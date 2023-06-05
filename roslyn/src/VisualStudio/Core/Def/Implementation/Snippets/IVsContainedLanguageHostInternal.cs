@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
     /// <summary>
-    /// Redefine IVsContainedLanguageHost so we can call InsertImportsDirective which would 
+    /// Redefine IVsContainedLanguageHost so we can call InsertImportsDirective which would
     /// otherwise expect the namespace string as a ushort.
     /// </summary>
     [Guid("0429916F-69E1-4336-AB7E-72086FB0D6BC")]

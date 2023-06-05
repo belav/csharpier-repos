@@ -51,7 +51,9 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
         var mapping = FindTypeMapping();
         if (mapping == null)
         {
-            throw new InvalidOperationException(CoreStrings.ModelNotFinalized(nameof(GetTypeMapping)));
+            throw new InvalidOperationException(
+                CoreStrings.ModelNotFinalized(nameof(GetTypeMapping))
+            );
         }
 
         return mapping;
@@ -170,7 +172,11 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
     {
         foreach (var foreignKey in GetContainingForeignKeys())
         {
-            for (var propertyIndex = 0; propertyIndex < foreignKey.Properties.Count; propertyIndex++)
+            for (
+                var propertyIndex = 0;
+                propertyIndex < foreignKey.Properties.Count;
+                propertyIndex++
+            )
             {
                 if (this == foreignKey.Properties[propertyIndex])
                 {
@@ -198,7 +204,11 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
     {
         foreach (var foreignKey in property.GetContainingForeignKeys())
         {
-            for (var propertyIndex = 0; propertyIndex < foreignKey.Properties.Count; propertyIndex++)
+            for (
+                var propertyIndex = 0;
+                propertyIndex < foreignKey.Properties.Count;
+                propertyIndex++
+            )
             {
                 if (property == foreignKey.Properties[propertyIndex])
                 {
@@ -237,8 +247,7 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
     ///     Gets a value indicating whether this property is used as a unique index (or part of a unique composite index).
     /// </summary>
     /// <returns><see langword="true" /> if the property is used as an unique index, otherwise <see langword="false" />.</returns>
-    bool IsUniqueIndex()
-        => GetContainingIndexes().Any(e => e.IsUnique);
+    bool IsUniqueIndex() => GetContainingIndexes().Any(e => e.IsUnique);
 
     /// <summary>
     ///     Gets all indexes that use this property (including composite indexes in which this property
@@ -251,8 +260,7 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
     ///     Gets a value indicating whether this property is used as the primary key (or part of a composite primary key).
     /// </summary>
     /// <returns><see langword="true" /> if the property is used as the primary key, otherwise <see langword="false" />.</returns>
-    bool IsPrimaryKey()
-        => FindContainingPrimaryKey() != null;
+    bool IsPrimaryKey() => FindContainingPrimaryKey() != null;
 
     /// <summary>
     ///     Gets the primary key that uses this property (including a composite primary key in which this property
@@ -287,7 +295,10 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
@@ -341,8 +352,7 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
                 builder.Append(" FK");
             }
 
-            if (IsKey()
-                && !IsPrimaryKey())
+            if (IsKey() && !IsPrimaryKey())
             {
                 builder.Append(" AlternateKey");
             }
@@ -387,8 +397,10 @@ public interface IReadOnlyProperty : IReadOnlyPropertyBase
                 builder.Append(" PropertyAccessMode.").Append(GetPropertyAccessMode());
             }
 
-            if ((options & MetadataDebugStringOptions.IncludePropertyIndexes) != 0
-                && ((AnnotatableBase)this).IsReadOnly)
+            if (
+                (options & MetadataDebugStringOptions.IncludePropertyIndexes) != 0
+                && ((AnnotatableBase)this).IsReadOnly
+            )
             {
                 var indexes = ((IProperty)this).GetPropertyIndexes();
                 builder.Append(' ').Append(indexes.Index);

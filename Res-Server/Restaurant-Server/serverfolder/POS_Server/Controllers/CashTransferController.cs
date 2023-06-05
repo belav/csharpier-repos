@@ -28,8 +28,13 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
 
-
-        List<string> hiddenCashes = new List<string>() { "inv", "deliver", "commissionAgent", "commissionCard" };
+        List<string> hiddenCashes = new List<string>()
+        {
+            "inv",
+            "deliver",
+            "commissionAgent",
+            "commissionCard"
+        };
 
         public async Task<string> addCashTransfer(cashTransfer newObject)
         {
@@ -79,7 +84,6 @@ namespace POS_Server.Controllers
                 var cEntity = entity.Set<cashTransfer>();
                 if (newObject.cashTransId == 0)
                 {
-                    
                     if (newObject.processType == "statement")
                     {
                         DateTime DT = new DateTime(datenow.Year, 1, 1, 0, 0, 0);
@@ -101,7 +105,9 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    cashtr = entity.cashTransfer.Where(p => p.cashTransId == newObject.cashTransId).First();
+                    cashtr = entity.cashTransfer
+                        .Where(p => p.cashTransId == newObject.cashTransId)
+                        .First();
                     cashtr.transType = newObject.transType;
                     cashtr.posId = newObject.posId;
                     cashtr.userId = newObject.userId;
@@ -109,7 +115,7 @@ namespace POS_Server.Controllers
                     cashtr.invId = newObject.invId;
                     cashtr.transNum = newObject.transNum;
                     cashtr.createDate = newObject.createDate;
-                    cashtr.updateDate = datenow;// server current date
+                    cashtr.updateDate = datenow; // server current date
                     cashtr.cash = newObject.cash;
                     cashtr.updateUserId = newObject.updateUserId;
                     cashtr.notes = newObject.notes;
@@ -122,12 +128,11 @@ namespace POS_Server.Controllers
                     cashtr.docNum = newObject.docNum;
                     cashtr.docImage = newObject.docImage;
                     cashtr.bankId = newObject.bankId;
-                  //  cashtr.updateDate = datenow;// server current date
+                    //  cashtr.updateDate = datenow;// server current date
                     cashtr.processType = newObject.processType;
                     cashtr.cardId = newObject.cardId;
                     cashtr.bondId = newObject.bondId;
                     cashtr.shippingCompanyId = newObject.shippingCompanyId;
-
                 }
                 entity.SaveChanges();
             }
@@ -163,81 +168,78 @@ namespace POS_Server.Controllers
                     {
                         side = c.Value;
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-                        List<CashTransferModel> cachlist = (from C in entity.cashTransfer
-                                                            join b in entity.banks on C.bankId equals b.bankId into jb
-                                                            join a in entity.agents on C.agentId equals a.agentId into ja
-                                                            join p in entity.pos on C.posId equals p.posId into jp
-                                                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                                                            join u in entity.users on C.userId equals u.userId into ju
-                                                            join uc in entity.users on C.createUserId equals uc.userId into juc
-                                                            join cr in entity.cards on C.cardId equals cr.cardId into jcr
-                                                            join bo in entity.bondes on C.bondId equals bo.bondId into jbo
-                                                            join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
-                                                            from jbb in jb.DefaultIfEmpty()
-                                                            from jaa in ja.DefaultIfEmpty()
-                                                            from jpp in jp.DefaultIfEmpty()
-                                                            from juu in ju.DefaultIfEmpty()
-                                                            from jpcc in jpcr.DefaultIfEmpty()
-                                                            from jucc in juc.DefaultIfEmpty()
-                                                            from jcrd in jcr.DefaultIfEmpty()
-                                                            from jbbo in jbo.DefaultIfEmpty()
-                                                            from jssh in jsh.DefaultIfEmpty()
-                                                            select new CashTransferModel()
-                                                            {
-                                                                cashTransId = C.cashTransId,
-                                                                transType = C.transType,
-                                                                posId = C.posId,
-                                                                userId = C.userId,
-                                                                agentId = C.agentId,
-                                                                invId = C.invId,
-                                                                transNum = C.transNum,
-                                                                createDate = C.createDate,
-                                                                updateDate = C.updateDate,
-                                                                cash = C.cash,
-                                                                updateUserId = C.updateUserId,
-                                                                createUserId = C.createUserId,
-                                                                notes = C.notes,
-                                                                posIdCreator = C.posIdCreator,
-                                                                isConfirm = C.isConfirm,
-                                                                cashTransIdSource = C.cashTransIdSource,
-                                                                side = C.side,
-
-                                                                docName = C.docName,
-                                                                docNum = C.docNum,
-                                                                docImage = C.docImage,
-                                                                bankId = C.bankId,
-                                                                bankName = jbb.name,
-                                                                agentName = jaa.name,
-                                                                usersName = juu.name,// side =u
-
-                                                                posName = jpp.name,
-                                                                posCreatorName = jpcc.name,
-                                                                processType = C.processType,
-                                                                cardId = C.cardId,
-                                                                bondId = C.bondId,
-                                                                usersLName = juu.lastname,// side =u
-                                                                createUserName = jucc.name,
-                                                                createUserLName = jucc.lastname,
-                                                                createUserJob = jucc.job,
-                                                                cardName = jcrd.name,
-                                                                bondDeserveDate = jbbo.deserveDate,
-                                                                //  bondIsRecieved = jbbo.isRecieved,
-                                                                shippingCompanyId = C.shippingCompanyId,
-                                                                shippingCompanyName = jssh.name,
-                                                                isConfirm2 = 0,
-                                                            }).Where(C => ((type == "all") ? true : C.transType == type) && (C.processType != "balance")
-                && ((side == "all") ? true : C.side == side) && !(C.agentId == null && C.userId == null && C.shippingCompanyId == null)).ToList();
+                        List<CashTransferModel> cachlist = (
+                            from C in entity.cashTransfer
+                            join b in entity.banks on C.bankId equals b.bankId into jb
+                            join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                            join u in entity.users on C.userId equals u.userId into ju
+                            join uc in entity.users on C.createUserId equals uc.userId into juc
+                            join cr in entity.cards on C.cardId equals cr.cardId into jcr
+                            join bo in entity.bondes on C.bondId equals bo.bondId into jbo
+                            join sh in entity.shippingCompanies
+                                on C.shippingCompanyId equals sh.shippingCompanyId
+                                into jsh
+                            from jbb in jb.DefaultIfEmpty()
+                            from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
+                            from jpcc in jpcr.DefaultIfEmpty()
+                            from jucc in juc.DefaultIfEmpty()
+                            from jcrd in jcr.DefaultIfEmpty()
+                            from jbbo in jbo.DefaultIfEmpty()
+                            from jssh in jsh.DefaultIfEmpty()
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                bankName = jbb.name,
+                                agentName = jaa.name,
+                                usersName = juu.name, // side =u
+                                posName = jpp.name,
+                                posCreatorName = jpcc.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                bondId = C.bondId,
+                                usersLName = juu.lastname, // side =u
+                                createUserName = jucc.name,
+                                createUserLName = jucc.lastname,
+                                createUserJob = jucc.job,
+                                cardName = jcrd.name,
+                                bondDeserveDate = jbbo.deserveDate,
+                                //  bondIsRecieved = jbbo.isRecieved,
+                                shippingCompanyId = C.shippingCompanyId,
+                                shippingCompanyName = jssh.name,
+                                isConfirm2 = 0,
+                            }
+                        ).Where(C => ((type == "all") ? true : C.transType == type) && (C.processType != "balance") && ((side == "all") ? true : C.side == side) && !(C.agentId == null && C.userId == null && C.shippingCompanyId == null)).ToList();
 
                         if (cachlist.Count > 0 && side == "p")
                         {
@@ -245,29 +247,23 @@ namespace POS_Server.Controllers
                             foreach (CashTransferModel cashtItem in cachlist)
                             {
                                 tempitem = this.Getpostransmodel(cashtItem.cashTransId)
-                                    .Where(C => C.cashTransId != cashtItem.cashTransId).FirstOrDefault();
+                                    .Where(C => C.cashTransId != cashtItem.cashTransId)
+                                    .FirstOrDefault();
                                 cashtItem.cashTrans2Id = tempitem.cashTransId;
                                 cashtItem.pos2Id = tempitem.posId;
                                 cashtItem.pos2Name = tempitem.posName;
                                 cashtItem.isConfirm2 = tempitem.isConfirm;
                                 // cashtItem.posCreatorName = tempitem.posName;
-
-
                             }
-
                         }
 
-
                         return TokenManager.GenerateToken(cachlist);
-
-
                     }
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
             #region old
             //       var re = Request;
@@ -322,7 +318,7 @@ namespace POS_Server.Controllers
             //         && ((side == "all") ? true : C.side == side))
 
             //    .Select(C => new CashTransferModel
-            //                    {                           
+            //                    {
             //      cashTransId = C.cashTransId,
             //      transType = C.transType,
             //      posId = C.posId,
@@ -474,99 +470,90 @@ namespace POS_Server.Controllers
                     {
                         side = c.Value;
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-                        List<CashTransferModel> cachlist = (from C in entity.cashTransfer
-                                                            join b in entity.banks on C.bankId equals b.bankId into jb
-                                                            join a in entity.agents on C.agentId equals a.agentId into ja
-                                                            join p in entity.pos on C.posId equals p.posId into jp
-                                                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                                                            join u in entity.users on C.userId equals u.userId into ju
-                                                            join uc in entity.users on C.createUserId equals uc.userId into juc
-                                                            join cr in entity.cards on C.cardId equals cr.cardId into jcr
-                                                            join bo in entity.bondes on C.bondId equals bo.bondId into jbo
-                                                            join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
-                                                            from jbb in jb.DefaultIfEmpty()
-                                                            from jaa in ja.DefaultIfEmpty()
-                                                            from jpp in jp.DefaultIfEmpty()
-                                                            from juu in ju.DefaultIfEmpty()
-                                                            from jpcc in jpcr.DefaultIfEmpty()
-                                                            from jucc in juc.DefaultIfEmpty()
-                                                            from jcrd in jcr.DefaultIfEmpty()
-                                                            from jbbo in jbo.DefaultIfEmpty()
-                                                            from jssh in jsh.DefaultIfEmpty()
-                                                            select new CashTransferModel()
-                                                            {
-                                                                cashTransId = C.cashTransId,
-                                                                transType = C.transType,
-                                                                posId = C.posId,
-                                                                userId = C.userId,
-                                                                agentId = C.agentId,
-                                                                invId = C.invId,
-                                                                transNum = C.transNum,
-                                                                createDate = C.createDate,
-                                                                updateDate = C.updateDate,
-                                                                cash = C.cash,
-                                                                updateUserId = C.updateUserId,
-                                                                createUserId = C.createUserId,
-                                                                notes = C.notes,
-                                                                posIdCreator = C.posIdCreator,
-                                                                isConfirm = C.isConfirm,
-                                                                cashTransIdSource = C.cashTransIdSource,
-                                                                side = C.side,
-
-                                                                docName = C.docName,
-                                                                docNum = C.docNum,
-                                                                docImage = C.docImage,
-                                                                bankId = C.bankId,
-                                                                bankName = jbb.name,
-                                                                agentName = jaa.name,
-                                                                usersName = juu.name,// side =u
-
-                                                                posName = jpp.name,
-                                                                posCreatorName = jpcc.name,
-                                                                processType = C.processType,
-                                                                cardId = C.cardId,
-                                                                bondId = C.bondId,
-                                                                usersLName = juu.lastname,// side =u
-                                                                createUserName = jucc.name,
-                                                                createUserLName = jucc.lastname,
-                                                                createUserJob = jucc.job,
-                                                                cardName = jcrd.name,
-                                                                bondDeserveDate = jbbo.deserveDate,
-                                                                //  bondIsRecieved = jbbo.isRecieved,
-                                                                shippingCompanyId = C.shippingCompanyId,
-                                                                shippingCompanyName = jssh.name,
-                                                                isConfirm2 = 0,
-                                                                isInvPurpose = C.isInvPurpose,
-                                                                purpose = C.purpose,
-                                                                paid=C.paid
-                                                            }).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side)).ToList();
-
-
+                        List<CashTransferModel> cachlist = (
+                            from C in entity.cashTransfer
+                            join b in entity.banks on C.bankId equals b.bankId into jb
+                            join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                            join u in entity.users on C.userId equals u.userId into ju
+                            join uc in entity.users on C.createUserId equals uc.userId into juc
+                            join cr in entity.cards on C.cardId equals cr.cardId into jcr
+                            join bo in entity.bondes on C.bondId equals bo.bondId into jbo
+                            join sh in entity.shippingCompanies
+                                on C.shippingCompanyId equals sh.shippingCompanyId
+                                into jsh
+                            from jbb in jb.DefaultIfEmpty()
+                            from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
+                            from jpcc in jpcr.DefaultIfEmpty()
+                            from jucc in juc.DefaultIfEmpty()
+                            from jcrd in jcr.DefaultIfEmpty()
+                            from jbbo in jbo.DefaultIfEmpty()
+                            from jssh in jsh.DefaultIfEmpty()
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                bankName = jbb.name,
+                                agentName = jaa.name,
+                                usersName = juu.name, // side =u
+                                posName = jpp.name,
+                                posCreatorName = jpcc.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                bondId = C.bondId,
+                                usersLName = juu.lastname, // side =u
+                                createUserName = jucc.name,
+                                createUserLName = jucc.lastname,
+                                createUserJob = jucc.job,
+                                cardName = jcrd.name,
+                                bondDeserveDate = jbbo.deserveDate,
+                                //  bondIsRecieved = jbbo.isRecieved,
+                                shippingCompanyId = C.shippingCompanyId,
+                                shippingCompanyName = jssh.name,
+                                isConfirm2 = 0,
+                                isInvPurpose = C.isInvPurpose,
+                                purpose = C.purpose,
+                                paid = C.paid
+                            }
+                        ).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side)).ToList();
 
                         return TokenManager.GenerateToken(cachlist);
-
-
                     }
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
-
         }
 
         [HttpPost]
@@ -583,9 +570,7 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 long invId = 0;
-
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -594,52 +579,51 @@ namespace POS_Server.Controllers
                     {
                         invId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         List<CashTransferModel> cachtrans = new List<CashTransferModel>();
-                        cachtrans = (from C in entity.cashTransfer
-                                     join b in entity.cards on C.cardId equals b.cardId into jb
+                        cachtrans = (
+                            from C in entity.cashTransfer
+                            join b in entity.cards on C.cardId equals b.cardId into jb
+                            from Card in jb.DefaultIfEmpty()
 
-                                     from Card in jb.DefaultIfEmpty()
-
-
-                                     select new CashTransferModel()
-                                     {
-                                         cashTransId = C.cashTransId,
-                                         transType = C.transType,
-
-                                         invId = C.invId,
-
-
-                                         cash = C.cash,
-
-
-                                         cardName = Card.name,
-                                         processType = C.processType,
-                                         cardId = C.cardId,
-
-
-                                     }).Where(C => C.invId == invId && (C.processType == "card" || C.processType == "cash")).ToList();
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                invId = C.invId,
+                                cash = C.cash,
+                                cardName = Card.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                            }
+                        ).Where(C => C.invId == invId && (C.processType == "card" || C.processType == "cash")).ToList();
 
                         int i = 0;
-                        var cachtranslist = cachtrans.GroupBy(x => x.cardId).Select(x => new
-                        {
-                            processType = x.FirstOrDefault().processType,
-
-                            cash = x.Sum(c => c.cash),
-                            cardId = x.FirstOrDefault().cardId,
-                            cardName = x.FirstOrDefault().processType == "card" ? x.FirstOrDefault().cardName : "cash",
-                            sequenc = x.FirstOrDefault().processType == "cash" ? 0 : ++i,
-                        }).OrderBy(c => c.cardId).ToList();
-
+                        var cachtranslist = cachtrans
+                            .GroupBy(x => x.cardId)
+                            .Select(
+                                x =>
+                                    new
+                                    {
+                                        processType = x.FirstOrDefault().processType,
+                                        cash = x.Sum(c => c.cash),
+                                        cardId = x.FirstOrDefault().cardId,
+                                        cardName = x.FirstOrDefault().processType == "card"
+                                            ? x.FirstOrDefault().cardName
+                                            : "cash",
+                                        sequenc = x.FirstOrDefault().processType == "cash"
+                                            ? 0
+                                            : ++i,
+                                    }
+                            )
+                            .OrderBy(c => c.cardId)
+                            .ToList();
 
                         return TokenManager.GenerateToken(cachtranslist);
                     }
@@ -648,13 +632,8 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
-
             }
-
         }
-
 
         [HttpPost]
         [Route("GetBytypeAndSideForPos")]
@@ -684,83 +663,77 @@ namespace POS_Server.Controllers
                     {
                         side = c.Value;
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        IEnumerable<CashTransferModel> cachlist = (from C in entity.cashTransfer
-                                                                       //  join b in entity.banks on C.bankId equals b.bankId into jb
-                                                                       //  join a in entity.agents on C.agentId equals a.agentId into ja
-                                                                   join p in entity.pos on C.posId equals p.posId into jp
-                                                                   join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                                                                   join u in entity.users on C.userId equals u.userId into ju
-                                                                   join uc in entity.users on C.createUserId equals uc.userId into juc
-                                                                   //  join cr in entity.cards on C.cardId equals cr.cardId into jcr
-                                                                   //  join bo in entity.bondes on C.bondId equals bo.bondId into jbo
-                                                                   //  join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
-                                                                   // from jbb in jb.DefaultIfEmpty()
-                                                                   // from jaa in ja.DefaultIfEmpty()
-                                                                   from jpp in jp.DefaultIfEmpty()
-                                                                   from juu in ju.DefaultIfEmpty()
-                                                                   from jpcc in jpcr.DefaultIfEmpty()
-                                                                   from jucc in juc.DefaultIfEmpty()
-                                                                       //  from jcrd in jcr.DefaultIfEmpty()
-                                                                       // from jbbo in jbo.DefaultIfEmpty() 
-                                                                       // from jssh in jsh.DefaultIfEmpty()
-                                                                   select new CashTransferModel()
-                                                                   {
-                                                                       cashTransId = C.cashTransId,
-                                                                       transType = C.transType,
-                                                                       posId = C.posId,
-                                                                       userId = C.userId,
-                                                                       agentId = C.agentId,
-                                                                       invId = C.invId,
-                                                                       transNum = C.transNum,
-                                                                       createDate = C.createDate,
-                                                                       updateDate = C.updateDate,
-                                                                       cash = C.cash,
-                                                                       updateUserId = C.updateUserId,
-                                                                       createUserId = C.createUserId,
-                                                                       notes = C.notes,
-                                                                       posIdCreator = C.posIdCreator,
-                                                                       isConfirm = C.isConfirm,
-                                                                       cashTransIdSource = C.cashTransIdSource,
-                                                                       side = C.side,
+                        IEnumerable<CashTransferModel> cachlist = (
+                            from C in entity.cashTransfer
+                            //  join b in entity.banks on C.bankId equals b.bankId into jb
+                            //  join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                            join u in entity.users on C.userId equals u.userId into ju
+                            join uc in entity.users on C.createUserId equals uc.userId into juc
+                            //  join cr in entity.cards on C.cardId equals cr.cardId into jcr
+                            //  join bo in entity.bondes on C.bondId equals bo.bondId into jbo
+                            //  join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
+                            // from jbb in jb.DefaultIfEmpty()
+                            // from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
+                            from jpcc in jpcr.DefaultIfEmpty()
+                            from jucc in juc.DefaultIfEmpty()
+                            //  from jcrd in jcr.DefaultIfEmpty()
+                            // from jbbo in jbo.DefaultIfEmpty()
+                            // from jssh in jsh.DefaultIfEmpty()
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                // bankName = jbb.name,
+                                // agentName = jaa.name,
+                                usersName = juu.name, // side =u
+                                posName = jpp.name,
+                                posCreatorName = jpcc.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                //   bondId = C.bondId,
+                                usersLName = juu.lastname, // side =u
+                                createUserName = jucc.name,
+                                createUserLName = jucc.lastname,
+                                createUserJob = jucc.job,
+                                //cardName = jcrd.name,
+                                // bondDeserveDate = jbbo.deserveDate,
+                                //bondIsRecieved =  jbbo.isRecieved,
+                                //   shippingCompanyId = C.shippingCompanyId,
+                                //   shippingCompanyName = jssh.name,
 
-                                                                       docName = C.docName,
-                                                                       docNum = C.docNum,
-                                                                       docImage = C.docImage,
-                                                                       bankId = C.bankId,
-                                                                       // bankName = jbb.name,
-                                                                       // agentName = jaa.name,
-                                                                       usersName = juu.name,// side =u
-
-                                                                       posName = jpp.name,
-                                                                       posCreatorName = jpcc.name,
-                                                                       processType = C.processType,
-                                                                       cardId = C.cardId,
-                                                                       //   bondId = C.bondId,
-                                                                       usersLName = juu.lastname,// side =u
-                                                                       createUserName = jucc.name,
-                                                                       createUserLName = jucc.lastname,
-                                                                       createUserJob = jucc.job,
-                                                                       //cardName = jcrd.name,
-                                                                       // bondDeserveDate = jbbo.deserveDate,
-                                                                       //bondIsRecieved =  jbbo.isRecieved,
-                                                                       //   shippingCompanyId = C.shippingCompanyId,
-                                                                       //   shippingCompanyName = jssh.name,
-
-                                                                       isConfirm2 = 0,
-
-
-                                                                   }).Where(C => ((type == "all") ? true : C.transType == type) && (C.processType != "balance")
-                                                                               && ((side == "all") ? true : C.side == side)).ToList();
+                                isConfirm2 = 0,
+                            }
+                        ).Where(C => ((type == "all") ? true : C.transType == type) && (C.processType != "balance") && ((side == "all") ? true : C.side == side)).ToList();
 
                         if (cachlist.Count() > 0 && side == "p")
                         {
@@ -768,20 +741,17 @@ namespace POS_Server.Controllers
                             foreach (CashTransferModel cashtItem in cachlist)
                             {
                                 tempitem = this.Getpostransmodel(cashtItem.cashTransId)
-                                    .Where(C => C.cashTransId != cashtItem.cashTransId).FirstOrDefault();
+                                    .Where(C => C.cashTransId != cashtItem.cashTransId)
+                                    .FirstOrDefault();
                                 cashtItem.cashTrans2Id = tempitem.cashTransId;
                                 cashtItem.pos2Id = tempitem.posId;
                                 cashtItem.pos2Name = tempitem.posName;
                                 cashtItem.isConfirm2 = tempitem.isConfirm;
                                 //  cashtItem.bondIsRecieved = cashtItem.bondIsRecieved == null ? Convert.ToByte(0) : cashtItem.bondIsRecieved;
                             }
-
                         }
 
-
                         return TokenManager.GenerateToken(cachlist);
-
-
                     }
                 }
                 catch (Exception ex)
@@ -789,10 +759,7 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                     // return TokenManager.GenerateToken(ex.ToString());
                 }
-
             }
-
-
         }
 
         [HttpPost]
@@ -826,7 +793,6 @@ namespace POS_Server.Controllers
                     {
                         posId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -926,80 +892,80 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
-
         }
 
-        public List<CashTransferModel> GetCashTransferForPosById(long posId, string type, string side)
+        public List<CashTransferModel> GetCashTransferForPosById(
+            long posId,
+            string type,
+            string side
+        )
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                List<CashTransferModel> cachlist = (from C in entity.cashTransfer
-                                                        //join b in entity.banks on C.bankId equals b.bankId into jb
-                                                        //join a in entity.agents on C.agentId equals a.agentId into ja
-                                                    join p in entity.pos on C.posId equals p.posId into jp
-                                                    join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                                                    join u in entity.users on C.userId equals u.userId into ju
-                                                    join uc in entity.users on C.createUserId equals uc.userId into juc
-                                                    //join cr in entity.cards on C.cardId equals cr.cardId into jcr
-                                                    //join bo in entity.bondes on C.bondId equals bo.bondId into jbo
-                                                    //join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
-                                                    //from jbb in jb.DefaultIfEmpty()
-                                                    //from jaa in ja.DefaultIfEmpty()
-                                                    from jpp in jp.DefaultIfEmpty()
-                                                    from juu in ju.DefaultIfEmpty()
-                                                    from jpcc in jpcr.DefaultIfEmpty()
-                                                    from jucc in juc.DefaultIfEmpty()
-                                                        //from jcrd in jcr.DefaultIfEmpty()
-                                                        //from jbbo in jbo.DefaultIfEmpty()
-                                                        //from jssh in jsh.DefaultIfEmpty()
-                                                    select new CashTransferModel()
-                                                    {
-                                                        cashTransId = C.cashTransId,
-                                                        transType = C.transType,
-                                                        posId = C.posId,
-                                                        userId = C.userId,
-                                                        agentId = C.agentId,
-                                                        invId = C.invId,
-                                                        transNum = C.transNum,
-                                                        createDate = C.createDate,
-                                                        updateDate = C.updateDate,
-                                                        cash = C.cash,
-                                                        updateUserId = C.updateUserId,
-                                                        createUserId = C.createUserId,
-                                                        notes = C.notes,
-                                                        posIdCreator = C.posIdCreator,
-                                                        isConfirm = C.isConfirm,
-                                                        cashTransIdSource = C.cashTransIdSource,
-                                                        side = C.side,
-
-                                                        docName = C.docName,
-                                                        docNum = C.docNum,
-                                                        docImage = C.docImage,
-                                                        bankId = C.bankId,
-                                                        //bankName = jbb.name,
-                                                        //agentName = jaa.name,
-                                                        usersName = juu.name,// side =u
-
-                                                        posName = jpp.name,
-                                                        posCreatorName = jpcc.name,
-                                                        processType = C.processType,
-                                                        cardId = C.cardId,
-                                                        bondId = C.bondId,
-                                                        usersLName = juu.lastname,// side =u
-                                                        createUserName = jucc.name,
-                                                        createUserLName = jucc.lastname,
-                                                        createUserJob = jucc.job,
-                                                        //cardName = jcrd.name,
-                                                        //bondDeserveDate = jbbo.deserveDate,
-                                                        // bondIsRecieved = jbbo.isRecieved,
-                                                        shippingCompanyId = C.shippingCompanyId,
-                                                        //shippingCompanyName = jssh.name
-                                                        isConfirm2 = 0,
-                                                    }).Where(C => ((type == "all") ? true : C.transType == type) && (C.processType != "balance")
-                                    && ((side == "all") ? true : C.side == side)).ToList();
+                List<CashTransferModel> cachlist = (
+                    from C in entity.cashTransfer
+                    //join b in entity.banks on C.bankId equals b.bankId into jb
+                    //join a in entity.agents on C.agentId equals a.agentId into ja
+                    join p in entity.pos on C.posId equals p.posId into jp
+                    join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                    join u in entity.users on C.userId equals u.userId into ju
+                    join uc in entity.users on C.createUserId equals uc.userId into juc
+                    //join cr in entity.cards on C.cardId equals cr.cardId into jcr
+                    //join bo in entity.bondes on C.bondId equals bo.bondId into jbo
+                    //join sh in entity.shippingCompanies on C.shippingCompanyId equals sh.shippingCompanyId into jsh
+                    //from jbb in jb.DefaultIfEmpty()
+                    //from jaa in ja.DefaultIfEmpty()
+                    from jpp in jp.DefaultIfEmpty()
+                    from juu in ju.DefaultIfEmpty()
+                    from jpcc in jpcr.DefaultIfEmpty()
+                    from jucc in juc.DefaultIfEmpty()
+                    //from jcrd in jcr.DefaultIfEmpty()
+                    //from jbbo in jbo.DefaultIfEmpty()
+                    //from jssh in jsh.DefaultIfEmpty()
+                    select new CashTransferModel()
+                    {
+                        cashTransId = C.cashTransId,
+                        transType = C.transType,
+                        posId = C.posId,
+                        userId = C.userId,
+                        agentId = C.agentId,
+                        invId = C.invId,
+                        transNum = C.transNum,
+                        createDate = C.createDate,
+                        updateDate = C.updateDate,
+                        cash = C.cash,
+                        updateUserId = C.updateUserId,
+                        createUserId = C.createUserId,
+                        notes = C.notes,
+                        posIdCreator = C.posIdCreator,
+                        isConfirm = C.isConfirm,
+                        cashTransIdSource = C.cashTransIdSource,
+                        side = C.side,
+                        docName = C.docName,
+                        docNum = C.docNum,
+                        docImage = C.docImage,
+                        bankId = C.bankId,
+                        //bankName = jbb.name,
+                        //agentName = jaa.name,
+                        usersName = juu.name, // side =u
+                        posName = jpp.name,
+                        posCreatorName = jpcc.name,
+                        processType = C.processType,
+                        cardId = C.cardId,
+                        bondId = C.bondId,
+                        usersLName = juu.lastname, // side =u
+                        createUserName = jucc.name,
+                        createUserLName = jucc.lastname,
+                        createUserJob = jucc.job,
+                        //cardName = jcrd.name,
+                        //bondDeserveDate = jbbo.deserveDate,
+                        // bondIsRecieved = jbbo.isRecieved,
+                        shippingCompanyId = C.shippingCompanyId,
+                        //shippingCompanyName = jssh.name
+                        isConfirm2 = 0,
+                    }
+                ).Where(C => ((type == "all") ? true : C.transType == type) && (C.processType != "balance") && ((side == "all") ? true : C.side == side)).ToList();
 
                 if (cachlist.Count > 0 && side == "p")
                 {
@@ -1007,22 +973,22 @@ namespace POS_Server.Controllers
                     foreach (CashTransferModel cashtItem in cachlist)
                     {
                         tempitem = this.Getpostransmodel(cashtItem.cashTransId)
-                            .Where(C => C.cashTransId != cashtItem.cashTransId).FirstOrDefault();
+                            .Where(C => C.cashTransId != cashtItem.cashTransId)
+                            .FirstOrDefault();
                         cashtItem.cashTrans2Id = tempitem.cashTransId;
                         cashtItem.pos2Id = tempitem.posId;
                         cashtItem.pos2Name = tempitem.posName;
                         cashtItem.isConfirm2 = tempitem.isConfirm;
-
                     }
-
                 }
-                cachlist = cachlist.Where(C => C.posId == posId || C.pos2Id == posId || C.posIdCreator == posId).ToList();
+                cachlist = cachlist
+                    .Where(C => C.posId == posId || C.pos2Id == posId || C.posIdCreator == posId)
+                    .ToList();
 
                 return cachlist;
-
-
             }
         }
+
         // get by bondId
         [HttpPost]
         [Route("GetBybondId")]
@@ -1040,7 +1006,6 @@ namespace POS_Server.Controllers
             {
                 long bondId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -1048,55 +1013,45 @@ namespace POS_Server.Controllers
                     {
                         bondId = long.Parse(c.Value);
                     }
-
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-                        List<CashTransferModel> cachlist = (from C in entity.cashTransfer
-                                                            where C.bondId == bondId
-                                                            select new CashTransferModel()
-                                                            {
-                                                                cashTransId = C.cashTransId,
-                                                                transType = C.transType,
-                                                                posId = C.posId,
-                                                                userId = C.userId,
-                                                                agentId = C.agentId,
-                                                                invId = C.invId,
-                                                                transNum = C.transNum,
-                                                                createDate = C.createDate,
-                                                                updateDate = C.updateDate,
-                                                                cash = C.cash,
-                                                                updateUserId = C.updateUserId,
-                                                                createUserId = C.createUserId,
-                                                                notes = C.notes,
-                                                                posIdCreator = C.posIdCreator,
-                                                                isConfirm = C.isConfirm,
-                                                                cashTransIdSource = C.cashTransIdSource,
-                                                                side = C.side,
-
-                                                                docName = C.docName,
-                                                                docNum = C.docNum,
-                                                                docImage = C.docImage,
-                                                                bankId = C.bankId,
-
-                                                                processType = C.processType,
-                                                                cardId = C.cardId,
-                                                                bondId = C.bondId,
-                                                                shippingCompanyId = C.shippingCompanyId,
-                                                            }).ToList();
-
-
-
-
-
+                        List<CashTransferModel> cachlist = (
+                            from C in entity.cashTransfer
+                            where C.bondId == bondId
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                bondId = C.bondId,
+                                shippingCompanyId = C.shippingCompanyId,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(cachlist);
                     }
@@ -1105,7 +1060,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
             #region old
             //var re = Request;
@@ -1177,7 +1131,6 @@ namespace POS_Server.Controllers
             #endregion
         }
 
-
         // GET api/agent/5
         [HttpPost]
         [Route("GetByID")]
@@ -1195,7 +1148,6 @@ namespace POS_Server.Controllers
             {
                 long cTId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -1203,64 +1155,54 @@ namespace POS_Server.Controllers
                     {
                         cTId = long.Parse(c.Value);
                     }
-
-
-
                 }
 
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var cacht = entity.cashTransfer
-
-          .Where(C => C.cashTransId == cTId)
-
-            .Select(C => new CashTransferModel
-            {
-                cashTransId = C.cashTransId,
-                transType = C.transType,
-                posId = C.posId,
-                userId = C.userId,
-                agentId = C.agentId,
-                invId = C.invId,
-                transNum = C.transNum,
-                createDate = C.createDate,
-                updateDate = C.updateDate,
-                cash = C.cash,
-                updateUserId = C.updateUserId,
-                createUserId = C.createUserId,
-                notes = C.notes,
-                posIdCreator = C.posIdCreator,
-                isConfirm = C.isConfirm,
-                cashTransIdSource = C.cashTransIdSource,
-                side = C.side,
-
-                docName = C.docName,
-                docNum = C.docNum,
-                docImage = C.docImage,
-                bankId = C.bankId,
-                processType = C.processType,
-                cardId = C.cardId,
-                bondId = C.bondId,
-                shippingCompanyId = C.shippingCompanyId,
-
-            }).FirstOrDefault();
-
+                            .Where(C => C.cashTransId == cTId)
+                            .Select(
+                                C =>
+                                    new CashTransferModel
+                                    {
+                                        cashTransId = C.cashTransId,
+                                        transType = C.transType,
+                                        posId = C.posId,
+                                        userId = C.userId,
+                                        agentId = C.agentId,
+                                        invId = C.invId,
+                                        transNum = C.transNum,
+                                        createDate = C.createDate,
+                                        updateDate = C.updateDate,
+                                        cash = C.cash,
+                                        updateUserId = C.updateUserId,
+                                        createUserId = C.createUserId,
+                                        notes = C.notes,
+                                        posIdCreator = C.posIdCreator,
+                                        isConfirm = C.isConfirm,
+                                        cashTransIdSource = C.cashTransIdSource,
+                                        side = C.side,
+                                        docName = C.docName,
+                                        docNum = C.docNum,
+                                        docImage = C.docImage,
+                                        bankId = C.bankId,
+                                        processType = C.processType,
+                                        cardId = C.cardId,
+                                        bondId = C.bondId,
+                                        shippingCompanyId = C.shippingCompanyId,
+                                    }
+                            )
+                            .FirstOrDefault();
 
                         return TokenManager.GenerateToken(cacht);
-
                     }
-
-
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
             #region old
             //      var re = Request;
@@ -1364,60 +1306,63 @@ namespace POS_Server.Controllers
                     {
                         searchwords = c.Value;
                     }
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var cashList = entity.cashTransfer
-                       .Where(C => ((type == "all") ? true : C.transType == type)
-                && ((side == "all") ? true : C.side == side) &&
-                 C.transNum.Contains(searchwords) || C.notes.Contains(searchwords)
-                 || C.docName.Contains(searchwords) || C.docNum.Contains(searchwords))
-                       .Select(C => new
-                       {
-                           C.cashTransId,
-                           C.transType,
-                           C.posId,
-                           C.userId,
-                           C.agentId,
-                           C.invId,
-                           C.transNum,
-                           C.createDate,
-                           C.updateDate,
-                           C.cash,
-                           C.updateUserId,
-                           C.createUserId,
-                           C.notes,
-                           C.posIdCreator,
-                           C.isConfirm,
-                           C.cashTransIdSource,
-                           C.side,
-
-                           C.docName,
-                           C.docNum,
-                           C.docImage,
-                           C.bankId,
-                           C.processType,
-                           C.cardId,
-                           C.bondId,
-                           C.shippingCompanyId,
-                       })
-                                   .ToList();
+                            .Where(
+                                C =>
+                                    ((type == "all") ? true : C.transType == type)
+                                        && ((side == "all") ? true : C.side == side)
+                                        && C.transNum.Contains(searchwords)
+                                    || C.notes.Contains(searchwords)
+                                    || C.docName.Contains(searchwords)
+                                    || C.docNum.Contains(searchwords)
+                            )
+                            .Select(
+                                C =>
+                                    new
+                                    {
+                                        C.cashTransId,
+                                        C.transType,
+                                        C.posId,
+                                        C.userId,
+                                        C.agentId,
+                                        C.invId,
+                                        C.transNum,
+                                        C.createDate,
+                                        C.updateDate,
+                                        C.cash,
+                                        C.updateUserId,
+                                        C.createUserId,
+                                        C.notes,
+                                        C.posIdCreator,
+                                        C.isConfirm,
+                                        C.cashTransIdSource,
+                                        C.side,
+                                        C.docName,
+                                        C.docNum,
+                                        C.docImage,
+                                        C.bankId,
+                                        C.processType,
+                                        C.cardId,
+                                        C.bondId,
+                                        C.shippingCompanyId,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(cashList);
-
                     }
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
             #region
             //var re = Request;
@@ -1506,28 +1451,26 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
 
-
                 if (newObject != null)
                 {
-
                     try
                     {
                         message = await addCashTransfer(newObject);
 
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch (Exception ex)
                     {
                         return TokenManager.GenerateToken(ex.ToString());
                     }
-
-
                 }
                 message = "0";
                 return TokenManager.GenerateToken(message);
@@ -1650,14 +1593,11 @@ namespace POS_Server.Controllers
             #endregion
         }
 
-
         ///
         [HttpPost]
         [Route("GetbySourcId")]
         public string GetbySourcId(string token)
         {
-
-
             //string type, string side string token
 
             token = TokenManager.readToken(HttpContext.Current.Request);
@@ -1683,62 +1623,57 @@ namespace POS_Server.Controllers
                     {
                         side = c.Value;
                     }
-
-
                 }
-
 
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
+                        var cachlist = (
+                            from C in entity.cashTransfer
+                            join b in entity.banks on C.bankId equals b.bankId into jb
+                            join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join u in entity.users on C.userId equals u.userId into ju
+                            from jbb in jb.DefaultIfEmpty()
+                            from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
 
-                        var cachlist = (from C in entity.cashTransfer
-                                        join b in entity.banks on C.bankId equals b.bankId into jb
-                                        join a in entity.agents on C.agentId equals a.agentId into ja
-                                        join p in entity.pos on C.posId equals p.posId into jp
-                                        join u in entity.users on C.userId equals u.userId into ju
-                                        from jbb in jb.DefaultIfEmpty()
-                                        from jaa in ja.DefaultIfEmpty()
-                                        from jpp in jp.DefaultIfEmpty()
-                                        from juu in ju.DefaultIfEmpty()
-
-                                        select new CashTransferModel()
-                                        {
-                                            cashTransId = C.cashTransId,
-                                            transType = C.transType,
-                                            posId = C.posId,
-                                            userId = C.userId,
-                                            agentId = C.agentId,
-                                            invId = C.invId,
-                                            transNum = C.transNum,
-                                            createDate = C.createDate,
-                                            updateDate = C.updateDate,
-                                            cash = C.cash,
-                                            updateUserId = C.updateUserId,
-                                            createUserId = C.createUserId,
-                                            notes = C.notes,
-                                            posIdCreator = C.posIdCreator,
-                                            isConfirm = C.isConfirm,
-                                            cashTransIdSource = C.cashTransIdSource,
-                                            side = C.side,
-
-                                            docName = C.docName,
-                                            docNum = C.docNum,
-                                            docImage = C.docImage,
-                                            bankId = C.bankId,
-                                            bankName = jbb.name,
-                                            agentName = jaa.name,
-                                            usersName = juu.username,
-                                            posName = jpp.name,
-                                            processType = C.processType,
-                                            cardId = C.cardId,
-                                            bondId = C.bondId,
-                                            shippingCompanyId = C.shippingCompanyId,
-                                            isConfirm2 = 0,
-                                        }).Where(C => ((type == "all") ? true : C.transType == type)
-                                    && ((side == "all") ? true : C.side == side) && (C.cashTransId == sourceId || C.cashTransIdSource == sourceId)).ToList();
-
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                bankName = jbb.name,
+                                agentName = jaa.name,
+                                usersName = juu.username,
+                                posName = jpp.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                bondId = C.bondId,
+                                shippingCompanyId = C.shippingCompanyId,
+                                isConfirm2 = 0,
+                            }
+                        ).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side) && (C.cashTransId == sourceId || C.cashTransIdSource == sourceId)).ToList();
 
                         // one row mean type=d
                         if (cachlist.Count == 1)
@@ -1746,60 +1681,58 @@ namespace POS_Server.Controllers
                             long? pullposcashtransid = cachlist.First().cashTransIdSource;
 
                             //
-                            var cachadd = (from C in entity.cashTransfer
-                                           join b in entity.banks on C.bankId equals b.bankId into jb
-                                           join a in entity.agents on C.agentId equals a.agentId into ja
-                                           join p in entity.pos on C.posId equals p.posId into jp
-                                           join u in entity.users on C.userId equals u.userId into ju
-                                           from jbb in jb.DefaultIfEmpty()
-                                           from jaa in ja.DefaultIfEmpty()
-                                           from jpp in jp.DefaultIfEmpty()
-                                           from juu in ju.DefaultIfEmpty()
+                            var cachadd = (
+                                from C in entity.cashTransfer
+                                join b in entity.banks on C.bankId equals b.bankId into jb
+                                join a in entity.agents on C.agentId equals a.agentId into ja
+                                join p in entity.pos on C.posId equals p.posId into jp
+                                join u in entity.users on C.userId equals u.userId into ju
+                                from jbb in jb.DefaultIfEmpty()
+                                from jaa in ja.DefaultIfEmpty()
+                                from jpp in jp.DefaultIfEmpty()
+                                from juu in ju.DefaultIfEmpty()
 
-                                           select new CashTransferModel()
-                                           {
-                                               cashTransId = C.cashTransId,
-                                               transType = C.transType,
-                                               posId = C.posId,
-                                               userId = C.userId,
-                                               agentId = C.agentId,
-                                               invId = C.invId,
-                                               transNum = C.transNum,
-                                               createDate = C.createDate,
-                                               updateDate = C.updateDate,
-                                               cash = C.cash,
-                                               updateUserId = C.updateUserId,
-                                               createUserId = C.createUserId,
-                                               notes = C.notes,
-                                               posIdCreator = C.posIdCreator,
-                                               isConfirm = C.isConfirm,
-                                               cashTransIdSource = C.cashTransIdSource,
-                                               side = C.side,
-
-                                               docName = C.docName,
-                                               docNum = C.docNum,
-                                               docImage = C.docImage,
-                                               bankId = C.bankId,
-                                               bankName = jbb.name,
-                                               agentName = jaa.name,
-                                               usersName = juu.username,
-                                               posName = jpp.name,
-                                               processType = C.processType,
-                                               cardId = C.cardId,
-                                               bondId = C.bondId,
-                                               isConfirm2 = 0,
-                                           }).Where(C => ((type == "all") ? true : C.transType == type)
-                   && ((side == "all") ? true : C.side == side) && (C.cashTransId == pullposcashtransid)).ToList();
+                                select new CashTransferModel()
+                                {
+                                    cashTransId = C.cashTransId,
+                                    transType = C.transType,
+                                    posId = C.posId,
+                                    userId = C.userId,
+                                    agentId = C.agentId,
+                                    invId = C.invId,
+                                    transNum = C.transNum,
+                                    createDate = C.createDate,
+                                    updateDate = C.updateDate,
+                                    cash = C.cash,
+                                    updateUserId = C.updateUserId,
+                                    createUserId = C.createUserId,
+                                    notes = C.notes,
+                                    posIdCreator = C.posIdCreator,
+                                    isConfirm = C.isConfirm,
+                                    cashTransIdSource = C.cashTransIdSource,
+                                    side = C.side,
+                                    docName = C.docName,
+                                    docNum = C.docNum,
+                                    docImage = C.docImage,
+                                    bankId = C.bankId,
+                                    bankName = jbb.name,
+                                    agentName = jaa.name,
+                                    usersName = juu.username,
+                                    posName = jpp.name,
+                                    processType = C.processType,
+                                    cardId = C.cardId,
+                                    bondId = C.bondId,
+                                    isConfirm2 = 0,
+                                }
+                            ).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side) && (C.cashTransId == pullposcashtransid)).ToList();
 
                             //
 
                             if (cachadd.Count > 0)
                             {
                                 cachlist.AddRange(cachadd);
-
                             }
                         }
-
 
                         return TokenManager.GenerateToken(cachlist);
                     }
@@ -1808,7 +1741,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
             #region old
@@ -1972,7 +1904,6 @@ namespace POS_Server.Controllers
             {
                 long cashTransId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -2001,33 +1932,28 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-
                                 foreach (CashTransferModel ctitem in allList)
                                 {
-                                    cashobject = entity.cashTransfer.Where(C => C.cashTransId == ctitem.cashTransId).FirstOrDefault();
+                                    cashobject = entity.cashTransfer
+                                        .Where(C => C.cashTransId == ctitem.cashTransId)
+                                        .FirstOrDefault();
                                     entity.cashTransfer.Remove(cashobject);
-
                                 }
                                 long res = entity.SaveChanges();
                                 if (res > 0)
                                 {
                                     message = "1";
                                 }
-
                             }
-
                         }
 
                         return TokenManager.GenerateToken(message);
-
                     }
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("-1");
                 }
-
-
             }
             #region old
             //var re = Request;
@@ -2118,8 +2044,14 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        cashTransferModel = JsonConvert.DeserializeObject<CashTransferModel>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        cashTransferModel = JsonConvert.DeserializeObject<CashTransferModel>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -2135,8 +2067,6 @@ namespace POS_Server.Controllers
                             {
                                 message = "-2";
                                 return TokenManager.GenerateToken(message);
-
-
                             }
                             else
                             {
@@ -2154,8 +2084,8 @@ namespace POS_Server.Controllers
                 message = "0";
                 return TokenManager.GenerateToken(message);
             }
-
         }
+
         [HttpPost]
         [Route("MovePosCash")]
         public string MovePosCash(string token)
@@ -2184,9 +2114,7 @@ namespace POS_Server.Controllers
                     {
                         userIdD = long.Parse(c.Value);
                     }
-
                 }
-
 
                 List<CashTransferModel> tempList = null;
                 List<CashTransferModel> allList = null;
@@ -2207,7 +2135,9 @@ namespace POS_Server.Controllers
                         if (allList.Count > 0)
                         {
                             //check if first pos is confirm
-                            tempList = allList.Where(C => C.transType == "p" && C.isConfirm == 1).ToList();
+                            tempList = allList
+                                .Where(C => C.transType == "p" && C.isConfirm == 1)
+                                .ToList();
 
                             if (tempList != null)
                             {
@@ -2216,13 +2146,19 @@ namespace POS_Server.Controllers
                                     cashobject = tempList.FirstOrDefault();
                                     cash = cashobject.cash;
                                     posidPull = cashobject.posId;
-                                    posobject = entity.pos.Where(p => p.posId == posidPull).FirstOrDefault();
+                                    posobject = entity.pos
+                                        .Where(p => p.posId == posidPull)
+                                        .FirstOrDefault();
                                     if (cashobject.cash <= posobject.balance)
                                     {
                                         //in "d" set confirm to 1
                                         //get row of type d
-                                        cashobject = allList.Where(C => C.transType == "d").FirstOrDefault();
-                                        ctObject = entity.cashTransfer.Where(C => C.cashTransId == cashobject.cashTransId).FirstOrDefault();
+                                        cashobject = allList
+                                            .Where(C => C.transType == "d")
+                                            .FirstOrDefault();
+                                        ctObject = entity.cashTransfer
+                                            .Where(C => C.cashTransId == cashobject.cashTransId)
+                                            .FirstOrDefault();
                                         ctObject.isConfirm = 1;
                                         ctObject.updateUserId = userIdD;
                                         ctObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
@@ -2231,21 +2167,31 @@ namespace POS_Server.Controllers
 
                                         //START decreas balance from pull pos
                                         posidD = ctObject.posId;
-                                        posobject = entity.pos.Where(p => p.posId == posidPull).FirstOrDefault();
+                                        posobject = entity.pos
+                                            .Where(p => p.posId == posidPull)
+                                            .FirstOrDefault();
 
-                                        posobject.balance = (decimal)posobject.balance - (decimal)cash;
+                                        posobject.balance =
+                                            (decimal)posobject.balance - (decimal)cash;
                                         posobject.updateUserId = userIdD;
-                                        posobject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                        posobject.updateDate = coctrlr.AddOffsetTodate(
+                                            DateTime.Now
+                                        );
                                         // end
                                         //increase balance from d pos
-                                        posobjectD = entity.pos.Where(p => p.posId == posidD).FirstOrDefault();
+                                        posobjectD = entity.pos
+                                            .Where(p => p.posId == posidD)
+                                            .FirstOrDefault();
                                         if (posobjectD.balance == null)
                                         {
                                             posobjectD.balance = 0;
                                         }
-                                        posobjectD.balance = (decimal)posobjectD.balance + (decimal)cash;
+                                        posobjectD.balance =
+                                            (decimal)posobjectD.balance + (decimal)cash;
                                         posobjectD.updateUserId = userIdD;
-                                        posobjectD.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                        posobjectD.updateDate = coctrlr.AddOffsetTodate(
+                                            DateTime.Now
+                                        );
                                         entity.SaveChanges();
                                         // return Ok("transdone");
                                         return TokenManager.GenerateToken("1");
@@ -2255,8 +2201,6 @@ namespace POS_Server.Controllers
                                         //  return Ok("nobalanceinpullpos");
                                         return TokenManager.GenerateToken("2");
                                     }
-
-
                                 }
                                 else
                                 {
@@ -2275,16 +2219,12 @@ namespace POS_Server.Controllers
                             //  return Ok("idnotfound");
                             return TokenManager.GenerateToken("5");
                         }
-
                     }
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
-
             }
             #region old
             //var re = Request;
@@ -2402,52 +2342,50 @@ namespace POS_Server.Controllers
             string type = "all";
             using (incposdbEntities entity = new incposdbEntities())
             {
+                var cachlist = (
+                    from C in entity.cashTransfer
+                    join b in entity.banks on C.bankId equals b.bankId into jb
+                    join a in entity.agents on C.agentId equals a.agentId into ja
+                    join p in entity.pos on C.posId equals p.posId into jp
+                    join u in entity.users on C.userId equals u.userId into ju
+                    from jbb in jb.DefaultIfEmpty()
+                    from jaa in ja.DefaultIfEmpty()
+                    from jpp in jp.DefaultIfEmpty()
+                    from juu in ju.DefaultIfEmpty()
 
-                var cachlist = (from C in entity.cashTransfer
-                                join b in entity.banks on C.bankId equals b.bankId into jb
-                                join a in entity.agents on C.agentId equals a.agentId into ja
-                                join p in entity.pos on C.posId equals p.posId into jp
-                                join u in entity.users on C.userId equals u.userId into ju
-                                from jbb in jb.DefaultIfEmpty()
-                                from jaa in ja.DefaultIfEmpty()
-                                from jpp in jp.DefaultIfEmpty()
-                                from juu in ju.DefaultIfEmpty()
-
-                                select new CashTransferModel()
-                                {
-                                    cashTransId = C.cashTransId,
-                                    transType = C.transType,
-                                    posId = C.posId,
-                                    userId = C.userId,
-                                    agentId = C.agentId,
-                                    invId = C.invId,
-                                    transNum = C.transNum,
-                                    createDate = C.createDate,
-                                    updateDate = C.updateDate,
-                                    cash = C.cash,
-                                    updateUserId = C.updateUserId,
-                                    createUserId = C.createUserId,
-                                    notes = C.notes,
-                                    posIdCreator = C.posIdCreator,
-                                    isConfirm = C.isConfirm,
-                                    cashTransIdSource = C.cashTransIdSource,
-                                    side = C.side,
-
-                                    docName = C.docName,
-                                    docNum = C.docNum,
-                                    docImage = C.docImage,
-                                    bankId = C.bankId,
-                                    bankName = jbb.name,
-                                    agentName = jaa.name,
-                                    usersName = juu.username,
-                                    posName = jpp.name,
-                                    processType = C.processType,
-                                    cardId = C.cardId,
-                                    bondId = C.bondId,
-                                    shippingCompanyId = C.shippingCompanyId,
-                                }).Where(C => ((type == "all") ? true : C.transType == type)
-        && ((side == "all") ? true : C.side == side) && (C.cashTransId == cashTransId || C.cashTransIdSource == cashTransId)).ToList();
-
+                    select new CashTransferModel()
+                    {
+                        cashTransId = C.cashTransId,
+                        transType = C.transType,
+                        posId = C.posId,
+                        userId = C.userId,
+                        agentId = C.agentId,
+                        invId = C.invId,
+                        transNum = C.transNum,
+                        createDate = C.createDate,
+                        updateDate = C.updateDate,
+                        cash = C.cash,
+                        updateUserId = C.updateUserId,
+                        createUserId = C.createUserId,
+                        notes = C.notes,
+                        posIdCreator = C.posIdCreator,
+                        isConfirm = C.isConfirm,
+                        cashTransIdSource = C.cashTransIdSource,
+                        side = C.side,
+                        docName = C.docName,
+                        docNum = C.docNum,
+                        docImage = C.docImage,
+                        bankId = C.bankId,
+                        bankName = jbb.name,
+                        agentName = jaa.name,
+                        usersName = juu.username,
+                        posName = jpp.name,
+                        processType = C.processType,
+                        cardId = C.cardId,
+                        bondId = C.bondId,
+                        shippingCompanyId = C.shippingCompanyId,
+                    }
+                ).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side) && (C.cashTransId == cashTransId || C.cashTransIdSource == cashTransId)).ToList();
 
                 // one row mean type=d
                 if (cachlist.Count == 1)
@@ -2455,72 +2393,67 @@ namespace POS_Server.Controllers
                     long? pullposcashtransid = cachlist.First().cashTransIdSource;
 
                     //
-                    var cachadd = (from C in entity.cashTransfer
-                                   join b in entity.banks on C.bankId equals b.bankId into jb
-                                   join a in entity.agents on C.agentId equals a.agentId into ja
-                                   join p in entity.pos on C.posId equals p.posId into jp
-                                   join u in entity.users on C.userId equals u.userId into ju
-                                   from jbb in jb.DefaultIfEmpty()
-                                   from jaa in ja.DefaultIfEmpty()
-                                   from jpp in jp.DefaultIfEmpty()
-                                   from juu in ju.DefaultIfEmpty()
+                    var cachadd = (
+                        from C in entity.cashTransfer
+                        join b in entity.banks on C.bankId equals b.bankId into jb
+                        join a in entity.agents on C.agentId equals a.agentId into ja
+                        join p in entity.pos on C.posId equals p.posId into jp
+                        join u in entity.users on C.userId equals u.userId into ju
+                        from jbb in jb.DefaultIfEmpty()
+                        from jaa in ja.DefaultIfEmpty()
+                        from jpp in jp.DefaultIfEmpty()
+                        from juu in ju.DefaultIfEmpty()
 
-                                   select new CashTransferModel()
-                                   {
-                                       cashTransId = C.cashTransId,
-                                       transType = C.transType,
-                                       posId = C.posId,
-                                       userId = C.userId,
-                                       agentId = C.agentId,
-                                       invId = C.invId,
-                                       transNum = C.transNum,
-                                       createDate = C.createDate,
-                                       updateDate = C.updateDate,
-                                       cash = C.cash,
-                                       updateUserId = C.updateUserId,
-                                       createUserId = C.createUserId,
-                                       notes = C.notes,
-                                       posIdCreator = C.posIdCreator,
-                                       isConfirm = C.isConfirm,
-                                       cashTransIdSource = C.cashTransIdSource,
-                                       side = C.side,
-
-                                       docName = C.docName,
-                                       docNum = C.docNum,
-                                       docImage = C.docImage,
-                                       bankId = C.bankId,
-                                       bankName = jbb.name,
-                                       agentName = jaa.name,
-                                       usersName = juu.username,
-                                       posName = jpp.name,
-                                       processType = C.processType,
-                                       cardId = C.cardId,
-                                       bondId = C.bondId,
-                                       shippingCompanyId = C.shippingCompanyId,
-                                   }).Where(C => ((type == "all") ? true : C.transType == type)
-                      && ((side == "all") ? true : C.side == side) && (C.cashTransId == pullposcashtransid)).ToList();
+                        select new CashTransferModel()
+                        {
+                            cashTransId = C.cashTransId,
+                            transType = C.transType,
+                            posId = C.posId,
+                            userId = C.userId,
+                            agentId = C.agentId,
+                            invId = C.invId,
+                            transNum = C.transNum,
+                            createDate = C.createDate,
+                            updateDate = C.updateDate,
+                            cash = C.cash,
+                            updateUserId = C.updateUserId,
+                            createUserId = C.createUserId,
+                            notes = C.notes,
+                            posIdCreator = C.posIdCreator,
+                            isConfirm = C.isConfirm,
+                            cashTransIdSource = C.cashTransIdSource,
+                            side = C.side,
+                            docName = C.docName,
+                            docNum = C.docNum,
+                            docImage = C.docImage,
+                            bankId = C.bankId,
+                            bankName = jbb.name,
+                            agentName = jaa.name,
+                            usersName = juu.username,
+                            posName = jpp.name,
+                            processType = C.processType,
+                            cardId = C.cardId,
+                            bondId = C.bondId,
+                            shippingCompanyId = C.shippingCompanyId,
+                        }
+                    ).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side) && (C.cashTransId == pullposcashtransid)).ToList();
 
                     //
 
                     if (cachadd.Count > 0)
                     {
                         cachlist.AddRange(cachadd);
-
                     }
-
                 }
 
                 return cachlist;
             }
         }
 
-
         [HttpPost]
         [Route("GetByInvId")]
         public string GetByInvId(string token)
-
         {
-
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
@@ -2533,7 +2466,6 @@ namespace POS_Server.Controllers
                 string side = "all";
                 long invId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -2541,78 +2473,68 @@ namespace POS_Server.Controllers
                     {
                         invId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         CashTransferModel cachtrans = new CashTransferModel();
-                        cachtrans = (from C in entity.cashTransfer
-                                     join b in entity.banks on C.bankId equals b.bankId into jb
-                                     join a in entity.agents on C.agentId equals a.agentId into ja
-                                     join p in entity.pos on C.posId equals p.posId into jp
-                                     join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                                     join u in entity.users on C.userId equals u.userId into ju
-                                     from jbb in jb.DefaultIfEmpty()
-                                     from jaa in ja.DefaultIfEmpty()
-                                     from jpp in jp.DefaultIfEmpty()
-                                     from juu in ju.DefaultIfEmpty()
-                                     from jpcc in jpcr.DefaultIfEmpty()
-                                     select new CashTransferModel()
-                                     {
-                                         cashTransId = C.cashTransId,
-                                         transType = C.transType,
-                                         posId = C.posId,
-                                         userId = C.userId,
-                                         agentId = C.agentId,
-                                         invId = C.invId,
-                                         transNum = C.transNum,
-                                         createDate = C.createDate,
-                                         updateDate = C.updateDate,
-                                         cash = C.cash,
-                                         updateUserId = C.updateUserId,
-                                         createUserId = C.createUserId,
-                                         notes = C.notes,
-                                         posIdCreator = C.posIdCreator,
-                                         isConfirm = C.isConfirm,
-                                         cashTransIdSource = C.cashTransIdSource,
-                                         side = C.side,
-
-                                         docName = C.docName,
-                                         docNum = C.docNum,
-                                         docImage = C.docImage,
-                                         bankId = C.bankId,
-                                         bankName = jbb.name,
-                                         agentName = jaa.name,
-                                         usersName = juu.username,
-                                         posName = jpp.name,
-                                         posCreatorName = jpcc.name,
-                                         processType = C.processType,
-                                         cardId = C.cardId,
-                                         bondId = C.bondId,
-                                         shippingCompanyId = C.shippingCompanyId,
-                                     }).Where(C => ((type == "all") ? true : C.transType == type)
-                                                            && ((side == "all") ? true : C.side == side) && C.invId == invId && C.processType != "inv").FirstOrDefault();
-
-
+                        cachtrans = (
+                            from C in entity.cashTransfer
+                            join b in entity.banks on C.bankId equals b.bankId into jb
+                            join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                            join u in entity.users on C.userId equals u.userId into ju
+                            from jbb in jb.DefaultIfEmpty()
+                            from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
+                            from jpcc in jpcr.DefaultIfEmpty()
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                bankName = jbb.name,
+                                agentName = jaa.name,
+                                usersName = juu.username,
+                                posName = jpp.name,
+                                posCreatorName = jpcc.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                bondId = C.bondId,
+                                shippingCompanyId = C.shippingCompanyId,
+                            }
+                        ).Where(C => ((type == "all") ? true : C.transType == type) && ((side == "all") ? true : C.side == side) && C.invId == invId && C.processType != "inv").FirstOrDefault();
 
                         return TokenManager.GenerateToken(cachtrans);
-
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
             #region old
             //var re = Request;
@@ -2701,7 +2623,6 @@ namespace POS_Server.Controllers
             #endregion
         }
 
-
         [HttpPost]
         [Route("GetListByInvId")]
         public string GetListByInvId(string token)
@@ -2716,9 +2637,7 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 long invId = 0;
-
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -2727,67 +2646,61 @@ namespace POS_Server.Controllers
                     {
                         invId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         List<CashTransferModel> cachtrans = new List<CashTransferModel>();
-                        cachtrans = (from C in entity.cashTransfer
-                                     join b in entity.banks on C.bankId equals b.bankId into jb
-                                     join a in entity.agents on C.agentId equals a.agentId into ja
-                                     join p in entity.pos on C.posId equals p.posId into jp
-                                     join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
-                                     join u in entity.users on C.userId equals u.userId into ju
-                                     from jbb in jb.DefaultIfEmpty()
-                                     from jaa in ja.DefaultIfEmpty()
-                                     from jpp in jp.DefaultIfEmpty()
-                                     from juu in ju.DefaultIfEmpty()
-                                     from jpcc in jpcr.DefaultIfEmpty()
+                        cachtrans = (
+                            from C in entity.cashTransfer
+                            join b in entity.banks on C.bankId equals b.bankId into jb
+                            join a in entity.agents on C.agentId equals a.agentId into ja
+                            join p in entity.pos on C.posId equals p.posId into jp
+                            join pc in entity.pos on C.posIdCreator equals pc.posId into jpcr
+                            join u in entity.users on C.userId equals u.userId into ju
+                            from jbb in jb.DefaultIfEmpty()
+                            from jaa in ja.DefaultIfEmpty()
+                            from jpp in jp.DefaultIfEmpty()
+                            from juu in ju.DefaultIfEmpty()
+                            from jpcc in jpcr.DefaultIfEmpty()
 
-                                     select new CashTransferModel()
-                                     {
-                                         cashTransId = C.cashTransId,
-                                         transType = C.transType,
-                                         posId = C.posId,
-                                         userId = C.userId,
-                                         agentId = C.agentId,
-                                         invId = C.invId,
-                                         transNum = C.transNum,
-                                         createDate = C.createDate,
-                                         updateDate = C.updateDate,
-                                         cash = C.cash,
-                                         updateUserId = C.updateUserId,
-                                         createUserId = C.createUserId,
-                                         notes = C.notes,
-                                         posIdCreator = C.posIdCreator,
-                                         isConfirm = C.isConfirm,
-                                         cashTransIdSource = C.cashTransIdSource,
-                                         side = C.side,
-
-                                         docName = C.docName,
-                                         docNum = C.docNum,
-                                         docImage = C.docImage,
-                                         bankId = C.bankId,
-                                         bankName = jbb.name,
-                                         agentName = jaa.name,
-                                         usersName = juu.username,
-                                         posName = jpp.name,
-                                         posCreatorName = jpcc.name,
-                                         processType = C.processType,
-                                         cardId = C.cardId,
-                                         bondId = C.bondId,
-                                         shippingCompanyId = C.shippingCompanyId,
-                                     }).Where(C => C.invId == invId && C.processType != "inv").ToList();
-
-
-
-
+                            select new CashTransferModel()
+                            {
+                                cashTransId = C.cashTransId,
+                                transType = C.transType,
+                                posId = C.posId,
+                                userId = C.userId,
+                                agentId = C.agentId,
+                                invId = C.invId,
+                                transNum = C.transNum,
+                                createDate = C.createDate,
+                                updateDate = C.updateDate,
+                                cash = C.cash,
+                                updateUserId = C.updateUserId,
+                                createUserId = C.createUserId,
+                                notes = C.notes,
+                                posIdCreator = C.posIdCreator,
+                                isConfirm = C.isConfirm,
+                                cashTransIdSource = C.cashTransIdSource,
+                                side = C.side,
+                                docName = C.docName,
+                                docNum = C.docNum,
+                                docImage = C.docImage,
+                                bankId = C.bankId,
+                                bankName = jbb.name,
+                                agentName = jaa.name,
+                                usersName = juu.username,
+                                posName = jpp.name,
+                                posCreatorName = jpcc.name,
+                                processType = C.processType,
+                                cardId = C.cardId,
+                                bondId = C.bondId,
+                                shippingCompanyId = C.shippingCompanyId,
+                            }
+                        ).Where(C => C.invId == invId && C.processType != "inv").ToList();
 
                         return TokenManager.GenerateToken(cachtrans);
                     }
@@ -2796,9 +2709,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
-
             }
             #region old
             //var re = Request;
@@ -2886,8 +2796,6 @@ namespace POS_Server.Controllers
             #endregion
         }
 
-
-
         [HttpPost]
         [Route("GetCountByInvId")]
         public string GetCountByInvId(string token)
@@ -2913,7 +2821,10 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        long cachtrans = entity.cashTransfer.Where(C => C.invId == invId && C.processType != "inv").ToList().Count();
+                        long cachtrans = entity.cashTransfer
+                            .Where(C => C.invId == invId && C.processType != "inv")
+                            .ToList()
+                            .Count();
                         return TokenManager.GenerateToken(cachtrans);
                     }
                 }
@@ -2932,13 +2843,18 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var invoice = entity.invoices.Where(x => x.invoiceId == invId)
-                    .Select(x => new InvoiceModel()
-                    {
-                        invoiceId = x.invoiceId,
-                        invoiceMainId = x.invoiceMainId,
-                        invType = x.invType,
-                    }).FirstOrDefault();
+                var invoice = entity.invoices
+                    .Where(x => x.invoiceId == invId)
+                    .Select(
+                        x =>
+                            new InvoiceModel()
+                            {
+                                invoiceId = x.invoiceId,
+                                invoiceMainId = x.invoiceMainId,
+                                invType = x.invType,
+                            }
+                    )
+                    .FirstOrDefault();
                 if (invoice.invType.Equals("s") || invoice.invType.Equals("p"))
                 {
                     while (invoice != null)
@@ -2951,11 +2867,19 @@ namespace POS_Server.Controllers
                             break;
                     }
                 }
-                int cachtrans = entity.cashTransfer.Where(C => C.invId == invoiceId && C.processType != "balance" && !hiddenCashes.Any(str => str.Contains(C.processType))).ToList().Count();
+                int cachtrans = entity.cashTransfer
+                    .Where(
+                        C =>
+                            C.invId == invoiceId
+                            && C.processType != "balance"
+                            && !hiddenCashes.Any(str => str.Contains(C.processType))
+                    )
+                    .ToList()
+                    .Count();
                 return cachtrans;
             }
         }
-        
+
         [HttpPost]
         [Route("payByAmount")]
         public async Task<string> payByAmount(string token)
@@ -2982,8 +2906,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "agentId")
                     {
@@ -2997,19 +2923,16 @@ namespace POS_Server.Controllers
                     {
                         payType = c.Value;
                     }
-
                 }
                 if (cashTr != null)
                 {
-
-
                     try
                     {
                         List<string> typesList = new List<string>();
                         string cashIds = "";
                         switch (payType)
                         {
-                            case "pay"://get pw,pi,sb invoices
+                            case "pay": //get pw,pi,sb invoices
 
                                 typesList.Add("pw");
                                 typesList.Add("p");
@@ -3025,45 +2948,64 @@ namespace POS_Server.Controllers
                         }
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var invList = (from b in entity.invoices.Where(x => x.agentId == agentId && typesList.Contains(x.invType)
-                                                                        && x.isActive == true && x.deserved > 0
-                                                                        && ((x.shippingCompanyId == null && x.shipUserId == null && x.agentId != null) ||
-                                                                          (x.shippingCompanyId != null && x.shipUserId != null && x.agentId != null)
-                                                                           || x.shippingCompanyId != null && x.shipUserId == null && x.agentId != null && x.isPrePaid == 1))
+                            var invList = (
+                                from b in entity.invoices.Where(
+                                    x =>
+                                        x.agentId == agentId
+                                        && typesList.Contains(x.invType)
+                                        && x.isActive == true
+                                        && x.deserved > 0
+                                        && (
+                                            (
+                                                x.shippingCompanyId == null
+                                                && x.shipUserId == null
+                                                && x.agentId != null
+                                            )
+                                            || (
+                                                x.shippingCompanyId != null
+                                                && x.shipUserId != null
+                                                && x.agentId != null
+                                            )
+                                            || x.shippingCompanyId != null
+                                                && x.shipUserId == null
+                                                && x.agentId != null
+                                                && x.isPrePaid == 1
+                                        )
+                                )
 
-                                           select new InvoiceModel()
-                                           {
-                                               invoiceId = b.invoiceId,
-                                               invNumber = b.invNumber,
-                                               agentId = b.agentId,
-                                               invType = b.invType,
-                                               total = b.total,
-                                               totalNet = b.totalNet,
-                                               paid = b.paid,
-                                               deserved = b.deserved,
-                                               deservedDate = b.deservedDate,
-                                               invDate = b.invDate,
-                                               invoiceMainId = b.invoiceMainId,
-                                               invCase = b.invCase,
-                                               invTime = b.invTime,
-                                               notes = b.notes,
-                                               vendorInvNum = b.vendorInvNum,
-                                               vendorInvDate = b.vendorInvDate,
-                                               createUserId = b.createUserId,
-                                               updateDate = b.updateDate,
-                                               updateUserId = b.updateUserId,
-                                               branchId = b.branchId,
-                                               discountValue = b.discountValue,
-                                               discountType = b.discountType,
-                                               tax = b.tax,
-                                               taxtype = b.taxtype,
-                                               name = b.name,
-                                               isApproved = b.isApproved,
-                                               branchCreatorId = b.branchCreatorId,
-                                               shippingCompanyId = b.shippingCompanyId,
-                                               shipUserId = b.shipUserId,
-                                           }).ToList().OrderBy(b => b.deservedDate);
-
+                                select new InvoiceModel()
+                                {
+                                    invoiceId = b.invoiceId,
+                                    invNumber = b.invNumber,
+                                    agentId = b.agentId,
+                                    invType = b.invType,
+                                    total = b.total,
+                                    totalNet = b.totalNet,
+                                    paid = b.paid,
+                                    deserved = b.deserved,
+                                    deservedDate = b.deservedDate,
+                                    invDate = b.invDate,
+                                    invoiceMainId = b.invoiceMainId,
+                                    invCase = b.invCase,
+                                    invTime = b.invTime,
+                                    notes = b.notes,
+                                    vendorInvNum = b.vendorInvNum,
+                                    vendorInvDate = b.vendorInvDate,
+                                    createUserId = b.createUserId,
+                                    updateDate = b.updateDate,
+                                    updateUserId = b.updateUserId,
+                                    branchId = b.branchId,
+                                    discountValue = b.discountValue,
+                                    discountType = b.discountType,
+                                    tax = b.tax,
+                                    taxtype = b.taxtype,
+                                    name = b.name,
+                                    isApproved = b.isApproved,
+                                    branchCreatorId = b.branchCreatorId,
+                                    shippingCompanyId = b.shippingCompanyId,
+                                    shipUserId = b.shipUserId,
+                                }
+                            ).ToList().OrderBy(b => b.deservedDate);
 
                             List<InvoiceModel> res = new List<InvoiceModel>();
                             agents agent;
@@ -3074,17 +3016,25 @@ namespace POS_Server.Controllers
                                 {
                                     long invoiceId = inv.invoiceId;
 
-                                    var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == invoiceId && x.status == "Done").FirstOrDefault();
+                                    var statusObj = entity.orderPreparingStatus
+                                        .Where(
+                                            x =>
+                                                x.orderPreparing.invoiceId == invoiceId
+                                                && x.status == "Done"
+                                        )
+                                        .FirstOrDefault();
 
                                     if (statusObj != null)
                                     {
-                                        int itemCount = entity.itemsTransfer.Where(x => x.invoiceId == invoiceId).Select(x => x.itemsTransId).ToList().Count;
+                                        int itemCount = entity.itemsTransfer
+                                            .Where(x => x.invoiceId == invoiceId)
+                                            .Select(x => x.itemsTransId)
+                                            .ToList()
+                                            .Count;
                                         inv.itemsCount = itemCount;
                                         res.Add(inv);
-
                                     }
                                 }
-
                             }
                             else
                             {
@@ -3096,7 +3046,7 @@ namespace POS_Server.Controllers
                                 switch (payType)
                                 {
                                     #region payments
-                                    case "pay"://get pw,p,sb invoices
+                                    case "pay": //get pw,p,sb invoices
 
                                         foreach (InvoiceModel inv in res)
                                         {
@@ -3120,10 +3070,16 @@ namespace POS_Server.Controllers
                                                 amount = 0;
                                             }
                                             cashTr.cash = paid;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
-                                            cashTr.transNum = await generateCashNumber(cashTr.transNum);
+                                            cashTr.transNum = await generateCashNumber(
+                                                cashTr.transNum
+                                            );
                                             entity.cashTransfer.Add(cashTr);
 
                                             // increase agent balance
@@ -3155,10 +3111,16 @@ namespace POS_Server.Controllers
                                             decimal agentBalance = (decimal)agent.balance;
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
-                                            cashTr.transNum = await generateCashNumber(cashTr.transNum);
+                                            cashTr.transNum = await generateCashNumber(
+                                                cashTr.transNum
+                                            );
                                             entity.cashTransfer.Add(cashTr);
 
                                             // increase agent balance
@@ -3206,10 +3168,16 @@ namespace POS_Server.Controllers
                                                 amount = 0;
                                             }
                                             cashTr.cash = paid;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
-                                            cashTr.transNum = await generateCashNumber(cashTr.transNum);
+                                            cashTr.transNum = await generateCashNumber(
+                                                cashTr.transNum
+                                            );
                                             cashTr = entity.cashTransfer.Add(cashTr);
 
                                             // decrease agent balance
@@ -3244,8 +3212,12 @@ namespace POS_Server.Controllers
 
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
                                             await addCashTransfer(cashTr);
 
@@ -3270,7 +3242,7 @@ namespace POS_Server.Controllers
                                             entity.SaveChanges();
                                         }
                                         break;
-                                        #endregion
+                                    #endregion
                                 }
                                 //return Ok(cashIds);
                                 return TokenManager.GenerateToken("1");
@@ -3286,11 +3258,14 @@ namespace POS_Server.Controllers
                                             decimal agentBalance = (decimal)agent.balance;
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
                                             await addCashTransfer(cashTr);
-
 
                                             // increase agent balance
                                             if (agent.balanceType == 0)
@@ -3316,8 +3291,12 @@ namespace POS_Server.Controllers
 
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
                                             await addCashTransfer(cashTr);
 
@@ -3346,21 +3325,16 @@ namespace POS_Server.Controllers
                                 return TokenManager.GenerateToken("1");
                             }
                         }
-
                     }
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
                 return TokenManager.GenerateToken("0");
-
             }
-
         }
 
         //
@@ -3371,7 +3345,7 @@ namespace POS_Server.Controllers
         /// <param name="payType">{feed}</param>
         /// <param name="cashTransfer"></param>
         /// <returns></returns>
-        /// 
+        ///
         [HttpPost]
         [Route("payShippingCompanyByAmount")]
         public async Task<string> payShippingCompanyByAmount(string token)
@@ -3399,8 +3373,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "shippingCompanyId")
                     {
@@ -3414,12 +3390,9 @@ namespace POS_Server.Controllers
                     {
                         payType = c.Value;
                     }
-
                 }
                 if (cashTr != null)
                 {
-
-
                     try
                     {
                         List<string> typesList = new List<string>();
@@ -3437,42 +3410,51 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             //var invList = (from b in entity.invoices.Where(x => x.shippingCompanyId == shippingCompanyId && typesList.Contains(x.invType) && x.deserved > 0)
-                            var invList = (from b in entity.invoices.Where(x => x.shippingCompanyId == shippingCompanyId && typesList.Contains(x.invType) && x.deserved > 0 &&
-                                                                                x.shippingCompanyId != null && x.shipUserId == null && x.agentId != null)
+                            var invList = (
+                                from b in entity.invoices.Where(
+                                    x =>
+                                        x.shippingCompanyId == shippingCompanyId
+                                        && typesList.Contains(x.invType)
+                                        && x.deserved > 0
+                                        && x.shippingCompanyId != null
+                                        && x.shipUserId == null
+                                        && x.agentId != null
+                                )
 
-                                           select new InvoiceModel()
-                                           {
-                                               invoiceId = b.invoiceId,
-                                               invNumber = b.invNumber,
-                                               agentId = b.agentId,
-                                               invType = b.invType,
-                                               total = b.total,
-                                               totalNet = b.totalNet,
-                                               paid = b.paid,
-                                               deserved = b.deserved,
-                                               deservedDate = b.deservedDate,
-                                               invDate = b.invDate,
-                                               invoiceMainId = b.invoiceMainId,
-                                               invCase = b.invCase,
-                                               invTime = b.invTime,
-                                               notes = b.notes,
-                                               vendorInvNum = b.vendorInvNum,
-                                               vendorInvDate = b.vendorInvDate,
-                                               createUserId = b.createUserId,
-                                               updateDate = b.updateDate,
-                                               updateUserId = b.updateUserId,
-                                               branchId = b.branchId,
-                                               discountValue = b.discountValue,
-                                               discountType = b.discountType,
-                                               tax = b.tax,
-                                               taxtype = b.taxtype,
-                                               name = b.name,
-                                               isApproved = b.isApproved,
-                                               branchCreatorId = b.branchCreatorId,
-                                               shippingCompanyId = b.shippingCompanyId,
-                                               shipUserId = b.shipUserId,
-                                               userId = b.userId
-                                           }).ToList().OrderBy(b => b.deservedDate);
+                                select new InvoiceModel()
+                                {
+                                    invoiceId = b.invoiceId,
+                                    invNumber = b.invNumber,
+                                    agentId = b.agentId,
+                                    invType = b.invType,
+                                    total = b.total,
+                                    totalNet = b.totalNet,
+                                    paid = b.paid,
+                                    deserved = b.deserved,
+                                    deservedDate = b.deservedDate,
+                                    invDate = b.invDate,
+                                    invoiceMainId = b.invoiceMainId,
+                                    invCase = b.invCase,
+                                    invTime = b.invTime,
+                                    notes = b.notes,
+                                    vendorInvNum = b.vendorInvNum,
+                                    vendorInvDate = b.vendorInvDate,
+                                    createUserId = b.createUserId,
+                                    updateDate = b.updateDate,
+                                    updateUserId = b.updateUserId,
+                                    branchId = b.branchId,
+                                    discountValue = b.discountValue,
+                                    discountType = b.discountType,
+                                    tax = b.tax,
+                                    taxtype = b.taxtype,
+                                    name = b.name,
+                                    isApproved = b.isApproved,
+                                    branchCreatorId = b.branchCreatorId,
+                                    shippingCompanyId = b.shippingCompanyId,
+                                    shipUserId = b.shipUserId,
+                                    userId = b.userId
+                                }
+                            ).ToList().OrderBy(b => b.deservedDate);
                             List<InvoiceModel> res = new List<InvoiceModel>();
                             cashTransfer ct;
                             shippingCompanies shippingCompany;
@@ -3483,17 +3465,25 @@ namespace POS_Server.Controllers
                                 {
                                     long invoiceId = inv.invoiceId;
 
-                                    var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == invoiceId && x.status == "Done").FirstOrDefault();
+                                    var statusObj = entity.orderPreparingStatus
+                                        .Where(
+                                            x =>
+                                                x.orderPreparing.invoiceId == invoiceId
+                                                && x.status == "Done"
+                                        )
+                                        .FirstOrDefault();
 
                                     if (statusObj != null)
                                     {
-                                        int itemCount = entity.itemsTransfer.Where(x => x.invoiceId == invoiceId).Select(x => x.itemsTransId).ToList().Count;
+                                        int itemCount = entity.itemsTransfer
+                                            .Where(x => x.invoiceId == invoiceId)
+                                            .Select(x => x.itemsTransId)
+                                            .ToList()
+                                            .Count;
                                         inv.itemsCount = itemCount;
                                         res.Add(inv);
-
                                     }
                                 }
-
                             }
                             else
                             {
@@ -3507,7 +3497,9 @@ namespace POS_Server.Controllers
                                     case "feed": //get s, pb
                                         foreach (InvoiceModel inv in res)
                                         {
-                                            shippingCompany = entity.shippingCompanies.Find(shippingCompanyId);
+                                            shippingCompany = entity.shippingCompanies.Find(
+                                                shippingCompanyId
+                                            );
 
                                             decimal paid = 0;
                                             var invObj = entity.invoices.Find(inv.invoiceId);
@@ -3515,7 +3507,8 @@ namespace POS_Server.Controllers
                                             if (amount >= inv.deserved)
                                             {
                                                 paid = (decimal)inv.deserved;
-                                                invObj.paid = (decimal)invObj.paid + (decimal)inv.deserved;
+                                                invObj.paid =
+                                                    (decimal)invObj.paid + (decimal)inv.deserved;
                                                 invObj.deserved = 0;
                                                 amount -= (decimal)inv.deserved;
                                             }
@@ -3527,11 +3520,14 @@ namespace POS_Server.Controllers
                                                 amount = 0;
                                             }
                                             cashTr.cash = paid;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
                                             await addCashTransfer(cashTr);
-
 
                                             // decrease shipping balance
                                             if (shippingCompany.balanceType == 1)
@@ -3542,7 +3538,8 @@ namespace POS_Server.Controllers
                                                 }
                                                 else
                                                 {
-                                                    shippingCompany.balance = paid - shippingCompany.balance;
+                                                    shippingCompany.balance =
+                                                        paid - shippingCompany.balance;
                                                     shippingCompany.balanceType = 0;
                                                 }
                                             }
@@ -3558,12 +3555,18 @@ namespace POS_Server.Controllers
                                         }
                                         if (amount > 0) // save remain amount
                                         {
-                                            shippingCompany = entity.shippingCompanies.Find(shippingCompanyId);
+                                            shippingCompany = entity.shippingCompanies.Find(
+                                                shippingCompanyId
+                                            );
 
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
                                             await addCashTransfer(cashTr);
 
@@ -3572,11 +3575,13 @@ namespace POS_Server.Controllers
                                             {
                                                 if (amount <= (decimal)shippingCompany.balance)
                                                 {
-                                                    shippingCompany.balance = shippingCompany.balance - amount;
+                                                    shippingCompany.balance =
+                                                        shippingCompany.balance - amount;
                                                 }
                                                 else
                                                 {
-                                                    shippingCompany.balance = amount - shippingCompany.balance;
+                                                    shippingCompany.balance =
+                                                        amount - shippingCompany.balance;
                                                     shippingCompany.balanceType = 0;
                                                 }
                                             }
@@ -3588,7 +3593,6 @@ namespace POS_Server.Controllers
                                             entity.SaveChanges();
                                         }
                                         break;
-                                    
                                 }
 
                                 TokenManager.GenerateToken(cashIds.ToString());
@@ -3600,12 +3604,18 @@ namespace POS_Server.Controllers
                                     switch (payType)
                                     {
                                         case "feed":
-                                            shippingCompany = entity.shippingCompanies.Find(shippingCompanyId);
+                                            shippingCompany = entity.shippingCompanies.Find(
+                                                shippingCompanyId
+                                            );
 
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
-                                            cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
-                                            cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                            cashTr.createDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
+                                            cashTr.updateDate = coctrlr.AddOffsetTodate(
+                                                DateTime.Now
+                                            );
                                             cashTr.updateUserId = cashTr.createUserId;
                                             await addCashTransfer(cashTr);
 
@@ -3614,11 +3624,13 @@ namespace POS_Server.Controllers
                                             {
                                                 if (amount <= (decimal)shippingCompany.balance)
                                                 {
-                                                    shippingCompany.balance = shippingCompany.balance - amount;
+                                                    shippingCompany.balance =
+                                                        shippingCompany.balance - amount;
                                                 }
                                                 else
                                                 {
-                                                    shippingCompany.balance = amount - shippingCompany.balance;
+                                                    shippingCompany.balance =
+                                                        amount - shippingCompany.balance;
                                                     shippingCompany.balanceType = 0;
                                                 }
                                             }
@@ -3635,7 +3647,6 @@ namespace POS_Server.Controllers
                                 TokenManager.GenerateToken("1");
                             }
                         }
-
 
                         // return Ok("false");
                     }
@@ -3855,6 +3866,7 @@ namespace POS_Server.Controllers
             //    return Ok("false");
             #endregion
         }
+
         /// <summary>
         /// //////////////
         /// </summary>
@@ -3891,15 +3903,19 @@ namespace POS_Server.Controllers
                     {
                         listObject = c.Value.Replace("\\", string.Empty);
                         listObject = listObject.Trim('"');
-                        invoiceList = JsonConvert.DeserializeObject<List<invoices>>(listObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        invoiceList = JsonConvert.DeserializeObject<List<invoices>>(
+                            listObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "agentId")
                     {
@@ -3909,21 +3925,19 @@ namespace POS_Server.Controllers
                     {
                         payType = c.Value;
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
                 {
                     try
                     {
-
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             agents agent = entity.agents.Find(agentId);
 
                             switch (payType)
                             {
-                                case "pay"://get pw,p,sb invoices
+                                case "pay": //get pw,p,sb invoices
                                     foreach (invoices inv in invoiceList)
                                     {
                                         decimal paid = 0;
@@ -4131,7 +4145,6 @@ namespace POS_Server.Controllers
             #endregion
         }
 
-
         [HttpPost]
         [Route("SaveCashWithCommission")]
         public async Task<string> SaveCashWithCommission(string token)
@@ -4155,7 +4168,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -4179,8 +4195,8 @@ namespace POS_Server.Controllers
                 message = "0";
                 return TokenManager.GenerateToken(message);
             }
-
         }
+
         [NonAction]
         public async void AddCardCommission(cashTransfer basicCash)
         {
@@ -4224,10 +4240,8 @@ namespace POS_Server.Controllers
                     entity.cashTransfer.Add(cashTransfer);
                     entity.SaveChanges();
                 }
-
             }
         }
-
 
         /// <summary>
         /// //////////////
@@ -4264,33 +4278,35 @@ namespace POS_Server.Controllers
                     {
                         listObject = c.Value.Replace("\\", string.Empty);
                         listObject = listObject.Trim('"');
-                        invoiceList = JsonConvert.DeserializeObject<List<invoices>>(listObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        invoiceList = JsonConvert.DeserializeObject<List<invoices>>(
+                            listObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "shippingCompanyId")
                     {
                         shippingCompanyId = long.Parse(c.Value);
                     }
-
-
                 }
                 #endregion
                 if (cashTr != null)
                 {
                     try
                     {
-
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            shippingCompanies shippingCompany = entity.shippingCompanies.Find(shippingCompanyId);
+                            shippingCompanies shippingCompany = entity.shippingCompanies.Find(
+                                shippingCompanyId
+                            );
 
                             foreach (invoices inv in invoiceList)
                             {
@@ -4329,7 +4345,9 @@ namespace POS_Server.Controllers
                                 //entity.SaveChanges();
 
                                 #region make order praparing status as "Done"
-                                var preparingOrders = entity.orderPreparing.Where(x => x.invoiceId == inv.invoiceId).ToList();
+                                var preparingOrders = entity.orderPreparing
+                                    .Where(x => x.invoiceId == inv.invoiceId)
+                                    .ToList();
 
                                 foreach (var row in preparingOrders)
                                 {
@@ -4348,11 +4366,8 @@ namespace POS_Server.Controllers
                             if (cashTr.processType == "card")
                                 AddCardCommission(cashTr);
 
-
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -4363,9 +4378,7 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
         }
 
         [HttpPost]
@@ -4385,7 +4398,6 @@ namespace POS_Server.Controllers
                 List<cashTransfer> cashesList = new List<cashTransfer>();
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
-
                 cashTransfer cashTr = new cashTransfer();
                 foreach (Claim c in claims)
                 {
@@ -4393,17 +4405,20 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashesList = JsonConvert.DeserializeObject<List<cashTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashesList = JsonConvert.DeserializeObject<List<cashTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
@@ -4412,7 +4427,6 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             foreach (var cash in cashesList)
                             {
                                 decimal paid = 0;
@@ -4422,14 +4436,12 @@ namespace POS_Server.Controllers
                                 deliverCash.deserved = 0;
                                 deliverCash.isCommissionPaid = 1;
 
-
                                 cashTr.cash = paid;
                                 cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 cashTr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 cashTr.updateUserId = cashTr.createUserId;
                                 cashTr.transNum = await generateCashNumber(cashTr.transNum);
                                 cashTr = entity.cashTransfer.Add(cashTr);
-
 
                                 entity.SaveChanges();
                                 increaseUserBalance((long)deliverCash.userId, paid);
@@ -4439,11 +4451,8 @@ namespace POS_Server.Controllers
                                     AddCardCommission(cashTr);
                             }
 
-
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -4455,7 +4464,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-
         }
 
         [HttpPost]
@@ -4476,7 +4484,6 @@ namespace POS_Server.Controllers
                 decimal amount = 0;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
-
                 cashTransfer cashTr = new cashTransfer();
                 foreach (Claim c in claims)
                 {
@@ -4492,10 +4499,11 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
@@ -4504,9 +4512,17 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var cashesList = entity.cashTransfer.Where(x => x.userId == userId
-                                                                  && (x.processType.Trim() == "destroy" || x.processType.Trim() == "shortage")
-                                                                  && x.deserved > 0).ToList();
+                            var cashesList = entity.cashTransfer
+                                .Where(
+                                    x =>
+                                        x.userId == userId
+                                        && (
+                                            x.processType.Trim() == "destroy"
+                                            || x.processType.Trim() == "shortage"
+                                        )
+                                        && x.deserved > 0
+                                )
+                                .ToList();
 
                             decimal basicAmount = amount;
                             foreach (var cash in cashesList)
@@ -4519,7 +4535,6 @@ namespace POS_Server.Controllers
                                     cash.paid += cash.deserved;
                                     cash.deserved = 0;
                                     cash.isCommissionPaid = 1;
-
                                 }
                                 else
                                 {
@@ -4565,9 +4580,7 @@ namespace POS_Server.Controllers
                             increaseUserBalance(userId, basicAmount);
 
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -4579,8 +4592,8 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-
         }
+
         [NonAction]
         public void increaseUserBalance(long userId, decimal paid)
         {
@@ -4606,13 +4619,12 @@ namespace POS_Server.Controllers
                 entity.SaveChanges();
             }
         }
+
         [HttpPost]
         [Route("payOrderInvoice")]
         public async Task<string> payOrderInvoice(string token)
         {
             string message = "";
-
-
 
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -4634,15 +4646,15 @@ namespace POS_Server.Controllers
                 cashTransfer cashTr = new cashTransfer();
                 foreach (Claim c in claims)
                 {
-
                     if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "invoiceId")
                     {
                         invoiceId = long.Parse(c.Value);
@@ -4659,12 +4671,9 @@ namespace POS_Server.Controllers
                     {
                         payType = c.Value;
                     }
-
                 }
                 if (cashTr != null)
                 {
-
-
                     try
                     {
                         using (incposdbEntities entity = new incposdbEntities())
@@ -4686,7 +4695,7 @@ namespace POS_Server.Controllers
                             //update agent
                             switch (payType)
                             {
-                                case "0":// cash - card - cheque - doc
+                                case "0": // cash - card - cheque - doc
 
                                     //update invoice
                                     inv.paid += amount;
@@ -4720,7 +4729,7 @@ namespace POS_Server.Controllers
                                         }
                                     }
                                     break;
-                                case "1":// balance
+                                case "1": // balance
                                     decimal newBalance = 0;
                                     if (agent.balanceType == 0)
                                     {
@@ -4761,9 +4770,7 @@ namespace POS_Server.Controllers
                             return TokenManager.GenerateToken(message);
 
                             // return Ok("true");
-
                         }
-
                     }
                     catch
                     {
@@ -4776,9 +4783,8 @@ namespace POS_Server.Controllers
                 }
                 //  return TokenManager.GenerateToken("0");
             }
-
-          
         }
+
         [HttpPost]
         [Route("GetLastNumOfCash")]
         public string GetLastNumOfCash(string token)
@@ -4795,31 +4801,24 @@ namespace POS_Server.Controllers
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
-
-
                 foreach (Claim c in claims)
                 {
-
-
-
                     if (c.Type == "cashCode")
                     {
                         cashCode = c.Value;
                     }
-
-
                 }
-
-
 
                 try
                 {
-
                     List<string> numberList;
                     int lastNum = 0;
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        numberList = entity.cashTransfer.Where(b => b.transNum.Contains(cashCode + "-")).Select(b => b.transNum).ToList();
+                        numberList = entity.cashTransfer
+                            .Where(b => b.transNum.Contains(cashCode + "-"))
+                            .Select(b => b.transNum)
+                            .ToList();
 
                         for (int i = 0; i < numberList.Count; i++)
                         {
@@ -4880,6 +4879,7 @@ namespace POS_Server.Controllers
             //return NotFound();
             #endregion
         }
+
         [HttpPost]
         [Route("GetLastNumOfDocNum")]
         public string GetLastNumOfDocNum(string token)
@@ -4896,31 +4896,24 @@ namespace POS_Server.Controllers
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
-
-
                 foreach (Claim c in claims)
                 {
-
-
-
                     if (c.Type == "docNum")
                     {
                         docNum = c.Value;
                     }
-
-
                 }
-
-
 
                 try
                 {
-
                     List<string> numberList;
                     int lastNum = 0;
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        numberList = entity.cashTransfer.Where(b => b.docNum.Contains(docNum + "-")).Select(b => b.docNum).ToList();
+                        numberList = entity.cashTransfer
+                            .Where(b => b.docNum.Contains(docNum + "-"))
+                            .Select(b => b.docNum)
+                            .ToList();
 
                         for (int i = 0; i < numberList.Count; i++)
                         {
@@ -5103,18 +5096,13 @@ namespace POS_Server.Controllers
 
         public long Save(cashTransfer newObject)
         {
-
             //string Object
             long message = 0;
 
-
-
             if (newObject != null)
             {
-
                 try
                 {
-
                     if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                     {
                         Nullable<long> id = null;
@@ -5166,7 +5154,9 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            cashtr = entity.cashTransfer.Where(p => p.cashTransId == newObject.cashTransId).First();
+                            cashtr = entity.cashTransfer
+                                .Where(p => p.cashTransId == newObject.cashTransId)
+                                .First();
                             cashtr.transType = newObject.transType;
                             cashtr.posId = newObject.posId;
                             cashtr.userId = newObject.userId;
@@ -5174,7 +5164,7 @@ namespace POS_Server.Controllers
                             cashtr.invId = newObject.invId;
                             cashtr.transNum = newObject.transNum;
                             cashtr.createDate = newObject.createDate;
-                            cashtr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);// server current date
+                            cashtr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date
                             cashtr.cash = newObject.cash;
                             cashtr.updateUserId = newObject.updateUserId;
                             // cashtr.createUserId = newObject. ;
@@ -5188,35 +5178,30 @@ namespace POS_Server.Controllers
                             cashtr.docNum = newObject.docNum;
                             cashtr.docImage = newObject.docImage;
                             cashtr.bankId = newObject.bankId;
-                            cashtr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);// server current date
+                            cashtr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date
                             cashtr.processType = newObject.processType;
                             cashtr.cardId = newObject.cardId;
                             cashtr.bondId = newObject.bondId;
                             cashtr.shippingCompanyId = newObject.shippingCompanyId;
-
                         }
                         entity.SaveChanges();
                     }
                     message = cashtr.cashTransId;
 
                     return message;
-
                 }
                 catch (Exception ex)
                 {
-
                     message = -213;
                     return message;
 
                     //  return TokenManager.GenerateToken(ex.ToString());
                 }
-
-
             }
             message = -214;
             return message;
-
         }
+
         [HttpPost]
         [Route("getLastOpenTransNum")]
         public string getLastOpenTransNum(string token)
@@ -5244,7 +5229,12 @@ namespace POS_Server.Controllers
                     string numberList = "";
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        numberList = entity.cashTransfer.Where(b => b.posId == posId && b.transType == "o").ToList().OrderBy(b => b.cashTransId).LastOrDefault().transNum;
+                        numberList = entity.cashTransfer
+                            .Where(b => b.posId == posId && b.transType == "o")
+                            .ToList()
+                            .OrderBy(b => b.cashTransId)
+                            .LastOrDefault()
+                            .transNum;
                     }
                     return TokenManager.GenerateToken(numberList);
                 }
@@ -5254,7 +5244,6 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
 
         public async Task<string> generateCashNumber(string cashCode)
         {
@@ -5270,7 +5259,10 @@ namespace POS_Server.Controllers
             int sequence = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                numberList = entity.cashTransfer.Where(b => b.transNum.Contains(cashCode + "-")).Select(b => b.transNum).ToList();
+                numberList = entity.cashTransfer
+                    .Where(b => b.transNum.Contains(cashCode + "-"))
+                    .Select(b => b.transNum)
+                    .ToList();
 
                 for (int i = 0; i < numberList.Count; i++)
                 {
@@ -5317,7 +5309,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -5347,9 +5342,7 @@ namespace POS_Server.Controllers
                 message = "0";
                 return TokenManager.GenerateToken(message);
             }
-
         }
-
 
         [HttpPost]
         [Route("MakeDeposit")]
@@ -5375,8 +5368,14 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        cashTransferModel = JsonConvert.DeserializeObject<CashTransferModel>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        cashTransferModel = JsonConvert.DeserializeObject<CashTransferModel>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -5392,8 +5391,6 @@ namespace POS_Server.Controllers
                             {
                                 message = "-2";
                                 return TokenManager.GenerateToken(message);
-
-
                             }
                             else
                             {
@@ -5432,7 +5429,6 @@ namespace POS_Server.Controllers
                 message = "-1";
                 return TokenManager.GenerateToken(message);
             }
-
         }
 
         [HttpPost]
@@ -5459,8 +5455,14 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        cashTransferModel = JsonConvert.DeserializeObject<CashTransferModel>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        cashTransferModel = JsonConvert.DeserializeObject<CashTransferModel>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -5476,8 +5478,6 @@ namespace POS_Server.Controllers
                             {
                                 message = "-2";
                                 return TokenManager.GenerateToken(message);
-
-
                             }
                             else
                             {
@@ -5517,8 +5517,8 @@ namespace POS_Server.Controllers
 
                 return TokenManager.GenerateToken(message);
             }
-
         }
+
         private async Task<int> Confirm(cashTransfer newObject, CashTransferModel cashTransferModel)
         {
             try
@@ -5526,7 +5526,7 @@ namespace POS_Server.Controllers
                 await addCashTransfer(newObject);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    //edit updatedate for cashTrans 2 
+                    //edit updatedate for cashTrans 2
                     var cashTrans2 = entity.cashTransfer.Find(cashTransferModel.cashTrans2Id);
                     cashTrans2.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                     entity.SaveChanges();
@@ -5563,13 +5563,19 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cash1 = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        cash1 = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "cash2")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cash2 = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        cash2 = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                 }
 
@@ -5596,9 +5602,7 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
-
         }
 
         [HttpPost]
@@ -5624,7 +5628,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -5645,8 +5652,6 @@ namespace POS_Server.Controllers
 
                                 if (pos.balance < (decimal)newObject.cash)
                                     return TokenManager.GenerateToken("-3");
-
-
                             }
 
                             message = await addCashTransfer(newObject);
@@ -5665,7 +5670,6 @@ namespace POS_Server.Controllers
                 message = "-1";
                 return TokenManager.GenerateToken(message);
             }
-
         }
 
         [HttpPost]
@@ -5684,7 +5688,6 @@ namespace POS_Server.Controllers
             {
                 long cashTransId1 = 0;
                 long cashTransId2 = 0;
-
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -5715,7 +5718,6 @@ namespace POS_Server.Controllers
                             {
                                 message = "-2";
                                 return TokenManager.GenerateToken(message);
-
                             }
                             else
                             {
@@ -5727,23 +5729,17 @@ namespace POS_Server.Controllers
                                 entity.SaveChanges();
 
                                 message = "1";
-
-
                             }
-
                         }
 
                         return TokenManager.GenerateToken(message);
-
                     }
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("-1");
                 }
-
             }
-
         }
 
         [HttpPost]
@@ -5763,7 +5759,6 @@ namespace POS_Server.Controllers
                 List<cashTransfer> cashesList = new List<cashTransfer>();
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
-
                 cashTransfer cashTr = new cashTransfer();
                 foreach (Claim c in claims)
                 {
@@ -5771,17 +5766,20 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashesList = JsonConvert.DeserializeObject<List<cashTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashesList = JsonConvert.DeserializeObject<List<cashTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
@@ -5790,7 +5788,6 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             foreach (var cash in cashesList)
                             {
                                 decimal paid = 0;
@@ -5814,11 +5811,8 @@ namespace POS_Server.Controllers
                                 decreaseUserBalance((long)deliverCash.userId, paid);
                             }
 
-
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -5830,7 +5824,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-
         }
 
         [HttpPost]
@@ -5851,7 +5844,6 @@ namespace POS_Server.Controllers
                 decimal amount = 0;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
-
                 cashTransfer cashTr = new cashTransfer();
                 foreach (Claim c in claims)
                 {
@@ -5867,10 +5859,11 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
@@ -5879,9 +5872,14 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var cashesList = entity.cashTransfer.Where(x => x.userId == userId
-                                                                  && x.processType.Trim() == "commissionAgent"
-                                                                  && x.deserved > 0).ToList();
+                            var cashesList = entity.cashTransfer
+                                .Where(
+                                    x =>
+                                        x.userId == userId
+                                        && x.processType.Trim() == "commissionAgent"
+                                        && x.deserved > 0
+                                )
+                                .ToList();
 
                             decimal basicAmount = amount;
                             foreach (var cash in cashesList)
@@ -5932,9 +5930,7 @@ namespace POS_Server.Controllers
                             decreaseUserBalance(userId, basicAmount);
 
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -5946,8 +5942,8 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-
         }
+
         [NonAction]
         public void decreaseUserBalance(long userId, decimal paid)
         {
@@ -6000,22 +5996,24 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashesList = JsonConvert.DeserializeObject<List<cashTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashesList = JsonConvert.DeserializeObject<List<cashTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "shippingCompanyId")
                     {
                         shippingCompanyId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
@@ -6033,7 +6031,6 @@ namespace POS_Server.Controllers
                                 deliverCash.deserved = 0;
                                 deliverCash.isCommissionPaid = 1;
 
-
                                 cashTr.cash = paid;
                                 cashTr.cashTransIdSource = cash.cashTransId;
                                 cashTr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
@@ -6042,16 +6039,12 @@ namespace POS_Server.Controllers
                                 cashTr.transNum = await generateCashNumber(cashTr.transNum);
                                 entity.cashTransfer.Add(cashTr);
 
-
                                 entity.SaveChanges();
                                 decreaseShippingComBalance((long)cash.shippingCompanyId, paid);
                             }
 
-
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -6063,7 +6056,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-
         }
 
         [NonAction]
@@ -6117,21 +6109,20 @@ namespace POS_Server.Controllers
                     if (c.Type == "amount")
                     {
                         amount = decimal.Parse(c.Value);
-
                     }
                     else if (c.Type == "cashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        cashTr = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "shippingCompanyId")
                     {
                         shippingCompanyId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 if (cashTr != null)
@@ -6141,12 +6132,24 @@ namespace POS_Server.Controllers
                         decimal basicAmount = amount;
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var cashesList = entity.cashTransfer.Where(x => x.shippingCompanyId == shippingCompanyId && x.processType.Trim() == "deliver" && x.deserved > 0).ToList();
-
+                            var cashesList = entity.cashTransfer
+                                .Where(
+                                    x =>
+                                        x.shippingCompanyId == shippingCompanyId
+                                        && x.processType.Trim() == "deliver"
+                                        && x.deserved > 0
+                                )
+                                .ToList();
 
                             foreach (var cash in cashesList)
                             {
-                                var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == cash.invId && x.status == "Done").FirstOrDefault();
+                                var statusObj = entity.orderPreparingStatus
+                                    .Where(
+                                        x =>
+                                            x.orderPreparing.invoiceId == cash.invId
+                                            && x.status == "Done"
+                                    )
+                                    .FirstOrDefault();
 
                                 if (statusObj != null)
                                 {
@@ -6158,7 +6161,6 @@ namespace POS_Server.Controllers
                                         cash.paid += cash.deserved;
                                         cash.deserved = 0;
                                         cash.isCommissionPaid = 1;
-
                                     }
                                     else
                                     {
@@ -6194,9 +6196,7 @@ namespace POS_Server.Controllers
                             decreaseShippingComBalance(shippingCompanyId, basicAmount);
 
                             return TokenManager.GenerateToken("1");
-
                         }
-
                     }
                     catch
                     {
@@ -6208,7 +6208,6 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("-1");
                 }
             }
-
         }
 
         [Route("getNotPaidAgentCommission")]
@@ -6234,26 +6233,31 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var cashes = (from b in entity.cashTransfer.Where(x => x.userId == userId
-                                                                    && x.processType == "commissionAgent" && x.deserved > 0)
-                                  select new CashTransferModel()
-                                  {
-                                      cashTransId = b.cashTransId,
-                                      invId = b.invId,
-                                      agentId = b.agentId,
-                                      cash = b.cash,
-                                      deserved = b.deserved,
-                                      paid = b.paid,
-                                      notes = b.notes,
-                                      createUserId = b.createUserId,
-                                      updateDate = b.updateDate,
-                                      updateUserId = b.updateUserId,
-                                      shippingCompanyId = b.shippingCompanyId,
-                                      transNum = b.transNum,
-                                      isConfirm = 0,
-                                      isConfirm2 = 0,
-
-                                  }).ToList();
+                    var cashes = (
+                        from b in entity.cashTransfer.Where(
+                            x =>
+                                x.userId == userId
+                                && x.processType == "commissionAgent"
+                                && x.deserved > 0
+                        )
+                        select new CashTransferModel()
+                        {
+                            cashTransId = b.cashTransId,
+                            invId = b.invId,
+                            agentId = b.agentId,
+                            cash = b.cash,
+                            deserved = b.deserved,
+                            paid = b.paid,
+                            notes = b.notes,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            transNum = b.transNum,
+                            isConfirm = 0,
+                            isConfirm2 = 0,
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(cashes);
                 }
@@ -6283,27 +6287,34 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var cashes = (from b in entity.cashTransfer.Where(x => x.userId == userId
-                                                                    && (x.processType.Trim() == "destroy" || x.processType.Trim() == "shortage")
-                                                                    && x.deserved > 0)
-                                  select new CashTransferModel()
-                                  {
-                                      cashTransId = b.cashTransId,
-                                      invId = b.invId,
-                                      agentId = b.agentId,
-                                      cash = b.cash,
-                                      deserved = b.deserved,
-                                      paid = b.paid,
-                                      notes = b.notes,
-                                      createUserId = b.createUserId,
-                                      updateDate = b.updateDate,
-                                      updateUserId = b.updateUserId,
-                                      shippingCompanyId = b.shippingCompanyId,
-                                      transNum = b.transNum,
-                                      isConfirm=0,
-                                      isConfirm2 = 0,
-
-                                  }).ToList();
+                    var cashes = (
+                        from b in entity.cashTransfer.Where(
+                            x =>
+                                x.userId == userId
+                                && (
+                                    x.processType.Trim() == "destroy"
+                                    || x.processType.Trim() == "shortage"
+                                )
+                                && x.deserved > 0
+                        )
+                        select new CashTransferModel()
+                        {
+                            cashTransId = b.cashTransId,
+                            invId = b.invId,
+                            agentId = b.agentId,
+                            cash = b.cash,
+                            deserved = b.deserved,
+                            paid = b.paid,
+                            notes = b.notes,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            transNum = b.transNum,
+                            isConfirm = 0,
+                            isConfirm2 = 0,
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(cashes);
                 }
@@ -6334,30 +6345,39 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     List<CashTransferModel> res = new List<CashTransferModel>();
-                    var cashes = (from b in entity.cashTransfer.Where(x => x.shippingCompanyId == shippingComId
-                                                                    && x.processType.Trim() == "deliver" && x.deserved > 0)
-                                  select new CashTransferModel()
-                                  {
-                                      cashTransId = b.cashTransId,
-                                      invId = b.invId,
-                                      agentId = b.agentId,
-                                      cash = b.cash,
-                                      deserved = b.deserved,
-                                      paid = b.paid,
-                                      notes = b.notes,
-                                      createUserId = b.createUserId,
-                                      updateDate = b.updateDate,
-                                      updateUserId = b.updateUserId,
-                                      shippingCompanyId = b.shippingCompanyId,
-                                      transNum = b.transNum,
-                                      isConfirm = 0,
-                                      isConfirm2 = 0,
-
-                                  }).ToList();
+                    var cashes = (
+                        from b in entity.cashTransfer.Where(
+                            x =>
+                                x.shippingCompanyId == shippingComId
+                                && x.processType.Trim() == "deliver"
+                                && x.deserved > 0
+                        )
+                        select new CashTransferModel()
+                        {
+                            cashTransId = b.cashTransId,
+                            invId = b.invId,
+                            agentId = b.agentId,
+                            cash = b.cash,
+                            deserved = b.deserved,
+                            paid = b.paid,
+                            notes = b.notes,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            transNum = b.transNum,
+                            isConfirm = 0,
+                            isConfirm2 = 0,
+                        }
+                    ).ToList();
 
                     foreach (var cash in cashes)
                     {
-                        var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == cash.invId && x.status == "Done").FirstOrDefault();
+                        var statusObj = entity.orderPreparingStatus
+                            .Where(
+                                x => x.orderPreparing.invoiceId == cash.invId && x.status == "Done"
+                            )
+                            .FirstOrDefault();
                         if (statusObj != null)
                         {
                             res.Add(cash);
@@ -6369,4 +6389,3 @@ namespace POS_Server.Controllers
         }
     }
 }
-

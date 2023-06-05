@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             [Fact]
             public async Task SelectTypeParameterWithConstraints()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class Program
 {
@@ -34,7 +35,8 @@ class Program
         return abcd;
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class Program
 {
@@ -56,7 +58,8 @@ class Program
             [Fact]
             public async Task SelectTypeParameter()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class Program
 {
@@ -70,7 +73,8 @@ class Program
         return s;
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class Program
 {
@@ -97,7 +101,8 @@ class Program
             [Fact]
             public async Task SelectTypeOfTypeParameter()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class Program
 {
@@ -106,7 +111,8 @@ class Program
         return [|typeof(U)|];
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class Program
 {
@@ -127,7 +133,8 @@ class Program
             [Fact]
             public async Task SelectTypeParameterDataFlowOut()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -147,7 +154,8 @@ class Program
         return t.i.ToString();
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -180,7 +188,8 @@ class Program
             [Fact, WorkItem(528198, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528198")]
             public async Task BugFix6794()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -198,7 +207,8 @@ class Program
         }
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -228,7 +238,8 @@ class Program
             [Fact, WorkItem(528198, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528198")]
             public async Task BugFix6794_1()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -245,7 +256,8 @@ class Program
         }
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -274,7 +286,8 @@ class Program
             [Fact]
             public async Task SelectDefaultOfT()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -286,7 +299,8 @@ class Test11<T>
         return t;
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -314,14 +328,16 @@ class Test11<T>
             [Fact]
             public async Task SelectPostIncrementOperatorExtractWithRef()
             {
-                var code = @"class A
+                var code =
+                    @"class A
 {
     int method(int i)
     {
         return [|i++|];
     }
 }";
-                var expected = @"class A
+                var expected =
+                    @"class A
 {
     int method(int i)
     {
@@ -339,14 +355,16 @@ class Test11<T>
             [Fact]
             public async Task SelectPostIncrementOperator()
             {
-                var code = @"class A
+                var code =
+                    @"class A
 {
     int method(int i)
     {
         return [|i++|];
     }
 }";
-                var expected = @"class A
+                var expected =
+                    @"class A
 {
     int method(int i)
     {
@@ -364,14 +382,16 @@ class Test11<T>
             [Fact]
             public async Task SelectPreIncrementOperator()
             {
-                var code = @"class A
+                var code =
+                    @"class A
 {
     int method(int i)
     {
         return [|++i|];
     }
 }";
-                var expected = @"class A
+                var expected =
+                    @"class A
 {
     int method(int i)
     {
@@ -389,14 +409,16 @@ class Test11<T>
             [Fact]
             public async Task SelectPostDecrementOperator()
             {
-                var code = @"class A
+                var code =
+                    @"class A
 {
     int method(int i)
     {
         return [|i--|];
     }
 }";
-                var expected = @"class A
+                var expected =
+                    @"class A
 {
     int method(int i)
     {
@@ -414,14 +436,16 @@ class Test11<T>
             [Fact]
             public async Task SelectPreDecrementOperator()
             {
-                var code = @"class A
+                var code =
+                    @"class A
 {
     int method(int i)
     {
         return [|--i|];
     }
 }";
-                var expected = @"class A
+                var expected =
+                    @"class A
 {
     int method(int i)
     {
@@ -443,13 +467,15 @@ class Test11<T>
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethod()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class T
 {
     int m;
     int M1() => [|1|] + 2 + 3 + m;
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class T
 {
     int m;
@@ -466,7 +492,8 @@ class T
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedOperator()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class Complex
 {
     int real; int imaginary;
@@ -477,7 +504,8 @@ class Complex
         throw new NotImplementedException();
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class Complex
 {
     int real; int imaginary;
@@ -499,7 +527,8 @@ class Complex
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedConversionOperator()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 public struct DBBool
 {
     public static readonly DBBool dbFalse = new DBBool(-1);
@@ -512,7 +541,8 @@ public struct DBBool
 
     public static implicit operator DBBool(bool x) => x ? new DBBool([|1|]) : dbFalse;
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 public struct DBBool
 {
     public static readonly DBBool dbFalse = new DBBool(-1);
@@ -536,12 +566,14 @@ public struct DBBool
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedProperty()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class T
 {
     int M1 => [|1|] + 2;
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class T
 {
     int M1 => NewMethod() + 2;
@@ -557,13 +589,15 @@ class T
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedIndexer()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
     public T this[int i] => i > 0 ? arr[[|i + 1|]] : arr[i + 2];
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
@@ -580,13 +614,15 @@ class SampleCollection<T>
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedIndexer2()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
     public T this[int i] => [|i > 0 ? arr[i + 1]|] : arr[i + 2];
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
@@ -603,7 +639,8 @@ class SampleCollection<T>
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithBlockBodiedAnonymousMethodExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x)
@@ -611,7 +648,8 @@ class TestClass
         return [|9|];
     };
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x)
@@ -630,12 +668,14 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithSingleLineBlockBodiedAnonymousMethodExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x) { return [|9|]; };
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x) { return NewMethod(); };
@@ -651,7 +691,8 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithBlockBodiedSimpleLambdaExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => f =>
@@ -659,7 +700,8 @@ class TestClass
         return f * [|9|];
     };
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => f =>
@@ -678,12 +720,14 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithExpressionBodiedSimpleLambdaExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => f => f * [|9|];
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => f => f * NewMethod();
@@ -699,7 +743,8 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithBlockBodiedParenthesizedLambdaExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => (f) =>
@@ -707,7 +752,8 @@ class TestClass
         return f * [|9|];
     };
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => (f) =>
@@ -726,12 +772,14 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithExpressionBodiedParenthesizedLambdaExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => (f) => f * [|9|];
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     Func<int, int> Y() => (f) => f * NewMethod();
@@ -747,7 +795,8 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task ExpressionBodiedMethodWithBlockBodiedAnonymousMethodExpressionInMethodArgs()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     public int Prop => Method1(delegate()
@@ -760,7 +809,8 @@ class TestClass
         throw new NotImplementedException();
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     public int Prop => Method1(delegate()
@@ -784,14 +834,16 @@ class TestClass
             [Fact, WorkItem(528, "https://github.com/dotnet/roslyn/issues/528")]
             public async Task LeadingAndTrailingTriviaOnExpressionBodiedMethod()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class TestClass
 {
     int M1() => 1 + 2 + /*not moved*/ [|3|] /*not moved*/;
 
     void Cat() { }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class TestClass
 {
     int M1() => 1 + 2 + /*not moved*/ NewMethod() /*not moved*/;
@@ -813,7 +865,8 @@ class TestClass
             [Fact, WorkItem(9244, "https://github.com/dotnet/roslyn/issues/9244")]
             public async Task PatternIsDisabled()
             {
-                var code = @"
+                var code =
+                    @"
 using System;
 class Program
 {
@@ -837,7 +890,8 @@ class Program
             [Fact, WorkItem(11155, "DevDiv_Projects/Roslyn")]
             public async Task AnonymousTypeMember1()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
  
 class Program
 {
@@ -854,14 +908,16 @@ class Program
             [Fact, WorkItem(544259, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544259")]
             public async Task ExtractMethod_ConstructorInitializer()
             {
-                var code = @"class Program
+                var code =
+                    @"class Program
 {
     public Program(string a, int b)
         : this(a, [|new Program()|])
     {
     }
 }";
-                var expected = @"class Program
+                var expected =
+                    @"class Program
 {
     public Program(string a, int b)
         : this(a, NewMethod())
@@ -880,7 +936,8 @@ class Program
             [Fact, WorkItem(543984, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543984")]
             public async Task ExtractMethod_UnsafeAddressTaken()
             {
-                var code = @"class C
+                var code =
+                    @"class C
 {
     unsafe void M()
     {
@@ -888,7 +945,8 @@ class Program
         int* j = [|&i|];
     }
 }";
-                var expected = @"class C
+                var expected =
+                    @"class C
 {
     unsafe void M()
     {
@@ -908,7 +966,8 @@ class Program
             [Fact, WorkItem(544387, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544387")]
             public async Task ExtractMethod_PointerType()
             {
-                var code = @"class Test
+                var code =
+                    @"class Test
 {
     static int x = 0;
     unsafe static void Main()
@@ -919,7 +978,8 @@ class Program
         }
     }
 }";
-                var expected = @"class Test
+                var expected =
+                    @"class Test
 {
     static int x = 0;
     unsafe static void Main()
@@ -942,7 +1002,8 @@ class Program
             [Fact, WorkItem(544514, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544514")]
             public async Task ExtractMethod_AnonymousType()
             {
-                var code = @"public class Test
+                var code =
+                    @"public class Test
 {
     public static void Main()
     {
@@ -952,7 +1013,8 @@ class Program
         [|p1 = p2;|]
     }
 }";
-                var expected = @"public class Test
+                var expected =
+                    @"public class Test
 {
     public static void Main()
     {
@@ -974,7 +1036,8 @@ class Program
             [Fact, WorkItem(544920, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544920")]
             public async Task ExtractMethod_StackAllocExpression()
             {
-                var code = @"
+                var code =
+                    @"
 unsafe class C
 {
     static void Main()
@@ -983,7 +1046,8 @@ unsafe class C
     }
 }
 ";
-                var expected = @"
+                var expected =
+                    @"
 unsafe class C
 {
     static void Main()
@@ -1004,7 +1068,8 @@ unsafe class C
             [Fact, WorkItem(539310, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539310")]
             public async Task Readonly_Field_WrittenTo()
             {
-                var code = @"class C
+                var code =
+                    @"class C
 {
     private readonly int i;
 
@@ -1019,7 +1084,8 @@ unsafe class C
             [Fact, WorkItem(539310, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539310")]
             public async Task Readonly_Field()
             {
-                var code = @"class C
+                var code =
+                    @"class C
 {
     private readonly int i;
 
@@ -1029,7 +1095,8 @@ unsafe class C
         [|var x = i;|]
     }
 }";
-                var expected = @"class C
+                var expected =
+                    @"class C
 {
     private readonly int i;
 
@@ -1050,7 +1117,8 @@ unsafe class C
             [Fact, WorkItem(545180, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545180")]
             public async Task NodeHasSyntacticErrors()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -1071,7 +1139,8 @@ class Program
             [Fact, WorkItem(545292, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545292")]
             public async Task LocalConst()
             {
-                var code = @"class Test
+                var code =
+                    @"class Test
 {
     public static void Main()
     {
@@ -1084,7 +1153,8 @@ class Program
             [Fact, WorkItem(545315, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545315")]
             public async Task Nullable()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class Program
 {
     static void Main()
@@ -1093,7 +1163,8 @@ class Program
         [|Console.WriteLine(q);|]
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class Program
 {
     static void Main()
@@ -1114,7 +1185,8 @@ class Program
             [Fact, WorkItem(545263, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545263")]
             public async Task SyntacticErrorInSelection()
             {
-                var code = @"class Program
+                var code =
+                    @"class Program
 {
     static void Main(string[] args)
     {
@@ -1135,7 +1207,8 @@ class Program
             [Fact, WorkItem(544497, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544497")]
             public async Task StackAllocExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 class Test
 {
     unsafe static void Main()
@@ -1143,7 +1216,8 @@ class Test
         void* buffer = [|stackalloc char[16]|];
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 class Test
 {
     unsafe static void Main()
@@ -1162,7 +1236,8 @@ class Test
             [Fact, WorkItem(545503, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545503")]
             public async Task MethodBodyInScript()
             {
-                var code = @"#r ""System.Management""
+                var code =
+                    @"#r ""System.Management""
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1184,7 +1259,8 @@ void CollectInfo(string title, string query, string[,] labelKeys)
     }
     output.AppendLine();|]
 }";
-                var expected = @"#r ""System.Management""
+                var expected =
+                    @"#r ""System.Management""
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1211,13 +1287,18 @@ void NewMethod(string query, string[,] labelKeys)
     }
     output.AppendLine();
 }";
-                await TestExtractMethodAsync(code, expected, parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script));
+                await TestExtractMethodAsync(
+                    code,
+                    expected,
+                    parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             }
 
             [Fact, WorkItem(544920, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544920")]
             public async Task NoSimplificationForStackAlloc()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
  
 unsafe class C
 {
@@ -1227,7 +1308,8 @@ unsafe class C
         Console.WriteLine((int)p);
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
  
 unsafe class C
 {
@@ -1249,7 +1331,8 @@ unsafe class C
             [Fact, WorkItem(545553, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545553")]
             public async Task CheckStatementContext1()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class X
 {
@@ -1266,7 +1349,8 @@ class X
         }
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class X
 {
@@ -1297,7 +1381,8 @@ class X
             [Fact, WorkItem(545553, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545553")]
             public async Task CheckStatementContext2()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class X
 {
@@ -1314,7 +1399,8 @@ class X
         }|]
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class X
 {
@@ -1342,7 +1428,8 @@ class X
             [Fact, WorkItem(545553, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545553")]
             public async Task CheckStatementContext3()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class X
 {
@@ -1361,7 +1448,8 @@ class X
         }
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class X
 {
@@ -1392,7 +1480,8 @@ class X
             [Fact, WorkItem(545553, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545553")]
             public async Task CheckExpressionContext1()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class X
 {
@@ -1406,7 +1495,8 @@ class X
         var s = unchecked(1 + [|Goo(X => (byte)X.Value, null)|]);
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class X
 {
@@ -1431,7 +1521,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_SingleStatement()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1441,7 +1532,8 @@ class X
         [|await Task.Run(() => { });|]
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1462,7 +1554,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_Expression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1472,7 +1565,8 @@ class X
         [|await Task.Run(() => { })|];
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1493,7 +1587,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_MultipleStatements()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1507,7 +1602,8 @@ class X
         return;|]
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1532,7 +1628,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_ExpressionWithReturn()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1544,7 +1641,8 @@ class X
         [|await Task.Run(() => 1)|];
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1567,7 +1665,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_ExpressionInAwaitExpression()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1577,7 +1676,8 @@ class X
         await [|Task.Run(() => 1)|];
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1598,7 +1698,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_StatementWithAwaitExpressionWithReturn()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1608,7 +1709,8 @@ class X
         [|await Task.Run(() => 1);|]
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1629,7 +1731,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_AwaitWithReturnParameter()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1641,7 +1744,8 @@ class X
         Console.WriteLine(i);
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1665,7 +1769,8 @@ class X
             [Fact]
             public async Task AwaitExpression_Normal_AwaitWithReturnParameter_Error()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1684,7 +1789,8 @@ class X
             public async Task AwaitExpression_AsyncLambda()
             {
                 // this is an error case. but currently, I didn't blocked this. but we could if we want to.
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1694,7 +1800,8 @@ class X
         Test([|async () => await Task.Run(() => 1)|]);
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1716,7 +1823,8 @@ class X
             public async Task AwaitExpression_AsyncLambda_Body()
             {
                 // this is an error case. but currently, I didn't blocked this. but we could if we want to.
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1726,7 +1834,8 @@ class X
         Test(async () => [|await Task.Run(() => 1)|]);
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1748,7 +1857,8 @@ class X
             public async Task AwaitExpression_AsyncLambda_WholeExpression()
             {
                 // this is an error case. but currently, I didn't blocked this. but we could if we want to.
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1758,7 +1868,8 @@ class X
         [|Test(async () => await Task.Run(() => 1));|]
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Threading.Tasks;
 
 class X
@@ -1776,10 +1887,14 @@ class X
                 await TestExtractMethodAsync(code, expected);
             }
 
-            [Fact, WorkItem(1064798, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064798")]
+            [
+                Fact,
+                WorkItem(1064798, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1064798")
+            ]
             public async Task ExpressionInStringInterpolation()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 
 class X
 {
@@ -1788,7 +1903,8 @@ class X
         var s = $""Alpha Beta {[|int.Parse(""12345"")|]} Gamma"";
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 
 class X
 {
@@ -1808,7 +1924,8 @@ class X
             [Fact, WorkItem(859493, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/859493")]
             public async Task ExpressionInYieldReturnStatement()
             {
-                var code = @"using System;
+                var code =
+                    @"using System;
 using System.Collections.Generic;
 
 public class Test<T> 
@@ -1830,7 +1947,8 @@ public class Test<T>
         }
     }
 }";
-                var expected = @"using System;
+                var expected =
+                    @"using System;
 using System.Collections.Generic;
 
 public class Test<T> 
@@ -1864,7 +1982,9 @@ public class Test<T>
         [Fact, WorkItem(3147, "https://github.com/dotnet/roslyn/issues/3147")]
         public async Task HandleFormattableStringTargetTyping1()
         {
-            const string code = CodeSnippets.FormattableStringType + @"
+            const string code =
+                CodeSnippets.FormattableStringType
+                + @"
 namespace N
 {
     using System;
@@ -1878,7 +1998,9 @@ namespace N
     }
 }";
 
-            const string expected = CodeSnippets.FormattableStringType + @"
+            const string expected =
+                CodeSnippets.FormattableStringType
+                + @"
 namespace N
 {
     using System;
@@ -1903,7 +2025,8 @@ namespace N
         [Fact, WorkItem(17971, "https://github.com/dotnet/roslyn/issues/17971")]
         public async Task BrokenForeachLoop()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 namespace ConsoleApp1
 {
     class Program
@@ -1916,7 +2039,8 @@ namespace ConsoleApp1
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 namespace ConsoleApp1
 {
     class Program
@@ -1941,7 +2065,8 @@ namespace ConsoleApp1
         [Fact, WorkItem(22150, "https://github.com/dotnet/roslyn/issues/22150")]
         public async Task ExtractMethod_LocalVariableCrossingLocalFunction()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class C
 {
@@ -1952,7 +2077,8 @@ class C
         Console.WriteLine(x);|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class C
 {

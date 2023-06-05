@@ -11,23 +11,35 @@ namespace Microsoft.Win32.SystemEventsTests
 {
     public abstract class ShutdownTest : SystemEventsTest
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void ShutdownThroughRestartManager()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                // Register any event to ensure that SystemEvents get initialized
-                SystemEvents.TimeChanged += (o, e) => { };
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    // Register any event to ensure that SystemEvents get initialized
+                    SystemEvents.TimeChanged += (o, e) => { };
 
-                // Fake Restart Manager behavior by sending external WM_CLOSE message
-                SendMessage(Interop.User32.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                    // Fake Restart Manager behavior by sending external WM_CLOSE message
+                    SendMessage(Interop.User32.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
 
-                // Emulate calling the Shutdown event
-                var shutdownMethod = typeof(SystemEvents).GetMethod("Shutdown", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic, null, new Type[0], null);
-                Assert.NotNull(shutdownMethod);
-                shutdownMethod.Invoke(null, null);
-            }).Dispose();
+                    // Emulate calling the Shutdown event
+                    var shutdownMethod = typeof(SystemEvents).GetMethod(
+                        "Shutdown",
+                        System.Reflection.BindingFlags.Static
+                            | System.Reflection.BindingFlags.NonPublic,
+                        null,
+                        new Type[0],
+                        null
+                    );
+                    Assert.NotNull(shutdownMethod);
+                    shutdownMethod.Invoke(null, null);
+                })
+                .Dispose();
         }
     }
 }

@@ -37,80 +37,98 @@ using System.Xml;
 
 namespace MonoTests.System.Data.Connected
 {
-	internal sealed class ConnectionConfig
-	{
-		private readonly string name;
-		private readonly string factory;
-		private readonly string connectionString;
-		private readonly EngineConfig engine;
+    internal sealed class ConnectionConfig
+    {
+        private readonly string name;
+        private readonly string factory;
+        private readonly string connectionString;
+        private readonly EngineConfig engine;
 
-		private ConnectionConfig (string name, string factory, string connectionString, EngineConfig engine)
-		{
-			this.name = name;
-			this.factory = factory;
-			this.connectionString = connectionString;
-			this.engine = engine;
-		}
+        private ConnectionConfig(
+            string name,
+            string factory,
+            string connectionString,
+            EngineConfig engine
+        )
+        {
+            this.name = name;
+            this.factory = factory;
+            this.connectionString = connectionString;
+            this.engine = engine;
+        }
 
-		internal static ConnectionConfig FromXml (XmlNode connNode, Hashtable engines)
-		{
-			return new ConnectionConfig (
-				GetAttribValue (connNode, "name", true),
-				GetAttribValue (connNode, "factory", true),
-				GetAttribValue (connNode, "connectionString", true),
-				GetEngine (connNode, engines));
-		}
+        internal static ConnectionConfig FromXml(XmlNode connNode, Hashtable engines)
+        {
+            return new ConnectionConfig(
+                GetAttribValue(connNode, "name", true),
+                GetAttribValue(connNode, "factory", true),
+                GetAttribValue(connNode, "connectionString", true),
+                GetEngine(connNode, engines)
+            );
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public string Factory {
-			get { return factory; }
-		}
+        public string Factory
+        {
+            get { return factory; }
+        }
 
-		public string ConnectionString {
-			get { return connectionString; }
-		}
+        public string ConnectionString
+        {
+            get { return connectionString; }
+        }
 
-		public EngineConfig Engine {
-			get { return engine; }
-		}
+        public EngineConfig Engine
+        {
+            get { return engine; }
+        }
 
-		static string GetAttribValue (XmlNode node, string name, bool required)
-		{
-			XmlAttribute attr = node.Attributes [name];
-			if (attr == null) {
-				if (required)
-					throw CreateAttributeMissingException (name, node);
-				return null;
-			}
-			return attr.Value;
-		}
+        static string GetAttribValue(XmlNode node, string name, bool required)
+        {
+            XmlAttribute attr = node.Attributes[name];
+            if (attr == null)
+            {
+                if (required)
+                    throw CreateAttributeMissingException(name, node);
+                return null;
+            }
+            return attr.Value;
+        }
 
-		static EngineConfig GetEngine (XmlNode connNode, Hashtable engines)
-		{
-			XmlAttribute engineAttr = connNode.Attributes ["engine"];
-			if (engineAttr == null)
-				throw CreateAttributeMissingException ("engine", connNode);
+        static EngineConfig GetEngine(XmlNode connNode, Hashtable engines)
+        {
+            XmlAttribute engineAttr = connNode.Attributes["engine"];
+            if (engineAttr == null)
+                throw CreateAttributeMissingException("engine", connNode);
 
-			string engineName = engineAttr.Value;
-			EngineConfig engine = (EngineConfig) engines [engineName];
-			if (engine == null) {
-				string msg = string.Format (CultureInfo.InvariantCulture,
-					"Engine '{0}' does not exist.", engineName);
-				throw new ConfigurationErrorsException (msg, engineAttr);
-			}
-			return engine;
-		}
+            string engineName = engineAttr.Value;
+            EngineConfig engine = (EngineConfig)engines[engineName];
+            if (engine == null)
+            {
+                string msg = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Engine '{0}' does not exist.",
+                    engineName
+                );
+                throw new ConfigurationErrorsException(msg, engineAttr);
+            }
+            return engine;
+        }
 
-		static Exception CreateAttributeMissingException (string name, XmlNode node)
-		{
-			string msg = string.Format (CultureInfo.InvariantCulture,
-				"Missing '{0}' attribute.", name);
-			throw new ConfigurationErrorsException (msg, node);
-		}
-	}
+        static Exception CreateAttributeMissingException(string name, XmlNode node)
+        {
+            string msg = string.Format(
+                CultureInfo.InvariantCulture,
+                "Missing '{0}' attribute.",
+                name
+            );
+            throw new ConfigurationErrorsException(msg, node);
+        }
+    }
 }
 
 #endif

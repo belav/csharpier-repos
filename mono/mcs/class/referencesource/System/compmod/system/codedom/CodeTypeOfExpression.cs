@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeTypeOfExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
+namespace System.CodeDom
+{
     using System.Diagnostics;
     using System;
     using Microsoft.Win32;
@@ -19,12 +19,9 @@ namespace System.CodeDom {
     ///       Represents a TypeOf expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeTypeOfExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    public class CodeTypeOfExpression : CodeExpression
+    {
         private CodeTypeReference type;
 
         /// <devdoc>
@@ -32,29 +29,31 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeOfExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeTypeOfExpression() {
-        }
+        public CodeTypeOfExpression() { }
 
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeOfExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeTypeOfExpression(CodeTypeReference type) {
+        public CodeTypeOfExpression(CodeTypeReference type)
+        {
             Type = type;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeTypeOfExpression(string type) {
+        public CodeTypeOfExpression(string type)
+        {
             Type = new CodeTypeReference(type);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeTypeOfExpression(Type type) {
+        public CodeTypeOfExpression(Type type)
+        {
             Type = new CodeTypeReference(type);
         }
 
@@ -63,16 +62,17 @@ namespace System.CodeDom {
         ///       Gets or sets the data type.
         ///    </para>
         /// </devdoc>
-        public CodeTypeReference Type {
-            get {
-                if (type == null) {
+        public CodeTypeReference Type
+        {
+            get
+            {
+                if (type == null)
+                {
                     type = new CodeTypeReference("");
                 }
                 return type;
             }
-            set {
-                type = value;
-            }
+            set { type = value; }
         }
     }
 }

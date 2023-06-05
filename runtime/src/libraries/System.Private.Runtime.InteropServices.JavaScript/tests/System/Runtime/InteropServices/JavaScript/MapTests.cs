@@ -133,58 +133,67 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void ContainsKey()
         {
             var map1 = Helpers.CreateStringMap(100);
-            Helpers.PerformActionOnAllMapWrappers(map1, map2 =>
-            {
-                for (int i = 0; i < map2.Count; i++)
+            Helpers.PerformActionOnAllMapWrappers(
+                map1,
+                map2 =>
                 {
-                    string key = $"Key_{i}";
-                    Assert.True(map2.Contains(key));
+                    for (int i = 0; i < map2.Count; i++)
+                    {
+                        string key = $"Key_{i}";
+                        Assert.True(map2.Contains(key));
+                    }
+
+                    Assert.False(map2.Contains("Non Existent Key"));
+                    Assert.False(map2.Contains(101));
+
+                    string removedKey = "Key_1";
+                    map2.Remove(removedKey);
+                    Assert.False(map2.Contains(removedKey));
                 }
-
-                Assert.False(map2.Contains("Non Existent Key"));
-                Assert.False(map2.Contains(101));
-
-                string removedKey = "Key_1";
-                map2.Remove(removedKey);
-                Assert.False(map2.Contains(removedKey));
-            });
+            );
         }
 
         [Fact]
         public static void RemoveKey()
         {
             var map1 = Helpers.CreateStringMap(100);
-            Helpers.PerformActionOnAllMapWrappers(map1, map2 =>
-            {
-                for (int i = 0; i < map2.Count; i++)
+            Helpers.PerformActionOnAllMapWrappers(
+                map1,
+                map2 =>
                 {
-                    string key = $"Key_{i}";
-                    Assert.True(map2.Contains(key));
-                }
-                Assert.Equal(map2.Count, map2.Keys.Count);
+                    for (int i = 0; i < map2.Count; i++)
+                    {
+                        string key = $"Key_{i}";
+                        Assert.True(map2.Contains(key));
+                    }
+                    Assert.Equal(map2.Count, map2.Keys.Count);
 
-                foreach (var key in map2.Keys)
-                {
-                    map2.Remove(key);
+                    foreach (var key in map2.Keys)
+                    {
+                        map2.Remove(key);
+                    }
+                    Assert.Equal(0, map2.Keys.Count);
                 }
-                Assert.Equal(0, map2.Keys.Count);
-            });
+            );
         }
 
         [Fact]
         public static void ContainsValue()
         {
             Map map1 = Helpers.CreateStringMap(100);
-            Helpers.PerformActionOnAllMapWrappers(map1, map2 =>
-            {
-                for (int i = 0; i < map2.Count; i++)
+            Helpers.PerformActionOnAllMapWrappers(
+                map1,
+                map2 =>
                 {
-                    string value = $"Value_{i}";
-                    Assert.True(map2[$"Key_{i}"].ToString() == value);
+                    for (int i = 0; i < map2.Count; i++)
+                    {
+                        string value = $"Value_{i}";
+                        Assert.True(map2[$"Key_{i}"].ToString() == value);
+                    }
+                    Assert.True(map2["Non Existent Value"] == null);
+                    Assert.True(map2[101] == null);
                 }
-                Assert.True(map2["Non Existent Value"] == null);
-                Assert.True(map2[101] == null);
-            });
+            );
         }
 
         private static class Helpers

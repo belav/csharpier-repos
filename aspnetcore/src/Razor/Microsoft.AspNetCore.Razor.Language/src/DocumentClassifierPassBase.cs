@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRazorDocumentClassifierPass
+public abstract class DocumentClassifierPassBase
+    : IntermediateNodePassBase,
+        IRazorDocumentClassifierPass
 {
     protected abstract string DocumentKind { get; }
 
@@ -18,10 +20,14 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
     protected override void OnInitialized()
     {
         var feature = Engine.GetFeature<IRazorTargetExtensionFeature>();
-        TargetExtensions = feature?.TargetExtensions.ToArray() ?? Array.Empty<ICodeTargetExtension>();
+        TargetExtensions =
+            feature?.TargetExtensions.ToArray() ?? Array.Empty<ICodeTargetExtension>();
     }
 
-    protected sealed override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected sealed override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (documentNode.DocumentKind != null)
         {
@@ -37,7 +43,9 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
         documentNode.Target = CreateTarget(codeDocument, documentNode.Options);
         if (documentNode.Target == null)
         {
-            throw new InvalidOperationException($"{nameof(CreateTarget)} must return a non-null {nameof(CodeTarget)}.");
+            throw new InvalidOperationException(
+                $"{nameof(CreateTarget)} must return a non-null {nameof(CodeTarget)}."
+            );
         }
 
         Rewrite(codeDocument, documentNode);
@@ -51,7 +59,8 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
         documentNode.Children.Clear();
 
         var @namespace = new NamespaceDeclarationIntermediateNode();
-        @namespace.Annotations[CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace;
+        @namespace.Annotations[CommonAnnotations.PrimaryNamespace] =
+            CommonAnnotations.PrimaryNamespace;
 
         var @class = new ClassDeclarationIntermediateNode();
         @class.Annotations[CommonAnnotations.PrimaryClass] = CommonAnnotations.PrimaryClass;
@@ -82,20 +91,30 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
         OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
     }
 
-    protected abstract bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode);
+    protected abstract bool IsMatch(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    );
 
     // virtual to allow replacing the code target wholesale.
-    protected virtual CodeTarget CreateTarget(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
+    protected virtual CodeTarget CreateTarget(
+        RazorCodeDocument codeDocument,
+        RazorCodeGenerationOptions options
+    )
     {
-        return CodeTarget.CreateDefault(codeDocument, options, (builder) =>
-        {
-            for (var i = 0; i < TargetExtensions.Count; i++)
+        return CodeTarget.CreateDefault(
+            codeDocument,
+            options,
+            (builder) =>
             {
-                builder.TargetExtensions.Add(TargetExtensions[i]);
-            }
+                for (var i = 0; i < TargetExtensions.Count; i++)
+                {
+                    builder.TargetExtensions.Add(TargetExtensions[i]);
+                }
 
-            ConfigureTarget(builder);
-        });
+                ConfigureTarget(builder);
+            }
+        );
     }
 
     protected virtual void ConfigureTarget(CodeTargetBuilder builder)
@@ -107,7 +126,8 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
         RazorCodeDocument codeDocument,
         NamespaceDeclarationIntermediateNode @namespace,
         ClassDeclarationIntermediateNode @class,
-        MethodDeclarationIntermediateNode @method)
+        MethodDeclarationIntermediateNode @method
+    )
     {
         // Intentionally empty.
     }
@@ -119,7 +139,12 @@ public abstract class DocumentClassifierPassBase : IntermediateNodePassBase, IRa
         private readonly IntermediateNodeBuilder _class;
         private readonly IntermediateNodeBuilder _method;
 
-        public Visitor(IntermediateNodeBuilder document, IntermediateNodeBuilder @namespace, IntermediateNodeBuilder @class, IntermediateNodeBuilder method)
+        public Visitor(
+            IntermediateNodeBuilder document,
+            IntermediateNodeBuilder @namespace,
+            IntermediateNodeBuilder @class,
+            IntermediateNodeBuilder method
+        )
         {
             _document = document;
             _namespace = @namespace;

@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -28,45 +28,45 @@
 using System;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	internal sealed class ConditionNotExpression : ConditionExpression {
-	
-		readonly ConditionExpression expression;
-		
-		public ConditionNotExpression (ConditionExpression expression)
-		{
-			this.expression = expression;
-		}
-		
-		public override  bool BoolEvaluate (Project context)
-		{
-			return !(expression.BoolEvaluate (context));
-		}
-		
-		
-		public override float NumberEvaluate (Project context)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		public override string StringEvaluate (Project context)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		public override bool CanEvaluateToBool (Project context)
-		{
-			return expression.CanEvaluateToBool (context);
-		}
-		
-		public override bool CanEvaluateToNumber (Project context)
-		{
-			return false;
-		}
-		
-		public override bool CanEvaluateToString (Project context)
-		{
-			return false;
-		}
-	}
+namespace Microsoft.Build.BuildEngine
+{
+    internal sealed class ConditionNotExpression : ConditionExpression
+    {
+        readonly ConditionExpression expression;
+
+        public ConditionNotExpression(ConditionExpression expression)
+        {
+            this.expression = expression;
+        }
+
+        public override bool BoolEvaluate(Project context)
+        {
+            return !(expression.BoolEvaluate(context));
+        }
+
+        public override float NumberEvaluate(Project context)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override string StringEvaluate(Project context)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override bool CanEvaluateToBool(Project context)
+        {
+            return expression.CanEvaluateToBool(context);
+        }
+
+        public override bool CanEvaluateToNumber(Project context)
+        {
+            return false;
+        }
+
+        public override bool CanEvaluateToString(Project context)
+        {
+            return false;
+        }
+    }
 }

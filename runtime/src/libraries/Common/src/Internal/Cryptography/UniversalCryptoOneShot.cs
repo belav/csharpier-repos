@@ -14,7 +14,8 @@ namespace Internal.Cryptography
             PaddingMode paddingMode,
             ReadOnlySpan<byte> input,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (input.Length % cipher.PaddingSizeInBytes != 0)
                 throw new CryptographicException(SR.Cryptography_PartialBlock);
@@ -50,7 +51,11 @@ namespace Internal.Cryptography
                 {
                     int transformWritten = cipher.TransformFinal(input, buffer);
                     decryptedBuffer = buffer.Slice(0, transformWritten);
-                    int unpaddedLength = SymmetricPadding.GetPaddingLength(decryptedBuffer, paddingMode, cipher.BlockSizeInBytes); // validates padding
+                    int unpaddedLength = SymmetricPadding.GetPaddingLength(
+                        decryptedBuffer,
+                        paddingMode,
+                        cipher.BlockSizeInBytes
+                    ); // validates padding
 
                     if (unpaddedLength > output.Length)
                     {
@@ -75,9 +80,14 @@ namespace Internal.Cryptography
             PaddingMode paddingMode,
             ReadOnlySpan<byte> input,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
-            int ciphertextLength = SymmetricPadding.GetCiphertextLength(input.Length, cipher.PaddingSizeInBytes, paddingMode);
+            int ciphertextLength = SymmetricPadding.GetCiphertextLength(
+                input.Length,
+                cipher.PaddingSizeInBytes,
+                paddingMode
+            );
 
             if (output.Length < ciphertextLength)
             {
@@ -88,7 +98,12 @@ namespace Internal.Cryptography
             // Copy the input to the output, and apply padding if required. This will not throw since the
             // output length has already been checked, and PadBlock will not copy from input to output
             // until it has checked that it will be able to apply padding correctly.
-            int padWritten = SymmetricPadding.PadBlock(input, output, cipher.PaddingSizeInBytes, paddingMode);
+            int padWritten = SymmetricPadding.PadBlock(
+                input,
+                output,
+                cipher.PaddingSizeInBytes,
+                paddingMode
+            );
 
             // Do an in-place encrypt. All of our implementations support this, either natively
             // or making a temporary buffer themselves if in-place is not supported by the native

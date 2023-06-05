@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
 {
     class MockSocket : UvStreamHandle
     {
-        public MockSocket(LibuvFunctions uv, int threadId, ILibuvTrace logger) : base(logger)
+        public MockSocket(LibuvFunctions uv, int threadId, ILibuvTrace logger)
+            : base(logger)
         {
             CreateMemory(uv, threadId, IntPtr.Size);
         }

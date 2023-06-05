@@ -21,7 +21,8 @@ namespace Roslyn.Utilities
         /// <returns>The new value referenced by <paramref name="target"/>. Note that this is
         /// nearly always more useful than the usual return from <see cref="Interlocked.CompareExchange{T}(ref T, T, T)"/>
         /// because it saves another read to <paramref name="target"/>.</returns>
-        public static T Initialize<T>([NotNull] ref T? target, T value) where T : class
+        public static T Initialize<T>([NotNull] ref T? target, T value)
+            where T : class
         {
             RoslynDebug.Assert((object?)value != null);
             return Interlocked.CompareExchange(ref target, value, null) ?? value;
@@ -40,10 +41,15 @@ namespace Roslyn.Utilities
         /// nearly always more useful than the usual return from <see cref="Interlocked.CompareExchange{T}(ref T, T, T)"/>
         /// because it saves another read to <paramref name="target"/>.</returns>
         [return: NotNullIfNotNull(parameterName: nameof(initializedValue))]
-        public static T Initialize<T>(ref T target, T initializedValue, T uninitializedValue) where T : class?
+        public static T Initialize<T>(ref T target, T initializedValue, T uninitializedValue)
+            where T : class?
         {
             Debug.Assert((object?)initializedValue != uninitializedValue);
-            T oldValue = Interlocked.CompareExchange(ref target, initializedValue, uninitializedValue);
+            T oldValue = Interlocked.CompareExchange(
+                ref target,
+                initializedValue,
+                uninitializedValue
+            );
             return (object?)oldValue == uninitializedValue ? initializedValue : oldValue;
         }
 
@@ -56,10 +62,17 @@ namespace Roslyn.Utilities
         /// <returns>The new value referenced by <paramref name="target"/>. Note that this is
         /// nearly always more useful than the usual return from <see cref="Interlocked.CompareExchange{T}(ref T, T, T)"/>
         /// because it saves another read to <paramref name="target"/>.</returns>
-        public static ImmutableArray<T> Initialize<T>(ref ImmutableArray<T> target, ImmutableArray<T> initializedValue)
+        public static ImmutableArray<T> Initialize<T>(
+            ref ImmutableArray<T> target,
+            ImmutableArray<T> initializedValue
+        )
         {
             Debug.Assert(!initializedValue.IsDefault);
-            var oldValue = ImmutableInterlocked.InterlockedCompareExchange(ref target, initializedValue, default(ImmutableArray<T>));
+            var oldValue = ImmutableInterlocked.InterlockedCompareExchange(
+                ref target,
+                initializedValue,
+                default(ImmutableArray<T>)
+            );
             return oldValue.IsDefault ? initializedValue : oldValue;
         }
     }

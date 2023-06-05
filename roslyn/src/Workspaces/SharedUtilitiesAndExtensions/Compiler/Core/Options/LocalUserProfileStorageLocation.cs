@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.Options
     {
         public string KeyName { get; }
 
-        public LocalUserProfileStorageLocation(string keyName)
-            => KeyName = keyName;
+        public LocalUserProfileStorageLocation(string keyName) => KeyName = keyName;
     }
 }

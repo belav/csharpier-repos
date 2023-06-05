@@ -109,7 +109,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags()
         {
-            using (X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser, OpenFlags.ReadOnly))
+            using (
+                X509Store store = new X509Store(
+                    StoreName.My,
+                    StoreLocation.CurrentUser,
+                    OpenFlags.ReadOnly
+                )
+            )
             {
                 Assert.True(store.IsOpen);
             }
@@ -118,7 +124,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags_StoreName()
         {
-            using (X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly))
+            using (
+                X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly)
+            )
             {
                 Assert.True(store.IsOpen);
             }
@@ -127,7 +135,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags_OpenAnyway()
         {
-            using (X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly))
+            using (
+                X509Store store = new X509Store("My", StoreLocation.CurrentUser, OpenFlags.ReadOnly)
+            )
             {
                 store.Open(OpenFlags.ReadOnly);
                 Assert.True(store.IsOpen);
@@ -137,8 +147,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void Constructor_OpenFlags_NonExistingStoreName_Throws()
         {
-            Assert.ThrowsAny<CryptographicException>(() =>
-                new X509Store(new Guid().ToString("D"), StoreLocation.CurrentUser, OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly)
+            Assert.ThrowsAny<CryptographicException>(
+                () =>
+                    new X509Store(
+                        new Guid().ToString("D"),
+                        StoreLocation.CurrentUser,
+                        OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly
+                    )
             );
         }
 #endif
@@ -178,9 +193,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void OpenNotExistent()
         {
-            using (X509Store store = new X509Store(Guid.NewGuid().ToString("N"), StoreLocation.CurrentUser))
+            using (
+                X509Store store = new X509Store(
+                    Guid.NewGuid().ToString("N"),
+                    StoreLocation.CurrentUser
+                )
+            )
             {
-                Assert.ThrowsAny<CryptographicException>(() => store.Open(OpenFlags.OpenExistingOnly));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => store.Open(OpenFlags.OpenExistingOnly)
+                );
             }
         }
 
@@ -395,7 +417,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
             {
-                Exception e = Assert.Throws<CryptographicException>(() => store.Open(OpenFlags.ReadOnly));
+                Exception e = Assert.Throws<CryptographicException>(
+                    () => store.Open(OpenFlags.ReadOnly)
+                );
                 Assert.NotNull(e.InnerException);
                 Assert.IsType<PlatformNotSupportedException>(e.InnerException);
             }
@@ -403,7 +427,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.OSX)]
-        [SkipOnPlatform(PlatformSupport.MobileAppleCrypto, "Root certificate store is not accessible")]
+        [SkipOnPlatform(
+            PlatformSupport.MobileAppleCrypto,
+            "Root certificate store is not accessible"
+        )]
         [InlineData(OpenFlags.ReadOnly, false)]
         [InlineData(OpenFlags.MaxAllowed, false)]
         [InlineData(OpenFlags.ReadWrite, true)]
@@ -413,7 +440,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 if (shouldThrow)
                 {
-                    Exception e = Assert.Throws<CryptographicException>(() => store.Open(permissions));
+                    Exception e = Assert.Throws<CryptographicException>(
+                        () => store.Open(permissions)
+                    );
                     Assert.NotNull(e.InnerException);
                     Assert.IsType<PlatformNotSupportedException>(e.InnerException);
                 }
@@ -426,8 +455,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57506", typeof(PlatformDetection), nameof(PlatformDetection.IsMonoRuntime), nameof(PlatformDetection.IsMariner))]
-        [SkipOnPlatform(PlatformSupport.MobileAppleCrypto, "Root certificate store is not accessible")]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57506",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMonoRuntime),
+            nameof(PlatformDetection.IsMariner)
+        )]
+        [SkipOnPlatform(
+            PlatformSupport.MobileAppleCrypto,
+            "Root certificate store is not accessible"
+        )]
         public static void MachineRootStore_NonEmpty()
         {
             // This test will fail on systems where the administrator has gone out of their

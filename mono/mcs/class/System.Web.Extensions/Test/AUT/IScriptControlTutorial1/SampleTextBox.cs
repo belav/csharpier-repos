@@ -37,14 +37,16 @@ namespace Samples.CS
                 sm = ScriptManager.GetCurrent(Page);
 
                 if (sm == null)
-                    throw new HttpException("A ScriptManager control must exist on the current page.");
+                    throw new HttpException(
+                        "A ScriptManager control must exist on the current page."
+                    );
 
                 sm.RegisterScriptControl(this);
             }
 
             base.OnPreRender(e);
         }
-        
+
         protected override void Render(HtmlTextWriter writer)
         {
             if (!this.DesignMode)
@@ -63,7 +65,10 @@ namespace Samples.CS
 
         protected virtual IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            ScriptControlDescriptor descriptor = new ScriptControlDescriptor("Samples.SampleTextBox", this.ClientID);
+            ScriptControlDescriptor descriptor = new ScriptControlDescriptor(
+                "Samples.SampleTextBox",
+                this.ClientID
+            );
             descriptor.AddProperty("highlightCssClass", this.HighlightCssClass);
             descriptor.AddProperty("nohighlightCssClass", this.NoHighlightCssClass);
 

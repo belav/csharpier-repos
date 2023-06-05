@@ -1,20 +1,22 @@
 ﻿using System;
 
-public class Control {}
-public class UserControl : Control {}
+public class Control { }
+
+public class UserControl : Control { }
 
 namespace test
 {
     public class MainPage : UserControl
     {
-        public static void Main ()
+        public static void Main()
         {
             var more = new MoreConstrained<MainPage>();
-            more.test(new MainPage ());
+            more.test(new MainPage());
         }
     }
 
-    public class MoreConstrained<T> where T : Control
+    public class MoreConstrained<T>
+        where T : Control
     {
         public void test(T param)
         {
@@ -24,12 +26,12 @@ namespace test
         }
     }
 
-    public class LessConstrained<T> where T : class
+    public class LessConstrained<T>
+        where T : class
     {
         public void test<T2>()
         {
             Console.WriteLine("Less " + typeof(T2));
         }
     }
-
 }

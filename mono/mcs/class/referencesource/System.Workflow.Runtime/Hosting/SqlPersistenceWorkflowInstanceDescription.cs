@@ -23,7 +23,9 @@ using System.Globalization;
 
 namespace System.Workflow.Runtime.Hosting
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class SqlPersistenceWorkflowInstanceDescription
     {
         private Guid workflowInstanceId;
@@ -32,7 +34,13 @@ namespace System.Workflow.Runtime.Hosting
         private string suspendOrTerminateDescription;
         private SqlDateTime nextTimerExpiration;
 
-        internal SqlPersistenceWorkflowInstanceDescription(Guid workflowInstanceId, WorkflowStatus status, bool isBlocked, string suspendOrTerminateDescription, SqlDateTime nextTimerExpiration)
+        internal SqlPersistenceWorkflowInstanceDescription(
+            Guid workflowInstanceId,
+            WorkflowStatus status,
+            bool isBlocked,
+            string suspendOrTerminateDescription,
+            SqlDateTime nextTimerExpiration
+        )
         {
             this.workflowInstanceId = workflowInstanceId;
             this.status = status;
@@ -41,10 +49,25 @@ namespace System.Workflow.Runtime.Hosting
             this.nextTimerExpiration = nextTimerExpiration;
         }
 
-        public Guid WorkflowInstanceId { get { return workflowInstanceId; } }
-        public WorkflowStatus Status { get { return status; } }
-        public bool IsBlocked { get { return isBlocked; } }
-        public string SuspendOrTerminateDescription { get { return suspendOrTerminateDescription; } }
-        public SqlDateTime NextTimerExpiration { get { return nextTimerExpiration; } }
+        public Guid WorkflowInstanceId
+        {
+            get { return workflowInstanceId; }
+        }
+        public WorkflowStatus Status
+        {
+            get { return status; }
+        }
+        public bool IsBlocked
+        {
+            get { return isBlocked; }
+        }
+        public string SuspendOrTerminateDescription
+        {
+            get { return suspendOrTerminateDescription; }
+        }
+        public SqlDateTime NextTimerExpiration
+        {
+            get { return nextTimerExpiration; }
+        }
     }
 }

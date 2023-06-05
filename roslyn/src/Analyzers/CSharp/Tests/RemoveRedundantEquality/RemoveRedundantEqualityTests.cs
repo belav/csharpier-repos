@@ -12,15 +12,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
 {
     using VerifyCS = CSharpCodeFixVerifier<
-       CSharpRemoveRedundantEqualityDiagnosticAnalyzer,
-       RemoveRedundantEqualityCodeFixProvider>;
+        CSharpRemoveRedundantEqualityDiagnosticAnalyzer,
+        RemoveRedundantEqualityCodeFixProvider
+    >;
 
     public class RemoveRedundantEqualityTests
     {
         [Fact]
         public async Task TestSimpleCaseForEqualsTrue()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -28,7 +30,8 @@ public class C
         return x [|==|] true;
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -42,7 +45,8 @@ public class C
         [Fact]
         public async Task TestSimpleCaseForEqualsFalse_NoDiagnostics()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -56,7 +60,8 @@ public class C
         [Fact]
         public async Task TestSimpleCaseForNotEqualsFalse()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -64,7 +69,8 @@ public class C
         return x [|!=|] false;
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -78,7 +84,8 @@ public class C
         [Fact]
         public async Task TestSimpleCaseForNotEqualsTrue_NoDiagnostics()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -92,7 +99,8 @@ public class C
         [Fact]
         public async Task TestNullable_NoDiagnostics()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool? x)
@@ -106,7 +114,8 @@ public class C
         [Fact]
         public async Task TestWhenConstant_NoDiagnostics()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public const bool MyTrueConstant = true;
@@ -122,7 +131,8 @@ public class C
         [Fact]
         public async Task TestOverloadedOperator_NoDiagnostics()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public static bool operator ==(C a, bool b) => false;
@@ -139,7 +149,8 @@ public class C
         [Fact]
         public async Task TestOnLeftHandSide()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -147,7 +158,8 @@ public class C
         return true [|==|] x;
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -161,7 +173,8 @@ public class C
         [Fact]
         public async Task TestInArgument()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -169,7 +182,8 @@ public class C
         return M1(x [|==|] true);
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -183,7 +197,8 @@ public class C
         [Fact]
         public async Task TestFixAll()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -201,7 +216,8 @@ public class C
         return x [|==|] true [|==|] true;
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class C
 {
     public bool M1(bool x)
@@ -225,7 +241,8 @@ public class C
         [Fact, WorkItem(48236, "https://github.com/dotnet/roslyn/issues/48236")]
         public async Task TestNullableValueTypes_DoesntCrash()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public bool M1(int? x)

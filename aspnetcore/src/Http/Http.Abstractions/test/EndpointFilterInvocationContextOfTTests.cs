@@ -9,7 +9,12 @@ public class EndpointFilterInvocationContextOfTTests
     [Fact]
     public void ProhibitsActionsThatModifyListSize()
     {
-        var context = new EndpointFilterInvocationContext<string, int, bool>(new DefaultHttpContext(), "This is a test", 42, false);
+        var context = new EndpointFilterInvocationContext<string, int, bool>(
+            new DefaultHttpContext(),
+            "This is a test",
+            42,
+            false
+        );
         Assert.Throws<NotSupportedException>(() => context.Add("string"));
         Assert.Throws<NotSupportedException>(() => context.Insert(0, "string"));
         Assert.Throws<NotSupportedException>(() => context.RemoveAt(0));
@@ -20,7 +25,13 @@ public class EndpointFilterInvocationContextOfTTests
     [Fact]
     public void ThrowsExceptionForInvalidCastOnGetArgument()
     {
-        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(new DefaultHttpContext(), "This is a test", 42, false, new Todo());
+        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(
+            new DefaultHttpContext(),
+            "This is a test",
+            42,
+            false,
+            new Todo()
+        );
         Assert.Throws<InvalidCastException>(() => context.GetArgument<string>(1));
         Assert.Throws<InvalidCastException>(() => context.GetArgument<int>(0));
         Assert.Throws<InvalidCastException>(() => context.GetArgument<string>(3));
@@ -31,7 +42,13 @@ public class EndpointFilterInvocationContextOfTTests
     [Fact]
     public void SetterAllowsInPlaceModificationOfParameters()
     {
-        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(new DefaultHttpContext(), "This is a test", 42, false, new Todo());
+        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(
+            new DefaultHttpContext(),
+            "This is a test",
+            42,
+            false,
+            new Todo()
+        );
         context[0] = "Foo";
         Assert.Equal("Foo", context.GetArgument<string>(0));
     }
@@ -39,14 +56,26 @@ public class EndpointFilterInvocationContextOfTTests
     [Fact]
     public void SetterDoesNotAllowModificationOfParameterType()
     {
-        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(new DefaultHttpContext(), "This is a test", 42, false, new Todo());
+        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(
+            new DefaultHttpContext(),
+            "This is a test",
+            42,
+            false,
+            new Todo()
+        );
         Assert.Throws<InvalidCastException>(() => context[0] = 4);
     }
 
     [Fact]
     public void AllowsEnumerationOfParameters()
     {
-        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(new DefaultHttpContext(), "This is a test", 42, false, new Todo());
+        var context = new EndpointFilterInvocationContext<string, int, bool, Todo>(
+            new DefaultHttpContext(),
+            "This is a test",
+            42,
+            false,
+            new Todo()
+        );
         var enumeratedCount = 0;
         foreach (var parameter in context)
         {
@@ -60,7 +89,13 @@ public class EndpointFilterInvocationContextOfTTests
     [Fact]
     public void HandlesMismatchedNullabilityOnTypeParams()
     {
-        var context = new EndpointFilterInvocationContext<string?, int?, bool?, Todo?>(new DefaultHttpContext(), null, null, null, null);
+        var context = new EndpointFilterInvocationContext<string?, int?, bool?, Todo?>(
+            new DefaultHttpContext(),
+            null,
+            null,
+            null,
+            null
+        );
         // Mismatched reference types will resolve as null
         Assert.Null(context.GetArgument<string>(0));
         Assert.Null(context.GetArgument<Todo>(3));
@@ -72,8 +107,18 @@ public class EndpointFilterInvocationContextOfTTests
     [Fact]
     public void GeneratedCodeIsUpToDate()
     {
-        var currentContentPath = Path.Combine(AppContext.BaseDirectory, "Shared", "GeneratedContent", "EndpointFilterInvocationContextOfT.Generated.cs");
-        var templatePath = Path.Combine(AppContext.BaseDirectory, "Shared", "GeneratedContent", "EndpointFilterInvocationContextOfT.Generated.tt");
+        var currentContentPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Shared",
+            "GeneratedContent",
+            "EndpointFilterInvocationContextOfT.Generated.cs"
+        );
+        var templatePath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Shared",
+            "GeneratedContent",
+            "EndpointFilterInvocationContextOfT.Generated.tt"
+        );
 
         var generator = new TemplateGenerator();
         var compiledTemplate = generator.CompileTemplate(File.ReadAllText(templatePath));
@@ -85,5 +130,6 @@ public class EndpointFilterInvocationContextOfTTests
     }
 
     interface ITodo { }
+
     class Todo : ITodo { }
 }

@@ -55,7 +55,11 @@ namespace System.ServiceModel.Activation
 
         void OnVia(Uri address)
         {
-            Debug.Print("HostedTcpTransportManager.OnVia() address: " + address + " calling EnsureServiceAvailable()");
+            Debug.Print(
+                "HostedTcpTransportManager.OnVia() address: "
+                    + address
+                    + " calling EnsureServiceAvailable()"
+            );
             ServiceHostingEnvironment.EnsureServiceAvailable(address.LocalPath);
         }
 

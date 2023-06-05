@@ -8,15 +8,15 @@ using System.Runtime.Serialization;
 namespace System.Security.AccessControl
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class PrivilegeNotHeldException : UnauthorizedAccessException, ISerializable
     {
         private readonly string? _privilegeName;
 
         public PrivilegeNotHeldException()
-            : base(SR.PrivilegeNotHeld_Default)
-        {
-        }
+            : base(SR.PrivilegeNotHeld_Default) { }
 
         public PrivilegeNotHeldException(string? privilege)
             : base(SR.Format(SR.PrivilegeNotHeld_Named, privilege))
@@ -30,7 +30,8 @@ namespace System.Security.AccessControl
             _privilegeName = privilege;
         }
 
-        private PrivilegeNotHeldException(SerializationInfo info, StreamingContext context) : base(info, context)
+        private PrivilegeNotHeldException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _privilegeName = info.GetString(nameof(PrivilegeName));
         }

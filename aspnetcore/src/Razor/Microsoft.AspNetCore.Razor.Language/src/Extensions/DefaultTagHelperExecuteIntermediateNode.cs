@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public sealed class DefaultTagHelperExecuteIntermediateNode : ExtensionIntermediateNode
 {
-    public override IntermediateNodeCollection Children { get; } = IntermediateNodeCollection.ReadOnly;
+    public override IntermediateNodeCollection Children { get; } =
+        IntermediateNodeCollection.ReadOnly;
 
     public override void Accept(IntermediateNodeVisitor visitor)
     {

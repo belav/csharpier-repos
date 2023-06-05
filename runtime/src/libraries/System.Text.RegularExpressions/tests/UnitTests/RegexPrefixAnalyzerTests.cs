@@ -59,7 +59,10 @@ namespace System.Text.RegularExpressions.Tests
             string actualSet = RegexPrefixAnalyzer.FindFirstCharClass(tree.Root);
             if (expectedSet != actualSet)
             {
-                throw new TrueException($"Expected {FormatSet(expectedSet)}, got {FormatSet(actualSet)}", true);
+                throw new TrueException(
+                    $"Expected {FormatSet(expectedSet)}, got {FormatSet(actualSet)}",
+                    true
+                );
             }
         }
 
@@ -67,7 +70,13 @@ namespace System.Text.RegularExpressions.Tests
         public void FindFirstCharClass_StressDeep()
         {
             int nesting = 8000;
-            FindFirstCharClass(string.Concat(Enumerable.Repeat($"(a?", nesting).Concat(Enumerable.Repeat(")*", nesting))), RegexOptions.None, null);
+            FindFirstCharClass(
+                string.Concat(
+                    Enumerable.Repeat($"(a?", nesting).Concat(Enumerable.Repeat(")*", nesting))
+                ),
+                RegexOptions.None,
+                null
+            );
         }
 
         private static string FormatSet(string set)

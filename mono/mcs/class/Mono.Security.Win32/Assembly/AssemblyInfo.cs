@@ -19,16 +19,15 @@ using System.Runtime.InteropServices;
 
 // General Information about the system assembly
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
 
-[assembly: AssemblyCompany ("MONO development team")]
-[assembly: AssemblyCopyright ("(c) 2003-2004 Various Authors")]
-[assembly: AssemblyDescription ("Mono.Security.Win32.dll")]
-[assembly: AssemblyProduct ("MONO CLI")]
-[assembly: AssemblyTitle ("Mono.Security.Win32.dll")]
-[assembly: CLSCompliant (true)]
-[assembly: ComVisible (false)]
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: AssemblyCompany("MONO development team")]
+[assembly: AssemblyCopyright("(c) 2003-2004 Various Authors")]
+[assembly: AssemblyDescription("Mono.Security.Win32.dll")]
+[assembly: AssemblyProduct("MONO CLI")]
+[assembly: AssemblyTitle("Mono.Security.Win32.dll")]
+[assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]

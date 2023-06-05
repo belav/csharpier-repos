@@ -20,8 +20,9 @@ public static class MvcXmlMvcCoreBuilderExtensions
     /// <param name="setupAction">The <see cref="MvcXmlOptions"/> which need to be configured.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddXmlOptions(
-       this IMvcCoreBuilder builder,
-       Action<MvcXmlOptions> setupAction)
+        this IMvcCoreBuilder builder,
+        Action<MvcXmlOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -42,7 +43,9 @@ public static class MvcXmlMvcCoreBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-    public static IMvcCoreBuilder AddXmlDataContractSerializerFormatters(this IMvcCoreBuilder builder)
+    public static IMvcCoreBuilder AddXmlDataContractSerializerFormatters(
+        this IMvcCoreBuilder builder
+    )
     {
         if (builder == null)
         {
@@ -61,7 +64,8 @@ public static class MvcXmlMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddXmlDataContractSerializerFormatters(
         this IMvcCoreBuilder builder,
-        Action<MvcXmlOptions> setupAction)
+        Action<MvcXmlOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -102,7 +106,8 @@ public static class MvcXmlMvcCoreBuilderExtensions
     /// /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddXmlSerializerFormatters(
         this IMvcCoreBuilder builder,
-        Action<MvcXmlOptions> setupAction)
+        Action<MvcXmlOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -118,13 +123,21 @@ public static class MvcXmlMvcCoreBuilderExtensions
     internal static void AddXmlDataContractSerializerFormatterServices(IServiceCollection services)
     {
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, XmlDataContractSerializerMvcOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcOptions>,
+                XmlDataContractSerializerMvcOptionsSetup
+            >()
+        );
     }
 
     // Internal for testing.
     internal static void AddXmlSerializerFormatterServices(IServiceCollection services)
     {
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, XmlSerializerMvcOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcOptions>,
+                XmlSerializerMvcOptionsSetup
+            >()
+        );
     }
 }

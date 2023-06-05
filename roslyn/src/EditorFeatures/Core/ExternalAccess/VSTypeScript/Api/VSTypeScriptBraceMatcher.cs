@@ -10,9 +10,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal abstract class VSTypeScriptBraceMatcher : IBraceMatcher
     {
-        Task<BraceMatchingResult?> IBraceMatcher.FindBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
-            => FindBracesAsync(document, position, cancellationToken);
+        Task<BraceMatchingResult?> IBraceMatcher.FindBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        ) => FindBracesAsync(document, position, cancellationToken);
 
-        protected abstract Task<BraceMatchingResult?> FindBracesAsync(Document document, int position, CancellationToken cancellationToken);
+        protected abstract Task<BraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

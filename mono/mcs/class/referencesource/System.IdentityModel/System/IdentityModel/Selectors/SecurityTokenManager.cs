@@ -9,8 +9,15 @@ namespace System.IdentityModel.Selectors
     /// </summary>
     public abstract class SecurityTokenManager
     {
-        public abstract SecurityTokenProvider CreateSecurityTokenProvider(SecurityTokenRequirement tokenRequirement);
-        public abstract SecurityTokenSerializer CreateSecurityTokenSerializer(SecurityTokenVersion version);
-        public abstract SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(SecurityTokenRequirement tokenRequirement, out SecurityTokenResolver outOfBandTokenResolver);
+        public abstract SecurityTokenProvider CreateSecurityTokenProvider(
+            SecurityTokenRequirement tokenRequirement
+        );
+        public abstract SecurityTokenSerializer CreateSecurityTokenSerializer(
+            SecurityTokenVersion version
+        );
+        public abstract SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(
+            SecurityTokenRequirement tokenRequirement,
+            out SecurityTokenResolver outOfBandTokenResolver
+        );
     }
 }

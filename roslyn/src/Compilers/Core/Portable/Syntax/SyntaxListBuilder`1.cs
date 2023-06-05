@@ -4,14 +4,13 @@
 
 namespace Microsoft.CodeAnalysis.Syntax
 {
-    internal readonly struct SyntaxListBuilder<TNode> where TNode : SyntaxNode
+    internal readonly struct SyntaxListBuilder<TNode>
+        where TNode : SyntaxNode
     {
         private readonly SyntaxListBuilder? _builder;
 
         public SyntaxListBuilder(int size)
-            : this(new SyntaxListBuilder(size))
-        {
-        }
+            : this(new SyntaxListBuilder(size)) { }
 
         public static SyntaxListBuilder<TNode> Create()
         {
@@ -25,18 +24,12 @@ namespace Microsoft.CodeAnalysis.Syntax
 
         public bool IsNull
         {
-            get
-            {
-                return _builder == null;
-            }
+            get { return _builder == null; }
         }
 
         public int Count
         {
-            get
-            {
-                return _builder!.Count;
-            }
+            get { return _builder!.Count; }
         }
 
         public void Clear()

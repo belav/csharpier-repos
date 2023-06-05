@@ -8,11 +8,11 @@ using System.Security;
 
 namespace Microsoft.Win32.SafeHandles
 {
-	partial class SafePasswordHandle
-	{
-		internal string Mono_DangerousGetString ()
-		{
-			return Marshal.PtrToStringAnsi (DangerousGetHandle ());
-		}
-	}
+    partial class SafePasswordHandle
+    {
+        internal string Mono_DangerousGetString()
+        {
+            return Marshal.PtrToStringAnsi(DangerousGetHandle());
+        }
+    }
 }

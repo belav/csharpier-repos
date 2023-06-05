@@ -11,10 +11,16 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         public SignatureHelpTriggerReason TriggerReason { get; }
         public char? TriggerCharacter { get; }
 
-        internal SignatureHelpTriggerInfo(SignatureHelpTriggerReason triggerReason, char? triggerCharacter = null)
+        internal SignatureHelpTriggerInfo(
+            SignatureHelpTriggerReason triggerReason,
+            char? triggerCharacter = null
+        )
             : this()
         {
-            Contract.ThrowIfTrue(triggerReason == SignatureHelpTriggerReason.TypeCharCommand && triggerCharacter == null);
+            Contract.ThrowIfTrue(
+                triggerReason == SignatureHelpTriggerReason.TypeCharCommand
+                    && triggerCharacter == null
+            );
             TriggerReason = triggerReason;
             TriggerCharacter = triggerCharacter;
         }

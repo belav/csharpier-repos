@@ -12,9 +12,7 @@ namespace System.ServiceModel.Dispatcher
     public class MatchAllMessageFilter : MessageFilter
     {
         public MatchAllMessageFilter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool Match(MessageBuffer messageBuffer)
         {

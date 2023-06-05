@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class HallSectionController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
@@ -30,23 +31,27 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var sectionsList = entity.hallSections.Select(S => new HallSectionModel()
-                    {
-                        name = S.name,
-                        sectionId = S.sectionId,
-                        branchId = S.branchId,
-                        details = S.details,
-                        notes = S.notes,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        isActive = (byte)S.isActive,
-                        branchName = S.branches.name,
-                    }).ToList();
+                    var sectionsList = entity.hallSections
+                        .Select(
+                            S =>
+                                new HallSectionModel()
+                                {
+                                    name = S.name,
+                                    sectionId = S.sectionId,
+                                    branchId = S.branchId,
+                                    details = S.details,
+                                    notes = S.notes,
+                                    createUserId = S.createUserId,
+                                    updateUserId = S.updateUserId,
+                                    createDate = S.createDate,
+                                    updateDate = S.updateDate,
+                                    isActive = (byte)S.isActive,
+                                    branchName = S.branches.name,
+                                }
+                        )
+                        .ToList();
 
                     // can delet or not
                     if (sectionsList.Count > 0)
@@ -57,7 +62,9 @@ namespace POS_Server.Controllers
                             if (section.isActive == 1)
                             {
                                 long cId = (int)section.sectionId;
-                                var tables = entity.tables.Where(x => x.sectionId == cId).FirstOrDefault();
+                                var tables = entity.tables
+                                    .Where(x => x.sectionId == cId)
+                                    .FirstOrDefault();
 
                                 if (tables is null)
                                     canDelete = true;
@@ -93,30 +100,32 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var sectionList = (from L in entity.hallSections
-                                       where L.branchId == branchId && L.isActive == 1
-                                       join b in entity.branches on L.branchId equals b.branchId into lj
-                                       from v in lj.DefaultIfEmpty()
-                                       select new SectionModel()
-                                       {
-                                           sectionId = L.sectionId,
-                                           name = L.name,
-                                           isActive = (byte)L.isActive,
-                                           branchId = L.branchId,
-                                           notes = L.notes,
-                                           branchName = v.name,
-                                           createDate = L.createDate,
-                                           updateDate = L.updateDate,
-                                           createUserId = L.createUserId,
-                                           updateUserId = L.updateUserId,
-                                           type = L.type,
-                                       })
-                                        .ToList();
+                    var sectionList = (
+                        from L in entity.hallSections
+                        where L.branchId == branchId && L.isActive == 1
+                        join b in entity.branches on L.branchId equals b.branchId into lj
+                        from v in lj.DefaultIfEmpty()
+                        select new SectionModel()
+                        {
+                            sectionId = L.sectionId,
+                            name = L.name,
+                            isActive = (byte)L.isActive,
+                            branchId = L.branchId,
+                            notes = L.notes,
+                            branchName = v.name,
+                            createDate = L.createDate,
+                            updateDate = L.updateDate,
+                            createUserId = L.createUserId,
+                            updateUserId = L.updateUserId,
+                            type = L.type,
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(sectionList);
                 }
             }
         }
+
         [HttpPost]
         [Route("GetById")]
         public string GetById(string token)
@@ -141,26 +150,29 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var location = entity.hallSections
-                   .Where(u => u.sectionId == sectionId)
-                   .Select(L => new HallSectionModel
-                   {
-                       sectionId = L.sectionId,
-                       name = L.name,
-                       isActive =(byte) L.isActive,
-                       branchId = L.branchId,
-                       notes = L.notes,
-                       details = L.details,
-                       createDate = L.createDate,
-                       updateDate = L.updateDate,
-                       createUserId = L.createUserId,
-                       updateUserId = L.updateUserId,
-
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.sectionId == sectionId)
+                        .Select(
+                            L =>
+                                new HallSectionModel
+                                {
+                                    sectionId = L.sectionId,
+                                    name = L.name,
+                                    isActive = (byte)L.isActive,
+                                    branchId = L.branchId,
+                                    notes = L.notes,
+                                    details = L.details,
+                                    createDate = L.createDate,
+                                    updateDate = L.updateDate,
+                                    createUserId = L.createUserId,
+                                    updateUserId = L.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(location);
                 }
             }
         }
+
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
@@ -183,7 +195,10 @@ namespace POS_Server.Controllers
                     {
                         itemObject = c.Value.Replace("\\", string.Empty);
                         itemObject = itemObject.Trim('"');
-                        Object = JsonConvert.DeserializeObject<hallSections>(itemObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        Object = JsonConvert.DeserializeObject<hallSections>(
+                            itemObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -194,8 +209,8 @@ namespace POS_Server.Controllers
                         hallSections tmpObject = new hallSections();
                         if (Object.sectionId == 0)
                         {
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             Object.isActive = 1;
                             entity.hallSections.Add(Object);
@@ -209,13 +224,16 @@ namespace POS_Server.Controllers
                             tmpObject.notes = Object.notes;
                             tmpObject.isActive = Object.isActive;
                             tmpObject.updateUserId = Object.updateUserId;
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         }
                         message = entity.SaveChanges().ToString();
                     }
                     return TokenManager.GenerateToken(message);
                 }
-                catch { return TokenManager.GenerateToken("0"); }
+                catch
+                {
+                    return TokenManager.GenerateToken("0");
+                }
             }
         }
 
@@ -279,7 +297,7 @@ namespace POS_Server.Controllers
 
                             tableObj.isActive = 0;
                             tableObj.updateUserId = userId;
-                            tableObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tableObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }

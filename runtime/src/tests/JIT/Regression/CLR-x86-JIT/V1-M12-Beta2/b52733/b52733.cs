@@ -10,7 +10,10 @@ namespace Test
         private static float[] s_af;
         private static bool s_b;
 
-        private static float[] Method1() { return s_af = new float[5]; }
+        private static float[] Method1()
+        {
+            return s_af = new float[5];
+        }
 
         public static int Main()
         {

@@ -13,17 +13,16 @@ namespace System.Web.Mvc.Routing
     /// routes.
     /// </summary>
     [Obsolete(
-        "Obsolete, do not use. To create custom Routes with attribute routing, use " +
-        "System.Web.Mvc.Routing.RouteFactoryAttribute")]
+        "Obsolete, do not use. To create custom Routes with attribute routing, use "
+            + "System.Web.Mvc.Routing.RouteFactoryAttribute"
+    )]
     public class RouteBuilder
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteBuilder" /> class using the default inline constraint resolver.
         /// </summary>
         public RouteBuilder()
-            : this(new DefaultInlineConstraintResolver())
-        {
-        }
+            : this(new DefaultInlineConstraintResolver()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteBuilder" /> class.
@@ -47,7 +46,10 @@ namespace System.Web.Mvc.Routing
         /// <param name="routeTemplate">The tokenized route template for the route.</param>
         /// <param name="controllerDescriptor">The controller the route attribute has been applied on.</param>
         /// <returns>The generated <see cref="Route"/>.</returns>
-        public Route BuildDirectRoute(string routeTemplate, ControllerDescriptor controllerDescriptor)
+        public Route BuildDirectRoute(
+            string routeTemplate,
+            ControllerDescriptor controllerDescriptor
+        )
         {
             if (routeTemplate == null)
             {
@@ -58,9 +60,9 @@ namespace System.Web.Mvc.Routing
             {
                 throw Error.ArgumentNull("controllerDescriptor");
             }
-                        
+
             string controllerName = controllerDescriptor.ControllerName;
-                        
+
             RouteAreaAttribute area = controllerDescriptor.GetAreaFrom();
             string areaName = controllerDescriptor.GetAreaName(area);
 
@@ -78,12 +80,20 @@ namespace System.Web.Mvc.Routing
                 dataTokens.Add(RouteDataTokenKeys.UseNamespaceFallback, value: false);
                 if (controllerType != null)
                 {
-                    dataTokens.Add(RouteDataTokenKeys.Namespaces, new[] { controllerType.Namespace });
+                    dataTokens.Add(
+                        RouteDataTokenKeys.Namespaces,
+                        new[] { controllerType.Namespace }
+                    );
                 }
             }
 
             RouteValueDictionary constraints = new RouteValueDictionary();
-            string detokenizedRouteTemplate = InlineRouteTemplateParser.ParseRouteTemplate(routeTemplate, defaults, constraints, ConstraintResolver);
+            string detokenizedRouteTemplate = InlineRouteTemplateParser.ParseRouteTemplate(
+                routeTemplate,
+                defaults,
+                constraints,
+                ConstraintResolver
+            );
 
             Route route = new Route(detokenizedRouteTemplate, new MvcRouteHandler())
             {
@@ -105,7 +115,14 @@ namespace System.Web.Mvc.Routing
         /// <param name="targetMethod">The method that the route attribute has been applied on.</param>
         /// <param name="areaName"></param>
         /// <returns>The generated <see cref="Route"/>.</returns>
-        public Route BuildDirectRoute(string routeTemplate, IEnumerable<string> allowedMethods, string controllerName, string actionName, MethodInfo targetMethod, string areaName)
+        public Route BuildDirectRoute(
+            string routeTemplate,
+            IEnumerable<string> allowedMethods,
+            string controllerName,
+            string actionName,
+            MethodInfo targetMethod,
+            string areaName
+        )
         {
             if (routeTemplate == null)
             {
@@ -147,13 +164,27 @@ namespace System.Web.Mvc.Routing
                 dataTokens.Add(RouteDataTokenKeys.UseNamespaceFallback, value: false);
                 if (targetMethod.DeclaringType != null)
                 {
-                    dataTokens.Add(RouteDataTokenKeys.Namespaces, new[] { targetMethod.DeclaringType.Namespace });
+                    dataTokens.Add(
+                        RouteDataTokenKeys.Namespaces,
+                        new[] { targetMethod.DeclaringType.Namespace }
+                    );
                 }
             }
 
-            string detokenizedRouteTemplate = InlineRouteTemplateParser.ParseRouteTemplate(routeTemplate, defaults, constraints, ConstraintResolver);
+            string detokenizedRouteTemplate = InlineRouteTemplateParser.ParseRouteTemplate(
+                routeTemplate,
+                defaults,
+                constraints,
+                ConstraintResolver
+            );
 
-            return BuildDirectRoute(defaults, constraints, dataTokens, detokenizedRouteTemplate, targetMethod);
+            return BuildDirectRoute(
+                defaults,
+                constraints,
+                dataTokens,
+                detokenizedRouteTemplate,
+                targetMethod
+            );
         }
 
         /// <summary>
@@ -165,7 +196,13 @@ namespace System.Web.Mvc.Routing
         /// <param name="routeTemplate">The detokenized route template.</param>
         /// <param name="targetMethod">The method that the route attribute has been applied on.</param>
         /// <returns>The generated <see cref="Route"/>.</returns>
-        public virtual Route BuildDirectRoute(RouteValueDictionary defaults, RouteValueDictionary constraints, RouteValueDictionary dataTokens, string routeTemplate, MethodInfo targetMethod)
+        public virtual Route BuildDirectRoute(
+            RouteValueDictionary defaults,
+            RouteValueDictionary constraints,
+            RouteValueDictionary dataTokens,
+            string routeTemplate,
+            MethodInfo targetMethod
+        )
         {
             Route route = new Route(routeTemplate, new MvcRouteHandler())
             {

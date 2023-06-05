@@ -27,10 +27,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddCommandLine(args);
-                })
+                .ConfigureAppConfiguration(
+                    (hostingContext, config) =>
+                    {
+                        config.AddCommandLine(args);
+                    }
+                )
                 .UseUrls("http://localhost:9300")
                 .Build();
 

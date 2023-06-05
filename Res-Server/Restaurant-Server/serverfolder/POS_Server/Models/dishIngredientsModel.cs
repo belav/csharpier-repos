@@ -8,7 +8,7 @@ namespace POS_Server.Models
     public class dishIngredientsModel
     {
         public long dishIngredId { get; set; }
-       public string name { get; set; }
+        public string name { get; set; }
         public Nullable<long> itemUnitId { get; set; }
         public string notes { get; set; }
         public byte isActive { get; set; }

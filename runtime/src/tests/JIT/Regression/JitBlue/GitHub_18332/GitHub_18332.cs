@@ -6,9 +6,7 @@ using System.Collections.Generic;
 
 internal class Foo : IDisposable
 {
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class GitHub_18332
@@ -32,15 +30,13 @@ public class GitHub_18332
                     return "wibble";
                 }
             }
-            
-            foreach (var i in new List<int>())
-            {
-            }
+
+            foreach (var i in new List<int>()) { }
         }
-        
+
         return "wobble";
     }
-    
+
     public static int Main()
     {
         string expected = "wobble";

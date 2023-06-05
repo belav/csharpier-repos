@@ -18,16 +18,22 @@ namespace System.Data.Mapping.ViewGeneration.Validation
     internal class KeyConstraint<TCellRelation, TSlot> : InternalBase
         where TCellRelation : CellRelation
     {
-
         #region Constructor
         //  Constructs a key constraint for the given relation and keyslots
         //  with comparer being the comparison operator for comparing various
         //  keyslots in Implies, etc
-        internal KeyConstraint(TCellRelation relation, IEnumerable<TSlot> keySlots, IEqualityComparer<TSlot> comparer)
+        internal KeyConstraint(
+            TCellRelation relation,
+            IEnumerable<TSlot> keySlots,
+            IEqualityComparer<TSlot> comparer
+        )
         {
             m_relation = relation;
             m_keySlots = new Set<TSlot>(keySlots, comparer).MakeReadOnly();
-            Debug.Assert(m_keySlots.Count > 0, "Key constraint being created without any keyslots?");
+            Debug.Assert(
+                m_keySlots.Count > 0,
+                "Key constraint being created without any keyslots?"
+            );
         }
         #endregion
 

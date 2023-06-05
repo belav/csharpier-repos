@@ -12,12 +12,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
     internal sealed class NodeKeyValidation
     {
-        private readonly Dictionary<ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>, List<GlobalNodeKey>> _nodeKeysMap =
-            new Dictionary<ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>, List<GlobalNodeKey>>();
+        private readonly Dictionary<
+            ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>,
+            List<GlobalNodeKey>
+        > _nodeKeysMap =
+            new Dictionary<
+                ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>,
+                List<GlobalNodeKey>
+            >();
 
-        public NodeKeyValidation()
-        {
-        }
+        public NodeKeyValidation() { }
 
         public NodeKeyValidation(ProjectCodeModelFactory projectCodeModelFactory)
         {

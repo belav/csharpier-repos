@@ -20,7 +20,8 @@ public sealed class SplitQueryCollectionContext
     public SplitQueryCollectionContext(
         object? parent,
         object? collection,
-        object[] parentIdentifier)
+        object[] parentIdentifier
+    )
     {
         Parent = parent;
         Collection = collection;

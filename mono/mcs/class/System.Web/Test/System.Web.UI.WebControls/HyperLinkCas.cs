@@ -1,5 +1,5 @@
 //
-// HyperLinkCas.cs 
+// HyperLinkCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.HyperLink
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,27 +36,28 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HyperLinkCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            HyperLinkTest unit = new HyperLinkTest();
+            unit.Empty();
+            unit.ImageUrlWithoutText();
+            unit.NavigateUrl_NO_ResolveUrl();
+            unit.ImageUrl_NO_ResolveUrl();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HyperLinkCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HyperLinkTest unit = new HyperLinkTest ();
-			unit.Empty ();
-			unit.ImageUrlWithoutText ();
-			unit.NavigateUrl_NO_ResolveUrl ();
-			unit.ImageUrl_NO_ResolveUrl ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (HyperLink); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HyperLink); }
+        }
+    }
 }

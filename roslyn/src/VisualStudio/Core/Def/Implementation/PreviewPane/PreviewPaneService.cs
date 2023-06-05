@@ -29,20 +29,27 @@ using SVsUIShell = Microsoft.VisualStudio.Shell.Interop.SVsUIShell;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 {
     [ExportWorkspaceServiceFactory(typeof(IPreviewPaneService), ServiceLayer.Host), Shared]
-    internal class PreviewPaneService : ForegroundThreadAffinitizedObject, IPreviewPaneService, IWorkspaceServiceFactory
+    internal class PreviewPaneService
+        : ForegroundThreadAffinitizedObject,
+            IPreviewPaneService,
+            IWorkspaceServiceFactory
     {
         private readonly IVsUIShell _uiShell;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewPaneService(IThreadingContext threadingContext, SVsServiceProvider serviceProvider)
+        public PreviewPaneService(
+            IThreadingContext threadingContext,
+            SVsServiceProvider serviceProvider
+        )
             : base(threadingContext)
         {
             _uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
         }
 
-        IWorkspaceService IWorkspaceServiceFactory.CreateService(HostWorkspaceServices workspaceServices)
-            => this;
+        IWorkspaceService IWorkspaceServiceFactory.CreateService(
+            HostWorkspaceServices workspaceServices
+        ) => this;
 
         private static Image GetSeverityIconForDiagnostic(DiagnosticData diagnostic)
         {
@@ -65,16 +72,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 
             if (moniker.HasValue)
             {
-                return new CrispImage
-                {
-                    Moniker = moniker.Value
-                };
+                return new CrispImage { Moniker = moniker.Value };
             }
 
             return null;
         }
 
-        object IPreviewPaneService.GetPreviewPane(DiagnosticData data, IReadOnlyList<object> previewContent)
+        object IPreviewPaneService.GetPreviewPane(
+            DiagnosticData data,
+            IReadOnlyList<object> previewContent
+        )
         {
             var title = data?.Message;
 
@@ -88,8 +95,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                 }
 
                 return new PreviewPane(
-                    severityIcon: null, id: null, title: null, description: null, helpLink: null, helpLinkToolTipText: null,
-                    previewContent: previewContent, logIdVerbatimInTelemetry: false, uiShell: _uiShell);
+                    severityIcon: null,
+                    id: null,
+                    title: null,
+                    description: null,
+                    helpLink: null,
+                    helpLinkToolTipText: null,
+                    previewContent: previewContent,
+                    logIdVerbatimInTelemetry: false,
+                    uiShell: _uiShell
+                );
             }
 
             var helpLinkUri = BrowserHelper.GetHelpLink(data);
@@ -104,14 +119,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 
             return new PreviewPane(
                 severityIcon: GetSeverityIconForDiagnostic(data),
-                id: data.Id, title: title,
+                id: data.Id,
+                title: title,
                 description: data.Description.ToString(CultureInfo.CurrentUICulture),
                 helpLink: helpLinkUri,
                 helpLinkToolTipText: helpLinkToolTip,
                 previewContent: previewContent,
-                logIdVerbatimInTelemetry: data.CustomTags.Contains(WellKnownDiagnosticTags.Telemetry),
+                logIdVerbatimInTelemetry: data.CustomTags.Contains(
+                    WellKnownDiagnosticTags.Telemetry
+                ),
                 uiShell: _uiShell,
-                optionPageGuid: optionPageGuid);
+                optionPageGuid: optionPageGuid
+            );
         }
 
         private Guid GetOptionPageGuidForOptionName(string optionName, string optionLanguage)
@@ -127,7 +146,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                     return Guid.Parse(Guids.VisualBasicOptionPageNamingStyleIdString);
                 }
             }
-            else if (optionName == nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration))
+            else if (
+                optionName
+                == nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration)
+            )
             {
                 if (optionLanguage == LanguageNames.CSharp)
                 {

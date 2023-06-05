@@ -20,12 +20,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 {
-    internal abstract class AbstractDocumentationCommentCommandHandler :
-        IChainedCommandHandler<TypeCharCommandArgs>,
-        ICommandHandler<ReturnKeyCommandArgs>,
-        ICommandHandler<InsertCommentCommandArgs>,
-        IChainedCommandHandler<OpenLineAboveCommandArgs>,
-        IChainedCommandHandler<OpenLineBelowCommandArgs>
+    internal abstract class AbstractDocumentationCommentCommandHandler
+        : IChainedCommandHandler<TypeCharCommandArgs>,
+            ICommandHandler<ReturnKeyCommandArgs>,
+            ICommandHandler<InsertCommentCommandArgs>,
+            IChainedCommandHandler<OpenLineAboveCommandArgs>,
+            IChainedCommandHandler<OpenLineBelowCommandArgs>
     {
         private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor;
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
         protected AbstractDocumentationCommentCommandHandler(
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        )
         {
             Contract.ThrowIfNull(uiThreadOperationExecutor);
             Contract.ThrowIfNull(undoHistoryRegistry);
@@ -54,27 +55,81 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 
         public string DisplayName => EditorFeaturesResources.Documentation_Comment;
 
-        private static DocumentationCommentSnippet? InsertOnCharacterTyped(IDocumentationCommentSnippetService service, SyntaxTree syntaxTree, SourceText text, int position, DocumentationCommentOptions options, CancellationToken cancellationToken)
-            => service.GetDocumentationCommentSnippetOnCharacterTyped(syntaxTree, text, position, options, cancellationToken);
+        private static DocumentationCommentSnippet? InsertOnCharacterTyped(
+            IDocumentationCommentSnippetService service,
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetDocumentationCommentSnippetOnCharacterTyped(
+                syntaxTree,
+                text,
+                position,
+                options,
+                cancellationToken
+            );
 
-        private static DocumentationCommentSnippet? InsertOnEnterTyped(IDocumentationCommentSnippetService service, SyntaxTree syntaxTree, SourceText text, int position, DocumentationCommentOptions options, CancellationToken cancellationToken)
-            => service.GetDocumentationCommentSnippetOnEnterTyped(syntaxTree, text, position, options, cancellationToken);
+        private static DocumentationCommentSnippet? InsertOnEnterTyped(
+            IDocumentationCommentSnippetService service,
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetDocumentationCommentSnippetOnEnterTyped(
+                syntaxTree,
+                text,
+                position,
+                options,
+                cancellationToken
+            );
 
-        private static DocumentationCommentSnippet? InsertOnCommandInvoke(IDocumentationCommentSnippetService service, SyntaxTree syntaxTree, SourceText text, int position, DocumentationCommentOptions options, CancellationToken cancellationToken)
-            => service.GetDocumentationCommentSnippetOnCommandInvoke(syntaxTree, text, position, options, cancellationToken);
+        private static DocumentationCommentSnippet? InsertOnCommandInvoke(
+            IDocumentationCommentSnippetService service,
+            SyntaxTree syntaxTree,
+            SourceText text,
+            int position,
+            DocumentationCommentOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            service.GetDocumentationCommentSnippetOnCommandInvoke(
+                syntaxTree,
+                text,
+                position,
+                options,
+                cancellationToken
+            );
 
-        private static void ApplySnippet(DocumentationCommentSnippet snippet, ITextBuffer subjectBuffer, ITextView textView)
+        private static void ApplySnippet(
+            DocumentationCommentSnippet snippet,
+            ITextBuffer subjectBuffer,
+            ITextView textView
+        )
         {
             var replaceSpan = snippet.SpanToReplace.ToSpan();
             subjectBuffer.Replace(replaceSpan, snippet.SnippetText);
-            textView.TryMoveCaretToAndEnsureVisible(subjectBuffer.CurrentSnapshot.GetPoint(replaceSpan.Start + snippet.CaretOffset));
+            textView.TryMoveCaretToAndEnsureVisible(
+                subjectBuffer.CurrentSnapshot.GetPoint(replaceSpan.Start + snippet.CaretOffset)
+            );
         }
 
         private static bool CompleteComment(
             ITextBuffer subjectBuffer,
             ITextView textView,
-            Func<IDocumentationCommentSnippetService, SyntaxTree, SourceText, int, DocumentationCommentOptions, CancellationToken, DocumentationCommentSnippet?> getSnippetAction,
-            CancellationToken cancellationToken)
+            Func<
+                IDocumentationCommentSnippetService,
+                SyntaxTree,
+                SourceText,
+                int,
+                DocumentationCommentOptions,
+                CancellationToken,
+                DocumentationCommentSnippet?
+            > getSnippetAction,
+            CancellationToken cancellationToken
+        )
         {
             var caretPosition = textView.GetCaretPoint(subjectBuffer) ?? -1;
             if (caretPosition < 0)
@@ -82,19 +137,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return false;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
             }
 
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
             var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
             var text = syntaxTree.GetText(cancellationToken);
-            var documentOptions = document.GetOptionsAsync(cancellationToken).WaitAndGetResult(cancellationToken);
+            var documentOptions = document
+                .GetOptionsAsync(cancellationToken)
+                .WaitAndGetResult(cancellationToken);
             var options = DocumentationCommentOptions.From(documentOptions);
 
-            var snippet = getSnippetAction(service, syntaxTree, text, caretPosition, options, cancellationToken);
+            var snippet = getSnippetAction(
+                service,
+                syntaxTree,
+                text,
+                caretPosition,
+                options,
+                cancellationToken
+            );
             if (snippet != null)
             {
                 ApplySnippet(snippet, subjectBuffer, textView);
@@ -104,10 +170,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             return false;
         }
 
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // Ensure the character is actually typed in the editor
             nextHandler();
@@ -123,11 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return;
             }
 
-            CompleteComment(args.SubjectBuffer, args.TextView, InsertOnCharacterTyped, CancellationToken.None);
+            CompleteComment(
+                args.SubjectBuffer,
+                args.TextView,
+                InsertOnCharacterTyped,
+                CancellationToken.None
+            );
         }
 
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 
         public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context)
         {
@@ -152,9 +228,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                     .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
                     .FirstOrNull();
 
-                originalPosition = selectedSpan != null
-                    ? selectedSpan.Value.Start
-                    : args.TextView.GetCaretPoint(args.SubjectBuffer) ?? -1;
+                originalPosition =
+                    selectedSpan != null
+                        ? selectedSpan.Value.Start
+                        : args.TextView.GetCaretPoint(args.SubjectBuffer) ?? -1;
             }
 
             if (originalPosition < 0)
@@ -170,12 +247,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             // According to JasonMal, the text undo history is associated with the surface buffer
             // in projection buffer scenarios, so the following line's usage of the surface buffer
             // is correct.
-            using (var transaction = _undoHistoryRegistry.GetHistory(args.TextView.TextBuffer).CreateTransaction(EditorFeaturesResources.Insert_new_line))
+            using (
+                var transaction = _undoHistoryRegistry
+                    .GetHistory(args.TextView.TextBuffer)
+                    .CreateTransaction(EditorFeaturesResources.Insert_new_line)
+            )
             {
-                var editorOperations = _editorOperationsFactoryService.GetEditorOperations(args.TextView);
+                var editorOperations = _editorOperationsFactoryService.GetEditorOperations(
+                    args.TextView
+                );
                 editorOperations.InsertNewLine();
 
-                CompleteComment(args.SubjectBuffer, args.TextView, InsertOnEnterTyped, CancellationToken.None);
+                CompleteComment(
+                    args.SubjectBuffer,
+                    args.TextView,
+                    InsertOnEnterTyped,
+                    CancellationToken.None
+                );
 
                 // Since we're wrapping the ENTER key undo transaction, we always complete
                 // the transaction -- even if we didn't generate anything.
@@ -193,39 +281,68 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return CommandState.Unavailable;
             }
 
-            var document = args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return CommandState.Unavailable;
             }
 
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
 
             var isValidTargetMember = false;
-            _uiThreadOperationExecutor.Execute("IntelliSense", defaultDescription: "", allowCancellation: true, showProgress: false, action: c =>
-            {
-                var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(c.UserCancellationToken);
-                var text = syntaxTree.GetText(c.UserCancellationToken);
-                isValidTargetMember = service.IsValidTargetMember(syntaxTree, text, caretPosition, c.UserCancellationToken);
-            });
+            _uiThreadOperationExecutor.Execute(
+                "IntelliSense",
+                defaultDescription: "",
+                allowCancellation: true,
+                showProgress: false,
+                action: c =>
+                {
+                    var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(
+                        c.UserCancellationToken
+                    );
+                    var text = syntaxTree.GetText(c.UserCancellationToken);
+                    isValidTargetMember = service.IsValidTargetMember(
+                        syntaxTree,
+                        text,
+                        caretPosition,
+                        c.UserCancellationToken
+                    );
+                }
+            );
 
-            return isValidTargetMember
-                ? CommandState.Available
-                : CommandState.Unavailable;
+            return isValidTargetMember ? CommandState.Available : CommandState.Unavailable;
         }
 
         public bool ExecuteCommand(InsertCommentCommandArgs args, CommandExecutionContext context)
         {
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Inserting_documentation_comment))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Inserting_documentation_comment
+                )
+            )
             {
-                return CompleteComment(args.SubjectBuffer, args.TextView, InsertOnCommandInvoke, context.OperationContext.UserCancellationToken);
+                return CompleteComment(
+                    args.SubjectBuffer,
+                    args.TextView,
+                    InsertOnCommandInvoke,
+                    context.OperationContext.UserCancellationToken
+                );
             }
         }
 
-        public CommandState GetCommandState(OpenLineAboveCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            OpenLineAboveCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(OpenLineAboveCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            OpenLineAboveCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // Check to see if the current line starts with exterior trivia. If so, we'll take over.
             // If not, let the nextHandler run.
@@ -247,21 +364,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             // Allow nextHandler() to run and then insert exterior trivia if necessary.
             nextHandler();
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
             }
 
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
 
             InsertExteriorTriviaIfNeeded(service, args.TextView, subjectBuffer);
         }
 
-        public CommandState GetCommandState(OpenLineBelowCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            OpenLineBelowCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(OpenLineBelowCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            OpenLineBelowCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // Check to see if the current line starts with exterior trivia. If so, we'll take over.
             // If not, let the nextHandler run.
@@ -280,13 +405,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
             }
 
-            var service = document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
+            var service =
+                document.GetRequiredLanguageService<IDocumentationCommentSnippetService>();
 
             // Allow nextHandler() to run and the insert exterior trivia if necessary.
             nextHandler();
@@ -294,7 +421,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
             InsertExteriorTriviaIfNeeded(service, args.TextView, subjectBuffer);
         }
 
-        private void InsertExteriorTriviaIfNeeded(IDocumentationCommentSnippetService service, ITextView textView, ITextBuffer subjectBuffer)
+        private void InsertExteriorTriviaIfNeeded(
+            IDocumentationCommentSnippetService service,
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             var caretPosition = textView.GetCaretPoint(subjectBuffer) ?? -1;
             if (caretPosition < 0)
@@ -302,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -323,15 +455,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 
             var previousLine = text.Lines[currentLine.LineNumber - 1];
 
-            if (LineStartsWithExteriorTrivia(currentLine) || !LineStartsWithExteriorTrivia(previousLine))
+            if (
+                LineStartsWithExteriorTrivia(currentLine)
+                || !LineStartsWithExteriorTrivia(previousLine)
+            )
             {
                 return;
             }
 
-            var documentOptions = document.GetOptionsAsync(CancellationToken.None).WaitAndGetResult(CancellationToken.None);
+            var documentOptions = document
+                .GetOptionsAsync(CancellationToken.None)
+                .WaitAndGetResult(CancellationToken.None);
             var options = DocumentationCommentOptions.From(documentOptions);
 
-            var snippet = service.GetDocumentationCommentSnippetFromPreviousLine(options, currentLine, previousLine);
+            var snippet = service.GetDocumentationCommentSnippetFromPreviousLine(
+                options,
+                currentLine,
+                previousLine
+            );
             if (snippet != null)
             {
                 ApplySnippet(snippet, subjectBuffer, textView);
@@ -340,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 
         private bool CurrentLineStartsWithExteriorTrivia(ITextBuffer subjectBuffer, int position)
         {
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -365,7 +507,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
                 return false;
             }
 
-            return string.CompareOrdinal(lineText, lineOffset, ExteriorTriviaText, 0, ExteriorTriviaText.Length) == 0;
+            return string.CompareOrdinal(
+                    lineText,
+                    lineOffset,
+                    ExteriorTriviaText,
+                    0,
+                    ExteriorTriviaText.Length
+                ) == 0;
         }
     }
 }

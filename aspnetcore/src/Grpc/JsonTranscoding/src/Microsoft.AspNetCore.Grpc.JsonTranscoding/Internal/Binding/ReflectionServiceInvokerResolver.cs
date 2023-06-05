@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
-internal sealed class ReflectionServiceInvokerResolver<TService>
-    : IServiceInvokerResolver<TService> where TService : class
+internal sealed class ReflectionServiceInvokerResolver<TService> : IServiceInvokerResolver<TService>
+    where TService : class
 {
     private readonly Type _declaringType;
 
@@ -23,13 +23,17 @@ internal sealed class ReflectionServiceInvokerResolver<TService>
         Type[] methodParameters,
         string verb,
         HttpRule httpRule,
-        MethodDescriptor methodDescriptor) where TDelegate : Delegate
+        MethodDescriptor methodDescriptor
+    )
+        where TDelegate : Delegate
     {
         var handlerMethod = GetMethod(methodName, methodParameters);
 
         if (handlerMethod == null)
         {
-            throw new InvalidOperationException($"Could not find '{methodName}' on {typeof(TService)}.");
+            throw new InvalidOperationException(
+                $"Could not find '{methodName}' on {typeof(TService)}."
+            );
         }
 
         var invoker = (TDelegate)Delegate.CreateDelegate(typeof(TDelegate), handlerMethod);
@@ -58,7 +62,8 @@ internal sealed class ReflectionServiceInvokerResolver<TService>
                 BindingFlags.Public | BindingFlags.Instance,
                 binder: null,
                 types: methodParameters,
-                modifiers: null);
+                modifiers: null
+            );
 
             if (matchingMethod == null)
             {
@@ -71,7 +76,10 @@ internal sealed class ReflectionServiceInvokerResolver<TService>
             if (matchingMethod.IsVirtual)
             {
                 var baseDefinitionMethod = matchingMethod.GetBaseDefinition();
-                if (baseDefinitionMethod != null && baseDefinitionMethod.DeclaringType == _declaringType)
+                if (
+                    baseDefinitionMethod != null
+                    && baseDefinitionMethod.DeclaringType == _declaringType
+                )
                 {
                     return matchingMethod;
                 }

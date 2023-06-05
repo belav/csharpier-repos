@@ -12,6 +12,7 @@ public class jaggedarr
     public static double[][,] jaggedb;
 
     private static double s_tolerance = 0.0000000000001;
+
     public static bool AreEqual(double left, double right)
     {
         return Math.Abs(left - right) < s_tolerance;
@@ -27,8 +28,16 @@ public class jaggedarr
 
     public static void gaussj(double[][,] a, int n, double[][,] b, int m)
     {
-        int i, icol = 0, irow = 0, j, k, l, ll;
-        double big = 0.0, dum = 0.0, pivinv = 0.0;
+        int i,
+            icol = 0,
+            irow = 0,
+            j,
+            k,
+            l,
+            ll;
+        double big = 0.0,
+            dum = 0.0,
+            pivinv = 0.0;
 
         int[] indxc = new int[3];
         int[] indxr = new int[3];
@@ -59,8 +68,10 @@ public class jaggedarr
             ++(ipiv[icol]);
             if (irow != icol)
             {
-                for (l = 0; l < n; l++) swap(jaggeda[2][irow, l], jaggeda[2][icol, l]);
-                for (l = 0; l < m; l++) swap(jaggedb[1][irow, l], jaggedb[1][icol, l]);
+                for (l = 0; l < n; l++)
+                    swap(jaggeda[2][irow, l], jaggeda[2][icol, l]);
+                for (l = 0; l < m; l++)
+                    swap(jaggedb[1][irow, l], jaggedb[1][icol, l]);
             }
 
             indxr[i] = irow;
@@ -69,15 +80,19 @@ public class jaggedarr
                 Console.WriteLine("GAUSSJ: Singular Matrix-2. icol is {0}\n", icol);
             pivinv = 1.0 / jaggeda[2][icol, icol];
             jaggeda[2][icol, icol] = 1.0;
-            for (l = 0; l < n; l++) jaggeda[2][icol, l] *= pivinv;
-            for (l = 0; l < m; l++) jaggedb[1][icol, l] *= pivinv;
+            for (l = 0; l < n; l++)
+                jaggeda[2][icol, l] *= pivinv;
+            for (l = 0; l < m; l++)
+                jaggedb[1][icol, l] *= pivinv;
             for (ll = 0; ll < n; ll++)
                 if (ll != icol)
                 {
                     dum = jaggeda[2][ll, icol];
                     jaggeda[2][ll, icol] = 0.0;
-                    for (l = 0; l < n; l++) jaggeda[2][ll, l] -= jaggeda[2][icol, l] * dum;
-                    for (l = 0; l < m; l++) jaggedb[1][ll, l] -= jaggedb[1][icol, l] * dum;
+                    for (l = 0; l < n; l++)
+                        jaggeda[2][ll, l] -= jaggeda[2][icol, l] * dum;
+                    for (l = 0; l < m; l++)
+                        jaggedb[1][ll, l] -= jaggedb[1][icol, l] * dum;
                 }
         }
         for (l = n - 1; l >= 0; l--)
@@ -118,54 +133,54 @@ public class jaggedarr
         jaggedb[1][2, 0] = 3;
 
         /*
-		int i, j;
-				
-		Console.WriteLine("Matrix A is \n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", jaggeda[2][i,j]);
-			Console.WriteLine();
-		}
+        int i, j;
+                
+        Console.WriteLine("Matrix A is \n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", jaggeda[2][i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("Matrix B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", jaggedb[1][i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("Matrix B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", jaggedb[1][i,j]);
+            Console.WriteLine();
+        }
+        */
 
         gaussj(jaggeda, n, jaggedb, m);
 
         /*
-		Console.WriteLine();
-		Console.WriteLine("The inverse of matrix A is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", jaggeda[2][i,j]);
-			Console.WriteLine();
-		}
+        Console.WriteLine();
+        Console.WriteLine("The inverse of matrix A is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", jaggeda[2][i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("The solution X of AX=B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", jaggedb[1][i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("The solution X of AX=B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", jaggedb[1][i,j]);
+            Console.WriteLine();
+        }
+        */
 
         if (
-               AreEqual(jaggeda[2][0, 0], 3)
+            AreEqual(jaggeda[2][0, 0], 3)
             && AreEqual(jaggeda[2][1, 1], 4)
             && AreEqual(jaggedb[1][0, 0], -9)
             && AreEqual(jaggedb[1][1, 0], 10)
-            )
+        )
             pass = true;
 
         if (!pass)

@@ -17,20 +17,32 @@ namespace System.ServiceModel.Security.Tokens
     class KerberosRequestorSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {
         public KerberosRequestorSecurityTokenAuthenticator()
-            : base()
-        { }
+            : base() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return (token is KerberosRequestorSecurityToken);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
-            KerberosRequestorSecurityToken kerbToken = (KerberosRequestorSecurityToken) token;
+            KerberosRequestorSecurityToken kerbToken = (KerberosRequestorSecurityToken)token;
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>(1);
-            ClaimSet claimSet = new DefaultClaimSet(ClaimSet.System, new Claim(ClaimTypes.Spn, kerbToken.ServicePrincipalName, Rights.PossessProperty));
-            policies.Add(new UnconditionalPolicy(SecurityUtils.CreateIdentity(kerbToken.ServicePrincipalName, SecurityUtils.AuthTypeKerberos), claimSet));
+            ClaimSet claimSet = new DefaultClaimSet(
+                ClaimSet.System,
+                new Claim(ClaimTypes.Spn, kerbToken.ServicePrincipalName, Rights.PossessProperty)
+            );
+            policies.Add(
+                new UnconditionalPolicy(
+                    SecurityUtils.CreateIdentity(
+                        kerbToken.ServicePrincipalName,
+                        SecurityUtils.AuthTypeKerberos
+                    ),
+                    claimSet
+                )
+            );
             return policies.AsReadOnly();
         }
     }

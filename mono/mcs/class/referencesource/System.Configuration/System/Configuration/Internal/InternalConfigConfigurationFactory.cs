@@ -14,22 +14,30 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 
-namespace System.Configuration.Internal {
-
+namespace System.Configuration.Internal
+{
     //
     // Class used to create and initialize an instance of the Configuration class
     // from assemblies other than System.
     //
-    internal sealed class InternalConfigConfigurationFactory : IInternalConfigConfigurationFactory {
+    internal sealed class InternalConfigConfigurationFactory : IInternalConfigConfigurationFactory
+    {
+        private InternalConfigConfigurationFactory() { }
 
-        private InternalConfigConfigurationFactory() {}
-
-        ClassConfiguration IInternalConfigConfigurationFactory.Create(Type typeConfigHost, params object[] hostInitConfigurationParams) {
+        ClassConfiguration IInternalConfigConfigurationFactory.Create(
+            Type typeConfigHost,
+            params object[] hostInitConfigurationParams
+        )
+        {
             return new ClassConfiguration(null, typeConfigHost, hostInitConfigurationParams);
         }
-        
+
         // Normalize a locationSubpath argument
-        string IInternalConfigConfigurationFactory.NormalizeLocationSubPath(string subPath, IConfigErrorInfo errorInfo) {
+        string IInternalConfigConfigurationFactory.NormalizeLocationSubPath(
+            string subPath,
+            IConfigErrorInfo errorInfo
+        )
+        {
             return BaseConfigurationRecord.NormalizeLocationSubPath(subPath, errorInfo);
         }
     }

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void String1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void String2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void ParameterList_OpenParenthesis()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method$$
 }";
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void ParameterList_OpenParenthesis_Delete()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method$$
 }";
@@ -84,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void ParameterList_OpenParenthesis_Tab()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method$$
 }";
@@ -98,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void ParameterList_OpenParenthesis_CloseParenthesis()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method$$
 }";
@@ -112,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Argument()
         {
-            var code = @"class C 
+            var code =
+                @"class C 
 {
     void Method()
     {
@@ -128,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Argument_Invalid()
         {
-            var code = @"class C 
+            var code =
+                @"class C 
 {
     void Method()
     {
@@ -144,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Array_Nested()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int Method(int i)
     {
@@ -160,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void OpenParenthesisWithExistingCloseParen()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public A(int a, int b) { }
 
@@ -181,7 +191,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                Parenthesis.OpenCharacter, Parenthesis.CloseCharacter);
+                Parenthesis.OpenCharacter,
+                Parenthesis.CloseCharacter
+            );
         }
     }
 }

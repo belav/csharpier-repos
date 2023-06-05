@@ -12,7 +12,8 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-internal sealed partial class DefaultActionDescriptorCollectionProvider : ActionDescriptorCollectionProvider
+internal sealed partial class DefaultActionDescriptorCollectionProvider
+    : ActionDescriptorCollectionProvider
 {
     private readonly IActionDescriptorProvider[] _actionDescriptorProviders;
     private readonly IActionDescriptorChangeProvider[] _actionDescriptorChangeProviders;
@@ -28,11 +29,10 @@ internal sealed partial class DefaultActionDescriptorCollectionProvider : Action
     public DefaultActionDescriptorCollectionProvider(
         IEnumerable<IActionDescriptorProvider> actionDescriptorProviders,
         IEnumerable<IActionDescriptorChangeProvider> actionDescriptorChangeProviders,
-        ILogger<DefaultActionDescriptorCollectionProvider> logger)
+        ILogger<DefaultActionDescriptorCollectionProvider> logger
+    )
     {
-        _actionDescriptorProviders = actionDescriptorProviders
-            .OrderBy(p => p.Order)
-            .ToArray();
+        _actionDescriptorProviders = actionDescriptorProviders.OrderBy(p => p.Order).ToArray();
 
         _actionDescriptorChangeProviders = actionDescriptorChangeProviders.ToArray();
 
@@ -41,9 +41,7 @@ internal sealed partial class DefaultActionDescriptorCollectionProvider : Action
         _logger = logger;
 
         // IMPORTANT: this needs to be the last thing we do in the constructor. Change notifications can happen immediately!
-        ChangeToken.OnChange(
-            GetCompositeChangeToken,
-            UpdateCollection);
+        ChangeToken.OnChange(GetCompositeChangeToken, UpdateCollection);
     }
 
     /// <summary>
@@ -158,7 +156,8 @@ internal sealed partial class DefaultActionDescriptorCollectionProvider : Action
             // Step 2.
             _collection = new ActionDescriptorCollection(
                 new ReadOnlyCollection<ActionDescriptor>(context.Results),
-                _version++);
+                _version++
+            );
 
             // Step 3.
             _cancellationTokenSource = new CancellationTokenSource();
@@ -175,7 +174,8 @@ internal sealed partial class DefaultActionDescriptorCollectionProvider : Action
             EventId = 1,
             EventName = "NoActionDescriptors",
             Level = LogLevel.Information,
-            Message = "No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts")]
+            Message = "No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts"
+        )]
         public static partial void NoActionDescriptors(ILogger logger);
     }
 }

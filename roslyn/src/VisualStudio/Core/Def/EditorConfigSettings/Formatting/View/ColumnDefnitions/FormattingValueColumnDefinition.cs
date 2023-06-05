@@ -24,7 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormattingValueColumnDefinition([ImportMany] IEnumerable<IEnumSettingViewModelFactory> factories)
+        public FormattingValueColumnDefinition(
+            [ImportMany] IEnumerable<IEnumSettingViewModelFactory> factories
+        )
         {
             _factories = factories;
         }
@@ -37,7 +39,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
         public override bool IsSortable => false;
         public override TextWrapping TextWrapping => TextWrapping.NoWrap;
 
-        public override bool TryCreateColumnContent(ITableEntryHandle entry, bool singleColumnView, out FrameworkElement? content)
+        public override bool TryCreateColumnContent(
+            ITableEntryHandle entry,
+            bool singleColumnView,
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Value, out FormattingSetting setting))
             {

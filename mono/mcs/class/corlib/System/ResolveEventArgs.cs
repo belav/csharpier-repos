@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,32 +34,31 @@ using System.Reflection;
 
 namespace System
 {
-	[ComVisible (true)]
-	public class ResolveEventArgs : EventArgs
-	{
-		private string m_Name;
-		private Assembly m_Requesting;
+    [ComVisible(true)]
+    public class ResolveEventArgs : EventArgs
+    {
+        private string m_Name;
+        private Assembly m_Requesting;
 
-		public ResolveEventArgs (string name)
-		{
-			m_Name = name;
-		}
+        public ResolveEventArgs(string name)
+        {
+            m_Name = name;
+        }
 
-		public ResolveEventArgs (string name, Assembly requestingAssembly) {
-			this.m_Name = name;
-			this.m_Requesting = requestingAssembly;
-		}
+        public ResolveEventArgs(string name, Assembly requestingAssembly)
+        {
+            this.m_Name = name;
+            this.m_Requesting = requestingAssembly;
+        }
 
-		public string Name {
-			get {
-				return m_Name;
-			}
-		}
+        public string Name
+        {
+            get { return m_Name; }
+        }
 
-		public Assembly RequestingAssembly {
-			get {
-				return m_Requesting;
-			}
-		}
-	}
+        public Assembly RequestingAssembly
+        {
+            get { return m_Requesting; }
+        }
+    }
 }

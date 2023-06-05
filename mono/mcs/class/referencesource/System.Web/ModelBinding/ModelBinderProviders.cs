@@ -1,17 +1,19 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
+    public static class ModelBinderProviders
+    {
+        private static readonly ModelBinderProviderCollection _providers =
+            CreateDefaultCollection();
 
-    public static class ModelBinderProviders {
-
-        private static readonly ModelBinderProviderCollection _providers = CreateDefaultCollection();
-
-        public static ModelBinderProviderCollection Providers {
-            get {
-                return _providers;
-            }
+        public static ModelBinderProviderCollection Providers
+        {
+            get { return _providers; }
         }
 
-        private static ModelBinderProviderCollection CreateDefaultCollection() {
-            return new ModelBinderProviderCollection() {
+        private static ModelBinderProviderCollection CreateDefaultCollection()
+        {
+            return new ModelBinderProviderCollection()
+            {
                 new TypeMatchModelBinderProvider(),
                 new BinaryDataModelBinderProvider(),
                 new KeyValuePairModelBinderProvider(),
@@ -23,6 +25,5 @@
                 new MutableObjectModelBinderProvider()
             };
         }
-
     }
 }

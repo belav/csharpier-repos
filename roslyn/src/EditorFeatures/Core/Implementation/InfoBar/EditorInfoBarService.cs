@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorInfoBarService()
-        {
-        }
+        public EditorInfoBarService() { }
 
-        public void ShowInfoBar(string message, params InfoBarUI[] items)
-            => Logger.Log(FunctionId.Extension_InfoBar, message);
+        public void ShowInfoBar(string message, params InfoBarUI[] items) =>
+            Logger.Log(FunctionId.Extension_InfoBar, message);
     }
 }

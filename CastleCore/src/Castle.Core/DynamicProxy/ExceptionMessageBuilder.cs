@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,14 +42,16 @@ namespace Castle.DynamicProxy
             }
 
             var instructionsFormat =
-                "Make it public, or internal and mark your assembly with " +
-                "[assembly: InternalsVisibleTo({0})] attribute, because assembly {1} " +
-                "is{2} strong-named.";
+                "Make it public, or internal and mark your assembly with "
+                + "[assembly: InternalsVisibleTo({0})] attribute, because assembly {1} "
+                + "is{2} strong-named.";
 
-            var instructions = string.Format(instructionsFormat,
+            var instructions = string.Format(
+                instructionsFormat,
                 assemblyToBeVisibleTo,
                 targetAssembly.GetName().Name,
-                strongNamedOrNotIndicator);
+                strongNamedOrNotIndicator
+            );
             return instructions;
 
             bool ReferencesCastleCore(Assembly ia)
@@ -65,19 +67,23 @@ namespace Castle.DynamicProxy
         /// </summary>
         /// <param name="inaccessibleType">the inaccessible type that prevents proxy creation</param>
         /// <param name="typeToProxy">the type that couldn't be proxied</param>
-        public static string CreateMessageForInaccessibleType(Type inaccessibleType, Type typeToProxy)
+        public static string CreateMessageForInaccessibleType(
+            Type inaccessibleType,
+            Type typeToProxy
+        )
         {
             var targetAssembly = typeToProxy.Assembly;
 
-            string inaccessibleTypeDescription = inaccessibleType == typeToProxy
-                ? "it"
-                : "type " + inaccessibleType.GetBestName();
+            string inaccessibleTypeDescription =
+                inaccessibleType == typeToProxy ? "it" : "type " + inaccessibleType.GetBestName();
 
             var messageFormat = "Can not create proxy for type {0} because {1} is not accessible. ";
 
-            var message = string.Format(messageFormat,
+            var message = string.Format(
+                messageFormat,
                 typeToProxy.GetBestName(),
-                inaccessibleTypeDescription);
+                inaccessibleTypeDescription
+            );
 
             var instructions = CreateInstructionsToMakeVisible(targetAssembly);
 

@@ -10,7 +10,6 @@ namespace System.Activities.Runtime
     using System.Runtime.Serialization;
     using System.Diagnostics.CodeAnalysis;
 
-
     [DataContract]
     class EmptyWorkItem : ActivityExecutionWorkItem
     {

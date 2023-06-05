@@ -19,21 +19,24 @@ namespace Microsoft.CodeAnalysis.Workspaces
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CocoaTextBufferVisibilityTracker(
             ITextBufferAssociatedViewService associatedViewService,
-            IThreadingContext threadingContext)
-            : base(associatedViewService, threadingContext)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(associatedViewService, threadingContext) { }
 
-        protected override bool IsVisible(ICocoaTextView view)
-            => view.IsVisible;
+        protected override bool IsVisible(ICocoaTextView view) => view.IsVisible;
 
-        protected override EventHandler GetVisiblityChangeCallback(VisibleTrackerData visibleTrackerData)
-            => (sender, args) => visibleTrackerData.TriggerCallbacks();
+        protected override EventHandler GetVisiblityChangeCallback(
+            VisibleTrackerData visibleTrackerData
+        ) => (sender, args) => visibleTrackerData.TriggerCallbacks();
 
-        protected override void AddVisibilityChangedCallback(ICocoaTextView view, EventHandler visibilityChangedCallback)
-            => view.IsVisibleChanged += visibilityChangedCallback;
+        protected override void AddVisibilityChangedCallback(
+            ICocoaTextView view,
+            EventHandler visibilityChangedCallback
+        ) => view.IsVisibleChanged += visibilityChangedCallback;
 
-        protected override void RemoveVisibilityChangedCallback(ICocoaTextView view, EventHandler visibilityChangedCallback)
-            => view.IsVisibleChanged -= visibilityChangedCallback;
+        protected override void RemoveVisibilityChangedCallback(
+            ICocoaTextView view,
+            EventHandler visibilityChangedCallback
+        ) => view.IsVisibleChanged -= visibilityChangedCallback;
     }
 }

@@ -1,4 +1,3 @@
 // Compiler options: -t:library
 
-internal class Provider {
-}
+internal class Provider { }

@@ -5,7 +5,9 @@ namespace System.Net.NetworkInformation
 {
     internal static class InterfaceInfoPal
     {
-        public static uint InterfaceNameToIndex(string _/*interfaceName*/)
+        public static uint InterfaceNameToIndex(
+            string _ /*interfaceName*/
+        )
         {
             // zero means "unknown"
             return 0;

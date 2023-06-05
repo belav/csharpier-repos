@@ -14,11 +14,9 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<string>("-x", () => "default");
 
-            var result = new RootCommand
-            {
-                option
-            }.Parse("-x")
-             .FindResultFor(option);
+            var result = new RootCommand { option }
+                .Parse("-x")
+                .FindResultFor(option);
 
             result.Tokens.Should().BeEmpty();
         }
@@ -26,10 +24,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void HasOption_can_be_used_to_check_the_presence_of_an_option()
         {
-            var command = new Command("the-command")
-            {
-                new Option(new[] { "-h", "--help" })
-            };
+            var command = new Command("the-command") { new Option(new[] { "-h", "--help" }) };
 
             var result = command.Parse("the-command -h");
 
@@ -54,20 +49,8 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("outer")
             {
-                new Command("inner-one")
-                {
-                    new Argument
-                    {
-                        Arity = ArgumentArity.Zero
-                    }
-                },
-                new Command("inner-two")
-                {
-                    new Argument
-                    {
-                        Arity = ArgumentArity.Zero
-                    }
-                }
+                new Command("inner-one") { new Argument { Arity = ArgumentArity.Zero } },
+                new Command("inner-two") { new Argument { Arity = ArgumentArity.Zero } }
             };
 
             var result = new Parser(command).Parse("outer inner-one inner-two");

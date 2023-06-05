@@ -15,22 +15,20 @@ namespace System.Reflection.Runtime.TypeInfos
     internal sealed partial class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
     {
         private RuntimeByRefTypeInfo(UnificationKey key)
-            : base(key)
-        {
-        }
+            : base(key) { }
 
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => true;
+
         protected sealed override bool IsPointerImpl() => false;
 
         protected sealed override string Suffix
         {
-            get
-            {
-                return "&";
-            }
+            get { return "&"; }
         }
     }
 }

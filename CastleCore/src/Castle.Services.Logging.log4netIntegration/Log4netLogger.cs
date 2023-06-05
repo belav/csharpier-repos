@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,13 +34,10 @@ namespace Castle.Services.Logging.Log4netIntegration
             Factory = factory;
         }
 
-        internal Log4netLogger()
-        {
-        }
+        internal Log4netLogger() { }
 
-        internal Log4netLogger(ILog log, Log4netFactory factory) : this(log.Logger, factory)
-        {
-        }
+        internal Log4netLogger(ILog log, Log4netFactory factory)
+            : this(log.Logger, factory) { }
 
         public bool IsTraceEnabled
         {
@@ -114,7 +111,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsTraceEnabled)
             {
-                Logger.Log(declaringType, Level.Trace, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Trace,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -122,7 +124,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsTraceEnabled)
             {
-                Logger.Log(declaringType, Level.Trace, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Trace,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -130,15 +137,30 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsTraceEnabled)
             {
-                Logger.Log(declaringType, Level.Trace, new SystemStringFormat(formatProvider, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Trace,
+                    new SystemStringFormat(formatProvider, format, args),
+                    null
+                );
             }
         }
 
-        public void TraceFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void TraceFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsTraceEnabled)
             {
-                Logger.Log(declaringType, Level.Trace, new SystemStringFormat(formatProvider, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Trace,
+                    new SystemStringFormat(formatProvider, format, args),
+                    exception
+                );
             }
         }
 
@@ -170,7 +192,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsDebugEnabled)
             {
-                Logger.Log(declaringType, Level.Debug, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Debug,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -178,7 +205,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsDebugEnabled)
             {
-                Logger.Log(declaringType, Level.Debug, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Debug,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -186,15 +218,30 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsDebugEnabled)
             {
-                Logger.Log(declaringType, Level.Debug, new SystemStringFormat(formatProvider, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Debug,
+                    new SystemStringFormat(formatProvider, format, args),
+                    null
+                );
             }
         }
 
-        public void DebugFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void DebugFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsDebugEnabled)
             {
-                Logger.Log(declaringType, Level.Debug, new SystemStringFormat(formatProvider, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Debug,
+                    new SystemStringFormat(formatProvider, format, args),
+                    exception
+                );
             }
         }
 
@@ -226,7 +273,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsErrorEnabled)
             {
-                Logger.Log(declaringType, Level.Error, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Error,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -234,7 +286,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsErrorEnabled)
             {
-                Logger.Log(declaringType, Level.Error, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Error,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -242,15 +299,30 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsErrorEnabled)
             {
-                Logger.Log(declaringType, Level.Error, new SystemStringFormat(formatProvider, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Error,
+                    new SystemStringFormat(formatProvider, format, args),
+                    null
+                );
             }
         }
 
-        public void ErrorFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void ErrorFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsErrorEnabled)
             {
-                Logger.Log(declaringType, Level.Error, new SystemStringFormat(formatProvider, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Error,
+                    new SystemStringFormat(formatProvider, format, args),
+                    exception
+                );
             }
         }
 
@@ -282,7 +354,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsFatalEnabled)
             {
-                Logger.Log(declaringType, Level.Fatal, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Fatal,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -290,7 +367,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsFatalEnabled)
             {
-                Logger.Log(declaringType, Level.Fatal, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Fatal,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -298,15 +380,30 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsFatalEnabled)
             {
-                Logger.Log(declaringType, Level.Fatal, new SystemStringFormat(formatProvider, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Fatal,
+                    new SystemStringFormat(formatProvider, format, args),
+                    null
+                );
             }
         }
 
-        public void FatalFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void FatalFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsFatalEnabled)
             {
-                Logger.Log(declaringType, Level.Fatal, new SystemStringFormat(formatProvider, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Fatal,
+                    new SystemStringFormat(formatProvider, format, args),
+                    exception
+                );
             }
         }
 
@@ -338,7 +435,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsInfoEnabled)
             {
-                Logger.Log(declaringType, Level.Info, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Info,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -346,7 +448,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsInfoEnabled)
             {
-                Logger.Log(declaringType, Level.Info, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Info,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -354,15 +461,30 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsInfoEnabled)
             {
-                Logger.Log(declaringType, Level.Info, new SystemStringFormat(formatProvider, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Info,
+                    new SystemStringFormat(formatProvider, format, args),
+                    null
+                );
             }
         }
 
-        public void InfoFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void InfoFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsInfoEnabled)
             {
-                Logger.Log(declaringType, Level.Info, new SystemStringFormat(formatProvider, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Info,
+                    new SystemStringFormat(formatProvider, format, args),
+                    exception
+                );
             }
         }
 
@@ -394,7 +516,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsWarnEnabled)
             {
-                Logger.Log(declaringType, Level.Warn, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Warn,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    null
+                );
             }
         }
 
@@ -402,7 +529,12 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsWarnEnabled)
             {
-                Logger.Log(declaringType, Level.Warn, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Warn,
+                    new SystemStringFormat(CultureInfo.InvariantCulture, format, args),
+                    exception
+                );
             }
         }
 
@@ -410,15 +542,30 @@ namespace Castle.Services.Logging.Log4netIntegration
         {
             if (IsWarnEnabled)
             {
-                Logger.Log(declaringType, Level.Warn, new SystemStringFormat(formatProvider, format, args), null);
+                Logger.Log(
+                    declaringType,
+                    Level.Warn,
+                    new SystemStringFormat(formatProvider, format, args),
+                    null
+                );
             }
         }
 
-        public void WarnFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void WarnFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             if (IsWarnEnabled)
             {
-                Logger.Log(declaringType, Level.Warn, new SystemStringFormat(formatProvider, format, args), exception);
+                Logger.Log(
+                    declaringType,
+                    Level.Warn,
+                    new SystemStringFormat(formatProvider, format, args),
+                    exception
+                );
             }
         }
     }

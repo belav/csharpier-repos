@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             private readonly AnchorIndentationOperation _operation;
 
-            public AnchorData(AnchorIndentationOperation operation, SyntaxToken anchorToken, int originalColumn)
+            public AnchorData(
+                AnchorIndentationOperation operation,
+                SyntaxToken anchorToken,
+                int originalColumn
+            )
             {
                 _operation = operation;
                 this.AnchorToken = anchorToken;
@@ -37,26 +41,28 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private readonly struct FormattingContextIntervalIntrospector
             : IIntervalIntrospector<AnchorData>,
-            IIntervalIntrospector<IndentationData>,
-            IIntervalIntrospector<RelativeIndentationData>
+                IIntervalIntrospector<IndentationData>,
+                IIntervalIntrospector<RelativeIndentationData>
         {
-            int IIntervalIntrospector<AnchorData>.GetStart(AnchorData value)
-                => value.TextSpan.Start;
+            int IIntervalIntrospector<AnchorData>.GetStart(AnchorData value) =>
+                value.TextSpan.Start;
 
-            int IIntervalIntrospector<AnchorData>.GetLength(AnchorData value)
-                => value.TextSpan.Length;
+            int IIntervalIntrospector<AnchorData>.GetLength(AnchorData value) =>
+                value.TextSpan.Length;
 
-            int IIntervalIntrospector<IndentationData>.GetStart(IndentationData value)
-                => value.TextSpan.Start;
+            int IIntervalIntrospector<IndentationData>.GetStart(IndentationData value) =>
+                value.TextSpan.Start;
 
-            int IIntervalIntrospector<IndentationData>.GetLength(IndentationData value)
-                => value.TextSpan.Length;
+            int IIntervalIntrospector<IndentationData>.GetLength(IndentationData value) =>
+                value.TextSpan.Length;
 
-            int IIntervalIntrospector<RelativeIndentationData>.GetStart(RelativeIndentationData value)
-                => value.InseparableRegionSpan.Start;
+            int IIntervalIntrospector<RelativeIndentationData>.GetStart(
+                RelativeIndentationData value
+            ) => value.InseparableRegionSpan.Start;
 
-            int IIntervalIntrospector<RelativeIndentationData>.GetLength(RelativeIndentationData value)
-                => value.InseparableRegionSpan.Length;
+            int IIntervalIntrospector<RelativeIndentationData>.GetLength(
+                RelativeIndentationData value
+            ) => value.InseparableRegionSpan.Length;
         }
     }
 }

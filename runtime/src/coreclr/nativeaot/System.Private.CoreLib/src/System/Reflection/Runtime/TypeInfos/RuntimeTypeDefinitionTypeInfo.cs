@@ -15,12 +15,18 @@ namespace System.Reflection.Runtime.TypeInfos
     {
         public sealed override bool IsTypeDefinition => true;
         public abstract override bool IsGenericTypeDefinition { get; }
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => false;
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;

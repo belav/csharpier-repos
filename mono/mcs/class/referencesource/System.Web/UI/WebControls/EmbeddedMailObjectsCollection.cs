@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System.Web.Mail;
     using System.Collections;
     using System.ComponentModel;
@@ -13,49 +13,62 @@ namespace System.Web.UI.WebControls {
     using System.Drawing.Design;
     using System.Web;
 
-    [Editor("System.Web.UI.Design.WebControls.EmbeddedMailObjectCollectionEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor))]
-    public sealed class EmbeddedMailObjectsCollection : CollectionBase {
-
-        public EmbeddedMailObject this[int index] {
-            get {
-                return (EmbeddedMailObject)List[index];
-            }
-            set {
-                List[index] = value;
-            }
+    [Editor(
+        "System.Web.UI.Design.WebControls.EmbeddedMailObjectCollectionEditor, "
+            + AssemblyRef.SystemDesign,
+        typeof(UITypeEditor)
+    )]
+    public sealed class EmbeddedMailObjectsCollection : CollectionBase
+    {
+        public EmbeddedMailObject this[int index]
+        {
+            get { return (EmbeddedMailObject)List[index]; }
+            set { List[index] = value; }
         }
-        
-        public int Add(EmbeddedMailObject value) {
+
+        public int Add(EmbeddedMailObject value)
+        {
             return List.Add(value);
         }
 
-        public bool Contains(EmbeddedMailObject value) {
+        public bool Contains(EmbeddedMailObject value)
+        {
             return List.Contains(value);
         }
 
-        public void CopyTo(EmbeddedMailObject[] array, int index) {
+        public void CopyTo(EmbeddedMailObject[] array, int index)
+        {
             List.CopyTo(array, index);
         }
 
-        public int IndexOf(EmbeddedMailObject value) {
+        public int IndexOf(EmbeddedMailObject value)
+        {
             return List.IndexOf(value);
         }
 
-        public void Insert(int index, EmbeddedMailObject value) {
+        public void Insert(int index, EmbeddedMailObject value)
+        {
             List.Insert(index, value);
         }
 
-        protected override void OnValidate(object value) {
+        protected override void OnValidate(object value)
+        {
             base.OnValidate(value);
-            if (value == null) {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value", SR.GetString(SR.Collection_CantAddNull));
             }
-            if (!(value is EmbeddedMailObject)) {
-                throw new ArgumentException(SR.GetString(SR.Collection_InvalidType, "EmbeddedMailObject"), "value");
+            if (!(value is EmbeddedMailObject))
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Collection_InvalidType, "EmbeddedMailObject"),
+                    "value"
+                );
             }
         }
 
-        public void Remove(EmbeddedMailObject value) {
+        public void Remove(EmbeddedMailObject value)
+        {
             List.Remove(value);
         }
     }

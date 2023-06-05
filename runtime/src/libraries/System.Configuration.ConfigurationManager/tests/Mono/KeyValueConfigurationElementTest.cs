@@ -40,9 +40,7 @@ namespace MonoTests.System.Configuration
         class Poker : KeyValueConfigurationElement
         {
             public Poker(string name, string value)
-                : base(name, value)
-            {
-            }
+                : base(name, value) { }
 
             protected override void Init()
             {

@@ -26,13 +26,15 @@ namespace System.Reflection.Metadata
             _rowId = handle.RowId;
         }
 
-        private MethodDebugInformationHandle Handle => MethodDebugInformationHandle.FromRowId(_rowId);
+        private MethodDebugInformationHandle Handle =>
+            MethodDebugInformationHandle.FromRowId(_rowId);
 
         /// <summary>
         /// Returns a blob encoding sequence points, or nil if the method doesn't have sequence points.
         /// Use <see cref="GetSequencePoints()"/> to decode the blob.
         /// </summary>
-        public BlobHandle SequencePointsBlob => _reader.MethodDebugInformationTable.GetSequencePoints(Handle);
+        public BlobHandle SequencePointsBlob =>
+            _reader.MethodDebugInformationTable.GetSequencePoints(Handle);
 
         /// <summary>
         /// Handle of the single document containing all sequence points of the method,
@@ -52,7 +54,9 @@ namespace System.Reflection.Metadata
                     return default(StandaloneSignatureHandle);
                 }
 
-                return StandaloneSignatureHandle.FromRowId(_reader.GetBlobReader(SequencePointsBlob).ReadCompressedInteger());
+                return StandaloneSignatureHandle.FromRowId(
+                    _reader.GetBlobReader(SequencePointsBlob).ReadCompressedInteger()
+                );
             }
         }
 
@@ -61,7 +65,10 @@ namespace System.Reflection.Metadata
         /// </summary>
         public SequencePointCollection GetSequencePoints()
         {
-            return new SequencePointCollection(_reader.BlobHeap.GetMemoryBlock(SequencePointsBlob), Document);
+            return new SequencePointCollection(
+                _reader.BlobHeap.GetMemoryBlock(SequencePointsBlob),
+                Document
+            );
         }
 
         /// <summary>

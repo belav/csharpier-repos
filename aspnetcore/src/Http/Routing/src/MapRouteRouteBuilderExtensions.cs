@@ -22,11 +22,14 @@ public static class MapRouteRouteBuilderExtensions
     /// <param name="name">The name of the route.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    [RequiresUnreferencedCode("This API may perform reflection on supplied parameter which may be trimmed if not referenced directly.")]
+    [RequiresUnreferencedCode(
+        "This API may perform reflection on supplied parameter which may be trimmed if not referenced directly."
+    )]
     public static IRouteBuilder MapRoute(
         this IRouteBuilder routeBuilder,
         string? name,
-        [StringSyntax("Route")] string? template)
+        [StringSyntax("Route")] string? template
+    )
     {
         MapRoute(routeBuilder, name, template, defaults: null);
         return routeBuilder;
@@ -43,12 +46,15 @@ public static class MapRouteRouteBuilderExtensions
     /// and values of the default values.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    [RequiresUnreferencedCode("This API may perform reflection on supplied parameter which may be trimmed if not referenced directly.")]
+    [RequiresUnreferencedCode(
+        "This API may perform reflection on supplied parameter which may be trimmed if not referenced directly."
+    )]
     public static IRouteBuilder MapRoute(
         this IRouteBuilder routeBuilder,
         string? name,
         [StringSyntax("Route")] string? template,
-        object? defaults)
+        object? defaults
+    )
     {
         return MapRoute(routeBuilder, name, template, defaults, constraints: null);
     }
@@ -69,13 +75,16 @@ public static class MapRouteRouteBuilderExtensions
     /// of the constraints.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    [RequiresUnreferencedCode("This API may perform reflection on supplied parameter which may be trimmed if not referenced directly.")]
+    [RequiresUnreferencedCode(
+        "This API may perform reflection on supplied parameter which may be trimmed if not referenced directly."
+    )]
     public static IRouteBuilder MapRoute(
         this IRouteBuilder routeBuilder,
         string? name,
         [StringSyntax("Route")] string? template,
         object? defaults,
-        object? constraints)
+        object? constraints
+    )
     {
         return MapRoute(routeBuilder, name, template, defaults, constraints, dataTokens: null);
     }
@@ -100,43 +109,55 @@ public static class MapRouteRouteBuilderExtensions
     /// of the data tokens.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    [RequiresUnreferencedCode("This API may perform reflection on supplied parameter which may be trimmed if not referenced directly.")]
+    [RequiresUnreferencedCode(
+        "This API may perform reflection on supplied parameter which may be trimmed if not referenced directly."
+    )]
     public static IRouteBuilder MapRoute(
         this IRouteBuilder routeBuilder,
         string? name,
         [StringSyntax("Route")] string? template,
         object? defaults,
         object? constraints,
-        object? dataTokens)
+        object? dataTokens
+    )
     {
         if (routeBuilder.DefaultHandler == null)
         {
-            throw new RouteCreationException(Resources.FormatDefaultHandler_MustBeSet(nameof(IRouteBuilder)));
+            throw new RouteCreationException(
+                Resources.FormatDefaultHandler_MustBeSet(nameof(IRouteBuilder))
+            );
         }
 
-        routeBuilder.Routes.Add(new Route(
-            routeBuilder.DefaultHandler,
-            name,
-            template,
-            new RouteValueDictionary(defaults),
-            new RouteValueDictionary(constraints)!,
-            new RouteValueDictionary(dataTokens),
-            CreateInlineConstraintResolver(routeBuilder.ServiceProvider)));
+        routeBuilder.Routes.Add(
+            new Route(
+                routeBuilder.DefaultHandler,
+                name,
+                template,
+                new RouteValueDictionary(defaults),
+                new RouteValueDictionary(constraints)!,
+                new RouteValueDictionary(dataTokens),
+                CreateInlineConstraintResolver(routeBuilder.ServiceProvider)
+            )
+        );
 
         return routeBuilder;
     }
 
-    private static IInlineConstraintResolver CreateInlineConstraintResolver(IServiceProvider serviceProvider)
+    private static IInlineConstraintResolver CreateInlineConstraintResolver(
+        IServiceProvider serviceProvider
+    )
     {
-        var inlineConstraintResolver = serviceProvider
-            .GetRequiredService<IInlineConstraintResolver>();
+        var inlineConstraintResolver =
+            serviceProvider.GetRequiredService<IInlineConstraintResolver>();
 
-        var parameterPolicyFactory = serviceProvider
-            .GetRequiredService<ParameterPolicyFactory>();
+        var parameterPolicyFactory = serviceProvider.GetRequiredService<ParameterPolicyFactory>();
 
         // This inline constraint resolver will return a null constraint for non-IRouteConstraint
         // parameter policies so Route does not error
-        return new BackCompatInlineConstraintResolver(inlineConstraintResolver, parameterPolicyFactory);
+        return new BackCompatInlineConstraintResolver(
+            inlineConstraintResolver,
+            parameterPolicyFactory
+        );
     }
 
     private sealed class BackCompatInlineConstraintResolver : IInlineConstraintResolver
@@ -144,7 +165,10 @@ public static class MapRouteRouteBuilderExtensions
         private readonly IInlineConstraintResolver _inner;
         private readonly ParameterPolicyFactory _parameterPolicyFactory;
 
-        public BackCompatInlineConstraintResolver(IInlineConstraintResolver inner, ParameterPolicyFactory parameterPolicyFactory)
+        public BackCompatInlineConstraintResolver(
+            IInlineConstraintResolver inner,
+            ParameterPolicyFactory parameterPolicyFactory
+        )
         {
             _inner = inner;
             _parameterPolicyFactory = parameterPolicyFactory;

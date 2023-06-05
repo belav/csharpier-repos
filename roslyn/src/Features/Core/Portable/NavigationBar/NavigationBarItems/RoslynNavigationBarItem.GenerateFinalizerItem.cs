@@ -11,21 +11,21 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         public class GenerateFinalizer : AbstractGenerateCodeItem, IEquatable<GenerateFinalizer>
         {
             public GenerateFinalizer(string text, SymbolKey destinationTypeSymbolKey)
-                : base(RoslynNavigationBarItemKind.GenerateFinalizer, text, Glyph.MethodProtected, destinationTypeSymbolKey)
-            {
-            }
+                : base(
+                    RoslynNavigationBarItemKind.GenerateFinalizer,
+                    text,
+                    Glyph.MethodProtected,
+                    destinationTypeSymbolKey
+                ) { }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.GenerateFinalizer(Text, DestinationTypeSymbolKey);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.GenerateFinalizer(Text, DestinationTypeSymbolKey);
 
-            public override bool Equals(object? obj)
-                => Equals(obj as GenerateFinalizer);
+            public override bool Equals(object? obj) => Equals(obj as GenerateFinalizer);
 
-            public bool Equals(GenerateFinalizer? other)
-                => base.Equals(other);
+            public bool Equals(GenerateFinalizer? other) => base.Equals(other);
 
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
     }
 }

@@ -50,9 +50,8 @@ public interface IColumnBase : IAnnotatable
     ///     Gets the <see cref="ValueComparer" /> for this column.
     /// </summary>
     /// <returns>The comparer.</returns>
-    ValueComparer ProviderValueComparer
-        => PropertyMappings.First().Property
-            .GetProviderValueComparer();
+    ValueComparer ProviderValueComparer =>
+        PropertyMappings.First().Property.GetProviderValueComparer();
 
     /// <summary>
     ///     Returns the property mapping for the given entity type.

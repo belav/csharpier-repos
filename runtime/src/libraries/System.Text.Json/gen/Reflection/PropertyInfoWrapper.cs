@@ -14,12 +14,17 @@ namespace System.Text.Json.Reflection
         private readonly IPropertySymbol _property;
         private readonly MetadataLoadContextInternal _metadataLoadContext;
 
-        public PropertyInfoWrapper(IPropertySymbol property, MetadataLoadContextInternal metadataLoadContext)
+        public PropertyInfoWrapper(
+            IPropertySymbol property,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             _property = property;
             _metadataLoadContext = metadataLoadContext;
 
-            NeedsAtSign = SyntaxFacts.GetKeywordKind(_property.Name) != SyntaxKind.None || SyntaxFacts.GetContextualKeywordKind(_property.Name) != SyntaxKind.None;
+            NeedsAtSign =
+                SyntaxFacts.GetKeywordKind(_property.Name) != SyntaxKind.None
+                || SyntaxFacts.GetContextualKeywordKind(_property.Name) != SyntaxKind.None;
         }
 
         public override PropertyAttributes Attributes => throw new NotImplementedException();
@@ -83,7 +88,13 @@ namespace System.Text.Json.Reflection
             return _property.SetMethod!.AsMethodInfo(_metadataLoadContext);
         }
 
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }
@@ -93,7 +104,14 @@ namespace System.Text.Json.Reflection
             throw new NotImplementedException();
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }

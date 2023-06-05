@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                     return _value;
                 }
 
-                if (_editorConfigOptions.TryGetEditorConfigOption(_option, out T? value) &&
-                    value is not null)
+                if (
+                    _editorConfigOptions.TryGetEditorConfigOption(_option, out T? value)
+                    && value is not null
+                )
                 {
                     return value;
                 }
@@ -46,12 +48,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         private readonly AnalyzerConfigOptions _editorConfigOptions;
         private readonly OptionSet _visualStudioOptions;
 
-        public PerLanguageWhitespaceSetting(PerLanguageOption2<T> option,
-                                            string description,
-                                            AnalyzerConfigOptions editorConfigOptions,
-                                            OptionSet visualStudioOptions,
-                                            OptionUpdater updater,
-                                            SettingLocation location)
+        public PerLanguageWhitespaceSetting(
+            PerLanguageOption2<T> option,
+            string description,
+            AnalyzerConfigOptions editorConfigOptions,
+            OptionSet visualStudioOptions,
+            OptionUpdater updater,
+            SettingLocation location
+        )
             : base(description, updater, location)
         {
             _option = option;
@@ -64,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 
         public override OptionKey2 Key => new(_option, Language ?? LanguageNames.CSharp);
 
-        public override bool IsDefinedInEditorConfig => _editorConfigOptions.TryGetEditorConfigOption<T>(_option, out _);
+        public override bool IsDefinedInEditorConfig =>
+            _editorConfigOptions.TryGetEditorConfigOption<T>(_option, out _);
 
         public override void SetValue(object value)
         {

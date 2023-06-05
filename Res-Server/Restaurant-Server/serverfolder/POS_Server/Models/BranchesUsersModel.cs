@@ -15,9 +15,6 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
 
-
-
-
         // branch
         public long bbranchId { get; set; }
         public string bcode { get; set; }
@@ -56,6 +53,5 @@ namespace POS_Server.Models
         public byte uisOnline { get; set; }
         public Boolean ucanDelete { get; set; }
         public string uimage { get; set; }
-
     }
-    }
+}

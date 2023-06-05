@@ -9,6 +9,7 @@ namespace Test
     public class AA
     {
         static ulong m_ul;
+
         public static int Main()
         {
             try

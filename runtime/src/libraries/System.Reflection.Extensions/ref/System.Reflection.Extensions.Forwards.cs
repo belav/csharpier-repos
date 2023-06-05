@@ -4,6 +4,12 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Reflection.CustomAttributeExtensions))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Reflection.InterfaceMapping))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Reflection.RuntimeReflectionExtensions))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Reflection.CustomAttributeExtensions)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Reflection.InterfaceMapping)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Reflection.RuntimeReflectionExtensions)
+)]

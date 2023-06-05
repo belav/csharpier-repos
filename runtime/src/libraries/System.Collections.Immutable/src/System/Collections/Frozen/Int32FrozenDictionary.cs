@@ -19,7 +19,8 @@ namespace System.Collections.Frozen
         private readonly FrozenHashTable _hashTable;
         private readonly TValue[] _values;
 
-        internal Int32FrozenDictionary(Dictionary<int, TValue> source) : base(EqualityComparer<int>.Default)
+        internal Int32FrozenDictionary(Dictionary<int, TValue> source)
+            : base(EqualityComparer<int>.Default)
         {
             Debug.Assert(source.Count != 0);
 
@@ -31,7 +32,8 @@ namespace System.Collections.Frozen
             _hashTable = FrozenHashTable.Create(
                 entries,
                 pair => pair.Key,
-                (index, pair) => _values[index] = pair.Value);
+                (index, pair) => _values[index] = pair.Value
+            );
         }
 
         /// <inheritdoc />
@@ -41,7 +43,8 @@ namespace System.Collections.Frozen
         private protected override TValue[] ValuesCore => _values;
 
         /// <inheritdoc />
-        private protected override Enumerator GetEnumeratorCore() => new Enumerator(_hashTable.HashCodes, _values);
+        private protected override Enumerator GetEnumeratorCore() =>
+            new Enumerator(_hashTable.HashCodes, _values);
 
         /// <inheritdoc />
         private protected override int CountCore => _hashTable.Count;

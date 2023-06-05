@@ -11,6 +11,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 {
     public static partial class DynamicRevocationTests
     {
-        public static bool SupportsDynamicRevocation { get; } = Interop.AndroidCrypto.X509ChainSupportsRevocationOptions();
+        public static bool SupportsDynamicRevocation { get; } =
+            Interop.AndroidCrypto.X509ChainSupportsRevocationOptions();
     }
 }

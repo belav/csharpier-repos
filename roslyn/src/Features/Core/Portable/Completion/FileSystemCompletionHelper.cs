@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<string> searchPaths,
             string? baseDirectory,
             ImmutableArray<string> allowableExtensions,
-            CompletionItemRules itemRules)
+            CompletionItemRules itemRules
+        )
         {
             Debug.Assert(searchPaths.All(PathUtilities.IsAbsolute));
             Debug.Assert(baseDirectory == null || PathUtilities.IsAbsolute(baseDirectory));
@@ -52,8 +53,8 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         // virtual for testing
-        protected virtual string[] GetLogicalDrives()
-            => IOUtilities.PerformIO(Directory.GetLogicalDrives, Array.Empty<string>());
+        protected virtual string[] GetLogicalDrives() =>
+            IOUtilities.PerformIO(Directory.GetLogicalDrives, Array.Empty<string>());
 
         // virtual for testing
         protected virtual bool DirectoryExists(string fullPath)
@@ -66,63 +67,87 @@ namespace Microsoft.CodeAnalysis.Completion
         protected virtual IEnumerable<string> EnumerateDirectories(string fullDirectoryPath)
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullDirectoryPath));
-            return IOUtilities.PerformIO(() => Directory.EnumerateDirectories(fullDirectoryPath), Array.Empty<string>());
+            return IOUtilities.PerformIO(
+                () => Directory.EnumerateDirectories(fullDirectoryPath),
+                Array.Empty<string>()
+            );
         }
 
         // virtual for testing
         protected virtual IEnumerable<string> EnumerateFiles(string fullDirectoryPath)
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullDirectoryPath));
-            return IOUtilities.PerformIO(() => Directory.EnumerateFiles(fullDirectoryPath), Array.Empty<string>());
+            return IOUtilities.PerformIO(
+                () => Directory.EnumerateFiles(fullDirectoryPath),
+                Array.Empty<string>()
+            );
         }
 
         // virtual for testing
         protected virtual bool IsVisibleFileSystemEntry(string fullPath)
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullPath));
-            return IOUtilities.PerformIO(() => (File.GetAttributes(fullPath) & (FileAttributes.Hidden | FileAttributes.System)) == 0, false);
+            return IOUtilities.PerformIO(
+                () =>
+                    (File.GetAttributes(fullPath) & (FileAttributes.Hidden | FileAttributes.System))
+                    == 0,
+                false
+            );
         }
 
-        private CompletionItem CreateNetworkRoot()
-            => CommonCompletionItem.Create(
+        private CompletionItem CreateNetworkRoot() =>
+            CommonCompletionItem.Create(
                 "\\\\",
                 displayTextSuffix: "",
                 glyph: null,
                 description: "\\\\".ToSymbolDisplayParts(),
-                rules: _itemRules);
+                rules: _itemRules
+            );
 
-        private CompletionItem CreateUnixRoot()
-            => CommonCompletionItem.Create(
+        private CompletionItem CreateUnixRoot() =>
+            CommonCompletionItem.Create(
                 "/",
                 displayTextSuffix: "",
                 glyph: _folderGlyph,
                 description: "/".ToSymbolDisplayParts(),
-                rules: _itemRules);
+                rules: _itemRules
+            );
 
-        private CompletionItem CreateFileSystemEntryItem(string fullPath, bool isDirectory)
-            => CommonCompletionItem.Create(
+        private CompletionItem CreateFileSystemEntryItem(string fullPath, bool isDirectory) =>
+            CommonCompletionItem.Create(
                 PathUtilities.GetFileName(fullPath),
                 displayTextSuffix: "",
                 glyph: isDirectory ? _folderGlyph : _fileGlyph,
                 description: fullPath.ToSymbolDisplayParts(),
-                rules: _itemRules);
+                rules: _itemRules
+            );
 
-        private CompletionItem CreateLogicalDriveItem(string drive)
-            => CommonCompletionItem.Create(
+        private CompletionItem CreateLogicalDriveItem(string drive) =>
+            CommonCompletionItem.Create(
                 drive,
                 displayTextSuffix: "",
                 glyph: _folderGlyph,
                 description: drive.ToSymbolDisplayParts(),
-                rules: _itemRules);
+                rules: _itemRules
+            );
 
-        public Task<ImmutableArray<CompletionItem>> GetItemsAsync(string directoryPath, CancellationToken cancellationToken)
-            => Task.Run(() => GetItems(directoryPath, cancellationToken), cancellationToken);
+        public Task<ImmutableArray<CompletionItem>> GetItemsAsync(
+            string directoryPath,
+            CancellationToken cancellationToken
+        ) => Task.Run(() => GetItems(directoryPath, cancellationToken), cancellationToken);
 
-        private ImmutableArray<CompletionItem> GetItems(string directoryPath, CancellationToken cancellationToken)
+        private ImmutableArray<CompletionItem> GetItems(
+            string directoryPath,
+            CancellationToken cancellationToken
+        )
         {
-            if (!PathUtilities.IsUnixLikePlatform && directoryPath.Length == 1 && directoryPath[0] == '\\')
+            if (
+                !PathUtilities.IsUnixLikePlatform
+                && directoryPath.Length == 1
+                && directoryPath[0] == '\\'
+            )
             {
-                // The user has typed only "\".  In this case, we want to add "\\" to the list.  
+                // The user has typed only "\".  In this case, we want to add "\\" to the list.
                 return ImmutableArray.Create(CreateNetworkRoot());
             }
 
@@ -147,7 +172,9 @@ namespace Microsoft.CodeAnalysis.Completion
                     {
                         foreach (var drive in GetLogicalDrives())
                         {
-                            result.Add(CreateLogicalDriveItem(drive.TrimEnd(s_windowsDirectorySeparator)));
+                            result.Add(
+                                CreateLogicalDriveItem(drive.TrimEnd(s_windowsDirectorySeparator))
+                            );
                         }
 
                         result.Add(CreateNetworkRoot());
@@ -165,7 +192,11 @@ namespace Microsoft.CodeAnalysis.Completion
                 case PathKind.RelativeToCurrentDirectory:
                 case PathKind.RelativeToCurrentParent:
                 case PathKind.RelativeToCurrentRoot:
-                    var fullDirectoryPath = FileUtilities.ResolveRelativePath(directoryPath, basePath: null, baseDirectory: _baseDirectory);
+                    var fullDirectoryPath = FileUtilities.ResolveRelativePath(
+                        directoryPath,
+                        basePath: null,
+                        baseDirectory: _baseDirectory
+                    );
                     if (fullDirectoryPath != null)
                     {
                         result.AddRange(GetItemsInDirectory(fullDirectoryPath, cancellationToken));
@@ -183,13 +214,29 @@ namespace Microsoft.CodeAnalysis.Completion
                     // base directory:
                     if (_baseDirectory != null)
                     {
-                        result.AddRange(GetItemsInDirectory(PathUtilities.CombineAbsoluteAndRelativePaths(_baseDirectory, directoryPath)!, cancellationToken));
+                        result.AddRange(
+                            GetItemsInDirectory(
+                                PathUtilities.CombineAbsoluteAndRelativePaths(
+                                    _baseDirectory,
+                                    directoryPath
+                                )!,
+                                cancellationToken
+                            )
+                        );
                     }
 
                     // search paths:
                     foreach (var searchPath in _searchPaths)
                     {
-                        result.AddRange(GetItemsInDirectory(PathUtilities.CombineAbsoluteAndRelativePaths(searchPath, directoryPath)!, cancellationToken));
+                        result.AddRange(
+                            GetItemsInDirectory(
+                                PathUtilities.CombineAbsoluteAndRelativePaths(
+                                    searchPath,
+                                    directoryPath
+                                )!,
+                                cancellationToken
+                            )
+                        );
                     }
 
                     break;
@@ -211,7 +258,10 @@ namespace Microsoft.CodeAnalysis.Completion
             return result.ToImmutableAndFree();
         }
 
-        private IEnumerable<CompletionItem> GetItemsInDirectory(string fullDirectoryPath, CancellationToken cancellationToken)
+        private IEnumerable<CompletionItem> GetItemsInDirectory(
+            string fullDirectoryPath,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullDirectoryPath));
 
@@ -236,10 +286,15 @@ namespace Microsoft.CodeAnalysis.Completion
 
             foreach (var file in EnumerateFiles(fullDirectoryPath))
             {
-                if (_allowableExtensions.Length != 0 &&
-                    !_allowableExtensions.Contains(
+                if (
+                    _allowableExtensions.Length != 0
+                    && !_allowableExtensions.Contains(
                         PathUtilities.GetExtension(file),
-                        PathUtilities.IsUnixLikePlatform ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase))
+                        PathUtilities.IsUnixLikePlatform
+                            ? StringComparer.Ordinal
+                            : StringComparer.OrdinalIgnoreCase
+                    )
+                )
                 {
                     continue;
                 }
@@ -253,18 +308,19 @@ namespace Microsoft.CodeAnalysis.Completion
             }
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly FileSystemCompletionHelper _fileSystemCompletionHelper;
 
-            public TestAccessor(FileSystemCompletionHelper fileSystemCompletionHelper)
-                => _fileSystemCompletionHelper = fileSystemCompletionHelper;
+            public TestAccessor(FileSystemCompletionHelper fileSystemCompletionHelper) =>
+                _fileSystemCompletionHelper = fileSystemCompletionHelper;
 
-            internal ImmutableArray<CompletionItem> GetItems(string directoryPath, CancellationToken cancellationToken)
-                => _fileSystemCompletionHelper.GetItems(directoryPath, cancellationToken);
+            internal ImmutableArray<CompletionItem> GetItems(
+                string directoryPath,
+                CancellationToken cancellationToken
+            ) => _fileSystemCompletionHelper.GetItems(directoryPath, cancellationToken);
         }
     }
 }

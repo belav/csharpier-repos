@@ -4,15 +4,40 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class IsolatedStorageFilePermission : IsolatedStoragePermission
     {
-        public IsolatedStorageFilePermission(PermissionState state) : base(state) { }
-        public override IPermission Union(IPermission target) { return null; }
-        public override bool IsSubsetOf(IPermission target) { return false; }
-        public override IPermission Intersect(IPermission target) { return null; }
-        public override IPermission Copy() { return null; }
-        public override SecurityElement ToXml() { return null; }
+        public IsolatedStorageFilePermission(PermissionState state)
+            : base(state) { }
+
+        public override IPermission Union(IPermission target)
+        {
+            return null;
+        }
+
+        public override bool IsSubsetOf(IPermission target)
+        {
+            return false;
+        }
+
+        public override IPermission Intersect(IPermission target)
+        {
+            return null;
+        }
+
+        public override IPermission Copy()
+        {
+            return null;
+        }
+
+        public override SecurityElement ToXml()
+        {
+            return null;
+        }
     }
 }

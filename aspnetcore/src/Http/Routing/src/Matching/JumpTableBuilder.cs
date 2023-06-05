@@ -9,7 +9,11 @@ internal static class JumpTableBuilder
 {
     public const int InvalidDestination = -1;
 
-    public static JumpTable Build(int defaultDestination, int exitDestination, (string text, int destination)[] pathEntries)
+    public static JumpTable Build(
+        int defaultDestination,
+        int exitDestination,
+        (string text, int destination)[] pathEntries
+    )
     {
         if (defaultDestination == InvalidDestination)
         {
@@ -44,14 +48,24 @@ internal static class JumpTableBuilder
         if (pathEntries.Length == 1 && Ascii.IsAscii(pathEntries[0].text))
         {
             var entry = pathEntries[0];
-            return new SingleEntryAsciiJumpTable(defaultDestination, exitDestination, entry.text, entry.destination);
+            return new SingleEntryAsciiJumpTable(
+                defaultDestination,
+                exitDestination,
+                entry.text,
+                entry.destination
+            );
         }
 
         // We have a fallback that works for non-ASCII
         if (pathEntries.Length == 1)
         {
             var entry = pathEntries[0];
-            return new SingleEntryJumpTable(defaultDestination, exitDestination, entry.text, entry.destination);
+            return new SingleEntryJumpTable(
+                defaultDestination,
+                exitDestination,
+                entry.text,
+                entry.destination
+            );
         }
 
         // We choose a hard upper bound of 100 as the limit for when we switch to a dictionary
@@ -88,8 +102,14 @@ internal static class JumpTableBuilder
         if (RuntimeFeature.IsDynamicCodeCompiled)
         {
 #pragma warning disable IL3050 // See https://github.com/dotnet/linker/issues/2715.
-            return new ILEmitTrieJumpTable(defaultDestination, exitDestination, pathEntries, vectorize: null, fallback);
-#pragma warning restore IL3050 
+            return new ILEmitTrieJumpTable(
+                defaultDestination,
+                exitDestination,
+                pathEntries,
+                vectorize: null,
+                fallback
+            );
+#pragma warning restore IL3050
         }
 
         return fallback;

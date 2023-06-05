@@ -21,13 +21,17 @@ namespace System.IO.Tests
         [Fact]
         public static void NegativeBufferSize_Throws_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new BufferedStream(new MemoryStream(), -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new BufferedStream(new MemoryStream(), -1)
+            );
         }
 
         [Fact]
         public static void ZeroBufferSize_Throws_ArgumentNullException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new BufferedStream(new MemoryStream(), 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new BufferedStream(new MemoryStream(), 0)
+            );
         }
 
         [Fact]
@@ -130,17 +134,27 @@ namespace System.IO.Tests
 
         [Theory]
         [MemberData(nameof(SetPosMethods))]
-        public void SetPositionInsideBufferRange_Read_WillNotReadUnderlyingStreamAgain(int sharedBufSize, Action<Stream, long> setPos)
+        public void SetPositionInsideBufferRange_Read_WillNotReadUnderlyingStreamAgain(
+            int sharedBufSize,
+            Action<Stream, long> setPos
+        )
         {
             var trackingStream = new CallTrackingStream(new MemoryStream());
             var bufferedStream = new BufferedStream(trackingStream, sharedBufSize);
-            bufferedStream.Write(Enumerable.Range(0, sharedBufSize * 2).Select(i => (byte)i).ToArray(), 0, sharedBufSize * 2);
+            bufferedStream.Write(
+                Enumerable.Range(0, sharedBufSize * 2).Select(i => (byte)i).ToArray(),
+                0,
+                sharedBufSize * 2
+            );
             setPos(bufferedStream, 0);
 
             var readBuf = new byte[sharedBufSize - 1];
 
             // First half part verification
-            byte[] expectedReadBuf = Enumerable.Range(0, sharedBufSize - 1).Select(i => (byte)i).ToArray();
+            byte[] expectedReadBuf = Enumerable
+                .Range(0, sharedBufSize - 1)
+                .Select(i => (byte)i)
+                .ToArray();
 
             // Call Read() to fill shared read buffer
             int readBytes = bufferedStream.Read(readBuf, 0, readBuf.Length);
@@ -168,7 +182,10 @@ namespace System.IO.Tests
             Assert.Equal(1, trackingStream.TimesCalled(nameof(trackingStream.Read)));
 
             // Second half part verification
-            expectedReadBuf = Enumerable.Range(sharedBufSize, sharedBufSize - 1).Select(i => (byte)i).ToArray();
+            expectedReadBuf = Enumerable
+                .Range(sharedBufSize, sharedBufSize - 1)
+                .Select(i => (byte)i)
+                .ToArray();
             // Call Read() to fill shared read buffer
             readBytes = bufferedStream.Read(readBuf, 0, readBuf.Length);
             Assert.Equal(readBuf.Length, readBytes);
@@ -200,9 +217,16 @@ namespace System.IO.Tests
             get
             {
                 var setByPosition = (Action<Stream, long>)((stream, pos) => stream.Position = pos);
-                var seekFromBegin = (Action<Stream, long>)((stream, pos) => stream.Seek(pos, SeekOrigin.Begin));
-                var seekFromCurrent = (Action<Stream, long>)((stream, pos) => stream.Seek(pos - stream.Position, SeekOrigin.Current));
-                var seekFromEnd = (Action<Stream, long>)((stream, pos) => stream.Seek(pos - stream.Length, SeekOrigin.End));
+                var seekFromBegin =
+                    (Action<Stream, long>)((stream, pos) => stream.Seek(pos, SeekOrigin.Begin));
+                var seekFromCurrent =
+                    (Action<Stream, long>)(
+                        (stream, pos) => stream.Seek(pos - stream.Position, SeekOrigin.Current)
+                    );
+                var seekFromEnd =
+                    (Action<Stream, long>)(
+                        (stream, pos) => stream.Seek(pos - stream.Length, SeekOrigin.End)
+                    );
 
                 yield return new object[] { 3, setByPosition };
                 yield return new object[] { 3, seekFromBegin };
@@ -296,7 +320,10 @@ namespace System.IO.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public async Task CopyToTest_ReadBeforeCopy_CopiesAllData(bool copyAsynchronously, bool wrappedStreamCanSeek)
+        public async Task CopyToTest_ReadBeforeCopy_CopiesAllData(
+            bool copyAsynchronously,
+            bool wrappedStreamCanSeek
+        )
         {
             byte[] data = Enumerable.Range(0, 1000).Select(i => (byte)(i % 256)).ToArray();
 
@@ -346,7 +373,18 @@ namespace System.IO.Tests
                 stream.Write(data2);
             }
 
-            using (var stream = new BufferedStream(new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None, bufferSize: 0, FileOptions.DeleteOnClose)))
+            using (
+                var stream = new BufferedStream(
+                    new FileStream(
+                        filePath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.None,
+                        bufferSize: 0,
+                        FileOptions.DeleteOnClose
+                    )
+                )
+            )
             {
                 stream.Seek(position1, SeekOrigin.Begin);
                 Assert.Equal(buffer.Length, stream.Read(buffer));
@@ -385,7 +423,12 @@ namespace System.IO.Tests
         [Fact]
         public void WriteAfterRead_NonSeekableStream_Throws()
         {
-            var wrapped = new WrappedMemoryStream(canRead: true, canWrite: true, canSeek: false, data: new byte[] { 1, 2, 3, 4, 5 });
+            var wrapped = new WrappedMemoryStream(
+                canRead: true,
+                canWrite: true,
+                canSeek: false,
+                data: new byte[] { 1, 2, 3, 4, 5 }
+            );
             var s = new BufferedStream(wrapped);
 
             s.Read(new byte[3], 0, 3);
@@ -478,7 +521,9 @@ namespace System.IO.Tests
     internal sealed class ManuallyReleaseAsyncOperationsStream : Stream
     {
         private readonly MemoryStream _stream = new MemoryStream();
-        private readonly TaskCompletionSource _tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _tcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         private bool _canSeek = true;
 
         public override bool CanSeek => _canSeek;
@@ -489,19 +534,33 @@ namespace System.IO.Tests
 
         public override long Length => _stream.Length;
 
-        public override long Position { get => _stream.Position; set => _stream.Position = value; }
+        public override long Position
+        {
+            get => _stream.Position;
+            set => _stream.Position = value;
+        }
 
         public void SetCanSeek(bool canSeek) => _canSeek = canSeek;
 
         public void Release() => _tcs.SetResult();
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             await _tcs.Task;
             return await _stream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             await _tcs.Task;
             await _stream.WriteAsync(buffer, offset, count, cancellationToken);
@@ -514,10 +573,16 @@ namespace System.IO.Tests
         }
 
         public override void Flush() => _stream.Flush();
-        public override int Read(byte[] buffer, int offset, int count) => _stream.Read(buffer, offset, count);
+
+        public override int Read(byte[] buffer, int offset, int count) =>
+            _stream.Read(buffer, offset, count);
+
         public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+
         public override void SetLength(long value) => _stream.SetLength(value);
-        public override void Write(byte[] buffer, int offset, int count) => _stream.Write(buffer, offset, count);
+
+        public override void Write(byte[] buffer, int offset, int count) =>
+            _stream.Write(buffer, offset, count);
     }
 
     internal sealed class ThrowsExceptionFromAsyncOperationsStream : MemoryStream
@@ -528,11 +593,19 @@ namespace System.IO.Tests
         public override void Write(byte[] buffer, int offset, int count) =>
             throw new InvalidOperationException("Exception from ReadAsync");
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
-            throw new InvalidOperationException("Exception from ReadAsync");
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => throw new InvalidOperationException("Exception from ReadAsync");
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
-            throw new InvalidOperationException("Exception from WriteAsync");
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => throw new InvalidOperationException("Exception from WriteAsync");
 
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             throw new InvalidOperationException("Exception from FlushAsync");
@@ -542,9 +615,7 @@ namespace System.IO.Tests
     {
         private long _pos;
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

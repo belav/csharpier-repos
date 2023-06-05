@@ -21,9 +21,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
         [InlineData("<>F`6", false, 0, 5)]
         [InlineData("<>F`19", false, 0, 18)]
         [InlineData("<>F#3`19", false, 3, 18)]
-        public void TryParseSynthesizedDelegateName_Success(string name, bool returnsVoid, int generation, int parameterCount)
+        public void TryParseSynthesizedDelegateName_Success(
+            string name,
+            bool returnsVoid,
+            int generation,
+            int parameterCount
+        )
         {
-            Assert.True(GeneratedNames.TryParseSynthesizedDelegateName(name, out var actualByRefs, out var actualReturnsVoid, out var actualGeneration, out var actualParameterCount));
+            Assert.True(
+                GeneratedNames.TryParseSynthesizedDelegateName(
+                    name,
+                    out var actualByRefs,
+                    out var actualReturnsVoid,
+                    out var actualGeneration,
+                    out var actualParameterCount
+                )
+            );
 
             Assert.Equal(returnsVoid, actualReturnsVoid);
             Assert.Equal(generation, actualGeneration);
@@ -31,7 +44,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 
             // We need to strip arity in order to validate round-tripping
             name = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(name, out _);
-            Assert.Equal(name, GeneratedNames.MakeSynthesizedDelegateName(actualByRefs, actualReturnsVoid, actualGeneration));
+            Assert.Equal(
+                name,
+                GeneratedNames.MakeSynthesizedDelegateName(
+                    actualByRefs,
+                    actualReturnsVoid,
+                    actualGeneration
+                )
+            );
         }
 
         [Theory]
@@ -48,7 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
         [InlineData("<>A{,1}")]
         public void TryParseSynthesizedDelegateName_Failure(string name)
         {
-            Assert.False(GeneratedNames.TryParseSynthesizedDelegateName(name, out _, out _, out _, out _));
+            Assert.False(
+                GeneratedNames.TryParseSynthesizedDelegateName(name, out _, out _, out _, out _)
+            );
         }
     }
 }

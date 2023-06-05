@@ -20,20 +20,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
 {
     public abstract class AbstractSemanticTokensTests : AbstractLanguageServerProtocolTests
     {
-        protected AbstractSemanticTokensTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        protected AbstractSemanticTokensTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
-        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangeAsync(TestLspServer testLspServer, LSP.Location caret, LSP.Range range)
+        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangeAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret,
+            LSP.Range range
+        )
         {
-            var result = await testLspServer.ExecuteRequestAsync<LSP.SemanticTokensRangeParams, LSP.SemanticTokens>(LSP.Methods.TextDocumentSemanticTokensRangeName,
-                CreateSemanticTokensRangeParams(caret, range), CancellationToken.None);
+            var result = await testLspServer.ExecuteRequestAsync<
+                LSP.SemanticTokensRangeParams,
+                LSP.SemanticTokens
+            >(
+                LSP.Methods.TextDocumentSemanticTokensRangeName,
+                CreateSemanticTokensRangeParams(caret, range),
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return result;
         }
 
-        private static LSP.SemanticTokensRangeParams CreateSemanticTokensRangeParams(LSP.Location caret, LSP.Range range)
-            => new LSP.SemanticTokensRangeParams
+        private static LSP.SemanticTokensRangeParams CreateSemanticTokensRangeParams(
+            LSP.Location caret,
+            LSP.Range range
+        ) =>
+            new LSP.SemanticTokensRangeParams
             {
                 TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri },
                 Range = range
@@ -42,12 +54,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         protected static async Task UpdateDocumentTextAsync(string updatedText, Workspace workspace)
         {
             var docId = ((TestWorkspace)workspace).Documents.First().Id;
-            await ((TestWorkspace)workspace).ChangeDocumentAsync(docId, SourceText.From(updatedText));
+            await ((TestWorkspace)workspace).ChangeDocumentAsync(
+                docId,
+                SourceText.From(updatedText)
+            );
         }
 
         // VS doesn't currently support multi-line tokens, so we want to verify that we aren't
         // returning any in the tokens array.
-        private protected static async Task VerifyNoMultiLineTokens(TestLspServer testLspServer, int[] tokens)
+        private protected static async Task VerifyNoMultiLineTokens(
+            TestLspServer testLspServer,
+            int[] tokens
+        )
         {
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var text = await document.GetTextAsync().ConfigureAwait(false);
@@ -82,9 +100,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
                 var lineLength = text.Lines[currentLine].Span.Length;
 
                 // If this assertion fails, we didn't break up a multi-line token properly.
-                Assert.True(currentChar + tokenLength <= lineLength,
-                    $"Multi-line token found on line {currentLine} at character index {currentChar}. " +
-                    $"The token ends at index {currentChar + tokenLength}, which exceeds the line length of {lineLength}.");
+                Assert.True(
+                    currentChar + tokenLength <= lineLength,
+                    $"Multi-line token found on line {currentLine} at character index {currentChar}. "
+                        + $"The token ends at index {currentChar + tokenLength}, which exceeds the line length of {lineLength}."
+                );
             }
         }
     }

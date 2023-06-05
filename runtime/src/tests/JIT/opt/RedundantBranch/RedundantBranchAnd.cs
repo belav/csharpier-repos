@@ -115,13 +115,12 @@ class RedundantBranchAnd
         return 3;
     }
 
-
     public static int Main()
     {
-        Func<int, int, int>[] funcs = {And_00, And_01, And_02, And_03, And_04, And_05, And_06};
+        Func<int, int, int>[] funcs = { And_00, And_01, And_02, And_03, And_04, And_05, And_06 };
         int funcNum = 0;
         int cases = 0;
-        int errors= 0;
+        int errors = 0;
 
         foreach (var f in funcs)
         {
@@ -139,7 +138,7 @@ class RedundantBranchAnd
                     }
                 }
             }
-            
+
             funcNum++;
         }
 

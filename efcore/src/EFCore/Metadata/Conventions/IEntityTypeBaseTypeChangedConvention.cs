@@ -22,5 +22,6 @@ public interface IEntityTypeBaseTypeChangedConvention : IConvention
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context);
+        IConventionContext<IConventionEntityType> context
+    );
 }

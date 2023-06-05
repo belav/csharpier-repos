@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Bug14200()
         {
             var text =
-@"abstract class A
+                @"abstract class A
 {
     public abstract object this[object x] = { get; }
 }";
@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void OmittedArraySize()
         {
             var text =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -55,7 +55,7 @@ class/*</bind>*/ B
         public void NullableObjCreation()
         {
             var text =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -82,7 +82,7 @@ class/*</bind>*/ B
         public void ConstructedTypeWithConstructedErrorTypeArgument()
         {
             var text =
-@"class A<T> { }
+                @"class A<T> { }
 class C
 {
     static void M()
@@ -101,8 +101,7 @@ class C
         [Fact]
         public void ExpressionInStructuredTrivia()
         {
-            var text =
-@"#if e==true";
+            var text = @"#if e==true";
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
@@ -117,7 +116,7 @@ class C
         public void Bug16411()
         {
             var text =
-@"class C
+                @"class C
 {
     void M1()
     {
@@ -139,7 +138,7 @@ class C
         public void Bug17789()
         {
             var text =
-@"delegate U D<T, U>(T t);
+                @"delegate U D<T, U>(T t);
 static class C
 {
     static string[] M(string[] s)
@@ -169,7 +168,7 @@ static class C
         public void IsImplicitlyDeclared()
         {
             var text =
-@"object F;
+                @"object F;
 abstract object P { get; set; }
 abstract void M();";
             var tree = Parse(text);
@@ -197,9 +196,15 @@ abstract void M();";
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            Assert.Empty(tree.GetCompilationUnitRoot().DescendantNodes().OfType<UsingDirectiveSyntax>());
+            Assert.Empty(
+                tree.GetCompilationUnitRoot().DescendantNodes().OfType<UsingDirectiveSyntax>()
+            );
 
-            foreach (var identifierSyntax in tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>())
+            foreach (
+                var identifierSyntax in tree.GetCompilationUnitRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+            )
             {
                 model.GetSymbolInfo(identifierSyntax);
             }
@@ -209,7 +214,8 @@ abstract void M();";
         [Fact]
         public void UsingStatementInDelegateInArrayRankInType()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void Test()
@@ -221,7 +227,10 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var usingSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<UsingStatementSyntax>().Single();
+            var usingSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<UsingStatementSyntax>()
+                .Single();
 
             model.GetSymbolInfo(usingSyntax.Expression);
         }
@@ -230,7 +239,8 @@ class C
         [Fact]
         public void TypeOfInUnexpectedDelegate()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void Test()
@@ -242,7 +252,10 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var typeOfSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<TypeOfExpressionSyntax>().Single();
+            var typeOfSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<TypeOfExpressionSyntax>()
+                .Single();
 
             var info = model.GetTypeInfo(typeOfSyntax); //Used to throw
             Assert.Equal(comp.GetWellKnownType(WellKnownType.System_Type), info.Type);
@@ -252,7 +265,8 @@ class C
         [Fact]
         public void UnexpectedDelegateInTypeOf()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void Test()
@@ -264,7 +278,10 @@ class C
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var literalSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LiteralExpressionSyntax>().Single();
+            var literalSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .Single();
             Assert.Equal(SyntaxKind.NumericLiteralExpression, literalSyntax.Kind());
 
             var info = model.GetTypeInfo(literalSyntax); //Used to throw
@@ -275,7 +292,8 @@ class C
         [Fact]
         public void Bug1014561()
         {
-            var source = @"
+            var source =
+                @"
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
@@ -297,7 +315,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var identifierSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Single(n => n.Identifier.ValueText == "CompletionItem");
+            var identifierSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Single(n => n.Identifier.ValueText == "CompletionItem");
 
             var info = model.GetSymbolInfo(identifierSyntax); //Used to throw
         }
@@ -307,7 +328,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public void MissingNullableType()
         {
             var text =
-@"class C
+                @"class C
 {
     object F = typeof(int?);
 }";
@@ -322,7 +343,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public void MissingPointerType()
         {
             var text =
-@"class C
+                @"class C
 {
     object F = typeof(int*);
 }";
@@ -337,7 +358,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public void MissingArrayType()
         {
             var text =
-@"class C
+                @"class C
 {
     object F = typeof(int[]);
 }";
@@ -352,7 +373,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public void OmittedTypeArgument()
         {
             var text =
-@"class C<T, U>
+                @"class C<T, U>
 {
     static object F = new C<,>();
 }";

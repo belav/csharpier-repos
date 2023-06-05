@@ -55,9 +55,9 @@ namespace System.Security.Cryptography
 
             private byte[] ExportKeyBlob(bool includePrivateParameters)
             {
-                string blobType = includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_RSAFULLPRIVATE_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB;
+                string blobType = includePrivateParameters
+                    ? Interop.BCrypt.KeyBlobType.BCRYPT_RSAFULLPRIVATE_BLOB
+                    : Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB;
 
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
@@ -77,7 +77,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<char> pkcs8Password,
                 int kdfCount,
                 Span<byte> destination,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 using (SafeNCryptKeyHandle keyHandle = GetDuplicatedKeyHandle())
                 {
@@ -86,7 +87,8 @@ namespace System.Security.Cryptography
                         pkcs8Password,
                         kdfCount,
                         destination,
-                        out bytesWritten);
+                        out bytesWritten
+                    );
                 }
             }
 
@@ -144,7 +146,6 @@ namespace System.Security.Cryptography
                     _keyHandle = null!;
                     _disposed = true;
                 }
-
 
                 base.Dispose(disposing);
             }

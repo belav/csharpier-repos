@@ -98,7 +98,10 @@ public static class ViewDataEvaluator
         return InnerEvalComplexExpression(indexableObject, expression);
     }
 
-    private static ViewDataInfo InnerEvalComplexExpression(object indexableObject, string expression)
+    private static ViewDataInfo InnerEvalComplexExpression(
+        object indexableObject,
+        string expression
+    )
     {
         Debug.Assert(expression != null);
         var leftExpression = expression;
@@ -125,8 +128,7 @@ public static class ViewDataEvaluator
             }
 
             leftExpression = GetNextShorterExpression(leftExpression);
-        }
-        while (!string.IsNullOrEmpty(leftExpression));
+        } while (!string.IsNullOrEmpty(leftExpression));
 
         return null;
     }

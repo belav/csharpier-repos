@@ -18,9 +18,10 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
-    internal enum ConfigurationLockCollectionType {
+namespace System.Configuration
+{
+    internal enum ConfigurationLockCollectionType
+    {
         LockedAttributes = 1,
         LockedExceptionList = 2,
         LockedElements = 3,

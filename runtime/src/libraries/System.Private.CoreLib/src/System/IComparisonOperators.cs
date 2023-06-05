@@ -15,8 +15,8 @@ namespace System
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
     public interface IComparisonOperators<TSelf, TOther>
         : IComparable,
-          IComparable<TOther>,
-          IEqualityOperators<TSelf, TOther>
+            IComparable<TOther>,
+            IEqualityOperators<TSelf, TOther>
         where TSelf : IComparisonOperators<TSelf, TOther>
     {
         /// <summary>Compares two values to determine which is less.</summary>

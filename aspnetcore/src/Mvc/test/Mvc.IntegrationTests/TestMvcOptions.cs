@@ -21,7 +21,9 @@ public class TestMvcOptions : IOptions<MvcOptions>
         optionsSetup.Configure(Value);
 
         var validationAttributeAdapterProvider = new ValidationAttributeAdapterProvider();
-        var dataAnnotationLocalizationOptions = Options.Create(new MvcDataAnnotationsLocalizationOptions());
+        var dataAnnotationLocalizationOptions = Options.Create(
+            new MvcDataAnnotationsLocalizationOptions()
+        );
         var stringLocalizer = new Mock<IStringLocalizer>();
         var stringLocalizerFactory = new Mock<IStringLocalizerFactory>();
         stringLocalizerFactory
@@ -31,7 +33,8 @@ public class TestMvcOptions : IOptions<MvcOptions>
         var dataAnnotationOptionsSetup = new MvcDataAnnotationsMvcOptionsSetup(
             validationAttributeAdapterProvider,
             dataAnnotationLocalizationOptions,
-            stringLocalizerFactory.Object);
+            stringLocalizerFactory.Object
+        );
         dataAnnotationOptionsSetup.Configure(Value);
 
         var loggerFactory = new LoggerFactory();
@@ -43,7 +46,8 @@ public class TestMvcOptions : IOptions<MvcOptions>
             loggerFactory,
             jsonOptions,
             charPool,
-            objectPoolProvider);
+            objectPoolProvider
+        );
         mvcJsonMvcOptionsSetup.Configure(Value);
     }
 

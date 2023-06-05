@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,27 +31,27 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class DataControlCommands
-	{
-		public const string CancelCommandName = "Cancel";
-		public const string DeleteCommandName = "Delete";
-		public const string EditCommandName = "Edit";
-		public const string FirstPageCommandArgument = "First";
-		public const string InsertCommandName = "Insert";
-		public const string LastPageCommandArgument = "Last";
-		public const string NextPageCommandArgument = "Next";
-		public const string NewCommandName = "New";
-		public const string PageCommandName = "Page";
-		public const string PreviousPageCommandArgument = "Prev";
-		public const string SelectCommandName = "Select";
-		public const string SortCommandName = "Sort";
-		public const string UpdateCommandName = "Update";
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class DataControlCommands
+    {
+        public const string CancelCommandName = "Cancel";
+        public const string DeleteCommandName = "Delete";
+        public const string EditCommandName = "Edit";
+        public const string FirstPageCommandArgument = "First";
+        public const string InsertCommandName = "Insert";
+        public const string LastPageCommandArgument = "Last";
+        public const string NextPageCommandArgument = "Next";
+        public const string NewCommandName = "New";
+        public const string PageCommandName = "Page";
+        public const string PreviousPageCommandArgument = "Prev";
+        public const string SelectCommandName = "Select";
+        public const string SortCommandName = "Sort";
+        public const string UpdateCommandName = "Update";
 
-		DataControlCommands ()
-		{
-		}
-	}
+        DataControlCommands() { }
+    }
 }
-

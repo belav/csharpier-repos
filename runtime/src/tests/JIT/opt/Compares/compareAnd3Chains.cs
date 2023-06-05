@@ -23,7 +23,8 @@ public class ComparisonTestAnd3Chains
     public static bool Eq_long_3(long a1, long a2, long a3) => a1 == 10 & a2 == 11 & a3 == 12;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Eq_ushort_3(ushort a1, ushort a2, ushort a3) => a1 == 10 & a2 == 11 & a3 == 12;
+    public static bool Eq_ushort_3(ushort a1, ushort a2, ushort a3) =>
+        a1 == 10 & a2 == 11 & a3 == 12;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Eq_uint_3(uint a1, uint a2, uint a3) => a1 == 10 & a2 == 11 & a3 == 12;
@@ -32,11 +33,12 @@ public class ComparisonTestAnd3Chains
     public static bool Eq_ulong_3(ulong a1, ulong a2, ulong a3) => a1 == 10 & a2 == 11 & a3 == 12;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Eq_float_3(float a1, float a2, float a3) => a1 == 10.5f & a2 == 11.5f & a3 == 12.5f;
+    public static bool Eq_float_3(float a1, float a2, float a3) =>
+        a1 == 10.5f & a2 == 11.5f & a3 == 12.5f;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Eq_double_3(double a1, double a2, double a3) => a1 == 10.5 & a2 == 11.5 & a3 == 12.5;
-
+    public static bool Eq_double_3(double a1, double a2, double a3) =>
+        a1 == 10.5 & a2 == 11.5 & a3 == 12.5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_byte_3(byte a1, byte a2, byte a3) => a1 != 5 & a2 != 5 & a3 != 5;
@@ -60,11 +62,12 @@ public class ComparisonTestAnd3Chains
     public static bool Ne_ulong_3(ulong a1, ulong a2, ulong a3) => a1 != 5 & a2 != 5 & a3 != 5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Ne_float_3(float a1, float a2, float a3) => a1 != 5.5f & a2 != 5.5f & a3 != 5.5f;
+    public static bool Ne_float_3(float a1, float a2, float a3) =>
+        a1 != 5.5f & a2 != 5.5f & a3 != 5.5f;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Ne_double_3(double a1, double a2, double a3) => a1 != 5.5 & a2 != 5.5 & a3 != 5.5;
-
+    public static bool Ne_double_3(double a1, double a2, double a3) =>
+        a1 != 5.5 & a2 != 5.5 & a3 != 5.5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_byte_3(byte a1, byte a2, byte a3) => a1 < 5 & a2 < 5 & a3 < 5;
@@ -88,11 +91,12 @@ public class ComparisonTestAnd3Chains
     public static bool Lt_ulong_3(ulong a1, ulong a2, ulong a3) => a1 < 5 & a2 < 5 & a3 < 5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Lt_float_3(float a1, float a2, float a3) => a1 < 5.5f & a2 < 5.5f & a3 < 5.5f;
+    public static bool Lt_float_3(float a1, float a2, float a3) =>
+        a1 < 5.5f & a2 < 5.5f & a3 < 5.5f;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Lt_double_3(double a1, double a2, double a3) => a1 < 5.5 & a2 < 5.5 & a3 < 5.5;
-
+    public static bool Lt_double_3(double a1, double a2, double a3) =>
+        a1 < 5.5 & a2 < 5.5 & a3 < 5.5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_byte_3(byte a1, byte a2, byte a3) => a1 <= 5 & a2 <= 5 & a3 <= 5;
@@ -116,11 +120,12 @@ public class ComparisonTestAnd3Chains
     public static bool Le_ulong_3(ulong a1, ulong a2, ulong a3) => a1 <= 5 & a2 <= 5 & a3 <= 5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Le_float_3(float a1, float a2, float a3) => a1 <= 5.5f & a2 <= 5.5f & a3 <= 5.5f;
+    public static bool Le_float_3(float a1, float a2, float a3) =>
+        a1 <= 5.5f & a2 <= 5.5f & a3 <= 5.5f;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Le_double_3(double a1, double a2, double a3) => a1 <= 5.5 & a2 <= 5.5 & a3 <= 5.5;
-
+    public static bool Le_double_3(double a1, double a2, double a3) =>
+        a1 <= 5.5 & a2 <= 5.5 & a3 <= 5.5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_byte_3(byte a1, byte a2, byte a3) => a1 > 5 & a2 > 5 & a3 > 5;
@@ -144,11 +149,12 @@ public class ComparisonTestAnd3Chains
     public static bool Gt_ulong_3(ulong a1, ulong a2, ulong a3) => a1 > 5 & a2 > 5 & a3 > 5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Gt_float_3(float a1, float a2, float a3) => a1 > 5.5f & a2 > 5.5f & a3 > 5.5f;
+    public static bool Gt_float_3(float a1, float a2, float a3) =>
+        a1 > 5.5f & a2 > 5.5f & a3 > 5.5f;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Gt_double_3(double a1, double a2, double a3) => a1 > 5.5 & a2 > 5.5 & a3 > 5.5;
-
+    public static bool Gt_double_3(double a1, double a2, double a3) =>
+        a1 > 5.5 & a2 > 5.5 & a3 > 5.5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_byte_3(byte a1, byte a2, byte a3) => a1 >= 5 & a2 >= 5 & a3 >= 5;
@@ -172,11 +178,12 @@ public class ComparisonTestAnd3Chains
     public static bool Ge_ulong_3(ulong a1, ulong a2, ulong a3) => a1 >= 5 & a2 >= 5 & a3 >= 5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Ge_float_3(float a1, float a2, float a3) => a1 >= 5.5f & a2 >= 5.5f & a3 >= 5.5f;
+    public static bool Ge_float_3(float a1, float a2, float a3) =>
+        a1 >= 5.5f & a2 >= 5.5f & a3 >= 5.5f;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Ge_double_3(double a1, double a2, double a3) => a1 >= 5.5 & a2 >= 5.5 & a3 >= 5.5;
-
+    public static bool Ge_double_3(double a1, double a2, double a3) =>
+        a1 >= 5.5 & a2 >= 5.5 & a3 >= 5.5;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Main()

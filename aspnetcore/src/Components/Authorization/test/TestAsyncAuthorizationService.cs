@@ -8,13 +8,24 @@ namespace Microsoft.AspNetCore.Components.Authorization;
 
 public class TestAsyncAuthorizationService : IAuthorizationService
 {
-    public AuthorizationResult NextResult { get; set; }
-        = AuthorizationResult.Failed();
+    public AuthorizationResult NextResult { get; set; } = AuthorizationResult.Failed();
 
-    public List<(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)> AuthorizeCalls { get; }
-        = new List<(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)>();
+    public List<(
+        ClaimsPrincipal user,
+        object resource,
+        IEnumerable<IAuthorizationRequirement> requirements
+    )> AuthorizeCalls { get; } =
+        new List<(
+            ClaimsPrincipal user,
+            object resource,
+            IEnumerable<IAuthorizationRequirement> requirements
+        )>();
 
-    public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)
+    public async Task<AuthorizationResult> AuthorizeAsync(
+        ClaimsPrincipal user,
+        object resource,
+        IEnumerable<IAuthorizationRequirement> requirements
+    )
     {
         AuthorizeCalls.Add((user, resource, requirements));
 
@@ -28,7 +39,9 @@ public class TestAsyncAuthorizationService : IAuthorizationService
         return NextResult;
     }
 
-    public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, string policyName)
-        => throw new NotImplementedException();
-
+    public Task<AuthorizationResult> AuthorizeAsync(
+        ClaimsPrincipal user,
+        object resource,
+        string policyName
+    ) => throw new NotImplementedException();
 }

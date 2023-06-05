@@ -22,8 +22,7 @@ namespace System.Text.Json
         /// <remarks>This calls <see cref="Type.IsValueType"/> which is slow. If knowledge already exists
         /// that the type is a value type, call <see cref="IsNullableOfT"/> instead.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool CanBeNull(this Type type) =>
-            !type.IsValueType || type.IsNullableOfT();
+        public static bool CanBeNull(this Type type) => !type.IsValueType || type.IsNullableOfT();
 
         /// <summary>
         /// Returns <see langword="true" /> when the given type is assignable from <paramref name="from"/> including support

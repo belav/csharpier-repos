@@ -24,7 +24,11 @@ namespace Microsoft.Interop
             return ValidateByValueMarshalKind(info, context, _inner.Create(info, context));
         }
 
-        private static IMarshallingGenerator ValidateByValueMarshalKind(TypePositionInfo info, StubCodeContext context, IMarshallingGenerator generator)
+        private static IMarshallingGenerator ValidateByValueMarshalKind(
+            TypePositionInfo info,
+            StubCodeContext context,
+            IMarshallingGenerator generator
+        )
         {
             if (generator is Forwarder)
             {
@@ -32,7 +36,10 @@ namespace Microsoft.Interop
                 return generator;
             }
 
-            if (info.IsByRef && info.ByValueContentsMarshalKind != ByValueContentsMarshalKind.Default)
+            if (
+                info.IsByRef
+                && info.ByValueContentsMarshalKind != ByValueContentsMarshalKind.Default
+            )
             {
                 throw new MarshallingNotSupportedException(info, context)
                 {
@@ -46,8 +53,10 @@ namespace Microsoft.Interop
                     NotSupportedDetails = SR.InAttributeNotSupportedWithoutOut
                 };
             }
-            else if (info.ByValueContentsMarshalKind != ByValueContentsMarshalKind.Default
-                && !generator.SupportsByValueMarshalKind(info.ByValueContentsMarshalKind, context))
+            else if (
+                info.ByValueContentsMarshalKind != ByValueContentsMarshalKind.Default
+                && !generator.SupportsByValueMarshalKind(info.ByValueContentsMarshalKind, context)
+            )
             {
                 throw new MarshallingNotSupportedException(info, context)
                 {

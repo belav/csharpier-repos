@@ -11,11 +11,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ChannelPoolSettingsElement : ServiceModelConfigurationElement
     {
-        public ChannelPoolSettingsElement()
-        {
-        }
+        public ChannelPoolSettingsElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.IdleTimeout, DefaultValue = OneWayDefaults.IdleTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IdleTimeout,
+            DefaultValue = OneWayDefaults.IdleTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan IdleTimeout
@@ -24,7 +25,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.IdleTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.LeaseTimeout, DefaultValue = OneWayDefaults.LeaseTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.LeaseTimeout,
+            DefaultValue = OneWayDefaults.LeaseTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan LeaseTimeout
@@ -33,7 +37,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.LeaseTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxOutboundChannelsPerEndpoint, DefaultValue = OneWayDefaults.MaxOutboundChannelsPerEndpoint)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxOutboundChannelsPerEndpoint,
+            DefaultValue = OneWayDefaults.MaxOutboundChannelsPerEndpoint
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxOutboundChannelsPerEndpoint
         {
@@ -60,9 +67,18 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("settings");
             }
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.IdleTimeout, settings.IdleTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.LeaseTimeout, settings.LeaseTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxOutboundChannelsPerEndpoint, settings.MaxOutboundChannelsPerEndpoint);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.IdleTimeout,
+                settings.IdleTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.LeaseTimeout,
+                settings.LeaseTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxOutboundChannelsPerEndpoint,
+                settings.MaxOutboundChannelsPerEndpoint
+            );
         }
 
         internal void CopyFrom(ChannelPoolSettingsElement source)
@@ -78,6 +94,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

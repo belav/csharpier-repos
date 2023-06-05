@@ -23,9 +23,9 @@ namespace POS_Server.Controllers
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             bool canDelete = false;
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -34,59 +34,59 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.branchStore
-                                 join B in entity.branches on S.branchId equals B.branchId into JBB 
-                                 join BB in entity.branches on S.storeId equals BB.branchId into JSB
-                                from JBBR in JBB.DefaultIfEmpty()
-                                from JSBB in JSB.DefaultIfEmpty()
-                                select new BranchStoreModel {
-                      id = S.id,
-                       branchId = S.branchId,
-                       storeId = S.storeId,
-                       notes = S.notes,
-                    
-                       createDate = S.createDate,
-                       updateDate = S.updateDate,
-                       createUserId = S.createUserId,
-                       updateUserId = S.updateUserId,
-                       isActive=S.isActive,
-                       canDelete = true,
-                                    // branch
-                                    bbranchId = JSBB.branchId,
-                                    bcode = JBBR.code,
-                                    bname = JBBR.name,
-                                    baddress = JBBR.address,
-                                    bemail = JBBR.email,
-                                    bphone = JBBR.phone,
-                                    bmobile = JBBR.mobile,
-                                    bcreateDate = JBBR.createDate,
-                                    bupdateDate = JBBR.updateDate,
-                                    bcreateUserId = JBBR.createUserId,
-                                    bupdateUserId = JBBR.updateUserId,
-                                    bnotes = JBBR.notes,
-                                    bparentId = JBBR.parentId,
-                                    bisActive = JBBR.isActive,
-                                    btype = JBBR.type,
-                                    //store
-                                    sbranchId = JSBB.branchId,
-                                    scode = JSBB.code,
-                                    sname = JSBB.name,
-                                    saddress = JSBB.address,
-                                    semail = JSBB.email,
-                                    sphone = JSBB.phone,
-                                    smobile = JSBB.mobile,
-                                    screateDate = JSBB.createDate,
-                                    supdateDate = JSBB.updateDate,
-                                    screateUserId = JSBB.createUserId,
-                                    supdateUserId = JSBB.updateUserId,
-                                    snotes = JSBB.notes,
-                                    sparentId = JSBB.parentId,
-                                    sisActive = JSBB.isActive,
-                                    stype = JSBB.type,
-
-                                }).ToList();
+                    var List = (
+                        from S in entity.branchStore
+                        join B in entity.branches on S.branchId equals B.branchId into JBB
+                        join BB in entity.branches on S.storeId equals BB.branchId into JSB
+                        from JBBR in JBB.DefaultIfEmpty()
+                        from JSBB in JSB.DefaultIfEmpty()
+                        select new BranchStoreModel
+                        {
+                            id = S.id,
+                            branchId = S.branchId,
+                            storeId = S.storeId,
+                            notes = S.notes,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            createUserId = S.createUserId,
+                            updateUserId = S.updateUserId,
+                            isActive = S.isActive,
+                            canDelete = true,
+                            // branch
+                            bbranchId = JSBB.branchId,
+                            bcode = JBBR.code,
+                            bname = JBBR.name,
+                            baddress = JBBR.address,
+                            bemail = JBBR.email,
+                            bphone = JBBR.phone,
+                            bmobile = JBBR.mobile,
+                            bcreateDate = JBBR.createDate,
+                            bupdateDate = JBBR.updateDate,
+                            bcreateUserId = JBBR.createUserId,
+                            bupdateUserId = JBBR.updateUserId,
+                            bnotes = JBBR.notes,
+                            bparentId = JBBR.parentId,
+                            bisActive = JBBR.isActive,
+                            btype = JBBR.type,
+                            //store
+                            sbranchId = JSBB.branchId,
+                            scode = JSBB.code,
+                            sname = JSBB.name,
+                            saddress = JSBB.address,
+                            semail = JSBB.email,
+                            sphone = JSBB.phone,
+                            smobile = JSBB.mobile,
+                            screateDate = JSBB.createDate,
+                            supdateDate = JSBB.updateDate,
+                            screateUserId = JSBB.createUserId,
+                            supdateUserId = JSBB.updateUserId,
+                            snotes = JSBB.notes,
+                            sparentId = JSBB.parentId,
+                            sisActive = JSBB.isActive,
+                            stype = JSBB.type,
+                        }
+                    ).ToList();
                     return TokenManager.GenerateToken(List);
-
                 }
             }
         }
@@ -120,73 +120,72 @@ var strP = TokenManager.GetPrincipal(token);
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.branchStore
-                                join B in entity.branches on S.branchId equals B.branchId into JBB
-                                join BB in entity.branches on S.storeId equals BB.branchId into JSB
-                                from JBBR in JBB.DefaultIfEmpty()
-                                from JSBB in JSB.DefaultIfEmpty()
-                                where S.branchId == branchId && JSBB.type == type
+                    var List = (
+                        from S in entity.branchStore
+                        join B in entity.branches on S.branchId equals B.branchId into JBB
+                        join BB in entity.branches on S.storeId equals BB.branchId into JSB
+                        from JBBR in JBB.DefaultIfEmpty()
+                        from JSBB in JSB.DefaultIfEmpty()
+                        where S.branchId == branchId && JSBB.type == type
 
-                                select new BranchStoreModel
-                                {
-                                    id = S.id,
-                                    branchId = S.branchId,
-                                    storeId = S.storeId,
-                                    notes = S.notes,
-
-                                    createDate = S.createDate,
-                                    updateDate = S.updateDate,
-                                    createUserId = S.createUserId,
-                                    updateUserId = S.updateUserId,
-                                    isActive = S.isActive,
-                                    canDelete = true,
-                                    // branch
-                                    bbranchId = JSBB.branchId,
-                                    bcode = JBBR.code,
-                                    bname = JBBR.name,
-                                    baddress = JBBR.address,
-                                    bemail = JBBR.email,
-                                    bphone = JBBR.phone,
-                                    bmobile = JBBR.mobile,
-                                    bcreateDate = JBBR.createDate,
-                                    bupdateDate = JBBR.updateDate,
-                                    bcreateUserId = JBBR.createUserId,
-                                    bupdateUserId = JBBR.updateUserId,
-                                    bnotes = JBBR.notes,
-                                    bparentId = JBBR.parentId,
-                                    bisActive = JBBR.isActive,
-                                    btype = JBBR.type,
-                                    //store
-                                    sbranchId = JSBB.branchId,
-                                    scode = JSBB.code,
-                                    sname = JSBB.name,
-                                    saddress = JSBB.address,
-                                    semail = JSBB.email,
-                                    sphone = JSBB.phone,
-                                    smobile = JSBB.mobile,
-                                    screateDate = JSBB.createDate,
-                                    supdateDate = JSBB.updateDate,
-                                    screateUserId = JSBB.createUserId,
-                                    supdateUserId = JSBB.updateUserId,
-                                    snotes = JSBB.notes,
-                                    sparentId = JSBB.parentId,
-                                    sisActive = JSBB.isActive,
-                                    stype = JSBB.type,
-
-                                }).ToList();
+                        select new BranchStoreModel
+                        {
+                            id = S.id,
+                            branchId = S.branchId,
+                            storeId = S.storeId,
+                            notes = S.notes,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            createUserId = S.createUserId,
+                            updateUserId = S.updateUserId,
+                            isActive = S.isActive,
+                            canDelete = true,
+                            // branch
+                            bbranchId = JSBB.branchId,
+                            bcode = JBBR.code,
+                            bname = JBBR.name,
+                            baddress = JBBR.address,
+                            bemail = JBBR.email,
+                            bphone = JBBR.phone,
+                            bmobile = JBBR.mobile,
+                            bcreateDate = JBBR.createDate,
+                            bupdateDate = JBBR.updateDate,
+                            bcreateUserId = JBBR.createUserId,
+                            bupdateUserId = JBBR.updateUserId,
+                            bnotes = JBBR.notes,
+                            bparentId = JBBR.parentId,
+                            bisActive = JBBR.isActive,
+                            btype = JBBR.type,
+                            //store
+                            sbranchId = JSBB.branchId,
+                            scode = JSBB.code,
+                            sname = JSBB.name,
+                            saddress = JSBB.address,
+                            semail = JSBB.email,
+                            sphone = JSBB.phone,
+                            smobile = JSBB.mobile,
+                            screateDate = JSBB.createDate,
+                            supdateDate = JSBB.updateDate,
+                            screateUserId = JSBB.createUserId,
+                            supdateUserId = JSBB.updateUserId,
+                            snotes = JSBB.notes,
+                            sparentId = JSBB.parentId,
+                            sisActive = JSBB.isActive,
+                            stype = JSBB.type,
+                        }
+                    ).ToList();
                     return TokenManager.GenerateToken(List);
                 }
             }
         }
 
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
         public string GetByID(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -205,34 +204,37 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var list = entity.branchStore
-                   .Where(c => c.id == cId)
-                   .Select(c => new {
-                    c.id,
-                    c.branchId,
-                    c.storeId,
-                    c.notes,
-                    c.createDate,
-                    c.updateDate,
-                    c.createUserId,
-                    c.updateUserId,
-                    c.isActive,
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.id == cId)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.id,
+                                    c.branchId,
+                                    c.storeId,
+                                    c.notes,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                    c.isActive,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(list);
                 }
             }
         }
 
-
-        // add or update 
+        // add or update
         [HttpPost]
         [Route("Save")]
         public String Save(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-            string message ="";
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            string message = "";
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -248,7 +250,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         Objects = c.Value.Replace("\\", string.Empty);
                         Objects = Objects.Trim('"');
-                        Object = JsonConvert.DeserializeObject<branchStore>(Objects, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        Object = JsonConvert.DeserializeObject<branchStore>(
+                            Objects,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -281,17 +286,18 @@ var strP = TokenManager.GetPrincipal(token);
                         var sEntity = entity.Set<branchStore>();
                         if (Object.id == 0)
                         {
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             sEntity.Add(Object);
-                             message = Object.id.ToString();
+                            message = Object.id.ToString();
                             entity.SaveChanges();
                         }
                         else
                         {
-
-                            var tmps = entity.branchStore.Where(p => p.id == Object.id).FirstOrDefault();
+                            var tmps = entity.branchStore
+                                .Where(p => p.id == Object.id)
+                                .FirstOrDefault();
 
                             tmps.id = Object.id;
                             tmps.branchId = Object.branchId;
@@ -299,28 +305,25 @@ var strP = TokenManager.GetPrincipal(token);
                             tmps.notes = Object.notes;
                             tmps.isActive = Object.isActive;
                             tmps.notes = Object.notes;
-                          
-                            tmps.createDate=Object.createDate;
-                            tmps.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date
-                            
+
+                            tmps.createDate = Object.createDate;
+                            tmps.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date
+
                             tmps.updateUserId = Object.updateUserId;
                             entity.SaveChanges();
                             message = tmps.id.ToString();
                         }
-                       
-                       
                     }
                     return TokenManager.GenerateToken(message);
                 }
-
                 catch
                 {
-                    message =  "-1";
+                    message = "-1";
                     return TokenManager.GenerateToken(message);
-
                 }
             }
         }
+
         //
         [HttpPost]
         [Route("UpdateStoresById")]
@@ -328,14 +331,13 @@ var strP = TokenManager.GetPrincipal(token);
         {
             token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-
                 string branchStoreObject = "";
                 List<branchStore> newListObj = null;
                 long branchId = 0;
@@ -347,81 +349,90 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         branchStoreObject = c.Value.Replace("\\", string.Empty);
                         branchStoreObject = branchStoreObject.Trim('"');
-                        newListObj = JsonConvert.DeserializeObject<List<branchStore>>(branchStoreObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newListObj = JsonConvert.DeserializeObject<List<branchStore>>(
+                            branchStoreObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         //break;
                     }
                     else if (c.Type == "branchId")
                     {
                         branchId = long.Parse(c.Value);
                     }
-                    else   if (c.Type == "userId")
+                    else if (c.Type == "userId")
                     {
                         userId = long.Parse(c.Value);
                     }
                 }
                 if (newListObj != null)
                 {
-
-               
-                // delete old invoice items
-                using (incposdbEntities entity = new incposdbEntities())
-                {
-                    List<branchStore> items = entity.branchStore.Where(x => x.branchId == branchId).ToList();
-                    entity.branchStore.RemoveRange(items);
-                    try { entity.SaveChanges(); }
-                    catch { }
-
-                }
-
-                using (incposdbEntities entity = new incposdbEntities())
-                {
-                    for (int i = 0; i < newListObj.Count; i++)
+                    // delete old invoice items
+                    using (incposdbEntities entity = new incposdbEntities())
                     {
-                        if (newListObj[i].updateUserId == 0 || newListObj[i].updateUserId == null)
+                        List<branchStore> items = entity.branchStore
+                            .Where(x => x.branchId == branchId)
+                            .ToList();
+                        entity.branchStore.RemoveRange(items);
+                        try
                         {
-                            Nullable<long> id = null;
-                            newListObj[i].updateUserId = id;
+                            entity.SaveChanges();
                         }
-                        if (newListObj[i].createUserId == 0 || newListObj[i].createUserId == null)
-                        {
-                            Nullable<long> id = null;
-                            newListObj[i].createUserId = id;
-                        }
-                        if (newListObj[i].branchId == 0 || newListObj[i].branchId == null)
-                        {
-                            Nullable<long> id = null;
-                            newListObj[i].branchId = id;
-                        }
-                        if (newListObj[i].storeId == 0 || newListObj[i].storeId == null)
-                        {
-                            Nullable<long> id = null;
-                            newListObj[i].storeId = id;
-                        }
-                        var branchEntity = entity.Set<branchStore>();
-
-                        newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                        newListObj[i].updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                        newListObj[i].updateUserId = newListObj[i].createUserId;
-                        newListObj[i].branchId = branchId;
-                        branchEntity.Add(newListObj[i]);
-
+                        catch { }
                     }
-                    try
+
+                    using (incposdbEntities entity = new incposdbEntities())
                     {
-                      message=  entity.SaveChanges().ToString();
+                        for (int i = 0; i < newListObj.Count; i++)
+                        {
+                            if (
+                                newListObj[i].updateUserId == 0
+                                || newListObj[i].updateUserId == null
+                            )
+                            {
+                                Nullable<long> id = null;
+                                newListObj[i].updateUserId = id;
+                            }
+                            if (
+                                newListObj[i].createUserId == 0
+                                || newListObj[i].createUserId == null
+                            )
+                            {
+                                Nullable<long> id = null;
+                                newListObj[i].createUserId = id;
+                            }
+                            if (newListObj[i].branchId == 0 || newListObj[i].branchId == null)
+                            {
+                                Nullable<long> id = null;
+                                newListObj[i].branchId = id;
+                            }
+                            if (newListObj[i].storeId == 0 || newListObj[i].storeId == null)
+                            {
+                                Nullable<long> id = null;
+                                newListObj[i].storeId = id;
+                            }
+                            var branchEntity = entity.Set<branchStore>();
+
+                            newListObj[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newListObj[i].updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newListObj[i].updateUserId = newListObj[i].createUserId;
+                            newListObj[i].branchId = branchId;
+                            branchEntity.Add(newListObj[i]);
+                        }
+                        try
+                        {
+                            message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
-
-                    catch
-                    {
-                        message = "0";
-                        return TokenManager.GenerateToken(message);
+                        catch
+                        {
+                            message = "0";
+                            return TokenManager.GenerateToken(message);
+                        }
                     }
-                }
                 }
             }
 
-           // message = "1";
+            // message = "1";
             return TokenManager.GenerateToken(message);
         }
 
@@ -430,9 +441,9 @@ var strP = TokenManager.GetPrincipal(token);
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -464,7 +475,6 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             branchStore Deleterow = entity.branchStore.Find(Id);
                             entity.branchStore.Remove(Deleterow);
                             message = entity.SaveChanges().ToString();
@@ -482,11 +492,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             branchStore Obj = entity.branchStore.Find(Id);
                             Obj.isActive = 0;
                             Obj.updateUserId = userId;
-                            Obj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Obj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -496,9 +505,6 @@ var strP = TokenManager.GetPrincipal(token);
                         return TokenManager.GenerateToken("0");
                     }
                 }
-
-
-
             }
         }
     }

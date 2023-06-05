@@ -21,7 +21,10 @@ namespace System.Text.Json.Serialization.Metadata
             return EffectiveConverter.ReadCore(ref reader, Options, ref state);
         }
 
-        internal async ValueTask<T?> DeserializeAsync(Stream utf8Json, CancellationToken cancellationToken)
+        internal async ValueTask<T?> DeserializeAsync(
+            Stream utf8Json,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(IsConfigured);
             JsonSerializerOptions options = Options;
@@ -34,8 +37,14 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 while (true)
                 {
-                    bufferState = await bufferState.ReadFromStreamAsync(utf8Json, cancellationToken).ConfigureAwait(false);
-                    T? value = ContinueDeserialize(ref bufferState, ref jsonReaderState, ref readStack);
+                    bufferState = await bufferState
+                        .ReadFromStreamAsync(utf8Json, cancellationToken)
+                        .ConfigureAwait(false);
+                    T? value = ContinueDeserialize(
+                        ref bufferState,
+                        ref jsonReaderState,
+                        ref readStack
+                    );
 
                     if (bufferState.IsFinalBlock)
                     {
@@ -63,7 +72,11 @@ namespace System.Text.Json.Serialization.Metadata
                 while (true)
                 {
                     bufferState.ReadFromStream(utf8Json);
-                    T? value = ContinueDeserialize(ref bufferState, ref jsonReaderState, ref readStack);
+                    T? value = ContinueDeserialize(
+                        ref bufferState,
+                        ref jsonReaderState,
+                        ref readStack
+                    );
 
                     if (bufferState.IsFinalBlock)
                     {
@@ -78,7 +91,11 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         private JsonTypeInfo<Queue<T>>? _asuncEnumerableQueueTypeInfo;
-        internal IAsyncEnumerable<T> DeserializeAsyncEnumerable(Stream utf8Json, CancellationToken cancellationToken)
+
+        internal IAsyncEnumerable<T> DeserializeAsyncEnumerable(
+            Stream utf8Json,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(IsConfigured);
 
@@ -92,7 +109,8 @@ namespace System.Text.Json.Serialization.Metadata
                         ObjectCreator = static () => new Queue<T>(),
                         ElementInfo = this,
                         NumberHandling = Options.NumberHandling
-                    });
+                    }
+                );
 
                 queueTypeInfo.EnsureConfigured();
                 _asuncEnumerableQueueTypeInfo = queueTypeInfo;
@@ -103,7 +121,8 @@ namespace System.Text.Json.Serialization.Metadata
             static async IAsyncEnumerable<T> CreateAsyncEnumerableDeserializer(
                 Stream utf8Json,
                 JsonTypeInfo<Queue<T>> queueTypeInfo,
-                [EnumeratorCancellation] CancellationToken cancellationToken)
+                [EnumeratorCancellation] CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(queueTypeInfo.IsConfigured);
                 JsonSerializerOptions options = queueTypeInfo.Options;
@@ -117,11 +136,14 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     do
                     {
-                        bufferState = await bufferState.ReadFromStreamAsync(utf8Json, cancellationToken, fillBuffer: false).ConfigureAwait(false);
+                        bufferState = await bufferState
+                            .ReadFromStreamAsync(utf8Json, cancellationToken, fillBuffer: false)
+                            .ConfigureAwait(false);
                         queueTypeInfo.ContinueDeserialize(
                             ref bufferState,
                             ref jsonReaderState,
-                            ref readStack);
+                            ref readStack
+                        );
 
                         if (readStack.Current.ReturnValue is Queue<T> queue)
                         {
@@ -130,8 +152,7 @@ namespace System.Text.Json.Serialization.Metadata
                                 yield return queue.Dequeue();
                             }
                         }
-                    }
-                    while (!bufferState.IsFinalBlock);
+                    } while (!bufferState.IsFinalBlock);
                 }
                 finally
                 {
@@ -140,28 +161,42 @@ namespace System.Text.Json.Serialization.Metadata
             }
         }
 
-        internal sealed override object? DeserializeAsObject(ref Utf8JsonReader reader, ref ReadStack state)
-            => Deserialize(ref reader, ref state);
+        internal sealed override object? DeserializeAsObject(
+            ref Utf8JsonReader reader,
+            ref ReadStack state
+        ) => Deserialize(ref reader, ref state);
 
-        internal sealed override async ValueTask<object?> DeserializeAsObjectAsync(Stream utf8Json, CancellationToken cancellationToken)
+        internal sealed override async ValueTask<object?> DeserializeAsObjectAsync(
+            Stream utf8Json,
+            CancellationToken cancellationToken
+        )
         {
             T? result = await DeserializeAsync(utf8Json, cancellationToken).ConfigureAwait(false);
             return result;
         }
 
-        internal sealed override object? DeserializeAsObject(Stream utf8Json)
-            => Deserialize(utf8Json);
+        internal sealed override object? DeserializeAsObject(Stream utf8Json) =>
+            Deserialize(utf8Json);
 
-        internal sealed override IAsyncEnumerable<object?> DeserializeAsyncEnumerableAsObject(Stream utf8Json, CancellationToken cancellationToken)
+        internal sealed override IAsyncEnumerable<object?> DeserializeAsyncEnumerableAsObject(
+            Stream utf8Json,
+            CancellationToken cancellationToken
+        )
         {
-            IAsyncEnumerable<T> typedSource = DeserializeAsyncEnumerable(utf8Json, cancellationToken);
+            IAsyncEnumerable<T> typedSource = DeserializeAsyncEnumerable(
+                utf8Json,
+                cancellationToken
+            );
             return AsObjectEnumerable(typedSource, cancellationToken);
 
             static async IAsyncEnumerable<object?> AsObjectEnumerable(
                 IAsyncEnumerable<T> source,
-                [EnumeratorCancellation] CancellationToken cancellationToken)
+                [EnumeratorCancellation] CancellationToken cancellationToken
+            )
             {
-                await foreach (T elem in source.WithCancellation(cancellationToken).ConfigureAwait(false))
+                await foreach (
+                    T elem in source.WithCancellation(cancellationToken).ConfigureAwait(false)
+                )
                 {
                     yield return elem;
                 }
@@ -171,9 +206,14 @@ namespace System.Text.Json.Serialization.Metadata
         private T? ContinueDeserialize(
             ref ReadBufferState bufferState,
             ref JsonReaderState jsonReaderState,
-            ref ReadStack readStack)
+            ref ReadStack readStack
+        )
         {
-            var reader = new Utf8JsonReader(bufferState.Bytes, bufferState.IsFinalBlock, jsonReaderState);
+            var reader = new Utf8JsonReader(
+                bufferState.Bytes,
+                bufferState.IsFinalBlock,
+                jsonReaderState
+            );
 
             // If we haven't read in the entire stream's payload we'll need to signify that we want
             // to enable read ahead behaviors to ensure we have complete json objects and arrays

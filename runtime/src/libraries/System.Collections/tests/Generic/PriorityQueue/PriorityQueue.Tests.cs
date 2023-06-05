@@ -10,14 +10,11 @@ namespace System.Collections.Tests
 {
     public class PriorityQueue_NonGeneric_Tests : TestBase
     {
-        protected PriorityQueue<string, int> CreateSmallPriorityQueue(out HashSet<(string, int)> items)
+        protected PriorityQueue<string, int> CreateSmallPriorityQueue(
+            out HashSet<(string, int)> items
+        )
         {
-            items = new HashSet<(string, int)>
-            {
-                ("one", 1),
-                ("two", 2),
-                ("three", 3)
-            };
+            items = new HashSet<(string, int)> { ("one", 1), ("two", 2), ("three", 3) };
             var queue = new PriorityQueue<string, int>(items);
 
             return queue;
@@ -46,7 +43,9 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_EnqueueDequeue_SmallerThanMin()
         {
-            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(out HashSet<(string, int)> enqueuedItems);
+            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(
+                out HashSet<(string, int)> enqueuedItems
+            );
 
             string actualElement = queue.EnqueueDequeue("zero", 0);
 
@@ -57,7 +56,9 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_EnqueueDequeue_LargerThanMin()
         {
-            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(out HashSet<(string, int)> enqueuedItems);
+            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(
+                out HashSet<(string, int)> enqueuedItems
+            );
 
             string actualElement = queue.EnqueueDequeue("four", 4);
 
@@ -70,7 +71,9 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_EnqueueDequeue_EqualToMin()
         {
-            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(out HashSet<(string, int)> enqueuedItems);
+            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(
+                out HashSet<(string, int)> enqueuedItems
+            );
 
             string actualElement = queue.EnqueueDequeue("one-not-to-enqueue", 1);
 
@@ -91,7 +94,9 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_DequeueEnqueue_SmallerThanMin()
         {
-            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(out HashSet<(string, int)> enqueuedItems);
+            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(
+                out HashSet<(string, int)> enqueuedItems
+            );
 
             string actualElement = queue.DequeueEnqueue("zero", 0);
 
@@ -104,7 +109,9 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_DequeueEnqueue_LargerThanMin()
         {
-            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(out HashSet<(string, int)> enqueuedItems);
+            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(
+                out HashSet<(string, int)> enqueuedItems
+            );
 
             string actualElement = queue.DequeueEnqueue("four", 4);
 
@@ -117,7 +124,9 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_DequeueEnqueue_EqualToMin()
         {
-            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(out HashSet<(string, int)> enqueuedItems);
+            PriorityQueue<string, int> queue = CreateSmallPriorityQueue(
+                out HashSet<(string, int)> enqueuedItems
+            );
 
             string actualElement = queue.DequeueEnqueue("one-to-replace", 1);
 
@@ -130,7 +139,7 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Generic_Constructor_IEnumerable_Null()
         {
-            (string, int)[] itemsToEnqueue = new(string, int)[] { (null, 0), ("one", 1) } ;
+            (string, int)[] itemsToEnqueue = new (string, int)[] { (null, 0), ("one", 1) };
             PriorityQueue<string, int> queue = new PriorityQueue<string, int>(itemsToEnqueue);
             Assert.Null(queue.Dequeue());
             Assert.Equal("one", queue.Dequeue());
@@ -170,15 +179,27 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () => new PriorityQueue<int, int>(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () => new PriorityQueue<int, int>(int.MinValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCapacity",
+                () => new PriorityQueue<int, int>(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCapacity",
+                () => new PriorityQueue<int, int>(int.MinValue)
+            );
         }
 
         [Fact]
         public void PriorityQueue_Constructor_Enumerable_null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("items", () => new PriorityQueue<int, int>(items: null));
-            AssertExtensions.Throws<ArgumentNullException>("items", () => new PriorityQueue<int, int>(items: null, comparer: Comparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "items",
+                () => new PriorityQueue<int, int>(items: null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "items",
+                () => new PriorityQueue<int, int>(items: null, comparer: Comparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -213,8 +234,14 @@ namespace System.Collections.Tests
         public void PriorityQueue_EnsureCapacity_Negative_ShouldThrowException()
         {
             PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => queue.EnsureCapacity(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => queue.EnsureCapacity(int.MinValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => queue.EnsureCapacity(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => queue.EnsureCapacity(int.MinValue)
+            );
         }
 
         [Theory]
@@ -248,7 +275,10 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidPositiveCollectionSizes))]
         public void PriorityQueue_Generic_EnsureCapacityAndTrimExcess(int count)
         {
-            IReadOnlyCollection<(int, int)> itemsToEnqueue = Enumerable.Range(1, count).Select(i => (i, i)).ToArray();
+            IReadOnlyCollection<(int, int)> itemsToEnqueue = Enumerable
+                .Range(1, count)
+                .Select(i => (i, i))
+                .ToArray();
             var queue = new PriorityQueue<int, int>();
             int expectedCount = 0;
             Random random = new Random(Seed: 34);
@@ -260,10 +290,14 @@ namespace System.Collections.Tests
                 int capacityAfterEnsureCapacity = queue.EnsureCapacity(getNextEnsureCapacity());
                 Assert.Equal(capacityAfterEnsureCapacity, GetUnderlyingBufferCapacity(queue));
 
-                int capacityAfterTrimExcess = (queue.Count < (int)(capacityAfterEnsureCapacity * 0.9)) ? queue.Count : capacityAfterEnsureCapacity;
+                int capacityAfterTrimExcess =
+                    (queue.Count < (int)(capacityAfterEnsureCapacity * 0.9))
+                        ? queue.Count
+                        : capacityAfterEnsureCapacity;
                 queue.TrimExcess();
                 Assert.Equal(capacityAfterTrimExcess, GetUnderlyingBufferCapacity(queue));
-            };
+            }
+            ;
 
             foreach ((int element, int priority) in itemsToEnqueue)
             {
@@ -285,9 +319,13 @@ namespace System.Collections.Tests
             Assert.Equal(0, queue.Count);
         }
 
-        private static int GetUnderlyingBufferCapacity<TPriority, TElement>(PriorityQueue<TPriority, TElement> queue)
+        private static int GetUnderlyingBufferCapacity<TPriority, TElement>(
+            PriorityQueue<TPriority, TElement> queue
+        )
         {
-            FieldInfo nodesField = queue.GetType().GetField("_nodes", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo nodesField = queue
+                .GetType()
+                .GetField("_nodes", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(nodesField);
             var nodes = ((TElement Element, TPriority Priority)[])nodesField.GetValue(queue);
             return nodes.Length;
@@ -299,9 +337,15 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(GetNonModifyingOperations))]
-        public void PriorityQueue_Enumeration_ValidOnNonModifyingOperation(Action<PriorityQueue<int, int>> nonModifyingOperation, int count)
+        public void PriorityQueue_Enumeration_ValidOnNonModifyingOperation(
+            Action<PriorityQueue<int, int>> nonModifyingOperation,
+            int count
+        )
         {
-            PriorityQueue<int, int> queue = CreatePriorityQueue(initialCapacity: count, count: count);
+            PriorityQueue<int, int> queue = CreatePriorityQueue(
+                initialCapacity: count,
+                count: count
+            );
             using var enumerator = queue.UnorderedItems.GetEnumerator();
             nonModifyingOperation(queue);
             enumerator.MoveNext();
@@ -309,9 +353,15 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(GetModifyingOperations))]
-        public void PriorityQueue_Enumeration_InvalidationOnModifyingOperation(Action<PriorityQueue<int, int>> modifyingOperation, int count)
+        public void PriorityQueue_Enumeration_InvalidationOnModifyingOperation(
+            Action<PriorityQueue<int, int>> modifyingOperation,
+            int count
+        )
         {
-            PriorityQueue<int, int> queue = CreatePriorityQueue(initialCapacity: count, count: count);
+            PriorityQueue<int, int> queue = CreatePriorityQueue(
+                initialCapacity: count,
+                count: count
+            );
             using var enumerator = queue.UnorderedItems.GetEnumerator();
             modifyingOperation(queue);
             Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
@@ -324,7 +374,7 @@ namespace System.Collections.Tests
             yield return WrapArg(queue => queue.TryDequeue(out _, out _), 5);
             yield return WrapArg(queue => queue.EnqueueDequeue(5, priority: int.MaxValue), 5);
             yield return WrapArg(queue => queue.EnqueueDequeue(5, priority: int.MaxValue), 5);
-            yield return WrapArg(queue => queue.EnqueueRange(new[] { (1,2) }), 0);
+            yield return WrapArg(queue => queue.EnqueueRange(new[] { (1, 2) }), 0);
             yield return WrapArg(queue => queue.EnqueueRange(new[] { (1, 2) }), 10);
             yield return WrapArg(queue => queue.EnqueueRange(new[] { 1, 2 }, 42), 0);
             yield return WrapArg(queue => queue.EnqueueRange(new[] { 1, 2 }, 42), 10);
@@ -332,7 +382,8 @@ namespace System.Collections.Tests
             yield return WrapArg(queue => queue.Clear(), 5);
             yield return WrapArg(queue => queue.Clear(), 0);
 
-            static object[] WrapArg(Action<PriorityQueue<int, int>> arg, int queueCount) => new object[] { arg, queueCount };
+            static object[] WrapArg(Action<PriorityQueue<int, int>> arg, int queueCount) =>
+                new object[] { arg, queueCount };
         }
 
         public static IEnumerable<object[]> GetNonModifyingOperations()
@@ -346,7 +397,8 @@ namespace System.Collections.Tests
             yield return WrapArg(queue => queue.EnqueueRange(Array.Empty<int>(), 42), 5);
             yield return WrapArg(queue => queue.EnsureCapacity(5), 5);
 
-            static object[] WrapArg(Action<PriorityQueue<int, int>> arg, int queueCount) => new object[] { arg, queueCount };
+            static object[] WrapArg(Action<PriorityQueue<int, int>> arg, int queueCount) =>
+                new object[] { arg, queueCount };
         }
 
         #endregion

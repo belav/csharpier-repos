@@ -16,7 +16,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class MsmqIntegrationSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = MsmqIntegrationSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = MsmqIntegrationSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(MsmqIntegrationSecurityModeHelper))]
         public MsmqIntegrationSecurityMode Mode
         {

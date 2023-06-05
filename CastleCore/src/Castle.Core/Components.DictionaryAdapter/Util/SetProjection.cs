@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -69,12 +69,15 @@ namespace Castle.Components.DictionaryAdapter
             SuspendEvents();
 
             var count = Count;
-            for (var index = 0; index < count;)
+            for (var index = 0; index < count; )
             {
                 var value = this[index];
 
                 if (!set.Add(value))
-                    { RemoveAt(index); count--; }
+                {
+                    RemoveAt(index);
+                    count--;
+                }
                 else
                     index++;
             }
@@ -89,11 +92,10 @@ namespace Castle.Components.DictionaryAdapter
             else
                 CancelNew(index);
         }
-        
+
         public override bool Add(T item)
         {
-            return !set.Contains(item)
-                && base.Add(item);
+            return !set.Contains(item) && base.Add(item);
         }
 
         protected override bool OnInserting(T value)
@@ -112,19 +114,18 @@ namespace Castle.Components.DictionaryAdapter
 
         public override bool Remove(T item)
         {
-            return set .Remove(item)
-                && base.Remove(item);
+            return set.Remove(item) && base.Remove(item);
         }
 
         public override void RemoveAt(int index)
         {
-            set .Remove  (this[index]);
+            set.Remove(this[index]);
             base.RemoveAt(index);
         }
 
         public override void Clear()
         {
-            set .Clear();
+            set.Clear();
             base.Clear();
         }
 
@@ -149,7 +150,7 @@ namespace Castle.Components.DictionaryAdapter
 
         public void SymmetricExceptWith(IEnumerable<T> other)
         {
-            var removals  = set.Intersect(other).ToArray();
+            var removals = set.Intersect(other).ToArray();
             var additions = other.Except(removals);
 
             ExceptWith(removals);

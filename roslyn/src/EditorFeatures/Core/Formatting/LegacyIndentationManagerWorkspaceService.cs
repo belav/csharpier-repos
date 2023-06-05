@@ -11,23 +11,32 @@ using Microsoft.VisualStudio.Text.Editor;
 namespace Microsoft.CodeAnalysis.Formatting;
 
 [ExportWorkspaceService(typeof(ILegacyIndentationManagerWorkspaceService)), Shared]
-internal sealed class LegacyIndentationManagerWorkspaceService : ILegacyIndentationManagerWorkspaceService
+internal sealed class LegacyIndentationManagerWorkspaceService
+    : ILegacyIndentationManagerWorkspaceService
 {
     private readonly IIndentationManagerService _indentationManagerService;
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LegacyIndentationManagerWorkspaceService(IIndentationManagerService indentationManagerService)
+    public LegacyIndentationManagerWorkspaceService(
+        IIndentationManagerService indentationManagerService
+    )
     {
         _indentationManagerService = indentationManagerService;
     }
 
-    public bool? UseSpacesForWhitespace(SourceText text)
-        => text.Container.TryGetTextBuffer() is { } buffer ? _indentationManagerService.UseSpacesForWhitespace(buffer, explicitFormat: false) : null;
+    public bool? UseSpacesForWhitespace(SourceText text) =>
+        text.Container.TryGetTextBuffer() is { } buffer
+            ? _indentationManagerService.UseSpacesForWhitespace(buffer, explicitFormat: false)
+            : null;
 
-    public int? GetTabSize(SourceText text)
-        => text.Container.TryGetTextBuffer() is { } buffer ? _indentationManagerService.GetTabSize(buffer, explicitFormat: false) : null;
+    public int? GetTabSize(SourceText text) =>
+        text.Container.TryGetTextBuffer() is { } buffer
+            ? _indentationManagerService.GetTabSize(buffer, explicitFormat: false)
+            : null;
 
-    public int? GetIndentSize(SourceText text)
-        => text.Container.TryGetTextBuffer() is { } buffer ? _indentationManagerService.GetIndentSize(buffer, explicitFormat: false) : null;
+    public int? GetIndentSize(SourceText text) =>
+        text.Container.TryGetTextBuffer() is { } buffer
+            ? _indentationManagerService.GetIndentSize(buffer, explicitFormat: false)
+            : null;
 }

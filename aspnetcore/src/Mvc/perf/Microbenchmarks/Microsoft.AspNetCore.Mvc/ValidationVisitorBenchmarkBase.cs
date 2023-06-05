@@ -17,16 +17,19 @@ public abstract class ValidationVisitorBenchmarkBase
 {
     protected const int Iterations = 4;
 
-    protected static readonly IModelValidatorProvider[] ValidatorProviders = new IModelValidatorProvider[]
-    {
+    protected static readonly IModelValidatorProvider[] ValidatorProviders =
+        new IModelValidatorProvider[]
+        {
             new DefaultModelValidatorProvider(),
             new DataAnnotationsModelValidatorProvider(
                 new ValidationAttributeAdapterProvider(),
                 Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                null),
-    };
+                null
+            ),
+        };
 
-    protected static readonly CompositeModelValidatorProvider CompositeModelValidatorProvider = new CompositeModelValidatorProvider(ValidatorProviders);
+    protected static readonly CompositeModelValidatorProvider CompositeModelValidatorProvider =
+        new CompositeModelValidatorProvider(ValidatorProviders);
 
     public abstract object Model { get; }
 
@@ -40,7 +43,9 @@ public abstract class ValidationVisitorBenchmarkBase
     [GlobalSetup]
     public void Setup()
     {
-        BaselineModelMetadataProvider = CreateModelMetadataProvider(addHasValidatorsProvider: false);
+        BaselineModelMetadataProvider = CreateModelMetadataProvider(
+            addHasValidatorsProvider: false
+        );
         ModelMetadataProvider = CreateModelMetadataProvider(addHasValidatorsProvider: true);
 
         BaselineModelMetadata = BaselineModelMetadataProvider.GetMetadataForType(Model.GetType());
@@ -49,20 +54,27 @@ public abstract class ValidationVisitorBenchmarkBase
         ValidatorCache = new ValidatorCache();
     }
 
-    protected static ModelMetadataProvider CreateModelMetadataProvider(bool addHasValidatorsProvider)
+    protected static ModelMetadataProvider CreateModelMetadataProvider(
+        bool addHasValidatorsProvider
+    )
     {
         var detailsProviders = new List<IMetadataDetailsProvider>
-            {
-                new DefaultValidationMetadataProvider(),
-            };
+        {
+            new DefaultValidationMetadataProvider(),
+        };
 
         if (addHasValidatorsProvider)
         {
             detailsProviders.Add(new HasValidatorsValidationMetadataProvider(ValidatorProviders));
         }
 
-        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(detailsProviders);
-        return new DefaultModelMetadataProvider(compositeDetailsProvider, Options.Create(new MvcOptions()));
+        var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(
+            detailsProviders
+        );
+        return new DefaultModelMetadataProvider(
+            compositeDetailsProvider,
+            Options.Create(new MvcOptions())
+        );
     }
 
     protected static ActionContext GetActionContext()

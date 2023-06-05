@@ -29,9 +29,10 @@ public class AssemblyName
         {
             new AssemblyFileVersionAttribute(null);
         }
-        catch(ArgumentNullException)
-        {}
-        Console.WriteLine((new AssemblyInformationalVersionAttribute("my informational")).InformationalVersion);
+        catch (ArgumentNullException) { }
+        Console.WriteLine(
+            (new AssemblyInformationalVersionAttribute("my informational")).InformationalVersion
+        );
         Console.WriteLine((new AssemblyProductAttribute("my product")).Product);
         Console.WriteLine((new AssemblyTrademarkAttribute("my trademark")).Trademark);
         Console.WriteLine((new AssemblyVersionAttribute("my version")).Version);

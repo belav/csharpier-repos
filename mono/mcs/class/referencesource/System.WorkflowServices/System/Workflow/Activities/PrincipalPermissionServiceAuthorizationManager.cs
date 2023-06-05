@@ -12,7 +12,9 @@ namespace System.Workflow.Activities
     {
         private PrincipalPermission principalPermission;
 
-        public PrincipalPermissionServiceAuthorizationManager(PrincipalPermission principalPermission)
+        public PrincipalPermissionServiceAuthorizationManager(
+            PrincipalPermission principalPermission
+        )
         {
             this.principalPermission = principalPermission;
         }
@@ -26,9 +28,7 @@ namespace System.Workflow.Activities
                 principalPermission.Demand();
                 approved = true;
             }
-            catch (SecurityException)
-            {
-            }
+            catch (SecurityException) { }
 
             return approved;
         }

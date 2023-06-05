@@ -10,7 +10,10 @@ namespace System.Net.Http.Functional.Tests
     {
         protected static bool IsWinHttpHandler => true;
 
-        protected static WinHttpClientHandler CreateHttpClientHandler(Version useVersion = null, bool allowAllCertificates = true)
+        protected static WinHttpClientHandler CreateHttpClientHandler(
+            Version useVersion = null,
+            bool allowAllCertificates = true
+        )
         {
             useVersion ??= HttpVersion.Version11;
 
@@ -24,16 +27,18 @@ namespace System.Net.Http.Functional.Tests
             return handler;
         }
 
-        protected WinHttpClientHandler CreateHttpClientHandler() => CreateHttpClientHandler(UseVersion);
+        protected WinHttpClientHandler CreateHttpClientHandler() =>
+            CreateHttpClientHandler(UseVersion);
 
         protected static WinHttpClientHandler CreateHttpClientHandler(string useVersionString) =>
             CreateHttpClientHandler(Version.Parse(useVersionString));
 
-        protected static HttpRequestMessage CreateRequest(HttpMethod method, Uri uri, Version version, bool exactVersion = false) =>
-            new HttpRequestMessage(method, uri)
-            {
-                Version = version
-            };
+        protected static HttpRequestMessage CreateRequest(
+            HttpMethod method,
+            Uri uri,
+            Version version,
+            bool exactVersion = false
+        ) => new HttpRequestMessage(method, uri) { Version = version };
 
         protected LoopbackServerFactory LoopbackServerFactory => GetFactoryForVersion(UseVersion);
 
@@ -45,6 +50,5 @@ namespace System.Net.Http.Functional.Tests
                 _ => Http11LoopbackServerFactory.Singleton
             };
         }
-
     }
 }

@@ -42,11 +42,13 @@ public class SqlServerDatabaseFacadeTest
         using var context = new SqlServerUseInOnConfiguringContext();
         Assert.Equal(
             CoreStrings.RecursiveOnConfiguring,
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert
+                .Throws<InvalidOperationException>(() =>
                 {
                     var _ = context.Model; // Trigger context initialization
-                }).Message);
+                })
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -55,7 +57,9 @@ public class SqlServerDatabaseFacadeTest
         using var context = new ProviderContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         Assert.True(context.Database.IsSqlServer());
     }
 
@@ -65,7 +69,9 @@ public class SqlServerDatabaseFacadeTest
         using var context = new ProviderOnModelContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         var _ = context.Model; // Trigger context initialization
         Assert.True(context.IsSqlServerSet);
     }
@@ -76,7 +82,9 @@ public class SqlServerDatabaseFacadeTest
         using var context = new ProviderConstructorContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         var _ = context.Model; // Trigger context initialization
         Assert.True(context.IsSqlServerSet);
     }
@@ -87,14 +95,18 @@ public class SqlServerDatabaseFacadeTest
         using var context = new ProviderUseInOnConfiguringContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
-                .UseSqlServer("Database=Maltesers").Options);
+                .UseSqlServer("Database=Maltesers")
+                .Options
+        );
         Assert.Equal(
             CoreStrings.RecursiveOnConfiguring,
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert
+                .Throws<InvalidOperationException>(() =>
                 {
                     var _ = context.Model; // Trigger context initialization
-                }).Message);
+                })
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -103,42 +115,40 @@ public class SqlServerDatabaseFacadeTest
         using var context = new ProviderContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                .UseInMemoryDatabase("Maltesers").Options);
+                .UseInMemoryDatabase("Maltesers")
+                .Options
+        );
         Assert.False(context.Database.IsSqlServer());
     }
 
     private class ProviderContext : DbContext
     {
-        protected ProviderContext()
-        {
-        }
+        protected ProviderContext() { }
 
         public ProviderContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public bool? IsSqlServerSet { get; protected set; }
     }
 
     private class SqlServerOnConfiguringContext : ProviderContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(SqlServerFixture.DefaultServiceProvider)
                 .UseSqlServer("Database=Maltesers");
     }
 
     private class SqlServerOnModelContext : SqlServerOnConfiguringContext
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => IsSqlServerSet = Database.IsSqlServer();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            IsSqlServerSet = Database.IsSqlServer();
     }
 
     private class RelationalOnModelContext : SqlServerOnConfiguringContext
     {
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => IsSqlServerSet = Database.IsRelational();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            IsSqlServerSet = Database.IsRelational();
     }
 
     private class SqlServerConstructorContext : SqlServerOnConfiguringContext
@@ -162,12 +172,10 @@ public class SqlServerDatabaseFacadeTest
     private class ProviderOnModelContext : ProviderContext
     {
         public ProviderOnModelContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => IsSqlServerSet = Database.IsSqlServer();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            IsSqlServerSet = Database.IsSqlServer();
     }
 
     private class ProviderConstructorContext : ProviderContext
@@ -182,11 +190,9 @@ public class SqlServerDatabaseFacadeTest
     private class ProviderUseInOnConfiguringContext : ProviderContext
     {
         public ProviderUseInOnConfiguringContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => IsSqlServerSet = Database.IsSqlServer();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            IsSqlServerSet = Database.IsSqlServer();
     }
 }

@@ -8,7 +8,12 @@ namespace Microsoft.Extensions.Configuration
     /// </summary>
     public readonly struct ConfigurationDebugViewContext
     {
-        public ConfigurationDebugViewContext(string path, string key, string? value, IConfigurationProvider configurationProvider)
+        public ConfigurationDebugViewContext(
+            string path,
+            string key,
+            string? value,
+            IConfigurationProvider configurationProvider
+        )
         {
             Path = path;
             Key = key;

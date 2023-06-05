@@ -20,7 +20,8 @@ internal static partial class Interop
             int funcPtrSize,
             out int bytesTransferred,
             IntPtr shouldBeNull,
-            IntPtr shouldBeNull2);
+            IntPtr shouldBeNull2
+        );
 
         [LibraryImport(Interop.Libraries.Ws2_32, EntryPoint = "WSAIoctl", SetLastError = true)]
         internal static partial SocketError WSAIoctl_Blocking(
@@ -32,6 +33,7 @@ internal static partial class Interop
             int outBufferSize,
             out int bytesTransferred,
             IntPtr overlapped,
-            IntPtr completionRoutine);
+            IntPtr completionRoutine
+        );
     }
 }

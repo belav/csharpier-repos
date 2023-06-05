@@ -20,7 +20,7 @@ class Test
         Mask = 1
     }
 
-    static void Main ()
+    static void Main()
     {
         byte v1 = (byte)(~Ebyte.Mask);
         sbyte v2 = (sbyte)(~Esbyte.Mask);

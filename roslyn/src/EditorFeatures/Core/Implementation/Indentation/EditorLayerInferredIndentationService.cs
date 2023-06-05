@@ -23,12 +23,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Indentation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorLayerInferredIndentationService(IIndentationManagerService indentationManagerService)
+        public EditorLayerInferredIndentationService(
+            IIndentationManagerService indentationManagerService
+        )
         {
             _indentationManagerService = indentationManagerService;
         }
 
-        public async Task<DocumentOptionSet> GetDocumentOptionsWithInferredIndentationAsync(Document document, bool explicitFormat, CancellationToken cancellationToken)
+        public async Task<DocumentOptionSet> GetDocumentOptionsWithInferredIndentationAsync(
+            Document document,
+            bool explicitFormat,
+            CancellationToken cancellationToken
+        )
         {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -36,11 +42,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Indentation
 
             if (snapshot != null)
             {
-                _indentationManagerService.GetIndentation(snapshot.TextBuffer, explicitFormat, out var convertTabsToSpaces, out var tabSize, out var indentSize);
+                _indentationManagerService.GetIndentation(
+                    snapshot.TextBuffer,
+                    explicitFormat,
+                    out var convertTabsToSpaces,
+                    out var tabSize,
+                    out var indentSize
+                );
 
-                options = options.WithChangedOption(FormattingOptions.UseTabs, !convertTabsToSpaces)
-                                 .WithChangedOption(FormattingOptions.IndentationSize, indentSize)
-                                 .WithChangedOption(FormattingOptions.TabSize, tabSize);
+                options = options
+                    .WithChangedOption(FormattingOptions.UseTabs, !convertTabsToSpaces)
+                    .WithChangedOption(FormattingOptions.IndentationSize, indentSize)
+                    .WithChangedOption(FormattingOptions.TabSize, tabSize);
             }
 
             return options;

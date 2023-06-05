@@ -17,17 +17,19 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     // Default configuration validator
     // Can validate everything and never complains
-    public sealed class DefaultValidator : ConfigurationValidatorBase {
-
-        public override bool CanValidate(Type type) {
+    public sealed class DefaultValidator : ConfigurationValidatorBase
+    {
+        public override bool CanValidate(Type type)
+        {
             return true;
         }
-        
-        public override void Validate(object value) {
+
+        public override void Validate(object value)
+        {
             // Everything is OK with this validator
         }
     }

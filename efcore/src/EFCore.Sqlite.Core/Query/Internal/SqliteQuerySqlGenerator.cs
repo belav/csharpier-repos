@@ -21,9 +21,7 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteQuerySqlGenerator(QuerySqlGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +29,8 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitExtension(Expression extensionExpression)
-        => extensionExpression switch
+    protected override Expression VisitExtension(Expression extensionExpression) =>
+        extensionExpression switch
         {
             GlobExpression globExpression => VisitGlob(globExpression),
             RegexpExpression regexpExpression => VisitRegexp(regexpExpression),
@@ -45,11 +43,11 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string GetOperator(SqlBinaryExpression binaryExpression)
-        => binaryExpression.OperatorType == ExpressionType.Add
-            && binaryExpression.Type == typeof(string)
-                ? " || "
-                : base.GetOperator(binaryExpression);
+    protected override string GetOperator(SqlBinaryExpression binaryExpression) =>
+        binaryExpression.OperatorType == ExpressionType.Add
+        && binaryExpression.Type == typeof(string)
+            ? " || "
+            : base.GetOperator(binaryExpression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,15 +57,17 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
     /// </summary>
     protected override void GenerateLimitOffset(SelectExpression selectExpression)
     {
-        if (selectExpression.Limit != null
-            || selectExpression.Offset != null)
+        if (selectExpression.Limit != null || selectExpression.Offset != null)
         {
-            Sql.AppendLine()
-                .Append("LIMIT ");
+            Sql.AppendLine().Append("LIMIT ");
 
             Visit(
                 selectExpression.Limit
-                ?? new SqlConstantExpression(Expression.Constant(-1), selectExpression.Offset!.TypeMapping));
+                    ?? new SqlConstantExpression(
+                        Expression.Constant(-1),
+                        selectExpression.Offset!.TypeMapping
+                    )
+            );
 
             if (selectExpression.Offset != null)
             {
@@ -84,9 +84,13 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override void GenerateSetOperationOperand(SetOperationBase setOperation, SelectExpression operand)
+    protected override void GenerateSetOperationOperand(
+        SetOperationBase setOperation,
+        SelectExpression operand
+    )
         // Sqlite doesn't support parentheses around set operation operands
-        => Visit(operand);
+        =>
+        Visit(operand);
 
     private Expression VisitGlob(GlobExpression globExpression)
     {

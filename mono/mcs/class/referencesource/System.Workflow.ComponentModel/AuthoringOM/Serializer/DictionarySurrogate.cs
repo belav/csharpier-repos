@@ -12,9 +12,16 @@ namespace System.Workflow.ComponentModel.Serialization
     #region DictionarySurrogate
     internal sealed class DictionarySurrogate : ISerializationSurrogate
     {
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
-            if (!obj.GetType().IsGenericType || obj.GetType().GetGenericTypeDefinition() != typeof(Dictionary<,>))
+            if (
+                !obj.GetType().IsGenericType
+                || obj.GetType().GetGenericTypeDefinition() != typeof(Dictionary<,>)
+            )
                 throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "obj");
 
             Type[] args = obj.GetType().GetGenericArguments();
@@ -47,7 +54,13 @@ namespace System.Workflow.ComponentModel.Serialization
 
             info.SetType(typeof(DictionaryRef));
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }
@@ -58,10 +71,13 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             [OptionalField]
             private IList keys = null;
+
             [OptionalField]
             private IList values = null;
+
             [OptionalField]
             private object key = null;
+
             [OptionalField]
             private object value = null;
 
@@ -75,11 +91,14 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 if (this.dictionary == null)
                 {
-                    Type dictionaryType = typeof(Dictionary<int, int>).GetGenericTypeDefinition().MakeGenericType(keyType, valueType);
+                    Type dictionaryType = typeof(Dictionary<int, int>)
+                        .GetGenericTypeDefinition()
+                        .MakeGenericType(keyType, valueType);
                     this.dictionary = dictionaryType.GetConstructor(Type.EmptyTypes).Invoke(null);
                 }
                 return this.dictionary;
             }
+
             void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 if (this.dictionary != null)
@@ -111,5 +130,4 @@ namespace System.Workflow.ComponentModel.Serialization
         #endregion
     }
     #endregion
-
 }

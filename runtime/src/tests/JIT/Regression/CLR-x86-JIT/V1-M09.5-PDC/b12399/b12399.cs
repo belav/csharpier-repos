@@ -8,9 +8,9 @@ public class foo
 {
     static double nan = 0.0 / 0.0;
     static double d = 1.1;
+
     public static int Main()
     {
-
 #pragma warning disable 1718
         if (!(nan != d))
 #pragma warning restore

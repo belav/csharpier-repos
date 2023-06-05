@@ -13,7 +13,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(@"Switch.System.Drawing.DontSupportPngFramesInIcons", ref s_dontSupportPngFramesInIcons);
+                return GetCachedSwitchValue(
+                    @"Switch.System.Drawing.DontSupportPngFramesInIcons",
+                    ref s_dontSupportPngFramesInIcons
+                );
             }
         }
 
@@ -23,7 +26,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return GetCachedSwitchValue(@"Switch.System.Drawing.Printing.OptimizePrintPreview", ref s_optimizePrintPreview);
+                return GetCachedSwitchValue(
+                    @"Switch.System.Drawing.Printing.OptimizePrintPreview",
+                    ref s_optimizePrintPreview
+                );
             }
         }
     }

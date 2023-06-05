@@ -8,7 +8,9 @@ using System;
 
 public enum EnumInt32 : int
 {
-    One, Two, Three
+    One,
+    Two,
+    Three
 }
 
 public class Test

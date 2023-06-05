@@ -30,7 +30,7 @@ namespace System.Data.SqlClient.SqlGen
     /// </list>
     /// We have this interface to allow for a common return type for the methods
     /// in the expression visitor <see cref="DbExpressionVisitor{T}"/>
-    /// 
+    ///
     /// Add the endd of translation, the sql fragments are converted into real strings.
     /// </remarks>
     internal interface ISqlFragment

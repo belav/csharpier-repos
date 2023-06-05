@@ -20,7 +20,14 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessarySuppressions
         protected override int CompilerErrorCodeDigitCount => 4;
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
         protected override ISemanticFacts SemanticFacts => CSharpSemanticFacts.Instance;
-        protected override (Assembly assembly, string typeName) GetCompilerDiagnosticAnalyzerInfo()
-            => (typeof(SyntaxKind).Assembly, CompilerDiagnosticAnalyzerNames.CSharpCompilerAnalyzerTypeName);
+
+        protected override (
+            Assembly assembly,
+            string typeName
+        ) GetCompilerDiagnosticAnalyzerInfo() =>
+            (
+                typeof(SyntaxKind).Assembly,
+                CompilerDiagnosticAnalyzerNames.CSharpCompilerAnalyzerTypeName
+            );
     }
 }

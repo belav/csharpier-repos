@@ -21,9 +21,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [ComImport]
     [CoClass(typeof(CommandClass))]
     [Guid("b08400bd-f9d1-4d02-b856-71d5dba123e9")]
-    public interface Command : _Command
-    {
-    }
+    public interface Command : _Command { }
 
     [ComImport]
     [ClassInterface(ClassInterfaceType.None)]
@@ -31,13 +29,14 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
     [TypeLibType(TypeLibTypeFlags.FCanCreate | TypeLibTypeFlags.FLicensed)]
     //[DefaultMember("Parameters")]
     public class CommandClass // : (implemented interfaces omitted)
-    {
-    }
+    { }
 
     [ComImport]
     [DefaultMember("Parameters")]
     [Guid("b08400bd-f9d1-4d02-b856-71d5dba123e9")]
-    [TypeLibType(TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FNonExtensible)]
+    [TypeLibType(
+        TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FNonExtensible
+    )]
     public interface _Command // : (inherited interfaces omitted)
     {
         [DispId(500)]
@@ -54,7 +53,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [DispId(1)]
             [return: MarshalAs(UnmanagedType.Interface)]
             get;
-
             [DispId(1)]
             [param: In]
             [param: MarshalAs(UnmanagedType.Interface)]
@@ -62,8 +60,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(1)]
-        void let_ActiveConnection(
-            [In] [MarshalAs(UnmanagedType.Struct)] object ppvObject);
+        void let_ActiveConnection([In] [MarshalAs(UnmanagedType.Struct)] object ppvObject);
 
         [DispId(2)]
         string CommandText
@@ -71,7 +68,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [DispId(2)]
             [return: MarshalAs(UnmanagedType.BStr)]
             get;
-
             [DispId(2)]
             [param: In]
             [param: MarshalAs(UnmanagedType.BStr)]
@@ -83,7 +79,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         {
             [DispId(3)]
             get;
-
             [DispId(3)]
             [param: In]
             set;
@@ -94,7 +89,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         {
             [DispId(4)]
             get;
-
             [DispId(4)]
             [param: In]
             set;
@@ -105,7 +99,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         Recordset Execute(
             [Optional] [MarshalAs(UnmanagedType.Struct)] out object RecordsAffected,
             [Optional] [In] [MarshalAs(UnmanagedType.Struct)] ref object Parameters,
-            [In] int Options = -1);
+            [In] int Options = -1
+        );
 
         [DispId(6)]
         //[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "ADODB.ParameterToInternalParameterMarshaler")]
@@ -114,7 +109,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [In] DataTypeEnum Type = DataTypeEnum.adEmpty,
             [In] ParameterDirectionEnum Direction = ParameterDirectionEnum.adParamInput,
             [In] [ComAliasName("ADODB.ADO_LONGPTR")] int Size = 0,
-            [In] [MarshalAs(UnmanagedType.Struct)] object Value = null /* default value added */);
+            [In] [MarshalAs(UnmanagedType.Struct)] object Value = null /* default value added */
+        );
 
         [DispId(0)]
         Parameters Parameters
@@ -130,7 +126,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [DispId(7)]
             [param: In]
             set;
-
             [DispId(7)]
             get;
         }
@@ -141,7 +136,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [DispId(8)]
             [return: MarshalAs(UnmanagedType.BStr)]
             get;
-
             [DispId(8)]
             [param: In]
             [param: MarshalAs(UnmanagedType.BStr)]
@@ -165,7 +159,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [param: In]
             [param: MarshalAs(UnmanagedType.IUnknown)]
             set;
-
             [DispId(11)]
             [return: MarshalAs(UnmanagedType.Struct)]
             get;
@@ -178,7 +171,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [param: In]
             [param: MarshalAs(UnmanagedType.BStr)]
             set;
-
             [DispId(12)]
             [return: MarshalAs(UnmanagedType.BStr)]
             get;
@@ -190,7 +182,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
             [DispId(13)]
             [param: In]
             set;
-
             [DispId(13)]
             get;
         }

@@ -12,8 +12,7 @@ internal sealed class Phase0EnlistmentShim
 
     internal ITransactionPhase0EnlistmentAsync? Phase0EnlistmentAsync { get; set; }
 
-    internal Phase0EnlistmentShim(Phase0NotifyShim notifyShim)
-        => _phase0NotifyShim = notifyShim;
+    internal Phase0EnlistmentShim(Phase0NotifyShim notifyShim) => _phase0NotifyShim = notifyShim;
 
     public void Unenlist()
     {

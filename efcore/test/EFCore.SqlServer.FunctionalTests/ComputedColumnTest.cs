@@ -15,13 +15,16 @@ public class ComputedColumnTest : IDisposable
         using var context = new Context(serviceProvider, TestStore.Name);
         context.Database.EnsureCreatedResiliently();
 
-        var entity = context.Add(
-            new Entity
-            {
-                P1 = 20,
-                P2 = 30,
-                P3 = 80
-            }).Entity;
+        var entity = context
+            .Add(
+                new Entity
+                {
+                    P1 = 20,
+                    P2 = 30,
+                    P3 = 80
+                }
+            )
+            .Entity;
 
         context.SaveChanges();
 
@@ -60,20 +63,19 @@ public class ComputedColumnTest : IDisposable
 
         public DbSet<Entity> Entities { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
+                .UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                )
                 .UseInternalServiceProvider(_serviceProvider);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Entity>()
-                .Property(e => e.P4)
-                .HasComputedColumnSql("P1 + P2");
+            modelBuilder.Entity<Entity>().Property(e => e.P4).HasComputedColumnSql("P1 + P2");
 
-            modelBuilder.Entity<Entity>()
-                .Property(e => e.P5)
-                .HasComputedColumnSql("P1 + P3");
+            modelBuilder.Entity<Entity>().Property(e => e.P5).HasComputedColumnSql("P1 + P3");
         }
     }
 
@@ -116,13 +118,17 @@ public class ComputedColumnTest : IDisposable
 
         public DbSet<EnumItem> EnumItems { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
+                .UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                )
                 .UseInternalServiceProvider(_serviceProvider);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<EnumItem>()
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<EnumItem>()
                 .Property(entity => entity.CalculatedFlagEnum)
                 .HasComputedColumnSql("FlagEnum | OptionalFlagEnum");
     }
@@ -137,7 +143,9 @@ public class ComputedColumnTest : IDisposable
         using var context = new NullableContext(serviceProvider, TestStore.Name);
         context.Database.EnsureCreatedResiliently();
 
-        var entity = context.EnumItems.Add(new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue }).Entity;
+        var entity = context.EnumItems
+            .Add(new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue })
+            .Entity;
         context.SaveChanges();
 
         Assert.Equal(FlagEnum.AValue | FlagEnum.BValue, entity.CalculatedFlagEnum);
@@ -150,6 +158,5 @@ public class ComputedColumnTest : IDisposable
 
     protected SqlServerTestStore TestStore { get; }
 
-    public virtual void Dispose()
-        => TestStore.Dispose();
+    public virtual void Dispose() => TestStore.Dispose();
 }

@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
             IThreadingContext threadingContext,
             ITextBuffer subjectBuffer,
             TimeSpan timeSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Only add a delay if we have access to a service that will tell us when the buffer become visible or not.
             if (service is null)
@@ -66,11 +67,14 @@ namespace Microsoft.CodeAnalysis.Workspaces
             {
                 // Listen to when the active document changed so that we startup work on a document once it becomes visible.
                 var delayTask = Task.Delay(timeSpan, cancellationToken);
-                await Task.WhenAny(delayTask, visibilityChangedTaskSource.Task).ConfigureAwait(false);
+                await Task.WhenAny(delayTask, visibilityChangedTaskSource.Task)
+                    .ConfigureAwait(false);
             }
             finally
             {
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
                 service.UnregisterForVisibilityChanges(subjectBuffer, callback);
             }
         }

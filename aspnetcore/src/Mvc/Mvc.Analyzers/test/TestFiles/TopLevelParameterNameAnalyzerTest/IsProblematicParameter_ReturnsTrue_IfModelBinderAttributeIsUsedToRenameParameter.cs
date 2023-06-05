@@ -4,6 +4,9 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
     {
         public string Model { get; set; }
 
-        public void ActionMethod([ModelBinder(Name = "model")] IsProblematicParameter_ReturnsTrue_IfModelBinderAttributeIsUsedToRenameParameter different) { }
+        public void ActionMethod(
+            [ModelBinder(Name = "model")]
+                IsProblematicParameter_ReturnsTrue_IfModelBinderAttributeIsUsedToRenameParameter different
+        ) { }
     }
 }

@@ -11,8 +11,13 @@ namespace System.IdentityModel.Claims
         const string identity = rightNamespace + "/identity";
         const string possessProperty = rightNamespace + "/possessproperty";
 
-        static public string Identity { get { return identity; } }
-        static public string PossessProperty { get { return possessProperty; } }
-
+        static public string Identity
+        {
+            get { return identity; }
+        }
+        static public string PossessProperty
+        {
+            get { return possessProperty; }
+        }
     }
 }

@@ -13,7 +13,7 @@ public class ManualConstructFalse : EventWaitHandleTest
 
     public static int Run()
     {
-        var sw = new Stopwatch();        
+        var sw = new Stopwatch();
         var ewh = new EventWaitHandle(false, EventResetMode.ManualReset);
 
         // Should not signal

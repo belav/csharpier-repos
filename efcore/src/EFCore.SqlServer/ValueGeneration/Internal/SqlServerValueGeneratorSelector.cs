@@ -29,7 +29,8 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
         ISqlServerSequenceValueGeneratorFactory sequenceFactory,
         ISqlServerConnection connection,
         IRawSqlCommandBuilder rawSqlCommandBuilder,
-        IRelationalCommandDiagnosticsLogger commandLogger)
+        IRelationalCommandDiagnosticsLogger commandLogger
+    )
         : base(dependencies)
     {
         _sequenceFactory = sequenceFactory;
@@ -44,8 +45,8 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public new virtual ISqlServerValueGeneratorCache Cache
-        => (ISqlServerValueGeneratorCache)base.Cache;
+    public new virtual ISqlServerValueGeneratorCache Cache =>
+        (ISqlServerValueGeneratorCache)base.Cache;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -55,8 +56,11 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
     /// </summary>
     public override ValueGenerator Select(IProperty property, IEntityType entityType)
     {
-        if (property.GetValueGeneratorFactory() != null
-            || property.GetValueGenerationStrategy() != SqlServerValueGenerationStrategy.SequenceHiLo)
+        if (
+            property.GetValueGeneratorFactory() != null
+            || property.GetValueGenerationStrategy()
+                != SqlServerValueGenerationStrategy.SequenceHiLo
+        )
         {
             return base.Select(property, entityType);
         }
@@ -69,7 +73,8 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
             Cache.GetOrAddSequenceState(property, _connection),
             _connection,
             _rawSqlCommandBuilder,
-            _commandLogger);
+            _commandLogger
+        );
 
         if (generator != null)
         {
@@ -77,8 +82,7 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
         }
 
         var converter = property.GetTypeMapping().Converter;
-        if (converter != null
-            && converter.ProviderClrType != propertyType)
+        if (converter != null && converter.ProviderClrType != propertyType)
         {
             generator = _sequenceFactory.TryCreate(
                 property,
@@ -86,7 +90,8 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
                 Cache.GetOrAddSequenceState(property, _connection),
                 _connection,
                 _rawSqlCommandBuilder,
-                _commandLogger);
+                _commandLogger
+            );
 
             if (generator != null)
             {
@@ -96,7 +101,11 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
 
         throw new ArgumentException(
             CoreStrings.InvalidValueGeneratorFactoryProperty(
-                nameof(SqlServerSequenceValueGeneratorFactory), property.Name, property.DeclaringEntityType.DisplayName()));
+                nameof(SqlServerSequenceValueGeneratorFactory),
+                property.Name,
+                property.DeclaringEntityType.DisplayName()
+            )
+        );
     }
 
     /// <summary>
@@ -105,9 +114,14 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ValueGenerator? FindForType(IProperty property, IEntityType entityType, Type clrType)
-        => property.ClrType.UnwrapNullableType() == typeof(Guid)
-            ? property.ValueGenerated == ValueGenerated.Never || property.GetDefaultValueSql() != null
+    protected override ValueGenerator? FindForType(
+        IProperty property,
+        IEntityType entityType,
+        Type clrType
+    ) =>
+        property.ClrType.UnwrapNullableType() == typeof(Guid)
+            ? property.ValueGenerated == ValueGenerated.Never
+            || property.GetDefaultValueSql() != null
                 ? new TemporaryGuidValueGenerator()
                 : new SequentialGuidValueGenerator()
             : base.FindForType(property, entityType, clrType);

@@ -1,4 +1,5 @@
-﻿namespace System.Web.DynamicData.ModelProviders {
+﻿namespace System.Web.DynamicData.ModelProviders
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -7,11 +8,19 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Resources;
 
-    internal sealed class SimpleColumnProvider : ColumnProvider {
-        public SimpleColumnProvider(TableProvider tableProvider, PropertyDescriptor propertyDescriptor)
-            : base(tableProvider) {
-            if (propertyDescriptor.PropertyType == null) {
-                throw new ArgumentNullException(DynamicDataResources.SimpleColumnProvider_ColumnTypeRequired);
+    internal sealed class SimpleColumnProvider : ColumnProvider
+    {
+        public SimpleColumnProvider(
+            TableProvider tableProvider,
+            PropertyDescriptor propertyDescriptor
+        )
+            : base(tableProvider)
+        {
+            if (propertyDescriptor.PropertyType == null)
+            {
+                throw new ArgumentNullException(
+                    DynamicDataResources.SimpleColumnProvider_ColumnTypeRequired
+                );
             }
             Name = propertyDescriptor.Name;
             ColumnType = propertyDescriptor.PropertyType;
@@ -21,10 +30,16 @@
             IsSortable = true;
         }
 
-        public override AttributeCollection Attributes {
-            get {
-                if (!System.Web.UI.DataBinder.IsBindableType(ColumnType)) {
-                    return AttributeCollection.FromExisting(base.Attributes, new ScaffoldColumnAttribute(false));
+        public override AttributeCollection Attributes
+        {
+            get
+            {
+                if (!System.Web.UI.DataBinder.IsBindableType(ColumnType))
+                {
+                    return AttributeCollection.FromExisting(
+                        base.Attributes,
+                        new ScaffoldColumnAttribute(false)
+                    );
                 }
                 return base.Attributes;
             }

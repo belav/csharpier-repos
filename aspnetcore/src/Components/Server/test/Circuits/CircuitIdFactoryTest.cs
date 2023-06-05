@@ -28,7 +28,11 @@ public class circuitIdFactoryTest
         var factory = TestCircuitIdFactory.CreateTestFactory();
 
         // Act
-        var secrets = Enumerable.Range(0, 100).Select(i => factory.CreateCircuitId()).Select(s => s.Secret).ToArray();
+        var secrets = Enumerable
+            .Range(0, 100)
+            .Select(i => factory.CreateCircuitId())
+            .Select(s => s.Secret)
+            .ToArray();
 
         // Assert
         Assert.All(secrets, secret => Assert.NotNull(secret));

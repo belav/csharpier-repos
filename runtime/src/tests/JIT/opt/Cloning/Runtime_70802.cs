@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-public class B 
+public class B
 {
     public virtual int V() => 33;
 }
@@ -18,7 +18,7 @@ public class D : B
 class Runtime_70802
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void G() {}
+    static void G() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int F(B b, int n = 10, int m = 10)
@@ -32,16 +32,18 @@ class Runtime_70802
         mid:
         r += b.V();
         i++;
-        if (i < n) goto top;
+        if (i < n)
+            goto top;
         j++;
-        if (i < m) goto mid;
-        return r;     
+        if (i < m)
+            goto mid;
+        return r;
     }
 
     public static int Main()
     {
         D d = new D();
-        
+
         for (int i = 0; i < 100; i++)
         {
             _ = F(d);

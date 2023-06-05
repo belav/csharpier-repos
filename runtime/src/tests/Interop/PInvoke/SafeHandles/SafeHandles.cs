@@ -8,8 +8,7 @@ namespace SafeHandleTests
     public class TestSafeHandle : SafeHandle
     {
         public TestSafeHandle()
-            : base(IntPtr.Zero, true)
-        {}
+            : base(IntPtr.Zero, true) { }
 
         public TestSafeHandle(IntPtr handleValue)
             : this()
@@ -29,15 +28,13 @@ namespace SafeHandleTests
     public abstract class AbstractDerivedSafeHandle : SafeHandle
     {
         public AbstractDerivedSafeHandle()
-            : base(IntPtr.Zero, true)
-        {}
+            : base(IntPtr.Zero, true) { }
     }
 
     public class AbstractDerivedSafeHandleImplementation : AbstractDerivedSafeHandle
     {
         public AbstractDerivedSafeHandleImplementation()
-            : base()
-        {}
+            : base() { }
 
         public AbstractDerivedSafeHandleImplementation(IntPtr handleValue)
             : this()
@@ -52,7 +49,6 @@ namespace SafeHandleTests
             handle = IntPtr.Zero;
             return true;
         }
-
     }
 
     public class NoDefaultConstructorSafeHandle : SafeHandle

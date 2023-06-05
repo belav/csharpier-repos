@@ -25,25 +25,38 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PythiaDeclarationNameRecommender([Import(AllowDefault = true)] Lazy<IPythiaDeclarationNameRecommenderImplementation>? implementation)
-            => _lazyImplementation = implementation;
+        public PythiaDeclarationNameRecommender(
+            [Import(AllowDefault = true)]
+                Lazy<IPythiaDeclarationNameRecommenderImplementation>? implementation
+        ) => _lazyImplementation = implementation;
 
         public async Task<ImmutableArray<(string name, Glyph glyph)>> ProvideRecommendedNamesAsync(
             CompletionContext completionContext,
             Document document,
             CSharpSyntaxContext syntaxContext,
             NameDeclarationInfo nameInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (_lazyImplementation is null || nameInfo.PossibleSymbolKinds.IsEmpty)
                 return ImmutableArray<(string, Glyph)>.Empty;
 
             var context = new PythiaDeclarationNameContext(syntaxContext);
-            var result = await _lazyImplementation.Value.ProvideRecommendationsAsync(context, cancellationToken).ConfigureAwait(false);
+            var result = await _lazyImplementation.Value
+                .ProvideRecommendationsAsync(context, cancellationToken)
+                .ConfigureAwait(false);
 
             // We just pick the first possible symbol kind for glyph.
             return result.SelectAsArray(
-                name => (name, NameDeclarationInfo.GetGlyph(NameDeclarationInfo.GetSymbolKind(nameInfo.PossibleSymbolKinds[0]), nameInfo.DeclaredAccessibility)));
+                name =>
+                    (
+                        name,
+                        NameDeclarationInfo.GetGlyph(
+                            NameDeclarationInfo.GetSymbolKind(nameInfo.PossibleSymbolKinds[0]),
+                            nameInfo.DeclaredAccessibility
+                        )
+                    )
+            );
         }
     }
 }

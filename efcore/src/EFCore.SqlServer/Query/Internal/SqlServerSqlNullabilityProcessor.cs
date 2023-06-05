@@ -21,10 +21,9 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     /// </summary>
     public SqlServerSqlNullabilityProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
-        bool useRelationalNulls)
-        : base(dependencies, useRelationalNulls)
-    {
-    }
+        bool useRelationalNulls
+    )
+        : base(dependencies, useRelationalNulls) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,11 +34,16 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     protected override SqlExpression VisitCustomSqlExpression(
         SqlExpression sqlExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
-        => sqlExpression switch
+        out bool nullable
+    ) =>
+        sqlExpression switch
         {
             SqlServerAggregateFunctionExpression aggregateFunctionExpression
-                => VisitSqlServerAggregateFunction(aggregateFunctionExpression, allowOptimizedExpansion, out nullable),
+                => VisitSqlServerAggregateFunction(
+                    aggregateFunctionExpression,
+                    allowOptimizedExpansion,
+                    out nullable
+                ),
 
             _ => base.VisitCustomSqlExpression(sqlExpression, allowOptimizedExpansion, out nullable)
         };
@@ -53,7 +57,8 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     protected virtual SqlExpression VisitSqlServerAggregateFunction(
         SqlServerAggregateFunctionExpression aggregateFunctionExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
+        out bool nullable
+    )
     {
         nullable = aggregateFunctionExpression.IsNullable;
 
@@ -101,7 +106,8 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
         return arguments is not null || orderings is not null
             ? aggregateFunctionExpression.Update(
                 arguments ?? aggregateFunctionExpression.Arguments,
-                orderings ?? aggregateFunctionExpression.Orderings)
+                orderings ?? aggregateFunctionExpression.Orderings
+            )
             : aggregateFunctionExpression;
     }
 }

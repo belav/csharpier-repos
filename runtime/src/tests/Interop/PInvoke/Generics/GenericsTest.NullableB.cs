@@ -20,7 +20,10 @@ unsafe partial class GenericsNative
     public static extern bool? AddNullableB(bool? lhs, bool? rhs);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern bool? AddNullableBs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] bool?[] pValues, int count);
+    public static extern bool? AddNullableBs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] bool?[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern bool? AddNullableBs(in bool? pValues, int count);
@@ -32,20 +35,22 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetNullableB(true, false));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetNullableBOut(true, false, out bool? value3));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetNullableBOut(true, false, out bool? value3)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableB(default, default));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddNullableB(default, default)
+        );
 
-        bool?[] values = new bool?[] {
-            default,
-            default,
-            default,
-            default,
-            default
-        };
+        bool?[] values = new bool?[] { default, default, default, default, default };
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableBs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddNullableBs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableBs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddNullableBs(in values[0], values.Length)
+        );
     }
 }

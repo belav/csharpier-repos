@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 public abstract class DocumentWriter
 {
-    public static DocumentWriter CreateDefault(CodeTarget codeTarget, RazorCodeGenerationOptions options)
+    public static DocumentWriter CreateDefault(
+        CodeTarget codeTarget,
+        RazorCodeGenerationOptions options
+    )
     {
         if (codeTarget == null)
         {
@@ -24,5 +27,8 @@ public abstract class DocumentWriter
         return new DefaultDocumentWriter(codeTarget, options);
     }
 
-    public abstract RazorCSharpDocument WriteDocument(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode);
+    public abstract RazorCSharpDocument WriteDocument(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    );
 }

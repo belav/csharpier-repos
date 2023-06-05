@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             // Act + Assert
 
             var tsc = new TaskCompletionSource<object>();
-            var thread = new Thread(() =>
+            var thread = new Thread(
+                () =>
                 {
                     try
                     {
@@ -44,7 +45,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                     {
                         tsc.SetException(ex);
                     }
-                }, stackSize);
+                },
+                stackSize
+            );
 
             thread.Start();
             thread.Join();

@@ -7,17 +7,22 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class UpdatesSqlServerTPTTest : UpdatesSqlServerTestBase<UpdatesSqlServerTPTTest.UpdatesSqlServerTPTFixture>
+public class UpdatesSqlServerTPTTest
+    : UpdatesSqlServerTestBase<UpdatesSqlServerTPTTest.UpdatesSqlServerTPTFixture>
 {
     // ReSharper disable once UnusedParameter.Local
-    public UpdatesSqlServerTPTTest(UpdatesSqlServerTPTFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+    public UpdatesSqlServerTPTTest(
+        UpdatesSqlServerTPTFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 
-    [ConditionalTheory(Skip = "Issue #29874. Skipped because the database is in a bad state, but the test may or may not fail.")]
-    public override Task Can_change_type_of_pk_to_pk_dependent_by_replacing_with_new_dependent(bool async)
-        => Task.CompletedTask;
+    [ConditionalTheory(
+        Skip = "Issue #29874. Skipped because the database is in a bad state, but the test may or may not fail."
+    )]
+    public override Task Can_change_type_of_pk_to_pk_dependent_by_replacing_with_new_dependent(
+        bool async
+    ) => Task.CompletedTask;
 
     public override void Save_with_shared_foreign_key()
     {
@@ -40,7 +45,8 @@ SET IMPLICIT_TRANSACTIONS OFF;
 SET NOCOUNT ON;
 INSERT INTO [Categories] ([Name], [PrincipalId])
 OUTPUT INSERTED.[Id]
-VALUES (@p0, @p1);");
+VALUES (@p0, @p1);"
+        );
     }
 
     public override void Save_replaced_principal()
@@ -48,7 +54,7 @@ VALUES (@p0, @p1);");
         base.Save_replaced_principal();
 
         AssertSql(
-"""
+            """
 SELECT TOP(2) [c].[Id], [c].[Name], [c].[PrincipalId], CASE
     WHEN [s].[Id] IS NOT NULL THEN N'SpecialCategory'
 END AS [Discriminator]
@@ -56,7 +62,7 @@ FROM [Categories] AS [c]
 LEFT JOIN [SpecialCategory] AS [s] ON [c].[Id] = [s].[Id]
 """,
             //
-"""
+            """
 @__category_PrincipalId_0='778' (Nullable = true)
 
 SELECT [p].[Id], [p].[Discriminator], [p].[DependentId], [p].[Name], [p].[Price]
@@ -64,7 +70,7 @@ FROM [ProductBase] AS [p]
 WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0
 """,
             //
-"""
+            """
 @p1='1'
 @p0='New Category' (Size = 4000)
 
@@ -75,7 +81,7 @@ OUTPUT 1
 WHERE [Id] = @p1;
 """,
             //
-"""
+            """
 SELECT TOP(2) [c].[Id], [c].[Name], [c].[PrincipalId], CASE
     WHEN [s].[Id] IS NOT NULL THEN N'SpecialCategory'
 END AS [Discriminator]
@@ -83,19 +89,19 @@ FROM [Categories] AS [c]
 LEFT JOIN [SpecialCategory] AS [s] ON [c].[Id] = [s].[Id]
 """,
             //
-"""
+            """
 @__category_PrincipalId_0='778' (Nullable = true)
 
 SELECT [p].[Id], [p].[Discriminator], [p].[DependentId], [p].[Name], [p].[Price]
 FROM [ProductBase] AS [p]
 WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0
-""");
+"""
+        );
     }
 
     public class UpdatesSqlServerTPTFixture : UpdatesSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "UpdateTestTPT";
+        protected override string StoreName => "UpdateTestTPT";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

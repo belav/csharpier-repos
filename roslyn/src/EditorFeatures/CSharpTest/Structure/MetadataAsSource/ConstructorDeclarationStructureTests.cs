@@ -13,15 +13,19 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource
 {
-    public class ConstructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<ConstructorDeclarationSyntax>
+    public class ConstructorDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<ConstructorDeclarationSyntax>
     {
         protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new ConstructorDeclarationStructureProvider();
+
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new ConstructorDeclarationStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task NoCommentsOrAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     $$C();
@@ -33,21 +37,25 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task WithAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:{|textspan:[Bar]
     |}$$C();|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task WithCommentsAndAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:{|textspan:// Summary:
@@ -56,14 +64,17 @@ class C
     |}$$C();|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task WithCommentsAttributesAndModifiers()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|hint:{|textspan:// Summary:
@@ -72,14 +83,17 @@ class C
     |}$$public C();|}
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestConstructor10()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     $${|#0:public C(){|textspan:
@@ -91,8 +105,10 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
     }
 }

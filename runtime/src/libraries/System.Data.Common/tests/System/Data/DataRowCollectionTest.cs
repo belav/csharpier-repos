@@ -181,7 +181,6 @@ namespace System.Data.Tests
 
             t.Columns[1].DefaultValue = "testme";
 
-
             // null test & missing columns
             DataRow r = t.Rows.Add(new object[] { null, null });
             Assert.Equal(10, (int)r[0]);
@@ -640,6 +639,7 @@ namespace System.Data.Tests
             index = ds.Tables[0].Rows.IndexOf(dr5);
             Assert.Equal(-1, index);
         }
+
         [Fact]
         public void IndexOfTest()
         {

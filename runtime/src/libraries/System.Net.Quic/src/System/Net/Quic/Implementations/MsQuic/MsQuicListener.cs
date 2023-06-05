@@ -32,16 +32,20 @@ namespace System.Net.Quic.Implementations.MsQuic
             // set immediately in ctor, but we need a GCHandle to State in order to create the handle.
             public SafeMsQuicListenerHandle Handle = null!;
 
-            public TaskCompletionSource StopCompletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            public TaskCompletionSource StopCompletion = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             public readonly SafeMsQuicConfigurationHandle? ConnectionConfiguration;
             public readonly Channel<MsQuicConnection> AcceptConnectionQueue;
+
             // Pending connections are held back until they're ready to be used, which includes TLS negotiation.
             // If the negotiation succeeds, the connection is put into the accept queue; otherwise, it's discarded.
             public readonly ConcurrentDictionary<IntPtr, MsQuicConnection> PendingConnections;
 
             public QuicOptions ConnectionOptions = new QuicOptions();
-            public SslServerAuthenticationOptions AuthenticationOptions = new SslServerAuthenticationOptions();
+            public SslServerAuthenticationOptions AuthenticationOptions =
+                new SslServerAuthenticationOptions();
 
             public State(QuicListenerOptions options)
             {
@@ -53,15 +57,31 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                 if (options.ServerAuthenticationOptions != null)
                 {
-                    AuthenticationOptions.ClientCertificateRequired = options.ServerAuthenticationOptions.ClientCertificateRequired;
-                    AuthenticationOptions.CertificateRevocationCheckMode = options.ServerAuthenticationOptions.CertificateRevocationCheckMode;
-                    AuthenticationOptions.RemoteCertificateValidationCallback = options.ServerAuthenticationOptions.RemoteCertificateValidationCallback;
-                    AuthenticationOptions.ServerCertificateSelectionCallback = options.ServerAuthenticationOptions.ServerCertificateSelectionCallback;
-                    AuthenticationOptions.ApplicationProtocols = options.ServerAuthenticationOptions.ApplicationProtocols;
-                    AuthenticationOptions.CipherSuitesPolicy = options.ServerAuthenticationOptions.CipherSuitesPolicy;
+                    AuthenticationOptions.ClientCertificateRequired = options
+                        .ServerAuthenticationOptions
+                        .ClientCertificateRequired;
+                    AuthenticationOptions.CertificateRevocationCheckMode = options
+                        .ServerAuthenticationOptions
+                        .CertificateRevocationCheckMode;
+                    AuthenticationOptions.RemoteCertificateValidationCallback = options
+                        .ServerAuthenticationOptions
+                        .RemoteCertificateValidationCallback;
+                    AuthenticationOptions.ServerCertificateSelectionCallback = options
+                        .ServerAuthenticationOptions
+                        .ServerCertificateSelectionCallback;
+                    AuthenticationOptions.ApplicationProtocols = options
+                        .ServerAuthenticationOptions
+                        .ApplicationProtocols;
+                    AuthenticationOptions.CipherSuitesPolicy = options
+                        .ServerAuthenticationOptions
+                        .CipherSuitesPolicy;
 
-                    if (options.ServerAuthenticationOptions.ServerCertificate == null && options.ServerAuthenticationOptions.ServerCertificateContext == null &&
-                        options.ServerAuthenticationOptions.ServerCertificateSelectionCallback != null)
+                    if (
+                        options.ServerAuthenticationOptions.ServerCertificate == null
+                        && options.ServerAuthenticationOptions.ServerCertificateContext == null
+                        && options.ServerAuthenticationOptions.ServerCertificateSelectionCallback
+                            != null
+                    )
                     {
                         // We don't have any certificate but we have selection callback so we need to wait for SNI.
                         delayConfiguration = true;
@@ -70,21 +90,29 @@ namespace System.Net.Quic.Implementations.MsQuic
 
                 if (!delayConfiguration)
                 {
-                    ConnectionConfiguration = SafeMsQuicConfigurationHandle.Create(options, options.ServerAuthenticationOptions);
+                    ConnectionConfiguration = SafeMsQuicConfigurationHandle.Create(
+                        options,
+                        options.ServerAuthenticationOptions
+                    );
                 }
 
                 PendingConnections = new ConcurrentDictionary<IntPtr, MsQuicConnection>();
-                AcceptConnectionQueue = Channel.CreateBounded<MsQuicConnection>(new BoundedChannelOptions(options.ListenBacklog)
-                {
-                    SingleReader = true,
-                    SingleWriter = true
-                });
+                AcceptConnectionQueue = Channel.CreateBounded<MsQuicConnection>(
+                    new BoundedChannelOptions(options.ListenBacklog)
+                    {
+                        SingleReader = true,
+                        SingleWriter = true
+                    }
+                );
             }
         }
 
         internal unsafe MsQuicListener(QuicListenerOptions options)
         {
-            ArgumentNullException.ThrowIfNull(options.ListenEndPoint, nameof(options.ListenEndPoint));
+            ArgumentNullException.ThrowIfNull(
+                options.ListenEndPoint,
+                nameof(options.ListenEndPoint)
+            );
 
             _state = new State(options);
             _stateHandle = GCHandle.Alloc(_state);
@@ -92,11 +120,15 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 QUIC_HANDLE* handle;
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
-                ThrowIfFailure(MsQuicApi.Api.ApiTable->ListenerOpen(
-                    MsQuicApi.Api.Registration.QuicHandle,
-                    &NativeCallback,
-                    (void*)GCHandle.ToIntPtr(_stateHandle),
-                    &handle), "ListenerOpen failed");
+                ThrowIfFailure(
+                    MsQuicApi.Api.ApiTable->ListenerOpen(
+                        MsQuicApi.Api.Registration.QuicHandle,
+                        &NativeCallback,
+                        (void*)GCHandle.ToIntPtr(_stateHandle),
+                        &handle
+                    ),
+                    "ListenerOpen failed"
+                );
                 _state.Handle = new SafeMsQuicListenerHandle(handle);
             }
             catch
@@ -120,19 +152,20 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         internal override IPEndPoint ListenEndPoint
         {
-            get
-            {
-                return new IPEndPoint(_listenEndPoint.Address, _listenEndPoint.Port);
-            }
+            get { return new IPEndPoint(_listenEndPoint.Address, _listenEndPoint.Port); }
         }
 
-        internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(CancellationToken cancellationToken = default)
+        internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             ThrowIfDisposed();
 
             try
             {
-                return await _state.AcceptConnectionQueue.Reader.ReadAsync(cancellationToken).ConfigureAwait(false);
+                return await _state.AcceptConnectionQueue.Reader
+                    .ReadAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (ChannelClosedException)
             {
@@ -168,7 +201,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             // If we ever change this class to not be finalizable, and instead rely on the SafeHandle finalization, then we will need to make
             // the SafeHandle responsible for freeing this GCHandle, since it will have the only chance to do so when finalized.
 
-            if (_stateHandle.IsAllocated) _stateHandle.Free();
+            if (_stateHandle.IsAllocated)
+                _stateHandle.Free();
 
             _state?.ConnectionConfiguration?.Dispose();
             _disposed = true;
@@ -176,7 +210,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         private unsafe IPEndPoint Start(QuicListenerOptions options)
         {
-            List<SslApplicationProtocol> applicationProtocols = options.ServerAuthenticationOptions!.ApplicationProtocols!;
+            List<SslApplicationProtocol> applicationProtocols = options
+                .ServerAuthenticationOptions!
+                .ApplicationProtocols!;
             IPEndPoint listenEndPoint = options.ListenEndPoint!;
 
             Debug.Assert(_stateHandle.IsAllocated);
@@ -184,7 +220,10 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
                 using var msquicBuffers = new MsQuicBuffers();
-                msquicBuffers.Initialize(applicationProtocols, applicationProtocol => applicationProtocol.Protocol);
+                msquicBuffers.Initialize(
+                    applicationProtocols,
+                    applicationProtocol => applicationProtocol.Protocol
+                );
 
                 QuicAddr address = listenEndPoint.ToQuicAddr();
 
@@ -195,11 +234,15 @@ namespace System.Net.Quic.Implementations.MsQuic
                     address.Family = QUIC_ADDRESS_FAMILY_UNSPEC;
                 }
 
-                ThrowIfFailure(MsQuicApi.Api.ApiTable->ListenerStart(
-                    _state.Handle.QuicHandle,
-                    msquicBuffers.Buffers,
-                    (uint)applicationProtocols.Count,
-                    &address), "ListenerStart failed");
+                ThrowIfFailure(
+                    MsQuicApi.Api.ApiTable->ListenerStart(
+                        _state.Handle.QuicHandle,
+                        msquicBuffers.Buffers,
+                        (uint)applicationProtocols.Count,
+                        &address
+                    ),
+                    "ListenerStart failed"
+                );
             }
             catch
             {
@@ -209,7 +252,12 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
             // override the address family to the original value in case we had to use UNSPEC
-            return MsQuicParameterHelpers.GetIPEndPointParam(MsQuicApi.Api, _state.Handle, QUIC_PARAM_LISTENER_LOCAL_ADDRESS, listenEndPoint.AddressFamily);
+            return MsQuicParameterHelpers.GetIPEndPointParam(
+                MsQuicApi.Api,
+                _state.Handle,
+                QUIC_PARAM_LISTENER_LOCAL_ADDRESS,
+                listenEndPoint.AddressFamily
+            );
         }
 
         private unsafe Task StopAsync()
@@ -233,13 +281,16 @@ namespace System.Net.Quic.Implementations.MsQuic
 #pragma warning disable CS3016
         [UnmanagedCallersOnly(CallConvs = new Type[] { typeof(CallConvCdecl) })]
 #pragma warning restore CS3016
-        private static unsafe int NativeCallback(QUIC_HANDLE* listener, void* context, QUIC_LISTENER_EVENT* listenerEvent)
+        private static unsafe int NativeCallback(
+            QUIC_HANDLE* listener,
+            void* context,
+            QUIC_LISTENER_EVENT* listenerEvent
+        )
         {
             GCHandle gcHandle = GCHandle.FromIntPtr((IntPtr)context);
             Debug.Assert(gcHandle.IsAllocated);
             Debug.Assert(gcHandle.Target is not null);
             var state = (State)gcHandle.Target;
-
 
             if (listenerEvent->Type == QUIC_LISTENER_EVENT_TYPE.STOP_COMPLETE)
             {
@@ -256,33 +307,55 @@ namespace System.Net.Quic.Implementations.MsQuic
             MsQuicConnection? msQuicConnection = null;
             try
             {
-                ref QUIC_NEW_CONNECTION_INFO connectionInfo = ref *listenerEvent->NEW_CONNECTION.Info;
+                ref QUIC_NEW_CONNECTION_INFO connectionInfo = ref *listenerEvent
+                    ->NEW_CONNECTION
+                    .Info;
 
-                IPEndPoint localEndPoint = MsQuicAddressHelpers.INetToIPEndPoint((IntPtr)connectionInfo.LocalAddress);
-                IPEndPoint remoteEndPoint = MsQuicAddressHelpers.INetToIPEndPoint((IntPtr)connectionInfo.RemoteAddress);
+                IPEndPoint localEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(
+                    (IntPtr)connectionInfo.LocalAddress
+                );
+                IPEndPoint remoteEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(
+                    (IntPtr)connectionInfo.RemoteAddress
+                );
 
-                string targetHost = string.Empty;   // compat with SslStream
-                if (connectionInfo.ServerNameLength > 0 && (IntPtr)connectionInfo.ServerName != IntPtr.Zero)
+                string targetHost = string.Empty; // compat with SslStream
+                if (
+                    connectionInfo.ServerNameLength > 0
+                    && (IntPtr)connectionInfo.ServerName != IntPtr.Zero
+                )
                 {
                     // TBD We should figure out what to do with international names.
-                    targetHost = Marshal.PtrToStringAnsi((IntPtr)connectionInfo.ServerName, connectionInfo.ServerNameLength);
+                    targetHost = Marshal.PtrToStringAnsi(
+                        (IntPtr)connectionInfo.ServerName,
+                        connectionInfo.ServerNameLength
+                    );
                 }
 
-                SafeMsQuicConfigurationHandle? connectionConfiguration = state.ConnectionConfiguration;
+                SafeMsQuicConfigurationHandle? connectionConfiguration =
+                    state.ConnectionConfiguration;
 
                 if (connectionConfiguration == null)
                 {
-                    Debug.Assert(state.AuthenticationOptions.ServerCertificateSelectionCallback != null);
+                    Debug.Assert(
+                        state.AuthenticationOptions.ServerCertificateSelectionCallback != null
+                    );
                     try
                     {
                         // ServerCertificateSelectionCallback is synchronous. We will call it as needed when building configuration
-                        connectionConfiguration = SafeMsQuicConfigurationHandle.Create(state.ConnectionOptions, state.AuthenticationOptions, targetHost);
+                        connectionConfiguration = SafeMsQuicConfigurationHandle.Create(
+                            state.ConnectionOptions,
+                            state.AuthenticationOptions,
+                            targetHost
+                        );
                     }
                     catch (Exception ex)
                     {
                         if (NetEventSource.Log.IsEnabled())
                         {
-                            NetEventSource.Error(state, $"[Listener#{state.GetHashCode()}] Exception occurred during creating configuration in connection callback: {ex}");
+                            NetEventSource.Error(
+                                state,
+                                $"[Listener#{state.GetHashCode()}] Exception occurred during creating configuration in connection callback: {ex}"
+                            );
                         }
                     }
 
@@ -293,16 +366,37 @@ namespace System.Net.Quic.Implementations.MsQuic
                     }
                 }
 
-                connectionHandle = new SafeMsQuicConnectionHandle(listenerEvent->NEW_CONNECTION.Connection);
+                connectionHandle = new SafeMsQuicConnectionHandle(
+                    listenerEvent->NEW_CONNECTION.Connection
+                );
 
                 Debug.Assert(!Monitor.IsEntered(state), "!Monitor.IsEntered(state)");
-                int status = MsQuicApi.Api.ApiTable->ConnectionSetConfiguration(connectionHandle.QuicHandle, connectionConfiguration.QuicHandle);
+                int status = MsQuicApi.Api.ApiTable->ConnectionSetConfiguration(
+                    connectionHandle.QuicHandle,
+                    connectionConfiguration.QuicHandle
+                );
                 if (StatusSucceeded(status))
                 {
-                    msQuicConnection = new MsQuicConnection(localEndPoint, remoteEndPoint, state, connectionHandle, state.AuthenticationOptions.ClientCertificateRequired, state.AuthenticationOptions.CertificateRevocationCheckMode, state.AuthenticationOptions.RemoteCertificateValidationCallback);
-                    msQuicConnection.SetNegotiatedAlpn((IntPtr)connectionInfo.NegotiatedAlpn, connectionInfo.NegotiatedAlpnLength);
+                    msQuicConnection = new MsQuicConnection(
+                        localEndPoint,
+                        remoteEndPoint,
+                        state,
+                        connectionHandle,
+                        state.AuthenticationOptions.ClientCertificateRequired,
+                        state.AuthenticationOptions.CertificateRevocationCheckMode,
+                        state.AuthenticationOptions.RemoteCertificateValidationCallback
+                    );
+                    msQuicConnection.SetNegotiatedAlpn(
+                        (IntPtr)connectionInfo.NegotiatedAlpn,
+                        connectionInfo.NegotiatedAlpnLength
+                    );
 
-                    if (!state.PendingConnections.TryAdd(connectionHandle.DangerousGetHandle(), msQuicConnection))
+                    if (
+                        !state.PendingConnections.TryAdd(
+                            connectionHandle.DangerousGetHandle(),
+                            msQuicConnection
+                        )
+                    )
                     {
                         msQuicConnection.Dispose();
                     }
@@ -316,7 +410,10 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 if (NetEventSource.Log.IsEnabled())
                 {
-                    NetEventSource.Error(state, $"[Listener#{state.GetHashCode()}] Exception occurred during handling {listenerEvent->Type} connection callback: {ex}");
+                    NetEventSource.Error(
+                        state,
+                        $"[Listener#{state.GetHashCode()}] Exception occurred during handling {listenerEvent->Type} connection callback: {ex}"
+                    );
                 }
             }
 

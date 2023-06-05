@@ -15,14 +15,13 @@ internal class AllowedChildTagDescriptorComparer : IEqualityComparer<AllowedChil
     public static readonly AllowedChildTagDescriptorComparer Default =
         new AllowedChildTagDescriptorComparer();
 
-    private AllowedChildTagDescriptorComparer()
-    {
-    }
+    private AllowedChildTagDescriptorComparer() { }
 
     /// <inheritdoc />
     public virtual bool Equals(
         AllowedChildTagDescriptor descriptorX,
-        AllowedChildTagDescriptor descriptorY)
+        AllowedChildTagDescriptor descriptorY
+    )
     {
         if (object.ReferenceEquals(descriptorX, descriptorY))
         {
@@ -34,9 +33,12 @@ internal class AllowedChildTagDescriptorComparer : IEqualityComparer<AllowedChil
             return false;
         }
 
-        return
-            string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal) &&
-            string.Equals(descriptorX.DisplayName, descriptorY.DisplayName, StringComparison.Ordinal);
+        return string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
+            && string.Equals(
+                descriptorX.DisplayName,
+                descriptorY.DisplayName,
+                StringComparison.Ordinal
+            );
     }
 
     /// <inheritdoc />

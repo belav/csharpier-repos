@@ -14,14 +14,18 @@ namespace System.Threading.RateLimiting.Tests
         public void ThrowsWhenAcquiringLessThanZero()
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
-            Assert.Throws<ArgumentOutOfRangeException>(() => limiter.AttemptAcquire(string.Empty, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => limiter.AttemptAcquire(string.Empty, -1)
+            );
         }
 
         [Fact]
         public async Task ThrowsWhenWaitingForLessThanZero()
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await limiter.AcquireAsync(string.Empty, -1));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                async () => await limiter.AcquireAsync(string.Empty, -1)
+            );
         }
 
         [Fact]
@@ -29,7 +33,8 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
             await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await limiter.AcquireAsync(string.Empty, 1, new CancellationToken(true)));
+                async () => await limiter.AcquireAsync(string.Empty, 1, new CancellationToken(true))
+            );
         }
 
         [Fact]
@@ -132,13 +137,16 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     return RateLimitPartition.Get(1, key => limiterFactory.GetLimiter(key));
                 }
-                return RateLimitPartition.GetConcurrencyLimiter(2,
-                    _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 2
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    2,
+                    _ =>
+                        new ConcurrencyLimiterOptions
+                        {
+                            PermitLimit = 1,
+                            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                            QueueLimit = 2
+                        }
+                );
             });
 
             var lease = await limiter.AcquireAsync("2");
@@ -161,22 +169,28 @@ namespace System.Threading.RateLimiting.Tests
         public async Task Create_BlockingFactoryDoesNotBlockOtherPartitions()
         {
             var limiterFactory = new TrackingRateLimiterFactory<int>();
-            var tcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var startedTcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var startedTcs = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Get(1, key =>
-                    {
-                        startedTcs.SetResult(null);
-                        // block the factory method
-                        Assert.True(tcs.Task.Wait(TimeSpan.FromSeconds(10)));
-                        return limiterFactory.GetLimiter(key);
-                    });
+                    return RateLimitPartition.Get(
+                        1,
+                        key =>
+                        {
+                            startedTcs.SetResult(null);
+                            // block the factory method
+                            Assert.True(tcs.Task.Wait(TimeSpan.FromSeconds(10)));
+                            return limiterFactory.GetLimiter(key);
+                        }
+                    );
                 }
-                return RateLimitPartition.Get(2,
-                    key => limiterFactory.GetLimiter(key));
+                return RateLimitPartition.Get(2, key => limiterFactory.GetLimiter(key));
             });
 
             var lease = await limiter.AcquireAsync("2");
@@ -212,14 +226,17 @@ namespace System.Threading.RateLimiting.Tests
         {
             var limiterFactory = new TrackingRateLimiterFactory<int>();
             var equality = new TestEquality();
-            using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
-            {
-                if (resource == "1")
+            using var limiter = PartitionedRateLimiter.Create<string, int>(
+                resource =>
                 {
-                    return RateLimitPartition.Get(1, key => limiterFactory.GetLimiter(key));
-                }
-                return RateLimitPartition.Get(2, key => limiterFactory.GetLimiter(key));
-            }, equality);
+                    if (resource == "1")
+                    {
+                        return RateLimitPartition.Get(1, key => limiterFactory.GetLimiter(key));
+                    }
+                    return RateLimitPartition.Get(2, key => limiterFactory.GetLimiter(key));
+                },
+                equality
+            );
 
             limiter.AttemptAcquire("1");
             // GetHashCode to add item to dictionary (skips TryGet for empty dictionary)
@@ -365,7 +382,9 @@ namespace System.Threading.RateLimiting.Tests
             limiter.AttemptAcquire("1");
             limiter.AttemptAcquire("2");
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(() => limiter.DisposeAsync().AsTask());
+            var ex = await Assert.ThrowsAsync<AggregateException>(
+                () => limiter.DisposeAsync().AsTask()
+            );
             Assert.Equal(2, ex.InnerExceptions.Count);
         }
 
@@ -374,16 +393,19 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetTokenBucketLimiter(1,
-                    _ => new TokenBucketRateLimiterOptions
-                {
-                    TokenLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
-                    TokensPerPeriod = 1,
-                    AutoReplenishment = false
-                });
+                return RateLimitPartition.GetTokenBucketLimiter(
+                    1,
+                    _ =>
+                        new TokenBucketRateLimiterOptions
+                        {
+                            TokenLimit = 1,
+                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                            QueueLimit = 1,
+                            ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
+                            TokensPerPeriod = 1,
+                            AutoReplenishment = false
+                        }
+                );
             });
 
             var lease = limiter.AttemptAcquire("");
@@ -399,16 +421,21 @@ namespace System.Threading.RateLimiting.Tests
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 // Use the non-specific Create method to make sure ReplenishingRateLimiters are still handled properly
-                return RateLimitPartition.Get(1,
-                    _ => new TokenBucketRateLimiter(new TokenBucketRateLimiterOptions
-                {
-                    TokenLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
-                    TokensPerPeriod = 1,
-                    AutoReplenishment = false
-                }));
+                return RateLimitPartition.Get(
+                    1,
+                    _ =>
+                        new TokenBucketRateLimiter(
+                            new TokenBucketRateLimiterOptions
+                            {
+                                TokenLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1,
+                                ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
+                                TokensPerPeriod = 1,
+                                AutoReplenishment = false
+                            }
+                        )
+                );
             });
 
             var lease = limiter.AttemptAcquire("");
@@ -425,27 +452,33 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetTokenBucketLimiter(1,
-                        _ => new TokenBucketRateLimiterOptions
-                    {
-                        TokenLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1,
-                        ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
-                        TokensPerPeriod = 1,
-                        AutoReplenishment = false
-                    });
+                    return RateLimitPartition.GetTokenBucketLimiter(
+                        1,
+                        _ =>
+                            new TokenBucketRateLimiterOptions
+                            {
+                                TokenLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1,
+                                ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
+                                TokensPerPeriod = 1,
+                                AutoReplenishment = false
+                            }
+                    );
                 }
-                return RateLimitPartition.GetTokenBucketLimiter(2,
-                    _ => new TokenBucketRateLimiterOptions
-                {
-                    TokenLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
-                    TokensPerPeriod = 1,
-                    AutoReplenishment = false
-                });
+                return RateLimitPartition.GetTokenBucketLimiter(
+                    2,
+                    _ =>
+                        new TokenBucketRateLimiterOptions
+                        {
+                            TokenLimit = 1,
+                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                            QueueLimit = 1,
+                            ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
+                            TokensPerPeriod = 1,
+                            AutoReplenishment = false
+                        }
+                );
             });
 
             var lease = limiter.AttemptAcquire("1");
@@ -470,13 +503,16 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1,
-                    _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ =>
+                        new ConcurrencyLimiterOptions
+                        {
+                            PermitLimit = 1,
+                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                            QueueLimit = 1
+                        }
+                );
             });
 
             var lease = limiter.AttemptAcquire("");
@@ -496,12 +532,15 @@ namespace System.Threading.RateLimiting.Tests
             var factoryCallCount = 0;
             using var limiter = Utils.CreatePartitionedLimiterWithoutTimer<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, _ =>
-                {
-                    factoryCallCount++;
-                    innerLimiter = new CustomizableLimiter();
-                    return innerLimiter;
-                });
+                return RateLimitPartition.Get(
+                    1,
+                    _ =>
+                    {
+                        factoryCallCount++;
+                        innerLimiter = new CustomizableLimiter();
+                        return innerLimiter;
+                    }
+                );
             });
 
             var lease = limiter.AttemptAcquire("");
@@ -509,7 +548,9 @@ namespace System.Threading.RateLimiting.Tests
 
             Assert.Equal(1, factoryCallCount);
 
-            var tcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             innerLimiter.DisposeAsyncCoreImpl = () =>
             {
                 tcs.SetResult(null);
@@ -538,19 +579,25 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Get(1, _ =>
-                    {
-                        innerLimiter1 = new CustomizableLimiter();
-                        return innerLimiter1;
-                    });
+                    return RateLimitPartition.Get(
+                        1,
+                        _ =>
+                        {
+                            innerLimiter1 = new CustomizableLimiter();
+                            return innerLimiter1;
+                        }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.Get(2, _ =>
-                    {
-                        innerLimiter2 = new CustomizableLimiter();
-                        return innerLimiter2;
-                    });
+                    return RateLimitPartition.Get(
+                        2,
+                        _ =>
+                        {
+                            innerLimiter2 = new CustomizableLimiter();
+                            return innerLimiter2;
+                        }
+                    );
                 }
             });
 
@@ -576,7 +623,9 @@ namespace System.Threading.RateLimiting.Tests
             innerLimiter2.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
             // Run Timer
-            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter));
+            var ex = await Assert.ThrowsAsync<AggregateException>(
+                () => Utils.RunTimerFunc(limiter)
+            );
 
             Assert.True(dispose1Called);
             Assert.True(dispose2Called);
@@ -587,24 +636,31 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task ThrowingTryReplenishDoesNotPreventIdleLimiterBeingCleanedUp()
         {
-            CustomizableReplenishingLimiter replenishLimiter = new CustomizableReplenishingLimiter();
+            CustomizableReplenishingLimiter replenishLimiter =
+                new CustomizableReplenishingLimiter();
             CustomizableLimiter idleLimiter = null;
             var factoryCallCount = 0;
             using var limiter = Utils.CreatePartitionedLimiterWithoutTimer<string, int>(resource =>
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Get(1, _ =>
-                    {
-                        factoryCallCount++;
-                        idleLimiter = new CustomizableLimiter();
-                        return idleLimiter;
-                    });
+                    return RateLimitPartition.Get(
+                        1,
+                        _ =>
+                        {
+                            factoryCallCount++;
+                            idleLimiter = new CustomizableLimiter();
+                            return idleLimiter;
+                        }
+                    );
                 }
-                return RateLimitPartition.Get(2, _ =>
-                {
-                    return replenishLimiter;
-                });
+                return RateLimitPartition.Get(
+                    2,
+                    _ =>
+                    {
+                        return replenishLimiter;
+                    }
+                );
             });
 
             // Add the replenishing limiter to the internal storage
@@ -616,7 +672,9 @@ namespace System.Threading.RateLimiting.Tests
             // Start throwing from TryReplenish, this will happen the next time the Timer runs
             replenishLimiter.TryReplenishImpl = () => throw new Exception();
 
-            var disposeTcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var disposeTcs = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             // This DisposeAsync will be called in the same Timer iteration as the throwing TryReplenish, so we block below on the disposeTcs to make sure DisposeAsync is called even with a throwing TryReplenish
             idleLimiter.DisposeAsyncCoreImpl = () =>
             {
@@ -625,7 +683,9 @@ namespace System.Threading.RateLimiting.Tests
             };
             idleLimiter.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter));
+            var ex = await Assert.ThrowsAsync<AggregateException>(
+                () => Utils.RunTimerFunc(limiter)
+            );
             Assert.Single(ex.InnerExceptions);
 
             // Wait for Timer to run again which will see the throwing TryReplenish and an idle limiter it needs to clean-up
@@ -641,32 +701,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: true);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: true
+            );
 
             var lease = translateLimiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
@@ -690,32 +759,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: true);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: true
+            );
 
             var lease = await translateLimiter.AcquireAsync(1);
             Assert.True(lease.IsAcquired);
@@ -739,32 +817,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: true);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: true
+            );
 
             Assert.Equal(1, translateLimiter.GetStatistics(1).CurrentAvailablePermits);
             Assert.Equal(1, translateCallCount);
@@ -797,32 +884,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: true);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: true
+            );
 
             translateLimiter.Dispose();
 
@@ -839,32 +935,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1
-                        });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1
-                        });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: false);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: false
+            );
 
             translateLimiter.Dispose();
 
@@ -879,32 +984,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 1
-                    });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: true);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: true
+            );
 
             await translateLimiter.DisposeAsync();
 
@@ -921,32 +1035,41 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1
-                        });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
                 else
                 {
-                    return RateLimitPartition.GetConcurrencyLimiter(1,
-                        _ => new ConcurrencyLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1
-                        });
+                    return RateLimitPartition.GetConcurrencyLimiter(
+                        1,
+                        _ =>
+                            new ConcurrencyLimiterOptions
+                            {
+                                PermitLimit = 1,
+                                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                                QueueLimit = 1
+                            }
+                    );
                 }
             });
 
             var translateCallCount = 0;
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                translateCallCount++;
-                return i.ToString();
-            }, leaveOpen: false);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    translateCallCount++;
+                    return i.ToString();
+                },
+                leaveOpen: false
+            );
 
             await translateLimiter.DisposeAsync();
 
@@ -963,10 +1086,13 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(1, key => limiterFactory.GetLimiter(key));
             });
 
-            var translateLimiter = limiter.WithTranslatedKey<int>(i =>
-            {
-                return i.ToString();
-            }, leaveOpen: false);
+            var translateLimiter = limiter.WithTranslatedKey<int>(
+                i =>
+                {
+                    return i.ToString();
+                },
+                leaveOpen: false
+            );
 
             translateLimiter.GetStatistics(1);
             Assert.Equal(1, limiterFactory.Limiters.Count);

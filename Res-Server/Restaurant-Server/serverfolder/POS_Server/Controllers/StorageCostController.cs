@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class StorageCostController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
@@ -33,19 +34,21 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.storageCost
-                                select new StorageCostModel()
-                                {
-                                    storageCostId = S.storageCostId,
-                                    name = S.name,
-                                    cost = S.cost,
-                                    notes = S.notes,
-                                    isActive = S.isActive,
-                                    createDate = S.createDate,
-                                    updateDate = S.updateDate,
-                                    createUserId = S.createUserId,
-                                    updateUserId = S.updateUserId,
-                                }).ToList();
+                    var List = (
+                        from S in entity.storageCost
+                        select new StorageCostModel()
+                        {
+                            storageCostId = S.storageCostId,
+                            name = S.name,
+                            cost = S.cost,
+                            notes = S.notes,
+                            isActive = S.isActive,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            createUserId = S.createUserId,
+                            updateUserId = S.updateUserId,
+                        }
+                    ).ToList();
 
                     if (List.Count > 0)
                     {
@@ -54,7 +57,10 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 long storageCostId = (long)List[i].storageCostId;
-                                var itemsI = entity.itemsUnits.Where(x => x.storageCostId == storageCostId).Select(b => new { b.itemUnitId }).FirstOrDefault();
+                                var itemsI = entity.itemsUnits
+                                    .Where(x => x.storageCostId == storageCostId)
+                                    .Select(b => new { b.itemUnitId })
+                                    .FirstOrDefault();
 
                                 if ((itemsI is null))
                                     canDelete = true;
@@ -65,8 +71,8 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken(List);
                 }
             }
-
         }
+
         [HttpPost]
         [Route("GetStorageCostUnits")]
         public string GetStorageCostUnits(string token)
@@ -90,40 +96,43 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from IU in entity.itemsUnits.Where(x => x.storageCostId == storageCostId)
-                                join u in entity.units on IU.unitId equals u.unitId into lj
-                                from v in lj.DefaultIfEmpty()
-                                join I in entity.items.Where(x => x.isActive == 1) on IU.itemId equals I.itemId
-                                select new ItemUnitModel()
-                                {
-                                    itemUnitId = IU.itemUnitId,
-                                    unitId = IU.unitId,
-                                    mainUnit = v.name,
-                                    itemId = IU.itemId,
-                                    itemName = I.name +"-" + v.name,
-                                    unitValue = IU.unitValue,
-                                    createDate = IU.createDate,
-                                    createUserId = IU.createUserId,
-                                    defaultPurchase = IU.defaultPurchase,
-                                    defaultSale = IU.defaultSale,
-                                    price = IU.price,
-                                    priceWithService = IU.priceWithService,
-                                    subUnitId = IU.subUnitId,
-                                    barcode = IU.barcode,
-                                    updateDate = IU.updateDate,
-                                    updateUserId = IU.updateUserId,
-                                    storageCostId = IU.storageCostId,
-                                    purchasePrice = IU.purchasePrice,
-                                    isActive = IU.isActive,
-                                    type = I.type,
-                                    categoryId = I.categoryId,
-                                }).ToList();
-                  
+                    var List = (
+                        from IU in entity.itemsUnits.Where(x => x.storageCostId == storageCostId)
+                        join u in entity.units on IU.unitId equals u.unitId into lj
+                        from v in lj.DefaultIfEmpty()
+                        join I in entity.items.Where(x => x.isActive == 1)
+                            on IU.itemId equals I.itemId
+                        select new ItemUnitModel()
+                        {
+                            itemUnitId = IU.itemUnitId,
+                            unitId = IU.unitId,
+                            mainUnit = v.name,
+                            itemId = IU.itemId,
+                            itemName = I.name + "-" + v.name,
+                            unitValue = IU.unitValue,
+                            createDate = IU.createDate,
+                            createUserId = IU.createUserId,
+                            defaultPurchase = IU.defaultPurchase,
+                            defaultSale = IU.defaultSale,
+                            price = IU.price,
+                            priceWithService = IU.priceWithService,
+                            subUnitId = IU.subUnitId,
+                            barcode = IU.barcode,
+                            updateDate = IU.updateDate,
+                            updateUserId = IU.updateUserId,
+                            storageCostId = IU.storageCostId,
+                            purchasePrice = IU.purchasePrice,
+                            isActive = IU.isActive,
+                            type = I.type,
+                            categoryId = I.categoryId,
+                        }
+                    ).ToList();
+
                     return TokenManager.GenerateToken(List);
                 }
             }
-
         }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetByID")]
@@ -149,19 +158,23 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var row = entity.storageCost
-                   .Where(u => u.storageCostId == storageCostId)
-                   .Select(S => new
-                   {
-                       S.storageCostId,
-                       S.name,
-                       S.cost,
-                       S.notes,
-                       S.isActive,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-                   }).FirstOrDefault();
+                        .Where(u => u.storageCostId == storageCostId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.storageCostId,
+                                    S.name,
+                                    S.cost,
+                                    S.notes,
+                                    S.isActive,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(row);
                 }
             }
@@ -190,7 +203,10 @@ namespace POS_Server.Controllers
                     {
                         storageCostObject = c.Value.Replace("\\", string.Empty);
                         storageCostObject = storageCostObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<storageCost>(storageCostObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<storageCost>(
+                            storageCostObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -213,10 +229,9 @@ namespace POS_Server.Controllers
                         var locationEntity = entity.Set<storageCost>();
                         if (newObject.storageCostId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
-
 
                             locationEntity.Add(newObject);
                             entity.SaveChanges();
@@ -224,9 +239,11 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpObject = entity.storageCost.Where(p => p.storageCostId == newObject.storageCostId).FirstOrDefault();
+                            var tmpObject = entity.storageCost
+                                .Where(p => p.storageCostId == newObject.storageCostId)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.updateUserId = newObject.updateUserId;
 
                             tmpObject.name = newObject.name;
@@ -246,6 +263,7 @@ namespace POS_Server.Controllers
             }
             return TokenManager.GenerateToken(message);
         }
+
         [HttpPost]
         [Route("setCostToUnits")]
         public string setCostToUnits(string token)
@@ -270,7 +288,10 @@ namespace POS_Server.Controllers
                     {
                         itemsUnits = c.Value.Replace("\\", string.Empty);
                         itemsUnits = itemsUnits.Trim('"');
-                        itemsUnitsIds = JsonConvert.DeserializeObject<List<long>>(itemsUnits, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemsUnitsIds = JsonConvert.DeserializeObject<List<long>>(
+                            itemsUnits,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "storageCostId")
                         storageCostId = long.Parse(c.Value);
@@ -282,15 +303,19 @@ namespace POS_Server.Controllers
                     DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var sotrageCostUnits = entity.itemsUnits.Where(x => x.storageCostId == storageCostId).ToList();
-                        foreach(itemsUnits iu in sotrageCostUnits)
+                        var sotrageCostUnits = entity.itemsUnits
+                            .Where(x => x.storageCostId == storageCostId)
+                            .ToList();
+                        foreach (itemsUnits iu in sotrageCostUnits)
                         {
                             iu.storageCostId = null;
-                            iu.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            iu.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             iu.updateUserId = userId;
                         }
                         entity.SaveChanges();
-                        var itemsUnitsList = entity.itemsUnits.Where(x => itemsUnitsIds.Contains(x.itemUnitId)).ToList();
+                        var itemsUnitsList = entity.itemsUnits
+                            .Where(x => itemsUnitsIds.Contains(x.itemUnitId))
+                            .ToList();
                         itemsUnitsList.ForEach(x => x.storageCostId = storageCostId);
                         itemsUnitsList.ForEach(x => x.updateUserId = userId);
                         itemsUnitsList.ForEach(x => x.updateDate = datenow);
@@ -305,6 +330,7 @@ namespace POS_Server.Controllers
             }
             return TokenManager.GenerateToken(message);
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
@@ -367,7 +393,7 @@ namespace POS_Server.Controllers
 
                             objectDelete.isActive = 0;
                             objectDelete.updateUserId = userId;
-                            objectDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objectDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
 
                             return TokenManager.GenerateToken(message);
@@ -381,6 +407,5 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
     }
 }

@@ -17,10 +17,9 @@ namespace System.ServiceModel
     {
         static public bool IsDefined(AddressFilterMode x)
         {
-            return
-                x == AddressFilterMode.Exact ||
-                x == AddressFilterMode.Prefix ||
-                x == AddressFilterMode.Any;
+            return x == AddressFilterMode.Exact
+                || x == AddressFilterMode.Prefix
+                || x == AddressFilterMode.Any;
         }
     }
 }

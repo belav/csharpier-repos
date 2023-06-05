@@ -82,14 +82,8 @@ namespace System.Data.Objects
         /// <returns> DataRowState </returns>
         public EntityState State
         {
-            get
-            {
-                return _state;
-            }
-            internal set
-            {
-                _state = value;
-            }
+            get { return _state; }
+            internal set { _state = value; }
         }
 
         /// <summary>
@@ -114,7 +108,10 @@ namespace System.Data.Objects
         /// </summary>
         abstract internal BitArray ModifiedProperties { get; }
 
-        BitArray IEntityStateEntry.ModifiedProperties { get { return this.ModifiedProperties; } }
+        BitArray IEntityStateEntry.ModifiedProperties
+        {
+            get { return this.ModifiedProperties; }
+        }
 
         /// <summary>
         /// Original values of entity
@@ -140,7 +137,7 @@ namespace System.Data.Objects
         /// <param></param>
         /// <returns></returns>
         abstract public void AcceptChanges();
-        
+
         /// <summary>
         /// API to mark the entity deleted. if entity is in added state, it will be detached
         /// </summary>
@@ -175,7 +172,7 @@ namespace System.Data.Objects
         /// <summary>
         /// Rejects any changes made to the property with the given name since the property was last loaded,
         /// attached, saved, or changes were accepted. The orginal value of the property is stored and the
-        /// property will no longer be marked as modified. 
+        /// property will no longer be marked as modified.
         /// </summary>
         /// <remarks>
         /// If the result is that no properties of the entity are marked as modified, then the entity will
@@ -209,10 +206,7 @@ namespace System.Data.Objects
         /// have associated RelationshipManagers.
         /// </summary>
         /// <exception cref="InvalidOperationException">The entry is a stub or represents a relationship</exception>
-        abstract public RelationshipManager RelationshipManager
-        {
-            get;
-        }
+        abstract public RelationshipManager RelationshipManager { get; }
 
         /// <summary>
         /// Changes state of the entry to the specified <paramref name="state"/>
@@ -237,10 +231,7 @@ namespace System.Data.Objects
         #region IEntityStateEntry
         IEntityStateManager IEntityStateEntry.StateManager
         {
-            get
-            {
-                return (IEntityStateManager)this.ObjectStateManager;
-            }
+            get { return (IEntityStateManager)this.ObjectStateManager; }
         }
 
         // must explicitly implement this because interface is internal & so is the property on the
@@ -248,10 +239,7 @@ namespace System.Data.Objects
         // an interface (even if the interface is also internal)
         bool IEntityStateEntry.IsKeyEntry
         {
-            get
-            {
-                return this.IsKeyEntry;
-            }
+            get { return this.IsKeyEntry; }
         }
         #endregion // IEntityStateEntry
 
@@ -285,9 +273,17 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
         /// <param name="complexObject">The complex object that contains the property that is changing</param>
         /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
-        void IEntityChangeTracker.EntityComplexMemberChanging(string entityMemberName, object complexObject, string complexObjectMemberName)
+        void IEntityChangeTracker.EntityComplexMemberChanging(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        )
         {
-            this.EntityComplexMemberChanging(entityMemberName, complexObject, complexObjectMemberName);
+            this.EntityComplexMemberChanging(
+                entityMemberName,
+                complexObject,
+                complexObjectMemberName
+            );
         }
 
         /// <summary>
@@ -297,9 +293,17 @@ namespace System.Data.Objects
         /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
         /// <param name="complexObject">The complex object that contains the property that changed</param>
         /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
-        void IEntityChangeTracker.EntityComplexMemberChanged(string entityMemberName, object complexObject, string complexObjectMemberName)
+        void IEntityChangeTracker.EntityComplexMemberChanged(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        )
         {
-            this.EntityComplexMemberChanged(entityMemberName, complexObject, complexObjectMemberName);
+            this.EntityComplexMemberChanged(
+                entityMemberName,
+                complexObject,
+                complexObjectMemberName
+            );
         }
 
         /// <summary>
@@ -307,10 +311,7 @@ namespace System.Data.Objects
         /// </summary>
         EntityState IEntityChangeTracker.EntityState
         {
-            get
-            {
-                return this.State;
-            }
+            get { return this.State; }
         }
 
         #endregion // IEntityChangeTracker
@@ -325,7 +326,10 @@ namespace System.Data.Objects
 
         abstract internal string GetCLayerName(int ordinal, StateManagerTypeMetadata metadata);
 
-        abstract internal int GetOrdinalforCLayerName(string name, StateManagerTypeMetadata metadata);
+        abstract internal int GetOrdinalforCLayerName(
+            string name,
+            StateManagerTypeMetadata metadata
+        );
 
         abstract internal void RevertDelete();
 
@@ -333,13 +337,24 @@ namespace System.Data.Objects
 
         abstract internal void EntityMemberChanging(string entityMemberName);
         abstract internal void EntityMemberChanged(string entityMemberName);
-        abstract internal void EntityComplexMemberChanging(string entityMemberName, object complexObject, string complexObjectMemberName);
-        abstract internal void EntityComplexMemberChanged(string entityMemberName, object complexObject, string complexObjectMemberName);
+        abstract internal void EntityComplexMemberChanging(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        );
+        abstract internal void EntityComplexMemberChanged(
+            string entityMemberName,
+            object complexObject,
+            string complexObjectMemberName
+        );
 
         /// <summary>
         /// Reuse or create a new (Entity)DataRecordInfo.
         /// </summary>
-        abstract internal DataRecordInfo GetDataRecordInfo(StateManagerTypeMetadata metadata, object userObject);
+        abstract internal DataRecordInfo GetDataRecordInfo(
+            StateManagerTypeMetadata metadata,
+            object userObject
+        );
 
         virtual internal void Reset()
         {
@@ -367,7 +382,11 @@ namespace System.Data.Objects
         internal object userObject;
         internal object originalValue;
 
-        internal StateManagerValue(StateManagerMemberMetadata metadata, object instance, object value)
+        internal StateManagerValue(
+            StateManagerMemberMetadata metadata,
+            object instance,
+            object value
+        )
         {
             memberMetadata = metadata;
             userObject = instance;
@@ -383,9 +402,8 @@ namespace System.Data.Objects
         OriginalUpdatablePublic = 3,
     }
 
-
     // This class is used in Referential Integrity Constraints feature.
-    // It is used to get around the problem of enumerating dictionary contents, 
+    // It is used to get around the problem of enumerating dictionary contents,
     // but allowing update of the value without breaking the enumerator.
     internal sealed class IntBox
     {
@@ -396,17 +414,10 @@ namespace System.Data.Objects
             this.val = val;
         }
 
-        internal int Value 
+        internal int Value
         {
-            get
-            {
-                return val;
-            }
-
-            set 
-            {
-                val = value;
-            }
+            get { return val; }
+            set { val = value; }
         }
     }
 }

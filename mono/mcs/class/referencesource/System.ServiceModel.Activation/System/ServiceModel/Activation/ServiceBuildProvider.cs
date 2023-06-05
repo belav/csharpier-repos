@@ -13,8 +13,10 @@ namespace System.ServiceModel.Activation
     using System.Security;
     using System.Web.Compilation;
 
-    [Fx.Tag.SecurityNote(Critical = "Entry-point from asp.net, called outside PermitOnly context." +
-        "Also needs to elevate in order to inherit from BuildProvider and call methods on the base class.")]
+    [Fx.Tag.SecurityNote(
+        Critical = "Entry-point from asp.net, called outside PermitOnly context."
+            + "Also needs to elevate in order to inherit from BuildProvider and call methods on the base class."
+    )]
 #pragma warning disable 618 // have not moved to the v4 security model yet
     [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
@@ -27,10 +29,7 @@ namespace System.ServiceModel.Activation
 
         public override CompilerType CodeCompilerType
         {
-            get
-            {
-                return GetCodeCompilerType();
-            }
+            get { return GetCodeCompilerType(); }
         }
 
         CompilerType GetCodeCompilerType()
@@ -79,7 +78,7 @@ namespace System.ServiceModel.Activation
             if (codeCompileUnit == null)
                 return;
 
-            // Add the code unit and then add all the assemblies 
+            // Add the code unit and then add all the assemblies
             //
             assemblyBuilder.AddCodeCompileUnit(this, codeCompileUnit);
             if (parser.AssemblyDependencies != null)
@@ -103,10 +102,7 @@ namespace System.ServiceModel.Activation
 
         public override System.Collections.ICollection VirtualPathDependencies
         {
-            get
-            {
-                return parser.SourceDependencies;
-            }
+            get { return parser.SourceDependencies; }
         }
 
         internal CompilerType GetDefaultCompilerTypeForLanguageInternal(string language)

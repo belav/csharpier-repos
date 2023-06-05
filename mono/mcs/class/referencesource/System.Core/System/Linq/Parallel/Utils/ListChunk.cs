@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -82,7 +82,9 @@ namespace System.Linq.Parallel
                 {
                     yield return curr.m_chunk[i];
                 }
-                Contract.Assert(curr.m_chunkCount == curr.m_chunk.Length || curr.m_nextChunk == null);
+                Contract.Assert(
+                    curr.m_chunkCount == curr.m_chunk.Length || curr.m_nextChunk == null
+                );
                 curr = curr.m_nextChunk;
             }
         }

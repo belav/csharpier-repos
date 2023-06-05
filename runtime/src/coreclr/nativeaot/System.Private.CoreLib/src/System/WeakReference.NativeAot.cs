@@ -24,7 +24,12 @@ namespace System
         private void Create(object? target, bool trackResurrection)
         {
             m_IsLongReference = trackResurrection;
-            m_handle = GCHandle.ToIntPtr(GCHandle.Alloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak));
+            m_handle = GCHandle.ToIntPtr(
+                GCHandle.Alloc(
+                    target,
+                    trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+                )
+            );
 
             if (target != null)
             {
@@ -95,7 +100,6 @@ namespace System
                 // statement.
                 return (m_handle == default(IntPtr)) ? null : o;
             }
-
             set
             {
                 IntPtr h = m_handle;

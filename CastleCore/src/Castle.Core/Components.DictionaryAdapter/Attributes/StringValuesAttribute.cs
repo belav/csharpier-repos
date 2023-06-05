@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,11 @@ namespace Castle.Components.DictionaryAdapter
     /// <summary>
     /// Converts all properties to strings.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Interface | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public class StringValuesAttribute : DictionaryBehaviorAttribute, IDictionaryPropertySetter
     {
         /// <summary>
@@ -28,8 +32,12 @@ namespace Castle.Components.DictionaryAdapter
         /// <value>The format.</value>
         public string Format { get; set; }
 
-        bool IDictionaryPropertySetter.SetPropertyValue(IDictionaryAdapter dictionaryAdapter,
-            string key, ref object value, PropertyDescriptor property)
+        bool IDictionaryPropertySetter.SetPropertyValue(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            ref object value,
+            PropertyDescriptor property
+        )
         {
             if (value != null)
             {
@@ -49,7 +57,7 @@ namespace Castle.Components.DictionaryAdapter
 
             if (converter != null && converter.CanConvertTo(typeof(string)))
             {
-                return (string) converter.ConvertTo(value, typeof(string));
+                return (string)converter.ConvertTo(value, typeof(string));
             }
 
             return value.ToString();

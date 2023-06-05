@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,17 +25,11 @@ namespace Castle.DynamicProxy.Tests
     [TestFixture]
     public class MethodComparerTestCase
     {
-        public static void GenericMethod<T>()
-        {
-        }
+        public static void GenericMethod<T>() { }
 
-        public static void GenericMethod2<T>()
-        {
-        }
+        public static void GenericMethod2<T>() { }
 
-        public static void GenericMethod3<T, H>(T t, H h)
-        {
-        }
+        public static void GenericMethod3<T, H>(T t, H h) { }
 
         public static T GenericMethod4<T>(T t)
         {
@@ -59,35 +53,23 @@ namespace Castle.DynamicProxy.Tests
 
         private class FakeScope
         {
-            public static void GenericMethod()
-            {
-            }
+            public static void GenericMethod() { }
 
-            public static void GenericMethod3<T>(T t)
-            {
-            }
+            public static void GenericMethod3<T>(T t) { }
         }
 
         private class NewScope
         {
-            public static void GenericMethod3<T, H>(H t, T h)
-            {
-            }
+            public static void GenericMethod3<T, H>(H t, T h) { }
         }
 
         private class Base
         {
-            public virtual void GenericMethod()
-            {
-            }
+            public virtual void GenericMethod() { }
 
-            public virtual void GenericMethod2<T>()
-            {
-            }
+            public virtual void GenericMethod2<T>() { }
 
-            public virtual void GenericMethod3<T, H>(T t, H h)
-            {
-            }
+            public virtual void GenericMethod3<T, H>(T t, H h) { }
 
             public virtual T GenericMethod4<T>(T t)
             {
@@ -153,207 +135,415 @@ namespace Castle.DynamicProxy.Tests
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
             Assert.IsTrue(mc.Equals(null, null));
-            Assert.IsFalse(mc.Equals(null, typeof (object).GetMethod("ToString")));
-
-            Assert.IsTrue(mc.Equals(typeof (object).GetMethod("ToString"), typeof (object).GetMethod("ToString")));
-            Assert.IsTrue(mc.Equals(typeof (List<>).GetMethod("get_Count"), typeof (List<>).GetMethod("get_Count")));
-            Assert.IsTrue(mc.Equals(typeof (List<int>).GetMethod("get_Count"), typeof (List<int>).GetMethod("get_Count")));
-            Assert.IsTrue(mc.Equals(typeof (List<>).GetMethod("get_Count"), typeof (List<int>).GetMethod("get_Count")));
-            Assert.IsTrue(mc.Equals(typeof (List<string>).GetMethod("get_Count"), typeof (List<>).GetMethod("get_Count")));
-            Assert.IsTrue(mc.Equals(typeof (List<>).GetMethod("get_Item"), typeof (List<>).GetMethod("get_Item")));
-
-            Assert.IsTrue(mc.Equals(typeof (List<string>).GetMethod("Add"), typeof (List<string>).GetMethod("Add")));
-            Assert.IsFalse(mc.Equals(typeof (List<string>).GetMethod("Add"), typeof (List<>).GetMethod("Add")));
-            Assert.IsFalse(mc.Equals(typeof (List<>).GetMethod("Add"), typeof (List<string>).GetMethod("Add")));
-
-            Assert.IsTrue(mc.Equals(typeof (List<string>).GetMethod("get_Item"), typeof (List<string>).GetMethod("get_Item")));
-            Assert.IsFalse(mc.Equals(typeof (List<string>).GetMethod("get_Item"), typeof (List<>).GetMethod("get_Item")));
-            Assert.IsFalse(mc.Equals(typeof (List<>).GetMethod("get_Item"), typeof (List<string>).GetMethod("get_Item")));
-
-            Assert.IsTrue(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod"),
-                                    typeof (MethodComparerTestCase).GetMethod("GenericMethod")));
-            Assert.IsTrue(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod").MakeGenericMethod(typeof (int)),
-                                    typeof (MethodComparerTestCase).GetMethod("GenericMethod").MakeGenericMethod(typeof (int))));
-            Assert.IsFalse(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod").MakeGenericMethod(typeof (int)),
-                                     typeof (MethodComparerTestCase).GetMethod("GenericMethod").MakeGenericMethod(typeof (string))));
-            Assert.IsFalse(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod").MakeGenericMethod(typeof (int)),
-                                     typeof (MethodComparerTestCase).GetMethod("GenericMethod")));
-            Assert.IsFalse(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod"),
-                                     typeof (MethodComparerTestCase).GetMethod("GenericMethod2")));
-
-            Assert.IsTrue(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod3"),
-                                    typeof (MethodComparerTestCase).GetMethod("GenericMethod3")));
-            Assert.IsFalse(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod3"),
-                                     typeof (NewScope).GetMethod("GenericMethod3")));
+            Assert.IsFalse(mc.Equals(null, typeof(object).GetMethod("ToString")));
 
             Assert.IsTrue(
-                mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod3").MakeGenericMethod(typeof (int), typeof (int)),
-                          typeof (NewScope).GetMethod("GenericMethod3").MakeGenericMethod(typeof (int), typeof (int))));
+                mc.Equals(
+                    typeof(object).GetMethod("ToString"),
+                    typeof(object).GetMethod("ToString")
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<>).GetMethod("get_Count"),
+                    typeof(List<>).GetMethod("get_Count")
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<int>).GetMethod("get_Count"),
+                    typeof(List<int>).GetMethod("get_Count")
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<>).GetMethod("get_Count"),
+                    typeof(List<int>).GetMethod("get_Count")
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<string>).GetMethod("get_Count"),
+                    typeof(List<>).GetMethod("get_Count")
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<>).GetMethod("get_Item"),
+                    typeof(List<>).GetMethod("get_Item")
+                )
+            );
+
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<string>).GetMethod("Add"),
+                    typeof(List<string>).GetMethod("Add")
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(typeof(List<string>).GetMethod("Add"), typeof(List<>).GetMethod("Add"))
+            );
+            Assert.IsFalse(
+                mc.Equals(typeof(List<>).GetMethod("Add"), typeof(List<string>).GetMethod("Add"))
+            );
+
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(List<string>).GetMethod("get_Item"),
+                    typeof(List<string>).GetMethod("get_Item")
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(List<string>).GetMethod("get_Item"),
+                    typeof(List<>).GetMethod("get_Item")
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(List<>).GetMethod("get_Item"),
+                    typeof(List<string>).GetMethod("get_Item")
+                )
+            );
+
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
+                        .MakeGenericMethod(typeof(int)),
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
+                        .MakeGenericMethod(typeof(int))
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
+                        .MakeGenericMethod(typeof(int)),
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
+                        .MakeGenericMethod(typeof(string))
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod")
+                        .MakeGenericMethod(typeof(int)),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod")
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod2")
+                )
+            );
+
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3")
+                )
+            );
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3"),
+                    typeof(NewScope).GetMethod("GenericMethod3")
+                )
+            );
+
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod3")
+                        .MakeGenericMethod(typeof(int), typeof(int)),
+                    typeof(NewScope)
+                        .GetMethod("GenericMethod3")
+                        .MakeGenericMethod(typeof(int), typeof(int))
+                )
+            );
 
             Assert.IsFalse(
                 mc.Equals(
-                    typeof (MethodComparerTestCase).GetMethod("GenericMethod3").MakeGenericMethod(typeof (int), typeof (string)),
-                    typeof (NewScope).GetMethod("GenericMethod3").MakeGenericMethod(typeof (int), typeof (string))));
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod3")
+                        .MakeGenericMethod(typeof(int), typeof(string)),
+                    typeof(NewScope)
+                        .GetMethod("GenericMethod3")
+                        .MakeGenericMethod(typeof(int), typeof(string))
+                )
+            );
 
             Assert.IsFalse(
                 mc.Equals(
-                    typeof (MethodComparerTestCase).GetMethod("GenericMethod3").MakeGenericMethod(typeof (int), typeof (string)),
-                    typeof (NewScope).GetMethod("GenericMethod3").MakeGenericMethod(typeof (string), typeof (int))));
+                    typeof(MethodComparerTestCase)
+                        .GetMethod("GenericMethod3")
+                        .MakeGenericMethod(typeof(int), typeof(string)),
+                    typeof(NewScope)
+                        .GetMethod("GenericMethod3")
+                        .MakeGenericMethod(typeof(string), typeof(int))
+                )
+            );
 
-            Assert.IsFalse(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod3"),
-                                     typeof (FakeScope).GetMethod("GenericMethod3")));
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod3"),
+                    typeof(FakeScope).GetMethod("GenericMethod3")
+                )
+            );
 
-            Assert.IsFalse(mc.Equals(typeof (MethodComparerTestCase).GetMethod("GenericMethod"),
-                                     typeof (FakeScope).GetMethod("GenericMethod")));
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod"),
+                    typeof(FakeScope).GetMethod("GenericMethod")
+                )
+            );
 
-            Assert.IsFalse(mc.Equals(typeof (Console).GetMethod("WriteLine", new Type[] {typeof (object)}),
-                                     typeof (Console).GetMethod("WriteLine", new Type[] {typeof (string), typeof (object[])})));
-            Assert.IsTrue(mc.Equals(typeof (Console).GetMethod("WriteLine", new Type[] {typeof (string), typeof (object[])}),
-                                    typeof (Console).GetMethod("WriteLine", new Type[] {typeof (string), typeof (object[])})));
+            Assert.IsFalse(
+                mc.Equals(
+                    typeof(Console).GetMethod("WriteLine", new Type[] { typeof(object) }),
+                    typeof(Console).GetMethod(
+                        "WriteLine",
+                        new Type[] { typeof(string), typeof(object[]) }
+                    )
+                )
+            );
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Console).GetMethod(
+                        "WriteLine",
+                        new Type[] { typeof(string), typeof(object[]) }
+                    ),
+                    typeof(Console).GetMethod(
+                        "WriteLine",
+                        new Type[] { typeof(string), typeof(object[]) }
+                    )
+                )
+            );
         }
 
         [Test]
         public void Compare_generic_parameter_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(MethodComparerTestCase).GetMethod("GenericMethod4"),
-                typeof(MethodComparerTestCase).GetMethod("GenericMethod4")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod4"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod4")
+                )
+            );
         }
 
         [Test]
         public void Compare_generic_parameter_nested_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(MethodComparerTestCase).GetMethod("GenericMethod5"),
-                typeof(MethodComparerTestCase).GetMethod("GenericMethod5")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod5"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod5")
+                )
+            );
         }
 
         [Test]
         public void Compare_generic_parameter_double_nested_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(MethodComparerTestCase).GetMethod("GenericMethod6"),
-                typeof(MethodComparerTestCase).GetMethod("GenericMethod6")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod6"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod6")
+                )
+            );
         }
 
         [Test]
         public void Compare_double_nested_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(MethodComparerTestCase).GetMethod("GenericMethod7"),
-                typeof(MethodComparerTestCase).GetMethod("GenericMethod7")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod7"),
+                    typeof(MethodComparerTestCase).GetMethod("GenericMethod7")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod"),
-                typeof(Base).GetMethod("GenericMethod")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod"),
+                    typeof(Base).GetMethod("GenericMethod")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_generic_parameter_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod2"),
-                typeof(Base).GetMethod("GenericMethod2")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod2"),
+                    typeof(Base).GetMethod("GenericMethod2")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_mutiple_generic_parameter_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod3"),
-                typeof(Base).GetMethod("GenericMethod3")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod3"),
+                    typeof(Base).GetMethod("GenericMethod3")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_generic_parameter_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod4"),
-                typeof(Base).GetMethod("GenericMethod4")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod4"),
+                    typeof(Base).GetMethod("GenericMethod4")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_generic_parameter_nested_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod5"),
-                typeof(Base).GetMethod("GenericMethod5")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod5"),
+                    typeof(Base).GetMethod("GenericMethod5")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_generic_parameter_double_nested_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod6"),
-                typeof(Base).GetMethod("GenericMethod6")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod6"),
+                    typeof(Base).GetMethod("GenericMethod6")
+                )
+            );
         }
 
         [Test]
         public void Compare_virtual_double_nested_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod7"),
-                typeof(Base).GetMethod("GenericMethod7")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod7"),
+                    typeof(Base).GetMethod("GenericMethod7")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod"),
-                typeof(Inherited).GetMethod("GenericMethod")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod"),
+                    typeof(Inherited).GetMethod("GenericMethod")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_generic_parameter_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod2"),
-                typeof(Inherited).GetMethod("GenericMethod2")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod2"),
+                    typeof(Inherited).GetMethod("GenericMethod2")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_mutiple_generic_parameter_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod3"),
-                typeof(Inherited).GetMethod("GenericMethod3")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod3"),
+                    typeof(Inherited).GetMethod("GenericMethod3")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_generic_parameter_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod4"),
-                typeof(Inherited).GetMethod("GenericMethod4")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod4"),
+                    typeof(Inherited).GetMethod("GenericMethod4")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_generic_parameter_nested_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod5"),
-                typeof(Inherited).GetMethod("GenericMethod5")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod5"),
+                    typeof(Inherited).GetMethod("GenericMethod5")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_generic_parameter_double_nested_generic_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod6"),
-                typeof(Inherited).GetMethod("GenericMethod6")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod6"),
+                    typeof(Inherited).GetMethod("GenericMethod6")
+                )
+            );
         }
 
         [Test]
         public void Compare_inherited_double_nested_return_method()
         {
             MethodSignatureComparer mc = MethodSignatureComparer.Instance;
-            Assert.IsTrue(mc.Equals(typeof(Base).GetMethod("GenericMethod7"),
-                typeof(Inherited).GetMethod("GenericMethod7")));
+            Assert.IsTrue(
+                mc.Equals(
+                    typeof(Base).GetMethod("GenericMethod7"),
+                    typeof(Inherited).GetMethod("GenericMethod7")
+                )
+            );
         }
 
         [Test]

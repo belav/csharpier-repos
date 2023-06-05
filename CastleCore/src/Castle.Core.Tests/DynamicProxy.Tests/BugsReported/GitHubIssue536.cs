@@ -29,12 +29,16 @@ namespace Castle.DynamicProxy.Tests.BugsReported
             var instance = new TestClassForCache();
             var toProxy = instance.GetType();
 
-            var proxyGenerationOptions = new ProxyGenerationOptions(new TestCacheProxyGenerationHook());
+            var proxyGenerationOptions = new ProxyGenerationOptions(
+                new TestCacheProxyGenerationHook()
+            );
 
             var generator = new ProxyGenerator();
-            var proxy = generator.CreateClassProxyWithTarget(toProxy,
+            var proxy = generator.CreateClassProxyWithTarget(
+                toProxy,
                 instance,
-                proxyGenerationOptions);
+                proxyGenerationOptions
+            );
 
             var accessor = (ITestCacheInterface)proxy;
             accessor.InstanceProperty = 1;

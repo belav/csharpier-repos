@@ -23,12 +23,22 @@ public class SyntaxTreeGenerationBenchmark
         var root = current;
         var fileSystem = RazorProjectFileSystem.Create(root.FullName);
 
-        ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, b => RazorExtensions.Register(b)); ;
+        ProjectEngine = RazorProjectEngine.Create(
+            RazorConfiguration.Default,
+            fileSystem,
+            b => RazorExtensions.Register(b)
+        );
+        ;
 
-        var projectItem = fileSystem.GetItem(Path.Combine(root.FullName, "MSN.cshtml"), FileKinds.Legacy);
+        var projectItem = fileSystem.GetItem(
+            Path.Combine(root.FullName, "MSN.cshtml"),
+            FileKinds.Legacy
+        );
         MSN = RazorSourceDocument.ReadFrom(projectItem);
 
-        var directiveFeature = ProjectEngine.EngineFeatures.OfType<IRazorDirectiveFeature>().FirstOrDefault();
+        var directiveFeature = ProjectEngine.EngineFeatures
+            .OfType<IRazorDirectiveFeature>()
+            .FirstOrDefault();
         Directives = directiveFeature?.Directives.ToArray() ?? Array.Empty<DirectiveDescriptor>();
     }
 
@@ -52,7 +62,11 @@ public class SyntaxTreeGenerationBenchmark
 
         if (syntaxTree.Diagnostics.Count != 0)
         {
-            throw new Exception("Error!" + Environment.NewLine + string.Join(Environment.NewLine, syntaxTree.Diagnostics));
+            throw new Exception(
+                "Error!"
+                    + Environment.NewLine
+                    + string.Join(Environment.NewLine, syntaxTree.Diagnostics)
+            );
         }
     }
 
@@ -70,7 +84,11 @@ public class SyntaxTreeGenerationBenchmark
 
         if (syntaxTree.Diagnostics.Count != 0)
         {
-            throw new Exception("Error!" + Environment.NewLine + string.Join(Environment.NewLine, syntaxTree.Diagnostics));
+            throw new Exception(
+                "Error!"
+                    + Environment.NewLine
+                    + string.Join(Environment.NewLine, syntaxTree.Diagnostics)
+            );
         }
     }
 }

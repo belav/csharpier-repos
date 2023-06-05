@@ -13,70 +13,62 @@ using Newtonsoft.Json.Converters;
 
 namespace POS_Server.Controllers
 {
-
     [RoutePrefix("api/UsersLogs")]
     public class UsersLogsController : ApiController
-    {    
+    {
         CountriesController coctrlr = new CountriesController();
         private static System.Timers.Timer logoutTimer;
         private static System.Timers.Timer oneminuteTimer;
         public static double oneMtime = 60000;
+
         // public DispatcherTimer logoutTimer;
-        public static double Repeattime = 600000;//milliSecond//600000=10 minute
-        public int maxIdleperiod = 15;//minute 
+        public static double Repeattime = 600000; //milliSecond//600000=10 minute
+        public int maxIdleperiod = 15; //minute
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
-       public string Get( string token)
+        public string Get(string token)
         {
             //public string GetPurinv(string token)
 
-          
-            
-        
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = (from S in entity.usersLogs
-                                    select new UsersLogsModel()
-                                    {
-                                        logId = S.logId,
-
-                                        sInDate = S.sInDate,
-                                        sOutDate = S.sOutDate,
-                                        posId = S.posId,
-                                        userId = S.userId,
-
-                                    }).ToList();
+                        var list = (
+                            from S in entity.usersLogs
+                            select new UsersLogsModel()
+                            {
+                                logId = S.logId,
+                                sInDate = S.sInDate,
+                                sOutDate = S.sOutDate,
+                                posId = S.posId,
+                                userId = S.userId,
+                            }
+                        ).ToList();
                         return TokenManager.GenerateToken(list);
-                     
-
                     }
-
-
-
                 }
                 catch
                 {
-                     return TokenManager.GenerateToken("0");
+                    return TokenManager.GenerateToken("0");
                 }
-
-
             }
 
-            //          
-            //         
+            //
+            //
             //            string token = "";
             //            bool canDelete = false;
 
@@ -91,7 +83,7 @@ namespace POS_Server.Controllers
             //            {
             //                using (incposdbEntities entity = new incposdbEntities())
             //                {
-            //                    var List = (from S in  entity.usersLogs                                         
+            //                    var List = (from S in  entity.usersLogs
             //                                         select new UsersLogsModel()
             //                                         {
             //                                            logId=S.logId,
@@ -103,7 +95,7 @@ namespace POS_Server.Controllers
 
             //                                         }).ToList();
             //                    /*
-            //                     * 
+            //                     *
 
 
             //    public long logId { get; set; }
@@ -135,19 +127,18 @@ namespace POS_Server.Controllers
             //            return NotFound();
         }
 
-
         // get by userId
         [HttpPost]
         [Route("GetByUserId")]
-       public string GetByUserId(string token)
+        public string GetByUserId(string token)
         {
             //public string GetPurinv(string token)long userId
 
-          
-         
-        
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -156,7 +147,6 @@ namespace POS_Server.Controllers
             {
                 long userId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -164,46 +154,35 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-
-
                 }
-
 
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var item = (from S in entity.usersLogs
-                                    where S.userId == userId
-                                    select new UsersLogsModel()
-                                    {
-                                        logId = S.logId,
-
-                                        sInDate = S.sInDate,
-                                        sOutDate = S.sOutDate,
-                                        posId = S.posId,
-                                        userId = S.userId,
-
-                                    }).ToList();
-
-
-
-
+                        var item = (
+                            from S in entity.usersLogs
+                            where S.userId == userId
+                            select new UsersLogsModel()
+                            {
+                                logId = S.logId,
+                                sInDate = S.sInDate,
+                                sOutDate = S.sOutDate,
+                                posId = S.posId,
+                                userId = S.userId,
+                            }
+                        ).ToList();
 
                         return TokenManager.GenerateToken(item);
-
                     }
-
                 }
                 catch
                 {
-                     return TokenManager.GenerateToken("0");
+                    return TokenManager.GenerateToken("0");
                 }
-
             }
-            //          
-            //         
+            //
+            //
             //            string token = "";
 
 
@@ -231,7 +210,7 @@ namespace POS_Server.Controllers
 
             //                                }).ToList();
             //                    /*
-            //                     * 
+            //                     *
 
 
             //    public long logId { get; set; }
@@ -263,19 +242,18 @@ namespace POS_Server.Controllers
             //            return NotFound();
         }
 
-        // GET api/<controller> 
+        // GET api/<controller>
         [HttpPost]
         [Route("GetByID")]
-       public string GetByID(string token)
+        public string GetByID(string token)
         {
-
             //public string GetPurinv(string token)long logId
 
-          
-         
-        
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -284,11 +262,10 @@ namespace POS_Server.Controllers
             {
                 long logId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
-                    if (c.Type == "logId") 
+                    if (c.Type == "logId")
                     {
                         logId = long.Parse(c.Value);
                     }
@@ -298,27 +275,28 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var item = entity.usersLogs
-                       .Where(u => u.logId == logId)
-                       .Select(S => new
-                       {
-                           S.logId,
-                           S.sInDate,
-                           S.sOutDate,
-                           S.posId,
-                           S.userId,
-                       })
-                       .FirstOrDefault();
+                            .Where(u => u.logId == logId)
+                            .Select(
+                                S =>
+                                    new
+                                    {
+                                        S.logId,
+                                        S.sInDate,
+                                        S.sOutDate,
+                                        S.posId,
+                                        S.userId,
+                                    }
+                            )
+                            .FirstOrDefault();
                         return TokenManager.GenerateToken(item);
-                       // return TokenManager.GenerateToken(item);
+                        // return TokenManager.GenerateToken(item);
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
-                 //    return TokenManager.GenerateToken("0");
+                    //    return TokenManager.GenerateToken("0");
                 }
-
             }
 
             //var re = Request;
@@ -360,20 +338,16 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
         //checkOtherUser
         [HttpPost]
         [Route("checkOtherUser")]
-       public string checkOtherUser(string token)
+        public string checkOtherUser(string token)
         {
-
             //public string GetPurinv(string token)long userId
             string message = "";
-          
-         
-        
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -381,7 +355,6 @@ namespace POS_Server.Controllers
             else
             {
                 long userId = 0;
-
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -393,15 +366,16 @@ namespace POS_Server.Controllers
                 }
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        List<usersLogs> List = entity.usersLogs.Where(S => S.userId == userId && S.sOutDate == null).ToList();
+                        List<usersLogs> List = entity.usersLogs
+                            .Where(S => S.userId == userId && S.sOutDate == null)
+                            .ToList();
                         if (List != null)
                         {
                             foreach (usersLogs row in List)
                             {
-                                row.sOutDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                row.sOutDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 message = entity.SaveChanges().ToString();
                             }
 
@@ -412,22 +386,18 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-
                             message = "-1";
                             // return Ok("none");
                         }
 
-                         return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
                     //  return TokenManager.GenerateToken(item);
-
-
                 }
                 catch
                 {
-                     return TokenManager.GenerateToken("0");
+                    return TokenManager.GenerateToken("0");
                 }
-
             }
             //var re = Request;
             //var headers = re.Headers;
@@ -445,7 +415,7 @@ namespace POS_Server.Controllers
             //{
             //    using (incposdbEntities entity = new incposdbEntities())
             //    {
-            //        List<usersLogs> List = entity.usersLogs.Where(S => S.userId == userId && S.sOutDate == null).ToList(); 
+            //        List<usersLogs> List = entity.usersLogs.Where(S => S.userId == userId && S.sOutDate == null).ToList();
             //        if(List !=null)
             //        {
             //            foreach(usersLogs row in List)
@@ -467,7 +437,6 @@ namespace POS_Server.Controllers
             //return Ok("error");
         }
 
-
         // add or update location
         [HttpPost]
         [Route("Save")]
@@ -476,8 +445,6 @@ namespace POS_Server.Controllers
             //public string Save(string token)
             //string Object string newObject
             string message = "";
-
-
 
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -496,16 +463,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<usersLogs>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<usersLogs>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     usersLogs tmpObject = null;
-
 
                     try
                     {
@@ -529,7 +496,6 @@ namespace POS_Server.Controllers
 
                                 newObject.sInDate = datenow;
 
-
                                 locationEntity.Add(newObject);
                                 entity.SaveChanges();
                                 message = newObject.logId.ToString();
@@ -539,8 +505,13 @@ namespace POS_Server.Controllers
                                 {
                                     List<usersLogs> ul = new List<usersLogs>();
                                     List<usersLogs> locationE = entity2.usersLogs.ToList();
-                                    ul = locationE.Where(s => s.sOutDate == null &&
-                                   ((datenow - (DateTime)s.sInDate).TotalHours >= 8)).ToList();
+                                    ul = locationE
+                                        .Where(
+                                            s =>
+                                                s.sOutDate == null
+                                                && ((datenow - (DateTime)s.sInDate).TotalHours >= 8)
+                                        )
+                                        .ToList();
                                     if (ul != null)
                                     {
                                         foreach (usersLogs row in ul)
@@ -550,20 +521,16 @@ namespace POS_Server.Controllers
                                         }
                                     }
                                 }
-
                             }
-
-
-
                             else
-                            {//signOut
-                                tmpObject = entity.usersLogs.Where(p => p.logId == newObject.logId).FirstOrDefault();
-
-
+                            { //signOut
+                                tmpObject = entity.usersLogs
+                                    .Where(p => p.logId == newObject.logId)
+                                    .FirstOrDefault();
 
                                 tmpObject.logId = newObject.logId;
                                 //  tmpObject.sInDate=newObject.sInDate;
-                                tmpObject.sOutDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                tmpObject.sOutDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 //    tmpObject.posId=newObject.posId;
                                 //  tmpObject.userId = newObject.userId;
 
@@ -576,19 +543,15 @@ namespace POS_Server.Controllers
                         }
 
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
 
             //var re = Request;
@@ -684,6 +647,7 @@ namespace POS_Server.Controllers
             //}
             //return message;
         }
+
         public bool checkLogByID(long logId)
         {
             try
@@ -708,19 +672,17 @@ namespace POS_Server.Controllers
                 return false;
             }
         }
+
         [HttpPost]
         [Route("Delete")]
-       public string Delete(string token)
+        public string Delete(string token)
         {
-
             //public string Delete(string token)long logId, long userId,bool final
             //long Id, long userId
             string message = "";
-          
-         
-        
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -746,14 +708,12 @@ namespace POS_Server.Controllers
                     {
                         final = bool.Parse(c.Value);
                     }
-
                 }
 
                 try
                 {
                     if (final)
                     {
-
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             usersLogs objectDelete = entity.usersLogs.Find(logId);
@@ -761,23 +721,19 @@ namespace POS_Server.Controllers
                             entity.usersLogs.Remove(objectDelete);
                             message = entity.SaveChanges().ToString();
 
-                          //   return TokenManager.GenerateToken(message);
-
+                            //   return TokenManager.GenerateToken(message);
                         }
 
-                         return TokenManager.GenerateToken(message);
-
+                        return TokenManager.GenerateToken(message);
                     }
                     else
                     {
-                    return TokenManager.GenerateToken("-2");
-
+                        return TokenManager.GenerateToken("-2");
                     }
-
                 }
                 catch
                 {
-                     return TokenManager.GenerateToken("0");
+                    return TokenManager.GenerateToken("0");
                 }
             }
             //var re = Request;
@@ -808,7 +764,7 @@ namespace POS_Server.Controllers
             //            }
             //        }
             //        catch
-            //        { 
+            //        {
             //            return "-1";
             //        }
             //    }
@@ -828,13 +784,9 @@ namespace POS_Server.Controllers
             //string Object string newObject
             string message = "";
 
-
             if (newObject != null)
             {
-
-
                 usersLogs tmpObject = null;
-
 
                 try
                 {
@@ -860,40 +812,39 @@ namespace POS_Server.Controllers
                             {
                                 List<usersLogs> ul = new List<usersLogs>();
                                 List<usersLogs> locationE = entity2.usersLogs.ToList();
-                                ul = locationE.Where(s => s.sOutDate == null &&
-                               ((datenow - (DateTime)s.sInDate).TotalHours >= 8) || (s.userId == newObject.userId && s.sOutDate == null)).ToList();
+                                ul = locationE
+                                    .Where(
+                                        s =>
+                                            s.sOutDate == null
+                                                && ((datenow - (DateTime)s.sInDate).TotalHours >= 8)
+                                            || (s.userId == newObject.userId && s.sOutDate == null)
+                                    )
+                                    .ToList();
                                 if (ul != null)
                                 {
                                     foreach (usersLogs row in ul)
                                     {
-                                        row.sOutDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                        row.sOutDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                         entity2.SaveChanges();
                                     }
                                 }
                             }
-                            newObject.sInDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-
+                            newObject.sInDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                             locationEntity.Add(newObject);
                             entity.SaveChanges();
                             message = newObject.logId.ToString();
                             //sign out old user
-
-
-
                         }
-
-
-
                         else
-                        {//signOut
-                            tmpObject = entity.usersLogs.Where(p => p.logId == newObject.logId).FirstOrDefault();
-
-
+                        { //signOut
+                            tmpObject = entity.usersLogs
+                                .Where(p => p.logId == newObject.logId)
+                                .FirstOrDefault();
 
                             tmpObject.logId = newObject.logId;
                             //  tmpObject.sInDate=newObject.sInDate;
-                            tmpObject.sOutDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.sOutDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             //    tmpObject.posId=newObject.posId;
                             //  tmpObject.userId = newObject.userId;
 
@@ -906,15 +857,12 @@ namespace POS_Server.Controllers
                     }
 
                     return message;
-
                 }
                 catch
                 {
                     message = "0";
                     return message;
                 }
-
-
             }
             else
             {
@@ -934,57 +882,49 @@ namespace POS_Server.Controllers
                     {
                         var itemlist = entity.usersLogs.Where(u => u.logId == logId).ToList();
 
-                        item = itemlist.Where(u => u.logId == logId)
-                               .Select(S => new usersLogs
-                               {
-                                   logId = S.logId,
-                                   sInDate = S.sInDate,
-                                   sOutDate = S.sOutDate,
-                                   posId = S.posId,
-                                   userId = S.userId,
-                               })
-                               .FirstOrDefault();
+                        item = itemlist
+                            .Where(u => u.logId == logId)
+                            .Select(
+                                S =>
+                                    new usersLogs
+                                    {
+                                        logId = S.logId,
+                                        sInDate = S.sInDate,
+                                        sOutDate = S.sOutDate,
+                                        posId = S.posId,
+                                        userId = S.userId,
+                                    }
+                            )
+                            .FirstOrDefault();
                         return item;
-
                     }
-
                 }
                 catch (Exception ex)
                 {
                     return item;
-
                 }
             }
             else
             {
                 return item;
             }
-
-
-
         }
+
         void timerFunction(object sender, EventArgs e)
         {
-
             try
             {
-
                 SignOutErrorExit();
                 TokenManager.deleteDirectoryFiles();
                 BackupController backcntrlr = new BackupController();
                 backcntrlr.autoBackup();
-               // notificationTimer();
+                // notificationTimer();
             }
-            catch (Exception ex)
-            {
-
-            }
-
+            catch (Exception ex) { }
         }
 
         public void startapp()
         {
-
             int res = 0;
             try
             {
@@ -993,38 +933,46 @@ namespace POS_Server.Controllers
                 // logoutTimer.Interval = Repeattime;
                 logoutTimer.Elapsed += timerFunction;
 
-                logoutTimer.AutoReset = true;//to repeat timer
-                logoutTimer.Enabled = true;// to start timer
+                logoutTimer.AutoReset = true; //to repeat timer
+                logoutTimer.Enabled = true; // to start timer
 
                 oneminuteTimer = new System.Timers.Timer();
                 oneminuteTimer.Interval = oneMtime;
                 // logoutTimer.Interval = Repeattime;
                 oneminuteTimer.Elapsed += oneminuteTimerFunction;
-                oneminuteTimer.AutoReset = true;//to repeat timer
-                oneminuteTimer.Enabled = true;// to start timer
+                oneminuteTimer.AutoReset = true; //to repeat timer
+                oneminuteTimer.Enabled = true; // to start timer
             }
             catch
             {
-
                 // return 0;
-
             }
-
         }
+
         private void SignOutErrorExit()
         {
             int res = 0;
             try
             {
-
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     List<UsersRequest> soutlist = entity.UsersRequest.ToList();
-                    soutlist = soutlist.Where(r => (coctrlr.AddOffsetTodate(DateTime.Now) - (DateTime)r.lastRequestDate.Value).Minutes >= maxIdleperiod && r.sOutDate == null).ToList();
+                    soutlist = soutlist
+                        .Where(
+                            r =>
+                                (
+                                    coctrlr.AddOffsetTodate(DateTime.Now)
+                                    - (DateTime)r.lastRequestDate.Value
+                                ).Minutes >= maxIdleperiod
+                                && r.sOutDate == null
+                        )
+                        .ToList();
                     foreach (UsersRequest urout in soutlist)
                     {
-                        usersLogs userlogobj = entity.usersLogs.Where(u => u.userId == urout.userId && u.sOutDate == null).ToList().LastOrDefault();
+                        usersLogs userlogobj = entity.usersLogs
+                            .Where(u => u.userId == urout.userId && u.sOutDate == null)
+                            .ToList()
+                            .LastOrDefault();
 
                         if (userlogobj.logId > 0)
                         {
@@ -1036,11 +984,9 @@ namespace POS_Server.Controllers
                     }
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) { }
         }
+
         public string Saverequest(UsersRequest newObject)
         {
             string res = "0";
@@ -1060,48 +1006,35 @@ namespace POS_Server.Controllers
                         var locationEntity = entity.Set<UsersRequest>();
                         if (newObject.UserRequestId == 0 || newObject.UserRequestId == null)
                         {
-
                             locationEntity.Add(newObject);
                             res = entity.SaveChanges().ToString();
-
-
                         }
-
                         else
-                        {//signOut
-                            tmpObject = entity.UsersRequest.Where(p => p.userId == newObject.userId).FirstOrDefault();
+                        { //signOut
+                            tmpObject = entity.UsersRequest
+                                .Where(p => p.userId == newObject.userId)
+                                .FirstOrDefault();
                             tmpObject.sInDate = newObject.sInDate;
                             tmpObject.sOutDate = newObject.sOutDate;
 
                             tmpObject.lastRequestDate = newObject.lastRequestDate;
 
-
                             res = entity.SaveChanges().ToString();
-
-
                         }
-
                     }
 
                     return res;
-
                 }
                 catch (Exception ex)
                 {
                     // return ex.ToString();
                     return "0";
                 }
-
-
-
-
             }
             else
             {
                 return "0";
             }
-
-
         }
 
         public string UpdateLastRequest(usersLogs item)
@@ -1114,7 +1047,6 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     reqlist = entity.UsersRequest.Where(r => r.userId == item.userId).ToList();
-
                 }
 
                 if (reqlist.Count() == 0)
@@ -1137,7 +1069,6 @@ namespace POS_Server.Controllers
                     urModel.sOutDate = item.sOutDate;
                     urModel.lastRequestDate = coctrlr.AddOffsetTodate(DateTime.Now);
                     res = Saverequest(urModel);
-
                 }
                 return res;
             }
@@ -1145,7 +1076,6 @@ namespace POS_Server.Controllers
             {
                 return "0";
             }
-
         }
 
         public void notificationTimer()
@@ -1157,40 +1087,30 @@ namespace POS_Server.Controllers
             setValuesModel = svalctrlr.GetRowBySettingName("isAlertDone");
             try
             {
-
-
                 DateTime Lastdate = Convert.ToDateTime(setValuesModel.value);
                 //    DateTime Lastdate= DateTime.Parse();
                 if (datetoday.Date > Lastdate.Date)
                 {
-                   // notctrlr.addExpiredAlert();
+                    // notctrlr.addExpiredAlert();
                     setValuesModel.value = datetoday.Date.ToString("yyyy-MM-dd");
                     svalctrlr.Save(setValuesModel);
                 }
-
             }
             catch (Exception ex)
             {
                 setValuesModel.value = datetoday.Date.ToString("yyyy-MM-dd");
                 svalctrlr.Save(setValuesModel);
             }
-
         }
+
         public async void oneminuteTimerFunction(object sender, EventArgs e)
         {
-
             try
             {
-
                 StatisticsController sts = new StatisticsController();
                 await sts.MakeStatement();
-
             }
-            catch
-            {
-
-            }
-
+            catch { }
         }
     }
 }

@@ -17,13 +17,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteWorkspaceTelemetryService()
-        {
-        }
+        public RemoteWorkspaceTelemetryService() { }
 
-        protected override ILogger CreateLogger(TelemetrySession telemetrySession, bool logDelta)
-            => AggregateLogger.Create(
+        protected override ILogger CreateLogger(TelemetrySession telemetrySession, bool logDelta) =>
+            AggregateLogger.Create(
                 TelemetryLogger.Create(telemetrySession, logDelta),
-                Logger.GetLogger());
+                Logger.GetLogger()
+            );
     }
 }

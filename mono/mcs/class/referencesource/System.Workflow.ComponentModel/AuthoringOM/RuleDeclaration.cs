@@ -10,14 +10,16 @@ namespace System.Workflow.ComponentModel
     using System.ComponentModel.Design.Serialization;
     using System.Reflection;
 
-    //TODO: remove this inheritence, when event binding service line UseMethod and FreeMethod methods are fixed. 
+    //TODO: remove this inheritence, when event binding service line UseMethod and FreeMethod methods are fixed.
     [DesignerSerializer(typeof(WorkflowMarkupSerializer), typeof(WorkflowMarkupSerializer))]
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
     [TypeConverter(typeof(ConditionTypeConverter))]
     [ActivityValidator(typeof(ConditionValidator))]
     [MergableProperty(false)]
     [Browsable(true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class ActivityCondition : DependencyObject
     {
         public abstract bool Evaluate(Activity activity, IServiceProvider provider);

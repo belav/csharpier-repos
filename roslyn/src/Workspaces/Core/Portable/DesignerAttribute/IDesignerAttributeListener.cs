@@ -17,6 +17,9 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
     internal interface IDesignerAttributeListener
     {
         ValueTask OnProjectRemovedAsync(ProjectId projectId, CancellationToken cancellationToken);
-        ValueTask ReportDesignerAttributeDataAsync(ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken);
+        ValueTask ReportDesignerAttributeDataAsync(
+            ImmutableArray<DesignerAttributeData> data,
+            CancellationToken cancellationToken
+        );
     }
 }

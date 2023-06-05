@@ -11,23 +11,39 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor
 {
-    internal abstract class AbstractDirectiveTriviaBraceMatcher<TDirectiveTriviaSyntax,
-        TIfDirectiveTriviaSyntax, TElseIfDirectiveTriviaSyntax,
-        TElseDirectiveTriviaSyntax, TEndIfDirectiveTriviaSyntax,
-        TRegionDirectiveTriviaSyntax, TEndRegionDirectiveTriviaSyntax> : IBraceMatcher
-            where TDirectiveTriviaSyntax : SyntaxNode
-            where TIfDirectiveTriviaSyntax : TDirectiveTriviaSyntax
-            where TElseIfDirectiveTriviaSyntax : TDirectiveTriviaSyntax
-            where TElseDirectiveTriviaSyntax : TDirectiveTriviaSyntax
-            where TEndIfDirectiveTriviaSyntax : TDirectiveTriviaSyntax
-            where TRegionDirectiveTriviaSyntax : TDirectiveTriviaSyntax
-            where TEndRegionDirectiveTriviaSyntax : TDirectiveTriviaSyntax
+    internal abstract class AbstractDirectiveTriviaBraceMatcher<
+        TDirectiveTriviaSyntax,
+        TIfDirectiveTriviaSyntax,
+        TElseIfDirectiveTriviaSyntax,
+        TElseDirectiveTriviaSyntax,
+        TEndIfDirectiveTriviaSyntax,
+        TRegionDirectiveTriviaSyntax,
+        TEndRegionDirectiveTriviaSyntax
+    > : IBraceMatcher
+        where TDirectiveTriviaSyntax : SyntaxNode
+        where TIfDirectiveTriviaSyntax : TDirectiveTriviaSyntax
+        where TElseIfDirectiveTriviaSyntax : TDirectiveTriviaSyntax
+        where TElseDirectiveTriviaSyntax : TDirectiveTriviaSyntax
+        where TEndIfDirectiveTriviaSyntax : TDirectiveTriviaSyntax
+        where TRegionDirectiveTriviaSyntax : TDirectiveTriviaSyntax
+        where TEndRegionDirectiveTriviaSyntax : TDirectiveTriviaSyntax
     {
-        internal abstract List<TDirectiveTriviaSyntax> GetMatchingConditionalDirectives(TDirectiveTriviaSyntax directive, CancellationToken cancellationToken);
-        internal abstract TDirectiveTriviaSyntax GetMatchingDirective(TDirectiveTriviaSyntax directive, CancellationToken cancellationToken);
+        internal abstract List<TDirectiveTriviaSyntax> GetMatchingConditionalDirectives(
+            TDirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        );
+        internal abstract TDirectiveTriviaSyntax GetMatchingDirective(
+            TDirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        );
         internal abstract TextSpan GetSpanForTagging(TDirectiveTriviaSyntax directive);
 
-        public async Task<BraceMatchingResult?> FindBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+        public async Task<BraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position, findInsideTrivia: true);
@@ -41,10 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor
             if (IsConditionalDirective(directive))
             {
                 // #if/#elif/#else/#endif directive cases.
-                var matchingDirectives = GetMatchingConditionalDirectives(directive, cancellationToken);
+                var matchingDirectives = GetMatchingConditionalDirectives(
+                    directive,
+                    cancellationToken
+                );
                 if (matchingDirectives?.Count > 0)
                 {
-                    matchingDirective = matchingDirectives[(matchingDirectives.IndexOf(directive) + 1) % matchingDirectives.Count];
+                    matchingDirective = matchingDirectives[
+                        (matchingDirectives.IndexOf(directive) + 1) % matchingDirectives.Count
+                    ];
                 }
             }
             else
@@ -61,15 +82,17 @@ namespace Microsoft.CodeAnalysis.Editor
 
             return new BraceMatchingResult(
                 LeftSpan: GetSpanForTagging(directive),
-                RightSpan: GetSpanForTagging(matchingDirective));
+                RightSpan: GetSpanForTagging(matchingDirective)
+            );
         }
 
         private static bool IsConditionalDirective(TDirectiveTriviaSyntax directive)
         {
-            return directive is TIfDirectiveTriviaSyntax or
-                   TElseIfDirectiveTriviaSyntax or
-                   TElseDirectiveTriviaSyntax or
-                   TEndIfDirectiveTriviaSyntax;
+            return directive
+                is TIfDirectiveTriviaSyntax
+                    or TElseIfDirectiveTriviaSyntax
+                    or TElseDirectiveTriviaSyntax
+                    or TEndIfDirectiveTriviaSyntax;
         }
     }
 }

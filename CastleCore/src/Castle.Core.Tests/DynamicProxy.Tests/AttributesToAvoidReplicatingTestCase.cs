@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,7 +39,9 @@ namespace Castle.DynamicProxy.Tests
         public void After_adding_attribute_must_still_contain_original_attributes()
         {
             AttributesToAvoidReplicating.Add<string>();
-            bool contains = AttributesToAvoidReplicating.Contains(typeof(System.Runtime.InteropServices.ComImportAttribute));
+            bool contains = AttributesToAvoidReplicating.Contains(
+                typeof(System.Runtime.InteropServices.ComImportAttribute)
+            );
             Assert.IsTrue(contains);
         }
 
@@ -51,9 +53,7 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [NonInheritable]
-        public class AttributedClass_NonInheritable
-        {
-        }
+        public class AttributedClass_NonInheritable { }
 
         [Test]
         public void InheritableAttribute_should_not_be_replicated_as_it_is_inherited_by_the_runtime()
@@ -63,9 +63,7 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [Inheritable]
-        public class AttributedClass_Inheritable
-        {
-        }
+        public class AttributedClass_Inheritable { }
 
         [Test]
         public void SecurityPermissionAttribute_should_not_be_replicated_as_it_is_part_of_cas()
@@ -75,9 +73,7 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [SecurityPermission(SecurityAction.Demand)]
-        public class AttributedClass_SecurityPermission
-        {
-        }
+        public class AttributedClass_SecurityPermission { }
 
         [Test]
         public void ReflectionPermissionAttribute_should_not_be_replicated_as_it_is_part_of_cas()
@@ -87,9 +83,7 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [ReflectionPermission(SecurityAction.Demand)]
-        public class AttributedClass_ReflectionPermission
-        {
-        }
+        public class AttributedClass_ReflectionPermission { }
 
         private int AttributeCount<TAttribute>(object proxy)
             where TAttribute : Attribute

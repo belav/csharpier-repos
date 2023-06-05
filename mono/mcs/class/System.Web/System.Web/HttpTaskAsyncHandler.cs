@@ -31,29 +31,34 @@ using System.Threading.Tasks;
 
 namespace System.Web
 {
-	public abstract class HttpTaskAsyncHandler : IHttpAsyncHandler, IHttpHandler
-	{
-		public virtual bool IsReusable {
-			get { return false; }
-		}
+    public abstract class HttpTaskAsyncHandler : IHttpAsyncHandler, IHttpHandler
+    {
+        public virtual bool IsReusable
+        {
+            get { return false; }
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public virtual void ProcessRequest (HttpContext context)
-		{
-			throw new NotSupportedException ("This handler cannot be executed synchronously.");
-		}
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public virtual void ProcessRequest(HttpContext context)
+        {
+            throw new NotSupportedException("This handler cannot be executed synchronously.");
+        }
 
-		public abstract Task ProcessRequestAsync (HttpContext context);
+        public abstract Task ProcessRequestAsync(HttpContext context);
 
-		IAsyncResult IHttpAsyncHandler.BeginProcessRequest (HttpContext context, AsyncCallback cb, object extraData)
-		{
-			Task task = ProcessRequestAsync (context);
-			return TaskAsyncResult.GetAsyncResult (task, cb, extraData);
-		}
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            object extraData
+        )
+        {
+            Task task = ProcessRequestAsync(context);
+            return TaskAsyncResult.GetAsyncResult(task, cb, extraData);
+        }
 
-		void IHttpAsyncHandler.EndProcessRequest (IAsyncResult result)
-		{
-			TaskAsyncResult.Wait (result);
-		}
-	}
+        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+        {
+            TaskAsyncResult.Wait(result);
+        }
+    }
 }

@@ -47,7 +47,6 @@ namespace System.Reflection.Runtime.TypeParsing
             }
         }
 
-
         public void Skip()
         {
             Debug.Assert(_index != _chars.Length);
@@ -80,7 +79,7 @@ namespace System.Reflection.Runtime.TypeParsing
             int src = _index;
             char[] buffer = new char[_chars.Length];
             int dst = 0;
-            for (;;)
+            for (; ; )
             {
                 char c = _chars[src];
                 TokenType token = CharToToken(c);
@@ -129,7 +128,7 @@ namespace System.Reflection.Runtime.TypeParsing
             int src = _index;
             char[] buffer = new char[_chars.Length];
             int dst = 0;
-            for (;;)
+            for (; ; )
             {
                 char c = _chars[src];
                 if (c == NUL)
@@ -154,7 +153,7 @@ namespace System.Reflection.Runtime.TypeParsing
             int src = _index;
             char[] buffer = new char[_chars.Length];
             int dst = 0;
-            for (;;)
+            for (; ; )
             {
                 char c = _chars[src];
                 if (c == NUL)
@@ -218,26 +217,22 @@ namespace System.Reflection.Runtime.TypeParsing
                 _index++;
         }
 
-
         private int _index;
         private readonly char[] _chars;
         private const char NUL = (char)0;
 
-
-        public sealed class IllegalEscapeSequenceException : Exception
-        {
-        }
+        public sealed class IllegalEscapeSequenceException : Exception { }
     }
 
     internal enum TokenType
     {
-        End = 0,              //At end of string
-        OpenSqBracket = 1,    //'['
-        CloseSqBracket = 2,   //']'
-        Comma = 3,            //','
-        Plus = 4,             //'+'
-        Asterisk = 5,         //'*'
-        Ampersand = 6,        //'&'
-        Other = 7,            //Type identifier, AssemblyName or embedded AssemblyName.
+        End = 0, //At end of string
+        OpenSqBracket = 1, //'['
+        CloseSqBracket = 2, //']'
+        Comma = 3, //','
+        Plus = 4, //'+'
+        Asterisk = 5, //'*'
+        Ampersand = 6, //'&'
+        Other = 7, //Type identifier, AssemblyName or embedded AssemblyName.
     }
 }

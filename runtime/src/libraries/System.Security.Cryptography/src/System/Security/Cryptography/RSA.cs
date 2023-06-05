@@ -18,7 +18,11 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("browser")]
         public static new partial RSA Create();
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static new RSA? Create(string algName)
         {
@@ -61,18 +65,43 @@ namespace System.Security.Cryptography
 
         public abstract RSAParameters ExportParameters(bool includePrivateParameters);
         public abstract void ImportParameters(RSAParameters parameters);
-        public virtual byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) => throw DerivedClassMustOverride();
-        public virtual byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) => throw DerivedClassMustOverride();
-        public virtual byte[] SignHash(byte[] hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) => throw DerivedClassMustOverride();
-        public virtual bool VerifyHash(byte[] hash, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) => throw DerivedClassMustOverride();
 
-        protected virtual byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) =>
+        public virtual byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) =>
+            throw DerivedClassMustOverride();
+
+        public virtual byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) =>
+            throw DerivedClassMustOverride();
+
+        public virtual byte[] SignHash(
+            byte[] hash,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => throw DerivedClassMustOverride();
+
+        public virtual bool VerifyHash(
+            byte[] hash,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => throw DerivedClassMustOverride();
+
+        protected virtual byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        ) =>
             HashOneShotHelpers.HashData(hashAlgorithm, new ReadOnlySpan<byte>(data, offset, count));
 
         protected virtual byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
             HashOneShotHelpers.HashData(hashAlgorithm, data);
 
-        public virtual bool TryDecrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding, out int bytesWritten)
+        public virtual bool TryDecrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding,
+            out int bytesWritten
+        )
         {
             byte[] result = Decrypt(data.ToArray(), padding);
 
@@ -87,7 +116,12 @@ namespace System.Security.Cryptography
             return false;
         }
 
-        public virtual bool TryEncrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding, out int bytesWritten)
+        public virtual bool TryEncrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding,
+            out int bytesWritten
+        )
         {
             byte[] result = Encrypt(data.ToArray(), padding);
 
@@ -140,7 +174,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> input,
                 byte[] destination,
                 RSAEncryptionPadding padding,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 return rsa.TryEncrypt(input, destination, padding, out bytesWritten);
             }
@@ -181,7 +216,11 @@ namespace System.Security.Cryptography
         /// <seealso cref="Encrypt(byte[], RSAEncryptionPadding)" />
         /// <seealso cref="Encrypt(ReadOnlySpan{byte}, RSAEncryptionPadding)" />
         /// <seealso cref="TryEncrypt" />
-        public int Encrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding)
+        public int Encrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(padding);
 
@@ -227,7 +266,8 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> input,
                 byte[] destination,
                 RSAEncryptionPadding padding,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 return rsa.TryDecrypt(input, destination, padding, out bytesWritten);
             }
@@ -264,7 +304,11 @@ namespace System.Security.Cryptography
         /// <seealso cref="Decrypt(byte[], RSAEncryptionPadding)" />
         /// <seealso cref="Decrypt(ReadOnlySpan{byte}, RSAEncryptionPadding)" />
         /// <seealso cref="TryDecrypt" />
-        public int Decrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding)
+        public int Decrypt(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            RSAEncryptionPadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(padding);
 
@@ -276,12 +320,22 @@ namespace System.Security.Cryptography
             throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
         }
 
-        protected virtual bool TryHashData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten)
+        protected virtual bool TryHashData(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            HashAlgorithmName hashAlgorithm,
+            out int bytesWritten
+        )
         {
             // If this is an algorithm that we ship, then we can use the hash one-shot.
             if (this is IRuntimeAlgorithm)
             {
-                return HashOneShotHelpers.TryHashData(hashAlgorithm, data, destination, out bytesWritten);
+                return HashOneShotHelpers.TryHashData(
+                    hashAlgorithm,
+                    data,
+                    destination,
+                    out bytesWritten
+                );
             }
 
             // If this is not our algorithm implementation, for compatibility purposes we need to
@@ -311,7 +365,13 @@ namespace System.Security.Cryptography
             return false;
         }
 
-        public virtual bool TrySignHash(ReadOnlySpan<byte> hash, Span<byte> destination, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding, out int bytesWritten)
+        public virtual bool TrySignHash(
+            ReadOnlySpan<byte> hash,
+            Span<byte> destination,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding,
+            out int bytesWritten
+        )
         {
             byte[] result = SignHash(hash.ToArray(), hashAlgorithm, padding);
 
@@ -326,23 +386,39 @@ namespace System.Security.Cryptography
             return false;
         }
 
-        public virtual bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            VerifyHash(hash.ToArray(), signature.ToArray(), hashAlgorithm, padding);
+        public virtual bool VerifyHash(
+            ReadOnlySpan<byte> hash,
+            ReadOnlySpan<byte> signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => VerifyHash(hash.ToArray(), signature.ToArray(), hashAlgorithm, padding);
 
         private static Exception DerivedClassMustOverride() =>
             new NotImplementedException(SR.NotSupported_SubclassOverride);
 
-        [Obsolete(Obsoletions.RsaEncryptDecryptValueMessage, DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RsaEncryptDecryptValueMessage,
+            DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual byte[] DecryptValue(byte[] rgb) =>
             throw new NotSupportedException(SR.NotSupported_Method); // Same as Desktop
 
-        [Obsolete(Obsoletions.RsaEncryptDecryptValueMessage, DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.RsaEncryptDecryptValueMessage,
+            DiagnosticId = Obsoletions.RsaEncryptDecryptDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual byte[] EncryptValue(byte[] rgb) =>
             throw new NotSupportedException(SR.NotSupported_Method); // Same as Desktop
 
-        public byte[] SignData(byte[] data, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public byte[] SignData(
+            byte[] data,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
 
@@ -354,7 +430,8 @@ namespace System.Security.Cryptography
             int offset,
             int count,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
             if (offset < 0 || offset > data.Length)
@@ -368,7 +445,11 @@ namespace System.Security.Cryptography
             return SignHash(hash, hashAlgorithm, padding);
         }
 
-        public virtual byte[] SignData(Stream data, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public virtual byte[] SignData(
+            Stream data,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
@@ -378,13 +459,27 @@ namespace System.Security.Cryptography
             return SignHash(hash, hashAlgorithm, padding);
         }
 
-        public virtual bool TrySignData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding, out int bytesWritten)
+        public virtual bool TrySignData(
+            ReadOnlySpan<byte> data,
+            Span<byte> destination,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding,
+            out int bytesWritten
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             ArgumentNullException.ThrowIfNull(padding);
 
-            if (TryHashData(data, destination, hashAlgorithm, out int hashLength) &&
-                TrySignHash(destination.Slice(0, hashLength), destination, hashAlgorithm, padding, out bytesWritten))
+            if (
+                TryHashData(data, destination, hashAlgorithm, out int hashLength)
+                && TrySignHash(
+                    destination.Slice(0, hashLength),
+                    destination,
+                    hashAlgorithm,
+                    padding,
+                    out bytesWritten
+                )
+            )
             {
                 return true;
             }
@@ -423,7 +518,11 @@ namespace System.Security.Cryptography
         ///   This implementation has not implemented one of <see cref="TrySignData" />, <see cref="TrySignHash" />,
         ///   or <see cref="SignHash(byte[], HashAlgorithmName, RSASignaturePadding)" />.
         /// </exception>
-        public byte[] SignData(ReadOnlySpan<byte> data, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public byte[] SignData(
+            ReadOnlySpan<byte> data,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             ArgumentNullException.ThrowIfNull(padding);
@@ -433,15 +532,23 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> input,
                 byte[] destination,
                 (HashAlgorithmName HashAlgorithm, RSASignaturePadding Padding) state,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                return rsa.TrySignData(input, destination, state.HashAlgorithm, state.Padding, out bytesWritten);
+                return rsa.TrySignData(
+                    input,
+                    destination,
+                    state.HashAlgorithm,
+                    state.Padding,
+                    out bytesWritten
+                );
             }
 
             return TryWithKeyBuffer(
                 data,
                 (HashAlgorithm: hashAlgorithm, Padding: padding),
-                TryWithSignData);
+                TryWithSignData
+            );
         }
 
         /// <summary>
@@ -486,7 +593,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             ArgumentNullException.ThrowIfNull(padding);
@@ -529,7 +637,11 @@ namespace System.Security.Cryptography
         ///   This implementation has not implemented one of <see cref="TrySignHash" />
         ///   or <see cref="SignHash(byte[], HashAlgorithmName, RSASignaturePadding)" />.
         /// </exception>
-        public byte[] SignHash(ReadOnlySpan<byte> hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public byte[] SignHash(
+            ReadOnlySpan<byte> hash,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             ArgumentNullException.ThrowIfNull(padding);
@@ -539,9 +651,16 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> input,
                 byte[] destination,
                 (HashAlgorithmName HashAlgorithm, RSASignaturePadding Padding) state,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                return rsa.TrySignHash(input, destination, state.HashAlgorithm, state.Padding, out bytesWritten);
+                return rsa.TrySignHash(
+                    input,
+                    destination,
+                    state.HashAlgorithm,
+                    state.Padding,
+                    out bytesWritten
+                );
             }
 
             return TryWithKeyBuffer(hash, (hashAlgorithm, padding), TryWithSignHash);
@@ -588,7 +707,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             ArgumentNullException.ThrowIfNull(padding);
@@ -601,7 +721,12 @@ namespace System.Security.Cryptography
             throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
         }
 
-        public bool VerifyData(byte[] data, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public bool VerifyData(
+            byte[] data,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
 
@@ -614,7 +739,8 @@ namespace System.Security.Cryptography
             int count,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
             if (offset < 0 || offset > data.Length)
@@ -629,7 +755,12 @@ namespace System.Security.Cryptography
             return VerifyHash(hash, signature, hashAlgorithm, padding);
         }
 
-        public bool VerifyData(Stream data, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public bool VerifyData(
+            Stream data,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(data);
             ArgumentNullException.ThrowIfNull(signature);
@@ -640,7 +771,12 @@ namespace System.Security.Cryptography
             return VerifyHash(hash, signature, hashAlgorithm, padding);
         }
 
-        public virtual bool VerifyData(ReadOnlySpan<byte> data, ReadOnlySpan<byte> signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public virtual bool VerifyData(
+            ReadOnlySpan<byte> data,
+            ReadOnlySpan<byte> signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
             ArgumentNullException.ThrowIfNull(padding);
@@ -653,7 +789,12 @@ namespace System.Security.Cryptography
                 {
                     if (TryHashData(data, hash, hashAlgorithm, out hashLength))
                     {
-                        return VerifyHash(new ReadOnlySpan<byte>(hash, 0, hashLength), signature, hashAlgorithm, padding);
+                        return VerifyHash(
+                            new ReadOnlySpan<byte>(hash, 0, hashLength),
+                            signature,
+                            hashAlgorithm,
+                            padding
+                        );
                     }
                 }
                 finally
@@ -687,7 +828,10 @@ namespace System.Security.Cryptography
             return pkcs1PublicKey.TryEncode(destination, out bytesWritten);
         }
 
-        public override unsafe bool TryExportSubjectPublicKeyInfo(Span<byte> destination, out int bytesWritten)
+        public override unsafe bool TryExportSubjectPublicKeyInfo(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             // The PKCS1 RSAPublicKey format is just the modulus (KeySize bits) and Exponent (usually 3 bytes),
             // with each field having up to 7 bytes of overhead and then up to 6 extra bytes of overhead for the
@@ -712,7 +856,9 @@ namespace System.Security.Cryptography
                             continue;
                         }
 
-                        AsnWriter writer = RSAKeyFormatHelper.WriteSubjectPublicKeyInfo(rented.AsSpan(0, pkcs1Size));
+                        AsnWriter writer = RSAKeyFormatHelper.WriteSubjectPublicKeyInfo(
+                            rented.AsSpan(0, pkcs1Size)
+                        );
                         return writer.TryEncode(destination, out bytesWritten);
                     }
                     finally
@@ -755,7 +901,9 @@ namespace System.Security.Cryptography
                             continue;
                         }
 
-                        return RSAKeyFormatHelper.WritePkcs8PrivateKey(new ReadOnlySpan<byte>(rented, 0, pkcs1Size));
+                        return RSAKeyFormatHelper.WritePkcs8PrivateKey(
+                            new ReadOnlySpan<byte>(rented, 0, pkcs1Size)
+                        );
                     }
                     finally
                     {
@@ -769,21 +917,24 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             AsnWriter pkcs8PrivateKey = WritePkcs8PrivateKey();
 
             AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                 password,
                 pkcs8PrivateKey,
-                pbeParameters);
+                pbeParameters
+            );
 
             return writer.TryEncode(destination, out bytesWritten);
         }
@@ -792,21 +943,24 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
             AsnWriter pkcs8PrivateKey = WritePkcs8PrivateKey();
 
             AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                 passwordBytes,
                 pkcs8PrivateKey,
-                pbeParameters);
+                pbeParameters
+            );
 
             return writer.TryEncode(destination, out bytesWritten);
         }
@@ -839,15 +993,21 @@ namespace System.Security.Cryptography
             }
         }
 
-        public override unsafe void ImportSubjectPublicKeyInfo(ReadOnlySpan<byte> source, out int bytesRead)
+        public override unsafe void ImportSubjectPublicKeyInfo(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
                     ReadOnlyMemory<byte> pkcs1 = RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                         manager.Memory,
-                        out int localRead);
+                        out int localRead
+                    );
 
                     ImportRSAPublicKey(pkcs1.Span, out _);
                     bytesRead = localRead;
@@ -864,14 +1024,21 @@ namespace System.Security.Cryptography
                     AsnEncodingRules.BER,
                     out _,
                     out _,
-                    out int localRead);
+                    out int localRead
+                );
 
                 fixed (byte* ptr = &MemoryMarshal.GetReference(source))
                 {
-                    using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, localRead))
+                    using (
+                        MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, localRead)
+                    )
                     {
                         AlgorithmIdentifierAsn ignored = default;
-                        RSAKeyFormatHelper.ReadRsaPublicKey(manager.Memory, ignored, out RSAParameters rsaParameters);
+                        RSAKeyFormatHelper.ReadRsaPublicKey(
+                            manager.Memory,
+                            ignored,
+                            out RSAParameters rsaParameters
+                        );
 
                         ImportParameters(rsaParameters);
 
@@ -894,17 +1061,27 @@ namespace System.Security.Cryptography
                     AsnEncodingRules.BER,
                     out _,
                     out _,
-                    out int firstValueLength);
+                    out int firstValueLength
+                );
 
                 fixed (byte* ptr = &MemoryMarshal.GetReference(source))
                 {
-                    using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, firstValueLength))
+                    using (
+                        MemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                            ptr,
+                            firstValueLength
+                        )
+                    )
                     {
                         ReadOnlyMemory<byte> firstValue = manager.Memory;
                         int localRead = firstValue.Length;
 
                         AlgorithmIdentifierAsn ignored = default;
-                        RSAKeyFormatHelper.FromPkcs1PrivateKey(firstValue, ignored, out RSAParameters rsaParameters);
+                        RSAKeyFormatHelper.FromPkcs1PrivateKey(
+                            firstValue,
+                            ignored,
+                            out RSAParameters rsaParameters
+                        );
 
                         fixed (byte* dPin = rsaParameters.D)
                         fixed (byte* pPin = rsaParameters.P)
@@ -933,15 +1110,21 @@ namespace System.Security.Cryptography
             }
         }
 
-        public override unsafe void ImportPkcs8PrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
+        public override unsafe void ImportPkcs8PrivateKey(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
         {
             fixed (byte* ptr = &MemoryMarshal.GetReference(source))
             {
-                using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+                using (
+                    MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
+                )
                 {
                     ReadOnlyMemory<byte> pkcs1 = RSAKeyFormatHelper.ReadPkcs8(
                         manager.Memory,
-                        out int localRead);
+                        out int localRead
+                    );
 
                     ImportRSAPrivateKey(pkcs1.Span, out _);
                     bytesRead = localRead;
@@ -952,13 +1135,15 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             RSAKeyFormatHelper.ReadEncryptedPkcs8(
                 source,
                 passwordBytes,
                 out int localRead,
-                out RSAParameters ret);
+                out RSAParameters ret
+            );
 
             fixed (byte* dPin = ret.D)
             fixed (byte* pPin = ret.P)
@@ -983,13 +1168,15 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             RSAKeyFormatHelper.ReadEncryptedPkcs8(
                 source,
                 password,
                 out int localRead,
-                out RSAParameters ret);
+                out RSAParameters ret
+            );
 
             fixed (byte* dPin = ret.D)
             fixed (byte* pPin = ret.P)
@@ -1050,15 +1237,18 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override void ImportFromPem(ReadOnlySpan<char> input)
         {
-            PemKeyHelpers.ImportPem(input, label =>
-                label switch
-                {
-                    PemLabels.RsaPrivateKey => ImportRSAPrivateKey,
-                    PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
-                    PemLabels.RsaPublicKey => ImportRSAPublicKey,
-                    PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
-                    _ => null,
-                });
+            PemKeyHelpers.ImportPem(
+                input,
+                label =>
+                    label switch
+                    {
+                        PemLabels.RsaPrivateKey => ImportRSAPrivateKey,
+                        PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
+                        PemLabels.RsaPublicKey => ImportRSAPublicKey,
+                        PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
+                        _ => null,
+                    }
+            );
         }
 
         /// <summary>
@@ -1125,7 +1315,10 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para>This method supports the <c>ENCRYPTED PRIVATE KEY</c> PEM label.</para>
         /// </remarks>
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<char> password)
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<char> password
+        )
         {
             // Implementation has been pushed down to AsymmetricAlgorithm. The
             // override remains for compatibility.
@@ -1197,7 +1390,10 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para>This method supports the <c>ENCRYPTED PRIVATE KEY</c> PEM label.</para>
         /// </remarks>
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<byte> passwordBytes)
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<byte> passwordBytes
+        )
         {
             // Implementation has been pushed down to AsymmetricAlgorithm. The
             // override remains for compatibility.
@@ -1308,7 +1504,8 @@ namespace System.Security.Cryptography
                 PemLabels.RsaPrivateKey,
                 Export,
                 destination,
-                out charsWritten);
+                out charsWritten
+            );
         }
 
         /// <summary>
@@ -1354,7 +1551,8 @@ namespace System.Security.Cryptography
                 PemLabels.RsaPublicKey,
                 Export,
                 destination,
-                out charsWritten);
+                out charsWritten
+            );
         }
 
         private static void ClearPrivateParameters(in RSAParameters rsaParameters)
@@ -1367,13 +1565,20 @@ namespace System.Security.Cryptography
             CryptographicOperations.ZeroMemory(rsaParameters.InverseQ);
         }
 
-        private delegate bool TryFunc<TState>(RSA rsa, ReadOnlySpan<byte> input, byte[] destination, TState state, out int bytesWritten);
+        private delegate bool TryFunc<TState>(
+            RSA rsa,
+            ReadOnlySpan<byte> input,
+            byte[] destination,
+            TState state,
+            out int bytesWritten
+        );
 
         private byte[] TryWithKeyBuffer<TState>(
             ReadOnlySpan<byte> input,
             TState state,
             TryFunc<TState> callback,
-            bool tryKeySizeFirst = true)
+            bool tryKeySizeFirst = true
+        )
         {
             // In normal circumstances, the signing and encryption size is the key size.
             // In the case of decryption, it will be at most the size of the key, but the final output size is not

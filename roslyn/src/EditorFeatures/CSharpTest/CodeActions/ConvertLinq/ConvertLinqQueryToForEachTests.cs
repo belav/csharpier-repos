@@ -17,15 +17,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertQueryToForEach)]
     public class ConvertLinqQueryToForEachTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-          => new CodeAnalysis.CSharp.ConvertLinq.CSharpConvertLinqQueryToForEachProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CodeAnalysis.CSharp.ConvertLinq.CSharpConvertLinqQueryToForEachProvider();
 
         #region Query Expressions
 
         [Fact]
         public async Task Select()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +40,8 @@ class Query
         var r = [|from i in c select i+1|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +67,8 @@ class Query
         [Fact]
         public async Task GroupBy01()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -83,7 +88,8 @@ class Query
         [Fact]
         public async Task GroupBy02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -103,7 +109,8 @@ class Query
         [Fact]
         public async Task FromJoinSelect01()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -118,7 +125,8 @@ class Query
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -151,7 +159,8 @@ class Query
         [Fact]
         public async Task FromJoinSelect02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class Program
@@ -164,7 +173,8 @@ class Program
                     select x1 + 5|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System.Linq;
 
 class Program
@@ -199,7 +209,8 @@ class Program
         [Fact]
         public async Task FromJoinSelect03()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class Program
@@ -213,7 +224,8 @@ class Program
                     select x1 + 5|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System.Linq;
 
 class Program
@@ -255,7 +267,8 @@ class Program
         [Fact]
         public async Task OrderBy()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -277,7 +290,8 @@ class Query
         [Fact]
         public async Task Let()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -295,7 +309,8 @@ class Query
             Console.WriteLine(r1);
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -322,7 +337,8 @@ class Query
         [Fact]
         public async Task GroupJoin()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -347,7 +363,8 @@ class Query
         [Fact]
         public async Task SelectFromType01()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 using System.Collections.Generic;
  
 class C
@@ -359,7 +376,8 @@ class C
 
     static IEnumerable<int> Select<T>(Func<int, T> f) { return null; }
 }";
-            var output = @"using System;
+            var output =
+                @"using System;
 using System.Collections.Generic;
  
 class C
@@ -385,7 +403,8 @@ class C
         [Fact]
         public async Task SelectFromType02()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 using System.Collections.Generic;
  
 class C
@@ -397,7 +416,8 @@ class C
 
     static Func<Func<int, object>, IEnumerable<object>> Select = null;
 }";
-            var output = @"using System;
+            var output =
+                @"using System;
 using System.Collections.Generic;
  
 class C
@@ -423,7 +443,8 @@ class C
         [Fact]
         public async Task JoinClause()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class Program
@@ -441,7 +462,8 @@ class Program
         }
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Linq;
 class Program
@@ -478,7 +500,8 @@ class Program
         [Fact]
         public async Task WhereClause()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class Program
@@ -500,7 +523,8 @@ class Program
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Linq;
 class Program
@@ -535,7 +559,8 @@ class Program
         [Fact]
         public async Task WhereDefinedInType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Y
@@ -565,7 +590,8 @@ class P
         [Fact]
         public async Task QueryContinuation()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 public class Test
@@ -579,7 +605,8 @@ public class Test
                  select w|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Linq;
 public class Test
@@ -605,7 +632,8 @@ public class Test
         [Fact]
         public async Task SelectInto()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -619,7 +647,8 @@ public class Test
                  select w+1|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -645,7 +674,8 @@ public class Test
         [Fact]
         public async Task ComputeQueryVariableType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 public class Test
 {
@@ -657,7 +687,8 @@ public class Test
                  select 5|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System.Linq;
 public class Test
 {
@@ -681,7 +712,8 @@ public class Test
         [Fact]
         public async Task JoinIntoClause()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 
@@ -701,7 +733,8 @@ static class Test
         [Fact]
         public async Task SemanticErrorInQuery()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 class Program
 {
@@ -721,7 +754,8 @@ class Program
         [Fact]
         public async Task SelectFromVoid()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 class Test
 {
@@ -746,7 +780,8 @@ class Test
         [Fact]
         public async Task AssignExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -766,7 +801,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -800,7 +836,8 @@ class C
         [Fact]
         public async Task MultipleAssignments()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -813,7 +850,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -840,7 +878,8 @@ public class Test
         [Fact]
         public async Task PropertyAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -858,7 +897,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -890,7 +930,8 @@ public class Test
         [Fact]
         public async Task MultipleDeclarationsFirst()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -902,7 +943,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -928,7 +970,8 @@ public class Test
         [Fact]
         public async Task MultipleDeclarationsSecond()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -940,7 +983,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -967,7 +1011,8 @@ public class Test
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25639")]
         public async Task TupleDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -979,7 +1024,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1005,7 +1051,8 @@ public class Test
         [Fact]
         public async Task AssignAndReturnIEnumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1020,7 +1067,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1050,7 +1098,8 @@ class C
         [Fact]
         public async Task BlockBodiedProperty()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1060,7 +1109,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1075,7 +1125,8 @@ public class Test
         [Fact]
         public async Task AnonymousType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1093,7 +1144,8 @@ class C
         [Fact]
         public async Task AnonymousTypeInternally()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1111,7 +1163,8 @@ class C
         [Fact]
         public async Task DuplicateIdentifiers()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1129,7 +1182,8 @@ class C
         [Fact]
         public async Task ReturnIEnumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1143,7 +1197,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1169,7 +1224,8 @@ class C
         [Fact]
         public async Task ReturnIEnumerablePartialMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1187,7 +1243,8 @@ partial class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1217,7 +1274,8 @@ partial class C
         [Fact]
         public async Task ReturnIEnumerableExtendedPartialMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1235,7 +1293,8 @@ partial class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1265,7 +1324,8 @@ partial class C
         [Fact]
         public async Task ReturnIEnumerableWithOtherReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1286,7 +1346,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1322,7 +1383,8 @@ class C
         [Fact]
         public async Task ReturnObject()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1336,7 +1398,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1365,7 +1428,8 @@ class C
         [Fact]
         public async Task ExtraParenthesis()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1377,7 +1441,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1400,7 +1465,8 @@ public class Test
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25639")]
         public async Task InReturningTuple()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1412,7 +1478,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1438,7 +1505,8 @@ public class Test
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/25639")]
         public async Task InInvocationReturningInTuple()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1450,7 +1518,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1476,7 +1545,8 @@ public class Test
         [Fact]
         public async Task RangeVariables()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class Query
@@ -1494,7 +1564,8 @@ class Query
         Console.WriteLine(r1);
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Linq;
 class Query
@@ -1528,7 +1599,8 @@ class Query
         [Fact]
         public async Task CallingMethodWithIEnumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1546,7 +1618,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1578,7 +1651,8 @@ class C
         [Fact]
         public async Task ReturnFirstOrDefault()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1592,7 +1666,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1621,7 +1696,8 @@ class C
         [Fact]
         public async Task IncompleteQueryWithSyntaxErrors()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class Program
@@ -1642,7 +1718,8 @@ class Program
         [Fact]
         public async Task ErrorNameDoesNotExistsInContext()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1660,7 +1737,8 @@ class C
         [Fact]
         public async Task InArrayInitialization()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1672,7 +1750,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1697,7 +1776,8 @@ public class Test
         [Fact]
         public async Task InCollectionInitialization()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1709,7 +1789,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1734,7 +1815,8 @@ public class Test
         [Fact]
         public async Task InStructInitialization()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1751,7 +1833,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1781,7 +1864,8 @@ public class Test
         [Fact]
         public async Task InClassInitialization()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1798,7 +1882,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1828,7 +1913,8 @@ public class Test
         [Fact]
         public async Task InConstructor()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1840,7 +1926,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1865,7 +1952,8 @@ public class Test
         [Fact]
         public async Task InInlineConstructor()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1882,7 +1970,8 @@ public class Test
         [Fact]
         public async Task IninlineIf()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1897,7 +1986,8 @@ public class Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1931,7 +2021,8 @@ public class Test
         [Fact]
         public async Task UsageInForEach()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1950,7 +2041,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1984,7 +2076,8 @@ class C
         [Fact]
         public async Task UsageInForEachSameVariableName()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2003,7 +2096,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2036,7 +2130,8 @@ class C
         [Fact]
         public async Task QueryInForEach()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2054,7 +2149,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2080,7 +2176,8 @@ class C
         [Fact]
         public async Task QueryInForEachSameVariableNameNoType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2098,7 +2195,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2122,7 +2220,8 @@ class C
         [Fact]
         public async Task QueryInForEachWithExpressionBody()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2137,7 +2236,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2163,7 +2263,8 @@ class C
         [Fact]
         public async Task QueryInForEachWithSameVariableNameAndDifferentType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2181,7 +2282,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2216,7 +2318,8 @@ class C
         [Fact]
         public async Task QueryInForEachWithSameVariableNameAndSameType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2234,7 +2337,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2261,7 +2365,8 @@ class C
         [Fact]
         public async Task QueryInForEachVariableUsedInBody()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2280,7 +2385,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2314,7 +2420,8 @@ class C
         [Fact]
         public async Task QueryInForEachWithConvertedType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2345,7 +2452,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2389,7 +2497,8 @@ class C
         [Fact]
         public async Task QueryInForEachWithSelectIdentifierButNotVariable()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2420,7 +2529,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2458,7 +2568,8 @@ class C
         [Fact]
         public async Task IQueryable()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2476,7 +2587,8 @@ class C
         [Fact]
         public async Task IQueryableConvertedToIEnumerableInReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2487,7 +2599,8 @@ class C
         return [|from int n1 in nums.AsQueryable() select n1|];
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2510,7 +2623,8 @@ class C
         [Fact]
         public async Task IQueryableConvertedToIEnumerableInAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2522,7 +2636,8 @@ class C
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2548,7 +2663,8 @@ class C
         [Fact]
         public async Task IQueryableInInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2560,7 +2676,8 @@ class C
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2586,7 +2703,8 @@ class C
         [Fact]
         public async Task PropertyAssignmentInInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2604,7 +2722,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2634,7 +2753,8 @@ public class Test
         [Fact]
         public async Task NullablePropertyAssignmentInInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2652,7 +2772,8 @@ public class Test
     }
 }";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2682,7 +2803,8 @@ public class Test
         [Fact]
         public async Task AssignList()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2697,7 +2819,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2724,7 +2847,8 @@ class C
         [Fact]
         public async Task AssignToListToParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2739,7 +2863,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2766,7 +2891,8 @@ class C
         [Fact]
         public async Task AssignToListToArrayElement()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2780,7 +2906,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2807,7 +2934,8 @@ class C
         [Fact]
         public async Task AssignListWithTypeArgument()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2822,7 +2950,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2849,7 +2978,8 @@ class C
         [Fact]
         public async Task AssignListToObject()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2864,7 +2994,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2892,7 +3023,8 @@ class C
         [Fact]
         public async Task AssignListWithNullableToList()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2907,7 +3039,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2937,7 +3070,8 @@ class C
         [Fact]
         public async Task ReturnList()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2951,7 +3085,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2978,7 +3113,8 @@ class C
         [Fact]
         public async Task ReturnListNameGeneration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2993,7 +3129,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3021,7 +3158,8 @@ class C
         [Fact]
         public async Task ToListTypeReplacement01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 using C = System.Collections.Generic.List<int>;
@@ -3042,7 +3180,8 @@ class Query
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Linq;
 using C = System.Collections.Generic.List<int>;
@@ -3079,7 +3218,8 @@ class Query
         [Fact]
         public async Task ToListTypeReplacement02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 using System;
 using C = System.Collections.Generic.List<int>;
@@ -3098,7 +3238,8 @@ class Query
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 using System.Linq;
 using System;
 using C = System.Collections.Generic.List<int>;
@@ -3131,7 +3272,8 @@ class Query
         [Fact]
         public async Task ToListOverloadAssignTo()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3151,7 +3293,8 @@ namespace Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3184,7 +3327,8 @@ namespace Test
         [Fact]
         public async Task ToListRefOverload()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3204,7 +3348,8 @@ namespace Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3241,7 +3386,8 @@ namespace Test
         [Fact]
         public async Task CountInMultipleDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3256,7 +3402,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3286,7 +3433,8 @@ class C
         [Fact]
         public async Task CountInNonLocalDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -3304,7 +3452,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -3337,7 +3486,8 @@ class C
         [Fact]
         public async Task CountInDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3352,7 +3502,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3379,7 +3530,8 @@ class C
         [Fact]
         public async Task ReturnCount()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3393,7 +3545,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3420,7 +3573,8 @@ class C
         [Fact]
         public async Task ReturnCountExtraParethesis()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3434,7 +3588,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3461,7 +3616,8 @@ class C
         [Fact]
         public async Task CountAsArgument()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3476,7 +3632,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3506,7 +3663,8 @@ class C
         [Fact]
         public async Task CountAsArgumentExpressionBody()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3525,7 +3683,8 @@ class C
         [Fact]
         public async Task ReturnCountNameGeneration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3540,7 +3699,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3568,7 +3728,8 @@ class C
         [Fact]
         public async Task CountNameUsedAfter()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3588,7 +3749,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3621,7 +3783,8 @@ class C
         [Fact]
         public async Task ReturnCountNameUsedBefore()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3640,7 +3803,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3672,7 +3836,8 @@ class C
         [Fact]
         public async Task CountOverload()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3687,7 +3852,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3716,7 +3882,8 @@ class C
         [Fact]
         public async Task CountOverloadAssignTo()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3736,7 +3903,8 @@ namespace Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3769,7 +3937,8 @@ namespace Test
         [Fact]
         public async Task CountRefOverload()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3789,7 +3958,8 @@ namespace Test
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3826,7 +3996,8 @@ namespace Test
         [Fact]
         public async Task ExpressionBodiedProperty()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3842,7 +4013,8 @@ public class Test
         [Fact]
         public async Task ExpressionBodiedField()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3857,7 +4029,8 @@ public class Test
         [Fact]
         public async Task Field()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3872,7 +4045,8 @@ public class Test
         [Fact]
         public async Task ExpressionBodiedMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3888,7 +4062,8 @@ public class Test
         [Fact]
         public async Task ExpressionBodiedMethodUnderInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3904,7 +4079,8 @@ public class Test
         [Fact]
         public async Task ExpressionBodiedenumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3923,7 +4099,8 @@ public class Test
         [Fact]
         public async Task ExpressionBodiedAccessor()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -3939,7 +4116,8 @@ public class Test
         [Fact]
         public async Task InInlineLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -3951,7 +4129,8 @@ class C
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -3978,7 +4157,8 @@ class C
         [Fact]
         public async Task InParameterLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -3994,7 +4174,8 @@ class C
     }
 }
 ";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4025,7 +4206,8 @@ class C
         [Fact]
         public async Task InParenthesizedLambdaWithBody()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4038,7 +4220,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4066,7 +4249,8 @@ class C
         [Fact]
         public async Task InSimplifiedLambdaWithBody()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4079,7 +4263,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4107,7 +4292,8 @@ class C
         [Fact]
         public async Task InAnonymousMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4120,7 +4306,8 @@ class C
 }
 ";
 
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4148,7 +4335,8 @@ class C
         [Fact]
         public async Task InWhen()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4176,7 +4364,8 @@ class C
         [Fact]
         public async Task InlineComments()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4195,7 +4384,8 @@ class C
         [Fact]
         public async Task Comments()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4214,8 +4404,8 @@ class C
         [Fact]
         public async Task PreprocessorDirectives()
         {
-
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4241,7 +4431,8 @@ class C
         [Fact]
         public async Task EnumerableFunctionDoesNotUseLocalFunctionName()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4255,7 +4446,8 @@ class Query
         void enumerable() { }
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4283,7 +4475,8 @@ class Query
         [Fact]
         public async Task EnumerableFunctionCanUseLocalFunctionParameterName()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4297,7 +4490,8 @@ class Query
         void M(IEnumerable<int> enumerable) { }
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4325,7 +4519,8 @@ class Query
         [Fact]
         public async Task EnumerableFunctionDoesNotUseLambdaParameterNameWithCSharpLessThan8()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4339,7 +4534,8 @@ class Query
         Action<int> myLambda = enumerable => { };
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4361,13 +4557,18 @@ class Query
         Action<int> myLambda = enumerable => { };
     }
 }";
-            await TestInRegularAndScriptAsync(source, output, parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp7_3));
+            await TestInRegularAndScriptAsync(
+                source,
+                output,
+                parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp7_3)
+            );
         }
 
         [Fact]
         public async Task EnumerableFunctionCanUseLambdaParameterNameInCSharp8()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4381,7 +4582,8 @@ class Query
         Action<int> myLambda = enumerable => { };
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4403,7 +4605,11 @@ class Query
         Action<int> myLambda = enumerable => { };
     }
 }";
-            await TestInRegularAndScriptAsync(source, output, parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp8));
+            await TestInRegularAndScriptAsync(
+                source,
+                output,
+                parseOptions: new CSharpParseOptions(CodeAnalysis.CSharp.LanguageVersion.CSharp8)
+            );
         }
 
         #endregion
@@ -4412,7 +4618,8 @@ class Query
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task DeclarationSelection()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4424,7 +4631,8 @@ class Query
         var r = [|from i in c select i+1;|]
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4450,7 +4658,8 @@ class Query
         [Fact, WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task LocalAssignmentSelection()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4463,7 +4672,8 @@ class Query
         [|r = from i in c select i+1;|]
     }
 }";
-            var output = @"
+            var output =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;

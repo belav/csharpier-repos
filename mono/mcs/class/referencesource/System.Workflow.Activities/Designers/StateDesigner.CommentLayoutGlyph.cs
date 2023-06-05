@@ -44,13 +44,15 @@ namespace System.Workflow.Activities
 
             public override int Priority
             {
-                get
-                {
-                    return DesignerGlyph.NormalPriority;
-                }
+                get { return DesignerGlyph.NormalPriority; }
             }
 
-            protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+            protected override void OnPaint(
+                Graphics graphics,
+                bool activated,
+                AmbientTheme ambientTheme,
+                ActivityDesigner designer
+            )
             {
                 if (designer == null)
                     throw new ArgumentNullException("designer");

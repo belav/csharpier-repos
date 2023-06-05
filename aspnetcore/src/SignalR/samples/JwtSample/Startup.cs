@@ -11,7 +11,9 @@ namespace JwtSample;
 
 public class Startup
 {
-    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(RandomNumberGenerator.GetBytes(16));
+    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(
+        RandomNumberGenerator.GetBytes(16)
+    );
     private readonly JwtSecurityTokenHandler JwtTokenHandler = new JwtSecurityTokenHandler();
 
     public void ConfigureServices(IServiceCollection services)
@@ -19,20 +21,24 @@ public class Startup
         services.AddSignalR();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
-            {
-                policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                policy.RequireClaim(ClaimTypes.NameIdentifier);
-            });
+            options.AddPolicy(
+                JwtBearerDefaults.AuthenticationScheme,
+                policy =>
+                {
+                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireClaim(ClaimTypes.NameIdentifier);
+                }
+            );
         });
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                options.TokenValidationParameters =
-                new TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    LifetimeValidator = (before, expires, token, parameters) => expires > DateTime.UtcNow,
+                    LifetimeValidator = (before, expires, token, parameters) =>
+                        expires > DateTime.UtcNow,
                     ValidateAudience = false,
                     ValidateIssuer = false,
                     ValidateActor = false,
@@ -46,8 +52,13 @@ public class Startup
                     {
                         var accessToken = context.Request.Query["access_token"];
 
-                        if (!string.IsNullOrEmpty(accessToken) &&
-                            (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
+                        if (
+                            !string.IsNullOrEmpty(accessToken)
+                            && (
+                                context.HttpContext.WebSockets.IsWebSocketRequest
+                                || context.Request.Headers["Accept"] == "text/event-stream"
+                            )
+                        )
                         {
                             context.Token = context.Request.Query["access_token"];
                         }
@@ -67,18 +78,30 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapHub<Broadcaster>("/broadcast");
-            endpoints.MapGet("/generatetoken", context =>
-            {
-                return context.Response.WriteAsync(GenerateToken(context));
-            });
+            endpoints.MapGet(
+                "/generatetoken",
+                context =>
+                {
+                    return context.Response.WriteAsync(GenerateToken(context));
+                }
+            );
         });
     }
 
     private string GenerateToken(HttpContext httpContext)
     {
-        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]) };
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"])
+        };
         var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.UtcNow.AddSeconds(30), signingCredentials: credentials);
+        var token = new JwtSecurityToken(
+            "SignalRTestServer",
+            "SignalRTests",
+            claims,
+            expires: DateTime.UtcNow.AddSeconds(30),
+            signingCredentials: credentials
+        );
         return JwtTokenHandler.WriteToken(token);
     }
 }

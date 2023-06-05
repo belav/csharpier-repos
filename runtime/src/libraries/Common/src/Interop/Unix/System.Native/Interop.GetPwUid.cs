@@ -17,8 +17,8 @@ internal static partial class Interop
 
             internal byte* Name;
             internal byte* Password;
-            internal uint  UserId;
-            internal uint  GroupId;
+            internal uint UserId;
+            internal uint GroupId;
             internal byte* UserInfo;
             internal byte* HomeDirectory;
             internal byte* Shell;
@@ -57,7 +57,12 @@ internal static partial class Interop
             }
         }
 
-        private static unsafe bool TryGetUserNameFromPasswd(uint uid, byte* buf, int bufLen, out string? username)
+        private static unsafe bool TryGetUserNameFromPasswd(
+            uint uid,
+            byte* buf,
+            int bufLen,
+            out string? username
+        )
         {
             // Call getpwuid_r to get the passwd struct
             Interop.Sys.Passwd passwd;
@@ -93,10 +98,29 @@ internal static partial class Interop
             throw new IOException(errorInfo.GetErrorMessage(), errorInfo.RawErrno);
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPwUidR", SetLastError = false)]
-        internal static unsafe partial int GetPwUidR(uint uid, out Passwd pwd, byte* buf, int bufLen);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetPwUidR",
+            SetLastError = false
+        )]
+        internal static unsafe partial int GetPwUidR(
+            uint uid,
+            out Passwd pwd,
+            byte* buf,
+            int bufLen
+        );
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetPwNamR", StringMarshalling = StringMarshalling.Utf8, SetLastError = false)]
-        internal static unsafe partial int GetPwNamR(string name, out Passwd pwd, byte* buf, int bufLen);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetPwNamR",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = false
+        )]
+        internal static unsafe partial int GetPwNamR(
+            string name,
+            out Passwd pwd,
+            byte* buf,
+            int bufLen
+        );
     }
 }

@@ -48,15 +48,16 @@ namespace System.ServiceModel.Security
         bool wasClientCertificateSent;
         X509Certificate2Collection remoteCertificateChain;
         string incomingValueTypeUri;
+
         /// <summary>
         /// Client side ctor
         /// </summary>
         public TlsSspiNegotiation(
             string destination,
             SchProtocols protocolFlags,
-            X509Certificate2 clientCertificate) :
-            this(destination, false, protocolFlags, null, clientCertificate, false)
-        { }
+            X509Certificate2 clientCertificate
+        )
+            : this(destination, false, protocolFlags, null, clientCertificate, false) { }
 
         /// <summary>
         /// Server side ctor
@@ -64,15 +65,24 @@ namespace System.ServiceModel.Security
         public TlsSspiNegotiation(
             SchProtocols protocolFlags,
             X509Certificate2 serverCertificate,
-            bool clientCertRequired) :
-            this(null, true, protocolFlags, serverCertificate, null, clientCertRequired)
-        { }
+            bool clientCertRequired
+        )
+            : this(null, true, protocolFlags, serverCertificate, null, clientCertRequired) { }
 
         static TlsSspiNegotiation()
         {
-            StandardFlags = SspiContextFlags.ReplayDetect | SspiContextFlags.Confidentiality | SspiContextFlags.AllocateMemory;
-            ServerStandardFlags = StandardFlags | SspiContextFlags.AcceptExtendedError | SspiContextFlags.AcceptStream;
-            ClientStandardFlags = StandardFlags | SspiContextFlags.InitManualCredValidation | SspiContextFlags.InitStream;
+            StandardFlags =
+                SspiContextFlags.ReplayDetect
+                | SspiContextFlags.Confidentiality
+                | SspiContextFlags.AllocateMemory;
+            ServerStandardFlags =
+                StandardFlags
+                | SspiContextFlags.AcceptExtendedError
+                | SspiContextFlags.AcceptStream;
+            ClientStandardFlags =
+                StandardFlags
+                | SspiContextFlags.InitManualCredValidation
+                | SspiContextFlags.InitStream;
         }
 
         private TlsSspiNegotiation(
@@ -81,7 +91,8 @@ namespace System.ServiceModel.Security
             SchProtocols protocolFlags,
             X509Certificate2 serverCertificate,
             X509Certificate2 clientCertificate,
-            bool clientCertRequired)
+            bool clientCertRequired
+        )
         {
             SspiWrapper.GetVerifyPackageInfo(SecurityPackage);
             this.destination = destination;
@@ -194,10 +205,7 @@ namespace System.ServiceModel.Security
 
         public string KeyEncryptionAlgorithm
         {
-            get
-            {
-                return SecurityAlgorithms.TlsSspiKeyWrap;
-            }
+            get { return SecurityAlgorithms.TlsSspiKeyWrap; }
         }
 
         /// <summary>
@@ -212,7 +220,9 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception((int)SecurityStatus.InvalidHandle)
+                    );
                 }
                 if (this.remoteCertificate == null)
                 {
@@ -231,7 +241,9 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception((int)SecurityStatus.InvalidHandle)
+                    );
                 }
                 if (this.remoteCertificateChain == null)
                 {
@@ -271,13 +283,16 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception((int)SecurityStatus.InvalidHandle)
+                    );
                 }
                 if (this.connectionInfo == null)
                 {
-                    SslConnectionInfo tmpInfo = SspiWrapper.QueryContextAttributes(
-                        this.securityContext,
-                        ContextAttribute.ConnectionInfo
+                    SslConnectionInfo tmpInfo =
+                        SspiWrapper.QueryContextAttributes(
+                            this.securityContext,
+                            ContextAttribute.ConnectionInfo
                         ) as SslConnectionInfo;
                     if (IsCompleted)
                     {
@@ -296,7 +311,11 @@ namespace System.ServiceModel.Security
                 ThrowIfDisposed();
                 if (this.streamSizes == null)
                 {
-                    StreamSizes tmpSizes = (StreamSizes)SspiWrapper.QueryContextAttributes(this.securityContext, ContextAttribute.StreamSizes);
+                    StreamSizes tmpSizes = (StreamSizes)
+                        SspiWrapper.QueryContextAttributes(
+                            this.securityContext,
+                            ContextAttribute.StreamSizes
+                        );
                     if (this.IsCompleted)
                     {
                         this.streamSizes = tmpSizes;
@@ -331,7 +350,9 @@ namespace System.ServiceModel.Security
         public byte[] Decrypt(byte[] encryptedContent)
         {
             ThrowIfDisposed();
-            byte[] dataBuffer = DiagnosticUtility.Utility.AllocateByteArray(encryptedContent.Length);
+            byte[] dataBuffer = DiagnosticUtility.Utility.AllocateByteArray(
+                encryptedContent.Length
+            );
 
             Buffer.BlockCopy(encryptedContent, 0, dataBuffer, 0, encryptedContent.Length);
 
@@ -353,7 +374,9 @@ namespace System.ServiceModel.Security
         public byte[] Encrypt(byte[] input)
         {
             ThrowIfDisposed();
-            byte[] buffer = DiagnosticUtility.Utility.AllocateByteArray(checked(input.Length + StreamSizes.header + StreamSizes.trailer));
+            byte[] buffer = DiagnosticUtility.Utility.AllocateByteArray(
+                checked(input.Length + StreamSizes.header + StreamSizes.trailer)
+            );
 
             Buffer.BlockCopy(input, 0, buffer, StreamSizes.header, input.Length);
 
@@ -372,7 +395,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public byte[] GetOutgoingBlob(byte[] incomingBlob, ChannelBinding channelbinding, ExtendedProtectionPolicy protectionPolicy)
+        public byte[] GetOutgoingBlob(
+            byte[] incomingBlob,
+            ChannelBinding channelbinding,
+            ExtendedProtectionPolicy protectionPolicy
+        )
         {
             ThrowIfDisposed();
             SecurityBuffer incomingSecurity = null;
@@ -389,13 +416,17 @@ namespace System.ServiceModel.Security
                 statusCode = SspiWrapper.AcceptSecurityContext(
                     this.credentialsHandle,
                     ref this.securityContext,
-                    ServerStandardFlags | (this.clientCertRequired ? SspiContextFlags.MutualAuth : SspiContextFlags.Zero),
+                    ServerStandardFlags
+                        | (
+                            this.clientCertRequired
+                                ? SspiContextFlags.MutualAuth
+                                : SspiContextFlags.Zero
+                        ),
                     Endianness.Native,
                     incomingSecurity,
                     outgoingSecurity,
                     ref this.attributes
-                    );
-
+                );
             }
             else
             {
@@ -408,13 +439,15 @@ namespace System.ServiceModel.Security
                     incomingSecurity,
                     outgoingSecurity,
                     ref this.attributes
-                    );
+                );
             }
 
             if ((statusCode & unchecked((int)0x80000000)) != 0)
             {
                 this.Dispose();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(statusCode)
+                );
             }
 
             if (statusCode == (int)SecurityStatus.OK)
@@ -423,10 +456,18 @@ namespace System.ServiceModel.Security
                 // ensure that the key negotiated is strong enough
                 if (SecurityUtils.ShouldValidateSslCipherStrength())
                 {
-                    SslConnectionInfo connectionInfo = (SslConnectionInfo)SspiWrapper.QueryContextAttributes(this.securityContext, ContextAttribute.ConnectionInfo);
+                    SslConnectionInfo connectionInfo = (SslConnectionInfo)
+                        SspiWrapper.QueryContextAttributes(
+                            this.securityContext,
+                            ContextAttribute.ConnectionInfo
+                        );
                     if (connectionInfo == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.CannotObtainSslConnectionInfo)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.CannotObtainSslConnectionInfo)
+                            )
+                        );
                     }
                     SecurityUtils.ValidateSslCipherStrength(connectionInfo.DataKeySize);
                 }
@@ -449,11 +490,15 @@ namespace System.ServiceModel.Security
                 this.Dispose();
                 if (statusCode == (int)SecurityStatus.InternalError)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode, SR.GetString(SR.LsaAuthorityNotContacted)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(statusCode, SR.GetString(SR.LsaAuthorityNotContacted))
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(statusCode)
+                    );
                 }
             }
             return outgoingSecurity.token;
@@ -463,7 +508,11 @@ namespace System.ServiceModel.Security
         /// The decrypted data will start header bytes from the start of
         /// encryptedContent array.
         /// </summary>
-        internal unsafe void DecryptInPlace(byte[] encryptedContent, out int dataStartOffset, out int dataLen)
+        internal unsafe void DecryptInPlace(
+            byte[] encryptedContent,
+            out int dataStartOffset,
+            out int dataLen
+        )
         {
             ThrowIfDisposed();
             dataStartOffset = StreamSizes.header;
@@ -474,15 +523,27 @@ namespace System.ServiceModel.Security
             byte[] emptyBuffer3 = new byte[0];
 
             SecurityBuffer[] securityBuffer = new SecurityBuffer[4];
-            securityBuffer[0] = new SecurityBuffer(encryptedContent, 0, encryptedContent.Length, BufferType.Data);
+            securityBuffer[0] = new SecurityBuffer(
+                encryptedContent,
+                0,
+                encryptedContent.Length,
+                BufferType.Data
+            );
             securityBuffer[1] = new SecurityBuffer(emptyBuffer1, BufferType.Empty);
             securityBuffer[2] = new SecurityBuffer(emptyBuffer2, BufferType.Empty);
             securityBuffer[3] = new SecurityBuffer(emptyBuffer3, BufferType.Empty);
 
-            int errorCode = SspiWrapper.DecryptMessage(this.securityContext, securityBuffer, 0, false);
+            int errorCode = SspiWrapper.DecryptMessage(
+                this.securityContext,
+                securityBuffer,
+                0,
+                false
+            );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
 
             for (int i = 0; i < securityBuffer.Length; ++i)
@@ -500,11 +561,19 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Assumes that the data to encrypt is "header" bytes ahead of bufferStartOffset
         /// </summary>
-        internal unsafe void EncryptInPlace(byte[] buffer, int bufferStartOffset, int dataLen, out int encryptedDataLen)
+        internal unsafe void EncryptInPlace(
+            byte[] buffer,
+            int bufferStartOffset,
+            int dataLen,
+            out int encryptedDataLen
+        )
         {
             ThrowIfDisposed();
             encryptedDataLen = 0;
-            if (bufferStartOffset + dataLen + StreamSizes.header + StreamSizes.trailer > buffer.Length)
+            if (
+                bufferStartOffset + dataLen + StreamSizes.header + StreamSizes.trailer
+                > buffer.Length
+            )
             {
                 OnBadData();
             }
@@ -513,15 +582,32 @@ namespace System.ServiceModel.Security
             int trailerOffset = bufferStartOffset + StreamSizes.header + dataLen;
 
             SecurityBuffer[] securityBuffer = new SecurityBuffer[4];
-            securityBuffer[0] = new SecurityBuffer(buffer, bufferStartOffset, StreamSizes.header, BufferType.Header);
-            securityBuffer[1] = new SecurityBuffer(buffer, bufferStartOffset + StreamSizes.header, dataLen, BufferType.Data);
-            securityBuffer[2] = new SecurityBuffer(buffer, trailerOffset, StreamSizes.trailer, BufferType.Trailer);
+            securityBuffer[0] = new SecurityBuffer(
+                buffer,
+                bufferStartOffset,
+                StreamSizes.header,
+                BufferType.Header
+            );
+            securityBuffer[1] = new SecurityBuffer(
+                buffer,
+                bufferStartOffset + StreamSizes.header,
+                dataLen,
+                BufferType.Data
+            );
+            securityBuffer[2] = new SecurityBuffer(
+                buffer,
+                trailerOffset,
+                StreamSizes.trailer,
+                BufferType.Trailer
+            );
             securityBuffer[3] = new SecurityBuffer(emptyBuffer, BufferType.Empty);
 
             int errorCode = SspiWrapper.EncryptMessage(this.securityContext, securityBuffer, 0);
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(errorCode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception(errorCode)
+                );
             }
 
             int trailerSize = 0;
@@ -549,20 +635,35 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    hasPrivateKey = certificate.HasPrivateKey && SecurityUtils.CanReadPrivateKey(certificate);
+                    hasPrivateKey =
+                        certificate.HasPrivateKey && SecurityUtils.CanReadPrivateKey(certificate);
                 }
             }
             catch (SecurityException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name),
+                        e
+                    )
+                );
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name),
+                        e
+                    )
+                );
             }
             if (!hasPrivateKey)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SslCertMustHavePrivateKey, certificate.SubjectName.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SslCertMustHavePrivateKey, certificate.SubjectName.Name)
+                    )
+                );
             }
         }
 
@@ -570,7 +671,9 @@ namespace System.ServiceModel.Security
         {
             if (this.serverCertificate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serverCertificate");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serverCertificate"
+                );
             }
 
             ValidatePrivateKey(this.serverCertificate);
@@ -586,28 +689,47 @@ namespace System.ServiceModel.Security
 
         private void AcquireClientCredentials()
         {
-            SecureCredential secureCredential = new SecureCredential(SecureCredential.CurrentVersion, this.ClientCertificate, SecureCredential.Flags.ValidateManual | SecureCredential.Flags.NoDefaultCred, this.protocolFlags);
+            SecureCredential secureCredential = new SecureCredential(
+                SecureCredential.CurrentVersion,
+                this.ClientCertificate,
+                SecureCredential.Flags.ValidateManual | SecureCredential.Flags.NoDefaultCred,
+                this.protocolFlags
+            );
             this.credentialsHandle = SspiWrapper.AcquireCredentialsHandle(
                 SecurityPackage,
                 CredentialUse.Outbound,
                 secureCredential
-                );
+            );
         }
 
         private void AcquireDummyCredentials()
         {
-            SecureCredential secureCredential = new SecureCredential(SecureCredential.CurrentVersion, null, SecureCredential.Flags.ValidateManual | SecureCredential.Flags.NoDefaultCred, this.protocolFlags);
-            this.credentialsHandle = SspiWrapper.AcquireCredentialsHandle(SecurityPackage, CredentialUse.Outbound, secureCredential);
+            SecureCredential secureCredential = new SecureCredential(
+                SecureCredential.CurrentVersion,
+                null,
+                SecureCredential.Flags.ValidateManual | SecureCredential.Flags.NoDefaultCred,
+                this.protocolFlags
+            );
+            this.credentialsHandle = SspiWrapper.AcquireCredentialsHandle(
+                SecurityPackage,
+                CredentialUse.Outbound,
+                secureCredential
+            );
         }
 
         private void AcquireServerCredentials()
         {
-            SecureCredential secureCredential = new SecureCredential(SecureCredential.CurrentVersion, this.serverCertificate, SecureCredential.Flags.Zero, this.protocolFlags);
+            SecureCredential secureCredential = new SecureCredential(
+                SecureCredential.CurrentVersion,
+                this.serverCertificate,
+                SecureCredential.Flags.Zero,
+                this.protocolFlags
+            );
             this.credentialsHandle = SspiWrapper.AcquireCredentialsHandle(
                 SecurityPackage,
                 CredentialUse.Inbound,
                 secureCredential
-                );
+            );
         }
 
         private void Dispose(bool disposing)
@@ -641,7 +763,9 @@ namespace System.ServiceModel.Security
 
         private SafeFreeCertContext ExtractCertificateHandle(ContextAttribute contextAttribute)
         {
-            SafeFreeCertContext result = SspiWrapper.QueryContextAttributes(this.securityContext, contextAttribute) as SafeFreeCertContext;
+            SafeFreeCertContext result =
+                SspiWrapper.QueryContextAttributes(this.securityContext, contextAttribute)
+                as SafeFreeCertContext;
             return result;
         }
 
@@ -656,8 +780,12 @@ namespace System.ServiceModel.Security
                 remoteContext = ExtractCertificateHandle(ContextAttribute.RemoteCertificate);
                 if (remoteContext != null && !remoteContext.IsInvalid)
                 {
-                    this.remoteCertificateChain = UnmanagedCertificateContext.GetStore(remoteContext);
-                    this.remoteCertificate = new X509Certificate2(remoteContext.DangerousGetHandle());
+                    this.remoteCertificateChain = UnmanagedCertificateContext.GetStore(
+                        remoteContext
+                    );
+                    this.remoteCertificate = new X509Certificate2(
+                        remoteContext.DangerousGetHandle()
+                    );
                 }
             }
             finally
@@ -673,19 +801,25 @@ namespace System.ServiceModel.Security
         {
             if (!IsValidContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new Win32Exception((int)SecurityStatus.InvalidHandle)
+                );
             }
 
             SafeCloseHandle token = null;
             try
             {
-                SecurityStatus status = (SecurityStatus)SspiWrapper.QuerySecurityContextToken(this.securityContext, out token);
+                SecurityStatus status = (SecurityStatus)
+                    SspiWrapper.QuerySecurityContextToken(this.securityContext, out token);
                 if (status != SecurityStatus.OK)
                 {
                     mappedIdentity = null;
                     return false;
                 }
-                mappedIdentity = new WindowsIdentity(token.DangerousGetHandle(), SecurityUtils.AuthTypeCertMap);
+                mappedIdentity = new WindowsIdentity(
+                    token.DangerousGetHandle(),
+                    SecurityUtils.AuthTypeCertMap
+                );
                 return true;
             }
             finally
@@ -699,7 +833,9 @@ namespace System.ServiceModel.Security
 
         void OnBadData()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadData)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new MessageSecurityException(SR.GetString(SR.BadData))
+            );
         }
 
         void ThrowIfDisposed()
@@ -708,14 +844,15 @@ namespace System.ServiceModel.Security
             {
                 if (this.disposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(null));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(null)
+                    );
                 }
             }
         }
 
         unsafe static class UnmanagedCertificateContext
         {
-
             [StructLayout(LayoutKind.Sequential)]
             private struct _CERT_CONTEXT
             {
@@ -733,7 +870,8 @@ namespace System.ServiceModel.Security
                 if (certContext.IsInvalid)
                     return result;
 
-                _CERT_CONTEXT context = (_CERT_CONTEXT)Marshal.PtrToStructure(certContext.DangerousGetHandle(), typeof(_CERT_CONTEXT));
+                _CERT_CONTEXT context = (_CERT_CONTEXT)
+                    Marshal.PtrToStructure(certContext.DangerousGetHandle(), typeof(_CERT_CONTEXT));
 
                 if (context.hCertStore != IntPtr.Zero)
                 {

@@ -25,7 +25,10 @@ public class NativeRefTests : BuildTestBase
     {
         string id = $"blz_nativeref_aot_{config}_{Path.GetRandomFileName()}";
         string projectFile = CreateProjectWithNativeReference(id);
-        AddItemsPropertiesToProject(projectFile, extraProperties: "<RunAOTCompilation>true</RunAOTCompilation>");
+        AddItemsPropertiesToProject(
+            projectFile,
+            extraProperties: "<RunAOTCompilation>true</RunAOTCompilation>"
+        );
 
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.Relinked));
 
@@ -46,12 +49,12 @@ public class NativeRefTests : BuildTestBase
 
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.Relinked));
 
-        BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.AOT), "-p:RunAOTCompilation=true");
+        BlazorPublish(
+            new BlazorBuildOptions(id, config, NativeFilesType.AOT),
+            "-p:RunAOTCompilation=true"
+        );
 
         // no aot!
         BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.Relinked));
     }
 }
-
-
-

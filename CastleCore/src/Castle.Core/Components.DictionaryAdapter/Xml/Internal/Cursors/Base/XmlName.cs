@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,19 +25,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public XmlName(string localName, string namespaceUri)
         {
-            this.localName    = localName;
+            this.localName = localName;
             this.namespaceUri = namespaceUri;
         }
 
         public string LocalName
         {
             get { return localName; }
-        } 
+        }
 
         public string NamespaceUri
         {
             get { return namespaceUri; }
-        } 
+        }
 
         public override int GetHashCode()
         {
@@ -51,18 +51,17 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override bool Equals(object obj)
         {
-            return obj is XmlName
-                && Equals((XmlName) obj);
+            return obj is XmlName && Equals((XmlName)obj);
         }
 
-        public static bool operator == (XmlName x, XmlName y)
+        public static bool operator ==(XmlName x, XmlName y)
         {
             return XmlNameComparer.Default.Equals(x, y);
         }
 
-        public static bool operator != (XmlName x, XmlName y)
+        public static bool operator !=(XmlName x, XmlName y)
         {
-            return ! XmlNameComparer.Default.Equals(x, y);
+            return !XmlNameComparer.Default.Equals(x, y);
         }
 
         public XmlName WithNamespaceUri(string namespaceUri)
@@ -92,9 +91,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (index == text.Length)
                 return new XmlName(text.Substring(0, index), null);
 
-            return new XmlName(
-                text.Substring(index + 1),
-                text.Substring(0, index));
+            return new XmlName(text.Substring(index + 1), text.Substring(0, index));
         }
     }
 }

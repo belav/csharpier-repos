@@ -64,20 +64,12 @@ namespace System.Data.SqlClient
         //
         public string UserId
         {
-            get
-            {
-                return _userId;
-            }
+            get { return _userId; }
         }
 
         public SecureString Password
         {
-            get
-            {
-                return _password;
-            }
+            get { return _password; }
         }
     }
-}   // System.Data.SqlClient namespace
-
-
+} // System.Data.SqlClient namespace

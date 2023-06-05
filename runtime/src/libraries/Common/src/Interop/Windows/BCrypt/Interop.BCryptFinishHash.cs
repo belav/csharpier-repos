@@ -10,6 +10,11 @@ internal static partial class Interop
     internal static partial class BCrypt
     {
         [LibraryImport(Libraries.BCrypt)]
-        internal static partial NTSTATUS BCryptFinishHash(SafeBCryptHashHandle hHash, Span<byte> pbOutput, int cbOutput, int dwFlags);
+        internal static partial NTSTATUS BCryptFinishHash(
+            SafeBCryptHashHandle hHash,
+            Span<byte> pbOutput,
+            int cbOutput,
+            int dwFlags
+        );
     }
 }

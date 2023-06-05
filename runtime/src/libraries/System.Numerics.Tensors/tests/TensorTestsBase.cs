@@ -35,6 +35,7 @@ namespace System.Numerics.Tensors.Tests
 
                 throw new ArgumentException(nameof(TensorType));
             }
+
             public Tensor<T> CreateFromDimensions<T>(ReadOnlySpan<int> dimensions)
             {
                 switch (TensorType)
@@ -63,11 +64,7 @@ namespace System.Numerics.Tensors.Tests
             TensorType.CompressedSparse
         };
 
-        private static bool[] s_reverseStrideValues = new[]
-        {
-            false,
-            true
-        };
+        private static bool[] s_reverseStrideValues = new[] { false, true };
 
         public static IEnumerable<object[]> GetSingleTensorConstructors()
         {
@@ -152,13 +149,15 @@ namespace System.Numerics.Tensors.Tests
                 yield return new object[] { ctor.CreateFromArray<int>(new[] { 7, 14, 21 }) };
                 yield return new object[]
                 {
-                    ctor.CreateFromArray<int>(new[,]
-                    {
-                        { 3, 6, 9 },
-                        { 5, 10, 15 },
-                        { 7, 14, 21 },
-                        { 11, 22, 33 }
-                    })
+                    ctor.CreateFromArray<int>(
+                        new[,]
+                        {
+                            { 3, 6, 9 },
+                            { 5, 10, 15 },
+                            { 7, 14, 21 },
+                            { 11, 22, 33 }
+                        }
+                    )
                 };
             }
         }

@@ -63,7 +63,8 @@ internal sealed partial class PhysicalFileResult : FileResult, IResult
             EnableRangeProcessing,
             lastModified,
             EntityTag,
-            logger);
+            logger
+        );
 
         if (!serveBody)
         {
@@ -94,10 +95,7 @@ internal sealed partial class PhysicalFileResult : FileResult, IResult
             count = rangeLength;
         }
 
-        return response.SendFileAsync(
-            FileName,
-            offset: offset,
-            count: count);
+        return response.SendFileAsync(FileName, offset: offset, count: count);
     }
 
     internal readonly struct FileInfoWrapper

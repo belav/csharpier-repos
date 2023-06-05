@@ -18,7 +18,13 @@ namespace IntelHardwareIntrinsicTest.SSE2
         {
             if (Sse2.IsSupported)
             {
-                using (TestTable_2Input<double> doubleTable = new TestTable_2Input<double>(new double[2] { 1, -5 }, new double[2] { 22, -1 }, new double[2]))
+                using (
+                    TestTable_2Input<double> doubleTable = new TestTable_2Input<double>(
+                        new double[2] { 1, -5 },
+                        new double[2] { 22, -1 },
+                        new double[2]
+                    )
+                )
                 {
                     var vf1 = Unsafe.Read<Vector128<double>>(doubleTable.inArray1Ptr);
                     var vf2 = Sse2.LoadLow(vf1, (double*)(doubleTable.inArray2Ptr));

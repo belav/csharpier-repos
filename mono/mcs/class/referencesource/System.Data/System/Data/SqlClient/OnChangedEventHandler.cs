@@ -6,7 +6,8 @@
 // <owner current="true" primary="false">blained</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.SqlClient {
+namespace System.Data.SqlClient
+{
     using System;
     using System.ComponentModel;
     using System.Collections;
@@ -14,4 +15,3 @@ namespace System.Data.SqlClient {
 
     public delegate void OnChangeEventHandler(object sender, SqlNotificationEventArgs e);
 }
-    

@@ -10,12 +10,20 @@ namespace System.Runtime
 
     class BufferedOutputStream : Stream
     {
-        [Fx.Tag.Cache(typeof(byte), Fx.Tag.CacheAttrition.None, Scope = Fx.Tag.Strings.ExternallyManaged,
-            SizeLimit = Fx.Tag.Strings.ExternallyManaged)]
+        [Fx.Tag.Cache(
+            typeof(byte),
+            Fx.Tag.CacheAttrition.None,
+            Scope = Fx.Tag.Strings.ExternallyManaged,
+            SizeLimit = Fx.Tag.Strings.ExternallyManaged
+        )]
         InternalBufferManager bufferManager;
 
-        [Fx.Tag.Queue(typeof(byte), SizeLimit = "BufferedOutputStream(maxSize)",
-            StaleElementsRemovedImmediately = true, EnqueueThrowsIfFull = true)]
+        [Fx.Tag.Queue(
+            typeof(byte),
+            SizeLimit = "BufferedOutputStream(maxSize)",
+            StaleElementsRemovedImmediately = true,
+            EnqueueThrowsIfFull = true
+        )]
         byte[][] chunks;
 
         int chunkCount;
@@ -34,47 +42,37 @@ namespace System.Runtime
             this.chunks = new byte[4][];
         }
 
-        public BufferedOutputStream(int initialSize, int maxSize, InternalBufferManager bufferManager)
+        public BufferedOutputStream(
+            int initialSize,
+            int maxSize,
+            InternalBufferManager bufferManager
+        )
             : this()
         {
             Reinitialize(initialSize, maxSize, bufferManager);
         }
 
         public BufferedOutputStream(int maxSize)
-            : this(0, maxSize, InternalBufferManager.Create(0, int.MaxValue))
-        {
-        }
+            : this(0, maxSize, InternalBufferManager.Create(0, int.MaxValue)) { }
 
         public override bool CanRead
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override long Length
         {
-            get
-            {
-                return this.totalSize;
-            }
+            get { return this.totalSize; }
         }
 
         public override long Position
@@ -89,12 +87,21 @@ namespace System.Runtime
             }
         }
 
-        public void Reinitialize(int initialSize, int maxSizeQuota, InternalBufferManager bufferManager)
+        public void Reinitialize(
+            int initialSize,
+            int maxSizeQuota,
+            InternalBufferManager bufferManager
+        )
         {
             Reinitialize(initialSize, maxSizeQuota, maxSizeQuota, bufferManager);
         }
 
-        public void Reinitialize(int initialSize, int maxSizeQuota, int effectiveMaxSize, InternalBufferManager bufferManager)
+        public void Reinitialize(
+            int initialSize,
+            int maxSizeQuota,
+            int effectiveMaxSize,
+            InternalBufferManager bufferManager
+        )
         {
             Fx.Assert(!this.initialized, "Clear must be called before re-initializing stream");
             this.maxSizeQuota = maxSizeQuota;
@@ -135,7 +142,13 @@ namespace System.Runtime
             this.currentChunkSize = 0;
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int size, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw Fx.Exception.AsError(new NotSupportedException(InternalSR.ReadNotSupported));
         }
@@ -145,7 +158,13 @@ namespace System.Runtime
             throw Fx.Exception.AsError(new NotSupportedException(InternalSR.ReadNotSupported));
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback callback,
+            object state
+        )
         {
             Write(buffer, offset, size);
             return new CompletedAsyncResult(callback, state);
@@ -174,13 +193,9 @@ namespace System.Runtime
             this.currentChunk = null;
         }
 
-        public override void Close()
-        {
-        }
+        public override void Close() { }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int size)
         {
@@ -252,7 +267,9 @@ namespace System.Runtime
 
         protected virtual Exception CreateQuotaExceededException(int maxSizeQuota)
         {
-            return new InvalidOperationException(InternalSR.BufferedOutputStreamQuotaExceeded(maxSizeQuota));
+            return new InvalidOperationException(
+                InternalSR.BufferedOutputStreamQuotaExceeded(maxSizeQuota)
+            );
         }
 
         void WriteCore(byte[] buffer, int offset, int size)
@@ -262,7 +279,11 @@ namespace System.Runtime
 
             if (size < 0)
             {
-                throw Fx.Exception.ArgumentOutOfRange("size", size, InternalSR.ValueMustBeNonNegative);
+                throw Fx.Exception.ArgumentOutOfRange(
+                    "size",
+                    size,
+                    InternalSR.ValueMustBeNonNegative
+                );
             }
 
             if ((int.MaxValue - size) < this.totalSize)
@@ -283,7 +304,13 @@ namespace System.Runtime
                 {
                     if (buffer != null)
                     {
-                        Buffer.BlockCopy(buffer, offset, this.currentChunk, this.currentChunkSize, remainingSizeInChunk);
+                        Buffer.BlockCopy(
+                            buffer,
+                            offset,
+                            this.currentChunk,
+                            this.currentChunkSize,
+                            remainingSizeInChunk
+                        );
                     }
                     this.currentChunkSize = this.currentChunk.Length;
                     offset += remainingSizeInChunk;

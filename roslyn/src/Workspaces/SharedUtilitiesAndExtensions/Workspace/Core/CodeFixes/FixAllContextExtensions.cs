@@ -19,7 +19,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 #endif
         }
 
-        public static string GetDefaultFixAllTitle(this FixAllContext context)
-            => FixAllHelper.GetDefaultFixAllTitle(context.Scope, title: context.DiagnosticIds.First(), context.Document!, context.Project);
+        public static string GetDefaultFixAllTitle(this FixAllContext context) =>
+            FixAllHelper.GetDefaultFixAllTitle(
+                context.Scope,
+                title: context.DiagnosticIds.First(),
+                context.Document!,
+                context.Project
+            );
     }
 }

@@ -241,7 +241,8 @@ namespace System.Runtime
         // This is not used in DEBUG builds as the runtime performs additional checks.
         // The logic below is the inlined copy of ObjectFromHandle in the unmanaged runtime.
 #pragma warning disable 8500 // address of managed types
-        private static unsafe object? InternalGetTarget(IntPtr dependentHandle) => *(object*)dependentHandle;
+        private static unsafe object? InternalGetTarget(IntPtr dependentHandle) =>
+            *(object*)dependentHandle;
 #pragma warning restore 8500
 #endif
 
@@ -249,7 +250,10 @@ namespace System.Runtime
         private static extern object? InternalGetDependent(IntPtr dependentHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern object? InternalGetTargetAndDependent(IntPtr dependentHandle, out object? dependent);
+        private static extern object? InternalGetTargetAndDependent(
+            IntPtr dependentHandle,
+            out object? dependent
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void InternalSetDependent(IntPtr dependentHandle, object? dependent);

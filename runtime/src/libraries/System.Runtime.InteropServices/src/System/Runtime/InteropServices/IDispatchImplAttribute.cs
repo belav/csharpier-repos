@@ -7,9 +7,8 @@ namespace System.Runtime.InteropServices
     [Obsolete("IDispatchImplAttribute has been deprecated and is not supported.")]
     public sealed class IDispatchImplAttribute : Attribute
     {
-        public IDispatchImplAttribute(short implType) : this((IDispatchImplType)implType)
-        {
-        }
+        public IDispatchImplAttribute(short implType)
+            : this((IDispatchImplType)implType) { }
 
         public IDispatchImplAttribute(IDispatchImplType implType) => Value = implType;
 

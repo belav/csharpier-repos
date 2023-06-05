@@ -18,11 +18,11 @@ namespace POS_Server.Models
         public Nullable<long> updateUserId { get; set; }
         public Nullable<long> itemsTransId { get; set; }
 
-
         // item
         public string itemName { get; set; }
         public Nullable<long> itemUnitId { get; set; }
         public int quantity { get; set; }
+
         //order
         public string status { get; set; }
         public int num { get; set; }
@@ -36,20 +36,21 @@ namespace POS_Server.Models
         public string invType { get; set; }
         public Nullable<long> shippingCompanyId { get; set; }
 
-
         public List<itemOrderPreparingModel> items { get; set; }
         public Nullable<long> branchId { get; set; }
         public string branchName { get; set; }
         public Nullable<System.DateTime> invDate { get; set; }
         public Nullable<System.TimeSpan> invTime { get; set; }
+
         //category
         public Nullable<long> categoryId { get; set; }
         public string categoryCode { get; set; }
         public string categoryName { get; set; }
+
         //sections
         public string sectionTable { get; set; }
-
     }
+
     public class itemOrderPreparingModel
     {
         public long itemOrderId { get; set; }
@@ -64,16 +65,15 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
 
-
         public string itemName { get; set; }
         public Nullable<long> itemId { get; set; }
 
         public decimal remainingTime { get; set; }
         public int sequence { get; set; }
+
         //
         public Nullable<long> categoryId { get; set; }
         public string categoryName { get; set; }
-
 
         public List<itemsTransferIngredientsModel> itemsIngredients { get; set; }
         public List<ItemTransferModel> itemExtras { get; set; }

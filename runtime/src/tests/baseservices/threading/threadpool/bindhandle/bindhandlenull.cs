@@ -22,7 +22,7 @@ class BindHandleNull
             Console.WriteLine("Test passed");
             return (100);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine("Unexpected: {0}", e);
             return (98);

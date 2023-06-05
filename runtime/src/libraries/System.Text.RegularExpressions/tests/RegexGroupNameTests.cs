@@ -19,7 +19,8 @@ namespace System.Text.RegularExpressions.Tests
         {
             //Debugger.Launch();
 
-            string pattern = @"\b(?<FirstWord>\w+)\s?((\w+)\s)*(?<LastWord>\w+)?(?<Punctuation>\p{Po})";
+            string pattern =
+                @"\b(?<FirstWord>\w+)\s?((\w+)\s)*(?<LastWord>\w+)?(?<Punctuation>\p{Po})";
             string input = "The cow jumped over the moon.";
             Regex regex = new Regex(pattern);
             Match match = regex.Match(input);

@@ -13,7 +13,12 @@ namespace System.Activities.Core.Presentation
     //Returns the maximum of input values. Input values should be of type double.
     class MaxValueConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(
+            object[] values,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             double maxValue = double.MinValue;
             foreach (object value in values)
@@ -31,7 +36,12 @@ namespace System.Activities.Core.Presentation
             return maxValue;
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object[] ConvertBack(
+            object value,
+            Type[] targetTypes,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }

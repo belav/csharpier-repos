@@ -15,61 +15,64 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariable
 {
-    public class DisambiguateSameVariableTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class DisambiguateSameVariableTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public DisambiguateSameVariableTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpDisambiguateSameVariableCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpDisambiguateSameVariableCodeFixProvider());
 
         [Fact]
         public async Task TestParamToParamWithNoMatch()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(int a)
     {
         [|a = a|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestLocalToLocalWithNoMatch()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(int a)
     {
         [|a = a|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFieldToFieldWithNoMatch()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     int a;
     void M()
     {
         [|a = a|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithSameNamedField()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int a;
     void M(int a)
@@ -77,35 +80,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [|a = a|];
     }
 }",
-@"class C
+                @"class C
 {
     int a;
     void M(int a)
     {
         this.a = a;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFieldToFieldWithNonMatchingField()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     int x;
     void M()
     {
         [|a = a|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithUnderscoreNamedField()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int _a;
     void M(int a)
@@ -113,21 +118,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [|a = a|];
     }
 }",
-@"class C
+                @"class C
 {
     int _a;
     void M(int a)
     {
         _a = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithCapitalizedField()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int A;
     void M(int a)
@@ -135,21 +141,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [|a = a|];
     }
 }",
-@"class C
+                @"class C
 {
     int A;
     void M(int a)
     {
         A = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithProperty()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int A { get; set; }
     void M(int a)
@@ -157,21 +164,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [|a = a|];
     }
 }",
-@"class C
+                @"class C
 {
     int A { get; set; }
     void M(int a)
     {
         A = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithReadOnlyFieldInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     readonly int a;
     public C(int a)
@@ -179,14 +187,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [|a = a|];
     }
 }",
-@"class C
+                @"class C
 {
     readonly int a;
     public C(int a)
     {
         this.a = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
@@ -194,7 +203,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         {
             // Not legal, but is at least something they might want.
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     readonly int a;
     void M(int a)
@@ -202,21 +211,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
         [|a = a|];
     }
 }",
-@"class C
+                @"class C
 {
     readonly int a;
     void M(int a)
     {
         this.a = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamWithAccessibleFieldInBaseType()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Base
 {
     protected int a;
@@ -229,7 +239,7 @@ class C : Base
         [|a = a|];
     }
 }",
-@"
+                @"
 class Base
 {
     protected int a;
@@ -241,14 +251,15 @@ class C : Base
     {
         this.a = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamNotWithInaccessibleFieldInBaseType()
         {
             await TestMissingAsync(
-@"
+                @"
 class Base
 {
     private int a;
@@ -260,14 +271,15 @@ class C : Base
     {
         [|a = a|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamNotWithStaticField()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     static int a;
@@ -275,14 +287,15 @@ class C
     {
         [|a = a|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestParamToParamCompareWithSameNamedField()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int a;
     void M(int a)
@@ -292,7 +305,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     int a;
     void M(int a)
@@ -301,14 +314,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int a;
     void M(int a)
@@ -317,7 +331,7 @@ class C
         a = a;
     }
 }",
-@"class C
+                @"class C
 {
     int a;
     void M(int a)
@@ -325,14 +339,15 @@ class C
         this.a = a;
         this.a = a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestFieldToFieldWithPropAvailableOffOfThis()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int a;
     int A { get; set; };
@@ -341,7 +356,7 @@ class C
         [|this.a = this.a|];
     }
 }",
-@"class C
+                @"class C
 {
     int a;
     int A { get; set; };
@@ -349,14 +364,15 @@ class C
     {
         this.A = this.a;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(28290, "https://github.com/dotnet/roslyn/issues/28290")]
         public async Task TestFieldToFieldWithPropAvailableOffOfOtherInstance()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int a;
     int A { get; set; };
@@ -365,7 +381,7 @@ class C
         [|c.a = c.a|];
     }
 }",
-@"class C
+                @"class C
 {
     int a;
     int A { get; set; };
@@ -373,7 +389,8 @@ class C
     {
         c.A = c.a;
     }
-}");
+}"
+            );
         }
     }
 }

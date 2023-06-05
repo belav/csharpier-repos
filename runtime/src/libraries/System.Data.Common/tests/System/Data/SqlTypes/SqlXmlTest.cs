@@ -34,10 +34,11 @@ namespace System.Data.Tests.SqlTypes
     {
         // Test constructor
         [Fact] // .ctor (Stream)
-               //[Category ("NotDotNet")] // Name cannot begin with the '.' character, hexadecimal value 0x00. Line 1, position 2
+        //[Category ("NotDotNet")] // Name cannot begin with the '.' character, hexadecimal value 0x00. Line 1, position 2
         public void Constructor2_Stream_Unicode()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(xmlStr));
             SqlXml xmlSql = new SqlXml(stream);
             Assert.False(xmlSql.IsNull);
@@ -65,7 +66,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact] // .ctor (XmlReader)
         public void Constructor3()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             XmlReader xrdr = new XmlTextReader(new StringReader(xmlStr));
             SqlXml xmlSql = new SqlXml(xrdr);
             Assert.False(xmlSql.IsNull);
@@ -96,7 +98,8 @@ namespace System.Data.Tests.SqlTypes
         //[Category ("NotDotNet")] // Name cannot begin with the '.' character, hexadecimal value 0x00. Line 1, position 2
         public void CreateReader_Stream_Unicode()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(xmlStr));
             SqlXml xmlSql = new SqlXml(stream);
 
@@ -109,7 +112,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void SqlXml_fromXmlReader_CreateReaderTest()
         {
-            string xmlStr = "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
+            string xmlStr =
+                "<Employee><FirstName>Varadhan</FirstName><LastName>Veerapuram</LastName></Employee>";
             XmlReader rdr = new XmlTextReader(new StringReader(xmlStr));
             SqlXml xmlSql = new SqlXml(rdr);
 

@@ -27,22 +27,26 @@ namespace System.Collections.Frozen
         /// <typeparam name="T">The type of the values in the set.</typeparam>
         /// <remarks>If the same key appears multiple times in the input, the latter one in the sequence takes precedence.</remarks>
         /// <returns>A frozen set.</returns>
-        public static FrozenSet<T> ToFrozenSet<T>(this IEnumerable<T> source, IEqualityComparer<T>? comparer = null)
+        public static FrozenSet<T> ToFrozenSet<T>(
+            this IEnumerable<T> source,
+            IEqualityComparer<T>? comparer = null
+        )
         {
             ThrowHelper.ThrowIfNull(source);
             comparer ??= EqualityComparer<T>.Default;
 
             // If the source is already frozen with the same comparer, it can simply be returned.
-            if (source is FrozenSet<T> existing &&
-                existing.Comparer.Equals(comparer))
+            if (source is FrozenSet<T> existing && existing.Comparer.Equals(comparer))
             {
                 return existing;
             }
 
             // Ensure we have a HashSet<,> using the specified comparer such that all values
             // are non-null and unique according to that comparer.
-            if (source is not HashSet<T> uniqueValues ||
-                (uniqueValues.Count != 0 && !uniqueValues.Comparer.Equals(comparer)))
+            if (
+                source is not HashSet<T> uniqueValues
+                || (uniqueValues.Count != 0 && !uniqueValues.Comparer.Equals(comparer))
+            )
             {
                 uniqueValues = new HashSet<T>(source, comparer);
             }
@@ -63,9 +67,10 @@ namespace System.Collections.Frozen
                     // In the specific case of Int32 keys, we can optimize further to reduce memory consumption by using
                     // the underlying FrozenHashtable's Int32 index as the values themselves, avoiding the need to store the
                     // same values yet again.
-                    return typeof(T) == typeof(int) ?
-                        (FrozenSet<T>)(object)new Int32FrozenSet((HashSet<int>)(object)uniqueValues) :
-                        new ValueTypeDefaultComparerFrozenSet<T>(uniqueValues);
+                    return typeof(T) == typeof(int)
+                        ? (FrozenSet<T>)
+                            (object)new Int32FrozenSet((HashSet<int>)(object)uniqueValues)
+                        : new ValueTypeDefaultComparerFrozenSet<T>(uniqueValues);
                 }
             }
             else if (typeof(T) == typeof(string))
@@ -76,16 +81,23 @@ namespace System.Collections.Frozen
                 {
                     // If the value is a string and the comparer is known to provide ordinal (case-sensitive or case-insensitive) semantics,
                     // we can use an implementation that's able to examine and optimize based on lengths and/or subsequences within those strings.
-                    if (ReferenceEquals(comparer, EqualityComparer<T>.Default) ||
-                        ReferenceEquals(comparer, StringComparer.Ordinal) ||
-                        ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase))
+                    if (
+                        ReferenceEquals(comparer, EqualityComparer<T>.Default)
+                        || ReferenceEquals(comparer, StringComparer.Ordinal)
+                        || ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase)
+                    )
                     {
                         HashSet<string> stringValues = (HashSet<string>)(object)uniqueValues;
-                        IEqualityComparer<string> stringComparer = (IEqualityComparer<string>)(object)comparer;
+                        IEqualityComparer<string> stringComparer =
+                            (IEqualityComparer<string>)(object)comparer;
 
                         FrozenSet<string> frozenSet =
-                            LengthBucketsFrozenSet.TryCreateLengthBucketsFrozenSet(stringValues, stringComparer) ??
-                            (FrozenSet<string>)new OrdinalStringFrozenSet(stringValues, stringComparer);
+                            LengthBucketsFrozenSet.TryCreateLengthBucketsFrozenSet(
+                                stringValues,
+                                stringComparer
+                            )
+                            ?? (FrozenSet<string>)
+                                new OrdinalStringFrozenSet(stringValues, stringComparer);
 
                         return (FrozenSet<T>)(object)frozenSet;
                     }
@@ -109,11 +121,13 @@ namespace System.Collections.Frozen
     /// </remarks>
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
     [DebuggerDisplay("Count = {Count}")]
-    public abstract class FrozenSet<T> : ISet<T>,
+    public abstract class FrozenSet<T>
+        : ISet<T>,
 #if NET5_0_OR_GREATER
-        IReadOnlySet<T>,
+            IReadOnlySet<T>,
 #endif
-        IReadOnlyCollection<T>, ICollection
+            IReadOnlyCollection<T>,
+            ICollection
     {
         /// <summary>Initialize the set.</summary>
         /// <param name="comparer">The comparer to use and to expose from <see cref="Comparer"/>.</param>
@@ -149,8 +163,7 @@ namespace System.Collections.Frozen
 
         /// <summary>Copies the values in the set to a span.</summary>
         /// <param name="destination">The span that is the destination of the values copied from the set.</param>
-        public void CopyTo(Span<T> destination) =>
-            Items.AsSpan().CopyTo(destination);
+        public void CopyTo(Span<T> destination) => Items.AsSpan().CopyTo(destination);
 
         /// <inheritdoc />
         void ICollection.CopyTo(Array array, int index)
@@ -176,8 +189,7 @@ namespace System.Collections.Frozen
         /// <summary>Determines whether the set contains the specified element.</summary>
         /// <param name="item">The element to locate.</param>
         /// <returns><see langword="true"/> if the set contains the specified element; otherwise, <see langword="false"/>.</returns>
-        public bool Contains(T item) =>
-            FindItemIndex(item) >= 0;
+        public bool Contains(T item) => FindItemIndex(item) >= 0;
 
         /// <summary>Searches the set for a given value and returns the equal value it finds, if any.</summary>
         /// <param name="equalValue">The value to search for.</param>
@@ -210,13 +222,11 @@ namespace System.Collections.Frozen
 
         /// <inheritdoc />
         IEnumerator<T> IEnumerable<T>.GetEnumerator() =>
-            Count == 0 ? ((IList<T>)Array.Empty<T>()).GetEnumerator() :
-            GetEnumerator();
+            Count == 0 ? ((IList<T>)Array.Empty<T>()).GetEnumerator() : GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() =>
-            Count == 0 ? Array.Empty<T>().GetEnumerator() :
-            GetEnumerator();
+            Count == 0 ? Array.Empty<T>().GetEnumerator() : GetEnumerator();
 
         /// <inheritdoc />
         bool ISet<T>.Add(T item) => throw new NotSupportedException();

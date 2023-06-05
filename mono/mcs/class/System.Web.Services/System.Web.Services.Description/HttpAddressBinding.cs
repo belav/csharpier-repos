@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.HttpAddressBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,35 +29,37 @@
 //
 
 using System.Web.Services.Configuration;
-using System.Xml.Serialization; 
+using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("address", "http://schemas.xmlsoap.org/wsdl/http/", typeof (Port))]
-	public sealed class HttpAddressBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension("address", "http://schemas.xmlsoap.org/wsdl/http/", typeof(Port))]
+    public sealed class HttpAddressBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
+        string location;
 
-		string location;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public HttpAddressBinding ()
-		{
-			location = String.Empty;
-		}
-		
-		#endregion // Constructors
+        public HttpAddressBinding()
+        {
+            location = String.Empty;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[XmlAttribute ("location")]
-		public string Location { 	
-			get { return location; }
-			set { location = value; }
-		}
-	
-		#endregion // Properties
-	}
+        #region Properties
+
+        [XmlAttribute("location")]
+        public string Location
+        {
+            get { return location; }
+            set { location = value; }
+        }
+
+        #endregion // Properties
+    }
 }
