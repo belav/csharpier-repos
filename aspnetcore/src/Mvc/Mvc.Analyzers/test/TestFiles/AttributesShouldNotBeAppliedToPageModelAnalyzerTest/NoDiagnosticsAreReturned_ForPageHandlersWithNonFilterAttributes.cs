@@ -6,8 +6,6 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.Test
     public class NoDiagnosticsAreReturned_ForPageHandlersWithNonFilterAttributes : PageModel
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
     }
 }

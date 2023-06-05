@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+
 namespace AutoMapper.Configuration;
 
 public interface ICtorParamConfigurationExpression
@@ -9,6 +10,7 @@ public interface ICtorParamConfigurationExpression
     /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a dot separated member path.</param>
     void MapFrom(string sourceMembersPath);
 }
+
 public interface ICtorParamConfigurationExpression<TSource> : ICtorParamConfigurationExpression
 {
     /// <summary>
@@ -25,18 +27,23 @@ public interface ICtorParamConfigurationExpression<TSource> : ICtorParamConfigur
     /// <param name="resolver">Custom func</param>
     void MapFrom<TMember>(Func<TSource, ResolutionContext, TMember> resolver);
 }
+
 public interface ICtorParameterConfiguration
 {
     string CtorParamName { get; }
     void Configure(TypeMap typeMap);
 }
+
 [EditorBrowsable(EditorBrowsableState.Never)]
-public class CtorParamConfigurationExpression<TSource, TDestination> : ICtorParamConfigurationExpression<TSource>, ICtorParameterConfiguration
+public class CtorParamConfigurationExpression<TSource, TDestination>
+    : ICtorParamConfigurationExpression<TSource>,
+        ICtorParameterConfiguration
 {
     public string CtorParamName { get; }
     public Type SourceType { get; }
 
-    private readonly List<Action<ConstructorParameterMap>> _ctorParamActions = new List<Action<ConstructorParameterMap>>();
+    private readonly List<Action<ConstructorParameterMap>> _ctorParamActions =
+        new List<Action<ConstructorParameterMap>>();
 
     public CtorParamConfigurationExpression(string ctorParamName, Type sourceType)
     {
@@ -49,7 +56,9 @@ public class CtorParamConfigurationExpression<TSource, TDestination> : ICtorPara
 
     public void MapFrom<TMember>(Func<TSource, ResolutionContext, TMember> resolver)
     {
-        Expression<Func<TSource, TDestination, TMember, ResolutionContext, TMember>> resolverExpression = (src, dest, destMember, ctxt) => resolver(src, ctxt);
+        Expression<
+            Func<TSource, TDestination, TMember, ResolutionContext, TMember>
+        > resolverExpression = (src, dest, destMember, ctxt) => resolver(src, ctxt);
         _ctorParamActions.Add(cpm => cpm.SetResolver(new FuncResolver(resolverExpression)));
     }
 
@@ -64,19 +73,25 @@ public class CtorParamConfigurationExpression<TSource, TDestination> : ICtorPara
         var ctorMap = typeMap.ConstructorMap;
         if (ctorMap == null)
         {
-            throw new AutoMapperConfigurationException($"The type {typeMap.DestinationType.Name} does not have a constructor.\n{typeMap.DestinationType.FullName}");
+            throw new AutoMapperConfigurationException(
+                $"The type {typeMap.DestinationType.Name} does not have a constructor.\n{typeMap.DestinationType.FullName}"
+            );
         }
         var parameter = ctorMap[CtorParamName];
         if (parameter == null)
         {
-            throw new AutoMapperConfigurationException($"{typeMap.DestinationType.Name} does not have a matching constructor with a parameter named '{CtorParamName}'.\n{typeMap.DestinationType.FullName}.{CheckRecord(ctorMap.Ctor)}");
+            throw new AutoMapperConfigurationException(
+                $"{typeMap.DestinationType.Name} does not have a matching constructor with a parameter named '{CtorParamName}'.\n{typeMap.DestinationType.FullName}.{CheckRecord(ctorMap.Ctor)}"
+            );
         }
         foreach (var action in _ctorParamActions)
         {
             action(parameter);
         }
         return;
-        static string CheckRecord(ConstructorInfo ctor) => ctor.IsFamily && ctor.Has<CompilerGeneratedAttribute>() ?
-            " When mapping to records, consider excluding non-public constructors. See https://docs.automapper.org/en/latest/Construction.html." : null;
+        static string CheckRecord(ConstructorInfo ctor) =>
+            ctor.IsFamily && ctor.Has<CompilerGeneratedAttribute>()
+                ? " When mapping to records, consider excluding non-public constructors. See https://docs.automapper.org/en/latest/Construction.html."
+                : null;
     }
 }

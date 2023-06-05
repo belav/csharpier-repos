@@ -24,13 +24,15 @@ namespace Microsoft.Extensions.Hosting.Internal
         private IEnumerable<IHostedService>? _hostedServices;
         private volatile bool _stopCalled;
 
-        public Host(IServiceProvider services,
-                    IHostEnvironment hostEnvironment,
-                    PhysicalFileProvider defaultProvider,
-                    IHostApplicationLifetime applicationLifetime,
-                    ILogger<Host> logger,
-                    IHostLifetime hostLifetime,
-                    IOptions<HostOptions> options)
+        public Host(
+            IServiceProvider services,
+            IHostEnvironment hostEnvironment,
+            PhysicalFileProvider defaultProvider,
+            IHostApplicationLifetime applicationLifetime,
+            ILogger<Host> logger,
+            IHostLifetime hostLifetime,
+            IOptions<HostOptions> options
+        )
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(applicationLifetime);
@@ -44,7 +46,10 @@ namespace Microsoft.Extensions.Hosting.Internal
 
             if (_applicationLifetime is null)
             {
-                throw new ArgumentException(SR.IHostApplicationLifetimeReplacementNotSupported, nameof(applicationLifetime));
+                throw new ArgumentException(
+                    SR.IHostApplicationLifetimeReplacementNotSupported,
+                    nameof(applicationLifetime)
+                );
             }
             _logger = logger;
             _hostLifetime = hostLifetime;
@@ -57,7 +62,11 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             _logger.Starting();
 
-            using var combinedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _applicationLifetime.ApplicationStopping);
+            using var combinedCancellationTokenSource =
+                CancellationTokenSource.CreateLinkedTokenSource(
+                    cancellationToken,
+                    _applicationLifetime.ApplicationStopping
+                );
             CancellationToken combinedCancellationToken = combinedCancellationTokenSource.Token;
 
             await _hostLifetime.WaitForStartAsync(combinedCancellationToken).ConfigureAwait(false);
@@ -105,7 +114,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 }
 
                 _logger.BackgroundServiceFaulted(ex);
-                if (_options.BackgroundServiceExceptionBehavior == BackgroundServiceExceptionBehavior.StopHost)
+                if (
+                    _options.BackgroundServiceExceptionBehavior
+                    == BackgroundServiceExceptionBehavior.StopHost
+                )
                 {
                     _logger.BackgroundServiceStoppingHost(ex);
                     _applicationLifetime.StopApplication();
@@ -119,7 +131,12 @@ namespace Microsoft.Extensions.Hosting.Internal
             _logger.Stopping();
 
             using (var cts = new CancellationTokenSource(_options.ShutdownTimeout))
-            using (var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cts.Token, cancellationToken))
+            using (
+                var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+                    cts.Token,
+                    cancellationToken
+                )
+            )
             {
                 CancellationToken token = linkedCts.Token;
                 // Trigger IHostApplicationLifetime.ApplicationStopping
@@ -155,7 +172,10 @@ namespace Microsoft.Extensions.Hosting.Internal
 
                 if (exceptions.Count > 0)
                 {
-                    var ex = new AggregateException("One or more hosted services failed to stop.", exceptions);
+                    var ex = new AggregateException(
+                        "One or more hosted services failed to stop.",
+                        exceptions
+                    );
                     _logger.StoppedWithException(ex);
                     throw ex;
                 }

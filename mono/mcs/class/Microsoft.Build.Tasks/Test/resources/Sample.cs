@@ -2,14 +2,10 @@ using System;
 
 namespace Mono.Tests
 {
-	public class Sample
-	{
-		Sample ()
-		{
-		}
-	}
+    public class Sample
+    {
+        Sample() { }
+    }
 
-	class Another
-	{
-	}
+    class Another { }
 }

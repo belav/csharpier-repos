@@ -59,7 +59,9 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        protected abstract ConnectionPool CreatePool(IConnectionOrientedTransportChannelFactorySettings settings);
+        protected abstract ConnectionPool CreatePool(
+            IConnectionOrientedTransportChannelFactorySettings settings
+        );
 
         public void Release(ConnectionPool pool, TimeSpan timeout)
         {
@@ -86,5 +88,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-
-

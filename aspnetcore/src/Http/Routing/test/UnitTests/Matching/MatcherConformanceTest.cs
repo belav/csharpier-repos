@@ -32,14 +32,16 @@ public abstract partial class MatcherConformanceTest
         string template,
         object defaults = null,
         object constraints = null,
-        int? order = null)
+        int? order = null
+    )
     {
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             RoutePatternFactory.Parse(template, defaults, constraints),
             order ?? 0,
             EndpointMetadataCollection.Empty,
-            "endpoint: " + template);
+            "endpoint: " + template
+        );
     }
 
     internal (Matcher matcher, RouteEndpoint endpoint) CreateMatcher(string template)

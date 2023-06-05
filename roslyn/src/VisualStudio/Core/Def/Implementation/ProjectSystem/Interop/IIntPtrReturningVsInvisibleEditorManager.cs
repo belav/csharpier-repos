@@ -27,6 +27,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.I
             IVsProject pProject,
             uint dwFlags,
             IVsSimpleDocFactory pFactory,
-            out IntPtr ppEditor);
+            out IntPtr ppEditor
+        );
     }
 }

@@ -1,14 +1,15 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: SafeLibraryHandle
 **
 ============================================================*/
-namespace Microsoft.Win32 {
+namespace Microsoft.Win32
+{
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
     using System;
@@ -25,10 +26,13 @@ namespace Microsoft.Win32 {
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
     [HostProtectionAttribute(MayLeakOnAbort = true)]
-    sealed internal class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        internal SafeLibraryHandle() : base(true) {}
-        
-        override protected bool ReleaseHandle() {
+    sealed internal class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        internal SafeLibraryHandle()
+            : base(true) { }
+
+        override protected bool ReleaseHandle()
+        {
             return UnsafeNativeMethods.FreeLibrary(handle);
         }
     }

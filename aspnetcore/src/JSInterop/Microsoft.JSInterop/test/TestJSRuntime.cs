@@ -7,12 +7,21 @@ namespace Microsoft.JSInterop;
 
 internal class TestJSRuntime : JSRuntime
 {
-    protected override void BeginInvokeJS(long asyncHandle, string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
+    protected override void BeginInvokeJS(
+        long asyncHandle,
+        string identifier,
+        string? argsJson,
+        JSCallResultType resultType,
+        long targetInstanceId
+    )
     {
         throw new NotImplementedException();
     }
 
-    protected internal override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
+    protected internal override void EndInvokeDotNet(
+        DotNetInvocationInfo invocationInfo,
+        in DotNetInvocationResult invocationResult
+    )
     {
         throw new NotImplementedException();
     }
@@ -22,7 +31,10 @@ internal class TestJSRuntime : JSRuntime
         // No-op
     }
 
-    protected internal override Task TransmitStreamAsync(long streamId, DotNetStreamReference dotNetStreamReference)
+    protected internal override Task TransmitStreamAsync(
+        long streamId,
+        DotNetStreamReference dotNetStreamReference
+    )
     {
         // No-op
         return Task.CompletedTask;

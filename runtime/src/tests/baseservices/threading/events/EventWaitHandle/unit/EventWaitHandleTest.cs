@@ -8,32 +8,38 @@ public class EventWaitHandleTest
 {
     public const int TestPassed = 100; // Returned by Run() on success
 
-    public static int RunTest(Func<int> test) {
+    public static int RunTest(Func<int> test)
+    {
         var rv = test();
         Console.WriteLine(rv == TestPassed ? "Test passed" : "Test failed");
         return rv;
     }
 
-    public static bool TryOpenExisting<Expected>(string name) where Expected : Exception
+    public static bool TryOpenExisting<Expected>(string name)
+        where Expected : Exception
     {
         EventWaitHandle ewh;
         return TryOpenExisting<Expected>(name, out ewh);
     }
 
-    public static bool TryOpenExisting<Expected>(string name, out EventWaitHandle ewh) where Expected : Exception
+    public static bool TryOpenExisting<Expected>(string name, out EventWaitHandle ewh)
+        where Expected : Exception
     {
         ewh = null;
-        try {
+        try
+        {
             ewh = EventWaitHandle.OpenExisting(name);
-        } catch (Expected) {
-        } catch (Exception ne) {
+        }
+        catch (Expected) { }
+        catch (Exception ne)
+        {
             Console.WriteLine("Caught unexpected exception: {0}", ne);
             return false;
         }
         return true;
     }
 
-    public class NoException : Exception {}
+    public class NoException : Exception { }
 }
 
 public static class EventWaitHandleExtensions

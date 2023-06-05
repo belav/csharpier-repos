@@ -12,17 +12,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             private readonly Compilation _compilation;
 
-            public CompilationTypeGenerator(Compilation compilation)
-                => _compilation = compilation;
+            public CompilationTypeGenerator(Compilation compilation) => _compilation = compilation;
 
-            public ITypeSymbol CreateArrayTypeSymbol(ITypeSymbol elementType, int rank)
-                => _compilation.CreateArrayTypeSymbol(elementType, rank);
+            public ITypeSymbol CreateArrayTypeSymbol(ITypeSymbol elementType, int rank) =>
+                _compilation.CreateArrayTypeSymbol(elementType, rank);
 
-            public ITypeSymbol CreatePointerTypeSymbol(ITypeSymbol pointedAtType)
-                => _compilation.CreatePointerTypeSymbol(pointedAtType);
+            public ITypeSymbol CreatePointerTypeSymbol(ITypeSymbol pointedAtType) =>
+                _compilation.CreatePointerTypeSymbol(pointedAtType);
 
-            public ITypeSymbol Construct(INamedTypeSymbol namedType, ITypeSymbol[] typeArguments)
-                => namedType.Construct(typeArguments);
+            public ITypeSymbol Construct(INamedTypeSymbol namedType, ITypeSymbol[] typeArguments) =>
+                namedType.Construct(typeArguments);
         }
     }
 }

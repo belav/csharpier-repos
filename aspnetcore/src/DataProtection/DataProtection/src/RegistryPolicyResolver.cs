@@ -27,7 +27,10 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
 
     public RegistryPolicyResolver(IActivator activator)
     {
-        _getPolicyRegKey = () => Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection");
+        _getPolicyRegKey = () =>
+            Registry.LocalMachine.OpenSubKey(
+                @"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection"
+            );
         _activator = activator;
     }
 
@@ -51,7 +54,9 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
                 var candidate = sinkFromRegistry.Trim();
                 if (!string.IsNullOrEmpty(candidate))
                 {
-                    typeof(IKeyEscrowSink).AssertIsAssignableFrom(TypeExtensions.GetTypeWithTrimFriendlyErrorMessage(candidate));
+                    typeof(IKeyEscrowSink).AssertIsAssignableFrom(
+                        TypeExtensions.GetTypeWithTrimFriendlyErrorMessage(candidate)
+                    );
                     sinks.Add(candidate);
                 }
             }
@@ -100,9 +105,9 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
 
         var defaultKeyLifetime = (int?)policyRegKey.GetValue("DefaultKeyLifetime");
         var escrowSinks = ReadKeyEscrowSinks(policyRegKey);
-        var keyEscrowSinks = escrowSinks.Count is 0 ?
-            Array.Empty<IKeyEscrowSink>() :
-            new IKeyEscrowSink[escrowSinks.Count];
+        var keyEscrowSinks = escrowSinks.Count is 0
+            ? Array.Empty<IKeyEscrowSink>()
+            : new IKeyEscrowSink[escrowSinks.Count];
         for (var i = 0; i < keyEscrowSinks.Length; i++)
         {
             keyEscrowSinks[i] = _activator.CreateInstance<IKeyEscrowSink>(escrowSinks[i]);
@@ -111,85 +116,144 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
         return new RegistryPolicy(configuration, keyEscrowSinks, defaultKeyLifetime);
     }
 
-    private static CngCbcAuthenticatedEncryptorConfiguration GetCngCbcAuthenticatedEncryptorConfiguration(RegistryKey key)
+    private static CngCbcAuthenticatedEncryptorConfiguration GetCngCbcAuthenticatedEncryptorConfiguration(
+        RegistryKey key
+    )
     {
         var options = new CngCbcAuthenticatedEncryptorConfiguration();
-        var valueFromRegistry = key.GetValue(nameof(CngCbcAuthenticatedEncryptorConfiguration.EncryptionAlgorithm));
+        var valueFromRegistry = key.GetValue(
+            nameof(CngCbcAuthenticatedEncryptorConfiguration.EncryptionAlgorithm)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithm = Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!;
+            options.EncryptionAlgorithm = Convert.ToString(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            )!;
         }
 
-        valueFromRegistry = key.GetValue(nameof(CngCbcAuthenticatedEncryptorConfiguration.EncryptionAlgorithmProvider));
+        valueFromRegistry = key.GetValue(
+            nameof(CngCbcAuthenticatedEncryptorConfiguration.EncryptionAlgorithmProvider)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithmProvider = Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!;
+            options.EncryptionAlgorithmProvider = Convert.ToString(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            )!;
         }
 
-        valueFromRegistry = key.GetValue(nameof(CngCbcAuthenticatedEncryptorConfiguration.EncryptionAlgorithmKeySize));
+        valueFromRegistry = key.GetValue(
+            nameof(CngCbcAuthenticatedEncryptorConfiguration.EncryptionAlgorithmKeySize)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithmKeySize = Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture);
+            options.EncryptionAlgorithmKeySize = Convert.ToInt32(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            );
         }
 
-        valueFromRegistry = key.GetValue(nameof(CngCbcAuthenticatedEncryptorConfiguration.HashAlgorithm));
+        valueFromRegistry = key.GetValue(
+            nameof(CngCbcAuthenticatedEncryptorConfiguration.HashAlgorithm)
+        );
         if (valueFromRegistry != null)
         {
-            options.HashAlgorithm = Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!;
+            options.HashAlgorithm = Convert.ToString(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            )!;
         }
 
-        valueFromRegistry = key.GetValue(nameof(CngCbcAuthenticatedEncryptorConfiguration.HashAlgorithmProvider));
+        valueFromRegistry = key.GetValue(
+            nameof(CngCbcAuthenticatedEncryptorConfiguration.HashAlgorithmProvider)
+        );
         if (valueFromRegistry != null)
         {
-            options.HashAlgorithmProvider = Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture);
+            options.HashAlgorithmProvider = Convert.ToString(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            );
         }
 
         return options;
     }
 
-    private static CngGcmAuthenticatedEncryptorConfiguration GetCngGcmAuthenticatedEncryptorConfiguration(RegistryKey key)
+    private static CngGcmAuthenticatedEncryptorConfiguration GetCngGcmAuthenticatedEncryptorConfiguration(
+        RegistryKey key
+    )
     {
         var options = new CngGcmAuthenticatedEncryptorConfiguration();
-        var valueFromRegistry = key.GetValue(nameof(CngGcmAuthenticatedEncryptorConfiguration.EncryptionAlgorithm));
+        var valueFromRegistry = key.GetValue(
+            nameof(CngGcmAuthenticatedEncryptorConfiguration.EncryptionAlgorithm)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithm = Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!;
+            options.EncryptionAlgorithm = Convert.ToString(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            )!;
         }
 
-        valueFromRegistry = key.GetValue(nameof(CngGcmAuthenticatedEncryptorConfiguration.EncryptionAlgorithmProvider));
+        valueFromRegistry = key.GetValue(
+            nameof(CngGcmAuthenticatedEncryptorConfiguration.EncryptionAlgorithmProvider)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithmProvider = Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!;
+            options.EncryptionAlgorithmProvider = Convert.ToString(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            )!;
         }
 
-        valueFromRegistry = key.GetValue(nameof(CngGcmAuthenticatedEncryptorConfiguration.EncryptionAlgorithmKeySize));
+        valueFromRegistry = key.GetValue(
+            nameof(CngGcmAuthenticatedEncryptorConfiguration.EncryptionAlgorithmKeySize)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithmKeySize = Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture);
+            options.EncryptionAlgorithmKeySize = Convert.ToInt32(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            );
         }
 
         return options;
     }
 
-    private static ManagedAuthenticatedEncryptorConfiguration GetManagedAuthenticatedEncryptorConfiguration(RegistryKey key)
+    private static ManagedAuthenticatedEncryptorConfiguration GetManagedAuthenticatedEncryptorConfiguration(
+        RegistryKey key
+    )
     {
         var options = new ManagedAuthenticatedEncryptorConfiguration();
-        var valueFromRegistry = key.GetValue(nameof(ManagedAuthenticatedEncryptorConfiguration.EncryptionAlgorithmType));
+        var valueFromRegistry = key.GetValue(
+            nameof(ManagedAuthenticatedEncryptorConfiguration.EncryptionAlgorithmType)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithmType = ManagedAlgorithmHelpers.FriendlyNameToType(Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!);
+            options.EncryptionAlgorithmType = ManagedAlgorithmHelpers.FriendlyNameToType(
+                Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!
+            );
         }
 
-        valueFromRegistry = key.GetValue(nameof(ManagedAuthenticatedEncryptorConfiguration.EncryptionAlgorithmKeySize));
+        valueFromRegistry = key.GetValue(
+            nameof(ManagedAuthenticatedEncryptorConfiguration.EncryptionAlgorithmKeySize)
+        );
         if (valueFromRegistry != null)
         {
-            options.EncryptionAlgorithmKeySize = Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture);
+            options.EncryptionAlgorithmKeySize = Convert.ToInt32(
+                valueFromRegistry,
+                CultureInfo.InvariantCulture
+            );
         }
 
-        valueFromRegistry = key.GetValue(nameof(ManagedAuthenticatedEncryptorConfiguration.ValidationAlgorithmType));
+        valueFromRegistry = key.GetValue(
+            nameof(ManagedAuthenticatedEncryptorConfiguration.ValidationAlgorithmType)
+        );
         if (valueFromRegistry != null)
         {
-            options.ValidationAlgorithmType = ManagedAlgorithmHelpers.FriendlyNameToType(Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!);
+            options.ValidationAlgorithmType = ManagedAlgorithmHelpers.FriendlyNameToType(
+                Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!
+            );
         }
 
         return options;

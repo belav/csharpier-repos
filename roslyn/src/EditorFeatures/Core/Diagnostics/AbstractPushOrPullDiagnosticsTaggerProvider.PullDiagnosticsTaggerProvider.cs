@@ -13,7 +13,8 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag> where TTag : ITag
+internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
+    where TTag : ITag
 {
     /// <summary>
     /// Base type for all taggers that interact with the <see cref="IDiagnosticAnalyzerService"/> and produce tags for the
@@ -36,21 +37,35 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             IDiagnosticAnalyzerService analyzerService,
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListener listener)
+            IAsynchronousOperationListener listener
+        )
         {
             _diagnosticsTaggerProviders = ImmutableArray.Create(
                 CreateDiagnosticsTaggerProvider(DiagnosticKind.CompilerSyntax),
                 CreateDiagnosticsTaggerProvider(DiagnosticKind.CompilerSemantic),
                 CreateDiagnosticsTaggerProvider(DiagnosticKind.AnalyzerSyntax),
-                CreateDiagnosticsTaggerProvider(DiagnosticKind.AnalyzerSemantic));
+                CreateDiagnosticsTaggerProvider(DiagnosticKind.AnalyzerSemantic)
+            );
 
             return;
 
-            SingleDiagnosticKindPullTaggerProvider CreateDiagnosticsTaggerProvider(DiagnosticKind diagnosticKind)
-                => new(callback, diagnosticKind, threadingContext, diagnosticService, analyzerService, globalOptions, visibilityTracker, listener);
+            SingleDiagnosticKindPullTaggerProvider CreateDiagnosticsTaggerProvider(
+                DiagnosticKind diagnosticKind
+            ) =>
+                new(
+                    callback,
+                    diagnosticKind,
+                    threadingContext,
+                    diagnosticService,
+                    analyzerService,
+                    globalOptions,
+                    visibilityTracker,
+                    listener
+                );
         }
 
-        public ITagger<T>? CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T>? CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             using var _ = ArrayBuilder<ITagger<TTag>>.GetInstance(out var taggers);
             foreach (var taggerProvider in _diagnosticsTaggerProviders)

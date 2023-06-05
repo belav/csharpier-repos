@@ -64,10 +64,12 @@ namespace DependencyLogViewer
 
         private void infoButton_LinkClicked(object sender, EventArgs e)
         {
-            string dMessage = "Dependent nodes depend on the current node. The current node depends on the dependees.";
+            string dMessage =
+                "Dependent nodes depend on the current node. The current node depends on the dependees.";
             MessageBox.Show(dMessage);
         }
     }
+
     public class BoxDisplay
     {
         public Node node;

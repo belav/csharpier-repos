@@ -16,9 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DashboardColorUpdater()
-        {
-        }
+        public DashboardColorUpdater() { }
 
         public void UpdateColors()
         {
@@ -26,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
             DashboardColors.SystemCaptionTextBrushKey = EnvironmentColors.SystemWindowTextBrushKey;
             DashboardColors.CheckBoxTextBrushKey = EnvironmentColors.SystemWindowTextBrushKey;
             DashboardColors.BackgroundBrushKey = VsBrushes.CommandBarGradientBeginKey;
-            DashboardColors.AccentBarColorKey = EnvironmentColors.FileTabInactiveDocumentBorderEdgeBrushKey;
+            DashboardColors.AccentBarColorKey =
+                EnvironmentColors.FileTabInactiveDocumentBorderEdgeBrushKey;
             DashboardColors.ButtonStyleKey = VsResourceKeys.ButtonStyleKey;
         }
     }

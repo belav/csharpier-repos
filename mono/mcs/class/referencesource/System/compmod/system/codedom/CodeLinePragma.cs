@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeLinePragma.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
+namespace System.CodeDom
+{
     using System.Diagnostics;
     using System;
     using Microsoft.Win32;
@@ -19,24 +19,21 @@ namespace System.CodeDom {
     ///       Represents line number information for an external file.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeLinePragma {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    public class CodeLinePragma
+    {
         private string fileName;
         private int lineNumber;
 
-        public CodeLinePragma() {
-        }
+        public CodeLinePragma() { }
 
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeLinePragma'/>.
         ///    </para>
         /// </devdoc>
-        public CodeLinePragma(string fileName, int lineNumber) {
+        public CodeLinePragma(string fileName, int lineNumber)
+        {
             FileName = fileName;
             LineNumber = lineNumber;
         }
@@ -48,13 +45,10 @@ namespace System.CodeDom {
         ///       the associated file.
         ///    </para>
         /// </devdoc>
-        public string FileName {
-            get {
-                return (fileName == null) ? string.Empty : fileName;
-            }
-            set {
-                fileName = value;
-            }
+        public string FileName
+        {
+            get { return (fileName == null) ? string.Empty : fileName; }
+            set { fileName = value; }
         }
 
         /// <devdoc>
@@ -63,13 +57,10 @@ namespace System.CodeDom {
         ///       the current pragma.
         ///    </para>
         /// </devdoc>
-        public int LineNumber {
-            get {
-                return lineNumber;
-            }
-            set {
-                lineNumber = value;
-            }
+        public int LineNumber
+        {
+            get { return lineNumber; }
+            set { lineNumber = value; }
         }
     }
 }

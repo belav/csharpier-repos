@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,8 +30,13 @@ namespace Castle.DynamicProxy.Generators
         private readonly MetaMethod setter;
         private PropertyEmitter emitter;
 
-        public MetaProperty(PropertyInfo property, MetaMethod getter, MetaMethod setter,
-                            IEnumerable<CustomAttributeBuilder> customAttributes, Type[] arguments)
+        public MetaProperty(
+            PropertyInfo property,
+            MetaMethod getter,
+            MetaMethod setter,
+            IEnumerable<CustomAttributeBuilder> customAttributes,
+            Type[] arguments
+        )
             : base(property)
         {
             this.getter = getter;
@@ -63,7 +68,8 @@ namespace Castle.DynamicProxy.Generators
                 if (emitter == null)
                 {
                     throw new InvalidOperationException(
-                        "Emitter is not initialized. You have to initialize it first using 'BuildPropertyEmitter' method");
+                        "Emitter is not initialized. You have to initialize it first using 'BuildPropertyEmitter' method"
+                    );
                 }
                 return emitter;
             }
@@ -112,7 +118,9 @@ namespace Castle.DynamicProxy.Generators
         {
             if (emitter != null)
             {
-                throw new InvalidOperationException("Emitter is already created. It is illegal to invoke this method twice.");
+                throw new InvalidOperationException(
+                    "Emitter is already created. It is illegal to invoke this method twice."
+                );
             }
 
             emitter = classEmitter.CreateProperty(Name, attributes, Type, arguments);
@@ -143,7 +151,8 @@ namespace Castle.DynamicProxy.Generators
         {
             unchecked
             {
-                return ((GetMethod != null ? GetMethod.GetHashCode() : 0)*397) ^ (SetMethod != null ? SetMethod.GetHashCode() : 0);
+                return ((GetMethod != null ? GetMethod.GetHashCode() : 0) * 397)
+                    ^ (SetMethod != null ? SetMethod.GetHashCode() : 0);
             }
         }
 

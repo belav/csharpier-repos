@@ -43,7 +43,17 @@ internal static partial class Interop
             } while (true);
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetGroupList", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        private static unsafe partial int GetGroupList(string name, uint group, uint* groups, int* ngroups);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetGroupList",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
+        private static unsafe partial int GetGroupList(
+            string name,
+            uint group,
+            uint* groups,
+            int* ngroups
+        );
     }
 }

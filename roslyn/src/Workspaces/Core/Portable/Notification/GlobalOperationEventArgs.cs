@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Notification
     {
         public ImmutableArray<string> Operations { get; }
 
-        public GlobalOperationEventArgs(ImmutableArray<string> operations)
-            => this.Operations = operations;
+        public GlobalOperationEventArgs(ImmutableArray<string> operations) =>
+            this.Operations = operations;
     }
 }

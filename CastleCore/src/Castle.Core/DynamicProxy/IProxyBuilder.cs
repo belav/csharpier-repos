@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -54,13 +54,20 @@ namespace Castle.DynamicProxy
         /// <exception cref = "ArgumentException">Thrown when <paramref name = "classToProxy" /> or any of <paramref
         ///    name = "additionalInterfacesToProxy" /> is not public.
         ///   Note that to avoid this exception, you can mark offending type internal, and define <see
-        ///    cref = "InternalsVisibleToAttribute" /> 
+        ///    cref = "InternalsVisibleToAttribute" />
         ///   pointing to Castle Dynamic Proxy assembly, in assembly containing that type, if this is appropriate.</exception>
         /// <seealso cref = "ClassProxyGenerator" />
-        Type CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options);
+        Type CreateClassProxyType(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        );
 
-        Type CreateClassProxyTypeWithTarget(Type classToProxy, Type[] additionalInterfacesToProxy,
-                                            ProxyGenerationOptions options);
+        Type CreateClassProxyTypeWithTarget(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        );
 
         /// <summary>
         ///   Creates a proxy type that proxies calls to <paramref name = "interfaceToProxy" /> members on <paramref
@@ -82,11 +89,15 @@ namespace Castle.DynamicProxy
         /// <exception cref = "ArgumentException">Thrown when <paramref name = "interfaceToProxy" /> or any of <paramref
         ///    name = "additionalInterfacesToProxy" /> is not public.
         ///   Note that to avoid this exception, you can mark offending type internal, and define <see
-        ///    cref = "InternalsVisibleToAttribute" /> 
+        ///    cref = "InternalsVisibleToAttribute" />
         ///   pointing to Castle Dynamic Proxy assembly, in assembly containing that type, if this is appropriate.</exception>
         /// <seealso cref = "InterfaceProxyWithTargetGenerator" />
-        Type CreateInterfaceProxyTypeWithTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy, Type targetType,
-                                                ProxyGenerationOptions options);
+        Type CreateInterfaceProxyTypeWithTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            Type targetType,
+            ProxyGenerationOptions options
+        );
 
         /// <summary>
         ///   Creates a proxy type for given <paramref name = "interfaceToProxy" /> and <parmaref
@@ -107,11 +118,14 @@ namespace Castle.DynamicProxy
         /// <exception cref = "ArgumentException">Thrown when <paramref name = "interfaceToProxy" /> or any of <paramref
         ///    name = "additionalInterfacesToProxy" /> is not public.
         ///   Note that to avoid this exception, you can mark offending type internal, and define <see
-        ///    cref = "InternalsVisibleToAttribute" /> 
+        ///    cref = "InternalsVisibleToAttribute" />
         ///   pointing to Castle Dynamic Proxy assembly, in assembly containing that type, if this is appropriate.</exception>
         /// <seealso cref = "InterfaceProxyWithTargetInterfaceGenerator" />
-        Type CreateInterfaceProxyTypeWithTargetInterface(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                         ProxyGenerationOptions options);
+        Type CreateInterfaceProxyTypeWithTargetInterface(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        );
 
         /// <summary>
         ///   Creates a proxy type for given <paramref name = "interfaceToProxy" /> that delegates all calls to the provided interceptors.
@@ -128,10 +142,13 @@ namespace Castle.DynamicProxy
         /// <exception cref = "ArgumentException">Thrown when <paramref name = "interfaceToProxy" /> or any of <paramref
         ///    name = "additionalInterfacesToProxy" /> is not public.
         ///   Note that to avoid this exception, you can mark offending type internal, and define <see
-        ///    cref = "InternalsVisibleToAttribute" /> 
+        ///    cref = "InternalsVisibleToAttribute" />
         ///   pointing to Castle Dynamic Proxy assembly, in assembly containing that type, if this is appropriate.</exception>
         /// <seealso cref = "InterfaceProxyWithoutTargetGenerator" />
-        Type CreateInterfaceProxyTypeWithoutTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                   ProxyGenerationOptions options);
+        Type CreateInterfaceProxyTypeWithoutTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        );
     }
 }

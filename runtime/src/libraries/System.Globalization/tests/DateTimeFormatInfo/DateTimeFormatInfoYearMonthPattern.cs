@@ -43,13 +43,18 @@ namespace System.Globalization.Tests
         public void YearMonthPattern_SetNull_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.YearMonthPattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.YearMonthPattern = null
+            );
         }
 
         [Fact]
         public void YearMonthPattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.YearMonthPattern = "yyyy MMMM"); // DateTimeFormatInfo.InvariantInfo is read only
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.YearMonthPattern = "yyyy MMMM"
+            ); // DateTimeFormatInfo.InvariantInfo is read only
         }
     }
 }

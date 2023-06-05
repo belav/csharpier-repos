@@ -11,11 +11,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 internal sealed class AnyIPListenOptions : ListenOptions
 {
     internal AnyIPListenOptions(int port)
-        : base(new IPEndPoint(IPAddress.IPv6Any, port))
-    {
-    }
+        : base(new IPEndPoint(IPAddress.IPv6Any, port)) { }
 
-    internal override async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+    internal override async Task BindAsync(
+        AddressBindContext context,
+        CancellationToken cancellationToken
+    )
     {
         Debug.Assert(IPEndPoint != null);
 
@@ -24,12 +25,18 @@ internal sealed class AnyIPListenOptions : ListenOptions
         {
             await base.BindAsync(context, cancellationToken).ConfigureAwait(false);
         }
-        catch (Exception ex) when (ex is not IOException
-            // HttpsConnectionMiddleware.CreateHttp3Options, Http3 doesn't support OnAuthenticate.
-            && ex is not NotSupportedException)
+        catch (Exception ex)
+            when (ex is not IOException
+                // HttpsConnectionMiddleware.CreateHttp3Options, Http3 doesn't support OnAuthenticate.
+                && ex is not NotSupportedException
+            )
         {
             context.Logger.LogTrace(ex, CoreStrings.FailedToBindToIPv6Any, IPEndPoint.Port);
-            context.Logger.LogDebug(CoreStrings.FallbackToIPv4Any, IPEndPoint.Port, IPEndPoint.Port);
+            context.Logger.LogDebug(
+                CoreStrings.FallbackToIPv4Any,
+                IPEndPoint.Port,
+                IPEndPoint.Port
+            );
 
             // for machines that do not support IPv6
             EndPoint = new IPEndPoint(IPAddress.Any, IPEndPoint.Port);

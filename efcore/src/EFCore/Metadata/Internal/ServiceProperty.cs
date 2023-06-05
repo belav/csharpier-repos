@@ -12,7 +12,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventionServiceProperty, IServiceProperty
+public class ServiceProperty
+    : PropertyBase,
+        IMutableServiceProperty,
+        IConventionServiceProperty,
+        IServiceProperty
 {
     private ServiceParameterBinding? _parameterBinding;
     private InternalServicePropertyBuilder? _builder;
@@ -31,7 +35,8 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
         FieldInfo? fieldInfo,
         Type serviceType,
         EntityType declaringEntityType,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
         : base(name, propertyInfo, fieldInfo, configurationSource)
     {
         DeclaringEntityType = declaringEntityType;
@@ -87,9 +92,7 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && DeclaringEntityType.IsInModel;
+    public virtual bool IsInModel => _builder is not null && DeclaringEntityType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,8 +100,7 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -109,16 +111,25 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     public virtual ServiceParameterBinding? ParameterBinding
     {
 #pragma warning disable CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
-        get => IsReadOnly
-            ? NonCapturingLazyInitializer.EnsureInitialized(
-                ref _parameterBinding, (IServiceProperty)this, static property =>
-                {
-                    var entityType = property.DeclaringEntityType;
-                    var factory = entityType.Model.GetModelDependencies().ParameterBindingFactories
-                        .FindFactory(property.ClrType, property.Name)!;
-                    return (ServiceParameterBinding)factory.Bind(entityType, property.ClrType, property.Name);
-                })
-            : _parameterBinding;
+        get =>
+            IsReadOnly
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _parameterBinding,
+                    (IServiceProperty)this,
+                    static property =>
+                    {
+                        var entityType = property.DeclaringEntityType;
+                        var factory = entityType.Model
+                            .GetModelDependencies()
+                            .ParameterBindingFactories.FindFactory(
+                                property.ClrType,
+                                property.Name
+                            )!;
+                        return (ServiceParameterBinding)
+                            factory.Bind(entityType, property.ClrType, property.Name);
+                    }
+                )
+                : _parameterBinding;
 #pragma warning restore CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
         set => SetParameterBinding(value, ConfigurationSource.Explicit);
     }
@@ -131,7 +142,8 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     /// </summary>
     public virtual ServiceParameterBinding? SetParameterBinding(
         ServiceParameterBinding? parameterBinding,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
@@ -150,9 +162,12 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     /// </summary>
     ServiceParameterBinding? IConventionServiceProperty.SetParameterBinding(
         ServiceParameterBinding? parameterBinding,
-        bool fromDataAnnotation)
-        => SetParameterBinding(
-            parameterBinding, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        SetParameterBinding(
+            parameterBinding,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -160,20 +175,15 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetParameterBindingConfigurationSource()
-        => _parameterBindingConfigurationSource;
+    public virtual ConfigurationSource? GetParameterBindingConfigurationSource() =>
+        _parameterBindingConfigurationSource;
 
-    private void UpdateParameterBindingConfigurationSource(ConfigurationSource configurationSource)
-        => _parameterBindingConfigurationSource = configurationSource.Max(_parameterBindingConfigurationSource);
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    public override string ToString()
-        => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    private void UpdateParameterBindingConfigurationSource(
+        ConfigurationSource configurationSource
+    ) =>
+        _parameterBindingConfigurationSource = configurationSource.Max(
+            _parameterBindingConfigurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -181,10 +191,20 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public override string ToString() =>
+        ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual DebugView DebugView =>
+        new(
             () => ((IServiceProperty)this).ToDebugString(),
-            () => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -254,7 +274,8 @@ public class ServiceProperty : PropertyBase, IMutableServiceProperty, IConventio
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    PropertyAccessMode IReadOnlyPropertyBase.GetPropertyAccessMode()
-        => (PropertyAccessMode)(this[CoreAnnotationNames.PropertyAccessMode]
-            ?? PropertyAccessMode.PreferField);
+    PropertyAccessMode IReadOnlyPropertyBase.GetPropertyAccessMode() =>
+        (PropertyAccessMode)(
+            this[CoreAnnotationNames.PropertyAccessMode] ?? PropertyAccessMode.PreferField
+        );
 }

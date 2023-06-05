@@ -23,8 +23,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new PendingTest().Run(),                   ref nSuccesses, ref nFailures);
-        
+        CountResults(new PendingTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -38,15 +38,14 @@ public class TestSet
     }
 }
 
-
 class PendingTest
 {
     Trace _trace;
-    
+
     void f3()
     {
         throw new Exception();
-    } 
+    }
 
     void f2()
     {
@@ -54,8 +53,8 @@ class PendingTest
         {
             _trace.Write("1");
             f3();
-        } 
-        catch(Exception e) 
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("2");
@@ -70,7 +69,7 @@ class PendingTest
             _trace.Write("0");
             f2();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("3");
@@ -81,12 +80,12 @@ class PendingTest
     public int Run()
     {
         _trace = new Trace("PendingTest", "0123401235");
-            
+
         try
         {
             f1();
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("4");
@@ -96,7 +95,7 @@ class PendingTest
         {
             f1();
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("5");
@@ -105,6 +104,3 @@ class PendingTest
         return _trace.Match();
     }
 }
-
-
-

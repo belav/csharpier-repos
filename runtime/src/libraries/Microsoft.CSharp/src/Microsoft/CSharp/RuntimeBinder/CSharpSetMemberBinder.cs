@@ -20,12 +20,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.BindAssignment(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.BindAssignment(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => SymbolTable.PopulateSymbolTableWithName(Name, null, arguments[0].Type);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            SymbolTable.PopulateSymbolTableWithName(Name, null, arguments[0].Type);
 
         public bool IsBinderThatCanHaveRefReceiver => false;
 
@@ -56,8 +59,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isCompoundAssignment,
             bool isChecked,
             Type callingContext,
-            IEnumerable<CSharpArgumentInfo> argumentInfo) :
-            base(name, false)
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
+            : base(name, false)
         {
             IsCompoundAssignment = isCompoundAssignment;
             _argumentInfo = BinderHelper.ToArray(argumentInfo);
@@ -90,11 +94,13 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (Name != otherBinder.Name ||
-                _callingContext != otherBinder._callingContext ||
-                IsChecked != otherBinder.IsChecked ||
-                IsCompoundAssignment != otherBinder.IsCompoundAssignment ||
-                _argumentInfo.Length != otherBinder._argumentInfo.Length)
+            if (
+                Name != otherBinder.Name
+                || _callingContext != otherBinder._callingContext
+                || IsChecked != otherBinder.IsChecked
+                || IsCompoundAssignment != otherBinder.IsCompoundAssignment
+                || _argumentInfo.Length != otherBinder._argumentInfo.Length
+            )
             {
                 return false;
             }
@@ -109,9 +115,16 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="value">The value to set to the member.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackSetMember(DynamicMetaObject target, DynamicMetaObject value, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackSetMember(
+            DynamicMetaObject target,
+            DynamicMetaObject value,
+            DynamicMetaObject errorSuggestion
+        )
         {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
@@ -125,7 +138,13 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             BinderHelper.ValidateBindArgument(target, nameof(target));
             BinderHelper.ValidateBindArgument(value, nameof(value));
-            return BinderHelper.Bind(this, _binder, new[] { target, value }, _argumentInfo, errorSuggestion);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                new[] { target, value },
+                _argumentInfo,
+                errorSuggestion
+            );
         }
     }
 }

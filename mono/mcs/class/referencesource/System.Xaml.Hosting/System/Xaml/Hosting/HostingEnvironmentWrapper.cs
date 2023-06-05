@@ -18,7 +18,3 @@ namespace System.Xaml.Hosting
         }
     }
 }
-
-
-
-

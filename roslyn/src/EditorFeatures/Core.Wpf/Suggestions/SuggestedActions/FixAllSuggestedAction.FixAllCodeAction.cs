@@ -14,12 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         private sealed partial class FixAllCodeAction : FixSomeCodeAction
         {
             public FixAllCodeAction(FixAllState fixAllState)
-                : base(fixAllState, showPreviewChangesDialog: true)
-            {
-            }
+                : base(fixAllState, showPreviewChangesDialog: true) { }
 
-            public override string Title
-                => this.FixAllState.Scope switch
+            public override string Title =>
+                this.FixAllState.Scope switch
                 {
                     FixAllScope.Document => FeaturesResources.Document,
                     FixAllScope.Project => FeaturesResources.Project,
@@ -27,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     _ => throw new NotSupportedException(),
                 };
 
-            internal override string Message => FeaturesResources.Computing_fix_all_occurrences_code_fix;
+            internal override string Message =>
+                FeaturesResources.Computing_fix_all_occurrences_code_fix;
         }
     }
 }

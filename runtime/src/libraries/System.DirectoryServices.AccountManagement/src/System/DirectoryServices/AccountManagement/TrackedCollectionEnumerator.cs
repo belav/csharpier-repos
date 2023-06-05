@@ -25,7 +25,12 @@ namespace System.DirectoryServices.AccountManagement
                 if (_endReached || _enumerator == null)
                 {
                     // Either we're at the end or before the beginning
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "TrackedCollectionEnumerator", "Current: bad position, endReached={0}", _endReached);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "TrackedCollectionEnumerator",
+                        "Current: bad position, endReached={0}",
+                        _endReached
+                    );
                     throw new InvalidOperationException(SR.TrackedCollectionEnumInvalidPos);
                 }
 
@@ -35,10 +40,7 @@ namespace System.DirectoryServices.AccountManagement
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         //
@@ -47,21 +49,33 @@ namespace System.DirectoryServices.AccountManagement
 
         public bool MoveNext()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "Entering MoveNext");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "TrackedCollectionEnumerator",
+                "Entering MoveNext"
+            );
 
             CheckDisposed();
             CheckChanged();
 
             if (_endReached)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "MoveNext: endReached");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "TrackedCollectionEnumerator",
+                    "MoveNext: endReached"
+                );
                 return false;
             }
 
             if (_enumerator == null)
             {
                 // Must be at the very beginning
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "MoveNext: at beginning");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "TrackedCollectionEnumerator",
+                    "MoveNext: at beginning"
+                );
 
                 _enumerator = ((IEnumerable)_combinedValues).GetEnumerator();
                 Debug.Assert(_enumerator != null);
@@ -79,19 +93,33 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (el.isInserted)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "MoveNext: current ({0}) is inserted", _current);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "TrackedCollectionEnumerator",
+                        "MoveNext: current ({0}) is inserted",
+                        _current
+                    );
                     _current = el.insertedValue;
                 }
                 else
                 {
                     _current = el.originalValue.Right;
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "MoveNext: current ({0}) is original", _current);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "TrackedCollectionEnumerator",
+                        "MoveNext: current ({0}) is original",
+                        _current
+                    );
                 }
             }
             else
             {
                 // Nothing more to enumerate
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "MoveNext: nothing more to enumerate");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "TrackedCollectionEnumerator",
+                    "MoveNext: nothing more to enumerate"
+                );
 
                 _endReached = true;
             }
@@ -128,7 +156,11 @@ namespace System.DirectoryServices.AccountManagement
         //
         // Internal constructors
         //
-        internal TrackedCollectionEnumerator(string outerClassName, TrackedCollection<T> trackedCollection, List<TrackedCollection<T>.ValueEl> combinedValues)
+        internal TrackedCollectionEnumerator(
+            string outerClassName,
+            TrackedCollection<T> trackedCollection,
+            List<TrackedCollection<T>.ValueEl> combinedValues
+        )
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "TrackedCollectionEnumerator", "Ctor");
 
@@ -166,7 +198,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "TrackedCollectionEnumerator", "CheckDisposed: accessing disposed object");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "TrackedCollectionEnumerator",
+                    "CheckDisposed: accessing disposed object"
+                );
                 throw new ObjectDisposedException(_outerClassName);
             }
         }
@@ -177,11 +213,12 @@ namespace System.DirectoryServices.AccountManagement
             if (_trackedCollection.LastChange > _creationTime)
             {
                 GlobalDebug.WriteLineIf(
-                            GlobalDebug.Warn,
-                            "TrackedCollectionEnumerator",
-                            "CheckChanged: has changed (last change={0}, creation={1})",
-                            _trackedCollection.LastChange,
-                            _creationTime);
+                    GlobalDebug.Warn,
+                    "TrackedCollectionEnumerator",
+                    "CheckChanged: has changed (last change={0}, creation={1})",
+                    _trackedCollection.LastChange,
+                    _creationTime
+                );
 
                 throw new InvalidOperationException(SR.TrackedCollectionEnumHasChanged);
             }

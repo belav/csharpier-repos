@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,7 +33,9 @@ namespace Explicit.NuGet.Versions
             WriteNuspecToPackages(packageMetaData);
         }
 
-        private static void WriteNuspecToPackages(Dictionary<string, NuspecContentEntry> packageMetaData)
+        private static void WriteNuspecToPackages(
+            Dictionary<string, NuspecContentEntry> packageMetaData
+        )
         {
             foreach (var packageFile in packageMetaData.ToList())
             {
@@ -45,18 +47,26 @@ namespace Explicit.NuGet.Versions
             }
         }
 
-        private static void UpdateNuspecManifestContent(Dictionary<string, NuspecContentEntry> packageMetaData, string dependencyNugetId)
+        private static void UpdateNuspecManifestContent(
+            Dictionary<string, NuspecContentEntry> packageMetaData,
+            string dependencyNugetId
+        )
         {
             foreach (var packageFile in packageMetaData.ToList())
             {
                 var nuspecXmlDocument = new XmlDocument();
                 nuspecXmlDocument.LoadXml(packageFile.Value.Contents);
 
-                SetPackageDepencyVersionsToBeExplicitForXmlDocument(nuspecXmlDocument, dependencyNugetId);
+                SetPackageDepencyVersionsToBeExplicitForXmlDocument(
+                    nuspecXmlDocument,
+                    dependencyNugetId
+                );
 
                 string updatedNuspecXml;
                 using (var writer = new StringWriterWithEncoding(Encoding.UTF8))
-                using (var xmlWriter = new XmlTextWriter(writer) { Formatting = Formatting.Indented })
+                using (
+                    var xmlWriter = new XmlTextWriter(writer) { Formatting = Formatting.Indented }
+                )
                 {
                     nuspecXmlDocument.Save(xmlWriter);
                     updatedNuspecXml = writer.ToString();
@@ -66,18 +76,32 @@ namespace Explicit.NuGet.Versions
             }
         }
 
-        private static void SetPackageDepencyVersionsToBeExplicitForXmlDocument(XmlDocument nuspecXmlDocument, string nugetIdFilter)
+        private static void SetPackageDepencyVersionsToBeExplicitForXmlDocument(
+            XmlDocument nuspecXmlDocument,
+            string nugetIdFilter
+        )
         {
-            WalkDocumentNodes(nuspecXmlDocument.ChildNodes, node => {
-                if (node.Name.ToLowerInvariant() == "dependency" && !string.IsNullOrEmpty(node.Attributes["id"].Value) && node.Attributes["id"].Value.ToLowerInvariant().StartsWith(nugetIdFilter))
+            WalkDocumentNodes(
+                nuspecXmlDocument.ChildNodes,
+                node =>
                 {
-                    var currentVersion = node.Attributes["version"].Value;
-                    if (!node.Attributes["version"].Value.StartsWith("[") && !node.Attributes["version"].Value.EndsWith("]"))
+                    if (
+                        node.Name.ToLowerInvariant() == "dependency"
+                        && !string.IsNullOrEmpty(node.Attributes["id"].Value)
+                        && node.Attributes["id"].Value.ToLowerInvariant().StartsWith(nugetIdFilter)
+                    )
                     {
-                        node.Attributes["version"].Value = $"[{currentVersion}]";
+                        var currentVersion = node.Attributes["version"].Value;
+                        if (
+                            !node.Attributes["version"].Value.StartsWith("[")
+                            && !node.Attributes["version"].Value.EndsWith("]")
+                        )
+                        {
+                            node.Attributes["version"].Value = $"[{currentVersion}]";
+                        }
                     }
                 }
-            });
+            );
         }
 
         internal class NuspecContentEntry
@@ -86,10 +110,17 @@ namespace Explicit.NuGet.Versions
             public string Contents { get; set; }
         }
 
-        private static Dictionary<string, NuspecContentEntry> ReadNuspecFromPackages(DirectoryInfo packageDiscoverDirectoryInfo)
+        private static Dictionary<string, NuspecContentEntry> ReadNuspecFromPackages(
+            DirectoryInfo packageDiscoverDirectoryInfo
+        )
         {
             var packageNuspecDictionary = new Dictionary<string, NuspecContentEntry>();
-            foreach (var packageFilePath in packageDiscoverDirectoryInfo.GetFiles("*.nupkg", SearchOption.AllDirectories))
+            foreach (
+                var packageFilePath in packageDiscoverDirectoryInfo.GetFiles(
+                    "*.nupkg",
+                    SearchOption.AllDirectories
+                )
+            )
             {
                 using (var zipFile = ZipFile.Read(packageFilePath.FullName))
                 {
@@ -100,10 +131,12 @@ namespace Explicit.NuGet.Versions
                             using (var zipEntryReader = new StreamReader(zipEntry.OpenReader()))
                             {
                                 var nuspecXml = zipEntryReader.ReadToEnd();
-                                packageNuspecDictionary[packageFilePath.FullName] = new NuspecContentEntry {
-                                    Contents = nuspecXml,
-                                    EntryName = zipEntry.FileName
-                                };
+                                packageNuspecDictionary[packageFilePath.FullName] =
+                                    new NuspecContentEntry
+                                    {
+                                        Contents = nuspecXml,
+                                        EntryName = zipEntry.FileName
+                                    };
                                 break;
                             }
                         }

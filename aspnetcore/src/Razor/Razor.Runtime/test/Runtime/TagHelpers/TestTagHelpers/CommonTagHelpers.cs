@@ -3,13 +3,9 @@
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-public class Valid_PlainTagHelper : TagHelper
-{
-}
+public class Valid_PlainTagHelper : TagHelper { }
 
-public class Valid_InheritedTagHelper : Valid_PlainTagHelper
-{
-}
+public class Valid_InheritedTagHelper : Valid_PlainTagHelper { }
 
 public class SingleAttributeTagHelper : TagHelper
 {
@@ -19,8 +15,14 @@ public class SingleAttributeTagHelper : TagHelper
 public class MissingAccessorTagHelper : TagHelper
 {
     public string ValidAttribute { get; set; }
-    public string InvalidNoGetAttribute { set { } }
-    public string InvalidNoSetAttribute { get { return string.Empty; } }
+    public string InvalidNoGetAttribute
+    {
+        set { }
+    }
+    public string InvalidNoSetAttribute
+    {
+        get { return string.Empty; }
+    }
 }
 
 public class NonPublicAccessorTagHelper : TagHelper

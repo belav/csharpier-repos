@@ -18,11 +18,13 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(BasicHttpSecurityMode value)
         {
-            return (value == BasicHttpSecurityMode.None ||
-                value == BasicHttpSecurityMode.Transport ||
-                value == BasicHttpSecurityMode.Message ||
-                value == BasicHttpSecurityMode.TransportWithMessageCredential ||
-                value == BasicHttpSecurityMode.TransportCredentialOnly);
+            return (
+                value == BasicHttpSecurityMode.None
+                || value == BasicHttpSecurityMode.Transport
+                || value == BasicHttpSecurityMode.Message
+                || value == BasicHttpSecurityMode.TransportWithMessageCredential
+                || value == BasicHttpSecurityMode.TransportCredentialOnly
+            );
         }
 
         internal static BasicHttpSecurityMode ToSecurityMode(UnifiedSecurityMode value)

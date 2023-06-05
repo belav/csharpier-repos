@@ -25,8 +25,7 @@ namespace Microsoft.Extensions.FileProviders.Internal
         /// </summary>
         /// <param name="directory">The directory</param>
         public PhysicalDirectoryContents(string directory)
-            : this(directory, ExclusionFilters.Sensitive)
-        { }
+            : this(directory, ExclusionFilters.Sensitive) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="PhysicalDirectoryContents"/>

@@ -11,8 +11,8 @@ namespace Roslyn.Utilities
 {
     internal static class LazyInitialization
     {
-        internal static T InterlockedStore<T>([NotNull] ref T? target, T value) where T : class
-            => Interlocked.CompareExchange(ref target, value, null) ?? value;
+        internal static T InterlockedStore<T>([NotNull] ref T? target, T value)
+            where T : class => Interlocked.CompareExchange(ref target, value, null) ?? value;
 
         internal static int InterlockedStore(ref int target, int uninitializedValue, int value)
         {
@@ -28,8 +28,9 @@ namespace Roslyn.Utilities
         /// <param name="valueFactory">A factory delegate to create a new instance of the target value. Note that this delegate may be called
         /// more than once by multiple threads, but only one of those values will successfully be written to the target.</param>
         /// <returns>The target value.</returns>
-        public static T EnsureInitialized<T>([NotNull] ref T? target, Func<T> valueFactory) where T : class
-            => Volatile.Read(ref target!) ?? InterlockedStore(ref target, valueFactory());
+        public static T EnsureInitialized<T>([NotNull] ref T? target, Func<T> valueFactory)
+            where T : class =>
+            Volatile.Read(ref target!) ?? InterlockedStore(ref target, valueFactory());
 
         /// <summary>
         /// Ensure that the given target value is initialized (not null) in a thread-safe manner.
@@ -41,7 +42,11 @@ namespace Roslyn.Utilities
         /// more than once by multiple threads, but only one of those values will successfully be written to the target.</param>
         /// <param name="state">An argument passed to the value factory.</param>
         /// <returns>The target value.</returns>
-        public static T EnsureInitialized<T, U>([NotNull] ref T? target, Func<U, T> valueFactory, U state)
+        public static T EnsureInitialized<T, U>(
+            [NotNull] ref T? target,
+            Func<U, T> valueFactory,
+            U state
+        )
             where T : class
         {
             return Volatile.Read(ref target!) ?? InterlockedStore(ref target, valueFactory(state));
@@ -61,7 +66,12 @@ namespace Roslyn.Utilities
         /// calls to the same method may recalculate the target value.
         /// </remarks>
         /// <returns>The target value.</returns>
-        public static int EnsureInitialized<U>(ref int target, int uninitializedValue, Func<U, int> valueFactory, U state)
+        public static int EnsureInitialized<U>(
+            ref int target,
+            int uninitializedValue,
+            Func<U, int> valueFactory,
+            U state
+        )
         {
             var existingValue = Volatile.Read(ref target);
             if (existingValue != uninitializedValue)
@@ -80,9 +90,14 @@ namespace Roslyn.Utilities
         /// <param name="valueFactory">A factory delegate to create a new instance of the target value. Note that this delegate may be called
         /// more than once by multiple threads, but only one of those values will successfully be written to the target.</param>
         /// <returns>The target value.</returns>
-        public static T? EnsureInitialized<T>([NotNull] ref StrongBox<T?>? target, Func<T?> valueFactory)
+        public static T? EnsureInitialized<T>(
+            [NotNull] ref StrongBox<T?>? target,
+            Func<T?> valueFactory
+        )
         {
-            var box = Volatile.Read(ref target!) ?? InterlockedStore(ref target, new StrongBox<T?>(valueFactory()));
+            var box =
+                Volatile.Read(ref target!)
+                ?? InterlockedStore(ref target, new StrongBox<T?>(valueFactory()));
             return box.Value;
         }
 
@@ -98,9 +113,15 @@ namespace Roslyn.Utilities
         /// more than once by multiple threads, but only one of those values will successfully be written to the target.</param>
         /// <param name="state">An argument passed to the value factory.</param>
         /// <returns>The target value.</returns>
-        public static T? EnsureInitialized<T, U>([NotNull] ref StrongBox<T?>? target, Func<U, T?> valueFactory, U state)
+        public static T? EnsureInitialized<T, U>(
+            [NotNull] ref StrongBox<T?>? target,
+            Func<U, T?> valueFactory,
+            U state
+        )
         {
-            var box = Volatile.Read(ref target!) ?? InterlockedStore(ref target, new StrongBox<T?>(valueFactory(state)));
+            var box =
+                Volatile.Read(ref target!)
+                ?? InterlockedStore(ref target, new StrongBox<T?>(valueFactory(state)));
             return box.Value;
         }
     }

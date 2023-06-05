@@ -26,8 +26,6 @@ namespace POS_Server.Models
         public string fax { get; set; }
         public string address { get; set; }
 
-     
         public bool canDelete { get; set; }
-     
     }
 }

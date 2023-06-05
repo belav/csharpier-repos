@@ -11,7 +11,6 @@ internal struct VC
     public int x3;
 }
 
-
 public class A
 {
     public static int Main()

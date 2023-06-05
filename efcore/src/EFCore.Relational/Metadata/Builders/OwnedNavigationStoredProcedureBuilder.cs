@@ -8,9 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IMutableStoredProcedure" /> that an entity type is mapped to.
 /// </summary>
-public class OwnedNavigationStoredProcedureBuilder :
-    IInfrastructure<OwnedNavigationBuilder>,
-    IInfrastructure<IConventionStoredProcedureBuilder>
+public class OwnedNavigationStoredProcedureBuilder
+    : IInfrastructure<OwnedNavigationBuilder>,
+        IInfrastructure<IConventionStoredProcedureBuilder>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -21,7 +21,8 @@ public class OwnedNavigationStoredProcedureBuilder :
     [EntityFrameworkInternal]
     public OwnedNavigationStoredProcedureBuilder(
         IMutableStoredProcedure sproc,
-        OwnedNavigationBuilder ownedNavigationBuilder)
+        OwnedNavigationBuilder ownedNavigationBuilder
+    )
     {
         Builder = ((StoredProcedure)sproc).Builder;
         OwnedNavigationBuilder = ownedNavigationBuilder;
@@ -36,7 +37,11 @@ public class OwnedNavigationStoredProcedureBuilder :
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalStoredProcedureBuilder Builder { [DebuggerStepThrough] get; }
+    protected virtual InternalStoredProcedureBuilder Builder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <inheritdoc />
     IConventionStoredProcedureBuilder IInfrastructure<IConventionStoredProcedureBuilder>.Instance
@@ -48,8 +53,7 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <summary>
     ///     The stored procedure being configured.
     /// </summary>
-    public virtual IMutableStoredProcedure Metadata
-        => Builder.Metadata;
+    public virtual IMutableStoredProcedure Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Configures a new parameter if no parameter mapped to the given property exists.
@@ -70,10 +74,16 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual OwnedNavigationStoredProcedureBuilder HasParameter(
         string propertyName,
-        Action<StoredProcedureParameterBuilder> buildAction)
+        Action<StoredProcedureParameterBuilder> buildAction
+    )
     {
         var parameterBuilder = Builder.HasParameter(propertyName, ConfigurationSource.Explicit)!;
-        buildAction(new StoredProcedureParameterBuilder(parameterBuilder, CreatePropertyBuilder(propertyName)));
+        buildAction(
+            new StoredProcedureParameterBuilder(
+                parameterBuilder,
+                CreatePropertyBuilder(propertyName)
+            )
+        );
         return this;
     }
 
@@ -82,7 +92,9 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// </summary>
     /// <param name="propertyName">The property name.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual OwnedNavigationStoredProcedureBuilder HasOriginalValueParameter(string propertyName)
+    public virtual OwnedNavigationStoredProcedureBuilder HasOriginalValueParameter(
+        string propertyName
+    )
     {
         Builder.HasOriginalValueParameter(propertyName, ConfigurationSource.Explicit);
         return this;
@@ -96,10 +108,19 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual OwnedNavigationStoredProcedureBuilder HasOriginalValueParameter(
         string propertyName,
-        Action<StoredProcedureParameterBuilder> buildAction)
+        Action<StoredProcedureParameterBuilder> buildAction
+    )
     {
-        var parameterBuilder = Builder.HasOriginalValueParameter(propertyName, ConfigurationSource.Explicit)!;
-        buildAction(new StoredProcedureParameterBuilder(parameterBuilder, CreatePropertyBuilder(propertyName)));
+        var parameterBuilder = Builder.HasOriginalValueParameter(
+            propertyName,
+            ConfigurationSource.Explicit
+        )!;
+        buildAction(
+            new StoredProcedureParameterBuilder(
+                parameterBuilder,
+                CreatePropertyBuilder(propertyName)
+            )
+        );
         return this;
     }
 
@@ -119,7 +140,8 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <param name="buildAction">An action that performs configuration of the parameter.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual OwnedNavigationStoredProcedureBuilder HasRowsAffectedParameter(
-        Action<StoredProcedureParameterBuilder> buildAction)
+        Action<StoredProcedureParameterBuilder> buildAction
+    )
     {
         var parameterBuilder = Builder.HasRowsAffectedParameter(ConfigurationSource.Explicit)!;
         buildAction(new StoredProcedureParameterBuilder(parameterBuilder, null));
@@ -139,7 +161,9 @@ public class OwnedNavigationStoredProcedureBuilder :
         var property = entityType.FindProperty(propertyName);
         if (property == null)
         {
-            throw new InvalidOperationException(CoreStrings.PropertyNotFound(propertyName, entityType.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.PropertyNotFound(propertyName, entityType.DisplayName())
+            );
         }
 
         return OwnedNavigationBuilder.Property(property.ClrType, propertyName);
@@ -153,7 +177,8 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual PropertyBuilder CreatePropertyBuilder<TDependentEntity, TProperty>(
-        Expression<Func<TDependentEntity, TProperty>> propertyExpression)
+        Expression<Func<TDependentEntity, TProperty>> propertyExpression
+    )
     {
         var memberInfo = propertyExpression.GetMemberAccess();
         return OwnedNavigationBuilder.Property(memberInfo.GetMemberType(), memberInfo.Name);
@@ -178,10 +203,19 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual OwnedNavigationStoredProcedureBuilder HasResultColumn(
         string propertyName,
-        Action<StoredProcedureResultColumnBuilder> buildAction)
+        Action<StoredProcedureResultColumnBuilder> buildAction
+    )
     {
-        var resultColumnBuilder = Builder.HasResultColumn(propertyName, ConfigurationSource.Explicit)!;
-        buildAction(new StoredProcedureResultColumnBuilder(resultColumnBuilder, CreatePropertyBuilder(propertyName)));
+        var resultColumnBuilder = Builder.HasResultColumn(
+            propertyName,
+            ConfigurationSource.Explicit
+        )!;
+        buildAction(
+            new StoredProcedureResultColumnBuilder(
+                resultColumnBuilder,
+                CreatePropertyBuilder(propertyName)
+            )
+        );
         return this;
     }
 
@@ -203,9 +237,12 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <param name="buildAction">An action that performs configuration of the column.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual OwnedNavigationStoredProcedureBuilder HasRowsAffectedResultColumn(
-        Action<StoredProcedureResultColumnBuilder> buildAction)
+        Action<StoredProcedureResultColumnBuilder> buildAction
+    )
     {
-        var resultColumnBuilder = Builder.HasRowsAffectedResultColumn(ConfigurationSource.Explicit)!;
+        var resultColumnBuilder = Builder.HasRowsAffectedResultColumn(
+            ConfigurationSource.Explicit
+        )!;
         buildAction(new StoredProcedureResultColumnBuilder(resultColumnBuilder, null));
         return this;
     }
@@ -217,7 +254,9 @@ public class OwnedNavigationStoredProcedureBuilder :
     ///     A value indicating whether this stored procedure returns the number of rows affected.
     /// </param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual OwnedNavigationStoredProcedureBuilder HasRowsAffectedReturnValue(bool rowsAffectedReturned = true)
+    public virtual OwnedNavigationStoredProcedureBuilder HasRowsAffectedReturnValue(
+        bool rowsAffectedReturned = true
+    )
     {
         Builder.HasRowsAffectedReturn(rowsAffectedReturned, ConfigurationSource.Explicit);
         return this;
@@ -230,7 +269,10 @@ public class OwnedNavigationStoredProcedureBuilder :
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual OwnedNavigationStoredProcedureBuilder HasAnnotation(string annotation, object? value)
+    public virtual OwnedNavigationStoredProcedureBuilder HasAnnotation(
+        string annotation,
+        object? value
+    )
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
@@ -239,6 +281,6 @@ public class OwnedNavigationStoredProcedureBuilder :
         return this;
     }
 
-    OwnedNavigationBuilder IInfrastructure<OwnedNavigationBuilder>.Instance
-        => OwnedNavigationBuilder;
+    OwnedNavigationBuilder IInfrastructure<OwnedNavigationBuilder>.Instance =>
+        OwnedNavigationBuilder;
 }

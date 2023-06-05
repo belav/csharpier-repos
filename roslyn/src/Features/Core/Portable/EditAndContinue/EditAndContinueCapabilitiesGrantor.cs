@@ -5,7 +5,7 @@
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Grants capabilities. 
+    /// Grants capabilities.
     /// </summary>
     internal sealed class EditAndContinueCapabilitiesGrantor
     {

@@ -5,7 +5,8 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class DefaultValuesTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+public class DefaultValuesTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     public DefaultValuesTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {
@@ -91,7 +92,8 @@ public class DefaultValuesTest : IClassFixture<MvcTestFixture<BasicWebSite.Start
         Guid guid = Guid.NewGuid();
         TimeSpan timeSpan = new TimeSpan(10, 10, 10);
         var expected = $"{guid}, {timeSpan}";
-        var url = $"http://localhost/DefaultValues/EchoValue_DefaultParameterValue_ForStructs?guid={guid}&timespan={timeSpan}";
+        var url =
+            $"http://localhost/DefaultValues/EchoValue_DefaultParameterValue_ForStructs?guid={guid}&timespan={timeSpan}";
 
         // Act
         var response = await Client.GetStringAsync(url);

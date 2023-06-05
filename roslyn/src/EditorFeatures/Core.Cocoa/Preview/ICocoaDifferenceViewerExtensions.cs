@@ -28,7 +28,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             private double _width;
             private double _height;
 
-            public SizeToFitHelper(IThreadingContext threadingContext, ICocoaDifferenceViewer diffViewer, double minWidth)
+            public SizeToFitHelper(
+                IThreadingContext threadingContext,
+                ICocoaDifferenceViewer diffViewer,
+                double minWidth
+            )
             {
                 _threadingContext = threadingContext;
                 _diffViewer = diffViewer;
@@ -37,17 +41,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             public async Task SizeToFitAsync(CancellationToken cancellationToken)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 await CalculateSizeAsync(cancellationToken).ConfigureAwait(true);
 
                 // We have the height and width required to display the inline diff snapshot now.
                 // Set the height and width of the ICocoaDifferenceViewer accordingly.
                 _diffViewer.VisualElement.SetFrameSize(new CoreGraphics.CGSize(_width, _height));
-                _diffViewer.VisualElement.Subviews[0].SetFrameSize(new CoreGraphics.CGSize(_width, _height));
+                _diffViewer.VisualElement.Subviews[0].SetFrameSize(
+                    new CoreGraphics.CGSize(_width, _height)
+                );
             }
 
-            private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(CancellationToken cancellationToken)
+            private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -56,8 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     return snapshot;
                 }
 
-                var completionSource = new TaskCompletionSource<IProjectionSnapshot>(TaskCreationOptions.RunContinuationsAsynchronously);
-                _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged += HandleSnapshotDifferenceChanged;
+                var completionSource = new TaskCompletionSource<IProjectionSnapshot>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+                _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged +=
+                    HandleSnapshotDifferenceChanged;
 
                 // Handle cases where the snapshot was set between the previous check and the event registration
                 if (_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot is { } snapshot2)
@@ -65,26 +78,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
                 try
                 {
-                    return await completionSource.Task.WithCancellation(cancellationToken).ConfigureAwaitRunInline();
+                    return await completionSource.Task
+                        .WithCancellation(cancellationToken)
+                        .ConfigureAwaitRunInline();
                 }
                 finally
                 {
-                    _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged -= HandleSnapshotDifferenceChanged;
+                    _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged -=
+                        HandleSnapshotDifferenceChanged;
                 }
 
                 // Local function
-                void HandleSnapshotDifferenceChanged(object sender, SnapshotDifferenceChangeEventArgs e)
+                void HandleSnapshotDifferenceChanged(
+                    object sender,
+                    SnapshotDifferenceChangeEventArgs e
+                )
                 {
                     // This event handler will only be called when the inline diff snapshot computation is complete.
                     Contract.ThrowIfNull(_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot);
 
-                    completionSource.SetResult(_diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot);
+                    completionSource.SetResult(
+                        _diffViewer.DifferenceBuffer.CurrentInlineBufferSnapshot
+                    );
                 }
             }
 
             private async Task CalculateSizeAsync(CancellationToken cancellationToken)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 ICocoaTextView textView;
                 ITextSnapshot snapshot;
@@ -101,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 else
                 {
                     textView = _diffViewer.InlineView;
-                    snapshot = await GetInlineBufferSnapshotAsync(cancellationToken).ConfigureAwait(true);
+                    snapshot = await GetInlineBufferSnapshotAsync(cancellationToken)
+                        .ConfigureAwait(true);
                 }
 
                 // Perform a layout without actually rendering the content on the screen so that
@@ -111,13 +135,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 // different sizes.
                 textView.DisplayTextLineContainingBufferPosition(
                     new SnapshotPoint(snapshot, 0),
-                    0.0, ViewRelativePosition.Top, double.MaxValue, double.MaxValue);
+                    0.0,
+                    ViewRelativePosition.Top,
+                    double.MaxValue,
+                    double.MaxValue
+                );
 
-                _width = Math.Max(textView.MaxTextRightCoordinate * (textView.ZoomLevel / 100), _minWidth); // Width of the widest line.
+                _width = Math.Max(
+                    textView.MaxTextRightCoordinate * (textView.ZoomLevel / 100),
+                    _minWidth
+                ); // Width of the widest line.
                 Contract.ThrowIfFalse(IsNormal(_width));
 
-                _height = textView.LineHeight * (textView.ZoomLevel / 100) * // Height of each line.
-                         snapshot.LineCount;                                // Number of lines.
+                _height =
+                    textView.LineHeight
+                    * (textView.ZoomLevel / 100)
+                    * // Height of each line.
+                    snapshot.LineCount; // Number of lines.
                 Contract.ThrowIfFalse(IsNormal(_height));
             }
 
@@ -127,7 +161,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             }
         }
 
-        public static Task SizeToFitAsync(this ICocoaDifferenceViewer diffViewer, IThreadingContext threadingContext, double minWidth = 400.0, CancellationToken cancellationToken = default)
+        public static Task SizeToFitAsync(
+            this ICocoaDifferenceViewer diffViewer,
+            IThreadingContext threadingContext,
+            double minWidth = 400.0,
+            CancellationToken cancellationToken = default
+        )
         {
             var helper = new SizeToFitHelper(threadingContext, diffViewer, minWidth);
             return helper.SizeToFitAsync(cancellationToken);

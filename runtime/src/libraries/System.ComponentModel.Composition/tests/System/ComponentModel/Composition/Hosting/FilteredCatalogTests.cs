@@ -13,39 +13,56 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void Constructor_ThrowsOnNullCatalog()
         {
-            Assert.Throws<ArgumentNullException>("catalog", () =>
-            {
-                new FilteredCatalog(null, p => true);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "catalog",
+                () =>
+                {
+                    new FilteredCatalog(null, p => true);
+                }
+            );
         }
 
         [Fact]
         public void Constructor_ThrowsOnNullFilter()
         {
-            Assert.Throws<ArgumentNullException>("filter", () =>
-            {
-                new FilteredCatalog(CreateCatalog(), null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "filter",
+                () =>
+                {
+                    new FilteredCatalog(CreateCatalog(), null);
+                }
+            );
         }
 
         [Fact]
         public void Parts_Throws_WhenDisposed()
         {
             var originalCatalog = this.CreateCatalog();
-            FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>());
+            FilteredCatalog catalog = new FilteredCatalog(
+                originalCatalog,
+                p => p.Exports<IContract1>()
+            );
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                var p = catalog.Parts;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    var p = catalog.Parts;
+                }
+            );
         }
 
         [Fact]
         public void Parts()
         {
             var originalCatalog = this.CreateCatalog();
-            using (FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>()))
+            using (
+                FilteredCatalog catalog = new FilteredCatalog(
+                    originalCatalog,
+                    p => p.Exports<IContract1>()
+                )
+            )
             {
                 var parts = catalog.Parts;
                 Assert.Equal(2, parts.Count());
@@ -56,20 +73,31 @@ namespace System.ComponentModel.Composition.Hosting
         public void GetExports_Throws_WhenDisposed()
         {
             var originalCatalog = this.CreateCatalog();
-            FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>());
+            FilteredCatalog catalog = new FilteredCatalog(
+                originalCatalog,
+                p => p.Exports<IContract1>()
+            );
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                var p = catalog.GetExports<IContract1>();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    var p = catalog.GetExports<IContract1>();
+                }
+            );
         }
 
         [Fact]
         public void GetExports()
         {
             var originalCatalog = this.CreateCatalog();
-            using (FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>()))
+            using (
+                FilteredCatalog catalog = new FilteredCatalog(
+                    originalCatalog,
+                    p => p.Exports<IContract1>()
+                )
+            )
             {
                 var parts1 = catalog.GetExports<IContract1>();
                 Assert.Equal(2, parts1.Count());
@@ -82,8 +110,17 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void GetExportsWithGenerics()
         {
-            var originalCatalog = new TypeCatalog(typeof(GenericExporter<,>), typeof(Exporter11), typeof(Exporter22));
-            using (FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>()).IncludeDependents())
+            var originalCatalog = new TypeCatalog(
+                typeof(GenericExporter<,>),
+                typeof(Exporter11),
+                typeof(Exporter22)
+            );
+            using (
+                FilteredCatalog catalog = new FilteredCatalog(
+                    originalCatalog,
+                    p => p.Exports<IContract1>()
+                ).IncludeDependents()
+            )
             {
                 var parts1 = catalog.GetExports<IContract1>();
                 Assert.Equal(1, parts1.Count());
@@ -100,20 +137,31 @@ namespace System.ComponentModel.Composition.Hosting
         public void Complement_Throws_WhenDisposed()
         {
             var originalCatalog = this.CreateCatalog();
-            FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>());
+            FilteredCatalog catalog = new FilteredCatalog(
+                originalCatalog,
+                p => p.Exports<IContract1>()
+            );
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                var c = catalog.Complement;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    var c = catalog.Complement;
+                }
+            );
         }
 
         [Fact]
         public void Complement()
         {
             var originalCatalog = this.CreateCatalog();
-            using (FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>()))
+            using (
+                FilteredCatalog catalog = new FilteredCatalog(
+                    originalCatalog,
+                    p => p.Exports<IContract1>()
+                )
+            )
             {
                 var c = catalog.Complement;
                 Assert.NotNull(c);
@@ -130,7 +178,12 @@ namespace System.ComponentModel.Composition.Hosting
         public void Complement_Repeatable_Read()
         {
             var originalCatalog = this.CreateCatalog();
-            using (FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>()))
+            using (
+                FilteredCatalog catalog = new FilteredCatalog(
+                    originalCatalog,
+                    p => p.Exports<IContract1>()
+                )
+            )
             {
                 var c1 = catalog.Complement;
                 var c2 = catalog.Complement;
@@ -143,7 +196,12 @@ namespace System.ComponentModel.Composition.Hosting
         public void Complement_ComplementOfComplement()
         {
             var originalCatalog = this.CreateCatalog();
-            using (FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p => p.Exports<IContract1>()))
+            using (
+                FilteredCatalog catalog = new FilteredCatalog(
+                    originalCatalog,
+                    p => p.Exports<IContract1>()
+                )
+            )
             {
                 var c1 = catalog.Complement;
                 var c2 = c1.Complement;
@@ -192,7 +250,10 @@ namespace System.ComponentModel.Composition.Hosting
                 filter1Ed = true;
                 edArgs = a;
                 EqualityExtensions.CheckEquals(ingArgs.AddedDefinitions, edArgs.AddedDefinitions);
-                EqualityExtensions.CheckEquals(ingArgs.RemovedDefinitions, edArgs.RemovedDefinitions);
+                EqualityExtensions.CheckEquals(
+                    ingArgs.RemovedDefinitions,
+                    edArgs.RemovedDefinitions
+                );
             };
 
             filter2.Changing += (object s, ComposablePartCatalogChangeEventArgs a) =>
@@ -217,7 +278,10 @@ namespace System.ComponentModel.Composition.Hosting
                 filter2Ed = true;
                 edArgs = a;
                 EqualityExtensions.CheckEquals(ingArgs.AddedDefinitions, edArgs.AddedDefinitions);
-                EqualityExtensions.CheckEquals(ingArgs.RemovedDefinitions, edArgs.RemovedDefinitions);
+                EqualityExtensions.CheckEquals(
+                    ingArgs.RemovedDefinitions,
+                    edArgs.RemovedDefinitions
+                );
             };
 
             //at first everything is empty
@@ -368,26 +432,24 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter11),
                 typeof(Exporter12),
                 typeof(Exporter21),
-                typeof(Exporter22));
-
+                typeof(Exporter22)
+            );
         }
 
         private ComposablePartCatalog CreateSubCatalog1()
         {
-            return new TypeCatalog(
-                typeof(Exporter11),
-                typeof(Exporter12));
+            return new TypeCatalog(typeof(Exporter11), typeof(Exporter12));
         }
 
         private ComposablePartCatalog CreateSubCatalog2()
         {
-            return new TypeCatalog(
-                typeof(Exporter21),
-                typeof(Exporter22));
+            return new TypeCatalog(typeof(Exporter21), typeof(Exporter22));
         }
 
         public interface IContract1 { }
+
         public interface IContract2 { }
+
         public interface IGenericContract<T1, T2> { }
 
         [Export(typeof(IGenericContract<,>))]
@@ -398,24 +460,15 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export(typeof(IContract1))]
-        public class Exporter11 : IContract1
-        {
-        }
+        public class Exporter11 : IContract1 { }
 
         [Export(typeof(IContract1))]
-        public class Exporter12 : IContract1
-        {
-        }
+        public class Exporter12 : IContract1 { }
 
         [Export(typeof(IContract2))]
-        public class Exporter21 : IContract2
-        {
-        }
+        public class Exporter21 : IContract2 { }
 
         [Export(typeof(IContract2))]
-        public class Exporter22 : IContract2
-        {
-        }
-
+        public class Exporter22 : IContract2 { }
     }
 }

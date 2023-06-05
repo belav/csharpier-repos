@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 
-namespace System.Net {
-
+namespace System.Net
+{
     //using System;
     //using System.Net;
     using System.Runtime.InteropServices;
@@ -22,7 +22,8 @@ namespace System.Net {
     /// <devdoc>
     ///    <para>Provides the base authentication interface for Web client authentication.</para>
     /// </devdoc>
-    public interface ICredentials {
+    public interface ICredentials
+    {
         /// <devdoc>
         ///    <para>
         ///       Returns a NetworkCredential object that
@@ -36,8 +37,5 @@ namespace System.Net {
         // for the specified host&realm
         //
         NetworkCredential GetCredential(Uri uri, String authType);
-
     } // interface ICredentials
-
-
 } // namespace System.Net

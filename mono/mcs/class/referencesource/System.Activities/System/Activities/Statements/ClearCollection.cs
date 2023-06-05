@@ -12,22 +12,26 @@ namespace System.Activities.Statements
     using System.Runtime;
     using System.Collections.ObjectModel;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotHaveIncorrectSuffix, Justification = "Optimizing for XAML naming.")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotHaveIncorrectSuffix,
+        Justification = "Optimizing for XAML naming."
+    )]
     [ContentProperty("Collection")]
     public sealed class ClearCollection<T> : CodeActivity
     {
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<ICollection<T>> Collection
-        {
-            get;
-            set;
-        }
-
+        public InArgument<ICollection<T>> Collection { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument collectionArgument = new RuntimeArgument("Collection", typeof(ICollection<T>), ArgumentDirection.In, true);
+            RuntimeArgument collectionArgument = new RuntimeArgument(
+                "Collection",
+                typeof(ICollection<T>),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Collection, collectionArgument);
 
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { collectionArgument });
@@ -38,7 +42,11 @@ namespace System.Activities.Statements
             ICollection<T> collection = this.Collection.Get(context);
             if (collection == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CollectionActivityRequiresCollection(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CollectionActivityRequiresCollection(this.DisplayName)
+                    )
+                );
             }
             collection.Clear();
         }

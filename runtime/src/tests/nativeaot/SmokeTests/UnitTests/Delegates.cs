@@ -259,14 +259,17 @@ public class Delegates
             if ((string)args[0] != "HelloMutated")
                 return false;
         }
-
         unsafe
         {
             GetAndReturnPointerDelegate d = ClassWithPointers.GetAndReturnPointer;
             if (Pointer.Unbox(d.DynamicInvoke(new object[] { (IntPtr)8 })) != (void*)50)
                 return false;
 
-            if (Pointer.Unbox(d.DynamicInvoke(new object[] { Pointer.Box((void*)9, typeof(void*)) })) != (void*)51)
+            if (
+                Pointer.Unbox(
+                    d.DynamicInvoke(new object[] { Pointer.Box((void*)9, typeof(void*)) })
+                ) != (void*)51
+            )
                 return false;
         }
 
@@ -456,9 +459,16 @@ class TestLinqExpressions
 
         {
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
-            RefIntDelegate del =
-                Expression.Lambda<RefIntDelegate>(
-                    Expression.Call(null, typeof(TestLinqExpressions).GetMethod(nameof(ModifyByRefAndThrow)), pX), pX).Compile();
+            RefIntDelegate del = Expression
+                .Lambda<RefIntDelegate>(
+                    Expression.Call(
+                        null,
+                        typeof(TestLinqExpressions).GetMethod(nameof(ModifyByRefAndThrow)),
+                        pX
+                    ),
+                    pX
+                )
+                .Compile();
 
             int i = 0;
             try
@@ -486,6 +496,7 @@ class TestDefaultInterfaceMethods
     }
 
     class Foo : IFoo { }
+
     class Bar : IBar { }
 
     class Baz : IFoo

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 
         public TextDocument Document => UnderlyingObject.Document;
 
-        public UnitTestingTextDocumentEventArgsWrapper(TextDocumentEventArgs underlyingObject)
-            => UnderlyingObject = underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
+        public UnitTestingTextDocumentEventArgsWrapper(TextDocumentEventArgs underlyingObject) =>
+            UnderlyingObject =
+                underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
     }
 }

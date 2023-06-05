@@ -15,7 +15,15 @@ internal static partial class Interop
     internal static partial class CoreFoundation
     {
         // https://developer.apple.com/reference/corefoundation/cfabsolutetime
-        private static readonly DateTime s_cfDateEpoch = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime s_cfDateEpoch = new DateTime(
+            2001,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        );
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
         private static partial SafeCFDateHandle CFDateCreate(IntPtr zero, CFAbsoluteTime at);
@@ -24,7 +32,8 @@ internal static partial class Interop
         {
             Debug.Assert(
                 date.Kind != DateTimeKind.Unspecified,
-                "DateTimeKind.Unspecified should be specified to Local or UTC by the caller");
+                "DateTimeKind.Unspecified should be specified to Local or UTC by the caller"
+            );
 
             // UTC stays unchanged, Local is changed.
             // Unspecified gets treated as Local (which may or may not be desired).
@@ -50,9 +59,7 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeCFDateHandle : SafeHandle
     {
         public SafeCFDateHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

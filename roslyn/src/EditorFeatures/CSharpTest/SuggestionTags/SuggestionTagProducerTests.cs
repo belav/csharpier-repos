@@ -23,35 +23,55 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SuggestionTags
 {
     [UseExportProvider]
-    [Trait(Traits.Feature, Traits.Features.SuggestionTags), Trait(Traits.Feature, Traits.Features.Tagging)]
+    [
+        Trait(Traits.Feature, Traits.Features.SuggestionTags),
+        Trait(Traits.Feature, Traits.Features.Tagging)
+    ]
     public class SuggestionTagProducerTests
     {
         [WpfTheory, CombinatorialData]
         public async Task SuggestionTagTest1(bool pull)
         {
             var (spans, selection) = await GetTagSpansAndSelectionAsync(
-@"class C {
+                @"class C {
     void M() {
         var v = [|ne|]w X();
         v.Y = 1;
     }
-}", pull);
+}",
+                pull
+            );
             Assert.Equal(1, spans.Length);
             Assert.Equal(selection, spans.Single().Span.Span.ToTextSpan());
         }
 
-        private static async Task<(ImmutableArray<ITagSpan<IErrorTag>> spans, TextSpan selection)> GetTagSpansAndSelectionAsync(
-            string content, bool pull)
+        private static async Task<(
+            ImmutableArray<ITagSpan<IErrorTag>> spans,
+            TextSpan selection
+        )> GetTagSpansAndSelectionAsync(string content, bool pull)
         {
             using var workspace = TestWorkspace.CreateCSharp(content);
-            workspace.GlobalOptions.SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
+            workspace.GlobalOptions.SetGlobalOption(
+                DiagnosticTaggingOptions.PullDiagnosticTagging,
+                pull
+            );
 
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>()
             {
-                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpUseObjectInitializerDiagnosticAnalyzer()) }
+                {
+                    LanguageNames.CSharp,
+                    ImmutableArray.Create<DiagnosticAnalyzer>(
+                        new CSharpUseObjectInitializerDiagnosticAnalyzer()
+                    )
+                }
             };
 
-            var spans = (await TestDiagnosticTagProducer<DiagnosticsSuggestionTaggerProvider, IErrorTag>.GetDiagnosticsAndErrorSpans(workspace, analyzerMap)).Item2;
+            var spans = (
+                await TestDiagnosticTagProducer<
+                    DiagnosticsSuggestionTaggerProvider,
+                    IErrorTag
+                >.GetDiagnosticsAndErrorSpans(workspace, analyzerMap)
+            ).Item2;
             return (spans, workspace.Documents.Single().SelectedSpans.Single());
         }
     }

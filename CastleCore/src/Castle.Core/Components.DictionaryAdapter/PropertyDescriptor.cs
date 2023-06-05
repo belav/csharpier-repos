@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,10 @@ namespace Castle.Components.DictionaryAdapter
     /// Describes a dictionary property.
     /// </summary>
     [DebuggerDisplay("{Property.DeclaringType.FullName,nq}.{PropertyName,nq}")]
-    public class PropertyDescriptor : IDictionaryKeyBuilder, IDictionaryPropertyGetter, IDictionaryPropertySetter
+    public class PropertyDescriptor
+        : IDictionaryKeyBuilder,
+            IDictionaryPropertyGetter,
+            IDictionaryPropertySetter
     {
         private IDictionary state;
         private Dictionary<object, object> extendedProperties;
@@ -48,7 +51,8 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         /// <param name="property">The property.</param>
         /// <param name="annotations">The annotations.</param>
-        public PropertyDescriptor(PropertyInfo property, object[] annotations) : this()
+        public PropertyDescriptor(PropertyInfo property, object[] annotations)
+            : this()
         {
             Property = property;
             Annotations = annotations ?? NoAnnotations;
@@ -86,7 +90,7 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int ExecutionOrder
         {
@@ -159,7 +163,11 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         public IDictionary ExtendedProperties
         {
-            get { return extendedProperties ?? (extendedProperties = new Dictionary<object, object>()); }
+            get
+            {
+                return extendedProperties
+                    ?? (extendedProperties = new Dictionary<object, object>());
+            }
         }
 
         /// <summary>
@@ -168,10 +176,7 @@ namespace Castle.Components.DictionaryAdapter
         /// <value>The setter.</value>
         public IEnumerable<IDictionaryBehavior> Behaviors
         {
-            get
-            {
-                return dictionaryBehaviors ?? Enumerable.Empty<IDictionaryBehavior>();
-            }
+            get { return dictionaryBehaviors ?? Enumerable.Empty<IDictionaryBehavior>(); }
         }
 
         internal List<IDictionaryBehavior> BehaviorsInternal
@@ -185,10 +190,10 @@ namespace Castle.Components.DictionaryAdapter
         /// <value>The key builders.</value>
         public IEnumerable<IDictionaryKeyBuilder> KeyBuilders
         {
-            get 
+            get
             {
                 return (dictionaryBehaviors != null)
-                    ? dictionaryBehaviors.OfType<IDictionaryKeyBuilder>() 
+                    ? dictionaryBehaviors.OfType<IDictionaryKeyBuilder>()
                     : Enumerable.Empty<IDictionaryKeyBuilder>();
             }
         }
@@ -255,7 +260,11 @@ namespace Castle.Components.DictionaryAdapter
         /// <param name="dictionaryAdapter">The dictionary adapter.</param>
         /// <param name="key">The key.</param>
         /// <param name="descriptor">The descriptor.</param>
-        public string GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor descriptor)
+        public string GetKey(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            PropertyDescriptor descriptor
+        )
         {
             var behaviors = dictionaryBehaviors;
             if (behaviors != null)
@@ -279,7 +288,13 @@ namespace Castle.Components.DictionaryAdapter
         /// <param name="storedValue">The stored value.</param>
         /// <param name="descriptor">The descriptor.</param>
         /// <param name="ifExists">true if return only existing.</param>
-        public object GetPropertyValue(IDictionaryAdapter dictionaryAdapter, string key, object storedValue, PropertyDescriptor descriptor, bool ifExists)
+        public object GetPropertyValue(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            object storedValue,
+            PropertyDescriptor descriptor,
+            bool ifExists
+        )
         {
             key = GetKey(dictionaryAdapter, key, descriptor);
             storedValue = storedValue ?? dictionaryAdapter.ReadProperty(key);
@@ -292,7 +307,13 @@ namespace Castle.Components.DictionaryAdapter
                 {
                     var getter = behaviors[i] as IDictionaryPropertyGetter;
                     if (getter != null)
-                        storedValue = getter.GetPropertyValue(dictionaryAdapter, key, storedValue, this, IfExists || ifExists);
+                        storedValue = getter.GetPropertyValue(
+                            dictionaryAdapter,
+                            key,
+                            storedValue,
+                            this,
+                            IfExists || ifExists
+                        );
                 }
             }
 
@@ -306,7 +327,12 @@ namespace Castle.Components.DictionaryAdapter
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="descriptor">The descriptor.</param>
-        public bool SetPropertyValue(IDictionaryAdapter dictionaryAdapter, string key, ref object value, PropertyDescriptor descriptor)
+        public bool SetPropertyValue(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            ref object value,
+            PropertyDescriptor descriptor
+        )
         {
             key = GetKey(dictionaryAdapter, key, descriptor);
 
@@ -318,7 +344,10 @@ namespace Castle.Components.DictionaryAdapter
                 {
                     var setter = behaviors[i] as IDictionaryPropertySetter;
                     if (setter != null)
-                        if (setter.SetPropertyValue(dictionaryAdapter, key, ref value, this) == false)
+                        if (
+                            setter.SetPropertyValue(dictionaryAdapter, key, ref value, this)
+                            == false
+                        )
                             return false;
                 }
             }
@@ -369,7 +398,7 @@ namespace Castle.Components.DictionaryAdapter
             IDictionaryBehavior candidateBehavior;
 
             // Skip while order < behavior.ExecutionOrder
-            for (;;)
+            for (; ; )
             {
                 candidateBehavior = behaviors[index];
                 candidatePriority = candidateBehavior.ExecutionOrder;
@@ -385,7 +414,7 @@ namespace Castle.Components.DictionaryAdapter
             }
 
             // Skip while order == behavior.ExecutionOrder
-            for (;;)
+            for (; ; )
             {
                 if (candidatePriority != targetOrder)
                     break;
@@ -463,9 +492,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             var converterType = AttributesUtil.GetTypeConverter(Property);
 
-            TypeConverter = (converterType != null)
-                ? (TypeConverter) Activator.CreateInstance(converterType)
-                : TypeDescriptor.GetConverter(PropertyType);
+            TypeConverter =
+                (converterType != null)
+                    ? (TypeConverter)Activator.CreateInstance(converterType)
+                    : TypeDescriptor.GetConverter(PropertyType);
         }
     }
 }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 public interface ICode
 {
-	string Code { get; }
+    string Code { get; }
 }
 
 static class Program
 {
-	public static void Main ()
-	{
-		IEnumerable<object> array = new ICode[10];
-		IEnumerator<object> x = array.GetEnumerator ();
+    public static void Main()
+    {
+        IEnumerable<object> array = new ICode[10];
+        IEnumerator<object> x = array.GetEnumerator();
 
-		x.MoveNext ();
-		object o = x.Current;
-	}
+        x.MoveNext();
+        object o = x.Current;
+    }
 }

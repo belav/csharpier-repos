@@ -8,7 +8,9 @@ namespace System.ServiceModel
 
     class ServiceModelDictionary : IXmlDictionary
     {
-        static public readonly ServiceModelDictionary Version1 = new ServiceModelDictionary(new ServiceModelStringsVersion1());
+        static public readonly ServiceModelDictionary Version1 = new ServiceModelDictionary(
+            new ServiceModelStringsVersion1()
+        );
         ServiceModelStrings strings;
         int count;
         XmlDictionaryString[] dictionaryStrings1;
@@ -24,10 +26,7 @@ namespace System.ServiceModel
 
         static public ServiceModelDictionary CurrentVersion
         {
-            get
-            {
-                return Version1;
-            }
+            get { return Version1; }
         }
 
         public XmlDictionaryString CreateString(string value, int key)
@@ -38,7 +37,9 @@ namespace System.ServiceModel
         public bool TryLookup(string key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("key"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("key")
+                );
             if (this.dictionary == null)
             {
                 Dictionary<string, int> dictionary = new Dictionary<string, int>(count);
@@ -91,7 +92,9 @@ namespace System.ServiceModel
         public bool TryLookup(XmlDictionaryString key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("key"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("key")
+                );
             if (key.Dictionary == this)
             {
                 value = key;

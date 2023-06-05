@@ -14,15 +14,19 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAndVerbatimString
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
-    public class ConvertBetweenRegularAndVerbatimInterpolatedStringTests : AbstractCSharpCodeActionTest
+    public class ConvertBetweenRegularAndVerbatimInterpolatedStringTests
+        : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider();
 
         [Fact]
         public async Task EmptyRegularString()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -30,13 +34,15 @@ class Test
         var v = $""[||]"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithMissingCloseQuote()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -44,13 +50,15 @@ class Test
         var v = $""[||];
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task VerbatimStringWithMissingCloseQuote()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -58,13 +66,15 @@ class Test
         var v = $@""[||];
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task EmptyVerbatimString()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -73,7 +83,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -81,13 +91,15 @@ class Test
         var v = $"""";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestLeadingAndTrailingTrivia()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -98,7 +110,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -108,13 +120,15 @@ class Test
             $"""" /* trailing */;
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithBasicText()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -122,13 +136,15 @@ class Test
         var v = $""[||]a"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task VerbatimStringWithBasicText()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -137,7 +153,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -145,13 +161,15 @@ class Test
         var v = $""a"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithUnicodeEscape()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -159,13 +177,15 @@ class Test
         var v = $""[||]\u0001"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithEscapedNewLine()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -174,7 +194,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -183,13 +203,15 @@ class Test
 b"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task VerbatimStringWithNewLine()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -199,7 +221,7 @@ b"";
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -207,13 +229,15 @@ class Test
         var v = $""a\r\nb"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithEscapedNull()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -221,13 +245,15 @@ class Test
         var v = $""[||]a\0b"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithEscapedQuote()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -236,7 +262,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -244,13 +270,15 @@ class Test
         var v = $@""a""""b"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task VerbatimStringWithEscapedQuote()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -259,7 +287,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -267,13 +295,15 @@ class Test
         var v = $""a\""b"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task RegularStringWithEscapedQuoteAndMultipleParts()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -282,7 +312,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -290,13 +320,15 @@ class Test
         var v = $@""{1}""""{2}"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task VerbatimStringWithEscapedQuoteAndMultipleParts()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -305,7 +337,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -313,13 +345,15 @@ class Test
         var v = $""{1}\""{2}"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task EscapedCurlyBracesInRegularString()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -328,7 +362,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -337,13 +371,15 @@ class Test
 {{1}}"";
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task EscapedCurlyBracesInVerbatimString()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -353,7 +389,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -361,7 +397,8 @@ class Test
         var v = $""a\r\n{{1}}"";
     }
 }
-");
+"
+            );
         }
     }
 }

@@ -5,7 +5,5 @@ namespace System.ServiceModel.Channels
 {
     using System;
 
-    public interface IDuplexSessionChannel : IDuplexChannel, ISessionChannel<IDuplexSession>
-    {
-    }
+    public interface IDuplexSessionChannel : IDuplexChannel, ISessionChannel<IDuplexSession> { }
 }

@@ -57,6 +57,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         private class FileMock : IFile
         {
             private Dictionary<string, string> _files;
+
             public FileMock(Dictionary<string, string> files)
             {
                 _files = files;
@@ -88,7 +89,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 FileAccess fileAccess,
                 FileShare fileShare,
                 int bufferSize,
-                FileOptions fileOptions)
+                FileOptions fileOptions
+            )
             {
                 throw new NotImplementedException();
             }
@@ -114,5 +116,4 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             }
         }
     }
-
 }

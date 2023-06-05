@@ -32,14 +32,19 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Interface not implemented on .NET Framework")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Interface not implemented on .NET Framework"
+        )]
         public static void GetEnumerator_Generic()
         {
             Regex regex = new Regex(@"(?<A1>a*)(?<A2>b*)(?<A3>c*)");
             Match match = regex.Match("aaabbccccccccccaaaabc");
 
             GroupCollection groups = match.Groups;
-            IEnumerator<KeyValuePair<string, Group>> enumerator = ((IEnumerable<KeyValuePair<string, Group>>)groups).GetEnumerator();
+            IEnumerator<KeyValuePair<string, Group>> enumerator = (
+                (IEnumerable<KeyValuePair<string, Group>>)groups
+            ).GetEnumerator();
             for (int i = 0; i < 2; i++)
             {
                 int counter = 0;
@@ -64,7 +69,8 @@ namespace System.Text.RegularExpressions.Tests
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             enumerator.Reset();
@@ -72,17 +78,23 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Interface not implemented on .NET Framework")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Interface not implemented on .NET Framework"
+        )]
         public static void GetEnumerator_Generic_Invalid()
         {
             Regex regex = new Regex(@"(?<A1>a*)(?<A2>b*)(?<A3>c*)");
             Match match = regex.Match("aaabbccccccccccaaaabc");
 
-            IEnumerator<KeyValuePair<string, Group>> enumerator = ((IEnumerable<KeyValuePair<string, Group>>)match.Groups).GetEnumerator();
+            IEnumerator<KeyValuePair<string, Group>> enumerator = (
+                (IEnumerable<KeyValuePair<string, Group>>)match.Groups
+            ).GetEnumerator();
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             enumerator.Reset();
@@ -99,10 +111,14 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Interface not implemented on .NET Framework")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Interface not implemented on .NET Framework"
+        )]
         public static void ContainsKey()
         {
-            IReadOnlyDictionary<string, Group> collection = (IReadOnlyDictionary<string, Group>)CreateCollection();
+            IReadOnlyDictionary<string, Group> collection =
+                (IReadOnlyDictionary<string, Group>)CreateCollection();
             Assert.True(collection.ContainsKey("0"));
             Assert.True(collection.ContainsKey("1"));
             Assert.True(collection.ContainsKey("2"));
@@ -164,10 +180,16 @@ namespace System.Text.RegularExpressions.Tests
             ICollection collection = regex.Match("aaabbccccccccccaaaabc").Groups;
 
             // Array is null
-            AssertExtensions.Throws<ArgumentNullException>("array", () => collection.CopyTo(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => collection.CopyTo(null, 0)
+            );
 
             // Array is multidimensional
-            AssertExtensions.Throws<ArgumentException>(null, () => collection.CopyTo(new object[10, 10], 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => collection.CopyTo(new object[10, 10], 0)
+            );
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
@@ -177,11 +199,17 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             // Index < 0
-            Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(new object[collection.Count], -1));
+            Assert.Throws<IndexOutOfRangeException>(
+                () => collection.CopyTo(new object[collection.Count], -1)
+            );
 
             // Invalid index + length
-            Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(new object[collection.Count], 1));
-            Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(new object[collection.Count + 1], 2));
+            Assert.Throws<IndexOutOfRangeException>(
+                () => collection.CopyTo(new object[collection.Count], 1)
+            );
+            Assert.Throws<IndexOutOfRangeException>(
+                () => collection.CopyTo(new object[collection.Count + 1], 2)
+            );
         }
 
         private static GroupCollection CreateCollection()

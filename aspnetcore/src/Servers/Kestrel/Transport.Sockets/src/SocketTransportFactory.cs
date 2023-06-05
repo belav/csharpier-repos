@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
 /// <summary>
 /// A factory for socket based connections.
 /// </summary>
-public sealed class SocketTransportFactory : IConnectionListenerFactory, IConnectionListenerFactorySelector
+public sealed class SocketTransportFactory
+    : IConnectionListenerFactory,
+        IConnectionListenerFactorySelector
 {
     private readonly SocketTransportOptions _options;
     private readonly ILoggerFactory _logger;
@@ -24,7 +26,8 @@ public sealed class SocketTransportFactory : IConnectionListenerFactory, IConnec
     /// <param name="loggerFactory">The logger factory.</param>
     public SocketTransportFactory(
         IOptions<SocketTransportOptions> options,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
 
@@ -35,7 +38,10 @@ public sealed class SocketTransportFactory : IConnectionListenerFactory, IConnec
     }
 
     /// <inheritdoc />
-    public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+    public ValueTask<IConnectionListener> BindAsync(
+        EndPoint endpoint,
+        CancellationToken cancellationToken = default
+    )
     {
         var transport = new SocketConnectionListener(endpoint, _options, _logger);
         transport.Bind();

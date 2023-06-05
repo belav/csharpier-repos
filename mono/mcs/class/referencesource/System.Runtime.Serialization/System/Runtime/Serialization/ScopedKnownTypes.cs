@@ -6,18 +6,25 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Xml;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, DataContract>;
+    using DataContractDictionary = System.Collections.Generic.Dictionary<
+        System.Xml.XmlQualifiedName,
+        DataContract
+    >;
 
     struct ScopedKnownTypes
     {
         internal DataContractDictionary[] dataContractDictionaries;
         int count;
+
         internal void Push(DataContractDictionary dataContractDictionary)
         {
             if (dataContractDictionaries == null)
                 dataContractDictionaries = new DataContractDictionary[4];
             else if (count == dataContractDictionaries.Length)
-                Array.Resize<DataContractDictionary>(ref dataContractDictionaries, dataContractDictionaries.Length * 2);
+                Array.Resize<DataContractDictionary>(
+                    ref dataContractDictionaries,
+                    dataContractDictionaries.Length * 2
+                );
             dataContractDictionaries[count++] = dataContractDictionary;
         }
 
@@ -37,7 +44,5 @@ namespace System.Runtime.Serialization
             }
             return null;
         }
-
     }
-
 }

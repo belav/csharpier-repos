@@ -74,17 +74,17 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.MetadataProperty; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.MetadataProperty; }
+        }
 
         /// <summary>
         /// Gets the identity of this item
         /// </summary>
         internal override string Identity
         {
-            get
-            {
-                return Name;
-            }
+            get { return Name; }
         }
 
         /// <summary>
@@ -129,10 +129,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.TypeUsage, false)]
         public TypeUsage TypeUsage
         {
-            get
-            {
-                return _typeUsage;
-            }
+            get { return _typeUsage; }
         }
         #endregion
 
@@ -155,10 +152,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public PropertyKind PropertyKind
         {
-            get
-            {
-                return _propertyKind;
-            }
+            get { return _propertyKind; }
         }
         #endregion
     }

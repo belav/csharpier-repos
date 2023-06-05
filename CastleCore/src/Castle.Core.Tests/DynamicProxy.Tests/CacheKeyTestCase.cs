@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,13 +26,29 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InstanceEquivalence()
         {
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), null, ProxyGenerationOptions.Default);
-            CacheKey key2 = new CacheKey(typeof (NonPublicConstructorClass), null, ProxyGenerationOptions.Default);
+            CacheKey key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                ProxyGenerationOptions.Default
+            );
+            CacheKey key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreEqual(key1, key2);
 
-            key1 = new CacheKey(typeof (NonPublicConstructorClass), null, ProxyGenerationOptions.Default);
-            key2 = new CacheKey(typeof (NonPublicConstructorClass), null, new ProxyGenerationOptions());
+            key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                ProxyGenerationOptions.Default
+            );
+            key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                new ProxyGenerationOptions()
+            );
 
             Assert.AreEqual(key1, key2);
         }
@@ -40,15 +56,29 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InstanceEquivalence_WithInterfaces()
         {
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), new Type[0], ProxyGenerationOptions.Default);
-            CacheKey key2 = new CacheKey(typeof (NonPublicConstructorClass), new Type[0], ProxyGenerationOptions.Default);
+            CacheKey key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[0],
+                ProxyGenerationOptions.Default
+            );
+            CacheKey key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[0],
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreEqual(key1, key2);
 
-            key1 =
-                new CacheKey(typeof (NonPublicConstructorClass), new Type[] {typeof (IDisposable)}, ProxyGenerationOptions.Default);
-            key2 =
-                new CacheKey(typeof (NonPublicConstructorClass), new Type[] {typeof (IDisposable)}, ProxyGenerationOptions.Default);
+            key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[] { typeof(IDisposable) },
+                ProxyGenerationOptions.Default
+            );
+            key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[] { typeof(IDisposable) },
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreEqual(key1, key2);
         }
@@ -56,21 +86,42 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void DifferentKeys()
         {
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), null, ProxyGenerationOptions.Default);
-            CacheKey key2 = new CacheKey(typeof (NonPublicMethodsClass), null, ProxyGenerationOptions.Default);
+            CacheKey key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                ProxyGenerationOptions.Default
+            );
+            CacheKey key2 = new CacheKey(
+                typeof(NonPublicMethodsClass),
+                null,
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreNotEqual(key1, key2);
 
-            key1 =
-                new CacheKey(typeof (NonPublicConstructorClass), new Type[] {typeof (IDisposable)}, ProxyGenerationOptions.Default);
-            key2 =
-                new CacheKey(typeof (NonPublicConstructorClass), new Type[] {typeof (IConvertible)}, ProxyGenerationOptions.Default);
+            key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[] { typeof(IDisposable) },
+                ProxyGenerationOptions.Default
+            );
+            key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[] { typeof(IConvertible) },
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreNotEqual(key1, key2);
 
-            key1 =
-                new CacheKey(typeof (NonPublicConstructorClass), new Type[] {typeof (IDisposable)}, ProxyGenerationOptions.Default);
-            key2 = new CacheKey(typeof (NonPublicMethodsClass), new Type[] {typeof (IDisposable)}, ProxyGenerationOptions.Default);
+            key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                new Type[] { typeof(IDisposable) },
+                ProxyGenerationOptions.Default
+            );
+            key2 = new CacheKey(
+                typeof(NonPublicMethodsClass),
+                new Type[] { typeof(IDisposable) },
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreNotEqual(key1, key2);
         }
@@ -80,17 +131,17 @@ namespace Castle.DynamicProxy.Tests
         {
             ProxyGenerationOptions options1 = new ProxyGenerationOptions();
             ProxyGenerationOptions options2 = new ProxyGenerationOptions();
-            options1.BaseTypeForInterfaceProxy = typeof (IConvertible);
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), null, options1);
-            CacheKey key2 = new CacheKey(typeof (NonPublicConstructorClass), null, options2);
+            options1.BaseTypeForInterfaceProxy = typeof(IConvertible);
+            CacheKey key1 = new CacheKey(typeof(NonPublicConstructorClass), null, options1);
+            CacheKey key2 = new CacheKey(typeof(NonPublicConstructorClass), null, options2);
 
             Assert.AreNotEqual(key1, key2);
 
             options1 = new ProxyGenerationOptions();
             options2 = new ProxyGenerationOptions();
             options2.Selector = new AllInterceptorSelector();
-            key1 = new CacheKey(typeof (NonPublicConstructorClass), null, options1);
-            key2 = new CacheKey(typeof (NonPublicConstructorClass), null, options2);
+            key1 = new CacheKey(typeof(NonPublicConstructorClass), null, options1);
+            key2 = new CacheKey(typeof(NonPublicConstructorClass), null, options2);
 
             Assert.AreNotEqual(key1, key2);
         }
@@ -101,8 +152,8 @@ namespace Castle.DynamicProxy.Tests
             ProxyGenerationOptions options1 = new ProxyGenerationOptions();
             ProxyGenerationOptions options2 = new ProxyGenerationOptions();
 
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), null, options1);
-            CacheKey key2 = new CacheKey(typeof (NonPublicConstructorClass), null, options2);
+            CacheKey key1 = new CacheKey(typeof(NonPublicConstructorClass), null, options1);
+            CacheKey key2 = new CacheKey(typeof(NonPublicConstructorClass), null, options2);
 
             Assert.AreEqual(key1, key2);
         }
@@ -110,8 +161,18 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void EqualWithProxyForType()
         {
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), null, null, ProxyGenerationOptions.Default);
-            CacheKey key2 = new CacheKey(typeof (NonPublicConstructorClass), null, null, ProxyGenerationOptions.Default);
+            CacheKey key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                null,
+                ProxyGenerationOptions.Default
+            );
+            CacheKey key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                null,
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreEqual(key1, key2);
 
@@ -127,9 +188,18 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void EqualNullAndEmptyInterfaces()
         {
-            CacheKey key1 = new CacheKey(typeof (NonPublicConstructorClass), null, null, ProxyGenerationOptions.Default);
-            CacheKey key2 = new CacheKey(typeof (NonPublicConstructorClass), null, Type.EmptyTypes,
-                                         ProxyGenerationOptions.Default);
+            CacheKey key1 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                null,
+                ProxyGenerationOptions.Default
+            );
+            CacheKey key2 = new CacheKey(
+                typeof(NonPublicConstructorClass),
+                null,
+                Type.EmptyTypes,
+                ProxyGenerationOptions.Default
+            );
 
             Assert.AreEqual(key1, key2);
             Assert.AreEqual(key2, key1);

@@ -28,25 +28,25 @@ namespace System.Web.UI.WebControls
             _entity = entity;
         }
 
-        internal EntityDataSourceChangedEventArgs(Exception exception) 
+        internal EntityDataSourceChangedEventArgs(Exception exception)
         {
             _exception = exception;
         }
 
-        public Exception Exception 
+        public Exception Exception
         {
             get { return _exception; }
         }
 
-        public bool ExceptionHandled 
+        public bool ExceptionHandled
         {
-            get {  return _exceptionHandled; }
+            get { return _exceptionHandled; }
             set { _exceptionHandled = value; }
         }
 
-        public object Entity 
+        public object Entity
         {
-            get {  return _entity; }
+            get { return _entity; }
         }
 
         public ObjectContext Context

@@ -8,7 +8,11 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for TripleDES, not consuming it.")]
+    [SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for TripleDES, not consuming it."
+    )]
     [UnsupportedOSPlatform("browser")]
     public abstract class TripleDES : SymmetricAlgorithm
     {
@@ -44,7 +48,6 @@ namespace System.Security.Cryptography
                 }
                 return key;
             }
-
             set
             {
                 if (value == null)
@@ -54,7 +57,9 @@ namespace System.Security.Cryptography
                     throw new ArgumentException(SR.Cryptography_InvalidKeySize);
 
                 if (IsWeakKey(value))
-                    throw new CryptographicException(SR.Format(SR.Cryptography_InvalidKey_Weak, "TripleDES"));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_InvalidKey_Weak, "TripleDES")
+                    );
 
                 base.Key = value;
             }
@@ -63,7 +68,7 @@ namespace System.Security.Cryptography
         public static bool IsWeakKey(byte[] rgbKey)
         {
             if (rgbKey == null)
-                throw new CryptographicException(SR.Cryptography_InvalidKeySize);  // .NET Framework compat: Strange exception for a null value, but this is what we threw in classic CLR.
+                throw new CryptographicException(SR.Cryptography_InvalidKeySize); // .NET Framework compat: Strange exception for a null value, but this is what we threw in classic CLR.
 
             if (!(rgbKey.Length * 8).IsLegalSize(s_legalKeySizes))
                 throw new CryptographicException(SR.Cryptography_InvalidKeySize);
@@ -98,7 +103,7 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(minSize: 2*64, maxSize: 3*64, skipSize: 64)
+            new KeySizes(minSize: 2 * 64, maxSize: 3 * 64, skipSize: 64)
         };
     }
 }

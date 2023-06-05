@@ -10,7 +10,9 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer : DiagnosticAnalyzer, IBuiltInAnalyzer
+    internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        : DiagnosticAnalyzer,
+            IBuiltInAnalyzer
     {
         protected readonly DiagnosticDescriptor Descriptor;
 
@@ -20,24 +22,42 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat,
             bool isUnnecessary,
-            bool configurable)
+            bool configurable
+        )
         {
             // 'isUnnecessary' should be true only for sub-types of AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer.
-            Debug.Assert(!isUnnecessary || this is AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer);
+            Debug.Assert(
+                !isUnnecessary || this is AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+            );
 
-            Descriptor = CreateDescriptorWithId(descriptorId, enforceOnBuild, title, messageFormat ?? title, isUnnecessary: isUnnecessary, isConfigurable: configurable);
+            Descriptor = CreateDescriptorWithId(
+                descriptorId,
+                enforceOnBuild,
+                title,
+                messageFormat ?? title,
+                isUnnecessary: isUnnecessary,
+                isConfigurable: configurable
+            );
             SupportedDiagnostics = ImmutableArray.Create(Descriptor);
         }
 
         /// <summary>
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors such that all the descriptors have no unique code style option to configure the descriptors.
         /// </summary>
-        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
+        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
+            ImmutableArray<DiagnosticDescriptor> supportedDiagnostics
+        )
         {
             SupportedDiagnostics = supportedDiagnostics;
 
             Descriptor = SupportedDiagnostics[0];
-            Debug.Assert(!supportedDiagnostics.Any(descriptor => descriptor.CustomTags.Any(t => t == WellKnownDiagnosticTags.Unnecessary)) || this is AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer);
+            Debug.Assert(
+                !supportedDiagnostics.Any(
+                    descriptor =>
+                        descriptor.CustomTags.Any(t => t == WellKnownDiagnosticTags.Unnecessary)
+                )
+                    || this is AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+            );
         }
 
         public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.Normal;
@@ -50,23 +70,33 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
             bool isConfigurable = true,
-            LocalizableString? description = null)
+            LocalizableString? description = null
+        )
 #pragma warning disable RS0030 // Do not used banned APIs
-            => new(
-                    id, title, messageFormat ?? title,
-                    DiagnosticCategory.Style,
-                    DiagnosticSeverity.Hidden,
-                    isEnabledByDefault: true,
-                    description: description,
-                    helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(id),
-                    customTags: DiagnosticCustomTags.Create(isUnnecessary, isConfigurable, enforceOnBuild));
+            =>
+            new(
+                id,
+                title,
+                messageFormat ?? title,
+                DiagnosticCategory.Style,
+                DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                description: description,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(id),
+                customTags: DiagnosticCustomTags.Create(
+                    isUnnecessary,
+                    isConfigurable,
+                    enforceOnBuild
+                )
+            );
 #pragma warning restore RS0030 // Do not used banned APIs
 
         /// <summary>
         /// Flags to configure the analysis of generated code.
         /// By default, code style analyzers should not analyze or report diagnostics on generated code, so the value is false.
         /// </summary>
-        protected virtual GeneratedCodeAnalysisFlags GeneratedCodeAnalysisFlags => GeneratedCodeAnalysisFlags.None;
+        protected virtual GeneratedCodeAnalysisFlags GeneratedCodeAnalysisFlags =>
+            GeneratedCodeAnalysisFlags.None;
 
         public sealed override void Initialize(AnalysisContext context)
         {

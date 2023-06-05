@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,12 +40,30 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Trace;
 
-            Assert.IsTrue(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning true when the level is Trace");
-            Assert.IsTrue(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning true when the level is Trace");
-            Assert.IsTrue(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning true when the level is Trace");
-            Assert.IsTrue(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Trace");
-            Assert.IsTrue(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Trace");
-            Assert.IsTrue(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Trace");
+            Assert.IsTrue(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning true when the level is Trace"
+            );
+            Assert.IsTrue(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning true when the level is Trace"
+            );
+            Assert.IsTrue(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning true when the level is Trace"
+            );
+            Assert.IsTrue(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Trace"
+            );
+            Assert.IsTrue(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Trace"
+            );
+            Assert.IsTrue(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Trace"
+            );
         }
 
         [Test]
@@ -53,12 +71,30 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Debug;
 
-            Assert.IsFalse(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Debug");
-            Assert.IsTrue(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning true when the level is Debug");
-            Assert.IsTrue(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning true when the level is Debug");
-            Assert.IsTrue(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Debug");
-            Assert.IsTrue(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Debug");
-            Assert.IsTrue(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Debug");
+            Assert.IsFalse(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Debug"
+            );
+            Assert.IsTrue(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning true when the level is Debug"
+            );
+            Assert.IsTrue(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning true when the level is Debug"
+            );
+            Assert.IsTrue(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Debug"
+            );
+            Assert.IsTrue(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Debug"
+            );
+            Assert.IsTrue(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Debug"
+            );
         }
 
         [Test]
@@ -66,12 +102,30 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Info;
 
-            Assert.IsFalse(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Info");
-            Assert.IsFalse(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Info");
-            Assert.IsTrue(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Info");
-            Assert.IsTrue(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning true when the level is Info");
-            Assert.IsTrue(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Info");
-            Assert.IsTrue(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Info");
+            Assert.IsFalse(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Info"
+            );
+            Assert.IsFalse(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Info"
+            );
+            Assert.IsTrue(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Info"
+            );
+            Assert.IsTrue(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning true when the level is Info"
+            );
+            Assert.IsTrue(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Info"
+            );
+            Assert.IsTrue(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Info"
+            );
         }
 
         [Test]
@@ -79,12 +133,30 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Warn;
 
-            Assert.IsFalse(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Warn");
-            Assert.IsFalse(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Warn");
-            Assert.IsFalse(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Warn");
-            Assert.IsTrue(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Warn");
-            Assert.IsTrue(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Warn");
-            Assert.IsTrue(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Warn");
+            Assert.IsFalse(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Warn"
+            );
+            Assert.IsFalse(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Warn"
+            );
+            Assert.IsFalse(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Warn"
+            );
+            Assert.IsTrue(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning true when the level is Warn"
+            );
+            Assert.IsTrue(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Warn"
+            );
+            Assert.IsTrue(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Warn"
+            );
         }
 
         [Test]
@@ -92,12 +164,30 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Error;
 
-            Assert.IsFalse(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Error");
-            Assert.IsFalse(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Error");
-            Assert.IsFalse(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Error");
-            Assert.IsFalse(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning false when the level is Error");
-            Assert.IsTrue(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Error");
-            Assert.IsTrue(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Error");
+            Assert.IsFalse(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Error"
+            );
+            Assert.IsFalse(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Error"
+            );
+            Assert.IsFalse(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Error"
+            );
+            Assert.IsFalse(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning false when the level is Error"
+            );
+            Assert.IsTrue(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning true when the level is Error"
+            );
+            Assert.IsTrue(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Error"
+            );
         }
 
         [Test]
@@ -105,12 +195,30 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Fatal;
 
-            Assert.IsFalse(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Fatal");
-            Assert.IsFalse(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Fatal");
-            Assert.IsFalse(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Fatal");
-            Assert.IsFalse(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning false when the level is Fatal");
-            Assert.IsFalse(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning false when the level is Fatal");
-            Assert.IsTrue(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Fatal");
+            Assert.IsFalse(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Fatal"
+            );
+            Assert.IsFalse(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Fatal"
+            );
+            Assert.IsFalse(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Fatal"
+            );
+            Assert.IsFalse(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning false when the level is Fatal"
+            );
+            Assert.IsFalse(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning false when the level is Fatal"
+            );
+            Assert.IsTrue(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning true when the level is Fatal"
+            );
         }
 
         [Test]
@@ -118,18 +226,40 @@ namespace Castle.Core.Logging.Tests
         {
             logger.Level = LoggerLevel.Off;
 
-            Assert.IsFalse(logger.IsTraceEnabled, "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Off");
-            Assert.IsFalse(logger.IsDebugEnabled, "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Off");
-            Assert.IsFalse(logger.IsInfoEnabled, "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Off");
-            Assert.IsFalse(logger.IsWarnEnabled, "LevelFilteredLogger.IsWarnEnabled is not returning false when the level is Off");
-            Assert.IsFalse(logger.IsErrorEnabled, "LevelFilteredLogger.IsErrorEnabled is not returning false when the level is Off");
-            Assert.IsFalse(logger.IsFatalEnabled, "LevelFilteredLogger.IsFatalErrorEnabled is not returning false when the level is Off");
+            Assert.IsFalse(
+                logger.IsTraceEnabled,
+                "LevelFilteredLogger.IsTraceEnabled is not returning false when the level is Off"
+            );
+            Assert.IsFalse(
+                logger.IsDebugEnabled,
+                "LevelFilteredLogger.IsDebugEnabled is not returning false when the level is Off"
+            );
+            Assert.IsFalse(
+                logger.IsInfoEnabled,
+                "LevelFilteredLogger.IsInfoEnabled is not returning false when the level is Off"
+            );
+            Assert.IsFalse(
+                logger.IsWarnEnabled,
+                "LevelFilteredLogger.IsWarnEnabled is not returning false when the level is Off"
+            );
+            Assert.IsFalse(
+                logger.IsErrorEnabled,
+                "LevelFilteredLogger.IsErrorEnabled is not returning false when the level is Off"
+            );
+            Assert.IsFalse(
+                logger.IsFatalEnabled,
+                "LevelFilteredLogger.IsFatalErrorEnabled is not returning false when the level is Off"
+            );
         }
 
         [Test]
         public void DefaultLevel()
         {
-            Assert.AreEqual(LoggerLevel.Off, logger.Level, "Default LevelFilteredLogger.Level is not Off");
+            Assert.AreEqual(
+                LoggerLevel.Off,
+                logger.Level,
+                "Default LevelFilteredLogger.Level is not Off"
+            );
         }
 
         [Test]
@@ -147,24 +277,28 @@ namespace Castle.Core.Logging.Tests
         [Test]
         public void DefaultName()
         {
-            Assert.AreEqual("unnamed", logger.Name, "Default LevelFilteredLogger.Name is not string.Empty");
+            Assert.AreEqual(
+                "unnamed",
+                logger.Name,
+                "Default LevelFilteredLogger.Name is not string.Empty"
+            );
         }
 
         [Test]
         public void Name()
         {
-            ((LevelFilteredLoggerInstance) logger).ChangeName("Main");
+            ((LevelFilteredLoggerInstance)logger).ChangeName("Main");
             Assert.AreEqual("Main", logger.Name, "LevelFilteredLogger.Name did not change");
 
-            ((LevelFilteredLoggerInstance) logger).ChangeName("GUI");
+            ((LevelFilteredLoggerInstance)logger).ChangeName("GUI");
             Assert.AreEqual("GUI", logger.Name, "LevelFilteredLogger.Name did not change");
         }
 
         [Test]
         public void SettingNameToNull()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                ((LevelFilteredLoggerInstance) logger).ChangeName(null)
+            Assert.Throws<ArgumentNullException>(
+                () => ((LevelFilteredLoggerInstance)logger).ChangeName(null)
             );
         }
     }
@@ -196,7 +330,7 @@ namespace Castle.Core.Logging.Tests
             // setting the level to an undefined value so
             // we don't have to wonder if it changed from Off
             // to Off (for instance).
-            level = (LoggerLevel) (-1);
+            level = (LoggerLevel)(-1);
             name = null;
             message = null;
             exception = null;
@@ -301,7 +435,6 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-
         [Test]
         public void DebugLevelDebugWithException()
         {
@@ -367,7 +500,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void DebugLevelDebugWithArgs()
@@ -469,7 +601,6 @@ namespace Castle.Core.Logging.Tests
             ValidateCall(level, message, exception);
         }
 
-
         [Test]
         public void InfoLevelDebug()
         {
@@ -529,7 +660,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void InfoLevelDebugWithException()
@@ -596,7 +726,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void InfoLevelDebugWithArgs()
@@ -698,7 +827,6 @@ namespace Castle.Core.Logging.Tests
             ValidateCall(level, message, exception);
         }
 
-
         [Test]
         public void WarnLevelDebug()
         {
@@ -758,7 +886,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void WarnLevelDebugWithException()
@@ -825,7 +952,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void WarnLevelDebugWithArgs()
@@ -927,7 +1053,6 @@ namespace Castle.Core.Logging.Tests
             ValidateCall(level, message, exception);
         }
 
-
         [Test]
         public void ErrorLevelDebug()
         {
@@ -987,7 +1112,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void ErrorLevelDebugWithException()
@@ -1155,7 +1279,6 @@ namespace Castle.Core.Logging.Tests
             ValidateCall(level, message, exception);
         }
 
-
         [Test]
         public void FatalErrorLevelDebug()
         {
@@ -1215,7 +1338,6 @@ namespace Castle.Core.Logging.Tests
 
             ValidateNoCalls();
         }
-
 
         [Test]
         public void FatalErrorLevelDebugWithException()
@@ -1283,7 +1405,6 @@ namespace Castle.Core.Logging.Tests
             ValidateNoCalls();
         }
 
-
         [Test]
         public void FatalErrorLevelDebugWithArgs()
         {
@@ -1346,18 +1467,46 @@ namespace Castle.Core.Logging.Tests
 
         #endregion
 
-        private void ValidateCall(LoggerLevel expectedLevel, string expectedMessage, Exception expectedException)
+        private void ValidateCall(
+            LoggerLevel expectedLevel,
+            string expectedMessage,
+            Exception expectedException
+        )
         {
-            Assert.AreEqual(1, calls, "LevelFilteredLogger.Log was not called the right number of times");
-            Assert.AreEqual(expectedLevel, level, "LevelFilteredLogger.Log was not called with the right level");
-            Assert.AreEqual(expectedMessage, message, "LevelFilteredLogger.Log was not called with the right message");
-            Assert.AreSame(expectedException, exception, "LevelFilteredLogger.Log was not called with the right exception");
-            Assert.AreEqual("unnamed", name, "LevelFilteredLogger.Log was not called with the right name");
+            Assert.AreEqual(
+                1,
+                calls,
+                "LevelFilteredLogger.Log was not called the right number of times"
+            );
+            Assert.AreEqual(
+                expectedLevel,
+                level,
+                "LevelFilteredLogger.Log was not called with the right level"
+            );
+            Assert.AreEqual(
+                expectedMessage,
+                message,
+                "LevelFilteredLogger.Log was not called with the right message"
+            );
+            Assert.AreSame(
+                expectedException,
+                exception,
+                "LevelFilteredLogger.Log was not called with the right exception"
+            );
+            Assert.AreEqual(
+                "unnamed",
+                name,
+                "LevelFilteredLogger.Log was not called with the right name"
+            );
         }
 
         private void ValidateNoCalls()
         {
-            Assert.AreEqual(0, calls, "LevelFilteredLogger.Log was called with logging " + logger.Level);
+            Assert.AreEqual(
+                0,
+                calls,
+                "LevelFilteredLogger.Log was called with logging " + logger.Level
+            );
         }
     }
 
@@ -1375,7 +1524,12 @@ namespace Castle.Core.Logging.Tests
             base.ChangeName(name);
         }
 
-        protected override void Log(LoggerLevel loggerLevel, string loggerName, string message, Exception exception)
+        protected override void Log(
+            LoggerLevel loggerLevel,
+            string loggerName,
+            string message,
+            Exception exception
+        )
         {
             Fixture.level = loggerLevel;
             Fixture.name = loggerName;

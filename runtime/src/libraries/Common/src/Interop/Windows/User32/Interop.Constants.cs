@@ -7,7 +7,7 @@ internal static partial class Interop
     {
         public const int COLOR_WINDOW = 5;
 
-        public const int CTRL_LOGOFF_EVENT   = 5;
+        public const int CTRL_LOGOFF_EVENT = 5;
         public const int CTRL_SHUTDOWN_EVENT = 6;
 
         public const int ENDSESSION_CLOSEAPP = 0x00000001;
@@ -19,34 +19,35 @@ internal static partial class Interop
 
         public const int MWMO_INPUTAVAILABLE = 0x0004;
 
-        public const int PBT_APMQUERYSUSPEND           = 0x0000;
-        public const int PBT_APMQUERYSTANDBY           = 0x0001;
-        public const int PBT_APMQUERYSUSPENDFAILED     = 0x0002;
-        public const int PBT_APMQUERYSTANDBYFAILED     = 0x0003;
-        public const int PBT_APMSUSPEND                = 0x0004;
-        public const int PBT_APMSTANDBY                = 0x0005;
-        public const int PBT_APMRESUMECRITICAL         = 0x0006;
-        public const int PBT_APMRESUMESUSPEND          = 0x0007;
-        public const int PBT_APMRESUMESTANDBY          = 0x0008;
-        public const int PBT_APMBATTERYLOW             = 0x0009;
-        public const int PBT_APMPOWERSTATUSCHANGE      = 0x000A;
-        public const int PBT_APMOEMEVENT               = 0x000B;
+        public const int PBT_APMQUERYSUSPEND = 0x0000;
+        public const int PBT_APMQUERYSTANDBY = 0x0001;
+        public const int PBT_APMQUERYSUSPENDFAILED = 0x0002;
+        public const int PBT_APMQUERYSTANDBYFAILED = 0x0003;
+        public const int PBT_APMSUSPEND = 0x0004;
+        public const int PBT_APMSTANDBY = 0x0005;
+        public const int PBT_APMRESUMECRITICAL = 0x0006;
+        public const int PBT_APMRESUMESUSPEND = 0x0007;
+        public const int PBT_APMRESUMESTANDBY = 0x0008;
+        public const int PBT_APMBATTERYLOW = 0x0009;
+        public const int PBT_APMPOWERSTATUSCHANGE = 0x000A;
+        public const int PBT_APMOEMEVENT = 0x000B;
 
         public const int PM_REMOVE = 0x0001;
 
         public const int QS_KEY = 0x0001,
-        QS_MOUSEMOVE = 0x0002,
-        QS_MOUSEBUTTON = 0x0004,
-        QS_POSTMESSAGE = 0x0008,
-        QS_TIMER = 0x0010,
-        QS_PAINT = 0x0020,
-        QS_SENDMESSAGE = 0x0040,
-        QS_HOTKEY = 0x0080,
-        QS_ALLPOSTMESSAGE = 0x0100,
-        QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON,
-        QS_INPUT = QS_MOUSE | QS_KEY,
-        QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY,
-        QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
+            QS_MOUSEMOVE = 0x0002,
+            QS_MOUSEBUTTON = 0x0004,
+            QS_POSTMESSAGE = 0x0008,
+            QS_TIMER = 0x0010,
+            QS_PAINT = 0x0020,
+            QS_SENDMESSAGE = 0x0040,
+            QS_HOTKEY = 0x0080,
+            QS_ALLPOSTMESSAGE = 0x0100,
+            QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON,
+            QS_INPUT = QS_MOUSE | QS_KEY,
+            QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY,
+            QS_ALLINPUT =
+                QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 
         public const int SPI_GETBEEP = 1;
         public const int SPI_SETBEEP = 2;
@@ -226,6 +227,5 @@ internal static partial class Interop
         public const int UOI_FLAGS = 1;
 
         public const int HWND_BROADCAST = 0xffff;
-
     }
 }

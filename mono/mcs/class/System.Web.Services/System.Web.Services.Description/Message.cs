@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Message.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,80 +33,82 @@ using System.Web.Services;
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class Message :
-		NamedItem
-	{
-		#region Fields
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class Message : NamedItem
+    {
+        #region Fields
 
-		MessagePartCollection parts;
-		ServiceDescription serviceDescription;
-		ServiceDescriptionFormatExtensionCollection extensions;
+        MessagePartCollection parts;
+        ServiceDescription serviceDescription;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public Message ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-			parts = new MessagePartCollection (this);
-			serviceDescription = null;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        public Message()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+            parts = new MessagePartCollection(this);
+            serviceDescription = null;
+        }
+
+        #endregion // Constructors
+
+        #region Properties
 
 
-		[XmlElement ("part")]
-		public MessagePartCollection Parts {
-			get { return parts; }
-		}
+        [XmlElement("part")]
+        public MessagePartCollection Parts
+        {
+            get { return parts; }
+        }
 
-//		[XmlIgnore]
-		public ServiceDescription ServiceDescription {
-			get { return serviceDescription; }
-		}
+        //		[XmlIgnore]
+        public ServiceDescription ServiceDescription
+        {
+            get { return serviceDescription; }
+        }
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public MessagePart FindPartByName (string partName)
-		{
-			return parts [partName];
-		}
+        public MessagePart FindPartByName(string partName)
+        {
+            return parts[partName];
+        }
 
-		public MessagePart[] FindPartsByName (string[] partNames) 
-		{
-			ArrayList searchResults = new ArrayList ();
+        public MessagePart[] FindPartsByName(string[] partNames)
+        {
+            ArrayList searchResults = new ArrayList();
 
-			foreach (string partName in partNames)
-				searchResults.Add (FindPartByName (partName));
+            foreach (string partName in partNames)
+                searchResults.Add(FindPartByName(partName));
 
-			int count = searchResults.Count;
+            int count = searchResults.Count;
 
-			if (count == 0)
-				throw new ArgumentException ();
+            if (count == 0)
+                throw new ArgumentException();
 
-			MessagePart[] returnValue = new MessagePart[count];
-			searchResults.CopyTo (returnValue);
-			return returnValue;
-		}
+            MessagePart[] returnValue = new MessagePart[count];
+            searchResults.CopyTo(returnValue);
+            return returnValue;
+        }
 
-		internal void SetParent (ServiceDescription serviceDescription)
-		{
-			this.serviceDescription = serviceDescription;
-		}
+        internal void SetParent(ServiceDescription serviceDescription)
+        {
+            this.serviceDescription = serviceDescription;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -16,21 +16,23 @@ public class PropertyEntryTest
 
         using (var context = new UserContext())
         {
-            id = context.Add(
-                new User { Name = "A", LongName = "B" }).Entity.Id;
+            id = context.Add(new User { Name = "A", LongName = "B" }).Entity.Id;
 
             context.SaveChanges();
         }
 
         using (var context = new UserContext())
         {
-            var user = context.Attach(
-                new User
-                {
-                    Id = id,
-                    Name = "NewA",
-                    LongName = "NewB"
-                }).Entity;
+            var user = context
+                .Attach(
+                    new User
+                    {
+                        Id = id,
+                        Name = "NewA",
+                        LongName = "NewB"
+                    }
+                )
+                .Entity;
 
             context.Entry(user).Property(x => x.Name).IsModified = false;
             context.Entry(user).Property(x => x.LongName).IsModified = true;
@@ -57,8 +59,7 @@ public class PropertyEntryTest
 
         using (var context = new UserContext())
         {
-            id = context.Add(
-                new User { Name = "A", LongName = "B" }).Entity.Id;
+            id = context.Add(new User { Name = "A", LongName = "B" }).Entity.Id;
 
             context.SaveChanges();
         }
@@ -114,18 +115,17 @@ public class PropertyEntryTest
 
     private class UserContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(GetType().FullName);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<User>(
-                b =>
-                {
-                    b.Property(e => e.Name).IsRequired();
-                    b.Property(e => e.LongName).IsRequired();
-                });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<User>(b =>
+            {
+                b.Property(e => e.Name).IsRequired();
+                b.Property(e => e.LongName).IsRequired();
+            });
     }
 
     [ConditionalFact]
@@ -134,21 +134,23 @@ public class PropertyEntryTest
         Guid id;
         using (var context = new UserContext())
         {
-            id = context.Add(
-                new User
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "A",
-                    LongName = "B"
-                }).Entity.Id;
+            id = context
+                .Add(
+                    new User
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "A",
+                        LongName = "B"
+                    }
+                )
+                .Entity.Id;
 
             context.SaveChanges();
         }
 
         using (var context = new UserContext())
         {
-            var user = context.Update(
-                new User { Id = id }).Entity;
+            var user = context.Update(new User { Id = id }).Entity;
 
             user.Name = "A2";
             user.LongName = "B2";
@@ -169,12 +171,10 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_get_name()
-        => Can_get_name_helper<Wotty>();
+    public void Can_get_name() => Can_get_name_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_name_with_object_field()
-        => Can_get_name_helper<ObjectWotty>();
+    public void Can_get_name_with_object_field() => Can_get_name_helper<ObjectWotty>();
 
     private void Can_get_name_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -187,7 +187,8 @@ public class PropertyEntryTest
                     Id = 1,
                     Primate = "Monkey",
                     RequiredPrimate = "Tarsier"
-                })
+                }
+            )
             .GetInfrastructure();
 
         entry.SetEntityState(EntityState.Unchanged);
@@ -196,12 +197,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_get_current_value()
-        => Can_get_current_value_helper<Wotty>();
+    public void Can_get_current_value() => Can_get_current_value_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_current_value_with_object_field()
-        => Can_get_current_value_helper<ObjectWotty>();
+    public void Can_get_current_value_with_object_field() =>
+        Can_get_current_value_helper<ObjectWotty>();
 
     private void Can_get_current_value_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -214,7 +214,8 @@ public class PropertyEntryTest
                     Id = 1,
                     Primate = "Monkey",
                     RequiredPrimate = "Tarsier"
-                })
+                }
+            )
             .GetInfrastructure();
 
         entry.SetEntityState(EntityState.Unchanged);
@@ -224,12 +225,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_current_value()
-        => Can_set_current_value_helper<Wotty>();
+    public void Can_set_current_value() => Can_set_current_value_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_with_object_field()
-        => Can_set_current_value_helper<ObjectWotty>();
+    public void Can_set_current_value_with_object_field() =>
+        Can_set_current_value_helper<ObjectWotty>();
 
     private void Can_set_current_value_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -257,12 +257,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null()
-        => Can_set_current_value_to_null_helper<Wotty>();
+    public void Can_set_current_value_to_null() => Can_set_current_value_to_null_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null_with_object_field()
-        => Can_set_current_value_to_null_helper<ObjectWotty>();
+    public void Can_set_current_value_to_null_with_object_field() =>
+        Can_set_current_value_to_null_helper<ObjectWotty>();
 
     private void Can_set_current_value_to_null_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -290,12 +289,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value()
-        => Can_set_and_get_original_value_helper<Wotty>();
+    public void Can_set_and_get_original_value() => Can_set_and_get_original_value_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_with_object_field()
-        => Can_set_and_get_original_value_helper<ObjectWotty>();
+    public void Can_set_and_get_original_value_with_object_field() =>
+        Can_set_and_get_original_value_helper<ObjectWotty>();
 
     private void Can_set_and_get_original_value_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -332,12 +330,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_starting_null()
-        => Can_set_and_get_original_value_starting_null_helper<Wotty>();
+    public void Can_set_and_get_original_value_starting_null() =>
+        Can_set_and_get_original_value_starting_null_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_starting_null_with_object_field()
-        => Can_set_and_get_original_value_starting_null_helper<ObjectWotty>();
+    public void Can_set_and_get_original_value_starting_null_with_object_field() =>
+        Can_set_and_get_original_value_starting_null_helper<ObjectWotty>();
 
     private void Can_set_and_get_original_value_starting_null_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -369,12 +367,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null()
-        => Can_set_original_value_to_null_helper<Wotty>();
+    public void Can_set_original_value_to_null() => Can_set_original_value_to_null_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null_with_object_field()
-        => Can_set_original_value_to_null_helper<ObjectWotty>();
+    public void Can_set_original_value_to_null_with_object_field() =>
+        Can_set_original_value_to_null_helper<ObjectWotty>();
 
     private void Can_set_original_value_to_null_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -402,12 +399,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_on_Modified_entity()
-        => Can_set_and_clear_modified_on_Modified_entity_helper<Wotty>();
+    public void Can_set_and_clear_modified_on_Modified_entity() =>
+        Can_set_and_clear_modified_on_Modified_entity_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_on_Modified_entity_with_object_field()
-        => Can_set_and_clear_modified_on_Modified_entity_helper<ObjectWotty>();
+    public void Can_set_and_clear_modified_on_Modified_entity_with_object_field() =>
+        Can_set_and_clear_modified_on_Modified_entity_helper<ObjectWotty>();
 
     private void Can_set_and_clear_modified_on_Modified_entity_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -451,16 +448,19 @@ public class PropertyEntryTest
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Deleted)]
-    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity(EntityState initialState)
-        => Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<Wotty>(initialState);
+    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity(EntityState initialState) =>
+        Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<Wotty>(initialState);
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Deleted)]
-    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity_with_object_field(EntityState initialState)
-        => Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<ObjectWotty>(initialState);
+    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity_with_object_field(
+        EntityState initialState
+    ) => Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<ObjectWotty>(initialState);
 
-    private void Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<TWotty>(EntityState initialState)
+    private void Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<TWotty>(
+        EntityState initialState
+    )
         where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
@@ -493,16 +493,23 @@ public class PropertyEntryTest
     [ConditionalTheory]
     [InlineData(EntityState.Detached)]
     [InlineData(EntityState.Unchanged)]
-    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity(EntityState initialState)
-        => Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<Wotty>(initialState);
+    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity(
+        EntityState initialState
+    ) => Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<Wotty>(initialState);
 
     [ConditionalTheory]
     [InlineData(EntityState.Detached)]
     [InlineData(EntityState.Unchanged)]
-    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_with_object_field(EntityState initialState)
-        => Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<ObjectWotty>(initialState);
+    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_with_object_field(
+        EntityState initialState
+    ) =>
+        Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<ObjectWotty>(
+            initialState
+        );
 
-    private void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<TWotty>(EntityState initialState)
+    private void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<TWotty>(
+        EntityState initialState
+    )
         where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
@@ -533,12 +540,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_reject_changes_when_clearing_modified_flag()
-        => Can_reject_changes_when_clearing_modified_flag_helper<Wotty>();
+    public void Can_reject_changes_when_clearing_modified_flag() =>
+        Can_reject_changes_when_clearing_modified_flag_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_reject_changes_when_clearing_modified_flag_with_object_field()
-        => Can_reject_changes_when_clearing_modified_flag_helper<ObjectWotty>();
+    public void Can_reject_changes_when_clearing_modified_flag_with_object_field() =>
+        Can_reject_changes_when_clearing_modified_flag_helper<ObjectWotty>();
 
     private void Can_reject_changes_when_clearing_modified_flag_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -554,11 +561,23 @@ public class PropertyEntryTest
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
-        var primateEntry = new PropertyEntry(entry, "Primate") { OriginalValue = "Chimp", IsModified = true };
+        var primateEntry = new PropertyEntry(entry, "Primate")
+        {
+            OriginalValue = "Chimp",
+            IsModified = true
+        };
 
-        var marmateEntry = new PropertyEntry(entry, "Marmate") { OriginalValue = "Marmite", IsModified = true };
+        var marmateEntry = new PropertyEntry(entry, "Marmate")
+        {
+            OriginalValue = "Marmite",
+            IsModified = true
+        };
 
-        var requiredEntry = new PropertyEntry(entry, "RequiredPrimate") { OriginalValue = "Bushbaby", IsModified = true };
+        var requiredEntry = new PropertyEntry(entry, "RequiredPrimate")
+        {
+            OriginalValue = "Bushbaby",
+            IsModified = true
+        };
 
         Assert.Equal(EntityState.Modified, entry.EntityState);
         Assert.Equal("Monkey", entity.Primate);
@@ -612,12 +631,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_get_name_generic()
-        => Can_get_name_generic_helper<Wotty>();
+    public void Can_get_name_generic() => Can_get_name_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_name_generic_with_object_field()
-        => Can_get_name_generic_helper<ObjectWotty>();
+    public void Can_get_name_generic_with_object_field() =>
+        Can_get_name_generic_helper<ObjectWotty>();
 
     private void Can_get_name_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -625,18 +643,18 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" });
+            new TWotty { Id = 1, Primate = "Monkey" }
+        );
 
         Assert.Equal("Primate", new PropertyEntry<Wotty, string>(entry, "Primate").Metadata.Name);
     }
 
     [ConditionalFact]
-    public void Can_get_current_value_generic()
-        => Can_get_current_value_generic_helper<Wotty>();
+    public void Can_get_current_value_generic() => Can_get_current_value_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_current_value_generic_with_object_field()
-        => Can_get_current_value_generic_helper<ObjectWotty>();
+    public void Can_get_current_value_generic_with_object_field() =>
+        Can_get_current_value_generic_helper<ObjectWotty>();
 
     private void Can_get_current_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -644,18 +662,18 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" });
+            new TWotty { Id = 1, Primate = "Monkey" }
+        );
 
         Assert.Equal("Monkey", new PropertyEntry<Wotty, string>(entry, "Primate").CurrentValue);
     }
 
     [ConditionalFact]
-    public void Can_set_current_value_generic()
-        => Can_set_current_value_generic_helper<Wotty>();
+    public void Can_set_current_value_generic() => Can_set_current_value_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_generic_with_object_field()
-        => Can_set_current_value_generic_helper<ObjectWotty>();
+    public void Can_set_current_value_generic_with_object_field() =>
+        Can_set_current_value_generic_helper<ObjectWotty>();
 
     private void Can_set_current_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -665,7 +683,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         new PropertyEntry<Wotty, string>(entry, "Primate").CurrentValue = "Chimp";
 
@@ -673,12 +692,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null_generic()
-        => Can_set_current_value_to_null_generic_helper<Wotty>();
+    public void Can_set_current_value_to_null_generic() =>
+        Can_set_current_value_to_null_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null_generic_with_object_field()
-        => Can_set_current_value_to_null_generic_helper<ObjectWotty>();
+    public void Can_set_current_value_to_null_generic_with_object_field() =>
+        Can_set_current_value_to_null_generic_helper<ObjectWotty>();
 
     private void Can_set_current_value_to_null_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -688,7 +707,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         new PropertyEntry<Wotty, string>(entry, "Primate").CurrentValue = null;
 
@@ -696,12 +716,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_generic()
-        => Can_set_and_get_original_value_generic_helper<Wotty>();
+    public void Can_set_and_get_original_value_generic() =>
+        Can_set_and_get_original_value_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_generic_with_object_field()
-        => Can_set_and_get_original_value_generic_helper<ObjectWotty>();
+    public void Can_set_and_get_original_value_generic_with_object_field() =>
+        Can_set_and_get_original_value_generic_helper<ObjectWotty>();
 
     private void Can_set_and_get_original_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -711,7 +731,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.Equal("Monkey", new PropertyEntry<Wotty, string>(entry, "Primate").OriginalValue);
 
@@ -722,12 +743,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null_generic()
-        => Can_set_original_value_to_null_generic_helper<Wotty>();
+    public void Can_set_original_value_to_null_generic() =>
+        Can_set_original_value_to_null_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null_generic_with_object_field()
-        => Can_set_original_value_to_null_generic_helper<ObjectWotty>();
+    public void Can_set_original_value_to_null_generic_with_object_field() =>
+        Can_set_original_value_to_null_generic_helper<ObjectWotty>();
 
     private void Can_set_original_value_to_null_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -735,7 +756,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" });
+            new TWotty { Id = 1, Primate = "Monkey" }
+        );
 
         new PropertyEntry<Wotty, string>(entry, "Primate").OriginalValue = null;
 
@@ -743,12 +765,12 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_generic()
-        => Can_set_and_clear_modified_generic_helper<Wotty>();
+    public void Can_set_and_clear_modified_generic() =>
+        Can_set_and_clear_modified_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_generic_with_object_field()
-        => Can_set_and_clear_modified_generic_helper<ObjectWotty>();
+    public void Can_set_and_clear_modified_generic_with_object_field() =>
+        Can_set_and_clear_modified_generic_helper<ObjectWotty>();
 
     private void Can_set_and_clear_modified_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -758,7 +780,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.False(new PropertyEntry<Wotty, string>(entry, "Primate").IsModified);
 
@@ -779,7 +802,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.Equal("Monkey", new PropertyEntry(entry, "Primate").OriginalValue);
 
@@ -795,7 +819,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new NotifyingWotty { Id = 1, Primate = "Monkey" });
+            new NotifyingWotty { Id = 1, Primate = "Monkey" }
+        );
 
         new PropertyEntry(entry, "Primate").OriginalValue = null;
 
@@ -810,13 +835,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue
+        );
 
         new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
@@ -826,7 +858,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new NotifyingWotty { Id = 1, Primate = "Monkey" });
+            new NotifyingWotty { Id = 1, Primate = "Monkey" }
+        );
 
         new PropertyEntry<NotifyingWotty, string>(entry, "Primate").OriginalValue = null;
 
@@ -841,7 +874,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.Equal("Monkey", new PropertyEntry(entry, "ConcurrentPrimate").OriginalValue);
 
@@ -857,7 +891,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" });
+            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+        );
 
         new PropertyEntry(entry, "ConcurrentPrimate").OriginalValue = null;
 
@@ -872,13 +907,21 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue
+        );
 
-        new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue = "Chimp";
+        new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue =
+            "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue
+        );
         Assert.Equal("Monkey", entity.ConcurrentPrimate);
     }
 
@@ -888,11 +931,15 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" });
+            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+        );
 
-        new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue = null;
+        new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue =
+            null;
 
-        Assert.Null(new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue);
+        Assert.Null(
+            new PropertyEntry<FullyNotifyingWotty, string>(entry, "ConcurrentPrimate").OriginalValue
+        );
     }
 
     [ConditionalFact]
@@ -903,17 +950,22 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         var propertyEntry = new PropertyEntry(entry, "Primate");
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message);
+            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message
+        );
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp").Message);
+            Assert
+                .Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp")
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -924,17 +976,22 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         var propertyEntry = new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate");
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message);
+            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message
+        );
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp").Message);
+            Assert
+                .Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp")
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -945,7 +1002,8 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.Equal("Monkey", new PropertyEntry(entry, "Primate").OriginalValue);
 
@@ -963,13 +1021,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate").OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate").OriginalValue
+        );
 
         new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate").OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate").OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry<FullyNotifyingWotty, string>(entry, "Primate").OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
@@ -1106,50 +1171,50 @@ public class PropertyEntryTest
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private abstract class HasChangedAndChanging : HasChanged, INotifyPropertyChanging
     {
         public event PropertyChangingEventHandler PropertyChanging;
 
-        protected void OnPropertyChanging([CallerMemberName] string propertyName = "")
-            => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+        protected void OnPropertyChanging([CallerMemberName] string propertyName = "") =>
+            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
     }
 
     public static IModel BuildModel(
-        ChangeTrackingStrategy fullNotificationStrategy = ChangeTrackingStrategy.ChangingAndChangedNotifications,
+        ChangeTrackingStrategy fullNotificationStrategy =
+            ChangeTrackingStrategy.ChangingAndChangedNotifications,
         ModelBuilder builder = null,
-        bool finalize = true)
+        bool finalize = true
+    )
     {
         builder ??= InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         builder.HasChangeTrackingStrategy(fullNotificationStrategy);
 
-        builder.Entity<Wotty>(
-            b =>
-            {
-                b.Property(e => e.RequiredPrimate).IsRequired();
-                b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-            });
+        builder.Entity<Wotty>(b =>
+        {
+            b.Property(e => e.RequiredPrimate).IsRequired();
+            b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
+        });
 
-        builder.Entity<ObjectWotty>(
-            b =>
-            {
-                b.Property(e => e.RequiredPrimate).IsRequired();
-                b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-            });
+        builder.Entity<ObjectWotty>(b =>
+        {
+            b.Property(e => e.RequiredPrimate).IsRequired();
+            b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
+        });
 
         builder.Entity<NotifyingWotty>(
-            b => b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications));
+            b => b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications)
+        );
 
-        builder.Entity<FullyNotifyingWotty>(
-            b =>
-            {
-                b.HasChangeTrackingStrategy(fullNotificationStrategy);
-                b.Property(e => e.ConcurrentPrimate).IsConcurrencyToken();
-            });
+        builder.Entity<FullyNotifyingWotty>(b =>
+        {
+            b.HasChangeTrackingStrategy(fullNotificationStrategy);
+            b.Property(e => e.ConcurrentPrimate).IsConcurrencyToken();
+        });
 
         return finalize ? builder.Model.FinalizeModel() : (IModel)builder.Model;
     }
@@ -1158,17 +1223,20 @@ public class PropertyEntryTest
     {
         private readonly ChangeTrackingStrategy _fullNotificationStrategy;
 
-        public PrimateContext(ChangeTrackingStrategy fullNotificationStrategy = ChangeTrackingStrategy.ChangingAndChangedNotifications)
+        public PrimateContext(
+            ChangeTrackingStrategy fullNotificationStrategy =
+                ChangeTrackingStrategy.ChangingAndChangedNotifications
+        )
         {
             _fullNotificationStrategy = fullNotificationStrategy;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(GetType().FullName);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => BuildModel(_fullNotificationStrategy, modelBuilder, finalize: false);
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            BuildModel(_fullNotificationStrategy, modelBuilder, finalize: false);
     }
 }

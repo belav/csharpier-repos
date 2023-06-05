@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CosmosShapedQueryCompilingExpressionVisitorFactory : IShapedQueryCompilingExpressionVisitorFactory
+public class CosmosShapedQueryCompilingExpressionVisitorFactory
+    : IShapedQueryCompilingExpressionVisitorFactory
 {
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IQuerySqlGeneratorFactory _querySqlGeneratorFactory;
@@ -25,7 +26,8 @@ public class CosmosShapedQueryCompilingExpressionVisitorFactory : IShapedQueryCo
     public CosmosShapedQueryCompilingExpressionVisitorFactory(
         ShapedQueryCompilingExpressionVisitorDependencies dependencies,
         ISqlExpressionFactory sqlExpressionFactory,
-        IQuerySqlGeneratorFactory querySqlGeneratorFactory)
+        IQuerySqlGeneratorFactory querySqlGeneratorFactory
+    )
     {
         Dependencies = dependencies;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -43,10 +45,13 @@ public class CosmosShapedQueryCompilingExpressionVisitorFactory : IShapedQueryCo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ShapedQueryCompilingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
-        => new CosmosShapedQueryCompilingExpressionVisitor(
+    public virtual ShapedQueryCompilingExpressionVisitor Create(
+        QueryCompilationContext queryCompilationContext
+    ) =>
+        new CosmosShapedQueryCompilingExpressionVisitor(
             Dependencies,
             (CosmosQueryCompilationContext)queryCompilationContext,
             _sqlExpressionFactory,
-            _querySqlGeneratorFactory);
+            _querySqlGeneratorFactory
+        );
 }

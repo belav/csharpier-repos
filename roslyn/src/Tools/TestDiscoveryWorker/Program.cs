@@ -32,14 +32,13 @@ string? output;
 do
 {
     output = await sr.ReadLineAsync().ConfigureAwait(false);
-}
-while (!(output?.StartsWith("ASSEMBLY", StringComparison.OrdinalIgnoreCase) == true));
+} while (!(output?.StartsWith("ASSEMBLY", StringComparison.OrdinalIgnoreCase) == true));
 
 if ((output = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
 {
     var assemblyFileName = output;
 
-#if NET6_0_OR_GREATER   
+#if NET6_0_OR_GREATER
     var resolver = new System.Runtime.Loader.AssemblyDependencyResolver(assemblyFileName);
     System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += (context, assemblyName) =>
     {
@@ -52,12 +51,18 @@ if ((output = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
         return null;
     };
 #endif
-    using var xunit = new XunitFrontController(AppDomainSupport.IfAvailable, assemblyFileName, shadowCopy: false);
+    using var xunit = new XunitFrontController(
+        AppDomainSupport.IfAvailable,
+        assemblyFileName,
+        shadowCopy: false
+    );
     var configuration = ConfigReader.Load(assemblyFileName);
     var sink = new Sink();
-    xunit.Find(includeSourceInformation: false,
-               messageSink: sink,
-               discoveryOptions: TestFrameworkOptions.ForDiscovery(configuration));
+    xunit.Find(
+        includeSourceInformation: false,
+        messageSink: sink,
+        discoveryOptions: TestFrameworkOptions.ForDiscovery(configuration)
+    );
 
     var testsToWrite = new HashSet<string>();
     await foreach (var fullyQualifiedName in sink.GetTestCaseNamesAsync())
@@ -67,14 +72,24 @@ if ((output = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
 
     if (sink.AnyWriteFailures)
     {
-        await Console.Error.WriteLineAsync($"Channel failed to write for '{assemblyFileName}'").ConfigureAwait(false);
+        await Console.Error
+            .WriteLineAsync($"Channel failed to write for '{assemblyFileName}'")
+            .ConfigureAwait(false);
         return ExitFailure;
     }
 
 #if NET6_0_OR_GREATER
-    await Console.Out.WriteLineAsync($"Discovered {testsToWrite.Count} tests in {Path.GetFileName(assemblyFileName)} (.NET Core)").ConfigureAwait(false);
+    await Console.Out
+        .WriteLineAsync(
+            $"Discovered {testsToWrite.Count} tests in {Path.GetFileName(assemblyFileName)} (.NET Core)"
+        )
+        .ConfigureAwait(false);
 #else
-    await Console.Out.WriteLineAsync($"Discovered {testsToWrite.Count} tests in {Path.GetFileName(assemblyFileName)} (.NET Framework)").ConfigureAwait(false);
+    await Console.Out
+        .WriteLineAsync(
+            $"Discovered {testsToWrite.Count} tests in {Path.GetFileName(assemblyFileName)} (.NET Framework)"
+        )
+        .ConfigureAwait(false);
 #endif
 
     var directory = Path.GetDirectoryName(assemblyFileName);
@@ -124,7 +139,8 @@ internal sealed class Sink : IMessageSink
 
     private void OnTestDiscovered(ITestCaseDiscoveryMessage testCaseDiscovered)
     {
-        var fullName = $"{testCaseDiscovered.TestCase.TestMethod.TestClass.Class.Name}.{testCaseDiscovered.TestCase.TestMethod.Method.Name}";
+        var fullName =
+            $"{testCaseDiscovered.TestCase.TestMethod.TestClass.Class.Name}.{testCaseDiscovered.TestCase.TestMethod.Method.Name}";
         // this shouldn't happen as our channel is unbounded but we are Paranoid Coding™️
         if (!_channel.Writer.TryWrite(fullName))
         {

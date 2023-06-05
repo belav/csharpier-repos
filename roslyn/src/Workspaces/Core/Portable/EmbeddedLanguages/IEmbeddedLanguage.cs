@@ -9,7 +9,5 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
     /// <summary>
     /// Services related to a specific embedded language.
     /// </summary>
-    internal interface IEmbeddedLanguage
-    {
-    }
+    internal interface IEmbeddedLanguage { }
 }

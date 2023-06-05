@@ -28,7 +28,8 @@ public record RelationalDatabaseFacadeDependencies : IRelationalDatabaseFacadeDe
         IRelationalConnection relationalConnection,
         IRawSqlCommandBuilder rawSqlCommandBuilder,
         ICoreSingletonOptions coreOptions,
-        IAsyncQueryProvider queryProvider)
+        IAsyncQueryProvider queryProvider
+    )
     {
         TransactionManager = transactionManager;
         DatabaseCreator = databaseCreator;
@@ -91,8 +92,8 @@ public record RelationalDatabaseFacadeDependencies : IRelationalDatabaseFacadeDe
     /// </summary>
     public virtual IRelationalCommandDiagnosticsLogger CommandLogger { get; init; }
 
-    IDiagnosticsLogger<DbLoggerCategory.Database.Command> IDatabaseFacadeDependencies.CommandLogger
-        => CommandLogger;
+    IDiagnosticsLogger<DbLoggerCategory.Database.Command> IDatabaseFacadeDependencies.CommandLogger =>
+        CommandLogger;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

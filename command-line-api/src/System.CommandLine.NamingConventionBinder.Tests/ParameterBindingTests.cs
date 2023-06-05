@@ -39,7 +39,7 @@ public class ParameterBindingTests
         boundName.Should().Be("Gandalf");
         boundAge.Should().Be(425);
     }
-    
+
     [Fact]
     public async Task Method_parameters_on_the_invoked_method_can_be_bound_to_hyphenated_option_names()
     {
@@ -50,10 +50,7 @@ public class ParameterBindingTests
             boundFirstName = firstName;
         }
 
-        var command = new Command("command")
-        {
-            new Option<string>("--first-name")
-        };
+        var command = new Command("command") { new Option<string>("--first-name") };
         command.Handler = CommandHandler.Create<string>(Execute);
 
         await command.InvokeAsync("command --first-name Gandalf", _console);
@@ -145,11 +142,13 @@ public class ParameterBindingTests
             new Option<string>("--name"),
             new Option<int>("--age")
         };
-        command.Handler = CommandHandler.Create<string, int>((name, age) =>
-        {
-            boundName = name;
-            boundAge = age;
-        });
+        command.Handler = CommandHandler.Create<string, int>(
+            (name, age) =>
+            {
+                boundName = name;
+                boundAge = age;
+            }
+        );
 
         await command.InvokeAsync("command --age 425 --name Gandalf", _console);
 
@@ -162,10 +161,7 @@ public class ParameterBindingTests
     {
         int? boundAge = default;
 
-        var command = new Command("command")
-        {
-            new Option<int?>("--age")
-        };
+        var command = new Command("command") { new Option<int?>("--age") };
         command.Handler = CommandHandler.Create<int?>(age =>
         {
             boundAge = age;
@@ -182,10 +178,7 @@ public class ParameterBindingTests
         var wasCalled = false;
         int? boundAge = default;
 
-        var command = new Command("command")
-        {
-            new Option<int?>("--age")
-        };
+        var command = new Command("command") { new Option<int?>("--age") };
         command.Handler = CommandHandler.Create<int?>(age =>
         {
             wasCalled = true;
@@ -204,10 +197,7 @@ public class ParameterBindingTests
         DirectoryInfo boundDirectoryInfo = default;
         var tempPath = Path.GetTempPath();
 
-        var command = new Command("command")
-        {
-            new Option<DirectoryInfo>("--dir")
-        };
+        var command = new Command("command") { new Option<DirectoryInfo>("--dir") };
         command.Handler = CommandHandler.Create<DirectoryInfo>(dir =>
         {
             boundDirectoryInfo = dir;
@@ -225,11 +215,11 @@ public class ParameterBindingTests
 
         var option = new Option<int>("-x");
 
-        var command = new Command("command")
+        var command = new Command("command") { option };
+        command.Handler = CommandHandler.Create<ParseResult>(result =>
         {
-            option
-        };
-        command.Handler = CommandHandler.Create<ParseResult>(result => { boundParseResult = result; });
+            boundParseResult = result;
+        });
 
         await command.InvokeAsync("command -x 123", _console);
 
@@ -242,11 +232,11 @@ public class ParameterBindingTests
         BindingContext boundContext = default;
 
         var option = new Option<int>("-x");
-        var command = new Command("command")
+        var command = new Command("command") { option };
+        command.Handler = CommandHandler.Create<BindingContext>(context =>
         {
-            option
-        };
-        command.Handler = CommandHandler.Create<BindingContext>(context => { boundContext = context; });
+            boundContext = context;
+        });
 
         await command.InvokeAsync("command -x 123", _console);
 
@@ -256,11 +246,11 @@ public class ParameterBindingTests
     [Fact]
     public async Task Method_parameters_of_type_IConsole_receive_the_current_console_instance()
     {
-        var command = new Command("command")
+        var command = new Command("command") { new Option<int>("-x") };
+        command.Handler = CommandHandler.Create<IConsole>(console =>
         {
-            new Option<int>("-x")
-        };
-        command.Handler = CommandHandler.Create<IConsole>(console => { console.Out.Write("Hello!"); });
+            console.Out.Write("Hello!");
+        });
 
         await command.InvokeAsync("command", _console);
 
@@ -274,11 +264,11 @@ public class ParameterBindingTests
 
         var option = new Option<int>("-x");
 
-        var command = new Command("command")
+        var command = new Command("command") { option };
+        command.Handler = CommandHandler.Create<InvocationContext>(context =>
         {
-            option
-        };
-        command.Handler = CommandHandler.Create<InvocationContext>(context => { boundContext = context; });
+            boundContext = context;
+        });
 
         await command.InvokeAsync("command -x 123", _console);
 
@@ -329,7 +319,8 @@ public class ParameterBindingTests
         };
         command.Handler = CommandHandler.Create(
             testClass.GetType().GetMethod(nameof(ExecuteTestClass.Execute)),
-            testClass);
+            testClass
+        );
 
         await command.InvokeAsync("command --age 425 --name Gandalf", _console);
 
@@ -370,10 +361,7 @@ public class ParameterBindingTests
             boundFirstName = firstName;
         }
 
-        var command = new Command("command")
-        {
-            new Argument<string>("first-name")
-        };
+        var command = new Command("command") { new Argument<string>("first-name") };
         command.Handler = CommandHandler.Create<string>(Execute);
 
         await command.InvokeAsync("command Gandalf", _console);
@@ -431,10 +419,15 @@ public class ParameterBindingTests
     [InlineData(typeof(ConcreteTestCommandHandler), 42)]
     [InlineData(typeof(VirtualTestCommandHandler), 42)]
     [InlineData(typeof(OverridenVirtualTestCommandHandler), 41)]
-    public async Task Method_invoked_is_matching_to_the_interface_implementation(Type type, int expectedResult)
+    public async Task Method_invoked_is_matching_to_the_interface_implementation(
+        Type type,
+        int expectedResult
+    )
     {
         var command = new Command("command");
-        command.Handler = CommandHandler.Create(type.GetMethod(nameof(ICommandHandler.InvokeAsync)));
+        command.Handler = CommandHandler.Create(
+            type.GetMethod(nameof(ICommandHandler.InvokeAsync))
+        );
 
         var parser = new Parser(command);
 
@@ -447,29 +440,26 @@ public class ParameterBindingTests
     {
         public abstract Task<int> DoJobAsync();
 
-        public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+        public int Invoke(InvocationContext context) =>
+            InvokeAsync(context).GetAwaiter().GetResult();
 
-        public Task<int> InvokeAsync(InvocationContext context)
-            => DoJobAsync();
+        public Task<int> InvokeAsync(InvocationContext context) => DoJobAsync();
     }
 
     public sealed class ConcreteTestCommandHandler : AbstractTestCommandHandler
     {
-        public override Task<int> DoJobAsync()
-            => Task.FromResult(42);
+        public override Task<int> DoJobAsync() => Task.FromResult(42);
     }
 
     public class VirtualTestCommandHandler : ICommandHandler
     {
         public int Invoke(InvocationContext context) => 42;
 
-        public virtual Task<int> InvokeAsync(InvocationContext context)
-            => Task.FromResult(42);
+        public virtual Task<int> InvokeAsync(InvocationContext context) => Task.FromResult(42);
     }
 
     public class OverridenVirtualTestCommandHandler : VirtualTestCommandHandler
     {
-        public override Task<int> InvokeAsync(InvocationContext context)
-            => Task.FromResult(41);
+        public override Task<int> InvokeAsync(InvocationContext context) => Task.FromResult(41);
     }
 }

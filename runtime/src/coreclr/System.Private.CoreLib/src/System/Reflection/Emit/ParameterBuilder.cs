@@ -13,8 +13,11 @@ namespace System.Reflection.Emit
             TypeBuilder.SetConstantValue(
                 _methodBuilder.GetModuleBuilder(),
                 _token,
-                _position == 0 ? _methodBuilder.ReturnType : _methodBuilder.m_parameterTypes![_position - 1],
-                defaultValue);
+                _position == 0
+                    ? _methodBuilder.ReturnType
+                    : _methodBuilder.m_parameterTypes![_position - 1],
+                defaultValue
+            );
         }
 
         // Use this function if client decides to form the custom attribute blob themselves
@@ -27,7 +30,8 @@ namespace System.Reflection.Emit
                 _methodBuilder.GetModuleBuilder(),
                 _token,
                 ((ModuleBuilder)_methodBuilder.GetModule()).GetConstructorToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
         }
 
         // Use this function if client wishes to build CustomAttribute using CustomAttributeBuilder
@@ -35,14 +39,18 @@ namespace System.Reflection.Emit
         {
             ArgumentNullException.ThrowIfNull(customBuilder);
 
-            customBuilder.CreateCustomAttribute((ModuleBuilder)(_methodBuilder.GetModule()), _token);
+            customBuilder.CreateCustomAttribute(
+                (ModuleBuilder)(_methodBuilder.GetModule()),
+                _token
+            );
         }
 
         internal ParameterBuilder(
             MethodBuilder methodBuilder,
             int sequence,
             ParameterAttributes attributes,
-            string? paramName)            // can be NULL string
+            string? paramName
+        ) // can be NULL string
         {
             _position = sequence;
             _name = paramName;
@@ -50,11 +58,12 @@ namespace System.Reflection.Emit
             _attributes = attributes;
             ModuleBuilder module = _methodBuilder.GetModuleBuilder();
             _token = TypeBuilder.SetParamInfo(
-                        new QCallModule(ref module),
-                        _methodBuilder.MetadataToken,
-                        sequence,
-                        attributes,
-                        paramName);
+                new QCallModule(ref module),
+                _methodBuilder.MetadataToken,
+                sequence,
+                attributes,
+                paramName
+            );
         }
 
         internal int GetToken()

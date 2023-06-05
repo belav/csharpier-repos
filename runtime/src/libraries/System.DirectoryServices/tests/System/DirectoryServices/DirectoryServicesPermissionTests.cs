@@ -14,9 +14,14 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void DirectoryServicesPermissionCallMethods()
         {
-            DirectoryServicesPermission dsp = new DirectoryServicesPermission(new PermissionState());
+            DirectoryServicesPermission dsp = new DirectoryServicesPermission(
+                new PermissionState()
+            );
             DirectoryServicesPermission other = new DirectoryServicesPermission();
-            other = new DirectoryServicesPermission(default(DirectoryServicesPermissionAccess), "test");
+            other = new DirectoryServicesPermission(
+                default(DirectoryServicesPermissionAccess),
+                "test"
+            );
             DirectoryServicesPermissionEntryCollection pe = other.PermissionEntries;
         }
 

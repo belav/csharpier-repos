@@ -10,18 +10,27 @@ namespace ILCompiler.DependencyAnalysis
 {
     internal sealed class CanonicalDefinitionEETypeNode : EETypeNode
     {
-        public CanonicalDefinitionEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public CanonicalDefinitionEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(type.IsCanonicalDefinitionType(CanonicalFormKind.Any));
         }
 
         public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
+
         public override bool StaticDependenciesAreComputed => true;
         public override bool IsShareable => true;
-        protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory) => null;
+
+        protected override DependencyList ComputeNonRelocationBasedDependencies(
+            NodeFactory factory
+        ) => null;
+
         protected override int GCDescSize => 0;
 
-        protected internal override void ComputeOptionalEETypeFields(NodeFactory factory, bool relocsOnly)
+        protected internal override void ComputeOptionalEETypeFields(
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             if (_type.IsCanonicalDefinitionType(CanonicalFormKind.Universal))
             {
@@ -29,11 +38,20 @@ namespace ILCompiler.DependencyAnalysis
                 // Add pointer-size to the number of instance field bytes to consistently represents the boxed size.
                 uint numInstanceFieldBytes = 1 + (uint)factory.Target.PointerSize;
 
-                uint valueTypeFieldPadding = (uint)(MinimumObjectSize - factory.Target.PointerSize) - numInstanceFieldBytes;
-                uint valueTypeFieldPaddingEncoded = EETypeBuilderHelpers.ComputeValueTypeFieldPaddingFieldValue(valueTypeFieldPadding, 1, _type.Context.Target.PointerSize);
+                uint valueTypeFieldPadding =
+                    (uint)(MinimumObjectSize - factory.Target.PointerSize) - numInstanceFieldBytes;
+                uint valueTypeFieldPaddingEncoded =
+                    EETypeBuilderHelpers.ComputeValueTypeFieldPaddingFieldValue(
+                        valueTypeFieldPadding,
+                        1,
+                        _type.Context.Target.PointerSize
+                    );
                 Debug.Assert(valueTypeFieldPaddingEncoded != 0);
 
-                _optionalFieldsBuilder.SetFieldValue(EETypeOptionalFieldTag.ValueTypeFieldPadding, valueTypeFieldPaddingEncoded);
+                _optionalFieldsBuilder.SetFieldValue(
+                    EETypeOptionalFieldTag.ValueTypeFieldPadding,
+                    valueTypeFieldPaddingEncoded
+                );
             }
         }
 

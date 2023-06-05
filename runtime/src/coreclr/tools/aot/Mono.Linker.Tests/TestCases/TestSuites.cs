@@ -7,46 +7,47 @@ using Xunit;
 
 namespace Mono.Linker.Tests.TestCases
 {
-	public class All
-	{
+    public class All
+    {
+        [Theory]
+        [MemberData(nameof(TestDatabase.DataFlow), MemberType = typeof(TestDatabase))]
+        public void DataFlow(string t)
+        {
+            Run(t);
+        }
 
-		[Theory]
-		[MemberData(nameof(TestDatabase.DataFlow), MemberType = typeof(TestDatabase))]
-		public void DataFlow(string t)
-		{
-			Run(t);
-		}
+        [Theory]
+        [MemberData(nameof(TestDatabase.DynamicDependencies), MemberType = typeof(TestDatabase))]
+        public void DynamicDependencies(string t)
+        {
+            Run(t);
+        }
 
-		[Theory]
-		[MemberData (nameof (TestDatabase.DynamicDependencies), MemberType = typeof (TestDatabase))]
-		public void DynamicDependencies (string t)
-		{
-			Run (t);
-		}
+        [Theory]
+        [MemberData(nameof(TestDatabase.Repro), MemberType = typeof(TestDatabase))]
+        public void Repro(string t)
+        {
+            Run(t);
+        }
 
-		[Theory]
-		[MemberData (nameof (TestDatabase.Repro), MemberType = typeof (TestDatabase))]
-		public void Repro (string t)
-		{
-			Run (t);
-		}
+        [Theory]
+        [MemberData(nameof(TestDatabase.RequiresCapability), MemberType = typeof(TestDatabase))]
+        public void RequiresCapability(string t)
+        {
+            Run(t);
+        }
 
-		[Theory]
-		[MemberData(nameof(TestDatabase.RequiresCapability), MemberType = typeof(TestDatabase))]
-		public void RequiresCapability(string t)
-		{
-			Run(t);
-		}
-
-		protected virtual void Run(string testName)
-		{
-			TestCase testCase = TestDatabase.GetTestCaseFromName(testName) ?? throw new InvalidOperationException($"Unknown test {testName}");
-			var runner = new TestRunner(new ObjectFactory());
-			var linkedResult = runner.Run(testCase);
-			if (linkedResult != null)
-			{
-				new ResultChecker().Check(linkedResult);
-			}
-		}
-	}
+        protected virtual void Run(string testName)
+        {
+            TestCase testCase =
+                TestDatabase.GetTestCaseFromName(testName)
+                ?? throw new InvalidOperationException($"Unknown test {testName}");
+            var runner = new TestRunner(new ObjectFactory());
+            var linkedResult = runner.Run(testCase);
+            if (linkedResult != null)
+            {
+                new ResultChecker().Check(linkedResult);
+            }
+        }
+    }
 }

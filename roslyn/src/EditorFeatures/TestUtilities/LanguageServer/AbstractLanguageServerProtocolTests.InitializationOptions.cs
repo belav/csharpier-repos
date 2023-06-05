@@ -14,8 +14,10 @@ namespace Roslyn.Test.Utilities
         internal readonly record struct InitializationOptions()
         {
             internal string[] SourceGeneratedMarkups { get; init; } = Array.Empty<string>();
-            internal LSP.ClientCapabilities ClientCapabilities { get; init; } = new LSP.ClientCapabilities();
-            internal WellKnownLspServerKinds ServerKind { get; init; } = WellKnownLspServerKinds.AlwaysActiveVSLspServer;
+            internal LSP.ClientCapabilities ClientCapabilities { get; init; } =
+                new LSP.ClientCapabilities();
+            internal WellKnownLspServerKinds ServerKind { get; init; } =
+                WellKnownLspServerKinds.AlwaysActiveVSLspServer;
             internal Action<IGlobalOptionService>? OptionUpdater { get; init; } = null;
         }
     }

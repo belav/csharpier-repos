@@ -11,13 +11,21 @@ namespace System.CommandLine
 {
     internal static partial class Helpers
     {
-        public static InstructionSetSupport ConfigureInstructionSetSupport(string instructionSet, TargetArchitecture targetArchitecture, TargetOS targetOS,
-            string mustNotBeMessage, string invalidImplicationMessage)
+        public static InstructionSetSupport ConfigureInstructionSetSupport(
+            string instructionSet,
+            TargetArchitecture targetArchitecture,
+            TargetOS targetOS,
+            string mustNotBeMessage,
+            string invalidImplicationMessage
+        )
         {
             InstructionSetSupportBuilder instructionSetSupportBuilder = new(targetArchitecture);
 
             // Ready to run images are built with certain instruction set baselines
-            if ((targetArchitecture == TargetArchitecture.X86) || (targetArchitecture == TargetArchitecture.X64))
+            if (
+                (targetArchitecture == TargetArchitecture.X86)
+                || (targetArchitecture == TargetArchitecture.X64)
+            )
             {
                 instructionSetSupportBuilder.AddSupportedInstructionSet("sse2"); // Lower baselines included by implication
             }
@@ -50,12 +58,13 @@ namespace System.CommandLine
                     char firstChar = instructionSet[0];
                     if ((firstChar != '+') && (firstChar != '-'))
                     {
-                        instructionSet =  "+" + instructionSet;
+                        instructionSet = "+" + instructionSet;
                     }
                     instructionSetParams.Add(instructionSet);
                 }
 
-                Dictionary<string, bool> instructionSetSpecification = new Dictionary<string, bool>();
+                Dictionary<string, bool> instructionSetSpecification =
+                    new Dictionary<string, bool>();
                 foreach (string instructionSetSpecifier in instructionSetParams)
                 {
                     instructionSet = instructionSetSpecifier.Substring(1);
@@ -63,25 +72,48 @@ namespace System.CommandLine
                     bool enabled = instructionSetSpecifier[0] == '+' ? true : false;
                     if (enabled)
                     {
-                        if (!instructionSetSupportBuilder.AddSupportedInstructionSet(instructionSet))
-                            throw new CommandLineException(string.Format(mustNotBeMessage, instructionSet));
+                        if (
+                            !instructionSetSupportBuilder.AddSupportedInstructionSet(instructionSet)
+                        )
+                            throw new CommandLineException(
+                                string.Format(mustNotBeMessage, instructionSet)
+                            );
                     }
                     else
                     {
-                        if (!instructionSetSupportBuilder.RemoveInstructionSetSupport(instructionSet))
-                            throw new CommandLineException(string.Format(mustNotBeMessage, instructionSet));
+                        if (
+                            !instructionSetSupportBuilder.RemoveInstructionSetSupport(
+                                instructionSet
+                            )
+                        )
+                            throw new CommandLineException(
+                                string.Format(mustNotBeMessage, instructionSet)
+                            );
                     }
                 }
             }
 
-            instructionSetSupportBuilder.ComputeInstructionSetFlags(out var supportedInstructionSet, out var unsupportedInstructionSet,
+            instructionSetSupportBuilder.ComputeInstructionSetFlags(
+                out var supportedInstructionSet,
+                out var unsupportedInstructionSet,
                 (string specifiedInstructionSet, string impliedInstructionSet) =>
-                    throw new CommandLineException(string.Format(invalidImplicationMessage, specifiedInstructionSet, impliedInstructionSet)));
+                    throw new CommandLineException(
+                        string.Format(
+                            invalidImplicationMessage,
+                            specifiedInstructionSet,
+                            impliedInstructionSet
+                        )
+                    )
+            );
 
-            InstructionSetSupportBuilder optimisticInstructionSetSupportBuilder = new InstructionSetSupportBuilder(targetArchitecture);
+            InstructionSetSupportBuilder optimisticInstructionSetSupportBuilder =
+                new InstructionSetSupportBuilder(targetArchitecture);
 
             // Optimistically assume some instruction sets are present.
-            if (targetArchitecture == TargetArchitecture.X86 || targetArchitecture == TargetArchitecture.X64)
+            if (
+                targetArchitecture == TargetArchitecture.X86
+                || targetArchitecture == TargetArchitecture.X64
+            )
             {
                 // We set these hardware features as opportunistically enabled as most of hardware in the wild supports them.
                 // Note that we do not indicate support for AVX, or any other instruction set which uses the VEX encodings as
@@ -113,16 +145,24 @@ namespace System.CommandLine
                 optimisticInstructionSetSupportBuilder.AddSupportedInstructionSet("lse");
             }
 
-            optimisticInstructionSetSupportBuilder.ComputeInstructionSetFlags(out var optimisticInstructionSet, out _,
-                (string specifiedInstructionSet, string impliedInstructionSet) => throw new NotSupportedException());
+            optimisticInstructionSetSupportBuilder.ComputeInstructionSetFlags(
+                out var optimisticInstructionSet,
+                out _,
+                (string specifiedInstructionSet, string impliedInstructionSet) =>
+                    throw new NotSupportedException()
+            );
             optimisticInstructionSet.Remove(unsupportedInstructionSet);
             optimisticInstructionSet.Add(supportedInstructionSet);
 
-            return new InstructionSetSupport(supportedInstructionSet,
+            return new InstructionSetSupport(
+                supportedInstructionSet,
                 unsupportedInstructionSet,
                 optimisticInstructionSet,
-                InstructionSetSupportBuilder.GetNonSpecifiableInstructionSetsForArch(targetArchitecture),
-                targetArchitecture);
+                InstructionSetSupportBuilder.GetNonSpecifiableInstructionSetsForArch(
+                    targetArchitecture
+                ),
+                targetArchitecture
+            );
         }
     }
 }

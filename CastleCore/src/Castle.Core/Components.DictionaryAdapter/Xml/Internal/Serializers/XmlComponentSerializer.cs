@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -19,8 +19,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlComponentSerializer : XmlTypeSerializer
     {
-        public static readonly XmlComponentSerializer
-            Instance = new XmlComponentSerializer();
+        public static readonly XmlComponentSerializer Instance = new XmlComponentSerializer();
 
         protected XmlComponentSerializer() { }
 
@@ -34,20 +33,34 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get { return true; }
         }
 
-        public override object GetStub(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        public override object GetStub(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor
+        )
         {
             // TODO: Refactor
             var adapter = new XmlAdapter(node, XmlAdapter.For(parent).References);
             return parent.CreateChildAdapter(accessor.ClrType, adapter);
         }
 
-        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        public override object GetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor
+        )
         {
             var adapter = new XmlAdapter(node.Save(), XmlAdapter.For(parent).References);
             return parent.CreateChildAdapter(node.ClrType, adapter);
         }
 
-        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        public override void SetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor,
+            object oldValue,
+            ref object value
+        )
         {
             // Require a dictionary adapter
             var source = value as IDictionaryAdapter;
@@ -63,7 +76,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var targetAdapter = new XmlAdapter(node.Save(), XmlAdapter.For(parent).References);
             if (sourceAdapter != null)
                 targetAdapter.References.UnionWith(sourceAdapter.References);
-            var component = (IDictionaryAdapter) parent.CreateChildAdapter(node.ClrType, targetAdapter);
+            var component = (IDictionaryAdapter)
+                parent.CreateChildAdapter(node.ClrType, targetAdapter);
 
             // Copy value onto fresh component
             source.CopyTo(component);

@@ -21,10 +21,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal sealed class FindReferenceCache
     {
-        private static readonly ConditionalWeakTable<SemanticModel, FindReferenceCache> s_cache = new();
+        private static readonly ConditionalWeakTable<SemanticModel, FindReferenceCache> s_cache =
+            new();
 
-        public static FindReferenceCache GetCache(SemanticModel model)
-            => s_cache.GetValue(model, static model => new(model));
+        public static FindReferenceCache GetCache(SemanticModel model) =>
+            s_cache.GetValue(model, static model => new(model));
 
         private readonly SemanticModel _semanticModel;
 
@@ -37,21 +38,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private FindReferenceCache(SemanticModel semanticModel)
         {
             _semanticModel = semanticModel;
-            _identifierCache = new(comparer: semanticModel.Language switch
-            {
-                LanguageNames.VisualBasic => StringComparer.OrdinalIgnoreCase,
-                LanguageNames.CSharp => StringComparer.Ordinal,
-                _ => throw ExceptionUtilities.UnexpectedValue(semanticModel.Language)
-            });
+            _identifierCache = new(
+                comparer: semanticModel.Language switch
+                {
+                    LanguageNames.VisualBasic => StringComparer.OrdinalIgnoreCase,
+                    LanguageNames.CSharp => StringComparer.Ordinal,
+                    _ => throw ExceptionUtilities.UnexpectedValue(semanticModel.Language)
+                }
+            );
         }
 
         public SymbolInfo GetSymbolInfo(SyntaxNode node, CancellationToken cancellationToken)
         {
-            return _symbolInfoCache.GetOrAdd(node, static (n, arg) => arg._semanticModel.GetSymbolInfo(n, arg.cancellationToken), (_semanticModel, cancellationToken));
+            return _symbolInfoCache.GetOrAdd(
+                node,
+                static (n, arg) => arg._semanticModel.GetSymbolInfo(n, arg.cancellationToken),
+                (_semanticModel, cancellationToken)
+            );
         }
 
         public IAliasSymbol? GetAliasInfo(
-            ISemanticFactsService semanticFacts, SyntaxToken token, CancellationToken cancellationToken)
+            ISemanticFactsService semanticFacts,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             if (_aliasNameSet == null)
             {
@@ -68,18 +78,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public async Task<ImmutableArray<SyntaxToken>> FindMatchingIdentifierTokensAsync(
             Document document,
             string identifier,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // It's very costly to walk an entire tree.  So if the tree is simple and doesn't contain
             // any unicode escapes in it, then we do simple string matching to find the tokens.
-            var info = await SyntaxTreeIndex.GetRequiredIndexAsync(document, cancellationToken).ConfigureAwait(false);
+            var info = await SyntaxTreeIndex
+                .GetRequiredIndexAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             // If this document doesn't even contain this identifier (escaped or non-escaped) we don't have to search it at all.
             if (!info.ProbablyContainsIdentifier(identifier))
                 return ImmutableArray<SyntaxToken>.Empty;
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await _semanticModel.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await _semanticModel.SyntaxTree
+                .GetRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // If the identifier was escaped in the file then we'll have to do a more involved search that actually
             // walks the root and checks all identifier tokens.
@@ -87,16 +102,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // otherwise, we can use the text of the document to quickly find candidates and test those directly.
             if (info.ProbablyContainsEscapedIdentifier(identifier))
             {
-                return _identifierCache.GetOrAdd(identifier, _ => FindMatchingIdentifierTokensFromTree());
+                return _identifierCache.GetOrAdd(
+                    identifier,
+                    _ => FindMatchingIdentifierTokensFromTree()
+                );
             }
             else
             {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                return _identifierCache.GetOrAdd(identifier, _ => FindMatchingIdentifierTokensFromText(text));
+                return _identifierCache.GetOrAdd(
+                    identifier,
+                    _ => FindMatchingIdentifierTokensFromText(text)
+                );
             }
 
-            bool IsMatch(SyntaxToken token)
-                => !token.IsMissing && syntaxFacts.IsIdentifier(token) && syntaxFacts.TextMatch(token.ValueText, identifier);
+            bool IsMatch(SyntaxToken token) =>
+                !token.IsMissing
+                && syntaxFacts.IsIdentifier(token)
+                && syntaxFacts.TextMatch(token.ValueText, identifier);
 
             ImmutableArray<SyntaxToken> FindMatchingIdentifierTokensFromTree()
             {
@@ -138,7 +161,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var result);
 
                 var index = 0;
-                while ((index = sourceText.IndexOf(identifier, index, syntaxFacts.IsCaseSensitive)) >= 0)
+                while (
+                    (index = sourceText.IndexOf(identifier, index, syntaxFacts.IsCaseSensitive))
+                    >= 0
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -157,28 +183,44 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         public IEnumerable<SyntaxToken> GetConstructorInitializerTokens(
-            ISyntaxFactsService syntaxFacts, SyntaxNode root, CancellationToken cancellationToken)
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        )
         {
             // this one will only get called when we know given document contains constructor initializer.
             // no reason to use text to check whether it exist first.
             if (_constructorInitializerCache.IsDefault)
             {
-                var initializers = GetConstructorInitializerTokensWorker(syntaxFacts, root, cancellationToken);
-                ImmutableInterlocked.InterlockedInitialize(ref _constructorInitializerCache, initializers);
+                var initializers = GetConstructorInitializerTokensWorker(
+                    syntaxFacts,
+                    root,
+                    cancellationToken
+                );
+                ImmutableInterlocked.InterlockedInitialize(
+                    ref _constructorInitializerCache,
+                    initializers
+                );
             }
 
             return _constructorInitializerCache;
         }
 
         private static ImmutableArray<SyntaxToken> GetConstructorInitializerTokensWorker(
-            ISyntaxFactsService syntaxFacts, SyntaxNode root, CancellationToken cancellationToken)
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var initializers);
             foreach (var constructor in syntaxFacts.GetConstructors(root, cancellationToken))
             {
                 foreach (var token in constructor.DescendantTokens(descendIntoTrivia: false))
                 {
-                    if (syntaxFacts.IsThisConstructorInitializer(token) || syntaxFacts.IsBaseConstructorInitializer(token))
+                    if (
+                        syntaxFacts.IsThisConstructorInitializer(token)
+                        || syntaxFacts.IsBaseConstructorInitializer(token)
+                    )
                         initializers.Add(token);
                 }
             }

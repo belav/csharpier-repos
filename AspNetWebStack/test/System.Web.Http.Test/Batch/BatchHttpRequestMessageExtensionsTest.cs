@@ -44,11 +44,16 @@ namespace System.Web.Http.Batch
                 subRequest.SetRequestContext(expectedOriginalContext);
 
                 // Act
-                BatchHttpRequestMessageExtensions.CopyBatchRequestProperties(subRequest, batchRequest);
+                BatchHttpRequestMessageExtensions.CopyBatchRequestProperties(
+                    subRequest,
+                    batchRequest
+                );
 
                 // Assert
                 HttpRequestContext context = subRequest.GetRequestContext();
-                BatchHttpRequestContext typedContext = Assert.IsType<BatchHttpRequestContext>(context);
+                BatchHttpRequestContext typedContext = Assert.IsType<BatchHttpRequestContext>(
+                    context
+                );
                 Assert.Same(expectedOriginalContext, typedContext.BatchContext);
             }
         }
@@ -63,7 +68,10 @@ namespace System.Web.Http.Batch
                 subRequest.SetRequestContext(new HttpRequestContext());
 
                 // Act
-                BatchHttpRequestMessageExtensions.CopyBatchRequestProperties(subRequest, batchRequest);
+                BatchHttpRequestMessageExtensions.CopyBatchRequestProperties(
+                    subRequest,
+                    batchRequest
+                );
 
                 // Assert
                 HttpRequestContext context = subRequest.GetRequestContext();

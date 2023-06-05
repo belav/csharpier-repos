@@ -24,15 +24,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// </summary>
             public StateKind StateKind
             {
-                get
-                {
-                    return (StateKind)Volatile.Read(ref _stateKind);
-                }
-
-                private set
-                {
-                    _stateKind = (int)value;
-                }
+                get { return (StateKind)Volatile.Read(ref _stateKind); }
+                private set { _stateKind = (int)value; }
             }
 
             /// <summary>
@@ -40,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// </summary>
             public HashSet<AnalyzerAction> ProcessedActions { get; }
 
-            public static readonly AnalyzerStateData FullyProcessedInstance = CreateFullyProcessedInstance();
+            public static readonly AnalyzerStateData FullyProcessedInstance =
+                CreateFullyProcessedInstance();
 
             public AnalyzerStateData()
             {

@@ -36,10 +36,13 @@ namespace Samples.CS
 
             return new ScriptReference[] { reference };
         }
-        
+
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl)
         {
-            ScriptBehaviorDescriptor descriptor = new ScriptBehaviorDescriptor("Samples.FocusBehavior", targetControl.ClientID);
+            ScriptBehaviorDescriptor descriptor = new ScriptBehaviorDescriptor(
+                "Samples.FocusBehavior",
+                targetControl.ClientID
+            );
             descriptor.AddProperty("highlightCssClass", this.HighlightCssClass);
             descriptor.AddProperty("nohighlightCssClass", this.NoHighlightCssClass);
 

@@ -24,7 +24,8 @@ public class SqlServerQueryCompilationContextFactory : IQueryCompilationContextF
     public SqlServerQueryCompilationContextFactory(
         QueryCompilationContextDependencies dependencies,
         RelationalQueryCompilationContextDependencies relationalDependencies,
-        ISqlServerConnection sqlServerConnection)
+        ISqlServerConnection sqlServerConnection
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -47,7 +48,11 @@ public class SqlServerQueryCompilationContextFactory : IQueryCompilationContextF
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryCompilationContext Create(bool async)
-        => new SqlServerQueryCompilationContext(
-            Dependencies, RelationalDependencies, async, _sqlServerConnection.IsMultipleActiveResultSetsEnabled);
+    public virtual QueryCompilationContext Create(bool async) =>
+        new SqlServerQueryCompilationContext(
+            Dependencies,
+            RelationalDependencies,
+            async,
+            _sqlServerConnection.IsMultipleActiveResultSetsEnabled
+        );
 }

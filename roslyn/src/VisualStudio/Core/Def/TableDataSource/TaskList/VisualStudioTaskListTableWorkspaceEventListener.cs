@@ -14,7 +14,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     [ExportEventListener(WellKnownEventListeners.TaskListProvider, WorkspaceKind.Host), Shared]
-    internal class VisualStudioTaskListTableWorkspaceEventListener : IEventListener<ITaskListProvider>
+    internal class VisualStudioTaskListTableWorkspaceEventListener
+        : IEventListener<ITaskListProvider>
     {
         internal const string IdentifierString = nameof(VisualStudioTaskListTable);
 
@@ -23,19 +24,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioTaskListTableWorkspaceEventListener(IThreadingContext threadingContext, ITableManagerProvider tableManagerProvider)
+        public VisualStudioTaskListTableWorkspaceEventListener(
+            IThreadingContext threadingContext,
+            ITableManagerProvider tableManagerProvider
+        )
         {
             _threadingContext = threadingContext;
             _tableManagerProvider = tableManagerProvider;
         }
 
-        public void StartListening(Workspace workspace, ITaskListProvider service)
-            => _ = new VisualStudioTaskListTable(workspace, _threadingContext, service, _tableManagerProvider);
+        public void StartListening(Workspace workspace, ITaskListProvider service) =>
+            _ = new VisualStudioTaskListTable(
+                workspace,
+                _threadingContext,
+                service,
+                _tableManagerProvider
+            );
 
         internal class VisualStudioTaskListTable : VisualStudioBaseTaskListTable
         {
             // internal for testing
-            internal VisualStudioTaskListTable(Workspace workspace, IThreadingContext threadingContext, ITaskListProvider taskProvider, ITableManagerProvider provider)
+            internal VisualStudioTaskListTable(
+                Workspace workspace,
+                IThreadingContext threadingContext,
+                ITaskListProvider taskProvider,
+                ITableManagerProvider provider
+            )
                 : base(workspace, threadingContext, taskProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();

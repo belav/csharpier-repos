@@ -5,12 +5,8 @@ using System.Web;
 
 namespace POS_Server.Models
 {
-    public class DashModel
-    {
+    public class DashModel { }
 
-
-
-    }
     public class TotalPurSale
     {
         public Nullable<long> branchCreatorId { get; set; }
@@ -20,8 +16,8 @@ namespace POS_Server.Models
         public int countPur { get; set; }
         public int countSale { get; set; }
         public int day { get; set; }
-
     }
+
     public class UserOnlineCount
     {
         //  public Nullable<long> branchId { get; set; }
@@ -54,22 +50,17 @@ namespace POS_Server.Models
         public short userisActive { get; set; }
         public byte isOnline { get; set; }
         public string image { get; set; }
-
     }
+
     public class BranchOnlineCount
     {
-
         public int branchOnline { get; set; }
         public int branchAll { get; set; }
         public int branchOffline { get; set; }
-
-
     }
 
     public class IUStorage
     {
-
-
         public string itemName { get; set; }
         public string unitName { get; set; }
         public long itemUnitId { get; set; }
@@ -78,25 +69,19 @@ namespace POS_Server.Models
         public string branchName { get; set; }
         public Nullable<long> branchId { get; set; }
         public long quantity { get; set; }
-
-
-
     }
 
     public class BranchInvoicedata
     {
-
         public long invoiceId { get; set; }
         public string invType { get; set; }
         public Nullable<System.DateTime> invDate { get; set; }
         public Nullable<long> branchCreatorId { get; set; }
         public string branchCreatorName { get; set; }
-
     }
+
     public class BranchInvoiceCount
     {
-
-
         public DateTime fromDate { get; set; }
         public DateTime toDate { get; set; }
         public Nullable<long> branchId { get; set; }
@@ -104,21 +89,16 @@ namespace POS_Server.Models
         public int count { get; set; }
         public int dateindex { get; set; }
         public string duration { get; set; }
-
-
     }
+
     public class BestOfCount
     {
         public List<BranchInvoiceCount> CountinMonthsList { get; set; }
         public List<BranchInvoiceCount> CountinDaysList { get; set; }
         public List<BranchInvoiceCount> CountinHoursList { get; set; }
 
-
         public Nullable<long> branchId { get; set; }
         public string branchName { get; set; }
-
-
-
     }
 
     public class CountByInvType
@@ -129,8 +109,8 @@ namespace POS_Server.Models
         public int dhallCount { get; set; }
         public int selfCount { get; set; }
         public int tawayCount { get; set; }
-
     }
+
     public class BranchBalance
     {
         public string branchName { get; set; }
@@ -139,6 +119,5 @@ namespace POS_Server.Models
         public string branchType { get; set; }
         public string branchCode { get; set; }
         public byte banchIsActive { get; set; }
-
     }
 }

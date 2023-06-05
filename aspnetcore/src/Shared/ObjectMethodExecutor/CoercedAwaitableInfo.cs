@@ -22,7 +22,11 @@ internal readonly struct CoercedAwaitableInfo
         CoercerResultType = null;
     }
 
-    public CoercedAwaitableInfo(Expression coercerExpression, Type coercerResultType, AwaitableInfo coercedAwaitableInfo)
+    public CoercedAwaitableInfo(
+        Expression coercerExpression,
+        Type coercerResultType,
+        AwaitableInfo coercedAwaitableInfo
+    )
     {
         CoercerExpression = coercerExpression;
         CoercerResultType = coercerResultType;
@@ -30,8 +34,15 @@ internal readonly struct CoercedAwaitableInfo
     }
 
     public static bool IsTypeAwaitable(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods | DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type,
-        out CoercedAwaitableInfo info)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+                | DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+            Type type,
+        out CoercedAwaitableInfo info
+    )
     {
         if (AwaitableInfo.IsTypeAwaitable(type, out var directlyAwaitableInfo))
         {
@@ -41,13 +52,21 @@ internal readonly struct CoercedAwaitableInfo
 
         // It's not directly awaitable, but maybe we can coerce it.
         // Currently we support coercing FSharpAsync<T>.
-        if (ObjectMethodExecutorFSharpSupport.TryBuildCoercerFromFSharpAsyncToAwaitable(type,
-            out var coercerExpression,
-            out var coercerResultType))
+        if (
+            ObjectMethodExecutorFSharpSupport.TryBuildCoercerFromFSharpAsyncToAwaitable(
+                type,
+                out var coercerExpression,
+                out var coercerResultType
+            )
+        )
         {
             if (AwaitableInfo.IsTypeAwaitable(coercerResultType, out var coercedAwaitableInfo))
             {
-                info = new CoercedAwaitableInfo(coercerExpression, coercerResultType, coercedAwaitableInfo);
+                info = new CoercedAwaitableInfo(
+                    coercerExpression,
+                    coercerResultType,
+                    coercedAwaitableInfo
+                );
                 return true;
             }
         }

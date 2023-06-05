@@ -11,22 +11,20 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     {
         private class NoOpDocumentTrackingService : IDocumentTrackingService
         {
-            public static readonly IDocumentTrackingService Instance = new NoOpDocumentTrackingService();
+            public static readonly IDocumentTrackingService Instance =
+                new NoOpDocumentTrackingService();
 
-            private NoOpDocumentTrackingService()
-            {
-            }
+            private NoOpDocumentTrackingService() { }
 
 #pragma warning disable CS0067
             public event EventHandler<DocumentId>? ActiveDocumentChanged;
             public event EventHandler<EventArgs>? NonRoslynBufferTextChanged;
 #pragma warning restore CS0067
 
-            public ImmutableArray<DocumentId> GetVisibleDocuments()
-                => ImmutableArray<DocumentId>.Empty;
+            public ImmutableArray<DocumentId> GetVisibleDocuments() =>
+                ImmutableArray<DocumentId>.Empty;
 
-            public DocumentId? TryGetActiveDocument()
-                => null;
+            public DocumentId? TryGetActiveDocument() => null;
         }
     }
 }

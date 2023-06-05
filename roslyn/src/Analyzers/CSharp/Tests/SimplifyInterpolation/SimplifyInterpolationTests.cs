@@ -18,177 +18,193 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyInterpolation)]
-    public partial class SimplifyInterpolationTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyInterpolationTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyInterpolationTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyInterpolationDiagnosticAnalyzer(), new CSharpSimplifyInterpolationCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyInterpolationDiagnosticAnalyzer(),
+                new CSharpSimplifyInterpolationCodeFixProvider()
+            );
 
         [Fact]
         public async Task SubsequentUnnecessarySpansDoNotRepeatTheSmartTag()
         {
-            var parameters = new TestParameters(retainNonFixableDiagnostics: true, includeDiagnosticsOutsideSelection: true);
+            var parameters = new TestParameters(
+                retainNonFixableDiagnostics: true,
+                includeDiagnosticsOutsideSelection: true
+            );
 
-            using var workspace = CreateWorkspaceFromOptions(@"class C
+            using var workspace = CreateWorkspaceFromOptions(
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix"";
     }
-}", parameters);
+}",
+                parameters
+            );
 
             var diagnostics = await GetDiagnosticsWorkerAsync(workspace, parameters);
 
             Assert.Equal(
-                new[] {
-                    ("IDE0071", DiagnosticSeverity.Info),
-                },
-                diagnostics.Select(d => (d.Descriptor.Id, d.Severity)));
+                new[] { ("IDE0071", DiagnosticSeverity.Info), },
+                diagnostics.Select(d => (d.Descriptor.Id, d.Severity))
+            );
         }
 
         [Fact]
         public async Task ToStringWithNoParameter()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString()|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithParameter()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString(""|}g{|Unnecessary:"")|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(int someValue)
     {
         _ = $""prefix {someValue:g} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithEscapeSequences()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString(""|}\\d \""d\""{|Unnecessary:"")|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue:\\d \""d\""} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithVerbatimEscapeSequencesInsideVerbatimInterpolatedString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $@""prefix {someValue{|Unnecessary:[||].ToString(@""|}\d """"d""""{|Unnecessary:"")|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $@""prefix {someValue:\d """"d""""} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithVerbatimEscapeSequencesInsideNonVerbatimInterpolatedString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString(@""|}\d """"d""""{|Unnecessary:"")|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue:\\d \""d\""} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithNonVerbatimEscapeSequencesInsideVerbatimInterpolatedString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $@""prefix {someValue{|Unnecessary:[||].ToString(""|}\\d \""d\""{|Unnecessary:"")|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $@""prefix {someValue:\d """"d""""} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithStringConstantParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         const string someConst = ""some format code"";
         _ = $""prefix {someValue[||].ToString(someConst)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithCharacterLiteralParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(C someValue)
     {
@@ -196,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
     }
 
     public string ToString(object obj) => null;
-}");
+}"
+            );
         }
 
         [Fact]
@@ -205,13 +222,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
             // (If someone is explicitly specifying culture, an implicit form should not be encouraged.)
 
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue[||].ToString(""some format code"", System.Globalization.CultureInfo.CurrentCulture)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -220,153 +238,161 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
             // Invariance remains explicit, so this is okay.
 
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.CultureInfo.InvariantCulture)|}} suffix"");
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue} suffix"");
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task DateTimeFormatInfoInvariantInfoIsRecognized()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.DateTimeFormatInfo.InvariantInfo)|}} suffix"");
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue} suffix"");
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NumberFormatInfoInvariantInfoIsRecognized()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(int someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue[||]{|Unnecessary:.ToString(System.Globalization.NumberFormatInfo.InvariantInfo)|}} suffix"");
     }
 }",
-@"class C
+                @"class C
 {
     void M(int someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue} suffix"");
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithInvariantCultureOutsideFormattableStringInvariant()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue[||].ToString(System.Globalization.CultureInfo.InvariantCulture)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithFormatAndInvariantCultureInsideFormattableStringInvariant()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue[||]{|Unnecessary:.ToString(""|}some format code{|Unnecessary:"", System.Globalization.CultureInfo.InvariantCulture)|}} suffix"");
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = System.FormattableString.Invariant($""prefix {someValue:some format code} suffix"");
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithFormatAndInvariantCultureOutsideFormattableStringInvariant()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.DateTime someValue)
     {
         _ = $""prefix {someValue[||].ToString(""some format code"", System.Globalization.CultureInfo.InvariantCulture)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWithIntegerLiteral()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].PadLeft(|}3{|Unnecessary:)|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWithIntegerLiteral()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,-3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWithComplexConstantExpression()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
@@ -374,87 +400,92 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         _ = $""prefix {someValue{|Unnecessary:[||].PadLeft(|}(byte)3.3 + someConstant{|Unnecessary:)|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         const int someConstant = 1;
         _ = $""prefix {someValue,(byte)3.3 + someConstant} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWithSpaceChar()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].PadLeft(|}3{|Unnecessary:, ' ')|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWithSpaceChar()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].PadRight(|}3{|Unnecessary:, ' ')|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,-3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWithNonSpaceChar()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadLeft(3, '\t')} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWithNonSpaceChar()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadRight(3, '\t')} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWithComplexConstantExpressionRequiringParentheses()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
@@ -462,322 +493,347 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
         _ = $""prefix {someValue{|Unnecessary:[||].PadRight(|}(byte)3.3 + someConstant{|Unnecessary:)|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         const int someConstant = 1;
         _ = $""prefix {someValue,-((byte)3.3 + someConstant)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithNoParameterWhenFormattingComponentIsSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].ToString():goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithStringLiteralParameterWhenFormattingComponentIsSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].ToString(""bar""):goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithNoParameterWhenAlignmentComponentIsSpecified()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString()|},3} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithNoParameterWhenBothComponentsAreSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].ToString(),3:goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithStringLiteralParameterWhenBothComponentsAreSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].ToString(""some format code""),3:goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWhenFormattingComponentIsSpecified()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadLeft(3):goo} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,3:goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWhenFormattingComponentIsSpecified()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadRight(3):goo} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,-3:goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWhenAlignmentComponentIsSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadLeft(3),3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWhenAlignmentComponentIsSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadRight(3),3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftWhenBothComponentsAreSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadLeft(3),3:goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadRightWhenBothComponentsAreSpecified()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue[||].PadRight(3),3:goo} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ToStringWithoutFormatThenPadLeft()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue{|Unnecessary:[||].ToString()|}{|Unnecessary:.PadLeft(|}3{|Unnecessary:)|}} suffix"";
     }
-}", @"class C
+}",
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue,3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftThenToStringWithoutFormat()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|}} suffix"";
     }
-}", @"class C
+}",
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftThenToStringWithoutFormatWhenAlignmentComponentIsSpecified()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3){|Unnecessary:[||].ToString()|},3} suffix"";
     }
-}", @"class C
+}",
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3),3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftThenPadRight_WithoutAlignment()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3){|Unnecessary:[||].PadRight(|}3{|Unnecessary:)|}} suffix"";
     }
-}", @"class C
+}",
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3),-3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task PadLeftThenPadRight_WithAlignment()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M(string someValue)
     {
         _ = $""prefix {someValue.PadLeft(3)[||].PadRight(3),3} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41381, "https://github.com/dotnet/roslyn/issues/41381")]
         public async Task MissingOnImplicitToStringReceiver()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     override string ToString() => ""Goobar"";
 
     string GetViaInterpolation() => $""Hello {ToString[||]()}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41381, "https://github.com/dotnet/roslyn/issues/41381")]
         public async Task MissingOnImplicitToStringReceiverWithArg()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     string ToString(string arg) => ""Goobar"";
 
     string GetViaInterpolation() => $""Hello {ToString[||](""g"")}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41381, "https://github.com/dotnet/roslyn/issues/41381")]
         public async Task MissingOnStaticToStringReceiver()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public static string ToString() => ""Goobar"";
 
     string GetViaInterpolation() => $""Hello {ToString[||]()}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41381, "https://github.com/dotnet/roslyn/issues/41381")]
         public async Task MissingOnStaticToStringReceiverWithArg()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public static string ToString(string arg) => ""Goobar"";
 
     string GetViaInterpolation() => $""Hello {ToString[||](""g"")}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41381, "https://github.com/dotnet/roslyn/issues/41381")]
         public async Task MissingOnImplicitPadLeft()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public string PadLeft(int val) => """";
 
@@ -785,14 +841,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
     {
         _ = $""prefix {[||]PadLeft(3)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41381, "https://github.com/dotnet/roslyn/issues/41381")]
         public async Task MissingOnStaticPadLeft()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public static string PadLeft(int val) => """";
 
@@ -800,14 +857,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
     {
         _ = $""prefix {[||]PadLeft(3)} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42247, "https://github.com/dotnet/roslyn/issues/42247")]
         public async Task OnConstantAlignment1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -824,8 +882,7 @@ public static class Sample
         }
     }
 }",
-
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -841,14 +898,15 @@ public static class Sample
             Console.WriteLine ($""{i}.{str,-maxLength}"");
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42247, "https://github.com/dotnet/roslyn/issues/42247")]
         public async Task MissingOnNonConstantAlignment()
         {
             await TestMissingAsync(
-@"
+                @"
 using System;
 using System.Linq;
 
@@ -864,34 +922,37 @@ public static class Sample
             Console.WriteLine ($""{i}.{str[||].PadRight(maxLength, ' ')}"");
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42669, "https://github.com/dotnet/roslyn/issues/42669")]
         public async Task MissingOnBaseToString()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     public override string ToString() => $""Test: {base[||].ToString()}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42669, "https://github.com/dotnet/roslyn/issues/42669")]
         public async Task MissingOnBaseToStringEvenWhenNotOverridden()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     string M() => $""Test: {base[||].ToString()}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42669, "https://github.com/dotnet/roslyn/issues/42669")]
         public async Task MissingOnBaseToStringWithArgument()
         {
             await TestMissingAsync(
-@"class Base
+                @"class Base
 {
     public string ToString(string format) => format;
 }
@@ -899,28 +960,30 @@ public static class Sample
 class Derived : Base
 {
     public override string ToString() => $""Test: {base[||].ToString(""a"")}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42669, "https://github.com/dotnet/roslyn/issues/42669")]
         public async Task PadLeftSimplificationIsStillOfferedOnBaseToString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     public override string ToString() => $""Test: {base.ToString()[||].PadLeft(10)}"";
 }",
-@"class C
+                @"class C
 {
     public override string ToString() => $""Test: {base.ToString(),10}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42887, "https://github.com/dotnet/roslyn/issues/42887")]
         public async Task FormatComponentSimplificationIsNotOfferedOnNonIFormattableType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     string M(TypeNotImplementingIFormattable value) => $""Test: {value[||].ToString(""a"")}"";
 }
@@ -928,14 +991,15 @@ class Derived : Base
 struct TypeNotImplementingIFormattable
 {
     public string ToString(string format) => ""A"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42887, "https://github.com/dotnet/roslyn/issues/42887")]
         public async Task FormatComponentSimplificationIsOfferedOnIFormattableType()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -948,7 +1012,7 @@ struct TypeImplementingIFormattable : IFormattable
 
     string IFormattable.ToString(string format, IFormatProvider formatProvider) => ""B"";
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -960,14 +1024,15 @@ struct TypeImplementingIFormattable : IFormattable
     public string ToString(string format) => ""A"";
 
     string IFormattable.ToString(string format, IFormatProvider formatProvider) => ""B"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42887, "https://github.com/dotnet/roslyn/issues/42887")]
         public async Task ParameterlessToStringSimplificationIsStillOfferedOnNonIFormattableType()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     string M(TypeNotImplementingIFormattable value) => $""Test: {value[||].ToString()}"";
 }
@@ -976,7 +1041,7 @@ struct TypeNotImplementingIFormattable
 {
     public string ToString(string format) => ""A"";
 }",
-@"class C
+                @"class C
 {
     string M(TypeNotImplementingIFormattable value) => $""Test: {value}"";
 }
@@ -984,14 +1049,15 @@ struct TypeNotImplementingIFormattable
 struct TypeNotImplementingIFormattable
 {
     public string ToString(string format) => ""A"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42887, "https://github.com/dotnet/roslyn/issues/42887")]
         public async Task PadLeftSimplificationIsStillOfferedOnNonIFormattableType()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     string M(TypeNotImplementingIFormattable value) => $""Test: {value.ToString(""a"")[||].PadLeft(10)}"";
 }
@@ -1000,7 +1066,7 @@ struct TypeNotImplementingIFormattable
 {
     public string ToString(string format) => ""A"";
 }",
-@"class C
+                @"class C
 {
     string M(TypeNotImplementingIFormattable value) => $""Test: {value.ToString(""a""),10}"";
 }
@@ -1008,14 +1074,15 @@ struct TypeNotImplementingIFormattable
 struct TypeNotImplementingIFormattable
 {
     public string ToString(string format) => ""A"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42936, "https://github.com/dotnet/roslyn/issues/42936")]
         public async Task ToStringSimplificationIsNotOfferedOnRefStruct()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     string M(RefStruct someValue) => $""Test: {someValue[||].ToString()}"";
 }
@@ -1023,14 +1090,15 @@ struct TypeNotImplementingIFormattable
 ref struct RefStruct
 {
     public override string ToString() => ""A"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42936, "https://github.com/dotnet/roslyn/issues/42936")]
         public async Task PadLeftSimplificationIsStillOfferedOnRefStruct()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     string M(RefStruct someValue) => $""Test: {someValue.ToString()[||].PadLeft(10)}"";
 }
@@ -1039,7 +1107,7 @@ ref struct RefStruct
 {
     public override string ToString() => ""A"";
 }",
-@"class C
+                @"class C
 {
     string M(RefStruct someValue) => $""Test: {someValue.ToString(),10}"";
 }
@@ -1047,25 +1115,27 @@ ref struct RefStruct
 ref struct RefStruct
 {
     public override string ToString() => ""A"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46011, "https://github.com/dotnet/roslyn/issues/46011")]
         public async Task ShadowedToString()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public new string ToString() => ""Shadow"";
     static string M(C c) => $""{c[||].ToString()}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46011, "https://github.com/dotnet/roslyn/issues/46011")]
         public async Task OverridenShadowedToString()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     public new string ToString() => ""Shadow"";
 }
@@ -1074,14 +1144,15 @@ class B : C
 {
     public override string ToString() => ""OverrideShadow"";
     static string M(C c) => $""{c[||].ToString()}"";
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46011, "https://github.com/dotnet/roslyn/issues/46011")]
         public async Task DoubleOverridenToString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     public override string ToString() => ""Override"";
 }
@@ -1095,7 +1166,7 @@ class B : C
         _ = $""prefix {someValue{|Unnecessary:[||].ToString()|}} suffix"";
     }
 }",
-@"class C
+                @"class C
 {
     public override string ToString() => ""Override"";
 }
@@ -1108,67 +1179,71 @@ class B : C
     {
         _ = $""prefix {someValue} suffix"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(49647, "https://github.com/dotnet/roslyn/issues/49647")]
         public async Task ConditionalExpressionMustRemainParenthesizedWhenUsingParameterlessToString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(bool cond)
     {
         _ = $""{(cond ? 1 : 2){|Unnecessary:[||].ToString()|}}"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool cond)
     {
         _ = $""{(cond ? 1 : 2)}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(49647, "https://github.com/dotnet/roslyn/issues/49647")]
         public async Task ConditionalExpressionMustRemainParenthesizedWhenUsingParameterizedToString()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(bool cond)
     {
         _ = $""{(cond ? 1 : 2){|Unnecessary:[||].ToString(""|}g{|Unnecessary:"")|}}"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool cond)
     {
         _ = $""{(cond ? 1 : 2):g}"";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(49647, "https://github.com/dotnet/roslyn/issues/49647")]
         public async Task ConditionalExpressionMustRemainParenthesizedWhenUsingPadLeft()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M(bool cond)
     {
         _ = $""{(cond ? ""1"" : ""2""){|Unnecessary:[||].PadLeft(|}3{|Unnecessary:)|}}"";
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool cond)
     {
         _ = $""{(cond ? ""1"" : ""2""),3}"";
     }
-}");
+}"
+            );
         }
     }
 }

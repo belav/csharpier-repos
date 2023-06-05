@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,10 @@ namespace Castle.DynamicProxy
 
     public static class ProxyUtil
     {
-        private static readonly SynchronizedDictionary<Assembly, bool> internalsVisibleToDynamicProxy = new SynchronizedDictionary<Assembly, bool>();
+        private static readonly SynchronizedDictionary<
+            Assembly,
+            bool
+        > internalsVisibleToDynamicProxy = new SynchronizedDictionary<Assembly, bool>();
 
         /// <summary>
         ///   Creates a delegate of the specified type to a suitable `Invoke` method
@@ -56,22 +59,31 @@ namespace Castle.DynamicProxy
         /// </exception>
         public static Delegate CreateDelegateToMixin(object proxy, Type delegateType)
         {
-            if (proxy == null) throw new ArgumentNullException(nameof(proxy));
-            if (delegateType == null) throw new ArgumentNullException(nameof(delegateType));
-            if (!delegateType.IsDelegateType()) throw new ArgumentException("Type is not a delegate type.", nameof(delegateType));
+            if (proxy == null)
+                throw new ArgumentNullException(nameof(proxy));
+            if (delegateType == null)
+                throw new ArgumentNullException(nameof(delegateType));
+            if (!delegateType.IsDelegateType())
+                throw new ArgumentException("Type is not a delegate type.", nameof(delegateType));
 
             var invokeMethod = delegateType.GetMethod("Invoke");
-            var proxiedInvokeMethod =
-                proxy
+            var proxiedInvokeMethod = proxy
                 .GetType()
-                .GetMember("Invoke", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetMember(
+                    "Invoke",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )
                 .Cast<MethodInfo>()
-                .FirstOrDefault(m => MethodSignatureComparer.Instance.EqualParameters(m, invokeMethod));
+                .FirstOrDefault(
+                    m => MethodSignatureComparer.Instance.EqualParameters(m, invokeMethod)
+                );
 
             if (proxiedInvokeMethod == null)
             {
-                throw new MissingMethodException("The proxy does not have an Invoke method " +
-                                                 "that is compatible with the requested delegate type.");
+                throw new MissingMethodException(
+                    "The proxy does not have an Invoke method "
+                        + "that is compatible with the requested delegate type."
+                );
             }
             else
             {
@@ -159,11 +171,16 @@ namespace Castle.DynamicProxy
         /// <param name="asm">The assembly to inspect.</param>
         internal static bool AreInternalsVisibleToDynamicProxy(Assembly asm)
         {
-            return internalsVisibleToDynamicProxy.GetOrAdd(asm, a =>
-            {
-                var internalsVisibleTo = asm.GetCustomAttributes<InternalsVisibleToAttribute>();
-                return internalsVisibleTo.Any(attr => attr.AssemblyName.Contains(ModuleScope.DEFAULT_ASSEMBLY_NAME));
-            });
+            return internalsVisibleToDynamicProxy.GetOrAdd(
+                asm,
+                a =>
+                {
+                    var internalsVisibleTo = asm.GetCustomAttributes<InternalsVisibleToAttribute>();
+                    return internalsVisibleTo.Any(
+                        attr => attr.AssemblyName.Contains(ModuleScope.DEFAULT_ASSEMBLY_NAME)
+                    );
+                }
+            );
         }
 
         internal static bool IsAccessibleType(Type target)
@@ -175,7 +192,8 @@ namespace Castle.DynamicProxy
             }
 
             var isTargetNested = target.IsNested;
-            var isNestedAndInternal = isTargetNested && (target.IsNestedAssembly || target.IsNestedFamORAssem);
+            var isNestedAndInternal =
+                isTargetNested && (target.IsNestedAssembly || target.IsNestedFamORAssem);
             var isInternalNotNested = target.IsVisible == false && isTargetNested == false;
             var isInternal = isInternalNotNested || isNestedAndInternal;
             if (isInternal && AreInternalsVisibleToDynamicProxy(target.Assembly))
@@ -224,12 +242,14 @@ namespace Castle.DynamicProxy
             var containingType = inaccessibleMethod.DeclaringType;
             var targetAssembly = containingType.Assembly;
 
-            var messageFormat = "Can not create proxy for method {0} because it or its declaring type is not accessible. ";
+            var messageFormat =
+                "Can not create proxy for method {0} because it or its declaring type is not accessible. ";
 
-            var message = string.Format(messageFormat,
-                inaccessibleMethod);
+            var message = string.Format(messageFormat, inaccessibleMethod);
 
-            var instructions = ExceptionMessageBuilder.CreateInstructionsToMakeVisible(targetAssembly);
+            var instructions = ExceptionMessageBuilder.CreateInstructionsToMakeVisible(
+                targetAssembly
+            );
             return message + instructions;
         }
     }

@@ -20,6 +20,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
     {
         // The list of pipes that can be dispatched to (where we've confirmed the _pipeMessage)
         private readonly List<UvPipeHandle> _dispatchPipes = new List<UvPipeHandle>();
+
         // The list of pipes we've created but may not be part of _dispatchPipes
         private readonly List<UvPipeHandle> _createdPipes = new List<UvPipeHandle>();
         private int _dispatchIndex;
@@ -30,11 +31,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         // this message is passed to write2 because it must be non-zero-length,
         // but it has no other functional significance
-        private readonly ArraySegment<ArraySegment<byte>> _dummyMessage = new ArraySegment<ArraySegment<byte>>(new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 }) });
+        private readonly ArraySegment<ArraySegment<byte>> _dummyMessage = new ArraySegment<
+            ArraySegment<byte>
+        >(new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 }) });
 
-        public ListenerPrimary(LibuvTransportContext transportContext) : base(transportContext)
-        {
-        }
+        public ListenerPrimary(LibuvTransportContext transportContext)
+            : base(transportContext) { }
 
         /// <summary>
         /// For testing purposes.
@@ -47,14 +49,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             string pipeName,
             byte[] pipeMessage,
             EndPoint endPoint,
-            LibuvThread thread)
+            LibuvThread thread
+        )
         {
             _pipeName = pipeName;
             _pipeMessage = pipeMessage;
 
             if (_fileCompletionInfoPtr == IntPtr.Zero)
             {
-                var fileCompletionInfo = new FILE_COMPLETION_INFORMATION { Key = IntPtr.Zero, Port = IntPtr.Zero };
+                var fileCompletionInfo = new FILE_COMPLETION_INFORMATION
+                {
+                    Key = IntPtr.Zero,
+                    Port = IntPtr.Zero
+                };
                 _fileCompletionInfoPtr = Marshal.AllocHGlobal(Marshal.SizeOf(fileCompletionInfo));
                 Marshal.StructureToPtr(fileCompletionInfo, _fileCompletionInfoPtr, false);
             }
@@ -70,8 +77,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             ListenPipe.Init(Thread.Loop, Thread.QueueCloseHandle, false);
             ListenPipe.Bind(_pipeName);
 #pragma warning disable CS0618
-            ListenPipe.Listen(TransportContext.Options.Backlog,
-                (pipe, status, error, state) => ((ListenerPrimary)state).OnListenPipe(pipe, status, error), this);
+            ListenPipe.Listen(
+                TransportContext.Options.Backlog,
+                (pipe, status, error, state) =>
+                    ((ListenerPrimary)state).OnListenPipe(pipe, status, error),
+                this
+            );
 #pragma warning restore CS0618
         }
 
@@ -94,9 +105,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 // Ensure client sends _pipeMessage before adding pipe to _dispatchPipes.
                 var readContext = new PipeReadContext(this);
                 dispatchPipe.ReadStart(
-                    (handle, status2, state) => ((PipeReadContext)state).AllocCallback(handle, status2),
-                    (handle, status2, state) => ((PipeReadContext)state).ReadCallback(handle, status2),
-                    readContext);
+                    (handle, status2, state) =>
+                        ((PipeReadContext)state).AllocCallback(handle, status2),
+                    (handle, status2, state) =>
+                        ((PipeReadContext)state).ReadCallback(handle, status2),
+                    readContext
+                );
             }
             catch (UvException ex)
             {
@@ -129,7 +143,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                             write2.Dispose();
                             ((UvStreamHandle)state).Dispose();
                         },
-                        socket);
+                        socket
+                    );
                 }
                 catch (UvException)
                 {
@@ -155,8 +170,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             var socket = IntPtr.Zero;
             Thread.Loop.Libuv.uv_fileno(handle, ref socket);
 
-            if (NtSetInformationFile(socket, out statusBlock, _fileCompletionInfoPtr,
-                (uint)Marshal.SizeOf<FILE_COMPLETION_INFORMATION>(), FileReplaceCompletionInformation) == STATUS_INVALID_INFO_CLASS)
+            if (
+                NtSetInformationFile(
+                    socket,
+                    out statusBlock,
+                    _fileCompletionInfoPtr,
+                    (uint)Marshal.SizeOf<FILE_COMPLETION_INFORMATION>(),
+                    FileReplaceCompletionInformation
+                ) == STATUS_INVALID_INFO_CLASS
+            )
             {
                 // Replacing IOCP information is only supported on Windows 8.1 or newer
                 _tryDetachFromIOCP = false;
@@ -176,9 +198,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         }
 
         [DllImport("NtDll.dll")]
-        private static extern uint NtSetInformationFile(IntPtr FileHandle,
-                out IO_STATUS_BLOCK IoStatusBlock, IntPtr FileInformation, uint Length,
-                int FileInformationClass);
+        private static extern uint NtSetInformationFile(
+            IntPtr FileHandle,
+            out IO_STATUS_BLOCK IoStatusBlock,
+            IntPtr FileInformation,
+            uint Length,
+            int FileInformationClass
+        );
 
         public override async Task DisposeAsync()
         {
@@ -194,15 +220,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
             if (Thread.FatalError == null && ListenPipe != null)
             {
-                await Thread.PostAsync(listener =>
-                {
-                    listener.ListenPipe.Dispose();
+                await Thread
+                    .PostAsync(
+                        listener =>
+                        {
+                            listener.ListenPipe.Dispose();
 
-                    foreach (var pipe in listener._createdPipes)
-                    {
-                        pipe.Dispose();
-                    }
-                }, this).ConfigureAwait(false);
+                            foreach (var pipe in listener._createdPipes)
+                            {
+                                pipe.Dispose();
+                            }
+                        },
+                        this
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -223,9 +254,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 _bufPtr = _bufHandle.AddrOfPinnedObject();
             }
 
-            public LibuvFunctions.uv_buf_t AllocCallback(UvStreamHandle dispatchPipe, int suggestedSize)
+            public LibuvFunctions.uv_buf_t AllocCallback(
+                UvStreamHandle dispatchPipe,
+                int suggestedSize
+            )
             {
-                return dispatchPipe.Libuv.buf_init(_bufPtr + _bytesRead, _bufferLength - _bytesRead);
+                return dispatchPipe.Libuv.buf_init(
+                    _bufPtr + _bytesRead,
+                    _bufferLength - _bytesRead
+                );
             }
 
             public void ReadCallback(UvStreamHandle dispatchPipe, int status)

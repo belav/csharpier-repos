@@ -3,7 +3,10 @@
 
 internal enum NodeType
 {
-    True, False, Not, Other
+    True,
+    False,
+    Not,
+    Other
 }
 
 internal class Node
@@ -12,8 +15,12 @@ internal class Node
     public Node Child;
     public string name;
 
-    public Node(string s) { name = s; }
+    public Node(string s)
+    {
+        name = s;
+    }
 }
+
 internal class NodeFactory
 {
     public Node Conditional(Node condition, Node trueBranch, Node falseBranch)
@@ -25,9 +32,9 @@ internal class NodeFactory
             case NodeType.False:
                 return falseBranch;
             case NodeType.Not:
-                return this.Conditional(condition.Child, falseBranch, trueBranch);  // <-- tail recursion
+                return this.Conditional(condition.Child, falseBranch, trueBranch); // <-- tail recursion
         }
-        return falseBranch;  //<- should return the original trueBranch
+        return falseBranch; //<- should return the original trueBranch
     }
 
     private class Test_simple_repro

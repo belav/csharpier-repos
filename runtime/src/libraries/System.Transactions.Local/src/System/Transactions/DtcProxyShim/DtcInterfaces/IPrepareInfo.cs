@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms686533(v=vs.85)
-[ComImport, Guid("80c7bfd0-87ee-11ce-8081-0080c758527e"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    ComImport,
+    Guid("80c7bfd0-87ee-11ce-8081-0080c758527e"),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal interface IPrepareInfo
 {
     void GetPrepareInfoSize(out uint pcbPrepInfo);

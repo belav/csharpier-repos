@@ -25,7 +25,10 @@ public class ViewLocalizer : IViewLocalizer, IViewContextAware
     /// </summary>
     /// <param name="localizerFactory">The <see cref="IHtmlLocalizerFactory"/>.</param>
     /// <param name="hostingEnvironment">The <see cref="IWebHostEnvironment"/>.</param>
-    public ViewLocalizer(IHtmlLocalizerFactory localizerFactory, IWebHostEnvironment hostingEnvironment)
+    public ViewLocalizer(
+        IHtmlLocalizerFactory localizerFactory,
+        IWebHostEnvironment hostingEnvironment
+    )
     {
         if (localizerFactory == null)
         {
@@ -39,7 +42,9 @@ public class ViewLocalizer : IViewLocalizer, IViewContextAware
 
         if (string.IsNullOrEmpty(hostingEnvironment.ApplicationName))
         {
-            throw new InvalidOperationException($"{nameof(hostingEnvironment)}.ApplicationName must have a value.");
+            throw new InvalidOperationException(
+                $"{nameof(hostingEnvironment)}.ApplicationName must have a value."
+            );
         }
 
         _applicationName = hostingEnvironment.ApplicationName;
@@ -78,7 +83,8 @@ public class ViewLocalizer : IViewLocalizer, IViewContextAware
     public LocalizedString GetString(string name) => _localizer.GetString(name);
 
     /// <inheritdoc />
-    public LocalizedString GetString(string name, params object[] values) => _localizer.GetString(name, values);
+    public LocalizedString GetString(string name, params object[] values) =>
+        _localizer.GetString(name, values);
 
     /// <inheritdoc />
     public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures) =>

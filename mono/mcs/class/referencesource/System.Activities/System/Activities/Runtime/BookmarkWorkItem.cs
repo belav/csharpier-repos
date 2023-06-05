@@ -16,7 +16,13 @@ namespace System.Activities.Runtime
         Bookmark bookmark;
         object state;
 
-        public BookmarkWorkItem(ActivityExecutor executor, bool isExternal, BookmarkCallbackWrapper callbackWrapper, Bookmark bookmark, object value)
+        public BookmarkWorkItem(
+            ActivityExecutor executor,
+            bool isExternal,
+            BookmarkCallbackWrapper callbackWrapper,
+            Bookmark bookmark,
+            object value
+        )
             : this(callbackWrapper, bookmark, value)
         {
             if (isExternal)
@@ -27,7 +33,11 @@ namespace System.Activities.Runtime
         }
 
         // This ctor is only used by subclasses which make their own determination about no persist or not
-        protected BookmarkWorkItem(BookmarkCallbackWrapper callbackWrapper, Bookmark bookmark, object value)
+        protected BookmarkWorkItem(
+            BookmarkCallbackWrapper callbackWrapper,
+            Bookmark bookmark,
+            object value
+        )
             : base(callbackWrapper.ActivityInstance)
         {
             this.callbackWrapper = callbackWrapper;
@@ -60,7 +70,13 @@ namespace System.Activities.Runtime
         {
             if (TD.CompleteBookmarkWorkItemIsEnabled())
             {
-                TD.CompleteBookmarkWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, ActivityUtilities.GetTraceString(this.bookmark), ActivityUtilities.GetTraceString(this.bookmark.Scope));
+                TD.CompleteBookmarkWorkItem(
+                    this.ActivityInstance.Activity.GetType().ToString(),
+                    this.ActivityInstance.Activity.DisplayName,
+                    this.ActivityInstance.Id,
+                    ActivityUtilities.GetTraceString(this.bookmark),
+                    ActivityUtilities.GetTraceString(this.bookmark.Scope)
+                );
             }
         }
 
@@ -68,7 +84,13 @@ namespace System.Activities.Runtime
         {
             if (TD.ScheduleBookmarkWorkItemIsEnabled())
             {
-                TD.ScheduleBookmarkWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, ActivityUtilities.GetTraceString(this.bookmark), ActivityUtilities.GetTraceString(this.bookmark.Scope));
+                TD.ScheduleBookmarkWorkItem(
+                    this.ActivityInstance.Activity.GetType().ToString(),
+                    this.ActivityInstance.Activity.DisplayName,
+                    this.ActivityInstance.Id,
+                    ActivityUtilities.GetTraceString(this.bookmark),
+                    ActivityUtilities.GetTraceString(this.bookmark.Scope)
+                );
             }
         }
 
@@ -76,7 +98,13 @@ namespace System.Activities.Runtime
         {
             if (TD.StartBookmarkWorkItemIsEnabled())
             {
-                TD.StartBookmarkWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, ActivityUtilities.GetTraceString(this.bookmark), ActivityUtilities.GetTraceString(this.bookmark.Scope));
+                TD.StartBookmarkWorkItem(
+                    this.ActivityInstance.Activity.GetType().ToString(),
+                    this.ActivityInstance.Activity.DisplayName,
+                    this.ActivityInstance.Id,
+                    ActivityUtilities.GetTraceString(this.bookmark),
+                    ActivityUtilities.GetTraceString(this.bookmark.Scope)
+                );
             }
         }
 

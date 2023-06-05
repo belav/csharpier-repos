@@ -17,7 +17,8 @@ public class SelectExpression : Expression
 {
     private const string RootAlias = "c";
 
-    private IDictionary<ProjectionMember, Expression> _projectionMapping = new Dictionary<ProjectionMember, Expression>();
+    private IDictionary<ProjectionMember, Expression> _projectionMapping =
+        new Dictionary<ProjectionMember, Expression>();
     private readonly List<ProjectionExpression> _projection = new();
     private readonly List<OrderingExpression> _orderings = new();
 
@@ -34,7 +35,10 @@ public class SelectExpression : Expression
     {
         Container = entityType.GetContainer();
         FromExpression = new RootReferenceExpression(entityType, RootAlias);
-        _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(entityType, FromExpression);
+        _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(
+            entityType,
+            FromExpression
+        );
     }
 
     /// <summary>
@@ -48,7 +52,9 @@ public class SelectExpression : Expression
         Container = entityType.GetContainer();
         FromExpression = new FromSqlExpression(entityType, RootAlias, sql, argument);
         _projectionMapping[new ProjectionMember()] = new EntityProjectionExpression(
-            entityType, new RootReferenceExpression(entityType, RootAlias));
+            entityType,
+            new RootReferenceExpression(entityType, RootAlias)
+        );
     }
 
     /// <summary>
@@ -60,7 +66,8 @@ public class SelectExpression : Expression
     public SelectExpression(
         List<ProjectionExpression> projections,
         RootReferenceExpression fromExpression,
-        List<OrderingExpression> orderings)
+        List<OrderingExpression> orderings
+    )
     {
         _projection = projections;
         FromExpression = fromExpression;
@@ -71,7 +78,8 @@ public class SelectExpression : Expression
         List<ProjectionExpression> projections,
         RootReferenceExpression fromExpression,
         List<OrderingExpression> orderings,
-        string container)
+        string container
+    )
         : this(projections, fromExpression, orderings)
     {
         Container = container;
@@ -91,8 +99,7 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<ProjectionExpression> Projection
-        => _projection;
+    public virtual IReadOnlyList<ProjectionExpression> Projection => _projection;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -108,8 +115,7 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<OrderingExpression> Orderings
-        => _orderings;
+    public virtual IReadOnlyList<OrderingExpression> Orderings => _orderings;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,8 +155,8 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Expression GetMappedProjection(ProjectionMember projectionMember)
-        => _projectionMapping[projectionMember];
+    public virtual Expression GetMappedProjection(ProjectionMember projectionMember) =>
+        _projectionMapping[projectionMember];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -176,15 +182,14 @@ public class SelectExpression : Expression
         {
             ConstantExpression constantExpression
                 => GetString(_partitionKeyValueConverter, constantExpression.Value),
-            ParameterExpression parameterExpression when parameterValues.TryGetValue(parameterExpression.Name, out var value)
+            ParameterExpression parameterExpression
+                when parameterValues.TryGetValue(parameterExpression.Name, out var value)
                 => GetString(_partitionKeyValueConverter, value),
             _ => null
         };
 
-        static string GetString(ValueConverter converter, object value)
-            => converter is null
-                ? (string)value
-                : (string)converter.ConvertToProvider(value);
+        static string GetString(ValueConverter converter, object value) =>
+            converter is null ? (string)value : (string)converter.ConvertToProvider(value);
     }
 
     /// <summary>
@@ -204,9 +209,8 @@ public class SelectExpression : Expression
         foreach (var (projectionMember, expression) in _projectionMapping)
         {
             result[projectionMember] = Constant(
-                AddToProjection(
-                    expression,
-                    projectionMember.Last?.Name));
+                AddToProjection(expression, projectionMember.Last?.Name)
+            );
         }
 
         _projectionMapping = result;
@@ -218,7 +222,9 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void ReplaceProjectionMapping(IDictionary<ProjectionMember, Expression> projectionMapping)
+    public virtual void ReplaceProjectionMapping(
+        IDictionary<ProjectionMember, Expression> projectionMapping
+    )
     {
         _projectionMapping.Clear();
         foreach (var (projectionMember, expression) in projectionMapping)
@@ -233,8 +239,8 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int AddToProjection(SqlExpression sqlExpression)
-        => AddToProjection(sqlExpression, null);
+    public virtual int AddToProjection(SqlExpression sqlExpression) =>
+        AddToProjection(sqlExpression, null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -242,8 +248,8 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int AddToProjection(EntityProjectionExpression entityProjection)
-        => AddToProjection(entityProjection, null);
+    public virtual int AddToProjection(EntityProjectionExpression entityProjection) =>
+        AddToProjection(entityProjection, null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -251,8 +257,8 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int AddToProjection(ObjectArrayProjectionExpression objectArrayProjection)
-        => AddToProjection(objectArrayProjection, null);
+    public virtual int AddToProjection(ObjectArrayProjectionExpression objectArrayProjection) =>
+        AddToProjection(objectArrayProjection, null);
 
     private int AddToProjection(Expression expression, string alias)
     {
@@ -262,13 +268,15 @@ public class SelectExpression : Expression
             return existingIndex;
         }
 
-        var baseAlias = alias
-            ?? (expression as IAccessExpression)?.Name
-            ?? "c";
+        var baseAlias = alias ?? (expression as IAccessExpression)?.Name ?? "c";
 
         var currentAlias = baseAlias;
         var counter = 0;
-        while (_projection.Any(pe => string.Equals(pe.Alias, currentAlias, StringComparison.OrdinalIgnoreCase)))
+        while (
+            _projection.Any(
+                pe => string.Equals(pe.Alias, currentAlias, StringComparison.OrdinalIgnoreCase)
+            )
+        )
         {
             currentAlias = $"{baseAlias}{counter++}";
         }
@@ -284,8 +292,7 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void ApplyDistinct()
-        => IsDistinct = true;
+    public virtual void ApplyDistinct() => IsDistinct = true;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -293,8 +300,7 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void ClearOrdering()
-        => _orderings.Clear();
+    public virtual void ClearOrdering() => _orderings.Clear();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -304,21 +310,25 @@ public class SelectExpression : Expression
     /// </summary>
     public virtual void ApplyPredicate(SqlExpression expression)
     {
-        if (expression is SqlConstantExpression sqlConstant
+        if (
+            expression is SqlConstantExpression sqlConstant
             && sqlConstant.Value is bool boolValue
-            && boolValue)
+            && boolValue
+        )
         {
             return;
         }
 
-        Predicate = Predicate == null
-            ? expression
-            : new SqlBinaryExpression(
-                ExpressionType.AndAlso,
-                Predicate,
-                expression,
-                typeof(bool),
-                expression.TypeMapping);
+        Predicate =
+            Predicate == null
+                ? expression
+                : new SqlBinaryExpression(
+                    ExpressionType.AndAlso,
+                    Predicate,
+                    expression,
+                    typeof(bool),
+                    expression.TypeMapping
+                );
     }
 
     /// <summary>
@@ -345,8 +355,7 @@ public class SelectExpression : Expression
     /// </summary>
     public virtual void ApplyOffset(SqlExpression sqlExpression)
     {
-        if (Limit != null
-            || Offset != null)
+        if (Limit != null || Offset != null)
         {
             throw new InvalidOperationException("See issue#16156");
         }
@@ -362,9 +371,7 @@ public class SelectExpression : Expression
     /// </summary>
     public virtual void ApplyOrdering(OrderingExpression orderingExpression)
     {
-        if (IsDistinct
-            || Limit != null
-            || Offset != null)
+        if (IsDistinct || Limit != null || Offset != null)
         {
             throw new InvalidOperationException("See issue#16156");
         }
@@ -381,7 +388,10 @@ public class SelectExpression : Expression
     /// </summary>
     public virtual void AppendOrdering(OrderingExpression orderingExpression)
     {
-        if (_orderings.FirstOrDefault(o => o.Expression.Equals(orderingExpression.Expression)) == null)
+        if (
+            _orderings.FirstOrDefault(o => o.Expression.Equals(orderingExpression.Expression))
+            == null
+        )
         {
             _orderings.Add(orderingExpression);
         }
@@ -395,8 +405,7 @@ public class SelectExpression : Expression
     /// </summary>
     public virtual void ReverseOrderings()
     {
-        if (Limit != null
-            || Offset != null)
+        if (Limit != null || Offset != null)
         {
             throw new InvalidOperationException(CosmosStrings.ReverseAfterSkipTakeNotSupported);
         }
@@ -408,9 +417,8 @@ public class SelectExpression : Expression
         foreach (var existingOrdering in existingOrderings)
         {
             _orderings.Add(
-                new OrderingExpression(
-                    existingOrdering.Expression,
-                    !existingOrdering.IsAscending));
+                new OrderingExpression(existingOrdering.Expression, !existingOrdering.IsAscending)
+            );
         }
     }
 
@@ -420,8 +428,7 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Type Type
-        => typeof(object);
+    public override Type Type => typeof(object);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -429,8 +436,7 @@ public class SelectExpression : Expression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -516,7 +522,8 @@ public class SelectExpression : Expression
         SqlExpression? predicate,
         List<OrderingExpression>? orderings,
         SqlExpression? limit,
-        SqlExpression? offset)
+        SqlExpression? offset
+    )
     {
         var projectionMapping = new Dictionary<ProjectionMember, Expression>();
         foreach (var (projectionMember, expression) in _projectionMapping)

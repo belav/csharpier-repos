@@ -18,21 +18,25 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
 {
-    public partial class SimplifyThisOrMeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyThisOrMeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyThisOrMeTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyThisOrMeDiagnosticAnalyzer(), new CSharpSimplifyThisOrMeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyThisOrMeDiagnosticAnalyzer(),
+                new CSharpSimplifyThisOrMeCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyThisOrMe)]
         public async Task TestSimplifyDiagnosticId()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -43,7 +47,7 @@ class C
         var a = [|this.x|];
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -53,7 +57,8 @@ class C
     {
         var a = x;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyThisOrMe)]
@@ -61,7 +66,7 @@ class C
         public async Task TestThisWithNoType()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     dynamic x = 7;
 
@@ -70,7 +75,7 @@ class C
         [|this|].x = default(dynamic);
     }
 }",
-@"class Program
+                @"class Program
 {
     dynamic x = 7;
 
@@ -78,14 +83,15 @@ class C
     {
         x = default(dynamic);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyThisOrMe)]
         public async Task TestAppropriateDiagnosticOnMissingQualifier()
         {
             await TestDiagnosticInfoAsync(
-@"class C
+                @"class C
 {
     int SomeProperty { get; set; }
 
@@ -94,9 +100,14 @@ class C
         [|this|].SomeProperty = 1;
     }
 }",
-                options: Option(CodeStyleOptions2.QualifyPropertyAccess, false, NotificationOption2.Warning),
+                options: Option(
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    false,
+                    NotificationOption2.Warning
+                ),
                 diagnosticId: IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Warning);
+                diagnosticSeverity: DiagnosticSeverity.Warning
+            );
         }
 
         [Fact]
@@ -104,7 +115,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution_RemoveThis()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -226,7 +238,8 @@ class ProgramB3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -356,7 +369,8 @@ class ProgramB3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution_RemoveMemberAccessQualification()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -392,7 +406,8 @@ class D
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -428,17 +443,17 @@ class D
     </Project>
 </Workspace>";
 
-            var options =
-                new OptionsCollection(GetLanguage())
-                {
-                    { CodeStyleOptions2.QualifyPropertyAccess, false, NotificationOption2.Suggestion },
-                    { CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Suggestion },
-                };
+            var options = new OptionsCollection(GetLanguage())
+            {
+                { CodeStyleOptions2.QualifyPropertyAccess, false, NotificationOption2.Suggestion },
+                { CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Suggestion },
+            };
 
             await TestInRegularAndScriptAsync(
                 initialMarkup: input,
                 expectedMarkup: expected,
-                options: options);
+                options: options
+            );
         }
     }
 }

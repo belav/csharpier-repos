@@ -25,7 +25,8 @@ public class DiagnosticMessage
         int startLine,
         int startColumn,
         int endLine,
-        int endColumn)
+        int endColumn
+    )
     {
         Message = message;
         SourceFilePath = filePath;

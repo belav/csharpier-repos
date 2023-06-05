@@ -21,18 +21,14 @@ namespace System
 #pragma warning restore
 
         // Creates a new instance of an Object.
-        public Object()
-        {
-        }
+        public Object() { }
 
         // Allow an object to free resources before the object is reclaimed by the GC.
         // CONTRACT with runtime: This method's virtual slot number is hardcoded in the binder. It is an
         // implementation detail where it winds up at runtime.
         // **** Do not add any virtual methods in this class ahead of this ****
 
-        ~Object()
-        {
-        }
+        ~Object() { }
 
         internal MethodTable* MethodTable
         {
@@ -50,10 +46,7 @@ namespace System
 
         internal EETypePtr EETypePtr
         {
-            get
-            {
-                return new EETypePtr(new IntPtr(m_pEEType));
-            }
+            get { return new EETypePtr(new IntPtr(m_pEEType)); }
         }
 
         [StructLayout(LayoutKind.Sequential)]

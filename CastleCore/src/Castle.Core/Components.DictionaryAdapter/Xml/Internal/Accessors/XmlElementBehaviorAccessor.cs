@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -18,15 +18,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
-    public class XmlElementBehaviorAccessor : XmlNodeAccessor,
-        IConfigurable<XmlElementAttribute>,
-        IXmlBehaviorSemantics <XmlElementAttribute>
+    public class XmlElementBehaviorAccessor
+        : XmlNodeAccessor,
+            IConfigurable<XmlElementAttribute>,
+            IXmlBehaviorSemantics<XmlElementAttribute>
     {
         private ItemAccessor itemAccessor;
         private List<XmlElementAttribute> attributes;
 
-        internal static readonly XmlAccessorFactory<XmlElementBehaviorAccessor>
-            Factory = (name, type, context) => new XmlElementBehaviorAccessor(name, type, context);
+        internal static readonly XmlAccessorFactory<XmlElementBehaviorAccessor> Factory = (
+            name,
+            type,
+            context
+        ) => new XmlElementBehaviorAccessor(name, type, context);
 
         public XmlElementBehaviorAccessor(string name, Type type, IXmlContext context)
             : base(name, type, context) { }
@@ -35,9 +39,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             if (attribute.Type == null)
             {
-                ConfigureLocalName   (attribute.ElementName);
-                ConfigureNamespaceUri(attribute.Namespace  );
-                ConfigureNillable    (attribute.IsNullable );
+                ConfigureLocalName(attribute.ElementName);
+                ConfigureNamespaceUri(attribute.Namespace);
+                ConfigureNillable(attribute.IsNullable);
             }
             else
             {
@@ -52,13 +56,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (attributes != null)
             {
                 ConfigureKnownTypesFromAttributes(attributes, this);
-                attributes = null;                
+                attributes = null;
             }
             base.Prepare();
         }
 
-        public override void SetValue(IXmlCursor cursor, IDictionaryAdapter parentObject, XmlReferenceManager references,
-            bool hasCurrent, object oldValue, ref object newValue)
+        public override void SetValue(
+            IXmlCursor cursor,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool hasCurrent,
+            object oldValue,
+            ref object newValue
+        )
         {
             if (newValue == null && IsCollection)
                 base.RemoveCollectionItems(cursor, references, oldValue);
@@ -73,7 +83,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override IXmlCursor SelectPropertyNode(IXmlNode node, bool mutable)
         {
-            return node.SelectChildren(KnownTypes, Context, CursorFlags.Elements.MutableIf(mutable));
+            return node.SelectChildren(
+                KnownTypes,
+                Context,
+                CursorFlags.Elements.MutableIf(mutable)
+            );
         }
 
         public override IXmlCursor SelectCollectionNode(IXmlNode node, bool mutable)
@@ -101,10 +115,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             public ItemAccessor(XmlNodeAccessor parent)
                 : base(parent.ClrType.GetCollectionItemType(), parent.Context)
             {
-                ConfigureLocalName   (parent.Name.LocalName   );
+                ConfigureLocalName(parent.Name.LocalName);
                 ConfigureNamespaceUri(parent.Name.NamespaceUri);
-                ConfigureNillable    (parent.IsNillable       );
-                ConfigureReference   (parent.IsReference      );
+                ConfigureNillable(parent.IsNillable);
+                ConfigureReference(parent.IsReference);
                 ConfigureKnownTypesFromParent(parent);
             }
 
@@ -115,7 +129,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             public override IXmlCursor SelectCollectionItems(IXmlNode node, bool mutable)
             {
-                return node.SelectChildren(KnownTypes, Context, CursorFlags.Elements.MutableIf(mutable) | CursorFlags.Multiple);
+                return node.SelectChildren(
+                    KnownTypes,
+                    Context,
+                    CursorFlags.Elements.MutableIf(mutable) | CursorFlags.Multiple
+                );
             }
         }
     }

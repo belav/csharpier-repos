@@ -15,18 +15,13 @@ namespace Microsoft.Build.Tasks.Xaml
     {
         MemberVisibility visibility;
 
-        public String Name
-        { get; set; }
+        public String Name { get; set; }
 
-        public XamlType Type
-        { get; set; }
+        public XamlType Type { get; set; }
 
         public MemberVisibility Visibility
         {
-            get
-            {
-                return this.visibility;
-            }
+            get { return this.visibility; }
             set
             {
                 if (!Enum.IsDefined(typeof(MemberVisibility), value))

@@ -21,37 +21,66 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             Workspace workspace,
             OptionSet? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var solution = workspace.CurrentSolution;
             var document = solution.GetRequiredDocument(semanticModel.SyntaxTree);
-            var context = document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            var context = document
+                .GetRequiredLanguageService<ISyntaxContextService>()
+                .CreateContext(document, semanticModel, position, cancellationToken);
 
             var languageRecommender = document.GetRequiredLanguageService<IRecommendationService>();
-            return languageRecommender.GetRecommendedSymbolsInContext(context, GetOptions(options, document.Project), cancellationToken).NamedSymbols;
+            return languageRecommender
+                .GetRecommendedSymbolsInContext(
+                    context,
+                    GetOptions(options, document.Project),
+                    cancellationToken
+                )
+                .NamedSymbols;
         }
 
         [Obsolete("Use GetRecommendedSymbolsAtPositionAsync(Document, ...)")]
         public static Task<IEnumerable<ISymbol>> GetRecommendedSymbolsAtPositionAsync(
-             SemanticModel semanticModel,
-             int position,
-             Workspace workspace,
-             OptionSet? options = null,
-             CancellationToken cancellationToken = default)
+            SemanticModel semanticModel,
+            int position,
+            Workspace workspace,
+            OptionSet? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            return Task.FromResult(GetRecommendedSymbolsAtPosition(semanticModel, position, workspace, options, cancellationToken));
+            return Task.FromResult(
+                GetRecommendedSymbolsAtPosition(
+                    semanticModel,
+                    position,
+                    workspace,
+                    options,
+                    cancellationToken
+                )
+            );
         }
 
         public static async Task<ImmutableArray<ISymbol>> GetRecommendedSymbolsAtPositionAsync(
             Document document,
             int position,
             OptionSet? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var context = document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var context = document
+                .GetRequiredLanguageService<ISyntaxContextService>()
+                .CreateContext(document, semanticModel, position, cancellationToken);
             var languageRecommender = document.GetRequiredLanguageService<IRecommendationService>();
-            return languageRecommender.GetRecommendedSymbolsInContext(context, GetOptions(options, document.Project), cancellationToken).NamedSymbols;
+            return languageRecommender
+                .GetRecommendedSymbolsInContext(
+                    context,
+                    GetOptions(options, document.Project),
+                    cancellationToken
+                )
+                .NamedSymbols;
         }
 
 #pragma warning disable RS0030 // Do not used banned APIs: RecommendationOptions
@@ -62,8 +91,14 @@ namespace Microsoft.CodeAnalysis.Recommendations
 
             return new RecommendationServiceOptions()
             {
-                HideAdvancedMembers = options.GetOption(RecommendationOptions.HideAdvancedMembers, language),
-                FilterOutOfScopeLocals = options.GetOption(RecommendationOptions.FilterOutOfScopeLocals, language),
+                HideAdvancedMembers = options.GetOption(
+                    RecommendationOptions.HideAdvancedMembers,
+                    language
+                ),
+                FilterOutOfScopeLocals = options.GetOption(
+                    RecommendationOptions.FilterOutOfScopeLocals,
+                    language
+                ),
             };
         }
 #pragma warning restore

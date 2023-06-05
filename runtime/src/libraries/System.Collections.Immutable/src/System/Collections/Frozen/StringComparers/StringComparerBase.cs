@@ -58,8 +58,12 @@ namespace System.Collections.Frozen
                 uint* ptrUInt32 = (uint*)src;
                 while (length > 3)
                 {
-                    hash1 = BitOperations.RotateLeft(hash1, 5) + hash1 ^ (ptrUInt32[0] | NormalizeToLowercase);
-                    hash2 = BitOperations.RotateLeft(hash2, 5) + hash2 ^ (ptrUInt32[1] | NormalizeToLowercase);
+                    hash1 =
+                        BitOperations.RotateLeft(hash1, 5) + hash1
+                        ^ (ptrUInt32[0] | NormalizeToLowercase);
+                    hash2 =
+                        BitOperations.RotateLeft(hash2, 5) + hash2
+                        ^ (ptrUInt32[1] | NormalizeToLowercase);
                     ptrUInt32 += 2;
                     length -= 4;
                 }
@@ -67,7 +71,9 @@ namespace System.Collections.Frozen
                 char* ptrChar = (char*)ptrUInt32;
                 while (length-- > 0)
                 {
-                    hash2 = BitOperations.RotateLeft(hash2, 5) + hash2 ^ (*ptrChar | NormalizeToLowercase);
+                    hash2 =
+                        BitOperations.RotateLeft(hash2, 5) + hash2
+                        ^ (*ptrChar | NormalizeToLowercase);
                     ptrChar++;
                 }
 
@@ -80,9 +86,10 @@ namespace System.Collections.Frozen
             int length = s.Length;
 
             char[]? rentedArray = null;
-            Span<char> scratch = length <= 256 ?
-                stackalloc char[256] :
-                (rentedArray = ArrayPool<char>.Shared.Rent(length));
+            Span<char> scratch =
+                length <= 256
+                    ? stackalloc char[256]
+                    : (rentedArray = ArrayPool<char>.Shared.Rent(length));
 
             length = s.ToUpperInvariant(scratch); // NOTE: this really should be the (non-existent) ToUpperOrdinal
 

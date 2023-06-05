@@ -6,8 +6,6 @@ using System.Text;
 
 namespace MonoTests.Common
 {
-	[DisplayColumn ("NoSuchColumn", "")]
-	class FooEmptySortColumn
-	{
-	}
+    [DisplayColumn("NoSuchColumn", "")]
+    class FooEmptySortColumn { }
 }

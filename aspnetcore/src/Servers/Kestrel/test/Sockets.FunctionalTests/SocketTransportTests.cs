@@ -24,7 +24,8 @@ public class SocketTransportTests : LoggedTestBase
     [Fact]
     public async Task SocketTransportExposesSocketsFeature()
     {
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder

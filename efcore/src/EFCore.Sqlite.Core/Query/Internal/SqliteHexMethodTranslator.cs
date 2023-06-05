@@ -13,8 +13,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteHexMethodTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo MethodInfo = typeof(SqliteDbFunctionsExtensions)
-        .GetMethod(nameof(SqliteDbFunctionsExtensions.Hex), new[] { typeof(DbFunctions), typeof(byte[]) })!;
+    private static readonly MethodInfo MethodInfo = typeof(SqliteDbFunctionsExtensions).GetMethod(
+        nameof(SqliteDbFunctionsExtensions.Hex),
+        new[] { typeof(DbFunctions), typeof(byte[]) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -39,7 +41,8 @@ public class SqliteHexMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (method.Equals(MethodInfo))
         {
@@ -48,7 +51,8 @@ public class SqliteHexMethodTranslator : IMethodCallTranslator
                 new[] { arguments[1] },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true },
-                typeof(string));
+                typeof(string)
+            );
         }
 
         return null;

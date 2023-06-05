@@ -14,10 +14,10 @@ class Common
         for (int i = 0; i < iNumChars; i++)
         {
             char c = '\\';
-         while (c == '\\')
-         {
-             c = (char)rand.Next(Char.MinValue, Char.MaxValue);
-         }
+            while (c == '\\')
+            {
+                c = (char)rand.Next(Char.MinValue, Char.MaxValue);
+            }
             semNameNum += ((int)c).ToString() + ";";
             semName += c;
         }

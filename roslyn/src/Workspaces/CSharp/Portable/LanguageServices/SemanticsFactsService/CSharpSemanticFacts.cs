@@ -13,7 +13,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class CSharpSemanticFacts : ISemanticFacts
     {
-        public string GenerateNameForExpression(SemanticModel semanticModel, SyntaxNode expression, bool capitalize, CancellationToken cancellationToken)
-            => semanticModel.GenerateNameForExpression((ExpressionSyntax)expression, capitalize, cancellationToken);
+        public string GenerateNameForExpression(
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            bool capitalize,
+            CancellationToken cancellationToken
+        ) =>
+            semanticModel.GenerateNameForExpression(
+                (ExpressionSyntax)expression,
+                capitalize,
+                cancellationToken
+            );
     }
 }

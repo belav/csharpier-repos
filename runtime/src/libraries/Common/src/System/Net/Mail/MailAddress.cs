@@ -9,11 +9,18 @@ namespace System.Net.Mail
     {
         public MailAddress(string address)
         {
-            MailAddressParser.TryParseAddress(address, out ParseAddressInfo _, throwExceptionIfFail: true);
+            MailAddressParser.TryParseAddress(
+                address,
+                out ParseAddressInfo _,
+                throwExceptionIfFail: true
+            );
         }
 
-        internal MailAddress(string displayName, string localPart, string domain, Encoding? displayNameEncoding)
-        {
-        }
+        internal MailAddress(
+            string displayName,
+            string localPart,
+            string domain,
+            Encoding? displayNameEncoding
+        ) { }
     }
 }

@@ -13,6 +13,7 @@ internal static partial class Interop
             in Guid providerId,
             EtwEnableCallback enableCallback,
             void* callbackContext,
-            ref long registrationHandle);
+            ref long registrationHandle
+        );
     }
 }

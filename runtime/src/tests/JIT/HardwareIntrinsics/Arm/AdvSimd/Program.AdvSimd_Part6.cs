@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["LoadAndInsertScalar.Vector128.UInt32.3"] = LoadAndInsertScalar_Vector128_UInt32_3,
                 ["LoadAndInsertScalar.Vector128.UInt64.1"] = LoadAndInsertScalar_Vector128_UInt64_1,
                 ["LoadAndReplicateToVector64.Byte"] = LoadAndReplicateToVector64_Byte,

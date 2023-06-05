@@ -23,8 +23,7 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
         {
             private readonly ImmutableArray<ITagger<TTag>> _taggers;
 
-            public AggregateTagger(ImmutableArray<ITagger<TTag>> taggers)
-                => _taggers = taggers;
+            public AggregateTagger(ImmutableArray<ITagger<TTag>> taggers) => _taggers = taggers;
 
             public void Dispose()
             {
@@ -39,7 +38,6 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
                     foreach (var tagger in _taggers)
                         tagger.TagsChanged += value;
                 }
-
                 remove
                 {
                     foreach (var tagger in _taggers)

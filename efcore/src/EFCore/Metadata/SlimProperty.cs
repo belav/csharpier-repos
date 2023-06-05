@@ -60,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ValueConverter? valueConverter,
             ValueComparer? valueComparer,
             ValueComparer? keyValueComparer,
-            CoreTypeMapping? typeMapping)
+            CoreTypeMapping? typeMapping
+        )
             : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             DeclaringEntityType = declaringEntityType;
@@ -127,8 +128,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [EntityFrameworkInternal]
         public virtual List<SlimKey>? Keys { get; set; }
 
-        private IEnumerable<SlimKey> GetContainingKeys()
-            => Keys ?? Enumerable.Empty<SlimKey>();
+        private IEnumerable<SlimKey> GetContainingKeys() => Keys ?? Enumerable.Empty<SlimKey>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -139,8 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [EntityFrameworkInternal]
         public virtual List<SlimForeignKey>? ForeignKeys { get; set; }
 
-        private IEnumerable<SlimForeignKey> GetContainingForeignKeys()
-            => ForeignKeys ?? Enumerable.Empty<SlimForeignKey>();
+        private IEnumerable<SlimForeignKey> GetContainingForeignKeys() =>
+            ForeignKeys ?? Enumerable.Empty<SlimForeignKey>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -151,21 +151,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         [EntityFrameworkInternal]
         public virtual List<SlimIndex>? Indexes { get; set; }
 
-        private IEnumerable<SlimIndex> GetContainingIndexes()
-            => Indexes ?? Enumerable.Empty<SlimIndex>();
+        private IEnumerable<SlimIndex> GetContainingIndexes() =>
+            Indexes ?? Enumerable.Empty<SlimIndex>();
 
-        private CoreTypeMapping TypeMapping
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _typeMapping, (IProperty)this,
+        private CoreTypeMapping TypeMapping =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _typeMapping,
+                (IProperty)this,
                 static property =>
-                    property.DeclaringEntityType.Model.GetModelDependencies().TypeMappingSource.FindMapping(property)!);
+                    property.DeclaringEntityType.Model
+                        .GetModelDependencies()
+                        .TypeMappingSource.FindMapping(property)!
+            );
 
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
-        public override string ToString()
-            => ((IProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -174,10 +178,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
+        public virtual DebugView DebugView =>
+            new(
                 () => ((IProperty)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
-                () => ((IProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+                () => ((IProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+            );
 
         /// <inheritdoc/>
         bool IReadOnlyProperty.IsNullable
@@ -218,33 +223,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        PropertySaveBehavior IReadOnlyProperty.GetBeforeSaveBehavior()
-            => _beforeSaveBehavior;
+        PropertySaveBehavior IReadOnlyProperty.GetBeforeSaveBehavior() => _beforeSaveBehavior;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        PropertySaveBehavior IReadOnlyProperty.GetAfterSaveBehavior()
-            => _afterSaveBehavior;
+        PropertySaveBehavior IReadOnlyProperty.GetAfterSaveBehavior() => _afterSaveBehavior;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        Func<IProperty, IEntityType, ValueGenerator>? IReadOnlyProperty.GetValueGeneratorFactory()
-            => _valueGeneratorFactory;
+        Func<
+            IProperty,
+            IEntityType,
+            ValueGenerator
+        >? IReadOnlyProperty.GetValueGeneratorFactory() => _valueGeneratorFactory;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        ValueConverter? IReadOnlyProperty.GetValueConverter()
-            => _valueConverter;
+        ValueConverter? IReadOnlyProperty.GetValueConverter() => _valueConverter;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        Type? IReadOnlyProperty.GetProviderClrType()
-            => (Type?)this[CoreAnnotationNames.ProviderClrType];
+        Type? IReadOnlyProperty.GetProviderClrType() =>
+            (Type?)this[CoreAnnotationNames.ProviderClrType];
 
         /// <inheritdoc/>
         IReadOnlyEntityType IReadOnlyProperty.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <inheritdoc/>
@@ -256,26 +262,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        CoreTypeMapping? IReadOnlyProperty.FindTypeMapping()
-            => TypeMapping;
+        CoreTypeMapping? IReadOnlyProperty.FindTypeMapping() => TypeMapping;
 
         /// <inheritdoc/>
-        ValueComparer? IReadOnlyProperty.GetValueComparer()
-            => _valueComparer;
-
-        /// <inheritdoc/>
-        [DebuggerStepThrough]
-        ValueComparer IProperty.GetValueComparer()
-            => _valueComparer;
-
-        /// <inheritdoc/>
-        ValueComparer? IReadOnlyProperty.GetKeyValueComparer()
-            => _keyValueComparer;
+        ValueComparer? IReadOnlyProperty.GetValueComparer() => _valueComparer;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        ValueComparer IProperty.GetKeyValueComparer()
-            => _keyValueComparer;
+        ValueComparer IProperty.GetValueComparer() => _valueComparer;
+
+        /// <inheritdoc/>
+        ValueComparer? IReadOnlyProperty.GetKeyValueComparer() => _keyValueComparer;
+
+        /// <inheritdoc/>
+        [DebuggerStepThrough]
+        ValueComparer IProperty.GetKeyValueComparer() => _keyValueComparer;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
@@ -283,13 +284,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyProperty.GetContainingForeignKeys()
-            => GetContainingForeignKeys();
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyProperty.GetContainingForeignKeys() =>
+            GetContainingForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IProperty.GetContainingForeignKeys()
-            => GetContainingForeignKeys();
+        IEnumerable<IForeignKey> IProperty.GetContainingForeignKeys() => GetContainingForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
@@ -297,13 +297,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyIndex> IReadOnlyProperty.GetContainingIndexes()
-            => GetContainingIndexes();
+        IEnumerable<IReadOnlyIndex> IReadOnlyProperty.GetContainingIndexes() =>
+            GetContainingIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IIndex> IProperty.GetContainingIndexes()
-            => GetContainingIndexes();
+        IEnumerable<IIndex> IProperty.GetContainingIndexes() => GetContainingIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
@@ -311,17 +310,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyKey> IReadOnlyProperty.GetContainingKeys()
-            => GetContainingKeys();
+        IEnumerable<IReadOnlyKey> IReadOnlyProperty.GetContainingKeys() => GetContainingKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IKey> IProperty.GetContainingKeys()
-            => GetContainingKeys();
+        IEnumerable<IKey> IProperty.GetContainingKeys() => GetContainingKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyKey? IReadOnlyProperty.FindContainingPrimaryKey()
-            => PrimaryKey;
+        IReadOnlyKey? IReadOnlyProperty.FindContainingPrimaryKey() => PrimaryKey;
     }
 }

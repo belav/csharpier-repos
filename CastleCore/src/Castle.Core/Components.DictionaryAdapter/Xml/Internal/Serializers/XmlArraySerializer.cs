@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -20,8 +20,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlArraySerializer : XmlTypeSerializer
     {
-        public static readonly XmlArraySerializer
-            Instance = new XmlArraySerializer();
+        public static readonly XmlArraySerializer Instance = new XmlArraySerializer();
 
         protected XmlArraySerializer() { }
 
@@ -35,17 +34,25 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get { return true; }
         }
 
-        public override object GetStub(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        public override object GetStub(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor
+        )
         {
             var itemType = node.ClrType.GetElementType();
 
             return Array.CreateInstance(itemType, 0);
         }
 
-        public override object GetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor)
+        public override object GetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor
+        )
         {
-            var items      = new ArrayList();
-            var itemType   = node.ClrType.GetElementType();
+            var items = new ArrayList();
+            var itemType = node.ClrType.GetElementType();
             var references = XmlAdapter.For(parent).References;
 
             accessor
@@ -55,16 +62,22 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return items.ToArray(itemType);
         }
 
-        public override void SetValue(IXmlNode node, IDictionaryAdapter parent, IXmlAccessor accessor, object oldValue, ref object value)
+        public override void SetValue(
+            IXmlNode node,
+            IDictionaryAdapter parent,
+            IXmlAccessor accessor,
+            object oldValue,
+            ref object value
+        )
         {
-            var source      = (Array) value;
-            var target      = (Array) null;
-            var originals   = (Array) oldValue;
-            var itemType    = source.GetType().GetElementType();
+            var source = (Array)value;
+            var target = (Array)null;
+            var originals = (Array)oldValue;
+            var itemType = source.GetType().GetElementType();
             var subaccessor = accessor.GetCollectionAccessor(itemType);
-            var cursor      = subaccessor.SelectCollectionItems(node, true);
-            var serializer  = subaccessor.Serializer;
-            var references  = XmlAdapter.For(parent).References;
+            var cursor = subaccessor.SelectCollectionItems(node, true);
+            var serializer = subaccessor.Serializer;
+            var references = XmlAdapter.For(parent).References;
 
             for (var i = 0; i < source.Length; i++)
             {
@@ -72,7 +85,14 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 var providedItem = source.GetValue(i);
                 var assignedItem = providedItem;
 
-                subaccessor.SetValue(cursor, parent, references, cursor.MoveNext(), originalItem, ref assignedItem);
+                subaccessor.SetValue(
+                    cursor,
+                    parent,
+                    references,
+                    cursor.MoveNext(),
+                    originalItem,
+                    ref assignedItem
+                );
 
                 if (target != null)
                 {

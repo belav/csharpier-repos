@@ -30,7 +30,11 @@ namespace System.Web.Mvc.Test
             Controller controller = new EmptyController();
 
             // Act & Assert
-            MemberHelper.TestPropertyWithDefaultInstance(controller, "ActionInvoker", new ControllerActionInvoker());
+            MemberHelper.TestPropertyWithDefaultInstance(
+                controller,
+                "ActionInvoker",
+                new ControllerActionInvoker()
+            );
         }
 
         [Fact]
@@ -85,7 +89,11 @@ namespace System.Web.Mvc.Test
         public void ContextProperty()
         {
             var controller = new EmptyController();
-            MemberHelper.TestPropertyValue(controller, "ControllerContext", new Mock<ControllerContext>().Object);
+            MemberHelper.TestPropertyValue(
+                controller,
+                "ControllerContext",
+                new Mock<ControllerContext>().Object
+            );
         }
 
         [Fact]
@@ -185,7 +193,9 @@ namespace System.Web.Mvc.Test
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(cc => cc.Controller).Returns(c);
-            mockControllerContext.Setup(cc => cc.HttpContext.Request).Returns(mockHttpRequest.Object);
+            mockControllerContext
+                .Setup(cc => cc.HttpContext.Request)
+                .Returns(mockHttpRequest.Object);
 
             c.ControllerContext = mockControllerContext.Object;
             Assert.Equal(mockHttpRequest.Object, c.Request);
@@ -201,7 +211,9 @@ namespace System.Web.Mvc.Test
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(cc => cc.Controller).Returns(c);
-            mockControllerContext.Setup(cc => cc.HttpContext.Response).Returns(mockHttpResponse.Object);
+            mockControllerContext
+                .Setup(cc => cc.HttpContext.Response)
+                .Returns(mockHttpResponse.Object);
 
             c.ControllerContext = mockControllerContext.Object;
             Assert.Equal(mockHttpResponse.Object, c.Response);
@@ -217,7 +229,9 @@ namespace System.Web.Mvc.Test
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(cc => cc.Controller).Returns(c);
-            mockControllerContext.Setup(cc => cc.HttpContext.Server).Returns(mockServerUtility.Object);
+            mockControllerContext
+                .Setup(cc => cc.HttpContext.Server)
+                .Returns(mockServerUtility.Object);
 
             c.ControllerContext = mockControllerContext.Object;
             Assert.Equal(mockServerUtility.Object, c.Server);
@@ -233,7 +247,9 @@ namespace System.Web.Mvc.Test
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.Setup(cc => cc.Controller).Returns(c);
-            mockControllerContext.Setup(cc => cc.HttpContext.Session).Returns(mockSessionState.Object);
+            mockControllerContext
+                .Setup(cc => cc.HttpContext.Session)
+                .Returns(mockSessionState.Object);
 
             c.ControllerContext = mockControllerContext.Object;
             Assert.Same(mockSessionState.Object, c.Session);
@@ -244,7 +260,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             EmptyController controller = new EmptyController();
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
 
             // Act
             controller.PublicInitialize(requestContext);
@@ -288,11 +307,22 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ControllerMethodsDoNotHaveNonActionAttribute()
         {
-            var methods = typeof(Controller).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            var methods = typeof(Controller).GetMethods(
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            );
             foreach (var method in methods)
             {
-                var attrs = method.GetCustomAttributes(typeof(NonActionAttribute), true /* inherit */);
-                Assert.True(attrs.Length == 0, "Methods on the Controller class should not be marked [NonAction]: " + method);
+                var attrs = method.GetCustomAttributes(
+                    typeof(NonActionAttribute),
+                    true /* inherit */
+                );
+                Assert.True(
+                    attrs.Length == 0,
+                    "Methods on the Controller class should not be marked [NonAction]: " + method
+                );
             }
         }
 
@@ -356,7 +386,11 @@ namespace System.Web.Mvc.Test
             byte[] fileContents = new byte[0];
 
             // Act
-            FileContentResult result = controller.File(fileContents, "someContentType", "someDownloadName");
+            FileContentResult result = controller.File(
+                fileContents,
+                "someContentType",
+                "someDownloadName"
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -388,7 +422,11 @@ namespace System.Web.Mvc.Test
             EmptyController controller = new EmptyController();
 
             // Act
-            FilePathResult result = controller.File("somePath", "someContentType", "someDownloadName");
+            FilePathResult result = controller.File(
+                "somePath",
+                "someContentType",
+                "someDownloadName"
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -422,7 +460,11 @@ namespace System.Web.Mvc.Test
             Stream fileStream = Stream.Null;
 
             // Act
-            FileStreamResult result = controller.File(fileStream, "someContentType", "someDownloadName");
+            FileStreamResult result = controller.File(
+                fileStream,
+                "someContentType",
+                "someDownloadName"
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -436,8 +478,12 @@ namespace System.Web.Mvc.Test
         {
             var controller = new EmptyController();
             Assert.Throws<HttpException>(
-                delegate { controller.HandleUnknownAction("UnknownAction"); },
-                "A public action method 'UnknownAction' was not found on controller 'System.Web.Mvc.Test.ControllerTest+EmptyController'.");
+                delegate
+                {
+                    controller.HandleUnknownAction("UnknownAction");
+                },
+                "A public action method 'UnknownAction' was not found on controller 'System.Web.Mvc.Test.ControllerTest+EmptyController'."
+            );
         }
 
         /// <summary>
@@ -448,9 +494,13 @@ namespace System.Web.Mvc.Test
         {
             var controller = new EmptyController();
             Assert.Throws<HttpException>(
-                delegate { controller.HandleUnknownAction(null); },
-                "No matching action was found on controller 'System.Web.Mvc.Test.ControllerTest+EmptyController'. " +
-                "This can happen when a controller uses RouteAttribute for routing, but no action on that controller matches the request.");
+                delegate
+                {
+                    controller.HandleUnknownAction(null);
+                },
+                "No matching action was found on controller 'System.Web.Mvc.Test.ControllerTest+EmptyController'. "
+                    + "This can happen when a controller uses RouteAttribute for routing, but no action on that controller matches the request."
+            );
         }
 
         [Fact]
@@ -553,7 +603,9 @@ namespace System.Web.Mvc.Test
 
             // Arrange
             Controller controller = GetEmptyController();
-            RouteValueDictionary values = new RouteValueDictionary(new { Action = "SomeAction", Controller = "SomeController" });
+            RouteValueDictionary values = new RouteValueDictionary(
+                new { Action = "SomeAction", Controller = "SomeController" }
+            );
 
             // Act
             controller.RedirectToAction("SomeOtherAction", "SomeOtherController", values);
@@ -587,7 +639,11 @@ namespace System.Web.Mvc.Test
             object values = new { Action = "SomeAction", Controller = "SomeController" };
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToAction("SomeOtherAction", "SomeOtherController", values);
+            RedirectToRouteResult result = controller.RedirectToAction(
+                "SomeOtherAction",
+                "SomeOtherController",
+                values
+            );
             RouteValueDictionary newValues = result.RouteValues;
 
             // Assert
@@ -631,7 +687,10 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToAction("SomeOtherAction", "SomeOtherController");
+            RedirectToRouteResult result = controller.RedirectToAction(
+                "SomeOtherAction",
+                "SomeOtherController"
+            );
 
             // Assert
             Assert.Equal("", result.RouteName);
@@ -648,7 +707,11 @@ namespace System.Web.Mvc.Test
             RouteValueDictionary values = new RouteValueDictionary(new { Foo = "SomeFoo" });
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToAction("SomeOtherAction", "SomeOtherController", values);
+            RedirectToRouteResult result = controller.RedirectToAction(
+                "SomeOtherAction",
+                "SomeOtherController",
+                values
+            );
 
             // Assert
             Assert.Equal("", result.RouteName);
@@ -666,7 +729,11 @@ namespace System.Web.Mvc.Test
             object values = new { Foo = "SomeFoo" };
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToAction("SomeOtherAction", "SomeOtherController", values);
+            RedirectToRouteResult result = controller.RedirectToAction(
+                "SomeOtherAction",
+                "SomeOtherController",
+                values
+            );
 
             // Assert
             Assert.Equal("", result.RouteName);
@@ -715,7 +782,19 @@ namespace System.Web.Mvc.Test
             // Arrange
             int invocationCount = 0;
             Mock<Controller> controllerMock = new Mock<Controller>();
-            controllerMock.Setup(c => c.RedirectToAction(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>())).Callback(() => { invocationCount++; });
+            controllerMock
+                .Setup(
+                    c =>
+                        c.RedirectToAction(
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<RouteValueDictionary>()
+                        )
+                )
+                .Callback(() =>
+                {
+                    invocationCount++;
+                });
 
             Controller controller = controllerMock.Object;
 
@@ -771,7 +850,10 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToAction("SomeOtherAction", (RouteValueDictionary)null);
+            RedirectToRouteResult result = controller.RedirectToAction(
+                "SomeOtherAction",
+                (RouteValueDictionary)null
+            );
             RouteValueDictionary newValues = result.RouteValues;
 
             // Assert
@@ -802,7 +884,11 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToActionPermanent("SomeOtherAction", controllerName: "SomeController", routeValues: new { foo = "bar" });
+            RedirectToRouteResult result = controller.RedirectToActionPermanent(
+                "SomeOtherAction",
+                controllerName: "SomeController",
+                routeValues: new { foo = "bar" }
+            );
 
             // Assert
             Assert.True(result.Permanent);
@@ -818,7 +904,10 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToActionPermanent("SomeOtherAction", routeValues: new RouteValueDictionary(new { foo = "bar" }));
+            RedirectToRouteResult result = controller.RedirectToActionPermanent(
+                "SomeOtherAction",
+                routeValues: new RouteValueDictionary(new { foo = "bar" })
+            );
 
             // Assert
             Assert.True(result.Permanent);
@@ -834,7 +923,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             int invocationCount = 0;
             Mock<Controller> controllerMock = new Mock<Controller>();
-            controllerMock.Setup(c => c.RedirectToRoute(It.IsAny<string>(), It.IsAny<RouteValueDictionary>())).Callback(() => { invocationCount++; });
+            controllerMock
+                .Setup(c => c.RedirectToRoute(It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
+                .Callback(() =>
+                {
+                    invocationCount++;
+                });
 
             Controller controller = controllerMock.Object;
 
@@ -917,7 +1011,10 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToRoute("foo", (RouteValueDictionary)null);
+            RedirectToRouteResult result = controller.RedirectToRoute(
+                "foo",
+                (RouteValueDictionary)null
+            );
 
             // Assert
             Assert.Empty(result.RouteValues);
@@ -932,7 +1029,10 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToRoute(null, (RouteValueDictionary)null);
+            RedirectToRouteResult result = controller.RedirectToRoute(
+                null,
+                (RouteValueDictionary)null
+            );
 
             // Assert
             Assert.Empty(result.RouteValues);
@@ -982,7 +1082,9 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToRoutePermanent(routeValues: new { Foo = "Bar" });
+            RedirectToRouteResult result = controller.RedirectToRoutePermanent(
+                routeValues: new { Foo = "Bar" }
+            );
 
             // Assert
             Assert.True(result.Permanent);
@@ -996,7 +1098,9 @@ namespace System.Web.Mvc.Test
             Controller controller = GetEmptyController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToRoutePermanent(routeValues: new RouteValueDictionary(new { Foo = "Bar" }));
+            RedirectToRouteResult result = controller.RedirectToRoutePermanent(
+                routeValues: new RouteValueDictionary(new { Foo = "Bar" })
+            );
 
             // Assert
             Assert.True(result.Permanent);
@@ -1039,8 +1143,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { controller.Redirect(String.Empty); },
-                "url");
+                delegate
+                {
+                    controller.Redirect(String.Empty);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -1051,8 +1159,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { controller.RedirectPermanent(String.Empty); },
-                "url");
+                delegate
+                {
+                    controller.RedirectPermanent(String.Empty);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -1063,8 +1175,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { controller.Redirect(url: null); },
-                "url");
+                delegate
+                {
+                    controller.Redirect(url: null);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -1075,8 +1191,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { controller.RedirectPermanent(url: null); },
-                "url");
+                delegate
+                {
+                    controller.RedirectPermanent(url: null);
+                },
+                "url"
+            );
         }
 
         [Fact]
@@ -1227,7 +1347,21 @@ namespace System.Web.Mvc.Test
             PropertyDescriptorCollection props = TypeDescriptor.GetProperties(paramValues);
             foreach (PropertyDescriptor prop in props)
             {
-                requestMock.Setup(o => o[It.Is<string>(item => String.Equals(prop.Name, item, StringComparison.OrdinalIgnoreCase))]).Returns((string)prop.GetValue(paramValues));
+                requestMock
+                    .Setup(
+                        o =>
+                            o[
+                                It.Is<string>(
+                                    item =>
+                                        String.Equals(
+                                            prop.Name,
+                                            item,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                )
+                            ]
+                    )
+                    .Returns((string)prop.GetValue(paramValues));
             }
         }
 
@@ -1238,7 +1372,8 @@ namespace System.Web.Mvc.Test
             TempDataHomeController tempDataHomeController = new TempDataHomeController();
 
             // Act
-            RedirectToRouteResult result = tempDataHomeController.GreetUser() as RedirectToRouteResult;
+            RedirectToRouteResult result =
+                tempDataHomeController.GreetUser() as RedirectToRouteResult;
             RouteValueDictionary values = result.RouteValues;
 
             // Assert
@@ -1293,12 +1428,22 @@ namespace System.Web.Mvc.Test
             mockContext.Setup(o => o.Session).Returns(session);
             RouteData rd = new RouteData();
             rd.Values.Add("action", "Crash");
-            controller.ControllerContext = new ControllerContext(mockContext.Object, rd, controller);
+            controller.ControllerContext = new ControllerContext(
+                mockContext.Object,
+                rd,
+                controller
+            );
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { ((IController)controller).Execute(controller.ControllerContext.RequestContext); });
-            Assert.NotNull(mockContext.Object.Session[SessionStateTempDataProvider.TempDataSessionStateKey]);
+                delegate
+                {
+                    ((IController)controller).Execute(controller.ControllerContext.RequestContext);
+                }
+            );
+            Assert.NotNull(
+                mockContext.Object.Session[SessionStateTempDataProvider.TempDataSessionStateKey]
+            );
             TempDataDictionary tempData = new TempDataDictionary();
             tempData.Load(controller.ControllerContext, controller.TempDataProvider);
             Assert.Equal("Value1", tempData["Key1"]);
@@ -1312,11 +1457,18 @@ namespace System.Web.Mvc.Test
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             HttpSessionStateBase session = GetEmptySession();
             mockContext.Setup(o => o.Session).Returns(session);
-            mockController.Object.ControllerContext = new ControllerContext(mockContext.Object, new RouteData(), mockController.Object);
+            mockController.Object.ControllerContext = new ControllerContext(
+                mockContext.Object,
+                new RouteData(),
+                mockController.Object
+            );
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController.Object.TempData.Save(mockController.Object.ControllerContext, mockController.Object.TempDataProvider);
+            mockController.Object.TempData.Save(
+                mockController.Object.ControllerContext,
+                mockController.Object.TempDataProvider
+            );
 
             // Assert
             Assert.True(mockController.Object.TempData.ContainsKey("Key"));
@@ -1326,8 +1478,15 @@ namespace System.Web.Mvc.Test
             Mock<Controller> mockDestinationController = new Mock<Controller>() { CallBase = true };
             Mock<HttpContextBase> mockDestinationContext = new Mock<HttpContextBase>();
             mockDestinationContext.Setup(o => o.Session).Returns(session);
-            mockDestinationController.Object.ControllerContext = new ControllerContext(mockDestinationContext.Object, new RouteData(), mockDestinationController.Object);
-            mockDestinationController.Object.TempData.Load(mockDestinationController.Object.ControllerContext, mockDestinationController.Object.TempDataProvider);
+            mockDestinationController.Object.ControllerContext = new ControllerContext(
+                mockDestinationContext.Object,
+                new RouteData(),
+                mockDestinationController.Object
+            );
+            mockDestinationController.Object.TempData.Load(
+                mockDestinationController.Object.ControllerContext,
+                mockDestinationController.Object.TempDataProvider
+            );
 
             // Assert
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1335,14 +1494,27 @@ namespace System.Web.Mvc.Test
             // Act
             mockDestinationController.Object.TempData["NewKey"] = "NewValue";
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("NewKey"));
-            mockDestinationController.Object.TempData.Save(mockDestinationController.Object.ControllerContext, mockDestinationController.Object.TempDataProvider);
+            mockDestinationController.Object.TempData.Save(
+                mockDestinationController.Object.ControllerContext,
+                mockDestinationController.Object.TempDataProvider
+            );
 
             // Instantiate "second destination" controller with the same session state and see that it gets the temp data
-            Mock<Controller> mockSecondDestinationController = new Mock<Controller>() { CallBase = true };
+            Mock<Controller> mockSecondDestinationController = new Mock<Controller>()
+            {
+                CallBase = true
+            };
             Mock<HttpContextBase> mockSecondDestinationContext = new Mock<HttpContextBase>();
             mockSecondDestinationContext.Setup(o => o.Session).Returns(session);
-            mockSecondDestinationController.Object.ControllerContext = new ControllerContext(mockSecondDestinationContext.Object, new RouteData(), mockSecondDestinationController.Object);
-            mockSecondDestinationController.Object.TempData.Load(mockSecondDestinationController.Object.ControllerContext, mockSecondDestinationController.Object.TempDataProvider);
+            mockSecondDestinationController.Object.ControllerContext = new ControllerContext(
+                mockSecondDestinationContext.Object,
+                new RouteData(),
+                mockSecondDestinationController.Object
+            );
+            mockSecondDestinationController.Object.TempData.Load(
+                mockSecondDestinationController.Object.ControllerContext,
+                mockSecondDestinationController.Object.TempDataProvider
+            );
 
             // Assert
             Assert.True(mockSecondDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1357,11 +1529,18 @@ namespace System.Web.Mvc.Test
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             HttpSessionStateBase session = GetEmptySession();
             mockContext.Setup(o => o.Session).Returns(session);
-            mockController.Object.ControllerContext = new ControllerContext(mockContext.Object, new RouteData(), mockController.Object);
+            mockController.Object.ControllerContext = new ControllerContext(
+                mockContext.Object,
+                new RouteData(),
+                mockController.Object
+            );
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController.Object.TempData.Save(mockController.Object.ControllerContext, mockController.Object.TempDataProvider);
+            mockController.Object.TempData.Save(
+                mockController.Object.ControllerContext,
+                mockController.Object.TempDataProvider
+            );
 
             // Assert
             Assert.True(mockController.Object.TempData.ContainsKey("Key"));
@@ -1371,22 +1550,42 @@ namespace System.Web.Mvc.Test
             Mock<Controller> mockDestinationController = new Mock<Controller>() { CallBase = true };
             Mock<HttpContextBase> mockDestinationContext = new Mock<HttpContextBase>();
             mockDestinationContext.Setup(o => o.Session).Returns(session);
-            mockDestinationController.Object.ControllerContext = new ControllerContext(mockDestinationContext.Object, new RouteData(), mockDestinationController.Object);
-            mockDestinationController.Object.TempData.Load(mockDestinationController.Object.ControllerContext, mockDestinationController.Object.TempDataProvider);
+            mockDestinationController.Object.ControllerContext = new ControllerContext(
+                mockDestinationContext.Object,
+                new RouteData(),
+                mockDestinationController.Object
+            );
+            mockDestinationController.Object.TempData.Load(
+                mockDestinationController.Object.ControllerContext,
+                mockDestinationController.Object.TempDataProvider
+            );
 
             // Assert
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("Key"));
 
             // Act
             object value = mockDestinationController.Object.TempData["Key"];
-            mockDestinationController.Object.TempData.Save(mockDestinationController.Object.ControllerContext, mockDestinationController.Object.TempDataProvider);
+            mockDestinationController.Object.TempData.Save(
+                mockDestinationController.Object.ControllerContext,
+                mockDestinationController.Object.TempDataProvider
+            );
 
             // Instantiate "second destination" controller with the same session state and see that it gets the temp data
-            Mock<Controller> mockSecondDestinationController = new Mock<Controller>() { CallBase = true };
+            Mock<Controller> mockSecondDestinationController = new Mock<Controller>()
+            {
+                CallBase = true
+            };
             Mock<HttpContextBase> mockSecondDestinationContext = new Mock<HttpContextBase>();
             mockSecondDestinationContext.Setup(o => o.Session).Returns(session);
-            mockSecondDestinationController.Object.ControllerContext = new ControllerContext(mockSecondDestinationContext.Object, new RouteData(), mockSecondDestinationController.Object);
-            mockSecondDestinationController.Object.TempData.Load(mockSecondDestinationController.Object.ControllerContext, mockSecondDestinationController.Object.TempDataProvider);
+            mockSecondDestinationController.Object.ControllerContext = new ControllerContext(
+                mockSecondDestinationContext.Object,
+                new RouteData(),
+                mockSecondDestinationController.Object
+            );
+            mockSecondDestinationController.Object.TempData.Load(
+                mockSecondDestinationController.Object.ControllerContext,
+                mockSecondDestinationController.Object.TempDataProvider
+            );
 
             // Assert
             Assert.False(mockSecondDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1400,7 +1599,11 @@ namespace System.Web.Mvc.Test
             Mock<HttpContextBase> mockContext = new Mock<HttpContextBase>();
             HttpSessionStateBase session = null;
             mockContext.Setup(o => o.Session).Returns(session);
-            mockController.Object.ControllerContext = new ControllerContext(mockContext.Object, new RouteData(), mockController.Object);
+            mockController.Object.ControllerContext = new ControllerContext(
+                mockContext.Object,
+                new RouteData(),
+                mockController.Object
+            );
             mockController.Object.TempData = new TempDataDictionary();
 
             // Act
@@ -1421,7 +1624,13 @@ namespace System.Web.Mvc.Test
             controller.ControllerContext = GetControllerContext("someAction");
 
             // Act
-            bool returned = controller.TryUpdateModel(myModel, "somePrefix", new[] { "prop1", "prop2" }, null, valueProvider);
+            bool returned = controller.TryUpdateModel(
+                myModel,
+                "somePrefix",
+                new[] { "prop1", "prop2" },
+                null,
+                valueProvider
+            );
 
             // Assert
             Assert.True(returned);
@@ -1461,7 +1670,11 @@ namespace System.Web.Mvc.Test
             controller.ValueProvider = valueProvider;
 
             // Act
-            bool returned = controller.TryUpdateModel(myModel, "somePrefix", new[] { "prop1", "prop2" });
+            bool returned = controller.TryUpdateModel(
+                myModel,
+                "somePrefix",
+                new[] { "prop1", "prop2" }
+            );
 
             // Assert
             Assert.True(returned);
@@ -1476,7 +1689,11 @@ namespace System.Web.Mvc.Test
             Controller controller = new EmptyController();
 
             // Act
-            bool returned = controller.TryUpdateModel(myModel, new[] { "prop1", "prop2" }, new SimpleValueProvider());
+            bool returned = controller.TryUpdateModel(
+                myModel,
+                new[] { "prop1", "prop2" },
+                new SimpleValueProvider()
+            );
 
             // Assert
             Assert.True(returned);
@@ -1491,7 +1708,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { controller.TryUpdateModel<object>(null, new SimpleValueProvider()); }, "model");
+                delegate
+                {
+                    controller.TryUpdateModel<object>(null, new SimpleValueProvider());
+                },
+                "model"
+            );
         }
 
         [Fact]
@@ -1502,7 +1724,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { controller.TryUpdateModel(new object(), null, null, null, null); }, "valueProvider");
+                delegate
+                {
+                    controller.TryUpdateModel(new object(), null, null, null, null);
+                },
+                "valueProvider"
+            );
         }
 
         [Fact]
@@ -1527,7 +1754,11 @@ namespace System.Web.Mvc.Test
             Controller controller = new EmptyController();
 
             // Act
-            bool returned = controller.TryUpdateModel(myModel, "somePrefix", new SimpleValueProvider());
+            bool returned = controller.TryUpdateModel(
+                myModel,
+                "somePrefix",
+                new SimpleValueProvider()
+            );
 
             // Assert
             Assert.True(returned);
@@ -1563,8 +1794,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { controller.UpdateModel(myModel, new SimpleValueProvider()); },
-                "The model of type 'System.Web.Mvc.Test.ControllerTest+MyModel' could not be updated.");
+                delegate
+                {
+                    controller.UpdateModel(myModel, new SimpleValueProvider());
+                },
+                "The model of type 'System.Web.Mvc.Test.ControllerTest+MyModel' could not be updated."
+            );
         }
 
         [Fact]
@@ -1676,7 +1911,12 @@ namespace System.Web.Mvc.Test
             Controller controller = new EmptyController();
 
             // Act
-            JsonResult result = controller.Json(model, "text/xml", Encoding.UTF32, JsonRequestBehavior.AllowGet);
+            JsonResult result = controller.Json(
+                model,
+                "text/xml",
+                Encoding.UTF32,
+                JsonRequestBehavior.AllowGet
+            );
 
             // Assert
             Assert.Same(model, result.Data);
@@ -1694,9 +1934,14 @@ namespace System.Web.Mvc.Test
             RouteData routeData = new RouteData();
             routeData.DataTokens[ControllerContext.ParentActionViewContextToken] = viewContext;
             routeData.Values["action"] = "SimpleAction";
-            RequestContext requestContext = new RequestContext(HttpContextHelpers.GetMockHttpContext().Object, routeData);
+            RequestContext requestContext = new RequestContext(
+                HttpContextHelpers.GetMockHttpContext().Object,
+                routeData
+            );
             // Strict == no default implementations == calls to Load & Save are not allowed
-            Mock<ITempDataProvider> tempDataProvider = new Mock<ITempDataProvider>(MockBehavior.Strict);
+            Mock<ITempDataProvider> tempDataProvider = new Mock<ITempDataProvider>(
+                MockBehavior.Strict
+            );
             SimpleController controller = new SimpleController();
             controller.ValidateRequest = false;
 
@@ -1716,9 +1961,7 @@ namespace System.Web.Mvc.Test
             Controller controller = new SimpleController();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => controller.TryValidateModel(null),
-                "model");
+            Assert.ThrowsArgumentNull(() => controller.TryValidateModel(null), "model");
         }
 
         [Fact]
@@ -1748,7 +1991,10 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.False(result);
-            Assert.Equal("Out of range!", controller.ModelState["Prefix.IntegerProperty"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "Out of range!",
+                controller.ModelState["Prefix.IntegerProperty"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -1758,9 +2004,7 @@ namespace System.Web.Mvc.Test
             Controller controller = new SimpleController();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => controller.ValidateModel(null),
-                "model");
+            Assert.ThrowsArgumentNull(() => controller.ValidateModel(null), "model");
         }
 
         [Fact]
@@ -1787,9 +2031,13 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => controller.ValidateModel(model, "Prefix"),
-                "The model of type '" + model.GetType().FullName + "' is not valid.");
+                "The model of type '" + model.GetType().FullName + "' is not valid."
+            );
 
-            Assert.Equal("Out of range!", controller.ModelState["Prefix.IntegerProperty"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "Out of range!",
+                controller.ModelState["Prefix.IntegerProperty"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -1802,7 +2050,6 @@ namespace System.Web.Mvc.Test
             Assert.Equal(DependencyResolver.CurrentCache.GetType(), resolver.GetType());
         }
 
-
         [Fact]
         public void CreateActionInvokerCallsAsyncActionInvokerFactoryCreateInstance()
         {
@@ -1812,11 +2059,16 @@ namespace System.Web.Mvc.Test
             var controller = new EmptyController();
             Mock<IDependencyResolver> resolverMock = new Mock<IDependencyResolver>();
             Mock<IAsyncActionInvoker> asyncActionInvokerMock = new Mock<IAsyncActionInvoker>();
-            Mock<IAsyncActionInvokerFactory> asyncActionInvokerFactoryMock = new Mock<IAsyncActionInvokerFactory>();
-            asyncActionInvokerFactoryMock.Setup(a => a.CreateInstance()).Returns(asyncActionInvokerMock.Object);
-            resolverMock.Setup(r => r.GetService(typeof(IAsyncActionInvokerFactory)))
+            Mock<IAsyncActionInvokerFactory> asyncActionInvokerFactoryMock =
+                new Mock<IAsyncActionInvokerFactory>();
+            asyncActionInvokerFactoryMock
+                .Setup(a => a.CreateInstance())
+                .Returns(asyncActionInvokerMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(IAsyncActionInvokerFactory)))
                 .Returns(asyncActionInvokerFactoryMock.Object);
-            resolverMock.Setup(r => r.GetService(typeof(IActionInvokerFactory)))
+            resolverMock
+                .Setup(r => r.GetService(typeof(IActionInvokerFactory)))
                 .Returns((IActionInvokerFactory)null);
             controller.Resolver = resolverMock.Object;
 
@@ -1824,7 +2076,10 @@ namespace System.Web.Mvc.Test
             var ai = controller.CreateActionInvoker();
 
             // Assert
-            resolverMock.Verify(r => r.GetService(typeof(IAsyncActionInvokerFactory)), Times.Once());
+            resolverMock.Verify(
+                r => r.GetService(typeof(IAsyncActionInvokerFactory)),
+                Times.Once()
+            );
             resolverMock.Verify(r => r.GetService(typeof(IActionInvokerFactory)), Times.Never());
             Assert.Same(asyncActionInvokerMock.Object, ai);
         }
@@ -1837,11 +2092,16 @@ namespace System.Web.Mvc.Test
             var controller = new EmptyController();
             Mock<IDependencyResolver> resolverMock = new Mock<IDependencyResolver>();
             Mock<IActionInvoker> actionInvokerMock = new Mock<IActionInvoker>();
-            Mock<IActionInvokerFactory> actionInvokerFactoryMock = new Mock<IActionInvokerFactory>();
-            actionInvokerFactoryMock.Setup(a => a.CreateInstance()).Returns(actionInvokerMock.Object);
-            resolverMock.Setup(r => r.GetService(typeof(IAsyncActionInvokerFactory)))
+            Mock<IActionInvokerFactory> actionInvokerFactoryMock =
+                new Mock<IActionInvokerFactory>();
+            actionInvokerFactoryMock
+                .Setup(a => a.CreateInstance())
+                .Returns(actionInvokerMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(IAsyncActionInvokerFactory)))
                 .Returns((IAsyncActionInvokerFactory)null);
-            resolverMock.Setup(r => r.GetService(typeof(IActionInvokerFactory)))
+            resolverMock
+                .Setup(r => r.GetService(typeof(IActionInvokerFactory)))
                 .Returns(actionInvokerFactoryMock.Object);
             controller.Resolver = resolverMock.Object;
 
@@ -1849,7 +2109,10 @@ namespace System.Web.Mvc.Test
             var ai = controller.CreateActionInvoker();
 
             // Assert
-            resolverMock.Verify(r => r.GetService(typeof(IAsyncActionInvokerFactory)), Times.Once());
+            resolverMock.Verify(
+                r => r.GetService(typeof(IAsyncActionInvokerFactory)),
+                Times.Once()
+            );
             resolverMock.Verify(r => r.GetService(typeof(IActionInvokerFactory)), Times.Once());
             Assert.Same(actionInvokerMock.Object, ai);
         }
@@ -1861,7 +2124,9 @@ namespace System.Web.Mvc.Test
             var controller = new EmptyController();
             Mock<IDependencyResolver> resolverMock = new Mock<IDependencyResolver>();
             Mock<IAsyncActionInvoker> actionInvokerMock = new Mock<IAsyncActionInvoker>();
-            resolverMock.Setup(r => r.GetService(typeof(IAsyncActionInvoker))).Returns(actionInvokerMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(IAsyncActionInvoker)))
+                .Returns(actionInvokerMock.Object);
             controller.Resolver = resolverMock.Object;
 
             var ai = controller.CreateActionInvoker();
@@ -1892,7 +2157,9 @@ namespace System.Web.Mvc.Test
             var controller = new EmptyController();
             Mock<IDependencyResolver> resolverMock = new Mock<IDependencyResolver>();
             Mock<ITempDataProvider> tempMock = new Mock<ITempDataProvider>();
-            resolverMock.Setup(r => r.GetService(typeof(ITempDataProvider))).Returns(tempMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(ITempDataProvider)))
+                .Returns(tempMock.Object);
             controller.Resolver = resolverMock.Object;
 
             ITempDataProvider temp = controller.CreateTempDataProvider();
@@ -1911,8 +2178,12 @@ namespace System.Web.Mvc.Test
             Mock<ITempDataProvider> tempMock = new Mock<ITempDataProvider>();
             Mock<ITempDataProviderFactory> factoryMock = new Mock<ITempDataProviderFactory>();
             factoryMock.Setup(f => f.CreateInstance()).Returns(tempMock.Object);
-            resolverMock.Setup(r => r.GetService(typeof(ITempDataProvider))).Returns(tempMock.Object);
-            resolverMock.Setup(r => r.GetService(typeof(ITempDataProviderFactory))).Returns(factoryMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(ITempDataProvider)))
+                .Returns(tempMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(ITempDataProviderFactory)))
+                .Returns(factoryMock.Object);
             controller.Resolver = resolverMock.Object;
 
             // Act
@@ -1964,9 +2235,7 @@ namespace System.Web.Mvc.Test
                 ControllerContext = new ControllerContext { Controller = this };
             }
 
-            public void SimpleAction()
-            {
-            }
+            public void SimpleAction() { }
         }
 
         private static ControllerContext GetControllerContext(string actionName)
@@ -1980,7 +2249,10 @@ namespace System.Web.Mvc.Test
             return new ControllerContext(mockHttpContext.Object, rd, new Mock<Controller>().Object);
         }
 
-        private static ControllerContext GetControllerContext(string actionName, string controllerName)
+        private static ControllerContext GetControllerContext(
+            string actionName,
+            string controllerName
+        )
         {
             RouteData rd = new RouteData();
             rd.Values["action"] = actionName;
@@ -2066,7 +2338,6 @@ namespace System.Web.Mvc.Test
             }
         }
 
-
         private sealed class UnknownActionController : Controller
         {
             public bool WasCalled;
@@ -2132,13 +2403,14 @@ namespace System.Web.Mvc.Test
             public ModelBindingContext BindingContext;
         }
 
-        private class MyModelSubclassed : MyModel
-        {
-        }
+        private class MyModelSubclassed : MyModel { }
 
         private class MyModelBinder : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 MyModel myModel = (MyModel)bindingContext.Model;
                 myModel.ControllerContext = controllerContext;
@@ -2150,9 +2422,10 @@ namespace System.Web.Mvc.Test
 
     internal class EmptyTempDataProvider : ITempDataProvider
     {
-        public void SaveTempData(ControllerContext controllerContext, IDictionary<string, object> values)
-        {
-        }
+        public void SaveTempData(
+            ControllerContext controllerContext,
+            IDictionary<string, object> values
+        ) { }
 
         public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
         {

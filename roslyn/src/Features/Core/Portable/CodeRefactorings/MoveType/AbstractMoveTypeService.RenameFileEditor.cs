@@ -11,22 +11,33 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    >
     {
         private class RenameFileEditor : Editor
         {
-            public RenameFileEditor(TService service, State state, string fileName, CancellationToken cancellationToken)
-                : base(service, state, fileName, cancellationToken)
-            {
-            }
+            public RenameFileEditor(
+                TService service,
+                State state,
+                string fileName,
+                CancellationToken cancellationToken
+            )
+                : base(service, state, fileName, cancellationToken) { }
 
-            public override Task<ImmutableArray<CodeActionOperation>> GetOperationsAsync()
-                => Task.FromResult(RenameFileToMatchTypeName());
+            public override Task<ImmutableArray<CodeActionOperation>> GetOperationsAsync() =>
+                Task.FromResult(RenameFileToMatchTypeName());
 
             public override Task<Solution> GetModifiedSolutionAsync()
             {
-                var modifiedSolution = SemanticDocument.Project.Solution
-                    .WithDocumentName(SemanticDocument.Document.Id, FileName);
+                var modifiedSolution = SemanticDocument.Project.Solution.WithDocumentName(
+                    SemanticDocument.Document.Id,
+                    FileName
+                );
 
                 return Task.FromResult(modifiedSolution);
             }
@@ -41,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 var newSolution = oldSolution.WithDocumentName(documentId, FileName);
 
                 return ImmutableArray.Create<CodeActionOperation>(
-                    new ApplyChangesOperation(newSolution));
+                    new ApplyChangesOperation(newSolution)
+                );
             }
         }
     }

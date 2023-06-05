@@ -63,7 +63,8 @@ using System.Net;
 // that ever changes.
 using CommonFraming = RabbitMQ.Client.Framing.v0_9;
 
-namespace RabbitMQ.Client.Impl {
+namespace RabbitMQ.Client.Impl
+{
     ///<summary>Thrown when frame parsing code detects an error in the
     ///wire-protocol encoding of a frame.</summary>
     ///<remarks>
@@ -71,9 +72,14 @@ namespace RabbitMQ.Client.Impl {
     ///include frames too short, frames missing their end marker, and
     ///invalid protocol negotiation headers.
     ///</remarks>
-    public class MalformedFrameException: HardProtocolException {
-        public MalformedFrameException(string message): base(message) {}
+    public class MalformedFrameException : HardProtocolException
+    {
+        public MalformedFrameException(string message)
+            : base(message) { }
 
-        public override ushort ReplyCode { get { return CommonFraming.Constants.FrameError; } }
+        public override ushort ReplyCode
+        {
+            get { return CommonFraming.Constants.FrameError; }
+        }
     }
 }

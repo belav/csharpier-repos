@@ -2,16 +2,16 @@
 
 class X
 {
-	/// <summary>
-	/// Top-class
-	/// </summary>
-	public sealed class C
-	{
-		public string Severity => "foo";
+    /// <summary>
+    /// Top-class
+    /// </summary>
+    public sealed class C
+    {
+        public string Severity => "foo";
 
-		/// <summary>
-		/// foo
-		/// </summary>
-		public static void Main() {}
-	}
+        /// <summary>
+        /// foo
+        /// </summary>
+        public static void Main() { }
+    }
 }

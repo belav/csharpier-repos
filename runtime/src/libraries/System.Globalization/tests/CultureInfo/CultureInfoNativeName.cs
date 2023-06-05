@@ -10,7 +10,11 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> NativeName_TestData()
         {
-            yield return new object[] { CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.NativeName };
+            yield return new object[]
+            {
+                CultureInfo.CurrentCulture.Name,
+                CultureInfo.CurrentCulture.NativeName
+            };
 
             // Android has its own ICU, which doesn't 100% map to UsingLimitedCultures
             if (PlatformDetection.IsNotUsingLimitedCultures || PlatformDetection.IsAndroid)

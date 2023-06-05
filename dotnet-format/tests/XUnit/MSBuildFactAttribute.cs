@@ -9,8 +9,9 @@ using Xunit.Sdk;
 namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    [XunitTestCaseDiscoverer("Microsoft.CodeAnalysis.Tools.Tests.XUnit.MSBuildFactDiscoverer", "dotnet-format.UnitTests")]
-    public sealed class MSBuildFactAttribute : FactAttribute
-    {
-    }
+    [XunitTestCaseDiscoverer(
+        "Microsoft.CodeAnalysis.Tools.Tests.XUnit.MSBuildFactDiscoverer",
+        "dotnet-format.UnitTests"
+    )]
+    public sealed class MSBuildFactAttribute : FactAttribute { }
 }

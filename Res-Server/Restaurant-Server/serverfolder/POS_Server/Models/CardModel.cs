@@ -7,7 +7,6 @@ namespace POS_Server.Models
 {
     public class CardModel
     {
-
         public long cardId { get; set; }
         public string name { get; set; }
         public string notes { get; set; }
@@ -23,6 +22,5 @@ namespace POS_Server.Models
         public Nullable<decimal> commissionRatio { get; set; }
 
         public Boolean canDelete { get; set; }
-
     }
 }

@@ -34,9 +34,8 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of a the <see cref='Margins'/> class with one-inch margins.
         /// </summary>
-        public Margins() : this(100, 100, 100, 100)
-        {
-        }
+        public Margins()
+            : this(100, 100, 100, 100) { }
 
         /// <summary>
         /// Initializes a new instance of a the <see cref='Margins'/> class with the specified left, right, top, and bottom margins.
@@ -179,7 +178,11 @@ namespace System.Drawing.Printing
         {
             if (margin < 0)
             {
-                throw new ArgumentOutOfRangeException(name, margin, SR.Format(SR.InvalidLowBoundArgumentEx, name, margin, 0));
+                throw new ArgumentOutOfRangeException(
+                    name,
+                    margin,
+                    SR.Format(SR.InvalidLowBoundArgumentEx, name, margin, 0)
+                );
             }
         }
 
@@ -235,6 +238,7 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Provides some interesting information for the Margins in String form.
         /// </summary>
-        public override string ToString() => $"[Margins Left={Left} Right={Right} Top={Top} Bottom={Bottom}]";
+        public override string ToString() =>
+            $"[Margins Left={Left} Right={Right} Top={Top} Bottom={Bottom}]";
     }
 }

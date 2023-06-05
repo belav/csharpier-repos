@@ -24,17 +24,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             bool itemDefaultsSupported,
             TextSpan defaultSpan,
             CompletionItem item,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     [ExportWorkspaceService(typeof(ILspCompletionResultCreationService)), Shared]
-    internal sealed class DefaultLspCompletionResultCreationService : ILspCompletionResultCreationService
+    internal sealed class DefaultLspCompletionResultCreationService
+        : ILspCompletionResultCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultLspCompletionResultCreationService()
-        {
-        }
+        public DefaultLspCompletionResultCreationService() { }
 
         public async Task<LSP.CompletionItem> CreateAsync(
             Document document,
@@ -43,12 +43,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             bool itemDefaultsSupported,
             TextSpan defaultSpan,
             CompletionItem item,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var completionItem = new LSP.CompletionItem();
 
             await PopulateTextEditAsync(
-                document, documentText, itemDefaultsSupported, defaultSpan, item, completionItem, cancellationToken).ConfigureAwait(false);
+                    document,
+                    documentText,
+                    itemDefaultsSupported,
+                    defaultSpan,
+                    item,
+                    completionItem,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return completionItem;
         }
@@ -60,12 +69,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             TextSpan defaultSpan,
             CompletionItem item,
             LSP.CompletionItem lspItem,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var completionService = document.GetRequiredLanguageService<CompletionService>();
 
-            var completionChange = await completionService.GetChangeAsync(
-                document, item, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var completionChange = await completionService
+                .GetChangeAsync(document, item, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
             var completionChangeSpan = completionChange.TextChange.Span;
             var newText = completionChange.TextChange.NewText ?? "";
 

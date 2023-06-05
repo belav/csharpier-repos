@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(CodeActionResolveHandler)), Shared]
     [Method(LSP.Methods.CodeActionResolveName)]
-    internal class CodeActionResolveHandler : ILspServiceDocumentRequestHandler<LSP.CodeAction, LSP.CodeAction>
+    internal class CodeActionResolveHandler
+        : ILspServiceDocumentRequestHandler<LSP.CodeAction, LSP.CodeAction>
     {
         private readonly ICodeFixService _codeFixService;
         private readonly ICodeRefactoringService _codeRefactoringService;
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CodeActionResolveHandler(
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
@@ -55,10 +57,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.CodeAction request)
-            => ((JToken)request.Data!).ToObject<CodeActionResolveData>()!.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(LSP.CodeAction request) =>
+            ((JToken)request.Data!).ToObject<CodeActionResolveData>()!.TextDocument;
 
-        public async Task<LSP.CodeAction> HandleRequestAsync(LSP.CodeAction codeAction, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CodeAction> HandleRequestAsync(
+            LSP.CodeAction codeAction,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.GetRequiredDocument();
             var solution = document.Project.Solution;
@@ -69,19 +75,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var options = _globalOptions.GetCodeActionOptionsProvider();
 
             var codeActionsCache = context.GetRequiredLspService<CodeActionsCache>();
-            var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-                codeActionsCache,
-                document,
-                data.Range,
-                options,
-                _codeFixService,
-                _codeRefactoringService,
-                cancellationToken).ConfigureAwait(false);
+            var codeActions = await CodeActionHelpers
+                .GetCodeActionsAsync(
+                    codeActionsCache,
+                    document,
+                    data.Range,
+                    options,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(data.UniqueIdentifier, codeActions);
+            var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(
+                data.UniqueIdentifier,
+                codeActions
+            );
             Contract.ThrowIfNull(codeActionToResolve);
 
-            var operations = await codeActionToResolve.GetOperationsAsync(cancellationToken).ConfigureAwait(false);
+            var operations = await codeActionToResolve
+                .GetOperationsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // TO-DO: We currently must execute code actions which add new documents on the server as commands,
             // since there is no LSP support for adding documents yet. In the future, we should move these actions
@@ -98,11 +112,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // class code actions that do more than this are supposed to add the CodeAction.MakesNonDocumentChange
                 // in their Tags so we can filter them out before returning them to the client.
                 //
-                // However, we cannot enforce this as 3rd party fixers can still run.  So we filter their results to 
+                // However, we cannot enforce this as 3rd party fixers can still run.  So we filter their results to
                 // only apply the portions of their work that updates documents, and nothing else.
                 if (option is not ApplyChangesOperation applyChangesOperation)
                 {
-                    context.TraceInformation($"Skipping code action operation for '{data.UniqueIdentifier}'.  It was a '{option.GetType().FullName}'");
+                    context.TraceInformation(
+                        $"Skipping code action operation for '{data.UniqueIdentifier}'.  It was a '{option.GetType().FullName}'"
+                    );
                     continue;
                 }
 
@@ -146,31 +162,41 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
                 // Changed documents
                 await AddTextDocumentEditsAsync(
-                    projectChanges.SelectMany(pc => pc.GetChangedDocuments()),
-                    applyChangesOperation.ChangedSolution.GetDocument,
-                    solution.GetDocument).ConfigureAwait(false);
+                        projectChanges.SelectMany(pc => pc.GetChangedDocuments()),
+                        applyChangesOperation.ChangedSolution.GetDocument,
+                        solution.GetDocument
+                    )
+                    .ConfigureAwait(false);
 
                 // Changed analyzer config documents
                 await AddTextDocumentEditsAsync(
-                    projectChanges.SelectMany(pc => pc.GetChangedAnalyzerConfigDocuments()),
-                    applyChangesOperation.ChangedSolution.GetAnalyzerConfigDocument,
-                    solution.GetAnalyzerConfigDocument).ConfigureAwait(false);
+                        projectChanges.SelectMany(pc => pc.GetChangedAnalyzerConfigDocuments()),
+                        applyChangesOperation.ChangedSolution.GetAnalyzerConfigDocument,
+                        solution.GetAnalyzerConfigDocument
+                    )
+                    .ConfigureAwait(false);
 
                 // Changed additional documents
                 await AddTextDocumentEditsAsync(
-                    projectChanges.SelectMany(pc => pc.GetChangedAdditionalDocuments()),
-                    applyChangesOperation.ChangedSolution.GetAdditionalDocument,
-                    solution.GetAdditionalDocument).ConfigureAwait(false);
+                        projectChanges.SelectMany(pc => pc.GetChangedAdditionalDocuments()),
+                        applyChangesOperation.ChangedSolution.GetAdditionalDocument,
+                        solution.GetAdditionalDocument
+                    )
+                    .ConfigureAwait(false);
             }
 
-            codeAction.Edit = new LSP.WorkspaceEdit { DocumentChanges = textDocumentEdits.ToArray() };
+            codeAction.Edit = new LSP.WorkspaceEdit
+            {
+                DocumentChanges = textDocumentEdits.ToArray()
+            };
 
             return codeAction;
 
             async Task AddTextDocumentEditsAsync<TTextDocument>(
                 IEnumerable<DocumentId> changedDocuments,
                 Func<DocumentId, TTextDocument?> getNewDocument,
-                Func<DocumentId, TTextDocument?> getOldDocument)
+                Func<DocumentId, TTextDocument?> getOldDocument
+            )
                 where TTextDocument : TextDocument
             {
                 foreach (var docId in changedDocuments)
@@ -181,7 +207,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     Contract.ThrowIfNull(oldTextDoc);
                     Contract.ThrowIfNull(newTextDoc);
 
-                    var oldText = await oldTextDoc.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                    var oldText = await oldTextDoc
+                        .GetTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     IEnumerable<TextChange> textChanges;
 
@@ -190,17 +218,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     if (newTextDoc is Document newDoc && oldTextDoc is Document oldDoc)
                     {
                         Contract.ThrowIfNull(textDiffService);
-                        textChanges = await textDiffService.GetTextChangesAsync(oldDoc, newDoc, cancellationToken).ConfigureAwait(false);
+                        textChanges = await textDiffService
+                            .GetTextChangesAsync(oldDoc, newDoc, cancellationToken)
+                            .ConfigureAwait(false);
                     }
                     else
                     {
-                        var newText = await newTextDoc.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                        var newText = await newTextDoc
+                            .GetTextAsync(cancellationToken)
+                            .ConfigureAwait(false);
                         textChanges = newText.GetTextChanges(oldText);
                     }
 
-                    var edits = textChanges.Select(tc => ProtocolConversions.TextChangeToTextEdit(tc, oldText)).ToArray();
-                    var documentIdentifier = new OptionalVersionedTextDocumentIdentifier { Uri = newTextDoc.GetURI() };
-                    textDocumentEdits.Add(new TextDocumentEdit { TextDocument = documentIdentifier, Edits = edits });
+                    var edits = textChanges
+                        .Select(tc => ProtocolConversions.TextChangeToTextEdit(tc, oldText))
+                        .ToArray();
+                    var documentIdentifier = new OptionalVersionedTextDocumentIdentifier
+                    {
+                        Uri = newTextDoc.GetURI()
+                    };
+                    textDocumentEdits.Add(
+                        new TextDocumentEdit { TextDocument = documentIdentifier, Edits = edits }
+                    );
                 }
             }
         }

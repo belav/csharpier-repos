@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,22 +32,17 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-	sealed class CodeRenderBuilder : CodeBuilder
-	{
-		public bool HtmlEncode {
-			get; private set;
-		}
+    sealed class CodeRenderBuilder : CodeBuilder
+    {
+        public bool HtmlEncode { get; private set; }
 
-		public CodeRenderBuilder (string code, bool isAssign, ILocation location, bool doHtmlEncode)
-			: base (code, isAssign, location)
-		{
-			this.HtmlEncode = doHtmlEncode;
-		}
-		
-		public CodeRenderBuilder (string code, bool isAssign, ILocation location)
-			: base (code, isAssign, location)
-		{
-		}
-	}
+        public CodeRenderBuilder(string code, bool isAssign, ILocation location, bool doHtmlEncode)
+            : base(code, isAssign, location)
+        {
+            this.HtmlEncode = doHtmlEncode;
+        }
+
+        public CodeRenderBuilder(string code, bool isAssign, ILocation location)
+            : base(code, isAssign, location) { }
+    }
 }
-

@@ -23,27 +23,31 @@ namespace Microsoft.WebAssembly.Diagnostics
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) =>
-            services.AddRouting()
-            .Configure<ProxyOptions>(Configuration);
+            services.AddRouting().Configure<ProxyOptions>(Configuration);
 
-        public Startup(IConfiguration configuration) =>
-            Configuration = configuration;
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IOptionsMonitor<ProxyOptions> optionsAccessor, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IOptionsMonitor<ProxyOptions> optionsAccessor,
+            IWebHostEnvironment env
+        )
         {
             var options = optionsAccessor.CurrentValue;
-            app.UseDeveloperExceptionPage()
-                .UseWebSockets()
-                .UseDebugProxy(options);
+            app.UseDeveloperExceptionPage().UseWebSockets().UseDebugProxy(options);
         }
     }
 
     static class DebugExtensions
     {
-        public static Dictionary<string, string> MapValues(Dictionary<string, string> response, HttpContext context, Uri debuggerHost)
+        public static Dictionary<string, string> MapValues(
+            Dictionary<string, string> response,
+            HttpContext context,
+            Uri debuggerHost
+        )
         {
             var filtered = new Dictionary<string, string>();
             var request = context.Request;
@@ -54,7 +58,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 {
                     case "devtoolsFrontendUrl":
                         var front = response[key];
-                        filtered[key] = $"{debuggerHost.Scheme}://{debuggerHost.Authority}{front.Replace($"ws={debuggerHost.Authority}", $"ws={request.Host}")}";
+                        filtered[key] =
+                            $"{debuggerHost.Scheme}://{debuggerHost.Authority}{front.Replace($"ws={debuggerHost.Authority}", $"ws={request.Host}")}";
                         break;
                     case "webSocketDebuggerUrl":
                         var page = new Uri(response[key]);
@@ -68,13 +73,16 @@ namespace Microsoft.WebAssembly.Diagnostics
             return filtered;
         }
 
-        public static IApplicationBuilder UseDebugProxy(this IApplicationBuilder app, ProxyOptions options) =>
-            UseDebugProxy(app, options, MapValues);
+        public static IApplicationBuilder UseDebugProxy(
+            this IApplicationBuilder app,
+            ProxyOptions options
+        ) => UseDebugProxy(app, options, MapValues);
 
         public static IApplicationBuilder UseDebugProxy(
             this IApplicationBuilder app,
             ProxyOptions options,
-            Func<Dictionary<string, string>, HttpContext, Uri, Dictionary<string, string>> mapFunc)
+            Func<Dictionary<string, string>, HttpContext, Uri, Dictionary<string, string>> mapFunc
+        )
         {
             var devToolsHost = options.DevToolsUrl;
             app.UseRouter(router =>
@@ -100,26 +108,31 @@ namespace Microsoft.WebAssembly.Diagnostics
                     using (var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) })
                     {
                         var response = await httpClient.GetAsync(GetEndpoint(context));
-                        context.Response.ContentType = response.Content.Headers.ContentType.ToString();
+                        context.Response.ContentType =
+                            response.Content.Headers.ContentType.ToString();
                         if ((response.Content.Headers.ContentLength ?? 0) > 0)
                             context.Response.ContentLength = response.Content.Headers.ContentLength;
                         var bytes = await response.Content.ReadAsByteArrayAsync();
                         await context.Response.Body.WriteAsync(bytes);
-
                     }
                 }
 
                 async Task RewriteSingle(HttpContext context)
                 {
-                    var version = await ProxyGetJsonAsync<Dictionary<string, string>>(GetEndpoint(context));
+                    var version = await ProxyGetJsonAsync<Dictionary<string, string>>(
+                        GetEndpoint(context)
+                    );
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(
-                        JsonSerializer.Serialize(mapFunc(version, context, devToolsHost)));
+                        JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
+                    );
                 }
 
                 async Task RewriteArray(HttpContext context)
                 {
-                    var tabs = await ProxyGetJsonAsync<Dictionary<string, string>[]>(GetEndpoint(context));
+                    var tabs = await ProxyGetJsonAsync<Dictionary<string, string>[]>(
+                        GetEndpoint(context)
+                    );
                     var alteredTabs = tabs.Select(t => mapFunc(t, context, devToolsHost)).ToArray();
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(JsonSerializer.Serialize(alteredTabs));
@@ -133,11 +146,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                         return;
                     }
 
-                    var endpoint = new Uri($"ws://{devToolsHost.Authority}{context.Request.Path.ToString()}");
+                    var endpoint = new Uri(
+                        $"ws://{devToolsHost.Authority}{context.Request.Path.ToString()}"
+                    );
                     try
                     {
                         using var loggerFactory = LoggerFactory.Create(
-                            builder => builder.AddConsole().AddFilter(null, LogLevel.Information));
+                            builder => builder.AddConsole().AddFilter(null, LogLevel.Information)
+                        );
                         var proxy = new DebuggerProxy(loggerFactory);
                         var ideSocket = await context.WebSockets.AcceptWebSocketAsync();
 
@@ -157,7 +173,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             using (var httpClient = new HttpClient())
             {
                 var response = await httpClient.GetAsync(url);
-                return await JsonSerializer.DeserializeAsync<T>(await response.Content.ReadAsStreamAsync());
+                return await JsonSerializer.DeserializeAsync<T>(
+                    await response.Content.ReadAsStreamAsync()
+                );
             }
         }
     }

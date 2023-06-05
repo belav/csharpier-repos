@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 public class StoreStoredProcedureParameter
-    : ColumnBase<StoredProcedureParameterMapping>, IStoreStoredProcedureParameter
+    : ColumnBase<StoredProcedureParameterMapping>,
+        IStoreStoredProcedureParameter
 {
     private readonly RelationalTypeMapping? _storeTypeMapping;
 
@@ -28,7 +29,8 @@ public class StoreStoredProcedureParameter
         int position,
         StoreStoredProcedure storedProcedure,
         ParameterDirection direction,
-        RelationalTypeMapping? storeTypeMapping = null)
+        RelationalTypeMapping? storeTypeMapping = null
+    )
         : base(name, type, storedProcedure)
     {
         Position = position;
@@ -42,8 +44,7 @@ public class StoreStoredProcedureParameter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual StoreStoredProcedure StoredProcedure
-        => (StoreStoredProcedure)Table;
+    public virtual StoreStoredProcedure StoredProcedure => (StoreStoredProcedure)Table;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,8 +68,8 @@ public class StoreStoredProcedureParameter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override RelationalTypeMapping StoreTypeMapping
-        => _storeTypeMapping ?? base.StoreTypeMapping;
+    public override RelationalTypeMapping StoreTypeMapping =>
+        _storeTypeMapping ?? base.StoreTypeMapping;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,8 +77,10 @@ public class StoreStoredProcedureParameter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoreStoredProcedureParameter)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoreStoredProcedureParameter)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,10 +89,14 @@ public class StoreStoredProcedureParameter
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoreStoredProcedureParameter)this).ToDebugString(),
-            () => ((IStoreStoredProcedureParameter)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoreStoredProcedureParameter)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IStoreStoredProcedure IStoreStoredProcedureParameter.StoredProcedure

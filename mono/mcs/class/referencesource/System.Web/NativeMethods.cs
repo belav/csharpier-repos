@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="NativeMethods.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System.Runtime.InteropServices;
     using System;
     using System.Security.Permissions;
@@ -16,14 +17,17 @@ namespace System.Web {
     using System.Web.Configuration;
 
     [System.Runtime.InteropServices.ComVisible(false)]
-    internal sealed class NativeMethods {
+    internal sealed class NativeMethods
+    {
         /*
          * ASPNET_ISAPI.DLL
          */
-        private NativeMethods() {}
+        private NativeMethods() { }
 
-        [DllImport("Fusion.dll", CharSet=CharSet.Auto)]
-        internal static extern int CreateAssemblyCache(out IAssemblyCache ppAsmCache, uint dwReserved);
+        [DllImport("Fusion.dll", CharSet = CharSet.Auto)]
+        internal static extern int CreateAssemblyCache(
+            out IAssemblyCache ppAsmCache,
+            uint dwReserved
+        );
     }
 }
-

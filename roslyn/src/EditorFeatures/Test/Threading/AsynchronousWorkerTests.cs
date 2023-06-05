@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
 
         public AsynchronousWorkerTests()
         {
-            WpfTestRunner.RequireWpfFact($"Tests are testing {nameof(AsynchronousSerialWorkQueue)} which is designed to run methods on the UI thread");
+            WpfTestRunner.RequireWpfFact(
+                $"Tests are testing {nameof(AsynchronousSerialWorkQueue)} which is designed to run methods on the UI thread"
+            );
             _foregroundSyncContext = SynchronizationContext.Current;
             Assert.NotNull(_foregroundSyncContext);
         }
@@ -32,21 +34,30 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
         [WpfFact]
         public void TestBackgroundAction()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
             var threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
-            var worker = new AsynchronousSerialWorkQueue(threadingContext, listenerProvider.GetListener("Test"));
+            var worker = new AsynchronousSerialWorkQueue(
+                threadingContext,
+                listenerProvider.GetListener("Test")
+            );
             var doneEvent = new AutoResetEvent(initialState: false);
 
             var actionRan = false;
-            worker.EnqueueBackgroundWork(() =>
-            {
-                // Assert.NotNull(SynchronizationContext.Current);
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                actionRan = true;
-                doneEvent.Set();
-            }, GetType().Name + ".TestBackgroundAction", CancellationToken.None);
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    // Assert.NotNull(SynchronizationContext.Current);
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    actionRan = true;
+                    doneEvent.Set();
+                },
+                GetType().Name + ".TestBackgroundAction",
+                CancellationToken.None
+            );
 
             doneEvent.WaitOne();
             Assert.True(actionRan);
@@ -55,34 +66,47 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
         [WpfFact]
         public void TestMultipleBackgroundAction()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
             var threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             // Test that background actions don't run at the same time.
-            var worker = new AsynchronousSerialWorkQueue(threadingContext, listenerProvider.GetListener("Test"));
+            var worker = new AsynchronousSerialWorkQueue(
+                threadingContext,
+                listenerProvider.GetListener("Test")
+            );
             var doneEvent = new AutoResetEvent(false);
 
             var action1Ran = false;
             var action2Ran = false;
 
-            worker.EnqueueBackgroundWork(() =>
-            {
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                action1Ran = true;
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    action1Ran = true;
 
-                // Simulate work to ensure that if tasks overlap that we will 
-                // see it.
-                Thread.Sleep(1000);
-                Assert.False(action2Ran);
-            }, "Test", CancellationToken.None);
+                    // Simulate work to ensure that if tasks overlap that we will
+                    // see it.
+                    Thread.Sleep(1000);
+                    Assert.False(action2Ran);
+                },
+                "Test",
+                CancellationToken.None
+            );
 
-            worker.EnqueueBackgroundWork(() =>
-            {
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                action2Ran = true;
-                doneEvent.Set();
-            }, "Test", CancellationToken.None);
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    action2Ran = true;
+                    doneEvent.Set();
+                },
+                "Test",
+                CancellationToken.None
+            );
 
             doneEvent.WaitOne();
             Assert.True(action1Ran);
@@ -92,12 +116,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
         [WpfFact]
         public void TestBackgroundCancel1()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
             var threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             // Ensure that we can cancel a background action.
-            var worker = new AsynchronousSerialWorkQueue(threadingContext, listenerProvider.GetListener("Test"));
+            var worker = new AsynchronousSerialWorkQueue(
+                threadingContext,
+                listenerProvider.GetListener("Test")
+            );
 
             var taskRunningEvent = new AutoResetEvent(false);
             var cancelEvent = new AutoResetEvent(false);
@@ -108,20 +137,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
 
             var actionRan = false;
 
-            worker.EnqueueBackgroundWork(() =>
-            {
-                actionRan = true;
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    actionRan = true;
 
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                Assert.False(cancellationToken.IsCancellationRequested);
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    Assert.False(cancellationToken.IsCancellationRequested);
 
-                taskRunningEvent.Set();
-                cancelEvent.WaitOne();
+                    taskRunningEvent.Set();
+                    cancelEvent.WaitOne();
 
-                Assert.True(cancellationToken.IsCancellationRequested);
+                    Assert.True(cancellationToken.IsCancellationRequested);
 
-                doneEvent.Set();
-            }, "Test", source.Token);
+                    doneEvent.Set();
+                },
+                "Test",
+                source.Token
+            );
 
             taskRunningEvent.WaitOne();
 
@@ -135,13 +168,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
         [WpfFact]
         public void TestBackgroundCancelOneAction()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
             var threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             // Ensure that when a background action is cancelled the next
             // one starts (if it has a different cancellation token).
-            var worker = new AsynchronousSerialWorkQueue(threadingContext, listenerProvider.GetListener("Test"));
+            var worker = new AsynchronousSerialWorkQueue(
+                threadingContext,
+                listenerProvider.GetListener("Test")
+            );
 
             var taskRunningEvent = new AutoResetEvent(false);
             var cancelEvent = new AutoResetEvent(false);
@@ -155,32 +193,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
             var action1Ran = false;
             var action2Ran = false;
 
-            worker.EnqueueBackgroundWork(() =>
-            {
-                action1Ran = true;
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    action1Ran = true;
 
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                Assert.False(token1.IsCancellationRequested);
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    Assert.False(token1.IsCancellationRequested);
 
-                taskRunningEvent.Set();
-                cancelEvent.WaitOne();
+                    taskRunningEvent.Set();
+                    cancelEvent.WaitOne();
 
-                token1.ThrowIfCancellationRequested();
-                Assert.True(false);
-            }, "Test", source1.Token);
+                    token1.ThrowIfCancellationRequested();
+                    Assert.True(false);
+                },
+                "Test",
+                source1.Token
+            );
 
-            worker.EnqueueBackgroundWork(() =>
-            {
-                action2Ran = true;
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    action2Ran = true;
 
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                Assert.False(token2.IsCancellationRequested);
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    Assert.False(token2.IsCancellationRequested);
 
-                taskRunningEvent.Set();
-                cancelEvent.WaitOne();
+                    taskRunningEvent.Set();
+                    cancelEvent.WaitOne();
 
-                doneEvent.Set();
-            }, "Test", source2.Token);
+                    doneEvent.Set();
+                },
+                "Test",
+                source2.Token
+            );
 
             // Wait for the first task to start.
             taskRunningEvent.WaitOne();
@@ -202,13 +248,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
         [WpfFact]
         public void TestBackgroundCancelMultipleActions()
         {
-            var exportProvider = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider =
+                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
             var threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
             // Ensure that multiple background actions are cancelled if they
             // use the same cancellation token.
-            var worker = new AsynchronousSerialWorkQueue(threadingContext, listenerProvider.GetListener("Test"));
+            var worker = new AsynchronousSerialWorkQueue(
+                threadingContext,
+                listenerProvider.GetListener("Test")
+            );
 
             var taskRunningEvent = new AutoResetEvent(false);
             var cancelEvent = new AutoResetEvent(false);
@@ -220,26 +271,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
             var action1Ran = false;
             var action2Ran = false;
 
-            worker.EnqueueBackgroundWork(() =>
-            {
-                action1Ran = true;
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    action1Ran = true;
 
-                Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
-                Assert.False(cancellationToken.IsCancellationRequested);
+                    Assert.NotSame(_foregroundSyncContext, SynchronizationContext.Current);
+                    Assert.False(cancellationToken.IsCancellationRequested);
 
-                taskRunningEvent.Set();
-                cancelEvent.WaitOne();
+                    taskRunningEvent.Set();
+                    cancelEvent.WaitOne();
 
-                cancellationToken.ThrowIfCancellationRequested();
-                Assert.True(false);
-            }, "Test", source.Token);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    Assert.True(false);
+                },
+                "Test",
+                source.Token
+            );
 
             // We should not run this action.
-            worker.EnqueueBackgroundWork(() =>
-            {
-                action2Ran = true;
-                Assert.False(true);
-            }, "Test", source.Token);
+            worker.EnqueueBackgroundWork(
+                () =>
+                {
+                    action2Ran = true;
+                    Assert.False(true);
+                },
+                "Test",
+                source.Token
+            );
 
             taskRunningEvent.WaitOne();
 

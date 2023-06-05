@@ -63,7 +63,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.Watson
         {
             var mockFault = new MockFault();
 
-            var exception = new RemoteInvocationException("test", errorCode: 100, "remoteErrorData");
+            var exception = new RemoteInvocationException(
+                "test",
+                errorCode: 100,
+                "remoteErrorData"
+            );
             mockFault.SetExtraParameters(exception, emptyCallstack: false);
 
             Assert.Equal(exception.GetParameterString(), mockFault.Map[7]);
@@ -74,7 +78,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.Watson
         {
             var mockFault = new MockFault();
 
-            var exception = new RemoteInvocationException(message: null, errorCode: -1, errorData: null);
+            var exception = new RemoteInvocationException(
+                message: null,
+                errorCode: -1,
+                errorData: null
+            );
             mockFault.SetExtraParameters(exception, emptyCallstack: false);
 
             Assert.Equal(exception.GetParameterString(), mockFault.Map[7]);

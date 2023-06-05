@@ -13,13 +13,17 @@ using System.Runtime.Serialization;
 namespace System.Collections
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class Comparer : IComparer, ISerializable
     {
         private readonly CompareInfo _compareInfo;
 
         public static readonly Comparer Default = new Comparer(CultureInfo.CurrentCulture);
-        public static readonly Comparer DefaultInvariant = new Comparer(CultureInfo.InvariantCulture);
+        public static readonly Comparer DefaultInvariant = new Comparer(
+            CultureInfo.InvariantCulture
+        );
 
         public Comparer(CultureInfo culture)
         {
@@ -50,9 +54,12 @@ namespace System.Collections
         //
         public int Compare(object? a, object? b)
         {
-            if (a == b) return 0;
-            if (a == null) return -1;
-            if (b == null) return 1;
+            if (a == b)
+                return 0;
+            if (a == null)
+                return -1;
+            if (b == null)
+                return 1;
 
             if (a is string sa && b is string sb)
                 return _compareInfo.Compare(sa, sb);

@@ -12,7 +12,7 @@ namespace System.CommandLine
     /// <summary>
     /// Enables composition of command line configurations.
     /// </summary>
-    public class CommandLineBuilder 
+    public class CommandLineBuilder
     {
         // for every generic type with type argument being struct JIT needs to compile a dedicated version
         // (because each struct is of a different size)
@@ -43,10 +43,10 @@ namespace System.CommandLine
         /// Determines whether the parser recognize and expands POSIX-style bundled options.
         /// </summary>
         internal bool EnablePosixBundling { get; set; } = true;
-        
+
         internal bool EnableTokenReplacement { get; set; } = true;
-        
-        internal void CustomizeHelpLayout(Action<HelpContext> customize) => 
+
+        internal void CustomizeHelpLayout(Action<HelpContext> customize) =>
             _customizeHelpBuilder = customize;
 
         internal void UseHelpBuilderFactory(Func<BindingContext, HelpBuilder> factory) =>
@@ -59,8 +59,11 @@ namespace System.CommandLine
             HelpBuilder CreateHelpBuilder(BindingContext bindingContext)
             {
                 var helpBuilder = _helpBuilderFactory is { }
-                                             ? _helpBuilderFactory(bindingContext)
-                                             : CommandLineConfiguration.DefaultHelpBuilderFactory(bindingContext, MaxHelpWidth);
+                    ? _helpBuilderFactory(bindingContext)
+                    : CommandLineConfiguration.DefaultHelpBuilderFactory(
+                        bindingContext,
+                        MaxHelpWidth
+                    );
 
                 helpBuilder.OnCustomize = _customizeHelpBuilder;
 
@@ -94,10 +97,12 @@ namespace System.CommandLine
                     enableTokenReplacement: EnableTokenReplacement,
                     resources: LocalizationResources,
                     middlewarePipeline: _middlewareList is null
-                                            ? Array.Empty<InvocationMiddleware>()
-                                            : GetMiddleware(),
+                        ? Array.Empty<InvocationMiddleware>()
+                        : GetMiddleware(),
                     helpBuilderFactory: GetHelpBuilderFactory(),
-                    tokenReplacer: TokenReplacer));
+                    tokenReplacer: TokenReplacer
+                )
+            );
 
         private IReadOnlyList<InvocationMiddleware> GetMiddleware()
         {
@@ -110,13 +115,17 @@ namespace System.CommandLine
             return result;
         }
 
-        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrder order)
-            => AddMiddleware(middleware, (int)order);
+        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrder order) =>
+            AddMiddleware(middleware, (int)order);
 
-        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrderInternal order)
-            => AddMiddleware(middleware, (int)order);
+        internal void AddMiddleware(
+            InvocationMiddleware middleware,
+            MiddlewareOrderInternal order
+        ) => AddMiddleware(middleware, (int)order);
 
-        private void AddMiddleware(InvocationMiddleware middleware, int order)
-            => (_middlewareList ??= new()).Add(new Tuple<InvocationMiddleware, int>(middleware, order));
+        private void AddMiddleware(InvocationMiddleware middleware, int order) =>
+            (_middlewareList ??= new()).Add(
+                new Tuple<InvocationMiddleware, int>(middleware, order)
+            );
     }
 }

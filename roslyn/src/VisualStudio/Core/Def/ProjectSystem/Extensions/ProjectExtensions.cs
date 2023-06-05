@@ -14,7 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
 {
     internal static class ProjectExtensions
     {
-        public static ProjectItem FindOrCreateFolder(this EnvDTE.Project project, IEnumerable<string> containers)
+        public static ProjectItem FindOrCreateFolder(
+            this EnvDTE.Project project,
+            IEnumerable<string> containers
+        )
         {
             Debug.Assert(containers.Any());
 
@@ -50,7 +53,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
             return currentItems.AddFolder(folderName);
         }
 
-        public static ProjectItem? FindItemByPath(this EnvDTE.Project project, string itemFilePath, StringComparer comparer)
+        public static ProjectItem? FindItemByPath(
+            this EnvDTE.Project project,
+            string itemFilePath,
+            StringComparer comparer
+        )
         {
             var stack = new Stack<ProjectItems>();
             stack.Push(project.ProjectItems);
@@ -61,7 +68,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
 
                 foreach (var projectItem in currentItems.OfType<ProjectItem>())
                 {
-                    if (projectItem.TryGetFullPath(out var filePath) && comparer.Equals(filePath, itemFilePath))
+                    if (
+                        projectItem.TryGetFullPath(out var filePath)
+                        && comparer.Equals(filePath, itemFilePath)
+                    )
                     {
                         return projectItem;
                     }
@@ -76,7 +86,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
             return null;
         }
 
-        public static bool TryGetFullPath(this EnvDTE.Project project, [NotNullWhen(returnValue: true)] out string? fullPath)
+        public static bool TryGetFullPath(
+            this EnvDTE.Project project,
+            [NotNullWhen(returnValue: true)] out string? fullPath
+        )
         {
             fullPath = project.Properties.Item("FullPath").Value as string;
             return fullPath != null;

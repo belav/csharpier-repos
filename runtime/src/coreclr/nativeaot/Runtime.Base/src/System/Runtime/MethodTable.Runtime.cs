@@ -19,7 +19,10 @@ namespace Internal.Runtime
 #else
             fixed (MethodTable* pThis = &this)
             {
-                void* pGetArrayEEType = InternalCalls.RhpGetClasslibFunctionFromEEType(new IntPtr(pThis), ClassLibFunctionId.GetSystemArrayEEType);
+                void* pGetArrayEEType = InternalCalls.RhpGetClasslibFunctionFromEEType(
+                    new IntPtr(pThis),
+                    ClassLibFunctionId.GetSystemArrayEEType
+                );
                 return ((delegate* <MethodTable*>)pGetArrayEEType)();
             }
 #endif
@@ -42,7 +45,11 @@ namespace Internal.Runtime
 
         internal IntPtr GetClasslibFunction(ClassLibFunctionId id)
         {
-            return (IntPtr)InternalCalls.RhpGetClasslibFunctionFromEEType((MethodTable*)Unsafe.AsPointer(ref this), id);
+            return (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromEEType(
+                    (MethodTable*)Unsafe.AsPointer(ref this),
+                    id
+                );
         }
 
         // Returns an address in the module most closely associated with this MethodTable that can be handed to
@@ -87,7 +94,8 @@ namespace Internal.Runtime
         /// </summary>
         internal bool SimpleCasting()
         {
-            return (_uFlags & (uint)EETypeFlags.ComplexCastingMask) == (uint)EETypeKind.CanonicalEEType;
+            return (_uFlags & (uint)EETypeFlags.ComplexCastingMask)
+                == (uint)EETypeKind.CanonicalEEType;
         }
 
         /// <summary>
@@ -118,8 +126,11 @@ namespace Internal.Runtime
 
                 if (pThisEEType->IsParameterizedType && pOtherEEType->IsParameterizedType)
                 {
-                    return pThisEEType->RelatedParameterType->IsEquivalentTo(pOtherEEType->RelatedParameterType) &&
-                        pThisEEType->ParameterizedTypeShape == pOtherEEType->ParameterizedTypeShape;
+                    return pThisEEType->RelatedParameterType->IsEquivalentTo(
+                            pOtherEEType->RelatedParameterType
+                        )
+                        && pThisEEType->ParameterizedTypeShape
+                            == pOtherEEType->ParameterizedTypeShape;
                 }
             }
 

@@ -38,7 +38,9 @@ namespace System.Xml.Xsl
     public sealed class XslCompiledTransform
     {
         // Version for GeneratedCodeAttribute
-        private static readonly Version? s_version = typeof(XslCompiledTransform).Assembly.GetName().Version;
+        private static readonly Version? s_version = typeof(XslCompiledTransform).Assembly
+            .GetName()
+            .Version;
 
         // Options of compilation
         private readonly bool _enableDebug;
@@ -82,12 +84,21 @@ namespace System.Xml.Xsl
         public void Load(XmlReader stylesheet)
         {
             Reset();
-            LoadInternal(stylesheet, XsltSettings.Default, CreateDefaultResolver(), originalStylesheetResolver: null);
+            LoadInternal(
+                stylesheet,
+                XsltSettings.Default,
+                CreateDefaultResolver(),
+                originalStylesheetResolver: null
+            );
         }
 
         // SxS: This method does not take any resource name and does not expose any resources to the caller.
         // It's OK to suppress the SxS warning.
-        public void Load(XmlReader stylesheet, XsltSettings? settings, XmlResolver? stylesheetResolver)
+        public void Load(
+            XmlReader stylesheet,
+            XsltSettings? settings,
+            XmlResolver? stylesheetResolver
+        )
         {
             Reset();
             LoadInternal(stylesheet, settings, stylesheetResolver, stylesheetResolver);
@@ -98,12 +109,21 @@ namespace System.Xml.Xsl
         public void Load(IXPathNavigable stylesheet)
         {
             Reset();
-            LoadInternal(stylesheet, XsltSettings.Default, CreateDefaultResolver(), originalStylesheetResolver: null);
+            LoadInternal(
+                stylesheet,
+                XsltSettings.Default,
+                CreateDefaultResolver(),
+                originalStylesheetResolver: null
+            );
         }
 
         // SxS: This method does not take any resource name and does not expose any resources to the caller.
         // It's OK to suppress the SxS warning.
-        public void Load(IXPathNavigable stylesheet, XsltSettings? settings, XmlResolver? stylesheetResolver)
+        public void Load(
+            IXPathNavigable stylesheet,
+            XsltSettings? settings,
+            XmlResolver? stylesheetResolver
+        )
         {
             Reset();
             LoadInternal(stylesheet, settings, stylesheetResolver, stylesheetResolver);
@@ -113,10 +133,19 @@ namespace System.Xml.Xsl
         {
             Reset();
             ArgumentNullException.ThrowIfNull(stylesheetUri);
-            LoadInternal(stylesheetUri, XsltSettings.Default, CreateDefaultResolver(), originalStylesheetResolver: null);
+            LoadInternal(
+                stylesheetUri,
+                XsltSettings.Default,
+                CreateDefaultResolver(),
+                originalStylesheetResolver: null
+            );
         }
 
-        public void Load(string stylesheetUri, XsltSettings? settings, XmlResolver? stylesheetResolver)
+        public void Load(
+            string stylesheetUri,
+            XsltSettings? settings,
+            XmlResolver? stylesheetResolver
+        )
         {
             Reset();
             ArgumentNullException.ThrowIfNull(stylesheetUri);
@@ -126,7 +155,12 @@ namespace System.Xml.Xsl
         // The 'originalStylesheetResolver' argument should be the original XmlResolver
         // that was passed to the caller (or null), *before* any default substitutions
         // were made by the caller.
-        private void LoadInternal(object stylesheet, XsltSettings? settings, XmlResolver? stylesheetResolver, XmlResolver? originalStylesheetResolver)
+        private void LoadInternal(
+            object stylesheet,
+            XsltSettings? settings,
+            XmlResolver? stylesheetResolver,
+            XmlResolver? originalStylesheetResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(stylesheet);
 
@@ -145,9 +179,19 @@ namespace System.Xml.Xsl
 
         [MemberNotNull(nameof(_compilerErrorColl))]
         [MemberNotNull(nameof(_qil))]
-        private void CompileXsltToQil(object stylesheet, XsltSettings settings, XmlResolver? stylesheetResolver, XmlResolver? originalStylesheetResolver)
+        private void CompileXsltToQil(
+            object stylesheet,
+            XsltSettings settings,
+            XmlResolver? stylesheetResolver,
+            XmlResolver? originalStylesheetResolver
+        )
         {
-            _compilerErrorColl = new Compiler(settings, _enableDebug, null).Compile(stylesheet, stylesheetResolver, originalStylesheetResolver, out _qil);
+            _compilerErrorColl = new Compiler(settings, _enableDebug, null).Compile(
+                stylesheet,
+                stylesheetResolver,
+                originalStylesheetResolver,
+                out _qil
+            );
         }
 
         /// <summary>
@@ -175,34 +219,62 @@ namespace System.Xml.Xsl
         //------------------------------------------------
         // Load compiled stylesheet from a Type
         //------------------------------------------------
-        [RequiresUnreferencedCode("This method will get fields and types from the assembly of the passed in compiledStylesheet and call their constructors which cannot be statically analyzed")]
+        [RequiresUnreferencedCode(
+            "This method will get fields and types from the assembly of the passed in compiledStylesheet and call their constructors which cannot be statically analyzed"
+        )]
         public void Load(Type compiledStylesheet)
         {
             Reset();
             ArgumentNullException.ThrowIfNull(compiledStylesheet);
-            object[] customAttrs = compiledStylesheet.GetCustomAttributes(typeof(GeneratedCodeAttribute), false);
-            GeneratedCodeAttribute? generatedCodeAttr = customAttrs.Length > 0 ? (GeneratedCodeAttribute)customAttrs[0] : null;
+            object[] customAttrs = compiledStylesheet.GetCustomAttributes(
+                typeof(GeneratedCodeAttribute),
+                false
+            );
+            GeneratedCodeAttribute? generatedCodeAttr =
+                customAttrs.Length > 0 ? (GeneratedCodeAttribute)customAttrs[0] : null;
 
             // If GeneratedCodeAttribute is not there, it is not a compiled stylesheet class
-            if (generatedCodeAttr != null && generatedCodeAttr.Tool == typeof(XslCompiledTransform).FullName)
+            if (
+                generatedCodeAttr != null
+                && generatedCodeAttr.Tool == typeof(XslCompiledTransform).FullName
+            )
             {
                 if (s_version < Version.Parse(generatedCodeAttr.Version!))
                 {
-                    throw new ArgumentException(SR.Format(SR.Xslt_IncompatibleCompiledStylesheetVersion, generatedCodeAttr.Version, s_version), nameof(compiledStylesheet));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Xslt_IncompatibleCompiledStylesheetVersion,
+                            generatedCodeAttr.Version,
+                            s_version
+                        ),
+                        nameof(compiledStylesheet)
+                    );
                 }
 
-                FieldInfo? fldData = compiledStylesheet.GetField(XmlQueryStaticData.DataFieldName, BindingFlags.Static | BindingFlags.NonPublic);
-                FieldInfo? fldTypes = compiledStylesheet.GetField(XmlQueryStaticData.TypesFieldName, BindingFlags.Static | BindingFlags.NonPublic);
+                FieldInfo? fldData = compiledStylesheet.GetField(
+                    XmlQueryStaticData.DataFieldName,
+                    BindingFlags.Static | BindingFlags.NonPublic
+                );
+                FieldInfo? fldTypes = compiledStylesheet.GetField(
+                    XmlQueryStaticData.TypesFieldName,
+                    BindingFlags.Static | BindingFlags.NonPublic
+                );
 
                 // If private fields are not there, it is not a compiled stylesheet class
                 if (fldData != null && fldTypes != null)
                 {
                     // Retrieve query static data from the type
-                    byte[]? queryData = fldData.GetValue(/*this:*/null) as byte[];
+                    byte[]? queryData =
+                        fldData.GetValue( /*this:*/
+                            null
+                        ) as byte[];
 
                     if (queryData != null)
                     {
-                        MethodInfo? executeMethod = compiledStylesheet.GetMethod("Execute", BindingFlags.Static | BindingFlags.NonPublic);
+                        MethodInfo? executeMethod = compiledStylesheet.GetMethod(
+                            "Execute",
+                            BindingFlags.Static | BindingFlags.NonPublic
+                        );
                         Type[]? earlyBoundTypes = (Type[]?)fldTypes.GetValue(null);
 
                         // Load the stylesheet
@@ -215,11 +287,16 @@ namespace System.Xml.Xsl
             // Throw an exception if the command was not loaded
             if (_command == null)
             {
-                throw new ArgumentException(SR.Format(SR.Xslt_NotCompiledStylesheet, compiledStylesheet.FullName), nameof(compiledStylesheet));
+                throw new ArgumentException(
+                    SR.Format(SR.Xslt_NotCompiledStylesheet, compiledStylesheet.FullName),
+                    nameof(compiledStylesheet)
+                );
             }
         }
 
-        [RequiresUnreferencedCode("This method will call into constructors of the earlyBoundTypes array which cannot be statically analyzed.")]
+        [RequiresUnreferencedCode(
+            "This method will call into constructors of the earlyBoundTypes array which cannot be statically analyzed."
+        )]
         public void Load(MethodInfo executeMethod, byte[] queryData, Type[]? earlyBoundTypes)
         {
             Reset();
@@ -230,7 +307,10 @@ namespace System.Xml.Xsl
                 ? dm.CreateDelegate(typeof(ExecuteDelegate))
                 : executeMethod.CreateDelegate(typeof(ExecuteDelegate));
 
-            _command = new XmlILCommand((ExecuteDelegate)delExec, new XmlQueryStaticData(queryData, earlyBoundTypes));
+            _command = new XmlILCommand(
+                (ExecuteDelegate)delExec,
+                new XmlQueryStaticData(queryData, earlyBoundTypes)
+            );
             OutputSettings = _command.StaticData.DefaultWriterSettings;
         }
 
@@ -254,7 +334,11 @@ namespace System.Xml.Xsl
             Transform(input, arguments, results, CreateDefaultResolver());
         }
 
-        public void Transform(IXPathNavigable input, XsltArgumentList? arguments, TextWriter results)
+        public void Transform(
+            IXPathNavigable input,
+            XsltArgumentList? arguments,
+            TextWriter results
+        )
         {
             ArgumentNullException.ThrowIfNull(input);
             ArgumentNullException.ThrowIfNull(results);
@@ -372,7 +456,12 @@ namespace System.Xml.Xsl
 
         // SxS: This method does not take any resource name and does not expose any resources to the caller.
         // It's OK to suppress the SxS warning.
-        public void Transform(XmlReader input, XsltArgumentList? arguments, XmlWriter results, XmlResolver? documentResolver)
+        public void Transform(
+            XmlReader input,
+            XsltArgumentList? arguments,
+            XmlWriter results,
+            XmlResolver? documentResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(input);
             ArgumentNullException.ThrowIfNull(results);
@@ -383,7 +472,12 @@ namespace System.Xml.Xsl
 
         // SxS: This method does not take any resource name and does not expose any resources to the caller.
         // It's OK to suppress the SxS warning.
-        public void Transform(IXPathNavigable input, XsltArgumentList? arguments, XmlWriter results, XmlResolver? documentResolver)
+        public void Transform(
+            IXPathNavigable input,
+            XsltArgumentList? arguments,
+            XmlWriter results,
+            XmlResolver? documentResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(input);
             ArgumentNullException.ThrowIfNull(results);

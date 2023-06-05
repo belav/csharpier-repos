@@ -46,7 +46,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
         /// <returns>
         /// The generated resultId associated with the passed in completion list.
         /// </returns>
-        public long UpdateCache(LSP.TextDocumentIdentifier textDocument, CompletionList completionList)
+        public long UpdateCache(
+            LSP.TextDocumentIdentifier textDocument,
+            CompletionList completionList
+        )
         {
             lock (_accessLock)
             {
@@ -98,13 +101,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
 
             public static int MaximumCacheSize => MaxCacheSize;
 
-            public TestAccessor(CompletionListCache completionListCache)
-                => _completionListCache = completionListCache;
+            public TestAccessor(CompletionListCache completionListCache) =>
+                _completionListCache = completionListCache;
 
-            public List<CacheEntry> GetCacheContents()
-                => _completionListCache._resultIdToCompletionList;
+            public List<CacheEntry> GetCacheContents() =>
+                _completionListCache._resultIdToCompletionList;
         }
 
-        public record CacheEntry(long ResultId, LSP.TextDocumentIdentifier TextDocument, CompletionList CompletionList);
+        public record CacheEntry(
+            long ResultId,
+            LSP.TextDocumentIdentifier TextDocument,
+            CompletionList CompletionList
+        );
     }
 }

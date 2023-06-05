@@ -10,14 +10,16 @@ namespace System.Security.Cryptography
         private static byte[] ReadRequiredElement(
             ref XmlKeyHelper.ParseState state,
             string name,
-            int sizeHint = -1)
+            int sizeHint = -1
+        )
         {
             byte[]? ret = XmlKeyHelper.ReadCryptoBinary(ref state, name, sizeHint);
 
             if (ret == null)
             {
                 throw new CryptographicException(
-                    SR.Format(SR.Cryptography_InvalidFromXmlString, nameof(RSA), name));
+                    SR.Format(SR.Cryptography_InvalidFromXmlString, nameof(RSA), name)
+                );
             }
 
             return ret;
@@ -39,7 +41,11 @@ namespace System.Security.Cryptography
             byte[]? q = XmlKeyHelper.ReadCryptoBinary(ref state, nameof(RSAParameters.Q), halfN);
             byte[]? dp = XmlKeyHelper.ReadCryptoBinary(ref state, nameof(RSAParameters.DP), halfN);
             byte[]? dq = XmlKeyHelper.ReadCryptoBinary(ref state, nameof(RSAParameters.DQ), halfN);
-            byte[]? qInv = XmlKeyHelper.ReadCryptoBinary(ref state, nameof(RSAParameters.InverseQ), halfN);
+            byte[]? qInv = XmlKeyHelper.ReadCryptoBinary(
+                ref state,
+                nameof(RSAParameters.InverseQ),
+                halfN
+            );
             byte[]? d = XmlKeyHelper.ReadCryptoBinary(ref state, nameof(RSAParameters.D), n.Length);
 
             RSAParameters keyParameters = new RSAParameters
@@ -109,8 +115,16 @@ namespace System.Security.Cryptography
             RSAParameters keyParameters = ExportParameters(includePrivateParameters);
             StringBuilder builder = new StringBuilder(initialCapacity);
             builder.Append("<RSAKeyValue>");
-            XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.Modulus), keyParameters.Modulus, builder);
-            XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.Exponent), keyParameters.Exponent, builder);
+            XmlKeyHelper.WriteCryptoBinary(
+                nameof(RSAParameters.Modulus),
+                keyParameters.Modulus,
+                builder
+            );
+            XmlKeyHelper.WriteCryptoBinary(
+                nameof(RSAParameters.Exponent),
+                keyParameters.Exponent,
+                builder
+            );
 
             if (includePrivateParameters)
             {
@@ -119,7 +133,11 @@ namespace System.Security.Cryptography
                 XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.Q), keyParameters.Q, builder);
                 XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.DP), keyParameters.DP, builder);
                 XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.DQ), keyParameters.DQ, builder);
-                XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.InverseQ), keyParameters.InverseQ, builder);
+                XmlKeyHelper.WriteCryptoBinary(
+                    nameof(RSAParameters.InverseQ),
+                    keyParameters.InverseQ,
+                    builder
+                );
                 XmlKeyHelper.WriteCryptoBinary(nameof(RSAParameters.D), keyParameters.D, builder);
             }
 

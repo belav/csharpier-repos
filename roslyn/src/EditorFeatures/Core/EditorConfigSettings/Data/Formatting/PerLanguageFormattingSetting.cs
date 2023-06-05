@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                     return _value;
                 }
 
-                if (_editorConfigOptions.TryGetEditorConfigOption(_option, out T? value) &&
-                    value is not null)
+                if (
+                    _editorConfigOptions.TryGetEditorConfigOption(_option, out T? value)
+                    && value is not null
+                )
                 {
                     return value;
                 }
@@ -46,11 +48,13 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         private readonly AnalyzerConfigOptions _editorConfigOptions;
         private readonly OptionSet _visualStudioOptions;
 
-        public PerLanguageFormattingSetting(PerLanguageOption2<T> option,
-                                            string description,
-                                            AnalyzerConfigOptions editorConfigOptions,
-                                            OptionSet visualStudioOptions,
-                                            OptionUpdater updater)
+        public PerLanguageFormattingSetting(
+            PerLanguageOption2<T> option,
+            string description,
+            AnalyzerConfigOptions editorConfigOptions,
+            OptionSet visualStudioOptions,
+            OptionUpdater updater
+        )
             : base(description, updater)
         {
             _option = option;
@@ -61,9 +65,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         public override string Category => _option.Group.Description;
         public override Type Type => typeof(T);
 
-        public override OptionKey2 Key => new(_option, _option.OptionDefinition.IsPerLanguage ? Language ?? LanguageNames.CSharp : null);
+        public override OptionKey2 Key =>
+            new(
+                _option,
+                _option.OptionDefinition.IsPerLanguage ? Language ?? LanguageNames.CSharp : null
+            );
 
-        public override bool IsDefinedInEditorConfig => _editorConfigOptions.TryGetEditorConfigOption<T>(_option, out _);
+        public override bool IsDefinedInEditorConfig =>
+            _editorConfigOptions.TryGetEditorConfigOption<T>(_option, out _);
 
         public override void SetValue(object value)
         {

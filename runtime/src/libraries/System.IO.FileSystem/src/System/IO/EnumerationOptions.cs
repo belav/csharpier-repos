@@ -21,10 +21,21 @@ namespace System.IO
         /// explicitly specify EnumerationOptions.
         /// </summary>
         internal static EnumerationOptions Compatible { get; } =
-            new EnumerationOptions { MatchType = MatchType.Win32, AttributesToSkip = 0, IgnoreInaccessible = false };
+            new EnumerationOptions
+            {
+                MatchType = MatchType.Win32,
+                AttributesToSkip = 0,
+                IgnoreInaccessible = false
+            };
 
         private static EnumerationOptions CompatibleRecursive { get; } =
-            new EnumerationOptions { RecurseSubdirectories = true, MatchType = MatchType.Win32, AttributesToSkip = 0, IgnoreInaccessible = false };
+            new EnumerationOptions
+            {
+                RecurseSubdirectories = true,
+                MatchType = MatchType.Win32,
+                AttributesToSkip = 0,
+                IgnoreInaccessible = false
+            };
 
         /// <summary>
         /// Internal singleton for default options.
@@ -46,8 +57,14 @@ namespace System.IO
         /// </summary>
         internal static EnumerationOptions FromSearchOption(SearchOption searchOption)
         {
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException(nameof(searchOption), SR.ArgumentOutOfRange_Enum);
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    nameof(searchOption),
+                    SR.ArgumentOutOfRange_Enum
+                );
 
             return searchOption == SearchOption.AllDirectories ? CompatibleRecursive : Compatible;
         }
@@ -112,7 +129,10 @@ namespace System.IO
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 }
 
                 _maxRecursionDepth = value;

@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_JTrue1
 {
     const int Pass = 100;
@@ -14,14 +15,16 @@ public class BringUpTest_JTrue1
     public static int JTrue1(int x)
     {
         if (x == 1)
-            return x+1;
+            return x + 1;
         return 0;
     }
 
     public static int Main()
     {
         int y = JTrue1(1);
-        if (y == 2) return Pass;
-        else return Fail;
+        if (y == 2)
+            return Pass;
+        else
+            return Fail;
     }
 }

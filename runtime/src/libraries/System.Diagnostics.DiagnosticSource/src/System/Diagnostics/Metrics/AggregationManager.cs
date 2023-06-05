@@ -16,14 +16,16 @@ namespace System.Diagnostics.Metrics
     internal sealed class AggregationManager
     {
         public const double MinCollectionTimeSecs = 0.1;
-        private static readonly QuantileAggregation s_defaultHistogramConfig = new QuantileAggregation(new double[] { 0.50, 0.95, 0.99 });
+        private static readonly QuantileAggregation s_defaultHistogramConfig =
+            new QuantileAggregation(new double[] { 0.50, 0.95, 0.99 });
 
         // these fields are modified after construction and accessed on multiple threads, use lock(this) to ensure the data
         // is synchronized
         private readonly List<Predicate<Instrument>> _instrumentConfigFuncs = new();
         private TimeSpan _collectionPeriod;
 
-        private readonly ConcurrentDictionary<Instrument, InstrumentState> _instrumentStates = new();
+        private readonly ConcurrentDictionary<Instrument, InstrumentState> _instrumentStates =
+            new();
         private readonly CancellationTokenSource _cts = new();
         private Thread? _collectThread;
         private readonly MeterListener _listener;
@@ -57,7 +59,8 @@ namespace System.Diagnostics.Metrics
             Action<Exception> collectionError,
             Action timeSeriesLimitReached,
             Action histogramLimitReached,
-            Action<Exception> observableInstrumentCallbackError)
+            Action<Exception> observableInstrumentCallbackError
+        )
         {
             _maxTimeSeries = maxTimeSeries;
             _maxHistograms = maxHistograms;
@@ -91,13 +94,27 @@ namespace System.Diagnostics.Metrics
                     RemoveInstrumentState(instrument);
                 }
             };
-            _listener.SetMeasurementEventCallback<double>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
-            _listener.SetMeasurementEventCallback<float>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
-            _listener.SetMeasurementEventCallback<long>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
-            _listener.SetMeasurementEventCallback<int>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
-            _listener.SetMeasurementEventCallback<short>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
-            _listener.SetMeasurementEventCallback<byte>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
-            _listener.SetMeasurementEventCallback<decimal>((i, m, l, c) => ((InstrumentState)c!).Update((double)m, l));
+            _listener.SetMeasurementEventCallback<double>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
+            _listener.SetMeasurementEventCallback<float>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
+            _listener.SetMeasurementEventCallback<long>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
+            _listener.SetMeasurementEventCallback<int>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
+            _listener.SetMeasurementEventCallback<short>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
+            _listener.SetMeasurementEventCallback<byte>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
+            _listener.SetMeasurementEventCallback<decimal>(
+                (i, m, l, c) => ((InstrumentState)c!).Update((double)m, l)
+            );
         }
 
         public void Include(string meterName)
@@ -170,8 +187,9 @@ namespace System.Diagnostics.Metrics
                     //
                     DateTime now = DateTime.UtcNow;
                     double secsSinceStart = (now - startTime).TotalSeconds;
-                    double alignUpSecsSinceStart = Math.Ceiling(secsSinceStart / collectionIntervalSecs) *
-                        collectionIntervalSecs;
+                    double alignUpSecsSinceStart =
+                        Math.Ceiling(secsSinceStart / collectionIntervalSecs)
+                        * collectionIntervalSecs;
                     DateTime nextIntervalStartTime = startTime.AddSeconds(alignUpSecsSinceStart);
 
                     // The delay timer precision isn't exact. We might have a situation
@@ -250,8 +268,11 @@ namespace System.Diagnostics.Metrics
             return instrumentState;
         }
 
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-                        Justification = "MakeGenericType is creating instances over reference types that works fine in AOT.")]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "MakeGenericType is creating instances over reference types that works fine in AOT."
+        )]
         internal InstrumentState? BuildInstrumentState(Instrument instrument)
         {
             Func<Aggregator?>? createAggregatorFunc = GetAggregatorFactory(instrument);
@@ -261,7 +282,8 @@ namespace System.Diagnostics.Metrics
             }
             Type aggregatorType = createAggregatorFunc.GetType().GenericTypeArguments[0];
             Type instrumentStateType = typeof(InstrumentState<>).MakeGenericType(aggregatorType);
-            return (InstrumentState)Activator.CreateInstance(instrumentStateType, createAggregatorFunc)!;
+            return (InstrumentState)
+                Activator.CreateInstance(instrumentStateType, createAggregatorFunc)!;
         }
 
         private Func<Aggregator?>? GetAggregatorFactory(Instrument instrument)
@@ -306,9 +328,9 @@ namespace System.Diagnostics.Metrics
                     lock (this)
                     {
                         // checking currentHistograms first because avoiding unexpected increment of TimeSeries count.
-                        return (!CheckHistogramAllowed() || !CheckTimeSeriesAllowed()) ?
-                            null :
-                            new ExponentialHistogramAggregator(s_defaultHistogramConfig);
+                        return (!CheckHistogramAllowed() || !CheckTimeSeriesAllowed())
+                            ? null
+                            : new ExponentialHistogramAggregator(s_defaultHistogramConfig);
                     }
                 };
             }
@@ -369,10 +391,13 @@ namespace System.Diagnostics.Metrics
 
             foreach (KeyValuePair<Instrument, InstrumentState> kv in _instrumentStates)
             {
-                kv.Value.Collect(kv.Key, (LabeledAggregationStatistics labeledAggStats) =>
-                {
-                    _collectMeasurement(kv.Key, labeledAggStats);
-                });
+                kv.Value.Collect(
+                    kv.Key,
+                    (LabeledAggregationStatistics labeledAggStats) =>
+                    {
+                        _collectMeasurement(kv.Key, labeledAggStats);
+                    }
+                );
             }
         }
     }

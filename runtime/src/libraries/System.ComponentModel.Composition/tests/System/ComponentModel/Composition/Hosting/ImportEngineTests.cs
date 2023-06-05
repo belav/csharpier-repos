@@ -23,11 +23,9 @@ namespace System.ComponentModel.Composition
 
             engine.PreviewImports(importer, null);
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.AddExport("Value", 22));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.AddExport("Value", 22));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.RemoveExport("Value"));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.RemoveExport("Value"));
 
             GC.KeepAlive(importer);
         }
@@ -41,8 +39,7 @@ namespace System.ComponentModel.Composition
             var import = ImportDefinitionFactory.Create("Value");
             var importer = PartFactory.CreateImporter(import);
 
-            Assert.Throws<CompositionException>(() =>
-                engine.PreviewImports(importer, null));
+            Assert.Throws<CompositionException>(() => engine.PreviewImports(importer, null));
 
             exportProvider.AddExport("Value", 22);
             exportProvider.AddExport("Value", 23);
@@ -68,11 +65,9 @@ namespace System.ComponentModel.Composition
                 atomicComposition.Complete();
             }
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.AddExport("Value", 22));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.AddExport("Value", 22));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.RemoveExport("Value"));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.RemoveExport("Value"));
 
             GC.KeepAlive(importer);
         }
@@ -112,8 +107,9 @@ namespace System.ComponentModel.Composition
 
             using (var atomicComposition = new AtomicComposition())
             {
-                Assert.Throws<ChangeRejectedException>(() =>
-                    engine.PreviewImports(importer, atomicComposition));
+                Assert.Throws<ChangeRejectedException>(
+                    () => engine.PreviewImports(importer, atomicComposition)
+                );
             }
 
             exportProvider.AddExport("Value", 22);
@@ -136,11 +132,9 @@ namespace System.ComponentModel.Composition
 
             engine.PreviewImports(importer, null);
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.AddExport("Value", 22));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.AddExport("Value", 22));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.RemoveExport("Value"));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.RemoveExport("Value"));
 
             engine.ReleaseImports(importer, null);
 
@@ -184,7 +178,12 @@ namespace System.ComponentModel.Composition
             var exportProvider = ExportProviderFactory.CreateRecomposable();
             var engine = new ImportEngine(exportProvider);
 
-            var import = ImportDefinitionFactory.Create("Value", ImportCardinality.ZeroOrOne, false, false);
+            var import = ImportDefinitionFactory.Create(
+                "Value",
+                ImportCardinality.ZeroOrOne,
+                false,
+                false
+            );
             var importer = PartFactory.CreateImporter(import);
 
             engine.PreviewImports(importer, null);
@@ -202,7 +201,12 @@ namespace System.ComponentModel.Composition
             var exportProvider = ExportProviderFactory.CreateRecomposable();
             var engine = new ImportEngine(exportProvider);
 
-            var import = ImportDefinitionFactory.Create("Value", ImportCardinality.ZeroOrMore, false, false);
+            var import = ImportDefinitionFactory.Create(
+                "Value",
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var importer = PartFactory.CreateImporter(import);
 
             engine.PreviewImports(importer, null);
@@ -231,8 +235,9 @@ namespace System.ComponentModel.Composition
 
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.ReplaceExportValue("Value", 42));
+            Assert.Throws<ChangeRejectedException>(
+                () => exportProvider.ReplaceExportValue("Value", 42)
+            );
 
             Assert.Equal(21, importer.GetImport(import));
 
@@ -276,8 +281,9 @@ namespace System.ComponentModel.Composition
 
             Assert.Equal(21, importer.GetImport(import));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.ReplaceExportValue("Value", 42));
+            Assert.Throws<ChangeRejectedException>(
+                () => exportProvider.ReplaceExportValue("Value", 42)
+            );
 
             Assert.Equal(21, importer.GetImport(import));
 
@@ -328,8 +334,9 @@ namespace System.ComponentModel.Composition
             importer.ResetImport(import1);
             importer.ResetImport(import2);
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.ReplaceExportValue("Value", 42));
+            Assert.Throws<ChangeRejectedException>(
+                () => exportProvider.ReplaceExportValue("Value", 42)
+            );
 
             Assert.Null(importer.GetImport(import1));
             Assert.Null(importer.GetImport(import2));
@@ -402,18 +409,21 @@ namespace System.ComponentModel.Composition
             var exportProvider = ExportProviderFactory.CreateRecomposable();
             var engine = new ImportEngine(exportProvider);
 
-            var import = ImportDefinitionFactory.Create("Value", ImportCardinality.ZeroOrOne, false, false);
+            var import = ImportDefinitionFactory.Create(
+                "Value",
+                ImportCardinality.ZeroOrOne,
+                false,
+                false
+            );
             var importer = PartFactory.CreateImporter(import);
 
             exportProvider.AddExport("Value", 20);
 
             engine.SatisfyImports(importer);
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.AddExport("Value", 21));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.AddExport("Value", 21));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.RemoveExport("Value"));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.RemoveExport("Value"));
 
             GC.KeepAlive(importer);
         }
@@ -424,18 +434,21 @@ namespace System.ComponentModel.Composition
             var exportProvider = ExportProviderFactory.CreateRecomposable();
             var engine = new ImportEngine(exportProvider);
 
-            var import = ImportDefinitionFactory.Create("Value", ImportCardinality.ZeroOrMore, false, false);
+            var import = ImportDefinitionFactory.Create(
+                "Value",
+                ImportCardinality.ZeroOrMore,
+                false,
+                false
+            );
             var importer = PartFactory.CreateImporter(import);
 
             exportProvider.AddExport("Value", 20);
 
             engine.SatisfyImports(importer);
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.AddExport("Value", 21));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.AddExport("Value", 21));
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                exportProvider.RemoveExport("Value"));
+            Assert.Throws<ChangeRejectedException>(() => exportProvider.RemoveExport("Value"));
 
             GC.KeepAlive(importer);
         }
@@ -446,7 +459,12 @@ namespace System.ComponentModel.Composition
             var exportProvider = ExportProviderFactory.CreateRecomposable();
             var engine = new ImportEngine(exportProvider);
 
-            var import = ImportDefinitionFactory.Create("Value", ImportCardinality.ZeroOrOne, true, false);
+            var import = ImportDefinitionFactory.Create(
+                "Value",
+                ImportCardinality.ZeroOrOne,
+                true,
+                false
+            );
             var importer = PartFactory.CreateImporter(import);
 
             exportProvider.AddExport("Value", 20);
@@ -465,7 +483,12 @@ namespace System.ComponentModel.Composition
             var exportProvider = ExportProviderFactory.CreateRecomposable();
             var engine = new ImportEngine(exportProvider);
 
-            var import = ImportDefinitionFactory.Create("Value", ImportCardinality.ZeroOrMore, true, false);
+            var import = ImportDefinitionFactory.Create(
+                "Value",
+                ImportCardinality.ZeroOrMore,
+                true,
+                false
+            );
             var importer = PartFactory.CreateImporter(import);
 
             exportProvider.AddExport("Value", 20);
@@ -550,8 +573,7 @@ namespace System.ComponentModel.Composition
             var import = ImportDefinitionFactory.Create("Value");
             var importer = PartFactory.CreateImporter(import);
 
-            Assert.Throws<CompositionException>(() =>
-                engine.SatisfyImportsOnce(importer));
+            Assert.Throws<CompositionException>(() => engine.SatisfyImportsOnce(importer));
 
             exportProvider.AddExport("Value", 22);
             exportProvider.AddExport("Value", 23);

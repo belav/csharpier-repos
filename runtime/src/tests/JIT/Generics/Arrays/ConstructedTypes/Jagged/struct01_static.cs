@@ -4,25 +4,25 @@
 
 using System;
 
-
 public struct ValX1<T>
 {
     public T t;
+
     public ValX1(T t)
     {
         this.t = t;
     }
-
 }
+
 public class RefX1<T>
 {
     public T t;
+
     public RefX1(T t)
     {
         this.t = t;
     }
 }
-
 
 public struct Gen<T>
 {
@@ -32,10 +32,7 @@ public struct Gen<T>
     {
         Fld1 = fld1;
     }
-
-
 }
-
 
 public class ArrayHolder
 {
@@ -46,6 +43,7 @@ public class Test_struct01_static
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -54,14 +52,16 @@ public class Test_struct01_static
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
-
 
     public static int Main()
     {
         int size = 10;
-        int i, j, k, l, m;
+        int i,
+            j,
+            k,
+            l,
+            m;
         double sum = 0;
 
         for (i = 0; i < size; i++)
@@ -116,6 +116,4 @@ public class Test_struct01_static
             return 1;
         }
     }
-
 }
-

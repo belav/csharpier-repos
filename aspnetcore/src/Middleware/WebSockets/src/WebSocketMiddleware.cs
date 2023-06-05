@@ -31,7 +31,11 @@ public partial class WebSocketMiddleware
     /// <param name="next">The next middleware in the pipeline.</param>
     /// <param name="options">The configuration options.</param>
     /// <param name="loggerFactory">An <see cref="ILoggerFactory"/> instance used to create loggers.</param>
-    public WebSocketMiddleware(RequestDelegate next, IOptions<WebSocketOptions> options, ILoggerFactory loggerFactory)
+    public WebSocketMiddleware(
+        RequestDelegate next,
+        IOptions<WebSocketOptions> options,
+        ILoggerFactory loggerFactory
+    )
     {
         if (next == null)
         {
@@ -45,7 +49,9 @@ public partial class WebSocketMiddleware
         _next = next;
         _options = options.Value;
         _allowedOrigins = _options.AllowedOrigins.Select(o => o.ToLowerInvariant()).ToList();
-        _anyOriginAllowed = _options.AllowedOrigins.Count == 0 || _options.AllowedOrigins.Contains("*", StringComparer.Ordinal);
+        _anyOriginAllowed =
+            _options.AllowedOrigins.Count == 0
+            || _options.AllowedOrigins.Contains("*", StringComparer.Ordinal);
 
         _logger = loggerFactory.CreateLogger<WebSocketMiddleware>();
 
@@ -63,21 +69,35 @@ public partial class WebSocketMiddleware
         // Detect if an opaque upgrade is available. If so, add a websocket upgrade.
         var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
         var connectFeature = context.Features.Get<IHttpExtendedConnectFeature>();
-        if ((upgradeFeature != null || connectFeature != null) && context.Features.Get<IHttpWebSocketFeature>() == null)
+        if (
+            (upgradeFeature != null || connectFeature != null)
+            && context.Features.Get<IHttpWebSocketFeature>() == null
+        )
         {
-            var webSocketFeature = new WebSocketHandshake(context, upgradeFeature, connectFeature, _options, _logger);
+            var webSocketFeature = new WebSocketHandshake(
+                context,
+                upgradeFeature,
+                connectFeature,
+                _options,
+                _logger
+            );
             context.Features.Set<IHttpWebSocketFeature>(webSocketFeature);
             if (!_anyOriginAllowed)
             {
                 // Check for Origin header
                 var originHeader = context.Request.Headers.Origin;
 
-                if (!StringValues.IsNullOrEmpty(originHeader) && webSocketFeature.IsWebSocketRequest)
+                if (
+                    !StringValues.IsNullOrEmpty(originHeader) && webSocketFeature.IsWebSocketRequest
+                )
                 {
                     // Check allowed origins to see if request is allowed
                     if (!_allowedOrigins.Contains(originHeader.ToString(), StringComparer.Ordinal))
                     {
-                        _logger.LogDebug("Request origin {Origin} is not in the list of allowed origins.", originHeader.ToString());
+                        _logger.LogDebug(
+                            "Request origin {Origin} is not in the list of allowed origins.",
+                            originHeader.ToString()
+                        );
                         context.Response.StatusCode = StatusCodes.Status403Forbidden;
                         return Task.CompletedTask;
                     }
@@ -98,7 +118,13 @@ public partial class WebSocketMiddleware
         private bool? _isWebSocketRequest;
         private bool _isH2WebSocket;
 
-        public WebSocketHandshake(HttpContext context, IHttpUpgradeFeature? upgradeFeature, IHttpExtendedConnectFeature? connectFeature, WebSocketOptions options, ILogger logger)
+        public WebSocketHandshake(
+            HttpContext context,
+            IHttpUpgradeFeature? upgradeFeature,
+            IHttpExtendedConnectFeature? connectFeature,
+            WebSocketOptions options,
+            ILogger logger
+        )
         {
             _context = context;
             _upgradeFeature = upgradeFeature;
@@ -115,12 +141,19 @@ public partial class WebSocketMiddleware
                 {
                     if (_connectFeature?.IsExtendedConnect == true)
                     {
-                        _isH2WebSocket = CheckSupportedWebSocketRequestH2(_context.Request.Method, _connectFeature.Protocol, _context.Request.Headers);
+                        _isH2WebSocket = CheckSupportedWebSocketRequestH2(
+                            _context.Request.Method,
+                            _connectFeature.Protocol,
+                            _context.Request.Headers
+                        );
                         _isWebSocketRequest = _isH2WebSocket;
                     }
                     else if (_upgradeFeature?.IsUpgradableRequest == true)
                     {
-                        _isWebSocketRequest = CheckSupportedWebSocketRequest(_context.Request.Method, _context.Request.Headers);
+                        _isWebSocketRequest = CheckSupportedWebSocketRequest(
+                            _context.Request.Method,
+                            _context.Request.Headers
+                        );
                     }
                     else
                     {
@@ -162,7 +195,12 @@ public partial class WebSocketMiddleware
                 }
             }
 
-            HandshakeHelpers.GenerateResponseHeaders(!_isH2WebSocket, _context.Request.Headers, subProtocol, _context.Response.Headers);
+            HandshakeHelpers.GenerateResponseHeaders(
+                !_isH2WebSocket,
+                _context.Request.Headers,
+                subProtocol,
+                _context.Response.Headers
+            );
 
             WebSocketDeflateOptions? deflateOptions = null;
             if (enableCompression)
@@ -171,11 +209,28 @@ public partial class WebSocketMiddleware
                 if (ext.Count != 0)
                 {
                     // loop over each extension offer, extensions can have multiple offers, we can accept any
-                    foreach (var extension in _context.Request.Headers.GetCommaSeparatedValues(HeaderNames.SecWebSocketExtensions))
+                    foreach (
+                        var extension in _context.Request.Headers.GetCommaSeparatedValues(
+                            HeaderNames.SecWebSocketExtensions
+                        )
+                    )
                     {
-                        if (extension.AsSpan().TrimStart().StartsWith("permessage-deflate", StringComparison.Ordinal))
+                        if (
+                            extension
+                                .AsSpan()
+                                .TrimStart()
+                                .StartsWith("permessage-deflate", StringComparison.Ordinal)
+                        )
                         {
-                            if (HandshakeHelpers.ParseDeflateOptions(extension.AsSpan().TrimStart(), serverContextTakeover, serverMaxWindowBits, out var parsedOptions, out var response))
+                            if (
+                                HandshakeHelpers.ParseDeflateOptions(
+                                    extension.AsSpan().TrimStart(),
+                                    serverContextTakeover,
+                                    serverMaxWindowBits,
+                                    out var parsedOptions,
+                                    out var response
+                                )
+                            )
                             {
                                 Log.CompressionAccepted(_logger, response);
                                 deflateOptions = parsedOptions;
@@ -207,16 +262,22 @@ public partial class WebSocketMiddleware
                 opaqueTransport = await _upgradeFeature!.UpgradeAsync(); // Sets status code to 101
             }
 
-            return WebSocket.CreateFromStream(opaqueTransport, new WebSocketCreationOptions()
-            {
-                IsServer = true,
-                KeepAliveInterval = keepAliveInterval,
-                SubProtocol = subProtocol,
-                DangerousDeflateOptions = deflateOptions
-            });
+            return WebSocket.CreateFromStream(
+                opaqueTransport,
+                new WebSocketCreationOptions()
+                {
+                    IsServer = true,
+                    KeepAliveInterval = keepAliveInterval,
+                    SubProtocol = subProtocol,
+                    DangerousDeflateOptions = deflateOptions
+                }
+            );
         }
 
-        public static bool CheckSupportedWebSocketRequest(string method, IHeaderDictionary requestHeaders)
+        public static bool CheckSupportedWebSocketRequest(
+            string method,
+            IHeaderDictionary requestHeaders
+        )
         {
             if (!HttpMethods.IsGet(method))
             {
@@ -233,7 +294,13 @@ public partial class WebSocketMiddleware
             var values = requestHeaders.GetCommaSeparatedValues(HeaderNames.Upgrade);
             foreach (var value in values)
             {
-                if (string.Equals(value, Constants.Headers.UpgradeWebSocket, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        value,
+                        Constants.Headers.UpgradeWebSocket,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // WebSockets are long lived; so if the header values are valid we switch them out for the interned versions.
                     if (values.Length == 1)
@@ -282,10 +349,18 @@ public partial class WebSocketMiddleware
         // sec-websocket-extensions = permessage-deflate
         // sec-websocket-version = 13
         // origin = http://www.example.com
-        public static bool CheckSupportedWebSocketRequestH2(string method, string? protocol, IHeaderDictionary requestHeaders)
+        public static bool CheckSupportedWebSocketRequestH2(
+            string method,
+            string? protocol,
+            IHeaderDictionary requestHeaders
+        )
         {
             return HttpMethods.IsConnect(method)
-                && string.Equals(protocol, Constants.Headers.UpgradeWebSocket, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(
+                    protocol,
+                    Constants.Headers.UpgradeWebSocket,
+                    StringComparison.OrdinalIgnoreCase
+                )
                 && CheckWebSocketVersion(requestHeaders);
         }
 
@@ -294,7 +369,13 @@ public partial class WebSocketMiddleware
             var values = requestHeaders.GetCommaSeparatedValues(HeaderNames.SecWebSocketVersion);
             foreach (var value in values)
             {
-                if (string.Equals(value, Constants.Headers.SupportedVersion, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        value,
+                        Constants.Headers.SupportedVersion,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // WebSockets are long lived; so if the header values are valid we switch them out for the interned versions.
                     if (values.Length == 1)
@@ -310,10 +391,20 @@ public partial class WebSocketMiddleware
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "WebSocket compression negotiation accepted with values '{CompressionResponse}'.", EventName = "CompressionAccepted")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "WebSocket compression negotiation accepted with values '{CompressionResponse}'.",
+            EventName = "CompressionAccepted"
+        )]
         public static partial void CompressionAccepted(ILogger logger, string compressionResponse);
 
-        [LoggerMessage(2, LogLevel.Debug, "Compression negotiation not accepted by server.", EventName = "CompressionNotAccepted")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Compression negotiation not accepted by server.",
+            EventName = "CompressionNotAccepted"
+        )]
         public static partial void CompressionNotAccepted(ILogger logger);
     }
 }

@@ -9,7 +9,13 @@ namespace System.Net
     {
         public static NetEventSource Log = new NetEventSource();
 
-        public static void Enter(object thisOrContextObject, object arg1 = null, object arg2 = null, object arg3 = null) { }
+        public static void Enter(
+            object thisOrContextObject,
+            object arg1 = null,
+            object arg2 = null,
+            object arg3 = null
+        ) { }
+
         public static void Info(object thisOrContextObject, object arg) { }
     }
 }

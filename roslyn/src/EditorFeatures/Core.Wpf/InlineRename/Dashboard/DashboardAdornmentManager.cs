@@ -21,21 +21,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         private readonly IAdornmentLayer _adornmentLayer;
 
-        private static readonly ConditionalWeakTable<InlineRenameSession, DashboardViewModel> s_createdViewModels =
-            new ConditionalWeakTable<InlineRenameSession, DashboardViewModel>();
+        private static readonly ConditionalWeakTable<
+            InlineRenameSession,
+            DashboardViewModel
+        > s_createdViewModels = new ConditionalWeakTable<InlineRenameSession, DashboardViewModel>();
 
         public DashboardAdornmentManager(
             InlineRenameService renameService,
             IEditorFormatMapService editorFormatMapService,
             IDashboardColorUpdater? dashboardColorUpdater,
-            IWpfTextView textView)
+            IWpfTextView textView
+        )
         {
             _renameService = renameService;
             _editorFormatMapService = editorFormatMapService;
             _dashboardColorUpdater = dashboardColorUpdater;
             _textView = textView;
 
-            _adornmentLayer = textView.GetAdornmentLayer(DashboardAdornmentProvider.AdornmentLayerName);
+            _adornmentLayer = textView.GetAdornmentLayer(
+                DashboardAdornmentProvider.AdornmentLayerName
+            );
 
             _renameService.ActiveSessionChanged += OnActiveSessionChanged;
             _textView.Closed += OnTextViewClosed;
@@ -49,34 +54,50 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _textView.Closed -= OnTextViewClosed;
         }
 
-        private void OnTextViewClosed(object sender, EventArgs e)
-            => Dispose();
+        private void OnTextViewClosed(object sender, EventArgs e) => Dispose();
 
-        private void OnActiveSessionChanged(object sender, EventArgs e)
-            => UpdateAdornments();
+        private void OnActiveSessionChanged(object sender, EventArgs e) => UpdateAdornments();
 
         private void UpdateAdornments()
         {
             _adornmentLayer.RemoveAllAdornments();
 
-            if (_renameService.ActiveSession != null &&
-                ViewIncludesBufferFromWorkspace(_textView, _renameService.ActiveSession.Workspace))
+            if (
+                _renameService.ActiveSession != null
+                && ViewIncludesBufferFromWorkspace(
+                    _textView,
+                    _renameService.ActiveSession.Workspace
+                )
+            )
             {
                 _dashboardColorUpdater?.UpdateColors();
 
                 var newAdornment = new Dashboard(
-                    s_createdViewModels.GetValue(_renameService.ActiveSession, session => new DashboardViewModel(session)),
+                    s_createdViewModels.GetValue(
+                        _renameService.ActiveSession,
+                        session => new DashboardViewModel(session)
+                    ),
                     _editorFormatMapService,
-                    _textView);
-                _adornmentLayer.AddAdornment(AdornmentPositioningBehavior.ViewportRelative, null, null, newAdornment,
-                    (tag, adornment) => ((Dashboard)adornment).Dispose());
+                    _textView
+                );
+                _adornmentLayer.AddAdornment(
+                    AdornmentPositioningBehavior.ViewportRelative,
+                    null,
+                    null,
+                    newAdornment,
+                    (tag, adornment) => ((Dashboard)adornment).Dispose()
+                );
             }
         }
 
-        private static bool ViewIncludesBufferFromWorkspace(IWpfTextView textView, Workspace workspace)
+        private static bool ViewIncludesBufferFromWorkspace(
+            IWpfTextView textView,
+            Workspace workspace
+        )
         {
-            return textView.BufferGraph.GetTextBuffers(b => GetWorkspace(b.AsTextContainer()) == workspace)
-                                       .Any();
+            return textView.BufferGraph
+                .GetTextBuffers(b => GetWorkspace(b.AsTextContainer()) == workspace)
+                .Any();
         }
 
         private static Workspace? GetWorkspace(SourceTextContainer textContainer)

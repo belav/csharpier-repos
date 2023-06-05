@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly TypeWithAnnotations _type;
         private readonly DiagnosticInfo _info;
 
-        private LazyMissingNonNullTypesContextDiagnosticInfo(TypeWithAnnotations type, DiagnosticInfo info)
+        private LazyMissingNonNullTypesContextDiagnosticInfo(
+            TypeWithAnnotations type,
+            DiagnosticInfo info
+        )
         {
             Debug.Assert(type.HasType);
             _type = type;
@@ -32,7 +35,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// - an error before C# 8.0
         /// - a warning outside of a NonNullTypes context
         /// </summary>
-        public static void AddAll(Binder binder, SyntaxToken questionToken, TypeWithAnnotations? type, DiagnosticBag diagnostics)
+        public static void AddAll(
+            Binder binder,
+            SyntaxToken questionToken,
+            TypeWithAnnotations? type,
+            DiagnosticBag diagnostics
+        )
         {
             var location = questionToken.GetLocation();
 
@@ -40,14 +48,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             GetRawDiagnosticInfos(binder, questionToken, rawInfos);
             foreach (var rawInfo in rawInfos)
             {
-                var info = (type.HasValue) ? new LazyMissingNonNullTypesContextDiagnosticInfo(type.Value, rawInfo) : rawInfo;
+                var info =
+                    (type.HasValue)
+                        ? new LazyMissingNonNullTypesContextDiagnosticInfo(type.Value, rawInfo)
+                        : rawInfo;
                 diagnostics.Add(info, location);
             }
 
             rawInfos.Free();
         }
 
-        private static void GetRawDiagnosticInfos(Binder binder, SyntaxToken questionToken, ArrayBuilder<DiagnosticInfo> infos)
+        private static void GetRawDiagnosticInfos(
+            Binder binder,
+            SyntaxToken questionToken,
+            ArrayBuilder<DiagnosticInfo> infos
+        )
         {
             Debug.Assert(questionToken.SyntaxTree != null);
             var tree = (CSharpSyntaxTree)questionToken.SyntaxTree;
@@ -59,20 +74,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 infos.Add(info);
             }
 
-            if (info?.Severity != DiagnosticSeverity.Error && !binder.AreNullableAnnotationsEnabled(questionToken))
+            if (
+                info?.Severity != DiagnosticSeverity.Error
+                && !binder.AreNullableAnnotationsEnabled(questionToken)
+            )
             {
-                var code = tree.IsGeneratedCode(binder.Compilation.Options.SyntaxTreeOptionsProvider, CancellationToken.None)
+                var code = tree.IsGeneratedCode(
+                    binder.Compilation.Options.SyntaxTreeOptionsProvider,
+                    CancellationToken.None
+                )
                     ? ErrorCode.WRN_MissingNonNullTypesContextForAnnotationInGeneratedCode
                     : ErrorCode.WRN_MissingNonNullTypesContextForAnnotation;
                 infos.Add(new CSDiagnosticInfo(code));
             }
         }
+
 #nullable disable
 
-        internal static bool IsNullableReference(TypeSymbol type)
-            => type is null || !(type.IsValueType || type.IsErrorType());
+        internal static bool IsNullableReference(TypeSymbol type) =>
+            type is null || !(type.IsValueType || type.IsErrorType());
 
-        protected override DiagnosticInfo ResolveInfo() => IsNullableReference(_type.Type) ? _info : null;
+        protected override DiagnosticInfo ResolveInfo() =>
+            IsNullableReference(_type.Type) ? _info : null;
     }
 }
-

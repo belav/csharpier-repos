@@ -7,15 +7,19 @@ using System.Runtime.CompilerServices;
 namespace ArrayBound
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                                 new RngTest(Test.Test2),
-                                 new RngTest(Test.Test3)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3)
+            };
 
             foreach (RngTest test in Tests)
             {
@@ -52,11 +56,12 @@ namespace ArrayBound
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
-		* Index is type sbyte
-		*********************************************************************************************/
+        * Index is type sbyte
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -69,8 +74,8 @@ namespace ArrayBound
         }
 
         /********************************************************************************************
-		* Index is type short
-		********************************************************************************************/
+        * Index is type short
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -81,9 +86,10 @@ namespace ArrayBound
                 numbers[index] = 1;
             }
         }
+
         /********************************************************************************************
-		* upper bound is on the edge of the short
-		********************************************************************************************/
+        * upper bound is on the edge of the short
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test3()
         {

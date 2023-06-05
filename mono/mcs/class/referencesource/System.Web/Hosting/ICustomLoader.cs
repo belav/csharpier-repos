@@ -1,10 +1,11 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="ICustomLoader.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
@@ -21,9 +22,13 @@ namespace System.Web.Hosting {
     /// The developer's bin-deployed AspNet.Loader assembly is expected to have an assembly-level
     /// CustomLoaderAttribute whose ctor parameter is a type which implements this interface.
     /// </summary>
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("50A3CE65-2F9F-44E9-9094-32C6C928F966")]
-    internal interface ICustomLoader {
-
+    [
+        ComImport,
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid("50A3CE65-2F9F-44E9-9094-32C6C928F966")
+    ]
+    internal interface ICustomLoader
+    {
         /// <summary>
         /// Loads a custom runtime for the current application.
         /// </summary>
@@ -40,7 +45,7 @@ namespace System.Web.Hosting {
             [In, MarshalAs(UnmanagedType.LPWStr)] string appConfigPath,
             [In, MarshalAs(UnmanagedType.Interface)] IProcessHostSupportFunctions supportFunctions,
             [In] IntPtr pLoadAppData,
-            [In] int loadAppDataSize);
-
+            [In] int loadAppDataSize
+        );
     }
 }

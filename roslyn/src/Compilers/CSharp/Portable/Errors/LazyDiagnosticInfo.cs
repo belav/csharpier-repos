@@ -11,15 +11,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         private DiagnosticInfo? _lazyInfo;
 
         protected LazyDiagnosticInfo()
-            : base(CSharp.MessageProvider.Instance, (int)ErrorCode.Unknown)
-        {
-        }
+            : base(CSharp.MessageProvider.Instance, (int)ErrorCode.Unknown) { }
 
         internal sealed override DiagnosticInfo GetResolvedInfo()
         {
             if (_lazyInfo == null)
             {
-                Interlocked.CompareExchange(ref _lazyInfo, ResolveInfo() ?? CSDiagnosticInfo.VoidDiagnosticInfo, null);
+                Interlocked.CompareExchange(
+                    ref _lazyInfo,
+                    ResolveInfo() ?? CSDiagnosticInfo.VoidDiagnosticInfo,
+                    null
+                );
             }
 
             return _lazyInfo;

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -31,24 +31,26 @@ using System.Reflection;
 using DbLinq.Util;
 
 #if MONO_STRICT
-    namespace System.Data.Linq
+namespace System.Data.Linq
 #else
-    namespace DbLinq.Data.Linq
+namespace DbLinq.Data.Linq
 #endif
 {
     /// <summary>
-    /// Allows to specify 
+    /// Allows to specify
     /// </summary>
     public sealed class DataLoadOptions
     {
         /// <summary>
         /// Criteria to restrict associations
         /// </summary>
-        private readonly Dictionary<MemberInfo, bool> eagerLoading = new Dictionary<MemberInfo, bool>();
-        private readonly Dictionary<MemberInfo, LambdaExpression> criteria = new Dictionary<MemberInfo, LambdaExpression>();
+        private readonly Dictionary<MemberInfo, bool> eagerLoading =
+            new Dictionary<MemberInfo, bool>();
+        private readonly Dictionary<MemberInfo, LambdaExpression> criteria =
+            new Dictionary<MemberInfo, LambdaExpression>();
 
         /// <summary>
-        /// Filters objects retrieved for a particular relationship. 
+        /// Filters objects retrieved for a particular relationship.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="expression"></param>
@@ -66,7 +68,9 @@ using DbLinq.Util;
             // TODO: ensure we have an EntitySet<>
             var memberInfo = ReflectionUtility.GetMemberCallInfo(expression);
             if (memberInfo == null)
-                throw new InvalidOperationException("The argument expression must be a property access or a field access where the target object is the parameter");
+                throw new InvalidOperationException(
+                    "The argument expression must be a property access or a field access where the target object is the parameter"
+                );
             if (!criteria.ContainsKey(memberInfo))
             {
                 VerifyMemberAccessCycles(memberInfo);
@@ -79,7 +83,10 @@ using DbLinq.Util;
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
-        public bool GetAssociationCriteria(MemberInfo memberInfo, out LambdaExpression associationCriteria)
+        public bool GetAssociationCriteria(
+            MemberInfo memberInfo,
+            out LambdaExpression associationCriteria
+        )
         {
             return criteria.TryGetValue(memberInfo, out associationCriteria);
         }
@@ -103,7 +110,9 @@ using DbLinq.Util;
             // TODO: ensure we have an EntitySet<>
             var memberInfo = ReflectionUtility.GetMemberInfo(expression);
             if (memberInfo == null)
-                throw new InvalidOperationException("The argument expression must be a property access or a field access where the target object is the parameter");
+                throw new InvalidOperationException(
+                    "The argument expression must be a property access or a field access where the target object is the parameter"
+                );
             if (!eagerLoading.ContainsKey(memberInfo))
             {
                 VerifyMemberAccessCycles(memberInfo);
@@ -113,12 +122,14 @@ using DbLinq.Util;
 
         private void VerifyMemberAccessCycles(MemberInfo member)
         {
-            var mt = GetMemberEntityType (member);
+            var mt = GetMemberEntityType(member);
             var d = member.DeclaringType;
             foreach (KeyValuePair<MemberInfo, bool> m in eagerLoading)
             {
-                if (m.Key.DeclaringType == mt && GetMemberEntityType (m.Key) == d)
-                    throw new InvalidOperationException("Illegal cycles are detected in the argument expression among other eager-loading expressions");
+                if (m.Key.DeclaringType == mt && GetMemberEntityType(m.Key) == d)
+                    throw new InvalidOperationException(
+                        "Illegal cycles are detected in the argument expression among other eager-loading expressions"
+                    );
             }
         }
 

@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
     [UseExportProvider]
     public class SpellCheckSpanTests : AbstractSpellCheckSpanTests
     {
-        protected override TestWorkspace CreateWorkspace(string content)
-            => TestWorkspace.CreateCSharp(content);
+        protected override TestWorkspace CreateWorkspace(string content) =>
+            TestWorkspace.CreateCSharp(content);
 
         [Fact]
         public async Task TestSingleLineComment1()
@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         [Fact]
         public async Task TestSingleLineComment2()
         {
-            await TestAsync(@"
-{|Comment:// Goo|}");
+            await TestAsync(
+                @"
+{|Comment:// Goo|}"
+            );
         }
 
         [Fact]
@@ -38,64 +40,78 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
         [Fact]
         public async Task TestMultiLineComment2()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 {|Comment:/*
    Goo
- */|}");
+ */|}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLineComment3()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 {|Comment:/*
    Goo
- |}");
+ |}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLineComment4()
         {
-            await TestAsync(@"
-{|Comment:/**/|}");
+            await TestAsync(
+                @"
+{|Comment:/**/|}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLineComment5()
         {
-            await TestAsync(@"
-{|Comment:/*/|}");
+            await TestAsync(
+                @"
+{|Comment:/*/|}"
+            );
         }
 
         [Fact]
         public async Task TestDocComment1()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 ///{|Comment:goo bar baz|}
 class {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDocComment2()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 ///{|Comment:goo bar baz|}
 ///{|Comment:goo bar baz|}
 class {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDocComment3()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 ///{|Comment: |}<summary>{|Comment: goo bar baz |}</summary>
 class {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
@@ -113,29 +129,37 @@ class {|Identifier:C|}
         [Fact]
         public async Task TestString3()
         {
-            await TestAsync(@"
-{|String:"" goo ""|}");
+            await TestAsync(
+                @"
+{|String:"" goo ""|}"
+            );
         }
 
         [Fact]
         public async Task TestString4()
         {
-            await TestAsync(@"
-{|String:"" goo |}");
+            await TestAsync(
+                @"
+{|String:"" goo |}"
+            );
         }
 
         [Fact]
         public async Task TestString5()
         {
-            await TestAsync(@"
-{|String:@"" goo ""|}");
+            await TestAsync(
+                @"
+{|String:@"" goo ""|}"
+            );
         }
 
         [Fact]
         public async Task TestString6()
         {
-            await TestAsync(@"
-{|String:@"" goo |}");
+            await TestAsync(
+                @"
+{|String:@"" goo |}"
+            );
         }
 
         [Fact]
@@ -165,262 +189,321 @@ class {|Identifier:C|}
         [Fact]
         public async Task TestString11()
         {
-            await TestAsync(@"{|String:""""""
+            await TestAsync(
+                @"{|String:""""""
     goo 
-    """"""|}");
+    """"""|}"
+            );
         }
 
         [Fact]
         public async Task TestString12()
         {
-            await TestAsync(@"{|String:""""""
+            await TestAsync(
+                @"{|String:""""""
     goo
-    """"|}");
+    """"|}"
+            );
         }
 
         [Fact]
         public async Task TestString13()
         {
-            await TestAsync(@"{|String:""""""
+            await TestAsync(
+                @"{|String:""""""
     goo
-    ""|}");
+    ""|}"
+            );
         }
 
         [Fact]
         public async Task TestString14()
         {
-            await TestAsync(@"{|String:""""""
+            await TestAsync(
+                @"{|String:""""""
     goo
-    |}");
+    |}"
+            );
         }
 
         [Fact]
         public async Task TestString15()
         {
-            await TestAsync(@"
-$""{|String: goo |}""");
+            await TestAsync(
+                @"
+$""{|String: goo |}"""
+            );
         }
 
         [Fact]
         public async Task TestString16()
         {
-            await TestAsync(@"
-$""{|String: goo |}{0}{|String: bar |}""");
+            await TestAsync(
+                @"
+$""{|String: goo |}{0}{|String: bar |}"""
+            );
         }
 
         [Fact]
         public async Task TestString17()
         {
-            await TestAsync(@"
-$""""""{|String: goo |}{0}{|String: bar |}""""""");
+            await TestAsync(
+                @"
+$""""""{|String: goo |}{0}{|String: bar |}"""""""
+            );
         }
 
         [Fact]
         public async Task TestString18()
         {
-            await TestAsync(@"
-$""""""{|String: goo |}{0:abcd}{|String: bar |}""""""");
+            await TestAsync(
+                @"
+$""""""{|String: goo |}{0:abcd}{|String: bar |}"""""""
+            );
         }
 
         [Fact]
         public async Task TestIdentifier1()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier2()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 record {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier3()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 record class {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier4()
         {
-            await TestAsync(@"
-delegate void {|Identifier:C|}();");
+            await TestAsync(
+                @"
+delegate void {|Identifier:C|}();"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier5()
         {
-            await TestAsync(@"
-enum {|Identifier:C|} { }");
+            await TestAsync(
+                @"
+enum {|Identifier:C|} { }"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier6()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 enum {|Identifier:C|}
 {
     {|Identifier:D|}
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier7()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 enum {|Identifier:C|}
 {
     {|Identifier:D|}, {|Identifier:E|}
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier8()
         {
-            await TestAsync(@"
-interface {|Identifier:C|} { }");
+            await TestAsync(
+                @"
+interface {|Identifier:C|} { }"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier9()
         {
-            await TestAsync(@"
-struct {|Identifier:C|} { }");
+            await TestAsync(
+                @"
+struct {|Identifier:C|} { }"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier10()
         {
-            await TestAsync(@"
-record struct {|Identifier:C|}() { }");
+            await TestAsync(
+                @"
+record struct {|Identifier:C|}() { }"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier11()
         {
-            await TestAsync(@"
-class {|Identifier:C|}<{|Identifier:T|}> { }");
+            await TestAsync(
+                @"
+class {|Identifier:C|}<{|Identifier:T|}> { }"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier12()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private int {|Identifier:X|};
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier13()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private int {|Identifier:X|}, {|Identifier:Y|};
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier14()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private const int {|Identifier:X|};
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier15()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private const int {|Identifier:X|}, {|Identifier:Y|};
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier16()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private int {|Identifier:X|} => 0;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier17()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private event Action {|Identifier:X|};
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier18()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private event Action {|Identifier:X|}, {|Identifier:Y|};
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier19()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     private event Action {|Identifier:X|} { add { } remove { } }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier20()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}()
     {
         int {|Identifier:E|};
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier21()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}()
     {
         int {|Identifier:E|}, {|Identifier:F|};
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier22()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}()
@@ -428,79 +511,93 @@ class {|Identifier:C|}
 {|Identifier:E|}:
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier23()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}(int {|Identifier:E|})
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier24()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}(int {|Identifier:E|})
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier25()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}(int {|Identifier:E|}, int {|Identifier:F|})
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier26()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 static class {|Identifier:C|}
 {
     static void {|Identifier:D|}(this int {|Identifier:E|})
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier27()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace {|Identifier:C|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier28()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace {|Identifier:C|}.{|Identifier:D|}
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier29()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}()
@@ -509,20 +606,23 @@ class {|Identifier:C|}
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIdentifier30()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class {|Identifier:C|}
 {
     void {|Identifier:D|}()
     {
         Goo(out var {|Identifier:E|});
     }
-}");
+}"
+            );
         }
     }
 }

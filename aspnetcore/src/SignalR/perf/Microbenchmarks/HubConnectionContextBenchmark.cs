@@ -28,8 +28,15 @@ public class HubConnectionContextBenchmark
         var memoryBufferWriter = MemoryBufferWriter.Get();
         try
         {
-            HandshakeProtocol.WriteRequestMessage(new HandshakeRequestMessage("json", 1), memoryBufferWriter);
-            _handshakeRequestResult = new ReadResult(new ReadOnlySequence<byte>(memoryBufferWriter.ToArray()), false, false);
+            HandshakeProtocol.WriteRequestMessage(
+                new HandshakeRequestMessage("json", 1),
+                memoryBufferWriter
+            );
+            _handshakeRequestResult = new ReadResult(
+                new ReadOnlySequence<byte>(memoryBufferWriter.ToArray()),
+                false,
+                false
+            );
         }
         finally
         {
@@ -43,7 +50,11 @@ public class HubConnectionContextBenchmark
         {
             KeepAliveInterval = Timeout.InfiniteTimeSpan,
         };
-        _hubConnectionContext = new HubConnectionContext(connection, contextOptions, NullLoggerFactory.Instance);
+        _hubConnectionContext = new HubConnectionContext(
+            connection,
+            contextOptions,
+            NullLoggerFactory.Instance
+        );
 
         _successHubProtocolResolver = new TestHubProtocolResolver(new NewtonsoftJsonHubProtocol());
         _failureHubProtocolResolver = new TestHubProtocolResolver(null);
@@ -56,8 +67,13 @@ public class HubConnectionContextBenchmark
     {
         _pipe.AddReadResult(new ValueTask<ReadResult>(_handshakeRequestResult));
 
-        await _hubConnectionContext.HandshakeAsync(TimeSpan.FromSeconds(5), _supportedProtocols, _successHubProtocolResolver,
-            _userIdProvider, enableDetailedErrors: true);
+        await _hubConnectionContext.HandshakeAsync(
+            TimeSpan.FromSeconds(5),
+            _supportedProtocols,
+            _successHubProtocolResolver,
+            _userIdProvider,
+            enableDetailedErrors: true
+        );
     }
 
     [Benchmark]
@@ -65,8 +81,13 @@ public class HubConnectionContextBenchmark
     {
         _pipe.AddReadResult(new ValueTask<ReadResult>(_handshakeRequestResult));
 
-        await _hubConnectionContext.HandshakeAsync(TimeSpan.FromSeconds(5), _supportedProtocols, _failureHubProtocolResolver,
-            _userIdProvider, enableDetailedErrors: true);
+        await _hubConnectionContext.HandshakeAsync(
+            TimeSpan.FromSeconds(5),
+            _supportedProtocols,
+            _failureHubProtocolResolver,
+            _userIdProvider,
+            enableDetailedErrors: true
+        );
     }
 }
 

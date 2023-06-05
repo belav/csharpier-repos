@@ -13,7 +13,13 @@ namespace Microsoft.CodeAnalysis.Interactive
 {
     internal sealed class InteractiveCommandCompletionService : CompletionService
     {
-        [ExportLanguageServiceFactory(typeof(CompletionService), InteractiveLanguageNames.InteractiveCommand), Shared]
+        [
+            ExportLanguageServiceFactory(
+                typeof(CompletionService),
+                InteractiveLanguageNames.InteractiveCommand
+            ),
+            Shared
+        ]
         internal sealed class Factory : ILanguageServiceFactory
         {
             private readonly IAsynchronousOperationListenerProvider _listenerProvider;
@@ -25,19 +31,22 @@ namespace Microsoft.CodeAnalysis.Interactive
                 _listenerProvider = listenerProvider;
             }
 
-            public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-                => new InteractiveCommandCompletionService(languageServices.LanguageServices.SolutionServices, _listenerProvider);
+            public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+                new InteractiveCommandCompletionService(
+                    languageServices.LanguageServices.SolutionServices,
+                    _listenerProvider
+                );
         }
 
-        private InteractiveCommandCompletionService(SolutionServices services, IAsynchronousOperationListenerProvider listenerProvider)
-            : base(services, listenerProvider)
-        {
-        }
+        private InteractiveCommandCompletionService(
+            SolutionServices services,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(services, listenerProvider) { }
 
-        public override string Language
-            => InteractiveLanguageNames.InteractiveCommand;
+        public override string Language => InteractiveLanguageNames.InteractiveCommand;
 
-        internal override CompletionRules GetRules(CompletionOptions options)
-            => CompletionRules.Default;
+        internal override CompletionRules GetRules(CompletionOptions options) =>
+            CompletionRules.Default;
     }
 }

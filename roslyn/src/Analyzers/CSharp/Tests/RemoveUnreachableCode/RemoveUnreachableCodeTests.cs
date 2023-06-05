@@ -12,7 +12,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpRemoveUnreachableCodeDiagnosticAnalyzer, CSharpRemoveUnreachableCodeCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpRemoveUnreachableCodeDiagnosticAnalyzer,
+        CSharpRemoveUnreachableCodeCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
     public class RemoveUnreachableCodeTests
@@ -21,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestSingleUnreachableStatement()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -30,21 +33,22 @@ class C
 [|        var v = 0;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInUnreachableIfBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -55,7 +59,7 @@ class C
 |]        }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -64,14 +68,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInIfWithNoBlock()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -80,7 +85,7 @@ class C
 [|            {|CS1023:var v = 0;|}
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -89,14 +94,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveSubsequentStatements()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -106,21 +112,22 @@ class C
 |][|        var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFromSubsequentStatement()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -130,21 +137,22 @@ class C
 |][|        var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveSubsequentStatementsExcludingLocalFunction()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -157,7 +165,7 @@ class C
         var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -166,14 +174,15 @@ class C
 
         void Local() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveSubsequentStatementsExcludingMultipleLocalFunctions()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -187,7 +196,7 @@ class C
         var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -197,14 +206,15 @@ class C
         void Local() {}
         void Local2() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveSubsequentStatementsInterspersedWithMultipleLocalFunctions()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -221,7 +231,7 @@ class C
         var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -232,14 +242,15 @@ class C
 
         void Local2() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveSubsequentStatementsInterspersedWithMultipleLocalFunctions2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -257,7 +268,7 @@ class C
         var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -268,14 +279,15 @@ class C
 
         void Local2() {}
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveSubsequentStatementsUpToNextLabel()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -289,21 +301,22 @@ class C
         var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnUnreachableLabel()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -317,20 +330,22 @@ class C
         var y = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnReachableLabel()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(object o)
@@ -349,7 +364,8 @@ class C
         var y = 1;
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     void M(object o)
@@ -374,7 +390,7 @@ class C
         public async Task TestInLambda()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 class C
@@ -389,7 +405,7 @@ class C
 |]        };
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -401,14 +417,15 @@ class C
                 return;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInLambdaInExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 
 class C
@@ -421,7 +438,7 @@ class C
             Console.WriteLine();
 |]        };
 }",
-@"
+                @"
 using System;
 
 class C
@@ -431,14 +448,15 @@ class C
             if (true)
                 return;
         };
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSingleRemovalDoesNotTouchCodeInUnrelatedLocalFunction()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -453,7 +471,7 @@ class C
 |]        }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -465,14 +483,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -487,7 +506,7 @@ class C
 |]        }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -499,14 +518,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -526,7 +546,7 @@ class C
             System.Console.WriteLine(o.ToString());
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -541,14 +561,15 @@ class C
         ReachableLabel:
             System.Console.WriteLine(o.ToString());
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -573,7 +594,7 @@ class C
         var x = 1;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -594,14 +615,15 @@ class C
             goto ReachableLabel1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll4()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -620,7 +642,7 @@ class C
         return;
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -637,14 +659,15 @@ class C
     stop:
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll5()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -656,7 +679,7 @@ class C
 [|        return;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -666,14 +689,15 @@ class C
 
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInUnreachableInSwitchSection1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -687,7 +711,7 @@ class C
 |]        }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -698,14 +722,15 @@ class C
                 throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDirectives1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -717,7 +742,7 @@ class C
 |]#endif
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -727,14 +752,15 @@ class C
 #if true
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDirectives2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -745,7 +771,7 @@ class C
 |]#endif
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -754,14 +780,15 @@ class C
         throw new System.Exception();
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDirectives3()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -772,7 +799,7 @@ class C
         var v = 0;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -782,14 +809,15 @@ class C
 
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestForLoop1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -805,7 +833,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -818,14 +846,15 @@ class C
             return ;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestInfiniteForLoop()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -834,32 +863,32 @@ class C
 [|        return;
 |]    }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         for (;;) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(61810, "https://github.com/dotnet/roslyn/issues/61810")]
         public async Task TestTopLevel_EndingWithNewLine()
         {
-            var code = @"
+            var code =
+                @"
 throw new System.Exception();
 [|System.Console.ReadLine();
 |]";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 throw new System.Exception();
 ";
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -869,18 +898,17 @@ throw new System.Exception();
         [Fact, WorkItem(61810, "https://github.com/dotnet/roslyn/issues/61810")]
         public async Task TestTopLevel_NotEndingWithNewLine()
         {
-            var code = @"
+            var code =
+                @"
 throw new System.Exception();
 [|System.Console.ReadLine();|]";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 throw new System.Exception();
 ";
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -890,20 +918,19 @@ throw new System.Exception();
         [Fact, WorkItem(61810, "https://github.com/dotnet/roslyn/issues/61810")]
         public async Task TestTopLevel_MultipleUnreachableStatements()
         {
-            var code = @"
+            var code =
+                @"
 throw new System.Exception();
 [|System.Console.ReadLine();
 |][|System.Console.ReadLine();
 |]";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 throw new System.Exception();
 ";
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -913,7 +940,8 @@ throw new System.Exception();
         [Fact, WorkItem(61810, "https://github.com/dotnet/roslyn/issues/61810")]
         public async Task TestTopLevel_MultipleUnreachableStatements_HasClassDeclarationInBetween()
         {
-            var code = @"
+            var code =
+                @"
 throw new System.Exception();
 [|System.Console.ReadLine();
 |]
@@ -921,7 +949,8 @@ throw new System.Exception();
 public class C { }
 [|
 {|CS8803:System.Console.ReadLine();|}|]";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 throw new System.Exception();
 
 
@@ -929,10 +958,7 @@ public class C { }
 ";
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -942,23 +968,22 @@ public class C { }
         [Fact, WorkItem(61810, "https://github.com/dotnet/roslyn/issues/61810")]
         public async Task TestTopLevel_MultipleUnreachableStatements_AfterClassDeclaration1()
         {
-            var code = @"
+            var code =
+                @"
 throw new System.Exception();
 
 public class C { }
 [|
 {|CS8803:System.Console.ReadLine();|}|]";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 throw new System.Exception();
 
 public class C { }
 ";
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -968,22 +993,21 @@ public class C { }
         [Fact, WorkItem(61810, "https://github.com/dotnet/roslyn/issues/61810")]
         public async Task TestTopLevel_MultipleUnreachableStatements_AfterClassDeclaration2()
         {
-            var code = @"
+            var code =
+                @"
 public class C { }
 
 {|CS8803:throw new System.Exception();|}
 [|System.Console.ReadLine();|]";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 public class C { }
 
 {|CS8803:throw new System.Exception();|}
 ";
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, },
                 TestCode = code,
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp9,

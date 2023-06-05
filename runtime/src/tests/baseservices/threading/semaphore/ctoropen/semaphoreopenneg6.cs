@@ -11,7 +11,7 @@ class OpenSemaphoreNeg
         OpenSemaphoreNeg osn = new OpenSemaphoreNeg();
         return osn.Run();
     }
-   
+
     private int Run()
     {
         int iRet = -1;
@@ -20,19 +20,16 @@ class OpenSemaphoreNeg
         Mutex mu = new Mutex(false, sName);
         try
         {
-            using (Semaphore sem = Semaphore.OpenExisting(sName))
-            {
-            }
+            using (Semaphore sem = Semaphore.OpenExisting(sName)) { }
         }
         catch (WaitHandleCannotBeOpenedException)
         {
-            //Expected    
+            //Expected
             iRet = 100;
         }
         catch (Exception e)
         {
-            Console.WriteLine("Caught unexpected exception: " +
-                e.ToString());
+            Console.WriteLine("Caught unexpected exception: " + e.ToString());
         }
 
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");

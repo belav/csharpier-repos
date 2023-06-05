@@ -32,15 +32,42 @@ namespace System.Reflection.Runtime.Assemblies
     internal partial class RuntimeAssemblyInfo
     {
 #if DEBUG
-        [RequiresUnreferencedCode("Assembly.CreateInstance is not supported with trimming. Use Type.GetType instead.")]
-        public sealed override object CreateInstance(string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes) => base.CreateInstance(typeName, ignoreCase, bindingAttr, binder, args, culture, activationAttributes);
+        [RequiresUnreferencedCode(
+            "Assembly.CreateInstance is not supported with trimming. Use Type.GetType instead."
+        )]
+        public sealed override object CreateInstance(
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        ) =>
+            base.CreateInstance(
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
+
         [RequiresUnreferencedCode("Types might be removed")]
         public sealed override Type GetType(string name) => base.GetType(name);
+
         [RequiresUnreferencedCode("Types might be removed")]
-        public sealed override Type GetType(string name, bool throwOnError) => base.GetType(name, throwOnError);
+        public sealed override Type GetType(string name, bool throwOnError) =>
+            base.GetType(name, throwOnError);
+
         public sealed override bool IsDynamic => base.IsDynamic;
+
         public sealed override string ToString() => base.ToString();
-        [RequiresAssemblyFilesAttribute("The code will return an empty string for assemblies embedded in a single-file app")]
+
+        [RequiresAssemblyFilesAttribute(
+            "The code will return an empty string for assemblies embedded in a single-file app"
+        )]
 #pragma warning disable SYSLIB0012
         public sealed override string EscapedCodeBase => base.EscapedCodeBase;
 #pragma warning restore SYSLIB0012
@@ -66,6 +93,7 @@ namespace System.Reflection.Runtime.CustomAttributes
     {
 #if DEBUG
         public sealed override bool Equals(object obj) => base.Equals(obj);
+
         public sealed override int GetHashCode() => base.GetHashCode();
 #endif //DEBUG
     }
@@ -78,8 +106,12 @@ namespace System.Reflection.Runtime.EventInfos
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
         public sealed override bool IsMulticast => base.IsMulticast;
-        public sealed override void AddEventHandler(object target, Delegate handler) => base.AddEventHandler(target, handler);
-        public sealed override void RemoveEventHandler(object target, Delegate handler) => base.RemoveEventHandler(target, handler);
+
+        public sealed override void AddEventHandler(object target, Delegate handler) =>
+            base.AddEventHandler(target, handler);
+
+        public sealed override void RemoveEventHandler(object target, Delegate handler) =>
+            base.RemoveEventHandler(target, handler);
 #endif //DEBUG
     }
 }
@@ -113,11 +145,16 @@ namespace System.Reflection.Runtime.Modules
     {
 #if DEBUG
         [RequiresUnreferencedCode("Types might be removed")]
-        public sealed override Type[] FindTypes(TypeFilter filter, object filterCriteria) => base.FindTypes(filter, filterCriteria);
+        public sealed override Type[] FindTypes(TypeFilter filter, object filterCriteria) =>
+            base.FindTypes(filter, filterCriteria);
+
         [RequiresUnreferencedCode("Types might be removed")]
         public sealed override Type GetType(string className) => base.GetType(className);
+
         [RequiresUnreferencedCode("Types might be removed")]
-        public sealed override Type GetType(string className, bool ignoreCase) => base.GetType(className, ignoreCase);
+        public sealed override Type GetType(string className, bool ignoreCase) =>
+            base.GetType(className, ignoreCase);
+
         public sealed override string ToString() => base.ToString();
 #endif //DEBUG
     }
@@ -138,8 +175,12 @@ namespace System.Reflection.Runtime.PropertyInfos
     {
 #if DEBUG
         public sealed override MemberTypes MemberType => base.MemberType;
-        public sealed override object GetValue(object obj, object[] index) => base.GetValue(obj, index);
-        public sealed override void SetValue(object obj, object value, object[] index) => base.SetValue(obj, value, index);
+
+        public sealed override object GetValue(object obj, object[] index) =>
+            base.GetValue(obj, index);
+
+        public sealed override void SetValue(object obj, object value, object[] index) =>
+            base.SetValue(obj, value, index);
 #endif //DEBUG
     }
 }
@@ -150,32 +191,56 @@ namespace System.Reflection.Runtime.TypeInfos
     {
 #if DEBUG
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-        public sealed override Type[] FindInterfaces(TypeFilter filter, object filterCriteria) => base.FindInterfaces(filter, filterCriteria);
+        public sealed override Type[] FindInterfaces(TypeFilter filter, object filterCriteria) =>
+            base.FindInterfaces(filter, filterCriteria);
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        public sealed override MemberInfo[] FindMembers(MemberTypes memberType, BindingFlags bindingAttr, MemberFilter filter, object filterCriteria) => base.FindMembers(memberType, bindingAttr, filter, filterCriteria);
+        public sealed override MemberInfo[] FindMembers(
+            MemberTypes memberType,
+            BindingFlags bindingAttr,
+            MemberFilter filter,
+            object filterCriteria
+        ) => base.FindMembers(memberType, bindingAttr, filter, filterCriteria);
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         public sealed override EventInfo[] GetEvents() => base.GetEvents();
+
         protected sealed override bool IsContextfulImpl() => base.IsContextfulImpl();
+
         public sealed override bool IsSubclassOf(Type c) => base.IsSubclassOf(c);
+
         protected sealed override bool IsMarshalByRefImpl() => base.IsMarshalByRefImpl();
+
         public sealed override bool IsInstanceOfType(object o) => base.IsInstanceOfType(o);
+
         public sealed override bool IsSerializable => base.IsSerializable;
+
         public sealed override bool IsEquivalentTo(Type other) => base.IsEquivalentTo(other); // Note: If we enable COM type equivalence, this is no longer the correct implementation.
+
         public sealed override bool IsSignatureType => base.IsSignatureType;
 
         public sealed override IEnumerable<ConstructorInfo> DeclaredConstructors
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
             get => base.DeclaredConstructors;
         }
         public sealed override IEnumerable<EventInfo> DeclaredEvents
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.NonPublicEvents
+            )]
             get => base.DeclaredEvents;
         }
         public sealed override IEnumerable<FieldInfo> DeclaredFields
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.NonPublicFields
+            )]
             get => base.DeclaredFields;
         }
         public sealed override IEnumerable<MemberInfo> DeclaredMembers
@@ -185,33 +250,70 @@ namespace System.Reflection.Runtime.TypeInfos
         }
         public sealed override IEnumerable<MethodInfo> DeclaredMethods
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
             get => base.DeclaredMethods;
         }
         public sealed override IEnumerable<TypeInfo> DeclaredNestedTypes
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+                    | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )]
             get => base.DeclaredNestedTypes;
         }
         public sealed override IEnumerable<PropertyInfo> DeclaredProperties
         {
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.NonPublicProperties
+            )]
             get => base.DeclaredProperties;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
-        public sealed override EventInfo GetDeclaredEvent(string name) => base.GetDeclaredEvent(name);
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
-        public sealed override FieldInfo GetDeclaredField(string name) => base.GetDeclaredField(name);
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        public sealed override MethodInfo GetDeclaredMethod(string name) => base.GetDeclaredMethod(name);
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-        public sealed override TypeInfo GetDeclaredNestedType(string name) => base.GetDeclaredNestedType(name);
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        public sealed override PropertyInfo GetDeclaredProperty(string name) => base.GetDeclaredProperty(name);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
+        public sealed override EventInfo GetDeclaredEvent(string name) =>
+            base.GetDeclaredEvent(name);
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        public sealed override IEnumerable<MethodInfo> GetDeclaredMethods(string name) => base.GetDeclaredMethods(name);
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
+        public sealed override FieldInfo GetDeclaredField(string name) =>
+            base.GetDeclaredField(name);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        public sealed override MethodInfo GetDeclaredMethod(string name) =>
+            base.GetDeclaredMethod(name);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
+        public sealed override TypeInfo GetDeclaredNestedType(string name) =>
+            base.GetDeclaredNestedType(name);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        public sealed override PropertyInfo GetDeclaredProperty(string name) =>
+            base.GetDeclaredProperty(name);
+
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        public sealed override IEnumerable<MethodInfo> GetDeclaredMethods(string name) =>
+            base.GetDeclaredMethods(name);
 #endif //DEBUG
     }
 }

@@ -12,29 +12,44 @@ namespace System.ServiceModel.Activation
 
     class MsmqHostedTransportConfiguration : HostedTransportConfigurationBase
     {
-        MsmqHostedTransportManager uniqueManager;        
+        MsmqHostedTransportManager uniqueManager;
 
         public MsmqHostedTransportConfiguration()
-          : this(MsmqUri.NetMsmqAddressTranslator)
-        {
-        }
+            : this(MsmqUri.NetMsmqAddressTranslator) { }
 
         protected MsmqHostedTransportConfiguration(MsmqUri.IAddressTranslator addressing)
             : base(addressing.Scheme)
         {
-            AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet(); 
-            
-            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings.GetBindings(addressing.Scheme);
-            
+            AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
+
+            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings.GetBindings(
+                addressing.Scheme
+            );
+
             this.uniqueManager = new MsmqHostedTransportManager(bindings, addressing);
 
             for (int i = 0; i < bindings.Length; i++)
             {
-                Uri address = addressing.CreateUri(bindings[i], HostingEnvironment.ApplicationVirtualPath, false);
-                this.ListenAddresses.Add(new BaseUriWithWildcard(address, TransportDefaults.HostNameComparisonMode));
+                Uri address = addressing.CreateUri(
+                    bindings[i],
+                    HostingEnvironment.ApplicationVirtualPath,
+                    false
+                );
+                this.ListenAddresses.Add(
+                    new BaseUriWithWildcard(address, TransportDefaults.HostNameComparisonMode)
+                );
 
-                UniqueTransportManagerRegistration registration = new UniqueTransportManagerRegistration(uniqueManager, address, TransportDefaults.HostNameComparisonMode);
-                Msmq.StaticTransportManagerTable.RegisterUri(address, TransportDefaults.HostNameComparisonMode, registration);
+                UniqueTransportManagerRegistration registration =
+                    new UniqueTransportManagerRegistration(
+                        uniqueManager,
+                        address,
+                        TransportDefaults.HostNameComparisonMode
+                    );
+                Msmq.StaticTransportManagerTable.RegisterUri(
+                    address,
+                    TransportDefaults.HostNameComparisonMode,
+                    registration
+                );
             }
 
             this.uniqueManager.Start(null);
@@ -45,18 +60,15 @@ namespace System.ServiceModel.Activation
             return this.uniqueManager.GetBaseAddresses(virtualPath);
         }
 
-        internal MsmqHostedTransportManager TransportManager 
-        { 
-            get { return uniqueManager; } 
+        internal MsmqHostedTransportManager TransportManager
+        {
+            get { return uniqueManager; }
         }
     }
 
     sealed class MsmqIntegrationHostedTransportConfiguration : MsmqHostedTransportConfiguration
     {
         public MsmqIntegrationHostedTransportConfiguration()
-            : base(MsmqUri.FormatNameAddressTranslator)
-        {
-        }
+            : base(MsmqUri.FormatNameAddressTranslator) { }
     }
 }
-

@@ -16,23 +16,40 @@ namespace System.Net.Http
         public override bool CanRead => true;
         public override bool CanWrite => false;
 
-        protected override void Dispose(bool disposing) {  /* nop */ }
-        public override void Close() { /* nop */ }
+        protected override void Dispose(
+            bool disposing
+        ) { /* nop */
+        }
+
+        public override void Close() { /* nop */
+        }
 
         public override int Read(Span<byte> buffer) => 0;
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken) =>
-            cancellationToken.IsCancellationRequested ? ValueTask.FromCanceled<int>(cancellationToken) :
-            new ValueTask<int>(0);
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) =>
+            cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<int>(cancellationToken)
+                : new ValueTask<int>(0);
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             ValidateCopyToArguments(destination, bufferSize);
             return NopAsync(cancellationToken);
         }
 
-        public override void Write(ReadOnlySpan<byte> buffer) => throw new NotSupportedException(SR.net_http_content_readonly_stream);
+        public override void Write(ReadOnlySpan<byte> buffer) =>
+            throw new NotSupportedException(SR.net_http_content_readonly_stream);
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> destination, CancellationToken cancellationToken) => throw new NotSupportedException();
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> destination,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
     }
 }

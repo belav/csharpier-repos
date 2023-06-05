@@ -9,7 +9,8 @@ namespace System.CommandLine.Parsing
         internal static bool TryGetValueForArgument(
             this CommandResult commandResult,
             IValueDescriptor valueDescriptor,
-            out object? value)
+            out object? value
+        )
         {
             var arguments = commandResult.Command.Arguments;
 
@@ -39,7 +40,8 @@ namespace System.CommandLine.Parsing
         internal static bool TryGetValueForOption(
             this CommandResult commandResult,
             IValueDescriptor valueDescriptor,
-            out object? value)
+            out object? value
+        )
         {
             var options = commandResult.Command.Options;
 
@@ -47,14 +49,16 @@ namespace System.CommandLine.Parsing
             {
                 if (options[i] is Option { DisallowBinding: false } option)
                 {
-                    var hasMatchingAlias =
-                        HasMatchingAlias(valueDescriptor, option);
+                    var hasMatchingAlias = HasMatchingAlias(valueDescriptor, option);
 
                     if (hasMatchingAlias)
                     {
                         var optionResult = commandResult.FindResultFor(option);
 
-                        if (optionResult?.ConvertIfNeeded(valueDescriptor.ValueType) is SuccessfulArgumentConversionResult successful)
+                        if (
+                            optionResult?.ConvertIfNeeded(valueDescriptor.ValueType)
+                            is SuccessfulArgumentConversionResult successful
+                        )
                         {
                             value = successful.Value;
                             return true;
@@ -66,9 +70,7 @@ namespace System.CommandLine.Parsing
             value = null;
             return false;
 
-            static bool HasMatchingAlias(
-                IValueDescriptor valueDescriptor,
-                Option option)
+            static bool HasMatchingAlias(IValueDescriptor valueDescriptor, Option option)
             {
                 if (option.HasAlias(valueDescriptor.ValueName))
                 {

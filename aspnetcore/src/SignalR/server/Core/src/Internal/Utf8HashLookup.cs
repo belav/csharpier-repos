@@ -55,13 +55,23 @@ internal sealed class Utf8HashLookup
         _caseSensitiveBuckets[caseSensitiveBucketIndex] = slotIndex + 1;
     }
 
-    internal bool TryGetValue(ReadOnlySpan<byte> encodedValue, [MaybeNullWhen(false), AllowNull] out string value)
+    internal bool TryGetValue(
+        ReadOnlySpan<byte> encodedValue,
+        [MaybeNullWhen(false), AllowNull] out string value
+    )
     {
         var caseSensitiveHashCode = GetCaseSensitiveHashCode(encodedValue);
 
-        for (var i = _caseSensitiveBuckets[caseSensitiveHashCode % _caseSensitiveBuckets.Length] - 1; i >= 0; i = _slots[i].caseSensitiveNext)
+        for (
+            var i = _caseSensitiveBuckets[caseSensitiveHashCode % _caseSensitiveBuckets.Length] - 1;
+            i >= 0;
+            i = _slots[i].caseSensitiveNext
+        )
         {
-            if (_slots[i].caseSensitiveHashCode == caseSensitiveHashCode && encodedValue.SequenceEqual(_slots[i].encodedValue.AsSpan()))
+            if (
+                _slots[i].caseSensitiveHashCode == caseSensitiveHashCode
+                && encodedValue.SequenceEqual(_slots[i].encodedValue.AsSpan())
+            )
             {
                 value = _slots[i].value;
                 return true;
@@ -73,15 +83,19 @@ internal sealed class Utf8HashLookup
         return TryGetValueSlow(encodedValue, out value);
     }
 
-    private bool TryGetValueSlow(ReadOnlySpan<byte> encodedValue, [MaybeNullWhen(false), AllowNull] out string value)
+    private bool TryGetValueSlow(
+        ReadOnlySpan<byte> encodedValue,
+        [MaybeNullWhen(false), AllowNull] out string value
+    )
     {
         const int StackAllocThreshold = 128;
 
         char[]? pooled = null;
         var count = Encoding.UTF8.GetCharCount(encodedValue);
-        var chars = count <= StackAllocThreshold ?
-            stackalloc char[StackAllocThreshold] :
-            (pooled = ArrayPool<char>.Shared.Rent(count));
+        var chars =
+            count <= StackAllocThreshold
+                ? stackalloc char[StackAllocThreshold]
+                : (pooled = ArrayPool<char>.Shared.Rent(count));
         var encoded = Encoding.UTF8.GetChars(encodedValue, chars);
         var hasValue = TryGetValueFromChars(chars[..encoded], out value);
         if (pooled is not null)
@@ -92,13 +106,19 @@ internal sealed class Utf8HashLookup
         return hasValue;
     }
 
-    private bool TryGetValueFromChars(ReadOnlySpan<char> key, [MaybeNullWhen(false), AllowNull] out string value)
+    private bool TryGetValueFromChars(
+        ReadOnlySpan<char> key,
+        [MaybeNullWhen(false), AllowNull] out string value
+    )
     {
         var hashCode = GetHashCode(key);
 
         for (var i = _buckets[hashCode % _buckets.Length] - 1; i >= 0; i = _slots[i].next)
         {
-            if (_slots[i].hashCode == hashCode && key.Equals(_slots[i].value, StringComparison.OrdinalIgnoreCase))
+            if (
+                _slots[i].hashCode == hashCode
+                && key.Equals(_slots[i].value, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 value = _slots[i].value;
                 return true;

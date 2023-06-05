@@ -8,15 +8,19 @@
 //
 
 using System;
-unsafe struct X {
-	int x, y, z;
-	
-	public static int Main ()
-	{
-		X* foo = null;
-		
-		if ((int) (foo + 1) != sizeof (X))
-			return 1;
-		return 0;
-	}
+
+unsafe struct X
+{
+    int x,
+        y,
+        z;
+
+    public static int Main()
+    {
+        X* foo = null;
+
+        if ((int)(foo + 1) != sizeof(X))
+            return 1;
+        return 0;
+    }
 }

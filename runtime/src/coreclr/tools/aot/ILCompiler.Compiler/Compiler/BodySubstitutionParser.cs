@@ -18,21 +18,43 @@ namespace ILCompiler
         private readonly Dictionary<MethodDesc, BodySubstitution> _methodSubstitutions;
         private readonly Dictionary<FieldDesc, object> _fieldSubstitutions;
 
-        private BodySubstitutionsParser(TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues)
+        private BodySubstitutionsParser(
+            TypeSystemContext context,
+            Stream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
+            : base(
+                context,
+                documentStream,
+                resource,
+                resourceAssembly,
+                xmlDocumentLocation,
+                featureSwitchValues
+            )
         {
             _methodSubstitutions = new Dictionary<MethodDesc, BodySubstitution>();
             _fieldSubstitutions = new Dictionary<FieldDesc, object>();
         }
 
-        protected override void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+        protected override void ProcessAssembly(
+            ModuleDesc assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        )
         {
             ProcessTypes(assembly, nav, warnOnUnresolvedTypes);
         }
 
         // protected override TypeDesc? ProcessExportedType(ExportedType exported, ModuleDesc assembly, XPathNavigator nav) => null;
 
-        protected override bool ProcessTypePattern(string fullname, ModuleDesc assembly, XPathNavigator nav) => false;
+        protected override bool ProcessTypePattern(
+            string fullname,
+            ModuleDesc assembly,
+            XPathNavigator nav
+        ) => false;
 
         protected override void ProcessType(TypeDesc type, XPathNavigator nav)
         {
@@ -40,7 +62,11 @@ namespace ILCompiler
             ProcessTypeChildren(type, nav);
         }
 
-        protected override void ProcessMethod(TypeDesc type, XPathNavigator methodNav, object customData)
+        protected override void ProcessMethod(
+            TypeDesc type,
+            XPathNavigator methodNav,
+            object customData
+        )
         {
             string signature = GetSignature(methodNav);
             if (string.IsNullOrEmpty(signature))
@@ -64,7 +90,12 @@ namespace ILCompiler
                     if (method.Signature.ReturnType.IsVoid)
                         stubBody = BodySubstitution.EmptyBody;
                     else
-                        stubBody = BodySubstitution.Create(TryCreateSubstitution(method.Signature.ReturnType, GetAttribute(methodNav, "value")));
+                        stubBody = BodySubstitution.Create(
+                            TryCreateSubstitution(
+                                method.Signature.ReturnType,
+                                GetAttribute(methodNav, "value")
+                            )
+                        );
 
                     if (stubBody != null)
                     {
@@ -114,7 +145,13 @@ namespace ILCompiler
                 return;
             }
 
-            if (string.Equals(GetAttribute(fieldNav, "initialize"), "true", StringComparison.InvariantCultureIgnoreCase))
+            if (
+                string.Equals(
+                    GetAttribute(fieldNav, "initialize"),
+                    "true",
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             {
                 // We would need to also mess with the cctor of the type to set the field to this value:
                 //
@@ -143,7 +180,14 @@ namespace ILCompiler
                 case TypeFlags.Int32:
                     if (string.IsNullOrEmpty(value))
                         return 0;
-                    else if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int iresult))
+                    else if (
+                        int.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out int iresult
+                        )
+                    )
                         return iresult;
                     break;
 
@@ -162,9 +206,26 @@ namespace ILCompiler
             return null;
         }
 
-        public static (Dictionary<MethodDesc, BodySubstitution>, Dictionary<FieldDesc, object>) GetSubstitutions(TypeSystemContext context, UnmanagedMemoryStream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        public static (
+            Dictionary<MethodDesc, BodySubstitution>,
+            Dictionary<FieldDesc, object>
+        ) GetSubstitutions(
+            TypeSystemContext context,
+            UnmanagedMemoryStream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
-            var rdr = new BodySubstitutionsParser(context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues);
+            var rdr = new BodySubstitutionsParser(
+                context,
+                documentStream,
+                resource,
+                resourceAssembly,
+                xmlDocumentLocation,
+                featureSwitchValues
+            );
             rdr.ProcessXml(false);
             return (rdr._methodSubstitutions, rdr._fieldSubstitutions);
         }

@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private readonly AnalyzerConfigOptions _options;
             private readonly AnalyzerConfigOptions _fallbackOptions;
 
-            public AnalyzerConfigOptionsImpl(AnalyzerConfigOptions options, AnalyzerConfigOptions fallbackOptions)
+            public AnalyzerConfigOptionsImpl(
+                AnalyzerConfigOptions options,
+                AnalyzerConfigOptions fallbackOptions
+            )
             {
                 _options = options;
                 _fallbackOptions = fallbackOptions;
@@ -32,8 +35,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return _fallbackOptions.TryGetValue(key, out value);
             }
 
-            public override IEnumerable<string> Keys
-                => _options.Keys.Concat(_fallbackOptions.Keys.Where(key => !_options.TryGetValue(key, out _)));
+            public override IEnumerable<string> Keys =>
+                _options.Keys.Concat(
+                    _fallbackOptions.Keys.Where(key => !_options.TryGetValue(key, out _))
+                );
         }
     }
 }

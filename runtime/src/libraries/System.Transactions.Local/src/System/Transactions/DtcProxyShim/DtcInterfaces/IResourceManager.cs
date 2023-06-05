@@ -14,17 +14,20 @@ internal interface IResourceManager
         [MarshalAs(UnmanagedType.Interface)] ITransactionResourceAsync pRes,
         out Guid pUOW,
         out OletxTransactionIsolationLevel pisoLevel,
-        [MarshalAs(UnmanagedType.Interface)] out ITransactionEnlistmentAsync ppEnlist);
+        [MarshalAs(UnmanagedType.Interface)] out ITransactionEnlistmentAsync ppEnlist
+    );
 
     internal void Reenlist(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pPrepInfo,
         uint cbPrepInfom,
         uint lTimeout,
-        [MarshalAs(UnmanagedType.I4)] out OletxXactStat pXactStat);
+        [MarshalAs(UnmanagedType.I4)] out OletxXactStat pXactStat
+    );
 
     void ReenlistmentComplete();
 
     void GetDistributedTransactionManager(
         in Guid riid,
-        [MarshalAs(UnmanagedType.Interface)] out object ppvObject);
+        [MarshalAs(UnmanagedType.Interface)] out object ppvObject
+    );
 }

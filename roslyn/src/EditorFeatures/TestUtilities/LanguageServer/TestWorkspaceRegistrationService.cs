@@ -18,9 +18,7 @@ namespace Roslyn.Test.Utilities
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestWorkspaceRegistrationService()
-            {
-            }
+            public TestWorkspaceRegistrationService() { }
 
             public override string GetHostWorkspaceKind()
             {

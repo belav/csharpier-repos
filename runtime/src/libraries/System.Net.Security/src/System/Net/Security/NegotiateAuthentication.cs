@@ -38,11 +38,14 @@ namespace System.Net.Security
             contextFlags |= clientOptions.RequiredProtectionLevel switch
             {
                 ProtectionLevel.Sign => ContextFlagsPal.InitIntegrity,
-                ProtectionLevel.EncryptAndSign => ContextFlagsPal.InitIntegrity | ContextFlagsPal.Confidentiality,
+                ProtectionLevel.EncryptAndSign
+                    => ContextFlagsPal.InitIntegrity | ContextFlagsPal.Confidentiality,
                 _ => 0
             };
 
-            contextFlags |= clientOptions.RequireMutualAuthentication ? ContextFlagsPal.MutualAuth : 0;
+            contextFlags |= clientOptions.RequireMutualAuthentication
+                ? ContextFlagsPal.MutualAuth
+                : 0;
 
             contextFlags |= clientOptions.AllowedImpersonationLevel switch
             {
@@ -63,17 +66,15 @@ namespace System.Net.Security
                     clientOptions.Credential,
                     clientOptions.TargetName,
                     contextFlags,
-                    clientOptions.Binding);
+                    clientOptions.Binding
+                );
             }
             catch (PlatformNotSupportedException) // Managed implementation, Unix
-            {
-            }
+            { }
             catch (NotSupportedException) // Windows implementation
-            {
-            }
+            { }
             catch (Win32Exception) // Unix implementation in native layer
-            {
-            }
+            { }
         }
 
         /// <summary>
@@ -85,12 +86,14 @@ namespace System.Net.Security
         {
             ArgumentNullException.ThrowIfNull(serverOptions);
 
-            ContextFlagsPal contextFlags = serverOptions.RequiredProtectionLevel switch
-            {
-                ProtectionLevel.Sign => ContextFlagsPal.AcceptIntegrity,
-                ProtectionLevel.EncryptAndSign => ContextFlagsPal.AcceptIntegrity | ContextFlagsPal.Confidentiality,
-                _ => 0
-            } | ContextFlagsPal.Connection;
+            ContextFlagsPal contextFlags =
+                serverOptions.RequiredProtectionLevel switch
+                {
+                    ProtectionLevel.Sign => ContextFlagsPal.AcceptIntegrity,
+                    ProtectionLevel.EncryptAndSign
+                        => ContextFlagsPal.AcceptIntegrity | ContextFlagsPal.Confidentiality,
+                    _ => 0
+                } | ContextFlagsPal.Connection;
 
             if (serverOptions.Policy is not null)
             {
@@ -99,8 +102,10 @@ namespace System.Net.Security
                     contextFlags |= ContextFlagsPal.AllowMissingBindings;
                 }
 
-                if (serverOptions.Policy.PolicyEnforcement != PolicyEnforcement.Never &&
-                    serverOptions.Policy.ProtectionScenario == ProtectionScenario.TrustedProxy)
+                if (
+                    serverOptions.Policy.PolicyEnforcement != PolicyEnforcement.Never
+                    && serverOptions.Policy.ProtectionScenario == ProtectionScenario.TrustedProxy
+                )
                 {
                     contextFlags |= ContextFlagsPal.ProxyBindings;
                 }
@@ -120,17 +125,15 @@ namespace System.Net.Security
                     serverOptions.Credential,
                     null,
                     contextFlags,
-                    serverOptions.Binding);
+                    serverOptions.Binding
+                );
             }
             catch (PlatformNotSupportedException) // Managed implementation, Unix
-            {
-            }
+            { }
             catch (NotSupportedException) // Windows implementation
-            {
-            }
+            { }
             catch (Win32Exception) // Unix implementation in native layer
-            {
-            }
+            { }
         }
 
         /// <summary>
@@ -163,9 +166,11 @@ namespace System.Net.Security
         /// <see cref="NegotiateAuthenticationServerOptions.RequiredProtectionLevel" />.
         /// </remarks>
         public ProtectionLevel ProtectionLevel =>
-            !IsSigned ? ProtectionLevel.None :
-            !IsEncrypted ? ProtectionLevel.Sign :
-            ProtectionLevel.EncryptAndSign;
+            !IsSigned
+                ? ProtectionLevel.None
+                : !IsEncrypted
+                    ? ProtectionLevel.Sign
+                    : ProtectionLevel.EncryptAndSign;
 
         /// <summary>
         /// Indicates whether data signing was negotiated.
@@ -215,7 +220,8 @@ namespace System.Net.Security
         /// For client-side of the authentication the property returns the target name
         /// specified in <see cref="NegotiateAuthenticationClientOptions.TargetName" />.
         /// </remarks>
-        public string? TargetName => IsServer ? _ntAuthentication?.ClientSpecifiedSpn : _ntAuthentication?.Spn;
+        public string? TargetName =>
+            IsServer ? _ntAuthentication?.ClientSpecifiedSpn : _ntAuthentication?.Spn;
 
         /// <summary>
         /// Gets information about the identity of the remote party.
@@ -239,8 +245,13 @@ namespace System.Net.Security
 
                     if (IsServer)
                     {
-                        Debug.Assert(!OperatingSystem.IsTvOS(), "Server authentication is not supported on tvOS");
-                        _remoteIdentity = identity = NegotiateStreamPal.GetIdentity(_ntAuthentication);
+                        Debug.Assert(
+                            !OperatingSystem.IsTvOS(),
+                            "Server authentication is not supported on tvOS"
+                        );
+                        _remoteIdentity = identity = NegotiateStreamPal.GetIdentity(
+                            _ntAuthentication
+                        );
                     }
                     else
                     {
@@ -261,9 +272,12 @@ namespace System.Net.Security
             {
                 // We should suppress the delegate flag in NTLM case.
                 return
-                    _ntAuthentication!.IsDelegationFlag && _ntAuthentication.ProtocolName != NegotiationInfoClass.NTLM ? TokenImpersonationLevel.Delegation :
-                    _ntAuthentication.IsIdentifyFlag ? TokenImpersonationLevel.Identification :
-                    TokenImpersonationLevel.Impersonation;
+                    _ntAuthentication!.IsDelegationFlag
+                    && _ntAuthentication.ProtocolName != NegotiationInfoClass.NTLM
+                    ? TokenImpersonationLevel.Delegation
+                    : _ntAuthentication.IsIdentifyFlag
+                        ? TokenImpersonationLevel.Identification
+                        : TokenImpersonationLevel.Impersonation;
             }
         }
 
@@ -284,7 +298,10 @@ namespace System.Net.Security
         /// When <see cref="NegotiateAuthenticationStatusCode.ContinueNeeded" /> is returned the
         /// return value is an authentication token to be transported to the other party.
         /// </remarks>
-        public byte[]? GetOutgoingBlob(ReadOnlySpan<byte> incomingBlob, out NegotiateAuthenticationStatusCode statusCode)
+        public byte[]? GetOutgoingBlob(
+            ReadOnlySpan<byte> incomingBlob,
+            out NegotiateAuthenticationStatusCode statusCode
+        )
         {
             if (_ntAuthentication == null)
             {
@@ -293,47 +310,81 @@ namespace System.Net.Security
                 return null;
             }
 
-            byte[]? blob = _ntAuthentication.GetOutgoingBlob(incomingBlob, false, out SecurityStatusPal securityStatus);
+            byte[]? blob = _ntAuthentication.GetOutgoingBlob(
+                incomingBlob,
+                false,
+                out SecurityStatusPal securityStatus
+            );
 
             // Map error codes
             statusCode = securityStatus.ErrorCode switch
             {
                 SecurityStatusPalErrorCode.OK => NegotiateAuthenticationStatusCode.Completed,
-                SecurityStatusPalErrorCode.ContinueNeeded => NegotiateAuthenticationStatusCode.ContinueNeeded,
+                SecurityStatusPalErrorCode.ContinueNeeded
+                    => NegotiateAuthenticationStatusCode.ContinueNeeded,
 
                 // These code should never be returned and they should be handled internally
-                SecurityStatusPalErrorCode.CompleteNeeded => NegotiateAuthenticationStatusCode.Completed,
-                SecurityStatusPalErrorCode.CompAndContinue => NegotiateAuthenticationStatusCode.ContinueNeeded,
+                SecurityStatusPalErrorCode.CompleteNeeded
+                    => NegotiateAuthenticationStatusCode.Completed,
+                SecurityStatusPalErrorCode.CompAndContinue
+                    => NegotiateAuthenticationStatusCode.ContinueNeeded,
 
-                SecurityStatusPalErrorCode.ContextExpired => NegotiateAuthenticationStatusCode.ContextExpired,
-                SecurityStatusPalErrorCode.Unsupported => NegotiateAuthenticationStatusCode.Unsupported,
-                SecurityStatusPalErrorCode.PackageNotFound => NegotiateAuthenticationStatusCode.Unsupported,
-                SecurityStatusPalErrorCode.CannotInstall => NegotiateAuthenticationStatusCode.Unsupported,
-                SecurityStatusPalErrorCode.InvalidToken => NegotiateAuthenticationStatusCode.InvalidToken,
-                SecurityStatusPalErrorCode.QopNotSupported => NegotiateAuthenticationStatusCode.QopNotSupported,
-                SecurityStatusPalErrorCode.NoImpersonation => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.LogonDenied => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.UnknownCredentials => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.NoCredentials => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.MessageAltered => NegotiateAuthenticationStatusCode.MessageAltered,
-                SecurityStatusPalErrorCode.OutOfSequence => NegotiateAuthenticationStatusCode.OutOfSequence,
-                SecurityStatusPalErrorCode.NoAuthenticatingAuthority => NegotiateAuthenticationStatusCode.InvalidCredentials,
-                SecurityStatusPalErrorCode.IncompleteCredentials => NegotiateAuthenticationStatusCode.InvalidCredentials,
-                SecurityStatusPalErrorCode.IllegalMessage => NegotiateAuthenticationStatusCode.InvalidToken,
-                SecurityStatusPalErrorCode.CertExpired => NegotiateAuthenticationStatusCode.CredentialsExpired,
-                SecurityStatusPalErrorCode.SecurityQosFailed => NegotiateAuthenticationStatusCode.QopNotSupported,
-                SecurityStatusPalErrorCode.UnsupportedPreauth => NegotiateAuthenticationStatusCode.InvalidToken,
-                SecurityStatusPalErrorCode.BadBinding => NegotiateAuthenticationStatusCode.BadBinding,
-                SecurityStatusPalErrorCode.UntrustedRoot => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.SmartcardLogonRequired => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.WrongPrincipal => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                SecurityStatusPalErrorCode.CannotPack => NegotiateAuthenticationStatusCode.InvalidToken,
-                SecurityStatusPalErrorCode.TimeSkew => NegotiateAuthenticationStatusCode.InvalidToken,
-                SecurityStatusPalErrorCode.AlgorithmMismatch => NegotiateAuthenticationStatusCode.InvalidToken,
-                SecurityStatusPalErrorCode.CertUnknown => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.ContextExpired
+                    => NegotiateAuthenticationStatusCode.ContextExpired,
+                SecurityStatusPalErrorCode.Unsupported
+                    => NegotiateAuthenticationStatusCode.Unsupported,
+                SecurityStatusPalErrorCode.PackageNotFound
+                    => NegotiateAuthenticationStatusCode.Unsupported,
+                SecurityStatusPalErrorCode.CannotInstall
+                    => NegotiateAuthenticationStatusCode.Unsupported,
+                SecurityStatusPalErrorCode.InvalidToken
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.QopNotSupported
+                    => NegotiateAuthenticationStatusCode.QopNotSupported,
+                SecurityStatusPalErrorCode.NoImpersonation
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.LogonDenied
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.UnknownCredentials
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.NoCredentials
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.MessageAltered
+                    => NegotiateAuthenticationStatusCode.MessageAltered,
+                SecurityStatusPalErrorCode.OutOfSequence
+                    => NegotiateAuthenticationStatusCode.OutOfSequence,
+                SecurityStatusPalErrorCode.NoAuthenticatingAuthority
+                    => NegotiateAuthenticationStatusCode.InvalidCredentials,
+                SecurityStatusPalErrorCode.IncompleteCredentials
+                    => NegotiateAuthenticationStatusCode.InvalidCredentials,
+                SecurityStatusPalErrorCode.IllegalMessage
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.CertExpired
+                    => NegotiateAuthenticationStatusCode.CredentialsExpired,
+                SecurityStatusPalErrorCode.SecurityQosFailed
+                    => NegotiateAuthenticationStatusCode.QopNotSupported,
+                SecurityStatusPalErrorCode.UnsupportedPreauth
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.BadBinding
+                    => NegotiateAuthenticationStatusCode.BadBinding,
+                SecurityStatusPalErrorCode.UntrustedRoot
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.SmartcardLogonRequired
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.WrongPrincipal
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
+                SecurityStatusPalErrorCode.CannotPack
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.TimeSkew
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.AlgorithmMismatch
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.CertUnknown
+                    => NegotiateAuthenticationStatusCode.UnknownCredentials,
 
                 // Processing partial inputs is not supported, so this is result of incorrect input
-                SecurityStatusPalErrorCode.IncompleteMessage => NegotiateAuthenticationStatusCode.InvalidToken,
+                SecurityStatusPalErrorCode.IncompleteMessage
+                    => NegotiateAuthenticationStatusCode.InvalidToken,
 
                 _ => NegotiateAuthenticationStatusCode.GenericFailure,
             };
@@ -345,11 +396,17 @@ namespace System.Net.Security
                 {
                     statusCode = NegotiateAuthenticationStatusCode.TargetUnknown;
                 }
-                else if (_requiredImpersonationLevel != TokenImpersonationLevel.None && ImpersonationLevel < _requiredImpersonationLevel)
+                else if (
+                    _requiredImpersonationLevel != TokenImpersonationLevel.None
+                    && ImpersonationLevel < _requiredImpersonationLevel
+                )
                 {
                     statusCode = NegotiateAuthenticationStatusCode.ImpersonationValidationFailed;
                 }
-                else if (_requiredProtectionLevel != ProtectionLevel.None && ProtectionLevel < _requiredProtectionLevel)
+                else if (
+                    _requiredProtectionLevel != ProtectionLevel.None
+                    && ProtectionLevel < _requiredProtectionLevel
+                )
                 {
                     statusCode = NegotiateAuthenticationStatusCode.SecurityQosFailed;
                 }
@@ -375,7 +432,10 @@ namespace System.Net.Security
         /// When <see cref="NegotiateAuthenticationStatusCode.ContinueNeeded" /> is returned the
         /// return value is an authentication token to be transported to the other party.
         /// </remarks>
-        public string? GetOutgoingBlob(string? incomingBlob, out NegotiateAuthenticationStatusCode statusCode)
+        public string? GetOutgoingBlob(
+            string? incomingBlob,
+            out NegotiateAuthenticationStatusCode statusCode
+        )
         {
             byte[]? decodedIncomingBlob = null;
             if (!string.IsNullOrEmpty(incomingBlob))
@@ -411,7 +471,12 @@ namespace System.Net.Security
         /// level.
         /// </remarks>
         /// <exception cref="InvalidOperationException">Authentication failed or has not occurred.</exception>
-        public NegotiateAuthenticationStatusCode Wrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, bool requestEncryption, out bool isEncrypted)
+        public NegotiateAuthenticationStatusCode Wrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            bool requestEncryption,
+            out bool isEncrypted
+        )
         {
             if (!IsAuthenticated || _ntAuthentication == null)
             {
@@ -438,7 +503,11 @@ namespace System.Net.Security
         /// Other <see cref="NegotiateAuthenticationStatusCode" /> values on failure.
         /// </returns>
         /// <exception cref="InvalidOperationException">Authentication failed or has not occurred.</exception>
-        public NegotiateAuthenticationStatusCode Unwrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, out bool wasEncrypted)
+        public NegotiateAuthenticationStatusCode Unwrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            out bool wasEncrypted
+        )
         {
             if (!IsAuthenticated || _ntAuthentication == null)
             {
@@ -466,14 +535,24 @@ namespace System.Net.Security
         /// Other <see cref="NegotiateAuthenticationStatusCode" /> values on failure.
         /// </returns>
         /// <exception cref="InvalidOperationException">Authentication failed or has not occurred.</exception>
-        public NegotiateAuthenticationStatusCode UnwrapInPlace(Span<byte> input, out int unwrappedOffset, out int unwrappedLength, out bool wasEncrypted)
+        public NegotiateAuthenticationStatusCode UnwrapInPlace(
+            Span<byte> input,
+            out int unwrappedOffset,
+            out int unwrappedLength,
+            out bool wasEncrypted
+        )
         {
             if (!IsAuthenticated || _ntAuthentication == null)
             {
                 throw new InvalidOperationException(SR.net_auth_noauth);
             }
 
-            return _ntAuthentication.UnwrapInPlace(input, out unwrappedOffset, out unwrappedLength, out wasEncrypted);
+            return _ntAuthentication.UnwrapInPlace(
+                input,
+                out unwrappedOffset,
+                out unwrappedLength,
+                out wasEncrypted
+            );
         }
 
         private bool CheckSpn()
@@ -483,25 +562,33 @@ namespace System.Net.Security
 
             if (_ntAuthentication.IsKerberos)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_kerberos);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spn_kerberos);
                 return true;
             }
 
             if (_extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Never)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_disabled);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spn_disabled);
                 return true;
             }
 
-            if (_isSecureConnection &&  _extendedProtectionPolicy.ProtectionScenario == ProtectionScenario.TransportSelected)
+            if (
+                _isSecureConnection
+                && _extendedProtectionPolicy.ProtectionScenario
+                    == ProtectionScenario.TransportSelected
+            )
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_cbt);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spn_cbt);
                 return true;
             }
 
             if (_extendedProtectionPolicy.CustomServiceNames == null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spns);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spns);
                 return true;
             }
 
@@ -511,17 +598,20 @@ namespace System.Net.Security
             {
                 if (_extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.WhenSupported)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_whensupported);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, SR.net_log_listener_no_spn_whensupported);
                     return true;
                 }
                 else
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_spn_failed_always);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, SR.net_log_listener_spn_failed_always);
                     return false;
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_spn, clientSpn);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, SR.net_log_listener_spn, clientSpn);
             bool found = _extendedProtectionPolicy.CustomServiceNames.Contains(clientSpn);
 
             if (NetEventSource.Log.IsEnabled())

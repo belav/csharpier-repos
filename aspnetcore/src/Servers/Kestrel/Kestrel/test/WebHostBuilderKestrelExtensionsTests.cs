@@ -19,9 +19,7 @@ public class WebHostBuilderKestrelExtensionsTests
     public void ApplicationServicesNotNullAfterUseKestrelWithoutOptions()
     {
         // Arrange
-        var hostBuilder = new WebHostBuilder()
-            .UseKestrel()
-            .Configure(app => { });
+        var hostBuilder = new WebHostBuilder().UseKestrel().Configure(app => { });
 
         hostBuilder.ConfigureServices(services =>
         {
@@ -55,23 +53,22 @@ public class WebHostBuilderKestrelExtensionsTests
     [Fact]
     public void DefaultTransportFactoriesConfigured()
     {
-        var hostBuilder = new WebHostBuilder()
-            .UseKestrel()
-            .Configure(app => { });
+        var hostBuilder = new WebHostBuilder().UseKestrel().Configure(app => { });
 
-        var transportFactories = hostBuilder.Build().Services.GetServices<IConnectionListenerFactory>();
-        Assert.Collection(transportFactories,
+        var transportFactories = hostBuilder
+            .Build()
+            .Services.GetServices<IConnectionListenerFactory>();
+        Assert.Collection(
+            transportFactories,
             t => Assert.IsType<SocketTransportFactory>(t),
-            t => Assert.IsType<NamedPipeTransportFactory>(t));
+            t => Assert.IsType<NamedPipeTransportFactory>(t)
+        );
     }
 
     [Fact]
     public void SocketsTransportCanBeManuallySelectedIndependentOfOrder()
     {
-        var hostBuilder = new WebHostBuilder()
-            .UseKestrel()
-            .UseSockets()
-            .Configure(app => { });
+        var hostBuilder = new WebHostBuilder().UseKestrel().UseSockets().Configure(app => { });
 
         var factories = hostBuilder.Build().Services.GetServices<IConnectionListenerFactory>();
         AssertContainsType<SocketTransportFactory, IConnectionListenerFactory>(factories);
@@ -81,7 +78,9 @@ public class WebHostBuilderKestrelExtensionsTests
             .UseKestrel()
             .Configure(app => { });
 
-        var factoriesReversed = hostBuilderReversed.Build().Services.GetServices<IConnectionListenerFactory>();
+        var factoriesReversed = hostBuilderReversed
+            .Build()
+            .Services.GetServices<IConnectionListenerFactory>();
         AssertContainsType<SocketTransportFactory, IConnectionListenerFactory>(factoriesReversed);
 
         static void AssertContainsType<TExpected, TCollection>(IEnumerable<TCollection> enumerable)
@@ -93,10 +92,7 @@ public class WebHostBuilderKestrelExtensionsTests
     [Fact]
     public void ServerIsKestrelServerImpl()
     {
-        var hostBuilder = new WebHostBuilder()
-            .UseSockets()
-            .UseKestrel()
-            .Configure(app => { });
+        var hostBuilder = new WebHostBuilder().UseSockets().UseKestrel().Configure(app => { });
 
         Assert.IsType<KestrelServerImpl>(hostBuilder.Build().Services.GetService<IServer>());
     }

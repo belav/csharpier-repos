@@ -14,7 +14,6 @@ public class Program
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args)
     {
-        return WebHost.CreateDefaultBuilder()
-            .UseStartup<Startup>();
+        return WebHost.CreateDefaultBuilder().UseStartup<Startup>();
     }
 }

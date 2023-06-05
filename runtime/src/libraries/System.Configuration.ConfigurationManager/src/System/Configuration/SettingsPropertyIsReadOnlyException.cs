@@ -6,26 +6,23 @@ using System.Runtime.Serialization;
 namespace System.Configuration
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SettingsPropertyIsReadOnlyException : Exception
     {
         public SettingsPropertyIsReadOnlyException(string message)
-             : base(message)
-        {
-        }
+            : base(message) { }
 
         public SettingsPropertyIsReadOnlyException(string message, Exception innerException)
-             : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        protected SettingsPropertyIsReadOnlyException(SerializationInfo info, StreamingContext context)
-             : base(info, context)
-        {
-        }
+        protected SettingsPropertyIsReadOnlyException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 
-        public SettingsPropertyIsReadOnlyException()
-        {
-        }
+        public SettingsPropertyIsReadOnlyException() { }
     }
 }

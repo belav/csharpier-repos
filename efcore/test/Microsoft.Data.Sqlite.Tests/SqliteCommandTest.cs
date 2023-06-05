@@ -44,10 +44,7 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void CommandText_coalesces_to_empty()
         {
-            var command = new SqliteCommand
-            {
-                CommandText = null
-            };
+            var command = new SqliteCommand { CommandText = null };
 
             Assert.NotNull(command.CommandText);
             Assert.Empty(command.CommandText);
@@ -67,7 +64,9 @@ namespace Microsoft.Data.Sqlite
                 {
                     reader.Read();
 
-                    var ex = Assert.Throws<InvalidOperationException>(() => command.CommandText = "SELECT 2;");
+                    var ex = Assert.Throws<InvalidOperationException>(
+                        () => command.CommandText = "SELECT 2;"
+                    );
 
                     Assert.Equal(Resources.SetRequiresNoOpenReader("CommandText"), ex.Message);
                 }
@@ -79,10 +78,7 @@ namespace Microsoft.Data.Sqlite
         {
             var command = new SqliteCommand
             {
-                Connection = new SqliteConnection("Command Timeout=1")
-                {
-                    DefaultTimeout = 2
-                },
+                Connection = new SqliteConnection("Command Timeout=1") { DefaultTimeout = 2 },
                 CommandTimeout = 3
             };
 
@@ -94,10 +90,7 @@ namespace Microsoft.Data.Sqlite
         {
             var command = new SqliteCommand
             {
-                Connection = new SqliteConnection("Default Timeout=1")
-                {
-                    DefaultTimeout = 2
-                }
+                Connection = new SqliteConnection("Default Timeout=1") { DefaultTimeout = 2 }
             };
 
             Assert.Equal(2, command.CommandTimeout);
@@ -152,7 +145,9 @@ namespace Microsoft.Data.Sqlite
                 {
                     reader.Read();
 
-                    var ex = Assert.Throws<InvalidOperationException>(() => command.Connection = new SqliteConnection());
+                    var ex = Assert.Throws<InvalidOperationException>(
+                        () => command.Connection = new SqliteConnection()
+                    );
 
                     Assert.Equal(Resources.SetRequiresNoOpenReader("Connection"), ex.Message);
                 }
@@ -170,7 +165,9 @@ namespace Microsoft.Data.Sqlite
         [InlineData(CommandType.TableDirect)]
         public void CommandType_validates_value(CommandType commandType)
         {
-            var ex = Assert.Throws<ArgumentException>(() => new SqliteCommand().CommandType = commandType);
+            var ex = Assert.Throws<ArgumentException>(
+                () => new SqliteCommand().CommandType = commandType
+            );
 
             Assert.Equal(Resources.InvalidCommandType(commandType), ex.Message);
         }
@@ -205,7 +202,9 @@ namespace Microsoft.Data.Sqlite
         {
             using (var connection = new SqliteConnection("Data Source=:memory:"))
             {
-                var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().Prepare());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => connection.CreateCommand().Prepare()
+                );
 
                 Assert.Equal(Resources.CallRequiresOpenConnection("Prepare"), ex.Message);
             }
@@ -232,7 +231,10 @@ namespace Microsoft.Data.Sqlite
                 command.CommandText = "CREATE TABLE Data (Value); SELECT * FROM Data;";
                 var ex = Assert.Throws<SqliteException>(() => command.Prepare());
 
-                Assert.Equal(Resources.SqliteNativeError(SQLITE_ERROR, "no such table: Data"), ex.Message);
+                Assert.Equal(
+                    Resources.SqliteNativeError(SQLITE_ERROR, "no such table: Data"),
+                    ex.Message
+                );
             }
         }
 
@@ -244,7 +246,9 @@ namespace Microsoft.Data.Sqlite
             using (var connection = new SqliteConnection("Data Source=:memory:"))
             {
                 connection.Open();
-                connection.ExecuteNonQuery("CREATE TABLE Data (ID integer PRIMARY KEY, Value integer);");
+                connection.ExecuteNonQuery(
+                    "CREATE TABLE Data (ID integer PRIMARY KEY, Value integer);"
+                );
 
                 using (var command = connection.CreateCommand())
                 {
@@ -283,7 +287,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void ExecuteReader_throws_when_no_connection()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteReader());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => new SqliteCommand().ExecuteReader()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
         }
@@ -293,7 +299,9 @@ namespace Microsoft.Data.Sqlite
         {
             using (var connection = new SqliteConnection("Data Source=:memory:"))
             {
-                var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().ExecuteReader());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => connection.CreateCommand().ExecuteReader()
+                );
 
                 Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
             }
@@ -331,7 +339,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void ExecuteScalar_throws_when_no_connection()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteScalar());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => new SqliteCommand().ExecuteScalar()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
         }
@@ -341,7 +351,9 @@ namespace Microsoft.Data.Sqlite
         {
             using (var connection = new SqliteConnection("Data Source=:memory:"))
             {
-                var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().ExecuteScalar());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => connection.CreateCommand().ExecuteScalar()
+                );
 
                 Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
             }
@@ -358,7 +370,9 @@ namespace Microsoft.Data.Sqlite
 
                 using (connection.BeginTransaction())
                 {
-                    var ex = Assert.Throws<InvalidOperationException>(() => command.ExecuteReader());
+                    var ex = Assert.Throws<InvalidOperationException>(
+                        () => command.ExecuteReader()
+                    );
 
                     Assert.Equal(Resources.TransactionRequired, ex.Message);
                 }
@@ -522,7 +536,9 @@ namespace Microsoft.Data.Sqlite
 
                 using (var reader = command.ExecuteReader())
                 {
-                    var ex = Assert.Throws<InvalidOperationException>(() => command.ExecuteReader());
+                    var ex = Assert.Throws<InvalidOperationException>(
+                        () => command.ExecuteReader()
+                    );
                     Assert.Equal(Resources.DataReaderOpen, ex.Message);
                 }
             }
@@ -570,7 +586,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void ExecuteNonQuery_throws_when_no_connection()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteNonQuery());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => new SqliteCommand().ExecuteNonQuery()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteNonQuery"), ex.Message);
         }
@@ -580,7 +598,9 @@ namespace Microsoft.Data.Sqlite
         {
             using (var connection = new SqliteConnection("Data Source=:memory:"))
             {
-                var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().ExecuteNonQuery());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => connection.CreateCommand().ExecuteNonQuery()
+                );
 
                 Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteNonQuery"), ex.Message);
             }
@@ -616,7 +636,9 @@ namespace Microsoft.Data.Sqlite
                     {
                         command.Transaction = transaction;
 
-                        var ex = Assert.Throws<InvalidOperationException>(() => command.ExecuteReader());
+                        var ex = Assert.Throws<InvalidOperationException>(
+                            () => command.ExecuteReader()
+                        );
 
                         Assert.Equal(Resources.TransactionConnectionMismatch, ex.Message);
                     }
@@ -635,7 +657,9 @@ namespace Microsoft.Data.Sqlite
                 {
                     connection.ExecuteNonQuery("ROLLBACK;");
 
-                    var ex = Assert.Throws<InvalidOperationException>(() => connection.ExecuteNonQuery("SELECT 1;"));
+                    var ex = Assert.Throws<InvalidOperationException>(
+                        () => connection.ExecuteNonQuery("SELECT 1;")
+                    );
 
                     Assert.Equal(Resources.TransactionCompleted, ex.Message);
                 }
@@ -704,7 +728,8 @@ namespace Microsoft.Data.Sqlite
                 connection.ExecuteNonQuery("CREATE TABLE Test(Value);");
 
                 var command = connection.CreateCommand();
-                command.CommandText = @"
+                command.CommandText =
+                    @"
                     INSERT INTO Test VALUES(1);
                     SELECT 1;";
 
@@ -838,47 +863,47 @@ namespace Microsoft.Data.Sqlite
             var selectedSignal = new AutoResetEvent(initialState: false);
 
             return Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    using (var connection = new SqliteConnection(connectionString))
                     {
-                        using (var connection = new SqliteConnection(connectionString))
+                        connection.Open();
+                        if (extendedErrorCode)
                         {
-                            connection.Open();
-                            if (extendedErrorCode)
-                            {
-                                sqlite3_extended_result_codes(connection.Handle, 1);
-                            }
-
-                            connection.ExecuteNonQuery(
-                                "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
-
-                            using (connection.ExecuteReader("SELECT * FROM Data;"))
-                            {
-                                selectedSignal.Set();
-
-                                await Task.Delay(1000);
-                            }
+                            sqlite3_extended_result_codes(connection.Handle, 1);
                         }
-                    }),
-                Task.Run(
-                    () =>
+
+                        connection.ExecuteNonQuery(
+                            "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                        );
+
+                        using (connection.ExecuteReader("SELECT * FROM Data;"))
+                        {
+                            selectedSignal.Set();
+
+                            await Task.Delay(1000);
+                        }
+                    }
+                }),
+                Task.Run(() =>
+                {
+                    using (var connection = new SqliteConnection(connectionString))
                     {
-                        using (var connection = new SqliteConnection(connectionString))
+                        connection.Open();
+                        if (extendedErrorCode)
                         {
-                            connection.Open();
-                            if (extendedErrorCode)
-                            {
-                                sqlite3_extended_result_codes(connection.Handle, 1);
-                            }
-
-                            selectedSignal.WaitOne();
-
-                            var command = connection.CreateCommand();
-                            command.CommandText = "DROP TABLE Data;";
-
-                            command.ExecuteNonQuery();
+                            sqlite3_extended_result_codes(connection.Handle, 1);
                         }
-                    }));
+
+                        selectedSignal.WaitOne();
+
+                        var command = connection.CreateCommand();
+                        command.CommandText = "DROP TABLE Data;";
+
+                        command.ExecuteNonQuery();
+                    }
+                })
+            );
         }
 
         [Fact]
@@ -891,39 +916,39 @@ namespace Microsoft.Data.Sqlite
             try
             {
                 await Task.WhenAll(
-                    Task.Run(
-                        async () =>
+                    Task.Run(async () =>
+                    {
+                        using (var connection = new SqliteConnection(connectionString))
                         {
-                            using (var connection = new SqliteConnection(connectionString))
+                            connection.Open();
+
+                            connection.ExecuteNonQuery(
+                                "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                            );
+
+                            using (connection.ExecuteReader("SELECT * FROM Data;"))
                             {
-                                connection.Open();
+                                selectedSignal.Set();
 
-                                connection.ExecuteNonQuery(
-                                    "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
-
-                                using (connection.ExecuteReader("SELECT * FROM Data;"))
-                                {
-                                    selectedSignal.Set();
-
-                                    await Task.Delay(1000);
-                                }
+                                await Task.Delay(1000);
                             }
-                        }),
-                    Task.Run(
-                        () =>
+                        }
+                    }),
+                    Task.Run(() =>
+                    {
+                        using (var connection = new SqliteConnection(connectionString))
                         {
-                            using (var connection = new SqliteConnection(connectionString))
-                            {
-                                connection.Open();
+                            connection.Open();
 
-                                selectedSignal.WaitOne();
+                            selectedSignal.WaitOne();
 
-                                var command = connection.CreateCommand();
-                                command.CommandText = "DROP TABLE Data;";
+                            var command = connection.CreateCommand();
+                            command.CommandText = "DROP TABLE Data;";
 
-                                command.ExecuteNonQuery();
-                            }
-                        }));
+                            command.ExecuteNonQuery();
+                        }
+                    })
+                );
             }
             finally
             {
@@ -939,7 +964,9 @@ namespace Microsoft.Data.Sqlite
             {
                 connection.Open();
 
-                connection.ExecuteNonQuery("CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
+                connection.ExecuteNonQuery(
+                    "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                );
 
                 using (connection.ExecuteReader("SELECT * FROM Data;"))
                 {
@@ -978,10 +1005,12 @@ namespace Microsoft.Data.Sqlite
                 connection.ExecuteNonQuery(
                     @"
                     CREATE TABLE Test(Value);
-                    INSERT INTO Test VALUES(1), (2);");
+                    INSERT INTO Test VALUES(1), (2);"
+                );
 
                 var command = connection.CreateCommand();
-                command.CommandText = @"
+                command.CommandText =
+                    @"
                     SELECT Value FROM Test;
                     DELETE FROM Test";
 
@@ -1013,7 +1042,9 @@ namespace Microsoft.Data.Sqlite
                 var ex = Assert.Throws<SqliteException>(() => command.ExecuteScalar());
                 Assert.Equal(SQLITE_ERROR, ex.SqliteErrorCode);
 
-                connection.ExecuteNonQuery("CREATE TABLE dual (dummy); INSERT INTO dual (dummy) VALUES ('X');");
+                connection.ExecuteNonQuery(
+                    "CREATE TABLE dual (dummy); INSERT INTO dual (dummy) VALUES ('X');"
+                );
 
                 var result = command.ExecuteScalar();
 

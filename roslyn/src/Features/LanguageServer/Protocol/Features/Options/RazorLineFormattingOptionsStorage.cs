@@ -11,9 +11,15 @@ namespace Microsoft.CodeAnalysis.Formatting;
 /// </summary>
 internal static class RazorLineFormattingOptionsStorage
 {
-    internal static readonly Option2<bool> UseTabs = new(
-        "RazorDesignTimeDocumentFormattingOptions_UseTabs", LineFormattingOptions.Default.UseTabs);
+    internal static readonly Option2<bool> UseTabs =
+        new(
+            "RazorDesignTimeDocumentFormattingOptions_UseTabs",
+            LineFormattingOptions.Default.UseTabs
+        );
 
-    internal static readonly Option2<int> TabSize = new(
-        "RazorDesignTimeDocumentFormattingOptions_TabSize", LineFormattingOptions.Default.TabSize);
+    internal static readonly Option2<int> TabSize =
+        new(
+            "RazorDesignTimeDocumentFormattingOptions_TabSize",
+            LineFormattingOptions.Default.TabSize
+        );
 }

@@ -29,37 +29,40 @@ namespace System.Diagnostics.Tests
             Assert.Equal(0, symlink(filePath, linkPath));
 
             // Assembly1.dll
-            VerifyVersionInfo(linkPath, new MyFVI()
-            {
-                Comments = "Have you played a Contoso amusement device today?",
-                CompanyName = "The name of the company.",
-                FileBuildPart = 2,
-                FileDescription = "My File",
-                FileMajorPart = 4,
-                FileMinorPart = 3,
-                FileName = linkPath,
-                FilePrivatePart = 1,
-                FileVersion = "4.3.2.1",
-                InternalName = OriginalTestAssemblyInternalName,
-                IsDebug = false,
-                IsPatched = false,
-                IsPrivateBuild = false,
-                IsPreRelease = false,
-                IsSpecialBuild = false,
-                Language = GetFileVersionLanguage(0x0000),
-                Language2 = null,
-                LegalCopyright = "Copyright, you betcha!",
-                LegalTrademarks = "TM",
-                OriginalFilename = OriginalTestAssemblyInternalName,
-                PrivateBuild = "",
-                ProductBuildPart = 3,
-                ProductMajorPart = 1,
-                ProductMinorPart = 2,
-                ProductName = "The greatest product EVER",
-                ProductPrivatePart = 0,
-                ProductVersion = "1.2.3-beta.4",
-                SpecialBuild = "",
-            });
+            VerifyVersionInfo(
+                linkPath,
+                new MyFVI()
+                {
+                    Comments = "Have you played a Contoso amusement device today?",
+                    CompanyName = "The name of the company.",
+                    FileBuildPart = 2,
+                    FileDescription = "My File",
+                    FileMajorPart = 4,
+                    FileMinorPart = 3,
+                    FileName = linkPath,
+                    FilePrivatePart = 1,
+                    FileVersion = "4.3.2.1",
+                    InternalName = OriginalTestAssemblyInternalName,
+                    IsDebug = false,
+                    IsPatched = false,
+                    IsPrivateBuild = false,
+                    IsPreRelease = false,
+                    IsSpecialBuild = false,
+                    Language = GetFileVersionLanguage(0x0000),
+                    Language2 = null,
+                    LegalCopyright = "Copyright, you betcha!",
+                    LegalTrademarks = "TM",
+                    OriginalFilename = OriginalTestAssemblyInternalName,
+                    PrivateBuild = "",
+                    ProductBuildPart = 3,
+                    ProductMajorPart = 1,
+                    ProductMinorPart = 2,
+                    ProductName = "The greatest product EVER",
+                    ProductPrivatePart = 0,
+                    ProductVersion = "1.2.3-beta.4",
+                    SpecialBuild = "",
+                }
+            );
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]

@@ -29,100 +29,100 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System;
+    using System.Collections;
 
-	using System;
-	using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using Mono.Cecil.Cil;
+    internal sealed class NestedTypeCollection : CollectionBase, IReflectionVisitable
+    {
+        TypeDefinition m_container;
 
-	internal sealed class NestedTypeCollection : CollectionBase, IReflectionVisitable {
+        public TypeDefinition this[int index]
+        {
+            get { return List[index] as TypeDefinition; }
+            set { List[index] = value; }
+        }
 
-		TypeDefinition m_container;
+        public TypeDefinition Container
+        {
+            get { return m_container; }
+        }
 
-		public TypeDefinition this [int index] {
-			get { return List [index] as TypeDefinition; }
-			set { List [index] = value; }
-		}
+        public NestedTypeCollection(TypeDefinition container)
+        {
+            m_container = container;
+        }
 
-		public TypeDefinition Container {
-			get { return m_container; }
-		}
+        public void Add(TypeDefinition value)
+        {
+            Attach(value);
 
-		public NestedTypeCollection (TypeDefinition container)
-		{
-			m_container = container;
-		}
+            List.Add(value);
+        }
 
-		public void Add (TypeDefinition value)
-		{
-			Attach (value);
+        public new void Clear()
+        {
+            foreach (TypeDefinition item in this)
+                Detach(item);
 
-			List.Add (value);
-		}
+            base.Clear();
+        }
 
+        public bool Contains(TypeDefinition value)
+        {
+            return List.Contains(value);
+        }
 
-		public new void Clear ()
-		{
-			foreach (TypeDefinition item in this)
-				Detach (item);
+        public int IndexOf(TypeDefinition value)
+        {
+            return List.IndexOf(value);
+        }
 
-			base.Clear ();
-		}
+        public void Insert(int index, TypeDefinition value)
+        {
+            Attach(value);
 
-		public bool Contains (TypeDefinition value)
-		{
-			return List.Contains (value);
-		}
+            List.Insert(index, value);
+        }
 
-		public int IndexOf (TypeDefinition value)
-		{
-			return List.IndexOf (value);
-		}
+        public void Remove(TypeDefinition value)
+        {
+            List.Remove(value);
 
-		public void Insert (int index, TypeDefinition value)
-		{
-			Attach (value);
+            Detach(value);
+        }
 
-			List.Insert (index, value);
-		}
+        public new void RemoveAt(int index)
+        {
+            TypeDefinition item = this[index];
+            Remove(item);
+        }
 
-		public void Remove (TypeDefinition value)
-		{
-			List.Remove (value);
+        protected override void OnValidate(object o)
+        {
+            if (!(o is TypeDefinition))
+                throw new ArgumentException("Must be of type " + typeof(TypeDefinition).FullName);
+        }
 
-			Detach (value);
-		}
+        void Attach(MemberReference member)
+        {
+            if (member.DeclaringType != null)
+                throw new ReflectionException("Member already attached, clone it instead");
 
+            member.DeclaringType = m_container;
+        }
 
-		public new void RemoveAt (int index)
-		{
-			TypeDefinition item = this [index];
-			Remove (item);
-		}
+        void Detach(MemberReference member)
+        {
+            member.DeclaringType = null;
+        }
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is TypeDefinition))
-				throw new ArgumentException ("Must be of type " + typeof (TypeDefinition).FullName);
-		}
-
-		void Attach (MemberReference member)
-		{
-			if (member.DeclaringType != null)
-				throw new ReflectionException ("Member already attached, clone it instead");
-
-			member.DeclaringType = m_container;
-		}
-
-		void Detach (MemberReference member)
-		{
-			member.DeclaringType = null;
-		}
-
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitNestedTypeCollection (this);
-		}
-	}
+        public void Accept(IReflectionVisitor visitor)
+        {
+            visitor.VisitNestedTypeCollection(this);
+        }
+    }
 }

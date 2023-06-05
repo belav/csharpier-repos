@@ -47,52 +47,80 @@ namespace Internal.IL
             switch (owningType.Name)
             {
                 case "Interlocked":
+
                     {
                         if (owningType.Namespace == "System.Threading")
                             return InterlockedIntrinsics.EmitIL(method);
                     }
                     break;
                 case "Unsafe":
+
                     {
                         if (owningType.Namespace == "System.Runtime.CompilerServices")
                             return UnsafeIntrinsics.EmitIL(method);
                     }
                     break;
                 case "MemoryMarshal":
+
                     {
                         if (owningType.Namespace == "System.Runtime.InteropServices")
                             return MemoryMarshalIntrinsics.EmitIL(method);
                     }
                     break;
                 case "Volatile":
+
                     {
                         if (owningType.Namespace == "System.Threading")
                             return VolatileIntrinsics.EmitIL(method);
                     }
                     break;
                 case "Debug":
+
                     {
-                        if (owningType.Namespace == "System.Diagnostics" && method.Name == "DebugBreak")
-                            return new ILStubMethodIL(method, new byte[] { (byte)ILOpcode.break_, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                        if (
+                            owningType.Namespace == "System.Diagnostics"
+                            && method.Name == "DebugBreak"
+                        )
+                            return new ILStubMethodIL(
+                                method,
+                                new byte[] { (byte)ILOpcode.break_, (byte)ILOpcode.ret },
+                                Array.Empty<LocalVariableDefinition>(),
+                                null
+                            );
                     }
                     break;
                 case "RuntimeAugments":
+
                     {
-                        if (owningType.Namespace == "Internal.Runtime.Augments" && method.Name == "GetCanonType")
+                        if (
+                            owningType.Namespace == "Internal.Runtime.Augments"
+                            && method.Name == "GetCanonType"
+                        )
                             return GetCanonTypeIntrinsic.EmitIL(method);
                     }
                     break;
                 case "MethodTable":
+
                     {
-                        if (owningType.Namespace == "Internal.Runtime" && method.Name == "get_SupportsRelativePointers")
+                        if (
+                            owningType.Namespace == "Internal.Runtime"
+                            && method.Name == "get_SupportsRelativePointers"
+                        )
                         {
-                            ILOpcode value = method.Context.Target.SupportsRelativePointers ?
-                                ILOpcode.ldc_i4_1 : ILOpcode.ldc_i4_0;
-                            return new ILStubMethodIL(method, new byte[] { (byte)value, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                            ILOpcode value = method.Context.Target.SupportsRelativePointers
+                                ? ILOpcode.ldc_i4_1
+                                : ILOpcode.ldc_i4_0;
+                            return new ILStubMethodIL(
+                                method,
+                                new byte[] { (byte)value, (byte)ILOpcode.ret },
+                                Array.Empty<LocalVariableDefinition>(),
+                                null
+                            );
                         }
                     }
                     break;
                 case "Stream":
+
                     {
                         if (owningType.Namespace == "System.IO")
                             return StreamIntrinsics.EmitIL(method);
@@ -121,46 +149,67 @@ namespace Internal.IL
             switch (owningType.Name)
             {
                 case "Activator":
+
                     {
                         TypeSystemContext context = owningType.Context;
-                        if (methodName == "CreateInstance" && method.Signature.Length == 0 && method.HasInstantiation
+                        if (
+                            methodName == "CreateInstance"
+                            && method.Signature.Length == 0
+                            && method.HasInstantiation
                             && method.Instantiation[0] is TypeDesc activatedType
                             && activatedType != context.UniversalCanonType
                             && activatedType.IsValueType
-                            && activatedType.GetParameterlessConstructor() == null)
+                            && activatedType.GetParameterlessConstructor() == null
+                        )
                         {
                             ILEmitter emit = new ILEmitter();
                             ILCodeStream codeStream = emit.NewCodeStream();
 
                             var t = emit.NewLocal(context.GetSignatureVariable(0, method: true));
                             codeStream.EmitLdLoca(t);
-                            codeStream.Emit(ILOpcode.initobj, emit.NewToken(context.GetSignatureVariable(0, method: true)));
+                            codeStream.Emit(
+                                ILOpcode.initobj,
+                                emit.NewToken(context.GetSignatureVariable(0, method: true))
+                            );
                             codeStream.EmitLdLoc(t);
                             codeStream.Emit(ILOpcode.ret);
 
-                            return new InstantiatedMethodIL(method, emit.Link(method.GetMethodDefinition()));
+                            return new InstantiatedMethodIL(
+                                method,
+                                emit.Link(method.GetMethodDefinition())
+                            );
                         }
                     }
                     break;
                 case "RuntimeHelpers":
+
                     {
                         if (owningType.Namespace == "System.Runtime.CompilerServices")
                             return RuntimeHelpersIntrinsics.EmitIL(method);
                     }
                     break;
                 case "Comparer`1":
+
                     {
-                        if (methodName == "Create" && owningType.Namespace == "System.Collections.Generic")
+                        if (
+                            methodName == "Create"
+                            && owningType.Namespace == "System.Collections.Generic"
+                        )
                             return ComparerIntrinsics.EmitComparerCreate(method);
                     }
                     break;
                 case "EqualityComparer`1":
+
                     {
-                        if (methodName == "Create" && owningType.Namespace == "System.Collections.Generic")
+                        if (
+                            methodName == "Create"
+                            && owningType.Namespace == "System.Collections.Generic"
+                        )
                             return ComparerIntrinsics.EmitEqualityComparerCreate(method);
                     }
                     break;
                 case "ComparerHelpers":
+
                     {
                         if (owningType.Namespace != "Internal.IntrinsicSupport")
                             return null;
@@ -174,20 +223,28 @@ namespace Internal.IL
                                 return null;
 
                             TypeDesc underlyingType = elementType.UnderlyingType;
-                            TypeDesc returnType = method.Context.GetWellKnownType(WellKnownType.Int32);
-                            MethodDesc underlyingCompareToMethod = underlyingType.GetKnownMethod("CompareTo",
+                            TypeDesc returnType = method.Context.GetWellKnownType(
+                                WellKnownType.Int32
+                            );
+                            MethodDesc underlyingCompareToMethod = underlyingType.GetKnownMethod(
+                                "CompareTo",
                                 new MethodSignature(
                                     MethodSignatureFlags.None,
                                     genericParameterCount: 0,
                                     returnType: returnType,
-                                    parameters: new TypeDesc[] {underlyingType}));
+                                    parameters: new TypeDesc[] { underlyingType }
+                                )
+                            );
 
                             ILEmitter emitter = new ILEmitter();
                             var codeStream = emitter.NewCodeStream();
 
                             codeStream.EmitLdArga(0);
                             codeStream.EmitLdArg(1);
-                            codeStream.Emit(ILOpcode.call, emitter.NewToken(underlyingCompareToMethod));
+                            codeStream.Emit(
+                                ILOpcode.call,
+                                emitter.NewToken(underlyingCompareToMethod)
+                            );
                             codeStream.Emit(ILOpcode.ret);
 
                             return emitter.Link(method);
@@ -195,6 +252,7 @@ namespace Internal.IL
                     }
                     break;
                 case "EqualityComparerHelpers":
+
                     {
                         if (owningType.Namespace != "Internal.IntrinsicSupport")
                             return null;
@@ -224,68 +282,103 @@ namespace Internal.IL
                                 convInstruction = ILOpcode.conv_i8;
                             }
 
-                            return new ILStubMethodIL(method, new byte[] {
-                                (byte)ILOpcode.ldarg_0,
-                                (byte)convInstruction,
-                                (byte)ILOpcode.ldarg_1,
-                                (byte)convInstruction,
-                                (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.ceq),
-                                (byte)ILOpcode.ret,
-                            },
-                            Array.Empty<LocalVariableDefinition>(), null);
+                            return new ILStubMethodIL(
+                                method,
+                                new byte[]
+                                {
+                                    (byte)ILOpcode.ldarg_0,
+                                    (byte)convInstruction,
+                                    (byte)ILOpcode.ldarg_1,
+                                    (byte)convInstruction,
+                                    (byte)ILOpcode.prefix1,
+                                    unchecked((byte)ILOpcode.ceq),
+                                    (byte)ILOpcode.ret,
+                                },
+                                Array.Empty<LocalVariableDefinition>(),
+                                null
+                            );
                         }
                         else if (methodName == "GetComparerForReferenceTypesOnly")
                         {
                             TypeDesc elementType = method.Instantiation[0];
-                            if (!elementType.IsRuntimeDeterminedSubtype
+                            if (
+                                !elementType.IsRuntimeDeterminedSubtype
                                 && !elementType.IsCanonicalSubtype(CanonicalFormKind.Any)
-                                && !elementType.IsGCPointer)
+                                && !elementType.IsGCPointer
+                            )
                             {
-                                return new ILStubMethodIL(method, new byte[] {
-                                    (byte)ILOpcode.ldnull,
-                                    (byte)ILOpcode.ret
-                                },
-                                Array.Empty<LocalVariableDefinition>(), null);
+                                return new ILStubMethodIL(
+                                    method,
+                                    new byte[] { (byte)ILOpcode.ldnull, (byte)ILOpcode.ret },
+                                    Array.Empty<LocalVariableDefinition>(),
+                                    null
+                                );
                             }
                         }
                         else if (methodName == "StructOnlyEquals")
                         {
                             TypeDesc elementType = method.Instantiation[0];
-                            if (!elementType.IsRuntimeDeterminedSubtype
+                            if (
+                                !elementType.IsRuntimeDeterminedSubtype
                                 && !elementType.IsCanonicalSubtype(CanonicalFormKind.Any)
-                                && !elementType.IsGCPointer)
+                                && !elementType.IsGCPointer
+                            )
                             {
                                 Debug.Assert(elementType.IsValueType);
 
                                 TypeSystemContext context = elementType.Context;
-                                MetadataType helperType = context.SystemModule.GetKnownType("Internal.IntrinsicSupport", "EqualityComparerHelpers");
+                                MetadataType helperType = context.SystemModule.GetKnownType(
+                                    "Internal.IntrinsicSupport",
+                                    "EqualityComparerHelpers"
+                                );
 
                                 MethodDesc methodToCall;
                                 if (elementType.IsEnum)
                                 {
-                                    methodToCall = helperType.GetKnownMethod("EnumOnlyEquals", null).MakeInstantiatedMethod(elementType);
+                                    methodToCall = helperType
+                                        .GetKnownMethod("EnumOnlyEquals", null)
+                                        .MakeInstantiatedMethod(elementType);
                                 }
-                                else if (elementType.IsNullable && ComparerIntrinsics.ImplementsIEquatable(elementType.Instantiation[0]))
+                                else if (
+                                    elementType.IsNullable
+                                    && ComparerIntrinsics.ImplementsIEquatable(
+                                        elementType.Instantiation[0]
+                                    )
+                                )
                                 {
-                                    methodToCall = helperType.GetKnownMethod("StructOnlyEqualsNullable", null).MakeInstantiatedMethod(elementType.Instantiation[0]);
+                                    methodToCall = helperType
+                                        .GetKnownMethod("StructOnlyEqualsNullable", null)
+                                        .MakeInstantiatedMethod(elementType.Instantiation[0]);
                                 }
                                 else if (ComparerIntrinsics.ImplementsIEquatable(elementType))
                                 {
-                                    methodToCall = helperType.GetKnownMethod("StructOnlyEqualsIEquatable", null).MakeInstantiatedMethod(elementType);
+                                    methodToCall = helperType
+                                        .GetKnownMethod("StructOnlyEqualsIEquatable", null)
+                                        .MakeInstantiatedMethod(elementType);
                                 }
                                 else
                                 {
-                                    methodToCall = helperType.GetKnownMethod("StructOnlyNormalEquals", null).MakeInstantiatedMethod(elementType);
+                                    methodToCall = helperType
+                                        .GetKnownMethod("StructOnlyNormalEquals", null)
+                                        .MakeInstantiatedMethod(elementType);
                                 }
 
-                                return new ILStubMethodIL(method, new byte[]
-                                {
-                                    (byte)ILOpcode.ldarg_0,
-                                    (byte)ILOpcode.ldarg_1,
-                                    (byte)ILOpcode.call, 1, 0, 0, 0,
-                                    (byte)ILOpcode.ret
-                                },
-                                Array.Empty<LocalVariableDefinition>(), new object[] { methodToCall });
+                                return new ILStubMethodIL(
+                                    method,
+                                    new byte[]
+                                    {
+                                        (byte)ILOpcode.ldarg_0,
+                                        (byte)ILOpcode.ldarg_1,
+                                        (byte)ILOpcode.call,
+                                        1,
+                                        0,
+                                        0,
+                                        0,
+                                        (byte)ILOpcode.ret
+                                    },
+                                    Array.Empty<LocalVariableDefinition>(),
+                                    new object[] { methodToCall }
+                                );
                             }
                         }
                     }
@@ -319,8 +412,7 @@ namespace Internal.IL
 
                 return null;
             }
-            else
-            if (method is MethodForInstantiatedType || method is InstantiatedMethod)
+            else if (method is MethodForInstantiatedType || method is InstantiatedMethod)
             {
                 // Intrinsics specialized per instantiation
                 if (method.IsIntrinsic)
@@ -335,19 +427,20 @@ namespace Internal.IL
                     return null;
                 return new InstantiatedMethodIL(method, methodDefinitionIL);
             }
-            else
-            if (method is ILStubMethod)
+            else if (method is ILStubMethod)
             {
                 return ((ILStubMethod)method).EmitIL();
             }
-            else
-            if (method is ArrayMethod)
+            else if (method is ArrayMethod)
             {
                 return ArrayMethodILEmitter.EmitIL((ArrayMethod)method);
             }
             else
             {
-                Debug.Assert(!(method is PInvokeTargetNativeMethod), "Who is asking for IL of PInvokeTargetNativeMethod?");
+                Debug.Assert(
+                    !(method is PInvokeTargetNativeMethod),
+                    "Who is asking for IL of PInvokeTargetNativeMethod?"
+                );
                 return null;
             }
         }

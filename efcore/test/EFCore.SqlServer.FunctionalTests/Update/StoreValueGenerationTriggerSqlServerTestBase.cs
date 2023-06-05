@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.TestModels.StoreValueGenerationModel;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture> : StoreValueGenerationTestBase<TFixture>
+public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture>
+    : StoreValueGenerationTestBase<TFixture>
     where TFixture : StoreValueGenerationTriggerSqlServerFixture
 {
     protected StoreValueGenerationTriggerSqlServerTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -33,10 +32,19 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture> : S
             context.SaveChanges();
         }
 
-        Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
-        Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionCommitted);
+        Assert.Contains(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionStarted
+        );
+        Assert.Contains(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionCommitted
+        );
 
-        Assert.Equal(1, Fixture.ListLoggerFactory.Log.Count(l => l.Id == RelationalEventId.CommandExecuted));
+        Assert.Equal(
+            1,
+            Fixture.ListLoggerFactory.Log.Count(l => l.Id == RelationalEventId.CommandExecuted)
+        );
 
         context.ChangeTracker.Clear();
 
@@ -44,7 +52,10 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture> : S
         {
             foreach (var instance in instances)
             {
-                Assert.Equal(await context.WithSomeDatabaseGenerated.FindAsync(instance.Id), instance);
+                Assert.Equal(
+                    await context.WithSomeDatabaseGenerated.FindAsync(instance.Id),
+                    instance
+                );
             }
         }
     }
@@ -56,7 +67,12 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture> : S
         await using var context = CreateContext();
 
         var instances = new StoreValueGenerationData[] { new(), new(), new(), new() };
-        context.WithSomeDatabaseGenerated.AddRange(instances[0], instances[1], instances[2], instances[3]);
+        context.WithSomeDatabaseGenerated.AddRange(
+            instances[0],
+            instances[1],
+            instances[2],
+            instances[3]
+        );
 
         Fixture.ListLoggerFactory.Clear();
 
@@ -69,10 +85,19 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture> : S
             context.SaveChanges();
         }
 
-        Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
-        Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionCommitted);
+        Assert.Contains(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionStarted
+        );
+        Assert.Contains(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionCommitted
+        );
 
-        Assert.Equal(1, Fixture.ListLoggerFactory.Log.Count(l => l.Id == RelationalEventId.CommandExecuted));
+        Assert.Equal(
+            1,
+            Fixture.ListLoggerFactory.Log.Count(l => l.Id == RelationalEventId.CommandExecuted)
+        );
 
         context.ChangeTracker.Clear();
 
@@ -80,12 +105,15 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture> : S
         {
             foreach (var instance in instances)
             {
-                Assert.Equal(await context.WithSomeDatabaseGenerated.FindAsync(instance.Id), instance);
+                Assert.Equal(
+                    await context.WithSomeDatabaseGenerated.FindAsync(instance.Id),
+                    instance
+                );
             }
         }
 
         AssertSql(
-"""
+            """
 @p0='0'
 @p1='0'
 @p2='0'
@@ -107,6 +135,7 @@ INTO @inserted0;
 SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
 INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
 ORDER BY [i].[_Position];
-""");
+"""
+        );
     }
 }
