@@ -12,9 +12,9 @@ public sealed class SkipIfDebugAttribute : Attribute, ITestCondition
 {
     public bool IsMet =>
 #if DEBUG
-            false;
+        false;
 #else
-            true;
+        true;
 #endif
 
     public string SkipReason => "Test cannot be run in Debug mode.";

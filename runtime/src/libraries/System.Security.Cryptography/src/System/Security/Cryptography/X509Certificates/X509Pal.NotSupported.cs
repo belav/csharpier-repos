@@ -7,7 +7,9 @@ namespace System.Security.Cryptography.X509Certificates
     {
         private static partial IX509Pal BuildSingleton()
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
     }
 }

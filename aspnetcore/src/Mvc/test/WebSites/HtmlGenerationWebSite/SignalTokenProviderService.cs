@@ -8,19 +8,22 @@ namespace HtmlGenerationWebSite;
 
 public class SignalTokenProviderService<TKey> : ISignalTokenProviderService<TKey>
 {
-    private readonly ConcurrentDictionary<object, ChangeTokenInfo> _changeTokens
-        = new ConcurrentDictionary<object, ChangeTokenInfo>();
+    private readonly ConcurrentDictionary<object, ChangeTokenInfo> _changeTokens =
+        new ConcurrentDictionary<object, ChangeTokenInfo>();
 
     public IChangeToken GetToken(object key)
     {
-        return _changeTokens.GetOrAdd(
-            key,
-            _ =>
-            {
-                var cancellationTokenSource = new CancellationTokenSource();
-                var changeToken = new CancellationChangeToken(cancellationTokenSource.Token);
-                return new ChangeTokenInfo(changeToken, cancellationTokenSource);
-            }).ChangeToken;
+        return _changeTokens
+            .GetOrAdd(
+                key,
+                _ =>
+                {
+                    var cancellationTokenSource = new CancellationTokenSource();
+                    var changeToken = new CancellationChangeToken(cancellationTokenSource.Token);
+                    return new ChangeTokenInfo(changeToken, cancellationTokenSource);
+                }
+            )
+            .ChangeToken;
     }
 
     public void SignalToken(object key)

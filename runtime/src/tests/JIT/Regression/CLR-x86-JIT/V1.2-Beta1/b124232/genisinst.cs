@@ -4,12 +4,12 @@
 
 using System;
 
-interface I<T>
-{
-}
+interface I<T> { }
+
 class C1<T> : I<T>
 {
     public T a;
+
     public C1(T arg)
     {
         a = arg;
@@ -25,6 +25,7 @@ class C2
         return ((C1<T>)o).a;
     }
 }
+
 public class Test_genisinst
 {
     public static int Main()
@@ -34,5 +35,3 @@ public class Test_genisinst
         return C2.GetMemberList<int>(ref o);
     }
 }
-
-

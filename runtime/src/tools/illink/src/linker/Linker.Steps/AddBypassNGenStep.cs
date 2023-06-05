@@ -8,115 +8,172 @@ using Mono.Collections.Generic;
 
 namespace Mono.Linker.Steps
 {
+    public class AddBypassNGenStep : BaseStep
+    {
+        AssemblyDefinition? coreLibAssembly;
+        CustomAttribute? bypassNGenAttribute;
 
-	public class AddBypassNGenStep : BaseStep
-	{
+        protected override void ProcessAssembly(AssemblyDefinition assembly)
+        {
+            if (Annotations.GetAction(assembly) == AssemblyAction.AddBypassNGen)
+            {
+                coreLibAssembly = Context.Resolve(assembly.MainModule.TypeSystem.CoreLibrary);
+                if (coreLibAssembly == null)
+                    return;
+                bypassNGenAttribute = null;
+                if (assembly == coreLibAssembly)
+                {
+                    EnsureBypassNGenAttribute(assembly.MainModule);
+                }
 
-		AssemblyDefinition? coreLibAssembly;
-		CustomAttribute? bypassNGenAttribute;
+                foreach (var type in assembly.MainModule.Types)
+                    ProcessType(type);
+            }
+        }
 
-		protected override void ProcessAssembly (AssemblyDefinition assembly)
-		{
-			if (Annotations.GetAction (assembly) == AssemblyAction.AddBypassNGen) {
-				coreLibAssembly = Context.Resolve (assembly.MainModule.TypeSystem.CoreLibrary);
-				if (coreLibAssembly == null)
-					return;
-				bypassNGenAttribute = null;
-				if (assembly == coreLibAssembly) {
-					EnsureBypassNGenAttribute (assembly.MainModule);
-				}
+        void ProcessType(TypeDefinition type)
+        {
+            if (type.HasMethods)
+                ProcessMethods(type.Methods, type.Module);
 
-				foreach (var type in assembly.MainModule.Types)
-					ProcessType (type);
-			}
-		}
+            if (type.HasNestedTypes)
+                ProcessNestedTypes(type);
+        }
 
-		void ProcessType (TypeDefinition type)
-		{
-			if (type.HasMethods)
-				ProcessMethods (type.Methods, type.Module);
+        void ProcessMethods(Collection<MethodDefinition> methods, ModuleDefinition module)
+        {
+            foreach (var method in methods)
+                if (!Annotations.IsMarked(method))
+                {
+                    EnsureBypassNGenAttribute(module);
+                    method.CustomAttributes.Add(bypassNGenAttribute);
+                }
+        }
 
-			if (type.HasNestedTypes)
-				ProcessNestedTypes (type);
-		}
+        void ProcessNestedTypes(TypeDefinition type)
+        {
+            for (int i = 0; i < type.NestedTypes.Count; i++)
+            {
+                var nested = type.NestedTypes[i];
+                ProcessType(nested);
+            }
+        }
 
-		void ProcessMethods (Collection<MethodDefinition> methods, ModuleDefinition module)
-		{
-			foreach (var method in methods)
-				if (!Annotations.IsMarked (method)) {
-					EnsureBypassNGenAttribute (module);
-					method.CustomAttributes.Add (bypassNGenAttribute);
-				}
-		}
+        private void EnsureBypassNGenAttribute(ModuleDefinition targetModule)
+        {
+            Debug.Assert(coreLibAssembly != null);
+            if (bypassNGenAttribute != null)
+            {
+                return;
+            }
+            ModuleDefinition corelibMainModule = coreLibAssembly.MainModule;
+            TypeReference bypassNGenAttributeRef = new TypeReference(
+                "System.Runtime",
+                "BypassNGenAttribute",
+                corelibMainModule,
+                targetModule.TypeSystem.CoreLibrary
+            );
+            TypeDefinition bypassNGenAttributeDef = corelibMainModule.MetadataResolver.Resolve(
+                bypassNGenAttributeRef
+            );
+            MethodDefinition? bypassNGenAttributeDefaultConstructor = null;
 
-		void ProcessNestedTypes (TypeDefinition type)
-		{
-			for (int i = 0; i < type.NestedTypes.Count; i++) {
-				var nested = type.NestedTypes[i];
-				ProcessType (nested);
-			}
-		}
+            if (bypassNGenAttributeDef == null)
+            {
+                // System.Runtime.BypassNGenAttribute is not found in corelib. Add it.
+                TypeReference systemAttributeRef = new TypeReference(
+                    "System",
+                    "Attribute",
+                    corelibMainModule,
+                    targetModule.TypeSystem.CoreLibrary
+                );
+                TypeReference systemAttribute = corelibMainModule.MetadataResolver.Resolve(
+                    systemAttributeRef
+                );
+                systemAttribute = corelibMainModule.ImportReference(systemAttribute);
 
-		private void EnsureBypassNGenAttribute (ModuleDefinition targetModule)
-		{
-			Debug.Assert (coreLibAssembly != null);
-			if (bypassNGenAttribute != null) {
-				return;
-			}
-			ModuleDefinition corelibMainModule = coreLibAssembly.MainModule;
-			TypeReference bypassNGenAttributeRef = new TypeReference ("System.Runtime", "BypassNGenAttribute", corelibMainModule, targetModule.TypeSystem.CoreLibrary);
-			TypeDefinition bypassNGenAttributeDef = corelibMainModule.MetadataResolver.Resolve (bypassNGenAttributeRef);
-			MethodDefinition? bypassNGenAttributeDefaultConstructor = null;
+                if (systemAttribute == null)
+                    throw new System.ApplicationException(
+                        "System.Attribute is not found in "
+                            + targetModule.TypeSystem.CoreLibrary.Name
+                    );
 
-			if (bypassNGenAttributeDef == null) {
-				// System.Runtime.BypassNGenAttribute is not found in corelib. Add it.
-				TypeReference systemAttributeRef = new TypeReference ("System", "Attribute", corelibMainModule, targetModule.TypeSystem.CoreLibrary);
-				TypeReference systemAttribute = corelibMainModule.MetadataResolver.Resolve (systemAttributeRef);
-				systemAttribute = corelibMainModule.ImportReference (systemAttribute);
+                MethodReference systemAttributeDefaultConstructorRef = new MethodReference(
+                    ".ctor",
+                    corelibMainModule.TypeSystem.Void,
+                    systemAttributeRef
+                );
+                MethodReference systemAttributeDefaultConstructor =
+                    corelibMainModule.MetadataResolver.Resolve(
+                        systemAttributeDefaultConstructorRef
+                    );
+                systemAttributeDefaultConstructor = corelibMainModule.ImportReference(
+                    systemAttributeDefaultConstructor
+                );
 
-				if (systemAttribute == null)
-					throw new System.ApplicationException ("System.Attribute is not found in " + targetModule.TypeSystem.CoreLibrary.Name);
+                if (systemAttributeDefaultConstructor == null)
+                    throw new System.ApplicationException(
+                        "System.Attribute has no default constructor"
+                    );
 
-				MethodReference systemAttributeDefaultConstructorRef = new MethodReference (".ctor", corelibMainModule.TypeSystem.Void, systemAttributeRef);
-				MethodReference systemAttributeDefaultConstructor = corelibMainModule.MetadataResolver.Resolve (systemAttributeDefaultConstructorRef);
-				systemAttributeDefaultConstructor = corelibMainModule.ImportReference (systemAttributeDefaultConstructor);
+                bypassNGenAttributeDef = new TypeDefinition(
+                    "System.Runtime",
+                    "BypassNGenAttribute",
+                    TypeAttributes.NotPublic | TypeAttributes.Sealed,
+                    systemAttribute
+                );
 
-				if (systemAttributeDefaultConstructor == null)
-					throw new System.ApplicationException ("System.Attribute has no default constructor");
+                coreLibAssembly.MainModule.Types.Add(bypassNGenAttributeDef);
 
-				bypassNGenAttributeDef = new TypeDefinition ("System.Runtime", "BypassNGenAttribute", TypeAttributes.NotPublic | TypeAttributes.Sealed, systemAttribute);
+                if (Annotations.GetAction(coreLibAssembly) == AssemblyAction.Copy)
+                {
+                    Annotations.SetAction(coreLibAssembly, AssemblyAction.Save);
+                }
 
-				coreLibAssembly.MainModule.Types.Add (bypassNGenAttributeDef);
-
-				if (Annotations.GetAction (coreLibAssembly) == AssemblyAction.Copy) {
-					Annotations.SetAction (coreLibAssembly, AssemblyAction.Save);
-				}
-
-				const MethodAttributes ctorAttributes = MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
-				bypassNGenAttributeDefaultConstructor = new MethodDefinition (".ctor", ctorAttributes, coreLibAssembly.MainModule.TypeSystem.Void);
+                const MethodAttributes ctorAttributes =
+                    MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.RTSpecialName;
+                bypassNGenAttributeDefaultConstructor = new MethodDefinition(
+                    ".ctor",
+                    ctorAttributes,
+                    coreLibAssembly.MainModule.TypeSystem.Void
+                );
 #pragma warning disable RS0030 // Anything after MarkStep should use Cecil directly as all method bodies should be processed by this point
-				var instructions = bypassNGenAttributeDefaultConstructor.Body.Instructions;
+                var instructions = bypassNGenAttributeDefaultConstructor.Body.Instructions;
 #pragma warning restore RS0030
-				instructions.Add (Instruction.Create (OpCodes.Ldarg_0));
-				instructions.Add (Instruction.Create (OpCodes.Call, systemAttributeDefaultConstructor));
-				instructions.Add (Instruction.Create (OpCodes.Ret));
+                instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
+                instructions.Add(
+                    Instruction.Create(OpCodes.Call, systemAttributeDefaultConstructor)
+                );
+                instructions.Add(Instruction.Create(OpCodes.Ret));
 
-				bypassNGenAttributeDef.Methods.Add (bypassNGenAttributeDefaultConstructor);
-			} else {
-				foreach (MethodDefinition method in bypassNGenAttributeDef.Methods) {
-					if (method.IsConstructor && !method.IsStatic && !method.HasMetadataParameters ()) {
-						bypassNGenAttributeDefaultConstructor = method;
-						break;
-					}
-				}
+                bypassNGenAttributeDef.Methods.Add(bypassNGenAttributeDefaultConstructor);
+            }
+            else
+            {
+                foreach (MethodDefinition method in bypassNGenAttributeDef.Methods)
+                {
+                    if (method.IsConstructor && !method.IsStatic && !method.HasMetadataParameters())
+                    {
+                        bypassNGenAttributeDefaultConstructor = method;
+                        break;
+                    }
+                }
 
-				if (bypassNGenAttributeDefaultConstructor == null) {
-					throw new System.ApplicationException ("System.Runtime.BypassNGenAttribute has no default constructor");
-				}
-			}
+                if (bypassNGenAttributeDefaultConstructor == null)
+                {
+                    throw new System.ApplicationException(
+                        "System.Runtime.BypassNGenAttribute has no default constructor"
+                    );
+                }
+            }
 
-			MethodReference defaultConstructorReference = targetModule.ImportReference (bypassNGenAttributeDefaultConstructor);
-			bypassNGenAttribute = new CustomAttribute (defaultConstructorReference);
-		}
-	}
+            MethodReference defaultConstructorReference = targetModule.ImportReference(
+                bypassNGenAttributeDefaultConstructor
+            );
+            bypassNGenAttribute = new CustomAttribute(defaultConstructorReference);
+        }
+    }
 }

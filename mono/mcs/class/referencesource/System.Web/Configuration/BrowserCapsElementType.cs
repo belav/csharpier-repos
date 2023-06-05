@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -17,7 +18,8 @@ namespace System.Web.Configuration {
     using System.Xml;
     using System.Globalization;
 
-    internal enum BrowserCapsElementType {
+    internal enum BrowserCapsElementType
+    {
         Capabilities,
         Capture,
         ControlAdapters,

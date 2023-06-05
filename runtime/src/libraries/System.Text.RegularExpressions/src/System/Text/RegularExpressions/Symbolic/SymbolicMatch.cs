@@ -11,7 +11,12 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Indicates a match was found but without meaningful details about where.</summary>
         internal static SymbolicMatch MatchExists => new SymbolicMatch(0, 0);
 
-        public SymbolicMatch(int index, int length, int[]? captureStarts = null, int[]? captureEnds = null)
+        public SymbolicMatch(
+            int index,
+            int length,
+            int[]? captureStarts = null,
+            int[]? captureEnds = null
+        )
         {
             Index = index;
             Length = length;

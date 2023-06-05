@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,68 +28,92 @@
 
 using System;
 using System.Xml;
+
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("Name={Name} TaskParameter={TaskParameter} ItemName={ItemName} "
-                                                      + "PropertyName={PropertyName} Condition={Condition}")]
-        public class ProjectOutputElement : ProjectElement
+    [System.Diagnostics.DebuggerDisplayAttribute(
+        "Name={Name} TaskParameter={TaskParameter} ItemName={ItemName} "
+            + "PropertyName={PropertyName} Condition={Condition}"
+    )]
+    public class ProjectOutputElement : ProjectElement
+    {
+        internal ProjectOutputElement(
+            string taskParameter,
+            string itemType,
+            string propertyName,
+            ProjectRootElement containintProject
+        )
         {
-                internal ProjectOutputElement (string taskParameter, string itemType, string propertyName,
-                                               ProjectRootElement containintProject)
-                {
-                        TaskParameter = taskParameter;
-                        ItemType = itemType;
-                        PropertyName = propertyName;
-                        ContainingProject = containintProject;
-                }
-                public bool IsOutputItem {
-                        get { return !String.IsNullOrWhiteSpace(itemType); }
-                }
-                public bool IsOutputProperty {
-                        get { return !String.IsNullOrWhiteSpace(propertyName); }
-                }
-                string itemType;
-                public string ItemType { get { return itemType ?? String.Empty; } set { itemType = value; } }
-                string propertyName;
-                public string PropertyName { get { return propertyName ?? String.Empty; } set { propertyName = value; } }
-                string taskParameter;
-                public string TaskParameter {
-                        get { return taskParameter ?? String.Empty; }
-                        set { taskParameter = value; }
-                }
-                ElementLocation taskParameterLocation;
-                public ElementLocation TaskParameterLocation {
-                        get { return taskParameterLocation; }
-                        set { taskParameterLocation = value; }
-                }
-                internal override string XmlName {
-                        get { return "Output"; }
-                }
-                internal override void SaveValue (XmlWriter writer)
-                {
-                        base.SaveValue (writer);
-                        SaveAttribute (writer, "TaskParameter", TaskParameter);
-                        if (IsOutputProperty)
-                                SaveAttribute (writer, "PropertyName", PropertyName);
-                        else
-                                SaveAttribute (writer, "ItemName", ItemType);
-                }
-                internal override void LoadAttribute (string name, string value)
-                {
-                        switch (name) {
-                        case "TaskParameter":
-                                TaskParameter = value;
-                                break;
-                        case "PropertyName":
-                                PropertyName = value;
-                                break;
-                        case "ItemName":
-                                ItemType = value;
-                                break;
-                        default:
-                                base.LoadAttribute (name, value);
-                                break;
-                        }
-                }
+            TaskParameter = taskParameter;
+            ItemType = itemType;
+            PropertyName = propertyName;
+            ContainingProject = containintProject;
         }
+
+        public bool IsOutputItem
+        {
+            get { return !String.IsNullOrWhiteSpace(itemType); }
+        }
+        public bool IsOutputProperty
+        {
+            get { return !String.IsNullOrWhiteSpace(propertyName); }
+        }
+        string itemType;
+        public string ItemType
+        {
+            get { return itemType ?? String.Empty; }
+            set { itemType = value; }
+        }
+        string propertyName;
+        public string PropertyName
+        {
+            get { return propertyName ?? String.Empty; }
+            set { propertyName = value; }
+        }
+        string taskParameter;
+        public string TaskParameter
+        {
+            get { return taskParameter ?? String.Empty; }
+            set { taskParameter = value; }
+        }
+        ElementLocation taskParameterLocation;
+        public ElementLocation TaskParameterLocation
+        {
+            get { return taskParameterLocation; }
+            set { taskParameterLocation = value; }
+        }
+        internal override string XmlName
+        {
+            get { return "Output"; }
+        }
+
+        internal override void SaveValue(XmlWriter writer)
+        {
+            base.SaveValue(writer);
+            SaveAttribute(writer, "TaskParameter", TaskParameter);
+            if (IsOutputProperty)
+                SaveAttribute(writer, "PropertyName", PropertyName);
+            else
+                SaveAttribute(writer, "ItemName", ItemType);
+        }
+
+        internal override void LoadAttribute(string name, string value)
+        {
+            switch (name)
+            {
+                case "TaskParameter":
+                    TaskParameter = value;
+                    break;
+                case "PropertyName":
+                    PropertyName = value;
+                    break;
+                case "ItemName":
+                    ItemType = value;
+                    break;
+                default:
+                    base.LoadAttribute(name, value);
+                    break;
+            }
+        }
+    }
 }

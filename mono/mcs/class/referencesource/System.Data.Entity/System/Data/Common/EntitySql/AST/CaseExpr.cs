@@ -27,9 +27,7 @@ namespace System.Data.Common.EntitySql.AST
         /// </summary>
         /// <param name="whenThenExpr">whenThen expression list</param>
         internal CaseExpr(NodeList<WhenThenExpr> whenThenExpr)
-            : this(whenThenExpr, null)
-        {
-        }
+            : this(whenThenExpr, null) { }
 
         /// <summary>
         /// Initializes case expression with else sub-expression.

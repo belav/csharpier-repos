@@ -29,9 +29,7 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                 }
             }
-            catch (CryptographicException)
-            {
-            }
+            catch (CryptographicException) { }
 
             return false;
         }
@@ -46,9 +44,16 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         using (var manager = new PointerMemoryManager<byte>(pin, rawData.Length))
                         {
-                            AsnValueReader reader = new AsnValueReader(rawData, AsnEncodingRules.BER);
+                            AsnValueReader reader = new AsnValueReader(
+                                rawData,
+                                AsnEncodingRules.BER
+                            );
 
-                            ContentInfoAsn.Decode(ref reader, manager.Memory, out ContentInfoAsn contentInfo);
+                            ContentInfoAsn.Decode(
+                                ref reader,
+                                manager.Memory,
+                                out ContentInfoAsn contentInfo
+                            );
 
                             switch (contentInfo.ContentType)
                             {
@@ -60,9 +65,7 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                 }
             }
-            catch (CryptographicException)
-            {
-            }
+            catch (CryptographicException) { }
 
             return false;
         }
@@ -91,7 +94,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             X509ContentType contentType,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -101,19 +105,30 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new CryptographicException(
                     SR.Cryptography_X509_PKCS7_Unsupported,
-                    new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported));
+                    new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported)
+                );
             }
 
             if (contentType == X509ContentType.Pkcs12)
             {
-                if ((keyStorageFlags & X509KeyStorageFlags.Exportable) == X509KeyStorageFlags.Exportable)
+                if (
+                    (keyStorageFlags & X509KeyStorageFlags.Exportable)
+                    == X509KeyStorageFlags.Exportable
+                )
                 {
-                    throw new PlatformNotSupportedException(SR.Cryptography_X509_PKCS12_ExportableNotSupported);
+                    throw new PlatformNotSupportedException(
+                        SR.Cryptography_X509_PKCS12_ExportableNotSupported
+                    );
                 }
 
-                if ((keyStorageFlags & X509KeyStorageFlags.PersistKeySet) == X509KeyStorageFlags.PersistKeySet)
+                if (
+                    (keyStorageFlags & X509KeyStorageFlags.PersistKeySet)
+                    == X509KeyStorageFlags.PersistKeySet
+                )
                 {
-                    throw new PlatformNotSupportedException(SR.Cryptography_X509_PKCS12_PersistKeySetNotSupported);
+                    throw new PlatformNotSupportedException(
+                        SR.Cryptography_X509_PKCS12_PersistKeySetNotSupported
+                    );
                 }
 
                 return ImportPkcs12(rawData, password, ephemeralSpecified);
@@ -124,7 +139,8 @@ namespace System.Security.Cryptography.X509Certificates
                 rawData,
                 contentType,
                 password,
-                out identityHandle);
+                out identityHandle
+            );
 
             if (identityHandle.IsInvalid)
             {
@@ -142,7 +158,8 @@ namespace System.Security.Cryptography.X509Certificates
         public static ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -153,9 +170,11 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     result = FromDerBlob(derData, contentType, password, keyStorageFlags);
                     return false;
-                });
+                }
+            );
 
-            return result ?? FromDerBlob(rawData, GetDerCertContentType(rawData), password, keyStorageFlags);
+            return result
+                ?? FromDerBlob(rawData, GetDerCertContentType(rawData), password, keyStorageFlags);
         }
 
         // No temporary keychain on iOS

@@ -11,24 +11,31 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (config == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("config");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "config"
+                );
             }
 #pragma warning suppress 56506 // Microsoft, config is checked above
-            return (SerializationSectionGroup)config.SectionGroups[ConfigurationStrings.SectionGroupName];
+            return (SerializationSectionGroup)
+                config.SectionGroups[ConfigurationStrings.SectionGroupName];
         }
 
         public DataContractSerializerSection DataContractSerializer
         {
-            get { return (DataContractSerializerSection)this.Sections[ConfigurationStrings.DataContractSerializerSectionName]; }
+            get
+            {
+                return (DataContractSerializerSection)
+                    this.Sections[ConfigurationStrings.DataContractSerializerSectionName];
+            }
         }
 
         public NetDataContractSerializerSection NetDataContractSerializer
         {
-            get { return (NetDataContractSerializerSection)this.Sections[ConfigurationStrings.NetDataContractSerializerSectionName]; }
+            get
+            {
+                return (NetDataContractSerializerSection)
+                    this.Sections[ConfigurationStrings.NetDataContractSerializerSectionName];
+            }
         }
-
     }
 }
-
-
-

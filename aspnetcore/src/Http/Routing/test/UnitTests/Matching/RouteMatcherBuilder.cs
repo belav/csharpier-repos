@@ -15,7 +15,10 @@ internal class RouteMatcherBuilder : MatcherBuilder
 
     public RouteMatcherBuilder()
     {
-        _constraintResolver = new DefaultInlineConstraintResolver(Options.Create(new RouteOptions()), new TestServiceProvider());
+        _constraintResolver = new DefaultInlineConstraintResolver(
+            Options.Create(new RouteOptions()),
+            new TestServiceProvider()
+        );
         _endpoints = new List<RouteEndpoint>();
     }
 
@@ -56,13 +59,16 @@ internal class RouteMatcherBuilder : MatcherBuilder
                 }
             }
 
-            routes.Add(new Route(
-                new SelectorRouter(selector, candidates),
-                endpoint.RoutePattern.RawText,
-                defaults,
-                new Dictionary<string, object>(),
-                new RouteValueDictionary(),
-                _constraintResolver));
+            routes.Add(
+                new Route(
+                    new SelectorRouter(selector, candidates),
+                    endpoint.RoutePattern.RawText,
+                    defaults,
+                    new Dictionary<string, object>(),
+                    new RouteValueDictionary(),
+                    _constraintResolver
+                )
+            );
         }
 
         return new RouteMatcher(routes);
@@ -94,7 +100,10 @@ internal class RouteMatcherBuilder : MatcherBuilder
             // This is needed due to a quirk of our tests - they reuse the endpoint feature.
             routeContext.HttpContext.SetEndpoint(null);
 
-            await _selector.SelectAsync(routeContext.HttpContext, new CandidateSet(_candidates, _values, _scores));
+            await _selector.SelectAsync(
+                routeContext.HttpContext,
+                new CandidateSet(_candidates, _values, _scores)
+            );
             if (routeContext.HttpContext.GetEndpoint() != null)
             {
                 routeContext.Handler = (_) => Task.CompletedTask;

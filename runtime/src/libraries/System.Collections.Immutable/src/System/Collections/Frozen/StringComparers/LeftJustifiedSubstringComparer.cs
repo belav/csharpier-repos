@@ -16,7 +16,10 @@ namespace System.Collections.Frozen
     internal sealed class LeftJustifiedSubstringComparer : SubstringComparerBase
     {
         public override bool Equals(string? x, string? y) => string.Equals(x, y);
-        public override bool EqualsPartial(string? x, string? y) => x.AsSpan(Index, Count).SequenceEqual(y.AsSpan(Index, Count));
+
+        public override bool EqualsPartial(string? x, string? y) =>
+            x.AsSpan(Index, Count).SequenceEqual(y.AsSpan(Index, Count));
+
         public override int GetHashCode(string s) => GetHashCodeOrdinal(s.AsSpan(Index, Count));
     }
 }

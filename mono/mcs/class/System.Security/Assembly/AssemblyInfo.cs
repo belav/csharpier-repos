@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,24 +39,24 @@ using System.Security.Permissions;
 
 // General Information about the System.Security assembly
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
 
-[assembly: CLSCompliant (true)]
-[assembly: ComVisible (false)]
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyDefaultAlias ("System.Security.dll")]
-[assembly: AssemblyDescription ("System.Security.dll")]
-[assembly: AssemblyTitle ("System.Security.dll")]
+[assembly: AssemblyDefaultAlias("System.Security.dll")]
+[assembly: AssemblyDescription("System.Security.dll")]
+[assembly: AssemblyTitle("System.Security.dll")]
 
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
 
 [assembly: AllowPartiallyTrustedCallers]

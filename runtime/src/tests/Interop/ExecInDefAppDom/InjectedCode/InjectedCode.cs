@@ -4,5 +4,8 @@ using System;
 
 public class InjectedCode
 {
-    static int ParseArgument(String argument) { return int.Parse(argument);}
+    static int ParseArgument(String argument)
+    {
+        return int.Parse(argument);
+    }
 }

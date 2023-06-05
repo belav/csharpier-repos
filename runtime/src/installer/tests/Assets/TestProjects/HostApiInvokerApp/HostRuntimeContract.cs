@@ -14,7 +14,12 @@ namespace HostApiInvokerApp
         {
             public nint size;
             public void* context;
-            public delegate* unmanaged[Stdcall]<byte*, byte*, nint, void*, nint> get_runtime_property;
+            public delegate* unmanaged[Stdcall]<
+                byte*,
+                byte*,
+                nint,
+                void*,
+                nint> get_runtime_property;
             public IntPtr bundle_probe;
             public IntPtr pinvoke_override;
         }
@@ -25,9 +30,12 @@ namespace HostApiInvokerApp
             if (string.IsNullOrEmpty(contractString))
                 throw new Exception("HOST_RUNTIME_CONTRACT not found");
 
-            host_runtime_contract* contract = (host_runtime_contract*)Convert.ToUInt64(contractString, 16);
+            host_runtime_contract* contract = (host_runtime_contract*)
+                Convert.ToUInt64(contractString, 16);
             if (contract->size != sizeof(host_runtime_contract))
-                throw new Exception($"Unexpected contract size {contract->size}. Expected: {sizeof(host_runtime_contract)}");
+                throw new Exception(
+                    $"Unexpected contract size {contract->size}. Expected: {sizeof(host_runtime_contract)}"
+                );
 
             return *contract;
         }
@@ -39,7 +47,9 @@ namespace HostApiInvokerApp
             foreach (string name in args)
             {
                 string value = GetProperty(name, contract);
-                Console.WriteLine($"{nameof(host_runtime_contract.get_runtime_property)}: {name} = {(value == null ? "<none>" : value)}");
+                Console.WriteLine(
+                    $"{nameof(host_runtime_contract.get_runtime_property)}: {name} = {(value == null ? "<none>" : value)}"
+                );
             }
 
             static string GetProperty(string name, host_runtime_contract contract)
@@ -51,10 +61,17 @@ namespace HostApiInvokerApp
 
                 nint len = 256;
                 byte* buffer = stackalloc byte[(int)len];
-                nint lenActual = contract.get_runtime_property(namePtr, buffer, len, contract.context);
+                nint lenActual = contract.get_runtime_property(
+                    namePtr,
+                    buffer,
+                    len,
+                    contract.context
+                );
                 if (lenActual <= 0)
                 {
-                    Console.WriteLine($"No value for {name} - {nameof(host_runtime_contract.get_runtime_property)} returned {lenActual}");
+                    Console.WriteLine(
+                        $"No value for {name} - {nameof(host_runtime_contract.get_runtime_property)} returned {lenActual}"
+                    );
                     return null;
                 }
 
@@ -63,7 +80,12 @@ namespace HostApiInvokerApp
 
                 len = lenActual;
                 byte* expandedBuffer = stackalloc byte[(int)len];
-                lenActual = contract.get_runtime_property(namePtr, expandedBuffer, len, contract.context);
+                lenActual = contract.get_runtime_property(
+                    namePtr,
+                    expandedBuffer,
+                    len,
+                    contract.context
+                );
                 return Encoding.UTF8.GetString(expandedBuffer, (int)lenActual);
             }
         }
@@ -82,5 +104,4 @@ namespace HostApiInvokerApp
             return true;
         }
     }
-
 }

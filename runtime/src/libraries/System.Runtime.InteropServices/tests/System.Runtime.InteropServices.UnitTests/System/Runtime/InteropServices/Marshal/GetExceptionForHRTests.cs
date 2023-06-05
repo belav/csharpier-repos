@@ -38,11 +38,16 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/15093", TestRuntimes.Mono)]
         [MemberData(nameof(GetExceptionForHR_ErrorInfo_TestData))]
-        public void GetExceptionForHR_ErrorInfo_ReturnsValidException(int errorCode, IntPtr errorInfo)
+        public void GetExceptionForHR_ErrorInfo_ReturnsValidException(
+            int errorCode,
+            IntPtr errorInfo
+        )
         {
             ClearCurrentIErrorInfo();
 
-            Exception ex = Assert.IsType<COMException>(Marshal.GetExceptionForHR(errorCode, errorInfo));
+            Exception ex = Assert.IsType<COMException>(
+                Marshal.GetExceptionForHR(errorCode, errorInfo)
+            );
             Assert.Equal(errorCode, ex.HResult);
             Assert.Null(ex.InnerException);
             Assert.Null(ex.HelpLink);
@@ -52,7 +57,10 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Null(ex.TargetSite);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         public void GetExceptionForHR_ThrowExceptionForHR_ThrowsSameException()
         {
             const int ErrorCode = unchecked((int)0x80131D0B);

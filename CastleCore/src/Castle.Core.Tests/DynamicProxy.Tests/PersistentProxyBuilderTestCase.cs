@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,11 +32,18 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [Test]
-        [Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503."
+        )]
         public void PersistentProxyBuilder_SavesSignedFile()
         {
             PersistentProxyBuilder builder = new PersistentProxyBuilder();
-            builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, ProxyGenerationOptions.Default);
+            builder.CreateClassProxyType(
+                typeof(object),
+                Type.EmptyTypes,
+                ProxyGenerationOptions.Default
+            );
             string path = builder.SaveAssembly();
             Assert.IsNotNull(path);
             Assert.IsNotEmpty(path);

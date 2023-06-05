@@ -16,9 +16,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicErrorListDesktop : BasicErrorListCommon
     {
         public BasicErrorListDesktop(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.ClassLibrary) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.ErrorList)]
         public override void ErrorList()

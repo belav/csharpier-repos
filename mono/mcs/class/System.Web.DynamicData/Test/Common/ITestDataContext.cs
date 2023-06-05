@@ -12,9 +12,14 @@ using MonoTests.DataSource;
 
 namespace MonoTests.Common
 {
-	public interface ITestDataContext
-	{
-		IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams);
-		List <DynamicDataTable> GetTables ();
-	}
+    public interface ITestDataContext
+    {
+        IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        );
+        List<DynamicDataTable> GetTables();
+    }
 }

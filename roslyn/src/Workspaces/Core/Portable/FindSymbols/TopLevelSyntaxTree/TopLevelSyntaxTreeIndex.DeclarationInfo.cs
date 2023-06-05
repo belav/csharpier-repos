@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             public ImmutableArray<DeclaredSymbolInfo> DeclaredSymbolInfos { get; }
 
-            public DeclarationInfo(ImmutableArray<DeclaredSymbolInfo> declaredSymbolInfos)
-                => DeclaredSymbolInfos = declaredSymbolInfos;
+            public DeclarationInfo(ImmutableArray<DeclaredSymbolInfo> declaredSymbolInfos) =>
+                DeclaredSymbolInfos = declaredSymbolInfos;
 
             public void WriteTo(ObjectWriter writer)
             {
@@ -30,15 +30,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 try
                 {
                     var declaredSymbolCount = reader.ReadInt32();
-                    using var _ = ArrayBuilder<DeclaredSymbolInfo>.GetInstance(declaredSymbolCount, out var builder);
+                    using var _ = ArrayBuilder<DeclaredSymbolInfo>.GetInstance(
+                        declaredSymbolCount,
+                        out var builder
+                    );
                     for (var i = 0; i < declaredSymbolCount; i++)
-                        builder.Add(DeclaredSymbolInfo.ReadFrom_ThrowsOnFailure(stringTable, reader));
+                        builder.Add(
+                            DeclaredSymbolInfo.ReadFrom_ThrowsOnFailure(stringTable, reader)
+                        );
 
                     return new DeclarationInfo(builder.ToImmutableAndClear());
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return null;
             }

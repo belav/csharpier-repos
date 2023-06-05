@@ -113,7 +113,11 @@ namespace System.Buffers.Text
         /// This method performs best when the starting index is a constant literal.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe void WriteFourDecimalDigits(uint value, Span<byte> buffer, int startingIndex = 0)
+        public static unsafe void WriteFourDecimalDigits(
+            uint value,
+            Span<byte> buffer,
+            int startingIndex = 0
+        )
         {
             Debug.Assert(value <= 9999);
             Debug.Assert(startingIndex <= buffer.Length - 4);
@@ -131,7 +135,11 @@ namespace System.Buffers.Text
         /// This method performs best when the starting index is a constant literal.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe void WriteTwoDecimalDigits(uint value, Span<byte> buffer, int startingIndex = 0)
+        public static unsafe void WriteTwoDecimalDigits(
+            uint value,
+            Span<byte> buffer,
+            int startingIndex = 0
+        )
         {
             Debug.Assert(value <= 99);
             Debug.Assert(startingIndex <= buffer.Length - 2);
@@ -144,8 +152,10 @@ namespace System.Buffers.Text
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyFourBytes(ReadOnlySpan<byte> source, Span<byte> destination) =>
-            Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination),
-                Unsafe.ReadUnaligned<uint>(ref MemoryMarshal.GetReference(source)));
+            Unsafe.WriteUnaligned(
+                ref MemoryMarshal.GetReference(destination),
+                Unsafe.ReadUnaligned<uint>(ref MemoryMarshal.GetReference(source))
+            );
 
         #endregion UTF-8 Helper methods
 

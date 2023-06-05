@@ -27,39 +27,48 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Info,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConvertToLibraryImportDescription)));
+                description: GetResourceString(nameof(SR.ConvertToLibraryImportDescription))
+            );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ConvertToLibraryImport);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(ConvertToLibraryImport);
 
         public const string CharSet = nameof(CharSet);
         public const string ExactSpelling = nameof(ExactSpelling);
         public const string MayRequireAdditionalWork = nameof(MayRequireAdditionalWork);
 
-        private static readonly HashSet<string> s_unsupportedTypeNames = new()
-        {
-            "global::System.Runtime.InteropServices.CriticalHandle",
-            "global::System.Runtime.InteropServices.HandleRef",
-            "global::System.Text.StringBuilder"
-        };
+        private static readonly HashSet<string> s_unsupportedTypeNames =
+            new()
+            {
+                "global::System.Runtime.InteropServices.CriticalHandle",
+                "global::System.Runtime.InteropServices.HandleRef",
+                "global::System.Text.StringBuilder"
+            };
 
         public override void Initialize(AnalysisContext context)
         {
             // Don't analyze generated code
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            context.RegisterCompilationStartAction(
-                context =>
-                {
-                    // Nothing to do if the LibraryImportAttribute is not in the compilation
-                    INamedTypeSymbol? libraryImportAttrType = context.Compilation.GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
-                    if (libraryImportAttrType == null)
-                        return;
+            context.RegisterCompilationStartAction(context =>
+            {
+                // Nothing to do if the LibraryImportAttribute is not in the compilation
+                INamedTypeSymbol? libraryImportAttrType =
+                    context.Compilation.GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
+                if (libraryImportAttrType == null)
+                    return;
 
-                    context.RegisterSymbolAction(symbolContext => AnalyzeSymbol(symbolContext, libraryImportAttrType), SymbolKind.Method);
-                });
+                context.RegisterSymbolAction(
+                    symbolContext => AnalyzeSymbol(symbolContext, libraryImportAttrType),
+                    SymbolKind.Method
+                );
+            });
         }
 
-        private static void AnalyzeSymbol(SymbolAnalysisContext context, INamedTypeSymbol libraryImportAttrType)
+        private static void AnalyzeSymbol(
+            SymbolAnalysisContext context,
+            INamedTypeSymbol libraryImportAttrType
+        )
         {
             var method = (IMethodSymbol)context.Symbol;
 
@@ -72,7 +81,12 @@ namespace Microsoft.Interop.Analyzers
             // This can be the case when the generator creates an extern partial function for blittable signatures.
             foreach (AttributeData attr in method.GetAttributes())
             {
-                if (SymbolEqualityComparer.Default.Equals(attr.AttributeClass, libraryImportAttrType))
+                if (
+                    SymbolEqualityComparer.Default.Equals(
+                        attr.AttributeClass,
+                        libraryImportAttrType
+                    )
+                )
                 {
                     return;
                 }
@@ -87,32 +101,65 @@ namespace Microsoft.Interop.Analyzers
             // later user work.
             AnyDiagnosticsSink diagnostics = new();
             StubEnvironment env = context.Compilation.CreateStubEnvironment();
-            AttributeData dllImportAttribute = method.GetAttributes().First(attr => attr.AttributeClass.ToDisplayString() == TypeNames.DllImportAttribute);
-            SignatureContext targetSignatureContext = SignatureContext.Create(method, DefaultMarshallingInfoParser.Create(env, diagnostics, method, CreateInteropAttributeDataFromDllImport(dllImportData), dllImportAttribute), env, typeof(ConvertToLibraryImportAnalyzer).Assembly);
+            AttributeData dllImportAttribute = method
+                .GetAttributes()
+                .First(
+                    attr => attr.AttributeClass.ToDisplayString() == TypeNames.DllImportAttribute
+                );
+            SignatureContext targetSignatureContext = SignatureContext.Create(
+                method,
+                DefaultMarshallingInfoParser.Create(
+                    env,
+                    diagnostics,
+                    method,
+                    CreateInteropAttributeDataFromDllImport(dllImportData),
+                    dllImportAttribute
+                ),
+                env,
+                typeof(ConvertToLibraryImportAnalyzer).Assembly
+            );
 
-            var generatorFactoryKey = LibraryImportGeneratorHelpers.CreateGeneratorFactory(env, new LibraryImportGeneratorOptions(context.Options.AnalyzerConfigOptionsProvider.GlobalOptions));
+            var generatorFactoryKey = LibraryImportGeneratorHelpers.CreateGeneratorFactory(
+                env,
+                new LibraryImportGeneratorOptions(
+                    context.Options.AnalyzerConfigOptionsProvider.GlobalOptions
+                )
+            );
 
             bool mayRequireAdditionalWork = diagnostics.AnyDiagnostics;
             bool anyExplicitlyUnsupportedInfo = false;
 
-            var stubCodeContext = new ManagedToNativeStubCodeContext(env.TargetFramework, env.TargetFrameworkVersion, "return", "nativeReturn");
+            var stubCodeContext = new ManagedToNativeStubCodeContext(
+                env.TargetFramework,
+                env.TargetFrameworkVersion,
+                "return",
+                "nativeReturn"
+            );
 
             var forwarder = new Forwarder();
             // We don't actually need the bound generators. We just need them to be attempted to be bound to determine if the generator will be able to bind them.
-            BoundGenerators generators = BoundGenerators.Create(targetSignatureContext.ElementTypeInformation, new CallbackGeneratorFactory((info, context) =>
-            {
-                if (s_unsupportedTypeNames.Contains(info.ManagedType.FullTypeName))
-                {
-                    anyExplicitlyUnsupportedInfo = true;
-                    return forwarder;
-                }
-                if (HasUnsupportedMarshalAsInfo(info))
-                {
-                    anyExplicitlyUnsupportedInfo = true;
-                    return forwarder;
-                }
-                return generatorFactoryKey.GeneratorFactory.Create(info, stubCodeContext);
-            }), stubCodeContext, forwarder, out var bindingFailures);
+            BoundGenerators generators = BoundGenerators.Create(
+                targetSignatureContext.ElementTypeInformation,
+                new CallbackGeneratorFactory(
+                    (info, context) =>
+                    {
+                        if (s_unsupportedTypeNames.Contains(info.ManagedType.FullTypeName))
+                        {
+                            anyExplicitlyUnsupportedInfo = true;
+                            return forwarder;
+                        }
+                        if (HasUnsupportedMarshalAsInfo(info))
+                        {
+                            anyExplicitlyUnsupportedInfo = true;
+                            return forwarder;
+                        }
+                        return generatorFactoryKey.GeneratorFactory.Create(info, stubCodeContext);
+                    }
+                ),
+                stubCodeContext,
+                forwarder,
+                out var bindingFailures
+            );
 
             mayRequireAdditionalWork |= bindingFailures.Length > 0;
 
@@ -123,13 +170,20 @@ namespace Microsoft.Interop.Analyzers
                 return;
             }
 
-            ImmutableDictionary<string, string>.Builder properties = ImmutableDictionary.CreateBuilder<string, string>();
+            ImmutableDictionary<string, string>.Builder properties =
+                ImmutableDictionary.CreateBuilder<string, string>();
 
             properties.Add(CharSet, dllImportData.CharacterSet.ToString());
             properties.Add(ExactSpelling, dllImportData.ExactSpelling.ToString());
             properties.Add(MayRequireAdditionalWork, mayRequireAdditionalWork.ToString());
 
-            context.ReportDiagnostic(method.CreateDiagnostic(ConvertToLibraryImport, properties.ToImmutable(), method.Name));
+            context.ReportDiagnostic(
+                method.CreateDiagnostic(
+                    ConvertToLibraryImport,
+                    properties.ToImmutable(),
+                    method.Name
+                )
+            );
         }
 
         private static bool HasUnsupportedMarshalAsInfo(TypePositionInfo info)
@@ -146,17 +200,28 @@ namespace Microsoft.Interop.Analyzers
                 || unmanagedType == UnmanagedType.SafeArray;
         }
 
-        private static InteropAttributeCompilationData CreateInteropAttributeDataFromDllImport(DllImportData dllImportData)
+        private static InteropAttributeCompilationData CreateInteropAttributeDataFromDllImport(
+            DllImportData dllImportData
+        )
         {
             InteropAttributeCompilationData interopData = new();
             if (dllImportData.SetLastError)
             {
-                interopData = interopData with { IsUserDefined = interopData.IsUserDefined | InteropAttributeMember.SetLastError, SetLastError = true };
+                interopData = interopData with
+                {
+                    IsUserDefined = interopData.IsUserDefined | InteropAttributeMember.SetLastError,
+                    SetLastError = true
+                };
             }
             if (dllImportData.CharacterSet != System.Runtime.InteropServices.CharSet.None)
             {
                 // Treat all strings as UTF-16 for the purposes of determining if we can marshal the parameters of this signature. We'll handle a more accurate conversion in the fixer.
-                interopData = interopData with { IsUserDefined = interopData.IsUserDefined | InteropAttributeMember.StringMarshalling, StringMarshalling = StringMarshalling.Utf16 };
+                interopData = interopData with
+                {
+                    IsUserDefined =
+                        interopData.IsUserDefined | InteropAttributeMember.StringMarshalling,
+                    StringMarshalling = StringMarshalling.Utf16
+                };
             }
             return interopData;
         }
@@ -164,20 +229,33 @@ namespace Microsoft.Interop.Analyzers
         private sealed class AnyDiagnosticsSink : IGeneratorDiagnostics
         {
             public bool AnyDiagnostics { get; private set; }
-            public void ReportConfigurationNotSupported(AttributeData attributeData, string configurationName, string? unsupportedValue) => AnyDiagnostics = true;
-            public void ReportInvalidMarshallingAttributeInfo(AttributeData attributeData, string reasonResourceName, params string[] reasonArgs) => AnyDiagnostics = true;
+
+            public void ReportConfigurationNotSupported(
+                AttributeData attributeData,
+                string configurationName,
+                string? unsupportedValue
+            ) => AnyDiagnostics = true;
+
+            public void ReportInvalidMarshallingAttributeInfo(
+                AttributeData attributeData,
+                string reasonResourceName,
+                params string[] reasonArgs
+            ) => AnyDiagnostics = true;
         }
 
         private sealed class CallbackGeneratorFactory : IMarshallingGeneratorFactory
         {
             private readonly Func<TypePositionInfo, StubCodeContext, IMarshallingGenerator> _func;
 
-            public CallbackGeneratorFactory(Func<TypePositionInfo, StubCodeContext, IMarshallingGenerator> func)
+            public CallbackGeneratorFactory(
+                Func<TypePositionInfo, StubCodeContext, IMarshallingGenerator> func
+            )
             {
                 _func = func;
             }
 
-            public IMarshallingGenerator Create(TypePositionInfo info, StubCodeContext context) => _func(info, context);
+            public IMarshallingGenerator Create(TypePositionInfo info, StubCodeContext context) =>
+                _func(info, context);
         }
     }
 }

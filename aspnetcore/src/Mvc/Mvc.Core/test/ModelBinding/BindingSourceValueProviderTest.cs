@@ -12,38 +12,43 @@ public class BindingSourceValueProviderTest
     {
         // Arrange
         var expected =
-            "The provided binding source 'Test Source' is a greedy data source. " +
-            $"'{nameof(BindingSourceValueProvider)}' does not support greedy data sources.";
+            "The provided binding source 'Test Source' is a greedy data source. "
+            + $"'{nameof(BindingSourceValueProvider)}' does not support greedy data sources.";
 
         var bindingSource = new BindingSource(
             "Test",
             displayName: "Test Source",
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => new TestableBindingSourceValueProvider(bindingSource),
             "bindingSource",
-            expected);
+            expected
+        );
     }
 
     [Fact]
     public void BindingSourceValueProvider_ThrowsOnCompositeSource()
     {
         // Arrange
-        var expected = $"The provided binding source 'Test Source' is a composite. '{nameof(BindingSourceValueProvider)}' " +
-            "requires that the source must represent a single type of input.";
+        var expected =
+            $"The provided binding source 'Test Source' is a composite. '{nameof(BindingSourceValueProvider)}' "
+            + "requires that the source must represent a single type of input.";
 
         var bindingSource = CompositeBindingSource.Create(
             bindingSources: new BindingSource[] { BindingSource.Query, BindingSource.Form },
-            displayName: "Test Source");
+            displayName: "Test Source"
+        );
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => new TestableBindingSourceValueProvider(bindingSource),
             "bindingSource",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -75,9 +80,7 @@ public class BindingSourceValueProviderTest
     private class TestableBindingSourceValueProvider : BindingSourceValueProvider
     {
         public TestableBindingSourceValueProvider(BindingSource source)
-            : base(source)
-        {
-        }
+            : base(source) { }
 
         public override bool ContainsPrefix(string prefix)
         {

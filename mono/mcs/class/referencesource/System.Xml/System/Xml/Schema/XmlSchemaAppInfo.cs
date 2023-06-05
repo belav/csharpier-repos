@@ -2,11 +2,11 @@
 // <copyright file="XmlSchemaAppInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.Collections;
     using System.Xml.Serialization;
 
@@ -14,16 +14,18 @@ namespace System.Xml.Schema {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaAppInfo : XmlSchemaObject {    
+    public class XmlSchemaAppInfo : XmlSchemaObject
+    {
         string source;
         XmlNode[] markup;
-        
+
         /// <include file='doc\XmlSchemaAppInfo.uex' path='docs/doc[@for="XmlSchemaAppInfo.Source"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [XmlAttribute("source", DataType="anyURI")]
-        public string Source {
+        [XmlAttribute("source", DataType = "anyURI")]
+        public string Source
+        {
             get { return source; }
             set { source = value; }
         }
@@ -33,10 +35,10 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlText(), XmlAnyElement]
-        public XmlNode[] Markup {
+        public XmlNode[] Markup
+        {
             get { return markup; }
             set { markup = value; }
         }
     }
-    
 }

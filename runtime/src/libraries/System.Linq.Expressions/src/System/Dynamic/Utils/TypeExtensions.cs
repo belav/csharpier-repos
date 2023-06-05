@@ -10,19 +10,34 @@ namespace System.Dynamic.Utils
     // Extensions on System.Type and friends
     internal static class TypeExtensions
     {
-        private static readonly CacheDict<MethodBase, ParameterInfo[]> s_paramInfoCache = new CacheDict<MethodBase, ParameterInfo[]>(75);
+        private static readonly CacheDict<MethodBase, ParameterInfo[]> s_paramInfoCache =
+            new CacheDict<MethodBase, ParameterInfo[]>(75);
 
         /// <summary>
         /// Returns the matching method if the parameter types are reference
         /// assignable from the provided type arguments, otherwise null.
         /// </summary>
         public static MethodInfo? GetAnyStaticMethodValidated(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] this Type type,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                this Type type,
             string name,
-            Type[] types)
+            Type[] types
+        )
         {
             Debug.Assert(types != null);
-            MethodInfo? method = type.GetMethod(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly, null, types, null);
+            MethodInfo? method = type.GetMethod(
+                name,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly,
+                null,
+                types,
+                null
+            );
             return method.MatchesArgumentTypes(types) ? method : null;
         }
 
@@ -62,9 +77,11 @@ namespace System.Dynamic.Utils
             return true;
         }
 
-        public static Type GetReturnType(this MethodBase mi) => mi.IsConstructor ? mi.DeclaringType! : ((MethodInfo)mi).ReturnType;
+        public static Type GetReturnType(this MethodBase mi) =>
+            mi.IsConstructor ? mi.DeclaringType! : ((MethodInfo)mi).ReturnType;
 
         public static TypeCode GetTypeCode(this Type type) => Type.GetTypeCode(type);
+
         internal static ParameterInfo[] GetParametersCached(this MethodBase method)
         {
             CacheDict<MethodBase, ParameterInfo[]> pic = s_paramInfoCache;

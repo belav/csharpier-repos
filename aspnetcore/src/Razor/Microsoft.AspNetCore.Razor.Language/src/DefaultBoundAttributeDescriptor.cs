@@ -20,7 +20,8 @@ internal sealed class DefaultBoundAttributeDescriptor : BoundAttributeDescriptor
         bool caseSensitive,
         BoundAttributeParameterDescriptor[] parameterDescriptors,
         Dictionary<string, string> metadata,
-        RazorDiagnostic[] diagnostics)
+        RazorDiagnostic[] diagnostics
+    )
         : base(kind)
     {
         Name = name;
@@ -37,10 +38,12 @@ internal sealed class DefaultBoundAttributeDescriptor : BoundAttributeDescriptor
         Metadata = metadata;
         Diagnostics = diagnostics;
 
-        IsIndexerStringProperty = indexerTypeName == typeof(string).FullName || indexerTypeName == "string";
+        IsIndexerStringProperty =
+            indexerTypeName == typeof(string).FullName || indexerTypeName == "string";
         IsStringProperty = typeName == typeof(string).FullName || typeName == "string";
 
-        IsIndexerBooleanProperty = indexerTypeName == typeof(bool).FullName || indexerTypeName == "bool";
+        IsIndexerBooleanProperty =
+            indexerTypeName == typeof(bool).FullName || indexerTypeName == "bool";
         IsBooleanProperty = typeName == typeof(bool).FullName || typeName == "bool";
     }
 }

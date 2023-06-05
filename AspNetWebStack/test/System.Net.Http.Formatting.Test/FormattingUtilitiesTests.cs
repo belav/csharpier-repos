@@ -29,7 +29,7 @@ namespace System.Net.Http
             get
             {
                 return new TheoryDataSet<string>
-                {       
+                {
                     @" """,
                     @" """"",
                     @"string",
@@ -78,7 +78,10 @@ namespace System.Net.Http
             {
                 return new TheoryDataSet<DateTimeOffset, string>
                 {
-                    { new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero), "Sun, 06 Nov 1994 08:49:37 GMT" },
+                    {
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero),
+                        "Sun, 06 Nov 1994 08:49:37 GMT"
+                    },
                 };
             }
         }
@@ -90,26 +93,65 @@ namespace System.Net.Http
                 return new TheoryDataSet<string, DateTimeOffset>
                 {
                     // RFC1123 date/time value
-                    { "Sun, 06 Nov 1994 08:49:37 GMT", new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "Sun, 06 Nov 1994 08:49:37", new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "6 Nov 1994 8:49:37 GMT", new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "6 Nov 1994 8:49:37",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "Sun, 06 Nov 94 08:49:37",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "6 Nov 94 8:49:37",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-
+                    {
+                        "Sun, 06 Nov 1994 08:49:37 GMT",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "Sun, 06 Nov 1994 08:49:37",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "6 Nov 1994 8:49:37 GMT",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "6 Nov 1994 8:49:37",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "Sun, 06 Nov 94 08:49:37",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "6 Nov 94 8:49:37",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
                     // RFC850 date/time value
-                    { "Sunday, 06-Nov-94 08:49:37 GMT",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "Sunday, 6-Nov-94 8:49:37",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "Sun, 6-Nov-1994 8:49:37 GMT", new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-
+                    {
+                        "Sunday, 06-Nov-94 08:49:37 GMT",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "Sunday, 6-Nov-94 8:49:37",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "Sun, 6-Nov-1994 8:49:37 GMT",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
                     // ANSI C's asctime() format
-                    { "Sun Nov  06 08:49:37 1994",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-                    { "Sun Nov  6 8:49:37 1994",  new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero) },
-
+                    {
+                        "Sun Nov  06 08:49:37 1994",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
+                    {
+                        "Sun Nov  6 8:49:37 1994",
+                        new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)
+                    },
                     // RFC5322 date/time
-                    { "Sat, 08 Nov 1997 09:55:06 -0600", new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(-6, 0, 0)) },
-                    { "8 Nov 1997 9:55:6", new DateTimeOffset(1997, 11, 8, 9, 55, 6, TimeSpan.Zero) },
-                    { "Sat, 8 Nov 1997 9:55:6 +0200", new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(2, 0, 0)) },
+                    {
+                        "Sat, 08 Nov 1997 09:55:06 -0600",
+                        new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(-6, 0, 0))
+                    },
+                    {
+                        "8 Nov 1997 9:55:6",
+                        new DateTimeOffset(1997, 11, 8, 9, 55, 6, TimeSpan.Zero)
+                    },
+                    {
+                        "Sat, 8 Nov 1997 9:55:6 +0200",
+                        new DateTimeOffset(1997, 11, 8, 9, 55, 6, new TimeSpan(2, 0, 0))
+                    },
                 };
             }
         }
@@ -136,7 +178,10 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(typeof(FormattingUtilities), TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic);
+            Assert.Type.HasProperties(
+                typeof(FormattingUtilities),
+                TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
+            );
         }
 
         [Fact]

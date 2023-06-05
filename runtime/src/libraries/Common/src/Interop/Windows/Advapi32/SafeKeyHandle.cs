@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
         private bool _fPublicOnly;
         private SafeProvHandle? _parent;
 
-        public SafeCapiKeyHandle() : base(true)
+        public SafeCapiKeyHandle()
+            : base(true)
         {
             SetHandle(IntPtr.Zero);
             _keySpec = 0;
@@ -31,26 +32,14 @@ namespace System.Security.Cryptography
 
         internal int KeySpec
         {
-            get
-            {
-                return _keySpec;
-            }
-            set
-            {
-                _keySpec = value;
-            }
+            get { return _keySpec; }
+            set { _keySpec = value; }
         }
 
         internal bool PublicOnly
         {
-            get
-            {
-                return _fPublicOnly;
-            }
-            set
-            {
-                _fPublicOnly = value;
-            }
+            get { return _fPublicOnly; }
+            set { _fPublicOnly = value; }
         }
 
         internal void SetParent(SafeProvHandle parent)
@@ -72,7 +61,12 @@ namespace System.Security.Cryptography
 
         internal static SafeCapiKeyHandle InvalidHandle
         {
-            get { return SafeHandleCache<SafeCapiKeyHandle>.GetInvalidHandle(() => new SafeCapiKeyHandle()); }
+            get
+            {
+                return SafeHandleCache<SafeCapiKeyHandle>.GetInvalidHandle(
+                    () => new SafeCapiKeyHandle()
+                );
+            }
         }
 
         protected override void Dispose(bool disposing)

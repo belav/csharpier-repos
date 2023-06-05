@@ -24,13 +24,31 @@ namespace TypeSystemTests
         [Fact]
         public void TestInstanceMap()
         {
-            MetadataType classWithArrayFields = _testModule.GetType("GCPointerMap", "ClassWithArrayFields");
-            MetadataType classWithStringField = _testModule.GetType("GCPointerMap", "ClassWithStringField");
+            MetadataType classWithArrayFields = _testModule.GetType(
+                "GCPointerMap",
+                "ClassWithArrayFields"
+            );
+            MetadataType classWithStringField = _testModule.GetType(
+                "GCPointerMap",
+                "ClassWithStringField"
+            );
             MetadataType mixedStruct = _testModule.GetType("GCPointerMap", "MixedStruct");
-            MetadataType structWithSameGCLayoutAsMixedStruct = _testModule.GetType("GCPointerMap", "StructWithSameGCLayoutAsMixedStruct");
-            MetadataType doubleMixedStructLayout = _testModule.GetType("GCPointerMap", "DoubleMixedStructLayout");
-            MetadataType explicitlyFarPointer = _testModule.GetType("GCPointerMap", "ExplicitlyFarPointer");
-            MetadataType struct32GcPointers = _testModule.GetType("GCPointerMap", "Struct32GcPointers");
+            MetadataType structWithSameGCLayoutAsMixedStruct = _testModule.GetType(
+                "GCPointerMap",
+                "StructWithSameGCLayoutAsMixedStruct"
+            );
+            MetadataType doubleMixedStructLayout = _testModule.GetType(
+                "GCPointerMap",
+                "DoubleMixedStructLayout"
+            );
+            MetadataType explicitlyFarPointer = _testModule.GetType(
+                "GCPointerMap",
+                "ExplicitlyFarPointer"
+            );
+            MetadataType struct32GcPointers = _testModule.GetType(
+                "GCPointerMap",
+                "Struct32GcPointers"
+            );
 
             {
                 var map = GCPointerMap.FromInstanceLayout(classWithArrayFields);
@@ -66,7 +84,10 @@ namespace TypeSystemTests
             {
                 var map = GCPointerMap.FromInstanceLayout(explicitlyFarPointer);
                 Assert.Equal(117, map.Size);
-                Assert.Equal("100000000000000000000000000000000000000000000000000000000000000010000000000000001000000000000000000000000000000001001", map.ToString());
+                Assert.Equal(
+                    "100000000000000000000000000000000000000000000000000000000000000010000000000000001000000000000000000000000000000001001",
+                    map.ToString()
+                );
             }
 
             {

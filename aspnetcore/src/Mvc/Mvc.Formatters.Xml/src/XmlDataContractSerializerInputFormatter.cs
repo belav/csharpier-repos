@@ -15,11 +15,15 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// This class handles deserialization of input XML data
 /// to strongly-typed objects using <see cref="DataContractSerializer"/>.
 /// </summary>
-public class XmlDataContractSerializerInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
+public class XmlDataContractSerializerInputFormatter
+    : TextInputFormatter,
+        IInputFormatterExceptionPolicy
 {
     private const int DefaultMemoryThreshold = 1024 * 30;
-    private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<Type, object>();
-    private readonly XmlDictionaryReaderQuotas _readerQuotas = FormattingUtilities.GetDefaultXmlReaderQuotas();
+    private readonly ConcurrentDictionary<Type, object> _serializerCache =
+        new ConcurrentDictionary<Type, object>();
+    private readonly XmlDictionaryReaderQuotas _readerQuotas =
+        FormattingUtilities.GetDefaultXmlReaderQuotas();
     private readonly MvcOptions _options;
     private DataContractSerializerSettings _serializerSettings;
 
@@ -41,9 +45,9 @@ public class XmlDataContractSerializerInputFormatter : TextInputFormatter, IInpu
         _serializerSettings = new DataContractSerializerSettings();
 
         WrapperProviderFactories = new List<IWrapperProviderFactory>
-            {
-                new SerializableErrorWrapperProviderFactory(),
-            };
+        {
+            new SerializableErrorWrapperProviderFactory(),
+        };
     }
 
     /// <summary>
@@ -99,7 +103,10 @@ public class XmlDataContractSerializerInputFormatter : TextInputFormatter, IInpu
     }
 
     /// <inheritdoc />
-    public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+    public override async Task<InputFormatterResult> ReadRequestBodyAsync(
+        InputFormatterContext context,
+        Encoding encoding
+    )
     {
         if (context == null)
         {
@@ -208,7 +215,12 @@ public class XmlDataContractSerializerInputFormatter : TextInputFormatter, IInpu
             throw new ArgumentNullException(nameof(encoding));
         }
 
-        return XmlDictionaryReader.CreateTextReader(readStream, encoding, _readerQuotas, onClose: null);
+        return XmlDictionaryReader.CreateTextReader(
+            readStream,
+            encoding,
+            _readerQuotas,
+            onClose: null
+        );
     }
 
     /// <summary>
@@ -224,7 +236,8 @@ public class XmlDataContractSerializerInputFormatter : TextInputFormatter, IInpu
         }
 
         var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(
-            new WrapperProviderContext(declaredType, isSerialization: false));
+            new WrapperProviderContext(declaredType, isSerialization: false)
+        );
 
         return wrapperProvider?.WrappingType ?? declaredType;
     }

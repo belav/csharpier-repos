@@ -9,7 +9,8 @@ namespace System.CommandLine
     /// <summary>
     /// a wrapper of List<typeparamref name="T"/> that sets parent for every added element
     /// </summary>
-    internal sealed class ChildList<T> : IList<T> where T : Symbol
+    internal sealed class ChildList<T> : IList<T>
+        where T : Symbol
     {
         private readonly List<T> _children;
         private readonly Command _parent;

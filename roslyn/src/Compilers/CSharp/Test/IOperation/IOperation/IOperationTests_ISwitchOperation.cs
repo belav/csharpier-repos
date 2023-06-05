@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void LocalsInSwitch_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -33,7 +34,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'input')
@@ -48,14 +50,19 @@ ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void LocalsInSwitch_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -72,7 +79,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'input')
@@ -104,14 +112,19 @@ ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void LocalsInSwitch_03()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -127,7 +140,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Object) (Syntax: 'input')
@@ -147,14 +161,19 @@ ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void LocalsInSwitch_04()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -171,7 +190,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Object) (Syntax: 'input')
@@ -211,14 +231,19 @@ ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void LabelsInSwitch_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -235,7 +260,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISwitchOperation (2 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'input')
@@ -257,14 +283,19 @@ ISwitchOperation (2 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void LabelsInSwitch_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -281,7 +312,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISwitchOperation (2 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'input')
@@ -301,14 +333,19 @@ ISwitchOperation (2 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -324,7 +361,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -356,14 +394,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -382,7 +425,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -438,14 +482,19 @@ Block[B4] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -464,7 +513,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -520,14 +570,19 @@ Block[B4] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -543,7 +598,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -587,14 +643,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -614,7 +675,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -698,14 +760,19 @@ Block[B6] - Exit
     Predecessors: [B3] [B4] [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -722,7 +789,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -765,14 +833,19 @@ Block[B3] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -789,7 +862,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -832,14 +906,19 @@ Block[B3] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -857,7 +936,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -911,14 +991,19 @@ Block[B4] - Exit
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -941,7 +1026,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1019,14 +1105,19 @@ Block[B6] - Exit
     Predecessors: [B4] [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -1039,16 +1130,22 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(9,17): error CS0159: No such label 'case 3:' within the scope of the goto statement
                 //                 goto case 3;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "goto case 3;").WithArguments("case 3:").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "goto case 3;")
+                    .WithArguments("case 3:")
+                    .WithLocation(9, 17),
                 // file.cs(8,13): error CS8070: Control cannot fall out of switch from final case label ('case 1:')
                 //             case 1:
-                Diagnostic(ErrorCode.ERR_SwitchFallOut, "case 1:").WithArguments("case 1:").WithLocation(8, 13)
+                Diagnostic(ErrorCode.ERR_SwitchFallOut, "case 1:")
+                    .WithArguments("case 1:")
+                    .WithLocation(8, 13)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1089,14 +1186,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, long input)
@@ -1116,16 +1218,20 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(14,13): error CS0152: The switch statement contains multiple cases with the label value 'default'
                 //             default:
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "default:").WithArguments("default").WithLocation(14, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "default:")
+                    .WithArguments("default")
+                    .WithLocation(14, 13),
                 // file.cs(12,17): warning CS1717: Assignment made to same variable; did you mean to assign something else?
                 //                 result = result;
                 Diagnostic(ErrorCode.WRN_AssignmentToSelf, "result = result").WithLocation(12, 17)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1198,14 +1304,19 @@ Block[B5] - Exit
     Predecessors: [B2] [B3] [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -1219,13 +1330,17 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //             case 1L:
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1L").WithArguments("long", "int").WithLocation(8, 18)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1L")
+                    .WithArguments("long", "int")
+                    .WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1273,14 +1388,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, MyClass input, MyClass other)
@@ -1305,13 +1425,15 @@ public sealed class MyClass
     }
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case other:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "other").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1357,14 +1479,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, MyClass input)
@@ -1389,13 +1516,17 @@ public sealed class MyClass
     }
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0029: Cannot implicitly convert type 'int' to 'MyClass'
                 //             case 1:
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "MyClass").WithLocation(8, 18)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
+                    .WithArguments("int", "MyClass")
+                    .WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1445,14 +1576,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, MyClass input)
@@ -1468,13 +1604,15 @@ public sealed class MyClass
     public static implicit operator MyClass(long x) => null;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case 1:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "1").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1528,14 +1666,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result)
@@ -1546,7 +1689,8 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(5,16): error CS1513: } expected
                 //     /*<bind>*/{
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 16),
@@ -1561,7 +1705,8 @@ public sealed class MyClass
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(10, 1)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1585,14 +1730,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result)
@@ -1603,10 +1753,12 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,13): error CS8716: There is no target type for the default literal.
                 //             default:
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
+                    .WithLocation(6, 13),
                 // file.cs(6,20): error CS1002: ; expected
                 //             default:
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(6, 20),
@@ -1618,7 +1770,8 @@ public sealed class MyClass
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(10, 1)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1640,14 +1793,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int? input)
@@ -1663,7 +1821,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1711,14 +1870,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int? input)
@@ -1734,7 +1898,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1777,14 +1942,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_20()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int? input, int? other)
@@ -1798,13 +1968,15 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case other:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "other").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1848,14 +2020,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_21()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input, int? other)
@@ -1869,16 +2046,20 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //             case other:
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "other").WithArguments("int?", "int").WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "other")
+                    .WithArguments("int?", "int")
+                    .WithLocation(8, 18),
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case other:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "other").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1926,14 +2107,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_22()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, dynamic input)
@@ -1949,7 +2135,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1995,14 +2182,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchIOperation_022()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, dynamic input)
@@ -2018,7 +2210,7 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
             var expectedOperationTree =
-@"
+                @"
 ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) (Syntax: 'switch (inp ... }')
   Switch expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: dynamic) (Syntax: 'input')
@@ -2040,14 +2232,19 @@ ISwitchOperation (1 cases, Exit Label Id: 0) (OperationKind.Switch, Type: null) 
                       ILiteralOperation (OperationKind.Literal, Type: System.Boolean, Constant: False) (Syntax: 'false')
               IBranchOperation (BranchKind.Break, Label Id: 0) (OperationKind.Branch, Type: null) (Syntax: 'break;')
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<SwitchStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_23()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, dynamic input, dynamic other)
@@ -2061,13 +2258,15 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case other:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "other").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2113,14 +2312,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_24()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int? input1, int input2)
@@ -2136,7 +2340,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2215,14 +2420,19 @@ Block[B6] - Exit
     Predecessors: [B4] [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_25()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int? input1, int input2, int input3)
@@ -2236,13 +2446,15 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case input1 ?? input2:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "input1 ?? input2").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2337,14 +2549,19 @@ Block[B7] - Exit
     Predecessors: [B5] [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_26()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int input1, MyClass input2)
@@ -2360,7 +2577,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2423,14 +2641,19 @@ Block[B4] - Exit
     Predecessors: [B1] [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_27()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input)
@@ -2446,7 +2669,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2492,14 +2716,19 @@ Block[B3] - Exit
     Predecessors: [B1] [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_28()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input, int? other)
@@ -2513,13 +2742,15 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case other ?? 1:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "other ?? 1").WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2620,14 +2851,19 @@ Block[B7] - Exit
     Predecessors: [B5] [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_29()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input)
@@ -2643,7 +2879,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2697,14 +2934,19 @@ Block[B4] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_30()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input1, bool other2, bool other3, bool other4)
@@ -2720,7 +2962,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2797,14 +3040,19 @@ Block[B7] - Exit
     Predecessors: [B2] [B4] [B5] [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_31()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input)
@@ -2823,7 +3071,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2895,14 +3144,19 @@ Block[B5] - Exit
     Predecessors: [B2] [B3] [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_32()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input, bool? guard)
@@ -2918,7 +3172,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -2996,14 +3251,19 @@ public sealed class MyClass
         Predecessors: [B1] [B3] [B5]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_33()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object input)
@@ -3017,13 +3277,17 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(8,25): error CS0103: The name 'guard' does not exist in the current context
                 //             case 1 when guard:
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "guard").WithArguments("guard").WithLocation(8, 25)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "guard")
+                    .WithArguments("guard")
+                    .WithLocation(8, 25)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3082,14 +3346,19 @@ Block[B4] - Exit
     Predecessors: [B1] [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_34()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -3108,13 +3377,16 @@ public sealed class MyClass
     }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case 1+TakeOutParam(3, out MyClass x1):
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "1+TakeOutParam(3, out MyClass x1)").WithLocation(8, 18)
+                Diagnostic(ErrorCode.ERR_ConstantExpected, "1+TakeOutParam(3, out MyClass x1)")
+                    .WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3184,14 +3456,19 @@ Block[B4] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void SwitchFlow_35()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int? input)
@@ -3205,13 +3482,16 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,18): error CS0150: A constant value is expected
                 //             case 1+(input is int x1 ? x1 : 0):
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "1+(input is int x1 ? x1 : 0)").WithLocation(8, 18)
+                Diagnostic(ErrorCode.ERR_ConstantExpected, "1+(input is int x1 ? x1 : 0)")
+                    .WithLocation(8, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3310,14 +3590,23 @@ Block[B7] - Exit
     Predecessors: [B5] [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Patterns, CompilerFeature.Dataflow)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Patterns,
+            CompilerFeature.Dataflow
+        )]
         [Fact]
         public void EmptySwitchExpressionFlow()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     public static void Main()
@@ -3326,16 +3615,20 @@ class Program
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
                 //         var r = 1 switch { };
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("_").WithLocation(6, 19),
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                    .WithArguments("_")
+                    .WithLocation(6, 19),
                 // file.cs(6,19): error CS8506: No best type was found for the switch expression.
                 //         var r = 1 switch { };
                 Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(6, 19)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3379,14 +3672,23 @@ Block[B4] - Exit [UnReachable]
     Predecessors: [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.Patterns)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.Patterns
+        )]
         [Fact]
         public void SwitchFlow_36()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -3402,7 +3704,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = new DiagnosticDescription[0];
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -3443,14 +3746,24 @@ public sealed class MyClass
         Predecessors: [B1] [B2]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularWithPatternCombinators);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.Patterns)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.Patterns
+        )]
         [Fact]
         public void SwitchFlow_37()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input, int other)
@@ -3464,13 +3777,15 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,20): error CS0150: A constant value is expected
                 //             case < other:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "other").WithLocation(8, 20)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -3511,14 +3826,24 @@ public sealed class MyClass
         Predecessors: [B1] [B2]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularWithPatternCombinators);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.Patterns)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.Patterns
+        )]
         [Fact]
         public void SwitchFlow_38()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -3532,10 +3857,10 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
-            };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -3606,14 +3931,24 @@ public sealed class MyClass
         Predecessors: [B5] [B6]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularWithPatternCombinators);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.Patterns)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.Patterns
+        )]
         [Fact]
         public void SwitchFlow_39()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, int input)
@@ -3627,10 +3962,10 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
-            };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -3704,14 +4039,24 @@ public sealed class MyClass
         Predecessors: [B5] [B6]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularWithPatternCombinators);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.Patterns)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.Patterns
+        )]
         [Fact]
         public void SwitchFlow_40()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     bool M(char input)
@@ -3725,10 +4070,10 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
-            };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -3792,14 +4137,24 @@ public sealed class MyClass
         Predecessors: [B2] [B3]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularWithPatternCombinators);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.Patterns)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.Patterns
+        )]
         [Fact]
         public void SwitchFlow_41()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     bool M(object input)
@@ -3814,10 +4169,10 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
-            };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -3863,7 +4218,12 @@ public sealed class MyClass
         Predecessors: [B2] [B3]
         Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.RegularWithPatternCombinators);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
         }
     }
 }

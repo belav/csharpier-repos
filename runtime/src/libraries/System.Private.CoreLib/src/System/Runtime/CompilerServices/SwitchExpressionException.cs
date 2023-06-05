@@ -11,18 +11,19 @@ namespace System.Runtime.CompilerServices
     /// The exception optionally contains an object representing the unmatched value.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("System.Runtime.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [TypeForwardedFrom(
+        "System.Runtime.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed class SwitchExpressionException : InvalidOperationException
     {
         public SwitchExpressionException()
             : base(SR.Arg_SwitchExpressionException) { }
 
-        public SwitchExpressionException(Exception? innerException) :
-            base(SR.Arg_SwitchExpressionException, innerException)
-        {
-        }
+        public SwitchExpressionException(Exception? innerException)
+            : base(SR.Arg_SwitchExpressionException, innerException) { }
 
-        public SwitchExpressionException(object? unmatchedValue) : this()
+        public SwitchExpressionException(object? unmatchedValue)
+            : this()
         {
             UnmatchedValue = unmatchedValue;
         }
@@ -33,7 +34,8 @@ namespace System.Runtime.CompilerServices
             UnmatchedValue = info.GetValue(nameof(UnmatchedValue), typeof(object));
         }
 
-        public SwitchExpressionException(string? message) : base(message) { }
+        public SwitchExpressionException(string? message)
+            : base(message) { }
 
         public SwitchExpressionException(string? message, Exception? innerException)
             : base(message, innerException) { }
@@ -55,7 +57,10 @@ namespace System.Runtime.CompilerServices
                     return base.Message;
                 }
 
-                string valueMessage = SR.Format(SR.SwitchExpressionException_UnmatchedValue, UnmatchedValue);
+                string valueMessage = SR.Format(
+                    SR.SwitchExpressionException_UnmatchedValue,
+                    UnmatchedValue
+                );
                 return base.Message + Environment.NewLine + valueMessage;
             }
         }

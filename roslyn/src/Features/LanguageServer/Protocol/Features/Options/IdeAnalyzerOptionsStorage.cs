@@ -12,41 +12,81 @@ namespace Microsoft.CodeAnalysis.Diagnostics;
 
 internal static class IdeAnalyzerOptionsStorage
 {
-    public static IdeAnalyzerOptions GetIdeAnalyzerOptions(this IGlobalOptionService globalOptions, Project project)
-        => GetIdeAnalyzerOptions(globalOptions, project.Services);
+    public static IdeAnalyzerOptions GetIdeAnalyzerOptions(
+        this IGlobalOptionService globalOptions,
+        Project project
+    ) => GetIdeAnalyzerOptions(globalOptions, project.Services);
 
-    public static IdeAnalyzerOptions GetIdeAnalyzerOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
+    public static IdeAnalyzerOptions GetIdeAnalyzerOptions(
+        this IGlobalOptionService globalOptions,
+        LanguageServices languageServices
+    )
     {
         var language = languageServices.Language;
 
         // avoid throwing for languages other than C# and VB:
-        var supportsLanguageSpecificOptions = languageServices.GetService<ISyntaxFormattingService>() != null;
+        var supportsLanguageSpecificOptions =
+            languageServices.GetService<ISyntaxFormattingService>() != null;
 
         return new()
         {
             CrashOnAnalyzerException = globalOptions.GetOption(CrashOnAnalyzerException),
-            ReportInvalidPlaceholdersInStringDotFormatCalls = globalOptions.GetOption(ReportInvalidPlaceholdersInStringDotFormatCalls, language),
-            ReportInvalidRegexPatterns = globalOptions.GetOption(ReportInvalidRegexPatterns, language),
-            ReportInvalidJsonPatterns = globalOptions.GetOption(ReportInvalidJsonPatterns, language),
-            DetectAndOfferEditorFeaturesForProbableJsonStrings = globalOptions.GetOption(DetectAndOfferEditorFeaturesForProbableJsonStrings, language),
-            PreferSystemHashCode = globalOptions.GetOption(CodeStyleOptions2.PreferSystemHashCode, language),
-            CleanCodeGenerationOptions = supportsLanguageSpecificOptions ? globalOptions.GetCleanCodeGenerationOptions(languageServices) : null,
-            CodeStyleOptions = supportsLanguageSpecificOptions ? globalOptions.GetCodeStyleOptions(languageServices) : null,
+            ReportInvalidPlaceholdersInStringDotFormatCalls = globalOptions.GetOption(
+                ReportInvalidPlaceholdersInStringDotFormatCalls,
+                language
+            ),
+            ReportInvalidRegexPatterns = globalOptions.GetOption(
+                ReportInvalidRegexPatterns,
+                language
+            ),
+            ReportInvalidJsonPatterns = globalOptions.GetOption(
+                ReportInvalidJsonPatterns,
+                language
+            ),
+            DetectAndOfferEditorFeaturesForProbableJsonStrings = globalOptions.GetOption(
+                DetectAndOfferEditorFeaturesForProbableJsonStrings,
+                language
+            ),
+            PreferSystemHashCode = globalOptions.GetOption(
+                CodeStyleOptions2.PreferSystemHashCode,
+                language
+            ),
+            CleanCodeGenerationOptions = supportsLanguageSpecificOptions
+                ? globalOptions.GetCleanCodeGenerationOptions(languageServices)
+                : null,
+            CodeStyleOptions = supportsLanguageSpecificOptions
+                ? globalOptions.GetCodeStyleOptions(languageServices)
+                : null,
         };
     }
 
-    public static readonly Option2<bool> CrashOnAnalyzerException = new(
-        "InternalDiagnosticsOptions_CrashOnAnalyzerException", IdeAnalyzerOptions.CommonDefault.CrashOnAnalyzerException);
+    public static readonly Option2<bool> CrashOnAnalyzerException =
+        new(
+            "InternalDiagnosticsOptions_CrashOnAnalyzerException",
+            IdeAnalyzerOptions.CommonDefault.CrashOnAnalyzerException
+        );
 
-    public static PerLanguageOption2<bool> ReportInvalidPlaceholdersInStringDotFormatCalls = new(
-        "ValidateFormatStringOption_ReportInvalidPlaceholdersInStringDotFormatCalls", IdeAnalyzerOptions.CommonDefault.ReportInvalidPlaceholdersInStringDotFormatCalls);
+    public static PerLanguageOption2<bool> ReportInvalidPlaceholdersInStringDotFormatCalls =
+        new(
+            "ValidateFormatStringOption_ReportInvalidPlaceholdersInStringDotFormatCalls",
+            IdeAnalyzerOptions.CommonDefault.ReportInvalidPlaceholdersInStringDotFormatCalls
+        );
 
-    public static PerLanguageOption2<bool> ReportInvalidRegexPatterns = new(
-        "RegularExpressionsOptions_ReportInvalidRegexPatterns", IdeAnalyzerOptions.CommonDefault.ReportInvalidRegexPatterns);
+    public static PerLanguageOption2<bool> ReportInvalidRegexPatterns =
+        new(
+            "RegularExpressionsOptions_ReportInvalidRegexPatterns",
+            IdeAnalyzerOptions.CommonDefault.ReportInvalidRegexPatterns
+        );
 
-    public static PerLanguageOption2<bool> ReportInvalidJsonPatterns = new(
-        "JsonFeatureOptions_ReportInvalidJsonPatterns", IdeAnalyzerOptions.CommonDefault.ReportInvalidJsonPatterns);
+    public static PerLanguageOption2<bool> ReportInvalidJsonPatterns =
+        new(
+            "JsonFeatureOptions_ReportInvalidJsonPatterns",
+            IdeAnalyzerOptions.CommonDefault.ReportInvalidJsonPatterns
+        );
 
-    public static PerLanguageOption2<bool> DetectAndOfferEditorFeaturesForProbableJsonStrings = new(
-        "JsonFeatureOptions_DetectAndOfferEditorFeaturesForProbableJsonStrings", IdeAnalyzerOptions.CommonDefault.DetectAndOfferEditorFeaturesForProbableJsonStrings);
+    public static PerLanguageOption2<bool> DetectAndOfferEditorFeaturesForProbableJsonStrings =
+        new(
+            "JsonFeatureOptions_DetectAndOfferEditorFeaturesForProbableJsonStrings",
+            IdeAnalyzerOptions.CommonDefault.DetectAndOfferEditorFeaturesForProbableJsonStrings
+        );
 }

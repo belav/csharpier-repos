@@ -13,13 +13,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         private readonly ITextSnapshot _snapshot;
 
-        public TrackingSpanIntrospector(ITextSnapshot snapshot)
-            => _snapshot = snapshot;
+        public TrackingSpanIntrospector(ITextSnapshot snapshot) => _snapshot = snapshot;
 
-        public int GetStart(ITrackingSpan value)
-            => value.GetStartPoint(_snapshot);
+        public int GetStart(ITrackingSpan value) => value.GetStartPoint(_snapshot);
 
-        public int GetLength(ITrackingSpan value)
-            => value.GetSpan(_snapshot).Length;
+        public int GetLength(ITrackingSpan value) => value.GetSpan(_snapshot).Length;
     }
 }

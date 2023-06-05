@@ -18,17 +18,19 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     /// </summary>
     internal class NavigateToSearchResultComparer : IEqualityComparer<INavigateToSearchResult>
     {
-        public static readonly IEqualityComparer<INavigateToSearchResult> Instance = new NavigateToSearchResultComparer();
+        public static readonly IEqualityComparer<INavigateToSearchResult> Instance =
+            new NavigateToSearchResultComparer();
 
-        private NavigateToSearchResultComparer()
-        {
-        }
+        private NavigateToSearchResultComparer() { }
 
-        public bool Equals(INavigateToSearchResult? x, INavigateToSearchResult? y)
-            => x?.NavigableItem.Document.FilePath == y?.NavigableItem.Document.FilePath &&
-               x?.NavigableItem.SourceSpan == y?.NavigableItem.SourceSpan;
+        public bool Equals(INavigateToSearchResult? x, INavigateToSearchResult? y) =>
+            x?.NavigableItem.Document.FilePath == y?.NavigableItem.Document.FilePath
+            && x?.NavigableItem.SourceSpan == y?.NavigableItem.SourceSpan;
 
-        public int GetHashCode(INavigateToSearchResult? obj)
-            => Hash.Combine(obj?.NavigableItem.Document.FilePath, obj?.NavigableItem.SourceSpan.GetHashCode() ?? 0);
+        public int GetHashCode(INavigateToSearchResult? obj) =>
+            Hash.Combine(
+                obj?.NavigableItem.Document.FilePath,
+                obj?.NavigableItem.SourceSpan.GetHashCode() ?? 0
+            );
     }
 }

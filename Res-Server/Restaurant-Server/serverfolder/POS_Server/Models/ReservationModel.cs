@@ -25,7 +25,6 @@ namespace POS_Server.Models
         public Nullable<long> updateUserId { get; set; }
         public Nullable<System.DateTime> endTime { get; set; }
 
-
         public string isExceed { get; set; }
         public IEnumerable<TableModel> tables { get; set; }
 

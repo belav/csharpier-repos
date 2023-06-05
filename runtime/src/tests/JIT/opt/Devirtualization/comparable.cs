@@ -3,7 +3,7 @@
 
 using System;
 
-public sealed class X: IComparable<X>
+public sealed class X : IComparable<X>
 {
     int ival;
 
@@ -16,14 +16,15 @@ public sealed class X: IComparable<X>
     {
         return ival - x.ival;
     }
-    
+
     public bool Equals(X x)
     {
         return ival == x.ival;
     }
 }
 
-public class Y<T> where T : IComparable<T>
+public class Y<T>
+    where T : IComparable<T>
 {
     public static int C(T x, T y)
     {
@@ -31,7 +32,7 @@ public class Y<T> where T : IComparable<T>
         // ldarga 0
         // ldarg  1
         // constrained ... callvirt ...
-        // 
+        //
         // The ldarga blocks both caller-arg direct sub and type
         // propagation since the jit thinks arg0 might be redefined.
         //

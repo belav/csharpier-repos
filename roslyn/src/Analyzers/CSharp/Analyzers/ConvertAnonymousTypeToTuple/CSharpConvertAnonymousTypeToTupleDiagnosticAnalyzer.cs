@@ -13,14 +13,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousTypeToTuple
     internal class CSharpConvertAnonymousTypeToTupleDiagnosticAnalyzer
         : AbstractConvertAnonymousTypeToTupleDiagnosticAnalyzer<
             SyntaxKind,
-            AnonymousObjectCreationExpressionSyntax>
+            AnonymousObjectCreationExpressionSyntax
+        >
     {
         public CSharpConvertAnonymousTypeToTupleDiagnosticAnalyzer()
-            : base(CSharpSyntaxKinds.Instance)
-        {
-        }
+            : base(CSharpSyntaxKinds.Instance) { }
 
-        protected override int GetInitializerCount(AnonymousObjectCreationExpressionSyntax anonymousType)
-            => anonymousType.Initializers.Count;
+        protected override int GetInitializerCount(
+            AnonymousObjectCreationExpressionSyntax anonymousType
+        ) => anonymousType.Initializers.Count;
     }
 }

@@ -25,6 +25,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
 
     internal interface IFSharpBraceMatcher
     {
-        Task<FSharpBraceMatchingResult?> FindBracesAsync(Document document, int position, CancellationToken cancellationToken = default);
+        Task<FSharpBraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken = default
+        );
     }
 }

@@ -17,7 +17,7 @@ class CloningForIEnumerable
     public static int Sum(IEnumerable<int> e)
     {
         int r = 0;
-        foreach(int i in e)
+        foreach (int i in e)
         {
             r += i;
         }
@@ -42,7 +42,7 @@ class CloningForIEnumerable
         {
             r += Sum(list);
         }
-        
+
         return r - 5400;
     }
 }

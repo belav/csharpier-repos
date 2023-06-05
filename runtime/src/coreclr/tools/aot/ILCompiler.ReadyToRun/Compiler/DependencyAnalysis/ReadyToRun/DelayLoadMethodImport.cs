@@ -19,16 +19,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             MethodWithToken method,
             MethodWithGCInfo localMethod,
             bool isInstantiatingStub,
-            bool isJump)
+            bool isJump
+        )
             : base(
-                  factory,
-                  factory.MethodImports,
-                  ReadyToRunHelper.DelayLoad_MethodCall,
-                  factory.MethodSignature(
-                      fixupKind,
-                      method,
-                      isInstantiatingStub),
-                  useJumpableStub: isJump)
+                factory,
+                factory.MethodImports,
+                ReadyToRunHelper.DelayLoad_MethodCall,
+                factory.MethodSignature(fixupKind, method, isInstantiatingStub),
+                useJumpableStub: isJump
+            )
         {
             _localMethod = localMethod;
             MethodWithToken = method;
@@ -54,7 +53,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if ((_localMethod != null) && (((DelayLoadMethodImport)other)._localMethod != null))
             {
-                int result = comparer.Compare(_localMethod, ((DelayLoadMethodImport)other)._localMethod);
+                int result = comparer.Compare(
+                    _localMethod,
+                    ((DelayLoadMethodImport)other)._localMethod
+                );
                 if (result != 0)
                     return result;
             }

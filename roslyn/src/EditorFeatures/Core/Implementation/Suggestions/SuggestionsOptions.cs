@@ -16,16 +16,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SuggestionsOptions()
-        {
-        }
+        public SuggestionsOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            AsynchronousQuickActionsDisableFeatureFlag);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(AsynchronousQuickActionsDisableFeatureFlag);
 
         private const string FeatureName = "SuggestionsOptions";
 
-        public static readonly Option2<bool> AsynchronousQuickActionsDisableFeatureFlag = new(FeatureName, nameof(AsynchronousQuickActionsDisableFeatureFlag), defaultValue: false,
-            new FeatureFlagStorageLocation("Roslyn.AsynchronousQuickActionsDisable"));
+        public static readonly Option2<bool> AsynchronousQuickActionsDisableFeatureFlag =
+            new(
+                FeatureName,
+                nameof(AsynchronousQuickActionsDisableFeatureFlag),
+                defaultValue: false,
+                new FeatureFlagStorageLocation("Roslyn.AsynchronousQuickActionsDisable")
+            );
     }
 }

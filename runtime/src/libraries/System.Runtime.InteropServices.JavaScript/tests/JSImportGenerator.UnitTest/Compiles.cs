@@ -27,7 +27,6 @@ namespace JSImportGenerator.Unit.Tests
             yield return new object[] { CodeSnippets.DefaultReturnMarshaler<Exception>() };
         }
 
-
         [Theory]
         [MemberData(nameof(CodeSnippetsToCompile))]
         public async Task ValidateSnippets(string source)
@@ -35,9 +34,12 @@ namespace JSImportGenerator.Unit.Tests
             Compilation comp = await TestUtils.CreateCompilation(source, allowUnsafe: true);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags,
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
                 new Microsoft.Interop.JavaScript.JSImportGenerator(),
-                new Microsoft.Interop.JavaScript.JSExportGenerator());
+                new Microsoft.Interop.JavaScript.JSExportGenerator()
+            );
 
             // uncomment for debugging JSTestUtils.DumpCode(source, newComp, generatorDiags);
 

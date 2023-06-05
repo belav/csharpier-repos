@@ -4,10 +4,7 @@ using System.CommandLine.Invocation;
 var fileArgument = new Argument<FileInfo>();
 fileArgument.AcceptLegalFileNamesOnly();
 
-var command = new RootCommand
-{
-    fileArgument
-};
+var command = new RootCommand { fileArgument };
 
 command.SetHandler(context =>
 {

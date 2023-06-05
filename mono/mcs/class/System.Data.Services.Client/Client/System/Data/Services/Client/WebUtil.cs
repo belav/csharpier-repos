@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -17,7 +17,7 @@ namespace System.Data.Services.Client
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-#if !ASTORIA_LIGHT    
+#if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
@@ -43,7 +43,10 @@ namespace System.Data.Services.Client
                     }
                 }
 
-                Debug.Assert(dataServiceCollectionAvailable != null, "observableCollectionOfTAvailable must not be null here.");
+                Debug.Assert(
+                    dataServiceCollectionAvailable != null,
+                    "observableCollectionOfTAvailable must not be null here."
+                );
 
                 return (bool)dataServiceCollectionAvailable;
             }
@@ -71,7 +74,10 @@ namespace System.Data.Services.Client
             return total;
         }
 
-        internal static void GetHttpWebResponse(InvalidOperationException exception, ref HttpWebResponse response)
+        internal static void GetHttpWebResponse(
+            InvalidOperationException exception,
+            ref HttpWebResponse response
+        )
         {
             if (null == response)
             {
@@ -90,7 +96,9 @@ namespace System.Data.Services.Client
 
         internal static Dictionary<string, string> WrapResponseHeaders(HttpWebResponse response)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>(EqualityComparer<string>.Default);
+            Dictionary<string, string> headers = new Dictionary<string, string>(
+                EqualityComparer<string>.Default
+            );
             if (null != response)
             {
                 foreach (string name in response.Headers.AllKeys)
@@ -102,18 +110,34 @@ namespace System.Data.Services.Client
             return headers;
         }
 
-        internal static void ApplyHeadersToRequest(Dictionary<string, string> headers, HttpWebRequest request, bool ignoreAcceptHeader)
+        internal static void ApplyHeadersToRequest(
+            Dictionary<string, string> headers,
+            HttpWebRequest request,
+            bool ignoreAcceptHeader
+        )
         {
             foreach (KeyValuePair<string, string> header in headers)
             {
-                if (string.Equals(header.Key, XmlConstants.HttpRequestAccept, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        header.Key,
+                        XmlConstants.HttpRequestAccept,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     if (!ignoreAcceptHeader)
                     {
                         request.Accept = header.Value;
                     }
                 }
-                else if (string.Equals(header.Key, XmlConstants.HttpContentType, StringComparison.Ordinal))
+                else if (
+                    string.Equals(
+                        header.Key,
+                        XmlConstants.HttpContentType,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     request.ContentType = header.Value;
                 }
@@ -139,9 +163,10 @@ namespace System.Data.Services.Client
             if (DataServiceCollectionAvailable)
             {
                 Debug.Assert(
-                    GetDataServiceCollectionOfTType() != null, 
-                    "DataServiceCollection is available so GetDataServiceCollectionOfTType() must not return null.");
-                
+                    GetDataServiceCollectionOfTType() != null,
+                    "DataServiceCollection is available so GetDataServiceCollectionOfTType() must not return null."
+                );
+
                 return GetDataServiceCollectionOfTType().MakeGenericType(typeArguments);
             }
 

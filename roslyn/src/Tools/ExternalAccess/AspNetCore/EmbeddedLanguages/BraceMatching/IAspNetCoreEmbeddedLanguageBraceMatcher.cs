@@ -11,6 +11,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
     internal interface IAspNetCoreEmbeddedLanguageBraceMatcher
     {
         /// <inheritdoc cref="IBraceMatcher.FindBracesAsync"/>
-        AspNetCoreBraceMatchingResult? FindBraces(SemanticModel semanticModel, SyntaxToken token, int position, CancellationToken cancellationToken);
+        AspNetCoreBraceMatchingResult? FindBraces(
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -10,7 +10,10 @@ internal class ComponentKeyLoweringPass : ComponentIntermediateNodePassBase, IRa
     // Run after component lowering pass
     public override int Order => 50;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (!IsComponentDocument(documentNode))
         {
@@ -25,7 +28,8 @@ internal class ComponentKeyLoweringPass : ComponentIntermediateNodePassBase, IRa
             return;
         }
 
-        var references = documentNode.FindDescendantReferences<TagHelperDirectiveAttributeIntermediateNode>();
+        var references =
+            documentNode.FindDescendantReferences<TagHelperDirectiveAttributeIntermediateNode>();
         for (var i = 0; i < references.Count; i++)
         {
             var reference = references[i];
@@ -38,7 +42,10 @@ internal class ComponentKeyLoweringPass : ComponentIntermediateNodePassBase, IRa
         }
     }
 
-    private IntermediateNode RewriteUsage(IntermediateNode parent, TagHelperDirectiveAttributeIntermediateNode node)
+    private IntermediateNode RewriteUsage(
+        IntermediateNode parent,
+        TagHelperDirectiveAttributeIntermediateNode node
+    )
     {
         // If we can't get a nonempty attribute value, do nothing because there will
         // already be a diagnostic for empty values
@@ -51,7 +58,9 @@ internal class ComponentKeyLoweringPass : ComponentIntermediateNodePassBase, IRa
         return new SetKeyIntermediateNode(keyValueToken);
     }
 
-    private IntermediateToken DetermineKeyValueToken(TagHelperDirectiveAttributeIntermediateNode attributeNode)
+    private IntermediateToken DetermineKeyValueToken(
+        TagHelperDirectiveAttributeIntermediateNode attributeNode
+    )
     {
         IntermediateToken foundToken = null;
 

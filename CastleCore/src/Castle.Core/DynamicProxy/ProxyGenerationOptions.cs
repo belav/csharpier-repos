@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,7 +44,8 @@ namespace Castle.DynamicProxy
         public static readonly ProxyGenerationOptions Default = new ProxyGenerationOptions();
 
         private List<object> mixins;
-        private readonly IList<CustomAttributeInfo> additionalAttributes = new List<CustomAttributeInfo>();
+        private readonly IList<CustomAttributeInfo> additionalAttributes =
+            new List<CustomAttributeInfo>();
 
 #if FEATURE_SERIALIZATION
         [NonSerialized]
@@ -65,17 +66,18 @@ namespace Castle.DynamicProxy
         ///   Initializes a new instance of the <see cref = "ProxyGenerationOptions" /> class.
         /// </summary>
         public ProxyGenerationOptions()
-            : this(new AllMethodsHook())
-        {
-        }
+            : this(new AllMethodsHook()) { }
 
 #if FEATURE_SERIALIZATION
         private ProxyGenerationOptions(SerializationInfo info, StreamingContext context)
         {
             Hook = (IProxyGenerationHook)info.GetValue("hook", typeof(IProxyGenerationHook));
-            Selector = (IInterceptorSelector)info.GetValue("selector", typeof(IInterceptorSelector));
+            Selector = (IInterceptorSelector)
+                info.GetValue("selector", typeof(IInterceptorSelector));
             mixins = (List<object>)info.GetValue("mixins", typeof(List<object>));
-            BaseTypeForInterfaceProxy = Type.GetType(info.GetString("baseTypeForInterfaceProxy.AssemblyQualifiedName"));
+            BaseTypeForInterfaceProxy = Type.GetType(
+                info.GetString("baseTypeForInterfaceProxy.AssemblyQualifiedName")
+            );
         }
 #endif
 
@@ -90,7 +92,9 @@ namespace Castle.DynamicProxy
                 catch (ArgumentException ex)
                 {
                     throw new InvalidOperationException(
-                        "There is a problem with the mixins added to this ProxyGenerationOptions. See the inner exception for details.", ex);
+                        "There is a problem with the mixins added to this ProxyGenerationOptions. See the inner exception for details.",
+                        ex
+                    );
                 }
             }
         }
@@ -101,7 +105,10 @@ namespace Castle.DynamicProxy
             info.AddValue("hook", Hook);
             info.AddValue("selector", Selector);
             info.AddValue("mixins", mixins);
-            info.AddValue("baseTypeForInterfaceProxy.AssemblyQualifiedName", BaseTypeForInterfaceProxy.AssemblyQualifiedName);
+            info.AddValue(
+                "baseTypeForInterfaceProxy.AssemblyQualifiedName",
+                BaseTypeForInterfaceProxy.AssemblyQualifiedName
+            );
         }
 #endif
 
@@ -155,7 +162,9 @@ namespace Castle.DynamicProxy
             {
                 if (mixinData == null)
                 {
-                    throw new InvalidOperationException("Call Initialize before accessing the MixinData property.");
+                    throw new InvalidOperationException(
+                        "Call Initialize before accessing the MixinData property."
+                    );
                 }
                 return mixinData;
             }
@@ -175,8 +184,10 @@ namespace Castle.DynamicProxy
         /// <exception cref="ArgumentException"><paramref name="delegateType"/> is not a delegate type.</exception>
         public void AddDelegateTypeMixin(Type delegateType)
         {
-            if (delegateType == null) throw new ArgumentNullException(nameof(delegateType));
-            if (!delegateType.IsDelegateType()) throw new ArgumentException("Type must be a delegate type.", nameof(delegateType));
+            if (delegateType == null)
+                throw new ArgumentNullException(nameof(delegateType));
+            if (!delegateType.IsDelegateType())
+                throw new ArgumentException("Type must be a delegate type.", nameof(delegateType));
 
             AddMixinImpl(delegateType);
         }
@@ -194,7 +205,8 @@ namespace Castle.DynamicProxy
         /// <exception cref="ArgumentNullException"><paramref name="delegate"/> is <see langword="null"/>.</exception>
         public void AddDelegateMixin(Delegate @delegate)
         {
-            if (@delegate == null) throw new ArgumentNullException(nameof(@delegate));
+            if (@delegate == null)
+                throw new ArgumentNullException(nameof(@delegate));
 
             AddMixinImpl(@delegate);
         }
@@ -212,8 +224,13 @@ namespace Castle.DynamicProxy
         /// <exception cref="ArgumentException"><paramref name="instance"/> is an instance of <see cref="Type"/>.</exception>
         public void AddMixinInstance(object instance)
         {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            if (instance is Type) throw new ArgumentException("You may not mix in types using this method.", nameof(instance));
+            if (instance == null)
+                throw new ArgumentNullException(nameof(instance));
+            if (instance is Type)
+                throw new ArgumentException(
+                    "You may not mix in types using this method.",
+                    nameof(instance)
+                );
 
             AddMixinImpl(instance);
         }
@@ -273,7 +290,9 @@ namespace Castle.DynamicProxy
             {
                 return false;
             }
-            if (!Equals(BaseTypeForInterfaceProxy, proxyGenerationOptions.BaseTypeForInterfaceProxy))
+            if (
+                !Equals(BaseTypeForInterfaceProxy, proxyGenerationOptions.BaseTypeForInterfaceProxy)
+            )
             {
                 return false;
             }
@@ -290,10 +309,12 @@ namespace Castle.DynamicProxy
             Initialize();
 
             var result = Hook != null ? Hook.GetType().GetHashCode() : 0;
-            result = 29*result + (Selector != null ? 1 : 0);
-            result = 29*result + MixinData.GetHashCode();
-            result = 29*result + (BaseTypeForInterfaceProxy != null ? BaseTypeForInterfaceProxy.GetHashCode() : 0);
-            result = 29*result + GetAdditionalAttributesHashCode();
+            result = 29 * result + (Selector != null ? 1 : 0);
+            result = 29 * result + MixinData.GetHashCode();
+            result =
+                29 * result
+                + (BaseTypeForInterfaceProxy != null ? BaseTypeForInterfaceProxy.GetHashCode() : 0);
+            result = 29 * result + GetAdditionalAttributesHashCode();
             return result;
         }
 

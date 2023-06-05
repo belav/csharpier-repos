@@ -56,7 +56,8 @@ namespace System
             return value.GetHashCode();
         }
 
-        public static RuntimeMethodHandle FromIntPtr(IntPtr value) => new RuntimeMethodHandle(value);
+        public static RuntimeMethodHandle FromIntPtr(IntPtr value) =>
+            new RuntimeMethodHandle(value);
 
         public static IntPtr ToIntPtr(RuntimeMethodHandle value) => value.Value;
 
@@ -91,10 +92,14 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void ReboxFromNullable (object? src, ObjectHandleOnStack res);
+        private static extern void ReboxFromNullable(object? src, ObjectHandleOnStack res);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void ReboxToNullable (object? src, QCallTypeHandle destNullableType, ObjectHandleOnStack res);
+        private static extern void ReboxToNullable(
+            object? src,
+            QCallTypeHandle destNullableType,
+            ObjectHandleOnStack res
+        );
 
         internal static object ReboxFromNullable(object? src)
         {
@@ -106,7 +111,11 @@ namespace System
         internal static object ReboxToNullable(object? src, RuntimeType destNullableType)
         {
             object? res = null;
-            ReboxToNullable(src, new QCallTypeHandle(ref destNullableType), ObjectHandleOnStack.Create(ref res));
+            ReboxToNullable(
+                src,
+                new QCallTypeHandle(ref destNullableType),
+                ObjectHandleOnStack.Create(ref res)
+            );
             return res!;
         }
     }

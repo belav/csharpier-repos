@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,15 +26,21 @@ namespace Castle.DynamicProxy.Generators
         // TODO: This class largely duplicates code from Forwarding and Minimalistic generators. Should be refactored to change that
         private readonly GetTargetReferenceDelegate getTargetReference;
 
-        public OptionallyForwardingMethodGenerator(MetaMethod method, OverrideMethodDelegate overrideMethod,
-                                                   GetTargetReferenceDelegate getTargetReference)
+        public OptionallyForwardingMethodGenerator(
+            MetaMethod method,
+            OverrideMethodDelegate overrideMethod,
+            GetTargetReferenceDelegate getTargetReference
+        )
             : base(method, overrideMethod)
         {
             this.getTargetReference = getTargetReference;
         }
 
-        protected override MethodEmitter BuildProxiedMethodBody(MethodEmitter emitter, ClassEmitter @class,
-                                                                INamingScope namingScope)
+        protected override MethodEmitter BuildProxiedMethodBody(
+            MethodEmitter emitter,
+            ClassEmitter @class,
+            INamingScope namingScope
+        )
         {
             var targetReference = getTargetReference(@class, MethodToOverride);
 
@@ -42,7 +48,9 @@ namespace Castle.DynamicProxy.Generators
                 new IfNullExpression(
                     targetReference,
                     IfNull(emitter.ReturnType),
-                    IfNotNull(targetReference)));
+                    IfNotNull(targetReference)
+                )
+            );
 
             return emitter;
         }
@@ -50,13 +58,18 @@ namespace Castle.DynamicProxy.Generators
         private IStatement IfNotNull(Reference targetReference)
         {
             var statements = new BlockStatement();
-            var arguments = ArgumentsUtil.ConvertToArgumentReferenceExpression(MethodToOverride.GetParameters());
+            var arguments = ArgumentsUtil.ConvertToArgumentReferenceExpression(
+                MethodToOverride.GetParameters()
+            );
 
-            statements.AddStatement(new ReturnStatement(
-                                        new MethodInvocationExpression(
-                                            targetReference,
-                                            MethodToOverride,
-                                            arguments) { VirtualCall = true }));
+            statements.AddStatement(
+                new ReturnStatement(
+                    new MethodInvocationExpression(targetReference, MethodToOverride, arguments)
+                    {
+                        VirtualCall = true
+                    }
+                )
+            );
             return statements;
         }
 
@@ -71,7 +84,9 @@ namespace Castle.DynamicProxy.Generators
             }
             else
             {
-                statements.AddStatement(new ReturnStatement(new DefaultValueExpression(returnType)));
+                statements.AddStatement(
+                    new ReturnStatement(new DefaultValueExpression(returnType))
+                );
             }
             return statements;
         }
@@ -84,8 +99,11 @@ namespace Castle.DynamicProxy.Generators
                 if (parameter.IsOut)
                 {
                     statements.AddStatement(
-                        new AssignArgumentStatement(new ArgumentReference(parameter.ParameterType, index + 1),
-                                                    new DefaultValueExpression(parameter.ParameterType)));
+                        new AssignArgumentStatement(
+                            new ArgumentReference(parameter.ParameterType, index + 1),
+                            new DefaultValueExpression(parameter.ParameterType)
+                        )
+                    );
                 }
             }
         }

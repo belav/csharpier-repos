@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,26 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract partial class BindingElementExtensionElement
-		 : ServiceModelExtensionElement
-	{
-		protected BindingElementExtensionElement () {
-		}
+    public abstract partial class BindingElementExtensionElement : ServiceModelExtensionElement
+    {
+        protected BindingElementExtensionElement() { }
 
-		// Properties
-		public abstract Type BindingElementType { get; }
+        // Properties
+        public abstract Type BindingElementType { get; }
 
-		public virtual void ApplyConfiguration (BindingElement bindingElement) {
-		}
+        public virtual void ApplyConfiguration(BindingElement bindingElement) { }
 
-		protected internal abstract BindingElement CreateBindingElement ();
+        protected internal abstract BindingElement CreateBindingElement();
 
-		protected internal virtual void InitializeFrom (BindingElement bindingElement) {
-		}
+        protected internal virtual void InitializeFrom(BindingElement bindingElement) { }
 
-		internal override string GetConfigurationElementName () {
-			return ConfigUtil.ExtensionsSection.BindingElementExtensions.GetConfigurationElementName (GetType());
-		}
-	}
-
+        internal override string GetConfigurationElementName()
+        {
+            return ConfigUtil.ExtensionsSection.BindingElementExtensions.GetConfigurationElementName(
+                GetType()
+            );
+        }
+    }
 }

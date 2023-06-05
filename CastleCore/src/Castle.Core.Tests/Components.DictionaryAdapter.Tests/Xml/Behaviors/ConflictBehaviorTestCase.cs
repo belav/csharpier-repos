@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,7 +48,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 var xml = Xml("<Foo/>");
                 var foo = Create<IFoo>(xml);
-                var bar = (IBar) foo.Coerce(typeof(IBar));
+                var bar = (IBar)foo.Coerce(typeof(IBar));
 
                 foo.A = "x";
                 bar.A = "y";
@@ -83,29 +83,35 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void AssignArray()
             {
-                var xml     = Xml("<HasItemsArray/>");
-                var foo     = Create<IHasItemsArray>(xml);
-                var itemA   = Create<IItem>();
-                var itemB   = Create<IItem>();
+                var xml = Xml("<HasItemsArray/>");
+                var foo = Create<IHasItemsArray>(xml);
+                var itemA = Create<IItem>();
+                var itemB = Create<IItem>();
 
-                foo.Array = new[] {        itemB };
+                foo.Array = new[] { itemB };
                 foo.Array = new[] { itemA, itemB };
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root> <Array> <Item/> <Item/> </Array> </Root>"), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root> <Array> <Item/> <Item/> </Array> </Root>"),
+                    xml
+                );
             }
 
             [Test]
             public void AssignList()
             {
-                var xml   = Xml("<HasItemsList/>");
-                var foo   = Create<IHasItemsList>(xml);
+                var xml = Xml("<HasItemsList/>");
+                var foo = Create<IHasItemsList>(xml);
                 var itemA = Create<IItem>();
                 var itemB = Create<IItem>();
 
-                foo.List = new[] {        itemB };
+                foo.List = new[] { itemB };
                 foo.List = new[] { itemA, itemB };
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root> <List> <Item/> <Item/> </List> </Root>"), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root> <List> <Item/> <Item/> </List> </Root>"),
+                    xml
+                );
             }
         }
 
@@ -115,7 +121,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Reference]
             public interface IFoo : IDictionaryAdapter
             {
-                IFoo        One  { get; set; }
+                IFoo One { get; set; }
                 IList<IFoo> List { get; set; }
             }
 
@@ -130,13 +136,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 b.List.Add(c);
                 a.One = b;
 
-                CustomAssert.AreXmlEquivalent(Xml(
-                    "<Foo $x>",
-                        "<One>",
-                            "<List> <Foo/> </List>",
-                        "</One>",
-                    "</Foo>"
-                ), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Foo $x>", "<One>", "<List> <Foo/> </List>", "</One>", "</Foo>"),
+                    xml
+                );
             }
 
             protected override T Create<T>(XmlNode storage, Action<PropertyDescriptor> config)
@@ -144,9 +147,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 return base.Create<T>(storage, d => d.AddBehavior(new MultipleCopyAttribute()));
             }
 
-            public class MultipleCopyAttribute : DictionaryBehaviorAttribute,
-                IDictionaryInitializer,
-                IDictionaryCopyStrategy
+            public class MultipleCopyAttribute
+                : DictionaryBehaviorAttribute,
+                    IDictionaryInitializer,
+                    IDictionaryCopyStrategy
             {
                 private bool copying;
 
@@ -155,8 +159,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                     dictionaryAdapter.This.AddCopyStrategy(this);
                 }
 
-                public bool Copy(IDictionaryAdapter source, IDictionaryAdapter target,
-                    ref Func<DictionaryAdapter.PropertyDescriptor, bool> selector)
+                public bool Copy(
+                    IDictionaryAdapter source,
+                    IDictionaryAdapter target,
+                    ref Func<DictionaryAdapter.PropertyDescriptor, bool> selector
+                )
                 {
                     if (copying)
                         return false;

@@ -7,12 +7,14 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed class HubGroupList : IReadOnlyCollection<ConcurrentDictionary<string, HubConnectionContext>>
+internal sealed class HubGroupList
+    : IReadOnlyCollection<ConcurrentDictionary<string, HubConnectionContext>>
 {
     private readonly ConcurrentDictionary<string, GroupConnectionList> _groups =
         new ConcurrentDictionary<string, GroupConnectionList>(StringComparer.Ordinal);
 
-    private static readonly GroupConnectionList EmptyGroupConnectionList = new GroupConnectionList();
+    private static readonly GroupConnectionList EmptyGroupConnectionList =
+        new GroupConnectionList();
 
     public ConcurrentDictionary<string, HubConnectionContext>? this[string groupName]
     {
@@ -37,8 +39,13 @@ internal sealed class HubGroupList : IReadOnlyCollection<ConcurrentDictionary<st
                 // If group is empty after connection remove, don't need empty group in dictionary.
                 // Why this way? Because ICollection.Remove implementation of dictionary checks for key and value. When we remove empty group,
                 // it checks if no connection added from another thread.
-                var groupToRemove = new KeyValuePair<string, GroupConnectionList>(groupName, EmptyGroupConnectionList);
-                ((ICollection<KeyValuePair<string, GroupConnectionList>>)(_groups)).Remove(groupToRemove);
+                var groupToRemove = new KeyValuePair<string, GroupConnectionList>(
+                    groupName,
+                    EmptyGroupConnectionList
+                );
+                ((ICollection<KeyValuePair<string, GroupConnectionList>>)(_groups)).Remove(
+                    groupToRemove
+                );
             }
         }
     }
@@ -64,18 +71,26 @@ internal sealed class HubGroupList : IReadOnlyCollection<ConcurrentDictionary<st
         return GetEnumerator();
     }
 
-    private void CreateOrUpdateGroupWithConnection(string groupName, HubConnectionContext connection)
+    private void CreateOrUpdateGroupWithConnection(
+        string groupName,
+        HubConnectionContext connection
+    )
     {
-        _groups.AddOrUpdate(groupName, _ => AddConnectionToGroup(connection, new GroupConnectionList()),
+        _groups.AddOrUpdate(
+            groupName,
+            _ => AddConnectionToGroup(connection, new GroupConnectionList()),
             (key, oldCollection) =>
             {
                 AddConnectionToGroup(connection, oldCollection);
                 return oldCollection;
-            });
+            }
+        );
     }
 
     private static GroupConnectionList AddConnectionToGroup(
-        HubConnectionContext connection, GroupConnectionList group)
+        HubConnectionContext connection,
+        GroupConnectionList group
+    )
     {
         group.AddOrUpdate(connection.ConnectionId, connection, (_, __) => connection);
         return group;

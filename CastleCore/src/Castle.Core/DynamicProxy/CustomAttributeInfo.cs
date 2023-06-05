@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,7 +36,8 @@ namespace Castle.DynamicProxy
         private static readonly FieldInfo[] EmptyFields = new FieldInfo[0];
         private static readonly object[] EmptyValues = new object[0];
 
-        private static readonly IEqualityComparer<object> ValueComparer = new AttributeArgumentValueEqualityComparer();
+        private static readonly IEqualityComparer<object> ValueComparer =
+            new AttributeArgumentValueEqualityComparer();
 
         private readonly CustomAttributeBuilder builder;
         private readonly ConstructorInfo constructor;
@@ -50,13 +51,22 @@ namespace Castle.DynamicProxy
             PropertyInfo[] namedProperties,
             object[] propertyValues,
             FieldInfo[] namedFields,
-            object[] fieldValues)
+            object[] fieldValues
+        )
         {
             // Will take care of validating the arguments
-            this.builder = new CustomAttributeBuilder(constructor, constructorArgs, namedProperties, propertyValues, namedFields, fieldValues);
+            this.builder = new CustomAttributeBuilder(
+                constructor,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                namedFields,
+                fieldValues
+            );
 
             this.constructor = constructor;
-            this.constructorArgs = constructorArgs.Length == 0 ? EmptyValues : constructorArgs.ToArray();
+            this.constructorArgs =
+                constructorArgs.Length == 0 ? EmptyValues : constructorArgs.ToArray();
             this.properties = MakeNameValueDictionary(namedProperties, propertyValues);
             this.fields = MakeNameValueDictionary(namedFields, fieldValues);
         }
@@ -65,26 +75,41 @@ namespace Castle.DynamicProxy
             ConstructorInfo constructor,
             object[] constructorArgs,
             PropertyInfo[] namedProperties,
-            object[] propertyValues)
-            : this(constructor, constructorArgs, namedProperties, propertyValues, EmptyFields, EmptyValues)
-        {            
-        }
+            object[] propertyValues
+        )
+            : this(
+                constructor,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                EmptyFields,
+                EmptyValues
+            ) { }
 
         public CustomAttributeInfo(
             ConstructorInfo constructor,
             object[] constructorArgs,
             FieldInfo[] namedFields,
-            object[] fieldValues)
-            : this(constructor, constructorArgs, EmptyProperties, EmptyValues, namedFields, fieldValues)
-        {
-        }
+            object[] fieldValues
+        )
+            : this(
+                constructor,
+                constructorArgs,
+                EmptyProperties,
+                EmptyValues,
+                namedFields,
+                fieldValues
+            ) { }
 
-        public CustomAttributeInfo(
-            ConstructorInfo constructor,
-            object[] constructorArgs)
-            : this(constructor, constructorArgs, EmptyProperties, EmptyValues, EmptyFields, EmptyValues)
-        {
-        }
+        public CustomAttributeInfo(ConstructorInfo constructor, object[] constructorArgs)
+            : this(
+                constructor,
+                constructorArgs,
+                EmptyProperties,
+                EmptyValues,
+                EmptyFields,
+                EmptyValues
+            ) { }
 
         public static CustomAttributeInfo FromExpression(Expression<Func<Attribute>> expression)
         {
@@ -101,7 +126,9 @@ namespace Castle.DynamicProxy
                 var memberInitExpression = body as MemberInitExpression;
                 if (memberInitExpression == null)
                 {
-                    throw new ArgumentException("The expression must be either a simple constructor call or an object initializer expression");
+                    throw new ArgumentException(
+                        "The expression must be either a simple constructor call or an object initializer expression"
+                    );
                 }
 
                 newExpression = memberInitExpression.NewExpression;
@@ -114,7 +141,10 @@ namespace Castle.DynamicProxy
                         throw new ArgumentException("Only assignment bindings are supported");
                     }
 
-                    object value = GetAttributeArgumentValue(assignment.Expression, allowArray: true);
+                    object value = GetAttributeArgumentValue(
+                        assignment.Expression,
+                        allowArray: true
+                    );
 
                     var property = assignment.Member as PropertyInfo;
                     if (property != null)
@@ -132,7 +162,9 @@ namespace Castle.DynamicProxy
                         }
                         else
                         {
-                            throw new ArgumentException("Only property and field assignments are supported");
+                            throw new ArgumentException(
+                                "Only property and field assignments are supported"
+                            );
                         }
                     }
                 }
@@ -151,7 +183,8 @@ namespace Castle.DynamicProxy
                 namedProperties.ToArray(),
                 propertyValues.ToArray(),
                 namedFields.ToArray(),
-                fieldValues.ToArray());
+                fieldValues.ToArray()
+            );
         }
 
         private static Expression UnwrapBody(Expression body)
@@ -175,12 +208,14 @@ namespace Castle.DynamicProxy
                 case ExpressionType.Constant:
                     return ((ConstantExpression)arg).Value;
                 case ExpressionType.MemberAccess:
-                    var memberExpr = (MemberExpression) arg;
+                    var memberExpr = (MemberExpression)arg;
                     if (memberExpr.Member is FieldInfo field)
                     {
-                        if (memberExpr.Expression is ConstantExpression constant &&
-                            IsCompilerGenerated(constant.Type) &&
-                            constant.Value != null)
+                        if (
+                            memberExpr.Expression is ConstantExpression constant
+                            && IsCompilerGenerated(constant.Type)
+                            && constant.Value != null
+                        )
                         {
                             return field.GetValue(constant.Value);
                         }
@@ -189,8 +224,11 @@ namespace Castle.DynamicProxy
                 case ExpressionType.NewArrayInit:
                     if (allowArray)
                     {
-                        var newArrayExpr = (NewArrayExpression) arg;
-                        var array = Array.CreateInstance(newArrayExpr.Type.GetElementType(), newArrayExpr.Expressions.Count);
+                        var newArrayExpr = (NewArrayExpression)arg;
+                        var array = Array.CreateInstance(
+                            newArrayExpr.Type.GetElementType(),
+                            newArrayExpr.Expressions.Count
+                        );
                         int index = 0;
                         foreach (var expr in newArrayExpr.Expressions)
                         {
@@ -202,8 +240,10 @@ namespace Castle.DynamicProxy
                     }
                     break;
             }
-            
-            throw new ArgumentException("Only constant, local variables, method parameters and single-dimensional array expressions are supported");
+
+            throw new ArgumentException(
+                "Only constant, local variables, method parameters and single-dimensional array expressions are supported"
+            );
         }
 
         private static bool IsCompilerGenerated(Type type)
@@ -218,19 +258,24 @@ namespace Castle.DynamicProxy
 
         public bool Equals(CustomAttributeInfo other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return constructor.Equals(other.constructor) &&
-                constructorArgs.SequenceEqual(other.constructorArgs, ValueComparer) &&
-                AreMembersEquivalent(properties, other.properties) &&
-                AreMembersEquivalent(fields, other.fields);
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
+            return constructor.Equals(other.constructor)
+                && constructorArgs.SequenceEqual(other.constructorArgs, ValueComparer)
+                && AreMembersEquivalent(properties, other.properties)
+                && AreMembersEquivalent(fields, other.fields);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != this.GetType())
+                return false;
             return Equals((CustomAttributeInfo)obj);
         }
 
@@ -239,14 +284,17 @@ namespace Castle.DynamicProxy
             unchecked
             {
                 int hashCode = constructor.GetHashCode();
-                hashCode = (hashCode*397) ^ CombineHashCodes(constructorArgs);
-                hashCode = (hashCode*397) ^ CombineMemberHashCodes(properties);
-                hashCode = (hashCode*397) ^ CombineMemberHashCodes(fields);
+                hashCode = (hashCode * 397) ^ CombineHashCodes(constructorArgs);
+                hashCode = (hashCode * 397) ^ CombineMemberHashCodes(properties);
+                hashCode = (hashCode * 397) ^ CombineMemberHashCodes(fields);
                 return hashCode;
             }
         }
 
-        private static bool AreMembersEquivalent(IDictionary<string, object> x, IDictionary<string, object> y)
+        private static bool AreMembersEquivalent(
+            IDictionary<string, object> x,
+            IDictionary<string, object> y
+        )
         {
             if (x.Count != y.Count)
                 return false;
@@ -269,7 +317,7 @@ namespace Castle.DynamicProxy
                 int hashCode = 173;
                 foreach (object value in values)
                 {
-                    hashCode = (hashCode*397) ^ ValueComparer.GetHashCode(value);
+                    hashCode = (hashCode * 397) ^ ValueComparer.GetHashCode(value);
                 }
                 return hashCode;
             }
@@ -287,7 +335,7 @@ namespace Castle.DynamicProxy
                 {
                     int keyHashCode = kvp.Key.GetHashCode();
                     int valueHashCode = ValueComparer.GetHashCode(kvp.Value);
-                    hashCode += (keyHashCode*397) ^ valueHashCode;
+                    hashCode += (keyHashCode * 397) ^ valueHashCode;
                 }
                 return hashCode;
             }

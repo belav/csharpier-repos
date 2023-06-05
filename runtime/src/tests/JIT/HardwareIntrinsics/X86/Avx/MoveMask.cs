@@ -21,9 +21,12 @@ namespace IntelHardwareIntrinsicTest
 
             if (Avx.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[8] { 1, -5, 100, 0, 1, -5, 100, 0 }))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[8] { 1, -5, 100, 0, 1, -5, 100, 0 }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArray1Ptr);
                     var res = Avx.MoveMask(vf1);
 
@@ -35,9 +38,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[4] { 1, -5, 1, -5 }))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[4] { 1, -5, 1, -5 }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector256<double>>(doubleTable.inArray1Ptr);
                     var res = Avx.MoveMask(vf1);
 
@@ -50,11 +56,11 @@ namespace IntelHardwareIntrinsicTest
                 }
             }
 
-
             return testResult;
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public void* inArray1Ptr => inHandle1.AddrOfPinnedObject().ToPointer();
@@ -71,6 +77,5 @@ namespace IntelHardwareIntrinsicTest
                 inHandle1.Free();
             }
         }
-
     }
 }

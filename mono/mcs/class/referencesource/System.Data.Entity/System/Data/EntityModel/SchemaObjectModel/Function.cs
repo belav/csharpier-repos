@@ -33,6 +33,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         protected SchemaType _type = null;
         private string _unresolvedType = null;
         protected bool _isRefType = false;
+
         // both are not specified
         protected SchemaElementLookUpTable<Parameter> _parameters = null;
         protected List<ReturnType> _returnTypeList = null;
@@ -45,14 +46,22 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Static Fields
 
-        private static System.Text.RegularExpressions.Regex s_typeParser = new System.Text.RegularExpressions.Regex(@"^(?<modifier>((Collection)|(Ref)))\s*\(\s*(?<typeName>\S*)\s*\)$", System.Text.RegularExpressions.RegexOptions.Compiled);
+        private static System.Text.RegularExpressions.Regex s_typeParser =
+            new System.Text.RegularExpressions.Regex(
+                @"^(?<modifier>((Collection)|(Ref)))\s*\(\s*(?<typeName>\S*)\s*\)$",
+                System.Text.RegularExpressions.RegexOptions.Compiled
+            );
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        internal static void RemoveTypeModifier(ref string type, out TypeModifier typeModifier, out bool isRefType)
+        internal static void RemoveTypeModifier(
+            ref string type,
+            out TypeModifier typeModifier,
+            out bool isRefType
+        )
         {
             isRefType = false;
             typeModifier = TypeModifier.None;
@@ -70,14 +79,20 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         isRefType = true;
                         return;
                     default:
-                        Debug.Assert(false, "Unexpected modifier: " + match.Groups["modifier"].Value);
+                        Debug.Assert(
+                            false,
+                            "Unexpected modifier: " + match.Groups["modifier"].Value
+                        );
                         break;
                 }
             }
-            
         }
 
-        internal static string GetTypeNameForErrorMessage(SchemaType type, CollectionKind colKind, bool isRef)
+        internal static string GetTypeNameForErrorMessage(
+            SchemaType type,
+            CollectionKind colKind,
+            bool isRef
+        )
         {
             string typeName = type.FQName;
             if (isRef)
@@ -102,59 +117,33 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// ctor for a schema function
         /// </summary>
         public Function(Schema parentElement)
-            : base(parentElement)
-        {
-        }
+            : base(parentElement) { }
         #endregion
 
         #region Public Properties
 
         public bool IsAggregate
         {
-            get
-            {
-                return _isAggregate;
-            }
-            internal set
-            {
-                _isAggregate = value;
-            }
+            get { return _isAggregate; }
+            internal set { _isAggregate = value; }
         }
 
         public bool IsBuiltIn
         {
-            get
-            {
-                return _isBuiltIn;
-            }
-            internal set
-            {
-                _isBuiltIn = value;
-            }
+            get { return _isBuiltIn; }
+            internal set { _isBuiltIn = value; }
         }
 
         public bool IsNiladicFunction
         {
-            get
-            {
-                return _isNiladicFunction;
-            }
-            internal set
-            {
-                _isNiladicFunction = value;
-            }
+            get { return _isNiladicFunction; }
+            internal set { _isNiladicFunction = value; }
         }
 
         public bool IsComposable
         {
-            get
-            {
-                return _isComposable;
-            }
-            internal set
-            {
-                _isComposable = value;
-            }
+            get { return _isComposable; }
+            internal set { _isComposable = value; }
         }
 
         public string CommandText
@@ -171,22 +160,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         public ParameterTypeSemantics ParameterTypeSemantics
         {
-            get
-            {
-                return _parameterTypeSemantics;
-            }
-            internal set
-            {
-                _parameterTypeSemantics = value;
-            }
+            get { return _parameterTypeSemantics; }
+            internal set { _parameterTypeSemantics = value; }
         }
 
         public string StoreFunctionName
         {
-            get
-            {
-                return _storeFunctionName;
-            }
+            get { return _storeFunctionName; }
             internal set
             {
                 Debug.Assert(value != null, "StoreFunctionName should never be set null value");
@@ -200,7 +180,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 if (null != _returnTypeList)
                 {
-                    Debug.Assert(_returnTypeList.Count == 1, "Shouldn't use Type if there could be multiple return types");
+                    Debug.Assert(
+                        _returnTypeList.Count == 1,
+                        "Shouldn't use Type if there could be multiple return types"
+                    );
                     return this._returnTypeList[0].Type;
                 }
                 else
@@ -214,7 +197,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             get
             {
-                return null != _returnTypeList ? new ReadOnlyCollection<ReturnType>(_returnTypeList) : null;
+                return null != _returnTypeList
+                    ? new ReadOnlyCollection<ReturnType>(_returnTypeList)
+                    : null;
             }
         }
 
@@ -232,14 +217,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         public CollectionKind CollectionKind
         {
-            get
-            {
-                return _returnTypeCollectionKind;
-            }
-            internal set
-            {
-                _returnTypeCollectionKind = value;
-            }
+            get { return _returnTypeCollectionKind; }
+            internal set { _returnTypeCollectionKind = value; }
         }
 
         public override string Identity
@@ -265,7 +244,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         stringBuilder.Append(Helper.ToString(parameter.ParameterDirection));
                         stringBuilder.Append(' ');
                         // we don't include the facets in the identity, since we are *not*
-                        // taking them into consideration inside the 
+                        // taking them into consideration inside the
                         // RankFunctionParameters method of TypeResolver.cs
 
                         parameter.WriteIdentity(stringBuilder);
@@ -279,20 +258,17 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         public bool IsReturnAttributeReftype
         {
-            get
-            {
-                return _isRefType;
-            }
+            get { return _isRefType; }
         }
 
-        public virtual bool IsFunctionImport { get { return false; } }
+        public virtual bool IsFunctionImport
+        {
+            get { return false; }
+        }
 
         public string DbSchema
         {
-            get
-            {
-                return _schema;
-            }
+            get { return _schema; }
         }
 
         #endregion
@@ -396,7 +372,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (_unresolvedType != null)
             {
-                Debug.Assert(Schema.DataModel != SchemaDataModelOption.ProviderManifestModel, "ProviderManifest cannot have ReturnType as an attribute");
+                Debug.Assert(
+                    Schema.DataModel != SchemaDataModelOption.ProviderManifestModel,
+                    "ProviderManifest cannot have ReturnType as an attribute"
+                );
                 Schema.ResolveTypeName(this, UnresolvedReturnType, out _type);
             }
 
@@ -423,18 +402,25 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (_type != null && _returnTypeList != null)
             {
-                AddError(ErrorCode.ReturnTypeDeclaredAsAttributeAndElement, EdmSchemaErrorSeverity.Error, Strings.TypeDeclaredAsAttributeAndElement);
+                AddError(
+                    ErrorCode.ReturnTypeDeclaredAsAttributeAndElement,
+                    EdmSchemaErrorSeverity.Error,
+                    Strings.TypeDeclaredAsAttributeAndElement
+                );
             }
 
-            // only call Type if _returnTypeList is empty, to ensure that we don't it when 
+            // only call Type if _returnTypeList is empty, to ensure that we don't it when
             // _returnTypeList has more than one element.
             if (this._returnTypeList == null && this.Type == null)
             {
                 // Composable functions and function imports must declare return type.
                 if (this.IsComposable)
                 {
-                    AddError(ErrorCode.ComposableFunctionOrFunctionImportWithoutReturnType, EdmSchemaErrorSeverity.Error,
-                        Strings.ComposableFunctionOrFunctionImportMustDeclareReturnType);
+                    AddError(
+                        ErrorCode.ComposableFunctionOrFunctionImportWithoutReturnType,
+                        EdmSchemaErrorSeverity.Error,
+                        Strings.ComposableFunctionOrFunctionImportMustDeclareReturnType
+                    );
                 }
             }
             else
@@ -442,8 +428,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 // Non-composable functions (except function imports) must not declare a return type.
                 if (!this.IsComposable && !this.IsFunctionImport)
                 {
-                    AddError(ErrorCode.NonComposableFunctionWithReturnType, EdmSchemaErrorSeverity.Error,
-                        Strings.NonComposableFunctionMustNotDeclareReturnType);
+                    AddError(
+                        ErrorCode.NonComposableFunctionWithReturnType,
+                        EdmSchemaErrorSeverity.Error,
+                        Strings.NonComposableFunctionMustNotDeclareReturnType
+                    );
                 }
             }
 
@@ -451,15 +440,18 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 if (IsAggregate)
                 {
-
                     // Make sure that the function has exactly one parameter and that takes
                     // a collection type
                     if (Parameters.Count != 1)
                     {
-                        AddError(ErrorCode.InvalidNumberOfParametersForAggregateFunction,
-                                 EdmSchemaErrorSeverity.Error,
-                                 this,
-                                 System.Data.Entity.Strings.InvalidNumberOfParametersForAggregateFunction(FQName));
+                        AddError(
+                            ErrorCode.InvalidNumberOfParametersForAggregateFunction,
+                            EdmSchemaErrorSeverity.Error,
+                            this,
+                            System.Data.Entity.Strings.InvalidNumberOfParametersForAggregateFunction(
+                                FQName
+                            )
+                        );
                     }
                     else if (Parameters.GetElementAt(0).CollectionKind == CollectionKind.None)
                     {
@@ -467,23 +459,28 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         // first parameter for the function
                         Parameter param = Parameters.GetElementAt(0);
 
-                        AddError(ErrorCode.InvalidParameterTypeForAggregateFunction,
-                                 EdmSchemaErrorSeverity.Error,
-                                 this,
-                                 System.Data.Entity.Strings.InvalidParameterTypeForAggregateFunction(param.Name, FQName));
+                        AddError(
+                            ErrorCode.InvalidParameterTypeForAggregateFunction,
+                            EdmSchemaErrorSeverity.Error,
+                            this,
+                            System.Data.Entity.Strings.InvalidParameterTypeForAggregateFunction(
+                                param.Name,
+                                FQName
+                            )
+                        );
                     }
-
                 }
 
                 if (!this.IsComposable)
                 {
                     // All aggregates, built-in and niladic functions must be composable, so throw error here.
-                    if (this.IsAggregate ||
-                        this.IsNiladicFunction ||
-                        this.IsBuiltIn)
+                    if (this.IsAggregate || this.IsNiladicFunction || this.IsBuiltIn)
                     {
-                        AddError(ErrorCode.NonComposableFunctionAttributesNotValid, EdmSchemaErrorSeverity.Error,
-                            Strings.NonComposableFunctionHasDisallowedAttribute);
+                        AddError(
+                            ErrorCode.NonComposableFunctionAttributesNotValid,
+                            EdmSchemaErrorSeverity.Error,
+                            Strings.NonComposableFunctionHasDisallowedAttribute
+                        );
                     }
                 }
 
@@ -492,15 +489,21 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     // Functions with command text are not composable.
                     if (this.IsComposable)
                     {
-                        AddError(ErrorCode.ComposableFunctionWithCommandText, EdmSchemaErrorSeverity.Error,
-                            Strings.CommandTextFunctionsNotComposable);
+                        AddError(
+                            ErrorCode.ComposableFunctionWithCommandText,
+                            EdmSchemaErrorSeverity.Error,
+                            Strings.CommandTextFunctionsNotComposable
+                        );
                     }
 
                     // Functions with command text cannot declare store function name.
                     if (null != this.StoreFunctionName)
                     {
-                        AddError(ErrorCode.FunctionDeclaresCommandTextAndStoreFunctionName, EdmSchemaErrorSeverity.Error,
-                            Strings.CommandTextFunctionsCannotDeclareStoreFunctionName);
+                        AddError(
+                            ErrorCode.FunctionDeclaresCommandTextAndStoreFunctionName,
+                            EdmSchemaErrorSeverity.Error,
+                            Strings.CommandTextFunctionsCannotDeclareStoreFunctionName
+                        );
                     }
                 }
             }
@@ -509,12 +512,27 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 // In SSDL function may return a primitive value or a collection of rows with scalar props.
                 // It is not possible to encode "collection of rows" in the ReturnType attribute, so the only check needed here is to make sure that the type is scalar and not a collection.
-                if (_type != null && (_type is ScalarType == false || _returnTypeCollectionKind != Metadata.Edm.CollectionKind.None))
+                if (
+                    _type != null
+                    && (
+                        _type is ScalarType == false
+                        || _returnTypeCollectionKind != Metadata.Edm.CollectionKind.None
+                    )
+                )
                 {
-                    AddError(ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
-                             EdmSchemaErrorSeverity.Error,
-                             this,
-                             System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(GetTypeNameForErrorMessage(_type, _returnTypeCollectionKind, _isRefType), this.FQName));
+                    AddError(
+                        ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
+                        EdmSchemaErrorSeverity.Error,
+                        this,
+                        System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
+                            GetTypeNameForErrorMessage(
+                                _type,
+                                _returnTypeCollectionKind,
+                                _isRefType
+                            ),
+                            this.FQName
+                        )
+                    );
                 }
             }
 
@@ -554,6 +572,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // We only support clone for FunctionImports.
             throw Error.NotImplemented();
         }
+
         protected void CloneSetFunctionFields(Function clone)
         {
             clone._isAggregate = _isAggregate;
@@ -573,26 +592,23 @@ namespace System.Data.EntityModel.SchemaObjectModel
             foreach (Parameter parameter in this.Parameters)
             {
                 AddErrorKind error = clone.Parameters.TryAdd((Parameter)parameter.Clone(clone));
-                Debug.Assert(error == AddErrorKind.Succeeded, "Since we are cloning a validated function, this should never fail.");
+                Debug.Assert(
+                    error == AddErrorKind.Succeeded,
+                    "Since we are cloning a validated function, this should never fail."
+                );
             }
         }
         #endregion
 
         #region Internal Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <value></value>
         internal string UnresolvedReturnType
         {
-            get
-            {
-                return _unresolvedType;
-            }
-            set
-            {
-                _unresolvedType = value;
-            }
+            get { return _unresolvedType; }
+            set { _unresolvedType = value; }
         }
         #endregion //Internal Properties
 
@@ -604,7 +620,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// <param name="reader">An XmlReader positioned at the Type attribute.</param>
         private void HandleDbSchemaAttribute(XmlReader reader)
         {
-            Debug.Assert(Schema.DataModel == SchemaDataModelOption.ProviderDataModel, "We shouldn't see this attribute unless we are parsing ssdl");
+            Debug.Assert(
+                Schema.DataModel == SchemaDataModelOption.ProviderDataModel,
+                "We shouldn't see this attribute unless we are parsing ssdl"
+            );
             Debug.Assert(reader != null);
 
             _schema = reader.Value;
@@ -778,11 +797,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         ParameterTypeSemantics = ParameterTypeSemantics.AllowImplicitConversion;
                         break;
                     default:
-                        // don't try to use the name of the function, because we are still parsing the 
+                        // don't try to use the name of the function, because we are still parsing the
                         // attributes, and we may not be to the name attribute yet.
-                        AddError(ErrorCode.InvalidValueForParameterTypeSemantics, EdmSchemaErrorSeverity.Error, reader,
+                        AddError(
+                            ErrorCode.InvalidValueForParameterTypeSemantics,
+                            EdmSchemaErrorSeverity.Error,
+                            reader,
                             System.Data.Entity.Strings.InvalidValueForParameterTypeSemanticsAttribute(
-                                          value));
+                                value
+                            )
+                        );
 
                         break;
                 }

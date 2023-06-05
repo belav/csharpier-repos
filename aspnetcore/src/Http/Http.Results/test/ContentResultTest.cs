@@ -35,70 +35,70 @@ public class ContentResultTest
         Assert.Equal("text/plain; charset=utf-16", httpContext.Response.ContentType);
     }
 
-    public static TheoryData<MediaTypeHeaderValue, string, string, string, byte[]> ContentResultContentTypeData
+    public static TheoryData<
+        MediaTypeHeaderValue,
+        string,
+        string,
+        string,
+        byte[]
+    > ContentResultContentTypeData
     {
         get
         {
             // contentType, content, responseContentType, expectedContentType, expectedData
             return new TheoryData<MediaTypeHeaderValue, string, string, string, byte[]>
+            {
                 {
-                    {
-                        null,
-                        "κόσμε",
-                        null,
-                        "text/plain; charset=utf-8",
-                        new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo"),
-                        "κόσμε",
-                        null,
-                        "text/foo",
-                        new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
-                    },
-                    {
-                        MediaTypeHeaderValue.Parse("text/foo;p1=p1-value"),
-                        "κόσμε",
-                        null,
-                        "text/foo; p1=p1-value",
-                        new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII },
-                        "abcd",
-                        null,
-                        "text/foo; charset=us-ascii",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        null,
-                        "abcd",
-                        "text/bar",
-                        "text/bar",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        null,
-                        "abcd",
-                        "application/xml; charset=us-ascii",
-                        "application/xml; charset=us-ascii",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        null,
-                        "abcd",
-                        "Invalid content type",
-                        "Invalid content type",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo") { Charset = "us-ascii" },
-                        "abcd",
-                        "text/bar",
-                        "text/foo; charset=us-ascii",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                };
+                    null,
+                    "κόσμε",
+                    null,
+                    "text/plain; charset=utf-8",
+                    new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
+                },
+                {
+                    new MediaTypeHeaderValue("text/foo"),
+                    "κόσμε",
+                    null,
+                    "text/foo",
+                    new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
+                },
+                {
+                    MediaTypeHeaderValue.Parse("text/foo;p1=p1-value"),
+                    "κόσμε",
+                    null,
+                    "text/foo; p1=p1-value",
+                    new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
+                },
+                {
+                    new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII },
+                    "abcd",
+                    null,
+                    "text/foo; charset=us-ascii",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+                { null, "abcd", "text/bar", "text/bar", new byte[] { 97, 98, 99, 100 } },
+                {
+                    null,
+                    "abcd",
+                    "application/xml; charset=us-ascii",
+                    "application/xml; charset=us-ascii",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+                {
+                    null,
+                    "abcd",
+                    "Invalid content type",
+                    "Invalid content type",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+                {
+                    new MediaTypeHeaderValue("text/foo") { Charset = "us-ascii" },
+                    "abcd",
+                    "text/bar",
+                    "text/foo; charset=us-ascii",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+            };
         }
     }
 
@@ -109,7 +109,8 @@ public class ContentResultTest
         string content,
         string responseContentType,
         string expectedContentType,
-        byte[] expectedContentData)
+        byte[] expectedContentData
+    )
     {
         // Arrange
         var contentResult = new ContentResult

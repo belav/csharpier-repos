@@ -22,7 +22,8 @@ public class RetryHandler : DelegatingHandler
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         HttpResponseMessage response = null;
         for (int i = 0; i < MaxRetries; i++)
@@ -42,8 +43,10 @@ public class RetryHandler : DelegatingHandler
             }
 
             // Retry only on 503 that is expected during IIS startup
-            if (response != null &&
-               (response.IsSuccessStatusCode || response.StatusCode != (HttpStatusCode)503))
+            if (
+                response != null
+                && (response.IsSuccessStatusCode || response.StatusCode != (HttpStatusCode)503)
+            )
             {
                 break;
             }

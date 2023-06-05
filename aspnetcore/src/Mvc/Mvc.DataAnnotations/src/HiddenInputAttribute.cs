@@ -12,7 +12,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <c>[HiddenInput(DisplayValue = true)]</c> (if the inherited attribute had <c>DisplayValue = false</c>) and a
 /// <see cref="System.ComponentModel.DataAnnotations.UIHintAttribute"/> with some value other than "HiddenInput".
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Property,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class HiddenInputAttribute : Attribute
 {
     /// <summary>

@@ -44,7 +44,10 @@ namespace System.Reflection.Runtime.PropertyInfos
         //
         //  We don't report any DeclaredMembers for arrays or generic parameters so those don't apply.
         //
-        protected RuntimePropertyInfo(RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType)
+        protected RuntimePropertyInfo(
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        )
         {
             ContextTypeInfo = contextTypeInfo;
             _reflectedType = reflectedType;
@@ -52,26 +55,17 @@ namespace System.Reflection.Runtime.PropertyInfos
 
         public sealed override bool CanRead
         {
-            get
-            {
-                return Getter != null;
-            }
+            get { return Getter != null; }
         }
 
         public sealed override bool CanWrite
         {
-            get
-            {
-                return Setter != null;
-            }
+            get { return Setter != null; }
         }
 
         public sealed override Type DeclaringType
         {
-            get
-            {
-                return ContextTypeInfo;
-            }
+            get { return ContextTypeInfo; }
         }
 
         public sealed override ParameterInfo[] GetIndexParameters()
@@ -84,7 +78,7 @@ namespace System.Reflection.Runtime.PropertyInfos
                 RuntimeParameterInfo[] runtimeMethodParameterInfos = accessor.RuntimeParameters;
                 int count = runtimeMethodParameterInfos.Length;
                 if (!useGetter)
-                    count--;  // If we're taking the parameters off the setter, subtract one for the "value" parameter.
+                    count--; // If we're taking the parameters off the setter, subtract one for the "value" parameter.
                 if (count == 0)
                 {
                     _lazyIndexParameters = indexParameters = Array.Empty<ParameterInfo>();
@@ -94,7 +88,11 @@ namespace System.Reflection.Runtime.PropertyInfos
                     indexParameters = new ParameterInfo[count];
                     for (int i = 0; i < count; i++)
                     {
-                        indexParameters[i] = RuntimePropertyIndexParameterInfo.GetRuntimePropertyIndexParameterInfo(this, runtimeMethodParameterInfos[i]);
+                        indexParameters[i] =
+                            RuntimePropertyIndexParameterInfo.GetRuntimePropertyIndexParameterInfo(
+                                this,
+                                runtimeMethodParameterInfos[i]
+                            );
                     }
                     _lazyIndexParameters = indexParameters;
                 }
@@ -113,24 +111,32 @@ namespace System.Reflection.Runtime.PropertyInfos
 
         public sealed override MethodInfo GetMethod
         {
-            get
-            {
-                return Getter;
-            }
+            get { return Getter; }
         }
 
-        public sealed override Type[] GetOptionalCustomModifiers() => PropertyTypeHandle.GetCustomModifiers(ContextTypeInfo.TypeContext, optional: true);
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            PropertyTypeHandle.GetCustomModifiers(ContextTypeInfo.TypeContext, optional: true);
 
-        public sealed override Type[] GetRequiredCustomModifiers() => PropertyTypeHandle.GetCustomModifiers(ContextTypeInfo.TypeContext, optional: false);
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            PropertyTypeHandle.GetCustomModifiers(ContextTypeInfo.TypeContext, optional: false);
 
-        public sealed override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo culture)
+        public sealed override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo culture
+        )
         {
             if (_lazyGetterInvoker == null)
             {
                 if (!CanRead)
                     throw new ArgumentException();
 
-                _lazyGetterInvoker = Getter.GetUncachedMethodInvoker(Array.Empty<RuntimeTypeInfo>(), this);
+                _lazyGetterInvoker = Getter.GetUncachedMethodInvoker(
+                    Array.Empty<RuntimeTypeInfo>(),
+                    this
+                );
             }
             index ??= Array.Empty<object>();
             return _lazyGetterInvoker.Invoke(obj, index, binder, invokeAttr, culture);
@@ -140,18 +146,12 @@ namespace System.Reflection.Runtime.PropertyInfos
 
         public sealed override Module Module
         {
-            get
-            {
-                return DefiningTypeInfo.Module;
-            }
+            get { return DefiningTypeInfo.Module; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         public sealed override Type PropertyType
@@ -171,28 +171,32 @@ namespace System.Reflection.Runtime.PropertyInfos
 
         public sealed override Type ReflectedType
         {
-            get
-            {
-                return _reflectedType;
-            }
+            get { return _reflectedType; }
         }
 
         public sealed override MethodInfo SetMethod
         {
-            get
-            {
-                return Setter;
-            }
+            get { return Setter; }
         }
 
-        public sealed override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo culture)
+        public sealed override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo culture
+        )
         {
             if (_lazySetterInvoker == null)
             {
                 if (!CanWrite)
                     throw new ArgumentException();
 
-                _lazySetterInvoker = Setter.GetUncachedMethodInvoker(Array.Empty<RuntimeTypeInfo>(), this);
+                _lazySetterInvoker = Setter.GetUncachedMethodInvoker(
+                    Array.Empty<RuntimeTypeInfo>(),
+                    this
+                );
             }
             object?[] arguments;
             if (index == null)
@@ -221,7 +225,9 @@ namespace System.Reflection.Runtime.PropertyInfos
             ParameterInfo[] indexParameters = this.GetIndexParameters();
             if (indexParameters.Length != 0)
             {
-                RuntimeParameterInfo[] indexRuntimeParameters = new RuntimeParameterInfo[indexParameters.Length];
+                RuntimeParameterInfo[] indexRuntimeParameters = new RuntimeParameterInfo[
+                    indexParameters.Length
+                ];
                 for (int i = 0; i < indexParameters.Length; i++)
                     indexRuntimeParameters[i] = (RuntimeParameterInfo)(indexParameters[i]);
                 sb.Append(" [");
@@ -247,7 +253,9 @@ namespace System.Reflection.Runtime.PropertyInfos
                     _lazyGetter = getter;
                 }
 
-                return object.ReferenceEquals(getter, RuntimeDummyMethodInfo.Instance) ? null : getter;
+                return object.ReferenceEquals(getter, RuntimeDummyMethodInfo.Instance)
+                    ? null
+                    : getter;
             }
         }
 
@@ -266,7 +274,9 @@ namespace System.Reflection.Runtime.PropertyInfos
                     _lazySetter = setter;
                 }
 
-                return object.ReferenceEquals(setter, RuntimeDummyMethodInfo.Instance) ? null : setter;
+                return object.ReferenceEquals(setter, RuntimeDummyMethodInfo.Instance)
+                    ? null
+                    : setter;
             }
         }
 
@@ -295,6 +305,7 @@ namespace System.Reflection.Runtime.PropertyInfos
         public abstract override int MetadataToken { get; }
 
         public sealed override object GetConstantValue() => GetConstantValue(raw: false);
+
         public sealed override object GetRawConstantValue() => GetConstantValue(raw: true);
 
         protected abstract bool GetDefaultValueIfAny(bool raw, out object defaultValue);
@@ -314,7 +325,9 @@ namespace System.Reflection.Runtime.PropertyInfos
         /// Override to return the Method that corresponds to the specified semantic.
         /// Return null if a method of the appropriate semantic does not exist
         /// </summary>
-        protected abstract RuntimeNamedMethodInfo GetPropertyMethod(PropertyMethodSemantics whichMethod);
+        protected abstract RuntimeNamedMethodInfo GetPropertyMethod(
+            PropertyMethodSemantics whichMethod
+        );
 
         /// <summary>
         /// Override to provide the metadata based name of a property. (Different from the Name

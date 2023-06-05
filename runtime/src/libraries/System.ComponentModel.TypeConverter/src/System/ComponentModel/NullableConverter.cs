@@ -15,7 +15,8 @@ namespace System.ComponentModel
     /// </summary>
     public class NullableConverter : TypeConverter
     {
-        private static readonly ConstructorInfo s_nullableConstructor = typeof(Nullable<>).GetConstructor(typeof(Nullable<>).GetGenericArguments())!;
+        private static readonly ConstructorInfo s_nullableConstructor =
+            typeof(Nullable<>).GetConstructor(typeof(Nullable<>).GetGenericArguments())!;
 
         /// <summary>
         /// Nullable converter is initialized with the underlying simple type.
@@ -55,7 +56,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value to the converter's underlying simple type or a null.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value
+        )
         {
             if (value == null || value.GetType() == UnderlyingType)
             {
@@ -76,7 +81,10 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets a value indicating whether this converter can convert a value object to the destination type.
         /// </summary>
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
             if (destinationType == UnderlyingType)
             {
@@ -97,17 +105,27 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to the destination type.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
-            if (destinationType == UnderlyingType && value != null && NullableType.IsInstanceOfType(value))
+            if (
+                destinationType == UnderlyingType
+                && value != null
+                && NullableType.IsInstanceOfType(value)
+            )
             {
                 return value;
             }
             else if (destinationType == typeof(InstanceDescriptor))
             {
-                ConstructorInfo ci = (ConstructorInfo)NullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableConstructor);
+                ConstructorInfo ci = (ConstructorInfo)
+                    NullableType.GetMemberWithSameMetadataDefinitionAs(s_nullableConstructor);
                 Debug.Assert(ci != null, "Couldn't find constructor");
                 return new InstanceDescriptor(ci, new object?[] { value }, true);
             }
@@ -129,7 +147,10 @@ namespace System.ComponentModel
 
         /// <summary>
         /// </summary>
-        public override object? CreateInstance(ITypeDescriptorContext? context, IDictionary propertyValues)
+        public override object? CreateInstance(
+            ITypeDescriptorContext? context,
+            IDictionary propertyValues
+        )
         {
             if (UnderlyingTypeConverter != null)
             {
@@ -159,8 +180,15 @@ namespace System.ComponentModel
         /// Gets a collection of properties for the type of array specified by the value
         /// parameter using the specified context and attributes.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public override PropertyDescriptorCollection? GetProperties(ITypeDescriptorContext? context, object value, Attribute[]? attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public override PropertyDescriptorCollection? GetProperties(
+            ITypeDescriptorContext? context,
+            object value,
+            Attribute[]? attributes
+        )
         {
             if (UnderlyingTypeConverter != null)
             {
@@ -191,7 +219,9 @@ namespace System.ComponentModel
         {
             if (UnderlyingTypeConverter != null)
             {
-                StandardValuesCollection? values = UnderlyingTypeConverter.GetStandardValues(context);
+                StandardValuesCollection? values = UnderlyingTypeConverter.GetStandardValues(
+                    context
+                );
                 if (GetStandardValuesSupported(context) && values != null)
                 {
                     // Create a set of standard values around nullable instances.

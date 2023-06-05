@@ -27,10 +27,7 @@ namespace System.Diagnostics
 
         public int ProcessId
         {
-            get
-            {
-                return Environment.ProcessId;
-            }
+            get { return Environment.ProcessId; }
         }
 
         public string ThreadId
@@ -55,10 +52,7 @@ namespace System.Diagnostics
 
         public Stack LogicalOperationStack
         {
-            get
-            {
-                return Trace.CorrelationManager.LogicalOperationStack;
-            }
+            get { return Trace.CorrelationManager.LogicalOperationStack; }
         }
     }
 }

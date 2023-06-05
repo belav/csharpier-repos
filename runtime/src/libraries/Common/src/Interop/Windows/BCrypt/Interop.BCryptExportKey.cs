@@ -19,12 +19,21 @@ internal static partial class Interop
             byte[]? pbOutput,
             int cbOutput,
             out int pcbResult,
-            int dwFlags);
+            int dwFlags
+        );
 
         internal static ArraySegment<byte> BCryptExportKey(SafeBCryptKeyHandle key, string blobType)
         {
             int numBytesNeeded;
-            NTSTATUS ntStatus = BCryptExportKey(key, IntPtr.Zero, blobType, null, 0, out numBytesNeeded, 0);
+            NTSTATUS ntStatus = BCryptExportKey(
+                key,
+                IntPtr.Zero,
+                blobType,
+                null,
+                0,
+                out numBytesNeeded,
+                0
+            );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -32,7 +41,15 @@ internal static partial class Interop
             }
 
             byte[] rented = CryptoPool.Rent(numBytesNeeded);
-            ntStatus = BCryptExportKey(key, IntPtr.Zero, blobType, rented, numBytesNeeded, out numBytesNeeded, 0);
+            ntStatus = BCryptExportKey(
+                key,
+                IntPtr.Zero,
+                blobType,
+                rented,
+                numBytesNeeded,
+                out numBytesNeeded,
+                0
+            );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {

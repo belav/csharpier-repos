@@ -12,14 +12,23 @@ public static class StreamExtensions
     /// <summary>
     /// Fill the buffer until the end of the stream.
     /// </summary>
-    public static async Task<int> FillBufferUntilEndAsync(this Stream stream, byte[] buffer, CancellationToken cancellationToken = default)
+    public static async Task<int> FillBufferUntilEndAsync(
+        this Stream stream,
+        byte[] buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         var offset = 0;
         int read;
 
         do
         {
-            read = await stream.ReadAsync(buffer, offset, buffer.Length - offset, cancellationToken);
+            read = await stream.ReadAsync(
+                buffer,
+                offset,
+                buffer.Length - offset,
+                cancellationToken
+            );
             offset += read;
         } while (read != 0 && offset < buffer.Length);
 
@@ -31,14 +40,23 @@ public static class StreamExtensions
         return offset;
     }
 
-    public static async Task<int> FillEntireBufferAsync(this Stream stream, byte[] buffer, CancellationToken cancellationToken = default)
+    public static async Task<int> FillEntireBufferAsync(
+        this Stream stream,
+        byte[] buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         var offset = 0;
         int read;
 
         do
         {
-            read = await stream.ReadAsync(buffer, offset, buffer.Length - offset, cancellationToken);
+            read = await stream.ReadAsync(
+                buffer,
+                offset,
+                buffer.Length - offset,
+                cancellationToken
+            );
             offset += read;
         } while (read != 0 && offset < buffer.Length);
 
@@ -46,7 +64,13 @@ public static class StreamExtensions
         return offset;
     }
 
-    public static async Task<byte[]> ReadAtLeastLengthAsync(this Stream stream, int length, int bufferLength = 1024, bool allowEmpty = false, CancellationToken cancellationToken = default)
+    public static async Task<byte[]> ReadAtLeastLengthAsync(
+        this Stream stream,
+        int length,
+        int bufferLength = 1024,
+        bool allowEmpty = false,
+        CancellationToken cancellationToken = default
+    )
     {
         var buffer = new byte[bufferLength];
         var data = new List<byte>();
@@ -73,7 +97,11 @@ public static class StreamExtensions
         return data.ToArray();
     }
 
-    public static async Task<byte[]> ReadUntilEndAsync(this Stream stream, int bufferLength = 1024, CancellationToken cancellationToken = default)
+    public static async Task<byte[]> ReadUntilEndAsync(
+        this Stream stream,
+        int bufferLength = 1024,
+        CancellationToken cancellationToken = default
+    )
     {
         var buffer = new byte[bufferLength];
         var data = new List<byte>();

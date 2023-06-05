@@ -16,7 +16,6 @@ using System.Diagnostics;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {
-
     using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
     using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
     using WrapperAndExpr = AndExpr<LeftCellWrapper>;
@@ -30,7 +29,6 @@ namespace System.Data.Mapping.ViewGeneration.Validation
     // checking methods
     internal abstract class ConstraintBase : InternalBase
     {
-
         #region Methods
         // effects: Returns an error log record with this constraint's information
         internal abstract ErrorLog.Record GetErrorRecord();

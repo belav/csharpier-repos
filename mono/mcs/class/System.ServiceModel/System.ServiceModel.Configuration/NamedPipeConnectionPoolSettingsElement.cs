@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,79 +54,94 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class NamedPipeConnectionPoolSettingsElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty group_name;
-		static ConfigurationProperty idle_timeout;
-		static ConfigurationProperty max_outbound_connections_per_endpoint;
+    [MonoTODO]
+    public sealed partial class NamedPipeConnectionPoolSettingsElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty group_name;
+        static ConfigurationProperty idle_timeout;
+        static ConfigurationProperty max_outbound_connections_per_endpoint;
 
-		static NamedPipeConnectionPoolSettingsElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			group_name = new ConfigurationProperty ("groupName",
-				typeof (string), "default", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static NamedPipeConnectionPoolSettingsElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            group_name = new ConfigurationProperty(
+                "groupName",
+                typeof(string),
+                "default",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			idle_timeout = new ConfigurationProperty ("idleTimeout",
-				typeof (TimeSpan), "00:02:00", new TimeSpanConverter (), null,
-				ConfigurationPropertyOptions.None);
+            idle_timeout = new ConfigurationProperty(
+                "idleTimeout",
+                typeof(TimeSpan),
+                "00:02:00",
+                new TimeSpanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			max_outbound_connections_per_endpoint = new ConfigurationProperty ("maxOutboundConnectionsPerEndpoint",
-				typeof (int), "10", null/* FIXME: get converter for int*/, null,
-				ConfigurationPropertyOptions.None);
+            max_outbound_connections_per_endpoint = new ConfigurationProperty(
+                "maxOutboundConnectionsPerEndpoint",
+                typeof(int),
+                "10",
+                null /* FIXME: get converter for int*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (group_name);
-			properties.Add (idle_timeout);
-			properties.Add (max_outbound_connections_per_endpoint);
-		}
+            properties.Add(group_name);
+            properties.Add(idle_timeout);
+            properties.Add(max_outbound_connections_per_endpoint);
+        }
 
-		public NamedPipeConnectionPoolSettingsElement ()
-		{
-		}
+        public NamedPipeConnectionPoolSettingsElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "groupName",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "default"
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string GroupName
+        {
+            get { return (string)base[group_name]; }
+            set { base[group_name] = value; }
+        }
 
-		[ConfigurationProperty ("groupName",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "default")]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string GroupName {
-			get { return (string) base [group_name]; }
-			set { base [group_name] = value; }
-		}
+        [ConfigurationProperty(
+            "idleTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:02:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan IdleTimeout
+        {
+            get { return (TimeSpan)base[idle_timeout]; }
+            set { base[idle_timeout] = value; }
+        }
 
-		[ConfigurationProperty ("idleTimeout",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "00:02:00")]
-		[TypeConverter (typeof (TimeSpanConverter))]
-		public TimeSpan IdleTimeout {
-			get { return (TimeSpan) base [idle_timeout]; }
-			set { base [idle_timeout] = value; }
-		}
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxOutboundConnectionsPerEndpoint",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "10"
+        )]
+        public int MaxOutboundConnectionsPerEndpoint
+        {
+            get { return (int)base[max_outbound_connections_per_endpoint]; }
+            set { base[max_outbound_connections_per_endpoint] = value; }
+        }
 
-		[IntegerValidator ( MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxOutboundConnectionsPerEndpoint",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "10")]
-		public int MaxOutboundConnectionsPerEndpoint {
-			get { return (int) base [max_outbound_connections_per_endpoint]; }
-			set { base [max_outbound_connections_per_endpoint] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

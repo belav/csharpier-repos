@@ -9,10 +9,9 @@ namespace POS_Server
 {
     public static class WebApiConfig
     {
-
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services    
+            // Web API configuration and services
             //config.SuppressDefaultHostAuthentication();
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
@@ -24,8 +23,6 @@ namespace POS_Server
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-          
         }
     }
 }

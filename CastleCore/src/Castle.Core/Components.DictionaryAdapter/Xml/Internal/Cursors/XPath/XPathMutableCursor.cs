@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -27,8 +27,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private readonly IXmlIncludedTypeMap knownTypes;
         private readonly CursorFlags flags;
 
-        public XPathMutableCursor(IXmlNode parent, CompiledXPath path,
-            IXmlIncludedTypeMap knownTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public XPathMutableCursor(
+            IXmlNode parent,
+            CompiledXPath path,
+            IXmlIncludedTypeMap knownTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
             : base(path, namespaces, parent)
         {
             if (null == parent)
@@ -40,14 +45,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (!path.IsCreatable)
                 throw Error.XPathNotCreatable(path);
 
-            this.step       = path.FirstStep;
+            this.step = path.FirstStep;
             this.knownTypes = knownTypes;
-            this.flags      = flags;
+            this.flags = flags;
 
             var source = parent.RequireRealizable<XPathNavigator>();
             if (source.IsReal)
-                iterator = new XPathBufferedNodeIterator(
-                    source.Value.Select(path.FirstStep.Path));
+                iterator = new XPathBufferedNodeIterator(source.Value.Select(path.FirstStep.Path));
         }
 
         public override bool IsReal
@@ -93,7 +97,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public override bool IsNil
         {
             get { return HasCurrent && base.IsNil; }
-            set { Realize(); base.IsNil = value; }
+            set
+            {
+                Realize();
+                base.IsNil = value;
+            }
         }
 
         public override string Value
@@ -116,10 +124,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             ResetCurrent();
 
-            for (;;)
+            for (; ; )
             {
-                var hasNext
-                    =  iterator != null
+                var hasNext =
+                    iterator != null
                     && iterator.MoveNext()
                     && Consume(iterator, flags.AllowsMultipleItems());
 
@@ -214,6 +222,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         }
 
         public override event EventHandler Realized;
+
         protected virtual void OnRealized()
         {
             if (Realized != null)
@@ -282,17 +291,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
             using (var writer = CreateWriterForAppend())
                 WriteNode(step, writer);
 
-            var moved = step.IsAttribute
-                ? node.MoveToLastAttribute()
-                : node.MoveToLastChild();
+            var moved = step.IsAttribute ? node.MoveToLastAttribute() : node.MoveToLastChild();
             SeekCurrentAfterCreate(moved);
         }
 
         private XmlWriter CreateWriterForAppend()
         {
-            return step.IsAttribute
-                ? node.CreateAttributes()
-                : node.AppendChild();
+            return step.IsAttribute ? node.CreateAttributes() : node.AppendChild();
         }
 
         private void WriteNode(CompiledXPathNode node, XmlWriter writer)
@@ -355,12 +360,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             do
             {
-                moved = step.IsAttribute
-                    ? node.MoveToFirstAttribute()
-                    : node.MoveToFirstChild();
+                moved = step.IsAttribute ? node.MoveToFirstAttribute() : node.MoveToFirstChild();
                 RequireMoved(moved);
-            }
-            while (Descend() < xpath.Depth);
+            } while (Descend() < xpath.Depth);
         }
 
         public void RemoveAllNext()
@@ -389,8 +391,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 name = new XmlName(node.LocalName, node.NamespaceURI);
                 node.DeleteSelf();
                 depth--;
-            }
-            while (depth > 0);
+            } while (depth > 0);
 
             ResetCurrent();
         }
@@ -398,7 +399,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public override IXmlNode Save()
         {
             return HasCurrent ? new XPathNode(node.Clone(), type, Namespaces) : this;
-        }    
+        }
 
         private void RequireRemovable()
         {

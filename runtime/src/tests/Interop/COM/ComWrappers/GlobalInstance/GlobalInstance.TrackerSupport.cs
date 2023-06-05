@@ -22,7 +22,10 @@ namespace ComWrappersTests.GlobalInstance
 
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
             object objWrapper = Marshal.GetObjectForIUnknown(trackerObjRaw);
-            Assert.False(objWrapper is FakeWrapper, $"ComWrappers instance should not have been called");
+            Assert.False(
+                objWrapper is FakeWrapper,
+                $"ComWrappers instance should not have been called"
+            );
         }
 
         static int Main()
@@ -37,7 +40,10 @@ namespace ComWrappersTests.GlobalInstance
 #endif
 
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
-                var trackerObj = GlobalComWrappers.Instance.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+                var trackerObj = GlobalComWrappers.Instance.GetOrCreateObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject
+                );
                 Marshal.Release(trackerObjRaw);
 
                 ValidateNotifyEndOfReferenceTrackingOnThread();
@@ -70,4 +76,3 @@ namespace ComWrappersTests.GlobalInstance
         }
     }
 }
-

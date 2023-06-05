@@ -22,7 +22,8 @@ namespace Internal.Cryptography.Pal
         public static ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -42,15 +43,21 @@ namespace Internal.Cryptography.Pal
 
             if (contentType == X509ContentType.Pkcs12)
             {
-                if ((keyStorageFlags & X509KeyStorageFlags.EphemeralKeySet) == X509KeyStorageFlags.EphemeralKeySet)
+                if (
+                    (keyStorageFlags & X509KeyStorageFlags.EphemeralKeySet)
+                    == X509KeyStorageFlags.EphemeralKeySet
+                )
                 {
                     throw new PlatformNotSupportedException(SR.Cryptography_X509_NoEphemeralPfx);
                 }
 
-                bool exportable = (keyStorageFlags & X509KeyStorageFlags.Exportable) == X509KeyStorageFlags.Exportable;
+                bool exportable =
+                    (keyStorageFlags & X509KeyStorageFlags.Exportable)
+                    == X509KeyStorageFlags.Exportable;
 
                 bool persist =
-                    (keyStorageFlags & X509KeyStorageFlags.PersistKeySet) == X509KeyStorageFlags.PersistKeySet;
+                    (keyStorageFlags & X509KeyStorageFlags.PersistKeySet)
+                    == X509KeyStorageFlags.PersistKeySet;
 
                 SafeKeychainHandle keychain = persist
                     ? Interop.AppleCrypto.SecKeychainCopyDefault()
@@ -82,7 +89,8 @@ namespace Internal.Cryptography.Pal
                 SafePasswordHandle.InvalidHandle,
                 SafeTemporaryKeychainHandle.InvalidHandle,
                 exportable: true,
-                out identityHandle);
+                out identityHandle
+            );
 
             if (identityHandle.IsInvalid)
             {
@@ -110,21 +118,41 @@ namespace Internal.Cryptography.Pal
         {
             Debug.Assert(_identityHandle != null);
 
-            using (SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle))
+            using (
+                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
+                    _identityHandle
+                )
+            )
             {
                 return ExportPkcs8(key, password);
             }
         }
 
-        internal static unsafe byte[] ExportPkcs8(SafeSecKeyRefHandle key, ReadOnlySpan<char> password)
+        internal static unsafe byte[] ExportPkcs8(
+            SafeSecKeyRefHandle key,
+            ReadOnlySpan<char> password
+        )
         {
-            using (SafeCFDataHandle data = Interop.AppleCrypto.SecKeyExportData(key, exportPrivate: true, password))
+            using (
+                SafeCFDataHandle data = Interop.AppleCrypto.SecKeyExportData(
+                    key,
+                    exportPrivate: true,
+                    password
+                )
+            )
             {
-                ReadOnlySpan<byte> systemExport = Interop.CoreFoundation.CFDataDangerousGetSpan(data);
+                ReadOnlySpan<byte> systemExport = Interop.CoreFoundation.CFDataDangerousGetSpan(
+                    data
+                );
 
                 fixed (byte* ptr = systemExport)
                 {
-                    using (PointerMemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, systemExport.Length))
+                    using (
+                        PointerMemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                            ptr,
+                            systemExport.Length
+                        )
+                    )
                     {
                         // Apple's PKCS8 export exports using PBES2, which Win7, Win8.1, and Apple all fail to
                         // understand in their PKCS12 readers, so re-encrypt using the Win7 PKCS12-PBE parameters.
@@ -135,7 +163,8 @@ namespace Internal.Cryptography.Pal
                             password,
                             manager.Memory,
                             password,
-                            UnixExportProvider.s_windowsPbe);
+                            UnixExportProvider.s_windowsPbe
+                        );
 
                         return writer.Encode();
                     }
@@ -143,12 +172,16 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        internal AppleCertificatePal? MoveToKeychain(SafeKeychainHandle keychain, SafeSecKeyRefHandle? privateKey)
+        internal AppleCertificatePal? MoveToKeychain(
+            SafeKeychainHandle keychain,
+            SafeSecKeyRefHandle? privateKey
+        )
         {
             SafeSecIdentityHandle? identity = Interop.AppleCrypto.X509MoveToKeychain(
                 _certHandle,
                 keychain,
-                privateKey);
+                privateKey
+            );
 
             if (identity != null)
             {

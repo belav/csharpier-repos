@@ -4,8 +4,10 @@ namespace System
     {
         internal static void ThrowValueArgumentOutOfRange_NeedNonNegNumException()
         {
-            throw GetArgumentOutOfRangeException(ExceptionArgument.value,
-                                                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+            throw GetArgumentOutOfRangeException(
+                ExceptionArgument.value,
+                ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+            );
         }
     }
 }

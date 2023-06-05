@@ -42,7 +42,12 @@ public static class HtmlHelperEditorExtensions
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.Editor(expression, templateName: null, htmlFieldName: null, additionalViewData: null);
+        return htmlHelper.Editor(
+            expression,
+            templateName: null,
+            htmlFieldName: null,
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -78,7 +83,8 @@ public static class HtmlHelperEditorExtensions
     public static IHtmlContent Editor(
         this IHtmlHelper htmlHelper,
         string expression,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -89,7 +95,8 @@ public static class HtmlHelperEditorExtensions
             expression,
             templateName: null,
             htmlFieldName: null,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 
     /// <summary>
@@ -118,14 +125,23 @@ public static class HtmlHelperEditorExtensions
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
-    public static IHtmlContent Editor(this IHtmlHelper htmlHelper, string expression, string templateName)
+    public static IHtmlContent Editor(
+        this IHtmlHelper htmlHelper,
+        string expression,
+        string templateName
+    )
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.Editor(expression, templateName, htmlFieldName: null, additionalViewData: null);
+        return htmlHelper.Editor(
+            expression,
+            templateName,
+            htmlFieldName: null,
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -163,7 +179,8 @@ public static class HtmlHelperEditorExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         string templateName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -174,7 +191,8 @@ public static class HtmlHelperEditorExtensions
             expression,
             templateName,
             htmlFieldName: null,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 
     /// <summary>
@@ -211,7 +229,8 @@ public static class HtmlHelperEditorExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         string templateName,
-        string htmlFieldName)
+        string htmlFieldName
+    )
     {
         if (htmlHelper == null)
         {
@@ -242,7 +261,8 @@ public static class HtmlHelperEditorExtensions
     /// </remarks>
     public static IHtmlContent EditorFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -254,7 +274,12 @@ public static class HtmlHelperEditorExtensions
             throw new ArgumentNullException(nameof(expression));
         }
 
-        return htmlHelper.EditorFor(expression, templateName: null, htmlFieldName: null, additionalViewData: null);
+        return htmlHelper.EditorFor(
+            expression,
+            templateName: null,
+            htmlFieldName: null,
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -285,7 +310,8 @@ public static class HtmlHelperEditorExtensions
     public static IHtmlContent EditorFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -301,7 +327,8 @@ public static class HtmlHelperEditorExtensions
             expression,
             templateName: null,
             htmlFieldName: null,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 
     /// <summary>
@@ -328,7 +355,8 @@ public static class HtmlHelperEditorExtensions
     public static IHtmlContent EditorFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        string templateName)
+        string templateName
+    )
     {
         if (htmlHelper == null)
         {
@@ -340,7 +368,12 @@ public static class HtmlHelperEditorExtensions
             throw new ArgumentNullException(nameof(expression));
         }
 
-        return htmlHelper.EditorFor(expression, templateName, htmlFieldName: null, additionalViewData: null);
+        return htmlHelper.EditorFor(
+            expression,
+            templateName,
+            htmlFieldName: null,
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -373,7 +406,8 @@ public static class HtmlHelperEditorExtensions
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
         string templateName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -389,7 +423,8 @@ public static class HtmlHelperEditorExtensions
             expression,
             templateName,
             htmlFieldName: null,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 
     /// <summary>
@@ -421,7 +456,8 @@ public static class HtmlHelperEditorExtensions
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
         string templateName,
-        string htmlFieldName)
+        string htmlFieldName
+    )
     {
         if (htmlHelper == null)
         {
@@ -433,7 +469,12 @@ public static class HtmlHelperEditorExtensions
             throw new ArgumentNullException(nameof(expression));
         }
 
-        return htmlHelper.EditorFor(expression, templateName, htmlFieldName, additionalViewData: null);
+        return htmlHelper.EditorFor(
+            expression,
+            templateName,
+            htmlFieldName,
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -463,7 +504,8 @@ public static class HtmlHelperEditorExtensions
             expression: null,
             templateName: null,
             htmlFieldName: null,
-            additionalViewData: null);
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -487,7 +529,10 @@ public static class HtmlHelperEditorExtensions
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
-    public static IHtmlContent EditorForModel(this IHtmlHelper htmlHelper, object additionalViewData)
+    public static IHtmlContent EditorForModel(
+        this IHtmlHelper htmlHelper,
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -498,7 +543,8 @@ public static class HtmlHelperEditorExtensions
             expression: null,
             templateName: null,
             htmlFieldName: null,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 
     /// <summary>
@@ -529,7 +575,8 @@ public static class HtmlHelperEditorExtensions
             expression: null,
             templateName: templateName,
             htmlFieldName: null,
-            additionalViewData: null);
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -558,7 +605,8 @@ public static class HtmlHelperEditorExtensions
     public static IHtmlContent EditorForModel(
         this IHtmlHelper htmlHelper,
         string templateName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -569,7 +617,8 @@ public static class HtmlHelperEditorExtensions
             expression: null,
             templateName: templateName,
             htmlFieldName: null,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 
     /// <summary>
@@ -597,7 +646,8 @@ public static class HtmlHelperEditorExtensions
     public static IHtmlContent EditorForModel(
         this IHtmlHelper htmlHelper,
         string templateName,
-        string htmlFieldName)
+        string htmlFieldName
+    )
     {
         if (htmlHelper == null)
         {
@@ -608,7 +658,8 @@ public static class HtmlHelperEditorExtensions
             expression: null,
             templateName: templateName,
             htmlFieldName: htmlFieldName,
-            additionalViewData: null);
+            additionalViewData: null
+        );
     }
 
     /// <summary>
@@ -642,7 +693,8 @@ public static class HtmlHelperEditorExtensions
         this IHtmlHelper htmlHelper,
         string templateName,
         string htmlFieldName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (htmlHelper == null)
         {
@@ -653,6 +705,7 @@ public static class HtmlHelperEditorExtensions
             expression: null,
             templateName: templateName,
             htmlFieldName: htmlFieldName,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
     }
 }

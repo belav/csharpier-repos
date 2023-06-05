@@ -20,23 +20,24 @@ public static class CosmosPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>Returns the property name that the property is mapped to when targeting Cosmos.</returns>
-    public static string GetJsonPropertyName(this IReadOnlyProperty property)
-        => (string?)property[CosmosAnnotationNames.PropertyName]
-            ?? GetDefaultJsonPropertyName(property);
+    public static string GetJsonPropertyName(this IReadOnlyProperty property) =>
+        (string?)property[CosmosAnnotationNames.PropertyName]
+        ?? GetDefaultJsonPropertyName(property);
 
     private static string GetDefaultJsonPropertyName(IReadOnlyProperty property)
     {
         var entityType = property.DeclaringEntityType;
         var ownership = entityType.FindOwnership();
 
-        if (ownership != null
-            && !entityType.IsDocumentRoot())
+        if (ownership != null && !entityType.IsDocumentRoot())
         {
             var pk = property.FindContainingPrimaryKey();
-            if (pk != null
+            if (
+                pk != null
                 && (property.ClrType == typeof(int) || ownership.Properties.Contains(property))
                 && pk.Properties.Count == ownership.Properties.Count + (ownership.IsUnique ? 0 : 1)
-                && ownership.Properties.All(fkProperty => pk.Properties.Contains(fkProperty)))
+                && ownership.Properties.All(fkProperty => pk.Properties.Contains(fkProperty))
+            )
             {
                 return "";
             }
@@ -50,10 +51,8 @@ public static class CosmosPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="name">The name to set.</param>
-    public static void SetJsonPropertyName(this IMutableProperty property, string? name)
-        => property.SetOrRemoveAnnotation(
-            CosmosAnnotationNames.PropertyName,
-            name);
+    public static void SetJsonPropertyName(this IMutableProperty property, string? name) =>
+        property.SetOrRemoveAnnotation(CosmosAnnotationNames.PropertyName, name);
 
     /// <summary>
     ///     Sets the property name that the property is mapped to when targeting Cosmos.
@@ -65,11 +64,12 @@ public static class CosmosPropertyExtensions
     public static string? SetJsonPropertyName(
         this IConventionProperty property,
         string? name,
-        bool fromDataAnnotation = false)
-        => (string?)property.SetOrRemoveAnnotation(
-            CosmosAnnotationNames.PropertyName,
-            name,
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            property
+                .SetOrRemoveAnnotation(CosmosAnnotationNames.PropertyName, name, fromDataAnnotation)
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> the property name that the property is mapped to when targeting Cosmos.
@@ -78,6 +78,7 @@ public static class CosmosPropertyExtensions
     /// <returns>
     ///     The <see cref="ConfigurationSource" /> the property name that the property is mapped to when targeting Cosmos.
     /// </returns>
-    public static ConfigurationSource? GetJsonPropertyNameConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(CosmosAnnotationNames.PropertyName)?.GetConfigurationSource();
+    public static ConfigurationSource? GetJsonPropertyNameConfigurationSource(
+        this IConventionProperty property
+    ) => property.FindAnnotation(CosmosAnnotationNames.PropertyName)?.GetConfigurationSource();
 }

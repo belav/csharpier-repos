@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,14 +29,17 @@ namespace Castle.Core.Resource.Tests
         public void Init()
         {
             var currentDirectory = TestContext.CurrentContext.TestDirectory;
-            basePath = Path.Combine(currentDirectory, "Core.Tests" + Path.DirectorySeparatorChar + "Resource");
+            basePath = Path.Combine(
+                currentDirectory,
+                "Core.Tests" + Path.DirectorySeparatorChar + "Resource"
+            );
         }
 
         [Test]
         public void Accept()
         {
-            Assert.IsTrue( resFactory.Accept( new CustomUri("file://something") ) );
-            Assert.IsFalse( resFactory.Accept( new CustomUri("http://www.castleproject.org") ) );
+            Assert.IsTrue(resFactory.Accept(new CustomUri("file://something")));
+            Assert.IsFalse(resFactory.Accept(new CustomUri("http://www.castleproject.org")));
         }
 
         [Test]
@@ -58,7 +61,7 @@ namespace Castle.Core.Resource.Tests
         [Test]
         public void CreateWithRelativePath()
         {
-            IResource resource = resFactory.Create( new CustomUri(basePath + "/file1.txt") );
+            IResource resource = resFactory.Create(new CustomUri(basePath + "/file1.txt"));
 
             Assert.IsNotNull(resource);
             string line = resource.GetStreamReader().ReadLine();
@@ -70,7 +73,7 @@ namespace Castle.Core.Resource.Tests
         {
             CustomUri uri = new CustomUri("file://file1.txt");
 
-            IResource resource = resFactory.Create( uri, basePath );
+            IResource resource = resFactory.Create(uri, basePath);
 
             Assert.IsNotNull(resource);
             string line = resource.GetStreamReader().ReadLine();
@@ -80,7 +83,9 @@ namespace Castle.Core.Resource.Tests
         [Test]
         public void NonExistingResource()
         {
-            IResource resource = resFactory.Create(new CustomUri(basePath + "/Something/file1.txt"));
+            IResource resource = resFactory.Create(
+                new CustomUri(basePath + "/Something/file1.txt")
+            );
 
             Assert.Throws<ResourceException>(() => resource.GetStreamReader());
         }

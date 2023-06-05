@@ -19,10 +19,11 @@ namespace System.ComponentModel.Composition.Factories
             private readonly Func<IEnumerable<ExportDefinition>> _exportsCreator;
 
             public DerivedComposablePartDefinition(
-                            IDictionary<string, object> metadata,
-                            Func<ComposablePart> partCreator,
-                            Func<IEnumerable<ImportDefinition>> importsCreator,
-                            Func<IEnumerable<ExportDefinition>> exportsCreator)
+                IDictionary<string, object> metadata,
+                Func<ComposablePart> partCreator,
+                Func<IEnumerable<ImportDefinition>> importsCreator,
+                Func<IEnumerable<ExportDefinition>> exportsCreator
+            )
             {
                 this._metadata = metadata.AsReadOnly();
                 this._partCreator = partCreator;
@@ -41,7 +42,8 @@ namespace System.ComponentModel.Composition.Factories
                 {
                     if (this._exportDefinitions == null)
                     {
-                        this._exportDefinitions = this._exportsCreator.Invoke() ?? Enumerable.Empty<ExportDefinition>();
+                        this._exportDefinitions =
+                            this._exportsCreator.Invoke() ?? Enumerable.Empty<ExportDefinition>();
                     }
                     return this._exportDefinitions;
                 }
@@ -53,7 +55,8 @@ namespace System.ComponentModel.Composition.Factories
                 {
                     if (this._importDefinitions == null)
                     {
-                        this._importDefinitions = this._importsCreator.Invoke() ?? Enumerable.Empty<ImportDefinition>();
+                        this._importDefinitions =
+                            this._importsCreator.Invoke() ?? Enumerable.Empty<ImportDefinition>();
                     }
                     return this._importDefinitions;
                 }

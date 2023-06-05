@@ -19,12 +19,12 @@ namespace System.Web.UI.WebControls
     {
         private readonly ObjectContext _context = null;
 
-        internal EntityDataSourceContextDisposingEventArgs(ObjectContext instance) 
+        internal EntityDataSourceContextDisposingEventArgs(ObjectContext instance)
         {
             _context = instance;
         }
 
-        public ObjectContext Context 
+        public ObjectContext Context
         {
             get { return _context; }
         }

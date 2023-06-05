@@ -25,41 +25,41 @@ namespace System.ServiceModel.Channels
         RemoteCertificateValidationCallback remoteCertificateValidationCallback;
         X509CertificateValidator sslCertificateValidator;
 
-        internal HttpsChannelFactory(HttpsTransportBindingElement httpsBindingElement, BindingContext context)
+        internal HttpsChannelFactory(
+            HttpsTransportBindingElement httpsBindingElement,
+            BindingContext context
+        )
             : base(httpsBindingElement, context)
         {
             this.requireClientCertificate = httpsBindingElement.RequireClientCertificate;
             this.channelBindingProvider = new ChannelBindingProviderHelper();
             ClientCredentials credentials = context.BindingParameters.Find<ClientCredentials>();
-            if (credentials != null && credentials.ServiceCertificate.SslCertificateAuthentication != null)
+            if (
+                credentials != null
+                && credentials.ServiceCertificate.SslCertificateAuthentication != null
+            )
             {
-                this.sslCertificateValidator = credentials.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator();
-                this.remoteCertificateValidationCallback = new RemoteCertificateValidationCallback(RemoteCertificateValidationCallback);
+                this.sslCertificateValidator =
+                    credentials.ServiceCertificate.SslCertificateAuthentication.GetCertificateValidator();
+                this.remoteCertificateValidationCallback = new RemoteCertificateValidationCallback(
+                    RemoteCertificateValidationCallback
+                );
             }
         }
 
         public override string Scheme
         {
-            get
-            {
-                return Uri.UriSchemeHttps;
-            }
+            get { return Uri.UriSchemeHttps; }
         }
 
         public bool RequireClientCertificate
         {
-            get
-            {
-                return this.requireClientCertificate;
-            }
+            get { return this.requireClientCertificate; }
         }
 
         public override bool IsChannelBindingSupportEnabled
         {
-            get
-            {
-                return this.channelBindingProvider.IsChannelBindingSupportEnabled;
-            }
+            get { return this.channelBindingProvider.IsChannelBindingSupportEnabled; }
         }
 
         public override T GetProperty<T>()
@@ -72,8 +72,10 @@ namespace System.ServiceModel.Channels
             return base.GetProperty<T>();
         }
 
-        internal override SecurityMessageProperty CreateReplySecurityProperty(HttpWebRequest request,
-            HttpWebResponse response)
+        internal override SecurityMessageProperty CreateReplySecurityProperty(
+            HttpWebRequest request,
+            HttpWebResponse response
+        )
         {
             SecurityMessageProperty result = null;
             X509Certificate certificate = request.ServicePoint.Certificate;
@@ -81,9 +83,13 @@ namespace System.ServiceModel.Channels
             {
                 X509Certificate2 certificateEx = new X509Certificate2(certificate);
                 SecurityToken token = new X509SecurityToken(certificateEx, false);
-                ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = SecurityUtils.NonValidatingX509Authenticator.ValidateToken(token);
+                ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                    SecurityUtils.NonValidatingX509Authenticator.ValidateToken(token);
                 result = new SecurityMessageProperty();
-                result.TransportToken = new SecurityTokenSpecification(token, authorizationPolicies);
+                result.TransportToken = new SecurityTokenSpecification(
+                    token,
+                    authorizationPolicies
+                );
                 result.ServiceSecurityContext = new ServiceSecurityContext(authorizationPolicies);
             }
             else
@@ -93,7 +99,10 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        protected override void ValidateCreateChannelParameters(EndpointAddress remoteAddress, Uri via)
+        protected override void ValidateCreateChannelParameters(
+            EndpointAddress remoteAddress,
+            Uri via
+        )
         {
             if (remoteAddress.Identity != null)
             {
@@ -103,22 +112,29 @@ namespace System.ServiceModel.Channels
                 {
                     if (certificateIdentity.Certificates.Count > 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("remoteAddress", SR.GetString(
-                            SR.HttpsIdentityMultipleCerts, remoteAddress.Uri));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "remoteAddress",
+                            SR.GetString(SR.HttpsIdentityMultipleCerts, remoteAddress.Uri)
+                        );
                     }
                 }
 
                 EndpointIdentity identity = remoteAddress.Identity;
-                bool validIdentity = (certificateIdentity != null)
+                bool validIdentity =
+                    (certificateIdentity != null)
                     || ClaimTypes.Spn.Equals(identity.IdentityClaim.ClaimType)
                     || ClaimTypes.Upn.Equals(identity.IdentityClaim.ClaimType)
                     || ClaimTypes.Dns.Equals(identity.IdentityClaim.ClaimType);
 
-                if (!HttpChannelFactory<TChannel>.IsWindowsAuth(this.AuthenticationScheme)
-                    && !validIdentity)
+                if (
+                    !HttpChannelFactory<TChannel>.IsWindowsAuth(this.AuthenticationScheme)
+                    && !validIdentity
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("remoteAddress", SR.GetString(
-                        SR.HttpsExplicitIdentity));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "remoteAddress",
+                        SR.GetString(SR.HttpsExplicitIdentity)
+                    );
                 }
             }
             base.ValidateCreateChannelParameters(remoteAddress, via);
@@ -131,11 +147,26 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) == typeof(IRequestChannel))
             {
-                return (TChannel)(object)new HttpsRequestChannel((HttpsChannelFactory<IRequestChannel>)(object)this, address, via, ManualAddressing);
+                return (TChannel)
+                    (object)
+                        new HttpsRequestChannel(
+                            (HttpsChannelFactory<IRequestChannel>)(object)this,
+                            address,
+                            via,
+                            ManualAddressing
+                        );
             }
             else
             {
-                return (TChannel)(object)new ClientWebSocketTransportDuplexSessionChannel((HttpChannelFactory<IDuplexSessionChannel>)(object)this, this.ClientWebSocketFactory, address, via, this.WebSocketBufferPool);
+                return (TChannel)
+                    (object)
+                        new ClientWebSocketTransportDuplexSessionChannel(
+                            (HttpChannelFactory<IDuplexSessionChannel>)(object)this,
+                            this.ClientWebSocketFactory,
+                            address,
+                            via,
+                            this.WebSocketBufferPool
+                        );
             }
         }
 
@@ -144,18 +175,28 @@ namespace System.ServiceModel.Channels
             return this.requireClientCertificate || base.IsSecurityTokenManagerRequired();
         }
 
-        protected override string OnGetConnectionGroupPrefix(HttpWebRequest httpWebRequest, SecurityTokenContainer clientCertificateToken)
+        protected override string OnGetConnectionGroupPrefix(
+            HttpWebRequest httpWebRequest,
+            SecurityTokenContainer clientCertificateToken
+        )
         {
             System.Text.StringBuilder inputStringBuilder = new System.Text.StringBuilder();
             string delimiter = "\0"; // nonprintable characters are invalid for SSPI Domain/UserName/Password
 
             if (this.RequireClientCertificate)
             {
-                HttpsChannelFactory<TChannel>.SetCertificate(httpWebRequest, clientCertificateToken);
+                HttpsChannelFactory<TChannel>.SetCertificate(
+                    httpWebRequest,
+                    clientCertificateToken
+                );
                 X509CertificateCollection certificateCollection = httpWebRequest.ClientCertificates;
                 for (int i = 0; i < certificateCollection.Count; i++)
                 {
-                    inputStringBuilder.AppendFormat("{0}{1}", certificateCollection[i].GetCertHashString(), delimiter);
+                    inputStringBuilder.AppendFormat(
+                        "{0}{1}",
+                        certificateCollection[i].GetCertHashString(),
+                        delimiter
+                    );
                 }
             }
 
@@ -166,7 +207,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.requireClientCertificate && this.SecurityTokenManager == null)
             {
-                throw Fx.AssertAndThrow("HttpsChannelFactory: SecurityTokenManager is null on open.");
+                throw Fx.AssertAndThrow(
+                    "HttpsChannelFactory: SecurityTokenManager is null on open."
+                );
             }
         }
 
@@ -182,19 +225,33 @@ namespace System.ServiceModel.Channels
             OnOpenCore();
         }
 
-        internal SecurityTokenProvider CreateAndOpenCertificateTokenProvider(EndpointAddress target, Uri via, ChannelParameterCollection channelParameters, TimeSpan timeout)
+        internal SecurityTokenProvider CreateAndOpenCertificateTokenProvider(
+            EndpointAddress target,
+            Uri via,
+            ChannelParameterCollection channelParameters,
+            TimeSpan timeout
+        )
         {
             if (!this.RequireClientCertificate)
             {
                 return null;
             }
-            SecurityTokenProvider certificateProvider = TransportSecurityHelpers.GetCertificateTokenProvider(
-                this.SecurityTokenManager, target, via, this.Scheme, channelParameters);
+            SecurityTokenProvider certificateProvider =
+                TransportSecurityHelpers.GetCertificateTokenProvider(
+                    this.SecurityTokenManager,
+                    target,
+                    via,
+                    this.Scheme,
+                    channelParameters
+                );
             SecurityUtils.OpenTokenProviderIfRequired(certificateProvider, timeout);
             return certificateProvider;
         }
 
-        static void SetCertificate(HttpWebRequest request, SecurityTokenContainer clientCertificateToken)
+        static void SetCertificate(
+            HttpWebRequest request,
+            SecurityTokenContainer clientCertificateToken
+        )
         {
             if (clientCertificateToken != null)
             {
@@ -203,15 +260,25 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal SecurityTokenContainer GetCertificateSecurityToken(SecurityTokenProvider certificateProvider,
-            EndpointAddress to, Uri via, ChannelParameterCollection channelParameters, ref TimeoutHelper timeoutHelper)
+        internal SecurityTokenContainer GetCertificateSecurityToken(
+            SecurityTokenProvider certificateProvider,
+            EndpointAddress to,
+            Uri via,
+            ChannelParameterCollection channelParameters,
+            ref TimeoutHelper timeoutHelper
+        )
         {
             SecurityToken token = null;
             SecurityTokenContainer tokenContainer = null;
             SecurityTokenProvider webRequestCertificateProvider;
             if (ManualAddressing && this.RequireClientCertificate)
             {
-                webRequestCertificateProvider = CreateAndOpenCertificateTokenProvider(to, via, channelParameters, timeoutHelper.RemainingTime());
+                webRequestCertificateProvider = CreateAndOpenCertificateTokenProvider(
+                    to,
+                    via,
+                    channelParameters,
+                    timeoutHelper.RemainingTime()
+                );
             }
             else
             {
@@ -236,12 +303,16 @@ namespace System.ServiceModel.Channels
             return tokenContainer;
         }
 
-        void AddServerCertMappingOrSetRemoteCertificateValidationCallback(HttpWebRequest request, EndpointAddress to)
+        void AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+            HttpWebRequest request,
+            EndpointAddress to
+        )
         {
             Fx.Assert(request != null, "request should not be null.");
             if (this.sslCertificateValidator != null)
             {
-                request.ServerCertificateValidationCallback = this.remoteCertificateValidationCallback;
+                request.ServerCertificateValidationCallback =
+                    this.remoteCertificateValidationCallback;
             }
             else
             {
@@ -249,13 +320,23 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic,
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
             "Reliability104:CaughtAndHandledExceptionsRule",
-            Justification = "The exception being thrown out comes from user code. Any non-fatal exception should be handled and translated into validation failure(return false).")]
-        bool RemoteCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            Justification = "The exception being thrown out comes from user code. Any non-fatal exception should be handled and translated into validation failure(return false)."
+        )]
+        bool RemoteCertificateValidationCallback(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             Fx.Assert(sender is HttpWebRequest, "sender should be HttpWebRequest");
-            Fx.Assert(this.sslCertificateValidator != null, "sslCertificateAuthentidation should not be null.");
+            Fx.Assert(
+                this.sslCertificateValidator != null,
+                "sslCertificateAuthentidation should not be null."
+            );
 
             try
             {
@@ -284,7 +365,12 @@ namespace System.ServiceModel.Channels
             SecurityTokenProvider certificateProvider;
             HttpsChannelFactory<IRequestChannel> factory;
 
-            public HttpsRequestChannel(HttpsChannelFactory<IRequestChannel> factory, EndpointAddress to, Uri via, bool manualAddressing)
+            public HttpsRequestChannel(
+                HttpsChannelFactory<IRequestChannel> factory,
+                EndpointAddress to,
+                Uri via,
+                bool manualAddressing
+            )
                 : base(factory, to, via, manualAddressing)
             {
                 this.factory = factory;
@@ -299,7 +385,12 @@ namespace System.ServiceModel.Channels
             {
                 if (!ManualAddressing && this.Factory.RequireClientCertificate)
                 {
-                    this.certificateProvider = Factory.CreateAndOpenCertificateTokenProvider(this.RemoteAddress, this.Via, this.ChannelParameters, timeout);
+                    this.certificateProvider = Factory.CreateAndOpenCertificateTokenProvider(
+                        this.RemoteAddress,
+                        this.Via,
+                        this.ChannelParameters,
+                        timeout
+                    );
                 }
             }
 
@@ -319,7 +410,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 CreateAndOpenTokenProvider(timeoutHelper.RemainingTime());
@@ -339,7 +434,11 @@ namespace System.ServiceModel.Channels
                 base.OnAbort();
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 CloseTokenProvider(timeoutHelper.RemainingTime());
@@ -353,9 +452,23 @@ namespace System.ServiceModel.Channels
                 base.OnClose(timeoutHelper.RemainingTime());
             }
 
-            public IAsyncResult BeginBaseGetWebRequest(EndpointAddress to, Uri via, SecurityTokenContainer clientCertificateToken, ref TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+            public IAsyncResult BeginBaseGetWebRequest(
+                EndpointAddress to,
+                Uri via,
+                SecurityTokenContainer clientCertificateToken,
+                ref TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return base.BeginGetWebRequest(to, via, clientCertificateToken, ref timeoutHelper, callback, state);
+                return base.BeginGetWebRequest(
+                    to,
+                    via,
+                    clientCertificateToken,
+                    ref timeoutHelper,
+                    callback,
+                    state
+                );
             }
 
             public HttpWebRequest EndBaseGetWebRequest(IAsyncResult result)
@@ -363,17 +476,48 @@ namespace System.ServiceModel.Channels
                 return base.EndGetWebRequest(result);
             }
 
-            public override HttpWebRequest GetWebRequest(EndpointAddress to, Uri via, ref TimeoutHelper timeoutHelper)
+            public override HttpWebRequest GetWebRequest(
+                EndpointAddress to,
+                Uri via,
+                ref TimeoutHelper timeoutHelper
+            )
             {
-                SecurityTokenContainer clientCertificateToken = Factory.GetCertificateSecurityToken(this.certificateProvider, to, via, this.ChannelParameters, ref timeoutHelper);
-                HttpWebRequest request = base.GetWebRequest(to, via, clientCertificateToken, ref timeoutHelper);
-                this.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(request, to);
+                SecurityTokenContainer clientCertificateToken = Factory.GetCertificateSecurityToken(
+                    this.certificateProvider,
+                    to,
+                    via,
+                    this.ChannelParameters,
+                    ref timeoutHelper
+                );
+                HttpWebRequest request = base.GetWebRequest(
+                    to,
+                    via,
+                    clientCertificateToken,
+                    ref timeoutHelper
+                );
+                this.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+                    request,
+                    to
+                );
                 return request;
             }
 
-            public override IAsyncResult BeginGetWebRequest(EndpointAddress to, Uri via, ref TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+            public override IAsyncResult BeginGetWebRequest(
+                EndpointAddress to,
+                Uri via,
+                ref TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new GetWebRequestAsyncResult(this, to, via, ref timeoutHelper, callback, state);
+                return new GetWebRequestAsyncResult(
+                    this,
+                    to,
+                    via,
+                    ref timeoutHelper,
+                    callback,
+                    state
+                );
             }
 
             public override HttpWebRequest EndGetWebRequest(IAsyncResult result)
@@ -406,12 +550,19 @@ namespace System.ServiceModel.Channels
                 Uri via;
                 TimeoutHelper timeoutHelper;
                 SecurityTokenContainer tokenContainer;
-                static AsyncCallback onGetBaseWebRequestCallback = Fx.ThunkCallback(new AsyncCallback(OnGetBaseWebRequestCallback));
+                static AsyncCallback onGetBaseWebRequestCallback = Fx.ThunkCallback(
+                    new AsyncCallback(OnGetBaseWebRequestCallback)
+                );
                 static AsyncCallback onGetTokenCallback;
 
-                public GetWebRequestAsyncResult(HttpsRequestChannel httpsChannel, EndpointAddress to, Uri via,
+                public GetWebRequestAsyncResult(
+                    HttpsRequestChannel httpsChannel,
+                    EndpointAddress to,
+                    Uri via,
                     ref TimeoutHelper timeoutHelper,
-                    AsyncCallback callback, object state)
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.httpsChannel = httpsChannel;
@@ -423,7 +574,12 @@ namespace System.ServiceModel.Channels
                     if (this.factory.ManualAddressing && this.factory.RequireClientCertificate)
                     {
                         this.certificateProvider =
-                            this.factory.CreateAndOpenCertificateTokenProvider(to, via, httpsChannel.ChannelParameters, timeoutHelper.RemainingTime());
+                            this.factory.CreateAndOpenCertificateTokenProvider(
+                                to,
+                                via,
+                                httpsChannel.ChannelParameters,
+                                timeoutHelper.RemainingTime()
+                            );
                     }
 
                     if (!GetToken())
@@ -441,7 +597,14 @@ namespace System.ServiceModel.Channels
 
                 bool GetWebRequest()
                 {
-                    IAsyncResult result = this.httpsChannel.BeginBaseGetWebRequest(to, via, tokenContainer, ref timeoutHelper, onGetBaseWebRequestCallback, this);
+                    IAsyncResult result = this.httpsChannel.BeginBaseGetWebRequest(
+                        to,
+                        via,
+                        tokenContainer,
+                        ref timeoutHelper,
+                        onGetBaseWebRequestCallback,
+                        this
+                    );
 
                     if (!result.CompletedSynchronously)
                     {
@@ -449,7 +612,10 @@ namespace System.ServiceModel.Channels
                     }
 
                     this.request = this.httpsChannel.EndBaseGetWebRequest(result);
-                    this.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(this.request, this.to);
+                    this.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+                        this.request,
+                        this.to
+                    );
                     return true;
                 }
 
@@ -459,11 +625,16 @@ namespace System.ServiceModel.Channels
                     {
                         if (onGetTokenCallback == null)
                         {
-                            onGetTokenCallback = Fx.ThunkCallback(new AsyncCallback(OnGetTokenCallback));
+                            onGetTokenCallback = Fx.ThunkCallback(
+                                new AsyncCallback(OnGetTokenCallback)
+                            );
                         }
 
                         IAsyncResult result = this.certificateProvider.BeginGetToken(
-                            timeoutHelper.RemainingTime(), onGetTokenCallback, this);
+                            timeoutHelper.RemainingTime(),
+                            onGetTokenCallback,
+                            this
+                        );
 
                         if (!result.CompletedSynchronously)
                         {
@@ -486,7 +657,10 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         thisPtr.request = thisPtr.httpsChannel.EndBaseGetWebRequest(result);
-                        thisPtr.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(thisPtr.request, thisPtr.to);
+                        thisPtr.factory.AddServerCertMappingOrSetRemoteCertificateValidationCallback(
+                            thisPtr.request,
+                            thisPtr.to
+                        );
                     }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
                     catch (Exception e)
@@ -550,7 +724,9 @@ namespace System.ServiceModel.Channels
 
                 public static HttpWebRequest End(IAsyncResult result)
                 {
-                    GetWebRequestAsyncResult thisPtr = AsyncResult.End<GetWebRequestAsyncResult>(result);
+                    GetWebRequestAsyncResult thisPtr = AsyncResult.End<GetWebRequestAsyncResult>(
+                        result
+                    );
                     return thisPtr.request;
                 }
             }

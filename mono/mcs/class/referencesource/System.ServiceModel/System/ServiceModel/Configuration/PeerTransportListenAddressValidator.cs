@@ -11,9 +11,7 @@ namespace System.ServiceModel.Configuration
 
     internal class PeerTransportListenAddressValidator : ConfigurationValidatorBase
     {
-        public PeerTransportListenAddressValidator()
-        {
-        }
+        public PeerTransportListenAddressValidator() { }
 
         public override bool CanValidate(Type type)
         {

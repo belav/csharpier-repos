@@ -16,9 +16,7 @@ namespace System.ServiceModel
     [MarkupExtensionReturnType(typeof(EndpointIdentity))]
     public class EndpointIdentityExtension : MarkupExtension
     {
-        public EndpointIdentityExtension()
-        {
-        }
+        public EndpointIdentityExtension() { }
 
         public EndpointIdentityExtension(EndpointIdentity identity)
         {
@@ -31,14 +29,11 @@ namespace System.ServiceModel
             this.ClaimResource = identity.IdentityClaim.Resource;
         }
 
-        public string ClaimType
-        { get; set; }
+        public string ClaimType { get; set; }
 
-        public string ClaimRight
-        { get; set; }
+        public string ClaimRight { get; set; }
 
-        public object ClaimResource
-        { get; set; }
+        public object ClaimResource { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

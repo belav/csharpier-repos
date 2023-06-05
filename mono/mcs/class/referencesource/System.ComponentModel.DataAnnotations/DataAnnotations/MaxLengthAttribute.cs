@@ -2,13 +2,22 @@ using System.ComponentModel.DataAnnotations.Resources;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Specifies the maximum length of array/string data allowed in a property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want users to be able to extend this class")]
-    public class MaxLengthAttribute : ValidationAttribute {
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want users to be able to extend this class"
+    )]
+    public class MaxLengthAttribute : ValidationAttribute
+    {
         private const int MaxAllowableLength = -1;
 
         /// <summary>
@@ -24,7 +33,8 @@ namespace System.ComponentModel.DataAnnotations {
         /// Value must be greater than zero.
         /// </param>
         public MaxLengthAttribute(int length)
-            : base(() => DefaultErrorMessageString) {
+            : base(() => DefaultErrorMessageString)
+        {
             Length = length;
         }
 
@@ -33,11 +43,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// The maximum allowable length supported by the database will be used.
         /// </summary>
         public MaxLengthAttribute()
-            : base(() => DefaultErrorMessageString) {
+            : base(() => DefaultErrorMessageString)
+        {
             Length = MaxAllowableLength;
         }
 
-        private static string DefaultErrorMessageString {
+        private static string DefaultErrorMessageString
+        {
             get { return DataAnnotationsResources.MaxLengthAttribute_ValidationError; }
         }
 
@@ -45,30 +57,40 @@ namespace System.ComponentModel.DataAnnotations {
         /// Determines whether a specified object is valid. (Overrides <see cref = "ValidationAttribute.IsValid(object)" />)
         /// </summary>
         /// <remarks>
-        /// This method returns <c>true</c> if the <paramref name = "value" /> is null.  
+        /// This method returns <c>true</c> if the <paramref name = "value" /> is null.
         /// It is assumed the <see cref = "RequiredAttribute" /> is used if the value may not be null.
         /// </remarks>
         /// <param name = "value">The object to validate.</param>
         /// <returns><c>true</c> if the value is null or less than or equal to the specified maximum length, otherwise <c>false</c></returns>
         /// <exception cref = "InvalidOperationException">Length is zero or less than negative one.</exception>
-        public override bool IsValid(object value) {
+        public override bool IsValid(object value)
+        {
             // Check the lengths for legality
             EnsureLegalLengths();
 
             var length = 0;
             // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not null.
-            if (value == null) {
+            if (value == null)
+            {
                 return true;
             }
 
-            if (value is string str) {
+            if (value is string str)
+            {
                 length = str.Length;
             }
-            else if (CountPropertyHelper.TryGetCount(value, out var count)) {
+            else if (CountPropertyHelper.TryGetCount(value, out var count))
+            {
                 length = count;
             }
-            else {
-                throw new InvalidCastException(String.Format(DataAnnotationsResources.LengthAttribute_InvalidValueType, value.GetType()));
+            else
+            {
+                throw new InvalidCastException(
+                    String.Format(
+                        DataAnnotationsResources.LengthAttribute_InvalidValueType,
+                        value.GetType()
+                    )
+                );
             }
 
             return MaxAllowableLength == Length || length <= Length;
@@ -79,7 +101,8 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <param name = "name">The name to include in the formatted string.</param>
         /// <returns>A localized string to describe the maximum acceptable length.</returns>
-        public override string FormatErrorMessage(string name) {
+        public override string FormatErrorMessage(string name)
+        {
             // An error occurred, so we know the value is greater than the maximum if it was specified
             return string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, Length);
         }
@@ -88,9 +111,16 @@ namespace System.ComponentModel.DataAnnotations {
         /// Checks that Length has a legal value.
         /// </summary>
         /// <exception cref="InvalidOperationException">Length is zero or less than negative one.</exception>
-        private void EnsureLegalLengths() {
-            if (Length == 0 || Length < -1) {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DataAnnotationsResources.MaxLengthAttribute_InvalidMaxLength));
+        private void EnsureLegalLengths()
+        {
+            if (Length == 0 || Length < -1)
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DataAnnotationsResources.MaxLengthAttribute_InvalidMaxLength
+                    )
+                );
             }
         }
     }

@@ -7,5 +7,6 @@ internal interface IServerComponentDeserializer
 {
     bool TryDeserializeComponentDescriptorCollection(
         string serializedComponentRecords,
-        out List<ComponentDescriptor> descriptors);
+        out List<ComponentDescriptor> descriptors
+    );
 }

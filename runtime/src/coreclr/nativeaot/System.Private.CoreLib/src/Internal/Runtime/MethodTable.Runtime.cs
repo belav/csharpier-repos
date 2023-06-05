@@ -14,7 +14,6 @@ namespace Internal.Runtime
 #if !INPLACE_RUNTIME
         internal MethodTable* GetArrayEEType()
         {
-
             return EETypePtr.EETypePtrOf<Array>().ToPointer();
         }
 #endif

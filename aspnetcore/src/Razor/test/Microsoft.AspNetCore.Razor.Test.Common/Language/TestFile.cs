@@ -14,7 +14,8 @@ public class TestFile
     private TestFile(string resourceName, Assembly assembly)
     {
         Assembly = assembly;
-        ResourceName = Assembly.GetName().Name + "." + resourceName.Replace('/', '.').Replace('\\', '.');
+        ResourceName =
+            Assembly.GetName().Name + "." + resourceName.Replace('/', '.').Replace('\\', '.');
     }
 
     public Assembly Assembly { get; }
@@ -36,7 +37,14 @@ public class TestFile
         var stream = Assembly.GetManifestResourceStream(ResourceName);
         if (stream == null)
         {
-            Assert.True(false, string.Format(CultureInfo.InvariantCulture, "Manifest resource: {0} not found", ResourceName));
+            Assert.True(
+                false,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Manifest resource: {0} not found",
+                    ResourceName
+                )
+            );
         }
 
         return stream;

@@ -7,9 +7,9 @@ namespace System.Runtime.Diagnostics
     // Order is important here. The order must match the order of strings in src\ndp\cdf\src\WCF\EventLog\EventLog.mc
     enum EventLogCategory : ushort
     {
-        ServiceAuthorization = 1,  // reserved
-        MessageAuthentication,     // reserved
-        ObjectAccess,              // reserved
+        ServiceAuthorization = 1, // reserved
+        MessageAuthentication, // reserved
+        ObjectAccess, // reserved
         Tracing,
         WebHost,
         FailFast,
@@ -22,5 +22,4 @@ namespace System.Runtime.Diagnostics
         SharingService,
         ListenerAdapter
     }
-
 }

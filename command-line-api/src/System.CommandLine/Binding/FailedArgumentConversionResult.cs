@@ -5,13 +5,15 @@ namespace System.CommandLine.Binding
 {
     internal class FailedArgumentConversionResult : ArgumentConversionResult
     {
-        internal FailedArgumentConversionResult(
-            IArgument argument, 
-            string errorMessage) : base(argument)
+        internal FailedArgumentConversionResult(IArgument argument, string errorMessage)
+            : base(argument)
         {
             if (string.IsNullOrWhiteSpace(errorMessage))
             {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(errorMessage));
+                throw new ArgumentException(
+                    "Value cannot be null or whitespace.",
+                    nameof(errorMessage)
+                );
             }
 
             ErrorMessage = errorMessage;

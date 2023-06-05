@@ -19,7 +19,11 @@ namespace Microsoft.Win32
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
 
-        private static RegistryKey CreateSubKeyInternalCore(string subkey, RegistryKeyPermissionCheck permissionCheck, RegistryOptions registryOptions)
+        private static RegistryKey CreateSubKeyInternalCore(
+            string subkey,
+            RegistryKeyPermissionCheck permissionCheck,
+            RegistryOptions registryOptions
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
@@ -44,12 +48,20 @@ namespace Microsoft.Win32
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
 
-        private static RegistryKey OpenRemoteBaseKeyCore(RegistryHive hKey, string machineName, RegistryView view)
+        private static RegistryKey OpenRemoteBaseKeyCore(
+            RegistryHive hKey,
+            string machineName,
+            RegistryView view
+        )
         {
             throw new PlatformNotSupportedException(SR.Security_RegistryPermission); // remote stores not supported on Unix
         }
 
-        private static RegistryKey InternalOpenSubKeyCore(string name, RegistryKeyPermissionCheck permissionCheck, int rights)
+        private static RegistryKey InternalOpenSubKeyCore(
+            string name,
+            RegistryKeyPermissionCheck permissionCheck,
+            int rights
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
@@ -59,17 +71,17 @@ namespace Microsoft.Win32
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
 
-        internal static RegistryKey InternalOpenSubKeyWithoutSecurityChecksCore(string name, bool writable)
+        internal static RegistryKey InternalOpenSubKeyWithoutSecurityChecksCore(
+            string name,
+            bool writable
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }
 
         private static SafeRegistryHandle SystemKeyHandle
         {
-            get
-            {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
-            }
+            get { throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry); }
         }
 
         private static int InternalSubKeyCountCore()
@@ -93,7 +105,11 @@ namespace Microsoft.Win32
         }
 
         [return: NotNullIfNotNull(nameof(defaultValue))]
-        private static object InternalGetValueCore(string? name, object? defaultValue, bool doNotExpand)
+        private static object InternalGetValueCore(
+            string? name,
+            object? defaultValue,
+            bool doNotExpand
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_Registry);
         }

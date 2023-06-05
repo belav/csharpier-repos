@@ -16,12 +16,23 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         private readonly SyntaxAnnotation _annotation;
         private readonly Lazy<SyntaxNode?> _context;
 
-        public static async Task<InsertionPoint> CreateAsync(SemanticDocument document, SyntaxNode node, CancellationToken cancellationToken)
+        public static async Task<InsertionPoint> CreateAsync(
+            SemanticDocument document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             var root = document.Root;
             var annotation = new SyntaxAnnotation();
-            var newRoot = root.AddAnnotations(SpecializedCollections.SingletonEnumerable(Tuple.Create(node, annotation)));
-            return new InsertionPoint(await document.WithSyntaxRootAsync(newRoot, cancellationToken).ConfigureAwait(false), annotation);
+            var newRoot = root.AddAnnotations(
+                SpecializedCollections.SingletonEnumerable(Tuple.Create(node, annotation))
+            );
+            return new InsertionPoint(
+                await document
+                    .WithSyntaxRootAsync(newRoot, cancellationToken)
+                    .ConfigureAwait(false),
+                annotation
+            );
         }
 
         private InsertionPoint(SemanticDocument document, SyntaxAnnotation annotation)
@@ -36,17 +47,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         public SemanticDocument SemanticDocument { get; }
 
-        public SyntaxNode GetRoot()
-            => SemanticDocument.Root;
+        public SyntaxNode GetRoot() => SemanticDocument.Root;
 
-        public SyntaxNode? GetContext()
-            => _context.Value;
+        public SyntaxNode? GetContext() => _context.Value;
 
-        public InsertionPoint With(SemanticDocument document)
-            => new(document, _annotation);
+        public InsertionPoint With(SemanticDocument document) => new(document, _annotation);
 
-        private Lazy<SyntaxNode?> CreateLazyContextNode()
-            => new(ComputeContextNode, isThreadSafe: true);
+        private Lazy<SyntaxNode?> CreateLazyContextNode() =>
+            new(ComputeContextNode, isThreadSafe: true);
 
         private SyntaxNode? ComputeContextNode()
         {

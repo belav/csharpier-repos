@@ -9,16 +9,14 @@ namespace Internal.TypeSystem
     /// </summary>
     public sealed class BaseTypeRuntimeInterfacesAlgorithm : RuntimeInterfacesAlgorithm
     {
-        private static RuntimeInterfacesAlgorithm _singleton = new BaseTypeRuntimeInterfacesAlgorithm();
+        private static RuntimeInterfacesAlgorithm _singleton =
+            new BaseTypeRuntimeInterfacesAlgorithm();
 
         private BaseTypeRuntimeInterfacesAlgorithm() { }
 
         public static RuntimeInterfacesAlgorithm Instance
         {
-            get
-            {
-                return _singleton;
-            }
+            get { return _singleton; }
         }
 
         public override DefType[] ComputeRuntimeInterfaces(TypeDesc _type)

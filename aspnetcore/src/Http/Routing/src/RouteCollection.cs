@@ -18,8 +18,10 @@ public class RouteCollection : IRouteCollection
 {
     private readonly List<IRouter> _routes = new List<IRouter>();
     private readonly List<IRouter> _unnamedRoutes = new List<IRouter>();
-    private readonly Dictionary<string, INamedRouter> _namedRoutes =
-                                new Dictionary<string, INamedRouter>(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, INamedRouter> _namedRoutes = new Dictionary<
+        string,
+        INamedRouter
+    >(StringComparer.OrdinalIgnoreCase);
 
     private RouteOptions? _options;
 

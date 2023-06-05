@@ -19,9 +19,7 @@ namespace Microsoft.CodeAnalysis.Experiments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultExperimentationService()
-        {
-        }
+        public DefaultExperimentationService() { }
 
         public bool IsExperimentEnabled(string experimentName) => false;
     }
@@ -37,6 +35,7 @@ namespace Microsoft.CodeAnalysis.Experiments
         public const string LspTextSyncEnabled = "Roslyn.LspTextSyncEnabled";
         public const string RemoveUnusedReferences = "Roslyn.RemoveUnusedReferences";
         public const string LSPCompletion = "Roslyn.LSP.Completion";
-        public const string UnnamedSymbolCompletionDisabled = "Roslyn.UnnamedSymbolCompletionDisabled";
+        public const string UnnamedSymbolCompletionDisabled =
+            "Roslyn.UnnamedSymbolCompletionDisabled";
     }
 }

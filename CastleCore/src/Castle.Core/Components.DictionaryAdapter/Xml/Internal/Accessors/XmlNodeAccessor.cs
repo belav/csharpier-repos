@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -36,7 +36,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (name == string.Empty)
                 throw Error.InvalidLocalName();
 
-            localName    = XmlConvert.EncodeLocalName(name);
+            localName = XmlConvert.EncodeLocalName(name);
             namespaceUri = context.ChildNamespaceUri;
         }
 
@@ -67,23 +67,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(IXmlIdentity xmlName, out IXmlKnownType knownType)
         {
-            return IsMatch(xmlName)
-                    ? Try.Success(out knownType, this)
-                    : Try.Failure(out knownType);
+            return IsMatch(xmlName) ? Try.Success(out knownType, this) : Try.Failure(out knownType);
         }
 
         public bool TryGet(Type clrType, out IXmlKnownType knownType)
         {
-            return IsMatch(clrType)
-                    ? Try.Success(out knownType, this)
-                    : Try.Failure(out knownType);
+            return IsMatch(clrType) ? Try.Success(out knownType, this) : Try.Failure(out knownType);
         }
 
         protected virtual bool IsMatch(IXmlIdentity xmlIdentity)
         {
             return NameComparer.Equals(localName, xmlIdentity.Name.LocalName)
                 && IsMatchOnNamespaceUri(xmlIdentity)
-                && IsMatchOnXsiType     (xmlIdentity);
+                && IsMatchOnXsiType(xmlIdentity);
         }
 
         private bool IsMatchOnNamespaceUri(IXmlIdentity xmlIdentity)
@@ -99,8 +95,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private bool IsMatchOnXsiType(IXmlIdentity xmlIdentity)
         {
             var otherXsiType = xmlIdentity.XsiType;
-            return otherXsiType == XmlName.Empty
-                || otherXsiType == XsiType;
+            return otherXsiType == XmlName.Empty || otherXsiType == XsiType;
         }
 
         private bool ShouldIgnoreAttributeNamespaceUri(IXmlIdentity xmlName)
@@ -114,8 +109,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         protected virtual bool IsMatch(Type clrType)
         {
             return clrType == this.ClrType
-                || ( Serializer.Kind == XmlTypeKind.Collection
-                &&   typeof(IEnumerable).IsAssignableFrom(clrType) );
+                || (
+                    Serializer.Kind == XmlTypeKind.Collection
+                    && typeof(IEnumerable).IsAssignableFrom(clrType)
+                );
         }
 
         protected void ConfigureLocalName(string localName)
@@ -134,7 +131,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 return;
             if (0 != (state & mask))
                 throw Error.AttributeConflict(localName);
-            field  = value;
+            field = value;
             state |= mask;
         }
 
@@ -146,7 +143,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             knownTypes = accessor.knownTypes;
         }
 
-        protected void ConfigureKnownTypesFromAttributes<T>(IEnumerable<T> attributes, IXmlBehaviorSemantics<T> semantics)
+        protected void ConfigureKnownTypesFromAttributes<T>(
+            IEnumerable<T> attributes,
+            IXmlBehaviorSemantics<T> semantics
+        )
         {
             foreach (var attribute in attributes)
             {
@@ -156,8 +156,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     var xsiType = Context.GetDefaultXsiType(clrType);
 
                     var name = new XmlName(
-                        semantics.GetLocalName   (attribute).NonEmpty() ?? xsiType.LocalName,
-                        semantics.GetNamespaceUri(attribute)            ?? namespaceUri);
+                        semantics.GetLocalName(attribute).NonEmpty() ?? xsiType.LocalName,
+                        semantics.GetNamespaceUri(attribute) ?? namespaceUri
+                    );
 
                     AddKnownType(name, xsiType, clrType, true);
                 }
@@ -202,22 +203,20 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private void AddSelfAsKnownType()
         {
-            var mask
-                = States.ConfiguredLocalName
+            var mask =
+                States.ConfiguredLocalName
                 | States.ConfiguredNamespaceUri
                 | States.ConfiguredKnownTypes;
 
-            var selfIsKnownType
-                = (state & mask) != States.ConfiguredKnownTypes;
+            var selfIsKnownType = (state & mask) != States.ConfiguredKnownTypes;
 
             if (selfIsKnownType)
             {
-                knownTypes.Add(new XmlKnownType(Name, XsiType,       ClrType), true);
+                knownTypes.Add(new XmlKnownType(Name, XsiType, ClrType), true);
                 knownTypes.Add(new XmlKnownType(Name, XmlName.Empty, ClrType), true);
             }
         }
 
-        protected static readonly StringComparer
-            NameComparer = StringComparer.OrdinalIgnoreCase;
+        protected static readonly StringComparer NameComparer = StringComparer.OrdinalIgnoreCase;
     }
 }

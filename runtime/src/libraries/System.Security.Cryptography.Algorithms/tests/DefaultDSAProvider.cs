@@ -23,10 +23,7 @@ namespace System.Security.Cryptography.Dsa.Tests
 
         public bool SupportsFips186_3
         {
-            get
-            {
-                return !(PlatformDetection.IsWindows7 || PlatformDetection.IsOSXLike);
-            }
+            get { return !(PlatformDetection.IsWindows7 || PlatformDetection.IsOSXLike); }
         }
 
         public bool SupportsKeyGeneration => !PlatformDetection.IsOSXLike;

@@ -16,15 +16,14 @@ namespace System.CommandLine
     {
         private ArgumentArity _arity;
         private TryConvertArgument? _convertArguments;
-        private List<Func<CompletionContext, IEnumerable<CompletionItem>>>? _completionSources = null;
+        private List<Func<CompletionContext, IEnumerable<CompletionItem>>>? _completionSources =
+            null;
         private List<Action<ArgumentResult>>? _validators = null;
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        protected Argument()
-        {
-        }
+        protected Argument() { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
@@ -46,10 +45,7 @@ namespace System.CommandLine
             {
                 if (!_arity.IsNonDefault)
                 {
-                    _arity = ArgumentArity.Default(
-                        ValueType, 
-                        this, 
-                        FirstParent);
+                    _arity = ArgumentArity.Default(ValueType, this, FirstParent);
                 }
 
                 return _arity;
@@ -58,7 +54,7 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// The name used in help output to describe the argument. 
+        /// The name used in help output to describe the argument.
         /// </summary>
         public string? HelpName { get; set; }
 
@@ -72,10 +68,7 @@ namespace System.CommandLine
         /// Gets the list of completion sources for the argument.
         /// </summary>
         public List<Func<CompletionContext, IEnumerable<CompletionItem>>> CompletionSources =>
-            _completionSources ??= new ()
-            {
-                CompletionSource.ForType(ValueType)
-            };
+            _completionSources ??= new() { CompletionSource.ForType(ValueType) };
 
         /// <summary>
         /// Gets or sets the <see cref="Type" /> that the argument token(s) will be converted to.
@@ -105,7 +98,7 @@ namespace System.CommandLine
         /// Provides a list of argument validators. Validators can be used
         /// to provide custom errors based on user input.
         /// </summary>
-        public List<Action<ArgumentResult>> Validators => _validators ??= new ();
+        public List<Action<ArgumentResult>> Validators => _validators ??= new();
 
         /// <summary>
         /// Gets the default value for the argument.
@@ -129,9 +122,9 @@ namespace System.CommandLine
         public override IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
         {
             return CompletionSources
-                   .SelectMany(source => source.Invoke(context))
-                   .Distinct()
-                   .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
+                .SelectMany(source => source.Invoke(context))
+                .Distinct()
+                .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc />

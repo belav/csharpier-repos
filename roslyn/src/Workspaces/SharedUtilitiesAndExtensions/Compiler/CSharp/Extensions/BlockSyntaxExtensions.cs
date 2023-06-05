@@ -20,21 +20,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             LanguageVersion languageVersion,
             ExpressionBodyPreference preference,
             [NotNullWhen(true)] out ExpressionSyntax? expression,
-            out SyntaxToken semicolonToken)
+            out SyntaxToken semicolonToken
+        )
         {
-            if (preference != ExpressionBodyPreference.Never &&
-                block != null && block.Statements.Count == 1)
+            if (
+                preference != ExpressionBodyPreference.Never
+                && block != null
+                && block.Statements.Count == 1
+            )
             {
                 var firstStatement = block.Statements[0];
 
-                if (TryGetExpression(firstStatement, languageVersion, out expression, out semicolonToken) &&
-                    MatchesPreference(expression, preference))
+                if (
+                    TryGetExpression(
+                        firstStatement,
+                        languageVersion,
+                        out expression,
+                        out semicolonToken
+                    ) && MatchesPreference(expression, preference)
+                )
                 {
-                    // The close brace of the block may have important trivia on it (like 
+                    // The close brace of the block may have important trivia on it (like
                     // comments or directives).  Preserve them on the semicolon when we
                     // convert to an expression body.
                     semicolonToken = semicolonToken.WithAppendedTrailingTrivia(
-                        block.CloseBraceToken.LeadingTrivia.Where(t => !t.IsWhitespaceOrEndOfLine()));
+                        block.CloseBraceToken.LeadingTrivia.Where(t => !t.IsWhitespaceOrEndOfLine())
+                    );
                     return true;
                 }
             }
@@ -50,16 +61,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             LanguageVersion languageVersion,
             ExpressionBodyPreference preference,
             [NotNullWhen(true)] out ArrowExpressionClauseSyntax? arrowExpression,
-            out SyntaxToken semicolonToken)
+            out SyntaxToken semicolonToken
+        )
         {
             // We can always use arrow-expression bodies in C# 7 or above.
             // We can also use them in C# 6, but only a select set of member kinds.
             var acceptableVersion =
-                languageVersion >= LanguageVersion.CSharp7 ||
-                (languageVersion >= LanguageVersion.CSharp6 && IsSupportedInCSharp6(declarationKind));
+                languageVersion >= LanguageVersion.CSharp7
+                || (
+                    languageVersion >= LanguageVersion.CSharp6
+                    && IsSupportedInCSharp6(declarationKind)
+                );
 
-            if (acceptableVersion &&
-                block.TryConvertToExpressionBody(languageVersion, preference, out var expression, out semicolonToken))
+            if (
+                acceptableVersion
+                && block.TryConvertToExpressionBody(
+                    languageVersion,
+                    preference,
+                    out var expression,
+                    out semicolonToken
+                )
+            )
             {
                 arrowExpression = SyntaxFactory.ArrowExpressionClause(expression);
 
@@ -67,11 +89,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                 if (parent.Kind() == SyntaxKind.GetAccessorDeclaration)
                 {
-                    var comments = parent.GetLeadingTrivia().Where(t => !t.IsWhitespaceOrEndOfLine());
+                    var comments = parent
+                        .GetLeadingTrivia()
+                        .Where(t => !t.IsWhitespaceOrEndOfLine());
                     if (!comments.IsEmpty())
                     {
                         arrowExpression = arrowExpression.WithLeadingTrivia(
-                            parent.GetLeadingTrivia());
+                            parent.GetLeadingTrivia()
+                        );
                     }
                 }
 
@@ -100,7 +125,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         public static bool MatchesPreference(
-            ExpressionSyntax expression, ExpressionBodyPreference preference)
+            ExpressionSyntax expression,
+            ExpressionBodyPreference preference
+        )
         {
             if (preference == ExpressionBodyPreference.WhenPossible)
             {
@@ -111,7 +138,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return CSharpSyntaxFacts.Instance.IsOnSingleLine(expression, fullSpan: false);
         }
 
-        private static bool TryGetExpression(StatementSyntax firstStatement, LanguageVersion languageVersion, [NotNullWhen(true)] out ExpressionSyntax? expression, out SyntaxToken semicolonToken)
+        private static bool TryGetExpression(
+            StatementSyntax firstStatement,
+            LanguageVersion languageVersion,
+            [NotNullWhen(true)] out ExpressionSyntax? expression,
+            out SyntaxToken semicolonToken
+        )
         {
             if (firstStatement is ExpressionStatementSyntax exprStatement)
             {
@@ -125,8 +157,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 {
                     // If there are any comments or directives on the return keyword, move them to
                     // the expression.
-                    expression = firstStatement.GetLeadingTrivia().Any(t => t.IsDirective || t.IsSingleOrMultiLineComment())
-                        ? returnStatement.Expression.WithLeadingTrivia(returnStatement.GetLeadingTrivia())
+                    expression = firstStatement
+                        .GetLeadingTrivia()
+                        .Any(t => t.IsDirective || t.IsSingleOrMultiLineComment())
+                        ? returnStatement.Expression.WithLeadingTrivia(
+                            returnStatement.GetLeadingTrivia()
+                        )
                         : returnStatement.Expression;
                     semicolonToken = returnStatement.SemicolonToken;
                     return true;
@@ -136,7 +172,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             {
                 if (languageVersion >= LanguageVersion.CSharp7 && throwStatement.Expression != null)
                 {
-                    expression = SyntaxFactory.ThrowExpression(throwStatement.ThrowKeyword, throwStatement.Expression);
+                    expression = SyntaxFactory.ThrowExpression(
+                        throwStatement.ThrowKeyword,
+                        throwStatement.Expression
+                    );
                     semicolonToken = throwStatement.SemicolonToken;
                     return true;
                 }

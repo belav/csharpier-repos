@@ -54,7 +54,8 @@ namespace System.Net
 
                     if (IsValidContext)
                     {
-                        negotiationAuthenticationPackage = NegotiateStreamPal.QueryContextAuthenticationPackage(_securityContext!);
+                        negotiationAuthenticationPackage =
+                            NegotiateStreamPal.QueryContextAuthenticationPackage(_securityContext!);
                         if (IsCompleted)
                         {
                             _protocolName = negotiationAuthenticationPackage;
@@ -89,15 +90,33 @@ namespace System.Net
         //
         // This overload does not attempt to impersonate because the caller either did it already or the original thread context is still preserved.
         //
-        internal NTAuthentication(bool isServer, string package, NetworkCredential credential, string? spn, ContextFlagsPal requestedContextFlags, ChannelBinding? channelBinding)
+        internal NTAuthentication(
+            bool isServer,
+            string package,
+            NetworkCredential credential,
+            string? spn,
+            ContextFlagsPal requestedContextFlags,
+            ChannelBinding? channelBinding
+        )
         {
             Initialize(isServer, package, credential, spn, requestedContextFlags, channelBinding);
         }
 
         [MemberNotNull(nameof(_package))]
-        private void Initialize(bool isServer, string package, NetworkCredential credential, string? spn, ContextFlagsPal requestedContextFlags, ChannelBinding? channelBinding)
+        private void Initialize(
+            bool isServer,
+            string package,
+            NetworkCredential credential,
+            string? spn,
+            ContextFlagsPal requestedContextFlags,
+            ChannelBinding? channelBinding
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"package={package}, spn={spn}, requestedContextFlags={requestedContextFlags}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"package={package}, spn={spn}, requestedContextFlags={requestedContextFlags}"
+                );
 
             _tokenSize = NegotiateStreamPal.QueryMaxTokenSize(package);
             _isServer = isServer;
@@ -107,28 +126,42 @@ namespace System.Net
             _package = package;
             _channelBinding = channelBinding;
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Peer SPN-> '{_spn}'");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Peer SPN-> '{_spn}'");
 
             //
             // Check if we're using DefaultCredentials.
             //
 
-            Debug.Assert(CredentialCache.DefaultCredentials == CredentialCache.DefaultNetworkCredentials);
+            Debug.Assert(
+                CredentialCache.DefaultCredentials == CredentialCache.DefaultNetworkCredentials
+            );
             if (credential == CredentialCache.DefaultCredentials)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "using DefaultCredentials");
-                _credentialsHandle = NegotiateStreamPal.AcquireDefaultCredential(package, _isServer);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "using DefaultCredentials");
+                _credentialsHandle = NegotiateStreamPal.AcquireDefaultCredential(
+                    package,
+                    _isServer
+                );
             }
             else
             {
-                _credentialsHandle = NegotiateStreamPal.AcquireCredentialsHandle(package, _isServer, credential);
+                _credentialsHandle = NegotiateStreamPal.AcquireCredentialsHandle(
+                    package,
+                    _isServer,
+                    credential
+                );
             }
         }
 
         internal SafeDeleteContext? GetContext(out SecurityStatusPal status)
         {
             status = new SecurityStatusPal(SecurityStatusPalErrorCode.OK);
-            Debug.Assert(IsCompleted && IsValidContext, "Should be called only when completed with success, currently is not!");
+            Debug.Assert(
+                IsCompleted && IsValidContext,
+                "Should be called only when completed with success, currently is not!"
+            );
             Debug.Assert(IsServer, "The method must not be called by the client side!");
 
             if (!IsValidContext)
@@ -149,19 +182,50 @@ namespace System.Net
             _isCompleted = false;
         }
 
-        internal NegotiateAuthenticationStatusCode Wrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, bool requestEncryption, out bool isEncrypted)
+        internal NegotiateAuthenticationStatusCode Wrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            bool requestEncryption,
+            out bool isEncrypted
+        )
         {
-            return NegotiateStreamPal.Wrap(_securityContext!, input, outputWriter, requestEncryption, out isEncrypted);
+            return NegotiateStreamPal.Wrap(
+                _securityContext!,
+                input,
+                outputWriter,
+                requestEncryption,
+                out isEncrypted
+            );
         }
 
-        internal NegotiateAuthenticationStatusCode Unwrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, out bool wasEncrypted)
+        internal NegotiateAuthenticationStatusCode Unwrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            out bool wasEncrypted
+        )
         {
-            return NegotiateStreamPal.Unwrap(_securityContext!, input, outputWriter, out wasEncrypted);
+            return NegotiateStreamPal.Unwrap(
+                _securityContext!,
+                input,
+                outputWriter,
+                out wasEncrypted
+            );
         }
 
-        internal NegotiateAuthenticationStatusCode UnwrapInPlace(Span<byte> input, out int unwrappedOffset, out int unwrappedLength, out bool wasEncrypted)
+        internal NegotiateAuthenticationStatusCode UnwrapInPlace(
+            Span<byte> input,
+            out int unwrappedOffset,
+            out int unwrappedLength,
+            out bool wasEncrypted
+        )
         {
-            return NegotiateStreamPal.UnwrapInPlace(_securityContext!, input, out unwrappedOffset, out unwrappedLength, out wasEncrypted);
+            return NegotiateStreamPal.UnwrapInPlace(
+                _securityContext!,
+                input,
+                out unwrappedOffset,
+                out unwrappedLength,
+                out wasEncrypted
+            );
         }
 
         internal string? GetOutgoingBlob(string? incomingBlob)
@@ -169,7 +233,11 @@ namespace System.Net
             return GetOutgoingBlob(incomingBlob, throwOnError: true, out _);
         }
 
-        internal string? GetOutgoingBlob(string? incomingBlob, bool throwOnError, out SecurityStatusPal statusCode)
+        internal string? GetOutgoingBlob(
+            string? incomingBlob,
+            bool throwOnError,
+            out SecurityStatusPal statusCode
+        )
         {
             byte[]? decodedIncomingBlob = null;
             if (incomingBlob != null && incomingBlob.Length > 0)
@@ -187,7 +255,11 @@ namespace System.Net
             }
             else
             {
-                decodedOutgoingBlob = GetOutgoingBlob(decodedIncomingBlob, throwOnError, out statusCode);
+                decodedOutgoingBlob = GetOutgoingBlob(
+                    decodedIncomingBlob,
+                    throwOnError,
+                    out statusCode
+                );
             }
 
             string? outgoingBlob = null;
@@ -210,12 +282,20 @@ namespace System.Net
         }
 
         // Accepts an incoming binary security blob and returns an outgoing binary security blob.
-        internal byte[]? GetOutgoingBlob(byte[]? incomingBlob, bool throwOnError, out SecurityStatusPal statusCode)
+        internal byte[]? GetOutgoingBlob(
+            byte[]? incomingBlob,
+            bool throwOnError,
+            out SecurityStatusPal statusCode
+        )
         {
             return GetOutgoingBlob(incomingBlob.AsSpan(), throwOnError, out statusCode);
         }
 
-        internal byte[]? GetOutgoingBlob(ReadOnlySpan<byte> incomingBlob, bool throwOnError, out SecurityStatusPal statusCode)
+        internal byte[]? GetOutgoingBlob(
+            ReadOnlySpan<byte> incomingBlob,
+            bool throwOnError,
+            out SecurityStatusPal statusCode
+        )
         {
             _tokenBuffer ??= _tokenSize == 0 ? Array.Empty<byte>() : new byte[_tokenSize];
 
@@ -235,15 +315,27 @@ namespace System.Net
                         _channelBinding,
                         ref _tokenBuffer,
                         out resultBlobLength,
-                        ref _contextFlags);
+                        ref _contextFlags
+                    );
 
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"SSPIWrapper.InitializeSecurityContext() returns statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode})");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            this,
+                            $"SSPIWrapper.InitializeSecurityContext() returns statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode})"
+                        );
 
                     if (statusCode.ErrorCode == SecurityStatusPalErrorCode.CompleteNeeded)
                     {
-                        statusCode = NegotiateStreamPal.CompleteAuthToken(ref _securityContext, _tokenBuffer.AsSpan(0, resultBlobLength));
+                        statusCode = NegotiateStreamPal.CompleteAuthToken(
+                            ref _securityContext,
+                            _tokenBuffer.AsSpan(0, resultBlobLength)
+                        );
 
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"SSPIWrapper.CompleteAuthToken() returns statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode})");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(
+                                this,
+                                $"SSPIWrapper.CompleteAuthToken() returns statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode})"
+                            );
 
                         resultBlobLength = 0;
                     }
@@ -259,9 +351,14 @@ namespace System.Net
                         _channelBinding,
                         ref _tokenBuffer,
                         out resultBlobLength,
-                        ref _contextFlags);
+                        ref _contextFlags
+                    );
 
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"SSPIWrapper.AcceptSecurityContext() returns statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode})");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            this,
+                            $"SSPIWrapper.AcceptSecurityContext() returns statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode})"
+                        );
                 }
             }
             finally
@@ -277,7 +374,6 @@ namespace System.Net
                     _credentialsHandle?.Dispose();
                 }
             }
-
 
             if (((int)statusCode.ErrorCode >= (int)SecurityStatusPalErrorCode.OutOfMemory))
             {
@@ -298,13 +394,17 @@ namespace System.Net
             }
 
             byte[]? result =
-                resultBlobLength == 0 || _tokenBuffer == null ? null :
-                _tokenBuffer.Length == resultBlobLength ? _tokenBuffer :
-                _tokenBuffer[0..resultBlobLength];
+                resultBlobLength == 0 || _tokenBuffer == null
+                    ? null
+                    : _tokenBuffer.Length == resultBlobLength
+                        ? _tokenBuffer
+                        : _tokenBuffer[0..resultBlobLength];
 
             // The return value will tell us correctly if the handshake is over or not
-            if (statusCode.ErrorCode == SecurityStatusPalErrorCode.OK
-                || (_isServer && statusCode.ErrorCode == SecurityStatusPalErrorCode.CompleteNeeded))
+            if (
+                statusCode.ErrorCode == SecurityStatusPalErrorCode.OK
+                || (_isServer && statusCode.ErrorCode == SecurityStatusPalErrorCode.CompleteNeeded)
+            )
             {
                 // Success.
                 _isCompleted = true;
@@ -313,7 +413,11 @@ namespace System.Net
             else
             {
                 // We need to continue.
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"need continue statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode}) _securityContext:{_securityContext}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        $"need continue statusCode:0x{((int)statusCode.ErrorCode):x8} ({statusCode}) _securityContext:{_securityContext}"
+                    );
             }
 
             return result;
@@ -321,11 +425,15 @@ namespace System.Net
 
         private string? GetClientSpecifiedSpn()
         {
-            Debug.Assert(IsValidContext && IsCompleted, "Trying to get the client SPN before handshaking is done!");
+            Debug.Assert(
+                IsValidContext && IsCompleted,
+                "Trying to get the client SPN before handshaking is done!"
+            );
 
             string? spn = NegotiateStreamPal.QueryContextClientSpecifiedSpn(_securityContext!);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"The client specified SPN is [{spn}]");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"The client specified SPN is [{spn}]");
 
             return spn;
         }
@@ -337,7 +445,8 @@ namespace System.Net
                 buffer,
                 (_contextFlags & ContextFlagsPal.Confidentiality) != 0,
                 IsNTLM,
-                ref output);
+                ref output
+            );
         }
 
         internal int Decrypt(Span<byte> payload, out int newOffset)
@@ -347,7 +456,8 @@ namespace System.Net
                 payload,
                 (_contextFlags & ContextFlagsPal.Confidentiality) != 0,
                 IsNTLM,
-                out newOffset);
+                out newOffset
+            );
         }
     }
 }

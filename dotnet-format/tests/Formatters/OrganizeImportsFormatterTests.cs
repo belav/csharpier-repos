@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
         [Fact]
         public async Task WhenOptionsDisabled_AndImportsNotSorted_ImportsSorted()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System;
@@ -30,7 +31,8 @@ class C
 {
 }";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using Microsoft.CodeAnalysis;
 using System;
 using System.Linq;
@@ -52,7 +54,8 @@ class C
         [Fact]
         public async Task WhenSystemDirectivesFirst_AndImportsNotSorted_ImportsSorted()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System;
@@ -61,7 +64,8 @@ class C
 {
 }";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -83,7 +87,8 @@ class C
         [Fact]
         public async Task WhenImportGroupsSeparated_AndImportsNotSeparated_ImportsSeparated()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System;
@@ -92,7 +97,8 @@ class C
 {
 }";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using Microsoft.CodeAnalysis;
 
 using System;
@@ -115,7 +121,8 @@ class C
         [Fact]
         public async Task WhenBothOptionsEnabled_AndImportsNotSortedOrSeparated_ImportsSortedAndSeparated()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System;
@@ -124,7 +131,8 @@ class C
 {
 }";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using System;
 using System.Linq;
 
@@ -147,7 +155,8 @@ class C
         [Fact]
         public async Task WhenNeitherOptionIsConfigured_AndImportsNotSortedOrSeparated_NoChange()
         {
-            var code = @"
+            var code =
+                @"
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System;

@@ -52,8 +52,10 @@ namespace System.Drawing.Printing
 
         /// <summary>Provides some interesting information about the TriState in String form.</summary>
         public override string ToString() =>
-            this == Default ? "Default" :
-            this == False ? "False" :
-            "True";
+            this == Default
+                ? "Default"
+                : this == False
+                    ? "False"
+                    : "True";
     }
 }

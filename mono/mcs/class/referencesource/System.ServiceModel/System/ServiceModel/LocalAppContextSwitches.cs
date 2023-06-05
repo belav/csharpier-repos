@@ -12,14 +12,22 @@ namespace System.ServiceModel
     // in 4.6 and above. So we set DisableExplicitConnectionCloseHeader to true if running 4.5.2 or less.
     internal static class LocalAppContextSwitches
     {
-        internal const string DisableExplicitConnectionCloseHeaderString = "Switch.System.ServiceModel.DisableExplicitConnectionCloseHeader";
-        internal const string AllowUnsignedToHeaderString = "Switch.System.ServiceModel.AllowUnsignedToHeader";
-        internal const string DisableCngCertificatesString = "Switch.System.ServiceModel.DisableCngCertificates";
-        internal const string DisableUsingServicePointManagerSecurityProtocolsString = "Switch.System.ServiceModel.DisableUsingServicePointManagerSecurityProtocols";
-        internal const string UseSha1InPipeConnectionGetHashAlgorithmString = "Switch.System.ServiceModel.UseSha1InPipeConnectionGetHashAlgorithm";
-        internal const string DisableAddressHeaderCollectionValidationString = "Switch.System.ServiceModel.DisableAddressHeaderCollectionValidation";
-        internal const string UseSha1InMsmqEncryptionAlgorithmString = "Switch.System.ServiceModel.UseSha1InMsmqEncryptionAlgorithm";
-        internal const string DontEnableSystemDefaultTlsVersionsString = "Switch.System.ServiceModel.DontEnableSystemDefaultTlsVersions";
+        internal const string DisableExplicitConnectionCloseHeaderString =
+            "Switch.System.ServiceModel.DisableExplicitConnectionCloseHeader";
+        internal const string AllowUnsignedToHeaderString =
+            "Switch.System.ServiceModel.AllowUnsignedToHeader";
+        internal const string DisableCngCertificatesString =
+            "Switch.System.ServiceModel.DisableCngCertificates";
+        internal const string DisableUsingServicePointManagerSecurityProtocolsString =
+            "Switch.System.ServiceModel.DisableUsingServicePointManagerSecurityProtocols";
+        internal const string UseSha1InPipeConnectionGetHashAlgorithmString =
+            "Switch.System.ServiceModel.UseSha1InPipeConnectionGetHashAlgorithm";
+        internal const string DisableAddressHeaderCollectionValidationString =
+            "Switch.System.ServiceModel.DisableAddressHeaderCollectionValidation";
+        internal const string UseSha1InMsmqEncryptionAlgorithmString =
+            "Switch.System.ServiceModel.UseSha1InMsmqEncryptionAlgorithm";
+        internal const string DontEnableSystemDefaultTlsVersionsString =
+            "Switch.System.ServiceModel.DontEnableSystemDefaultTlsVersions";
 
         private static int disableExplicitConnectionCloseHeader;
         private static int allowUnsignedToHeader;
@@ -35,7 +43,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DontEnableSystemDefaultTlsVersionsString, ref dontEnableSystemDefaultTlsVersions);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DontEnableSystemDefaultTlsVersionsString,
+                    ref dontEnableSystemDefaultTlsVersions
+                );
             }
         }
 
@@ -44,7 +55,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(UseSha1InMsmqEncryptionAlgorithmString, ref useSha1InMsmqEncryptionAlgorithm);
+                return LocalAppContext.GetCachedSwitchValue(
+                    UseSha1InMsmqEncryptionAlgorithmString,
+                    ref useSha1InMsmqEncryptionAlgorithm
+                );
             }
         }
 
@@ -53,7 +67,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableAddressHeaderCollectionValidationString, ref disableAddressHeaderCollectionValidation);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableAddressHeaderCollectionValidationString,
+                    ref disableAddressHeaderCollectionValidation
+                );
             }
         }
 
@@ -62,7 +79,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(UseSha1InPipeConnectionGetHashAlgorithmString, ref useSha1InPipeConnectionGetHashAlgorithm);
+                return LocalAppContext.GetCachedSwitchValue(
+                    UseSha1InPipeConnectionGetHashAlgorithmString,
+                    ref useSha1InPipeConnectionGetHashAlgorithm
+                );
             }
         }
 
@@ -71,7 +91,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableExplicitConnectionCloseHeaderString, ref disableExplicitConnectionCloseHeader);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableExplicitConnectionCloseHeaderString,
+                    ref disableExplicitConnectionCloseHeader
+                );
             }
         }
 
@@ -80,7 +103,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(AllowUnsignedToHeaderString, ref allowUnsignedToHeader);
+                return LocalAppContext.GetCachedSwitchValue(
+                    AllowUnsignedToHeaderString,
+                    ref allowUnsignedToHeader
+                );
             }
         }
 
@@ -89,7 +115,10 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableCngCertificatesString, ref disableCngCertificates);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableCngCertificatesString,
+                    ref disableCngCertificates
+                );
             }
         }
 
@@ -98,13 +127,16 @@ namespace System.ServiceModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableUsingServicePointManagerSecurityProtocolsString, ref disableUsingServicePointManagerSecurityProtocols);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableUsingServicePointManagerSecurityProtocolsString,
+                    ref disableUsingServicePointManagerSecurityProtocols
+                );
             }
         }
 
         public static void SetDefaultsLessOrEqual_452()
         {
-#pragma warning disable BCL0012            
+#pragma warning disable BCL0012
             // Define the switches that should be true for 4.5.2 or less, false for 4.6+.
             LocalAppContext.DefineSwitchDefault(DisableExplicitConnectionCloseHeaderString, true);
 #pragma warning restore BCL0012
@@ -112,7 +144,7 @@ namespace System.ServiceModel
 
         public static void SetDefaultsLessOrEqual_461()
         {
-#pragma warning disable BCL0012            
+#pragma warning disable BCL0012
             // Define the switches that should be true for 4.6.1 or less, false for 4.6.2+.
             LocalAppContext.DefineSwitchDefault(DisableCngCertificatesString, true);
 #pragma warning restore BCL0012

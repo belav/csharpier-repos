@@ -11,7 +11,9 @@ using Microsoft.CodeAnalysis.Options;
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal sealed class HostSolutionCrawlerWorkspaceEventListener : IEventListener<object>, IEventListenerStoppable
+    internal sealed class HostSolutionCrawlerWorkspaceEventListener
+        : IEventListener<object>,
+            IEventListenerStoppable
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -26,15 +28,18 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             if (_globalOptions.GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler))
             {
-                workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>().Register(workspace);
+                workspace.Services
+                    .GetRequiredService<ISolutionCrawlerRegistrationService>()
+                    .Register(workspace);
             }
         }
 
         public void StopListening(Workspace workspace)
         {
-            // we do this so that we can stop solution crawler faster and fire some telemetry. 
+            // we do this so that we can stop solution crawler faster and fire some telemetry.
             // this is to reduce a case where we keep going even when VS is shutting down since we don't know about that
-            var registration = workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registration =
+                workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             registration.Unregister(workspace, blockingShutdown: true);
         }
     }

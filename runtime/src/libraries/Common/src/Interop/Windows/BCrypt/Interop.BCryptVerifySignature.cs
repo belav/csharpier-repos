@@ -25,13 +25,15 @@ internal static partial class Interop
             int cbHash,
             byte* pbSignature,
             int cbSignature,
-            BCryptSignVerifyFlags dwFlags);
+            BCryptSignVerifyFlags dwFlags
+        );
 
         internal static unsafe bool BCryptVerifySignaturePkcs1(
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            string hashAlgorithmName)
+            string hashAlgorithmName
+        )
         {
             NTSTATUS status;
 
@@ -49,7 +51,8 @@ internal static partial class Interop
                     hash.Length,
                     pSignature,
                     signature.Length,
-                    BCryptSignVerifyFlags.BCRYPT_PAD_PKCS1);
+                    BCryptSignVerifyFlags.BCRYPT_PAD_PKCS1
+                );
             }
 
             return status == NTSTATUS.STATUS_SUCCESS;
@@ -59,9 +62,9 @@ internal static partial class Interop
             SafeBCryptKeyHandle key,
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            string hashAlgorithmName)
+            string hashAlgorithmName
+        )
         {
-
             NTSTATUS status;
 
             fixed (char* pHashAlgorithmName = hashAlgorithmName)
@@ -79,7 +82,8 @@ internal static partial class Interop
                     hash.Length,
                     pSignature,
                     signature.Length,
-                    BCryptSignVerifyFlags.BCRYPT_PAD_PSS);
+                    BCryptSignVerifyFlags.BCRYPT_PAD_PSS
+                );
             }
 
             return status == NTSTATUS.STATUS_SUCCESS;

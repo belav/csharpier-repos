@@ -9,7 +9,7 @@ namespace Microsoft.Interop.JavaScript
     internal record JSMarshallingInfo(MarshallingInfo Inner, JSTypeInfo TypeInfo) : MarshallingInfo
     {
         protected JSMarshallingInfo()
-            :this(NoMarshallingInfo.Instance, new JSInvalidTypeInfo())
+            : this(NoMarshallingInfo.Instance, new JSInvalidTypeInfo())
         {
             Inner = null;
         }

@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UnsafeStatementHighlighter()
-        {
-        }
+        public UnsafeStatementHighlighter() { }
 
-        protected override void AddHighlights(UnsafeStatementSyntax unsafeStatement, List<TextSpan> highlights, CancellationToken cancellationToken)
-            => highlights.Add(unsafeStatement.UnsafeKeyword.Span);
+        protected override void AddHighlights(
+            UnsafeStatementSyntax unsafeStatement,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        ) => highlights.Add(unsafeStatement.UnsafeKeyword.Span);
     }
 }

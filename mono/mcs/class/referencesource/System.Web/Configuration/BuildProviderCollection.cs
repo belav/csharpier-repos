@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Xml;
     using System.Configuration;
@@ -25,61 +26,66 @@ namespace System.Web.Configuration {
     // class CompilationSection
 
     [ConfigurationCollection(typeof(BuildProvider))]
-    public sealed class BuildProviderCollection : ConfigurationElementCollection {
+    public sealed class BuildProviderCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static BuildProviderCollection() {
+        static BuildProviderCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
-        
+
         public BuildProviderCollection()
-            : base(StringComparer.OrdinalIgnoreCase) {
+            : base(StringComparer.OrdinalIgnoreCase) { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        public new BuildProvider this[string name]
+        {
+            get { return (BuildProvider)BaseGet(name); }
         }
-
-        public new BuildProvider this[string name] {
-            get {
-                return (BuildProvider)BaseGet(name);
-            }
-        }
-        public BuildProvider this[int index] {
-            get {
-                return (BuildProvider)BaseGet(index);
-            }
-            set {
+        public BuildProvider this[int index]
+        {
+            get { return (BuildProvider)BaseGet(index); }
+            set
+            {
                 if (BaseGet(index) != null)
                     BaseRemoveAt(index);
                 BaseAdd(index, value);
             }
         }
 
-        public void Add(BuildProvider buildProvider) {
+        public void Add(BuildProvider buildProvider)
+        {
             BaseAdd(buildProvider);
         }
-        
-        public void Remove(String name) {
+
+        public void Remove(String name)
+        {
             BaseRemove(name);
         }
-        
-        public void RemoveAt(int index) {
+
+        public void RemoveAt(int index)
+        {
             BaseRemoveAt(index);
         }
-        
-        public void Clear() {
+
+        public void Clear()
+        {
             BaseClear();
         }
-        
-        protected override ConfigurationElement CreateNewElement() {
+
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new BuildProvider();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) {
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
             return ((BuildProvider)element).Extension;
         }
     }

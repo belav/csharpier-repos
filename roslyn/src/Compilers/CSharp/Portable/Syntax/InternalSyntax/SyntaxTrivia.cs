@@ -11,7 +11,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     {
         public readonly string Text;
 
-        internal SyntaxTrivia(SyntaxKind kind, string text, DiagnosticInfo[]? diagnostics = null, SyntaxAnnotation[]? annotations = null)
+        internal SyntaxTrivia(
+            SyntaxKind kind,
+            string text,
+            DiagnosticInfo[]? diagnostics = null,
+            SyntaxAnnotation[]? annotations = null
+        )
             : base(kind, diagnostics, annotations, text.Length)
         {
             this.Text = text;
@@ -35,8 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         public override bool IsTrivia => true;
 
-        internal override bool ShouldReuseInSerialization => this.Kind == SyntaxKind.WhitespaceTrivia &&
-                                                             FullWidth < Lexer.MaxCachedTokenSize;
+        internal override bool ShouldReuseInSerialization =>
+            this.Kind == SyntaxKind.WhitespaceTrivia && FullWidth < Lexer.MaxCachedTokenSize;
 
         internal override void WriteTo(ObjectWriter writer)
         {

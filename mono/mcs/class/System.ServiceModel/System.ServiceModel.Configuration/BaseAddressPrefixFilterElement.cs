@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,49 +54,51 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class BaseAddressPrefixFilterElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty prefix;
+    public sealed class BaseAddressPrefixFilterElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty prefix;
 
-		static BaseAddressPrefixFilterElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			prefix = new ConfigurationProperty ("prefix",
-				typeof (Uri), null, new UriTypeConverter (), new StringValidator (1, int.MaxValue, null),
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static BaseAddressPrefixFilterElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            prefix = new ConfigurationProperty(
+                "prefix",
+                typeof(Uri),
+                null,
+                new UriTypeConverter(),
+                new StringValidator(1, int.MaxValue, null),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (prefix);
-		}
+            properties.Add(prefix);
+        }
 
-		public BaseAddressPrefixFilterElement ()
-		{
-		}
+        public BaseAddressPrefixFilterElement() { }
 
-		public BaseAddressPrefixFilterElement (Uri prefix)
-		{
-			Prefix = prefix;
-		}
+        public BaseAddressPrefixFilterElement(Uri prefix)
+        {
+            Prefix = prefix;
+        }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "prefix",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        public Uri Prefix
+        {
+            get { return (Uri)base[prefix]; }
+            set { base[prefix] = value; }
+        }
 
-		[ConfigurationProperty ("prefix",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		public Uri Prefix {
-			get { return (Uri) base [prefix]; }
-			set { base [prefix] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

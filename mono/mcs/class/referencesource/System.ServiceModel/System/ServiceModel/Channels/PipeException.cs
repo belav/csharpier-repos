@@ -10,29 +10,19 @@ namespace System.IO
     public class PipeException : IOException
     {
         public PipeException()
-            : base()
-        {
-        }
+            : base() { }
 
         public PipeException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public PipeException(string message, int errorCode)
-            : base(message, errorCode)
-        {
-        }
+            : base(message, errorCode) { }
 
         public PipeException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+            : base(message, inner) { }
 
         protected PipeException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public virtual int ErrorCode
         {

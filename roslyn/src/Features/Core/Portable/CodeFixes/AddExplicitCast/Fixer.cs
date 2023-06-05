@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
 {
-    internal abstract partial class AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax> where TExpressionSyntax : SyntaxNode
+    internal abstract partial class AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax>
+        where TExpressionSyntax : SyntaxNode
     {
         protected abstract class Fixer<TArgumentSyntax, TArgumentListSyntax, TInvocationSyntax>
             where TArgumentSyntax : SyntaxNode
@@ -21,14 +22,25 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
         {
             private readonly AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax> _provider;
 
-            protected Fixer(AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax> provider)
-                => _provider = provider;
+            protected Fixer(AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax> provider) =>
+                _provider = provider;
 
             protected abstract TExpressionSyntax GetExpressionOfArgument(TArgumentSyntax argument);
-            protected abstract TArgumentSyntax GenerateNewArgument(TArgumentSyntax oldArgument, ITypeSymbol conversionType);
-            protected abstract TArgumentListSyntax GenerateNewArgumentList(TArgumentListSyntax oldArgumentList, ArrayBuilder<TArgumentSyntax> newArguments);
-            protected abstract SeparatedSyntaxList<TArgumentSyntax> GetArgumentsOfArgumentList(TArgumentListSyntax argumentList);
-            protected abstract SymbolInfo GetSpeculativeSymbolInfo(SemanticModel semanticModel, TArgumentListSyntax newArgumentList);
+            protected abstract TArgumentSyntax GenerateNewArgument(
+                TArgumentSyntax oldArgument,
+                ITypeSymbol conversionType
+            );
+            protected abstract TArgumentListSyntax GenerateNewArgumentList(
+                TArgumentListSyntax oldArgumentList,
+                ArrayBuilder<TArgumentSyntax> newArguments
+            );
+            protected abstract SeparatedSyntaxList<TArgumentSyntax> GetArgumentsOfArgumentList(
+                TArgumentListSyntax argumentList
+            );
+            protected abstract SymbolInfo GetSpeculativeSymbolInfo(
+                SemanticModel semanticModel,
+                TArgumentListSyntax newArgumentList
+            );
 
             /// <summary>
             /// Collect all the available cast pairs, format is (target argument expression, potential conversion type)
@@ -45,10 +57,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 TArgumentSyntax targetArgument,
                 TArgumentListSyntax argumentList,
                 TInvocationSyntax invocationNode,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // Implicit downcast appears on the argument of invocation node,
-                // get all candidate functions and extract potential conversion types 
+                // get all candidate functions and extract potential conversion types
                 var symbolInfo = semanticModel.GetSymbolInfo(invocationNode, cancellationToken);
                 using var _ = ArrayBuilder<ISymbol>.GetInstance(out var candidateSymbols);
                 if (symbolInfo.Symbol != null) // BC42016: the only candidate symbol is symbolInfo.Symbol
@@ -60,21 +73,36 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                     candidateSymbols.AddRange(symbolInfo.CandidateSymbols);
                 }
 
-                using var __ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(out var mutablePotentialConversionTypes);
+                using var __ = ArrayBuilder<(TExpressionSyntax, ITypeSymbol)>.GetInstance(
+                    out var mutablePotentialConversionTypes
+                );
                 foreach (var candidateSymbol in candidateSymbols.OfType<IMethodSymbol>())
                 {
-                    if (CanArgumentTypesBeConvertedToParameterTypes(
-                            semanticModel, root, argumentList, candidateSymbol.Parameters,
-                            targetArgument, cancellationToken, out var targetArgumentConversionType)
-                        && GetExpressionOfArgument(targetArgument) is TExpressionSyntax argumentExpression)
+                    if (
+                        CanArgumentTypesBeConvertedToParameterTypes(
+                            semanticModel,
+                            root,
+                            argumentList,
+                            candidateSymbol.Parameters,
+                            targetArgument,
+                            cancellationToken,
+                            out var targetArgumentConversionType
+                        )
+                        && GetExpressionOfArgument(targetArgument)
+                            is TExpressionSyntax argumentExpression
+                    )
                     {
-                        mutablePotentialConversionTypes.Add((argumentExpression, targetArgumentConversionType));
+                        mutablePotentialConversionTypes.Add(
+                            (argumentExpression, targetArgumentConversionType)
+                        );
                     }
                 }
 
                 // Sort the potential conversion types by inheritance distance, so that
                 // operations are in order and user can choose least specific types(more accurate)
-                mutablePotentialConversionTypes.Sort(new InheritanceDistanceComparer<TExpressionSyntax>(semanticModel));
+                mutablePotentialConversionTypes.Sort(
+                    new InheritanceDistanceComparer<TExpressionSyntax>(semanticModel)
+                );
 
                 return mutablePotentialConversionTypes.ToImmutable();
             }
@@ -90,14 +118,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             /// void DoSomething(int i, Derived1 d) { }
             /// void DoSomething(string s, Derived2 d) { }
             /// void DoSomething(int i, Derived3 d) { }
-            /// 
+            ///
             /// Base b;
             /// DoSomething(1, [||]b);
             ///
             /// *void DoSomething(string s, Derived2 d) { }* is not the perfect match candidate function for
             /// *DoSomething(1, [||]b)* because int and string are not ancestor-descendant relationship. Thus,
             /// Derived2 is not a potential conversion type.
-            /// 
+            ///
             /// <param name="argumentList"> The argument list of invocation expression</param>
             /// <param name="parameters"> The parameters of function</param>
             /// <param name="targetArgument">The argument need to be cast.</param>
@@ -115,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 ImmutableArray<IParameterSymbol> parameters,
                 TArgumentSyntax targetArgument,
                 CancellationToken cancellationToken,
-                [NotNullWhen(true)] out ITypeSymbol? targetArgumentConversionType)
+                [NotNullWhen(true)] out ITypeSymbol? targetArgumentConversionType
+            )
             {
                 targetArgumentConversionType = null;
 
@@ -130,14 +159,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
 
                 for (var i = 0; i < arguments.Count; i++)
                 {
-                    // Parameter index cannot out of its range, #arguments is larger than #parameter only if 
+                    // Parameter index cannot out of its range, #arguments is larger than #parameter only if
                     // the last parameter with keyword params
                     var parameterIndex = Math.Min(i, parameters.Length - 1);
 
                     // If the argument has a name, get the corresponding parameter index
-                    if (syntaxFacts.GetNameForArgument(arguments[i]) is string name
+                    if (
+                        syntaxFacts.GetNameForArgument(arguments[i]) is string name
                         && name != string.Empty
-                        && !FindCorrespondingParameterByName(name, parameters, ref parameterIndex))
+                        && !FindCorrespondingParameterByName(name, parameters, ref parameterIndex)
+                    )
                     {
                         return false;
                     }
@@ -152,23 +183,40 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                     }
 
                     var parameterType = parameters[parameterIndex].Type;
-                    if (parameters[parameterIndex].IsParams
+                    if (
+                        parameters[parameterIndex].IsParams
                         && parameterType is IArrayTypeSymbol paramsType
-                        && _provider.ClassifyConversion(semanticModel, argumentExpression, paramsType.ElementType).Exists)
+                        && _provider
+                            .ClassifyConversion(
+                                semanticModel,
+                                argumentExpression,
+                                paramsType.ElementType
+                            )
+                            .Exists
+                    )
                     {
                         newArguments.Add(GenerateNewArgument(arguments[i], paramsType.ElementType));
                         if (arguments[i].Equals(targetArgument))
                             targetArgumentConversionType = paramsType.ElementType;
                     }
-                    else if (_provider.ClassifyConversion(semanticModel, argumentExpression, parameterType).Exists)
+                    else if (
+                        _provider
+                            .ClassifyConversion(semanticModel, argumentExpression, parameterType)
+                            .Exists
+                    )
                     {
                         newArguments.Add(GenerateNewArgument(arguments[i], parameterType));
                         if (arguments[i].Equals(targetArgument))
                             targetArgumentConversionType = parameterType;
                     }
-                    else if (syntaxFacts.IsDeclarationExpression(argumentExpression)
-                        && semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type is ITypeSymbol argumentType
-                        && semanticModel.Compilation.ClassifyCommonConversion(argumentType, parameterType).IsIdentity)
+                    else if (
+                        syntaxFacts.IsDeclarationExpression(argumentExpression)
+                        && semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type
+                            is ITypeSymbol argumentType
+                        && semanticModel.Compilation
+                            .ClassifyCommonConversion(argumentType, parameterType)
+                            .IsIdentity
+                    )
                     {
                         // Direct conversion from a declaration expression to a type is unspecified, thus we classify the
                         // conversion from the type of declaration expression to the parameter type
@@ -176,7 +224,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         // void Goo(out int i) { i = 1; }
                         // Goo([|out var i|]);
                         // "var i" is a declaration expression
-                        // 
+                        //
                         // In addition, since this case is with keyword "out", the type of declaration expression and the
                         // parameter type must be identical in order to match.
                         newArguments.Add(arguments[i]);
@@ -189,7 +237,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
 
                 return targetArgumentConversionType != null
                     && IsInvocationExpressionWithNewArgumentsApplicable(
-                        semanticModel, root, argumentList, newArguments, targetArgument);
+                        semanticModel,
+                        root,
+                        argumentList,
+                        newArguments,
+                        targetArgument
+                    );
             }
 
             /// <summary>
@@ -202,14 +255,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             /// Return true if the invocation expression with new arguments is applicable.
             /// Otherwise, return false
             /// </returns>
-            private bool IsInvocationExpressionWithNewArgumentsApplicable(SemanticModel semanticModel,
+            private bool IsInvocationExpressionWithNewArgumentsApplicable(
+                SemanticModel semanticModel,
                 SyntaxNode root,
                 TArgumentListSyntax oldArgumentList,
                 ArrayBuilder<TArgumentSyntax> newArguments,
-                SyntaxNode targetNode)
+                SyntaxNode targetNode
+            )
             {
-                var newRoot = root.ReplaceNode(oldArgumentList, GenerateNewArgumentList(oldArgumentList, newArguments));
-                if (newRoot.FindNode(targetNode.Span).GetAncestorOrThis<TArgumentListSyntax>() is TArgumentListSyntax newArgumentList)
+                var newRoot = root.ReplaceNode(
+                    oldArgumentList,
+                    GenerateNewArgumentList(oldArgumentList, newArguments)
+                );
+                if (
+                    newRoot.FindNode(targetNode.Span).GetAncestorOrThis<TArgumentListSyntax>()
+                    is TArgumentListSyntax newArgumentList
+                )
                 {
                     var symbolInfo = GetSpeculativeSymbolInfo(semanticModel, newArgumentList);
                     return symbolInfo.Symbol != null;

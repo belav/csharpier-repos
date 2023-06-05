@@ -11,9 +11,7 @@ namespace System.Drawing.Printing
     /// </summary>
     public sealed class PrinterUnitConvert
     {
-        private PrinterUnitConvert()
-        {
-        }
+        private PrinterUnitConvert() { }
 
         /// <summary>
         /// Converts the value, in fromUnit units, to toUnit units.
@@ -39,9 +37,9 @@ namespace System.Drawing.Printing
         public static Point Convert(Point value, PrinterUnit fromUnit, PrinterUnit toUnit)
         {
             return new Point(
-                            Convert(value.X, fromUnit, toUnit),
-                            Convert(value.Y, fromUnit, toUnit)
-                            );
+                Convert(value.X, fromUnit, toUnit),
+                Convert(value.Y, fromUnit, toUnit)
+            );
         }
 
         /// <summary>
@@ -50,9 +48,9 @@ namespace System.Drawing.Printing
         public static Size Convert(Size value, PrinterUnit fromUnit, PrinterUnit toUnit)
         {
             return new Size(
-                           Convert(value.Width, fromUnit, toUnit),
-                           Convert(value.Height, fromUnit, toUnit)
-                           );
+                Convert(value.Width, fromUnit, toUnit),
+                Convert(value.Height, fromUnit, toUnit)
+            );
         }
 
         /// <summary>
@@ -61,11 +59,11 @@ namespace System.Drawing.Printing
         public static Rectangle Convert(Rectangle value, PrinterUnit fromUnit, PrinterUnit toUnit)
         {
             return new Rectangle(
-                                Convert(value.X, fromUnit, toUnit),
-                                Convert(value.Y, fromUnit, toUnit),
-                                Convert(value.Width, fromUnit, toUnit),
-                                Convert(value.Height, fromUnit, toUnit)
-                                );
+                Convert(value.X, fromUnit, toUnit),
+                Convert(value.Y, fromUnit, toUnit),
+                Convert(value.Width, fromUnit, toUnit),
+                Convert(value.Height, fromUnit, toUnit)
+            );
         }
 
         /// <summary>

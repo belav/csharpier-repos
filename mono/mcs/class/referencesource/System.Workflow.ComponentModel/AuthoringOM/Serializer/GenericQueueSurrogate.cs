@@ -13,9 +13,17 @@ namespace System.Workflow.ComponentModel.Serialization
     internal sealed class GenericQueueSurrogate : ISerializationSurrogate
     {
         internal GenericQueueSurrogate() { }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
-            if (!obj.GetType().IsGenericType || obj.GetType().GetGenericTypeDefinition() != typeof(Queue<>))
+            if (
+                !obj.GetType().IsGenericType
+                || obj.GetType().GetGenericTypeDefinition() != typeof(Queue<>)
+            )
                 throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "obj");
 
             Type[] args = obj.GetType().GetGenericArguments();
@@ -30,7 +38,13 @@ namespace System.Workflow.ComponentModel.Serialization
             info.AddValue("itemType", args[0]);
             info.SetType(typeof(GenericQRef));
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }
@@ -41,6 +55,7 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             [OptionalField]
             private IList items = null;
+
             [OptionalField]
             private object item = null;
             private Type itemType = null;
@@ -52,11 +67,14 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 if (this.queue == null)
                 {
-                    Type queueType = typeof(Queue<int>).GetGenericTypeDefinition().MakeGenericType(itemType);
+                    Type queueType = typeof(Queue<int>)
+                        .GetGenericTypeDefinition()
+                        .MakeGenericType(itemType);
                     this.queue = queueType.GetConstructor(Type.EmptyTypes).Invoke(null);
                 }
                 return this.queue;
             }
+
             void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 if (this.queue != null)
@@ -81,5 +99,4 @@ namespace System.Workflow.ComponentModel.Serialization
         #endregion
     }
     #endregion
-
 }

@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,25 +30,35 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	public class ProviderConnectionPoint : ConnectionPoint
-	{
-		public ProviderConnectionPoint (MethodInfo callbackMethod, Type interfaceType,
-			Type controlType, string displayName, string id,
-			bool allowsMultipleConnections) : base (callbackMethod, interfaceType,
-					controlType, displayName, id, allowsMultipleConnections)
-		{
-		}
+    public class ProviderConnectionPoint : ConnectionPoint
+    {
+        public ProviderConnectionPoint(
+            MethodInfo callbackMethod,
+            Type interfaceType,
+            Type controlType,
+            string displayName,
+            string id,
+            bool allowsMultipleConnections
+        )
+            : base(
+                callbackMethod,
+                interfaceType,
+                controlType,
+                displayName,
+                id,
+                allowsMultipleConnections
+            ) { }
 
-		[MonoTODO ("Not implemented")]
-		public virtual object GetObject (Control control)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        public virtual object GetObject(Control control)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO ("Not implemented")]
-		public virtual ConnectionInterfaceCollection GetSecondaryInterfaces (Control control)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO("Not implemented")]
+        public virtual ConnectionInterfaceCollection GetSecondaryInterfaces(Control control)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

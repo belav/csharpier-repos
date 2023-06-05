@@ -17,11 +17,13 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class SqlExpressionVisitor : ExpressionVisitor
 {
     /// <inheritdoc />
-    protected override Expression VisitExtension(Expression extensionExpression)
-        => extensionExpression switch
+    protected override Expression VisitExtension(Expression extensionExpression) =>
+        extensionExpression switch
         {
             ShapedQueryExpression shapedQueryExpression
-                => shapedQueryExpression.UpdateQueryExpression(Visit(shapedQueryExpression.QueryExpression)),
+                => shapedQueryExpression.UpdateQueryExpression(
+                    Visit(shapedQueryExpression.QueryExpression)
+                ),
             AtTimeZoneExpression atTimeZoneExpression => VisitAtTimeZone(atTimeZoneExpression),
             CaseExpression caseExpression => VisitCase(caseExpression),
             CollateExpression collateExpression => VisitCollate(collateExpression),
@@ -41,15 +43,18 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
             OrderingExpression orderingExpression => VisitOrdering(orderingExpression),
             OuterApplyExpression outerApplyExpression => VisitOuterApply(outerApplyExpression),
             ProjectionExpression projectionExpression => VisitProjection(projectionExpression),
-            TableValuedFunctionExpression tableValuedFunctionExpression => VisitTableValuedFunction(tableValuedFunctionExpression),
+            TableValuedFunctionExpression tableValuedFunctionExpression
+                => VisitTableValuedFunction(tableValuedFunctionExpression),
             RowNumberExpression rowNumberExpression => VisitRowNumber(rowNumberExpression),
-            ScalarSubqueryExpression scalarSubqueryExpression => VisitScalarSubquery(scalarSubqueryExpression),
+            ScalarSubqueryExpression scalarSubqueryExpression
+                => VisitScalarSubquery(scalarSubqueryExpression),
             SelectExpression selectExpression => VisitSelect(selectExpression),
             SqlBinaryExpression sqlBinaryExpression => VisitSqlBinary(sqlBinaryExpression),
             SqlConstantExpression sqlConstantExpression => VisitSqlConstant(sqlConstantExpression),
             SqlFragmentExpression sqlFragmentExpression => VisitSqlFragment(sqlFragmentExpression),
             SqlFunctionExpression sqlFunctionExpression => VisitSqlFunction(sqlFunctionExpression),
-            SqlParameterExpression sqlParameterExpression => VisitSqlParameter(sqlParameterExpression),
+            SqlParameterExpression sqlParameterExpression
+                => VisitSqlParameter(sqlParameterExpression),
             SqlUnaryExpression sqlUnaryExpression => VisitSqlUnary(sqlUnaryExpression),
             TableExpression tableExpression => VisitTable(tableExpression),
             UnionExpression unionExpression => VisitUnion(unionExpression),
@@ -196,7 +201,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     /// </summary>
     /// <param name="tableValuedFunctionExpression">The expression to visit.</param>
     /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-    protected abstract Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression);
+    protected abstract Expression VisitTableValuedFunction(
+        TableValuedFunctionExpression tableValuedFunctionExpression
+    );
 
     /// <summary>
     ///     Visits the children of the row number expression.
@@ -210,7 +217,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     /// </summary>
     /// <param name="scalarSubqueryExpression">The expression to visit.</param>
     /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-    protected abstract Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression);
+    protected abstract Expression VisitScalarSubquery(
+        ScalarSubqueryExpression scalarSubqueryExpression
+    );
 
     /// <summary>
     ///     Visits the children of the select expression.

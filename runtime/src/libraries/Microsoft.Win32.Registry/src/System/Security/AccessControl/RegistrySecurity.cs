@@ -11,25 +11,59 @@ namespace System.Security.AccessControl
     public sealed class RegistryAccessRule : AccessRule
     {
         // Constructor for creating access rules for registry objects
-        public RegistryAccessRule(IdentityReference identity, RegistryRights registryRights, AccessControlType type)
-            : this(identity, (int)registryRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public RegistryAccessRule(
+            IdentityReference identity,
+            RegistryRights registryRights,
+            AccessControlType type
+        )
+            : this(
+                identity,
+                (int)registryRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-        public RegistryAccessRule(string identity, RegistryRights registryRights, AccessControlType type)
-            : this(new NTAccount(identity), (int)registryRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public RegistryAccessRule(
+            string identity,
+            RegistryRights registryRights,
+            AccessControlType type
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
-        public RegistryAccessRule(IdentityReference identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+        public RegistryAccessRule(
+            IdentityReference identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
             : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, type)
-        {
-        }
+        { }
 
-        public RegistryAccessRule(string identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
-            : this(new NTAccount(identity), (int)registryRights, false, inheritanceFlags, propagationFlags, type)
-        {
-        }
+        public RegistryAccessRule(
+            string identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -41,61 +75,75 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                type)
-        {
-        }
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         public RegistryRights RegistryRights
         {
             get { return (RegistryRights)AccessMask; }
         }
     }
-
 
     public sealed class RegistryAuditRule : AuditRule
     {
-        public RegistryAuditRule(IdentityReference identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
+        public RegistryAuditRule(
+            IdentityReference identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
             : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, flags)
-        {
-        }
+        { }
 
-        public RegistryAuditRule(string identity, RegistryRights registryRights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : this(new NTAccount(identity), (int)registryRights, false, inheritanceFlags, propagationFlags, flags)
-        {
-        }
+        public RegistryAuditRule(
+            string identity,
+            RegistryRights registryRights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : this(
+                new NTAccount(identity),
+                (int)registryRights,
+                false,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            ) { }
 
-        internal RegistryAuditRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
-        {
-        }
+        internal RegistryAuditRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         public RegistryRights RegistryRights
         {
             get { return (RegistryRights)AccessMask; }
         }
     }
-
 
     public sealed partial class RegistrySecurity : NativeObjectSecurity
     {
         public RegistrySecurity()
-            : base(true, ResourceType.RegistryKey)
-        {
-        }
+            : base(true, ResourceType.RegistryKey) { }
 
         internal RegistrySecurity(SafeRegistryHandle hKey, AccessControlSections includeSections)
             : base(true, ResourceType.RegistryKey, hKey, includeSections, _HandleErrorCode, null)
-        {
-        }
+        { }
 
-        private static Exception? _HandleErrorCode(int errorCode, string? name, SafeHandle? handle, object? context)
+        private static Exception? _HandleErrorCode(
+            int errorCode,
+            string? name,
+            SafeHandle? handle,
+            object? context
+        )
         {
             Exception? exception = null;
 
@@ -120,14 +168,42 @@ namespace System.Security.AccessControl
             return exception;
         }
 
-        public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            return new RegistryAccessRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type);
+            return new RegistryAccessRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            );
         }
 
-        public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
+        public override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
         {
-            return new RegistryAuditRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags);
+            return new RegistryAuditRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            );
         }
 
         internal AccessControlSections GetAccessControlSectionsFromChanges()
@@ -165,7 +241,7 @@ namespace System.Security.AccessControl
                 AccessControlSections persistRules = GetAccessControlSectionsFromChanges();
                 if (persistRules == AccessControlSections.None)
                 {
-                    return;  // Don't need to persist anything.
+                    return; // Don't need to persist anything.
                 }
 
                 Persist(hKey, persistRules);

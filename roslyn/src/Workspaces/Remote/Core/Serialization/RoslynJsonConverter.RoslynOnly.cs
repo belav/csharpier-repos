@@ -18,10 +18,12 @@ namespace Microsoft.CodeAnalysis.Remote
     internal partial class AggregateJsonConverter : JsonConverter
     {
 #pragma warning disable CA1822 // Mark members as static
-        // this type is shared by multiple teams such as Razor, LUT and etc which have either 
-        // separated/shared/shim repo so some types might not available to those context. this 
+        // this type is shared by multiple teams such as Razor, LUT and etc which have either
+        // separated/shared/shim repo so some types might not available to those context. this
         // partial method let us add Roslyn specific types without breaking them
-        partial void AppendRoslynSpecificJsonConverters(ImmutableDictionary<Type, JsonConverter>.Builder builder)
+        partial void AppendRoslynSpecificJsonConverters(
+            ImmutableDictionary<Type, JsonConverter>.Builder builder
+        )
 #pragma warning restore CA1822 // Mark members as static
         {
             Add(builder, new HighlightSpanJsonConverter());
@@ -35,7 +37,10 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private class TodoCommentDescriptorJsonConverter : BaseJsonConverter<TodoCommentDescriptor>
         {
-            protected override TodoCommentDescriptor ReadValue(JsonReader reader, JsonSerializer serializer)
+            protected override TodoCommentDescriptor ReadValue(
+                JsonReader reader,
+                JsonSerializer serializer
+            )
             {
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.StartObject);
 
@@ -49,7 +54,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new TodoCommentDescriptor(text, (int)priority);
             }
 
-            protected override void WriteValue(JsonWriter writer, TodoCommentDescriptor descriptor, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                TodoCommentDescriptor descriptor,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 
@@ -80,7 +89,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new TodoComment(descriptor, message, (int)position);
             }
 
-            protected override void WriteValue(JsonWriter writer, TodoComment todoComment, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                TodoComment todoComment,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 
@@ -112,7 +125,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new HighlightSpan(textSpan, kind);
             }
 
-            protected override void WriteValue(JsonWriter writer, HighlightSpan source, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                HighlightSpan source,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 
@@ -141,7 +158,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new TaggedText(tag, text);
             }
 
-            protected override void WriteValue(JsonWriter writer, TaggedText source, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                TaggedText source,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 
@@ -157,7 +178,10 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private class AnalyzerPerformanceInfoConverter : BaseJsonConverter<AnalyzerPerformanceInfo>
         {
-            protected override AnalyzerPerformanceInfo ReadValue(JsonReader reader, JsonSerializer serializer)
+            protected override AnalyzerPerformanceInfo ReadValue(
+                JsonReader reader,
+                JsonSerializer serializer
+            )
             {
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.StartObject);
 
@@ -171,7 +195,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new AnalyzerPerformanceInfo(analyzerid, builtIn, timeSpan);
             }
 
-            protected override void WriteValue(JsonWriter writer, AnalyzerPerformanceInfo info, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                AnalyzerPerformanceInfo info,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 

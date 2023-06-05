@@ -23,21 +23,29 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         public override ObjectNodeSection GetSection(NodeFactory factory) => _section;
+
         public override bool StaticDependenciesAreComputed => true;
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(_name);
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
-            return new ObjectData(_data, Array.Empty<Relocation>(), _alignment, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                _data,
+                Array.Empty<Relocation>(),
+                _alignment,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
 #if !SUPPORT_JIT
         public override int ClassCode => -470351029;

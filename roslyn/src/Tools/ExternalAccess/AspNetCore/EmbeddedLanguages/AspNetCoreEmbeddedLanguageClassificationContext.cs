@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
 
         internal AspNetCoreEmbeddedLanguageClassificationContext(
             EmbeddedLanguageClassificationContext context,
-            AspNetCoreVirtualCharSequence virtualCharSequence)
+            AspNetCoreVirtualCharSequence virtualCharSequence
+        )
         {
             _context = context;
             VirtualCharSequence = virtualCharSequence;
@@ -32,7 +33,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         /// <inheritdoc cref="EmbeddedLanguageClassificationContext.CancellationToken"/>
         public CancellationToken CancellationToken => _context.CancellationToken;
 
-        public void AddClassification(string classificationType, TextSpan span)
-            => _context.AddClassification(classificationType, span);
+        public void AddClassification(string classificationType, TextSpan span) =>
+            _context.AddClassification(classificationType, span);
     }
 }

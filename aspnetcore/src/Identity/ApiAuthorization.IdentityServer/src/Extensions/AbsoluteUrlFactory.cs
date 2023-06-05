@@ -26,7 +26,9 @@ internal sealed class AbsoluteUrlFactory : IAbsoluteUrlFactory
 
         if (ContextAccessor.HttpContext?.Request == null)
         {
-            throw new InvalidOperationException("The request is not currently available. This service can only be used within the context of an existing HTTP request.");
+            throw new InvalidOperationException(
+                "The request is not currently available. This service can only be used within the context of an existing HTTP request."
+            );
         }
 
         return GetAbsoluteUrl(ContextAccessor.HttpContext, path);

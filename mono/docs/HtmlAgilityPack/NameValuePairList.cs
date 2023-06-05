@@ -16,10 +16,8 @@ namespace HtmlAgilityPack
 
         #region Constructors
 
-        internal NameValuePairList() :
-            this(null)
-        {
-        }
+        internal NameValuePairList()
+            : this(null) { }
 
         internal NameValuePairList(string text)
         {
@@ -76,8 +74,8 @@ namespace HtmlAgilityPack
             {
                 if (pv.Length == 0)
                     continue;
-                string[] onep = pv.Split(new char[] {'='}, 2);
-                if (onep.Length==0)
+                string[] onep = pv.Split(new char[] { '=' }, 2);
+                if (onep.Length == 0)
                     continue;
                 NameValuePair nvp = new NameValuePair(onep[0].Trim().ToLower());
 

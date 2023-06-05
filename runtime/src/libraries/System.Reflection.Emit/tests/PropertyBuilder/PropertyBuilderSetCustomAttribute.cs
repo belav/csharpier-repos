@@ -16,15 +16,29 @@ namespace System.Reflection.Emit.Tests
 
             int expectedValue = 10;
             object[] ctorParamValues = new object[] { expectedValue };
-            CustomAttributeBuilder customAttrBuilder = new CustomAttributeBuilder(typeof(IntPropertyAttribute).GetConstructor(ctorParamTypes), ctorParamValues);
+            CustomAttributeBuilder customAttrBuilder = new CustomAttributeBuilder(
+                typeof(IntPropertyAttribute).GetConstructor(ctorParamTypes),
+                ctorParamValues
+            );
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, returnType, null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                returnType,
+                null
+            );
             property.SetCustomAttribute(customAttrBuilder);
 
-            MethodAttributes getMethodAttributes = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
-            MethodBuilder method = type.DefineMethod("TestMethod", getMethodAttributes, returnType, new Type[0]);
+            MethodAttributes getMethodAttributes =
+                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                getMethodAttributes,
+                returnType,
+                new Type[0]
+            );
 
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);
@@ -32,7 +46,11 @@ namespace System.Reflection.Emit.Tests
 
             property.SetGetMethod(method);
 
-            BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static;
+            BindingFlags bindingFlags =
+                BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.NonPublic
+                | BindingFlags.Static;
             Type createdType = type.CreateType();
             PropertyInfo createdProperty = createdType.GetProperty("TestProperty", bindingFlags);
             object[] attributes = createdProperty.GetCustomAttributes(false).ToArray();
@@ -46,9 +64,17 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder_NullBuilder_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, typeof(int), null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                typeof(int),
+                null
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () => property.SetCustomAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customBuilder",
+                () => property.SetCustomAttribute(null)
+            );
         }
 
         [Fact]
@@ -56,14 +82,24 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder_TypeNotCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, typeof(int), null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                typeof(int),
+                null
+            );
 
             Type[] ctorParamTypes = new Type[] { typeof(int) };
             object[] ctorParamValues = new object[] { 10 };
-            CustomAttributeBuilder customAttrBuilder = new CustomAttributeBuilder(typeof(IntPropertyAttribute).GetConstructor(ctorParamTypes), ctorParamValues);
+            CustomAttributeBuilder customAttrBuilder = new CustomAttributeBuilder(
+                typeof(IntPropertyAttribute).GetConstructor(ctorParamTypes),
+                ctorParamValues
+            );
 
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() => property.SetCustomAttribute(customAttrBuilder));
+            Assert.Throws<InvalidOperationException>(
+                () => property.SetCustomAttribute(customAttrBuilder)
+            );
         }
 
         [Fact]
@@ -84,18 +120,33 @@ namespace System.Reflection.Emit.Tests
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, returnType, null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                returnType,
+                null
+            );
             property.SetCustomAttribute(con, binaryAttribute);
 
-            MethodAttributes getMethodAttributes = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
-            MethodBuilder method = type.DefineMethod("TestMethod", getMethodAttributes, returnType, new Type[0]);
+            MethodAttributes getMethodAttributes =
+                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                getMethodAttributes,
+                returnType,
+                new Type[0]
+            );
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);
             methodILGenerator.Emit(OpCodes.Ret);
 
             property.SetGetMethod(method);
 
-            BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static;
+            BindingFlags bindingFlags =
+                BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.NonPublic
+                | BindingFlags.Static;
             Type createdType = type.CreateType();
             PropertyInfo createdProperty = createdType.GetProperty("TestProperty", bindingFlags);
             object[] attributes = createdProperty.GetCustomAttributes(false).ToArray();
@@ -109,23 +160,39 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorInfo_ByteArray_NullConstructorInfo_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, typeof(int), null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                typeof(int),
+                null
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("con", () => property.SetCustomAttribute(null, new byte[6]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "con",
+                () => property.SetCustomAttribute(null, new byte[6])
+            );
         }
-
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         public void SetCustomAttribute_ConstructorInfo_ByteArray_TypeAlreadyCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, typeof(int), null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                typeof(int),
+                null
+            );
 
-            ConstructorInfo con = typeof(IntPropertyAttribute).GetConstructor(new Type[] { typeof(int) });
+            ConstructorInfo con = typeof(IntPropertyAttribute).GetConstructor(
+                new Type[] { typeof(int) }
+            );
 
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() => property.SetCustomAttribute(con, new byte[6]));
+            Assert.Throws<InvalidOperationException>(
+                () => property.SetCustomAttribute(con, new byte[6])
+            );
         }
     }
 
@@ -133,13 +200,17 @@ namespace System.Reflection.Emit.Tests
     public class IntPropertyAttribute : Attribute
     {
         private int _value;
-        public int Value { get { return _value; } }
+        public int Value
+        {
+            get { return _value; }
+        }
 
         public IntPropertyAttribute(int value)
         {
             _value = value;
         }
 
-        public IntPropertyAttribute() : this(0) { }
+        public IntPropertyAttribute()
+            : this(0) { }
     }
 }

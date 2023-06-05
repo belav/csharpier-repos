@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,103 +30,104 @@
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEvent("ServerClick")]
+    [SupportsEventValidation]
+    public class HtmlButton : HtmlContainerControl, IPostBackEventHandler
+    {
+        static readonly object ServerClickEvent = new object();
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEvent("ServerClick")]
-	[SupportsEventValidation]
-	public class HtmlButton : HtmlContainerControl, IPostBackEventHandler {
+        public HtmlButton()
+            : base("button") { }
 
-		static readonly object ServerClickEvent = new object();
+        [DefaultValue(true)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public virtual bool CausesValidation
+        {
+            get { return ViewState.GetBool("CausesValidation", true); }
+            set { ViewState["CausesValidation"] = value; }
+        }
 
-		public HtmlButton () : base ("button")
-		{
-		}
+        [DefaultValue("")]
+        public virtual string ValidationGroup
+        {
+            get { return ViewState.GetString("ValidationGroup", ""); }
+            set { ViewState["ValidationGroup"] = value; }
+        }
 
-		[DefaultValue(true)]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public virtual bool CausesValidation {
-			get {
-				return ViewState.GetBool ("CausesValidation", true);
-			}
-			set {
-				ViewState ["CausesValidation"] = value;
-			}
-		}
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
+            RaisePostBackEvent(eventArgument);
+        }
 
-		[DefaultValue ("")]
-		public virtual string ValidationGroup 
-		{
-			get {
-				return ViewState.GetString ("ValidationGroup", "");
-			}
-			set {
-				ViewState ["ValidationGroup"] = value;
-			}
-		}
-		void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
-		{
-			RaisePostBackEvent (eventArgument);
-		}
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
+            ValidateEvent(UniqueID, eventArgument);
+            if (CausesValidation)
+                Page.Validate(ValidationGroup);
+            OnServerClick(EventArgs.Empty);
+        }
 
-		protected virtual void RaisePostBackEvent (string eventArgument)
-		{
-			ValidateEvent (UniqueID, eventArgument);
-			if (CausesValidation)
-				Page.Validate (ValidationGroup);
-			OnServerClick (EventArgs.Empty);
-		}
-		
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
-		}
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+        }
 
-		protected virtual void OnServerClick (EventArgs e)
-		{
-			EventHandler server_click = (EventHandler) Events [ServerClickEvent];
-			if (server_click != null)
-				server_click (this, e);
-		}
+        protected virtual void OnServerClick(EventArgs e)
+        {
+            EventHandler server_click = (EventHandler)Events[ServerClickEvent];
+            if (server_click != null)
+                server_click(this, e);
+        }
 
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			Page page = Page;
-			if (page != null && Events [ServerClickEvent] != null) {
-				PostBackOptions options = GetPostBackOptions ();
-				Attributes ["onclick"] += page.ClientScript.GetPostBackEventReference (options, true);
-				writer.WriteAttribute ("language", "javascript");
-			}
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            Page page = Page;
+            if (page != null && Events[ServerClickEvent] != null)
+            {
+                PostBackOptions options = GetPostBackOptions();
+                Attributes["onclick"] += page.ClientScript.GetPostBackEventReference(options, true);
+                writer.WriteAttribute("language", "javascript");
+            }
 
-			base.RenderAttributes (writer);
-		}
+            base.RenderAttributes(writer);
+        }
 
-		PostBackOptions GetPostBackOptions ()
-		{
-			Page page = Page;
-			PostBackOptions options = new PostBackOptions (this);
-			options.ValidationGroup = null;
-			options.ActionUrl = null;
-			options.Argument = String.Empty;
-			options.RequiresJavaScriptProtocol = false;
-			options.ClientSubmit = true;
-			options.PerformValidation = CausesValidation && page != null && page.AreValidatorsUplevel (ValidationGroup);
-			if (options.PerformValidation)
-				options.ValidationGroup = ValidationGroup;
+        PostBackOptions GetPostBackOptions()
+        {
+            Page page = Page;
+            PostBackOptions options = new PostBackOptions(this);
+            options.ValidationGroup = null;
+            options.ActionUrl = null;
+            options.Argument = String.Empty;
+            options.RequiresJavaScriptProtocol = false;
+            options.ClientSubmit = true;
+            options.PerformValidation =
+                CausesValidation && page != null && page.AreValidatorsUplevel(ValidationGroup);
+            if (options.PerformValidation)
+                options.ValidationGroup = ValidationGroup;
 
-			return options;
-		}
+            return options;
+        }
 
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		public event EventHandler ServerClick {
-			add { Events.AddHandler (ServerClickEvent, value); }
-			remove { Events.RemoveHandler (ServerClickEvent, value); }
-		}
-	}
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event EventHandler ServerClick
+        {
+            add { Events.AddHandler(ServerClickEvent, value); }
+            remove { Events.RemoveHandler(ServerClickEvent, value); }
+        }
+    }
 }
-

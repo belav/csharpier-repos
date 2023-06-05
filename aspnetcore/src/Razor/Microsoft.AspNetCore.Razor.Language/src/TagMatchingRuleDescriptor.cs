@@ -24,13 +24,14 @@ public abstract class TagMatchingRuleDescriptor : IEquatable<TagMatchingRuleDesc
 
     public IReadOnlyList<RazorDiagnostic> Diagnostics { get; protected set; }
 
-
     public bool HasErrors
     {
         get
         {
             var allDiagnostics = GetAllDiagnostics();
-            var errors = allDiagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+            var errors = allDiagnostics.Any(
+                diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+            );
 
             return errors;
         }

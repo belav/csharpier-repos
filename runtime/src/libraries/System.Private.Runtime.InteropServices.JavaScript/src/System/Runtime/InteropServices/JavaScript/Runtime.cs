@@ -10,7 +10,9 @@ namespace System.Runtime.InteropServices.JavaScript
     public static partial class Runtime
     {
         private const string TaskGetResultName = "get_Result";
-        private static readonly MethodInfo _taskGetResultMethodInfo = typeof(Task<>).GetMethod(TaskGetResultName)!;
+        private static readonly MethodInfo _taskGetResultMethodInfo = typeof(Task<>).GetMethod(
+            TaskGetResultName
+        )!;
 
         /// <summary>
         /// Execute the provided string in the JavaScript context
@@ -99,7 +101,12 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             var methodHandle = GetMethodHandleFromIntPtr(_methodHandle);
 
-            MethodBase? mb = objForRuntimeType is null ? MethodBase.GetMethodFromHandle(methodHandle) : MethodBase.GetMethodFromHandle(methodHandle, Type.GetTypeHandle(objForRuntimeType));
+            MethodBase? mb = objForRuntimeType is null
+                ? MethodBase.GetMethodFromHandle(methodHandle)
+                : MethodBase.GetMethodFromHandle(
+                    methodHandle,
+                    Type.GetTypeHandle(objForRuntimeType)
+                );
             if (mb is null)
                 return string.Empty;
 
@@ -181,7 +188,9 @@ namespace System.Runtime.InteropServices.JavaScript
             if (type.IsArray)
             {
                 if (!type.IsSZArray)
-                    throw new JSException("Only single-dimensional arrays with a zero lower bound can be marshaled to JS");
+                    throw new JSException(
+                        "Only single-dimensional arrays with a zero lower bound can be marshaled to JS"
+                    );
 
                 var elementType = type.GetElementType();
                 switch (Type.GetTypeCode(elementType))
@@ -227,7 +236,10 @@ namespace System.Runtime.InteropServices.JavaScript
                 return MarshalType.OBJECT;
         }
 
-        internal static char GetCallSignatureCharacterForMarshalType(MarshalType t, char? defaultValue)
+        internal static char GetCallSignatureCharacterForMarshalType(
+            MarshalType t,
+            char? defaultValue
+        )
         {
             switch (t)
             {
@@ -281,8 +293,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// The reason for this restriction is to make this use of Reflection trim-compatible,
         /// ensuring that trimming doesn't change the application's behavior.
         /// </remarks>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Task<T>.Result is preserved by the ILLinker because _taskGetResultMethodInfo was initialized with it.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Task<T>.Result is preserved by the ILLinker because _taskGetResultMethodInfo was initialized with it."
+        )]
         private static MethodInfo? GetTaskResultMethodInfo(Type taskType)
         {
             MethodInfo? result = taskType.GetMethod(TaskGetResultName);
@@ -304,7 +319,9 @@ namespace System.Runtime.InteropServices.JavaScript
             ArgumentNullException.ThrowIfNull(dtv);
 
             if (!(dtv is DateTime dt))
-                throw new InvalidCastException(SR.Format(SR.UnableCastObjectToType, dtv.GetType(), typeof(DateTime)));
+                throw new InvalidCastException(
+                    SR.Format(SR.UnableCastObjectToType, dtv.GetType(), typeof(DateTime))
+                );
             if (dt.Kind == DateTimeKind.Local)
                 dt = dt.ToUniversalTime();
             else if (dt.Kind == DateTimeKind.Unspecified)
@@ -332,9 +349,23 @@ namespace System.Runtime.InteropServices.JavaScript
                 throw new JSException(res);
         }
 
-        public static Task<object> WebSocketOpen(string uri, object[]? subProtocols, Delegate onClosed, out JSObject webSocket, out IntPtr promiseJSHandle)
+        public static Task<object> WebSocketOpen(
+            string uri,
+            object[]? subProtocols,
+            Delegate onClosed,
+            out JSObject webSocket,
+            out IntPtr promiseJSHandle
+        )
         {
-            Interop.Runtime.WebSocketOpenRef(uri, subProtocols, onClosed, out IntPtr webSocketJSHandle, out promiseJSHandle, out int exception, out object res);
+            Interop.Runtime.WebSocketOpenRef(
+                uri,
+                subProtocols,
+                onClosed,
+                out IntPtr webSocketJSHandle,
+                out promiseJSHandle,
+                out int exception,
+                out object res
+            );
             if (exception != 0)
                 throw new JSException((string)res);
             webSocket = new JSObject((IntPtr)webSocketJSHandle);
@@ -342,11 +373,27 @@ namespace System.Runtime.InteropServices.JavaScript
             return (Task<object>)res;
         }
 
-        public static unsafe Task<object>? WebSocketSend(JSObject webSocket, ArraySegment<byte> buffer, int messageType, bool endOfMessage, out IntPtr promiseJSHandle)
+        public static unsafe Task<object>? WebSocketSend(
+            JSObject webSocket,
+            ArraySegment<byte> buffer,
+            int messageType,
+            bool endOfMessage,
+            out IntPtr promiseJSHandle
+        )
         {
             fixed (byte* messagePtr = buffer.Array)
             {
-                Interop.Runtime.WebSocketSend(webSocket.JSHandle, (IntPtr)messagePtr, buffer.Offset, buffer.Count, messageType, endOfMessage, out promiseJSHandle, out int exception, out object res);
+                Interop.Runtime.WebSocketSend(
+                    webSocket.JSHandle,
+                    (IntPtr)messagePtr,
+                    buffer.Offset,
+                    buffer.Count,
+                    messageType,
+                    endOfMessage,
+                    out promiseJSHandle,
+                    out int exception,
+                    out object res
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
 
@@ -359,12 +406,26 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        public static unsafe Task<object>? WebSocketReceive(JSObject webSocket, ArraySegment<byte> buffer, ReadOnlySpan<int> response, out IntPtr promiseJSHandle)
+        public static unsafe Task<object>? WebSocketReceive(
+            JSObject webSocket,
+            ArraySegment<byte> buffer,
+            ReadOnlySpan<int> response,
+            out IntPtr promiseJSHandle
+        )
         {
             fixed (int* responsePtr = response)
             fixed (byte* bufferPtr = buffer.Array)
             {
-                Interop.Runtime.WebSocketReceive(webSocket.JSHandle, (IntPtr)bufferPtr, buffer.Offset, buffer.Count, (IntPtr)responsePtr, out promiseJSHandle, out int exception, out object res);
+                Interop.Runtime.WebSocketReceive(
+                    webSocket.JSHandle,
+                    (IntPtr)bufferPtr,
+                    buffer.Offset,
+                    buffer.Count,
+                    (IntPtr)responsePtr,
+                    out promiseJSHandle,
+                    out int exception,
+                    out object res
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 if (res == null)
@@ -375,9 +436,23 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        public static Task<object>? WebSocketClose(JSObject webSocket, int code, string? reason, bool waitForCloseReceived, out IntPtr promiseJSHandle)
+        public static Task<object>? WebSocketClose(
+            JSObject webSocket,
+            int code,
+            string? reason,
+            bool waitForCloseReceived,
+            out IntPtr promiseJSHandle
+        )
         {
-            Interop.Runtime.WebSocketCloseRef(webSocket.JSHandle, code, reason, waitForCloseReceived, out promiseJSHandle, out int exception, out object res);
+            Interop.Runtime.WebSocketCloseRef(
+                webSocket.JSHandle,
+                code,
+                reason,
+                waitForCloseReceived,
+                out promiseJSHandle,
+                out int exception,
+                out object res
+            );
             if (exception != 0)
                 throw new JSException((string)res);
 

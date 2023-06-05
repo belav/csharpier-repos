@@ -67,7 +67,10 @@ namespace RabbitMQ.Client.Impl
     {
         private NetworkBinaryWriter m_writer;
 
-        public NetworkBinaryWriter BaseWriter { get { return m_writer; } }
+        public NetworkBinaryWriter BaseWriter
+        {
+            get { return m_writer; }
+        }
 
         protected ushort m_flagWord;
         protected int m_bitCount;

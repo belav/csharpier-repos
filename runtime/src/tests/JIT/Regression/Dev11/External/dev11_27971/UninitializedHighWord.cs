@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 namespace UninitializedHighWord
 {
     public struct StackFiller
@@ -50,7 +49,6 @@ namespace UninitializedHighWord
         }
     }
 
-
     public struct SystemTime
     {
         public short Year;
@@ -63,7 +61,6 @@ namespace UninitializedHighWord
         public short Milliseconds;
     }
 
-
     public struct RegistryTimeZoneInformation
     {
         public Int32 Bias;
@@ -73,18 +70,13 @@ namespace UninitializedHighWord
         public SystemTime DaylightDate;
     }
 
-
     public static class App
     {
-
-
         private static bool s_fArgumentCheckPassed = false;
         private static bool s_fPreparingMethods = false;
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static
-        void CheckArguments(
+        private static void CheckArguments(
             Int32 fill,
             Int32 year,
             Int32 month,
@@ -93,7 +85,7 @@ namespace UninitializedHighWord
             Int32 minute,
             Int32 second,
             Int32 milliseconds
-            )
+        )
         {
             if (App.s_fPreparingMethods)
             {
@@ -101,10 +93,7 @@ namespace UninitializedHighWord
             }
             else
             {
-                if ((hour == 0) &&
-                    (minute == 0) &&
-                    (second == 0) &&
-                    (milliseconds == 0))
+                if ((hour == 0) && (minute == 0) && (second == 0) && (milliseconds == 0))
                 {
                     App.s_fArgumentCheckPassed = true;
                     Console.WriteLine("Argument check passed.  All trailing arguments are zero.");
@@ -114,11 +103,11 @@ namespace UninitializedHighWord
                     App.s_fArgumentCheckPassed = false;
 
                     Console.WriteLine(
-                        "Argument check failed.  Trailing argument values are:\r\n" +
-                        "    Hour           = {0:x8}\r\n" +
-                        "    Minute         = {1:x8}\r\n" +
-                        "    Second         = {2:x8}\r\n" +
-                        "    Milliseconds   = {3:x8}\r\n",
+                        "Argument check failed.  Trailing argument values are:\r\n"
+                            + "    Hour           = {0:x8}\r\n"
+                            + "    Minute         = {1:x8}\r\n"
+                            + "    Second         = {2:x8}\r\n"
+                            + "    Milliseconds   = {3:x8}\r\n",
                         hour,
                         minute,
                         second,
@@ -130,12 +119,10 @@ namespace UninitializedHighWord
             }
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static
-        void GenerateHalfInitializedArgSlots(
+        private static void GenerateHalfInitializedArgSlots(
             RegistryTimeZoneInformation timeZoneInformation
-            )
+        )
         {
             if (timeZoneInformation.DaylightDate.Year == 0)
             {
@@ -154,10 +141,8 @@ namespace UninitializedHighWord
             return;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static
-        void InitializeStack(
+        private static void InitializeStack(
             Int32 arg1,
             Int32 arg2,
             Int32 arg3,
@@ -166,34 +151,25 @@ namespace UninitializedHighWord
             StackFiller fill2,
             StackFiller fill3,
             StackFiller fill4
-            )
+        )
         {
             return;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static
-        void StompStackBelowCallerSP(
-            )
+        private static void StompStackBelowCallerSP()
         {
             var filler = new StackFiller();
 
             StackFiller.FillWithFFPattern(ref filler);
 
-            App.InitializeStack(
-                1, 1, 1, 1,
-                filler, filler, filler, filler
-            );
+            App.InitializeStack(1, 1, 1, 1, filler, filler, filler, filler);
 
             return;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static
-        void PrepareMethods(
-            )
+        private static void PrepareMethods()
         {
             var timeZoneInformation = new RegistryTimeZoneInformation();
 
@@ -206,24 +182,14 @@ namespace UninitializedHighWord
             return;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static
-        int RunTest(
-            )
+        private static int RunTest()
         {
             var timeZoneInformation = new RegistryTimeZoneInformation();
 
-
-
             App.StompStackBelowCallerSP();
 
-
-
-
             App.GenerateHalfInitializedArgSlots(timeZoneInformation);
-
-
 
             if (App.s_fArgumentCheckPassed)
             {
@@ -236,7 +202,6 @@ namespace UninitializedHighWord
                 return 101;
             }
         }
-
 
         public static int Main()
         {

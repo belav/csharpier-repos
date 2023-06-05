@@ -32,9 +32,10 @@ namespace System.Data.Mapping.ViewGeneration.Utils
         }
 
         static internal DbCommandTree CompileView(
-            string viewDef, 
-            StorageMappingItemCollection mappingItemCollection, 
-            ParserOptions.CompilationMode compilationMode)
+            string viewDef,
+            StorageMappingItemCollection mappingItemCollection,
+            ParserOptions.CompilationMode compilationMode
+        )
         {
             Debug.Assert(!String.IsNullOrEmpty(viewDef), "!String.IsNullOrEmpty(viewDef)");
             Debug.Assert(mappingItemCollection != null, "mappingItemCollection != null");
@@ -42,9 +43,11 @@ namespace System.Data.Mapping.ViewGeneration.Utils
             Perspective perspective = new TargetPerspective(mappingItemCollection.Workspace);
             ParserOptions parserOptions = new ParserOptions();
             parserOptions.ParserCompilationMode = compilationMode;
-            DbCommandTree expr = CqlQuery.Compile(viewDef, perspective, parserOptions, null).CommandTree;
+            DbCommandTree expr = CqlQuery
+                .Compile(viewDef, perspective, parserOptions, null)
+                .CommandTree;
             Debug.Assert(expr != null, "Compile returned empty tree?");
-            
+
             return expr;
         }
 
@@ -52,7 +55,8 @@ namespace System.Data.Mapping.ViewGeneration.Utils
             string viewDef,
             StorageMappingItemCollection mappingItemCollection,
             ParserOptions.CompilationMode compilationMode,
-            IEnumerable<DbParameterReferenceExpression> parameters)
+            IEnumerable<DbParameterReferenceExpression> parameters
+        )
         {
             Debug.Assert(!String.IsNullOrEmpty(viewDef), "!String.IsNullOrEmpty(viewDef)");
             Debug.Assert(mappingItemCollection != null, "mappingItemCollection != null");
@@ -68,8 +72,10 @@ namespace System.Data.Mapping.ViewGeneration.Utils
                 viewDef,
                 perspective,
                 parserOptions,
-                null /* parameters */,
-                parameters.Select(pInfo => pInfo.ResultType.Variable(pInfo.ParameterName)));
+                null /* parameters */
+                ,
+                parameters.Select(pInfo => pInfo.ResultType.Variable(pInfo.ParameterName))
+            );
             Debug.Assert(functionBody != null, "functionBody != null");
             DbExpression expr = functionBody.Invoke(parameters);
 
@@ -83,12 +89,19 @@ namespace System.Data.Mapping.ViewGeneration.Utils
         /// </summary>
         static internal DbLambda CompileFunctionDefinition(
             string functionFullName,
-            string functionDefinition, 
-            IList<FunctionParameter> functionParameters, 
-            EdmItemCollection edmItemCollection)
+            string functionDefinition,
+            IList<FunctionParameter> functionParameters,
+            EdmItemCollection edmItemCollection
+        )
         {
-            Debug.Assert(!String.IsNullOrEmpty(functionFullName), "!String.IsNullOrEmpty(functionFullName)");
-            Debug.Assert(!String.IsNullOrEmpty(functionDefinition), "!String.IsNullOrEmpty(functionDefinition)");
+            Debug.Assert(
+                !String.IsNullOrEmpty(functionFullName),
+                "!String.IsNullOrEmpty(functionFullName)"
+            );
+            Debug.Assert(
+                !String.IsNullOrEmpty(functionDefinition),
+                "!String.IsNullOrEmpty(functionDefinition)"
+            );
             Debug.Assert(functionParameters != null, "functionParameters != null");
             Debug.Assert(edmItemCollection != null, "edmItemCollection != null");
 
@@ -101,9 +114,12 @@ namespace System.Data.Mapping.ViewGeneration.Utils
             DbLambda functionBody = CqlQuery.CompileQueryCommandLambda(
                 functionDefinition,
                 perspective,
-                null /* use default parser options */,
-                null /* parameters */,
-                functionParameters.Select(pInfo => pInfo.TypeUsage.Variable(pInfo.Name)));
+                null /* use default parser options */
+                ,
+                null /* parameters */
+                ,
+                functionParameters.Select(pInfo => pInfo.TypeUsage.Variable(pInfo.Name))
+            );
             Debug.Assert(functionBody != null, "functionBody != null");
 
             return functionBody;

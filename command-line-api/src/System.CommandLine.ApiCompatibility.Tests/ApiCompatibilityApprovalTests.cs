@@ -31,7 +31,9 @@ public class ApiCompatibilityApprovalTests
     [UseReporter(typeof(DiffReporter))]
     public void System_CommandLine_NamingConventionBinder_api_is_not_changed()
     {
-        var contract = ApiContract.GenerateContractForAssembly(typeof(ModelBindingCommandHandler).Assembly);
+        var contract = ApiContract.GenerateContractForAssembly(
+            typeof(ModelBindingCommandHandler).Assembly
+        );
         Approvals.Verify(contract);
     }
 }

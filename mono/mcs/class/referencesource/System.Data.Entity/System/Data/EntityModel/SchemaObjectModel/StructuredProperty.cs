@@ -23,7 +23,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #region Instance Fields
         private SchemaType _type = null;
         private string _unresolvedType = null;
-        
+
         // Facets
         private TypeUsageBuilder _typeUsageBuilder;
 
@@ -32,13 +32,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #endregion
         #region Static Fields
-        
+
         //private static System.Text.RegularExpressions.Regex _binaryValueValidator = new System.Text.RegularExpressions.Regex("0[xX][0-9a-fA-F]+");
         #endregion
         #region Public Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal StructuredProperty(StructuredType parentElement)
@@ -51,79 +51,60 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #region Public Properties
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override SchemaType Type
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         /// <summary>
-        /// Returns a TypeUsage that represent this property. 
+        /// Returns a TypeUsage that represent this property.
         /// </summary>
         public TypeUsage TypeUsage
         {
-            get
-            {
-                return _typeUsageBuilder.TypeUsage;
-            }
+            get { return _typeUsageBuilder.TypeUsage; }
         }
-        
+
         /// <summary>
         /// The nullablity of this property.
         /// </summary>
         public bool Nullable
         {
-            get
-            {
-                return _typeUsageBuilder.Nullable;
-            }
+            get { return _typeUsageBuilder.Nullable; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string Default
         {
-            get
-            {
-                return _typeUsageBuilder.Default;
-            }
+            get { return _typeUsageBuilder.Default; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public object DefaultAsObject
         {
-            get
-            {
-                return _typeUsageBuilder.DefaultAsObject;
-            }
+            get { return _typeUsageBuilder.DefaultAsObject; }
         }
 
-
         /// <summary>
-        /// Specifies the type of the Collection. 
+        /// Specifies the type of the Collection.
         /// By Default this is Single( i.e. not a Collection.
         /// And in case of Collections, will be either Bag or List
         /// </summary>
         public CollectionKind CollectionKind
         {
-            get
-            {
-                return _collectionKind;
-            }
+            get { return _collectionKind; }
         }
 
         #endregion
         #region Internal Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal override void ResolveTopLevelNames()
         {
@@ -145,15 +126,24 @@ namespace System.Data.EntityModel.SchemaObjectModel
             }
         }
 
-        // 
+        //
 
 
 
-        internal void EnsureEnumTypeFacets(Converter.ConversionCache convertedItemCache, Dictionary<SchemaElement, GlobalItem> newGlobalItems)
+        internal void EnsureEnumTypeFacets(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             Debug.Assert(Type is SchemaEnumType);
-            EdmType propertyType = (EdmType)Converter.LoadSchemaElement(Type, Type.Schema.ProviderManifest, convertedItemCache, newGlobalItems);
-            _typeUsageBuilder.ValidateAndSetTypeUsage(propertyType, false);//use typeusagebuilder so dont lose facet information
+            EdmType propertyType = (EdmType)
+                Converter.LoadSchemaElement(
+                    Type,
+                    Type.Schema.ProviderManifest,
+                    convertedItemCache,
+                    newGlobalItems
+                );
+            _typeUsageBuilder.ValidateAndSetTypeUsage(propertyType, false); //use typeusagebuilder so dont lose facet information
         }
 
         /// <summary>
@@ -169,10 +159,17 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 return null;
             }
 
-            if (!(element is SchemaComplexType) && !(element is ScalarType) && !(element is SchemaEnumType))
+            if (
+                !(element is SchemaComplexType)
+                && !(element is ScalarType)
+                && !(element is SchemaEnumType)
+            )
             {
-                AddError(ErrorCode.InvalidPropertyType, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidPropertyType(UnresolvedType));
+                AddError(
+                    ErrorCode.InvalidPropertyType,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.InvalidPropertyType(UnresolvedType)
+                );
                 return null;
             }
 
@@ -184,19 +181,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Internal Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <value></value>
         internal string UnresolvedType
         {
-            get
-            {
-                return _unresolvedType;
-            }
-            set
-            {
-                _unresolvedType = value;
-            }
+            get { return _unresolvedType; }
+            set { _unresolvedType = value; }
         }
 
         #endregion
@@ -206,24 +197,33 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             base.Validate();
             //Non Complex Collections are not supported
-            if ((_collectionKind == CollectionKind.Bag) ||
-                (_collectionKind == CollectionKind.List))
+            if ((_collectionKind == CollectionKind.Bag) || (_collectionKind == CollectionKind.List))
             {
-                Debug.Assert(Schema.SchemaVersion != XmlConstants.EdmVersionForV1,
-                    "CollctionKind Attribute is not supported in EDM V1");
+                Debug.Assert(
+                    Schema.SchemaVersion != XmlConstants.EdmVersionForV1,
+                    "CollctionKind Attribute is not supported in EDM V1"
+                );
             }
 
             var schemaEnumType = this._type as SchemaEnumType;
             if (schemaEnumType != null)
             {
                 this._typeUsageBuilder.ValidateEnumFacets(schemaEnumType);
-            } 
-            else if (Nullable && (this.Schema.SchemaVersion != XmlConstants.EdmVersionForV1_1)
-                && (this._type is SchemaComplexType))
+            }
+            else if (
+                Nullable
+                && (this.Schema.SchemaVersion != XmlConstants.EdmVersionForV1_1)
+                && (this._type is SchemaComplexType)
+            )
             {
                 //Nullable Complex Types are not supported in V1.0, V2 and V3
-                AddError(ErrorCode.NullableComplexType, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.ComplexObject_NullableComplexTypesNotSupported(this.FQName));
+                AddError(
+                    ErrorCode.NullableComplexType,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.ComplexObject_NullableComplexTypesNotSupported(
+                        this.FQName
+                    )
+                );
             }
         }
 
@@ -254,15 +254,19 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #endregion
         #region Private Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleTypeAttribute(XmlReader reader)
         {
             if (UnresolvedType != null)
             {
-                AddError(ErrorCode.AlreadyDefined, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.PropertyTypeAlreadyDefined(reader.Name));
+                AddError(
+                    ErrorCode.AlreadyDefined,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.PropertyTypeAlreadyDefined(reader.Name)
+                );
                 return;
             }
 
@@ -296,8 +300,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 }
                 else
                 {
-                    Debug.Fail("Xsd should have changed", "XSD validation should have ensured that" +
-                        " Multiplicity attribute has only 'None' or 'Bag' or 'List' as the values");
+                    Debug.Fail(
+                        "Xsd should have changed",
+                        "XSD validation should have ensured that"
+                            + " Multiplicity attribute has only 'None' or 'Bag' or 'List' as the values"
+                    );
                     return;
                 }
             }

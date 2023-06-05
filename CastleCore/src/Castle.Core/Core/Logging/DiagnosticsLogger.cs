@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,16 +35,16 @@ namespace Castle.Core.Logging
         ///   Creates a logger based on <see cref = "EventLog" />.
         /// </summary>
         /// <param name = "logName"><see cref = "EventLog.Log" /></param>
-        public DiagnosticsLogger(string logName) : this(logName, "default")
-        {
-        }
+        public DiagnosticsLogger(string logName)
+            : this(logName, "default") { }
 
         /// <summary>
         ///   Creates a logger based on <see cref = "EventLog" />.
         /// </summary>
         /// <param name = "logName"><see cref = "EventLog.Log" /></param>
         /// <param name = "source"><see cref = "EventLog.Source" /></param>
-        public DiagnosticsLogger(string logName, string source) : base(LoggerLevel.Trace)
+        public DiagnosticsLogger(string logName, string source)
+            : base(LoggerLevel.Trace)
         {
             // Create the source, if it does not already exist.
             if (!EventLog.SourceExists(source))
@@ -98,7 +98,12 @@ namespace Castle.Core.Logging
             }
         }
 
-        protected override void Log(LoggerLevel loggerLevel, string loggerName, string message, Exception exception)
+        protected override void Log(
+            LoggerLevel loggerLevel,
+            string loggerName,
+            string message,
+            Exception exception
+        )
         {
             if (eventLog == null)
             {
@@ -111,14 +116,26 @@ namespace Castle.Core.Logging
 
             if (exception == null)
             {
-                contentToLog = string.Format(CultureInfo.CurrentCulture, "[{0}] '{1}' message: {2}", loggerLevel, loggerName,
-                                             message);
+                contentToLog = string.Format(
+                    CultureInfo.CurrentCulture,
+                    "[{0}] '{1}' message: {2}",
+                    loggerLevel,
+                    loggerName,
+                    message
+                );
             }
             else
             {
-                contentToLog = string.Format(CultureInfo.CurrentCulture, "[{0}] '{1}' message: {2} exception: {3} {4} {5}",
-                                             loggerLevel, loggerName, message, exception.GetType(), exception.Message,
-                                             exception.StackTrace);
+                contentToLog = string.Format(
+                    CultureInfo.CurrentCulture,
+                    "[{0}] '{1}' message: {2} exception: {3} {4} {5}",
+                    loggerLevel,
+                    loggerName,
+                    message,
+                    exception.GetType(),
+                    exception.Message,
+                    exception.StackTrace
+                );
             }
 
             eventLog.WriteEntry(contentToLog, type);

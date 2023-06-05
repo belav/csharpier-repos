@@ -14,19 +14,14 @@ namespace Internal.TypeSystem
     {
         public override MethodNameAndSignature NameAndSignature
         {
-            get
-            {
-                return _methodDef.NameAndSignature;
-            }
+            get { return _methodDef.NameAndSignature; }
         }
-
 
         protected override bool ComputeIsNonSharableMethod()
         {
-            return !IsCanonicalMethod(CanonicalFormKind.Any) &&
-                        this == GetCanonMethodTarget(CanonicalFormKind.Specific);
+            return !IsCanonicalMethod(CanonicalFormKind.Any)
+                && this == GetCanonMethodTarget(CanonicalFormKind.Specific);
         }
-
 
         /// <summary>
         /// Does this method need a dictionary?
@@ -57,10 +52,7 @@ namespace Internal.TypeSystem
 
         public override bool UnboxingStub
         {
-            get
-            {
-                return _methodDef.UnboxingStub;
-            }
+            get { return _methodDef.UnboxingStub; }
         }
 
 #if DEBUG

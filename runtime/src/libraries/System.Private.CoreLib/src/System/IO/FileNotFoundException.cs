@@ -8,7 +8,9 @@ namespace System.IO
 {
     // Thrown when trying to access a file that doesn't exist on disk.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class FileNotFoundException : IOException
     {
         public FileNotFoundException()
@@ -57,8 +59,7 @@ namespace System.IO
         {
             if (_message == null)
             {
-                if ((FileName == null) &&
-                    (HResult == System.HResults.COR_E_EXCEPTION))
+                if ((FileName == null) && (HResult == System.HResults.COR_E_EXCEPTION))
                     _message = SR.IO_FileNotFound;
                 else if (FileName != null)
                     _message = FileLoadException.FormatFileLoadExceptionMessage(FileName, HResult);

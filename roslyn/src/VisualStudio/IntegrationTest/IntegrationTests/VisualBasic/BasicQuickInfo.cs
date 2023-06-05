@@ -18,27 +18,31 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicQuickInfo(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicQuickInfo))
-        {
-        }
+            : base(instanceFactory, nameof(BasicQuickInfo)) { }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/38301")]
         public void QuickInfo1()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 ''' <summary>Hello!</summary>
 Class Program
     Sub Main(ByVal args As String$$())
     End Sub
-End Class");
+End Class"
+            );
             VisualStudio.Editor.InvokeQuickInfo();
-            Assert.Equal("Class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.", VisualStudio.Editor.GetQuickInfo());
+            Assert.Equal(
+                "Class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.",
+                VisualStudio.Editor.GetQuickInfo()
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/62280")]
         public void International()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 ''' <summary>
 ''' This is an XML doc comment defined in code.
 ''' </summary>
@@ -46,10 +50,14 @@ Class ???????123
     Shared Sub Goo()
          Dim goo as ???????123$$
     End Sub
-End Class");
+End Class"
+            );
             VisualStudio.Editor.InvokeQuickInfo();
-            Assert.Equal(@"Class TestProj.???????123
-This is an XML doc comment defined in code.", VisualStudio.Editor.GetQuickInfo());
+            Assert.Equal(
+                @"Class TestProj.???????123
+This is an XML doc comment defined in code.",
+                VisualStudio.Editor.GetQuickInfo()
+            );
         }
     }
 }

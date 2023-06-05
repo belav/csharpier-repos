@@ -20,7 +20,10 @@ namespace ILCompiler
         private EcmaModule _module;
         private IEnumerable<MethodDesc> _profileData;
 
-        public ReadyToRunProfilingRootProvider(EcmaModule module, ProfileDataManager profileDataManager)
+        public ReadyToRunProfilingRootProvider(
+            EcmaModule module,
+            ProfileDataManager profileDataManager
+        )
         {
             _module = module;
             _profileData = profileDataManager.GetInputProfileDataMethodsForModule(module);
@@ -33,7 +36,10 @@ namespace ILCompiler
                 try
                 {
                     // Validate that this method is fully instantiated
-                    if (method.OwningType.IsGenericDefinition || method.OwningType.ContainsSignatureVariables())
+                    if (
+                        method.OwningType.IsGenericDefinition
+                        || method.OwningType.ContainsSignatureVariables()
+                    )
                     {
                         continue;
                     }
@@ -64,7 +70,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(method))
                     {
                         ReadyToRunLibraryRootProvider.CheckCanGenerateMethod(method);
-                        rootProvider.AddCompilationRoot(method, rootMinimalDependencies: true, reason: "Profile triggered method");
+                        rootProvider.AddCompilationRoot(
+                            method,
+                            rootMinimalDependencies: true,
+                            reason: "Profile triggered method"
+                        );
                     }
                 }
                 catch (TypeSystemException)

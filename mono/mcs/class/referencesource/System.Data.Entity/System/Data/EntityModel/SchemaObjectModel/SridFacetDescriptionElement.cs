@@ -18,13 +18,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
     internal sealed class SridFacetDescriptionElement : FacetDescriptionElement
     {
         public SridFacetDescriptionElement(TypeElement type, string name)
-        :base(type, name)
-        {
-        }
+            : base(type, name) { }
 
         public override EdmType FacetType
         {
-            get { return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Int32); }
+            get
+            {
+                return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Int32);
+            }
         }
 
         /////////////////////////////////////////////////////////////////////

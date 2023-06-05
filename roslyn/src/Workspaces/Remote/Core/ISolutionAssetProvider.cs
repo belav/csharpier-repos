@@ -19,6 +19,11 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <param name="pipeWriter">The writer to write the assets into.  Implementations of this method must call<see
         /// cref="PipeWriter.Complete"/> on it (in the event of failure or success).  Failing to do so will lead to
         /// hangs on the code that reads from the corresponding <see cref="PipeReader"/> side of this.</param>
-        ValueTask GetAssetsAsync(PipeWriter pipeWriter, Checksum solutionChecksum, Checksum[] checksums, CancellationToken cancellationToken);
+        ValueTask GetAssetsAsync(
+            PipeWriter pipeWriter,
+            Checksum solutionChecksum,
+            Checksum[] checksums,
+            CancellationToken cancellationToken
+        );
     }
 }

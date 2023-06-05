@@ -15,25 +15,25 @@ using System.Xml.Serialization;
 
 namespace MonoTests.System.Web.Services.Description
 {
-	[TestFixture]
-	public class TypesTest
-	{
-		Types types;
+    [TestFixture]
+    public class TypesTest
+    {
+        Types types;
 
-		[SetUp]
-		public void InitializeTypes()
-		{
-			types = new Types();
-		}
+        [SetUp]
+        public void InitializeTypes()
+        {
+            types = new Types();
+        }
 
-		[Test]
-		public void TestDefaultProperties()
-		{
-			Assert.AreEqual (String.Empty, types.Documentation);
-			Assert.IsNotNull (types.Schemas);
-			Assert.AreEqual (0, types.Schemas.Count);
-			Assert.IsNotNull (types.Extensions);
-			Assert.AreEqual (0, types.Extensions.Count);
-		}
-	}
+        [Test]
+        public void TestDefaultProperties()
+        {
+            Assert.AreEqual(String.Empty, types.Documentation);
+            Assert.IsNotNull(types.Schemas);
+            Assert.AreEqual(0, types.Schemas.Count);
+            Assert.IsNotNull(types.Extensions);
+            Assert.AreEqual(0, types.Extensions.Count);
+        }
+    }
 }

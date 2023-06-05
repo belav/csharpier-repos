@@ -10,8 +10,13 @@ namespace TestInALC
     {
         static int Main(string[] args)
         {
-            string currentAssemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string testAssemblyFullPath = Path.Combine(currentAssemblyDirectory, "NETClientPrimitives.dll");
+            string currentAssemblyDirectory = Path.GetDirectoryName(
+                Assembly.GetExecutingAssembly().Location
+            );
+            string testAssemblyFullPath = Path.Combine(
+                currentAssemblyDirectory,
+                "NETClientPrimitives.dll"
+            );
             return TestLibrary.Utilities.ExecuteAndUnload(testAssemblyFullPath, args);
         }
     }

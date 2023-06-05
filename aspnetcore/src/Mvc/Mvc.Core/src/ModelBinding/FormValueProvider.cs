@@ -26,7 +26,8 @@ public class FormValueProvider : BindingSourceValueProvider, IEnumerableValuePro
     public FormValueProvider(
         BindingSource bindingSource,
         IFormCollection values,
-        CultureInfo? culture)
+        CultureInfo? culture
+    )
         : base(bindingSource)
     {
         if (bindingSource == null)
@@ -41,7 +42,10 @@ public class FormValueProvider : BindingSourceValueProvider, IEnumerableValuePro
 
         _values = values;
 
-        if (_values.TryGetValue(FormValueHelper.CultureInvariantFieldName, out var invariantKeys) && invariantKeys.Count > 0)
+        if (
+            _values.TryGetValue(FormValueHelper.CultureInvariantFieldName, out var invariantKeys)
+            && invariantKeys.Count > 0
+        )
         {
             _invariantValueKeys = new(invariantKeys, StringComparer.OrdinalIgnoreCase);
         }
@@ -111,7 +115,8 @@ public class FormValueProvider : BindingSourceValueProvider, IEnumerableValuePro
         }
         else
         {
-            var culture = _invariantValueKeys?.Contains(key) == true ? CultureInfo.InvariantCulture : Culture;
+            var culture =
+                _invariantValueKeys?.Contains(key) == true ? CultureInfo.InvariantCulture : Culture;
             return new ValueProviderResult(values, culture);
         }
     }

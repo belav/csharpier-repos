@@ -13,22 +13,21 @@ namespace System.Data
         internal bool _found;
         internal DataColumn? _column;
 
-        internal NameNode(DataTable? table, char[] text, int start, int pos) : base(table)
+        internal NameNode(DataTable? table, char[] text, int start, int pos)
+            : base(table)
         {
             _name = ParseName(text, start, pos);
         }
 
-        internal NameNode(DataTable? table, string name) : base(table)
+        internal NameNode(DataTable? table, string name)
+            : base(table)
         {
             _name = name;
         }
 
         internal override bool IsSqlColumn
         {
-            get
-            {
-                return _column!.IsSqlType;
-            }
+            get { return _column!.IsSqlType; }
         }
 
         internal override void Bind(DataTable table, List<DataColumn> list)

@@ -5,14 +5,13 @@ namespace Benchmark;
 public class HiPerfTimer
 {
     [DllImport("Kernel32.dll")]
-    private static extern bool QueryPerformanceCounter(
-        out long lpPerformanceCount);
+    private static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
 
     [DllImport("Kernel32.dll")]
-    private static extern bool QueryPerformanceFrequency(
-        out long lpFrequency);
+    private static extern bool QueryPerformanceFrequency(out long lpFrequency);
 
-    private long _startTime, _stopTime;
+    private long _startTime,
+        _stopTime;
     private long _freq;
 
     // Constructor

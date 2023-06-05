@@ -52,38 +52,26 @@ namespace System.ServiceModel.Security.Tokens
             this.requireCancellation = requireCancellation;
         }
 
-        internal protected override bool HasAsymmetricKey { get { return false; } }
+        internal protected override bool HasAsymmetricKey
+        {
+            get { return false; }
+        }
 
         public bool RequireCancellation
         {
-            get
-            {
-                return this.requireCancellation;
-            }
-            set
-            {
-                this.requireCancellation = value;
-            }
+            get { return this.requireCancellation; }
+            set { this.requireCancellation = value; }
         }
 
         public bool RequireClientCertificate
         {
-            get
-            {
-                return this.requireClientCertificate;
-            }
-            set
-            {
-                this.requireClientCertificate = value;
-            }
+            get { return this.requireClientCertificate; }
+            set { this.requireClientCertificate = value; }
         }
 
         internal BindingContext IssuerBindingContext
         {
-            get
-            {
-                return this.issuerBindingContext;
-            }
+            get { return this.issuerBindingContext; }
             set
             {
                 if (value != null)
@@ -94,34 +82,60 @@ namespace System.ServiceModel.Security.Tokens
             }
         }
 
-        internal protected override bool SupportsClientAuthentication { get { return this.requireClientCertificate; } }
-        internal protected override bool SupportsServerAuthentication { get { return true; } }
-        internal protected override bool SupportsClientWindowsIdentity { get { return this.requireClientCertificate; } }
+        internal protected override bool SupportsClientAuthentication
+        {
+            get { return this.requireClientCertificate; }
+        }
+        internal protected override bool SupportsServerAuthentication
+        {
+            get { return true; }
+        }
+        internal protected override bool SupportsClientWindowsIdentity
+        {
+            get { return this.requireClientCertificate; }
+        }
 
         protected override SecurityTokenParameters CloneCore()
         {
             return new SslSecurityTokenParameters(this);
         }
 
-        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
             if (token is GenericXmlSecurityToken)
                 return base.CreateGenericXmlTokenKeyIdentifierClause(token, referenceStyle);
             else
-                return this.CreateKeyIdentifierClause<SecurityContextKeyIdentifierClause, LocalIdKeyIdentifierClause>(token, referenceStyle);
+                return this.CreateKeyIdentifierClause<
+                    SecurityContextKeyIdentifierClause,
+                    LocalIdKeyIdentifierClause
+                >(token, referenceStyle);
         }
 
-        protected internal override void InitializeSecurityTokenRequirement(SecurityTokenRequirement requirement)
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
-            requirement.TokenType = (this.RequireClientCertificate) ? ServiceModelSecurityTokenTypes.MutualSslnego : ServiceModelSecurityTokenTypes.AnonymousSslnego;
+            requirement.TokenType =
+                (this.RequireClientCertificate)
+                    ? ServiceModelSecurityTokenTypes.MutualSslnego
+                    : ServiceModelSecurityTokenTypes.AnonymousSslnego;
             requirement.RequireCryptographicToken = true;
             requirement.KeyType = SecurityKeyType.SymmetricKey;
-            requirement.Properties[ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty] = this.RequireCancellation;
+            requirement.Properties[
+                ServiceModelSecurityTokenRequirement.SupportSecurityContextCancellationProperty
+            ] = this.RequireCancellation;
             if (this.IssuerBindingContext != null)
             {
-                requirement.Properties[ServiceModelSecurityTokenRequirement.IssuerBindingContextProperty] = this.IssuerBindingContext.Clone();
+                requirement.Properties[
+                    ServiceModelSecurityTokenRequirement.IssuerBindingContextProperty
+                ] = this.IssuerBindingContext.Clone();
             }
-            requirement.Properties[ServiceModelSecurityTokenRequirement.IssuedSecurityTokenParametersProperty] = this.Clone();
+            requirement.Properties[
+                ServiceModelSecurityTokenRequirement.IssuedSecurityTokenParametersProperty
+            ] = this.Clone();
         }
 
         public override string ToString()
@@ -129,8 +143,20 @@ namespace System.ServiceModel.Security.Tokens
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(base.ToString());
 
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "RequireCancellation: {0}", this.RequireCancellation.ToString()));
-            sb.Append(String.Format(CultureInfo.InvariantCulture, "RequireClientCertificate: {0}", this.RequireClientCertificate.ToString()));
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "RequireCancellation: {0}",
+                    this.RequireCancellation.ToString()
+                )
+            );
+            sb.Append(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "RequireClientCertificate: {0}",
+                    this.RequireClientCertificate.ToString()
+                )
+            );
 
             return sb.ToString();
         }

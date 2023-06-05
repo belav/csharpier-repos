@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 /// <summary>
 /// A Server-Side Blazor implementation of <see cref="NavigationManager"/>.
 /// </summary>
-internal sealed partial class RemoteNavigationManager : NavigationManager, IHostEnvironmentNavigationManager
+internal sealed partial class RemoteNavigationManager
+    : NavigationManager,
+        IHostEnvironmentNavigationManager
 {
     private readonly ILogger<RemoteNavigationManager> _logger;
     private IJSRuntime _jsRuntime;
@@ -74,7 +76,11 @@ internal sealed partial class RemoteNavigationManager : NavigationManager, IHost
         NotifyLocationChanged(intercepted);
     }
 
-    public async ValueTask<bool> HandleLocationChangingAsync(string uri, string? state, bool intercepted)
+    public async ValueTask<bool> HandleLocationChangingAsync(
+        string uri,
+        string? state,
+        bool intercepted
+    )
     {
         return await NotifyLocationChangingAsync(uri, state, intercepted);
     }
@@ -97,7 +103,11 @@ internal sealed partial class RemoteNavigationManager : NavigationManager, IHost
         {
             try
             {
-                var shouldContinueNavigation = await NotifyLocationChangingAsync(uri, options.HistoryEntryState, false);
+                var shouldContinueNavigation = await NotifyLocationChangingAsync(
+                    uri,
+                    options.HistoryEntryState,
+                    false
+                );
 
                 if (!shouldContinueNavigation)
                 {
@@ -117,7 +127,10 @@ internal sealed partial class RemoteNavigationManager : NavigationManager, IHost
         }
     }
 
-    protected override void HandleLocationChangingHandlerException(Exception ex, LocationChangingContext context)
+    protected override void HandleLocationChangingHandlerException(
+        Exception ex,
+        LocationChangingContext context
+    )
     {
         Log.NavigationFailed(_logger, context.TargetLocation, ex);
         UnhandledException?.Invoke(this, ex);
@@ -134,24 +147,60 @@ internal sealed partial class RemoteNavigationManager : NavigationManager, IHost
         SetHasLocationChangingListeners(value);
     }
 
-    private void SetHasLocationChangingListeners(bool value)
-        => _jsRuntime.InvokeVoidAsync(Interop.SetHasLocationChangingListeners, value).Preserve();
+    private void SetHasLocationChangingListeners(bool value) =>
+        _jsRuntime.InvokeVoidAsync(Interop.SetHasLocationChangingListeners, value).Preserve();
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}, replace={Replace}", EventName = "RequestingNavigation")]
-        private static partial void RequestingNavigation(ILogger logger, string uri, bool forceLoad, bool replace);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}, replace={Replace}",
+            EventName = "RequestingNavigation"
+        )]
+        private static partial void RequestingNavigation(
+            ILogger logger,
+            string uri,
+            bool forceLoad,
+            bool replace
+        );
 
-        public static void RequestingNavigation(ILogger logger, string uri, NavigationOptions options)
-            => RequestingNavigation(logger, uri, options.ForceLoad, options.ReplaceHistoryEntry);
+        public static void RequestingNavigation(
+            ILogger logger,
+            string uri,
+            NavigationOptions options
+        ) => RequestingNavigation(logger, uri, options.ForceLoad, options.ReplaceHistoryEntry);
 
-        [LoggerMessage(2, LogLevel.Debug, "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}", EventName = "ReceivedLocationChangedNotification")]
-        public static partial void ReceivedLocationChangedNotification(ILogger logger, string uri, bool isIntercepted);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}",
+            EventName = "ReceivedLocationChangedNotification"
+        )]
+        public static partial void ReceivedLocationChangedNotification(
+            ILogger logger,
+            string uri,
+            bool isIntercepted
+        );
 
-        [LoggerMessage(3, LogLevel.Debug, "Navigation canceled when changing the location to {Uri}", EventName = "NavigationCanceled")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Navigation canceled when changing the location to {Uri}",
+            EventName = "NavigationCanceled"
+        )]
         public static partial void NavigationCanceled(ILogger logger, string uri);
 
-        [LoggerMessage(4, LogLevel.Error, "Navigation failed when changing the location to {Uri}", EventName = "NavigationFailed")]
-        public static partial void NavigationFailed(ILogger logger, string uri, Exception exception);
+        [LoggerMessage(
+            4,
+            LogLevel.Error,
+            "Navigation failed when changing the location to {Uri}",
+            EventName = "NavigationFailed"
+        )]
+        public static partial void NavigationFailed(
+            ILogger logger,
+            string uri,
+            Exception exception
+        );
     }
 }

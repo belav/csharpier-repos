@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RazorTestWorkspaceRegistrationService()
-        {
-        }
+        public RazorTestWorkspaceRegistrationService() { }
 
         public override string GetHostWorkspaceKind()
         {

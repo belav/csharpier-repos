@@ -7,7 +7,9 @@ using System.Runtime.Serialization;
 namespace System.Resources
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class MissingManifestResourceException : SystemException
     {
@@ -30,8 +32,6 @@ namespace System.Resources
         }
 
         protected MissingManifestResourceException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

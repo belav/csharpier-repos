@@ -20,18 +20,26 @@ internal class WebTransportTestUtilities
 {
     private static int streamCounter;
 
-    public static async ValueTask<WebTransportSession> GenerateSession(Http3InMemory inMemory, TaskCompletionSource exitSessionTcs)
+    public static async ValueTask<WebTransportSession> GenerateSession(
+        Http3InMemory inMemory,
+        TaskCompletionSource exitSessionTcs
+    )
     {
 #pragma warning disable CA2252 // WebTransport is a preview feature
-        var appCompletedTcs = new TaskCompletionSource<IWebTransportSession>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appCompletedTcs = new TaskCompletionSource<IWebTransportSession>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         await inMemory.InitializeConnectionAsync(async context =>
         {
-            var webTransportFeature = context.Features.GetRequiredFeature<IHttpWebTransportFeature>();
+            var webTransportFeature =
+                context.Features.GetRequiredFeature<IHttpWebTransportFeature>();
 
             try
             {
-                var session = await webTransportFeature.AcceptAsync(CancellationToken.None).DefaultTimeout();
+                var session = await webTransportFeature
+                    .AcceptAsync(CancellationToken.None)
+                    .DefaultTimeout();
                 appCompletedTcs.SetResult(session);
             }
             catch (TimeoutException exception)
@@ -46,43 +54,64 @@ internal class WebTransportTestUtilities
         var controlStream = await inMemory.CreateControlStream();
         var controlStream2 = await inMemory.GetInboundControlStream();
 
-        var settings = new Http3PeerSettings()
-        {
-            EnableWebTransport = 1,
-            H3Datagram = 1,
-        };
+        var settings = new Http3PeerSettings() { EnableWebTransport = 1, H3Datagram = 1, };
 
         await controlStream.SendSettingsAsync(settings.GetNonProtocolDefaults());
         var response1 = await controlStream2.ExpectSettingsAsync();
 
         await inMemory.ServerReceivedSettingsReader.ReadAsync().DefaultTimeout();
 
-        var requestStream = await inMemory.CreateRequestStream(new[]
-        {
-            new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "webtransport"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
-            new KeyValuePair<string, string>(HeaderNames.Origin, "server.example.com"),
-            new KeyValuePair<string, string>(WebTransportSession.CurrentSuppportedVersion, "1")
-        });
+        var requestStream = await inMemory.CreateRequestStream(
+            new[]
+            {
+                new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT"),
+                new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "webtransport"),
+                new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
+                new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+                new KeyValuePair<string, string>(
+                    InternalHeaderNames.Authority,
+                    "server.example.com"
+                ),
+                new KeyValuePair<string, string>(HeaderNames.Origin, "server.example.com"),
+                new KeyValuePair<string, string>(WebTransportSession.CurrentSuppportedVersion, "1")
+            }
+        );
 
         return (WebTransportSession)await appCompletedTcs.Task;
     }
 
-    public static WebTransportStream CreateStream(WebTransportStreamType type, Memory<byte>? memory = null)
+    public static WebTransportStream CreateStream(
+        WebTransportStreamType type,
+        Memory<byte>? memory = null
+    )
     {
         var features = new FeatureCollection();
         features.Set<IStreamIdFeature>(new StreamId(streamCounter++));
-        features.Set<IStreamDirectionFeature>(new DefaultStreamDirectionFeature(type != WebTransportStreamType.Output, type != WebTransportStreamType.Input));
+        features.Set<IStreamDirectionFeature>(
+            new DefaultStreamDirectionFeature(
+                type != WebTransportStreamType.Output,
+                type != WebTransportStreamType.Input
+            )
+        );
         features.Set(Mock.Of<IConnectionItemsFeature>());
         features.Set(Mock.Of<IProtocolErrorCodeFeature>());
 
         var writer = new HttpResponsePipeWriter(new StreamWriterControl(memory));
         writer.StartAcceptingWrites();
         var transport = new DuplexPipe(new StreamReader(memory), writer);
-        return new WebTransportStream(TestContextFactory.CreateHttp3StreamContext("id", null, new TestServiceContext(), features, null, null, null, transport), type);
+        return new WebTransportStream(
+            TestContextFactory.CreateHttp3StreamContext(
+                "id",
+                null,
+                new TestServiceContext(),
+                features,
+                null,
+                null,
+                null,
+                transport
+            ),
+            type
+        );
     }
 
     class StreamId : IStreamIdFeature
@@ -147,7 +176,10 @@ internal class WebTransportTestUtilities
             return Task.CompletedTask;
         }
 
-        public ValueTask<FlushResult> WritePipeAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        public ValueTask<FlushResult> WritePipeAsync(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             source.CopyTo(GetMemory());
             return new ValueTask<FlushResult>();
@@ -183,16 +215,27 @@ internal class WebTransportTestUtilities
             // no-op
         }
 
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             // just return the whole memory as a readResult
-            return new ValueTask<ReadResult>(new ReadResult(
-                new ReadOnlySequence<byte>((ReadOnlyMemory<byte>)_sharedMemory), false, true));
+            return new ValueTask<ReadResult>(
+                new ReadResult(
+                    new ReadOnlySequence<byte>((ReadOnlyMemory<byte>)_sharedMemory),
+                    false,
+                    true
+                )
+            );
         }
 
         public override bool TryRead(out ReadResult result)
         {
-            result = new ReadResult(new ReadOnlySequence<byte>((ReadOnlyMemory<byte>)_sharedMemory), false, true);
+            result = new ReadResult(
+                new ReadOnlySequence<byte>((ReadOnlyMemory<byte>)_sharedMemory),
+                false,
+                true
+            );
             return true;
         }
     }

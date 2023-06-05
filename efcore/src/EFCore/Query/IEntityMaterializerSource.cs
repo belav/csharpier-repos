@@ -43,7 +43,8 @@ public interface IEntityMaterializerSource
     Expression CreateMaterializeExpression(
         IEntityType entityType,
         string entityInstanceName,
-        Expression materializationExpression);
+        Expression materializationExpression
+    );
 
     /// <summary>
     ///     <para>
@@ -59,9 +60,15 @@ public interface IEntityMaterializerSource
     /// <returns>An expression to read the value.</returns>
     Expression CreateMaterializeExpression(
         EntityMaterializerSourceParameters parameters,
-        Expression materializationExpression)
+        Expression materializationExpression
+    )
 #pragma warning disable CS0618
-        => CreateMaterializeExpression(parameters.EntityType, parameters.EntityInstanceName, materializationExpression);
+        =>
+        CreateMaterializeExpression(
+            parameters.EntityType,
+            parameters.EntityInstanceName,
+            materializationExpression
+        );
 #pragma warning restore CS0618
 
     /// <summary>

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,35 +54,34 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (XPathMessageFilterElement),
-		 AddItemName = "add",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	[MonoTODO]
-	public sealed partial class XPathMessageFilterElementCollection
-		 : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>,  ICollection,  IEnumerable
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection(
+        typeof(XPathMessageFilterElement),
+        AddItemName = "add",
+        RemoveItemName = "remove",
+        ClearItemsName = "clear",
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    [MonoTODO]
+    public sealed partial class XPathMessageFilterElementCollection
+        : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>,
+            ICollection,
+            IEnumerable
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static XPathMessageFilterElementCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static XPathMessageFilterElementCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-		public XPathMessageFilterElementCollection ()
-		{
-		}
+        public XPathMessageFilterElementCollection() { }
 
+        // Properties
 
-		// Properties
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

@@ -5,7 +5,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-// This testcase reproduces a bug where the tree re-sequencing was not correct for 
+// This testcase reproduces a bug where the tree re-sequencing was not correct for
 // fgMorphModToSubMulDiv(), resulting in an assert in LSRA.
 
 public static class Test_DevDiv_359736

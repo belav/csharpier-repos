@@ -23,12 +23,19 @@ public abstract class TwoDatabasesTestBase
         var connectionString1 = context1.Database.GetConnectionString();
         var connectionString2 = context2.Database.GetConnectionString();
 
-        Assert.NotEqual(context1.Database.GetConnectionString(), context2.Database.GetConnectionString());
+        Assert.NotEqual(
+            context1.Database.GetConnectionString(),
+            context2.Database.GetConnectionString()
+        );
 
         context1.Database.EnsureCreatedResiliently();
         context2.Database.EnsureCreatedResiliently();
 
-        using (var context = new TwoDatabasesContext(CreateTestOptions(new DbContextOptionsBuilder()).Options))
+        using (
+            var context = new TwoDatabasesContext(
+                CreateTestOptions(new DbContextOptionsBuilder()).Options
+            )
+        )
         {
             context.Database.SetConnectionString(connectionString1);
 
@@ -42,7 +49,10 @@ public abstract class TwoDatabasesTestBase
         }
 
         Assert.Equal(new[] { "One", "Two" }, context1.Foos.Select(e => e.Bar).ToList());
-        Assert.Equal(new[] { "Modified One", "Modified Two" }, context2.Foos.Select(e => e.Bar).ToList());
+        Assert.Equal(
+            new[] { "Modified One", "Modified Two" },
+            context2.Foos.Select(e => e.Bar).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -56,7 +66,11 @@ public abstract class TwoDatabasesTestBase
         context1.Database.EnsureCreatedResiliently();
         context2.Database.EnsureCreatedResiliently();
 
-        using (var context = new TwoDatabasesContext(CreateTestOptions(new DbContextOptionsBuilder()).Options))
+        using (
+            var context = new TwoDatabasesContext(
+                CreateTestOptions(new DbContextOptionsBuilder()).Options
+            )
+        )
         {
             context.Database.SetDbConnection(context1.Database.GetDbConnection());
 
@@ -70,14 +84,20 @@ public abstract class TwoDatabasesTestBase
         }
 
         Assert.Equal(new[] { "One", "Two" }, context1.Foos.Select(e => e.Bar).ToList());
-        Assert.Equal(new[] { "Modified One", "Modified Two" }, context2.Foos.Select(e => e.Bar).ToList());
+        Assert.Equal(
+            new[] { "Modified One", "Modified Two" },
+            context2.Foos.Select(e => e.Bar).ToList()
+        );
     }
 
     [ConditionalTheory]
     [InlineData(true, false)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public virtual void Can_set_connection_string_in_interceptor(bool withConnectionString, bool withNullConnectionString)
+    public virtual void Can_set_connection_string_in_interceptor(
+        bool withConnectionString,
+        bool withNullConnectionString
+    )
     {
         using var context1 = CreateBackingContext("TwoDatabasesIntercept");
 
@@ -85,12 +105,18 @@ public abstract class TwoDatabasesTestBase
 
         context1.Database.EnsureCreatedResiliently();
 
-        using (var context = new TwoDatabasesContext(
-                   CreateTestOptions(new DbContextOptionsBuilder(), withConnectionString)
-                       .AddInterceptors(
-                           new ConnectionStringConnectionInterceptor(
-                               connectionString1, withConnectionString ? DummyConnectionString : ""))
-                       .Options))
+        using (
+            var context = new TwoDatabasesContext(
+                CreateTestOptions(new DbContextOptionsBuilder(), withConnectionString)
+                    .AddInterceptors(
+                        new ConnectionStringConnectionInterceptor(
+                            connectionString1,
+                            withConnectionString ? DummyConnectionString : ""
+                        )
+                    )
+                    .Options
+            )
+        )
         {
             var data = context.Foos.ToList();
             data[0].Bar = "Modified One";
@@ -99,7 +125,10 @@ public abstract class TwoDatabasesTestBase
             context.SaveChanges();
         }
 
-        Assert.Equal(new[] { "Modified One", "Modified Two" }, context1.Foos.Select(e => e.Bar).ToList());
+        Assert.Equal(
+            new[] { "Modified One", "Modified Two" },
+            context1.Foos.Select(e => e.Bar).ToList()
+        );
     }
 
     protected class ConnectionStringConnectionInterceptor : DbConnectionInterceptor
@@ -107,7 +136,10 @@ public abstract class TwoDatabasesTestBase
         private readonly string _goodConnectionString;
         private readonly string _dummyConnectionString;
 
-        public ConnectionStringConnectionInterceptor(string goodConnectionString, string dummyConnectionString)
+        public ConnectionStringConnectionInterceptor(
+            string goodConnectionString,
+            string dummyConnectionString
+        )
         {
             _goodConnectionString = goodConnectionString;
             _dummyConnectionString = dummyConnectionString;
@@ -116,7 +148,8 @@ public abstract class TwoDatabasesTestBase
         public override InterceptionResult ConnectionOpening(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.Equal(_dummyConnectionString, eventData.Context.Database.GetConnectionString());
             eventData.Context.Database.SetConnectionString(_goodConnectionString);
@@ -124,7 +157,10 @@ public abstract class TwoDatabasesTestBase
             return result;
         }
 
-        public override void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
+        public override void ConnectionClosed(
+            DbConnection connection,
+            ConnectionEndEventData eventData
+        )
         {
             Assert.Equal(_goodConnectionString, eventData.Context.Database.GetConnectionString());
             eventData.Context.Database.SetConnectionString(_dummyConnectionString);
@@ -134,7 +170,8 @@ public abstract class TwoDatabasesTestBase
     protected abstract DbContextOptionsBuilder CreateTestOptions(
         DbContextOptionsBuilder optionsBuilder,
         bool withConnectionString = false,
-        bool withNullConnectionString = false);
+        bool withNullConnectionString = false
+    );
 
     protected abstract TwoDatabasesWithDataContext CreateBackingContext(string databaseName);
 
@@ -143,23 +180,18 @@ public abstract class TwoDatabasesTestBase
     protected class TwoDatabasesContext : DbContext
     {
         public TwoDatabasesContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Foo>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Foo>();
 
-        public IQueryable<Foo> Foos
-            => Set<Foo>().OrderBy(e => e.Id);
+        public IQueryable<Foo> Foos => Set<Foo>().OrderBy(e => e.Id);
     }
 
     protected class TwoDatabasesWithDataContext : TwoDatabasesContext
     {
         public TwoDatabasesWithDataContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -167,9 +199,7 @@ public abstract class TwoDatabasesTestBase
 
             modelBuilder
                 .Entity<Foo>()
-                .HasData(
-                    new Foo { Id = 1, Bar = "One" },
-                    new Foo { Id = 2, Bar = "Two" });
+                .HasData(new Foo { Id = 1, Bar = "One" }, new Foo { Id = 2, Bar = "Two" });
         }
     }
 

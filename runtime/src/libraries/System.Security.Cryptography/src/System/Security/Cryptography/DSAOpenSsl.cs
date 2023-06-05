@@ -113,7 +113,9 @@ namespace System.Security.Cryptography
         {
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(DSAOpenSsl)));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(DSAOpenSsl))
+                );
             }
         }
     }

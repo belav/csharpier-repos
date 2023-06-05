@@ -36,11 +36,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public UnidirectionalSymbolSet(
                 FindReferencesSearchEngine engine,
                 MetadataUnifyingSymbolHashSet initialSymbols,
-                MetadataUnifyingSymbolHashSet upSymbols)
+                MetadataUnifyingSymbolHashSet upSymbols
+            )
                 : base(engine)
             {
                 _initialAndDownSymbols = initialSymbols;
-                _upSymbols = upSymbols.ToImmutableHashSet(MetadataUnifyingEquivalenceComparer.Instance);
+                _upSymbols = upSymbols.ToImmutableHashSet(
+                    MetadataUnifyingEquivalenceComparer.Instance
+                );
             }
 
             public override ImmutableArray<ISymbol> GetAllSymbols()
@@ -51,7 +54,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return result.ToImmutableArray();
             }
 
-            public override async Task InheritanceCascadeAsync(Project project, CancellationToken cancellationToken)
+            public override async Task InheritanceCascadeAsync(
+                Project project,
+                CancellationToken cancellationToken
+            )
             {
                 // Start searching using the existing set of symbols found at the start (or anything found below that).
                 var workQueue = new Stack<ISymbol>();
@@ -64,7 +70,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     var current = workQueue.Pop();
 
                     // Keep adding symbols downwards in this project as long as we keep finding new symbols.
-                    await AddDownSymbolsAsync(this.Engine, current, _initialAndDownSymbols, workQueue, projects, cancellationToken).ConfigureAwait(false);
+                    await AddDownSymbolsAsync(
+                            this.Engine,
+                            current,
+                            _initialAndDownSymbols,
+                            workQueue,
+                            projects,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
         }

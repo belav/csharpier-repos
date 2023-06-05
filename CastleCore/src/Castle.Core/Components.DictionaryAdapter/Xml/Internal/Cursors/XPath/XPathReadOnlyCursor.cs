@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -23,8 +23,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private readonly IXmlIncludedTypeMap includedTypes;
         private readonly CursorFlags flags;
 
-        public XPathReadOnlyCursor(IXmlNode parent, CompiledXPath path,
-            IXmlIncludedTypeMap includedTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public XPathReadOnlyCursor(
+            IXmlNode parent,
+            CompiledXPath path,
+            IXmlIncludedTypeMap includedTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
             : base(path, namespaces, parent)
         {
             if (parent == null)
@@ -35,11 +40,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 throw Error.ArgumentNull(nameof(includedTypes));
 
             this.includedTypes = includedTypes;
-            this.flags         = flags;
+            this.flags = flags;
 
             Reset();
         }
-            
+
         public void Reset()
         {
             var source = Parent.RequireRealizable<XPathNavigator>();
@@ -49,10 +54,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool MoveNext()
         {
-            for (;;)
+            for (; ; )
             {
-                var hasNext
-                    = iterator != null
+                var hasNext =
+                    iterator != null
                     && iterator.MoveNext()
                     && (flags.AllowsMultipleItems() || !iterator.MoveNext());
 
@@ -95,7 +100,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (iterator != null)
                 while (iterator.MoveNext())
                     if (iterator.Current.IsSamePosition(positionNode))
-                        { SetAtNext(); return; }
+                    {
+                        SetAtNext();
+                        return;
+                    }
 
             throw Error.CursorCannotMoveToGivenNode();
         }
@@ -103,7 +111,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public void MoveToEnd()
         {
             if (iterator != null)
-                while (iterator.MoveNext()) ;
+                while (iterator.MoveNext())
+                    ;
             SetAtEnd();
         }
 

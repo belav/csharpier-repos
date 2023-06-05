@@ -21,10 +21,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
 
         public EmbeddedLanguageDetector(
             EmbeddedLanguageInfo info,
-            ImmutableArray<string> languageIdentifiers)
+            ImmutableArray<string> languageIdentifiers
+        )
         {
             Info = info;
-            LanguageIdentifiers = new HashSet<string>(languageIdentifiers, StringComparer.OrdinalIgnoreCase);
+            LanguageIdentifiers = new HashSet<string>(
+                languageIdentifiers,
+                StringComparer.OrdinalIgnoreCase
+            );
             _commentDetector = new EmbeddedLanguageCommentDetector(languageIdentifiers);
         }
 
@@ -39,9 +43,18 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out string? identifier,
-            out IEnumerable<string>? options)
+            out IEnumerable<string>? options
+        )
         {
-            if (!IsEmbeddedLanguageTokenWorker(token, semanticModel, cancellationToken, out identifier, out options))
+            if (
+                !IsEmbeddedLanguageTokenWorker(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out identifier,
+                    out options
+                )
+            )
                 return false;
 
             // Only succeed if the comment/attribute references one of the language identifiers we're looking for.
@@ -53,18 +66,30 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out string? identifier,
-            out IEnumerable<string>? options)
+            out IEnumerable<string>? options
+        )
         {
             identifier = null;
             options = null;
 
             if (Info.IsAnyStringLiteral(token.RawKind))
-                return IsEmbeddedLanguageStringLiteralToken(token, semanticModel, cancellationToken, out identifier, out options);
+                return IsEmbeddedLanguageStringLiteralToken(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out identifier,
+                    out options
+                );
 
             if (token.RawKind == Info.SyntaxKinds.InterpolatedStringTextToken)
             {
                 options = null;
-                return IsEmbeddedLanguageInterpolatedStringTextToken(token, semanticModel, cancellationToken, out identifier);
+                return IsEmbeddedLanguageInterpolatedStringTextToken(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out identifier
+                );
             }
 
             return false;
@@ -74,14 +99,29 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SyntaxToken token,
             ISyntaxFacts syntaxFacts,
             [NotNullWhen(true)] out string? identifier,
-            [NotNullWhen(true)] out IEnumerable<string>? options)
+            [NotNullWhen(true)] out IEnumerable<string>? options
+        )
         {
-            if (HasLanguageComment(token.GetPreviousToken().TrailingTrivia, syntaxFacts, out identifier, out options))
+            if (
+                HasLanguageComment(
+                    token.GetPreviousToken().TrailingTrivia,
+                    syntaxFacts,
+                    out identifier,
+                    out options
+                )
+            )
                 return true;
 
             for (var node = token.Parent; node != null; node = node.Parent)
             {
-                if (HasLanguageComment(node.GetLeadingTrivia(), syntaxFacts, out identifier, out options))
+                if (
+                    HasLanguageComment(
+                        node.GetLeadingTrivia(),
+                        syntaxFacts,
+                        out identifier,
+                        out options
+                    )
+                )
                     return true;
 
                 // Stop walking up once we hit a statement.  We don't need/want statements higher up the parent chain to
@@ -97,7 +137,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SyntaxTriviaList list,
             ISyntaxFacts syntaxFacts,
             [NotNullWhen(true)] out string? identifier,
-            [NotNullWhen(true)] out IEnumerable<string>? options)
+            [NotNullWhen(true)] out IEnumerable<string>? options
+        )
         {
             foreach (var trivia in list)
             {
@@ -114,7 +155,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SyntaxTrivia trivia,
             ISyntaxFacts syntaxFacts,
             [NotNullWhen(true)] out string? identifier,
-            [NotNullWhen(true)] out IEnumerable<string>? options)
+            [NotNullWhen(true)] out IEnumerable<string>? options
+        )
         {
             if (syntaxFacts.IsRegularComment(trivia))
             {
@@ -134,7 +176,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
-            [NotNullWhen(true)] out string? identifier)
+            [NotNullWhen(true)] out string? identifier
+        )
         {
             // If we have the format string for an interpolation (e.g. `{expr:XXX}`) then see if expr has an
             // implementation if IFormattable.Format(string, ...) and then see if that impl method has a
@@ -152,24 +195,26 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             if (type == null)
                 return false;
 
-            var iformattable = type.AllInterfaces.FirstOrDefault(t => t is
-            {
-                Name: nameof(IFormattable),
-                ContainingNamespace:
-                {
-                    Name: nameof(System),
-                    ContainingNamespace.IsGlobalNamespace: true,
-                }
-            });
+            var iformattable = type.AllInterfaces.FirstOrDefault(
+                t =>
+                    t
+                        is {
+                            Name: nameof(IFormattable),
+                            ContainingNamespace:
+                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true, }
+                        }
+            );
             if (iformattable == null)
                 return false;
 
             var formatMethod = iformattable
                 .GetMembers(nameof(IFormattable.ToString))
                 .FirstOrDefault(
-                    m => m is IMethodSymbol method &&
-                         method.Parameters.Length > 0 &&
-                         method.Parameters[0].Type.SpecialType is SpecialType.System_String);
+                    m =>
+                        m is IMethodSymbol method
+                        && method.Parameters.Length > 0
+                        && method.Parameters[0].Type.SpecialType is SpecialType.System_String
+                );
             if (formatMethod == null)
                 return false;
 
@@ -185,7 +230,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out string? identifier,
-            out IEnumerable<string>? options)
+            out IEnumerable<string>? options
+        )
         {
             identifier = null;
             options = null;
@@ -204,12 +250,26 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
 
             if (syntaxFacts.IsArgument(container.Parent))
             {
-                if (IsArgumentToParameterWithMatchingStringSyntaxAttribute(semanticModel, container.Parent, cancellationToken, out identifier))
+                if (
+                    IsArgumentToParameterWithMatchingStringSyntaxAttribute(
+                        semanticModel,
+                        container.Parent,
+                        cancellationToken,
+                        out identifier
+                    )
+                )
                     return true;
             }
             else if (syntaxFacts.IsAttributeArgument(container.Parent))
             {
-                if (IsArgumentToAttributeParameterWithMatchingStringSyntaxAttribute(semanticModel, container.Parent, cancellationToken, out identifier))
+                if (
+                    IsArgumentToAttributeParameterWithMatchingStringSyntaxAttribute(
+                        semanticModel,
+                        container.Parent,
+                        cancellationToken,
+                        out identifier
+                    )
+                )
                     return true;
             }
             else
@@ -217,10 +277,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
                 var statement = container.FirstAncestorOrSelf<SyntaxNode>(syntaxFacts.IsStatement);
                 if (syntaxFacts.IsSimpleAssignmentStatement(statement))
                 {
-                    syntaxFacts.GetPartsOfAssignmentStatement(statement, out var left, out var right);
-                    if (container == right &&
-                        IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
-                            semanticModel, left, cancellationToken, out identifier))
+                    syntaxFacts.GetPartsOfAssignmentStatement(
+                        statement,
+                        out var left,
+                        out var right
+                    );
+                    if (
+                        container == right
+                        && IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
+                            semanticModel,
+                            left,
+                            cancellationToken,
+                            out identifier
+                        )
+                    )
                     {
                         return true;
                     }
@@ -232,10 +302,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
                     {
                         var variableDeclarator = container.Parent.Parent;
                         var symbol =
-                            semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken) ??
-                            semanticModel.GetDeclaredSymbol(syntaxFacts.GetIdentifierOfVariableDeclarator(variableDeclarator).GetRequiredParent(), cancellationToken);
+                            semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken)
+                            ?? semanticModel.GetDeclaredSymbol(
+                                syntaxFacts
+                                    .GetIdentifierOfVariableDeclarator(variableDeclarator)
+                                    .GetRequiredParent(),
+                                cancellationToken
+                            );
 
-                        if (IsFieldOrPropertyWithMatchingStringSyntaxAttribute(symbol, out identifier))
+                        if (
+                            IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
+                                symbol,
+                                out identifier
+                            )
+                        )
                             return true;
                     }
                     else if (syntaxFacts.IsEqualsValueOfPropertyDeclaration(container.Parent))
@@ -243,7 +323,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
                         var property = container.Parent.GetRequiredParent();
                         var symbol = semanticModel.GetDeclaredSymbol(property, cancellationToken);
 
-                        if (IsFieldOrPropertyWithMatchingStringSyntaxAttribute(symbol, out identifier))
+                        if (
+                            IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
+                                symbol,
+                                out identifier
+                            )
+                        )
                             return true;
                     }
                 }
@@ -257,7 +342,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             var syntaxFacts = Info.SyntaxFacts;
             var node = syntaxFacts.WalkUpParentheses(token.GetRequiredParent());
 
-            // if we're inside some collection-like initializer, find the instance actually being created. 
+            // if we're inside some collection-like initializer, find the instance actually being created.
             if (syntaxFacts.IsAnyInitializerExpression(node.Parent, out var instance))
                 node = syntaxFacts.WalkUpParentheses(instance);
 
@@ -268,9 +353,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SemanticModel semanticModel,
             SyntaxNode argument,
             CancellationToken cancellationToken,
-            [NotNullWhen(true)] out string? identifier)
+            [NotNullWhen(true)] out string? identifier
+        )
         {
-            var parameter = Info.SemanticFacts.FindParameterForAttributeArgument(semanticModel, argument, cancellationToken);
+            var parameter = Info.SemanticFacts.FindParameterForAttributeArgument(
+                semanticModel,
+                argument,
+                cancellationToken
+            );
             return HasMatchingStringSyntaxAttribute(parameter, out identifier);
         }
 
@@ -278,9 +368,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SemanticModel semanticModel,
             SyntaxNode argument,
             CancellationToken cancellationToken,
-            [NotNullWhen(true)] out string? identifier)
+            [NotNullWhen(true)] out string? identifier
+        )
         {
-            var parameter = Info.SemanticFacts.FindParameterForArgument(semanticModel, argument, cancellationToken);
+            var parameter = Info.SemanticFacts.FindParameterForArgument(
+                semanticModel,
+                argument,
+                cancellationToken
+            );
             return HasMatchingStringSyntaxAttribute(parameter, out identifier);
         }
 
@@ -288,23 +383,27 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             SemanticModel semanticModel,
             SyntaxNode left,
             CancellationToken cancellationToken,
-            [NotNullWhen(true)] out string? identifier)
+            [NotNullWhen(true)] out string? identifier
+        )
         {
             var symbol = semanticModel.GetSymbolInfo(left, cancellationToken).Symbol;
             return IsFieldOrPropertyWithMatchingStringSyntaxAttribute(symbol, out identifier);
         }
 
         private bool IsFieldOrPropertyWithMatchingStringSyntaxAttribute(
-            ISymbol? symbol, [NotNullWhen(true)] out string? identifier)
+            ISymbol? symbol,
+            [NotNullWhen(true)] out string? identifier
+        )
         {
             identifier = null;
-            return symbol is IFieldSymbol or IPropertySymbol &&
-                HasMatchingStringSyntaxAttribute(symbol, out identifier);
+            return symbol is IFieldSymbol or IPropertySymbol
+                && HasMatchingStringSyntaxAttribute(symbol, out identifier);
         }
 
         private bool HasMatchingStringSyntaxAttribute(
             [NotNullWhen(true)] ISymbol? symbol,
-            [NotNullWhen(true)] out string? identifier)
+            [NotNullWhen(true)] out string? identifier
+        )
         {
             if (symbol != null)
             {
@@ -321,14 +420,16 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
 
         private bool IsMatchingStringSyntaxAttribute(
             AttributeData attribute,
-            [NotNullWhen(true)] out string? identifier)
+            [NotNullWhen(true)] out string? identifier
+        )
         {
             identifier = null;
             if (attribute.ConstructorArguments.Length == 0)
                 return false;
 
-            if (attribute.AttributeClass is not
-                {
+            if (
+                attribute.AttributeClass
+                is not {
                     Name: "StringSyntaxAttribute",
                     ContainingNamespace:
                     {
@@ -337,19 +438,20 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
                         {
                             Name: nameof(Diagnostics),
                             ContainingNamespace:
-                            {
-                                Name: nameof(System),
-                                ContainingNamespace.IsGlobalNamespace: true,
-                            }
+                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true, }
                         }
                     }
-                })
+                }
+            )
             {
                 return false;
             }
 
             var argument = attribute.ConstructorArguments[0];
-            if (argument.Kind != TypedConstantKind.Primitive || argument.Value is not string argString)
+            if (
+                argument.Kind != TypedConstantKind.Primitive
+                || argument.Value is not string argString
+            )
                 return false;
 
             identifier = argString;
@@ -375,7 +477,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             var syntaxFacts = Info.SyntaxFacts;
             if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
             {
-                return syntaxFacts.GetIdentifierOfSimpleName(syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)).ValueText;
+                return syntaxFacts
+                    .GetIdentifierOfSimpleName(
+                        syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
+                    )
+                    .ValueText;
             }
             else if (syntaxFacts.IsIdentifierName(invokedExpression))
             {

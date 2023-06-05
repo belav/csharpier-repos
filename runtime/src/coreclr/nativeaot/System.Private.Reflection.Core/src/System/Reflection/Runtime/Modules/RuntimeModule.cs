@@ -18,31 +18,25 @@ namespace System.Reflection.Runtime.Modules
     internal abstract partial class RuntimeModule : Module
     {
         protected RuntimeModule()
-            : base()
-        { }
+            : base() { }
 
         public abstract override Assembly Assembly { get; }
 
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
-        internal const string UnknownStringMessageInRAF = "Returns <Unknown> for modules with no file path";
+        internal const string UnknownStringMessageInRAF =
+            "Returns <Unknown> for modules with no file path";
 
         [RequiresAssemblyFiles(UnknownStringMessageInRAF)]
         public sealed override string FullyQualifiedName
         {
-            get
-            {
-                return "<Unknown>";
-            }
+            get { return "<Unknown>"; }
         }
 
         [RequiresAssemblyFiles(UnknownStringMessageInRAF)]
         public sealed override string Name
         {
-            get
-            {
-                return "<Unknown>";
-            }
+            get { return "<Unknown>"; }
         }
 
         public sealed override bool Equals(object obj)
@@ -79,21 +73,75 @@ namespace System.Reflection.Runtime.Modules
 
         public abstract override Guid ModuleVersionId { get; }
 
-        public sealed override bool IsResource() { throw new PlatformNotSupportedException(); }
-        public sealed override void GetPEKind(out PortableExecutableKinds peKind, out ImageFileMachine machine) { throw new PlatformNotSupportedException(); }
-        public sealed override int MDStreamVersion { get { throw new PlatformNotSupportedException(); } }
+        public sealed override bool IsResource()
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public sealed override void GetPEKind(
+            out PortableExecutableKinds peKind,
+            out ImageFileMachine machine
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        public sealed override int MDStreamVersion
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public sealed override FieldInfo ResolveField(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) { throw new PlatformNotSupportedException(); }
+        public sealed override FieldInfo ResolveField(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public sealed override MemberInfo ResolveMember(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) { throw new PlatformNotSupportedException(); }
+        public sealed override MemberInfo ResolveMember(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public sealed override MethodBase ResolveMethod(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) { throw new PlatformNotSupportedException(); }
+        public sealed override MethodBase ResolveMethod(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public sealed override byte[] ResolveSignature(int metadataToken) { throw new PlatformNotSupportedException(); }
+        public sealed override byte[] ResolveSignature(int metadataToken)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public sealed override string ResolveString(int metadataToken) { throw new PlatformNotSupportedException(); }
+        public sealed override string ResolveString(int metadataToken)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public sealed override Type ResolveType(int metadataToken, Type[] genericTypeArguments, Type[] genericMethodArguments) { throw new PlatformNotSupportedException(); }
+        public sealed override Type ResolveType(
+            int metadataToken,
+            Type[] genericTypeArguments,
+            Type[] genericMethodArguments
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         protected sealed override ModuleHandle GetModuleHandleImpl() => new ModuleHandle(this);
     }

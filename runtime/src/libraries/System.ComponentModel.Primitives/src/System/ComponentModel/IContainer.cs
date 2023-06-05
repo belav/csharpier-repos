@@ -27,7 +27,9 @@ namespace System.ComponentModel
         /// <see cref='System.ComponentModel.IContainer'/> at the end of the list,
         /// and assigns a name to the component.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of components in the container cannot be statically discovered to validate the name.")]
+        [RequiresUnreferencedCode(
+            "The Type of components in the container cannot be statically discovered to validate the name."
+        )]
         void Add(IComponent? component, string? name);
 
         /// <summary>

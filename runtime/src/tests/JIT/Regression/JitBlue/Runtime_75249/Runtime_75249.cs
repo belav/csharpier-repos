@@ -11,12 +11,11 @@
 public struct S1
 {
     public uint F0;
+
     public S2 M18(ref int arg0, ulong arg1)
     {
         S1 var6;
-        try
-        {
-        }
+        try { }
         finally
         {
             var6.F0 = Runtime_75249.s_13;
@@ -31,7 +30,9 @@ public struct S2
 {
     public S1 F0;
     public short F1;
-    public S2(short f1): this()
+
+    public S2(short f1)
+        : this()
     {
         F1 = f1;
     }
@@ -43,6 +44,7 @@ public class Runtime_75249
     public static int s_10;
     public static uint s_13 = 1;
     public static int s_19;
+
     public static int Main()
     {
         S2 vr1 = new S2(-1);
@@ -54,6 +56,6 @@ public class Runtime_75249
     {
         uint r = arg0.F0.F0;
         System.Console.WriteLine(r);
-        return (byte) r;
+        return (byte)r;
     }
 }

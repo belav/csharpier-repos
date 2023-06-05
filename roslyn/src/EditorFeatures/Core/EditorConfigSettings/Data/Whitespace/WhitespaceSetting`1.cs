@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
     internal sealed class WhitespaceSetting<T> : WhitespaceSetting
         where T : notnull
     {
-        public override bool IsDefinedInEditorConfig => _options.TryGetEditorConfigOption<T>(_option, out _);
+        public override bool IsDefinedInEditorConfig =>
+            _options.TryGetEditorConfigOption<T>(_option, out _);
 
         private bool _isValueSet;
         private T? _value;
@@ -34,8 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                     return _value;
                 }
 
-                if (_options.TryGetEditorConfigOption(_option, out T? value) &&
-                    value is not null)
+                if (_options.TryGetEditorConfigOption(_option, out T? value) && value is not null)
                 {
                     return value;
                 }
@@ -53,12 +53,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         private readonly AnalyzerConfigOptions _options;
         private readonly OptionSet _visualStudioOptions;
 
-        public WhitespaceSetting(Option2<T> option,
-                                 string description,
-                                 AnalyzerConfigOptions options,
-                                 OptionSet visualStudioOptions,
-                                 OptionUpdater updater,
-                                 SettingLocation location)
+        public WhitespaceSetting(
+            Option2<T> option,
+            string description,
+            AnalyzerConfigOptions options,
+            OptionSet visualStudioOptions,
+            OptionUpdater updater,
+            SettingLocation location
+        )
             : base(description, updater, location)
         {
             _option = option;

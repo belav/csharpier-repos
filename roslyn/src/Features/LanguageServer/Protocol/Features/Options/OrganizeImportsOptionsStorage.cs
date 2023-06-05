@@ -12,14 +12,30 @@ namespace Microsoft.CodeAnalysis.OrganizeImports;
 
 internal static class OrganizeImportsOptionsStorage
 {
-    public static ValueTask<OrganizeImportsOptions> GetOrganizeImportsOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetOrganizeImportsOptionsAsync(globalOptions.GetOrganizeImportsOptions(document.Project.Language), cancellationToken);
+    public static ValueTask<OrganizeImportsOptions> GetOrganizeImportsOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetOrganizeImportsOptionsAsync(
+            globalOptions.GetOrganizeImportsOptions(document.Project.Language),
+            cancellationToken
+        );
 
-    public static OrganizeImportsOptions GetOrganizeImportsOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
+    public static OrganizeImportsOptions GetOrganizeImportsOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
         {
-            PlaceSystemNamespaceFirst = globalOptions.GetOption(GenerationOptions.PlaceSystemNamespaceFirst, language),
-            SeparateImportDirectiveGroups = globalOptions.GetOption(GenerationOptions.SeparateImportDirectiveGroups, language),
+            PlaceSystemNamespaceFirst = globalOptions.GetOption(
+                GenerationOptions.PlaceSystemNamespaceFirst,
+                language
+            ),
+            SeparateImportDirectiveGroups = globalOptions.GetOption(
+                GenerationOptions.SeparateImportDirectiveGroups,
+                language
+            ),
             NewLine = globalOptions.GetOption(FormattingOptions2.NewLine, language)
         };
 }

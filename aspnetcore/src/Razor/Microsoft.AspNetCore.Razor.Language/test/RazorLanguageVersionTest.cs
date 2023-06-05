@@ -154,7 +154,8 @@ public class RazorLanguageVersionTest
     {
         // Arrange
         var v = RazorLanguageVersion.Parse("latest");
-        var versions = typeof(RazorLanguageVersion).GetFields(BindingFlags.Public | BindingFlags.Static)
+        var versions = typeof(RazorLanguageVersion)
+            .GetFields(BindingFlags.Public | BindingFlags.Static)
             .Where(f => f.Name.StartsWith("Version_", StringComparison.Ordinal))
             .Select(f => f.GetValue(obj: null))
             .Cast<RazorLanguageVersion>();
@@ -163,7 +164,10 @@ public class RazorLanguageVersionTest
         Assert.NotEmpty(versions);
         foreach (var version in versions)
         {
-            Assert.True(version.CompareTo(v) <= 0, $"RazorLanguageVersion {version} has a higher version than RazorLanguageVersion.Latest");
+            Assert.True(
+                version.CompareTo(v) <= 0,
+                $"RazorLanguageVersion {version} has a higher version than RazorLanguageVersion.Latest"
+            );
         }
     }
 }

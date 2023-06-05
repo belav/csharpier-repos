@@ -15,7 +15,10 @@ internal sealed class DelegateCacheContainer : SynthesizedContainer
 {
     private readonly Symbol _containingSymbol;
     private readonly NamedTypeSymbol? _constructedContainer;
-    private readonly Dictionary<(TypeSymbol?, TypeSymbol, MethodSymbol), FieldSymbol> _delegateFields = new(CLRSignatureComparer.Instance);
+    private readonly Dictionary<
+        (TypeSymbol?, TypeSymbol, MethodSymbol),
+        FieldSymbol
+    > _delegateFields = new(CLRSignatureComparer.Instance);
 
     /// <summary>Creates a type-scope concrete delegate cache container.</summary>
     internal DelegateCacheContainer(TypeSymbol containingType, int generationOrdinal)
@@ -27,8 +30,21 @@ internal sealed class DelegateCacheContainer : SynthesizedContainer
     }
 
     /// <summary>Creates a method-scope generic delegate cache container.</summary>
-    internal DelegateCacheContainer(MethodSymbol ownerMethod, int topLevelMethodOrdinal, int ownerUniqueId, int generationOrdinal)
-        : base(GeneratedNames.DelegateCacheContainerType(generationOrdinal, ownerMethod.Name, topLevelMethodOrdinal, ownerUniqueId), ownerMethod)
+    internal DelegateCacheContainer(
+        MethodSymbol ownerMethod,
+        int topLevelMethodOrdinal,
+        int ownerUniqueId,
+        int generationOrdinal
+    )
+        : base(
+            GeneratedNames.DelegateCacheContainerType(
+                generationOrdinal,
+                ownerMethod.Name,
+                topLevelMethodOrdinal,
+                ownerUniqueId
+            ),
+            ownerMethod
+        )
     {
         Debug.Assert(ownerMethod.IsDefinition);
         Debug.Assert(ownerMethod.Arity > 0);
@@ -51,7 +67,10 @@ internal sealed class DelegateCacheContainer : SynthesizedContainer
 
     internal override bool HasPossibleWellKnownCloneMethod() => false;
 
-    internal FieldSymbol GetOrAddCacheField(SyntheticBoundNodeFactory factory, BoundDelegateCreationExpression boundDelegateCreation)
+    internal FieldSymbol GetOrAddCacheField(
+        SyntheticBoundNodeFactory factory,
+        BoundDelegateCreationExpression boundDelegateCreation
+    )
     {
         var targetMethod = boundDelegateCreation.MethodOpt;
         var delegateType = boundDelegateCreation.Type;
@@ -59,17 +78,39 @@ internal sealed class DelegateCacheContainer : SynthesizedContainer
         Debug.Assert(delegateType.IsDelegateType());
         Debug.Assert(targetMethod is { });
 
-        var constrainedToTypeOpt = ((targetMethod.IsAbstract || targetMethod.IsVirtual) && boundDelegateCreation.Argument is BoundTypeExpression typeExpression) ? typeExpression.Type : null;
+        var constrainedToTypeOpt =
+            (
+                (targetMethod.IsAbstract || targetMethod.IsVirtual)
+                && boundDelegateCreation.Argument is BoundTypeExpression typeExpression
+            )
+                ? typeExpression.Type
+                : null;
 
-        if (_delegateFields.TryGetValue((constrainedToTypeOpt, delegateType, targetMethod), out var field))
+        if (
+            _delegateFields.TryGetValue(
+                (constrainedToTypeOpt, delegateType, targetMethod),
+                out var field
+            )
+        )
         {
             return field;
         }
 
-        var fieldType = TypeParameters.IsEmpty ? delegateType : TypeMap.SubstituteType(delegateType).Type;
-        var fieldName = GeneratedNames.DelegateCacheContainerFieldName(_delegateFields.Count, targetMethod.Name);
+        var fieldType = TypeParameters.IsEmpty
+            ? delegateType
+            : TypeMap.SubstituteType(delegateType).Type;
+        var fieldName = GeneratedNames.DelegateCacheContainerFieldName(
+            _delegateFields.Count,
+            targetMethod.Name
+        );
 
-        field = new SynthesizedFieldSymbol(this, fieldType, fieldName, isPublic: true, isStatic: true);
+        field = new SynthesizedFieldSymbol(
+            this,
+            fieldType,
+            fieldName,
+            isPublic: true,
+            isStatic: true
+        );
         factory.AddField(this, field);
 
         if (!TypeParameters.IsEmpty)
@@ -84,24 +125,45 @@ internal sealed class DelegateCacheContainer : SynthesizedContainer
         return field;
     }
 
-    private sealed class CLRSignatureComparer : IEqualityComparer<(TypeSymbol? constrainedToTypeOpt, TypeSymbol delegateType, MethodSymbol targetMethod)>
+    private sealed class CLRSignatureComparer
+        : IEqualityComparer<(
+            TypeSymbol? constrainedToTypeOpt,
+            TypeSymbol delegateType,
+            MethodSymbol targetMethod
+        )>
     {
         public static readonly CLRSignatureComparer Instance = new();
 
-        public bool Equals((TypeSymbol? constrainedToTypeOpt, TypeSymbol delegateType, MethodSymbol targetMethod) x, (TypeSymbol? constrainedToTypeOpt, TypeSymbol delegateType, MethodSymbol targetMethod) y)
+        public bool Equals(
+            (
+                TypeSymbol? constrainedToTypeOpt,
+                TypeSymbol delegateType,
+                MethodSymbol targetMethod
+            ) x,
+            (TypeSymbol? constrainedToTypeOpt, TypeSymbol delegateType, MethodSymbol targetMethod) y
+        )
         {
             var symbolComparer = SymbolEqualityComparer.CLRSignature;
 
-            return symbolComparer.Equals(x.delegateType, y.delegateType) &&
-                   symbolComparer.Equals(x.targetMethod, y.targetMethod) &&
-                   symbolComparer.Equals(x.constrainedToTypeOpt, y.constrainedToTypeOpt);
+            return symbolComparer.Equals(x.delegateType, y.delegateType)
+                && symbolComparer.Equals(x.targetMethod, y.targetMethod)
+                && symbolComparer.Equals(x.constrainedToTypeOpt, y.constrainedToTypeOpt);
         }
 
-        public int GetHashCode((TypeSymbol? constrainedToTypeOpt, TypeSymbol delegateType, MethodSymbol targetMethod) conversion)
+        public int GetHashCode(
+            (
+                TypeSymbol? constrainedToTypeOpt,
+                TypeSymbol delegateType,
+                MethodSymbol targetMethod
+            ) conversion
+        )
         {
             var symbolComparer = SymbolEqualityComparer.CLRSignature;
 
-            int hash = Hash.Combine(symbolComparer.GetHashCode(conversion.delegateType), symbolComparer.GetHashCode(conversion.targetMethod));
+            int hash = Hash.Combine(
+                symbolComparer.GetHashCode(conversion.delegateType),
+                symbolComparer.GetHashCode(conversion.targetMethod)
+            );
 
             if (conversion.constrainedToTypeOpt is { } constrainedToType)
             {

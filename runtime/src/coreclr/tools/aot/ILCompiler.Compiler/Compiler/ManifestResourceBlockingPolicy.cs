@@ -34,12 +34,15 @@ namespace ILCompiler
         /// </summary>
         public virtual bool IsManifestResourceBlocked(ModuleDesc module, string resourceName)
         {
-            return module is EcmaModule ecmaModule &&
-                (_hashtable.GetOrCreateValue(ecmaModule).BlockedResources.Contains(resourceName)
-                || (resourceName.StartsWith("ILLink.") && resourceName.EndsWith(".xml")));
+            return module is EcmaModule ecmaModule
+                && (
+                    _hashtable.GetOrCreateValue(ecmaModule).BlockedResources.Contains(resourceName)
+                    || (resourceName.StartsWith("ILLink.") && resourceName.EndsWith(".xml"))
+                );
         }
 
-        private sealed class FeatureSwitchHashtable : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
+        private sealed class FeatureSwitchHashtable
+            : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
         {
             private readonly Dictionary<string, bool> _switchValues;
 
@@ -48,10 +51,18 @@ namespace ILCompiler
                 _switchValues = switchValues;
             }
 
-            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) => key == value.Module;
-            protected override bool CompareValueToValue(AssemblyFeatureInfo value1, AssemblyFeatureInfo value2) => value1.Module == value2.Module;
+            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) =>
+                key == value.Module;
+
+            protected override bool CompareValueToValue(
+                AssemblyFeatureInfo value1,
+                AssemblyFeatureInfo value2
+            ) => value1.Module == value2.Module;
+
             protected override int GetKeyHashCode(EcmaModule key) => key.GetHashCode();
-            protected override int GetValueHashCode(AssemblyFeatureInfo value) => value.Module.GetHashCode();
+
+            protected override int GetValueHashCode(AssemblyFeatureInfo value) =>
+                value.Module.GetHashCode();
 
             protected override AssemblyFeatureInfo CreateValueFromKey(EcmaModule key)
             {
@@ -65,16 +76,23 @@ namespace ILCompiler
 
             public HashSet<string> BlockedResources { get; }
 
-            public AssemblyFeatureInfo(EcmaModule module, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public AssemblyFeatureInfo(
+                EcmaModule module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
                 Module = module;
                 BlockedResources = new HashSet<string>();
 
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
+                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
+                );
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module.MetadataReader.GetManifestResource(resourceHandle);
+                    ManifestResource resource = module.MetadataReader.GetManifestResource(
+                        resourceHandle
+                    );
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)
@@ -85,7 +103,10 @@ namespace ILCompiler
                     string resourceName = module.MetadataReader.GetString(resource.Name);
                     if (resourceName == "ILLink.Substitutions.xml")
                     {
-                        BlobReader reader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                        BlobReader reader = resourceDirectory.GetReader(
+                            (int)resource.Offset,
+                            resourceDirectory.Length - (int)resource.Offset
+                        );
                         int length = (int)reader.ReadUInt32();
 
                         UnmanagedMemoryStream ms;
@@ -94,7 +115,14 @@ namespace ILCompiler
                             ms = new UnmanagedMemoryStream(reader.CurrentPointer, length);
                         }
 
-                        BlockedResources = SubstitutionsReader.GetSubstitutions(module.Context, ms, resource, module, "resource " + resourceName + " in " + module.ToString(), featureSwitchValues);
+                        BlockedResources = SubstitutionsReader.GetSubstitutions(
+                            module.Context,
+                            ms,
+                            resource,
+                            module,
+                            "resource " + resourceName + " in " + module.ToString(),
+                            featureSwitchValues
+                        );
                     }
                 }
             }
@@ -104,14 +132,40 @@ namespace ILCompiler
         {
             private readonly HashSet<string> _substitutions = new();
 
-            private SubstitutionsReader(TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues)
-            {
-            }
+            private SubstitutionsReader(
+                TypeSystemContext context,
+                Stream documentStream,
+                ManifestResource resource,
+                ModuleDesc resourceAssembly,
+                string xmlDocumentLocation,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
+                : base(
+                    context,
+                    documentStream,
+                    resource,
+                    resourceAssembly,
+                    xmlDocumentLocation,
+                    featureSwitchValues
+                ) { }
 
-            public static HashSet<string> GetSubstitutions(TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public static HashSet<string> GetSubstitutions(
+                TypeSystemContext context,
+                Stream documentStream,
+                ManifestResource resource,
+                ModuleDesc resourceAssembly,
+                string xmlDocumentLocation,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
-                var rdr = new SubstitutionsReader(context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues);
+                var rdr = new SubstitutionsReader(
+                    context,
+                    documentStream,
+                    resource,
+                    resourceAssembly,
+                    xmlDocumentLocation,
+                    featureSwitchValues
+                );
                 rdr.ProcessXml(false);
                 return rdr._substitutions;
             }
@@ -141,13 +195,18 @@ namespace ILCompiler
                 }
             }
 
-            protected override void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+            protected override void ProcessAssembly(
+                ModuleDesc assembly,
+                XPathNavigator nav,
+                bool warnOnUnresolvedTypes
+            )
             {
                 ProcessResources(nav);
             }
 
             // Should not be resolving types. That's useless work.
-            protected override void ProcessType(TypeDesc type, XPathNavigator nav) => throw new System.NotImplementedException();
+            protected override void ProcessType(TypeDesc type, XPathNavigator nav) =>
+                throw new System.NotImplementedException();
         }
     }
 

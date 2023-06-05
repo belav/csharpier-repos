@@ -65,13 +65,22 @@ namespace SampleSynthesisTests
             string temp = GetTestFilePath();
 
             // Cannot compile to assemblies on .NET Core
-            Assert.Throws<PlatformNotSupportedException>(() => SrgsGrammarCompiler.CompileClassLibrary(srgsDoc, temp, new string[0], keyFile: null));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    SrgsGrammarCompiler.CompileClassLibrary(
+                        srgsDoc,
+                        temp,
+                        new string[0],
+                        keyFile: null
+                    )
+            );
         }
 
         [Fact]
         public void ParseGrammarXml()
         {
-            string xml = @"<grammar version=""1.0"" xml:lang=""en-US"" root=""playCommands"" xmlns=""http://www.w3.org/2001/06/grammar"">
+            string xml =
+                @"<grammar version=""1.0"" xml:lang=""en-US"" root=""playCommands"" xmlns=""http://www.w3.org/2001/06/grammar"">
                              <rule id=""playCommands"">
                                <ruleref uri=""#playAction"" />
                                <item> the </item>
@@ -99,7 +108,10 @@ namespace SampleSynthesisTests
             grammar.Name = "test";
         }
 
-        [ConditionalFact(typeof(SynthesizeRecognizeTests), nameof(SynthesizeRecognizeTests.HasInstalledRecognizers))]
+        [ConditionalFact(
+            typeof(SynthesizeRecognizeTests),
+            nameof(SynthesizeRecognizeTests.HasInstalledRecognizers)
+        )]
         [SkipOnMono("No SAPI on Mono")]
         public void GrammarBuilder()
         {

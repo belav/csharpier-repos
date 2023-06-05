@@ -8,7 +8,11 @@ namespace ManagedDll2
 {
     public class Class2
     {
-        [DllImport(@"MAWSPINative", EntryPoint="GetInt", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            @"MAWSPINative",
+            EntryPoint = "GetInt",
+            CallingConvention = CallingConvention.StdCall
+        )]
         private static extern int GetIntNative();
 
         public static int GetInt()

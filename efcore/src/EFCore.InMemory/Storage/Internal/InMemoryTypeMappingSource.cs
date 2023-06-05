@@ -18,9 +18,7 @@ public class InMemoryTypeMappingSource : TypeMappingSource
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InMemoryTypeMappingSource(TypeMappingSourceDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,22 +31,20 @@ public class InMemoryTypeMappingSource : TypeMappingSource
         var clrType = mappingInfo.ClrType;
         Check.DebugAssert(clrType != null, "ClrType is null");
 
-        if (clrType.IsValueType
-            || clrType == typeof(string)
-            || clrType == typeof(byte[]))
+        if (clrType.IsValueType || clrType == typeof(string) || clrType == typeof(byte[]))
         {
             return new InMemoryTypeMapping(clrType);
         }
 
-        if (clrType.FullName == "NetTopologySuite.Geometries.Geometry"
-            || clrType.GetBaseTypes().Any(t => t.FullName == "NetTopologySuite.Geometries.Geometry"))
+        if (
+            clrType.FullName == "NetTopologySuite.Geometries.Geometry"
+            || clrType.GetBaseTypes().Any(t => t.FullName == "NetTopologySuite.Geometries.Geometry")
+        )
         {
-            var comparer = (ValueComparer)Activator.CreateInstance(typeof(GeometryValueComparer<>).MakeGenericType(clrType))!;
+            var comparer = (ValueComparer)
+                Activator.CreateInstance(typeof(GeometryValueComparer<>).MakeGenericType(clrType))!;
 
-            return new InMemoryTypeMapping(
-                clrType,
-                comparer,
-                comparer);
+            return new InMemoryTypeMapping(clrType, comparer, comparer);
         }
 
         return base.FindMapping(mappingInfo);

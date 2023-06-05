@@ -15,21 +15,46 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.UseExpressionBodyForLambda
 {
     internal static class UseExpressionBodyForLambdaCodeActionHelpers
     {
-        internal static LambdaExpressionSyntax Update(SemanticModel semanticModel, LambdaExpressionSyntax originalDeclaration, LambdaExpressionSyntax currentDeclaration)
-            => UpdateWorker(semanticModel, originalDeclaration, currentDeclaration).WithAdditionalAnnotations(Formatter.Annotation);
+        internal static LambdaExpressionSyntax Update(
+            SemanticModel semanticModel,
+            LambdaExpressionSyntax originalDeclaration,
+            LambdaExpressionSyntax currentDeclaration
+        ) =>
+            UpdateWorker(semanticModel, originalDeclaration, currentDeclaration)
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
         private static LambdaExpressionSyntax UpdateWorker(
-            SemanticModel semanticModel, LambdaExpressionSyntax originalDeclaration, LambdaExpressionSyntax currentDeclaration)
+            SemanticModel semanticModel,
+            LambdaExpressionSyntax originalDeclaration,
+            LambdaExpressionSyntax currentDeclaration
+        )
         {
-            var expressionBody = UseExpressionBodyForLambdaHelpers.GetBodyAsExpression(currentDeclaration);
+            var expressionBody = UseExpressionBodyForLambdaHelpers.GetBodyAsExpression(
+                currentDeclaration
+            );
             return expressionBody == null
                 ? WithExpressionBody(currentDeclaration, originalDeclaration.GetLanguageVersion())
-                : WithBlockBody(semanticModel, originalDeclaration, currentDeclaration, expressionBody);
+                : WithBlockBody(
+                    semanticModel,
+                    originalDeclaration,
+                    currentDeclaration,
+                    expressionBody
+                );
         }
 
-        private static LambdaExpressionSyntax WithExpressionBody(LambdaExpressionSyntax declaration, LanguageVersion languageVersion)
+        private static LambdaExpressionSyntax WithExpressionBody(
+            LambdaExpressionSyntax declaration,
+            LanguageVersion languageVersion
+        )
         {
-            if (!UseExpressionBodyForLambdaHelpers.TryConvertToExpressionBody(declaration, languageVersion, ExpressionBodyPreference.WhenPossible, out var expressionBody))
+            if (
+                !UseExpressionBodyForLambdaHelpers.TryConvertToExpressionBody(
+                    declaration,
+                    languageVersion,
+                    ExpressionBodyPreference.WhenPossible,
+                    out var expressionBody
+                )
+            )
             {
                 return declaration;
             }
@@ -38,25 +63,38 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.UseExpressionBodyForLambda
 
             // If there will only be whitespace between the arrow and the body, then replace that
             // with a single space so that the lambda doesn't have superfluous newlines in it.
-            if (declaration.ArrowToken.TrailingTrivia.All(t => t.IsWhitespaceOrEndOfLine()) &&
-                expressionBody.GetLeadingTrivia().All(t => t.IsWhitespaceOrEndOfLine()))
+            if (
+                declaration.ArrowToken.TrailingTrivia.All(t => t.IsWhitespaceOrEndOfLine())
+                && expressionBody.GetLeadingTrivia().All(t => t.IsWhitespaceOrEndOfLine())
+            )
             {
-                updatedDecl = updatedDecl.WithArrowToken(updatedDecl.ArrowToken.WithTrailingTrivia(SyntaxFactory.ElasticSpace));
+                updatedDecl = updatedDecl.WithArrowToken(
+                    updatedDecl.ArrowToken.WithTrailingTrivia(SyntaxFactory.ElasticSpace)
+                );
             }
 
             return updatedDecl;
         }
 
         private static LambdaExpressionSyntax WithBlockBody(
-            SemanticModel semanticModel, LambdaExpressionSyntax originalDeclaration, LambdaExpressionSyntax currentDeclaration, ExpressionSyntax expressionBody)
+            SemanticModel semanticModel,
+            LambdaExpressionSyntax originalDeclaration,
+            LambdaExpressionSyntax currentDeclaration,
+            ExpressionSyntax expressionBody
+        )
         {
             var createReturnStatementForExpression = CreateReturnStatementForExpression(
-                semanticModel, originalDeclaration);
+                semanticModel,
+                originalDeclaration
+            );
 
-            if (!expressionBody.TryConvertToStatement(
+            if (
+                !expressionBody.TryConvertToStatement(
                     semicolonTokenOpt: null,
                     createReturnStatementForExpression,
-                    out var statement))
+                    out var statement
+                )
+            )
             {
                 return currentDeclaration;
             }
@@ -64,22 +102,30 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.UseExpressionBodyForLambda
             // If the user is converting to a block, it's likely they intend to add multiple
             // statements to it.  So make a multi-line block so that things are formatted properly
             // for them to do so.
-            return currentDeclaration.WithBody(SyntaxFactory.Block(
-                SyntaxFactory.Token(SyntaxKind.OpenBraceToken).WithAppendedTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed),
-                SyntaxFactory.SingletonList(statement),
-                SyntaxFactory.Token(SyntaxKind.CloseBraceToken)));
+            return currentDeclaration.WithBody(
+                SyntaxFactory.Block(
+                    SyntaxFactory
+                        .Token(SyntaxKind.OpenBraceToken)
+                        .WithAppendedTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed),
+                    SyntaxFactory.SingletonList(statement),
+                    SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
+                )
+            );
         }
 
         private static bool CreateReturnStatementForExpression(
-            SemanticModel semanticModel, LambdaExpressionSyntax declaration)
+            SemanticModel semanticModel,
+            LambdaExpressionSyntax declaration
+        )
         {
-            var lambdaType = (INamedTypeSymbol)semanticModel.GetTypeInfo(declaration).ConvertedType!;
+            var lambdaType = (INamedTypeSymbol)
+                semanticModel.GetTypeInfo(declaration).ConvertedType!;
             if (lambdaType.DelegateInvokeMethod!.ReturnsVoid)
             {
                 return false;
             }
 
-            // 'async Task' is effectively a void-returning lambda.  we do not want to create 
+            // 'async Task' is effectively a void-returning lambda.  we do not want to create
             // 'return statements' when converting.
             if (declaration.AsyncKeyword != default)
             {
@@ -93,7 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.UseExpressionBodyForLambda
                     return returnType.Name != nameof(Task);
                 }
 
-                var taskType = semanticModel.Compilation.GetTypeByMetadataName(typeof(Task).FullName!);
+                var taskType = semanticModel.Compilation.GetTypeByMetadataName(
+                    typeof(Task).FullName!
+                );
                 if (returnType.Equals(taskType))
                 {
                     // 'async Task'.  definitely do not create a 'return' statement;

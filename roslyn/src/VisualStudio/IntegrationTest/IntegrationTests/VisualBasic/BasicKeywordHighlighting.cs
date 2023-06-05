@@ -18,25 +18,29 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicKeywordHighlighting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicKeywordHighlighting))
-        {
-        }
+            : base(instanceFactory, nameof(BasicKeywordHighlighting)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public void NavigationBetweenKeywords()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Class C
     Sub Main()
         For a = 0 To 1 Step 1
             For b = 0 To 2
         Next b, a
     End Sub
-End Class");
+End Class"
+            );
 
             Verify("To", 4);
             VisualStudio.Editor.InvokeNavigateToNextHighlightedReference();
-            VisualStudio.Editor.Verify.CurrentLineText("For a = 0 To 1 Step$$ 1", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "For a = 0 To 1 Step$$ 1",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         private void Verify(string marker, int expectedCount)
@@ -48,7 +52,8 @@ End Class");
                 FeatureAttribute.SolutionCrawlerLegacy,
                 FeatureAttribute.DiagnosticService,
                 FeatureAttribute.Classification,
-                FeatureAttribute.KeywordHighlighting);
+                FeatureAttribute.KeywordHighlighting
+            );
 
             Assert.Equal(expectedCount, VisualStudio.Editor.GetKeywordHighlightTags().Length);
         }

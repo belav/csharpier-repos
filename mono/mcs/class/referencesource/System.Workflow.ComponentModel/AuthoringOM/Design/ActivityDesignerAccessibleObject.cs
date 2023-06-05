@@ -31,7 +31,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Accessibility object class for the ActivityDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerAccessibleObject : AccessibleObject
     {
         private ActivityDesigner activityDesigner;
@@ -45,7 +47,10 @@ namespace System.Workflow.ComponentModel.Design
             if (activityDesigner == null)
                 throw new ArgumentNullException("activityDesigner");
             if (activityDesigner.Activity == null)
-                throw new ArgumentException(DR.GetString(DR.DesignerNotInitialized), "activityDesigner");
+                throw new ArgumentException(
+                    DR.GetString(DR.DesignerNotInitialized),
+                    "activityDesigner"
+                );
 
             this.activityDesigner = activityDesigner;
         }
@@ -54,23 +59,25 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return this.activityDesigner.InternalRectangleToScreen(this.activityDesigner.Bounds);
+                return this.activityDesigner.InternalRectangleToScreen(
+                    this.activityDesigner.Bounds
+                );
             }
         }
 
         public override string DefaultAction
         {
-            get
-            {
-                return DR.GetString(DR.AccessibleAction);
-            }
+            get { return DR.GetString(DR.AccessibleAction); }
         }
 
         public override string Description
         {
             get
             {
-                return DR.GetString(DR.ActivityDesignerAccessibleDescription, this.activityDesigner.Activity.GetType().Name);
+                return DR.GetString(
+                    DR.ActivityDesignerAccessibleDescription,
+                    this.activityDesigner.Activity.GetType().Name
+                );
             }
         }
 
@@ -78,7 +85,10 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return DR.GetString(DR.ActivityDesignerAccessibleHelp, this.activityDesigner.Activity.GetType().Name);
+                return DR.GetString(
+                    DR.ActivityDesignerAccessibleHelp,
+                    this.activityDesigner.Activity.GetType().Name
+                );
             }
         }
 
@@ -90,7 +100,8 @@ namespace System.Workflow.ComponentModel.Design
                 if (activity != null)
                 {
                     if (TypeDescriptor.GetProperties(activity)["TypeName"] != null)
-                        return TypeDescriptor.GetProperties(activity)["TypeName"].GetValue(activity) as string;
+                        return TypeDescriptor.GetProperties(activity)["TypeName"].GetValue(activity)
+                            as string;
                     else if (!string.IsNullOrEmpty(activity.QualifiedName))
                         return activity.QualifiedName;
                     else
@@ -101,7 +112,6 @@ namespace System.Workflow.ComponentModel.Design
                     return base.Name;
                 }
             }
-
             set
             {
                 //We do not allow setting ID programatically
@@ -119,19 +129,22 @@ namespace System.Workflow.ComponentModel.Design
 
         public override AccessibleRole Role
         {
-            get
-            {
-                return AccessibleRole.Diagram;
-            }
+            get { return AccessibleRole.Diagram; }
         }
 
         public override AccessibleStates State
         {
             get
             {
-                AccessibleStates state = (this.activityDesigner.IsSelected) ? AccessibleStates.Selected : AccessibleStates.Selectable;
+                AccessibleStates state =
+                    (this.activityDesigner.IsSelected)
+                        ? AccessibleStates.Selected
+                        : AccessibleStates.Selectable;
                 state |= AccessibleStates.MultiSelectable;
-                state |= (this.activityDesigner.IsPrimarySelection) ? AccessibleStates.Focused : AccessibleStates.Focusable;
+                state |=
+                    (this.activityDesigner.IsPrimarySelection)
+                        ? AccessibleStates.Focused
+                        : AccessibleStates.Focusable;
 
                 if (this.activityDesigner.IsLocked)
                     state |= AccessibleStates.ReadOnly;
@@ -147,9 +160,13 @@ namespace System.Workflow.ComponentModel.Design
 
         public override void DoDefaultAction()
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
-                selectionService.SetSelectedComponents(new object[] { this.activityDesigner.Activity }, SelectionTypes.Replace);
+                selectionService.SetSelectedComponents(
+                    new object[] { this.activityDesigner.Activity },
+                    SelectionTypes.Replace
+                );
             else
                 base.DoDefaultAction();
         }
@@ -174,12 +191,21 @@ namespace System.Workflow.ComponentModel.Design
                         navigate = DesignerNavigationDirection.Left;
                     else if (navdir == AccessibleNavigation.Right)
                         navigate = DesignerNavigationDirection.Right;
-                    else if (navdir == AccessibleNavigation.Up || navdir == AccessibleNavigation.Previous)
+                    else if (
+                        navdir == AccessibleNavigation.Up || navdir == AccessibleNavigation.Previous
+                    )
                         navigate = DesignerNavigationDirection.Up;
-                    else if (navdir == AccessibleNavigation.Down || navdir == AccessibleNavigation.Next)
+                    else if (
+                        navdir == AccessibleNavigation.Down || navdir == AccessibleNavigation.Next
+                    )
                         navigate = DesignerNavigationDirection.Down;
 
-                    ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(compositeDesigner.GetNextSelectableObject(this.activityDesigner.Activity, navigate) as Activity);
+                    ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                        compositeDesigner.GetNextSelectableObject(
+                            this.activityDesigner.Activity,
+                            navigate
+                        ) as Activity
+                    );
                     if (activityDesigner != null)
                         return activityDesigner.AccessibilityObject;
                 }
@@ -190,15 +216,28 @@ namespace System.Workflow.ComponentModel.Design
 
         public override void Select(AccessibleSelection flags)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
             {
-                if (((flags & AccessibleSelection.TakeFocus) > 0) || ((flags & AccessibleSelection.TakeSelection) > 0))
-                    selectionService.SetSelectedComponents(new object[] { this.activityDesigner.Activity }, SelectionTypes.Replace);
+                if (
+                    ((flags & AccessibleSelection.TakeFocus) > 0)
+                    || ((flags & AccessibleSelection.TakeSelection) > 0)
+                )
+                    selectionService.SetSelectedComponents(
+                        new object[] { this.activityDesigner.Activity },
+                        SelectionTypes.Replace
+                    );
                 else if ((flags & AccessibleSelection.AddSelection) > 0)
-                    selectionService.SetSelectedComponents(new object[] { this.activityDesigner.Activity }, SelectionTypes.Add);
+                    selectionService.SetSelectedComponents(
+                        new object[] { this.activityDesigner.Activity },
+                        SelectionTypes.Add
+                    );
                 else if ((flags & AccessibleSelection.RemoveSelection) > 0)
-                    selectionService.SetSelectedComponents(new object[] { this.activityDesigner.Activity }, SelectionTypes.Remove);
+                    selectionService.SetSelectedComponents(
+                        new object[] { this.activityDesigner.Activity },
+                        SelectionTypes.Remove
+                    );
             }
         }
 
@@ -207,7 +246,10 @@ namespace System.Workflow.ComponentModel.Design
             if (serviceType == null)
                 throw new ArgumentNullException("serviceType");
 
-            if (this.ActivityDesigner.Activity != null && this.ActivityDesigner.Activity.Site != null)
+            if (
+                this.ActivityDesigner.Activity != null
+                && this.ActivityDesigner.Activity.Site != null
+            )
                 return this.ActivityDesigner.Activity.Site.GetService(serviceType);
             else
                 return null;
@@ -215,12 +257,8 @@ namespace System.Workflow.ComponentModel.Design
 
         protected ActivityDesigner ActivityDesigner
         {
-            get
-            {
-                return this.activityDesigner;
-            }
+            get { return this.activityDesigner; }
         }
     }
     #endregion
-
 }

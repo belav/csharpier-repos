@@ -27,8 +27,7 @@ public class IdentifierShadowValuePresenceTest
     }
 
     [ConditionalFact]
-    public async Task
-        Entities_can_be_tracked_with_normal_use_of_DbContext_methods_and_have_correct_resultant_state_and_id_shadow_value()
+    public async Task Entities_can_be_tracked_with_normal_use_of_DbContext_methods_and_have_correct_resultant_state_and_id_shadow_value()
     {
         await using var testDatabase = CosmosTestStore.Create("IdentifierShadowValuePresenceTest");
         using var context = new IdentifierShadowValuePresenceTestContext(testDatabase);
@@ -66,17 +65,10 @@ public class IdentifierShadowValuePresenceTestContext : DbContext
         _name = testStore.Name;
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder
-            .UseCosmos(
-                _connectionUri,
-                _authToken,
-                _name,
-                b => b.ApplyConfiguration());
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseCosmos(_connectionUri, _authToken, _name, b => b.ApplyConfiguration());
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
     public DbSet<GItem> GItems { get; set; }
 

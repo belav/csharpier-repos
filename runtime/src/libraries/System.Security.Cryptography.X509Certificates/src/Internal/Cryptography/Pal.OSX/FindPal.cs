@@ -9,17 +9,23 @@ namespace Internal.Cryptography.Pal
 {
     internal sealed partial class FindPal
     {
-        internal static IFindPal OpenPal(X509Certificate2Collection findFrom, X509Certificate2Collection copyTo, bool validOnly)
+        internal static IFindPal OpenPal(
+            X509Certificate2Collection findFrom,
+            X509Certificate2Collection copyTo,
+            bool validOnly
+        )
         {
             return new AppleCertificateFinder(findFrom, copyTo, validOnly);
         }
 
         private sealed class AppleCertificateFinder : ManagedCertificateFinder
         {
-            public AppleCertificateFinder(X509Certificate2Collection findFrom, X509Certificate2Collection copyTo, bool validOnly)
-                : base(findFrom, copyTo, validOnly)
-            {
-            }
+            public AppleCertificateFinder(
+                X509Certificate2Collection findFrom,
+                X509Certificate2Collection copyTo,
+                bool validOnly
+            )
+                : base(findFrom, copyTo, validOnly) { }
 
             protected override byte[] GetSubjectPublicKeyInfo(X509Certificate2 cert)
             {

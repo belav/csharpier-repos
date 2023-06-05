@@ -17,10 +17,8 @@ namespace POS_Server.Models
         public string notes { get; set; }
         public byte isActive { get; set; }
 
-
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<long> userId { get; set; }
         public string updateUserName { get; set; }
-
     }
 }

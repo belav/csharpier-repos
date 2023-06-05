@@ -16,7 +16,10 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type expectedType = typeof(Action<object>);
 
             // Act
-            LambdaExpressionFingerprint fingerprint = new LambdaExpressionFingerprint(expectedNodeType, expectedType);
+            LambdaExpressionFingerprint fingerprint = new LambdaExpressionFingerprint(
+                expectedNodeType,
+                expectedType
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -31,8 +34,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(Action<object>);
 
             // Act
-            LambdaExpressionFingerprint fingerprint1 = new LambdaExpressionFingerprint(nodeType, type);
-            LambdaExpressionFingerprint fingerprint2 = new LambdaExpressionFingerprint(nodeType, type);
+            LambdaExpressionFingerprint fingerprint1 = new LambdaExpressionFingerprint(
+                nodeType,
+                type
+            );
+            LambdaExpressionFingerprint fingerprint2 = new LambdaExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -47,8 +56,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(Action<object>);
 
             // Act
-            LambdaExpressionFingerprint fingerprint1 = new LambdaExpressionFingerprint(nodeType, type);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            LambdaExpressionFingerprint fingerprint1 = new LambdaExpressionFingerprint(
+                nodeType,
+                type
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -62,8 +77,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(Action<object>);
 
             // Act
-            LambdaExpressionFingerprint fingerprint1 = new LambdaExpressionFingerprint(nodeType, type);
-            LambdaExpressionFingerprint fingerprint2 = new LambdaExpressionFingerprint(nodeType, typeof(Action));
+            LambdaExpressionFingerprint fingerprint1 = new LambdaExpressionFingerprint(
+                nodeType,
+                type
+            );
+            LambdaExpressionFingerprint fingerprint2 = new LambdaExpressionFingerprint(
+                nodeType,
+                typeof(Action)
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

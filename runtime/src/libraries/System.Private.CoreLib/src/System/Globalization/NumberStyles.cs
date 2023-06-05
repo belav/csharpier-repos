@@ -54,16 +54,40 @@ namespace System.Globalization
 
         HexNumber = AllowLeadingWhite | AllowTrailingWhite | AllowHexSpecifier,
 
-        Number = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign | AllowTrailingSign |
-                   AllowDecimalPoint | AllowThousands,
+        Number =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowTrailingSign
+            | AllowDecimalPoint
+            | AllowThousands,
 
-        Float = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign |
-                   AllowDecimalPoint | AllowExponent,
+        Float =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowDecimalPoint
+            | AllowExponent,
 
-        Currency = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign | AllowTrailingSign |
-                   AllowParentheses | AllowDecimalPoint | AllowThousands | AllowCurrencySymbol,
+        Currency =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowTrailingSign
+            | AllowParentheses
+            | AllowDecimalPoint
+            | AllowThousands
+            | AllowCurrencySymbol,
 
-        Any = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign | AllowTrailingSign |
-                   AllowParentheses | AllowDecimalPoint | AllowThousands | AllowCurrencySymbol | AllowExponent,
+        Any =
+            AllowLeadingWhite
+            | AllowTrailingWhite
+            | AllowLeadingSign
+            | AllowTrailingSign
+            | AllowParentheses
+            | AllowDecimalPoint
+            | AllowThousands
+            | AllowCurrencySymbol
+            | AllowExponent,
     }
 }

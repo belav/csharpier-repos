@@ -28,7 +28,8 @@ internal static partial class Interop
             SafeHandle safeProvHandle,
             CryptProvParam dwParam,
             IntPtr pbData,
-            int dwFlags);
+            int dwFlags
+        );
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -36,7 +37,8 @@ internal static partial class Interop
             SafeProvHandle hProv,
             CryptProvParam dwParam,
             ref IntPtr pbData,
-            int dwFlags);
+            int dwFlags
+        );
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -45,13 +47,15 @@ internal static partial class Interop
             CryptProvParam dwParam,
             IntPtr pbData,
             ref int dwDataLen,
-            int dwFlags);
+            int dwFlags
+        );
 
         public static bool CryptGetProvParam(
             SafeHandle safeProvHandle,
             CryptProvParam dwParam,
             Span<byte> pbData,
-            ref int dwDataLen)
+            ref int dwDataLen
+        )
         {
             if (pbData.IsEmpty)
             {
@@ -62,12 +66,17 @@ internal static partial class Interop
             {
                 throw new IndexOutOfRangeException();
             }
-
             unsafe
             {
                 fixed (byte* bytePtr = &MemoryMarshal.GetReference(pbData))
                 {
-                    return CryptGetProvParam(safeProvHandle, dwParam, (IntPtr)bytePtr, ref dwDataLen, 0);
+                    return CryptGetProvParam(
+                        safeProvHandle,
+                        dwParam,
+                        (IntPtr)bytePtr,
+                        ref dwDataLen,
+                        0
+                    );
                 }
             }
         }

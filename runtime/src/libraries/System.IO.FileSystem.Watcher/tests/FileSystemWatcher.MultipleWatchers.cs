@@ -16,7 +16,8 @@ namespace System.IO.Tests
 
         private void OnError(object source, ErrorEventArgs e)
         {
-            string msg = $"Watcher failed: {e.GetException()} source={source} {source.GetHashCode()}";
+            string msg =
+                $"Watcher failed: {e.GetException()} source={source} {source.GetHashCode()}";
             _output.WriteLine(msg);
             // Repeat on Console so it easier to triage in CI.
             Console.WriteLine(msg);
@@ -68,7 +69,10 @@ namespace System.IO.Tests
         {
             using (var watcher1 = new FileSystemWatcher(TestDirectory))
             {
-                string fileName = Path.Combine(TestDirectory, "FileSystemWatcher_File_Create_SuppressedExecutionContextHandled");
+                string fileName = Path.Combine(
+                    TestDirectory,
+                    "FileSystemWatcher_File_Create_SuppressedExecutionContextHandled"
+                );
                 watcher1.Filter = Path.GetFileName(fileName);
                 watcher1.Error += OnError;
 
@@ -89,11 +93,11 @@ namespace System.IO.Tests
                     ExecutionContext.RestoreFlow();
                 }
 
-                    File.Create(fileName).Dispose();
-                    tcs1.Task.Wait(WaitForExpectedEventTimeout);
+                File.Create(fileName).Dispose();
+                tcs1.Task.Wait(WaitForExpectedEventTimeout);
 
-                    Assert.Equal(0, tcs1.Task.Result);
-           }
+                Assert.Equal(0, tcs1.Task.Result);
+            }
         }
 
         [OuterLoop]
@@ -104,7 +108,10 @@ namespace System.IO.Tests
             using (var watcher2 = new FileSystemWatcher(TestDirectory))
             using (var watcher3 = new FileSystemWatcher(TestDirectory))
             {
-                string fileName = Path.Combine(TestDirectory, "FileSystemWatcher_File_Create_NotAffectEachOther");
+                string fileName = Path.Combine(
+                    TestDirectory,
+                    "FileSystemWatcher_File_Create_NotAffectEachOther"
+                );
                 watcher1.Filter = Path.GetFileName(fileName);
                 watcher2.Filter = Path.GetFileName(fileName);
                 watcher3.Filter = Path.GetFileName(fileName);
@@ -113,23 +120,42 @@ namespace System.IO.Tests
                 watcher2.Error += OnError;
                 watcher3.Error += OnError;
 
-                AutoResetEvent autoResetEvent1 = WatchCreated(watcher1, new[] { fileName }).EventOccurred;
-                AutoResetEvent autoResetEvent2 = WatchCreated(watcher2, new[] { fileName }).EventOccurred;
-                AutoResetEvent autoResetEvent3 = WatchCreated(watcher3, new[] { fileName }).EventOccurred;
+                AutoResetEvent autoResetEvent1 = WatchCreated(
+                    watcher1,
+                    new[] { fileName }
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent2 = WatchCreated(
+                    watcher2,
+                    new[] { fileName }
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent3 = WatchCreated(
+                    watcher3,
+                    new[] { fileName }
+                ).EventOccurred;
 
                 watcher1.EnableRaisingEvents = true;
                 watcher2.EnableRaisingEvents = true;
                 watcher3.EnableRaisingEvents = true;
 
                 File.Create(fileName).Dispose();
-                Assert.True(WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent2, autoResetEvent3 }, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent2, autoResetEvent3 },
+                        WaitForExpectedEventTimeout_NoRetry
+                    )
+                );
 
                 File.Delete(fileName);
                 watcher1.EnableRaisingEvents = false;
 
                 File.Create(fileName).Dispose();
                 Assert.False(autoResetEvent1.WaitOne(WaitForUnexpectedEventTimeout));
-                Assert.True(WaitHandle.WaitAll(new[] { autoResetEvent2, autoResetEvent3 }, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent2, autoResetEvent3 },
+                        WaitForExpectedEventTimeout_NoRetry
+                    )
+                );
             }
         }
 
@@ -148,8 +174,14 @@ namespace System.IO.Tests
                 string fileName1 = Path.Combine(dir1, "file");
                 string fileName2 = Path.Combine(dir2, "file");
 
-                AutoResetEvent autoResetEvent1 = WatchCreated(watcher1, new[] { fileName1 }).EventOccurred;
-                AutoResetEvent autoResetEvent2 = WatchCreated(watcher2, new[] { fileName2 }).EventOccurred;
+                AutoResetEvent autoResetEvent1 = WatchCreated(
+                    watcher1,
+                    new[] { fileName1 }
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent2 = WatchCreated(
+                    watcher2,
+                    new[] { fileName2 }
+                ).EventOccurred;
 
                 watcher1.EnableRaisingEvents = true;
                 watcher2.EnableRaisingEvents = true;
@@ -176,18 +208,26 @@ namespace System.IO.Tests
 
             try
             {
-                string fileName = Path.Combine(TestDirectory, "FileSystemWatcher_File_Create_ForceLoopRestart");
+                string fileName = Path.Combine(
+                    TestDirectory,
+                    "FileSystemWatcher_File_Create_ForceLoopRestart"
+                );
                 AutoResetEvent[] autoResetEvents = new AutoResetEvent[64];
                 for (var i = 0; i < watchers.Length; i++)
                 {
                     watchers[i] = new FileSystemWatcher(TestDirectory);
                     watchers[i].Filter = Path.GetFileName(fileName);
-                    autoResetEvents[i] = WatchCreated(watchers[i], new[] { fileName }).EventOccurred;
+                    autoResetEvents[i] = WatchCreated(
+                        watchers[i],
+                        new[] { fileName }
+                    ).EventOccurred;
                     watchers[i].EnableRaisingEvents = true;
                 }
 
                 File.Create(fileName).Dispose();
-                Assert.True(WaitHandle.WaitAll(autoResetEvents, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(autoResetEvents, WaitForExpectedEventTimeout_NoRetry)
+                );
 
                 File.Delete(fileName);
                 for (var i = 0; i < watchers.Length; i++)
@@ -208,7 +248,9 @@ namespace System.IO.Tests
                     }
 
                     File.Create(fileName).Dispose();
-                    Assert.True(WaitHandle.WaitAll(autoResetEvents, WaitForExpectedEventTimeout_NoRetry));
+                    Assert.True(
+                        WaitHandle.WaitAll(autoResetEvents, WaitForExpectedEventTimeout_NoRetry)
+                    );
                 }
                 else
                 {
@@ -217,12 +259,17 @@ namespace System.IO.Tests
                     {
                         watchers1[i] = new FileSystemWatcher(TestDirectory);
                         watchers1[i].Filter = Path.GetFileName(fileName);
-                        autoResetEvents1[i] = WatchCreated(watchers1[i], new[] { fileName }).EventOccurred;
+                        autoResetEvents1[i] = WatchCreated(
+                            watchers1[i],
+                            new[] { fileName }
+                        ).EventOccurred;
                         watchers1[i].EnableRaisingEvents = true;
                     }
 
                     File.Create(fileName).Dispose();
-                    Assert.True(WaitHandle.WaitAll(autoResetEvents1, WaitForExpectedEventTimeout_NoRetry));
+                    Assert.True(
+                        WaitHandle.WaitAll(autoResetEvents1, WaitForExpectedEventTimeout_NoRetry)
+                    );
                 }
             }
             finally
@@ -237,7 +284,7 @@ namespace System.IO.Tests
 
         [OuterLoop]
         [Fact]
-        public void  FileSystemWatcher_File_Changed_NotAffectEachOther()
+        public void FileSystemWatcher_File_Changed_NotAffectEachOther()
         {
             string file = CreateTestFile(TestDirectory, "apple");
             string otherFile = CreateTestFile(TestDirectory, "pear");
@@ -245,9 +292,18 @@ namespace System.IO.Tests
             using (var watcher2 = new FileSystemWatcher(TestDirectory, Path.GetFileName(file)))
             using (var watcher3 = new FileSystemWatcher(TestDirectory, Path.GetFileName(otherFile)))
             {
-                AutoResetEvent autoResetEvent1 = WatchChanged(watcher1, new[] { Path.Combine(TestDirectory, "apple") }).EventOccurred;
-                AutoResetEvent autoResetEvent2 = WatchChanged(watcher2, new[] { Path.Combine(TestDirectory, "apple") }).EventOccurred;
-                AutoResetEvent autoResetEvent3 = WatchChanged(watcher3, new[] { Path.Combine(TestDirectory, "pear") }).EventOccurred;
+                AutoResetEvent autoResetEvent1 = WatchChanged(
+                    watcher1,
+                    new[] { Path.Combine(TestDirectory, "apple") }
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent2 = WatchChanged(
+                    watcher2,
+                    new[] { Path.Combine(TestDirectory, "apple") }
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent3 = WatchChanged(
+                    watcher3,
+                    new[] { Path.Combine(TestDirectory, "pear") }
+                ).EventOccurred;
 
                 watcher1.Error += OnError;
                 watcher2.Error += OnError;
@@ -258,21 +314,41 @@ namespace System.IO.Tests
                 watcher3.EnableRaisingEvents = true;
 
                 Directory.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
-                Assert.True(WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent2 }, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent2 },
+                        WaitForExpectedEventTimeout_NoRetry
+                    )
+                );
                 Assert.False(autoResetEvent3.WaitOne(WaitForUnexpectedEventTimeout));
 
                 Directory.SetLastWriteTime(otherFile, DateTime.Now + TimeSpan.FromSeconds(10));
-                Assert.False(WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent2 }, WaitForUnexpectedEventTimeout));
+                Assert.False(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent2 },
+                        WaitForUnexpectedEventTimeout
+                    )
+                );
                 Assert.True(autoResetEvent3.WaitOne(WaitForExpectedEventTimeout_NoRetry));
 
                 watcher1.EnableRaisingEvents = false;
 
                 Directory.SetLastWriteTime(file, DateTime.Now + TimeSpan.FromSeconds(10));
-                Assert.False(WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent3 }, WaitForUnexpectedEventTimeout));
+                Assert.False(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent3 },
+                        WaitForUnexpectedEventTimeout
+                    )
+                );
                 Assert.True(autoResetEvent2.WaitOne(WaitForExpectedEventTimeout_NoRetry));
 
                 Directory.SetLastWriteTime(otherFile, DateTime.Now + TimeSpan.FromSeconds(10));
-                Assert.False(WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent2 }, WaitForUnexpectedEventTimeout));
+                Assert.False(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent2 },
+                        WaitForUnexpectedEventTimeout
+                    )
+                );
                 Assert.True(autoResetEvent3.WaitOne(WaitForExpectedEventTimeout_NoRetry));
             }
         }
@@ -295,23 +371,45 @@ namespace System.IO.Tests
                 watcher2.Error += OnError;
                 watcher3.Error += OnError;
 
-                AutoResetEvent autoResetEvent1 = WatchDeleted(watcher1, new[] { fileName }, _output).EventOccurred;
-                AutoResetEvent autoResetEvent2 = WatchDeleted(watcher2, new[] { fileName }, _output).EventOccurred;
-                AutoResetEvent autoResetEvent3 = WatchDeleted(watcher3, new[] { fileName }, _output).EventOccurred;
+                AutoResetEvent autoResetEvent1 = WatchDeleted(
+                    watcher1,
+                    new[] { fileName },
+                    _output
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent2 = WatchDeleted(
+                    watcher2,
+                    new[] { fileName },
+                    _output
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent3 = WatchDeleted(
+                    watcher3,
+                    new[] { fileName },
+                    _output
+                ).EventOccurred;
 
                 watcher1.EnableRaisingEvents = true;
                 watcher2.EnableRaisingEvents = true;
                 watcher3.EnableRaisingEvents = true;
 
                 File.Delete(fileName);
-                Assert.True(WaitHandle.WaitAll(new[] { autoResetEvent1, autoResetEvent2, autoResetEvent3 }, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent2, autoResetEvent3 },
+                        WaitForExpectedEventTimeout_NoRetry
+                    )
+                );
 
                 File.Create(fileName).Dispose();
                 watcher1.EnableRaisingEvents = false;
 
                 File.Delete(fileName);
                 Assert.False(autoResetEvent1.WaitOne(WaitForUnexpectedEventTimeout));
-                Assert.True(WaitHandle.WaitAll(new[] { autoResetEvent2, autoResetEvent3 }, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent2, autoResetEvent3 },
+                        WaitForExpectedEventTimeout_NoRetry
+                    )
+                );
             }
         }
 
@@ -327,8 +425,16 @@ namespace System.IO.Tests
                 string filePath = file;
                 string filePathRenamed = file + "_renamed";
 
-                AutoResetEvent autoResetEvent1 = WatchRenamed(watcher1, new[] { filePathRenamed }, _output).EventOccurred;
-                AutoResetEvent autoResetEvent2 = WatchRenamed(watcher2, new[] { filePathRenamed }, _output).EventOccurred;
+                AutoResetEvent autoResetEvent1 = WatchRenamed(
+                    watcher1,
+                    new[] { filePathRenamed },
+                    _output
+                ).EventOccurred;
+                AutoResetEvent autoResetEvent2 = WatchRenamed(
+                    watcher2,
+                    new[] { filePathRenamed },
+                    _output
+                ).EventOccurred;
 
                 watcher1.Error += OnError;
                 watcher2.Error += OnError;
@@ -337,8 +443,12 @@ namespace System.IO.Tests
                 watcher2.EnableRaisingEvents = true;
 
                 File.Move(filePath, filePathRenamed);
-                Assert.True(WaitHandle.WaitAll(
-                    new[] { autoResetEvent1, autoResetEvent2}, WaitForExpectedEventTimeout_NoRetry));
+                Assert.True(
+                    WaitHandle.WaitAll(
+                        new[] { autoResetEvent1, autoResetEvent2 },
+                        WaitForExpectedEventTimeout_NoRetry
+                    )
+                );
 
                 File.Move(filePathRenamed, filePath);
                 watcher1.EnableRaisingEvents = false;

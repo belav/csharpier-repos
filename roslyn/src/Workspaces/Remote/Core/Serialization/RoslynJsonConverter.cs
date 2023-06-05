@@ -19,22 +19,30 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private readonly ConcurrentDictionary<Type, JsonConverter> _map;
 
-        private AggregateJsonConverter()
-            => _map = new ConcurrentDictionary<Type, JsonConverter>(CreateConverterMap());
+        private AggregateJsonConverter() =>
+            _map = new ConcurrentDictionary<Type, JsonConverter>(CreateConverterMap());
 
-        public override bool CanConvert(Type objectType)
-            => _map.ContainsKey(objectType);
+        public override bool CanConvert(Type objectType) => _map.ContainsKey(objectType);
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-            => _map[objectType].ReadJson(reader, objectType, existingValue, serializer);
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        ) => _map[objectType].ReadJson(reader, objectType, existingValue, serializer);
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            => _map[value.GetType()].WriteJson(writer, value, serializer);
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) => _map[value.GetType()].WriteJson(writer, value, serializer);
 
-        // this type is shared by multiple teams such as Razor, LUT and etc which have either 
-        // separated/shared/shim repo so some types might not available to those context. this 
+        // this type is shared by multiple teams such as Razor, LUT and etc which have either
+        // separated/shared/shim repo so some types might not available to those context. this
         // partial method let us add Roslyn specific types without breaking them
-        partial void AppendRoslynSpecificJsonConverters(ImmutableDictionary<Type, JsonConverter>.Builder builder);
+        partial void AppendRoslynSpecificJsonConverters(
+            ImmutableDictionary<Type, JsonConverter>.Builder builder
+        );
 
         private ImmutableDictionary<Type, JsonConverter> CreateConverterMap()
         {
@@ -56,24 +64,34 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private static void Add<T>(
             ImmutableDictionary<Type, JsonConverter>.Builder builder,
-            BaseJsonConverter<T> converter)
-            => builder.Add(typeof(T), converter);
+            BaseJsonConverter<T> converter
+        ) => builder.Add(typeof(T), converter);
 
-        internal bool TryAdd(Type type, JsonConverter converter)
-            => _map.TryAdd(type, converter);
+        internal bool TryAdd(Type type, JsonConverter converter) => _map.TryAdd(type, converter);
 
         private abstract class BaseJsonConverter<T> : JsonConverter
         {
             public sealed override bool CanConvert(Type objectType) => typeof(T) == objectType;
 
-            public sealed override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-                => ReadValue(reader, serializer);
+            public sealed override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            ) => ReadValue(reader, serializer);
 
-            public sealed override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-                => WriteValue(writer, (T)value, serializer);
+            public sealed override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            ) => WriteValue(writer, (T)value, serializer);
 
             protected abstract T ReadValue(JsonReader reader, JsonSerializer serializer);
-            protected abstract void WriteValue(JsonWriter writer, T value, JsonSerializer serializer);
+            protected abstract void WriteValue(
+                JsonWriter writer,
+                T value,
+                JsonSerializer serializer
+            );
 
             protected static U ReadProperty<U>(JsonReader reader, JsonSerializer serializer)
             {
@@ -112,7 +130,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new TextSpan((int)start, (int)length);
             }
 
-            protected override void WriteValue(JsonWriter writer, TextSpan span, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                TextSpan span,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 
@@ -143,7 +165,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return new TextChange(new TextSpan((int)start, (int)length), newText);
             }
 
-            protected override void WriteValue(JsonWriter writer, TextChange change, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                TextChange change,
+                JsonSerializer serializer
+            )
             {
                 var span = change.Span;
 
@@ -164,25 +190,34 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private class SymbolKeyJsonConverter : BaseJsonConverter<SymbolKey>
         {
-            protected override SymbolKey ReadValue(JsonReader reader, JsonSerializer serializer)
-                => new SymbolKey((string)reader.Value);
+            protected override SymbolKey ReadValue(JsonReader reader, JsonSerializer serializer) =>
+                new SymbolKey((string)reader.Value);
 
-            protected override void WriteValue(JsonWriter writer, SymbolKey value, JsonSerializer serializer)
-                => writer.WriteValue(value.ToString());
+            protected override void WriteValue(
+                JsonWriter writer,
+                SymbolKey value,
+                JsonSerializer serializer
+            ) => writer.WriteValue(value.ToString());
         }
 
         private class ChecksumJsonConverter : BaseJsonConverter<Checksum>
         {
-            protected override Checksum ReadValue(JsonReader reader, JsonSerializer serializer)
-                => Checksum.FromBase64String((string)reader.Value);
+            protected override Checksum ReadValue(JsonReader reader, JsonSerializer serializer) =>
+                Checksum.FromBase64String((string)reader.Value);
 
-            protected override void WriteValue(JsonWriter writer, Checksum value, JsonSerializer serializer)
-                => writer.WriteValue(value?.ToBase64String());
+            protected override void WriteValue(
+                JsonWriter writer,
+                Checksum value,
+                JsonSerializer serializer
+            ) => writer.WriteValue(value?.ToBase64String());
         }
 
         private class PinnedSolutionInfoJsonConverter : BaseJsonConverter<PinnedSolutionInfo>
         {
-            protected override PinnedSolutionInfo ReadValue(JsonReader reader, JsonSerializer serializer)
+            protected override PinnedSolutionInfo ReadValue(
+                JsonReader reader,
+                JsonSerializer serializer
+            )
             {
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.StartObject);
 
@@ -195,10 +230,19 @@ namespace Microsoft.CodeAnalysis.Remote
                 Contract.ThrowIfFalse(reader.Read());
                 Contract.ThrowIfFalse(reader.TokenType == JsonToken.EndObject);
 
-                return new PinnedSolutionInfo((int)scopeId, fromPrimaryBranch, (int)workspaceVersion, checksum);
+                return new PinnedSolutionInfo(
+                    (int)scopeId,
+                    fromPrimaryBranch,
+                    (int)workspaceVersion,
+                    checksum
+                );
             }
 
-            protected override void WriteValue(JsonWriter writer, PinnedSolutionInfo scope, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                PinnedSolutionInfo scope,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 

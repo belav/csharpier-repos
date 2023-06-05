@@ -30,12 +30,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         internal override Expression UnmarshalFromRef(Expression value)
         {
             //parameter = temp != 0
-            return base.UnmarshalFromRef(
-                Expression.NotEqual(
-                     value,
-                     Expression.Constant((short)0)
-                )
-            );
+            return base.UnmarshalFromRef(Expression.NotEqual(value, Expression.Constant((short)0)));
         }
     }
 }

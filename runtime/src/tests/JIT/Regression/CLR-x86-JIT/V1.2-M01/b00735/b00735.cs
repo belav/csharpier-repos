@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct AA
 {
     static void f()
@@ -17,6 +18,7 @@ public struct AA
         }
         do { } while (flag);
     }
+
     public static int Main()
     {
         f();

@@ -12,7 +12,8 @@ internal static partial class Interop
     internal static partial class Gdi32
     {
         [LibraryImport(Libraries.Gdi32, EntryPoint = "ResetDCW", SetLastError = true)]
-        internal static partial IntPtr /*HDC*/ ResetDC(
+        internal static partial IntPtr /*HDC*/
+        ResetDC(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -20,6 +21,8 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef /*DEVMODE*/ lpDevMode);
+            HandleRef /*DEVMODE*/
+            lpDevMode
+        );
     }
 }

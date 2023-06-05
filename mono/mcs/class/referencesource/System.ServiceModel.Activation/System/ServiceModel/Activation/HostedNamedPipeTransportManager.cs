@@ -53,9 +53,7 @@ namespace System.ServiceModel.Activation
             // This is intentionally empty.
         }
 
-        internal override void OnAbort()
-        {
-        }
+        internal override void OnAbort() { }
 
         internal void Stop(TimeSpan timeout)
         {
@@ -93,19 +91,31 @@ namespace System.ServiceModel.Activation
 
         void CreateConnectionDemuxer()
         {
-            IConnectionListener connectionListener = new BufferedConnectionListener(listener, MaxOutputDelay, ConnectionBufferSize);
+            IConnectionListener connectionListener = new BufferedConnectionListener(
+                listener,
+                MaxOutputDelay,
+                ConnectionBufferSize
+            );
             if (DiagnosticUtility.ShouldUseActivity)
             {
-                connectionListener = new TracingConnectionListener(connectionListener, this.ListenUri);
+                connectionListener = new TracingConnectionListener(
+                    connectionListener,
+                    this.ListenUri
+                );
             }
 
-            connectionDemuxer = new ConnectionDemuxer(connectionListener,
-                MaxPendingAccepts, MaxPendingConnections, ChannelInitializationTimeout,
-                IdleTimeout, MaxPooledConnections,
+            connectionDemuxer = new ConnectionDemuxer(
+                connectionListener,
+                MaxPendingAccepts,
+                MaxPendingConnections,
+                ChannelInitializationTimeout,
+                IdleTimeout,
+                MaxPooledConnections,
                 OnGetTransportFactorySettings,
                 OnGetSingletonMessageHandler,
                 OnHandleServerSessionPreamble,
-                OnDemuxerError);
+                OnDemuxerError
+            );
 
             connectionDemuxer.StartDemuxing(onViaCallback);
         }
@@ -117,19 +127,29 @@ namespace System.ServiceModel.Activation
                 this.queueId = queueId;
                 this.token = token;
 
-                BaseUriWithWildcard path = new BaseUriWithWildcard(this.ListenUri, this.HostNameComparisonMode);
+                BaseUriWithWildcard path = new BaseUriWithWildcard(
+                    this.ListenUri,
+                    this.HostNameComparisonMode
+                );
 
-                listener = new SharedConnectionListener(path, queueId, token, this.onDuplicatedViaCallback);
+                listener = new SharedConnectionListener(
+                    path,
+                    queueId,
+                    token,
+                    this.onDuplicatedViaCallback
+                );
             }
         }
 
-        internal override void OnClose(TimeSpan timeout)
-        {
-        }
+        internal override void OnClose(TimeSpan timeout) { }
 
         void OnVia(Uri address)
         {
-            Debug.Print("HostedNamedPipeTransportManager.OnVia() address: " + address + " calling EnsureServiceAvailable()");
+            Debug.Print(
+                "HostedNamedPipeTransportManager.OnVia() address: "
+                    + address
+                    + " calling EnsureServiceAvailable()"
+            );
             ServiceHostingEnvironment.EnsureServiceAvailable(address.LocalPath);
         }
 
@@ -157,7 +177,7 @@ namespace System.ServiceModel.Activation
         int OnDuplicatedVia(Uri via)
         {
             OnVia(via);
-            
+
             if (!demuxerCreated)
             {
                 lock (ThisLock)
@@ -165,7 +185,9 @@ namespace System.ServiceModel.Activation
                     if (listener == null)
                     {
                         // The listener has been stopped.
-                        throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.PipeListenerProxyStopped));
+                        throw FxTrace.Exception.AsError(
+                            new CommunicationObjectAbortedException(SR.PipeListenerProxyStopped)
+                        );
                     }
 
                     if (!demuxerCreated)

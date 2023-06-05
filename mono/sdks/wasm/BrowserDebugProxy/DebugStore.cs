@@ -34,12 +34,17 @@ namespace Microsoft.WebAssembly.Diagnostics
         public bool IsResolved => Assembly != null;
         public List<Breakpoint> Locations { get; } = new List<Breakpoint>();
 
-        public override string ToString() => $"BreakpointRequest Assembly: {Assembly} File: {File} Line: {Line} Column: {Column}";
+        public override string ToString() =>
+            $"BreakpointRequest Assembly: {Assembly} File: {File} Line: {Line} Column: {Column}";
 
-        public object AsSetBreakpointByUrlResponse(IEnumerable<object> jsloc) => new { breakpointId = Id, locations = Locations.Select(l => l.Location.AsLocation()).Concat(jsloc) };
+        public object AsSetBreakpointByUrlResponse(IEnumerable<object> jsloc) =>
+            new
+            {
+                breakpointId = Id,
+                locations = Locations.Select(l => l.Location.AsLocation()).Concat(jsloc)
+            };
 
-        public BreakpointRequest()
-        { }
+        public BreakpointRequest() { }
 
         public BreakpointRequest(string id, MethodInfo method)
         {
@@ -154,9 +159,18 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.cliLoc = new CliLocation(mi, sp.Offset);
         }
 
-        public SourceId Id { get => id; }
-        public int Line { get => line; }
-        public int Column { get => column; }
+        public SourceId Id
+        {
+            get => id;
+        }
+        public int Line
+        {
+            get => line;
+        }
+        public int Column
+        {
+            get => column;
+        }
         public CliLocation CliLocation => this.cliLoc;
 
         public override string ToString() => $"{id}:{Line}:{Column}";
@@ -186,9 +200,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 else if (l1 == null || l2 == null)
                     return false;
 
-                return (l1.Line == l2.Line &&
-                    l1.Column == l2.Column &&
-                    l1.Id == l2.Id);
+                return (l1.Line == l2.Line && l1.Column == l2.Column && l1.Id == l2.Id);
             }
 
             public override int GetHashCode(SourceLocation loc)
@@ -198,19 +210,21 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        internal object AsLocation() => new
-        {
-            scriptId = id.ToString(),
-            lineNumber = line,
-            columnNumber = column
-        };
+        internal object AsLocation() =>
+            new
+            {
+                scriptId = id.ToString(),
+                lineNumber = line,
+                columnNumber = column
+            };
     }
 
     internal class SourceId
     {
         const string Scheme = "dotnet://";
 
-        readonly int assembly, document;
+        readonly int assembly,
+            document;
 
         public int Assembly => assembly;
         public int Document => document;
@@ -268,7 +282,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public override int GetHashCode() => assembly.GetHashCode() ^ document.GetHashCode();
 
-        public static bool operator ==(SourceId a, SourceId b) => ((object)a == null) ? (object)b == null : a.Equals(b);
+        public static bool operator ==(SourceId a, SourceId b) =>
+            ((object)a == null) ? (object)b == null : a.Equals(b);
 
         public static bool operator !=(SourceId a, SourceId b) => !a.Equals(b);
     }
@@ -339,11 +354,18 @@ namespace Microsoft.WebAssembly.Diagnostics
             var res = new List<VarInfo>();
 
             res.AddRange(methodDef.Parameters.Select(p => new VarInfo(p)));
-            res.AddRange(methodDef.DebugInformation.GetScopes()
-                .Where(s => s.Start.Offset <= offset && (s.End.IsEndOfMethod || s.End.Offset > offset))
-                .SelectMany(s => s.Variables)
-                .Where(v => !v.IsDebuggerHidden)
-                .Select(v => new VarInfo(v)));
+            res.AddRange(
+                methodDef.DebugInformation
+                    .GetScopes()
+                    .Where(
+                        s =>
+                            s.Start.Offset <= offset
+                            && (s.End.IsEndOfMethod || s.End.Offset > offset)
+                    )
+                    .SelectMany(s => s.Variables)
+                    .Where(v => !v.IsDebuggerHidden)
+                    .Select(v => new VarInfo(v))
+            );
 
             return res.ToArray();
         }
@@ -390,7 +412,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             try
             {
                 Url = url;
-                ReaderParameters rp = new ReaderParameters( /*ReadingMode.Immediate*/ );
+                ReaderParameters rp =
+                    new ReaderParameters( /*ReadingMode.Immediate*/
+                    );
                 rp.AssemblyResolver = resolver;
                 // set ReadSymbols = true unconditionally in case there
                 // is an embedded pdb then handle ArgumentException
@@ -417,7 +441,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (this.image == null)
             {
-                ReaderParameters rp = new ReaderParameters( /*ReadingMode.Immediate*/ );
+                ReaderParameters rp =
+                    new ReaderParameters( /*ReadingMode.Immediate*/
+                    );
                 rp.AssemblyResolver = resolver;
                 if (pdb != null)
                 {
@@ -457,7 +483,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 sources.Add(src);
                 d2s[doc] = src;
                 return src;
-            };
+            }
+            ;
 
             foreach (var type in image.GetTypes())
             {
@@ -482,7 +509,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         private void ProcessSourceLink()
         {
-            var sourceLinkDebugInfo = image.CustomDebugInformations.FirstOrDefault(i => i.Kind == CustomDebugInformationKind.SourceLink);
+            var sourceLinkDebugInfo = image.CustomDebugInformations.FirstOrDefault(
+                i => i.Kind == CustomDebugInformationKind.SourceLink
+            );
 
             if (sourceLinkDebugInfo != null)
             {
@@ -491,7 +520,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 if (sourceLinkContent != null)
                 {
                     var jObject = JObject.Parse(sourceLinkContent)["documents"];
-                    sourceLinkMappings = JsonConvert.DeserializeObject<Dictionary<string, string>>(jObject.ToString());
+                    sourceLinkMappings = JsonConvert.DeserializeObject<Dictionary<string, string>>(
+                        jObject.ToString()
+                    );
                 }
             }
         }
@@ -562,7 +593,10 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.doc = doc;
             this.DebuggerFileName = doc.Url.Replace("\\", "/").Replace(":", "");
 
-            this.SourceUri = new Uri((Path.IsPathRooted(doc.Url) ? "file://" : "") + doc.Url, UriKind.RelativeOrAbsolute);
+            this.SourceUri = new Uri(
+                (Path.IsPathRooted(doc.Url) ? "file://" : "") + doc.Url,
+                UriKind.RelativeOrAbsolute
+            );
             if (SourceUri.IsFile && File.Exists(SourceUri.LocalPath))
             {
                 this.Url = this.SourceUri.ToString();
@@ -594,9 +628,20 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public (int startLine, int startColumn, int endLine, int endColumn) GetExtents()
         {
-            var start = Methods.OrderBy(m => m.StartLocation.Line).ThenBy(m => m.StartLocation.Column).First();
-            var end = Methods.OrderByDescending(m => m.EndLocation.Line).ThenByDescending(m => m.EndLocation.Column).First();
-            return (start.StartLocation.Line, start.StartLocation.Column, end.EndLocation.Line, end.EndLocation.Column);
+            var start = Methods
+                .OrderBy(m => m.StartLocation.Line)
+                .ThenBy(m => m.StartLocation.Column)
+                .First();
+            var end = Methods
+                .OrderByDescending(m => m.EndLocation.Line)
+                .ThenByDescending(m => m.EndLocation.Column)
+                .First();
+            return (
+                start.StartLocation.Line,
+                start.StartLocation.Column,
+                end.EndLocation.Line,
+                end.EndLocation.Column
+            );
         }
 
         async Task<MemoryStream> GetDataAsync(Uri uri, CancellationToken token)
@@ -665,7 +710,10 @@ namespace Microsoft.WebAssembly.Diagnostics
             return Array.Empty<byte>();
         }
 
-        public async Task<Stream> GetSourceAsync(bool checkHash, CancellationToken token = default(CancellationToken))
+        public async Task<Stream> GetSourceAsync(
+            bool checkHash,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             if (doc.EmbeddedSource.Length > 0)
                 return new MemoryStream(doc.EmbeddedSource, false);
@@ -709,8 +757,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             this.logger = logger;
         }
 
-        public DebugStore(ILogger logger) : this(logger, new HttpClient())
-        { }
+        public DebugStore(ILogger logger)
+            : this(logger, new HttpClient()) { }
 
         class DebugItem
         {
@@ -718,7 +766,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             public Task<byte[][]> Data { get; set; }
         }
 
-        public async IAsyncEnumerable<SourceFile> Load(SessionId sessionId, string[] loaded_files, [EnumeratorCancellation] CancellationToken token)
+        public async IAsyncEnumerable<SourceFile> Load(
+            SessionId sessionId,
+            string[] loaded_files,
+            [EnumeratorCancellation] CancellationToken token
+        )
         {
             static bool MatchPdb(string asm, string pdb) => Path.ChangeExtension(asm, "pdb") == pdb;
 
@@ -742,8 +794,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                         new DebugItem
                         {
                             Url = url,
-                            Data = Task.WhenAll(client.GetByteArrayAsync(url), pdb != null ? client.GetByteArrayAsync(pdb) : Task.FromResult<byte[]>(null))
-                        });
+                            Data = Task.WhenAll(
+                                client.GetByteArrayAsync(url),
+                                pdb != null
+                                    ? client.GetByteArrayAsync(pdb)
+                                    : Task.FromResult<byte[]>(null)
+                            )
+                        }
+                    );
                 }
                 catch (Exception e)
                 {
@@ -775,9 +833,13 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public IEnumerable<SourceFile> AllSources() => assemblies.SelectMany(a => a.Sources);
 
-        public SourceFile GetFileById(SourceId id) => AllSources().SingleOrDefault(f => f.SourceId.Equals(id));
+        public SourceFile GetFileById(SourceId id) =>
+            AllSources().SingleOrDefault(f => f.SourceId.Equals(id));
 
-        public AssemblyInfo GetAssemblyByName(string name) => assemblies.FirstOrDefault(a => a.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+        public AssemblyInfo GetAssemblyByName(string name) =>
+            assemblies.FirstOrDefault(
+                a => a.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)
+            );
 
         /*
         V8 uses zero based indexing for both line and column.
@@ -803,12 +865,17 @@ namespace Microsoft.WebAssembly.Diagnostics
             return true;
         }
 
-        public List<SourceLocation> FindPossibleBreakpoints(SourceLocation start, SourceLocation end)
+        public List<SourceLocation> FindPossibleBreakpoints(
+            SourceLocation start,
+            SourceLocation end
+        )
         {
             //XXX FIXME no idea what todo with locations on different files
             if (start.Id != end.Id)
             {
-                logger.LogDebug($"FindPossibleBreakpoints: documents differ (start: {start.Id}) (end {end.Id}");
+                logger.LogDebug(
+                    $"FindPossibleBreakpoints: documents differ (start: {start.Id}) (end {end.Id}"
+                );
                 return null;
             }
 
@@ -862,8 +929,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             request.TryResolve(this);
 
-            var asm = assemblies.FirstOrDefault(a => a.Name.Equals(request.Assembly, StringComparison.OrdinalIgnoreCase));
-            var sourceFile = asm?.Sources?.SingleOrDefault(s => s.DebuggerFileName.Equals(request.File, StringComparison.OrdinalIgnoreCase));
+            var asm = assemblies.FirstOrDefault(
+                a => a.Name.Equals(request.Assembly, StringComparison.OrdinalIgnoreCase)
+            );
+            var sourceFile = asm?.Sources?.SingleOrDefault(
+                s => s.DebuggerFileName.Equals(request.File, StringComparison.OrdinalIgnoreCase)
+            );
 
             if (sourceFile == null)
                 yield break;
@@ -872,12 +943,16 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 foreach (var sequencePoint in method.DebugInformation.SequencePoints)
                 {
-                    if (!sequencePoint.IsHidden && Match(sequencePoint, request.Line, request.Column))
+                    if (
+                        !sequencePoint.IsHidden
+                        && Match(sequencePoint, request.Line, request.Column)
+                    )
                         yield return new SourceLocation(method, sequencePoint);
                 }
             }
         }
 
-        public string ToUrl(SourceLocation location) => location != null ? GetFileById(location.Id).Url : "";
+        public string ToUrl(SourceLocation location) =>
+            location != null ? GetFileById(location.Id).Url : "";
     }
 }

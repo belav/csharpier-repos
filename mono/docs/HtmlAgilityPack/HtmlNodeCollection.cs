@@ -42,9 +42,12 @@ namespace HtmlAgilityPack
                 int index = GetNodeIndex(node);
                 if (index == -1)
                 {
-                    throw new ArgumentOutOfRangeException("node",
-                                                          "Node \"" + node.CloneNode(false).OuterHtml +
-                                                          "\" was not found in the collection");
+                    throw new ArgumentOutOfRangeException(
+                        "node",
+                        "Node \""
+                            + node.CloneNode(false).OuterHtml
+                            + "\" was not found in the collection"
+                    );
                 }
                 return index;
             }

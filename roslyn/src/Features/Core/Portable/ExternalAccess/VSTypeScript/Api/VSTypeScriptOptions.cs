@@ -11,14 +11,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal static class VSTypeScriptOptions
     {
-        public static OptionSet WithBackgroundAnalysisScope(this OptionSet options, bool openFilesOnly)
-            => options.WithChangedOption(
+        public static OptionSet WithBackgroundAnalysisScope(
+            this OptionSet options,
+            bool openFilesOnly
+        ) =>
+            options
+                .WithChangedOption(
                     SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
                     InternalLanguageNames.TypeScript,
-                    openFilesOnly ? BackgroundAnalysisScope.OpenFilesAndProjects : BackgroundAnalysisScope.FullSolution)
+                    openFilesOnly
+                        ? BackgroundAnalysisScope.OpenFilesAndProjects
+                        : BackgroundAnalysisScope.FullSolution
+                )
                 .WithChangedOption(
                     ServiceFeatureOnOffOptions.RemoveDocumentDiagnosticsOnDocumentClose,
                     InternalLanguageNames.TypeScript,
-                    openFilesOnly);
+                    openFilesOnly
+                );
     }
 }

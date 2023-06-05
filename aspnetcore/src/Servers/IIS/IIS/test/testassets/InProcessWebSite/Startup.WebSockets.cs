@@ -59,9 +59,11 @@ public partial class Startup
         {
             var ws = await Upgrade(context);
 #if FORWARDCOMPAT
-            var appLifetime = app.ApplicationServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
+            var appLifetime =
+                app.ApplicationServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
 #else
-            var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            var appLifetime =
+                app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
 #endif
 
             await Echo(ws, appLifetime.ApplicationStopping);
@@ -93,7 +95,9 @@ public partial class Startup
         app.Run(async context =>
         {
             var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => upgradeFeature.UpgradeAsync());
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => upgradeFeature.UpgradeAsync()
+            );
             Assert.Equal("Upgrade requires HTTP/1.1.", ex.Message);
         });
     }
@@ -102,7 +106,12 @@ public partial class Startup
     {
         foreach (var message in messages)
         {
-            await webSocket.SendAsync(new ArraySegment<byte>(Encoding.ASCII.GetBytes(message)), WebSocketMessageType.Text, true, CancellationToken.None);
+            await webSocket.SendAsync(
+                new ArraySegment<byte>(Encoding.ASCII.GetBytes(message)),
+                WebSocketMessageType.Text,
+                true,
+                CancellationToken.None
+            );
         }
     }
 
@@ -123,7 +132,12 @@ public partial class Startup
         Assert.Null(context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize);
 
         // Get the WebSocket object
-        var ws = WebSocket.CreateFromStream(opaqueTransport, isServer: true, subProtocol: null, keepAliveInterval: TimeSpan.FromMinutes(2));
+        var ws = WebSocket.CreateFromStream(
+            opaqueTransport,
+            isServer: true,
+            subProtocol: null,
+            keepAliveInterval: TimeSpan.FromMinutes(2)
+        );
         return ws;
     }
 
@@ -137,15 +151,22 @@ public partial class Startup
 
         while (!result.CloseStatus.HasValue && !token.IsCancellationRequested && !closeFromServer)
         {
-            if (result.Count == closeFromServerLength &&
-                Encoding.ASCII.GetString(buffer).Substring(0, result.Count) == closeFromServerCmd)
+            if (
+                result.Count == closeFromServerLength
+                && Encoding.ASCII.GetString(buffer).Substring(0, result.Count) == closeFromServerCmd
+            )
             {
                 // The client sent "CloseFromServer" text message to request the server to close (a test scenario).
                 closeFromServer = true;
             }
             else
             {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, token);
+                await webSocket.SendAsync(
+                    new ArraySegment<byte>(buffer, 0, result.Count),
+                    result.MessageType,
+                    result.EndOfMessage,
+                    token
+                );
                 result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), token);
             }
         }
@@ -153,20 +174,31 @@ public partial class Startup
         if (result.CloseStatus.HasValue)
         {
             // Client-initiated close handshake
-            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+            await webSocket.CloseAsync(
+                result.CloseStatus.Value,
+                result.CloseStatusDescription,
+                CancellationToken.None
+            );
         }
         else
         {
             // Server-initiated close handshake due to either of the two conditions:
             // (1) The applicaton host is performing a graceful shutdown.
             // (2) The client sent "CloseFromServer" text message to request the server to close (a test scenario).
-            await webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, closeFromServerCmd, CancellationToken.None);
+            await webSocket.CloseOutputAsync(
+                WebSocketCloseStatus.NormalClosure,
+                closeFromServerCmd,
+                CancellationToken.None
+            );
 
             // The server has sent the Close frame.
             // Stop sending but keep receiving until we get the Close frame from the client.
             while (!result.CloseStatus.HasValue)
             {
-                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                result = await webSocket.ReceiveAsync(
+                    new ArraySegment<byte>(buffer),
+                    CancellationToken.None
+                );
             }
         }
     }

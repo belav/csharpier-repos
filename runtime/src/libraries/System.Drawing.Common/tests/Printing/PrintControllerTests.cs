@@ -23,7 +23,12 @@ namespace System.Drawing.Printing.Tests
                 var controller = new SubPrintController();
                 controller.OnStartPrint(document, new PrintEventArgs());
 
-                var printEventArgs = new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null);
+                var printEventArgs = new PrintPageEventArgs(
+                    null,
+                    Rectangle.Empty,
+                    Rectangle.Empty,
+                    null
+                );
                 Assert.Null(controller.OnStartPage(document, printEventArgs));
 
                 // Call OnEndPage.
@@ -40,7 +45,12 @@ namespace System.Drawing.Printing.Tests
             using (var document = new PrintDocument())
             {
                 var controller = new SubPrintController();
-                Assert.Null(controller.OnStartPage(document, new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null)));
+                Assert.Null(
+                    controller.OnStartPage(
+                        document,
+                        new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null)
+                    )
+                );
                 Assert.Null(controller.OnStartPage(null, null));
             }
         }
@@ -51,7 +61,10 @@ namespace System.Drawing.Printing.Tests
             using (var document = new PrintDocument())
             {
                 var controller = new SubPrintController();
-                controller.OnEndPage(document, new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null));
+                controller.OnEndPage(
+                    document,
+                    new PrintPageEventArgs(null, Rectangle.Empty, Rectangle.Empty, null)
+                );
                 controller.OnEndPage(null, null);
             }
         }
@@ -95,7 +108,9 @@ namespace System.Drawing.Printing.Tests
         public void OnStartPrint_InvokeNullDocument_ThrowsNullReferenceException()
         {
             var controller = new SubPrintController();
-            Assert.Throws<NullReferenceException>(() => controller.OnStartPrint(null, new PrintEventArgs()));
+            Assert.Throws<NullReferenceException>(
+                () => controller.OnStartPrint(null, new PrintEventArgs())
+            );
         }
 
         [Theory]
@@ -110,8 +125,6 @@ namespace System.Drawing.Printing.Tests
             }
         }
 
-        private class SubPrintController : PrintController
-        {
-        }
+        private class SubPrintController : PrintController { }
     }
 }

@@ -9,11 +9,11 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(ComUdtElement), AddItemName = ConfigurationStrings.ComUdt)]
-    public sealed class ComUdtElementCollection : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>
+    public sealed class ComUdtElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>
     {
         public ComUdtElementCollection()
-            : base(ConfigurationStrings.ComUdt)
-        { }
+            : base(ConfigurationStrings.ComUdt) { }
 
         protected override bool ThrowOnDuplicate
         {
@@ -32,5 +32,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

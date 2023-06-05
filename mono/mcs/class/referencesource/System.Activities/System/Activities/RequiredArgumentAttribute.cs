@@ -11,16 +11,11 @@ namespace System.Activities
     public sealed class RequiredArgumentAttribute : Attribute
     {
         public RequiredArgumentAttribute()
-            : base()
-        {
-        }
+            : base() { }
 
         public override object TypeId
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
     }
 }

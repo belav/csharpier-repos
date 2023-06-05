@@ -1,14 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
     /// <summary>
     ///     Level of trustworthiness assigned to a manifest's signature
     /// </summary>
-    public enum TrustStatus {
+    public enum TrustStatus
+    {
         /// <summary>
         ///     The signature is by an explicitly distrusted publisher
         /// </summary>

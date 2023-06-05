@@ -22,9 +22,7 @@ internal sealed partial class RedirectToRouteResult : IResult
     /// </summary>
     /// <param name="routeValues">The parameters for the route.</param>
     public RedirectToRouteResult(object? routeValues)
-        : this(routeName: null, routeValues: routeValues)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -32,12 +30,8 @@ internal sealed partial class RedirectToRouteResult : IResult
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
-    public RedirectToRouteResult(
-        string? routeName,
-        object? routeValues)
-        : this(routeName, routeValues, permanent: false)
-    {
-    }
+    public RedirectToRouteResult(string? routeName, object? routeValues)
+        : this(routeName, routeValues, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -46,13 +40,8 @@ internal sealed partial class RedirectToRouteResult : IResult
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
     /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
-    public RedirectToRouteResult(
-        string? routeName,
-        object? routeValues,
-        bool permanent)
-        : this(routeName, routeValues, permanent, fragment: null)
-    {
-    }
+    public RedirectToRouteResult(string? routeName, object? routeValues, bool permanent)
+        : this(routeName, routeValues, permanent, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -66,10 +55,9 @@ internal sealed partial class RedirectToRouteResult : IResult
         string? routeName,
         object? routeValues,
         bool permanent,
-        bool preserveMethod)
-        : this(routeName, routeValues, permanent, preserveMethod, fragment: null)
-    {
-    }
+        bool preserveMethod
+    )
+        : this(routeName, routeValues, permanent, preserveMethod, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -78,13 +66,8 @@ internal sealed partial class RedirectToRouteResult : IResult
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
-    public RedirectToRouteResult(
-        string? routeName,
-        object? routeValues,
-        string? fragment)
-        : this(routeName, routeValues, permanent: false, fragment: fragment)
-    {
-    }
+    public RedirectToRouteResult(string? routeName, object? routeValues, string? fragment)
+        : this(routeName, routeValues, permanent: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -98,10 +81,9 @@ internal sealed partial class RedirectToRouteResult : IResult
         string? routeName,
         object? routeValues,
         bool permanent,
-        string? fragment)
-        : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment)
-    {
-    }
+        string? fragment
+    )
+        : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -117,7 +99,8 @@ internal sealed partial class RedirectToRouteResult : IResult
         object? routeValues,
         bool permanent,
         bool preserveMethod,
-        string? fragment)
+        string? fragment
+    )
     {
         RouteName = routeName;
         RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
@@ -160,19 +143,23 @@ internal sealed partial class RedirectToRouteResult : IResult
             httpContext,
             RouteName,
             RouteValues,
-            fragment: Fragment == null ? FragmentString.Empty : new FragmentString("#" + Fragment));
+            fragment: Fragment == null ? FragmentString.Empty : new FragmentString("#" + Fragment)
+        );
         if (string.IsNullOrEmpty(destinationUrl))
         {
             throw new InvalidOperationException("No route matches the supplied values.");
         }
 
-        var logger = httpContext.RequestServices.GetRequiredService<ILogger<RedirectToRouteResult>>();
+        var logger = httpContext.RequestServices.GetRequiredService<
+            ILogger<RedirectToRouteResult>
+        >();
         Log.RedirectToRouteResultExecuting(logger, destinationUrl, RouteName);
 
         if (PreserveMethod)
         {
-            httpContext.Response.StatusCode = Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            httpContext.Response.StatusCode = Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             httpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -185,9 +172,16 @@ internal sealed partial class RedirectToRouteResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.",
-            EventName = "RedirectToRouteResultExecuting")]
-        public static partial void RedirectToRouteResultExecuting(ILogger logger, string destination, string? routeName);
+            EventName = "RedirectToRouteResultExecuting"
+        )]
+        public static partial void RedirectToRouteResultExecuting(
+            ILogger logger,
+            string destination,
+            string? routeName
+        );
     }
 }

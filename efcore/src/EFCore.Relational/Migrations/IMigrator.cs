@@ -51,7 +51,8 @@ public interface IMigrator
     [RequiresUnreferencedCode("Migration generation currently isn't compatible with trimming")]
     Task MigrateAsync(
         string? targetMigration = null,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Generates a SQL script to migrate a database either in its entirety, or starting and
@@ -74,5 +75,6 @@ public interface IMigrator
     string GenerateScript(
         string? fromMigration = null,
         string? toMigration = null,
-        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default);
+        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+    );
 }

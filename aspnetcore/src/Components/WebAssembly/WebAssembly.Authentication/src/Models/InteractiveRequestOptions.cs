@@ -39,7 +39,10 @@ public sealed class InteractiveRequestOptions
     /// implementations the parameters will be JSON serialized using System.Text.Json and passed as a parameter to the
     /// underlying JavaScript implementation that handles the operation details.
     /// </remarks>
-    public bool TryAddAdditionalParameter<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string name, TValue value)
+    public bool TryAddAdditionalParameter<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string name,
+        TValue value
+    )
     {
         ArgumentNullException.ThrowIfNull(name, nameof(name));
         AdditionalRequestParameters ??= new();
@@ -58,12 +61,18 @@ public sealed class InteractiveRequestOptions
     /// <summary>
     /// Tries to retrieve an existing additional parameter.
     /// </summary>
-    public bool TryGetAdditionalParameter<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string name, [NotNullWhen(true)] out TValue? value)
+    public bool TryGetAdditionalParameter<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string name,
+        [NotNullWhen(true)] out TValue? value
+    )
     {
         ArgumentNullException.ThrowIfNull(name);
 
         value = default;
-        if (AdditionalRequestParameters == null || !AdditionalRequestParameters.TryGetValue(name, out var rawValue))
+        if (
+            AdditionalRequestParameters == null
+            || !AdditionalRequestParameters.TryGetValue(name, out var rawValue)
+        )
         {
             return false;
         }
@@ -82,21 +91,35 @@ public sealed class InteractiveRequestOptions
         [UnconditionalSuppressMessage(
             "Trimming",
             "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code",
-            Justification = "The types this method deserializes are anotated with 'DynamicallyAccessedMembers' to prevent them from being linked out as part of 'TryAddAdditionalParameter'.")]
+            Justification = "The types this method deserializes are anotated with 'DynamicallyAccessedMembers' to prevent them from being linked out as part of 'TryAddAdditionalParameter'."
+        )]
         static TValue Deserialize(JsonElement element) => element.Deserialize<TValue>()!;
     }
 
-    internal string ToState() => JsonSerializer.Serialize(this, InteractiveRequestOptionsSerializerContext.Default.InteractiveRequestOptions);
+    internal string ToState() =>
+        JsonSerializer.Serialize(
+            this,
+            InteractiveRequestOptionsSerializerContext.Default.InteractiveRequestOptions
+        );
 
-    internal static InteractiveRequestOptions FromState(string state) => JsonSerializer.Deserialize(
-        state,
-        InteractiveRequestOptionsSerializerContext.Default.InteractiveRequestOptions)!;
+    internal static InteractiveRequestOptions FromState(string state) =>
+        JsonSerializer.Deserialize(
+            state,
+            InteractiveRequestOptionsSerializerContext.Default.InteractiveRequestOptions
+        )!;
 
     internal class Converter : JsonConverter<InteractiveRequestOptions>
     {
-        public override InteractiveRequestOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override InteractiveRequestOptions Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
-            var requestOptions = JsonSerializer.Deserialize(ref reader, InteractiveRequestOptionsSerializerContext.Default.OptionsRecord);
+            var requestOptions = JsonSerializer.Deserialize(
+                ref reader,
+                InteractiveRequestOptionsSerializerContext.Default.OptionsRecord
+            );
 
             return new InteractiveRequestOptions
             {
@@ -107,26 +130,38 @@ public sealed class InteractiveRequestOptions
             };
         }
 
-        public override void Write(Utf8JsonWriter writer, InteractiveRequestOptions value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            InteractiveRequestOptions value,
+            JsonSerializerOptions options
+        )
         {
             JsonSerializer.Serialize(
                 writer,
-                new OptionsRecord(value.ReturnUrl, value.Scopes, value.Interaction, value.AdditionalRequestParameters),
-                InteractiveRequestOptionsSerializerContext.Default.OptionsRecord);
+                new OptionsRecord(
+                    value.ReturnUrl,
+                    value.Scopes,
+                    value.Interaction,
+                    value.AdditionalRequestParameters
+                ),
+                InteractiveRequestOptionsSerializerContext.Default.OptionsRecord
+            );
         }
 
         internal record struct OptionsRecord(
             [property: JsonInclude] string ReturnUrl,
             [property: JsonInclude] IEnumerable<string> Scopes,
             [property: JsonInclude] InteractionType Interaction,
-            [property: JsonInclude] Dictionary<string, object>? AdditionalRequestParameters);
+            [property: JsonInclude] Dictionary<string, object>? AdditionalRequestParameters
+        );
     }
 }
 
-[JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase, WriteIndented = false)]
+[JsonSourceGenerationOptions(
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    WriteIndented = false
+)]
 [JsonSerializable(typeof(InteractiveRequestOptions))]
 [JsonSerializable(typeof(InteractiveRequestOptions.Converter.OptionsRecord))]
 [JsonSerializable(typeof(JsonElement))]
-internal partial class InteractiveRequestOptionsSerializerContext : JsonSerializerContext
-{
-}
+internal partial class InteractiveRequestOptionsSerializerContext : JsonSerializerContext { }

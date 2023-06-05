@@ -4,12 +4,11 @@
 
 // compile with csc /o+
 using System;
+
 public class MyClass
 {
-
     public static int Main()
     {
-
         double d1 = double.PositiveInfinity;
         double d2 = -0.0;
         double d3 = d1 / d2;

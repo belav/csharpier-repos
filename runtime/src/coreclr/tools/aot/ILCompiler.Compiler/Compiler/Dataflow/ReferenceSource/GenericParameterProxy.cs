@@ -7,14 +7,17 @@ namespace ILLink.Shared.TypeSystemProxy
 {
     internal readonly partial struct GenericParameterProxy
     {
-        public GenericParameterProxy (GenericParameter genericParameter) => GenericParameter = genericParameter;
+        public GenericParameterProxy(GenericParameter genericParameter) =>
+            GenericParameter = genericParameter;
 
-        public static implicit operator GenericParameterProxy (GenericParameter genericParameter) => new (genericParameter);
+        public static implicit operator GenericParameterProxy(GenericParameter genericParameter) =>
+            new(genericParameter);
 
-        internal partial bool HasDefaultConstructorConstraint () => GenericParameter.HasDefaultConstructorConstraint;
+        internal partial bool HasDefaultConstructorConstraint() =>
+            GenericParameter.HasDefaultConstructorConstraint;
 
         public readonly GenericParameter GenericParameter;
 
-        public override string ToString () => GenericParameter.ToString ();
+        public override string ToString() => GenericParameter.ToString();
     }
 }

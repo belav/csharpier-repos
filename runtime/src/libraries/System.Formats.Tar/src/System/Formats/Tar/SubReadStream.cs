@@ -25,7 +25,10 @@ namespace System.Formats.Tar
         {
             if (!superStream.CanRead)
             {
-                throw new ArgumentException(SR.IO_NotSupported_UnreadableStream, nameof(superStream));
+                throw new ArgumentException(
+                    SR.IO_NotSupported_UnreadableStream,
+                    nameof(superStream)
+                );
             }
             _startInSuperStream = startPosition;
             _positionInSuperStream = startPosition;
@@ -134,7 +137,12 @@ namespace System.Formats.Tar
             return Read(new Span<byte>(ref b)) == 1 ? b : -1;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -144,7 +152,10 @@ namespace System.Formats.Tar
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -155,7 +166,10 @@ namespace System.Formats.Tar
             return ReadAsyncCore(buffer, cancellationToken);
         }
 
-        protected async ValueTask<int> ReadAsyncCore(Memory<byte> buffer, CancellationToken cancellationToken)
+        protected async ValueTask<int> ReadAsyncCore(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!_hasReachedEnd);
 
@@ -172,17 +186,21 @@ namespace System.Formats.Tar
             return ret;
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException(SR.IO_NotSupported_UnseekableStream);
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException(SR.IO_NotSupported_UnseekableStream);
 
-        public override void SetLength(long value) => throw new NotSupportedException(SR.IO_NotSupported_UnseekableStream);
+        public override void SetLength(long value) =>
+            throw new NotSupportedException(SR.IO_NotSupported_UnseekableStream);
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException(SR.IO_NotSupported_UnwritableStream);
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException(SR.IO_NotSupported_UnwritableStream);
 
         public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken) =>
-            cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-            Task.CompletedTask;
+            cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : Task.CompletedTask;
 
         // Close the stream for reading.  Note that this does NOT close the superStream (since
         // the substream is just 'a chunk' of the super-stream
