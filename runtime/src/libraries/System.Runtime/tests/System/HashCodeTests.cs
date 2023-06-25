@@ -306,12 +306,12 @@ public static class HashCodeTests
         };
 
         for (int i = 0; i < hcs.Length; i++)
-            for (int j = 0; j < hcs.Length; j++)
-            {
-                if (i == j)
-                    continue;
-                Assert.NotEqual(hcs[i], hcs[j]);
-            }
+        for (int j = 0; j < hcs.Length; j++)
+        {
+            if (i == j)
+                continue;
+            Assert.NotEqual(hcs[i], hcs[j]);
+        }
     }
 
     [Fact]

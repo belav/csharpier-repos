@@ -695,14 +695,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             {
                 var list = new List<Monomial<TVar>>(left.left.Length + right.left.Length);
                 foreach (var m in left.left)
-                    foreach (var n in right.left)
-                    {
-                        Rational mul;
-                        if (!Rational.TryMultiply(m.Coeff, n.Coeff, out mul))
-                            return false.Without(out result);
+                foreach (var n in right.left)
+                {
+                    Rational mul;
+                    if (!Rational.TryMultiply(m.Coeff, n.Coeff, out mul))
+                        return false.Without(out result);
 
-                        list.Add(Monomial<TVar>.From(mul, m.Variables.Concat(n.Variables)));
-                    }
+                    list.Add(Monomial<TVar>.From(mul, m.Variables.Concat(n.Variables)));
+                }
 
                 return true.With(new Polynomial<TVar, TExpr>(list.ToArray()), out result);
             }

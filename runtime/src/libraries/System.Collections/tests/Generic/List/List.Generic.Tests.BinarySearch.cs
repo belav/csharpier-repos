@@ -18,8 +18,8 @@ namespace System.Collections.Tests
         {
             List<T> list = GenericListFactory(count);
             foreach (T item in list)
-                while (list.Count((value) => value.Equals(item)) > 1)
-                    list.Remove(item);
+            while (list.Count((value) => value.Equals(item)) > 1)
+                list.Remove(item);
             list.Sort();
             List<T> beforeList = list.ToList();
 

@@ -281,20 +281,20 @@ namespace DrawingTestHelper
 
             int offset = 0;
             for (int y = 0; y < bitmap.Height; y++)
-                for (int x = 0; x < bitmap.Width; x++)
+            for (int x = 0; x < bitmap.Width; x++)
+            {
+                Color c = bitmap.GetPixel(x, y);
+                float s = 1F;
+                if (((x + y) & 0x1) != 0)
                 {
-                    Color c = bitmap.GetPixel(x, y);
-                    float s = 1F;
-                    if (((x + y) & 0x1) != 0)
-                    {
-                        s = -1F;
-                    }
-
-                    data[offset++] = new ComplexF(c.A * s / 256F, 0);
-                    data[offset++] = new ComplexF(c.R * s / -256F, 0);
-                    data[offset++] = new ComplexF(c.G * s / 256F, 0);
-                    data[offset++] = new ComplexF(c.B * s / -256F, 0);
+                    s = -1F;
                 }
+
+                data[offset++] = new ComplexF(c.A * s / 256F, 0);
+                data[offset++] = new ComplexF(c.R * s / -256F, 0);
+                data[offset++] = new ComplexF(c.G * s / 256F, 0);
+                data[offset++] = new ComplexF(c.B * s / -256F, 0);
+            }
 
             Fourier.FFT3(data, 4, bitmap.Width, bitmap.Height, FourierDirection.Forward);
 

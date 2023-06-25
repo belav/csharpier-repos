@@ -339,10 +339,10 @@ namespace System.Drawing.Design
             protected override void OnPaint(PaintEventArgs e)
             {
                 for (int i = 0; i < 8; i++)
-                    for (int j = 0; j < 8; j++)
-                    {
-                        DrawRect(e.Graphics, colors[i, j], j * 24, i * 24);
-                    }
+                for (int j = 0; j < 8; j++)
+                {
+                    DrawRect(e.Graphics, colors[i, j], j * 24, i * 24);
+                }
 
                 if (highlighting)
                 {

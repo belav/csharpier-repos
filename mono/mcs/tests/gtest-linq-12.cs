@@ -27,11 +27,11 @@ class NestedQuery
 
         int counter = 0;
         foreach (var v in e)
-            foreach (var vv in v)
-            {
-                ++counter;
-                Console.WriteLine(vv);
-            }
+        foreach (var vv in v)
+        {
+            ++counter;
+            Console.WriteLine(vv);
+        }
 
         if (counter != 6)
             return 1;
@@ -45,11 +45,11 @@ class NestedQuery
             select type;
         counter = 0;
         foreach (var v in e)
-            foreach (var vv in v)
-            {
-                ++counter;
-                Console.WriteLine(vv);
-            }
+        foreach (var vv in v)
+        {
+            ++counter;
+            Console.WriteLine(vv);
+        }
 
         if (counter != 12)
             return 2;

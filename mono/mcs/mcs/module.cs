@@ -631,8 +631,8 @@ namespace Mono.CSharp
             if (anonymous_types != null)
             {
                 foreach (var atypes in anonymous_types)
-                    foreach (var at in atypes.Value)
-                        at.CloseContainer();
+                foreach (var at in atypes.Value)
+                    at.CloseContainer();
             }
 
             base.CloseContainer();
@@ -720,8 +720,8 @@ namespace Mono.CSharp
             if (anonymous_types != null)
             {
                 foreach (var atypes in anonymous_types)
-                    foreach (var at in atypes.Value)
-                        at.EmitContainer();
+                foreach (var at in atypes.Value)
+                    at.EmitContainer();
             }
         }
 

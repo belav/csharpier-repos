@@ -18,13 +18,13 @@ public class Test
         j2[2] = new int[9];
 
         for (int i = 0; i < j2.Length; i++)
-            for (int j = 0; j < (i + 1) * 3; j++)
-                j2[i][j] = j;
+        for (int j = 0; j < (i + 1) * 3; j++)
+            j2[i][j] = j;
 
         for (int i = 0; i < j2.Length; i++)
-            for (int j = 0; j < (i + 1) * 3; j++)
-                if (j2[i][j] != j)
-                    return 1;
+        for (int j = 0; j < (i + 1) * 3; j++)
+            if (j2[i][j] != j)
+                return 1;
         return 0;
     }
 

@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IEnumerable enumerable = NonGenericIEnumerableFactory(count);
             int iterations = 0;
             foreach (object item in enumerable)
-                foreach (object item2 in enumerable)
-                    foreach (object item3 in enumerable)
-                        iterations++;
+            foreach (object item2 in enumerable)
+            foreach (object item3 in enumerable)
+                iterations++;
             Assert.Equal(count * count * count, iterations);
         }
 

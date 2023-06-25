@@ -123,9 +123,9 @@ namespace System.Tests
         {
             var bools = new[] { true, false };
             foreach (var one in bools)
-                foreach (var two in bools)
-                    foreach (var three in bools)
-                        yield return new object[] { one, two, three };
+            foreach (var two in bools)
+            foreach (var three in bools)
+                yield return new object[] { one, two, three };
         }
     }
 }

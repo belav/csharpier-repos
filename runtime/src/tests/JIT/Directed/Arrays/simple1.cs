@@ -53,14 +53,14 @@ class Simple_Array_Test
         }
 
         for (i = 0; i < SIZE; i++)
-            for (j = 0; j < i; j++)
-                for (k = 0; k < j; k++)
-                    for (l = 0; l < k; l++)
-                        for (m = 0; m < l; m++)
-                        {
-                            //Console.Write(" "+foo[i][j][k][l][m].ToString());
-                            sum += foo[i][j][k][l][m];
-                        }
+        for (j = 0; j < i; j++)
+        for (k = 0; k < j; k++)
+        for (l = 0; l < k; l++)
+        for (m = 0; m < l; m++)
+        {
+            //Console.Write(" "+foo[i][j][k][l][m].ToString());
+            sum += foo[i][j][k][l][m];
+        }
         if (sum == 269325)
         {
             Console.WriteLine("Everything Worked!");

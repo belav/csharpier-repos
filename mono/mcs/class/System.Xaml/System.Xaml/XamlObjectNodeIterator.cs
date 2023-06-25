@@ -542,8 +542,8 @@ namespace System.Xaml
                 // It is for x:TypeArguments
                 yield return XamlLanguage.Xaml2006Namespace;
                 foreach (var targ in xt.TypeArguments)
-                    foreach (var ns in NamespacesInType(targ))
-                        yield return ns;
+                foreach (var ns in NamespacesInType(targ))
+                    yield return ns;
             }
         }
     }

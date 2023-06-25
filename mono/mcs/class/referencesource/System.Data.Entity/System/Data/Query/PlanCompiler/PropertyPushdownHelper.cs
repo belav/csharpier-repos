@@ -737,31 +737,31 @@ namespace System.Data.Query.PlanCompiler
         protected override void VisitSetOp(SetOp op, Node n)
         {
             foreach (VarMap varMap in op.VarMap)
-                foreach (KeyValuePair<Var, Var> kv in varMap)
+            foreach (KeyValuePair<Var, Var> kv in varMap)
+            {
+                if (TypeUtils.IsStructuredType(kv.Key.Type))
                 {
-                    if (TypeUtils.IsStructuredType(kv.Key.Type))
+                    // Get the set of expected properties for the unionVar, and
+                    // push it down to the inputvars
+                    // For Intersect and ExceptOps, we need all properties
+                    // from the input
+                    // We call GetPropertyRefList() always to initialize
+                    // the map, even though we may not use it
+                    //
+                    PropertyRefList myProps = GetPropertyRefList(kv.Key);
+                    if (op.OpType == OpType.Intersect || op.OpType == OpType.Except)
                     {
-                        // Get the set of expected properties for the unionVar, and
-                        // push it down to the inputvars
-                        // For Intersect and ExceptOps, we need all properties
-                        // from the input
-                        // We call GetPropertyRefList() always to initialize
-                        // the map, even though we may not use it
-                        //
-                        PropertyRefList myProps = GetPropertyRefList(kv.Key);
-                        if (op.OpType == OpType.Intersect || op.OpType == OpType.Except)
-                        {
-                            myProps = PropertyRefList.All;
-                            // We "want" all properties even on the output of the setop
-                            AddPropertyRefs(kv.Key, myProps);
-                        }
-                        else
-                        {
-                            myProps = myProps.Clone();
-                        }
-                        AddPropertyRefs(kv.Value, myProps);
+                        myProps = PropertyRefList.All;
+                        // We "want" all properties even on the output of the setop
+                        AddPropertyRefs(kv.Key, myProps);
                     }
+                    else
+                    {
+                        myProps = myProps.Clone();
+                    }
+                    AddPropertyRefs(kv.Value, myProps);
                 }
+            }
             VisitChildren(n);
         }
 

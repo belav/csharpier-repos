@@ -243,8 +243,8 @@ public class Stringmm
         String[,,] imr3d = new String[size, size, size];
 
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-                imr3d[i, j, 0] = "";
+        for (int j = 0; j < size; j++)
+            imr3d[i, j, 0] = "";
 
         String[][] refa3d = new String[size][];
         String[][] refb3d = new String[size][];

@@ -280,8 +280,8 @@ namespace Mono.ServiceContractTool
         {
             Assembly ass = Assembly.LoadFile(file);
             foreach (Module m in ass.GetModules())
-                foreach (Type t in m.GetTypes())
-                    ProcessType(t);
+            foreach (Type t in m.GetTypes())
+                ProcessType(t);
         }
 
         void ProcessType(Type type)

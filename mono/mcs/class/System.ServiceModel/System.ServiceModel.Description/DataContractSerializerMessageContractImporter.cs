@@ -111,8 +111,8 @@ namespace System.ServiceModel.Description
             schema_set_in_use = new XmlSchemaSet();
             schema_set_in_use.Add(importer.XmlSchemas);
             foreach (WSDL wsdl in importer.WsdlDocuments)
-                foreach (XmlSchema xs in wsdl.Types.Schemas)
-                    schema_set_in_use.Add(xs);
+            foreach (XmlSchema xs in wsdl.Types.Schemas)
+                schema_set_in_use.Add(xs);
 
             schema_set_in_use.Compile();
 
@@ -309,8 +309,8 @@ namespace System.ServiceModel.Description
                 var gb = p as XmlSchemaGroupBase;
                 if (gb != null)
                     foreach (XmlSchemaParticle pp in gb.Items)
-                        foreach (var e in GetElementsInParticle(pp))
-                            yield return e;
+                    foreach (var e in GetElementsInParticle(pp))
+                        yield return e;
             }
         }
 

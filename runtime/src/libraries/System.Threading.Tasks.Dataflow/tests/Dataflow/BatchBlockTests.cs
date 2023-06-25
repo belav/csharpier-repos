@@ -266,49 +266,49 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler
                 }
             )
-                foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
-                    foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 2, 3 })
-                        foreach (int batchSize in new[] { 1, 2 })
-                        {
-                            const int Messages = 50;
-                            var bb = new BatchBlock<int>(
-                                batchSize,
-                                new GroupingDataflowBlockOptions
+            foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
+            foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 2, 3 })
+            foreach (int batchSize in new[] { 1, 2 })
+            {
+                const int Messages = 50;
+                var bb = new BatchBlock<int>(
+                    batchSize,
+                    new GroupingDataflowBlockOptions
+                    {
+                        BoundedCapacity = boundedCapacity,
+                        MaxMessagesPerTask = maxMessagesPerTask,
+                        TaskScheduler = scheduler
+                    }
+                );
+                await Task.WhenAll(
+                    Task.Run(
+                        async delegate
+                        { // consumer
+                            int i = 0;
+                            while (await bb.OutputAvailableAsync())
+                            {
+                                int[] items = await bb.ReceiveAsync();
+                                Assert.Equal(expected: batchSize, actual: items.Length);
+                                for (int j = 0; j < items.Length; j++)
                                 {
-                                    BoundedCapacity = boundedCapacity,
-                                    MaxMessagesPerTask = maxMessagesPerTask,
-                                    TaskScheduler = scheduler
+                                    Assert.Equal(expected: i + j, actual: items[j]);
                                 }
-                            );
-                            await Task.WhenAll(
-                                Task.Run(
-                                    async delegate
-                                    { // consumer
-                                        int i = 0;
-                                        while (await bb.OutputAvailableAsync())
-                                        {
-                                            int[] items = await bb.ReceiveAsync();
-                                            Assert.Equal(expected: batchSize, actual: items.Length);
-                                            for (int j = 0; j < items.Length; j++)
-                                            {
-                                                Assert.Equal(expected: i + j, actual: items[j]);
-                                            }
-                                            i += batchSize;
-                                        }
-                                    }
-                                ),
-                                Task.Run(
-                                    async delegate
-                                    { // producer
-                                        for (int i = 0; i < Messages; i++)
-                                        {
-                                            await bb.SendAsync(i);
-                                        }
-                                        bb.Complete();
-                                    }
-                                )
-                            );
+                                i += batchSize;
+                            }
                         }
+                    ),
+                    Task.Run(
+                        async delegate
+                        { // producer
+                            for (int i = 0; i < Messages; i++)
+                            {
+                                await bb.SendAsync(i);
+                            }
+                            bb.Complete();
+                        }
+                    )
+                );
+            }
         }
 
         [Fact]
@@ -415,91 +415,90 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestBoundedCapacityFromSends()
         {
             foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 3 })
-                foreach (bool greedy in DataflowTestHelpers.BooleanValues)
-                {
-                    var bb = new BatchBlock<int>(
-                        2,
-                        new GroupingDataflowBlockOptions
-                        {
-                            BoundedCapacity = boundedCapacity,
-                            Greedy = greedy
-                        }
-                    );
-                    Task<bool>[] sends = Enumerable
-                        .Range(0, 100)
-                        .Select(i => bb.SendAsync(i))
-                        .ToArray();
-                    ((IDataflowBlock)bb).Fault(new InvalidCastException());
-                    await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
-                    await Task.WhenAll(sends);
-                }
+            foreach (bool greedy in DataflowTestHelpers.BooleanValues)
+            {
+                var bb = new BatchBlock<int>(
+                    2,
+                    new GroupingDataflowBlockOptions
+                    {
+                        BoundedCapacity = boundedCapacity,
+                        Greedy = greedy
+                    }
+                );
+                Task<bool>[] sends = Enumerable
+                    .Range(0, 100)
+                    .Select(i => bb.SendAsync(i))
+                    .ToArray();
+                ((IDataflowBlock)bb).Fault(new InvalidCastException());
+                await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
+                await Task.WhenAll(sends);
+            }
         }
 
         [Fact]
         public async Task TestNonGreedyFailedConsume()
         {
             foreach (bool exceptionalConsume in DataflowTestHelpers.BooleanValues)
-                foreach (bool linkGoodFirst in DataflowTestHelpers.BooleanValues)
+            foreach (bool linkGoodFirst in DataflowTestHelpers.BooleanValues)
+            {
+                const int BatchSize = 2;
+                var bb = new BatchBlock<int>(
+                    BatchSize,
+                    new GroupingDataflowBlockOptions { Greedy = false }
+                );
+
+                var goodSource = new BufferBlock<int>();
+                Assert.True(goodSource.Post(1));
+
+                if (linkGoodFirst)
                 {
-                    const int BatchSize = 2;
-                    var bb = new BatchBlock<int>(
-                        BatchSize,
-                        new GroupingDataflowBlockOptions { Greedy = false }
-                    );
-
-                    var goodSource = new BufferBlock<int>();
-                    Assert.True(goodSource.Post(1));
-
-                    if (linkGoodFirst)
-                    {
-                        goodSource.LinkTo(bb);
-                    }
-
-                    var badSource = new DelegatePropagator<int, int>
-                    {
-                        ReserveMessageDelegate = delegate
-                        {
-                            return true;
-                        },
-                        ConsumeMessageDelegate = delegate(
-                            DataflowMessageHeader header,
-                            ITargetBlock<int> target,
-                            out bool messageConsumed
-                        )
-                        {
-                            if (exceptionalConsume)
-                            {
-                                throw new FormatException(); // throw when attempting to consume reserved message
-                            }
-                            else
-                            {
-                                messageConsumed = false; // fail when attempting to consume reserved message
-                                return 0;
-                            }
-                        }
-                    };
-                    Assert.Equal(
-                        expected: DataflowMessageStatus.Postponed,
-                        actual: ((ITargetBlock<int>)bb).OfferMessage(
-                            new DataflowMessageHeader(2),
-                            2,
-                            badSource,
-                            consumeToAccept: true
-                        )
-                    );
-
-                    if (!linkGoodFirst)
-                    {
-                        goodSource.LinkTo(bb);
-                    }
-
-                    await (
-                        exceptionalConsume
-                            ? (Task)Assert.ThrowsAsync<FormatException>(() => bb.Completion)
-                            : (Task)
-                                Assert.ThrowsAsync<InvalidOperationException>(() => bb.Completion)
-                    );
+                    goodSource.LinkTo(bb);
                 }
+
+                var badSource = new DelegatePropagator<int, int>
+                {
+                    ReserveMessageDelegate = delegate
+                    {
+                        return true;
+                    },
+                    ConsumeMessageDelegate = delegate(
+                        DataflowMessageHeader header,
+                        ITargetBlock<int> target,
+                        out bool messageConsumed
+                    )
+                    {
+                        if (exceptionalConsume)
+                        {
+                            throw new FormatException(); // throw when attempting to consume reserved message
+                        }
+                        else
+                        {
+                            messageConsumed = false; // fail when attempting to consume reserved message
+                            return 0;
+                        }
+                    }
+                };
+                Assert.Equal(
+                    expected: DataflowMessageStatus.Postponed,
+                    actual: ((ITargetBlock<int>)bb).OfferMessage(
+                        new DataflowMessageHeader(2),
+                        2,
+                        badSource,
+                        consumeToAccept: true
+                    )
+                );
+
+                if (!linkGoodFirst)
+                {
+                    goodSource.LinkTo(bb);
+                }
+
+                await (
+                    exceptionalConsume
+                        ? (Task)Assert.ThrowsAsync<FormatException>(() => bb.Completion)
+                        : (Task)Assert.ThrowsAsync<InvalidOperationException>(() => bb.Completion)
+                );
+            }
         }
 
         [Fact]
@@ -507,31 +506,28 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             const int Batches = 5;
             foreach (int batchSize in new[] { 1, 2, 5 })
-                foreach (bool greedy in DataflowTestHelpers.BooleanValues)
+            foreach (bool greedy in DataflowTestHelpers.BooleanValues)
+            {
+                var batch = new BatchBlock<int>(
+                    batchSize,
+                    new GroupingDataflowBlockOptions { Greedy = greedy }
+                );
+                var buffers = Enumerable
+                    .Range(0, batchSize * Batches)
+                    .Select(_ => new BufferBlock<int>())
+                    .ToList();
+
+                foreach (var buffer in buffers)
                 {
-                    var batch = new BatchBlock<int>(
-                        batchSize,
-                        new GroupingDataflowBlockOptions { Greedy = greedy }
-                    );
-                    var buffers = Enumerable
-                        .Range(0, batchSize * Batches)
-                        .Select(_ => new BufferBlock<int>())
-                        .ToList();
-
-                    foreach (var buffer in buffers)
-                    {
-                        buffer.LinkTo(batch);
-                        buffer.Post(1);
-                    }
-
-                    for (int i = 0; i < Batches; i++)
-                    {
-                        Assert.Equal(
-                            expected: batchSize,
-                            actual: (await batch.ReceiveAsync()).Sum()
-                        );
-                    }
+                    buffer.LinkTo(batch);
+                    buffer.Post(1);
                 }
+
+                for (int i = 0; i < Batches; i++)
+                {
+                    Assert.Equal(expected: batchSize, actual: (await batch.ReceiveAsync()).Sum());
+                }
+            }
         }
 
         [Fact]
@@ -667,63 +663,63 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestMaxNumberOfGroups()
         {
             foreach (bool greedy in DataflowTestHelpers.BooleanValues)
-                for (int maxNumberOfGroups = 1; maxNumberOfGroups <= 21; maxNumberOfGroups += 20)
+            for (int maxNumberOfGroups = 1; maxNumberOfGroups <= 21; maxNumberOfGroups += 20)
+            {
+                for (int itemsPerBatch = 1; itemsPerBatch <= 3; itemsPerBatch += 2)
                 {
-                    for (int itemsPerBatch = 1; itemsPerBatch <= 3; itemsPerBatch += 2)
+                    var batch = new BatchBlock<int>(
+                        itemsPerBatch,
+                        new GroupingDataflowBlockOptions
+                        {
+                            MaxNumberOfGroups = maxNumberOfGroups,
+                            Greedy = greedy
+                        }
+                    );
+
+                    // Feed all N batches; all should succeed
+                    for (int batchNum = 0; batchNum < maxNumberOfGroups; batchNum++)
                     {
-                        var batch = new BatchBlock<int>(
-                            itemsPerBatch,
-                            new GroupingDataflowBlockOptions
+                        var sendAsyncs = new Task<bool>[itemsPerBatch];
+                        for (int itemNum = 0; itemNum < itemsPerBatch; itemNum++)
+                        {
+                            sendAsyncs[itemNum] = batch.SendAsync(itemNum);
+                            if (greedy)
                             {
-                                MaxNumberOfGroups = maxNumberOfGroups,
-                                Greedy = greedy
+                                Assert.True(sendAsyncs[itemNum].IsCompleted);
+                                Assert.True(sendAsyncs[itemNum].Result);
                             }
-                        );
-
-                        // Feed all N batches; all should succeed
-                        for (int batchNum = 0; batchNum < maxNumberOfGroups; batchNum++)
-                        {
-                            var sendAsyncs = new Task<bool>[itemsPerBatch];
-                            for (int itemNum = 0; itemNum < itemsPerBatch; itemNum++)
+                            else if (itemNum < itemsPerBatch - 1)
                             {
-                                sendAsyncs[itemNum] = batch.SendAsync(itemNum);
-                                if (greedy)
-                                {
-                                    Assert.True(sendAsyncs[itemNum].IsCompleted);
-                                    Assert.True(sendAsyncs[itemNum].Result);
-                                }
-                                else if (itemNum < itemsPerBatch - 1)
-                                {
-                                    Assert.False(sendAsyncs[itemNum].IsCompleted);
-                                }
+                                Assert.False(sendAsyncs[itemNum].IsCompleted);
                             }
-                            await Task.WhenAll(sendAsyncs);
                         }
+                        await Task.WhenAll(sendAsyncs);
+                    }
 
-                        // Next message should fail in greedy mode
-                        if (greedy)
-                        {
-                            var t = batch.SendAsync(1);
-                            Assert.Equal(expected: TaskStatus.RanToCompletion, actual: t.Status);
-                            Assert.False(t.Result);
-                        }
+                    // Next message should fail in greedy mode
+                    if (greedy)
+                    {
+                        var t = batch.SendAsync(1);
+                        Assert.Equal(expected: TaskStatus.RanToCompletion, actual: t.Status);
+                        Assert.False(t.Result);
+                    }
 
-                        // Make sure all batches were produced
-                        for (int i = 0; i < maxNumberOfGroups; i++)
-                        {
-                            int[] result = await batch.ReceiveAsync();
-                            Assert.Equal(expected: itemsPerBatch, actual: result.Length);
-                        }
+                    // Make sure all batches were produced
+                    for (int i = 0; i < maxNumberOfGroups; i++)
+                    {
+                        int[] result = await batch.ReceiveAsync();
+                        Assert.Equal(expected: itemsPerBatch, actual: result.Length);
+                    }
 
-                        // Next message should fail, even after groups have been produced
-                        if (!greedy)
-                        {
-                            var t = batch.SendAsync(1);
-                            Assert.Equal(expected: TaskStatus.RanToCompletion, actual: t.Status);
-                            Assert.False(t.Result);
-                        }
+                    // Next message should fail, even after groups have been produced
+                    if (!greedy)
+                    {
+                        var t = batch.SendAsync(1);
+                        Assert.Equal(expected: TaskStatus.RanToCompletion, actual: t.Status);
+                        Assert.False(t.Result);
                     }
                 }
+            }
         }
 
         [Fact]
@@ -808,26 +804,26 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void TestTriggerBatch_VaryingBatchSizes()
         {
             foreach (var batchSize in new[] { 2, 5 })
-                foreach (var queuedBeforeTrigger in new[] { 1, batchSize - 1 })
+            foreach (var queuedBeforeTrigger in new[] { 1, batchSize - 1 })
+            {
+                var b = new BatchBlock<int>(batchSize);
+                b.PostRange(1, queuedBeforeTrigger + 1);
+
+                Assert.Equal(expected: 0, actual: b.OutputCount);
+                b.TriggerBatch();
+                Assert.Equal(expected: 1, actual: b.OutputCount);
+
+                int[] results;
+                Assert.True(b.TryReceive(out results));
+                Assert.Equal(expected: queuedBeforeTrigger, actual: results.Length);
+
+                for (int j = 0; j < batchSize; j++)
                 {
-                    var b = new BatchBlock<int>(batchSize);
-                    b.PostRange(1, queuedBeforeTrigger + 1);
-
                     Assert.Equal(expected: 0, actual: b.OutputCount);
-                    b.TriggerBatch();
-                    Assert.Equal(expected: 1, actual: b.OutputCount);
-
-                    int[] results;
-                    Assert.True(b.TryReceive(out results));
-                    Assert.Equal(expected: queuedBeforeTrigger, actual: results.Length);
-
-                    for (int j = 0; j < batchSize; j++)
-                    {
-                        Assert.Equal(expected: 0, actual: b.OutputCount);
-                        b.Post(j);
-                    }
-                    Assert.Equal(expected: 1, actual: b.OutputCount);
+                    b.Post(j);
                 }
+                Assert.Equal(expected: 1, actual: b.OutputCount);
+            }
         }
 
         [Fact]

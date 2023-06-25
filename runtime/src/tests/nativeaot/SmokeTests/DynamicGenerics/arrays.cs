@@ -182,9 +182,9 @@ namespace ArrayTests
 
             T[,,] array = new T[1, 2, 3];
             for (int i = 0; i < 1; i++)
-                for (int j = 0; j < 2; j++)
-                    for (int k = 0; k < 3; k++)
-                        array[i, j, k] = lastValue = getValue(lastValue);
+            for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 3; k++)
+                array[i, j, k] = lastValue = getValue(lastValue);
 
             int index = 0;
             string[] expected = new string[] { "10", "20", "30", "40", "50", "60" };
@@ -328,9 +328,9 @@ namespace ArrayTests
             int[,,] array = new int[1, 2, 3];
             int value = 1;
             for (int i = 0; i < 1; i++)
-                for (int j = 0; j < 2; j++)
-                    for (int k = 0; k < 3; k++)
-                        array[i, j, k] = value++;
+            for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 3; k++)
+                array[i, j, k] = value++;
 
             int index = 0;
             string[] expected = new string[] { "1", "2", "3", "4", "5", "6" };

@@ -41,14 +41,14 @@ public class main
         };
 
         for (int j = 0; j < 100; ++j)
-            for (int i = 0; i < arg_types.Length; ++i)
-            {
-                Type[] args = { arg_types[i] };
-                MethodInfo inflated = method.MakeGenericMethod(args);
+        for (int i = 0; i < arg_types.Length; ++i)
+        {
+            Type[] args = { arg_types[i] };
+            MethodInfo inflated = method.MakeGenericMethod(args);
 
-                if (inflated.Invoke(b, null).GetType() != array_types[i])
-                    return 1;
-            }
+            if (inflated.Invoke(b, null).GetType() != array_types[i])
+                return 1;
+        }
 
         return 0;
     }

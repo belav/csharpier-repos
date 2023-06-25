@@ -584,42 +584,42 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestLinkTo_DoubleLinking()
         {
             foreach (bool greedy in DataflowTestHelpers.BooleanValues)
-                foreach (bool append in DataflowTestHelpers.BooleanValues)
+            foreach (bool append in DataflowTestHelpers.BooleanValues)
+            {
+                var source1 = new BufferBlock<int>();
+                var source2 = new BufferBlock<int>();
+                var jb = new JoinBlock<int, int>(
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy }
+                );
+
+                var ignored = source1.Completion.ContinueWith(
+                    _ => jb.Target1.Complete(),
+                    TaskScheduler.Default
+                );
+                ignored = source2.Completion.ContinueWith(
+                    _ => jb.Target2.Complete(),
+                    TaskScheduler.Default
+                );
+
+                using (source1.LinkTo(jb.Target1))
                 {
-                    var source1 = new BufferBlock<int>();
-                    var source2 = new BufferBlock<int>();
-                    var jb = new JoinBlock<int, int>(
-                        new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy }
-                    );
-
-                    var ignored = source1.Completion.ContinueWith(
-                        _ => jb.Target1.Complete(),
-                        TaskScheduler.Default
-                    );
-                    ignored = source2.Completion.ContinueWith(
-                        _ => jb.Target2.Complete(),
-                        TaskScheduler.Default
-                    );
-
-                    using (source1.LinkTo(jb.Target1))
-                    {
-                        source1.LinkTo(jb.Target1, new DataflowLinkOptions { Append = append }); // force NopLinkPropagator creation
-                    }
-                    using (source2.LinkTo(jb.Target2))
-                    {
-                        source2.LinkTo(jb.Target2, new DataflowLinkOptions { Append = append }); // force NopLinkPropagator creation
-                    }
-
-                    source1.Post(42);
-                    source2.Post(43);
-
-                    source1.Complete();
-                    source2.Complete();
-
-                    var tuple = jb.Receive();
-                    Assert.Equal(expected: 42, actual: tuple.Item1);
-                    Assert.Equal(expected: 43, actual: tuple.Item2);
+                    source1.LinkTo(jb.Target1, new DataflowLinkOptions { Append = append }); // force NopLinkPropagator creation
                 }
+                using (source2.LinkTo(jb.Target2))
+                {
+                    source2.LinkTo(jb.Target2, new DataflowLinkOptions { Append = append }); // force NopLinkPropagator creation
+                }
+
+                source1.Post(42);
+                source2.Post(43);
+
+                source1.Complete();
+                source2.Complete();
+
+                var tuple = jb.Receive();
+                Assert.Equal(expected: 42, actual: tuple.Item1);
+                Assert.Equal(expected: 43, actual: tuple.Item2);
+            }
 
             ITargetBlock<int> target = new ActionBlock<int>(i => { });
             ISourceBlock<int> source = new BufferBlock<int>();
@@ -2375,73 +2375,73 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var buffer = new BufferBlock<int>();
 
             foreach (bool withUncanceledToken in DataflowTestHelpers.BooleanValues)
-                foreach (bool beforeData in DataflowTestHelpers.BooleanValues)
+            foreach (bool beforeData in DataflowTestHelpers.BooleanValues)
+            {
+                if (beforeData)
                 {
-                    if (beforeData)
-                    {
-                        var t = withUncanceledToken
-                            ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
-                            : buffer.OutputAvailableAsync();
-                        Assert.False(t.IsCompleted);
-                        buffer.Post(42);
-                        Assert.True(await t);
-                    }
-                    else
-                    {
-                        buffer.Post(42);
-                        var t = withUncanceledToken
-                            ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
-                            : buffer.OutputAvailableAsync();
-                        Assert.True(t.IsCompleted);
-                        Assert.True(t.Result);
-                    }
-                    Assert.Equal(expected: 1, actual: buffer.Count);
-                    Assert.Equal(expected: 42, actual: await buffer.ReceiveAsync());
+                    var t = withUncanceledToken
+                        ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
+                        : buffer.OutputAvailableAsync();
+                    Assert.False(t.IsCompleted);
+                    buffer.Post(42);
+                    Assert.True(await t);
                 }
+                else
+                {
+                    buffer.Post(42);
+                    var t = withUncanceledToken
+                        ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
+                        : buffer.OutputAvailableAsync();
+                    Assert.True(t.IsCompleted);
+                    Assert.True(t.Result);
+                }
+                Assert.Equal(expected: 1, actual: buffer.Count);
+                Assert.Equal(expected: 42, actual: await buffer.ReceiveAsync());
+            }
         }
 
         [Fact]
         public async Task TestOutputAvailableAsync_NoDataAfterCompletion()
         {
             foreach (bool withUncanceledToken in DataflowTestHelpers.BooleanValues)
-                foreach (bool completeBefore in DataflowTestHelpers.BooleanValues)
-                {
-                    var buffer = new BufferBlock<int>();
-                    Task<bool> t;
+            foreach (bool completeBefore in DataflowTestHelpers.BooleanValues)
+            {
+                var buffer = new BufferBlock<int>();
+                Task<bool> t;
 
-                    if (completeBefore)
-                        buffer.Complete();
+                if (completeBefore)
+                    buffer.Complete();
 
-                    t = withUncanceledToken
-                        ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
-                        : buffer.OutputAvailableAsync();
+                t = withUncanceledToken
+                    ? buffer.OutputAvailableAsync(new CancellationTokenSource().Token)
+                    : buffer.OutputAvailableAsync();
 
-                    if (!completeBefore)
-                        buffer.Complete();
+                if (!completeBefore)
+                    buffer.Complete();
 
-                    Assert.False(await t);
-                }
+                Assert.False(await t);
+            }
         }
 
         [Fact]
         public async Task TestOutputAvailableAsync_DataAfterCompletion()
         {
             foreach (bool withUncanceledToken in DataflowTestHelpers.BooleanValues)
-                foreach (bool withData in DataflowTestHelpers.BooleanValues)
-                {
-                    var wob = new WriteOnceBlock<int>(_ => _);
-                    if (withData)
-                        wob.Post(42);
-                    else
-                        wob.Complete();
-                    await wob.Completion;
+            foreach (bool withData in DataflowTestHelpers.BooleanValues)
+            {
+                var wob = new WriteOnceBlock<int>(_ => _);
+                if (withData)
+                    wob.Post(42);
+                else
+                    wob.Complete();
+                await wob.Completion;
 
-                    Task<bool> t = withUncanceledToken
-                        ? wob.OutputAvailableAsync(new CancellationTokenSource().Token)
-                        : wob.OutputAvailableAsync();
+                Task<bool> t = withUncanceledToken
+                    ? wob.OutputAvailableAsync(new CancellationTokenSource().Token)
+                    : wob.OutputAvailableAsync();
 
-                    Assert.Equal(expected: withData, actual: await t);
-                }
+                Assert.Equal(expected: withData, actual: await t);
+            }
         }
 
         [Fact]

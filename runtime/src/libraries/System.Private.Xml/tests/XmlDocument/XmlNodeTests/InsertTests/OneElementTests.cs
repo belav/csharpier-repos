@@ -78,8 +78,8 @@ namespace System.Xml.XmlDocumentTests
                 @"<W>
         </W>";
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -87,8 +87,8 @@ namespace System.Xml.XmlDocumentTests
         {
             var xml = @"<S xml:space=""preserve""> 	</S>";
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -97,8 +97,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<C><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></C>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -107,8 +107,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<T>text</T>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    OneTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                OneTextNodeBase(xml, insertType, nodeType);
         }
     }
 }

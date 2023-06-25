@@ -371,9 +371,9 @@ namespace System.Net.Http.Tests
         {
             bool[] bools = new[] { true, false };
             foreach (object arg in args)
-                foreach (bool b1 in bools)
-                    foreach (bool b2 in bools)
-                        yield return new object[] { b1, b2, arg };
+            foreach (bool b1 in bools)
+            foreach (bool b2 in bools)
+                yield return new object[] { b1, b2, arg };
         }
 
         private sealed class WrapperStream : DelegatingStream

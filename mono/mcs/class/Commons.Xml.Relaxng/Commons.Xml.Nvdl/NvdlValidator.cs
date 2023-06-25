@@ -232,15 +232,12 @@ namespace Commons.Xml.Nvdl
         {
             if (a.Contexts != null)
                 foreach (SimpleContext ctx in a.Contexts)
-                    foreach (SimplePath path in ctx.Path)
-                        if (MatchPath(path, parentState))
-                        {
-                            NvdlDebug.Writer.WriteLine(
-                                "------ matched context at {0}.",
-                                ctx.Location
-                            );
-                            return ctx.UseMode;
-                        }
+                foreach (SimplePath path in ctx.Path)
+                    if (MatchPath(path, parentState))
+                    {
+                        NvdlDebug.Writer.WriteLine("------ matched context at {0}.", ctx.Location);
+                        return ctx.UseMode;
+                    }
             return a.DefaultMode;
         }
 

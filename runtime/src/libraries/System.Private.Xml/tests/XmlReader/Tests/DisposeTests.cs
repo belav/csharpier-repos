@@ -165,41 +165,41 @@ namespace System.Xml.XmlReaderTests
             bool[] closeInputValues = { false, true };
 
             foreach (var async in asyncValues)
-                foreach (var closeInput in closeInputValues)
+            foreach (var closeInput in closeInputValues)
+            {
+                using (Stream s = CreateXmlStream())
                 {
-                    using (Stream s = CreateXmlStream())
-                    {
-                        XmlReaderSettings settings = new XmlReaderSettings();
-                        settings.Async = async;
-                        settings.CloseInput = closeInput;
+                    XmlReaderSettings settings = new XmlReaderSettings();
+                    settings.Async = async;
+                    settings.CloseInput = closeInput;
 
-                        XmlReader reader = XmlReader.Create(s, settings);
-                        if (async)
-                        {
-                            // Underlying Stream is not being disposed when using async and not reading anything
-                            // async is delaying initialization until you start to read (allegedly to not block on IO when creating reader)
-                            reader.Read();
-                        }
-                        reader.Dispose();
-                        if (closeInput)
-                        {
-                            Assert.Throws<ObjectDisposedException>(() =>
-                            {
-                                s.Position = 0;
-                                s.ReadByte();
-                            });
-                        }
-                        else
+                    XmlReader reader = XmlReader.Create(s, settings);
+                    if (async)
+                    {
+                        // Underlying Stream is not being disposed when using async and not reading anything
+                        // async is delaying initialization until you start to read (allegedly to not block on IO when creating reader)
+                        reader.Read();
+                    }
+                    reader.Dispose();
+                    if (closeInput)
+                    {
+                        Assert.Throws<ObjectDisposedException>(() =>
                         {
                             s.Position = 0;
                             s.ReadByte();
-                            // does not throw ObjectDisposedException
-                        }
-
-                        // should not throw
-                        reader.Dispose();
+                        });
                     }
+                    else
+                    {
+                        s.Position = 0;
+                        s.ReadByte();
+                        // does not throw ObjectDisposedException
+                    }
+
+                    // should not throw
+                    reader.Dispose();
                 }
+            }
         }
 
         [Fact]

@@ -447,26 +447,26 @@ class Tests
 
         FooStruct[,] a12 = new FooStruct[10, 10];
         for (int i = 0; i < 10; ++i)
-            for (int j = 0; j < 10; ++j)
-            {
-                /* This one calls Address */
-                a12[i, j] = new FooStruct(i + j);
+        for (int j = 0; j < 10; ++j)
+        {
+            /* This one calls Address */
+            a12[i, j] = new FooStruct(i + j);
 
-                /* Test Set as well */
-                FooStruct s = new FooStruct(i + j);
-                a12[i, j] = s;
-            }
+            /* Test Set as well */
+            FooStruct s = new FooStruct(i + j);
+            a12[i, j] = s;
+        }
         sum = 0;
         for (int i = 0; i < 10; ++i)
-            for (int j = 0; j < 10; ++j)
-            {
-                /* This one calls Address */
-                sum += a12[i, j].i;
+        for (int j = 0; j < 10; ++j)
+        {
+            /* This one calls Address */
+            sum += a12[i, j].i;
 
-                /* Test Get as well */
-                FooStruct s = a12[i, j];
-                sum += s.i;
-            }
+            /* Test Get as well */
+            FooStruct s = a12[i, j];
+            sum += s.i;
+        }
         if (sum != 1800)
             return 12;
 
@@ -853,10 +853,10 @@ class Tests
         int x,
             y;
         for (x = -100; x < 100; x++)
-            for (y = -100; y < 100; y++)
-            {
-                test[x + 100, y + 100] = true;
-            }
+        for (y = -100; y < 100; y++)
+        {
+            test[x + 100, y + 100] = true;
+        }
         return 0;
     }
 

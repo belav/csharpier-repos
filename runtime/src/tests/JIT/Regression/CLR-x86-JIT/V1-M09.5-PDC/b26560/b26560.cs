@@ -15,9 +15,9 @@ namespace DefaultNamespace
             while (f)
                 GC.Collect();
             while (f)
-                while (i > 39)
-                    while (f)
-                        GC.Collect();
+            while (i > 39)
+            while (f)
+                GC.Collect();
             return 100;
         }
     }

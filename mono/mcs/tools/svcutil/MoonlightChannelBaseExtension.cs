@@ -60,14 +60,14 @@ namespace Mono.ServiceContractTool
             foreach (
                 CodeNamespace cns in context.ServiceContractGenerator.TargetCompileUnit.Namespaces
             )
-                foreach (CodeTypeDeclaration ct in cns.Types)
-                    if (ct == context.ContractType)
-                        foreach (CodeTypeDeclaration ct2 in cns.Types)
-                            if (ct2.Name == name)
-                            {
-                                ClientType = ct2;
-                                return;
-                            }
+            foreach (CodeTypeDeclaration ct in cns.Types)
+                if (ct == context.ContractType)
+                    foreach (CodeTypeDeclaration ct2 in cns.Types)
+                        if (ct2.Name == name)
+                        {
+                            ClientType = ct2;
+                            return;
+                        }
             throw new Exception(String.Format("Contract '{0}' not found", name));
         }
 

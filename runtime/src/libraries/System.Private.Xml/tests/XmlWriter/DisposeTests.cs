@@ -103,66 +103,60 @@ namespace System.Xml.XmlWriterTests
             bool[] omitXmlDeclarationValues = { false, true };
             bool[] writeEndDocumentOnCloseValues = { false, true };
             foreach (var async in asyncValues)
-                foreach (var closeOutput in closeOutputValues)
-                    foreach (var indent in indentValues)
-                        foreach (var omitXmlDeclaration in omitXmlDeclarationValues)
-                            foreach (var writeEndDocumentOnClose in writeEndDocumentOnCloseValues)
-                            {
-                                using (MemoryStream ms = new MemoryStream())
-                                {
-                                    XmlWriterSettings settings = new XmlWriterSettings();
-                                    // UTF8 without BOM
-                                    settings.Encoding = new UTF8Encoding(false);
-                                    settings.Async = async;
-                                    settings.CloseOutput = closeOutput;
-                                    settings.Indent = indent;
-                                    settings.OmitXmlDeclaration = omitXmlDeclaration;
-                                    settings.WriteEndDocumentOnClose = writeEndDocumentOnClose;
-                                    XmlWriter writer = XmlWriter.Create(ms, settings);
-                                    writer.WriteStartDocument();
-                                    writer.WriteStartElement("root");
-                                    writer.WriteStartElement("test");
-                                    writer.WriteString("abc");
-                                    // !!! intentionally not closing both elements
-                                    // !!! writer.WriteEndElement();
-                                    // !!! writer.WriteEndElement();
-                                    writer.Dispose();
+            foreach (var closeOutput in closeOutputValues)
+            foreach (var indent in indentValues)
+            foreach (var omitXmlDeclaration in omitXmlDeclarationValues)
+            foreach (var writeEndDocumentOnClose in writeEndDocumentOnCloseValues)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    XmlWriterSettings settings = new XmlWriterSettings();
+                    // UTF8 without BOM
+                    settings.Encoding = new UTF8Encoding(false);
+                    settings.Async = async;
+                    settings.CloseOutput = closeOutput;
+                    settings.Indent = indent;
+                    settings.OmitXmlDeclaration = omitXmlDeclaration;
+                    settings.WriteEndDocumentOnClose = writeEndDocumentOnClose;
+                    XmlWriter writer = XmlWriter.Create(ms, settings);
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("root");
+                    writer.WriteStartElement("test");
+                    writer.WriteString("abc");
+                    // !!! intentionally not closing both elements
+                    // !!! writer.WriteEndElement();
+                    // !!! writer.WriteEndElement();
+                    writer.Dispose();
 
-                                    if (closeOutput)
-                                    {
-                                        bool failed = true;
-                                        try
-                                        {
-                                            ms.WriteByte(123);
-                                        }
-                                        catch (ObjectDisposedException)
-                                        {
-                                            failed = false;
-                                        }
-                                        if (failed)
-                                        {
-                                            throw new Exception("Failed!");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        string output = ReadAsString(ms);
-                                        Assert.Contains("<test>abc", output);
-                                        Assert.NotEqual(
-                                            output.Contains("<?xml version"),
-                                            omitXmlDeclaration
-                                        );
-                                        Assert.Equal(output.Contains("  "), indent);
-                                        Assert.Equal(
-                                            output.Contains("</test>"),
-                                            writeEndDocumentOnClose
-                                        );
-                                    }
+                    if (closeOutput)
+                    {
+                        bool failed = true;
+                        try
+                        {
+                            ms.WriteByte(123);
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            failed = false;
+                        }
+                        if (failed)
+                        {
+                            throw new Exception("Failed!");
+                        }
+                    }
+                    else
+                    {
+                        string output = ReadAsString(ms);
+                        Assert.Contains("<test>abc", output);
+                        Assert.NotEqual(output.Contains("<?xml version"), omitXmlDeclaration);
+                        Assert.Equal(output.Contains("  "), indent);
+                        Assert.Equal(output.Contains("</test>"), writeEndDocumentOnClose);
+                    }
 
-                                    // should not throw
-                                    writer.Dispose();
-                                }
-                            }
+                    // should not throw
+                    writer.Dispose();
+                }
+            }
         }
 
         [Fact]

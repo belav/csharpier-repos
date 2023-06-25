@@ -309,9 +309,9 @@ namespace System.Collections.Tests
             IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
             int iterations = 0;
             foreach (T item in enumerable)
-                foreach (T item2 in enumerable)
-                    foreach (T item3 in enumerable)
-                        iterations++;
+            foreach (T item2 in enumerable)
+            foreach (T item3 in enumerable)
+                iterations++;
             Assert.Equal(count * count * count, iterations);
         }
 

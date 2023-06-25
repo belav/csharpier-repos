@@ -612,15 +612,15 @@ namespace MonoTests.System.ServiceModel.Description
             var sd = WSServiceDescription.Read(XmlReader.Create(path));
             ms.MetadataSections.Add(MetadataSection.CreateFromServiceDescription(sd));
             foreach (XmlSchema xs in sd.Types.Schemas)
-                foreach (XmlSchemaImport import in xs.Includes)
-                    using (
-                        var xr = XmlReader.Create(
-                            Path.Combine(Path.GetDirectoryName(path), import.SchemaLocation)
-                        )
+            foreach (XmlSchemaImport import in xs.Includes)
+                using (
+                    var xr = XmlReader.Create(
+                        Path.Combine(Path.GetDirectoryName(path), import.SchemaLocation)
                     )
-                        ms.MetadataSections.Add(
-                            MetadataSection.CreateFromSchema(XmlSchema.Read(xr, null))
-                        );
+                )
+                    ms.MetadataSections.Add(
+                        MetadataSection.CreateFromSchema(XmlSchema.Read(xr, null))
+                    );
             return ms;
         }
 

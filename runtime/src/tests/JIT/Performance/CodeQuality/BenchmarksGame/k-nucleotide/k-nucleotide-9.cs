@@ -244,8 +244,8 @@ namespace BenchmarksGame
                 {
                     var d = new Dictionary<long, Wrapper>(dicts.Sum(i => i.Result.Count));
                     for (int i = 0; i < dicts.Length; i++)
-                        foreach (var kv in dicts[i].Result)
-                            d[(kv.Key << 2) | (long)i] = kv.Value;
+                    foreach (var kv in dicts[i].Result)
+                        d[(kv.Key << 2) | (long)i] = kv.Value;
                     return summary(d);
                 }
             );

@@ -1112,8 +1112,8 @@ namespace MonoTests.System.Xml
             Assert.IsTrue(reader.Read(), "#6-1");
             AssertNode(XmlNodeType.EndElement, "el", "", "", 0, reader, "#6-2");
             for (int i = 0; i < 3; i++) // 6, 8, 10
-                for (int j = 0; j < 3; j++) // el / text / endel
-                    Assert.IsTrue(reader.Read(), "#x-" + i + j);
+            for (int j = 0; j < 3; j++) // el / text / endel
+                Assert.IsTrue(reader.Read(), "#x-" + i + j);
             Assert.IsFalse(reader.Read(), "End");
         }
 

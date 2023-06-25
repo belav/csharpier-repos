@@ -641,12 +641,12 @@ namespace Graph
                     new Edge<V, E>.UnorderedEqualityComparer()
                 );
                 foreach (V v in graph.graph.Keys)
-                    foreach (KeyValuePair<V, E> p in graph.graph[v])
-                    {
-                        Edge<V, E> edge = new Edge<V, E>(v, p.Key, p.Value);
-                        if (!seen.FindOrAdd(ref edge))
-                            yield return edge;
-                    }
+                foreach (KeyValuePair<V, E> p in graph.graph[v])
+                {
+                    Edge<V, E> edge = new Edge<V, E>(v, p.Key, p.Value);
+                    if (!seen.FindOrAdd(ref edge))
+                        yield return edge;
+                }
             }
         }
 
@@ -1551,12 +1551,12 @@ namespace Graph
             }
             if (complete)
                 for (int i = 0; i < n - 1; i++)
-                    for (int j = i + 1; j < n; j++)
-                        yield return new Edge<string, double>(
-                            perimeter[i],
-                            perimeter[j],
-                            2 * Math.Sin((j - i) * Math.PI / n)
-                        );
+                for (int j = i + 1; j < n; j++)
+                    yield return new Edge<string, double>(
+                        perimeter[i],
+                        perimeter[j],
+                        2 * Math.Sin((j - i) * Math.PI / n)
+                    );
             else
             {
                 for (int i = 0; i < n - 1; i++)

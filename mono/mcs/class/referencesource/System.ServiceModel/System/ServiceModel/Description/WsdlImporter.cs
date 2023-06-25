@@ -129,19 +129,19 @@ namespace System.ServiceModel.Description
             EnsureBeforeImportCalled();
             Collection<ContractDescription> contracts = new Collection<ContractDescription>();
             foreach (WsdlNS.ServiceDescription wsdl in this.wsdlDocuments)
-                foreach (WsdlNS.PortType wsdlPortType in wsdl.PortTypes)
-                {
-                    if (IsBlackListed(wsdlPortType))
-                        continue;
+            foreach (WsdlNS.PortType wsdlPortType in wsdl.PortTypes)
+            {
+                if (IsBlackListed(wsdlPortType))
+                    continue;
 
-                    ContractDescription contract = ImportWsdlPortType(
-                        wsdlPortType,
-                        WsdlPortTypeImportOptions.ReuseExistingContracts,
-                        ErrorBehavior.DoNotThrowExceptions
-                    );
-                    if (contract != null)
-                        contracts.Add(contract);
-                }
+                ContractDescription contract = ImportWsdlPortType(
+                    wsdlPortType,
+                    WsdlPortTypeImportOptions.ReuseExistingContracts,
+                    ErrorBehavior.DoNotThrowExceptions
+                );
+                if (contract != null)
+                    contracts.Add(contract);
+            }
             return contracts;
         }
 

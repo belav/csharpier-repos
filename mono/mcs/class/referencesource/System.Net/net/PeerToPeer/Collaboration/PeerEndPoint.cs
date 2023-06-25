@@ -684,11 +684,11 @@ namespace System.Net.PeerToPeer.Collaboration
             if (other != null)
             {
                 foreach (PeerEndPoint peerEndPoint1 in other)
-                    foreach (PeerEndPoint peerEndPoint2 in this)
-                        if (!peerEndPoint1.Equals(peerEndPoint2))
-                        {
-                            return equal;
-                        }
+                foreach (PeerEndPoint peerEndPoint2 in this)
+                    if (!peerEndPoint1.Equals(peerEndPoint2))
+                    {
+                        return equal;
+                    }
                 equal = true;
             }
 

@@ -162,20 +162,20 @@ namespace System.Dynamic.Tests
         public void MergeCombines()
         {
             foreach (bool x in new[] { false, true })
-                foreach (bool y in new[] { false, true })
-                {
-                    BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(
-                        Expression.Constant(x)
-                    );
-                    BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(
-                        Expression.Constant(y)
-                    );
-                    BindingRestrictions merged = bX.Merge(bY);
-                    Assert.Equal(
-                        x & y,
-                        Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()()
-                    );
-                }
+            foreach (bool y in new[] { false, true })
+            {
+                BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(
+                    Expression.Constant(x)
+                );
+                BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(
+                    Expression.Constant(y)
+                );
+                BindingRestrictions merged = bX.Merge(bY);
+                Assert.Equal(
+                    x & y,
+                    Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()()
+                );
+            }
         }
 
         [Fact]

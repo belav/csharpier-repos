@@ -934,32 +934,32 @@ namespace System.Tests
         public static void IsSurrogatePair_Char()
         {
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.True(char.IsSurrogatePair(hs, ls));
+            foreach (char ls in s_lowSurrogates)
+                Assert.True(char.IsSurrogatePair(hs, ls));
 
             foreach (char hs in s_nonSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs, ls));
+            foreach (char ls in s_lowSurrogates)
+                Assert.False(char.IsSurrogatePair(hs, ls));
 
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_nonSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs, ls));
+            foreach (char ls in s_nonSurrogates)
+                Assert.False(char.IsSurrogatePair(hs, ls));
         }
 
         [Fact]
         public static void IsSurrogatePair_String_Int()
         {
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.True(char.IsSurrogatePair(hs.ToString() + ls, 0));
+            foreach (char ls in s_lowSurrogates)
+                Assert.True(char.IsSurrogatePair(hs.ToString() + ls, 0));
 
             foreach (char hs in s_nonSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
+            foreach (char ls in s_lowSurrogates)
+                Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
 
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_nonSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
+            foreach (char ls in s_nonSurrogates)
+                Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
 
             Assert.False(char.IsSurrogatePair("\ud800\udc00", 1)); // Index + 1 >= s.Length
         }

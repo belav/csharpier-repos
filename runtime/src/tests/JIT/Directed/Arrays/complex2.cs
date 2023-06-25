@@ -40,28 +40,28 @@ internal class Complex2_Array_Test
             o;
 
         for (i = 0; i < SIZE; i++)
-            for (j = 0; j < SIZE; j++)
-                for (k = 0; k < SIZE; k++)
-                    for (l = 0; l < SIZE; l++)
-                        for (m = 0; m < SIZE; m++)
-                            for (n = 0; n < SIZE; n++)
-                                for (o = 0; o < SIZE; o++)
-                                {
-                                    foo[i, j, k, l, m, n, o].a = i * j * k * l * m * n * o;
-                                    foo[i, j, k, l, m, n, o].b = i + j + k + l + m + n + o;
-                                    foo[i, j, k, l, m, n, o].Do_Something();
-                                }
+        for (j = 0; j < SIZE; j++)
+        for (k = 0; k < SIZE; k++)
+        for (l = 0; l < SIZE; l++)
+        for (m = 0; m < SIZE; m++)
+        for (n = 0; n < SIZE; n++)
+        for (o = 0; o < SIZE; o++)
+        {
+            foo[i, j, k, l, m, n, o].a = i * j * k * l * m * n * o;
+            foo[i, j, k, l, m, n, o].b = i + j + k + l + m + n + o;
+            foo[i, j, k, l, m, n, o].Do_Something();
+        }
 
         for (i = 0; i < SIZE; i++)
-            for (j = 0; j < SIZE; j++)
-                for (k = 0; k < SIZE; k++)
-                    for (l = 0; l < SIZE; l++)
-                        for (m = 0; m < SIZE; m++)
-                            for (n = 0; n < SIZE; n++)
-                                for (o = 0; o < SIZE; o++)
-                                {
-                                    sum += foo[i, j, k, l, m, n, o].b;
-                                }
+        for (j = 0; j < SIZE; j++)
+        for (k = 0; k < SIZE; k++)
+        for (l = 0; l < SIZE; l++)
+        for (m = 0; m < SIZE; m++)
+        for (n = 0; n < SIZE; n++)
+        for (o = 0; o < SIZE; o++)
+        {
+            sum += foo[i, j, k, l, m, n, o].b;
+        }
 
         Console.WriteLine("\nTry to get count!");
 

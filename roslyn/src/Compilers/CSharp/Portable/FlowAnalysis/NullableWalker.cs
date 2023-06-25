@@ -6792,13 +6792,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !(baseType is null);
                     baseType = baseType.BaseTypeNoUseSiteDiagnostics
                 )
-                    foreach (var member in baseType.GetMembers())
-                        yield return member;
+                foreach (var member in baseType.GetMembers())
+                    yield return member;
 
                 // Interfaces and type parameters inherit from their effective interfaces
                 foreach (NamedTypeSymbol interfaceType in inheritedInterfaces(type))
-                    foreach (var member in interfaceType.GetMembers())
-                        yield return member;
+                foreach (var member in interfaceType.GetMembers())
+                    yield return member;
 
                 yield break;
 

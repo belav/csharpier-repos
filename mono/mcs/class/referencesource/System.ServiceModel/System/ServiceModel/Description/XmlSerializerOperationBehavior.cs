@@ -418,8 +418,8 @@ namespace System.ServiceModel.Description
                         keyBase = methodInfo.DeclaringType.FullName + ":" + methodInfo.ToString();
 
                     foreach (MessageDescription message in operation.Messages)
-                        foreach (MessageHeaderDescription header in message.Headers)
-                            SetUnknownHeaderInDescription(header);
+                    foreach (MessageHeaderDescription header in message.Headers)
+                        SetUnknownHeaderInDescription(header);
                     if (!reflectOnDemand)
                     {
                         this.EnsureMessageInfos();

@@ -65,14 +65,14 @@ public class Complex_Array_Test
         }
 
         for (i = 0; i < SIZE; i++)
-            for (j = 0; j < i; j++)
-                for (k = 0; k < j; k++)
-                    for (l = 0; l < k; l++)
-                        for (m = 0; m < l; m++)
-                        {
-                            sum += foo[i][j][k][l][m].c;
-                            //Console.Write(" "+foo[i][j][k][l][m].c.ToString());
-                        }
+        for (j = 0; j < i; j++)
+        for (k = 0; k < j; k++)
+        for (l = 0; l < k; l++)
+        for (m = 0; m < l; m++)
+        {
+            sum += foo[i][j][k][l][m].c;
+            //Console.Write(" "+foo[i][j][k][l][m].c.ToString());
+        }
 
         if (sum == 269325)
         {

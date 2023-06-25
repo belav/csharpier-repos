@@ -308,8 +308,8 @@ namespace System.Web.Services.Description
                 AddExtensionNamespaces(ns, Types.Extensions);
 
             foreach (Service ser in Services)
-                foreach (Port port in ser.Ports)
-                    AddExtensionNamespaces(ns, port.Extensions);
+            foreach (Port port in ser.Ports)
+                AddExtensionNamespaces(ns, port.Extensions);
 
             foreach (Binding bin in Bindings)
             {

@@ -998,11 +998,11 @@ namespace MonoTests.System
 
             Array myArray = Array.CreateInstance(typeof(String), myLengthsArray, myBoundsArray);
             for (int i = myArray.GetLowerBound(0); i <= myArray.GetUpperBound(0); i++)
-                for (int j = myArray.GetLowerBound(1); j <= myArray.GetUpperBound(1); j++)
-                {
-                    int[] myIndicesArray = new int[2] { i, j };
-                    myArray.SetValue(Convert.ToString(i) + j, myIndicesArray);
-                }
+            for (int j = myArray.GetLowerBound(1); j <= myArray.GetUpperBound(1); j++)
+            {
+                int[] myIndicesArray = new int[2] { i, j };
+                myArray.SetValue(Convert.ToString(i) + j, myIndicesArray);
+            }
             IEnumerator en = myArray.GetEnumerator();
             Assert.IsNotNull(en, "#AB01");
 

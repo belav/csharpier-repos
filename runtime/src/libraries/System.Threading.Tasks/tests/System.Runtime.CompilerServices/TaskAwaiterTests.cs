@@ -228,23 +228,23 @@ namespace System.Threading.Tasks.Tests
         public static IEnumerable<object[]> Await_MultipleAwaits_FirstCompletesAccordingToOptions_RestCompleteAsynchronously_MemberData()
         {
             foreach (int numContinuations in new[] { 1, 2, 5 })
-                foreach (bool runContinuationsAsynchronously in new[] { false, true })
-                    foreach (bool valueTask in new[] { false, true })
-                        foreach (
-                            object scheduler in new object[]
-                            {
-                                null,
-                                new QUWITaskScheduler(),
-                                new ValidateCorrectContextSynchronizationContext()
-                            }
-                        )
-                            yield return new object[]
-                            {
-                                numContinuations,
-                                runContinuationsAsynchronously,
-                                valueTask,
-                                scheduler
-                            };
+            foreach (bool runContinuationsAsynchronously in new[] { false, true })
+            foreach (bool valueTask in new[] { false, true })
+            foreach (
+                object scheduler in new object[]
+                {
+                    null,
+                    new QUWITaskScheduler(),
+                    new ValidateCorrectContextSynchronizationContext()
+                }
+            )
+                yield return new object[]
+                {
+                    numContinuations,
+                    runContinuationsAsynchronously,
+                    valueTask,
+                    scheduler
+                };
         }
 
         [ConditionalTheory(

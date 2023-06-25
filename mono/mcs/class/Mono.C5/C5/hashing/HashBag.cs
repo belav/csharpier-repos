@@ -451,8 +451,8 @@ namespace C5
             int ind = 0;
 
             foreach (KeyValuePair<T, int> p in dict)
-                for (int i = 0; i < p.Value; i++)
-                    res[ind++] = p.Key;
+            for (int i = 0; i < p.Value; i++)
+                res[ind++] = p.Key;
 
             return res;
         }
@@ -532,8 +532,8 @@ namespace C5
                 throw new ArgumentOutOfRangeException();
 
             foreach (KeyValuePair<T, int> p in dict)
-                for (int j = 0; j < p.Value; j++)
-                    array[index++] = p.Key;
+            for (int j = 0; j < p.Value; j++)
+                array[index++] = p.Key;
         }
 
         #endregion

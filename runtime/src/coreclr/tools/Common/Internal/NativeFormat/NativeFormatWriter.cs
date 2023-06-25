@@ -329,18 +329,18 @@ namespace Internal.NativeFormat
 
             _phase = SavePhase.Initial;
             foreach (var section in _sections)
-                foreach (var vertex in section._items)
-                {
-                    vertex._offset = GetCurrentOffset();
-                    vertex._iteration = _iteration;
-                    vertex.Save(this);
+            foreach (var vertex in section._items)
+            {
+                vertex._offset = GetCurrentOffset();
+                vertex._iteration = _iteration;
+                vertex.Save(this);
 
 #if NATIVEFORMAT_COMPRESSION
-                    // Ensure that the compressor state is fully flushed
-                    Debug.Assert(_TentativelyWritten.Count == 0);
-                    Debug.Assert(_compressionDepth == 0);
+                // Ensure that the compressor state is fully flushed
+                Debug.Assert(_TentativelyWritten.Count == 0);
+                Debug.Assert(_compressionDepth == 0);
 #endif
-                }
+            }
 
             // Aggressive phase that only allows offsets to shrink.
             _phase = SavePhase.Shrinking;
@@ -352,36 +352,33 @@ namespace Internal.NativeFormat
                 _offsetAdjustment = 0;
 
                 foreach (var section in _sections)
-                    foreach (var vertex in section._items)
+                foreach (var vertex in section._items)
+                {
+                    int currentOffset = GetCurrentOffset();
+
+                    // Only allow the offsets to shrink.
+                    _offsetAdjustment = Math.Min(_offsetAdjustment, currentOffset - vertex._offset);
+
+                    vertex._offset += _offsetAdjustment;
+
+                    if (vertex._offset < currentOffset)
                     {
-                        int currentOffset = GetCurrentOffset();
+                        // It is possible for the encoding of relative offsets to grow during some iterations.
+                        // Ignore this growth because of it should disappear during next iteration.
+                        RollbackTo(vertex._offset);
+                    }
+                    Debug.Assert(vertex._offset == GetCurrentOffset());
 
-                        // Only allow the offsets to shrink.
-                        _offsetAdjustment = Math.Min(
-                            _offsetAdjustment,
-                            currentOffset - vertex._offset
-                        );
+                    vertex._iteration = _iteration;
 
-                        vertex._offset += _offsetAdjustment;
-
-                        if (vertex._offset < currentOffset)
-                        {
-                            // It is possible for the encoding of relative offsets to grow during some iterations.
-                            // Ignore this growth because of it should disappear during next iteration.
-                            RollbackTo(vertex._offset);
-                        }
-                        Debug.Assert(vertex._offset == GetCurrentOffset());
-
-                        vertex._iteration = _iteration;
-
-                        vertex.Save(this);
+                    vertex.Save(this);
 
 #if NATIVEFORMAT_COMPRESSION
-                        // Ensure that the compressor state is fully flushed
-                        Debug.Assert(_tentativelyWritten.Count == 0);
-                        Debug.Assert(_compressionDepth == 0);
+                    // Ensure that the compressor state is fully flushed
+                    Debug.Assert(_tentativelyWritten.Count == 0);
+                    Debug.Assert(_compressionDepth == 0);
 #endif
-                    }
+                }
 
                 // We are not able to shrink anymore. We cannot just return here. It is possible that we have rolledback
                 // above because of we shrunk too much.
@@ -404,37 +401,34 @@ namespace Internal.NativeFormat
                 _paddingSize = 0;
 
                 foreach (var section in _sections)
-                    foreach (var vertex in section._items)
+                foreach (var vertex in section._items)
+                {
+                    int currentOffset = GetCurrentOffset();
+
+                    // Only allow the offsets to grow.
+                    _offsetAdjustment = Math.Max(_offsetAdjustment, currentOffset - vertex._offset);
+
+                    vertex._offset += _offsetAdjustment;
+
+                    if (vertex._offset > currentOffset)
                     {
-                        int currentOffset = GetCurrentOffset();
+                        // Padding
+                        int padding = vertex._offset - currentOffset;
+                        _paddingSize += padding;
+                        WritePad(padding);
+                    }
+                    Debug.Assert(vertex._offset == GetCurrentOffset());
 
-                        // Only allow the offsets to grow.
-                        _offsetAdjustment = Math.Max(
-                            _offsetAdjustment,
-                            currentOffset - vertex._offset
-                        );
+                    vertex._iteration = _iteration;
 
-                        vertex._offset += _offsetAdjustment;
-
-                        if (vertex._offset > currentOffset)
-                        {
-                            // Padding
-                            int padding = vertex._offset - currentOffset;
-                            _paddingSize += padding;
-                            WritePad(padding);
-                        }
-                        Debug.Assert(vertex._offset == GetCurrentOffset());
-
-                        vertex._iteration = _iteration;
-
-                        vertex.Save(this);
+                    vertex.Save(this);
 
 #if NATIVEFORMAT_COMPRESSION
-                        // Ensure that the compressor state is fully flushed
-                        Debug.Assert(_tentativelyWritten.Count == 0);
-                        Debug.Assert(_compressionDepth == 0);
+                    // Ensure that the compressor state is fully flushed
+                    Debug.Assert(_tentativelyWritten.Count == 0);
+                    Debug.Assert(_compressionDepth == 0);
 #endif
-                    }
+                }
 
                 if (_offsetAdjustment == 0)
                 {

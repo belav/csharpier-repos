@@ -419,9 +419,9 @@ namespace System.Windows.Forms
                     items_to_move.Add(tsi);
                 else if (tsi is ToolStripMenuItem)
                     foreach (ToolStripItem menuitem in (tsi as ToolStripMenuItem).DropDownItems)
-                        foreach (ToolStripMenuItem tsmi in sourceToolStrip.Items)
-                            if (menuitem.Owner == tsmi.DropDown)
-                                items_to_move.Add(menuitem);
+                    foreach (ToolStripMenuItem tsmi in sourceToolStrip.Items)
+                        if (menuitem.Owner == tsmi.DropDown)
+                            items_to_move.Add(menuitem);
             }
 
             // If we didn't find anything, return false

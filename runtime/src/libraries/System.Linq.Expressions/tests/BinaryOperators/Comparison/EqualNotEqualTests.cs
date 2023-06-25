@@ -503,8 +503,8 @@ namespace System.Linq.Expressions.Tests
             );
             var func = lambda.Compile(useInterpreter);
             foreach (var xVal in new[] { DBNull.Value, null })
-                foreach (var yVal in new[] { DBNull.Value, null })
-                    Assert.Equal(xVal == yVal, func(xVal, yVal));
+            foreach (var yVal in new[] { DBNull.Value, null })
+                Assert.Equal(xVal == yVal, func(xVal, yVal));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -519,8 +519,8 @@ namespace System.Linq.Expressions.Tests
             );
             var func = lambda.Compile(useInterpreter);
             foreach (var xVal in new[] { DBNull.Value, null })
-                foreach (var yVal in new[] { DBNull.Value, null })
-                    Assert.Equal(xVal != yVal, func(xVal, yVal));
+            foreach (var yVal in new[] { DBNull.Value, null })
+                Assert.Equal(xVal != yVal, func(xVal, yVal));
         }
 
         private struct UselessValue { }

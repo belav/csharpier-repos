@@ -73,9 +73,9 @@ namespace AnagramStrings
             using (TextReader rd = new StreamReader(filename, Encoding.GetEncoding("iso-8859-1")))
             {
                 for (String line = rd.ReadLine(); line != null; line = rd.ReadLine())
-                    foreach (String s in delim.Split(line))
-                        if (s != "")
-                            yield return s.ToLower();
+                foreach (String s in delim.Split(line))
+                    if (s != "")
+                        yield return s.ToLower();
             }
         }
 

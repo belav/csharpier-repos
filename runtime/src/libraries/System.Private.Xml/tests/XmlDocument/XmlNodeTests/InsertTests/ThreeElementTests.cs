@@ -93,8 +93,8 @@ namespace System.Xml.XmlDocumentTests
                 @"<TMC>text<!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></TMC>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -103,8 +103,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<TCS xml:space=""preserve"">text<!-- comments -->   	</TCS>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -115,8 +115,8 @@ namespace System.Xml.XmlDocumentTests
             <!-- comments -->text</WMT>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -128,8 +128,8 @@ namespace System.Xml.XmlDocumentTests
         </WEW>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -138,8 +138,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<TET>text1<E/>text2</TET>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -148,8 +148,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<SES xml:space=""preserve""> 	<E/>		</SES>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -159,8 +159,8 @@ namespace System.Xml.XmlDocumentTests
                 @"<CEC><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]><E/><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></CEC>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    InsertTestBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                InsertTestBase(xml, insertType, nodeType);
         }
     }
 }

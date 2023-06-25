@@ -212,8 +212,8 @@ namespace Commons.Xml.Relaxng
             foreach (RelaxngStart start in starts)
                 start.Pattern.CheckConstraints();
             foreach (RelaxngDefine define in defs)
-                foreach (RelaxngPattern p in define.Patterns)
-                    p.CheckConstraints();
+            foreach (RelaxngPattern p in define.Patterns)
+                p.CheckConstraints();
 
             // Assemble combine into the same name defines/start.
             // see RELAX NG 4.17.

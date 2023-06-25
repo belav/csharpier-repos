@@ -3016,38 +3016,38 @@ namespace System.Tests
             var rnd = new Random(42);
             var unique = new HashSet<string>();
             for (byte scale = 0; scale <= 28; scale++)
-                for (int sign = 0; sign <= 1; sign++)
-                    for (int high = 0; high <= 96; high = IncBitLimits(high))
-                        for (int low = 0; low < high || (high | low) == 0; low = IncBitLimits(high))
-                        {
-                            var d = new decimal(
-                                GetDigits(low, high),
-                                GetDigits(low - 32, high - 32),
-                                GetDigits(low - 64, high - 64),
-                                sign != 0,
-                                scale
-                            );
-                            if (!unique.Add(d.ToString(CultureInfo.InvariantCulture)))
-                                continue; // skip duplicates
-                            list.Add(d);
+            for (int sign = 0; sign <= 1; sign++)
+            for (int high = 0; high <= 96; high = IncBitLimits(high))
+            for (int low = 0; low < high || (high | low) == 0; low = IncBitLimits(high))
+            {
+                var d = new decimal(
+                    GetDigits(low, high),
+                    GetDigits(low - 32, high - 32),
+                    GetDigits(low - 64, high - 64),
+                    sign != 0,
+                    scale
+                );
+                if (!unique.Add(d.ToString(CultureInfo.InvariantCulture)))
+                    continue; // skip duplicates
+                list.Add(d);
 
-                            if (hash)
-                            {
-                                // generate all possible variants of the number up-to max decimal scale
-                                for (byte lastScale = scale; lastScale < 28; )
-                                {
-                                    d *= 1.0m;
-                                    unsafe
-                                    {
-                                        byte curScale = (byte)(*(uint*)&d >> BigDecimal.ScaleShift);
-                                        if (curScale <= lastScale)
-                                            break;
-                                        lastScale = curScale;
-                                    }
-                                    list.Add(d);
-                                }
-                            }
+                if (hash)
+                {
+                    // generate all possible variants of the number up-to max decimal scale
+                    for (byte lastScale = scale; lastScale < 28; )
+                    {
+                        d *= 1.0m;
+                        unsafe
+                        {
+                            byte curScale = (byte)(*(uint*)&d >> BigDecimal.ScaleShift);
+                            if (curScale <= lastScale)
+                                break;
+                            lastScale = curScale;
                         }
+                        list.Add(d);
+                    }
+                }
+            }
             decimal[] decimalValues = list.ToArray();
             bigDecimals = hash ? null : Array.ConvertAll(decimalValues, d => new BigDecimal(d));
             return decimalValues;

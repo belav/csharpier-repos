@@ -194,17 +194,17 @@ namespace MonoTests.System.Data
             }
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    if (tb1.Rows[i].RowState != DataRowState.Deleted)
-                        Assert.AreEqual(
-                            tb1.Rows[i][j],
-                            dt.Rows[i][j],
-                            "#13 Elements differ at Row :{0} Column :{1}",
-                            i,
-                            j
-                        );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                if (tb1.Rows[i].RowState != DataRowState.Deleted)
+                    Assert.AreEqual(
+                        tb1.Rows[i][j],
+                        dt.Rows[i][j],
+                        "#13 Elements differ at Row :{0} Column :{1}",
+                        i,
+                        j
+                    );
+            }
             dt.Rows[0].RejectChanges();
             dt.Rows[1].RejectChanges();
         }
@@ -291,17 +291,17 @@ namespace MonoTests.System.Data
             }
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    if (tb1.Rows[i].RowState != DataRowState.Deleted)
-                        Assert.AreEqual(
-                            tb1.Rows[i][j],
-                            dt.Rows[i][j],
-                            "#13 Elements differ at Row :{0} Column :{1}",
-                            i,
-                            j
-                        );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                if (tb1.Rows[i].RowState != DataRowState.Deleted)
+                    Assert.AreEqual(
+                        tb1.Rows[i][j],
+                        dt.Rows[i][j],
+                        "#13 Elements differ at Row :{0} Column :{1}",
+                        i,
+                        j
+                    );
+            }
             dt.Rows[0].RejectChanges();
             dt.Rows[1].RejectChanges();
         }
@@ -330,23 +330,23 @@ namespace MonoTests.System.Data
 
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        tb1.Columns[j].DefaultValue,
-                        dt.Rows[i][j],
-                        "#1 Element differs from DefaultValue at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                    Assert.AreEqual(
-                        tb1.Rows[i][j],
-                        dt.Rows[i][j],
-                        "#2 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    tb1.Columns[j].DefaultValue,
+                    dt.Rows[i][j],
+                    "#1 Element differs from DefaultValue at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+                Assert.AreEqual(
+                    tb1.Rows[i][j],
+                    dt.Rows[i][j],
+                    "#2 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]
@@ -395,16 +395,16 @@ namespace MonoTests.System.Data
             ms.Close();
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        tb1.Rows[i][j],
-                        dt.Rows[i][j],
-                        "#1 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    tb1.Rows[i][j],
+                    dt.Rows[i][j],
+                    "#1 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]
@@ -438,16 +438,16 @@ namespace MonoTests.System.Data
             ms.Close();
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        tb1.Rows[i][j],
-                        dt.Rows[i][j],
-                        "#1 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    tb1.Rows[i][j],
+                    dt.Rows[i][j],
+                    "#1 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]
@@ -473,16 +473,16 @@ namespace MonoTests.System.Data
             ms.Close();
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        tb1.Rows[i][j],
-                        dt.Rows[i][j],
-                        "#1 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    tb1.Rows[i][j],
+                    dt.Rows[i][j],
+                    "#1 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]
@@ -516,16 +516,16 @@ namespace MonoTests.System.Data
             ms.Close();
             //Table Data
             for (int i = 0; i < tb1.Rows.Count; i++)
-                for (int j = 0; j < tb1.Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        tb1.Rows[i][j],
-                        dt.Rows[i][j],
-                        "#1 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < tb1.Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    tb1.Rows[i][j],
+                    dt.Rows[i][j],
+                    "#1 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]
@@ -653,28 +653,28 @@ namespace MonoTests.System.Data
             //Table Data
             //Table1
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        ds.Tables[0].Rows[i][j],
-                        ds1.Tables[0].Rows[i][j],
-                        "#16 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    ds.Tables[0].Rows[i][j],
+                    ds1.Tables[0].Rows[i][j],
+                    "#16 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
             //Table2
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                for (int j = 0; j < ds.Tables[1].Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        ds.Tables[1].Rows[i][j],
-                        ds1.Tables[1].Rows[i][j],
-                        "#17 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < ds.Tables[1].Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    ds.Tables[1].Rows[i][j],
+                    ds1.Tables[1].Rows[i][j],
+                    "#17 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]
@@ -810,28 +810,28 @@ namespace MonoTests.System.Data
             //Table Data
             //Table1
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        ds.Tables[0].Rows[i][j],
-                        ds1.Tables[0].Rows[i][j],
-                        "#16 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    ds.Tables[0].Rows[i][j],
+                    ds1.Tables[0].Rows[i][j],
+                    "#16 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
             //Table2
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                for (int j = 0; j < ds.Tables[1].Columns.Count; j++)
-                {
-                    Assert.AreEqual(
-                        ds.Tables[1].Rows[i][j],
-                        ds1.Tables[1].Rows[i][j],
-                        "#17 Elements differ at Row :{0} Column :{1}",
-                        i,
-                        j
-                    );
-                }
+            for (int j = 0; j < ds.Tables[1].Columns.Count; j++)
+            {
+                Assert.AreEqual(
+                    ds.Tables[1].Rows[i][j],
+                    ds1.Tables[1].Rows[i][j],
+                    "#17 Elements differ at Row :{0} Column :{1}",
+                    i,
+                    j
+                );
+            }
         }
 
         [Test]

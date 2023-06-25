@@ -14,8 +14,8 @@ public class Test
         Console.WriteLine("Repeat = " + repeat);
 
         for (int i = 0; i < repeat; i++)
-            for (int j = 0; j < 500000000; j++)
-                test(12345);
+        for (int j = 0; j < 500000000; j++)
+            test(12345);
 
         return 0;
     }

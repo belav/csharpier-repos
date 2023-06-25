@@ -2874,11 +2874,11 @@ namespace System.Net.Http.Tests
                     "foo* bar"
                 }
             )
-                foreach (string newLine in new[] { "\r", "\n", "\r\n" })
-                    foreach (string prefix in new[] { "", "valid, " })
-                    {
-                        yield return new object[] { prefix + pattern.Replace("*", newLine) };
-                    }
+            foreach (string newLine in new[] { "\r", "\n", "\r\n" })
+            foreach (string prefix in new[] { "", "valid, " })
+            {
+                yield return new object[] { prefix + pattern.Replace("*", newLine) };
+            }
         }
 
         #region Helper methods

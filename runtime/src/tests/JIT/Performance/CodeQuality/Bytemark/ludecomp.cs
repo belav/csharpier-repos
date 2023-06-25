@@ -168,8 +168,8 @@ internal class LUDecomp : LUStruct
             locabase = abase[j];
             locbbase = bbase[j];
             for (i = 0; i < global.LUARRAYROWS; i++)
-                for (k = 0; k < global.LUARRAYCOLS; k++)
-                    locabase[i][k] = a[i][k];
+            for (k = 0; k < global.LUARRAYCOLS; k++)
+                locabase[i][k] = a[i][k];
             for (i = 0; i < global.LUARRAYROWS; i++)
                 locbbase[i] = b[i];
         }

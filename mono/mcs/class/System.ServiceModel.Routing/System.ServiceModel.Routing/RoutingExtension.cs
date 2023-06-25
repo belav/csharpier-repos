@@ -49,14 +49,11 @@ namespace System.ServiceModel.Routing
             host.Opened += delegate
             {
                 foreach (ChannelDispatcher cd in host.ChannelDispatchers)
-                    foreach (var ed in cd.Endpoints)
-                        if (
-                            ed.ContractNamespace
-                            == "http://schemas.microsoft.com/netfx/2009/05/routing"
-                        )
-                            ed.DispatchRuntime.InstanceProvider = new InstanceProvider(
-                                configuration
-                            );
+                foreach (var ed in cd.Endpoints)
+                    if (
+                        ed.ContractNamespace == "http://schemas.microsoft.com/netfx/2009/05/routing"
+                    )
+                        ed.DispatchRuntime.InstanceProvider = new InstanceProvider(configuration);
             };
         }
 

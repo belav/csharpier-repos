@@ -16,11 +16,11 @@ class FP
         T[] result = new T[length];
         int k = 0;
         foreach (T[] array in arrays)
-            foreach (T obj in array)
-            {
-                result[k] = obj;
-                k++;
-            }
+        foreach (T obj in array)
+        {
+            result[k] = obj;
+            k++;
+        }
         return result;
     }
 }

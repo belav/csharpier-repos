@@ -137,14 +137,14 @@ namespace Test.Mono.Data.Sqlite
 
             Console.WriteLine("read and display data...");
             while (reader.Read())
-                for (int i = 0; i < reader.FieldCount; i++)
-                    Console.WriteLine(
-                        " Col {0}: {1} (type: {2}, data type: {3})",
-                        i,
-                        reader[i] == null ? "(null)" : reader[i].ToString(),
-                        reader[i] == null ? "(null)" : reader[i].GetType().FullName,
-                        reader.GetDataTypeName(i)
-                    );
+            for (int i = 0; i < reader.FieldCount; i++)
+                Console.WriteLine(
+                    " Col {0}: {1} (type: {2}, data type: {3})",
+                    i,
+                    reader[i] == null ? "(null)" : reader[i].ToString(),
+                    reader[i] == null ? "(null)" : reader[i].GetType().FullName,
+                    reader.GetDataTypeName(i)
+                );
 
             dbcmd.CommandText = "SELECT NDESC FROM MONO_TEST WHERE NID=2";
             Console.WriteLine("read and display a scalar = 'Two': " + dbcmd.ExecuteScalar());

@@ -53,33 +53,33 @@ public class string1
     public static void Process2DArray(ref String[,] a)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                double temp = Convert.ToDouble(a[i, j]);
-                temp += Convert.ToDouble(a[0, j]) + Convert.ToDouble(a[1, j]);
-                temp *= Convert.ToDouble(a[i, j]) + Convert.ToDouble(a[2, j]);
-                temp -= Convert.ToDouble(a[i, j]) * Convert.ToDouble(a[3, j]);
-                temp /= Convert.ToDouble(a[i, j]) + Convert.ToDouble(a[4, j]);
-                for (int k = 5; k < size; k++)
-                    temp += Convert.ToDouble(a[k, j]);
-                a[i, j] = Convert.ToString(temp);
-            }
+        for (int j = 0; j < size; j++)
+        {
+            double temp = Convert.ToDouble(a[i, j]);
+            temp += Convert.ToDouble(a[0, j]) + Convert.ToDouble(a[1, j]);
+            temp *= Convert.ToDouble(a[i, j]) + Convert.ToDouble(a[2, j]);
+            temp -= Convert.ToDouble(a[i, j]) * Convert.ToDouble(a[3, j]);
+            temp /= Convert.ToDouble(a[i, j]) + Convert.ToDouble(a[4, j]);
+            for (int k = 5; k < size; k++)
+                temp += Convert.ToDouble(a[k, j]);
+            a[i, j] = Convert.ToString(temp);
+        }
     }
 
     public static void ProcessJagged2DArray(ref String[][] a)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                double temp = Convert.ToDouble(a[i][j]);
-                temp += Convert.ToDouble(a[0][j]) + Convert.ToDouble(a[1][j]);
-                temp *= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[2][j]);
-                temp -= Convert.ToDouble(a[i][j]) * Convert.ToDouble(a[3][j]);
-                temp /= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[4][j]);
-                for (int k = 5; k < size; k++)
-                    temp += Convert.ToDouble(a[k][j]);
-                a[i][j] = Convert.ToString(temp);
-            }
+        for (int j = 0; j < size; j++)
+        {
+            double temp = Convert.ToDouble(a[i][j]);
+            temp += Convert.ToDouble(a[0][j]) + Convert.ToDouble(a[1][j]);
+            temp *= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[2][j]);
+            temp -= Convert.ToDouble(a[i][j]) * Convert.ToDouble(a[3][j]);
+            temp /= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[4][j]);
+            for (int k = 5; k < size; k++)
+                temp += Convert.ToDouble(a[k][j]);
+            a[i][j] = Convert.ToString(temp);
+        }
     }
 
     public static void Init3DMatrix(String[,,] m, String[][] refm)
@@ -106,33 +106,33 @@ public class string1
     public static void Process3DArray(String[,,] a)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                double temp = Convert.ToDouble(a[i, size, j]);
-                temp += Convert.ToDouble(a[0, size, j]) + Convert.ToDouble(a[1, size, j]);
-                temp *= Convert.ToDouble(a[i, size, j]) + Convert.ToDouble(a[2, size, j]);
-                temp -= Convert.ToDouble(a[i, size, j]) * Convert.ToDouble(a[3, size, j]);
-                temp /= Convert.ToDouble(a[i, size, j]) + Convert.ToDouble(a[4, size, j]);
-                for (int k = 5; k < size; k++)
-                    temp += Convert.ToDouble(a[k, size, j]);
-                a[i, size, j] = Convert.ToString(temp);
-            }
+        for (int j = 0; j < size; j++)
+        {
+            double temp = Convert.ToDouble(a[i, size, j]);
+            temp += Convert.ToDouble(a[0, size, j]) + Convert.ToDouble(a[1, size, j]);
+            temp *= Convert.ToDouble(a[i, size, j]) + Convert.ToDouble(a[2, size, j]);
+            temp -= Convert.ToDouble(a[i, size, j]) * Convert.ToDouble(a[3, size, j]);
+            temp /= Convert.ToDouble(a[i, size, j]) + Convert.ToDouble(a[4, size, j]);
+            for (int k = 5; k < size; k++)
+                temp += Convert.ToDouble(a[k, size, j]);
+            a[i, size, j] = Convert.ToString(temp);
+        }
     }
 
     public static void ProcessJagged3DArray(String[][] a)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                double temp = Convert.ToDouble(a[i][j]);
-                temp += Convert.ToDouble(a[0][j]) + Convert.ToDouble(a[1][j]);
-                temp *= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[2][j]);
-                temp -= Convert.ToDouble(a[i][j]) * Convert.ToDouble(a[3][j]);
-                temp /= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[4][j]);
-                for (int k = 5; k < size; k++)
-                    temp += Convert.ToDouble(a[k][j]);
-                a[i][j] = Convert.ToString(temp);
-            }
+        for (int j = 0; j < size; j++)
+        {
+            double temp = Convert.ToDouble(a[i][j]);
+            temp += Convert.ToDouble(a[0][j]) + Convert.ToDouble(a[1][j]);
+            temp *= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[2][j]);
+            temp -= Convert.ToDouble(a[i][j]) * Convert.ToDouble(a[3][j]);
+            temp /= Convert.ToDouble(a[i][j]) + Convert.ToDouble(a[4][j]);
+            for (int k = 5; k < size; k++)
+                temp += Convert.ToDouble(a[k][j]);
+            a[i][j] = Convert.ToString(temp);
+        }
     }
 
     [Fact]

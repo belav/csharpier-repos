@@ -79,9 +79,9 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 bool[,,] tmp = new bool[7, 24, 4];
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 24; j++)
-                        for (int k = 0; k < 4; k++)
-                            tmp[i, j, k] = _scheduleArray[i * 24 * 4 + j * 4 + k];
+                for (int j = 0; j < 24; j++)
+                for (int k = 0; k < 4; k++)
+                    tmp[i, j, k] = _scheduleArray[i * 24 * 4 + j * 4 + k];
                 return tmp;
             }
             set
@@ -92,9 +92,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 ValidateRawArray(value);
 
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 24; j++)
-                        for (int k = 0; k < 4; k++)
-                            _scheduleArray[i * 24 * 4 + j * 4 + k] = value[i, j, k];
+                for (int j = 0; j < 24; j++)
+                for (int k = 0; k < 4; k++)
+                    _scheduleArray[i * 24 * 4 + j * 4 + k] = value[i, j, k];
             }
         }
 

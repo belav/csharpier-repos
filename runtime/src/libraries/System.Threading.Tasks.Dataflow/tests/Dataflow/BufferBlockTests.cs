@@ -254,42 +254,42 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler
                 }
             )
-                foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
-                    foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
+            foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
+            foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
+            {
+                const int Messages = 100;
+                var bb = new BufferBlock<int>(
+                    new DataflowBlockOptions
                     {
-                        const int Messages = 100;
-                        var bb = new BufferBlock<int>(
-                            new DataflowBlockOptions
-                            {
-                                BoundedCapacity = boundedCapacity,
-                                MaxMessagesPerTask = maxMessagesPerTask,
-                                TaskScheduler = scheduler
-                            }
-                        );
-                        await Task.WhenAll(
-                            Task.Run(
-                                async delegate
-                                { // consumer
-                                    int i = 0;
-                                    while (await bb.OutputAvailableAsync())
-                                    {
-                                        Assert.Equal(expected: i, actual: await bb.ReceiveAsync());
-                                        i++;
-                                    }
-                                }
-                            ),
-                            Task.Run(
-                                async delegate
-                                { // producer
-                                    for (int i = 0; i < Messages; i++)
-                                    {
-                                        await bb.SendAsync(i);
-                                    }
-                                    bb.Complete();
-                                }
-                            )
-                        );
+                        BoundedCapacity = boundedCapacity,
+                        MaxMessagesPerTask = maxMessagesPerTask,
+                        TaskScheduler = scheduler
                     }
+                );
+                await Task.WhenAll(
+                    Task.Run(
+                        async delegate
+                        { // consumer
+                            int i = 0;
+                            while (await bb.OutputAvailableAsync())
+                            {
+                                Assert.Equal(expected: i, actual: await bb.ReceiveAsync());
+                                i++;
+                            }
+                        }
+                    ),
+                    Task.Run(
+                        async delegate
+                        { // producer
+                            for (int i = 0; i < Messages; i++)
+                            {
+                                await bb.SendAsync(i);
+                            }
+                            bb.Complete();
+                        }
+                    )
+                );
+            }
         }
 
         [Fact]
@@ -504,43 +504,36 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestFaultingAndCancellation()
         {
             foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 1 })
-                foreach (bool fault in DataflowTestHelpers.BooleanValues)
+            foreach (bool fault in DataflowTestHelpers.BooleanValues)
+            {
+                var cts = new CancellationTokenSource();
+                var bb = new BufferBlock<int>(
+                    new DataflowBlockOptions
+                    {
+                        CancellationToken = cts.Token,
+                        BoundedCapacity = boundedCapacity
+                    }
+                );
+
+                Task<bool>[] sends = Enumerable.Range(0, 4).Select(i => bb.SendAsync(i)).ToArray();
+                Assert.Equal(expected: 0, actual: await bb.ReceiveAsync());
+                Assert.Equal(expected: 1, actual: await bb.ReceiveAsync());
+
+                if (fault)
                 {
-                    var cts = new CancellationTokenSource();
-                    var bb = new BufferBlock<int>(
-                        new DataflowBlockOptions
-                        {
-                            CancellationToken = cts.Token,
-                            BoundedCapacity = boundedCapacity
-                        }
-                    );
-
-                    Task<bool>[] sends = Enumerable
-                        .Range(0, 4)
-                        .Select(i => bb.SendAsync(i))
-                        .ToArray();
-                    Assert.Equal(expected: 0, actual: await bb.ReceiveAsync());
-                    Assert.Equal(expected: 1, actual: await bb.ReceiveAsync());
-
-                    if (fault)
-                    {
-                        Assert.Throws<ArgumentNullException>(
-                            () => ((IDataflowBlock)bb).Fault(null)
-                        );
-                        ((IDataflowBlock)bb).Fault(new InvalidCastException());
-                        await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
-                    }
-                    else
-                    {
-                        cts.Cancel();
-                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                            () => bb.Completion
-                        );
-                    }
-
-                    await Task.WhenAll(sends);
-                    Assert.Equal(expected: 0, actual: bb.Count);
+                    Assert.Throws<ArgumentNullException>(() => ((IDataflowBlock)bb).Fault(null));
+                    ((IDataflowBlock)bb).Fault(new InvalidCastException());
+                    await Assert.ThrowsAsync<InvalidCastException>(() => bb.Completion);
                 }
+                else
+                {
+                    cts.Cancel();
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() => bb.Completion);
+                }
+
+                await Task.WhenAll(sends);
+                Assert.Equal(expected: 0, actual: bb.Count);
+            }
         }
 
         [Fact]

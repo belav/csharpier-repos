@@ -15,10 +15,10 @@ namespace DrawingTestHelper
         static PDComparer()
         {
             for (int x = 0; x < SearchRectSize; x++)
-                for (int y = 0; y < SearchRectSize; y++)
-                {
-                    ltDistances[x, y] = Math.Sqrt(x * x + y * y);
-                }
+            for (int y = 0; y < SearchRectSize; y++)
+            {
+                ltDistances[x, y] = Math.Sqrt(x * x + y * y);
+            }
         }
 
         public PDComparer() { }
@@ -56,16 +56,16 @@ namespace DrawingTestHelper
             double min_distance = SearchRectSize;
 
             for (int x = r.X; x < r.X + SearchRectSize; x++)
-                for (int y = r.Y; y < r.Y + SearchRectSize; y++)
-                    if ((x < b.Width) && (y < b.Height) && (x >= 0) && (y >= 0))
+            for (int y = r.Y; y < r.Y + SearchRectSize; y++)
+                if ((x < b.Width) && (y < b.Height) && (x >= 0) && (y >= 0))
+                {
+                    if (IsPixelExist(b.GetPixel(x, y)))
                     {
-                        if (IsPixelExist(b.GetPixel(x, y)))
-                        {
-                            double d = CalculateDistance(p.X, p.Y, x, y);
-                            if (d < min_distance)
-                                min_distance = d;
-                        }
+                        double d = CalculateDistance(p.X, p.Y, x, y);
+                        if (d < min_distance)
+                            min_distance = d;
                     }
+                }
 
             return min_distance;
         }
@@ -97,9 +97,9 @@ namespace DrawingTestHelper
             ArrayList points = new ArrayList();
 
             for (int x = 0; x < b.Width; x++)
-                for (int y = 0; y < b.Height; y++)
-                    if (IsPixelExist(b.GetPixel(x, y)))
-                        points.Add(new Point(x, y));
+            for (int y = 0; y < b.Height; y++)
+                if (IsPixelExist(b.GetPixel(x, y)))
+                    points.Add(new Point(x, y));
 
             return (Point[])points.ToArray(typeof(Point));
         }

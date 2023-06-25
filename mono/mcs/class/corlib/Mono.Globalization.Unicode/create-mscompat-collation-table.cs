@@ -2287,9 +2287,9 @@ namespace Mono.Globalization.Unicode
             byte weight = 0x38;
             int[] numarr = numberSecondaryWeightBounds;
             for (int i = 0; i < numarr.Length; i += 2, weight++)
-                for (int cp = numarr[i]; cp < numarr[i + 1]; cp++)
-                    if (Char.IsNumber((char)cp))
-                        diacritical[cp] = weight;
+            for (int cp = numarr[i]; cp < numarr[i + 1]; cp++)
+                if (Char.IsNumber((char)cp))
+                    diacritical[cp] = weight;
 
             // Gurmukhi special letters' diacritical weight
             for (int i = 0x0A50; i < 0x0A60; i++)
@@ -3686,15 +3686,15 @@ namespace Mono.Globalization.Unicode
                     case '>':
                         IncrementSequentialIndex(ref hangulCat);
                         for (int l = 0; l < 0x15; l++)
-                            for (int v = 0; v < 0x1C; v++)
-                            {
-                                AddCharMap(
-                                    (char)(0xAC00 + syllableBlock * 0x1C * 0x15 + l * 0x1C + v),
-                                    hangulCat,
-                                    0
-                                );
-                                IncrementSequentialIndex(ref hangulCat);
-                            }
+                        for (int v = 0; v < 0x1C; v++)
+                        {
+                            AddCharMap(
+                                (char)(0xAC00 + syllableBlock * 0x1C * 0x15 + l * 0x1C + v),
+                                hangulCat,
+                                0
+                            );
+                            IncrementSequentialIndex(ref hangulCat);
+                        }
                         syllableBlock++;
                         break;
                     case '[':

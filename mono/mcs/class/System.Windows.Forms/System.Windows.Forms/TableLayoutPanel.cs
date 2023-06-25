@@ -227,9 +227,9 @@ namespace System.Windows.Forms
         public TableLayoutPanelCellPosition GetPositionFromControl(Control control)
         {
             for (int x = 0; x < this.actual_positions.GetLength(0); x++)
-                for (int y = 0; y < this.actual_positions.GetLength(1); y++)
-                    if (this.actual_positions[x, y] == control)
-                        return new TableLayoutPanelCellPosition(x, y);
+            for (int y = 0; y < this.actual_positions.GetLength(1); y++)
+                if (this.actual_positions[x, y] == control)
+                    return new TableLayoutPanelCellPosition(x, y);
 
             return new TableLayoutPanelCellPosition(-1, -1);
         }

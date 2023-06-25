@@ -95,8 +95,8 @@ namespace MonoTests.Mono.Collections.Concurrent
                     const int delta = 5;
 
                     for (int i = 0; i < (count + delta) * threads; i++)
-                        while (!coll.TryAdd(i))
-                            ;
+                    while (!coll.TryAdd(i))
+                        ;
 
                     bool state = true;
 

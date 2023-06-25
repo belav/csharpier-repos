@@ -66,37 +66,37 @@ public class struct1
     public static void Process2DArray(ref double[,] a2d)
     {
         for (int i = 10; i < size + 10; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a2d[i - 10, j] += a2d[0, j] + a2d[1, j];
-                a2d[i - 10, j] += 10;
-                a2d[i - 10, j] *= a2d[i - 10, j] + a2d[2, j];
-                a2d[i - 10, j] -= a2d[i - 10, j] * a2d[3, j];
-                if ((a2d[i - 10, j] + a2d[4, j]) != 0)
-                    a2d[i - 10, j] /= a2d[i - 10, j] + a2d[4, j];
-                else
-                    a2d[i - 10, j] += a2d[i - 10, j] * a2d[4, j];
-                for (int k = 5; k < size; k++)
-                    a2d[i - 10, j] += a2d[k, j];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a2d[i - 10, j] += a2d[0, j] + a2d[1, j];
+            a2d[i - 10, j] += 10;
+            a2d[i - 10, j] *= a2d[i - 10, j] + a2d[2, j];
+            a2d[i - 10, j] -= a2d[i - 10, j] * a2d[3, j];
+            if ((a2d[i - 10, j] + a2d[4, j]) != 0)
+                a2d[i - 10, j] /= a2d[i - 10, j] + a2d[4, j];
+            else
+                a2d[i - 10, j] += a2d[i - 10, j] * a2d[4, j];
+            for (int k = 5; k < size; k++)
+                a2d[i - 10, j] += a2d[k, j];
+        }
     }
 
     public static void ProcessJagged2DArray(ref double[][] a2d)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a2d[i][j] += a2d[0][j] + a2d[1][j];
-                a2d[i][j] += 10;
-                a2d[i][j] *= a2d[i][j] + a2d[2][j];
-                a2d[i][j] -= a2d[i][j] * a2d[3][j];
-                if ((a2d[i][j] + a2d[4][j]) != 0)
-                    a2d[i][j] /= a2d[i][j] + a2d[4][j];
-                else
-                    a2d[i][j] += a2d[i][j] * a2d[4][j];
-                for (int k = 5; k < size; k++)
-                    a2d[i][j] += a2d[k][j];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a2d[i][j] += a2d[0][j] + a2d[1][j];
+            a2d[i][j] += 10;
+            a2d[i][j] *= a2d[i][j] + a2d[2][j];
+            a2d[i][j] -= a2d[i][j] * a2d[3][j];
+            if ((a2d[i][j] + a2d[4][j]) != 0)
+                a2d[i][j] /= a2d[i][j] + a2d[4][j];
+            else
+                a2d[i][j] += a2d[i][j] * a2d[4][j];
+            for (int k = 5; k < size; k++)
+                a2d[i][j] += a2d[k][j];
+        }
     }
 
     public static void Init3DMatrix(double[,,] m, double[][] refm)
@@ -123,35 +123,35 @@ public class struct1
     public static void Process3DArray(double[,,] a3d)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a3d[i, 0, j] += a3d[0, 0, j] + a3d[1, 0, j];
-                a3d[i, 0, j] *= a3d[i, 0, j] + a3d[2, 0, j];
-                a3d[i, 0, j] -= a3d[i, 0, j] * a3d[3, 0, j];
-                if ((a3d[i, 0, j] + a3d[4, 0, j]) != 0)
-                    a3d[i, 0, j] /= a3d[i, 0, j] + a3d[4, 0, j];
-                else
-                    a3d[i, 0, j] += a3d[i, 0, j] * a3d[4, 0, j];
-                for (int k = 5; k < size; k++)
-                    a3d[i, 0, j] += a3d[k, 0, j];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a3d[i, 0, j] += a3d[0, 0, j] + a3d[1, 0, j];
+            a3d[i, 0, j] *= a3d[i, 0, j] + a3d[2, 0, j];
+            a3d[i, 0, j] -= a3d[i, 0, j] * a3d[3, 0, j];
+            if ((a3d[i, 0, j] + a3d[4, 0, j]) != 0)
+                a3d[i, 0, j] /= a3d[i, 0, j] + a3d[4, 0, j];
+            else
+                a3d[i, 0, j] += a3d[i, 0, j] * a3d[4, 0, j];
+            for (int k = 5; k < size; k++)
+                a3d[i, 0, j] += a3d[k, 0, j];
+        }
     }
 
     public static void ProcessJagged3DArray(double[][] a3d)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a3d[i][j] += a3d[0][j] + a3d[1][j];
-                a3d[i][j] *= a3d[i][j] + a3d[2][j];
-                a3d[i][j] -= a3d[i][j] * a3d[3][j];
-                if ((a3d[i][j] + a3d[4][j]) != 0)
-                    a3d[i][j] /= a3d[i][j] + a3d[4][j];
-                else
-                    a3d[i][j] += a3d[i][j] * a3d[4][j];
-                for (int k = 5; k < size; k++)
-                    a3d[i][j] += a3d[k][j];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a3d[i][j] += a3d[0][j] + a3d[1][j];
+            a3d[i][j] *= a3d[i][j] + a3d[2][j];
+            a3d[i][j] -= a3d[i][j] * a3d[3][j];
+            if ((a3d[i][j] + a3d[4][j]) != 0)
+                a3d[i][j] /= a3d[i][j] + a3d[4][j];
+            else
+                a3d[i][j] += a3d[i][j] * a3d[4][j];
+            for (int k = 5; k < size; k++)
+                a3d[i][j] += a3d[k][j];
+        }
     }
 
     [Fact]

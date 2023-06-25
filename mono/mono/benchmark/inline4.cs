@@ -21,8 +21,8 @@ public class Tests
         Console.WriteLine("Repeat = " + repeat);
 
         for (int i = 0; i < repeat; i++)
-            for (int j = 0; j < 50000000; j++)
-                sum += test(j);
+        for (int j = 0; j < 50000000; j++)
+            sum += test(j);
 
         Console.WriteLine(sum);
         if (sum != (75000000 * repeat))

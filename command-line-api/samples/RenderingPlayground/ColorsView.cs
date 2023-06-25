@@ -23,26 +23,26 @@ namespace RenderingPlayground
             var i = 0;
 
             for (var x = 0; x < region.Width; x++)
-                for (var y = 0; y < region.Height; y++)
+            for (var y = 0; y < region.Height; y++)
+            {
+                if (i >= Text.Length - 1)
                 {
-                    if (i >= Text.Length - 1)
-                    {
-                        i = 0;
-                    }
-                    else
-                    {
-                        i++;
-                    }
-
-                    var subregion = new Region(region.Left + x, region.Top + y, 1, 1);
-                    unchecked
-                    {
-                        renderer.RenderToRegion(
-                            $"{ForegroundColorSpan.Rgb(r += 2, g += 3, b += 5)}{Text[i]}{ForegroundColorSpan.Reset()}",
-                            subregion
-                        );
-                    }
+                    i = 0;
                 }
+                else
+                {
+                    i++;
+                }
+
+                var subregion = new Region(region.Left + x, region.Top + y, 1, 1);
+                unchecked
+                {
+                    renderer.RenderToRegion(
+                        $"{ForegroundColorSpan.Rgb(r += 2, g += 3, b += 5)}{Text[i]}{ForegroundColorSpan.Reset()}",
+                        subregion
+                    );
+                }
+            }
         }
     }
 }

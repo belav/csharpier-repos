@@ -16,9 +16,9 @@ public class Test
         object a = new Test();
 
         for (int i = 0; i < (repeat * 5000); i++)
-            for (int j = 0; j < 100000; j++)
-                if (((Test)a).tmp != 1)
-                    return 1;
+        for (int j = 0; j < 100000; j++)
+            if (((Test)a).tmp != 1)
+                return 1;
 
         return 0;
     }

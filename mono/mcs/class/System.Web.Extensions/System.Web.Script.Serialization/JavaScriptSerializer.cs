@@ -504,9 +504,9 @@ namespace System.Web.Script.Serialization
                 for (int i = 0; i < _converterList.Count; i++)
                 {
                     foreach (JavaScriptConverter converter in _converterList[i])
-                        foreach (Type supportedType in converter.SupportedTypes)
-                            if (supportedType.IsAssignableFrom(type))
-                                return converter;
+                    foreach (Type supportedType in converter.SupportedTypes)
+                        if (supportedType.IsAssignableFrom(type))
+                            return converter;
                 }
 
             return null;

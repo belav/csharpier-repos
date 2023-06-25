@@ -479,9 +479,9 @@ namespace System.Net.Http.Functional.Tests
         public static IEnumerable<object[]> GetAsync_Chunked_VaryingSizeChunks_ReceivedCorrectly_MemberData()
         {
             foreach (int maxChunkSize in new[] { 1, 10_000 })
-                foreach (string lineEnding in new[] { "\n", "\r\n" })
-                    foreach (bool useCopyToAsync in new[] { false, true })
-                        yield return new object[] { maxChunkSize, lineEnding, useCopyToAsync };
+            foreach (string lineEnding in new[] { "\n", "\r\n" })
+            foreach (bool useCopyToAsync in new[] { false, true })
+                yield return new object[] { maxChunkSize, lineEnding, useCopyToAsync };
         }
 
         [OuterLoop]

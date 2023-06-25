@@ -24,8 +24,8 @@ public class Test
         Console.WriteLine("Repeat = " + repeat);
 
         for (int i = 0; i < (repeat * 5000); i++)
-            for (int j = 0; j < 10000; j++)
-                mono_test_empty_pinvoke(5);
+        for (int j = 0; j < 10000; j++)
+            mono_test_empty_pinvoke(5);
 
         return 0;
     }

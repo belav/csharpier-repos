@@ -217,20 +217,20 @@ namespace System.Reflection.Tests
 
                             int cnt = 0;
                             for (int pos1 = 0; pos1 < baseNum; pos1++)
-                                for (int pos2 = 0; pos2 < baseNum; pos2++)
-                                    for (int pos3 = 0; pos3 < baseNum; pos3++)
-                                        for (int pos4 = 0; pos4 < baseNum; pos4++)
-                                        {
-                                            int saved = cnt;
-                                            validLowerBounds1[cnt] = saved % baseNum;
-                                            saved = saved / baseNum;
-                                            validLengths1[cnt] = saved % baseNum;
-                                            saved = saved / baseNum;
-                                            validLowerBounds2[cnt] = saved % baseNum;
-                                            saved = saved / baseNum;
-                                            validLengths2[cnt] = saved % baseNum;
-                                            cnt++;
-                                        }
+                            for (int pos2 = 0; pos2 < baseNum; pos2++)
+                            for (int pos3 = 0; pos3 < baseNum; pos3++)
+                            for (int pos4 = 0; pos4 < baseNum; pos4++)
+                            {
+                                int saved = cnt;
+                                validLowerBounds1[cnt] = saved % baseNum;
+                                saved = saved / baseNum;
+                                validLengths1[cnt] = saved % baseNum;
+                                saved = saved / baseNum;
+                                validLowerBounds2[cnt] = saved % baseNum;
+                                saved = saved / baseNum;
+                                validLengths2[cnt] = saved % baseNum;
+                                cnt++;
+                            }
 
                             if (!PlatformDetection.IsNonZeroLowerBoundArraySupported)
                             {

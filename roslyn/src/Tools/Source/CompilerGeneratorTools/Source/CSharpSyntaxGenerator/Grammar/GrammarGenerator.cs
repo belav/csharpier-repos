@@ -145,9 +145,9 @@ namespace CSharpSyntaxGenerator.Grammar
                     // Now proceed in depth-first fashion through the referenced rules to keep related rules
                     // close by. Don't recurse into major-sections to help keep them separated in grammar file.
                     foreach (var production in sorted)
-                        foreach (var referencedRule in production.ReferencedRules)
-                            if (!majorRules.Concat(lexicalRules).Contains(referencedRule))
-                                processRule(referencedRule, ref result);
+                    foreach (var referencedRule in production.ReferencedRules)
+                        if (!majorRules.Concat(lexicalRules).Contains(referencedRule))
+                            processRule(referencedRule, ref result);
                 }
             }
         }

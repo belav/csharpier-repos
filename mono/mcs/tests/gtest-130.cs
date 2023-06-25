@@ -25,8 +25,8 @@ class MyTest
         bool?[] bvals = new bool?[] { null, false, true };
         Console.WriteLine("{0,-6} {1,-6} {2,-6} {3,-6} {4,-6}", "x", "y", "x&y", "x|y", "x^y");
         foreach (bool? x in bvals)
-            foreach (bool? y in bvals)
-                Console.WriteLine("{0,-6} {1,-6} {2,-6} {3,-6} {4,-6}", x, y, x & y, x | y, x ^ y);
+        foreach (bool? y in bvals)
+            Console.WriteLine("{0,-6} {1,-6} {2,-6} {3,-6} {4,-6}", x, y, x & y, x | y, x ^ y);
         Console.WriteLine();
         Console.WriteLine("{0,-6} {1,-6}", "x", "!x");
         foreach (bool? x in bvals)

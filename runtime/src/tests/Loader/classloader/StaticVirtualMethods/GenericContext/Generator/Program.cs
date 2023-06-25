@@ -77,36 +77,29 @@ namespace VirtualStaticInterfaceMethodTestGen
                     var constaintTypeScenario in (ConstrainedTypeScenario[])
                         typeof(ConstrainedTypeScenario).GetEnumValues()
                 )
-                    foreach (
-                        var callerScenario in (CallerMethodScenario[])
-                            typeof(CallerMethodScenario).GetEnumValues()
-                    )
-                        foreach (
-                            var interfaceScenario in (InterfaceType[])
-                                typeof(InterfaceType).GetEnumValues()
-                        )
-                            foreach (
-                                var methodType in (MethodType[])typeof(MethodType).GetEnumValues()
-                            )
-                                foreach (
-                                    var constrainedTypeDefinition in (ConstrainedTypeDefinition[])
-                                        typeof(ConstrainedTypeDefinition).GetEnumValues()
-                                )
-                                    foreach (
-                                        var opTested in (OperationTested[])
-                                            typeof(OperationTested).GetEnumValues()
-                                    )
-                                    {
-                                        TestScenario scenario = new TestScenario();
-                                        scenario.Operation = opTested;
-                                        scenario.ConstrainedType = constaintTypeScenario;
-                                        scenario.CallerScenario = callerScenario;
-                                        scenario.InterfaceType = interfaceScenario;
-                                        scenario.MethodType = methodType;
-                                        scenario.ConstrainedTypeDefinition =
-                                            constrainedTypeDefinition;
-                                        yield return scenario;
-                                    }
+                foreach (
+                    var callerScenario in (CallerMethodScenario[])
+                        typeof(CallerMethodScenario).GetEnumValues()
+                )
+                foreach (
+                    var interfaceScenario in (InterfaceType[])typeof(InterfaceType).GetEnumValues()
+                )
+                foreach (var methodType in (MethodType[])typeof(MethodType).GetEnumValues())
+                foreach (
+                    var constrainedTypeDefinition in (ConstrainedTypeDefinition[])
+                        typeof(ConstrainedTypeDefinition).GetEnumValues()
+                )
+                foreach (var opTested in (OperationTested[])typeof(OperationTested).GetEnumValues())
+                {
+                    TestScenario scenario = new TestScenario();
+                    scenario.Operation = opTested;
+                    scenario.ConstrainedType = constaintTypeScenario;
+                    scenario.CallerScenario = callerScenario;
+                    scenario.InterfaceType = interfaceScenario;
+                    scenario.MethodType = methodType;
+                    scenario.ConstrainedTypeDefinition = constrainedTypeDefinition;
+                    yield return scenario;
+                }
             }
         }
 

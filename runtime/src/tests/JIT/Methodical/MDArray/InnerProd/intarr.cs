@@ -195,8 +195,8 @@ namespace Test_intarr_InnerProd
             int[,,] imr3d = new int[size + 3, size, size];
 
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                    imr3d[i, j, 0] = 1;
+            for (int j = 0; j < size; j++)
+                imr3d[i, j, 0] = 1;
 
             int[][] refa3d = new int[size][];
             int[][] refb3d = new int[size][];

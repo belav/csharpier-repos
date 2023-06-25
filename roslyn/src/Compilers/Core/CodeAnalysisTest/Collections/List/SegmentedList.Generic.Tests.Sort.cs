@@ -159,13 +159,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> unsortedList = GenericListFactory(count);
             IComparer<T> comparer = GetIComparer();
             for (int startIndex = 0; startIndex < count - 2; startIndex++)
-                for (int sortCount = 1; sortCount < count - startIndex; sortCount++)
-                {
-                    SegmentedList<T> list = new SegmentedList<T>(unsortedList);
-                    list.Sort(startIndex, sortCount + 1, comparer);
-                    for (int i = startIndex; i < sortCount; i++)
-                        Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 0);
-                }
+            for (int sortCount = 1; sortCount < count - startIndex; sortCount++)
+            {
+                SegmentedList<T> list = new SegmentedList<T>(unsortedList);
+                list.Sort(startIndex, sortCount + 1, comparer);
+                for (int i = startIndex; i < sortCount; i++)
+                    Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 0);
+            }
         }
 
         [Theory]
@@ -176,13 +176,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IComparer<T> comparer = GetIComparer();
             unsortedList.Add(unsortedList[0]);
             for (int startIndex = 0; startIndex < count - 2; startIndex++)
-                for (int sortCount = 2; sortCount < count - startIndex; sortCount++)
-                {
-                    SegmentedList<T> list = new SegmentedList<T>(unsortedList);
-                    list.Sort(startIndex, sortCount + 1, comparer);
-                    for (int i = startIndex; i < sortCount; i++)
-                        Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 1);
-                }
+            for (int sortCount = 2; sortCount < count - startIndex; sortCount++)
+            {
+                SegmentedList<T> list = new SegmentedList<T>(unsortedList);
+                list.Sort(startIndex, sortCount + 1, comparer);
+                for (int i = startIndex; i < sortCount; i++)
+                    Assert.InRange(comparer.Compare(list[i], list[i + 1]), int.MinValue, 1);
+            }
         }
 
         [Theory]

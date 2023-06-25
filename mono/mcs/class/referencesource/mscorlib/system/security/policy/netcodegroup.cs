@@ -927,8 +927,8 @@ namespace System.Security.Policy
                 result += ((string)m_schemesList[i]).GetHashCode();
 
             foreach (ArrayList accessList in m_accessList)
-                for (int i = 0; i < accessList.Count; ++i)
-                    result += ((CodeConnectAccess)accessList[i]).GetHashCode();
+            for (int i = 0; i < accessList.Count; ++i)
+                result += ((CodeConnectAccess)accessList[i]).GetHashCode();
 
             return result;
         }

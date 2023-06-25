@@ -630,141 +630,141 @@ namespace System.Net.Http.Functional.Tests
                 foreach (
                     Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
                 ) // target server
-                    foreach (bool syncCopy in BoolValues) // force the content copy to happen via Read/Write or ReadAsync/WriteAsync
+                foreach (bool syncCopy in BoolValues) // force the content copy to happen via Read/Write or ReadAsync/WriteAsync
+                {
+                    byte[] data = new byte[1234];
+                    new Random(42).NextBytes(data);
+
+                    // A MemoryStream
                     {
-                        byte[] data = new byte[1234];
-                        new Random(42).NextBytes(data);
-
-                        // A MemoryStream
+                        var memStream = new MemoryStream(data, writable: false);
+                        yield return new object[]
                         {
-                            var memStream = new MemoryStream(data, writable: false);
-                            yield return new object[]
-                            {
-                                remoteServer,
-                                new StreamContentWithSyncAsyncCopy(memStream, syncCopy: syncCopy),
-                                data
-                            };
-                        }
-
-                        // A multipart content that provides its own stream from CreateContentReadStreamAsync
-                        {
-                            var mc = new MultipartContent();
-                            mc.Add(new ByteArrayContent(data));
-                            var memStream = new MemoryStream();
-                            mc.CopyToAsync(memStream).GetAwaiter().GetResult();
-                            yield return new object[] { remoteServer, mc, memStream.ToArray() };
-                        }
-
-                        // A stream that provides the data synchronously and has a known length
-                        {
-                            var wrappedMemStream = new MemoryStream(data, writable: false);
-                            var syncKnownLengthStream = new DelegateStream(
-                                canReadFunc: () => wrappedMemStream.CanRead,
-                                canSeekFunc: () => wrappedMemStream.CanSeek,
-                                lengthFunc: () => wrappedMemStream.Length,
-                                positionGetFunc: () => wrappedMemStream.Position,
-                                positionSetFunc: p => wrappedMemStream.Position = p,
-                                readFunc: (buffer, offset, count) =>
-                                    wrappedMemStream.Read(buffer, offset, count),
-                                readAsyncFunc: (buffer, offset, count, token) =>
-                                    wrappedMemStream.ReadAsync(buffer, offset, count, token)
-                            );
-                            yield return new object[]
-                            {
-                                remoteServer,
-                                new StreamContentWithSyncAsyncCopy(
-                                    syncKnownLengthStream,
-                                    syncCopy: syncCopy
-                                ),
-                                data
-                            };
-                        }
-
-                        // A stream that provides the data synchronously and has an unknown length
-                        {
-                            int syncUnknownLengthStreamOffset = 0;
-
-                            Func<byte[], int, int, int> readFunc = (buffer, offset, count) =>
-                            {
-                                int bytesRemaining = data.Length - syncUnknownLengthStreamOffset;
-                                int bytesToCopy = Math.Min(bytesRemaining, count);
-                                Array.Copy(
-                                    data,
-                                    syncUnknownLengthStreamOffset,
-                                    buffer,
-                                    offset,
-                                    bytesToCopy
-                                );
-                                syncUnknownLengthStreamOffset += bytesToCopy;
-                                return bytesToCopy;
-                            };
-
-                            var syncUnknownLengthStream = new DelegateStream(
-                                canReadFunc: () => true,
-                                canSeekFunc: () => false,
-                                readFunc: readFunc,
-                                readAsyncFunc: (buffer, offset, count, token) =>
-                                    Task.FromResult(readFunc(buffer, offset, count))
-                            );
-                            yield return new object[]
-                            {
-                                remoteServer,
-                                new StreamContentWithSyncAsyncCopy(
-                                    syncUnknownLengthStream,
-                                    syncCopy: syncCopy
-                                ),
-                                data
-                            };
-                        }
-
-                        // A stream that provides the data asynchronously
-                        {
-                            int asyncStreamOffset = 0,
-                                maxDataPerRead = 100;
-
-                            Func<byte[], int, int, int> readFunc = (buffer, offset, count) =>
-                            {
-                                int bytesRemaining = data.Length - asyncStreamOffset;
-                                int bytesToCopy = Math.Min(
-                                    bytesRemaining,
-                                    Math.Min(maxDataPerRead, count)
-                                );
-                                Array.Copy(data, asyncStreamOffset, buffer, offset, bytesToCopy);
-                                asyncStreamOffset += bytesToCopy;
-                                return bytesToCopy;
-                            };
-
-                            var asyncStream = new DelegateStream(
-                                canReadFunc: () => true,
-                                canSeekFunc: () => false,
-                                readFunc: readFunc,
-                                readAsyncFunc: async (buffer, offset, count, token) =>
-                                {
-                                    await Task.Delay(1).ConfigureAwait(false);
-                                    return readFunc(buffer, offset, count);
-                                }
-                            );
-                            yield return new object[]
-                            {
-                                remoteServer,
-                                new StreamContentWithSyncAsyncCopy(asyncStream, syncCopy: syncCopy),
-                                data
-                            };
-                        }
-
-                        // Providing data from a FormUrlEncodedContent's stream
-                        {
-                            var formContent = new FormUrlEncodedContent(
-                                new[] { new KeyValuePair<string, string>("key", "val") }
-                            );
-                            yield return new object[]
-                            {
-                                remoteServer,
-                                formContent,
-                                Encoding.GetEncoding("iso-8859-1").GetBytes("key=val")
-                            };
-                        }
+                            remoteServer,
+                            new StreamContentWithSyncAsyncCopy(memStream, syncCopy: syncCopy),
+                            data
+                        };
                     }
+
+                    // A multipart content that provides its own stream from CreateContentReadStreamAsync
+                    {
+                        var mc = new MultipartContent();
+                        mc.Add(new ByteArrayContent(data));
+                        var memStream = new MemoryStream();
+                        mc.CopyToAsync(memStream).GetAwaiter().GetResult();
+                        yield return new object[] { remoteServer, mc, memStream.ToArray() };
+                    }
+
+                    // A stream that provides the data synchronously and has a known length
+                    {
+                        var wrappedMemStream = new MemoryStream(data, writable: false);
+                        var syncKnownLengthStream = new DelegateStream(
+                            canReadFunc: () => wrappedMemStream.CanRead,
+                            canSeekFunc: () => wrappedMemStream.CanSeek,
+                            lengthFunc: () => wrappedMemStream.Length,
+                            positionGetFunc: () => wrappedMemStream.Position,
+                            positionSetFunc: p => wrappedMemStream.Position = p,
+                            readFunc: (buffer, offset, count) =>
+                                wrappedMemStream.Read(buffer, offset, count),
+                            readAsyncFunc: (buffer, offset, count, token) =>
+                                wrappedMemStream.ReadAsync(buffer, offset, count, token)
+                        );
+                        yield return new object[]
+                        {
+                            remoteServer,
+                            new StreamContentWithSyncAsyncCopy(
+                                syncKnownLengthStream,
+                                syncCopy: syncCopy
+                            ),
+                            data
+                        };
+                    }
+
+                    // A stream that provides the data synchronously and has an unknown length
+                    {
+                        int syncUnknownLengthStreamOffset = 0;
+
+                        Func<byte[], int, int, int> readFunc = (buffer, offset, count) =>
+                        {
+                            int bytesRemaining = data.Length - syncUnknownLengthStreamOffset;
+                            int bytesToCopy = Math.Min(bytesRemaining, count);
+                            Array.Copy(
+                                data,
+                                syncUnknownLengthStreamOffset,
+                                buffer,
+                                offset,
+                                bytesToCopy
+                            );
+                            syncUnknownLengthStreamOffset += bytesToCopy;
+                            return bytesToCopy;
+                        };
+
+                        var syncUnknownLengthStream = new DelegateStream(
+                            canReadFunc: () => true,
+                            canSeekFunc: () => false,
+                            readFunc: readFunc,
+                            readAsyncFunc: (buffer, offset, count, token) =>
+                                Task.FromResult(readFunc(buffer, offset, count))
+                        );
+                        yield return new object[]
+                        {
+                            remoteServer,
+                            new StreamContentWithSyncAsyncCopy(
+                                syncUnknownLengthStream,
+                                syncCopy: syncCopy
+                            ),
+                            data
+                        };
+                    }
+
+                    // A stream that provides the data asynchronously
+                    {
+                        int asyncStreamOffset = 0,
+                            maxDataPerRead = 100;
+
+                        Func<byte[], int, int, int> readFunc = (buffer, offset, count) =>
+                        {
+                            int bytesRemaining = data.Length - asyncStreamOffset;
+                            int bytesToCopy = Math.Min(
+                                bytesRemaining,
+                                Math.Min(maxDataPerRead, count)
+                            );
+                            Array.Copy(data, asyncStreamOffset, buffer, offset, bytesToCopy);
+                            asyncStreamOffset += bytesToCopy;
+                            return bytesToCopy;
+                        };
+
+                        var asyncStream = new DelegateStream(
+                            canReadFunc: () => true,
+                            canSeekFunc: () => false,
+                            readFunc: readFunc,
+                            readAsyncFunc: async (buffer, offset, count, token) =>
+                            {
+                                await Task.Delay(1).ConfigureAwait(false);
+                                return readFunc(buffer, offset, count);
+                            }
+                        );
+                        yield return new object[]
+                        {
+                            remoteServer,
+                            new StreamContentWithSyncAsyncCopy(asyncStream, syncCopy: syncCopy),
+                            data
+                        };
+                    }
+
+                    // Providing data from a FormUrlEncodedContent's stream
+                    {
+                        var formContent = new FormUrlEncodedContent(
+                            new[] { new KeyValuePair<string, string>("key", "val") }
+                        );
+                        yield return new object[]
+                        {
+                            remoteServer,
+                            formContent,
+                            Encoding.GetEncoding("iso-8859-1").GetBytes("key=val")
+                        };
+                    }
+                }
             }
         }
 

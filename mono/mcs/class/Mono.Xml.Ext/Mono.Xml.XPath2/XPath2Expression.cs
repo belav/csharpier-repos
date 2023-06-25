@@ -321,8 +321,8 @@ namespace Mono.Xml.XPath2
         internal override void CheckReference(XQueryASTCompiler compiler)
         {
             foreach (ForLetClause flc in fl)
-                foreach (ForLetSingleBody single in flc)
-                    single.CheckReference(compiler);
+            foreach (ForLetSingleBody single in flc)
+                single.CheckReference(compiler);
             if (whereClause != null)
                 whereClause.CheckReference(compiler);
             if (orderBy != null)

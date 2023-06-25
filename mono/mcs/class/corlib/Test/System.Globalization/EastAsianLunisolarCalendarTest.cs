@@ -224,12 +224,12 @@ namespace MonoTests.System.Globalization
             d[2033] = 12; // hmmmmmm ...
             d[2036] = 7;
             for (int y = 2000; y < 2038; y++)
-                for (int m = 1; m <= 12; m++)
-                    Assert.AreEqual(
-                        d.ContainsKey(y) && d[y] == m,
-                        cn.IsLeapMonth(y, m),
-                        "cn" + y + "/" + m
-                    );
+            for (int m = 1; m <= 12; m++)
+                Assert.AreEqual(
+                    d.ContainsKey(y) && d[y] == m,
+                    cn.IsLeapMonth(y, m),
+                    "cn" + y + "/" + m
+                );
 
             d = new Dictionary<int, int>();
             d[90] = 5;
@@ -247,12 +247,12 @@ namespace MonoTests.System.Globalization
             d[122] = 12;
             d[125] = 7;
             for (int y = 89; y < 127; y++)
-                for (int m = 1; m <= 12; m++)
-                    Assert.AreEqual(
-                        d.ContainsKey(y) && d[y] == m,
-                        tw.IsLeapMonth(y, m),
-                        "tw" + y + "/" + m
-                    );
+            for (int m = 1; m <= 12; m++)
+                Assert.AreEqual(
+                    d.ContainsKey(y) && d[y] == m,
+                    tw.IsLeapMonth(y, m),
+                    "tw" + y + "/" + m
+                );
 
             d = new Dictionary<int, int>();
             d[13] = 5;
@@ -263,12 +263,12 @@ namespace MonoTests.System.Globalization
             d[26] = 10;
             d[29] = 6;
             for (int y = 12; y < 32; y++)
-                for (int m = 1; m <= 12; m++)
-                    Assert.AreEqual(
-                        d.ContainsKey(y) && d[y] == m,
-                        jp.IsLeapMonth(y, m, 4),
-                        "jp" + y + "/" + m
-                    );
+            for (int m = 1; m <= 12; m++)
+                Assert.AreEqual(
+                    d.ContainsKey(y) && d[y] == m,
+                    jp.IsLeapMonth(y, m, 4),
+                    "jp" + y + "/" + m
+                );
 
             d = new Dictionary<int, int>();
             d[2001] = 5;
@@ -279,12 +279,12 @@ namespace MonoTests.System.Globalization
             d[2014] = 10;
             d[2017] = 6;
             for (int y = 2000; y < 2020; y++)
-                for (int m = 1; m <= 12; m++)
-                    Assert.AreEqual(
-                        d.ContainsKey(y) && d[y] == m,
-                        kr.IsLeapMonth(y, m),
-                        "kr" + y + "/" + m
-                    );
+            for (int m = 1; m <= 12; m++)
+                Assert.AreEqual(
+                    d.ContainsKey(y) && d[y] == m,
+                    kr.IsLeapMonth(y, m),
+                    "kr" + y + "/" + m
+                );
         }
     }
 }

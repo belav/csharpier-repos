@@ -45,11 +45,9 @@ namespace MonoTests.System.DirectoryServices
                 _authenticationType = (AuthenticationTypes)0;
 
                 foreach (string s in authTypes)
-                    foreach (
-                        AuthenticationTypes type in Enum.GetValues(typeof(AuthenticationTypes))
-                    )
-                        if (s.Trim().Equals(type.ToString()))
-                            _authenticationType |= type;
+                foreach (AuthenticationTypes type in Enum.GetValues(typeof(AuthenticationTypes)))
+                    if (s.Trim().Equals(type.ToString()))
+                        _authenticationType |= type;
             }
 
             //Console.WriteLine ("Connecting to {0} with credentials {1}:{2} and security {3}",ConnectionString,Username,Password,AuthenticationType);

@@ -55,29 +55,29 @@ namespace Test_jaggedarr_basics
         public static void Process2DArray(ref double[,] a)
         {
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                {
-                    a[i, j] += a[0, j] + a[1, j];
-                    a[i, j] *= a[i, j] + a[2, j];
-                    a[i, j] -= a[i, j] * a[3, j];
-                    a[i, j] /= a[i, j] + a[4, j];
-                    for (int k = 5; k < size; k++)
-                        a[i, j] += a[k, j];
-                }
+            for (int j = 0; j < size; j++)
+            {
+                a[i, j] += a[0, j] + a[1, j];
+                a[i, j] *= a[i, j] + a[2, j];
+                a[i, j] -= a[i, j] * a[3, j];
+                a[i, j] /= a[i, j] + a[4, j];
+                for (int k = 5; k < size; k++)
+                    a[i, j] += a[k, j];
+            }
         }
 
         public static void ProcessJagged2DArray(ref double[][] a)
         {
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                {
-                    a[i][j] += a[0][j] + a[1][j];
-                    a[i][j] *= a[i][j] + a[2][j];
-                    a[i][j] -= a[i][j] * a[3][j];
-                    a[i][j] /= a[i][j] + a[4][j];
-                    for (int k = 5; k < size; k++)
-                        a[i][j] += a[k][j];
-                }
+            for (int j = 0; j < size; j++)
+            {
+                a[i][j] += a[0][j] + a[1][j];
+                a[i][j] *= a[i][j] + a[2][j];
+                a[i][j] -= a[i][j] * a[3][j];
+                a[i][j] /= a[i][j] + a[4][j];
+                for (int k = 5; k < size; k++)
+                    a[i][j] += a[k][j];
+            }
         }
 
         public static void Init3DMatrix(double[,,] m, double[][] refm)
@@ -104,30 +104,30 @@ namespace Test_jaggedarr_basics
         public static void Process3DArray(double[,,] a)
         {
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                {
-                    a[i, size, j] += a[0, size, j] + a[1, size, j];
-                    a[i, size, j] *= a[i, size, j] + a[2, size, j];
-                    a[i, size, j] -= a[i, size, j] * a[3, size, j];
-                    a[i, size, j] /= a[i, size, j] + a[4, size, j];
-                    for (int k = 5; k < size; k++)
-                        a[i, size, j] += a[k, size, j];
-                }
+            for (int j = 0; j < size; j++)
+            {
+                a[i, size, j] += a[0, size, j] + a[1, size, j];
+                a[i, size, j] *= a[i, size, j] + a[2, size, j];
+                a[i, size, j] -= a[i, size, j] * a[3, size, j];
+                a[i, size, j] /= a[i, size, j] + a[4, size, j];
+                for (int k = 5; k < size; k++)
+                    a[i, size, j] += a[k, size, j];
+            }
         }
 
         public static void ProcessJagged3DArray(double[][] a)
         {
             for (int i = 10; i < size + 10; i++)
-                for (int j = 0; j < size; j++)
-                {
-                    int b = i - 4;
-                    a[i - 10][j] += a[0][j] + a[1][j];
-                    a[i - 10][j] *= a[b - 6][j] + a[2][j];
-                    a[b - 6][j] -= a[i - 10][j] * a[3][j];
-                    a[i - 10][j] /= a[b - 6][j] + a[4][j];
-                    for (int k = 5; k < size; k++)
-                        a[i - 10][j] += a[k][j];
-                }
+            for (int j = 0; j < size; j++)
+            {
+                int b = i - 4;
+                a[i - 10][j] += a[0][j] + a[1][j];
+                a[i - 10][j] *= a[b - 6][j] + a[2][j];
+                a[b - 6][j] -= a[i - 10][j] * a[3][j];
+                a[i - 10][j] /= a[b - 6][j] + a[4][j];
+                for (int k = 5; k < size; k++)
+                    a[i - 10][j] += a[k][j];
+            }
         }
 
         [Fact]

@@ -193,9 +193,9 @@ namespace System.Web.UI.WebControls
         private Type LoadType(string name)
         {
             foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
-                foreach (var type in ass.GetTypes())
-                    if (type.FullName == name)
-                        return type;
+            foreach (var type in ass.GetTypes())
+                if (type.FullName == name)
+                    return type;
             return null;
         }
 

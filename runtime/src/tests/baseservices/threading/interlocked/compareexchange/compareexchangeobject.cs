@@ -68,15 +68,15 @@ namespace Exchange
             get
             {
                 for (int i = 0; i < postObjArray.Count; i++)
-                    for (int j = i + 1; j < postObjArray.Count; j++)
-                        if (postObjArray[i] == postObjArray[j])
-                        {
-                            Console.WriteLine("Failure!!!!");
-                            Console.WriteLine("ValueOne:" + postObjArray[i]);
-                            Console.WriteLine("ValueTwo:" + postObjArray[j]);
-                            Console.WriteLine("Position:" + i + "  " + j);
-                            return false;
-                        }
+                for (int j = i + 1; j < postObjArray.Count; j++)
+                    if (postObjArray[i] == postObjArray[j])
+                    {
+                        Console.WriteLine("Failure!!!!");
+                        Console.WriteLine("ValueOne:" + postObjArray[i]);
+                        Console.WriteLine("ValueTwo:" + postObjArray[j]);
+                        Console.WriteLine("Position:" + i + "  " + j);
+                        return false;
+                    }
                 //No dups so check for proper count
                 Console.WriteLine(
                     "Expect accessCount {0} to equal postObjArray.Count {1}",

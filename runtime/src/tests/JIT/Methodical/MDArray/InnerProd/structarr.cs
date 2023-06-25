@@ -227,8 +227,8 @@ namespace Test_structarr_InnerProd
             imb = new ArrayStruct(size);
             imr = new ArrayStruct(size);
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                    imr.a3d[i, j, size - 2] = 1;
+            for (int j = 0; j < size; j++)
+                imr.a3d[i, j, size - 2] = 1;
 
             int[][] refa3d = new int[size][];
             int[][] refb3d = new int[size][];

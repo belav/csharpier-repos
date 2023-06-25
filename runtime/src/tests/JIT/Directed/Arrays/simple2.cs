@@ -20,21 +20,21 @@ internal class Simple2_Array_Test
         Int64 sum = 0;
 
         for (i = 0; i < SIZE; i++)
-            for (j = 0; j < SIZE; j++)
-                for (k = 0; k < SIZE; k++)
-                    for (l = 0; l < SIZE; l++)
-                    {
-                        foo[i, j, k, l] = i * j * k * l;
-                    }
+        for (j = 0; j < SIZE; j++)
+        for (k = 0; k < SIZE; k++)
+        for (l = 0; l < SIZE; l++)
+        {
+            foo[i, j, k, l] = i * j * k * l;
+        }
 
         for (i = 0; i < SIZE; i++)
-            for (j = 0; j < i; j++)
-                for (k = 0; k < j; k++)
-                    for (l = 0; l < k; l++)
-                        for (m = 0; m < l; m++)
-                        {
-                            sum += foo[i, j, k, l];
-                        }
+        for (j = 0; j < i; j++)
+        for (k = 0; k < j; k++)
+        for (l = 0; l < k; l++)
+        for (m = 0; m < l; m++)
+        {
+            sum += foo[i, j, k, l];
+        }
 
         if (sum == 197163)
         {

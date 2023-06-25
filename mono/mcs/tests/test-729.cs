@@ -13,8 +13,8 @@ namespace Primes
                 numbers[i] = true;
 
             for (ulong j = 1; j < max; j++)
-                for (ulong k = (j + 1) * 2; k < max; k += j + 1)
-                    numbers[k] = false;
+            for (ulong k = (j + 1) * 2; k < max; k += j + 1)
+                numbers[k] = false;
 
             for (ulong i = 0; i < max; i++)
                 if (numbers[i])

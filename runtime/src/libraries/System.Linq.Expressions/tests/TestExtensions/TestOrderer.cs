@@ -37,8 +37,8 @@ namespace System.Linq.Expressions.Tests
                 }
             }
             foreach (var order in queue.Keys.OrderBy(i => i))
-                foreach (var testCase in queue[order])
-                    yield return testCase;
+            foreach (var testCase in queue[order])
+                yield return testCase;
         }
     }
 }

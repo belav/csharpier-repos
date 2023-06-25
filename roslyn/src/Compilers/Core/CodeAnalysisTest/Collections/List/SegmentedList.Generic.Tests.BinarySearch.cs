@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             SegmentedList<T> list = GenericListFactory(count);
             foreach (T item in list)
-                while (list.Count((value) => value.Equals(item)) > 1)
-                    list.Remove(item);
+            while (list.Count((value) => value.Equals(item)) > 1)
+                list.Remove(item);
             list.Sort();
             SegmentedList<T> beforeList = list.ToSegmentedList();
 

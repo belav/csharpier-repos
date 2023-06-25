@@ -702,29 +702,29 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap
             );
 
             for (int i = 0; i < 2; i++)
-                for (int j = 0; j < 3; j++)
-                    for (int k = 0; k < 4; k++)
-                        SerializationTest.AssertEquals(
-                            "SomeValues._intsMulti[" + i + "," + j + "," + k + "]",
-                            _intsMulti[i, j, k],
-                            obj._intsMulti[i, j, k]
-                        );
+            for (int j = 0; j < 3; j++)
+            for (int k = 0; k < 4; k++)
+                SerializationTest.AssertEquals(
+                    "SomeValues._intsMulti[" + i + "," + j + "," + k + "]",
+                    _intsMulti[i, j, k],
+                    obj._intsMulti[i, j, k]
+                );
 
             for (int i = 0; i < _intsJagged.Length; i++)
-                for (int j = 0; j < _intsJagged[i].Length; j++)
-                    SerializationTest.AssertEquals(
-                        "SomeValues._intsJagged[" + i + "][" + j + "]",
-                        _intsJagged[i][j],
-                        obj._intsJagged[i][j]
-                    );
+            for (int j = 0; j < _intsJagged[i].Length; j++)
+                SerializationTest.AssertEquals(
+                    "SomeValues._intsJagged[" + i + "][" + j + "]",
+                    _intsJagged[i][j],
+                    obj._intsJagged[i][j]
+                );
 
             for (int i = 0; i < 2; i++)
-                for (int j = 0; j < 3; j++)
-                    SerializationTest.AssertEquals(
-                        "SomeValues._simplesMulti[" + i + "," + j + "]",
-                        _simplesMulti[i, j],
-                        obj._simplesMulti[i, j]
-                    );
+            for (int j = 0; j < 3; j++)
+                SerializationTest.AssertEquals(
+                    "SomeValues._simplesMulti[" + i + "," + j + "]",
+                    _simplesMulti[i, j],
+                    obj._simplesMulti[i, j]
+                );
 
             for (int i = 0; i < _simplesJagged.Length; i++)
                 SerializationTest.EqualsArray(

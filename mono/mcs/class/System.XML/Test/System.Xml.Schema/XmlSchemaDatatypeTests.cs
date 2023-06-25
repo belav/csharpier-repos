@@ -260,8 +260,8 @@ namespace MonoTests.System.Xml
             // this method is used only to detect user-defined
             // simpleType derivation.
             foreach (string b in allTypes)
-                foreach (string d in allTypes)
-                    AssertType.AreEqual(b == d, GetDatatype(d).IsDerivedFrom(GetDatatype(b)), b);
+            foreach (string d in allTypes)
+                AssertType.AreEqual(b == d, GetDatatype(d).IsDerivedFrom(GetDatatype(b)), b);
 
             AssertType.IsFalse(GetDatatype("string").IsDerivedFrom(null), "null arg");
         }

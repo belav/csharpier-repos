@@ -42,9 +42,9 @@ public class Test
         Console.WriteLine("Repeat = " + repeat);
 
         for (int i = 0; i < repeat; i++)
-            for (int j = 0; j < 500000000; j++)
-                if (test0() != 10)
-                    return 1;
+        for (int j = 0; j < 500000000; j++)
+            if (test0() != 10)
+                return 1;
 
         return 0;
     }

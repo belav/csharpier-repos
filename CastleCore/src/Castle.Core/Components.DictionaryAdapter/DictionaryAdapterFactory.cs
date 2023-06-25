@@ -608,10 +608,10 @@ namespace Castle.Components.DictionaryAdapter
             foreach (
                 var reflectedType in types.Where(t => InfrastructureTypes.Contains(t) == false)
             )
-                foreach (var property in reflectedType.GetProperties(publicBindings))
-                {
-                    onProperty(property, reflectedType);
-                }
+            foreach (var property in reflectedType.GetProperties(publicBindings))
+            {
+                onProperty(property, reflectedType);
+            }
         }
 
         private static void AddDefaultGetter(PropertyDescriptor descriptor)

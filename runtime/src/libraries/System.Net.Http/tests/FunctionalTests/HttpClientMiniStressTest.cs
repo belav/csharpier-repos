@@ -250,15 +250,15 @@ namespace System.Net.Http.Functional.Tests
         public static IEnumerable<object[]> GetStressOptions()
         {
             foreach (int numRequests in new[] { 5000 }) // number of requests
-                foreach (int dop in new[] { 1, 32 }) // number of threads
-                    foreach (
-                        var completionoption in new[]
-                        {
-                            HttpCompletionOption.ResponseContentRead,
-                            HttpCompletionOption.ResponseHeadersRead
-                        }
-                    )
-                        yield return new object[] { numRequests, dop, completionoption };
+            foreach (int dop in new[] { 1, 32 }) // number of threads
+            foreach (
+                var completionoption in new[]
+                {
+                    HttpCompletionOption.ResponseContentRead,
+                    HttpCompletionOption.ResponseHeadersRead
+                }
+            )
+                yield return new object[] { numRequests, dop, completionoption };
         }
 
         private void CreateServerAndGet(
@@ -319,9 +319,9 @@ namespace System.Net.Http.Functional.Tests
         public static IEnumerable<object[]> PostStressOptions()
         {
             foreach (int numRequests in new[] { 5000 }) // number of requests
-                foreach (int dop in new[] { 1, 32 }) // number of threads
-                    foreach (int numBytes in new[] { 0, 100 }) // number of bytes to post
-                        yield return new object[] { numRequests, dop, numBytes };
+            foreach (int dop in new[] { 1, 32 }) // number of threads
+            foreach (int numBytes in new[] { 0, 100 }) // number of bytes to post
+                yield return new object[] { numRequests, dop, numBytes };
         }
 
         [ConditionalFact(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]

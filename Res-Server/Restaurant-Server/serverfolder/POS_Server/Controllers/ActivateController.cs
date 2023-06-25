@@ -66,13 +66,11 @@ namespace POS_Server.Controllers
             )
             {
                 foreach (ManagementObject logicalDisk in searcher.Get())
-                    foreach (
-                        ManagementObject partition in logicalDisk.GetRelated("Win32_DiskPartition")
-                    )
-                        foreach (
-                            ManagementObject diskDrive in partition.GetRelated("Win32_DiskDrive")
-                        )
-                            return diskDrive["SerialNumber"].ToString();
+                foreach (
+                    ManagementObject partition in logicalDisk.GetRelated("Win32_DiskPartition")
+                )
+                foreach (ManagementObject diskDrive in partition.GetRelated("Win32_DiskDrive"))
+                    return diskDrive["SerialNumber"].ToString();
             }
 
             return null;

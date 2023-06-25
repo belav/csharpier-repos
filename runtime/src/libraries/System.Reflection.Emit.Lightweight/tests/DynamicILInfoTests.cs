@@ -1366,12 +1366,12 @@ namespace System.Reflection.Emit.Tests
             int b = 8;
             int[,] array = new int[a, b];
             for (int i = 0; i < a; i++)
-                for (int j = 0; j < b; j++)
-                    array[i, j] = i * j;
+            for (int j = 0; j < b; j++)
+                array[i, j] = i * j;
 
             for (int i = 1; i < a; i++)
-                for (int j = 1; j < b; j++)
-                    array[i, j] += array[i - 1, j - 1];
+            for (int j = 1; j < b; j++)
+                array[i, j] += array[i - 1, j - 1];
 
             return array[a - 1, b - 1];
         }

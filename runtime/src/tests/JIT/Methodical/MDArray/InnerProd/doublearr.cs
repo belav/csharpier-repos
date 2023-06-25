@@ -227,8 +227,8 @@ namespace Test_doublearr_InnerProd
             double[,,] imr3d = new double[size, 2, size];
 
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                    imr3d[i, 0, j] = 1.0;
+            for (int j = 0; j < size; j++)
+                imr3d[i, 0, j] = 1.0;
 
             double[][] refa3d = new double[size][];
             double[][] refb3d = new double[size][];

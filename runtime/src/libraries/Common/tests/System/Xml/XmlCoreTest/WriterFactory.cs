@@ -459,12 +459,12 @@ namespace XmlCoreTest.Common
                         if ((string)AttNames[k] == ActName)
                         {
                             for (int m = 0; m < ((string)AttScopes[k]).Length; m++)
-                                for (int n = 0; n < Scope.Length; n++)
-                                    if (((string)AttScopes[k])[m] == Scope[n])
-                                    {
-                                        CError.WriteLine("Invalid Prefix: '" + ActName + "'");
-                                        return false;
-                                    }
+                            for (int n = 0; n < Scope.Length; n++)
+                                if (((string)AttScopes[k])[m] == Scope[n])
+                                {
+                                    CError.WriteLine("Invalid Prefix: '" + ActName + "'");
+                                    return false;
+                                }
                         }
                     }
                     AttNames.Add(ActName);

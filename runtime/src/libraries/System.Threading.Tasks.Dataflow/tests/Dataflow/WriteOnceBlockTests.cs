@@ -73,56 +73,53 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestLinkToOptions()
         {
             foreach (bool consumeToAccept in DataflowTestHelpers.BooleanValues)
-                foreach (bool propagateCompletion in DataflowTestHelpers.BooleanValues)
-                    foreach (bool append in DataflowTestHelpers.BooleanValues)
-                        foreach (int maxMessages in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
-                        {
-                            var wob = consumeToAccept
-                                ? new WriteOnceBlock<int>(i => i)
-                                : new WriteOnceBlock<int>(null);
+            foreach (bool propagateCompletion in DataflowTestHelpers.BooleanValues)
+            foreach (bool append in DataflowTestHelpers.BooleanValues)
+            foreach (int maxMessages in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
+            {
+                var wob = consumeToAccept
+                    ? new WriteOnceBlock<int>(i => i)
+                    : new WriteOnceBlock<int>(null);
 
-                            int result = 0;
-                            const int Count = 10;
-                            Assert.True(Count % 2 == 0);
-                            var targets = Enumerable
-                                .Range(0, Count)
-                                .Select(
-                                    i =>
-                                        new ActionBlock<int>(_ => Interlocked.Increment(ref result))
-                                )
-                                .ToArray();
-                            var options = new DataflowLinkOptions
-                            {
-                                MaxMessages = maxMessages,
-                                Append = append,
-                                PropagateCompletion = propagateCompletion
-                            };
+                int result = 0;
+                const int Count = 10;
+                Assert.True(Count % 2 == 0);
+                var targets = Enumerable
+                    .Range(0, Count)
+                    .Select(i => new ActionBlock<int>(_ => Interlocked.Increment(ref result)))
+                    .ToArray();
+                var options = new DataflowLinkOptions
+                {
+                    MaxMessages = maxMessages,
+                    Append = append,
+                    PropagateCompletion = propagateCompletion
+                };
 
-                            for (int i = 0; i < Count / 2; i++)
-                            {
-                                wob.LinkTo(targets[i], options, f => false);
-                                wob.LinkTo(targets[i], options);
-                            }
-                            wob.Post(1);
-                            for (int i = Count / 2; i < Count; i++)
-                            {
-                                wob.LinkTo(targets[i], options);
-                            }
+                for (int i = 0; i < Count / 2; i++)
+                {
+                    wob.LinkTo(targets[i], options, f => false);
+                    wob.LinkTo(targets[i], options);
+                }
+                wob.Post(1);
+                for (int i = Count / 2; i < Count; i++)
+                {
+                    wob.LinkTo(targets[i], options);
+                }
 
-                            await wob.Completion;
-                            if (propagateCompletion)
-                            {
-                                await Task.WhenAll(from target in targets select target.Completion);
-                                Assert.Equal(expected: Count, actual: result);
-                            }
-                            else
-                            {
-                                // This should never fail, but there is a race such that it won't always
-                                // be testing what we want it to test.  Doing so would mean waiting
-                                // for an arbitrary period of time to ensure something hasn't happened.
-                                Assert.All(targets, t => Assert.False(t.Completion.IsCompleted));
-                            }
-                        }
+                await wob.Completion;
+                if (propagateCompletion)
+                {
+                    await Task.WhenAll(from target in targets select target.Completion);
+                    Assert.Equal(expected: Count, actual: result);
+                }
+                else
+                {
+                    // This should never fail, but there is a race such that it won't always
+                    // be testing what we want it to test.  Doing so would mean waiting
+                    // for an arbitrary period of time to ensure something hasn't happened.
+                    Assert.All(targets, t => Assert.False(t.Completion.IsCompleted));
+                }
+            }
         }
 
         [Fact]

@@ -232,8 +232,8 @@ namespace Test_jaggedarr_InnerProd
             imr3d[0] = new double[size + 5, size + 4, size + 3];
 
             for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
-                    imr3d[0][size, i, j] = 1;
+            for (int j = 0; j < size; j++)
+                imr3d[0][size, i, j] = 1;
 
             double[][] refa3d = new double[size][];
             double[][] refb3d = new double[size][];

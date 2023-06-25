@@ -200,8 +200,8 @@ public class AssignRect : AssignStruct
         ByteMark.randnum(13);
 
         for (i = 0; i < global.ASSIGNROWS; i++)
-            for (j = 0; j < global.ASSIGNROWS; j++)
-                arraybase[i, j] = ByteMark.abs_randwc(5000000);
+        for (j = 0; j < global.ASSIGNROWS; j++)
+            arraybase[i, j] = ByteMark.abs_randwc(5000000);
         return;
     }
 
@@ -218,8 +218,8 @@ public class AssignRect : AssignStruct
             j;
 
         for (i = 0; i < global.ASSIGNROWS; i++)
-            for (j = 0; j < global.ASSIGNCOLS; j++)
-                arrayto[i, j] = arrayfrom[i, j];
+        for (j = 0; j < global.ASSIGNCOLS; j++)
+            arrayto[i, j] = arrayfrom[i, j];
 
         return;
     }
@@ -330,8 +330,8 @@ public class AssignRect : AssignStruct
         ** no one is yet assigned, eliminated, or anything.
         */
         for (i = 0; i < global.ASSIGNROWS; i++)
-            for (j = 0; j < global.ASSIGNCOLS; j++)
-                assignedtableau[i, j] = 0;
+        for (j = 0; j < global.ASSIGNCOLS; j++)
+            assignedtableau[i, j] = 0;
 
         totnumassigns = 0;
         do

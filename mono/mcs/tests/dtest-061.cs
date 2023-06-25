@@ -22,8 +22,8 @@ namespace Test
             var tester = new Program();
 
             foreach (int baseVal in testValues)
-                foreach (int amt in testValues)
-                    tester.ShiftTest(baseVal, amt);
+            foreach (int amt in testValues)
+                tester.ShiftTest(baseVal, amt);
         }
 
         public static void AreEqual<A, B>(A a, B b)

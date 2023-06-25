@@ -707,21 +707,21 @@ public class Neural : NNetStruct
             j;
 
         for (i = 0; i < MID_SIZE; i++)
-            for (j = 0; j < IN_SIZE; j++)
-            {
-                mid_wt_change[i, j] = mid_wt_cum_change[i, j];
-                /*
-                ** Zero it out for next pass accumulation.
-                */
-                mid_wt_cum_change[i, j] = 0.0;
-            }
+        for (j = 0; j < IN_SIZE; j++)
+        {
+            mid_wt_change[i, j] = mid_wt_cum_change[i, j];
+            /*
+            ** Zero it out for next pass accumulation.
+            */
+            mid_wt_cum_change[i, j] = 0.0;
+        }
 
         for (i = 0; i < OUT_SIZE; i++)
-            for (j = 0; j < MID_SIZE; j++)
-            {
-                out_wt_change[i, j] = out_wt_cum_change[i, j];
-                out_wt_cum_change[i, j] = 0.0;
-            }
+        for (j = 0; j < MID_SIZE; j++)
+        {
+            out_wt_change[i, j] = out_wt_cum_change[i, j];
+            out_wt_cum_change[i, j] = 0.0;
+        }
 
         return;
     }

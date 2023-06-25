@@ -97,8 +97,8 @@ namespace System.Xml.XmlDocumentTests
             var xml = @" <WC> 	<![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></WC>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
@@ -107,60 +107,60 @@ namespace System.Xml.XmlDocumentTests
             var xml = @"<CT><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]>text</CT>";
 
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(xml, insertType, nodeType);
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(xml, insertType, nodeType);
         }
 
         [Fact]
         public static void Whitespace_Whitespace()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(
-                        new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.Whitespace },
-                        insertType,
-                        nodeType
-                    );
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.Whitespace },
+                    insertType,
+                    nodeType
+                );
         }
 
         [Fact]
         public static void SignificantWhitespace_SignificantWhitespace()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(
-                        new XmlNodeType[]
-                        {
-                            XmlNodeType.SignificantWhitespace,
-                            XmlNodeType.SignificantWhitespace
-                        },
-                        insertType,
-                        nodeType
-                    );
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[]
+                    {
+                        XmlNodeType.SignificantWhitespace,
+                        XmlNodeType.SignificantWhitespace
+                    },
+                    insertType,
+                    nodeType
+                );
         }
 
         [Fact]
         public static void Text_Text()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(
-                        new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.Text },
-                        insertType,
-                        nodeType
-                    );
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.Text },
+                    insertType,
+                    nodeType
+                );
         }
 
         [Fact]
         public static void Text_SignificantWhitespace()
         {
             foreach (var insertType in s_InsertTypes)
-                foreach (var nodeType in s_XmlNodeTypes)
-                    TwoTextNodeBase(
-                        new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.SignificantWhitespace },
-                        insertType,
-                        nodeType
-                    );
+            foreach (var nodeType in s_XmlNodeTypes)
+                TwoTextNodeBase(
+                    new XmlNodeType[] { XmlNodeType.Text, XmlNodeType.SignificantWhitespace },
+                    insertType,
+                    nodeType
+                );
         }
     }
 }

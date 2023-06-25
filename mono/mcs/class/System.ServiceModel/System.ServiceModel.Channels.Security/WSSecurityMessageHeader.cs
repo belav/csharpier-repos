@@ -244,12 +244,12 @@ namespace System.ServiceModel.Channels.Security
             Collection<string> references = new Collection<string>();
 
             foreach (ReferenceList rlist in header.FindAll<ReferenceList>())
-                foreach (EncryptedReference encref in rlist)
-                    references.Add(StripUri(encref.Uri));
+            foreach (EncryptedReference encref in rlist)
+                references.Add(StripUri(encref.Uri));
 
             foreach (WrappedKeySecurityToken wk in header.FindAll<WrappedKeySecurityToken>())
-                foreach (EncryptedReference er in wk.ReferenceList)
-                    references.Add(StripUri(er.Uri));
+            foreach (EncryptedReference er in wk.ReferenceList)
+                references.Add(StripUri(er.Uri));
 
             Collection<XmlElement> list = new Collection<XmlElement>();
             foreach (string uri in references)

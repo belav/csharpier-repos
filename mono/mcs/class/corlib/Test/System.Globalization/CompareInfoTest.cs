@@ -183,8 +183,8 @@ namespace MonoTests.System.Globalization
             byte[] tmp = invariant.GetSortKey(test).KeyData;
             int idx = 0;
             for (int i = 0; i < 4; i++, idx++)
-                for (; tmp[idx] != 1; idx++)
-                    ;
+            for (; tmp[idx] != 1; idx++)
+                ;
             byte[] actual = new byte[tmp.Length - idx];
             Array.Copy(tmp, idx, actual, 0, actual.Length);
             Assert.AreEqual(expected, actual, message);

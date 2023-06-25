@@ -567,94 +567,88 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestMaxNumberOfGroups()
         {
             foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 2, 3 })
-                foreach (bool greedy in DataflowTestHelpers.BooleanValues)
-                {
-                    var join = new JoinBlock<int, int>(
-                        new GroupingDataflowBlockOptions
-                        {
-                            MaxNumberOfGroups = 2,
-                            BoundedCapacity = 2
-                        }
-                    );
-                    Task<bool>[] sends1 = Enumerable
-                        .Range(0, 10)
-                        .Select(i => join.Target1.SendAsync(i))
-                        .ToArray();
-                    Task<bool>[] sends2 = Enumerable
-                        .Range(0, 10)
-                        .Select(i => join.Target2.SendAsync(i))
-                        .ToArray();
-                    var ab = new ActionBlock<Tuple<int, int>>(
-                        i => { },
-                        new ExecutionDataflowBlockOptions { BoundedCapacity = 1 }
-                    );
-                    join.LinkTo(ab, new DataflowLinkOptions { PropagateCompletion = true });
-                    await join.Completion;
-                    await Task.WhenAll(sends1);
-                    await Task.WhenAll(sends2);
-                }
+            foreach (bool greedy in DataflowTestHelpers.BooleanValues)
+            {
+                var join = new JoinBlock<int, int>(
+                    new GroupingDataflowBlockOptions { MaxNumberOfGroups = 2, BoundedCapacity = 2 }
+                );
+                Task<bool>[] sends1 = Enumerable
+                    .Range(0, 10)
+                    .Select(i => join.Target1.SendAsync(i))
+                    .ToArray();
+                Task<bool>[] sends2 = Enumerable
+                    .Range(0, 10)
+                    .Select(i => join.Target2.SendAsync(i))
+                    .ToArray();
+                var ab = new ActionBlock<Tuple<int, int>>(
+                    i => { },
+                    new ExecutionDataflowBlockOptions { BoundedCapacity = 1 }
+                );
+                join.LinkTo(ab, new DataflowLinkOptions { PropagateCompletion = true });
+                await join.Completion;
+                await Task.WhenAll(sends1);
+                await Task.WhenAll(sends2);
+            }
         }
 
         [Fact]
         public async Task TestTree()
         {
             foreach (bool greedy in DataflowTestHelpers.BooleanValues)
-                foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 1 })
-                    foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1 })
-                    {
-                        var gdbo = new GroupingDataflowBlockOptions
-                        {
-                            Greedy = greedy,
-                            BoundedCapacity = boundedCapacity,
-                            MaxMessagesPerTask = maxMessagesPerTask
-                        };
-                        var linkOptions = new DataflowLinkOptions { PropagateCompletion = true };
+            foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 1 })
+            foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1 })
+            {
+                var gdbo = new GroupingDataflowBlockOptions
+                {
+                    Greedy = greedy,
+                    BoundedCapacity = boundedCapacity,
+                    MaxMessagesPerTask = maxMessagesPerTask
+                };
+                var linkOptions = new DataflowLinkOptions { PropagateCompletion = true };
 
-                        var join1 = new JoinBlock<int, string>(gdbo);
-                        var join2 = new JoinBlock<double, short>(gdbo);
-                        var join5 = new JoinBlock<Tuple<int, string>, Tuple<double, short>>(gdbo);
+                var join1 = new JoinBlock<int, string>(gdbo);
+                var join2 = new JoinBlock<double, short>(gdbo);
+                var join5 = new JoinBlock<Tuple<int, string>, Tuple<double, short>>(gdbo);
 
-                        var join3 = new JoinBlock<string, object>(gdbo);
-                        var join4 = new JoinBlock<float, IntPtr>(gdbo);
-                        var join6 = new JoinBlock<Tuple<string, object>, Tuple<float, IntPtr>>(
-                            gdbo
-                        );
+                var join3 = new JoinBlock<string, object>(gdbo);
+                var join4 = new JoinBlock<float, IntPtr>(gdbo);
+                var join6 = new JoinBlock<Tuple<string, object>, Tuple<float, IntPtr>>(gdbo);
 
-                        var join7 = new JoinBlock<
-                            Tuple<Tuple<int, string>, Tuple<double, short>>,
-                            Tuple<Tuple<string, object>, Tuple<float, IntPtr>>
-                        >(gdbo);
+                var join7 = new JoinBlock<
+                    Tuple<Tuple<int, string>, Tuple<double, short>>,
+                    Tuple<Tuple<string, object>, Tuple<float, IntPtr>>
+                >(gdbo);
 
-                        int count = 0;
-                        var sink = new ActionBlock<
-                            Tuple<
-                                Tuple<Tuple<int, string>, Tuple<double, short>>,
-                                Tuple<Tuple<string, object>, Tuple<float, IntPtr>>
-                            >
-                        >(i => count++);
+                int count = 0;
+                var sink = new ActionBlock<
+                    Tuple<
+                        Tuple<Tuple<int, string>, Tuple<double, short>>,
+                        Tuple<Tuple<string, object>, Tuple<float, IntPtr>>
+                    >
+                >(i => count++);
 
-                        join1.LinkTo(new ActionBlock<Tuple<int, string>>(item => { }), t => false); // ensure don't propagate across false filtered link
-                        join1.LinkTo(join5.Target1, linkOptions, t => true); // ensure joins work through filters
-                        join2.LinkTo(join5.Target2, linkOptions);
-                        join3.LinkTo(join6.Target1, linkOptions, t => true);
-                        join4.LinkTo(join6.Target2, linkOptions);
-                        join5.LinkTo(join7.Target1, linkOptions, t => true);
-                        join6.LinkTo(join7.Target2, linkOptions);
-                        join7.LinkTo(sink, linkOptions);
+                join1.LinkTo(new ActionBlock<Tuple<int, string>>(item => { }), t => false); // ensure don't propagate across false filtered link
+                join1.LinkTo(join5.Target1, linkOptions, t => true); // ensure joins work through filters
+                join2.LinkTo(join5.Target2, linkOptions);
+                join3.LinkTo(join6.Target1, linkOptions, t => true);
+                join4.LinkTo(join6.Target2, linkOptions);
+                join5.LinkTo(join7.Target1, linkOptions, t => true);
+                join6.LinkTo(join7.Target2, linkOptions);
+                join7.LinkTo(sink, linkOptions);
 
-                        const int Messages = 5;
-                        CreateFillLink<int>(Messages, join1.Target1);
-                        CreateFillLink<string>(Messages, join1.Target2);
-                        CreateFillLink<double>(Messages, join2.Target1);
-                        CreateFillLink<short>(Messages, join2.Target2);
-                        CreateFillLink<string>(Messages, join3.Target1);
-                        CreateFillLink<object>(Messages, join3.Target2);
-                        CreateFillLink<float>(Messages, join4.Target1);
-                        CreateFillLink<IntPtr>(Messages, join4.Target2);
+                const int Messages = 5;
+                CreateFillLink<int>(Messages, join1.Target1);
+                CreateFillLink<string>(Messages, join1.Target2);
+                CreateFillLink<double>(Messages, join2.Target1);
+                CreateFillLink<short>(Messages, join2.Target2);
+                CreateFillLink<string>(Messages, join3.Target1);
+                CreateFillLink<object>(Messages, join3.Target2);
+                CreateFillLink<float>(Messages, join4.Target1);
+                CreateFillLink<IntPtr>(Messages, join4.Target2);
 
-                        await sink.Completion;
-                        Assert.Equal(expected: Messages, actual: count);
-                    }
+                await sink.Completion;
+                Assert.Equal(expected: Messages, actual: count);
+            }
         }
 
         private static void CreateFillLink<T>(int messages, ITargetBlock<T> target)

@@ -290,9 +290,9 @@ namespace System.Xaml
                     continue;
                 bool mismatch = false;
                 foreach (var pi in pis)
-                    for (int i = 0; i < args.Length; i++)
-                        if (!args.Any(a => a.ConstructorArgumentName() == pi.Name))
-                            mismatch = true;
+                for (int i = 0; i < args.Length; i++)
+                    if (!args.Any(a => a.ConstructorArgumentName() == pi.Name))
+                        mismatch = true;
                 if (mismatch)
                     continue;
                 return args.OrderBy(

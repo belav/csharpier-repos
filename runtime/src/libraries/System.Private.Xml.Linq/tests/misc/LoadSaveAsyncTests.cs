@@ -334,9 +334,9 @@ namespace CoreXml.Test.XLinq
             get
             {
                 foreach (bool doc in new[] { true, false })
-                    foreach (LoadOptions loadOptions in Enum.GetValues(typeof(LoadOptions)))
-                        foreach (SaveOptions saveOptions in Enum.GetValues(typeof(SaveOptions)))
-                            yield return new object[] { doc, loadOptions, saveOptions };
+                foreach (LoadOptions loadOptions in Enum.GetValues(typeof(LoadOptions)))
+                foreach (SaveOptions saveOptions in Enum.GetValues(typeof(SaveOptions)))
+                    yield return new object[] { doc, loadOptions, saveOptions };
             }
         }
 
@@ -345,8 +345,8 @@ namespace CoreXml.Test.XLinq
             get
             {
                 foreach (bool isAsync in new[] { true, false })
-                    foreach (SaveOptions saveOptions in Enum.GetValues(typeof(SaveOptions)))
-                        yield return new object[] { isAsync, saveOptions };
+                foreach (SaveOptions saveOptions in Enum.GetValues(typeof(SaveOptions)))
+                    yield return new object[] { isAsync, saveOptions };
             }
         }
 

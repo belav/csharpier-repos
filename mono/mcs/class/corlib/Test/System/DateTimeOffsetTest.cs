@@ -330,12 +330,12 @@ namespace MonoTests.System
             };
 
             foreach (DateTimeOffset dto in dtos)
-                foreach (string format in formats)
-                {
-                    string serialized = dto.ToString(format, fp);
-                    //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
-                    Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
-                }
+            foreach (string format in formats)
+            {
+                string serialized = dto.ToString(format, fp);
+                //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
+                Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
+            }
         }
 
         //
@@ -387,12 +387,12 @@ namespace MonoTests.System
             };
 
             foreach (DateTimeOffset dto in dtos)
-                foreach (string format in formats)
-                {
-                    string serialized = dto.ToString(format, fp);
-                    //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
-                    Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
-                }
+            foreach (string format in formats)
+            {
+                string serialized = dto.ToString(format, fp);
+                //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
+                Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
+            }
         }
 
         [Test]
@@ -495,12 +495,12 @@ namespace MonoTests.System
             string[] formats = { "dddd, dd MMMM yyyy HH:mm:ss zzz", };
 
             foreach (DateTimeOffset dto in dtos)
-                foreach (string format in formats)
-                {
-                    string serialized = dto.ToString(format, fp);
-                    //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
-                    Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
-                }
+            foreach (string format in formats)
+            {
+                string serialized = dto.ToString(format, fp);
+                //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
+                Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
+            }
         }
 
         [Test]
@@ -599,12 +599,12 @@ namespace MonoTests.System
             };
 
             foreach (DateTimeOffset dto in dtos)
-                foreach (string format in formats)
-                {
-                    string serialized = dto.ToString(format, fp);
-                    //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
-                    Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
-                }
+            foreach (string format in formats)
+            {
+                string serialized = dto.ToString(format, fp);
+                //Console.WriteLine ("{0} {1} {2}", format, dto, serialized);
+                Assert.AreEqual(dto, DateTimeOffset.ParseExact(serialized, format, fp), format);
+            }
         }
 
         [Test]

@@ -129,8 +129,8 @@ namespace MultiCollection
             get
             {
                 foreach (W w in dict.Values)
-                    foreach (V v in w)
-                        yield return v;
+                foreach (V v in w)
+                    yield return v;
             }
         }
     }

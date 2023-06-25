@@ -26,40 +26,38 @@ namespace System.Linq.Expressions.Tests
                     assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                {
-                    ConstantExpression xExp = Expression.Constant(x);
-                    ConstantExpression yExp = Expression.Constant(y);
-                    Expression woAssign = withoutAssignment(xExp, yExp);
-                    ParameterExpression variable = Expression.Variable(type);
-                    Expression initAssign = Expression.Assign(variable, xExp);
-                    Expression assignment = withAssignment(variable, yExp);
-                    Expression wAssign = Expression.Block(
-                        new ParameterExpression[] { variable },
-                        initAssign,
-                        assignment
-                    );
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(Expression.Equal(woAssign, wAssign))
-                            .Compile(useInterpreter)()
-                    );
-                    LabelTarget target = Expression.Label(type);
-                    Expression wAssignReturningVariable = Expression.Block(
-                        new ParameterExpression[] { variable },
-                        initAssign,
-                        assignment,
-                        Expression.Return(target, variable),
-                        Expression.Label(target, Expression.Default(type))
-                    );
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
-                            .Compile(useInterpreter)()
-                    );
-                }
+            foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
+            {
+                ConstantExpression xExp = Expression.Constant(x);
+                ConstantExpression yExp = Expression.Constant(y);
+                Expression woAssign = withoutAssignment(xExp, yExp);
+                ParameterExpression variable = Expression.Variable(type);
+                Expression initAssign = Expression.Assign(variable, xExp);
+                Expression assignment = withAssignment(variable, yExp);
+                Expression wAssign = Expression.Block(
+                    new ParameterExpression[] { variable },
+                    initAssign,
+                    assignment
+                );
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, wAssign))
+                        .Compile(useInterpreter)()
+                );
+                LabelTarget target = Expression.Label(type);
+                Expression wAssignReturningVariable = Expression.Block(
+                    new ParameterExpression[] { variable },
+                    initAssign,
+                    assignment,
+                    Expression.Return(target, variable),
+                    Expression.Label(target, Expression.Default(type))
+                );
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, wAssignReturningVariable))
+                        .Compile(useInterpreter)()
+                );
+            }
         }
 
         private class Box<T>
@@ -95,39 +93,37 @@ namespace System.Linq.Expressions.Tests
                     assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                {
-                    ConstantExpression xExp = Expression.Constant(x);
-                    ConstantExpression yExp = Expression.Constant(y);
-                    Expression woAssign = withoutAssignment(xExp, yExp);
-                    Type boxType = typeof(Box<>).MakeGenericType(type);
-                    object box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
-                    Expression boxExp = Expression.Constant(box);
-                    Expression property = Expression.Property(boxExp, boxType.GetProperty("Value"));
-                    Expression assignment = withAssignment(property, yExp);
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(Expression.Equal(woAssign, assignment))
-                            .Compile(useInterpreter)()
-                    );
-                    LabelTarget target = Expression.Label(type);
-                    box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
-                    boxExp = Expression.Constant(box);
-                    property = Expression.Property(boxExp, boxType.GetProperty("Value"));
-                    assignment = withAssignment(property, yExp);
-                    Expression wAssignReturningVariable = Expression.Block(
-                        assignment,
-                        Expression.Return(target, property),
-                        Expression.Label(target, Expression.Default(type))
-                    );
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
-                            .Compile(useInterpreter)()
-                    );
-                }
+            foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
+            {
+                ConstantExpression xExp = Expression.Constant(x);
+                ConstantExpression yExp = Expression.Constant(y);
+                Expression woAssign = withoutAssignment(xExp, yExp);
+                Type boxType = typeof(Box<>).MakeGenericType(type);
+                object box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
+                Expression boxExp = Expression.Constant(box);
+                Expression property = Expression.Property(boxExp, boxType.GetProperty("Value"));
+                Expression assignment = withAssignment(property, yExp);
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, assignment))
+                        .Compile(useInterpreter)()
+                );
+                LabelTarget target = Expression.Label(type);
+                box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
+                boxExp = Expression.Constant(box);
+                property = Expression.Property(boxExp, boxType.GetProperty("Value"));
+                assignment = withAssignment(property, yExp);
+                Expression wAssignReturningVariable = Expression.Block(
+                    assignment,
+                    Expression.Return(target, property),
+                    Expression.Label(target, Expression.Default(type))
+                );
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, wAssignReturningVariable))
+                        .Compile(useInterpreter)()
+                );
+            }
         }
 
         [Theory, PerCompilationType(nameof(AssignAndEquivalentMethods))]
@@ -146,31 +142,29 @@ namespace System.Linq.Expressions.Tests
                     assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                {
-                    ConstantExpression xExp = Expression.Constant(x);
-                    ConstantExpression yExp = Expression.Constant(y);
-                    Expression woAssign = withoutAssignment(xExp, yExp);
-                    Type boxType = typeof(Box<>).MakeGenericType(type);
-                    PropertyInfo prop = boxType.GetProperty("StaticValue");
-                    prop.SetValue(null, x);
-                    Expression property = Expression.Property(null, prop);
-                    Expression assignment = withAssignment(property, yExp);
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(Expression.Equal(woAssign, assignment))
-                            .Compile(useInterpreter)()
-                    );
-                    prop.SetValue(null, x);
-                    Expression wAssignReturningVariable = Expression.Block(assignment, property);
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
-                            .Compile(useInterpreter)()
-                    );
-                }
+            foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
+            {
+                ConstantExpression xExp = Expression.Constant(x);
+                ConstantExpression yExp = Expression.Constant(y);
+                Expression woAssign = withoutAssignment(xExp, yExp);
+                Type boxType = typeof(Box<>).MakeGenericType(type);
+                PropertyInfo prop = boxType.GetProperty("StaticValue");
+                prop.SetValue(null, x);
+                Expression property = Expression.Property(null, prop);
+                Expression assignment = withAssignment(property, yExp);
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, assignment))
+                        .Compile(useInterpreter)()
+                );
+                prop.SetValue(null, x);
+                Expression wAssignReturningVariable = Expression.Block(assignment, property);
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, wAssignReturningVariable))
+                        .Compile(useInterpreter)()
+                );
+            }
         }
 
         [Theory]
@@ -190,47 +184,45 @@ namespace System.Linq.Expressions.Tests
                     assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
             foreach (object x in new[] { 0, -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
-                {
-                    ConstantExpression xExp = Expression.Constant(x);
-                    ConstantExpression yExp = Expression.Constant(y);
-                    Expression woAssign = withoutAssignment(xExp, yExp);
-                    Type boxType = typeof(Box<>).MakeGenericType(type);
-                    object box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
-                    Expression boxExp = Expression.Constant(box);
-                    Expression property = Expression.Property(
-                        boxExp,
-                        boxType.GetProperty("Item"),
-                        Expression.Constant(0)
-                    );
-                    Expression assignment = withAssignment(property, yExp);
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(Expression.Equal(woAssign, assignment))
-                            .Compile(useInterpreter)()
-                    );
-                    LabelTarget target = Expression.Label(type);
-                    box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
-                    boxExp = Expression.Constant(box);
-                    property = Expression.Property(
-                        boxExp,
-                        boxType.GetProperty("Item"),
-                        Expression.Constant(0)
-                    );
-                    assignment = withAssignment(property, yExp);
-                    Expression wAssignReturningVariable = Expression.Block(
-                        assignment,
-                        Expression.Return(target, property),
-                        Expression.Label(target, Expression.Default(type))
-                    );
-                    Assert.True(
-                        Expression
-                            .Lambda<Func<bool>>(
-                                Expression.Equal(woAssign, wAssignReturningVariable)
-                            )
-                            .Compile(useInterpreter)()
-                    );
-                }
+            foreach (object y in new[] { -1, 1, 10 }.Select(i => Convert.ChangeType(i, type)))
+            {
+                ConstantExpression xExp = Expression.Constant(x);
+                ConstantExpression yExp = Expression.Constant(y);
+                Expression woAssign = withoutAssignment(xExp, yExp);
+                Type boxType = typeof(Box<>).MakeGenericType(type);
+                object box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
+                Expression boxExp = Expression.Constant(box);
+                Expression property = Expression.Property(
+                    boxExp,
+                    boxType.GetProperty("Item"),
+                    Expression.Constant(0)
+                );
+                Expression assignment = withAssignment(property, yExp);
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, assignment))
+                        .Compile(useInterpreter)()
+                );
+                LabelTarget target = Expression.Label(type);
+                box = boxType.GetConstructor(new[] { type }).Invoke(new object[] { x });
+                boxExp = Expression.Constant(box);
+                property = Expression.Property(
+                    boxExp,
+                    boxType.GetProperty("Item"),
+                    Expression.Constant(0)
+                );
+                assignment = withAssignment(property, yExp);
+                Expression wAssignReturningVariable = Expression.Block(
+                    assignment,
+                    Expression.Return(target, property),
+                    Expression.Label(target, Expression.Default(type))
+                );
+                Assert.True(
+                    Expression
+                        .Lambda<Func<bool>>(Expression.Equal(woAssign, wAssignReturningVariable))
+                        .Compile(useInterpreter)()
+                );
+            }
         }
 
         [Theory]

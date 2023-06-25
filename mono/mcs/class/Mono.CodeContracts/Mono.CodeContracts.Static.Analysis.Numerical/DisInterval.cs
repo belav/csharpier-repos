@@ -342,17 +342,17 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
 
             if (propagateTop || (left.IsNormal() && right.IsNormal()))
                 foreach (var leftIntv in left.intervals.AsEnumerable())
-                    foreach (var rightIntv in right.intervals.AsEnumerable())
-                    {
-                        var res = binop(leftIntv, rightIntv);
-                        if (res.IsTop)
-                            return TopValue;
-                        if (res.IsBottom)
-                            continue;
+                foreach (var rightIntv in right.intervals.AsEnumerable())
+                {
+                    var res = binop(leftIntv, rightIntv);
+                    if (res.IsTop)
+                        return TopValue;
+                    if (res.IsBottom)
+                        continue;
 
-                        hasNoNormals = false;
-                        intervals = intervals.Cons(res);
-                    }
+                    hasNoNormals = false;
+                    intervals = intervals.Cons(res);
+                }
             else
             {
                 var notTop = left.IsTop ? right : left;

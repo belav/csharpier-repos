@@ -2237,19 +2237,19 @@ namespace C5UnitTests.linkedlists.hashed
                 list.Insert(3, 777);
                 Assert.IsTrue(list.Check(), "list check after insert");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i < 3 || (i == 3 && j == 0) ? i : i + 1,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            i < 3 && i + j > 3 ? j + 1 : j,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i < 3 || (i == 3 && j == 0) ? i : i + 1,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        i < 3 && i + j > 3 ? j + 1 : j,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2259,19 +2259,19 @@ namespace C5UnitTests.linkedlists.hashed
                 list.RemoveAt(3);
                 Assert.IsTrue(list.Check(), "list check after remove");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i <= 3 ? i : i - 1,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            i <= 3 && i + j > 3 ? j - 1 : j,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i <= 3 ? i : i - 1,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        i <= 3 && i + j > 3 ? j - 1 : j,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2281,29 +2281,29 @@ namespace C5UnitTests.linkedlists.hashed
                 list.RemoveInterval(3, 2);
                 Assert.IsTrue(list.Check(), "list check after remove");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i <= 3
-                                ? i
-                                : i <= 5
-                                    ? 3
-                                    : i - 2,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            j == 0
-                                ? 0
-                                : i <= 3 && i + j > 4
-                                    ? j - 2
-                                    : i > 4 || i + j <= 3
-                                        ? j
-                                        : j - 1,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i <= 3
+                            ? i
+                            : i <= 5
+                                ? 3
+                                : i - 2,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        j == 0
+                            ? 0
+                            : i <= 3 && i + j > 4
+                                ? j - 2
+                                : i > 4 || i + j <= 3
+                                    ? j
+                                    : j - 1,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2313,11 +2313,11 @@ namespace C5UnitTests.linkedlists.hashed
                 list.InsertLast(777);
                 Assert.IsTrue(list.Check(), "list check after insert");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(i, views[i][j].Offset, "view[" + i + "][" + j + "] offset");
-                        Assert.AreEqual(j, views[i][j].Count, "view[" + i + "][" + j + "] count");
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(i, views[i][j].Offset, "view[" + i + "][" + j + "] offset");
+                    Assert.AreEqual(j, views[i][j].Count, "view[" + i + "][" + j + "] count");
+                }
             }
 
             [Test]
@@ -2327,19 +2327,19 @@ namespace C5UnitTests.linkedlists.hashed
                 list.RemoveAt(5);
                 Assert.IsTrue(list.Check(), "list check after remove");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i <= 5 ? i : i - 1,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            i <= 5 && i + j > 5 ? j - 1 : j,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i <= 5 ? i : i - 1,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        i <= 5 && i + j > 5 ? j - 1 : j,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2349,15 +2349,15 @@ namespace C5UnitTests.linkedlists.hashed
                 list.Insert(0, 777);
                 Assert.IsTrue(list.Check(), "list check after insert");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i == 0 && j == 0 ? 0 : i + 1,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(j, views[i][j].Count, "view[" + i + "][" + j + "] count");
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i == 0 && j == 0 ? 0 : i + 1,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(j, views[i][j].Count, "view[" + i + "][" + j + "] count");
+                }
             }
 
             [Test]
@@ -2367,19 +2367,19 @@ namespace C5UnitTests.linkedlists.hashed
                 list.RemoveAt(0);
                 Assert.IsTrue(list.Check(), "list check after remove");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i == 0 ? i : i - 1,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            i == 0 && j > 0 ? j - 1 : j,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i == 0 ? i : i - 1,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        i == 0 && j > 0 ? j - 1 : j,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2392,23 +2392,19 @@ namespace C5UnitTests.linkedlists.hashed
                 views[2][3].Clear();
                 Assert.IsTrue(list.Check(), "list check after clear");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i < 2
-                                ? i
-                                : i < 6
-                                    ? 2
-                                    : i - 3,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            s(i, j),
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i < 2
+                            ? i
+                            : i < 6
+                                ? 2
+                                : i - 3,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(s(i, j), views[i][j].Count, "view[" + i + "][" + j + "] count");
+                }
             }
 
             private int s(int i, int j)
@@ -2437,19 +2433,19 @@ namespace C5UnitTests.linkedlists.hashed
                 list.InsertAll(3, list2);
                 Assert.IsTrue(list.Check(), "list check after insertAll");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i < 3 || (i == 3 && j == 0) ? i : i + 5,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            i < 3 && i + j > 3 ? j + 5 : j,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i < 3 || (i == 3 && j == 0) ? i : i + 5,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        i < 3 && i + j > 3 ? j + 5 : j,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2464,19 +2460,19 @@ namespace C5UnitTests.linkedlists.hashed
                 list.View(1, 2).AddAll(list2);
                 Assert.IsTrue(list.Check(), "list check after AddAll");
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
-                    {
-                        Assert.AreEqual(
-                            i < 3 || (i == 3 && j == 0) ? i : i + 5,
-                            views[i][j].Offset,
-                            "view[" + i + "][" + j + "] offset"
-                        );
-                        Assert.AreEqual(
-                            i < 3 && i + j > 3 ? j + 5 : j,
-                            views[i][j].Count,
-                            "view[" + i + "][" + j + "] count"
-                        );
-                    }
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    Assert.AreEqual(
+                        i < 3 || (i == 3 && j == 0) ? i : i + 5,
+                        views[i][j].Offset,
+                        "view[" + i + "][" + j + "] offset"
+                    );
+                    Assert.AreEqual(
+                        i < 3 && i + j > 3 ? j + 5 : j,
+                        views[i][j].Count,
+                        "view[" + i + "][" + j + "] count"
+                    );
+                }
             }
 
             [Test]
@@ -2693,57 +2689,53 @@ namespace C5UnitTests.linkedlists.hashed
             {
                 int k = 0;
                 for (int i = 0; i < 7; i++)
-                    for (int j = 0; j < 7 - i; j++)
+                for (int j = 0; j < 7 - i; j++)
+                {
+                    if (
+                        i + j <= start
+                        || i >= start + count
+                        || (i <= start && i + j >= start + count)
+                        || (reverse && start <= i && start + count >= i + j)
+                    )
                     {
+                        try
+                        {
+                            k = views[i][j].Count;
+                        }
+                        catch (ViewDisposedException)
+                        {
+                            Assert.Fail("view[" + i + "][" + j + "] threw");
+                        }
+                        Assert.AreEqual(j, views[i][j].Count, "view[" + i + "][" + j + "] size");
                         if (
-                            i + j <= start
-                            || i >= start + count
-                            || (i <= start && i + j >= start + count)
-                            || (reverse && start <= i && start + count >= i + j)
-                        )
-                        {
-                            try
-                            {
-                                k = views[i][j].Count;
-                            }
-                            catch (ViewDisposedException)
-                            {
-                                Assert.Fail("view[" + i + "][" + j + "] threw");
-                            }
-                            Assert.AreEqual(
-                                j,
-                                views[i][j].Count,
-                                "view[" + i + "][" + j + "] size"
-                            );
-                            if (
-                                reverse
-                                && (
-                                    (j > 0 && start <= i && start + count >= i + j)
-                                    || (j == 0 && start < i && start + count > i)
-                                )
+                            reverse
+                            && (
+                                (j > 0 && start <= i && start + count >= i + j)
+                                || (j == 0 && start < i && start + count > i)
                             )
-                                Assert.AreEqual(
-                                    start + (start + count - i - j),
-                                    views[i][j].Offset,
-                                    "view[" + i + "][" + j + "] offset (mirrored)"
-                                );
-                            else
-                                Assert.AreEqual(
-                                    i,
-                                    views[i][j].Offset,
-                                    "view[" + i + "][" + j + "] offset"
-                                );
-                        }
+                        )
+                            Assert.AreEqual(
+                                start + (start + count - i - j),
+                                views[i][j].Offset,
+                                "view[" + i + "][" + j + "] offset (mirrored)"
+                            );
                         else
-                        {
-                            try
-                            {
-                                k = views[i][j].Count;
-                                Assert.Fail("view[" + i + "][" + j + "] no throw");
-                            }
-                            catch (ViewDisposedException) { }
-                        }
+                            Assert.AreEqual(
+                                i,
+                                views[i][j].Offset,
+                                "view[" + i + "][" + j + "] offset"
+                            );
                     }
+                    else
+                    {
+                        try
+                        {
+                            k = views[i][j].Count;
+                            Assert.Fail("view[" + i + "][" + j + "] no throw");
+                        }
+                        catch (ViewDisposedException) { }
+                    }
+                }
             }
 
             [Test]

@@ -959,8 +959,8 @@ class Tests
     {
         var arr = new LargeStruct2[10, 10];
         for (int i = 0; i < 10; ++i)
-            for (int j = 0; j < 10; ++j)
-                arr[i, j].x = new FpStruct();
+        for (int j = 0; j < 10; ++j)
+            arr[i, j].x = new FpStruct();
 
         var s1 = new FpStruct()
         {

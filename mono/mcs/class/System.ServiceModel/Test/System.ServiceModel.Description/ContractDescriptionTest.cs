@@ -797,9 +797,9 @@ namespace MonoTests.System.ServiceModel.Description
                 typeof(Dealerinfo.wsvDealerinfo.WSVDealerInfoServices)
             );
             foreach (var od in cd.Operations)
-                foreach (var md in od.Messages)
-                    if (md.Action == "*") // return
-                        Assert.IsNotNull(md.Body.ReturnValue, od.Name);
+            foreach (var md in od.Messages)
+                if (md.Action == "*") // return
+                    Assert.IsNotNull(md.Body.ReturnValue, od.Name);
         }
 
         [Test]

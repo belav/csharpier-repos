@@ -333,8 +333,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             var i = 0;
             foreach (var item in source)
-                foreach (var subitem in collectionSelector(item, i++))
-                    yield return resultSelector(item, subitem);
+            foreach (var subitem in collectionSelector(item, i++))
+                yield return resultSelector(item, subitem);
         }
 
         /// <summary>

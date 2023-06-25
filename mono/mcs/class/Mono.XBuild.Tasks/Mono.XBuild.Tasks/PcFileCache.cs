@@ -488,8 +488,8 @@ namespace Mono.PkgConfig
                     Path.Combine("libdata", "pkgconfig"),
                 };
                 foreach (string prefix in systemPrefixes)
-                    foreach (string suffix in suffixes)
-                        yield return Path.Combine(prefix, suffix);
+                foreach (string suffix in suffixes)
+                    yield return Path.Combine(prefix, suffix);
             }
         }
 

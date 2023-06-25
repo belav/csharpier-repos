@@ -36,8 +36,8 @@ class X
         int[,] b = new int[10, 10];
 
         for (int q = 0; q < 10; q++)
-            for (int w = 0; w < 10; w++)
-                b[q, w] = q * 10 + w;
+        for (int w = 0; w < 10; w++)
+            b[q, w] = q * 10 + w;
 
         if (dob(b) != 4950)
             return 1;

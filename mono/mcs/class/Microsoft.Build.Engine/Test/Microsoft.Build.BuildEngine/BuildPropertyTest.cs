@@ -196,8 +196,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             project.LoadXml(documentString);
 
             foreach (BuildPropertyGroup bpg in project.PropertyGroups)
-                foreach (BuildProperty bpr in bpg)
-                    properties.Add(bpr);
+            foreach (BuildProperty bpr in bpg)
+                properties.Add(bpr);
 
             a = (BuildProperty)properties[0];
             Assert.AreEqual("Value", a.Value, "A1");
@@ -231,8 +231,8 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             project.LoadXml(documentString);
 
             foreach (BuildPropertyGroup bpg in project.PropertyGroups)
-                foreach (BuildProperty bpr in bpg)
-                    properties.Add(bpr);
+            foreach (BuildProperty bpr in bpg)
+                properties.Add(bpr);
 
             a = (BuildProperty)properties[0];
             Assert.AreEqual("Value", a.Value, "A1");

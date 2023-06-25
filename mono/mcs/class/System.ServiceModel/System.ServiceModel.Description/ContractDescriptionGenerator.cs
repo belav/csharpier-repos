@@ -415,8 +415,8 @@ namespace System.ServiceModel.Description
         {
             yield return type;
             foreach (var t in type.GetInterfaces())
-                foreach (var tt in GetAllInterfaceTypes(t))
-                    yield return tt;
+            foreach (var tt in GetAllInterfaceTypes(t))
+                yield return tt;
         }
 
         static OperationDescription GetOrCreateOperation(
@@ -497,8 +497,8 @@ namespace System.ServiceModel.Description
                         serviceMethod.GetCustomAttributes(typeof(ServiceKnownTypeAttribute), false)
                     );
                 foreach (ServiceKnownTypeAttribute a in knownTypeAtts)
-                    foreach (Type t in a.GetTypes(givenServiceType))
-                        od.KnownTypes.Add(t);
+                foreach (Type t in a.GetTypes(givenServiceType))
+                    od.KnownTypes.Add(t);
                 foreach (
                     FaultContractAttribute a in mi.GetCustomAttributes(
                         typeof(FaultContractAttribute),

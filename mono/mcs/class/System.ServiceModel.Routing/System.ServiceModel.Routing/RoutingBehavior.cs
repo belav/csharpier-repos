@@ -47,8 +47,8 @@ namespace System.ServiceModel.Routing
             // FIXME: not sure if this is correct.
             if (config.SoapProcessingEnabled)
                 foreach (var ses in config.FilterTable.Values)
-                    foreach (var se in ses)
-                        se.Behaviors.Add(new SoapProcessingBehavior());
+                foreach (var se in ses)
+                    se.Behaviors.Add(new SoapProcessingBehavior());
 
             var ext = new RoutingExtension();
             ((IExtension<ServiceHostBase>)ext).Attach(serviceHostBase);
