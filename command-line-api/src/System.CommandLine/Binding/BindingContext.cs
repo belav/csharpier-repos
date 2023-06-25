@@ -29,8 +29,9 @@ namespace System.CommandLine.Binding
         /// The parse result for the current invocation.
         /// </summary>
         public ParseResult ParseResult => InvocationContext.ParseResult;
-        
-        internal HelpBuilder HelpBuilder => _helpBuilder ??= (HelpBuilder)ServiceProvider.GetService(typeof(HelpBuilder))!;
+
+        internal HelpBuilder HelpBuilder =>
+            _helpBuilder ??= (HelpBuilder)ServiceProvider.GetService(typeof(HelpBuilder))!;
 
         /// <summary>
         /// The console to which output should be written during the current invocation.
@@ -69,7 +70,8 @@ namespace System.CommandLine.Binding
 
         internal bool TryGetValueSource(
             IValueDescriptor valueDescriptor,
-            [MaybeNullWhen(false)] out IValueSource valueSource)
+            [MaybeNullWhen(false)] out IValueSource valueSource
+        )
         {
             if (ServiceProvider.AvailableServiceTypes.Contains(valueDescriptor.ValueType))
             {
@@ -85,7 +87,8 @@ namespace System.CommandLine.Binding
             IValueDescriptor valueDescriptor,
             IValueSource valueSource,
             LocalizationResources localizationResources,
-            out BoundValue? boundValue)
+            out BoundValue? boundValue
+        )
         {
             if (valueSource.TryGetValue(valueDescriptor, this, out var value))
             {
@@ -97,10 +100,12 @@ namespace System.CommandLine.Binding
                 else
                 {
                     var parsed = ArgumentConverter.ConvertObject(
-                        valueDescriptor as Argument ?? new Argument<string>(valueDescriptor.ValueName),
+                        valueDescriptor as Argument
+                            ?? new Argument<string>(valueDescriptor.ValueName),
                         valueDescriptor.ValueType,
                         value,
-                        localizationResources);
+                        localizationResources
+                    );
 
                     if (parsed.Result == ArgumentConversionResultType.Successful)
                     {

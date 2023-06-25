@@ -17,7 +17,6 @@ public interface IRetThis
     Type GetMyType();
 }
 
-
 public interface IUnimplemented
 {
     void UnimplementedMethod();
@@ -28,10 +27,9 @@ public interface IExtra
     int InnocentMethod();
 }
 
-public class CastableException : Exception {};
+public class CastableException : Exception { };
 
-
-public class RetArgImpl: IRetArg<string>
+public class RetArgImpl : IRetArg<string>
 {
     public string ReturnArg(string t)
     {
@@ -40,17 +38,18 @@ public class RetArgImpl: IRetArg<string>
     }
 }
 
-public class GenRetArgImpl<T>: IRetArg<T>
+public class GenRetArgImpl<T> : IRetArg<T>
 {
     public T ReturnArg(T t)
     {
-        Console.WriteLine(String.Format("Generic ReturnArg has been called. My type is {0}", GetType()));
+        Console.WriteLine(
+            String.Format("Generic ReturnArg has been called. My type is {0}", GetType())
+        );
         return t;
     }
 }
 
-
-public class RetThisImpl: IRetThis
+public class RetThisImpl : IRetThis
 {
     public IRetThis ReturnThis()
     {
@@ -65,7 +64,6 @@ public class RetThisImpl: IRetThis
     }
 }
 
-
 public class Castable : ICastable, IExtra
 {
     private Dictionary<Type, Type> _interface2impl;
@@ -77,7 +75,12 @@ public class Castable : ICastable, IExtra
 
     public bool IsInstanceOfInterface(RuntimeTypeHandle interfaceType, out Exception castError)
     {
-        Console.WriteLine(String.Format("IsInstanceOfInterface has been called for type {0}", Type.GetTypeFromHandle(interfaceType)));
+        Console.WriteLine(
+            String.Format(
+                "IsInstanceOfInterface has been called for type {0}",
+                Type.GetTypeFromHandle(interfaceType)
+            )
+        );
         if (_interface2impl == null)
         {
             castError = new CastableException();
@@ -89,13 +92,20 @@ public class Castable : ICastable, IExtra
 
     public RuntimeTypeHandle GetImplType(RuntimeTypeHandle interfaceType)
     {
-        Console.WriteLine(String.Format("GetImplType has been called for type {0}", Type.GetTypeFromHandle(interfaceType)));
+        Console.WriteLine(
+            String.Format(
+                "GetImplType has been called for type {0}",
+                Type.GetTypeFromHandle(interfaceType)
+            )
+        );
         return _interface2impl[Type.GetTypeFromHandle(interfaceType)].TypeHandle;
     }
 
     public int InnocentMethod()
     {
-        Console.WriteLine(String.Format("InnocentMethod has been called. My type is {0}", GetType()));
+        Console.WriteLine(
+            String.Format("InnocentMethod has been called. My type is {0}", GetType())
+        );
         return 3;
     }
 }
@@ -131,39 +141,64 @@ public class CastableTests
         try
         {
             object implProxy = new Castable(
-                 new Dictionary<Type, Type>()
-                 {
-                     { typeof(IRetArg<string>), typeof(RetArgImpl) },
-                     { typeof(IRetArg<int>), typeof(GenRetArgImpl<int>) },
-                     { typeof(IRetThis), typeof(RetThisImpl) },
-                     { typeof(IExtra), null }, //we should never use it
-                 }
+                new Dictionary<Type, Type>()
+                {
+                    { typeof(IRetArg<string>), typeof(RetArgImpl) },
+                    { typeof(IRetArg<int>), typeof(GenRetArgImpl<int>) },
+                    { typeof(IRetThis), typeof(RetThisImpl) },
+                    { typeof(IExtra), null }, //we should never use it
+                }
             );
 
             // testing simple cases
             Assert(implProxy is IRetThis, "implProxy should be castable to IRetThis via is");
-            Assert(!(implProxy is IUnimplemented), "implProxy should not be castable to IUnimplemented via is");
-            Assert((implProxy as IRetThis) != null, "implProxy should be castable to IRetThis is as");
-            Assert((implProxy as IUnimplemented) == null, "implProxy should not be castable to IUnimplemented is as");
+            Assert(
+                !(implProxy is IUnimplemented),
+                "implProxy should not be castable to IUnimplemented via is"
+            );
+            Assert(
+                (implProxy as IRetThis) != null,
+                "implProxy should be castable to IRetThis is as"
+            );
+            Assert(
+                (implProxy as IUnimplemented) == null,
+                "implProxy should not be castable to IUnimplemented is as"
+            );
             var retThis = (IRetThis)implProxy;
-            Assert(object.ReferenceEquals(retThis.ReturnThis(), implProxy), "RetThis should return implProxy");
-            Assert(retThis.GetMyType() == typeof(Castable), "GetMyType should return typeof(Castable)");
+            Assert(
+                object.ReferenceEquals(retThis.ReturnThis(), implProxy),
+                "RetThis should return implProxy"
+            );
+            Assert(
+                retThis.GetMyType() == typeof(Castable),
+                "GetMyType should return typeof(Castable)"
+            );
 
-            Assert(!(implProxy is IUnimplemented), "implProxy should not be castable to IUnimplemented via is");
-            Assert((implProxy as IUnimplemented) == null, "implProxy should not be castable to IUnimplemented via as");
-
+            Assert(
+                !(implProxy is IUnimplemented),
+                "implProxy should not be castable to IUnimplemented via is"
+            );
+            Assert(
+                (implProxy as IUnimplemented) == null,
+                "implProxy should not be castable to IUnimplemented via as"
+            );
 
             // testing generics
             IRetArg<string> retArgStr = (IRetArg<string>)implProxy;
-            Assert(retArgStr.ReturnArg("hohoho") == "hohoho", "retArgStr.ReturnArg() should return arg");
+            Assert(
+                retArgStr.ReturnArg("hohoho") == "hohoho",
+                "retArgStr.ReturnArg() should return arg"
+            );
 
             IRetArg<int> retArgInt = (IRetArg<int>)implProxy;
             Assert(retArgInt.ReturnArg(42) == 42, "retArgInt.ReturnArg() should return arg");
 
-
             // testing Castable implementing other interfaces
             var extra = (IExtra)implProxy;
-            Assert(extra.InnocentMethod() == 3, "InnocentMethod() should be called on Castable and return 3");
+            Assert(
+                extra.InnocentMethod() == 3,
+                "InnocentMethod() should be called on Castable and return 3"
+            );
 
             // testing error handling
             try
@@ -171,7 +206,7 @@ public class CastableTests
                 var _ = (IUnimplemented)implProxy;
                 Assert(false, "pProxy should not be castable to I1");
             }
-            catch (InvalidCastException) {}
+            catch (InvalidCastException) { }
 
             object nullCastable = new Castable(null);
             try
@@ -179,9 +214,12 @@ public class CastableTests
                 var _ = (IRetThis)nullCastable;
                 Assert(false, "Exceptions should be thrown from IsInstanceOfInterface");
             }
-            catch (CastableException) {}
+            catch (CastableException) { }
 
-            Assert(!(nullCastable is IRetThis), "null castable shouldn't be allowed to be casted to anything");
+            Assert(
+                !(nullCastable is IRetThis),
+                "null castable shouldn't be allowed to be casted to anything"
+            );
 
             var shouldBeNull = nullCastable as IRetThis;
             Assert(shouldBeNull == null, "shouldBeNull should be assigned null");
@@ -193,18 +231,21 @@ public class CastableTests
                 r.ReturnThis();
                 Assert(false, "Exceptions should be thrown from ReturnThis()");
             }
-            catch (EntryPointNotFoundException) {}
+            catch (EntryPointNotFoundException) { }
 
             //delegate testing
             Func<int> fInt = new Func<int>(extra.InnocentMethod);
             Assert(fInt() == 3, "Delegate call to InnocentMethod() should return 3");
 
             Func<IRetThis> func = new Func<IRetThis>(retThis.ReturnThis);
-            Assert(object.ReferenceEquals(func(), implProxy), "Delegate call to ReturnThis() should return this");
-       }
-       catch (Exception e)
-       {
+            Assert(
+                object.ReferenceEquals(func(), implProxy),
+                "Delegate call to ReturnThis() should return this"
+            );
+        }
+        catch (Exception e)
+        {
             Assert(false, e.ToString());
-       }
+        }
     }
 }

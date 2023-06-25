@@ -7,7 +7,7 @@ namespace POS_Server.Models
 {
     public class MedalModel
     {
-        public long  medalId { get; set; }
+        public long medalId { get; set; }
         public string name { get; set; }
         public string symbol { get; set; }
         public int CashPointsRequired { get; set; }
@@ -19,9 +19,6 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<System.DateTime> updateDate { get; set; }
 
-
         public Boolean canDelete { get; set; }
-
-
     }
 }

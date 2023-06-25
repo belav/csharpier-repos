@@ -70,16 +70,19 @@ public abstract class EmailModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostChangeEmailAsync() => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostChangeEmailAsync() =>
+        throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostSendVerificationEmailAsync() => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostSendVerificationEmailAsync() =>
+        throw new NotImplementedException();
 }
 
-internal sealed class EmailModel<TUser> : EmailModel where TUser : class
+internal sealed class EmailModel<TUser> : EmailModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly SignInManager<TUser> _signInManager;
@@ -88,7 +91,8 @@ internal sealed class EmailModel<TUser> : EmailModel where TUser : class
     public EmailModel(
         UserManager<TUser> userManager,
         SignInManager<TUser> signInManager,
-        IEmailSender emailSender)
+        IEmailSender emailSender
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -100,10 +104,7 @@ internal sealed class EmailModel<TUser> : EmailModel where TUser : class
         var email = await _userManager.GetEmailAsync(user);
         Email = email;
 
-        Input = new InputModel
-        {
-            NewEmail = email!,
-        };
+        Input = new InputModel { NewEmail = email!, };
 
         IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
     }
@@ -143,12 +144,20 @@ internal sealed class EmailModel<TUser> : EmailModel where TUser : class
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmailChange",
                 pageHandler: null,
-                values: new { area = "Identity", userId = userId, email = Input.NewEmail, code = code },
-                protocol: Request.Scheme)!;
+                values: new
+                {
+                    area = "Identity",
+                    userId = userId,
+                    email = Input.NewEmail,
+                    code = code
+                },
+                protocol: Request.Scheme
+            )!;
             await _emailSender.SendEmailAsync(
                 Input.NewEmail,
                 "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+            );
 
             StatusMessage = "Confirmation link to change email sent. Please check your email.";
             return RedirectToPage();
@@ -179,12 +188,19 @@ internal sealed class EmailModel<TUser> : EmailModel where TUser : class
         var callbackUrl = Url.Page(
             "/Account/ConfirmEmail",
             pageHandler: null,
-            values: new { area = "Identity", userId = userId, code = code },
-            protocol: Request.Scheme);
+            values: new
+            {
+                area = "Identity",
+                userId = userId,
+                code = code
+            },
+            protocol: Request.Scheme
+        );
         await _emailSender.SendEmailAsync(
             email!,
             "Confirm your email",
-            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>.");
+            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>."
+        );
 
         StatusMessage = "Verification email sent. Please check your email.";
         return RedirectToPage();

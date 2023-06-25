@@ -15,7 +15,9 @@ public unsafe class PInvokes_AutoLayout
     {
         short s = 42;
         bool b = true;
-        Assert.Throws<MarshalDirectiveException>(() => DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(new AutoLayoutStruct()));
+        Assert.Throws<MarshalDirectiveException>(
+            () => DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(new AutoLayoutStruct())
+        );
     }
 
     [Fact]
@@ -23,7 +25,12 @@ public unsafe class PInvokes_AutoLayout
     {
         short s = 42;
         bool b = true;
-        AssertThrowsMarshalDirectiveOrTypeLoad(() => DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(new SequentialWithAutoLayoutField()));
+        AssertThrowsMarshalDirectiveOrTypeLoad(
+            () =>
+                DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(
+                    new SequentialWithAutoLayoutField()
+                )
+        );
     }
 
     [Fact]
@@ -31,24 +38,35 @@ public unsafe class PInvokes_AutoLayout
     {
         short s = 42;
         bool b = true;
-        AssertThrowsMarshalDirectiveOrTypeLoad(() => DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(new SequentialWithAutoLayoutNestedField()));
+        AssertThrowsMarshalDirectiveOrTypeLoad(
+            () =>
+                DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(
+                    new SequentialWithAutoLayoutNestedField()
+                )
+        );
     }
 
     private static void AssertThrowsMarshalDirectiveOrTypeLoad(Action testCode)
     {
         try
         {
-             testCode();
-             return;
+            testCode();
+            return;
         }
-        catch (Exception ex) when(ex is MarshalDirectiveException or TypeLoadException)
+        catch (Exception ex) when (ex is MarshalDirectiveException or TypeLoadException)
         {
             return;
         }
         catch (Exception ex)
         {
-            Assert.False(true, $"Expected either a MarshalDirectiveException or a TypeLoadException, but received a '{ex.GetType().FullName}' exception: '{ex.ToString()}'");
+            Assert.False(
+                true,
+                $"Expected either a MarshalDirectiveException or a TypeLoadException, but received a '{ex.GetType().FullName}' exception: '{ex.ToString()}'"
+            );
         }
-        Assert.False(true, $"Expected either a MarshalDirectiveException or a TypeLoadException, but received no exception.");
+        Assert.False(
+            true,
+            $"Expected either a MarshalDirectiveException or a TypeLoadException, but received no exception."
+        );
     }
 }

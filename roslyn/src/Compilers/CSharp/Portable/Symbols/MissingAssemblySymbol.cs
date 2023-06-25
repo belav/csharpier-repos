@@ -37,18 +37,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsMissing
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override bool IsLinked
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override Symbol GetDeclaredSpecialTypeMember(SpecialMember member)
@@ -58,10 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override AssemblyIdentity Identity
         {
-            get
-            {
-                return identity;
-            }
+            get { return identity; }
         }
 
         public override Version AssemblyVersionPattern => null;
@@ -111,13 +102,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
-        internal override void SetLinkedReferencedAssemblies(ImmutableArray<AssemblySymbol> assemblies)
+        internal override void SetLinkedReferencedAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
@@ -127,7 +117,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ImmutableArray<AssemblySymbol>.Empty;
         }
 
-        internal override void SetNoPiaResolutionAssemblies(ImmutableArray<AssemblySymbol> assemblies)
+        internal override void SetNoPiaResolutionAssemblies(
+            ImmutableArray<AssemblySymbol> assemblies
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
@@ -139,36 +131,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override NamespaceSymbol GlobalNamespace
         {
-            get
-            {
-                return this.moduleSymbol.GlobalNamespace;
-            }
+            get { return this.moduleSymbol.GlobalNamespace; }
         }
 
         public override ICollection<string> TypeNames
         {
-            get
-            {
-                return SpecializedCollections.EmptyCollection<string>();
-            }
+            get { return SpecializedCollections.EmptyCollection<string>(); }
         }
 
         public override ICollection<string> NamespaceNames
         {
-            get
-            {
-                return SpecializedCollections.EmptyCollection<string>();
-            }
+            get { return SpecializedCollections.EmptyCollection<string>(); }
         }
 
 #nullable enable
 
-        internal override NamedTypeSymbol LookupDeclaredOrForwardedTopLevelMetadataType(ref MetadataTypeName emittedName, ConsList<AssemblySymbol>? visitedAssemblies)
+        internal override NamedTypeSymbol LookupDeclaredOrForwardedTopLevelMetadataType(
+            ref MetadataTypeName emittedName,
+            ConsList<AssemblySymbol>? visitedAssemblies
+        )
         {
             return new MissingMetadataTypeSymbol.TopLevel(this.moduleSymbol, ref emittedName);
         }
 
-        internal override NamedTypeSymbol? LookupDeclaredTopLevelMetadataType(ref MetadataTypeName emittedName)
+        internal override NamedTypeSymbol? LookupDeclaredTopLevelMetadataType(
+            ref MetadataTypeName emittedName
+        )
         {
             return null;
         }
@@ -185,17 +173,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
+        internal override IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
+            string simpleName
+        )
         {
             return SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
         }
 
         public override bool MightContainExtensionMethods
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override AssemblyMetadata GetMetadata() => null;

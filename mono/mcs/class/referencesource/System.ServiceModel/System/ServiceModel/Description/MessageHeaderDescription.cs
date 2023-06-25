@@ -22,10 +22,7 @@ namespace System.ServiceModel.Description
         bool isUnknownHeader;
 
         public MessageHeaderDescription(string name, string ns)
-            : base(name, ns)
-        {
-
-        }
+            : base(name, ns) { }
 
         internal MessageHeaderDescription(MessageHeaderDescription other)
             : base(other)
@@ -72,14 +69,8 @@ namespace System.ServiceModel.Description
 
         internal bool IsUnknownHeaderCollection
         {
-            get
-            {
-                return isUnknownHeader || Multiple && (Type == typeof(XmlElement));
-            }
-            set
-            {
-                isUnknownHeader = value;
-            }
+            get { return isUnknownHeader || Multiple && (Type == typeof(XmlElement)); }
+            set { isUnknownHeader = value; }
         }
     }
 }

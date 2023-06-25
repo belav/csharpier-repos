@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 IAssemblySymbol assembly,
                 PortableExecutableReference metadataReference,
                 bool exact,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
                 : base(provider, exact, cancellationToken)
             {
                 _assemblyProject = assemblyProject;
@@ -41,19 +42,34 @@ namespace Microsoft.CodeAnalysis.AddImport
                     provider,
                     searchResult.WithSymbol<INamespaceOrTypeSymbol>(searchResult.Symbol),
                     _assemblyProject.Id,
-                    _metadataReference);
+                    _metadataReference
+                );
             }
 
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
-                SymbolFilter filter, SearchQuery searchQuery)
+                SymbolFilter filter,
+                SearchQuery searchQuery
+            )
             {
-                var service = _assemblyProject.Solution.Services.GetService<ISymbolTreeInfoCacheService>();
-                var info = await service.TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(_assemblyProject, _metadataReference, CancellationToken).ConfigureAwait(false);
+                var service =
+                    _assemblyProject.Solution.Services.GetService<ISymbolTreeInfoCacheService>();
+                var info = await service
+                    .TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(
+                        _assemblyProject,
+                        _metadataReference,
+                        CancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (info == null)
                     return ImmutableArray<ISymbol>.Empty;
 
                 var declarations = await info.FindAsync(
-                    searchQuery, _assembly, filter, CancellationToken).ConfigureAwait(false);
+                        searchQuery,
+                        _assembly,
+                        filter,
+                        CancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return declarations;
             }

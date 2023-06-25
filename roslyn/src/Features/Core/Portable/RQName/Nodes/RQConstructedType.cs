@@ -24,7 +24,11 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         {
             var typeArgumentNodes = TypeArguments.Select(node => node.ToSimpleTree()).ToList();
             var typeParamsNode = new SimpleGroupNode(RQNameStrings.TypeParams, typeArgumentNodes);
-            return new SimpleGroupNode(RQNameStrings.AggType, DefiningType.ToSimpleTree(), typeParamsNode);
+            return new SimpleGroupNode(
+                RQNameStrings.AggType,
+                DefiningType.ToSimpleTree(),
+                typeParamsNode
+            );
         }
     }
 }

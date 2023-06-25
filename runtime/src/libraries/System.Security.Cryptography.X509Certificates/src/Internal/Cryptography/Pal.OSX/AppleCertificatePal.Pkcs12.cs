@@ -15,7 +15,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             bool exportable,
-            SafeKeychainHandle keychain)
+            SafeKeychainHandle keychain
+        )
         {
             using (ApplePkcs12Reader reader = new ApplePkcs12Reader(rawData))
             {
@@ -24,8 +25,9 @@ namespace Internal.Cryptography.Pal
                 UnixPkcs12Reader.CertAndKey certAndKey = reader.GetSingleCert();
                 AppleCertificatePal pal = (AppleCertificatePal)certAndKey.Cert!;
 
-                SafeSecKeyRefHandle? safeSecKeyRefHandle =
-                    ApplePkcs12Reader.GetPrivateKey(certAndKey.Key);
+                SafeSecKeyRefHandle? safeSecKeyRefHandle = ApplePkcs12Reader.GetPrivateKey(
+                    certAndKey.Key
+                );
 
                 AppleCertificatePal? newPal;
 
@@ -40,7 +42,12 @@ namespace Internal.Cryptography.Pal
                     {
                         using (pal)
                         {
-                            return ImportPkcs12NonExportable(pal, safeSecKeyRefHandle, password, keychain);
+                            return ImportPkcs12NonExportable(
+                                pal,
+                                safeSecKeyRefHandle,
+                                password,
+                                keychain
+                            );
                         }
                     }
 
@@ -61,7 +68,8 @@ namespace Internal.Cryptography.Pal
             AppleCertificatePal cert,
             SafeSecKeyRefHandle privateKey,
             SafePasswordHandle password,
-            SafeKeychainHandle keychain)
+            SafeKeychainHandle keychain
+        )
         {
             Pkcs12SmallExport exporter = new Pkcs12SmallExport(new TempExportPal(cert), privateKey);
             byte[] smallPfx = exporter.Export(X509ContentType.Pkcs12, password)!;
@@ -73,7 +81,8 @@ namespace Internal.Cryptography.Pal
                 password,
                 keychain,
                 exportable: false,
-                out identityHandle);
+                out identityHandle
+            );
 
             // On Windows and Linux if a PFX uses a LocalKeyId to bind the wrong key to a cert, the
             // nonsensical object of "this cert, that key" is returned.
@@ -103,7 +112,10 @@ namespace Internal.Cryptography.Pal
 
             protected override byte[] ExportPkcs7() => throw new NotImplementedException();
 
-            protected override byte[] ExportPkcs8(ICertificatePalCore certificatePal, ReadOnlySpan<char> password)
+            protected override byte[] ExportPkcs8(
+                ICertificatePalCore certificatePal,
+                ReadOnlySpan<char> password
+            )
             {
                 return AppleCertificatePal.ExportPkcs8(_privateKey, password);
             }

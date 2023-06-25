@@ -72,9 +72,7 @@ class Program
 
     class TestAbstractTypeNeverDerivedVirtualsOptimization
     {
-        class UnreferencedType1
-        {
-        }
+        class UnreferencedType1 { }
 
         class TheBase
         {
@@ -86,14 +84,13 @@ class Program
             // We expect "Something" to be generated as a throwing helper.
             [MethodImpl(MethodImplOptions.NoInlining)]
             public sealed override object Something() => new UnreferencedType1();
+
             // We expect "callvirt Something" to get devirtualized here.
             [MethodImpl(MethodImplOptions.NoInlining)]
             public object TrySomething() => Something();
         }
 
-        abstract class AbstractDerivedAgain : AbstractDerived
-        {
-        }
+        abstract class AbstractDerivedAgain : AbstractDerived { }
 
         static TheBase s_b = new TheBase();
         static AbstractDerived s_d = null;
@@ -135,7 +132,9 @@ class Program
 
         public static void Run()
         {
-            Console.WriteLine("Testing abstract classes that might have methods reachable through devirtualization");
+            Console.WriteLine(
+                "Testing abstract classes that might have methods reachable through devirtualization"
+            );
 
             // Force a vtable for Base
             typeof(Base).ToString();
@@ -171,7 +170,9 @@ class Program
 
         public static void Run()
         {
-            Console.WriteLine("Testing more abstract classes that might have methods reachable through devirtualization");
+            Console.WriteLine(
+                "Testing more abstract classes that might have methods reachable through devirtualization"
+            );
 
             // Force a vtable for Base
             typeof(Base).ToString();
@@ -220,9 +221,13 @@ class Program
         }
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    private static bool IsTypePresent(Type testType, string typeName) => testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    private static bool IsTypePresent(Type testType, string typeName) =>
+        testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
 
     private static void ThrowIfPresent(Type testType, string typeName)
     {

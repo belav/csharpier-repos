@@ -35,17 +35,18 @@ namespace Microsoft.AspNetCore.Components.Routing
             }
         }
 
-        public override string ToString() => typeof(T) switch
-        {
-            var x when x == typeof(bool) => "bool",
-            var x when x == typeof(DateTime) => "datetime",
-            var x when x == typeof(decimal) => "decimal",
-            var x when x == typeof(double) => "double",
-            var x when x == typeof(float) => "float",
-            var x when x == typeof(Guid) => "guid",
-            var x when x == typeof(int) => "int",
-            var x when x == typeof(long) => "long",
-            var x => x.Name.ToLowerInvariant()
-        };
+        public override string ToString() =>
+            typeof(T) switch
+            {
+                var x when x == typeof(bool) => "bool",
+                var x when x == typeof(DateTime) => "datetime",
+                var x when x == typeof(decimal) => "decimal",
+                var x when x == typeof(double) => "double",
+                var x when x == typeof(float) => "float",
+                var x when x == typeof(Guid) => "guid",
+                var x when x == typeof(int) => "int",
+                var x when x == typeof(long) => "long",
+                var x => x.Name.ToLowerInvariant()
+            };
     }
 }

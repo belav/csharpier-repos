@@ -2,7 +2,5 @@
 
 static public class A
 {
-	public static void Foo (this int i)
-	{
-	}
+    public static void Foo(this int i) { }
 }

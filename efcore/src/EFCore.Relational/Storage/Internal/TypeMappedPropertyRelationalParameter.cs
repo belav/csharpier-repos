@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             string invariantName,
             string name,
             RelationalTypeMapping relationalTypeMapping,
-            IProperty property)
+            IProperty property
+        )
             : base(invariantName, name, relationalTypeMapping, property.IsNullable)
         {
             _clrPropertyGetter = property.GetGetter();

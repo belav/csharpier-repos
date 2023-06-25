@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// </summary>
         public string[] LanguageNames { get; }
 
-        public ExportLspRequestHandlerProviderAttribute(params string[] languageNames) : base(typeof(AbstractRequestHandlerProvider))
+        public ExportLspRequestHandlerProviderAttribute(params string[] languageNames)
+            : base(typeof(AbstractRequestHandlerProvider))
         {
             LanguageNames = languageNames;
         }
@@ -31,10 +32,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// all the language names that the default Roslyn servers support.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class), MetadataAttribute]
-    internal class ExportRoslynLanguagesLspRequestHandlerProviderAttribute : ExportLspRequestHandlerProviderAttribute
+    internal class ExportRoslynLanguagesLspRequestHandlerProviderAttribute
+        : ExportLspRequestHandlerProviderAttribute
     {
-        public ExportRoslynLanguagesLspRequestHandlerProviderAttribute() : base(ProtocolConstants.RoslynLspLanguages.ToArray())
-        {
-        }
+        public ExportRoslynLanguagesLspRequestHandlerProviderAttribute()
+            : base(ProtocolConstants.RoslynLspLanguages.ToArray()) { }
     }
 }

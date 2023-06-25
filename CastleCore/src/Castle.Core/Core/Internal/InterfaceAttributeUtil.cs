@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -49,20 +49,19 @@ namespace Castle.Core.Internal
                 throw new ArgumentOutOfRangeException(nameof(type));
 
             var attributes = type.GetCustomAttributes(false).ToArray();
-            var baseTypes  = type.GetInterfaces();
+            var baseTypes = type.GetInterfaces();
 
             if (baseTypes.Length == 0 || !inherit)
                 return attributes;
 
-            return new InterfaceAttributeUtil(type, baseTypes)
-                .GetAttributes(attributes);
+            return new InterfaceAttributeUtil(type, baseTypes).GetAttributes(attributes);
         }
 
         private InterfaceAttributeUtil(Type derivedType, Type[] baseTypes)
         {
-            types      = CollectTypes(derivedType, baseTypes);
+            types = CollectTypes(derivedType, baseTypes);
             singletons = new Dictionary<Type, Aged<object>>();
-            results    = new List<object>();
+            results = new List<object>();
         }
 
         private Aged<Type>[] CollectTypes(Type derivedType, Type[] baseTypes)
@@ -82,10 +81,7 @@ namespace Castle.Core.Internal
                         if (ages.TryGetValue(type, out age))
                             ages[type] = ++age;
 
-            return ages
-                .Select (a => new Aged<Type>(a.Key, a.Value))
-                .OrderBy(t => t.Age)
-                .ToArray();
+            return ages.Select(a => new Aged<Type>(a.Key, a.Value)).OrderBy(t => t.Age).ToArray();
         }
 
         private object[] GetAttributes(object[] attributes)
@@ -103,7 +99,7 @@ namespace Castle.Core.Internal
         {
             foreach (var attribute in attributes)
             {
-                var attributeType  = attribute.GetType();
+                var attributeType = attribute.GetType();
                 var attributeUsage = attributeType.GetAttributeUsage();
 
                 if (IsMostDerivedType || attributeUsage.Inherited)
@@ -148,11 +144,10 @@ namespace Castle.Core.Internal
 
         private void HandleAttributeConflict(Type attributeType)
         {
-            var message = string.Format
-            (
-                "Cannot determine inherited attributes for interface type {0}.  " +
-                "Conflicting attributes of type {1} exist in the inheritance graph.",
-                CurrentType  .FullName,
+            var message = string.Format(
+                "Cannot determine inherited attributes for interface type {0}.  "
+                    + "Conflicting attributes of type {1} exist in the inheritance graph.",
+                CurrentType.FullName,
                 attributeType.FullName
             );
 
@@ -162,8 +157,7 @@ namespace Castle.Core.Internal
         private static bool ShouldConsiderType(Type type)
         {
             var ns = type.Namespace;
-            return ns != "Castle.Components.DictionaryAdapter"
-                && ns != "System.ComponentModel";
+            return ns != "Castle.Components.DictionaryAdapter" && ns != "System.ComponentModel";
         }
 
         private Aged<T> MakeAged<T>(T value)
@@ -174,17 +168,16 @@ namespace Castle.Core.Internal
         [DebuggerDisplay("{Value}, Age: {Age}")]
         private sealed class Aged<T>
         {
-            public readonly T   Value;
+            public readonly T Value;
             public readonly int Age;
 
             public Aged(T value, int age)
             {
                 Value = value;
-                Age   = age;
+                Age = age;
             }
         }
 
-        private static readonly object
-            ConflictMarker = new object();
+        private static readonly object ConflictMarker = new object();
     }
 }

@@ -19,7 +19,12 @@ namespace System.Workflow.ComponentModel.Serialization
             Guid = 1,
             Null,
         }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
             if (obj.GetType() == typeof(Guid))
             {
@@ -28,7 +33,13 @@ namespace System.Workflow.ComponentModel.Serialization
                 info.AddValue("bits", guid.ToByteArray());
             }
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             TypeID typeID = (TypeID)info.GetValue("typeID", typeof(TypeID));
 

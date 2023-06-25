@@ -10,16 +10,22 @@ namespace System.Xml
 {
     public interface IXmlBinaryReaderInitializer
     {
-        void SetInput(byte[] buffer, int offset, int count,
-                            IXmlDictionary? dictionary,
-                            XmlDictionaryReaderQuotas quotas,
-                            XmlBinaryReaderSession? session,
-                            OnXmlDictionaryReaderClose? onClose);
-        void SetInput(Stream stream,
-                             IXmlDictionary? dictionary,
-                             XmlDictionaryReaderQuotas quotas,
-                             XmlBinaryReaderSession? session,
-                             OnXmlDictionaryReaderClose? onClose);
+        void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary? dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession? session,
+            OnXmlDictionaryReaderClose? onClose
+        );
+        void SetInput(
+            Stream stream,
+            IXmlDictionary? dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession? session,
+            OnXmlDictionaryReaderClose? onClose
+        );
     }
 
     internal sealed class XmlBinaryReader : XmlBaseReader, IXmlBinaryReaderInitializer
@@ -32,36 +38,54 @@ namespace System.Xml
         private XmlBinaryNodeType _arrayNodeType;
         private OnXmlDictionaryReaderClose? _onClose;
 
-        public XmlBinaryReader()
-        {
-        }
+        public XmlBinaryReader() { }
 
-        public void SetInput(byte[] buffer, int offset, int count,
-                            IXmlDictionary? dictionary,
-                            XmlDictionaryReaderQuotas quotas,
-                            XmlBinaryReaderSession? session,
-                            OnXmlDictionaryReaderClose? onClose)
+        public void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary? dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession? session,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             ArgumentNullException.ThrowIfNull(buffer);
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > buffer.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                    )
+                );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                );
             if (count > buffer.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(count),
+                        SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                    )
+                );
             MoveToInitial(quotas, onClose);
             BufferReader.SetBuffer(buffer, offset, count, dictionary, session);
             _buffered = true;
         }
 
-        public void SetInput(Stream stream,
-                             IXmlDictionary? dictionary,
-                            XmlDictionaryReaderQuotas quotas,
-                            XmlBinaryReaderSession? session,
-                            OnXmlDictionaryReaderClose? onClose)
+        public void SetInput(
+            Stream stream,
+            IXmlDictionary? dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession? session,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -70,7 +94,10 @@ namespace System.Xml
             _buffered = false;
         }
 
-        private void MoveToInitial(XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
+        private void MoveToInitial(
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        )
         {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
@@ -121,7 +148,10 @@ namespace System.Xml
                     break;
             }
             if (value.Length > Quotas.MaxStringContentLength)
-                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(this, Quotas.MaxStringContentLength);
+                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(
+                    this,
+                    Quotas.MaxStringContentLength
+                );
             return value;
         }
 
@@ -206,7 +236,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.FloatTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.FloatTextWithEndElement
+            )
             {
                 SkipNodeType();
                 float value = BufferReader.ReadSingle();
@@ -220,7 +253,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.DoubleTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.DoubleTextWithEndElement
+            )
             {
                 SkipNodeType();
                 double value = BufferReader.ReadDouble();
@@ -234,7 +270,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.DecimalTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.DecimalTextWithEndElement
+            )
             {
                 SkipNodeType();
                 decimal value = BufferReader.ReadDecimal();
@@ -248,7 +287,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.DateTimeTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.DateTimeTextWithEndElement
+            )
             {
                 SkipNodeType();
                 DateTime value = BufferReader.ReadDateTime();
@@ -262,7 +304,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.TimeSpanTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.TimeSpanTextWithEndElement
+            )
             {
                 SkipNodeType();
                 TimeSpan value = BufferReader.ReadTimeSpan();
@@ -276,7 +321,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.GuidTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.GuidTextWithEndElement
+            )
             {
                 SkipNodeType();
                 Guid value = BufferReader.ReadGuid();
@@ -290,7 +338,10 @@ namespace System.Xml
         {
             if (this.Node.NodeType != XmlNodeType.Element)
                 MoveToStartElement();
-            if (CanOptimizeReadElementContent() && GetNodeType() == XmlBinaryNodeType.UniqueIdTextWithEndElement)
+            if (
+                CanOptimizeReadElementContent()
+                && GetNodeType() == XmlBinaryNodeType.UniqueIdTextWithEndElement
+            )
             {
                 SkipNodeType();
                 UniqueId value = BufferReader.ReadUniqueId();
@@ -492,7 +543,9 @@ namespace System.Xml
                 case XmlBinaryNodeType.PrefixElementY:
                 case XmlBinaryNodeType.PrefixElementZ:
                     elementNode = EnterScope();
-                    prefix = PrefixHandle.GetAlphaPrefix((int)nodeType - (int)XmlBinaryNodeType.PrefixElementA);
+                    prefix = PrefixHandle.GetAlphaPrefix(
+                        (int)nodeType - (int)XmlBinaryNodeType.PrefixElementA
+                    );
                     elementNode.Prefix.SetValue(prefix);
                     ReadName(elementNode.LocalName);
                     ReadAttributes();
@@ -526,7 +579,9 @@ namespace System.Xml
                 case XmlBinaryNodeType.PrefixDictionaryElementY:
                 case XmlBinaryNodeType.PrefixDictionaryElementZ:
                     elementNode = EnterScope();
-                    prefix = PrefixHandle.GetAlphaPrefix((int)nodeType - (int)XmlBinaryNodeType.PrefixDictionaryElementA);
+                    prefix = PrefixHandle.GetAlphaPrefix(
+                        (int)nodeType - (int)XmlBinaryNodeType.PrefixDictionaryElementA
+                    );
                     elementNode.Prefix.SetValue(prefix);
                     ReadDictionaryName(elementNode.LocalName);
                     ReadAttributes();
@@ -565,13 +620,19 @@ namespace System.Xml
                         VerifyWhitespace();
                     return true;
                 case XmlBinaryNodeType.BoolTextWithEndElement:
-                    MoveToAtomicTextWithEndElement().Value.SetValue(ReadUInt8() != 0 ? ValueHandleType.True : ValueHandleType.False);
+                    MoveToAtomicTextWithEndElement().Value.SetValue(
+                        ReadUInt8() != 0 ? ValueHandleType.True : ValueHandleType.False
+                    );
                     if (this.OutsideRootElement)
                         VerifyWhitespace();
                     return true;
                 case XmlBinaryNodeType.Chars8TextWithEndElement:
                     if (_buffered)
-                        ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.UTF8, ReadUInt8());
+                        ReadText(
+                            MoveToAtomicTextWithEndElement(),
+                            ValueHandleType.UTF8,
+                            ReadUInt8()
+                        );
                     else
                         ReadPartialUTF8Text(true, ReadUInt8());
                     return true;
@@ -583,7 +644,11 @@ namespace System.Xml
                     return true;
                 case XmlBinaryNodeType.Chars16TextWithEndElement:
                     if (_buffered)
-                        ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.UTF8, ReadUInt16());
+                        ReadText(
+                            MoveToAtomicTextWithEndElement(),
+                            ValueHandleType.UTF8,
+                            ReadUInt16()
+                        );
                     else
                         ReadPartialUTF8Text(true, ReadUInt16());
                     return true;
@@ -595,7 +660,11 @@ namespace System.Xml
                     return true;
                 case XmlBinaryNodeType.Chars32TextWithEndElement:
                     if (_buffered)
-                        ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.UTF8, ReadUInt31());
+                        ReadText(
+                            MoveToAtomicTextWithEndElement(),
+                            ValueHandleType.UTF8,
+                            ReadUInt31()
+                        );
                     else
                         ReadPartialUTF8Text(true, ReadUInt31());
                     return true;
@@ -663,40 +732,88 @@ namespace System.Xml
                     MoveToAtomicTextWithEndElement().Value.SetDictionaryValue(ReadDictionaryKey());
                     return true;
                 case XmlBinaryNodeType.UniqueIdTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.UniqueId, ValueHandleLength.UniqueId);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.UniqueId,
+                        ValueHandleLength.UniqueId
+                    );
                     return true;
                 case XmlBinaryNodeType.GuidTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Guid, ValueHandleLength.Guid);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Guid,
+                        ValueHandleLength.Guid
+                    );
                     return true;
                 case XmlBinaryNodeType.DecimalTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Decimal, ValueHandleLength.Decimal);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Decimal,
+                        ValueHandleLength.Decimal
+                    );
                     return true;
                 case XmlBinaryNodeType.Int8TextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Int8, ValueHandleLength.Int8);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Int8,
+                        ValueHandleLength.Int8
+                    );
                     return true;
                 case XmlBinaryNodeType.Int16TextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Int16, ValueHandleLength.Int16);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Int16,
+                        ValueHandleLength.Int16
+                    );
                     return true;
                 case XmlBinaryNodeType.Int32TextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Int32, ValueHandleLength.Int32);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Int32,
+                        ValueHandleLength.Int32
+                    );
                     return true;
                 case XmlBinaryNodeType.Int64TextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Int64, ValueHandleLength.Int64);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Int64,
+                        ValueHandleLength.Int64
+                    );
                     return true;
                 case XmlBinaryNodeType.UInt64TextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.UInt64, ValueHandleLength.UInt64);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.UInt64,
+                        ValueHandleLength.UInt64
+                    );
                     return true;
                 case XmlBinaryNodeType.FloatTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Single, ValueHandleLength.Single);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Single,
+                        ValueHandleLength.Single
+                    );
                     return true;
                 case XmlBinaryNodeType.DoubleTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.Double, ValueHandleLength.Double);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.Double,
+                        ValueHandleLength.Double
+                    );
                     return true;
                 case XmlBinaryNodeType.TimeSpanTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.TimeSpan, ValueHandleLength.TimeSpan);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.TimeSpan,
+                        ValueHandleLength.TimeSpan
+                    );
                     return true;
                 case XmlBinaryNodeType.DateTimeTextWithEndElement:
-                    ReadText(MoveToAtomicTextWithEndElement(), ValueHandleType.DateTime, ValueHandleLength.DateTime);
+                    ReadText(
+                        MoveToAtomicTextWithEndElement(),
+                        ValueHandleType.DateTime,
+                        ValueHandleLength.DateTime
+                    );
                     return true;
                 case XmlBinaryNodeType.QNameDictionaryTextWithEndElement:
                     BufferReader.ReadQName(MoveToAtomicTextWithEndElement().Value);
@@ -719,7 +836,10 @@ namespace System.Xml
         private void ReadAttributes()
         {
             XmlBinaryNodeType nodeType = GetNodeType();
-            if (nodeType < XmlBinaryNodeType.MinAttribute || nodeType > XmlBinaryNodeType.MaxAttribute)
+            if (
+                nodeType < XmlBinaryNodeType.MinAttribute
+                || nodeType > XmlBinaryNodeType.MaxAttribute
+            )
                 return;
             ReadAttributes2();
         }
@@ -824,7 +944,9 @@ namespace System.Xml
                     case XmlBinaryNodeType.PrefixDictionaryAttributeZ:
                         SkipNodeType();
                         attributeNode = AddAttribute();
-                        prefix = PrefixHandle.GetAlphaPrefix((int)nodeType - (int)XmlBinaryNodeType.PrefixDictionaryAttributeA);
+                        prefix = PrefixHandle.GetAlphaPrefix(
+                            (int)nodeType - (int)XmlBinaryNodeType.PrefixDictionaryAttributeA
+                        );
                         attributeNode.Prefix.SetValue(prefix);
                         ReadDictionaryName(attributeNode.LocalName);
                         ReadAttributeText(attributeNode.AttributeText!);
@@ -857,7 +979,9 @@ namespace System.Xml
                     case XmlBinaryNodeType.PrefixAttributeZ:
                         SkipNodeType();
                         attributeNode = AddAttribute();
-                        prefix = PrefixHandle.GetAlphaPrefix((int)nodeType - (int)XmlBinaryNodeType.PrefixAttributeA);
+                        prefix = PrefixHandle.GetAlphaPrefix(
+                            (int)nodeType - (int)XmlBinaryNodeType.PrefixAttributeA
+                        );
                         attributeNode.Prefix.SetValue(prefix);
                         ReadName(attributeNode.LocalName);
                         ReadAttributeText(attributeNode.AttributeText!);
@@ -928,7 +1052,11 @@ namespace System.Xml
                 if (this.OutsideRootElement)
                     VerifyWhitespace();
 
-                XmlBinaryNodeType nodeType = (withEndElement ? XmlBinaryNodeType.Chars32TextWithEndElement : XmlBinaryNodeType.Chars32Text);
+                XmlBinaryNodeType nodeType = (
+                    withEndElement
+                        ? XmlBinaryNodeType.Chars32TextWithEndElement
+                        : XmlBinaryNodeType.Chars32Text
+                );
                 InsertNode(nodeType, length - actual);
             }
         }
@@ -993,7 +1121,11 @@ namespace System.Xml
                 if (this.OutsideRootElement)
                     VerifyWhitespace();
 
-                XmlBinaryNodeType nodeType = (withEndElement ? XmlBinaryNodeType.UnicodeChars32TextWithEndElement : XmlBinaryNodeType.UnicodeChars32Text);
+                XmlBinaryNodeType nodeType = (
+                    withEndElement
+                        ? XmlBinaryNodeType.UnicodeChars32TextWithEndElement
+                        : XmlBinaryNodeType.UnicodeChars32Text
+                );
                 InsertNode(nodeType, length - actual);
             }
         }
@@ -1015,7 +1147,11 @@ namespace System.Xml
                 if (actual > 3)
                     actual -= (actual % 3);
                 ReadText(MoveToComplexText(), ValueHandleType.Base64, actual);
-                XmlBinaryNodeType nodeType = (withEndElement ? XmlBinaryNodeType.Bytes32TextWithEndElement : XmlBinaryNodeType.Bytes32Text);
+                XmlBinaryNodeType nodeType = (
+                    withEndElement
+                        ? XmlBinaryNodeType.Bytes32TextWithEndElement
+                        : XmlBinaryNodeType.Bytes32Text
+                );
                 InsertNode(nodeType, length - actual);
             }
         }
@@ -1225,12 +1361,22 @@ namespace System.Xml
 
         private bool IsStartArray(string localName, string namespaceUri, XmlBinaryNodeType nodeType)
         {
-            return IsStartElement(localName, namespaceUri) && _arrayState == ArrayState.Element && _arrayNodeType == nodeType && !Signing;
+            return IsStartElement(localName, namespaceUri)
+                && _arrayState == ArrayState.Element
+                && _arrayNodeType == nodeType
+                && !Signing;
         }
 
-        private bool IsStartArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, XmlBinaryNodeType nodeType)
+        private bool IsStartArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            XmlBinaryNodeType nodeType
+        )
         {
-            return IsStartElement(localName, namespaceUri) && _arrayState == ArrayState.Element && _arrayNodeType == nodeType && !Signing;
+            return IsStartElement(localName, namespaceUri)
+                && _arrayState == ArrayState.Element
+                && _arrayNodeType == nodeType
+                && !Signing;
         }
 
         private static void CheckArray(Array array, int offset, int count)
@@ -1238,13 +1384,27 @@ namespace System.Xml
             ArgumentNullException.ThrowIfNull(array);
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > array.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, array.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, array.Length)
+                    )
+                );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                );
             if (count > array.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(count),
+                        SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                    )
+                );
         }
 
         private unsafe int ReadArray(bool[] array, int offset, int count)
@@ -1256,14 +1416,26 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, bool[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.BoolTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, bool[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.BoolTextWithEndElement))
                 return ReadArray(array, offset, count);
@@ -1279,16 +1451,34 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, short[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int16TextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int16TextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, short[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            short[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int16TextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int16TextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
@@ -1302,16 +1492,34 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, int[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int32TextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int32TextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, int[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            int[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int32TextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int32TextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
@@ -1325,16 +1533,34 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, long[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int64TextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int64TextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, long[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            long[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int64TextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.Int64TextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
@@ -1348,16 +1574,34 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, float[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.FloatTextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.FloatTextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, float[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.FloatTextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.FloatTextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
@@ -1371,16 +1615,34 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, double[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DoubleTextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DoubleTextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, double[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DoubleTextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DoubleTextWithEndElement)
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
@@ -1394,16 +1656,42 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, decimal[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DecimalTextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(
+                    localName,
+                    namespaceUri,
+                    XmlBinaryNodeType.DecimalTextWithEndElement
+                )
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, decimal[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
-            if (BitConverter.IsLittleEndian && IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DecimalTextWithEndElement))
+            if (
+                BitConverter.IsLittleEndian
+                && IsStartArray(
+                    localName,
+                    namespaceUri,
+                    XmlBinaryNodeType.DecimalTextWithEndElement
+                )
+            )
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
@@ -1423,14 +1711,26 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, DateTime[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DateTimeTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, DateTime[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.DateTimeTextWithEndElement))
                 return ReadArray(array, offset, count);
@@ -1459,14 +1759,26 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, Guid[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.GuidTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, Guid[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.GuidTextWithEndElement))
                 return ReadArray(array, offset, count);
@@ -1488,14 +1800,26 @@ namespace System.Xml
             return actual;
         }
 
-        public override int ReadArray(string localName, string namespaceUri, TimeSpan[] array, int offset, int count)
+        public override int ReadArray(
+            string localName,
+            string namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.TimeSpanTextWithEndElement))
                 return ReadArray(array, offset, count);
             return base.ReadArray(localName, namespaceUri, array, offset, count);
         }
 
-        public override int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, TimeSpan[] array, int offset, int count)
+        public override int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             if (IsStartArray(localName, namespaceUri, XmlBinaryNodeType.TimeSpanTextWithEndElement))
                 return ReadArray(array, offset, count);

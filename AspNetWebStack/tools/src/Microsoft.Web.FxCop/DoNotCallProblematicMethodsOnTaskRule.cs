@@ -11,9 +11,7 @@ namespace Microsoft.Web.FxCop
         private readonly Dictionary<string, string> _problematicMethods = GetProblematicMethods();
 
         public DoNotCallProblematicMethodsOnTaskRule()
-            : base("DoNotCallProblematicMethodsOnTask")
-        {
-        }
+            : base("DoNotCallProblematicMethodsOnTask") { }
 
         public override ProblemCollection Check(Member member)
         {
@@ -32,10 +30,17 @@ namespace Microsoft.Web.FxCop
             if (method != null)
             {
                 string message;
-                if (_problematicMethods.TryGetValue(method.Name.Name, out message) &&
-                    method.DeclaringType.IsTask())
+                if (
+                    _problematicMethods.TryGetValue(method.Name.Name, out message)
+                    && method.DeclaringType.IsTask()
+                )
                 {
-                    Problems.Add(new Problem(GetResolution(method.Name.Name, message), memberBinding.UniqueKey.ToString()));
+                    Problems.Add(
+                        new Problem(
+                            GetResolution(method.Name.Name, message),
+                            memberBinding.UniqueKey.ToString()
+                        )
+                    );
                 }
             }
 
@@ -46,17 +51,41 @@ namespace Microsoft.Web.FxCop
         {
             return new Dictionary<string, string>
             {
-                { "get_Result", "Calls to this method are difficult to get correct or do not have good performance characteristics. Use the .Then(), .Catch(), or .Finally() extension method instead." },
-                { "get_Factory", "If you need to create a Task, use the TaskHelpers class instead." },
-                { "ContinueWith", "Calls to this method are difficult to get correct or do not have good performance characteristics. Use the .Then(), .Catch(), or .Finally() extension method instead." },
+                {
+                    "get_Result",
+                    "Calls to this method are difficult to get correct or do not have good performance characteristics. Use the .Then(), .Catch(), or .Finally() extension method instead."
+                },
+                {
+                    "get_Factory",
+                    "If you need to create a Task, use the TaskHelpers class instead."
+                },
+                {
+                    "ContinueWith",
+                    "Calls to this method are difficult to get correct or do not have good performance characteristics. Use the .Then(), .Catch(), or .Finally() extension method instead."
+                },
                 { "Dispose", "Tasks should never be disposed of." },
                 { "Run", "If you need to create a Task, use the TaskHelpers class instead." },
-                { "RunSynchronously", "If you need to create a Task, use the TaskHelpers class instead." },
+                {
+                    "RunSynchronously",
+                    "If you need to create a Task, use the TaskHelpers class instead."
+                },
                 { "Start", "If you need to create a Task, use the TaskHelpers class instead." },
-                { "Wait", "This is a blocking call. Switch to an asynchronous call like .Then() instead." },
-                { "WaitAll", "This is a blocking call. Switch to an asynchronous call like .Then() instead." },
-                { "WaitAny", "This is a blocking call. Switch to an asynchronous call like .Then() instead." },
-                { "Yield", "This call forces a thread transition which can hurt server performance. Do not use." },
+                {
+                    "Wait",
+                    "This is a blocking call. Switch to an asynchronous call like .Then() instead."
+                },
+                {
+                    "WaitAll",
+                    "This is a blocking call. Switch to an asynchronous call like .Then() instead."
+                },
+                {
+                    "WaitAny",
+                    "This is a blocking call. Switch to an asynchronous call like .Then() instead."
+                },
+                {
+                    "Yield",
+                    "This call forces a thread transition which can hurt server performance. Do not use."
+                },
             };
         }
     }

@@ -18,13 +18,15 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         // Arrange
         using var httpEventSource = new HttpEventSourceListener(LoggerFactory);
 
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         await NamedPipeTestHelpers.CreateAndCompleteBidirectionalStreamGracefully(
             NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint),
             connectionListener,
-            Logger);
+            Logger
+        );
 
         Assert.Contains(LogMessages, m => m.Message.Contains("send loop completed gracefully"));
     }
@@ -33,20 +35,27 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
     public async Task InputReadAsync_ServerAborted_ThrowError()
     {
         // Arrange
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         var clientStream = NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint);
         await clientStream.ConnectAsync().DefaultTimeout();
         await clientStream.WriteAsync(TestData).DefaultTimeout();
-        
+
         var serverConnection = await connectionListener.AcceptAsync().DefaultTimeout();
-        var readResult = await serverConnection.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
+        var readResult = await serverConnection.Transport.Input
+            .ReadAtLeastAsync(TestData.Length)
+            .DefaultTimeout();
         serverConnection.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
         serverConnection.Abort(new ConnectionAbortedException("Test reason"));
 
-        var serverEx = await Assert.ThrowsAsync<ConnectionAbortedException>(() => serverConnection.Transport.Input.ReadAsync().AsTask()).DefaultTimeout();
+        var serverEx = await Assert
+            .ThrowsAsync<ConnectionAbortedException>(
+                () => serverConnection.Transport.Input.ReadAsync().AsTask()
+            )
+            .DefaultTimeout();
         Assert.Equal("Test reason", serverEx.Message);
 
         // Complete writing.
@@ -57,7 +66,8 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
     public async Task InputReadAsync_ServerAbortedDuring_ThrowError()
     {
         // Arrange
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         var clientStream = NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint);
@@ -65,7 +75,9 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverConnection = await connectionListener.AcceptAsync().DefaultTimeout();
-        var readResult = await serverConnection.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
+        var readResult = await serverConnection.Transport.Input
+            .ReadAtLeastAsync(TestData.Length)
+            .DefaultTimeout();
         serverConnection.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
         var serverReadTask = serverConnection.Transport.Input.ReadAsync();
@@ -73,7 +85,9 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
 
         serverConnection.Abort(new ConnectionAbortedException("Test reason"));
 
-        var serverEx = await Assert.ThrowsAsync<ConnectionAbortedException>(() => serverReadTask.AsTask()).DefaultTimeout();
+        var serverEx = await Assert
+            .ThrowsAsync<ConnectionAbortedException>(() => serverReadTask.AsTask())
+            .DefaultTimeout();
         Assert.Equal("Test reason", serverEx.Message);
 
         // Complete writing.
@@ -84,7 +98,8 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
     public async Task OutputWriteAsync_ServerAborted_ThrowError()
     {
         // Arrange
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         var clientStream = NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint);
@@ -92,13 +107,17 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverConnection = await connectionListener.AcceptAsync().DefaultTimeout();
-        var readResult = await serverConnection.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
+        var readResult = await serverConnection.Transport.Input
+            .ReadAtLeastAsync(TestData.Length)
+            .DefaultTimeout();
         serverConnection.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
         serverConnection.Abort(new ConnectionAbortedException("Test reason"));
 
         // Write after abort is ignored.
-        await serverConnection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes(new string('c', 1024 * 1024 * 10)));
+        await serverConnection.Transport.Output.WriteAsync(
+            Encoding.UTF8.GetBytes(new string('c', 1024 * 1024 * 10))
+        );
 
         // Complete writing.
         await serverConnection.Transport.Output.CompleteAsync();

@@ -18,7 +18,9 @@ namespace System.Diagnostics.Tests
         [InlineData(false)]
         public void Ctors_ProviderNames_LogNames_NotEmpty(bool usingDefaultCtor)
         {
-            using (var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null))
+            using (
+                var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
+            )
             {
                 Assert.NotEmpty(session.GetProviderNames());
                 Assert.NotEmpty(session.GetLogNames());
@@ -30,12 +32,29 @@ namespace System.Diagnostics.Tests
         [InlineData(false)]
         public void ExportLogAndMessages_NullPath_Throws(bool usingDefaultCtor)
         {
-            using (var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null))
+            using (
+                var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
+            )
             {
-                Assert.Throws<ArgumentNullException>(() => session.ExportLogAndMessages(null, PathType.LogName, LogName, GetTestFilePath()));
+                Assert.Throws<ArgumentNullException>(
+                    () =>
+                        session.ExportLogAndMessages(
+                            null,
+                            PathType.LogName,
+                            LogName,
+                            GetTestFilePath()
+                        )
+                );
                 // Does not throw:
                 session.ExportLogAndMessages(LogName, PathType.LogName, LogName, GetTestFilePath());
-                session.ExportLogAndMessages(LogName, PathType.LogName, LogName, GetTestFilePath(), false, targetCultureInfo: CultureInfo.CurrentCulture);
+                session.ExportLogAndMessages(
+                    LogName,
+                    PathType.LogName,
+                    LogName,
+                    GetTestFilePath(),
+                    false,
+                    targetCultureInfo: CultureInfo.CurrentCulture
+                );
                 session.CancelCurrentOperations();
             }
         }
@@ -45,14 +64,30 @@ namespace System.Diagnostics.Tests
         [InlineData(false)]
         public void ExportLog_InvalidInputCombinations_Throws(bool usingDefaultCtor)
         {
-            using (var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null))
+            using (
+                var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
+            )
             {
-                Assert.Throws<ArgumentNullException>(() => session.ExportLog(null, PathType.LogName, LogName, GetTestFilePath()));
-                Assert.Throws<ArgumentNullException>(() => session.ExportLog(LogName, PathType.LogName, LogName, null));
-                Assert.Throws<ArgumentOutOfRangeException>(() => session.ExportLog(LogName, (PathType)0, LogName, GetTestFilePath()));
-                Assert.Throws<EventLogNotFoundException>(() => session.ExportLog(LogName, PathType.FilePath, LogName, GetTestFilePath()));
+                Assert.Throws<ArgumentNullException>(
+                    () => session.ExportLog(null, PathType.LogName, LogName, GetTestFilePath())
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => session.ExportLog(LogName, PathType.LogName, LogName, null)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => session.ExportLog(LogName, (PathType)0, LogName, GetTestFilePath())
+                );
+                Assert.Throws<EventLogNotFoundException>(
+                    () => session.ExportLog(LogName, PathType.FilePath, LogName, GetTestFilePath())
+                );
                 // Does not throw:
-                session.ExportLog(LogName, PathType.LogName, LogName, GetTestFilePath(), tolerateQueryErrors: true);
+                session.ExportLog(
+                    LogName,
+                    PathType.LogName,
+                    LogName,
+                    GetTestFilePath(),
+                    tolerateQueryErrors: true
+                );
                 session.CancelCurrentOperations();
             }
         }
@@ -62,7 +97,15 @@ namespace System.Diagnostics.Tests
         {
             var password = new SecureString();
             password.AppendChar('a');
-            using (var session = new EventLogSession(null, null, null, password, SessionAuthentication.Default))
+            using (
+                var session = new EventLogSession(
+                    null,
+                    null,
+                    null,
+                    password,
+                    SessionAuthentication.Default
+                )
+            )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => session.GetProviderNames());
             }
@@ -74,9 +117,16 @@ namespace System.Diagnostics.Tests
             using (var session = new EventLogSession())
             {
                 Assert.Throws<ArgumentNullException>(() => session.ClearLog(null));
-                Assert.Throws<ArgumentNullException>(() => session.ClearLog(null, backupPath: GetTestFilePath()));
+                Assert.Throws<ArgumentNullException>(
+                    () => session.ClearLog(null, backupPath: GetTestFilePath())
+                );
                 Assert.Throws<EventLogException>(() => session.ClearLog(""));
-                Assert.Throws<EventLogNotFoundException>(() => session.ClearLog(logName: nameof(ClearLog_LogNameNullEmptyOrNotExist_Throws)));
+                Assert.Throws<EventLogNotFoundException>(
+                    () =>
+                        session.ClearLog(
+                            logName: nameof(ClearLog_LogNameNullEmptyOrNotExist_Throws)
+                        )
+                );
             }
         }
 
@@ -96,7 +146,7 @@ namespace System.Diagnostics.Tests
                         Helpers.Retry(() => eventLog.WriteEntry("Writing to event log."));
                         Assert.NotEqual(0, Helpers.Retry((() => eventLog.Entries.Count)));
                         session.ClearLog(logName: log);
-                        Assert.Equal(0,  Helpers.Retry((() => eventLog.Entries.Count)));
+                        Assert.Equal(0, Helpers.Retry((() => eventLog.Entries.Count)));
                     }
                 }
                 finally
@@ -113,7 +163,9 @@ namespace System.Diagnostics.Tests
         {
             using (var session = new EventLogSession())
             {
-                EventLogNotFoundException exception = Assert.Throws<EventLogNotFoundException>(() => session.ExportLog(LogName, PathType.FilePath, LogName, GetTestFilePath()));
+                EventLogNotFoundException exception = Assert.Throws<EventLogNotFoundException>(
+                    () => session.ExportLog(LogName, PathType.FilePath, LogName, GetTestFilePath())
+                );
                 Assert.Equal(unchecked((int)0x80070002), exception.HResult);
                 session.CancelCurrentOperations();
             }

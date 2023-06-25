@@ -10,14 +10,21 @@ namespace Microsoft.CodeAnalysis
     {
         private static class TypeParameterOrdinalSymbolKey
         {
-            public static void Create(ITypeParameterSymbol symbol, int methodIndex, SymbolKeyWriter visitor)
+            public static void Create(
+                ITypeParameterSymbol symbol,
+                int methodIndex,
+                SymbolKeyWriter visitor
+            )
             {
                 Contract.ThrowIfFalse(symbol.TypeParameterKind == TypeParameterKind.Method);
                 visitor.WriteInteger(methodIndex);
                 visitor.WriteInteger(symbol.Ordinal);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var methodIndex = reader.ReadInteger();
                 var ordinal = reader.ReadInteger();

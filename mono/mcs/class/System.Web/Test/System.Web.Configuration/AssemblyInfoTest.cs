@@ -1,5 +1,5 @@
 //
-// AssemblyInfoTest.cs 
+// AssemblyInfoTest.cs
 //	- unit tests for System.Web.Configuration.AssemblyInfo
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,35 +36,33 @@ using System.Web.Configuration;
 using System.Web;
 using System.Web.Security;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class AssemblyInfoTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            AssemblyInfo a = new AssemblyInfo("hi");
 
-	[TestFixture]
-	public class AssemblyInfoTest  {
+            Assert.AreEqual("hi", a.Assembly, "A1");
+        }
 
-		[Test]
-		public void Defaults()
-		{
-			AssemblyInfo a = new AssemblyInfo("hi");
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void Assembly_validationFailure()
+        {
+            AssemblyInfo a = new AssemblyInfo("");
+        }
 
-			Assert.AreEqual ("hi", a.Assembly, "A1");
-		}
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void Assembly_validationFailure2()
+        {
+            AssemblyInfo a = new AssemblyInfo("hi");
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void Assembly_validationFailure ()
-		{
-			AssemblyInfo a = new AssemblyInfo ("");
-		}
-
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void Assembly_validationFailure2 ()
-		{
-			AssemblyInfo a = new AssemblyInfo ("hi");
-
-			a.Assembly = "";
-		}
-	}
-
+            a.Assembly = "";
+        }
+    }
 }
-

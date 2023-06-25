@@ -24,7 +24,10 @@ namespace BoundTreeGenerator
 
             if (args.Length != 3)
             {
-                Console.Error.WriteLine("Usage: \"{0} <language> <input> <output>\", where <language> is \"VB\" or \"CSharp\"", Path.GetFileNameWithoutExtension(args[0]));
+                Console.Error.WriteLine(
+                    "Usage: \"{0} <language> <input> <output>\", where <language> is \"VB\" or \"CSharp\"",
+                    Path.GetFileNameWithoutExtension(args[0])
+                );
                 return 1;
             }
 
@@ -48,12 +51,22 @@ namespace BoundTreeGenerator
 
             Tree tree;
             var serializer = new XmlSerializer(typeof(Tree));
-            using (var reader = XmlReader.Create(infilename, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }))
+            using (
+                var reader = XmlReader.Create(
+                    infilename,
+                    new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+                )
+            )
             {
                 tree = (Tree)serializer.Deserialize(reader);
             }
 
-            using (var outfile = new StreamWriter(File.Open(outfilename, FileMode.Create), Encoding.UTF8))
+            using (
+                var outfile = new StreamWriter(
+                    File.Open(outfilename, FileMode.Create),
+                    Encoding.UTF8
+                )
+            )
             {
                 BoundNodeClassWriter.Write(outfile, tree, targetLanguage);
             }

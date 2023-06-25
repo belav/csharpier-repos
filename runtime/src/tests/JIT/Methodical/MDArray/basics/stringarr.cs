@@ -25,7 +25,8 @@ public class string1
 
     public static void Init2DMatrix(out String[,] m, out String[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -83,7 +84,8 @@ public class string1
 
     public static void Init3DMatrix(String[,,] m, String[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -140,7 +142,8 @@ public class string1
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -150,8 +153,14 @@ public class string1
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
-        Console.WriteLine("Element manipulation of {0} by {0} matrices with different arithmetic operations", size);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
+        Console.WriteLine(
+            "Element manipulation of {0} by {0} matrices with different arithmetic operations",
+            size
+        );
         Console.WriteLine("Matrix element stores string converted from random double");
         Console.WriteLine("array set/get, ref/out param are used");
 
@@ -182,7 +191,13 @@ public class string1
             {
                 if (ima2d[i, j] != refa2d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr[i,j] {2}!=refr[i][j] {3}", i, j, ima2d[i, j], refa2d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr[i,j] {2}!=refr[i][j] {3}",
+                        i,
+                        j,
+                        ima2d[i, j],
+                        refa2d[i][j]
+                    );
                     pass = false;
                 }
             }
@@ -195,13 +210,16 @@ public class string1
                 ima2d[0, -1] = "5";
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();
         Console.WriteLine("3D Array");
-        Console.WriteLine("Element manipulation of {0} by {1} by {0} matrices with different arithmetic operations", size, size + 1);
+        Console.WriteLine(
+            "Element manipulation of {0} by {1} by {0} matrices with different arithmetic operations",
+            size,
+            size + 1
+        );
 
         String[,,] ima3d = new String[size, size + 1, size];
         String[][] refa3d = new String[size][];
@@ -233,7 +251,14 @@ public class string1
             {
                 if (ima3d[i, size, j] != refa3d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr[i,{4},j] {2}!=refr[i][j] {3}", i, j, ima3d[i, size, j], refa3d[i][j], size);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr[i,{4},j] {2}!=refr[i][j] {3}",
+                        i,
+                        j,
+                        ima3d[i, size, j],
+                        refa3d[i][j],
+                        size
+                    );
                     pass = false;
                 }
             }
@@ -246,8 +271,7 @@ public class string1
                 ima3d[0, 100, 0] = "";
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();

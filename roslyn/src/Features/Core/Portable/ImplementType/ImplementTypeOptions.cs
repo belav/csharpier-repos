@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.ImplementType
                 nameof(InsertionBehavior),
                 defaultValue: ImplementTypeInsertionBehavior.WithOtherMembersOfTheSameKind,
                 storageLocation: new RoamingProfileStorageLocation(
-                    $"TextEditor.%LANGUAGE%.{nameof(ImplementTypeOptions)}.{nameof(InsertionBehavior)}"));
+                    $"TextEditor.%LANGUAGE%.{nameof(ImplementTypeOptions)}.{nameof(InsertionBehavior)}"
+                )
+            );
 
         public static readonly PerLanguageOption2<ImplementTypePropertyGenerationBehavior> PropertyGenerationBehavior =
             new(
@@ -34,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ImplementType
                 nameof(PropertyGenerationBehavior),
                 defaultValue: ImplementTypePropertyGenerationBehavior.PreferThrowingProperties,
                 storageLocation: new RoamingProfileStorageLocation(
-                    $"TextEditor.%LANGUAGE%.{nameof(ImplementTypeOptions)}.{nameof(PropertyGenerationBehavior)}"));
-
+                    $"TextEditor.%LANGUAGE%.{nameof(ImplementTypeOptions)}.{nameof(PropertyGenerationBehavior)}"
+                )
+            );
     }
 }

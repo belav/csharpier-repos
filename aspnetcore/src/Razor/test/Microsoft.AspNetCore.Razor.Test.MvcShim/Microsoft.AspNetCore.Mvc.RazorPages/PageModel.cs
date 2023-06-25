@@ -38,5 +38,6 @@ public abstract class PageModel
 
     public virtual bool TryValidateModel(object model) => throw new NotImplementedException();
 
-    public virtual bool TryValidateModel(object model, string name) => throw new NotImplementedException();
+    public virtual bool TryValidateModel(object model, string name) =>
+        throw new NotImplementedException();
 }

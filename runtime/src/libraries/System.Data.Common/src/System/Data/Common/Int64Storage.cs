@@ -14,9 +14,7 @@ namespace System.Data.Common
         private long[] _values = default!; // Late-initialized
 
         internal Int64Storage(DataColumn column)
-        : base(column, typeof(long), defaultValue, StorageType.Int64)
-        {
-        }
+            : base(column, typeof(long), defaultValue, StorageType.Int64) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -31,7 +29,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { sum += _values[record]; }
+                                checked
+                                {
+                                    sum += _values[record];
+                                }
                                 hasData = true;
                             }
                         }
@@ -48,7 +49,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { meanSum += _values[record]; }
+                                checked
+                                {
+                                    meanSum += _values[record];
+                                }
                                 meanCount++;
                                 hasData = true;
                             }
@@ -56,7 +60,10 @@ namespace System.Data.Common
                         if (hasData)
                         {
                             long mean;
-                            checked { mean = (long)(meanSum / (decimal)meanCount); }
+                            checked
+                            {
+                                mean = (long)(meanSum / (decimal)meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -259,7 +266,12 @@ namespace System.Data.Common
             return new long[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             long[] typedStore = (long[])store;
             typedStore[storeIndex] = _values[record];

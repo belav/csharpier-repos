@@ -31,6 +31,8 @@ internal static class Helpers
             new TestW3CLoggerProcessor(
                 options,
                 new HostingEnvironment(),
-                NullLoggerFactory.Instance));
+                NullLoggerFactory.Instance
+            )
+        );
     }
 }

@@ -11,14 +11,63 @@ namespace System.Drawing.Drawing2D.Tests
         public static IEnumerable<object[]> Ctor_Path_Path_LineCap_Float_TestData()
         {
             yield return new object[] { new GraphicsPath(), null, LineCap.Flat, 0f, LineCap.Flat };
-            yield return new object[] { new GraphicsPath(), null, LineCap.Square, 1f, LineCap.Square };
-            yield return new object[] { new GraphicsPath(), null, LineCap.Round, -1f, LineCap.Round };
-            yield return new object[] { new GraphicsPath(), null, LineCap.Triangle, float.MaxValue, LineCap.Triangle };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.Square,
+                1f,
+                LineCap.Square
+            };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.Round,
+                -1f,
+                LineCap.Round
+            };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.Triangle,
+                float.MaxValue,
+                LineCap.Triangle
+            };
             // All of these "anchor" values yield a "Flat" LineCap.
-            yield return new object[] { new GraphicsPath(), null, LineCap.NoAnchor, 0f, LineCap.Flat };
-            yield return new object[] { new GraphicsPath(), null, LineCap.SquareAnchor, 0f, LineCap.Flat };
-            yield return new object[] { new GraphicsPath(), null, LineCap.DiamondAnchor, 0f, LineCap.Flat };
-            yield return new object[] { new GraphicsPath(), null, LineCap.ArrowAnchor, 0f, LineCap.Flat };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.NoAnchor,
+                0f,
+                LineCap.Flat
+            };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.SquareAnchor,
+                0f,
+                LineCap.Flat
+            };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.DiamondAnchor,
+                0f,
+                LineCap.Flat
+            };
+            yield return new object[]
+            {
+                new GraphicsPath(),
+                null,
+                LineCap.ArrowAnchor,
+                0f,
+                LineCap.Flat
+            };
 
             // Boxy cap
             GraphicsPath strokePath = new GraphicsPath();
@@ -42,11 +91,24 @@ namespace System.Drawing.Drawing2D.Tests
 
         [ConditionalTheory(Helpers.IsWindowsOrAtLeastLibgdiplus6)]
         [MemberData(nameof(Ctor_Path_Path_LineCap_Float_TestData))]
-        public void Ctor_Path_Path_LineCap_Float(GraphicsPath fillPath, GraphicsPath strokePath, LineCap baseCap, float baseInset, LineCap expectedCap)
+        public void Ctor_Path_Path_LineCap_Float(
+            GraphicsPath fillPath,
+            GraphicsPath strokePath,
+            LineCap baseCap,
+            float baseInset,
+            LineCap expectedCap
+        )
         {
             using (fillPath)
             using (strokePath)
-            using (CustomLineCap customLineCap = new CustomLineCap(fillPath, strokePath, baseCap, baseInset))
+            using (
+                CustomLineCap customLineCap = new CustomLineCap(
+                    fillPath,
+                    strokePath,
+                    baseCap,
+                    baseInset
+                )
+            )
             {
                 Assert.Equal(expectedCap, customLineCap.BaseCap);
                 Assert.Equal(baseInset, customLineCap.BaseInset);
@@ -63,7 +125,9 @@ namespace System.Drawing.Drawing2D.Tests
         {
             using (GraphicsPath fillPath = new GraphicsPath())
             using (GraphicsPath strokePath = new GraphicsPath())
-            using (CustomLineCap customLineCap = new CustomLineCap(fillPath, strokePath, baseCap, 0f))
+            using (
+                CustomLineCap customLineCap = new CustomLineCap(fillPath, strokePath, baseCap, 0f)
+            )
             {
                 Assert.Equal(LineCap.Flat, customLineCap.BaseCap);
             }
@@ -75,7 +139,10 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath fillPath = new GraphicsPath())
             {
                 fillPath.AddLine(new Point(0, -10), new Point(0, 10));
-                AssertExtensions.Throws<ArgumentException>(null, () => new CustomLineCap(fillPath, null));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new CustomLineCap(fillPath, null)
+                );
             }
         }
 
@@ -102,7 +169,10 @@ namespace System.Drawing.Drawing2D.Tests
             using (CustomLineCap customLineCap = new CustomLineCap(null, strokePath))
             {
                 customLineCap.SetStrokeCaps(startCap, endCap);
-                customLineCap.GetStrokeCaps(out LineCap retrievedStartCap, out LineCap retrievedEndCap);
+                customLineCap.GetStrokeCaps(
+                    out LineCap retrievedStartCap,
+                    out LineCap retrievedEndCap
+                );
 
                 Assert.Equal(startCap, retrievedStartCap);
                 Assert.Equal(endCap, retrievedEndCap);
@@ -116,15 +186,24 @@ namespace System.Drawing.Drawing2D.Tests
         [InlineData(LineCap.Custom, LineCap.SquareAnchor)]
         [InlineData(LineCap.Flat - 1, LineCap.Flat)] // Below valid enum range
         [InlineData(LineCap.Custom + 1, LineCap.Flat)] // Above valid enum range
-        public void SetStrokeCaps_InvalidLineCap_ThrowsArgumentException(LineCap startCap, LineCap endCap)
+        public void SetStrokeCaps_InvalidLineCap_ThrowsArgumentException(
+            LineCap startCap,
+            LineCap endCap
+        )
         {
             using (GraphicsPath strokePath = new GraphicsPath())
             using (CustomLineCap customLineCap = new CustomLineCap(null, strokePath))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.SetStrokeCaps(startCap, endCap));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => customLineCap.SetStrokeCaps(startCap, endCap)
+                );
 
                 // start and end cap should be unchanged.
-                customLineCap.GetStrokeCaps(out LineCap retrievedStartCap, out LineCap retrievedEndCap);
+                customLineCap.GetStrokeCaps(
+                    out LineCap retrievedStartCap,
+                    out LineCap retrievedEndCap
+                );
                 Assert.Equal(LineCap.Flat, retrievedStartCap);
                 Assert.Equal(LineCap.Flat, retrievedEndCap);
             }
@@ -176,7 +255,10 @@ namespace System.Drawing.Drawing2D.Tests
             using (GraphicsPath strokePath = new GraphicsPath())
             using (CustomLineCap customLineCap = new CustomLineCap(null, strokePath))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.BaseCap = baseCap);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => customLineCap.BaseCap = baseCap
+                );
                 Assert.Equal(LineCap.Flat, customLineCap.BaseCap);
             }
         }
@@ -239,8 +321,14 @@ namespace System.Drawing.Drawing2D.Tests
                 AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.BaseInset);
                 AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.WidthScale);
                 AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.Clone());
-                AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.SetStrokeCaps(LineCap.Flat, LineCap.Flat));
-                AssertExtensions.Throws<ArgumentException>(null, () => customLineCap.GetStrokeCaps(out LineCap startCap, out LineCap endCap));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => customLineCap.SetStrokeCaps(LineCap.Flat, LineCap.Flat)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => customLineCap.GetStrokeCaps(out LineCap startCap, out LineCap endCap)
+                );
             }
         }
     }

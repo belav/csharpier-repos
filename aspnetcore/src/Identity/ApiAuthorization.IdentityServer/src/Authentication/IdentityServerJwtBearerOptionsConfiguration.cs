@@ -11,7 +11,8 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-internal sealed class IdentityServerJwtBearerOptionsConfiguration : IConfigureNamedOptions<JwtBearerOptions>
+internal sealed class IdentityServerJwtBearerOptionsConfiguration
+    : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly string _scheme;
     private readonly string _apiName;
@@ -20,7 +21,8 @@ internal sealed class IdentityServerJwtBearerOptionsConfiguration : IConfigureNa
     public IdentityServerJwtBearerOptionsConfiguration(
         string scheme,
         string apiName,
-        IIdentityServerJwtDescriptor localApiDescriptor)
+        IIdentityServerJwtDescriptor localApiDescriptor
+    )
     {
         _scheme = scheme;
         _apiName = apiName;
@@ -41,10 +43,7 @@ internal sealed class IdentityServerJwtBearerOptionsConfiguration : IConfigureNa
             options.Events.OnMessageReceived = ResolveAuthorityAndKeysAsync;
             options.Audience = _apiName;
 
-            var staticConfiguration = new OpenIdConnectConfiguration
-            {
-                Issuer = options.Authority
-            };
+            var staticConfiguration = new OpenIdConnectConfiguration { Issuer = options.Authority };
 
             var manager = new StaticConfigurationManager(staticConfiguration);
             options.ConfigurationManager = manager;
@@ -54,22 +53,28 @@ internal sealed class IdentityServerJwtBearerOptionsConfiguration : IConfigureNa
         }
     }
 
-    internal static async Task ResolveAuthorityAndKeysAsync(MessageReceivedContext messageReceivedContext)
+    internal static async Task ResolveAuthorityAndKeysAsync(
+        MessageReceivedContext messageReceivedContext
+    )
     {
         var options = messageReceivedContext.Options;
-        if (options.TokenValidationParameters.ValidIssuer == null || options.TokenValidationParameters.IssuerSigningKey == null)
+        if (
+            options.TokenValidationParameters.ValidIssuer == null
+            || options.TokenValidationParameters.IssuerSigningKey == null
+        )
         {
-            var store = messageReceivedContext.HttpContext.RequestServices.GetRequiredService<ISigningCredentialStore>();
+            var store =
+                messageReceivedContext.HttpContext.RequestServices.GetRequiredService<ISigningCredentialStore>();
             var credential = await store.GetSigningCredentialsAsync();
 #pragma warning disable 0618
-            options.Authority = options.Authority ?? messageReceivedContext.HttpContext.GetIdentityServerIssuerUri();
+            options.Authority =
+                options.Authority
+                ?? messageReceivedContext.HttpContext.GetIdentityServerIssuerUri();
 #pragma warning restore 0618
             options.TokenValidationParameters.IssuerSigningKey = credential.Key;
             options.TokenValidationParameters.ValidIssuer = options.Authority;
         }
     }
 
-    public void Configure(JwtBearerOptions options)
-    {
-    }
+    public void Configure(JwtBearerOptions options) { }
 }

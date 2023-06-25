@@ -9,12 +9,18 @@ namespace System.Transactions.Distributed
     {
         internal object? NodeName { get; set; }
 
-        internal static IPromotedEnlistment ReenlistTransaction(Guid resourceManagerIdentifier, byte[] resourceManagerRecoveryInformation, RecoveringInternalEnlistment internalEnlistment)
+        internal static IPromotedEnlistment ReenlistTransaction(
+            Guid resourceManagerIdentifier,
+            byte[] resourceManagerRecoveryInformation,
+            RecoveringInternalEnlistment internalEnlistment
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static DistributedCommittableTransaction CreateTransaction(TransactionOptions options)
+        internal static DistributedCommittableTransaction CreateTransaction(
+            TransactionOptions options
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
@@ -29,17 +35,24 @@ namespace System.Transactions.Distributed
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static Transaction GetTransactionFromDtcTransaction(IDtcTransaction transactionNative)
+        internal static Transaction GetTransactionFromDtcTransaction(
+            IDtcTransaction transactionNative
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static DistributedTransaction GetTransactionFromExportCookie(byte[] cookie, Guid txId)
+        internal static DistributedTransaction GetTransactionFromExportCookie(
+            byte[] cookie,
+            Guid txId
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
 
-        internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(byte[] propagationToken)
+        internal static DistributedTransaction GetDistributedTransactionFromTransmitterPropagationToken(
+            byte[] propagationToken
+        )
         {
             throw DistributedTransaction.NotSupported();
         }
@@ -58,11 +71,12 @@ namespace System.Transactions.Distributed
     /// </summary>
     internal class DistributedTransaction : ISerializable, IObjectReference
     {
-        internal DistributedTransaction()
-        {
-        }
+        internal DistributedTransaction() { }
 
-        protected DistributedTransaction(SerializationInfo serializationInfo, StreamingContext context)
+        protected DistributedTransaction(
+            SerializationInfo serializationInfo,
+            StreamingContext context
+        )
         {
             //if (serializationInfo == null)
             //{
@@ -80,12 +94,20 @@ namespace System.Transactions.Distributed
         internal IsolationLevel IsolationLevel { get; set; }
         internal Transaction? SavedLtmPromotedTransaction { get; set; }
 
-        internal static IPromotedEnlistment EnlistVolatile(InternalEnlistment internalEnlistment, EnlistmentOptions enlistmentOptions)
+        internal static IPromotedEnlistment EnlistVolatile(
+            InternalEnlistment internalEnlistment,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             throw NotSupported();
         }
 
-        internal static IPromotedEnlistment EnlistDurable(Guid resourceManagerIdentifier, DurableInternalEnlistment internalEnlistment, bool v, EnlistmentOptions enlistmentOptions)
+        internal static IPromotedEnlistment EnlistDurable(
+            Guid resourceManagerIdentifier,
+            DurableInternalEnlistment internalEnlistment,
+            bool v,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             throw NotSupported();
         }
@@ -100,7 +122,10 @@ namespace System.Transactions.Distributed
             throw NotSupported();
         }
 
-        internal static IPromotedEnlistment EnlistVolatile(VolatileDemultiplexer volatileDemux, EnlistmentOptions enlistmentOptions)
+        internal static IPromotedEnlistment EnlistVolatile(
+            VolatileDemultiplexer volatileDemux,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             throw NotSupported();
         }
@@ -125,7 +150,10 @@ namespace System.Transactions.Distributed
             throw NotSupported();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext context)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext context
+        )
         {
             //if (serializationInfo == null)
             //{

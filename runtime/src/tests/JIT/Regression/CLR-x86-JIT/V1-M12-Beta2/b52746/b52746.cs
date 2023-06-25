@@ -28,6 +28,7 @@ namespace Test
             }
             return 0;
         }
+
         public static int Main()
         {
             try

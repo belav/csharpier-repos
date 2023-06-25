@@ -15,10 +15,9 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
 
         public Nullable<long> updateUserId { get; set; }
- 
+
         public Nullable<int> isActive { get; set; }
         public string propValue { get; set; }
         public string propName { get; set; }
-   
     }
 }

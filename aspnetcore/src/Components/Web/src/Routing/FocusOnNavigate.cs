@@ -15,31 +15,38 @@ public class FocusOnNavigate : ComponentBase
     private Type? _lastNavigatedPageType = typeof(NonMatchingType);
     private bool _focusAfterRender;
 
-    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets the route data. This can be obtained from an enclosing
     /// <see cref="Router"/> component.
     /// </summary>
-    [Parameter] public RouteData? RouteData { get; set; } // TODO: [EditorRequired]
+    [Parameter]
+    public RouteData? RouteData { get; set; } // TODO: [EditorRequired]
 
     /// <summary>
     /// Gets or sets a CSS selector describing the element to be focused after
     /// navigation between pages.
     /// </summary>
-    [Parameter] public string? Selector { get; set; } // TODO: [EditorRequired]
+    [Parameter]
+    public string? Selector { get; set; } // TODO: [EditorRequired]
 
     /// <inheritdoc />
     protected override void OnParametersSet()
     {
         if (RouteData is null)
         {
-            throw new InvalidOperationException($"{nameof(FocusOnNavigate)} requires a non-null value for the parameter '{nameof(RouteData)}'.");
+            throw new InvalidOperationException(
+                $"{nameof(FocusOnNavigate)} requires a non-null value for the parameter '{nameof(RouteData)}'."
+            );
         }
 
         if (string.IsNullOrWhiteSpace(Selector))
         {
-            throw new InvalidOperationException($"{nameof(FocusOnNavigate)} requires a nonempty value for the parameter '{nameof(Selector)}'.");
+            throw new InvalidOperationException(
+                $"{nameof(FocusOnNavigate)} requires a nonempty value for the parameter '{nameof(Selector)}'."
+            );
         }
 
         // We focus whenever the page type changes, including to or from 'null'

@@ -21,7 +21,8 @@ internal sealed class ComponentRenderer : IComponentRenderer
     public ComponentRenderer(
         StaticComponentRenderer staticComponentRenderer,
         ServerComponentSerializer serverComponentSerializer,
-        IViewBufferScope viewBufferScope)
+        IViewBufferScope viewBufferScope
+    )
     {
         _staticComponentRenderer = staticComponentRenderer;
         _serverComponentSerializer = serverComponentSerializer;
@@ -32,7 +33,8 @@ internal sealed class ComponentRenderer : IComponentRenderer
         ViewContext viewContext,
         Type componentType,
         RenderMode renderMode,
-        object parameters)
+        object parameters
+    )
     {
         if (viewContext is null)
         {
@@ -46,28 +48,54 @@ internal sealed class ComponentRenderer : IComponentRenderer
 
         if (!typeof(IComponent).IsAssignableFrom(componentType))
         {
-            throw new ArgumentException(Resources.FormatTypeMustDeriveFromType(componentType, typeof(IComponent)));
+            throw new ArgumentException(
+                Resources.FormatTypeMustDeriveFromType(componentType, typeof(IComponent))
+            );
         }
 
         var context = viewContext.HttpContext;
-        var parameterView = parameters is null ?
-            ParameterView.Empty :
-            ParameterView.FromDictionary(HtmlHelper.ObjectToDictionary(parameters));
+        var parameterView = parameters is null
+            ? ParameterView.Empty
+            : ParameterView.FromDictionary(HtmlHelper.ObjectToDictionary(parameters));
 
         UpdateSaveStateRenderMode(viewContext, renderMode);
 
         return renderMode switch
         {
-            RenderMode.Server => NonPrerenderedServerComponent(context, GetOrCreateInvocationId(viewContext), componentType, parameterView),
-            RenderMode.ServerPrerendered => await PrerenderedServerComponentAsync(context, GetOrCreateInvocationId(viewContext), componentType, parameterView),
+            RenderMode.Server
+                => NonPrerenderedServerComponent(
+                    context,
+                    GetOrCreateInvocationId(viewContext),
+                    componentType,
+                    parameterView
+                ),
+            RenderMode.ServerPrerendered
+                => await PrerenderedServerComponentAsync(
+                    context,
+                    GetOrCreateInvocationId(viewContext),
+                    componentType,
+                    parameterView
+                ),
             RenderMode.Static => await StaticComponentAsync(context, componentType, parameterView),
-            RenderMode.WebAssembly => NonPrerenderedWebAssemblyComponent(context, componentType, parameterView),
-            RenderMode.WebAssemblyPrerendered => await PrerenderedWebAssemblyComponentAsync(context, componentType, parameterView),
-            _ => throw new ArgumentException(Resources.FormatUnsupportedRenderMode(renderMode), nameof(renderMode)),
+            RenderMode.WebAssembly
+                => NonPrerenderedWebAssemblyComponent(context, componentType, parameterView),
+            RenderMode.WebAssemblyPrerendered
+                => await PrerenderedWebAssemblyComponentAsync(
+                    context,
+                    componentType,
+                    parameterView
+                ),
+            _
+                => throw new ArgumentException(
+                    Resources.FormatUnsupportedRenderMode(renderMode),
+                    nameof(renderMode)
+                ),
         };
     }
 
-    private static ServerComponentInvocationSequence GetOrCreateInvocationId(ViewContext viewContext)
+    private static ServerComponentInvocationSequence GetOrCreateInvocationId(
+        ViewContext viewContext
+    )
     {
         if (!viewContext.Items.TryGetValue(ComponentSequenceKey, out var result))
         {
@@ -85,17 +113,20 @@ internal sealed class ComponentRenderer : IComponentRenderer
         {
             if (!viewContext.Items.TryGetValue(InvokedRenderModesKey, out var result))
             {
-                result = new InvokedRenderModes(mode is RenderMode.ServerPrerendered ?
-                    InvokedRenderModes.Mode.Server :
-                    InvokedRenderModes.Mode.WebAssembly);
+                result = new InvokedRenderModes(
+                    mode is RenderMode.ServerPrerendered
+                        ? InvokedRenderModes.Mode.Server
+                        : InvokedRenderModes.Mode.WebAssembly
+                );
 
                 viewContext.Items[InvokedRenderModesKey] = result;
             }
             else
             {
-                var currentInvocation = mode is RenderMode.ServerPrerendered ?
-                    InvokedRenderModes.Mode.Server :
-                    InvokedRenderModes.Mode.WebAssembly;
+                var currentInvocation =
+                    mode is RenderMode.ServerPrerendered
+                        ? InvokedRenderModes.Mode.Server
+                        : InvokedRenderModes.Mode.WebAssembly;
 
                 var invokedMode = (InvokedRenderModes)result;
                 if (invokedMode.Value != currentInvocation)
@@ -118,15 +149,25 @@ internal sealed class ComponentRenderer : IComponentRenderer
         }
     }
 
-    private ValueTask<IHtmlContent> StaticComponentAsync(HttpContext context, Type type, ParameterView parametersCollection)
+    private ValueTask<IHtmlContent> StaticComponentAsync(
+        HttpContext context,
+        Type type,
+        ParameterView parametersCollection
+    )
     {
         return _staticComponentRenderer.PrerenderComponentAsync(
             parametersCollection,
             context,
-            type);
+            type
+        );
     }
 
-    private async Task<IHtmlContent> PrerenderedServerComponentAsync(HttpContext context, ServerComponentInvocationSequence invocationId, Type type, ParameterView parametersCollection)
+    private async Task<IHtmlContent> PrerenderedServerComponentAsync(
+        HttpContext context,
+        ServerComponentInvocationSequence invocationId,
+        Type type,
+        ParameterView parametersCollection
+    )
     {
         if (!context.Response.HasStarted)
         {
@@ -137,14 +178,20 @@ internal sealed class ComponentRenderer : IComponentRenderer
             invocationId,
             type,
             parametersCollection,
-            prerendered: true);
+            prerendered: true
+        );
 
         var result = await _staticComponentRenderer.PrerenderComponentAsync(
             parametersCollection,
             context,
-            type);
+            type
+        );
 
-        var viewBuffer = new ViewBuffer(_viewBufferScope, nameof(ComponentRenderer), ViewBuffer.ViewPageSize);
+        var viewBuffer = new ViewBuffer(
+            _viewBufferScope,
+            nameof(ComponentRenderer),
+            ViewBuffer.ViewPageSize
+        );
         ServerComponentSerializer.AppendPreamble(viewBuffer, currentInvocation);
         viewBuffer.AppendHtml(result);
         ServerComponentSerializer.AppendEpilogue(viewBuffer, currentInvocation);
@@ -152,19 +199,29 @@ internal sealed class ComponentRenderer : IComponentRenderer
         return viewBuffer;
     }
 
-    private async ValueTask<IHtmlContent> PrerenderedWebAssemblyComponentAsync(HttpContext context, Type type, ParameterView parametersCollection)
+    private async ValueTask<IHtmlContent> PrerenderedWebAssemblyComponentAsync(
+        HttpContext context,
+        Type type,
+        ParameterView parametersCollection
+    )
     {
         var currentInvocation = WebAssemblyComponentSerializer.SerializeInvocation(
             type,
             parametersCollection,
-            prerendered: true);
+            prerendered: true
+        );
 
         var result = await _staticComponentRenderer.PrerenderComponentAsync(
             parametersCollection,
             context,
-            type);
+            type
+        );
 
-        var viewBuffer = new ViewBuffer(_viewBufferScope, nameof(ComponentRenderer), ViewBuffer.ViewPageSize);
+        var viewBuffer = new ViewBuffer(
+            _viewBufferScope,
+            nameof(ComponentRenderer),
+            ViewBuffer.ViewPageSize
+        );
         WebAssemblyComponentSerializer.AppendPreamble(viewBuffer, currentInvocation);
         viewBuffer.AppendHtml(result);
         WebAssemblyComponentSerializer.AppendEpilogue(viewBuffer, currentInvocation);
@@ -172,24 +229,50 @@ internal sealed class ComponentRenderer : IComponentRenderer
         return viewBuffer;
     }
 
-    private IHtmlContent NonPrerenderedServerComponent(HttpContext context, ServerComponentInvocationSequence invocationId, Type type, ParameterView parametersCollection)
+    private IHtmlContent NonPrerenderedServerComponent(
+        HttpContext context,
+        ServerComponentInvocationSequence invocationId,
+        Type type,
+        ParameterView parametersCollection
+    )
     {
         if (!context.Response.HasStarted)
         {
             context.Response.Headers.CacheControl = "no-cache, no-store, max-age=0";
         }
 
-        var currentInvocation = _serverComponentSerializer.SerializeInvocation(invocationId, type, parametersCollection, prerendered: false);
+        var currentInvocation = _serverComponentSerializer.SerializeInvocation(
+            invocationId,
+            type,
+            parametersCollection,
+            prerendered: false
+        );
 
-        var viewBuffer = new ViewBuffer(_viewBufferScope, nameof(ComponentRenderer), ServerComponentSerializer.PreambleBufferSize);
+        var viewBuffer = new ViewBuffer(
+            _viewBufferScope,
+            nameof(ComponentRenderer),
+            ServerComponentSerializer.PreambleBufferSize
+        );
         ServerComponentSerializer.AppendPreamble(viewBuffer, currentInvocation);
         return viewBuffer;
     }
 
-    private IHtmlContent NonPrerenderedWebAssemblyComponent(HttpContext context, Type type, ParameterView parametersCollection)
+    private IHtmlContent NonPrerenderedWebAssemblyComponent(
+        HttpContext context,
+        Type type,
+        ParameterView parametersCollection
+    )
     {
-        var currentInvocation = WebAssemblyComponentSerializer.SerializeInvocation(type, parametersCollection, prerendered: false);
-        var viewBuffer = new ViewBuffer(_viewBufferScope, nameof(ComponentRenderer), ServerComponentSerializer.PreambleBufferSize);
+        var currentInvocation = WebAssemblyComponentSerializer.SerializeInvocation(
+            type,
+            parametersCollection,
+            prerendered: false
+        );
+        var viewBuffer = new ViewBuffer(
+            _viewBufferScope,
+            nameof(ComponentRenderer),
+            ServerComponentSerializer.PreambleBufferSize
+        );
         WebAssemblyComponentSerializer.AppendPreamble(viewBuffer, currentInvocation);
         return viewBuffer;
     }

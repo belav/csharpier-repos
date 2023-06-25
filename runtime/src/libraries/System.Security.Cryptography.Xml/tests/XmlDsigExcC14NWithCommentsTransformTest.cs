@@ -21,16 +21,13 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-    public class UnprotectedXmlDsigExcC14NWithCommentsTransform : XmlDsigExcC14NWithCommentsTransform
+    public class UnprotectedXmlDsigExcC14NWithCommentsTransform
+        : XmlDsigExcC14NWithCommentsTransform
     {
-        public UnprotectedXmlDsigExcC14NWithCommentsTransform()
-        {
-        }
+        public UnprotectedXmlDsigExcC14NWithCommentsTransform() { }
 
         public UnprotectedXmlDsigExcC14NWithCommentsTransform(string inclusiveNamespacesPrefixList)
-            : base(inclusiveNamespacesPrefixList)
-        {
-        }
+            : base(inclusiveNamespacesPrefixList) { }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {
@@ -72,7 +69,10 @@ namespace System.Security.Cryptography.Xml.Tests
 
         void CheckProperties(XmlDsigExcC14NWithCommentsTransform transform)
         {
-            Assert.Equal("http://www.w3.org/2001/10/xml-exc-c14n#WithComments", transform.Algorithm);
+            Assert.Equal(
+                "http://www.w3.org/2001/10/xml-exc-c14n#WithComments",
+                transform.Algorithm
+            );
 
             Type[] input = transform.InputTypes;
             Assert.Equal(3, input.Length);

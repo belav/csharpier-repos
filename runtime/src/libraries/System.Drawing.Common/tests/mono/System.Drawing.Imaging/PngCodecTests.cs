@@ -175,7 +175,11 @@ namespace MonoTests.System.Drawing.Imaging
             string sInFile = Helpers.GetTestBitmapPath("1bit.png");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -342,7 +346,11 @@ namespace MonoTests.System.Drawing.Imaging
             string sInFile = Helpers.GetTestBitmapPath("81674-2bpp.png");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -521,7 +529,11 @@ namespace MonoTests.System.Drawing.Imaging
             string sInFile = Helpers.GetTestBitmapPath("4bit.png");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -653,9 +665,7 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     File.Delete(sOutFile);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

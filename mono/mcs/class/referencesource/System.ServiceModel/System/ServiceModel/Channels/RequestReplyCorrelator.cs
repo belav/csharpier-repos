@@ -26,7 +26,7 @@ namespace System.ServiceModel.Channels
             Type stateType = typeof(T);
             Key key = new Key(messageId, stateType);
 
-            // add the correlator key to the request, this will be needed for cleaning up the correlator table in case of 
+            // add the correlator key to the request, this will be needed for cleaning up the correlator table in case of
             // channel aborting or faulting while there are pending requests
             ICorrelatorKey value = state as ICorrelatorKey;
             if (value != null)
@@ -59,7 +59,7 @@ namespace System.ServiceModel.Channels
         }
 
         // This method is used to remove the request from the correlator table when the
-        // reply is lost. This will avoid leaking the correlator table in cases where the 
+        // reply is lost. This will avoid leaking the correlator table in cases where the
         // channel faults or aborts while there are pending requests.
         internal void RemoveRequest(ICorrelatorKey request)
         {
@@ -77,7 +77,12 @@ namespace System.ServiceModel.Channels
         {
             UniqueId relatesTo = reply.Headers.RelatesTo;
             if (relatesTo == null)
-                throw TraceUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SuppliedMessageIsNotAReplyItHasNoRelatesTo0)), reply);
+                throw TraceUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.SuppliedMessageIsNotAReplyItHasNoRelatesTo0)
+                    ),
+                    reply
+                );
             return relatesTo;
         }
 
@@ -146,7 +151,10 @@ namespace System.ServiceModel.Channels
         internal static void PrepareReply(Message reply, UniqueId messageId)
         {
             if (object.ReferenceEquals(messageId, null))
-                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MissingMessageID)), reply);
+                throw TraceUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MissingMessageID)),
+                    reply
+                );
 
             MessageHeaders replyHeaders = reply.Headers;
 
@@ -257,7 +265,11 @@ namespace System.ServiceModel.Channels
                 return other.MessageId == this.MessageId && other.StateType == this.StateType;
             }
 
-            [SuppressMessage(FxCop.Category.Usage, "CA2303:FlagTypeGetHashCode", Justification = "The hashcode is not used for identity purposes for embedded types.")]
+            [SuppressMessage(
+                FxCop.Category.Usage,
+                "CA2303:FlagTypeGetHashCode",
+                Justification = "The hashcode is not used for identity purposes for embedded types."
+            )]
             public override int GetHashCode()
             {
                 return MessageId.GetHashCode() ^ StateType.GetHashCode();
@@ -265,11 +277,13 @@ namespace System.ServiceModel.Channels
 
             public override string ToString()
             {
-                return typeof(Key).ToString() + ": {" + MessageId + ", " + StateType.ToString() + "}";
+                return typeof(Key).ToString()
+                    + ": {"
+                    + MessageId
+                    + ", "
+                    + StateType.ToString()
+                    + "}";
             }
-
         }
-
     }
-
 }

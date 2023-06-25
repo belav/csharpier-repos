@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public sealed class FunctionsDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
 {
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var @class = documentNode.FindPrimaryClass();
         if (@class == null)
@@ -23,7 +26,9 @@ public sealed class FunctionsDirectivePass : IntermediateNodePassBase, IRazorDir
 
         if (FileKinds.IsComponent(codeDocument.GetFileKind()))
         {
-            directiveNodes.AddRange(documentNode.FindDirectiveReferences(ComponentCodeDirective.Directive));
+            directiveNodes.AddRange(
+                documentNode.FindDirectiveReferences(ComponentCodeDirective.Directive)
+            );
         }
 
         // Now we have all the directive nodes, we want to add them to the end of the class node in document order.

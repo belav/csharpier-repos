@@ -14,18 +14,31 @@ namespace Wasm.Build.NativeRebuild.Tests
 {
     public class ReferenceNewAssemblyRebuildTest : NativeRebuildTestsBase
     {
-        public ReferenceNewAssemblyRebuildTest(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public ReferenceNewAssemblyRebuildTest(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
         [MemberData(nameof(NativeBuildData))]
-        public void ReferenceNewAssembly(BuildArgs buildArgs, bool nativeRelink, bool invariant, RunHost host, string id)
+        public void ReferenceNewAssembly(
+            BuildArgs buildArgs,
+            bool nativeRelink,
+            bool invariant,
+            RunHost host,
+            string id
+        )
         {
             buildArgs = buildArgs with { ProjectName = $"rebuild_tasks_{buildArgs.Config}" };
-            (buildArgs, BuildPaths paths) = FirstNativeBuild(s_mainReturns42, nativeRelink, invariant: invariant, buildArgs, id);
+            (buildArgs, BuildPaths paths) = FirstNativeBuild(
+                s_mainReturns42,
+                nativeRelink,
+                invariant: invariant,
+                buildArgs,
+                id
+            );
 
             var pathsDict = GetFilesTable(buildArgs, paths, unchanged: false);
             pathsDict.UpdateTo(unchanged: true, "corebindings.o");
@@ -35,16 +48,16 @@ namespace Wasm.Build.NativeRebuild.Tests
             var originalStat = StatFiles(pathsDict.Select(kvp => kvp.Value.fullPath));
 
             string programText =
-            @$"
+                @$"
                 using System;
                 using System.Text.Json;
                 public class Test
                 {{
                     public static int Main()
-                    {{" +
-             @"          string json = ""{ \""name\"": \""value\"" }"";" +
-             @"          var jdoc = JsonDocument.Parse($""{json}"", new JsonDocumentOptions());" +
-            @$"          Console.WriteLine($""json: {{jdoc}}"");
+                    {{"
+                + @"          string json = ""{ \""name\"": \""value\"" }"";"
+                + @"          var jdoc = JsonDocument.Parse($""{json}"", new JsonDocumentOptions());"
+                + @$"          Console.WriteLine($""json: {{jdoc}}"");
                         return 42;
                     }}
                 }}";
@@ -54,7 +67,13 @@ namespace Wasm.Build.NativeRebuild.Tests
             var newStat = StatFiles(pathsDict.Select(kvp => kvp.Value.fullPath));
 
             CompareStat(originalStat, newStat, pathsDict.Values);
-            RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42, host: host, id: id);
+            RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42,
+                host: host,
+                id: id
+            );
         }
     }
 }

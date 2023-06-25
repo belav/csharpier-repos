@@ -31,9 +31,16 @@ namespace Microsoft.CodeAnalysis.Tools
             return result.Children.GetByAlias(alias) as ArgumentResult;
         }
 
-        internal static SymbolResult? GetByAlias(this IReadOnlyList<SymbolResult> results, string alias)
+        internal static SymbolResult? GetByAlias(
+            this IReadOnlyList<SymbolResult> results,
+            string alias
+        )
         {
-            return results.SingleOrDefault(result => result.Symbol.Name.Equals(alias) || result.Symbol is IdentifierSymbol id && id.HasAlias(alias));
+            return results.SingleOrDefault(
+                result =>
+                    result.Symbol.Name.Equals(alias)
+                    || result.Symbol is IdentifierSymbol id && id.HasAlias(alias)
+            );
         }
 
         [return: MaybeNull]
@@ -55,12 +62,19 @@ namespace Microsoft.CodeAnalysis.Tools
         }
 
         [return: MaybeNull]
-        internal static T GetValueForArgument<T>(this CommandResult result, Argument<T> argumentDefinition)
+        internal static T GetValueForArgument<T>(
+            this CommandResult result,
+            Argument<T> argumentDefinition
+        )
         {
-            var arguments = result.Children.Where(x => x.Symbol.Name == argumentDefinition.Name).ToArray();
-            if (arguments.Length == 1 &&
-                arguments.SingleOrDefault() is ArgumentResult argument &&
-                argument.GetValueOrDefault<T>() is T t)
+            var arguments = result.Children
+                .Where(x => x.Symbol.Name == argumentDefinition.Name)
+                .ToArray();
+            if (
+                arguments.Length == 1
+                && arguments.SingleOrDefault() is ArgumentResult argument
+                && argument.GetValueOrDefault<T>() is T t
+            )
             {
                 return t;
             }
@@ -71,8 +85,10 @@ namespace Microsoft.CodeAnalysis.Tools
         [return: MaybeNull]
         internal static T GetValueForArgument<T>(this CommandResult result, string alias)
         {
-            if (result.GetArgumentResult(alias) is ArgumentResult argument &&
-                argument.GetValueOrDefault<T>() is { } t)
+            if (
+                result.GetArgumentResult(alias) is ArgumentResult argument
+                && argument.GetValueOrDefault<T>() is { } t
+            )
             {
                 return t;
             }
@@ -83,8 +99,10 @@ namespace Microsoft.CodeAnalysis.Tools
         [return: MaybeNull]
         internal static T GetValueForOption<T>(this CommandResult result, string alias)
         {
-            if (result.GetOptionResult(alias) is OptionResult option &&
-                option.GetValueOrDefault<T>() is { } t)
+            if (
+                result.GetOptionResult(alias) is OptionResult option
+                && option.GetValueOrDefault<T>() is { } t
+            )
             {
                 return t;
             }

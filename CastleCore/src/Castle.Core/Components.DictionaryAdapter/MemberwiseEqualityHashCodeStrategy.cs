@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,8 +18,11 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
     using System.Collections.Generic;
 
-    public class MemberwiseEqualityHashCodeStrategy : DictionaryBehaviorAttribute,
-        IDictionaryEqualityHashCodeStrategy, IDictionaryInitializer, IEqualityComparer<IDictionaryAdapter>
+    public class MemberwiseEqualityHashCodeStrategy
+        : DictionaryBehaviorAttribute,
+            IDictionaryEqualityHashCodeStrategy,
+            IDictionaryInitializer,
+            IEqualityComparer<IDictionaryAdapter>
     {
         class HashCodeVisitor : AbstractDictionaryAdapterVisitor
         {
@@ -34,21 +37,36 @@ namespace Castle.Components.DictionaryAdapter
                 return VisitDictionaryAdapter(dictionaryAdapter, null) ? hashCode : 0;
             }
 
-            protected override void VisitProperty(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, object state)
+            protected override void VisitProperty(
+                IDictionaryAdapter dictionaryAdapter,
+                PropertyDescriptor property,
+                object state
+            )
             {
                 var value = dictionaryAdapter.GetProperty(property.PropertyName, true);
                 CollectHashCode(property, GetValueHashCode(value));
             }
 
-            protected override void VisitInterface(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, object state)
+            protected override void VisitInterface(
+                IDictionaryAdapter dictionaryAdapter,
+                PropertyDescriptor property,
+                object state
+            )
             {
-                var nested = (IDictionaryAdapter)dictionaryAdapter.GetProperty(property.PropertyName, true);
+                var nested = (IDictionaryAdapter)
+                    dictionaryAdapter.GetProperty(property.PropertyName, true);
                 CollectHashCode(property, GetNestedHashCode(nested));
             }
 
-            protected override void VisitCollection(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, Type collectionItemType, object state)
+            protected override void VisitCollection(
+                IDictionaryAdapter dictionaryAdapter,
+                PropertyDescriptor property,
+                Type collectionItemType,
+                object state
+            )
             {
-                var collection = (IEnumerable)dictionaryAdapter.GetProperty(property.PropertyName, true);
+                var collection = (IEnumerable)
+                    dictionaryAdapter.GetProperty(property.PropertyName, true);
                 CollectHashCode(property, GetCollectionHashcode(collection));
             }
 
@@ -144,7 +162,10 @@ namespace Castle.Components.DictionaryAdapter
             return true;
         }
 
-        void IDictionaryInitializer.Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
+        void IDictionaryInitializer.Initialize(
+            IDictionaryAdapter dictionaryAdapter,
+            object[] behaviors
+        )
         {
             dictionaryAdapter.This.EqualityHashCodeStrategy = this;
         }

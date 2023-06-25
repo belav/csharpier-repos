@@ -13,9 +13,17 @@ namespace JitInliningTest
         public int prop
         {
             get { return _prop + _prop * (_prop + 1) * (_prop - 1); }
-            set { _prop = value * value + (value + 1) * (value - 1) - (value + 2) * (value - 2) + (value + 3) * (value - 3); }
+            set
+            {
+                _prop =
+                    value * value
+                    + (value + 1) * (value - 1)
+                    - (value + 2) * (value - 2)
+                    + (value + 3) * (value - 3);
+            }
         }
     }
+
     internal class PropTest
     {
         public static int Main()

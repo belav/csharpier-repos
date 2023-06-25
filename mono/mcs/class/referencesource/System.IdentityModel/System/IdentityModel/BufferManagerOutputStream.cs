@@ -23,7 +23,12 @@ namespace System.IdentityModel
             this.quotaExceededString = quotaExceededString;
         }
 
-        public BufferManagerOutputStream(string quotaExceededString, int initialSize, int maxSize, BufferManager bufferManager)
+        public BufferManagerOutputStream(
+            string quotaExceededString,
+            int initialSize,
+            int maxSize,
+            BufferManager bufferManager
+        )
             : base(initialSize, maxSize, BufferManager.GetInternalBufferManager(bufferManager))
         {
             this.quotaExceededString = quotaExceededString;
@@ -34,9 +39,19 @@ namespace System.IdentityModel
             Init(initialSize, maxSizeQuota, maxSizeQuota, bufferManager);
         }
 
-        public void Init(int initialSize, int maxSizeQuota, int effectiveMaxSize, BufferManager bufferManager)
+        public void Init(
+            int initialSize,
+            int maxSizeQuota,
+            int effectiveMaxSize,
+            BufferManager bufferManager
+        )
         {
-            base.Reinitialize(initialSize, maxSizeQuota, effectiveMaxSize, BufferManager.GetInternalBufferManager(bufferManager));
+            base.Reinitialize(
+                initialSize,
+                maxSizeQuota,
+                effectiveMaxSize,
+                BufferManager.GetInternalBufferManager(bufferManager)
+            );
         }
 
         protected override Exception CreateQuotaExceededException(int maxSizeQuota)

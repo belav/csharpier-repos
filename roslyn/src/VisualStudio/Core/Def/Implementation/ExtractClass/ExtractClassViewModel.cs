@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             string languageName,
             string typeParameterSuffix,
             ImmutableArray<string> conflictingNames,
-            ISyntaxFactsService syntaxFactsService)
+            ISyntaxFactsService syntaxFactsService
+        )
         {
             _notificationService = notificationService;
 
@@ -35,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 uiThreadOperationExecutor,
                 memberViewModels,
                 memberToDependentsMap,
-                destinationTypeKind: TypeKind.Class);
+                destinationTypeKind: TypeKind.Class
+            );
 
             DestinationViewModel = new NewTypeDestinationSelectionViewModel(
                 defaultTypeName,
@@ -43,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 defaultNamespace,
                 typeParameterSuffix,
                 conflictingNames,
-                syntaxFactsService);
+                syntaxFactsService
+            );
         }
 
         internal bool TrySubmit()
@@ -57,8 +60,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             return true;
         }
 
-        private void SendFailureNotification(string message)
-            => _notificationService.SendNotification(message, severity: NotificationSeverity.Information);
+        private void SendFailureNotification(string message) =>
+            _notificationService.SendNotification(
+                message,
+                severity: NotificationSeverity.Information
+            );
 
         public MemberSelectionViewModel MemberSelectionViewModel { get; }
         public NewTypeDestinationSelectionViewModel DestinationViewModel { get; }

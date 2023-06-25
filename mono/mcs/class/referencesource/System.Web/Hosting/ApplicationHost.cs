@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ApplicationHost.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
-
+namespace System.Web.Hosting
+{
     using System;
     using System.IO;
     using System.Collections;
@@ -17,14 +17,12 @@ namespace System.Web.Hosting {
     using System.Web.Util;
     using System.Security.Permissions;
 
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class ApplicationHost {
-
-        private ApplicationHost() {
-        }
+    public sealed class ApplicationHost
+    {
+        private ApplicationHost() { }
 
         /*
          * Creates new app domain for hosting of ASP.NET apps with a
@@ -35,8 +33,13 @@ namespace System.Web.Hosting {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [SecurityPermission(SecurityAction.Demand, Unrestricted=true)]
-        public static Object CreateApplicationHost(Type hostType, String virtualDir, String physicalDir) {
+        [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
+        public static Object CreateApplicationHost(
+            Type hostType,
+            String virtualDir,
+            String physicalDir
+        )
+        {
 #if !FEATURE_PAL // FEATURE_PAL does not require PlatformID.Win32NT
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
                 throw new PlatformNotSupportedException(SR.GetString(SR.RequiresNT));
@@ -49,11 +52,16 @@ namespace System.Web.Hosting {
 
             ApplicationManager appManager = ApplicationManager.GetApplicationManager();
 
-            String appId = StringUtil.GetNonRandomizedHashCode(String.Concat(virtualDir, physicalDir)).ToString("x");
-
+            String appId = StringUtil
+                .GetNonRandomizedHashCode(String.Concat(virtualDir, physicalDir))
+                .ToString("x");
 
             ObjectHandle h = appManager.CreateInstanceInNewWorkerAppDomain(
-                                hostType, appId, VirtualPath.CreateNonRelative(virtualDir), physicalDir);
+                hostType,
+                appId,
+                VirtualPath.CreateNonRelative(virtualDir),
+                physicalDir
+            );
 
             return h.Unwrap();
         }

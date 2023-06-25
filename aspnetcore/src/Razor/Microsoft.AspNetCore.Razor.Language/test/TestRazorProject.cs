@@ -12,9 +12,7 @@ public class TestRazorProject : RazorProject
     private readonly Dictionary<string, RazorProjectItem> _lookup;
 
     public TestRazorProject()
-        : this(new RazorProjectItem[0])
-    {
-    }
+        : this(new RazorProjectItem[0]) { }
 
     public TestRazorProject(IList<RazorProjectItem> items)
     {
@@ -25,7 +23,6 @@ public class TestRazorProject : RazorProject
     {
         throw new NotImplementedException();
     }
-
 
     public override RazorProjectItem GetItem(string path)
     {
@@ -42,5 +39,6 @@ public class TestRazorProject : RazorProject
         return value;
     }
 
-    public new string NormalizeAndEnsureValidPath(string path) => base.NormalizeAndEnsureValidPath(path);
+    public new string NormalizeAndEnsureValidPath(string path) =>
+        base.NormalizeAndEnsureValidPath(path);
 }

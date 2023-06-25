@@ -13,6 +13,6 @@ namespace POS_Server.Models
         public Nullable<long> posId { get; set; }
         public Nullable<long> userId { get; set; }
 
-            public bool canDelete { get; set; }
+        public bool canDelete { get; set; }
     }
 }

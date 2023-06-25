@@ -13,29 +13,19 @@ namespace System.Collections.ObjectModel
         bool frozen;
 
         public FreezableCollection()
-            : base()
-        {
-        }
+            : base() { }
 
         public FreezableCollection(IList<T> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
         public bool IsFrozen
         {
-            get
-            {
-                return this.frozen;
-            }
+            get { return this.frozen; }
         }
 
         bool ICollection<T>.IsReadOnly
         {
-            get
-            {
-                return this.frozen;
-            }
+            get { return this.frozen; }
         }
 
         public void Freeze()
@@ -71,7 +61,9 @@ namespace System.Collections.ObjectModel
         {
             if (this.frozen)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.ObjectIsReadOnly));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.ObjectIsReadOnly)
+                );
             }
         }
     }

@@ -16,13 +16,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         public static Task<IEnumerable<S>> SelectManyAsync<T, S>(
             this IEnumerable<T> sequence,
-            Func<T, CancellationToken, Task<IEnumerable<S>>> selector, CancellationToken cancellationToken)
+            Func<T, CancellationToken, Task<IEnumerable<S>>> selector,
+            CancellationToken cancellationToken
+        )
         {
             var whenAllTask = Task.WhenAll(sequence.Select(e => selector(e, cancellationToken)));
 
-            return whenAllTask.SafeContinueWith(allResultsTask =>
-                allResultsTask.Result.Flatten(),
-                cancellationToken, TaskContinuationOptions.None, TaskScheduler.Default);
+            return whenAllTask.SafeContinueWith(
+                allResultsTask => allResultsTask.Result.Flatten(),
+                cancellationToken,
+                TaskContinuationOptions.None,
+                TaskScheduler.Default
+            );
         }
     }
 }

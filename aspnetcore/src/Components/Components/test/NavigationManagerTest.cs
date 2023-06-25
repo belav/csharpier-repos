@@ -10,7 +10,9 @@ public class NavigationManagerTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch
     // failures.
-    private static readonly TimeSpan Timeout = Debugger.IsAttached ? System.Threading.Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(10);
+    private static readonly TimeSpan Timeout = Debugger.IsAttached
+        ? System.Threading.Timeout.InfiniteTimeSpan
+        : TimeSpan.FromSeconds(10);
 
     [Theory]
     [InlineData("scheme://host/", "scheme://host/")]
@@ -34,7 +36,11 @@ public class NavigationManagerTest
     [InlineData("scheme://host/path/", "scheme://host/path#hash", "#hash")]
     [InlineData("scheme://host/path/", "scheme://host/path/#hash", "#hash")]
     [InlineData("scheme://host/path/", "scheme://host/path/more#hash", "more#hash")]
-    public void ComputesCorrectValidBaseRelativePaths(string baseUri, string uri, string expectedResult)
+    public void ComputesCorrectValidBaseRelativePaths(
+        string baseUri,
+        string uri,
+        string expectedResult
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
@@ -57,7 +63,8 @@ public class NavigationManagerTest
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Theory]
@@ -75,14 +82,18 @@ public class NavigationManagerTest
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Theory]
     [InlineData("scheme://host/", "otherscheme://host/")]
     [InlineData("scheme://host/", "scheme://otherhost/")]
     [InlineData("scheme://host/path/", "scheme://host/")]
-    public void ToBaseRelativePath_ThrowsForInvalidBaseRelativePaths(string baseUri, string absoluteUri)
+    public void ToBaseRelativePath_ThrowsForInvalidBaseRelativePaths(
+        string baseUri,
+        string absoluteUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
@@ -93,16 +104,32 @@ public class NavigationManagerTest
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Theory]
-    [InlineData("scheme://host/?full%20name=Bob%20Joe&age=42", "scheme://host/?full%20name=John%20Doe&age=42")]
-    [InlineData("scheme://host/?fUlL%20nAmE=Bob%20Joe&AgE=42", "scheme://host/?full%20name=John%20Doe&AgE=42")]
-    [InlineData("scheme://host/?full%20name=Sally%20Smith&age=42&full%20name=Emily", "scheme://host/?full%20name=John%20Doe&age=42&full%20name=John%20Doe")]
-    [InlineData("scheme://host/?full%20name=&age=42", "scheme://host/?full%20name=John%20Doe&age=42")]
+    [InlineData(
+        "scheme://host/?full%20name=Bob%20Joe&age=42",
+        "scheme://host/?full%20name=John%20Doe&age=42"
+    )]
+    [InlineData(
+        "scheme://host/?fUlL%20nAmE=Bob%20Joe&AgE=42",
+        "scheme://host/?full%20name=John%20Doe&AgE=42"
+    )]
+    [InlineData(
+        "scheme://host/?full%20name=Sally%20Smith&age=42&full%20name=Emily",
+        "scheme://host/?full%20name=John%20Doe&age=42&full%20name=John%20Doe"
+    )]
+    [InlineData(
+        "scheme://host/?full%20name=&age=42",
+        "scheme://host/?full%20name=John%20Doe&age=42"
+    )]
     [InlineData("scheme://host/?full%20name=", "scheme://host/?full%20name=John%20Doe")]
-    public void GetUriWithQueryParameter_ReplacesWhenParameterExists(string baseUri, string expectedUri)
+    public void GetUriWithQueryParameter_ReplacesWhenParameterExists(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
         var actualUri = navigationManager.GetUriWithQueryParameter("full name", "John Doe");
@@ -114,7 +141,10 @@ public class NavigationManagerTest
     [InlineData("scheme://host/?age=42", "scheme://host/?age=42&name=John%20Doe")]
     [InlineData("scheme://host/", "scheme://host/?name=John%20Doe")]
     [InlineData("scheme://host/?", "scheme://host/?name=John%20Doe")]
-    public void GetUriWithQueryParameter_AppendsWhenParameterDoesNotExist(string baseUri, string expectedUri)
+    public void GetUriWithQueryParameter_AppendsWhenParameterDoesNotExist(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
         var actualUri = navigationManager.GetUriWithQueryParameter("name", "John Doe");
@@ -124,12 +154,21 @@ public class NavigationManagerTest
 
     [Theory]
     [InlineData("scheme://host/?full%20name=Bob%20Joe&age=42", "scheme://host/?age=42")]
-    [InlineData("scheme://host/?full%20name=Sally%Smith&age=42&full%20name=Emily%20Karlsen", "scheme://host/?age=42")]
-    [InlineData("scheme://host/?full%20name=Sally%Smith&age=42&FuLl%20NaMe=Emily%20Karlsen", "scheme://host/?age=42")]
+    [InlineData(
+        "scheme://host/?full%20name=Sally%Smith&age=42&full%20name=Emily%20Karlsen",
+        "scheme://host/?age=42"
+    )]
+    [InlineData(
+        "scheme://host/?full%20name=Sally%Smith&age=42&FuLl%20NaMe=Emily%20Karlsen",
+        "scheme://host/?age=42"
+    )]
     [InlineData("scheme://host/?full%20name=&age=42", "scheme://host/?age=42")]
     [InlineData("scheme://host/?full%20name=", "scheme://host/")]
     [InlineData("scheme://host/", "scheme://host/")]
-    public void GetUriWithQueryParameter_RemovesWhenParameterValueIsNull(string baseUri, string expectedUri)
+    public void GetUriWithQueryParameter_RemovesWhenParameterValueIsNull(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
         var actualUri = navigationManager.GetUriWithQueryParameter("full name", (string)null);
@@ -145,42 +184,63 @@ public class NavigationManagerTest
         var baseUri = "scheme://host/";
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var exception = Assert.Throws<InvalidOperationException>(() => navigationManager.GetUriWithQueryParameter(name, "test"));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => navigationManager.GetUriWithQueryParameter(name, "test")
+        );
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
     [Theory]
     [InlineData("scheme://host/?name=Bob%20Joe&age=42", "scheme://host/?age=25&eye%20color=green")]
     [InlineData("scheme://host/?NaMe=Bob%20Joe&AgE=42", "scheme://host/?age=25&eye%20color=green")]
-    [InlineData("scheme://host/?name=Bob%20Joe&age=42&keepme=true", "scheme://host/?age=25&keepme=true&eye%20color=green")]
+    [InlineData(
+        "scheme://host/?name=Bob%20Joe&age=42&keepme=true",
+        "scheme://host/?age=25&keepme=true&eye%20color=green"
+    )]
     [InlineData("scheme://host/?age=42&eye%20color=87", "scheme://host/?age=25&eye%20color=green")]
     [InlineData("scheme://host/?", "scheme://host/?age=25&eye%20color=green")]
     [InlineData("scheme://host/", "scheme://host/?age=25&eye%20color=green")]
     public void GetUriWithQueryParameters_CanAddUpdateAndRemove(string baseUri, string expectedUri)
     {
         var navigationManager = new TestNavigationManager(baseUri);
-        var actualUri = navigationManager.GetUriWithQueryParameters(new Dictionary<string, object>
-        {
-            ["name"] = null,        // Remove
-            ["age"] = (int?)25,     // Add/update
-            ["eye color"] = "green",// Add/update
-        });
+        var actualUri = navigationManager.GetUriWithQueryParameters(
+            new Dictionary<string, object>
+            {
+                ["name"] = null, // Remove
+                ["age"] = (int?)25, // Add/update
+                ["eye color"] = "green", // Add/update
+            }
+        );
 
         Assert.Equal(expectedUri, actualUri);
     }
 
     [Theory]
-    [InlineData("scheme://host/?full%20name=Bob%20Joe&ping=8&ping=300", "scheme://host/?full%20name=John%20Doe&ping=35&ping=16&ping=87&ping=240")]
-    [InlineData("scheme://host/?ping=8&full%20name=Bob%20Joe&ping=300", "scheme://host/?ping=35&full%20name=John%20Doe&ping=16&ping=87&ping=240")]
-    [InlineData("scheme://host/?ping=8&ping=300&ping=50&ping=68&ping=42", "scheme://host/?ping=35&ping=16&ping=87&ping=240&full%20name=John%20Doe")]
-    public void GetUriWithQueryParameters_SupportsEnumerableValues(string baseUri, string expectedUri)
+    [InlineData(
+        "scheme://host/?full%20name=Bob%20Joe&ping=8&ping=300",
+        "scheme://host/?full%20name=John%20Doe&ping=35&ping=16&ping=87&ping=240"
+    )]
+    [InlineData(
+        "scheme://host/?ping=8&full%20name=Bob%20Joe&ping=300",
+        "scheme://host/?ping=35&full%20name=John%20Doe&ping=16&ping=87&ping=240"
+    )]
+    [InlineData(
+        "scheme://host/?ping=8&ping=300&ping=50&ping=68&ping=42",
+        "scheme://host/?ping=35&ping=16&ping=87&ping=240&full%20name=John%20Doe"
+    )]
+    public void GetUriWithQueryParameters_SupportsEnumerableValues(
+        string baseUri,
+        string expectedUri
+    )
     {
         var navigationManager = new TestNavigationManager(baseUri);
-        var actualUri = navigationManager.GetUriWithQueryParameters(new Dictionary<string, object>
-        {
-            ["full name"] = "John Doe", // Single value
-            ["ping"] = new int?[] { 35, 16, null, 87, 240 }
-        });
+        var actualUri = navigationManager.GetUriWithQueryParameters(
+            new Dictionary<string, object>
+            {
+                ["full name"] = "John Doe", // Single value
+                ["ping"] = new int?[] { 35, 16, null, 87, 240 }
+            }
+        );
 
         Assert.Equal(expectedUri, actualUri);
     }
@@ -195,7 +255,9 @@ public class NavigationManagerTest
             ["value"] = new { Value = 3 }
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() => navigationManager.GetUriWithQueryParameters(unsupportedParameterValues));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => navigationManager.GetUriWithQueryParameters(unsupportedParameterValues)
+        );
         Assert.StartsWith("Cannot format query parameters with values of type", exception.Message);
     }
 
@@ -211,7 +273,9 @@ public class NavigationManagerTest
             [string.Empty] = "value2",
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() => navigationManager.GetUriWithQueryParameters(values));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => navigationManager.GetUriWithQueryParameters(values)
+        );
         Assert.StartsWith("Cannot have empty query parameter names.", exception.Message);
     }
 
@@ -224,7 +288,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1.IsCompletedSuccessfully);
@@ -233,7 +301,8 @@ public class NavigationManagerTest
         static ValueTask HandleLocationChanging(LocationChangingContext context)
         {
             return ValueTask.CompletedTask;
-        };
+        }
+        ;
     }
 
     [Fact]
@@ -251,7 +320,11 @@ public class NavigationManagerTest
             navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
         }
 
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1.IsCompletedSuccessfully);
@@ -262,7 +335,8 @@ public class NavigationManagerTest
         {
             completedHandlerCount++;
             return ValueTask.CompletedTask;
-        };
+        }
+        ;
     }
 
     [Fact]
@@ -275,7 +349,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.False(navigation1.IsCompleted);
@@ -286,7 +364,8 @@ public class NavigationManagerTest
         async ValueTask HandleLocationChanging(LocationChangingContext context)
         {
             await tcs.Task;
-        };
+        }
+        ;
     }
 
     [Fact]
@@ -304,7 +383,11 @@ public class NavigationManagerTest
             navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
         }
 
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
         var navigation1Result = await navigation1.WaitAsync(Timeout);
 
         // Assert
@@ -316,7 +399,8 @@ public class NavigationManagerTest
         {
             await Task.Yield();
             Interlocked.Increment(ref completedHandlerCount);
-        };
+        }
+        ;
     }
 
     [Fact]
@@ -329,7 +413,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1.IsCompletedSuccessfully);
@@ -351,14 +439,18 @@ public class NavigationManagerTest
         var invokedHandlerCount = 0;
 
         // The first two handlers run, but the third doesn't because the navigation gets prevented after the second.
-        var expectedInvokedHandlerCount = 2; 
+        var expectedInvokedHandlerCount = 2;
 
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_AllowNavigation);
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_PreventNavigation);
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_AllowNavigation);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1.IsCompletedSuccessfully);
@@ -392,7 +484,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1.IsCompletedSuccessfully);
@@ -429,7 +525,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_AllowNavigation);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1.IsCompletedSuccessfully);
@@ -469,7 +569,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
         var navigation1Result = await navigation1.WaitAsync(Timeout);
 
         // Assert
@@ -495,13 +599,19 @@ public class NavigationManagerTest
 
         for (var i = 0; i < blockNavigationHandlerCount; i++)
         {
-            navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_BlockNavigation);
+            navigationManager.RegisterLocationChangingHandler(
+                HandleLocationChanging_BlockNavigation
+            );
         }
 
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_PreventNavigation);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
         var navigation1Result = await navigation1.WaitAsync(Timeout);
 
         await tcs.Task.WaitAsync(Timeout);
@@ -536,7 +646,9 @@ public class NavigationManagerTest
             }
         }
 
-        static async ValueTask HandleLocationChanging_PreventNavigation(LocationChangingContext context)
+        static async ValueTask HandleLocationChanging_PreventNavigation(
+            LocationChangingContext context
+        )
         {
             await Task.Yield();
             context.PreventNavigation();
@@ -553,10 +665,20 @@ public class NavigationManagerTest
         var tcs = new TaskCompletionSource();
 
         // Act
-        var locationChangingRegistration = navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var locationChangingRegistration = navigationManager.RegisterLocationChangingHandler(
+            HandleLocationChanging
+        );
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
         locationChangingRegistration.Dispose();
-        var navigation2 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir2", null, false);
+        var navigation2 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir2",
+            null,
+            false
+        );
 
         await tcs.Task.WaitAsync(Timeout);
 
@@ -582,7 +704,8 @@ public class NavigationManagerTest
 
                 throw;
             }
-        };
+        }
+        ;
     }
 
     [Fact]
@@ -602,12 +725,22 @@ public class NavigationManagerTest
         // Act
         for (var i = 0; i < initialHandlerCount; i++)
         {
-            locationChangingRegistrations[i] = navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
+            locationChangingRegistrations[i] = navigationManager.RegisterLocationChangingHandler(
+                HandleLocationChanging
+            );
         }
 
         // These two navigations get canceled
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
-        var navigation2 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir2", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
+        var navigation2 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir2",
+            null,
+            false
+        );
 
         for (var i = 0; i < initialHandlerCount; i++)
         {
@@ -615,7 +748,11 @@ public class NavigationManagerTest
         }
 
         // This navigation continues without getting canceled
-        var navigation3 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir3", null, false);
+        var navigation3 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir3",
+            null,
+            false
+        );
 
         await tcs.Task.WaitAsync(Timeout);
 
@@ -656,7 +793,8 @@ public class NavigationManagerTest
 
                 throw;
             }
-        };
+        }
+        ;
     }
 
     [Fact]
@@ -664,7 +802,9 @@ public class NavigationManagerTest
     {
         // Arrange
         var baseUri = "scheme://host/";
-        var navigationManager = new TestNavigationManagerWithLocationChangingExceptionTracking(baseUri);
+        var navigationManager = new TestNavigationManagerWithLocationChangingExceptionTracking(
+            baseUri
+        );
         var exceptionMessage = "Thrown from a test handler";
         var preventNavigationTcs = new TaskCompletionSource();
         var throwExceptionTcs = new TaskCompletionSource();
@@ -673,7 +813,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_ThrowException);
 
         // Act
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
         preventNavigationTcs.SetResult();
         var navigation1Result = await navigation1;
 
@@ -704,13 +848,19 @@ public class NavigationManagerTest
     {
         // Arrange
         var baseUri = "scheme://host/";
-        var navigationManager = new TestNavigationManagerWithLocationChangingExceptionTracking(baseUri);
+        var navigationManager = new TestNavigationManagerWithLocationChangingExceptionTracking(
+            baseUri
+        );
         var exceptionMessage = "Thrown from a test handler";
 
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_ThrowException);
 
         // Act
-        var navigation1Result = await navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1Result = await navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1Result);
@@ -729,14 +879,20 @@ public class NavigationManagerTest
     {
         // Arrange
         var baseUri = "scheme://host/";
-        var navigationManager = new TestNavigationManagerWithLocationChangingExceptionTracking(baseUri);
+        var navigationManager = new TestNavigationManagerWithLocationChangingExceptionTracking(
+            baseUri
+        );
         var exceptionMessage = "Thrown from a test handler";
 
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_AllowNavigation);
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_ThrowException);
 
         // Act
-        var navigation1Result = await navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1Result = await navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Assert
         Assert.True(navigation1Result);
@@ -766,7 +922,10 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_ThrowException);
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false)
+        );
         Assert.StartsWith("To support navigation locks", ex.Message);
 
         async ValueTask HandleLocationChanging_ThrowException(LocationChangingContext context)
@@ -788,7 +947,10 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging_ThrowException);
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () =>
+                navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false)
+        );
         Assert.StartsWith("To support navigation locks", ex.Message);
 
         async ValueTask HandleLocationChanging_AllowNavigation(LocationChangingContext context)
@@ -816,7 +978,11 @@ public class NavigationManagerTest
         navigationManager.RegisterLocationChangingHandler(HandleLocationChanging);
 
         // Act/Assert
-        var navigation1 = navigationManager.RunNotifyLocationChangingAsync($"{baseUri}/subdir1", null, false);
+        var navigation1 = navigationManager.RunNotifyLocationChangingAsync(
+            $"{baseUri}/subdir1",
+            null,
+            false
+        );
 
         // Wait for the navigation to be prevented asynchronously
         await navigationPreventedTcs.Task.WaitAsync(Timeout);
@@ -850,13 +1016,14 @@ public class NavigationManagerTest
 
     private class TestNavigationManager : NavigationManager
     {
-        public TestNavigationManager()
-        {
-        }
+        public TestNavigationManager() { }
 
         public TestNavigationManager(string baseUri = null, string uri = null)
         {
-            Initialize(baseUri ?? "http://example.com/", uri ?? baseUri ?? "http://example.com/welcome-page");
+            Initialize(
+                baseUri ?? "http://example.com/",
+                uri ?? baseUri ?? "http://example.com/welcome-page"
+            );
         }
 
         public new void Initialize(string baseUri, string uri)
@@ -864,31 +1031,37 @@ public class NavigationManagerTest
             base.Initialize(baseUri, uri);
         }
 
-        public async Task<bool> RunNotifyLocationChangingAsync(string uri, string state, bool isNavigationIntercepted)
-            => await NotifyLocationChangingAsync(uri, state, isNavigationIntercepted);
+        public async Task<bool> RunNotifyLocationChangingAsync(
+            string uri,
+            string state,
+            bool isNavigationIntercepted
+        ) => await NotifyLocationChangingAsync(uri, state, isNavigationIntercepted);
 
         protected override void NavigateToCore(string uri, bool forceLoad)
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void SetNavigationLockState(bool value)
-        {
-        }
+        protected override void SetNavigationLockState(bool value) { }
     }
 
     private class TestNavigationManagerWithLocationChangingExceptionTracking : TestNavigationManager
     {
         private readonly List<Exception> _exceptionsThrownFromLocationChangingHandlers = new();
 
-        public IReadOnlyList<Exception> ExceptionsThrownFromLocationChangingHandlers => _exceptionsThrownFromLocationChangingHandlers;
+        public IReadOnlyList<Exception> ExceptionsThrownFromLocationChangingHandlers =>
+            _exceptionsThrownFromLocationChangingHandlers;
 
-        public TestNavigationManagerWithLocationChangingExceptionTracking(string baseUri = null, string uri = null)
-            : base(baseUri, uri)
-        {
-        }
+        public TestNavigationManagerWithLocationChangingExceptionTracking(
+            string baseUri = null,
+            string uri = null
+        )
+            : base(baseUri, uri) { }
 
-        protected override void HandleLocationChangingHandlerException(Exception ex, LocationChangingContext context)
+        protected override void HandleLocationChangingHandlerException(
+            Exception ex,
+            LocationChangingContext context
+        )
         {
             _exceptionsThrownFromLocationChangingHandlers.Add(ex);
         }

@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public class CC
 {
     public static int Main()
@@ -17,6 +18,7 @@ public class CC
             return 100;
         }
     }
+
     static void Main1()
     {
         object b = null;

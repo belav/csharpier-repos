@@ -6,10 +6,10 @@ using System.Reflection;
 
 class X
 {
-    readonly static string S;
-    readonly static string S_Expected;
-    readonly static bool B0;
-    readonly static bool B1;
+    static readonly string S;
+    static readonly string S_Expected;
+    static readonly bool B0;
+    static readonly bool B1;
 
     static X()
     {
@@ -28,9 +28,11 @@ class X
         bool threw = false;
         bool unexpected = false;
 
-        Console.WriteLine($"Attempting to update {field.Name} via SetValue, current value is '{S}', desired new value is '{s}'");
+        Console.WriteLine(
+            $"Attempting to update {field.Name} via SetValue, current value is '{S}', desired new value is '{s}'"
+        );
 
-        try 
+        try
         {
             field.SetValue(null, s);
         }
@@ -65,9 +67,11 @@ class X
         bool threw = false;
         bool unexpected = false;
 
-        Console.WriteLine($"Attempting to update {field.Name} via SetValueDirect, current value is '{S}', desired new value is '{s}'");
+        Console.WriteLine(
+            $"Attempting to update {field.Name} via SetValueDirect, current value is '{S}', desired new value is '{s}'"
+        );
 
-        try 
+        try
         {
             field.SetValueDirect(t, s);
         }
@@ -76,7 +80,6 @@ class X
             Console.WriteLine("Caught {0}expected exception", shouldThrow ? "" : "un");
             Console.WriteLine(f);
             threw = true;
-
         }
         catch (Exception e)
         {
@@ -100,10 +103,14 @@ class X
         bool b0 = Set("3", true);
         bool b1 = SetDirect("4", true);
         bool v = (S == S_Expected);
-        if (!B0) Console.WriteLine("SetValue during class init unexpectedly threw");
-        if (!B1) Console.WriteLine("SetValueDirect during class init unexpectedly threw");
-        if (!b0) Console.WriteLine("SetValue after class init didn't throw as expected");
-        if (!b1) Console.WriteLine("SetValueDirect after class init didn't throw as expected");
+        if (!B0)
+            Console.WriteLine("SetValue during class init unexpectedly threw");
+        if (!B1)
+            Console.WriteLine("SetValueDirect during class init unexpectedly threw");
+        if (!b0)
+            Console.WriteLine("SetValue after class init didn't throw as expected");
+        if (!b1)
+            Console.WriteLine("SetValueDirect after class init didn't throw as expected");
         Console.Write($"S is '{S}' ");
         if (v)
         {
@@ -119,5 +126,3 @@ class X
         return ok ? 100 : -1;
     }
 }
-
-

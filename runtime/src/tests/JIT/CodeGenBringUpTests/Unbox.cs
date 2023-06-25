@@ -12,7 +12,7 @@ public class BringUpTest_Unbox
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    unsafe public static int Unbox(object o)
+    public static unsafe int Unbox(object o)
     {
         return (int)o;
     }
@@ -22,7 +22,9 @@ public class BringUpTest_Unbox
         int r = 3;
         object o = r;
         int y = Unbox(o);
-        if (y == 3) return Pass;
-        else return Fail;
+        if (y == 3)
+            return Pass;
+        else
+            return Fail;
     }
 }

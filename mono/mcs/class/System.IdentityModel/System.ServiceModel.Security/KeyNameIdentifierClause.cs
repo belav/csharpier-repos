@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,37 +33,37 @@ using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public class KeyNameIdentifierClause : SecurityKeyIdentifierClause
-	{
-		public KeyNameIdentifierClause (string keyName)
-			: base (null)
-		{
-			key_name = keyName;
-		}
+    public class KeyNameIdentifierClause : SecurityKeyIdentifierClause
+    {
+        public KeyNameIdentifierClause(string keyName)
+            : base(null)
+        {
+            key_name = keyName;
+        }
 
-		string key_name;
+        string key_name;
 
-		public string KeyName {
-			get { return key_name; }
-		}
+        public string KeyName
+        {
+            get { return key_name; }
+        }
 
-		public override bool Matches (SecurityKeyIdentifierClause clause)
-		{
-			if (clause == null)
-				throw new ArgumentNullException ("clause");
-			KeyNameIdentifierClause knic =
-				clause as KeyNameIdentifierClause;
-			return knic != null && Matches (knic.KeyName);
-		}
+        public override bool Matches(SecurityKeyIdentifierClause clause)
+        {
+            if (clause == null)
+                throw new ArgumentNullException("clause");
+            KeyNameIdentifierClause knic = clause as KeyNameIdentifierClause;
+            return knic != null && Matches(knic.KeyName);
+        }
 
-		public bool Matches (string keyName)
-		{
-			return key_name == keyName;
-		}
+        public bool Matches(string keyName)
+        {
+            return key_name == keyName;
+        }
 
-		public override string ToString ()
-		{
-			return String.Concat ("KeyNameIdentifierClause(KeyName = '", KeyName, "')");
-		}
-	}
+        public override string ToString()
+        {
+            return String.Concat("KeyNameIdentifierClause(KeyName = '", KeyName, "')");
+        }
+    }
 }

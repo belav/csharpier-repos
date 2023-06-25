@@ -13,6 +13,11 @@ namespace Microsoft.CodeAnalysis.Shared.Options
     /// </summary>
     internal static class ServiceComponentOnOffOptions
     {
-        public static readonly Option2<bool> DiagnosticProvider = new(nameof(ServiceComponentOnOffOptions), nameof(DiagnosticProvider), defaultValue: true);
+        public static readonly Option2<bool> DiagnosticProvider =
+            new(
+                nameof(ServiceComponentOnOffOptions),
+                nameof(DiagnosticProvider),
+                defaultValue: true
+            );
     }
 }

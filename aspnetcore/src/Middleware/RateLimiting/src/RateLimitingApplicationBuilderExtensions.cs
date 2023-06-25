@@ -29,7 +29,10 @@ public static class RateLimitingApplicationBuilderExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseRateLimiter(this IApplicationBuilder app, RateLimiterOptions options)
+    public static IApplicationBuilder UseRateLimiter(
+        this IApplicationBuilder app,
+        RateLimiterOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app, nameof(app));
         ArgumentNullException.ThrowIfNull(options, nameof(options));

@@ -35,12 +35,20 @@ namespace Microsoft.Interop
         public void ReportInvalidMarshallingAttributeInfo(
             AttributeData attributeData,
             string reasonResourceName,
-            params string[] reasonArgs)
+            params string[] reasonArgs
+        )
         {
             _diagnostics.Add(
                 attributeData.CreateDiagnostic(
                     GeneratorDiagnostics.MarshallingAttributeConfigurationNotSupported,
-                    new LocalizableResourceString(reasonResourceName, SR.ResourceManager, typeof(FxResources.Microsoft.Interop.JavaScript.JSImportGenerator.SR), reasonArgs)));
+                    new LocalizableResourceString(
+                        reasonResourceName,
+                        SR.ResourceManager,
+                        typeof(FxResources.Microsoft.Interop.JavaScript.JSImportGenerator.SR),
+                        reasonArgs
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -52,14 +60,17 @@ namespace Microsoft.Interop
         public void ReportConfigurationNotSupported(
             AttributeData attributeData,
             string configurationName,
-            string? unsupportedValue = null)
+            string? unsupportedValue = null
+        )
         {
             if (unsupportedValue == null)
             {
                 _diagnostics.Add(
                     attributeData.CreateDiagnostic(
                         GeneratorDiagnostics.ConfigurationNotSupported,
-                        configurationName));
+                        configurationName
+                    )
+                );
             }
             else
             {
@@ -67,7 +78,9 @@ namespace Microsoft.Interop
                     attributeData.CreateDiagnostic(
                         GeneratorDiagnostics.ConfigurationValueNotSupported,
                         unsupportedValue,
-                        configurationName));
+                        configurationName
+                    )
+                );
             }
         }
 
@@ -81,7 +94,8 @@ namespace Microsoft.Interop
             MethodSignatureDiagnosticLocations diagnosticLocations,
             TypePositionInfo info,
             string? notSupportedDetails,
-            ImmutableDictionary<string, string> diagnosticProperties)
+            ImmutableDictionary<string, string> diagnosticProperties
+        )
         {
             Location diagnosticLocation = Location.None;
             string elementName = string.Empty;
@@ -93,8 +107,12 @@ namespace Microsoft.Interop
             }
             else
             {
-                Debug.Assert(info.ManagedIndex <= diagnosticLocations.ManagedParameterLocations.Length);
-                diagnosticLocation = diagnosticLocations.ManagedParameterLocations[info.ManagedIndex];
+                Debug.Assert(
+                    info.ManagedIndex <= diagnosticLocations.ManagedParameterLocations.Length
+                );
+                diagnosticLocation = diagnosticLocations.ManagedParameterLocations[
+                    info.ManagedIndex
+                ];
                 elementName = info.InstanceIdentifier;
             }
 
@@ -108,7 +126,9 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails,
                             diagnosticProperties,
                             notSupportedDetails!,
-                            elementName));
+                            elementName
+                        )
+                    );
                 }
                 else
                 {
@@ -117,7 +137,9 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails,
                             diagnosticProperties,
                             notSupportedDetails!,
-                            elementName));
+                            elementName
+                        )
+                    );
                 }
             }
             else if (info.MarshallingAttributeInfo is MarshalAsInfo)
@@ -132,7 +154,9 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.ReturnConfigurationNotSupported,
                             diagnosticProperties,
                             nameof(System.Runtime.InteropServices.MarshalAsAttribute),
-                            elementName));
+                            elementName
+                        )
+                    );
                 }
                 else
                 {
@@ -141,7 +165,9 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.ParameterConfigurationNotSupported,
                             diagnosticProperties,
                             nameof(System.Runtime.InteropServices.MarshalAsAttribute),
-                            elementName));
+                            elementName
+                        )
+                    );
                 }
             }
             else
@@ -154,7 +180,9 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.ReturnTypeNotSupported,
                             diagnosticProperties,
                             info.ManagedType.DiagnosticFormattedName,
-                            elementName));
+                            elementName
+                        )
+                    );
                 }
                 else
                 {
@@ -163,7 +191,9 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.ParameterTypeNotSupported,
                             diagnosticProperties,
                             info.ManagedType.DiagnosticFormattedName,
-                            elementName));
+                            elementName
+                        )
+                    );
                 }
             }
         }
@@ -176,7 +206,8 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ConfigurationValueNotSupported =
             new DiagnosticDescriptor(
@@ -186,7 +217,8 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor MarshallingAttributeConfigurationNotSupported =
             new DiagnosticDescriptor(
@@ -196,7 +228,8 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ReturnTypeNotSupportedWithDetails =
             new DiagnosticDescriptor(
@@ -206,17 +239,19 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.TypeNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.TypeNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ParameterTypeNotSupported =
-                    new DiagnosticDescriptor(
-                        Ids.TypeNotSupported,
-                        GetResourceString(nameof(SR.TypeNotSupportedTitle)),
-                        GetResourceString(nameof(SR.TypeNotSupportedMessageParameter)),
-                        Category,
-                        DiagnosticSeverity.Error,
-                        isEnabledByDefault: true,
-                        description: GetResourceString(nameof(SR.TypeNotSupportedDescription)));
+            new DiagnosticDescriptor(
+                Ids.TypeNotSupported,
+                GetResourceString(nameof(SR.TypeNotSupportedTitle)),
+                GetResourceString(nameof(SR.TypeNotSupportedMessageParameter)),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(nameof(SR.TypeNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ReturnTypeNotSupported =
             new DiagnosticDescriptor(
@@ -226,7 +261,8 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.TypeNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.TypeNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ParameterTypeNotSupportedWithDetails =
             new DiagnosticDescriptor(
@@ -236,7 +272,8 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.TypeNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.TypeNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ParameterConfigurationNotSupported =
             new DiagnosticDescriptor(
@@ -246,7 +283,8 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor ReturnConfigurationNotSupported =
             new DiagnosticDescriptor(
@@ -256,71 +294,98 @@ namespace Microsoft.Interop
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription)));
+                description: GetResourceString(nameof(SR.ConfigurationNotSupportedDescription))
+            );
 
         public static readonly DiagnosticDescriptor InvalidImportAttributedMethodSignature =
             new DiagnosticDescriptor(
-            Ids.InvalidJSImportAttributeUsage,
-            GetResourceString(nameof(SR.InvalidJSImportAttributeUsageTitle)),
-            GetResourceString(nameof(SR.InvalidJSImportAttributedMethodSignatureMessage)),
-            Category,
-            DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description: GetResourceString(nameof(SR.InvalidJSImportAttributedMethodDescription)));
+                Ids.InvalidJSImportAttributeUsage,
+                GetResourceString(nameof(SR.InvalidJSImportAttributeUsageTitle)),
+                GetResourceString(nameof(SR.InvalidJSImportAttributedMethodSignatureMessage)),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(
+                    nameof(SR.InvalidJSImportAttributedMethodDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor InvalidExportAttributedMethodSignature =
             new DiagnosticDescriptor(
-            Ids.InvalidJSExportAttributeUsage,
-            GetResourceString(nameof(SR.InvalidJSExportAttributeUsageTitle)),
-            GetResourceString(nameof(SR.InvalidJSExportAttributedMethodSignatureMessage)),
-            Category,
-            DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description: GetResourceString(nameof(SR.InvalidJSExportAttributedMethodDescription)));
+                Ids.InvalidJSExportAttributeUsage,
+                GetResourceString(nameof(SR.InvalidJSExportAttributeUsageTitle)),
+                GetResourceString(nameof(SR.InvalidJSExportAttributedMethodSignatureMessage)),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(
+                    nameof(SR.InvalidJSExportAttributedMethodDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor InvalidImportAttributedMethodContainingTypeMissingModifiers =
             new DiagnosticDescriptor(
-            Ids.InvalidJSImportAttributeUsage,
-            GetResourceString(nameof(SR.InvalidJSImportAttributeUsageTitle)),
-            GetResourceString(nameof(SR.InvalidAttributedMethodContainingTypeMissingModifiersMessage)),
-            Category,
-            DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description: GetResourceString(nameof(SR.InvalidJSImportAttributedMethodDescription)));
+                Ids.InvalidJSImportAttributeUsage,
+                GetResourceString(nameof(SR.InvalidJSImportAttributeUsageTitle)),
+                GetResourceString(
+                    nameof(SR.InvalidAttributedMethodContainingTypeMissingModifiersMessage)
+                ),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(
+                    nameof(SR.InvalidJSImportAttributedMethodDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor InvalidExportAttributedMethodContainingTypeMissingModifiers =
             new DiagnosticDescriptor(
-            Ids.InvalidJSExportAttributeUsage,
-            GetResourceString(nameof(SR.InvalidJSExportAttributeUsageTitle)),
-            GetResourceString(nameof(SR.InvalidAttributedMethodContainingTypeMissingModifiersMessage)),
-            Category,
-            DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description: GetResourceString(nameof(SR.InvalidJSExportAttributedMethodDescription)));
+                Ids.InvalidJSExportAttributeUsage,
+                GetResourceString(nameof(SR.InvalidJSExportAttributeUsageTitle)),
+                GetResourceString(
+                    nameof(SR.InvalidAttributedMethodContainingTypeMissingModifiersMessage)
+                ),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(
+                    nameof(SR.InvalidJSExportAttributedMethodDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor JSImportRequiresAllowUnsafeBlocks =
-                   new DiagnosticDescriptor(
-                       Ids.JSImportRequiresAllowUnsafeBlocks,
-                       GetResourceString(nameof(SR.JSImportRequiresAllowUnsafeBlocksTitle)),
-                       GetResourceString(nameof(SR.JSImportRequiresAllowUnsafeBlocksMessage)),
-                       Category,
-                       DiagnosticSeverity.Error,
-                       isEnabledByDefault: true,
-                       description: GetResourceString(nameof(SR.JSImportRequiresAllowUnsafeBlocksDescription)));
+            new DiagnosticDescriptor(
+                Ids.JSImportRequiresAllowUnsafeBlocks,
+                GetResourceString(nameof(SR.JSImportRequiresAllowUnsafeBlocksTitle)),
+                GetResourceString(nameof(SR.JSImportRequiresAllowUnsafeBlocksMessage)),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(
+                    nameof(SR.JSImportRequiresAllowUnsafeBlocksDescription)
+                )
+            );
 
         public static readonly DiagnosticDescriptor JSExportRequiresAllowUnsafeBlocks =
-                   new DiagnosticDescriptor(
-                       Ids.JSExportRequiresAllowUnsafeBlocks,
-                       GetResourceString(nameof(SR.JSExportRequiresAllowUnsafeBlocksTitle)),
-                       GetResourceString(nameof(SR.JSExportRequiresAllowUnsafeBlocksMessage)),
-                       Category,
-                       DiagnosticSeverity.Error,
-                       isEnabledByDefault: true,
-                       description: GetResourceString(nameof(SR.JSExportRequiresAllowUnsafeBlocksDescription)));
+            new DiagnosticDescriptor(
+                Ids.JSExportRequiresAllowUnsafeBlocks,
+                GetResourceString(nameof(SR.JSExportRequiresAllowUnsafeBlocksTitle)),
+                GetResourceString(nameof(SR.JSExportRequiresAllowUnsafeBlocksMessage)),
+                Category,
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true,
+                description: GetResourceString(
+                    nameof(SR.JSExportRequiresAllowUnsafeBlocksDescription)
+                )
+            );
 
         private static LocalizableResourceString GetResourceString(string resourceName)
         {
-            return new LocalizableResourceString(resourceName, SR.ResourceManager, typeof(FxResources.Microsoft.Interop.JavaScript.JSImportGenerator.SR));
+            return new LocalizableResourceString(
+                resourceName,
+                SR.ResourceManager,
+                typeof(FxResources.Microsoft.Interop.JavaScript.JSImportGenerator.SR)
+            );
         }
     }
 }

@@ -187,7 +187,9 @@ namespace Microsoft.AspNetCore.Components.Server.BlazorPack
 
         private static void ThrowInvalidOperationException(int capacity)
         {
-            throw new InvalidOperationException($"Cannot advance past the end of the buffer, which has a size of {capacity}.");
+            throw new InvalidOperationException(
+                $"Cannot advance past the end of the buffer, which has a size of {capacity}."
+            );
         }
     }
 }

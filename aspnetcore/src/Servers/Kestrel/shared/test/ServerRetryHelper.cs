@@ -57,7 +57,11 @@ public static class ServerRetryHelper
         var properties = IPGlobalProperties.GetIPGlobalProperties();
 
         // Ignore active connections
-        AddEndpoints(startingPort, unavailableEndpoints, properties.GetActiveTcpConnections().Select(c => c.LocalEndPoint));
+        AddEndpoints(
+            startingPort,
+            unavailableEndpoints,
+            properties.GetActiveTcpConnections().Select(c => c.LocalEndPoint)
+        );
 
         // Ignore active tcp listners
         AddEndpoints(startingPort, unavailableEndpoints, properties.GetActiveTcpListeners());
@@ -83,7 +87,11 @@ public static class ServerRetryHelper
 
         throw new Exception($"Couldn't find a free port after {startingPort}.");
 
-        static void AddEndpoints(int startingPort, List<IPEndPoint> endpoints, IEnumerable<IPEndPoint> activeEndpoints)
+        static void AddEndpoints(
+            int startingPort,
+            List<IPEndPoint> endpoints,
+            IEnumerable<IPEndPoint> activeEndpoints
+        )
         {
             foreach (IPEndPoint endpoint in activeEndpoints)
             {

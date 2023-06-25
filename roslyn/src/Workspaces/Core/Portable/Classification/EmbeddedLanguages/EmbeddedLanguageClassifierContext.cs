@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Classification
             ClassificationOptions options,
             IVirtualCharService virtualCharService,
             ArrayBuilder<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Project = project;
             SemanticModel = semanticModel;
@@ -49,7 +50,7 @@ namespace Microsoft.CodeAnalysis.Classification
             CancellationToken = cancellationToken;
         }
 
-        public void AddClassification(string classificationType, TextSpan span)
-            => _result.Add(new ClassifiedSpan(classificationType, span));
+        public void AddClassification(string classificationType, TextSpan span) =>
+            _result.Add(new ClassifiedSpan(classificationType, span));
     }
 }

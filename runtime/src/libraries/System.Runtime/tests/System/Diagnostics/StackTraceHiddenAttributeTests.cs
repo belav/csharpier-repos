@@ -7,8 +7,17 @@ using Xunit;
 
 namespace System.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
-    [ActiveIssue("https://github.com/dotnet/runtimelab/issues/851", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/50957",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsBrowser),
+        nameof(PlatformDetection.IsMonoAOT)
+    )]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtimelab/issues/851",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNativeAot)
+    )]
     public class StackTraceHiddenAttributeTests
     {
         [Fact]
@@ -16,7 +25,6 @@ namespace System.Tests
         {
             new StackTraceHiddenAttribute();
         }
-
 
         [Fact]
         public void MethodHidden_ExceptionStackTrace()
@@ -49,7 +57,6 @@ namespace System.Tests
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static string ThrowStackTraceMethodC() => throw new Exception();
 
-
         [Fact]
         public void MethodHidden_EnvironmentStackTrace()
         {
@@ -68,7 +75,6 @@ namespace System.Tests
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static string GetStackTraceMethodC() => Environment.StackTrace;
-
 
         [Fact]
         public void ConstructorHidden_EnvironmentStackTrace()
@@ -94,7 +100,6 @@ namespace System.Tests
             public HiddenConstructor() => StackTrace = Environment.StackTrace;
         }
 
-
         [Fact]
         public void ClassHidden_EnvironmentStackTrace()
         {
@@ -116,7 +121,6 @@ namespace System.Tests
             [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
             internal static string GetStackTraceMethodC() => Environment.StackTrace;
         }
-
 
         [Fact]
         public void StructHidden_EnvironmentStackTrace()

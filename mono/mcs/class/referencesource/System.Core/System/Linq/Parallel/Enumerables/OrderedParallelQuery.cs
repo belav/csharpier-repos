@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -27,7 +27,7 @@ namespace System.Linq
         private QueryOperator<TSource> m_sortOp;
 
         internal OrderedParallelQuery(QueryOperator<TSource> sortOp)
-            :base(sortOp.SpecifiedQuerySettings)
+            : base(sortOp.SpecifiedQuerySettings)
         {
             m_sortOp = sortOp;
             Contract.Assert(sortOp is IOrderedEnumerable<TSource>);
@@ -49,7 +49,6 @@ namespace System.Linq
         /// <returns>An enumerator that iterates through the sequence.</returns>
         public override IEnumerator<TSource> GetEnumerator()
         {
-         
             return m_sortOp.GetEnumerator();
         }
     }

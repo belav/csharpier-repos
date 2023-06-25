@@ -13,9 +13,7 @@ namespace Test
         blue = 4,
     }
 
-    public class BB
-    {
-    }
+    public class BB { }
 
     public struct AA
     {
@@ -106,9 +104,7 @@ namespace Test
                     double local13 = (0.0);
                     throw new NullReferenceException();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
             return 72u;
         }

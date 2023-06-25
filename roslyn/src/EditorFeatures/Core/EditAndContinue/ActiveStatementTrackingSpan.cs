@@ -15,7 +15,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public readonly ActiveStatementFlags Flags;
         public readonly DocumentId? UnmappedDocumentId;
 
-        public ActiveStatementTrackingSpan(ITrackingSpan trackingSpan, int ordinal, ActiveStatementFlags flags, DocumentId? unmappedDocumentId)
+        public ActiveStatementTrackingSpan(
+            ITrackingSpan trackingSpan,
+            int ordinal,
+            ActiveStatementFlags flags,
+            DocumentId? unmappedDocumentId
+        )
         {
             Span = trackingSpan;
             Ordinal = ordinal;
@@ -28,7 +33,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public bool IsLeaf => (Flags & ActiveStatementFlags.LeafFrame) != 0;
 
-        public static ActiveStatementTrackingSpan Create(ITextSnapshot snapshot, ActiveStatementSpan span)
-            => new(snapshot.CreateTrackingSpan(snapshot.GetTextSpan(span.LineSpan).ToSpan(), SpanTrackingMode.EdgeExclusive), span.Ordinal, span.Flags, span.UnmappedDocumentId);
+        public static ActiveStatementTrackingSpan Create(
+            ITextSnapshot snapshot,
+            ActiveStatementSpan span
+        ) =>
+            new(
+                snapshot.CreateTrackingSpan(
+                    snapshot.GetTextSpan(span.LineSpan).ToSpan(),
+                    SpanTrackingMode.EdgeExclusive
+                ),
+                span.Ordinal,
+                span.Flags,
+                span.UnmappedDocumentId
+            );
     }
 }

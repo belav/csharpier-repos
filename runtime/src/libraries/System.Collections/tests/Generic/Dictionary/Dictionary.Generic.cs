@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace System.Collections.Tests
 {
-    public partial class Dictionary_Generic_Tests_string_string : Dictionary_Generic_Tests<string, string>
+    public partial class Dictionary_Generic_Tests_string_string
+        : Dictionary_Generic_Tests<string, string>
     {
         protected override KeyValuePair<string, string> CreateT(int seed)
         {
@@ -43,9 +44,13 @@ namespace System.Collections.Tests
         protected override int CreateTValue(int seed) => CreateTKey(seed);
     }
 
-    public class Dictionary_Generic_Tests_SimpleInt_int_With_Comparer_WrapStructural_SimpleInt : Dictionary_Generic_Tests<SimpleInt, int>
+    public class Dictionary_Generic_Tests_SimpleInt_int_With_Comparer_WrapStructural_SimpleInt
+        : Dictionary_Generic_Tests<SimpleInt, int>
     {
-        protected override bool DefaultValueAllowed { get { return true; } }
+        protected override bool DefaultValueAllowed
+        {
+            get { return true; }
+        }
 
         public override IEqualityComparer<SimpleInt> GetKeyIEqualityComparer()
         {

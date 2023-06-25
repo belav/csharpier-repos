@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Storage
     /// <summary>
     /// Handle that can be used with <see cref="IChecksummedPersistentStorage"/> to read data for a
     /// <see cref="Project"/> without needing to have the entire <see cref="Project"/> snapshot available.
-    /// This is useful for cases where acquiring an entire snapshot might be expensive (for example, during 
+    /// This is useful for cases where acquiring an entire snapshot might be expensive (for example, during
     /// solution load), but querying the data is still desired.
     /// </summary>
     [DataContract]
@@ -31,7 +31,13 @@ namespace Microsoft.CodeAnalysis.Storage
         [DataMember(Order = 4)]
         public readonly Checksum ParseOptionsChecksum;
 
-        public ProjectKey(SolutionKey solution, ProjectId id, string? filePath, string name, Checksum parseOptionsChecksum)
+        public ProjectKey(
+            SolutionKey solution,
+            ProjectId id,
+            string? filePath,
+            string name,
+            Checksum parseOptionsChecksum
+        )
         {
             Solution = solution;
             Id = id;
@@ -40,13 +46,21 @@ namespace Microsoft.CodeAnalysis.Storage
             ParseOptionsChecksum = parseOptionsChecksum;
         }
 
-        public static ProjectKey ToProjectKey(Project project)
-            => ToProjectKey(project.Solution.State, project.State);
+        public static ProjectKey ToProjectKey(Project project) =>
+            ToProjectKey(project.Solution.State, project.State);
 
-        public static ProjectKey ToProjectKey(SolutionState solutionState, ProjectState projectState)
-            => ToProjectKey(SolutionKey.ToSolutionKey(solutionState), projectState);
+        public static ProjectKey ToProjectKey(
+            SolutionState solutionState,
+            ProjectState projectState
+        ) => ToProjectKey(SolutionKey.ToSolutionKey(solutionState), projectState);
 
-        public static ProjectKey ToProjectKey(SolutionKey solutionKey, ProjectState projectState)
-            => new(solutionKey, projectState.Id, projectState.FilePath, projectState.Name, projectState.GetParseOptionsChecksum());
+        public static ProjectKey ToProjectKey(SolutionKey solutionKey, ProjectState projectState) =>
+            new(
+                solutionKey,
+                projectState.Id,
+                projectState.FilePath,
+                projectState.Name,
+                projectState.GetParseOptionsChecksum()
+            );
     }
 }

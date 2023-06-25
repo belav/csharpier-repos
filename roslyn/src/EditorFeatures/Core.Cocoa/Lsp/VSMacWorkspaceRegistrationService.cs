@@ -17,9 +17,7 @@ internal class VSMacWorkspaceRegistrationService : LspWorkspaceRegistrationServi
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSMacWorkspaceRegistrationService()
-    {
-    }
+    public VSMacWorkspaceRegistrationService() { }
 
     /// <summary>
     /// VSMac uses <see cref="WorkspaceKind.Host"/> for their MonoDevelopWorkspace.

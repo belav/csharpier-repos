@@ -12,23 +12,18 @@ namespace System.ServiceModel.Security.Tokens
     class SecurityContextTokenValidationException : SecurityTokenValidationException
     {
         public SecurityContextTokenValidationException()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityContextTokenValidationException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SecurityContextTokenValidationException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        protected SecurityContextTokenValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected SecurityContextTokenValidationException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

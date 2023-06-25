@@ -21,9 +21,8 @@ public class ApplicationBuilder : IApplicationBuilder
     /// Initializes a new instance of <see cref="ApplicationBuilder"/>.
     /// </summary>
     /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application services.</param>
-    public ApplicationBuilder(IServiceProvider serviceProvider) : this(serviceProvider, new FeatureCollection())
-    {
-    }
+    public ApplicationBuilder(IServiceProvider serviceProvider)
+        : this(serviceProvider, new FeatureCollection()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ApplicationBuilder"/>.
@@ -40,7 +39,10 @@ public class ApplicationBuilder : IApplicationBuilder
 
     private ApplicationBuilder(ApplicationBuilder builder)
     {
-        Properties = new CopyOnWriteDictionary<string, object?>(builder.Properties, StringComparer.Ordinal);
+        Properties = new CopyOnWriteDictionary<string, object?>(
+            builder.Properties,
+            StringComparer.Ordinal
+        );
     }
 
     /// <summary>
@@ -48,14 +50,8 @@ public class ApplicationBuilder : IApplicationBuilder
     /// </summary>
     public IServiceProvider ApplicationServices
     {
-        get
-        {
-            return GetProperty<IServiceProvider>(ApplicationServicesKey)!;
-        }
-        set
-        {
-            SetProperty<IServiceProvider>(ApplicationServicesKey, value);
-        }
+        get { return GetProperty<IServiceProvider>(ApplicationServicesKey)!; }
+        set { SetProperty<IServiceProvider>(ApplicationServicesKey, value); }
     }
 
     /// <summary>
@@ -66,10 +62,7 @@ public class ApplicationBuilder : IApplicationBuilder
     /// </remarks>
     public IFeatureCollection ServerFeatures
     {
-        get
-        {
-            return GetProperty<IFeatureCollection>(ServerFeaturesKey)!;
-        }
+        get { return GetProperty<IFeatureCollection>(ServerFeaturesKey)!; }
     }
 
     /// <summary>
@@ -126,9 +119,9 @@ public class ApplicationBuilder : IApplicationBuilder
             if (endpointRequestDelegate != null)
             {
                 var message =
-                    $"The request reached the end of the pipeline without executing the endpoint: '{endpoint!.DisplayName}'. " +
-                    $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...)' if using " +
-                    $"routing.";
+                    $"The request reached the end of the pipeline without executing the endpoint: '{endpoint!.DisplayName}'. "
+                    + $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...)' if using "
+                    + $"routing.";
                 throw new InvalidOperationException(message);
             }
 

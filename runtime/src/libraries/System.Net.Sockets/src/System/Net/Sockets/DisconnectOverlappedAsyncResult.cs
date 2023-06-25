@@ -6,10 +6,12 @@ namespace System.Net.Sockets
     // DisconnectOverlappedAsyncResult - used to take care of storage for async Socket BeginDisconnect call.
     internal sealed partial class DisconnectOverlappedAsyncResult : BaseOverlappedAsyncResult
     {
-        internal DisconnectOverlappedAsyncResult(Socket socket, object? asyncState, AsyncCallback? asyncCallback) :
-            base(socket, asyncState, asyncCallback)
-        {
-        }
+        internal DisconnectOverlappedAsyncResult(
+            Socket socket,
+            object? asyncState,
+            AsyncCallback? asyncCallback
+        )
+            : base(socket, asyncState, asyncCallback) { }
 
         // This method will be called by us when the IO completes synchronously and
         // by the ThreadPool when the IO completes asynchronously.

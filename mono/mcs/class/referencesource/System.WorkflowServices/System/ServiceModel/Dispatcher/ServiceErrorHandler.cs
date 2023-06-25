@@ -12,9 +12,7 @@ namespace System.ServiceModel.Dispatcher
         const string dataKey = "System.ServiceModel.Dispatcher.ServiceErrorHandler.MarkExeption";
 
         public ServiceErrorHandler(bool debug)
-            : base(debug)
-        {
-        }
+            : base(debug) { }
 
         public static void MarkException(Exception toMark)
         {

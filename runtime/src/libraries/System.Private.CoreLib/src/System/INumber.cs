@@ -16,19 +16,19 @@ namespace System
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
     public interface INumber<TSelf>
         : IAdditionOperators<TSelf, TSelf, TSelf>,
-          IAdditiveIdentity<TSelf, TSelf>,
-          IComparisonOperators<TSelf, TSelf>,   // implies IEquatableOperators<TSelf, TSelf>
-          IDecrementOperators<TSelf>,
-          IDivisionOperators<TSelf, TSelf, TSelf>,
-          IIncrementOperators<TSelf>,
-          IModulusOperators<TSelf, TSelf, TSelf>,
-          IMultiplicativeIdentity<TSelf, TSelf>,
-          IMultiplyOperators<TSelf, TSelf, TSelf>,
-          ISpanFormattable,                     // implies IFormattable
-          ISpanParseable<TSelf>,                // implies IParseable<TSelf>
-          ISubtractionOperators<TSelf, TSelf, TSelf>,
-          IUnaryNegationOperators<TSelf, TSelf>,
-          IUnaryPlusOperators<TSelf, TSelf>
+            IAdditiveIdentity<TSelf, TSelf>,
+            IComparisonOperators<TSelf, TSelf>, // implies IEquatableOperators<TSelf, TSelf>
+            IDecrementOperators<TSelf>,
+            IDivisionOperators<TSelf, TSelf, TSelf>,
+            IIncrementOperators<TSelf>,
+            IModulusOperators<TSelf, TSelf, TSelf>,
+            IMultiplicativeIdentity<TSelf, TSelf>,
+            IMultiplyOperators<TSelf, TSelf, TSelf>,
+            ISpanFormattable, // implies IFormattable
+            ISpanParseable<TSelf>, // implies IParseable<TSelf>
+            ISubtractionOperators<TSelf, TSelf, TSelf>,
+            IUnaryNegationOperators<TSelf, TSelf>,
+            IUnaryPlusOperators<TSelf, TSelf>
         where TSelf : INumber<TSelf>
     {
         /// <summary>Gets the value <c>1</c> for the type.</summary>
@@ -115,7 +115,11 @@ namespace System
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
         /// <exception cref="FormatException"><paramref name="s" /> is not in the correct format.</exception>
         /// <exception cref="OverflowException"><paramref name="s" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        static abstract TSelf Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider);
+        static abstract TSelf Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider
+        );
 
         /// <summary>Computes the sign of a value.</summary>
         /// <param name="value">The value whose sign is to be computed.</param>
@@ -139,7 +143,12 @@ namespace System
         /// <param name="result">On return, contains the result of succesfully parsing <paramref name="s" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        static abstract bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out TSelf result);
+        static abstract bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out TSelf result
+        );
 
         /// <summary>Tries to parses a span of characters into a value.</summary>
         /// <param name="s">The span of characters to parse.</param>
@@ -148,15 +157,18 @@ namespace System
         /// <param name="result">On return, contains the result of succesfully parsing <paramref name="s" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        static abstract bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out TSelf result);
+        static abstract bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out TSelf result
+        );
     }
 
     /// <summary>Defines a number that is represented in a base-2 format.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IBinaryNumber<TSelf>
-        : IBitwiseOperators<TSelf, TSelf, TSelf>,
-          INumber<TSelf>
+    public interface IBinaryNumber<TSelf> : IBitwiseOperators<TSelf, TSelf, TSelf>, INumber<TSelf>
         where TSelf : IBinaryNumber<TSelf>
     {
         /// <summary>Determines if a value is a power of two.</summary>
@@ -173,8 +185,7 @@ namespace System
     /// <summary>Defines a number type which can represent both positive and negative values.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface ISignedNumber<TSelf>
-        : INumber<TSelf>
+    public interface ISignedNumber<TSelf> : INumber<TSelf>
         where TSelf : ISignedNumber<TSelf>
     {
         /// <summary>Gets the value <c>-1</c> for the type.</summary>
@@ -184,9 +195,6 @@ namespace System
     /// <summary>Defines a number type which can only represent positive values, that is it cannot represent negative values.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IUnsignedNumber<TSelf>
-        : INumber<TSelf>
-        where TSelf : IUnsignedNumber<TSelf>
-    {
-    }
+    public interface IUnsignedNumber<TSelf> : INumber<TSelf>
+        where TSelf : IUnsignedNumber<TSelf> { }
 }

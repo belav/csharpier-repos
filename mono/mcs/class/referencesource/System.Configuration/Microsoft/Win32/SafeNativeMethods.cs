@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Win32 {
+namespace Microsoft.Win32
+{
     using System.Runtime.InteropServices;
     using System;
     using System.Security.Permissions;
@@ -12,17 +13,16 @@ namespace Microsoft.Win32 {
     using System.IO;
     using System.Text;
     using System.Threading;
-    using Microsoft.Win32.SafeHandles;    
+    using Microsoft.Win32.SafeHandles;
 
-    [ 
-    System.Security.SuppressUnmanagedCodeSecurityAttribute()
-    ]
-    internal static class SafeNativeMethods {
+    [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
+    internal static class SafeNativeMethods
+    {
 #if NOPERF
-        [DllImport(ExternDll.Kernel32, SetLastError=true)]
+        [DllImport(ExternDll.Kernel32, SetLastError = true)]
         internal static extern bool QueryPerformanceCounter(out long value);
-        
-        [DllImport(ExternDll.Kernel32, SetLastError=true)]
+
+        [DllImport(ExternDll.Kernel32, SetLastError = true)]
         internal static extern bool QueryPerformanceFrequency(out long value);
 #endif
     }

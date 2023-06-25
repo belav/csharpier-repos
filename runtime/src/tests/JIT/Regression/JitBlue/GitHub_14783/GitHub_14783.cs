@@ -50,7 +50,6 @@ public class GitHub_14783
         }
     }
 
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string B(string x)
     {

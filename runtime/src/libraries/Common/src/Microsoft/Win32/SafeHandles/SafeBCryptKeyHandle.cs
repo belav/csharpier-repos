@@ -11,9 +11,7 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeBCryptKeyHandle : SafeBCryptHandle
     {
         public SafeBCryptKeyHandle()
-            : base()
-        {
-        }
+            : base() { }
 
         protected sealed override bool ReleaseHandle()
         {

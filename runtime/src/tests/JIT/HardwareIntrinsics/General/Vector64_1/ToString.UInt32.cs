@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringUInt32()
+        private static unsafe void ToStringUInt32()
         {
             int size = Unsafe.SizeOf<Vector64<UInt32>>() / sizeof(UInt32);
             UInt32[] values = new UInt32[size];
@@ -27,17 +27,27 @@ namespace JIT.HardwareIntrinsics.General
             {
                 values[i] = TestLibrary.Generator.GetUInt32();
             }
-            
+
             Vector64<UInt32> vector = Vector64.Create(values[0], values[1]);
             string actual = vector.ToString();
 
-            string expected = '<' + string.Join(", ", values.Select(x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture))) + '>';
+            string expected =
+                '<'
+                + string.Join(
+                    ", ",
+                    values.Select(
+                        x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                    )
+                )
+                + '>';
 
             bool succeeded = string.Equals(expected, actual, StringComparison.Ordinal);
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64UInt32ToString: Vector64<UInt32>.ToString() returned an unexpected result.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64UInt32ToString: Vector64<UInt32>.ToString() returned an unexpected result."
+                );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

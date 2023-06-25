@@ -31,11 +31,15 @@ namespace System.Linq.Parallel
         //
 
         internal SynchronousChannelMergeEnumerator(
-            QueryTaskGroupState taskGroupState, SynchronousChannel<T>[] channels) : base(taskGroupState)
+            QueryTaskGroupState taskGroupState,
+            SynchronousChannel<T>[] channels
+        )
+            : base(taskGroupState)
         {
             Debug.Assert(channels != null);
 #if DEBUG
-            foreach (SynchronousChannel<T> c in channels) Debug.Assert(c != null);
+            foreach (SynchronousChannel<T> c in channels)
+                Debug.Assert(c != null);
 #endif
 
             _channels = channels;
@@ -58,7 +62,9 @@ namespace System.Linq.Parallel
                 // retrieving the current element. We throw.
                 if (_channelIndex == -1 || _channelIndex == _channels.Length)
                 {
-                    throw new InvalidOperationException(SR.PLINQ_CommonEnumerator_Current_NotStarted);
+                    throw new InvalidOperationException(
+                        SR.PLINQ_CommonEnumerator_Current_NotStarted
+                    );
                 }
 
                 return _currentElement!;

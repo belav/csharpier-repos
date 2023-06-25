@@ -28,7 +28,10 @@ namespace System.Text.RegularExpressions.Tests
         {
             if (PlatformDetection.IsNetCore)
             {
-                Assert.Equal(RegexOptionNonBacktracking, Enum.Parse(typeof(RegexOptions), "NonBacktracking"));
+                Assert.Equal(
+                    RegexOptionNonBacktracking,
+                    Enum.Parse(typeof(RegexOptions), "NonBacktracking")
+                );
             }
         }
 
@@ -50,7 +53,12 @@ namespace System.Text.RegularExpressions.Tests
             return start == 0;
         }
 
-        public static async Task<Regex> GetRegexAsync(RegexEngine engine, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern, RegexOptions options, Globalization.CultureInfo culture)
+        public static async Task<Regex> GetRegexAsync(
+            RegexEngine engine,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
+            RegexOptions options,
+            Globalization.CultureInfo culture
+        )
         {
             if (engine == RegexEngine.SourceGenerated)
             {
@@ -91,9 +99,12 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     yield return RegexEngine.NonBacktracking;
 
-                    if (PlatformDetection.IsReflectionEmitSupported && // the source generator doesn't use reflection emit, but it does use Roslyn for the equivalent
-                        PlatformDetection.IsNotMobile &&
-                        PlatformDetection.IsNotBrowser)
+                    if (
+                        PlatformDetection.IsReflectionEmitSupported
+                        && // the source generator doesn't use reflection emit, but it does use Roslyn for the equivalent
+                        PlatformDetection.IsNotMobile
+                        && PlatformDetection.IsNotBrowser
+                    )
                     {
                         yield return RegexEngine.SourceGenerated;
 
@@ -107,7 +118,12 @@ namespace System.Text.RegularExpressions.Tests
         public static bool IsNonBacktracking(RegexEngine engine) =>
             engine is RegexEngine.NonBacktracking or RegexEngine.NonBacktrackingSourceGenerated;
 
-        public static async Task<Regex> GetRegexAsync(RegexEngine engine, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern, RegexOptions? options = null, TimeSpan? matchTimeout = null)
+        public static async Task<Regex> GetRegexAsync(
+            RegexEngine engine,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
+            RegexOptions? options = null,
+            TimeSpan? matchTimeout = null
+        )
         {
             if (options is null)
             {
@@ -116,19 +132,37 @@ namespace System.Text.RegularExpressions.Tests
 
             if (engine == RegexEngine.SourceGenerated)
             {
-                return await RegexGeneratorHelper.SourceGenRegexAsync(pattern, null, options, matchTimeout);
+                return await RegexGeneratorHelper.SourceGenRegexAsync(
+                    pattern,
+                    null,
+                    options,
+                    matchTimeout
+                );
             }
 
             // TODO-NONBACKTRACKING
             // - Handle NonBacktrackingSourceGenerated
 
-            return
-                options is null ? new Regex(pattern, OptionsFromEngine(engine)) :
-                matchTimeout is null ? new Regex(pattern, options.Value | OptionsFromEngine(engine)) :
-                new Regex(pattern, options.Value | OptionsFromEngine(engine), matchTimeout.Value);
+            return options is null
+                ? new Regex(pattern, OptionsFromEngine(engine))
+                : matchTimeout is null
+                    ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                    : new Regex(
+                        pattern,
+                        options.Value | OptionsFromEngine(engine),
+                        matchTimeout.Value
+                    );
         }
 
-        public static async Task<Regex[]> GetRegexesAsync(RegexEngine engine, params (string pattern, CultureInfo? culture, RegexOptions? options, TimeSpan? matchTimeout)[] regexes)
+        public static async Task<Regex[]> GetRegexesAsync(
+            RegexEngine engine,
+            params (
+                string pattern,
+                CultureInfo? culture,
+                RegexOptions? options,
+                TimeSpan? matchTimeout
+            )[] regexes
+        )
         {
             if (engine == RegexEngine.SourceGenerated)
             {
@@ -141,25 +175,37 @@ namespace System.Text.RegularExpressions.Tests
             var results = new Regex[regexes.Length];
             for (int i = 0; i < regexes.Length; i++)
             {
-                (string pattern, CultureInfo? culture, RegexOptions? options, TimeSpan? matchTimeout) = regexes[i];
-                results[i] =
-                    options is null ? new Regex(pattern, OptionsFromEngine(engine)) :
-                    matchTimeout is null ? new Regex(pattern, options.Value | OptionsFromEngine(engine)) :
-                    new Regex(pattern, options.Value | OptionsFromEngine(engine), matchTimeout.Value);
+                (
+                    string pattern,
+                    CultureInfo? culture,
+                    RegexOptions? options,
+                    TimeSpan? matchTimeout
+                ) = regexes[i];
+                results[i] = options is null
+                    ? new Regex(pattern, OptionsFromEngine(engine))
+                    : matchTimeout is null
+                        ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                        : new Regex(
+                            pattern,
+                            options.Value | OptionsFromEngine(engine),
+                            matchTimeout.Value
+                        );
             }
 
             return results;
         }
 
-        public static RegexOptions OptionsFromEngine(RegexEngine engine) => engine switch
-        {
-            RegexEngine.Interpreter => RegexOptions.None,
-            RegexEngine.Compiled => RegexOptions.Compiled,
-            RegexEngine.SourceGenerated => RegexOptions.Compiled,
-            RegexEngine.NonBacktracking => RegexOptionNonBacktracking,
-            RegexEngine.NonBacktrackingSourceGenerated => RegexOptionNonBacktracking | RegexOptions.Compiled,
-            _ => throw new ArgumentException($"Unknown engine: {engine}"),
-        };
+        public static RegexOptions OptionsFromEngine(RegexEngine engine) =>
+            engine switch
+            {
+                RegexEngine.Interpreter => RegexOptions.None,
+                RegexEngine.Compiled => RegexOptions.Compiled,
+                RegexEngine.SourceGenerated => RegexOptions.Compiled,
+                RegexEngine.NonBacktracking => RegexOptionNonBacktracking,
+                RegexEngine.NonBacktrackingSourceGenerated
+                    => RegexOptionNonBacktracking | RegexOptions.Compiled,
+                _ => throw new ArgumentException($"Unknown engine: {engine}"),
+            };
 
         /// <summary>Set the AppContext variable REGEX_NONBACKTRACKING_MAX_AUTOMATA_SIZE to the given max value. Only used with Nonbacktracking engine.</summary>
         public static void SetSafeSizeThreshold(int maxSize)
@@ -202,11 +248,11 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        public CaptureData(string value, int index, int length) : this(value, index, length, true)
-        {
-        }
+        public CaptureData(string value, int index, int length)
+            : this(value, index, length, true) { }
 
-        public CaptureData(string value, int index, int length, CaptureData[] captures) : this(value, index, length, false)
+        public CaptureData(string value, int index, int length, CaptureData[] captures)
+            : this(value, index, length, false)
         {
             Captures = captures;
         }

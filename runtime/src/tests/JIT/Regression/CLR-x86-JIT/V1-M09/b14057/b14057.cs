@@ -7,6 +7,7 @@ using System;
 public class test
 {
     static byte by = 13;
+
     public static int Main()
     {
         byte by1 = (byte)(by >> 1);

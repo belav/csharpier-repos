@@ -14,12 +14,12 @@ namespace System.Collections.Specialized
 {
     partial class StringDictionary
     {
-        internal void ReplaceHashtable (Hashtable useThisHashtableInstead)
+        internal void ReplaceHashtable(Hashtable useThisHashtableInstead)
         {
             contents = useThisHashtableInstead;
-        } 
+        }
 
-        internal IDictionary<string, string> AsGenericDictionary ()
+        internal IDictionary<string, string> AsGenericDictionary()
         {
             return new GenericAdapter(this);
         }

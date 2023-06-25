@@ -17,7 +17,12 @@ internal sealed class Heartbeat : IDisposable
     private readonly Thread _timerThread;
     private volatile bool _stopped;
 
-    public Heartbeat(IHeartbeatHandler[] callbacks, ISystemClock systemClock, IDebugger debugger, KestrelTrace trace)
+    public Heartbeat(
+        IHeartbeatHandler[] callbacks,
+        ISystemClock systemClock,
+        IDebugger debugger,
+        KestrelTrace trace
+    )
     {
         _callbacks = callbacks;
         _systemClock = systemClock;

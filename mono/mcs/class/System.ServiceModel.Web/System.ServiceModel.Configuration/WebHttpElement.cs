@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,35 +46,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed partial class WebHttpElement
-		 : BehaviorExtensionElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty behavior_type;
+    public sealed partial class WebHttpElement : BehaviorExtensionElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty behavior_type;
 
-		static WebHttpElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			behavior_type = new ConfigurationProperty ("",
-				typeof (Type), null, new TypeConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static WebHttpElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            behavior_type = new ConfigurationProperty(
+                "",
+                typeof(Type),
+                null,
+                new TypeConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (behavior_type);
-		}
+            properties.Add(behavior_type);
+        }
 
-		public WebHttpElement ()
-		{
-		}
+        public WebHttpElement() { }
 
-		public override Type BehaviorType {
-			get { return typeof (WebHttpBehavior); }
-		}
+        public override Type BehaviorType
+        {
+            get { return typeof(WebHttpBehavior); }
+        }
 
-		protected internal override object CreateBehavior ()
-		{
-			return new WebHttpBehavior ();
-		}
-	}
-
+        protected internal override object CreateBehavior()
+        {
+            return new WebHttpBehavior();
+        }
+    }
 }

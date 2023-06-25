@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PeerNameRecordCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 namespace System.Net.PeerToPeer
 {
@@ -14,6 +14,7 @@ namespace System.Net.PeerToPeer
     public class PeerNameRecordCollection : Collection<PeerNameRecord>
     {
         public PeerNameRecordCollection() { }
+
         protected override void SetItem(int index, PeerNameRecord item)
         {
             if (item == null)
@@ -22,6 +23,7 @@ namespace System.Net.PeerToPeer
             }
             base.SetItem(index, item);
         }
+
         protected override void InsertItem(int index, PeerNameRecord item)
         {
             if (item == null)

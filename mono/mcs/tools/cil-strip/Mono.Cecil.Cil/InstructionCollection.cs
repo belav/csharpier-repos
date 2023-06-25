@@ -29,66 +29,68 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
+namespace Mono.Cecil.Cil
+{
+    using System;
+    using System.Collections;
 
-	using System;
-	using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using Mono.Cecil.Cil;
+    internal sealed class InstructionCollection : CollectionBase, ICodeVisitable
+    {
+        MethodBody m_container;
+        public readonly Instruction Outside = new Instruction(int.MaxValue, OpCodes.Nop);
 
-	internal sealed class InstructionCollection : CollectionBase, ICodeVisitable {
+        public Instruction this[int index]
+        {
+            get { return List[index] as Instruction; }
+            set { List[index] = value; }
+        }
 
-		MethodBody m_container;
-		public readonly Instruction Outside = new Instruction (int.MaxValue, OpCodes.Nop);
+        public MethodBody Container
+        {
+            get { return m_container; }
+        }
 
-		public Instruction this [int index] {
-			get { return List [index] as Instruction; }
-			set { List [index] = value; }
-		}
+        public InstructionCollection(MethodBody container)
+        {
+            m_container = container;
+        }
 
-		public MethodBody Container {
-			get { return m_container; }
-		}
+        internal void Add(Instruction value)
+        {
+            List.Add(value);
+        }
 
-		public InstructionCollection (MethodBody container)
-		{
-			m_container = container;
-		}
+        public bool Contains(Instruction value)
+        {
+            return List.Contains(value);
+        }
 
-		internal void Add (Instruction value)
-		{
-			List.Add (value);
-		}
+        public int IndexOf(Instruction value)
+        {
+            return List.IndexOf(value);
+        }
 
-		public bool Contains (Instruction value)
-		{
-			return List.Contains (value);
-		}
+        internal void Insert(int index, Instruction value)
+        {
+            List.Insert(index, value);
+        }
 
-		public int IndexOf (Instruction value)
-		{
-			return List.IndexOf (value);
-		}
+        internal void Remove(Instruction value)
+        {
+            List.Remove(value);
+        }
 
-		internal void Insert (int index, Instruction value)
-		{
-			List.Insert (index, value);
-		}
+        protected override void OnValidate(object o)
+        {
+            if (!(o is Instruction))
+                throw new ArgumentException("Must be of type " + typeof(Instruction).FullName);
+        }
 
-		internal void Remove (Instruction value)
-		{
-			List.Remove (value);
-		}
-
-		protected override void OnValidate (object o)
-		{
-			if (! (o is Instruction))
-				throw new ArgumentException ("Must be of type " + typeof (Instruction).FullName);
-		}
-
-		public void Accept (ICodeVisitor visitor)
-		{
-			visitor.VisitInstructionCollection (this);
-		}
-	}
+        public void Accept(ICodeVisitor visitor)
+        {
+            visitor.VisitInstructionCollection(this);
+        }
+    }
 }

@@ -10,7 +10,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptGoToDefinitionService
     {
-        Task<IEnumerable<IVSTypeScriptNavigableItem>?> FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken);
-        bool TryGoToDefinition(Document document, int position, CancellationToken cancellationToken);
+        Task<IEnumerable<IVSTypeScriptNavigableItem>?> FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
+        bool TryGoToDefinition(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

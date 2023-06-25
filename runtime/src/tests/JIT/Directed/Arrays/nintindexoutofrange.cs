@@ -7,12 +7,10 @@ using System.Runtime.CompilerServices;
 class NintIndexOutOfRangeTest
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Stelem_Ref(object[] arr, nint i, Object value)
-        => arr[i] = value;
+    static void Stelem_Ref(object[] arr, nint i, Object value) => arr[i] = value;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void LdElemATestHelper(ref object nothingOfInterest)
-    {}
+    static void LdElemATestHelper(ref object nothingOfInterest) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void LdElemA(object[] arr, nint i)
@@ -38,7 +36,7 @@ class NintIndexOutOfRangeTest
             failed = true;
             Console.WriteLine("Failed to throw IndexOutOfRange when storing null");
         }
-        catch (IndexOutOfRangeException) {}
+        catch (IndexOutOfRangeException) { }
 
         // Try store to invalid index with actual value
         try
@@ -47,7 +45,7 @@ class NintIndexOutOfRangeTest
             failed = true;
             Console.WriteLine("Failed to throw IndexOutOfRange when storing object");
         }
-        catch (IndexOutOfRangeException) {}
+        catch (IndexOutOfRangeException) { }
 
         // Try to load element address
         try
@@ -56,7 +54,7 @@ class NintIndexOutOfRangeTest
             failed = true;
             Console.WriteLine("Failed to throw IndexOutOfRange when accessing element");
         }
-        catch (IndexOutOfRangeException) {}
+        catch (IndexOutOfRangeException) { }
 
         if (failed)
             return 1;

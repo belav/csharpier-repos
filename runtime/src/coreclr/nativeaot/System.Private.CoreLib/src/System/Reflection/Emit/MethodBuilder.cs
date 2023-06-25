@@ -14,125 +14,78 @@ namespace System.Reflection.Emit
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool ContainsGenericParameters
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public bool InitLocals
         {
-            get
-            {
-                return default;
-            }
-            set
-            {
-            }
+            get { return default; }
+            set { }
         }
 
         public override bool IsGenericMethod
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool IsConstructedGenericMethod
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override ParameterInfo ReturnParameter
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReturnType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public GenericTypeParameterBuilder[] DefineGenericParameters(params string[] names)
@@ -140,7 +93,11 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public ParameterBuilder DefineParameter(int position, ParameterAttributes attributes, string strParamName)
+        public ParameterBuilder DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string strParamName
+        )
         {
             return default;
         }
@@ -200,7 +157,13 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, Globalization.CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            Globalization.CultureInfo? culture
+        )
         {
             return default;
         }
@@ -210,36 +173,35 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
 
-        public void SetImplementationFlags(MethodImplAttributes attributes)
-        {
-        }
+        public void SetImplementationFlags(MethodImplAttributes attributes) { }
 
-        public void SetParameters(params Type[] parameterTypes)
-        {
-        }
+        public void SetParameters(params Type[] parameterTypes) { }
 
-        public void SetReturnType(Type returnType)
-        {
-        }
+        public void SetReturnType(Type returnType) { }
 
-        public void SetSignature(Type returnType, Type[] returnTypeRequiredCustomModifiers, Type[] returnTypeOptionalCustomModifiers, Type[] parameterTypes, Type[][] parameterTypeRequiredCustomModifiers, Type[][] parameterTypeOptionalCustomModifiers)
-        {
-        }
+        public void SetSignature(
+            Type returnType,
+            Type[] returnTypeRequiredCustomModifiers,
+            Type[] returnTypeOptionalCustomModifiers,
+            Type[] parameterTypes,
+            Type[][] parameterTypeRequiredCustomModifiers,
+            Type[][] parameterTypeOptionalCustomModifiers
+        ) { }
 
         public override string ToString()
         {

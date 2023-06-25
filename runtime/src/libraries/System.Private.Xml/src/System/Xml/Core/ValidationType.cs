@@ -26,7 +26,9 @@ namespace System.Xml
         DTD,
 
         // Validate according to XDR.
-        [Obsolete("XDR Validation through XmlValidatingReader has been deprecated and is not supported.")]
+        [Obsolete(
+            "XDR Validation through XmlValidatingReader has been deprecated and is not supported."
+        )]
         XDR,
 
         // Validate according to W3C XSD schemas, including inline schemas. An error is returned if both XDR and XSD schemas

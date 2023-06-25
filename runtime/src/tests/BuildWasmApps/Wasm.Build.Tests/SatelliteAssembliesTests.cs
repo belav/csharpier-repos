@@ -14,103 +14,196 @@ namespace Wasm.Build.Tests
 {
     public class SatelliteAssembliesTests : BuildTestBase
     {
-        public SatelliteAssembliesTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public SatelliteAssembliesTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        )
+            : base(output, buildContext) { }
 
-        public static IEnumerable<object?[]> SatelliteAssemblyTestData(bool aot, bool relinking, RunHost host)
-            => ConfigWithAOTData(aot)
-                    .Multiply(
-                        new object?[] { relinking, "es-ES", "got: hola" },
-                        new object?[] { relinking, null,    "got: hello" },
-                        new object?[] { relinking, "ja-JP", "got: \u3053\u3093\u306B\u3061\u306F" })
-                    .WithRunHosts(host)
-                    .UnwrapItemsAsArrays();
+        public static IEnumerable<object?[]> SatelliteAssemblyTestData(
+            bool aot,
+            bool relinking,
+            RunHost host
+        ) =>
+            ConfigWithAOTData(aot)
+                .Multiply(
+                    new object?[] { relinking, "es-ES", "got: hola" },
+                    new object?[] { relinking, null, "got: hello" },
+                    new object?[] { relinking, "ja-JP", "got: \u3053\u3093\u306B\u3061\u306F" }
+                )
+                .WithRunHosts(host)
+                .UnwrapItemsAsArrays();
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
-        [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ false, RunHost.All })]
-        [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ true,  RunHost.All })]
-        [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ true,  /*relinking*/ false, RunHost.All })]
-        public void ResourcesFromMainAssembly(BuildArgs buildArgs,
-                                              bool nativeRelink,
-                                              string? argCulture,
-                                              string expectedOutput,
-                                              RunHost host,
-                                              string id)
+        [MemberData(
+            nameof(SatelliteAssemblyTestData),
+            parameters: new object[]
+            { /*aot*/
+                false, /*relinking*/
+                false,
+                RunHost.All
+            }
+        )]
+        [MemberData(
+            nameof(SatelliteAssemblyTestData),
+            parameters: new object[]
+            { /*aot*/
+                false, /*relinking*/
+                true,
+                RunHost.All
+            }
+        )]
+        [MemberData(
+            nameof(SatelliteAssemblyTestData),
+            parameters: new object[]
+            { /*aot*/
+                true, /*relinking*/
+                false,
+                RunHost.All
+            }
+        )]
+        public void ResourcesFromMainAssembly(
+            BuildArgs buildArgs,
+            bool nativeRelink,
+            string? argCulture,
+            string expectedOutput,
+            RunHost host,
+            string id
+        )
         {
             string projectName = $"sat_asm_from_main_asm";
             // Release+publish defaults to native relinking
-            bool dotnetWasmFromRuntimePack = !nativeRelink && !buildArgs.AOT && buildArgs.Config != "Release";
+            bool dotnetWasmFromRuntimePack =
+                !nativeRelink && !buildArgs.AOT && buildArgs.Config != "Release";
 
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs,
-                                        projectTemplate: s_resourcesProjectTemplate,
-                                        extraProperties: (nativeRelink ? $"<WasmBuildNative>true</WasmBuildNative>" : string.Empty)
-                                        // make ASSERTIONS=1 so that we test with it
-                                        + $"<EmccCompileOptimizationFlag>{ (buildArgs.Config == "Debug" ? "-O0 -sASSERTIONS=1" : "-O0 -sASSERTIONS=1")}</EmccCompileOptimizationFlag>"
-                                        );
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                projectTemplate: s_resourcesProjectTemplate,
+                extraProperties: (
+                    nativeRelink ? $"<WasmBuildNative>true</WasmBuildNative>" : string.Empty
+                )
+                    // make ASSERTIONS=1 so that we test with it
+                    + $"<EmccCompileOptimizationFlag>{(buildArgs.Config == "Debug" ? "-O0 -sASSERTIONS=1" : "-O0 -sASSERTIONS=1")}</EmccCompileOptimizationFlag>"
+            );
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () =>
-                                {
-                                    Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "resx"), Path.Combine(_projectDir!, "resx"));
-                                    CreateProgramForCultureTest(_projectDir!, $"{projectName}.resx.words", "TestClass");
-                                },
-                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                    {
+                        Utils.DirectoryCopy(
+                            Path.Combine(BuildEnvironment.TestAssetsPath, "resx"),
+                            Path.Combine(_projectDir!, "resx")
+                        );
+                        CreateProgramForCultureTest(
+                            _projectDir!,
+                            $"{projectName}.resx.words",
+                            "TestClass"
+                        );
+                    },
+                    DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack
+                )
+            );
 
             string output = RunAndTestWasmApp(
-                                buildArgs, expectedExitCode: 42,
-                                args: argCulture,
-                                host: host, id: id,
-                                // check that downloading assets doesn't have timing race conditions
-                                extraXHarnessMonoArgs: "--fetch-random-delay=200");
+                buildArgs,
+                expectedExitCode: 42,
+                args: argCulture,
+                host: host,
+                id: id,
+                // check that downloading assets doesn't have timing race conditions
+                extraXHarnessMonoArgs: "--fetch-random-delay=200"
+            );
 
             Assert.Contains(expectedOutput, output);
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
-        [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ false, RunHost.All })]
-        [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ true,  RunHost.All })]
-        [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ true,  /*relinking*/ false, RunHost.All })]
-        public void ResourcesFromProjectReference(BuildArgs buildArgs,
-                                                  bool nativeRelink,
-                                                  string? argCulture,
-                                                  string expectedOutput,
-                                                  RunHost host,
-                                                  string id)
+        [MemberData(
+            nameof(SatelliteAssemblyTestData),
+            parameters: new object[]
+            { /*aot*/
+                false, /*relinking*/
+                false,
+                RunHost.All
+            }
+        )]
+        [MemberData(
+            nameof(SatelliteAssemblyTestData),
+            parameters: new object[]
+            { /*aot*/
+                false, /*relinking*/
+                true,
+                RunHost.All
+            }
+        )]
+        [MemberData(
+            nameof(SatelliteAssemblyTestData),
+            parameters: new object[]
+            { /*aot*/
+                true, /*relinking*/
+                false,
+                RunHost.All
+            }
+        )]
+        public void ResourcesFromProjectReference(
+            BuildArgs buildArgs,
+            bool nativeRelink,
+            string? argCulture,
+            string expectedOutput,
+            RunHost host,
+            string id
+        )
         {
             string projectName = $"SatelliteAssemblyFromProjectRef";
             bool dotnetWasmFromRuntimePack = !nativeRelink && !buildArgs.AOT;
 
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs,
-                                        projectTemplate: s_resourcesProjectTemplate,
-                                        extraProperties: $"<WasmBuildNative>{(nativeRelink ? "true" : "false")}</WasmBuildNative>",
-                                        extraItems: $"<ProjectReference Include=\"..\\LibraryWithResources\\LibraryWithResources.csproj\" />");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                projectTemplate: s_resourcesProjectTemplate,
+                extraProperties: $"<WasmBuildNative>{(nativeRelink ? "true" : "false")}</WasmBuildNative>",
+                extraItems: $"<ProjectReference Include=\"..\\LibraryWithResources\\LibraryWithResources.csproj\" />"
+            );
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
-                                InitProject: () =>
-                                {
-                                    string rootDir = _projectDir!;
-                                    _projectDir = Path.Combine(rootDir, projectName);
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
+                    InitProject: () =>
+                    {
+                        string rootDir = _projectDir!;
+                        _projectDir = Path.Combine(rootDir, projectName);
 
-                                    Directory.CreateDirectory(_projectDir);
-                                    Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "SatelliteAssemblyFromProjectRef"), rootDir);
-                                    CreateProgramForCultureTest(_projectDir, "LibraryWithResources.resx.words", "LibraryWithResources.Class1");
-                                }));
+                        Directory.CreateDirectory(_projectDir);
+                        Utils.DirectoryCopy(
+                            Path.Combine(
+                                BuildEnvironment.TestAssetsPath,
+                                "SatelliteAssemblyFromProjectRef"
+                            ),
+                            rootDir
+                        );
+                        CreateProgramForCultureTest(
+                            _projectDir,
+                            "LibraryWithResources.resx.words",
+                            "LibraryWithResources.Class1"
+                        );
+                    }
+                )
+            );
 
-            string output = RunAndTestWasmApp(buildArgs,
-                                              expectedExitCode: 42,
-                                              args: argCulture,
-                                              host: host, id: id);
+            string output = RunAndTestWasmApp(
+                buildArgs,
+                expectedExitCode: 42,
+                args: argCulture,
+                host: host,
+                id: id
+            );
 
             Assert.Contains(expectedOutput, output);
         }
@@ -122,22 +215,37 @@ namespace Wasm.Build.Tests
         {
             string projectName = $"check_sat_asm_not_aot";
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs,
-                                        projectTemplate: s_resourcesProjectTemplate,
-                                        extraProperties: $@"
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                projectTemplate: s_resourcesProjectTemplate,
+                extraProperties: $@"
                                             <EmccCompileOptimizationFlag>-O0</EmccCompileOptimizationFlag>
                                             <EmccLinkOptimizationFlag>-O0</EmccLinkOptimizationFlag>",
-                                        extraItems: $"<EmbeddedResource Include=\"{BuildEnvironment.RelativeTestAssetsPath}resx\\*\" />");
+                extraItems: $"<EmbeddedResource Include=\"{BuildEnvironment.RelativeTestAssetsPath}resx\\*\" />"
+            );
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => CreateProgramForCultureTest(_projectDir!, $"{projectName}.words", "TestClass"),
-                                DotnetWasmFromRuntimePack: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        CreateProgramForCultureTest(
+                            _projectDir!,
+                            $"{projectName}.words",
+                            "TestClass"
+                        ),
+                    DotnetWasmFromRuntimePack: false
+                )
+            );
 
-            var bitCodeFileNames = Directory.GetFileSystemEntries(Path.Combine(_projectDir!, "obj"), "*.dll.bc", SearchOption.AllDirectories)
-                                    .Select(path => Path.GetFileName(path))
-                                    .ToArray();
+            var bitCodeFileNames = Directory
+                .GetFileSystemEntries(
+                    Path.Combine(_projectDir!, "obj"),
+                    "*.dll.bc",
+                    SearchOption.AllDirectories
+                )
+                .Select(path => Path.GetFileName(path))
+                .ToArray();
 
             // sanity check, in case we change file extensions
             Assert.Contains($"{projectName}.dll.bc", bitCodeFileNames);
@@ -146,11 +254,17 @@ namespace Wasm.Build.Tests
         }
 #pragma warning restore xUnit1026
 
-        private void CreateProgramForCultureTest(string dir, string resourceName, string typeName)
-            => File.WriteAllText(Path.Combine(dir, "Program.cs"),
-                                s_cultureResourceTestProgram
-                                    .Replace("##RESOURCE_NAME##", resourceName)
-                                    .Replace("##TYPE_NAME##", typeName));
+        private void CreateProgramForCultureTest(
+            string dir,
+            string resourceName,
+            string typeName
+        ) =>
+            File.WriteAllText(
+                Path.Combine(dir, "Program.cs"),
+                s_cultureResourceTestProgram
+                    .Replace("##RESOURCE_NAME##", resourceName)
+                    .Replace("##TYPE_NAME##", typeName)
+            );
 
         private const string s_resourcesProjectTemplate =
             @$"<Project Sdk=""Microsoft.NET.Sdk"">
@@ -167,7 +281,8 @@ namespace Wasm.Build.Tests
               ##INSERT_AT_END##
             </Project>";
 
-        private static string s_cultureResourceTestProgram = @"
+        private static string s_cultureResourceTestProgram =
+            @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Globalization;

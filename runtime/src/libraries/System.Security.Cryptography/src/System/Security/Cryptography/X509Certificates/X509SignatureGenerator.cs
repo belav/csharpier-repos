@@ -20,7 +20,10 @@ namespace System.Security.Cryptography.X509Certificates
             return new ECDsaX509SignatureGenerator(key);
         }
 
-        public static X509SignatureGenerator CreateForRSA(RSA key, RSASignaturePadding signaturePadding)
+        public static X509SignatureGenerator CreateForRSA(
+            RSA key,
+            RSASignaturePadding signaturePadding
+        )
         {
             ArgumentNullException.ThrowIfNull(key);
             ArgumentNullException.ThrowIfNull(signaturePadding);

@@ -8,16 +8,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 {
     internal class UvLoopHandle : UvMemory
     {
-        public UvLoopHandle(ILibuvTrace logger) : base(logger)
-        {
-        }
+        public UvLoopHandle(ILibuvTrace logger)
+            : base(logger) { }
 
         public void Init(LibuvFunctions uv)
         {
-            CreateMemory(
-                uv,
-                Environment.CurrentManagedThreadId,
-                uv.loop_size());
+            CreateMemory(uv, Environment.CurrentManagedThreadId, uv.loop_size());
 
             _uv.loop_init(this);
         }
@@ -37,7 +33,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             return _uv.now(this);
         }
 
-        unsafe protected override bool ReleaseHandle()
+        protected override unsafe bool ReleaseHandle()
         {
             var memory = handle;
             if (memory != IntPtr.Zero)

@@ -34,9 +34,7 @@ namespace ILCompiler
                             var ecmaType = (EcmaType)assembly.GetObject(typeHandle);
                             WalkAncestorTypes(ecmaType);
                         }
-                        catch (TypeSystemException)
-                        {
-                        }
+                        catch (TypeSystemException) { }
                     }
 
                     foreach (MethodDefinitionHandle methodHandle in typeDefinition.GetMethods())
@@ -46,8 +44,12 @@ namespace ILCompiler
 
                         if (!needsScanning)
                         {
-                            MethodDefinition methodDefinition = _metadataReader.GetMethodDefinition(methodHandle);
-                            BlobReader sigBlob = _metadataReader.GetBlobReader(methodDefinition.Signature);
+                            MethodDefinition methodDefinition = _metadataReader.GetMethodDefinition(
+                                methodHandle
+                            );
+                            BlobReader sigBlob = _metadataReader.GetBlobReader(
+                                methodDefinition.Signature
+                            );
                             needsScanning = sigBlob.ReadSignatureHeader().IsGeneric;
                         }
 
@@ -61,16 +63,17 @@ namespace ILCompiler
                                 if (ecmaMethod.IsVirtual)
                                     LookForVirtualOverrides(ecmaMethod);
                             }
-                            catch (TypeSystemException)
-                            {
-                            }
+                            catch (TypeSystemException) { }
                         }
                     }
                 }
                 return;
             }
 
-            public Graph<EcmaGenericParameter> Graph { get { return _graph; } }
+            public Graph<EcmaGenericParameter> Graph
+            {
+                get { return _graph; }
+            }
 
             // Base types and interfaces.
             private void WalkAncestorTypes(EcmaType declaringType)
@@ -90,7 +93,12 @@ namespace ILCompiler
             private void ProcessAncestorType(TypeDesc ancestorType, Instantiation typeContext)
             {
                 var embeddingState = new EmbeddingStateList(this);
-                ForEachEmbeddedGenericFormal(ancestorType, typeContext, Instantiation.Empty, ref embeddingState);
+                ForEachEmbeddedGenericFormal(
+                    ancestorType,
+                    typeContext,
+                    Instantiation.Empty,
+                    ref embeddingState
+                );
             }
 
             private void LookForVirtualOverrides(EcmaMethod method)
@@ -103,7 +111,10 @@ namespace ILCompiler
                 // of the implementation to the generic parameters of the declaration - any call to the
                 // declaration will be modeled as if the declaration was calling into the implementation.
 
-                var decl = (EcmaMethod)MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(method).GetTypicalMethodDefinition();
+                var decl = (EcmaMethod)
+                    MetadataVirtualMethodAlgorithm
+                        .FindSlotDefiningMethodForVirtualMethod(method)
+                        .GetTypicalMethodDefinition();
                 if (decl != method)
                 {
                     RecordBinding(this, decl.Instantiation, method.Instantiation);
@@ -120,30 +131,44 @@ namespace ILCompiler
                         {
                             // Trivially reject looking at interface methods that for sure can't be implemented by
                             // the method we're looking at.
-                            if (!interfaceMethod.IsVirtual
-                                || interfaceMethod.Instantiation.Length != method.Instantiation.Length
+                            if (
+                                !interfaceMethod.IsVirtual
+                                || interfaceMethod.Instantiation.Length
+                                    != method.Instantiation.Length
                                 || interfaceMethod.Signature.Length != method.Signature.Length
-                                || interfaceMethod.Signature.IsStatic != method.Signature.IsStatic)
+                                || interfaceMethod.Signature.IsStatic != method.Signature.IsStatic
+                            )
                                 continue;
 
-                            MethodDesc impl = methodOwningType.ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethod)?.GetMethodDefinition();
+                            MethodDesc impl = methodOwningType
+                                .ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethod)
+                                ?.GetMethodDefinition();
                             if (impl == method)
                             {
-                                RecordBinding(this, interfaceMethod.Instantiation, method.Instantiation);
+                                RecordBinding(
+                                    this,
+                                    interfaceMethod.Instantiation,
+                                    method.Instantiation
+                                );
                                 // Continue the loop in case this method implements multiple interfaces
                             }
                         }
                     }
                 }
 
-                static void RecordBinding(GraphBuilder builder, Instantiation declInstantiation, Instantiation implInstantiation)
+                static void RecordBinding(
+                    GraphBuilder builder,
+                    Instantiation declInstantiation,
+                    Instantiation implInstantiation
+                )
                 {
                     for (int i = 0; i < declInstantiation.Length; i++)
                     {
                         builder.RecordBinding(
                             (EcmaGenericParameter)implInstantiation[i],
                             (EcmaGenericParameter)declInstantiation[i],
-                            isProperEmbedding: false);
+                            isProperEmbedding: false
+                        );
                     }
                 }
             }
@@ -200,11 +225,17 @@ namespace ILCompiler
                         case ILOpcode.refanyval:
                         case ILOpcode.mkrefany:
                         case ILOpcode.constrained:
-                            EntityHandle accessedType = MetadataTokens.EntityHandle(reader.ReadILToken());
-                        typeCase:
+                            EntityHandle accessedType = MetadataTokens.EntityHandle(
+                                reader.ReadILToken()
+                            );
+                            typeCase:
                             if (accessedType.Kind == HandleKind.TypeSpecification)
                             {
-                                var t = methodIL.GetObject(MetadataTokens.GetToken(accessedType), NotFoundBehavior.ReturnNull) as TypeDesc;
+                                var t =
+                                    methodIL.GetObject(
+                                        MetadataTokens.GetToken(accessedType),
+                                        NotFoundBehavior.ReturnNull
+                                    ) as TypeDesc;
                                 if (t != null)
                                 {
                                     ProcessTypeReference(t, typeContext, methodContext);
@@ -218,11 +249,15 @@ namespace ILCompiler
                         case ILOpcode.stfld:
                         case ILOpcode.ldfld:
                         case ILOpcode.ldflda:
-                            EntityHandle accessedField = MetadataTokens.EntityHandle(reader.ReadILToken());
-                        fieldCase:
+                            EntityHandle accessedField = MetadataTokens.EntityHandle(
+                                reader.ReadILToken()
+                            );
+                            fieldCase:
                             if (accessedField.Kind == HandleKind.MemberReference)
                             {
-                                accessedType = _metadataReader.GetMemberReference((MemberReferenceHandle)accessedField).Parent;
+                                accessedType = _metadataReader
+                                    .GetMemberReference((MemberReferenceHandle)accessedField)
+                                    .Parent;
                                 goto typeCase;
                             }
                             break;
@@ -233,13 +268,25 @@ namespace ILCompiler
                         case ILOpcode.ldftn:
                         case ILOpcode.ldvirtftn:
                         case ILOpcode.jmp:
-                            EntityHandle accessedMethod = MetadataTokens.EntityHandle(reader.ReadILToken());
-                        methodCase:
-                            if (accessedMethod.Kind == HandleKind.MethodSpecification
-                                || (accessedMethod.Kind == HandleKind.MemberReference
-                                     && _metadataReader.GetMemberReference((MemberReferenceHandle)accessedMethod).Parent.Kind == HandleKind.TypeSpecification))
+                            EntityHandle accessedMethod = MetadataTokens.EntityHandle(
+                                reader.ReadILToken()
+                            );
+                            methodCase:
+                            if (
+                                accessedMethod.Kind == HandleKind.MethodSpecification
+                                || (
+                                    accessedMethod.Kind == HandleKind.MemberReference
+                                    && _metadataReader
+                                        .GetMemberReference((MemberReferenceHandle)accessedMethod)
+                                        .Parent.Kind == HandleKind.TypeSpecification
+                                )
+                            )
                             {
-                                var m = methodIL.GetObject(MetadataTokens.GetToken(accessedMethod), NotFoundBehavior.ReturnNull) as MethodDesc;
+                                var m =
+                                    methodIL.GetObject(
+                                        MetadataTokens.GetToken(accessedMethod),
+                                        NotFoundBehavior.ReturnNull
+                                    ) as MethodDesc;
                                 if (m != null)
                                 {
                                     ProcessTypeReference(m.OwningType, typeContext, methodContext);
@@ -249,9 +296,18 @@ namespace ILCompiler
                             break;
 
                         case ILOpcode.ldtoken:
-                            EntityHandle accessedEntity = MetadataTokens.EntityHandle(reader.ReadILToken());
-                            if (accessedEntity.Kind == HandleKind.MethodSpecification
-                                || (accessedEntity.Kind == HandleKind.MemberReference && _metadataReader.GetMemberReference((MemberReferenceHandle)accessedEntity).GetKind() == MemberReferenceKind.Method))
+                            EntityHandle accessedEntity = MetadataTokens.EntityHandle(
+                                reader.ReadILToken()
+                            );
+                            if (
+                                accessedEntity.Kind == HandleKind.MethodSpecification
+                                || (
+                                    accessedEntity.Kind == HandleKind.MemberReference
+                                    && _metadataReader
+                                        .GetMemberReference((MemberReferenceHandle)accessedEntity)
+                                        .GetKind() == MemberReferenceKind.Method
+                                )
+                            )
                             {
                                 accessedMethod = accessedEntity;
                                 goto methodCase;
@@ -280,17 +336,30 @@ namespace ILCompiler
             /// If the type is a generic instance, record any bindings between its formals and the referencer's
             /// formals.
             /// </summary>
-            private void ProcessTypeReference(TypeDesc typeReference, Instantiation typeContext, Instantiation methodContext)
+            private void ProcessTypeReference(
+                TypeDesc typeReference,
+                Instantiation typeContext,
+                Instantiation methodContext
+            )
             {
                 var embeddingState = new EmbeddingStateList(this);
-                ForEachEmbeddedGenericFormal(typeReference, typeContext, methodContext, ref embeddingState);
+                ForEachEmbeddedGenericFormal(
+                    typeReference,
+                    typeContext,
+                    methodContext,
+                    ref embeddingState
+                );
             }
 
             /// <summary>
             /// Records the fact that the type formal "receiver" is being bound to a type expression that references
             /// "embedded."
             /// </summary>
-            private void RecordBinding(EcmaGenericParameter receiver, EcmaGenericParameter embedded, bool isProperEmbedding)
+            private void RecordBinding(
+                EcmaGenericParameter receiver,
+                EcmaGenericParameter embedded,
+                bool isProperEmbedding
+            )
             {
                 bool flagged;
                 if (isProperEmbedding)

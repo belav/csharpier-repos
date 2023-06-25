@@ -32,7 +32,8 @@ namespace Internal.Reflection.Execution.FieldAccessors
         }
 
         // GetValueDirect() can be used on static fields though this seems like a silly thing to do.
-        public sealed override object GetFieldDirect(TypedReference typedReference) => GetField(null);
+        public sealed override object GetFieldDirect(TypedReference typedReference) =>
+            GetField(null);
 
         public sealed override void SetField(object obj, object value, BinderBundle binderBundle)
         {

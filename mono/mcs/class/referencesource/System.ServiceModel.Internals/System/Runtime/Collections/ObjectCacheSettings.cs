@@ -12,7 +12,7 @@ namespace System.Runtime.Collections
         int purgeFrequency;
 
         const int DefaultCacheLimit = 64;
-        const int DefaultPurgeFrequency = 32; 
+        const int DefaultPurgeFrequency = 32;
         static TimeSpan DefaultIdleTimeout = TimeSpan.FromMinutes(2);
         static TimeSpan DefaultLeaseTimeout = TimeSpan.FromMinutes(5);
 
@@ -39,55 +39,48 @@ namespace System.Runtime.Collections
 
         public int CacheLimit
         {
-            get
-            {
-                return this.cacheLimit;
-            }
-            set 
+            get { return this.cacheLimit; }
+            set
             {
                 Fx.Assert(value >= 0, "caller should validate cache limit is non-negative");
-                this.cacheLimit = value; 
+                this.cacheLimit = value;
             }
         }
 
         public TimeSpan IdleTimeout
         {
-            get
+            get { return this.idleTimeout; }
+            set
             {
-                return this.idleTimeout;
-            }
-            set 
-            {
-                Fx.Assert(value >= TimeSpan.Zero, "caller should validate cache limit is non-negative");
-                this.idleTimeout = value; 
+                Fx.Assert(
+                    value >= TimeSpan.Zero,
+                    "caller should validate cache limit is non-negative"
+                );
+                this.idleTimeout = value;
             }
         }
 
         public TimeSpan LeaseTimeout
         {
-            get
+            get { return this.leaseTimeout; }
+            set
             {
-                return this.leaseTimeout;
-            }
-            set 
-            {
-                Fx.Assert(value >= TimeSpan.Zero, "caller should validate cache limit is non-negative");
-                this.leaseTimeout = value; 
+                Fx.Assert(
+                    value >= TimeSpan.Zero,
+                    "caller should validate cache limit is non-negative"
+                );
+                this.leaseTimeout = value;
             }
         }
 
         public int PurgeFrequency
         {
-            get
-            {
-                return this.purgeFrequency;
-            }
+            get { return this.purgeFrequency; }
             set
             {
                 Fx.Assert(value >= 0, "caller should validate purge frequency is non-negative");
                 this.purgeFrequency = value;
             }
         }
-
     }
 }

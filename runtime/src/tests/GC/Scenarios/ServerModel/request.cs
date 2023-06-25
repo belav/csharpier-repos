@@ -16,7 +16,13 @@ namespace ServerSimulator
 
         public Request()
         {
-            survivors = new Object[1 + (int)(ServerSimulator.Params.AllocationVolume * ServerSimulator.Params.SurvivalRate) / 100];
+            survivors = new Object[
+                1
+                    + (int)(
+                        ServerSimulator.Params.AllocationVolume
+                        * ServerSimulator.Params.SurvivalRate
+                    ) / 100
+            ];
             int index = 0;
             int volume = 0;
 
@@ -37,7 +43,6 @@ namespace ServerSimulator
             {
                 volume += allocateRequest(index++);
             }
-
         }
 
         // allocates the request along with garbage to simulate work on the server side
@@ -67,9 +72,7 @@ namespace ServerSimulator
                 pin.Free();
             }
         }
-
     }
-
 
     /// <summary>
     /// This class is a finalizable version of Request that allocates inside its finalizer
@@ -77,14 +80,13 @@ namespace ServerSimulator
 
     internal sealed class FinalizableRequest : Request
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         private byte[] finalizedData = null;
 #pragma warning restore 0414
 
-        public FinalizableRequest() : base()
-        {
-        }
+        public FinalizableRequest()
+            : base() { }
 
         ~FinalizableRequest()
         {

@@ -13,7 +13,8 @@ namespace System.ServiceModel.Security
 
     class LaxModeSecurityHeaderElementInferenceEngine : SecurityHeaderElementInferenceEngine
     {
-        static LaxModeSecurityHeaderElementInferenceEngine instance = new LaxModeSecurityHeaderElementInferenceEngine();
+        static LaxModeSecurityHeaderElementInferenceEngine instance =
+            new LaxModeSecurityHeaderElementInferenceEngine();
 
         protected LaxModeSecurityHeaderElementInferenceEngine() { }
 
@@ -22,7 +23,10 @@ namespace System.ServiceModel.Security
             get { return instance; }
         }
 
-        public override void ExecuteProcessingPasses(ReceiveSecurityHeader securityHeader, XmlDictionaryReader reader)
+        public override void ExecuteProcessingPasses(
+            ReceiveSecurityHeader securityHeader,
+            XmlDictionaryReader reader
+        )
         {
             // pass 1
             securityHeader.ExecuteReadingPass(reader);
@@ -43,7 +47,10 @@ namespace System.ServiceModel.Security
             securityHeader.ExecuteSignatureEncryptionProcessingPass();
         }
 
-        public override void MarkElements(ReceiveSecurityHeaderElementManager elementManager, bool messageSecurityMode)
+        public override void MarkElements(
+            ReceiveSecurityHeaderElementManager elementManager,
+            bool messageSecurityMode
+        )
         {
             bool primarySignatureFound = false;
             for (int position = 0; position < elementManager.Count; position++)
@@ -54,11 +61,15 @@ namespace System.ServiceModel.Security
                 {
                     if (!messageSecurityMode)
                     {
-                        elementManager.SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Endorsing);
+                        elementManager.SetBindingMode(
+                            position,
+                            ReceiveSecurityHeaderBindingModes.Endorsing
+                        );
                         continue;
                     }
                     SignedXml signedXml = (SignedXml)entry.element;
-                    StandardSignedInfo signedInfo = (StandardSignedInfo)signedXml.Signature.SignedInfo;
+                    StandardSignedInfo signedInfo = (StandardSignedInfo)
+                        signedXml.Signature.SignedInfo;
                     bool targetsSignature = false;
                     if (signedInfo.ReferenceCount == 1)
                     {
@@ -71,13 +82,21 @@ namespace System.ServiceModel.Security
                         else
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(SR.GetString(SR.UnableToResolveReferenceUriForSignature, uri)));
+                                new MessageSecurityException(
+                                    SR.GetString(SR.UnableToResolveReferenceUriForSignature, uri)
+                                )
+                            );
                         }
                         for (int j = 0; j < elementManager.Count; j++)
                         {
                             ReceiveSecurityHeaderEntry inner;
                             elementManager.GetElementEntry(j, out inner);
-                            if (j != position && inner.elementCategory == ReceiveSecurityHeaderElementCategory.Signature && inner.id == id)
+                            if (
+                                j != position
+                                && inner.elementCategory
+                                    == ReceiveSecurityHeaderElementCategory.Signature
+                                && inner.id == id
+                            )
                             {
                                 targetsSignature = true;
                                 break;
@@ -86,17 +105,29 @@ namespace System.ServiceModel.Security
                     }
                     if (targetsSignature)
                     {
-                        elementManager.SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Endorsing);
+                        elementManager.SetBindingMode(
+                            position,
+                            ReceiveSecurityHeaderBindingModes.Endorsing
+                        );
                         continue;
                     }
                     else
                     {
                         if (primarySignatureFound)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.AtMostOnePrimarySignatureInReceiveSecurityHeader)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.AtMostOnePrimarySignatureInReceiveSecurityHeader
+                                    )
+                                )
+                            );
                         }
                         primarySignatureFound = true;
-                        elementManager.SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Primary);
+                        elementManager.SetBindingMode(
+                            position,
+                            ReceiveSecurityHeaderBindingModes.Primary
+                        );
                         continue;
                     }
                 }

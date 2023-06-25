@@ -9,7 +9,5 @@ namespace Microsoft.NET.HostModel.AppHost
     /// Unable to use the input file as application host executable because it's not a
     /// Windows executable for the CUI (Console) subsystem.
     /// </summary>
-    public class AppHostNotCUIException : AppHostUpdateException
-    {
-    }
+    public class AppHostNotCUIException : AppHostUpdateException { }
 }

@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,248 +42,243 @@ using System.Runtime.Remoting.Proxies;
 
 using System.Runtime.ConstrainedExecution;
 
-namespace System.Runtime.Remoting {
+namespace System.Runtime.Remoting
+{
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ObjRef : IObjectReference, ISerializable
+    {
+        IChannelInfo channel_info;
+        string uri;
+        IRemotingTypeInfo typeInfo;
+        IEnvoyInfo envoyInfo;
+        int flags;
+        Type _serverType;
 
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ObjRef : IObjectReference, ISerializable 
-	{
-		IChannelInfo channel_info;
-		string uri;
-		IRemotingTypeInfo typeInfo;
-		IEnvoyInfo envoyInfo;
-		int flags;
-		Type _serverType;
+        static int MarshalledObjectRef = 1;
+        static int WellKnowObjectRef = 2;
 
-		static int MarshalledObjectRef = 1;
-		static int WellKnowObjectRef = 2;
-		
-		public ObjRef ()
-		{
-			// no idea why this needs to be public
+        public ObjRef()
+        {
+            // no idea why this needs to be public
 
-			UpdateChannelInfo();
-		}
+            UpdateChannelInfo();
+        }
 
-		internal ObjRef (string uri, IChannelInfo cinfo)
-		{
-			this.uri = uri;
-			this.channel_info = cinfo;
-		}
+        internal ObjRef(string uri, IChannelInfo cinfo)
+        {
+            this.uri = uri;
+            this.channel_info = cinfo;
+        }
 
-		internal ObjRef DeserializeInTheCurrentDomain (int domainId, byte[] tInfo)
-		{
-				string local_uri = string.Copy (this.uri);
-				ChannelInfo cinfo = new ChannelInfo (new CrossAppDomainData (domainId));
-				ObjRef res = new ObjRef (local_uri, cinfo);
-				IRemotingTypeInfo typeInfo = (IRemotingTypeInfo)CADSerializer.DeserializeObjectSafe (tInfo);
-				res.typeInfo = typeInfo;
-				return res;
-		}
+        internal ObjRef DeserializeInTheCurrentDomain(int domainId, byte[] tInfo)
+        {
+            string local_uri = string.Copy(this.uri);
+            ChannelInfo cinfo = new ChannelInfo(new CrossAppDomainData(domainId));
+            ObjRef res = new ObjRef(local_uri, cinfo);
+            IRemotingTypeInfo typeInfo = (IRemotingTypeInfo)
+                CADSerializer.DeserializeObjectSafe(tInfo);
+            res.typeInfo = typeInfo;
+            return res;
+        }
 
-		internal byte[] SerializeType ()
-		{
-			// FIXME: Assert self and typeinfo in same domain
-			if (typeInfo == null)
-				throw new Exception ("Attempt to serialize a null TypeInfo.");
+        internal byte[] SerializeType()
+        {
+            // FIXME: Assert self and typeinfo in same domain
+            if (typeInfo == null)
+                throw new Exception("Attempt to serialize a null TypeInfo.");
 
-			MemoryStream stm = CADSerializer.SerializeObject (typeInfo);
-			return stm.GetBuffer ();
-		}
+            MemoryStream stm = CADSerializer.SerializeObject(typeInfo);
+            return stm.GetBuffer();
+        }
 
-		internal ObjRef (ObjRef o, bool unmarshalAsProxy)
-		{
-			channel_info = o.channel_info;
-			uri = o.uri;
-	
-			typeInfo = o.typeInfo;
-			envoyInfo = o.envoyInfo;
-			flags = o.flags;
-			if (unmarshalAsProxy) flags |= MarshalledObjectRef;
-		}
+        internal ObjRef(ObjRef o, bool unmarshalAsProxy)
+        {
+            channel_info = o.channel_info;
+            uri = o.uri;
 
-		public ObjRef (MarshalByRefObject o, Type requestedType)
-		{
-			if (o == null)
-				throw new ArgumentNullException ("o");
-			
-			if (requestedType == null)
-				throw new ArgumentNullException ("requestedType");
+            typeInfo = o.typeInfo;
+            envoyInfo = o.envoyInfo;
+            flags = o.flags;
+            if (unmarshalAsProxy)
+                flags |= MarshalledObjectRef;
+        }
 
-			// The ObjRef can only be constructed if the given o
-			// has already been marshalled using RemotingServices.Marshall
+        public ObjRef(MarshalByRefObject o, Type requestedType)
+        {
+            if (o == null)
+                throw new ArgumentNullException("o");
 
-			uri = RemotingServices.GetObjectUri (o);
-			typeInfo = new TypeInfo (requestedType);
+            if (requestedType == null)
+                throw new ArgumentNullException("requestedType");
 
-			if (!requestedType.IsInstanceOfType (o))
-				throw new RemotingException ("The server object type cannot be cast to the requested type " + requestedType.FullName);
+            // The ObjRef can only be constructed if the given o
+            // has already been marshalled using RemotingServices.Marshall
 
-			UpdateChannelInfo();
-		}
+            uri = RemotingServices.GetObjectUri(o);
+            typeInfo = new TypeInfo(requestedType);
 
-		internal ObjRef (Type type, string url, object remoteChannelData)
-		{
-			uri = url;
-			typeInfo = new TypeInfo(type);
+            if (!requestedType.IsInstanceOfType(o))
+                throw new RemotingException(
+                    "The server object type cannot be cast to the requested type "
+                        + requestedType.FullName
+                );
 
-			if (remoteChannelData != null)
-				channel_info = new ChannelInfo (remoteChannelData);
+            UpdateChannelInfo();
+        }
 
-			flags |= WellKnowObjectRef;
-		}
+        internal ObjRef(Type type, string url, object remoteChannelData)
+        {
+            uri = url;
+            typeInfo = new TypeInfo(type);
 
-		protected ObjRef (SerializationInfo info, StreamingContext context)
-		{
-			SerializationInfoEnumerator en = info.GetEnumerator();
-			// Info to serialize: uri, objrefFlags, typeInfo, envoyInfo, channelInfo
+            if (remoteChannelData != null)
+                channel_info = new ChannelInfo(remoteChannelData);
 
-			bool marshalledValue = true;
+            flags |= WellKnowObjectRef;
+        }
 
-			while (en.MoveNext ()) {
-				switch (en.Name) {
-				case "uri":
-					uri = (string)en.Value;
-					break;
-				case "typeInfo":
-					typeInfo = (IRemotingTypeInfo)en.Value;
-					break;
-				case "channelInfo":
-					channel_info = (IChannelInfo)en.Value;
-					break;
-				case "envoyInfo":
-					envoyInfo = (IEnvoyInfo)en.Value;
-					break;
-				case "fIsMarshalled":
-					int status;
-					Object o = en.Value;
-					if (o is string)
-						status = ((IConvertible) o).ToInt32(null);
-					else
-						status = (int) o;
+        protected ObjRef(SerializationInfo info, StreamingContext context)
+        {
+            SerializationInfoEnumerator en = info.GetEnumerator();
+            // Info to serialize: uri, objrefFlags, typeInfo, envoyInfo, channelInfo
 
-					if (status == 0)
-						marshalledValue = false;
-					break;
-				case "objrefFlags":
-					flags = Convert.ToInt32 (en.Value);
-					break;
-				default:
-					throw new NotSupportedException ();
-				}
-			}
-			if (marshalledValue) flags |= MarshalledObjectRef;
-		}
+            bool marshalledValue = true;
 
-		internal bool IsPossibleToCAD () 
-		{
-			// we should check if this obj ref belongs to a cross app context.
+            while (en.MoveNext())
+            {
+                switch (en.Name)
+                {
+                    case "uri":
+                        uri = (string)en.Value;
+                        break;
+                    case "typeInfo":
+                        typeInfo = (IRemotingTypeInfo)en.Value;
+                        break;
+                    case "channelInfo":
+                        channel_info = (IChannelInfo)en.Value;
+                        break;
+                    case "envoyInfo":
+                        envoyInfo = (IEnvoyInfo)en.Value;
+                        break;
+                    case "fIsMarshalled":
+                        int status;
+                        Object o = en.Value;
+                        if (o is string)
+                            status = ((IConvertible)o).ToInt32(null);
+                        else
+                            status = (int)o;
 
-			// Return false. If not, serialization of this ObjRef will not work
-			// on the target AD.
-			return false;
-		}
+                        if (status == 0)
+                            marshalledValue = false;
+                        break;
+                    case "objrefFlags":
+                        flags = Convert.ToInt32(en.Value);
+                        break;
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
+            if (marshalledValue)
+                flags |= MarshalledObjectRef;
+        }
 
-		internal bool IsReferenceToWellKnow
-		{
-			get { return (flags & WellKnowObjectRef) > 0; }
-		}
+        internal bool IsPossibleToCAD()
+        {
+            // we should check if this obj ref belongs to a cross app context.
 
-		public virtual IChannelInfo ChannelInfo {
-		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-			get {
-				return channel_info;
-			}
-			
-			set {
-				channel_info = value;
-			}
-		}
-		
-		public virtual IEnvoyInfo EnvoyInfo {
-			get {
-				return envoyInfo;
-			}
-			set {
-				envoyInfo = value;
-			}
-		}
-		
-		public virtual IRemotingTypeInfo TypeInfo {
-			get {
-				return typeInfo;
-			}
-			set {
-				typeInfo = value;
-			}
-		}
-		
-		public virtual string URI {
-			get {
-				return uri;
-			}
-			set {
-				uri = value;
-			}
-		}
+            // Return false. If not, serialization of this ObjRef will not work
+            // on the target AD.
+            return false;
+        }
 
-		public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			info.SetType (GetType());
-			info.AddValue ("uri", uri);
-			info.AddValue ("typeInfo", typeInfo, typeof (IRemotingTypeInfo));
-			info.AddValue ("envoyInfo", envoyInfo, typeof (IEnvoyInfo));
-			info.AddValue ("channelInfo", channel_info, typeof(IChannelInfo));
-			info.AddValue ("objrefFlags", flags);
-		}
+        internal bool IsReferenceToWellKnow
+        {
+            get { return (flags & WellKnowObjectRef) > 0; }
+        }
 
-		public virtual object GetRealObject (StreamingContext context)
-		{
-			if ((flags & MarshalledObjectRef) > 0)
-				return RemotingServices.Unmarshal (this);
-			else
-				return this;
-		}
+        public virtual IChannelInfo ChannelInfo
+        {
+            [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+            get { return channel_info; }
+            set { channel_info = value; }
+        }
 
-		public bool IsFromThisAppDomain ()
-		{
-			Identity identity = RemotingServices.GetIdentityForUri (uri);
-			if (identity == null) return false;		// URI not registered in this domain
+        public virtual IEnvoyInfo EnvoyInfo
+        {
+            get { return envoyInfo; }
+            set { envoyInfo = value; }
+        }
 
-			return identity.IsFromThisAppDomain;
-		}
+        public virtual IRemotingTypeInfo TypeInfo
+        {
+            get { return typeInfo; }
+            set { typeInfo = value; }
+        }
 
-		[ReliabilityContractAttribute (Consistency.WillNotCorruptState, Cer.Success)]
-		public bool IsFromThisProcess ()
-		{
-			foreach (object data in channel_info.ChannelData)
-			{
-				if (data is CrossAppDomainData)
-				{
-					string refProcId = ((CrossAppDomainData)data).ProcessID;
-					return (refProcId == RemotingConfiguration.ProcessId);
-				}
-			}
-			
-			return true;
-		}
+        public virtual string URI
+        {
+            get { return uri; }
+            set { uri = value; }
+        }
 
-		internal void UpdateChannelInfo()
-		{
-			channel_info = new ChannelInfo ();
-		}
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.SetType(GetType());
+            info.AddValue("uri", uri);
+            info.AddValue("typeInfo", typeInfo, typeof(IRemotingTypeInfo));
+            info.AddValue("envoyInfo", envoyInfo, typeof(IEnvoyInfo));
+            info.AddValue("channelInfo", channel_info, typeof(IChannelInfo));
+            info.AddValue("objrefFlags", flags);
+        }
 
-		internal Type ServerType
-		{
-			get
-			{
-				if (_serverType == null) _serverType = Type.GetType (typeInfo.TypeName);
-				return _serverType;
-			}
-		}
+        public virtual object GetRealObject(StreamingContext context)
+        {
+            if ((flags & MarshalledObjectRef) > 0)
+                return RemotingServices.Unmarshal(this);
+            else
+                return this;
+        }
 
-		internal void SetDomainID (int id)
-		{
-		}
-	}
+        public bool IsFromThisAppDomain()
+        {
+            Identity identity = RemotingServices.GetIdentityForUri(uri);
+            if (identity == null)
+                return false; // URI not registered in this domain
+
+            return identity.IsFromThisAppDomain;
+        }
+
+        [ReliabilityContractAttribute(Consistency.WillNotCorruptState, Cer.Success)]
+        public bool IsFromThisProcess()
+        {
+            foreach (object data in channel_info.ChannelData)
+            {
+                if (data is CrossAppDomainData)
+                {
+                    string refProcId = ((CrossAppDomainData)data).ProcessID;
+                    return (refProcId == RemotingConfiguration.ProcessId);
+                }
+            }
+
+            return true;
+        }
+
+        internal void UpdateChannelInfo()
+        {
+            channel_info = new ChannelInfo();
+        }
+
+        internal Type ServerType
+        {
+            get
+            {
+                if (_serverType == null)
+                    _serverType = Type.GetType(typeInfo.TypeName);
+                return _serverType;
+            }
+        }
+
+        internal void SetDomainID(int id) { }
+    }
 }

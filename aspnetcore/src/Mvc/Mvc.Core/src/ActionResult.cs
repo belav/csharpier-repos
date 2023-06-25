@@ -29,7 +29,5 @@ public abstract class ActionResult : IActionResult
     /// </summary>
     /// <param name="context">The context in which the result is executed. The context information includes
     /// information about the action that was executed and request information.</param>
-    public virtual void ExecuteResult(ActionContext context)
-    {
-    }
+    public virtual void ExecuteResult(ActionContext context) { }
 }

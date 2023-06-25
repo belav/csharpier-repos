@@ -30,33 +30,49 @@ namespace DebuggerTests
 
         public static readonly Uri Endpoint = new Uri("http://localhost:9400");
 
-        private static readonly ConcurrentDictionary<string, WeakReference<DebuggerProxyBase>> s_proxyTable = new();
-        private static readonly ConcurrentDictionary<int, WeakReference<Action<RunLoopExitState>>> s_exitHandlers = new();
-        private static readonly ConcurrentDictionary<string, RunLoopExitState> s_statusTable = new();
+        private static readonly ConcurrentDictionary<
+            string,
+            WeakReference<DebuggerProxyBase>
+        > s_proxyTable = new();
+        private static readonly ConcurrentDictionary<
+            int,
+            WeakReference<Action<RunLoopExitState>>
+        > s_exitHandlers = new();
+        private static readonly ConcurrentDictionary<string, RunLoopExitState> s_statusTable =
+            new();
 
-        public static Task Start(string appPath, string pagePath, string url, ITestOutputHelper testOutput)
+        public static Task Start(
+            string appPath,
+            string pagePath,
+            string url,
+            ITestOutputHelper testOutput
+        )
         {
             lock (proxyLock)
             {
                 if (hostTask != null)
                     return hostTask;
 
-                host = WebHost.CreateDefaultBuilder()
+                host = WebHost
+                    .CreateDefaultBuilder()
                     .UseSetting("UseIISIntegration", false.ToString())
-                    .ConfigureAppConfiguration((hostingContext, config) =>
-                    {
-                        config.AddEnvironmentVariables(prefix: "WASM_TESTS_");
-                    })
+                    .ConfigureAppConfiguration(
+                        (hostingContext, config) =>
+                        {
+                            config.AddEnvironmentVariables(prefix: "WASM_TESTS_");
+                        }
+                    )
                     .ConfigureLogging(logging =>
                     {
                         if (TestOptions.LogToConsole)
                         {
-                            logging.AddSimpleConsole(options =>
-                                    {
-                                        options.SingleLine = true;
-                                        options.TimestampFormat = "[HH:mm:ss] ";
-                                    })
-                                    .AddFilter("DevToolsProxy", LogLevel.Debug);
+                            logging
+                                .AddSimpleConsole(options =>
+                                {
+                                    options.SingleLine = true;
+                                    options.TimestampFormat = "[HH:mm:ss] ";
+                                })
+                                .AddFilter("DevToolsProxy", LogLevel.Debug);
                         }
                         else
                         {
@@ -64,26 +80,31 @@ namespace DebuggerTests
                             logging.ClearProviders();
                         }
 
-                        logging.AddXunit(testOutput)
-                                .AddFile(Path.Combine(DebuggerTestBase.TestLogPath, "proxy.log"),
-                                            minimumLevel: LogLevel.Trace,
-                                            levelOverrides: new Dictionary<string, LogLevel>
-                                            {
-                                                ["Microsoft.AspNetCore"] = LogLevel.Warning
-                                            },
-                                            outputTemplate: "{Timestamp:o} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}")
-                                .AddFilter(null, LogLevel.Information);
+                        logging
+                            .AddXunit(testOutput)
+                            .AddFile(
+                                Path.Combine(DebuggerTestBase.TestLogPath, "proxy.log"),
+                                minimumLevel: LogLevel.Trace,
+                                levelOverrides: new Dictionary<string, LogLevel>
+                                {
+                                    ["Microsoft.AspNetCore"] = LogLevel.Warning
+                                },
+                                outputTemplate: "{Timestamp:o} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}"
+                            )
+                            .AddFilter(null, LogLevel.Information);
                     })
-                    .ConfigureServices((ctx, services) =>
-                    {
-                        services.Configure<TestHarnessOptions>(ctx.Configuration);
-                        services.Configure<TestHarnessOptions>(options =>
+                    .ConfigureServices(
+                        (ctx, services) =>
                         {
-                            options.AppPath = appPath;
-                            options.PagePath = pagePath;
-                            options.DevToolsUrl = new Uri(url);
-                        });
-                    })
+                            services.Configure<TestHarnessOptions>(ctx.Configuration);
+                            services.Configure<TestHarnessOptions>(options =>
+                            {
+                                options.AppPath = appPath;
+                                options.PagePath = pagePath;
+                                options.DevToolsUrl = new Uri(url);
+                            });
+                        }
+                    )
                     .UseStartup<TestHarnessStartup>()
                     .UseUrls(Endpoint.ToString())
                     .Build();
@@ -119,19 +140,29 @@ namespace DebuggerTests
             // to the proxy
             s_proxyTable.TryRemove(id, out WeakReference<DebuggerProxyBase> _);
 
-            if (s_exitHandlers.TryRemove(intId, out WeakReference<Action<RunLoopExitState>>? handlerRef)
-                && handlerRef.TryGetTarget(out Action<RunLoopExitState>? handler))
+            if (
+                s_exitHandlers.TryRemove(
+                    intId,
+                    out WeakReference<Action<RunLoopExitState>>? handlerRef
+                ) && handlerRef.TryGetTarget(out Action<RunLoopExitState>? handler)
+            )
             {
                 handler(status);
             }
         }
 
         // FIXME: remove
-        public static bool TryGetProxyExitState(string id, [NotNullWhen(true)] out RunLoopExitState? state)
+        public static bool TryGetProxyExitState(
+            string id,
+            [NotNullWhen(true)] out RunLoopExitState? state
+        )
         {
             state = null;
 
-            if (s_proxyTable.TryGetValue(id, out WeakReference<DebuggerProxyBase>? proxyRef) && proxyRef.TryGetTarget(out DebuggerProxyBase? proxy))
+            if (
+                s_proxyTable.TryGetValue(id, out WeakReference<DebuggerProxyBase>? proxyRef)
+                && proxyRef.TryGetTarget(out DebuggerProxyBase? proxy)
+            )
             {
                 state = proxy.ExitState;
             }
@@ -146,9 +177,11 @@ namespace DebuggerTests
 
         public static DebuggerProxyBase? ShutdownProxy(string id)
         {
-            if (!string.IsNullOrEmpty(id)
+            if (
+                !string.IsNullOrEmpty(id)
                 && s_proxyTable.TryGetValue(id, out WeakReference<DebuggerProxyBase>? proxyRef)
-                && proxyRef.TryGetTarget(out DebuggerProxyBase? proxy))
+                && proxyRef.TryGetTarget(out DebuggerProxyBase? proxy)
+            )
             {
                 proxy.Shutdown();
                 return proxy;
@@ -156,5 +189,4 @@ namespace DebuggerTests
             return null;
         }
     }
-
 }

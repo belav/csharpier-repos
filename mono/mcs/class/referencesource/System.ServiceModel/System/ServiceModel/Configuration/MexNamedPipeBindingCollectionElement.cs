@@ -13,11 +13,15 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
-    public partial class MexNamedPipeBindingCollectionElement : MexBindingBindingCollectionElement<CustomBinding, MexNamedPipeBindingElement>
+    public partial class MexNamedPipeBindingCollectionElement
+        : MexBindingBindingCollectionElement<CustomBinding, MexNamedPipeBindingElement>
     {
         internal static MexNamedPipeBindingCollectionElement GetBindingCollectionElement()
         {
-            return (MexNamedPipeBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.MexNamedPipeBindingCollectionElementName);
+            return (MexNamedPipeBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.MexNamedPipeBindingCollectionElementName
+                );
         }
 
         protected internal override Binding GetDefault()

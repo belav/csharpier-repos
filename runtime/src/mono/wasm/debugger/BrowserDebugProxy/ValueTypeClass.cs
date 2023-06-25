@@ -30,7 +30,13 @@ namespace BrowserDebugProxy
         public int TypeId { get; init; }
         public bool IsEnum { get; init; }
 
-        public ValueTypeClass(byte[] buffer, string className, JArray fields, int typeId, bool isEnum)
+        public ValueTypeClass(
+            byte[] buffer,
+            string className,
+            JArray fields,
+            int typeId,
+            bool isEnum
+        )
         {
             var valueTypeId = MonoSDBHelper.GetNewObjectId();
             var objectId = new DotnetObjectId("valuetype", valueTypeId);
@@ -44,17 +50,19 @@ namespace BrowserDebugProxy
             IsEnum = isEnum;
         }
 
-        public override string ToString() => $"{{ ValueTypeClass: typeId: {TypeId}, Id: {Id}, Id: {Id}, fields: {fields} }}";
+        public override string ToString() =>
+            $"{{ ValueTypeClass: typeId: {TypeId}, Id: {Id}, Id: {Id}, fields: {fields} }}";
 
         public static async Task<ValueTypeClass> CreateFromReader(
-                                                MonoSDBHelper sdbAgent,
-                                                MonoBinaryReader cmdReader,
-                                                long initialPos,
-                                                string className,
-                                                int typeId,
-                                                bool isEnum,
-                                                bool includeStatic,
-                                                CancellationToken token)
+            MonoSDBHelper sdbAgent,
+            MonoBinaryReader cmdReader,
+            long initialPos,
+            string className,
+            int typeId,
+            bool isEnum,
+            bool includeStatic,
+            CancellationToken token
+        )
         {
             var typeInfo = await sdbAgent.GetTypeInfo(typeId, token);
             var typeFieldsBrowsableInfo = typeInfo?.Info?.DebuggerBrowsableFields;
@@ -65,8 +73,9 @@ namespace BrowserDebugProxy
             JArray fields = new();
             if (includeStatic)
             {
-                IEnumerable<FieldTypeClass> staticFields =
-                    fieldTypes.Where(f => f.Attributes.HasFlag(FieldAttributes.Static));
+                IEnumerable<FieldTypeClass> staticFields = fieldTypes.Where(
+                    f => f.Attributes.HasFlag(FieldAttributes.Static)
+                );
                 foreach (var field in staticFields)
                 {
                     var fieldValue = await sdbAgent.GetFieldValue(typeId, field.Id, token);
@@ -74,13 +83,22 @@ namespace BrowserDebugProxy
                 }
             }
 
-            IEnumerable<FieldTypeClass> writableFields = fieldTypes
-                .Where(f => !f.Attributes.HasFlag(FieldAttributes.Literal)
-                    && !f.Attributes.HasFlag(FieldAttributes.Static));
+            IEnumerable<FieldTypeClass> writableFields = fieldTypes.Where(
+                f =>
+                    !f.Attributes.HasFlag(FieldAttributes.Literal)
+                    && !f.Attributes.HasFlag(FieldAttributes.Static)
+            );
 
             foreach (var field in writableFields)
             {
-                var fieldValue = await sdbAgent.ValueCreator.ReadAsVariableValue(cmdReader, field.Name, token, true, field.TypeId, false);
+                var fieldValue = await sdbAgent.ValueCreator.ReadAsVariableValue(
+                    cmdReader,
+                    field.Name,
+                    token,
+                    true,
+                    field.TypeId,
+                    false
+                );
                 fields.Add(GetFieldWithMetadata(field, fieldValue, isStatic: false));
             }
 
@@ -98,7 +116,8 @@ namespace BrowserDebugProxy
                 if (isStatic)
                     fieldValue["name"] = field.Name;
                 FieldAttributes attr = field.Attributes & FieldAttributes.FieldAccessMask;
-                fieldValue[InternalUseFieldName.Section.Name] = attr == FieldAttributes.Private ? "private" : "result";
+                fieldValue[InternalUseFieldName.Section.Name] =
+                    attr == FieldAttributes.Private ? "private" : "result";
 
                 if (field.IsBackingField)
                 {
@@ -111,14 +130,27 @@ namespace BrowserDebugProxy
             }
         }
 
-        public async Task<JObject> ToJObject(MonoSDBHelper sdbAgent, bool forDebuggerDisplayAttribute, CancellationToken token)
+        public async Task<JObject> ToJObject(
+            MonoSDBHelper sdbAgent,
+            bool forDebuggerDisplayAttribute,
+            CancellationToken token
+        )
         {
             string description = className;
             if (ShouldAutoInvokeToString(className) || IsEnum)
             {
-                var toString = await sdbAgent.InvokeToStringAsync(new int[]{ TypeId }, isValueType: true, IsEnum, Id.Value, IsEnum ? BindingFlags.Default : BindingFlags.DeclaredOnly, token);
+                var toString = await sdbAgent.InvokeToStringAsync(
+                    new int[] { TypeId },
+                    isValueType: true,
+                    IsEnum,
+                    Id.Value,
+                    IsEnum ? BindingFlags.Default : BindingFlags.DeclaredOnly,
+                    token
+                );
                 if (toString == null)
-                    sdbAgent.logger.LogDebug($"Error while evaluating ToString method on typeId = {TypeId}");
+                    sdbAgent.logger.LogDebug(
+                        $"Error while evaluating ToString method on typeId = {TypeId}"
+                    );
                 else
                     description = toString;
                 if (className.Equals("System.Guid"))
@@ -126,14 +158,25 @@ namespace BrowserDebugProxy
             }
             else if (!forDebuggerDisplayAttribute)
             {
-                string displayString = await sdbAgent.GetValueFromDebuggerDisplayAttribute(Id, TypeId, token);
+                string displayString = await sdbAgent.GetValueFromDebuggerDisplayAttribute(
+                    Id,
+                    TypeId,
+                    token
+                );
                 if (displayString != null)
                 {
                     description = displayString;
                 }
                 else
                 {
-                    var toString = await sdbAgent.InvokeToStringAsync(new int[]{ TypeId }, isValueType: true, IsEnum, Id.Value, IsEnum ? BindingFlags.Default : BindingFlags.DeclaredOnly, token);
+                    var toString = await sdbAgent.InvokeToStringAsync(
+                        new int[] { TypeId },
+                        isValueType: true,
+                        IsEnum,
+                        Id.Value,
+                        IsEnum ? BindingFlags.Default : BindingFlags.DeclaredOnly,
+                        token
+                    );
                     if (toString != null)
                         description = toString;
                 }
@@ -145,7 +188,8 @@ namespace BrowserDebugProxy
                 className,
                 Id.ToString(),
                 isValueType: true,
-                isEnum: IsEnum);
+                isEnum: IsEnum
+            );
         }
 
         public async Task<JArray> GetProxy(MonoSDBHelper sdbHelper, CancellationToken token)
@@ -182,26 +226,40 @@ namespace BrowserDebugProxy
                 command_params_writer_to_proxy.Write(0);
 
                 var (data, length) = command_params_writer_to_proxy.ToBase64();
-                proxy.Add(JObject.FromObject(new
-                {
-                    get = JObject.FromObject(new
-                    {
-                        commandSet = CommandSet.Vm,
-                        command = CmdVM.InvokeMethod,
-                        buffer = data,
-                        length = length,
-                        id = MonoSDBHelper.GetNewId()
-                    }),
-                    name = propertyNameStr
-                }));
+                proxy.Add(
+                    JObject.FromObject(
+                        new
+                        {
+                            get = JObject.FromObject(
+                                new
+                                {
+                                    commandSet = CommandSet.Vm,
+                                    command = CmdVM.InvokeMethod,
+                                    buffer = data,
+                                    length = length,
+                                    id = MonoSDBHelper.GetNewId()
+                                }
+                            ),
+                            name = propertyNameStr
+                        }
+                    )
+                );
             }
             return proxy;
         }
 
         public async Task<GetMembersResult> GetMemberValues(
-            MonoSDBHelper sdbHelper, GetObjectCommandOptions getObjectOptions, bool sortByAccessLevel, bool includeStatic, CancellationToken token)
+            MonoSDBHelper sdbHelper,
+            GetObjectCommandOptions getObjectOptions,
+            bool sortByAccessLevel,
+            bool includeStatic,
+            CancellationToken token
+        )
         {
-            if (getObjectOptions.HasFlag(GetObjectCommandOptions.AutoExpandable) && !getObjectOptions.HasFlag(GetObjectCommandOptions.AccessorPropertiesOnly))
+            if (
+                getObjectOptions.HasFlag(GetObjectCommandOptions.AutoExpandable)
+                && !getObjectOptions.HasFlag(GetObjectCommandOptions.AccessorPropertiesOnly)
+            )
                 autoExpand = true;
             // 1
             if (!propertiesExpanded)
@@ -215,10 +273,17 @@ namespace BrowserDebugProxy
             if (!getObjectOptions.HasFlag(GetObjectCommandOptions.ForDebuggerDisplayAttribute))
             {
                 // FIXME: cache?
-                result = await sdbHelper.GetValuesFromDebuggerProxyAttributeForValueTypes(Id.Value, TypeId, token);
+                result = await sdbHelper.GetValuesFromDebuggerProxyAttributeForValueTypes(
+                    Id.Value,
+                    TypeId,
+                    token
+                );
             }
 
-            if (result == null && getObjectOptions.HasFlag(GetObjectCommandOptions.AccessorPropertiesOnly))
+            if (
+                result == null
+                && getObjectOptions.HasFlag(GetObjectCommandOptions.AccessorPropertiesOnly)
+            )
             {
                 // 3 - just properties, skip fields
                 result = _combinedResult.Clone();
@@ -247,12 +312,21 @@ namespace BrowserDebugProxy
             }
         }
 
-        public async Task ExpandedFieldValues(MonoSDBHelper sdbHelper, bool includeStatic, CancellationToken token)
+        public async Task ExpandedFieldValues(
+            MonoSDBHelper sdbHelper,
+            bool includeStatic,
+            CancellationToken token
+        )
         {
             JArray visibleFields = new();
             foreach (JObject field in fields)
             {
-                if (!Enum.TryParse(field[InternalUseFieldName.State.Name]?.Value<string>(), out DebuggerBrowsableState state))
+                if (
+                    !Enum.TryParse(
+                        field[InternalUseFieldName.State.Name]?.Value<string>(),
+                        out DebuggerBrowsableState state
+                    )
+                )
                 {
                     visibleFields.Add(field);
                     continue;
@@ -260,17 +334,33 @@ namespace BrowserDebugProxy
                 var fieldValue = field["value"] ?? field["get"];
                 string typeName = fieldValue?["className"]?.Value<string>();
                 JArray fieldMembers = await MemberObjectsExplorer.GetExpandedMemberValues(
-                    sdbHelper, typeName, field["name"]?.Value<string>(), field, state, includeStatic, token);
+                    sdbHelper,
+                    typeName,
+                    field["name"]?.Value<string>(),
+                    field,
+                    state,
+                    includeStatic,
+                    token
+                );
                 visibleFields.AddRange(fieldMembers);
             }
             fields = visibleFields;
         }
 
-        public async Task ExpandPropertyValues(MonoSDBHelper sdbHelper, bool splitMembersByAccessLevel, bool includeStatic, CancellationToken token)
+        public async Task ExpandPropertyValues(
+            MonoSDBHelper sdbHelper,
+            bool splitMembersByAccessLevel,
+            bool includeStatic,
+            CancellationToken token
+        )
         {
             using var commandParamsWriter = new MonoBinaryWriter();
             commandParamsWriter.Write(TypeId);
-            using MonoBinaryReader getParentsReader = await sdbHelper.SendDebuggerAgentCommand(CmdType.GetParents, commandParamsWriter, token);
+            using MonoBinaryReader getParentsReader = await sdbHelper.SendDebuggerAgentCommand(
+                CmdType.GetParents,
+                commandParamsWriter,
+                token
+            );
             int numParents = getParentsReader.ReadInt32();
 
             if (!fieldsExpanded)
@@ -288,34 +378,40 @@ namespace BrowserDebugProxy
             for (int i = 0; i < parentsCntPlusSelf; i++)
             {
                 // isParent:
-                if (i != 0) typeId = getParentsReader.ReadInt32();
+                if (i != 0)
+                    typeId = getParentsReader.ReadInt32();
 
                 allMembers = await MemberObjectsExplorer.ExpandPropertyValues(
                     sdbHelper,
                     typeId,
                     className,
                     Buffer,
-                    autoExpand ? GetObjectCommandOptions.AutoExpandable : GetObjectCommandOptions.None,
+                    autoExpand
+                        ? GetObjectCommandOptions.AutoExpandable
+                        : GetObjectCommandOptions.None,
                     Id,
                     isValueType: true,
                     isOwn: i == 0,
                     token,
                     allMembers,
-                    includeStatic);
+                    includeStatic
+                );
             }
-            _combinedResult = GetMembersResult.FromValues(allMembers.Values, splitMembersByAccessLevel);
+            _combinedResult = GetMembersResult.FromValues(
+                allMembers.Values,
+                splitMembersByAccessLevel
+            );
         }
 
-        private static bool ShouldAutoExpand(string className)
-            => className is "System.DateTime" or
-            "System.DateTimeOffset" or
-            "System.TimeSpan";
+        private static bool ShouldAutoExpand(string className) =>
+            className is "System.DateTime" or "System.DateTimeOffset" or "System.TimeSpan";
 
-        private static bool ShouldAutoInvokeToString(string className)
-            => className is "System.DateTime" or
-            "System.DateTimeOffset" or
-            "System.TimeSpan" or
-            "System.Decimal" or
-            "System.Guid";
+        private static bool ShouldAutoInvokeToString(string className) =>
+            className
+                is "System.DateTime"
+                    or "System.DateTimeOffset"
+                    or "System.TimeSpan"
+                    or "System.Decimal"
+                    or "System.Guid";
     }
 }

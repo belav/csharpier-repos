@@ -17,7 +17,12 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int seed = 21543;
             int arraySize = 16;
-            T[] tempItems, tempItems2, headItems, headItemsReverse, tailItems, tailItemsReverse;
+            T[] tempItems,
+                tempItems2,
+                headItems,
+                headItemsReverse,
+                tailItems,
+                tailItemsReverse;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];
@@ -117,7 +122,12 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int arraySize = 16;
             int seed = 21543;
-            T[] tempItems, tempItems2, headItems, headItemsReverse, tailItems, tailItemsReverse;
+            T[] tempItems,
+                tempItems2,
+                headItems,
+                headItemsReverse,
+                tailItems,
+                tailItemsReverse;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];
@@ -234,7 +244,9 @@ namespace System.Collections.Tests
             tempLinkedList.Clear();
             tempLinkedList.AddLast(CreateT(seed++));
             tempLinkedList.AddLast(CreateT(seed++));
-            Assert.Throws<InvalidOperationException>(() => linkedList.AddFirst(tempLinkedList.Last)); //"Err_98809ahied Node that already exists in another collection throws InvalidOperationException\n"
+            Assert.Throws<InvalidOperationException>(
+                () => linkedList.AddFirst(tempLinkedList.Last)
+            ); //"Err_98809ahied Node that already exists in another collection throws InvalidOperationException\n"
             InitialItems_Tests(linkedList, items);
         }
     }

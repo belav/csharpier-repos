@@ -21,7 +21,13 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddExplicitCast), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddExplicitCast
+        ),
+        Shared
+    ]
     internal sealed partial class CSharpAddExplicitCastCodeFixProvider
         : AbstractAddExplicitCastCodeFixProvider<ExpressionSyntax>
     {
@@ -39,36 +45,61 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
         private readonly AttributeArgumentFixer _attributeArgumentFixer;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpAddExplicitCastCodeFixProvider() : base(CSharpSyntaxFacts.Instance)
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpAddExplicitCastCodeFixProvider()
+            : base(CSharpSyntaxFacts.Instance)
         {
             _argumentFixer = new ArgumentFixer(this);
             _attributeArgumentFixer = new AttributeArgumentFixer(this);
         }
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS0266, CS1503);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS0266, CS1503);
 
-        protected override SyntaxNode ApplyFix(SyntaxNode currentRoot, ExpressionSyntax targetNode, ITypeSymbol conversionType)
+        protected override SyntaxNode ApplyFix(
+            SyntaxNode currentRoot,
+            ExpressionSyntax targetNode,
+            ITypeSymbol conversionType
+        )
         {
             // TODO:
             // the Simplifier doesn't remove the redundant cast from the expression
             // Issue link: https://github.com/dotnet/roslyn/issues/41500
-            var castExpression = targetNode.Cast(conversionType).WithAdditionalAnnotations(Simplifier.Annotation);
+            var castExpression = targetNode
+                .Cast(conversionType)
+                .WithAdditionalAnnotations(Simplifier.Annotation);
             var newRoot = currentRoot.ReplaceNode(targetNode, castExpression);
             return newRoot;
         }
 
-        protected override bool TryGetTargetTypeInfo(Document document, SemanticModel semanticModel, SyntaxNode root,
-            string diagnosticId, ExpressionSyntax spanNode, CancellationToken cancellationToken,
-            out ImmutableArray<(ExpressionSyntax, ITypeSymbol)> potentialConversionTypes)
+        protected override bool TryGetTargetTypeInfo(
+            Document document,
+            SemanticModel semanticModel,
+            SyntaxNode root,
+            string diagnosticId,
+            ExpressionSyntax spanNode,
+            CancellationToken cancellationToken,
+            out ImmutableArray<(ExpressionSyntax, ITypeSymbol)> potentialConversionTypes
+        )
         {
             potentialConversionTypes = ImmutableArray<(ExpressionSyntax, ITypeSymbol)>.Empty;
-            using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>.GetInstance(out var mutablePotentialConversionTypes);
+            using var _ = ArrayBuilder<(ExpressionSyntax, ITypeSymbol)>.GetInstance(
+                out var mutablePotentialConversionTypes
+            );
 
             if (diagnosticId == CS0266)
             {
                 var inferenceService = document.GetRequiredLanguageService<ITypeInferenceService>();
-                var conversionType = inferenceService.InferType(semanticModel, spanNode, objectAsDefault: false, cancellationToken);
+                var conversionType = inferenceService.InferType(
+                    semanticModel,
+                    spanNode,
+                    objectAsDefault: false,
+                    cancellationToken
+                );
                 if (conversionType is null)
                     return false;
 
@@ -76,30 +107,58 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             }
             else if (diagnosticId == CS1503)
             {
-                if (spanNode.GetAncestorOrThis<ArgumentSyntax>() is ArgumentSyntax targetArgument
+                if (
+                    spanNode.GetAncestorOrThis<ArgumentSyntax>() is ArgumentSyntax targetArgument
                     && targetArgument.Parent is ArgumentListSyntax argumentList
-                    && argumentList.Parent is SyntaxNode invocationNode)
+                    && argumentList.Parent is SyntaxNode invocationNode
+                )
                 {
                     // invocationNode could be Invocation Expression, Object Creation, Base Constructor...)
-                    mutablePotentialConversionTypes.AddRange(_argumentFixer.GetPotentialConversionTypes(
-                        semanticModel, root, targetArgument, argumentList, invocationNode, cancellationToken));
+                    mutablePotentialConversionTypes.AddRange(
+                        _argumentFixer.GetPotentialConversionTypes(
+                            semanticModel,
+                            root,
+                            targetArgument,
+                            argumentList,
+                            invocationNode,
+                            cancellationToken
+                        )
+                    );
                 }
-                else if (spanNode.GetAncestorOrThis<AttributeArgumentSyntax>() is AttributeArgumentSyntax targetAttributeArgument
-                    && targetAttributeArgument.Parent is AttributeArgumentListSyntax attributeArgumentList
-                    && attributeArgumentList.Parent is AttributeSyntax attributeNode)
+                else if (
+                    spanNode.GetAncestorOrThis<AttributeArgumentSyntax>()
+                        is AttributeArgumentSyntax targetAttributeArgument
+                    && targetAttributeArgument.Parent
+                        is AttributeArgumentListSyntax attributeArgumentList
+                    && attributeArgumentList.Parent is AttributeSyntax attributeNode
+                )
                 {
                     // attribute node
-                    mutablePotentialConversionTypes.AddRange(_attributeArgumentFixer.GetPotentialConversionTypes(
-                        semanticModel, root, targetAttributeArgument, attributeArgumentList, attributeNode, cancellationToken));
+                    mutablePotentialConversionTypes.AddRange(
+                        _attributeArgumentFixer.GetPotentialConversionTypes(
+                            semanticModel,
+                            root,
+                            targetAttributeArgument,
+                            attributeArgumentList,
+                            attributeNode,
+                            cancellationToken
+                        )
+                    );
                 }
             }
 
             // clear up duplicate types
-            potentialConversionTypes = FilterValidPotentialConversionTypes(semanticModel, mutablePotentialConversionTypes);
+            potentialConversionTypes = FilterValidPotentialConversionTypes(
+                semanticModel,
+                mutablePotentialConversionTypes
+            );
             return !potentialConversionTypes.IsEmpty;
         }
 
-        protected override CommonConversion ClassifyConversion(SemanticModel semanticModel, ExpressionSyntax expression, ITypeSymbol type)
-            => semanticModel.ClassifyConversion(expression, type).ToCommonConversion();
+        protected override CommonConversion ClassifyConversion(
+            SemanticModel semanticModel,
+            ExpressionSyntax expression,
+            ITypeSymbol type
+        ) => semanticModel.ClassifyConversion(expression, type).ToCommonConversion();
     }
 }

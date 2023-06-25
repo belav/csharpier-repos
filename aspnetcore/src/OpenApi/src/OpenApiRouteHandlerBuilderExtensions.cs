@@ -34,7 +34,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
                 {
                     routeEndpointBuilder.Metadata.Add(openApiOperation);
                 }
-            };
+            }
+            ;
         });
         return builder;
     }
@@ -46,7 +47,10 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="configureOperation">An <see cref="Func{T, TResult}"/> that returns a new OpenAPI annotation given a generated operation.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder WithOpenApi(this RouteHandlerBuilder builder, Func<OpenApiOperation, OpenApiOperation> configureOperation)
+    public static RouteHandlerBuilder WithOpenApi(
+        this RouteHandlerBuilder builder,
+        Func<OpenApiOperation, OpenApiOperation> configureOperation
+    )
     {
         builder.Add(endpointBuilder =>
         {
@@ -57,12 +61,15 @@ public static class OpenApiRouteHandlerBuilderExtensions
                 {
                     routeEndpointBuilder.Metadata.Add(configureOperation(openApiOperation));
                 }
-            };
+            }
+            ;
         });
         return builder;
     }
 
-    private static OpenApiOperation? GetOperationForEndpoint(RouteEndpointBuilder routeEndpointBuilder)
+    private static OpenApiOperation? GetOperationForEndpoint(
+        RouteEndpointBuilder routeEndpointBuilder
+    )
     {
         var pattern = routeEndpointBuilder.RoutePattern;
         var metadata = new EndpointMetadataCollection(routeEndpointBuilder.Metadata);

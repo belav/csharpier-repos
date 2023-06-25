@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Configuration.Internal;
     using System.Collections;
     using System.Collections.Specialized;
@@ -19,17 +20,20 @@ namespace System.Configuration {
 
     // An impersonation context that does nothing
     // Used in cases where the Host does not require impersonation.
-    class EmptyImpersonationContext : IDisposable {
+    class EmptyImpersonationContext : IDisposable
+    {
         static volatile IDisposable s_emptyImpersonationContext;
 
-        static internal IDisposable GetStaticInstance() {
-            if (s_emptyImpersonationContext == null) {
+        internal static IDisposable GetStaticInstance()
+        {
+            if (s_emptyImpersonationContext == null)
+            {
                 s_emptyImpersonationContext = new EmptyImpersonationContext();
             }
 
             return s_emptyImpersonationContext;
         }
 
-        public void Dispose() {}
+        public void Dispose() { }
     }
 }

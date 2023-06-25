@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,8 +20,9 @@ namespace Castle.Core.Internal
     internal class WeakKeyComparer<TKey> : IEqualityComparer<object>
         where TKey : class
     {
-        public static readonly WeakKeyComparer<TKey>
-            Default = new WeakKeyComparer<TKey>(EqualityComparer<TKey>.Default);
+        public static readonly WeakKeyComparer<TKey> Default = new WeakKeyComparer<TKey>(
+            EqualityComparer<TKey>.Default
+        );
 
         private readonly IEqualityComparer<TKey> comparer;
 
@@ -41,17 +42,13 @@ namespace Castle.Core.Internal
         public TKey Unwrap(object obj)
         {
             var weak = obj as WeakKey;
-            return (weak != null)
-                ? (TKey) weak.Target
-                : (TKey) obj;
+            return (weak != null) ? (TKey)weak.Target : (TKey)obj;
         }
 
         public int GetHashCode(object obj)
         {
             var weak = obj as WeakKey;
-            return (weak != null)
-                ? weak    .GetHashCode()
-                : comparer.GetHashCode((TKey) obj);
+            return (weak != null) ? weak.GetHashCode() : comparer.GetHashCode((TKey)obj);
         }
 
         public new bool Equals(object objA, object objB)

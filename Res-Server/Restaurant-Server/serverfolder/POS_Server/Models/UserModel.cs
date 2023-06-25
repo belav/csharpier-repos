@@ -23,7 +23,7 @@ namespace POS_Server.Models
         public byte isActive { get; set; }
         public string notes { get; set; }
         public byte isOnline { get; set; }
-   
+
         public string image { get; set; }
         public Nullable<long> groupId { get; set; }
         public string groupName { get; set; }
@@ -38,6 +38,5 @@ namespace POS_Server.Models
         public bool hasCommission { get; set; }
         public Nullable<decimal> commissionValue { get; set; }
         public Nullable<decimal> commissionRatio { get; set; }
-
     }
 }

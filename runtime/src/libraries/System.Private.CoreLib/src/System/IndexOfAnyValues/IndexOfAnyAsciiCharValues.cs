@@ -22,31 +22,48 @@ namespace System.Buffers
         internal override char[] GetValues() => _lookup.GetCharValues();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override bool ContainsCore(char value) =>
-            _lookup.Contains128(value);
+        internal override bool ContainsCore(char value) => _lookup.Contains128(value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAny(ReadOnlySpan<char> span) =>
-            IndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(ref MemoryMarshal.GetReference(span), span.Length);
+            IndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(
+                ref MemoryMarshal.GetReference(span),
+                span.Length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAnyExcept(ReadOnlySpan<char> span) =>
-            IndexOfAny<IndexOfAnyAsciiSearcher.Negate>(ref MemoryMarshal.GetReference(span), span.Length);
+            IndexOfAny<IndexOfAnyAsciiSearcher.Negate>(
+                ref MemoryMarshal.GetReference(span),
+                span.Length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int LastIndexOfAny(ReadOnlySpan<char> span) =>
-            LastIndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(ref MemoryMarshal.GetReference(span), span.Length);
+            LastIndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(
+                ref MemoryMarshal.GetReference(span),
+                span.Length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int LastIndexOfAnyExcept(ReadOnlySpan<char> span) =>
-            LastIndexOfAny<IndexOfAnyAsciiSearcher.Negate>(ref MemoryMarshal.GetReference(span), span.Length);
+            LastIndexOfAny<IndexOfAnyAsciiSearcher.Negate>(
+                ref MemoryMarshal.GetReference(span),
+                span.Length
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int IndexOfAny<TNegator>(ref char searchSpace, int searchSpaceLength)
             where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
         {
-            return IndexOfAnyAsciiSearcher.IsVectorizationSupported && searchSpaceLength >= Vector128<short>.Count
-                ? IndexOfAnyAsciiSearcher.IndexOfAnyVectorized<TNegator, TOptimizations>(ref Unsafe.As<char, short>(ref searchSpace), searchSpaceLength, _bitmap)
+            return
+                IndexOfAnyAsciiSearcher.IsVectorizationSupported
+                && searchSpaceLength >= Vector128<short>.Count
+                ? IndexOfAnyAsciiSearcher.IndexOfAnyVectorized<TNegator, TOptimizations>(
+                    ref Unsafe.As<char, short>(ref searchSpace),
+                    searchSpaceLength,
+                    _bitmap
+                )
                 : IndexOfAnyScalar<TNegator>(ref searchSpace, searchSpaceLength);
         }
 
@@ -54,8 +71,14 @@ namespace System.Buffers
         private int LastIndexOfAny<TNegator>(ref char searchSpace, int searchSpaceLength)
             where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
         {
-            return IndexOfAnyAsciiSearcher.IsVectorizationSupported && searchSpaceLength >= Vector128<short>.Count
-                ? IndexOfAnyAsciiSearcher.LastIndexOfAnyVectorized<TNegator, TOptimizations>(ref Unsafe.As<char, short>(ref searchSpace), searchSpaceLength, _bitmap)
+            return
+                IndexOfAnyAsciiSearcher.IsVectorizationSupported
+                && searchSpaceLength >= Vector128<short>.Count
+                ? IndexOfAnyAsciiSearcher.LastIndexOfAnyVectorized<TNegator, TOptimizations>(
+                    ref Unsafe.As<char, short>(ref searchSpace),
+                    searchSpaceLength,
+                    _bitmap
+                )
                 : LastIndexOfAnyScalar<TNegator>(ref searchSpace, searchSpaceLength);
         }
 

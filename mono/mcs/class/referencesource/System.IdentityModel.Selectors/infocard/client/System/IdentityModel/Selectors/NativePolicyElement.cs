@@ -19,14 +19,19 @@ namespace System.IdentityModel.Selectors
     {
         [MarshalAs(UnmanagedType.LPWStr)]
         public String targetEndpointAddress;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public String issuerEndpointAddress;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public String issuedTokenParameters;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public String policyNoticeLink;
+
         [MarshalAs(UnmanagedType.U4)]
         public int policyNoticeVersion;
+
         [MarshalAs(UnmanagedType.Bool)]
         public bool isManagedCardProvider;
     }

@@ -14,7 +14,8 @@ namespace Sample
 
         public StringTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new NormalizeMeasurement(),
                 new NormalizeMeasurementASCII(),
             };
@@ -22,10 +23,7 @@ namespace Sample
 
         public override Measurement[] Measurements
         {
-            get
-            {
-                return measurements;
-            }
+            get { return measurements; }
         }
 
         public abstract class StringMeasurement : BenchTask.Measurement

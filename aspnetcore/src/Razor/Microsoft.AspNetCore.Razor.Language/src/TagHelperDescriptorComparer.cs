@@ -15,9 +15,7 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
     /// </summary>
     public static readonly TagHelperDescriptorComparer Default = new TagHelperDescriptorComparer();
 
-    private TagHelperDescriptorComparer()
-    {
-    }
+    private TagHelperDescriptorComparer() { }
 
     public bool Equals(TagHelperDescriptor descriptorX, TagHelperDescriptor descriptorY)
     {
@@ -36,7 +34,13 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
             return false;
         }
 
-        if (!string.Equals(descriptorX.AssemblyName, descriptorY.AssemblyName, StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                descriptorX.AssemblyName,
+                descriptorY.AssemblyName,
+                StringComparison.Ordinal
+            )
+        )
         {
             return false;
         }
@@ -46,29 +50,54 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
             return false;
         }
 
-        if (!Enumerable.SequenceEqual(
-            descriptorX.BoundAttributes.OrderBy(attribute => attribute.Name, StringComparer.Ordinal),
-            descriptorY.BoundAttributes.OrderBy(attribute => attribute.Name, StringComparer.Ordinal),
-            BoundAttributeDescriptorComparer.Default))
+        if (
+            !Enumerable.SequenceEqual(
+                descriptorX.BoundAttributes.OrderBy(
+                    attribute => attribute.Name,
+                    StringComparer.Ordinal
+                ),
+                descriptorY.BoundAttributes.OrderBy(
+                    attribute => attribute.Name,
+                    StringComparer.Ordinal
+                ),
+                BoundAttributeDescriptorComparer.Default
+            )
+        )
         {
             return false;
         }
 
-        if (!Enumerable.SequenceEqual(
-            descriptorX.TagMatchingRules.OrderBy(rule => rule.TagName, StringComparer.Ordinal),
-            descriptorY.TagMatchingRules.OrderBy(rule => rule.TagName, StringComparer.Ordinal),
-            TagMatchingRuleDescriptorComparer.Default))
+        if (
+            !Enumerable.SequenceEqual(
+                descriptorX.TagMatchingRules.OrderBy(rule => rule.TagName, StringComparer.Ordinal),
+                descriptorY.TagMatchingRules.OrderBy(rule => rule.TagName, StringComparer.Ordinal),
+                TagMatchingRuleDescriptorComparer.Default
+            )
+        )
         {
             return false;
         }
 
-        if (!(descriptorX.AllowedChildTags == descriptorY.AllowedChildTags ||
-            (descriptorX.AllowedChildTags != null &&
-            descriptorY.AllowedChildTags != null &&
-            Enumerable.SequenceEqual(
-                descriptorX.AllowedChildTags.OrderBy(childTag => childTag.Name, StringComparer.Ordinal),
-                descriptorY.AllowedChildTags.OrderBy(childTag => childTag.Name, StringComparer.Ordinal),
-                AllowedChildTagDescriptorComparer.Default))))
+        if (
+            !(
+                descriptorX.AllowedChildTags == descriptorY.AllowedChildTags
+                || (
+                    descriptorX.AllowedChildTags != null
+                    && descriptorY.AllowedChildTags != null
+                    && Enumerable.SequenceEqual(
+                        descriptorX.AllowedChildTags.OrderBy(
+                            childTag => childTag.Name,
+                            StringComparer.Ordinal
+                        ),
+                        descriptorY.AllowedChildTags.OrderBy(
+                            childTag => childTag.Name,
+                            StringComparer.Ordinal
+                        ),
+                        AllowedChildTagDescriptorComparer.Default
+                    )
+                )
+            )
+        )
         {
             return false;
         }
@@ -78,17 +107,35 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
             return false;
         }
 
-        if (!string.Equals(descriptorX.Documentation, descriptorY.Documentation, StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                descriptorX.Documentation,
+                descriptorY.Documentation,
+                StringComparison.Ordinal
+            )
+        )
         {
             return false;
         }
 
-        if (!string.Equals(descriptorX.DisplayName, descriptorY.DisplayName, StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                descriptorX.DisplayName,
+                descriptorY.DisplayName,
+                StringComparison.Ordinal
+            )
+        )
         {
             return false;
         }
 
-        if (!string.Equals(descriptorX.TagOutputHint, descriptorY.TagOutputHint, StringComparison.Ordinal))
+        if (
+            !string.Equals(
+                descriptorX.TagOutputHint,
+                descriptorY.TagOutputHint,
+                StringComparison.Ordinal
+            )
+        )
         {
             return false;
         }
@@ -98,9 +145,12 @@ internal sealed class TagHelperDescriptorComparer : IEqualityComparer<TagHelperD
             return false;
         }
 
-        if (!Enumerable.SequenceEqual(
-            descriptorX.Metadata.OrderBy(metadataX => metadataX.Key, StringComparer.Ordinal),
-            descriptorY.Metadata.OrderBy(metadataY => metadataY.Key, StringComparer.Ordinal)))
+        if (
+            !Enumerable.SequenceEqual(
+                descriptorX.Metadata.OrderBy(metadataX => metadataX.Key, StringComparer.Ordinal),
+                descriptorY.Metadata.OrderBy(metadataY => metadataY.Key, StringComparer.Ordinal)
+            )
+        )
         {
             return false;
         }

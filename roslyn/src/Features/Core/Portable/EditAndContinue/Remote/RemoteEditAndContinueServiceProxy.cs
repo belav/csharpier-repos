@@ -26,31 +26,77 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     internal readonly partial struct RemoteEditAndContinueServiceProxy
     {
         [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteEditAndContinueService)), Shared]
-        internal sealed class CallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteEditAndContinueService.ICallback
+        internal sealed class CallbackDispatcher
+            : RemoteServiceCallbackDispatcher,
+                IRemoteEditAndContinueService.ICallback
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CallbackDispatcher()
-            {
-            }
+            public CallbackDispatcher() { }
 
-            public ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(RemoteServiceCallbackId callbackId, DocumentId? documentId, string filePath, CancellationToken cancellationToken)
-                => ((ActiveStatementSpanProviderCallback)GetCallback(callbackId)).GetSpansAsync(documentId, filePath, cancellationToken);
+            public ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(
+                RemoteServiceCallbackId callbackId,
+                DocumentId? documentId,
+                string filePath,
+                CancellationToken cancellationToken
+            ) =>
+                ((ActiveStatementSpanProviderCallback)GetCallback(callbackId)).GetSpansAsync(
+                    documentId,
+                    filePath,
+                    cancellationToken
+                );
 
-            public ValueTask<string?> TryGetMatchingSourceTextAsync(RemoteServiceCallbackId callbackId, string filePath, ImmutableArray<byte> requiredChecksum, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
-                => ((DebuggingSessionCallback)GetCallback(callbackId)).TryGetMatchingSourceTextAsync(filePath, requiredChecksum, checksumAlgorithm, cancellationToken);
+            public ValueTask<string?> TryGetMatchingSourceTextAsync(
+                RemoteServiceCallbackId callbackId,
+                string filePath,
+                ImmutableArray<byte> requiredChecksum,
+                SourceHashAlgorithm checksumAlgorithm,
+                CancellationToken cancellationToken
+            ) =>
+                ((DebuggingSessionCallback)GetCallback(callbackId)).TryGetMatchingSourceTextAsync(
+                    filePath,
+                    requiredChecksum,
+                    checksumAlgorithm,
+                    cancellationToken
+                );
 
-            public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(RemoteServiceCallbackId callbackId, CancellationToken cancellationToken)
-                => ((DebuggingSessionCallback)GetCallback(callbackId)).GetActiveStatementsAsync(cancellationToken);
+            public ValueTask<
+                ImmutableArray<ManagedActiveStatementDebugInfo>
+            > GetActiveStatementsAsync(
+                RemoteServiceCallbackId callbackId,
+                CancellationToken cancellationToken
+            ) =>
+                ((DebuggingSessionCallback)GetCallback(callbackId)).GetActiveStatementsAsync(
+                    cancellationToken
+                );
 
-            public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(RemoteServiceCallbackId callbackId, Guid mvid, CancellationToken cancellationToken)
-                => ((DebuggingSessionCallback)GetCallback(callbackId)).GetAvailabilityAsync(mvid, cancellationToken);
+            public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+                RemoteServiceCallbackId callbackId,
+                Guid mvid,
+                CancellationToken cancellationToken
+            ) =>
+                ((DebuggingSessionCallback)GetCallback(callbackId)).GetAvailabilityAsync(
+                    mvid,
+                    cancellationToken
+                );
 
-            public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(RemoteServiceCallbackId callbackId, CancellationToken cancellationToken)
-                => ((DebuggingSessionCallback)GetCallback(callbackId)).GetCapabilitiesAsync(cancellationToken);
+            public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
+                RemoteServiceCallbackId callbackId,
+                CancellationToken cancellationToken
+            ) =>
+                ((DebuggingSessionCallback)GetCallback(callbackId)).GetCapabilitiesAsync(
+                    cancellationToken
+                );
 
-            public ValueTask PrepareModuleForUpdateAsync(RemoteServiceCallbackId callbackId, Guid mvid, CancellationToken cancellationToken)
-                => ((DebuggingSessionCallback)GetCallback(callbackId)).PrepareModuleForUpdateAsync(mvid, cancellationToken);
+            public ValueTask PrepareModuleForUpdateAsync(
+                RemoteServiceCallbackId callbackId,
+                Guid mvid,
+                CancellationToken cancellationToken
+            ) =>
+                ((DebuggingSessionCallback)GetCallback(callbackId)).PrepareModuleForUpdateAsync(
+                    mvid,
+                    cancellationToken
+                );
         }
 
         private sealed class DebuggingSessionCallback
@@ -58,67 +104,108 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             private readonly IManagedHotReloadService _debuggerService;
             private readonly IPdbMatchingSourceTextProvider _sourceTextProvider;
 
-            public DebuggingSessionCallback(IManagedHotReloadService debuggerService, IPdbMatchingSourceTextProvider sourceTextProvider)
+            public DebuggingSessionCallback(
+                IManagedHotReloadService debuggerService,
+                IPdbMatchingSourceTextProvider sourceTextProvider
+            )
             {
                 _debuggerService = debuggerService;
                 _sourceTextProvider = sourceTextProvider;
             }
 
-            public async ValueTask<string?> TryGetMatchingSourceTextAsync(string filePath, ImmutableArray<byte> requiredChecksum, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
+            public async ValueTask<string?> TryGetMatchingSourceTextAsync(
+                string filePath,
+                ImmutableArray<byte> requiredChecksum,
+                SourceHashAlgorithm checksumAlgorithm,
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    return await _sourceTextProvider.TryGetMatchingSourceTextAsync(filePath, requiredChecksum, checksumAlgorithm, cancellationToken).ConfigureAwait(false);
+                    return await _sourceTextProvider
+                        .TryGetMatchingSourceTextAsync(
+                            filePath,
+                            requiredChecksum,
+                            checksumAlgorithm,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                 {
                     return null;
                 }
             }
 
-            public async ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellationToken)
+            public async ValueTask<
+                ImmutableArray<ManagedActiveStatementDebugInfo>
+            > GetActiveStatementsAsync(CancellationToken cancellationToken)
             {
                 try
                 {
-                    return await _debuggerService.GetActiveStatementsAsync(cancellationToken).ConfigureAwait(false);
+                    return await _debuggerService
+                        .GetActiveStatementsAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                 {
                     return ImmutableArray<ManagedActiveStatementDebugInfo>.Empty;
                 }
             }
 
-            public async ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(Guid mvid, CancellationToken cancellationToken)
+            public async ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+                Guid mvid,
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    return await _debuggerService.GetAvailabilityAsync(mvid, cancellationToken).ConfigureAwait(false);
+                    return await _debuggerService
+                        .GetAvailabilityAsync(mvid, cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                 {
-                    return new ManagedHotReloadAvailability(ManagedHotReloadAvailabilityStatus.InternalError, e.Message);
+                    return new ManagedHotReloadAvailability(
+                        ManagedHotReloadAvailabilityStatus.InternalError,
+                        e.Message
+                    );
                 }
             }
 
-            public async ValueTask PrepareModuleForUpdateAsync(Guid mvid, CancellationToken cancellationToken)
+            public async ValueTask PrepareModuleForUpdateAsync(
+                Guid mvid,
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    await _debuggerService.PrepareModuleForUpdateAsync(mvid, cancellationToken).ConfigureAwait(false);
+                    await _debuggerService
+                        .PrepareModuleForUpdateAsync(mvid, cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                 {
                     // nop
                 }
             }
 
-            public async ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellationToken)
+            public async ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    return await _debuggerService.GetCapabilitiesAsync(cancellationToken).ConfigureAwait(false);
+                    return await _debuggerService
+                        .GetCapabilitiesAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
                 {
                     return ImmutableArray<string>.Empty;
                 }
@@ -132,8 +219,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Workspace = workspace;
         }
 
-        private IEditAndContinueWorkspaceService GetLocalService()
-            => Workspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
+        private IEditAndContinueWorkspaceService GetLocalService() =>
+            Workspace.Services.GetRequiredService<IEditAndContinueWorkspaceService>();
 
         public async ValueTask<RemoteDebuggingSessionProxy?> StartDebuggingSessionAsync(
             Solution solution,
@@ -142,23 +229,54 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<DocumentId> captureMatchingDocuments,
             bool captureAllMatchingDocuments,
             bool reportDiagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(Workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
-                var sessionId = await GetLocalService().StartDebuggingSessionAsync(solution, debuggerService, sourceTextProvider, captureMatchingDocuments, captureAllMatchingDocuments, reportDiagnostics, cancellationToken).ConfigureAwait(false);
-                return new RemoteDebuggingSessionProxy(Workspace, LocalConnection.Instance, sessionId);
+                var sessionId = await GetLocalService()
+                    .StartDebuggingSessionAsync(
+                        solution,
+                        debuggerService,
+                        sourceTextProvider,
+                        captureMatchingDocuments,
+                        captureAllMatchingDocuments,
+                        reportDiagnostics,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                return new RemoteDebuggingSessionProxy(
+                    Workspace,
+                    LocalConnection.Instance,
+                    sessionId
+                );
             }
 
             // need to keep the providers alive until the session ends:
             var connection = client.CreateConnection<IRemoteEditAndContinueService>(
-                callbackTarget: new DebuggingSessionCallback(debuggerService, sourceTextProvider));
+                callbackTarget: new DebuggingSessionCallback(debuggerService, sourceTextProvider)
+            );
 
-            var sessionIdOpt = await connection.TryInvokeAsync(
-                solution,
-                async (service, solutionInfo, callbackId, cancellationToken) => await service.StartDebuggingSessionAsync(solutionInfo, callbackId, captureMatchingDocuments, captureAllMatchingDocuments, reportDiagnostics, cancellationToken).ConfigureAwait(false),
-                cancellationToken).ConfigureAwait(false);
+            var sessionIdOpt = await connection
+                .TryInvokeAsync(
+                    solution,
+                    async (service, solutionInfo, callbackId, cancellationToken) =>
+                        await service
+                            .StartDebuggingSessionAsync(
+                                solutionInfo,
+                                callbackId,
+                                captureMatchingDocuments,
+                                captureAllMatchingDocuments,
+                                reportDiagnostics,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (sessionIdOpt.HasValue)
             {
@@ -169,7 +287,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return null;
         }
 
-        public async ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, Document designTimeDocument, ActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken)
+        public async ValueTask<ImmutableArray<Diagnostic>> GetDocumentDiagnosticsAsync(
+            Document document,
+            Document designTimeDocument,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        )
         {
             // filter out documents that are not synchronized to remote process before we attempt remote invoke:
             if (!RemoteSupportedLanguages.IsSupported(document.Project.Language))
@@ -177,25 +300,53 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
-            var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(Workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
-                var diagnostics = await GetLocalService().GetDocumentDiagnosticsAsync(document, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+                var diagnostics = await GetLocalService()
+                    .GetDocumentDiagnosticsAsync(
+                        document,
+                        activeStatementSpanProvider,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (designTimeDocument != document)
                 {
                     diagnostics = diagnostics.SelectAsArray(
-                        diagnostic => RemapLocation(designTimeDocument, DiagnosticData.Create(document.Project.Solution, diagnostic, document.Project)));
+                        diagnostic =>
+                            RemapLocation(
+                                designTimeDocument,
+                                DiagnosticData.Create(
+                                    document.Project.Solution,
+                                    diagnostic,
+                                    document.Project
+                                )
+                            )
+                    );
                 }
 
                 return diagnostics;
             }
 
-            var diagnosticData = await client.TryInvokeAsync<IRemoteEditAndContinueService, ImmutableArray<DiagnosticData>>(
-                document.Project.Solution,
-                (service, solutionInfo, callbackId, cancellationToken) => service.GetDocumentDiagnosticsAsync(solutionInfo, callbackId, document.Id, cancellationToken),
-                callbackTarget: new ActiveStatementSpanProviderCallback(activeStatementSpanProvider),
-                cancellationToken).ConfigureAwait(false);
+            var diagnosticData = await client
+                .TryInvokeAsync<IRemoteEditAndContinueService, ImmutableArray<DiagnosticData>>(
+                    document.Project.Solution,
+                    (service, solutionInfo, callbackId, cancellationToken) =>
+                        service.GetDocumentDiagnosticsAsync(
+                            solutionInfo,
+                            callbackId,
+                            document.Id,
+                            cancellationToken
+                        ),
+                    callbackTarget: new ActiveStatementSpanProviderCallback(
+                        activeStatementSpanProvider
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!diagnosticData.HasValue)
             {
@@ -220,7 +371,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
                 else
                 {
-                    diagnostic = await data.ToDiagnosticAsync(document.Project, cancellationToken).ConfigureAwait(false);
+                    diagnostic = await data.ToDiagnosticAsync(document.Project, cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
                 result.Add(diagnostic);
@@ -236,24 +388,36 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // If the location in the generated document is in a scope of user-visible #line mapping use the mapped span,
             // otherwise (if it's hidden) display the diagnostic at the start of the file.
-            var span = data.DataLocation.UnmappedFileSpan != data.DataLocation.MappedFileSpan ? data.DataLocation.MappedFileSpan.Span : default;
+            var span =
+                data.DataLocation.UnmappedFileSpan != data.DataLocation.MappedFileSpan
+                    ? data.DataLocation.MappedFileSpan.Span
+                    : default;
             var location = Location.Create(designTimeDocument.FilePath, textSpan: default, span);
 
             return data.ToDiagnostic(location, ImmutableArray<Location>.Empty);
         }
 
-        public async ValueTask SetFileLoggingDirectoryAsync(string? logDirectory, CancellationToken cancellationToken)
+        public async ValueTask SetFileLoggingDirectoryAsync(
+            string? logDirectory,
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(Workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(Workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 GetLocalService().SetFileLoggingDirectory(logDirectory);
             }
             else
             {
-                await client.TryInvokeAsync<IRemoteEditAndContinueService>(
-                    (service, cancellationToken) => service.SetFileLoggingDirectoryAsync(logDirectory, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                await client
+                    .TryInvokeAsync<IRemoteEditAndContinueService>(
+                        (service, cancellationToken) =>
+                            service.SetFileLoggingDirectoryAsync(logDirectory, cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -261,9 +425,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             public static readonly LocalConnection Instance = new();
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

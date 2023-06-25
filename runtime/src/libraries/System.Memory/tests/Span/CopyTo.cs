@@ -81,7 +81,7 @@ namespace System.SpanTests
             bool success = srcSpan.TryCopyTo(dst);
             Assert.False(success);
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // TryCopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // TryCopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -91,9 +91,12 @@ namespace System.SpanTests
             int[] dst = { 99, 100 };
 
             Span<int> srcSpan = new Span<int>(src);
-            TestHelpers.AssertThrows<ArgumentException, int>(srcSpan, (_srcSpan) => _srcSpan.CopyTo(dst));
+            TestHelpers.AssertThrows<ArgumentException, int>(
+                srcSpan,
+                (_srcSpan) => _srcSpan.CopyTo(dst)
+            );
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -178,7 +181,7 @@ namespace System.SpanTests
 
             TestHelpers.AssertThrows<ArgumentException, int>(src, (_src) => _src.CopyTo(dst));
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -220,8 +223,14 @@ namespace System.SpanTests
             {
                 try
                 {
-                    allocatedFirst = AllocationHelper.TryAllocNative((IntPtr)bufferSize, out memBlockFirst);
-                    allocatedSecond = AllocationHelper.TryAllocNative((IntPtr)bufferSize, out memBlockSecond);
+                    allocatedFirst = AllocationHelper.TryAllocNative(
+                        (IntPtr)bufferSize,
+                        out memBlockFirst
+                    );
+                    allocatedSecond = AllocationHelper.TryAllocNative(
+                        (IntPtr)bufferSize,
+                        out memBlockSecond
+                    );
 
                     if (allocatedFirst && allocatedSecond)
                     {

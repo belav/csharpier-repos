@@ -230,30 +230,67 @@ namespace System.Buffers.Binary.Tests
             Assert.True(MemoryMarshal.TryRead(span, out byte byteValue));
             Assert.Equal(1, byteValue);
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<short>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<short>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out short shortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<int>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<int>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out int intValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<long>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<long>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out long longValue));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<ushort>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<ushort>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out ushort ushortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<uint>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<uint>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out uint uintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<ulong>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<ulong>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out ulong ulongValue));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<Half>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<Half>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out Half halfValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<float>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<float>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out float floatValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<double>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<double>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out double doubleValue));
 
             Span<byte> largeSpan = new byte[100];
-            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) => MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span));
-            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) => MemoryMarshal.TryRead(_span, out TestHelpers.TestValueTypeWithReference stringValue));
+            TestHelpers.AssertThrows<ArgumentException, byte>(
+                largeSpan,
+                (_span) => MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span)
+            );
+            TestHelpers.AssertThrows<ArgumentException, byte>(
+                largeSpan,
+                (_span) =>
+                    MemoryMarshal.TryRead(
+                        _span,
+                        out TestHelpers.TestValueTypeWithReference stringValue
+                    )
+            );
         }
 
         [Fact]
@@ -265,30 +302,67 @@ namespace System.Buffers.Binary.Tests
             Assert.True(MemoryMarshal.TryRead(span, out byte byteValue));
             Assert.Equal(1, byteValue);
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<short>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<short>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out short shortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<int>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<int>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out int intValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<long>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<long>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out long longValue));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<ushort>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<ushort>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out ushort ushortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<uint>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<uint>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out uint uintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<ulong>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<ulong>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out ulong ulongValue));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<Half>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<Half>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out Half halfValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<float>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<float>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out float floatValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Read<double>(_span));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Read<double>(_span)
+            );
             Assert.False(MemoryMarshal.TryRead(span, out double doubleValue));
 
             ReadOnlySpan<byte> largeSpan = new byte[100];
-            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) => MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span));
-            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) => MemoryMarshal.TryRead(_span, out TestHelpers.TestValueTypeWithReference stringValue));
+            TestHelpers.AssertThrows<ArgumentException, byte>(
+                largeSpan,
+                (_span) => MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span)
+            );
+            TestHelpers.AssertThrows<ArgumentException, byte>(
+                largeSpan,
+                (_span) =>
+                    MemoryMarshal.TryRead(
+                        _span,
+                        out TestHelpers.TestValueTypeWithReference stringValue
+                    )
+            );
         }
 
         [Fact]
@@ -477,7 +551,8 @@ namespace System.Buffers.Binary.Tests
 
             ReadOnlySpan<byte> readOnlySpanBE = new ReadOnlySpan<byte>(spanBE.ToArray());
 
-            TestHelpers.TestStructExplicit readStructAndReverse = MemoryMarshal.Read<TestHelpers.TestStructExplicit>(spanBE);
+            TestHelpers.TestStructExplicit readStructAndReverse =
+                MemoryMarshal.Read<TestHelpers.TestStructExplicit>(spanBE);
             if (BitConverter.IsLittleEndian)
             {
                 readStructAndReverse.S0 = ReverseEndianness(readStructAndReverse.S0);
@@ -510,21 +585,46 @@ namespace System.Buffers.Binary.Tests
                 UL1 = ReadUInt64BigEndian(spanBE.Slice(48))
             };
 
-            TestHelpers.TestStructExplicit readStructAndReverseFromReadOnlySpan = MemoryMarshal.Read<TestHelpers.TestStructExplicit>(readOnlySpanBE);
+            TestHelpers.TestStructExplicit readStructAndReverseFromReadOnlySpan =
+                MemoryMarshal.Read<TestHelpers.TestStructExplicit>(readOnlySpanBE);
             if (BitConverter.IsLittleEndian)
             {
-                readStructAndReverseFromReadOnlySpan.S0 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.S0);
-                readStructAndReverseFromReadOnlySpan.I0 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.I0);
-                readStructAndReverseFromReadOnlySpan.L0 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.L0);
-                readStructAndReverseFromReadOnlySpan.US0 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.US0);
-                readStructAndReverseFromReadOnlySpan.UI0 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.UI0);
-                readStructAndReverseFromReadOnlySpan.UL0 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.UL0);
-                readStructAndReverseFromReadOnlySpan.S1 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.S1);
-                readStructAndReverseFromReadOnlySpan.I1 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.I1);
-                readStructAndReverseFromReadOnlySpan.L1 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.L1);
-                readStructAndReverseFromReadOnlySpan.US1 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.US1);
-                readStructAndReverseFromReadOnlySpan.UI1 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.UI1);
-                readStructAndReverseFromReadOnlySpan.UL1 = ReverseEndianness(readStructAndReverseFromReadOnlySpan.UL1);
+                readStructAndReverseFromReadOnlySpan.S0 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.S0
+                );
+                readStructAndReverseFromReadOnlySpan.I0 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.I0
+                );
+                readStructAndReverseFromReadOnlySpan.L0 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.L0
+                );
+                readStructAndReverseFromReadOnlySpan.US0 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.US0
+                );
+                readStructAndReverseFromReadOnlySpan.UI0 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.UI0
+                );
+                readStructAndReverseFromReadOnlySpan.UL0 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.UL0
+                );
+                readStructAndReverseFromReadOnlySpan.S1 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.S1
+                );
+                readStructAndReverseFromReadOnlySpan.I1 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.I1
+                );
+                readStructAndReverseFromReadOnlySpan.L1 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.L1
+                );
+                readStructAndReverseFromReadOnlySpan.US1 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.US1
+                );
+                readStructAndReverseFromReadOnlySpan.UI1 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.UI1
+                );
+                readStructAndReverseFromReadOnlySpan.UL1 = ReverseEndianness(
+                    readStructAndReverseFromReadOnlySpan.UL1
+                );
             }
 
             var readStructFieldByFieldFromReadOnlySpan = new TestHelpers.TestStructExplicit

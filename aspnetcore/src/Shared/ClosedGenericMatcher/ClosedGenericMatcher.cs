@@ -58,9 +58,7 @@ internal static class ClosedGenericMatcher
 
     private static bool IsGenericInstantiation(Type candidate, Type interfaceType)
     {
-        return
-            candidate.IsGenericType &&
-            candidate.GetGenericTypeDefinition() == interfaceType;
+        return candidate.IsGenericType && candidate.GetGenericTypeDefinition() == interfaceType;
     }
 
     private static Type? GetGenericInstantiation(Type queryType, Type interfaceType)
@@ -75,7 +73,9 @@ internal static class ClosedGenericMatcher
                 {
                     bestMatch = @interface;
                 }
-                else if (StringComparer.Ordinal.Compare(@interface.FullName, bestMatch.FullName) < 0)
+                else if (
+                    StringComparer.Ordinal.Compare(@interface.FullName, bestMatch.FullName) < 0
+                )
                 {
                     bestMatch = @interface;
                 }

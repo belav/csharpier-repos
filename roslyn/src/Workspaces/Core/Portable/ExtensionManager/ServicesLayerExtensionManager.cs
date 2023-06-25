@@ -14,15 +14,11 @@ namespace Microsoft.CodeAnalysis.Extensions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ServicesLayerExtensionManager()
-        {
-        }
+        public ServicesLayerExtensionManager() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new ExtensionManager();
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new ExtensionManager();
 
-        private class ExtensionManager : AbstractExtensionManager
-        {
-        }
+        private class ExtensionManager : AbstractExtensionManager { }
     }
 }

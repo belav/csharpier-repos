@@ -59,15 +59,15 @@ public class CorsResult
     /// </summary>
     public TimeSpan? PreflightMaxAge
     {
-        get
-        {
-            return _preflightMaxAge;
-        }
+        get { return _preflightMaxAge; }
         set
         {
             if (value < TimeSpan.Zero)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), Resources.PreflightMaxAgeOutOfRange);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    Resources.PreflightMaxAgeOutOfRange
+                );
             }
             _preflightMaxAge = value;
         }
@@ -85,8 +85,11 @@ public class CorsResult
         builder.Append("AllowCredentials: ");
         builder.Append(SupportsCredentials);
         builder.Append(", PreflightMaxAge: ");
-        builder.Append(PreflightMaxAge.HasValue ?
-            PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture) : "null");
+        builder.Append(
+            PreflightMaxAge.HasValue
+                ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                : "null"
+        );
         builder.Append(", AllowOrigin: ");
         builder.Append(AllowedOrigin);
         builder.Append(", AllowExposedHeaders: {");

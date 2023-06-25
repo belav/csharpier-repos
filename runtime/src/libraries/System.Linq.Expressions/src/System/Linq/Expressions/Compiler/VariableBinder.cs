@@ -28,9 +28,7 @@ namespace System.Linq.Expressions.Compiler
             return binder._tree;
         }
 
-        private VariableBinder()
-        {
-        }
+        private VariableBinder() { }
 
         [return: NotNullIfNotNull(nameof(node))]
         public override Expression? Visit(Expression? node)
@@ -40,7 +38,11 @@ namespace System.Linq.Expressions.Compiler
             // another thread when we run out of stack space.
             if (!_guard.TryEnterOnCurrentStack())
             {
-                return _guard.RunOnEmptyStack((VariableBinder @this, Expression? e) => @this.Visit(e), this, node);
+                return _guard.RunOnEmptyStack(
+                    (VariableBinder @this, Expression? e) => @this.Visit(e),
+                    this,
+                    node
+                );
             }
 
             return base.Visit(node);
@@ -178,7 +180,9 @@ namespace System.Linq.Expressions.Compiler
                     }
 
                     // Otherwise, merge it
-                    currentScope.MergedScopes ??= new HashSet<BlockExpression>(ReferenceEqualityComparer.Instance);
+                    currentScope.MergedScopes ??= new HashSet<BlockExpression>(
+                        ReferenceEqualityComparer.Instance
+                    );
                     currentScope.MergedScopes.Add(block);
                     foreach (ParameterExpression v in block.Variables)
                     {
@@ -189,7 +193,6 @@ namespace System.Linq.Expressions.Compiler
             }
             return body;
         }
-
 
         protected internal override Expression VisitParameter(ParameterExpression node)
         {
@@ -224,7 +227,9 @@ namespace System.Linq.Expressions.Compiler
             return node;
         }
 
-        protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+        protected internal override Expression VisitRuntimeVariables(
+            RuntimeVariablesExpression node
+        )
         {
             foreach (ParameterExpression v in node.Variables)
             {

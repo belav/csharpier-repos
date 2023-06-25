@@ -11,7 +11,7 @@ using POS_Server.Controllers;
 namespace POS_Server
 {
     public class WebApiApplication : System.Web.HttpApplication
-    { 
+    {
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -22,15 +22,19 @@ namespace POS_Server
 
             HttpConfiguration config = GlobalConfiguration.Configuration;
 
-            config.Formatters.JsonFormatter
-                        .SerializerSettings
-                        .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft
+                .Json
+                .ReferenceLoopHandling
+                .Ignore;
             UsersLogsController usctrlr = new UsersLogsController();
             usctrlr.startapp();
         }
+
         protected void Application_PostAuthorizeRequest()
         {
-            System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
+            System.Web.HttpContext.Current.SetSessionStateBehavior(
+                System.Web.SessionState.SessionStateBehavior.Required
+            );
         }
     }
 }

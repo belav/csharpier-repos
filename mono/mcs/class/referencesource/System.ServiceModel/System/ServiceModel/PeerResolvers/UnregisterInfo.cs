@@ -20,6 +20,7 @@ namespace System.ServiceModel.PeerResolvers
             public string MeshId;
 
             public UnregisterInfoDC() { }
+
             public UnregisterInfoDC(string meshId, Guid registrationId)
             {
                 this.MeshId = meshId;
@@ -40,7 +41,11 @@ namespace System.ServiceModel.PeerResolvers
             get { return body.MeshId; }
         }
 
-        public UnregisterInfo() { body = new UnregisterInfoDC(); }
+        public UnregisterInfo()
+        {
+            body = new UnregisterInfoDC();
+        }
+
         public UnregisterInfo(string meshId, Guid registrationId)
         {
             this.body = new UnregisterInfoDC(meshId, registrationId);
@@ -52,4 +57,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

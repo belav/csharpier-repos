@@ -13,9 +13,7 @@ namespace System.Workflow.Activities
 
     #region Class CodeDesigner
     [ActivityDesignerTheme(typeof(CodeDesignerTheme))]
-    internal sealed class CodeDesigner : ActivityDesigner
-    {
-    }
+    internal sealed class CodeDesigner : ActivityDesigner { }
     #endregion
 
     #region CodeDesignerTheme

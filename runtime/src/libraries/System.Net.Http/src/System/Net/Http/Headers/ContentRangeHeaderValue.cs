@@ -90,9 +90,7 @@ namespace System.Net.Http.Headers
             _unit = HeaderUtilities.BytesUnit;
         }
 
-        private ContentRangeHeaderValue()
-        {
-        }
+        private ContentRangeHeaderValue() { }
 
         private ContentRangeHeaderValue(ContentRangeHeaderValue source)
         {
@@ -113,8 +111,12 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return ((_from == other._from) && (_to == other._to) && (_length == other._length) &&
-                string.Equals(_unit, other._unit, StringComparison.OrdinalIgnoreCase));
+            return (
+                (_from == other._from)
+                && (_to == other._to)
+                && (_length == other._length)
+                && string.Equals(_unit, other._unit, StringComparison.OrdinalIgnoreCase)
+            );
         }
 
         public override int GetHashCode()
@@ -168,15 +170,26 @@ namespace System.Net.Http.Headers
         public static ContentRangeHeaderValue Parse(string input)
         {
             int index = 0;
-            return (ContentRangeHeaderValue)GenericHeaderParser.ContentRangeParser.ParseValue(input, null, ref index);
+            return (ContentRangeHeaderValue)
+                GenericHeaderParser.ContentRangeParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out ContentRangeHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out ContentRangeHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.ContentRangeParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.ContentRangeParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (ContentRangeHeaderValue)output!;
                 return true;
@@ -184,7 +197,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetContentRangeLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetContentRangeLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -224,7 +241,15 @@ namespace System.Net.Http.Headers
             int fromLength;
             int toStartIndex;
             int toLength;
-            if (!TryGetRangeLength(input, ref current, out fromLength, out toStartIndex, out toLength))
+            if (
+                !TryGetRangeLength(
+                    input,
+                    ref current,
+                    out fromLength,
+                    out toStartIndex,
+                    out toLength
+                )
+            )
             {
                 return 0;
             }
@@ -251,8 +276,19 @@ namespace System.Net.Http.Headers
                 return 0;
             }
 
-            if (!TryCreateContentRange(input, unit, fromStartIndex, fromLength, toStartIndex, toLength,
-                lengthStartIndex, lengthLength, out parsedValue))
+            if (
+                !TryCreateContentRange(
+                    input,
+                    unit,
+                    fromStartIndex,
+                    fromLength,
+                    toStartIndex,
+                    toLength,
+                    lengthStartIndex,
+                    lengthLength,
+                    out parsedValue
+                )
+            )
             {
                 return 0;
             }
@@ -285,8 +321,13 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TryGetRangeLength(string input, ref int current, out int fromLength, out int toStartIndex,
-            out int toLength)
+        private static bool TryGetRangeLength(
+            string input,
+            ref int current,
+            out int fromLength,
+            out int toStartIndex,
+            out int toLength
+        )
         {
             fromLength = 0;
             toStartIndex = 0;
@@ -342,19 +383,34 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TryCreateContentRange(string input, string unit, int fromStartIndex, int fromLength,
-            int toStartIndex, int toLength, int lengthStartIndex, int lengthLength, [NotNullWhen(true)] out object? parsedValue)
+        private static bool TryCreateContentRange(
+            string input,
+            string unit,
+            int fromStartIndex,
+            int fromLength,
+            int toStartIndex,
+            int toLength,
+            int lengthStartIndex,
+            int lengthLength,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             parsedValue = null;
 
             long from = 0;
-            if ((fromLength > 0) && !HeaderUtilities.TryParseInt64(input, fromStartIndex, fromLength, out from))
+            if (
+                (fromLength > 0)
+                && !HeaderUtilities.TryParseInt64(input, fromStartIndex, fromLength, out from)
+            )
             {
                 return false;
             }
 
             long to = 0;
-            if ((toLength > 0) && !HeaderUtilities.TryParseInt64(input, toStartIndex, toLength, out to))
+            if (
+                (toLength > 0)
+                && !HeaderUtilities.TryParseInt64(input, toStartIndex, toLength, out to)
+            )
             {
                 return false;
             }
@@ -366,7 +422,10 @@ namespace System.Net.Http.Headers
             }
 
             long length = 0;
-            if ((lengthLength > 0) && !HeaderUtilities.TryParseInt64(input, lengthStartIndex, lengthLength, out length))
+            if (
+                (lengthLength > 0)
+                && !HeaderUtilities.TryParseInt64(input, lengthStartIndex, lengthLength, out length)
+            )
             {
                 return false;
             }

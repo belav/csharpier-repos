@@ -30,7 +30,8 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsageAttribute(
         AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Parameter,
         AllowMultiple = false,
-        Inherited = false)]
+        Inherited = false
+    )]
     public sealed class UnscopedRefAttribute : Attribute
     {
         /// <summary>

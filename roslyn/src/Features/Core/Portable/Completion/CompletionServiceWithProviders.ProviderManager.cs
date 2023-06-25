@@ -25,33 +25,50 @@ namespace Microsoft.CodeAnalysis.Completion
         {
             private readonly object _gate = new();
             private readonly Dictionary<string, CompletionProvider?> _nameToProvider = new();
-            private readonly Dictionary<ImmutableHashSet<string>, ImmutableArray<CompletionProvider>> _rolesToProviders;
+            private readonly Dictionary<
+                ImmutableHashSet<string>,
+                ImmutableArray<CompletionProvider>
+            > _rolesToProviders;
 
-            private readonly Func<ImmutableHashSet<string>, ImmutableArray<CompletionProvider>> _createRoleProviders;
+            private readonly Func<
+                ImmutableHashSet<string>,
+                ImmutableArray<CompletionProvider>
+            > _createRoleProviders;
             private readonly Func<string, CompletionProvider?> _getProviderByName;
 
-            private IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>>? _lazyImportedProviders;
+            private IEnumerable<
+                Lazy<CompletionProvider, CompletionProviderMetadata>
+            >? _lazyImportedProviders;
             private readonly CompletionServiceWithProviders _service;
 
             public ProviderManager(CompletionServiceWithProviders service)
             {
                 _service = service;
-                _rolesToProviders = new Dictionary<ImmutableHashSet<string>, ImmutableArray<CompletionProvider>>(this);
+                _rolesToProviders = new Dictionary<
+                    ImmutableHashSet<string>,
+                    ImmutableArray<CompletionProvider>
+                >(this);
                 _createRoleProviders = CreateRoleProviders;
                 _getProviderByName = GetProviderByName;
             }
 
-            public IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>> GetImportedProviders()
+            public IEnumerable<
+                Lazy<CompletionProvider, CompletionProviderMetadata>
+            > GetImportedProviders()
             {
                 if (_lazyImportedProviders == null)
                 {
                     var language = _service.Language;
-                    var mefExporter = (IMefHostExportProvider)_service._workspace.Services.HostServices;
+                    var mefExporter = (IMefHostExportProvider)
+                        _service._workspace.Services.HostServices;
 
-                    var providers = ExtensionOrderer.Order(
-                            mefExporter.GetExports<CompletionProvider, CompletionProviderMetadata>()
-                            .Where(lz => lz.Metadata.Language == language)
-                            ).ToList();
+                    var providers = ExtensionOrderer
+                        .Order(
+                            mefExporter
+                                .GetExports<CompletionProvider, CompletionProviderMetadata>()
+                                .Where(lz => lz.Metadata.Language == language)
+                        )
+                        .ToList();
 
                     Interlocked.CompareExchange(ref _lazyImportedProviders, providers, null);
                 }
@@ -59,10 +76,17 @@ namespace Microsoft.CodeAnalysis.Completion
                 return _lazyImportedProviders;
             }
 
-            public ImmutableArray<CompletionProvider> GetAllProviders(ImmutableHashSet<string> roles)
+            public ImmutableArray<CompletionProvider> GetAllProviders(
+                ImmutableHashSet<string> roles
+            )
             {
                 var imported = GetImportedProviders()
-                    .Where(lz => lz.Metadata.Roles == null || lz.Metadata.Roles.Length == 0 || roles.Overlaps(lz.Metadata.Roles))
+                    .Where(
+                        lz =>
+                            lz.Metadata.Roles == null
+                            || lz.Metadata.Roles.Length == 0
+                            || roles.Overlaps(lz.Metadata.Roles)
+                    )
                     .Select(lz => lz.Value);
 
 #pragma warning disable 0618
@@ -100,15 +124,29 @@ namespace Microsoft.CodeAnalysis.Completion
             }
 
             public ConcatImmutableArray<CompletionProvider> GetFilteredProviders(
-                Project? project, ImmutableHashSet<string>? roles, CompletionTrigger trigger, in CompletionOptions options)
+                Project? project,
+                ImmutableHashSet<string>? roles,
+                CompletionTrigger trigger,
+                in CompletionOptions options
+            )
             {
                 // We need to call `GetProviders` from the service since it could be overridden by its subclasses.
-                var allCompletionProviders = FilterProviders(_service.GetProviders(roles, trigger), trigger, options);
-                var projectCompletionProviders = FilterProviders(GetProjectCompletionProviders(project), trigger, options);
+                var allCompletionProviders = FilterProviders(
+                    _service.GetProviders(roles, trigger),
+                    trigger,
+                    options
+                );
+                var projectCompletionProviders = FilterProviders(
+                    GetProjectCompletionProviders(project),
+                    trigger,
+                    options
+                );
                 return allCompletionProviders.ConcatFast(projectCompletionProviders);
             }
 
-            public static ImmutableArray<CompletionProvider> GetProjectCompletionProviders(Project? project)
+            public static ImmutableArray<CompletionProvider> GetProjectCompletionProviders(
+                Project? project
+            )
             {
                 if (project?.Solution.Workspace.Kind == WorkspaceKind.Interactive)
                 {
@@ -122,24 +160,27 @@ namespace Microsoft.CodeAnalysis.Completion
             private ImmutableArray<CompletionProvider> FilterProviders(
                 ImmutableArray<CompletionProvider> providers,
                 CompletionTrigger trigger,
-                in CompletionOptions options)
+                in CompletionOptions options
+            )
             {
                 providers = options.ExpandedCompletionBehavior switch
                 {
-                    ExpandedCompletionMode.NonExpandedItemsOnly => providers.WhereAsArray(p => !p.IsExpandItemProvider),
-                    ExpandedCompletionMode.ExpandedItemsOnly => providers.WhereAsArray(p => p.IsExpandItemProvider),
+                    ExpandedCompletionMode.NonExpandedItemsOnly
+                        => providers.WhereAsArray(p => !p.IsExpandItemProvider),
+                    ExpandedCompletionMode.ExpandedItemsOnly
+                        => providers.WhereAsArray(p => p.IsExpandItemProvider),
                     _ => providers,
                 };
 
                 // If the caller passed along specific options that affect snippets,
                 // then defer to those.  Otherwise if the caller just wants the default
                 // behavior, then get the snippets behavior from our own rules.
-                var snippetsRule = options.SnippetsBehavior != SnippetsRule.Default
-                    ? options.SnippetsBehavior
-                    : _service.GetRules(options).SnippetsRule;
+                var snippetsRule =
+                    options.SnippetsBehavior != SnippetsRule.Default
+                        ? options.SnippetsBehavior
+                        : _service.GetRules(options).SnippetsRule;
 
-                if (snippetsRule is SnippetsRule.Default or
-                    SnippetsRule.NeverInclude)
+                if (snippetsRule is SnippetsRule.Default or SnippetsRule.NeverInclude)
                 {
                     return providers.Where(p => !p.IsSnippetProvider).ToImmutableArray();
                 }
@@ -168,7 +209,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 return providers.FirstOrDefault(p => p.Name == providerName);
             }
 
-            private ImmutableArray<CompletionProvider> CreateRoleProviders(ImmutableHashSet<string> roles)
+            private ImmutableArray<CompletionProvider> CreateRoleProviders(
+                ImmutableHashSet<string> roles
+            )
             {
                 var providers = GetAllProviders(roles);
 
@@ -180,7 +223,10 @@ namespace Microsoft.CodeAnalysis.Completion
                 return providers;
             }
 
-            bool IEqualityComparer<ImmutableHashSet<string>>.Equals([AllowNull] ImmutableHashSet<string> x, [AllowNull] ImmutableHashSet<string> y)
+            bool IEqualityComparer<ImmutableHashSet<string>>.Equals(
+                [AllowNull] ImmutableHashSet<string> x,
+                [AllowNull] ImmutableHashSet<string> y
+            )
             {
                 if (x == y)
                 {
@@ -203,7 +249,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 return true;
             }
 
-            int IEqualityComparer<ImmutableHashSet<string>>.GetHashCode([DisallowNull] ImmutableHashSet<string> obj)
+            int IEqualityComparer<ImmutableHashSet<string>>.GetHashCode(
+                [DisallowNull] ImmutableHashSet<string> obj
+            )
             {
                 var hash = 0;
                 foreach (var o in obj)
@@ -215,12 +263,20 @@ namespace Microsoft.CodeAnalysis.Completion
             }
 
             private sealed class ProjectCompletionProvider
-                : AbstractProjectExtensionProvider<ProjectCompletionProvider, CompletionProvider, ExportCompletionProviderAttribute>
+                : AbstractProjectExtensionProvider<
+                    ProjectCompletionProvider,
+                    CompletionProvider,
+                    ExportCompletionProviderAttribute
+                >
             {
-                protected override ImmutableArray<string> GetLanguages(ExportCompletionProviderAttribute exportAttribute)
-                    => ImmutableArray.Create(exportAttribute.Language);
+                protected override ImmutableArray<string> GetLanguages(
+                    ExportCompletionProviderAttribute exportAttribute
+                ) => ImmutableArray.Create(exportAttribute.Language);
 
-                protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<CompletionProvider> extensions)
+                protected override bool TryGetExtensionsFromReference(
+                    AnalyzerReference reference,
+                    out ImmutableArray<CompletionProvider> extensions
+                )
                 {
                     // check whether the analyzer reference knows how to return completion providers directly.
                     if (reference is ICompletionProviderFactory completionProviderFactory)

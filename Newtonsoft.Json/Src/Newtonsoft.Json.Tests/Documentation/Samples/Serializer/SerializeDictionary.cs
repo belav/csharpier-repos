@@ -61,11 +61,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""James"": 9001,
   ""Jo"": 3474,
   ""Jess"": 11926
-}", json);
+}",
+                json
+            );
         }
     }
 }

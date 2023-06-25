@@ -11,22 +11,28 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X.IntegrationTests;
 
 public class CodeGenerationIntegrationTest : IntegrationTestBase
 {
-    private static readonly CSharpCompilation DefaultBaseCompilation = MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+    private static readonly CSharpCompilation DefaultBaseCompilation =
+        MvcShim.BaseCompilation.WithAssemblyName("AppCode");
 
     public CodeGenerationIntegrationTest()
-        : base(generateBaselines: null, projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X")
+        : base(
+            generateBaselines: null,
+            projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X"
+        )
     {
         Configuration = RazorConfiguration.Create(
             RazorLanguageVersion.Version_1_1,
             "MVC-1.1",
-            new[] { new AssemblyExtension("MVC-1.1", typeof(ExtensionInitializer).Assembly) });
+            new[] { new AssemblyExtension("MVC-1.1", typeof(ExtensionInitializer).Assembly) }
+        );
     }
 
     protected override CSharpCompilation BaseCompilation => DefaultBaseCompilation;
 
     protected override RazorConfiguration Configuration { get; }
 
-    protected override CSharpParseOptions CSharpParseOptions => base.CSharpParseOptions.WithLanguageVersion(LanguageVersion.CSharp8);
+    protected override CSharpParseOptions CSharpParseOptions =>
+        base.CSharpParseOptions.WithLanguageVersion(LanguageVersion.CSharp8);
 
     [Fact]
     public void InvalidNamespaceAtEOF_DesignTime()
@@ -50,11 +56,13 @@ public class CodeGenerationIntegrationTest : IntegrationTestBase
     public void IncompleteDirectives_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 public class MyService<TModel>
 {
     public string Html { get; set; }
-}");
+}"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -74,7 +82,8 @@ public class MyService<TModel>
     public void InheritsViewModel_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -89,7 +98,8 @@ public class MyModel
 {
 
 }
-");
+"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -106,7 +116,8 @@ public class MyModel
     public void InheritsWithViewImports_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -121,7 +132,8 @@ public class MyBasePageForViews<TModel> : RazorPage
 public class MyModel
 {
 
-}");
+}"
+        );
 
         AddProjectItemFromText(@"@inherits MyBasePageForViews<TModel>");
 
@@ -155,14 +167,16 @@ public class MyModel
     public void Sections_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree($@"
+        AddCSharpSyntaxTree(
+            $@"
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class InputTestTagHelper : {typeof(TagHelper).FullName}
 {{
     public ModelExpression For {{ get; set; }}
 }}
-");
+"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -194,12 +208,14 @@ public class InputTestTagHelper : {typeof(TagHelper).FullName}
     public void Inject_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 public class MyApp
 {
     public string MyProperty { get; set; }
 }
-");
+"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -216,7 +232,8 @@ public class MyApp
     public void InjectWithModel_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 public class MyModel
 {
 
@@ -230,7 +247,8 @@ public class MyService<TModel>
 public class MyApp
 {
     public string MyProperty { get; set; }
-}");
+}"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -247,7 +265,8 @@ public class MyApp
     public void InjectWithSemicolon_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 public class MyModel
 {
 
@@ -262,7 +281,8 @@ public class MyService<TModel>
 {
     public string Html { get; set; }
 }
-");
+"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -294,11 +314,13 @@ public class MyService<TModel>
     public void MultipleModels_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree(@"
+        AddCSharpSyntaxTree(
+            @"
 public class ThisShouldBeGenerated
 {
 
-}");
+}"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -318,14 +340,16 @@ public class ThisShouldBeGenerated
     public void ModelExpressionTagHelper_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree($@"
+        AddCSharpSyntaxTree(
+            $@"
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class InputTestTagHelper : {typeof(TagHelper).FullName}
 {{
     public ModelExpression For {{ get; set; }}
 }}
-");
+"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 
@@ -342,7 +366,8 @@ public class InputTestTagHelper : {typeof(TagHelper).FullName}
     public void ViewComponentTagHelper_DesignTime()
     {
         // Arrange
-        AddCSharpSyntaxTree($@"
+        AddCSharpSyntaxTree(
+            $@"
 public class TestViewComponent
 {{
     public string Invoke(string firstName)
@@ -356,7 +381,8 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
 {{
     public string Bar {{ get; set; }}
 }}
-");
+"
+        );
 
         var projectItem = CreateProjectItemFromFile();
 

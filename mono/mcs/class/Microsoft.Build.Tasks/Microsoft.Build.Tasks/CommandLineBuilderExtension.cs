@@ -1,5 +1,5 @@
 //
-// CommandLineBuilderExtension.cs: 
+// CommandLineBuilderExtension.cs:
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
@@ -28,12 +28,10 @@
 
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class CommandLineBuilderExtension : CommandLineBuilder {
-		
-		public CommandLineBuilderExtension ()
-		{
-		}
-	}
+namespace Microsoft.Build.Tasks
+{
+    public class CommandLineBuilderExtension : CommandLineBuilder
+    {
+        public CommandLineBuilderExtension() { }
+    }
 }
-

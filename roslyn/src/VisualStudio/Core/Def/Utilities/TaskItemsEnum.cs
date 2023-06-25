@@ -9,7 +9,8 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 {
-    internal class TaskItemsEnum<T> : IVsEnumTaskItems where T : IVsTaskItem
+    internal class TaskItemsEnum<T> : IVsEnumTaskItems
+        where T : IVsTaskItem
     {
         private readonly T[] _items;
         private int _next;

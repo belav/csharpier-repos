@@ -13,10 +13,17 @@ namespace Microsoft.AspNetCore.Grpc.Swagger.Tests;
 
 public class SchemaGeneratorIntegrationTests
 {
-    private (OpenApiSchema Schema, SchemaRepository SchemaRepository) GenerateSchema(System.Type type)
+    private (OpenApiSchema Schema, SchemaRepository SchemaRepository) GenerateSchema(
+        System.Type type
+    )
     {
-        var dataContractResolver = new GrpcDataContractResolver(new JsonSerializerDataContractResolver(new JsonSerializerOptions()));
-        var schemaGenerator = new SchemaGenerator(new SchemaGeneratorOptions(), dataContractResolver);
+        var dataContractResolver = new GrpcDataContractResolver(
+            new JsonSerializerDataContractResolver(new JsonSerializerOptions())
+        );
+        var schemaGenerator = new SchemaGenerator(
+            new SchemaGeneratorOptions(),
+            dataContractResolver
+        );
         var schemaRepository = new SchemaRepository();
 
         var schema = schemaGenerator.GenerateSchema(type, schemaRepository);

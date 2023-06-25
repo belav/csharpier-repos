@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Not.Vector128.Int64"] = Not_Vector128_Int64,
                 ["Not.Vector128.SByte"] = Not_Vector128_SByte,
                 ["Not.Vector128.Single"] = Not_Vector128_Single,
@@ -61,10 +62,14 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["PolynomialMultiply.Vector64.SByte"] = PolynomialMultiply_Vector64_SByte,
                 ["PolynomialMultiply.Vector128.Byte"] = PolynomialMultiply_Vector128_Byte,
                 ["PolynomialMultiply.Vector128.SByte"] = PolynomialMultiply_Vector128_SByte,
-                ["PolynomialMultiplyWideningLower.Vector64.Byte"] = PolynomialMultiplyWideningLower_Vector64_Byte,
-                ["PolynomialMultiplyWideningLower.Vector64.SByte"] = PolynomialMultiplyWideningLower_Vector64_SByte,
-                ["PolynomialMultiplyWideningUpper.Vector128.Byte"] = PolynomialMultiplyWideningUpper_Vector128_Byte,
-                ["PolynomialMultiplyWideningUpper.Vector128.SByte"] = PolynomialMultiplyWideningUpper_Vector128_SByte,
+                ["PolynomialMultiplyWideningLower.Vector64.Byte"] =
+                    PolynomialMultiplyWideningLower_Vector64_Byte,
+                ["PolynomialMultiplyWideningLower.Vector64.SByte"] =
+                    PolynomialMultiplyWideningLower_Vector64_SByte,
+                ["PolynomialMultiplyWideningUpper.Vector128.Byte"] =
+                    PolynomialMultiplyWideningUpper_Vector128_Byte,
+                ["PolynomialMultiplyWideningUpper.Vector128.SByte"] =
+                    PolynomialMultiplyWideningUpper_Vector128_SByte,
                 ["PopCount.Vector64.Byte"] = PopCount_Vector64_Byte,
                 ["PopCount.Vector64.SByte"] = PopCount_Vector64_SByte,
                 ["PopCount.Vector128.Byte"] = PopCount_Vector128_Byte,
@@ -73,12 +78,18 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ReciprocalEstimate.Vector64.UInt32"] = ReciprocalEstimate_Vector64_UInt32,
                 ["ReciprocalEstimate.Vector128.Single"] = ReciprocalEstimate_Vector128_Single,
                 ["ReciprocalEstimate.Vector128.UInt32"] = ReciprocalEstimate_Vector128_UInt32,
-                ["ReciprocalSquareRootEstimate.Vector64.Single"] = ReciprocalSquareRootEstimate_Vector64_Single,
-                ["ReciprocalSquareRootEstimate.Vector64.UInt32"] = ReciprocalSquareRootEstimate_Vector64_UInt32,
-                ["ReciprocalSquareRootEstimate.Vector128.Single"] = ReciprocalSquareRootEstimate_Vector128_Single,
-                ["ReciprocalSquareRootEstimate.Vector128.UInt32"] = ReciprocalSquareRootEstimate_Vector128_UInt32,
-                ["ReciprocalSquareRootStep.Vector64.Single"] = ReciprocalSquareRootStep_Vector64_Single,
-                ["ReciprocalSquareRootStep.Vector128.Single"] = ReciprocalSquareRootStep_Vector128_Single,
+                ["ReciprocalSquareRootEstimate.Vector64.Single"] =
+                    ReciprocalSquareRootEstimate_Vector64_Single,
+                ["ReciprocalSquareRootEstimate.Vector64.UInt32"] =
+                    ReciprocalSquareRootEstimate_Vector64_UInt32,
+                ["ReciprocalSquareRootEstimate.Vector128.Single"] =
+                    ReciprocalSquareRootEstimate_Vector128_Single,
+                ["ReciprocalSquareRootEstimate.Vector128.UInt32"] =
+                    ReciprocalSquareRootEstimate_Vector128_UInt32,
+                ["ReciprocalSquareRootStep.Vector64.Single"] =
+                    ReciprocalSquareRootStep_Vector64_Single,
+                ["ReciprocalSquareRootStep.Vector128.Single"] =
+                    ReciprocalSquareRootStep_Vector128_Single,
                 ["ReciprocalStep.Vector64.Single"] = ReciprocalStep_Vector64_Single,
                 ["ReciprocalStep.Vector128.Single"] = ReciprocalStep_Vector128_Single,
                 ["ReverseElement16.Vector64.Int32"] = ReverseElement16_Vector64_Int32,
@@ -107,8 +118,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ReverseElement8.Vector128.UInt64"] = ReverseElement8_Vector128_UInt64,
                 ["RoundAwayFromZero.Vector64.Single"] = RoundAwayFromZero_Vector64_Single,
                 ["RoundAwayFromZero.Vector128.Single"] = RoundAwayFromZero_Vector128_Single,
-                ["RoundAwayFromZeroScalar.Vector64.Double"] = RoundAwayFromZeroScalar_Vector64_Double,
-                ["RoundAwayFromZeroScalar.Vector64.Single"] = RoundAwayFromZeroScalar_Vector64_Single,
+                ["RoundAwayFromZeroScalar.Vector64.Double"] =
+                    RoundAwayFromZeroScalar_Vector64_Double,
+                ["RoundAwayFromZeroScalar.Vector64.Single"] =
+                    RoundAwayFromZeroScalar_Vector64_Single,
                 ["RoundToNearest.Vector64.Single"] = RoundToNearest_Vector64_Single,
                 ["RoundToNearest.Vector128.Single"] = RoundToNearest_Vector128_Single,
             };

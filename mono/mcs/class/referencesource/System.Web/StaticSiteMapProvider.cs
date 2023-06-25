@@ -10,8 +10,8 @@
  * Copyright (c) 2002 Microsoft Corporation
  */
 
-namespace System.Web {
-
+namespace System.Web
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -20,15 +20,20 @@ namespace System.Web {
     using System.Web.UI;
     using System.Web.Util;
 
-    public abstract class StaticSiteMapProvider : SiteMapProvider {
-
+    public abstract class StaticSiteMapProvider : SiteMapProvider
+    {
         // Table maps nodes to their child node collections
         private Hashtable _childNodeCollectionTable;
-        internal IDictionary ChildNodeCollectionTable {
-            get {
-                if (_childNodeCollectionTable == null) {
-                    lock (_lock) {
-                        if (_childNodeCollectionTable == null) {
+        internal IDictionary ChildNodeCollectionTable
+        {
+            get
+            {
+                if (_childNodeCollectionTable == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_childNodeCollectionTable == null)
+                        {
                             _childNodeCollectionTable = new Hashtable();
                         }
                     }
@@ -40,11 +45,16 @@ namespace System.Web {
 
         // Case sensitive table that maps key to sitemap node.
         private Hashtable _keyTable;
-        internal IDictionary KeyTable {
-            get {
-                if (_keyTable == null) {
-                    lock (_lock) {
-                        if (_keyTable == null) {
+        internal IDictionary KeyTable
+        {
+            get
+            {
+                if (_keyTable == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_keyTable == null)
+                        {
                             _keyTable = new Hashtable();
                         }
                     }
@@ -56,11 +66,16 @@ namespace System.Web {
 
         // Table maps nodes to their parent nodes
         private Hashtable _parentNodeTable;
-        internal IDictionary ParentNodeTable {
-            get {
-                if (_parentNodeTable == null) {
-                    lock (_lock) {
-                        if (_parentNodeTable == null) {
+        internal IDictionary ParentNodeTable
+        {
+            get
+            {
+                if (_parentNodeTable == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_parentNodeTable == null)
+                        {
                             _parentNodeTable = new Hashtable();
                         }
                     }
@@ -72,11 +87,16 @@ namespace System.Web {
 
         // Case insensitive table that maps url to sitemap node.
         private Hashtable _urlTable;
-        internal IDictionary UrlTable {
-            get {
-                if (_urlTable == null) {
-                    lock (_lock) {
-                        if (_urlTable == null) {
+        internal IDictionary UrlTable
+        {
+            get
+            {
+                if (_urlTable == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_urlTable == null)
+                        {
                             _urlTable = new Hashtable(StringComparer.OrdinalIgnoreCase);
                         }
                     }
@@ -86,23 +106,27 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>Add single node to provider tree and sets the parent-child relation.</para>
         /// </devdoc>
-        protected internal override void AddNode(SiteMapNode node, SiteMapNode parentNode) {
-            if (node == null) {
+        protected internal override void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        {
+            if (node == null)
+            {
                 throw new ArgumentNullException("node");
             }
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 bool validUrl = false;
 
                 string url = node.Url;
-                if (!String.IsNullOrEmpty(url)) {
-                    if (HttpRuntime.AppDomainAppVirtualPath != null) {
-
-                        if (!UrlPath.IsAbsolutePhysicalPath(url)) {
+                if (!String.IsNullOrEmpty(url))
+                {
+                    if (HttpRuntime.AppDomainAppVirtualPath != null)
+                    {
+                        if (!UrlPath.IsAbsolutePhysicalPath(url))
+                        {
                             url = UrlPath.Combine(HttpRuntime.AppDomainAppVirtualPathString, url);
 
                             // Normalize url
@@ -111,7 +135,11 @@ namespace System.Web {
 
                         if (UrlTable[url] != null)
                             throw new InvalidOperationException(
-                                SR.GetString(SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Url, url));
+                                SR.GetString(
+                                    SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Url,
+                                    url
+                                )
+                            );
                     }
 
                     validUrl = true;
@@ -119,18 +147,22 @@ namespace System.Web {
 
                 String key = node.Key;
                 Debug.Assert(key != null);
-                if (KeyTable.Contains(key)) {
+                if (KeyTable.Contains(key))
+                {
                     throw new InvalidOperationException(
-                    SR.GetString(SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Key, key));
+                        SR.GetString(SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Key, key)
+                    );
                 }
 
                 KeyTable[key] = node;
 
-                if (validUrl) {
+                if (validUrl)
+                {
                     UrlTable[url] = node;
                 }
 
-                if (parentNode != null) {
+                if (parentNode != null)
+                {
                     ParentNodeTable[node] = parentNode;
                     if (ChildNodeCollectionTable[parentNode] == null)
                         ChildNodeCollectionTable[parentNode] = new SiteMapNodeCollection();
@@ -140,13 +172,14 @@ namespace System.Web {
             }
         }
 
-
         public abstract SiteMapNode BuildSiteMap();
 
         // Clear tables
 
-        protected virtual void Clear() {
-            lock (_lock) {
+        protected virtual void Clear()
+        {
+            lock (_lock)
+            {
                 if (_childNodeCollectionTable != null)
                     _childNodeCollectionTable.Clear();
 
@@ -163,10 +196,12 @@ namespace System.Web {
 
         // Find sitemapnode in current provider
 
-        public override SiteMapNode FindSiteMapNodeFromKey(string key) {
+        public override SiteMapNode FindSiteMapNodeFromKey(string key)
+        {
             SiteMapNode result = base.FindSiteMapNodeFromKey(key);
 
-            if (result == null) {
+            if (result == null)
+            {
                 result = (SiteMapNode)KeyTable[key];
             }
 
@@ -175,19 +210,22 @@ namespace System.Web {
 
         // Find sitemapnode in current provider
 
-        public override SiteMapNode FindSiteMapNode(string rawUrl) {
+        public override SiteMapNode FindSiteMapNode(string rawUrl)
+        {
             if (rawUrl == null)
                 throw new ArgumentNullException("rawUrl");
 
             // VSWhidbey 411041. URL needs to be trimmed.
             rawUrl = rawUrl.Trim();
 
-            if (rawUrl.Length == 0) {
+            if (rawUrl.Length == 0)
+            {
                 return null;
             }
 
             // Make sure it is an app absolute url
-            if (UrlPath.IsAppRelativePath(rawUrl)) {
+            if (UrlPath.IsAppRelativePath(rawUrl))
+            {
                 rawUrl = UrlPath.MakeVirtualPathAppAbsolute(rawUrl);
             }
 
@@ -198,29 +236,39 @@ namespace System.Web {
 
         // Return readonly child node collection
 
-        public override SiteMapNodeCollection GetChildNodes(SiteMapNode node) {
+        public override SiteMapNodeCollection GetChildNodes(SiteMapNode node)
+        {
             if (node == null)
                 throw new ArgumentNullException("node");
 
             BuildSiteMap();
-            SiteMapNodeCollection collection = (SiteMapNodeCollection)ChildNodeCollectionTable[node];
+            SiteMapNodeCollection collection = (SiteMapNodeCollection)
+                ChildNodeCollectionTable[node];
 
-            if (collection == null) {
+            if (collection == null)
+            {
                 SiteMapNode childNodeFromKey = (SiteMapNode)KeyTable[node.Key];
-                if (childNodeFromKey != null) {
+                if (childNodeFromKey != null)
+                {
                     collection = (SiteMapNodeCollection)ChildNodeCollectionTable[childNodeFromKey];
                 }
             }
 
-            if (collection != null) {
-                if (!SecurityTrimmingEnabled) {
+            if (collection != null)
+            {
+                if (!SecurityTrimmingEnabled)
+                {
                     return SiteMapNodeCollection.ReadOnly(collection);
                 }
 
                 HttpContext context = HttpContext.Current;
-                SiteMapNodeCollection trimmedCollection = new SiteMapNodeCollection(collection.Count);
-                foreach (SiteMapNode subNode in collection) {
-                    if (subNode.IsAccessibleToUser(context)) {
+                SiteMapNodeCollection trimmedCollection = new SiteMapNodeCollection(
+                    collection.Count
+                );
+                foreach (SiteMapNode subNode in collection)
+                {
+                    if (subNode.IsAccessibleToUser(context))
+                    {
                         trimmedCollection.Add(subNode);
                     }
                 }
@@ -231,53 +279,61 @@ namespace System.Web {
             return SiteMapNodeCollection.Empty;
         }
 
-
-        public override SiteMapNode GetParentNode(SiteMapNode node) {
+        public override SiteMapNode GetParentNode(SiteMapNode node)
+        {
             if (node == null)
                 throw new ArgumentNullException("node");
 
             BuildSiteMap();
             SiteMapNode parent = (SiteMapNode)ParentNodeTable[node];
 
-            if (parent == null) {
+            if (parent == null)
+            {
                 // Try to find the original node in the table using the key
                 SiteMapNode fallbackNode = (SiteMapNode)KeyTable[node.Key];
-                if (fallbackNode != null) {
+                if (fallbackNode != null)
+                {
                     parent = (SiteMapNode)ParentNodeTable[fallbackNode];
                 }
             }
 
             // Try the parent providers.
-            if (parent == null && ParentProvider != null) {
+            if (parent == null && ParentProvider != null)
+            {
                 parent = ParentProvider.GetParentNode(node);
             }
 
             return ReturnNodeIfAccessible(parent);
         }
 
-
-        protected internal override void RemoveNode(SiteMapNode node) {
+        protected internal override void RemoveNode(SiteMapNode node)
+        {
             if (node == null)
                 throw new ArgumentNullException("node");
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 SiteMapNode oldParent = (SiteMapNode)ParentNodeTable[node];
                 if (ParentNodeTable.Contains(node))
                     ParentNodeTable.Remove(node);
 
-                if (oldParent != null) {
-                    SiteMapNodeCollection collection = (SiteMapNodeCollection)ChildNodeCollectionTable[oldParent];
+                if (oldParent != null)
+                {
+                    SiteMapNodeCollection collection = (SiteMapNodeCollection)
+                        ChildNodeCollectionTable[oldParent];
                     if (collection != null && collection.Contains(node))
                         collection.Remove(node);
                 }
 
                 string url = node.Url;
-                if (url != null && url.Length > 0 && UrlTable.Contains(url)) {
+                if (url != null && url.Length > 0 && UrlTable.Contains(url))
+                {
                     UrlTable.Remove(url);
                 }
 
                 string key = node.Key;
-                if (KeyTable.Contains(key)) {
+                if (KeyTable.Contains(key))
+                {
                     KeyTable.Remove(key);
                 }
             }

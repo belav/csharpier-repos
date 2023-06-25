@@ -38,7 +38,7 @@ namespace System.Linq.Tests
         {
             // Unlike the keys of a dictionary, HashSet tolerates null items.
             Assert.False(new HashSet<string>().Contains(null));
-            var hs = new [] {"abc", null, "def"}.ToHashSet();
+            var hs = new[] { "abc", null, "def" }.ToHashSet();
             Assert.True(hs.Contains(null));
         }
 

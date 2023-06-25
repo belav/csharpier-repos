@@ -25,9 +25,11 @@ public class CurrentValueComparerFactory
         var nonNullableModelType = modelType.UnwrapNullableType();
         if (IsGenericComparable(modelType, nonNullableModelType))
         {
-            return (IComparer<IUpdateEntry>)Activator.CreateInstance(
-                typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
-                propertyBase)!;
+            return (IComparer<IUpdateEntry>)
+                Activator.CreateInstance(
+                    typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
+                    propertyBase
+                )!;
         }
 
         if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableModelType))
@@ -50,13 +52,22 @@ public class CurrentValueComparerFactory
                 if (IsGenericComparable(providerType, nonNullableProviderType))
                 {
                     var comparerType = modelType.IsClass
-                        ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(modelType, providerType)
+                        ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(
+                            modelType,
+                            providerType
+                        )
                         : modelType == converter.ModelClrType
-                            ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(modelType, providerType)
+                            ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(
+                                modelType,
+                                providerType
+                            )
                             : typeof(NullableStructCurrentProviderValueComparer<,>).MakeGenericType(
-                                nonNullableModelType, providerType);
+                                nonNullableModelType,
+                                providerType
+                            );
 
-                    return (IComparer<IUpdateEntry>)Activator.CreateInstance(comparerType, propertyBase, converter)!;
+                    return (IComparer<IUpdateEntry>)
+                        Activator.CreateInstance(comparerType, propertyBase, converter)!;
                 }
 
                 if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableProviderType))
@@ -74,7 +85,9 @@ public class CurrentValueComparerFactory
                         propertyBase.DeclaringType.DisplayName(),
                         propertyBase.Name,
                         modelType.ShortDisplayName(),
-                        providerType.ShortDisplayName()));
+                        providerType.ShortDisplayName()
+                    )
+                );
             }
         }
 
@@ -82,12 +95,16 @@ public class CurrentValueComparerFactory
             CoreStrings.NonComparableKeyType(
                 propertyBase.DeclaringType.DisplayName(),
                 propertyBase.Name,
-                modelType.ShortDisplayName()));
+                modelType.ShortDisplayName()
+            )
+        );
 
-        static bool IsGenericComparable(Type type, Type nonNullableType)
-            => typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
-                || typeof(IComparable<>).MakeGenericType(nonNullableType).IsAssignableFrom(nonNullableType)
-                || type.IsEnum
-                || nonNullableType.IsEnum;
+        static bool IsGenericComparable(Type type, Type nonNullableType) =>
+            typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
+            || typeof(IComparable<>)
+                .MakeGenericType(nonNullableType)
+                .IsAssignableFrom(nonNullableType)
+            || type.IsEnum
+            || nonNullableType.IsEnum;
     }
 }

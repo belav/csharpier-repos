@@ -9,24 +9,25 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptorBuilder
 {
-    private static readonly IReadOnlyDictionary<string, string> PrimitiveDisplayTypeNameLookups = new Dictionary<string, string>(StringComparer.Ordinal)
-    {
-        [typeof(byte).FullName] = "byte",
-        [typeof(sbyte).FullName] = "sbyte",
-        [typeof(int).FullName] = "int",
-        [typeof(uint).FullName] = "uint",
-        [typeof(short).FullName] = "short",
-        [typeof(ushort).FullName] = "ushort",
-        [typeof(long).FullName] = "long",
-        [typeof(ulong).FullName] = "ulong",
-        [typeof(float).FullName] = "float",
-        [typeof(double).FullName] = "double",
-        [typeof(char).FullName] = "char",
-        [typeof(bool).FullName] = "bool",
-        [typeof(object).FullName] = "object",
-        [typeof(string).FullName] = "string",
-        [typeof(decimal).FullName] = "decimal",
-    };
+    private static readonly IReadOnlyDictionary<string, string> PrimitiveDisplayTypeNameLookups =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            [typeof(byte).FullName] = "byte",
+            [typeof(sbyte).FullName] = "sbyte",
+            [typeof(int).FullName] = "int",
+            [typeof(uint).FullName] = "uint",
+            [typeof(short).FullName] = "short",
+            [typeof(ushort).FullName] = "ushort",
+            [typeof(long).FullName] = "long",
+            [typeof(ulong).FullName] = "ulong",
+            [typeof(float).FullName] = "float",
+            [typeof(double).FullName] = "double",
+            [typeof(char).FullName] = "char",
+            [typeof(bool).FullName] = "bool",
+            [typeof(object).FullName] = "object",
+            [typeof(string).FullName] = "string",
+            [typeof(decimal).FullName] = "decimal",
+        };
 
     private readonly DefaultTagHelperDescriptorBuilder _parent;
     private readonly string _kind;
@@ -35,7 +36,10 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
 
     private RazorDiagnosticCollection _diagnostics;
 
-    public DefaultBoundAttributeDescriptorBuilder(DefaultTagHelperDescriptorBuilder parent, string kind)
+    public DefaultBoundAttributeDescriptorBuilder(
+        DefaultTagHelperDescriptorBuilder parent,
+        string kind
+    )
     {
         _parent = parent;
         _kind = kind;
@@ -76,7 +80,9 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
 
     internal bool CaseSensitive => _parent.CaseSensitive;
 
-    public override void BindAttributeParameter(Action<BoundAttributeParameterDescriptorBuilder> configure)
+    public override void BindAttributeParameter(
+        Action<BoundAttributeParameterDescriptorBuilder> configure
+    )
     {
         if (configure == null)
         {
@@ -103,7 +109,9 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
         if (_attributeParameterBuilders != null)
         {
             // Attribute parameters are case-sensitive.
-            var parameterset = new HashSet<BoundAttributeParameterDescriptor>(BoundAttributeParameterDescriptorComparer.Default);
+            var parameterset = new HashSet<BoundAttributeParameterDescriptor>(
+                BoundAttributeParameterDescriptorComparer.Default
+            );
             for (var i = 0; i < _attributeParameterBuilders.Count; i++)
             {
                 parameterset.Add(_attributeParameterBuilders[i].Build());
@@ -125,7 +133,8 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
             CaseSensitive,
             parameters,
             new Dictionary<string, string>(Metadata),
-            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>())
+            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>()
+        )
         {
             IsEditorRequired = IsEditorRequired,
         };
@@ -143,9 +152,7 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
         var parentTypeName = _parent.GetTypeName();
         var propertyName = this.GetPropertyName();
 
-        if (TypeName != null &&
-            propertyName != null &&
-            parentTypeName != null)
+        if (TypeName != null && propertyName != null && parentTypeName != null)
         {
             // This looks like a normal c# property, so lets compute a display name based on that.
             if (!PrimitiveDisplayTypeNameLookups.TryGetValue(TypeName, out var simpleTypeName))
@@ -172,9 +179,11 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
         {
             if (IndexerAttributeNamePrefix == null)
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
-                    _parent.GetDisplayName(),
-                    GetDisplayName());
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
+                        _parent.GetDisplayName(),
+                        GetDisplayName()
+                    );
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
@@ -184,10 +193,12 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
         {
             if (Name.StartsWith(DataDashPrefix, StringComparison.OrdinalIgnoreCase))
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNameStartsWith(
-                    _parent.GetDisplayName(),
-                    GetDisplayName(),
-                    Name);
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNameStartsWith(
+                        _parent.GetDisplayName(),
+                        GetDisplayName(),
+                        Name
+                    );
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
@@ -200,10 +211,12 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
             }
             else if (isDirectiveAttribute)
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributeName(
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributeName(
                         _parent.GetDisplayName(),
                         GetDisplayName(),
-                        Name);
+                        Name
+                    );
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
@@ -212,13 +225,18 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
             for (var i = 0; i < name.Length; i++)
             {
                 var character = name[i];
-                if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                if (
+                    char.IsWhiteSpace(character)
+                    || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeName(
-                        _parent.GetDisplayName(),
-                        GetDisplayName(),
-                        name.Value,
-                        character);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeName(
+                            _parent.GetDisplayName(),
+                            GetDisplayName(),
+                            name.Value,
+                            character
+                        );
 
                     diagnostics ??= new();
                     diagnostics.Add(diagnostic);
@@ -228,21 +246,33 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
 
         if (IndexerAttributeNamePrefix != null)
         {
-            if (IndexerAttributeNamePrefix.StartsWith(DataDashPrefix, StringComparison.OrdinalIgnoreCase))
+            if (
+                IndexerAttributeNamePrefix.StartsWith(
+                    DataDashPrefix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefixStartsWith(
-                    _parent.GetDisplayName(),
-                    GetDisplayName(),
-                    IndexerAttributeNamePrefix);
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefixStartsWith(
+                        _parent.GetDisplayName(),
+                        GetDisplayName(),
+                        IndexerAttributeNamePrefix
+                    );
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
             }
-            else if (IndexerAttributeNamePrefix.Length > 0 && string.IsNullOrWhiteSpace(IndexerAttributeNamePrefix))
+            else if (
+                IndexerAttributeNamePrefix.Length > 0
+                && string.IsNullOrWhiteSpace(IndexerAttributeNamePrefix)
+            )
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
-                    _parent.GetDisplayName(),
-                    GetDisplayName());
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
+                        _parent.GetDisplayName(),
+                        GetDisplayName()
+                    );
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
@@ -256,10 +286,12 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
                 }
                 else if (isDirectiveAttribute)
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributePrefix(
-                        _parent.GetDisplayName(),
-                        GetDisplayName(),
-                        indexerPrefix.Value);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributePrefix(
+                            _parent.GetDisplayName(),
+                            GetDisplayName(),
+                            indexerPrefix.Value
+                        );
 
                     diagnostics ??= new();
                     diagnostics.Add(diagnostic);
@@ -268,13 +300,18 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
                 for (var i = 0; i < indexerPrefix.Length; i++)
                 {
                     var character = indexerPrefix[i];
-                    if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                    )
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefix(
-                            _parent.GetDisplayName(),
-                            GetDisplayName(),
-                            indexerPrefix.Value,
-                            character);
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefix(
+                                _parent.GetDisplayName(),
+                                GetDisplayName(),
+                                indexerPrefix.Value,
+                                character
+                            );
 
                         diagnostics ??= new();
                         diagnostics.Add(diagnostic);
@@ -290,7 +327,8 @@ internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptor
     {
         if (_attributeParameterBuilders == null)
         {
-            _attributeParameterBuilders = new List<DefaultBoundAttributeParameterDescriptorBuilder>();
+            _attributeParameterBuilders =
+                new List<DefaultBoundAttributeParameterDescriptorBuilder>();
         }
     }
 }

@@ -33,7 +33,8 @@ namespace System.Net.WebSockets
 
         public string SubProtocol => _webSocket?.SubProtocol;
 
-        public static void CheckPlatformSupport() { /* nop */ }
+        public static void CheckPlatformSupport() { /* nop */
+        }
 
         public void Dispose()
         {
@@ -46,25 +47,47 @@ namespace System.Net.WebSockets
             _webSocket?.Abort();
         }
 
-        public Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken) =>
-            _webSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
+        public Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        ) => _webSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
 
-        public ValueTask SendAsync(ReadOnlyMemory<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken) =>
-            _webSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
+        public ValueTask SendAsync(
+            ReadOnlyMemory<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        ) => _webSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
 
-        public Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken) =>
-            _webSocket.ReceiveAsync(buffer, cancellationToken);
+        public Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        ) => _webSocket.ReceiveAsync(buffer, cancellationToken);
 
-        public ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(Memory<byte> buffer, CancellationToken cancellationToken) =>
-            _webSocket.ReceiveAsync(buffer, cancellationToken);
+        public ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) => _webSocket.ReceiveAsync(buffer, cancellationToken);
 
-        public Task CloseAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken) =>
-            _webSocket.CloseAsync(closeStatus, statusDescription, cancellationToken);
+        public Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        ) => _webSocket.CloseAsync(closeStatus, statusDescription, cancellationToken);
 
-        public Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken) =>
-            _webSocket.CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
+        public Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        ) => _webSocket.CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
 
-        public async Task ConnectAsyncCore(Uri uri, CancellationToken cancellationToken, ClientWebSocketOptions options)
+        public async Task ConnectAsyncCore(
+            Uri uri,
+            CancellationToken cancellationToken,
+            ClientWebSocketOptions options
+        )
         {
             // TODO #14480 : Not currently implemented, or explicitly ignored:
             // - ClientWebSocketOptions.UseDefaultCredentials
@@ -73,16 +96,19 @@ namespace System.Net.WebSockets
             // - ClientWebSocketOptions._sendBufferSize
             // throw new PlatformNotSupportedException ();
             // Establish connection to the server
-            CancellationTokenRegistration registration = cancellationToken.Register(s => ((WebSocketHandle)s).Abort(), this);
+            CancellationTokenRegistration registration = cancellationToken.Register(
+                s => ((WebSocketHandle)s).Abort(),
+                this
+            );
             try
             {
-                _webSocket = new WebAssembly.Net.WebSockets.ClientWebSocket ();//(options);
-                foreach (var t in options.RequestedSubProtocols) {
-                    _webSocket.Options.AddSubProtocol (t);
+                _webSocket = new WebAssembly.Net.WebSockets.ClientWebSocket(); //(options);
+                foreach (var t in options.RequestedSubProtocols)
+                {
+                    _webSocket.Options.AddSubProtocol(t);
                 }
 
-                await _webSocket.ConnectAsync (uri, cancellationToken);
-
+                await _webSocket.ConnectAsync(uri, cancellationToken);
             }
             catch (Exception exc)
             {

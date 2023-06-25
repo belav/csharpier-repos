@@ -20,14 +20,17 @@ using Hosting = System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime.Tracking
 {
-
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityTrackPoint
     {
         #region Private Data Members
 
-        private ActivityTrackingLocationCollection _match = new ActivityTrackingLocationCollection();
-        private ActivityTrackingLocationCollection _exclude = new ActivityTrackingLocationCollection();
+        private ActivityTrackingLocationCollection _match =
+            new ActivityTrackingLocationCollection();
+        private ActivityTrackingLocationCollection _exclude =
+            new ActivityTrackingLocationCollection();
         private TrackingAnnotationCollection _annotations = new TrackingAnnotationCollection();
         private ExtractCollection _extracts = new ExtractCollection();
 
@@ -59,7 +62,11 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Internal Matching Methods
 
-        internal bool IsMatch(Activity activity, out List<ActivityExecutionStatus> status, out bool hasCondition)
+        internal bool IsMatch(
+            Activity activity,
+            out List<ActivityExecutionStatus> status,
+            out bool hasCondition
+        )
         {
             hasCondition = false;
             //
@@ -98,7 +105,7 @@ namespace System.Workflow.Runtime.Tracking
                 }
             }
             //
-            // If no includes matched 
+            // If no includes matched
             // this trackpoint isn't relevant to this activity
             if (0 == status.Count)
                 return false;
@@ -138,7 +145,7 @@ namespace System.Workflow.Runtime.Tracking
                 }
             }
             //
-            // If no includes matched this trackpoint 
+            // If no includes matched this trackpoint
             // doesn't match this activity
             if (!included)
                 return false;
@@ -159,17 +166,22 @@ namespace System.Workflow.Runtime.Tracking
             return included;
         }
 
-        internal void Track(Activity activity, IServiceProvider provider, IList<TrackingDataItem> items)
+        internal void Track(
+            Activity activity,
+            IServiceProvider provider,
+            IList<TrackingDataItem> items
+        )
         {
             foreach (TrackingExtract e in _extracts)
                 e.GetData(activity, provider, items);
         }
 
         #endregion
-
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class UserTrackPoint
     {
         #region Private Data Members
@@ -236,7 +248,12 @@ namespace System.Workflow.Runtime.Tracking
             return false;
         }
 
-        internal void Track(Activity activity, object arg, IServiceProvider provider, IList<TrackingDataItem> items)
+        internal void Track(
+            Activity activity,
+            object arg,
+            IServiceProvider provider,
+            IList<TrackingDataItem> items
+        )
         {
             foreach (TrackingExtract e in _extracts)
                 e.GetData(activity, provider, items);
@@ -245,7 +262,9 @@ namespace System.Workflow.Runtime.Tracking
         #endregion
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowTrackPoint
     {
         #region Private Data Members

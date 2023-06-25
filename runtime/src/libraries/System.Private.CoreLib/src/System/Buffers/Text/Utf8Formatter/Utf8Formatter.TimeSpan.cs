@@ -27,7 +27,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(TimeSpan value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            TimeSpan value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             char symbol = FormattingHelpers.GetSymbolOrDefault(format, 'c');
 
@@ -61,7 +66,9 @@ namespace System.Buffers.Text
                     ticks = -ticks;
                     if (ticks < 0)
                     {
-                        Debug.Assert(ticks == long.MinValue /* -9223372036854775808 */);
+                        Debug.Assert(
+                            ticks == long.MinValue /* -9223372036854775808 */
+                        );
 
                         // We computed these ahead of time; they're straight from the decimal representation of Int64.MinValue.
                         fraction = 4775808;
@@ -71,11 +78,14 @@ namespace System.Buffers.Text
                 }
 
                 ulong fraction64;
-                (totalSecondsRemaining, fraction64) = Math.DivRem((ulong)Math.Abs(value.Ticks), TimeSpan.TicksPerSecond);
+                (totalSecondsRemaining, fraction64) = Math.DivRem(
+                    (ulong)Math.Abs(value.Ticks),
+                    TimeSpan.TicksPerSecond
+                );
                 fraction = (uint)fraction64;
             }
 
-        AfterComputeFraction:
+            AfterComputeFraction:
 
             int fractionDigits = 0;
             if (symbol == 'c')
@@ -98,7 +108,9 @@ namespace System.Buffers.Text
                 // case write out only the most significant digits.
                 if (fraction != 0)
                 {
-                    fractionDigits = Utf8Constants.DateTimeNumFractionDigits - FormattingHelpers.CountDecimalTrailingZeros(fraction, out fraction);
+                    fractionDigits =
+                        Utf8Constants.DateTimeNumFractionDigits
+                        - FormattingHelpers.CountDecimalTrailingZeros(fraction, out fraction);
                 }
             }
 
@@ -115,7 +127,10 @@ namespace System.Buffers.Text
             if (totalSecondsRemaining > 0)
             {
                 // Only compute minutes if the TimeSpan has an absolute value of >= 1 minute.
-                (totalMinutesRemaining, seconds) = Math.DivRem(totalSecondsRemaining, 60 /* seconds per minute */);
+                (totalMinutesRemaining, seconds) = Math.DivRem(
+                    totalSecondsRemaining,
+                    60 /* seconds per minute */
+                );
             }
 
             Debug.Assert(seconds < 60);
@@ -125,7 +140,10 @@ namespace System.Buffers.Text
             if (totalMinutesRemaining > 0)
             {
                 // Only compute hours if the TimeSpan has an absolute value of >= 1 hour.
-                (totalHoursRemaining, minutes) = Math.DivRem(totalMinutesRemaining, 60 /* minutes per hour */);
+                (totalHoursRemaining, minutes) = Math.DivRem(
+                    totalMinutesRemaining,
+                    60 /* minutes per hour */
+                );
             }
 
             Debug.Assert(minutes < 60);
@@ -138,7 +156,10 @@ namespace System.Buffers.Text
             if (totalHoursRemaining > 0)
             {
                 // Only compute days if the TimeSpan has an absolute value of >= 1 day.
-                (days, hours) = Math.DivRem((uint)totalHoursRemaining, 24 /* hours per day */);
+                (days, hours) = Math.DivRem(
+                    (uint)totalHoursRemaining,
+                    24 /* hours per day */
+                );
             }
 
             Debug.Assert(hours < 24);

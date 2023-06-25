@@ -25,9 +25,12 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             Workspace workspace,
             ISymbolSearchLogService logService,
             IFileDownloaderFactory fileDownloaderFactory,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
                 return new SymbolSearchUpdateEngineProxy(client, logService);
@@ -40,7 +43,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// <summary>
         /// This returns a No-op engine if called on non-Windows OS, because the backing storage depends on Windows APIs.
         /// </summary>
-        public static ISymbolSearchUpdateEngine CreateEngineInProcess(IFileDownloaderFactory fileDownloaderFactory)
+        public static ISymbolSearchUpdateEngine CreateEngineInProcess(
+            IFileDownloaderFactory fileDownloaderFactory
+        )
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? new SymbolSearchUpdateEngine(fileDownloaderFactory)

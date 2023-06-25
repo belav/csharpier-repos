@@ -4,13 +4,11 @@
 
 class A
 {
-	public void Method (DynamicReference d)
-	{
-		d.DynType.Value.AnyMethod ();
-		d.DynArray.Value[0][0].AnyMethod ();
-	}
-	
-	public static void Main ()
-	{
-	}
+    public void Method(DynamicReference d)
+    {
+        d.DynType.Value.AnyMethod();
+        d.DynArray.Value[0][0].AnyMethod();
+    }
+
+    public static void Main() { }
 }

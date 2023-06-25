@@ -18,4 +18,3 @@ internal interface IVisualStudioStorageReadFallback
 {
     Optional<object?> TryRead(string? language, TryReadValueDelegate readValue);
 }
-

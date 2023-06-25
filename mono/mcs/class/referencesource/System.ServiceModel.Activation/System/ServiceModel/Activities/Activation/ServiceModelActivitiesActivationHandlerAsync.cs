@@ -9,9 +9,15 @@ namespace System.ServiceModel.Activities.Activation
     using System.Runtime;
     using System.Xaml.Hosting;
 
-    [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUninstantiatedInternalClasses,
-        Justification = "This is instantiated by AspNet.")]
-    class ServiceModelActivitiesActivationHandlerAsync : ServiceHttpHandlerFactory, IServiceModelActivationHandler, IXamlBuildProviderExtensionFactory
+    [SuppressMessage(
+        FxCop.Category.Performance,
+        FxCop.Rule.AvoidUninstantiatedInternalClasses,
+        Justification = "This is instantiated by AspNet."
+    )]
+    class ServiceModelActivitiesActivationHandlerAsync
+        : ServiceHttpHandlerFactory,
+            IServiceModelActivationHandler,
+            IXamlBuildProviderExtensionFactory
     {
         public ServiceHostFactoryBase GetFactory()
         {

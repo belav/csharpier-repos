@@ -12,15 +12,15 @@ namespace System.ServiceModel.Description
     public class ClientViaBehavior : IEndpointBehavior
     {
         Uri uri;
-        
+
         public ClientViaBehavior(Uri uri)
         {
             if (uri == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("uri");
-                
+
             this.uri = uri;
         }
-        
+
         public Uri Uri
         {
             get { return this.uri; }
@@ -28,26 +28,37 @@ namespace System.ServiceModel.Description
             {
                 if (value == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
-                    
+
                 this.uri = value;
             }
         }
-        
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
+
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
+
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.SFXEndpointBehaviorUsedOnWrongSide,
+                        typeof(ClientViaBehavior).Name
+                    )
+                )
+            );
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
-        {
-        }
-
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SFXEndpointBehaviorUsedOnWrongSide, typeof(ClientViaBehavior).Name)));
-        }
-
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
         {
             if (behavior == null)
             {

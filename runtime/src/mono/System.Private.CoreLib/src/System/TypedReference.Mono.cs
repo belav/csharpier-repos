@@ -9,11 +9,11 @@ namespace System
     public ref partial struct TypedReference
     {
         #region sync with object-internals.h
-        #pragma warning disable CA1823 // used by runtime
+#pragma warning disable CA1823 // used by runtime
         private readonly RuntimeTypeHandle type;
         private readonly ref byte _value;
         private readonly IntPtr _type;
-        #pragma warning restore CA1823
+#pragma warning restore CA1823
         #endregion
 
         public static unsafe object? ToObject(TypedReference value)

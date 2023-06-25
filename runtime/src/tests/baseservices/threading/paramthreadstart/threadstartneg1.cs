@@ -20,12 +20,12 @@ class ThreadStartInt
         {
             t.Start(12345);
         }
-        catch(ThreadStateException)
+        catch (ThreadStateException)
         {
             // Expected
             iRet = 100;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Unexpected exception thrown: " + ex.ToString());
         }

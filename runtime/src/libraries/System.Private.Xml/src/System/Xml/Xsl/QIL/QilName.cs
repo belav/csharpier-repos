@@ -19,7 +19,6 @@ namespace System.Xml.Xsl.Qil
         private string _uri;
         private string _prefix;
 
-
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -27,14 +26,14 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilName(QilNodeType nodeType, string local, string uri, string prefix) : base(nodeType, null)
+        public QilName(QilNodeType nodeType, string local, string uri, string prefix)
+            : base(nodeType, null)
         {
             LocalName = local;
             NamespaceUri = uri;
             Prefix = prefix;
             Value = this;
         }
-
 
         //-----------------------------------------------
         // QilName methods

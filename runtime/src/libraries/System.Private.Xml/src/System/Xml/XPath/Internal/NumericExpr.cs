@@ -17,9 +17,11 @@ namespace MS.Internal.Xml.XPath
         public NumericExpr(Operator.Op op, Query opnd1, Query opnd2)
         {
             Debug.Assert(
-                op == Operator.Op.PLUS || op == Operator.Op.MINUS ||
-                op == Operator.Op.MUL || op == Operator.Op.DIV ||
-                op == Operator.Op.MOD
+                op == Operator.Op.PLUS
+                    || op == Operator.Op.MINUS
+                    || op == Operator.Op.MUL
+                    || op == Operator.Op.DIV
+                    || op == Operator.Op.MOD
             );
             Debug.Assert(opnd1 != null && opnd2 != null);
             if (opnd1.StaticType != XPathResultType.Number)
@@ -34,7 +36,9 @@ namespace MS.Internal.Xml.XPath
             _opnd1 = opnd1;
             _opnd2 = opnd2;
         }
-        private NumericExpr(NumericExpr other) : base(other)
+
+        private NumericExpr(NumericExpr other)
+            : base(other)
         {
             _op = other._op;
             _opnd1 = Clone(other._opnd1);
@@ -49,14 +53,22 @@ namespace MS.Internal.Xml.XPath
 
         public override object Evaluate(XPathNodeIterator nodeIterator)
         {
-            return GetValue(_op,
+            return GetValue(
+                _op,
                 XmlConvert.ToXPathDouble(_opnd1.Evaluate(nodeIterator)),
                 XmlConvert.ToXPathDouble(_opnd2.Evaluate(nodeIterator))
             );
         }
+
         private static double GetValue(Operator.Op op, double n1, double n2)
         {
-            Debug.Assert(op == Operator.Op.PLUS || op == Operator.Op.MINUS || op == Operator.Op.MOD || op == Operator.Op.DIV || op == Operator.Op.MUL);
+            Debug.Assert(
+                op == Operator.Op.PLUS
+                    || op == Operator.Op.MINUS
+                    || op == Operator.Op.MOD
+                    || op == Operator.Op.DIV
+                    || op == Operator.Op.MUL
+            );
             return op switch
             {
                 Operator.Op.PLUS => n1 + n2,
@@ -68,8 +80,14 @@ namespace MS.Internal.Xml.XPath
             };
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.Number; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Number; }
+        }
 
-        public override XPathNodeIterator Clone() { return new NumericExpr(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new NumericExpr(this);
+        }
     }
 }

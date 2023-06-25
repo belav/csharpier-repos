@@ -139,7 +139,11 @@ public class RouteData
     /// <see cref="DataTokens"/> will not be changed.
     /// </param>
     /// <returns>A <see cref="RouteDataSnapshot"/> that captures the current state.</returns>
-    public RouteDataSnapshot PushState(IRouter? router, RouteValueDictionary? values, RouteValueDictionary? dataTokens)
+    public RouteDataSnapshot PushState(
+        IRouter? router,
+        RouteValueDictionary? values,
+        RouteValueDictionary? dataTokens
+    )
     {
         // Perf: this is optimized for small list sizes, in particular to avoid overhead of a native call in
         // Array.CopyTo inside the List(IEnumerable<T>) constructor.
@@ -160,7 +164,8 @@ public class RouteData
             this,
             _dataTokens?.Count > 0 ? new RouteValueDictionary(_dataTokens) : null,
             routers,
-            _values?.Count > 0 ? new RouteValueDictionary(_values) : null);
+            _values?.Count > 0 ? new RouteValueDictionary(_values) : null
+        );
 
         if (router != null)
         {
@@ -210,7 +215,8 @@ public class RouteData
             RouteData routeData,
             RouteValueDictionary? dataTokens,
             IList<IRouter>? routers,
-            RouteValueDictionary? values)
+            RouteValueDictionary? values
+        )
         {
             if (routeData == null)
             {

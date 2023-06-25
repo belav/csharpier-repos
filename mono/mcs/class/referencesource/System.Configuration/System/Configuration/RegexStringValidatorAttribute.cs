@@ -18,24 +18,25 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class RegexStringValidatorAttribute : ConfigurationValidatorAttribute {
+    public sealed class RegexStringValidatorAttribute : ConfigurationValidatorAttribute
+    {
         private string _regex;
 
-        public RegexStringValidatorAttribute(string regex) {
+        public RegexStringValidatorAttribute(string regex)
+        {
             _regex = regex;
         }
-        public override ConfigurationValidatorBase ValidatorInstance {
-            get {
-                return new RegexStringValidator(_regex);
-            }
+
+        public override ConfigurationValidatorBase ValidatorInstance
+        {
+            get { return new RegexStringValidator(_regex); }
         }
-        public string Regex {
-            get {
-                return _regex;
-            }
+        public string Regex
+        {
+            get { return _regex; }
         }
     }
 }

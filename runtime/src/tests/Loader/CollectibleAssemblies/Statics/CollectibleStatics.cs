@@ -14,7 +14,9 @@ class Program
     class TestALC : AssemblyLoadContext
     {
         AssemblyLoadContext m_parentALC;
-        public TestALC(AssemblyLoadContext parentALC) : base("test", isCollectible: true)
+
+        public TestALC(AssemblyLoadContext parentALC)
+            : base("test", isCollectible: true)
         {
             m_parentALC = parentALC;
         }
@@ -29,7 +31,12 @@ class Program
     {
         var currentALC = AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly());
         var alc = new TestALC(currentALC);
-        var a = alc.LoadFromAssemblyPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Unloaded.dll"));
+        var a = alc.LoadFromAssemblyPath(
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "Unloaded.dll"
+            )
+        );
 
         var accessor = (IStaticTest)Activator.CreateInstance(a.GetType("StaticTest"));
         accessor.SetStatic(12759, 548739, 5468, 8518, 9995);
@@ -51,7 +58,13 @@ class Program
         object obj4 = new object();
         object obj5 = new object();
         accessor.SetStaticObject(obj1, obj2, obj3, obj4, obj5);
-        accessor.GetStaticObject(out object val1Obj, out object val2Obj, out object val3Obj, out object val4Obj, out object val5Obj);
+        accessor.GetStaticObject(
+            out object val1Obj,
+            out object val2Obj,
+            out object val3Obj,
+            out object val4Obj,
+            out object val5Obj
+        );
         if (val1Obj != obj1)
             return 11;
         if (val2Obj != obj2)

@@ -21,9 +21,10 @@ namespace Internal.Runtime.CompilerHelpers
                 return;
             }
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             if (lck.TryAcquire(0))
             {
@@ -34,6 +35,7 @@ namespace Internal.Runtime.CompilerHelpers
             Monitor.TryAcquireContended(lck, obj, Timeout.Infinite);
             lockTaken = true;
         }
+
         private static void MonitorExit(object obj, ref bool lockTaken)
         {
             // Inlined Monitor.Exit with a few tweaks
@@ -55,9 +57,10 @@ namespace Internal.Runtime.CompilerHelpers
                 return;
             }
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             if (lck.TryAcquire(0))
             {
@@ -68,6 +71,7 @@ namespace Internal.Runtime.CompilerHelpers
             Monitor.TryAcquireContended(lck, obj, Timeout.Infinite);
             lockTaken = true;
         }
+
         private static void MonitorExitStatic(IntPtr pEEType, ref bool lockTaken)
         {
             // Inlined Monitor.Exit with a few tweaks

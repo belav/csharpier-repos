@@ -17,7 +17,10 @@ public class StringLocalizerOfTRootNamespaceTest
         var locOptions = new LocalizationOptions();
         var options = new Mock<IOptions<LocalizationOptions>>();
         options.Setup(o => o.Value).Returns(locOptions);
-        var factory = new ResourceManagerStringLocalizerFactory(options.Object, NullLoggerFactory.Instance);
+        var factory = new ResourceManagerStringLocalizerFactory(
+            options.Object,
+            NullLoggerFactory.Instance
+        );
 
         var valuesLoc = factory.Create(typeof(ValuesController));
         string value = valuesLoc["String1"]; // Note: Tests nullable analysis of implicit string conversion operator.

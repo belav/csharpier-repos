@@ -21,7 +21,14 @@ namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
     //
     internal sealed partial class NativeFormatMethodParameterInfo : RuntimeFatMethodParameterInfo
     {
-        private NativeFormatMethodParameterInfo(MethodBase member, MethodHandle methodHandle, int position, ParameterHandle parameterHandle, QSignatureTypeHandle qualifiedParameterTypeHandle, TypeContext typeContext)
+        private NativeFormatMethodParameterInfo(
+            MethodBase member,
+            MethodHandle methodHandle,
+            int position,
+            ParameterHandle parameterHandle,
+            QSignatureTypeHandle qualifiedParameterTypeHandle,
+            TypeContext typeContext
+        )
             : base(member, position, qualifiedParameterTypeHandle, typeContext)
         {
             _methodHandle = methodHandle;
@@ -40,33 +47,38 @@ namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
 
         public sealed override ParameterAttributes Attributes
         {
-            get
-            {
-                return _parameter.Flags;
-            }
+            get { return _parameter.Flags; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return _parameter.Name.GetStringOrNull(this.Reader);
-            }
+            get { return _parameter.Name.GetStringOrNull(this.Reader); }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
-        protected sealed override IEnumerable<CustomAttributeData> TrueCustomAttributes => RuntimeCustomAttributeData.GetCustomAttributes(this.Reader, _parameter.CustomAttributes);
+        protected sealed override IEnumerable<CustomAttributeData> TrueCustomAttributes =>
+            RuntimeCustomAttributeData.GetCustomAttributes(
+                this.Reader,
+                _parameter.CustomAttributes
+            );
 
-        protected sealed override bool GetDefaultValueIfAvailable(bool raw, out object? defaultValue)
+        protected sealed override bool GetDefaultValueIfAvailable(
+            bool raw,
+            out object? defaultValue
+        )
         {
-            return DefaultValueParser.GetDefaultValueIfAny(Reader, _parameter.DefaultValue, ParameterType, CustomAttributes, raw, out defaultValue);
+            return DefaultValueParser.GetDefaultValueIfAny(
+                Reader,
+                _parameter.DefaultValue,
+                ParameterType,
+                CustomAttributes,
+                raw,
+                out defaultValue
+            );
         }
 
         private readonly MethodHandle _methodHandle;

@@ -22,7 +22,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
-        services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
             .AddNegotiate(options =>
             {
                 var persist = string.Equals("true", Configuration["Persist"]);

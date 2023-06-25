@@ -10,7 +10,10 @@
 struct S
 {
     long m_fld;
-    int m_a, m_b, m_c, m_d;
+    int m_a,
+        m_b,
+        m_c,
+        m_d;
 
     static int Main(string[] args)
     {

@@ -36,7 +36,10 @@ public class LoggingStreamTests
 
         loggingStream.Write(new byte[bufferLength]);
 
-        Assert.Equal($"Write[{bufferLength}]{Environment.NewLine}{expectedOutput}", mockLogger.Logs);
+        Assert.Equal(
+            $"Write[{bufferLength}]{Environment.NewLine}{expectedOutput}",
+            mockLogger.Logs
+        );
     }
 
     [Fact]
@@ -63,7 +66,13 @@ public class LoggingStreamTests
 
         public bool IsEnabled(LogLevel logLevel) => true;
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             _logs.Append(formatter(state, exception));
         }

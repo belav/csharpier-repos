@@ -11,10 +11,7 @@ namespace System.ServiceModel.Activities.Dispatcher
         static WorkflowSynchronizationContext singletonInstance;
 
         WorkflowSynchronizationContext()
-            : base()
-        {
-
-        }
+            : base() { }
 
         public static WorkflowSynchronizationContext Instance
         {
@@ -37,9 +34,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             Send(d, state);
         }
+
         public override void Send(SendOrPostCallback d, object state)
-        {            
+        {
             base.Send(d, state);
-        }     
+        }
     }
 }

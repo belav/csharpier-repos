@@ -19,14 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService.ErrorCa
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExceptionInComputeRefactoringsAsync()
-        {
-        }
+        public ExceptionInComputeRefactoringsAsync() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             await Task.Yield();
-            throw new Exception($"Exception thrown from ComputeRefactoringsAsync in {nameof(ExceptionInCodeActions)}");
+            throw new Exception(
+                $"Exception thrown from ComputeRefactoringsAsync in {nameof(ExceptionInCodeActions)}"
+            );
         }
     }
 }

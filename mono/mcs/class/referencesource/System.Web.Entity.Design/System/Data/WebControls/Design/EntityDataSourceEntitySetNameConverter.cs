@@ -18,9 +18,7 @@ namespace System.Web.UI.Design.WebControls
     internal class EntityDataSourceEntitySetNameConverter : StringConverter
     {
         public EntityDataSourceEntitySetNameConverter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
@@ -30,11 +28,17 @@ namespace System.Web.UI.Design.WebControls
             // Even if these values are set, it may not be possible to actually find them in metadata, but at least we can try the lookup if requested
 
             EntityDataSource entityDataSource = context.Instance as EntityDataSource;
-            if (entityDataSource != null &&
-                    !String.IsNullOrEmpty(entityDataSource.ConnectionString) &&
-                    !String.IsNullOrEmpty(entityDataSource.DefaultContainerName))
+            if (
+                entityDataSource != null
+                && !String.IsNullOrEmpty(entityDataSource.ConnectionString)
+                && !String.IsNullOrEmpty(entityDataSource.DefaultContainerName)
+            )
             {
-                List<EntityDataSourceEntitySetNameItem> entitySetNameItems = new EntityDataSourceDesignerHelper(entityDataSource, false /*interactiveMode*/).GetEntitySets(entityDataSource.DefaultContainerName);
+                List<EntityDataSourceEntitySetNameItem> entitySetNameItems =
+                    new EntityDataSourceDesignerHelper(
+                        entityDataSource,
+                        false /*interactiveMode*/
+                    ).GetEntitySets(entityDataSource.DefaultContainerName);
                 string[] entitySetNames = new string[entitySetNameItems.Count];
                 for (int i = 0; i < entitySetNameItems.Count; i++)
                 {

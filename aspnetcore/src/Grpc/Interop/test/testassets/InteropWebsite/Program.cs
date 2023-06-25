@@ -41,27 +41,34 @@ public class Program
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.ConfigureKestrel((context, options) =>
-                {
-                    // Support --port and --use_tls cmdline arguments normally supported
-                    // by gRPC interop servers.
-                    var useTls = context.Configuration.GetValue("use_tls", false);
-
-                    options.Limits.MinRequestBodyDataRate = null;
-                    options.ListenAnyIP(0, listenOptions =>
+                webBuilder.ConfigureKestrel(
+                    (context, options) =>
                     {
-                        Console.WriteLine($"Enabling connection encryption: {useTls}");
+                        // Support --port and --use_tls cmdline arguments normally supported
+                        // by gRPC interop servers.
+                        var useTls = context.Configuration.GetValue("use_tls", false);
 
-                        if (useTls)
-                        {
-                            var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
-                            var certPath = Path.Combine(basePath!, "Certs", "server1.pfx");
+                        options.Limits.MinRequestBodyDataRate = null;
+                        options.ListenAnyIP(
+                            0,
+                            listenOptions =>
+                            {
+                                Console.WriteLine($"Enabling connection encryption: {useTls}");
 
-                            listenOptions.UseHttps(certPath, "1111");
-                        }
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                    });
-                });
+                                if (useTls)
+                                {
+                                    var basePath = Path.GetDirectoryName(
+                                        typeof(Program).Assembly.Location
+                                    );
+                                    var certPath = Path.Combine(basePath!, "Certs", "server1.pfx");
+
+                                    listenOptions.UseHttps(certPath, "1111");
+                                }
+                                listenOptions.Protocols = HttpProtocols.Http2;
+                            }
+                        );
+                    }
+                );
                 webBuilder.UseStartup<Startup>();
             });
 }

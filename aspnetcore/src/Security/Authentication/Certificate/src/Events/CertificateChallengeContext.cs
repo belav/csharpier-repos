@@ -21,7 +21,8 @@ public class CertificateChallengeContext : PropertiesContext<CertificateAuthenti
         HttpContext context,
         AuthenticationScheme scheme,
         CertificateAuthenticationOptions options,
-        AuthenticationProperties properties)
+        AuthenticationProperties properties
+    )
         : base(context, scheme, options, properties) { }
 
     /// <summary>

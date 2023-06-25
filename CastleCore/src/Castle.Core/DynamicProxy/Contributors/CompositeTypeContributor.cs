@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,7 +29,7 @@ namespace Castle.DynamicProxy.Contributors
         protected readonly INamingScope namingScope;
 
         protected readonly ICollection<Type> interfaces = new HashSet<Type>();
-        
+
         private ILogger logger = NullLogger.Instance;
         private readonly List<MetaProperty> properties = new List<MetaProperty>();
         private readonly List<MetaEvent> events = new List<MetaEvent>();
@@ -70,9 +70,7 @@ namespace Castle.DynamicProxy.Contributors
                     continue;
                 }
 
-                ImplementMethod(method,
-                                @class,
-                                @class.CreateMethod);
+                ImplementMethod(method, @class, @class.CreateMethod);
             }
 
             foreach (var property in properties)
@@ -88,10 +86,21 @@ namespace Castle.DynamicProxy.Contributors
 
         public void AddInterfaceToProxy(Type @interface)
         {
-            Debug.Assert(@interface != null, "@interface == null", "Shouldn't be adding empty interfaces...");
-            Debug.Assert(@interface.IsInterface || @interface.IsDelegateType(), "@interface.IsInterface || @interface.IsDelegateType()", "Should be adding interfaces or delegate types only...");
-            Debug.Assert(!interfaces.Contains(@interface), "!interfaces.ContainsKey(@interface)",
-                         "Shouldn't be adding same interface twice...");
+            Debug.Assert(
+                @interface != null,
+                "@interface == null",
+                "Shouldn't be adding empty interfaces..."
+            );
+            Debug.Assert(
+                @interface.IsInterface || @interface.IsDelegateType(),
+                "@interface.IsInterface || @interface.IsDelegateType()",
+                "Should be adding interfaces or delegate types only..."
+            );
+            Debug.Assert(
+                !interfaces.Contains(@interface),
+                "!interfaces.ContainsKey(@interface)",
+                "Shouldn't be adding same interface twice..."
+            );
 
             interfaces.Add(@interface);
         }
@@ -117,11 +126,17 @@ namespace Castle.DynamicProxy.Contributors
             }
         }
 
-        protected abstract MethodGenerator GetMethodGenerator(MetaMethod method, ClassEmitter @class,
-                                                              OverrideMethodDelegate overrideMethod);
+        protected abstract MethodGenerator GetMethodGenerator(
+            MetaMethod method,
+            ClassEmitter @class,
+            OverrideMethodDelegate overrideMethod
+        );
 
-        private void ImplementMethod(MetaMethod method, ClassEmitter @class,
-                                     OverrideMethodDelegate overrideMethod)
+        private void ImplementMethod(
+            MetaMethod method,
+            ClassEmitter @class,
+            OverrideMethodDelegate overrideMethod
+        )
         {
             {
                 var generator = GetMethodGenerator(method, @class, overrideMethod);

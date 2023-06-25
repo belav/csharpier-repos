@@ -13,7 +13,11 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal X86Base() { }
 
-        public static bool IsSupported { [Intrinsic] get => false; }
+        public static bool IsSupported
+        {
+            [Intrinsic]
+            get => false;
+        }
 
 #pragma warning disable IDE0060
 
@@ -21,7 +25,11 @@ namespace System.Runtime.Intrinsics.X86
         {
             internal X64() { }
 
-            public static bool IsSupported { [Intrinsic] get => false; }
+            public static bool IsSupported
+            {
+                [Intrinsic]
+                get => false;
+            }
 
             /// <summary>
             /// unsigned char _BitScanForward64 (unsigned __int32* index, unsigned __int64 a)
@@ -32,7 +40,10 @@ namespace System.Runtime.Intrinsics.X86
             /// This method is to remain internal.
             /// Its functionality is exposed in the public <see cref="System.Numerics.BitOperations" /> class.
             /// </remarks>
-            internal static ulong BitScanForward(ulong value) { throw new PlatformNotSupportedException(); }
+            internal static ulong BitScanForward(ulong value)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             /// unsigned char _BitScanReverse64 (unsigned __int32* index, unsigned __int64 a)
@@ -43,7 +54,10 @@ namespace System.Runtime.Intrinsics.X86
             /// This method is to remain internal.
             /// Its functionality is exposed in the public <see cref="System.Numerics.BitOperations" /> class.
             /// </remarks>
-            internal static ulong BitScanReverse(ulong value) { throw new PlatformNotSupportedException(); }
+            internal static ulong BitScanReverse(ulong value)
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
@@ -55,7 +69,10 @@ namespace System.Runtime.Intrinsics.X86
         /// This method is to remain internal.
         /// Its functionality is exposed in the public <see cref="System.Numerics.BitOperations" /> class.
         /// </remarks>
-        internal static uint BitScanForward(uint value) { throw new PlatformNotSupportedException(); }
+        internal static uint BitScanForward(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         /// unsigned char _BitScanReverse (unsigned __int32* index, unsigned __int32 a)
@@ -66,21 +83,29 @@ namespace System.Runtime.Intrinsics.X86
         /// This method is to remain internal.
         /// Its functionality is exposed in the public <see cref="System.Numerics.BitOperations" /> class.
         /// </remarks>
-        internal static uint BitScanReverse(uint value) { throw new PlatformNotSupportedException(); }
+        internal static uint BitScanReverse(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         /// void __cpuidex (int cpuInfo[4], int function_id, int subfunction_id);
         ///   CPUID
         /// </summary>
-        public static (int Eax, int Ebx, int Ecx, int Edx) CpuId(int functionId, int subFunctionId) { throw new PlatformNotSupportedException(); }
+        public static (int Eax, int Ebx, int Ecx, int Edx) CpuId(int functionId, int subFunctionId)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         /// void _mm_pause (void);
         ///   PAUSE
         /// </summary>
-        public static void Pause() { throw new PlatformNotSupportedException(); }
+        public static void Pause()
+        {
+            throw new PlatformNotSupportedException();
+        }
 
 #pragma warning restore IDE0060
-
     }
 }

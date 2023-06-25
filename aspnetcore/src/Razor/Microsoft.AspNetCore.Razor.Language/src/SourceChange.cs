@@ -83,12 +83,16 @@ public sealed class SourceChange : IEquatable<SourceChange>
         var start = Span.AbsoluteIndex;
         var end = Span.AbsoluteIndex + Span.Length;
 
-        if (start < node.Position ||
-            start > node.EndPosition ||
-            end < node.Position ||
-            end > node.EndPosition)
+        if (
+            start < node.Position
+            || start > node.EndPosition
+            || end < node.Position
+            || end > node.EndPosition
+        )
         {
-            throw new InvalidOperationException(Resources.FormatInvalidOperation_SpanIsNotChangeOwner(node, this));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidOperation_SpanIsNotChangeOwner(node, this)
+            );
         }
 
         return start - node.Position;
@@ -112,10 +116,9 @@ public sealed class SourceChange : IEquatable<SourceChange>
 
     public bool Equals(SourceChange other)
     {
-        return
-            other != null &&
-            Span.Equals(other.Span) &&
-            string.Equals(NewText, other.NewText, StringComparison.Ordinal);
+        return other != null
+            && Span.Equals(other.Span)
+            && string.Equals(NewText, other.NewText, StringComparison.Ordinal);
     }
 
     public override bool Equals(object obj)

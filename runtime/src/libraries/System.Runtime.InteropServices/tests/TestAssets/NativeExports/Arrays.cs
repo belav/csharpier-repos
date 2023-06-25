@@ -113,7 +113,11 @@ namespace NativeExports
 
         [UnmanagedCallersOnly(EntryPoint = "fill_range_array")]
         [DNNE.C99DeclCode("struct int_struct_wrapper;")]
-        public static byte FillRange([DNNE.C99Type("struct int_struct_wrapper*")] IntStructWrapperNative* numValues, int length, int start)
+        public static byte FillRange(
+            [DNNE.C99Type("struct int_struct_wrapper*")] IntStructWrapperNative* numValues,
+            int length,
+            int start
+        )
         {
             if (numValues == null)
             {
@@ -130,7 +134,10 @@ namespace NativeExports
 
         [UnmanagedCallersOnly(EntryPoint = "double_values")]
         [DNNE.C99DeclCode("struct int_struct_wrapper { int value; };")]
-        public static void DoubleValues([DNNE.C99Type("struct int_struct_wrapper*")] IntStructWrapperNative* numValues, int length)
+        public static void DoubleValues(
+            [DNNE.C99Type("struct int_struct_wrapper*")] IntStructWrapperNative* numValues,
+            int length
+        )
         {
             for (int i = 0; i < length; i++)
             {
@@ -230,14 +237,19 @@ namespace NativeExports
         public static void Append(int** values, int numOriginalValues, int newValue)
         {
             int* newArray = (int*)Marshal.AllocCoTaskMem(sizeof(int) * (numOriginalValues + 1));
-            new Span<int>(*values, numOriginalValues).CopyTo(new Span<int>(newArray, numOriginalValues));
+            new Span<int>(*values, numOriginalValues).CopyTo(
+                new Span<int>(newArray, numOriginalValues)
+            );
             newArray[numOriginalValues] = newValue;
             *values = newArray;
         }
 
         [UnmanagedCallersOnly(EntryPoint = "and_bool_struct_array")]
         [DNNE.C99DeclCode("struct bool_struct;")]
-        public static byte AndBoolStructs([DNNE.C99Type("struct bool_struct*")] BoolStructMarshaller.BoolStructNative* pArray, int length)
+        public static byte AndBoolStructs(
+            [DNNE.C99Type("struct bool_struct*")] BoolStructMarshaller.BoolStructNative* pArray,
+            int length
+        )
         {
             bool result = true;
             for (int i = 0; i < length; i++)
@@ -250,7 +262,10 @@ namespace NativeExports
 
         [UnmanagedCallersOnly(EntryPoint = "and_bool_struct_array_in")]
         [DNNE.C99DeclCode("struct bool_struct;")]
-        public static byte AndBoolStructsIn([DNNE.C99Type("struct bool_struct**")] BoolStructMarshaller.BoolStructNative** pArray, int length)
+        public static byte AndBoolStructsIn(
+            [DNNE.C99Type("struct bool_struct**")] BoolStructMarshaller.BoolStructNative** pArray,
+            int length
+        )
         {
             bool result = true;
             for (int i = 0; i < length; i++)
@@ -265,7 +280,8 @@ namespace NativeExports
         [DNNE.C99DeclCode("struct bool_struct;")]
         public static void NegateBoolStructs(
             [DNNE.C99Type("struct bool_struct*")] BoolStructMarshaller.BoolStructNative* array,
-            int length)
+            int length
+        )
         {
             for (int i = 0; i < length; i++)
             {
@@ -280,7 +296,8 @@ namespace NativeExports
         [DNNE.C99DeclCode("struct bool_struct;")]
         public static void NegateBoolStructsRef(
             [DNNE.C99Type("struct bool_struct**")] BoolStructMarshaller.BoolStructNative** array,
-            int length)
+            int length
+        )
         {
             for (int i = 0; i < length; i++)
             {
@@ -296,7 +313,8 @@ namespace NativeExports
         public static void NegateBoolStructsOut(
             [DNNE.C99Type("struct bool_struct*")] BoolStructMarshaller.BoolStructNative* array,
             int length,
-            [DNNE.C99Type("struct bool_struct**")] BoolStructMarshaller.BoolStructNative** outArray)
+            [DNNE.C99Type("struct bool_struct**")] BoolStructMarshaller.BoolStructNative** outArray
+        )
         {
             *outArray = NegateBoolStructsImpl(array, length);
         }
@@ -306,7 +324,8 @@ namespace NativeExports
         [return: DNNE.C99Type("struct bool_struct*")]
         public static BoolStructMarshaller.BoolStructNative* NegateBoolStructsReturn(
             [DNNE.C99Type("struct bool_struct*")] BoolStructMarshaller.BoolStructNative* array,
-            int length)
+            int length
+        )
         {
             return NegateBoolStructsImpl(array, length);
         }
@@ -327,12 +346,16 @@ namespace NativeExports
             return newRows;
         }
 
-        private static BoolStructMarshaller.BoolStructNative* NegateBoolStructsImpl(BoolStructMarshaller.BoolStructNative* array, int numValues)
+        private static BoolStructMarshaller.BoolStructNative* NegateBoolStructsImpl(
+            BoolStructMarshaller.BoolStructNative* array,
+            int numValues
+        )
         {
             if (array == null)
                 return null;
 
-            BoolStructMarshaller.BoolStructNative* retVal = (BoolStructMarshaller.BoolStructNative*)Marshal.AllocCoTaskMem(sizeof(BoolStructMarshaller.BoolStructNative) * numValues);
+            BoolStructMarshaller.BoolStructNative* retVal = (BoolStructMarshaller.BoolStructNative*)
+                Marshal.AllocCoTaskMem(sizeof(BoolStructMarshaller.BoolStructNative) * numValues);
             for (int i = 0; i < numValues; i++)
             {
                 BoolStructMarshaller.BoolStructNative boolStruct = array[i];
@@ -382,7 +405,9 @@ namespace NativeExports
             newStrings.Add(IntPtr.Zero);
 
             ushort** res = (ushort**)Marshal.AllocCoTaskMem(sizeof(ushort*) * newStrings.Count);
-            CollectionsMarshal.AsSpan(newStrings).CopyTo(new Span<IntPtr>((IntPtr*)(res), newStrings.Count));
+            CollectionsMarshal
+                .AsSpan(newStrings)
+                .CopyTo(new Span<IntPtr>((IntPtr*)(res), newStrings.Count));
             *numValues = newStrings.Count;
             return res;
         }

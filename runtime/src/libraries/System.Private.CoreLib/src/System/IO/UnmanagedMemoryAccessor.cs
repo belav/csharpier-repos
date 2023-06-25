@@ -31,16 +31,19 @@ namespace System.IO
         private bool _canRead;
         private bool _canWrite;
 
-        protected UnmanagedMemoryAccessor()
-        {
-        }
+        protected UnmanagedMemoryAccessor() { }
 
         public UnmanagedMemoryAccessor(SafeBuffer buffer, long offset, long capacity)
         {
             Initialize(buffer, offset, capacity, FileAccess.Read);
         }
 
-        public UnmanagedMemoryAccessor(SafeBuffer buffer, long offset, long capacity, FileAccess access)
+        public UnmanagedMemoryAccessor(
+            SafeBuffer buffer,
+            long offset,
+            long capacity,
+            FileAccess access
+        )
         {
             Initialize(buffer, offset, capacity, access);
         }
@@ -227,7 +230,10 @@ namespace System.IO
 
             EnsureSafeToRead(position, sizeof(decimal));
 
-            int lo, mid, hi, flags;
+            int lo,
+                mid,
+                hi,
+                flags;
 
             unsafe
             {
@@ -263,9 +269,11 @@ namespace System.IO
             return new decimal(lo, mid, hi, isNegative, scale);
         }
 
-        public float ReadSingle(long position) => BitConverter.Int32BitsToSingle(ReadInt32(position));
+        public float ReadSingle(long position) =>
+            BitConverter.Int32BitsToSingle(ReadInt32(position));
 
-        public double ReadDouble(long position) => BitConverter.Int64BitsToDouble(ReadInt64(position));
+        public double ReadDouble(long position) =>
+            BitConverter.Int64BitsToDouble(ReadInt64(position));
 
         [CLSCompliant(false)]
         public sbyte ReadSByte(long position) => unchecked((sbyte)ReadByte(position));
@@ -286,13 +294,17 @@ namespace System.IO
         // (larger than 8 bytes -- though this is number is JIT and architecture dependent).   As
         // such, it is best to use the ReadXXX methods for small standard types such as ints, longs,
         // bools, etc.
-        public void Read<T>(long position, out T structure) where T : struct
+        public void Read<T>(long position, out T structure)
+            where T : struct
         {
             ArgumentOutOfRangeException.ThrowIfNegative(position);
 
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canRead)
             {
@@ -304,7 +316,10 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
@@ -318,7 +333,8 @@ namespace System.IO
         // Reads 'count' structs of type T from unmanaged memory, into 'array' starting at 'offset'.
         // Note: this method is not safe, since it overwrites the contents of structures, it can
         // be used to modify the private members of a struct.
-        public int ReadArray<T>(long position, T[] array, int offset, int count) where T : struct
+        public int ReadArray<T>(long position, T[] array, int offset, int count)
+            where T : struct
         {
             ArgumentNullException.ThrowIfNull(array);
 
@@ -330,7 +346,10 @@ namespace System.IO
             }
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canRead)
             {
@@ -343,7 +362,10 @@ namespace System.IO
             // only check position and ask for fewer Ts if count is too big
             if (position >= _capacity)
             {
-                throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(position),
+                    SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                );
             }
 
             int n = count;
@@ -495,9 +517,11 @@ namespace System.IO
             }
         }
 
-        public void Write(long position, float value) => Write(position, BitConverter.SingleToInt32Bits(value));
+        public void Write(long position, float value) =>
+            Write(position, BitConverter.SingleToInt32Bits(value));
 
-        public void Write(long position, double value) => Write(position, BitConverter.DoubleToInt64Bits(value));
+        public void Write(long position, double value) =>
+            Write(position, BitConverter.DoubleToInt64Bits(value));
 
         [CLSCompliant(false)]
         public void Write(long position, sbyte value) => Write(position, unchecked((byte)value));
@@ -515,12 +539,16 @@ namespace System.IO
         // is most performant when used with medium to large sized structs (larger than 8 bytes
         // though this is number is JIT and architecture dependent).   As such, it is best to use
         // the WriteX methods for small standard types such as ints, longs, bools, etc.
-        public void Write<T>(long position, ref T structure) where T : struct
+        public void Write<T>(long position, ref T structure)
+            where T : struct
         {
             ArgumentOutOfRangeException.ThrowIfNegative(position);
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canWrite)
             {
@@ -532,11 +560,17 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Argument_NotEnoughBytesToWrite, nameof(position));
+                    throw new ArgumentException(
+                        SR.Argument_NotEnoughBytesToWrite,
+                        nameof(position)
+                    );
                 }
             }
 
@@ -544,7 +578,8 @@ namespace System.IO
         }
 
         // Writes 'count' structs of type T from 'array' (starting at 'offset') into unmanaged memory.
-        public void WriteArray<T>(long position, T[] array, int offset, int count) where T : struct
+        public void WriteArray<T>(long position, T[] array, int offset, int count)
+            where T : struct
         {
             ArgumentNullException.ThrowIfNull(array);
 
@@ -557,12 +592,18 @@ namespace System.IO
             ArgumentOutOfRangeException.ThrowIfNegative(position);
             if (position >= Capacity)
             {
-                throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(position),
+                    SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                );
             }
 
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canWrite)
             {
@@ -576,7 +617,10 @@ namespace System.IO
         {
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canRead)
             {
@@ -587,7 +631,10 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
@@ -600,7 +647,10 @@ namespace System.IO
         {
             if (!_isOpen)
             {
-                throw new ObjectDisposedException(nameof(UnmanagedMemoryAccessor), SR.ObjectDisposed_ViewAccessorClosed);
+                throw new ObjectDisposedException(
+                    nameof(UnmanagedMemoryAccessor),
+                    SR.ObjectDisposed_ViewAccessorClosed
+                );
             }
             if (!_canWrite)
             {
@@ -611,11 +661,17 @@ namespace System.IO
             {
                 if (position >= _capacity)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(position), SR.ArgumentOutOfRange_PositionLessThanCapacityRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(position),
+                        SR.ArgumentOutOfRange_PositionLessThanCapacityRequired
+                    );
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Argument_NotEnoughBytesToWrite, nameof(position));
+                    throw new ArgumentException(
+                        SR.Argument_NotEnoughBytesToWrite,
+                        nameof(position)
+                    );
                 }
             }
         }

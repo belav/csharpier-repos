@@ -22,15 +22,18 @@ namespace System.Threading
                 Debug.Assert(succeeded);
             }
             catch (Exception ex)
-            {   // BindHandle throws ApplicationException on full CLR and Exception on CoreCLR.
+            { // BindHandle throws ApplicationException on full CLR and Exception on CoreCLR.
                 // We do not let either of these leak and convert them to ArgumentException to
                 // indicate that the specified handles are invalid.
 
-                if (ex.HResult == HResults.E_HANDLE)         // Bad handle
+                if (ex.HResult == HResults.E_HANDLE) // Bad handle
                     throw new ArgumentException(SR.Argument_InvalidHandle, nameof(handle));
 
-                if (ex.HResult == HResults.E_INVALIDARG)     // Handle already bound or sync handle
-                    throw new ArgumentException(SR.Argument_AlreadyBoundOrSyncHandle, nameof(handle));
+                if (ex.HResult == HResults.E_INVALIDARG) // Handle already bound or sync handle
+                    throw new ArgumentException(
+                        SR.Argument_AlreadyBoundOrSyncHandle,
+                        nameof(handle)
+                    );
 
                 throw;
             }

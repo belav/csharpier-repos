@@ -4,6 +4,7 @@
 public class Program
 {
     public static ulong[,] s_1;
+
     public static int Main()
     {
         // This should not assert.
@@ -12,7 +13,7 @@ public class Program
             ushort vr10 = default(ushort);
             bool vr11 = 0 < ((s_1[0, 0] * (uint)(0 / vr10)) % 1);
         }
-        catch {}
+        catch { }
 
         return 100;
     }

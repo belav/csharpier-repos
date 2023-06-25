@@ -5,25 +5,25 @@ using System;
 
 public class Gen<U>
 {
-	public void Meth<T>(T t) where T : struct, U {}
+    public void Meth<T>(T t)
+        where T : struct, U { }
 }
 
 public class Test_repro
 {
-	public static int Main()
-	{
-		try
-		{
-			Gen<System.ValueType> g1 = new Gen<ValueType>();
-	    g1.Meth(1);
-	    Console.WriteLine("PASS");
-	    return 100;
-	  }
-	  catch(Exception e)
-	  {
-	  	Console.WriteLine("cuaght unexpected exception \n {0}", e);
-	  	return 99;
-	  }
-	}
+    public static int Main()
+    {
+        try
+        {
+            Gen<System.ValueType> g1 = new Gen<ValueType>();
+            g1.Meth(1);
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("cuaght unexpected exception \n {0}", e);
+            return 99;
+        }
+    }
 }
-

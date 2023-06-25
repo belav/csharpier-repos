@@ -7,7 +7,6 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Discovery;
 
-    public class DiscoveryEndpointCollectionElement : StandardEndpointCollectionElement<DiscoveryEndpoint, DiscoveryEndpointElement>
-    {
-    }
+    public class DiscoveryEndpointCollectionElement
+        : StandardEndpointCollectionElement<DiscoveryEndpoint, DiscoveryEndpointElement> { }
 }

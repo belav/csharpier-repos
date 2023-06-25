@@ -49,7 +49,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.False(importAtt.AllowDefault);
             Assert.False(importAtt.AllowRecomposition);
             Assert.Null(importAtt.ContractType);
-    }
+        }
 
         [Fact]
         public void RequiredCreationPolicy_SetsRequiredCreationPolicyProperty()
@@ -76,7 +76,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.False(importAtt.AllowRecomposition);
             Assert.Null(importAtt.ContractType);
             Assert.Null(importAtt.ContractName);
-            }
+        }
 
         [Fact]
         public void AllowRecomposition_SetsAllowRecompositionProperty()

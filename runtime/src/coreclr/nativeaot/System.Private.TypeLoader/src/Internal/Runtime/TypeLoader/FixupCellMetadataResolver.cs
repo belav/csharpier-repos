@@ -30,7 +30,10 @@ namespace Internal.Runtime.TypeLoader
             _loadContextFromNativeLayout = null;
         }
 
-        public FixupCellMetadataResolver(NativeFormatMetadataUnit metadataUnit, TypeDesc typeContext)
+        public FixupCellMetadataResolver(
+            NativeFormatMetadataUnit metadataUnit,
+            TypeDesc typeContext
+        )
         {
             _metadataUnit = metadataUnit;
             _typeContext = typeContext;
@@ -38,7 +41,10 @@ namespace Internal.Runtime.TypeLoader
             _loadContextFromNativeLayout = null;
         }
 
-        public FixupCellMetadataResolver(NativeFormatMetadataUnit metadataUnit, MethodDesc methodContext)
+        public FixupCellMetadataResolver(
+            NativeFormatMetadataUnit metadataUnit,
+            MethodDesc methodContext
+        )
         {
             _metadataUnit = metadataUnit;
             _methodContext = methodContext;
@@ -46,7 +52,10 @@ namespace Internal.Runtime.TypeLoader
             _loadContextFromNativeLayout = null;
         }
 
-        public FixupCellMetadataResolver(NativeFormatMetadataUnit metadataUnit, NativeLayoutInfoLoadContext loadContext)
+        public FixupCellMetadataResolver(
+            NativeFormatMetadataUnit metadataUnit,
+            NativeLayoutInfoLoadContext loadContext
+        )
         {
             _metadataUnit = metadataUnit;
             _methodContext = null;
@@ -62,21 +71,30 @@ namespace Internal.Runtime.TypeLoader
         public TypeDesc GetType(Internal.Metadata.NativeFormat.Handle token)
         {
             TypeDesc type = _metadataUnit.GetType(token);
-            TypeDesc instantiatedType = type.InstantiateSignature(TypeInstantiation, MethodInstantiation);
+            TypeDesc instantiatedType = type.InstantiateSignature(
+                TypeInstantiation,
+                MethodInstantiation
+            );
             return instantiatedType;
         }
 
         public MethodDesc GetMethod(Internal.Metadata.NativeFormat.Handle token)
         {
             MethodDesc method = _metadataUnit.GetMethod(token, null);
-            MethodDesc instantiatedMethod = method.InstantiateSignature(TypeInstantiation, MethodInstantiation);
+            MethodDesc instantiatedMethod = method.InstantiateSignature(
+                TypeInstantiation,
+                MethodInstantiation
+            );
             return instantiatedMethod;
         }
 
         public FieldDesc GetField(Internal.Metadata.NativeFormat.Handle token)
         {
             FieldDesc field = _metadataUnit.GetField(token, null);
-            FieldDesc instantiatedField = field.InstantiateSignature(TypeInstantiation, MethodInstantiation);
+            FieldDesc instantiatedField = field.InstantiateSignature(
+                TypeInstantiation,
+                MethodInstantiation
+            );
             return instantiatedField;
         }
 
@@ -96,7 +114,10 @@ namespace Internal.Runtime.TypeLoader
                     Environment.FailFast("Unknown and invalid handle type");
                     break;
             }
-            return RuntimeSignature.CreateFromMethodHandle(_metadataUnit.RuntimeModule, token.ToInt());
+            return RuntimeSignature.CreateFromMethodHandle(
+                _metadataUnit.RuntimeModule,
+                token.ToInt()
+            );
         }
 
         public Instantiation TypeInstantiation

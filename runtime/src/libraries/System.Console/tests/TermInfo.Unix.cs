@@ -7,11 +7,18 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-[SkipOnPlatform(TestPlatforms.Android | TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Android, Browser, iOS, MacCatalyst, or tvOS.")]
+[SkipOnPlatform(
+    TestPlatforms.Android
+        | TestPlatforms.Browser
+        | TestPlatforms.iOS
+        | TestPlatforms.MacCatalyst
+        | TestPlatforms.tvOS,
+    "Not supported on Android, Browser, iOS, MacCatalyst, or tvOS."
+)]
 public class TermInfoTests
 {
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests TermInfo
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests TermInfo
     public void VerifyInstalledTermInfosParse()
     {
         bool foundAtLeastOne = false;
@@ -21,21 +28,35 @@ public class TermInfoTests
             if (!Directory.Exists(location))
                 continue;
 
-            foreach (string term in Directory.EnumerateFiles(location, "*", SearchOption.AllDirectories))
+            foreach (
+                string term in Directory.EnumerateFiles(location, "*", SearchOption.AllDirectories)
+            )
             {
-                if (term.ToUpper().Contains("README")) continue;
+                if (term.ToUpper().Contains("README"))
+                    continue;
                 foundAtLeastOne = true;
 
-                TerminalFormatStrings info = new(TermInfo.DatabaseFactory.ReadDatabase(Path.GetFileName(term)));
+                TerminalFormatStrings info =
+                    new(TermInfo.DatabaseFactory.ReadDatabase(Path.GetFileName(term)));
 
                 if (!string.IsNullOrEmpty(info.Foreground))
                 {
-                    Assert.NotEmpty(TermInfo.ParameterizedStrings.Evaluate(info.Foreground, 0 /* irrelevant, just an integer to put into the formatting*/));
+                    Assert.NotEmpty(
+                        TermInfo.ParameterizedStrings.Evaluate(
+                            info.Foreground,
+                            0 /* irrelevant, just an integer to put into the formatting*/
+                        )
+                    );
                 }
 
                 if (!string.IsNullOrEmpty(info.Background))
                 {
-                    Assert.NotEmpty(TermInfo.ParameterizedStrings.Evaluate(info.Background, 0 /* irrelevant, just an integer to put into the formatting*/));
+                    Assert.NotEmpty(
+                        TermInfo.ParameterizedStrings.Evaluate(
+                            info.Background,
+                            0 /* irrelevant, just an integer to put into the formatting*/
+                        )
+                    );
                 }
             }
         }
@@ -52,7 +73,7 @@ public class TermInfoTests
     }
 
     [Theory]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests TermInfo
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests TermInfo
     [InlineData("xterm-256color", "\u001B\u005B\u00330m", "\u001B\u005B\u00340m", 0)]
     [InlineData("xterm-256color", "\u001B\u005B\u00331m", "\u001B\u005B\u00341m", 1)]
     [InlineData("xterm-256color", "\u001B\u005B90m", "\u001B\u005B100m", 8)]
@@ -68,20 +89,31 @@ public class TermInfoTests
     [InlineData("mach-color", "\u001B\u005B\u00330m", "\u001B\u005B\u00340m", 0)]
     [InlineData("mach-color", "\u001B\u005B\u00335m", "\u001B\u005B\u00345m", 5)]
     [InlineData("mach-color", "\u001B\u005B\u003312m", "\u001B\u005B\u003412m", 12)]
-    public void TermInfoVerification(string termToTest, string expectedForeground, string expectedBackground, int colorValue)
+    public void TermInfoVerification(
+        string termToTest,
+        string expectedForeground,
+        string expectedBackground,
+        int colorValue
+    )
     {
         TermInfo.Database db = TermInfo.DatabaseFactory.ReadDatabase(termToTest);
         if (db != null)
         {
             TerminalFormatStrings info = new(db);
-            Assert.Equal(expectedForeground, TermInfo.ParameterizedStrings.Evaluate(info.Foreground, colorValue));
-            Assert.Equal(expectedBackground, TermInfo.ParameterizedStrings.Evaluate(info.Background, colorValue));
+            Assert.Equal(
+                expectedForeground,
+                TermInfo.ParameterizedStrings.Evaluate(info.Foreground, colorValue)
+            );
+            Assert.Equal(
+                expectedBackground,
+                TermInfo.ParameterizedStrings.Evaluate(info.Background, colorValue)
+            );
             Assert.InRange(info.MaxColors, 1, int.MaxValue);
         }
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.OSX)]  // The file being tested is available by default only on OSX
+    [PlatformSpecific(TestPlatforms.OSX)] // The file being tested is available by default only on OSX
     public void EmuTermInfoDoesntBreakParser()
     {
         // This file (available by default on OS X) is called out specifically since it contains a format where it has %i
@@ -90,7 +122,7 @@ public class TermInfoTests
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests TermInfo
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests TermInfo
     public void TryingToLoadTermThatDoesNotExistDoesNotThrow()
     {
         const string NonexistentTerm = "foobar____";

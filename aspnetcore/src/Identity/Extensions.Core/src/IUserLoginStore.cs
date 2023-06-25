@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// by Microsoft Account, Facebook etc. to a user account.
 /// </summary>
 /// <typeparam name="TUser">The type that represents a user.</typeparam>
-public interface IUserLoginStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserLoginStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Adds an external <see cref="UserLoginInfo"/> to the specified <paramref name="user"/>.
@@ -32,7 +33,12 @@ public interface IUserLoginStore<TUser> : IUserStore<TUser> where TUser : class
     /// <param name="providerKey">The key given by the external login provider for the specified user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task RemoveLoginAsync(TUser user, string loginProvider, string providerKey, CancellationToken cancellationToken);
+    Task RemoveLoginAsync(
+        TUser user,
+        string loginProvider,
+        string providerKey,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Retrieves the associated logins for the specified <param ref="user"/>.
@@ -53,5 +59,9 @@ public interface IUserLoginStore<TUser> : IUserStore<TUser> where TUser : class
     /// <returns>
     /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched the specified login provider and key.
     /// </returns>
-    Task<TUser?> FindByLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken);
+    Task<TUser?> FindByLoginAsync(
+        string loginProvider,
+        string providerKey,
+        CancellationToken cancellationToken
+    );
 }

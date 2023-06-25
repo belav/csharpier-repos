@@ -23,18 +23,13 @@ namespace POS_Server.Models
         public Nullable<long> updateUserId { get; set; }
         public int isActive { get; set; }
 
-
-      
         public string objectName { get; set; }
         public string desc { get; set; }
-      
+
         public Boolean canDelete { get; set; }
-     //   public Nullable<long> parentObjectId { get; set; }
+
+        //   public Nullable<long> parentObjectId { get; set; }
         public string objectType { get; set; }
         public string parentObjectName { get; set; }
-
-        
-
-
     }
 }

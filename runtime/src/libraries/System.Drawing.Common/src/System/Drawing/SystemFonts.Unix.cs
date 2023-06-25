@@ -31,7 +31,6 @@
 
 namespace System.Drawing
 {
-
     public static partial class SystemFonts
     {
         public static Font CaptionFont

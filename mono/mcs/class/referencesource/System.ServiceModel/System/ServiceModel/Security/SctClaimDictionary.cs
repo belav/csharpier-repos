@@ -26,7 +26,7 @@ namespace System.ServiceModel.Security
         XmlDictionaryString systemClaimSet;
         XmlDictionaryString windowsClaimSet;
         XmlDictionaryString anonymousClaimSet;
-       
+
         XmlDictionaryString binaryClaim;
         XmlDictionaryString dnsClaim;
         XmlDictionaryString hashClaim;
@@ -53,7 +53,7 @@ namespace System.ServiceModel.Security
         XmlDictionaryString id;
         XmlDictionaryString isCookieMode;
         XmlDictionaryString key;
- 
+
         XmlDictionaryString name;
         XmlDictionaryString sid;
         XmlDictionaryString nullValue;
@@ -72,7 +72,7 @@ namespace System.ServiceModel.Security
         XmlDictionaryString keyExpiryTime;
 
         XmlDictionaryString emptyString;
-        
+
         private SctClaimDictionary()
         {
             this.securityContextToken = this.Add("SecurityContextSecurityToken");

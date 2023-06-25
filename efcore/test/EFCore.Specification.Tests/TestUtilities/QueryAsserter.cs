@@ -8,14 +8,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class QueryAsserter
 {
-    private static readonly MethodInfo _assertIncludeEntity =
-        typeof(QueryAsserter).GetTypeInfo().GetDeclaredMethod(nameof(AssertIncludeEntity));
+    private static readonly MethodInfo _assertIncludeEntity = typeof(QueryAsserter)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(AssertIncludeEntity));
 
-    private static readonly MethodInfo _assertIncludeCollectionMethodInfo =
-        typeof(QueryAsserter).GetTypeInfo().GetDeclaredMethod(nameof(AssertIncludeCollection));
+    private static readonly MethodInfo _assertIncludeCollectionMethodInfo = typeof(QueryAsserter)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(AssertIncludeCollection));
 
-    private static readonly MethodInfo _filteredIncludeMethodInfo =
-        typeof(QueryAsserter).GetTypeInfo().GetDeclaredMethod(nameof(FilteredInclude));
+    private static readonly MethodInfo _filteredIncludeMethodInfo = typeof(QueryAsserter)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(FilteredInclude));
 
     private readonly Func<DbContext> _contextCreator;
     private readonly IReadOnlyDictionary<Type, object> _entitySorters;
@@ -33,7 +36,8 @@ public class QueryAsserter
         IQueryFixtureBase queryFixture,
         Func<Expression, Expression> rewriteExpectedQueryExpression,
         Func<Expression, Expression> rewriteServerQueryExpression,
-        bool ignoreEntryCount = false)
+        bool ignoreEntryCount = false
+    )
     {
         QueryFixture = queryFixture;
         _contextCreator = queryFixture.GetContextCreator();
@@ -51,12 +55,12 @@ public class QueryAsserter
 
     protected IQueryFixtureBase QueryFixture { get; }
 
-    protected virtual void AssertRogueExecution(int expectedCount, IQueryable queryable)
-    {
-    }
+    protected virtual void AssertRogueExecution(int expectedCount, IQueryable queryable) { }
 
-    protected ISetSource GetExpectedData(DbContext context, bool filteredQuery)
-        => filteredQuery ? ((IFilteredQueryFixtureBase)QueryFixture).GetFilteredExpectedData(context) : _expectedData;
+    protected ISetSource GetExpectedData(DbContext context, bool filteredQuery) =>
+        filteredQuery
+            ? ((IFilteredQueryFixtureBase)QueryFixture).GetFilteredExpectedData(context)
+            : _expectedData;
 
     public async Task AssertSingleResult<TResult>(
         Expression<Func<ISetSource, TResult>> actualSyncQuery,
@@ -65,14 +69,16 @@ public class QueryAsserter
         Action<TResult, TResult> asserter,
         int entryCount,
         bool async,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
             ? await actualAsyncQuery.Compile()(SetSourceCreator(context))
             : actualSyncQuery.Compile()(SetSourceCreator(context));
 
-        var rewrittenExpectedQueryExpression = (Expression<Func<ISetSource, TResult>>)_rewriteExpectedQueryExpression(expectedQuery);
+        var rewrittenExpectedQueryExpression =
+            (Expression<Func<ISetSource, TResult>>)_rewriteExpectedQueryExpression(expectedQuery);
         var expectedData = GetExpectedData(context, filteredQuery);
         var expected = rewrittenExpectedQueryExpression.Compile()(expectedData);
 
@@ -89,7 +95,8 @@ public class QueryAsserter
         int entryCount,
         bool async,
         string testMethodName,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var query = RewriteServerQuery(actualQuery(SetSourceCreator(context)));
@@ -102,17 +109,14 @@ public class QueryAsserter
 
         OrderingSettingsVerifier(assertOrder, query.Expression.Type, elementSorter);
 
-        var actual = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var actual = async ? await query.ToListAsync() : query.ToList();
 
         AssertRogueExecution(actual.Count, query);
 
         var expectedData = GetExpectedData(context, filteredQuery);
         var expected = RewriteExpectedQuery(expectedQuery(expectedData)).ToList();
 
-        if (!assertOrder
-            && elementSorter == null)
+        if (!assertOrder && elementSorter == null)
         {
             _entitySorters.TryGetValue(typeof(TResult), out var sorter);
             elementSorter = (Func<TResult, object>)sorter;
@@ -124,30 +128,32 @@ public class QueryAsserter
             elementAsserter = (Action<TResult, TResult>)asserter;
         }
 
-        TestHelpers.AssertResults(
-            expected,
-            actual,
-            elementSorter,
-            elementAsserter,
-            assertOrder);
+        TestHelpers.AssertResults(expected, actual, elementSorter, elementAsserter, assertOrder);
 
         AssertEntryCount(context, entryCount);
     }
 
     private void OrderingSettingsVerifier(bool assertOrder, Type type, object elementSorter)
     {
-        if (!assertOrder
+        if (
+            !assertOrder
             && type.IsGenericType
-            && (type.GetGenericTypeDefinition() == typeof(IOrderedEnumerable<>)
-                || type.GetGenericTypeDefinition() == typeof(IOrderedQueryable<>)))
+            && (
+                type.GetGenericTypeDefinition() == typeof(IOrderedEnumerable<>)
+                || type.GetGenericTypeDefinition() == typeof(IOrderedQueryable<>)
+            )
+        )
         {
             throw new InvalidOperationException(
-                "Query result is OrderedQueryable - you need to set AssertQuery option: 'assertOrder' to 'true'. If the resulting order is non-deterministic by design, add identity projection to the top of the query to disable this check.");
+                "Query result is OrderedQueryable - you need to set AssertQuery option: 'assertOrder' to 'true'. If the resulting order is non-deterministic by design, add identity projection to the top of the query to disable this check."
+            );
         }
 
         if (assertOrder && elementSorter != null)
         {
-            throw new InvalidOperationException("You shouldn't apply element sorter when 'assertOrder' is set to 'true'.");
+            throw new InvalidOperationException(
+                "You shouldn't apply element sorter when 'assertOrder' is set to 'true'."
+            );
         }
     }
 
@@ -157,7 +163,8 @@ public class QueryAsserter
         bool assertOrder,
         bool async,
         string testMethodName,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
         where TResult : struct
     {
         using var context = _contextCreator();
@@ -171,21 +178,14 @@ public class QueryAsserter
 
         OrderingSettingsVerifier(assertOrder, query.Expression.Type, elementSorter: null);
 
-        var actual = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var actual = async ? await query.ToListAsync() : query.ToList();
 
         AssertRogueExecution(actual.Count, query);
 
         var expectedData = GetExpectedData(context, filteredQuery);
         var expected = RewriteExpectedQuery(expectedQuery(expectedData)).ToList();
 
-        TestHelpers.AssertResults(
-            expected,
-            actual,
-            e => e,
-            Assert.Equal,
-            assertOrder);
+        TestHelpers.AssertResults(expected, actual, e => e, Assert.Equal, assertOrder);
     }
 
     public async Task AssertQueryScalar<TResult>(
@@ -194,7 +194,8 @@ public class QueryAsserter
         bool assertOrder,
         bool async,
         string testMethodName,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
         where TResult : struct
     {
         using var context = _contextCreator();
@@ -208,21 +209,14 @@ public class QueryAsserter
 
         OrderingSettingsVerifier(assertOrder, query.Expression.Type, elementSorter: null);
 
-        var actual = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var actual = async ? await query.ToListAsync() : query.ToList();
 
         AssertRogueExecution(actual.Count, query);
 
         var expectedData = GetExpectedData(context, filteredQuery);
         var expected = RewriteExpectedQuery(expectedQuery(expectedData)).ToList();
 
-        TestHelpers.AssertResults(
-            expected,
-            actual,
-            e => e,
-            Assert.Equal,
-            assertOrder);
+        TestHelpers.AssertResults(expected, actual, e => e, Assert.Equal, assertOrder);
     }
 
     #region Assert termination operation methods
@@ -231,7 +225,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<TResult>> actualQuery,
         Func<ISetSource, IQueryable<TResult>> expectedQuery,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -250,17 +245,22 @@ public class QueryAsserter
         Expression<Func<TResult, bool>> actualPredicate,
         Expression<Func<TResult, bool>> expectedPredicate,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AnyAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AnyAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Any(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Any(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Any(rewrittenExpectedPredicate);
 
         Assert.Equal(expected, actual);
     }
@@ -271,17 +271,22 @@ public class QueryAsserter
         Expression<Func<TResult, bool>> actualPredicate,
         Expression<Func<TResult, bool>> expectedPredicate,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AllAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AllAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).All(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).All(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .All(rewrittenExpectedPredicate);
 
         Assert.Equal(expected, actual);
     }
@@ -294,11 +299,13 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).ElementAtAsync(actualIndex())
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .ElementAtAsync(actualIndex())
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).ElementAt(actualIndex());
 
         var expectedData = GetExpectedData(context, filteredQuery);
@@ -316,15 +323,19 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).ElementAtOrDefaultAsync(actualIndex())
-            : RewriteServerQuery(actualQuery(SetSourceCreator(context))).ElementAtOrDefault(actualIndex());
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .ElementAtOrDefaultAsync(actualIndex())
+            : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .ElementAtOrDefault(actualIndex());
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).ElementAtOrDefault(expectedIndex());
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .ElementAtOrDefault(expectedIndex());
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -336,7 +347,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -358,17 +370,22 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).FirstAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .FirstAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).First(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).First(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .First(rewrittenExpectedPredicate);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -380,7 +397,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -402,17 +420,23 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).FirstOrDefaultAsync(actualPredicate)
-            : RewriteServerQuery(actualQuery(SetSourceCreator(context))).FirstOrDefault(actualPredicate);
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .FirstOrDefaultAsync(actualPredicate)
+            : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .FirstOrDefault(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).FirstOrDefault(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .FirstOrDefault(rewrittenExpectedPredicate);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -424,7 +448,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -446,17 +471,22 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SingleAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SingleAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Single(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Single(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Single(rewrittenExpectedPredicate);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -468,11 +498,13 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SingleOrDefaultAsync()
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SingleOrDefaultAsync()
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).SingleOrDefault();
 
         var expectedData = GetExpectedData(context, filteredQuery);
@@ -490,17 +522,23 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SingleOrDefaultAsync(actualPredicate)
-            : RewriteServerQuery(actualQuery(SetSourceCreator(context))).SingleOrDefault(actualPredicate);
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SingleOrDefaultAsync(actualPredicate)
+            : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SingleOrDefault(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).SingleOrDefault(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .SingleOrDefault(rewrittenExpectedPredicate);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -512,7 +550,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -534,17 +573,22 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).LastAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .LastAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Last(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Last(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Last(rewrittenExpectedPredicate);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -556,7 +600,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -578,17 +623,23 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).LastOrDefaultAsync(actualPredicate)
-            : RewriteServerQuery(actualQuery(SetSourceCreator(context))).LastOrDefault(actualPredicate);
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .LastOrDefaultAsync(actualPredicate)
+            : RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .LastOrDefault(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).LastOrDefault(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .LastOrDefault(rewrittenExpectedPredicate);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -598,7 +649,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<TResult>> actualQuery,
         Func<ISetSource, IQueryable<TResult>> expectedQuery,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -618,17 +670,22 @@ public class QueryAsserter
         Expression<Func<TResult, bool>> actualPredicate,
         Expression<Func<TResult, bool>> expectedPredicate,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).CountAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .CountAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Count(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Count(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Count(rewrittenExpectedPredicate);
 
         Assert.Equal(expected, actual);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -638,7 +695,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<TResult>> actualQuery,
         Func<ISetSource, IQueryable<TResult>> expectedQuery,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -658,17 +716,22 @@ public class QueryAsserter
         Expression<Func<TResult, bool>> actualPredicate,
         Expression<Func<TResult, bool>> expectedPredicate,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).LongCountAsync(actualPredicate)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .LongCountAsync(actualPredicate)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).LongCount(actualPredicate);
 
-        var rewrittenExpectedPredicate = (Expression<Func<TResult, bool>>)new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
+        var rewrittenExpectedPredicate =
+            (Expression<Func<TResult, bool>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedPredicate);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).LongCount(rewrittenExpectedPredicate);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .LongCount(rewrittenExpectedPredicate);
 
         Assert.Equal(expected, actual);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -680,7 +743,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -702,18 +766,22 @@ public class QueryAsserter
         Action<TSelector, TSelector> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).MinAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .MinAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Min(actualSelector);
 
         var rewrittenExpectedSelector =
-            (Expression<Func<TResult, TSelector>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+            (Expression<Func<TResult, TSelector>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Min(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Min(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -725,7 +793,8 @@ public class QueryAsserter
         Action<TResult, TResult> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -747,18 +816,22 @@ public class QueryAsserter
         Action<TSelector, TSelector> asserter = null,
         int entryCount = 0,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).MaxAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .MaxAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Max(actualSelector);
 
         var rewrittenExpectedSelector =
-            (Expression<Func<TResult, TSelector>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+            (Expression<Func<TResult, TSelector>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Max(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Max(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         AssertEntryCount(context, entryCount);
@@ -769,7 +842,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<int>> expectedQuery,
         Action<int, int> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -788,7 +862,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<int?>> expectedQuery,
         Action<int?, int?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -807,7 +882,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<long>> expectedQuery,
         Action<long, long> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -826,7 +902,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<long?>> expectedQuery,
         Action<long?, long?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -845,7 +922,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<decimal>> expectedQuery,
         Action<decimal, decimal> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -864,7 +942,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<decimal?>> expectedQuery,
         Action<decimal?, decimal?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -883,7 +962,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<float>> expectedQuery,
         Action<float, float> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -902,7 +982,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<float?>> expectedQuery,
         Action<float?, float?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -921,7 +1002,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<double>> expectedQuery,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -940,7 +1022,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<double?>> expectedQuery,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -961,17 +1044,22 @@ public class QueryAsserter
         Expression<Func<TResult, int>> expectedSelector,
         Action<int, int> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, int>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, int>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -984,17 +1072,22 @@ public class QueryAsserter
         Expression<Func<TResult, int?>> expectedSelector,
         Action<int?, int?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, int?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, int?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1007,17 +1100,22 @@ public class QueryAsserter
         Expression<Func<TResult, long>> expectedSelector,
         Action<long, long> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, long>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, long>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1030,17 +1128,22 @@ public class QueryAsserter
         Expression<Func<TResult, long?>> expectedSelector,
         Action<long?, long?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, long?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, long?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1053,17 +1156,22 @@ public class QueryAsserter
         Expression<Func<TResult, decimal>> expectedSelector,
         Action<decimal, decimal> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, decimal>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, decimal>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1076,18 +1184,22 @@ public class QueryAsserter
         Expression<Func<TResult, decimal?>> expectedSelector,
         Action<decimal?, decimal?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
         var rewrittenExpectedSelector =
-            (Expression<Func<TResult, decimal?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+            (Expression<Func<TResult, decimal?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1100,17 +1212,22 @@ public class QueryAsserter
         Expression<Func<TResult, float>> expectedSelector,
         Action<float, float> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, float>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, float>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1123,17 +1240,22 @@ public class QueryAsserter
         Expression<Func<TResult, float?>> expectedSelector,
         Action<float?, float?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, float?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, float?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1146,17 +1268,22 @@ public class QueryAsserter
         Expression<Func<TResult, double>> expectedSelector,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, double>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, double>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1169,17 +1296,22 @@ public class QueryAsserter
         Expression<Func<TResult, double?>> expectedSelector,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).SumAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .SumAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Sum(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, double?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, double?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Sum(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Sum(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1190,7 +1322,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<int>> expectedQuery,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1209,7 +1342,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<int?>> expectedQuery,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1228,7 +1362,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<long>> expectedQuery,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1247,7 +1382,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<long?>> expectedQuery,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1266,7 +1402,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<decimal>> expectedQuery,
         Action<decimal, decimal> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1285,7 +1422,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<decimal?>> expectedQuery,
         Action<decimal?, decimal?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1304,7 +1442,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<float>> expectedQuery,
         Action<float, float> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1323,7 +1462,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<float?>> expectedQuery,
         Action<float?, float?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1342,7 +1482,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<double>> expectedQuery,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1361,7 +1502,8 @@ public class QueryAsserter
         Func<ISetSource, IQueryable<double?>> expectedQuery,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
@@ -1382,17 +1524,22 @@ public class QueryAsserter
         Expression<Func<TResult, int>> expectedSelector,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, int>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, int>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1405,17 +1552,22 @@ public class QueryAsserter
         Expression<Func<TResult, int?>> expectedSelector,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, int?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, int?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1428,17 +1580,22 @@ public class QueryAsserter
         Expression<Func<TResult, long>> expectedSelector,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, long>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, long>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1451,17 +1608,22 @@ public class QueryAsserter
         Expression<Func<TResult, long?>> expectedSelector,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, long?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, long?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1474,17 +1636,22 @@ public class QueryAsserter
         Expression<Func<TResult, decimal>> expectedSelector,
         Action<decimal, decimal> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, decimal>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, decimal>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1497,18 +1664,22 @@ public class QueryAsserter
         Expression<Func<TResult, decimal?>> expectedSelector,
         Action<decimal?, decimal?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
         var rewrittenExpectedSelector =
-            (Expression<Func<TResult, decimal?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+            (Expression<Func<TResult, decimal?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1521,17 +1692,22 @@ public class QueryAsserter
         Expression<Func<TResult, float>> expectedSelector,
         Action<float, float> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, float>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, float>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1544,17 +1720,22 @@ public class QueryAsserter
         Expression<Func<TResult, float?>> expectedSelector,
         Action<float?, float?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, float?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, float?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1567,17 +1748,22 @@ public class QueryAsserter
         Expression<Func<TResult, double>> expectedSelector,
         Action<double, double> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, double>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, double>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1590,17 +1776,22 @@ public class QueryAsserter
         Expression<Func<TResult, double?>> expectedSelector,
         Action<double?, double?> asserter = null,
         bool async = false,
-        bool filteredQuery = false)
+        bool filteredQuery = false
+    )
     {
         using var context = _contextCreator();
         var actual = async
-            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context))).AverageAsync(actualSelector)
+            ? await RewriteServerQuery(actualQuery(SetSourceCreator(context)))
+                .AverageAsync(actualSelector)
             : RewriteServerQuery(actualQuery(SetSourceCreator(context))).Average(actualSelector);
 
-        var rewrittenExpectedSelector = (Expression<Func<TResult, double?>>)new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
+        var rewrittenExpectedSelector =
+            (Expression<Func<TResult, double?>>)
+                new ExpectedQueryRewritingVisitor().Visit(expectedSelector);
 
         var expectedData = GetExpectedData(context, filteredQuery);
-        var expected = RewriteExpectedQuery(expectedQuery(expectedData)).Average(rewrittenExpectedSelector);
+        var expected = RewriteExpectedQuery(expectedQuery(expectedData))
+            .Average(rewrittenExpectedSelector);
 
         AssertEqual(expected, actual, asserter);
         Assert.Empty(context.ChangeTracker.Entries());
@@ -1612,8 +1803,7 @@ public class QueryAsserter
 
     public void AssertEqual<T>(T expected, T actual, Action<T, T> asserter = null)
     {
-        if (asserter == null
-            && expected != null)
+        if (asserter == null && expected != null)
         {
             _entityAsserters.TryGetValue(typeof(T), out var entityAsserter);
             asserter ??= (Action<T, T>)entityAsserter;
@@ -1636,10 +1826,10 @@ public class QueryAsserter
         IEnumerable<TElement> actual,
         bool ordered = false,
         Func<TElement, object> elementSorter = null,
-        Action<TElement, TElement> elementAsserter = null)
+        Action<TElement, TElement> elementAsserter = null
+    )
     {
-        if (expected == null
-            && actual == null)
+        if (expected == null && actual == null)
         {
             return;
         }
@@ -1647,7 +1837,8 @@ public class QueryAsserter
         if (expected == null != (actual == null))
         {
             throw new InvalidOperationException(
-                $"Nullability doesn't match. Expected: {(expected == null ? "NULL" : "NOT NULL")}. Actual: {(actual == null ? "NULL." : "NOT NULL.")}.");
+                $"Nullability doesn't match. Expected: {(expected == null ? "NULL" : "NOT NULL")}. Actual: {(actual == null ? "NULL." : "NOT NULL.")}."
+            );
         }
 
         _entitySorters.TryGetValue(typeof(TElement), out var sorter);
@@ -1694,17 +1885,25 @@ public class QueryAsserter
         }
     }
 
-    public void AssertInclude<TEntity>(TEntity expected, TEntity actual, IExpectedInclude[] expectedIncludes)
+    public void AssertInclude<TEntity>(
+        TEntity expected,
+        TEntity actual,
+        IExpectedInclude[] expectedIncludes
+    )
     {
         _includePath.Clear();
 
         AssertIncludeObject(expected, actual, expectedIncludes, assertOrder: false);
     }
 
-    private void AssertIncludeObject(object expected, object actual, IEnumerable<IExpectedInclude> expectedIncludes, bool assertOrder)
+    private void AssertIncludeObject(
+        object expected,
+        object actual,
+        IEnumerable<IExpectedInclude> expectedIncludes,
+        bool assertOrder
+    )
     {
-        if (expected == null
-            && actual == null)
+        if (expected == null && actual == null)
         {
             return;
         }
@@ -1712,20 +1911,34 @@ public class QueryAsserter
         Assert.Equal(expected == null, actual == null);
 
         var expectedType = expected.GetType();
-        if (expectedType.IsGenericType
-            && expectedType.GetTypeInfo().ImplementedInterfaces.Any(
-                i => i.IsConstructedGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
+        if (
+            expectedType.IsGenericType
+            && expectedType
+                .GetTypeInfo()
+                .ImplementedInterfaces.Any(
+                    i =>
+                        i.IsConstructedGenericType
+                        && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                )
+        )
         {
-            _assertIncludeCollectionMethodInfo.MakeGenericMethod(expectedType.GenericTypeArguments[0])
+            _assertIncludeCollectionMethodInfo
+                .MakeGenericMethod(expectedType.GenericTypeArguments[0])
                 .Invoke(this, new[] { expected, actual, expectedIncludes, assertOrder });
         }
         else
         {
-            _assertIncludeEntity.MakeGenericMethod(expectedType).Invoke(this, new[] { expected, actual, expectedIncludes });
+            _assertIncludeEntity
+                .MakeGenericMethod(expectedType)
+                .Invoke(this, new[] { expected, actual, expectedIncludes });
         }
     }
 
-    private void AssertIncludeEntity<TElement>(TElement expected, TElement actual, IEnumerable<IExpectedInclude> expectedIncludes)
+    private void AssertIncludeEntity<TElement>(
+        TElement expected,
+        TElement actual,
+        IEnumerable<IExpectedInclude> expectedIncludes
+    )
     {
         Assert.Equal(expected.GetType(), actual.GetType());
 
@@ -1736,7 +1949,9 @@ public class QueryAsserter
         }
         else
         {
-            throw new InvalidOperationException($"Couldn't find entity asserter for entity type: '{typeof(TElement).Name}'.");
+            throw new InvalidOperationException(
+                $"Couldn't find entity asserter for entity type: '{typeof(TElement).Name}'."
+            );
         }
     }
 
@@ -1744,7 +1959,8 @@ public class QueryAsserter
         IEnumerable<TElement> expected,
         IEnumerable<TElement> actual,
         IEnumerable<IExpectedInclude> expectedIncludes,
-        bool assertOrder)
+        bool assertOrder
+    )
     {
         var expectedList = expected.ToList();
         var actualList = actual.ToList();
@@ -1761,40 +1977,60 @@ public class QueryAsserter
         for (var i = 0; i < expectedList.Count; i++)
         {
             var elementType = expectedList[i].GetType();
-            _assertIncludeEntity.MakeGenericMethod(elementType)
+            _assertIncludeEntity
+                .MakeGenericMethod(elementType)
                 .Invoke(this, new object[] { expectedList[i], actualList[i], expectedIncludes });
         }
     }
 
-    private void ProcessIncludes<TEntity>(TEntity expected, TEntity actual, IEnumerable<IExpectedInclude> expectedIncludes)
+    private void ProcessIncludes<TEntity>(
+        TEntity expected,
+        TEntity actual,
+        IEnumerable<IExpectedInclude> expectedIncludes
+    )
     {
         var currentPath = string.Join(".", _includePath);
 
-        foreach (var expectedInclude in expectedIncludes.OfType<ExpectedInclude<TEntity>>().Where(i => i.NavigationPath == currentPath))
+        foreach (
+            var expectedInclude in expectedIncludes
+                .OfType<ExpectedInclude<TEntity>>()
+                .Where(i => i.NavigationPath == currentPath)
+        )
         {
             var expectedIncludedNavigation = GetIncluded(expected, expectedInclude.IncludeMember);
             var assertOrder = false;
             if (expectedInclude.GetType().BaseType != typeof(object))
             {
                 var includedType = expectedInclude.GetType().GetGenericArguments()[1];
-                var filterTypedMethod = _filteredIncludeMethodInfo.MakeGenericMethod(typeof(TEntity), includedType);
+                var filterTypedMethod = _filteredIncludeMethodInfo.MakeGenericMethod(
+                    typeof(TEntity),
+                    includedType
+                );
                 expectedIncludedNavigation = filterTypedMethod.Invoke(
                     this,
                     BindingFlags.NonPublic,
                     null,
                     new[] { expectedIncludedNavigation, expectedInclude },
-                    CultureInfo.CurrentCulture);
+                    CultureInfo.CurrentCulture
+                );
 
-                assertOrder = (bool)expectedInclude.GetType()
-                    .GetProperty(nameof(ExpectedFilteredInclude<object, object>.AssertOrder))
-                    .GetValue(expectedInclude);
+                assertOrder = (bool)
+                    expectedInclude
+                        .GetType()
+                        .GetProperty(nameof(ExpectedFilteredInclude<object, object>.AssertOrder))
+                        .GetValue(expectedInclude);
             }
 
             var actualIncludedNavigation = GetIncluded(actual, expectedInclude.IncludeMember);
 
             _includePath.Add(expectedInclude.IncludeMember.Name);
 
-            AssertIncludeObject(expectedIncludedNavigation, actualIncludedNavigation, expectedIncludes, assertOrder);
+            AssertIncludeObject(
+                expectedIncludedNavigation,
+                actualIncludedNavigation,
+                expectedIncludes,
+                assertOrder
+            );
 
             _includePath.RemoveAt(_includePath.Count - 1);
         }
@@ -1802,11 +2038,11 @@ public class QueryAsserter
 
     private IEnumerable<TIncluded> FilteredInclude<TEntity, TIncluded>(
         IEnumerable<TIncluded> expected,
-        ExpectedFilteredInclude<TEntity, TIncluded> expectedFilteredInclude)
-        => expectedFilteredInclude.IncludeFilter(expected);
+        ExpectedFilteredInclude<TEntity, TIncluded> expectedFilteredInclude
+    ) => expectedFilteredInclude.IncludeFilter(expected);
 
-    private object GetIncluded<TEntity>(TEntity entity, MemberInfo includeMember)
-        => includeMember switch
+    private object GetIncluded<TEntity>(TEntity entity, MemberInfo includeMember) =>
+        includeMember switch
         {
             FieldInfo fieldInfo => fieldInfo.GetValue(entity),
             PropertyInfo propertyInfo => propertyInfo.GetValue(entity),
@@ -1821,11 +2057,11 @@ public class QueryAsserter
         }
     }
 
-    private IQueryable<T> RewriteServerQuery<T>(IQueryable<T> query)
-        => query.Provider.CreateQuery<T>(_rewriteServerQueryExpression(query.Expression));
+    private IQueryable<T> RewriteServerQuery<T>(IQueryable<T> query) =>
+        query.Provider.CreateQuery<T>(_rewriteServerQueryExpression(query.Expression));
 
-    private IQueryable<T> RewriteExpectedQuery<T>(IQueryable<T> query)
-        => query.Provider.CreateQuery<T>(_rewriteExpectedQueryExpression(query.Expression));
+    private IQueryable<T> RewriteExpectedQuery<T>(IQueryable<T> query) =>
+        query.Provider.CreateQuery<T>(_rewriteExpectedQueryExpression(query.Expression));
 
     #endregion
 }

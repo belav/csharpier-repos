@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,10 +24,13 @@ namespace Castle.DynamicProxy.Generators
 
     internal sealed class ClassProxyGenerator : BaseClassProxyGenerator
     {
-        public ClassProxyGenerator(ModuleScope scope, Type targetType, Type[] interfaces, ProxyGenerationOptions options)
-            : base(scope, targetType, interfaces, options)
-        {
-        }
+        public ClassProxyGenerator(
+            ModuleScope scope,
+            Type targetType,
+            Type[] interfaces,
+            ProxyGenerationOptions options
+        )
+            : base(scope, targetType, interfaces, options) { }
 
         protected override FieldReference TargetField => null;
 
@@ -39,11 +42,17 @@ namespace Castle.DynamicProxy.Generators
 #if FEATURE_SERIALIZATION
         protected override SerializableContributor GetSerializableContributor()
         {
-            return new ClassProxySerializableContributor(targetType, interfaces, ProxyTypeConstants.Class);
+            return new ClassProxySerializableContributor(
+                targetType,
+                interfaces,
+                ProxyTypeConstants.Class
+            );
         }
 #endif
 
-        protected override CompositeTypeContributor GetProxyTargetContributor(INamingScope namingScope)
+        protected override CompositeTypeContributor GetProxyTargetContributor(
+            INamingScope namingScope
+        )
         {
             return new ClassProxyTargetContributor(targetType, namingScope) { Logger = Logger };
         }
@@ -52,7 +61,8 @@ namespace Castle.DynamicProxy.Generators
         {
             return new ProxyTargetAccessorContributor(
                 getTargetReference: () => SelfReference.Self,
-                targetType);
+                targetType
+            );
         }
     }
 }

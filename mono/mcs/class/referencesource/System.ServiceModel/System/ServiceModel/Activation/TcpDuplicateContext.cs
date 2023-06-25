@@ -25,10 +25,7 @@ namespace System.ServiceModel.Activation
 
         public SocketInformation SocketInformation
         {
-            get
-            {
-                return this.socketInformation;
-            }
+            get { return this.socketInformation; }
         }
     }
 }

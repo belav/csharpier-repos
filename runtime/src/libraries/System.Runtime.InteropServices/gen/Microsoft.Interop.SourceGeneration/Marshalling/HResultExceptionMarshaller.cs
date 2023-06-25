@@ -14,7 +14,9 @@ namespace Microsoft.Interop
 {
     public sealed class HResultExceptionMarshaller : IMarshallingGenerator
     {
-        private static readonly TypeSyntax s_nativeType = PredefinedType(Token(SyntaxKind.IntKeyword));
+        private static readonly TypeSyntax s_nativeType = PredefinedType(
+            Token(SyntaxKind.IntKeyword)
+        );
 
         public bool IsSupported(TargetFramework target, Version version) => true;
 
@@ -25,8 +27,11 @@ namespace Microsoft.Interop
         }
 
         // Should only be used for return value
-        public ParameterSyntax AsParameter(TypePositionInfo info) => throw new InvalidOperationException();
-        public ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context) => throw new InvalidOperationException();
+        public ParameterSyntax AsParameter(TypePositionInfo info) =>
+            throw new InvalidOperationException();
+
+        public ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context) =>
+            throw new InvalidOperationException();
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
         {
@@ -40,14 +45,20 @@ namespace Microsoft.Interop
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         MarshallerHelpers.InteropServicesMarshalType,
-                        IdentifierName(nameof(System.Runtime.InteropServices.Marshal.ThrowExceptionForHR))),
-                    ArgumentList(SingletonSeparatedList(
-                        Argument(IdentifierName(identifier))))));
+                        IdentifierName(
+                            nameof(System.Runtime.InteropServices.Marshal.ThrowExceptionForHR)
+                        )
+                    ),
+                    ArgumentList(SingletonSeparatedList(Argument(IdentifierName(identifier))))
+                )
+            );
         }
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => false;
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
     }
-
 }

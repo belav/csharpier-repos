@@ -17,7 +17,10 @@ namespace Microsoft.Extensions.Logging.TraceSource
         private readonly SourceSwitch _rootSourceSwitch;
         private readonly TraceListener? _rootTraceListener;
 
-        private readonly ConcurrentDictionary<string, DiagnosticsTraceSource> _sources = new ConcurrentDictionary<string, DiagnosticsTraceSource>(StringComparer.OrdinalIgnoreCase);
+        private readonly ConcurrentDictionary<string, DiagnosticsTraceSource> _sources =
+            new ConcurrentDictionary<string, DiagnosticsTraceSource>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
         private bool _disposed;
 
@@ -26,16 +29,17 @@ namespace Microsoft.Extensions.Logging.TraceSource
         /// </summary>
         /// <param name="rootSourceSwitch">The <see cref="SourceSwitch"/> to use.</param>
         public TraceSourceLoggerProvider(SourceSwitch rootSourceSwitch)
-            : this(rootSourceSwitch, null)
-        {
-        }
+            : this(rootSourceSwitch, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TraceSourceLoggerProvider"/> class.
         /// </summary>
         /// <param name="rootSourceSwitch">The <see cref="SourceSwitch"/> to use.</param>
         /// <param name="rootTraceListener">The <see cref="TraceListener"/> to use.</param>
-        public TraceSourceLoggerProvider(SourceSwitch rootSourceSwitch, TraceListener? rootTraceListener)
+        public TraceSourceLoggerProvider(
+            SourceSwitch rootSourceSwitch,
+            TraceListener? rootTraceListener
+        )
         {
             ThrowHelper.ThrowIfNull(rootSourceSwitch);
 
@@ -54,8 +58,9 @@ namespace Microsoft.Extensions.Logging.TraceSource
         }
 
         private DiagnosticsTraceSource GetOrAddTraceSource(string name) =>
-            _sources.TryGetValue(name, out DiagnosticsTraceSource? source) ? source :
-            _sources.GetOrAdd(name, InitializeTraceSource(name));
+            _sources.TryGetValue(name, out DiagnosticsTraceSource? source)
+                ? source
+                : _sources.GetOrAdd(name, InitializeTraceSource(name));
 
         private DiagnosticsTraceSource InitializeTraceSource(string traceSourceName)
         {
@@ -78,14 +83,18 @@ namespace Microsoft.Extensions.Logging.TraceSource
             {
                 if (HasDefaultListeners(traceSource))
                 {
-                    DiagnosticsTraceSource parentTraceSource = GetOrAddTraceSource(parentSourceName);
+                    DiagnosticsTraceSource parentTraceSource = GetOrAddTraceSource(
+                        parentSourceName
+                    );
                     traceSource.Listeners.Clear();
                     traceSource.Listeners.AddRange(parentTraceSource.Listeners);
                 }
 
                 if (HasDefaultSwitch(traceSource))
                 {
-                    DiagnosticsTraceSource parentTraceSource = GetOrAddTraceSource(parentSourceName);
+                    DiagnosticsTraceSource parentTraceSource = GetOrAddTraceSource(
+                        parentSourceName
+                    );
                     traceSource.Switch = parentTraceSource.Switch;
                 }
             }
@@ -101,13 +110,15 @@ namespace Microsoft.Extensions.Logging.TraceSource
 
         private static bool HasDefaultListeners(DiagnosticsTraceSource traceSource)
         {
-            return traceSource.Listeners.Count == 1 && traceSource.Listeners[0] is DefaultTraceListener;
+            return traceSource.Listeners.Count == 1
+                && traceSource.Listeners[0] is DefaultTraceListener;
         }
 
         private static bool HasDefaultSwitch(DiagnosticsTraceSource traceSource)
         {
-            return string.IsNullOrEmpty(traceSource.Switch.DisplayName) == string.IsNullOrEmpty(traceSource.Name) &&
-                traceSource.Switch.Level == SourceLevels.Off;
+            return string.IsNullOrEmpty(traceSource.Switch.DisplayName)
+                    == string.IsNullOrEmpty(traceSource.Name)
+                && traceSource.Switch.Level == SourceLevels.Off;
         }
 
         /// <inheritdoc />

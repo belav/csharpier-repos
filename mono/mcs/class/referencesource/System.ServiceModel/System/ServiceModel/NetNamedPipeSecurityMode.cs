@@ -13,11 +13,8 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(NetNamedPipeSecurityMode value)
         {
-            return
-                value == NetNamedPipeSecurityMode.Transport ||
-                value == NetNamedPipeSecurityMode.None;
+            return value == NetNamedPipeSecurityMode.Transport
+                || value == NetNamedPipeSecurityMode.None;
         }
     }
 }
-
-

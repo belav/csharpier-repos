@@ -33,11 +33,17 @@ namespace System.DirectoryServices.ActiveDirectory
             get => _status;
             set
             {
-                if (value != TopLevelNameStatus.Enabled &&
-                    value != TopLevelNameStatus.NewlyCreated &&
-                    value != TopLevelNameStatus.AdminDisabled &&
-                    value != TopLevelNameStatus.ConflictDisabled)
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(TopLevelNameStatus));
+                if (
+                    value != TopLevelNameStatus.Enabled
+                    && value != TopLevelNameStatus.NewlyCreated
+                    && value != TopLevelNameStatus.AdminDisabled
+                    && value != TopLevelNameStatus.ConflictDisabled
+                )
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(TopLevelNameStatus)
+                    );
 
                 _status = value;
             }

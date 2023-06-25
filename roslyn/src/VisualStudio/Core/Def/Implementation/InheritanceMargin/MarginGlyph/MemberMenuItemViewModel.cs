@@ -36,25 +36,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             string displayContent,
             ImageMoniker imageMoniker,
             string automationName,
-            ImmutableArray<MenuItemViewModel> targets) : base(displayContent, imageMoniker, automationName)
+            ImmutableArray<MenuItemViewModel> targets
+        )
+            : base(displayContent, imageMoniker, automationName)
         {
             Targets = targets;
         }
 
-        public static MemberMenuItemViewModel CreateWithHeaderInTargets(InheritanceMarginItem member)
+        public static MemberMenuItemViewModel CreateWithHeaderInTargets(
+            InheritanceMarginItem member
+        )
         {
             var displayName = member.DisplayTexts.JoinText();
             var targetsByRelationship = member.TargetItems
                 .OrderBy(item => item.DisplayName)
                 .GroupBy(target => target.RelationToMember)
-                .SelectMany(grouping => InheritanceMarginHelpers.CreateMenuItemsWithHeader(grouping.Key, grouping))
+                .SelectMany(
+                    grouping =>
+                        InheritanceMarginHelpers.CreateMenuItemsWithHeader(grouping.Key, grouping)
+                )
                 .ToImmutableArray();
 
             return new MemberMenuItemViewModel(
                 displayName,
                 member.Glyph.GetImageMoniker(),
                 displayName,
-                targetsByRelationship);
+                targetsByRelationship
+            );
         }
     }
 }

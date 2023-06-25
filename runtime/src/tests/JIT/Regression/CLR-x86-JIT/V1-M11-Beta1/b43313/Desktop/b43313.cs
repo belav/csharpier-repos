@@ -5,9 +5,7 @@ namespace Test
 {
     using System;
 
-    class OtherException : Exception
-    {
-    }
+    class OtherException : Exception { }
 
     public struct AA
     {
@@ -47,6 +45,7 @@ namespace Test
             }
             catch (OtherException) { }
         }
+
         public static int Main()
         {
             try

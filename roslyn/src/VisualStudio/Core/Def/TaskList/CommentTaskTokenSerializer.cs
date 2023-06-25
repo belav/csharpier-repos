@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
         public CommentTaskTokenSerializer(
             IGlobalOptionService globalOptionService,
-            ITaskList? taskList)
+            ITaskList? taskList
+        )
         {
             _globalOptionService = globalOptionService;
 
@@ -73,7 +74,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             _lastCommentTokenCache = commentString;
 
             // let people to know that comment string has changed
-            _globalOptionService.RefreshOption(new OptionKey(TodoCommentOptionsStorage.TokenList), _lastCommentTokenCache);
+            _globalOptionService.RefreshOption(
+                new OptionKey(TodoCommentOptionsStorage.TokenList),
+                _lastCommentTokenCache
+            );
         }
 
         private static string GetTaskTokenList(ITaskList? taskList)

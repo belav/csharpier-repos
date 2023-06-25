@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-internal partial class Http1Connection : IHttpMinRequestBodyDataRateFeature,
-                                         IHttpMinResponseDataRateFeature,
-                                         IPersistentStateFeature
+internal partial class Http1Connection
+    : IHttpMinRequestBodyDataRateFeature,
+        IHttpMinResponseDataRateFeature,
+        IPersistentStateFeature
 {
     // Persistent state collection is not reset with a request by design.
     // If SocketsConections are pooled in the future this state could be moved

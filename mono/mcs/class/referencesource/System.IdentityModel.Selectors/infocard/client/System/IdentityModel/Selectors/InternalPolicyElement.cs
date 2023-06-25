@@ -26,8 +26,6 @@ namespace System.IdentityModel.Selectors
 
         IntPtr m_nativePtr;
 
-
-
         //
         // Parameters:
         //  target     - The target of the token being described.
@@ -46,10 +44,7 @@ namespace System.IdentityModel.Selectors
 
         public static int Size
         {
-            get
-            {
-                return Marshal.SizeOf(typeof(NativePolicyElement));
-            }
+            get { return Marshal.SizeOf(typeof(NativePolicyElement)); }
         }
 
         //
@@ -81,7 +76,8 @@ namespace System.IdentityModel.Selectors
             m_nativeElement.targetEndpointAddress = target;
             m_nativeElement.issuerEndpointAddress = issuer;
             m_nativeElement.issuedTokenParameters = tokenParameters;
-            m_nativeElement.policyNoticeLink = null != m_element.PolicyNoticeLink ? m_element.PolicyNoticeLink.ToString() : null;
+            m_nativeElement.policyNoticeLink =
+                null != m_element.PolicyNoticeLink ? m_element.PolicyNoticeLink.ToString() : null;
             m_nativeElement.policyNoticeVersion = m_element.PolicyNoticeVersion;
             m_nativeElement.isManagedCardProvider = m_element.IsManagedIssuer;
 
@@ -102,7 +98,6 @@ namespace System.IdentityModel.Selectors
 
         private void Dispose(bool disposing)
         {
-
             if (IntPtr.Zero != m_nativePtr)
             {
                 Marshal.DestroyStructure(m_nativePtr, typeof(NativePolicyElement));
@@ -112,7 +107,6 @@ namespace System.IdentityModel.Selectors
             {
                 GC.SuppressFinalize(this);
             }
-
         }
     }
 }

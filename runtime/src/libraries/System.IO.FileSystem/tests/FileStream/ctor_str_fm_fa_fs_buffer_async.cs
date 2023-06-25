@@ -7,12 +7,25 @@ namespace System.IO.Tests
 {
     public class FileStream_ctor_str_fm_fa_fs_buffer_async : FileStream_ctor_str_fm_fa_fs_buffer
     {
-        protected sealed override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize)
+        protected sealed override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize
+        )
         {
             return CreateFileStream(path, mode, access, share, bufferSize, false);
         }
 
-        protected virtual FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, bool useAsync)
+        protected virtual FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            bool useAsync
+        )
         {
             return new FileStream(path, mode, access, share, bufferSize, useAsync);
         }
@@ -22,7 +35,16 @@ namespace System.IO.Tests
         [InlineData(false)]
         public void ValidUseAsync(bool isAsync)
         {
-            using (FileStream fs = CreateFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, c_DefaultBufferSize, isAsync))
+            using (
+                FileStream fs = CreateFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    c_DefaultBufferSize,
+                    isAsync
+                )
+            )
             {
                 Assert.Equal(isAsync, fs.IsAsync);
             }

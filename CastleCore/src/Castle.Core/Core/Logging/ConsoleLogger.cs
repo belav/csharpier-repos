@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,36 +32,32 @@ namespace Castle.Core.Logging
         ///   set to <c>LoggerLevel.Debug</c> and the <c>Name</c>
         ///   set to <c>string.Empty</c>.
         /// </summary>
-        public ConsoleLogger() : this(string.Empty, LoggerLevel.Debug)
-        {
-        }
+        public ConsoleLogger()
+            : this(string.Empty, LoggerLevel.Debug) { }
 
         /// <summary>
         ///   Creates a new ConsoleLogger with the <c>Name</c>
         ///   set to <c>string.Empty</c>.
         /// </summary>
         /// <param name = "logLevel">The logs Level.</param>
-        public ConsoleLogger(LoggerLevel logLevel) : this(string.Empty, logLevel)
-        {
-        }
+        public ConsoleLogger(LoggerLevel logLevel)
+            : this(string.Empty, logLevel) { }
 
         /// <summary>
         ///   Creates a new ConsoleLogger with the <c>Level</c>
         ///   set to <c>LoggerLevel.Debug</c>.
         /// </summary>
         /// <param name = "name">The logs Name.</param>
-        public ConsoleLogger(string name) : this(name, LoggerLevel.Debug)
-        {
-        }
+        public ConsoleLogger(string name)
+            : this(name, LoggerLevel.Debug) { }
 
         /// <summary>
         ///   Creates a new ConsoleLogger.
         /// </summary>
         /// <param name = "name">The logs Name.</param>
         /// <param name = "logLevel">The logs Level.</param>
-        public ConsoleLogger(string name, LoggerLevel logLevel) : base(name, logLevel)
-        {
-        }
+        public ConsoleLogger(string name, LoggerLevel logLevel)
+            : base(name, logLevel) { }
 
         /// <summary>
         ///   A Common method to log.
@@ -70,14 +66,25 @@ namespace Castle.Core.Logging
         /// <param name = "loggerName">The name of the logger</param>
         /// <param name = "message">The Message</param>
         /// <param name = "exception">The Exception</param>
-        protected override void Log(LoggerLevel loggerLevel, string loggerName, string message, Exception exception)
+        protected override void Log(
+            LoggerLevel loggerLevel,
+            string loggerName,
+            string message,
+            Exception exception
+        )
         {
             Console.Out.WriteLine("[{0}] '{1}' {2}", loggerLevel, loggerName, message);
 
             if (exception != null)
             {
-                Console.Out.WriteLine("[{0}] '{1}' {2}: {3} {4}", loggerLevel, loggerName, exception.GetType().FullName,
-                                      exception.Message, exception.StackTrace);
+                Console.Out.WriteLine(
+                    "[{0}] '{1}' {2}: {3} {4}",
+                    loggerLevel,
+                    loggerName,
+                    exception.GetType().FullName,
+                    exception.Message,
+                    exception.StackTrace
+                );
             }
         }
 
@@ -91,10 +98,16 @@ namespace Castle.Core.Logging
         {
             if (loggerName == null)
             {
-                throw new ArgumentNullException(nameof(loggerName), "To create a child logger you must supply a non null name");
+                throw new ArgumentNullException(
+                    nameof(loggerName),
+                    "To create a child logger you must supply a non null name"
+                );
             }
 
-            return new ConsoleLogger(string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Name, loggerName), Level);
+            return new ConsoleLogger(
+                string.Format(CultureInfo.CurrentCulture, "{0}.{1}", Name, loggerName),
+                Level
+            );
         }
     }
 }

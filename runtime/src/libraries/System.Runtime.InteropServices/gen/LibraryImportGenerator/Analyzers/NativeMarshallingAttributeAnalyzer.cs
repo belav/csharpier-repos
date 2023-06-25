@@ -23,11 +23,20 @@ namespace Microsoft.Interop.Analyzers
             new DiagnosticDescriptor(
                 Ids.InvalidNativeMarshallingAttributeUsage,
                 GetResourceString(nameof(SR.InvalidNativeMarshallingAttributeUsageTitle)),
-                GetResourceString(nameof(SR.EntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeMessage)),
+                GetResourceString(
+                    nameof(
+                        SR.EntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeMessage
+                    )
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.EntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeDescription)));
+                description: GetResourceString(
+                    nameof(
+                        SR.EntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeDescription
+                    )
+                )
+            );
 
         public static readonly DiagnosticDescriptor MarshallerEntryPointTypeMustBeNonNullRule =
             new DiagnosticDescriptor(
@@ -37,23 +46,30 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.EntryPointTypeMustBeNonNullDescription)));
+                description: GetResourceString(nameof(SR.EntryPointTypeMustBeNonNullDescription))
+            );
 
         public static readonly DiagnosticDescriptor GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule =
             new DiagnosticDescriptor(
                 Ids.InvalidNativeMarshallingAttributeUsage,
                 GetResourceString(nameof(SR.InvalidNativeMarshallingAttributeUsageTitle)),
-                GetResourceString(nameof(SR.GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityMessage)),
+                GetResourceString(
+                    nameof(SR.GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityMessage)
+                ),
                 Category,
                 DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
-                description: GetResourceString(nameof(SR.GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityDescription)));
+                description: GetResourceString(
+                    nameof(SR.GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityDescription)
+                )
+            );
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(
                 MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule,
                 MarshallerEntryPointTypeMustBeNonNullRule,
-                GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule);
+                GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule
+            );
 
         public override void Initialize(AnalysisContext context)
         {
@@ -69,7 +85,10 @@ namespace Microsoft.Interop.Analyzers
 
             // TODO: Change this from a SyntaxNode action to an operation attribute once attribute application is represented in the
             // IOperation tree by Roslyn.
-            context.RegisterSyntaxNodeAction(perCompilationAnalyzer.AnalyzeAttribute, SyntaxKind.Attribute);
+            context.RegisterSyntaxNodeAction(
+                perCompilationAnalyzer.AnalyzeAttribute,
+                SyntaxKind.Attribute
+            );
         }
 
         private sealed partial class PerCompilationAnalyzer
@@ -87,27 +106,38 @@ namespace Microsoft.Interop.Analyzers
                 ISymbol attributedSymbol = context.ContainingSymbol!;
 
                 AttributeData? attr = syntax.FindAttributeData(attributedSymbol);
-                if (attr?.AttributeClass?.ToDisplayString() == TypeNames.NativeMarshallingAttribute
-                    && attr.AttributeConstructor is not null)
+                if (
+                    attr?.AttributeClass?.ToDisplayString() == TypeNames.NativeMarshallingAttribute
+                    && attr.AttributeConstructor is not null
+                )
                 {
-                    INamedTypeSymbol? entryType = (INamedTypeSymbol?)attr.ConstructorArguments[0].Value;
+                    INamedTypeSymbol? entryType = (INamedTypeSymbol?)
+                        attr.ConstructorArguments[0].Value;
                     AnalyzeManagedTypeMarshallingInfo(
                         GetSymbolType(attributedSymbol),
-                        DiagnosticReporter.CreateForLocation(syntax.FindArgumentWithNameOrArity("nativeType", 0).FindTypeExpressionOrNullLocation(), context.ReportDiagnostic),
-                        entryType);
+                        DiagnosticReporter.CreateForLocation(
+                            syntax
+                                .FindArgumentWithNameOrArity("nativeType", 0)
+                                .FindTypeExpressionOrNullLocation(),
+                            context.ReportDiagnostic
+                        ),
+                        entryType
+                    );
                 }
             }
 
             private void AnalyzeManagedTypeMarshallingInfo(
                 ITypeSymbol managedType,
                 DiagnosticReporter diagnosticFactory,
-                INamedTypeSymbol? entryType)
+                INamedTypeSymbol? entryType
+            )
             {
                 if (entryType is null)
                 {
                     diagnosticFactory.CreateAndReportDiagnostic(
                         MarshallerEntryPointTypeMustBeNonNullRule,
-                        managedType.ToDisplayString());
+                        managedType.ToDisplayString()
+                    );
                     return;
                 }
 
@@ -116,11 +146,13 @@ namespace Microsoft.Interop.Analyzers
                     diagnosticFactory.CreateAndReportDiagnostic(
                         MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule,
                         entryType.ToDisplayString(),
-                        managedType.ToDisplayString());
+                        managedType.ToDisplayString()
+                    );
                     return;
                 }
 
-                bool isLinearCollectionMarshaller = ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(entryType);
+                bool isLinearCollectionMarshaller =
+                    ManualTypeMarshallingHelper.IsLinearCollectionEntryPoint(entryType);
                 if (entryType.IsUnboundGenericType)
                 {
                     if (managedType is not INamedTypeSymbol namedManagedType)
@@ -128,38 +160,50 @@ namespace Microsoft.Interop.Analyzers
                         diagnosticFactory.CreateAndReportDiagnostic(
                             GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule,
                             entryType.ToDisplayString(),
-                            managedType.ToDisplayString());
+                            managedType.ToDisplayString()
+                        );
                         return;
                     }
-                    if (!ManualTypeMarshallingHelper.TryResolveEntryPointType(
-                        namedManagedType,
-                        entryType,
-                        isLinearCollectionMarshaller,
-                        (managedType, entryType) => diagnosticFactory.CreateAndReportDiagnostic(
-                            GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule,
-                            entryType.ToDisplayString(),
-                            managedType.ToDisplayString()),
-                        out ITypeSymbol resolvedEntryType))
+                    if (
+                        !ManualTypeMarshallingHelper.TryResolveEntryPointType(
+                            namedManagedType,
+                            entryType,
+                            isLinearCollectionMarshaller,
+                            (managedType, entryType) =>
+                                diagnosticFactory.CreateAndReportDiagnostic(
+                                    GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule,
+                                    entryType.ToDisplayString(),
+                                    managedType.ToDisplayString()
+                                ),
+                            out ITypeSymbol resolvedEntryType
+                        )
+                    )
                     {
                         return;
                     }
                     entryType = (INamedTypeSymbol)resolvedEntryType;
                 }
 
-                if (!ManualTypeMarshallingHelper.TryGetMarshallersFromEntryTypeIgnoringElements(
-                    entryType,
-                    managedType,
-                    _compilation,
-                    (entryType, managedType) =>
-                        diagnosticFactory.CreateAndReportDiagnostic(
-                            GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule,
-                            entryType.ToDisplayString(),
-                            managedType.ToDisplayString()), out _))
+                if (
+                    !ManualTypeMarshallingHelper.TryGetMarshallersFromEntryTypeIgnoringElements(
+                        entryType,
+                        managedType,
+                        _compilation,
+                        (entryType, managedType) =>
+                            diagnosticFactory.CreateAndReportDiagnostic(
+                                GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule,
+                                entryType.ToDisplayString(),
+                                managedType.ToDisplayString()
+                            ),
+                        out _
+                    )
+                )
                 {
                     diagnosticFactory.CreateAndReportDiagnostic(
                         MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule,
                         entryType.ToDisplayString(),
-                        managedType.ToDisplayString());
+                        managedType.ToDisplayString()
+                    );
                 }
             }
 

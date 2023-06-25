@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 internal class MthdImpl
 {
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

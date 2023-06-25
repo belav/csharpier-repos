@@ -22,7 +22,7 @@ namespace System.Data.Metadata.Edm
         OSpace = 0,
 
         /// <summary>
-        /// CSpace indicates the item in the CSpace - edm primitive types + 
+        /// CSpace indicates the item in the CSpace - edm primitive types +
         /// types defined in csdl
         /// </summary>
         CSpace = 1,

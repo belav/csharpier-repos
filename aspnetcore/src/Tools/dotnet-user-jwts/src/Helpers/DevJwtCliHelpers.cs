@@ -20,7 +20,11 @@ internal static class DevJwtCliHelpers
         var id = resolver.Resolve(projectFilePath, configuration: null);
         if (string.IsNullOrEmpty(id))
         {
-            return UserSecretsCreator.CreateUserSecretsId(NullReporter.Singleton, projectFilePath, projectFilePath);
+            return UserSecretsCreator.CreateUserSecretsId(
+                NullReporter.Singleton,
+                projectFilePath,
+                projectFilePath
+            );
         }
         return id;
     }
@@ -32,9 +36,14 @@ internal static class DevJwtCliHelpers
             return projectPath;
         }
 
-        var csprojFiles = Directory.EnumerateFileSystemEntries(Directory.GetCurrentDirectory(), "*.*proj", SearchOption.TopDirectoryOnly)
-                .Where(f => !".xproj".Equals(Path.GetExtension(f), StringComparison.OrdinalIgnoreCase))
-                .ToList();
+        var csprojFiles = Directory
+            .EnumerateFileSystemEntries(
+                Directory.GetCurrentDirectory(),
+                "*.*proj",
+                SearchOption.TopDirectoryOnly
+            )
+            .Where(f => !".xproj".Equals(Path.GetExtension(f), StringComparison.OrdinalIgnoreCase))
+            .ToList();
         if (csprojFiles is [var path])
         {
             return path;
@@ -42,7 +51,12 @@ internal static class DevJwtCliHelpers
         return null;
     }
 
-    public static bool GetProjectAndSecretsId(string projectPath, IReporter reporter, out string project, out string userSecretsId)
+    public static bool GetProjectAndSecretsId(
+        string projectPath,
+        IReporter reporter,
+        out string project,
+        out string userSecretsId
+    )
     {
         project = GetProject(projectPath);
         userSecretsId = null;
@@ -68,11 +82,19 @@ internal static class DevJwtCliHelpers
             return new List<string>();
         }
 
-        var launchSettingsFilePath = Path.Combine(Path.GetDirectoryName(project)!, "Properties", "launchSettings.json");
+        var launchSettingsFilePath = Path.Combine(
+            Path.GetDirectoryName(project)!,
+            "Properties",
+            "launchSettings.json"
+        );
         var applicationUrls = new HashSet<string>();
         if (File.Exists(launchSettingsFilePath))
         {
-            using var launchSettingsFileStream = new FileStream(launchSettingsFilePath, FileMode.Open, FileAccess.Read);
+            using var launchSettingsFileStream = new FileStream(
+                launchSettingsFilePath,
+                FileMode.Open,
+                FileAccess.Read
+            );
             if (launchSettingsFileStream.Length > 0)
             {
                 var launchSettingsJson = JsonDocument.Parse(launchSettingsFileStream);
@@ -143,7 +165,13 @@ internal static class DevJwtCliHelpers
         }
     }
 
-    public static void PrintJwt(IReporter reporter, Jwt jwt, bool showAll, string outputFormat, JwtSecurityToken fullToken = null)
+    public static void PrintJwt(
+        IReporter reporter,
+        Jwt jwt,
+        bool showAll,
+        string outputFormat,
+        JwtSecurityToken fullToken = null
+    )
     {
         switch (outputFormat)
         {
@@ -158,12 +186,24 @@ internal static class DevJwtCliHelpers
                 break;
         }
 
-        static void PrintJwtJson(IReporter reporter, Jwt jwt, bool showAll, JwtSecurityToken fullToken)
+        static void PrintJwtJson(
+            IReporter reporter,
+            Jwt jwt,
+            bool showAll,
+            JwtSecurityToken fullToken
+        )
         {
-            reporter.Output(JsonSerializer.Serialize(jwt, new JsonSerializerOptions { WriteIndented = true }));
+            reporter.Output(
+                JsonSerializer.Serialize(jwt, new JsonSerializerOptions { WriteIndented = true })
+            );
         }
 
-        static void PrintJwtDefault(IReporter reporter, Jwt jwt, bool showAll, JwtSecurityToken fullToken)
+        static void PrintJwtDefault(
+            IReporter reporter,
+            Jwt jwt,
+            bool showAll,
+            JwtSecurityToken fullToken
+        )
         {
             reporter.Output(Resources.FormatPrintCommand_Confirmed(jwt.Id));
             reporter.Output($"{Resources.JwtPrint_Id}: {jwt.Id}");
@@ -184,9 +224,7 @@ internal static class DevJwtCliHelpers
 
             if (!jwt.Roles.IsNullOrEmpty() || showAll)
             {
-                var rolesValue = jwt.Roles.IsNullOrEmpty()
-                    ? "none"
-                    : string.Join(", ", jwt.Roles);
+                var rolesValue = jwt.Roles.IsNullOrEmpty() ? "none" : string.Join(", ", jwt.Roles);
                 reporter.Output($"{Resources.JwtPrint_Roles}: [{rolesValue}]");
             }
 
@@ -200,11 +238,17 @@ internal static class DevJwtCliHelpers
 
             if (showAll)
             {
-                reporter.Output($"{Resources.JwtPrint_TokenHeader}: {fullToken.Header.SerializeToJson()}");
-                reporter.Output($"{Resources.JwtPrint_TokenPayload}: {fullToken.Payload.SerializeToJson()}");
+                reporter.Output(
+                    $"{Resources.JwtPrint_TokenHeader}: {fullToken.Header.SerializeToJson()}"
+                );
+                reporter.Output(
+                    $"{Resources.JwtPrint_TokenPayload}: {fullToken.Payload.SerializeToJson()}"
+                );
             }
 
-            var tokenValueFieldName = showAll ? Resources.JwtPrint_CompactToken : Resources.JwtPrint_Token;
+            var tokenValueFieldName = showAll
+                ? Resources.JwtPrint_CompactToken
+                : Resources.JwtPrint_Token;
             reporter.Output($"{tokenValueFieldName}: {jwt.Token}");
         }
     }

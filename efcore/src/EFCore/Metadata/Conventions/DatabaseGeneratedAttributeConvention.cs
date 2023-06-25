@@ -14,16 +14,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class DatabaseGeneratedAttributeConvention : PropertyAttributeConventionBase<DatabaseGeneratedAttribute>
+public class DatabaseGeneratedAttributeConvention
+    : PropertyAttributeConventionBase<DatabaseGeneratedAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="DatabaseGeneratedAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public DatabaseGeneratedAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public DatabaseGeneratedAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -36,7 +37,8 @@ public class DatabaseGeneratedAttributeConvention : PropertyAttributeConventionB
         IConventionPropertyBuilder propertyBuilder,
         DatabaseGeneratedAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var valueGenerated =
             attribute.DatabaseGeneratedOption == DatabaseGeneratedOption.Identity

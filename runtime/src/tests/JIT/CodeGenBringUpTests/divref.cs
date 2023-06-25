@@ -27,4 +27,3 @@ class child
         return a / b;
     }
 }
-

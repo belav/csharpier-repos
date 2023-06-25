@@ -19,33 +19,69 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsQualifyMemberAccess)]
-    public partial class QualifyMemberAccessTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class QualifyMemberAccessTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public QualifyMemberAccessTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpQualifyMemberAccessDiagnosticAnalyzer(), new CSharpQualifyMemberAccessCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpQualifyMemberAccessDiagnosticAnalyzer(),
+                new CSharpQualifyMemberAccessCodeFixProvider()
+            );
 
-        private Task TestAsyncWithOption(string code, string expected, PerLanguageOption2<CodeStyleOption2<bool>> option)
-            => TestAsyncWithOptionAndNotificationOption(code, expected, option, NotificationOption2.Error);
+        private Task TestAsyncWithOption(
+            string code,
+            string expected,
+            PerLanguageOption2<CodeStyleOption2<bool>> option
+        ) =>
+            TestAsyncWithOptionAndNotificationOption(
+                code,
+                expected,
+                option,
+                NotificationOption2.Error
+            );
 
-        private Task TestAsyncWithOptionAndNotificationOption(string code, string expected, PerLanguageOption2<CodeStyleOption2<bool>> option, NotificationOption2 notification)
-            => TestInRegularAndScriptAsync(code, expected, options: Option(option, true, notification));
+        private Task TestAsyncWithOptionAndNotificationOption(
+            string code,
+            string expected,
+            PerLanguageOption2<CodeStyleOption2<bool>> option,
+            NotificationOption2 notification
+        ) =>
+            TestInRegularAndScriptAsync(
+                code,
+                expected,
+                options: Option(option, true, notification)
+            );
 
-        private Task TestMissingAsyncWithOption(string code, PerLanguageOption2<CodeStyleOption2<bool>> option)
-            => TestMissingAsyncWithOptionAndNotificationOption(code, option, NotificationOption2.Error);
+        private Task TestMissingAsyncWithOption(
+            string code,
+            PerLanguageOption2<CodeStyleOption2<bool>> option
+        ) =>
+            TestMissingAsyncWithOptionAndNotificationOption(
+                code,
+                option,
+                NotificationOption2.Error
+            );
 
-        private Task TestMissingAsyncWithOptionAndNotificationOption(string code, PerLanguageOption2<CodeStyleOption2<bool>> option, NotificationOption2 notification)
-            => TestMissingInRegularAndScriptAsync(code, new TestParameters(options: Option(option, true, notification)));
+        private Task TestMissingAsyncWithOptionAndNotificationOption(
+            string code,
+            PerLanguageOption2<CodeStyleOption2<bool>> option,
+            NotificationOption2 notification
+        ) =>
+            TestMissingInRegularAndScriptAsync(
+                code,
+                new TestParameters(options: Option(option, true, notification))
+            );
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_LHS()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -54,7 +90,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
         [|i|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -63,14 +99,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
         this.i = 1;
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_RHS()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -79,7 +116,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         var x = [|i|];
     }
 }",
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -88,14 +125,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         var x = this.i;
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_MethodArgument()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -104,7 +142,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         M([|i|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -113,14 +151,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         M(this.i);
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_ChainedAccess()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -129,7 +168,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         var s = [|i|].ToString();
     }
 }",
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -138,14 +177,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         var s = this.i.ToString();
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_ConditionalAccess()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     string s;
 
@@ -154,7 +194,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         var x = [|s|]?.ToString();
     }
 }",
-@"class Class
+                @"class Class
 {
     string s;
 
@@ -163,14 +203,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         var x = this.s?.ToString();
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_OnBase()
         {
             await TestAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected int i;
 }
@@ -182,7 +223,7 @@ class Derived : Base
         [|i|] = 1;
     }
 }",
-@"class Base
+                @"class Base
 {
     protected int i;
 }
@@ -194,14 +235,15 @@ class Derived : Base
         this.i = 1;
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyFieldAccess_InObjectInitializer()
         {
             await TestAsyncWithOption(
-@"class C
+                @"class C
 {
     int i = 1;
     void M()
@@ -209,7 +251,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         var test = new System.Collections.Generic.List<int> { [|i|] };
     }
 }",
-@"class C
+                @"class C
 {
     int i = 1;
     void M()
@@ -217,14 +259,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         var test = new System.Collections.Generic.List<int> { this.i };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyFieldAccess_InCollectionInitializer()
         {
             await TestAsyncWithOption(
-@"class C
+                @"class C
 {
     int i = 1;
     void M()
@@ -232,7 +275,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         var test = new System.Collections.Generic.List<int> { [|i|] };
     }
 }",
-@"class C
+                @"class C
 {
     int i = 1;
     void M()
@@ -240,14 +283,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         var test = new System.Collections.Generic.List<int> { this.i };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_NotSuggestedOnInstance()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -257,14 +301,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         c.[|i|] = 1;
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyFieldAccess_NotSuggestedOnStatic()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     static int i;
 
@@ -273,14 +318,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         [|i|] = 1;
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyFieldAccess_NotSuggestedOnLocalVarInObjectInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -288,14 +334,15 @@ CodeStyleOptions2.QualifyFieldAccess);
          var test = new System.Collections.Generic.List<int> { [|foo|] };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyFieldAccess_NotSuggestedOnLocalVarInCollectionInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -303,14 +350,15 @@ CodeStyleOptions2.QualifyFieldAccess);
          var test = new System.Collections.Generic.List<int> { [|foo|] };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(28091, "https://github.com/dotnet/roslyn/issues/28091")]
         public async Task QualifyFieldAccess_NotSuggestedOnLocalVarInDictionaryInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -318,14 +366,15 @@ CodeStyleOptions2.QualifyFieldAccess);
          var test = new System.Collections.Generic.Dictionary<int, int> { { 2, [|foo|] } };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyFieldAccess_Subpattern1()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -336,14 +385,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         }
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyFieldAccess_Subpattern2()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -356,14 +406,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         }
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyFieldAccess_Subpattern3()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -376,14 +427,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_LHS()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -392,7 +444,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         [|i|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -401,14 +453,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         this.i = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_RHS()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -417,7 +470,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var x = [|i|];
     }
 }",
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -426,14 +479,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var x = this.i;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyPropertyAccess_PropertySubpattern1()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -444,14 +498,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         }
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyPropertyAccess_PropertySubpattern2()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -464,14 +519,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         }
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyPropertyAccess_PropertySubpattern3()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -484,7 +540,8 @@ CodeStyleOptions2.QualifyPropertyAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
@@ -492,7 +549,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         {
             //  it's ok that we qualify here because it's not a legal pattern (because it is not const).
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -505,7 +562,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         };
     }
 }",
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -518,14 +575,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyPropertyAccess_FieldSubpattern1()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -536,14 +594,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         }
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyPropertyAccess_FieldSubpattern2()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -556,14 +615,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         }
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
         public async Task QualifyPropertyAccess_FieldSubpattern3()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -576,7 +636,8 @@ CodeStyleOptions2.QualifyFieldAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(40242, "https://github.com/dotnet/roslyn/issues/40242")]
@@ -584,7 +645,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         {
             //  it's ok that we qualify here because it's not a legal pattern (because it is not const).
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -597,7 +658,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         };
     }
 }",
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -610,14 +671,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_MethodArgument()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -626,7 +688,7 @@ CodeStyleOptions2.QualifyFieldAccess);
         M([|i|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -635,14 +697,15 @@ CodeStyleOptions2.QualifyFieldAccess);
         M(this.i);
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_ChainedAccess()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -651,7 +714,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var s = [|i|].ToString();
     }
 }",
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -660,14 +723,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var s = this.i.ToString();
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_ConditionalAccess()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     string s { get; set; }
 
@@ -676,7 +740,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var x = [|s|]?.ToString();
     }
 }",
-@"class Class
+                @"class Class
 {
     string s { get; set; }
 
@@ -685,14 +749,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var x = this.s?.ToString();
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_OnBase()
         {
             await TestAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected int i { get; set; }
 }
@@ -704,7 +769,7 @@ class Derived : Base
         [|i|] = 1;
     }
 }",
-@"class Base
+                @"class Base
 {
     protected int i { get; set; }
 }
@@ -716,14 +781,15 @@ class Derived : Base
         this.i = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_NotSuggestedOnInstance()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int i { get; set; }
 
@@ -732,14 +798,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         c.[|i|] = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyPropertyAccess_NotSuggestedOnStatic()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     static int i { get; set; }
 
@@ -748,92 +815,97 @@ CodeStyleOptions2.QualifyPropertyAccess);
         [|i|] = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_VoidCallWithArguments()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     void M(int i)
     {
         [|M|](0);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M(int i)
     {
         this.M(0);
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_AsReturn()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     int M()
     {
         return [|M|]();
     }",
-@"class Class
+                @"class Class
 {
     int M()
     {
         return this.M();
     }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_ChainedAccess()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     string M()
     {
         var s = [|M|]().ToString();
     }",
-@"class Class
+                @"class Class
 {
     string M()
     {
         var s = this.M().ToString();
     }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_ConditionalAccess()
         {
             await TestAsyncWithOption(
-@"class Class
+                @"class Class
 {
     string M()
     {
         return [|M|]()?.ToString();
     }",
-@"class Class
+                @"class Class
 {
     string M()
     {
         return this.M()?.ToString();
     }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_EventSubscription1()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -844,7 +916,7 @@ class C
         e += [|Handler|];
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -855,14 +927,15 @@ class C
         e += this.Handler;
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_EventSubscription2()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -873,7 +946,7 @@ class C
         e += new EventHandler([|Handler|]);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -884,14 +957,15 @@ class C
         e += new EventHandler(this.Handler);
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_OnBase()
         {
             await TestAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected void Method()
     {
@@ -905,7 +979,7 @@ class Derived : Base
         [|Method|]();
     }
 }",
-@"class Base
+                @"class Base
 {
     protected void Method()
     {
@@ -919,28 +993,30 @@ class Derived : Base
         this.Method();
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_NotSuggestedOnInstance()
         {
             await TestMissingAsyncWithOption(
-@"class Class
+                @"class Class
 {
     void M(Class c)
     {
         c.[|M|]();
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyMethodAccess_NotSuggestedOnStatic()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     static void Method()
     {
@@ -951,14 +1027,15 @@ CodeStyleOptions2.QualifyMethodAccess);
         [|Method|]();
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyMethodAccess_NotSuggestedOnObjectInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -966,14 +1043,15 @@ CodeStyleOptions2.QualifyMethodAccess);
          var test = new System.Collections.Generic.List<int> { [|foo|] };
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyLocalMethodAccess_NotSuggestedOnObjectInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -981,14 +1059,15 @@ CodeStyleOptions2.QualifyMethodAccess);
         var test = new System.Collections.Generic.List<int> { [|Local()|] };
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyMethodAccess_NotSuggestedOnCollectionInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -996,14 +1075,15 @@ CodeStyleOptions2.QualifyMethodAccess);
          var test = new System.Collections.Generic.List<int> { [|foo|] };
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyLocalMethodAccess_NotSuggestedOnCollectionInitializer()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1011,14 +1091,15 @@ CodeStyleOptions2.QualifyMethodAccess);
         var test = new System.Collections.Generic.List<int> { [|Local()|] };
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyLocalMethodAccess_NotSuggestedInMethodCall()
         {
             await TestMissingAsyncWithOption(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1026,14 +1107,15 @@ CodeStyleOptions2.QualifyMethodAccess);
         [|Local|]();
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(38043, "https://github.com/dotnet/roslyn/issues/38043")]
         public async Task QualifyLocalMethodAccess_NotSuggestedInNestedMethodCall()
         {
             await TestMissingAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1047,14 +1129,15 @@ class C
     {
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(38043, "https://github.com/dotnet/roslyn/issues/38043")]
         public async Task QualifyLocalMethodAccess_NotSuggestedInCollectionInitializer()
         {
             await TestMissingAsyncWithOption(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -1065,14 +1148,15 @@ class C
         var dict = new Dictionary<Func<object>, int>() { { [|LocalFunction|], 1 } };
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(38043, "https://github.com/dotnet/roslyn/issues/38043")]
         public async Task QualifyLocalMethodAccess_NotSuggestedInObjectMethodInvocation()
         {
             await TestMissingAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1082,7 +1166,8 @@ class C
         [|LocalFunction|]();
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1090,7 +1175,7 @@ CodeStyleOptions2.QualifyMethodAccess);
         public async Task QualifyEventAccess_EventSubscription()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1101,7 +1186,7 @@ class C
         [|e|] += Handler;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1112,7 +1197,8 @@ class C
         this.e += Handler;
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1120,7 +1206,7 @@ CodeStyleOptions2.QualifyEventAccess);
         public async Task QualifyEventAccessAsProperty_EventSubscription()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1140,7 +1226,7 @@ class C
         [|e|] += Handler;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1160,7 +1246,8 @@ class C
         this.e += Handler;
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1168,7 +1255,7 @@ CodeStyleOptions2.QualifyEventAccess);
         public async Task QualifyEventAccess_InvokeEvent1()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1179,7 +1266,7 @@ class C
         [|e|](this, new EventArgs());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1190,7 +1277,8 @@ class C
         this.e(this, new EventArgs());
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1198,7 +1286,7 @@ CodeStyleOptions2.QualifyEventAccess);
         public async Task QualifyEventAccess_InvokeEvent2()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1209,7 +1297,7 @@ class C
         [|e|].Invoke(this, new EventArgs());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1220,7 +1308,8 @@ class C
         this.e.Invoke(this, new EventArgs());
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1228,7 +1317,7 @@ CodeStyleOptions2.QualifyEventAccess);
         public async Task QualifyEventAccess_InvokeEvent3()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1239,7 +1328,7 @@ class C
         [|e|]?.Invoke(this, new EventArgs());
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1250,7 +1339,8 @@ class C
         this.e?.Invoke(this, new EventArgs());
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/7587")]
@@ -1258,7 +1348,7 @@ CodeStyleOptions2.QualifyEventAccess);
         public async Task QualifyEventAccess_OnBase()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class Base
 {
@@ -1272,7 +1362,7 @@ class Derived : Base
         [|e|] += Handler;
     }
 }",
-@"using System;
+                @"using System;
 
 class Base
 {
@@ -1286,14 +1376,15 @@ class Derived : Base
         this.e += Handler;
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyEventAccess_NotSuggestedOnInstance()
         {
             await TestMissingAsyncWithOption(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -1308,14 +1399,15 @@ class Class
     {
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem(7065, "https://github.com/dotnet/roslyn/issues/7065")]
         public async Task QualifyEventAccess_NotSuggestedOnStatic()
         {
             await TestMissingAsyncWithOption(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1326,14 +1418,15 @@ void Handler(object sender, EventArgs args)
 {
     [|e|] += Handler;
 } }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact]
         public async Task QualifyMemberAccessOnNotificationOptionSilent()
         {
             await TestAsyncWithOptionAndNotificationOption(
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1342,7 +1435,7 @@ CodeStyleOptions2.QualifyEventAccess);
         [|Property|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1351,14 +1444,16 @@ CodeStyleOptions2.QualifyEventAccess);
         this.Property = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Silent);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Silent
+            );
         }
 
         [Fact]
         public async Task QualifyMemberAccessOnNotificationOptionInfo()
         {
             await TestAsyncWithOptionAndNotificationOption(
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1367,7 +1462,7 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Silent);
         [|Property|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1376,14 +1471,16 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Silent);
         this.Property = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Suggestion);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Suggestion
+            );
         }
 
         [Fact]
         public async Task QualifyMemberAccessOnNotificationOptionWarning()
         {
             await TestAsyncWithOptionAndNotificationOption(
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1392,7 +1489,7 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Suggestion);
         [|Property|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1401,14 +1498,16 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Suggestion);
         this.Property = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Warning);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Warning
+            );
         }
 
         [Fact]
         public async Task QualifyMemberAccessOnNotificationOptionError()
         {
             await TestAsyncWithOptionAndNotificationOption(
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1417,7 +1516,7 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Warning);
         [|Property|] = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int Property { get; set; };
 
@@ -1426,7 +1525,9 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Warning);
         this.Property = 1;
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Error);
+                CodeStyleOptions2.QualifyPropertyAccess,
+                NotificationOption2.Error
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/18839")]
@@ -1434,7 +1535,7 @@ CodeStyleOptions2.QualifyPropertyAccess, NotificationOption2.Error);
         public async Task QualifyInstanceMethodInDelegateCreation()
         {
             await TestAsyncWithOption(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1446,7 +1547,7 @@ class A
         func(1);
     }
 }",
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1458,14 +1559,15 @@ class A
         func(1);
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(15325, "https://github.com/dotnet/roslyn/issues/15325")]
         public async Task DoNotQualifyStaticMethodInDelegateCreation()
         {
             await TestMissingAsyncWithOption(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -1477,14 +1579,15 @@ class A
         func(1);
     }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(17711, "https://github.com/dotnet/roslyn/issues/17711")]
         public async Task DoNotReportToQualify_IfBaseQualificationOnField()
         {
             await TestMissingAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected int field;
 }
@@ -1492,14 +1595,15 @@ class Derived : Base
 {
     void M() { [|base.field|] = 0; }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(17711, "https://github.com/dotnet/roslyn/issues/17711")]
         public async Task DoNotReportToQualify_IfBaseQualificationOnProperty()
         {
             await TestMissingAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected virtual int Property { get; }
 }
@@ -1507,14 +1611,15 @@ class Derived : Base
 {
     protected override int Property { get { return [|base.Property|]; } }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(17711, "https://github.com/dotnet/roslyn/issues/17711")]
         public async Task DoNotReportToQualify_IfBaseQualificationOnMethod()
         {
             await TestMissingAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected virtual void M() { }
 }
@@ -1522,14 +1627,15 @@ class Derived : Base
 {
     protected override void M() { [|base.M()|]; }
 }",
-CodeStyleOptions2.QualifyMethodAccess);
+                CodeStyleOptions2.QualifyMethodAccess
+            );
         }
 
         [Fact, WorkItem(17711, "https://github.com/dotnet/roslyn/issues/17711")]
         public async Task DoNotReportToQualify_IfBaseQualificationOnEvent()
         {
             await TestMissingAsyncWithOption(
-@"class Base
+                @"class Base
 {
     protected virtual event EventHandler Event;
 }
@@ -1541,38 +1647,41 @@ class Derived : Base
         remove { }
     }
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task DoNotReportToQualify_IfInStaticContext1()
         {
             await TestMissingAsyncWithOption(
-@"class Program
+                @"class Program
 {
     public int Foo { get; set; }
     public static string Bar = nameof([|Foo|]);
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task DoNotReportToQualify_IfInStaticContext2()
         {
             await TestMissingAsyncWithOption(
-@"class Program
+                @"class Program
 {
     public int Foo { get; set; }
     public string Bar = nameof([|Foo|]);
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task DoNotReportToQualify_IfInStaticContext3()
         {
             await TestMissingAsyncWithOption(
-@"class Program
+                @"class Program
 {
     public int Foo { get; set; }
     static void Main(string[] args)
@@ -1580,14 +1689,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         System.Console.WriteLine(nameof([|Foo|]));
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task DoNotReportToQualify_IfInStaticContext4()
         {
             await TestMissingAsyncWithOption(
-@"class Program
+                @"class Program
 {
     public int Foo;
     static void Main(string[] args)
@@ -1595,14 +1705,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         System.Console.WriteLine(nameof([|Foo|]));
     }
 }",
-CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task DoNotReportToQualify_IfInStaticContext5()
         {
             await TestMissingAsyncWithOption(
-@"class Program
+                @"class Program
 {
     public int Foo { get; set; }
     static string Bar { get; set; }
@@ -1612,27 +1723,29 @@ CodeStyleOptions2.QualifyFieldAccess);
         Bar = nameof([|Foo|]);
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task DoNotReportToQualify_IfInStaticContext6()
         {
             await TestMissingAsyncWithOption(
-@"public class Foo
+                @"public class Foo
 {
     public event EventHandler Bar;
 
     private string Field = nameof([|Bar|]);
 }",
-CodeStyleOptions2.QualifyEventAccess);
+                CodeStyleOptions2.QualifyEventAccess
+            );
         }
 
         [Fact, WorkItem(32093, "https://github.com/dotnet/roslyn/issues/32093")]
         public async Task DoNotReportToQualify_IfInBaseConstructor()
         {
             await TestMissingAsyncWithOption(
-@"public class Base
+                @"public class Base
 {
     public string Foo { get; }
     public Base(string foo){}
@@ -1644,65 +1757,69 @@ public class Derived : Base
     {}
 }
 ",
-                CodeStyleOptions2.QualifyFieldAccess);
+                CodeStyleOptions2.QualifyFieldAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task QualifyPropertyAccess_InAccessorExpressionBody()
         {
             await TestAsyncWithOption(
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public string Bar { get => [|Foo|]; }
 }",
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public string Bar { get => this.Foo; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task QualifyPropertyAccess_InAccessorWithBodyAndExpressionBody1()
         {
             await TestAsyncWithOption(
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public string Bar { get { return [|Foo|]; } => Foo; }
 }",
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public string Bar { get { return this.Foo; } => Foo; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(21519, "https://github.com/dotnet/roslyn/issues/21519")]
         public async Task QualifyPropertyAccess_InAccessorWithBodyAndExpressionBody2()
         {
             await TestAsyncWithOption(
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public string Bar { get { return Foo; } => [|Foo|]; }
 }",
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public string Bar { get { return Foo; } => this.Foo; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyPropertyAccess_InObjectInitializer()
         {
             await TestAsyncWithOption(
-@"class C
+                @"class C
 {
     public int Foo { get; set }
     void M()
@@ -1710,7 +1827,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var test = new System.Collections.Generic.List<int> { [|Foo|] };
     }
 }",
-@"class C
+                @"class C
 {
     public int Foo { get; set }
     void M()
@@ -1718,14 +1835,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var test = new System.Collections.Generic.List<int> { this.Foo };
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(28509, "https://github.com/dotnet/roslyn/issues/28509")]
         public async Task QualifyPropertyAccess_InCollectionInitializer()
         {
             await TestAsyncWithOption(
-@"class C
+                @"class C
 {
     public int Foo { get; set }
     void M()
@@ -1733,7 +1851,7 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var test = new System.Collections.Generic.List<int> { [|Foo|] };
     }
 }",
-@"class C
+                @"class C
 {
     public int Foo { get; set }
     void M()
@@ -1741,14 +1859,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         var test = new System.Collections.Generic.List<int> { this.Foo };
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(22776, "https://github.com/dotnet/roslyn/issues/22776")]
         public async Task DoNotReportToQualify_InObjectInitializer1()
         {
             await TestMissingAsyncWithOption(
-@"public class C
+                @"public class C
 {
     public string Foo { get; set; }
     public void Bar()
@@ -1759,14 +1878,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(22776, "https://github.com/dotnet/roslyn/issues/22776")]
         public async Task DoNotReportToQualify_InObjectInitializer2()
         {
             await TestMissingAsyncWithOption(
-@"public class C
+                @"public class C
 {
     public string Foo;
     public void Bar()
@@ -1777,14 +1897,15 @@ CodeStyleOptions2.QualifyPropertyAccess);
         };
     }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(26893, "https://github.com/dotnet/roslyn/issues/26893")]
         public async Task DoNotReportToQualify_IfInAttribute1()
         {
             await TestMissingAsyncWithOption(
-@"
+                @"
 using System;
 
 class MyAttribute : Attribute 
@@ -1797,14 +1918,15 @@ class Program
 {
     int Goo { get; set; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(26893, "https://github.com/dotnet/roslyn/issues/26893")]
         public async Task DoNotReportToQualify_IfInAttribute2()
         {
             await TestMissingAsyncWithOption(
-@"
+                @"
 using System;
 
 class MyAttribute : Attribute 
@@ -1817,14 +1939,15 @@ class Program
     [My(nameof([|Goo|]))]
     int Goo { get; set; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(26893, "https://github.com/dotnet/roslyn/issues/26893")]
         public async Task DoNotReportToQualify_IfInAttribute3()
         {
             await TestMissingAsyncWithOption(
-@"
+                @"
 using System;
 
 class MyAttribute : Attribute 
@@ -1838,14 +1961,15 @@ class Program
     public int Bar = 0 ;
     public int Goo { get; set; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(26893, "https://github.com/dotnet/roslyn/issues/26893")]
         public async Task DoNotReportToQualify_IfInAttribute4()
         {
             await TestMissingAsyncWithOption(
-@"
+                @"
 using System;
 
 class MyAttribute : Attribute 
@@ -1857,14 +1981,15 @@ class Program
 {
     int Goo { [My(nameof([|Goo|]))]get; set; }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
 
         [Fact, WorkItem(26893, "https://github.com/dotnet/roslyn/issues/26893")]
         public async Task DoNotReportToQualify_IfInAttribute5()
         {
             await TestMissingAsyncWithOption(
-@"
+                @"
 using System;
 
 class MyAttribute : Attribute 
@@ -1877,7 +2002,8 @@ class Program
     int Goo { get; set; }
     void M([My(nameof([|Goo|]))]int i) { }
 }",
-CodeStyleOptions2.QualifyPropertyAccess);
+                CodeStyleOptions2.QualifyPropertyAccess
+            );
         }
     }
 }

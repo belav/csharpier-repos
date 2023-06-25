@@ -15,7 +15,12 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         private readonly bool _hideStateInfo;
         private readonly bool _onlyDFAinfo;
 
-        internal DgmlWriter(TextWriter tw, bool hideStateInfo, int maxDgmlTransitionLabelLength = -1, bool onlyDFAinfo = false)
+        internal DgmlWriter(
+            TextWriter tw,
+            bool hideStateInfo,
+            int maxDgmlTransitionLabelLength = -1,
+            bool onlyDFAinfo = false
+        )
         {
             _maxDgmlTransitionLabelLength = maxDgmlTransitionLabelLength;
             _tw = tw;
@@ -55,10 +60,18 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
             }
 
             _tw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-            _tw.WriteLine("<DirectedGraph xmlns=\"http://schemas.microsoft.com/vs/2009/dgml\" ZoomLevel=\"1.5\" GraphDirection=\"TopToBottom\" >");
+            _tw.WriteLine(
+                "<DirectedGraph xmlns=\"http://schemas.microsoft.com/vs/2009/dgml\" ZoomLevel=\"1.5\" GraphDirection=\"TopToBottom\" >"
+            );
             _tw.WriteLine("<Nodes>");
-            _tw.WriteLine("<Node Id=\"dfa\" Label=\" \" Group=\"Collapsed\" Category=\"DFA\" DFAInfo=\"{0}\" />", GetDFAInfo(fa));
-            _tw.WriteLine("<Node Id=\"dfainfo\" Category=\"DFAInfo\" Label=\"{0}\"/>", GetDFAInfo(fa));
+            _tw.WriteLine(
+                "<Node Id=\"dfa\" Label=\" \" Group=\"Collapsed\" Category=\"DFA\" DFAInfo=\"{0}\" />",
+                GetDFAInfo(fa)
+            );
+            _tw.WriteLine(
+                "<Node Id=\"dfainfo\" Category=\"DFAInfo\" Label=\"{0}\"/>",
+                GetDFAInfo(fa)
+            );
             if (_onlyDFAinfo)
             {
                 _tw.WriteLine("</Nodes>");
@@ -67,7 +80,12 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
             {
                 foreach (int state in fa.GetStates())
                 {
-                    _tw.WriteLine("<Node Id=\"{0}\" Label=\"{0}\" Category=\"State\" Group=\"{1}\" StateInfo=\"{2}\">", state, _hideStateInfo ? "Collapsed" : "Expanded", GetStateInfo(fa, state));
+                    _tw.WriteLine(
+                        "<Node Id=\"{0}\" Label=\"{0}\" Category=\"State\" Group=\"{1}\" StateInfo=\"{2}\">",
+                        state,
+                        _hideStateInfo ? "Collapsed" : "Expanded",
+                        GetStateInfo(fa, state)
+                    );
                     if (state == fa.InitialState)
                     {
                         _tw.WriteLine("<Category Ref=\"InitialState\" />");
@@ -77,26 +95,45 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
                         _tw.WriteLine("<Category Ref=\"FinalState\" />");
                     }
                     _tw.WriteLine("</Node>");
-                    _tw.WriteLine("<Node Id=\"{0}info\" Label=\"{1}\" Category=\"StateInfo\"/>", state, GetStateInfo(fa, state));
+                    _tw.WriteLine(
+                        "<Node Id=\"{0}info\" Label=\"{1}\" Category=\"StateInfo\"/>",
+                        state,
+                        GetStateInfo(fa, state)
+                    );
                 }
                 _tw.WriteLine("</Nodes>");
                 _tw.WriteLine("<Links>");
-                _tw.WriteLine("<Link Source=\"dfa\" Target=\"{0}\" Label=\"{1}\" Category=\"StartTransition\" />", fa.InitialState, fa.DescribeStartLabel());
-                _tw.WriteLine("<Link Source=\"dfa\" Target=\"dfainfo\" Label=\"\" Category=\"Contains\" />");
+                _tw.WriteLine(
+                    "<Link Source=\"dfa\" Target=\"{0}\" Label=\"{1}\" Category=\"StartTransition\" />",
+                    fa.InitialState,
+                    fa.DescribeStartLabel()
+                );
+                _tw.WriteLine(
+                    "<Link Source=\"dfa\" Target=\"dfainfo\" Label=\"\" Category=\"Contains\" />"
+                );
 
                 foreach (Move<S> move in epsilonmoves)
                 {
-                    _tw.WriteLine("<Link Source=\"{0}\" Target=\"{1}\" Category=\"EpsilonTransition\" />", move.SourceState, move.TargetState);
+                    _tw.WriteLine(
+                        "<Link Source=\"{0}\" Target=\"{1}\" Category=\"EpsilonTransition\" />",
+                        move.SourceState,
+                        move.TargetState
+                    );
                 }
 
                 foreach (KeyValuePair<(int, int), List<S>> move in nonEpsilonMoves)
                 {
-                    _tw.WriteLine(GetNonFinalRuleInfo(fa, move.Key.Item1, move.Key.Item2, move.Value));
+                    _tw.WriteLine(
+                        GetNonFinalRuleInfo(fa, move.Key.Item1, move.Key.Item2, move.Value)
+                    );
                 }
 
                 foreach (int state in fa.GetStates())
                 {
-                    _tw.WriteLine("<Link Source=\"{0}\" Target=\"{0}info\" Category=\"Contains\" />", state);
+                    _tw.WriteLine(
+                        "<Link Source=\"{0}\" Target=\"{0}info\" Category=\"Contains\" />",
+                        state
+                    );
                 }
 
                 _tw.WriteLine("</Links>");
@@ -142,7 +179,12 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
             return sb.ToString();
         }
 
-        private string GetNonFinalRuleInfo<S>(IAutomaton<S> aut, int source, int target, List<S> rules)
+        private string GetNonFinalRuleInfo<S>(
+            IAutomaton<S> aut,
+            int source,
+            int target,
+            List<S> rules
+        )
         {
             string lab = "";
             string info = "";
@@ -165,23 +207,37 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         {
             _tw.WriteLine("<Categories>");
             _tw.WriteLine("<Category Id=\"DFA\" Label=\"DFA\" IsTag=\"True\" />");
-            _tw.WriteLine("<Category Id=\"EpsilonTransition\" Label=\"Epsilon transition\" IsTag=\"True\" />");
-            _tw.WriteLine("<Category Id=\"StartTransition\" Label=\"Initial transition\" IsTag=\"True\" />");
-            _tw.WriteLine("<Category Id=\"FinalLabel\" Label=\"Final transition\" IsTag=\"True\" />");
+            _tw.WriteLine(
+                "<Category Id=\"EpsilonTransition\" Label=\"Epsilon transition\" IsTag=\"True\" />"
+            );
+            _tw.WriteLine(
+                "<Category Id=\"StartTransition\" Label=\"Initial transition\" IsTag=\"True\" />"
+            );
+            _tw.WriteLine(
+                "<Category Id=\"FinalLabel\" Label=\"Final transition\" IsTag=\"True\" />"
+            );
             _tw.WriteLine("<Category Id=\"FinalState\" Label=\"Final\" IsTag=\"True\" />");
             _tw.WriteLine("<Category Id=\"SinkState\" Label=\"Sink state\" IsTag=\"True\" />");
-            _tw.WriteLine("<Category Id=\"EpsilonState\" Label=\"Epsilon state\" IsTag=\"True\" />");
+            _tw.WriteLine(
+                "<Category Id=\"EpsilonState\" Label=\"Epsilon state\" IsTag=\"True\" />"
+            );
             _tw.WriteLine("<Category Id=\"InitialState\" Label=\"Initial\" IsTag=\"True\" />");
-            _tw.WriteLine("<Category Id=\"NonepsilonTransition\" Label=\"Nonepsilon transition\" IsTag=\"True\" />");
+            _tw.WriteLine(
+                "<Category Id=\"NonepsilonTransition\" Label=\"Nonepsilon transition\" IsTag=\"True\" />"
+            );
             _tw.WriteLine("<Category Id=\"State\" Label=\"State\" IsTag=\"True\" />");
             _tw.WriteLine("</Categories>");
             _tw.WriteLine("<Styles>");
-            _tw.WriteLine("<Style TargetType=\"Node\" GroupLabel=\"InitialState\" ValueLabel=\"True\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Node\" GroupLabel=\"InitialState\" ValueLabel=\"True\">"
+            );
             _tw.WriteLine("<Condition Expression=\"HasCategory('InitialState')\" />");
             _tw.WriteLine("<Setter Property=\"Background\" Value=\"lightgray\" />");
             _tw.WriteLine("<Setter Property=\"MinWidth\" Value=\"0\" />");
             _tw.WriteLine("</Style>");
-            _tw.WriteLine("<Style TargetType=\"Node\" GroupLabel=\"FinalState\" ValueLabel=\"True\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Node\" GroupLabel=\"FinalState\" ValueLabel=\"True\">"
+            );
             _tw.WriteLine("<Condition Expression=\"HasCategory('FinalState')\" />");
             _tw.WriteLine("<Setter Property=\"Background\" Value=\"lightgreen\" />");
             _tw.WriteLine("<Setter Property=\"StrokeThickness\" Value=\"4\" />");
@@ -204,27 +260,37 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
             _tw.WriteLine("<Setter Property=\"FontSize\" Value=\"12\" />");
             _tw.WriteLine("<Setter Property=\"FontFamily\" Value=\"Arial\" />");
             _tw.WriteLine("</Style>");
-            _tw.WriteLine("<Style TargetType=\"Link\" GroupLabel=\"NonepsilonTransition\" ValueLabel=\"True\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Link\" GroupLabel=\"NonepsilonTransition\" ValueLabel=\"True\">"
+            );
             _tw.WriteLine("<Condition Expression=\"HasCategory('NonepsilonTransition')\" />");
             _tw.WriteLine("<Setter Property=\"Stroke\" Value=\"black\" />");
             _tw.WriteLine("<Setter Property=\"FontSize\" Value=\"18\" />");
             _tw.WriteLine("<Setter Property=\"FontFamily\" Value=\"Arial\" />");
             _tw.WriteLine("</Style>");
-            _tw.WriteLine("<Style TargetType=\"Link\" GroupLabel=\"StartTransition\" ValueLabel=\"True\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Link\" GroupLabel=\"StartTransition\" ValueLabel=\"True\">"
+            );
             _tw.WriteLine("<Condition Expression=\"HasCategory('StartTransition')\" />");
             _tw.WriteLine("<Setter Property=\"Stroke\" Value=\"black\" />");
             _tw.WriteLine("</Style>");
-            _tw.WriteLine("<Style TargetType=\"Link\" GroupLabel=\"EpsilonTransition\" ValueLabel=\"True\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Link\" GroupLabel=\"EpsilonTransition\" ValueLabel=\"True\">"
+            );
             _tw.WriteLine("<Condition Expression=\"HasCategory('EpsilonTransition')\" />");
             _tw.WriteLine("<Setter Property=\"Stroke\" Value=\"black\" />");
             _tw.WriteLine("<Setter Property=\"StrokeDashArray\" Value=\"8 8\" />");
             _tw.WriteLine("</Style>");
-            _tw.WriteLine("<Style TargetType=\"Link\" GroupLabel=\"FinalLabel\" ValueLabel=\"False\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Link\" GroupLabel=\"FinalLabel\" ValueLabel=\"False\">"
+            );
             _tw.WriteLine("<Condition Expression=\"HasCategory('FinalLabel')\" />");
             _tw.WriteLine("<Setter Property=\"Stroke\" Value=\"black\" />");
             _tw.WriteLine("<Setter Property=\"StrokeDashArray\" Value=\"8 8\" />");
             _tw.WriteLine("</Style>");
-            _tw.WriteLine("<Style TargetType=\"Node\" GroupLabel=\"StateInfo\" ValueLabel=\"True\">");
+            _tw.WriteLine(
+                "<Style TargetType=\"Node\" GroupLabel=\"StateInfo\" ValueLabel=\"True\">"
+            );
             _tw.WriteLine("<Setter Property=\"Stroke\" Value=\"white\" />");
             _tw.WriteLine("<Setter Property=\"FontSize\" Value=\"18\" />");
             _tw.WriteLine("<Setter Property=\"FontFamily\" Value=\"Arial\" />");

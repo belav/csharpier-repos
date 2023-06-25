@@ -13,25 +13,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
     {
         public static BaseObjectCreationExpressionSyntax GetNewObjectCreation(
             BaseObjectCreationExpressionSyntax baseObjectCreation,
-            SeparatedSyntaxList<ExpressionSyntax> expressions)
+            SeparatedSyntaxList<ExpressionSyntax> expressions
+        )
         {
-            if (baseObjectCreation is ObjectCreationExpressionSyntax objectCreation &&
-                objectCreation.ArgumentList?.Arguments.Count == 0)
+            if (
+                baseObjectCreation is ObjectCreationExpressionSyntax objectCreation
+                && objectCreation.ArgumentList?.Arguments.Count == 0
+            )
             {
                 baseObjectCreation = objectCreation
-                    .WithType(objectCreation.Type.WithTrailingTrivia(objectCreation.ArgumentList.GetTrailingTrivia()))
+                    .WithType(
+                        objectCreation.Type.WithTrailingTrivia(
+                            objectCreation.ArgumentList.GetTrailingTrivia()
+                        )
+                    )
                     .WithArgumentList(null);
             }
 
             var firstExpression = expressions.First();
-            var initializerKind = firstExpression is AssignmentExpressionSyntax
-                ? SyntaxKind.ObjectInitializerExpression
-                : SyntaxKind.CollectionInitializerExpression;
+            var initializerKind =
+                firstExpression is AssignmentExpressionSyntax
+                    ? SyntaxKind.ObjectInitializerExpression
+                    : SyntaxKind.CollectionInitializerExpression;
 
-            return baseObjectCreation.WithInitializer(InitializerExpression(initializerKind, expressions));
+            return baseObjectCreation.WithInitializer(
+                InitializerExpression(initializerKind, expressions)
+            );
         }
 
-        public static void AddExistingItems(BaseObjectCreationExpressionSyntax objectCreation, ArrayBuilder<SyntaxNodeOrToken> nodesAndTokens)
+        public static void AddExistingItems(
+            BaseObjectCreationExpressionSyntax objectCreation,
+            ArrayBuilder<SyntaxNodeOrToken> nodesAndTokens
+        )
         {
             if (objectCreation.Initializer != null)
                 nodesAndTokens.AddRange(objectCreation.Initializer.Expressions.GetWithSeparators());
@@ -43,7 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
                 var last = nodesAndTokens.Last();
                 nodesAndTokens.RemoveLast();
                 nodesAndTokens.Add(last.WithTrailingTrivia());
-                nodesAndTokens.Add(Token(SyntaxKind.CommaToken).WithTrailingTrivia(last.GetTrailingTrivia()));
+                nodesAndTokens.Add(
+                    Token(SyntaxKind.CommaToken).WithTrailingTrivia(last.GetTrailingTrivia())
+                );
             }
         }
     }

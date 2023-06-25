@@ -24,7 +24,9 @@ public class CookieActionFactoryTest
     [Fact]
     public void Creates_OneCookie_AltSeparator()
     {
-        var action = CookieActionFactory.Create(";NAME;VALUE:WithColon;DOMAIN;1440;path;secure;httponly");
+        var action = CookieActionFactory.Create(
+            ";NAME;VALUE:WithColon;DOMAIN;1440;path;secure;httponly"
+        );
 
         Assert.Equal("NAME", action.Name);
         Assert.Equal("VALUE:WithColon", action.Value);
@@ -84,7 +86,9 @@ public class CookieActionFactoryTest
     public void ThrowsForInvalidIntFormat(string badInt)
     {
         var factory = new CookieActionFactory();
-        var ex = Assert.Throws<FormatException>(() => CookieActionFactory.Create("NAME:VALUE:DOMAIN:" + badInt));
+        var ex = Assert.Throws<FormatException>(
+            () => CookieActionFactory.Create("NAME:VALUE:DOMAIN:" + badInt)
+        );
         Assert.Equal(Resources.FormatError_CouldNotParseInteger(badInt), ex.Message);
     }
 }

@@ -1,16 +1,17 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // GacInstalled is an IIdentity representing whether or not an assembly is installed in the Gac
 //
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
     using System.Runtime.Remoting;
     using System;
     using System.Security;
@@ -24,11 +25,9 @@ namespace System.Security.Policy {
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class GacInstalled : EvidenceBase, IIdentityPermissionFactory
     {
-        public GacInstalled()
-        {
-        }
+        public GacInstalled() { }
 
-        public IPermission CreateIdentityPermission( Evidence evidence )
+        public IPermission CreateIdentityPermission(Evidence evidence)
         {
             return new GacIdentityPermission();
         }
@@ -55,8 +54,8 @@ namespace System.Security.Policy {
 
         internal SecurityElement ToXml()
         {
-            SecurityElement elem = new SecurityElement( this.GetType().FullName );
-            elem.AddAttribute( "version", "1" );
+            SecurityElement elem = new SecurityElement(this.GetType().FullName);
+            elem.AddAttribute("version", "1");
             return elem;
         }
 

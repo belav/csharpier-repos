@@ -10,7 +10,9 @@ namespace System.Reflection.Runtime.General
     internal static partial class Helpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static NativeFormatRuntimeNamedTypeInfo CastToNativeFormatRuntimeNamedTypeInfo(this Type type)
+        public static NativeFormatRuntimeNamedTypeInfo CastToNativeFormatRuntimeNamedTypeInfo(
+            this Type type
+        )
         {
             Debug.Assert(type is NativeFormatRuntimeNamedTypeInfo);
             return (NativeFormatRuntimeNamedTypeInfo)type;

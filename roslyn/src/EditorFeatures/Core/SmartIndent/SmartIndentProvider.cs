@@ -34,7 +34,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 throw new ArgumentNullException(nameof(textView));
             }
 
-            if (!_editorOptionsService.GlobalOptions.GetOption(InternalFeatureOnOffOptions.SmartIndenter))
+            if (
+                !_editorOptionsService.GlobalOptions.GetOption(
+                    InternalFeatureOnOffOptions.SmartIndenter
+                )
+            )
             {
                 return null;
             }

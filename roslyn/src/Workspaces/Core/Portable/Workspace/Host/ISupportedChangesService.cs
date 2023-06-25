@@ -18,10 +18,18 @@ namespace Microsoft.CodeAnalysis
         bool CanApplyChange(ApplyChangesKind kind);
 
         /// <inheritdoc cref="Workspace.CanApplyCompilationOptionChange"/>
-        bool CanApplyCompilationOptionChange(CompilationOptions oldOptions, CompilationOptions newOptions, Project project);
+        bool CanApplyCompilationOptionChange(
+            CompilationOptions oldOptions,
+            CompilationOptions newOptions,
+            Project project
+        );
 
         /// <inheritdoc cref="Workspace.CanApplyParseOptionChange"/>
-        bool CanApplyParseOptionChange(ParseOptions oldOptions, ParseOptions newOptions, Project project);
+        bool CanApplyParseOptionChange(
+            ParseOptions oldOptions,
+            ParseOptions newOptions,
+            Project project
+        );
     }
 
     [ExportWorkspaceServiceFactory(typeof(ISupportedChangesService)), Shared]
@@ -29,12 +37,10 @@ namespace Microsoft.CodeAnalysis
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSupportedChangesServiceFactory()
-        {
-        }
+        public DefaultSupportedChangesServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new DefaultSupportedChangesService(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new DefaultSupportedChangesService(workspaceServices.Workspace);
 
         private sealed class DefaultSupportedChangesService : ISupportedChangesService
         {
@@ -45,23 +51,34 @@ namespace Microsoft.CodeAnalysis
                 _workspace = workspace;
             }
 
-            public bool CanApplyChange(ApplyChangesKind kind)
-                => _workspace.CanApplyChange(kind);
+            public bool CanApplyChange(ApplyChangesKind kind) => _workspace.CanApplyChange(kind);
 
-            public bool CanApplyCompilationOptionChange(CompilationOptions oldOptions, CompilationOptions newOptions, Project project)
-                => _workspace.CanApplyCompilationOptionChange(oldOptions, newOptions, project);
+            public bool CanApplyCompilationOptionChange(
+                CompilationOptions oldOptions,
+                CompilationOptions newOptions,
+                Project project
+            ) => _workspace.CanApplyCompilationOptionChange(oldOptions, newOptions, project);
 
-            public bool CanApplyParseOptionChange(ParseOptions oldOptions, ParseOptions newOptions, Project project)
-                => _workspace.CanApplyParseOptionChange(oldOptions, newOptions, project);
+            public bool CanApplyParseOptionChange(
+                ParseOptions oldOptions,
+                ParseOptions newOptions,
+                Project project
+            ) => _workspace.CanApplyParseOptionChange(oldOptions, newOptions, project);
         }
     }
 
     internal static class SupportedChangesServiceExtensions
     {
-        public static bool CanApplyChange(this Solution solution, ApplyChangesKind kind)
-            => solution.Services.GetRequiredService<ISupportedChangesService>().CanApplyChange(kind);
+        public static bool CanApplyChange(this Solution solution, ApplyChangesKind kind) =>
+            solution.Services.GetRequiredService<ISupportedChangesService>().CanApplyChange(kind);
 
-        public static bool CanApplyParseOptionChange(this Project project, ParseOptions oldOptions, ParseOptions newOptions)
-            => project.Solution.Services.GetRequiredService<ISupportedChangesService>().CanApplyParseOptionChange(oldOptions, newOptions, project);
+        public static bool CanApplyParseOptionChange(
+            this Project project,
+            ParseOptions oldOptions,
+            ParseOptions newOptions
+        ) =>
+            project.Solution.Services
+                .GetRequiredService<ISupportedChangesService>()
+                .CanApplyParseOptionChange(oldOptions, newOptions, project);
     }
 }

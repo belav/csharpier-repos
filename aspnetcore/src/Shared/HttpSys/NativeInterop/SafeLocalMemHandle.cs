@@ -9,9 +9,7 @@ namespace Microsoft.AspNetCore.HttpSys.Internal;
 internal sealed class SafeLocalMemHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     internal SafeLocalMemHandle()
-        : base(true)
-    {
-    }
+        : base(true) { }
 
     internal SafeLocalMemHandle(IntPtr existingHandle, bool ownsHandle)
         : base(ownsHandle)

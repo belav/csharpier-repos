@@ -31,7 +31,9 @@ public class AspNetTestAssemblyRunnerTest
     [Fact]
     public async Task ConstructorWithMessageSinkHasHigherPriorityThanParameterlessConstructor()
     {
-        var runner = TestableAspNetTestAssemblyRunner.Create(typeof(TestAssemblyFixtureWithMessageSink));
+        var runner = TestableAspNetTestAssemblyRunner.Create(
+            typeof(TestAssemblyFixtureWithMessageSink)
+        );
 
         await runner.AfterTestAssemblyStartingAsync_Public();
 
@@ -45,7 +47,9 @@ public class AspNetTestAssemblyRunnerTest
     [Fact]
     public async Task CalledInExpectedOrder_SuccessWithDispose()
     {
-        var runner = TestableAspNetTestAssemblyRunner.Create(typeof(TextAssemblyFixtureWithDispose));
+        var runner = TestableAspNetTestAssemblyRunner.Create(
+            typeof(TextAssemblyFixtureWithDispose)
+        );
 
         var runSummary = await runner.RunAsync();
 
@@ -66,7 +70,8 @@ public class AspNetTestAssemblyRunnerTest
     {
         var runner = TestableAspNetTestAssemblyRunner.Create(
             typeof(TextAssemblyFixtureWithDispose),
-            failTestCase: true);
+            failTestCase: true
+        );
 
         var runSummary = await runner.RunAsync();
 
@@ -85,7 +90,9 @@ public class AspNetTestAssemblyRunnerTest
     [Fact]
     public async Task CalledInExpectedOrder_SuccessWithAsyncDispose()
     {
-        var runner = TestableAspNetTestAssemblyRunner.Create(typeof(TestAssemblyFixtureWithAsyncDispose));
+        var runner = TestableAspNetTestAssemblyRunner.Create(
+            typeof(TestAssemblyFixtureWithAsyncDispose)
+        );
 
         var runSummary = await runner.RunAsync();
 
@@ -107,7 +114,8 @@ public class AspNetTestAssemblyRunnerTest
     {
         var runner = TestableAspNetTestAssemblyRunner.Create(
             typeof(TestAssemblyFixtureWithAsyncDispose),
-            failTestCase: true);
+            failTestCase: true
+        );
 
         var runSummary = await runner.RunAsync();
 

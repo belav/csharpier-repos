@@ -21,13 +21,13 @@ namespace System.Workflow.Activities
     internal sealed class ParallelToolboxItem : ActivityToolboxItem
     {
         public ParallelToolboxItem(Type type)
-            : base(type)
-        {
-        }
+            : base(type) { }
+
         private ParallelToolboxItem(SerializationInfo info, StreamingContext context)
         {
             Deserialize(info, context);
         }
+
         protected override IComponent[] CreateComponentsCore(IDesignerHost designerHost)
         {
             CompositeActivity parallelActivity = new ParallelActivity();
@@ -48,7 +48,10 @@ namespace System.Workflow.Activities
             return new SequenceActivity();
         }
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {

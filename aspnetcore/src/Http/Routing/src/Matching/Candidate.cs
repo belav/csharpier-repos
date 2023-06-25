@@ -68,7 +68,8 @@ internal readonly struct Candidate
         (string parameterName, int segmentIndex, int slotIndex)[] captures,
         in (string parameterName, int segmentIndex, int slotIndex) catchAll,
         (RoutePatternPathSegment pathSegment, int segmentIndex)[] complexSegments,
-        KeyValuePair<string, IRouteConstraint>[] constraints)
+        KeyValuePair<string, IRouteConstraint>[] constraints
+    )
     {
         Endpoint = endpoint;
         Score = score;

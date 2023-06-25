@@ -54,7 +54,12 @@ namespace System.Web.Razor.Tokenizer
             }
         }
 
-        protected override HtmlSymbol CreateSymbol(SourceLocation start, string content, HtmlSymbolType type, IEnumerable<RazorError> errors)
+        protected override HtmlSymbol CreateSymbol(
+            SourceLocation start,
+            string content,
+            HtmlSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new HtmlSymbol(start, content, type, errors);
         }
@@ -75,16 +80,22 @@ namespace System.Web.Razor.Tokenizer
                 TakeCurrent();
                 if (CurrentCharacter == '*')
                 {
-                    return Transition(EndSymbol(HtmlSymbolType.RazorCommentTransition), AfterRazorCommentTransition);
+                    return Transition(
+                        EndSymbol(HtmlSymbolType.RazorCommentTransition),
+                        AfterRazorCommentTransition
+                    );
                 }
                 else if (CurrentCharacter == '@')
                 {
                     // Could be escaped comment transition
-                    return Transition(EndSymbol(HtmlSymbolType.Transition), () =>
-                    {
-                        TakeCurrent();
-                        return Transition(EndSymbol(HtmlSymbolType.Transition), Data);
-                    });
+                    return Transition(
+                        EndSymbol(HtmlSymbolType.Transition),
+                        () =>
+                        {
+                            TakeCurrent();
+                            return Transition(EndSymbol(HtmlSymbolType.Transition), Data);
+                        }
+                    );
                 }
                 return Stay(EndSymbol(HtmlSymbolType.Transition));
             }
@@ -101,7 +112,9 @@ namespace System.Web.Razor.Tokenizer
         private StateResult Text()
         {
             char prev = '\0';
-            while (!EndOfFile && !ParserHelpers.IsWhitespaceOrNewLine(CurrentCharacter) && !AtSymbol())
+            while (
+                !EndOfFile && !ParserHelpers.IsWhitespaceOrNewLine(CurrentCharacter) && !AtSymbol()
+            )
             {
                 prev = CurrentCharacter;
                 TakeCurrent();
@@ -110,7 +123,10 @@ namespace System.Web.Razor.Tokenizer
             if (CurrentCharacter == '@')
             {
                 char next = Peek();
-                if (ParserHelpers.IsLetterOrDecimalDigit(prev) && ParserHelpers.IsLetterOrDecimalDigit(next))
+                if (
+                    ParserHelpers.IsLetterOrDecimalDigit(prev)
+                    && ParserHelpers.IsLetterOrDecimalDigit(next)
+                )
                 {
                     TakeCurrent(); // Take the "@"
                     return Stay(); // Stay in the Text state
@@ -182,19 +198,19 @@ namespace System.Web.Razor.Tokenizer
 
         private bool AtSymbol()
         {
-            return CurrentCharacter == '<' ||
-                   CurrentCharacter == '<' ||
-                   CurrentCharacter == '!' ||
-                   CurrentCharacter == '/' ||
-                   CurrentCharacter == '?' ||
-                   CurrentCharacter == '[' ||
-                   CurrentCharacter == '>' ||
-                   CurrentCharacter == ']' ||
-                   CurrentCharacter == '=' ||
-                   CurrentCharacter == '"' ||
-                   CurrentCharacter == '\'' ||
-                   CurrentCharacter == '@' ||
-                   (CurrentCharacter == '-' && Peek() == '-');
+            return CurrentCharacter == '<'
+                || CurrentCharacter == '<'
+                || CurrentCharacter == '!'
+                || CurrentCharacter == '/'
+                || CurrentCharacter == '?'
+                || CurrentCharacter == '['
+                || CurrentCharacter == '>'
+                || CurrentCharacter == ']'
+                || CurrentCharacter == '='
+                || CurrentCharacter == '"'
+                || CurrentCharacter == '\''
+                || CurrentCharacter == '@'
+                || (CurrentCharacter == '-' && Peek() == '-');
         }
     }
 }

@@ -10,16 +10,17 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class CompositeDuplexElement : BindingElementExtensionElement
     {
-        public CompositeDuplexElement() 
-        {
-        }
+        public CompositeDuplexElement() { }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
             CompositeDuplexBindingElement binding = (CompositeDuplexBindingElement)bindingElement;
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.ClientBaseAddress].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.ClientBaseAddress].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 binding.ClientBaseAddress = this.ClientBaseAddress;
             }
@@ -57,11 +58,10 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
             CompositeDuplexBindingElement binding = (CompositeDuplexBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ClientBaseAddress, binding.ClientBaseAddress);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ClientBaseAddress,
+                binding.ClientBaseAddress
+            );
         }
-
     }
 }
-
-
-

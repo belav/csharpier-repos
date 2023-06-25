@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** File: EventSourceException.cs
-** 
+**
 ============================================================*/
 using System;
 using System.Runtime.Serialization;
@@ -32,26 +32,34 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Initializes a new instance of the EventSourceException class.
         /// </summary>
-        public EventSourceException() : base(Environment.GetResourceString("EventSource_ListenerWriteFailure")) { }
+        public EventSourceException()
+            : base(Environment.GetResourceString("EventSource_ListenerWriteFailure")) { }
 
         /// <summary>
         /// Initializes a new instance of the EventSourceException class with a specified error message.
         /// </summary>
-        public EventSourceException(string message) : base(message) { }
+        public EventSourceException(string message)
+            : base(message) { }
 
         /// <summary>
-        /// Initializes a new instance of the EventSourceException class with a specified error message 
+        /// Initializes a new instance of the EventSourceException class with a specified error message
         /// and a reference to the inner exception that is the cause of this exception.
         /// </summary>
-        public EventSourceException(string message, Exception innerException) : base(message, innerException) { }
+        public EventSourceException(string message, Exception innerException)
+            : base(message, innerException) { }
 
 #if !ES_BUILD_PCL
         /// <summary>
         /// Initializes a new instance of the EventSourceException class with serialized data.
         /// </summary>
-        protected EventSourceException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected EventSourceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 #endif
 
-        internal EventSourceException(Exception innerException) : base(Environment.GetResourceString("EventSource_ListenerWriteFailure"), innerException) { }
+        internal EventSourceException(Exception innerException)
+            : base(
+                Environment.GetResourceString("EventSource_ListenerWriteFailure"),
+                innerException
+            ) { }
     }
 }

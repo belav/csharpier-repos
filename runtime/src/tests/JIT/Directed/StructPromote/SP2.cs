@@ -8,7 +8,6 @@ using System;
 
 class SP2
 {
-
 #if USE_STRUCT
     // Struct in reg (int, long)
     struct S
@@ -37,7 +36,7 @@ class SP2
         S s;
         s.i0 = i1;
         s.l1 = l0;
-        return Foo(s);   // r0 <= r2; r2/r3 <= r0/r1
+        return Foo(s); // r0 <= r2; r2/r3 <= r0/r1
 #else
         return Foo(i1, l0);
 #endif

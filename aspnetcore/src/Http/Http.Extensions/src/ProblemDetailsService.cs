@@ -9,8 +9,7 @@ internal sealed class ProblemDetailsService : IProblemDetailsService
 {
     private readonly IProblemDetailsWriter[] _writers;
 
-    public ProblemDetailsService(
-        IEnumerable<IProblemDetailsWriter> writers)
+    public ProblemDetailsService(IEnumerable<IProblemDetailsWriter> writers)
     {
         _writers = writers.ToArray();
     }
@@ -21,9 +20,11 @@ internal sealed class ProblemDetailsService : IProblemDetailsService
         ArgumentNullException.ThrowIfNull(context.ProblemDetails);
         ArgumentNullException.ThrowIfNull(context.HttpContext);
 
-        if (context.HttpContext.Response.HasStarted ||
-            context.HttpContext.Response.StatusCode < 400 ||
-            _writers.Length == 0)
+        if (
+            context.HttpContext.Response.HasStarted
+            || context.HttpContext.Response.StatusCode < 400
+            || _writers.Length == 0
+        )
         {
             return ValueTask.CompletedTask;
         }
@@ -34,9 +35,9 @@ internal sealed class ProblemDetailsService : IProblemDetailsService
         {
             selectedWriter = _writers[0];
 
-            return selectedWriter.CanWrite(context) ?
-                selectedWriter.WriteAsync(context) :
-                ValueTask.CompletedTask;
+            return selectedWriter.CanWrite(context)
+                ? selectedWriter.WriteAsync(context)
+                : ValueTask.CompletedTask;
         }
 
         for (var i = 0; i < _writers.Length; i++)

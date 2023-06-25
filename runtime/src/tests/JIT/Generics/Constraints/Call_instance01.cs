@@ -25,7 +25,8 @@ public struct FooStruct : IFoo
     }
 }
 
-public class GenClass<T> where T : IFoo
+public class GenClass<T>
+    where T : IFoo
 {
     public bool CallOnConstraint(T t)
     {
@@ -38,17 +39,20 @@ public class GenClass<T> where T : IFoo
     }
 }
 
-public struct GenStruct<T> where T : IFoo
+public struct GenStruct<T>
+    where T : IFoo
 {
     public bool CallOnConstraint(T t)
     {
         return (t.InterfaceMethod().Equals(typeof(T)));
     }
 }
+
 public class Test_Call_instance01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -57,7 +61,6 @@ public class Test_Call_instance01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -82,6 +85,4 @@ public class Test_Call_instance01
             return 1;
         }
     }
-
 }
-

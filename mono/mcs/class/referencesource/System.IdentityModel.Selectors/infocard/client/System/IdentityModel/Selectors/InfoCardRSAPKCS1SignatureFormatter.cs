@@ -16,7 +16,8 @@ namespace System.IdentityModel.Selectors
         // public constructors
         //
 
-        public InfoCardRSAPKCS1SignatureFormatter() : base() { }
+        public InfoCardRSAPKCS1SignatureFormatter()
+            : base() { }
 
         public InfoCardRSAPKCS1SignatureFormatter(AsymmetricAlgorithm key)
             : base(key)
@@ -42,7 +43,10 @@ namespace System.IdentityModel.Selectors
 
         public override byte[] CreateSignature(byte[] rgbHash)
         {
-            if (!(null == m_strOID || null == m_rsaKey || null == rgbHash) && m_rsaKey is InfoCardRSACryptoProvider)
+            if (
+                !(null == m_strOID || null == m_rsaKey || null == rgbHash)
+                && m_rsaKey is InfoCardRSACryptoProvider
+            )
             {
                 return ((InfoCardRSACryptoProvider)m_rsaKey).SignHash(rgbHash, m_strOID);
             }

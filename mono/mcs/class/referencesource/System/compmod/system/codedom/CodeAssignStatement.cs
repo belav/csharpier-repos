@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeAssignStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
+namespace System.CodeDom
+{
     using System.Diagnostics;
     using System;
     using Microsoft.Win32;
@@ -19,12 +19,9 @@ namespace System.CodeDom {
     ///       Represents a simple assignment statement.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeAssignStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    public class CodeAssignStatement : CodeStatement
+    {
         private CodeExpression left;
         private CodeExpression right;
 
@@ -33,8 +30,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeAssignStatement'/>.
         ///    </para>
         /// </devdoc>
-        public CodeAssignStatement() {
-        }
+        public CodeAssignStatement() { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +38,8 @@ namespace System.CodeDom {
         ///       specified assignment values.
         ///    </para>
         /// </devdoc>
-        public CodeAssignStatement(CodeExpression left, CodeExpression right) {
+        public CodeAssignStatement(CodeExpression left, CodeExpression right)
+        {
             Left = left;
             Right = right;
         }
@@ -53,13 +50,10 @@ namespace System.CodeDom {
         ///       the variable to be assigned to.
         ///    </para>
         /// </devdoc>
-        public CodeExpression Left {
-            get {
-                return left;
-            }
-            set {
-                left = value;
-            }
+        public CodeExpression Left
+        {
+            get { return left; }
+            set { left = value; }
         }
 
         /// <devdoc>
@@ -68,13 +62,10 @@ namespace System.CodeDom {
         ///       the value to assign.
         ///    </para>
         /// </devdoc>
-        public CodeExpression Right {
-            get {
-                return right;
-            }
-            set {
-                right = value;
-            }
+        public CodeExpression Right
+        {
+            get { return right; }
+            set { right = value; }
         }
     }
 }

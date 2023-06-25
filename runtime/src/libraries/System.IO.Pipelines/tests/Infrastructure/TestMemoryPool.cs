@@ -59,7 +59,10 @@ namespace System.IO.Pipelines
 
             ~PooledMemory()
             {
-                Debug.Assert(_returned, $"Block being garbage collected instead of returned to pool{Environment.NewLine}{_leaser}");
+                Debug.Assert(
+                    _returned,
+                    $"Block being garbage collected instead of returned to pool{Environment.NewLine}{_leaser}"
+                );
             }
 
             protected override void Dispose(bool disposing)
@@ -88,7 +91,14 @@ namespace System.IO.Pipelines
 
                         GCHandle handle = GCHandle.Alloc(segment.Array, GCHandleType.Pinned);
 
-                        return new MemoryHandle(Unsafe.Add<byte>(((void*)handle.AddrOfPinnedObject()), elementIndex + segment.Offset), handle, this);
+                        return new MemoryHandle(
+                            Unsafe.Add<byte>(
+                                ((void*)handle.AddrOfPinnedObject()),
+                                elementIndex + segment.Offset
+                            ),
+                            handle,
+                            this
+                        );
                     }
                     catch
                     {

@@ -5,7 +5,6 @@ using System;
 using System.Xml;
 using System.Collections.Generic;
 
-
 namespace System.Runtime.Serialization
 {
     internal sealed class HybridObjectCache
@@ -13,16 +12,18 @@ namespace System.Runtime.Serialization
         private Dictionary<string, object?>? _objectDictionary;
         private Dictionary<string, object?>? _referencedObjectDictionary;
 
-        internal HybridObjectCache()
-        {
-        }
+        internal HybridObjectCache() { }
 
         internal void Add(string id, object? obj)
         {
             _objectDictionary ??= new Dictionary<string, object?>();
 
             if (_objectDictionary.ContainsKey(id))
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.MultipleIdDefinition, id)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.MultipleIdDefinition, id)
+                    )
+                );
             _objectDictionary.Add(id, obj);
         }
 

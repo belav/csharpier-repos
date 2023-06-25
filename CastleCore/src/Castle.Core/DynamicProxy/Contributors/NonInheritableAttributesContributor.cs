@@ -40,8 +40,6 @@ namespace Castle.DynamicProxy.Contributors
             }
         }
 
-        public void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
-        {
-        }
+        public void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model) { }
     }
 }

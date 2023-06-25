@@ -102,7 +102,10 @@ public class ResponseHeaderTests : IDisposable
         string address;
         using (var server = Utilities.CreateHttpServer(out address))
         {
-            Task<HttpResponseMessage> responseTask = SendHeadRequestAsync(address, usehttp11: false);
+            Task<HttpResponseMessage> responseTask = SendHeadRequestAsync(
+                address,
+                usehttp11: false
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             context.Dispose();
@@ -213,7 +216,11 @@ public class ResponseHeaderTests : IDisposable
         using (var server = Utilities.CreateHttpServer(out address))
         {
             // Http.Sys does not support 1.0 keep-alives.
-            Task<HttpResponseMessage> responseTask = SendRequestAsync(address, usehttp11: false, sendKeepAlive: true);
+            Task<HttpResponseMessage> responseTask = SendRequestAsync(
+                address,
+                usehttp11: false,
+                sendKeepAlive: true
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             context.Dispose();
@@ -289,7 +296,11 @@ public class ResponseHeaderTests : IDisposable
         }
     }
 
-    private async Task<HttpResponseMessage> SendRequestAsync(string uri, bool usehttp11 = true, bool sendKeepAlive = false)
+    private async Task<HttpResponseMessage> SendRequestAsync(
+        string uri,
+        bool usehttp11 = true,
+        bool sendKeepAlive = false
+    )
     {
         var request = new HttpRequestMessage(HttpMethod.Get, uri);
         if (!usehttp11)

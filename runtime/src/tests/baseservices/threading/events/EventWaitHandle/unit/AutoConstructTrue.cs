@@ -15,7 +15,7 @@ public class AutoConstructTrue : EventWaitHandleTest
     {
         var ewh = new EventWaitHandle(true, EventResetMode.AutoReset);
         var sw = new Stopwatch();
-        
+
         if (!ewh.TestWaitOne(0, null))
             return -1;
 
