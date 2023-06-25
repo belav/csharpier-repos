@@ -19,6 +19,9 @@
 # missing ) inside in #if
 /aspnetcore/src/Http/Routing/src/Matching/ILEmitTrieFactory.cs
 
+# doesn't compile
+/mono/mcs/class/referencesource/System.Web.DataVisualization/Common/General/Axis.cs
+
 # has #error in an #else we can handle these probably
 /efcore/test/Microsoft.Data.Sqlite.Tests/TestUtilities/SqliteTestFramework.cs
 /roslyn/src/Compilers/Test/Core/Assert/ConditionalFactAttribute.cs
