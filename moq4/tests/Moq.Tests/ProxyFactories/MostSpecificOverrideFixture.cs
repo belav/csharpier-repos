@@ -4,11 +4,16 @@
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
 
 using System;
+
 using System.Reflection;
 
-using Xunit;
+
 
 using static Moq.CastleProxyFactory;
+
+
+
+using Xunit;
 
 namespace Moq.Tests.ProxyFactories
 {
