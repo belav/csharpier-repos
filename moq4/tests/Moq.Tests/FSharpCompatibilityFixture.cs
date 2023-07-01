@@ -3,15 +3,11 @@
 
 using System;
 
-
 using System.Collections.Generic;
-
 
 using System.Reflection;
 
-
 using Moq.Tests.FSharpTypes;
-
 
 using Xunit;
 

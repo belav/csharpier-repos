@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 
-
 using System.Linq;
 
 namespace Moq.Behaviors

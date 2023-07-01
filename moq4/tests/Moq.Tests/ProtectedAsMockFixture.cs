@@ -3,12 +3,9 @@
 
 using System;
 
-
 using System.Collections.Generic;
 
-
 using Moq.Protected;
-
 
 using Xunit;
 

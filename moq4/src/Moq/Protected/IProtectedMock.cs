@@ -3,12 +3,9 @@
 
 using System;
 
-
 using System.ComponentModel;
 
-
 using Moq.Language;
-
 
 using Moq.Language.Flow;
 

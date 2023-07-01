@@ -3,9 +3,7 @@
 
 using System;
 
-
 using System.ComponentModel;
-
 
 using Moq.Language.Flow;
 
