@@ -2,11 +2,8 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using System.ComponentModel;
-
 using System.Diagnostics.CodeAnalysis;
-
 using Xunit;
 
 namespace Moq.Tests

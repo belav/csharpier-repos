@@ -2,27 +2,16 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using System.Collections.Generic;
-
 using System.Diagnostics;
-
 using System.Globalization;
-
 using System.Linq;
-
 using System.Linq.Expressions;
-
 using System.Runtime.Serialization;
-
 using System.Security;
-
 using System.Text;
-
 using Moq.Async;
-
 using Moq.Language;
-
 using Moq.Properties;
 
 namespace Moq

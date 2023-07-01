@@ -2,39 +2,22 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using System.Collections;
-
 using System.Collections.Generic;
-
 using System.ComponentModel;
-
 using System.IO;
-
 using System.Linq;
-
 using System.Linq.Expressions;
-
 using System.Reflection;
-
 using System.Runtime.Serialization;
-
 using System.Text.RegularExpressions;
-
 using System.Threading;
-
 using System.Threading.Tasks;
-
 using Castle.DynamicProxy;
-
 using Microsoft.Extensions.Logging;
-
 using Moq;
-
 using Moq.Properties;
-
 using Moq.Protected;
-
 using Xunit;
 
 #region #181

@@ -2,11 +2,8 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System.Runtime.CompilerServices;
-
 using System.Runtime.InteropServices;
-
 using Moq.Tests.ComTypes;
-
 using Xunit;
 
 namespace Moq.Tests

@@ -2,17 +2,11 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using System.Linq;
-
 using System.Linq.Expressions;
-
 using System.Text.RegularExpressions;
-
 using Moq.Matchers;
-
 using Moq.Protected;
-
 using Xunit;
 
 namespace Moq.Tests
