@@ -4,6 +4,7 @@
 using System.Net.Http;
 using System.Net.Http.HPack;
 using System.Text;
+
 using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;

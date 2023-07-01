@@ -5,8 +5,8 @@
 
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.Extensions.Internal;
 using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
+using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 

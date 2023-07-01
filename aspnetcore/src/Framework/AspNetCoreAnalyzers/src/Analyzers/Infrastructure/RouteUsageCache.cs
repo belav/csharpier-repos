@@ -3,6 +3,7 @@
 
 using System.Collections.Concurrent;
 using System.Threading;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure;
 using Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;

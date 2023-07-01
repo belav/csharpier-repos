@@ -5,6 +5,7 @@ using System.Buffers;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+
 using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.WebUtilities;

@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;

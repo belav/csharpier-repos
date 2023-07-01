@@ -4,6 +4,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
+
 using Microsoft.DotNet.OpenApi.Tests;
 using Microsoft.Extensions.Tools.Internal;
 using Xunit;

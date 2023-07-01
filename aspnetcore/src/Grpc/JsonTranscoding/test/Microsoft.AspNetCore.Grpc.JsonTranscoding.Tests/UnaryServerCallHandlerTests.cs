@@ -3,7 +3,9 @@
 
 using System.Text;
 using System.Text.Json;
+using Type = System.Type;
 using System.Xml.Linq;
+
 using Google.Api;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
@@ -15,6 +17,7 @@ using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Grpc.Shared;
 using Grpc.Shared.Server;
+using MethodOptions = Grpc.Shared.Server.MethodOptions;
 using Grpc.Tests.Shared;
 using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
@@ -25,8 +28,6 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Primitives;
 using Transcoding;
 using Xunit.Abstractions;
-using MethodOptions = Grpc.Shared.Server.MethodOptions;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 

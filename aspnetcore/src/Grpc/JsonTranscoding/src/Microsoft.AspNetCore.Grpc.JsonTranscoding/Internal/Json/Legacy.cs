@@ -38,9 +38,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using Type = System.Type;
+
 using Google.Protobuf.Reflection;
 using Google.Protobuf.WellKnownTypes;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

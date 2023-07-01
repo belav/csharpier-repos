@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using System.Text;
+
 using BasicTestApp;
 using BasicTestApp.FormsTest;
 using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;

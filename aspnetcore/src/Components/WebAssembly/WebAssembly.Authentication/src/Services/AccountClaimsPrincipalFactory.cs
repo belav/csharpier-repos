@@ -3,6 +3,7 @@
 
 using System.Security.Claims;
 using System.Text.Json;
+
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;

@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Testing;
 using Templates.Test.Helpers;
 using Xunit;

@@ -3,6 +3,7 @@
 
 using System.Reflection;
 using System.Runtime.ExceptionServices;
+
 using Microsoft.AspNetCore.E2ETesting;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;

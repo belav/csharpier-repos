@@ -4,6 +4,7 @@
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+
 using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;

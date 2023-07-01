@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Net.Http;
+
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 using Xunit.Sdk;

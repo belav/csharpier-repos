@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+
 using Microsoft.Build.Framework;
 
 // Inspired by https://github.com/microsoft/msbuild/blob/master/src/Utilities.UnitTests/MockEngine.cs

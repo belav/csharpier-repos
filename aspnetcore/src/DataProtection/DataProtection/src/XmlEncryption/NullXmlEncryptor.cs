@@ -3,6 +3,7 @@
 
 using System;
 using System.Xml.Linq;
+
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;

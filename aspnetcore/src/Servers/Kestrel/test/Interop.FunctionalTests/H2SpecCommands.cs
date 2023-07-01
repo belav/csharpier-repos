@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Xml;
+
 using Microsoft.Extensions.Logging;
 using Xunit;
 

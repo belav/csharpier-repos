@@ -4,6 +4,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.Loader;
+
 using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;

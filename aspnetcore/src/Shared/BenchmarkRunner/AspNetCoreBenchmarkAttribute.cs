@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using BenchmarkDotNet.Configs;
 
 namespace BenchmarkDotNet.Attributes;

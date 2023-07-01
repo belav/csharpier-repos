@@ -7,6 +7,7 @@ using System.Composition;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.App.Analyzers.Infrastructure;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;

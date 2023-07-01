@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text.Json;
+using Type = System.Type;
+
 using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Shared;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

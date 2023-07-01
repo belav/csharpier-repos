@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.Build.Evaluation;
 
 namespace Microsoft.DotNet.OpenApi;

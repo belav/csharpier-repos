@@ -4,8 +4,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using Google.Protobuf.Reflection;
 using Type = System.Type;
+
+using Google.Protobuf.Reflection;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

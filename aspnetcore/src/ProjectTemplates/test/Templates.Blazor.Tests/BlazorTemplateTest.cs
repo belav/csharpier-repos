@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.BrowserTesting;
 using Templates.Test.Helpers;
 using Xunit;

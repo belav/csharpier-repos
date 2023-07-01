@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;

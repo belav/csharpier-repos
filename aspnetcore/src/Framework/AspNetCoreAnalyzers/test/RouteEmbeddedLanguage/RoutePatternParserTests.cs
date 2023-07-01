@@ -5,6 +5,7 @@
 
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 using Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;

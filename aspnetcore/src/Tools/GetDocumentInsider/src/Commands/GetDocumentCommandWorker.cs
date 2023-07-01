@@ -9,12 +9,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Tools.Internal;
 #if NET7_0_OR_GREATER
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Hosting.Server;using Microsoft.Extensions.DependencyInjection;using Microsoft.AspNetCore.Http.Features;
 #endif
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;

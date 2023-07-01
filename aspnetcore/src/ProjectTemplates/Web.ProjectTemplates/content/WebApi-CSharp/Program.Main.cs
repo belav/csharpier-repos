@@ -1,6 +1,5 @@
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -9,8 +8,7 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Graph = Microsoft.Graph;
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.Resource;
+using Microsoft.Identity.Web;using Microsoft.Identity.Web.Resource;
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth || GenerateGraph || WindowsAuth || EnableOpenAPI)
 

@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Linq;
+
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;

@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Xunit;
 

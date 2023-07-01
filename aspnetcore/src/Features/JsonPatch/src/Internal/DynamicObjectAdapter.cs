@@ -4,11 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CSharp.RuntimeBinder;
+using CSharpBinder = Microsoft.CSharp.RuntimeBinder;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using CSharpBinder = Microsoft.CSharp.RuntimeBinder;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 

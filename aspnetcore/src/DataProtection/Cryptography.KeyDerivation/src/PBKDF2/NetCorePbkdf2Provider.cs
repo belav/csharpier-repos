@@ -2,10 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NETCOREAPP
-using System;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
+using System;using System.Diagnostics;using System.Security.Cryptography;using System.Text;
 
 namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 

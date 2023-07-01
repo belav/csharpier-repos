@@ -19,6 +19,7 @@
 using System.Globalization;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+
 using CommandLine;
 using Google.Apis.Auth.OAuth2;
 using Google.Protobuf;

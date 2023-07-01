@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+
 using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;

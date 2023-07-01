@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Net.Http;
+
 using AngleSharp.Parser.Html;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;

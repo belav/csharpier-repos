@@ -3,6 +3,7 @@
 
 using System;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;

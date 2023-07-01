@@ -3,11 +3,11 @@
 
 using System.Globalization;
 using Microsoft.AspNetCore.Analyzer.Testing;
-using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
     Microsoft.AspNetCore.Analyzers.WebApplicationBuilder.WebApplicationBuilderAnalyzer,
     Microsoft.AspNetCore.Analyzers.WebApplicationBuilder.Fixers.WebApplicationBuilderFixer
 >;
+using Microsoft.CodeAnalysis.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder;
 

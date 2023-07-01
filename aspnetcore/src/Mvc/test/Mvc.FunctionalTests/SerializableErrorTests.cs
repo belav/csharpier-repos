@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+
 using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;

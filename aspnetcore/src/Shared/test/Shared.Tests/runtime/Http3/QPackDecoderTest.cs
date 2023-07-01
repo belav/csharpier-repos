@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.HPack;
 using System.Net.Http.QPack;
-using System.Text;
-using Xunit;
 using HeaderField = System.Net.Http.QPack.HeaderField;
+using System.Text;
+
+using Xunit;
 #if KESTREL
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 #endif

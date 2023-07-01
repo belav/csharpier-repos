@@ -4,6 +4,7 @@
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Security.Claims;
+
 using Microsoft.AspNetCore.Identity.Test;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Data.Sqlite;

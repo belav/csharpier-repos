@@ -3,6 +3,7 @@
 
 using System;
 using System.Dynamic;
+
 using Newtonsoft.Json;
 using Xunit;
 

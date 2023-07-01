@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
+
 using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;

@@ -6,10 +6,7 @@ using System;
 #if NETCOREAPP
 using System.Buffers;
 #endif
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.WebEncoders.Sources;
+using System.Diagnostics;using System.Globalization;using System.Runtime.CompilerServices;using Microsoft.Extensions.WebEncoders.Sources;
 
 #if WebEncoders_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;

@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Text;
+
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;

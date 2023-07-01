@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure;
 using Microsoft.CodeAnalysis.Text;
 

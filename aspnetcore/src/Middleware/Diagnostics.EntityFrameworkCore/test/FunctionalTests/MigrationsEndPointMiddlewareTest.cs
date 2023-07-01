@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Net.Http;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.Helpers;
 using Microsoft.AspNetCore.Hosting;

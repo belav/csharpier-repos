@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Ignitor;
 using Microsoft.AspNetCore.SignalR.Client;
 

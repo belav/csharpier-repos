@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.StaticWebAssets;
 using Microsoft.Extensions.DependencyInjection;

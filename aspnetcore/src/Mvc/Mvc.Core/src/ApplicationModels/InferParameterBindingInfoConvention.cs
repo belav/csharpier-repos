@@ -3,10 +3,11 @@
 
 using System.Linq;
 using System.Reflection;
+
+using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.Extensions.DependencyInjection;
-using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 

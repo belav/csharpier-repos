@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;

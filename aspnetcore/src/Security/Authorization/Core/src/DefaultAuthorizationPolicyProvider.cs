@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authorization;

@@ -5,10 +5,11 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
+using Type = System.Type;
+
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 using Grpc.Shared;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

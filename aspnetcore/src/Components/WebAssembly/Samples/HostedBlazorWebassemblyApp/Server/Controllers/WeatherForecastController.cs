@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using HostedBlazorWebassemblyApp.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

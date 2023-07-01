@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Xunit;
 using Xunit.Sdk;

@@ -4,6 +4,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Security.Claims;
+
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BasicTestApp.AuthTest;

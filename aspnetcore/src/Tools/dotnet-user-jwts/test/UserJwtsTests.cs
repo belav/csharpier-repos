@@ -4,20 +4,21 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Numerics;
+using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.Tools.Internal;
-using Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 using Xunit;
 using Xunit.Abstractions;
-using System.Text.RegularExpressions;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
-using System.Numerics;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools.Tests;
 

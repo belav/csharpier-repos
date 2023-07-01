@@ -5,6 +5,7 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+
 using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.CommandLineUtils;

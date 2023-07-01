@@ -3,6 +3,7 @@
 
 using System;
 using System.Text;
+
 using Microsoft.Extensions.ApiDescription.Tool.Commands;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;

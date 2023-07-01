@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 using StackExchange.Redis.Profiling;

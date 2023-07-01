@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;

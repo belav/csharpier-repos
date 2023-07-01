@@ -18,6 +18,7 @@
 
 using System;
 using System.Reflection;
+
 using Grpc.Testing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;

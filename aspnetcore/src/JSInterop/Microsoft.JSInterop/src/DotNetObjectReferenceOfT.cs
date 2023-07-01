@@ -3,8 +3,9 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.JSInterop.Infrastructure;
+
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.AspNetCore.JsonPatch.IntegrationTests;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

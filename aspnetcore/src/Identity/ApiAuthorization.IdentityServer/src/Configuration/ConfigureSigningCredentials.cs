@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
