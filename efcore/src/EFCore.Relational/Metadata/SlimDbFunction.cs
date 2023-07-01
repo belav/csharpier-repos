@@ -52,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string? schema,
             string? storeType,
             RelationalTypeMapping? typeMapping = null,
-            Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation = null)
+            Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation = null
+        )
         {
             ModelName = modelName;
             Model = model;
@@ -93,14 +94,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Type clrType,
             bool propagatesNullability,
             string storeType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
-            var slimFunctionParameter = new SlimDbFunctionParameter(this,
+            var slimFunctionParameter = new SlimDbFunctionParameter(
+                this,
                 name,
                 clrType,
                 propagatesNullability,
                 storeType,
-                typeMapping);
+                typeMapping
+            );
 
             _parameters.Add(slimFunctionParameter);
             return slimFunctionParameter;
@@ -110,8 +114,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
-        public override string ToString()
-            => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,10 +124,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
+        public virtual DebugView DebugView =>
+            new(
                 () => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
-                () => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+                () => ((IDbFunction)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+            );
 
         /// <inheritdoc />
         IReadOnlyModel IReadOnlyDbFunction.Model
@@ -240,15 +245,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         RelationalTypeMapping? IReadOnlyDbFunction.TypeMapping
         {
             [DebuggerStepThrough]
-            get => _isScalar
-                    ? NonCapturingLazyInitializer.EnsureInitialized(ref _typeMapping, this, static dbFunction =>
+            get =>
+                _isScalar
+                    ? NonCapturingLazyInitializer.EnsureInitialized(
+                        ref _typeMapping,
+                        this,
+                        static dbFunction =>
                         {
-                            var relationalTypeMappingSource =
-                                (IRelationalTypeMappingSource)((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
+                            var relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                                ((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
                             return !string.IsNullOrEmpty(dbFunction._storeType)
-                                        ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
-                                        : relationalTypeMappingSource.FindMapping(dbFunction._returnType)!;
-                        })
+                                ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
+                                : relationalTypeMappingSource.FindMapping(dbFunction._returnType)!;
+                        }
+                    )
                     : _typeMapping;
         }
     }

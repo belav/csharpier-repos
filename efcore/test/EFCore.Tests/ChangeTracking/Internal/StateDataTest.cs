@@ -16,7 +16,8 @@ public class StateDataTest
                 InternalEntityEntry.PropertyFlag.Null,
                 InternalEntityEntry.PropertyFlag.Unknown,
                 InternalEntityEntry.PropertyFlag.IsLoaded,
-                InternalEntityEntry.PropertyFlag.IsTemporary);
+                InternalEntityEntry.PropertyFlag.IsTemporary
+            );
         }
     }
 
@@ -31,7 +32,8 @@ public class StateDataTest
                 InternalEntityEntry.PropertyFlag.Modified,
                 InternalEntityEntry.PropertyFlag.Unknown,
                 InternalEntityEntry.PropertyFlag.IsLoaded,
-                InternalEntityEntry.PropertyFlag.IsTemporary);
+                InternalEntityEntry.PropertyFlag.IsTemporary
+            );
         }
     }
 
@@ -46,7 +48,8 @@ public class StateDataTest
                 InternalEntityEntry.PropertyFlag.Modified,
                 InternalEntityEntry.PropertyFlag.Null,
                 InternalEntityEntry.PropertyFlag.IsLoaded,
-                InternalEntityEntry.PropertyFlag.IsTemporary);
+                InternalEntityEntry.PropertyFlag.IsTemporary
+            );
         }
     }
 
@@ -61,7 +64,8 @@ public class StateDataTest
                 InternalEntityEntry.PropertyFlag.Modified,
                 InternalEntityEntry.PropertyFlag.Null,
                 InternalEntityEntry.PropertyFlag.Unknown,
-                InternalEntityEntry.PropertyFlag.IsTemporary);
+                InternalEntityEntry.PropertyFlag.IsTemporary
+            );
         }
     }
 
@@ -76,7 +80,8 @@ public class StateDataTest
                 InternalEntityEntry.PropertyFlag.IsLoaded,
                 InternalEntityEntry.PropertyFlag.Modified,
                 InternalEntityEntry.PropertyFlag.Null,
-                InternalEntityEntry.PropertyFlag.Unknown);
+                InternalEntityEntry.PropertyFlag.Unknown
+            );
         }
     }
 
@@ -86,7 +91,8 @@ public class StateDataTest
         InternalEntityEntry.PropertyFlag unusedFlag1,
         InternalEntityEntry.PropertyFlag unusedFlag2,
         InternalEntityEntry.PropertyFlag unusedFlag3,
-        InternalEntityEntry.PropertyFlag unusedFlag4)
+        InternalEntityEntry.PropertyFlag unusedFlag4
+    )
     {
         var data = new InternalEntityEntry.StateData(propertyCount, propertyCount);
 

@@ -61,8 +61,7 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// </summary>
     /// <param name="memberName">The name of the member that might be ignored.</param>
     /// <returns><see langword="true" /> if the given member name is ignored.</returns>
-    bool IsIgnored(string memberName)
-        => FindIgnoredConfigurationSource(memberName) != null;
+    bool IsIgnored(string memberName) => FindIgnoredConfigurationSource(memberName) != null;
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for properties of this type.
@@ -74,16 +73,23 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    PropertyAccessMode? SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false)
-        => (PropertyAccessMode?)SetOrRemoveAnnotation(CoreAnnotationNames.PropertyAccessMode, propertyAccessMode, fromDataAnnotation)
-            ?.Value;
+    PropertyAccessMode? SetPropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    ) =>
+        (PropertyAccessMode?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.PropertyAccessMode,
+                propertyAccessMode,
+                fromDataAnnotation
+            )?.Value;
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetPropertyAccessMode" />.
     /// </summary>
     /// <returns>The configuration source for <see cref="IReadOnlyTypeBase.GetPropertyAccessMode" />.</returns>
-    ConfigurationSource? GetPropertyAccessModeConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.PropertyAccessMode)?.GetConfigurationSource();
+    ConfigurationSource? GetPropertyAccessModeConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.PropertyAccessMode)?.GetConfigurationSource();
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for navigations of this entity type.
@@ -95,14 +101,21 @@ public interface IConventionTypeBase : IReadOnlyTypeBase, IConventionAnnotatable
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    PropertyAccessMode? SetNavigationAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false)
-        => (PropertyAccessMode?)SetOrRemoveAnnotation(
-            CoreAnnotationNames.NavigationAccessMode, propertyAccessMode, fromDataAnnotation)?.Value;
+    PropertyAccessMode? SetNavigationAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    ) =>
+        (PropertyAccessMode?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.NavigationAccessMode,
+                propertyAccessMode,
+                fromDataAnnotation
+            )?.Value;
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyTypeBase.GetNavigationAccessMode" />.
     /// </summary>
     /// <returns>The configuration source for <see cref="IReadOnlyTypeBase.GetNavigationAccessMode" />.</returns>
-    ConfigurationSource? GetNavigationAccessModeConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.NavigationAccessMode)?.GetConfigurationSource();
+    ConfigurationSource? GetNavigationAccessModeConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.NavigationAccessMode)?.GetConfigurationSource();
 }

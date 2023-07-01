@@ -17,7 +17,8 @@ public readonly record struct EntityMaterializerSourceParameters
     public EntityMaterializerSourceParameters(
         IEntityType entityType,
         string entityInstanceName,
-        QueryTrackingBehavior? queryTrackingBehavior)
+        QueryTrackingBehavior? queryTrackingBehavior
+    )
     {
         EntityType = entityType;
         EntityInstanceName = entityInstanceName;

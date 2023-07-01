@@ -16,13 +16,14 @@ public class ColumnBuilder<TProperty> : ColumnBuilder, IInfrastructure<PropertyB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public ColumnBuilder(in StoreObjectIdentifier storeObject, PropertyBuilder<TProperty> propertyBuilder)
-        : base(storeObject, propertyBuilder)
-    {
-    }
+    public ColumnBuilder(
+        in StoreObjectIdentifier storeObject,
+        PropertyBuilder<TProperty> propertyBuilder
+    )
+        : base(storeObject, propertyBuilder) { }
 
-    private PropertyBuilder<TProperty> PropertyBuilder
-        => (PropertyBuilder<TProperty>)((IInfrastructure<PropertyBuilder>)this).Instance;
+    private PropertyBuilder<TProperty> PropertyBuilder =>
+        (PropertyBuilder<TProperty>)((IInfrastructure<PropertyBuilder>)this).Instance;
 
     /// <summary>
     ///     Configures the column that the property maps to when targeting a relational database.
@@ -32,8 +33,8 @@ public class ColumnBuilder<TProperty> : ColumnBuilder, IInfrastructure<PropertyB
     /// </remarks>
     /// <param name="name">The name of the column.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual ColumnBuilder<TProperty> HasColumnName(string? name)
-        => (ColumnBuilder<TProperty>)base.HasColumnName(name);
+    public new virtual ColumnBuilder<TProperty> HasColumnName(string? name) =>
+        (ColumnBuilder<TProperty>)base.HasColumnName(name);
 
     /// <summary>
     ///     Adds or updates an annotation on the property for a specific table.
@@ -43,9 +44,9 @@ public class ColumnBuilder<TProperty> : ColumnBuilder, IInfrastructure<PropertyB
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ColumnBuilder<TProperty> HasAnnotation(string annotation, object? value)
-        => (ColumnBuilder<TProperty>)base.HasAnnotation(annotation, value);
+    public new virtual ColumnBuilder<TProperty> HasAnnotation(string annotation, object? value) =>
+        (ColumnBuilder<TProperty>)base.HasAnnotation(annotation, value);
 
-    PropertyBuilder<TProperty> IInfrastructure<PropertyBuilder<TProperty>>.Instance
-        => PropertyBuilder;
+    PropertyBuilder<TProperty> IInfrastructure<PropertyBuilder<TProperty>>.Instance =>
+        PropertyBuilder;
 }

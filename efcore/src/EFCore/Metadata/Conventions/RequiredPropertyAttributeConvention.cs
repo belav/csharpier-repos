@@ -11,16 +11,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RequiredPropertyAttributeConvention : PropertyAttributeConventionBase<RequiredAttribute>
+public class RequiredPropertyAttributeConvention
+    : PropertyAttributeConventionBase<RequiredAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RequiredPropertyAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public RequiredPropertyAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public RequiredPropertyAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -33,6 +34,6 @@ public class RequiredPropertyAttributeConvention : PropertyAttributeConventionBa
         IConventionPropertyBuilder propertyBuilder,
         RequiredAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
-        => propertyBuilder.IsRequired(true, fromDataAnnotation: true);
+        IConventionContext context
+    ) => propertyBuilder.IsRequired(true, fromDataAnnotation: true);
 }

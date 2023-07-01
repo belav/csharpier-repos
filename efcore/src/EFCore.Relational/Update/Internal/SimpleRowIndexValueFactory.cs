@@ -49,7 +49,11 @@ public class SimpleRowIndexValueFactory<TKey> : IRowIndexValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateIndexValue(object?[] keyValues, out TKey? key, out bool hasNullValue)
+    public virtual bool TryCreateIndexValue(
+        object?[] keyValues,
+        out TKey? key,
+        out bool hasNullValue
+    )
     {
         key = (TKey?)keyValues[0];
         hasNullValue = key == null;
@@ -62,7 +66,11 @@ public class SimpleRowIndexValueFactory<TKey> : IRowIndexValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateIndexValue(IDictionary<string, object?> keyValues, out TKey? key, out bool hasNullValue)
+    public virtual bool TryCreateIndexValue(
+        IDictionary<string, object?> keyValues,
+        out TKey? key,
+        out bool hasNullValue
+    )
     {
         if (keyValues.TryGetValue(_column.Name, out var value))
         {
@@ -86,11 +94,18 @@ public class SimpleRowIndexValueFactory<TKey> : IRowIndexValueFactory<TKey>
         IReadOnlyModificationCommand command,
         bool fromOriginalValues,
         out TKey? key,
-        out bool hasNullValue)
+        out bool hasNullValue
+    )
     {
         (key, var present) = fromOriginalValues
-            ? ((Func<IReadOnlyModificationCommand, (TKey, bool)>)_columnAccessors.OriginalValueGetter)(command)
-            : ((Func<IReadOnlyModificationCommand, (TKey, bool)>)_columnAccessors.CurrentValueGetter)(command);
+            ? (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    _columnAccessors.OriginalValueGetter
+            )(command)
+            : (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    _columnAccessors.CurrentValueGetter
+            )(command);
         hasNullValue = key == null;
         return present;
     }
@@ -102,8 +117,10 @@ public class SimpleRowIndexValueFactory<TKey> : IRowIndexValueFactory<TKey>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual (object? Value, bool HasNullValue) CreateEquatableIndexValue(
-        IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateIndexValue(command, fromOriginalValues, out var keyValue, out var hasNullValue)
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateIndexValue(command, fromOriginalValues, out var keyValue, out var hasNullValue)
             ? (new EquatableKeyValue<TKey>(_index, keyValue, EqualityComparer), hasNullValue)
             : (null, true);
 
@@ -114,8 +131,10 @@ public class SimpleRowIndexValueFactory<TKey> : IRowIndexValueFactory<TKey>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual (object?[]? Value, bool HasNullValue) CreateIndexValue(
-        IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => TryCreateIndexValue(command, fromOriginalValues, out var value, out var hasNullValue)
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        TryCreateIndexValue(command, fromOriginalValues, out var value, out var hasNullValue)
             ? (new object?[] { value }, hasNullValue)
             : (null, true);
 }
