@@ -26,20 +26,26 @@ public class TreeRouteBuilderTest
             TemplateParser.Parse("api/Products"),
             new RouteValueDictionary(),
             "Get_Products",
-            order: 0);
+            order: 0
+        );
 
         builder.MapOutbound(
             Mock.Of<IRouter>(),
             TemplateParser.Parse("Products/Index"),
             new RouteValueDictionary(),
             "Get_Products",
-            order: 0);
+            order: 0
+        );
 
         // Act & Assert
-        ExceptionAssert.ThrowsArgument(() =>
-        {
-            builder.Build();
-        }, "linkGenerationEntries", message);
+        ExceptionAssert.ThrowsArgument(
+            () =>
+            {
+                builder.Build();
+            },
+            "linkGenerationEntries",
+            message
+        );
     }
 
     [Fact]
@@ -53,14 +59,16 @@ public class TreeRouteBuilderTest
             TemplateParser.Parse("api/Products"),
             new RouteValueDictionary(),
             "Get_Products",
-            order: 0);
+            order: 0
+        );
 
         builder.MapOutbound(
             Mock.Of<IRouter>(),
             TemplateParser.Parse("api/products"),
             new RouteValueDictionary(),
             "Get_Products",
-            order: 0);
+            order: 0
+        );
 
         // Act & Assert (does not throw)
         builder.Build();
@@ -76,7 +84,8 @@ public class TreeRouteBuilderTest
             Mock.Of<IRouter>(),
             TemplateParser.Parse("a/{b=3}/c"),
             "Intermediate",
-            order: 0);
+            order: 0
+        );
 
         // Act
         var tree = builder.Build();
@@ -108,7 +117,8 @@ public class TreeRouteBuilderTest
             Mock.Of<IRouter>(),
             TemplateParser.Parse("a/{b=3}/c/{d?}/e/{*f}"),
             "Intermediate",
-            order: 0);
+            order: 0
+        );
 
         // Act
         var tree = builder.Build();
@@ -152,7 +162,8 @@ public class TreeRouteBuilderTest
             Mock.Of<IRouter>(),
             TemplateParser.Parse("a/{b?}/c"),
             "Intermediate",
-            order: 0);
+            order: 0
+        );
 
         // Act
         var tree = builder.Build();
@@ -184,7 +195,8 @@ public class TreeRouteBuilderTest
             Mock.Of<IRouter>(),
             TemplateParser.Parse("a/{b:int=3}/c"),
             "Intermediate",
-            order: 0);
+            order: 0
+        );
 
         // Act
         var tree = builder.Build();
@@ -216,7 +228,8 @@ public class TreeRouteBuilderTest
             Mock.Of<IRouter>(),
             TemplateParser.Parse("a/{b:int?}/c"),
             "Intermediate",
-            order: 0);
+            order: 0
+        );
 
         // Act
         var tree = builder.Build();
@@ -248,7 +261,8 @@ public class TreeRouteBuilderTest
         var builder = new TreeRouteBuilder(
             NullLoggerFactory.Instance,
             objectPool,
-            constraintResolver);
+            constraintResolver
+        );
         return builder;
     }
 

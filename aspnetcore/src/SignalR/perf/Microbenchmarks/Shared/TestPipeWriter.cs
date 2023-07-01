@@ -12,9 +12,7 @@ public class TestPipeWriter : PipeWriter
 
     public bool ForceAsync { get; set; }
 
-    public override void Advance(int bytes)
-    {
-    }
+    public override void Advance(int bytes) { }
 
     public override Memory<byte> GetMemory(int sizeHint = 0)
     {
@@ -36,7 +34,9 @@ public class TestPipeWriter : PipeWriter
         throw new NotImplementedException();
     }
 
-    public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override ValueTask<FlushResult> FlushAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    )
     {
         if (!ForceAsync)
         {

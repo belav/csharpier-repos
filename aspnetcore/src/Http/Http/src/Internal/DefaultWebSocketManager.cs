@@ -10,11 +10,14 @@ namespace Microsoft.AspNetCore.Http;
 internal sealed class DefaultWebSocketManager : WebSocketManager
 {
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
-    private static readonly Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature = f => null;
-    private static readonly Func<IFeatureCollection, IHttpWebSocketFeature?> _nullWebSocketFeature = f => null;
+    private static readonly Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature =
+        f => null;
+    private static readonly Func<IFeatureCollection, IHttpWebSocketFeature?> _nullWebSocketFeature =
+        f => null;
 
     private FeatureReferences<FeatureInterfaces> _features;
-    private static readonly WebSocketAcceptContext _defaultWebSocketAcceptContext = new WebSocketAcceptContext();
+    private static readonly WebSocketAcceptContext _defaultWebSocketAcceptContext =
+        new WebSocketAcceptContext();
 
     public DefaultWebSocketManager(IFeatureCollection features)
     {
@@ -44,24 +47,24 @@ internal sealed class DefaultWebSocketManager : WebSocketManager
 
     public override bool IsWebSocketRequest
     {
-        get
-        {
-            return WebSocketFeature != null && WebSocketFeature.IsWebSocketRequest;
-        }
+        get { return WebSocketFeature != null && WebSocketFeature.IsWebSocketRequest; }
     }
 
     public override IList<string> WebSocketRequestedProtocols
     {
         get
         {
-            return HttpRequestFeature.Headers.GetCommaSeparatedValues(HeaderNames.WebSocketSubProtocols);
+            return HttpRequestFeature.Headers.GetCommaSeparatedValues(
+                HeaderNames.WebSocketSubProtocols
+            );
         }
     }
 
     public override Task<WebSocket> AcceptWebSocketAsync(string? subProtocol)
     {
-        var acceptContext = subProtocol is null ? _defaultWebSocketAcceptContext :
-            new WebSocketAcceptContext() { SubProtocol = subProtocol };
+        var acceptContext = subProtocol is null
+            ? _defaultWebSocketAcceptContext
+            : new WebSocketAcceptContext() { SubProtocol = subProtocol };
         return AcceptWebSocketAsync(acceptContext);
     }
 

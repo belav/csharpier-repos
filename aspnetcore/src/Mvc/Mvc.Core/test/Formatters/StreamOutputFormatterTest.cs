@@ -21,7 +21,8 @@ public class StreamOutputFormatterTest
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             type,
-            new MemoryStream())
+            new MemoryStream()
+        )
         {
             ContentType = contentTypeHeader,
         };
@@ -40,13 +41,15 @@ public class StreamOutputFormatterTest
     {
         // Arrange
         var formatter = new StreamOutputFormatter();
-        var contentTypeHeader = contentType == null ? new StringSegment() : new StringSegment(contentType);
+        var contentTypeHeader =
+            contentType == null ? new StringSegment() : new StringSegment(contentType);
 
         var context = new OutputFormatterWriteContext(
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             type,
-            new SimplePOCO())
+            new SimplePOCO()
+        )
         {
             ContentType = contentTypeHeader,
         };
@@ -72,7 +75,8 @@ public class StreamOutputFormatterTest
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             type,
-            @object);
+            @object
+        );
 
         // Act
         var result = formatter.CanWriteResult(context);

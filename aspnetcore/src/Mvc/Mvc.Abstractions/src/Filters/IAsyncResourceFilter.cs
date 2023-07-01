@@ -20,7 +20,5 @@ public interface IAsyncResourceFilter : IFilterMetadata
     /// <returns>
     /// A <see cref="Task"/> which will complete when the remainder of the pipeline completes.
     /// </returns>
-    Task OnResourceExecutionAsync(
-        ResourceExecutingContext context,
-        ResourceExecutionDelegate next);
+    Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next);
 }

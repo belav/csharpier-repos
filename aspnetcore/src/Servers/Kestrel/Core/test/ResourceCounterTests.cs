@@ -34,15 +34,23 @@ public class ResourceCounterTests
     public void QuotaValid(long max)
     {
         var counter = ResourceCounter.Quota(max);
-        Parallel.For(0, max, i =>
-        {
-            Assert.True(counter.TryLockOne());
-        });
+        Parallel.For(
+            0,
+            max,
+            i =>
+            {
+                Assert.True(counter.TryLockOne());
+            }
+        );
 
-        Parallel.For(0, 10, i =>
-        {
-            Assert.False(counter.TryLockOne());
-        });
+        Parallel.For(
+            0,
+            10,
+            i =>
+            {
+                Assert.False(counter.TryLockOne());
+            }
+        );
     }
 
     [Fact]

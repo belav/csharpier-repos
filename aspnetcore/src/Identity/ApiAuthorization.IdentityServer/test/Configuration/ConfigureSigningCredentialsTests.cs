@@ -14,9 +14,13 @@ public class ConfigureSigningCredentialsTests
     // due to the fact that is not part of .NET Standard. This value is only used with non-windows
     // platforms (all .NET Core) for which the value is defined on the underlying platform.
     private const X509KeyStorageFlags UnsafeEphemeralKeySet = (X509KeyStorageFlags)32;
-    private static readonly X509KeyStorageFlags DefaultFlags = OperatingSystem.IsLinux() ?
-        UnsafeEphemeralKeySet : (OperatingSystem.IsMacOS() ? X509KeyStorageFlags.PersistKeySet :
-        X509KeyStorageFlags.DefaultKeySet);
+    private static readonly X509KeyStorageFlags DefaultFlags = OperatingSystem.IsLinux()
+        ? UnsafeEphemeralKeySet
+        : (
+            OperatingSystem.IsMacOS()
+                ? X509KeyStorageFlags.PersistKeySet
+                : X509KeyStorageFlags.DefaultKeySet
+        );
 
     [ConditionalFact]
     [FrameworkSkipCondition(RuntimeFrameworks.CLR)]
@@ -27,13 +31,13 @@ public class ConfigureSigningCredentialsTests
         {
             // Arrange
             var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>()
-                {
-                }).Build();
+                .AddInMemoryCollection(new Dictionary<string, string>() { })
+                .Build();
 
             var configureSigningCredentials = new ConfigureSigningCredentials(
                 configuration,
-                new TestLogger<ConfigureSigningCredentials>());
+                new TestLogger<ConfigureSigningCredentials>()
+            );
 
             var options = new ApiAuthorizationOptions();
 
@@ -63,15 +67,19 @@ public class ConfigureSigningCredentialsTests
         {
             // Arrange
             var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>()
-                {
-                    ["Type"] = "Development",
-                    ["FilePath"] = "testkey.json"
-                }).Build();
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>()
+                    {
+                        ["Type"] = "Development",
+                        ["FilePath"] = "testkey.json"
+                    }
+                )
+                .Build();
 
             var configureSigningCredentials = new ConfigureSigningCredentials(
                 configuration,
-                new TestLogger<ConfigureSigningCredentials>());
+                new TestLogger<ConfigureSigningCredentials>()
+            );
 
             var options = new ApiAuthorizationOptions();
 
@@ -100,16 +108,20 @@ public class ConfigureSigningCredentialsTests
     {
         // Arrange
         var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>()
-            {
-                ["Type"] = "File",
-                ["FilePath"] = "test.pfx",
-                ["Password"] = "aspnetcore"
-            }).Build();
+            .AddInMemoryCollection(
+                new Dictionary<string, string>()
+                {
+                    ["Type"] = "File",
+                    ["FilePath"] = "test.pfx",
+                    ["Password"] = "aspnetcore"
+                }
+            )
+            .Build();
 
         var configureSigningCredentials = new ConfigureSigningCredentials(
             configuration,
-            new TestLogger<ConfigureSigningCredentials>());
+            new TestLogger<ConfigureSigningCredentials>()
+        );
 
         var options = new ApiAuthorizationOptions();
 
@@ -135,17 +147,21 @@ public class ConfigureSigningCredentialsTests
             SetupTestCertificate(x509Certificate);
 
             var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>()
-                {
-                    ["Type"] = "Store",
-                    ["StoreLocation"] = "CurrentUser",
-                    ["StoreName"] = "My",
-                    ["Name"] = "CN=Test"
-                }).Build();
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>()
+                    {
+                        ["Type"] = "Store",
+                        ["StoreLocation"] = "CurrentUser",
+                        ["StoreName"] = "My",
+                        ["Name"] = "CN=Test"
+                    }
+                )
+                .Build();
 
             var configureSigningCredentials = new ConfigureSigningCredentials(
                 configuration,
-                new TestLogger<ConfigureSigningCredentials>());
+                new TestLogger<ConfigureSigningCredentials>()
+            );
 
             var options = new ApiAuthorizationOptions();
 
@@ -170,9 +186,11 @@ public class ConfigureSigningCredentialsTests
         using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
         {
             store.Open(OpenFlags.ReadWrite);
-            var certificates = store
-                .Certificates
-                .Find(X509FindType.FindByThumbprint, "1646CFBEE354788D7116DF86EFC35C0075A9C05D", validOnly: false);
+            var certificates = store.Certificates.Find(
+                X509FindType.FindByThumbprint,
+                "1646CFBEE354788D7116DF86EFC35C0075A9C05D",
+                validOnly: false
+            );
 
             foreach (var certificate in certificates)
             {
@@ -192,9 +210,11 @@ public class ConfigureSigningCredentialsTests
         using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
         {
             store.Open(OpenFlags.ReadWrite);
-            var certificates = store
-                .Certificates
-                .Find(X509FindType.FindByThumbprint, "AC8FDF4BD4C10841BD24DC88D983225D10B43BB2", validOnly: false);
+            var certificates = store.Certificates.Find(
+                X509FindType.FindByThumbprint,
+                "AC8FDF4BD4C10841BD24DC88D983225D10B43BB2",
+                validOnly: false
+            );
             if (certificates.Count == 0)
             {
                 store.Add(x509Certificate);

@@ -15,7 +15,9 @@ public static class ObjectPoolProviderExtensions
     /// </summary>
     /// <param name="provider">The <see cref="ObjectPoolProvider"/>.</param>
     /// <returns>The <see cref="ObjectPool{T}"/>.</returns>
-    public static ObjectPool<StringBuilder> CreateStringBuilderPool(this ObjectPoolProvider provider)
+    public static ObjectPool<StringBuilder> CreateStringBuilderPool(
+        this ObjectPoolProvider provider
+    )
     {
         return provider.Create<StringBuilder>(new StringBuilderPooledObjectPolicy());
     }
@@ -31,7 +33,8 @@ public static class ObjectPoolProviderExtensions
     public static ObjectPool<StringBuilder> CreateStringBuilderPool(
         this ObjectPoolProvider provider,
         int initialCapacity,
-        int maximumRetainedCapacity)
+        int maximumRetainedCapacity
+    )
     {
         var policy = new StringBuilderPooledObjectPolicy()
         {

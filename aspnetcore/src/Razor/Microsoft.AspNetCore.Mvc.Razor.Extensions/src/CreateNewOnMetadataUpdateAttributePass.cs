@@ -12,12 +12,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 /// <summary>
 /// Applies attributes required for hot reload.
 /// </summary>
-internal sealed class CreateNewOnMetadataUpdateAttributePass : IntermediateNodePassBase, IRazorOptimizationPass
+internal sealed class CreateNewOnMetadataUpdateAttributePass
+    : IntermediateNodePassBase,
+        IRazorOptimizationPass
 {
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
-        if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-            documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
+        if (
+            documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind
+            && documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind
+        )
         {
             // Not a MVC file. Skip.
             return;
@@ -40,16 +47,21 @@ internal sealed class CreateNewOnMetadataUpdateAttributePass : IntermediateNodeP
         @namespace.Children.Insert(classIndex, metadataAttributeNode);
 
         // [global:Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemMetadataAttribute("Identifier", "/Views/Home/Index.cshtml")]
-        @namespace.Children.Insert(classIndex, new RazorCompiledItemMetadataAttributeIntermediateNode
-        {
-            Key = "Identifier",
-            Value = identifier,
-        });
+        @namespace.Children.Insert(
+            classIndex,
+            new RazorCompiledItemMetadataAttributeIntermediateNode
+            {
+                Key = "Identifier",
+                Value = identifier,
+            }
+        );
     }
 
-    internal sealed class CreateNewOnMetadataUpdateAttributeIntermediateNode : ExtensionIntermediateNode
+    internal sealed class CreateNewOnMetadataUpdateAttributeIntermediateNode
+        : ExtensionIntermediateNode
     {
-        private const string CreateNewOnMetadataUpdateAttributeName = "global::System.Runtime.CompilerServices.CreateNewOnMetadataUpdateAttribute";
+        private const string CreateNewOnMetadataUpdateAttributeName =
+            "global::System.Runtime.CompilerServices.CreateNewOnMetadataUpdateAttribute";
 
         public override IntermediateNodeCollection Children => IntermediateNodeCollection.ReadOnly;
 

@@ -30,12 +30,14 @@ internal sealed class Startup
         app.UseWebAssemblyDebugging();
 
         app.UseBlazorFrameworkFiles();
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            // In development, serve everything, as there's no other way to configure it.
-            // In production, developers are responsible for configuring their own production server
-            ServeUnknownFileTypes = true,
-        });
+        app.UseStaticFiles(
+            new StaticFileOptions
+            {
+                // In development, serve everything, as there's no other way to configure it.
+                // In production, developers are responsible for configuring their own production server
+                ServeUnknownFileTypes = true,
+            }
+        );
 
         app.UseRouting();
 
@@ -45,7 +47,10 @@ internal sealed class Startup
         });
     }
 
-    private static void EnableConfiguredPathbase(IApplicationBuilder app, IConfiguration configuration)
+    private static void EnableConfiguredPathbase(
+        IApplicationBuilder app,
+        IConfiguration configuration
+    )
     {
         var pathBase = configuration.GetValue<string>("pathbase");
         if (!string.IsNullOrEmpty(pathBase))
@@ -54,19 +59,23 @@ internal sealed class Startup
 
             // To ensure consistency with a production environment, only handle requests
             // that match the specified pathbase.
-            app.Use((context, next) =>
-            {
-                if (context.Request.PathBase == pathBase)
+            app.Use(
+                (context, next) =>
                 {
-                    return next(context);
+                    if (context.Request.PathBase == pathBase)
+                    {
+                        return next(context);
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 404;
+                        return context.Response.WriteAsync(
+                            $"The server is configured only to "
+                                + $"handle request URIs within the PathBase '{pathBase}'."
+                        );
+                    }
                 }
-                else
-                {
-                    context.Response.StatusCode = 404;
-                    return context.Response.WriteAsync($"The server is configured only to " +
-                        $"handle request URIs within the PathBase '{pathBase}'.");
-                }
-            });
+            );
         }
     }
 }

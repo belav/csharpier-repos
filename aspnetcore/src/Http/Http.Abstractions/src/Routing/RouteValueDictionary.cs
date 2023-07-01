@@ -18,11 +18,14 @@ namespace Microsoft.AspNetCore.Routing;
 /// <summary>
 /// An <see cref="IDictionary{String, Object}"/> type for route values.
 /// </summary>
-public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDictionary<string, object?>
+public class RouteValueDictionary
+    : IDictionary<string, object?>,
+        IReadOnlyDictionary<string, object?>
 {
     // 4 is a good default capacity here because that leaves enough space for area/controller/action/id
     private const int DefaultCapacity = 4;
-    private static readonly ConcurrentDictionary<Type, PropertyHelper[]> _propertyCache = new ConcurrentDictionary<Type, PropertyHelper[]>();
+    private static readonly ConcurrentDictionary<Type, PropertyHelper[]> _propertyCache =
+        new ConcurrentDictionary<Type, PropertyHelper[]>();
 
     internal KeyValuePair<string, object?>[] _arrayStorage;
     internal PropertyStorage? _propertyStorage;
@@ -72,11 +75,7 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             }
         }
 
-        return new RouteValueDictionary()
-        {
-            _arrayStorage = items!,
-            _count = start,
-        };
+        return new RouteValueDictionary() { _arrayStorage = items!, _count = start, };
     }
 
     /// <summary>
@@ -100,7 +99,9 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
     /// property names are keys, and property values are the values, and copied into the dictionary.
     /// Only public instance non-index properties are considered.
     /// </remarks>
-    [RequiresUnreferencedCode("This constructor may perform reflection on the specificed value which may be trimmed if not referenced directly. Consider using a different overload to avoid this issue.")]
+    [RequiresUnreferencedCode(
+        "This constructor may perform reflection on the specificed value which may be trimmed if not referenced directly. Consider using a different overload to avoid this issue."
+    )]
     public RouteValueDictionary(object? values)
     {
         if (values is RouteValueDictionary dictionary)
@@ -247,7 +248,6 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             TryGetValue(key, out var value);
             return value;
         }
-
         set
         {
             if (key == null)
@@ -345,7 +345,10 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
 
         if (ContainsKeyArray(key))
         {
-            var message = Resources.FormatRouteValueDictionary_DuplicateKey(key, nameof(RouteValueDictionary));
+            var message = Resources.FormatRouteValueDictionary_DuplicateKey(
+                key,
+                nameof(RouteValueDictionary)
+            );
             throw new ArgumentException(message, nameof(key));
         }
 
@@ -376,7 +379,8 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
     /// <inheritdoc />
     bool ICollection<KeyValuePair<string, object?>>.Contains(KeyValuePair<string, object?> item)
     {
-        return TryGetValue(item.Key, out var value) && EqualityComparer<object>.Default.Equals(value, item.Value);
+        return TryGetValue(item.Key, out var value)
+            && EqualityComparer<object>.Default.Equals(value, item.Value);
     }
 
     /// <inheritdoc />
@@ -404,7 +408,8 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
     /// <inheritdoc />
     void ICollection<KeyValuePair<string, object?>>.CopyTo(
         KeyValuePair<string, object?>[] array,
-        int arrayIndex)
+        int arrayIndex
+    )
     {
         if (array == null)
         {
@@ -434,7 +439,9 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
     }
 
     /// <inheritdoc />
-    IEnumerator<KeyValuePair<string, object?>> IEnumerable<KeyValuePair<string, object?>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, object?>> IEnumerable<
+        KeyValuePair<string, object?>
+    >.GetEnumerator()
     {
         return GetEnumerator();
     }
@@ -582,9 +589,12 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
         return TryGetValueSlow(key, out value);
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026",
-        Justification = "The constructor that would result in _propertyStorage being non-null is annotated with RequiresUnreferencedCodeAttribute. " +
-        "We do not need to additionally produce an error in this method since it is shared by trimmer friendly code paths.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "The constructor that would result in _propertyStorage being non-null is annotated with RequiresUnreferencedCodeAttribute. "
+            + "We do not need to additionally produce an error in this method since it is shared by trimmer friendly code paths."
+    )]
     private bool TryGetValueSlow(string key, out object? value)
     {
         if (_propertyStorage != null)
@@ -592,7 +602,13 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             var storage = _propertyStorage;
             for (var i = 0; i < storage.Properties.Length; i++)
             {
-                if (string.Equals(storage.Properties[i].Name, key, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        storage.Properties[i].Name,
+                        key,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     value = storage.Properties[i].GetValue(storage.Value);
                     return true;
@@ -619,9 +635,12 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
         }
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026",
-        Justification = "The constructor that would result in _propertyStorage being non-null is annotated with RequiresUnreferencedCodeAttribute. " +
-        "We do not need to additionally produce an error in this method since it is shared by trimmer friendly code paths.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "The constructor that would result in _propertyStorage being non-null is annotated with RequiresUnreferencedCodeAttribute. "
+            + "We do not need to additionally produce an error in this method since it is shared by trimmer friendly code paths."
+    )]
     private void EnsureCapacitySlow(int capacity)
     {
         if (_propertyStorage != null)
@@ -636,7 +655,10 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             for (var i = 0; i < storage.Properties.Length; i++)
             {
                 var property = storage.Properties[i];
-                array[i] = new KeyValuePair<string, object?>(property.Name, property.GetValue(storage.Value));
+                array[i] = new KeyValuePair<string, object?>(
+                    property.Name,
+                    property.GetValue(storage.Value)
+                );
             }
 
             _arrayStorage = array;
@@ -768,9 +790,7 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
         /// <summary>
         /// Releases resources used by the <see cref="Enumerator"/>.
         /// </summary>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining friendliness
         /// <inheritdoc />
@@ -790,9 +810,12 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             return MoveNextRare();
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2026",
-            Justification = "The constructor that would result in _propertyStorage being non-null is annotated with RequiresUnreferencedCodeAttribute. " +
-            "We do not need to additionally produce an error in this method since it is shared by trimmer friendly code paths.")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "The constructor that would result in _propertyStorage being non-null is annotated with RequiresUnreferencedCodeAttribute. "
+                + "We do not need to additionally produce an error in this method since it is shared by trimmer friendly code paths."
+        )]
         private bool MoveNextRare()
         {
             var dictionary = _dictionary;
@@ -800,7 +823,10 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             {
                 var storage = dictionary._propertyStorage;
                 var property = storage.Properties[_index];
-                Current = new KeyValuePair<string, object?>(property.Name, property.GetValue(storage.Value));
+                Current = new KeyValuePair<string, object?>(
+                    property.Name,
+                    property.GetValue(storage.Value)
+                );
                 _index++;
                 return true;
             }
@@ -833,7 +859,11 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
             var type = Value.GetType();
             if (!_propertyCache.TryGetValue(type, out Properties!))
             {
-                Properties = PropertyHelper.GetVisibleProperties(type, allPropertiesCache: null, visiblePropertiesCache: null);
+                Properties = PropertyHelper.GetVisibleProperties(
+                    type,
+                    allPropertiesCache: null,
+                    visiblePropertiesCache: null
+                );
                 ValidatePropertyNames(type, Properties);
                 _propertyCache.TryAdd(type, Properties);
             }
@@ -852,7 +882,8 @@ public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDicti
                         type.FullName,
                         property.Name,
                         duplicate.Name,
-                        nameof(RouteValueDictionary));
+                        nameof(RouteValueDictionary)
+                    );
                     throw new InvalidOperationException(message);
                 }
 

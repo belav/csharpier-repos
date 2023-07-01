@@ -14,16 +14,23 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 internal readonly record struct RoutePatternUsageContext(
     IMethodSymbol? MethodSymbol,
     bool IsMinimal,
-    bool IsMvcAttribute);
+    bool IsMvcAttribute
+);
 
 internal readonly record struct MapMethodParts(
     IMethodSymbol Method,
     LiteralExpressionSyntax RouteStringExpression,
-    ExpressionSyntax DelegateExpression);
+    ExpressionSyntax DelegateExpression
+);
 
 internal static class RoutePatternUsageDetector
 {
-    public static RoutePatternUsageContext BuildContext(SyntaxToken token, SemanticModel semanticModel, WellKnownTypes wellKnownTypes, CancellationToken cancellationToken)
+    public static RoutePatternUsageContext BuildContext(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        CancellationToken cancellationToken
+    )
     {
         if (token.Parent is not LiteralExpressionSyntax)
         {
@@ -39,14 +46,23 @@ internal static class RoutePatternUsageDetector
         if (container.Parent.IsKind(SyntaxKind.Argument))
         {
             // We're an argument in a method call. See if we're a MapXXX method.
-            var mapMethodParts = FindMapMethodParts(semanticModel, wellKnownTypes, container, cancellationToken);
+            var mapMethodParts = FindMapMethodParts(
+                semanticModel,
+                wellKnownTypes,
+                container,
+                cancellationToken
+            );
             if (mapMethodParts == null)
             {
                 return default;
             }
 
             // Get the map method delegate.
-            var mapMethodSymbol = GetMethodInfo(semanticModel, mapMethodParts.Value.DelegateExpression, cancellationToken);
+            var mapMethodSymbol = GetMethodInfo(
+                semanticModel,
+                mapMethodParts.Value.DelegateExpression,
+                cancellationToken
+            );
 
             return new(MethodSymbol: mapMethodSymbol, IsMinimal: true, IsMvcAttribute: false);
         }
@@ -56,20 +72,34 @@ internal static class RoutePatternUsageDetector
             var attributeParent = FindAttributeParent(container);
             if (attributeParent is MethodDeclarationSyntax methodDeclarationSyntax)
             {
-                var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclarationSyntax, cancellationToken);
+                var methodSymbol = semanticModel.GetDeclaredSymbol(
+                    methodDeclarationSyntax,
+                    cancellationToken
+                );
 
                 var actionMethodSymbol = FindMvcMethod(wellKnownTypes, methodSymbol);
                 if (actionMethodSymbol == null)
                 {
                     return default;
                 }
-                return new(MethodSymbol: actionMethodSymbol, IsMinimal: false, IsMvcAttribute: true);
+                return new(
+                    MethodSymbol: actionMethodSymbol,
+                    IsMinimal: false,
+                    IsMvcAttribute: true
+                );
             }
             else if (attributeParent is ClassDeclarationSyntax classDeclarationSyntax)
             {
-                var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax, cancellationToken);
+                var classSymbol = semanticModel.GetDeclaredSymbol(
+                    classDeclarationSyntax,
+                    cancellationToken
+                );
 
-                return new(MethodSymbol: null, IsMinimal: false, IsMvcAttribute: MvcDetector.IsController(classSymbol, wellKnownTypes));
+                return new(
+                    MethodSymbol: null,
+                    IsMinimal: false,
+                    IsMvcAttribute: MvcDetector.IsController(classSymbol, wellKnownTypes)
+                );
             }
         }
 
@@ -97,7 +127,10 @@ internal static class RoutePatternUsageDetector
         return attributeList.Parent;
     }
 
-    private static IMethodSymbol? FindMvcMethod(WellKnownTypes wellKnownTypes, IMethodSymbol methodSymbol)
+    private static IMethodSymbol? FindMvcMethod(
+        WellKnownTypes wellKnownTypes,
+        IMethodSymbol methodSymbol
+    )
     {
         if (methodSymbol.ContainingType is not INamedTypeSymbol typeSymbol)
         {
@@ -117,24 +150,38 @@ internal static class RoutePatternUsageDetector
         return methodSymbol;
     }
 
-    public static MapMethodParts? FindMapMethodParts(SemanticModel semanticModel, WellKnownTypes wellKnownTypes, SyntaxNode container, CancellationToken cancellationToken)
+    public static MapMethodParts? FindMapMethodParts(
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        SyntaxNode container,
+        CancellationToken cancellationToken
+    )
     {
         var argument = container.Parent;
-        if (argument.Parent is not BaseArgumentListSyntax argumentList ||
-            argumentList.Parent is null)
+        if (
+            argument.Parent is not BaseArgumentListSyntax argumentList
+            || argumentList.Parent is null
+        )
         {
             return null;
         }
 
         // Multiple overloads could be resolved, e.g. MapGet(string, RequestDelegate) and MapGet(string, Delegate)
         // Check each overload result to see whether it matches and return the first valid result.
-        var symbols = GetBestOrAllSymbols(semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken));
+        var symbols = GetBestOrAllSymbols(
+            semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken)
+        );
 
         foreach (var symbol in symbols)
         {
             if (symbol is IMethodSymbol methodSymbol)
             {
-                var mapMethodParts = FindValidMapMethodParts(semanticModel, wellKnownTypes, argumentList, methodSymbol);
+                var mapMethodParts = FindValidMapMethodParts(
+                    semanticModel,
+                    wellKnownTypes,
+                    argumentList,
+                    methodSymbol
+                );
                 if (mapMethodParts != null)
                 {
                     return mapMethodParts;
@@ -145,7 +192,12 @@ internal static class RoutePatternUsageDetector
         return null;
     }
 
-    private static MapMethodParts? FindValidMapMethodParts(SemanticModel semanticModel, WellKnownTypes wellKnownTypes, BaseArgumentListSyntax argumentList, IMethodSymbol method)
+    private static MapMethodParts? FindValidMapMethodParts(
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        BaseArgumentListSyntax argumentList,
+        IMethodSymbol method
+    )
     {
         if (!method.Name.StartsWith("Map", StringComparison.Ordinal))
         {
@@ -154,15 +206,23 @@ internal static class RoutePatternUsageDetector
 
         // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension method.
         // ReducedFrom includes the original IEndpointRouteBuilder parameter.
-        if (!(method.ReducedFrom ?? method).Parameters.Any(
-            a => SymbolEqualityComparer.Default.Equals(a.Type, wellKnownTypes.IEndpointRouteBuilder) ||
-                a.Type.Implements(wellKnownTypes.IEndpointRouteBuilder)))
+        if (
+            !(method.ReducedFrom ?? method).Parameters.Any(
+                a =>
+                    SymbolEqualityComparer.Default.Equals(
+                        a.Type,
+                        wellKnownTypes.IEndpointRouteBuilder
+                    ) || a.Type.Implements(wellKnownTypes.IEndpointRouteBuilder)
+            )
+        )
         {
             return null;
         }
 
         var delegateSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_Delegate);
-        var delegateParameter = method.Parameters.FirstOrDefault(p => SymbolEqualityComparer.Default.Equals(delegateSymbol, p.Type));
+        var delegateParameter = method.Parameters.FirstOrDefault(
+            p => SymbolEqualityComparer.Default.Equals(delegateSymbol, p.Type)
+        );
         if (delegateParameter == null)
         {
             return null;
@@ -175,9 +235,12 @@ internal static class RoutePatternUsageDetector
         }
 
         var stringSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_String);
-        var routeStringParameter = method.Parameters.FirstOrDefault(p => SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type) &&
-            RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer) &&
-            identifer == "Route");
+        var routeStringParameter = method.Parameters.FirstOrDefault(
+            p =>
+                SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type)
+                && RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer)
+                && identifer == "Route"
+        );
         if (routeStringParameter == null)
         {
             return null;
@@ -192,7 +255,11 @@ internal static class RoutePatternUsageDetector
         return new MapMethodParts(method, literalExpression, delegateArgument.Expression);
     }
 
-    private static ArgumentSyntax? GetArgumentSyntax(BaseArgumentListSyntax argumentList, IMethodSymbol methodSymbol, IParameterSymbol? parameterSymbol)
+    private static ArgumentSyntax? GetArgumentSyntax(
+        BaseArgumentListSyntax argumentList,
+        IMethodSymbol methodSymbol,
+        IParameterSymbol? parameterSymbol
+    )
     {
         foreach (var argument in argumentList.Arguments)
         {
@@ -217,7 +284,11 @@ internal static class RoutePatternUsageDetector
         return argumentList.Arguments[index];
     }
 
-    public static IMethodSymbol? GetMethodInfo(SemanticModel semanticModel, SyntaxNode syntaxNode, CancellationToken cancellationToken)
+    public static IMethodSymbol? GetMethodInfo(
+        SemanticModel semanticModel,
+        SyntaxNode syntaxNode,
+        CancellationToken cancellationToken
+    )
     {
         var delegateSymbolInfo = semanticModel.GetSymbolInfo(syntaxNode, cancellationToken);
         var delegateSymbol = delegateSymbolInfo.Symbol;

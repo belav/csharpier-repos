@@ -30,7 +30,9 @@ internal sealed class FileParser
             if (tokens.Count > 4)
             {
                 // This means the line didn't have an appropriate format, throw format exception
-                throw new FormatException(Resources.FormatError_ModRewriteParseError("Too many tokens on line", lineNum));
+                throw new FormatException(
+                    Resources.FormatError_ModRewriteParseError("Too many tokens on line", lineNum)
+                );
             }
 
             switch (tokens[0])
@@ -43,7 +45,9 @@ internal sealed class FileParser
                     try
                     {
                         var pattern = TestStringParser.Parse(tokens[1]);
-                        var condActionParsed = ConditionPatternParser.ParseActionCondition(tokens[2]);
+                        var condActionParsed = ConditionPatternParser.ParseActionCondition(
+                            tokens[2]
+                        );
 
                         var flags = new Flags();
                         if (tokens.Count == 4)
@@ -55,7 +59,10 @@ internal sealed class FileParser
                     }
                     catch (FormatException formatException)
                     {
-                        throw new FormatException(Resources.FormatError_ModRewriteGeneralParseError(lineNum), formatException);
+                        throw new FormatException(
+                            Resources.FormatError_ModRewriteGeneralParseError(lineNum),
+                            formatException
+                        );
                     }
                     break;
                 case "RewriteRule":
@@ -81,7 +88,10 @@ internal sealed class FileParser
                     }
                     catch (FormatException formatException)
                     {
-                        throw new FormatException(Resources.FormatError_ModRewriteGeneralParseError(lineNum), formatException);
+                        throw new FormatException(
+                            Resources.FormatError_ModRewriteGeneralParseError(lineNum),
+                            formatException
+                        );
                     }
                     break;
                 case "RewriteMap":
@@ -91,7 +101,12 @@ internal sealed class FileParser
                     // Explicitly do nothing here, no notion of turning on regex engine.
                     break;
                 default:
-                    throw new FormatException(Resources.FormatError_ModRewriteParseError("Unrecognized keyword: " + tokens[0], lineNum));
+                    throw new FormatException(
+                        Resources.FormatError_ModRewriteParseError(
+                            "Unrecognized keyword: " + tokens[0],
+                            lineNum
+                        )
+                    );
             }
         }
         return rules;

@@ -6,7 +6,5 @@ namespace Microsoft.AspNetCore.Http.Result;
 internal sealed class NotFoundObjectResult : ObjectResult
 {
     public NotFoundObjectResult(object? value)
-        : base(value, StatusCodes.Status404NotFound)
-    {
-    }
+        : base(value, StatusCodes.Status404NotFound) { }
 }

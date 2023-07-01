@@ -27,7 +27,8 @@ internal sealed partial class RequestDecompressionMiddleware
     public RequestDecompressionMiddleware(
         RequestDelegate next,
         ILogger<RequestDecompressionMiddleware> logger,
-        IRequestDecompressionProvider provider)
+        IRequestDecompressionProvider provider
+    )
     {
         if (next is null)
         {
@@ -73,8 +74,11 @@ internal sealed partial class RequestDecompressionMiddleware
         try
         {
             var sizeLimit =
-                context.GetEndpoint()?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>()?.MaxRequestBodySize
-                    ?? context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize;
+                context
+                    .GetEndpoint()
+                    ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>()
+                    ?.MaxRequestBodySize
+                ?? context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize;
 
             context.Request.Body = new SizeLimitedStream(decompressionStream, sizeLimit);
             await _next(context);
@@ -88,7 +92,9 @@ internal sealed partial class RequestDecompressionMiddleware
 
     private void SetMaxRequestBodySize(HttpContext context)
     {
-        var sizeLimitMetadata = context.GetEndpoint()?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>();
+        var sizeLimitMetadata = context
+            .GetEndpoint()
+            ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>();
         if (sizeLimitMetadata == null)
         {
             Log.MetadataNotFound(_logger);
@@ -111,8 +117,10 @@ internal sealed partial class RequestDecompressionMiddleware
 
             if (maxRequestBodySize.HasValue)
             {
-                Log.MaxRequestBodySizeSet(_logger,
-                    maxRequestBodySize.Value.ToString(CultureInfo.InvariantCulture));
+                Log.MaxRequestBodySizeSet(
+                    _logger,
+                    maxRequestBodySize.Value.ToString(CultureInfo.InvariantCulture)
+                );
             }
             else
             {
@@ -123,19 +131,44 @@ internal sealed partial class RequestDecompressionMiddleware
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.", EventName = "MetadataNotFound")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.",
+            EventName = "MetadataNotFound"
+        )]
         public static partial void MetadataNotFound(ILogger logger);
 
-        [LoggerMessage(2, LogLevel.Warning, $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.", EventName = "FeatureNotFound")]
+        [LoggerMessage(
+            2,
+            LogLevel.Warning,
+            $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.",
+            EventName = "FeatureNotFound"
+        )]
         public static partial void FeatureNotFound(ILogger logger);
 
-        [LoggerMessage(3, LogLevel.Warning, $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.", EventName = "FeatureIsReadOnly")]
+        [LoggerMessage(
+            3,
+            LogLevel.Warning,
+            $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.",
+            EventName = "FeatureIsReadOnly"
+        )]
         public static partial void FeatureIsReadOnly(ILogger logger);
 
-        [LoggerMessage(4, LogLevel.Debug, "The maximum request body size has been set to {RequestSize}.", EventName = "MaxRequestBodySizeSet")]
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "The maximum request body size has been set to {RequestSize}.",
+            EventName = "MaxRequestBodySizeSet"
+        )]
         public static partial void MaxRequestBodySizeSet(ILogger logger, string requestSize);
 
-        [LoggerMessage(5, LogLevel.Debug, "The maximum request body size as been disabled.", EventName = "MaxRequestBodySizeDisabled")]
+        [LoggerMessage(
+            5,
+            LogLevel.Debug,
+            "The maximum request body size as been disabled.",
+            EventName = "MaxRequestBodySizeDisabled"
+        )]
         public static partial void MaxRequestBodySizeDisabled(ILogger logger);
     }
 }

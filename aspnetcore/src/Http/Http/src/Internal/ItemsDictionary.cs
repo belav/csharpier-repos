@@ -10,8 +10,7 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
 {
     private IDictionary<object, object?>? _items;
 
-    public ItemsDictionary()
-    { }
+    public ItemsDictionary() { }
 
     public ItemsDictionary(IDictionary<object, object?> items)
     {
@@ -44,8 +43,8 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
         _items.Add(key, value);
     }
 
-    bool IDictionary<object, object?>.ContainsKey(object key)
-        => _items != null && _items.ContainsKey(key);
+    bool IDictionary<object, object?>.ContainsKey(object key) =>
+        _items != null && _items.ContainsKey(key);
 
     ICollection<object> IDictionary<object, object?>.Keys
     {
@@ -60,8 +59,7 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
         }
     }
 
-    bool IDictionary<object, object?>.Remove(object key)
-        => _items != null && _items.Remove(key);
+    bool IDictionary<object, object?>.Remove(object key) => _items != null && _items.Remove(key);
 
     bool IDictionary<object, object?>.TryGetValue(object key, out object? value)
     {
@@ -90,10 +88,13 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
 
     void ICollection<KeyValuePair<object, object?>>.Clear() => _items?.Clear();
 
-    bool ICollection<KeyValuePair<object, object?>>.Contains(KeyValuePair<object, object?> item)
-        => _items != null && _items.Contains(item);
+    bool ICollection<KeyValuePair<object, object?>>.Contains(KeyValuePair<object, object?> item) =>
+        _items != null && _items.Contains(item);
 
-    void ICollection<KeyValuePair<object, object?>>.CopyTo(KeyValuePair<object, object?>[] array, int arrayIndex)
+    void ICollection<KeyValuePair<object, object?>>.CopyTo(
+        KeyValuePair<object, object?>[] array,
+        int arrayIndex
+    )
     {
         if (_items == null)
         {
@@ -131,32 +132,33 @@ internal sealed class ItemsDictionary : IDictionary<object, object?>
         }
     }
 
-    IEnumerator<KeyValuePair<object, object?>> IEnumerable<KeyValuePair<object, object?>>.GetEnumerator()
-        => _items?.GetEnumerator() ?? EmptyEnumerator.Instance;
+    IEnumerator<KeyValuePair<object, object?>> IEnumerable<
+        KeyValuePair<object, object?>
+    >.GetEnumerator() => _items?.GetEnumerator() ?? EmptyEnumerator.Instance;
 
     IEnumerator IEnumerable.GetEnumerator() => _items?.GetEnumerator() ?? EmptyEnumerator.Instance;
 
     private sealed class EmptyEnumerator : IEnumerator<KeyValuePair<object, object?>>
     {
         // In own class so only initalized if GetEnumerator is called on an empty ItemsDictionary
-        public static readonly IEnumerator<KeyValuePair<object, object?>> Instance = new EmptyEnumerator();
+        public static readonly IEnumerator<KeyValuePair<object, object?>> Instance =
+            new EmptyEnumerator();
         public KeyValuePair<object, object?> Current => default;
 
         object? IEnumerator.Current => null;
 
-        public void Dispose()
-        { }
+        public void Dispose() { }
 
         public bool MoveNext() => false;
 
-        public void Reset()
-        { }
+        public void Reset() { }
     }
 
     private static class EmptyDictionary
     {
         // In own class so only initalized if CopyTo is called on an empty ItemsDictionary
-        public static readonly IDictionary<object, object?> Dictionary = new Dictionary<object, object?>();
+        public static readonly IDictionary<object, object?> Dictionary =
+            new Dictionary<object, object?>();
         public static ICollection<KeyValuePair<object, object?>> Collection => Dictionary;
     }
 }

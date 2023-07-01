@@ -229,7 +229,10 @@ public class CSharpImplicitExpressionTest : ParserTestBase
     public void ParsesNullForgivenessOperatorImplicitExpression_DirectiveCodeBlock()
     {
         // Act & Assert
-        ParseDocumentTest("@functions { public void Foo() { @Model!.Name![0]!?.Bar } }", new[] { FunctionsDirective.Directive });
+        ParseDocumentTest(
+            "@functions { public void Foo() { @Model!.Name![0]!?.Bar } }",
+            new[] { FunctionsDirective.Directive }
+        );
     }
 
     [Fact]
@@ -434,7 +437,9 @@ public class CSharpImplicitExpressionTest : ParserTestBase
     [Fact]
     public void SupportsSlashesWithinComplexImplicitExpressions()
     {
-        ParseDocumentTest("@DataGridColumn.Template(\"Years of Service\", e => (int)Math.Round((DateTime.Now - dt).TotalDays / 365))");
+        ParseDocumentTest(
+            "@DataGridColumn.Template(\"Years of Service\", e => (int)Math.Round((DateTime.Now - dt).TotalDays / 365))"
+        );
     }
 
     [Fact]
@@ -503,7 +508,9 @@ public class CSharpImplicitExpressionTest : ParserTestBase
     [Fact]
     public void ProperlyParsesParenthesesAndBalancesThemInImplicitExpression()
     {
-        ParseDocumentTest(@"@foo().bar(""bi\""z"", 4)(""chained method; call"").baz(@""bo""""z"", '\'', () => { return 4; }, (4+5+new { foo = bar[4] }))");
+        ParseDocumentTest(
+            @"@foo().bar(""bi\""z"", 4)(""chained method; call"").baz(@""bo""""z"", '\'', () => { return 4; }, (4+5+new { foo = bar[4] }))"
+        );
     }
 
     [Fact]

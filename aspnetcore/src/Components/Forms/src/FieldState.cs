@@ -44,6 +44,7 @@ internal sealed class FieldState
         _validationMessageStores.Add(validationMessageStore);
     }
 
-    public void DissociateFromValidationMessageStore(ValidationMessageStore validationMessageStore)
-        => _validationMessageStores?.Remove(validationMessageStore);
+    public void DissociateFromValidationMessageStore(
+        ValidationMessageStore validationMessageStore
+    ) => _validationMessageStores?.Remove(validationMessageStore);
 }

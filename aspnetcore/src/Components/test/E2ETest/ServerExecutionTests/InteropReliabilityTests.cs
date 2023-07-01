@@ -22,10 +22,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/19666")]
 public class InteropReliabilityTests : IgnitorTest<ServerStartup>
 {
-    public InteropReliabilityTests(BasicTestAppServerSiteFixture<ServerStartup> serverFixture, ITestOutputHelper output)
-        : base(serverFixture, output)
-    {
-    }
+    public InteropReliabilityTests(
+        BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
+        ITestOutputHelper output
+    )
+        : base(serverFixture, output) { }
 
     protected override async Task InitializeAsync()
     {
@@ -40,9 +41,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeNonJSInvokableMethods()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027WriteAllText\\u0027 on assembly \\u0027System.IO.FileSystem\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027WriteAllText\\u0027 on assembly \\u0027System.IO.FileSystem\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -50,7 +52,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "System.IO.FileSystem",
             "WriteAllText",
             null,
-            JsonSerializer.Serialize(new[] { ".\\log.txt", "log" }));
+            JsonSerializer.Serialize(new[] { ".\\log.txt", "log" })
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -61,9 +64,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeNonExistingMethods()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027MadeUpMethod\\u0027 on assembly \\u0027BasicTestApp\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027MadeUpMethod\\u0027 on assembly \\u0027BasicTestApp\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -71,7 +75,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "BasicTestApp",
             "MadeUpMethod",
             null,
-            JsonSerializer.Serialize(new[] { ".\\log.txt", "log" }));
+            JsonSerializer.Serialize(new[] { ".\\log.txt", "log" })
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -82,9 +87,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeJSInvokableMethodsWithWrongNumberOfArguments()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027NotifyLocationChanged\\u0027 on assembly \\u0027Microsoft.AspNetCore.Components.Server\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027NotifyLocationChanged\\u0027 on assembly \\u0027Microsoft.AspNetCore.Components.Server\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -92,7 +98,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "Microsoft.AspNetCore.Components.Server",
             "NotifyLocationChanged",
             null,
-            JsonSerializer.Serialize(new[] { ServerFixture.RootUri }));
+            JsonSerializer.Serialize(new[] { ServerFixture.RootUri })
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -103,9 +110,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeJSInvokableMethodsEmptyAssemblyName()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027NotifyLocationChanged\\u0027 on assembly \\u0027\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027NotifyLocationChanged\\u0027 on assembly \\u0027\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -113,7 +121,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "",
             "NotifyLocationChanged",
             null,
-            JsonSerializer.Serialize(new object[] { ServerFixture.RootUri + "counter", false }));
+            JsonSerializer.Serialize(new object[] { ServerFixture.RootUri + "counter", false })
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -124,9 +133,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeJSInvokableMethodsEmptyMethodName()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027\\u0027 on assembly \\u0027Microsoft.AspNetCore.Components.Server\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027\\u0027 on assembly \\u0027Microsoft.AspNetCore.Components.Server\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -134,7 +144,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "Microsoft.AspNetCore.Components.Server",
             "",
             null,
-            JsonSerializer.Serialize(new object[] { ServerFixture.RootUri + "counter", false }));
+            JsonSerializer.Serialize(new object[] { ServerFixture.RootUri + "counter", false })
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -147,9 +158,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     {
         // Arrange
         var expectedDotNetObjectRef = "[\"1\",true,{\"__dotNetObject\":1}]";
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027Reverse\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027Reverse\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -157,7 +169,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "BasicTestApp",
             "CreateImportant",
             null,
-            JsonSerializer.Serialize(Array.Empty<object>()));
+            JsonSerializer.Serialize(Array.Empty<object>())
+        );
 
         Assert.Single(DotNetCompletions, c => c == expectedDotNetObjectRef);
 
@@ -166,7 +179,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             null,
             "Reverse",
             1,
-            JsonSerializer.Serialize(Array.Empty<object>()));
+            JsonSerializer.Serialize(Array.Empty<object>())
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == "[\"1\",true,\"tnatropmI\"]");
@@ -176,7 +190,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             null,
             "Reverse",
             3, // non existing ref
-            JsonSerializer.Serialize(Array.Empty<object>()));
+            JsonSerializer.Serialize(Array.Empty<object>())
+        );
 
         Assert.Single(DotNetCompletions, c => c == expectedError);
         await ValidateClientKeepsWorking(Client, Batches);
@@ -187,16 +202,18 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     {
         // Arrange
         var expectedImportantDotNetObjectRef = "[\"1\",true,{\"__dotNetObject\":1}]";
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027ReceiveTrivial\\u0027 on assembly \\u0027BasicTestApp\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027ReceiveTrivial\\u0027 on assembly \\u0027BasicTestApp\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         await Client.InvokeDotNetMethod(
             "1",
             "BasicTestApp",
             "CreateImportant",
             null,
-            JsonSerializer.Serialize(Array.Empty<object>()));
+            JsonSerializer.Serialize(Array.Empty<object>())
+        );
 
         Assert.Single(DotNetCompletions, c => c == expectedImportantDotNetObjectRef);
 
@@ -206,7 +223,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "BasicTestApp",
             "ReceiveTrivial",
             null,
-            JsonSerializer.Serialize(new object[] { new { __dotNetObject = 1 } }));
+            JsonSerializer.Serialize(new object[] { new { __dotNetObject = 1 } })
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -217,12 +235,15 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task ContinuesWorkingAfterInvalidAsyncReturnCallback()
     {
         // Arrange
-        var expectedError = "An exception occurred executing JS interop: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 3.. See InnerException for more details.";
+        var expectedError =
+            "An exception occurred executing JS interop: The JSON value could not be converted to System.Int32. Path: $ | LineNumber: 0 | BytePositionInLine: 3.. See InnerException for more details.";
 
         // Act
         await Client.ClickAsync("triggerjsinterop-malformed");
 
-        var call = JSInteropCalls.FirstOrDefault(call => call.Identifier == "sendMalformedCallbackReturn");
+        var call = JSInteropCalls.FirstOrDefault(
+            call => call.Identifier == "sendMalformedCallbackReturn"
+        );
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
@@ -232,12 +253,14 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
                 "EndInvokeJSFromDotNet",
                 id,
                 true,
-                $"[{id}, true, \"{{\"]");
+                $"[{id}, true, \"{{\"]"
+            );
         });
 
         var text = Assert.Single(
             Client.FindElementById("errormessage-malformed").Children.OfType<TextNode>(),
-            e => expectedError == e.TextContent);
+            e => expectedError == e.TextContent
+        );
 
         await ValidateClientKeepsWorking(Client, Batches);
     }
@@ -250,7 +273,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Act
         await Client.ClickAsync("triggerjsinterop-success");
 
-        var call = JSInteropCalls.FirstOrDefault(call => call.Identifier == "sendSuccessCallbackReturn");
+        var call = JSInteropCalls.FirstOrDefault(
+            call => call.Identifier == "sendSuccessCallbackReturn"
+        );
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
@@ -260,12 +285,14 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
                 "EndInvokeJSFromDotNet",
                 id,
                 true,
-                $"[{id}, true, null]");
+                $"[{id}, true, null]"
+            );
         });
 
         Assert.Single(
             Client.FindElementById("errormessage-success").Children.OfType<TextNode>(),
-            e => "" == e.TextContent);
+            e => "" == e.TextContent
+        );
 
         var entry = Assert.Single(Logs, l => l.EventId.Name == "EndInvokeJSSucceeded");
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
@@ -279,7 +306,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Act
         await Client.ClickAsync("triggerjsinterop-failure");
 
-        var call = JSInteropCalls.FirstOrDefault(call => call.Identifier == "sendFailureCallbackReturn");
+        var call = JSInteropCalls.FirstOrDefault(
+            call => call.Identifier == "sendFailureCallbackReturn"
+        );
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
@@ -289,12 +318,14 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
                 "EndInvokeJSFromDotNet",
                 id,
                 false,
-                $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]");
+                $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
+            );
         });
 
         Assert.Single(
             Client.FindElementById("errormessage-failure").Children.OfType<TextNode>(),
-            e => "There was an error invoking sendFailureCallbackReturn" == e.TextContent);
+            e => "There was an error invoking sendFailureCallbackReturn" == e.TextContent
+        );
 
         var entry = Assert.Single(Logs, l => l.EventId.Name == "EndInvokeJSFailed");
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
@@ -312,7 +343,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Act
         await Client.ClickAsync("triggerjsinterop-malformed");
 
-        var call = JSInteropCalls.FirstOrDefault(call => call.Identifier == "sendMalformedCallbackReturn");
+        var call = JSInteropCalls.FirstOrDefault(
+            call => call.Identifier == "sendMalformedCallbackReturn"
+        );
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
@@ -322,20 +355,24 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
                 "EndInvokeJSFromDotNet",
                 id,
                 true,
-                $"[{id}, true, }}");
+                $"[{id}, true, }}"
+            );
         });
 
         // A completely malformed payload like the one above never gets to the application.
         Assert.Single(
             Client.FindElementById("errormessage-malformed").Children.OfType<TextNode>(),
-            e => "" == e.TextContent);
+            e => "" == e.TextContent
+        );
 
         var entry = Assert.Single(Logs, l => l.EventId.Name == "EndInvokeDispatchException");
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
 
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -343,9 +380,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeJSInvokableMethodsWithInvalidArgumentsPayload()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027NotifyLocationChanged\\u0027 on assembly \\u0027Microsoft.AspNetCore.Components.Server\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027NotifyLocationChanged\\u0027 on assembly \\u0027Microsoft.AspNetCore.Components.Server\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -353,7 +391,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "Microsoft.AspNetCore.Components.Server",
             "NotifyLocationChanged",
             null,
-            "[ \"invalidPayload\"}");
+            "[ \"invalidPayload\"}"
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -364,9 +403,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
     public async Task CannotInvokeJSInvokableMethodsWithMalformedArgumentPayload()
     {
         // Arrange
-        var expectedError = "[\"1\"," +
-            "false," +
-            "\"There was an exception invoking \\u0027ReceiveTrivial\\u0027 on assembly \\u0027BasicTestApp\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
+        var expectedError =
+            "[\"1\","
+            + "false,"
+            + "\"There was an exception invoking \\u0027ReceiveTrivial\\u0027 on assembly \\u0027BasicTestApp\\u0027. For more details turn on detailed exceptions in \\u0027CircuitOptions.DetailedErrors\\u0027\"]";
 
         // Act
         await Client.InvokeDotNetMethod(
@@ -374,7 +414,8 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             "BasicTestApp",
             "ReceiveTrivial",
             null,
-            "[ { \"data\": {\"}} ]");
+            "[ { \"data\": {\"}} ]"
+        );
 
         // Assert
         Assert.Single(DotNetCompletions, c => c == expectedError);
@@ -389,19 +430,21 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Act
         await Client.ExpectCircuitError(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-            "DispatchBrowserEvent",
-            null,
-            null);
+            await Client.HubConnection.InvokeAsync("DispatchBrowserEvent", null, null);
         });
 
-        var entry = Assert.Single(Logs, l => l.EventId.Name == "DispatchEventFailedToParseEventData");
+        var entry = Assert.Single(
+            Logs,
+            l => l.EventId.Name == "DispatchEventFailedToParseEventData"
+        );
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
 
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -414,18 +457,24 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         await Client.ExpectCircuitError(async () =>
         {
             await Client.HubConnection.InvokeAsync(
-            "DispatchBrowserEvent",
-            "{Invalid:{\"payload}",
-            "{}");
+                "DispatchBrowserEvent",
+                "{Invalid:{\"payload}",
+                "{}"
+            );
         });
 
-        var entry = Assert.Single(Logs, l => l.EventId.Name == "DispatchEventFailedToParseEventData");
+        var entry = Assert.Single(
+            Logs,
+            l => l.EventId.Name == "DispatchEventFailedToParseEventData"
+        );
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
 
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -445,19 +494,29 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         {
             await Client.HubConnection.InvokeAsync(
                 "DispatchBrowserEvent",
-                JsonSerializer.Serialize(browserDescriptor, TestJsonSerializerOptionsProvider.Options),
-                "{Invalid:{\"payload}");
+                JsonSerializer.Serialize(
+                    browserDescriptor,
+                    TestJsonSerializerOptionsProvider.Options
+                ),
+                "{Invalid:{\"payload}"
+            );
         });
 
         Assert.Contains(
             Logs,
-            e => e.EventId.Name == "DispatchEventFailedToParseEventData" && e.LogLevel == LogLevel.Debug &&
-                 e.Exception.Message == "There was an error parsing the event arguments. EventId: '6'.");
+            e =>
+                e.EventId.Name == "DispatchEventFailedToParseEventData"
+                && e.LogLevel == LogLevel.Debug
+                && e.Exception.Message
+                    == "There was an error parsing the event arguments. EventId: '6'."
+        );
 
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -467,11 +526,7 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Arrange
 
         // Act
-        var mouseEventArgs = new MouseEventArgs()
-        {
-            Type = "click",
-            Detail = 1
-        };
+        var mouseEventArgs = new MouseEventArgs() { Type = "click", Detail = 1 };
         var browserDescriptor = new WebEventDescriptor()
         {
             EventHandlerId = 1,
@@ -485,13 +540,21 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
 
         Assert.Contains(
             Logs,
-            e => e.EventId.Name == "DispatchEventFailedToDispatchEvent" && e.LogLevel == LogLevel.Debug &&
-                 e.Exception is ArgumentException ae && ae.Message.Contains("There is no event handler associated with this event. EventId: '1'."));
+            e =>
+                e.EventId.Name == "DispatchEventFailedToDispatchEvent"
+                && e.LogLevel == LogLevel.Debug
+                && e.Exception is ArgumentException ae
+                && ae.Message.Contains(
+                    "There is no event handler associated with this event. EventId: '1'."
+                )
+        );
 
         // Taking any other action will fail because the circuit is disposed.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
@@ -508,20 +571,26 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
 
         Assert.Contains(
             Logs,
-            e => LogLevel.Error == e.LogLevel &&
-                "CircuitUnhandledException" == e.EventId.Name &&
-                "Handler threw an exception" == e.Exception.Message);
+            e =>
+                LogLevel.Error == e.LogLevel
+                && "CircuitUnhandledException" == e.EventId.Name
+                && "Handler threw an exception" == e.Exception.Message
+        );
 
         // Now if you try to click again, you will get *forcibly* disconnected for trying to talk to
         // a circuit that's gone.
         await Client.ExpectCircuitErrorAndDisconnect(async () =>
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
         });
     }
 
-    private Task ValidateClientKeepsWorking(BlazorClient Client, IReadOnlyCollection<CapturedRenderBatch> batches) =>
-        ValidateClientKeepsWorking(Client, () => batches.Count);
+    private Task ValidateClientKeepsWorking(
+        BlazorClient Client,
+        IReadOnlyCollection<CapturedRenderBatch> batches
+    ) => ValidateClientKeepsWorking(Client, () => batches.Count);
 
     private async Task ValidateClientKeepsWorking(BlazorClient Client, Func<int> countAccessor)
     {

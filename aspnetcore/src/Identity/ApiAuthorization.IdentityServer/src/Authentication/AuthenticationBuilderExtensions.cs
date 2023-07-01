@@ -20,8 +20,7 @@ public static class AuthenticationBuilderExtensions
 {
     private const string IdentityServerJwtNameSuffix = "API";
 
-    private static readonly PathString DefaultIdentityUIPathPrefix =
-        new PathString("/Identity");
+    private static readonly PathString DefaultIdentityUIPathPrefix = new PathString("/Identity");
 
     /// <summary>
     /// Adds an authentication handler for an API that coexists with an Authorization Server.
@@ -32,21 +31,34 @@ public static class AuthenticationBuilderExtensions
     {
         var services = builder.Services;
         services.TryAddSingleton<IIdentityServerJwtDescriptor, IdentityServerJwtDescriptor>();
-        services.TryAddEnumerable(ServiceDescriptor
-            .Transient<IConfigureOptions<JwtBearerOptions>, IdentityServerJwtBearerOptionsConfiguration>(JwtBearerOptionsFactory));
+        services.TryAddEnumerable(
+            ServiceDescriptor.Transient<
+                IConfigureOptions<JwtBearerOptions>,
+                IdentityServerJwtBearerOptionsConfiguration
+            >(JwtBearerOptionsFactory)
+        );
 
-        services.AddAuthentication(IdentityServerJwtConstants.IdentityServerJwtScheme)
-            .AddPolicyScheme(IdentityServerJwtConstants.IdentityServerJwtScheme, null, options =>
-            {
-                options.ForwardDefaultSelector = new IdentityServerJwtPolicySchemeForwardSelector(
-                    DefaultIdentityUIPathPrefix,
-                    IdentityServerJwtConstants.IdentityServerJwtBearerScheme).SelectScheme;
-            })
+        services
+            .AddAuthentication(IdentityServerJwtConstants.IdentityServerJwtScheme)
+            .AddPolicyScheme(
+                IdentityServerJwtConstants.IdentityServerJwtScheme,
+                null,
+                options =>
+                {
+                    options.ForwardDefaultSelector =
+                        new IdentityServerJwtPolicySchemeForwardSelector(
+                            DefaultIdentityUIPathPrefix,
+                            IdentityServerJwtConstants.IdentityServerJwtBearerScheme
+                        ).SelectScheme;
+                }
+            )
             .AddJwtBearer(IdentityServerJwtConstants.IdentityServerJwtBearerScheme, null, o => { });
 
         return builder;
 
-        static IdentityServerJwtBearerOptionsConfiguration JwtBearerOptionsFactory(IServiceProvider sp)
+        static IdentityServerJwtBearerOptionsConfiguration JwtBearerOptionsFactory(
+            IServiceProvider sp
+        )
         {
             var schemeName = IdentityServerJwtConstants.IdentityServerJwtBearerScheme;
 
@@ -54,7 +66,11 @@ public static class AuthenticationBuilderExtensions
             var hostingEnvironment = sp.GetRequiredService<IWebHostEnvironment>();
             var apiName = hostingEnvironment.ApplicationName + IdentityServerJwtNameSuffix;
 
-            return new IdentityServerJwtBearerOptionsConfiguration(schemeName, apiName, localApiDescriptor);
+            return new IdentityServerJwtBearerOptionsConfiguration(
+                schemeName,
+                apiName,
+                localApiDescriptor
+            );
         }
     }
 }

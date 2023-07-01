@@ -16,8 +16,12 @@ public class UriHelperTests
     [Fact]
     public void EncodePartialUrl()
     {
-        var result = UriHelper.BuildRelative(new PathString("/un?escaped/base"), new PathString("/un?escaped"),
-            new QueryString("?name=val%23ue"), new FragmentString("#my%20value"));
+        var result = UriHelper.BuildRelative(
+            new PathString("/un?escaped/base"),
+            new PathString("/un?escaped"),
+            new QueryString("?name=val%23ue"),
+            new FragmentString("#my%20value")
+        );
 
         Assert.Equal("/un%3Fescaped/base/un%3Fescaped?name=val%23ue#my%20value", result);
     }
@@ -33,31 +37,128 @@ public class UriHelperTests
     [Fact]
     public void EncodeFullUrl()
     {
-        var result = UriHelper.BuildAbsolute("http", new HostString("my.HoΨst:80"), new PathString("/un?escaped/base"), new PathString("/un?escaped"),
-            new QueryString("?name=val%23ue"), new FragmentString("#my%20value"));
+        var result = UriHelper.BuildAbsolute(
+            "http",
+            new HostString("my.HoΨst:80"),
+            new PathString("/un?escaped/base"),
+            new PathString("/un?escaped"),
+            new QueryString("?name=val%23ue"),
+            new FragmentString("#my%20value")
+        );
 
-        Assert.Equal("http://my.xn--host-cpd:80/un%3Fescaped/base/un%3Fescaped?name=val%23ue#my%20value", result);
+        Assert.Equal(
+            "http://my.xn--host-cpd:80/un%3Fescaped/base/un%3Fescaped?name=val%23ue#my%20value",
+            result
+        );
     }
 
     [Theory]
     [InlineData("http", "example.com", "", "", "", "", "http://example.com/")]
     [InlineData("https", "example.com", "", "", "", "", "https://example.com/")]
     [InlineData("http", "example.com", "", "/foo/bar", "", "", "http://example.com/foo/bar")]
-    [InlineData("http", "example.com", "", "/foo/bar", "?baz=1", "", "http://example.com/foo/bar?baz=1")]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "/foo/bar",
+        "?baz=1",
+        "",
+        "http://example.com/foo/bar?baz=1"
+    )]
     [InlineData("http", "example.com", "", "/foo", "", "#col=2", "http://example.com/foo#col=2")]
-    [InlineData("http", "example.com", "", "/foo", "?bar=1", "#col=2", "http://example.com/foo?bar=1#col=2")]
-    [InlineData("http", "example.com", "/base", "/foo", "?bar=1", "#col=2", "http://example.com/base/foo?bar=1#col=2")]
-    [InlineData("http", "example.com", "/base/", "/foo", "?bar=1", "#col=2", "http://example.com/base/foo?bar=1#col=2")]
-    [InlineData("http", "example.com", "/base/", "", "?bar=1", "#col=2", "http://example.com/base/?bar=1#col=2")]
-    [InlineData("http", "example.com", "", "", "?bar=1", "#col=2", "http://example.com/?bar=1#col=2")]
-    [InlineData("http", "example.com", "", "", "", "#frag?stillfrag/stillfrag", "http://example.com/#frag?stillfrag/stillfrag")]
-    [InlineData("http", "example.com", "", "", "?q/stillq", "#frag?stillfrag/stillfrag", "http://example.com/?q/stillq#frag?stillfrag/stillfrag")]
-    [InlineData("http", "example.com", "", "/fo#o", "", "#col=2", "http://example.com/fo%23o#col=2")]
-    [InlineData("http", "example.com", "", "/fo?o", "", "#col=2", "http://example.com/fo%3Fo#col=2")]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "/foo",
+        "?bar=1",
+        "#col=2",
+        "http://example.com/foo?bar=1#col=2"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "/base",
+        "/foo",
+        "?bar=1",
+        "#col=2",
+        "http://example.com/base/foo?bar=1#col=2"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "/base/",
+        "/foo",
+        "?bar=1",
+        "#col=2",
+        "http://example.com/base/foo?bar=1#col=2"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "/base/",
+        "",
+        "?bar=1",
+        "#col=2",
+        "http://example.com/base/?bar=1#col=2"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "",
+        "?bar=1",
+        "#col=2",
+        "http://example.com/?bar=1#col=2"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "",
+        "",
+        "#frag?stillfrag/stillfrag",
+        "http://example.com/#frag?stillfrag/stillfrag"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "",
+        "?q/stillq",
+        "#frag?stillfrag/stillfrag",
+        "http://example.com/?q/stillq#frag?stillfrag/stillfrag"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "/fo#o",
+        "",
+        "#col=2",
+        "http://example.com/fo%23o#col=2"
+    )]
+    [InlineData(
+        "http",
+        "example.com",
+        "",
+        "/fo?o",
+        "",
+        "#col=2",
+        "http://example.com/fo%3Fo#col=2"
+    )]
     [InlineData("ftp", "example.com", "", "/", "", "", "ftp://example.com/")]
     [InlineData("ftp", "example.com", "/", "/", "", "", "ftp://example.com/")]
     [InlineData("https", "127.0.0.0:80", "", "/bar", "", "", "https://127.0.0.0:80/bar")]
-    [InlineData("http", "[1080:0:0:0:8:800:200C:417A]", "", "/index.html", "", "", "http://[1080:0:0:0:8:800:200C:417A]/index.html")]
+    [InlineData(
+        "http",
+        "[1080:0:0:0:8:800:200C:417A]",
+        "",
+        "/index.html",
+        "",
+        "",
+        "http://[1080:0:0:0:8:800:200C:417A]/index.html"
+    )]
     [InlineData("http", "example.com", "", "///", "", "", "http://example.com///")]
     [InlineData("http", "example.com", "///", "///", "", "", "http://example.com/////")]
     public void BuildAbsoluteGenerationChecks(
@@ -67,7 +168,8 @@ public class UriHelperTests
         string path,
         string query,
         string fragment,
-        string expectedUri)
+        string expectedUri
+    )
     {
         var uri = UriHelper.BuildAbsolute(
             scheme,
@@ -75,7 +177,8 @@ public class UriHelperTests
             new PathString(pathBase),
             new PathString(path),
             new QueryString(query),
-            new FragmentString(fragment));
+            new FragmentString(fragment)
+        );
 
         Assert.Equal(expectedUri, uri);
     }
@@ -90,7 +193,10 @@ public class UriHelperTests
         request.Path = new PathString("/un?escaped");
         request.QueryString = new QueryString("?name=val%23ue");
 
-        Assert.Equal("http://my.xn--host-cpd:80/un%3Fescaped/base/un%3Fescaped?name=val%23ue", request.GetEncodedUrl());
+        Assert.Equal(
+            "http://my.xn--host-cpd:80/un%3Fescaped/base/un%3Fescaped?name=val%23ue",
+            request.GetEncodedUrl()
+        );
     }
 
     [Theory]
@@ -105,24 +211,62 @@ public class UriHelperTests
         request.Path = new PathString("/un?escaped");
         request.QueryString = new QueryString("?name=val%23ue");
 
-        Assert.Equal("http://my.hoψst:80" + pathBase + "/un?escaped?name=val%23ue", request.GetDisplayUrl());
+        Assert.Equal(
+            "http://my.hoψst:80" + pathBase + "/un?escaped?name=val%23ue",
+            request.GetDisplayUrl()
+        );
     }
 
     [Theory]
     [InlineData("http://example.com", "http", "example.com", "", "", "")]
     [InlineData("https://example.com", "https", "example.com", "", "", "")]
     [InlineData("http://example.com/foo/bar", "http", "example.com", "/foo/bar", "", "")]
-    [InlineData("http://example.com/foo/bar?baz=1", "http", "example.com", "/foo/bar", "?baz=1", "")]
+    [InlineData(
+        "http://example.com/foo/bar?baz=1",
+        "http",
+        "example.com",
+        "/foo/bar",
+        "?baz=1",
+        ""
+    )]
     [InlineData("http://example.com/foo#col=2", "http", "example.com", "/foo", "", "#col=2")]
-    [InlineData("http://example.com/foo?bar=1#col=2", "http", "example.com", "/foo", "?bar=1", "#col=2")]
+    [InlineData(
+        "http://example.com/foo?bar=1#col=2",
+        "http",
+        "example.com",
+        "/foo",
+        "?bar=1",
+        "#col=2"
+    )]
     [InlineData("http://example.com?bar=1#col=2", "http", "example.com", "", "?bar=1", "#col=2")]
-    [InlineData("http://example.com#frag?stillfrag/stillfrag", "http", "example.com", "", "", "#frag?stillfrag/stillfrag")]
-    [InlineData("http://example.com?q/stillq#frag?stillfrag/stillfrag", "http", "example.com", "", "?q/stillq", "#frag?stillfrag/stillfrag")]
+    [InlineData(
+        "http://example.com#frag?stillfrag/stillfrag",
+        "http",
+        "example.com",
+        "",
+        "",
+        "#frag?stillfrag/stillfrag"
+    )]
+    [InlineData(
+        "http://example.com?q/stillq#frag?stillfrag/stillfrag",
+        "http",
+        "example.com",
+        "",
+        "?q/stillq",
+        "#frag?stillfrag/stillfrag"
+    )]
     [InlineData("http://example.com/fo%23o#col=2", "http", "example.com", "/fo#o", "", "#col=2")]
     [InlineData("http://example.com/fo%3Fo#col=2", "http", "example.com", "/fo?o", "", "#col=2")]
     [InlineData("ftp://example.com/", "ftp", "example.com", "/", "", "")]
     [InlineData("https://127.0.0.0:80/bar", "https", "127.0.0.0:80", "/bar", "", "")]
-    [InlineData("http://[1080:0:0:0:8:800:200C:417A]/index.html", "http", "[1080:0:0:0:8:800:200C:417A]", "/index.html", "", "")]
+    [InlineData(
+        "http://[1080:0:0:0:8:800:200C:417A]/index.html",
+        "http",
+        "[1080:0:0:0:8:800:200C:417A]",
+        "/index.html",
+        "",
+        ""
+    )]
     [InlineData("http://example.com///", "http", "example.com", "///", "", "")]
     public void FromAbsoluteUriParsingChecks(
         string uri,
@@ -130,7 +274,8 @@ public class UriHelperTests
         string expectedHost,
         string expectedPath,
         string expectedQuery,
-        string expectedFragment)
+        string expectedFragment
+    )
     {
         string scheme = null;
         var host = new HostString();
@@ -154,14 +299,27 @@ public class UriHelperTests
         var path = new PathString("/index.html");
         var query = new QueryString("?foo=1");
         var fragment = new FragmentString("#col=1");
-        var request = UriHelper.BuildAbsolute(scheme, host, path: path, query: query, fragment: fragment);
+        var request = UriHelper.BuildAbsolute(
+            scheme,
+            host,
+            path: path,
+            query: query,
+            fragment: fragment
+        );
 
         string resScheme = null;
         var resHost = new HostString();
         var resPath = new PathString();
         var resQuery = new QueryString();
         var resFragment = new FragmentString();
-        UriHelper.FromAbsolute(request, out resScheme, out resHost, out resPath, out resQuery, out resFragment);
+        UriHelper.FromAbsolute(
+            request,
+            out resScheme,
+            out resHost,
+            out resPath,
+            out resQuery,
+            out resFragment
+        );
 
         Assert.Equal(scheme, resScheme);
         Assert.Equal(host, resHost);
@@ -177,8 +335,9 @@ public class UriHelperTests
         var resPath = new PathString();
         var resQuery = new QueryString();
         var resFragment = new FragmentString();
-        Assert.Throws<ArgumentNullException>(() => UriHelper.BuildAbsolute(null, resHost, resPath, resPath, resQuery, resFragment));
-
+        Assert.Throws<ArgumentNullException>(
+            () => UriHelper.BuildAbsolute(null, resHost, resPath, resPath, resQuery, resFragment)
+        );
     }
 
     [Fact]
@@ -189,7 +348,16 @@ public class UriHelperTests
         var resPath = new PathString();
         var resQuery = new QueryString();
         var resFragment = new FragmentString();
-        Assert.Throws<ArgumentNullException>(() => UriHelper.FromAbsolute(null, out resScheme, out resHost, out resPath, out resQuery, out resFragment));
-
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                UriHelper.FromAbsolute(
+                    null,
+                    out resScheme,
+                    out resHost,
+                    out resPath,
+                    out resQuery,
+                    out resFragment
+                )
+        );
     }
 }

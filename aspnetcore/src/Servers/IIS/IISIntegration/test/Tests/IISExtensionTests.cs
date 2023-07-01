@@ -34,8 +34,7 @@ public class IISExtensionTests
 
         await host.StartAsync();
 
-        var filters = server.Services.GetServices<IStartupFilter>()
-            .OfType<IISSetupFilter>();
+        var filters = server.Services.GetServices<IStartupFilter>().OfType<IISSetupFilter>();
 
         Assert.Single(filters);
     }

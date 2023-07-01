@@ -12,21 +12,31 @@ internal sealed class WellKnownTypes
     /// <summary>
     /// Cache so that we can reuse the same <see cref="WellKnownTypes"/> when analyzing a particular compilation model.
     /// </summary>
-    private static readonly ConditionalWeakTable<Compilation, WellKnownTypes?> _compilationToTypes = new();
+    private static readonly ConditionalWeakTable<Compilation, WellKnownTypes?> _compilationToTypes =
+        new();
 
-    public static bool TryGetOrCreate(Compilation compilation, [NotNullWhen(true)] out WellKnownTypes? wellKnownTypes)
+    public static bool TryGetOrCreate(
+        Compilation compilation,
+        [NotNullWhen(true)] out WellKnownTypes? wellKnownTypes
+    )
     {
-        wellKnownTypes = _compilationToTypes.GetValue(compilation, static c =>
-        {
-            TryCreate(c, out var wellKnownTypes);
-            return wellKnownTypes;
-        });
+        wellKnownTypes = _compilationToTypes.GetValue(
+            compilation,
+            static c =>
+            {
+                TryCreate(c, out var wellKnownTypes);
+                return wellKnownTypes;
+            }
+        );
 
         // The cache could return null if well known types couldn't be resolved.
         return wellKnownTypes != null;
     }
 
-    private static bool TryCreate(Compilation compilation, [NotNullWhen(true)] out WellKnownTypes? wellKnownTypes)
+    private static bool TryCreate(
+        Compilation compilation,
+        [NotNullWhen(true)] out WellKnownTypes? wellKnownTypes
+    )
     {
         wellKnownTypes = default;
 
@@ -54,14 +64,18 @@ internal sealed class WellKnownTypes
             return false;
         }
 
-        const string IFromServiceMetadata = "Microsoft.AspNetCore.Http.Metadata.IFromServiceMetadata";
+        const string IFromServiceMetadata =
+            "Microsoft.AspNetCore.Http.Metadata.IFromServiceMetadata";
         if (compilation.GetTypeByMetadataName(IFromServiceMetadata) is not { } iFromServiceMetadata)
         {
             return false;
         }
 
         const string IEndpointRouteBuilder = "Microsoft.AspNetCore.Routing.IEndpointRouteBuilder";
-        if (compilation.GetTypeByMetadataName(IEndpointRouteBuilder) is not { } iEndpointRouteBuilder)
+        if (
+            compilation.GetTypeByMetadataName(IEndpointRouteBuilder)
+            is not { } iEndpointRouteBuilder
+        )
         {
             return false;
         }
@@ -73,7 +87,10 @@ internal sealed class WellKnownTypes
         }
 
         const string NonControllerAttribute = "Microsoft.AspNetCore.Mvc.NonControllerAttribute";
-        if (compilation.GetTypeByMetadataName(NonControllerAttribute) is not { } nonControllerAttribute)
+        if (
+            compilation.GetTypeByMetadataName(NonControllerAttribute)
+            is not { } nonControllerAttribute
+        )
         {
             return false;
         }
@@ -85,7 +102,10 @@ internal sealed class WellKnownTypes
         }
 
         const string AsParametersAttribute = "Microsoft.AspNetCore.Http.AsParametersAttribute";
-        if (compilation.GetTypeByMetadataName(AsParametersAttribute) is not { } asParametersAttribute)
+        if (
+            compilation.GetTypeByMetadataName(AsParametersAttribute)
+            is not { } asParametersAttribute
+        )
         {
             return false;
         }

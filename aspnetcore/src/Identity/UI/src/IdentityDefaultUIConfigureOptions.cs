@@ -10,14 +10,14 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
-internal sealed class IdentityDefaultUIConfigureOptions<TUser> :
-    IPostConfigureOptions<RazorPagesOptions>,
-    IConfigureNamedOptions<CookieAuthenticationOptions> where TUser : class
+internal sealed class IdentityDefaultUIConfigureOptions<TUser>
+    : IPostConfigureOptions<RazorPagesOptions>,
+        IConfigureNamedOptions<CookieAuthenticationOptions>
+    where TUser : class
 {
     private const string IdentityUIDefaultAreaName = "Identity";
 
-    public IdentityDefaultUIConfigureOptions(
-        IWebHostEnvironment environment)
+    public IdentityDefaultUIConfigureOptions(IWebHostEnvironment environment)
     {
         Environment = environment;
     }
@@ -34,11 +34,13 @@ internal sealed class IdentityDefaultUIConfigureOptions<TUser> :
         options.Conventions.AddAreaFolderApplicationModelConvention(
             IdentityUIDefaultAreaName,
             "/",
-            convention.Apply);
+            convention.Apply
+        );
         options.Conventions.AddAreaFolderApplicationModelConvention(
             IdentityUIDefaultAreaName,
             "/Account/Manage",
-            pam => pam.Filters.Add(new ExternalLoginsPageFilter<TUser>()));
+            pam => pam.Filters.Add(new ExternalLoginsPageFilter<TUser>())
+        );
     }
 
     public void Configure(CookieAuthenticationOptions options)

@@ -17,7 +17,8 @@ internal sealed class DefaultViewComponentInvokerFactory : IViewComponentInvoker
         IViewComponentFactory viewComponentFactory,
         ViewComponentInvokerCache viewComponentInvokerCache,
         DiagnosticListener diagnosticListener,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         if (viewComponentFactory == null)
         {
@@ -61,6 +62,7 @@ internal sealed class DefaultViewComponentInvokerFactory : IViewComponentInvoker
             _viewComponentFactory,
             _viewComponentInvokerCache,
             _diagnosticListener,
-            _logger);
+            _logger
+        );
     }
 }

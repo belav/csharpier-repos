@@ -19,7 +19,5 @@ public class OkResult : StatusCodeResult
     /// Initializes a new instance of the <see cref="OkResult"/> class.
     /// </summary>
     public OkResult()
-        : base(DefaultStatusCode)
-    {
-    }
+        : base(DefaultStatusCode) { }
 }

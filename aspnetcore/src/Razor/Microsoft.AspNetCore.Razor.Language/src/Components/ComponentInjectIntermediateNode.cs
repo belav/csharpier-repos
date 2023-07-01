@@ -12,9 +12,9 @@ internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode
 {
     private static readonly IList<string> _injectedPropertyModifiers = new[]
     {
-            $"[global::{ComponentsApi.InjectAttribute.FullTypeName}]",
-            "private" // Encapsulation is the default
-        };
+        $"[global::{ComponentsApi.InjectAttribute.FullTypeName}]",
+        "private" // Encapsulation is the default
+    };
 
     public ComponentInjectIntermediateNode(string typeName, string memberName)
     {
@@ -27,7 +27,6 @@ internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode
     public string MemberName { get; }
 
     public override IntermediateNodeCollection Children => IntermediateNodeCollection.ReadOnly;
-
 
     public override void Accept(IntermediateNodeVisitor visitor)
     {
@@ -54,6 +53,7 @@ internal class ComponentInjectIntermediateNode : ExtensionIntermediateNode
         context.CodeWriter.WriteAutoPropertyDeclaration(
             _injectedPropertyModifiers,
             TypeName,
-            MemberName);
+            MemberName
+        );
     }
 }

@@ -12,7 +12,8 @@ internal sealed class WebAssemblyErrorBoundaryLogger : IErrorBoundaryLogger
 
     public WebAssemblyErrorBoundaryLogger(ILogger<ErrorBoundary> errorBoundaryLogger)
     {
-        _errorBoundaryLogger = errorBoundaryLogger ?? throw new ArgumentNullException(nameof(errorBoundaryLogger));
+        _errorBoundaryLogger =
+            errorBoundaryLogger ?? throw new ArgumentNullException(nameof(errorBoundaryLogger));
     }
 
     public ValueTask LogErrorAsync(Exception exception)

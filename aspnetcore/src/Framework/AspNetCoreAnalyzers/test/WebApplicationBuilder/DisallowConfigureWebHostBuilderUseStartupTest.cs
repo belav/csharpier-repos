@@ -14,7 +14,8 @@ public partial class DisallowConfigureWebHostBuilderUseStartupTest
     public async Task WebApplicationBuilder_WebHostWithoutUseStartup_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebApplication.CreateBuilder();
@@ -31,90 +32,123 @@ builder.WebHost.ConfigureKestrel(options => { });
     public async Task WebApplicationBuilder_WebHostWithoutUseStartupGenericType_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebApplication.CreateBuilder();
 builder.WebHost./*MM*/UseStartup<Startup>();
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("UseStartup cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "UseStartup cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithoutUseStartupType_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebApplication.CreateBuilder();
 builder.WebHost./*MM*/UseStartup(typeof(Startup));
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("UseStartup cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "UseStartup cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithoutUseStartupString_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebApplication.CreateBuilder();
 builder.WebHost./*MM*/UseStartup(""Startup"");
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("UseStartup cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "UseStartup cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithoutUseStartupGenericTypeWithContext_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebApplication.CreateBuilder();
 builder.WebHost./*MM*/UseStartup(context => new Startup());
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("UseStartup cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "UseStartup cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithUseStartupOnProperty_ProducesDiagnostics_In_Program_Main()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 public static class Program
@@ -126,22 +160,30 @@ public static class Program
     }
 }
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("UseStartup cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "UseStartup cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task WebApplicationBuilder_WebHostWithUseStartupOnBuilder_ProducesDiagnostics_In_Program_Main()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 public static class Program
@@ -154,22 +196,30 @@ public static class Program
     }
 }
 public class Startup { }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseUseStartupWithConfigureWebHostBuilder,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("UseStartup cannot be used with WebApplicationBuilder.WebHost", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "UseStartup cannot be used with WebApplicationBuilder.WebHost",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task HostBuilder_WebHostBuilder_UseStartup_DoesNotProduceDiagnostic()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 var builder = Host.CreateDefaultBuilder();
@@ -190,7 +240,8 @@ public class Startup { }
     public async Task WebHostBuilder_UseStartup_DoesNotProduceDiagnostic()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 var builder = WebHost.CreateDefaultBuilder();

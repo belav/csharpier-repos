@@ -29,16 +29,13 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         IViewBufferScope bufferScope,
         HtmlEncoder htmlEncoder,
         UrlEncoder urlEncoder,
-        ModelExpressionProvider modelExpressionProvider)
-        : base(
-              htmlGenerator,
-              viewEngine,
-              metadataProvider,
-              bufferScope,
-              htmlEncoder,
-              urlEncoder)
+        ModelExpressionProvider modelExpressionProvider
+    )
+        : base(htmlGenerator, viewEngine, metadataProvider, bufferScope, htmlEncoder, urlEncoder)
     {
-        _modelExpressionProvider = modelExpressionProvider ?? throw new ArgumentNullException(nameof(modelExpressionProvider));
+        _modelExpressionProvider =
+            modelExpressionProvider
+            ?? throw new ArgumentNullException(nameof(modelExpressionProvider));
     }
 
     /// <inheritdoc />
@@ -54,10 +51,13 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
 
         if (viewContext.ViewData == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
                     nameof(ViewContext.ViewData),
-                    typeof(ViewContext)),
-                nameof(viewContext));
+                    typeof(ViewContext)
+                ),
+                nameof(viewContext)
+            );
         }
 
         ViewData = viewContext.ViewData as ViewDataDictionary<TModel>;
@@ -71,20 +71,30 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             // In that case, we check if the type of the current view data, 'ViewDataDictionary<TRuntime>' is "covariant" with the
             // one defined at compile time 'ViewDataDictionary<TCompile>'
             var runtimeType = viewContext.ViewData.ModelMetadata.ModelType;
-            if (runtimeType != null && typeof(TModel) != runtimeType && typeof(TModel).IsAssignableFrom(runtimeType))
+            if (
+                runtimeType != null
+                && typeof(TModel) != runtimeType
+                && typeof(TModel).IsAssignableFrom(runtimeType)
+            )
             {
-                ViewData = new ViewDataDictionary<TModel>(viewContext.ViewData, viewContext.ViewData.Model);
+                ViewData = new ViewDataDictionary<TModel>(
+                    viewContext.ViewData,
+                    viewContext.ViewData.Model
+                );
             }
         }
 
         if (ViewData == null)
         {
             // viewContext may contain a base ViewDataDictionary instance. So complain about that type, not TModel.
-            throw new ArgumentException(Resources.FormatArgumentPropertyUnexpectedType(
+            throw new ArgumentException(
+                Resources.FormatArgumentPropertyUnexpectedType(
                     nameof(ViewContext.ViewData),
                     viewContext.ViewData.GetType().FullName,
-                    typeof(ViewDataDictionary<TModel>).FullName),
-                nameof(viewContext));
+                    typeof(ViewDataDictionary<TModel>).FullName
+                ),
+                nameof(viewContext)
+            );
         }
 
         base.Contextualize(viewContext);
@@ -93,7 +103,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
     /// <inheritdoc />
     public IHtmlContent CheckBoxFor(
         Expression<Func<TModel, bool>> expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -105,7 +116,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.ModelExplorer,
             modelExpression.Name,
             isChecked: null,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -113,7 +125,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         Expression<Func<TModel, TResult>> expression,
         IEnumerable<SelectListItem> selectList,
         string optionLabel,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -126,7 +139,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.Name,
             selectList,
             optionLabel,
-            htmlAttributes);
+            htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -134,7 +148,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         Expression<Func<TModel, TResult>> expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (expression == null)
         {
@@ -146,7 +161,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.ModelExplorer,
             htmlFieldName ?? modelExpression.Name,
             templateName,
-            additionalViewData);
+            additionalViewData
+        );
     }
 
     /// <inheritdoc />
@@ -163,7 +179,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
 
     /// <inheritdoc />
     public string DisplayNameForInnerType<TModelItem, TResult>(
-        Expression<Func<TModelItem, TResult>> expression)
+        Expression<Func<TModelItem, TResult>> expression
+    )
     {
         if (expression == null)
         {
@@ -172,7 +189,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
 
         var modelExpression = _modelExpressionProvider.CreateModelExpression(
             new ViewDataDictionary<TModelItem>(ViewData, model: null),
-            expression);
+            expression
+        );
 
         return GenerateDisplayName(modelExpression.ModelExplorer, modelExpression.Name);
     }
@@ -193,7 +211,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         Expression<Func<TModel, TResult>> expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         if (expression == null)
         {
@@ -205,13 +224,15 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.ModelExplorer,
             htmlFieldName ?? modelExpression.Name,
             templateName,
-            additionalViewData);
+            additionalViewData
+        );
     }
 
     /// <inheritdoc />
     public IHtmlContent HiddenFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -224,7 +245,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.Name,
             modelExpression.Model,
             useViewData: false,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -242,7 +264,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
     public IHtmlContent LabelFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         string labelText,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -250,14 +273,20 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         }
 
         var modelExpression = GetModelExpression(expression);
-        return GenerateLabel(modelExpression.ModelExplorer, modelExpression.Name, labelText, htmlAttributes);
+        return GenerateLabel(
+            modelExpression.ModelExplorer,
+            modelExpression.Name,
+            labelText,
+            htmlAttributes
+        );
     }
 
     /// <inheritdoc />
     public IHtmlContent ListBoxFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         IEnumerable<SelectListItem> selectList,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -285,7 +314,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
     /// <inheritdoc />
     public IHtmlContent PasswordFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -297,14 +327,16 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.ModelExplorer,
             modelExpression.Name,
             value: null,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
     public IHtmlContent RadioButtonFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         object value,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -322,7 +354,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.Name,
             value,
             isChecked: null,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -330,7 +363,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         Expression<Func<TModel, TResult>> expression,
         int rows,
         int columns,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -338,14 +372,21 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         }
 
         var modelExpression = GetModelExpression(expression);
-        return GenerateTextArea(modelExpression.ModelExplorer, modelExpression.Name, rows, columns, htmlAttributes);
+        return GenerateTextArea(
+            modelExpression.ModelExplorer,
+            modelExpression.Name,
+            rows,
+            columns,
+            htmlAttributes
+        );
     }
 
     /// <inheritdoc />
     public IHtmlContent TextBoxFor<TResult>(
         Expression<Func<TModel, TResult>> expression,
         string format,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (expression == null)
         {
@@ -358,10 +399,13 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.Name,
             modelExpression.Model,
             format,
-            htmlAttributes);
+            htmlAttributes
+        );
     }
 
-    private ModelExpression GetModelExpression<TResult>(Expression<Func<TModel, TResult>> expression)
+    private ModelExpression GetModelExpression<TResult>(
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         return _modelExpressionProvider.CreateModelExpression(ViewData, expression);
     }
@@ -403,7 +447,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         Expression<Func<TModel, TResult>> expression,
         string message,
         object htmlAttributes,
-        string tag)
+        string tag
+    )
     {
         if (expression == null)
         {
@@ -416,7 +461,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
             modelExpression.Name,
             message,
             tag,
-            htmlAttributes);
+            htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -428,6 +474,11 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         }
 
         var modelExpression = GetModelExpression(expression);
-        return GenerateValue(modelExpression.Name, modelExpression.Model, format, useViewData: false);
+        return GenerateValue(
+            modelExpression.Name,
+            modelExpression.Model,
+            format,
+            useViewData: false
+        );
     }
 }

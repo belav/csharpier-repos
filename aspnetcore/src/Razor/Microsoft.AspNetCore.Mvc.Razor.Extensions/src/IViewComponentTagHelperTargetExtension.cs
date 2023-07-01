@@ -7,5 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
 public interface IViewComponentTagHelperTargetExtension : ICodeTargetExtension
 {
-    void WriteViewComponentTagHelper(CodeRenderingContext context, ViewComponentTagHelperIntermediateNode node);
+    void WriteViewComponentTagHelper(
+        CodeRenderingContext context,
+        ViewComponentTagHelperIntermediateNode node
+    );
 }

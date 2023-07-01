@@ -12,7 +12,10 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-delegate Task<HttpResponseMessage> RequestDelegate(HttpRequestMessage requestMessage, CancellationToken cancellationToken);
+delegate Task<HttpResponseMessage> RequestDelegate(
+    HttpRequestMessage requestMessage,
+    CancellationToken cancellationToken
+);
 
 public class TestHttpMessageHandler : HttpMessageHandler
 {
@@ -20,7 +23,8 @@ public class TestHttpMessageHandler : HttpMessageHandler
     private RequestDelegate _app;
     private readonly ILogger _logger;
 
-    private readonly List<Func<RequestDelegate, RequestDelegate>> _middleware = new List<Func<RequestDelegate, RequestDelegate>>();
+    private readonly List<Func<RequestDelegate, RequestDelegate>> _middleware =
+        new List<Func<RequestDelegate, RequestDelegate>>();
 
     public bool Disposed { get; private set; }
 
@@ -35,38 +39,50 @@ public class TestHttpMessageHandler : HttpMessageHandler
         }
     }
 
-    public TestHttpMessageHandler(ILoggerFactory loggerFactory, bool autoNegotiate = true, bool handleFirstPoll = true)
+    public TestHttpMessageHandler(
+        ILoggerFactory loggerFactory,
+        bool autoNegotiate = true,
+        bool handleFirstPoll = true
+    )
     {
-        _logger = loggerFactory?.CreateLogger<TestHttpMessageHandler>() ?? NullLoggerFactory.Instance.CreateLogger<TestHttpMessageHandler>();
+        _logger =
+            loggerFactory?.CreateLogger<TestHttpMessageHandler>()
+            ?? NullLoggerFactory.Instance.CreateLogger<TestHttpMessageHandler>();
 
         if (autoNegotiate)
         {
-            OnNegotiate((_, cancellationToken) => ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent()));
+            OnNegotiate(
+                (_, cancellationToken) =>
+                    ResponseUtils.CreateResponse(
+                        HttpStatusCode.OK,
+                        ResponseUtils.CreateNegotiationContent()
+                    )
+            );
         }
 
         if (handleFirstPoll)
         {
             var firstPoll = true;
-            OnRequest(async (request, next, cancellationToken) =>
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (ResponseUtils.IsLongPollRequest(request) && firstPoll)
+            OnRequest(
+                async (request, next, cancellationToken) =>
                 {
-                    firstPoll = false;
-                    return ResponseUtils.CreateResponse(HttpStatusCode.OK);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    if (ResponseUtils.IsLongPollRequest(request) && firstPoll)
+                    {
+                        firstPoll = false;
+                        return ResponseUtils.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else
+                    {
+                        return await next();
+                    }
                 }
-                else
-                {
-                    return await next();
-                }
-            });
+            );
         }
     }
 
     public TestHttpMessageHandler(bool autoNegotiate = true, bool handleFirstPoll = true)
-        : this(NullLoggerFactory.Instance, autoNegotiate, handleFirstPoll)
-    {
-    }
+        : this(NullLoggerFactory.Instance, autoNegotiate, handleFirstPoll) { }
 
     protected override void Dispose(bool disposing)
     {
@@ -74,9 +90,16 @@ public class TestHttpMessageHandler : HttpMessageHandler
         base.Dispose(disposing);
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
-        _logger.LogDebug("Calling handlers for a '{Method}' going to '{Url}'.", request.Method, request.RequestUri);
+        _logger.LogDebug(
+            "Calling handlers for a '{Method}' going to '{Url}'.",
+            request.Method,
+            request.RequestUri
+        );
         await Task.Yield();
 
         lock (_receivedRequests)
@@ -105,10 +128,15 @@ public class TestHttpMessageHandler : HttpMessageHandler
 
         var deleteCts = new CancellationTokenSource();
 
-        testHttpMessageHandler.OnSocketSend((_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted));
+        testHttpMessageHandler.OnSocketSend(
+            (_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
+        );
         testHttpMessageHandler.OnLongPoll(async cancellationToken =>
         {
-            var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, deleteCts.Token);
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                cancellationToken,
+                deleteCts.Token
+            );
 
             // Just block until canceled
             var tcs = new TaskCompletionSource();
@@ -118,21 +146,33 @@ public class TestHttpMessageHandler : HttpMessageHandler
             }
             return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
         });
-        testHttpMessageHandler.OnRequest((request, next, cancellationToken) =>
-        {
-            if (request.Method.Equals(HttpMethod.Delete) && request.RequestUri.PathAndQuery.Contains("id="))
+        testHttpMessageHandler.OnRequest(
+            (request, next, cancellationToken) =>
             {
-                deleteCts.Cancel();
-                return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.Accepted));
-            }
+                if (
+                    request.Method.Equals(HttpMethod.Delete)
+                    && request.RequestUri.PathAndQuery.Contains("id=")
+                )
+                {
+                    deleteCts.Cancel();
+                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.Accepted));
+                }
 
-            return next();
-        });
+                return next();
+            }
+        );
 
         return testHttpMessageHandler;
     }
 
-    public void OnRequest(Func<HttpRequestMessage, Func<Task<HttpResponseMessage>>, CancellationToken, Task<HttpResponseMessage>> handler)
+    public void OnRequest(
+        Func<
+            HttpRequestMessage,
+            Func<Task<HttpResponseMessage>>,
+            CancellationToken,
+            Task<HttpResponseMessage>
+        > handler
+    )
     {
         void OnRequestCore(Func<RequestDelegate, RequestDelegate> middleware)
         {
@@ -148,65 +188,111 @@ public class TestHttpMessageHandler : HttpMessageHandler
         });
     }
 
-    public void OnGet(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Get, pathAndQuery, handler);
-    public void OnPost(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Post, pathAndQuery, handler);
-    public void OnPut(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Put, pathAndQuery, handler);
-    public void OnDelete(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Delete, pathAndQuery, handler);
-    public void OnHead(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Head, pathAndQuery, handler);
-    public void OnOptions(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Options, pathAndQuery, handler);
-    public void OnTrace(string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler) => OnRequest(HttpMethod.Trace, pathAndQuery, handler);
+    public void OnGet(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Get, pathAndQuery, handler);
 
-    public void OnRequest(HttpMethod method, string pathAndQuery, Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler)
+    public void OnPost(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Post, pathAndQuery, handler);
+
+    public void OnPut(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Put, pathAndQuery, handler);
+
+    public void OnDelete(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Delete, pathAndQuery, handler);
+
+    public void OnHead(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Head, pathAndQuery, handler);
+
+    public void OnOptions(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Options, pathAndQuery, handler);
+
+    public void OnTrace(
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    ) => OnRequest(HttpMethod.Trace, pathAndQuery, handler);
+
+    public void OnRequest(
+        HttpMethod method,
+        string pathAndQuery,
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    )
     {
-        OnRequest((request, next, cancellationToken) =>
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (request.Method.Equals(method) && string.Equals(request.RequestUri.PathAndQuery, pathAndQuery))
+        OnRequest(
+            (request, next, cancellationToken) =>
             {
-                return handler(request, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                if (
+                    request.Method.Equals(method)
+                    && string.Equals(request.RequestUri.PathAndQuery, pathAndQuery)
+                )
+                {
+                    return handler(request, cancellationToken);
+                }
+                else
+                {
+                    return next();
+                }
             }
-            else
-            {
-                return next();
-            }
-        });
+        );
     }
 
-    public void OnNegotiate(Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> handler) => OnNegotiate((req, cancellationToken) => Task.FromResult(handler(req, cancellationToken)));
+    public void OnNegotiate(
+        Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> handler
+    ) => OnNegotiate((req, cancellationToken) => Task.FromResult(handler(req, cancellationToken)));
 
-    public void OnNegotiate(Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler)
+    public void OnNegotiate(
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    )
     {
-        OnRequest((request, next, cancellationToken) =>
-        {
-            if (ResponseUtils.IsNegotiateRequest(request))
+        OnRequest(
+            (request, next, cancellationToken) =>
             {
-                return handler(request, cancellationToken);
+                if (ResponseUtils.IsNegotiateRequest(request))
+                {
+                    return handler(request, cancellationToken);
+                }
+                else
+                {
+                    return next();
+                }
             }
-            else
-            {
-                return next();
-            }
-        });
+        );
     }
 
-    public void OnLongPollDelete(Func<CancellationToken, HttpResponseMessage> handler) => OnLongPollDelete((cancellationToken) => Task.FromResult(handler(cancellationToken)));
+    public void OnLongPollDelete(Func<CancellationToken, HttpResponseMessage> handler) =>
+        OnLongPollDelete((cancellationToken) => Task.FromResult(handler(cancellationToken)));
 
     public void OnLongPollDelete(Func<CancellationToken, Task<HttpResponseMessage>> handler)
     {
-        OnRequest((request, next, cancellationToken) =>
-        {
-            if (ResponseUtils.IsLongPollDeleteRequest(request))
+        OnRequest(
+            (request, next, cancellationToken) =>
             {
-                return handler(cancellationToken);
+                if (ResponseUtils.IsLongPollDeleteRequest(request))
+                {
+                    return handler(cancellationToken);
+                }
+                else
+                {
+                    return next();
+                }
             }
-            else
-            {
-                return next();
-            }
-        });
+        );
     }
 
-    public void OnLongPoll(Func<CancellationToken, HttpResponseMessage> handler) => OnLongPoll(cancellationToken => Task.FromResult(handler(cancellationToken)));
+    public void OnLongPoll(Func<CancellationToken, HttpResponseMessage> handler) =>
+        OnLongPoll(cancellationToken => Task.FromResult(handler(cancellationToken)));
 
     public void OnLongPoll(Func<CancellationToken, Task<HttpResponseMessage>> handler)
     {
@@ -218,41 +304,57 @@ public class TestHttpMessageHandler : HttpMessageHandler
         OnLongPoll((request, token) => Task.FromResult(handler(request, token)));
     }
 
-    public void OnLongPoll(Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler)
+    public void OnLongPoll(
+        Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> handler
+    )
     {
-        OnRequest((request, next, cancellationToken) =>
-        {
-            if (ResponseUtils.IsLongPollRequest(request))
+        OnRequest(
+            (request, next, cancellationToken) =>
             {
-                return handler(request, cancellationToken);
+                if (ResponseUtils.IsLongPollRequest(request))
+                {
+                    return handler(request, cancellationToken);
+                }
+                else
+                {
+                    return next();
+                }
             }
-            else
-            {
-                return next();
-            }
-        });
+        );
     }
 
-    public void OnSocketSend(Func<byte[], CancellationToken, HttpResponseMessage> handler) => OnSocketSend((data, cancellationToken) => Task.FromResult(handler(data, cancellationToken)));
+    public void OnSocketSend(Func<byte[], CancellationToken, HttpResponseMessage> handler) =>
+        OnSocketSend(
+            (data, cancellationToken) => Task.FromResult(handler(data, cancellationToken))
+        );
 
     public void OnSocketSend(Func<byte[], CancellationToken, Task<HttpResponseMessage>> handler)
     {
-        OnRequest(async (request, next, cancellationToken) =>
-        {
-            if (ResponseUtils.IsSocketSendRequest(request))
+        OnRequest(
+            async (request, next, cancellationToken) =>
             {
-                var data = await request.Content.ReadAsByteArrayAsync();
-                return await handler(data, cancellationToken);
+                if (ResponseUtils.IsSocketSendRequest(request))
+                {
+                    var data = await request.Content.ReadAsByteArrayAsync();
+                    return await handler(data, cancellationToken);
+                }
+                else
+                {
+                    return await next();
+                }
             }
-            else
-            {
-                return await next();
-            }
-        });
+        );
     }
 
-    private Task<HttpResponseMessage> BaseHandler(HttpRequestMessage request, CancellationToken cancellationToken)
+    private Task<HttpResponseMessage> BaseHandler(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
-        return Task.FromException<HttpResponseMessage>(new InvalidOperationException($"Http endpoint not implemented: {request.Method} {request.RequestUri}"));
+        return Task.FromException<HttpResponseMessage>(
+            new InvalidOperationException(
+                $"Http endpoint not implemented: {request.Method} {request.RequestUri}"
+            )
+        );
     }
 }

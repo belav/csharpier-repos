@@ -7,8 +7,7 @@ public class StartupWithSystemTextJson
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddMvc();
+        services.AddMvc();
 
         services.AddSingleton<ContactsRepository>();
     }

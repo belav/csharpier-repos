@@ -12,7 +12,11 @@ namespace Microsoft.AspNetCore.Components.Routing;
 [DebuggerDisplay("Handler = {Handler}, Template = {Template}")]
 internal sealed class RouteEntry
 {
-    public RouteEntry(RouteTemplate template, [DynamicallyAccessedMembers(Component)] Type handler, List<string>? unusedRouteParameterNames)
+    public RouteEntry(
+        RouteTemplate template,
+        [DynamicallyAccessedMembers(Component)] Type handler,
+        List<string>? unusedRouteParameterNames
+    )
     {
         Template = template;
         UnusedRouteParameterNames = unusedRouteParameterNames;
@@ -73,7 +77,12 @@ internal sealed class RouteEntry
                 {
                     // Unconstrained catch all, we can stop early
                     parameters ??= new(StringComparer.OrdinalIgnoreCase);
-                    parameters[templateSegment.Value] = string.Join('/', context.Segments, pathIndex, context.Segments.Length - pathIndex);
+                    parameters[templateSegment.Value] = string.Join(
+                        '/',
+                        context.Segments,
+                        pathIndex,
+                        context.Segments.Length - pathIndex
+                    );
 
                     // Mark the remaining segments as consumed.
                     pathIndex = context.Segments.Length;
@@ -91,7 +100,12 @@ internal sealed class RouteEntry
                     if (pathIndex == context.Segments.Length)
                     {
                         parameters ??= new(StringComparer.OrdinalIgnoreCase);
-                        parameters[templateSegment.Value] = string.Join('/', context.Segments, templateIndex, context.Segments.Length - templateIndex);
+                        parameters[templateSegment.Value] = string.Join(
+                            '/',
+                            context.Segments,
+                            templateIndex,
+                            context.Segments.Length - templateIndex
+                        );
 
                         // This is important to signal that we consumed the entire template.
                         templateIndex++;
@@ -100,10 +114,14 @@ internal sealed class RouteEntry
             }
         }
 
-        var hasRemainingOptionalSegments = templateIndex < Template.Segments.Length &&
-            RemainingSegmentsAreOptional(pathIndex, Template.Segments);
+        var hasRemainingOptionalSegments =
+            templateIndex < Template.Segments.Length
+            && RemainingSegmentsAreOptional(pathIndex, Template.Segments);
 
-        if ((pathIndex == context.Segments.Length && templateIndex == Template.Segments.Length) || hasRemainingOptionalSegments)
+        if (
+            (pathIndex == context.Segments.Length && templateIndex == Template.Segments.Length)
+            || hasRemainingOptionalSegments
+        )
         {
             if (hasRemainingOptionalSegments)
             {
@@ -123,7 +141,11 @@ internal sealed class RouteEntry
         }
     }
 
-    private static void AddDefaultValues(Dictionary<string, object> parameters, int templateIndex, TemplateSegment[] segments)
+    private static void AddDefaultValues(
+        Dictionary<string, object> parameters,
+        int templateIndex,
+        TemplateSegment[] segments
+    )
     {
         for (var i = templateIndex; i < segments.Length; i++)
         {
