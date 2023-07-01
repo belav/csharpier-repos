@@ -1,12 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-#nullable enable
 using System;
-#if NETCOREAPP
-using System.Buffers;
-#endif
-using System.Diagnostics;using System.Globalization;using System.Runtime.CompilerServices;using Microsoft.Extensions.WebEncoders.Sources;
+using System.Diagnostics;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using Microsoft.Extensions.WebEncoders.Sources;
 
 #if WebEncoders_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;

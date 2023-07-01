@@ -2,9 +2,6 @@ using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
     Microsoft.AspNetCore.Analyzers.Http.HeaderDictionaryAddAnalyzer,
     Microsoft.AspNetCore.Analyzers.Http.Fixers.HeaderDictionaryAddFixer
 >;
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using Microsoft.AspNetCore.Testing;
 using Microsoft.CodeAnalysis.Testing;
 

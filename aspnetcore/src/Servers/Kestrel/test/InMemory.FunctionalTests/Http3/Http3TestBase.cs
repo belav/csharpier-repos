@@ -1,6 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using System;
 using System.Buffers;
 using System.Collections.Concurrent;
@@ -9,7 +6,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Pipelines;
-using static System.IO.Pipelines.DuplexPipe;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.QPack;
@@ -26,13 +22,13 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using static Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2TestBase;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;
-using Xunit.Abstractions;
+using Xunit.Abstractions;using static System.IO.Pipelines.DuplexPipe;
+using static Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2TestBase;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 

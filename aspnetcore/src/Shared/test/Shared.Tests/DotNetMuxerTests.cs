@@ -2,7 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NETCOREAPP
-using System;using System.IO;using System.Runtime.InteropServices;using Xunit;
+using System;
+
+using System.IO;
+
+using System.Runtime.InteropServices;
+
+using Xunit;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 

@@ -1,9 +1,5 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using Microsoft.AspNetCore.Http;
-using static Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy;
-using Microsoft.AspNetCore.Routing.Patterns;
+using Microsoft.AspNetCore.Routing.Patterns;using static Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 

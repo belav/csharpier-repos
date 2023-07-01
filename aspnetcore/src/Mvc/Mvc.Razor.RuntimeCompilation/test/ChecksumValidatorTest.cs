@@ -1,9 +1,5 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Microsoft.AspNetCore.Razor.Hosting;
-using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
-using Microsoft.AspNetCore.Razor.Language;
+﻿using Microsoft.AspNetCore.Razor.Hosting;
+using Microsoft.AspNetCore.Razor.Language;using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 

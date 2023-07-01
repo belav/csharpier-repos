@@ -1,12 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using System.Buffers;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO.Pipelines;
-using static System.IO.Pipelines.DuplexPipe;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.QPack;
@@ -26,7 +22,7 @@ using Http3SettingType = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
+using Microsoft.Extensions.Primitives;using static System.IO.Pipelines.DuplexPipe;
 
 namespace Microsoft.AspNetCore.Testing;
 

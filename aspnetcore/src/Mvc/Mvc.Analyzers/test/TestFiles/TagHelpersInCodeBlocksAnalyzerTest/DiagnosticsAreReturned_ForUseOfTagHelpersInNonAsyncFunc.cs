@@ -1,6 +1,5 @@
 namespace AspNetCore
 {
-#line hidden
     using System;
     using System.Collections.Generic;
     using System.Linq;

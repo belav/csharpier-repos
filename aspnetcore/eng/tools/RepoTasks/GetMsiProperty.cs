@@ -2,7 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if BUILD_MSI_TASKS
-using System;using Microsoft.Build.Framework;using Microsoft.Build.Utilities;using Microsoft.Deployment.WindowsInstaller.Package;
+using System;
+
+using Microsoft.Build.Framework;
+
+using Microsoft.Build.Utilities;
+
+using Microsoft.Deployment.WindowsInstaller.Package;
 
 namespace RepoTasks;
 

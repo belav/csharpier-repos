@@ -1,14 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-#if DEBUG
-// Uncomment to enable runtime checks to help validate that NetEventSource isn't being misused
-// in a way that will cause performance problems, e.g. unexpected boxing of value types.
-//#define DEBUG_NETEVENTSOURCE_MISUSE
-#endif
-
-#nullable enable
-using System.Collections;using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.Tracing;using System.Globalization;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;
+using System.Collections;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Tracing;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 #pragma warning disable CA1823 // not all IDs are used by all partial providers
 

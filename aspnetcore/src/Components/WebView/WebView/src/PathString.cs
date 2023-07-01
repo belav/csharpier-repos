@@ -1,12 +1,3 @@
-// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
-
-// NOTE: This file is copied from src/Http/Http.Abstractions/src/PathString.cs
-// and made internal with a namespace change.
-// It can't be referenced directly from the StaticFiles package because that would cause this package to require
-// Microsoft.AspNetCore.App, thus preventing it from being used anywhere ASP.NET Core isn't supported (such as
-// various platforms that .NET MAUI runs on, such as Android and iOS).
-
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;

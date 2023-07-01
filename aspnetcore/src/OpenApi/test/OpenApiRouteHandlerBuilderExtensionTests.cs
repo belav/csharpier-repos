@@ -1,13 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using static Microsoft.AspNetCore.OpenApi.Tests.OpenApiOperationGeneratorTests;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Models;using static Microsoft.AspNetCore.OpenApi.Tests.OpenApiOperationGeneratorTests;
 
 namespace Microsoft.AspNetCore.OpenApi.Tests;
 

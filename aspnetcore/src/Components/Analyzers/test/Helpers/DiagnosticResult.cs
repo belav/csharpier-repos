@@ -1,8 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-// Most of the code in this file comes from the default Roslyn Analyzer project template
-
 using Microsoft.CodeAnalysis;
 
 namespace TestHelper;

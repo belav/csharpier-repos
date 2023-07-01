@@ -1,11 +1,7 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using Microsoft.AspNetCore.Http.Features;
-using static Microsoft.AspNetCore.Http.Features.QueryFeature;
-using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.WebUtilities;using static Microsoft.AspNetCore.Http.Features.QueryFeature;
 
 namespace Microsoft.AspNetCore.Http;
 

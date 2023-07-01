@@ -1,8 +1,4 @@
-using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.CommandLineUtils;using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
 
 namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 {

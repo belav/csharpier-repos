@@ -2,7 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NET7_0_OR_GREATER
-using System.Net.Security;using System.Threading;using Microsoft.AspNetCore.Connections;using Microsoft.AspNetCore.Http.Features;
+using System.Net.Security;
+
+using System.Threading;
+
+using Microsoft.AspNetCore.Connections;
+
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 

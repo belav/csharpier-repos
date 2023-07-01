@@ -4,14 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-#if (RequiresHttps)
-using Microsoft.AspNetCore.HttpsPolicy;
-#endif
 using Microsoft.AspNetCore.Mvc;
-#if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication;using Microsoft.AspNetCore.Authentication.JwtBearer;using Microsoft.Identity.Web;
-#endif
-using Microsoft.Extensions.Configuration;using Microsoft.Extensions.DependencyInjection;using Microsoft.Extensions.Hosting;using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 #if (GenerateGraph)
 using Microsoft.Graph;
 #endif

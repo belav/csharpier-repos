@@ -1,17 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-// Helper methods for using Tasks to implement the APM pattern.
-//
-// Example usage, wrapping a Task<int>-returning FooAsync method with Begin/EndFoo methods:
-//
-//     public IAsyncResult BeginFoo(..., AsyncCallback callback, object state) =>
-//         TaskToApm.Begin(FooAsync(...), callback, state);
-//
-//     public int EndFoo(IAsyncResult asyncResult) =>
-//         TaskToApm.End<int>(asyncResult);
-
-#nullable enable
 using System.Diagnostics;
 
 namespace System.Threading.Tasks;
