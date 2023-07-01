@@ -19,10 +19,7 @@ namespace System.ServiceModel.Channels
 
         internal override string Scheme
         {
-            get 
-            { 
-                return Uri.UriSchemeHttps; 
-            }
+            get { return Uri.UriSchemeHttps; }
         }
 
         internal static UriPrefixTable<ITransportManagerRegistration> StaticTransportManagerTable
@@ -32,10 +29,7 @@ namespace System.ServiceModel.Channels
 
         internal override UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
     }
 }

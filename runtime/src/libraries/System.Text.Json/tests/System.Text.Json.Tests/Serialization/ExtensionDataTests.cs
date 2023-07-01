@@ -5,11 +5,13 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed partial class ExtensionDataTestsDynamic_String : ExtensionDataTests
     {
-        public ExtensionDataTestsDynamic_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public ExtensionDataTestsDynamic_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public sealed partial class ExtensionDataTestsDynamic_AsyncStream : ExtensionDataTests
     {
-        public ExtensionDataTestsDynamic_AsyncStream() : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+        public ExtensionDataTestsDynamic_AsyncStream()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 }

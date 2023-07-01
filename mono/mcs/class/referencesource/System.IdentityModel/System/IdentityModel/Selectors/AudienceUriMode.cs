@@ -26,10 +26,10 @@ namespace System.IdentityModel.Selectors
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(AudienceUriMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException("value", (int)value, typeof(AudienceUriMode))
+                );
             }
         }
-
     }
 }

@@ -9,7 +9,7 @@ public struct Data
 }
 
 public class Test11611
-{    
+{
     static bool fail = false;
 
     public static void handle(Data data, long value)
@@ -37,7 +37,7 @@ public class Test11611
 
         var data = new Data();
         handler(data, 123);
-        
+
         return fail ? -1 : 100;
     }
 }

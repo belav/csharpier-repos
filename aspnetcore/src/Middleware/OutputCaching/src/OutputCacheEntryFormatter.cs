@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.OutputCaching.Serialization;
 
 namespace Microsoft.AspNetCore.OutputCaching;
+
 /// <summary>
 /// Formats <see cref="OutputCacheEntry"/> instance to match structures supported by the <see cref="IOutputCacheStore"/> implementations.
 /// </summary>
@@ -13,7 +14,11 @@ internal static class OutputCacheEntryFormatter
 {
     private const byte SerializationRevision = 1;
 
-    public static async ValueTask<OutputCacheEntry?> GetAsync(string key, IOutputCacheStore store, CancellationToken cancellationToken)
+    public static async ValueTask<OutputCacheEntry?> GetAsync(
+        string key,
+        IOutputCacheStore store,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(key);
 
@@ -51,7 +56,13 @@ internal static class OutputCacheEntryFormatter
         return outputCacheEntry;
     }
 
-    public static async ValueTask StoreAsync(string key, OutputCacheEntry value, TimeSpan duration, IOutputCacheStore store, CancellationToken cancellationToken)
+    public static async ValueTask StoreAsync(
+        string key,
+        OutputCacheEntry value,
+        TimeSpan duration,
+        IOutputCacheStore store,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(value);
         ArgumentNullException.ThrowIfNull(value.Body);
@@ -78,7 +89,13 @@ internal static class OutputCacheEntryFormatter
 
         Serialize(bufferStream, formatterEntry);
 
-        await store.SetAsync(key, bufferStream.ToArray(), value.Tags ?? Array.Empty<string>(), duration, cancellationToken);
+        await store.SetAsync(
+            key,
+            bufferStream.ToArray(),
+            value.Tags ?? Array.Empty<string>(),
+            duration,
+            cancellationToken
+        );
     }
 
     // Format:

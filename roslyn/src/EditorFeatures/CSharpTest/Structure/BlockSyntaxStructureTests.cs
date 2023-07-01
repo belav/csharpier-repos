@@ -17,12 +17,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
     [Trait(Traits.Feature, Traits.Features.Outlining)]
     public class BlockSyntaxStructureTests : AbstractCSharpSyntaxNodeStructureTests<BlockSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new BlockSyntaxStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new BlockSyntaxStructureProvider();
 
         [Fact]
         public async Task TestTryBlock1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -39,14 +41,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestUnsafe1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -57,14 +62,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestFixed1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -75,14 +83,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestUsing1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -93,14 +104,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestLock1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -111,14 +125,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestForStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -129,14 +146,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestForEachStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -147,14 +167,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestCompoundForEachStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -165,14 +188,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestWhileStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -183,14 +209,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestDoStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -202,14 +231,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestIfStatement1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -220,14 +252,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestIfStatement2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -241,14 +276,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestIfStatement3()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -261,14 +299,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestElseClause1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -282,14 +323,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestIfElse1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -303,14 +347,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestIfElse2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -326,14 +373,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestIfElse3()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -348,14 +398,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestNestedBlock()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -366,14 +419,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestNestedBlockInSwitchSection1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -388,14 +444,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact]
         public async Task TestNestedBlockInSwitchSection2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -411,14 +470,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, WorkItem(52493, "https://github.com/dotnet/roslyn/issues/")]
         public async Task LocalFunctionInTopLevelStatement_AutoCollapse()
         {
-            const string code = @"
+            const string code =
+                @"
 Foo();
 Bar();
 
@@ -428,8 +490,10 @@ Bar();
 }|}|}
 ";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
     }
 }

@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         void NotAllConnectionsClosedGracefully();
 
-        void ConnectionBadRequest(string connectionId, Microsoft.AspNetCore.Http.BadHttpRequestException ex);
+        void ConnectionBadRequest(
+            string connectionId,
+            Microsoft.AspNetCore.Http.BadHttpRequestException ex
+        );
 
         void ApplicationError(string connectionId, string traceIdentifier, Exception ex);
 
@@ -53,7 +56,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         void RequestBodyDrainTimedOut(string connectionId, string traceIdentifier);
 
-        void RequestBodyMinimumDataRateNotSatisfied(string connectionId, string? traceIdentifier, double rate);
+        void RequestBodyMinimumDataRateNotSatisfied(
+            string connectionId,
+            string? traceIdentifier,
+            double rate
+        );
 
         void ResponseMinimumDataRateNotSatisfied(string connectionId, string? traceIdentifier);
 
@@ -67,7 +74,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         void Http2StreamError(string connectionId, Http2StreamErrorException ex);
 
-        void Http2StreamResetAbort(string traceIdentifier, Http2ErrorCode error, ConnectionAbortedException abortReason);
+        void Http2StreamResetAbort(
+            string traceIdentifier,
+            Http2ErrorCode error,
+            ConnectionAbortedException abortReason
+        );
 
         void HPackDecodingError(string connectionId, int streamId, HPackDecodingException ex);
 
@@ -87,7 +98,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         void Http3ConnectionClosed(string connectionId, long highestOpenedStreamId);
 
-        void Http3StreamAbort(string traceIdentifier, Http3ErrorCode error, ConnectionAbortedException abortReason);
+        void Http3StreamAbort(
+            string traceIdentifier,
+            Http3ErrorCode error,
+            ConnectionAbortedException abortReason
+        );
 
         void Http3FrameReceived(string connectionId, long streamId, Http3RawFrame frame);
 

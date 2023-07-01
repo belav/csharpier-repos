@@ -14,7 +14,6 @@ using Internal.Runtime.TypeLoader;
 
 namespace System.Reflection.Runtime.General
 {
-
     public partial struct QMethodDefinition
     {
         public QMethodDefinition(MetadataReader reader, MethodHandle handle)
@@ -23,14 +22,29 @@ namespace System.Reflection.Runtime.General
             _handle = ((Handle)handle).AsInt();
         }
 
-        public MetadataReader NativeFormatReader { get { Debug.Assert(IsNativeFormatMetadataBased); return _reader as MetadataReader; } }
-        public MethodHandle NativeFormatHandle { get { Debug.Assert(IsNativeFormatMetadataBased); return _handle.AsHandle().ToMethodHandle(NativeFormatReader); } }
+        public MetadataReader NativeFormatReader
+        {
+            get
+            {
+                Debug.Assert(IsNativeFormatMetadataBased);
+                return _reader as MetadataReader;
+            }
+        }
+        public MethodHandle NativeFormatHandle
+        {
+            get
+            {
+                Debug.Assert(IsNativeFormatMetadataBased);
+                return _handle.AsHandle().ToMethodHandle(NativeFormatReader);
+            }
+        }
 
         public bool IsNativeFormatMetadataBased
         {
             get
             {
-                return (_reader != null) && _reader is global::Internal.Metadata.NativeFormat.MetadataReader;
+                return (_reader != null)
+                    && _reader is global::Internal.Metadata.NativeFormat.MetadataReader;
             }
         }
     }
@@ -43,14 +57,29 @@ namespace System.Reflection.Runtime.General
             _handle = ((Handle)handle).AsInt();
         }
 
-        public MetadataReader NativeFormatReader { get { Debug.Assert(IsNativeFormatMetadataBased); return _reader as MetadataReader; } }
-        public TypeDefinitionHandle NativeFormatHandle { get { Debug.Assert(IsNativeFormatMetadataBased); return _handle.AsHandle().ToTypeDefinitionHandle(NativeFormatReader); } }
+        public MetadataReader NativeFormatReader
+        {
+            get
+            {
+                Debug.Assert(IsNativeFormatMetadataBased);
+                return _reader as MetadataReader;
+            }
+        }
+        public TypeDefinitionHandle NativeFormatHandle
+        {
+            get
+            {
+                Debug.Assert(IsNativeFormatMetadataBased);
+                return _handle.AsHandle().ToTypeDefinitionHandle(NativeFormatReader);
+            }
+        }
 
         public bool IsNativeFormatMetadataBased
         {
             get
             {
-                return (_reader != null) && _reader is global::Internal.Metadata.NativeFormat.MetadataReader;
+                return (_reader != null)
+                    && _reader is global::Internal.Metadata.NativeFormat.MetadataReader;
             }
         }
     }
@@ -73,7 +102,8 @@ namespace System.Reflection.Runtime.General
         {
             get
             {
-                return (_reader != null) && Reader is global::Internal.Metadata.NativeFormat.MetadataReader;
+                return (_reader != null)
+                    && Reader is global::Internal.Metadata.NativeFormat.MetadataReader;
             }
         }
     }

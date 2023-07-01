@@ -17,51 +17,62 @@ namespace LibraryImportGenerator.UnitTests
     [ActiveIssue("https://github.com/dotnet/runtime/issues/60650", TestRuntimes.Mono)]
     public class ConvertToLibraryImportAnalyzerTests
     {
-        public static IEnumerable<object[]> MarshallingRequiredTypes() => new[]
-        {
-            new object[] { typeof(bool) },
-            new object[] { typeof(char) },
-            new object[] { typeof(string) },
-            new object[] { typeof(int[]) },
-            new object[] { typeof(string[]) },
-            new object[] { typeof(ConsoleKeyInfo) }, // struct
-        };
+        public static IEnumerable<object[]> MarshallingRequiredTypes() =>
+            new[]
+            {
+                new object[] { typeof(bool) },
+                new object[] { typeof(char) },
+                new object[] { typeof(string) },
+                new object[] { typeof(int[]) },
+                new object[] { typeof(string[]) },
+                new object[] { typeof(ConsoleKeyInfo) }, // struct
+            };
 
-        public static IEnumerable<object[]> NoMarshallingRequiredTypes() => new[]
-        {
-            new object[] { typeof(byte) },
-            new object[] { typeof(int) },
-            new object[] { typeof(byte*) },
-            new object[] { typeof(int*) },
-            new object[] { typeof(bool*) },
-            new object[] { typeof(char*) },
-            new object[] { typeof(delegate* <void>) },
-            new object[] { typeof(IntPtr) },
-            new object[] { typeof(ConsoleKey) }, // enum
-        };
+        public static IEnumerable<object[]> NoMarshallingRequiredTypes() =>
+            new[]
+            {
+                new object[] { typeof(byte) },
+                new object[] { typeof(int) },
+                new object[] { typeof(byte*) },
+                new object[] { typeof(int*) },
+                new object[] { typeof(bool*) },
+                new object[] { typeof(char*) },
+                new object[] { typeof(delegate* <void>) },
+                new object[] { typeof(IntPtr) },
+                new object[] { typeof(ConsoleKey) }, // enum
+            };
 
-        public static IEnumerable<object[]> UnsupportedTypes() => new[]
-        {
-            new object[] { typeof(System.Runtime.InteropServices.CriticalHandle) },
-            new object[] { typeof(System.Runtime.InteropServices.HandleRef) },
-            new object[] { typeof(System.Text.StringBuilder) },
-        };
+        public static IEnumerable<object[]> UnsupportedTypes() =>
+            new[]
+            {
+                new object[] { typeof(System.Runtime.InteropServices.CriticalHandle) },
+                new object[] { typeof(System.Runtime.InteropServices.HandleRef) },
+                new object[] { typeof(System.Text.StringBuilder) },
+            };
 
         [Theory]
         [MemberData(nameof(MarshallingRequiredTypes))]
         [MemberData(nameof(NoMarshallingRequiredTypes))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60909", typeof(PlatformDetection), nameof(PlatformDetection.IsArm64Process), nameof(PlatformDetection.IsWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60909",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArm64Process),
+            nameof(PlatformDetection.IsWindows)
+        )]
         public async Task TypeRequiresMarshalling_ReportsDiagnostic(Type type)
         {
             string source = DllImportWithType(type.FullName!);
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method_Parameter"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(1)
-                    .WithArguments("Method_Return"));
+                    .WithArguments("Method_Return")
+            );
         }
 
         [Theory]
@@ -70,7 +81,8 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ByRef_ReportsDiagnostic(Type type)
         {
             string typeName = type.FullName!;
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 unsafe partial class Test
 {{
@@ -86,21 +98,26 @@ unsafe partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method_In"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(1)
                     .WithArguments("Method_Out"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(2)
-                    .WithArguments("Method_Ref"));
+                    .WithArguments("Method_Ref")
+            );
         }
 
         [Fact]
         public async Task SetLastErrorTrue_ReportsDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -113,12 +130,12 @@ partial class Test
 ";
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
+                VerifyCS
+                    .Diagnostic(ConvertToLibraryImport)
                     .WithLocation(0)
                     .WithArguments("Method1"),
-                VerifyCS.Diagnostic(ConvertToLibraryImport)
-                    .WithLocation(1)
-                    .WithArguments("Method2"));
+                VerifyCS.Diagnostic(ConvertToLibraryImport).WithLocation(1).WithArguments("Method2")
+            );
         }
 
         [Theory]
@@ -137,7 +154,8 @@ partial class Test
         [InlineData(UnmanagedType.SafeArray)]
         public async Task UnsupportedUnmanagedType_NoDiagnostic(UnmanagedType unmanagedType)
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 unsafe partial class Test
 {{
@@ -155,7 +173,8 @@ unsafe partial class Test
         [Fact]
         public async Task LibraryImport_NoDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -174,7 +193,8 @@ partial class Test
         [Fact]
         public async Task NotDllImport_NoDiagnostic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -185,7 +205,8 @@ partial class Test
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
-        private static string DllImportWithType(string typeName) => @$"
+        private static string DllImportWithType(string typeName) =>
+            @$"
 using System.Runtime.InteropServices;
 unsafe partial class Test
 {{

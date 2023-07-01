@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public class InjectTargetExtension : IInjectTargetExtension
 {
-    private const string RazorInjectAttribute = "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]";
+    private const string RazorInjectAttribute =
+        "[global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]";
 
     public void WriteInjectProperty(CodeRenderingContext context, InjectIntermediateNode node)
     {
@@ -28,16 +29,12 @@ public class InjectTargetExtension : IInjectTargetExtension
         {
             using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
             {
-                context.CodeWriter
-                    .WriteLine(RazorInjectAttribute)
-                    .WriteLine(property);
+                context.CodeWriter.WriteLine(RazorInjectAttribute).WriteLine(property);
             }
         }
         else
         {
-            context.CodeWriter
-                .WriteLine(RazorInjectAttribute)
-                .WriteLine(property);
+            context.CodeWriter.WriteLine(RazorInjectAttribute).WriteLine(property);
         }
     }
 }

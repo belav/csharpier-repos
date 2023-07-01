@@ -8,52 +8,52 @@
 
 //namespace Microsoft.Extensions.Caching.StackExchangeRedis
 //{
-    // TODO - should replace this whole approach with a CollectionFixture when
-    // Xunit CollectionFixtures are working correctly.
-    //public class RedisXunitTestExecutor : XunitTestFrameworkExecutor, IDisposable
-    //{
-    //    private bool _isDisposed;
+// TODO - should replace this whole approach with a CollectionFixture when
+// Xunit CollectionFixtures are working correctly.
+//public class RedisXunitTestExecutor : XunitTestFrameworkExecutor, IDisposable
+//{
+//    private bool _isDisposed;
 
-    //    public RedisXunitTestExecutor(
-    //        AssemblyName assemblyName, ISourceInformationProvider sourceInformationProvider)
-    //        : base(assemblyName, sourceInformationProvider)
-    //    {
-    //        try
-    //        {
-    //            RedisTestConfig.GetOrStartServer();
-    //        }
-    //        catch (Exception)
-    //        {
-    //            // do not let exceptions starting server prevent XunitTestFrameworkExecutor from being created
-    //        }
-    //    }
+//    public RedisXunitTestExecutor(
+//        AssemblyName assemblyName, ISourceInformationProvider sourceInformationProvider)
+//        : base(assemblyName, sourceInformationProvider)
+//    {
+//        try
+//        {
+//            RedisTestConfig.GetOrStartServer();
+//        }
+//        catch (Exception)
+//        {
+//            // do not let exceptions starting server prevent XunitTestFrameworkExecutor from being created
+//        }
+//    }
 
-    //    ~RedisXunitTestExecutor()
-    //    {
-    //        Dispose(false);
-    //    }
+//    ~RedisXunitTestExecutor()
+//    {
+//        Dispose(false);
+//    }
 
-    //    void IDisposable.Dispose()
-    //    {
-    //        Dispose(true);
-    //        GC.SuppressFinalize(this);
-    //    }
+//    void IDisposable.Dispose()
+//    {
+//        Dispose(true);
+//        GC.SuppressFinalize(this);
+//    }
 
-    //    protected virtual void Dispose(bool disposing)
-    //    {
-    //        if (!_isDisposed)
-    //        {
-    //            try
-    //            {
-    //                RedisTestConfig.StopRedisServer();
-    //            }
-    //            catch (Exception)
-    //            {
-    //                // do not let exceptions stopping server prevent XunitTestFrameworkExecutor from being disposed
-    //            }
+//    protected virtual void Dispose(bool disposing)
+//    {
+//        if (!_isDisposed)
+//        {
+//            try
+//            {
+//                RedisTestConfig.StopRedisServer();
+//            }
+//            catch (Exception)
+//            {
+//                // do not let exceptions stopping server prevent XunitTestFrameworkExecutor from being disposed
+//            }
 
-    //            _isDisposed = true;
-    //        }
-    //    }
-    //}
+//            _isDisposed = true;
+//        }
+//    }
+//}
 //}

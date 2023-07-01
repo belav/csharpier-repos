@@ -18,19 +18,28 @@ namespace System.ServiceModel
         static readonly string WebScriptEndpointKind = "webScriptEndpoint";
 
         public WebScriptServiceHost(Type serviceType, params Uri[] baseAddresses)
-            :
-            base(serviceType, baseAddresses)
-        {
-        }
+            : base(serviceType, baseAddresses) { }
 
         protected override void OnOpening()
         {
-            WebServiceHost.AddAutomaticWebHttpBindingEndpoints(this, this.ImplementedContracts, 
-                SR2.GetString(SR2.JsonWebScriptServiceHostOneServiceContract, this.ImplementedContracts.Count),
-                SR2.GetString(SR2.JsonWebScriptServiceHostAtLeastOneServiceContract), WebScriptEndpointKind);
+            WebServiceHost.AddAutomaticWebHttpBindingEndpoints(
+                this,
+                this.ImplementedContracts,
+                SR2.GetString(
+                    SR2.JsonWebScriptServiceHostOneServiceContract,
+                    this.ImplementedContracts.Count
+                ),
+                SR2.GetString(SR2.JsonWebScriptServiceHostAtLeastOneServiceContract),
+                WebScriptEndpointKind
+            );
             foreach (ServiceEndpoint endpoint in this.Description.Endpoints)
             {
-                if (endpoint.Binding != null && endpoint.Binding.CreateBindingElements().Find<WebMessageEncodingBindingElement>() != null)
+                if (
+                    endpoint.Binding != null
+                    && endpoint.Binding
+                        .CreateBindingElements()
+                        .Find<WebMessageEncodingBindingElement>() != null
+                )
                 {
                     if (endpoint.Behaviors.Find<WebHttpBehavior>() == null)
                     {

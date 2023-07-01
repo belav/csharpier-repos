@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableSegmentedDictionary<string, VoidResult> memberNames,
             ImmutableArray<SingleTypeDeclaration> children,
             ImmutableArray<Diagnostic> diagnostics,
-            QuickAttributes quickAttributes)
+            QuickAttributes quickAttributes
+        )
             : base(name, syntaxReference, nameLocation, diagnostics)
         {
             Debug.Assert(kind != DeclarationKind.Namespace);
@@ -87,108 +88,69 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override DeclarationKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         public new ImmutableArray<SingleTypeDeclaration> Children
         {
-            get
-            {
-                return _children;
-            }
+            get { return _children; }
         }
 
         public int Arity
         {
-            get
-            {
-                return _arity;
-            }
+            get { return _arity; }
         }
 
         public DeclarationModifiers Modifiers
         {
-            get
-            {
-                return _modifiers;
-            }
+            get { return _modifiers; }
         }
 
         public ImmutableSegmentedDictionary<string, VoidResult> MemberNames { get; }
 
         public bool AnyMemberHasExtensionMethodSyntax
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.AnyMemberHasExtensionMethodSyntax) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.AnyMemberHasExtensionMethodSyntax) != 0; }
         }
 
         public bool HasAnyAttributes
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.HasAnyAttributes) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.HasAnyAttributes) != 0; }
         }
 
         public bool HasBaseDeclarations
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.HasBaseDeclarations) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.HasBaseDeclarations) != 0; }
         }
 
         public bool AnyMemberHasAttributes
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.AnyMemberHasAttributes) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.AnyMemberHasAttributes) != 0; }
         }
 
         public bool HasAnyNontypeMembers
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.HasAnyNontypeMembers) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.HasAnyNontypeMembers) != 0; }
         }
 
         public bool HasAwaitExpressions
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.HasAwaitExpressions) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.HasAwaitExpressions) != 0; }
         }
 
         public bool HasReturnWithExpression
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.HasReturnWithExpression) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.HasReturnWithExpression) != 0; }
         }
 
         public bool IsIterator
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.IsIterator) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.IsIterator) != 0; }
         }
 
         public bool IsSimpleProgram
         {
-            get
-            {
-                return (_flags & TypeDeclarationFlags.IsSimpleProgram) != 0;
-            }
+            get { return (_flags & TypeDeclarationFlags.IsSimpleProgram) != 0; }
         }
 
         public bool HasRequiredMembers => (_flags & TypeDeclarationFlags.HasRequiredMembers) != 0;
@@ -200,13 +162,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal TypeDeclarationIdentity Identity
         {
-            get
-            {
-                return new TypeDeclarationIdentity(this);
-            }
+            get { return new TypeDeclarationIdentity(this); }
         }
 
-        // identity that is used when collecting all declarations 
+        // identity that is used when collecting all declarations
         // of same type across multiple containers
         internal readonly struct TypeDeclarationIdentity : IEquatable<TypeDeclarationIdentity>
         {
@@ -234,22 +193,31 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // arity, kind, name must match
-                if ((thisDecl._arity != otherDecl._arity) ||
-                    (thisDecl._kind != otherDecl._kind) ||
-                    (thisDecl.name != otherDecl.name))
+                if (
+                    (thisDecl._arity != otherDecl._arity)
+                    || (thisDecl._kind != otherDecl._kind)
+                    || (thisDecl.name != otherDecl.name)
+                )
                 {
                     return false;
                 }
 
-                if ((object)thisDecl.Location.SourceTree != otherDecl.Location.SourceTree
-                    && ((thisDecl.Modifiers & DeclarationModifiers.File) != 0
-                        || (otherDecl.Modifiers & DeclarationModifiers.File) != 0))
+                if (
+                    (object)thisDecl.Location.SourceTree != otherDecl.Location.SourceTree
+                    && (
+                        (thisDecl.Modifiers & DeclarationModifiers.File) != 0
+                        || (otherDecl.Modifiers & DeclarationModifiers.File) != 0
+                    )
+                )
                 {
                     // declarations of 'file' types are only the same type if they are in the same file
                     return false;
                 }
 
-                if (thisDecl._kind == DeclarationKind.Enum || thisDecl._kind == DeclarationKind.Delegate)
+                if (
+                    thisDecl._kind == DeclarationKind.Enum
+                    || thisDecl._kind == DeclarationKind.Delegate
+                )
                 {
                     // oh, so close, but enums and delegates cannot be partial
                     return false;
@@ -261,9 +229,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override int GetHashCode()
             {
                 var thisDecl = _decl;
-                return Hash.Combine(thisDecl.Name.GetHashCode(),
-                    Hash.Combine(thisDecl.Arity.GetHashCode(),
-                    (int)thisDecl.Kind));
+                return Hash.Combine(
+                    thisDecl.Name.GetHashCode(),
+                    Hash.Combine(thisDecl.Arity.GetHashCode(), (int)thisDecl.Kind)
+                );
             }
         }
     }

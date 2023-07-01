@@ -26,38 +26,38 @@ namespace System.Workflow.Activities
     [SRCategory(SR.Standard)]
     [SRDisplayName(SR.SequentialWorkflow)]
     [ToolboxItem(false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class SequentialWorkflowActivity : SequenceActivity
     {
         #region Dependency Properties
-        public static readonly DependencyProperty InitializedEvent = DependencyProperty.Register("Initialized", typeof(EventHandler), typeof(SequentialWorkflowActivity));
-        public static readonly DependencyProperty CompletedEvent = DependencyProperty.Register("Completed", typeof(EventHandler), typeof(SequentialWorkflowActivity));
+        public static readonly DependencyProperty InitializedEvent = DependencyProperty.Register(
+            "Initialized",
+            typeof(EventHandler),
+            typeof(SequentialWorkflowActivity)
+        );
+        public static readonly DependencyProperty CompletedEvent = DependencyProperty.Register(
+            "Completed",
+            typeof(EventHandler),
+            typeof(SequentialWorkflowActivity)
+        );
         #endregion
 
         #region Constructors
 
-        public SequentialWorkflowActivity()
-        {
-        }
+        public SequentialWorkflowActivity() { }
 
         public SequentialWorkflowActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         [SRDescription(SR.DynamicUpdateConditionDescr)]
         [SRCategory(SR.Conditions)]
         [DefaultValue(null)]
         public ActivityCondition DynamicUpdateCondition
         {
-            get
-            {
-                return WorkflowChanges.GetCondition(this) as ActivityCondition;
-            }
-            set
-            {
-                WorkflowChanges.SetCondition(this, value);
-            }
+            get { return WorkflowChanges.GetCondition(this) as ActivityCondition; }
+            set { WorkflowChanges.SetCondition(this, value); }
         }
         #endregion
 
@@ -67,14 +67,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler Initialized
         {
-            add
-            {
-                base.AddHandler(InitializedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(InitializedEvent, value);
-            }
+            add { base.AddHandler(InitializedEvent, value); }
+            remove { base.RemoveHandler(InitializedEvent, value); }
         }
 
         [SRDescription(SR.OnCompletedDescr)]
@@ -82,20 +76,16 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler Completed
         {
-            add
-            {
-                base.AddHandler(CompletedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(CompletedEvent, value);
-            }
+            add { base.AddHandler(CompletedEvent, value); }
+            remove { base.RemoveHandler(CompletedEvent, value); }
         }
         #endregion
 
         #region Protected Implementations
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -104,7 +94,7 @@ namespace System.Workflow.Activities
             return base.Execute(executionContext);
         }
 
-        protected override sealed void OnSequenceComplete(ActivityExecutionContext executionContext)
+        protected sealed override void OnSequenceComplete(ActivityExecutionContext executionContext)
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");

@@ -92,10 +92,22 @@ namespace System.Drawing.Internal
         private void CacheInitialState()
         {
             Debug.Assert(_hDC != IntPtr.Zero, "Cannot get initial state without a valid HDC");
-            _hCurrentPen = _hInitialPen = Interop.Gdi32.GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_PEN);
-            _hCurrentBrush = _hInitialBrush = Interop.Gdi32.GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_BRUSH);
-            _hCurrentBmp = _hInitialBmp = Interop.Gdi32.GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_BITMAP);
-            _hCurrentFont = _hInitialFont = Interop.Gdi32.GetCurrentObject(new HandleRef(this, _hDC), Interop.Gdi32.ObjectType.OBJ_FONT);
+            _hCurrentPen = _hInitialPen = Interop.Gdi32.GetCurrentObject(
+                new HandleRef(this, _hDC),
+                Interop.Gdi32.ObjectType.OBJ_PEN
+            );
+            _hCurrentBrush = _hInitialBrush = Interop.Gdi32.GetCurrentObject(
+                new HandleRef(this, _hDC),
+                Interop.Gdi32.ObjectType.OBJ_BRUSH
+            );
+            _hCurrentBmp = _hInitialBmp = Interop.Gdi32.GetCurrentObject(
+                new HandleRef(this, _hDC),
+                Interop.Gdi32.ObjectType.OBJ_BITMAP
+            );
+            _hCurrentFont = _hInitialFont = Interop.Gdi32.GetCurrentObject(
+                new HandleRef(this, _hDC),
+                Interop.Gdi32.ObjectType.OBJ_FONT
+            );
         }
 
         /// <summary>
@@ -110,14 +122,21 @@ namespace System.Drawing.Internal
             DeviceContexts.AddDeviceContext(this);
 
 #if TRACK_HDC
-            Debug.WriteLine(DbgUtil.StackTraceToStr($"DeviceContext(hDC=0x{(int)hDC:X8}, Type={dcType})"));
+            Debug.WriteLine(
+                DbgUtil.StackTraceToStr($"DeviceContext(hDC=0x{(int)hDC:X8}, Type={dcType})")
+            );
 #endif
         }
 
         /// <summary>
         /// CreateDC creates a DeviceContext object wrapping an hdc created with the Win32 CreateDC function.
         /// </summary>
-        public static DeviceContext CreateDC(string driverName, string deviceName, string? fileName, IntPtr devMode)
+        public static DeviceContext CreateDC(
+            string driverName,
+            string deviceName,
+            string? fileName,
+            IntPtr devMode
+        )
         {
             // Note: All input params can be null but not at the same time.  See MSDN for information.
             IntPtr hdc = Interop.Gdi32.CreateDCW(driverName, deviceName, fileName, devMode);
@@ -127,7 +146,12 @@ namespace System.Drawing.Internal
         /// <summary>
         /// CreateIC creates a DeviceContext object wrapping an hdc created with the Win32 CreateIC function.
         /// </summary>
-        public static DeviceContext CreateIC(string driverName, string deviceName, string? fileName, IntPtr devMode)
+        public static DeviceContext CreateIC(
+            string driverName,
+            string deviceName,
+            string? fileName,
+            IntPtr devMode
+        )
         {
             // Note: All input params can be null but not at the same time.  See MSDN for information.
 
@@ -179,8 +203,8 @@ namespace System.Drawing.Internal
                 case DeviceContextType.Unknown:
                 default:
                     return;
-                    // do nothing, the hdc is not owned by this object.
-                    // in this case it is ok if disposed through finalization.
+                // do nothing, the hdc is not owned by this object.
+                // in this case it is ok if disposed through finalization.
             }
 
             DbgUtil.AssertFinalization(this, disposing);
@@ -206,7 +230,16 @@ namespace System.Drawing.Internal
             Interop.Gdi32.RestoreDC(new HandleRef(this, _hDC), -1);
 #if TRACK_HDC
             // Note: Winforms may call this method during app exit at which point the DC may have been finalized already causing this assert to popup.
-            Debug.WriteLine( DbgUtil.StackTraceToStr( string.Format("ret[0]=DC.RestoreHdc(hDc=0x{1:x8}, state={2})", result, unchecked((int) _hDC), restoreState) ));
+            Debug.WriteLine(
+                DbgUtil.StackTraceToStr(
+                    string.Format(
+                        "ret[0]=DC.RestoreHdc(hDc=0x{1:x8}, state={2})",
+                        result,
+                        unchecked((int)_hDC),
+                        restoreState
+                    )
+                )
+            );
 #endif
             Debug.Assert(_contextStack != null, "Someone is calling RestoreHdc() before SaveHdc()");
 
@@ -252,7 +285,11 @@ namespace System.Drawing.Internal
             _contextStack.Push(g);
 
 #if TRACK_HDC
-            Debug.WriteLine( DbgUtil.StackTraceToStr( string.Format("state[0]=DC.SaveHdc(hDc=0x{1:x8})", state, unchecked((int) _hDC)) ));
+            Debug.WriteLine(
+                DbgUtil.StackTraceToStr(
+                    string.Format("state[0]=DC.SaveHdc(hDc=0x{1:x8})", state, unchecked((int)_hDC))
+                )
+            );
 #endif
 
             return state;
@@ -287,7 +324,10 @@ namespace System.Drawing.Internal
             WindowsRegion clip = new WindowsRegion(0, 0, 0, 0);
             try
             {
-                int result = Interop.Gdi32.GetClipRgn(new HandleRef(this, _hDC), new HandleRef(clip, clip.HRegion));
+                int result = Interop.Gdi32.GetClipRgn(
+                    new HandleRef(this, _hDC),
+                    new HandleRef(clip, clip.HRegion)
+                );
 
                 // If the function succeeds and there is a clipping region for the given device context, the return value is 1.
                 if (result == 1)

@@ -10,7 +10,9 @@ namespace System.IO
     /// to a certain file format specification is malformed.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class FileFormatException : FormatException
     {
         /// <summary>
@@ -20,8 +22,7 @@ namespace System.IO
         /// This message takes into account the current system culture.
         /// </summary>
         public FileFormatException()
-            : base(SR.FileFormatException)
-        { }
+            : base(SR.FileFormatException) { }
 
         /// <summary>
         /// Creates a new instance of FileFormatException class.
@@ -29,8 +30,7 @@ namespace System.IO
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public FileFormatException(string? message)
-            : base(message)
-        { }
+            : base(message) { }
 
         /// <summary>
         /// Creates a new instance of FileFormatException class.
@@ -40,8 +40,7 @@ namespace System.IO
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public FileFormatException(string? message, Exception? innerException)
-            : base(message, innerException)
-        { }
+            : base(message, innerException) { }
 
         /// <summary>
         /// Creates a new instance of FileFormatException class.
@@ -54,8 +53,9 @@ namespace System.IO
         public FileFormatException(Uri? sourceUri)
             : base(
                 sourceUri == null
-                ? SR.FileFormatException
-                : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri))
+                    ? SR.FileFormatException
+                    : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri)
+            )
         {
             _sourceUri = sourceUri;
         }
@@ -88,9 +88,10 @@ namespace System.IO
         public FileFormatException(Uri? sourceUri, Exception? innerException)
             : base(
                 sourceUri == null
-                ? SR.FileFormatException
-                : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri),
-                innerException)
+                    ? SR.FileFormatException
+                    : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri),
+                innerException
+            )
         {
             _sourceUri = sourceUri;
         }
@@ -112,7 +113,8 @@ namespace System.IO
             _sourceUri = sourceUri;
         }
 
-        protected FileFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected FileFormatException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             string? sourceUriString = info.GetString("SourceUri");
             if (sourceUriString != null)
@@ -127,7 +129,14 @@ namespace System.IO
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("SourceUri", SourceUri?.GetComponents(UriComponents.SerializationInfoString, UriFormat.SafeUnescaped), typeof(string));
+            info.AddValue(
+                "SourceUri",
+                SourceUri?.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.SafeUnescaped
+                ),
+                typeof(string)
+            );
         }
 
         /// <summary>
@@ -141,10 +150,7 @@ namespace System.IO
         /// </SecurityNote>
         public Uri? SourceUri
         {
-            get
-            {
-                return _sourceUri;
-            }
+            get { return _sourceUri; }
         }
 
         private readonly Uri? _sourceUri;

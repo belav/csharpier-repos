@@ -20,7 +20,12 @@ internal class LargeTextSourceDocument : RazorSourceDocument
     private readonly int _length;
     private byte[] _checksum;
 
-    public LargeTextSourceDocument(StreamReader reader, int chunkMaxLength, Encoding encoding, RazorSourceDocumentProperties properties)
+    public LargeTextSourceDocument(
+        StreamReader reader,
+        int chunkMaxLength,
+        Encoding encoding,
+        RazorSourceDocumentProperties properties
+    )
     {
         if (reader == null)
         {
@@ -67,7 +72,12 @@ internal class LargeTextSourceDocument : RazorSourceDocument
 
     public override string RelativePath { get; }
 
-    public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+    public override void CopyTo(
+        int sourceIndex,
+        char[] destination,
+        int destinationIndex,
+        int count
+    )
     {
         if (destination == null)
         {
@@ -84,7 +94,11 @@ internal class LargeTextSourceDocument : RazorSourceDocument
             throw new ArgumentOutOfRangeException(nameof(destinationIndex));
         }
 
-        if (count < 0 || count > Length - sourceIndex || count > destination.Length - destinationIndex)
+        if (
+            count < 0
+            || count > Length - sourceIndex
+            || count > destination.Length - destinationIndex
+        )
         {
             throw new ArgumentOutOfRangeException(nameof(count));
         }
@@ -102,7 +116,13 @@ internal class LargeTextSourceDocument : RazorSourceDocument
         while (remaining > 0)
         {
             var toCopy = Math.Min(remaining, _chunkMaxLength - insideChunkPosition);
-            Array.Copy(_chunks[chunkIndex], insideChunkPosition, destination, currentDestIndex, toCopy);
+            Array.Copy(
+                _chunks[chunkIndex],
+                insideChunkPosition,
+                destination,
+                currentDestIndex,
+                toCopy
+            );
 
             remaining -= toCopy;
             currentDestIndex += toCopy;
@@ -135,7 +155,12 @@ internal class LargeTextSourceDocument : RazorSourceDocument
         return copiedChecksum;
     }
 
-    private static void ReadChunks(StreamReader reader, int chunkMaxLength, out int length, out List<char[]> chunks)
+    private static void ReadChunks(
+        StreamReader reader,
+        int chunkMaxLength,
+        out int length,
+        out List<char[]> chunks
+    )
     {
         length = 0;
         chunks = new List<char[]>();
@@ -152,7 +177,6 @@ internal class LargeTextSourceDocument : RazorSourceDocument
             {
                 chunks.Add(chunk);
             }
-        }
-        while (read == chunkMaxLength);
+        } while (read == chunkMaxLength);
     }
 }

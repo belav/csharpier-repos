@@ -14,22 +14,32 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteInteger(symbol.Rank);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var elementTypeResolution = reader.ReadSymbolKey(out var elementTypeFailureReason);
                 var rank = reader.ReadInteger();
 
                 if (elementTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(ArrayTypeSymbolKey)} {nameof(elementTypeResolution)} failed -> {elementTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(ArrayTypeSymbolKey)} {nameof(elementTypeResolution)} failed -> {elementTypeFailureReason})";
                     return default;
                 }
 
-                using var result = PooledArrayBuilder<IArrayTypeSymbol>.GetInstance(elementTypeResolution.SymbolCount);
+                using var result = PooledArrayBuilder<IArrayTypeSymbol>.GetInstance(
+                    elementTypeResolution.SymbolCount
+                );
                 foreach (var typeSymbol in elementTypeResolution.OfType<ITypeSymbol>())
                     result.AddIfNotNull(reader.Compilation.CreateArrayTypeSymbol(typeSymbol, rank));
 
-                return CreateResolution(result, $"({nameof(ArrayTypeSymbolKey)})", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ArrayTypeSymbolKey)})",
+                    out failureReason
+                );
             }
         }
     }

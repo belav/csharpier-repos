@@ -10,11 +10,14 @@ namespace System.Reflection.TypeLoading.Ecma
     internal sealed class EcmaModifiedTypeProvider : EcmaWrappedTypeProvider
     {
         internal EcmaModifiedTypeProvider(EcmaModule module)
-            : base(module)
-        {
-        }
+            : base(module) { }
 
-        public sealed override RoType GetModifiedType(RoType modifier, RoType unmodifiedType, bool isRequired) => new RoModifiedType(modifier.SkipTypeWrappers(), unmodifiedType, isRequired);
+        public sealed override RoType GetModifiedType(
+            RoType modifier,
+            RoType unmodifiedType,
+            bool isRequired
+        ) => new RoModifiedType(modifier.SkipTypeWrappers(), unmodifiedType, isRequired);
+
         public sealed override RoType GetPinnedType(RoType elementType) => elementType;
     }
 }

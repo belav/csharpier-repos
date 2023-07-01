@@ -26,10 +26,8 @@ public readonly struct MarkupString
     /// Casts a <see cref="string"/> to a <see cref="MarkupString"/>.
     /// </summary>
     /// <param name="value">The <see cref="string"/> value.</param>
-    public static explicit operator MarkupString(string value)
-        => new MarkupString(value);
+    public static explicit operator MarkupString(string value) => new MarkupString(value);
 
     /// <inheritdoc />
-    public override string ToString()
-        => Value ?? string.Empty;
+    public override string ToString() => Value ?? string.Empty;
 }

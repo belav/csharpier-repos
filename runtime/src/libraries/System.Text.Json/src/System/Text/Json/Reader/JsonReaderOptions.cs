@@ -32,7 +32,9 @@ namespace System.Text.Json
                 Debug.Assert(value >= 0);
                 if (value > JsonCommentHandling.Allow)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException_CommentEnumMustBeInRange(nameof(value));
+                    ThrowHelper.ThrowArgumentOutOfRangeException_CommentEnumMustBeInRange(
+                        nameof(value)
+                    );
                 }
 
                 _commentHandling = value;
@@ -55,7 +57,9 @@ namespace System.Text.Json
             {
                 if (value < 0)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException_MaxDepthMustBePositive(nameof(value));
+                    ThrowHelper.ThrowArgumentOutOfRangeException_MaxDepthMustBePositive(
+                        nameof(value)
+                    );
                 }
 
                 _maxDepth = value;

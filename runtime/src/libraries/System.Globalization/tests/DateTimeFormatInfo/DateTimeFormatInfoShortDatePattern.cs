@@ -51,13 +51,18 @@ namespace System.Globalization.Tests
         public void ShortDatePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.ShortDatePattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.ShortDatePattern = null
+            );
         }
 
         [Fact]
         public void ShortDatePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.ShortDatePattern = "MM/dd/yyyy");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.ShortDatePattern = "MM/dd/yyyy"
+            );
         }
     }
 }

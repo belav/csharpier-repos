@@ -5,20 +5,22 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ManyToManyFieldsLoadSqlServerTest : ManyToManyFieldsLoadTestBase<
-    ManyToManyFieldsLoadSqlServerTest.ManyToManyFieldsLoadSqlServerFixture>
+public class ManyToManyFieldsLoadSqlServerTest
+    : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadSqlServerTest.ManyToManyFieldsLoadSqlServerFixture>
 {
     public ManyToManyFieldsLoadSqlServerTest(ManyToManyFieldsLoadSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override async Task Load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public override async Task Load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         await base.Load_collection(state, queryTrackingBehavior, async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[CollectionInverseId], [t].[Name], [t].[ReferenceInverseId], [e].[Id], [t].[OneId], [t].[TwoId], [t0].[OneId], [t0].[TwoId], [t0].[Id], [t0].[Name]
@@ -36,7 +38,8 @@ LEFT JOIN (
 ) AS [t0] ON [t].[Id] = [t0].[TwoId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t0].[OneId], [t0].[TwoId]
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_with_Include_for_inverse(bool async)
@@ -44,7 +47,7 @@ ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t0].[OneId], [t0].[TwoId
         await base.Load_collection_using_Query_with_Include_for_inverse(async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[CollectionInverseId], [t].[Name], [t].[ReferenceInverseId], [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t0].[Name]
@@ -62,15 +65,18 @@ LEFT JOIN (
 ) AS [t0] ON [t].[Id] = [t0].[TwoSkipSharedId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId]
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_using_Query_with_Include_for_same_collection(bool async)
+    public override async Task Load_collection_using_Query_with_Include_for_same_collection(
+        bool async
+    )
     {
         await base.Load_collection_using_Query_with_Include_for_same_collection(async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[CollectionInverseId], [t].[Name], [t].[ReferenceInverseId], [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t0].[Name], [t0].[OneSkipSharedId0], [t0].[TwoSkipSharedId0], [t0].[Id0], [t0].[CollectionInverseId], [t0].[Name0], [t0].[ReferenceInverseId]
@@ -93,7 +99,8 @@ LEFT JOIN (
 ) AS [t0] ON [t].[Id] = [t0].[TwoSkipSharedId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t0].[OneSkipSharedId0], [t0].[TwoSkipSharedId0]
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_with_Include(bool async)
@@ -101,7 +108,7 @@ ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].
         await base.Load_collection_using_Query_with_Include(async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[CollectionInverseId], [t].[Name], [t].[ReferenceInverseId], [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t0].[Name], [t1].[ThreeId], [t1].[TwoId], [t1].[Id], [t1].[CollectionInverseId], [t1].[Name], [t1].[ReferenceInverseId]
@@ -124,7 +131,8 @@ LEFT JOIN (
 ) AS [t1] ON [t].[Id] = [t1].[TwoId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t1].[ThreeId], [t1].[TwoId]
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_with_filtered_Include(bool async)
@@ -132,7 +140,7 @@ ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].
         await base.Load_collection_using_Query_with_filtered_Include(async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[CollectionInverseId], [t].[Name], [t].[ReferenceInverseId], [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t0].[Name], [t1].[ThreeId], [t1].[TwoId], [t1].[Id], [t1].[CollectionInverseId], [t1].[Name], [t1].[ReferenceInverseId]
@@ -156,15 +164,18 @@ LEFT JOIN (
 ) AS [t1] ON [t].[Id] = [t1].[TwoId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id], [t1].[ThreeId], [t1].[TwoId]
-""");
+"""
+        );
     }
 
-    public override async Task Load_collection_using_Query_with_filtered_Include_and_projection(bool async)
+    public override async Task Load_collection_using_Query_with_filtered_Include_and_projection(
+        bool async
+    )
     {
         await base.Load_collection_using_Query_with_filtered_Include_and_projection(async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[Name], (
@@ -184,7 +195,8 @@ INNER JOIN (
 ) AS [t] ON [e].[Id] = [t].[OneSkipSharedId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [t].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Load_collection_using_Query_with_join(bool async)
@@ -192,7 +204,7 @@ ORDER BY [t].[Id]
         await base.Load_collection_using_Query_with_join(async);
 
         AssertSql(
-"""
+            """
 @__p_0='3'
 
 SELECT [t].[Id], [t].[CollectionInverseId], [t].[Name], [t].[ReferenceInverseId], [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t0].[Id], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id0], [t2].[OneSkipSharedId], [t2].[TwoSkipSharedId], [t2].[Id], [t2].[Name], [t0].[CollectionInverseId], [t0].[Name0], [t0].[ReferenceInverseId]
@@ -219,53 +231,57 @@ LEFT JOIN (
 ) AS [t2] ON [t].[Id] = [t2].[TwoSkipSharedId]
 WHERE [e].[Id] = @__p_0
 ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].[Id], [t0].[OneSkipSharedId], [t0].[TwoSkipSharedId], [t0].[Id0], [t2].[OneSkipSharedId], [t2].[TwoSkipSharedId]
-""");
+"""
+        );
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    protected override void RecordLog()
-        => Sql = Fixture.TestSqlLoggerFactory.Sql;
+    protected override void RecordLog() => Sql = Fixture.TestSqlLoggerFactory.Sql;
 
-    private const string FileNewLine = @"
+    private const string FileNewLine =
+        @"
 ";
 
     private void AssertSql(string expected)
     {
         try
         {
-            Assert.Equal(
-                expected,
-                Sql,
-                ignoreLineEndingDifferences: true);
+            Assert.Equal(expected, Sql, ignoreLineEndingDifferences: true);
         }
         catch
         {
             var methodCallLine = Environment.StackTrace.Split(
                 new[] { Environment.NewLine },
-                StringSplitOptions.RemoveEmptyEntries)[2][6..];
+                StringSplitOptions.RemoveEmptyEntries
+            )[2][6..];
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
             var testName = methodCallLine.Substring(0, indexMethodEnding);
-            var parts = methodCallLine[indexMethodEnding..].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var parts = methodCallLine[indexMethodEnding..].Split(
+                " ",
+                StringSplitOptions.RemoveEmptyEntries
+            );
             var fileName = parts[1][..^5];
             var lineNumber = int.Parse(parts[2]);
 
             var currentDirectory = Directory.GetCurrentDirectory();
-            var logFile = currentDirectory.Substring(
+            var logFile =
+                currentDirectory.Substring(
                     0,
-                    currentDirectory.LastIndexOf("\\artifacts\\", StringComparison.Ordinal) + 1)
-                + "QueryBaseline.txt";
+                    currentDirectory.LastIndexOf("\\artifacts\\", StringComparison.Ordinal) + 1
+                ) + "QueryBaseline.txt";
 
             var testInfo = testName + " : " + lineNumber + FileNewLine;
 
-            var newBaseLine = $@"            AssertSql(
+            var newBaseLine =
+                $@"            AssertSql(
                 {"@\"" + Sql.Replace("\"", "\"\"") + "\""});
 
 ";
 
-            var contents = testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
+            var contents =
+                testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
 
             File.AppendAllText(logFile, contents);
 
@@ -277,11 +293,9 @@ ORDER BY [e].[Id], [t].[OneSkipSharedId], [t].[TwoSkipSharedId], [t].[Id], [t0].
 
     public class ManyToManyFieldsLoadSqlServerFixture : ManyToManyFieldsLoadFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

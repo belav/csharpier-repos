@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
-public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLoggerCategory.Database.Command>
+public interface IRelationalCommandDiagnosticsLogger
+    : IDiagnosticsLogger<DbLoggerCategory.Database.Command>
 {
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandCreating" /> event.
@@ -38,7 +39,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandCreated" /> event.
@@ -62,7 +64,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandInitialized" /> event.
@@ -86,7 +89,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -106,7 +110,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -126,7 +131,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -146,7 +152,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -169,7 +176,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -192,7 +200,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -215,7 +224,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -239,7 +249,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         DbDataReader methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -263,7 +274,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         object? methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -287,7 +299,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         int methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -314,7 +327,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -341,7 +355,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandExecuted" /> event.
@@ -368,7 +383,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandError" /> event.
@@ -393,7 +409,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Exception exception,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandError" /> event.
@@ -422,7 +439,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandCanceled" /> event.
@@ -445,7 +463,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource);
+        CommandSource commandSource
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.CommandCanceled" /> event.
@@ -472,7 +491,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.DataReaderDisposing" /> event.
@@ -494,7 +514,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         int recordsAffected,
         int readCount,
         DateTimeOffset startTime,
-        TimeSpan duration);
+        TimeSpan duration
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.DataReaderClosing" /> event.
@@ -514,7 +535,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid commandId,
         int recordsAffected,
         int readCount,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Logs for the <see cref="RelationalEventId.DataReaderClosing" /> event.
@@ -534,7 +556,8 @@ public interface IRelationalCommandDiagnosticsLogger : IDiagnosticsLogger<DbLogg
         Guid commandId,
         int recordsAffected,
         int readCount,
-        DateTimeOffset startTime);
+        DateTimeOffset startTime
+    );
 
     /// <summary>
     ///     Whether <see cref="RelationalEventId.CommandCreating" /> or <see cref="RelationalEventId.CommandCreated" /> need

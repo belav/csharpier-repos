@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Symbols
     internal interface ISynthesizedMethodBodyImplementationSymbol : ISymbolInternal
     {
         /// <summary>
-        /// The symbol whose body lowering produced this synthesized symbol, 
+        /// The symbol whose body lowering produced this synthesized symbol,
         /// or null if the symbol is synthesized based on declaration.
         /// </summary>
         IMethodSymbolInternal? Method { get; }

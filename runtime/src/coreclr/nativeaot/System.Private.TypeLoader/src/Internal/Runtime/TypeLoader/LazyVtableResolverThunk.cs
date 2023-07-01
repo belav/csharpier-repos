@@ -26,10 +26,12 @@ namespace Internal.Runtime.TypeLoader
         private static volatile IntPtr[] s_thunks = InitialThunks();
 
         [DllImport("*", ExactSpelling = true, EntryPoint = "VTableResolver_Init")]
-        private static extern unsafe int VTableResolver_Init(out IntPtr firstResolverThunk,
-                                                     IntPtr vtableResolveCallback,
-                                                     IntPtr universalTransition,
-                                                     out int pregeneratedThunkCount);
+        private static extern unsafe int VTableResolver_Init(
+            out IntPtr firstResolverThunk,
+            IntPtr vtableResolveCallback,
+            IntPtr universalTransition,
+            out int pregeneratedThunkCount
+        );
 
         [DllImport("*", ExactSpelling = true, EntryPoint = "VTableResolver_GetCommonCallingStub")]
         private static extern unsafe IntPtr VTableResolver_GetCommonCallingStub();
@@ -42,10 +44,12 @@ namespace Internal.Runtime.TypeLoader
         {
             IntPtr firstResolverThunk;
             int thunkCount;
-            int thunkSize = VTableResolver_Init(out firstResolverThunk,
-                                                Intrinsics.AddrOf(new Func<IntPtr, IntPtr, IntPtr>(VTableResolveThunk)),
-                                                RuntimeAugments.GetUniversalTransitionThunk(),
-                                                out thunkCount);
+            int thunkSize = VTableResolver_Init(
+                out firstResolverThunk,
+                Intrinsics.AddrOf(new Func<IntPtr, IntPtr, IntPtr>(VTableResolveThunk)),
+                RuntimeAugments.GetUniversalTransitionThunk(),
+                out thunkCount
+            );
             IntPtr[] initialThunks = new IntPtr[thunkCount];
             for (int i = 0; i < thunkCount; i++)
             {
@@ -72,7 +76,10 @@ namespace Internal.Runtime.TypeLoader
                 {
                     currentThunks = s_thunks;
 
-                    if ((currentThunks.Length > slotIndex) && (currentThunks[slotIndex] != IntPtr.Zero))
+                    if (
+                        (currentThunks.Length > slotIndex)
+                        && (currentThunks[slotIndex] != IntPtr.Zero)
+                    )
                         return currentThunks[slotIndex];
 
                     if ((currentThunks.Length <= slotIndex))
@@ -97,7 +104,9 @@ namespace Internal.Runtime.TypeLoader
         {
             if (s_lazyVtableThunksPoolHeap == null)
             {
-                s_lazyVtableThunksPoolHeap = RuntimeAugments.CreateThunksHeap(VTableResolver_GetCommonCallingStub());
+                s_lazyVtableThunksPoolHeap = RuntimeAugments.CreateThunksHeap(
+                    VTableResolver_GetCommonCallingStub()
+                );
                 Debug.Assert(s_lazyVtableThunksPoolHeap != null);
             }
 
@@ -107,7 +116,12 @@ namespace Internal.Runtime.TypeLoader
 
             int eetypeVtableOffset = SlotIndexToEETypeVTableOffset(slotIndex);
 
-            RuntimeAugments.SetThunkData(s_lazyVtableThunksPoolHeap, thunk, new IntPtr(eetypeVtableOffset), thunk);
+            RuntimeAugments.SetThunkData(
+                s_lazyVtableThunksPoolHeap,
+                thunk,
+                new IntPtr(eetypeVtableOffset),
+                thunk
+            );
 
             return thunk;
         }
@@ -146,13 +160,18 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="callerTransitionBlockParam">pointer to the arguments of the called function</param>
         /// <param name="eeTypePointerOffsetAsIntPtr">eeTypePointerOffsetAsIntPtr is the offset from the start of the MethodTable to the vtable slot</param>
         /// <returns>function pointer of correct override of virtual function</returns>
-        private static unsafe IntPtr VTableResolveThunk(IntPtr callerTransitionBlockParam, IntPtr eeTypePointerOffsetAsIntPtr)
+        private static unsafe IntPtr VTableResolveThunk(
+            IntPtr callerTransitionBlockParam,
+            IntPtr eeTypePointerOffsetAsIntPtr
+        )
         {
             int eeTypePointerOffset = (int)eeTypePointerOffsetAsIntPtr;
             int vtableSlotIndex = EETypeVTableOffsetToSlotIndex(eeTypePointerOffset);
             Debug.Assert(eeTypePointerOffset == SlotIndexToEETypeVTableOffset(vtableSlotIndex)); // Assert that the round trip through the slot calculations is good
 
-            MethodTable** thisPointer = *((MethodTable***)(((byte*)callerTransitionBlockParam) + ArgIterator.GetThisOffset()));
+            MethodTable** thisPointer = *(
+                (MethodTable***)(((byte*)callerTransitionBlockParam) + ArgIterator.GetThisOffset())
+            );
             MethodTable* MethodTable = *thisPointer;
 
             RuntimeTypeHandle rth = MethodTable->ToRuntimeTypeHandle();
@@ -174,7 +193,9 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="obj">Object to be finalized</param>
         private static void FinalizeThunk(object obj)
         {
-            RuntimeTypeHandle rthType = RuntimeAugments.GetRuntimeTypeHandleFromObjectReference(obj);
+            RuntimeTypeHandle rthType = RuntimeAugments.GetRuntimeTypeHandleFromObjectReference(
+                obj
+            );
             TypeSystemContext context = TypeSystemContextFactory.Create();
             TypeDesc type = context.ResolveRuntimeTypeHandle(rthType);
 
@@ -203,16 +224,25 @@ namespace Internal.Runtime.TypeLoader
         private static IntPtr ResolveVirtualVTableFunction(TypeDesc type, int vtableSlotIndex)
         {
             IntPtr exactResult;
-            MethodDesc virtualFunctionDefiningSlot = ResolveVTableSlotIndexToMethodDescOrFunctionPointer(type.GetClosestDefType(), vtableSlotIndex, out exactResult);
+            MethodDesc virtualFunctionDefiningSlot =
+                ResolveVTableSlotIndexToMethodDescOrFunctionPointer(
+                    type.GetClosestDefType(),
+                    vtableSlotIndex,
+                    out exactResult
+                );
             if (virtualFunctionDefiningSlot == null)
                 return exactResult;
 
-            MethodDesc virtualFunctionOverride = ((MetadataType)type.GetClosestDefType()).FindVirtualFunctionTargetMethodOnObjectType(virtualFunctionDefiningSlot);
+            MethodDesc virtualFunctionOverride = (
+                (MetadataType)type.GetClosestDefType()
+            ).FindVirtualFunctionTargetMethodOnObjectType(virtualFunctionDefiningSlot);
 
             if (TryGetVTableCallableAddress(virtualFunctionOverride, out exactResult))
                 return exactResult;
 
-            Environment.FailFast("Method address lookup failed for: " + virtualFunctionOverride.ToString());
+            Environment.FailFast(
+                "Method address lookup failed for: " + virtualFunctionOverride.ToString()
+            );
             return IntPtr.Zero;
         }
 
@@ -231,7 +261,10 @@ namespace Internal.Runtime.TypeLoader
             // If not newslot, make sure we've got the defining method here
             if (!definingMethod.IsNewSlot)
             {
-                definingMethod = MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(definingMethod);
+                definingMethod =
+                    MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(
+                        definingMethod
+                    );
             }
             TypeDesc definingType = definingMethod.OwningType;
 
@@ -252,18 +285,27 @@ namespace Internal.Runtime.TypeLoader
                     {
                         if (definingMetadataType.BaseType.RetrieveRuntimeTypeHandleIfPossible())
                         {
-                            baseTypeSlotCount = definingMetadataType.BaseType.GetRuntimeTypeHandle().ToEETypePtr()->NumVtableSlots;
+                            baseTypeSlotCount = definingMetadataType.BaseType
+                                .GetRuntimeTypeHandle()
+                                .ToEETypePtr()
+                                ->NumVtableSlots;
                         }
                         else
                         {
-                            baseTypeSlotCount = definingMetadataType.BaseType.GetOrCreateTypeBuilderState().NumVTableSlots;
+                            baseTypeSlotCount = definingMetadataType.BaseType
+                                .GetOrCreateTypeBuilderState()
+                                .NumVTableSlots;
                         }
                     }
                 }
 
                 int currentSlot = baseTypeSlotCount;
 
-                if (definingMetadataType.ConvertToCanonForm(CanonicalFormKind.Specific).IsCanonicalSubtype(CanonicalFormKind.Specific))
+                if (
+                    definingMetadataType
+                        .ConvertToCanonForm(CanonicalFormKind.Specific)
+                        .IsCanonicalSubtype(CanonicalFormKind.Specific)
+                )
                 {
                     // Deal with the space reserved for the canonical dictionary
                     currentSlot++;
@@ -286,20 +328,35 @@ namespace Internal.Runtime.TypeLoader
             else
             {
                 // Case 2, pregenerated type
-                TypeSystem.NativeFormat.NativeFormatMethod definingMethodOpenType = (TypeSystem.NativeFormat.NativeFormatMethod)definingMethod.GetTypicalMethodDefinition();
+                TypeSystem.NativeFormat.NativeFormatMethod definingMethodOpenType =
+                    (TypeSystem.NativeFormat.NativeFormatMethod)
+                        definingMethod.GetTypicalMethodDefinition();
                 MethodSignatureComparer methodSignatureComparer = new MethodSignatureComparer(
-                    definingMethodOpenType.MetadataReader, definingMethodOpenType.Handle);
+                    definingMethodOpenType.MetadataReader,
+                    definingMethodOpenType.Handle
+                );
 
                 if (!definingType.RetrieveRuntimeTypeHandleIfPossible())
                 {
                     new TypeBuilder().BuildType(definingType);
                 }
 
-                TypeSystem.NativeFormat.NativeFormatType definingNativeFormatType = (TypeSystem.NativeFormat.NativeFormatType)definingType.GetTypeDefinition();
-                NativeFormatModuleInfo moduleToLookIn = definingNativeFormatType.MetadataUnit.RuntimeModuleInfo;
+                TypeSystem.NativeFormat.NativeFormatType definingNativeFormatType =
+                    (TypeSystem.NativeFormat.NativeFormatType)definingType.GetTypeDefinition();
+                NativeFormatModuleInfo moduleToLookIn = definingNativeFormatType
+                    .MetadataUnit
+                    .RuntimeModuleInfo;
 
                 TypeLoaderEnvironment.VirtualResolveDataResult virtualSlotInfo;
-                if (!TypeLoaderEnvironment.TryGetVirtualResolveData(moduleToLookIn, definingType.RuntimeTypeHandle, Array.Empty<RuntimeTypeHandle>(), ref methodSignatureComparer, out virtualSlotInfo))
+                if (
+                    !TypeLoaderEnvironment.TryGetVirtualResolveData(
+                        moduleToLookIn,
+                        definingType.RuntimeTypeHandle,
+                        Array.Empty<RuntimeTypeHandle>(),
+                        ref methodSignatureComparer,
+                        out virtualSlotInfo
+                    )
+                )
                     return -1;
 
                 Debug.Assert(!virtualSlotInfo.IsGVM);
@@ -317,7 +374,11 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="functionPointer">If there is no corresponding method defined in metadata, this is
         /// the function pointer that should be used for calls to this vtable slot</param>
         /// <returns>MethodDesc of function that defined the slot if possible.</returns>
-        private static unsafe MethodDesc ResolveVTableSlotIndexToMethodDescOrFunctionPointer(DefType type, int vtableSlotIndex, out IntPtr functionPointer)
+        private static unsafe MethodDesc ResolveVTableSlotIndexToMethodDescOrFunctionPointer(
+            DefType type,
+            int vtableSlotIndex,
+            out IntPtr functionPointer
+        )
         {
             Debug.Assert(type.RetrieveRuntimeTypeHandleIfPossible());
             Debug.Assert(type.RuntimeTypeHandle.ToEETypePtr()->NumVtableSlots > vtableSlotIndex);
@@ -373,13 +434,19 @@ namespace Internal.Runtime.TypeLoader
                 int baseTypeSlotCount = 0;
 
                 if (definingMetadataType.BaseType != null)
-                    baseTypeSlotCount = definingMetadataType.BaseType.GetRuntimeTypeHandle().ToEETypePtr()->NumVtableSlots;
+                    baseTypeSlotCount = definingMetadataType.BaseType
+                        .GetRuntimeTypeHandle()
+                        .ToEETypePtr()
+                        ->NumVtableSlots;
 
                 int slotOnType = vtableSlotIndex - baseTypeSlotCount;
                 Debug.Assert(slotOnType >= 0);
 
                 // R2R types create new slots only for methods that are marked as NewSlot
-                if (definingMetadataType.ConvertToCanonForm(CanonicalFormKind.Specific) != definingType)
+                if (
+                    definingMetadataType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    != definingType
+                )
                 {
                     // Deal with the space reserved for the canonical dictionary
                     slotOnType--;
@@ -401,10 +468,14 @@ namespace Internal.Runtime.TypeLoader
                         currentSlot++;
                 }
 
-                Environment.FailFast("Unexpected failure to find virtual function that defined slot");
+                Environment.FailFast(
+                    "Unexpected failure to find virtual function that defined slot"
+                );
                 return null;
             }
-            else if (TryGetVirtualMethodFromSlot(definingType, vtableSlotIndex, out slotDefiningMethod))
+            else if (
+                TryGetVirtualMethodFromSlot(definingType, vtableSlotIndex, out slotDefiningMethod)
+            )
             {
                 // Case 2
                 Debug.Assert(VirtualMethodToSlotIndex(slotDefiningMethod) == vtableSlotIndex);
@@ -412,10 +483,15 @@ namespace Internal.Runtime.TypeLoader
             }
             else
             {
-                TypeDesc mostDerivedPregeneratedType = GetMostDerivedPregeneratedOrTemplateLoadedType(type);
+                TypeDesc mostDerivedPregeneratedType =
+                    GetMostDerivedPregeneratedOrTemplateLoadedType(type);
 
-                MethodTable* mostDerivedTypeEEType = mostDerivedPregeneratedType.GetRuntimeTypeHandle().ToEETypePtr();
-                IntPtr* vtableStart = (IntPtr*)(((byte*)mostDerivedTypeEEType) + sizeof(MethodTable));
+                MethodTable* mostDerivedTypeEEType = mostDerivedPregeneratedType
+                    .GetRuntimeTypeHandle()
+                    .ToEETypePtr();
+                IntPtr* vtableStart = (IntPtr*)(
+                    ((byte*)mostDerivedTypeEEType) + sizeof(MethodTable)
+                );
 
                 IntPtr possibleFunctionPointerReturn = vtableStart[vtableSlotIndex];
                 int functionPointerMatches = 0;
@@ -454,11 +530,20 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        private static bool TryGetVirtualMethodFromSlot(TypeDesc definingType, int vtableSlotIndex, out MethodDesc slotDefiningMethod)
+        private static bool TryGetVirtualMethodFromSlot(
+            TypeDesc definingType,
+            int vtableSlotIndex,
+            out MethodDesc slotDefiningMethod
+        )
         {
             MethodNameAndSignature methodNameAndSig;
-            bool success = TypeLoaderEnvironment.TryGetMethodMethodNameAndSigFromVTableSlotForPregeneratedOrTemplateType
-                (definingType.Context, definingType.GetRuntimeTypeHandle(), vtableSlotIndex, out methodNameAndSig);
+            bool success =
+                TypeLoaderEnvironment.TryGetMethodMethodNameAndSigFromVTableSlotForPregeneratedOrTemplateType(
+                    definingType.Context,
+                    definingType.GetRuntimeTypeHandle(),
+                    vtableSlotIndex,
+                    out methodNameAndSig
+                );
 
             if (!success)
             {
@@ -466,7 +551,9 @@ namespace Internal.Runtime.TypeLoader
                 return false;
             }
 
-            TypeSystem.NativeFormat.NativeFormatType metadataDefiningType = definingType.GetClosestDefType().GetTypeDefinition() as TypeSystem.NativeFormat.NativeFormatType;
+            TypeSystem.NativeFormat.NativeFormatType metadataDefiningType =
+                definingType.GetClosestDefType().GetTypeDefinition()
+                as TypeSystem.NativeFormat.NativeFormatType;
 
             // We're working with a NoMetadataType, or an ArrayType, neither of which have full metadata
             if (metadataDefiningType == null)
@@ -479,7 +566,9 @@ namespace Internal.Runtime.TypeLoader
             // If we start hitting the more general case, we can improve this algorithm.
             Debug.Assert(methodNameAndSig.Signature.IsNativeLayoutSignature);
 
-            foreach (TypeSystem.NativeFormat.NativeFormatMethod method in metadataDefiningType.GetMethods())
+            foreach (
+                TypeSystem.NativeFormat.NativeFormatMethod method in metadataDefiningType.GetMethods()
+            )
             {
                 if (!method.IsVirtual)
                     continue;
@@ -490,8 +579,16 @@ namespace Internal.Runtime.TypeLoader
                 if (!method.Name.Equals(methodNameAndSig.Name))
                     continue;
 
-                MethodSignatureComparer sigComparer = new MethodSignatureComparer(method.MetadataReader, method.Handle);
-                if (!sigComparer.IsMatchingNativeLayoutMethodNameAndSignature(methodNameAndSig.Name, methodNameAndSig.Signature))
+                MethodSignatureComparer sigComparer = new MethodSignatureComparer(
+                    method.MetadataReader,
+                    method.Handle
+                );
+                if (
+                    !sigComparer.IsMatchingNativeLayoutMethodNameAndSignature(
+                        methodNameAndSig.Name,
+                        methodNameAndSig.Signature
+                    )
+                )
                     continue;
 
                 // At this point we've matched
@@ -530,7 +627,10 @@ namespace Internal.Runtime.TypeLoader
             }
             else
             {
-                if (!(defTypeDerived is TypeSystem.NoMetadata.NoMetadataType) && !defTypeDerived.HasNativeLayout)
+                if (
+                    !(defTypeDerived is TypeSystem.NoMetadata.NoMetadataType)
+                    && !defTypeDerived.HasNativeLayout
+                )
                 {
                     if (!defTypeDerived.RetrieveRuntimeTypeHandleIfPossible())
                         return false;
@@ -601,7 +701,11 @@ namespace Internal.Runtime.TypeLoader
         /// <summary>
         /// Get the MethodDesc that corresponds to an interface type/slot pair
         /// </summary>
-        public static bool TryGetMethodFromInterfaceSlot(TypeDesc owningType, ushort slot, out MethodDesc method)
+        public static bool TryGetMethodFromInterfaceSlot(
+            TypeDesc owningType,
+            ushort slot,
+            out MethodDesc method
+        )
         {
             int iMethod = -1;
             method = null;
@@ -642,7 +746,11 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="instanceDefTypeToExamine">(in) The class type on which the interface call is made, (out) the class type where the search may continue using non-metadata means</param>
         /// <param name="targetVirtualMethod">The interface method to translate into a virtual method for execution</param>
         /// <returns>virtual method slot which implements the interface method OR null if an implementation should fall back to non-metadata based lookup.</returns>
-        public static MethodDesc ResolveInterfaceMethodToVirtualMethod(TypeDesc instanceType, out TypeDesc instanceDefTypeToExamine, MethodDesc targetVirtualMethod)
+        public static MethodDesc ResolveInterfaceMethodToVirtualMethod(
+            TypeDesc instanceType,
+            out TypeDesc instanceDefTypeToExamine,
+            MethodDesc targetVirtualMethod
+        )
         {
             instanceDefTypeToExamine = instanceType.GetClosestDefType();
 
@@ -653,18 +761,28 @@ namespace Internal.Runtime.TypeLoader
             {
                 foreach (TypeDesc type in instanceType.RuntimeInterfaces)
                 {
-                    if (type != targetVirtualMethod.OwningType &&
-                        type.GetTypeDefinition() == targetVirtualMethod.OwningType.GetTypeDefinition())
+                    if (
+                        type != targetVirtualMethod.OwningType
+                        && type.GetTypeDefinition()
+                            == targetVirtualMethod.OwningType.GetTypeDefinition()
+                    )
                     {
                         // Check to see if these interfaces are appropriately assignable
-                        if (RuntimeAugments.IsAssignableFrom(targetVirtualMethod.OwningType.GetRuntimeTypeHandle(), type.GetRuntimeTypeHandle()))
+                        if (
+                            RuntimeAugments.IsAssignableFrom(
+                                targetVirtualMethod.OwningType.GetRuntimeTypeHandle(),
+                                type.GetRuntimeTypeHandle()
+                            )
+                        )
                         {
                             if (variantTargets == null)
                                 variantTargets = new LowLevelList<MethodDesc>();
 
-                            MethodDesc targetVariantMatch = type.Context.GetMethodForInstantiatedType(
-                                targetVirtualMethod.GetTypicalMethodDefinition(),
-                                (InstantiatedType)type);
+                            MethodDesc targetVariantMatch =
+                                type.Context.GetMethodForInstantiatedType(
+                                    targetVirtualMethod.GetTypicalMethodDefinition(),
+                                    (InstantiatedType)type
+                                );
 
                             variantTargets.Add(targetVariantMatch);
                         }
@@ -674,19 +792,29 @@ namespace Internal.Runtime.TypeLoader
 
             do
             {
-                newlyFoundVirtualMethod = instanceDefTypeToExamine.ResolveInterfaceMethodToVirtualMethodOnType(targetVirtualMethod);
+                newlyFoundVirtualMethod =
+                    instanceDefTypeToExamine.ResolveInterfaceMethodToVirtualMethodOnType(
+                        targetVirtualMethod
+                    );
 
                 if (newlyFoundVirtualMethod == null && variantTargets != null)
                 {
                     for (int i = 0; i < variantTargets.Count; i++)
                     {
-                        newlyFoundVirtualMethod = instanceDefTypeToExamine.ResolveInterfaceMethodToVirtualMethodOnType(variantTargets[i]);
+                        newlyFoundVirtualMethod =
+                            instanceDefTypeToExamine.ResolveInterfaceMethodToVirtualMethodOnType(
+                                variantTargets[i]
+                            );
                         if (newlyFoundVirtualMethod != null)
                             break;
                     }
                 }
                 instanceDefTypeToExamine = instanceDefTypeToExamine.BaseType;
-            } while ((newlyFoundVirtualMethod == null) && (instanceDefTypeToExamine != null) && !IsPregeneratedOrTemplateTypeLoaded(instanceDefTypeToExamine));
+            } while (
+                (newlyFoundVirtualMethod == null)
+                && (instanceDefTypeToExamine != null)
+                && !IsPregeneratedOrTemplateTypeLoaded(instanceDefTypeToExamine)
+            );
 
             return newlyFoundVirtualMethod;
         }
@@ -698,7 +826,11 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="targetMethod">non-generic virtual or interface method</param>
         /// <param name="methodAddress">function pointer resolved</param>
         /// <returns>true if successful</returns>
-        public static bool TryDispatchMethodOnTarget(TypeDesc instanceType, MethodDesc targetMethod, out IntPtr methodAddress)
+        public static bool TryDispatchMethodOnTarget(
+            TypeDesc instanceType,
+            MethodDesc targetMethod,
+            out IntPtr methodAddress
+        )
         {
             methodAddress = IntPtr.Zero;
 
@@ -714,9 +846,11 @@ namespace Internal.Runtime.TypeLoader
                     {
                         return false;
                     }
-                    methodAddress = RuntimeAugments.ResolveDispatchOnType(instanceType.GetRuntimeTypeHandle(),
-                                                                          targetMethod.OwningType.GetRuntimeTypeHandle(),
-                                                                          interfaceSlot);
+                    methodAddress = RuntimeAugments.ResolveDispatchOnType(
+                        instanceType.GetRuntimeTypeHandle(),
+                        targetMethod.OwningType.GetRuntimeTypeHandle(),
+                        interfaceSlot
+                    );
                     Debug.Assert(methodAddress != IntPtr.Zero); // TODO! This should happen for IDynamicInterfaceCastable dispatch...
                     return true;
                 }
@@ -724,8 +858,12 @@ namespace Internal.Runtime.TypeLoader
                 {
                     unsafe
                     {
-                        int vtableSlotIndex = LazyVTableResolver.VirtualMethodToSlotIndex(targetMethod);
-                        MethodTable* MethodTable = instanceType.GetRuntimeTypeHandle().ToEETypePtr();
+                        int vtableSlotIndex = LazyVTableResolver.VirtualMethodToSlotIndex(
+                            targetMethod
+                        );
+                        MethodTable* MethodTable = instanceType
+                            .GetRuntimeTypeHandle()
+                            .ToEETypePtr();
                         IntPtr* vtableStart = (IntPtr*)(((byte*)MethodTable) + sizeof(MethodTable));
 
                         methodAddress = vtableStart[vtableSlotIndex];
@@ -741,7 +879,11 @@ namespace Internal.Runtime.TypeLoader
             if (targetVirtualMethod.OwningType.IsInterface)
             {
                 TypeDesc instanceDefTypeToExamine;
-                MethodDesc newlyFoundVirtualMethod = ResolveInterfaceMethodToVirtualMethod(instanceType, out instanceDefTypeToExamine, targetVirtualMethod);
+                MethodDesc newlyFoundVirtualMethod = ResolveInterfaceMethodToVirtualMethod(
+                    instanceType,
+                    out instanceDefTypeToExamine,
+                    targetVirtualMethod
+                );
 
                 targetVirtualMethod = newlyFoundVirtualMethod;
 
@@ -754,9 +896,11 @@ namespace Internal.Runtime.TypeLoader
                     {
                         return false;
                     }
-                    methodAddress = RuntimeAugments.ResolveDispatchOnType(instanceDefTypeToExamine.GetRuntimeTypeHandle(),
-                                                                          targetMethod.OwningType.GetRuntimeTypeHandle(),
-                                                                          interfaceSlot);
+                    methodAddress = RuntimeAugments.ResolveDispatchOnType(
+                        instanceDefTypeToExamine.GetRuntimeTypeHandle(),
+                        targetMethod.OwningType.GetRuntimeTypeHandle(),
+                        interfaceSlot
+                    );
 
                     Debug.Assert(methodAddress != IntPtr.Zero); // TODO! This should happen for IDynamicInterfaceCastable dispatch...
                     return true;
@@ -769,7 +913,9 @@ namespace Internal.Runtime.TypeLoader
                 return false;
 
             // Resolve virtual method to exact method
-            MethodDesc dispatchMethod = instanceDefType.FindVirtualFunctionTargetMethodOnObjectType(targetVirtualMethod);
+            MethodDesc dispatchMethod = instanceDefType.FindVirtualFunctionTargetMethodOnObjectType(
+                targetVirtualMethod
+            );
 
             return TryGetVTableCallableAddress(dispatchMethod, out methodAddress);
         }
@@ -785,7 +931,14 @@ namespace Internal.Runtime.TypeLoader
             IntPtr methodAddressNonUnboxing;
             IntPtr unboxingMethodAddress;
 
-            if (TypeLoaderEnvironment.TryGetMethodAddressFromMethodDesc(method, out methodAddressNonUnboxing, out unboxingMethodAddress, out dummy))
+            if (
+                TypeLoaderEnvironment.TryGetMethodAddressFromMethodDesc(
+                    method,
+                    out methodAddressNonUnboxing,
+                    out unboxingMethodAddress,
+                    out dummy
+                )
+            )
             {
                 if (unboxingMethodAddress != IntPtr.Zero)
                 {

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
 {
     using VerifyCS = CSharpCodeFixVerifier<
         ConvertSwitchStatementToExpressionDiagnosticAnalyzer,
-        ConvertSwitchStatementToExpressionCodeFixProvider>;
+        ConvertSwitchStatementToExpressionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
     public class ConvertSwitchStatementToExpressionTests
@@ -27,14 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         private static readonly LanguageVersion CSharp9 = LanguageVersion.CSharp9;
 
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact]
         public async Task TestReturn()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -51,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -63,14 +64,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             _ => 7,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestReturnAndThrow()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -87,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -99,14 +101,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAssignment_Array()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int[] array = new int[1];
 
@@ -129,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int[] array = new int[1];
 
@@ -143,13 +146,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             _ => 7,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnDifferentIndexerArgs()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     int[] array = new int[1];
 
@@ -179,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestMissingOnQualifiedName()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     int[] array = new int[1];
 
@@ -209,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestMissingOnDefaultBreak_01()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -227,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestMissingOnDefaultBreak_02()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -245,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestMissingOnDefaultBreak_03()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -263,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestMissingOnDefaultBreak_04()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -281,7 +291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestMissingOnAllBreak()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -304,7 +315,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         public async Task TestAllThrow()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 class Program
 {
     void M(int i)
@@ -318,7 +329,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 class Program
 {
     void M(int i)
@@ -329,14 +340,15 @@ class Program
             _ => new Exception(),
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAssignment()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -356,7 +368,7 @@ class Program
         throw null;
     }
 }",
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -368,13 +380,15 @@ class Program
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnNextStatementMismatch()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     int M(int i)
     {
@@ -401,7 +415,8 @@ class Program
         [Fact]
         public async Task TestMissingOnAssignmentMismatch()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     int M(int i)
     {
@@ -426,7 +441,7 @@ class Program
         public async Task TestAssignment_Compound()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -446,7 +461,7 @@ class Program
         throw null;
     }
 }",
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -459,14 +474,15 @@ class Program
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAssignment_UseBeforeAssignment()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -487,7 +503,7 @@ class Program
         throw null;
     }
 }",
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -501,13 +517,15 @@ class Program
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingOnMultiAssignment()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -537,7 +555,8 @@ class Program
         [Fact]
         public async Task TestMissingOnMultiCaseSection()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -559,7 +578,8 @@ class Program
         [Fact]
         public async Task TestMissingOnMultiCaseSectionWithWhenClause_CSharp9()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -586,7 +606,8 @@ class Program
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task TestOnMultiCaseSection_CSharp9()
         {
-            var testCode = @"class Program
+            var testCode =
+                @"class Program
 {
     void M(int i)
     {
@@ -601,7 +622,8 @@ class Program
         throw null;
     }
 }";
-            var fixedCode = @"class Program
+            var fixedCode =
+                @"class Program
 {
     void M(int i)
     {
@@ -624,7 +646,8 @@ class Program
         [Fact]
         public async Task TestMissingOnMultiCompoundAssignment()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void M(int i)
     {
@@ -654,7 +677,8 @@ class Program
         [Fact]
         public async Task TestMissingOnGoto()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     int M(int i)
     {
@@ -677,7 +701,7 @@ class Program
         public async Task TestTrivia_01()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -698,7 +722,7 @@ class Program
         throw null; // leading next statement
     }
 }",
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -715,14 +739,15 @@ class Program
             _ => throw null,// leading next statement
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(37873, "https://github.com/dotnet/roslyn/issues/37873")]
         public async Task TestTrivia_02()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     static int GetValue(int input)
     {
@@ -743,7 +768,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static int GetValue(int input)
     {
@@ -755,14 +780,15 @@ class Program
             _ => 80,// this little piggy had none
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(52258, "https://github.com/dotnet/roslyn/issues/52258")]
         public async Task TestTrivia_03()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -774,7 +800,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -785,14 +811,15 @@ class Program
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(36086, "https://github.com/dotnet/roslyn/issues/36086")]
         public async Task TestSeverity()
         {
             var source =
-@"class Program
+                @"class Program
 {
     int M(int i)
     {
@@ -811,18 +838,28 @@ class Program
 }";
 
             var analyzer = new ConvertSwitchStatementToExpressionDiagnosticAnalyzer();
-            var descriptor = analyzer.SupportedDiagnostics.First(descriptor => descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);
+            var descriptor = analyzer.SupportedDiagnostics.First(
+                descriptor =>
+                    descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
+            );
             await new VerifyCS.Test
             {
                 TestCode = source,
                 ExpectedDiagnostics =
                 {
                     // Test0.cs(5,9): warning IDE0066: Use 'switch' expression
-                    new DiagnosticResult(descriptor).WithSeverity(DiagnosticSeverity.Warning).WithSpan(5, 9, 5, 15).WithSpan(5, 9, 15, 10),
+                    new DiagnosticResult(descriptor)
+                        .WithSeverity(DiagnosticSeverity.Warning)
+                        .WithSpan(5, 9, 5, 15)
+                        .WithSpan(5, 9, 15, 10),
                 },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferSwitchExpression, true, NotificationOption2.Warning },
+                    {
+                        CSharpCodeStyleOptions.PreferSwitchExpression,
+                        true,
+                        NotificationOption2.Warning
+                    },
                 },
             }.RunAsync();
         }
@@ -831,7 +868,7 @@ class Program
         public async Task TestAddParenthesesAroundBinaryExpression()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -848,7 +885,7 @@ class Program
         throw null;
     }
 }",
-@"class Program
+                @"class Program
 {
     void M(int i)
     {
@@ -860,14 +897,15 @@ class Program
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(37947, "https://github.com/dotnet/roslyn/issues/37947")]
         public async Task TestMultiLabelWithDefault()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -883,7 +921,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -895,13 +933,15 @@ class Program
             _ => ""Other"",
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(37949, "https://github.com/dotnet/roslyn/issues/37949")]
         public async Task TestMissingOnUseInNextStatement()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -924,7 +964,7 @@ class Program
         public async Task TestDeclarationInOuterScope()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.IO;
 
 class Program
@@ -967,7 +1007,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.IO;
 
 class Program
@@ -999,13 +1039,15 @@ class Program
             throw new ArgumentOutOfRangeException(nameof(offset));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(37872, "https://github.com/dotnet/roslyn/issues/37872")]
         public async Task TestMissingFixOnDirectives()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main() { }
 
@@ -1035,7 +1077,8 @@ class Program
         [Fact, WorkItem(37872, "https://github.com/dotnet/roslyn/issues/37872")]
         public async Task TestMissingFixAllOnDirectives()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main() { }
 
@@ -1066,7 +1109,8 @@ class Program
         }
     }
 }";
-            var fixedCode = @"class Program
+            var fixedCode =
+                @"class Program
 {
     static void Main() { }
 
@@ -1098,11 +1142,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode = code,
-                FixedState =
-                {
-                    Sources = { fixedCode },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { fixedCode }, MarkupHandling = MarkupMode.Allow, },
             }.RunAsync();
         }
 
@@ -1110,7 +1150,7 @@ class Program
         public async Task TestShouldNotCastNullOnNullableValueType_ReturnStatement()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     public static bool? GetBool(string name)
     {
@@ -1122,7 +1162,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     public static bool? GetBool(string name)
     {
@@ -1133,14 +1173,15 @@ class Program
             _ => null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(37950, "https://github.com/dotnet/roslyn/issues/37950")]
         public async Task TestShouldNotCastNullOnNullableValueType_Assignment()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     public static void Test(string name)
     {
@@ -1153,7 +1194,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     public static void Test(string name)
     {
@@ -1164,14 +1205,15 @@ class Program
             _ => null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(38771, "https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_Interfaces()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1200,7 +1242,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1238,7 +1280,7 @@ class Program
         public async Task TestExplicitDeclaration_Interfaces2()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1267,7 +1309,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1305,7 +1347,7 @@ class Program
         public async Task TestExplicitDeclaration_Interfaces3()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1334,7 +1376,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1372,7 +1414,7 @@ class Program
         public async Task TestExplicitDeclaration_ClassInheritance()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1405,7 +1447,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1447,7 +1489,7 @@ class Program
         public async Task TestExplicitDeclaration_ClassInheritance2()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1476,7 +1518,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1514,7 +1556,7 @@ class Program
         public async Task TestImplicitDeclaration_ClassInheritance()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1543,7 +1585,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1581,7 +1623,7 @@ class Program
         public async Task TestImplicitDeclaration_ClassInheritance2()
         {
             var input =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1610,7 +1652,7 @@ class Program
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1648,7 +1690,7 @@ class Program
         public async Task TestExplicitDeclaration_AllCasesDefaultLiteral()
         {
             var input =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1666,7 +1708,7 @@ class Program
     }
 }";
             var expected =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1694,7 +1736,7 @@ class Program
         public async Task TestExplicitDeclaration_MixedDefaultLiteralDefaultParameter()
         {
             var input =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1711,7 +1753,8 @@ class Program
         }
     }
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     public static void Test()
     {
@@ -1739,7 +1782,7 @@ class Program
         public async Task TestImplicitDeclaration_AllCasesDefaultParameter()
         {
             var input =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1757,7 +1800,7 @@ class Program
     }
 }";
             var expected =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1785,7 +1828,7 @@ class Program
         public async Task TestExplicitDeclaration_AllCasesDefaultParameter()
         {
             var input =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1803,7 +1846,7 @@ class Program
     }
 }";
             var expected =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1822,7 +1865,11 @@ class Program
                 FixedCode = expected,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.VarForBuiltInTypes, false, NotificationOption2.Silent },
+                    {
+                        CSharpCodeStyleOptions.VarForBuiltInTypes,
+                        false,
+                        NotificationOption2.Silent
+                    },
                 },
             }.RunAsync();
         }
@@ -1831,7 +1878,7 @@ class Program
         public async Task TestExplicitDeclaration_DeclarationTypeDifferentFromAllCaseTypes()
         {
             var input =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1849,7 +1896,7 @@ class Program
     }
 }";
             var expected =
-@"class Program
+                @"class Program
 {
     public static void Test()
     {
@@ -1876,7 +1923,8 @@ class Program
         [Fact, WorkItem(40198, "https://github.com/dotnet/roslyn/issues/40198")]
         public async Task TestNotWithRefReturns()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static ref int GetRef(int[] mem, int addr, int mode)
@@ -1896,7 +1944,8 @@ class Program
         [Fact, WorkItem(40198, "https://github.com/dotnet/roslyn/issues/40198")]
         public async Task TestNotWithRefAssignment()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static ref int GetRef(int[] mem, int addr, int mode)
@@ -1918,7 +1967,8 @@ class Program
         [Fact, WorkItem(40198, "https://github.com/dotnet/roslyn/issues/40198")]
         public async Task TestNotWithRefConditionalAssignment()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static ref int GetRef(int[] mem, int addr, int mode)
@@ -1941,7 +1991,7 @@ class Program
         public async Task TestWithRefInsideConditionalAssignment()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 class Program
 {
     static void GetRef(int[] mem, int addr, int mode)
@@ -1954,7 +2004,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 class Program
 {
     static void GetRef(int[] mem, int addr, int mode)
@@ -1966,13 +2016,15 @@ class Program
             _ => throw new Exception(),
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TopLevelStatement()
         {
-            var source = @"
+            var source =
+                @"
 int i = 0;
 [|switch|] (i)
 {
@@ -1982,7 +2034,8 @@ int i = 0;
         return 7;
 }";
 
-            var fixedSource = @"
+            var fixedSource =
+                @"
 int i = 0;
 return i switch
 {
@@ -2000,7 +2053,8 @@ return i switch
 
             test.ExpectedDiagnostics.Add(
                 // /0/Test0.cs(2,1): error CS8805: Program using top-level statements must be an executable.
-                DiagnosticResult.CompilerError("CS8805").WithSpan(2, 1, 2, 11));
+                DiagnosticResult.CompilerError("CS8805").WithSpan(2, 1, 2, 11)
+            );
 
             await test.RunAsync();
         }
@@ -2009,7 +2063,8 @@ return i switch
         public async Task TopLevelStatement_FollowedWithThrow()
         {
             // We should be rewriting the declaration for 'j' to get 'var j = i switch ...'
-            var source = @"
+            var source =
+                @"
 int i = 0;
 int j;
 [|switch|] (i)
@@ -2024,7 +2079,8 @@ int j;
 throw null;
 ";
 
-            var fixedSource = @"
+            var fixedSource =
+                @"
 int i = 0;
 int j;
 j = i switch
@@ -2044,7 +2100,8 @@ j = i switch
 
             test.ExpectedDiagnostics.Add(
                 // /0/Test0.cs(2,1): error CS8805: Program using top-level statements must be an executable.
-                DiagnosticResult.CompilerError("CS8805").WithSpan(2, 1, 2, 11));
+                DiagnosticResult.CompilerError("CS8805").WithSpan(2, 1, 2, 11)
+            );
 
             await test.RunAsync();
         }
@@ -2052,7 +2109,8 @@ j = i switch
         [Fact, WorkItem(48006, "https://github.com/dotnet/roslyn/issues/48006")]
         public async Task TestOnMultiCaseSection_String_CSharp9()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class Program
 {
     bool M(string s)
@@ -2068,7 +2126,8 @@ class Program
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class Program
 {
     bool M(string s)
@@ -2093,7 +2152,7 @@ class Program
         public async Task TestParenthesizedExpression1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M(object i)
     {
@@ -2103,7 +2162,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int M(object i)
     {
@@ -2112,14 +2171,15 @@ class Program
             _ => 0,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(49788, "https://github.com/dotnet/roslyn/issues/49788")]
         public async Task TestParenthesizedExpression2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M()
     {
@@ -2129,7 +2189,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int M()
     {
@@ -2138,14 +2198,15 @@ class Program
             _ => 0,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(58636, "https://github.com/dotnet/roslyn/issues/58636")]
         public async Task TestRuntimeTypeConversion_Assignment1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     void M(string s)
     {
@@ -2164,7 +2225,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     void M(string s)
     {
@@ -2175,14 +2236,15 @@ class Program
             _ => throw new System.Exception(),
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(58636, "https://github.com/dotnet/roslyn/issues/58636")]
         public async Task TestRuntimeTypeConversion_Assignment2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     void M(string s)
     {
@@ -2204,7 +2266,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     void M(string s)
     {
@@ -2216,14 +2278,15 @@ class Program
             _ => throw new System.Exception(),
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(58636, "https://github.com/dotnet/roslyn/issues/58636")]
         public async Task TestRuntimeTypeConversion_Return1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     object M(string s)
     {
@@ -2238,7 +2301,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     object M(string s)
     {
@@ -2249,14 +2312,15 @@ class Program
             _ => throw new System.Exception(),
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(58636, "https://github.com/dotnet/roslyn/issues/58636")]
         public async Task TestRuntimeTypeConversion_Return2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     object M(string s)
     {
@@ -2273,7 +2337,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     object M(string s)
     {
@@ -2285,7 +2349,8 @@ class Program
             _ => throw new System.Exception(),
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(61278, "https://github.com/dotnet/roslyn/issues/61278")]
@@ -2294,7 +2359,7 @@ class Program
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System;
+                    @"using System;
 
 class C
 {
@@ -2316,7 +2381,7 @@ class C
     }
 }",
                 FixedCode =
-@"using System;
+                    @"using System;
 
 class C
 {
@@ -2346,7 +2411,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"using System;
+                    @"using System;
 
 class C
 {
@@ -2368,7 +2433,7 @@ class C
     }
 }",
                 FixedCode =
-@"using System;
+                    @"using System;
 
 class C
 {

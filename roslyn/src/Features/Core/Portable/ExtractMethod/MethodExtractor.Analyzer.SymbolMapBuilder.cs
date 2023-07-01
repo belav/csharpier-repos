@@ -30,13 +30,19 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     SemanticModel semanticModel,
                     SyntaxNode root,
                     TextSpan span,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     Contract.ThrowIfNull(semanticModel);
                     Contract.ThrowIfNull(service);
                     Contract.ThrowIfNull(root);
 
-                    var builder = new SymbolMapBuilder(service, semanticModel, span, cancellationToken);
+                    var builder = new SymbolMapBuilder(
+                        service,
+                        semanticModel,
+                        span,
+                        cancellationToken
+                    );
                     builder.Visit(root);
 
                     return builder._symbolMap;
@@ -46,7 +52,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     ISyntaxFactsService service,
                     SemanticModel semanticModel,
                     TextSpan span,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                     : base(SyntaxWalkerDepth.Token)
                 {
                     _semanticModel = semanticModel;
@@ -57,11 +64,13 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 protected override void VisitToken(SyntaxToken token)
                 {
-                    if (token.IsMissing ||
-                        token.Width() <= 0 ||
-                        !_service.IsIdentifier(token) ||
-                        !_span.Contains(token.Span) ||
-                        _service.IsNameOfNamedArgument(token.Parent))
+                    if (
+                        token.IsMissing
+                        || token.Width() <= 0
+                        || !_service.IsIdentifier(token)
+                        || !_span.Contains(token.Span)
+                        || _service.IsNameOfNamedArgument(token.Parent)
+                    )
                     {
                         return;
                     }

@@ -17,7 +17,8 @@ internal static partial class Interop
         internal static byte[] OpenSslEncode<THandle>(
             GetEncodedSizeFunc<THandle> getSize,
             EncodeFunc<THandle> encode,
-            THandle handle)
+            THandle handle
+        )
             where THandle : SafeHandle
         {
             int size = getSize(handle);
@@ -33,7 +34,8 @@ internal static partial class Interop
             if (size2 < 1)
             {
                 Debug.Fail(
-                    $"{nameof(OpenSslEncode)}: {nameof(getSize)} succeeded ({size}) and {nameof(encode)} failed ({size2})");
+                    $"{nameof(OpenSslEncode)}: {nameof(getSize)} succeeded ({size}) and {nameof(encode)} failed ({size2})"
+                );
 
                 // If it ever happens, ensure the error queue gets cleared.
                 // And since it didn't write the data, reporting an exception is good too.
@@ -48,7 +50,8 @@ internal static partial class Interop
         internal static ArraySegment<byte> OpenSslRentEncode<THandle>(
             GetEncodedSizeFunc<THandle> getSize,
             EncodeFunc<THandle> encode,
-            THandle handle)
+            THandle handle
+        )
             where THandle : SafeHandle
         {
             int size = getSize(handle);
@@ -64,7 +67,8 @@ internal static partial class Interop
             if (size2 < 1)
             {
                 Debug.Fail(
-                    $"{nameof(OpenSslEncode)}: {nameof(getSize)} succeeded ({size}) and {nameof(encode)} failed ({size2})");
+                    $"{nameof(OpenSslEncode)}: {nameof(getSize)} succeeded ({size}) and {nameof(encode)} failed ({size2})"
+                );
 
                 // Since we don't know what was written, assume it was secret and have the
                 // CryptoPool.Return clear the whole array.

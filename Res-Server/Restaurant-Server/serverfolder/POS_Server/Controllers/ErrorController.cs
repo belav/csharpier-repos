@@ -15,16 +15,17 @@ using System.Web;
 namespace POS_Server.Controllers
 {
     [RoutePrefix("api/errorcontroller")]
-    public class ErrorController : ApiController 
+    public class ErrorController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -33,32 +34,35 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in entity.error
-                                select new ErrorModel()
-                                {
-                                    errorId = S.errorId,
-                                    num = S.num,
-                                    msg = S.msg,
-                                    stackTrace = S.stackTrace,
-                                    targetSite = S.targetSite,
-                                    posId = S.posId,
-                                    branchId = S.branchId,
-                                    createDate = S.createDate,
-                                    createUserId = S.createUserId,
-                                    source=S.source,
-                                    method=S.method,
-                                }).ToList();
+                    var List = (
+                        from S in entity.error
+                        select new ErrorModel()
+                        {
+                            errorId = S.errorId,
+                            num = S.num,
+                            msg = S.msg,
+                            stackTrace = S.stackTrace,
+                            targetSite = S.targetSite,
+                            posId = S.posId,
+                            branchId = S.branchId,
+                            createDate = S.createDate,
+                            createUserId = S.createUserId,
+                            source = S.source,
+                            method = S.method,
+                        }
+                    ).ToList();
                     return TokenManager.GenerateToken(List);
                 }
             }
         }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetByID")]
         public string GetByID(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -77,37 +81,39 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var row = entity.error
-                   .Where(u => u.errorId == errorId)
-                   .Select(S => new
-                   {
-                       S.errorId,
-
-                       S.num,
-                       S.msg,
-                       S.stackTrace,
-                       S.targetSite,
-                       S.posId,
-                       S.branchId,
-                       S.createDate,
-                       S.createUserId,
-                       S.source,
-                       S.method,
-
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.errorId == errorId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.errorId,
+                                    S.num,
+                                    S.msg,
+                                    S.stackTrace,
+                                    S.targetSite,
+                                    S.posId,
+                                    S.branchId,
+                                    S.createDate,
+                                    S.createUserId,
+                                    S.source,
+                                    S.method,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(row);
                 }
             }
         }
+
         // add or update location
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -123,7 +129,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<error>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<error>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -150,15 +159,17 @@ var strP = TokenManager.GetPrincipal(token);
                         var locationEntity = entity.Set<error>();
                         if (newObject.errorId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             locationEntity.Add(newObject);
                             entity.SaveChanges();
                             message = newObject.errorId.ToString();
-                    return TokenManager.GenerateToken(message);
+                            return TokenManager.GenerateToken(message);
                         }
                         else
                         {
-                            var tmpObject = entity.error.Where(p => p.errorId == newObject.errorId).FirstOrDefault();
+                            var tmpObject = entity.error
+                                .Where(p => p.errorId == newObject.errorId)
+                                .FirstOrDefault();
 
                             // newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
 
@@ -173,12 +184,10 @@ var strP = TokenManager.GetPrincipal(token);
                             tmpObject.source = newObject.source;
                             tmpObject.method = newObject.method;
 
-
-
                             entity.SaveChanges();
 
                             message = tmpObject.errorId.ToString();
-                    return TokenManager.GenerateToken(message);
+                            return TokenManager.GenerateToken(message);
                         }
                     }
                 }
@@ -189,13 +198,14 @@ var strP = TokenManager.GetPrincipal(token);
                 }
             }
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -221,17 +231,13 @@ var strP = TokenManager.GetPrincipal(token);
                         message = entity.SaveChanges().ToString();
 
                         return TokenManager.GenerateToken(message);
-
                     }
                 }
                 catch
                 {
                     message = "-1";
                     return TokenManager.GenerateToken(message);
-
                 }
-
-
             }
         }
     }

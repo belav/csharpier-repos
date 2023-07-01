@@ -28,11 +28,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CollectionJoinApplyingExpressionVisitor(RelationalQueryCompilationContext queryCompilationContext)
+        public CollectionJoinApplyingExpressionVisitor(
+            RelationalQueryCompilationContext queryCompilationContext
+        )
         {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
-            _splitQuery = queryCompilationContext.QuerySplittingBehavior == QuerySplittingBehavior.SplitQuery;
+            _splitQuery =
+                queryCompilationContext.QuerySplittingBehavior == QuerySplittingBehavior.SplitQuery;
             _noConfiguredBehavior = queryCompilationContext.QuerySplittingBehavior == null;
             _logger = queryCompilationContext.Logger;
         }
@@ -51,19 +54,22 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 var collectionId = _collectionId++;
 
-                if (_noConfiguredBehavior
-                    && _collectionId == 2)
+                if (_noConfiguredBehavior && _collectionId == 2)
                 {
                     _logger.MultipleCollectionIncludeWarning();
                 }
 
-                var projectionBindingExpression = (ProjectionBindingExpression)collectionShaperExpression.Projection;
-                var selectExpression = (SelectExpression)projectionBindingExpression.QueryExpression;
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    collectionShaperExpression.Projection;
+                var selectExpression = (SelectExpression)
+                    projectionBindingExpression.QueryExpression;
                 // Do pushdown beforehand so it updates all pending collections first
-                if (selectExpression.IsDistinct
+                if (
+                    selectExpression.IsDistinct
                     || selectExpression.Limit != null
                     || selectExpression.Offset != null
-                    || selectExpression.GroupBy.Count > 0)
+                    || selectExpression.GroupBy.Count > 0
+                )
                 {
                     selectExpression.PushdownIntoSubquery();
                 }
@@ -76,23 +82,27 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     innerShaper,
                     collectionShaperExpression.Navigation,
                     collectionShaperExpression.ElementType,
-                    _splitQuery);
+                    _splitQuery
+                );
 
-                if (_splitQuery
-                    && collectionJoin == null)
+                if (_splitQuery && collectionJoin == null)
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.UnableToSplitCollectionProjectionInSplitQuery(
                             $"{nameof(QuerySplittingBehavior)}.{QuerySplittingBehavior.SplitQuery}",
                             nameof(RelationalQueryableExtensions.AsSplitQuery),
-                            nameof(RelationalQueryableExtensions.AsSingleQuery)));
+                            nameof(RelationalQueryableExtensions.AsSingleQuery)
+                        )
+                    );
                 }
 
                 return collectionJoin!;
             }
 
             return extensionExpression is ShapedQueryExpression shapedQueryExpression
-                ? shapedQueryExpression.UpdateShaperExpression(Visit(shapedQueryExpression.ShaperExpression))
+                ? shapedQueryExpression.UpdateShaperExpression(
+                    Visit(shapedQueryExpression.ShaperExpression)
+                )
                 : base.VisitExtension(extensionExpression);
         }
     }

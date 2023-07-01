@@ -13,19 +13,30 @@ namespace BundleProbeTester
         // The bundle-probe callback is only called from native code in the product
         // Therefore the type on this test is adjusted to circumvent the failure.
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        public delegate byte BundleProbeDelegate([MarshalAs(UnmanagedType.LPUTF8Str)] string path, IntPtr offset, IntPtr size, IntPtr compressedSize);
+        public delegate byte BundleProbeDelegate(
+            [MarshalAs(UnmanagedType.LPUTF8Str)] string path,
+            IntPtr offset,
+            IntPtr size,
+            IntPtr compressedSize
+        );
 
-        unsafe static bool Probe(BundleProbeDelegate bundleProbe, string path, bool isExpected)
+        static unsafe bool Probe(BundleProbeDelegate bundleProbe, string path, bool isExpected)
         {
-            Int64 size, offset, compressedSize;
-            bool exists = bundleProbe(path, (IntPtr)(&offset), (IntPtr)(&size), (IntPtr)(&compressedSize)) != 0;
+            Int64 size,
+                offset,
+                compressedSize;
+            bool exists =
+                bundleProbe(path, (IntPtr)(&offset), (IntPtr)(&size), (IntPtr)(&compressedSize))
+                != 0;
 
             switch (exists, isExpected)
             {
                 case (true, true):
                     if (compressedSize < 0 || compressedSize > size)
                     {
-                        Console.WriteLine($"Invalid compressedSize obtained for {path} within bundle.");
+                        Console.WriteLine(
+                            $"Invalid compressedSize obtained for {path} within bundle."
+                        );
                         return false;
                     }
 
@@ -75,14 +86,19 @@ namespace BundleProbeTester
 
             string probeString = probeObject as string;
             IntPtr probePtr = (IntPtr)Convert.ToUInt64(probeString, 16);
-            BundleProbeDelegate bundleProbeDelegate = Marshal.GetDelegateForFunctionPointer<BundleProbeDelegate>(probePtr);
+            BundleProbeDelegate bundleProbeDelegate =
+                Marshal.GetDelegateForFunctionPointer<BundleProbeDelegate>(probePtr);
             bool success =
-                Probe(bundleProbeDelegate, "BundleProbeTester.dll", isExpected: true) &&
-                Probe(bundleProbeDelegate, "BundleProbeTester.runtimeconfig.json", isExpected: true) &&
-                Probe(bundleProbeDelegate, "System.Private.CoreLib.dll", isExpected: true) &&
-                Probe(bundleProbeDelegate, "hostpolicy.dll", isExpected: false) &&
-                Probe(bundleProbeDelegate, "--", isExpected: false) &&
-                Probe(bundleProbeDelegate, "", isExpected: false);
+                Probe(bundleProbeDelegate, "BundleProbeTester.dll", isExpected: true)
+                && Probe(
+                    bundleProbeDelegate,
+                    "BundleProbeTester.runtimeconfig.json",
+                    isExpected: true
+                )
+                && Probe(bundleProbeDelegate, "System.Private.CoreLib.dll", isExpected: true)
+                && Probe(bundleProbeDelegate, "hostpolicy.dll", isExpected: false)
+                && Probe(bundleProbeDelegate, "--", isExpected: false)
+                && Probe(bundleProbeDelegate, "", isExpected: false);
 
             if (!success)
             {

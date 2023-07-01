@@ -17,7 +17,9 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
 {
     public XmlSerializerFormattersWrappingTest(MvcTestFixture<Startup> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(builder => builder.UseStartup<Startup>());
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(builder => builder.UseStartup<Startup>());
         Client = Factory.CreateDefaultClient();
     }
 
@@ -39,10 +41,12 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfInt xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                     "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><int>10</int>" +
-                     "<int>20</int></ArrayOfInt>",
-                     result);
+        XmlAssert.Equal(
+            "<ArrayOfInt xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><int>10</int>"
+                + "<int>20</int></ArrayOfInt>",
+            result
+        );
     }
 
     [Theory]
@@ -60,10 +64,12 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                     "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><string>value1</string>" +
-                     "<string>value2</string></ArrayOfString>",
-                     result);
+        XmlAssert.Equal(
+            "<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><string>value1</string>"
+                + "<string>value2</string></ArrayOfString>",
+            result
+        );
     }
 
     [Theory]
@@ -81,9 +87,11 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-            " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xsi:nil=\"true\" />",
-            result);
+        XmlAssert.Equal(
+            "<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+                + " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xsi:nil=\"true\" />",
+            result
+        );
     }
 
     [Theory]
@@ -101,9 +109,11 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-            " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />",
-            result);
+        XmlAssert.Equal(
+            "<ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+                + " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />",
+            result
+        );
     }
 
     [Theory]
@@ -121,11 +131,13 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfPersonWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                     "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><PersonWrapper><Id>10</Id>" +
-                     "<Name>Mike</Name><Age>35</Age></PersonWrapper><PersonWrapper><Id>11</Id>" +
-                     "<Name>Jimmy</Name><Age>35</Age></PersonWrapper></ArrayOfPersonWrapper>",
-                     result);
+        XmlAssert.Equal(
+            "<ArrayOfPersonWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><PersonWrapper><Id>10</Id>"
+                + "<Name>Mike</Name><Age>35</Age></PersonWrapper><PersonWrapper><Id>11</Id>"
+                + "<Name>Jimmy</Name><Age>35</Age></PersonWrapper></ArrayOfPersonWrapper>",
+            result
+        );
     }
 
     [Theory]
@@ -143,9 +155,11 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfPersonWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-            " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />",
-            result);
+        XmlAssert.Equal(
+            "<ArrayOfPersonWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+                + " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />",
+            result
+        );
     }
 
     [Theory]
@@ -163,16 +177,21 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfPersonWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-            " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xsi:nil=\"true\" />",
-            result);
+        XmlAssert.Equal(
+            "<ArrayOfPersonWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+                + " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xsi:nil=\"true\" />",
+            result
+        );
     }
 
     [Fact]
     public async Task CanWrite_IEnumerableOf_SerializableErrors()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/IEnumerable/SerializableErrors");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "http://localhost/IEnumerable/SerializableErrors"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml-xmlser"));
 
         // Act
@@ -181,11 +200,13 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
-        XmlAssert.Equal("<ArrayOfSerializableErrorWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-            " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SerializableErrorWrapper><key1>key1-error</key1>" +
-            "<key2>key2-error</key2></SerializableErrorWrapper><SerializableErrorWrapper><key3>key1-error</key3>" +
-            "<key4>key2-error</key4></SerializableErrorWrapper></ArrayOfSerializableErrorWrapper>",
-            result);
+        XmlAssert.Equal(
+            "<ArrayOfSerializableErrorWrapper xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+                + " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SerializableErrorWrapper><key1>key1-error</key1>"
+                + "<key2>key2-error</key2></SerializableErrorWrapper><SerializableErrorWrapper><key3>key1-error</key3>"
+                + "<key4>key2-error</key4></SerializableErrorWrapper></ArrayOfSerializableErrorWrapper>",
+            result
+        );
     }
 
     [Fact]
@@ -194,15 +215,18 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         // Arrange
         using (new ActivityReplacer())
         {
-            var expected = "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-                "<status>404</status>" +
-                "<title>Not Found</title>" +
-                "<type>https://tools.ietf.org/html/rfc9110#section-15.5.5</type>" +
-                $"<traceId>{Activity.Current.Id}</traceId>" +
-                "</problem>";
+            var expected =
+                "<problem xmlns=\"urn:ietf:rfc:7807\">"
+                + "<status>404</status>"
+                + "<title>Not Found</title>"
+                + "<type>https://tools.ietf.org/html/rfc9110#section-15.5.5</type>"
+                + $"<traceId>{Activity.Current.Id}</traceId>"
+                + "</problem>";
 
             // Act
-            var response = await Client.GetAsync("/api/XmlSerializerApi/ActionReturningClientErrorStatusCodeResult");
+            var response = await Client.GetAsync(
+                "/api/XmlSerializerApi/ActionReturningClientErrorStatusCodeResult"
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.NotFound);
@@ -210,7 +234,10 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
             var root = XDocument.Parse(content).Root;
             Assert.Equal("404", root.Element(root.Name.Namespace.GetName("status"))?.Value);
             Assert.Equal("Not Found", root.Element(root.Name.Namespace.GetName("title"))?.Value);
-            Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.5.5", root.Element(root.Name.Namespace.GetName("type"))?.Value);
+            Assert.Equal(
+                "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+                root.Element(root.Name.Namespace.GetName("type"))?.Value
+            );
             // Activity is not null
             Assert.NotNull(root.Element(root.Name.Namespace.GetName("traceId"))?.Value);
         }
@@ -220,13 +247,14 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
     public async Task ProblemDetails_WithExtensionMembers_IsSerialized()
     {
         // Arrange
-        var expected = "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<instance>instance</instance>" +
-            "<status>404</status>" +
-            "<title>title</title>" +
-            "<Correlation>correlation</Correlation>" +
-            "<Accounts>Account1 Account2</Accounts>" +
-            "</problem>";
+        var expected =
+            "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<instance>instance</instance>"
+            + "<status>404</status>"
+            + "<title>title</title>"
+            + "<Correlation>correlation</Correlation>"
+            + "<Accounts>Account1 Account2</Accounts>"
+            + "</problem>";
 
         // Act
         var response = await Client.GetAsync("/api/XmlSerializerApi/ActionReturningProblemDetails");
@@ -244,17 +272,25 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
         using (new ActivityReplacer())
         {
             // Act
-            var response = await Client.GetAsync("/api/XmlSerializerApi/ActionReturningValidationProblem");
+            var response = await Client.GetAsync(
+                "/api/XmlSerializerApi/ActionReturningValidationProblem"
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
             var content = await response.Content.ReadAsStringAsync();
             var root = XDocument.Parse(content).Root;
             Assert.Equal("400", root.Element(root.Name.Namespace.GetName("status"))?.Value);
-            Assert.Equal("One or more validation errors occurred.", root.Element(root.Name.Namespace.GetName("title"))?.Value);
+            Assert.Equal(
+                "One or more validation errors occurred.",
+                root.Element(root.Name.Namespace.GetName("title"))?.Value
+            );
             var mvcErrors = root.Element(root.Name.Namespace.GetName("MVC-Errors"));
             Assert.NotNull(mvcErrors);
-            Assert.Equal("The State field is required.", mvcErrors.Element(root.Name.Namespace.GetName("State"))?.Value);
+            Assert.Equal(
+                "The State field is required.",
+                mvcErrors.Element(root.Name.Namespace.GetName("State"))?.Value
+            );
             // Activity is not null
             Assert.NotNull(root.Element(root.Name.Namespace.GetName("traceId"))?.Value);
         }
@@ -264,19 +300,22 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
     public async Task ValidationProblemDetails_WithExtensionMembers_IsSerialized()
     {
         // Arrange
-        var expected = "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<detail>some detail</detail>" +
-            "<status>400</status>" +
-            "<title>One or more validation errors occurred.</title>" +
-            "<type>some type</type>" +
-            "<CorrelationId>correlation</CorrelationId>" +
-            "<MVC-Errors>" +
-            "<Error1>ErrorValue</Error1>" +
-            "</MVC-Errors>" +
-            "</problem>";
+        var expected =
+            "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<detail>some detail</detail>"
+            + "<status>400</status>"
+            + "<title>One or more validation errors occurred.</title>"
+            + "<type>some type</type>"
+            + "<CorrelationId>correlation</CorrelationId>"
+            + "<MVC-Errors>"
+            + "<Error1>ErrorValue</Error1>"
+            + "</MVC-Errors>"
+            + "</problem>";
 
         // Act
-        var response = await Client.GetAsync("/api/XmlSerializerApi/ActionReturningValidationDetailsWithMetadata");
+        var response = await Client.GetAsync(
+            "/api/XmlSerializerApi/ActionReturningValidationDetailsWithMetadata"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);

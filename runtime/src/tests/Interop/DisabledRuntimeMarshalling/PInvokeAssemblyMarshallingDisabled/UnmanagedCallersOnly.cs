@@ -11,13 +11,19 @@ namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingDisabled;
 
 public unsafe class UnmanagedCallersOnly
 {
-
     [Fact]
     public static void UnmanagedCallersOnly_WithNonBlittableParameters_DoesNotMarshal()
     {
         short s = 41;
         bool b = true;
 
-        Assert.True(DisabledRuntimeMarshallingNative.CallCheckStructWithShortAndBoolCallback(&DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolManaged, new StructWithShortAndBool(s, b), s, b));
+        Assert.True(
+            DisabledRuntimeMarshallingNative.CallCheckStructWithShortAndBoolCallback(
+                &DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolManaged,
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            )
+        );
     }
 }

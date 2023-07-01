@@ -8,10 +8,13 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(ActivityScheduledQueryElement),
+    [ConfigurationCollection(
+        typeof(ActivityScheduledQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.ActivityScheduledQuery)]
-    public class ActivityScheduledQueryElementCollection : TrackingConfigurationCollection<ActivityScheduledQueryElement>
+        AddItemName = TrackingConfigurationStrings.ActivityScheduledQuery
+    )]
+    public class ActivityScheduledQueryElementCollection
+        : TrackingConfigurationCollection<ActivityScheduledQueryElement>
     {
         protected override string ElementName
         {

@@ -16,15 +16,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         private class ParseOptionChangedEventSource : AbstractWorkspaceTrackingTaggerEventSource
         {
             public ParseOptionChangedEventSource(ITextBuffer subjectBuffer)
-                : base(subjectBuffer)
-            {
-            }
+                : base(subjectBuffer) { }
 
-            protected override void ConnectToWorkspace(Workspace workspace)
-                => workspace.WorkspaceChanged += OnWorkspaceChanged;
+            protected override void ConnectToWorkspace(Workspace workspace) =>
+                workspace.WorkspaceChanged += OnWorkspaceChanged;
 
-            protected override void DisconnectFromWorkspace(Workspace workspace)
-                => workspace.WorkspaceChanged -= OnWorkspaceChanged;
+            protected override void DisconnectFromWorkspace(Workspace workspace) =>
+                workspace.WorkspaceChanged -= OnWorkspaceChanged;
 
             private void OnWorkspaceChanged(object? sender, WorkspaceChangeEventArgs e)
             {
@@ -37,12 +35,21 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                     if (!object.Equals(oldProject.ParseOptions, newProject.ParseOptions))
                     {
                         var workspace = e.NewSolution.Workspace;
-                        var documentId = workspace.GetDocumentIdInCurrentContext(SubjectBuffer.AsTextContainer());
+                        var documentId = workspace.GetDocumentIdInCurrentContext(
+                            SubjectBuffer.AsTextContainer()
+                        );
                         if (documentId != null)
                         {
-                            var relatedDocumentIds = e.NewSolution.GetRelatedDocumentIds(documentId);
+                            var relatedDocumentIds = e.NewSolution.GetRelatedDocumentIds(
+                                documentId
+                            );
 
-                            if (relatedDocumentIds.Any(static (d, e) => d.ProjectId == e.ProjectId, e))
+                            if (
+                                relatedDocumentIds.Any(
+                                    static (d, e) => d.ProjectId == e.ProjectId,
+                                    e
+                                )
+                            )
                             {
                                 RaiseChanged();
                             }

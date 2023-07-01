@@ -12,7 +12,6 @@ namespace System.Runtime.CompilerServices
     internal class __BlockReflectionAttribute : Attribute { }
 }
 
-
 public class BlockedTypesTests
 {
     public class My { }

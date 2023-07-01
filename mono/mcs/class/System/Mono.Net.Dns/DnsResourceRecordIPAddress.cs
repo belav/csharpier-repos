@@ -23,27 +23,29 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace Mono.Net.Dns {
-	abstract class DnsResourceRecordIPAddress : DnsResourceRecord {
-		IPAddress address;
+namespace Mono.Net.Dns
+{
+    abstract class DnsResourceRecordIPAddress : DnsResourceRecord
+    {
+        IPAddress address;
 
-		internal DnsResourceRecordIPAddress (DnsResourceRecord rr, int address_size)
-		{
-			CopyFrom (rr);
-			ArraySegment<byte> segment = rr.Data;
-			byte [] bytes = new byte [address_size];
-			Buffer.BlockCopy (segment.Array, segment.Offset, bytes, 0, address_size);
-			address = new IPAddress (bytes);
-		}
+        internal DnsResourceRecordIPAddress(DnsResourceRecord rr, int address_size)
+        {
+            CopyFrom(rr);
+            ArraySegment<byte> segment = rr.Data;
+            byte[] bytes = new byte[address_size];
+            Buffer.BlockCopy(segment.Array, segment.Offset, bytes, 0, address_size);
+            address = new IPAddress(bytes);
+        }
 
-		public override string ToString ()
-		{
-			return base.ToString() + " Address: " + address;
-		}
+        public override string ToString()
+        {
+            return base.ToString() + " Address: " + address;
+        }
 
-		public IPAddress Address {
-			get { return address; }
-		}
-	}
+        public IPAddress Address
+        {
+            get { return address; }
+        }
+    }
 }
-

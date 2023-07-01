@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,24 +25,28 @@ namespace Castle.Components.DictionaryAdapter
         private IDictionary extendedProperties;
         private List<IDictionaryCopyStrategy> copyStrategies;
 
-        public DictionaryAdapterInstance(IDictionary dictionary, DictionaryAdapterMeta meta,
-                                         PropertyDescriptor descriptor, IDictionaryAdapterFactory factory)
+        public DictionaryAdapterInstance(
+            IDictionary dictionary,
+            DictionaryAdapterMeta meta,
+            PropertyDescriptor descriptor,
+            IDictionaryAdapterFactory factory
+        )
         {
             Dictionary = dictionary;
             Descriptor = descriptor;
-            Factory    = factory;
+            Factory = factory;
 
             List<IDictionaryBehavior> behaviors;
 
             if (null == descriptor || null == (behaviors = descriptor.BehaviorsInternal))
             {
                 Initializers = meta.Initializers;
-                Properties   = MergeProperties(meta.Properties);
+                Properties = MergeProperties(meta.Properties);
             }
             else
             {
                 Initializers = MergeInitializers(meta.Initializers, behaviors);
-                Properties   = MergeProperties(meta.Properties, behaviors);
+                Properties = MergeProperties(meta.Properties, behaviors);
             }
         }
 
@@ -66,10 +70,7 @@ namespace Castle.Components.DictionaryAdapter
 
         public IEnumerable<IDictionaryCopyStrategy> CopyStrategies
         {
-            get
-            {
-                return copyStrategies ?? Enumerable.Empty<IDictionaryCopyStrategy>();
-            }
+            get { return copyStrategies ?? Enumerable.Empty<IDictionaryCopyStrategy>(); }
         }
 
         public void AddCopyStrategy(IDictionaryCopyStrategy copyStrategy)
@@ -96,9 +97,12 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         private static IDictionaryInitializer[] MergeInitializers(
-            IDictionaryInitializer[] source, List<IDictionaryBehavior> behaviors)
+            IDictionaryInitializer[] source,
+            List<IDictionaryBehavior> behaviors
+        )
         {
-            int index, count;
+            int index,
+                count;
             IDictionaryInitializer initializer;
             var result = null as List<IDictionaryInitializer>;
 
@@ -111,13 +115,12 @@ namespace Castle.Components.DictionaryAdapter
                 if (null != (initializer = behaviors[index] as IDictionaryInitializer))
                     PropertyDescriptor.MergeBehavior(ref result, initializer);
 
-            return result == null
-                ? NoInitializers
-                : result.ToArray();
+            return result == null ? NoInitializers : result.ToArray();
         }
 
         private static IDictionary<string, PropertyDescriptor> MergeProperties(
-            IDictionary<string, PropertyDescriptor> source)
+            IDictionary<string, PropertyDescriptor> source
+        )
         {
             var properties = new Dictionary<string, PropertyDescriptor>();
 
@@ -130,9 +133,12 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         private static IDictionary<string, PropertyDescriptor> MergeProperties(
-            IDictionary<string, PropertyDescriptor> source, List<IDictionaryBehavior> behaviors)
+            IDictionary<string, PropertyDescriptor> source,
+            List<IDictionaryBehavior> behaviors
+        )
         {
-            int index, count = behaviors.Count;
+            int index,
+                count = behaviors.Count;
             var properties = new Dictionary<string, PropertyDescriptor>();
 
             foreach (var sourceProperty in source)
@@ -148,7 +154,6 @@ namespace Castle.Components.DictionaryAdapter
             return properties;
         }
 
-        private static readonly IDictionaryInitializer[]
-            NoInitializers = { };
+        private static readonly IDictionaryInitializer[] NoInitializers = { };
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,23 +39,23 @@ using System.Runtime.InteropServices;
 
 // General Information about the System.Configuration.Install assembly
 
-[assembly: AssemblyTitle ("System.Configuration.Install.dll")]
-[assembly: AssemblyDescription ("System.Configuration.Install.dll")]
-[assembly: AssemblyDefaultAlias ("System.Configuration.Install.dll")]
+[assembly: AssemblyTitle("System.Configuration.Install.dll")]
+[assembly: AssemblyDescription("System.Configuration.Install.dll")]
+[assembly: AssemblyDefaultAlias("System.Configuration.Install.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: CLSCompliant (true)]
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: CLSCompliant(true)]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: ComCompatibleVersion (1, 0, 3300, 0)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: ComCompatibleVersion(1, 0, 3300, 0)]

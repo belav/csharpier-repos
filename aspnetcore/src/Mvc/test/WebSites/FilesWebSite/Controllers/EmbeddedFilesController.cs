@@ -13,7 +13,10 @@ public class EmbeddedFilesController : Controller
     {
         return new VirtualFileResult("/Greetings.txt", "text/plain")
         {
-            FileProvider = new EmbeddedFileProvider(GetType().GetTypeInfo().Assembly, "FilesWebSite.EmbeddedResources"),
+            FileProvider = new EmbeddedFileProvider(
+                GetType().GetTypeInfo().Assembly,
+                "FilesWebSite.EmbeddedResources"
+            ),
             FileDownloadName = "downloadName.txt",
             EnableRangeProcessing = true,
         };
@@ -23,7 +26,10 @@ public class EmbeddedFilesController : Controller
     {
         return new VirtualFileResult("/Greetings.txt", "text/plain")
         {
-            FileProvider = new EmbeddedFileProvider(GetType().GetTypeInfo().Assembly, "FilesWebSite.EmbeddedResources"),
+            FileProvider = new EmbeddedFileProvider(
+                GetType().GetTypeInfo().Assembly,
+                "FilesWebSite.EmbeddedResources"
+            ),
             FileDownloadName = "downloadName.txt",
         };
     }
@@ -32,7 +38,10 @@ public class EmbeddedFilesController : Controller
     {
         var file = new VirtualFileResult("/Greetings.txt", "text/plain")
         {
-            FileProvider = new EmbeddedFileProvider(GetType().GetTypeInfo().Assembly, "FilesWebSite.EmbeddedResources"),
+            FileProvider = new EmbeddedFileProvider(
+                GetType().GetTypeInfo().Assembly,
+                "FilesWebSite.EmbeddedResources"
+            ),
             FileDownloadName = "downloadName.txt",
             EnableRangeProcessing = true,
         };

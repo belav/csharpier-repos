@@ -11,12 +11,10 @@ using System.Runtime.InteropServices;
 public sealed class C
 {
     [DllImport("nonexistent.dll")]
-    extern static double GetDouble();
+    static extern double GetDouble();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void UseDouble(double d)
-    {
-    }
+    static void UseDouble(double d) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test(bool condition)
@@ -28,7 +26,7 @@ public sealed class C
 
         return 100;
     }
-    
+
     public static int Main()
     {
         return Test(false);

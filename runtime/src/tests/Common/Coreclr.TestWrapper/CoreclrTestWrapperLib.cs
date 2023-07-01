@@ -76,7 +76,7 @@ namespace CoreclrTestLib
 
     internal static class ProcessExtensions
     {
-        public unsafe static IEnumerable<Process> GetChildren(this Process process)
+        public static unsafe IEnumerable<Process> GetChildren(this Process process)
         {
             var children = new List<Process>();
             if (OperatingSystem.IsWindows())
@@ -94,10 +94,13 @@ namespace CoreclrTestLib
             return children;
         }
 
-        private unsafe static IEnumerable<Process> Windows_GetChildren(Process process)
+        private static unsafe IEnumerable<Process> Windows_GetChildren(Process process)
         {
             var children = new List<Process>();
-            IntPtr snapshot = Kernel32.CreateToolhelp32Snapshot(Kernel32.Toolhelp32Flags.TH32CS_SNAPPROCESS, 0);
+            IntPtr snapshot = Kernel32.CreateToolhelp32Snapshot(
+                Kernel32.Toolhelp32Flags.TH32CS_SNAPPROCESS,
+                0
+            );
             if (snapshot != IntPtr.Zero && snapshot.ToInt64() != Kernel32.INVALID_HANDLE)
             {
                 try
@@ -105,7 +108,10 @@ namespace CoreclrTestLib
                     children = new List<Process>();
                     int ppid = process.Id;
 
-                    var processEntry = new Kernel32.ProcessEntry32W { Size = sizeof(Kernel32.ProcessEntry32W) };
+                    var processEntry = new Kernel32.ProcessEntry32W
+                    {
+                        Size = sizeof(Kernel32.ProcessEntry32W)
+                    };
 
                     bool success = Kernel32.Process32FirstW(snapshot, ref processEntry);
                     while (success)
@@ -116,12 +122,11 @@ namespace CoreclrTestLib
                             {
                                 children.Add(Process.GetProcessById(processEntry.ProcessID));
                             }
-                            catch {}
+                            catch { }
                         }
 
                         success = Kernel32.Process32NextW(snapshot, ref processEntry);
                     }
-
                 }
                 finally
                 {
@@ -154,7 +159,9 @@ namespace CoreclrTestLib
 
                 using Process pgrep = Process.Start(pgrepInfo);
 
-                string[] pidStrings = pgrep.StandardOutput.ReadToEnd().Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                string[] pidStrings = pgrep.StandardOutput
+                    .ReadToEnd()
+                    .Split('\n', StringSplitOptions.RemoveEmptyEntries);
                 pgrep.WaitForExit();
 
                 childPids = new List<int>();
@@ -220,14 +227,19 @@ namespace CoreclrTestLib
             {
                 createdump.StartInfo.FileName = "sudo";
                 createdump.StartInfo.Arguments = $"{createdumpPath} " + arguments;
-                createdump.StartInfo.EnvironmentVariables.Add("DOTNET_DbgEnableElfDumpOnMacOS", "1");
+                createdump.StartInfo.EnvironmentVariables.Add(
+                    "DOTNET_DbgEnableElfDumpOnMacOS",
+                    "1"
+                );
             }
 
             createdump.StartInfo.UseShellExecute = false;
             createdump.StartInfo.RedirectStandardOutput = true;
             createdump.StartInfo.RedirectStandardError = true;
 
-            Console.WriteLine($"Invoking: {createdump.StartInfo.FileName} {createdump.StartInfo.Arguments}");
+            Console.WriteLine(
+                $"Invoking: {createdump.StartInfo.FileName} {createdump.StartInfo.Arguments}"
+            );
             createdump.Start();
 
             Task<string> copyOutput = createdump.StandardOutput.ReadToEndAsync();
@@ -255,7 +267,10 @@ namespace CoreclrTestLib
 
         // Finds all children processes starting with a process named childName
         // The children are sorted in the order they should be dumped
-        static unsafe IEnumerable<Process> FindChildProcessesByName(Process process, string childName)
+        static unsafe IEnumerable<Process> FindChildProcessesByName(
+            Process process,
+            string childName
+        )
         {
             var children = new Stack<Process>();
             Queue<Process> childrenToCheck = new Queue<Process>();
@@ -285,7 +300,14 @@ namespace CoreclrTestLib
             return children;
         }
 
-        public int RunTest(string executable, string outputFile, string errorFile, string category, string testBinaryBase, string outputDir)
+        public int RunTest(
+            string executable,
+            string outputFile,
+            string errorFile,
+            string category,
+            string testBinaryBase,
+            string outputDir
+        )
         {
             Debug.Assert(outputFile != errorFile);
 
@@ -295,8 +317,11 @@ namespace CoreclrTestLib
             // timeout.
             string environmentVar = Environment.GetEnvironmentVariable(TIMEOUT_ENVIRONMENT_VAR);
             int timeout = environmentVar != null ? int.Parse(environmentVar) : DEFAULT_TIMEOUT_MS;
-            bool collectCrashDumps = Environment.GetEnvironmentVariable(COLLECT_DUMPS_ENVIRONMENT_VAR) != null;
-            string crashDumpFolder = Environment.GetEnvironmentVariable(CRASH_DUMP_FOLDER_ENVIRONMENT_VAR);
+            bool collectCrashDumps =
+                Environment.GetEnvironmentVariable(COLLECT_DUMPS_ENVIRONMENT_VAR) != null;
+            string crashDumpFolder = Environment.GetEnvironmentVariable(
+                CRASH_DUMP_FOLDER_ENVIRONMENT_VAR
+            );
 
             var outputStream = new FileStream(outputFile, FileMode.Create);
             var errorStream = new FileStream(errorFile, FileMode.Create);
@@ -307,7 +332,9 @@ namespace CoreclrTestLib
             {
                 if (MobileAppHandler.IsRetryRequested(testBinaryBase))
                 {
-                    outputWriter.WriteLine("\nWork item retry had been requested earlier - skipping test...");
+                    outputWriter.WriteLine(
+                        "\nWork item retry had been requested earlier - skipping test..."
+                    );
                 }
                 else
                 {
@@ -334,14 +361,27 @@ namespace CoreclrTestLib
                     process.Start();
 
                     var cts = new CancellationTokenSource();
-                    Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(outputStream, 4096, cts.Token);
-                    Task copyError = process.StandardError.BaseStream.CopyToAsync(errorStream, 4096, cts.Token);
+                    Task copyOutput = process.StandardOutput.BaseStream.CopyToAsync(
+                        outputStream,
+                        4096,
+                        cts.Token
+                    );
+                    Task copyError = process.StandardError.BaseStream.CopyToAsync(
+                        errorStream,
+                        4096,
+                        cts.Token
+                    );
 
                     if (process.WaitForExit(timeout))
                     {
                         // Process completed. Check process.ExitCode here.
                         exitCode = process.ExitCode;
-                        MobileAppHandler.CheckExitCode(exitCode, testBinaryBase, category, outputWriter);
+                        MobileAppHandler.CheckExitCode(
+                            exitCode,
+                            testBinaryBase,
+                            category,
+                            outputWriter
+                        );
                         Task.WaitAll(copyOutput, copyError);
                     }
                     else
@@ -353,14 +393,26 @@ namespace CoreclrTestLib
                         {
                             cts.Cancel();
                         }
-                        catch {}
+                        catch { }
 
-                        outputWriter.WriteLine("\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}{2}{3}, start: {4}, end: {5})",
-                                executable, timeout, (environmentVar != null) ? " from variable " : "", (environmentVar != null) ? TIMEOUT_ENVIRONMENT_VAR : "",
-                                startTime.ToString(), endTime.ToString());
-                        errorWriter.WriteLine("\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}{2}{3}, start: {4}, end: {5})",
-                                executable, timeout, (environmentVar != null) ? " from variable " : "", (environmentVar != null) ? TIMEOUT_ENVIRONMENT_VAR : "",
-                                startTime.ToString(), endTime.ToString());
+                        outputWriter.WriteLine(
+                            "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}{2}{3}, start: {4}, end: {5})",
+                            executable,
+                            timeout,
+                            (environmentVar != null) ? " from variable " : "",
+                            (environmentVar != null) ? TIMEOUT_ENVIRONMENT_VAR : "",
+                            startTime.ToString(),
+                            endTime.ToString()
+                        );
+                        errorWriter.WriteLine(
+                            "\ncmdLine:{0} Timed Out (timeout in milliseconds: {1}{2}{3}, start: {4}, end: {5})",
+                            executable,
+                            timeout,
+                            (environmentVar != null) ? " from variable " : "",
+                            (environmentVar != null) ? TIMEOUT_ENVIRONMENT_VAR : "",
+                            startTime.ToString(),
+                            endTime.ToString()
+                        );
 
                         if (collectCrashDumps)
                         {
@@ -368,11 +420,19 @@ namespace CoreclrTestLib
                             {
                                 foreach (var child in FindChildProcessesByName(process, "corerun"))
                                 {
-                                    string crashDumpPath = Path.Combine(Path.GetFullPath(crashDumpFolder), string.Format("crashdump_{0}.dmp", child.Id));
-                                    Console.WriteLine($"Attempting to collect crash dump: {crashDumpPath}");
+                                    string crashDumpPath = Path.Combine(
+                                        Path.GetFullPath(crashDumpFolder),
+                                        string.Format("crashdump_{0}.dmp", child.Id)
+                                    );
+                                    Console.WriteLine(
+                                        $"Attempting to collect crash dump: {crashDumpPath}"
+                                    );
                                     if (CollectCrashDump(child, crashDumpPath))
                                     {
-                                        Console.WriteLine("Collected crash dump: {0}", crashDumpPath);
+                                        Console.WriteLine(
+                                            "Collected crash dump: {0}",
+                                            crashDumpPath
+                                        );
                                     }
                                     else
                                     {

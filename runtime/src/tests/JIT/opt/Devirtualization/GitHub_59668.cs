@@ -17,8 +17,7 @@ class Program
 {
     static int Main() => Test<string>();
 
-    [MethodImpl(MethodImplOptions.NoInlining | 
-                MethodImplOptions.AggressiveOptimization)]
+    [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static int Test<T>() => DoWork(new MyInterfaceImpl<T>());
 
     static int DoWork<T>(IMyInterface<T> a) => a.MyMethod();

@@ -6,22 +6,21 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-	internal sealed class DefaultExpressionCompiler : ExpressionCompiler
-	{
-		new public static readonly DefaultExpressionCompiler Instance = new DefaultExpressionCompiler();
+    internal sealed class DefaultExpressionCompiler : ExpressionCompiler
+    {
+        public static new readonly DefaultExpressionCompiler Instance =
+            new DefaultExpressionCompiler();
 
-		private DefaultExpressionCompiler()
-		{
-		}
+        private DefaultExpressionCompiler() { }
 
-		public override Delegate Compile(LambdaExpression expression)
-		{
-			return expression.Compile();
-		}
+        public override Delegate Compile(LambdaExpression expression)
+        {
+            return expression.Compile();
+        }
 
-		public override TDelegate Compile<TDelegate>(Expression<TDelegate> expression)
-		{
-			return expression.Compile();
-		}
-	}
+        public override TDelegate Compile<TDelegate>(Expression<TDelegate> expression)
+        {
+            return expression.Compile();
+        }
+    }
 }

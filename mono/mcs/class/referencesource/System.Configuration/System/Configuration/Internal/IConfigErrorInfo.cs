@@ -4,10 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration.Internal {
-
-    public interface IConfigErrorInfo {
-        string Filename   { get; }
-        int    LineNumber { get; }
+namespace System.Configuration.Internal
+{
+    public interface IConfigErrorInfo
+    {
+        string Filename { get; }
+        int LineNumber { get; }
     }
 }

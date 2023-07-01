@@ -12,7 +12,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel;
 /// </summary>
 public class EndpointConfiguration
 {
-    internal EndpointConfiguration(bool isHttps, ListenOptions listenOptions, HttpsConnectionAdapterOptions httpsOptions, IConfigurationSection configSection)
+    internal EndpointConfiguration(
+        bool isHttps,
+        ListenOptions listenOptions,
+        HttpsConnectionAdapterOptions httpsOptions,
+        IConfigurationSection configSection
+    )
     {
         IsHttps = isHttps;
         ListenOptions = listenOptions ?? throw new ArgumentNullException(nameof(listenOptions));

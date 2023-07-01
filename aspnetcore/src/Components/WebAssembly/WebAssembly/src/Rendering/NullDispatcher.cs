@@ -7,9 +7,7 @@ internal sealed class NullDispatcher : Dispatcher
 {
     public static readonly Dispatcher Instance = new NullDispatcher();
 
-    private NullDispatcher()
-    {
-    }
+    private NullDispatcher() { }
 
     public override bool CheckAccess() => true;
 

@@ -22,7 +22,8 @@ public class FilterCollection : Collection<IFilterMetadata>
     /// Use <see cref="AddService(Type)"/> to register a service as a filter.
     /// The added filter will be assigned an order of 0.
     /// </remarks>
-    public IFilterMetadata Add<TFilterType>() where TFilterType : IFilterMetadata
+    public IFilterMetadata Add<TFilterType>()
+        where TFilterType : IFilterMetadata
     {
         return Add(typeof(TFilterType));
     }
@@ -59,7 +60,8 @@ public class FilterCollection : Collection<IFilterMetadata>
     /// <see cref="Microsoft.Extensions.DependencyInjection.ActivatorUtilities"/>.
     /// Use <see cref="AddService(Type)"/> to register a service as a filter.
     /// </remarks>
-    public IFilterMetadata Add<TFilterType>(int order) where TFilterType : IFilterMetadata
+    public IFilterMetadata Add<TFilterType>(int order)
+        where TFilterType : IFilterMetadata
     {
         return Add(typeof(TFilterType), order);
     }
@@ -86,7 +88,8 @@ public class FilterCollection : Collection<IFilterMetadata>
         {
             var message = Resources.FormatTypeMustDeriveFromType(
                 filterType.FullName,
-                typeof(IFilterMetadata).FullName);
+                typeof(IFilterMetadata).FullName
+            );
             throw new ArgumentException(message, nameof(filterType));
         }
 
@@ -106,7 +109,8 @@ public class FilterCollection : Collection<IFilterMetadata>
     /// type activation.
     /// The added filter will be assigned an order of 0.
     /// </remarks>
-    public IFilterMetadata AddService<TFilterType>() where TFilterType : IFilterMetadata
+    public IFilterMetadata AddService<TFilterType>()
+        where TFilterType : IFilterMetadata
     {
         return AddService(typeof(TFilterType));
     }
@@ -143,7 +147,8 @@ public class FilterCollection : Collection<IFilterMetadata>
     /// <see cref="Add(Type)"/> to register a service that will be created via
     /// type activation.
     /// </remarks>
-    public IFilterMetadata AddService<TFilterType>(int order) where TFilterType : IFilterMetadata
+    public IFilterMetadata AddService<TFilterType>(int order)
+        where TFilterType : IFilterMetadata
     {
         return AddService(typeof(TFilterType), order);
     }
@@ -170,7 +175,8 @@ public class FilterCollection : Collection<IFilterMetadata>
         {
             var message = Resources.FormatTypeMustDeriveFromType(
                 filterType.FullName,
-                typeof(IFilterMetadata).FullName);
+                typeof(IFilterMetadata).FullName
+            );
             throw new ArgumentException(message, nameof(filterType));
         }
 

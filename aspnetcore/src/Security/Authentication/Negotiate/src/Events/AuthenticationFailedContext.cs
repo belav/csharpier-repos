@@ -17,7 +17,8 @@ public class AuthenticationFailedContext : RemoteAuthenticationContext<Negotiate
     public AuthenticationFailedContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        NegotiateOptions options)
+        NegotiateOptions options
+    )
         : base(context, scheme, options, properties: null) { }
 
     /// <summary>

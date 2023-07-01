@@ -10,15 +10,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class ComponentWithParametersTest : ServerTestBase<BasicTestAppServerSiteFixture<PrerenderedStartup>>
+public class ComponentWithParametersTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<PrerenderedStartup>>
 {
     public ComponentWithParametersTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<PrerenderedStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void PassingParametersToComponentsFromThePageWorks()
@@ -43,7 +43,8 @@ public class ComponentWithParametersTest : ServerTestBase<BasicTestAppServerSite
         Assert.Collection(
             parameter3,
             p => Assert.Equal("key1 testQueryValue", p.Text),
-            p => Assert.Equal("key2 43", p.Text));
+            p => Assert.Equal("key2 43", p.Text)
+        );
     }
 
     private void BeginInteractivity()

@@ -33,10 +33,13 @@ namespace SslStress
         }
 
         public int Length { get; }
+
         public Memory<byte> AsMemory() => new Memory<byte>(_buffer, 0, Length);
+
         public Span<byte> AsSpan() => new Span<byte>(_buffer, 0, Length);
 
         public ulong Checksum => CRC.CalculateCRC(AsSpan());
+
         public void Return()
         {
             byte[] toReturn = _buffer;
@@ -57,17 +60,17 @@ namespace SslStress
             return chunk;
         }
 
-        private static readonly byte[] s_bytePool =
-            Enumerable
-                .Range(0, 256)
-                .Select(i => (byte)i)
-                .Where(b => b != (byte)'\n')
-                .ToArray();
+        private static readonly byte[] s_bytePool = Enumerable
+            .Range(0, 256)
+            .Select(i => (byte)i)
+            .Where(b => b != (byte)'\n')
+            .ToArray();
     }
 
     public class DataMismatchException : Exception
     {
-        public DataMismatchException(string message) : base(message) { }
+        public DataMismatchException(string message)
+            : base(message) { }
     }
 
     // Serializes data segment using the following format: <length>,<checksum>,<data>
@@ -78,7 +81,12 @@ namespace SslStress
         private readonly byte[] _buffer = new byte[32];
         private readonly char[] _charBuffer = new char[32];
 
-        public async Task SerializeAsync(Stream stream, DataSegment segment, Random? random = null, CancellationToken token = default)
+        public async Task SerializeAsync(
+            Stream stream,
+            DataSegment segment,
+            Random? random = null,
+            CancellationToken token = default
+        )
         {
             // length
             int numsize = s_encoding.GetBytes(segment.Length.ToString(), _buffer);
@@ -192,9 +200,18 @@ namespace SslStress
     // Applies backpressure if the difference between sent and received segments is too large.
     public sealed class StressClient : SslClientBase
     {
-        public StressClient(Configuration config) : base(config) { }
+        public StressClient(Configuration config)
+            : base(config) { }
 
-        protected override async Task HandleConnection(int workerId, long jobId, SslStream stream, TcpClient client, Random random, TimeSpan duration, CancellationToken token)
+        protected override async Task HandleConnection(
+            int workerId,
+            long jobId,
+            SslStream stream,
+            TcpClient client,
+            Random random,
+            TimeSpan duration,
+            CancellationToken token
+        )
         {
             // token used for signalling cooperative cancellation; do not pass this to SslStream methods
             using var connectionLifetimeToken = new CancellationTokenSource(duration);
@@ -203,13 +220,21 @@ namespace SslStress
             DateTime lastWrite = DateTime.Now;
             DateTime lastRead = DateTime.Now;
 
-            await StressTaskExtensions.WhenAllThrowOnFirstException(token, Sender, Receiver, Monitor);
+            await StressTaskExtensions.WhenAllThrowOnFirstException(
+                token,
+                Sender,
+                Receiver,
+                Monitor
+            );
 
             async Task Sender(CancellationToken token)
             {
                 var serializer = new DataSegmentSerializer();
 
-                while (!token.IsCancellationRequested && !connectionLifetimeToken.IsCancellationRequested)
+                while (
+                    !token.IsCancellationRequested
+                    && !connectionLifetimeToken.IsCancellationRequested
+                )
                 {
                     await ApplyBackpressure();
 
@@ -240,7 +265,11 @@ namespace SslStress
                         Stopwatch stopwatch = Stopwatch.StartNew();
                         bool isLogged = false;
 
-                        while (!token.IsCancellationRequested && !connectionLifetimeToken.IsCancellationRequested && Volatile.Read(ref messagesInFlight) > 2000)
+                        while (
+                            !token.IsCancellationRequested
+                            && !connectionLifetimeToken.IsCancellationRequested
+                            && Volatile.Read(ref messagesInFlight) > 2000
+                        )
                         {
                             // only log if tx has been suspended for a while
                             if (!isLogged && stopwatch.ElapsedMilliseconds >= 1000)
@@ -258,9 +287,11 @@ namespace SslStress
                             await Task.Delay(20);
                         }
 
-                        if(isLogged)
+                        if (isLogged)
                         {
-                            Console.WriteLine($"worker #{workerId}: resumed tx after {stopwatch.Elapsed}");
+                            Console.WriteLine(
+                                $"worker #{workerId}: resumed tx after {stopwatch.Elapsed}"
+                            );
                         }
                     }
                 }
@@ -297,17 +328,23 @@ namespace SslStress
                 {
                     await Task.Delay(500);
 
-                    if((DateTime.Now - lastWrite) >= TimeSpan.FromSeconds(10))
+                    if ((DateTime.Now - lastWrite) >= TimeSpan.FromSeconds(10))
                     {
-                        throw new Exception($"worker #{workerId} job #{jobId} has stopped writing bytes to server");
+                        throw new Exception(
+                            $"worker #{workerId} job #{jobId} has stopped writing bytes to server"
+                        );
                     }
 
-                    if((DateTime.Now - lastRead) >= TimeSpan.FromSeconds(10))
+                    if ((DateTime.Now - lastRead) >= TimeSpan.FromSeconds(10))
                     {
-                        throw new Exception($"worker #{workerId} job #{jobId} has stopped receiving bytes from server");
+                        throw new Exception(
+                            $"worker #{workerId} job #{jobId} has stopped receiving bytes from server"
+                        );
                     }
-                }
-                while(!token.IsCancellationRequested && !connectionLifetimeToken.IsCancellationRequested);
+                } while (
+                    !token.IsCancellationRequested
+                    && !connectionLifetimeToken.IsCancellationRequested
+                );
             }
         }
     }
@@ -317,11 +354,18 @@ namespace SslStress
     // Sets up a pipeline reader which validates checksums and echoes back data.
     public sealed class StressServer : SslServerBase
     {
-        public StressServer(Configuration config) : base(config) { }
+        public StressServer(Configuration config)
+            : base(config) { }
 
-        protected override async Task HandleConnection(SslStream sslStream, TcpClient client, CancellationToken token)
+        protected override async Task HandleConnection(
+            SslStream sslStream,
+            TcpClient client,
+            CancellationToken token
+        )
         {
-            using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(token);
+            using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(
+                token
+            );
             DateTime lastReadTime = DateTime.Now;
 
             var serializer = new DataSegmentSerializer();
@@ -379,7 +423,6 @@ namespace SslStress
                     {
                         cts.Cancel();
                     }
-
                 } while (!cts.IsCancellationRequested);
             }
         }

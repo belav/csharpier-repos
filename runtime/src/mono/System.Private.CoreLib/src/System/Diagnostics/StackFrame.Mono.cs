@@ -22,7 +22,8 @@ namespace System.Diagnostics
                 _columnNumber = monoStackFrame.columnNumber;
             }
 
-            _isLastFrameFromForeignExceptionStackTrace = monoStackFrame.isLastFrameFromForeignException;
+            _isLastFrameFromForeignExceptionStackTrace =
+                monoStackFrame.isLastFrameFromForeignException;
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -30,7 +31,19 @@ namespace System.Diagnostics
         {
             const int SystemDiagnosticsStackDepth = 3;
 
-            if (skipFrames + SystemDiagnosticsStackDepth < 0 || !get_frame_info(skipFrames + SystemDiagnosticsStackDepth, needFileInfo, out MethodBase? method, out int ilOffset, out int nativeOffset, out string? fileName, out int line, out int column))
+            if (
+                skipFrames + SystemDiagnosticsStackDepth < 0
+                || !get_frame_info(
+                    skipFrames + SystemDiagnosticsStackDepth,
+                    needFileInfo,
+                    out MethodBase? method,
+                    out int ilOffset,
+                    out int nativeOffset,
+                    out string? fileName,
+                    out int line,
+                    out int column
+                )
+            )
                 return;
 
             _method = method;
@@ -50,8 +63,15 @@ namespace System.Diagnostics
 #pragma warning restore IDE0060
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern bool get_frame_info(int skipFrames, bool needFileInfo,
-            out MethodBase method, out int ilOffset, out int nativeOffset, out string file, out int line, out int column);
-
+        private static extern bool get_frame_info(
+            int skipFrames,
+            bool needFileInfo,
+            out MethodBase method,
+            out int ilOffset,
+            out int nativeOffset,
+            out string file,
+            out int line,
+            out int column
+        );
     }
 }

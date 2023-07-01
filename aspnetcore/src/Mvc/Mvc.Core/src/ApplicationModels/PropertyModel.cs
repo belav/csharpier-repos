@@ -18,9 +18,7 @@ public class PropertyModel : ParameterModelBase, ICommonModel, IBindingModel
     /// </summary>
     /// <param name="propertyInfo">The <see cref="PropertyInfo"/> for the underlying property.</param>
     /// <param name="attributes">Any attributes which are annotated on the property.</param>
-    public PropertyModel(
-        PropertyInfo propertyInfo,
-        IReadOnlyList<object> attributes)
+    public PropertyModel(PropertyInfo propertyInfo, IReadOnlyList<object> attributes)
         : base(propertyInfo.PropertyType, attributes)
     {
         PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));

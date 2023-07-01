@@ -18,19 +18,18 @@ public class SqlServerMigrationsAnnotationProvider : MigrationsAnnotationProvide
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
 #pragma warning disable EF1001 // Internal EF Core API usage.
-    public SqlServerMigrationsAnnotationProvider(MigrationsAnnotationProviderDependencies dependencies)
+    public SqlServerMigrationsAnnotationProvider(
+        MigrationsAnnotationProviderDependencies dependencies
+    )
 #pragma warning restore EF1001 // Internal EF Core API usage.
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
-    public override IEnumerable<IAnnotation> ForRemove(IRelationalModel model)
-        => model.GetAnnotations().Where(a => a.Name != SqlServerAnnotationNames.EditionOptions);
+    public override IEnumerable<IAnnotation> ForRemove(IRelationalModel model) =>
+        model.GetAnnotations().Where(a => a.Name != SqlServerAnnotationNames.EditionOptions);
 
     /// <inheritdoc />
-    public override IEnumerable<IAnnotation> ForRemove(ITable table)
-        => table.GetAnnotations();
+    public override IEnumerable<IAnnotation> ForRemove(ITable table) => table.GetAnnotations();
 
     /// <inheritdoc />
     public override IEnumerable<IAnnotation> ForRemove(IUniqueConstraint constraint)
@@ -41,19 +40,23 @@ public class SqlServerMigrationsAnnotationProvider : MigrationsAnnotationProvide
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalPeriodStartColumnName,
-                constraint.Table[SqlServerAnnotationNames.TemporalPeriodStartColumnName]);
+                constraint.Table[SqlServerAnnotationNames.TemporalPeriodStartColumnName]
+            );
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalPeriodEndColumnName,
-                constraint.Table[SqlServerAnnotationNames.TemporalPeriodEndColumnName]);
+                constraint.Table[SqlServerAnnotationNames.TemporalPeriodEndColumnName]
+            );
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableName,
-                constraint.Table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                constraint.Table[SqlServerAnnotationNames.TemporalHistoryTableName]
+            );
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableSchema,
-                constraint.Table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                constraint.Table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+            );
         }
     }
 
@@ -66,24 +69,34 @@ public class SqlServerMigrationsAnnotationProvider : MigrationsAnnotationProvide
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableName,
-                column.Table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                column.Table[SqlServerAnnotationNames.TemporalHistoryTableName]
+            );
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableSchema,
-                column.Table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                column.Table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+            );
 
-            if (column[SqlServerAnnotationNames.TemporalPeriodStartColumnName] is string periodStartColumnName)
+            if (
+                column[SqlServerAnnotationNames.TemporalPeriodStartColumnName]
+                is string periodStartColumnName
+            )
             {
                 yield return new Annotation(
                     SqlServerAnnotationNames.TemporalPeriodStartColumnName,
-                    periodStartColumnName);
+                    periodStartColumnName
+                );
             }
 
-            if (column[SqlServerAnnotationNames.TemporalPeriodEndColumnName] is string periodEndColumnName)
+            if (
+                column[SqlServerAnnotationNames.TemporalPeriodEndColumnName]
+                is string periodEndColumnName
+            )
             {
                 yield return new Annotation(
                     SqlServerAnnotationNames.TemporalPeriodEndColumnName,
-                    periodEndColumnName);
+                    periodEndColumnName
+                );
             }
         }
     }
@@ -97,11 +110,13 @@ public class SqlServerMigrationsAnnotationProvider : MigrationsAnnotationProvide
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableName,
-                table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                table[SqlServerAnnotationNames.TemporalHistoryTableName]
+            );
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableSchema,
-                table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+            );
         }
     }
 
@@ -114,24 +129,34 @@ public class SqlServerMigrationsAnnotationProvider : MigrationsAnnotationProvide
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableName,
-                column.Table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                column.Table[SqlServerAnnotationNames.TemporalHistoryTableName]
+            );
 
             yield return new Annotation(
                 SqlServerAnnotationNames.TemporalHistoryTableSchema,
-                column.Table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                column.Table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+            );
 
-            if (column[SqlServerAnnotationNames.TemporalPeriodStartColumnName] is string periodStartColumnName)
+            if (
+                column[SqlServerAnnotationNames.TemporalPeriodStartColumnName]
+                is string periodStartColumnName
+            )
             {
                 yield return new Annotation(
                     SqlServerAnnotationNames.TemporalPeriodStartColumnName,
-                    periodStartColumnName);
+                    periodStartColumnName
+                );
             }
 
-            if (column[SqlServerAnnotationNames.TemporalPeriodEndColumnName] is string periodEndColumnName)
+            if (
+                column[SqlServerAnnotationNames.TemporalPeriodEndColumnName]
+                is string periodEndColumnName
+            )
             {
                 yield return new Annotation(
                     SqlServerAnnotationNames.TemporalPeriodEndColumnName,
-                    periodEndColumnName);
+                    periodEndColumnName
+                );
             }
         }
     }

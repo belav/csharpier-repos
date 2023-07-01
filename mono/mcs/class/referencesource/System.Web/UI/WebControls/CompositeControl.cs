@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System.ComponentModel;
     using System.Web.Util;
 
@@ -18,26 +18,29 @@ namespace System.Web.UI.WebControls {
     /// - LoginView
     /// - SiteMapPath
     /// </devdoc>
-    [
-    Designer("System.Web.UI.Design.WebControls.CompositeControlDesigner, " + AssemblyRef.SystemDesign)
-    ]
-    public abstract class CompositeControl : WebControl, INamingContainer, ICompositeControlDesignerAccessor {
-
-
+    [Designer(
+        "System.Web.UI.Design.WebControls.CompositeControlDesigner, " + AssemblyRef.SystemDesign
+    )]
+    public abstract class CompositeControl
+        : WebControl,
+            INamingContainer,
+            ICompositeControlDesignerAccessor
+    {
         /// <devdoc>
         /// Ensure that the child controls have been created before returning the controls collection
         /// </devdoc>
-        public override ControlCollection Controls {
-            get {
+        public override ControlCollection Controls
+        {
+            get
+            {
                 EnsureChildControls();
                 return base.Controls;
             }
         }
 
-        public override bool SupportsDisabledAttribute {
-            get {
-                return RenderingCompatibility < VersionUtil.Framework40;
-            }
+        public override bool SupportsDisabledAttribute
+        {
+            get { return RenderingCompatibility < VersionUtil.Framework40; }
         }
 
         /// <devdoc>
@@ -45,7 +48,8 @@ namespace System.Web.UI.WebControls {
         /// Does not call Base.DataBind(), since we need to call EnsureChildControls() between
         /// OnDataBinding() and DataBindChildren().
         /// </devdoc>
-        public override void DataBind() {
+        public override void DataBind()
+        {
             OnDataBinding(EventArgs.Empty);
 
             EnsureChildControls();
@@ -53,15 +57,18 @@ namespace System.Web.UI.WebControls {
             DataBindChildren();
         }
 
-        protected virtual void RecreateChildControls() {
+        protected virtual void RecreateChildControls()
+        {
             ChildControlsCreated = false;
             EnsureChildControls();
         }
 
         // Needed so the CompositeControl renders correctly in the designer, even when it does not have
         // an associated ControlDesigner (i.e. it is a child control of another CompositeControl).
-        protected internal override void Render(HtmlTextWriter writer) {
-            if (DesignMode) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            if (DesignMode)
+            {
                 EnsureChildControls();
             }
 
@@ -69,7 +76,8 @@ namespace System.Web.UI.WebControls {
         }
 
         #region ICompositeControlDesignerAccessor implementation
-        void ICompositeControlDesignerAccessor.RecreateChildControls() {
+        void ICompositeControlDesignerAccessor.RecreateChildControls()
+        {
             RecreateChildControls();
         }
         #endregion

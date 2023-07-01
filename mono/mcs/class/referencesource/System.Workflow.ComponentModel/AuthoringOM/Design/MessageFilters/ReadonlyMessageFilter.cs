@@ -11,9 +11,7 @@
     internal sealed class ReadonlyMessageFilter : WorkflowDesignerMessageFilter
     {
         #region Members and Contructor/Destruction
-        public ReadonlyMessageFilter()
-        {
-        }
+        public ReadonlyMessageFilter() { }
         #endregion
 
         #region MessageFilter Overridables

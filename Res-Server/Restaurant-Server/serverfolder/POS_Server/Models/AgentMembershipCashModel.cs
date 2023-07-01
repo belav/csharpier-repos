@@ -7,8 +7,6 @@ namespace POS_Server.Models
 {
     public class AgentMembershipCashModel
     {
-
-
         public long agentMembershipCashId { get; set; }
         public Nullable<long> subscriptionFeesId { get; set; }
         public Nullable<long> cashTransId { get; set; }
@@ -24,9 +22,7 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public string subscriptionType { get; set; }
 
-
         public decimal Amount { get; set; }
-      
 
         public bool canDelete { get; set; }
         public Nullable<int> monthsCount { get; set; }
@@ -36,7 +32,6 @@ namespace POS_Server.Models
         public string agenttype { get; set; }
         public string membershipName { get; set; }
 
-        
         public string membershipcode { get; set; }
         public string transType { get; set; }
         public string transNum { get; set; }
@@ -48,13 +43,10 @@ namespace POS_Server.Models
         public Nullable<long> cardId { get; set; }
         public string cardName { get; set; }
         public string docNum { get; set; }
-
     }
+
     public class AgenttoPayCashModel
     {
-
-
-   
         public Nullable<long> agentMembershipCashId { get; set; }
         public Nullable<long> subscriptionFeesId { get; set; }
         public Nullable<long> cashTransId { get; set; }
@@ -62,10 +54,12 @@ namespace POS_Server.Models
         public Nullable<long> agentId { get; set; }
         public Nullable<System.DateTime> startDate { get; set; }
         public Nullable<System.DateTime> endDate { get; set; }
+
         //public Nullable<long> updateUserId { get; set; }
         //public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<System.DateTime> updateDate { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
+
         //public Nullable<long> createUserId { get; set; }
         public decimal Amount { get; set; }
         public Nullable<long> pointId { get; set; }
@@ -76,12 +70,12 @@ namespace POS_Server.Models
         public string agentemail { get; set; }
         public string agentphone { get; set; }
         public string agentmobile { get; set; }
-     
+
         public string agenttype { get; set; }
         public string agentaccType { get; set; }
         public decimal agentbalance { get; set; }
         public byte agentbalanceType { get; set; }
-       
+
         public string agentfax { get; set; }
         public decimal agentmaxDeserve { get; set; }
         public bool agentisLimited { get; set; }
@@ -109,15 +103,13 @@ namespace POS_Server.Models
         public decimal total { get; set; }
         public string processType { get; set; }
 
-
         public int couponsCount { get; set; }
         public int invoicesClassesCount { get; set; }
         public int offersCount { get; set; }
+
         //public Nullable<int> cachpayrowCount { get; set; }
         public AgentMembershipCashModel agentMembershipcashobj { get; set; }
-        public  List<AgentMembershipCashModel> agentMembershipcashobjList { get; set; }
-     
-
+        public List<AgentMembershipCashModel> agentMembershipcashobjList { get; set; }
     }
     /*
      * public long agentId { get; set; }

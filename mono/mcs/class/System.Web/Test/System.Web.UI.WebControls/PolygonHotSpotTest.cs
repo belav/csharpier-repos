@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,7 +41,6 @@ namespace MonoTests.System.Web.UI.WebControls
     [TestFixture]
     public class PolygonHotSpotTest
     {
-
         [Test]
         public void PolygonHotSpot_DefaultProperties()
         {
@@ -59,11 +58,15 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         public void PolygonHotSpot_GetCoordinates()
-         {
+        {
             PolygonHotSpot polygon = new PolygonHotSpot();
             polygon.Coordinates = "10,20,30,40,50,60,70,80";
             Assert.AreEqual("10,20,30,40,50,60,70,80", polygon.Coordinates, "BeforeGetCoordinates");
-            Assert.AreEqual("10,20,30,40,50,60,70,80", polygon.GetCoordinates(), "AfterGetCoordinates");
+            Assert.AreEqual(
+                "10,20,30,40,50,60,70,80",
+                polygon.GetCoordinates(),
+                "AfterGetCoordinates"
+            );
         }
 
         [Test]
@@ -74,5 +77,3 @@ namespace MonoTests.System.Web.UI.WebControls
         }
     }
 }
-
-

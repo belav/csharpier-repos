@@ -11,5 +11,6 @@ namespace Microsoft.Interop
         Compilation Compilation,
         TargetFramework TargetFramework,
         Version TargetFrameworkVersion,
-        bool ModuleSkipLocalsInit);
+        bool ModuleSkipLocalsInit
+    );
 }

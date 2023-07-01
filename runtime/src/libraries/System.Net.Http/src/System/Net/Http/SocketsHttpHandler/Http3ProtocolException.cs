@@ -14,12 +14,14 @@ namespace System.Net.Http
     {
         public Http3ErrorCode ErrorCode { get; }
 
-        protected Http3ProtocolException(string message, Http3ErrorCode errorCode) : base(message)
+        protected Http3ProtocolException(string message, Http3ErrorCode errorCode)
+            : base(message)
         {
             ErrorCode = errorCode;
         }
 
-        protected Http3ProtocolException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected Http3ProtocolException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             ErrorCode = (Http3ErrorCode)info.GetUInt32(nameof(ErrorCode));
         }

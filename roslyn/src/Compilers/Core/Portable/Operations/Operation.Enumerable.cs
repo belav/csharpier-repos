@@ -53,6 +53,7 @@ namespace Microsoft.CodeAnalysis
             }
 
             IEnumerator<IOperation> IEnumerable<IOperation>.GetEnumerator() => this.GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
         }
 
@@ -90,7 +91,10 @@ namespace Microsoft.CodeAnalysis
             public bool MoveNext()
             {
                 bool result;
-                (result, _currentSlot, _currentIndex) = _operation.MoveNext(_currentSlot, _currentIndex);
+                (result, _currentSlot, _currentIndex) = _operation.MoveNext(
+                    _currentSlot,
+                    _currentIndex
+                );
                 return result;
             }
 
@@ -101,6 +105,7 @@ namespace Microsoft.CodeAnalysis
             }
 
             object? IEnumerator.Current => this.Current;
+
             void IDisposable.Dispose() { }
         }
     }

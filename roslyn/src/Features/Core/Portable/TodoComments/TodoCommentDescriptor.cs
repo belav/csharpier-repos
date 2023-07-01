@@ -42,7 +42,14 @@ namespace Microsoft.CodeAnalysis.TodoComments
                 if (pair.Length != 2 || string.IsNullOrWhiteSpace(pair[0]))
                     continue;
 
-                if (!int.TryParse(pair[1], NumberStyles.None, CultureInfo.InvariantCulture, out var priority))
+                if (
+                    !int.TryParse(
+                        pair[1],
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out var priority
+                    )
+                )
                     continue;
 
                 result.Add(new TodoCommentDescriptor(pair[0].Trim(), priority));

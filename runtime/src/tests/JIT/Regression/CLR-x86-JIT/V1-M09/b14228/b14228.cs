@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace DefaultNamespace
 {
     public class MainClass

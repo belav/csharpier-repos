@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-
 internal class baseclass
 {
     public virtual int virtualmethod(int a, int b)
@@ -22,11 +21,13 @@ internal class Test : baseclass
     {
         return a / b;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public int testmethod2(int a, int b)
     {
         return a / b;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public override int virtualmethod(int a, int b)
     {
@@ -34,12 +35,10 @@ internal class Test : baseclass
     }
 }
 
-
-
 internal class Program
 {
-    private volatile static int s_a = 5;
-    private volatile static int s_b = 0;
+    private static volatile int s_a = 5;
+    private static volatile int s_b = 0;
 
     private static int Main()
     {
@@ -83,7 +82,6 @@ internal class Program
             }
             Console.WriteLine("passed");
         }
-
 
         return 100;
     }

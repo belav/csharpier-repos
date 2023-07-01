@@ -20,11 +20,16 @@ namespace System.Data
     /// by a state manager in order to perform updates on a backing store (and push back the results
     /// of those updates).
     /// </summary>
-    internal interface IEntityStateManager {
+    internal interface IEntityStateManager
+    {
         IEnumerable<IEntityStateEntry> GetEntityStateEntries(EntityState state);
         IEnumerable<IEntityStateEntry> FindRelationshipsByKey(EntityKey key);
         IEntityStateEntry GetEntityStateEntry(EntityKey key);
         bool TryGetEntityStateEntry(EntityKey key, out IEntityStateEntry stateEntry);
-        bool TryGetReferenceKey(EntityKey dependentKey, AssociationEndMember principalRole, out EntityKey principalKey);
+        bool TryGetReferenceKey(
+            EntityKey dependentKey,
+            AssociationEndMember principalRole,
+            out EntityKey principalKey
+        );
     }
 }

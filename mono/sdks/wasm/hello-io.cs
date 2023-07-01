@@ -3,9 +3,9 @@ using System.IO;
 
 public class Program
 {
-    private static void Main ()
+    private static void Main()
     {
-        var content = File.ReadAllText ("hello-io.cs");
-        Console.WriteLine (content);
+        var content = File.ReadAllText("hello-io.cs");
+        Console.WriteLine(content);
     }
 }

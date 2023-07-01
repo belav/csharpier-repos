@@ -61,14 +61,17 @@ internal class DefaultRequiredAttributeDescriptorBuilder : RequiredAttributeDesc
             ValueComparisonMode,
             displayName,
             diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>(),
-            new Dictionary<string, string>(Metadata));
+            new Dictionary<string, string>(Metadata)
+        );
 
         return rule;
     }
 
     private string GetDisplayName()
     {
-        return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch ? string.Concat(Name, "...") : Name;
+        return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+            ? string.Concat(Name, "...")
+            : Name;
     }
 
     private HashSet<RazorDiagnostic> Validate()
@@ -77,7 +80,8 @@ internal class DefaultRequiredAttributeDescriptorBuilder : RequiredAttributeDesc
 
         if (string.IsNullOrWhiteSpace(Name))
         {
-            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace();
+            var diagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace();
 
             diagnostics ??= new();
             diagnostics.Add(diagnostic);
@@ -92,7 +96,11 @@ internal class DefaultRequiredAttributeDescriptorBuilder : RequiredAttributeDesc
             }
             else if (isDirectiveAttribute)
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredDirectiveAttributeName(GetDisplayName(), Name);
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredDirectiveAttributeName(
+                        GetDisplayName(),
+                        Name
+                    );
 
                 diagnostics ??= new();
                 diagnostics.Add(diagnostic);
@@ -101,9 +109,16 @@ internal class DefaultRequiredAttributeDescriptorBuilder : RequiredAttributeDesc
             for (var i = 0; i < name.Length; i++)
             {
                 var character = name[i];
-                if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                if (
+                    char.IsWhiteSpace(character)
+                    || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(Name, character);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(
+                            Name,
+                            character
+                        );
 
                     diagnostics ??= new();
                     diagnostics.Add(diagnostic);

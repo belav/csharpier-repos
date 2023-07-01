@@ -20,7 +20,12 @@ namespace ILCompiler.DependencyAnalysis
 
         public GenericTypesTemplateMap(ExternalReferencesTableNode externalReferences)
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__GenericTypesTemplateMap_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__GenericTypesTemplateMap_End",
+                true
+            );
             _externalReferences = externalReferences;
         }
 
@@ -32,15 +37,25 @@ namespace ILCompiler.DependencyAnalysis
         public ISymbolNode EndSymbol => _endSymbol;
         public int Offset => 0;
         public override bool IsShareable => false;
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
+
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // Dependencies for this node are tracked by the method code nodes
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Ensure the native layout data has been saved, in order to get valid Vertex offsets for the signature Vertices
             factory.MetadataManager.NativeLayoutInfo.SaveNativeLayoutInfoWriter(factory);
@@ -53,13 +68,17 @@ namespace ILCompiler.DependencyAnalysis
             foreach (TypeDesc type in factory.MetadataManager.GetTypeTemplates())
             {
                 // Type's native layout info
-                NativeLayoutTemplateTypeLayoutVertexNode templateNode = factory.NativeLayout.TemplateTypeLayout(type);
+                NativeLayoutTemplateTypeLayoutVertexNode templateNode =
+                    factory.NativeLayout.TemplateTypeLayout(type);
                 Vertex nativeLayout = templateNode.SavedVertex;
 
                 // Hashtable Entry
                 Vertex entry = nativeWriter.GetTuple(
-                    nativeWriter.GetUnsignedConstant(_externalReferences.GetIndex(factory.NecessaryTypeSymbol(type))),
-                    nativeWriter.GetUnsignedConstant((uint)nativeLayout.VertexOffset));
+                    nativeWriter.GetUnsignedConstant(
+                        _externalReferences.GetIndex(factory.NecessaryTypeSymbol(type))
+                    ),
+                    nativeWriter.GetUnsignedConstant((uint)nativeLayout.VertexOffset)
+                );
 
                 // Add to the hash table, hashed by the containing type's hashcode
                 uint hashCode = (uint)type.GetHashCode();
@@ -70,10 +89,19 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(streamBytes.Length);
 
-            return new ObjectData(streamBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                streamBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
-        public static void GetTemplateTypeDependencies(ref DependencyList dependencies, NodeFactory factory, TypeDesc type)
+        public static void GetTemplateTypeDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type
+        )
         {
             TypeDesc templateType = ConvertArrayOfTToRegularArray(factory, type);
 
@@ -81,8 +109,15 @@ namespace ILCompiler.DependencyAnalysis
                 return;
 
             dependencies ??= new DependencyList();
-            dependencies.Add(new DependencyListEntry(factory.NecessaryTypeSymbol(templateType), "Template type"));
-            dependencies.Add(new DependencyListEntry(factory.NativeLayout.TemplateTypeLayout(templateType), "Template Type Layout"));
+            dependencies.Add(
+                new DependencyListEntry(factory.NecessaryTypeSymbol(templateType), "Template type")
+            );
+            dependencies.Add(
+                new DependencyListEntry(
+                    factory.NativeLayout.TemplateTypeLayout(templateType),
+                    "Template Type Layout"
+                )
+            );
         }
 
         /// <summary>

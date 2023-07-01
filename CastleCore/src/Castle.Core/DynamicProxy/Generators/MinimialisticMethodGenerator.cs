@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,13 +22,17 @@ namespace Castle.DynamicProxy.Generators
 
     internal class MinimialisticMethodGenerator : MethodGenerator
     {
-        public MinimialisticMethodGenerator(MetaMethod method, OverrideMethodDelegate overrideMethod)
-            : base(method, overrideMethod)
-        {
-        }
+        public MinimialisticMethodGenerator(
+            MetaMethod method,
+            OverrideMethodDelegate overrideMethod
+        )
+            : base(method, overrideMethod) { }
 
-        protected override MethodEmitter BuildProxiedMethodBody(MethodEmitter emitter, ClassEmitter @class,
-                                                                INamingScope namingScope)
+        protected override MethodEmitter BuildProxiedMethodBody(
+            MethodEmitter emitter,
+            ClassEmitter @class,
+            INamingScope namingScope
+        )
         {
             InitOutParameters(emitter, MethodToOverride.GetParameters());
 
@@ -38,7 +42,9 @@ namespace Castle.DynamicProxy.Generators
             }
             else
             {
-                emitter.CodeBuilder.AddStatement(new ReturnStatement(new DefaultValueExpression(emitter.ReturnType)));
+                emitter.CodeBuilder.AddStatement(
+                    new ReturnStatement(new DefaultValueExpression(emitter.ReturnType))
+                );
             }
 
             return emitter;
@@ -52,8 +58,11 @@ namespace Castle.DynamicProxy.Generators
                 if (parameter.IsOut)
                 {
                     emitter.CodeBuilder.AddStatement(
-                        new AssignArgumentStatement(new ArgumentReference(parameter.ParameterType, index + 1),
-                                                    new DefaultValueExpression(parameter.ParameterType)));
+                        new AssignArgumentStatement(
+                            new ArgumentReference(parameter.ParameterType, index + 1),
+                            new DefaultValueExpression(parameter.ParameterType)
+                        )
+                    );
                 }
             }
         }

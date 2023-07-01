@@ -22,7 +22,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.Mode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReferralPolicy, DefaultValue = PeerReferralPolicy.Service)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReferralPolicy,
+            DefaultValue = PeerReferralPolicy.Service
+        )]
         [ServiceModelEnumValidator(typeof(PeerReferralPolicyHelper))]
         public PeerReferralPolicy ReferralPolicy
         {
@@ -54,9 +57,11 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("settings");
             }
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Mode, settings.Mode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReferralPolicy, settings.ReferralPolicy);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ReferralPolicy,
+                settings.ReferralPolicy
+            );
             this.Custom.InitializeFrom(settings.Custom);
         }
     }
 }
-

@@ -16,7 +16,8 @@ internal class DefaultRazorCodeGenerationOptions : RazorCodeGenerationOptions
         bool suppressNullabilityEnforcement,
         bool omitMinimizedComponentAttributeValues,
         bool supportLocalizedComponentNames,
-        bool useEnhancedLinePragma)
+        bool useEnhancedLinePragma
+    )
     {
         IndentWithTabs = indentWithTabs;
         IndentSize = indentSize;

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,44 +54,47 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class NamedPipeTransportSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty protection_level;
+    [MonoTODO]
+    public sealed partial class NamedPipeTransportSecurityElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty protection_level;
 
-		static NamedPipeTransportSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			protection_level = new ConfigurationProperty ("protectionLevel",
-				typeof (ProtectionLevel), "EncryptAndSign", null/* FIXME: get converter for ProtectionLevel*/, null,
-				ConfigurationPropertyOptions.None);
+        static NamedPipeTransportSecurityElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            protection_level = new ConfigurationProperty(
+                "protectionLevel",
+                typeof(ProtectionLevel),
+                "EncryptAndSign",
+                null /* FIXME: get converter for ProtectionLevel*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (protection_level);
-		}
+            properties.Add(protection_level);
+        }
 
-		public NamedPipeTransportSecurityElement ()
-		{
-		}
+        public NamedPipeTransportSecurityElement() { }
 
+        // Properties
 
-		// Properties
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-		[ConfigurationProperty ("protectionLevel",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "EncryptAndSign")]
-		public ProtectionLevel ProtectionLevel {
-			get { return (ProtectionLevel) base [protection_level]; }
-			set { base [protection_level] = value; }
-		}
-
-
-	}
-
+        [ConfigurationProperty(
+            "protectionLevel",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "EncryptAndSign"
+        )]
+        public ProtectionLevel ProtectionLevel
+        {
+            get { return (ProtectionLevel)base[protection_level]; }
+            set { base[protection_level] = value; }
+        }
+    }
 }

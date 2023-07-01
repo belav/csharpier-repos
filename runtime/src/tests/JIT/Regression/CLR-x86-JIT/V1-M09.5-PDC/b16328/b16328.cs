@@ -9,6 +9,7 @@ namespace DefaultNamespace
     public class DD
     {
         public static int zero = 0;
+
         public static int Main()
         {
             try

@@ -62,16 +62,20 @@ public class TagHelperDescriptorExtensionsTest
 
     private static TagHelperDescriptor CreateTagHelperDescriptor()
     {
-        var tagHelper = TagHelperDescriptorBuilder.Create("TypeName", "AssemblyName")
+        var tagHelper = TagHelperDescriptorBuilder
+            .Create("TypeName", "AssemblyName")
             .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tag-name"))
             .Build();
 
         return tagHelper;
     }
 
-    private static TagHelperDescriptor CreateViewComponentTagHelperDescriptor(string name = "ViewComponentName")
+    private static TagHelperDescriptor CreateViewComponentTagHelperDescriptor(
+        string name = "ViewComponentName"
+    )
     {
-        var tagHelper = TagHelperDescriptorBuilder.Create(ViewComponentTagHelperConventions.Kind, "TypeName", "AssemblyName")
+        var tagHelper = TagHelperDescriptorBuilder
+            .Create(ViewComponentTagHelperConventions.Kind, "TypeName", "AssemblyName")
             .TagMatchingRuleDescriptor(rule => rule.RequireTagName("tag-name"))
             .AddMetadata(ViewComponentTagHelperMetadata.Name, name)
             .Build();

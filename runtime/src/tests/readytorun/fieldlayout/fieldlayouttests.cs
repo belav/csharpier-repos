@@ -8,7 +8,7 @@ class Test
     static int Main()
     {
         ContainsGCPointersFieldsTest.Test();
-//        ExplicitTest.Test(); // Explicit layout is known to not quite match the runtime, and if enabled this set of tests will fail.
+        //        ExplicitTest.Test(); // Explicit layout is known to not quite match the runtime, and if enabled this set of tests will fail.
         SequentialTest.Test();
         AutoTest.Test();
         EnumAlignmentTest.Test();
@@ -262,6 +262,7 @@ class ExplicitTest
         _fld3.Lol = 4;
     }
 }
+
 class ContainsGCPointersFieldsTest
 {
     static ContainsGCPointers.NoPointers _fld1;
@@ -270,9 +271,11 @@ class ContainsGCPointersFieldsTest
     static ContainsGCPointers.HasPointers _fld4;
     static ContainsGCPointers.FieldHasPointers _fld5;
     static ContainsGCPointers.ClassHasPointers _fld6 = new ContainsGCPointers.ClassHasPointers();
-    static ContainsGCPointers.BaseClassHasPointers _fld7 = new ContainsGCPointers.BaseClassHasPointers();
+    static ContainsGCPointers.BaseClassHasPointers _fld7 =
+        new ContainsGCPointers.BaseClassHasPointers();
     static ContainsGCPointers.ClassHasIntArray _fld8 = new ContainsGCPointers.ClassHasIntArray();
-    static ContainsGCPointers.ClassHasArrayOfClassType _fld9 = new ContainsGCPointers.ClassHasArrayOfClassType();
+    static ContainsGCPointers.ClassHasArrayOfClassType _fld9 =
+        new ContainsGCPointers.ClassHasArrayOfClassType();
 
     public static void Test()
     {

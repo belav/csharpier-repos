@@ -12,10 +12,18 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     // ParameterExpression fingerprint class
     // Can represent the model parameter or an inner parameter in an open lambda expression
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class ParameterExpressionFingerprint : ExpressionFingerprint
     {
-        public ParameterExpressionFingerprint(ExpressionType nodeType, Type type, int parameterIndex)
+        public ParameterExpressionFingerprint(
+            ExpressionType nodeType,
+            Type type,
+            int parameterIndex
+        )
             : base(nodeType, type)
         {
             ParameterIndex = parameterIndex;
@@ -28,8 +36,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         {
             ParameterExpressionFingerprint other = obj as ParameterExpressionFingerprint;
             return (other != null)
-                   && (this.ParameterIndex == other.ParameterIndex)
-                   && this.Equals(other);
+                && (this.ParameterIndex == other.ParameterIndex)
+                && this.Equals(other);
         }
 
         internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)

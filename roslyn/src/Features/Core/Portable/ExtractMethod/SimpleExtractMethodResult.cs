@@ -14,9 +14,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             Document documentWithoutFinalFormatting,
             ImmutableArray<AbstractFormattingRule> formattingRules,
             SyntaxToken invocationNameToken,
-            SyntaxNode methodDefinition)
-            : base(status.Flag, status.Reasons, documentWithoutFinalFormatting, formattingRules, invocationNameToken, methodDefinition)
-        {
-        }
+            SyntaxNode methodDefinition
+        )
+            : base(
+                status.Flag,
+                status.Reasons,
+                documentWithoutFinalFormatting,
+                formattingRules,
+                invocationNameToken,
+                methodDefinition
+            ) { }
     }
 }

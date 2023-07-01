@@ -9,9 +9,7 @@ namespace System.Runtime.Serialization
         private string? _value;
         private bool _isValueSetExplicitly;
 
-        public EnumMemberAttribute()
-        {
-        }
+        public EnumMemberAttribute() { }
 
         public string? Value
         {

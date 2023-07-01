@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
 #if CODE_STYLE
         public static readonly CSharpSyntaxFormattingService Instance = new();
-
 #else
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -48,16 +47,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 new AnchorIndentationFormattingRule(),
                 new QueryExpressionFormattingRule(),
                 new TokenBasedFormattingRule(),
-                DefaultOperationProvider.Instance);
+                DefaultOperationProvider.Instance
+            );
         }
 
-        public override IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules()
-            => _rules;
+        public override IEnumerable<AbstractFormattingRule> GetDefaultFormattingRules() => _rules;
 
-        protected override IFormattingResult CreateAggregatedFormattingResult(SyntaxNode node, IList<AbstractFormattingResult> results, SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? formattingSpans = null)
-            => new AggregatedFormattingResult(node, results, formattingSpans);
+        protected override IFormattingResult CreateAggregatedFormattingResult(
+            SyntaxNode node,
+            IList<AbstractFormattingResult> results,
+            SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? formattingSpans = null
+        ) => new AggregatedFormattingResult(node, results, formattingSpans);
 
-        protected override AbstractFormattingResult Format(SyntaxNode node, AnalyzerConfigOptions options, IEnumerable<AbstractFormattingRule> formattingRules, SyntaxToken token1, SyntaxToken token2, CancellationToken cancellationToken)
-            => new CSharpFormatEngine(node, options, formattingRules, token1, token2).Format(cancellationToken);
+        protected override AbstractFormattingResult Format(
+            SyntaxNode node,
+            AnalyzerConfigOptions options,
+            IEnumerable<AbstractFormattingRule> formattingRules,
+            SyntaxToken token1,
+            SyntaxToken token2,
+            CancellationToken cancellationToken
+        ) =>
+            new CSharpFormatEngine(node, options, formattingRules, token1, token2).Format(
+                cancellationToken
+            );
     }
 }

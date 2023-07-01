@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,76 +29,93 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class DataGridItem : TableRow, INamingContainer, IDataItemContainer
-	{
-		#region Fields
-		object item;
-		int dataset_index;
-		int item_index;
-		ListItemType item_type;
-		#endregion	// Fields
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class DataGridItem : TableRow, INamingContainer, IDataItemContainer
+    {
+        #region Fields
+        object item;
+        int dataset_index;
+        int item_index;
+        ListItemType item_type;
+        #endregion	// Fields
 
-		#region Public Constructors
-		public DataGridItem(int itemIndex, int dataSetIndex, ListItemType itemType) {
-			item_index = itemIndex;
-			dataset_index = dataSetIndex;
-			item_type = itemType;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public DataGridItem(int itemIndex, int dataSetIndex, ListItemType itemType)
+        {
+            item_index = itemIndex;
+            dataset_index = dataSetIndex;
+            item_type = itemType;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public virtual object DataItem {
-			get { return item; }
-			set { item = value; }
-		}
+        #region Public Instance Properties
+        public virtual object DataItem
+        {
+            get { return item; }
+            set { item = value; }
+        }
 
-		public virtual int DataSetIndex {
-			get { return dataset_index; }
-		}
+        public virtual int DataSetIndex
+        {
+            get { return dataset_index; }
+        }
 
-		public virtual int ItemIndex {
-			get { return item_index; }
-		}
+        public virtual int ItemIndex
+        {
+            get { return item_index; }
+        }
 
-		public virtual ListItemType ItemType {
-			get { return item_type; }
-		}
-		#endregion	// Public Instance Properties
+        public virtual ListItemType ItemType
+        {
+            get { return item_type; }
+        }
+        #endregion	// Public Instance Properties
 
-		#region IDataItemContainer Properties
-		object IDataItemContainer.DataItem {
-			get { return item; }
-		}
+        #region IDataItemContainer Properties
+        object IDataItemContainer.DataItem
+        {
+            get { return item; }
+        }
 
-		int IDataItemContainer.DataItemIndex{
-			get { return item_index; }
-		}
+        int IDataItemContainer.DataItemIndex
+        {
+            get { return item_index; }
+        }
 
-		int IDataItemContainer.DisplayIndex{
-			get { return item_index; }
-		}
-		#endregion	// IDataItemContainer Properties
+        int IDataItemContainer.DisplayIndex
+        {
+            get { return item_index; }
+        }
+        #endregion	// IDataItemContainer Properties
 
-		#region Public Instance Methods
-		protected override bool OnBubbleEvent(object source, EventArgs e)
-		{
-			// Nikhil Kothari, pg 312-313:
-			if (e is CommandEventArgs) {
-				RaiseBubbleEvent(this, new DataGridCommandEventArgs(this, source, (CommandEventArgs)e));
-				return true;
-			}
+        #region Public Instance Methods
+        protected override bool OnBubbleEvent(object source, EventArgs e)
+        {
+            // Nikhil Kothari, pg 312-313:
+            if (e is CommandEventArgs)
+            {
+                RaiseBubbleEvent(
+                    this,
+                    new DataGridCommandEventArgs(this, source, (CommandEventArgs)e)
+                );
+                return true;
+            }
 
-			return base.OnBubbleEvent (source, e);
-		}
+            return base.OnBubbleEvent(source, e);
+        }
 
-		protected internal virtual void SetItemType(ListItemType itemType)
-		{
-			item_type = itemType;
-			
-		}
-		#endregion	// Public Instance Methods
-	}
+        protected internal virtual void SetItemType(ListItemType itemType)
+        {
+            item_type = itemType;
+        }
+        #endregion	// Public Instance Methods
+    }
 }

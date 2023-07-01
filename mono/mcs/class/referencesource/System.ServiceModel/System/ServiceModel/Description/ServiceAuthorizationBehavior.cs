@@ -18,7 +18,8 @@ namespace System.ServiceModel.Description
     {
         internal const bool DefaultImpersonateCallerForAllOperations = false;
         internal const bool DefaultImpersonateOnSerializingReply = false;
-        internal const PrincipalPermissionMode DefaultPrincipalPermissionMode = PrincipalPermissionMode.UseWindowsGroups;
+        internal const PrincipalPermissionMode DefaultPrincipalPermissionMode =
+            PrincipalPermissionMode.UseWindowsGroups;
 
         bool impersonateCallerForAllOperations;
         bool impersonateOnSerializingReply;
@@ -29,7 +30,7 @@ namespace System.ServiceModel.Description
         bool isExternalPoliciesSet;
         bool isAuthorizationManagerSet;
         bool isReadOnly;
-     
+
         public ServiceAuthorizationBehavior()
         {
             this.impersonateCallerForAllOperations = DefaultImpersonateCallerForAllOperations;
@@ -45,7 +46,7 @@ namespace System.ServiceModel.Description
             this.roleProvider = other.roleProvider;
             this.isExternalPoliciesSet = other.isExternalPoliciesSet;
             this.isAuthorizationManagerSet = other.isAuthorizationManagerSet;
-         
+
             if (other.isExternalPoliciesSet || other.isAuthorizationManagerSet)
             {
                 CopyAuthorizationPoliciesAndManager(other);
@@ -55,10 +56,7 @@ namespace System.ServiceModel.Description
 
         public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies
         {
-            get
-            {
-                return this.externalAuthorizationPolicies;
-            }
+            get { return this.externalAuthorizationPolicies; }
             set
             {
                 ThrowIfImmutable();
@@ -74,10 +72,7 @@ namespace System.ServiceModel.Description
 
         public ServiceAuthorizationManager ServiceAuthorizationManager
         {
-            get
-            {
-                return this.serviceAuthorizationManager;
-            }
+            get { return this.serviceAuthorizationManager; }
             set
             {
                 ThrowIfImmutable();
@@ -94,15 +89,14 @@ namespace System.ServiceModel.Description
         [DefaultValue(DefaultPrincipalPermissionMode)]
         public PrincipalPermissionMode PrincipalPermissionMode
         {
-            get
-            {
-                return this.principalPermissionMode;
-            }
+            get { return this.principalPermissionMode; }
             set
             {
                 if (!PrincipalPermissionModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 ThrowIfImmutable();
                 this.principalPermissionMode = value;
@@ -112,10 +106,7 @@ namespace System.ServiceModel.Description
         [DefaultValue(null)]
         public RoleProvider RoleProvider
         {
-            get
-            {
-                return (RoleProvider)this.roleProvider;
-            }
+            get { return (RoleProvider)this.roleProvider; }
             set
             {
                 ThrowIfImmutable();
@@ -126,10 +117,7 @@ namespace System.ServiceModel.Description
         [DefaultValue(DefaultImpersonateCallerForAllOperations)]
         public bool ImpersonateCallerForAllOperations
         {
-            get
-            {
-                return this.impersonateCallerForAllOperations;
-            }
+            get { return this.impersonateCallerForAllOperations; }
             set
             {
                 ThrowIfImmutable();
@@ -137,14 +125,10 @@ namespace System.ServiceModel.Description
             }
         }
 
-
         [DefaultValue(DefaultImpersonateOnSerializingReply)]
         public bool ImpersonateOnSerializingReply
         {
-            get
-            {
-                return this.impersonateOnSerializingReply;
-            }
+            get { return this.impersonateOnSerializingReply; }
             set
             {
                 ThrowIfImmutable();
@@ -178,29 +162,47 @@ namespace System.ServiceModel.Description
             dispatchRuntime.RoleProvider = (RoleProvider)this.roleProvider;
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("description"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("description")
+                );
             }
             if (serviceHostBase == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceHostBase"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceHostBase")
+                );
             }
 
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
-                if (channelDispatcher != null && !ServiceMetadataBehavior.IsHttpGetMetadataDispatcher(description, channelDispatcher))
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                if (
+                    channelDispatcher != null
+                    && !ServiceMetadataBehavior.IsHttpGetMetadataDispatcher(
+                        description,
+                        channelDispatcher
+                    )
+                )
                 {
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
                     {
@@ -208,8 +210,10 @@ namespace System.ServiceModel.Description
                         behavior.PrincipalPermissionMode = this.principalPermissionMode;
                         if (!endpointDispatcher.IsSystemEndpoint)
                         {
-                            behavior.ImpersonateCallerForAllOperations = this.impersonateCallerForAllOperations;
-                            behavior.ImpersonateOnSerializingReply = this.impersonateOnSerializingReply;
+                            behavior.ImpersonateCallerForAllOperations =
+                                this.impersonateCallerForAllOperations;
+                            behavior.ImpersonateOnSerializingReply =
+                                this.impersonateOnSerializingReply;
                         }
                         if (this.roleProvider != null)
                         {
@@ -238,7 +242,9 @@ namespace System.ServiceModel.Description
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 public unsafe class Runtime_74117
 {
-    public unsafe static int Main()
+    public static unsafe int Main()
     {
         byte a = 5;
         Problem(ref a, 0);
@@ -23,5 +23,6 @@ public unsafe class Runtime_74117
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void JitUse<T>(T* arg) where T : unmanaged { }
+    public static void JitUse<T>(T* arg)
+        where T : unmanaged { }
 }

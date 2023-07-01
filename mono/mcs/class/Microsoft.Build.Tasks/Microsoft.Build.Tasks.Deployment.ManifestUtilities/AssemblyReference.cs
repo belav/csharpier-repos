@@ -30,68 +30,74 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class AssemblyReference : BaseReference {
-	
-		AssemblyIdentity	assemblyIdentity;
-		bool			isPrerequisite;
-		AssemblyReferenceType	referenceType;
-		AssemblyIdentity	xmlAssemblyIdentity;
-		string			xmlIsNative;
-		string			xmlIsPrerequisite;
-	
-		[MonoTODO]
-		public AssemblyReference ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class AssemblyReference : BaseReference
+    {
+        AssemblyIdentity assemblyIdentity;
+        bool isPrerequisite;
+        AssemblyReferenceType referenceType;
+        AssemblyIdentity xmlAssemblyIdentity;
+        string xmlIsNative;
+        string xmlIsPrerequisite;
 
-		[MonoTODO]
-		public AssemblyReference (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public AssemblyIdentity AssemblyIdentity {
-			get { return assemblyIdentity; }
-			set { assemblyIdentity = value; }
-		}
-		
-		public bool IsPrerequisite {
-			get { return isPrerequisite; }
-			set { isPrerequisite = value; }
-		}
-		
-		public AssemblyReferenceType ReferenceType {
-			get { return referenceType; }
-			set { referenceType = value; }
-		}
-		
-		public AssemblyIdentity XmlAssemblyIdentity {
-			get { return xmlAssemblyIdentity; }
-			set { xmlAssemblyIdentity = value; }
-		}
-		
-		public string XmlIsNative {
-			get { return xmlIsNative; }
-			set { xmlIsNative = value; }
-		}
-		
-		public string XmlIsPrerequisite {
-			get { return xmlIsPrerequisite; }
-			set { xmlIsPrerequisite = value; }
-		}
-		
-		protected internal override string SortName {
-			get { return null; }
-		}
-	}
+        [MonoTODO]
+        public AssemblyReference()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public AssemblyReference(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AssemblyIdentity AssemblyIdentity
+        {
+            get { return assemblyIdentity; }
+            set { assemblyIdentity = value; }
+        }
+
+        public bool IsPrerequisite
+        {
+            get { return isPrerequisite; }
+            set { isPrerequisite = value; }
+        }
+
+        public AssemblyReferenceType ReferenceType
+        {
+            get { return referenceType; }
+            set { referenceType = value; }
+        }
+
+        public AssemblyIdentity XmlAssemblyIdentity
+        {
+            get { return xmlAssemblyIdentity; }
+            set { xmlAssemblyIdentity = value; }
+        }
+
+        public string XmlIsNative
+        {
+            get { return xmlIsNative; }
+            set { xmlIsNative = value; }
+        }
+
+        public string XmlIsPrerequisite
+        {
+            get { return xmlIsPrerequisite; }
+            set { xmlIsPrerequisite = value; }
+        }
+
+        protected internal override string SortName
+        {
+            get { return null; }
+        }
+    }
 }
-

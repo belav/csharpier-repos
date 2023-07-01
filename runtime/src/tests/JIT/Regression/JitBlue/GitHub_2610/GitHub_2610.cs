@@ -7,8 +7,11 @@ using System.Runtime.CompilerServices;
 public struct MyValue
 {
     public long val;
+
     public MyValue(long a)
-    { val = a; }
+    {
+        val = a;
+    }
 }
 
 public struct MyStruct
@@ -17,7 +20,10 @@ public struct MyStruct
     public MyValue v2;
 
     public MyStruct(MyValue a, MyValue b)
-    { v1 = a; v2 = b; }
+    {
+        v1 = a;
+        v2 = b;
+    }
 }
 
 public class Program

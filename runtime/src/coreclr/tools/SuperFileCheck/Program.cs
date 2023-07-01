@@ -11,13 +11,21 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SuperFileCheck
 {
-    internal readonly record struct MethodDeclarationInfo(MethodDeclarationSyntax Syntax, string FullyQualifiedName);
+    internal readonly record struct MethodDeclarationInfo(
+        MethodDeclarationSyntax Syntax,
+        string FullyQualifiedName
+    );
 
-    internal readonly record struct FileCheckResult(int ExitCode, string StandardOutput, string StandardError);
+    internal readonly record struct FileCheckResult(
+        int ExitCode,
+        string StandardOutput,
+        string StandardError
+    );
 
     internal class SuperFileCheckException : Exception
     {
-        public SuperFileCheckException(string message): base(message) { }
+        public SuperFileCheckException(string message)
+            : base(message) { }
     }
 
     internal class Program
@@ -47,8 +55,12 @@ namespace SuperFileCheck
             var superFileCheckDir = Path.GetDirectoryName(superFileCheckPath);
             if (superFileCheckDir != null)
             {
-                var fileCheckPath =
-                    Directory.EnumerateFiles(Path.Combine(superFileCheckDir, "runtimes/"), "FileCheck*", SearchOption.AllDirectories)
+                var fileCheckPath = Directory
+                    .EnumerateFiles(
+                        Path.Combine(superFileCheckDir, "runtimes/"),
+                        "FileCheck*",
+                        SearchOption.AllDirectories
+                    )
                     .FirstOrDefault();
                 if (fileCheckPath != null)
                 {
@@ -75,7 +87,8 @@ namespace SuperFileCheck
             // FULL-LINE and FULL-LINE-NEXT are not part of LLVM FileCheck - they are new syntax directives for SuperFileCheck to be able to
             // match a single full-line, similar to that of LLVM FileCheck's --match-full-lines option.
 
-            var pattern = $"({String.Join('|', checkPrefixes)})+?({{LITERAL}})?(:|-LABEL:|-NEXT:|-NOT:|-SAME:|-EMPTY:|-COUNT:|-DAG:|{SyntaxDirectiveFullLine}|{SyntaxDirectiveFullLineNext})";
+            var pattern =
+                $"({String.Join('|', checkPrefixes)})+?({{LITERAL}})?(:|-LABEL:|-NEXT:|-NOT:|-SAME:|-EMPTY:|-COUNT:|-DAG:|{SyntaxDirectiveFullLine}|{SyntaxDirectiveFullLineNext})";
             var regex = new System.Text.RegularExpressions.Regex(pattern);
             return regex.Count(str) > 0;
         }
@@ -174,7 +187,9 @@ namespace SuperFileCheck
             var typeDecl = node.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
             if (typeDecl == null)
             {
-                throw new SuperFileCheckException($"Unable to find enclosing type declaration on: {node.Span}");
+                throw new SuperFileCheckException(
+                    $"Unable to find enclosing type declaration on: {node.Span}"
+                );
             }
             return typeDecl;
         }
@@ -220,11 +235,16 @@ namespace SuperFileCheck
                 qualifiedTypeName = $"{GetTypeName(typeDecl)}+{qualifiedTypeName}";
             }
 
-            var namespaceDecl = typeDecl.Ancestors().OfType<NamespaceDeclarationSyntax>().FirstOrDefault();
+            var namespaceDecl = typeDecl
+                .Ancestors()
+                .OfType<NamespaceDeclarationSyntax>()
+                .FirstOrDefault();
             if (namespaceDecl != null)
             {
-                var identifiers =
-                    namespaceDecl.Name.DescendantTokens().Where(x => x.IsKind(SyntaxKind.IdentifierToken)).Select(x => x.ValueText);
+                var identifiers = namespaceDecl.Name
+                    .DescendantTokens()
+                    .Where(x => x.IsKind(SyntaxKind.IdentifierToken))
+                    .Select(x => x.ValueText);
                 return $"{String.Join(".", identifiers)}.{qualifiedTypeName}";
             }
 
@@ -236,10 +256,7 @@ namespace SuperFileCheck
         /// </summary>
         static IEnumerable<SyntaxTrivia> GetDescendantSingleLineCommentTrivia(SyntaxNode node)
         {
-            return
-                node
-                .DescendantTrivia()
-                .Where(x => x.IsKind(SyntaxKind.SingleLineCommentTrivia));
+            return node.DescendantTrivia().Where(x => x.IsKind(SyntaxKind.SingleLineCommentTrivia));
         }
 
         /// <summary>
@@ -248,11 +265,12 @@ namespace SuperFileCheck
         /// </summary>
         static MethodDeclarationInfo[] FindMethodsByFile(string filePath, string[] checkPrefixes)
         {
-            var syntaxTree = CSharpSyntaxTree.ParseText(SourceText.From(File.ReadAllText(filePath)));
+            var syntaxTree = CSharpSyntaxTree.ParseText(
+                SourceText.From(File.ReadAllText(filePath))
+            );
             var root = syntaxTree.GetRoot();
 
-            var trivia =
-                GetDescendantSingleLineCommentTrivia(root)
+            var trivia = GetDescendantSingleLineCommentTrivia(root)
                 .Where(x =>
                 {
                     if (x.Token.Parent == null)
@@ -273,29 +291,44 @@ namespace SuperFileCheck
                     //
                     // We are only allowing checks to occur in 'trivia2'.  The 'Contains' check is
                     // used to find 'trivia1'.
-                    return !x.Token.Parent.Ancestors().Any(p => p.IsKind(SyntaxKind.MethodDeclaration) && p.Span.Contains(x.Span));
+                    return !x.Token.Parent
+                        .Ancestors()
+                        .Any(
+                            p => p.IsKind(SyntaxKind.MethodDeclaration) && p.Span.Contains(x.Span)
+                        );
                 })
                 .Where(x => ContainsCheckPrefixes(x.ToString(), checkPrefixes))
                 .ToArray();
 
             if (trivia.Length > 0)
             {
-                throw new SuperFileCheckException("FileCheck syntax not allowed outside of a method.");
+                throw new SuperFileCheckException(
+                    "FileCheck syntax not allowed outside of a method."
+                );
             }
 
-            return
-                root
-                .DescendantNodes()
+            return root.DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Where(x => ContainsCheckPrefixes(x.ToString(), checkPrefixes))
-                .Select(x => new MethodDeclarationInfo(x, $"{GetFullyQualifiedEnclosingTypeName(x)}:{GetMethodName(x)}"))
+                .Select(
+                    x =>
+                        new MethodDeclarationInfo(
+                            x,
+                            $"{GetFullyQualifiedEnclosingTypeName(x)}:{GetMethodName(x)}"
+                        )
+                )
                 .ToArray();
         }
 
         /// <summary>
         /// Helper to expand FileCheck syntax.
         /// </summary>
-        static string? TryTransformDirective(string lineStr, string[] checkPrefixes, string syntaxDirective, string transformSuffix)
+        static string? TryTransformDirective(
+            string lineStr,
+            string[] checkPrefixes,
+            string syntaxDirective,
+            string transformSuffix
+        )
         {
             var index = lineStr.IndexOf(syntaxDirective);
             if (index == -1)
@@ -311,7 +344,10 @@ namespace SuperFileCheck
                 return null;
             }
 
-            return lineStr.Substring(0, index) + $"{transformSuffix}: {{{{^ *}}}}" + lineStr.Substring(index + syntaxDirective.Length) + "{{$}}";
+            return lineStr.Substring(0, index)
+                + $"{transformSuffix}: {{{{^ *}}}}"
+                + lineStr.Substring(index + syntaxDirective.Length)
+                + "{{$}}";
         }
 
         /// <summary>
@@ -328,13 +364,23 @@ namespace SuperFileCheck
 
             var lineStr = text.ToString(line.Span);
 
-            var result = TryTransformDirective(lineStr, checkPrefixes, SyntaxDirectiveFullLine, String.Empty);
+            var result = TryTransformDirective(
+                lineStr,
+                checkPrefixes,
+                SyntaxDirectiveFullLine,
+                String.Empty
+            );
             if (result != null)
             {
                 return result;
             }
 
-            result = TryTransformDirective(lineStr, checkPrefixes, SyntaxDirectiveFullLineNext, "-NEXT");
+            result = TryTransformDirective(
+                lineStr,
+                checkPrefixes,
+                SyntaxDirectiveFullLineNext,
+                "-NEXT"
+            );
 
             return result ?? lineStr;
         }
@@ -345,7 +391,10 @@ namespace SuperFileCheck
         /// </summary>
         static string TransformMethod(MethodDeclarationSyntax methodDecl, string[] checkPrefixes)
         {
-            return String.Join(Environment.NewLine, methodDecl.GetText().Lines.Select(x => TransformLine(x, checkPrefixes)));
+            return String.Join(
+                Environment.NewLine,
+                methodDecl.GetText().Lines.Select(x => TransformLine(x, checkPrefixes))
+            );
         }
 
         /// <summary>
@@ -397,7 +446,12 @@ namespace SuperFileCheck
         /// Runs SuperFileCheck logic.
         /// </summary>
 
-        static async Task<FileCheckResult> RunSuperFileCheckAsync(MethodDeclarationInfo methodDeclInfo, string[] args, string[] checkPrefixes, string tmpFilePath)
+        static async Task<FileCheckResult> RunSuperFileCheckAsync(
+            MethodDeclarationInfo methodDeclInfo,
+            string[] args,
+            string[] checkPrefixes,
+            string tmpFilePath
+        )
         {
             File.WriteAllText(tmpFilePath, PreProcessMethod(methodDeclInfo, checkPrefixes));
 
@@ -408,7 +462,11 @@ namespace SuperFileCheck
             }
             finally
             {
-                try { File.Delete(tmpFilePath); } catch { }
+                try
+                {
+                    File.Delete(tmpFilePath);
+                }
+                catch { }
             }
         }
 
@@ -442,14 +500,15 @@ namespace SuperFileCheck
         /// </summary>
         static string[] ParseCheckPrefixes(string[] args)
         {
-            var checkPrefixesArg = args.FirstOrDefault(x => x.StartsWith(CommandLineCheckPrefixesEqual));
+            var checkPrefixesArg = args.FirstOrDefault(
+                x => x.StartsWith(CommandLineCheckPrefixesEqual)
+            );
             if (checkPrefixesArg == null)
             {
                 return new string[] { };
             }
 
-            return
-                checkPrefixesArg
+            return checkPrefixesArg
                 .Replace(CommandLineCheckPrefixesEqual, "")
                 .Split(",")
                 .Where(x => !String.IsNullOrWhiteSpace(x))
@@ -497,7 +556,9 @@ namespace SuperFileCheck
         static void PrintErrorMethodNoInlining(string methodName)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine($"'{methodName}' is not marked with attribute 'MethodImpl(MethodImplOptions.NoInlining)'.");
+            Console.Error.WriteLine(
+                $"'{methodName}' is not marked with attribute 'MethodImpl(MethodImplOptions.NoInlining)'."
+            );
             Console.ResetColor();
         }
 
@@ -508,7 +569,9 @@ namespace SuperFileCheck
         static void PrintErrorNoMethodsFound(string[] checkPrefixes)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine("No methods were found. Check if any method bodies are using one or more of the following FileCheck prefixes:");
+            Console.Error.WriteLine(
+                "No methods were found. Check if any method bodies are using one or more of the following FileCheck prefixes:"
+            );
             foreach (var prefix in checkPrefixes)
             {
                 Console.Error.WriteLine($"    {prefix}");
@@ -537,19 +600,45 @@ namespace SuperFileCheck
             Console.Write(Environment.NewLine);
             Console.WriteLine("SUPER OPTIONS:");
             Console.Write(Environment.NewLine);
-            Console.WriteLine($"  --csharp                       - A {CommandLineInputFile} is required.");
-            Console.WriteLine($"                                   <check-file> must be a C# source file.");
-            Console.WriteLine($"                                   Methods must not have duplicate names.");
-            Console.WriteLine($"                                   Methods must be marked as not inlining.");
-            Console.WriteLine($"                                   One or more methods are required.");
-            Console.WriteLine($"                                   Prefixes are determined by {CommandLineCheckPrefixes}.");
-            Console.WriteLine($"  --csharp-list-method-names     - Print a space-delimited list of method names to be");
-            Console.WriteLine($"                                   supplied to environment variable DOTNET_JitDisasm.");
-            Console.WriteLine($"                                   <check-file> must be a C# source file.");
-            Console.WriteLine($"                                   Methods must not have duplicate names.");
-            Console.WriteLine($"                                   Methods must be marked as not inlining.");
-            Console.WriteLine($"                                   Prints nothing if no methods are found.");
-            Console.WriteLine($"                                   Prefixes are determined by {CommandLineCheckPrefixes}.");
+            Console.WriteLine(
+                $"  --csharp                       - A {CommandLineInputFile} is required."
+            );
+            Console.WriteLine(
+                $"                                   <check-file> must be a C# source file."
+            );
+            Console.WriteLine(
+                $"                                   Methods must not have duplicate names."
+            );
+            Console.WriteLine(
+                $"                                   Methods must be marked as not inlining."
+            );
+            Console.WriteLine(
+                $"                                   One or more methods are required."
+            );
+            Console.WriteLine(
+                $"                                   Prefixes are determined by {CommandLineCheckPrefixes}."
+            );
+            Console.WriteLine(
+                $"  --csharp-list-method-names     - Print a space-delimited list of method names to be"
+            );
+            Console.WriteLine(
+                $"                                   supplied to environment variable DOTNET_JitDisasm."
+            );
+            Console.WriteLine(
+                $"                                   <check-file> must be a C# source file."
+            );
+            Console.WriteLine(
+                $"                                   Methods must not have duplicate names."
+            );
+            Console.WriteLine(
+                $"                                   Methods must be marked as not inlining."
+            );
+            Console.WriteLine(
+                $"                                   Prints nothing if no methods are found."
+            );
+            Console.WriteLine(
+                $"                                   Prefixes are determined by {CommandLineCheckPrefixes}."
+            );
         }
 
         /// <summary>
@@ -559,8 +648,9 @@ namespace SuperFileCheck
         {
             var set = new HashSet<string>();
 
-            var duplicateMethodDeclInfo =
-                methodDeclInfos.FirstOrDefault(x => !set.Add(x.FullyQualifiedName));
+            var duplicateMethodDeclInfo = methodDeclInfos.FirstOrDefault(
+                x => !set.Add(x.FullyQualifiedName)
+            );
 
             return duplicateMethodDeclInfo.FullyQualifiedName;
         }
@@ -594,18 +684,16 @@ namespace SuperFileCheck
         /// </summary>
         static bool CheckMethodsHaveNoInlining(MethodDeclarationInfo[] methodDeclInfos)
         {
-            return
-                methodDeclInfos
-                .All(methodDeclInfo =>
+            return methodDeclInfos.All(methodDeclInfo =>
+            {
+                if (!MethodHasNoInlining(methodDeclInfo.Syntax))
                 {
-                    if (!MethodHasNoInlining(methodDeclInfo.Syntax))
-                    {
-                        PrintErrorMethodNoInlining(methodDeclInfo.FullyQualifiedName);
-                        return false;
-                    }
+                    PrintErrorMethodNoInlining(methodDeclInfo.FullyQualifiedName);
+                    return false;
+                }
 
-                    return true;
-                });
+                return true;
+            });
         }
 
         /// <summary>
@@ -639,10 +727,12 @@ namespace SuperFileCheck
                             return 1;
                         }
 
-                        Console.Write(String.Join(' ', methodDeclInfos.Select(x => x.FullyQualifiedName)));
+                        Console.Write(
+                            String.Join(' ', methodDeclInfos.Select(x => x.FullyQualifiedName))
+                        );
                         return 0;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(ex.Message);
@@ -708,7 +798,15 @@ namespace SuperFileCheck
                                 {
                                     tmpFilePath = Path.Combine(tmpDirName, tmpFileName);
                                 }
-                                tasks[i] = Task.Run(() => RunSuperFileCheckAsync(methodDeclInfos[index], argsToCopy.ToArray(), checkPrefixes, tmpFilePath));
+                                tasks[i] = Task.Run(
+                                    () =>
+                                        RunSuperFileCheckAsync(
+                                            methodDeclInfos[index],
+                                            argsToCopy.ToArray(),
+                                            checkPrefixes,
+                                            tmpFilePath
+                                        )
+                                );
                             }
 
                             await Task.WhenAll(tasks);

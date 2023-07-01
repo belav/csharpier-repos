@@ -14,9 +14,7 @@ internal sealed class PropertyActivator<TContext>
     private readonly Func<TContext, object> _valueAccessor;
     private readonly Action<object, object> _fastPropertySetter;
 
-    public PropertyActivator(
-        PropertyInfo propertyInfo,
-        Func<TContext, object> valueAccessor)
+    public PropertyActivator(PropertyInfo propertyInfo, Func<TContext, object> valueAccessor)
     {
         PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
         _valueAccessor = valueAccessor ?? throw new ArgumentNullException(nameof(valueAccessor));
@@ -40,7 +38,8 @@ internal sealed class PropertyActivator<TContext>
     public static PropertyActivator<TContext>[] GetPropertiesToActivate(
         Type type,
         Type activateAttributeType,
-        Func<PropertyInfo, PropertyActivator<TContext>> createActivateInfo)
+        Func<PropertyInfo, PropertyActivator<TContext>> createActivateInfo
+    )
     {
         if (type == null)
         {
@@ -57,14 +56,20 @@ internal sealed class PropertyActivator<TContext>
             throw new ArgumentNullException(nameof(createActivateInfo));
         }
 
-        return GetPropertiesToActivate(type, activateAttributeType, createActivateInfo, includeNonPublic: false);
+        return GetPropertiesToActivate(
+            type,
+            activateAttributeType,
+            createActivateInfo,
+            includeNonPublic: false
+        );
     }
 
     public static PropertyActivator<TContext>[] GetPropertiesToActivate(
         Type type,
         Type activateAttributeType,
         Func<PropertyInfo, PropertyActivator<TContext>> createActivateInfo,
-        bool includeNonPublic)
+        bool includeNonPublic
+    )
     {
         if (type == null)
         {
@@ -82,14 +87,15 @@ internal sealed class PropertyActivator<TContext>
         }
 
         var properties = type.GetRuntimeProperties()
-            .Where((property) =>
-            {
-                return
-                    property.IsDefined(activateAttributeType) &&
-                    property.GetIndexParameters().Length == 0 &&
-                    property.SetMethod != null &&
-                    !property.SetMethod.IsStatic;
-            });
+            .Where(
+                (property) =>
+                {
+                    return property.IsDefined(activateAttributeType)
+                        && property.GetIndexParameters().Length == 0
+                        && property.SetMethod != null
+                        && !property.SetMethod.IsStatic;
+                }
+            );
 
         if (!includeNonPublic)
         {

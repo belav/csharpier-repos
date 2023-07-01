@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="MimeReflector.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Description {
-
+namespace System.Web.Services.Description
+{
     using System.Web.Services;
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
@@ -14,13 +14,15 @@ namespace System.Web.Services.Description {
     using System;
     using System.Reflection;
 
-    internal abstract class MimeReflector {
+    internal abstract class MimeReflector
+    {
         HttpProtocolReflector protocol;
 
         internal abstract bool ReflectParameters();
         internal abstract bool ReflectReturn();
 
-        internal HttpProtocolReflector ReflectionContext {
+        internal HttpProtocolReflector ReflectionContext
+        {
             get { return protocol; }
             set { protocol = value; }
         }

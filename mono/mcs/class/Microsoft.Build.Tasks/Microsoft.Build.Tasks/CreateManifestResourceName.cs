@@ -31,117 +31,151 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public abstract class CreateManifestResourceName : TaskExtension {
-	
-		ITaskItem[]	manifestResourceNames;
-		ITaskItem[]	resourceFiles;
-		string		rootNamespace;
-		
-		protected CreateManifestResourceName ()
-		{
-		}
-		
-		public override bool Execute ()
-		{
-			if (resourceFiles.Length == 0)
-				return true;
+namespace Microsoft.Build.Tasks
+{
+    public abstract class CreateManifestResourceName : TaskExtension
+    {
+        ITaskItem[] manifestResourceNames;
+        ITaskItem[] resourceFiles;
+        string rootNamespace;
 
-			manifestResourceNames = new ITaskItem [resourceFiles.Length];
-			for (int i = 0; i < resourceFiles.Length; i ++) {
-				ITaskItem item = resourceFiles [i];
-				string filename = item.ItemSpec;
+        protected CreateManifestResourceName() { }
 
-				Stream binaryStream = null;
-				try {
-					string dependentUponFileName = item.GetMetadata ("DependentUpon");
-					if (!String.IsNullOrEmpty (dependentUponFileName)) {
-						dependentUponFileName = Path.GetFullPath (Path.Combine (Path.GetDirectoryName (
-									filename), dependentUponFileName));
-						if (!File.Exists (dependentUponFileName)) {
-							Log.LogError ("Unable to create resource name for '{0}'," +
-									"as dependent file {1} was not found.",
-									filename, dependentUponFileName);
-							return false;
-						}
+        public override bool Execute()
+        {
+            if (resourceFiles.Length == 0)
+                return true;
 
-						binaryStream = new FileStream (dependentUponFileName, FileMode.Open,
-								FileAccess.Read);
-					}
+            manifestResourceNames = new ITaskItem[resourceFiles.Length];
+            for (int i = 0; i < resourceFiles.Length; i++)
+            {
+                ITaskItem item = resourceFiles[i];
+                string filename = item.ItemSpec;
 
-					manifestResourceNames [i] = new TaskItem (item);
-					manifestResourceNames [i].ItemSpec = CreateManifestName (
-								filename, item.GetMetadata ("TargetPath"), rootNamespace,
-								dependentUponFileName, binaryStream);
-				} finally {
-					if (binaryStream != null)
-						binaryStream.Close ();
-				}
-			}
+                Stream binaryStream = null;
+                try
+                {
+                    string dependentUponFileName = item.GetMetadata("DependentUpon");
+                    if (!String.IsNullOrEmpty(dependentUponFileName))
+                    {
+                        dependentUponFileName = Path.GetFullPath(
+                            Path.Combine(Path.GetDirectoryName(filename), dependentUponFileName)
+                        );
+                        if (!File.Exists(dependentUponFileName))
+                        {
+                            Log.LogError(
+                                "Unable to create resource name for '{0}',"
+                                    + "as dependent file {1} was not found.",
+                                filename,
+                                dependentUponFileName
+                            );
+                            return false;
+                        }
 
-			return true;
-		}
-		
-		[MonoTODO]
-		public static string MakeValidEverettIdentifier (string name)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		// No dependent file
-		internal static string GetResourceIdFromFileName (string fileName, string rootNamespace)
-		{
-			string culture = null;
-			if (String.Compare (Path.GetExtension (fileName), ".resx", true) == 0) {
-				fileName = Path.ChangeExtension (fileName, null);
-			} else {
-				string only_filename, extn;
-				if (AssignCulture.TrySplitResourceName (fileName, out only_filename, out culture, out extn)) {
-					//remove the culture from fileName
-					//foo.it.bmp -> foo.bmp
-					fileName = only_filename + "." + extn;
-				} else {
-					culture = null;
-				}
-			}
+                        binaryStream = new FileStream(
+                            dependentUponFileName,
+                            FileMode.Open,
+                            FileAccess.Read
+                        );
+                    }
 
-			// spaces in folder name are changed to _, those in filename remain
-			string dirname = Path.GetDirectoryName (fileName) ?? String.Empty;
-			dirname = dirname.Replace (' ', '_');
-			fileName = Path.Combine (dirname, Path.GetFileName (fileName));
-			string rname = fileName.Replace ('/', '.').Replace ('\\', '.');
+                    manifestResourceNames[i] = new TaskItem(item);
+                    manifestResourceNames[i].ItemSpec = CreateManifestName(
+                        filename,
+                        item.GetMetadata("TargetPath"),
+                        rootNamespace,
+                        dependentUponFileName,
+                        binaryStream
+                    );
+                }
+                finally
+                {
+                    if (binaryStream != null)
+                        binaryStream.Close();
+                }
+            }
 
-			if (!String.IsNullOrEmpty (rootNamespace))
-				rname = rootNamespace + "." + rname;
-			if (culture == null)
-				return rname;
-			else
-				return Path.Combine (culture, rname);
-		}
+            return true;
+        }
 
-		protected abstract string CreateManifestName (string fileName,
-							      string linkFileName,
-							      string rootNamespaceName,
-							      string dependentUponFileName,
-							      Stream binaryStream);
-		
-		protected abstract bool	IsSourceFile (string fileName);
-		
-		[Output]
-		public ITaskItem[] ManifestResourceNames {
-			get { return manifestResourceNames; }
-		}
-		
-		[Required]
-		public ITaskItem[] ResourceFiles {
-			get { return resourceFiles; }
-			set { resourceFiles = value; }
-		}
-		
-		public string RootNamespace {
-			get { return rootNamespace; }
-			set { rootNamespace = value; }
-		}
-	}
+        [MonoTODO]
+        public static string MakeValidEverettIdentifier(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        // No dependent file
+        internal static string GetResourceIdFromFileName(string fileName, string rootNamespace)
+        {
+            string culture = null;
+            if (String.Compare(Path.GetExtension(fileName), ".resx", true) == 0)
+            {
+                fileName = Path.ChangeExtension(fileName, null);
+            }
+            else
+            {
+                string only_filename,
+                    extn;
+                if (
+                    AssignCulture.TrySplitResourceName(
+                        fileName,
+                        out only_filename,
+                        out culture,
+                        out extn
+                    )
+                )
+                {
+                    //remove the culture from fileName
+                    //foo.it.bmp -> foo.bmp
+                    fileName = only_filename + "." + extn;
+                }
+                else
+                {
+                    culture = null;
+                }
+            }
+
+            // spaces in folder name are changed to _, those in filename remain
+            string dirname = Path.GetDirectoryName(fileName) ?? String.Empty;
+            dirname = dirname.Replace(' ', '_');
+            fileName = Path.Combine(dirname, Path.GetFileName(fileName));
+            string rname = fileName.Replace('/', '.').Replace('\\', '.');
+
+            if (!String.IsNullOrEmpty(rootNamespace))
+                rname = rootNamespace + "." + rname;
+            if (culture == null)
+                return rname;
+            else
+                return Path.Combine(culture, rname);
+        }
+
+        protected abstract string CreateManifestName(
+            string fileName,
+            string linkFileName,
+            string rootNamespaceName,
+            string dependentUponFileName,
+            Stream binaryStream
+        );
+
+        protected abstract bool IsSourceFile(string fileName);
+
+        [Output]
+        public ITaskItem[] ManifestResourceNames
+        {
+            get { return manifestResourceNames; }
+        }
+
+        [Required]
+        public ITaskItem[] ResourceFiles
+        {
+            get { return resourceFiles; }
+            set { resourceFiles = value; }
+        }
+
+        public string RootNamespace
+        {
+            get { return rootNamespace; }
+            set { rootNamespace = value; }
+        }
+    }
 }
-

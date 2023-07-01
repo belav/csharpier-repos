@@ -67,18 +67,18 @@ public class BuildPublishTests : BuildTestBase
     //[InlineData("Release")]
     //public void DefaultTemplate_AOT_OnlyWithPublishCommandLine_Then_PublishNoAOT(string config)
     //{
-        //string id = $"blz_aot_pub_{config}";
-        //CreateBlazorWasmTemplateProject(id);
+    //string id = $"blz_aot_pub_{config}";
+    //CreateBlazorWasmTemplateProject(id);
 
-        //// No relinking, no AOT
-        //BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack);
+    //// No relinking, no AOT
+    //BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack);
 
-        //// AOT=true only for the publish command line, similar to what
-        //// would happen when setting it in Publish dialog for VS
-        //BlazorPublish(new BlazorBuildOptions(id, config, expectedFileType: NativeFilesType.AOT, "-p:RunAOTCompilation=true");
+    //// AOT=true only for the publish command line, similar to what
+    //// would happen when setting it in Publish dialog for VS
+    //BlazorPublish(new BlazorBuildOptions(id, config, expectedFileType: NativeFilesType.AOT, "-p:RunAOTCompilation=true");
 
-        //// publish again, no AOT
-        //BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.Relinked);
+    //// publish again, no AOT
+    //BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.Relinked);
     //}
 
     [Theory]
@@ -89,7 +89,8 @@ public class BuildPublishTests : BuildTestBase
         // Based on https://github.com/dotnet/runtime/issues/59255
         string id = $"blz_dllimp_{config}";
         string projectFile = CreateProjectWithNativeReference(id);
-        string nativeSource = @"
+        string nativeSource =
+            @"
             #include <stdio.h>
 
             extern ""C"" {
@@ -100,7 +101,8 @@ public class BuildPublishTests : BuildTestBase
 
         File.WriteAllText(Path.Combine(_projectDir!, "mylib.cpp"), nativeSource);
 
-        string myDllImportCs = @$"
+        string myDllImportCs =
+            @$"
             using System.Runtime.InteropServices;
             namespace {id};
 
@@ -112,11 +114,17 @@ public class BuildPublishTests : BuildTestBase
 
         File.WriteAllText(Path.Combine(_projectDir!, "Pages", "MyDllImport.cs"), myDllImportCs);
 
-        AddItemsPropertiesToProject(projectFile, extraItems: @"<NativeFileReference Include=""mylib.cpp"" />");
-        BlazorAddRazorButton("cpp_add", """
+        AddItemsPropertiesToProject(
+            projectFile,
+            extraItems: @"<NativeFileReference Include=""mylib.cpp"" />"
+        );
+        BlazorAddRazorButton(
+            "cpp_add",
+            """
             var result = MyDllImports.cpp_add(10, 12);
             outputText = $"{result}";
-        """);
+        """
+        );
 
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.Relinked));
         CheckNativeFileLinked(forPublish: false);
@@ -126,23 +134,32 @@ public class BuildPublishTests : BuildTestBase
 
         // [ActiveIssue("https://github.com/dotnet/runtime/issues/79514")]
         //await BlazorRun(config, async (page) => {
-            //await page.Locator("text=\"cpp_add\"").ClickAsync();
-            //var txt = await page.Locator("p[role='test']").InnerHTMLAsync();
-            //Assert.Equal("Output: 22", txt);
+        //await page.Locator("text=\"cpp_add\"").ClickAsync();
+        //var txt = await page.Locator("p[role='test']").InnerHTMLAsync();
+        //Assert.Equal("Output: 22", txt);
         //});
 
         void CheckNativeFileLinked(bool forPublish)
         {
             // very crude way to check that the native file was linked in
             // needed because we don't run the blazor app yet
-            string objBuildDir = Path.Combine(_projectDir!, "obj", config, DefaultTargetFrameworkForBlazor, "wasm", forPublish ? "for-publish" : "for-build");
+            string objBuildDir = Path.Combine(
+                _projectDir!,
+                "obj",
+                config,
+                DefaultTargetFrameworkForBlazor,
+                "wasm",
+                forPublish ? "for-publish" : "for-build"
+            );
             string pinvokeTableHPath = Path.Combine(objBuildDir, "pinvoke-table.h");
             Assert.True(File.Exists(pinvokeTableHPath), $"Could not find {pinvokeTableHPath}");
 
             string pinvokeTableHContents = File.ReadAllText(pinvokeTableHPath);
             string pattern = $"\"cpp_add\".*{id}";
-            Assert.True(Regex.IsMatch(pinvokeTableHContents, pattern),
-                            $"Could not find {pattern} in {pinvokeTableHPath}");
+            Assert.True(
+                Regex.IsMatch(pinvokeTableHContents, pattern),
+                $"Could not find {pattern} in {pinvokeTableHPath}"
+            );
         }
     }
 
@@ -156,24 +173,26 @@ public class BuildPublishTests : BuildTestBase
         string wasmProjectFile = Path.Combine(wasmProjectDir, "wasm.csproj");
         Directory.CreateDirectory(wasmProjectDir);
         new DotNetCommand(s_buildEnv, _testOutput, useDefaultArgs: false)
-                .WithWorkingDirectory(wasmProjectDir)
-                .WithEnvironmentVariable("NUGET_PACKAGES", _nugetPackagesDir)
-                .ExecuteWithCapturedOutput("new blazorwasm")
-                .EnsureSuccessful();
-
+            .WithWorkingDirectory(wasmProjectDir)
+            .WithEnvironmentVariable("NUGET_PACKAGES", _nugetPackagesDir)
+            .ExecuteWithCapturedOutput("new blazorwasm")
+            .EnsureSuccessful();
 
         string razorProjectDir = Path.Combine(_projectDir!, "RazorClassLibrary");
         Directory.CreateDirectory(razorProjectDir);
         new DotNetCommand(s_buildEnv, _testOutput, useDefaultArgs: false)
-                .WithWorkingDirectory(razorProjectDir)
-                .WithEnvironmentVariable("NUGET_PACKAGES", _nugetPackagesDir)
-                .ExecuteWithCapturedOutput("new razorclasslib")
-                .EnsureSuccessful();
+            .WithWorkingDirectory(razorProjectDir)
+            .WithEnvironmentVariable("NUGET_PACKAGES", _nugetPackagesDir)
+            .ExecuteWithCapturedOutput("new razorclasslib")
+            .EnsureSuccessful();
 
-        AddItemsPropertiesToProject(wasmProjectFile, extraItems:@"
+        AddItemsPropertiesToProject(
+            wasmProjectFile,
+            extraItems: @"
             <ProjectReference Include=""..\RazorClassLibrary\RazorClassLibrary.csproj"" />
             <BlazorWebAssemblyLazyLoad Include=""RazorClassLibrary.dll"" />
-        ");
+        "
+        );
 
         _projectDir = wasmProjectDir;
         string config = "Release";
@@ -189,8 +208,10 @@ public class BuildPublishTests : BuildTestBase
 
         Assert.True(File.Exists(bootJson), $"Could not find {bootJson}");
         var jdoc = JsonDocument.Parse(File.ReadAllText(bootJson));
-        if (!jdoc.RootElement.TryGetProperty("resources", out JsonElement resValue) ||
-            !resValue.TryGetProperty("lazyAssembly", out JsonElement lazyVal))
+        if (
+            !jdoc.RootElement.TryGetProperty("resources", out JsonElement resValue)
+            || !resValue.TryGetProperty("lazyAssembly", out JsonElement lazyVal)
+        )
         {
             throw new XunitException($"Could not find resources.lazyAssembly object in {bootJson}");
         }

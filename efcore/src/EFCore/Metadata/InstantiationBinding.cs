@@ -16,8 +16,7 @@ public abstract class InstantiationBinding
     ///     Creates a new <see cref="InstantiationBinding" /> instance.
     /// </summary>
     /// <param name="parameterBindings">The parameter bindings to use.</param>
-    protected InstantiationBinding(
-        IReadOnlyList<ParameterBinding> parameterBindings)
+    protected InstantiationBinding(IReadOnlyList<ParameterBinding> parameterBindings)
     {
         Check.NotNull(parameterBindings, nameof(parameterBindings));
 

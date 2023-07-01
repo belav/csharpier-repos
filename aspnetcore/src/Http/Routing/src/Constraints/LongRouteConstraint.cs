@@ -18,7 +18,8 @@ public class LongRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchi
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -46,7 +47,12 @@ public class LongRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchi
 
     private static bool CheckConstraintCore(string? valueString)
     {
-        return long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out _);
+        return long.TryParse(
+            valueString,
+            NumberStyles.Integer,
+            CultureInfo.InvariantCulture,
+            out _
+        );
     }
 
     bool IParameterLiteralNodeMatchingPolicy.MatchesLiteral(string parameterName, string literal)

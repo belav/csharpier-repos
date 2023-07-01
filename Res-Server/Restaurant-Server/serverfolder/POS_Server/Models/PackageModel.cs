@@ -18,32 +18,29 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> createDate { get; set; }
 
         public Nullable<System.DateTime> updateDate { get; set; }
-       
-        public bool canDelete { get; set; }
 
+        public bool canDelete { get; set; }
 
         // item parent
         public Nullable<long> pitemId { get; set; }
         public string pcode { get; set; }
         public string pitemName { get; set; }
-      
+
         public string type { get; set; }
         public string image { get; set; }
-      
 
         //units
         public Nullable<long> punitId { get; set; }
         public string punitName { get; set; }
 
         //item chiled
-       
-        public Nullable<long>  citemId { get; set; }
+
+        public Nullable<long> citemId { get; set; }
         public string ccode { get; set; }
         public string citemName { get; set; }
 
         public string ctype { get; set; }
         public string cimage { get; set; }
-
 
         //units
         public Nullable<long> cunitId { get; set; }

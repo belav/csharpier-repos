@@ -21,7 +21,7 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
 
             using StreamWriter sw = new StreamWriter($"{Path.Combine(path, classname)}.cs");
             sw.WriteLine(
-$@"// Licensed to the .NET Foundation under one or more agreements.
+                $@"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // This is a programmatically generated file from Regex.GenerateUnicodeTables.
@@ -30,18 +30,24 @@ $@"// Licensed to the .NET Foundation under one or more agreements.
 namespace {namespacename}
 {{
     internal static class {classname}
-    {{");
+    {{"
+            );
             WriteIgnoreCaseBDD(sw);
-            sw.WriteLine($@"    }}
-}}");
+            sw.WriteLine(
+                $@"    }}
+}}"
+            );
         }
 
         private static void WriteIgnoreCaseBDD(StreamWriter sw)
         {
-            sw.WriteLine("        /// <summary>Serialized BDD for mapping characters to their case-ignoring equivalence classes in the default (en-US) culture.</summary>");
+            sw.WriteLine(
+                "        /// <summary>Serialized BDD for mapping characters to their case-ignoring equivalence classes in the default (en-US) culture.</summary>"
+            );
 
             var solver = new CharSetSolver();
-            List<EquivalenceClass> ignoreCaseEquivalenceClasses = ComputeIgnoreCaseEquivalenceClasses(solver, new CultureInfo(DefaultCultureName));
+            List<EquivalenceClass> ignoreCaseEquivalenceClasses =
+                ComputeIgnoreCaseEquivalenceClasses(solver, new CultureInfo(DefaultCultureName));
             BDD ignorecase = solver.False;
             foreach (EquivalenceClass ec in ignoreCaseEquivalenceClasses)
             {
@@ -56,7 +62,10 @@ namespace {namespacename}
             sw.WriteLine(";");
         }
 
-        private static List<EquivalenceClass> ComputeIgnoreCaseEquivalenceClasses(CharSetSolver solver, CultureInfo culture)
+        private static List<EquivalenceClass> ComputeIgnoreCaseEquivalenceClasses(
+            CharSetSolver solver,
+            CultureInfo culture
+        )
         {
             var ignoreCase = new Dictionary<char, EquivalenceClass>();
             var sets = new List<EquivalenceClass>();
@@ -86,6 +95,7 @@ namespace {namespacename}
         private class EquivalenceClass
         {
             public BDD _set;
+
             public EquivalenceClass(BDD set)
             {
                 _set = set;

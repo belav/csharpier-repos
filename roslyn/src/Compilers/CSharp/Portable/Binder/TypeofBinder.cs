@@ -14,10 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// This binder is for binding the argument to typeof.  It traverses
     /// the syntax marking each open type ("unbound generic type" in the
-    /// C# spec) as either allowed or not allowed, so that BindType can 
-    /// appropriately return either the corresponding type symbol or an 
-    /// error type.  It also indicates whether the argument as a whole 
-    /// should be considered open so that the flag can be set 
+    /// C# spec) as either allowed or not allowed, so that BindType can
+    /// appropriately return either the corresponding type symbol or an
+    /// error type.  It also indicates whether the argument as a whole
+    /// should be considered open so that the flag can be set
     /// appropriately in BoundTypeOfOperator.
     /// </summary>
     internal sealed class TypeofBinder : Binder
@@ -59,7 +59,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Values are false if the node should result in an error and true otherwise.
             /// </param>
             /// <param name="isUnboundGenericType">True if no constructed generic type was encountered.</param>
-            public static void Visit(ExpressionSyntax typeSyntax, out Dictionary<GenericNameSyntax, bool> allowedMap, out bool isUnboundGenericType)
+            public static void Visit(
+                ExpressionSyntax typeSyntax,
+                out Dictionary<GenericNameSyntax, bool> allowedMap,
+                out bool isUnboundGenericType
+            )
             {
                 OpenTypeVisitor visitor = new OpenTypeVisitor();
                 visitor.Visit(typeSyntax);

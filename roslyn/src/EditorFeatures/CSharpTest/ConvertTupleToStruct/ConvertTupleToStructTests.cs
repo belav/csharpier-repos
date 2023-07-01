@@ -28,11 +28,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
     public class ConvertTupleToStructTests
     {
-        private static OptionsCollection PreferImplicitTypeWithInfo()
-            => new(LanguageNames.CSharp)
+        private static OptionsCollection PreferImplicitTypeWithInfo() =>
+            new(LanguageNames.CSharp)
             {
                 { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Suggestion },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true, NotificationOption2.Suggestion },
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    true,
+                    NotificationOption2.Suggestion
+                },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Suggestion },
             };
 
@@ -44,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
             LanguageVersion languageVersion = LanguageVersion.CSharp9,
             OptionsCollection? options = null,
             TestHost testHost = TestHost.InProcess,
-            string[]? actions = null)
+            string[]? actions = null
+        )
         {
             if (index != 0)
                 Assert.NotNull(equivalenceKey);
@@ -69,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleType(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -78,7 +84,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -135,7 +142,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypeToRecord(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -144,7 +152,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -165,13 +174,20 @@ internal record struct NewStruct(int a, int B)
         return new NewStruct(value.a, value.B);
     }
 }";
-            await TestAsync(text, expected, languageVersion: LanguageVersion.Preview, options: PreferImplicitTypeWithInfo(), testHost: host);
+            await TestAsync(
+                text,
+                expected,
+                languageVersion: LanguageVersion.Preview,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypeToRecord_FileScopedNamespace(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 namespace N;
 
 class Test
@@ -182,7 +198,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 namespace N;
 
 class Test
@@ -205,13 +222,20 @@ internal record struct NewStruct(int a, int b)
         return new NewStruct(value.a, value.b);
     }
 }";
-            await TestAsync(text, expected, languageVersion: LanguageVersion.Preview, options: PreferImplicitTypeWithInfo(), testHost: host);
+            await TestAsync(
+                text,
+                expected,
+                languageVersion: LanguageVersion.Preview,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypeToRecord_MatchedNameCasing(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -220,7 +244,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -241,13 +266,24 @@ internal record struct NewStruct(int A, int B)
         return new NewStruct(value.A, value.B);
     }
 }";
-            await TestAsync(text, expected, languageVersion: LanguageVersion.Preview, options: PreferImplicitTypeWithInfo(), testHost: host);
+            await TestAsync(
+                text,
+                expected,
+                languageVersion: LanguageVersion.Preview,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
-        [Theory, WorkItem(45451, "https://github.com/dotnet/roslyn/issues/45451"), CombinatorialData]
+        [
+            Theory,
+            WorkItem(45451, "https://github.com/dotnet/roslyn/issues/45451"),
+            CombinatorialData
+        ]
         public async Task ConvertSingleTupleType_ChangeArgumentNameCase(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -256,7 +292,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -310,10 +347,15 @@ internal struct NewStruct
             await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host);
         }
 
-        [Theory, WorkItem(45451, "https://github.com/dotnet/roslyn/issues/45451"), CombinatorialData]
+        [
+            Theory,
+            WorkItem(45451, "https://github.com/dotnet/roslyn/issues/45451"),
+            CombinatorialData
+        ]
         public async Task ConvertSingleTupleType_ChangeArgumentNameCase_Uppercase(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -322,7 +364,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -376,9 +419,12 @@ internal struct NewStruct
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name2",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -386,7 +432,8 @@ internal struct NewStruct
                 name: "Name2",
                 prefix: "p_",
                 suffix: "_",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -398,7 +445,8 @@ internal struct NewStruct
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             var options = PreferImplicitTypeWithInfo();
             options.Add(NamingStyleOptions.NamingPreferences, info);
@@ -406,10 +454,15 @@ internal struct NewStruct
             await TestAsync(text, expected, options: options, testHost: host);
         }
 
-        [Theory, WorkItem(39916, "https://github.com/dotnet/roslyn/issues/39916"), CombinatorialData]
+        [
+            Theory,
+            WorkItem(39916, "https://github.com/dotnet/roslyn/issues/39916"),
+            CombinatorialData
+        ]
         public async Task ConvertSingleTupleType_Explicit(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -418,7 +471,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -475,7 +529,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypeNoNames(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -484,7 +539,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -541,7 +597,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypePartialNames(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -550,7 +607,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -607,7 +665,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertFromType(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -617,7 +676,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -675,7 +735,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertFromType2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     (int a, int b) Method()
@@ -686,7 +747,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     NewStruct Method()
@@ -745,7 +807,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertFromType3(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     (int a, int b) Method()
@@ -756,7 +819,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     NewStruct Method()
@@ -815,7 +879,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertFromType4(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -825,7 +890,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -883,7 +949,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypeInNamespace(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 namespace N
 {
     class Test
@@ -895,7 +962,8 @@ namespace N
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 namespace N
 {
     class Test
@@ -956,7 +1024,8 @@ namespace N
         [Theory, CombinatorialData]
         public async Task TestNonLiteralNames_WithUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -966,7 +1035,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -1024,7 +1094,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestNonLiteralNames_WithoutUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1033,7 +1104,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1090,7 +1162,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertSingleTupleTypeWithInferredName(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -1099,7 +1172,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -1156,7 +1230,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertMultipleInstancesInSameMethod(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1166,7 +1241,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1224,7 +1300,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertMultipleInstancesAcrossMethods(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1240,7 +1317,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1304,7 +1382,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task OnlyConvertMatchingTypesInSameMethod(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -1316,7 +1395,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -1376,7 +1456,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestFixAllMatchesInSingleMethod(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -1388,7 +1469,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -1448,7 +1530,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestFixNotAcrossMethods(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1464,7 +1547,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1528,7 +1612,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestTrivia_WithUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -1538,7 +1623,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -1596,7 +1682,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestTrivia_WithoutUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1605,7 +1692,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1662,7 +1750,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task NotIfReferencesAnonymousTypeInternally(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1678,7 +1767,8 @@ class Test
         [Theory, CombinatorialData]
         public async Task ConvertMultipleNestedInstancesInSameMethod1_WithUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1687,7 +1777,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -1746,7 +1837,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertMultipleNestedInstancesInSameMethod1_WithoutUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1755,7 +1847,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -1814,7 +1907,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertMultipleNestedInstancesInSameMethod2_WithUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1823,7 +1917,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -1882,7 +1977,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertMultipleNestedInstancesInSameMethod2_WithoutUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1891,7 +1987,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -1950,7 +2047,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task RenameAnnotationOnStartingPoint(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1960,7 +2058,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2018,7 +2117,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task CapturedMethodTypeParameters_WithUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections.Generic;
 class Test<X> where X : struct
 {
@@ -2028,7 +2128,8 @@ class Test<X> where X : struct
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 class Test<X> where X : struct
 {
@@ -2083,16 +2184,20 @@ internal struct NewStruct<X, Y>
     }
 }";
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions: new[]
-                {
-                    FeaturesResources.updating_usages_in_containing_member
-                });
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: new[] { FeaturesResources.updating_usages_in_containing_member }
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task CapturedMethodTypeParameters_WithoutUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test<X> where X : struct
 {
     void Method<Y>(System.Collections.Generic.List<X> x, Y[] y) where Y : class, new()
@@ -2101,7 +2206,8 @@ class Test<X> where X : struct
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test<X> where X : struct
@@ -2157,16 +2263,20 @@ internal struct NewStruct<X, Y>
     }
 }";
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions: new[]
-                {
-                    FeaturesResources.updating_usages_in_containing_member
-                });
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: new[] { FeaturesResources.updating_usages_in_containing_member }
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task NewTypeNameCollision(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -2179,7 +2289,8 @@ class NewStruct
 {
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2240,7 +2351,8 @@ internal struct NewStruct1
         [Theory, CombinatorialData]
         public async Task TestDuplicatedName(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -2249,7 +2361,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2315,62 +2428,140 @@ internal struct NewStruct
                 {
                     ExpectedDiagnostics =
                     {
-    // /0/Test0.cs(6,22): error CS7036: There is no argument given that corresponds to the required parameter 'a' of 'NewStruct.NewStruct(int, int)'
-    DiagnosticResult.CompilerError("CS7036").WithSpan(6, 22, 6, 31).WithArguments("a", "NewStruct.NewStruct(int, int)"),
-    // /0/Test0.cs(13,16): error CS0102: The type 'NewStruct' already contains a definition for 'a'
-    DiagnosticResult.CompilerError("CS0102").WithSpan(13, 16, 13, 17).WithArguments("NewStruct", "a"),
-    // /0/Test0.cs(15,12): error CS0171: Field 'NewStruct.a' must be fully assigned before control is returned to the caller. Consider updating to language version 'preview' to auto-default the field.
-    DiagnosticResult.CompilerError("CS0171").WithSpan(15, 12, 15, 21).WithArguments("NewStruct.a", "11.0"),
-    // /0/Test0.cs(15,12): error CS0171: Field 'NewStruct.a' must be fully assigned before control is returned to the caller. Consider updating to language version 'preview' to auto-default the field.
-    DiagnosticResult.CompilerError("CS0171").WithSpan(15, 12, 15, 21).WithArguments("NewStruct.a", "11.0"),
-    // /0/Test0.cs(15,33): error CS0100: The parameter name 'a' is a duplicate
-    DiagnosticResult.CompilerError("CS0100").WithSpan(15, 33, 15, 34).WithArguments("a"),
-    // /0/Test0.cs(17,14): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(17, 14, 17, 15).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(17,18): error CS0229: Ambiguity between 'int a' and 'int a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(17, 18, 17, 19).WithArguments("int a", "int a"),
-    // /0/Test0.cs(18,14): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(18, 14, 18, 15).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(18,18): error CS0229: Ambiguity between 'int a' and 'int a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(18, 18, 18, 19).WithArguments("int a", "int a"),
-    // /0/Test0.cs(24,21): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(24, 21, 24, 22).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(24,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(24, 32, 24, 33).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(25,21): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(25, 21, 25, 22).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(25,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(25, 32, 25, 33).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(31,50): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(31, 50, 31, 51).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(32,50): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(32, 50, 32, 51).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(36,17): error CS0177: The out parameter 'a' must be assigned to before control leaves the current method
-    DiagnosticResult.CompilerError("CS0177").WithSpan(36, 17, 36, 28).WithArguments("a"),
-    // /0/Test0.cs(36,17): error CS0177: The out parameter 'a' must be assigned to before control leaves the current method
-    DiagnosticResult.CompilerError("CS0177").WithSpan(36, 17, 36, 28).WithArguments("a"),
-    // /0/Test0.cs(36,48): error CS0100: The parameter name 'a' is a duplicate
-    DiagnosticResult.CompilerError("CS0100").WithSpan(36, 48, 36, 49).WithArguments("a"),
-    // /0/Test0.cs(38,9): error CS0229: Ambiguity between 'out int a' and 'out int a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(38, 9, 38, 10).WithArguments("out int a", "out int a"),
-    // /0/Test0.cs(38,18): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(38, 18, 38, 19).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(39,9): error CS0229: Ambiguity between 'out int a' and 'out int a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(39, 9, 39, 10).WithArguments("out int a", "out int a"),
-    // /0/Test0.cs(39,18): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(39, 18, 39, 19).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(42,49): error CS8127: Tuple element names must be unique.
-    DiagnosticResult.CompilerError("CS8127").WithSpan(42, 49, 42, 50),
-    // /0/Test0.cs(44,23): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(44, 23, 44, 24).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(44,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(44, 32, 44, 33).WithArguments("NewStruct.a", "NewStruct.a"),
-    // /0/Test0.cs(47,59): error CS8127: Tuple element names must be unique.
-    DiagnosticResult.CompilerError("CS8127").WithSpan(47, 59, 47, 60),
-    // /0/Test0.cs(49,36): error CS0229: Ambiguity between '(int a, int a).a' and '(int a, int a).a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(49, 36, 49, 37).WithArguments("(int a, int a).a", "(int a, int a).a"),
-    // /0/Test0.cs(49,45): error CS0229: Ambiguity between '(int a, int a).a' and '(int a, int a).a'
-    DiagnosticResult.CompilerError("CS0229").WithSpan(49, 45, 49, 46).WithArguments("(int a, int a).a", "(int a, int a).a"),
+                        // /0/Test0.cs(6,22): error CS7036: There is no argument given that corresponds to the required parameter 'a' of 'NewStruct.NewStruct(int, int)'
+                        DiagnosticResult
+                            .CompilerError("CS7036")
+                            .WithSpan(6, 22, 6, 31)
+                            .WithArguments("a", "NewStruct.NewStruct(int, int)"),
+                        // /0/Test0.cs(13,16): error CS0102: The type 'NewStruct' already contains a definition for 'a'
+                        DiagnosticResult
+                            .CompilerError("CS0102")
+                            .WithSpan(13, 16, 13, 17)
+                            .WithArguments("NewStruct", "a"),
+                        // /0/Test0.cs(15,12): error CS0171: Field 'NewStruct.a' must be fully assigned before control is returned to the caller. Consider updating to language version 'preview' to auto-default the field.
+                        DiagnosticResult
+                            .CompilerError("CS0171")
+                            .WithSpan(15, 12, 15, 21)
+                            .WithArguments("NewStruct.a", "11.0"),
+                        // /0/Test0.cs(15,12): error CS0171: Field 'NewStruct.a' must be fully assigned before control is returned to the caller. Consider updating to language version 'preview' to auto-default the field.
+                        DiagnosticResult
+                            .CompilerError("CS0171")
+                            .WithSpan(15, 12, 15, 21)
+                            .WithArguments("NewStruct.a", "11.0"),
+                        // /0/Test0.cs(15,33): error CS0100: The parameter name 'a' is a duplicate
+                        DiagnosticResult
+                            .CompilerError("CS0100")
+                            .WithSpan(15, 33, 15, 34)
+                            .WithArguments("a"),
+                        // /0/Test0.cs(17,14): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(17, 14, 17, 15)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(17,18): error CS0229: Ambiguity between 'int a' and 'int a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(17, 18, 17, 19)
+                            .WithArguments("int a", "int a"),
+                        // /0/Test0.cs(18,14): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(18, 14, 18, 15)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(18,18): error CS0229: Ambiguity between 'int a' and 'int a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(18, 18, 18, 19)
+                            .WithArguments("int a", "int a"),
+                        // /0/Test0.cs(24,21): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(24, 21, 24, 22)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(24,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(24, 32, 24, 33)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(25,21): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(25, 21, 25, 22)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(25,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(25, 32, 25, 33)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(31,50): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(31, 50, 31, 51)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(32,50): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(32, 50, 32, 51)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(36,17): error CS0177: The out parameter 'a' must be assigned to before control leaves the current method
+                        DiagnosticResult
+                            .CompilerError("CS0177")
+                            .WithSpan(36, 17, 36, 28)
+                            .WithArguments("a"),
+                        // /0/Test0.cs(36,17): error CS0177: The out parameter 'a' must be assigned to before control leaves the current method
+                        DiagnosticResult
+                            .CompilerError("CS0177")
+                            .WithSpan(36, 17, 36, 28)
+                            .WithArguments("a"),
+                        // /0/Test0.cs(36,48): error CS0100: The parameter name 'a' is a duplicate
+                        DiagnosticResult
+                            .CompilerError("CS0100")
+                            .WithSpan(36, 48, 36, 49)
+                            .WithArguments("a"),
+                        // /0/Test0.cs(38,9): error CS0229: Ambiguity between 'out int a' and 'out int a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(38, 9, 38, 10)
+                            .WithArguments("out int a", "out int a"),
+                        // /0/Test0.cs(38,18): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(38, 18, 38, 19)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(39,9): error CS0229: Ambiguity between 'out int a' and 'out int a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(39, 9, 39, 10)
+                            .WithArguments("out int a", "out int a"),
+                        // /0/Test0.cs(39,18): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(39, 18, 39, 19)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(42,49): error CS8127: Tuple element names must be unique.
+                        DiagnosticResult.CompilerError("CS8127").WithSpan(42, 49, 42, 50),
+                        // /0/Test0.cs(44,23): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(44, 23, 44, 24)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(44,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(44, 32, 44, 33)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
+                        // /0/Test0.cs(47,59): error CS8127: Tuple element names must be unique.
+                        DiagnosticResult.CompilerError("CS8127").WithSpan(47, 59, 47, 60),
+                        // /0/Test0.cs(49,36): error CS0229: Ambiguity between '(int a, int a).a' and '(int a, int a).a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(49, 36, 49, 37)
+                            .WithArguments("(int a, int a).a", "(int a, int a).a"),
+                        // /0/Test0.cs(49,45): error CS0229: Ambiguity between '(int a, int a).a' and '(int a, int a).a'
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(49, 45, 49, 46)
+                            .WithArguments("(int a, int a).a", "(int a, int a).a"),
                     }
                 },
                 Options = { PreferImplicitTypeWithInfo() },
@@ -2380,7 +2571,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestInLambda1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -2395,7 +2587,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2458,7 +2651,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestInLambda2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -2473,7 +2667,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2536,7 +2731,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestInLocalFunction1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -2551,7 +2747,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2614,7 +2811,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestInLocalFunction2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -2629,7 +2827,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -2692,7 +2891,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task ConvertWithDefaultNames1(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -2705,7 +2905,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2761,17 +2962,24 @@ internal struct NewStruct
     }
 }";
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions: new[]
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
-                });
+                }
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task ConvertWithDefaultNames2(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -2783,7 +2991,8 @@ class Test
         var t5 = (Item1: 1, Item2: 2);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -2839,11 +3048,17 @@ internal struct NewStruct
     }
 }";
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions: new[]
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
-                });
+                }
+            );
         }
 
         #endregion
@@ -2853,7 +3068,8 @@ internal struct NewStruct
         [Theory, CombinatorialData]
         public async Task TestCapturedTypeParameter_UpdateType_WithUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test<T>
@@ -2875,7 +3091,8 @@ class Test<T>
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2942,18 +3159,25 @@ internal struct NewStruct<T>
 }";
 
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host, actions: new[]
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type
-                });
+                }
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestCapturedTypeParameter_UpdateType_WithoutUsings(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 class Test<T>
 {
     void Method(T t)
@@ -2973,7 +3197,8 @@ class Test<T>
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test<T>
@@ -3039,18 +3264,25 @@ internal struct NewStruct<T>
 }";
 
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host, actions: new[]
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: new[]
                 {
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type
-                });
+                }
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UpdateAllInType_SinglePart_SingleFile(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -3074,7 +3306,8 @@ class Other
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -3141,14 +3374,20 @@ internal struct NewStruct
     }
 }";
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host);
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UpdateAllInType_MultiplePart_SingleFile(TestHost host)
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 partial class Test
@@ -3176,7 +3415,8 @@ class Other
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 partial class Test
@@ -3247,14 +3487,20 @@ internal struct NewStruct
     }
 }";
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host);
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UpdateAllInType_MultiplePart_MultipleFile(TestHost host)
         {
-            var text1 = @"
+            var text1 =
+                @"
 using System;
 
 partial class Test
@@ -3272,7 +3518,8 @@ partial class Other
         var t1 = (a: 1, b: 2);
     }
 }";
-            var text2 = @"
+            var text2 =
+                @"
 using System;
 
 partial class Test
@@ -3292,7 +3539,8 @@ partial class Other
     }
 }";
 
-            var expected1 = @"
+            var expected1 =
+                @"
 using System;
 
 partial class Test
@@ -3353,7 +3601,8 @@ internal struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            var expected2 = @"
+            var expected2 =
+                @"
 using System;
 
 partial class Test
@@ -3375,22 +3624,8 @@ partial class Other
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        text1,
-                        text2,
-                    }
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        expected1,
-                        expected2,
-                    }
-                },
+                TestState = { Sources = { text1, text2, } },
+                FixedState = { Sources = { expected1, expected2, } },
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = Scope.ContainingType.ToString(),
                 TestHost = host,
@@ -3405,7 +3640,8 @@ partial class Other
         [Theory, CombinatorialData]
         public async Task UpdateAllInProject_MultiplePart_MultipleFile_WithNamespace(TestHost host)
         {
-            var text1 = @"
+            var text1 =
+                @"
 using System;
 
 namespace N
@@ -3426,7 +3662,8 @@ namespace N
         }
     }
 }";
-            var text2 = @"
+            var text2 =
+                @"
 using System;
 
 partial class Test
@@ -3446,7 +3683,8 @@ partial class Other
     }
 }";
 
-            var expected1 = @"
+            var expected1 =
+                @"
 using System;
 
 namespace N
@@ -3510,7 +3748,8 @@ namespace N
         }
     }
 }";
-            var expected2 = @"
+            var expected2 =
+                @"
 using System;
 
 partial class Test
@@ -3535,14 +3774,8 @@ partial class Other
                 CodeActionIndex = 2,
                 CodeActionEquivalenceKey = Scope.ContainingProject.ToString(),
                 TestHost = host,
-                TestState =
-                {
-                    Sources = { text1, text2, },
-                },
-                FixedState =
-                {
-                    Sources = { expected1, expected2 },
-                },
+                TestState = { Sources = { text1, text2, }, },
+                FixedState = { Sources = { expected1, expected2 }, },
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
         }
@@ -3554,7 +3787,8 @@ partial class Other
         [Theory, CombinatorialData]
         public async Task UpdateDependentProjects_DirectDependency(TestHost host)
         {
-            var text1 = @"
+            var text1 =
+                @"
 using System;
 
 partial class Test
@@ -3573,7 +3807,8 @@ partial class Other
     }
 }";
 
-            var text2 = @"
+            var text2 =
+                @"
 using System;
 
 partial class Other
@@ -3583,7 +3818,8 @@ partial class Other
         var t1 = (a: 1, b: 2);
     }
 }";
-            var expected1 = @"
+            var expected1 =
+                @"
 using System;
 
 partial class Test
@@ -3644,7 +3880,8 @@ public struct NewStruct
         return new NewStruct(value.a, value.b);
     }
 }";
-            var expected2 = @"
+            var expected2 =
+                @"
 using System;
 
 partial class Other
@@ -3691,7 +3928,8 @@ partial class Other
         [Theory, CombinatorialData]
         public async Task UpdateDependentProjects_NoDependency(TestHost host)
         {
-            var text1 = @"
+            var text1 =
+                @"
 using System;
 
 partial class Test
@@ -3709,7 +3947,8 @@ partial class Other
         var t1 = (a: 1, b: 2);
     }
 }";
-            var text2 = @"
+            var text2 =
+                @"
 using System;
 
 partial class Other
@@ -3719,7 +3958,8 @@ partial class Other
         var t1 = (a: 1, b: 2);
     }
 }";
-            var expected1 = @"
+            var expected1 =
+                @"
 using System;
 
 partial class Test
@@ -3781,7 +4021,8 @@ public struct NewStruct
     }
 }";
 
-            var expected2 = @"
+            var expected2 =
+                @"
 using System;
 
 partial class Other
@@ -3800,18 +4041,12 @@ partial class Other
                 TestState =
                 {
                     Sources = { text1 },
-                    AdditionalProjects =
-                    {
-                        ["DependencyProject"] = { Sources = { text2 } }
-                    },
+                    AdditionalProjects = { ["DependencyProject"] = { Sources = { text2 } } },
                 },
                 FixedState =
                 {
                     Sources = { expected1 },
-                    AdditionalProjects =
-                    {
-                        ["DependencyProject"] = { Sources = { expected2 } }
-                    },
+                    AdditionalProjects = { ["DependencyProject"] = { Sources = { expected2 } } },
                 },
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();

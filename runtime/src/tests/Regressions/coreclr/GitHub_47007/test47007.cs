@@ -8,6 +8,7 @@ class Base<T1>
 {
     public virtual Base<T1> Method() => null;
 }
+
 class Derived<T1, T2> : Base<T1>
 {
     public override Derived<T1, T2> Method() => null;

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             DiagnosticSeverity severity,
             ImmutableHashSet<string> fixableCompilerDiagnostics,
             ILogger logger,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         Task RunCodeAnalysisAsync(
             CodeAnalysisResult result,
@@ -28,6 +29,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             DiagnosticSeverity severity,
             ImmutableHashSet<string> fixableCompilerDiagnostics,
             ILogger logger,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

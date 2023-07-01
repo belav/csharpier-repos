@@ -61,13 +61,22 @@ namespace Internal.Runtime.CallConverter
 
     public static class CallingConventionInfo
     {
-        public static bool TypeUsesReturnBuffer(RuntimeTypeHandle returnType, bool methodWithReturnTypeIsVarArg)
+        public static bool TypeUsesReturnBuffer(
+            RuntimeTypeHandle returnType,
+            bool methodWithReturnTypeIsVarArg
+        )
         {
             TypeHandle thReturnType = new TypeHandle(false, returnType);
             CorElementType typeReturnType = thReturnType.GetCorElementType();
 
             bool usesReturnBuffer;
-            ArgIterator.ComputeReturnValueTreatment(typeReturnType, thReturnType, methodWithReturnTypeIsVarArg, out usesReturnBuffer, out _);
+            ArgIterator.ComputeReturnValueTreatment(
+                typeReturnType,
+                thReturnType,
+                methodWithReturnTypeIsVarArg,
+                out usesReturnBuffer,
+                out _
+            );
 
             return usesReturnBuffer;
         }
@@ -96,11 +105,29 @@ namespace Internal.Runtime.CallConverter
             return _isByRef == other._isByRef && _eeType == other._eeType;
         }
 
-        public override int GetHashCode() { return (int)_eeType->HashCode; }
+        public override int GetHashCode()
+        {
+            return (int)_eeType->HashCode;
+        }
 
-        public bool IsNull() { return _eeType == null && !_isByRef; }
-        public bool IsValueType() { if (_isByRef) return false; return _eeType->IsValueType; }
-        public bool IsPointerType() { if (_isByRef) return false; return _eeType->IsPointerType; }
+        public bool IsNull()
+        {
+            return _eeType == null && !_isByRef;
+        }
+
+        public bool IsValueType()
+        {
+            if (_isByRef)
+                return false;
+            return _eeType->IsValueType;
+        }
+
+        public bool IsPointerType()
+        {
+            if (_isByRef)
+                return false;
+            return _eeType->IsPointerType;
+        }
 
         public unsafe uint GetSize()
         {
@@ -123,6 +150,7 @@ namespace Internal.Runtime.CallConverter
             return _eeType->RequiresAlign8;
 #endif
         }
+
         public bool IsHFA()
         {
 #if !TARGET_ARM && !TARGET_ARM64
@@ -165,9 +193,14 @@ namespace Internal.Runtime.CallConverter
             // but for other types, it doesn't match the needs in this file.
             EETypeElementType rhCorElementType = _eeType->ElementType;
 
-            if (rhCorElementType >= EETypeElementType.Boolean && rhCorElementType <= EETypeElementType.UInt64)
+            if (
+                rhCorElementType >= EETypeElementType.Boolean
+                && rhCorElementType <= EETypeElementType.UInt64
+            )
             {
-                Debug.Assert((int)EETypeElementType.Boolean == (int)CorElementType.ELEMENT_TYPE_BOOLEAN);
+                Debug.Assert(
+                    (int)EETypeElementType.Boolean == (int)CorElementType.ELEMENT_TYPE_BOOLEAN
+                );
                 Debug.Assert((int)EETypeElementType.Int32 == (int)CorElementType.ELEMENT_TYPE_I4);
                 Debug.Assert((int)EETypeElementType.UInt64 == (int)CorElementType.ELEMENT_TYPE_U8);
                 return (CorElementType)rhCorElementType;
@@ -207,38 +240,38 @@ namespace Internal.Runtime.CallConverter
         }
 
         private static int[] s_elemSizes = new int[]
-            {
-                0,  //ELEMENT_TYPE_END         0x0
-                0,  //ELEMENT_TYPE_VOID        0x1
-                1,  //ELEMENT_TYPE_BOOLEAN     0x2
-                2,  //ELEMENT_TYPE_CHAR        0x3
-                1,  //ELEMENT_TYPE_I1          0x4
-                1,  //ELEMENT_TYPE_U1          0x5
-                2,  //ELEMENT_TYPE_I2          0x6
-                2,  //ELEMENT_TYPE_U2          0x7
-                4,  //ELEMENT_TYPE_I4          0x8
-                4,  //ELEMENT_TYPE_U4          0x9
-                8,  //ELEMENT_TYPE_I8          0xa
-                8,  //ELEMENT_TYPE_U8          0xb
-                4,  //ELEMENT_TYPE_R4          0xc
-                8,  //ELEMENT_TYPE_R8          0xd
-                -2, //ELEMENT_TYPE_STRING      0xe
-                -2, //ELEMENT_TYPE_PTR         0xf
-                -2, //ELEMENT_TYPE_BYREF       0x10
-                -1, //ELEMENT_TYPE_VALUETYPE   0x11
-                -2, //ELEMENT_TYPE_CLASS       0x12
-                0,  //ELEMENT_TYPE_VAR         0x13
-                -2, //ELEMENT_TYPE_ARRAY       0x14
-                0,  //ELEMENT_TYPE_GENERICINST 0x15
-                0,  //ELEMENT_TYPE_TYPEDBYREF  0x16
-                0,  // UNUSED                  0x17
-                -2, //ELEMENT_TYPE_I           0x18
-                -2, //ELEMENT_TYPE_U           0x19
-                0,  // UNUSED                  0x1a
-                -2, //ELEMENT_TYPE_FPTR        0x1b
-                -2, //ELEMENT_TYPE_OBJECT      0x1c
-                -2, //ELEMENT_TYPE_SZARRAY     0x1d
-            };
+        {
+            0, //ELEMENT_TYPE_END         0x0
+            0, //ELEMENT_TYPE_VOID        0x1
+            1, //ELEMENT_TYPE_BOOLEAN     0x2
+            2, //ELEMENT_TYPE_CHAR        0x3
+            1, //ELEMENT_TYPE_I1          0x4
+            1, //ELEMENT_TYPE_U1          0x5
+            2, //ELEMENT_TYPE_I2          0x6
+            2, //ELEMENT_TYPE_U2          0x7
+            4, //ELEMENT_TYPE_I4          0x8
+            4, //ELEMENT_TYPE_U4          0x9
+            8, //ELEMENT_TYPE_I8          0xa
+            8, //ELEMENT_TYPE_U8          0xb
+            4, //ELEMENT_TYPE_R4          0xc
+            8, //ELEMENT_TYPE_R8          0xd
+            -2, //ELEMENT_TYPE_STRING      0xe
+            -2, //ELEMENT_TYPE_PTR         0xf
+            -2, //ELEMENT_TYPE_BYREF       0x10
+            -1, //ELEMENT_TYPE_VALUETYPE   0x11
+            -2, //ELEMENT_TYPE_CLASS       0x12
+            0, //ELEMENT_TYPE_VAR         0x13
+            -2, //ELEMENT_TYPE_ARRAY       0x14
+            0, //ELEMENT_TYPE_GENERICINST 0x15
+            0, //ELEMENT_TYPE_TYPEDBYREF  0x16
+            0, // UNUSED                  0x17
+            -2, //ELEMENT_TYPE_I           0x18
+            -2, //ELEMENT_TYPE_U           0x19
+            0, // UNUSED                  0x1a
+            -2, //ELEMENT_TYPE_FPTR        0x1b
+            -2, //ELEMENT_TYPE_OBJECT      0x1c
+            -2, //ELEMENT_TYPE_SZARRAY     0x1d
+        };
 
         public static unsafe int GetElemSize(CorElementType t, TypeHandle thValueType)
         {
@@ -258,7 +291,10 @@ namespace Internal.Runtime.CallConverter
             return 0;
         }
 
-        public RuntimeTypeHandle GetRuntimeTypeHandle() { return _eeType->ToRuntimeTypeHandle(); }
+        public RuntimeTypeHandle GetRuntimeTypeHandle()
+        {
+            return _eeType->ToRuntimeTypeHandle();
+        }
     }
 
     // Describes how a single argument is laid out in registers and/or stack locations when given as an input to a
@@ -280,21 +316,20 @@ namespace Internal.Runtime.CallConverter
     // and possibly on to the stack as well.
     internal struct ArgLocDesc
     {
-        public int m_idxFloatReg;  // First floating point register used (or -1)
-        public int m_cFloatReg;    // Count of floating point registers used (or 0)
+        public int m_idxFloatReg; // First floating point register used (or -1)
+        public int m_cFloatReg; // Count of floating point registers used (or 0)
 
-        public int m_idxGenReg;    // First general register used (or -1)
-        public int m_cGenReg;      // Count of general registers used (or 0)
+        public int m_idxGenReg; // First general register used (or -1)
+        public int m_cGenReg; // Count of general registers used (or 0)
 
-        public int m_idxStack;     // First stack slot used (or -1)
-        public int m_cStack;       // Count of stack slots used (or 0)
-
+        public int m_idxStack; // First stack slot used (or -1)
+        public int m_cStack; // Count of stack slots used (or 0)
 #if TARGET_ARM64
-        public bool m_isSinglePrecision;        // For determining if HFA is single or double precision
+        public bool m_isSinglePrecision; // For determining if HFA is single or double precision
 #endif
 
 #if TARGET_ARM
-        public bool m_fRequires64BitAlignment;  // True if the argument should always be aligned (in registers or on the stack
+        public bool m_fRequires64BitAlignment; // True if the argument should always be aligned (in registers or on the stack
 #endif
 
         // Initialize to represent a non-placed argument (no register or stack slots referenced).
@@ -319,10 +354,12 @@ namespace Internal.Runtime.CallConverter
 
     internal class ArgIteratorData
     {
-        public ArgIteratorData(bool hasThis,
-                        bool isVarArg,
-                        TypeHandle[] parameterTypes,
-                        TypeHandle returnType)
+        public ArgIteratorData(
+            bool hasThis,
+            bool isVarArg,
+            TypeHandle[] parameterTypes,
+            TypeHandle returnType
+        )
         {
             _hasThis = hasThis;
             _isVarArg = isVarArg;
@@ -337,18 +374,27 @@ namespace Internal.Runtime.CallConverter
 
         public override bool Equals(object obj)
         {
-            if (this == obj) return true;
+            if (this == obj)
+                return true;
 
             ArgIteratorData other = obj as ArgIteratorData;
-            if (other == null) return false;
+            if (other == null)
+                return false;
 
-            if (_hasThis != other._hasThis || _isVarArg != other._isVarArg || !_returnType.Equals(other._returnType))
+            if (
+                _hasThis != other._hasThis
+                || _isVarArg != other._isVarArg
+                || !_returnType.Equals(other._returnType)
+            )
                 return false;
 
             if (_parameterTypes == null)
                 return other._parameterTypes == null;
 
-            if (other._parameterTypes == null || _parameterTypes.Length != other._parameterTypes.Length)
+            if (
+                other._parameterTypes == null
+                || _parameterTypes.Length != other._parameterTypes.Length
+            )
                 return false;
 
             for (int i = 0; i < _parameterTypes.Length; i++)
@@ -360,14 +406,31 @@ namespace Internal.Runtime.CallConverter
 
         public override int GetHashCode()
         {
-            return 37 + (_parameterTypes == null ?
-                _returnType.GetHashCode() :
-                TypeHashingAlgorithms.ComputeGenericInstanceHashCode(_returnType.GetHashCode(), _parameterTypes));
+            return 37
+                + (
+                    _parameterTypes == null
+                        ? _returnType.GetHashCode()
+                        : TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
+                            _returnType.GetHashCode(),
+                            _parameterTypes
+                        )
+                );
         }
 
-        public bool HasThis() { return _hasThis; }
-        public bool IsVarArg() { return _isVarArg; }
-        public int NumFixedArgs() { return _parameterTypes != null ? _parameterTypes.Length : 0; }
+        public bool HasThis()
+        {
+            return _hasThis;
+        }
+
+        public bool IsVarArg()
+        {
+            return _isVarArg;
+        }
+
+        public int NumFixedArgs()
+        {
+            return _parameterTypes != null ? _parameterTypes.Length : 0;
+        }
 
         // Argument iteration.
         public CorElementType GetArgumentType(int argNum, out TypeHandle thArgType)
@@ -379,9 +442,12 @@ namespace Internal.Runtime.CallConverter
 
         public TypeHandle GetByRefArgumentType(int argNum)
         {
-            return (argNum < _parameterTypes.Length && _parameterTypes[argNum].GetCorElementType() == CorElementType.ELEMENT_TYPE_BYREF) ?
-                _parameterTypes[argNum] :
-                default(TypeHandle);
+            return (
+                argNum < _parameterTypes.Length
+                && _parameterTypes[argNum].GetCorElementType() == CorElementType.ELEMENT_TYPE_BYREF
+            )
+                ? _parameterTypes[argNum]
+                : default(TypeHandle);
         }
 
         public CorElementType GetReturnType(out TypeHandle thRetType)
@@ -394,7 +460,9 @@ namespace Internal.Runtime.CallConverter
         public string GetEETypeDebugName(int argNum)
         {
             Internal.TypeSystem.TypeSystemContext context = TypeSystemContextFactory.Create();
-            var result = context.ResolveRuntimeTypeHandle(_parameterTypes[argNum].GetRuntimeTypeHandle()).ToString();
+            var result = context
+                .ResolveRuntimeTypeHandle(_parameterTypes[argNum].GetRuntimeTypeHandle())
+                .ToString();
             TypeSystemContextFactory.Recycle(context);
             return result;
         }
@@ -425,13 +493,34 @@ namespace Internal.Runtime.CallConverter
         private bool _extraObjectFirstArg;
         private CallingConvention _interpreterCallingConvention;
 
-        public bool HasThis() { return _hasThis; }
-        public bool IsVarArg() { return _argData.IsVarArg(); }
-        public bool HasParamType() { return _hasParamType; }
-        public int NumFixedArgs() { return _argData.NumFixedArgs() + (_extraFunctionPointerArg ? 1 : 0) + (_extraObjectFirstArg ? 1 : 0); }
+        public bool HasThis()
+        {
+            return _hasThis;
+        }
+
+        public bool IsVarArg()
+        {
+            return _argData.IsVarArg();
+        }
+
+        public bool HasParamType()
+        {
+            return _hasParamType;
+        }
+
+        public int NumFixedArgs()
+        {
+            return _argData.NumFixedArgs()
+                + (_extraFunctionPointerArg ? 1 : 0)
+                + (_extraObjectFirstArg ? 1 : 0);
+        }
 
         // Argument iteration.
-        public CorElementType GetArgumentType(int argNum, out TypeHandle thArgType, out bool forceByRefReturn)
+        public CorElementType GetArgumentType(
+            int argNum,
+            out TypeHandle thArgType,
+            out bool forceByRefReturn
+        )
         {
             forceByRefReturn = false;
 
@@ -489,7 +578,15 @@ namespace Internal.Runtime.CallConverter
         //------------------------------------------------------------
         // Constructor
         //------------------------------------------------------------
-        public ArgIterator(ArgIteratorData argData, CallingConvention callConv, bool hasParamType, bool extraFunctionPointerArg, bool[] forcedByRefParams, bool skipFirstArg, bool extraObjectFirstArg)
+        public ArgIterator(
+            ArgIteratorData argData,
+            CallingConvention callConv,
+            bool hasParamType,
+            bool extraFunctionPointerArg,
+            bool[] forcedByRefParams,
+            bool skipFirstArg,
+            bool extraObjectFirstArg
+        )
         {
             this = default(ArgIterator);
             _argData = argData;
@@ -588,7 +685,11 @@ namespace Internal.Runtime.CallConverter
         //
         //  typ:                 the signature type
         //=========================================================================
-        private static bool IsArgumentInRegister(ref int pNumRegistersUsed, CorElementType typ, TypeHandle thArgType)
+        private static bool IsArgumentInRegister(
+            ref int pNumRegistersUsed,
+            CorElementType typ,
+            TypeHandle thArgType
+        )
         {
             //        LIMITED_METHOD_CONTRACT;
             if ((pNumRegistersUsed) < ArchitectureConstants.NUM_ARGUMENT_REGISTERS)
@@ -617,19 +718,19 @@ namespace Internal.Runtime.CallConverter
                         return true;
 
                     case CorElementType.ELEMENT_TYPE_VALUETYPE:
+                    {
+                        // Valuetypes of integral size are passed enregistered
+                        int structSize = TypeHandle.GetElemSize(typ, thArgType);
+                        switch (structSize)
                         {
-                            // Valuetypes of integral size are passed enregistered
-                            int structSize = TypeHandle.GetElemSize(typ, thArgType);
-                            switch (structSize)
-                            {
-                                case 1:
-                                case 2:
-                                case 4:
-                                    pNumRegistersUsed++;
-                                    return true;
-                            }
-                            break;
+                            case 1:
+                            case 2:
+                            case 4:
+                                pNumRegistersUsed++;
+                                return true;
                         }
+                        break;
+                    }
                 }
             }
 
@@ -669,7 +770,8 @@ namespace Internal.Runtime.CallConverter
 
             // If the size is bigger than ENREGISTERED_PARAM_TYPE_MAXSIZE, or if the size is NOT a power of 2, then
             // the argument is passed by reference.
-            return (size > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE) || ((size & (size - 1)) != 0);
+            return (size > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE)
+                || ((size & (size - 1)) != 0);
         }
 #endif
 
@@ -705,7 +807,10 @@ namespace Internal.Runtime.CallConverter
             if (_argType == CorElementType.ELEMENT_TYPE_VALUETYPE)
             {
                 Debug.Assert(!_argTypeHandle.IsNull());
-                return ((_argSize > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE) && (!_argTypeHandle.IsHFA() || IsVarArg()));
+                return (
+                    (_argSize > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE)
+                    && (!_argTypeHandle.IsHFA() || IsVarArg())
+                );
             }
             return false;
 #else
@@ -795,10 +900,12 @@ namespace Internal.Runtime.CallConverter
 
             switch (_paramTypeLoc)
             {
-                case ParamTypeLocation.Ecx:// PARAM_TYPE_REGISTER_ECX:
-                    return TransitionBlock.GetOffsetOfArgumentRegisters() + ArgumentRegisters.GetOffsetOfEcx();
+                case ParamTypeLocation.Ecx: // PARAM_TYPE_REGISTER_ECX:
+                    return TransitionBlock.GetOffsetOfArgumentRegisters()
+                        + ArgumentRegisters.GetOffsetOfEcx();
                 case ParamTypeLocation.Edx:
-                    return TransitionBlock.GetOffsetOfArgumentRegisters() + ArgumentRegisters.GetOffsetOfEdx();
+                    return TransitionBlock.GetOffsetOfArgumentRegisters()
+                        + ArgumentRegisters.GetOffsetOfEdx();
                 default:
                     break;
             }
@@ -882,7 +989,10 @@ namespace Internal.Runtime.CallConverter
                 {
                     case CallingConvention.StdCall:
                         _numRegistersUsed = ArchitectureConstants.NUM_ARGUMENT_REGISTERS;
-                        _curOfs = TransitionBlock.GetOffsetOfArgs() + numRegistersUsed * IntPtr.Size + initialArgOffset;
+                        _curOfs =
+                            TransitionBlock.GetOffsetOfArgs()
+                            + numRegistersUsed * IntPtr.Size
+                            + initialArgOffset;
                         break;
 
                     case CallingConvention.ManagedStatic:
@@ -897,9 +1007,9 @@ namespace Internal.Runtime.CallConverter
                         break;
                 }
 #else
-                        _numRegistersUsed = numRegistersUsed;
-// DESKTOP BEHAVIOR     _curOfs = (int)(TransitionBlock.GetOffsetOfArgs() + SizeOfArgStack());
-                        _curOfs = (int)(TransitionBlock.GetOffsetOfArgs() + initialArgOffset);
+                _numRegistersUsed = numRegistersUsed;
+                // DESKTOP BEHAVIOR     _curOfs = (int)(TransitionBlock.GetOffsetOfArgs() + SizeOfArgStack());
+                _curOfs = (int)(TransitionBlock.GetOffsetOfArgs() + initialArgOffset);
 #endif
 
 #elif TARGET_AMD64
@@ -936,9 +1046,17 @@ namespace Internal.Runtime.CallConverter
             if (_argNum >= this.NumFixedArgs())
                 return TransitionBlock.InvalidOffset;
 
-            CorElementType argType = this.GetArgumentType(_argNum, out _argTypeHandle, out _argForceByRef);
+            CorElementType argType = this.GetArgumentType(
+                _argNum,
+                out _argTypeHandle,
+                out _argForceByRef
+            );
 
-            _argTypeHandleOfByRefParam = (argType == CorElementType.ELEMENT_TYPE_BYREF ? _argData.GetByRefArgumentType(_argNum) : default(TypeHandle));
+            _argTypeHandleOfByRefParam = (
+                argType == CorElementType.ELEMENT_TYPE_BYREF
+                    ? _argData.GetByRefArgumentType(_argNum)
+                    : default(TypeHandle)
+            );
 
             _argNum++;
 
@@ -948,7 +1066,11 @@ namespace Internal.Runtime.CallConverter
             // NOT DESKTOP BEHAVIOR: The S and D registers overlap, and the UniversalTransitionThunk copies D registers to the transition blocks. We'll need
             // to work with the D registers here as well.
             bool processingFloatsAsDoublesFromTransitionBlock = false;
-            if (argType == CorElementType.ELEMENT_TYPE_VALUETYPE && _argTypeHandle.IsHFA() && _argTypeHandle.GetHFAType() == CorElementType.ELEMENT_TYPE_R4)
+            if (
+                argType == CorElementType.ELEMENT_TYPE_VALUETYPE
+                && _argTypeHandle.IsHFA()
+                && _argTypeHandle.GetHFAType() == CorElementType.ELEMENT_TYPE_R4
+            )
             {
                 if ((argSize / sizeof(float)) + _idxFPReg <= 8)
                 {
@@ -970,7 +1092,10 @@ namespace Internal.Runtime.CallConverter
 
 #if TARGET_X86
 #if FEATURE_INTERPRETER
-            if (_interpreterCallingConvention != CallingConvention.ManagedStatic && _interpreterCallingConvention != CallingConvention.ManagedInstance)
+            if (
+                _interpreterCallingConvention != CallingConvention.ManagedStatic
+                && _interpreterCallingConvention != CallingConvention.ManagedInstance
+            )
             {
                 argOfs = _curOfs;
                 _curOfs += ArchitectureConstants.StackElemSize(argSize);
@@ -979,7 +1104,9 @@ namespace Internal.Runtime.CallConverter
 #endif
             if (IsArgumentInRegister(ref _numRegistersUsed, argType, _argTypeHandle))
             {
-                return TransitionBlock.GetOffsetOfArgumentRegisters() + (ArchitectureConstants.NUM_ARGUMENT_REGISTERS - _numRegistersUsed) * IntPtr.Size;
+                return TransitionBlock.GetOffsetOfArgumentRegisters()
+                    + (ArchitectureConstants.NUM_ARGUMENT_REGISTERS - _numRegistersUsed)
+                        * IntPtr.Size;
             }
 
             // DESKTOP BEHAVIOR _curOfs -= ArchitectureConstants.StackElemSize(argSize);
@@ -994,7 +1121,6 @@ namespace Internal.Runtime.CallConverter
 
             switch (argType)
             {
-
                 case CorElementType.ELEMENT_TYPE_R4:
                     // 32-bit floating point argument.
                     cFPRegs = 1;
@@ -1006,11 +1132,11 @@ namespace Internal.Runtime.CallConverter
                     break;
 
                 case CorElementType.ELEMENT_TYPE_VALUETYPE:
-                    {
-                        // UNIXTODO: FEATURE_UNIX_AMD64_STRUCT_PASSING: Passing of structs, HFAs. For now, use the Windows convention.
-                        argSize = IntPtr.Size;
-                        break;
-                    }
+                {
+                    // UNIXTODO: FEATURE_UNIX_AMD64_STRUCT_PASSING: Passing of structs, HFAs. For now, use the Windows convention.
+                    argSize = IntPtr.Size;
+                    break;
+                }
 
                 default:
                     break;
@@ -1023,7 +1149,8 @@ namespace Internal.Runtime.CallConverter
             {
                 if (cFPRegs + m_idxFPReg <= 8)
                 {
-                    int argOfsInner = TransitionBlock.GetOffsetOfFloatArgumentRegisters() + m_idxFPReg * 8;
+                    int argOfsInner =
+                        TransitionBlock.GetOffsetOfFloatArgumentRegisters() + m_idxFPReg * 8;
                     m_idxFPReg += cFPRegs;
                     return argOfsInner;
                 }
@@ -1032,7 +1159,8 @@ namespace Internal.Runtime.CallConverter
             {
                 if (m_idxGenReg + cArgSlots <= 6)
                 {
-                    int argOfsInner = TransitionBlock.GetOffsetOfArgumentRegisters() + m_idxGenReg * 8;
+                    int argOfsInner =
+                        TransitionBlock.GetOffsetOfArgumentRegisters() + m_idxGenReg * 8;
                     m_idxGenReg += cArgSlots;
                     return argOfsInner;
                 }
@@ -1068,7 +1196,8 @@ namespace Internal.Runtime.CallConverter
             else
             {
                 int idxFpReg = argOfs / IntPtr.Size;
-                return TransitionBlock.GetOffsetOfFloatArgumentRegisters() + idxFpReg * sizeof(M128A);
+                return TransitionBlock.GetOffsetOfFloatArgumentRegisters()
+                    + idxFpReg * sizeof(M128A);
             }
 #endif
 #elif TARGET_ARM
@@ -1100,18 +1229,18 @@ namespace Internal.Runtime.CallConverter
                     break;
 
                 case CorElementType.ELEMENT_TYPE_VALUETYPE:
-                    {
-                        // Value type case: extract the alignment requirement, note that this has to handle
-                        // the interop "native value types".
-                        fRequiresAlign64Bit = _argTypeHandle.RequiresAlign8();
+                {
+                    // Value type case: extract the alignment requirement, note that this has to handle
+                    // the interop "native value types".
+                    fRequiresAlign64Bit = _argTypeHandle.RequiresAlign8();
 
-                        // Handle HFAs: packed structures of 1-4 floats or doubles that are passed in FP argument
-                        // registers if possible.
-                        if (_argTypeHandle.IsHFA())
-                            fFloatingPoint = true;
+                    // Handle HFAs: packed structures of 1-4 floats or doubles that are passed in FP argument
+                    // registers if possible.
+                    if (_argTypeHandle.IsHFA())
+                        fFloatingPoint = true;
 
-                        break;
-                    }
+                    break;
+                }
 
                 default:
                     // The default is are 4-byte arguments (or promoted to 4 bytes), non-FP and don't require any
@@ -1161,7 +1290,8 @@ namespace Internal.Runtime.CallConverter
                         _wFPRegs |= wAllocMask;
 
                         // Indicate the registers used to the caller and return.
-                        return TransitionBlock.GetOffsetOfFloatArgumentRegisters() + (i * cShift * 4);
+                        return TransitionBlock.GetOffsetOfFloatArgumentRegisters()
+                            + (i * cShift * 4);
                     }
                     wAllocMask <<= cShift;
                 }
@@ -1250,28 +1380,31 @@ namespace Internal.Runtime.CallConverter
                     break;
 
                 case CorElementType.ELEMENT_TYPE_VALUETYPE:
+                {
+                    // Handle HFAs: packed structures of 2-4 floats or doubles that are passed in FP argument
+                    // registers if possible.
+                    if (_argTypeHandle.IsHFA())
                     {
-                        // Handle HFAs: packed structures of 2-4 floats or doubles that are passed in FP argument
-                        // registers if possible.
-                        if (_argTypeHandle.IsHFA())
-                        {
-                            CorElementType type = _argTypeHandle.GetHFAType();
-                            if (processingFloatsAsDoublesFromTransitionBlock)
-                                cFPRegs = argSize / sizeof(double);
-                            else
-                                cFPRegs = (type == CorElementType.ELEMENT_TYPE_R4) ? (argSize / sizeof(float)) : (argSize / sizeof(double));
-                        }
+                        CorElementType type = _argTypeHandle.GetHFAType();
+                        if (processingFloatsAsDoublesFromTransitionBlock)
+                            cFPRegs = argSize / sizeof(double);
                         else
-                        {
-                            // Composite greater than 16bytes should be passed by reference
-                            if (argSize > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE)
-                            {
-                                argSize = IntPtr.Size;
-                            }
-                        }
-
-                        break;
+                            cFPRegs =
+                                (type == CorElementType.ELEMENT_TYPE_R4)
+                                    ? (argSize / sizeof(float))
+                                    : (argSize / sizeof(double));
                     }
+                    else
+                    {
+                        // Composite greater than 16bytes should be passed by reference
+                        if (argSize > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE)
+                        {
+                            argSize = IntPtr.Size;
+                        }
+                    }
+
+                    break;
+                }
 
                 default:
                     break;
@@ -1284,7 +1417,8 @@ namespace Internal.Runtime.CallConverter
             {
                 if (cFPRegs + _idxFPReg <= 8)
                 {
-                    int argOfsInner = TransitionBlock.GetOffsetOfFloatArgumentRegisters() + _idxFPReg * 8;
+                    int argOfsInner =
+                        TransitionBlock.GetOffsetOfFloatArgumentRegisters() + _idxFPReg * 8;
                     _idxFPReg += cFPRegs;
                     return argOfsInner;
                 }
@@ -1297,7 +1431,8 @@ namespace Internal.Runtime.CallConverter
             {
                 if (_idxGenReg + cArgSlots <= 8)
                 {
-                    int argOfsInner = TransitionBlock.GetOffsetOfArgumentRegisters() + _idxGenReg * 8;
+                    int argOfsInner =
+                        TransitionBlock.GetOffsetOfArgumentRegisters() + _idxGenReg * 8;
                     _idxGenReg += cArgSlots;
                     return argOfsInner;
                 }
@@ -1316,7 +1451,6 @@ namespace Internal.Runtime.CallConverter
 #error            PORTABILITY_ASSERT("ArgIterator::GetNextOffset");
 #endif
         }
-
 
         public CorElementType GetArgType(out TypeHandle pTypeHandle)
         {
@@ -1365,8 +1499,8 @@ namespace Internal.Runtime.CallConverter
             if (this.HasParamType())
             {
                 numRegistersUsed++;
-                _paramTypeLoc = (numRegistersUsed == 1) ?
-                    ParamTypeLocation.Ecx : ParamTypeLocation.Edx;
+                _paramTypeLoc =
+                    (numRegistersUsed == 1) ? ParamTypeLocation.Ecx : ParamTypeLocation.Edx;
                 Debug.Assert(numRegistersUsed <= 2);
             }
 
@@ -1398,7 +1532,11 @@ namespace Internal.Runtime.CallConverter
             {
                 TypeHandle thArgType;
                 bool argForcedToBeByref;
-                CorElementType type = this.GetArgumentType(i, out thArgType, out argForcedToBeByref);
+                CorElementType type = this.GetArgumentType(
+                    i,
+                    out thArgType,
+                    out argForcedToBeByref
+                );
                 if (argForcedToBeByref)
                     type = CorElementType.ELEMENT_TYPE_BYREF;
 
@@ -1421,8 +1559,8 @@ namespace Internal.Runtime.CallConverter
                 if (numRegistersUsed < ArchitectureConstants.NUM_ARGUMENT_REGISTERS)
                 {
                     numRegistersUsed++;
-                    paramTypeLoc = (numRegistersUsed == 1) ?
-                        ParamTypeLocation.Ecx : ParamTypeLocation.Edx;
+                    paramTypeLoc =
+                        (numRegistersUsed == 1) ? ParamTypeLocation.Ecx : ParamTypeLocation.Edx;
                 }
                 else
                 {
@@ -1467,8 +1605,10 @@ namespace Internal.Runtime.CallConverter
             int nSizeOfArgStack = maxOffset - TransitionBlock.GetOffsetOfArgs();
 
 #if TARGET_AMD64 && !UNIX_AMD64_ABI
-            nSizeOfArgStack = (nSizeOfArgStack > (int)sizeof(ArgumentRegisters)) ?
-                (nSizeOfArgStack - sizeof(ArgumentRegisters)) : 0;
+            nSizeOfArgStack =
+                (nSizeOfArgStack > (int)sizeof(ArgumentRegisters))
+                    ? (nSizeOfArgStack - sizeof(ArgumentRegisters))
+                    : 0;
 #endif
 
 #endif // TARGET_X86
@@ -1480,15 +1620,29 @@ namespace Internal.Runtime.CallConverter
             this.Reset();
         }
 
-
 #if !TARGET_X86
         // Accessors for built in argument descriptions of the special implicit parameters not mentioned directly
         // in signatures (this pointer and the like). Whether or not these can be used successfully before all the
         // explicit arguments have been scanned is platform dependent.
-        public unsafe void GetThisLoc(ArgLocDesc* pLoc) { GetSimpleLoc(GetThisOffset(), pLoc); }
-        public unsafe void GetRetBuffArgLoc(ArgLocDesc* pLoc) { GetSimpleLoc(GetRetBuffArgOffset(), pLoc); }
-        public unsafe void GetParamTypeLoc(ArgLocDesc* pLoc) { GetSimpleLoc(GetParamTypeArgOffset(), pLoc); }
-        public unsafe void GetVASigCookieLoc(ArgLocDesc* pLoc) { GetSimpleLoc(GetVASigCookieOffset(), pLoc); }
+        public unsafe void GetThisLoc(ArgLocDesc* pLoc)
+        {
+            GetSimpleLoc(GetThisOffset(), pLoc);
+        }
+
+        public unsafe void GetRetBuffArgLoc(ArgLocDesc* pLoc)
+        {
+            GetSimpleLoc(GetRetBuffArgOffset(), pLoc);
+        }
+
+        public unsafe void GetParamTypeLoc(ArgLocDesc* pLoc)
+        {
+            GetSimpleLoc(GetParamTypeArgOffset(), pLoc);
+        }
+
+        public unsafe void GetVASigCookieLoc(ArgLocDesc* pLoc)
+        {
+            GetSimpleLoc(GetVASigCookieOffset(), pLoc);
+        }
 #endif // !TARGET_X86
 
 #if TARGET_ARM
@@ -1505,7 +1659,8 @@ namespace Internal.Runtime.CallConverter
 
             if (TransitionBlock.IsFloatArgumentRegisterOffset(argOffset))
             {
-                pLoc->m_idxFloatReg = (argOffset - TransitionBlock.GetOffsetOfFloatArgumentRegisters()) / 4;
+                pLoc->m_idxFloatReg =
+                    (argOffset - TransitionBlock.GetOffsetOfFloatArgumentRegisters()) / 4;
                 pLoc->m_cFloatReg = cSlots;
                 return;
             }
@@ -1545,7 +1700,8 @@ namespace Internal.Runtime.CallConverter
             if (TransitionBlock.IsFloatArgumentRegisterOffset(argOffset))
             {
                 // Dividing by 8 as size of each register in FloatArgumentRegisters is 8 bytes.
-                pLoc->m_idxFloatReg = (argOffset - TransitionBlock.GetOffsetOfFloatArgumentRegisters()) / 8;
+                pLoc->m_idxFloatReg =
+                    (argOffset - TransitionBlock.GetOffsetOfFloatArgumentRegisters()) / 8;
 
                 if (!_argTypeHandle.IsNull() && _argTypeHandle.IsHFA())
                 {
@@ -1567,7 +1723,10 @@ namespace Internal.Runtime.CallConverter
 
             // Composites greater than 16bytes are passed by reference
             TypeHandle dummy;
-            if (GetArgType(out dummy) == CorElementType.ELEMENT_TYPE_VALUETYPE && GetArgSize() > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE)
+            if (
+                GetArgType(out dummy) == CorElementType.ELEMENT_TYPE_VALUETYPE
+                && GetArgSize() > ArchitectureConstants.ENREGISTERED_PARAMTYPE_MAXSIZE
+            )
             {
                 cSlots = 1;
             }
@@ -1604,7 +1763,8 @@ namespace Internal.Runtime.CallConverter
             if (TransitionBlock.IsFloatArgumentRegisterOffset(argOffset))
             {
                 // Dividing by 8 as size of each register in FloatArgumentRegisters is 8 bytes.
-                pLoc->m_idxFloatReg = (argOffset - TransitionBlock.GetOffsetOfFloatArgumentRegisters()) / 8;
+                pLoc->m_idxFloatReg =
+                    (argOffset - TransitionBlock.GetOffsetOfFloatArgumentRegisters()) / 8;
 
                 // UNIXTODO: Passing of structs, HFAs. For now, use the Windows convention.
                 pLoc->m_cFloatReg = 1;
@@ -1627,7 +1787,7 @@ namespace Internal.Runtime.CallConverter
         }
 #endif // TARGET_AMD64 && UNIX_AMD64_ABI
 
-        private int _nSizeOfArgStack;      // Cached value of SizeOfArgStack
+        private int _nSizeOfArgStack; // Cached value of SizeOfArgStack
 
         private int _argNum;
 
@@ -1639,7 +1799,7 @@ namespace Internal.Runtime.CallConverter
         private bool _argForceByRef;
 
 #if TARGET_X86
-        private int _curOfs;           // Current position of the stack iterator
+        private int _curOfs; // Current position of the stack iterator
         private int _numRegistersUsed;
 #endif
 
@@ -1649,22 +1809,22 @@ namespace Internal.Runtime.CallConverter
         int _idxStack;
         int _idxFPReg;
 #else
-        private int _curOfs;           // Current position of the stack iterator
+        private int _curOfs; // Current position of the stack iterator
 #endif
 #endif
 
 #if TARGET_ARM
-        private int _idxGenReg;        // Next general register to be assigned a value
-        private int _idxStack;         // Next stack slot to be assigned a value
+        private int _idxGenReg; // Next general register to be assigned a value
+        private int _idxStack; // Next stack slot to be assigned a value
 
-        private ushort _wFPRegs;          // Bitmask of available floating point argument registers (s0-s15/d0-d7)
+        private ushort _wFPRegs; // Bitmask of available floating point argument registers (s0-s15/d0-d7)
         private bool _fRequires64BitAlignment; // Cached info about the current arg
 #endif
 
 #if TARGET_ARM64
-        private int _idxGenReg;        // Next general register to be assigned a value
-        private int _idxStack;         // Next stack slot to be assigned a value
-        private int _idxFPReg;         // Next FP register to be assigned a value
+        private int _idxGenReg; // Next general register to be assigned a value
+        private int _idxStack; // Next stack slot to be assigned a value
+        private int _idxFPReg; // Next FP register to be assigned a value
 #endif
 
         // These are enum flags in CallingConvention.h, but that's really ugly in C#, so I've changed them to bools.
@@ -1687,6 +1847,7 @@ namespace Internal.Runtime.CallConverter
             Ecx,
             Edx
         }
+
         private ParamTypeLocation _paramTypeLoc;
         /*        PARAM_TYPE_REGISTER_MASK        = 0x0030,
                 PARAM_TYPE_REGISTER_STACK       = 0x0010,
@@ -1699,8 +1860,13 @@ namespace Internal.Runtime.CallConverter
         //        RETURN_FP_SIZE_SHIFT            = 8,        // The rest of the flags is cached value of GetFPReturnSize
         //    };
 
-        internal static void ComputeReturnValueTreatment(CorElementType type, TypeHandle thRetType, bool isVarArgMethod, out bool usesRetBuffer, out uint fpReturnSize)
-
+        internal static void ComputeReturnValueTreatment(
+            CorElementType type,
+            TypeHandle thRetType,
+            bool isVarArgMethod,
+            out bool usesRetBuffer,
+            out uint fpReturnSize
+        )
         {
             usesRetBuffer = false;
             fpReturnSize = 0;
@@ -1710,10 +1876,10 @@ namespace Internal.Runtime.CallConverter
                 case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
                     throw new NotSupportedException();
 #if ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE
-                    //                    if (sizeof(TypedByRef) > ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE)
-                    //                        flags |= RETURN_HAS_RET_BUFFER;
+                //                    if (sizeof(TypedByRef) > ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE)
+                //                        flags |= RETURN_HAS_RET_BUFFER;
 #else
-//                    flags |= RETURN_HAS_RET_BUFFER;
+                //                    flags |= RETURN_HAS_RET_BUFFER;
 #endif
                 //                    break;
 
@@ -1726,6 +1892,7 @@ namespace Internal.Runtime.CallConverter
                     break;
 
                 case CorElementType.ELEMENT_TYPE_VALUETYPE:
+
 #if ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE
                     {
                         Debug.Assert(!thRetType.IsNull() && thRetType.IsValueType());
@@ -1741,9 +1908,10 @@ namespace Internal.Runtime.CallConverter
                             // thread floats like doubles during copying.
                             fpReturnSize = 4 * (uint)sizeof(double);
 #else
-                            fpReturnSize = (hfaType == CorElementType.ELEMENT_TYPE_R4) ?
-                                (4 * (uint)sizeof(float)) :
-                                (4 * (uint)sizeof(double));
+                            fpReturnSize =
+                                (hfaType == CorElementType.ELEMENT_TYPE_R4)
+                                    ? (4 * (uint)sizeof(float))
+                                    : (4 * (uint)sizeof(double));
 #endif
 
                             break;
@@ -1782,12 +1950,17 @@ namespace Internal.Runtime.CallConverter
 
             if (!_RETURN_HAS_RET_BUFFER)
             {
-                ComputeReturnValueTreatment(type, thRetType, this.IsVarArg(), out _RETURN_HAS_RET_BUFFER, out _fpReturnSize);
+                ComputeReturnValueTreatment(
+                    type,
+                    thRetType,
+                    this.IsVarArg(),
+                    out _RETURN_HAS_RET_BUFFER,
+                    out _fpReturnSize
+                );
             }
 
             _RETURN_FLAGS_COMPUTED = true;
         }
-
 
 #if !TARGET_X86
         private unsafe void GetSimpleLoc(int offset, ArgLocDesc* pLoc)

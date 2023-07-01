@@ -28,7 +28,12 @@ public class Runtime_65694
     [MethodImpl(MethodImplOptions.NoInlining)]
     public void D()
     {
-        Problem p = new Problem { s0 = "hello", s1 = "world", x = 33 };
+        Problem p = new Problem
+        {
+            s0 = "hello",
+            s1 = "world",
+            x = 33
+        };
         Key k = new Key() { a = 0, s = "a" };
         Dictionary<Key, Problem> d = new Dictionary<Key, Problem>();
         d[k] = p;
@@ -37,7 +42,7 @@ public class Runtime_65694
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void F() 
+    public static void F()
     {
         GC.Collect();
     }
@@ -70,4 +75,3 @@ public class Runtime_65694
         return result + 78;
     }
 }
-

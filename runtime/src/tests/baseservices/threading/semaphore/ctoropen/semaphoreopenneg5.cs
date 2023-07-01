@@ -11,7 +11,7 @@ class OpenSemaphoreNeg
         OpenSemaphoreNeg osn = new OpenSemaphoreNeg();
         return osn.Run();
     }
-   
+
     private int Run()
     {
         int iRet = -1;
@@ -19,20 +19,17 @@ class OpenSemaphoreNeg
         //  open a closed semaphore
         try
         {
-            using (Semaphore sem1 = new Semaphore(10, 10, sName))
-            {
-            }
+            using (Semaphore sem1 = new Semaphore(10, 10, sName)) { }
             Semaphore sem2 = Semaphore.OpenExisting(sName);
         }
         catch (WaitHandleCannotBeOpenedException)
         {
-            //Expected    
+            //Expected
             iRet = 100;
         }
         catch (Exception e)
         {
-            Console.WriteLine("Caught unexpected exception: " +
-                e.ToString());
+            Console.WriteLine("Caught unexpected exception: " + e.ToString());
         }
 
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");

@@ -29,24 +29,43 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         // This is workaround for a bug in ILTrimmer.
         // Without these DynamicDependency attributes, .ctor() will be removed from the safe handles.
         // Remove once fixed: https://github.com/mono/linker/issues/1660
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(SafeMsQuicRegistrationHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(SafeMsQuicConfigurationHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(SafeMsQuicListenerHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(SafeMsQuicConnectionHandle))]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(SafeMsQuicStreamHandle))]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(SafeMsQuicRegistrationHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(SafeMsQuicConfigurationHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(SafeMsQuicListenerHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(SafeMsQuicConnectionHandle)
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(SafeMsQuicStreamHandle)
+        )]
         private MsQuicApi(QUIC_API_TABLE* apiTable)
         {
             ApiTable = apiTable;
 
             fixed (byte* pAppName = s_appName)
             {
-                var cfg = new QUIC_REGISTRATION_CONFIG {
+                var cfg = new QUIC_REGISTRATION_CONFIG
+                {
                     AppName = (sbyte*)pAppName,
                     ExecutionProfile = QUIC_EXECUTION_PROFILE.LOW_LATENCY
                 };
 
                 QUIC_HANDLE* handle;
-                ThrowIfFailure(ApiTable->RegistrationOpen(&cfg, &handle), "RegistrationOpen failed");
+                ThrowIfFailure(
+                    ApiTable->RegistrationOpen(&cfg, &handle),
+                    "RegistrationOpen failed"
+                );
 
                 Registration = new SafeMsQuicRegistrationHandle(handle);
             }
@@ -66,7 +85,10 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                 {
                     if (NetEventSource.Log.IsEnabled())
                     {
-                        NetEventSource.Info(null, $"Current Windows version ({Environment.OSVersion}) is not supported by QUIC. Minimal supported version is {MinWindowsVersion}");
+                        NetEventSource.Info(
+                            null,
+                            $"Current Windows version ({Environment.OSVersion}) is not supported by QUIC. Minimal supported version is {MinWindowsVersion}"
+                        );
                     }
 
                     return;
@@ -76,23 +98,61 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             }
 
             IntPtr msQuicHandle;
-            if (NativeLibrary.TryLoad($"{Interop.Libraries.MsQuic}.{MsQuicVersion.Major}", typeof(MsQuicApi).Assembly, DllImportSearchPath.AssemblyDirectory, out msQuicHandle) ||
-                NativeLibrary.TryLoad(Interop.Libraries.MsQuic, typeof(MsQuicApi).Assembly, DllImportSearchPath.AssemblyDirectory, out msQuicHandle))
+            if (
+                NativeLibrary.TryLoad(
+                    $"{Interop.Libraries.MsQuic}.{MsQuicVersion.Major}",
+                    typeof(MsQuicApi).Assembly,
+                    DllImportSearchPath.AssemblyDirectory,
+                    out msQuicHandle
+                )
+                || NativeLibrary.TryLoad(
+                    Interop.Libraries.MsQuic,
+                    typeof(MsQuicApi).Assembly,
+                    DllImportSearchPath.AssemblyDirectory,
+                    out msQuicHandle
+                )
+            )
             {
                 try
                 {
-                    if (NativeLibrary.TryGetExport(msQuicHandle, "MsQuicOpenVersion", out IntPtr msQuicOpenVersionAddress))
+                    if (
+                        NativeLibrary.TryGetExport(
+                            msQuicHandle,
+                            "MsQuicOpenVersion",
+                            out IntPtr msQuicOpenVersionAddress
+                        )
+                    )
                     {
                         QUIC_API_TABLE* apiTable;
-                        delegate* unmanaged[Cdecl]<uint, QUIC_API_TABLE**, int> msQuicOpenVersion = (delegate* unmanaged[Cdecl]<uint, QUIC_API_TABLE**, int>)msQuicOpenVersionAddress;
-                        if (StatusSucceeded(msQuicOpenVersion((uint)MsQuicVersion.Major, &apiTable)))
+                        delegate* unmanaged[Cdecl]<uint, QUIC_API_TABLE**, int> msQuicOpenVersion =
+                            (delegate* unmanaged[Cdecl]<
+                                uint,
+                                QUIC_API_TABLE**,
+                                int>)msQuicOpenVersionAddress;
+                        if (
+                            StatusSucceeded(msQuicOpenVersion((uint)MsQuicVersion.Major, &apiTable))
+                        )
                         {
                             int arraySize = 4;
                             uint* libVersion = stackalloc uint[arraySize];
                             uint size = (uint)arraySize * sizeof(uint);
-                            if (StatusSucceeded(apiTable->GetParam(null, QUIC_PARAM_GLOBAL_LIBRARY_VERSION, &size, libVersion)))
+                            if (
+                                StatusSucceeded(
+                                    apiTable->GetParam(
+                                        null,
+                                        QUIC_PARAM_GLOBAL_LIBRARY_VERSION,
+                                        &size,
+                                        libVersion
+                                    )
+                                )
+                            )
                             {
-                                var version = new Version((int)libVersion[0], (int)libVersion[1], (int)libVersion[2], (int)libVersion[3]);
+                                var version = new Version(
+                                    (int)libVersion[0],
+                                    (int)libVersion[1],
+                                    (int)libVersion[2],
+                                    (int)libVersion[3]
+                                );
                                 if (version >= MsQuicVersion)
                                 {
                                     Api = new MsQuicApi(apiTable);
@@ -102,7 +162,10 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                                 {
                                     if (NetEventSource.Log.IsEnabled())
                                     {
-                                        NetEventSource.Info(null, $"Incompatible MsQuic library version '{version}', expecting '{MsQuicVersion}'");
+                                        NetEventSource.Info(
+                                            null,
+                                            $"Incompatible MsQuic library version '{version}', expecting '{MsQuicVersion}'"
+                                        );
                                     }
                                 }
                             }
@@ -119,13 +182,19 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             }
         }
 
-        private static bool IsWindowsVersionSupported() => OperatingSystem.IsWindowsVersionAtLeast(MinWindowsVersion.Major,
-            MinWindowsVersion.Minor, MinWindowsVersion.Build, MinWindowsVersion.Revision);
+        private static bool IsWindowsVersionSupported() =>
+            OperatingSystem.IsWindowsVersionAtLeast(
+                MinWindowsVersion.Major,
+                MinWindowsVersion.Minor,
+                MinWindowsVersion.Build,
+                MinWindowsVersion.Revision
+            );
 
         private static bool IsTls13Disabled()
         {
 #if TARGET_WINDOWS
-            string[] SChannelTLS13RegKeys = {
+            string[] SChannelTLS13RegKeys =
+            {
                 @"SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Client",
                 @"SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.3\Server"
             };
@@ -134,7 +203,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             {
                 using var regKey = Registry.LocalMachine.OpenSubKey(key);
 
-                if (regKey is null) return false;
+                if (regKey is null)
+                    return false;
 
                 if (regKey.GetValue("Enabled") is int enabled && enabled == 0)
                 {

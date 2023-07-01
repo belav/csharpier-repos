@@ -11,6 +11,7 @@ namespace System.Globalization.Tests
 
         public override DateTime MinSupportedDateTime => new DateTime(1901, 02, 19);
 
-        public override DateTime MaxSupportedDateTime => new DateTime(2101, 01, 28, 23, 59, 59).AddTicks(9999999);
+        public override DateTime MaxSupportedDateTime =>
+            new DateTime(2101, 01, 28, 23, 59, 59).AddTicks(9999999);
     }
 }

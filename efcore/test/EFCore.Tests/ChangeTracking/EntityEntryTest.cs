@@ -12,9 +12,7 @@ public class EntityEntryTest
     {
         using var context = new KeySetContext();
         Assert.True(context.Entry(new NotStoreGenerated()).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new NotStoreGenerated { Id = 1 }).IsKeySet);
+        Assert.True(context.Entry(new NotStoreGenerated { Id = 1 }).IsKeySet);
     }
 
     [ConditionalFact]
@@ -22,15 +20,9 @@ public class EntityEntryTest
     {
         using var context = new KeySetContext();
         Assert.True(context.Entry(new CompositeNotStoreGenerated()).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new CompositeNotStoreGenerated { Id1 = 1 }).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new CompositeNotStoreGenerated { Id2 = true }).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new CompositeNotStoreGenerated { Id1 = 1, Id2 = true }).IsKeySet);
+        Assert.True(context.Entry(new CompositeNotStoreGenerated { Id1 = 1 }).IsKeySet);
+        Assert.True(context.Entry(new CompositeNotStoreGenerated { Id2 = true }).IsKeySet);
+        Assert.True(context.Entry(new CompositeNotStoreGenerated { Id1 = 1, Id2 = true }).IsKeySet);
     }
 
     [ConditionalFact]
@@ -38,9 +30,7 @@ public class EntityEntryTest
     {
         using var context = new KeySetContext();
         Assert.False(context.Entry(new StoreGenerated()).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new StoreGenerated { Id = 1 }).IsKeySet);
+        Assert.True(context.Entry(new StoreGenerated { Id = 1 }).IsKeySet);
     }
 
     [ConditionalFact]
@@ -48,15 +38,9 @@ public class EntityEntryTest
     {
         using var context = new KeySetContext();
         Assert.False(context.Entry(new CompositeStoreGenerated()).IsKeySet);
-        Assert.False(
-            context.Entry(
-                new CompositeStoreGenerated { Id1 = 1 }).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new CompositeStoreGenerated { Id2 = true }).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new CompositeStoreGenerated { Id1 = 1, Id2 = true }).IsKeySet);
+        Assert.False(context.Entry(new CompositeStoreGenerated { Id1 = 1 }).IsKeySet);
+        Assert.True(context.Entry(new CompositeStoreGenerated { Id2 = true }).IsKeySet);
+        Assert.True(context.Entry(new CompositeStoreGenerated { Id1 = 1, Id2 = true }).IsKeySet);
     }
 
     [ConditionalFact]
@@ -64,9 +48,7 @@ public class EntityEntryTest
     {
         using var context = new KeySetContext();
         Assert.False(context.Entry(new Dependent()).IsKeySet);
-        Assert.True(
-            context.Entry(
-                new Dependent { Id = 1 }).IsKeySet);
+        Assert.True(context.Entry(new Dependent { Id = 1 }).IsKeySet);
     }
 
     private class StoreGenerated
@@ -102,8 +84,8 @@ public class EntityEntryTest
 
     private class KeySetContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(KeySetContext));
 
@@ -115,23 +97,21 @@ public class EntityEntryTest
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StoreGenerated>()
+            modelBuilder
+                .Entity<StoreGenerated>()
                 .HasOne(e => e.Dependent)
                 .WithOne(e => e.Principal)
                 .HasForeignKey<Dependent>(e => e.Id);
 
             modelBuilder.Entity<NotStoreGenerated>().Property(e => e.Id).ValueGeneratedNever();
 
-            modelBuilder.Entity<CompositeNotStoreGenerated>().HasKey(
-                e => new { e.Id1, e.Id2 });
+            modelBuilder.Entity<CompositeNotStoreGenerated>().HasKey(e => new { e.Id1, e.Id2 });
 
-            modelBuilder.Entity<CompositeStoreGenerated>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                });
+            modelBuilder.Entity<CompositeStoreGenerated>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.Property(e => e.Id2).ValueGeneratedOnAdd();
+            });
         }
     }
 
@@ -224,11 +204,17 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.InvalidEnumValue("-1", "value", typeof(EntityState).FullName),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(-1)).Message);
+            Assert
+                .Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(-1))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.InvalidEnumValue("5", "value", typeof(EntityState).FullName),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(5)).Message);
+            Assert
+                .Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(5))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -339,8 +325,16 @@ public class EntityEntryTest
         var entity = context.Add(new Chunky()).Entity;
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("Monkey", entity.GetType().ShortDisplayName(), "int", "string"),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).Property<string>("Monkey")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "Monkey",
+                entity.GetType().ShortDisplayName(),
+                "int",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() => context.Entry(entity).Property<string>("Monkey"))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -360,13 +354,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property<int>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Property<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -377,24 +386,60 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyIsNavigation(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Property), nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property("Garcia").Metadata.Name).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Property),
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Property("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyIsNavigation(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Property), nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Property("Garcia").Metadata.Name).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Property),
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Property("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyIsNavigation(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Property), nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property<Cherry>("Garcia").Metadata.Name).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Property),
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Property<Cherry>("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyIsNavigation(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Property), nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property(e => e.Garcia).Metadata.Name).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Property),
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Property(e => e.Garcia).Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -430,10 +475,14 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Chunky()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Garcia")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Garcia")!;
 
         Assert.Same(navigationBase, context.Entry(entity).Reference(navigationBase).Metadata);
-        Assert.Same(navigationBase, context.Entry((object)entity).Reference(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry((object)entity).Reference(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -441,9 +490,13 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Chunky()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Garcia")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Garcia")!;
 
-        Assert.Same(navigationBase, context.Entry(entity).Reference<Cherry>(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry(entity).Reference<Cherry>(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -454,13 +507,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Reference("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -471,26 +539,60 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Monkey").Metadata.Name).Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Monkey").Metadata.Name)
-                .Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Reference("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Monkey").Metadata.Name)
-                .Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference<Random>("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Nonkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name).Message);
+                "Nonkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -501,47 +603,101 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Monkeys")).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Monkeys"))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Monkeys")).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Reference("Monkeys")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Monkeys")).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference<Random>("Monkeys")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(e => e.Monkeys)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference(e => e.Monkeys)
+                )
+                .Message
+        );
 
         var navigationBase = context.Entry(entity).Navigation("Monkeys").Metadata;
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(navigationBase)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference(navigationBase)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Reference(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>(navigationBase)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Reference<Random>(navigationBase)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -577,10 +733,14 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Cherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
 
         Assert.Same(navigationBase, context.Entry(entity).Collection(navigationBase).Metadata);
-        Assert.Same(navigationBase, context.Entry((object)entity).Collection(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry((object)entity).Collection(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -588,9 +748,13 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Cherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
 
-        Assert.Same(navigationBase, context.Entry(entity).Collection<Chunky>(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry(entity).Collection<Chunky>(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -601,15 +765,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Chimp").Metadata.Name)
-                .Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Collection("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name)
-                .Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -620,21 +797,46 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Garcia").Metadata.Name).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Garcia").Metadata.Name)
-                .Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Collection("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Random>("Garcia").Metadata.Name)
-                .Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection<Random>("Garcia").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -645,41 +847,87 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Garcia")).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Garcia"))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Garcia")).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Collection("Garcia")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Cherry>("Garcia")).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection<Cherry>("Garcia")
+                )
+                .Message
+        );
 
         var navigationBase = context.Entry(entity).Navigation("Garcia").Metadata;
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection(navigationBase)).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection(navigationBase)).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Collection(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Cherry>(navigationBase)).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Collection<Cherry>(navigationBase)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -705,10 +953,20 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Member("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Member("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Member("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Member("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -797,11 +1055,20 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Navigation("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Navigation("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Navigation("Chimp").Metadata.Name)
-                .Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Navigation("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -839,7 +1106,8 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Chunky()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Garcia")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Garcia")!;
 
         var entry = context.Entry(entity).Navigation(navigationBase);
         Assert.Same(navigationBase, entry.Metadata);
@@ -855,7 +1123,8 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Cherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
 
         var entry = context.Entry(entity).Navigation(navigationBase);
         Assert.Same(navigationBase, entry.Metadata);
@@ -874,15 +1143,32 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Navigation("Monkey").Metadata.Name).Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry(entity).Navigation("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Navigation("Monkey").Metadata.Name)
-                .Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => context.Entry((object)entity).Navigation("Monkey").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -891,8 +1177,11 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         var entity = context.Attach(new Chunky()).Entity;
 
-        var modified = context.Entry(entity).Properties
-            .Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        var modified = context
+            .Entry(entity)
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
         Assert.Empty(modified);
 
@@ -901,11 +1190,13 @@ public class EntityEntryTest
 
         context.ChangeTracker.DetectChanges();
 
-        modified = context.Entry(entity).Properties
-            .Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        modified = context
+            .Entry(entity)
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
-        Assert.Equal(
-            new List<string> { "GarciaId", "Nonkey" }, modified);
+        Assert.Equal(new List<string> { "GarciaId", "Nonkey" }, modified);
     }
 
     [ConditionalFact]
@@ -913,35 +1204,19 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "GarciaId",
-                "Monkey",
-                "Nonkey",
-                "Garcia"
-            },
-            context.Attach(new Chunky()).Members.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "GarciaId", "Monkey", "Nonkey", "Garcia" },
+            context.Attach(new Chunky()).Members.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "Garcia",
-                "Baked",
-                "Monkeys"
-            },
-            context.Attach(new Cherry()).Members.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "Garcia", "Baked", "Monkeys" },
+            context.Attach(new Cherry()).Members.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "Baked",
-                "GarciaId",
-                "Garcia"
-            },
-            context.Attach(new Half()).Members.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "Baked", "GarciaId", "Garcia" },
+            context.Attach(new Half()).Members.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -949,27 +1224,19 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "GarciaId",
-                "Monkey",
-                "Nonkey"
-            },
-            context.Attach(new Chunky()).Properties.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "GarciaId", "Monkey", "Nonkey" },
+            context.Attach(new Chunky()).Properties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Id", "Garcia" },
-            context.Attach(new Cherry()).Properties.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Cherry()).Properties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "Baked",
-                "GarciaId"
-            },
-            context.Attach(new Half()).Properties.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "Baked", "GarciaId" },
+            context.Attach(new Half()).Properties.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -978,15 +1245,18 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(new Chunky()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Chunky()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Baked", "Monkeys" },
-            context.Attach(new Cherry()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Cherry()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(new Half()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Half()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -995,26 +1265,32 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(new Chunky()).References.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Chunky()).References.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Baked" },
-            context.Attach(new Cherry()).References.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Cherry()).References.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(new Half()).References.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Half()).References.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
     public void Can_get_all_collection_entries()
     {
         using var context = new FreezerContext();
-        Assert.Empty(context.Attach(new Chunky()).Collections.Select(e => e.Metadata.Name).ToList());
+        Assert.Empty(
+            context.Attach(new Chunky()).Collections.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Monkeys" },
-            context.Attach(new Cherry()).Collections.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Cherry()).Collections.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Empty(context.Attach(new Half()).Collections.Select(e => e.Metadata.Name).ToList());
     }
@@ -1050,8 +1326,8 @@ public class EntityEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 

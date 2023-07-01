@@ -10,7 +10,8 @@ using static Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer;
 
 using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer,
-    Microsoft.Interop.Analyzers.CustomMarshallerAttributeFixer>;
+    Microsoft.Interop.Analyzers.CustomMarshallerAttributeFixer
+>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -27,8 +28,13 @@ namespace LibraryImportGenerator.UnitTests
                 static class MarshallerType {}
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(ManagedTypeMustBeNonNullRule).WithLocation(0).WithArguments("MarshallerType"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(ManagedTypeMustBeNonNullRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType")
+            );
         }
 
         [Fact]
@@ -103,8 +109,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("ManagedType<T>", "MarshallerType<U, V>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("ManagedType<T>", "MarshallerType<U, V>")
+            );
         }
 
         [Fact]
@@ -122,8 +133,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("ManagedType<T, U>", "MarshallerType<V>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("ManagedType<T, U>", "MarshallerType<V>")
+            );
         }
 
         [Fact]
@@ -165,8 +181,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("ManagedType<T>", "MarshallerType<U>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("ManagedType<T>", "MarshallerType<U>")
+            );
         }
 
         [Fact]
@@ -187,8 +208,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("ManagedType<T>", "MarshallerType<U, V, W>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(ManagedTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("ManagedType<T>", "MarshallerType<U, V, W>")
+            );
         }
     }
 }

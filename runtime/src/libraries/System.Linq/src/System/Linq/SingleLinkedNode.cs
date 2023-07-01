@@ -46,7 +46,8 @@ namespace System.Linq
         /// Creates a new node that holds the specified item and is linked to this node.
         /// </summary>
         /// <param name="item">The item to place in the new node.</param>
-        public SingleLinkedNode<TSource> Add(TSource item) => new SingleLinkedNode<TSource>(this, item);
+        public SingleLinkedNode<TSource> Add(TSource item) =>
+            new SingleLinkedNode<TSource>(this, item);
 
         /// <summary>
         /// Gets the number of items in this and subsequent nodes by walking the linked list.

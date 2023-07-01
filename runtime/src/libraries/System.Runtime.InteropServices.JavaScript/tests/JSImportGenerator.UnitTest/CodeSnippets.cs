@@ -5,7 +5,8 @@ namespace JSImportGenerator.Unit.Tests
 {
     internal static class CodeSnippets
     {
-        public static readonly string AllDefault= @"
+        public static readonly string AllDefault =
+            @"
 //AllDefault
 using System;
 using System.Runtime.InteropServices.JavaScript;
@@ -33,7 +34,8 @@ partial class Basic
 }
 ";
 
-        public static readonly string AllAnnotated = @"
+        public static readonly string AllAnnotated =
+            @"
 //AllAnnotated
 using System;
 using System.Runtime.InteropServices.JavaScript;
@@ -61,7 +63,8 @@ partial class Basic
 }
 ";
 
-        public static readonly string AllMissing = @"
+        public static readonly string AllMissing =
+            @"
 //AllMissing
 using System;
 using System.Runtime.InteropServices.JavaScript;
@@ -89,7 +92,8 @@ partial class Basic
 }
 ";
 
-        public static readonly string InOutRef = @"
+        public static readonly string InOutRef =
+            @"
 //InOutRef
 using System;
 using System.Runtime.InteropServices.JavaScript;
@@ -105,7 +109,8 @@ partial class Basic
 }
 ";
 
-        public static readonly string AllUnsupported = @"
+        public static readonly string AllUnsupported =
+            @"
 //AllUnsupported
 using System;
 using System.Runtime.InteropServices.JavaScript;
@@ -127,8 +132,8 @@ partial class Basic
 }
 ";
 
-
-        public static readonly string TrivialClassDeclarations = @"
+        public static readonly string TrivialClassDeclarations =
+            @"
 //TrivialClassDeclarations
 using System.Runtime.InteropServices.JavaScript;
 partial class Basic
@@ -159,9 +164,12 @@ partial class Basic
 
 }
 ";
-        public static string DefaultReturnMarshaler<T>() => DefaultReturnMarshaler(typeof(T).ToString());
 
-        public static string DefaultReturnMarshaler(string type) => $@"
+        public static string DefaultReturnMarshaler<T>() =>
+            DefaultReturnMarshaler(typeof(T).ToString());
+
+        public static string DefaultReturnMarshaler(string type) =>
+            $@"
 //DefaultReturnMarshaler<{type}>
 using System.Runtime.InteropServices.JavaScript;
 partial class Basic
@@ -173,6 +181,5 @@ partial class Basic
     public static {type} Export1(){{ throw null; }}
 }}
 ";
-
     }
 }

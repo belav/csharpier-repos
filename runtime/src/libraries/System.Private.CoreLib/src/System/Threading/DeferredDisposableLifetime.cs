@@ -38,7 +38,8 @@ namespace System.Threading
     /// no more references can do so in <see cref="IDeferredDisposable.OnFinalRelease(bool)"/> when
     /// 'disposed' is true.
     /// </remarks>
-    internal struct DeferredDisposableLifetime<T> where T : class, IDeferredDisposable
+    internal struct DeferredDisposableLifetime<T>
+        where T : class, IDeferredDisposable
     {
         /// <summary>_count is positive until Dispose is called, after which it's (-1 - refcount).</summary>
         private int _count;

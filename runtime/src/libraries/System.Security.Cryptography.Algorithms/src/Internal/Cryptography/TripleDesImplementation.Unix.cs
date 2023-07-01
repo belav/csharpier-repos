@@ -16,12 +16,21 @@ namespace Internal.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm = GetAlgorithm(cipherMode, feedbackSize);
 
-            BasicSymmetricCipher cipher = new OpenSslCipher(algorithm, cipherMode, blockSize, paddingSize, key, iv, encrypting);
+            BasicSymmetricCipher cipher = new OpenSslCipher(
+                algorithm,
+                cipherMode,
+                blockSize,
+                paddingSize,
+                key,
+                iv,
+                encrypting
+            );
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
 
@@ -33,7 +42,8 @@ namespace Internal.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm = GetAlgorithm(cipherMode, feedbackSize);
@@ -45,10 +55,12 @@ namespace Internal.Cryptography
                 paddingSize,
                 key,
                 iv,
-                encrypting);
+                encrypting
+            );
         }
 
-        private static IntPtr GetAlgorithm(CipherMode cipherMode, int feedbackSizeInBytes) => cipherMode switch
+        private static IntPtr GetAlgorithm(CipherMode cipherMode, int feedbackSizeInBytes) =>
+            cipherMode switch
             {
                 CipherMode.CBC => Interop.Crypto.EvpDes3Cbc(),
                 CipherMode.ECB => Interop.Crypto.EvpDes3Ecb(),

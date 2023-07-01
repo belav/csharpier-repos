@@ -18,16 +18,17 @@ public class ModelSourceTest
         using var context = new JustSomeContext(serviceProvider);
         var model = context.Model;
         Assert.Equal("Us!", model["AllYourModelAreBelongTo"]);
-        Assert.Equal("Us!", model.GetEntityTypes().Single(e => e.DisplayName() == "Base")["AllYourBaseAreBelongTo"]);
+        Assert.Equal(
+            "Us!",
+            model.GetEntityTypes().Single(e => e.DisplayName() == "Base")["AllYourBaseAreBelongTo"]
+        );
         Assert.Contains("Peak", model.GetEntityTypes().Select(e => e.DisplayName()));
     }
 
     private class MyModelCustomizer : ModelCustomizer
     {
         public MyModelCustomizer(ModelCustomizerDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         public override void Customize(ModelBuilder modelBuilder, DbContext dbContext)
         {
@@ -47,11 +48,11 @@ public class ModelSourceTest
 
         public DbSet<Peak> Peaks { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Base>().HasAnnotation("AllYourBaseAreBelongTo", "Us!");
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Base>().HasAnnotation("AllYourBaseAreBelongTo", "Us!");
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(JustSomeContext))
                 .UseInternalServiceProvider(_serviceProvider);
     }

@@ -25,13 +25,16 @@ public class ServicesModelBinder : IModelBinder
         }
 
         var requestServices = bindingContext.HttpContext.RequestServices;
-        var model = IsOptional ?
-            requestServices.GetService(bindingContext.ModelType) :
-            requestServices.GetRequiredService(bindingContext.ModelType);
+        var model = IsOptional
+            ? requestServices.GetService(bindingContext.ModelType)
+            : requestServices.GetRequiredService(bindingContext.ModelType);
 
         if (model != null)
         {
-            bindingContext.ValidationState.Add(model, new ValidationStateEntry() { SuppressValidation = true });
+            bindingContext.ValidationState.Add(
+                model,
+                new ValidationStateEntry() { SuppressValidation = true }
+            );
         }
 
         bindingContext.Result = ModelBindingResult.Success(model);

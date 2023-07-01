@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,28 +32,30 @@ using System.Text;
 
 namespace System.ServiceModel
 {
-	[MonoTODO]
-	public abstract class ReliableMessagingVersion
-	{
-		static ReliableMessagingVersion _default = new FakeReliableMessagingVersion ();
-		static ReliableMessagingVersion _wsReliableMessaging11 = new FakeReliableMessagingVersion ();
-		static ReliableMessagingVersion _wsReliableMessagingFebruary2005 = new FakeReliableMessagingVersion ();
+    [MonoTODO]
+    public abstract class ReliableMessagingVersion
+    {
+        static ReliableMessagingVersion _default = new FakeReliableMessagingVersion();
+        static ReliableMessagingVersion _wsReliableMessaging11 = new FakeReliableMessagingVersion();
+        static ReliableMessagingVersion _wsReliableMessagingFebruary2005 =
+            new FakeReliableMessagingVersion();
 
-		public static ReliableMessagingVersion Default {
-			get { return _default; }
-		}
+        public static ReliableMessagingVersion Default
+        {
+            get { return _default; }
+        }
 
-		public static ReliableMessagingVersion WSReliableMessaging11 {
-			get { return _wsReliableMessaging11; }
-		}
+        public static ReliableMessagingVersion WSReliableMessaging11
+        {
+            get { return _wsReliableMessaging11; }
+        }
 
-		public static ReliableMessagingVersion WSReliableMessagingFebruary2005 {
-			get { return _wsReliableMessagingFebruary2005; }
-		}
+        public static ReliableMessagingVersion WSReliableMessagingFebruary2005
+        {
+            get { return _wsReliableMessagingFebruary2005; }
+        }
 
-		[MonoTODO ("must be replaces with a correct implementation")]
-		class FakeReliableMessagingVersion : ReliableMessagingVersion
-		{
-		}
-	}
+        [MonoTODO("must be replaces with a correct implementation")]
+        class FakeReliableMessagingVersion : ReliableMessagingVersion { }
+    }
 }

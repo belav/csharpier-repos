@@ -28,16 +28,17 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
         int? precision = null,
         int? scale = null,
         SqlDbType? sqlDbType = null,
-        StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale)
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale
+    )
         : this(
             new RelationalTypeMappingParameters(
-                    new CoreTypeMappingParameters(typeof(decimal)),
-                    storeType,
-                    storeTypePostfix,
-                    dbType)
-                .WithPrecisionAndScale(precision, scale), sqlDbType)
-    {
-    }
+                new CoreTypeMappingParameters(typeof(decimal)),
+                storeType,
+                storeTypePostfix,
+                dbType
+            ).WithPrecisionAndScale(precision, scale),
+            sqlDbType
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,7 +46,10 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected SqlServerDecimalTypeMapping(RelationalTypeMappingParameters parameters, SqlDbType? sqlDbType)
+    protected SqlServerDecimalTypeMapping(
+        RelationalTypeMappingParameters parameters,
+        SqlDbType? sqlDbType
+    )
         : base(parameters)
     {
         _sqlDbType = sqlDbType;
@@ -57,8 +61,7 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SqlDbType? SqlType
-        => _sqlDbType;
+    public virtual SqlDbType? SqlType => _sqlDbType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,8 +69,8 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerDecimalTypeMapping(parameters, _sqlDbType);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerDecimalTypeMapping(parameters, _sqlDbType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,8 +87,7 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
             ((SqlParameter)parameter).SqlDbType = _sqlDbType.Value;
         }
 
-        if (Size.HasValue
-            && Size.Value != -1)
+        if (Size.HasValue && Size.Value != -1)
         {
             parameter.Size = Size.Value;
         }

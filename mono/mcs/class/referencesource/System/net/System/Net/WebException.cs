@@ -5,7 +5,8 @@
 //------------------------------------------------------------------------------
 
 
-namespace System.Net {
+namespace System.Net
+{
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
@@ -35,13 +36,14 @@ namespace System.Net {
     ///    </para>
     /// </devdoc>
     [Serializable]
-    public class WebException : InvalidOperationException, ISerializable {
-
+    public class WebException : InvalidOperationException, ISerializable
+    {
         private WebExceptionStatus m_Status = WebExceptionStatus.UnknownError; //Should be changed to GeneralFailure;
         private WebResponse m_Response;
-        [NonSerialized]
-        private WebExceptionInternalStatus m_InternalStatus = WebExceptionInternalStatus.RequestFatal;
 
+        [NonSerialized]
+        private WebExceptionInternalStatus m_InternalStatus =
+            WebExceptionInternalStatus.RequestFatal;
 
         /// <devdoc>
         ///    <para>
@@ -51,10 +53,7 @@ namespace System.Net {
         ///    <see cref='System.Net.WebExceptionStatus'/> values.
         ///    </para>
         /// </devdoc>
-        public WebException() {
-
-        }
-
+        public WebException() { }
 
         /// <devdoc>
         ///    <para>
@@ -62,9 +61,8 @@ namespace System.Net {
         ///       message.
         ///    </para>
         /// </devdoc>
-        public WebException(string message) : this(message, null) {
-        }
-
+        public WebException(string message)
+            : this(message, null) { }
 
         /// <devdoc>
         ///    <para>
@@ -76,14 +74,11 @@ namespace System.Net {
         ///
         ///    </para>
         /// </devdoc>
-        public WebException(string message, Exception innerException) :
-            base(message, innerException) {
-        }
+        public WebException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        public WebException(string message, WebExceptionStatus status) :
-            this(message, null, status, null) {
-        }
-
+        public WebException(string message, WebExceptionStatus status)
+            : this(message, null, status, null) { }
 
         /// <devdoc>
         ///    <para>
@@ -94,9 +89,13 @@ namespace System.Net {
         ///           Status          - Network status of exception
         ///    </para>
         /// </devdoc>
-        internal WebException(string message, WebExceptionStatus status, WebExceptionInternalStatus internalStatus, Exception innerException) :
-            this(message, innerException, status, null, internalStatus) {
-        }
+        internal WebException(
+            string message,
+            WebExceptionStatus status,
+            WebExceptionInternalStatus internalStatus,
+            Exception innerException
+        )
+            : this(message, innerException, status, null, internalStatus) { }
 
         /// <devdoc>
         ///    <para>
@@ -109,56 +108,94 @@ namespace System.Net {
         ///           Response        - The WebResponse we have.
         ///    </para>
         /// </devdoc>
-        public WebException(string message,
-                            Exception innerException,
-                            WebExceptionStatus status,
-                            WebResponse response) :
-            this(message, null, innerException, status, response)
-        { }
+        public WebException(
+            string message,
+            Exception innerException,
+            WebExceptionStatus status,
+            WebResponse response
+        )
+            : this(message, null, innerException, status, response) { }
 
-        internal WebException(string message, string data, Exception innerException, WebExceptionStatus status, WebResponse response) :
-            base(message + (data != null ? ": '" + data + "'" : ""), innerException)
+        internal WebException(
+            string message,
+            string data,
+            Exception innerException,
+            WebExceptionStatus status,
+            WebResponse response
+        )
+            : base(message + (data != null ? ": '" + data + "'" : ""), innerException)
         {
             m_Status = status;
             m_Response = response;
         }
 
-        internal WebException(string message,
-                            Exception innerException,
-                            WebExceptionStatus status,
-                            WebResponse response,
-                            WebExceptionInternalStatus internalStatus) :
-            this(message, null, innerException, status, response, internalStatus)
-        { }
+        internal WebException(
+            string message,
+            Exception innerException,
+            WebExceptionStatus status,
+            WebResponse response,
+            WebExceptionInternalStatus internalStatus
+        )
+            : this(message, null, innerException, status, response, internalStatus) { }
 
-        internal WebException(string message, string data, Exception innerException, WebExceptionStatus status, WebResponse response, WebExceptionInternalStatus internalStatus) :
-            base(message + (data != null ? ": '" + data + "'" : ""), innerException)
+        internal WebException(
+            string message,
+            string data,
+            Exception innerException,
+            WebExceptionStatus status,
+            WebResponse response,
+            WebExceptionInternalStatus internalStatus
+        )
+            : base(message + (data != null ? ": '" + data + "'" : ""), innerException)
         {
             m_Status = status;
             m_Response = response;
             m_InternalStatus = internalStatus;
         }
 
-
-        protected WebException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext) {
-           // m_Status = (WebExceptionStatus)serializationInfo.GetInt32("Status");
-           // m_InternalStatus = (WebExceptionInternalStatus)serializationInfo.GetInt32("InternalStatus");
+        protected WebException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext)
+        {
+            // m_Status = (WebExceptionStatus)serializationInfo.GetInt32("Status");
+            // m_InternalStatus = (WebExceptionInternalStatus)serializationInfo.GetInt32("InternalStatus");
         }
 
         /// <internalonly/>
 
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             GetObjectData(serializationInfo, streamingContext);
         }
 
-
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)] 		
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext){
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermissionAttribute(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
             //serializationInfo.AddValue("Status", (int)m_Status, typeof(int));
             //serializationInfo.AddValue("InternalStatus", (int)m_InternalStatus, typeof(int));
@@ -169,22 +206,9 @@ namespace System.Net {
         ///       Gets the status of the response.
         ///    </para>
         /// </devdoc>
-        public WebExceptionStatus Status {
-            get {
-                return m_Status;
-            }
-        }
-
-
-        /// <devdoc>
-        ///    <para>
-        ///       Gets the error message returned from the remote host.
-        ///    </para>
-        /// </devdoc>
-        public WebResponse Response {
-            get {
-                return m_Response;
-            }
+        public WebExceptionStatus Status
+        {
+            get { return m_Status; }
         }
 
         /// <devdoc>
@@ -192,20 +216,27 @@ namespace System.Net {
         ///       Gets the error message returned from the remote host.
         ///    </para>
         /// </devdoc>
-        internal WebExceptionInternalStatus InternalStatus {
-            get {
-                return m_InternalStatus;
-            }
+        public WebResponse Response
+        {
+            get { return m_Response; }
         }
 
+        /// <devdoc>
+        ///    <para>
+        ///       Gets the error message returned from the remote host.
+        ///    </para>
+        /// </devdoc>
+        internal WebExceptionInternalStatus InternalStatus
+        {
+            get { return m_InternalStatus; }
+        }
     }; // class WebException
 
-    internal enum WebExceptionInternalStatus {
-        RequestFatal      = 0,
+    internal enum WebExceptionInternalStatus
+    {
+        RequestFatal = 0,
         ServicePointFatal = 1,
-        Recoverable       = 2,
-        Isolated          = 3,
+        Recoverable = 2,
+        Isolated = 3,
     }
-
-
 } // namespace System.Net

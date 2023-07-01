@@ -5,12 +5,17 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 struct S2
 {
     public uint F0;
-    public ulong F1, F2;
-    public S2(uint f0) : this() { F0 = f0; }
+    public ulong F1,
+        F2;
+
+    public S2(uint f0)
+        : this()
+    {
+        F0 = f0;
+    }
 }
 
 public class GitHub_19256
@@ -18,6 +23,7 @@ public class GitHub_19256
     static S2 s_one = new S2(1);
     static S2 s_two = new S2(2);
     static uint sum = 0;
+
     public static int Main()
     {
         M28(s_two, M28(s_one, s_one));
@@ -36,5 +42,3 @@ public class GitHub_19256
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Use(S2 arg) { }
 }
-
-

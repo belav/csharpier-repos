@@ -16,9 +16,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     {
         private const int DefaultSlot = 0;
         private readonly ServiceDescriptor[] _descriptors;
-        private readonly ConcurrentDictionary<ServiceCacheKey, ServiceCallSite> _callSiteCache = new ConcurrentDictionary<ServiceCacheKey, ServiceCallSite>();
-        private readonly Dictionary<Type, ServiceDescriptorCacheItem> _descriptorLookup = new Dictionary<Type, ServiceDescriptorCacheItem>();
-        private readonly ConcurrentDictionary<Type, object> _callSiteLocks = new ConcurrentDictionary<Type, object>();
+        private readonly ConcurrentDictionary<ServiceCacheKey, ServiceCallSite> _callSiteCache =
+            new ConcurrentDictionary<ServiceCacheKey, ServiceCallSite>();
+        private readonly Dictionary<Type, ServiceDescriptorCacheItem> _descriptorLookup =
+            new Dictionary<Type, ServiceDescriptorCacheItem>();
+        private readonly ConcurrentDictionary<Type, object> _callSiteLocks =
+            new ConcurrentDictionary<Type, object>();
 
         private readonly StackGuard _stackGuard;
 
@@ -45,40 +48,66 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     if (implementationType == null || !implementationType.IsGenericTypeDefinition)
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.OpenGenericServiceRequiresOpenGenericImplementation, serviceType),
-                            "descriptors");
+                            SR.Format(
+                                SR.OpenGenericServiceRequiresOpenGenericImplementation,
+                                serviceType
+                            ),
+                            "descriptors"
+                        );
                     }
 
                     if (implementationType.IsAbstract || implementationType.IsInterface)
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.TypeCannotBeActivated, implementationType, serviceType));
+                            SR.Format(SR.TypeCannotBeActivated, implementationType, serviceType)
+                        );
                     }
 
                     Type[] serviceTypeGenericArguments = serviceType.GetGenericArguments();
-                    Type[] implementationTypeGenericArguments = implementationType.GetGenericArguments();
-                    if (serviceTypeGenericArguments.Length != implementationTypeGenericArguments.Length)
+                    Type[] implementationTypeGenericArguments =
+                        implementationType.GetGenericArguments();
+                    if (
+                        serviceTypeGenericArguments.Length
+                        != implementationTypeGenericArguments.Length
+                    )
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.ArityOfOpenGenericServiceNotEqualArityOfOpenGenericImplementation, serviceType, implementationType), "descriptors");
+                            SR.Format(
+                                SR.ArityOfOpenGenericServiceNotEqualArityOfOpenGenericImplementation,
+                                serviceType,
+                                implementationType
+                            ),
+                            "descriptors"
+                        );
                     }
 
                     if (ServiceProvider.VerifyOpenGenericServiceTrimmability)
                     {
-                        ValidateTrimmingAnnotations(serviceType, serviceTypeGenericArguments, implementationType, implementationTypeGenericArguments);
+                        ValidateTrimmingAnnotations(
+                            serviceType,
+                            serviceTypeGenericArguments,
+                            implementationType,
+                            implementationTypeGenericArguments
+                        );
                     }
                 }
-                else if (descriptor.ImplementationInstance == null && descriptor.ImplementationFactory == null)
+                else if (
+                    descriptor.ImplementationInstance == null
+                    && descriptor.ImplementationFactory == null
+                )
                 {
                     Debug.Assert(descriptor.ImplementationType != null);
                     Type implementationType = descriptor.ImplementationType;
 
-                    if (implementationType.IsGenericTypeDefinition ||
-                        implementationType.IsAbstract ||
-                        implementationType.IsInterface)
+                    if (
+                        implementationType.IsGenericTypeDefinition
+                        || implementationType.IsAbstract
+                        || implementationType.IsInterface
+                    )
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.TypeCannotBeActivated, implementationType, serviceType));
+                            SR.Format(SR.TypeCannotBeActivated, implementationType, serviceType)
+                        );
                     }
                 }
 
@@ -102,58 +131,105 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type serviceType,
             Type[] serviceTypeGenericArguments,
             Type implementationType,
-            Type[] implementationTypeGenericArguments)
+            Type[] implementationTypeGenericArguments
+        )
         {
-            Debug.Assert(serviceTypeGenericArguments.Length == implementationTypeGenericArguments.Length);
+            Debug.Assert(
+                serviceTypeGenericArguments.Length == implementationTypeGenericArguments.Length
+            );
 
             for (int i = 0; i < serviceTypeGenericArguments.Length; i++)
             {
                 Type serviceGenericType = serviceTypeGenericArguments[i];
                 Type implementationGenericType = implementationTypeGenericArguments[i];
 
-                DynamicallyAccessedMemberTypes serviceDynamicallyAccessedMembers = GetDynamicallyAccessedMemberTypes(serviceGenericType);
-                DynamicallyAccessedMemberTypes implementationDynamicallyAccessedMembers = GetDynamicallyAccessedMemberTypes(implementationGenericType);
+                DynamicallyAccessedMemberTypes serviceDynamicallyAccessedMembers =
+                    GetDynamicallyAccessedMemberTypes(serviceGenericType);
+                DynamicallyAccessedMemberTypes implementationDynamicallyAccessedMembers =
+                    GetDynamicallyAccessedMemberTypes(implementationGenericType);
 
-                if (!AreCompatible(serviceDynamicallyAccessedMembers, implementationDynamicallyAccessedMembers))
+                if (
+                    !AreCompatible(
+                        serviceDynamicallyAccessedMembers,
+                        implementationDynamicallyAccessedMembers
+                    )
+                )
                 {
-                    throw new ArgumentException(SR.Format(SR.TrimmingAnnotationsDoNotMatch, implementationType.FullName, serviceType.FullName));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.TrimmingAnnotationsDoNotMatch,
+                            implementationType.FullName,
+                            serviceType.FullName
+                        )
+                    );
                 }
 
-                bool serviceHasNewConstraint = serviceGenericType.GenericParameterAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
-                bool implementationHasNewConstraint = implementationGenericType.GenericParameterAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
+                bool serviceHasNewConstraint =
+                    serviceGenericType.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    );
+                bool implementationHasNewConstraint =
+                    implementationGenericType.GenericParameterAttributes.HasFlag(
+                        GenericParameterAttributes.DefaultConstructorConstraint
+                    );
                 if (implementationHasNewConstraint && !serviceHasNewConstraint)
                 {
-                    throw new ArgumentException(SR.Format(SR.TrimmingAnnotationsDoNotMatch_NewConstraint, implementationType.FullName, serviceType.FullName));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.TrimmingAnnotationsDoNotMatch_NewConstraint,
+                            implementationType.FullName,
+                            serviceType.FullName
+                        )
+                    );
                 }
             }
         }
 
-        private static DynamicallyAccessedMemberTypes GetDynamicallyAccessedMemberTypes(Type serviceGenericType)
+        private static DynamicallyAccessedMemberTypes GetDynamicallyAccessedMemberTypes(
+            Type serviceGenericType
+        )
         {
-            foreach (CustomAttributeData attributeData in serviceGenericType.GetCustomAttributesData())
+            foreach (
+                CustomAttributeData attributeData in serviceGenericType.GetCustomAttributesData()
+            )
             {
-                if (attributeData.AttributeType.FullName == "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute" &&
-                    attributeData.ConstructorArguments.Count == 1 &&
-                    attributeData.ConstructorArguments[0].ArgumentType.FullName == "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes")
+                if (
+                    attributeData.AttributeType.FullName
+                        == "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"
+                    && attributeData.ConstructorArguments.Count == 1
+                    && attributeData.ConstructorArguments[0].ArgumentType.FullName
+                        == "System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"
+                )
                 {
-                    return (DynamicallyAccessedMemberTypes)(int)attributeData.ConstructorArguments[0].Value!;
+                    return (DynamicallyAccessedMemberTypes)
+                        (int)attributeData.ConstructorArguments[0].Value!;
                 }
             }
 
             return DynamicallyAccessedMemberTypes.None;
         }
 
-        private static bool AreCompatible(DynamicallyAccessedMemberTypes serviceDynamicallyAccessedMembers, DynamicallyAccessedMemberTypes implementationDynamicallyAccessedMembers)
+        private static bool AreCompatible(
+            DynamicallyAccessedMemberTypes serviceDynamicallyAccessedMembers,
+            DynamicallyAccessedMemberTypes implementationDynamicallyAccessedMembers
+        )
         {
             // The DynamicallyAccessedMemberTypes don't need to exactly match.
             // The service type needs to preserve a superset of the members required by the implementation type.
-            return serviceDynamicallyAccessedMembers.HasFlag(implementationDynamicallyAccessedMembers);
+            return serviceDynamicallyAccessedMembers.HasFlag(
+                implementationDynamicallyAccessedMembers
+            );
         }
 
         // For unit testing
         internal int? GetSlot(ServiceDescriptor serviceDescriptor)
         {
-            if (_descriptorLookup.TryGetValue(serviceDescriptor.ServiceType, out ServiceDescriptorCacheItem item))
+            if (
+                _descriptorLookup.TryGetValue(
+                    serviceDescriptor.ServiceType,
+                    out ServiceDescriptorCacheItem item
+                )
+            )
             {
                 return item.GetSlot(serviceDescriptor);
             }
@@ -162,14 +238,31 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         }
 
         internal ServiceCallSite? GetCallSite(Type serviceType, CallSiteChain callSiteChain) =>
-            _callSiteCache.TryGetValue(new ServiceCacheKey(serviceType, DefaultSlot), out ServiceCallSite? site) ? site :
-            CreateCallSite(serviceType, callSiteChain);
+            _callSiteCache.TryGetValue(
+                new ServiceCacheKey(serviceType, DefaultSlot),
+                out ServiceCallSite? site
+            )
+                ? site
+                : CreateCallSite(serviceType, callSiteChain);
 
-        internal ServiceCallSite? GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+        internal ServiceCallSite? GetCallSite(
+            ServiceDescriptor serviceDescriptor,
+            CallSiteChain callSiteChain
+        )
         {
-            if (_descriptorLookup.TryGetValue(serviceDescriptor.ServiceType, out ServiceDescriptorCacheItem descriptor))
+            if (
+                _descriptorLookup.TryGetValue(
+                    serviceDescriptor.ServiceType,
+                    out ServiceDescriptorCacheItem descriptor
+                )
+            )
             {
-                return TryCreateExact(serviceDescriptor, serviceDescriptor.ServiceType, callSiteChain, descriptor.GetSlot(serviceDescriptor));
+                return TryCreateExact(
+                    serviceDescriptor,
+                    serviceDescriptor.ServiceType,
+                    callSiteChain,
+                    descriptor.GetSlot(serviceDescriptor)
+                );
             }
 
             Debug.Fail("_descriptorLookup didn't contain requested serviceDescriptor");
@@ -199,9 +292,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 callSiteChain.CheckCircularDependency(serviceType);
 
-                ServiceCallSite? callSite = TryCreateExact(serviceType, callSiteChain) ??
-                                           TryCreateOpenGeneric(serviceType, callSiteChain) ??
-                                           TryCreateEnumerable(serviceType, callSiteChain);
+                ServiceCallSite? callSite =
+                    TryCreateExact(serviceType, callSiteChain)
+                    ?? TryCreateOpenGeneric(serviceType, callSiteChain)
+                    ?? TryCreateEnumerable(serviceType, callSiteChain);
 
                 return callSite;
             }
@@ -209,7 +303,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private ServiceCallSite? TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
         {
-            if (_descriptorLookup.TryGetValue(serviceType, out ServiceDescriptorCacheItem descriptor))
+            if (
+                _descriptorLookup.TryGetValue(
+                    serviceType,
+                    out ServiceDescriptorCacheItem descriptor
+                )
+            )
             {
                 return TryCreateExact(descriptor.Last, serviceType, callSiteChain, DefaultSlot);
             }
@@ -219,10 +318,21 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private ServiceCallSite? TryCreateOpenGeneric(Type serviceType, CallSiteChain callSiteChain)
         {
-            if (serviceType.IsConstructedGenericType
-                && _descriptorLookup.TryGetValue(serviceType.GetGenericTypeDefinition(), out ServiceDescriptorCacheItem descriptor))
+            if (
+                serviceType.IsConstructedGenericType
+                && _descriptorLookup.TryGetValue(
+                    serviceType.GetGenericTypeDefinition(),
+                    out ServiceDescriptorCacheItem descriptor
+                )
+            )
             {
-                return TryCreateOpenGeneric(descriptor.Last, serviceType, callSiteChain, DefaultSlot, true);
+                return TryCreateOpenGeneric(
+                    descriptor.Last,
+                    serviceType,
+                    callSiteChain,
+                    DefaultSlot,
+                    true
+                );
             }
 
             return null;
@@ -240,8 +350,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 callSiteChain.Add(serviceType);
 
-                if (serviceType.IsConstructedGenericType &&
-                    serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                if (
+                    serviceType.IsConstructedGenericType
+                    && serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                )
                 {
                     Type itemType = serviceType.GenericTypeArguments[0];
                     CallSiteResultCacheLocation cacheLocation = CallSiteResultCacheLocation.Root;
@@ -249,8 +361,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     var callSites = new List<ServiceCallSite>();
 
                     // If item type is not generic we can safely use descriptor cache
-                    if (!itemType.IsConstructedGenericType &&
-                        _descriptorLookup.TryGetValue(itemType, out ServiceDescriptorCacheItem descriptors))
+                    if (
+                        !itemType.IsConstructedGenericType
+                        && _descriptorLookup.TryGetValue(
+                            itemType,
+                            out ServiceDescriptorCacheItem descriptors
+                        )
+                    )
                     {
                         for (int i = 0; i < descriptors.Count; i++)
                         {
@@ -259,10 +376,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                             // Last service should get slot 0
                             int slot = descriptors.Count - i - 1;
                             // There may not be any open generics here
-                            ServiceCallSite? callSite = TryCreateExact(descriptor, itemType, callSiteChain, slot);
+                            ServiceCallSite? callSite = TryCreateExact(
+                                descriptor,
+                                itemType,
+                                callSiteChain,
+                                slot
+                            );
                             Debug.Assert(callSite != null);
 
-                            cacheLocation = GetCommonCacheLocation(cacheLocation, callSite.Cache.Location);
+                            cacheLocation = GetCommonCacheLocation(
+                                cacheLocation,
+                                callSite.Cache.Location
+                            );
                             callSites.Add(callSite);
                         }
                     }
@@ -273,14 +398,24 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         for (int i = _descriptors.Length - 1; i >= 0; i--)
                         {
                             ServiceDescriptor descriptor = _descriptors[i];
-                            ServiceCallSite? callSite = TryCreateExact(descriptor, itemType, callSiteChain, slot) ??
-                                           TryCreateOpenGeneric(descriptor, itemType, callSiteChain, slot, false);
+                            ServiceCallSite? callSite =
+                                TryCreateExact(descriptor, itemType, callSiteChain, slot)
+                                ?? TryCreateOpenGeneric(
+                                    descriptor,
+                                    itemType,
+                                    callSiteChain,
+                                    slot,
+                                    false
+                                );
 
                             if (callSite != null)
                             {
                                 slot++;
 
-                                cacheLocation = GetCommonCacheLocation(cacheLocation, callSite.Cache.Location);
+                                cacheLocation = GetCommonCacheLocation(
+                                    cacheLocation,
+                                    callSite.Cache.Location
+                                );
                                 callSites.Add(callSite);
                             }
                         }
@@ -288,14 +423,20 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         callSites.Reverse();
                     }
 
-
                     ResultCache resultCache = ResultCache.None;
-                    if (cacheLocation == CallSiteResultCacheLocation.Scope || cacheLocation == CallSiteResultCacheLocation.Root)
+                    if (
+                        cacheLocation == CallSiteResultCacheLocation.Scope
+                        || cacheLocation == CallSiteResultCacheLocation.Root
+                    )
                     {
                         resultCache = new ResultCache(cacheLocation, callSiteKey);
                     }
 
-                    return _callSiteCache[callSiteKey] = new IEnumerableCallSite(resultCache, itemType, callSites.ToArray());
+                    return _callSiteCache[callSiteKey] = new IEnumerableCallSite(
+                        resultCache,
+                        itemType,
+                        callSites.ToArray()
+                    );
                 }
 
                 return null;
@@ -306,12 +447,20 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
         }
 
-        private static CallSiteResultCacheLocation GetCommonCacheLocation(CallSiteResultCacheLocation locationA, CallSiteResultCacheLocation locationB)
+        private static CallSiteResultCacheLocation GetCommonCacheLocation(
+            CallSiteResultCacheLocation locationA,
+            CallSiteResultCacheLocation locationB
+        )
         {
             return (CallSiteResultCacheLocation)Math.Max((int)locationA, (int)locationB);
         }
 
-        private ServiceCallSite? TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, int slot)
+        private ServiceCallSite? TryCreateExact(
+            ServiceDescriptor descriptor,
+            Type serviceType,
+            CallSiteChain callSiteChain,
+            int slot
+        )
         {
             if (serviceType == descriptor.ServiceType)
             {
@@ -325,15 +474,27 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 var lifetime = new ResultCache(descriptor.Lifetime, serviceType, slot);
                 if (descriptor.ImplementationInstance != null)
                 {
-                    callSite = new ConstantCallSite(descriptor.ServiceType, descriptor.ImplementationInstance);
+                    callSite = new ConstantCallSite(
+                        descriptor.ServiceType,
+                        descriptor.ImplementationInstance
+                    );
                 }
                 else if (descriptor.ImplementationFactory != null)
                 {
-                    callSite = new FactoryCallSite(lifetime, descriptor.ServiceType, descriptor.ImplementationFactory);
+                    callSite = new FactoryCallSite(
+                        lifetime,
+                        descriptor.ServiceType,
+                        descriptor.ImplementationFactory
+                    );
                 }
                 else if (descriptor.ImplementationType != null)
                 {
-                    callSite = CreateConstructorCallSite(lifetime, descriptor.ServiceType, descriptor.ImplementationType, callSiteChain);
+                    callSite = CreateConstructorCallSite(
+                        lifetime,
+                        descriptor.ServiceType,
+                        descriptor.ImplementationType,
+                        callSiteChain
+                    );
                 }
                 else
                 {
@@ -346,14 +507,25 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return null;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:MakeGenericType",
-            Justification = "MakeGenericType here is used to create a closed generic implementation type given the closed service type. " +
-            "Trimming annotations on the generic types are verified when 'Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability' is set, which is set by default when PublishTrimmed=true. " +
-            "That check informs developers when these generic types don't have compatible trimming annotations.")]
-        private ServiceCallSite? TryCreateOpenGeneric(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, int slot, bool throwOnConstraintViolation)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2055:MakeGenericType",
+            Justification = "MakeGenericType here is used to create a closed generic implementation type given the closed service type. "
+                + "Trimming annotations on the generic types are verified when 'Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability' is set, which is set by default when PublishTrimmed=true. "
+                + "That check informs developers when these generic types don't have compatible trimming annotations."
+        )]
+        private ServiceCallSite? TryCreateOpenGeneric(
+            ServiceDescriptor descriptor,
+            Type serviceType,
+            CallSiteChain callSiteChain,
+            int slot,
+            bool throwOnConstraintViolation
+        )
         {
-            if (serviceType.IsConstructedGenericType &&
-                serviceType.GetGenericTypeDefinition() == descriptor.ServiceType)
+            if (
+                serviceType.IsConstructedGenericType
+                && serviceType.GetGenericTypeDefinition() == descriptor.ServiceType
+            )
             {
                 ServiceCacheKey callSiteKey = new ServiceCacheKey(serviceType, slot);
                 if (_callSiteCache.TryGetValue(callSiteKey, out ServiceCallSite? serviceCallSite))
@@ -361,12 +533,17 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     return serviceCallSite;
                 }
 
-                Debug.Assert(descriptor.ImplementationType != null, "descriptor.ImplementationType != null");
+                Debug.Assert(
+                    descriptor.ImplementationType != null,
+                    "descriptor.ImplementationType != null"
+                );
                 var lifetime = new ResultCache(descriptor.Lifetime, serviceType, slot);
                 Type closedType;
                 try
                 {
-                    closedType = descriptor.ImplementationType.MakeGenericType(serviceType.GenericTypeArguments);
+                    closedType = descriptor.ImplementationType.MakeGenericType(
+                        serviceType.GenericTypeArguments
+                    );
                 }
                 catch (ArgumentException)
                 {
@@ -378,7 +555,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     return null;
                 }
 
-                return _callSiteCache[callSiteKey] = CreateConstructorCallSite(lifetime, serviceType, closedType, callSiteChain);
+                return _callSiteCache[callSiteKey] = CreateConstructorCallSite(
+                    lifetime,
+                    serviceType,
+                    closedType,
+                    callSiteChain
+                );
             }
 
             return null;
@@ -387,8 +569,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private ServiceCallSite CreateConstructorCallSite(
             ResultCache lifetime,
             Type serviceType,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType,
-            CallSiteChain callSiteChain)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type implementationType,
+            CallSiteChain callSiteChain
+        )
         {
             try
             {
@@ -399,7 +583,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
                 if (constructors.Length == 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.NoConstructorMatch, implementationType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.NoConstructorMatch, implementationType)
+                    );
                 }
                 else if (constructors.Length == 1)
                 {
@@ -414,13 +600,21 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         implementationType,
                         callSiteChain,
                         parameters,
-                        throwIfCallSiteNotFound: true)!;
+                        throwIfCallSiteNotFound: true
+                    )!;
 
-                    return new ConstructorCallSite(lifetime, serviceType, constructor, parameterCallSites);
+                    return new ConstructorCallSite(
+                        lifetime,
+                        serviceType,
+                        constructor,
+                        parameterCallSites
+                    );
                 }
 
-                Array.Sort(constructors,
-                    (a, b) => b.GetParameters().Length.CompareTo(a.GetParameters().Length));
+                Array.Sort(
+                    constructors,
+                    (a, b) => b.GetParameters().Length.CompareTo(a.GetParameters().Length)
+                );
 
                 ConstructorInfo? bestConstructor = null;
                 HashSet<Type>? bestConstructorParameterTypes = null;
@@ -432,7 +626,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         implementationType,
                         callSiteChain,
                         parameters,
-                        throwIfCallSiteNotFound: false);
+                        throwIfCallSiteNotFound: false
+                    );
 
                     if (currentParameterCallSites != null)
                     {
@@ -460,11 +655,17 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                                 if (!bestConstructorParameterTypes.Contains(p.ParameterType))
                                 {
                                     // Ambiguous match exception
-                                    throw new InvalidOperationException(string.Join(
-                                        Environment.NewLine,
-                                        SR.Format(SR.AmbiguousConstructorException, implementationType),
-                                        bestConstructor,
-                                        constructors[i]));
+                                    throw new InvalidOperationException(
+                                        string.Join(
+                                            Environment.NewLine,
+                                            SR.Format(
+                                                SR.AmbiguousConstructorException,
+                                                implementationType
+                                            ),
+                                            bestConstructor,
+                                            constructors[i]
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -474,12 +675,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 if (bestConstructor == null)
                 {
                     throw new InvalidOperationException(
-                        SR.Format(SR.UnableToActivateTypeException, implementationType));
+                        SR.Format(SR.UnableToActivateTypeException, implementationType)
+                    );
                 }
                 else
                 {
                     Debug.Assert(parameterCallSites != null);
-                    return new ConstructorCallSite(lifetime, serviceType, bestConstructor, parameterCallSites);
+                    return new ConstructorCallSite(
+                        lifetime,
+                        serviceType,
+                        bestConstructor,
+                        parameterCallSites
+                    );
                 }
             }
             finally
@@ -493,7 +700,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Type implementationType,
             CallSiteChain callSiteChain,
             ParameterInfo[] parameters,
-            bool throwIfCallSiteNotFound)
+            bool throwIfCallSiteNotFound
+        )
         {
             var parameterCallSites = new ServiceCallSite[parameters.Length];
             for (int index = 0; index < parameters.Length; index++)
@@ -501,7 +709,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 Type parameterType = parameters[index].ParameterType;
                 ServiceCallSite? callSite = GetCallSite(parameterType, callSiteChain);
 
-                if (callSite == null && ParameterDefaultValue.TryGetDefaultValue(parameters[index], out object? defaultValue))
+                if (
+                    callSite == null
+                    && ParameterDefaultValue.TryGetDefaultValue(
+                        parameters[index],
+                        out object? defaultValue
+                    )
+                )
                 {
                     callSite = new ConstantCallSite(parameterType, defaultValue);
                 }
@@ -510,9 +724,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 {
                     if (throwIfCallSiteNotFound)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.CannotResolveService,
-                            parameterType,
-                            implementationType));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.CannotResolveService, parameterType, implementationType)
+                        );
                     }
 
                     return null;
@@ -523,7 +737,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             return parameterCallSites;
         }
-
 
         public void Add(Type type, ServiceCallSite serviceCallSite)
         {
@@ -548,18 +761,22 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 return true;
             }
 
-            if (serviceType.IsConstructedGenericType && serviceType.GetGenericTypeDefinition() is Type genericDefinition)
+            if (
+                serviceType.IsConstructedGenericType
+                && serviceType.GetGenericTypeDefinition() is Type genericDefinition
+            )
             {
                 // We special case IEnumerable since it isn't explicitly registered in the container
                 // yet we can manifest instances of it when requested.
-                return genericDefinition == typeof(IEnumerable<>) || _descriptorLookup.ContainsKey(genericDefinition);
+                return genericDefinition == typeof(IEnumerable<>)
+                    || _descriptorLookup.ContainsKey(genericDefinition);
             }
 
             // These are the built in service types that aren't part of the list of service descriptors
             // If you update these make sure to also update the code in ServiceProvider.ctor
-            return serviceType == typeof(IServiceProvider) ||
-                   serviceType == typeof(IServiceScopeFactory) ||
-                   serviceType == typeof(IServiceProviderIsService);
+            return serviceType == typeof(IServiceProvider)
+                || serviceType == typeof(IServiceScopeFactory)
+                || serviceType == typeof(IServiceProviderIsService);
         }
 
         private struct ServiceDescriptorCacheItem

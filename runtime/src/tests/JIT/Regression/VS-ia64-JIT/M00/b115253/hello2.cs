@@ -8,13 +8,13 @@ namespace hello
 {
     class Class1
     {
-        static public int Main(string[] args)
+        public static int Main(string[] args)
         {
             int i = 123;
             Console.WriteLine(i);
-        begin:
+            begin:
             String s = "test";
-        intry:
+            intry:
             try
             {
                 Console.WriteLine(s);
@@ -24,8 +24,8 @@ namespace hello
             {
                 try
                 {
-                    if (i == 3) goto incatch;
-
+                    if (i == 3)
+                        goto incatch;
                 }
                 catch
                 {
@@ -33,7 +33,7 @@ namespace hello
                 }
                 Console.WriteLine("unreached");
 
-            incatch:
+                incatch:
                 Console.WriteLine("end outer catch " + s);
             }
 
@@ -41,4 +41,3 @@ namespace hello
         }
     }
 }
-

@@ -12,15 +12,22 @@ using Microsoft.CodeAnalysis.Recommendations;
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations
 {
     [ExportLanguageService(typeof(IRecommendationService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpRecommendationService : AbstractRecommendationService<CSharpSyntaxContext>
+    internal partial class CSharpRecommendationService
+        : AbstractRecommendationService<CSharpSyntaxContext>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRecommendationService()
-        {
-        }
+        public CSharpRecommendationService() { }
 
-        protected override AbstractRecommendationServiceRunner CreateRunner(CSharpSyntaxContext context, bool filterOutOfScopeLocals, CancellationToken cancellationToken)
-            => new CSharpRecommendationServiceRunner(context, filterOutOfScopeLocals, cancellationToken);
+        protected override AbstractRecommendationServiceRunner CreateRunner(
+            CSharpSyntaxContext context,
+            bool filterOutOfScopeLocals,
+            CancellationToken cancellationToken
+        ) =>
+            new CSharpRecommendationServiceRunner(
+                context,
+                filterOutOfScopeLocals,
+                cancellationToken
+            );
     }
 }

@@ -6,7 +6,9 @@ using System.Runtime.Serialization;
 namespace System.ServiceProcess
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.ServiceProcess, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.ServiceProcess, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class TimeoutException : SystemException
     {
         private const int ServiceControllerTimeout = unchecked((int)0x80131906);
@@ -16,7 +18,8 @@ namespace System.ServiceProcess
             HResult = ServiceControllerTimeout;
         }
 
-        public TimeoutException(string? message) : base(message)
+        public TimeoutException(string? message)
+            : base(message)
         {
             HResult = ServiceControllerTimeout;
         }
@@ -28,8 +31,6 @@ namespace System.ServiceProcess
         }
 
         protected TimeoutException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

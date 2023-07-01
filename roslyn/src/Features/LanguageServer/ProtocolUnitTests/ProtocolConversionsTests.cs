@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
             var containsMethod = map.Values.Any(c => c == CompletionItemKind.Method);
             var containsFunction = map.Values.Any(c => c == CompletionItemKind.Function);
 
-            Assert.False(containsFunction && containsMethod, "Don't use Method and Function completion item kinds as it causes user confusion.");
+            Assert.False(
+                containsFunction && containsMethod,
+                "Don't use Method and Function completion item kinds as it causes user confusion."
+            );
         }
     }
 }

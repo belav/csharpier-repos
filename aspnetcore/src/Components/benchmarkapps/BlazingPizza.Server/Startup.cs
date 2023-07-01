@@ -31,7 +31,8 @@ namespace BlazingPizza.Server
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                    new[] { MediaTypeNames.Application.Octet });
+                    new[] { MediaTypeNames.Application.Octet }
+                );
             });
         }
 

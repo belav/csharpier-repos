@@ -4,9 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    public enum ProcessModelComAuthenticationLevel {
+namespace System.Web.Configuration
+{
+    public enum ProcessModelComAuthenticationLevel
+    {
         None = 0,
         Call = 1,
         Connect = 2,

@@ -16,6 +16,10 @@ namespace System.ServiceModel.Security
         bool ReturnCorrelationState { get; set; }
         SecurityToken GetOutgoingSessionToken();
         void SetOutgoingSessionToken(SecurityToken token);
-        void SetSessionTokenAuthenticator(UniqueId sessionId, SecurityTokenAuthenticator sessionTokenAuthenticator, SecurityTokenResolver sessionTokenResolver);
+        void SetSessionTokenAuthenticator(
+            UniqueId sessionId,
+            SecurityTokenAuthenticator sessionTokenAuthenticator,
+            SecurityTokenResolver sessionTokenResolver
+        );
     }
 }

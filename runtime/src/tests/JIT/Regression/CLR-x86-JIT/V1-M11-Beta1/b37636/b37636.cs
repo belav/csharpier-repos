@@ -18,7 +18,10 @@ namespace Test
                 {
                     while (0.0f > m_af[0]) { }
                 }
-                catch (DivideByZeroException) { return -1; }
+                catch (DivideByZeroException)
+                {
+                    return -1;
+                }
             }
             return 100;
         }

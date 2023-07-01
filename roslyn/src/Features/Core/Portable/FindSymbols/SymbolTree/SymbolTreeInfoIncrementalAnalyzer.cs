@@ -15,36 +15,68 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
         {
             private readonly Workspace _workspace;
 
-            public SymbolTreeInfoIncrementalAnalyzer(Workspace workspace)
-                => _workspace = workspace;
+            public SymbolTreeInfoIncrementalAnalyzer(Workspace workspace) => _workspace = workspace;
 
-            public override async Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken)
+            public override async Task AnalyzeDocumentAsync(
+                Document document,
+                SyntaxNode bodyOpt,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            )
             {
-                var client = await RemoteHostClient.TryGetClientAsync(document.Project, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(document.Project, cancellationToken)
+                    .ConfigureAwait(false);
                 var isMethodBodyEdit = bodyOpt != null;
 
                 if (client != null)
                 {
-                    await client.TryInvokeAsync<IRemoteSymbolFinderService>(
-                        document.Project, (service, checksum, cancellationToken) =>
-                            service.AnalyzeDocumentAsync(checksum, document.Id, isMethodBodyEdit, cancellationToken),
-                        cancellationToken).ConfigureAwait(false);
+                    await client
+                        .TryInvokeAsync<IRemoteSymbolFinderService>(
+                            document.Project,
+                            (service, checksum, cancellationToken) =>
+                                service.AnalyzeDocumentAsync(
+                                    checksum,
+                                    document.Id,
+                                    isMethodBodyEdit,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return;
                 }
 
                 var service = _workspace.Services.GetRequiredService<SymbolTreeInfoCacheService>();
-                await service.AnalyzeDocumentAsync(document, isMethodBodyEdit, cancellationToken).ConfigureAwait(false);
+                await service
+                    .AnalyzeDocumentAsync(document, isMethodBodyEdit, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            public override async Task AnalyzeProjectAsync(Project project, bool semanticsChanged, InvocationReasons reasons, CancellationToken cancellationToken)
+            public override async Task AnalyzeProjectAsync(
+                Project project,
+                bool semanticsChanged,
+                InvocationReasons reasons,
+                CancellationToken cancellationToken
+            )
             {
-                var client = await RemoteHostClient.TryGetClientAsync(project, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(project, cancellationToken)
+                    .ConfigureAwait(false);
                 if (client != null)
                 {
-                    await client.TryInvokeAsync<IRemoteSymbolFinderService>(
-                        project, (service, checksum, cancellationToken) =>
-                            service.AnalyzeProjectAsync(checksum, project.Id, cancellationToken),
-                        cancellationToken).ConfigureAwait(false);
+                    await client
+                        .TryInvokeAsync<IRemoteSymbolFinderService>(
+                            project,
+                            (service, checksum, cancellationToken) =>
+                                service.AnalyzeProjectAsync(
+                                    checksum,
+                                    project.Id,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return;
                 }
 
@@ -52,14 +84,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
                 await service.AnalyzeProjectAsync(project, cancellationToken).ConfigureAwait(false);
             }
 
-            public override async Task RemoveProjectAsync(ProjectId projectId, CancellationToken cancellationToken)
+            public override async Task RemoveProjectAsync(
+                ProjectId projectId,
+                CancellationToken cancellationToken
+            )
             {
-                var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(_workspace, cancellationToken)
+                    .ConfigureAwait(false);
                 if (client != null)
                 {
-                    await client.TryInvokeAsync<IRemoteSymbolFinderService>(
-                        (service, cancellationToken) => service.RemoveProjectAsync(projectId, cancellationToken),
-                        cancellationToken).ConfigureAwait(false);
+                    await client
+                        .TryInvokeAsync<IRemoteSymbolFinderService>(
+                            (service, cancellationToken) =>
+                                service.RemoveProjectAsync(projectId, cancellationToken),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return;
                 }
 

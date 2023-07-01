@@ -29,109 +29,109 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System;
+    using System.Collections;
 
-	using System;
-	using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using Mono.Cecil.Cil;
+    internal sealed class EventDefinitionCollection : CollectionBase, IReflectionVisitable
+    {
+        TypeDefinition m_container;
 
-	internal sealed class EventDefinitionCollection : CollectionBase, IReflectionVisitable {
+        public EventDefinition this[int index]
+        {
+            get { return List[index] as EventDefinition; }
+            set { List[index] = value; }
+        }
 
-		TypeDefinition m_container;
+        public TypeDefinition Container
+        {
+            get { return m_container; }
+        }
 
-		public EventDefinition this [int index] {
-			get { return List [index] as EventDefinition; }
-			set { List [index] = value; }
-		}
+        public EventDefinitionCollection(TypeDefinition container)
+        {
+            m_container = container;
+        }
 
-		public TypeDefinition Container {
-			get { return m_container; }
-		}
+        public void Add(EventDefinition value)
+        {
+            Attach(value);
 
-		public EventDefinitionCollection (TypeDefinition container)
-		{
-			m_container = container;
-		}
+            List.Add(value);
+        }
 
-		public void Add (EventDefinition value)
-		{
-			Attach (value);
+        public new void Clear()
+        {
+            foreach (EventDefinition item in this)
+                Detach(item);
 
-			List.Add (value);
-		}
+            base.Clear();
+        }
 
+        public bool Contains(EventDefinition value)
+        {
+            return List.Contains(value);
+        }
 
-		public new void Clear ()
-		{
-			foreach (EventDefinition item in this)
-				Detach (item);
+        public int IndexOf(EventDefinition value)
+        {
+            return List.IndexOf(value);
+        }
 
-			base.Clear ();
-		}
+        public void Insert(int index, EventDefinition value)
+        {
+            Attach(value);
 
-		public bool Contains (EventDefinition value)
-		{
-			return List.Contains (value);
-		}
+            List.Insert(index, value);
+        }
 
-		public int IndexOf (EventDefinition value)
-		{
-			return List.IndexOf (value);
-		}
+        public void Remove(EventDefinition value)
+        {
+            List.Remove(value);
 
-		public void Insert (int index, EventDefinition value)
-		{
-			Attach (value);
+            Detach(value);
+        }
 
-			List.Insert (index, value);
-		}
+        public new void RemoveAt(int index)
+        {
+            EventDefinition item = this[index];
+            Remove(item);
+        }
 
-		public void Remove (EventDefinition value)
-		{
-			List.Remove (value);
+        protected override void OnValidate(object o)
+        {
+            if (!(o is EventDefinition))
+                throw new ArgumentException("Must be of type " + typeof(EventDefinition).FullName);
+        }
 
-			Detach (value);
-		}
+        public EventDefinition GetEvent(string name)
+        {
+            foreach (EventDefinition evt in this)
+                if (evt.Name == name)
+                    return evt;
 
+            return null;
+        }
 
-		public new void RemoveAt (int index)
-		{
-			EventDefinition item = this [index];
-			Remove (item);
-		}
+        void Attach(MemberReference member)
+        {
+            if (member.DeclaringType != null)
+                throw new ReflectionException("Member already attached, clone it instead");
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is EventDefinition))
-				throw new ArgumentException ("Must be of type " + typeof (EventDefinition).FullName);
-		}
+            member.DeclaringType = m_container;
+        }
 
-		public EventDefinition GetEvent (string name)
-		{
-			foreach (EventDefinition evt in this)
-				if (evt.Name == name)
-					return evt;
+        void Detach(MemberReference member)
+        {
+            member.DeclaringType = null;
+        }
 
-			return null;
-		}
-
-		void Attach (MemberReference member)
-		{
-			if (member.DeclaringType != null)
-				throw new ReflectionException ("Member already attached, clone it instead");
-
-			member.DeclaringType = m_container;
-		}
-
-		void Detach (MemberReference member)
-		{
-			member.DeclaringType = null;
-		}
-
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitEventDefinitionCollection (this);
-		}
-	}
+        public void Accept(IReflectionVisitor visitor)
+        {
+            visitor.VisitEventDefinitionCollection(this);
+        }
+    }
 }

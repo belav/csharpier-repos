@@ -15,7 +15,11 @@ namespace System.Reflection.Context.Virtual
             private readonly Func<object, object?> _getter;
             private readonly IEnumerable<Attribute> _attributes;
 
-            public PropertyGetter(VirtualPropertyBase property, Func<object, object?> getter, IEnumerable<Attribute>? getterAttributes)
+            public PropertyGetter(
+                VirtualPropertyBase property,
+                Func<object, object?> getter,
+                IEnumerable<Attribute>? getterAttributes
+            )
                 : base(property)
             {
                 Debug.Assert(null != getter);
@@ -24,7 +28,13 @@ namespace System.Reflection.Context.Virtual
                 _attributes = getterAttributes ?? CollectionServices.Empty<Attribute>();
             }
 
-            public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+            public override object? Invoke(
+                object? obj,
+                BindingFlags invokeAttr,
+                Binder? binder,
+                object?[]? parameters,
+                CultureInfo? culture
+            )
             {
                 // invokeAttr, binder, and culture are ignored, similar to what runtime reflection does with the default binder.
 
@@ -39,7 +49,10 @@ namespace System.Reflection.Context.Virtual
 
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
-                return CollectionServices.IEnumerableToArray(AttributeUtils.FilterCustomAttributes(_attributes, attributeType), attributeType);
+                return CollectionServices.IEnumerableToArray(
+                    AttributeUtils.FilterCustomAttributes(_attributes, attributeType),
+                    attributeType
+                );
             }
 
             public override object[] GetCustomAttributes(bool inherit)

@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.ExtenderService
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2006 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,51 +33,55 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
+    internal sealed class ExtenderService
+        : IExtenderProviderService,
+            IExtenderListService,
+            IDisposable
+    {
+        private ArrayList _extenderProviders;
 
-	internal sealed class ExtenderService : IExtenderProviderService, IExtenderListService, IDisposable
-	{
+        public ExtenderService()
+        {
+            _extenderProviders = new ArrayList();
+        }
 
-		private ArrayList _extenderProviders;
+        public void AddExtenderProvider(IExtenderProvider provider)
+        {
+            if (_extenderProviders != null)
+            {
+                if (!_extenderProviders.Contains(provider))
+                    _extenderProviders.Add(provider);
+            }
+        }
 
-		public ExtenderService ()
-		{
-			_extenderProviders = new ArrayList ();
-		}
-		
-		public void AddExtenderProvider (IExtenderProvider provider)
-		{
-			if (_extenderProviders != null) {
-				if (!_extenderProviders.Contains (provider))
-					_extenderProviders.Add (provider);
-			}
-		}
+        public void RemoveExtenderProvider(IExtenderProvider provider)
+        {
+            if (_extenderProviders != null)
+            {
+                if (_extenderProviders.Contains(provider))
+                    _extenderProviders.Remove(provider);
+            }
+        }
 
-		public void RemoveExtenderProvider (IExtenderProvider provider)
-		{
-			if (_extenderProviders != null) {
-				if (_extenderProviders.Contains (provider))
-					_extenderProviders.Remove (provider);
-			}
-		}
-		
-		public IExtenderProvider[] GetExtenderProviders()
-		{
-			if (_extenderProviders != null) {
-				IExtenderProvider[] result = new IExtenderProvider[_extenderProviders.Count];
-				_extenderProviders.CopyTo (result, 0);
-				
-				return result;
-			}
-			return null;
-		}
+        public IExtenderProvider[] GetExtenderProviders()
+        {
+            if (_extenderProviders != null)
+            {
+                IExtenderProvider[] result = new IExtenderProvider[_extenderProviders.Count];
+                _extenderProviders.CopyTo(result, 0);
 
-		public void Dispose ()
-		{
-			if (_extenderProviders != null) {
-				_extenderProviders.Clear ();
-				_extenderProviders = null;
-			}
-		}
-	}
+                return result;
+            }
+            return null;
+        }
+
+        public void Dispose()
+        {
+            if (_extenderProviders != null)
+            {
+                _extenderProviders.Clear();
+                _extenderProviders = null;
+            }
+        }
+    }
 }
-

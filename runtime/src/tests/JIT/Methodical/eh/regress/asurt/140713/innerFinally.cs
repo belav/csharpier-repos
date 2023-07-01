@@ -6,10 +6,8 @@ using Xunit;
 
 namespace test_innerFinally
 {
-
     public class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -30,10 +28,13 @@ namespace test_innerFinally
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
-            int x = 7, y = 0, z;
+            int x = 7,
+                y = 0,
+                z;
             //Start recording
             testLog.StartRecording();
 

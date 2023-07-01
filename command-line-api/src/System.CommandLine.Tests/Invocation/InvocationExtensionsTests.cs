@@ -23,10 +23,7 @@ namespace System.CommandLine.Tests.Invocation
 
             await command.InvokeAsync("-h", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Contain(theHelpText);
+            console.Out.ToString().Should().Contain(theHelpText);
         }
 
         [Fact]
@@ -40,10 +37,7 @@ namespace System.CommandLine.Tests.Invocation
 
             command.Invoke("-h", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Contain(theHelpText);
+            console.Out.ToString().Should().Contain(theHelpText);
         }
 
         [Fact]
@@ -157,17 +151,19 @@ namespace System.CommandLine.Tests.Invocation
         {
             CancellationTokenSource cts = new();
             var command = new Command("test");
-            command.SetHandler((InvocationContext context) =>
-            {
-                CancellationToken cancellationToken = context.GetCancellationToken();
-                Assert.True(cancellationToken.CanBeCanceled);
-                if (cancellationToken.IsCancellationRequested)
+            command.SetHandler(
+                (InvocationContext context) =>
                 {
-                    return Task.FromResult(42);
-                }
+                    CancellationToken cancellationToken = context.GetCancellationToken();
+                    Assert.True(cancellationToken.CanBeCanceled);
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        return Task.FromResult(42);
+                    }
 
-                return Task.FromResult(0);
-            });
+                    return Task.FromResult(0);
+                }
+            );
 
             cts.Cancel();
             int rv = await command.InvokeAsync("test", cancellationToken: cts.Token);

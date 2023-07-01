@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             InheritanceRelationship relationToMember,
             DefinitionItem.DetachedDefinitionItem definitionItem,
             Glyph glyph,
-            string displayName)
+            string displayName
+        )
         {
             RelationToMember = relationToMember;
             DefinitionItem = definitionItem;
@@ -48,9 +49,12 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         public static async ValueTask<InheritanceTargetItem> ConvertAsync(
             Solution solution,
             SerializableInheritanceTargetItem serializableItem,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var definitionItem = await serializableItem.DefinitionItem.RehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+            var definitionItem = await serializableItem.DefinitionItem
+                .RehydrateAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
 
             // detach this item so that it doesn't hold onto a full solution snapshot in other documents that
             // are not getting updated.
@@ -58,7 +62,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 serializableItem.RelationToMember,
                 definitionItem.Detach(),
                 serializableItem.Glyph,
-                serializableItem.DisplayName);
+                serializableItem.DisplayName
+            );
         }
     }
 }

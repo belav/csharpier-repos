@@ -15,7 +15,11 @@ namespace System.Text.Json.Serialization.Metadata
         private readonly JsonPolymorphicAttribute? _polymorphicTypeAttribute;
         private readonly IEnumerable<JsonDerivedTypeAttribute> _derivedTypeAttributes;
 
-        private AttributePolymorphicTypeConfiguration(Type baseType, JsonPolymorphicAttribute? polymorphicTypeAttribute, IEnumerable<JsonDerivedTypeAttribute> derivedTypeAttributes)
+        private AttributePolymorphicTypeConfiguration(
+            Type baseType,
+            JsonPolymorphicAttribute? polymorphicTypeAttribute,
+            IEnumerable<JsonDerivedTypeAttribute> derivedTypeAttributes
+        )
         {
             BaseType = baseType;
             _polymorphicTypeAttribute = polymorphicTypeAttribute;
@@ -24,15 +28,21 @@ namespace System.Text.Json.Serialization.Metadata
 
         public static AttributePolymorphicTypeConfiguration? Create(Type baseType)
         {
-            JsonPolymorphicAttribute? polymorphicTypeAttribute = baseType.GetCustomAttribute<JsonPolymorphicAttribute>(inherit: false);
-            IEnumerable<JsonDerivedTypeAttribute> derivedTypeAttributes = baseType.GetCustomAttributes<JsonDerivedTypeAttribute>(inherit: false);
+            JsonPolymorphicAttribute? polymorphicTypeAttribute =
+                baseType.GetCustomAttribute<JsonPolymorphicAttribute>(inherit: false);
+            IEnumerable<JsonDerivedTypeAttribute> derivedTypeAttributes =
+                baseType.GetCustomAttributes<JsonDerivedTypeAttribute>(inherit: false);
 
             if (polymorphicTypeAttribute is null && IsEmpty(derivedTypeAttributes))
             {
                 return null;
             }
 
-            return new AttributePolymorphicTypeConfiguration(baseType, polymorphicTypeAttribute, derivedTypeAttributes);
+            return new AttributePolymorphicTypeConfiguration(
+                baseType,
+                polymorphicTypeAttribute,
+                derivedTypeAttributes
+            );
 
             static bool IsEmpty<T>(IEnumerable<T> source)
             {
@@ -43,11 +53,14 @@ namespace System.Text.Json.Serialization.Metadata
 
         public Type BaseType { get; }
 
-        public string? TypeDiscriminatorPropertyName => _polymorphicTypeAttribute?.TypeDiscriminatorPropertyName;
+        public string? TypeDiscriminatorPropertyName =>
+            _polymorphicTypeAttribute?.TypeDiscriminatorPropertyName;
 
-        public JsonUnknownDerivedTypeHandling UnknownDerivedTypeHandling => _polymorphicTypeAttribute?.UnknownDerivedTypeHandling ?? default;
+        public JsonUnknownDerivedTypeHandling UnknownDerivedTypeHandling =>
+            _polymorphicTypeAttribute?.UnknownDerivedTypeHandling ?? default;
 
-        public bool IgnoreUnrecognizedTypeDiscriminators => _polymorphicTypeAttribute?.IgnoreUnrecognizedTypeDiscriminators ?? false;
+        public bool IgnoreUnrecognizedTypeDiscriminators =>
+            _polymorphicTypeAttribute?.IgnoreUnrecognizedTypeDiscriminators ?? false;
 
         public IEnumerable<(Type DerivedType, object? TypeDiscriminator)> GetSupportedDerivedTypes()
         {

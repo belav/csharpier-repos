@@ -31,9 +31,7 @@ public class ManifestEmbeddedFileProvider : IFileProvider
     /// <param name="assembly">The assembly containing the embedded files.</param>
     /// <param name="root">The relative path from the root of the manifest to use as root for the provider.</param>
     public ManifestEmbeddedFileProvider(Assembly assembly, string root)
-        : this(assembly, root, ResolveLastModified(assembly))
-    {
-    }
+        : this(assembly, root, ResolveLastModified(assembly)) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ManifestEmbeddedFileProvider"/>.
@@ -43,9 +41,7 @@ public class ManifestEmbeddedFileProvider : IFileProvider
     /// <param name="lastModified">The LastModified date to use on the <see cref="IFileInfo"/> instances
     /// returned by this <see cref="IFileProvider"/>.</param>
     public ManifestEmbeddedFileProvider(Assembly assembly, string root, DateTimeOffset lastModified)
-        : this(assembly, ManifestParser.Parse(assembly).Scope(root), lastModified)
-    {
-    }
+        : this(assembly, ManifestParser.Parse(assembly).Scope(root), lastModified) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ManifestEmbeddedFileProvider"/>.
@@ -55,12 +51,19 @@ public class ManifestEmbeddedFileProvider : IFileProvider
     /// <param name="manifestName">The name of the embedded resource containing the manifest.</param>
     /// <param name="lastModified">The LastModified date to use on the <see cref="IFileInfo"/> instances
     /// returned by this <see cref="IFileProvider"/>.</param>
-    public ManifestEmbeddedFileProvider(Assembly assembly, string root, string manifestName, DateTimeOffset lastModified)
-        : this(assembly, ManifestParser.Parse(assembly, manifestName).Scope(root), lastModified)
-    {
-    }
+    public ManifestEmbeddedFileProvider(
+        Assembly assembly,
+        string root,
+        string manifestName,
+        DateTimeOffset lastModified
+    )
+        : this(assembly, ManifestParser.Parse(assembly, manifestName).Scope(root), lastModified) { }
 
-    internal ManifestEmbeddedFileProvider(Assembly assembly, EmbeddedFilesManifest manifest, DateTimeOffset lastModified)
+    internal ManifestEmbeddedFileProvider(
+        Assembly assembly,
+        EmbeddedFilesManifest manifest,
+        DateTimeOffset lastModified
+    )
     {
         if (assembly == null)
         {
@@ -139,12 +142,8 @@ public class ManifestEmbeddedFileProvider : IFileProvider
             {
                 result = File.GetLastWriteTimeUtc(assembly.Location);
             }
-            catch (PathTooLongException)
-            {
-            }
-            catch (UnauthorizedAccessException)
-            {
-            }
+            catch (PathTooLongException) { }
+            catch (UnauthorizedAccessException) { }
         }
 
         return result;

@@ -9,7 +9,8 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Collections;
 
-    internal class CommunicationObjectManager<ItemType> : LifetimeManager where ItemType : class, ICommunicationObject
+    internal class CommunicationObjectManager<ItemType> : LifetimeManager
+        where ItemType : class, ICommunicationObject
     {
         bool inputClosed;
         Hashtable table;
@@ -41,13 +42,15 @@ namespace System.ServiceModel.Channels
             if (!added)
             {
                 item.Abort();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().ToString())
+                );
             }
         }
 
         public void CloseInput()
         {
-            //Abort can reenter this call as a result of 
+            //Abort can reenter this call as a result of
             //close timeout, Closing input twice is not a
             //FailFast case.
             this.inputClosed = true;

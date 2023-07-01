@@ -21,7 +21,6 @@ using System.Globalization;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {
-
     internal abstract class Property : SchemaElement
     {
         /// <summary>
@@ -29,14 +28,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="parentElement">The parent element</param>
         internal Property(StructuredType parentElement)
-            : base(parentElement)
-        {
-        }
+            : base(parentElement) { }
 
         /// <summary>
         /// Gets the Type of the property
         /// </summary>
-        public abstract SchemaType Type { get;}
+        public abstract SchemaType Type { get; }
 
         protected override bool HandleElement(XmlReader reader)
         {

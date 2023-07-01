@@ -21,6 +21,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
     public class DiagnosticPortValidation
     {
         private static readonly int s_NumberOfPorts = 4;
+
         public static async Task<bool> TEST_MultipleConnectPortsNoSuspend()
         {
             bool fSuccess = true;
@@ -40,7 +41,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
             int subprocessId = -1;
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string>
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, dotnetDiagnosticPorts }
                 },
@@ -52,14 +53,18 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     {
                         var (server, _) = serverAndNames[i];
                         int serverIndex = i;
-                        tasks.Add(Task.Run(async () =>
-                        {
-                            Stream stream = await server.AcceptAsync();
-                            IpcAdvertise advertise = IpcAdvertise.Parse(stream);
-                            lock(sync)
-                                advertisements.Add(advertise);
-                            Logger.logger.Log($"Server {serverIndex} got advertise {advertise.ToString()}");
-                        }));
+                        tasks.Add(
+                            Task.Run(async () =>
+                            {
+                                Stream stream = await server.AcceptAsync();
+                                IpcAdvertise advertise = IpcAdvertise.Parse(stream);
+                                lock (sync)
+                                    advertisements.Add(advertise);
+                                Logger.logger.Log(
+                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                );
+                            })
+                        );
                     }
 
                     await Task.WhenAll(tasks);
@@ -102,7 +107,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
             int subprocessId = -1;
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string>
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, dotnetDiagnosticPorts }
                 },
@@ -116,18 +121,30 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> {
-                            new Provider("Microsoft-Windows-DotNETRuntimePrivate", 0x80000000, EventLevel.Verbose),
+                        providers: new List<Provider>
+                        {
+                            new Provider(
+                                "Microsoft-Windows-DotNETRuntimePrivate",
+                                0x80000000,
+                                EventLevel.Verbose
+                            ),
                             // workaround for https://github.com/dotnet/runtime/issues/44072 which happens because the
                             // above provider only sends 2 events and that can cause EventPipeEventSource (from TraceEvent)
                             // to not dispatch the events if the EventBlock is a size not divisible by 8 (the reading alignment in TraceEvent).
                             // Adding this provider keeps data flowing over the pipe so the reader doesn't get stuck waiting for data
                             // that won't come otherwise.
                             new Provider("Microsoft-DotNETCore-SampleProfiler")
-                        });
+                        }
+                    );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream eventStream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
 
                     var mre = new ManualResetEvent(false);
 
@@ -151,12 +168,14 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         int serverIndex = i;
                         Stream stream = await server.AcceptAsync();
                         IpcAdvertise advertise = IpcAdvertise.Parse(stream);
-                        lock(sync)
+                        lock (sync)
                             advertisements.Add(advertise);
-                        Logger.logger.Log($"Server {serverIndex} got advertise {advertise.ToString()}");
+                        Logger.logger.Log(
+                            $"Server {serverIndex} got advertise {advertise.ToString()}"
+                        );
 
                         // send resume command on this connection
-                        var message = new IpcMessage(0x04,0x01);
+                        var message = new IpcMessage(0x04, 0x01);
                         Logger.logger.Log($"Port {serverIndex} sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);
                         Logger.logger.Log($"Port {serverIndex} received: {response.ToString()}");
@@ -174,10 +193,8 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     // runtime should have resumed now
                     fSuccess &= mre.WaitOne(0);
                     Logger.logger.Log($"Runtime HAS resumed (expects: true): {fSuccess}");
-
                 }
             );
-
 
             fSuccess &= await subprocessTask;
             foreach (var (server, _) in serverAndNames)
@@ -207,7 +224,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
             int subprocessId = -1;
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string>
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortSuspend, "1" }
                 },
@@ -221,18 +238,30 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> {
-                            new Provider("Microsoft-Windows-DotNETRuntimePrivate", 0x80000000, EventLevel.Verbose),
+                        providers: new List<Provider>
+                        {
+                            new Provider(
+                                "Microsoft-Windows-DotNETRuntimePrivate",
+                                0x80000000,
+                                EventLevel.Verbose
+                            ),
                             // workaround for https://github.com/dotnet/runtime/issues/44072 which happens because the
                             // above provider only sends 2 events and that can cause EventPipeEventSource (from TraceEvent)
                             // to not dispatch the events if the EventBlock is a size not divisible by 8 (the reading alignment in TraceEvent).
                             // Adding this provider keeps data flowing over the pipe so the reader doesn't get stuck waiting for data
                             // that won't come otherwise.
                             new Provider("Microsoft-DotNETCore-SampleProfiler")
-                        });
+                        }
+                    );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream eventStream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
 
                     var mre = new ManualResetEvent(false);
 
@@ -248,14 +277,16 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         Logger.logger.Log($"Finished processing");
                     });
 
-
                     fSuccess &= !mre.WaitOne(0);
                     Logger.logger.Log($"Runtime HAS NOT resumed (expects: true): {fSuccess}");
 
                     // send resume command on this connection
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
-                    IpcMessage response = IpcClient.SendMessage(ConnectionHelper.GetStandardTransport(pid), message);
+                    IpcMessage response = IpcClient.SendMessage(
+                        ConnectionHelper.GetStandardTransport(pid),
+                        message
+                    );
                     Logger.logger.Log($"Received: {response.ToString()}");
 
                     Logger.logger.Log($"Waiting for EEStartupStarted event");
@@ -270,10 +301,8 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     // runtime should have resumed now
                     fSuccess &= mre.WaitOne(0);
                     Logger.logger.Log($"Runtime HAS resumed (expects: true): {fSuccess}");
-
                 }
             );
-
 
             fSuccess &= await subprocessTask;
 
@@ -289,7 +318,10 @@ namespace Tracing.Tests.DiagnosticPortValidation
             using var memoryStream = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -298,14 +330,19 @@ namespace Tracing.Tests.DiagnosticPortValidation
 
                     Logger.logger.Log($"Send ProcessInfo Diagnostics IPC Command");
                     // send ProcessInfo command (0x04=ProcessCommandSet, 0x00=ProcessInfo commandid)
-                    var message = new IpcMessage(0x04,0x00);
+                    var message = new IpcMessage(0x04, 0x00);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
                     ProcessInfo info = ProcessInfo.TryParse(response.Payload);
-                    Logger.logger.Log($"ProcessInfo: {{ id={info.ProcessId}, cookie={info.RuntimeCookie}, cmdline={info.Commandline}, OS={info.OS}, arch={info.Arch} }}");
+                    Logger.logger.Log(
+                        $"ProcessInfo: {{ id={info.ProcessId}, cookie={info.RuntimeCookie}, cmdline={info.Commandline}, OS={info.OS}, arch={info.Arch} }}"
+                    );
 
-                    Utils.Assert(info.RuntimeCookie.Equals(advertise.RuntimeInstanceCookie), $"The runtime cookie reported by ProcessInfo and Advertise must match.  ProcessInfo: {info.RuntimeCookie.ToString()}, Advertise: {advertise.RuntimeInstanceCookie.ToString()}");
+                    Utils.Assert(
+                        info.RuntimeCookie.Equals(advertise.RuntimeInstanceCookie),
+                        $"The runtime cookie reported by ProcessInfo and Advertise must match.  ProcessInfo: {info.RuntimeCookie.ToString()}, Advertise: {advertise.RuntimeInstanceCookie.ToString()}"
+                    );
                     Logger.logger.Log($"ProcessInfo and Advertise Cookies are equal");
                 }
             );
@@ -331,7 +368,8 @@ namespace Tracing.Tests.DiagnosticPortValidation
             dotnetDiagnosticPorts += " , , , , , ,;,,,,,;;"; // whitespace configs and empty tags with no path shouldn't cause a crash
             dotnetDiagnosticPorts += "connect,connect,connect,nosuspend,nosuspend,nosuspend,,,;"; // path that is the same as a tag name and duplicate tags shouldn't cause a crash
             dotnetDiagnosticPorts += "SomeRandomPath,nosuspend,suspend,suspend,suspend,suspend;"; // only the first tag from a pair is respected (this should result in a nosuspend port)
-            dotnetDiagnosticPorts += "%%bad_Path^* fasdf----##2~~,bad tag$$@#@%_)*)@!#(&%.>,   , , , ,nosuspend,:::;"; // invalid path chars and tag chars won't cause a crash
+            dotnetDiagnosticPorts +=
+                "%%bad_Path^* fasdf----##2~~,bad tag$$@#@%_)*)@!#(&%.>,   , , , ,nosuspend,:::;"; // invalid path chars and tag chars won't cause a crash
             for (int i = 0; i < s_NumberOfPorts; i++)
             {
                 string serverName = ReverseServer.MakeServerAddress();
@@ -347,7 +385,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
             int subprocessId = -1;
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string>
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortsEnvKey, dotnetDiagnosticPorts }
                 },
@@ -359,14 +397,18 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     {
                         var (server, _) = serverAndNames[i];
                         int serverIndex = i;
-                        tasks.Add(Task.Run(async () =>
-                        {
-                            Stream stream = await server.AcceptAsync();
-                            IpcAdvertise advertise = IpcAdvertise.Parse(stream);
-                            lock(sync)
-                                advertisements.Add(advertise);
-                            Logger.logger.Log($"Server {serverIndex} got advertise {advertise.ToString()}");
-                        }));
+                        tasks.Add(
+                            Task.Run(async () =>
+                            {
+                                Stream stream = await server.AcceptAsync();
+                                IpcAdvertise advertise = IpcAdvertise.Parse(stream);
+                                lock (sync)
+                                    advertisements.Add(advertise);
+                                Logger.logger.Log(
+                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                );
+                            })
+                        );
                     }
 
                     await Task.WhenAll(tasks);
@@ -393,7 +435,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
             bool fSuccess = true;
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string>
+                environment: new Dictionary<string, string>
                 {
                     { Utils.DiagnosticPortSuspend, "1" }
                 },
@@ -405,14 +447,19 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     var processInfoMessage = new IpcMessage(0x04, 0x04);
                     Logger.logger.Log($"Wrote: {processInfoMessage}");
                     IpcMessage response = IpcClient.SendMessage(stream, processInfoMessage);
-                    Logger.logger.Log($"Received: [{response.Payload.Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]");
+                    Logger.logger.Log(
+                        $"Received: [{response.Payload.Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
+                    );
                     ProcessInfo2 processInfo2 = ProcessInfo2.TryParse(response.Payload);
                     Utils.Assert(String.IsNullOrEmpty(processInfo2.ManagedEntrypointAssemblyName));
 
                     // send resume command on this connection
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
-                    response = IpcClient.SendMessage(ConnectionHelper.GetStandardTransport(pid), message);
+                    response = IpcClient.SendMessage(
+                        ConnectionHelper.GetStandardTransport(pid),
+                        message
+                    );
                     Logger.logger.Log($"Received: {response.ToString()}");
 
                     return Task.FromResult(true);
@@ -437,14 +484,16 @@ namespace Tracing.Tests.DiagnosticPortValidation
             bool fSuccess = true;
             if (!IpcTraceTest.EnsureCleanEnvironment())
                 return -1;
-            IEnumerable<MethodInfo> tests = typeof(DiagnosticPortValidation).GetMethods().Where(mi => mi.Name.StartsWith("TEST_"));
+            IEnumerable<MethodInfo> tests = typeof(DiagnosticPortValidation)
+                .GetMethods()
+                .Where(mi => mi.Name.StartsWith("TEST_"));
             foreach (var test in tests)
             {
                 Logger.logger.Log($"::== Running test: {test.Name}");
                 bool result = true;
                 try
                 {
-                    result = await (Task<bool>)test.Invoke(null, new object[] {});
+                    result = await (Task<bool>)test.Invoke(null, new object[] { });
                 }
                 catch (Exception e)
                 {
@@ -454,7 +503,6 @@ namespace Tracing.Tests.DiagnosticPortValidation
                 fSuccess &= result;
                 Logger.logger.Log($"Test passed: {result}");
                 Logger.logger.Log($"");
-
             }
             return fSuccess ? 100 : -1;
         }

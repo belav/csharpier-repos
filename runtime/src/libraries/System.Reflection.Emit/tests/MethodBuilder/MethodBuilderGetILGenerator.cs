@@ -7,13 +7,21 @@ namespace System.Reflection.Emit.Tests
 {
     public class MethodBuilderGetILGenerator
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [InlineData(20)]
         [InlineData(-10)]
         public void GetILGenerator_Int(int size)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[0]);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[0]
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator(size);
             int expectedReturn = 5;
@@ -26,10 +34,12 @@ namespace System.Reflection.Emit.Tests
 
             // Verify MetadataToken
             Assert.Equal(method.MetadataToken, createdMethod.MetadataToken);
-            MethodInfo methodFromToken = (MethodInfo)type.Module.ResolveMethod(method.MetadataToken);
+            MethodInfo methodFromToken = (MethodInfo)
+                type.Module.ResolveMethod(method.MetadataToken);
             Assert.Equal(createdMethod, methodFromToken);
 
-            MemberInfo memberInfoFromToken = (MemberInfo)type.Module.ResolveMember(method.MetadataToken);
+            MemberInfo memberInfoFromToken = (MemberInfo)
+                type.Module.ResolveMember(method.MetadataToken);
             Assert.Equal(methodFromToken, memberInfoFromToken);
         }
 
@@ -37,8 +47,14 @@ namespace System.Reflection.Emit.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [InlineData(TypeAttributes.Public, MethodAttributes.Public | MethodAttributes.PinvokeImpl)]
         [InlineData(TypeAttributes.Abstract, MethodAttributes.PinvokeImpl)]
-        [InlineData(TypeAttributes.Abstract, MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)]
-        public void GetILGenerator_NoMethodBody_ThrowsInvalidOperationException(TypeAttributes typeAttributes, MethodAttributes methodAttributes)
+        [InlineData(
+            TypeAttributes.Abstract,
+            MethodAttributes.Abstract | MethodAttributes.PinvokeImpl
+        )]
+        public void GetILGenerator_NoMethodBody_ThrowsInvalidOperationException(
+            TypeAttributes typeAttributes,
+            MethodAttributes methodAttributes
+        )
         {
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             MethodBuilder method = type.DefineMethod("TestMethod", methodAttributes);
@@ -68,13 +84,23 @@ namespace System.Reflection.Emit.Tests
         [InlineData(MethodAttributes.Static)]
         [InlineData(MethodAttributes.UnmanagedExport)]
         [InlineData(MethodAttributes.Virtual)]
-        [InlineData(MethodAttributes.Assembly | MethodAttributes.CheckAccessOnOverride |
-                MethodAttributes.FamORAssem | MethodAttributes.Final |
-                MethodAttributes.HasSecurity | MethodAttributes.HideBySig | MethodAttributes.MemberAccessMask |
-                MethodAttributes.NewSlot | MethodAttributes.Private |
-                MethodAttributes.PrivateScope | MethodAttributes.RequireSecObject |
-                MethodAttributes.RTSpecialName | MethodAttributes.SpecialName |
-                MethodAttributes.Static | MethodAttributes.UnmanagedExport)]
+        [InlineData(
+            MethodAttributes.Assembly
+                | MethodAttributes.CheckAccessOnOverride
+                | MethodAttributes.FamORAssem
+                | MethodAttributes.Final
+                | MethodAttributes.HasSecurity
+                | MethodAttributes.HideBySig
+                | MethodAttributes.MemberAccessMask
+                | MethodAttributes.NewSlot
+                | MethodAttributes.Private
+                | MethodAttributes.PrivateScope
+                | MethodAttributes.RequireSecObject
+                | MethodAttributes.RTSpecialName
+                | MethodAttributes.SpecialName
+                | MethodAttributes.Static
+                | MethodAttributes.UnmanagedExport
+        )]
         public void GetILGenerator_DifferentAttributes(MethodAttributes attributes)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);

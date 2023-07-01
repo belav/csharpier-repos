@@ -13,16 +13,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.FixFormatting)]
+    [ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.FixFormatting
+    )]
     [Shared]
     internal class CSharpFormattingCodeFixProvider : AbstractFormattingCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFormattingCodeFixProvider()
-        {
-        }
+        public CSharpFormattingCodeFixProvider() { }
 
-        protected override ISyntaxFormattingService SyntaxFormattingService => CSharpSyntaxFormattingService.Instance;
+        protected override ISyntaxFormattingService SyntaxFormattingService =>
+            CSharpSyntaxFormattingService.Instance;
     }
 }

@@ -22,35 +22,59 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptDiagnosticService(IDiagnosticService service, IGlobalOptionService globalOptions)
+        public VSTypeScriptDiagnosticService(
+            IDiagnosticService service,
+            IGlobalOptionService globalOptions
+        )
         {
             _service = service;
             _globalOptions = globalOptions;
         }
 
-        public async Task<ImmutableArray<VSTypeScriptDiagnosticData>> GetPushDiagnosticsAsync(Workspace workspace, ProjectId projectId, DocumentId documentId, object id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<VSTypeScriptDiagnosticData>> GetPushDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId projectId,
+            DocumentId documentId,
+            object id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        )
         {
             // this is the TS entrypoint to get push diagnostics.  Only return diagnostics if we're actually in push-mode.
             var diagnosticMode = _globalOptions.GetDiagnosticMode();
             if (diagnosticMode != DiagnosticMode.SolutionCrawlerPush)
                 return ImmutableArray<VSTypeScriptDiagnosticData>.Empty;
 
-            var result = await _service.GetDiagnosticsAsync(workspace, projectId, documentId, id, includeSuppressedDiagnostics, cancellationToken).ConfigureAwait(false);
+            var result = await _service
+                .GetDiagnosticsAsync(
+                    workspace,
+                    projectId,
+                    documentId,
+                    id,
+                    includeSuppressedDiagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result.SelectAsArray(data => new VSTypeScriptDiagnosticData(data));
         }
 
-        public IDisposable RegisterDiagnosticsUpdatedEventHandler(Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action)
-            => new EventHandlerWrapper(_service, action);
+        public IDisposable RegisterDiagnosticsUpdatedEventHandler(
+            Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action
+        ) => new EventHandlerWrapper(_service, action);
 
         private sealed class EventHandlerWrapper : IDisposable
         {
             private readonly IDiagnosticService _service;
             private readonly EventHandler<DiagnosticsUpdatedArgs> _handler;
 
-            internal EventHandlerWrapper(IDiagnosticService service, Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action)
+            internal EventHandlerWrapper(
+                IDiagnosticService service,
+                Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action
+            )
             {
                 _service = service;
-                _handler = (sender, args) => action(new VSTypeScriptDiagnosticsUpdatedArgsWrapper(args));
+                _handler = (sender, args) =>
+                    action(new VSTypeScriptDiagnosticsUpdatedArgsWrapper(args));
                 _service.DiagnosticsUpdated += _handler;
             }
 

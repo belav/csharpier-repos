@@ -18,28 +18,28 @@ namespace Exchange
         {
             int loops = 100;
             int rValue = 0;
-            if(args.Length == 1)
+            if (args.Length == 1)
                 loops = Int32.Parse(args[0]);
             float valuetoadd = 10.12345F;
             Thread[] threads = new Thread[100];
-            ThreadSafe tsi = new ThreadSafe(100,valuetoadd);
+            ThreadSafe tsi = new ThreadSafe(100, valuetoadd);
             for (int i = 0; i < threads.Length; i++)
             {
                 threads[i] = new Thread(new ThreadStart(tsi.ThreadWorker));
                 threads[i].Start();
             }
-            
+
             tsi.Signal();
 
-            for(int i=0;i<threads.Length;i++)
+            for (int i = 0; i < threads.Length; i++)
                 threads[i].Join();
             float expected = 0.0F;
-            for(int i=0;i<threads.Length*loops;i++)
+            for (int i = 0; i < threads.Length * loops; i++)
                 expected = (float)(expected + valuetoadd);
-            if(tsi.Total == expected)
+            if (tsi.Total == expected)
                 rValue = 100;
-            Console.WriteLine("Expected: "+expected);
-            Console.WriteLine("Actual  : "+tsi.Total);
+            Console.WriteLine("Expected: " + expected);
+            Console.WriteLine("Actual  : " + tsi.Total);
             Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
             return rValue;
         }
@@ -48,10 +48,13 @@ namespace Exchange
     public class ThreadSafe
     {
         ManualResetEvent signal;
-        private float totalValue = 0F;        
+        private float totalValue = 0F;
         private int numberOfIterations;
         private float valueToAdd;
-        public ThreadSafe(): this(100,10.12345F) { }
+
+        public ThreadSafe()
+            : this(100, 10.12345F) { }
+
         public ThreadSafe(int loops, float addend)
         {
             signal = new ManualResetEvent(false);
@@ -67,30 +70,32 @@ namespace Exchange
         public void ThreadWorker()
         {
             signal.WaitOne();
-            for(int i=0;i<numberOfIterations;i++)
+            for (int i = 0; i < numberOfIterations; i++)
                 AddToTotal(valueToAdd);
-
         }
+
         public float Expected
         {
-            get
-            {
-                return (numberOfIterations * valueToAdd);
-            }
+            get { return (numberOfIterations * valueToAdd); }
         }
         public float Total
         {
             get { return totalValue; }
         }
+
         private float AddToTotal(float addend)
         {
-            float initialValue, computedValue;
+            float initialValue,
+                computedValue;
             do
             {
                 initialValue = totalValue;
                 computedValue = (float)(initialValue + addend);
-            } while (initialValue != Interlocked.CompareExchange(ref totalValue, computedValue, initialValue));
+            } while (
+                initialValue
+                != Interlocked.CompareExchange(ref totalValue, computedValue, initialValue)
+            );
             return computedValue;
         }
-    }    
+    }
 }

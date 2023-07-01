@@ -6,77 +6,79 @@ namespace System.Runtime.Serialization
     using System;
     using System.Xml;
 
-    [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-        + " data from being modified or leaked to other components in appdomain."
-        + " Changes to static fields could affect serialization/deserialization; should be reviewed.")]
+    [Fx.Tag.SecurityNote(
+        Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+            + " data from being modified or leaked to other components in appdomain."
+            + " Changes to static fields could affect serialization/deserialization; should be reviewed."
+    )]
 #if USE_REFEMIT
     public static class DictionaryGlobals
 #else
     internal static class DictionaryGlobals
 #endif
     {
-        public readonly static XmlDictionaryString EmptyString;
-        public readonly static XmlDictionaryString SchemaInstanceNamespace;
-        public readonly static XmlDictionaryString SchemaNamespace;
-        public readonly static XmlDictionaryString SerializationNamespace;
-        public readonly static XmlDictionaryString XmlnsNamespace;
-        public readonly static XmlDictionaryString XsiTypeLocalName;
-        public readonly static XmlDictionaryString XsiNilLocalName;
-        public readonly static XmlDictionaryString ClrTypeLocalName;
-        public readonly static XmlDictionaryString ClrAssemblyLocalName;
-        public readonly static XmlDictionaryString ArraySizeLocalName;
-        public readonly static XmlDictionaryString IdLocalName;
-        public readonly static XmlDictionaryString RefLocalName;
-        public readonly static XmlDictionaryString ISerializableFactoryTypeLocalName;
-        public readonly static XmlDictionaryString CharLocalName;
-        public readonly static XmlDictionaryString BooleanLocalName;
-        public readonly static XmlDictionaryString SignedByteLocalName;
-        public readonly static XmlDictionaryString UnsignedByteLocalName;
-        public readonly static XmlDictionaryString ShortLocalName;
-        public readonly static XmlDictionaryString UnsignedShortLocalName;
-        public readonly static XmlDictionaryString IntLocalName;
-        public readonly static XmlDictionaryString UnsignedIntLocalName;
-        public readonly static XmlDictionaryString LongLocalName;
-        public readonly static XmlDictionaryString UnsignedLongLocalName;
-        public readonly static XmlDictionaryString FloatLocalName;
-        public readonly static XmlDictionaryString DoubleLocalName;
-        public readonly static XmlDictionaryString DecimalLocalName;
-        public readonly static XmlDictionaryString DateTimeLocalName;
-        public readonly static XmlDictionaryString StringLocalName;
-        public readonly static XmlDictionaryString ByteArrayLocalName;
-        public readonly static XmlDictionaryString ObjectLocalName;
-        public readonly static XmlDictionaryString TimeSpanLocalName;
-        public readonly static XmlDictionaryString GuidLocalName;
-        public readonly static XmlDictionaryString UriLocalName;
-        public readonly static XmlDictionaryString QNameLocalName;
-        public readonly static XmlDictionaryString Space;
+        public static readonly XmlDictionaryString EmptyString;
+        public static readonly XmlDictionaryString SchemaInstanceNamespace;
+        public static readonly XmlDictionaryString SchemaNamespace;
+        public static readonly XmlDictionaryString SerializationNamespace;
+        public static readonly XmlDictionaryString XmlnsNamespace;
+        public static readonly XmlDictionaryString XsiTypeLocalName;
+        public static readonly XmlDictionaryString XsiNilLocalName;
+        public static readonly XmlDictionaryString ClrTypeLocalName;
+        public static readonly XmlDictionaryString ClrAssemblyLocalName;
+        public static readonly XmlDictionaryString ArraySizeLocalName;
+        public static readonly XmlDictionaryString IdLocalName;
+        public static readonly XmlDictionaryString RefLocalName;
+        public static readonly XmlDictionaryString ISerializableFactoryTypeLocalName;
+        public static readonly XmlDictionaryString CharLocalName;
+        public static readonly XmlDictionaryString BooleanLocalName;
+        public static readonly XmlDictionaryString SignedByteLocalName;
+        public static readonly XmlDictionaryString UnsignedByteLocalName;
+        public static readonly XmlDictionaryString ShortLocalName;
+        public static readonly XmlDictionaryString UnsignedShortLocalName;
+        public static readonly XmlDictionaryString IntLocalName;
+        public static readonly XmlDictionaryString UnsignedIntLocalName;
+        public static readonly XmlDictionaryString LongLocalName;
+        public static readonly XmlDictionaryString UnsignedLongLocalName;
+        public static readonly XmlDictionaryString FloatLocalName;
+        public static readonly XmlDictionaryString DoubleLocalName;
+        public static readonly XmlDictionaryString DecimalLocalName;
+        public static readonly XmlDictionaryString DateTimeLocalName;
+        public static readonly XmlDictionaryString StringLocalName;
+        public static readonly XmlDictionaryString ByteArrayLocalName;
+        public static readonly XmlDictionaryString ObjectLocalName;
+        public static readonly XmlDictionaryString TimeSpanLocalName;
+        public static readonly XmlDictionaryString GuidLocalName;
+        public static readonly XmlDictionaryString UriLocalName;
+        public static readonly XmlDictionaryString QNameLocalName;
+        public static readonly XmlDictionaryString Space;
 
-        public readonly static XmlDictionaryString timeLocalName;
-        public readonly static XmlDictionaryString dateLocalName;
-        public readonly static XmlDictionaryString hexBinaryLocalName;
-        public readonly static XmlDictionaryString gYearMonthLocalName;
-        public readonly static XmlDictionaryString gYearLocalName;
-        public readonly static XmlDictionaryString gMonthDayLocalName;
-        public readonly static XmlDictionaryString gDayLocalName;
-        public readonly static XmlDictionaryString gMonthLocalName;
-        public readonly static XmlDictionaryString integerLocalName;
-        public readonly static XmlDictionaryString positiveIntegerLocalName;
-        public readonly static XmlDictionaryString negativeIntegerLocalName;
-        public readonly static XmlDictionaryString nonPositiveIntegerLocalName;
-        public readonly static XmlDictionaryString nonNegativeIntegerLocalName;
-        public readonly static XmlDictionaryString normalizedStringLocalName;
-        public readonly static XmlDictionaryString tokenLocalName;
-        public readonly static XmlDictionaryString languageLocalName;
-        public readonly static XmlDictionaryString NameLocalName;
-        public readonly static XmlDictionaryString NCNameLocalName;
-        public readonly static XmlDictionaryString XSDIDLocalName;
-        public readonly static XmlDictionaryString IDREFLocalName;
-        public readonly static XmlDictionaryString IDREFSLocalName;
-        public readonly static XmlDictionaryString ENTITYLocalName;
-        public readonly static XmlDictionaryString ENTITIESLocalName;
-        public readonly static XmlDictionaryString NMTOKENLocalName;
-        public readonly static XmlDictionaryString NMTOKENSLocalName;
-        public readonly static XmlDictionaryString AsmxTypesNamespace;
+        public static readonly XmlDictionaryString timeLocalName;
+        public static readonly XmlDictionaryString dateLocalName;
+        public static readonly XmlDictionaryString hexBinaryLocalName;
+        public static readonly XmlDictionaryString gYearMonthLocalName;
+        public static readonly XmlDictionaryString gYearLocalName;
+        public static readonly XmlDictionaryString gMonthDayLocalName;
+        public static readonly XmlDictionaryString gDayLocalName;
+        public static readonly XmlDictionaryString gMonthLocalName;
+        public static readonly XmlDictionaryString integerLocalName;
+        public static readonly XmlDictionaryString positiveIntegerLocalName;
+        public static readonly XmlDictionaryString negativeIntegerLocalName;
+        public static readonly XmlDictionaryString nonPositiveIntegerLocalName;
+        public static readonly XmlDictionaryString nonNegativeIntegerLocalName;
+        public static readonly XmlDictionaryString normalizedStringLocalName;
+        public static readonly XmlDictionaryString tokenLocalName;
+        public static readonly XmlDictionaryString languageLocalName;
+        public static readonly XmlDictionaryString NameLocalName;
+        public static readonly XmlDictionaryString NCNameLocalName;
+        public static readonly XmlDictionaryString XSDIDLocalName;
+        public static readonly XmlDictionaryString IDREFLocalName;
+        public static readonly XmlDictionaryString IDREFSLocalName;
+        public static readonly XmlDictionaryString ENTITYLocalName;
+        public static readonly XmlDictionaryString ENTITIESLocalName;
+        public static readonly XmlDictionaryString NMTOKENLocalName;
+        public static readonly XmlDictionaryString NMTOKENSLocalName;
+        public static readonly XmlDictionaryString AsmxTypesNamespace;
 
         static DictionaryGlobals()
         {
@@ -97,7 +99,9 @@ namespace System.Runtime.Serialization
                 RefLocalName = dictionary.Add(Globals.RefLocalName);
                 ArraySizeLocalName = dictionary.Add(Globals.ArraySizeLocalName);
                 EmptyString = dictionary.Add(String.Empty);
-                ISerializableFactoryTypeLocalName = dictionary.Add(Globals.ISerializableFactoryTypeLocalName);
+                ISerializableFactoryTypeLocalName = dictionary.Add(
+                    Globals.ISerializableFactoryTypeLocalName
+                );
 
                 // 10
                 XmlnsNamespace = dictionary.Add(Globals.XmlnsNamespace);
@@ -183,7 +187,5 @@ namespace System.Runtime.Serialization
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
             }
         }
-
     }
 }
-

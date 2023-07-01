@@ -24,7 +24,9 @@ internal sealed class DefaultEndpointConventionBuilder : IEndpointConventionBuil
 
         if (conventions is null)
         {
-            throw new InvalidOperationException("Conventions cannot be added after building the endpoint");
+            throw new InvalidOperationException(
+                "Conventions cannot be added after building the endpoint"
+            );
         }
 
         conventions.Add(convention);

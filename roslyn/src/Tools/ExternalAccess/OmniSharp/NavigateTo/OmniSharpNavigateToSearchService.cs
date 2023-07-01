@@ -16,14 +16,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.NavigateTo;
 
 internal static class OmniSharpNavigateToSearcher
 {
-    public delegate Task OmniSharpNavigateToCallback(Project project, in OmniSharpNavigateToSearchResult result, CancellationToken cancellationToken);
+    public delegate Task OmniSharpNavigateToCallback(
+        Project project,
+        in OmniSharpNavigateToSearchResult result,
+        CancellationToken cancellationToken
+    );
 
     public static Task SearchAsync(
         Solution solution,
         OmniSharpNavigateToCallback callback,
         string searchPattern,
         IImmutableSet<string> kinds,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var searcher = NavigateToSearcher.Create(
             solution,
@@ -31,7 +36,8 @@ internal static class OmniSharpNavigateToSearcher
             new OmniSharpNavigateToCallbackImpl(callback),
             searchPattern,
             kinds,
-            disposalToken: CancellationToken.None);
+            disposalToken: CancellationToken.None
+        );
 
         return searcher.SearchAsync(searchCurrentDocument: false, cancellationToken);
     }
@@ -45,7 +51,11 @@ internal static class OmniSharpNavigateToSearcher
             _callback = callback;
         }
 
-        public Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+        public Task AddItemAsync(
+            Project project,
+            INavigateToSearchResult result,
+            CancellationToken cancellationToken
+        )
         {
             var omniSharpResult = new OmniSharpNavigateToSearchResult(
                 result.AdditionalInformation,
@@ -56,21 +66,20 @@ internal static class OmniSharpNavigateToSearcher
                 result.NameMatchSpans,
                 result.SecondarySort,
                 result.Summary!,
-                new(result.NavigableItem.DisplayTaggedParts, result.NavigableItem.Document, result.NavigableItem.SourceSpan));
+                new(
+                    result.NavigableItem.DisplayTaggedParts,
+                    result.NavigableItem.Document,
+                    result.NavigableItem.SourceSpan
+                )
+            );
 
             return _callback(project, omniSharpResult, cancellationToken);
         }
 
-        public void Done(bool isFullyLoaded)
-        {
-        }
+        public void Done(bool isFullyLoaded) { }
 
-        public void ReportProgress(int current, int maximum)
-        {
-        }
+        public void ReportProgress(int current, int maximum) { }
 
-        public void ReportIncomplete()
-        {
-        }
+        public void ReportIncomplete() { }
     }
 }

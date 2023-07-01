@@ -35,7 +35,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be non-negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be non-negative."
+                    );
                 }
 
                 _sizeLimit = value ?? NotSet;
@@ -52,7 +56,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value is < 0 or > 1)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be between 0 and 1 inclusive.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be between 0 and 1 inclusive."
+                    );
                 }
 
                 _compactionPercentage = value;

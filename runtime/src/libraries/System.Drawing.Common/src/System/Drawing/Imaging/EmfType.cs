@@ -12,10 +12,12 @@ namespace System.Drawing.Imaging
         /// Windows enhanced metafile. Contains GDI commands. Metafiles of this type are referred to as an EMF file.
         /// </summary>
         EmfOnly = MetafileType.Emf,
+
         /// <summary>
         /// Windows enhanced metafile plus. Contains GDI+ commands. Metafiles of this type are referred to as an EMF+ file.
         /// </summary>
         EmfPlusOnly = MetafileType.EmfPlusOnly,
+
         /// <summary>
         /// Dual Windows enhanced metafile. Contains equivalent GDI and GDI+ commands. Metafiles of this type are referred to as an EMF+ file.
         /// </summary>

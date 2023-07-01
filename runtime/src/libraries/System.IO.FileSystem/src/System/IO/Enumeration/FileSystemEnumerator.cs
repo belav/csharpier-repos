@@ -12,7 +12,9 @@ namespace Microsoft.IO.Enumeration
 namespace System.IO.Enumeration
 #endif
 {
-    public unsafe abstract partial class FileSystemEnumerator<TResult> : CriticalFinalizerObject, IEnumerator<TResult>
+    public abstract unsafe partial class FileSystemEnumerator<TResult>
+        : CriticalFinalizerObject,
+            IEnumerator<TResult>
     {
         private int _remainingRecursionDepth;
 
@@ -22,9 +24,7 @@ namespace System.IO.Enumeration
         /// <param name="directory">The directory to search in.</param>
         /// <param name="options">Enumeration options to use.</param>
         public FileSystemEnumerator(string directory, EnumerationOptions? options = null)
-            : this(directory, isNormalized: false, options)
-        {
-        }
+            : this(directory, isNormalized: false, options) { }
 
         /// <summary>
         /// Encapsulates a find operation.
@@ -32,9 +32,14 @@ namespace System.IO.Enumeration
         /// <param name="directory">The directory to search in.</param>
         /// <param name="isNormalized">Whether the directory path is already normalized or not.</param>
         /// <param name="options">Enumeration options to use.</param>
-        internal FileSystemEnumerator(string directory, bool isNormalized, EnumerationOptions? options = null)
+        internal FileSystemEnumerator(
+            string directory,
+            bool isNormalized,
+            EnumerationOptions? options = null
+        )
         {
-            _originalRootDirectory = directory ?? throw new ArgumentNullException(nameof(directory));
+            _originalRootDirectory =
+                directory ?? throw new ArgumentNullException(nameof(directory));
 
             string path = isNormalized ? directory : Path.GetFullPath(directory);
             _rootDirectory = Path.TrimEndingDirectorySeparator(path);
@@ -110,9 +115,7 @@ namespace System.IO.Enumeration
         /// Override for any additional cleanup.
         /// </summary>
         /// <param name="disposing">True if called while disposing. False if called from finalizer.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         ~FileSystemEnumerator()
         {

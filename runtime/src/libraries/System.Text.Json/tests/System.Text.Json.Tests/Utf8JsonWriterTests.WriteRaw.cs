@@ -11,7 +11,7 @@ namespace System.Text.Json.Tests
     public partial class Utf8JsonWriterTests
     {
         private const string TestGuidAsStr = "eb97fadd-3ebf-4781-8722-f4773989160e";
-        private readonly static Guid s_guid = Guid.Parse(TestGuidAsStr);
+        private static readonly Guid s_guid = Guid.Parse(TestGuidAsStr);
 
         private static byte[] s_oneAsJson = new byte[] { (byte)'1' };
 
@@ -125,19 +125,25 @@ namespace System.Text.Json.Tests
         {
             Action<byte[]> validate;
 
-            byte[] json = Encoding.UTF8.GetBytes(@"{""Hello"":""World""}"); ;
+            byte[] json = Encoding.UTF8.GetBytes(@"{""Hello"":""World""}");
+            ;
             validate = (data) =>
             {
-                KeyValuePair<string, string> kvp = JsonSerializer.Deserialize<Dictionary<string, string>>(data).Single();
+                KeyValuePair<string, string> kvp = JsonSerializer
+                    .Deserialize<Dictionary<string, string>>(data)
+                    .Single();
                 Assert.Equal("Hello", kvp.Key);
                 Assert.Equal("World", kvp.Value);
             };
             yield return new object[] { json, validate };
 
-            json = Encoding.UTF8.GetBytes(@" {  ""Hello""    :""World""  }   "); ;
+            json = Encoding.UTF8.GetBytes(@" {  ""Hello""    :""World""  }   ");
+            ;
             validate = (data) =>
             {
-                KeyValuePair<string, string> kvp = JsonSerializer.Deserialize<Dictionary<string, string>>(data).Single();
+                KeyValuePair<string, string> kvp = JsonSerializer
+                    .Deserialize<Dictionary<string, string>>(data)
+                    .Single();
                 Assert.Equal("Hello", kvp.Key);
                 Assert.Equal("World", kvp.Value);
             };
@@ -160,7 +166,11 @@ namespace System.Text.Json.Tests
         [InlineData(false, 1, "[1]")]
         [InlineData(true, 5, "[1,1,1,1,1]")]
         [InlineData(false, 5, "[1,1,1,1,1]")]
-        public static void WriteRawArrayElements(bool skipInputValidation, int numElements, string expectedJson)
+        public static void WriteRawArrayElements(
+            bool skipInputValidation,
+            int numElements,
+            string expectedJson
+        )
         {
             using MemoryStream ms = new();
             using Utf8JsonWriter writer = new(ms);
@@ -184,7 +194,11 @@ namespace System.Text.Json.Tests
         [InlineData(false, 1, @"{""int"":1}")]
         [InlineData(true, 3, @"{""int"":1,""int"":1,""int"":1}")]
         [InlineData(false, 3, @"{""int"":1,""int"":1,""int"":1}")]
-        public static void WriteRawObjectProperty(bool skipInputValidation, int numElements, string expectedJson)
+        public static void WriteRawObjectProperty(
+            bool skipInputValidation,
+            int numElements,
+            string expectedJson
+        )
         {
             using MemoryStream ms = new();
             using Utf8JsonWriter writer = new(ms);
@@ -243,7 +257,9 @@ namespace System.Text.Json.Tests
             using Utf8JsonWriter writer = new(ms);
             Assert.Throws<ArgumentNullException>(() => writer.WriteRawValue(json: default(string)));
             Assert.Throws<ArgumentException>(() => writer.WriteRawValue(json: ""));
-            Assert.Throws<ArgumentException>(() => writer.WriteRawValue(json: default(ReadOnlySpan<char>)));
+            Assert.Throws<ArgumentException>(
+                () => writer.WriteRawValue(json: default(ReadOnlySpan<char>))
+            );
             Assert.Throws<ArgumentException>(() => writer.WriteRawValue(utf8Json: default));
         }
 
@@ -258,7 +274,8 @@ namespace System.Text.Json.Tests
             void RunTest(bool skipInputValidation)
             {
                 using MemoryStream ms = new();
-                using Utf8JsonWriter writer = new(ms, new JsonWriterOptions { SkipValidation = skipValidation });
+                using Utf8JsonWriter writer =
+                    new(ms, new JsonWriterOptions { SkipValidation = skipValidation });
 
                 writer.WriteStartObject();
 
@@ -266,11 +283,15 @@ namespace System.Text.Json.Tests
                 {
                     writer.WriteRawValue(@"{}", skipInputValidation);
                     writer.Flush();
-                    Assert.True(ms.ToArray().SequenceEqual(new byte[] { (byte)'{',  (byte)'{', (byte)'}' }));
+                    Assert.True(
+                        ms.ToArray().SequenceEqual(new byte[] { (byte)'{', (byte)'{', (byte)'}' })
+                    );
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => writer.WriteRawValue(@"{}", skipInputValidation));
+                    Assert.Throws<InvalidOperationException>(
+                        () => writer.WriteRawValue(@"{}", skipInputValidation)
+                    );
                 }
             }
         }
@@ -278,7 +299,6 @@ namespace System.Text.Json.Tests
         [Fact]
         public static void WriteRawDepthExceedsMaxOf64Fail()
         {
-
             RunTest(GenerateJsonUsingDepth(1), false);
             RunTest(GenerateJsonUsingDepth(64), false);
             RunTest(GenerateJsonUsingDepth(65), true);
@@ -291,7 +311,9 @@ namespace System.Text.Json.Tests
 
                 if (expectFail)
                 {
-                    Assert.ThrowsAny<JsonException>(() => writer.WriteRawValue(json, skipInputValidation));
+                    Assert.ThrowsAny<JsonException>(
+                        () => writer.WriteRawValue(json, skipInputValidation)
+                    );
                 }
                 else
                 {
@@ -366,7 +388,9 @@ namespace System.Text.Json.Tests
 
                 // Next write forces a grow beyond max array length
 
-                Assert.Throws<OutOfMemoryException>(() => writer.WriteRawValue(WrapInQuotes(text3.EncodedUtf8Bytes)));
+                Assert.Throws<OutOfMemoryException>(
+                    () => writer.WriteRawValue(WrapInQuotes(text3.EncodedUtf8Bytes))
+                );
 
                 Assert.Equal(2_100_097_542, writer.BytesPending);
 
@@ -453,7 +477,11 @@ namespace System.Text.Json.Tests
             ByteArray
         }
 
-        private static void WriteRawValueWithSetting(Utf8JsonWriter writer, string payload, OverloadParamType param)
+        private static void WriteRawValueWithSetting(
+            Utf8JsonWriter writer,
+            string payload,
+            OverloadParamType param
+        )
         {
             switch (param)
             {
@@ -493,8 +521,12 @@ namespace System.Text.Json.Tests
             using Utf8JsonWriter writer = new(ms);
 
             // UTF-16 overloads not compatible with this length.
-            Assert.Throws<ArgumentException>(() => WriteRawValueWithSetting(writer, payload, OverloadParamType.ROSChar));
-            Assert.Throws<ArgumentException>(() => WriteRawValueWithSetting(writer, payload, OverloadParamType.String));
+            Assert.Throws<ArgumentException>(
+                () => WriteRawValueWithSetting(writer, payload, OverloadParamType.ROSChar)
+            );
+            Assert.Throws<ArgumentException>(
+                () => WriteRawValueWithSetting(writer, payload, OverloadParamType.String)
+            );
 
             // UTF-8 overload is okay.
             WriteRawValueWithSetting(writer, payload, OverloadParamType.ByteArray);

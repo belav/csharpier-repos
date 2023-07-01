@@ -9,81 +9,128 @@ namespace System.Numerics.Tensors
         {
             if (left.Rank != right.Rank || left.Length != right.Length)
             {
-                throw new ArgumentException("Operands must have matching dimensions", nameof(right));
+                throw new ArgumentException(
+                    "Operands must have matching dimensions",
+                    nameof(right)
+                );
             }
 
             if (left.Rank == 0)
             {
-                throw new ArgumentException($"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.", nameof(left));
+                throw new ArgumentException(
+                    $"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.",
+                    nameof(left)
+                );
             }
 
             for (int i = 0; i < left.Rank; i++)
             {
                 if (left.dimensions[i] != right.dimensions[i])
                 {
-                    throw new ArgumentException("Operands must have matching dimensions", nameof(right));
+                    throw new ArgumentException(
+                        "Operands must have matching dimensions",
+                        nameof(right)
+                    );
                 }
             }
         }
 
-        internal static void ValidateBinaryArgs<T>(Tensor<T> left, Tensor<T> right, Tensor<T> result)
+        internal static void ValidateBinaryArgs<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            Tensor<T> result
+        )
         {
             if (left.Rank != right.Rank || left.Length != right.Length)
             {
-                throw new ArgumentException("Operands must have matching dimensions", nameof(right));
+                throw new ArgumentException(
+                    "Operands must have matching dimensions",
+                    nameof(right)
+                );
             }
 
             if (left.Rank != result.Rank || left.Length != result.Length)
             {
-                throw new ArgumentException("Operands must have matching dimensions", nameof(result));
+                throw new ArgumentException(
+                    "Operands must have matching dimensions",
+                    nameof(result)
+                );
             }
 
             if (left.Rank == 0)
             {
-                throw new ArgumentException($"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.", nameof(left));
+                throw new ArgumentException(
+                    $"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.",
+                    nameof(left)
+                );
             }
 
             for (int i = 0; i < result.Rank; i++)
             {
                 if (left.dimensions[i] != right.dimensions[i])
                 {
-                    throw new ArgumentException("Operands must have matching dimensions", nameof(right));
+                    throw new ArgumentException(
+                        "Operands must have matching dimensions",
+                        nameof(right)
+                    );
                 }
 
                 if (left.dimensions[i] != result.dimensions[i])
                 {
-                    throw new ArgumentException("Operands and result must have matching dimensions", nameof(result));
+                    throw new ArgumentException(
+                        "Operands and result must have matching dimensions",
+                        nameof(result)
+                    );
                 }
             }
         }
 
-        internal static void ValidateBinaryArgs<T>(Tensor<T> left, Tensor<T> right, Tensor<bool> result)
+        internal static void ValidateBinaryArgs<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            Tensor<bool> result
+        )
         {
             if (left.Rank != right.Rank || left.Length != right.Length)
             {
-                throw new ArgumentException("Operands must have matching dimensions", nameof(right));
+                throw new ArgumentException(
+                    "Operands must have matching dimensions",
+                    nameof(right)
+                );
             }
 
             if (left.Rank != result.Rank || left.Length != result.Length)
             {
-                throw new ArgumentException("Operands must have matching dimensions", nameof(result));
+                throw new ArgumentException(
+                    "Operands must have matching dimensions",
+                    nameof(result)
+                );
             }
 
             if (left.Rank == 0)
             {
-                throw new ArgumentException($"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.", nameof(left));
+                throw new ArgumentException(
+                    $"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.",
+                    nameof(left)
+                );
             }
 
             for (int i = 0; i < result.Rank; i++)
             {
                 if (left.dimensions[i] != right.dimensions[i])
                 {
-                    throw new ArgumentException("Operands must have matching dimensions", nameof(right));
+                    throw new ArgumentException(
+                        "Operands must have matching dimensions",
+                        nameof(right)
+                    );
                 }
 
                 if (left.dimensions[i] != result.dimensions[i])
                 {
-                    throw new ArgumentException("Operands and result must have matching dimensions", nameof(result));
+                    throw new ArgumentException(
+                        "Operands and result must have matching dimensions",
+                        nameof(result)
+                    );
                 }
             }
         }
@@ -92,7 +139,10 @@ namespace System.Numerics.Tensors
         {
             if (tensor.Rank == 0)
             {
-                throw new ArgumentException($"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.", nameof(tensor));
+                throw new ArgumentException(
+                    $"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.",
+                    nameof(tensor)
+                );
             }
         }
 
@@ -100,24 +150,38 @@ namespace System.Numerics.Tensors
         {
             if (tensor.Rank != result.Rank || tensor.Length != result.Length)
             {
-                throw new ArgumentException("Operands and result must have matching dimensions", nameof(result));
+                throw new ArgumentException(
+                    "Operands and result must have matching dimensions",
+                    nameof(result)
+                );
             }
 
             if (tensor.Rank == 0)
             {
-                throw new ArgumentException($"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.", nameof(tensor));
+                throw new ArgumentException(
+                    $"Cannot operate on Tensor with {nameof(Tensor<T>.Rank)} of 0.",
+                    nameof(tensor)
+                );
             }
 
             for (int i = 0; i < result.Rank; i++)
             {
                 if (tensor.dimensions[i] != result.dimensions[i])
                 {
-                    throw new ArgumentException("Operands and result must have matching dimensions", nameof(result));
+                    throw new ArgumentException(
+                        "Operands and result must have matching dimensions",
+                        nameof(result)
+                    );
                 }
             }
         }
 
-        internal static int[] ValidateContractArgs<T>(Tensor<T> left, Tensor<T> right, int[] leftAxes, int[] rightAxes)
+        internal static int[] ValidateContractArgs<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            int[] leftAxes,
+            int[] rightAxes
+        )
         {
             if (leftAxes == null)
             {
@@ -131,7 +195,9 @@ namespace System.Numerics.Tensors
 
             if (leftAxes.Length != rightAxes.Length)
             {
-                throw new ArgumentException($"{nameof(leftAxes)} and {nameof(rightAxes)} must have the same length, but were {leftAxes.Length} and {rightAxes.Length}, respectively.");
+                throw new ArgumentException(
+                    $"{nameof(leftAxes)} and {nameof(rightAxes)} must have the same length, but were {leftAxes.Length} and {rightAxes.Length}, respectively."
+                );
             }
 
             for (int i = 0; i < leftAxes.Length; i++)
@@ -140,7 +206,9 @@ namespace System.Numerics.Tensors
 
                 if (leftAxis >= left.Rank)
                 {
-                    throw new ArgumentOutOfRangeException($"{nameof(leftAxes)}[{i}] was set to axis index {leftAxis} which exceeds the Rank of {left}.");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(leftAxes)}[{i}] was set to axis index {leftAxis} which exceeds the Rank of {left}."
+                    );
                 }
 
                 var leftDimension = left.dimensions[leftAxis];
@@ -149,14 +217,18 @@ namespace System.Numerics.Tensors
 
                 if (rightAxis >= right.Rank)
                 {
-                    throw new ArgumentOutOfRangeException($"{nameof(rightAxes)}[{i}] was set to axis index {rightAxis} which exceeds the Rank of {right}.");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(rightAxes)}[{i}] was set to axis index {rightAxis} which exceeds the Rank of {right}."
+                    );
                 }
 
                 var rightDimension = right.dimensions[rightAxis];
 
                 if (leftDimension != rightDimension)
                 {
-                    throw new ArgumentOutOfRangeException($"Tensors may only be contracted on axes of the same length, but {nameof(leftAxes)} index {i} was length {leftDimension} and {nameof(rightAxes)} index {i} was length {rightDimension}.");
+                    throw new ArgumentOutOfRangeException(
+                        $"Tensors may only be contracted on axes of the same length, but {nameof(leftAxes)} index {i} was length {leftDimension} and {nameof(rightAxes)} index {i} was length {rightDimension}."
+                    );
                 }
             }
 
@@ -192,20 +264,30 @@ namespace System.Numerics.Tensors
             return resultDimensions;
         }
 
-        internal static int[] ValidateContractArgs<T>(Tensor<T> left, Tensor<T> right, int[] leftAxes, int[] rightAxes, Tensor<T> result)
+        internal static int[] ValidateContractArgs<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            int[] leftAxes,
+            int[] rightAxes,
+            Tensor<T> result
+        )
         {
             var expectedDimensions = ValidateContractArgs(left, right, leftAxes, rightAxes);
 
             if (result.Rank != expectedDimensions.Length)
             {
-                throw new ArgumentException($"{nameof(result)} should have {expectedDimensions.Length} dimensions but had {result.Rank}.");
+                throw new ArgumentException(
+                    $"{nameof(result)} should have {expectedDimensions.Length} dimensions but had {result.Rank}."
+                );
             }
 
             for (int i = 0; i < expectedDimensions.Length; i++)
             {
                 if (result.dimensions[i] != expectedDimensions[i])
                 {
-                    throw new ArgumentException($"{nameof(result)} dimension {i} should be {expectedDimensions[i]} but was {result.dimensions[i]}.");
+                    throw new ArgumentException(
+                        $"{nameof(result)} dimension {i} should be {expectedDimensions[i]} but was {result.dimensions[i]}."
+                    );
                 }
             }
 
@@ -284,14 +366,25 @@ namespace System.Numerics.Tensors
             return result;
         }
 
-        internal static void Contract<T>(Tensor<T> left, Tensor<T> right, int[] leftAxes, int[] rightAxes, Tensor<T> result)
+        internal static void Contract<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            int[] leftAxes,
+            int[] rightAxes,
+            Tensor<T> result
+        )
         {
             ValidateContractArgs(left, right, leftAxes, rightAxes, result);
 
             TensorArithmetic<T>.Instance.Contract(left, right, leftAxes, rightAxes, result);
         }
 
-        internal static Tensor<T> Contract<T>(Tensor<T> left, Tensor<T> right, int[] leftAxes, int[] rightAxes)
+        internal static Tensor<T> Contract<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            int[] leftAxes,
+            int[] rightAxes
+        )
         {
             var resultDimensions = ValidateContractArgs(left, right, leftAxes, rightAxes);
 
@@ -392,7 +485,11 @@ namespace System.Numerics.Tensors
             return result;
         }
 
-        internal static void GreaterThanOrEqual<T>(Tensor<T> left, Tensor<T> right, Tensor<bool> result)
+        internal static void GreaterThanOrEqual<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            Tensor<bool> result
+        )
         {
             ValidateBinaryArgs(left, right, result);
 
@@ -464,7 +561,11 @@ namespace System.Numerics.Tensors
             return result;
         }
 
-        internal static void LessThanOrEqual<T>(Tensor<T> left, Tensor<T> right, Tensor<bool> result)
+        internal static void LessThanOrEqual<T>(
+            Tensor<T> left,
+            Tensor<T> right,
+            Tensor<bool> result
+        )
         {
             ValidateBinaryArgs(left, right, result);
 
@@ -733,6 +834,5 @@ namespace System.Numerics.Tensors
 
             return result;
         }
-
     }
 }

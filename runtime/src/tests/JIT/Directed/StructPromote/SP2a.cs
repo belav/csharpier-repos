@@ -7,7 +7,6 @@ using System;
 
 class SP2a
 {
-
     // Struct in reg (long, int)
     struct S
     {
@@ -27,7 +26,7 @@ class SP2a
         S s;
         s.i1 = i1;
         s.l0 = l0;
-        return Foo(i2, s);  // r0 <= r3; r2/r3 <= r0/r1; outarg[0] <= r3
+        return Foo(i2, s); // r0 <= r3; r2/r3 <= r0/r1; outarg[0] <= r3
     }
 
     public static int Main()

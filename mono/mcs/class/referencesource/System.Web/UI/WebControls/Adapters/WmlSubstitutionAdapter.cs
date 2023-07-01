@@ -6,7 +6,8 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
+namespace System.Web.UI.WebControls.Adapters
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -17,11 +18,13 @@ namespace System.Web.UI.WebControls.Adapters {
     using System.Web.UI;
     using System.Web.UI.Adapters;
 
-    public class WmlSubstitutionAdapter : SubstitutionAdapter {
-
-        protected internal override void Render(HtmlTextWriter markupWriter) {
-            WmlTextWriter writer = (WmlTextWriter) markupWriter;
-            if(writer.AnalyzeMode) {
+    public class WmlSubstitutionAdapter : SubstitutionAdapter
+    {
+        protected internal override void Render(HtmlTextWriter markupWriter)
+        {
+            WmlTextWriter writer = (WmlTextWriter)markupWriter;
+            if (writer.AnalyzeMode)
+            {
                 return;
             }
             Control.RenderMarkup(writer);
@@ -30,4 +33,3 @@ namespace System.Web.UI.WebControls.Adapters {
 }
 
 #endif
-

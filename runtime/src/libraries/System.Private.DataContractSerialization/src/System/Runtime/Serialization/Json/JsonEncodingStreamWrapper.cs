@@ -98,15 +98,12 @@ namespace System.Runtime.Serialization.Json
             get { return _stream.Length; }
         }
 
-
         // The encoding conversion and buffering breaks seeking.
         public override long Position
         {
-            get
-            {
+            get {
 #pragma warning suppress 56503 // The contract for non seekable stream is to throw exception
-                throw new NotSupportedException();
-            }
+                throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }
         }
 
@@ -122,7 +119,12 @@ namespace System.Runtime.Serialization.Json
             set { _stream.WriteTimeout = value; }
         }
 
-        public static ArraySegment<byte> ProcessBuffer(byte[] buffer, int offset, int count, Encoding? encoding)
+        public static ArraySegment<byte> ProcessBuffer(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding
+        )
         {
             try
             {
@@ -148,8 +150,11 @@ namespace System.Runtime.Serialization.Json
                 }
 
                 // Convert to UTF-8
-                return
-                    new ArraySegment<byte>(DataContractSerializer.ValidatingUTF8.GetBytes(GetEncoding(dataEnc).GetChars(buffer, offset, count)));
+                return new ArraySegment<byte>(
+                    DataContractSerializer.ValidatingUTF8.GetBytes(
+                        GetEncoding(dataEnc).GetChars(buffer, offset, count)
+                    )
+                );
             }
             catch (DecoderFallbackException e)
             {
@@ -342,9 +347,18 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        private static void ThrowExpectedEncodingMismatch(SupportedEncoding expEnc, SupportedEncoding actualEnc)
+        private static void ThrowExpectedEncodingMismatch(
+            SupportedEncoding expEnc,
+            SupportedEncoding actualEnc
+        )
         {
-            throw new XmlException(SR.Format(SR.JsonExpectedEncoding, GetEncodingName(expEnc), GetEncodingName(actualEnc)));
+            throw new XmlException(
+                SR.Format(
+                    SR.JsonExpectedEncoding,
+                    GetEncodingName(expEnc),
+                    GetEncodingName(actualEnc)
+                )
+            );
         }
 
         private void CleanupCharBreak()
@@ -418,7 +432,11 @@ namespace System.Runtime.Serialization.Json
             count -= _byteCount;
             if (count > 0)
             {
-                _byteCount += _stream.ReadAtLeast(_bytes.AsSpan(_byteOffset + _byteCount, count), count, throwOnEndOfStream: false);
+                _byteCount += _stream.ReadAtLeast(
+                    _bytes.AsSpan(_byteOffset + _byteCount, count),
+                    count,
+                    throwOnEndOfStream: false
+                );
             }
         }
 
@@ -446,7 +464,13 @@ namespace System.Runtime.Serialization.Json
                     CleanupCharBreak();
                     int count = _encoding.GetChars(_bytes, _byteOffset, _byteCount, _chars, 0);
                     _byteOffset = 0;
-                    _byteCount = DataContractSerializer.ValidatingUTF8.GetBytes(_chars, 0, count, _bytes, 0);
+                    _byteCount = DataContractSerializer.ValidatingUTF8.GetBytes(
+                        _chars,
+                        0,
+                        count,
+                        _bytes,
+                        0
+                    );
                 }
             }
             catch (DecoderFallbackException ex)

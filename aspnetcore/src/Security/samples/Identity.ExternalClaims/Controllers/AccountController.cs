@@ -18,7 +18,10 @@ public class AccountController : Controller
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ILogger _logger;
 
-    public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger)
+    public AccountController(
+        SignInManager<ApplicationUser> signInManager,
+        ILogger<AccountController> logger
+    )
     {
         _signInManager = signInManager;
         _logger = logger;

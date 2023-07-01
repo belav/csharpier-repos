@@ -18,7 +18,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils
 
     public class Project : Identity
     {
-        public Project(string name, string projectExtension = ".csproj", string? relativePath = null)
+        public Project(
+            string name,
+            string projectExtension = ".csproj",
+            string? relativePath = null
+        )
             : base(name)
         {
             if (string.IsNullOrWhiteSpace(relativePath))
@@ -40,17 +44,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils
     public class ProjectReference : Identity
     {
         public ProjectReference(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
     }
 
     public class AssemblyReference : Identity
     {
         public AssemblyReference(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
     }
 
     public class PackageReference : Identity

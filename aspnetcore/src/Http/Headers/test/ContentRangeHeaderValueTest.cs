@@ -146,11 +146,15 @@ public class ContentRangeHeaderValueTest
         CheckValidParse(" bytes 1-2/3 ", new ContentRangeHeaderValue(1, 2, 3));
         CheckValidParse("bytes  *  /  3", new ContentRangeHeaderValue(3));
 
-        CheckValidParse(" custom 1234567890123456789-1234567890123456799/*",
-            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799) { Unit = "custom" });
+        CheckValidParse(
+            " custom 1234567890123456789-1234567890123456799/*",
+            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799)
+            {
+                Unit = "custom"
+            }
+        );
 
-        CheckValidParse(" custom * / 123 ",
-            new ContentRangeHeaderValue(123) { Unit = "custom" });
+        CheckValidParse(" custom * / 123 ", new ContentRangeHeaderValue(123) { Unit = "custom" });
 
         // Note that we don't have a public constructor for value 'bytes */*' since the RFC doesn't mention a
         // scenario for it. However, if a server returns this value, we're flexible and accept it.
@@ -201,11 +205,18 @@ public class ContentRangeHeaderValueTest
         CheckValidTryParse(" bytes 1-2/3 ", new ContentRangeHeaderValue(1, 2, 3));
         CheckValidTryParse("bytes  *  /  3", new ContentRangeHeaderValue(3));
 
-        CheckValidTryParse(" custom 1234567890123456789-1234567890123456799/*",
-            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799) { Unit = "custom" });
+        CheckValidTryParse(
+            " custom 1234567890123456789-1234567890123456799/*",
+            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799)
+            {
+                Unit = "custom"
+            }
+        );
 
-        CheckValidTryParse(" custom * / 123 ",
-            new ContentRangeHeaderValue(123) { Unit = "custom" });
+        CheckValidTryParse(
+            " custom * / 123 ",
+            new ContentRangeHeaderValue(123) { Unit = "custom" }
+        );
 
         // Note that we don't have a public constructor for value 'bytes */*' since the RFC doesn't mention a
         // scenario for it. However, if a server returns this value, we're flexible and accept it.

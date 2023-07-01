@@ -24,7 +24,8 @@ namespace ILCompiler.DependencyAnalysis
             _type = type;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         protected override void OnMarked(NodeFactory factory)
         {
@@ -55,14 +56,25 @@ namespace ILCompiler.DependencyAnalysis
         {
             DependencyList result = new DependencyList();
 
-            result.Add(new DependencyListEntry(GetGCStaticEETypeNode(factory), "ThreadStatic MethodTable"));
+            result.Add(
+                new DependencyListEntry(GetGCStaticEETypeNode(factory), "ThreadStatic MethodTable")
+            );
 
             if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
             {
-                result.Add(new DependencyListEntry(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor"));
+                result.Add(
+                    new DependencyListEntry(
+                        factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                        "Eager .cctor"
+                    )
+                );
             }
 
-            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref result, factory, _type.Module);
+            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                ref result,
+                factory,
+                _type.Module
+            );
 
             EETypeNode.AddDependenciesForStaticsNode(factory, _type, ref result);
             return result;
@@ -70,7 +82,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override void EncodeData(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             // At runtime, an instance of the GCStaticEEType will be created and a GCHandle to it
             // will be written in this location.

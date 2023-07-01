@@ -11,316 +11,301 @@ internal static partial class ArgumentConverter
 {
     private delegate bool TryConvertString(string token, out object? value);
 
-    private static readonly Dictionary<Type, TryConvertString> _stringConverters = new()
-    {
-        [typeof(bool)] = (string token, out object? value) =>
+    private static readonly Dictionary<Type, TryConvertString> _stringConverters =
+        new()
         {
-            if (bool.TryParse(token, out var parsed))
+            [typeof(bool)] = (string token, out object? value) =>
             {
-                value = parsed;
-                return true;
-            }
+                if (bool.TryParse(token, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
+                value = default;
+                return false;
+            },
 #if NET6_0_OR_GREATER
-        [typeof(DateOnly)] = (string input, out object? value) =>
-        {
-            if (DateOnly.TryParse(input, out var parsed))
+            [typeof(DateOnly)] = (string input, out object? value) =>
             {
-                value = parsed;
-                return true;
-            }
+                if (DateOnly.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
+                value = default;
+                return false;
+            },
 #endif
 
-        [typeof(DateTime)] = (string input, out object? value) =>
-        {
-            if (DateTime.TryParse(input, out var parsed))
+            [typeof(DateTime)] = (string input, out object? value) =>
             {
-                value = parsed;
-                return true;
-            }
+                if (DateTime.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(DateTimeOffset)] = (string input, out object? value) =>
-        {
-            if (DateTimeOffset.TryParse(input, out var parsed))
-            {
-                value = parsed;
-                return true;
-            }
-
-            value = default;
-            return false;
-        },
-
-        [typeof(decimal)] = (string input, out object? value) =>
-        {
-            if (decimal.TryParse(input, out var parsed))
-            {
-                value = parsed;
-                return true;
-            }
-
-            value = default;
-            return false;
-        },
-
-        [typeof(DirectoryInfo)] = (string path, out object? value) =>
-        {
-            if (string.IsNullOrEmpty(path))
-            {
                 value = default;
                 return false;
-            }
-            value = new DirectoryInfo(path);
-            return true;
-        },
-
-        [typeof(double)] = (string input, out object? value) =>
-        {
-            if (double.TryParse(input, out var parsed))
+            },
+            [typeof(DateTimeOffset)] = (string input, out object? value) =>
             {
-                value = parsed;
-                return true;
-            }
+                if (DateTimeOffset.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(FileInfo)] = (string path, out object? value) =>
-        {
-            if (string.IsNullOrEmpty(path))
-            {
                 value = default;
                 return false;
-            }
-            value = new FileInfo(path);
-            return true;
-        },
-
-        [typeof(FileSystemInfo)] = (string path, out object? value) =>
-        {
-            if (string.IsNullOrEmpty(path))
+            },
+            [typeof(decimal)] = (string input, out object? value) =>
             {
+                if (decimal.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
+
                 value = default;
                 return false;
-            }
-            if (Directory.Exists(path))
+            },
+            [typeof(DirectoryInfo)] = (string path, out object? value) =>
             {
+                if (string.IsNullOrEmpty(path))
+                {
+                    value = default;
+                    return false;
+                }
                 value = new DirectoryInfo(path);
-            }
-            else if (path.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal) ||
-                     path.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+                return true;
+            },
+            [typeof(double)] = (string input, out object? value) =>
             {
-                value = new DirectoryInfo(path);
-            }
-            else
+                if (double.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
+
+                value = default;
+                return false;
+            },
+            [typeof(FileInfo)] = (string path, out object? value) =>
             {
+                if (string.IsNullOrEmpty(path))
+                {
+                    value = default;
+                    return false;
+                }
                 value = new FileInfo(path);
-            }
-
-            return true;
-        },
-
-        [typeof(float)] = (string input, out object? value) =>
-        {
-            if (float.TryParse(input, out var parsed))
-            {
-                value = parsed;
                 return true;
-            }
-
-            value = default;
-            return false;
-        },
-
-        [typeof(Guid)] = (string input, out object? value) =>
-        {
-            if (Guid.TryParse(input, out var parsed))
+            },
+            [typeof(FileSystemInfo)] = (string path, out object? value) =>
             {
-                value = parsed;
+                if (string.IsNullOrEmpty(path))
+                {
+                    value = default;
+                    return false;
+                }
+                if (Directory.Exists(path))
+                {
+                    value = new DirectoryInfo(path);
+                }
+                else if (
+                    path.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal)
+                    || path.EndsWith(
+                        Path.AltDirectorySeparatorChar.ToString(),
+                        StringComparison.Ordinal
+                    )
+                )
+                {
+                    value = new DirectoryInfo(path);
+                }
+                else
+                {
+                    value = new FileInfo(path);
+                }
+
                 return true;
-            }
-
-            value = default;
-            return false;
-        },
-
-        [typeof(int)] = (string token, out object? value) =>
-        {
-            if (int.TryParse(token, out var intValue))
+            },
+            [typeof(float)] = (string input, out object? value) =>
             {
-                value = intValue;
-                return true;
-            }
+                if (float.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(IPAddress)] = (string token, out object? value) =>
-        {
-            if (IPAddress.TryParse(token, out var ip))
+                value = default;
+                return false;
+            },
+            [typeof(Guid)] = (string input, out object? value) =>
             {
-                value = ip;
-                return true;
-            }
+                if (Guid.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
+                value = default;
+                return false;
+            },
+            [typeof(int)] = (string token, out object? value) =>
+            {
+                if (int.TryParse(token, out var intValue))
+                {
+                    value = intValue;
+                    return true;
+                }
 
+                value = default;
+                return false;
+            },
+            [typeof(IPAddress)] = (string token, out object? value) =>
+            {
+                if (IPAddress.TryParse(token, out var ip))
+                {
+                    value = ip;
+                    return true;
+                }
+
+                value = default;
+                return false;
+            },
 #if NETCOREAPP3_0_OR_GREATER
-        [typeof(IPEndPoint)] = (string token, out object? value) =>
-        {
-            if (IPEndPoint.TryParse(token, out var ipendpoint))
+            [typeof(IPEndPoint)] = (string token, out object? value) =>
             {
-                value = ipendpoint;
-                return true;
-            }
+                if (IPEndPoint.TryParse(token, out var ipendpoint))
+                {
+                    value = ipendpoint;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
+                value = default;
+                return false;
+            },
 #endif
 
-        [typeof(long)] = (string token, out object? value) =>
-        {
-            if (long.TryParse(token, out var longValue))
+            [typeof(long)] = (string token, out object? value) =>
             {
-                value = longValue;
-                return true;
-            }
+                if (long.TryParse(token, out var longValue))
+                {
+                    value = longValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(short)] = (string token, out object? value) =>
-        {
-            if (short.TryParse(token, out var shortValue))
+                value = default;
+                return false;
+            },
+            [typeof(short)] = (string token, out object? value) =>
             {
-                value = shortValue;
-                return true;
-            }
+                if (short.TryParse(token, out var shortValue))
+                {
+                    value = shortValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
+                value = default;
+                return false;
+            },
 #if NET6_0_OR_GREATER
-        [typeof(TimeOnly)] = (string input, out object? value) =>
-        {
-            if (TimeOnly.TryParse(input, out var parsed))
+            [typeof(TimeOnly)] = (string input, out object? value) =>
             {
-                value = parsed;
-                return true;
-            }
+                if (TimeOnly.TryParse(input, out var parsed))
+                {
+                    value = parsed;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
+                value = default;
+                return false;
+            },
 #endif
 
-        [typeof(uint)] = (string token, out object? value) =>
-        {
-            if (uint.TryParse(token, out var uintValue))
+            [typeof(uint)] = (string token, out object? value) =>
             {
-                value = uintValue;
-                return true;
-            }
+                if (uint.TryParse(token, out var uintValue))
+                {
+                    value = uintValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(sbyte)] = (string token, out object? value) =>
-        {
-            if (sbyte.TryParse(token, out var sbyteValue))
+                value = default;
+                return false;
+            },
+            [typeof(sbyte)] = (string token, out object? value) =>
             {
-                value = sbyteValue;
-                return true;
-            }
+                if (sbyte.TryParse(token, out var sbyteValue))
+                {
+                    value = sbyteValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(byte)] = (string token, out object? value) =>
-        {
-            if (byte.TryParse(token, out var byteValue))
+                value = default;
+                return false;
+            },
+            [typeof(byte)] = (string token, out object? value) =>
             {
-                value = byteValue;
-                return true;
-            }
+                if (byte.TryParse(token, out var byteValue))
+                {
+                    value = byteValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(string)] = (string input, out object? value) =>
-        {
-            value = input;
-            return true;
-        },
-
-        [typeof(ulong)] = (string token, out object? value) =>
-        {
-            if (ulong.TryParse(token, out var ulongValue))
+                value = default;
+                return false;
+            },
+            [typeof(string)] = (string input, out object? value) =>
             {
-                value = ulongValue;
+                value = input;
                 return true;
-            }
-
-            value = default;
-            return false;
-        },
-
-        [typeof(ushort)] = (string token, out object? value) =>
-        {
-            if (ushort.TryParse(token, out var ushortValue))
+            },
+            [typeof(ulong)] = (string token, out object? value) =>
             {
-                value = ushortValue;
-                return true;
-            }
+                if (ulong.TryParse(token, out var ulongValue))
+                {
+                    value = ulongValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(Uri)] = (string input, out object? value) =>
-        {
-            if (Uri.TryCreate(input, UriKind.RelativeOrAbsolute, out var uri))
+                value = default;
+                return false;
+            },
+            [typeof(ushort)] = (string token, out object? value) =>
             {
-                value = uri;
-                return true;
-            }
+                if (ushort.TryParse(token, out var ushortValue))
+                {
+                    value = ushortValue;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-
-        [typeof(TimeSpan)] = (string input, out object? value) =>
-        {
-            if (TimeSpan.TryParse(input, out var timeSpan))
+                value = default;
+                return false;
+            },
+            [typeof(Uri)] = (string input, out object? value) =>
             {
-                value = timeSpan;
-                return true;
-            }
+                if (Uri.TryCreate(input, UriKind.RelativeOrAbsolute, out var uri))
+                {
+                    value = uri;
+                    return true;
+                }
 
-            value = default;
-            return false;
-        },
-    };
+                value = default;
+                return false;
+            },
+            [typeof(TimeSpan)] = (string input, out object? value) =>
+            {
+                if (TimeSpan.TryParse(input, out var timeSpan))
+                {
+                    value = timeSpan;
+                    return true;
+                }
+
+                value = default;
+                return false;
+            },
+        };
 }

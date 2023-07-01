@@ -15,7 +15,8 @@ internal static partial class Interop
         private static partial SafeCreateHandle CFURLCreateWithString(
             IntPtr allocator,
             SafeCreateHandle str,
-            IntPtr baseUrl);
+            IntPtr baseUrl
+        );
 
         internal static SafeCreateHandle CFURLCreateWithString(string url)
         {

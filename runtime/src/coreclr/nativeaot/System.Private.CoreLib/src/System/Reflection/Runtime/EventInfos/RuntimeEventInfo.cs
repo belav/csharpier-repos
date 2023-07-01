@@ -46,10 +46,7 @@ namespace System.Reflection.Runtime.EventInfos
 
         public sealed override Type DeclaringType
         {
-            get
-            {
-                return ContextTypeInfo;
-            }
+            get { return ContextTypeInfo; }
         }
 
         public sealed override MethodInfo[] GetOtherMethods(bool nonPublic)
@@ -61,34 +58,22 @@ namespace System.Reflection.Runtime.EventInfos
 
         public sealed override Module Module
         {
-            get
-            {
-                return DefiningTypeInfo.Module;
-            }
+            get { return DefiningTypeInfo.Module; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         public sealed override Type ReflectedType
         {
-            get
-            {
-                return ReflectedTypeInfo;
-            }
+            get { return ReflectedTypeInfo; }
         }
 
         public sealed override MethodInfo RaiseMethod
         {
-            get
-            {
-                return GetEventMethod(EventMethodSemantics.Fire);
-            }
+            get { return GetEventMethod(EventMethodSemantics.Fire); }
         }
 
         public sealed override MethodInfo RemoveMethod
@@ -115,7 +100,9 @@ namespace System.Reflection.Runtime.EventInfos
             if (parameters.Length == 0)
                 throw new InvalidOperationException(); // Legacy: Why is a ToString() intentionally throwing an exception?
             RuntimeParameterInfo runtimeParameterInfo = (RuntimeParameterInfo)(parameters[0]);
-            return runtimeParameterInfo.ParameterType.FormatTypeNameForReflection() + " " + this.Name;
+            return runtimeParameterInfo.ParameterType.FormatTypeNameForReflection()
+                + " "
+                + this.Name;
         }
 
         protected RuntimeEventInfo WithDebugName()
@@ -166,7 +153,6 @@ namespace System.Reflection.Runtime.EventInfos
         /// Return the DefiningTypeInfo as a RuntimeTypeInfo (instead of as a format specific type info)
         /// </summary>
         protected abstract RuntimeTypeInfo DefiningTypeInfo { get; }
-
 
         protected readonly RuntimeTypeInfo ContextTypeInfo;
         protected readonly RuntimeTypeInfo ReflectedTypeInfo;

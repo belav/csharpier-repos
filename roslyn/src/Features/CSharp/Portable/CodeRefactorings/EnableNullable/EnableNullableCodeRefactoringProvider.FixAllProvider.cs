@@ -17,26 +17,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
 {
     internal partial class EnableNullableCodeRefactoringProvider : CodeRefactoringProvider
     {
-        internal sealed override CodeAnalysis.CodeRefactorings.FixAllProvider? GetFixAllProvider()
-            => FixAllProvider.Instance;
+        internal sealed override CodeAnalysis.CodeRefactorings.FixAllProvider? GetFixAllProvider() =>
+            FixAllProvider.Instance;
 
         private sealed class FixAllProvider : CodeAnalysis.CodeRefactorings.FixAllProvider
         {
             public static readonly FixAllProvider Instance = new();
 
-            private FixAllProvider()
-            {
-            }
+            private FixAllProvider() { }
 
-            public override IEnumerable<FixAllScope> GetSupportedFixAllScopes()
-                => ImmutableArray.Create(FixAllScope.Solution);
+            public override IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
+                ImmutableArray.Create(FixAllScope.Solution);
 
             public override Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext)
             {
                 Debug.Assert(fixAllContext.Scope == FixAllScope.Solution);
-                return Task.FromResult<CodeAction?>(new FixAllCodeAction(EnableNullableReferenceTypesInSolutionAsync));
+                return Task.FromResult<CodeAction?>(
+                    new FixAllCodeAction(EnableNullableReferenceTypesInSolutionAsync)
+                );
 
-                async Task<Solution> EnableNullableReferenceTypesInSolutionAsync(CodeActionPurpose purpose, CancellationToken cancellationToken)
+                async Task<Solution> EnableNullableReferenceTypesInSolutionAsync(
+                    CodeActionPurpose purpose,
+                    CancellationToken cancellationToken
+                )
                 {
                     var solution = fixAllContext.Solution;
                     foreach (var projectId in solution.ProjectIds)
@@ -45,8 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
                         if (!ShouldOfferRefactoring(project))
                             continue;
 
-                        solution = await EnableNullableReferenceTypesAsync(project, purpose,
-                            fixAllContext.GetOptionsProvider(), fixAllContext.CancellationToken).ConfigureAwait(false);
+                        solution = await EnableNullableReferenceTypesAsync(
+                                project,
+                                purpose,
+                                fixAllContext.GetOptionsProvider(),
+                                fixAllContext.CancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     return solution;
@@ -55,20 +63,34 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
 
             private sealed class FixAllCodeAction : CodeAction.SolutionChangeAction
             {
-                private readonly Func<CodeActionPurpose, CancellationToken, Task<Solution>> _createChangedSolution;
+                private readonly Func<
+                    CodeActionPurpose,
+                    CancellationToken,
+                    Task<Solution>
+                > _createChangedSolution;
 
-                public FixAllCodeAction(Func<CodeActionPurpose, CancellationToken, Task<Solution>> createChangedSolution)
-                : base(
-                    CSharpFeaturesResources.Enable_nullable_reference_types_in_solution,
-                    cancellationToken => createChangedSolution(CodeActionPurpose.Apply, cancellationToken),
-                    nameof(CSharpFeaturesResources.Enable_nullable_reference_types_in_solution))
+                public FixAllCodeAction(
+                    Func<CodeActionPurpose, CancellationToken, Task<Solution>> createChangedSolution
+                )
+                    : base(
+                        CSharpFeaturesResources.Enable_nullable_reference_types_in_solution,
+                        cancellationToken =>
+                            createChangedSolution(CodeActionPurpose.Apply, cancellationToken),
+                        nameof(CSharpFeaturesResources.Enable_nullable_reference_types_in_solution)
+                    )
                 {
                     _createChangedSolution = createChangedSolution;
                 }
 
-                protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
+                protected override async Task<
+                    IEnumerable<CodeActionOperation>
+                > ComputePreviewOperationsAsync(CancellationToken cancellationToken)
                 {
-                    var changedSolution = await _createChangedSolution(CodeActionPurpose.Preview, cancellationToken).ConfigureAwait(false);
+                    var changedSolution = await _createChangedSolution(
+                            CodeActionPurpose.Preview,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (changedSolution is null)
                         return Array.Empty<CodeActionOperation>();
 

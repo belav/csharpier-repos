@@ -11,7 +11,11 @@ namespace System.Runtime
     using System.Transactions;
 
     // AsyncResult starts acquired; Complete releases.
-    [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.ManualResetEvent, SupportsAsync = true, ReleaseMethod = "Complete")]
+    [Fx.Tag.SynchronizationPrimitive(
+        Fx.Tag.BlocksUsing.ManualResetEvent,
+        SupportsAsync = true,
+        ReleaseMethod = "Complete"
+    )]
     abstract class TransactedAsyncResult : AsyncResult
     {
         IAsyncResult deferredTransactionalResult;
@@ -46,7 +50,9 @@ namespace System.Runtime
                 {
                     if (this.transactionContext.State != TransactionSignalState.Completed)
                     {
-                        ThrowInvalidAsyncResult("Check/SyncContinue cannot be called from within the PrepareTransactionalCall using block.");
+                        ThrowInvalidAsyncResult(
+                            "Check/SyncContinue cannot be called from within the PrepareTransactionalCall using block."
+                        );
                     }
                     else if (this.transactionContext.IsSignalled)
                     {
@@ -97,10 +103,13 @@ namespace System.Runtime
         {
             if (this.transactionContext != null && !this.transactionContext.IsPotentiallyAbandoned)
             {
-                ThrowInvalidAsyncResult("PrepareTransactionalCall should only be called as the object of non-nested using statements. If the Begin succeeds, Check/SyncContinue must be called before another PrepareTransactionalCall.");
+                ThrowInvalidAsyncResult(
+                    "PrepareTransactionalCall should only be called as the object of non-nested using statements. If the Begin succeeds, Check/SyncContinue must be called before another PrepareTransactionalCall."
+                );
             }
 
-            return this.transactionContext = transaction == null ? null : new TransactionSignalScope(this, transaction);
+            return this.transactionContext =
+                transaction == null ? null : new TransactionSignalScope(this, transaction);
         }
 
         enum TransactionSignalState
@@ -118,7 +127,10 @@ namespace System.Runtime
 
             public TransactionSignalScope(TransactedAsyncResult result, Transaction transaction)
             {
-                Fx.Assert(transaction != null, "Null Transaction provided to AsyncResult.TransactionSignalScope.");
+                Fx.Assert(
+                    transaction != null,
+                    "Null Transaction provided to AsyncResult.TransactionSignalScope."
+                );
                 this.parent = result;
                 this.transactionScope = TransactionHelper.CreateTransactionScope(transaction);
             }
@@ -129,7 +141,8 @@ namespace System.Runtime
             {
                 get
                 {
-                    return State == TransactionSignalState.Abandoned || (State == TransactionSignalState.Completed && !IsSignalled);
+                    return State == TransactionSignalState.Abandoned
+                        || (State == TransactionSignalState.Completed && !IsSignalled);
                 }
             }
 
@@ -137,7 +150,9 @@ namespace System.Runtime
             {
                 if (State != TransactionSignalState.Ready)
                 {
-                    AsyncResult.ThrowInvalidAsyncResult("PrepareAsyncCompletion should only be called once per PrepareTransactionalCall.");
+                    AsyncResult.ThrowInvalidAsyncResult(
+                        "PrepareAsyncCompletion should only be called once per PrepareTransactionalCall."
+                    );
                 }
                 State = TransactionSignalState.Prepared;
             }
@@ -154,7 +169,9 @@ namespace System.Runtime
                 }
                 else
                 {
-                    AsyncResult.ThrowInvalidAsyncResult("PrepareTransactionalCall should only be called in a using. Dispose called multiple times.");
+                    AsyncResult.ThrowInvalidAsyncResult(
+                        "PrepareTransactionalCall should only be called in a using. Dispose called multiple times."
+                    );
                 }
 
                 try
@@ -169,7 +186,9 @@ namespace System.Runtime
                     }
 
                     // Complete and Dispose are not expected to throw.  If they do it can mess up the AsyncResult state machine.
-                    throw Fx.Exception.AsError(new InvalidOperationException(SRCore.AsyncTransactionException));
+                    throw Fx.Exception.AsError(
+                        new InvalidOperationException(SRCore.AsyncTransactionException)
+                    );
                 }
 
                 // This will release the callback to run, or tell us that we need to defer the callback to Check/SyncContinue.
@@ -183,7 +202,9 @@ namespace System.Runtime
                 {
                     if (this.parent.deferredTransactionalResult != null)
                     {
-                        AsyncResult.ThrowInvalidAsyncResult(this.parent.deferredTransactionalResult);
+                        AsyncResult.ThrowInvalidAsyncResult(
+                            this.parent.deferredTransactionalResult
+                        );
                     }
                     this.parent.deferredTransactionalResult = result;
                 }
