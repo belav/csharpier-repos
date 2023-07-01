@@ -25,8 +25,8 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 
 namespace MonoSamples.System.Drawing
 {

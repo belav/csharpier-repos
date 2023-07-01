@@ -15,8 +15,8 @@
 
 namespace System.Runtime.Remoting
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Runtime.Serialization;
 
     // The Exception thrown when something has gone

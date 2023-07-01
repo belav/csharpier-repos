@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Cryptography;
+using System.Security.Policy;
+
 //
 // HashMembershipConditionTest.cs -
 //	NUnit Test Cases for HashMembershipCondition
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

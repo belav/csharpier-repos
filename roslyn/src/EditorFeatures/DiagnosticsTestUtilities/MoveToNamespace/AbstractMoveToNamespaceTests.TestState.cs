@@ -6,6 +6,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
 using Microsoft.CodeAnalysis.MoveToNamespace;
 using Microsoft.CodeAnalysis.Shared.Extensions;

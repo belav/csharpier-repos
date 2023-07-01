@@ -7,9 +7,9 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 

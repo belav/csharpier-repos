@@ -4,9 +4,10 @@
 //   csc /r:C5.dll Locking.cs
 
 using System;
-using System.Threading;
-using C5;
 using SCG = System.Collections.Generic;
+using System.Threading;
+
+using C5;
 
 namespace Locking
 {

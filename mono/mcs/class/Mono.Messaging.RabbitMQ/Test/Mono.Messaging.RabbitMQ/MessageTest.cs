@@ -1,3 +1,11 @@
+using System;
+using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
+using SystemMessage = System.Messaging.Message;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using Mono.Messaging;
 //
 // MessageTest.cs -
 //    NUnit Test Cases for MessageQueuePermissionAttribute
@@ -29,14 +37,6 @@
 
 using NUnit.Framework;
 using NUnit.Mocks;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Reflection;
-using SystemMessage = System.Messaging.Message;
-using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
-
-using Mono.Messaging;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ
 {

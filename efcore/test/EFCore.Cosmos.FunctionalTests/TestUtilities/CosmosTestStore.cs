@@ -4,10 +4,10 @@
 using System.Net.Sockets;
 using Azure.Core;
 using Microsoft.Azure.Cosmos;
+using ContainerProperties = Microsoft.Azure.Cosmos.ContainerProperties;
 using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ContainerProperties = Microsoft.Azure.Cosmos.ContainerProperties;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 

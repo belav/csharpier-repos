@@ -3,6 +3,7 @@
 
 using System.ComponentModel;
 using System.Data;
+
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;

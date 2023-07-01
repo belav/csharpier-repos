@@ -6,6 +6,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+
 using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel

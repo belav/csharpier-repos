@@ -28,14 +28,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.IO;
 using System.Text;
 using System.Xml;
+
 using Microsoft.Build.BuildEngine;
-using NUnit.Framework;
-using System.IO;
 using Microsoft.Build.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.BuildEngine.Various
 {

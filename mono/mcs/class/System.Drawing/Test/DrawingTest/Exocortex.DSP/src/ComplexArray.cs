@@ -32,6 +32,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Exocortex.DSP;
 
 namespace Exocortex.DSP

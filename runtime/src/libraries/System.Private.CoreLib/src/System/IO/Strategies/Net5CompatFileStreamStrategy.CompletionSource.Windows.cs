@@ -3,10 +3,10 @@
 
 using System.Buffers;
 using System.Diagnostics;
+using TaskSourceCodes = System.IO.Strategies.FileStreamHelpers.TaskSourceCodes;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using TaskSourceCodes = System.IO.Strategies.FileStreamHelpers.TaskSourceCodes;
 
 namespace System.IO.Strategies
 {

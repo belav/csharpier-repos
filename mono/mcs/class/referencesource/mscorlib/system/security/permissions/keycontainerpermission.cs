@@ -15,10 +15,10 @@ namespace System.Security.Permissions
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Security.Cryptography;
     using System.Security.Util;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
 #if !FEATURE_PAL
 

@@ -26,9 +26,7 @@
 using System.Linq;
 using Newtonsoft.Json.Linq;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

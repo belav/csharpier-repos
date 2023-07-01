@@ -1,3 +1,4 @@
+using System.Diagnostics;
 //
 // VisualStylesNative.cs: IVisualStyles that uses the Visual Styles feature of
 // Windows XP and later.
@@ -28,7 +29,6 @@
 //
 
 using System.Drawing;
-using System.Diagnostics;
 
 namespace System.Windows.Forms.VisualStyles
 {

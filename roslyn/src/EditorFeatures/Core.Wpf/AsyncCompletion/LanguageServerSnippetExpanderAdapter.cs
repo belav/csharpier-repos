@@ -4,6 +4,7 @@
 
 using System;
 using System.Composition;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.LanguageServer.Client.Snippets;
 using Microsoft.VisualStudio.Text;

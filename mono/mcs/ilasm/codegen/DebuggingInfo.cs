@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.IO;
+
+using Mono.CompilerServices.SymbolWriter;
 //
 // Mono.ILASM.DebuggingInfo.cs
 //
@@ -8,10 +13,6 @@
 //
 
 using PEAPI;
-using System;
-using System.IO;
-using System.Collections;
-using Mono.CompilerServices.SymbolWriter;
 
 namespace Mono.ILASM
 {

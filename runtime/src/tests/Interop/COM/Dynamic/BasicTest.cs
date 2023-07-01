@@ -5,6 +5,7 @@ namespace Dynamic
 {
     using System;
     using System.Runtime.InteropServices;
+
     using Xunit;
 
     internal class BasicTest

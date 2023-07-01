@@ -4,9 +4,9 @@
 
 namespace System.IdentityModel
 {
+    using System.Configuration;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-    using System.Configuration;
 
     /// <summary>
     /// This is the Management utility class.

@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization

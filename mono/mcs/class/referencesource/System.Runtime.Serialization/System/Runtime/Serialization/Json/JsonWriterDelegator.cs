@@ -4,8 +4,8 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Xml;
     using System.Globalization;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif

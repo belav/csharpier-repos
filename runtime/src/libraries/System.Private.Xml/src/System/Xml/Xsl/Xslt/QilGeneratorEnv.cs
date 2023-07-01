@@ -8,9 +8,9 @@ using System.Xml.Schema;
 using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
+using T = System.Xml.Xsl.XmlQueryTypeFactory;
 using System.Xml.Xsl.XPath;
 using FunctionInfo = System.Xml.Xsl.XPath.XPathBuilder.FunctionInfo<System.Xml.Xsl.Xslt.QilGenerator.FuncId>;
-using T = System.Xml.Xsl.XmlQueryTypeFactory;
 
 namespace System.Xml.Xsl.Xslt
 {

@@ -16,6 +16,7 @@ namespace Castle.DynamicProxy.Tests
 {
     using System;
     using System.Collections.Generic;
+
     using Castle.DynamicProxy.Tests.Interceptors;
     using Castle.DynamicProxy.Tests.InterClasses;
 

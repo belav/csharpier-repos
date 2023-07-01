@@ -4,6 +4,7 @@
 
 using System;
 using System.Globalization;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp

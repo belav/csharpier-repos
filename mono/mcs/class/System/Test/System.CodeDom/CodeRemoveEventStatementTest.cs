@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom;
+
 //
 // CodeRemoveEventStatementTest.cs
 //	- Unit tests for System.CodeDom.CodeRemoveEventStatement
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Xml;
+
 using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests

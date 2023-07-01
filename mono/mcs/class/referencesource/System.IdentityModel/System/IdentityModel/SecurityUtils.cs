@@ -19,6 +19,7 @@ namespace System.IdentityModel
     using System.Security.Principal;
     using System.Text;
     using System.Xml;
+
     using Microsoft.Win32;
 
     static class SecurityUtils

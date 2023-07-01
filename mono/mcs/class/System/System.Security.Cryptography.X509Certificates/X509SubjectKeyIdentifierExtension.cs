@@ -35,8 +35,7 @@ extern alias MonoSecurity;
 using MonoSecurity::Mono.Security;
 using MonoSecurity::Mono.Security.Cryptography;
 #else
-using Mono.Security;
-using Mono.Security.Cryptography;
+using Mono.Security;using Mono.Security.Cryptography;
 #endif
 
 using System.Text;

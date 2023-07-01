@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Threading;
+
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 

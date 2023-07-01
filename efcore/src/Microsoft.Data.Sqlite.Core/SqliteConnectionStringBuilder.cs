@@ -9,6 +9,7 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+
 using Microsoft.Data.Sqlite.Properties;
 
 namespace Microsoft.Data.Sqlite

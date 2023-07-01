@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+
 using Xunit;
 
 namespace System.Runtime.Serialization.Formatters.Tests

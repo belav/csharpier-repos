@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Xunit;
 
 namespace System.Linq.Tests

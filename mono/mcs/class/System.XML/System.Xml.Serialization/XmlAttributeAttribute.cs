@@ -1,3 +1,4 @@
+using System;
 //
 // XmlAttributeAttribute.cs:
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Xml.Schema;
-using System;
 
 namespace System.Xml.Serialization
 {

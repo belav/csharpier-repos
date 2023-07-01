@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.ConvertIfToSwitch;
 using Microsoft.CodeAnalysis.CSharp.Extensions;

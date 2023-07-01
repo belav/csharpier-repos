@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.UnitTests.TestFiles;
 
 namespace Microsoft.CodeAnalysis.MSBuild.UnitTests

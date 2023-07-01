@@ -13,8 +13,8 @@ namespace B
 namespace C
 {
     using A;
-    using B;
     using X = A.XAttribute;
+    using B;
 
     [X]
     class Test

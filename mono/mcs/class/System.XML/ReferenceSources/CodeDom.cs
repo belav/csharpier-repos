@@ -1,7 +1,6 @@
 #if MOBILE
 
-using System;
-using System.Globalization;
+using System;using System.Globalization;
 
 namespace Microsoft.CSharp
 {

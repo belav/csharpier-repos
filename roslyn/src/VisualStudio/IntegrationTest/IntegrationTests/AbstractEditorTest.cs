@@ -7,8 +7,8 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.IntegrationTest.Utilities;
 using Microsoft.VisualStudio.IntegrationTest.Utilities.Common;
-using Roslyn.Test.Utilities;
 using ProjectUtils = Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils;
+using Roslyn.Test.Utilities;
 
 namespace Roslyn.VisualStudio.IntegrationTests
 {

@@ -7,6 +7,7 @@
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

@@ -6,8 +6,8 @@ namespace System.Activities
 {
     using System;
     using System.Activities.Expressions;
-    using System.Activities.XamlIntegration;
     using System.Activities.Runtime;
+    using System.Activities.XamlIntegration;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;

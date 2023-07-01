@@ -3,10 +3,11 @@
 
 using System;
 using System.IO;
+
+using static AppHost.Bundle.Tests.BundleTestBase;
 using Microsoft.DotNet;
 using Microsoft.DotNet.CoreSetup.Test;
 using Xunit;
-using static AppHost.Bundle.Tests.BundleTestBase;
 
 namespace AppHost.Bundle.Tests
 {

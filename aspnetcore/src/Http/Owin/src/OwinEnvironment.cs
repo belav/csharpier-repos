@@ -9,17 +9,19 @@ using System.Net.WebSockets;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 
 namespace Microsoft.AspNetCore.Owin;
 
-using SendFileFunc = Func<string, long, long?, CancellationToken, Task>;
 using WebSocketAcceptAlt = Func<
     WebSocketAcceptContext, // WebSocket Accept parameters
     Task<WebSocket>
 >;
+
+using SendFileFunc = Func<string, long, long?, CancellationToken, Task>;
 
 /// <summary>
 /// A loosely-typed OWIN environment wrapper over an <see cref="HttpContext"/>.

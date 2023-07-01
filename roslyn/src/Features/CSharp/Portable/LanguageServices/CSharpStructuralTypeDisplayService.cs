@@ -8,6 +8,7 @@ using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.LanguageService;

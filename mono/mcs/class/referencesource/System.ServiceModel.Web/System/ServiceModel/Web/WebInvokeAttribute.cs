@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Web
 {
     using System;
+    using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Web;
-    using System.ServiceModel.Administration;
 
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class WebInvokeAttribute

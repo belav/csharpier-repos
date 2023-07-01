@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CSharp.UnitTests;
 using Microsoft.CodeAnalysis.EditAndContinue;
 using Microsoft.CodeAnalysis.EditAndContinue.UnitTests;

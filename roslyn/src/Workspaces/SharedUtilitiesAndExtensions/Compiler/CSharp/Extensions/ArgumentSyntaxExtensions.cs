@@ -5,6 +5,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 

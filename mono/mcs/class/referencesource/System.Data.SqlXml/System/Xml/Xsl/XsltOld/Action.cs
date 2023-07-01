@@ -7,12 +7,13 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
     using System.Xml;
+    using Res = System.Xml.Utils.Res;
     using System.Xml.XPath;
-    using MS.Internal.Xml.XPath;
     using System.Xml.Xsl.XsltOld.Debugger;
+
+    using MS.Internal.Xml.XPath;
 
     internal abstract class Action
     {

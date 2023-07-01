@@ -6,6 +6,7 @@
 
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Emit;
 using Roslyn.Test.Utilities;

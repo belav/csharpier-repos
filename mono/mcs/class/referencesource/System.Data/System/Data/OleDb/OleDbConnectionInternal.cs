@@ -14,6 +14,7 @@ namespace System.Data.OleDb
     using System.Data.Common;
     using System.Data.ProviderBase;
     using System.Diagnostics;
+    using SysES = System.EnterpriseServices;
     using System.Globalization;
     using System.IO;
     using System.Runtime.CompilerServices;
@@ -22,7 +23,6 @@ namespace System.Data.OleDb
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using SysES = System.EnterpriseServices;
     using SysTx = System.Transactions;
 
     internal sealed class OleDbConnectionInternal : DbConnectionInternal, IDisposable

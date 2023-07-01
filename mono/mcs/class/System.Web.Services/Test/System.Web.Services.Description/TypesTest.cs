@@ -1,3 +1,7 @@
+using System;
+using System.Web.Services.Description;
+using System.Xml.Serialization;
+
 //
 // MonoTests.System.Web.Services.Description.TypesTest.cs
 //
@@ -8,10 +12,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Web.Services.Description;
-using System.Xml.Serialization;
 
 namespace MonoTests.System.Web.Services.Description
 {

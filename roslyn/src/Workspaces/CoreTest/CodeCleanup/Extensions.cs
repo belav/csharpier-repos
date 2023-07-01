@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup

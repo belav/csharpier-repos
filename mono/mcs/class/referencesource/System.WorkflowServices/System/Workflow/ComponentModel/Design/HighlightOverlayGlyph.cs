@@ -6,11 +6,11 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Workflow.ComponentModel.Design;
 
     // <summary>
     // This class provides the visualisation of the backdrop + hightlighted designer when

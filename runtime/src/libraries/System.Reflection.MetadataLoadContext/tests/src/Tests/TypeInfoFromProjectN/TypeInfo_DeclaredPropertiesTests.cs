@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-using System.Collections.Generic;
 
 #pragma warning disable 0414
 #pragma warning disable 0067

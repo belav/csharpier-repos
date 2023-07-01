@@ -16,12 +16,9 @@ namespace System.Security.Principal
 {
     using System;
     using System.Diagnostics.Contracts;
-
     // Claims feature is not available in Silverlight
 #if !FEATURE_CORECLR
-    using System.Security.Claims;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
+    using System.Security.Claims;using System.Collections.Generic;using System.Runtime.Serialization;
 #endif
 
     [Serializable]

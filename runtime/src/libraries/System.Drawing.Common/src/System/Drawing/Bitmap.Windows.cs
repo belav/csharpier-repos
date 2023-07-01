@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Drawing.Internal;
-using System.IO;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
+using System.IO;
 
 namespace System.Drawing
 {

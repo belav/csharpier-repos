@@ -7,6 +7,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.Security.AccessControl;
 using System.Security.Principal;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

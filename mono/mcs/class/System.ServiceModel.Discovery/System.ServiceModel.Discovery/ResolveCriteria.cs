@@ -30,8 +30,8 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace System.ServiceModel.Discovery
 {

@@ -1,6 +1,6 @@
-using SomeOtherNS;
 using LocalNS;
 using OneMoreNS;
+using SomeOtherNS;
 
 namespace SomeOtherNS.Compiler { }
 

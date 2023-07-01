@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime;
-using System.Runtime.CompilerServices;
 
 using Debug = System.Diagnostics.Debug;
+using System.Runtime;
+using System.Runtime.CompilerServices;
 
 namespace Internal.Runtime.CompilerHelpers
 {

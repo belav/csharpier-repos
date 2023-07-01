@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.ComponentModel;
 //
 // FlowLayoutSettings.cs
 //
@@ -27,8 +29,6 @@
 //
 
 using System.Windows.Forms.Layout;
-using System.ComponentModel;
-using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {

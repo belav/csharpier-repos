@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.ChangeSignature;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 

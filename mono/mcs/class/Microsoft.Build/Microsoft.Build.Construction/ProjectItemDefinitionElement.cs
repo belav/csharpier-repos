@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+
 using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction

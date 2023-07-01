@@ -9,9 +9,10 @@
 
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Reflection;
+using System.Windows.Forms;
+
 using NUnit.Framework;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 

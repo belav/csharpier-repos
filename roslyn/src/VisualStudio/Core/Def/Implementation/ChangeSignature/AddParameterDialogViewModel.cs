@@ -5,6 +5,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.LanguageServices;
 using Microsoft.CodeAnalysis.Notification;

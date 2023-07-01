@@ -2,14 +2,7 @@
 // BootstrapContextTest.cs - NUnit Test Cases for System.IdentityModel.Tokens.BootstrapContext
 //
 #if !MOBILE
-using System;
-using System.IO;
-using System.IdentityModel.Tokens;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Xml;
-using NUnit.Framework;
+using System;using System.IO;using System.IdentityModel.Tokens;using System.Runtime.Serialization;using System.Runtime.Serialization.Formatters.Binary;using System.Text;using System.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Tokens.net_4_5
 {

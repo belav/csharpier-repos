@@ -1,3 +1,8 @@
+using System;
+using System.Security.Permissions;
+using System.Web.UI.HtmlControls;
+
+using MonoTests.System.Web.UI.HtmlControls;
 //
 // HtmlLinkCas.cs
 //	- CAS unit tests for System.Web.UI.HtmlControls.HtmlLink
@@ -29,12 +34,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Permissions;
-using System.Web.UI.HtmlControls;
-
-using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls
 {

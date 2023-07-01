@@ -26,10 +26,11 @@
 
 using System;
 using System.Threading;
+
 using Mono.Threading;
+using MonoTests.Mono.Threading.Tasks;
 
 using NUnit.Framework;
-using MonoTests.Mono.Threading.Tasks;
 
 namespace MonoTests.Mono.Threading
 {

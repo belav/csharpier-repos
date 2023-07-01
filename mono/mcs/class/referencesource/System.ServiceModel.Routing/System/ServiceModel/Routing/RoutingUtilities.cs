@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Routing
 {
     using System;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Transactions;
     using SR2 = System.ServiceModel.Routing.SR;
-    using System.Runtime;
+    using System.Transactions;
 
     static class RoutingUtilities
     {

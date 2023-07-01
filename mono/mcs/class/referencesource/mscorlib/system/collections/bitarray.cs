@@ -17,8 +17,8 @@
 namespace System.Collections
 {
     using System;
-    using System.Security.Permissions;
     using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
 
     // A vector of bits.  Use this to store bits efficiently, without having to do bit
     // shifting yourself.

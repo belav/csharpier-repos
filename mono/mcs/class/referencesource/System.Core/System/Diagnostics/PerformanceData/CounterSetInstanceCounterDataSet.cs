@@ -7,13 +7,14 @@
 namespace System.Diagnostics.PerformanceData
 {
     using System;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
     using System.Security;
+    using System.Threading;
+
     using Microsoft.Win32;
 
     /// <summary>

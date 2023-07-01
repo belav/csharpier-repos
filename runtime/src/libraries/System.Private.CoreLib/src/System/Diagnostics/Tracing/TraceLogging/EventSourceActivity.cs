@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if ES_BUILD_STANDALONE
-using System;
-using System.Diagnostics;
+using System;using System.Diagnostics;
 #endif
 
 #if ES_BUILD_STANDALONE

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 #pragma warning disable 0420
 // ==++==
 //
@@ -19,9 +20,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Security.Permissions;
 using System.Diagnostics.Contracts;
+using System.Security.Permissions;
 
 namespace System.Threading
 {

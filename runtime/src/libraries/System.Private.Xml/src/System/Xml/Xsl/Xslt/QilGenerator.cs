@@ -14,9 +14,9 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
+using T = System.Xml.Xsl.XmlQueryTypeFactory;
 using System.Xml.Xsl.XPath;
 using ScopeRecord = System.Xml.Xsl.Xslt.CompilerScopeManager<System.Xml.Xsl.Qil.QilIterator>.ScopeRecord;
-using T = System.Xml.Xsl.XmlQueryTypeFactory;
 
 namespace System.Xml.Xsl.Xslt
 {

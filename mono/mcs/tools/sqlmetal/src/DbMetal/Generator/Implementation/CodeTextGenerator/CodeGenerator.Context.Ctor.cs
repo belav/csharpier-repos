@@ -27,9 +27,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Linq.Mapping;
+using Type = System.Type;
+
 using DbLinq.Schema.Dbml;
 using DbLinq.Vendor;
-using Type = System.Type;
 
 namespace DbMetal.Generator.Implementation.CodeTextGenerator
 {

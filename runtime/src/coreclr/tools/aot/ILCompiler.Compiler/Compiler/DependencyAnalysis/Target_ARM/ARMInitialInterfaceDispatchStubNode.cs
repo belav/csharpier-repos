@@ -1,14 +1,14 @@
+using System;
+
+using ILCompiler.DependencyAnalysis.ARM;
+using ILCompiler.DependencyAnalysis.ARM64;
+using ILCompiler.DependencyAnalysis.LoongArch64;
+using ILCompiler.DependencyAnalysis.X64;
+using ILCompiler.DependencyAnalysis.X86;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Text;
-using System;
-
-using ILCompiler.DependencyAnalysis.ARM;
-using ILCompiler.DependencyAnalysis.X64;
-using ILCompiler.DependencyAnalysis.X86;
-using ILCompiler.DependencyAnalysis.ARM64;
-using ILCompiler.DependencyAnalysis.LoongArch64;
 
 namespace ILCompiler.DependencyAnalysis
 {

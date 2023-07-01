@@ -1,3 +1,4 @@
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <copyright file="XmlEncoding.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,7 +7,6 @@
 //------------------------------------------------------------------------------
 
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Xml
 {

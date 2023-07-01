@@ -2,14 +2,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
-using System.Drawing;
-using FluentAssertions;
-using System.Linq;
-using Xunit;
-using Xunit.Abstractions;
 using System.CommandLine.Rendering.Views;
 using System.CommandLine.Tests.Utility;
+using System.Drawing;
 using static System.Environment;
+using System.Linq;
+
+using FluentAssertions;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace System.CommandLine.Rendering.Tests
 {

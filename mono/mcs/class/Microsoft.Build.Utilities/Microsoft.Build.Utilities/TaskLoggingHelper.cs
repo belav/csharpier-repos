@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using System.Resources;
 using System.Text;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities

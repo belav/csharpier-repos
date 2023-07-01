@@ -6,6 +6,7 @@
 
 using System;
 using System.Globalization;
+
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;

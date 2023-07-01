@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.Shell.TableManager;
 using Roslyn.Utilities;

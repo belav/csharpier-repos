@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
 namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars

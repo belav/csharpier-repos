@@ -9,6 +9,8 @@ namespace System.Web.UI.WebControls
     using System;
     using System.Collections;
     using System.ComponentModel;
+
+    using AttributeCollection = System.ComponentModel.AttributeCollection;
     using System.Data;
     using System.Drawing.Design;
     using System.Globalization;
@@ -16,8 +18,6 @@ namespace System.Web.UI.WebControls
     using System.Web;
     using System.Web.UI;
     using System.Xml;
-
-    using AttributeCollection = System.ComponentModel.AttributeCollection;
 
     /// <devdoc>
     /// Represents the data associated with a single hierarchy item - in this case an XmlNode.

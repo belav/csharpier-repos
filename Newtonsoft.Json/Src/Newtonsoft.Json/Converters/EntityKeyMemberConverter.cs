@@ -24,11 +24,7 @@
 #endregion
 
 #if HAVE_ENTITY_FRAMEWORK
-using System;
-using Newtonsoft.Json.Serialization;
-using System.Globalization;
-using Newtonsoft.Json.Utilities;
-using System.Diagnostics;
+using System;using Newtonsoft.Json.Serialization;using System.Globalization;using Newtonsoft.Json.Utilities;using System.Diagnostics;
 
 namespace Newtonsoft.Json.Converters
 {

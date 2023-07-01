@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.Shell;
 

@@ -8,8 +8,9 @@
 namespace System.Xml.XPath
 {
     using System;
-    using System.Xml;
     using System.Collections;
+    using System.Xml;
+
     using MS.Internal.Xml.XPath;
 
     public enum XmlSortOrder

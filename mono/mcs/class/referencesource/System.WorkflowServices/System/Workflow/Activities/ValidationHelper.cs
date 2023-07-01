@@ -6,13 +6,13 @@ namespace System.Workflow.Activities
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
-    using System.Globalization;
 
     static class ValidationHelper
     {

@@ -28,6 +28,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.BuildEngine

@@ -8,8 +8,8 @@
 namespace System.Xml
 {
     using System;
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
     using System.Xml.XPath;
 
     // Used to quote or escape blocks of text to keep that text from being

@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // Pkits_4_10_PolicyMapping.cs -
 //	NUnit tests for Pkits 4.10 : Policy Mapping
@@ -29,9 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

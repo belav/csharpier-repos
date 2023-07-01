@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Completion.Providers;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders;
 using Microsoft.CodeAnalysis.Test.Utilities;

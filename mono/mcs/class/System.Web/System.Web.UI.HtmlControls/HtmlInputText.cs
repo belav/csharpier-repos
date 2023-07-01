@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 //
 // System.Web.UI.HtmlControls.HtmlInputText.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.ComponentModel;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Web.Util;

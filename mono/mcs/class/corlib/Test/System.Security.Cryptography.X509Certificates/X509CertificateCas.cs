@@ -1,3 +1,12 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // X509CertificateCas.cs - CAS unit tests for
 //	System.Security.Cryptography.X509Certificates.X509CertificateCas
@@ -28,15 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Globalization;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates
 {

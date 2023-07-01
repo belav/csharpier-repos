@@ -9,6 +9,7 @@
 
 using System;
 using System.Diagnostics;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics

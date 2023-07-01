@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Concurrent;
+
 using Xunit;
 
 namespace System.Collections.Concurrent.Tests

@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web.Util;
+
 //
 // WorkItemCas.cs - CAS unit tests for System.Web.Util.WorkItem
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web.Util;
 
 namespace MonoCasTests.System.Web.Util
 {

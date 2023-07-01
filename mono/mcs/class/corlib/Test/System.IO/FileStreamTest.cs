@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+
+using Microsoft.Win32.SafeHandles;
 // FileStreamTests.cs - NUnit2 Test Cases for System.IO.FileStream class
 //
 // Authors:
@@ -11,12 +18,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using Microsoft.Win32.SafeHandles;
 
 namespace MonoTests.System.IO
 {

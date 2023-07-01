@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+
 using NUnit.Framework;
 
 namespace Mono.Linker.Tests

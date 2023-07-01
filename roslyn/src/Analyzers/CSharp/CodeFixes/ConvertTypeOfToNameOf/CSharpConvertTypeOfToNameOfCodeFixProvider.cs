@@ -5,6 +5,7 @@
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.ConvertTypeOfToNameOf;
 using Microsoft.CodeAnalysis.CSharp.Extensions;

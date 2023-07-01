@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.DocumentationComments;
 using Microsoft.CodeAnalysis.Editor.Host;

@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <copyright file="XmlNavigatorReader.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -7,9 +10,6 @@
 
 using System.IO;
 using System.Xml.Schema;
-using System.Collections;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace System.Xml.XPath
 {

@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.Loader;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Loader;
+using System.Threading.Tasks;
 
 class InstanceFieldTest : MyClass
 {

@@ -3,12 +3,12 @@
 
 using System.Collections;
 using System.Diagnostics;
+using DebuggingModes = System.Diagnostics.DebuggableAttribute.DebuggingModes;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Xsl.Runtime;
-using System.Runtime.Versioning;
-using DebuggingModes = System.Diagnostics.DebuggableAttribute.DebuggingModes;
 
 namespace System.Xml.Xsl.IlGen
 {

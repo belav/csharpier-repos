@@ -6,12 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+
+using SysClaimSet = System.IdentityModel.Claims.ClaimSet;
 using System.IdentityModel.Diagnostics;
 using System.IdentityModel.Policy;
 using System.Security.Claims;
 using System.Security.Principal;
-
-using SysClaimSet = System.IdentityModel.Claims.ClaimSet;
 
 namespace System.IdentityModel.Tokens
 {

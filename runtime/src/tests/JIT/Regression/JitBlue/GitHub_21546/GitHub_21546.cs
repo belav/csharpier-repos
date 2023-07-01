@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 using Point = System.Numerics.Vector2;
+using System.Runtime.CompilerServices;
 
 namespace GitHub_21546
 {

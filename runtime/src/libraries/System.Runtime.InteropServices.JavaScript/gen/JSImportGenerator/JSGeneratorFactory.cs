@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
+
 using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Data;
 
 namespace Microsoft.Interop.JavaScript
 {

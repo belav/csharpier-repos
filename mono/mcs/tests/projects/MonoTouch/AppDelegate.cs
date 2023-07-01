@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using MonoTouch.Foundation;
-using MonoTouch.UIKit;
 using MonoTouch.NUnit.UI;
+using MonoTouch.UIKit;
 
 namespace TestMcs
 {

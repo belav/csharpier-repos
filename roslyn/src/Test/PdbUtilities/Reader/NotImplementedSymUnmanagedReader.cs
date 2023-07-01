@@ -7,6 +7,7 @@
 extern alias DSR;
 using System;
 using System.Runtime.InteropServices.ComTypes;
+
 using DSR::Microsoft.DiaSymReader;
 
 namespace Roslyn.Test.Utilities

@@ -33,15 +33,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Web.Services.Description;
-using System.Xml;
-using System.Xml.Schema;
 
 using SMBinding = System.ServiceModel.Channels.Binding;
+using System.Web.Services.Description;
 using WS = System.Web.Services.Description;
-using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 using WSBinding = System.Web.Services.Description.Binding;
 using WSMessage = System.Web.Services.Description.Message;
+using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
+using System.Xml;
+using System.Xml.Schema;
 using QName = System.Xml.XmlQualifiedName;
 
 namespace System.ServiceModel.Description

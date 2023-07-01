@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.System;
 //
 // NewsStyleUriParserCas.cs - CAS unit tests for System.NewsStyleUriParser
 //
@@ -28,14 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System;
 
 namespace MonoCasTests.System
 {

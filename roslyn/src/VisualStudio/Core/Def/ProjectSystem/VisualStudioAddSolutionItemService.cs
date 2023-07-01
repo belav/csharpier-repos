@@ -7,6 +7,8 @@ using System.Collections.Concurrent;
 using System.Composition;
 using System.IO;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
+
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -15,7 +17,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Roslyn.Utilities;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {

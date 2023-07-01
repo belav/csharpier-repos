@@ -29,13 +29,7 @@
 //
 
 #if WEBSERVICES_DEP
-using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.IO;
-using System.Reflection;
-using System.Web;
-using System.Web.Configuration;
+using System;using System.CodeDom;using System.CodeDom.Compiler;using System.IO;using System.Reflection;using System.Web;using System.Web.Configuration;
 
 namespace System.Web.Compilation
 {

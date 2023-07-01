@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -13,7 +14,6 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
 #endif

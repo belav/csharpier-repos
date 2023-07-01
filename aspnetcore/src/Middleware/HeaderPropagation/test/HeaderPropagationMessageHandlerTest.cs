@@ -3,6 +3,7 @@
 
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation.Tests;

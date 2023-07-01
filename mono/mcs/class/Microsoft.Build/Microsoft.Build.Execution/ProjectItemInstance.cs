@@ -28,14 +28,15 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Evaluation;
 using System.Collections;
-using Microsoft.Build.Construction;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+
+using Microsoft.Build.Construction;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Execution
 {

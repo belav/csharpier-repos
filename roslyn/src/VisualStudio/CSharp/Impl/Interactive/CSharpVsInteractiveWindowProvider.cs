@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.Editor.CSharp.Interactive;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
@@ -14,13 +15,13 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.VisualStudio.InteractiveWindow.Commands;
 using Microsoft.VisualStudio.InteractiveWindow.Shell;
+using LanguageServiceGuids = Microsoft.VisualStudio.LanguageServices.Guids;
 using Microsoft.VisualStudio.LanguageServices.Interactive;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
-using LanguageServiceGuids = Microsoft.VisualStudio.LanguageServices.Guids;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
 {

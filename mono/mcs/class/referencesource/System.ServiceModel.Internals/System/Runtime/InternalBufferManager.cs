@@ -6,13 +6,8 @@ namespace System.Runtime
     using System;
     using System.Collections.Generic;
     using System.Threading;
-
 #if DEBUG
-    using System.Collections.Concurrent;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Security;
-    using System.Security.Permissions;
+    using System.Collections.Concurrent;using System.Diagnostics;using System.Globalization;using System.Security;using System.Security.Permissions;
 #endif //DEBUG
 
     abstract class InternalBufferManager

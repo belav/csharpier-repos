@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests

@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
 

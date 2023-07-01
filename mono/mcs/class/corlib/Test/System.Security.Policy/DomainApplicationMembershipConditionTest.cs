@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Policy;
+
 //
 // DomainApplicationMembershipConditionTest.cs -
 //	NUnit Test Cases for DomainApplicationMembershipCondition
@@ -29,10 +34,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

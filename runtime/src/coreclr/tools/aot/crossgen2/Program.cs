@@ -3,10 +3,10 @@
 
 using System;
 using System.Buffers.Binary;
-using System.CommandLine;
-using System.CommandLine.Parsing;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.CommandLine;
+using System.CommandLine.Parsing;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
@@ -14,13 +14,14 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text;
 
+using ILCompiler.DependencyAnalysis;
+using ILCompiler.IBC;
+
+using ILCompiler.Reflection.ReadyToRun;
+
 using Internal.IL;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using ILCompiler.Reflection.ReadyToRun;
-using ILCompiler.DependencyAnalysis;
-using ILCompiler.IBC;
 
 namespace ILCompiler
 {

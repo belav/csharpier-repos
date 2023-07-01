@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Hosting.Internal

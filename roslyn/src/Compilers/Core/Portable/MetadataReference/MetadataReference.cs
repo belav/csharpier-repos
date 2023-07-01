@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

@@ -6,23 +6,23 @@
 
 namespace System.Web.Services.Description
 {
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
+    using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using System;
-    using System.Xml;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.ComponentModel;
-    using System.CodeDom;
-    using System.Text;
-    using System.Web.Services.Configuration;
-    using System.Diagnostics;
-    using System.Threading;
-    using System.Globalization;
     using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription"]/*' />
     /// <devdoc>

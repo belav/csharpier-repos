@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.InlineHints;
 using Microsoft.CodeAnalysis.Text.Shared.Extensions;
 using Microsoft.VisualStudio.Text;

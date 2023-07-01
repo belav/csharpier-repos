@@ -28,9 +28,9 @@
 
 
 using System;
-using System.IO;
-using System.Data;
 using System.ComponentModel;
+using System.Data;
+using System.IO;
 
 namespace MonoTests.System.Data
 {

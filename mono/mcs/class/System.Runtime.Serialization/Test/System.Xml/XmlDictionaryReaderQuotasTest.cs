@@ -28,9 +28,10 @@
 
 using System;
 using System.Xml;
-using NUnit.Framework;
 
 using Q = System.Xml.XmlDictionaryReaderQuotas;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

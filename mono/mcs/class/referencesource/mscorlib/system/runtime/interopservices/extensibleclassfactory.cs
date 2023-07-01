@@ -16,12 +16,11 @@
 
 namespace System.Runtime.InteropServices
 {
+    using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
-
-    using System;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class ExtensibleClassFactory

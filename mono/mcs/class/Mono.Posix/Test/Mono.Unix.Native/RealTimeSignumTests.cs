@@ -1,3 +1,10 @@
+using System;
+using System.Text;
+using System.Threading;
+
+using Mono.Unix;
+using Mono.Unix.Android;
+using Mono.Unix.Native;
 //
 // RealTimeSignumTests.cs - NUnit Test Cases for Mono.Unix.Native.RealTimeSignum
 //
@@ -8,13 +15,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Text;
-using System.Threading;
-using Mono.Unix;
-using Mono.Unix.Android;
-using Mono.Unix.Native;
 
 namespace MonoTests.Mono.Unix.Native
 {

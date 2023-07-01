@@ -1851,6 +1851,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regclass038.regclass038
 {
+    using System.Collections.Generic;
     // <Title> Tests regular class operator used in anonymous type.</Title>
     // <Description>
     // anonymous type inside a query expression that introduces dynamic variables.
@@ -1859,7 +1860,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //<Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {
@@ -1963,6 +1963,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct002.regstrct002
 {
+    using System.Collections.Generic;
     // <Title> Tests regular struct operator used in query expression.</Title>
     // <Description>
     // </Description>
@@ -1970,7 +1971,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     //<Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

@@ -1,3 +1,12 @@
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+
 //
 // PageCas.cs - CAS unit tests for System.Web.UI.Page
 //
@@ -27,15 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI
 {

@@ -29,21 +29,18 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
-using System.Text;
 #if !MOBILE
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using Microsoft.CSharp;
+using System.CodeDom;using System.CodeDom.Compiler;using Microsoft.CSharp;
 #endif
-using System.Configuration;
-using System.Security.Policy;
+using System.Configuration;using System.Security.Policy;
 
 namespace System.Xml.Serialization
 {

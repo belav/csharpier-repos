@@ -6,6 +6,7 @@
 
 using System.Globalization;
 using System.Windows.Controls;
+
 using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options

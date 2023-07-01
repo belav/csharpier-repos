@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+
+using Mono.Security;
 //
 // Pkcs9ContentTypeTest.cs - NUnit tests for Pkcs9ContentType
 //
@@ -28,13 +34,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
-
-using Mono.Security;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

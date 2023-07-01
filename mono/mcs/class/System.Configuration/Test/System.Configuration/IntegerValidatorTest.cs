@@ -31,9 +31,10 @@
 
 
 using System;
-using System.Xml;
-using System.IO;
 using System.Configuration;
+using System.IO;
+using System.Xml;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration

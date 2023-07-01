@@ -7,11 +7,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using static Microsoft.Interop.LibraryImportGenerator;
 using Microsoft.Interop.UnitTests;
 using Xunit;
-using static Microsoft.Interop.LibraryImportGenerator;
 
 namespace LibraryImportGenerator.UnitTests
 {

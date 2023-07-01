@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 using System.Text;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests

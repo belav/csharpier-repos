@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Xml.Resolvers;
+
 using Xunit;
 
 namespace System.Xml.XmlResolverTests

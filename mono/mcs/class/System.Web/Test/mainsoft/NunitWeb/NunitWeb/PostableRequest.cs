@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
-using System.Collections.Specialized;
 
 namespace MonoTests.SystemWeb.Framework
 {

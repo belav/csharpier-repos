@@ -1,3 +1,7 @@
+using System;
+using System.Runtime.InteropServices;
+using System.Threading;
+
 //
 // InterlockedTest.cs - NUnit Test Cases for System.Threading.Interlocked
 //
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Runtime.InteropServices;
 
 namespace MonoTests.System.Threading
 {

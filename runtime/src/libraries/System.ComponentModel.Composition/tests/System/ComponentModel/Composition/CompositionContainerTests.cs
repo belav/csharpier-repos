@@ -9,6 +9,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Linq.Expressions;
 using System.UnitTesting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition

@@ -6,8 +6,8 @@
 
 namespace System.IO
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Changes that may occur to a file or directory.

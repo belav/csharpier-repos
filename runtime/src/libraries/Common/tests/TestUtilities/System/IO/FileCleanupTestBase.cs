@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
+
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 

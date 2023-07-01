@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
 using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;

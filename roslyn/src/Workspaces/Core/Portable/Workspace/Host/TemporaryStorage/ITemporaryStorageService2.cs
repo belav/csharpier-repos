@@ -4,6 +4,7 @@
 
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Host

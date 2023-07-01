@@ -7,10 +7,10 @@
 //
 
 using System;
+using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Runtime.Remoting;
 using System.Runtime.Serialization;
-using System.Globalization;
-using System.Diagnostics.Contracts;
 
 namespace System.Reflection
 {

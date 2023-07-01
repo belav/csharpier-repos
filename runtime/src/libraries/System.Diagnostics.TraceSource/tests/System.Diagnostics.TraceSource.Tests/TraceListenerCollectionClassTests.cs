@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
-using Xunit;
 using System.Reflection;
+
+using Xunit;
 
 namespace System.Diagnostics.TraceSourceTests
 {

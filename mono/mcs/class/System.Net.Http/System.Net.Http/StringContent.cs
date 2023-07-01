@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 //
 // StringContent.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Text;
-using System.Net.Http.Headers;
 
 namespace System.Net.Http
 {

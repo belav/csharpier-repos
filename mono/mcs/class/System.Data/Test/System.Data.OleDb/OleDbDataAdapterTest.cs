@@ -28,14 +28,11 @@
 
 #if !NO_OLEDB
 
-using System;
-using System.Data;
+using System;using System.Data;
 #if !NO_ODBC
 using System.Data.Odbc;
 #endif
-using System.Data.OleDb;
-
-using NUnit.Framework;
+using System.Data.OleDb;using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {

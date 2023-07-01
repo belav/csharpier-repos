@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Activities.Dispatcher
 {
     using System.Runtime;
-    using System.Transactions;
     using System.Threading;
+    using System.Transactions;
 
     sealed class TransactionWaitAsyncResult : AsyncResult
     {

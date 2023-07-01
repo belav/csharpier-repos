@@ -29,10 +29,10 @@
 
 
 using System;
-using System.ComponentModel;
-using System.ComponentModel.Design;
 
 using System.CodeDom;
+using System.ComponentModel;
+using System.ComponentModel.Design;
 
 namespace System.ComponentModel.Design.Serialization
 {

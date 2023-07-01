@@ -31,18 +31,7 @@
 
 #if !MOBILE
 
-using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Text;
-
-using Mono.Xml;
+using System.Collections;using System.Diagnostics;using System.Globalization;using System.IO;using System.Reflection;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Security.Permissions;using System.Security.Policy;using System.Text;using Mono.Xml;
 
 namespace System.Security
 {

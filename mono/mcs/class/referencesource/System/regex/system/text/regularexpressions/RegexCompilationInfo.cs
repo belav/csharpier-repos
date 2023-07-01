@@ -6,9 +6,7 @@
 
 #if !SILVERLIGHT
 
-using System;
-using System.Runtime.Serialization;
-using System.Runtime.Versioning;
+using System;using System.Runtime.Serialization;using System.Runtime.Versioning;
 
 namespace System.Text.RegularExpressions
 {

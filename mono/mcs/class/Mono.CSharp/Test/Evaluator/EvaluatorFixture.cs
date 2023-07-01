@@ -1,3 +1,4 @@
+using Mono.CSharp;
 //
 // EvaluatorFixture.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using NUnit.Framework;
-using Mono.CSharp;
 
 namespace MonoTests.EvaluatorTest
 {

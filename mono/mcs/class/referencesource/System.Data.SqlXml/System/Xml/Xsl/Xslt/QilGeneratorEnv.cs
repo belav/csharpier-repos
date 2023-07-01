@@ -7,17 +7,17 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml.XPath;
 using System.Xml.Schema;
+using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
 using System.Xml.Xsl.XPath;
 
 namespace System.Xml.Xsl.Xslt
 {
-    using FunctionInfo = XPathBuilder.FunctionInfo<QilGenerator.FuncId>;
     using Res = System.Xml.Utils.Res;
     using T = XmlQueryTypeFactory;
+    using FunctionInfo = XPathBuilder.FunctionInfo<QilGenerator.FuncId>;
 
     internal partial class QilGenerator : IXPathEnvironment
     {

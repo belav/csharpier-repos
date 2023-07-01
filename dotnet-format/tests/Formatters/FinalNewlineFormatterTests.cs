@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Tools.Formatters;
 using Xunit;
 using Xunit.Abstractions;

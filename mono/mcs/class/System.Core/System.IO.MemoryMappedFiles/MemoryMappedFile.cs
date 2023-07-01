@@ -27,11 +27,12 @@
 //
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.MemoryMappedFiles
 {

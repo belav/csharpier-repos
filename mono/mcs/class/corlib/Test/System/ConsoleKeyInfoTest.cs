@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Text;
+
 //
 // ConsoleKeyInfoTest.cs
 //
@@ -27,9 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
 
 namespace MonoTests.System
 {

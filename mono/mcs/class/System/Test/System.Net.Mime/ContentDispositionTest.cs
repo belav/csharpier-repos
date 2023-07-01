@@ -1,3 +1,6 @@
+using System;
+using System.Net.Mime;
+
 //
 // ContentDispositionTest.cs - NUnit Test Cases for System.Net.Mime.ContentDisposition
 //
@@ -9,8 +12,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Net.Mime;
 
 namespace MonoTests.System.Net.Mime
 {

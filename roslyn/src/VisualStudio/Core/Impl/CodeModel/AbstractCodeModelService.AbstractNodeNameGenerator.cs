@@ -7,6 +7,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel

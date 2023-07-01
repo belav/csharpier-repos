@@ -10,8 +10,6 @@
 ============================================================*/
 namespace Microsoft.Win32
 {
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
@@ -21,6 +19,9 @@ namespace Microsoft.Win32
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
 #pragma warning disable 618    // Have not migrated to v4 transparency yet
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]

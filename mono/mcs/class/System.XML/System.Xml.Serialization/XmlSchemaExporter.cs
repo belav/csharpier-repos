@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Xml.Serialization.XmlSchemaExporter
 //
@@ -31,7 +32,6 @@
 
 using System.Xml;
 using System.Xml.Schema;
-using System.Collections;
 
 namespace System.Xml.Serialization
 {

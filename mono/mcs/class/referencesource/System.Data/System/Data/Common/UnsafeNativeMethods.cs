@@ -11,13 +11,7 @@ using System;
 #if !NO_ODBC
 using System.Data.Odbc;
 #endif
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Versioning;
+using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Security;using System.Security.Permissions;using System.Text;using System.Runtime.ConstrainedExecution;using System.Runtime.Versioning;
 
 namespace System.Data.Common
 {

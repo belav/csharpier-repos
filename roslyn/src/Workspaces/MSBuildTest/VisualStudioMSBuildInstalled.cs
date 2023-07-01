@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.Setup.Configuration;
 using Roslyn.Test.Utilities;
 

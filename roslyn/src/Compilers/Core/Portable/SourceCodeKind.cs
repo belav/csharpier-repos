@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis

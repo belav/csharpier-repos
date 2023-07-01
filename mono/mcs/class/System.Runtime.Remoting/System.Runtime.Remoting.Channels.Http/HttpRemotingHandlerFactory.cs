@@ -1,3 +1,6 @@
+using System.IO;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
 //
 // System.Runtime.Remoting.Channels.Http.HttpRemotingHandlerFactory
 //
@@ -30,9 +33,6 @@
 //
 
 using System.Web;
-using System.IO;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Channels;
 
 namespace System.Runtime.Remoting.Channels.Http
 {

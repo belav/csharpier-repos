@@ -30,6 +30,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Web;
+
 using NUnit.Framework;
 
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;

@@ -26,6 +26,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Drawing.Imaging.Tests

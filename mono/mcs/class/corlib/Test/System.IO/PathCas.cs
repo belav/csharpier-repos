@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // PathCas.cs -CAS unit tests for System.IO.Path
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.IO
 {

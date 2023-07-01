@@ -30,10 +30,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Util;
 
+using NUnit.Framework;
+
 using StandAloneRunnerSupport;
 using StandAloneTests;
-
-using NUnit.Framework;
 
 namespace StandAloneTests.DisabledAttributeRendering
 {

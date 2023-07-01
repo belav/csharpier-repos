@@ -4,9 +4,10 @@
 
 using System.Diagnostics;
 using System.Threading;
+
+using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.CodeAnalysis.Shared.Utilities;
-using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {

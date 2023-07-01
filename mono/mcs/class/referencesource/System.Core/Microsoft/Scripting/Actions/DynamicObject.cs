@@ -19,10 +19,7 @@ using Microsoft.Scripting.Ast;
 using System.Linq.Expressions;
 #endif
 
-using System.Diagnostics;
-using System.Dynamic.Utils;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;using System.Dynamic.Utils;using System.Reflection;using System.Runtime.CompilerServices;
 
 namespace System.Dynamic
 {

@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 // TargetResult.cs
 //
 // Author:
@@ -26,9 +30,6 @@
 //
 
 using Microsoft.Build.Framework;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Microsoft.Build.Execution
 {

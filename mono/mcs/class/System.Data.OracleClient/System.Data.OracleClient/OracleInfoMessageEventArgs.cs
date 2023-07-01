@@ -15,9 +15,9 @@
 //
 
 using System;
-using System.IO;
-using System.Data.SqlTypes;
 using System.Data.OracleClient.Oci;
+using System.Data.SqlTypes;
+using System.IO;
 
 namespace System.Data.OracleClient
 {

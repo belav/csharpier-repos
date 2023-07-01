@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis.DocumentHighlighting;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.DocumentHighlighting;

@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+
+using CMS = System.Deployment.Internal.Isolation.Manifest;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
-
-using CMS = System.Deployment.Internal.Isolation.Manifest;
 
 namespace System.Deployment.Internal.Isolation
 {

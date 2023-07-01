@@ -4,6 +4,7 @@
 
 using System;
 using System.Text;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 using Microsoft.CodeAnalysis.Text;
 

@@ -1,3 +1,8 @@
+using System;
+using System.Messaging;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // MessageQueuePermissionAttributeTest.cs -
 //	NUnit Test Cases for MessageQueuePermissionAttribute
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Messaging;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Messaging
 {

@@ -17,13 +17,13 @@ namespace System.ServiceModel.Channels
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using Utility = System.ServiceModel.Activation.Utility;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.ServiceProcess;
     using System.Threading;
-    using Utility = System.ServiceModel.Activation.Utility;
 
     sealed class SharedConnectionListener : IConnectionListener
     {

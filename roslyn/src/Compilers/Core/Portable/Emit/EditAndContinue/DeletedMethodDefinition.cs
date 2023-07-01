@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Reflection;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis.Symbols;
 

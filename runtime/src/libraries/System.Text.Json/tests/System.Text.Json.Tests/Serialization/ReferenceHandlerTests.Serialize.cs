@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Newtonsoft.Json;
 using Xunit;
 

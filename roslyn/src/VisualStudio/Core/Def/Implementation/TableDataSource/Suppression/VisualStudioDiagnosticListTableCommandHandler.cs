@@ -10,6 +10,8 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes.Configuration;
@@ -27,7 +29,6 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell.TableControl;
 using Microsoft.VisualStudio.Utilities;
 using Roslyn.Utilities;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {

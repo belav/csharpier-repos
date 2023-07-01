@@ -27,13 +27,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Type = System.Type;
+
 using DbLinq.Data.Linq;
 using DbLinq.Schema;
 using DbLinq.Schema.Dbml;
 using DbLinq.Schema.Dbml.Adapter;
 using DbLinq.Util;
-using Type = System.Type;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #endif

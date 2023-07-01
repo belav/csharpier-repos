@@ -36,10 +36,7 @@
 // every "choice" is statiscally compiled. As long as CreateFromName is not
 // used the linker will be able to eliminate the crypto code from the applications
 
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;using System.Security.Permissions;using System.Collections.Generic;using System.Runtime.CompilerServices;
 
 namespace System.Security.Cryptography
 {

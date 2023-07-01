@@ -27,7 +27,6 @@
 //
 
 using System;
-
 #if NDESK_OPTIONS
 using NDesk.Options;
 #else

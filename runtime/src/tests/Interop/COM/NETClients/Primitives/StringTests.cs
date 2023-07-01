@@ -7,8 +7,9 @@ namespace NetClient
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Text;
     using System.Runtime.InteropServices;
+    using System.Text;
+
     using Xunit;
 
     class StringTests

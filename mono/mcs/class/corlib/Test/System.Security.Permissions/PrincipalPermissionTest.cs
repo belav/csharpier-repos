@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // PrincipalPermissionTest.cs - NUnit Test Cases for PrincipalPermission
 //
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

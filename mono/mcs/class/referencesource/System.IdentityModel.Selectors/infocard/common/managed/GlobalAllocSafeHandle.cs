@@ -4,10 +4,11 @@
 namespace Microsoft.InfoCards
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security;
+
     using Microsoft.InfoCards.Diagnostics;
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 

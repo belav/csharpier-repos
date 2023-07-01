@@ -6,8 +6,8 @@ namespace System.ServiceModel.Discovery
     using System;
     using System.Collections.Generic;
     using System.Runtime;
-    using System.Text;
     using SR2 = System.ServiceModel.Discovery.SR;
+    using System.Text;
 
     static class ScopeCompiler
     {

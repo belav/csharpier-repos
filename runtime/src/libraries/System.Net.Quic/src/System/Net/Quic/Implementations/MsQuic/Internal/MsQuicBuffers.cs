@@ -4,6 +4,7 @@
 using System.Buffers;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 using Microsoft.Quic;
 
 namespace System.Net.Quic.Implementations.MsQuic.Internal;

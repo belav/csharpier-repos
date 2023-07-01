@@ -8,9 +8,7 @@ using System.Reflection;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Threading;
-
-using NUnit.Framework;
+using System.Threading;using NUnit.Framework;
 
 namespace MonoTests.System
 {

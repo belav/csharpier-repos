@@ -6,6 +6,7 @@
 
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;

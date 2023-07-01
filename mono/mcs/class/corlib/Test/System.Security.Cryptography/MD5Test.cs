@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 // MD5Test.cs - NUnit Test Cases for System.Security.Cryptography.MD5
 //
 // Eduardo Garcia Cebollero (kiwnix@yahoo.es)
@@ -6,8 +9,6 @@
 // (C)  Ximian, Inc.  http://www.ximian.com
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

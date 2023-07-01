@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests

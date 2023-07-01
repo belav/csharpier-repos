@@ -7,11 +7,10 @@
 using System;
 using System.Reflection;
 using System.Text;
-using I18N.Common;
 
+using I18N.Common;
 #if DISABLE_UNSAFE
-using MonoEncoder = I18N.Common.MonoSafeEncoder;
-using MonoEncoding = I18N.Common.MonoSafeEncoding;
+using MonoEncoder = I18N.Common.MonoSafeEncoder;using MonoEncoding = I18N.Common.MonoSafeEncoding;
 #endif
 
 namespace I18N.CJK

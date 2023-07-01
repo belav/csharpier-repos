@@ -31,8 +31,8 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
 using Win32 = System.Runtime.Remoting.Channels.Ipc.Win32;
+using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels.Ipc.Unix
 {

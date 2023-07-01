@@ -3,9 +3,7 @@
 
 using System.Collections.Generic;
 #if DEBUG
-using System.Collections;
-using System.Diagnostics;
-using System.Reflection;
+using System.Collections;using System.Diagnostics;using System.Reflection;
 #endif
 
 namespace System.Net.Security

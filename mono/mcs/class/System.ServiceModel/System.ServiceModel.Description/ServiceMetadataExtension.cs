@@ -35,17 +35,17 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.ServiceModel.Channels;
+using WCFBinding = System.ServiceModel.Channels.Binding;
+using SMMessage = System.ServiceModel.Channels.Message;
 using System.ServiceModel.Dispatcher;
 using System.Web;
 using System.Web.Services;
 using System.Web.Services.Description;
-using System.Xml;
-using System.Xml.Schema;
+using WSMessage = System.Web.Services.Description.Message;
 
 using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
-using WSMessage = System.Web.Services.Description.Message;
-using SMMessage = System.ServiceModel.Channels.Message;
-using WCFBinding = System.ServiceModel.Channels.Binding;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.ServiceModel.Description
 {

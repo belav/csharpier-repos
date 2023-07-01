@@ -26,14 +26,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IdentityModel.Claims;
-using System.IdentityModel.Policy;
-using System.IdentityModel.Tokens;
-using System.Security.Principal;
-using System.Xml;
+using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.IdentityModel.Claims;using System.IdentityModel.Policy;using System.IdentityModel.Tokens;using System.Security.Principal;using System.Xml;
 
 namespace System.IdentityModel.Selectors
 {

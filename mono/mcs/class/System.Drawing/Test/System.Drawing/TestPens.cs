@@ -1,3 +1,8 @@
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Security.Permissions;
+
 // Tests for System.Drawing.Pens.cs
 //
 // Author:
@@ -29,10 +34,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing
 {

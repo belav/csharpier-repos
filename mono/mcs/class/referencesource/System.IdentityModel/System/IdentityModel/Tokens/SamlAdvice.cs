@@ -5,15 +5,15 @@
 namespace System.IdentityModel.Tokens
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.Runtime.Serialization;
+    using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.Threading;
     using System.IdentityModel;
     using System.IdentityModel.Selectors;
+    using System.Runtime.Serialization;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     public class SamlAdvice
     {

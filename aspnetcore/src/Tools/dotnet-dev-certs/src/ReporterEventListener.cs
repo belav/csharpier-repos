@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Linq;
+
 using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.DeveloperCertificates.Tools;

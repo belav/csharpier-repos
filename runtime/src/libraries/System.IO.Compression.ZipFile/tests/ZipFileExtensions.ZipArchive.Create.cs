@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.IO.Compression.Tests

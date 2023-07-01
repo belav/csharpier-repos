@@ -6,10 +6,7 @@
 //------------------------------------------------------------------------------
 
 #if MTNAMETABLE
-using System;
-using System.IO;
-using System.Collections;
-using System.Threading;
+using System;using System.IO;using System.Collections;using System.Threading;
 
 namespace System.Xml
 {

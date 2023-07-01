@@ -8,8 +8,8 @@ namespace System.Runtime.Serialization
     using System.Collections.Generic;
     using System.Globalization;
     using System.Reflection;
-    using System.Xml;
     using System.Security;
+    using System.Xml;
 #if MONO
     using System.Runtime.CompilerServices;
 #endif

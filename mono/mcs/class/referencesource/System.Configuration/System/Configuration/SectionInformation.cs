@@ -9,12 +9,12 @@ namespace System.Configuration
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Internal;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Security;
     using System.Text;
     using System.Xml;
-    using System.Globalization;
 
     public sealed class SectionInformation
     {

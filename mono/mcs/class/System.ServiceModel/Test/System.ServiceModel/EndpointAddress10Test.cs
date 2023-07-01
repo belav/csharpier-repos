@@ -26,14 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.IO;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using NUnit.Framework;
+using System;using System.IO;using System.ServiceModel;using System.ServiceModel.Channels;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {

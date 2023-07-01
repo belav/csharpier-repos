@@ -1,3 +1,8 @@
+using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing;
+using System.Globalization;
 //
 // System.Web.UI.WebControls.BulletedList.cs
 //
@@ -29,13 +34,8 @@
 //
 
 using System.IO;
-using System.Collections;
-using System.Globalization;
-using System.Text;
-using System.Drawing;
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Security.Permissions;
+using System.Text;
 using System.Web.Util;
 
 namespace System.Web.UI.WebControls

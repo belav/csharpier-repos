@@ -3,6 +3,7 @@
 
 using System.ComponentModel.Composition.Factories;
 using System.UnitTesting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition.Primitives

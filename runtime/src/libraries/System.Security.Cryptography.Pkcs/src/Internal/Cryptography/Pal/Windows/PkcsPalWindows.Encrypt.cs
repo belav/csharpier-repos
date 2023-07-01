@@ -5,15 +5,15 @@ using System;
 using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Runtime.InteropServices;
+
+using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
 using System.Security.Cryptography.X509Certificates;
 
-using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
+using static Interop.Crypt32;
 
 using Microsoft.Win32.SafeHandles;
-
-using static Interop.Crypt32;
 
 namespace Internal.Cryptography.Pal.Windows
 {

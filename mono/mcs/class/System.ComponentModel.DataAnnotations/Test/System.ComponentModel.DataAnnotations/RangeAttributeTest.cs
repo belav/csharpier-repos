@@ -30,9 +30,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-using NUnit.Framework;
-
 using DA = global::System.ComponentModel.DataAnnotations;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations
 {

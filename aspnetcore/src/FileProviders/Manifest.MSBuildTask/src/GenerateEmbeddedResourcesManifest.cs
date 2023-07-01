@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;

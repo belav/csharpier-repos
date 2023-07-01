@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // IBuiltInEvidenceTest.cs - NUnit Test Cases for IBuiltInEvidence
 //
@@ -27,12 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

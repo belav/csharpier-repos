@@ -15,10 +15,10 @@ namespace System.ServiceModel.Security
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
-    using System.Threading;
 
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
     using SR = System.ServiceModel.SR;
+    using System.Threading;
 
     sealed class TlsSspiNegotiation : ISspiNegotiation
     {

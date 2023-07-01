@@ -22,9 +22,7 @@ namespace System.Runtime.Serialization
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Proxies;
 #endif
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Security;
+    using System.Globalization;using System.Diagnostics.Contracts;using System.Security;
 #if FEATURE_CORECLR
     using System.Runtime.CompilerServices;
 #endif

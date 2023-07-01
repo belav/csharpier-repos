@@ -9,14 +9,14 @@
 
 using System;
 using System.CodeDom;
-using System.Data.EntityModel.SchemaObjectModel;
-using Som = System.Data.EntityModel.SchemaObjectModel;
-using System.Data.Metadata.Edm;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Data.Entity.Design;
 using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel.SchemaObjectModel;
+using Som = System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace System.Data.EntityModel.Emitters
 {

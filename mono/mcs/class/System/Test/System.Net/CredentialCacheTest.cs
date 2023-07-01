@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Net;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // CredentialCacheTest.cs - NUnit Test Cases for System.Net.CredentialCache
 //
@@ -6,11 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
-using System.Collections;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Net
 {

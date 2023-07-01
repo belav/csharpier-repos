@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 // CompareInfoTest.cs - NUnit Test Cases for the
 // System.Globalization.CompareInfo class
 //
@@ -8,8 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System.Globalization
 {

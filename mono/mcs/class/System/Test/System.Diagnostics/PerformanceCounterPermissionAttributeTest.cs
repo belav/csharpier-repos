@@ -29,12 +29,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.Diagnostics;
-using System.Security;
-using System.Security.Permissions;
-using System.Text.RegularExpressions;
+using NUnit.Framework;using System;using System.Diagnostics;using System.Security;using System.Security.Permissions;using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Diagnostics
 {

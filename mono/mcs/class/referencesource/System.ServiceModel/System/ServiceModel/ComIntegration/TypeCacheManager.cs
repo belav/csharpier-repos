@@ -14,6 +14,7 @@ namespace System.ServiceModel.ComIntegration
     using System.Runtime.InteropServices.ComTypes;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
+
     using Microsoft.Win32;
 
     class TypeCacheManager : ITypeCacheManager

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Net.Http;
+
 using Microsoft.Owin;
 using Microsoft.TestCommon;
 

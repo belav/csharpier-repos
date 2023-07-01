@@ -1,3 +1,8 @@
+using System;
+using System.Configuration.Assemblies;
+using System.IO;
+using System.Reflection;
+
 //
 // AssemblyNameTest.cs - NUnit Test Cases for AssemblyName
 //
@@ -9,19 +14,10 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Configuration.Assemblies;
-using System.IO;
-using System.Reflection;
 #if !MOBILE
 using System.Reflection.Emit;
 #endif
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Globalization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security;
-using System.Security.Permissions;
+using System.Runtime.Serialization;using System.Threading;using System.Globalization;using System.Runtime.Serialization.Formatters.Binary;using System.Security;using System.Security.Permissions;
 
 namespace MonoTests.System.Reflection
 {

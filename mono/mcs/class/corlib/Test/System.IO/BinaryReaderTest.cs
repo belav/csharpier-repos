@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Text;
+
 // BinaryReaderTest.cs - NUnit Test Cases for the SystemIO.BinaryReader class
 //
 // Eduardo Garcia Cebollero (kiwnix@yahoo.es)
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
 
 namespace MonoTests.System.IO
 {

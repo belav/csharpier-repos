@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.EncapsulateField;
 using Microsoft.CodeAnalysis.Host.Mef;

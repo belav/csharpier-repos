@@ -11,6 +11,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.Debugger.Clr;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
 

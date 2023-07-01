@@ -1,3 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using refl = System.Reflection;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 //
 // Tests for System.Web.UI.CssStyleCollection.cs
 //
@@ -28,17 +40,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Drawing;
-using System.IO;
-using System.Globalization;
-using refl = System.Reflection;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections.Specialized;
-using System.Text;
 
 namespace MonoTests.System.Web.UI
 {

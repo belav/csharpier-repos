@@ -13,8 +13,9 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Roslyn.Utilities;
+
 using static Microsoft.CodeAnalysis.CommandLine.NativeMethods;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CommandLine
 {

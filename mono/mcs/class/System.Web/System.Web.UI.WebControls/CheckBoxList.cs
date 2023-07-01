@@ -1,3 +1,5 @@
+using System.Collections.Specialized;
+using System.ComponentModel;
 //
 // System.Web.UI.WebControls.CheckBoxList.cs
 //
@@ -27,8 +29,6 @@
 //
 
 using System.Globalization;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Security.Permissions;
 using System.Web.Util;
 

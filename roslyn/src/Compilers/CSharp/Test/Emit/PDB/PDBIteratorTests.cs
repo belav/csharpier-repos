@@ -7,6 +7,7 @@
 using System.Globalization;
 using System.IO;
 using System.Reflection.Metadata;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Test.Utilities;

@@ -9,11 +9,12 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using Contract = System.Diagnostics.Contracts.Contract;
 using System.Linq;
 using System.Text;
+
 using Microsoft.CodeAnalysis;
 using Roslyn.Utilities;
-using Contract = System.Diagnostics.Contracts.Contract;
 
 namespace Roslyn.Collections.Immutable
 {

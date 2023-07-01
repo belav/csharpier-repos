@@ -7,11 +7,10 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 #if BUILD_GENERATOR
-using System.IO;
-using System.Xml;
+using System.IO;using System.Xml;
 #endif
 
 namespace I18N.CJK

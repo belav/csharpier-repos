@@ -8,10 +8,10 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
 
     public class XmlNamespaceManager : IXmlNamespaceResolver, IEnumerable
     {

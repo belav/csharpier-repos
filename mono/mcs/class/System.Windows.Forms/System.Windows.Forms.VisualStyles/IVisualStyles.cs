@@ -1,3 +1,4 @@
+using System.Drawing;
 //
 // IVisualStyles.cs: An implementation of VisualStyleRenderer and
 // VisualStyleInformation.
@@ -28,7 +29,6 @@
 //
 
 using HRESULT = System.Int32;
-using System.Drawing;
 
 namespace System.Windows.Forms.VisualStyles
 {

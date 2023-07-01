@@ -39,11 +39,7 @@
 // Defining this writes the output to console.log
 //#define DEBUG
 
-using System.Collections;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Runtime.InteropServices;
+using System.Collections;using System.IO;using System.Text;using System.Threading;using System.Runtime.InteropServices;
 
 namespace System
 {

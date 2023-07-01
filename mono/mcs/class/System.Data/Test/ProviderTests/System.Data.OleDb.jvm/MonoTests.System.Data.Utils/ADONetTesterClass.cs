@@ -27,12 +27,13 @@
 //
 
 using System;
+using Sys = System;
+using System.Collections;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
-using System.Collections;
+
 using MonoTests.System.Data.Utils.Data;
-using Sys = System;
 
 namespace MonoTests.System.Data.Utils
 {

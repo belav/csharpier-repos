@@ -7,13 +7,7 @@
 // We only include this file in the command line version for now which is the netcoreapp target
 #if NETCOREAPP
 
-using System;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using CSharpSyntaxGenerator.Grammar;
+using System;using System.IO;using System.Reflection;using System.Text;using System.Xml;using System.Xml.Serialization;using CSharpSyntaxGenerator.Grammar;
 
 namespace CSharpSyntaxGenerator
 {

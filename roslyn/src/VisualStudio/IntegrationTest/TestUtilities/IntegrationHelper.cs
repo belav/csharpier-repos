@@ -5,12 +5,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Process = System.Diagnostics.Process;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+
 using EnvDTE;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Test.Utilities;
@@ -18,7 +20,6 @@ using Microsoft.VisualStudio.IntegrationTest.Utilities.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.Win32;
 using Roslyn.Utilities;
-using Process = System.Diagnostics.Process;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {

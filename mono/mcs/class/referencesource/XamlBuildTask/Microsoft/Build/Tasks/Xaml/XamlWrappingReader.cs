@@ -9,6 +9,7 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Linq;
     using System.Text;
     using System.Xaml;
+
     using XamlBuildTask;
 
     internal class XamlWrappingReader : XamlReader, IXamlLineInfo

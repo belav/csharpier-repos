@@ -7,18 +7,18 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
-    using System.Text;
-    using System.Web.Util;
-    using System.Web.UI;
-    using System.Web.Compilation;
-    using System.Threading;
-    using System.Web.Configuration;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.UI;
+    using System.Web.Util;
+    using System.Xml;
 
     public sealed class NamespaceInfo : ConfigurationElement
     {

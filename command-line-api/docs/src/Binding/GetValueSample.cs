@@ -4,6 +4,7 @@
 using System;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+
 using static Binding.Formatter;
 
 namespace Binding

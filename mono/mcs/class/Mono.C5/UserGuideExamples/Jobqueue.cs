@@ -25,8 +25,9 @@
 //   csc /r:C5.dll Anagrams.cs
 
 using System;
-using C5;
 using SCG = System.Collections.Generic;
+
+using C5;
 
 class MyJobQueueTest
 {

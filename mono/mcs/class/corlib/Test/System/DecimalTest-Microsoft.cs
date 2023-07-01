@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Threading;
+
 // DecimalTest-Microsoft.cs - NUnit Test Cases for System.Decimal, ported
 // from corefx src/System.Runtime/tests/System/Decimal.cs to NUnit
 //
@@ -7,11 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Collections.Generic;
 
 #pragma warning disable CS1718
 

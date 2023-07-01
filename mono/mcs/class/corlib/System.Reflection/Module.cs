@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 //
 // System.Reflection/Module.cs
 //
@@ -28,12 +31,9 @@
 //
 
 using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
-using System.Collections.Generic;
 
 namespace System.Reflection
 {

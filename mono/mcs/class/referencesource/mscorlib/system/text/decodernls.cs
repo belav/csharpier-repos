@@ -5,11 +5,11 @@
 // ==--==
 namespace System.Text
 {
+    using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Text;
-    using System;
-    using System.Diagnostics.Contracts;
 
     // A Decoder is used to decode a sequence of blocks of bytes into a
     // sequence of blocks of characters. Following instantiation of a decoder,

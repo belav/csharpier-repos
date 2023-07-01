@@ -3,17 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using BYTE = System.Byte;
+using WCHAR = System.Char;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.CodeAnalysis.Text;
-using System.Diagnostics;
-using BYTE = System.Byte;
-using DWORD = System.UInt32;
-using WCHAR = System.Char;
-using WORD = System.UInt16;
 using System.Reflection.PortableExecutable;
+using System.Text;
+using WORD = System.UInt16;
+using DWORD = System.UInt32;
+
+using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

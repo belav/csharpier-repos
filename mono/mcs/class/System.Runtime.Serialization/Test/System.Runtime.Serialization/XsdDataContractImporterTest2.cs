@@ -26,25 +26,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel.Description;
-using System.Web.Services.Discovery;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using Microsoft.CSharp;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
-using QName = System.Xml.XmlQualifiedName;
+using System;using System.CodeDom;using System.CodeDom.Compiler;using System.Collections;using System.Collections.Generic;using System.Collections.ObjectModel;using System.IO;using System.Linq;using System.Runtime.Serialization;using System.ServiceModel.Description;using System.Web.Services.Discovery;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using Microsoft.CSharp;using NUnit.Framework;using NUnit.Framework.Constraints;using QName = System.Xml.XmlQualifiedName;
 
 namespace MonoTests.System.Runtime.Serialization
 {

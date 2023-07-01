@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.UnusedReferences;
 using Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets;

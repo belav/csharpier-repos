@@ -7,8 +7,9 @@
 //
 
 using System;
-using System.Numerics;
 using System.Globalization;
+using System.Numerics;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Numerics

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Features.Intents;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Text;

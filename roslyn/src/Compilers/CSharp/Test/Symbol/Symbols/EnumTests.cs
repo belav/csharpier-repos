@@ -7,6 +7,7 @@
 using System;
 using System.Linq;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;

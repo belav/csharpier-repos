@@ -17,8 +17,8 @@
 namespace System.Reflection
 {
     using System;
-    using System.Runtime.Serialization;
     using ApplicationException = System.ApplicationException;
+    using System.Runtime.Serialization;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

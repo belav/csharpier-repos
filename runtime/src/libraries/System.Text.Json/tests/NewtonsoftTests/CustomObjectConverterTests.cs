@@ -25,8 +25,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Collections.Generic;
-using Xunit;
 using System.Text.Json.Serialization;
+
+using Xunit;
 
 namespace System.Text.Json.Tests
 {

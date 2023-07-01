@@ -1,3 +1,9 @@
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.EntitySql;
+using System.Data.Common.Utils;
 //---------------------------------------------------------------------
 // <copyright file="ExternalCalls.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,14 +15,8 @@
 
 
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Data.Common;
-using System.Data.Common.CommandTrees;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
-using System.Data.Common.EntitySql;
-using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace System.Data.Mapping.ViewGeneration.Utils

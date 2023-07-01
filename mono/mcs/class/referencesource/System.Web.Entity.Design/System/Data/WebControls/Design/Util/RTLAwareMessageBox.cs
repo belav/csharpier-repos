@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Windows.Forms;
 using System.Design;
+using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
 {

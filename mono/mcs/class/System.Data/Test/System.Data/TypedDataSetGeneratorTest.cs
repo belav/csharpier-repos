@@ -30,14 +30,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Data;
-using NUnit.Framework;
-using Microsoft.CSharp;
-
-using MonoTests.Helpers;
+using System;using System.CodeDom;using System.CodeDom.Compiler;using System.Data;using NUnit.Framework;using Microsoft.CSharp;using MonoTests.Helpers;
 
 namespace MonoTests.System.Data
 {

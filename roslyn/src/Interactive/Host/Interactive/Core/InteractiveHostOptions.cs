@@ -4,6 +4,7 @@
 
 using System.Globalization;
 using System.IO;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Interactive

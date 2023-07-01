@@ -1,3 +1,10 @@
+using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Globalization;
+using System.Security.Permissions;
+using System.Text;
+using System.Text.RegularExpressions;
 //------------------------------------------------------------------------------
 // <copyright file="BrowserCapabilitiesFactoryBase.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -14,13 +21,6 @@
 */
 
 using System.Web.UI;
-using System.Collections;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Globalization;
-using System.Security.Permissions;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Web.Util;
 
 namespace System.Web.Configuration

@@ -8,8 +8,8 @@ namespace System.Web.Services.Discovery
 {
     using System;
     using System.Collections;
-    using System.Security.Permissions;
     using System.Globalization;
+    using System.Security.Permissions;
 
     /// <include file='doc\DiscoveryExceptionDictionary.uex' path='docs/doc[@for="DiscoveryExceptionDictionary"]/*' />
     /// <devdoc>

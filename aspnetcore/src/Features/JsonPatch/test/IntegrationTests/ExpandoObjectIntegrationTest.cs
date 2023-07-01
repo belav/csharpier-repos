@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 using Xunit;
 

@@ -7,18 +7,18 @@ namespace System.Text
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime;
-    using System.Runtime.Remoting;
-    using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Threading;
-    using System.Text;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 #if FEATURE_CODEPAGES_FILE
     using Win32Native = Microsoft.Win32.Win32Native;
 #endif

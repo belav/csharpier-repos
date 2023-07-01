@@ -8,10 +8,10 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-using System.Security.Permissions;
+using System.Runtime.InteropServices;
 using System.Security;
+using System.Security.Permissions;
 
 #pragma warning disable 618
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Execution = true)]

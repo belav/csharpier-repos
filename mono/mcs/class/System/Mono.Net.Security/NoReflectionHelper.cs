@@ -30,15 +30,12 @@ extern alias MonoSecurity;
 using MSI = MonoSecurity::Mono.Security.Interface;
 using MX = MonoSecurity::Mono.Security.X509;
 #else
-using MSI = Mono.Security.Interface;
-using MX = Mono.Security.X509;
+using MSI = Mono.Security.Interface;using MX = Mono.Security.X509;
 #endif
 using System.Security.Cryptography.X509Certificates;
 #endif
 
-using System;
-using System.Net;
-using System.Net.Security;
+using System;using System.Net;using System.Net.Security;
 
 namespace Mono.Net.Security
 {

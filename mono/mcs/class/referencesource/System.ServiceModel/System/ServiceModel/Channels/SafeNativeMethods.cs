@@ -5,9 +5,9 @@ namespace System.ServiceModel.Channels
 {
     using System.Runtime;
     using System.Runtime.InteropServices;
+    using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
     using System.Runtime.Versioning;
     using System.Security;
-    using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     [SuppressUnmanagedCodeSecurity]
     internal static class SafeNativeMethods

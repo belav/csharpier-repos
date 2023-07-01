@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Navigation;
 using Microsoft.CodeAnalysis.PatternMatching;
 using Microsoft.CodeAnalysis.Shared.TestHooks;

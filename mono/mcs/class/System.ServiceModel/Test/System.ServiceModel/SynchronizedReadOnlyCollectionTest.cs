@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ServiceModel;
-using NUnit.Framework;
 
 using ObjectList = System.Collections.Generic.SynchronizedReadOnlyCollection<object>;
+using System.ServiceModel;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {

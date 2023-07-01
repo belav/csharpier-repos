@@ -1,7 +1,8 @@
 using System;
-using Microsoft.CSharp.RuntimeBinder;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
+
+using Microsoft.CSharp.RuntimeBinder;
 
 public class C { }
 

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Generator.Parameters;
+
 using Microsoft.CodeAnalysis;
 
 namespace System.CommandLine.Generator

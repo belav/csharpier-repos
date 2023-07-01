@@ -5,8 +5,8 @@
 // Repro test from MStanton
 
 using System;
-using System.Threading;
 using System.Security;
+using System.Threading;
 
 internal class Mainy
 {

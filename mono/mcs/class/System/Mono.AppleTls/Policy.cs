@@ -29,8 +29,9 @@
 //
 using System;
 using System.Runtime.InteropServices;
-using ObjCRuntimeInternal;
+
 using Mono.Net;
+using ObjCRuntimeInternal;
 
 namespace Mono.AppleTls
 {

@@ -1,4 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿using System;
+using System.Collections;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,15 +15,7 @@
 
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xunit;
-using System.Collections;
-using System.Collections.Immutable;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {

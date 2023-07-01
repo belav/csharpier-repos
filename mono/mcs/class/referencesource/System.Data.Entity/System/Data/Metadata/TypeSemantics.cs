@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Diagnostics;
 using objectModel = System.Collections.ObjectModel;
+using System.Data.Common;
+using System.Diagnostics;
+using System.Linq;
 
 namespace System.Data.Metadata.Edm
 {

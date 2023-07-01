@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem

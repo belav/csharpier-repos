@@ -1,3 +1,9 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web.UI.WebControls;
+
+using MonoTests.System.Web.UI.WebControls;
 //
 // BaseCompareValidatorCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.BaseCompareValidator
@@ -28,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web.UI.WebControls;
-
-using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls
 {

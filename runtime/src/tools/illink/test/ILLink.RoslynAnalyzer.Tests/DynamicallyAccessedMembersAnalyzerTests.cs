@@ -2,13 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading.Tasks;
-using ILLink.Shared;
-using Microsoft.CodeAnalysis.Testing;
-using Xunit;
 using VerifyCS = ILLink.RoslynAnalyzer.Tests.CSharpCodeFixVerifier<
     ILLink.RoslynAnalyzer.DynamicallyAccessedMembersAnalyzer,
     ILLink.CodeFix.DynamicallyAccessedMembersCodeFixProvider
 >;
+using ILLink.Shared;
+using Microsoft.CodeAnalysis.Testing;
+using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {

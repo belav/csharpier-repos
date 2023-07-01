@@ -6,11 +6,11 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Xml;
 
-using Internal.Text;
-
 using ILCompiler.DependencyAnalysis;
 
 using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
+
+using Internal.Text;
 
 namespace ILCompiler
 {

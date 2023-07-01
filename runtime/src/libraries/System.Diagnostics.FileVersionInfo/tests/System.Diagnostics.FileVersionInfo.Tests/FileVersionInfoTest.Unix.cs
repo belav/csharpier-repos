@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Diagnostics.Tests

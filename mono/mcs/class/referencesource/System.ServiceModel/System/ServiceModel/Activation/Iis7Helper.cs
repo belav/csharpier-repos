@@ -7,6 +7,7 @@ namespace System.ServiceModel.Activation
     using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
+
     using Microsoft.Win32;
 
     static class Iis7Helper

@@ -11,12 +11,12 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Runtime.Diagnostics;
     using System.Runtime.DurableInstancing;
     using System.ServiceModel;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
-    using System.Xml.Linq;
     using System.Text;
-    using SR2 = System.ServiceModel.Activities.SR;
+    using System.Xml.Linq;
 
     class CorrelationKeyCalculator
     {

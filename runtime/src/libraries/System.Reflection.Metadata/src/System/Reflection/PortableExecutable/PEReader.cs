@@ -4,11 +4,11 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
+using ImmutableArrayExtensions = System.Linq.ImmutableArrayExtensions;
 using System.Reflection.Internal;
 using System.Reflection.Metadata;
 using System.Runtime.ExceptionServices;
 using System.Threading;
-using ImmutableArrayExtensions = System.Linq.ImmutableArrayExtensions;
 
 namespace System.Reflection.PortableExecutable
 {

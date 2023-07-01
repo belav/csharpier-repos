@@ -2,13 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
+using Debug = System.Diagnostics.Debug;
 using System.Runtime.InteropServices;
+
+using InteropDataConstants = Internal.Runtime.InteropDataConstants;
 
 using Internal.Text;
 using Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
-using InteropDataConstants = Internal.Runtime.InteropDataConstants;
 
 namespace ILCompiler.DependencyAnalysis
 {

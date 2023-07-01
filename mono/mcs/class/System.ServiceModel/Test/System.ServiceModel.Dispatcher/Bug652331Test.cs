@@ -25,18 +25,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Threading;
-using NUnit.Framework;
-
-using WebServiceMoonlightTest.ServiceReference1;
-
-using MonoTests.Helpers;
+using System;using System.Collections.Generic;using System.Linq;using System.Runtime.Serialization;using System.ServiceModel;using System.ServiceModel.Description;using System.Threading;using NUnit.Framework;using WebServiceMoonlightTest.ServiceReference1;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {

@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
 //
 // XmlAttributes.cs:
 //
@@ -29,9 +32,6 @@
 //
 
 using System.Reflection;
-using System;
-using System.ComponentModel;
-using System.Collections;
 
 namespace System.Xml.Serialization
 {

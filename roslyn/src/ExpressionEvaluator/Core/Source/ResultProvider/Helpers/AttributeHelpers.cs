@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
 using Microsoft.VisualStudio.Debugger.Metadata;
 

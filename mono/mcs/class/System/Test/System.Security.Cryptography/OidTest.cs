@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // OidTest.cs - NUnit tests for Oid
 //
@@ -29,9 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

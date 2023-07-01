@@ -29,10 +29,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Configuration;
 using System.Collections;
-using Xunit;
+using System.Configuration;
 using SysConfig = System.Configuration.Configuration;
+
+using Xunit;
 
 namespace MonoTests.System.Configuration
 {

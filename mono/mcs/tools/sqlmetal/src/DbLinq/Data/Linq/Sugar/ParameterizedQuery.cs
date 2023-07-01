@@ -1,4 +1,9 @@
-﻿#region MIT license
+﻿using System.Collections.Generic;
+using DbLinq.Data.Linq.Database;
+
+using DbLinq.Data.Linq.Sql;
+using DbLinq.Data.Linq.Sugar.Expressions;
+#region MIT license
 //
 // MIT license
 //
@@ -25,12 +30,6 @@
 #endregion
 
 using DbLinq.Util;
-using DbLinq.Data.Linq.Database;
-using System.Collections.Generic;
-
-using DbLinq.Data.Linq.Sql;
-using DbLinq.Data.Linq.Sugar.Expressions;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

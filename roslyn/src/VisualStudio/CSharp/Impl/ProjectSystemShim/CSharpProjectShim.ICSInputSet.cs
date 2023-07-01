@@ -6,6 +6,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop;
 using Roslyn.Utilities;
 

@@ -10,9 +10,9 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using CategoryAttribute = System.ComponentModel.CategoryAttribute;
 using System.Globalization;
 using System.Threading;
-using CategoryAttribute = System.ComponentModel.CategoryAttribute;
 
 using NUnit.Framework;
 

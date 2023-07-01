@@ -2,14 +2,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
+using static System.CommandLine.Rendering.Ansi;
 using System.CommandLine.Rendering.Views;
 using System.Globalization;
 using System.Linq;
+
 using FluentAssertions;
 using FluentAssertions.Extensions;
 using Xunit;
 using Xunit.Abstractions;
-using static System.CommandLine.Rendering.Ansi;
 
 namespace System.CommandLine.Rendering.Tests
 {

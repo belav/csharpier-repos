@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 
-using Internal.Text;
-using Internal.TypeSystem;
 using Internal.NativeFormat;
 
 using VirtualInvokeTableEntry = Internal.Runtime.VirtualInvokeTableEntry;
+
+using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

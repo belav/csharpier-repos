@@ -15,9 +15,9 @@ namespace System.ServiceModel.Description
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
-    using WsdlNS = System.Web.Services.Description;
 
     // the description/metadata "mix-in"
     public class ServiceMetadataExtension : IExtension<ServiceHostBase>

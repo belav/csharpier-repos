@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Discovery
 {
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     public class FindRequestContext

@@ -9,16 +9,16 @@
 
 using System;
 using System.CodeDom;
-using System.Diagnostics;
-using SOM = System.Data.EntityModel.SchemaObjectModel;
 using System.Collections.Generic;
-using System.Data.Entity.Design;
-using System.Data.Objects;
-using System.Data.Entity.Design.Common;
-using System.Data.Metadata.Edm;
-using System.Data.Entity.Design.SsdlGenerator;
-using System.Linq;
 using System.Data.Common.Utils;
+using System.Data.Entity.Design;
+using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
+using SOM = System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Diagnostics;
+using System.Linq;
 
 namespace System.Data.EntityModel.Emitters
 {

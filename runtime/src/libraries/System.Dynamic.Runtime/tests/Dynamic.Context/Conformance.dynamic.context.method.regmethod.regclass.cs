@@ -1,13 +1,14 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
-using System.Collections.Generic;
-using System.IO;
-using System.Collections;
-using System.Linq;
-using System;
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth
 {
@@ -1767,7 +1768,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass060.regclass060
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in try expression.</Title>
     // <Description>
     // </Description>
@@ -1775,6 +1775,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -1807,7 +1808,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass061.regclass061
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in try expression.</Title>
     // <Description>
     // </Description>
@@ -1815,6 +1815,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -1852,7 +1853,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass062.regclass062
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in while body.</Title>
     // <Description>
     // </Description>
@@ -1860,6 +1860,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2087,7 +2088,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass067.regclass067
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in foreach body.</Title>
     // <Description>
     // </Description>
@@ -2095,6 +2095,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System.Collections.Generic;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2160,7 +2161,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass069.regclass069
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in indexer-set.</Title>
     // <Description>
     // </Description>
@@ -2168,6 +2168,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System.Collections.Generic;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2348,7 +2349,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass074.regclass074
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in iterator and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2357,6 +2357,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     // <Code>
     using System;
     using System.Collections;
+
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2402,7 +2404,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass076.regclass076
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in for and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2410,6 +2411,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2450,7 +2452,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass077.regclass077
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in constructor and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2458,6 +2459,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class A
     {
@@ -2500,7 +2502,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass078.regclass078
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in using block and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2509,6 +2510,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     // <Code>
     using System;
     using System.IO;
+
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2542,7 +2545,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass079.regclass079
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in lock block and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2550,6 +2552,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2586,7 +2589,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass080.regclass080
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in do/while block and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2594,6 +2596,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2632,7 +2635,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass081.regclass081
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in switch section and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2640,6 +2642,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {
@@ -2679,7 +2682,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass082.regclass082
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
     // <Title> Tests regular class regular method used in switch section and throw exception.</Title>
     // <Description>
     // </Description>
@@ -2687,6 +2689,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
 
     public class Test
     {

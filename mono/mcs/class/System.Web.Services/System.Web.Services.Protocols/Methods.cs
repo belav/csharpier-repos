@@ -1,3 +1,8 @@
+using System.Collections;
+
+using System.Reflection;
+using System.Web.Services;
+using System.Web.Services.Description;
 //
 // Methods.cs: Information about a method and its mapping to a SOAP web service.
 //
@@ -30,13 +35,8 @@
 //
 
 using HeaderInfo = System.Web.Services.Protocols.SoapHeaderMapping;
-
-using System.Reflection;
-using System.Collections;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Web.Services;
-using System.Web.Services.Description;
 
 namespace System.Web.Services.Protocols
 {

@@ -3,11 +3,12 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 using System.Linq;
 using System.Web.Security;
+
 using Microsoft.TestCommon;
 using Moq;
-using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace System.Web.Mvc.Test
 {

@@ -1,3 +1,13 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Xml;
+using System.Xml.XPath;
+using System.Xml.Xsl;
+
 //
 // Tests for System.Web.UI.WebControls.Xml.cs
 //
@@ -29,15 +39,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Xml;
-using System.Xml.Xsl;
-using System.Xml.XPath;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

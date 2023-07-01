@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+
 using BundleTests.Helpers;
 using Microsoft.DotNet.Cli.Build;
 using Microsoft.DotNet.Cli.Build.Framework;

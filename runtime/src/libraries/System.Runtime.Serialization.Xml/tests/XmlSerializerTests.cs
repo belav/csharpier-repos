@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+
 using Xunit;
 
 public static class XmlSerializerTests

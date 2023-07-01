@@ -6,6 +6,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Commanding

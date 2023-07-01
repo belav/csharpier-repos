@@ -33,9 +33,9 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
-using NUnit.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing
 {

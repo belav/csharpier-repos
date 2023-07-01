@@ -28,9 +28,9 @@
 
 using System;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Security;
 using System.Security.Permissions;
-using System.IO.IsolatedStorage;
 
 using NUnit.Framework;
 

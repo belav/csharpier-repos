@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Specialized;
 //
 // System.Web.Security.RoleManagerModule
 //
@@ -29,8 +31,6 @@
 //
 
 using System.ComponentModel;
-using System.Collections;
-using System.Collections.Specialized;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;

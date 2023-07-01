@@ -19,8 +19,7 @@ using Microsoft.Scripting.Ast.Compiler;
 using System.Linq.Expressions.Compiler;
 #endif
 
-using System.ComponentModel;
-using System.Diagnostics;
+using System.ComponentModel;using System.Diagnostics;
 
 namespace System.Runtime.CompilerServices
 {

@@ -2,13 +2,13 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Design;
-    using System.ComponentModel;
-    using System.Runtime.Serialization;
-    using System.ComponentModel.Design;
-    using System.Security.Permissions;
     using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     [Serializable]
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]

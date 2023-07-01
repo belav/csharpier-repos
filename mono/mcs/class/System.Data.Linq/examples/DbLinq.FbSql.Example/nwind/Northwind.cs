@@ -13,13 +13,14 @@
 #endregion
 
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.Reflection;
+
 using DbLinq.Data.Linq;
 using DbLinq.Vendor;
-using System.ComponentModel;
 
 namespace nwind
 {

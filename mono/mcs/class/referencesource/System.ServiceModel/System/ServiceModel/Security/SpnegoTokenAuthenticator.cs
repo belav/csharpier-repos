@@ -9,6 +9,9 @@ namespace System.ServiceModel.Security
     using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+
+    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
+    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using System.Net;
     using System.Runtime;
     using System.Security.Authentication.ExtendedProtection;
@@ -16,9 +19,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-
-    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
-    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
     sealed class SpnegoTokenAuthenticator : SspiNegotiationTokenAuthenticator
     {

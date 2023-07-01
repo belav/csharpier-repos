@@ -6,6 +6,7 @@
 
 using System;
 using System.Globalization;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;

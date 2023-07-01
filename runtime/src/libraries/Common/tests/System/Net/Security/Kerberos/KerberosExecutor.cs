@@ -1,16 +1,17 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Microsoft.DotNet.RemoteExecutor;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Kerberos.NET.Configuration;
 using Kerberos.NET.Crypto;
-using Kerberos.NET.Server;
 using Kerberos.NET.Logging;
+using Kerberos.NET.Server;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using Microsoft.DotNet.RemoteExecutor;
 using Xunit.Abstractions;
 
 namespace System.Net.Security.Kerberos;

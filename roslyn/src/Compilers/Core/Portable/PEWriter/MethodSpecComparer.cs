@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.Cci

@@ -30,14 +30,7 @@
 
 #if !NO_ODBC
 
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Data.Odbc;
-using System.Globalization;
-using System.Text;
-using System.Threading;
-using NUnit.Framework;
+using System;using System.Data;using System.Data.Common;using System.Data.Odbc;using System.Globalization;using System.Text;using System.Threading;using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.Odbc
 {

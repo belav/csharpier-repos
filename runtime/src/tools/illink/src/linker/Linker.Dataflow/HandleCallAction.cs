@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+
 using ILLink.Shared.TypeSystemProxy;
 using Mono.Cecil;
 using Mono.Linker;

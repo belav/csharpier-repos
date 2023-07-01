@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Globalization;
 //
 // System.Xml.Serialization.SerializationCodeGenerator.cs:
 //
@@ -32,10 +34,8 @@
 
 using System.IO;
 using System.Reflection;
-using System.Xml.Serialization;
-using System.Collections;
-using System.Globalization;
 using System.Text;
+using System.Xml.Serialization;
 
 using HookDir = System.Xml.Serialization.XmlMappingAccess;
 

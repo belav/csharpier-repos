@@ -7,16 +7,16 @@
 namespace System.Net.PeerToPeer.Collaboration
 {
     using System;
-    using System.Net.Sockets;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Net.Mail;
-    using System.Security.Cryptography.X509Certificates;
+    using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Net.Mail;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This is the event args class we give back when

@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.ExpressionEvaluator;
@@ -21,10 +22,10 @@ using Microsoft.VisualStudio.Debugger.CallStack;
 using Microsoft.VisualStudio.Debugger.Clr;
 using Microsoft.VisualStudio.Debugger.ComponentInterfaces;
 using Microsoft.VisualStudio.Debugger.Metadata;
-using Microsoft.VisualStudio.Debugger.Symbols;
-using Roslyn.Utilities;
 using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 using TypeCode = Microsoft.VisualStudio.Debugger.Metadata.TypeCode;
+using Microsoft.VisualStudio.Debugger.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 {

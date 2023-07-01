@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+using Mono.Security.Cryptography;
+using Mono.Security.X509;
 //
 // PKCS12Test.cs - NUnit tests for PKCS12
 //
@@ -9,15 +17,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-
-using Mono.Security.Cryptography;
-using Mono.Security.X509;
 
 namespace MonoTests.Mono.Security.X509
 {

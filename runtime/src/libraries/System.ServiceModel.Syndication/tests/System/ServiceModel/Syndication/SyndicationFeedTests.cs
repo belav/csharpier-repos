@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+
 using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests

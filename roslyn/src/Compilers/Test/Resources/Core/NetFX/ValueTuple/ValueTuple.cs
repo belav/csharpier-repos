@@ -42,9 +42,9 @@ namespace System
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     using HashHelpers = System.Numerics.Hashing.HashHelpers;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Helper so we can call some tuple methods recursively without knowing the underlying types.

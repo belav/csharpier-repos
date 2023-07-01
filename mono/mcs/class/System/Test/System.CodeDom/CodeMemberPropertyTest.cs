@@ -1,3 +1,4 @@
+using System.CodeDom;
 //
 // CodeMemberFieldTest.cs - NUnit Test Cases for System.CodeDom.CodeMemberField
 //
@@ -8,7 +9,6 @@
 //
 
 using NUnit.Framework;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

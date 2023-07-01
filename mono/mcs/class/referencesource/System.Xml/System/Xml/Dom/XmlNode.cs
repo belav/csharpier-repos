@@ -8,14 +8,15 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Text;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
     using System.Xml.Schema;
     using System.Xml.XPath;
+
     using MS.Internal.Xml.XPath;
-    using System.Globalization;
 
     // Represents a single node in the document.
     [DebuggerDisplay("{debuggerDisplayProxy}")]

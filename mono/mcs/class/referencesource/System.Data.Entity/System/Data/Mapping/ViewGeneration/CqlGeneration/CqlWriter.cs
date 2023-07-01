@@ -1,3 +1,7 @@
+using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Utils;
+using System.Data.Metadata.Edm;
+using System.Text;
 //---------------------------------------------------------------------
 // <copyright file="CqlWriter.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,10 +12,6 @@
 //---------------------------------------------------------------------
 
 using System.Text.RegularExpressions;
-using System.Text;
-using System.Data.Common.Utils;
-using System.Data.Mapping.ViewGeneration.Utils;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {

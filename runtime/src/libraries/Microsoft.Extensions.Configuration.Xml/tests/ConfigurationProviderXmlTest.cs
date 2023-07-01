@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Text;
+
 using Microsoft.Extensions.Configuration.Test;
 
 namespace Microsoft.Extensions.Configuration.Xml.Test

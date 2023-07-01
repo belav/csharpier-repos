@@ -3,9 +3,9 @@
 
 using System;
 using Internal.Cryptography;
-using Microsoft.Win32.SafeHandles;
-using ErrorCode = Interop.NCrypt.ErrorCode;
 using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
+using ErrorCode = Interop.NCrypt.ErrorCode;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

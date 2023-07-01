@@ -28,17 +28,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
 
-using DbLinq.Factory;
-using DbLinq.Schema;
-using DbLinq.Schema.Dbml;
-using System.Text.RegularExpressions;
+using DbLinq.Factory;using DbLinq.Schema;using DbLinq.Schema.Dbml;using System.Text.RegularExpressions;
 
 namespace DbLinq.Vendor.Implementation
 {

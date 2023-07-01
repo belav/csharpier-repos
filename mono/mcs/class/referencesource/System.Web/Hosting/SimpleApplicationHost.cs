@@ -17,8 +17,9 @@ namespace System.Web.Hosting
     using System.Web.Configuration;
     using System.Web.UI;
     using System.Web.Util;
-    using Microsoft.Win32;
     using Debug = System.Web.Util.Debug;
+
+    using Microsoft.Win32;
 
     internal class SimpleApplicationHost : MarshalByRefObject, IApplicationHost
     {

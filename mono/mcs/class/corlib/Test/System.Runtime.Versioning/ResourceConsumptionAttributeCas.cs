@@ -34,8 +34,9 @@ using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 
-using NUnit.Framework;
 using MonoTests.System.Runtime.Versioning;
+
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Runtime.Versioning
 {

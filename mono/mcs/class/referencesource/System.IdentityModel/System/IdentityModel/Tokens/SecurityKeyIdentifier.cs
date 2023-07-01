@@ -6,8 +6,8 @@ namespace System.IdentityModel.Tokens
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
 
     public class SecurityKeyIdentifier : IEnumerable<SecurityKeyIdentifierClause>
     {

@@ -8,6 +8,7 @@ using System.Composition.Hosting.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Composition.Lightweight.UnitTests

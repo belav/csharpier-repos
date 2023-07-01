@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Reflection;
+
 //
 // StrongNameKeyPairTest.cs - NUnit Test Cases for StrongNameKeyPair
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
 
 namespace MonoTests.System.Reflection
 {

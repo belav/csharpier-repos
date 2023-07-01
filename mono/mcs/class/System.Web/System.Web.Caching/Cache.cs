@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Permissions;
 //
 // System.Web.Caching.Cache
 //
@@ -29,10 +33,6 @@
 //
 
 using System.Threading;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Permissions;
 using System.Web.Configuration;
 
 namespace System.Web.Caching

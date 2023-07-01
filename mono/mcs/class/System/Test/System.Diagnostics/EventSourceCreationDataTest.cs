@@ -29,10 +29,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Diagnostics;
-
-using NUnit.Framework;
+using System;using System.Diagnostics;using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics
 {

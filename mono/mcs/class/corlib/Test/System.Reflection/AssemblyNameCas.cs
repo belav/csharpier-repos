@@ -1,3 +1,10 @@
+using System;
+using System.Configuration.Assemblies;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // AssemblyNameCas.cs - CAS unit tests for System.Reflection.AssemblyName
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Configuration.Assemblies;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.Reflection
 {

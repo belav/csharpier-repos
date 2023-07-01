@@ -1,3 +1,8 @@
+using System;
+using System.DirectoryServices;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // DirectoryServicesPermissionAttributeTest.cs -
 //	NUnit Test Cases for DirectoryServicesPermissionAttribute
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.DirectoryServices;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.DirectoryServices
 {

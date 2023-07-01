@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;

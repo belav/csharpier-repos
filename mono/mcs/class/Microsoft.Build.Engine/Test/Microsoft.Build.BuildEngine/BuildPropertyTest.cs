@@ -28,12 +28,13 @@
 using System;
 using System.Collections;
 using System.Xml;
+
 using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using NUnit.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.BuildEngine
 {

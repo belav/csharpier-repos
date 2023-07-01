@@ -4,11 +4,12 @@
 
 using System;
 using System.Composition;
+
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Host.Mef;
-using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.CodeStyle;
+using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
+using Microsoft.CodeAnalysis.Host.Mef;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 

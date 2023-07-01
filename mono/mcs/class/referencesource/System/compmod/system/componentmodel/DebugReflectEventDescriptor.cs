@@ -15,14 +15,14 @@
  */
 namespace System.ComponentModel
 {
-    using System.Diagnostics;
-
     using System;
-    using System.Reflection;
     using System.Collections;
-    using Microsoft.Win32;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Reflection;
     using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <internalonly/>
     /// <devdoc>

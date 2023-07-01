@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <copyright file="XslAstAnalyzer.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,8 +8,6 @@
 //------------------------------------------------------------------------------
 
 using System.Globalization;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
@@ -16,8 +16,8 @@ using System.Xml.Xsl.XPath;
 namespace System.Xml.Xsl.Xslt
 {
     using TypeFactory = XmlQueryTypeFactory;
-    using XPathFunctionInfo = XPathBuilder.FunctionInfo<XPathBuilder.FuncId>;
     using XsltFunctionInfo = XPathBuilder.FunctionInfo<QilGenerator.FuncId>;
+    using XPathFunctionInfo = XPathBuilder.FunctionInfo<XPathBuilder.FuncId>;
 
     // ------------------------------- XslAstAnalyzer -------------------------------
 

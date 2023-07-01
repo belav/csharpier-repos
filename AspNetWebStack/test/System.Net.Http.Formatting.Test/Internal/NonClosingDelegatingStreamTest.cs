@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Net.Http.Mocks;
+
 using Microsoft.TestCommon;
 using Moq;
 using Moq.Protected;

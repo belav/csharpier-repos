@@ -6,6 +6,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator

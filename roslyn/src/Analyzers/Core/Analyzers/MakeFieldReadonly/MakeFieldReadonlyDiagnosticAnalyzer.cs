@@ -7,6 +7,7 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics;

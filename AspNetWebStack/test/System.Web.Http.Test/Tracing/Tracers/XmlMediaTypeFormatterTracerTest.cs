@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http.Services;
+
 using Microsoft.TestCommon;
 using Moq;
 using Moq.Protected;

@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Policy;
+using System.Text;
+
 //
 // ApplicationDirectoryTest.cs - NUnit Test Cases for ApplicationDirectory
 //
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Policy;
-using System.Text;
 
 namespace MonoTests.System.Security.Policy
 {

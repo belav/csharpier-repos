@@ -7,12 +7,13 @@
 using System.Collections.Immutable;
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static Microsoft.CodeAnalysis.MakeMethodAsynchronous.AbstractMakeMethodAsynchronousCodeFixProvider;
 using Microsoft.CodeAnalysis.MakeMethodSynchronous;
 using Microsoft.CodeAnalysis.Shared.Extensions;
-using static Microsoft.CodeAnalysis.MakeMethodAsynchronous.AbstractMakeMethodAsynchronousCodeFixProvider;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
 {

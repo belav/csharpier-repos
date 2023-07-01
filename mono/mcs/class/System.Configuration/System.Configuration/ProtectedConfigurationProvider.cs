@@ -1,3 +1,4 @@
+using System.Configuration.Provider;
 //
 // System.Configuration.ProtectedConfigurationProvider.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Xml;
-using System.Configuration.Provider;
 
 namespace System.Configuration
 {

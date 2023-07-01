@@ -1,15 +1,15 @@
 using System;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.WebSockets;
 using System.Reflection;
 using System.Text;
-
-using NUnit.Framework;
+using System.Threading;
+using System.Threading.Tasks;
 
 using MonoTests.Helpers;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.WebSockets
 {

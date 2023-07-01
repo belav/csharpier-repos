@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="SchemaConstraints.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,7 +10,6 @@
 
 
 using System.Data.Common.Utils;
-using System.Collections.Generic;
 using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Validation

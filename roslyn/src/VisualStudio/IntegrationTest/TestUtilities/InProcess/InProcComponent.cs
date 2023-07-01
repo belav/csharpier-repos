@@ -4,8 +4,10 @@
 
 using System;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
 using System.Windows;
 using System.Windows.Threading;
+
 using EnvDTE;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.Internal.VisualStudio.Shell.Interop;
@@ -14,7 +16,6 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
 using Roslyn.Hosting.Diagnostics.Waiters;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {

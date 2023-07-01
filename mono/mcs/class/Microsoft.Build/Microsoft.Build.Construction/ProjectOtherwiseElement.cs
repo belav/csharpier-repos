@@ -1,4 +1,5 @@
-﻿//
+﻿using System;
+//
 // ProjectOtherwiseElement.cs
 //
 // Author:
@@ -27,9 +28,9 @@
 //
 
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Xml;
+
 using Microsoft.Build.Exceptions;
 using Microsoft.Build.Internal;
 

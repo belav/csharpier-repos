@@ -7,9 +7,9 @@
 namespace System.Net.Configuration
 {
     using System.Configuration;
-    using System.Threading;
     using System.Net.Security;
     using System.Net.Sockets;
+    using System.Threading;
 
     public sealed class SettingsSection : ConfigurationSection
     {

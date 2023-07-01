@@ -24,10 +24,11 @@
 //
 
 using System;
-using System.Text;
 using System.Collections;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
+
 using Mono.WebBrowser;
 
 namespace Mono.Mozilla

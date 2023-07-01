@@ -6,9 +6,9 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.ServiceModel;
-    using System.IdentityModel.Selectors;
     using System.ServiceModel.Security.Tokens;
 
     internal class InfoCardChannelParameter

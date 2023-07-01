@@ -8,6 +8,7 @@ using System;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.Completion.Providers;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
@@ -19,8 +20,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
 {
-    using static FeaturesResources;
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
+    using static FeaturesResources;
 
     internal sealed partial class RegexEmbeddedCompletionProvider
         : EmbeddedLanguageCompletionProvider

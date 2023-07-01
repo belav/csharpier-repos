@@ -1,3 +1,7 @@
+using System;
+using System.Drawing;
+using System.Drawing.Design;
+
 //
 // UITypeEditorTest.cs - Unit tests for System.Drawing.Design.UITypeEditor
 //
@@ -27,10 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Drawing;
-using System.Drawing.Design;
 
 namespace MonoTests.System.Drawing.Design
 {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="MultipartIdentifier.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,7 +10,6 @@
 
 using System.Diagnostics;
 using System.Text;
-using System.Collections.Generic;
 
 namespace System.Data.Common.Internal
 {

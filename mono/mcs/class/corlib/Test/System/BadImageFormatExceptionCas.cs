@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // BadImageFormatExceptionCas.cs -
 //	CAS unit tests for System.BadImageFormatException
@@ -28,10 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

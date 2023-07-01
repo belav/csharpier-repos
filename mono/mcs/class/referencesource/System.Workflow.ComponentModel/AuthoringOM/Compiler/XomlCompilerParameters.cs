@@ -3,23 +3,24 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System.CodeDom;
-    using System.Reflection;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Runtime.Serialization;
     using System.Diagnostics;
-    using System.Text.RegularExpressions;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
     using System.Security;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
     using Microsoft.Build.Utilities;
-    using System.IO;
-    using System.Runtime.InteropServices;
 
     #endregion
 

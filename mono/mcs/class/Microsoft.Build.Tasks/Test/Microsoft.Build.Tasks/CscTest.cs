@@ -26,11 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Reflection;
 using System.Collections;
+using System.Reflection;
+
 using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 using Microsoft.Build.Tasks;
+using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks

@@ -1,3 +1,6 @@
+using System;
+using System.Web.Services;
+
 //
 // MonoTests.System.Web.Services.WebServiceAttributeTest.cs
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Web.Services;
 
 namespace MonoTests.System.Web.Services
 {

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Composition;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Internal.Log;
 

@@ -36,10 +36,11 @@ using System.Reflection;
 using System.Security;
 using System.Security.Policy;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Query;
+using System.Xml.Schema;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+
 using Mono.Xml;
 
 namespace Mono.Xml.XPath2

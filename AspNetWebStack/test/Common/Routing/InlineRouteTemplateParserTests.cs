@@ -5,8 +5,7 @@ using System.Linq;
 #if ASPNETWEBAPI
 using System.Web.Http.Routing.Constraints;
 #else
-using System.Web.Mvc.Routing.Constraints;
-using System.Web.Routing;
+using System.Web.Mvc.Routing.Constraints;using System.Web.Routing;
 #endif
 using Microsoft.TestCommon;
 

@@ -29,10 +29,11 @@
 
 
 using System;
-using System.Configuration;
 using System.Collections;
-using NUnit.Framework;
+using System.Configuration;
 using SysConfig = System.Configuration.Configuration;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {

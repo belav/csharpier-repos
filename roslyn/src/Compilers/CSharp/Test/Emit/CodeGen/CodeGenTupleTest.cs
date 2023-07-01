@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting;
@@ -19,10 +20,10 @@ using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
-using Roslyn.Utilities;
-using Xunit;
 using static Roslyn.Test.Utilities.TestMetadata;
+using Roslyn.Utilities;
 using static TestResources.NetFX.ValueTuple;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {

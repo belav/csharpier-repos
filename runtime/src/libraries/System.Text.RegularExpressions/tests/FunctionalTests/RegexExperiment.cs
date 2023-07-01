@@ -3,12 +3,13 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
+
 using Xunit;
 using Xunit.Abstractions;
-using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions.Tests
 {

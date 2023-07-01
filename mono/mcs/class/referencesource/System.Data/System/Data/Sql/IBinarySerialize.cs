@@ -14,14 +14,14 @@
 
 using System;
 using System.Collections;
-using System.Text;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Reflection.Emit;
-using System.Data.SqlTypes;
+using System.Text;
 
 namespace Microsoft.SqlServer.Server
 {

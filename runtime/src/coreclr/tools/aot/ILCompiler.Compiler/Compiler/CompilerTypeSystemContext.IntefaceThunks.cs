@@ -3,13 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
 using System.Text;
 
-using Internal.TypeSystem;
 using Internal.IL;
 using Internal.IL.Stubs;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
 
 // Default interface method implementation thunks
 //

@@ -16,6 +16,7 @@ Process is terminated due to StackOverflowException.
 
 using System;
 using System.IO;
+
 using Xunit;
 
 namespace Test_volatileFromFinally

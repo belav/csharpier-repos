@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
 //
 // FlowLayoutPanel.cs
 //
@@ -27,9 +30,6 @@
 //
 
 using System.Windows.Forms.Layout;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Drawing;
 
 namespace System.Windows.Forms
 {

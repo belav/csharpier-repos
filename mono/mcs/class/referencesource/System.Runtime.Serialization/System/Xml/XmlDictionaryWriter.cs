@@ -4,17 +4,17 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
-    using System.Xml;
     using System.Collections;
     using System.Diagnostics;
+    using System.IO;
+    using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Text;
-    using System.Runtime;
+    using System.Xml;
 
     public abstract class XmlDictionaryWriter : XmlWriter
     {

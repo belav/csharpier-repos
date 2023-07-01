@@ -7,15 +7,16 @@
 namespace System.Text
 {
     using System;
+    using System.Collections;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Runtime.InteropServices;
-    using System.Security;
-    using System.Collections;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security;
     using System.Security.Permissions;
+
     using Microsoft.Win32.SafeHandles;
 
     // Our input file data structures look like:

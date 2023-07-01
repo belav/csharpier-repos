@@ -13,9 +13,9 @@ namespace B
 namespace Foo
 {
     using A;
-    using B;
 
     using C = A.CAttribute;
+    using B;
 
     [C]
     class Foo

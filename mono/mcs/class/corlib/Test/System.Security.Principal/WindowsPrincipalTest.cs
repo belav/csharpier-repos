@@ -1,3 +1,7 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security.Principal;
+
 //
 // WindowsPrincipalTest.cs - NUnit Test Cases for WindowsPrincipal
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Runtime.Serialization;
-using System.Security.Principal;
 
 namespace MonoTests.System.Security.Principal
 {

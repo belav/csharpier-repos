@@ -27,10 +27,10 @@
 //
 
 using System;
-using System.IO;
-using System.Security;
 using System.Configuration.Internal;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security;
 
 namespace System.Configuration
 {

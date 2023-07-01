@@ -6,8 +6,9 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CommonLanguageServerProtocol.Framework.Example;
+
 using Microsoft.CommonLanguageServerProtocol.Framework;
+using Microsoft.CommonLanguageServerProtocol.Framework.Example;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Nerdbank.Streams;
 using StreamJsonRpc;

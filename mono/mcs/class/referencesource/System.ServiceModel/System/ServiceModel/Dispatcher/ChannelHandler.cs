@@ -13,13 +13,13 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
+    using SessionIdleManager = System.ServiceModel.Channels.ServiceChannel.SessionIdleManager;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.Threading;
     using System.Transactions;
     using System.Xml;
-    using SessionIdleManager = System.ServiceModel.Channels.ServiceChannel.SessionIdleManager;
 
     class ChannelHandler
     {

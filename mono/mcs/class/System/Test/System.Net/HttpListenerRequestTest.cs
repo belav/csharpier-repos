@@ -28,17 +28,17 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

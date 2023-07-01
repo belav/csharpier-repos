@@ -6,6 +6,7 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Completion;
 using Roslyn.Test.Utilities;
 using Xunit;

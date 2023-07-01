@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Editor.UnitTests;
 using Microsoft.VisualStudio.Composition;
 using Microsoft.VisualStudio.Text;

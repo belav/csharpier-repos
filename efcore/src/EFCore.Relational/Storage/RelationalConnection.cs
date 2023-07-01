@@ -4,9 +4,9 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Data;
+using IsolationLevel = System.Data.IsolationLevel;
 using System.Diagnostics.CodeAnalysis;
 using System.Transactions;
-using IsolationLevel = System.Data.IsolationLevel;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 

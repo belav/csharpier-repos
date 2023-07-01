@@ -8,13 +8,14 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using NativeMethods = Microsoft.CodeAnalysis.Editor.Wpf.Utilities.NativeMethods;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Roslyn.Utilities;
-using NativeMethods = Microsoft.CodeAnalysis.Editor.Wpf.Utilities.NativeMethods;
 
 namespace Microsoft.CodeAnalysis.ColorSchemes
 {

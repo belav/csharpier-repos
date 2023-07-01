@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using SslStress.Utils;
 
 namespace SslStress

@@ -3,8 +3,8 @@
 
 using System.Diagnostics;
 using System.Dynamic.Utils;
-using System.Runtime.CompilerServices;
 using static System.Linq.Expressions.CachedReflectionInfo;
+using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions
 {

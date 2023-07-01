@@ -30,11 +30,11 @@ using System.Reflection;
 using System.Windows.Markup;
 using System.Xaml;
 using System.Xaml.Schema;
+
+using MonoTests.Helpers;
 using NUnit.Framework;
 
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Xaml
 {

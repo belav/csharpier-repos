@@ -33,9 +33,9 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+
+using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {

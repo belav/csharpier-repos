@@ -3,13 +3,13 @@
 
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
-using System.Runtime.Intrinsics.X86;
-using System.Runtime.CompilerServices;
 
 using ArmAes = System.Runtime.Intrinsics.Arm.Aes;
+using System.Runtime.Intrinsics.X86;
 using X86Aes = System.Runtime.Intrinsics.X86.Aes;
 
 public class Runtime_34587

@@ -3,8 +3,8 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.CommandLine.Parsing;
 using static System.CommandLine.Binding.ArgumentConversionResult;
+using System.CommandLine.Parsing;
 
 namespace System.CommandLine.Binding
 {

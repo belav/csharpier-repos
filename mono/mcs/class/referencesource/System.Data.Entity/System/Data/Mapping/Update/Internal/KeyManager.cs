@@ -1,4 +1,5 @@
-﻿//---------------------------------------------------------------------
+﻿using NodeColor = System.Byte;
+//---------------------------------------------------------------------
 // <copyright file="KeyManager.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -11,7 +12,6 @@ using System.Collections.Generic;
 using System.Data.Common.Utils;
 using System.Data.Entity;
 using System.Diagnostics;
-using NodeColor = System.Byte;
 
 namespace System.Data.Mapping.Update.Internal
 {

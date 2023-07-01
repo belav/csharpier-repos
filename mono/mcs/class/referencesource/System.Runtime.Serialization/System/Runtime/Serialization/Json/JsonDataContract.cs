@@ -5,10 +5,10 @@
 namespace System.Runtime.Serialization.Json
 {
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Reflection;
 #if !MONO
     using System.ServiceModel;
 #endif

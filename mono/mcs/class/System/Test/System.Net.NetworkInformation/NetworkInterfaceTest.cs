@@ -1,3 +1,9 @@
+using System;
+using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
+
 //
 // NetworkInterfaceTest.cs - NUnit Test Cases for System.Net.NetworkInformation.NetworkInterface
 //
@@ -6,11 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
 
 namespace MonoTests.System.Net.NetworkInformation
 {

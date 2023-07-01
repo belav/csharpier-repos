@@ -6,9 +6,9 @@ namespace System.ServiceModel.Dispatcher
 {
     using System;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime.Diagnostics;
 
     struct ProxyRpc
     {

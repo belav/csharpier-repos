@@ -1,3 +1,9 @@
+using System;
+using System.CodeDom.Compiler;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
+
 //
 // ExecutorTest.cs
 //	- Unit tests for System.CodeDom.Compiler.Executor
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
 
 namespace MonoTests.System.CodeDom.Compiler
 {

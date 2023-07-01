@@ -6,6 +6,7 @@
 
 using System;
 using System.Composition;
+
 using Microsoft.CodeAnalysis.DecompiledSource;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;

@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Linq;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;

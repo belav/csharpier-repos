@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.MemoryMappedFiles

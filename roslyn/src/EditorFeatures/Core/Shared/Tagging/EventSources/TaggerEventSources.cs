@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Editor.Tagging;

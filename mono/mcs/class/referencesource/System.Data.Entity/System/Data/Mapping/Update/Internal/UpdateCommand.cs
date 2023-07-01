@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.Utils;
+using System.Data.EntityClient;
 //---------------------------------------------------------------------
 // <copyright file="UpdateCommand.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,16 +13,11 @@
 //---------------------------------------------------------------------
 
 using System.Data.Metadata.Edm;
-using System.Data.Common;
-using System.Collections.Generic;
-using System.Text;
+using System.Data.Objects;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.Utils;
-using System.Data.Common.CommandTrees;
-using System.Data.Objects;
 using System.Linq;
-using System.Data.EntityClient;
+using System.Text;
 using System.Threading;
 
 namespace System.Data.Mapping.Update.Internal

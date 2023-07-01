@@ -19,20 +19,18 @@ namespace System.Data.Services.Client
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Data.Services.Common;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Data.Services.Common;
 #if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
 #endif
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Linq;
+    using System.Text;using System.Xml;using System.Xml.Linq;
 
     #endregion Namespaces.
 

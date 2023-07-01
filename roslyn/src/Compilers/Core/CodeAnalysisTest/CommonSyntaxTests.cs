@@ -6,11 +6,12 @@
 
 using System;
 using System.Linq;
+
+using CS = Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
 using Xunit;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
-using CS = Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

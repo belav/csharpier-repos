@@ -1,3 +1,4 @@
+using System.Web.UI.MobileControls;
 //------------------------------------------------------------------------------
 // <copyright file="IListDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,8 +6,6 @@
 //------------------------------------------------------------------------------
 
 using System.Windows.Forms;
-
-using System.Web.UI.MobileControls;
 
 namespace System.Web.UI.Design.MobileControls
 {

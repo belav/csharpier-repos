@@ -6,9 +6,7 @@
 
 #if NETCOREAPP
 
-using System;
-using System.Collections.Generic;
-using Roslyn.Test.Utilities;
+using System;using System.Collections.Generic;using Roslyn.Test.Utilities;
 
 namespace Roslyn.Test.Utilities.CoreClr
 {

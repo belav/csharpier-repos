@@ -41,22 +41,7 @@ using Mono.Security.Interface;
 #endif
 #endif
 
-using System;
-using System.Collections;
-using System.Configuration;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Net.Cache;
-using System.Net.Sockets;
-using System.Net.Security;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Mono.Net.Security;
+using System;using System.Collections;using System.Configuration;using System.Globalization;using System.IO;using System.Net;using System.Net.Cache;using System.Net.Sockets;using System.Net.Security;using System.Runtime.Remoting.Messaging;using System.Runtime.Serialization;using System.Security.Cryptography.X509Certificates;using System.Text;using System.Threading;using System.Threading.Tasks;using Mono.Net.Security;
 
 namespace System.Net
 {

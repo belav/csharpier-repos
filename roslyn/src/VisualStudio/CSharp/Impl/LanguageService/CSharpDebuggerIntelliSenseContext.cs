@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
@@ -18,9 +19,9 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Projection;
 using Microsoft.VisualStudio.TextManager.Interop;
+using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 using Microsoft.VisualStudio.Utilities;
 using Roslyn.Utilities;
-using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 {

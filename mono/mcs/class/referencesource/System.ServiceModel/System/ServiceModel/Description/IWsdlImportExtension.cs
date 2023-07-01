@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
-    using WsdlNS = System.Web.Services.Description;
 
     public interface IWsdlImportExtension
     {

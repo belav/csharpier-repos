@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Text;
+
 //
 // System.IO.StringWriter
 //
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System.IO;
-using System.Text;
-using System;
 
 namespace MonoTests.System.IO
 {

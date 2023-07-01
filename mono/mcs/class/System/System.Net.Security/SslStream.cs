@@ -36,23 +36,10 @@ using MonoSecurity::Mono.Security.Interface;
 using Mono.Security.Interface;
 #endif
 
-using CipherAlgorithmType = System.Security.Authentication.CipherAlgorithmType;
-using HashAlgorithmType = System.Security.Authentication.HashAlgorithmType;
-using ExchangeAlgorithmType = System.Security.Authentication.ExchangeAlgorithmType;
+using CipherAlgorithmType = System.Security.Authentication.CipherAlgorithmType;using HashAlgorithmType = System.Security.Authentication.HashAlgorithmType;using ExchangeAlgorithmType = System.Security.Authentication.ExchangeAlgorithmType;
 #endif
 
-using System.IO;
-using System.Net;
-using System.Net.Security;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-
-using MNS = Mono.Net.Security;
+using System.IO;using System.Net;using System.Net.Security;using System.Security.Authentication;using System.Security.Cryptography.X509Certificates;using System.Security.Permissions;using System.Security.Principal;using System.Security.Cryptography;using System.Threading;using System.Threading.Tasks;using MNS = Mono.Net.Security;
 
 namespace System.Net.Security
 {

@@ -35,17 +35,12 @@
 #define FEATURE_SERIALIZATION
 #endif
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
-
+using System;using System.Collections.Generic;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.Contracts;
 #if FEATURE_RELIABILITY_CONTRACTS
 using System.Runtime.ConstrainedExecution;
 #endif
 #if FEATURE_UNTRUSTED_CALLERS
-using System.Security;
-using System.Security.Permissions;
+using System.Security;using System.Security.Permissions;
 #endif
 
 namespace System.Diagnostics.Contracts

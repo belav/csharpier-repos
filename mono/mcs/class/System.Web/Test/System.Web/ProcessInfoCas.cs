@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // ProcessInfoCas.cs - CAS unit tests for System.Web.ProcessInfo
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

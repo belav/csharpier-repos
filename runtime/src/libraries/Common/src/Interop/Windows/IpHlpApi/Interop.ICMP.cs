@@ -4,6 +4,7 @@
 using System;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop

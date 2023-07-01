@@ -9,11 +9,7 @@
 
 #if MONO_FEATURE_CAS
 
-using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
+using NUnit.Framework;using System;using System.Security;using System.Security.Permissions;using System.Text;
 
 namespace MonoTests.System.Security
 {

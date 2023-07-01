@@ -1,11 +1,12 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Xunit;
 using System.Configuration;
 using System.DirectoryServices;
 using System.Reflection;
 using System.Web;
+
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using Xunit;
 
 namespace System.Security.Permissions.Tests
 {

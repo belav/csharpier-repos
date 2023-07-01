@@ -25,6 +25,7 @@
 
 using System;
 using System.Globalization;
+
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Converters

@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.AddMissingImports;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Options;

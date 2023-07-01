@@ -4,6 +4,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Text;
+
 using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 using Microsoft.AspNetCore.Testing;
 

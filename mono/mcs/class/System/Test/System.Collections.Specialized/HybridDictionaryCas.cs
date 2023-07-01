@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Specialized;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.System.Collections.Specialized;
 //
 // HybridDictionaryCas.cs - CAS unit tests for
 //	System.Collections.Specialized.HybridDictionary
@@ -28,14 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections.Specialized;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized
 {

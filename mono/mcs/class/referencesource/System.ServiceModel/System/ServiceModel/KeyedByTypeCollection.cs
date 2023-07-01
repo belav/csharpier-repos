@@ -4,10 +4,10 @@
 
 namespace System.Collections.Generic
 {
-    using System.Xml;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.Xml;
 
     public class KeyedByTypeCollection<TItem> : KeyedCollection<Type, TItem>
     {

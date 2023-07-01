@@ -26,24 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
-using System.Xml;
-using NUnit.Framework;
-
-using MonoTests.System.ServiceModel.Channels;
-
-using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
-
-using MonoTests.Helpers;
+using System;using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Security;using System.ServiceModel.Security.Tokens;using System.Xml;using NUnit.Framework;using MonoTests.System.ServiceModel.Channels;using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel
 {

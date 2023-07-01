@@ -1,3 +1,4 @@
+using System.Reflection;
 //
 // System.Web.UI.WebControls.WebParts.ProviderConnectionPoint.cs
 //
@@ -26,7 +27,6 @@
 //
 
 using System.Web;
-using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {

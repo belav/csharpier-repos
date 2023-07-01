@@ -1,9 +1,9 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
+    using System.Collections;
     using System.IO;
     using System.Reflection;
-    using System.Collections;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
 

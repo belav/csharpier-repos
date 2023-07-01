@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.IO;
 //
 // CleanHtmlTextWriter.cs
 //
@@ -32,9 +35,6 @@
 //#define TEST_THIS
 
 using System.Web.UI;
-using System;
-using System.IO;
-using System.Collections;
 
 class CleanHtmlTextWriter : HtmlTextWriter
 {

@@ -5,8 +5,8 @@
 namespace System.Activities.Runtime
 {
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     class ResolveNextArgumentWorkItem : ActivityExecutionWorkItem

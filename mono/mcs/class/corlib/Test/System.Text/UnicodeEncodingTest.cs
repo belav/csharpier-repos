@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+
 //
 // UnicodeEncodingTest.cs - NUnit Test Cases for System.Text.UnicodeEncoding
 //
@@ -7,8 +10,6 @@
 // (C) 2003 Patrick Kalkman
 //
 using NUnit.Framework;
-using System;
-using System.Text;
 
 namespace MonoTests.System.Text
 {

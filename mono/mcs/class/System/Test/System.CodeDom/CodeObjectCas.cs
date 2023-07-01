@@ -1,3 +1,9 @@
+using System;
+using System.CodeDom;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // CodeObjectCas.cs
 //	- CAS unit tests for System.CodeDom.CodeObject
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom
 {

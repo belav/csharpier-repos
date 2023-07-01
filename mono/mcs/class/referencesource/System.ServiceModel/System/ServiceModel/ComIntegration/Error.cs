@@ -4,13 +4,13 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Runtime.InteropServices;
     using System.ComponentModel;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     static class Error
     {

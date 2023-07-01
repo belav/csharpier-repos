@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common.Utils;
 using System.Data.Entity;
+using som = System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Mapping.Update.Internal;
 using System.Data.Mapping.ViewGeneration;
 using System.Data.Metadata.Edm;
@@ -19,7 +20,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Xml;
-using som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.Mapping
 {

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;

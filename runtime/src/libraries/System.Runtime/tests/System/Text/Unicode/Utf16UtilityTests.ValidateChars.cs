@@ -7,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Text.Unicode.Tests

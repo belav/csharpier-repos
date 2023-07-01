@@ -20,10 +20,10 @@ namespace System.Web.UI.WebControls
     using System.Web;
     using System.Web.Caching;
     using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using System.Web.Util;
 
     using ConflictOptions = System.Web.UI.ConflictOptions;
+    using System.Web.UI.WebControls;
+    using System.Web.Util;
 
     /// <devdoc>
     /// Represents a single view of a SqlDataSource.

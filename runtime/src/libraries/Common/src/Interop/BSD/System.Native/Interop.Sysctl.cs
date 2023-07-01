@@ -3,10 +3,10 @@
 
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Text;
 
 using size_t = System.IntPtr;
+using System.Runtime.InteropServices;
+using System.Text;
 
 // This implements shim for sysctl calls.
 // They are available on BSD systems - FreeBSD, OSX and others.

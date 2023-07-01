@@ -24,27 +24,14 @@
 #endregion
 
 #if !(NET20 || NET35 || NET40)
-using Moq;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities;
+using Moq;using System;using System.Collections;using System.Collections.Generic;using System.Dynamic;using System.IO;using System.Linq;using System.Reflection;using System.Runtime.Serialization;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Utilities;
 #if PORTABLE && !(NETSTANDARD2_0 || NET6_0_OR_GREATER)
 using BindingFlags = Newtonsoft.Json.Utilities.BindingFlags;
 #else
 using BindingFlags = System.Reflection.BindingFlags;
 #endif
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

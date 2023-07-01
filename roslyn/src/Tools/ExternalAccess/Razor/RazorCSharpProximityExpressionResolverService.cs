@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp.Debugging;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Razor

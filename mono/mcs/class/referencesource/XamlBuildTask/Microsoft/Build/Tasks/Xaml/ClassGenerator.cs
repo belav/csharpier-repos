@@ -6,22 +6,23 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Xml.Linq;
     using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.InteropServices;
+    using System.Windows.Markup;
     using System.Xaml;
     using System.Xaml.Schema;
-    using System.Windows.Markup;
-    using System.Runtime;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.CodeDom.Compiler;
-    using System.Runtime.InteropServices;
     using System.Xml;
+    using System.Xml.Linq;
+
     using Microsoft.Build.Utilities;
     using XamlBuildTask;
 

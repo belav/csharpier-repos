@@ -6,14 +6,14 @@ namespace System.ServiceModel.Syndication
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
     using System.Diagnostics.CodeAnalysis;
-    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

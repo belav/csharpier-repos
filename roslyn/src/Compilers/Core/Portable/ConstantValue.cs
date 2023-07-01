@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

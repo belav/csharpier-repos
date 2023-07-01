@@ -1,3 +1,6 @@
+using System;
+using System.Security;
+
 //
 // SecurityTransparentAttributeTest.cs -
 //	NUnit Test Cases for SecurityTransparentAttribute
@@ -29,8 +32,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Security;
 
 namespace MonoTests.System.Security
 {

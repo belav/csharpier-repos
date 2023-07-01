@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="ChangeNode.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,9 +9,8 @@
 //---------------------------------------------------------------------
 
 using System.Data.Metadata.Edm;
-using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
+using System.Text;
 
 namespace System.Data.Mapping.Update.Internal
 {

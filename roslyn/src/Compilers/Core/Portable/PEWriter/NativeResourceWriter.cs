@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.Cci

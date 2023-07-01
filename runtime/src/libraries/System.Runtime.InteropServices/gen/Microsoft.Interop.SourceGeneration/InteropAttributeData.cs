@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop

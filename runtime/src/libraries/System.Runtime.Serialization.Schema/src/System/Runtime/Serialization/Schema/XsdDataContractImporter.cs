@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization.DataContracts;
-using System.Xml;
-using System.Xml.Schema;
 
 using ExceptionUtil = System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Runtime.Serialization
 {

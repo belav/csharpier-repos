@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Runtime.InteropServices.ExtensibleClassFactory.cs
 //
@@ -31,7 +32,6 @@
 //
 
 using System.Diagnostics;
-using System.Collections;
 using System.Reflection;
 
 namespace System.Runtime.InteropServices

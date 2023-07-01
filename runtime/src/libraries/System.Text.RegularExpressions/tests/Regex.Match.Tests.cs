@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Tests;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Tests;
+
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 

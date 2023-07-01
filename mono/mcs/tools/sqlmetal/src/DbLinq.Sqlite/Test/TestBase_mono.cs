@@ -27,8 +27,9 @@
 
 using System;
 using System.Data;
-using Mono.Data.Sqlite;
 using System.IO;
+
+using Mono.Data.Sqlite;
 
 namespace Test_NUnit
 {

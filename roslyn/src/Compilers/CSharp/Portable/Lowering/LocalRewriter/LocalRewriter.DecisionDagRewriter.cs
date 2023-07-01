@@ -10,10 +10,11 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using static Microsoft.CodeAnalysis.CSharp.SyntheticBoundNodeFactory;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.CSharp.SyntheticBoundNodeFactory;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {

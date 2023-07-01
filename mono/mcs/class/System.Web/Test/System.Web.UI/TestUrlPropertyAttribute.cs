@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+
 //
 // Tests for System.Web.UI.UrlPropertyAttribute.cs
 //
@@ -28,12 +35,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Web;
-using System.Web.UI;
-using System.Collections;
-using System.ComponentModel;
-using System.IO;
 
 namespace MonoTests.System.Web.UI
 {

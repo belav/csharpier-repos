@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Net.Mail.AttachmentBase.cs
 //
@@ -31,7 +32,6 @@
 using System.IO;
 using System.Net.Mime;
 using System.Text;
-using System.Collections;
 
 namespace System.Net.Mail
 {

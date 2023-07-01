@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 // ByteTest.cs - NUnit Test Cases for the System.Byte struct
 //
 // Mario Martinez (mariom925@home.om)
@@ -6,9 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Threading;
 
 namespace MonoTests.System
 {

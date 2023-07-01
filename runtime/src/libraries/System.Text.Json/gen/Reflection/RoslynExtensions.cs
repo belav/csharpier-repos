@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis;
 
 namespace System.Text.Json.Reflection

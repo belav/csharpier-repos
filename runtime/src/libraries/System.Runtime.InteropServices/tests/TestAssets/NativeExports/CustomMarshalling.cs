@@ -4,6 +4,7 @@
 using System;
 using System.Buffers.Binary;
 using System.Runtime.InteropServices;
+
 using SharedTypes;
 using static SharedTypes.BoolStructMarshaller;
 using static SharedTypes.StringContainerMarshaller;

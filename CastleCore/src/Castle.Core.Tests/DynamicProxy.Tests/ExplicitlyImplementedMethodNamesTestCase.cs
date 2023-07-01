@@ -17,11 +17,11 @@ namespace Castle.DynamicProxy.Tests
     using System;
     using System.Reflection;
 
-    using NUnit.Framework;
-
     using ISharedNameFromA = Interfaces.A.ISharedName;
     using ISharedNameFromB = Interfaces.B.ISharedName;
     using ISharedNameFromC = Interfaces.C.ISharedName;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class ExplicitlyImplementedMethodNamesTestCase

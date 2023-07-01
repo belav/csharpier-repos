@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 //
 // AssemblyNamesTypeResolutionService.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Reflection;
-using System.ComponentModel.Design;
 
 namespace System.Resources
 {

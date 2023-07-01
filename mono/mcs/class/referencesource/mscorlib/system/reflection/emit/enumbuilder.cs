@@ -19,9 +19,9 @@ namespace System.Reflection.Emit
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using CultureInfo = System.Globalization.CultureInfo;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using CultureInfo = System.Globalization.CultureInfo;
     using System.Security.Permissions;
 
     [HostProtection(MayLeakOnAbort = true)]

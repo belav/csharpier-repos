@@ -8,9 +8,9 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Design.Common;
 using System.Linq;
 using System.Text;
-using System.Data.Entity.Design.Common;
 
 namespace System.Data.Entity.Design
 {

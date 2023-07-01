@@ -25,15 +25,16 @@
 #endregion
 
 using System;
-using System.Diagnostics;
-using DbLinq.Data.Linq.Database;
-using DbLinq.Data.Linq.Mapping;
-using System.Data.Linq.Mapping;
 using System.Data;
-using DbLinq.Vendor;
 using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Diagnostics;
+
+using DbLinq.Data.Linq.Database;
 using DbLinq.Data.Linq.Database.Implementation;
+using DbLinq.Data.Linq.Mapping;
 using DbLinq.Util;
+using DbLinq.Vendor;
 
 namespace DbLinq.Data.Linq
 {

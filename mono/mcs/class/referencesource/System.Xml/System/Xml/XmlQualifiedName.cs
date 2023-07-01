@@ -10,10 +10,7 @@ namespace System.Xml
     using System.Collections;
     using System.Diagnostics;
 #if !SILVERLIGHT
-    using Microsoft.Win32;
-    using System.Reflection;
-    using System.Security;
-    using System.Security.Permissions;
+    using Microsoft.Win32;using System.Reflection;using System.Security;using System.Security.Permissions;
 #endif
 
     /// <include file='doc\XmlQualifiedName.uex' path='docs/doc[@for="XmlQualifiedName"]/*' />

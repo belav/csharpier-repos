@@ -4,9 +4,10 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.GraphModel;
 using Microsoft.CodeAnalysis.NavigateTo;
+using Microsoft.VisualStudio.GraphModel;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {

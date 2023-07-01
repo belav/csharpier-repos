@@ -5,16 +5,16 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Xml;
-using System.Xml.XPath;
-using System.Globalization;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.XPath;
 
 namespace System.Xml.Schema
 {

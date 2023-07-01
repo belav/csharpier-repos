@@ -5,15 +5,7 @@
 #nullable disable
 
 #if NETCOREAPP
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeGen;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using static Roslyn.Test.Utilities.RuntimeEnvironmentUtilities;
+using System;using System.Collections.Generic;using System.Collections.Immutable;using System.Linq;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.CodeGen;using Microsoft.CodeAnalysis.Emit;using Microsoft.CodeAnalysis.Test.Utilities;using static Roslyn.Test.Utilities.RuntimeEnvironmentUtilities;
 
 namespace Roslyn.Test.Utilities.CoreClr
 {

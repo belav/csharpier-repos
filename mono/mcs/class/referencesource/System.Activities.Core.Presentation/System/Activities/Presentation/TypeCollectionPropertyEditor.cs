@@ -5,17 +5,17 @@
 namespace System.Activities.Presentation
 {
     using System.Activities.Core.Presentation.Themes;
-    using System.Activities.Presentation.Model;
     using System.Activities.Presentation.Converters;
+    using System.Activities.Presentation.Model;
     using System.Activities.Presentation.PropertyEditing;
     using System.Activities.Presentation.View;
-    using System.Windows;
-    using System.Runtime;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Diagnostics.CodeAnalysis;
-    using System.ComponentModel;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Windows;
 
     sealed class TypeCollectionPropertyEditor : DialogPropertyValueEditor
     {

@@ -4,6 +4,7 @@
 using System.Collections.Concurrent;
 using System.Composition.Hosting;
 using System.Threading;
+
 using Xunit;
 
 namespace System.Composition.TypedParts.Tests

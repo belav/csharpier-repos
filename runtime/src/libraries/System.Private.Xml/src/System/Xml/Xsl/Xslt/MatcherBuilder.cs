@@ -6,8 +6,8 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Xsl.Qil;
-using System.Xml.Xsl.XPath;
 using T = System.Xml.Xsl.XmlQueryTypeFactory;
+using System.Xml.Xsl.XPath;
 
 namespace System.Xml.Xsl.Xslt
 {

@@ -9,8 +9,8 @@
 namespace System.Net
 {
     using System;
-    using System.Threading;
     using System.Security.Permissions;
+    using System.Threading;
 
     // used for Connection Pooling
     internal sealed class Semaphore : WaitHandle

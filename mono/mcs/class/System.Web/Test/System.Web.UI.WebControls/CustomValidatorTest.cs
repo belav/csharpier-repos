@@ -1,3 +1,14 @@
+using System;
+using System.Collections;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
 //
 // Tests for System.Web.UI.WebControls.CustomValidator
 //
@@ -30,16 +41,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Drawing;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

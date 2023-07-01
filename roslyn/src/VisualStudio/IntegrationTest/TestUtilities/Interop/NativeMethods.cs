@@ -5,6 +5,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop

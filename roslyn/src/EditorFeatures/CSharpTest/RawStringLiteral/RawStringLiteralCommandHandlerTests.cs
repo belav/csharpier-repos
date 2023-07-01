@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral;
 using Microsoft.CodeAnalysis.Editor.UnitTests;
 using Microsoft.CodeAnalysis.Test.Utilities;

@@ -3,8 +3,8 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.BindingFlagSupport;
+using System.Reflection.Runtime.General;
 
 namespace System.Reflection.Runtime.TypeInfos
 {

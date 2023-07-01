@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.Globalization;
-using Microsoft.Build.Utilities;
+
 using Microsoft.Build.Framework;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.Build.Utilities;
 
 //
 // This class generates the icall_trampoline_dispatch () function used by the interpreter to call native code on WASM.

@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using AC = System.Web.UI.AttributeCollection;
+
 //
 // Tests for System.Web.UI.AttributeCollection.cs and CssStyleCollection
 //
@@ -28,13 +36,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Collections;
-using AC = System.Web.UI.AttributeCollection;
 
 namespace MonoTests.System.Web.UI
 {

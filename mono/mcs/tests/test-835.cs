@@ -1,5 +1,5 @@
-using C = A.D;
 using System;
+using C = A.D;
 
 class AA
 {

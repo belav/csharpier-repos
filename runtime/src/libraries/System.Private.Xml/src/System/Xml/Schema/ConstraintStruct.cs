@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using System.Xml.XPath;
+
 using MS.Internal.Xml.XPath;
 
 namespace System.Xml.Schema

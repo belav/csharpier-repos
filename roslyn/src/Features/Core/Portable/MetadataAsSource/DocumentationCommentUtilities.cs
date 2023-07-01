@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.MetadataAsSource

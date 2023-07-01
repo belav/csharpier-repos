@@ -1,3 +1,10 @@
+using System;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // SqlClientPermissionTest.cs - NUnit Test Cases for SqlClientPermission
 //
@@ -27,12 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Data.SqlClient
 {

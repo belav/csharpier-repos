@@ -1,3 +1,7 @@
+using System;
+using System.Net;
+
+using Microsoft.Win32;
 //
 // IntranetZoneCredentialPolicyTest.cs
 //	- Unit tests for Microsoft.Win32.IntranetZoneCredentialPolicy
@@ -29,10 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Net;
-using Microsoft.Win32;
 
 namespace MonoTests.Microsoft.Win32
 {

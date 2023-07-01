@@ -22,8 +22,8 @@
 #define IMPROVED_COLLECTION_HASHFUNCTION
 
 using System;
-using System.Diagnostics;
 using SCG = System.Collections.Generic;
+using System.Diagnostics;
 
 namespace C5
 {

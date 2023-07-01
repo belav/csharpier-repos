@@ -4,11 +4,11 @@
 
 namespace System.IdentityModel
 {
+    using System.IdentityModel.Tokens;
     using System.IO;
     using System.Security.Cryptography;
-    using System.IdentityModel.Tokens;
-    using System.Xml;
     using System.Text;
+    using System.Xml;
 
     // for sequential use by one thread
     sealed class SignatureResourcePool

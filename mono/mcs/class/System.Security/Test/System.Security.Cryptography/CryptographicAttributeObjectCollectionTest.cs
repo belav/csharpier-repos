@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+
 //
 // CryptographicAttributeObjectCollectionTest.cs - NUnit tests for
 //	System.Security.Cryptography.CryptographicAttributeObjectCollection
@@ -29,10 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

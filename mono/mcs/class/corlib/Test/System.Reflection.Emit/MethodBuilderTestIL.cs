@@ -6,13 +6,13 @@
 // (C) Xamarin, Inc.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading;
 
 using NUnit.Framework;
-using System.IO;
 
 namespace MonoTests.System.Reflection.Emit
 {

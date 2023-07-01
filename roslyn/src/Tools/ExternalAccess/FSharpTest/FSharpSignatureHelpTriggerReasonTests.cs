@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp;
 using Microsoft.CodeAnalysis.SignatureHelp;

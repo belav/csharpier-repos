@@ -24,13 +24,7 @@
 #endregion
 
 #if HAVE_ADO_NET
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using Newtonsoft.Json.Utilities;
-using System;
-using System.Data;
-using Newtonsoft.Json.Serialization;
+using System.Collections;using System.Collections.Generic;using System.Globalization;using Newtonsoft.Json.Utilities;using System;using System.Data;using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Converters
 {

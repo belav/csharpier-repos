@@ -1,3 +1,6 @@
+using System;
+using System.DirectoryServices;
+
 //
 // DirectoryServicesDirectoryEntryTest.cs -
 //	NUnit Test Cases for DirectoryServices.DirectoryEntry
@@ -7,8 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.DirectoryServices;
 
 namespace MonoTests.System.DirectoryServices
 {

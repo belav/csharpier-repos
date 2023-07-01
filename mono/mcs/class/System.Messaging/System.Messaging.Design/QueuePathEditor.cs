@@ -29,8 +29,7 @@
 //
 
 #if !NO_SYSTEM_DRAWING_DEPENDENCY
-using System.ComponentModel;
-using System.Drawing.Design;
+using System.ComponentModel;using System.Drawing.Design;
 
 namespace System.Messaging.Design
 {

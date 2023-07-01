@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // DateTimeFormatEntry.cs
 //
@@ -30,7 +31,6 @@
 
 
 using System.Text;
-using System.Collections.Generic;
 
 namespace Mono.Tools.LocaleBuilder
 {

@@ -6,18 +6,19 @@
 
 namespace System.ComponentModel.Design
 {
-    using System.Runtime.Remoting;
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
-    using System.Net;
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Reflection;
+    using System.Runtime.Remoting;
     using System.Security;
     using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>

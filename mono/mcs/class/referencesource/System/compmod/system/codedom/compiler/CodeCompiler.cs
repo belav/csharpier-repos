@@ -8,21 +8,22 @@
 
 namespace System.CodeDom.Compiler
 {
-    using System.Text;
+    using System;
+    using System.CodeDom;
+    using System.Collections;
 
     using System.Diagnostics;
-    using System;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
+    using System.Globalization;
     using System.IO;
-    using System.Collections;
+    using System.Reflection;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Reflection;
-    using System.CodeDom;
-    using System.Globalization;
-    using System.Runtime.Versioning;
+    using System.Text;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     /// <devdoc>
     /// <para>Provides a

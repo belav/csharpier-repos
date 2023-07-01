@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using ILCompiler.Win32Resources;
 
 using Internal.Text;
-using ILCompiler.Win32Resources;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

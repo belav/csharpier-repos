@@ -33,11 +33,7 @@
 //
 
 #if !FULL_AOT_RUNTIME && !DISABLE_REMOTING
-using Mono.Interop;
-using System.Collections;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Threading;
+using Mono.Interop;using System.Collections;using System.Runtime.InteropServices;using System.Runtime.CompilerServices;using System.Threading;
 
 namespace System
 {

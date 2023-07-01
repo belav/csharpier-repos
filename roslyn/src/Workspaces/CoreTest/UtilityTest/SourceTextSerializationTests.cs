@@ -6,6 +6,7 @@
 
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Test.Utilities;

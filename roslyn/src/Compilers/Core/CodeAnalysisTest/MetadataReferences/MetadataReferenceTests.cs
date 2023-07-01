@@ -12,15 +12,16 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp;
+using CS = Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Symbols;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
+using static Roslyn.Test.Utilities.TestMetadata;
 using Roslyn.Utilities;
 using Xunit;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using static Roslyn.Test.Utilities.TestMetadata;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

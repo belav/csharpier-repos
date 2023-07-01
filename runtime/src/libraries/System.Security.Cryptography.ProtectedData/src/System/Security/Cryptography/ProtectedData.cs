@@ -4,9 +4,9 @@
 using System.Runtime.InteropServices;
 
 using Internal.Cryptography;
+using CryptProtectDataFlags = Interop.Crypt32.CryptProtectDataFlags;
 
 using DATA_BLOB = Interop.Crypt32.DATA_BLOB;
-using CryptProtectDataFlags = Interop.Crypt32.CryptProtectDataFlags;
 
 namespace System.Security.Cryptography
 {

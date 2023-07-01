@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Http

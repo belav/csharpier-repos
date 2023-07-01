@@ -1,3 +1,5 @@
+using System.Security;
+using System.Security.Permissions;
 //------------------------------------------------------------------------------
 // <copyright file="ScriptHandlerFactory.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,8 +7,6 @@
 //------------------------------------------------------------------------------
 
 using System.Web.SessionState;
-using System.Security.Permissions;
-using System.Security;
 
 namespace System.Web.Script.Services
 {

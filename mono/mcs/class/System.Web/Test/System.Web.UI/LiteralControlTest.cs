@@ -1,3 +1,13 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Security.Principal;
+using System.Threading;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+
 //
 // Tests for System.Web.UI.LiteralControl
 //
@@ -27,15 +37,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Threading;
-using System.Security.Principal;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Collections;
 
 namespace MonoTests.System.Web.UI
 {

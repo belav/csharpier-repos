@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+
 using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution

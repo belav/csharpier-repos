@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Mono.Linker.Tests.Cases.Attributes.Dependencies;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Cases.Expectations.Metadata;

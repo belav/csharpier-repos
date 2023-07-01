@@ -3,12 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+
+using ConstraintInAnotherNamespace;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Generators.Tests.TestClasses;
 using Microsoft.Extensions.Logging.Generators.Tests.TestClasses.UsesConstraintInAnotherNamespace;
-using Xunit;
 using NamespaceForABC;
-using ConstraintInAnotherNamespace;
+using Xunit;
 
 namespace Microsoft.Extensions.Logging.Generators.Tests
 {

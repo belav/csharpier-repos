@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Web.Configuration;
 using System.Web.WebPages.Razor.Configuration;
 using System.Web.WebPages.Razor.Resources;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.WebPages.Razor.Test

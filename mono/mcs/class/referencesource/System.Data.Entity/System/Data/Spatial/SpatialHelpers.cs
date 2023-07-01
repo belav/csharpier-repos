@@ -1,4 +1,6 @@
-﻿//------------------------------------------------------------------------------
+﻿using System.Data.Common;
+using System.Data.Metadata.Edm;
+//------------------------------------------------------------------------------
 // <copyright file="SpatialHelpers.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -7,8 +9,6 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 using System.Diagnostics;
-using System.Data.Metadata.Edm;
-using System.Data.Common;
 
 namespace System.Data.Spatial
 {

@@ -5,12 +5,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ChangeNamespace;
 using Microsoft.CodeAnalysis.CodeActions;
+using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 using Microsoft.CodeAnalysis.CodeCleanup;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Text;
-using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 {

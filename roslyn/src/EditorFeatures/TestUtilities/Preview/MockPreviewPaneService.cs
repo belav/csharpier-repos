@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.Host;
 using Microsoft.CodeAnalysis.Host.Mef;

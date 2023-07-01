@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.IO;
 //
 // System.Drawing.Design.ImageEditor.cs
 //
@@ -30,8 +32,6 @@
 //
 
 using System.Text;
-using System.IO;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace System.Drawing.Design

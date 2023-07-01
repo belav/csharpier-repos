@@ -12,15 +12,15 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.Versioning;
-using System.Threading;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
-using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Threading;
 
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Security.Permissions;
 
 namespace System.IO
 {

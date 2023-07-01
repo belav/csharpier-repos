@@ -11,10 +11,10 @@ namespace System.Data.Common.CommandTrees
 {
     using System;
     using System.Collections.Generic;
+    using CqtBuilder = System.Data.Common.CommandTrees.ExpressionBuilder.DbExpressionBuilder;
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
     using System.Linq;
-    using CqtBuilder = System.Data.Common.CommandTrees.ExpressionBuilder.DbExpressionBuilder;
 
     /// <summary>
     /// Visits each element of an expression tree from a given root expression. If any element changes, the tree is

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-
 // Include Silverlight's managed resources
 #if SILVERLIGHT
 using System.Core;

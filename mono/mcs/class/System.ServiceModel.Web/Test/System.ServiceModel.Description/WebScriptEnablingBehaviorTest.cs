@@ -26,19 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Net;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel.Web;
-using System.Text;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.Net;using System.Runtime.Serialization;using System.ServiceModel;using System.ServiceModel.Activation;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Dispatcher;using System.ServiceModel.Web;using System.Text;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Description
 {

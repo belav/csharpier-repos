@@ -1,3 +1,8 @@
+using System;
+using System.Globalization;
+using System.Reflection;
+using System.Runtime.InteropServices;
+
 //
 // System.Runtime.InteropServices.GCHandle Test Cases
 //
@@ -8,10 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Globalization;
 
 namespace MonoTests.System.Runtime.InteropServices
 {

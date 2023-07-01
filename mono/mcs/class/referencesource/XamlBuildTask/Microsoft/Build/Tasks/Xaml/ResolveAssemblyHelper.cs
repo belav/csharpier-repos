@@ -6,12 +6,12 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Reflection;
-    using System.IO;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
     using System.Runtime;
+    using System.Text;
 
     internal class ResolveAssemblyHelper
     {

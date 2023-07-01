@@ -14,14 +14,14 @@ namespace System.ServiceModel.ComIntegration
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using ConfigNS = System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
-    using ConfigNS = System.ServiceModel.Configuration;
-    using WsdlNS = System.Web.Services.Description;
 
     internal class WsdlServiceChannelBuilder : IProxyCreator, IProvideChannelBuilderSettings
     {

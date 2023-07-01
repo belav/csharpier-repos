@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Formats.Cbor;
 using System.Linq;
-using Xunit;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
+
+using Xunit;
 
 namespace System.Security.Cryptography.Cose.Tests
 {

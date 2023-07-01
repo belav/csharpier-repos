@@ -1,3 +1,12 @@
+using System;
+using System.Configuration;
+using System.IO;
+using System.Reflection;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Security;
+using System.Xml;
+
 //
 // AuthorizationRuleTest.cs
 //	- unit tests for System.Web.Configuration.AuthorizationRule
@@ -29,15 +38,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Configuration;
-using System.Web.Configuration;
-using System.Web;
-using System.Web.Security;
-using System.IO;
-using System.Xml;
-using System.Reflection;
 
 namespace MonoTests.System.Web.Configuration
 {

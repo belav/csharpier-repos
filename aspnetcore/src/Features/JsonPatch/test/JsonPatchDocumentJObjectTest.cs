@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Dynamic;
+
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 using Microsoft.AspNetCore.JsonPatch.Operations;
 using Newtonsoft.Json;

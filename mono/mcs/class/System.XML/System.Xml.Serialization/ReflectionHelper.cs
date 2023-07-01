@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Xml.Serialization.ReflectionHelper
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Reflection;
-using System.Collections;
 
 namespace System.Xml.Serialization
 {

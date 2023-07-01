@@ -6,9 +6,9 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using NUnit.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

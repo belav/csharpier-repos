@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Drawing.Imaging;
 //
 // System.Drawing.Bitmap.cs
 //
@@ -36,11 +38,9 @@
 //
 
 using System.IO;
-using System.Drawing.Imaging;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace System.Drawing
 {

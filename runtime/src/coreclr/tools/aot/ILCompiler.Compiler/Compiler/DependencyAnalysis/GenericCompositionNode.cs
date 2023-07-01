@@ -3,11 +3,12 @@
 
 using System;
 
+using Debug = System.Diagnostics.Debug;
+
+using GenericVariance = Internal.Runtime.GenericVariance;
+
 using Internal.Text;
 using Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
-using GenericVariance = Internal.Runtime.GenericVariance;
 
 namespace ILCompiler.DependencyAnalysis
 {

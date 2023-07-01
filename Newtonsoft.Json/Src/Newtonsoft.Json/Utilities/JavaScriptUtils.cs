@@ -26,13 +26,9 @@
 using System;
 using System.IO;
 #if HAVE_ASYNC
-using System.Threading;
-using System.Threading.Tasks;
+using System.Threading;using System.Threading.Tasks;
 #endif
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;using System.Diagnostics;using System.Runtime.CompilerServices;using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

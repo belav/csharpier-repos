@@ -8,12 +8,12 @@
  */
 namespace System.ComponentModel
 {
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.InteropServices;
+    using System;
 
     using System.Diagnostics;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
 
-    using System;
     using Microsoft.Win32;
 
     /// <devdoc>

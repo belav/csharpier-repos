@@ -9,6 +9,7 @@ namespace System.Runtime
     using System.Runtime.Interop;
     using System.Security;
     using System.Threading;
+
     using Microsoft.Win32.SafeHandles;
 
     // IOThreadTimer has several characterstics that are important for performance:

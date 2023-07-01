@@ -3,8 +3,8 @@ using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Xml.Schema;
+using System.Xml.Serialization;
 
 [assembly: AllowPartiallyTrustedCallers]
 

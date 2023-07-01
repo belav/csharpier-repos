@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Text;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Symbols;
 using Microsoft.VisualStudio.Debugger.Clr;

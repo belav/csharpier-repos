@@ -1,8 +1,9 @@
 using System;
-using NUnit.Framework;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+
 using DrawingTestHelper;
+using NUnit.Framework;
 
 namespace Test.Sys.Drawing
 {

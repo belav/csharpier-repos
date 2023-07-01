@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.ServiceProcess;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Hosting.WindowsServices;

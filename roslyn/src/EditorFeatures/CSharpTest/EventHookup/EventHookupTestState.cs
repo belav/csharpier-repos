@@ -7,6 +7,7 @@
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.Editor.CSharp.EventHookup;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Editor.UnitTests;

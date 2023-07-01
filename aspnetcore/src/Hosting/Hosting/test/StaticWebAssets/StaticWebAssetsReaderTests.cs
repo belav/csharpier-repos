@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+
 using Xunit;
 
 namespace Microsoft.AspNetCore.Hosting.StaticWebAssets

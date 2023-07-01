@@ -5,11 +5,11 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
+using Console = Internal.Console;
 using Internal.Runtime.InteropServices;
 using TestLibrary;
 using Xunit;
-
-using Console = Internal.Console;
 
 namespace LoadIjwFromModuleHandle
 {

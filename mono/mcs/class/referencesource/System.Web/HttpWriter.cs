@@ -19,10 +19,10 @@ namespace System.Web
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Web.Util;
     using System.Web.Hosting;
 
     using IIS = System.Web.Hosting.UnsafeIISMethods;
+    using System.Web.Util;
 
     //
     //  HttpWriter buffer recycling support

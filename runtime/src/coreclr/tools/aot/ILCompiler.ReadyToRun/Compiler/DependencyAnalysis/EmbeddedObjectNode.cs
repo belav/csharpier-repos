@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 
-using ILCompiler.DependencyAnalysisFramework;
-
 using Debug = System.Diagnostics.Debug;
+
+using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
 {

@@ -21,8 +21,8 @@
 using System;
 using System.Collections;
 using System.Data;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace IBM.Data.DB2

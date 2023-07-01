@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Text;
 using VsTextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 

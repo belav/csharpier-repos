@@ -8,9 +8,9 @@ namespace System.Activities
     using System.Activities.Hosting;
     using System.Activities.Runtime;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Globalization;
 
     [DataContract]
     [Fx.Tag.XamlVisible(false)]

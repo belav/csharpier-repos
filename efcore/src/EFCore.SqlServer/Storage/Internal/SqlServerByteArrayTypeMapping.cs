@@ -4,6 +4,7 @@
 using System.Data;
 using System.Globalization;
 using System.Text;
+
 using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;

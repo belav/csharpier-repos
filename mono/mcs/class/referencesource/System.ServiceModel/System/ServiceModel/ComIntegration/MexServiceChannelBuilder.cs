@@ -13,15 +13,15 @@ namespace System.ServiceModel.ComIntegration
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using ConfigNS = System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
+    using WsdlNS = System.Web.Services.Description;
+    using DiscoNS = System.Web.Services.Discovery;
     using System.Xml;
     using System.Xml.Schema;
-    using ConfigNS = System.ServiceModel.Configuration;
-    using DiscoNS = System.Web.Services.Discovery;
-    using WsdlNS = System.Web.Services.Description;
 
     class MexServiceChannelBuilder : IProxyCreator, IProvideChannelBuilderSettings
     {

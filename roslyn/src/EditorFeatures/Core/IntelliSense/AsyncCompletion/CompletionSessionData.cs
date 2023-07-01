@@ -4,11 +4,12 @@
 
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+
+using RoslynCompletionList = Microsoft.CodeAnalysis.Completion.CompletionList;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
 using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using Microsoft.VisualStudio.Text;
-using RoslynCompletionList = Microsoft.CodeAnalysis.Completion.CompletionList;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {

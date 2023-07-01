@@ -11,9 +11,9 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using NUnit.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

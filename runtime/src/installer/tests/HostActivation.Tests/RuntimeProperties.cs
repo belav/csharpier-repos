@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.DotNet.Cli.Build;
 using Xunit;
 

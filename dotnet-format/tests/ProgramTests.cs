@@ -6,6 +6,7 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.Tools.Tests

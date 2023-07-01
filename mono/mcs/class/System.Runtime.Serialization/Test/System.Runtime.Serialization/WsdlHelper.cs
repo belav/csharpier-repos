@@ -26,15 +26,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.ServiceModel.Description;
-using System.Web.Services.Discovery;
-using System.Runtime.Serialization;
-using WebServices = System.Web.Services;
-using System.CodeDom;
+using System;using System.IO;using System.Linq;using System.Reflection;using System.ServiceModel.Description;using System.Web.Services.Discovery;using System.Runtime.Serialization;using WebServices = System.Web.Services;using System.CodeDom;
 
 namespace MonoTests.System.Runtime.Serialization
 {

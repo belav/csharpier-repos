@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.Editor

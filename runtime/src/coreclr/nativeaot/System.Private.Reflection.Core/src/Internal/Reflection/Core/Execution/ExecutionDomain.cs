@@ -2,22 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Reflection.Runtime.General;
-using System.Reflection.Runtime.TypeInfos;
-using System.Reflection.Runtime.TypeInfos.NativeFormat;
+using System.Reflection;
 using System.Reflection.Runtime.Assemblies;
+using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.MethodInfos;
 using System.Reflection.Runtime.MethodInfos.NativeFormat;
+using System.Reflection.Runtime.TypeInfos;
+using System.Reflection.Runtime.TypeInfos.NativeFormat;
 #if ECMA_METADATA_SUPPORT
-using System.Reflection.Runtime.TypeInfos.EcmaFormat;
-using System.Reflection.Runtime.MethodInfos.EcmaFormat;
+using System.Reflection.Runtime.TypeInfos.EcmaFormat;using System.Reflection.Runtime.MethodInfos.EcmaFormat;
 #endif
-using System.Reflection.Runtime.TypeParsing;
-using System.Reflection.Runtime.CustomAttributes;
-using Internal.Metadata.NativeFormat;
-using Internal.Runtime.Augments;
+using System.Reflection.Runtime.TypeParsing;using System.Reflection.Runtime.CustomAttributes;using Internal.Metadata.NativeFormat;using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Core.Execution
 {

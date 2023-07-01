@@ -2,6 +2,7 @@
 
 using System;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Tools.Logging;
 using Microsoft.Extensions.Logging;
 

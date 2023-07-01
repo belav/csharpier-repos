@@ -6,8 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Text;
-using Roslyn.Utilities;
+
 using static Microsoft.CodeAnalysis.CodeAnalysisEventSource;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {

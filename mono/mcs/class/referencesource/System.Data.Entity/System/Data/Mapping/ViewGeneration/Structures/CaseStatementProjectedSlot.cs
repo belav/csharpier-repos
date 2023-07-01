@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
 //---------------------------------------------------------------------
 // <copyright file="CaseStatementProjectedSlot.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,9 +12,6 @@
 
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Text;
-using System.Collections.Generic;
-using System.Data.Common.CommandTrees;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

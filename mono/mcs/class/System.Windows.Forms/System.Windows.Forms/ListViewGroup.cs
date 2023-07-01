@@ -26,10 +26,10 @@
 //	Daniel Nauck		(dna(at)mono-project(dot)de)
 
 using System;
-using System.Text;
-using System.Runtime.Serialization;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace System.Windows.Forms
 {

@@ -6,8 +6,8 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.Reflection;
     using System.Data.Linq;
+    using System.Reflection;
 
     internal class LinqToSqlWrapper : ILinqToSql
     {

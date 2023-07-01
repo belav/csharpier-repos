@@ -25,10 +25,11 @@
 //
 
 using System;
-using System.Net;
 using System.Collections.Generic;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
+
 using ObjCRuntimeInternal;
 
 namespace Mono.Net

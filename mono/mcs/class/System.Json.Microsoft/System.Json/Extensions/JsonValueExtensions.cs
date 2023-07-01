@@ -1,12 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
 #if FEATURE_DYNAMIC
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Dynamic;
-using System.IO;
-using System.Json;
-using System.Linq.Expressions;
+using System.Collections.Generic;using System.ComponentModel;using System.Diagnostics.CodeAnalysis;using System.Dynamic;using System.IO;using System.Json;using System.Linq.Expressions;
 
 namespace System.Runtime.Serialization.Json
 {

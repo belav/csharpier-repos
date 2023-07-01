@@ -4,13 +4,13 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
+    using System.Diagnostics;
     using System.IO;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Threading;
-    using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
-    using System.Security.Principal;
 
     sealed class ExclusiveNamedPipeTransportManager : NamedPipeTransportManager
     {

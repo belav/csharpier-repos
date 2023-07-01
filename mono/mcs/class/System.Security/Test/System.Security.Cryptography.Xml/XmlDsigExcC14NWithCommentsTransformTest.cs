@@ -15,13 +15,7 @@
 //
 #if !MOBILE
 
-using System;
-using System.IO;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Xml;
-
-using NUnit.Framework;
+using System;using System.IO;using System.Security.Cryptography.Xml;using System.Text;using System.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.Xml
 {

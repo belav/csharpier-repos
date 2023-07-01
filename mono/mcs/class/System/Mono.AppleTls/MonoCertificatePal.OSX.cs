@@ -37,15 +37,7 @@ using Mono.Security.Cryptography;
 #endif
 #endif
 
-using System;
-using System.Threading;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Apple;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Win32.SafeHandles;
-using Mono.Net;
-
+using System;using System.Threading;using System.Runtime.InteropServices;using System.Security.Cryptography;using System.Security.Cryptography.Apple;using System.Security.Cryptography.X509Certificates;using Microsoft.Win32.SafeHandles;using Mono.Net;
 #if MONO_FEATURE_BTLS
 using Mono.Btls;
 #endif

@@ -8,13 +8,7 @@ using System.Linq;
 #if !SILVERLIGHT // Serialization
 using System.Runtime.Serialization;
 #endif // !SILVERLIGHT
-using System.Text;
-using System.Threading;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using CultureInfo = System.Globalization.CultureInfo;
-using System.Runtime.Versioning;
+using System.Text;using System.Threading;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using CultureInfo = System.Globalization.CultureInfo;using System.Runtime.Versioning;
 
 [module: SuppressMessage(
     "Microsoft.Performance",

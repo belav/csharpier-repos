@@ -7,7 +7,6 @@
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
-
 #if CODE_STYLE
 using AbstractCodeActionOrUserDiagnosticTest = Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest;
 #endif

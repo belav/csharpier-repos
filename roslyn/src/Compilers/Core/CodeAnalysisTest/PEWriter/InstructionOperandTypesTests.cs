@@ -7,6 +7,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+
 using Microsoft.Cci;
 using Roslyn.Test.Utilities;
 using Xunit;

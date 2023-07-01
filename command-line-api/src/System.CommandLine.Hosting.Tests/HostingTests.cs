@@ -1,8 +1,8 @@
 ﻿using System.CommandLine.Binding;
 using System.CommandLine.Invocation;
+using CommandHandler = System.CommandLine.NamingConventionBinder.CommandHandler;
 using System.CommandLine.Parsing;
 using System.Linq;
-using CommandHandler = System.CommandLine.NamingConventionBinder.CommandHandler;
 
 using FluentAssertions;
 

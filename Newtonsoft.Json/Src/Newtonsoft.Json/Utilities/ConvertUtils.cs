@@ -25,19 +25,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
 #if !HAVE_GUID_TRY_PARSE
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Text;using System.Text.RegularExpressions;
 #endif
-using Newtonsoft.Json.Serialization;
-using System.Reflection;
-using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Serialization;using System.Reflection;using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif

@@ -3,9 +3,9 @@
 
 
 using System;
-using System.Text;
 
 using System.Reflection.Runtime.General;
+using System.Text;
 
 using Internal.Metadata.NativeFormat;
 using Internal.Runtime.Augments;

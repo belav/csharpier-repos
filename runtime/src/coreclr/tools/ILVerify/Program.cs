@@ -5,15 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Parsing;
+
+using static System.Console;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.RegularExpressions;
-using Internal.TypeSystem.Ecma;
 
-using static System.Console;
+using Internal.TypeSystem.Ecma;
 
 namespace ILVerify
 {

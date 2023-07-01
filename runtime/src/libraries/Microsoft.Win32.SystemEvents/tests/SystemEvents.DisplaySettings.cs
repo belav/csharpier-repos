@@ -3,8 +3,9 @@
 
 using System;
 using System.Threading;
-using Xunit;
+
 using static Interop;
+using Xunit;
 
 namespace Microsoft.Win32.SystemEventsTests
 {

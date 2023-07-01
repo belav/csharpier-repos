@@ -31,10 +31,10 @@ using System;
 
 using Mono.Messaging;
 using Mono.Messaging.RabbitMQ;
-using RabbitMQ.Client;
 
 using NUnit.Framework;
 using NUnit.Mocks;
+using RabbitMQ.Client;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ
 {

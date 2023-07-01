@@ -8,12 +8,12 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
-    using System.Xml;
-    using System.Xml.XPath;
+    using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
     using System.Text;
-    using System.Collections;
+    using System.Xml;
+    using System.Xml.XPath;
 
     internal sealed class XPathScanner
     {

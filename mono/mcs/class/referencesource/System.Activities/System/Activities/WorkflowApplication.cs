@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
-    using System.Activities.Hosting;
     using System.Activities.DurableInstancing;
     using System.Activities.DynamicUpdate;
+    using System.Activities.Hosting;
     using System.Activities.Persistence;
     using System.Activities.Runtime;
     using System.Activities.Tracking;
@@ -18,11 +18,11 @@ namespace System.Activities
     using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Runtime.Serialization;
+    using System.Security;
+    using System.Text;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Text;
-    using System.Security;
 
     // WorkflowApplication is free-threaded. It is responsible for the correct locking and usage of the ActivityExecutor.
     // Given that there are two simultaneous users of ActivityExecutor (WorkflowApplication and NativeActivityContext),

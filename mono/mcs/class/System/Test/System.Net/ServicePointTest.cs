@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Threading;
+
 //
 // ServicePointTest.cs - NUnit Test Cases for System.Net.ServicePoint
 //
@@ -9,12 +16,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.IO;
-using System.Net;
-using System.Reflection;
-using System.Threading;
 
 namespace MonoTests.System.Net
 {

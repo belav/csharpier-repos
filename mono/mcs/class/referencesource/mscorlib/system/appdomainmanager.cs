@@ -23,9 +23,7 @@ namespace System
 #if FEATURE_CLICKONCE
     using System.Runtime.Hosting;
 #endif
-    using System.Runtime.Versioning;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
+    using System.Runtime.Versioning;using System.Runtime.InteropServices;using System.Diagnostics.Contracts;
 
 #if FEATURE_APPDOMAINMANAGER_INITOPTIONS
     [Flags]

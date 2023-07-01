@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
+
 using StackInt = MS.Internal.Xml.XPath.ClonableStack<int>;
 using StackNav = MS.Internal.Xml.XPath.ClonableStack<System.Xml.XPath.XPathNavigator>;
 

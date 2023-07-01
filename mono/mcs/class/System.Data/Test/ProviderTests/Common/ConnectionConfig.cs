@@ -29,11 +29,7 @@
 
 #if !NO_CONFIGURATION
 
-using System;
-using System.Collections;
-using System.Configuration;
-using System.Globalization;
-using System.Xml;
+using System;using System.Collections;using System.Configuration;using System.Globalization;using System.Xml;
 
 namespace MonoTests.System.Data.Connected
 {

@@ -8,8 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
-using System.Security;
 using ComTypes = System.Runtime.InteropServices.ComTypes;
+using System.Security;
 
 namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {

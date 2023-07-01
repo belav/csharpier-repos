@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Runtime;
+    using System.ServiceModel.Diagnostics.Application;
     using System.Threading;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
 
     sealed class ReliableRequestSessionChannel : RequestChannel, IRequestSessionChannel
     {

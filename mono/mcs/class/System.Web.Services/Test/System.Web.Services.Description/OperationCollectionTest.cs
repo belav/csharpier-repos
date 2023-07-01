@@ -1,3 +1,6 @@
+using System;
+using System.Web.Services.Description;
+
 //
 // MonoTests.System.Web.Services.Description.OperationCollectionTest.cs
 //
@@ -8,9 +11,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Web.Services.Description;
 
 namespace MonoTests.System.Web.Services.Description
 {

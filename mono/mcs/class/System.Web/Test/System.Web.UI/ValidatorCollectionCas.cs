@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 //
 // ValidatorCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.ValidatorCollection
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI
 {

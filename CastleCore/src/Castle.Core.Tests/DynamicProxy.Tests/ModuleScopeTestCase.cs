@@ -17,6 +17,7 @@ namespace Castle.DynamicProxy.Tests
     using System;
     using System.IO;
     using System.Reflection;
+
     using Castle.DynamicProxy.Generators;
     using Castle.DynamicProxy.Serialization;
     using Castle.DynamicProxy.Tests.InterClasses;

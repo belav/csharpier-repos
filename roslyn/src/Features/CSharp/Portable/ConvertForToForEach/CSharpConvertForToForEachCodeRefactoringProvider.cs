@@ -7,6 +7,7 @@
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.ConvertForToForEach;
 using Microsoft.CodeAnalysis.CSharp.Extensions;

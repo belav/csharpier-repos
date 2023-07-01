@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
     using Newtonsoft.Json;
 
     internal sealed class SemanticTokensCapabilities

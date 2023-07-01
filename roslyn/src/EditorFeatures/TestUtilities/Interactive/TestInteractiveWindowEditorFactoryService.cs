@@ -6,6 +6,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.InteractiveWindow;
 using Microsoft.VisualStudio.Text;

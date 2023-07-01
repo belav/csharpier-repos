@@ -1,3 +1,13 @@
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
+using System.IO;
+using System.Reflection;
+using System.Security.Permissions;
+
+using MonoTests.Helpers;
 //
 // Graphics class testing unit
 //
@@ -28,16 +38,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.IO;
-using System.Reflection;
-using System.Security.Permissions;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Drawing
 {

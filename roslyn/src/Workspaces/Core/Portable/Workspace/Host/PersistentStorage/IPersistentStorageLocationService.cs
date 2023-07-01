@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Composition;
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.PersistentStorage;
 using Roslyn.Utilities;

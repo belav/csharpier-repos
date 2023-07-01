@@ -26,14 +26,14 @@
 
 using System;
 using System.Collections;
+
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
 
 using NUnit.Framework;
-
-using System.Collections.ObjectModel;
 
 namespace MonoTests.System.Windows.Forms.DataBinding
 {

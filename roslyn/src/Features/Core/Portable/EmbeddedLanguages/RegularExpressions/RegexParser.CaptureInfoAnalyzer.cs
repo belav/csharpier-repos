@@ -7,6 +7,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -15,9 +16,9 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 {
     using static EmbeddedSyntaxHelpers;
-    using static RegexHelpers;
 
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
+    using static RegexHelpers;
 
     internal partial struct RegexParser
     {

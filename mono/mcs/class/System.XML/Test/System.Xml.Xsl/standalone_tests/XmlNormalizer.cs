@@ -1,11 +1,11 @@
 using System;
+using System.Collections;
+using System.ComponentModel;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-using System.Collections;
-using System.Reflection;
-using System.ComponentModel;
-using System.Text;
 
 namespace XmlNormalizer
 {

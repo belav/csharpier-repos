@@ -6,6 +6,7 @@
 
 using System;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.Language.Intellisense;
 

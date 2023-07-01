@@ -1,3 +1,4 @@
+using System;
 //
 // System.IO.StreamWriter.cs
 //
@@ -39,7 +40,6 @@
 // output.)  See UnexceptionalStreamReader too.
 
 using System.Text;
-using System;
 
 namespace System.IO
 {

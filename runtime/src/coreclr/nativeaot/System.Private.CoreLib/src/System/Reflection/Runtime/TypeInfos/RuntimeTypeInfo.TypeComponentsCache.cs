@@ -1,17 +1,17 @@
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Reflection.Runtime.BindingFlagSupport;
+using System.Reflection.Runtime.General;
+
+using Unsafe = System.Runtime.CompilerServices.Unsafe;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Reflection;
-using System.Reflection.Runtime.General;
-using System.Reflection.Runtime.BindingFlagSupport;
 
 using Internal.Reflection.Core.Execution;
-
-using Unsafe = System.Runtime.CompilerServices.Unsafe;
 
 namespace System.Reflection.Runtime.TypeInfos
 {

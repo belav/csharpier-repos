@@ -10,9 +10,9 @@ namespace System.ServiceModel.Dispatcher
     using System.Runtime.CompilerServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using SessionIdleManager = System.ServiceModel.Channels.ServiceChannel.SessionIdleManager;
     using System.Threading;
     using System.Transactions;
-    using SessionIdleManager = System.ServiceModel.Channels.ServiceChannel.SessionIdleManager;
 
     class ListenerHandler : CommunicationObject, ISessionThrottleNotification
     {

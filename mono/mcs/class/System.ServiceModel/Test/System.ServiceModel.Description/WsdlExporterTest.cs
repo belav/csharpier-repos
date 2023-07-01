@@ -26,28 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using NUnit.Framework;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Web.Services;
-
-using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
-using WSMessage = System.Web.Services.Description.Message;
-using WSBinding = System.Web.Services.Description.Binding;
-using QName = System.Xml.XmlQualifiedName;
-
-using SMMessage = System.ServiceModel.Channels.Message;
-
-using System.Xml;
-using System.Web.Services.Description;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.Reflection;
+using System;using System.Collections.Generic;using System.Text;using System.ServiceModel.Channels;using System.ServiceModel.Description;using NUnit.Framework;using System.Runtime.Serialization;using System.ServiceModel;using System.Web.Services;using WSServiceDescription = System.Web.Services.Description.ServiceDescription;using WSMessage = System.Web.Services.Description.Message;using WSBinding = System.Web.Services.Description.Binding;using QName = System.Xml.XmlQualifiedName;using SMMessage = System.ServiceModel.Channels.Message;using System.Xml;using System.Web.Services.Description;using System.Xml.Schema;using System.Xml.Serialization;using System.Reflection;
 
 namespace MonoTests.System.ServiceModel.Description
 {

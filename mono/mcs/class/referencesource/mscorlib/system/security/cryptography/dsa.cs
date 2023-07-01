@@ -12,11 +12,11 @@
 
 namespace System.Security.Cryptography
 {
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.Security.Util;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Serialization;
+    using System.Security.Util;
+    using System.Text;
 #if MONO
     using System.Buffers;
 #endif

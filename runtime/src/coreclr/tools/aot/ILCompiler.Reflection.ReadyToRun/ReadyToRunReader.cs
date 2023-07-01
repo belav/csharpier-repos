@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
+using Debug = System.Diagnostics.Debug;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -15,8 +17,6 @@ using System.Text;
 
 using Internal.ReadyToRunConstants;
 using Internal.Runtime;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Reflection.ReadyToRun
 {

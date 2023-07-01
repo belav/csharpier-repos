@@ -1,3 +1,7 @@
+using System;
+using System.Drawing;
+using System.Security.Permissions;
+
 //
 // Test FontConverter class testing unit
 //
@@ -28,9 +32,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing
 {

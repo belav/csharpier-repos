@@ -6,12 +6,7 @@
 
 #if NETCOREAPP
 
-using System;
-using System.IO;
-using System.Text;
-using System.Threading;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
+using System;using System.IO;using System.Text;using System.Threading;using Microsoft.CodeAnalysis.Test.Utilities;using Roslyn.Test.Utilities;
 
 namespace Roslyn.Test.Utilities.CoreClr
 {

@@ -41,13 +41,7 @@
 // utilized by the JIT on that platform). The caller enumerates each argument of a signature in turn, and is
 // provided with information mapping that argument into registers and/or stack locations.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Internal.Runtime;
-using Internal.Runtime.Augments;
-using Internal.Runtime.TypeLoader;
-using Internal.NativeFormat;
+using System;using System.Collections.Generic;using System.Diagnostics;using Internal.Runtime;using Internal.Runtime.Augments;using Internal.Runtime.TypeLoader;using Internal.NativeFormat;
 
 namespace Internal.Runtime.CallConverter
 {

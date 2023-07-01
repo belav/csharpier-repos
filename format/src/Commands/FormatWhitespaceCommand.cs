@@ -4,8 +4,9 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+
 using static Microsoft.CodeAnalysis.Tools.FormatCommandCommon;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.CodeAnalysis.Tools.Commands
 {

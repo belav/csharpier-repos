@@ -1,3 +1,8 @@
+using System.Drawing;
+using System.Globalization;
+using System.Reflection;
+using System.Runtime.InteropServices;
+
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -27,10 +32,6 @@
 // NOT COMPLETE
 
 using Accessibility;
-using System.Drawing;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {

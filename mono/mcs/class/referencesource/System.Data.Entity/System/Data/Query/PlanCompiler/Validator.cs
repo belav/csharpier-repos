@@ -9,13 +9,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 using md = System.Data.Metadata.Edm;
 using System.Data.Query.InternalTrees;
 using System.Data.Query.PlanCompiler;
 using System.Data.Query.ResultAssembly;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 
 namespace System.Data.Query.PlanCompiler

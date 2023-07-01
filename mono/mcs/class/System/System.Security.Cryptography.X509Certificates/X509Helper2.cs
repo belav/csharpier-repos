@@ -40,9 +40,7 @@ using MX = Mono.Security.X509;
 using Mono.Btls;
 #endif
 
-using System.IO;
-using System.Text;
-using Mono;
+using System.IO;using System.Text;using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {

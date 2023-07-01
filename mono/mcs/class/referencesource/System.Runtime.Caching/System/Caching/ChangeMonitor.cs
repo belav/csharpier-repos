@@ -2,8 +2,8 @@
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 using System;
-using System.Runtime.Caching.Resources;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Caching.Resources;
 using System.Threading;
 
 // Every member of this class is thread-safe.

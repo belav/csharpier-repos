@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
 
-using Internal.Reflection.Tracing;
-
 using Internal.Metadata.NativeFormat;
+
+using Internal.Reflection.Tracing;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {

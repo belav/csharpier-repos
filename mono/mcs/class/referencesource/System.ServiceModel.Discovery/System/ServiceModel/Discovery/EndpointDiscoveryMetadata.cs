@@ -8,10 +8,10 @@ namespace System.ServiceModel.Discovery
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using SR2 = System.ServiceModel.Discovery.SR;
     using System.ServiceModel.Dispatcher;
     using System.Xml;
     using System.Xml.Linq;
-    using SR2 = System.ServiceModel.Discovery.SR;
 
     [Fx.Tag.XamlVisible(false)]
     public class EndpointDiscoveryMetadata

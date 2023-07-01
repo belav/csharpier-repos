@@ -33,6 +33,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
+
 using NUnit.Framework;
 
 // This binding element class is for testing some bindings to check

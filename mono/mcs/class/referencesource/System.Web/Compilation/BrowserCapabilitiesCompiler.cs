@@ -8,10 +8,10 @@ namespace System.Web.Compilation
 {
     using System;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Configuration;
-    using System.CodeDom.Compiler;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
@@ -20,8 +20,8 @@ namespace System.Web.Compilation
     using System.Security.Permissions;
     using System.Web.Configuration;
     using System.Web.Hosting;
-    using System.Web.Util;
     using System.Web.UI;
+    using System.Web.Util;
     using System.Xml;
 
     static class BrowserCapabilitiesCompiler

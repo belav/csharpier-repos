@@ -154,13 +154,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt03.opt03
 {
+    using System;
     // <Area>Use of Optional Parameters</Area>
     // <Title>Optional Parameters declared with Attributes</Title>
     // <Description>Optional Parameters declared with Attributes</Description>
     // <Expects status=success></Expects>
     // <Code>
     using System.Runtime.InteropServices;
-    using System;
 
     public class Parent
     {

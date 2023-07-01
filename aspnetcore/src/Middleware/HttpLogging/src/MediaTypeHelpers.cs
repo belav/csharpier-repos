@@ -3,8 +3,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using Microsoft.Net.Http.Headers;
+
 using static Microsoft.AspNetCore.HttpLogging.MediaTypeOptions;
+using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 

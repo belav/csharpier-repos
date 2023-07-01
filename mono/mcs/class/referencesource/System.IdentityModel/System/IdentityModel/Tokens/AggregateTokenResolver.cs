@@ -3,11 +3,11 @@
 //------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
 
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-using System.Collections.ObjectModel;
+using System.Text;
 
 namespace System.IdentityModel.Tokens
 {

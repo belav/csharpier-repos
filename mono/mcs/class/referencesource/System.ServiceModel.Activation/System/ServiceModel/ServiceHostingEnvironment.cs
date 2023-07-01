@@ -17,8 +17,10 @@ namespace System.ServiceModel
     using System.Security;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Activation.Diagnostics;
+    using SR2 = System.ServiceModel.Activation.SR;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
+    using TD2 = System.ServiceModel.Diagnostics.Application.TD;
     using System.Threading;
     using System.Web;
     using System.Web.Compilation;
@@ -26,8 +28,6 @@ namespace System.ServiceModel
     using System.Web.Hosting;
     using System.Web.Routing;
     using System.Xaml.Hosting.Configuration;
-    using SR2 = System.ServiceModel.Activation.SR;
-    using TD2 = System.ServiceModel.Diagnostics.Application.TD;
 
     [TypeForwardedFrom(
         "System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"

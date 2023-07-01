@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-using Xunit;
+using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer>;
 
 using static Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer;
 
-using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer>;
+using Xunit;
 
 namespace LibraryImportGenerator.UnitTests
 {

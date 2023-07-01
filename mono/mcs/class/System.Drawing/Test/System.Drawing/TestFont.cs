@@ -1,3 +1,10 @@
+using System;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // Test Font class testing unit
 //
@@ -30,12 +37,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Security;
-using System.Security.Permissions;
-using System.Runtime.InteropServices;
 
 namespace MonoTests.System.Drawing
 {

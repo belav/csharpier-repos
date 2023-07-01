@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.Runtime;
     using System.ServiceModel;
     using System.Transactions;
-    using System.Runtime;
 
     internal class MsmqReceiveContextLockManager : IDisposable
     {

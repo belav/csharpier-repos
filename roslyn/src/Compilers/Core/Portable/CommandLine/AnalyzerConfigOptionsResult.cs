@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using System.Diagnostics;
-using AnalyzerOptions = System.Collections.Immutable.ImmutableDictionary<string, string>;
 using TreeOptions = System.Collections.Immutable.ImmutableDictionary<
     string,
     Microsoft.CodeAnalysis.ReportDiagnostic
 >;
+using AnalyzerOptions = System.Collections.Immutable.ImmutableDictionary<string, string>;
+using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {

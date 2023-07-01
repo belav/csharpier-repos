@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+
 using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests

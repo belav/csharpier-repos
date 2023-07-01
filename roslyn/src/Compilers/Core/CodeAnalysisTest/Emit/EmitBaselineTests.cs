@@ -7,6 +7,7 @@
 using System;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Emit;
 using Roslyn.Utilities;
 using Xunit;

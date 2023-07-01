@@ -3,6 +3,7 @@
 
 using System.Runtime.InteropServices;
 using System.Text.Json;
+
 using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;

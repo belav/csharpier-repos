@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Runtime.Remoting.Contexts.ContextAttribute.cs
 //
@@ -31,7 +32,6 @@
 //
 
 using System.Runtime.Remoting.Activation;
-using System.Collections;
 
 namespace System.Runtime.Remoting.Contexts
 {

@@ -5,8 +5,7 @@
 #nullable disable
 
 #if NET472
-using System.Collections.Generic;
-using Roslyn.Test.Utilities;
+using System.Collections.Generic;using Roslyn.Test.Utilities;
 
 namespace Roslyn.Test.Utilities.Desktop
 {

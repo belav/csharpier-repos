@@ -1,3 +1,4 @@
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <copyright file="DesignerValidatorAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,7 +10,6 @@ using System.Web.Mobile;
 using System.Web.UI.Design.MobileControls;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Diagnostics;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {

@@ -6,12 +6,12 @@ namespace System.ServiceModel.Transactions
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.IO;
     using System.Net;
+    using System.Runtime;
     using System.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.ComIntegration;
     using System.ServiceModel.Security;
     using System.Transactions;

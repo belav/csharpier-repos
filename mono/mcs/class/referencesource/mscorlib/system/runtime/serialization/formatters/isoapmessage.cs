@@ -15,10 +15,10 @@
 #if FEATURE_REMOTING || MOBILE_LEGACY
 namespace System.Runtime.Serialization.Formatters
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.Serialization;
-    using System.Runtime.Remoting.Messaging;
     using System;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Messaging;
+    using System.Runtime.Serialization;
 
     // Used to specify a call record to either the binary or xml serializer
     // The call record can be transmitted as the SOAP Top record which contains

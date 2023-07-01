@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using Xunit;
 
 namespace System.Net.Mail.Tests

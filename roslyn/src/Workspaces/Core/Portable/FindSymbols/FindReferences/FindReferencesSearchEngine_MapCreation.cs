@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.FindSymbols.Finders;
 using Microsoft.CodeAnalysis.Internal.Log;
@@ -20,13 +21,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         Document,
         HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>
     >;
-    using ProjectMap = Dictionary<
-        Project,
-        HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>
-    >;
     using ProjectToDocumentMap = Dictionary<
         Project,
         Dictionary<Document, HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>>
+    >;
+    using ProjectMap = Dictionary<
+        Project,
+        HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>
     >;
 
     internal partial class FindReferencesSearchEngine

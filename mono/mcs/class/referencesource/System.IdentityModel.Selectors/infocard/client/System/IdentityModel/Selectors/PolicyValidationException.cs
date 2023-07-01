@@ -6,6 +6,7 @@ namespace System.IdentityModel.Selectors
 {
     using System;
     using System.Runtime.Serialization;
+
     using Microsoft.InfoCards.Diagnostics;
 
     //

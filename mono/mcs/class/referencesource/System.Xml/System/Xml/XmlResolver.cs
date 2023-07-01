@@ -9,12 +9,11 @@ namespace System.Xml
 {
     using System;
     using System.IO;
-    using System.Text;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
 #if !SILVERLIGHT
-    using System.Net;
-    using System.Threading.Tasks;
+    using System.Net;using System.Threading.Tasks;
 #endif
     using System.Runtime.Versioning;
 

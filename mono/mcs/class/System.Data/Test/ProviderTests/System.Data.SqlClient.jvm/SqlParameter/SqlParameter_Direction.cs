@@ -1,7 +1,7 @@
 using System;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 using MonoTests.System.Data.Utils;
 

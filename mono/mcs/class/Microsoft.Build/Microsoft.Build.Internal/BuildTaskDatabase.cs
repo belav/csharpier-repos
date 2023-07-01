@@ -27,14 +27,15 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Build.Framework;
-using System.Reflection;
-using Microsoft.Build.Execution;
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Construction;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Xml;
+
+using Microsoft.Build.Construction;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Execution;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Internal
 {

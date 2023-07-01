@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.UnitTests

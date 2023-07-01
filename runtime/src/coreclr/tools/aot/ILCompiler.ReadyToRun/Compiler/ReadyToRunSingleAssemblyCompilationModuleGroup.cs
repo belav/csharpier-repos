@@ -3,11 +3,11 @@
 
 using System.Collections.Generic;
 
+using Debug = System.Diagnostics.Debug;
+
 using Internal.ReadyToRunConstants;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {

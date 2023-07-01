@@ -4,9 +4,9 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.Windows.Data;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Windows.Data;
 
     public sealed class GenericTypeArgumentConverter : IValueConverter
     {

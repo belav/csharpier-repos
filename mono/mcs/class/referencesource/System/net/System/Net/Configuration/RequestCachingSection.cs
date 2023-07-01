@@ -6,11 +6,12 @@
 
 namespace System.Net.Configuration
 {
-    using Microsoft.Win32;
     using System.Configuration;
     using System.Globalization;
     using System.Net.Cache;
     using System.Threading;
+
+    using Microsoft.Win32;
 
     public sealed class RequestCachingSection : ConfigurationSection
     {

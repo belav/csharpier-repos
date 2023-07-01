@@ -3,9 +3,9 @@
 
 using System;
 
-using Internal.TypeSystem;
-
 using Internal.Text;
+
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // ReflectionPermissionAttributeTest.cs -
 //	NUnit Test Cases for ReflectionPermissionAttribute
@@ -29,9 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

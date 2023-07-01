@@ -7,12 +7,12 @@ namespace System.ServiceModel.Routing
     using System;
     using System.Collections.Generic;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Transactions;
-    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
+    using System.Transactions;
 
     static class ClientFactory
     {

@@ -4,8 +4,9 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
+
 using IMessageFilter = Microsoft.VisualStudio.OLE.Interop.IMessageFilter;
+using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
 {

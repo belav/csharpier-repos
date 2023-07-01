@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Data.Query.InternalTrees;
 using System.Data.Query.PlanCompiler;
+using System.Globalization;
 using System.Linq;
 
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...

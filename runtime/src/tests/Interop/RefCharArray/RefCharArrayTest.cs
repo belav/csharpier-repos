@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using System.Security;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+
 using TestLibrary;
 
 public class Test_RefCharArrayTest

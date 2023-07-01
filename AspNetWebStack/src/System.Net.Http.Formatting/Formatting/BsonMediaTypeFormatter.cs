@@ -10,12 +10,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+
 using Newtonsoft.Json;
 #if NETFX_CORE
 using Newtonsoft.Json.Bson;
 #else
-using BsonReader = Newtonsoft.Json.Bson.BsonDataReader;
-using BsonWriter = Newtonsoft.Json.Bson.BsonDataWriter;
+using BsonReader = Newtonsoft.Json.Bson.BsonDataReader;using BsonWriter = Newtonsoft.Json.Bson.BsonDataWriter;
 #endif
 
 namespace System.Net.Http.Formatting

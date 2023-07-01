@@ -4,10 +4,10 @@
 
 using System;
 using System.Diagnostics;
-using Internal.IL;
-using Internal.TypeSystem;
 
 using ILLink.Shared;
+using Internal.IL;
+using Internal.TypeSystem;
 
 namespace ILCompiler.Dataflow
 {

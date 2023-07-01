@@ -42,10 +42,10 @@
 //
 
 using System;
-using System.Data;
-using System.Configuration;
-using System.Data.Odbc;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Data;
+using System.Data.Odbc;
 
 namespace MonoTests.System.Data
 {

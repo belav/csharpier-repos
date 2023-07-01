@@ -28,12 +28,7 @@
 
 #if FEATURE_COMPRESSEDSTACK
 
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Threading;
-
-using NUnit.Framework;
+using System;using System.Runtime.Serialization;using System.Security;using System.Threading;using NUnit.Framework;
 
 namespace MonoTests.System.Threading
 {

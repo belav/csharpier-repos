@@ -3,10 +3,11 @@
 
 using System;
 
-using Internal.TypeSystem;
+using Debug = System.Diagnostics.Debug;
+
 using Internal.IL.Stubs;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
 
 namespace Internal.IL
 {

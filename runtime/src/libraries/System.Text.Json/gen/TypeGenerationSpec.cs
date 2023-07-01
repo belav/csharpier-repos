@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Reflection;
 using System.Text.Json.Serialization;
+
 using Microsoft.CodeAnalysis;
 
 namespace System.Text.Json.SourceGeneration

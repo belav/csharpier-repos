@@ -29,8 +29,8 @@ using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery.Udp;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {

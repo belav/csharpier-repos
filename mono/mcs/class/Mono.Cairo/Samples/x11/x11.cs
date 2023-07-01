@@ -28,8 +28,9 @@
 //
 
 using System;
-using Cairo;
 using System.Runtime.InteropServices;
+
+using Cairo;
 
 public class Window
 {

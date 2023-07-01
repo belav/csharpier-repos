@@ -15,9 +15,9 @@
 namespace System
 {
     using System.Diagnostics.Contracts;
-    using System.Text;
     using CultureInfo = System.Globalization.CultureInfo;
     using NumberStyles = System.Globalization.NumberStyles;
+    using System.Text;
 
     // A Version object contains four hierarchical numeric components: major, minor,
     // build and revision.  Build and revision may be unspecified, which is represented

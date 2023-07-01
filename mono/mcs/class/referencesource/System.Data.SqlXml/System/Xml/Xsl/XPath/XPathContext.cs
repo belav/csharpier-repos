@@ -8,12 +8,7 @@
 #if DontUse
 // XPathContext is not used any more but comments in it and Replacer visitor may be used to
 // optimize code XSLT generates on last().
-using System;
-using System.Diagnostics;
-using System.Collections;
-using System.Xml;
-using System.Xml.XPath;
-using MS.Internal.Xml;
+using System;using System.Diagnostics;using System.Collections;using System.Xml;using System.Xml.XPath;using MS.Internal.Xml;
 
 namespace System.Xml.Xsl.XPath
 {

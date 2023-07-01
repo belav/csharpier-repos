@@ -20,15 +20,7 @@ using System;
 #if FEATURE_MACL || MONO
 using System.Security.AccessControl;
 #endif
-using System.Security.Permissions;
-using PermissionSet = System.Security.PermissionSet;
-using Win32Native = Microsoft.Win32.Win32Native;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Runtime.Serialization;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
+using System.Security.Permissions;using PermissionSet = System.Security.PermissionSet;using Win32Native = Microsoft.Win32.Win32Native;using System.Runtime.InteropServices;using System.Text;using System.Runtime.Serialization;using System.Globalization;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
 namespace System.IO
 {

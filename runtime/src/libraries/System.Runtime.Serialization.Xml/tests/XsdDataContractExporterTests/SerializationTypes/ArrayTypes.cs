@@ -1,15 +1,12 @@
 using System;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
-
+using System.Runtime.Serialization;
 #if UseSeparateAssemblyNamespace
-using Address = SerializableTypes.XsdDataContractExporterTests.Address;
-using Employee = SerializableTypes.XsdDataContractExporterTests.Employee;
+using Address = SerializableTypes.XsdDataContractExporterTests.Address;using Employee = SerializableTypes.XsdDataContractExporterTests.Employee;
 
 namespace SerializableTypes.XsdDataContractExporterTests.ArrayTypes
 #else
-using Address = System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Address;
-using Employee = System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Employee;
+using Address = System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Address;using Employee = System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Employee;
 
 namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.ArrayTypes
 #endif

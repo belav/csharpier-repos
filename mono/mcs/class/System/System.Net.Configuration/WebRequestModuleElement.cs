@@ -32,9 +32,7 @@
 
 #if CONFIGURATION_DEP
 
-using System;
-using System.ComponentModel;
-using System.Configuration;
+using System;using System.ComponentModel;using System.Configuration;
 
 namespace System.Net.Configuration
 {

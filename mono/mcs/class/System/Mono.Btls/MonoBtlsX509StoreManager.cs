@@ -28,16 +28,11 @@
 extern alias MonoSecurity;
 #endif
 
-using System;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-
+using System;using System.IO;using System.Security.Cryptography.X509Certificates;
 #if MONO_SECURITY_ALIAS
-using MonoSecurity::Mono.Security.Interface;
-using MX = MonoSecurity::Mono.Security.X509;
+using MonoSecurity::Mono.Security.Interface;using MX = MonoSecurity::Mono.Security.X509;
 #else
-using Mono.Security.Interface;
-using MX = Mono.Security.X509;
+using Mono.Security.Interface;using MX = Mono.Security.X509;
 #endif
 
 namespace Mono.Btls

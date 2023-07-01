@@ -7,18 +7,19 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
-    using System.Globalization;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Xml.XPath;
-    using MS.Internal.Xml.XPath;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Xml.Xsl.XsltOld.Debugger;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Security;
+    using System.Text;
+    using Res = System.Xml.Utils.Res;
+    using System.Xml.XPath;
+    using System.Xml.Xsl.XsltOld.Debugger;
+
+    using MS.Internal.Xml.XPath;
 
     internal sealed class Processor : IXsltProcessor
     {

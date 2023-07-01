@@ -19,21 +19,22 @@
 namespace System.Resources
 {
     using System;
-    using System.IO;
-    using System.Globalization;
     using System.Collections;
-    using System.Text;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
     using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
+
     using Microsoft.Win32;
-    using System.Collections.Generic;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 #if !FEATURE_CORECLR
     using System.Diagnostics.Tracing;
 #endif

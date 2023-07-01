@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Factories;
 using System.ComponentModel.Composition.Primitives;
+
 using Xunit;
 
 namespace Tests.Integration

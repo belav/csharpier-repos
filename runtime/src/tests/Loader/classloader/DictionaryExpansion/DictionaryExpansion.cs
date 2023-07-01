@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 class TestType1<T> { }

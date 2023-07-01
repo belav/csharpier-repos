@@ -27,8 +27,7 @@
 //
 
 #if !MONO_FEATURE_SRE
-using System.Globalization;
-using System.IO;
+using System.Globalization;using System.IO;
 
 namespace System.Reflection.Emit
 {

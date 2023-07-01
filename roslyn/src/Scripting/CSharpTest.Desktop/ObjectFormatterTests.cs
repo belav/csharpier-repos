@@ -9,10 +9,11 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 using Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests;
-using Xunit;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 {

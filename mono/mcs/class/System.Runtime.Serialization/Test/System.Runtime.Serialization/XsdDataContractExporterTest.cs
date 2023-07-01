@@ -28,19 +28,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Collections.Generic;
-
-using System.IO;
-using System.Runtime.Serialization;
-using NUnit.Framework;
-using System.Xml.Schema;
-using System.Collections;
-using System.Xml.Serialization;
-using System.Reflection;
-using System.Xml;
-
-using QName = System.Xml.XmlQualifiedName;
+using System;using System.Collections.Generic;using System.IO;using System.Runtime.Serialization;using NUnit.Framework;using System.Xml.Schema;using System.Collections;using System.Xml.Serialization;using System.Reflection;using System.Xml;using QName = System.Xml.XmlQualifiedName;
 
 namespace MonoTests.System.Runtime.Serialization
 {

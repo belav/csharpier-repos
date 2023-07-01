@@ -13,10 +13,11 @@ namespace System.ServiceModel.Activities
     using System.Runtime.DurableInstancing;
     using System.ServiceModel;
     using System.ServiceModel.Activities.Dispatcher;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.Xaml;
+
     using Microsoft.VisualBasic.Activities;
-    using SR2 = System.ServiceModel.Activities.SR;
 
     static class MessagingActivityHelper
     {

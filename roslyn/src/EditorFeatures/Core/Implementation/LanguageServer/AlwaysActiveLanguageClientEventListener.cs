@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.ErrorReporting;

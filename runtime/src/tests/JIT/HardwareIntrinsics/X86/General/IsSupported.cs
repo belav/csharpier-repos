@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.Intrinsics.X86;
 using System.Numerics;
+using System.Runtime.Intrinsics.X86;
+
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.General

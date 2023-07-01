@@ -1,3 +1,4 @@
+using System.Web.Services.Configuration;
 //
 // System.Web.Services.Description.PortType.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Xml.Serialization;
-using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description
 {

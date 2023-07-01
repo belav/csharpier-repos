@@ -3,9 +3,10 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using ILLink.Shared.DataFlow;
-using Mono.Linker.Dataflow;
 using GenericParameter = Mono.Cecil.GenericParameter;
+using Mono.Linker.Dataflow;
 
 namespace ILLink.Shared.TrimAnalysis
 {

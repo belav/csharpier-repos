@@ -3,11 +3,12 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using ILLink.Shared.DataFlow;
-using Mono.Linker;
-using Mono.Linker.Dataflow;
 using FieldDefinition = Mono.Cecil.FieldDefinition;
 using TypeDefinition = Mono.Cecil.TypeDefinition;
+using Mono.Linker;
+using Mono.Linker.Dataflow;
 
 namespace ILLink.Shared.TrimAnalysis
 {

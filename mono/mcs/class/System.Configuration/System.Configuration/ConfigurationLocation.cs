@@ -1,3 +1,4 @@
+using System.IO;
 //
 // System.Configuration.ConfigurationLocation.cs
 //
@@ -28,7 +29,6 @@
 //
 
 using System.Xml;
-using System.IO;
 
 namespace System.Configuration
 {

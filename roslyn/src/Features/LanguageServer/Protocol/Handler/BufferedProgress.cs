@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 

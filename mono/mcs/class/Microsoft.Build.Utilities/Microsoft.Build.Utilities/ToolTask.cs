@@ -30,19 +30,20 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Diagnostics;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+
+using SCS = System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+
 using Microsoft.Build.Framework;
 using Mono.XBuild.Utilities;
-using System.Threading;
-using System.Collections.Generic;
-
-using SCS = System.Collections.Specialized;
 
 namespace Microsoft.Build.Utilities
 {

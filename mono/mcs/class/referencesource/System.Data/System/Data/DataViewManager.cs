@@ -10,8 +10,8 @@
 namespace System.Data
 {
     using System;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
     using System.IO;
     using System.Text;
     using System.Xml;

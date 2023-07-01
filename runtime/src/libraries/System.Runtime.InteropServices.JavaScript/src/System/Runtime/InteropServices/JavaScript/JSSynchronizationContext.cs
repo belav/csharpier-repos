@@ -3,13 +3,7 @@
 
 #if FEATURE_WASM_THREADS
 
-using System;
-using System.Threading;
-using System.Threading.Channels;
-using System.Runtime;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using QueueType = System.Threading.Channels.Channel<System.Runtime.InteropServices.JavaScript.JSSynchronizationContext.WorkItem>;
+using System;using System.Threading;using System.Threading.Channels;using System.Runtime;using System.Runtime.InteropServices;using System.Runtime.CompilerServices;using QueueType = System.Threading.Channels.Channel<System.Runtime.InteropServices.JavaScript.JSSynchronizationContext.WorkItem>;
 
 namespace System.Runtime.InteropServices.JavaScript
 {

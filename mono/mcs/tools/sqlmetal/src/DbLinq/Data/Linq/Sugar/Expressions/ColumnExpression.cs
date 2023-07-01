@@ -1,3 +1,4 @@
+using System.Data.Linq.Mapping;
 #region MIT license
 //
 // MIT license
@@ -30,7 +31,6 @@ using System.Reflection;
 
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Util;
-using System.Data.Linq.Mapping;
 
 namespace DbLinq.Data.Linq.Sugar.Expressions
 {

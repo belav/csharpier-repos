@@ -9,13 +9,13 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.IO;
     using System.Collections;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.Versioning;
 
     // No data, does not need to be marked with the serializable attribute
     [System.Runtime.InteropServices.ComVisible(true)]

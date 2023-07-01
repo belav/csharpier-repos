@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem;
+
+using Internal.TypeSystem.Ecma;
 
 using Xunit;
 

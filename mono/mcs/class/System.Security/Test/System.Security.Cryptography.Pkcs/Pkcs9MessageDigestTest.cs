@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+
 //
 // Pkcs9MessageDigestTest.cs - NUnit tests for Pkcs9MessageDigest
 //
@@ -28,11 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

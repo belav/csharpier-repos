@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+
 using Xunit;
 
 public static partial class XmlSerializerTests

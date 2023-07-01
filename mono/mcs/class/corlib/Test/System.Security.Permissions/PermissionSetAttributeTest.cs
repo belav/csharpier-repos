@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // PermissionSetAttributeTest.cs - NUnit Test Cases for PermissionSetAttribute
 //
@@ -28,9 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

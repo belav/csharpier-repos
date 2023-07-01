@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Globalization;
+
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Routing;

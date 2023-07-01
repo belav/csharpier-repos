@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Text;
+
 //
 // System.IO.BufferedStream Unit Tests
 //
@@ -10,9 +14,6 @@
 //
 
 using NUnit.Framework;
-using System.IO;
-using System.Text;
-using System;
 
 namespace MonoTests.System.IO
 {

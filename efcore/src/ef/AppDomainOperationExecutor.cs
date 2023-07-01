@@ -2,13 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NET461
-using System;
-using System.Collections;
-using System.IO;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Tools.Properties;
+using System;using System.Collections;using System.IO;using System.Reflection;using Microsoft.EntityFrameworkCore.Design;using Microsoft.EntityFrameworkCore.Infrastructure;using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools
 {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.StackTraceExplorer;
 
 namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer

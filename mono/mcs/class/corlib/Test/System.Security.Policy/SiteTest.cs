@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // SiteTest.cs - NUnit Test Cases for Site
 //
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

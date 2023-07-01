@@ -7,6 +7,7 @@ using System.Composition.Hosting;
 using System.Composition.Hosting.Core;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.Composition.Demos.ExtendedCollectionImports.Util;
 
 namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries

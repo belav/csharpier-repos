@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Cryptography;
+
 //
 // SignatureDescriptionTest.cs - NUnit Test Cases for SignatureDescription
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

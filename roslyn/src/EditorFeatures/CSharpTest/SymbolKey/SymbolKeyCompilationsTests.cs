@@ -6,6 +6,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Shared.Extensions;

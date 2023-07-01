@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http.ModelBinding;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.Http.Tracing.Diagnostics.Test

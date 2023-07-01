@@ -1,9 +1,10 @@
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
+using static System.Environment;
 using System.Threading.Tasks;
+
 using FluentAssertions;
 using Xunit;
-using static System.Environment;
 
 namespace System.CommandLine.Tests.Invocation
 {

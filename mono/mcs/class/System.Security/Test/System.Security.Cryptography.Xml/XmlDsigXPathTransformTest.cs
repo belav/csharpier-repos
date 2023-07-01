@@ -8,16 +8,7 @@
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
 #if !MOBILE
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Xml;
-using System.Xml.Xsl;
-using System.Xml.XPath;
-
-using NUnit.Framework;
+using System;using System.IO;using System.Security.Cryptography;using System.Security.Cryptography.Xml;using System.Text;using System.Xml;using System.Xml.Xsl;using System.Xml.XPath;using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.Xml
 {

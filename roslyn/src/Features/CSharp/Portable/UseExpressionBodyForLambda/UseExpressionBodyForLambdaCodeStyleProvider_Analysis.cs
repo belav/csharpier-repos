@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

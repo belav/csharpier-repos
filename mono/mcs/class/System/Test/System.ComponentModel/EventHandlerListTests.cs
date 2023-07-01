@@ -1,3 +1,6 @@
+using System;
+using System.ComponentModel;
+
 //
 // System.ComponentModel.EventHandlerList test cases
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.ComponentModel;
 
 namespace MonoTests.System.ComponentModel
 {

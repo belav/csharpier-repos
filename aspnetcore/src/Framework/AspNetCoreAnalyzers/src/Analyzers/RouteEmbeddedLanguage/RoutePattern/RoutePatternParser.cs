@@ -5,14 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.EmbeddedSyntax;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.RoutePattern;
 
-using static RoutePatternHelpers;
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
+
+using static RoutePatternHelpers;
 
 internal partial struct RoutePatternParser
 {

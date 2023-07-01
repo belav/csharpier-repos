@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Sockets;
-    using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
 
     abstract class ConnectionOrientedTransportManager<TChannelListener> : TransportManager
         where TChannelListener : ConnectionOrientedTransportChannelListener

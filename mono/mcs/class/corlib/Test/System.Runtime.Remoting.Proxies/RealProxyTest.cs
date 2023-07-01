@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Remoting.Proxies

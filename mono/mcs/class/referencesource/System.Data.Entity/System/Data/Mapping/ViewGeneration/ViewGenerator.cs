@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="ViewGenerator.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -10,25 +11,24 @@
 using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
 using System.Data.Common.Utils.Boolean;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Data.Mapping.ViewGeneration.Validation;
 using System.Data.Mapping.ViewGeneration.QueryRewriting;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
+using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Mapping.ViewGeneration.Utils;
+using System.Data.Mapping.ViewGeneration.Validation;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {
-    using ViewSet = KeyToListMap<EntitySetBase, GeneratedView>;
-    using CellGroup = Set<Cell>;
     using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
-    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
     using WrapperFalseExpr = FalseExpr<LeftCellWrapper>;
+    using ViewSet = KeyToListMap<EntitySetBase, GeneratedView>;
     using WrapperNotExpr = NotExpr<LeftCellWrapper>;
     using WrapperOrExpr = OrExpr<LeftCellWrapper>;
+    using CellGroup = Set<Cell>;
+    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
 
     // This class is responsible for generating query or update mapping
     // views from the initial cells.

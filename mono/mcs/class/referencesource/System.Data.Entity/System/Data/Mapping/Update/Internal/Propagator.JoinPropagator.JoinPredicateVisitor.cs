@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 //---------------------------------------------------------------------
 // <copyright file="Propagator.JoinPropagator.JoinPredicateVisitor.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,9 +10,7 @@
 //---------------------------------------------------------------------
 
 using System.Data.Common.CommandTrees;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Collections.ObjectModel;
 
 namespace System.Data.Mapping.Update.Internal
 {

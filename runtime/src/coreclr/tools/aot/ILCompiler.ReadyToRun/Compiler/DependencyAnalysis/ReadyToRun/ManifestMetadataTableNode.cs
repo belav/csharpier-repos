@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
@@ -12,8 +14,6 @@ using System.Reflection.Metadata.Ecma335;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

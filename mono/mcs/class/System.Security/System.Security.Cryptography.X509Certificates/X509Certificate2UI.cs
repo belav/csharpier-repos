@@ -40,9 +40,7 @@
 // elsewhere (except if Gtk# isn't available then we fallback on SWF)
 //
 
-using System.Security.Permissions;
-
-using Mono.Security.X509;
+using System.Security.Permissions;using Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates
 {

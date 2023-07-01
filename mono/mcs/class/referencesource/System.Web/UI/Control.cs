@@ -23,12 +23,12 @@ namespace System.Web.UI
     using System.Web.Caching;
     using System.Web.Configuration;
     using System.Web.Hosting;
+    using HttpException = System.Web.HttpException;
     using System.Web.Routing;
     using System.Web.UI.Adapters;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using System.Web.Util;
-    using HttpException = System.Web.HttpException;
 
     // Delegate used for the compiled template
     public delegate void RenderMethod(HtmlTextWriter output, Control container);

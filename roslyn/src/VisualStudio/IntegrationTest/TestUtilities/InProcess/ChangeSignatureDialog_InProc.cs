@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess

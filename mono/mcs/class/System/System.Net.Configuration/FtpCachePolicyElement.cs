@@ -30,10 +30,7 @@
 
 #if CONFIGURATION_DEP
 
-using System;
-using System.Configuration;
-using System.Net.Cache;
-using System.Xml;
+using System;using System.Configuration;using System.Net.Cache;using System.Xml;
 
 namespace System.Net.Configuration
 {

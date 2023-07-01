@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Razor

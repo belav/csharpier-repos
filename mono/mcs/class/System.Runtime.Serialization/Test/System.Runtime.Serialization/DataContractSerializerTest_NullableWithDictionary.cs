@@ -5,10 +5,11 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.Xml;
 using System.ServiceModel.Dispatcher;
 
 using System.Text;
+using System.Xml;
+
 using NUnit.Framework;
 
 //------------------------------------------------------------------------------
@@ -23,8 +24,8 @@ using NUnit.Framework;
 
 namespace Client.EvalServiceReference
 {
-    using System.Runtime.Serialization;
     using System;
+    using System.Runtime.Serialization;
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]

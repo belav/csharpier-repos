@@ -41,18 +41,7 @@
 
 #region Used Namespaces
 
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.ComponentModel;
-using System.Collections;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.DataVisualization.Charting.Data;
-using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-using System.Drawing.Design;
-using System.Collections.Generic;
+using System;using System.Drawing;using System.Drawing.Drawing2D;using System.ComponentModel;using System.Collections;using System.Windows.Forms.DataVisualization.Charting;using System.Windows.Forms.DataVisualization.Charting.Data;using System.Windows.Forms.DataVisualization.Charting.ChartTypes;using System.Windows.Forms.DataVisualization.Charting.Utilities;using System.Windows.Forms.DataVisualization.Charting.Borders3D;using System.Drawing.Design;using System.Collections.Generic;
 
 #endregion
 

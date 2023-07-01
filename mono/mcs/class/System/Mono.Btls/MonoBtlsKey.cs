@@ -30,11 +30,7 @@ using MX = MonoSecurity::Mono.Security.Cryptography;
 #else
 using MX = Mono.Security.Cryptography;
 #endif
-using System;
-using System.IO;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
+using System;using System.IO;using System.Text;using System.Runtime.InteropServices;using System.Runtime.CompilerServices;
 
 namespace Mono.Btls
 {

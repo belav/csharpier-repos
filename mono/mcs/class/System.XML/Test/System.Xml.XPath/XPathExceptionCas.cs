@@ -1,3 +1,10 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+using System.Xml.XPath;
+
 //
 // XPathExceptionCas.cs - CAS unit tests for System.Xml.XPathException
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Xml.XPath;
 
 namespace MonoCasTests.System.Xml.XPath
 {

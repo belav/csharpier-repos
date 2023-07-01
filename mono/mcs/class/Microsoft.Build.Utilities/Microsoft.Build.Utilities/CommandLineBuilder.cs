@@ -30,6 +30,7 @@ using System;
 using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities

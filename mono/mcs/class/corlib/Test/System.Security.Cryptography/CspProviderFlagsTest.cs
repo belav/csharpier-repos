@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // CspProviderFlagsTest.cs - NUnit Test Cases for CspProviderFlags
 //
@@ -27,8 +30,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

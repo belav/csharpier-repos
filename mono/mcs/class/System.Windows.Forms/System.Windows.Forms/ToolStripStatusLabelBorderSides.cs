@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // ToolStripStatusLabelBorderSides.cs
 //
@@ -28,7 +29,6 @@
 
 
 using System.Runtime.InteropServices;
-using System.ComponentModel;
 
 namespace System.Windows.Forms
 {

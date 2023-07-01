@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Highlighting;

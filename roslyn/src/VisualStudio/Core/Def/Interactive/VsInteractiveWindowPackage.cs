@@ -11,6 +11,9 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
+
+using InteractiveHostFatalError = InteractiveHost::Microsoft.CodeAnalysis.ErrorReporting.FatalError;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.Internal.Log;
@@ -19,8 +22,6 @@ using Microsoft.VisualStudio.InteractiveWindow;
 using Microsoft.VisualStudio.InteractiveWindow.Shell;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using InteractiveHostFatalError = InteractiveHost::Microsoft.CodeAnalysis.ErrorReporting.FatalError;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Interactive
 {

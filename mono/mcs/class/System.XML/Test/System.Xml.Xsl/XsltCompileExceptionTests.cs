@@ -1,3 +1,10 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+using System.Xml.Xsl;
+
 //
 // XsltCompileExceptionTests.cs
 //	- Unit tests for System.Xml.Xsl.XsltCompileException
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Xml.Xsl;
 
 namespace MonoTests.System.Xml.Xsl
 {

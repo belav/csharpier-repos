@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Diagnostics;
 //
 // System.Nullable.cs
 //
@@ -31,10 +33,8 @@
 //
 
 using System.Reflection;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 
 namespace System
 {

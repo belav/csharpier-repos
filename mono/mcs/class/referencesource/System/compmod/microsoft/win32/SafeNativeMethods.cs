@@ -6,20 +6,12 @@
 
 namespace Microsoft.Win32
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System;
     using System.Security;
 #if !SILVERLIGHT || FEATURE_NETCORE
-    using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
-    using System.Collections;
-    using System.IO;
-    using System.Text;
-    using System.Threading;
-    using Microsoft.Win32.SafeHandles;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;using System.Security.Permissions;using System.Collections;using System.IO;using System.Text;using System.Threading;using Microsoft.Win32.SafeHandles;using System.Runtime.ConstrainedExecution;using System.Diagnostics;
 #endif // !SILVERLIGHT || FEATURE_NETCORE
 
 #if !SILVERLIGHT

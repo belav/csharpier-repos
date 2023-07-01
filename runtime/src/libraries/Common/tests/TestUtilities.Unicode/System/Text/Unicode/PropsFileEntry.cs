@@ -4,6 +4,7 @@
 using System.Globalization;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
+
 using Xunit;
 
 namespace System.Text.Unicode

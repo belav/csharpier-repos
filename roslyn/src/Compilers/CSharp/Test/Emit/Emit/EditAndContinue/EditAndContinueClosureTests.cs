@@ -7,6 +7,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+
 using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;

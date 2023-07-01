@@ -34,23 +34,7 @@
 
 #if !MOBILE
 
-using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel.Description;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using Microsoft.CSharp;
-using NUnit.Framework;
-
-using QName = System.Xml.XmlQualifiedName;
-
-using MonoTests.Helpers;
+using System;using System.CodeDom;using System.CodeDom.Compiler;using System.Collections.Generic;using System.IO;using System.Linq;using System.Runtime.Serialization;using System.ServiceModel.Description;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using Microsoft.CSharp;using NUnit.Framework;using QName = System.Xml.XmlQualifiedName;using MonoTests.Helpers;
 
 namespace MonoTests.System.Runtime.Serialization
 {

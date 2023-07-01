@@ -4,15 +4,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime;
-using System.Runtime.InteropServices;
 using System.Reflection.Runtime.General;
+using System.Runtime;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+using Internal.NativeFormat;
+using Internal.Runtime.Augments;
 
 using Internal.TypeSystem;
-using Internal.Runtime.Augments;
 using Internal.TypeSystem.NativeFormat;
-using Internal.NativeFormat;
-using System.Runtime.CompilerServices;
 
 namespace Internal.Runtime.TypeLoader
 {

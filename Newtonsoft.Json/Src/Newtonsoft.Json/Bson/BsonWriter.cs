@@ -30,10 +30,7 @@ using System.IO;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System.Text;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Linq;
-using System.Globalization;
+using System.Text;using Newtonsoft.Json.Utilities;using Newtonsoft.Json.Linq;using System.Globalization;
 
 #nullable disable
 

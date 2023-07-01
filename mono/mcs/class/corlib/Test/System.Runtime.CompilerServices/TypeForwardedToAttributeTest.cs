@@ -27,10 +27,11 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Threading;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices

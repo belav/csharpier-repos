@@ -7,6 +7,7 @@ namespace System.ServiceModel.Security
     using System;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
+    using SchProtocols = System.IdentityModel.SchProtocols;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Runtime;
@@ -14,7 +15,6 @@ namespace System.ServiceModel.Security
     using System.Security.Principal;
     using System.ServiceModel;
     using System.Xml;
-    using SchProtocols = System.IdentityModel.SchProtocols;
 
     sealed class TlsnegoTokenAuthenticator : SspiNegotiationTokenAuthenticator
     {

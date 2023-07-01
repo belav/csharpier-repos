@@ -16,8 +16,8 @@ namespace System.ServiceModel.ComIntegration
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
-    using System.Xml;
     using SR = System.ServiceModel.SR;
+    using System.Xml;
 
     class ComPlusTypeLoader : IContractResolver
     {

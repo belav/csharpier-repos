@@ -8,6 +8,7 @@
 
 namespace System.Web.UI.Adapters
 {
+    using System.Collections;
     using System.Collections.Specialized;
     using System.Globalization;
     using System.IO;
@@ -17,7 +18,6 @@ namespace System.Web.UI.Adapters
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
     using System.Web.Util;
-    using System.Collections;
 
     public class WmlPageAdapter : PageAdapter
     {

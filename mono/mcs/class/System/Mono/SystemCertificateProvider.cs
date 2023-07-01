@@ -36,11 +36,7 @@ using Mono.Security.Interface;
 using MNS = Mono.Net.Security;
 #endif
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Win32.SafeHandles;
+using System;using System.Threading;using System.Threading.Tasks;using System.Security.Cryptography.X509Certificates;using Microsoft.Win32.SafeHandles;
 
 namespace Mono
 {

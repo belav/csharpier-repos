@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 //
 // System.Diagnostics.PerformanceCounterCategory.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Security.Permissions;
-using System.Runtime.CompilerServices;
 
 namespace System.Diagnostics
 {

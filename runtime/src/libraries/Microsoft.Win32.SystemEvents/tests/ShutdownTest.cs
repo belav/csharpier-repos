@@ -3,9 +3,10 @@
 
 using System;
 using System.Threading;
+
+using static Interop;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using static Interop;
 
 namespace Microsoft.Win32.SystemEventsTests
 {

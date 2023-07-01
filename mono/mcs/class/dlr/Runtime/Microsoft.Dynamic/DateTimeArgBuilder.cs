@@ -14,11 +14,9 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT // ComObject
 
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic;using System.Diagnostics;
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else

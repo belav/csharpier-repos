@@ -1,9 +1,10 @@
-﻿using Microsoft.Owin.Security.OAuth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+
+using Microsoft.Owin.Security.OAuth;
 
 namespace POS_Server
 {

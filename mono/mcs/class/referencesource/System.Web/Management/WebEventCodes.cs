@@ -6,10 +6,10 @@
 
 namespace System.Web.Management
 {
-    using System.Globalization;
     using System.Collections;
-    using Debug = System.Web.Util.Debug;
+    using System.Globalization;
     using System.Security.Permissions;
+    using Debug = System.Web.Util.Debug;
 
     // this class is a container for pre-defined event codes
     // all APIs will take integers so application defined

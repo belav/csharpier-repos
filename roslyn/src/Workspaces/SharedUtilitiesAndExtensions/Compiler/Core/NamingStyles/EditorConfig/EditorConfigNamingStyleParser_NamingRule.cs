@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.CodeAnalysis.NamingStyles;
 using Microsoft.CodeAnalysis.Text;
 

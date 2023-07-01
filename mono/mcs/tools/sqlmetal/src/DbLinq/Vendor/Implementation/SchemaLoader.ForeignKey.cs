@@ -1,4 +1,5 @@
-﻿#region MIT license
+﻿using System.Collections.Generic;
+#region MIT license
 //
 // MIT license
 //
@@ -26,10 +27,10 @@
 
 using System.Data;
 using System.Linq;
+using System.Text;
+
 using DbLinq.Schema;
 using DbLinq.Schema.Dbml;
-using System.Text;
-using System.Collections.Generic;
 
 namespace DbLinq.Vendor.Implementation
 {

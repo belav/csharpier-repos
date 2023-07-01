@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.VisualStudio.Language.Intellisense;
 using Roslyn.Utilities;
 

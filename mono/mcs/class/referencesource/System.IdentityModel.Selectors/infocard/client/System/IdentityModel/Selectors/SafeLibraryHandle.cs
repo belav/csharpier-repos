@@ -4,16 +4,17 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.IO;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
-    using System.Runtime.ConstrainedExecution;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+
     using Microsoft.InfoCards.Diagnostics;
     using Microsoft.Win32;
-    using System.Security.Permissions;
     using Microsoft.Win32.SafeHandles;
 
     //

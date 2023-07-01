@@ -9,29 +9,29 @@ namespace System.ServiceModel.Security.Tokens
     using System.ComponentModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using WSTrust13Constants = System.IdentityModel.Protocols.WSTrust.WSTrust13Constants;
+    using WSTrust14Constants = System.IdentityModel.Protocols.WSTrust.WSTrust14Constants;
+    using WSTrustFeb2005Constants = System.IdentityModel.Protocols.WSTrust.WSTrustFeb2005Constants;
+
+    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
+    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using SafeNativeMethods = System.ServiceModel.ComIntegration.SafeNativeMethods;
+    using Win32Error = System.ServiceModel.ComIntegration.Win32Error;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
-    using System.Xml;
-
-    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
-    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
-    using SafeNativeMethods = System.ServiceModel.ComIntegration.SafeNativeMethods;
-    using Win32Error = System.ServiceModel.ComIntegration.Win32Error;
-    using WSTrustFeb2005Constants = System.IdentityModel.Protocols.WSTrust.WSTrustFeb2005Constants;
-    using WSTrust13Constants = System.IdentityModel.Protocols.WSTrust.WSTrust13Constants;
-    using WSTrust14Constants = System.IdentityModel.Protocols.WSTrust.WSTrust14Constants;
-    using System.IO;
     using System.Text;
+    using System.Xml;
 
     public class IssuedSecurityTokenProvider : SecurityTokenProvider, ICommunicationObject
     {

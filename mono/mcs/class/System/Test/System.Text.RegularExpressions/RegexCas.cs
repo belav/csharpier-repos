@@ -28,15 +28,7 @@
 
 #if MONO_FEATURE_CAS
 
-using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security;
-using System.Security.Permissions;
-using System.Text.RegularExpressions;
+using NUnit.Framework;using System;using System.IO;using System.Reflection;using System.Runtime.Serialization.Formatters.Binary;using System.Security;using System.Security.Permissions;using System.Text.RegularExpressions;
 
 namespace MonoCasTests.System.Text.RegularExpressions
 {

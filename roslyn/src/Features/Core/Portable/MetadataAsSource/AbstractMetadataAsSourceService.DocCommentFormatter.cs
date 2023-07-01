@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Text;
+
 using Microsoft.CodeAnalysis.DocumentationComments;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Utilities;

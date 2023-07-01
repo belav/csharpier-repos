@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.PooledObjects;
 

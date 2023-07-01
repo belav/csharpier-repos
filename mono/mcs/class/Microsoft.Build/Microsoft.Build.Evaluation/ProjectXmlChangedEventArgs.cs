@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 //
 // ProjectXmlChangedEventArgs.cs
 //
@@ -27,8 +30,6 @@
 //
 
 using Microsoft.Build.Construction;
-using System;
-using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {

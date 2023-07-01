@@ -8,6 +8,7 @@ using System.CommandLine.Tests.Binding;
 using System.CommandLine.Utility;
 using System.IO;
 using System.Threading.Tasks;
+
 using FluentAssertions;
 using Xunit;
 

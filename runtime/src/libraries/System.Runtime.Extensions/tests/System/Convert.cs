@@ -1,13 +1,13 @@
+using System.Collections.Generic;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Globalization;
-using Xunit;
 using System.Linq;
 using System.Text;
-using System.Collections.Generic;
 
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Tests
 {

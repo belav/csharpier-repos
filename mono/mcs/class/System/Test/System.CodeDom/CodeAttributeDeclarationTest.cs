@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom;
+
 //
 // CodeAttributeDeclarationTest.cs
 //	- Unit tests for System.CodeDom.CodeAttributeDeclaration
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

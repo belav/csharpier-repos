@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.IO;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;

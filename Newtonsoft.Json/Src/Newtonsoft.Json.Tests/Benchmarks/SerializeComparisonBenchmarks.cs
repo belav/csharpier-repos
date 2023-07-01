@@ -25,22 +25,11 @@
 
 #if HAVE_BENCHMARKS
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
+using System;using System.Collections.Generic;using System.IO;using System.Linq;using System.Runtime.Serialization;
 #if (!DNXCORE50)
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Web.Script.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;using System.Web.Script.Serialization;
 #endif
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
-using Newtonsoft.Json.Bson;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Tests.TestObjects;
+using System.Runtime.Serialization.Json;using System.Text;using System.Threading.Tasks;using BenchmarkDotNet.Attributes;using Newtonsoft.Json.Bson;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Tests.TestObjects;
 
 namespace Newtonsoft.Json.Tests.Benchmarks
 {

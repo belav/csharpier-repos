@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
-using System.Net.Sockets;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Diagnostics.Tools.RuntimeClient;
-using System.Threading;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Microsoft.Diagnostics.Tools.RuntimeClient;
 
 // modified version of same code in dotnet/diagnostics for testing
 namespace Tracing.Tests.Common

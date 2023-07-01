@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using Ecma = System.Reflection.Metadata;
+using ConstantTypeCode = System.Reflection.Metadata.ConstantTypeCode;
 
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-using ConstantTypeCode = System.Reflection.Metadata.ConstantTypeCode;
 
 namespace ILCompiler.Metadata
 {

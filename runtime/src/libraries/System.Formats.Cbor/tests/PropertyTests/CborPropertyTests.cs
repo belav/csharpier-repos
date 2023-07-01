@@ -3,6 +3,7 @@
 
 using System.Formats.Cbor.Tests.DataModel;
 using System.Linq;
+
 using FsCheck;
 using FsCheck.Xunit;
 using Xunit;

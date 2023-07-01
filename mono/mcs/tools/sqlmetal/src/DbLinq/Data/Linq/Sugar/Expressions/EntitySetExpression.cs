@@ -26,15 +26,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Linq.Mapping;
 using System.Reflection;
 
-using DbLinq.Util;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Implementation;
+
+using DbLinq.Util;
 
 namespace DbLinq.Data.Linq.Sugar.Expressions
 {

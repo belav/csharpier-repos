@@ -13,13 +13,13 @@
 namespace System.Data.Services.Client
 {
     using System;
-    using System.Reflection;
+    using System.ComponentModel;
     using System.Globalization;
+    using System.Reflection;
     using System.Resources;
+    using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.ComponentModel;
-    using System.Security.Permissions;
 
     [AttributeUsage(AttributeTargets.All)]
     internal sealed class TextResDescriptionAttribute : DescriptionAttribute

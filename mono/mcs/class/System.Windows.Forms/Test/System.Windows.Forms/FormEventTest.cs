@@ -6,14 +6,14 @@
 //
 
 using System;
-using System.Windows.Forms;
-using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
+using System.Drawing;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
-using System.Globalization;
 
 using NUnit.Framework;
 

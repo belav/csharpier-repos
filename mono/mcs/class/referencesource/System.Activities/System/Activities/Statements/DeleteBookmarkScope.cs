@@ -6,9 +6,9 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
+    using SA = System.Activities;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using SA = System.Activities;
 
     public sealed class DeleteBookmarkScope : NativeActivity
     {

@@ -7,14 +7,15 @@
 //
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
+
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.Principal
 {

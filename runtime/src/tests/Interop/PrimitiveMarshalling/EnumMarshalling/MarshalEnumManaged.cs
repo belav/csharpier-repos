@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using TestLibrary;
 using System.Runtime.InteropServices;
+using System.Text;
+
+using TestLibrary;
 
 namespace EnumRoundtrip
 {

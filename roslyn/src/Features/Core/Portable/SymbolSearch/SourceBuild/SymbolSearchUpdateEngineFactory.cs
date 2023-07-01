@@ -5,9 +5,7 @@
 
 #pragma warning disable IDE0060 // Remove unused parameter
 
-using System.Threading;
-using System.Threading.Tasks;
-using Roslyn.Utilities;
+using System.Threading;using System.Threading.Tasks;using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch
 {

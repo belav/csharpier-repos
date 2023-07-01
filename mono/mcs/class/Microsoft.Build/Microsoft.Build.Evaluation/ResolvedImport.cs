@@ -1,3 +1,4 @@
+using System;
 // ResolvedImport.cs
 //
 // Author:
@@ -26,7 +27,6 @@
 //
 
 using Microsoft.Build.Construction;
-using System;
 
 namespace Microsoft.Build.Evaluation
 {

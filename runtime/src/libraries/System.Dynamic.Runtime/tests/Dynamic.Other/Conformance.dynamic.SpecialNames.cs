@@ -339,13 +339,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial011
 {
+    using System.Collections.Generic;
     // <Area>Dynamic bind to special name</Area>
     // <Title>op_Addition in class</Title>
     // <Description></Description>
     // <Expects status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class TestClass
     {

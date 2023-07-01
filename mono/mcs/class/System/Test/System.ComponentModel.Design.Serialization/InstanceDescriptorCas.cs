@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.ComponentModel.Design.Serialization;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.System.ComponentModel.Design.Serialization;
 //
 // InstanceDescriptorCas.cs - CAS unit tests for
 //	System.ComponentModel.Design.Serialization.InstanceDescriptor
@@ -28,15 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.ComponentModel.Design.Serialization;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System.ComponentModel.Design.Serialization;
 
 namespace MonoCasTests.System.ComponentModel.Design.Serialization
 {

@@ -1,3 +1,13 @@
+using System;
+using System.Configuration;
+using _Configuration = System.Configuration.Configuration;
+using System.IO;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Security;
+using System.Web.UI;
+
+using MonoTests.SystemWeb.Framework;
 //
 // WebConfigurationManagerTest.cs
 //	- unit tests for System.Web.Configuration.WebConfigurationManager
@@ -29,16 +39,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Configuration;
-using _Configuration = System.Configuration.Configuration;
-using System.IO;
-using System.Web.Configuration;
-using System.Web;
-using System.Web.Security;
-using MonoTests.SystemWeb.Framework;
-using System.Web.UI;
 
 namespace MonoTests.System.Web.Configuration
 {

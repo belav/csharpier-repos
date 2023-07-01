@@ -1,3 +1,7 @@
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 //
 // System.RuntimeTypeHandle.cs
 //
@@ -32,11 +36,7 @@
 //
 
 using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
-using System.Runtime.ConstrainedExecution;
 using System.Threading;
-using System.Runtime.CompilerServices;
-using System.Reflection;
 
 namespace System
 {

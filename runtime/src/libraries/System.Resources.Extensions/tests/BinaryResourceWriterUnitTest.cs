@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Resources.Extensions.Tests

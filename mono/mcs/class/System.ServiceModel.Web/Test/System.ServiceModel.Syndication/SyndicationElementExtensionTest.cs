@@ -26,16 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using System.ServiceModel.Syndication;
-using NUnit.Framework;
+using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.IO;using System.Runtime.Serialization;using System.Text;using System.Xml;using System.Xml.Serialization;using System.ServiceModel.Syndication;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Syndication
 {

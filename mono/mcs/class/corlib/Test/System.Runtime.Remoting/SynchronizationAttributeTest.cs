@@ -7,8 +7,9 @@
 //
 
 using System;
-using System.Threading;
 using System.Runtime.Remoting.Contexts;
+using System.Threading;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Remoting

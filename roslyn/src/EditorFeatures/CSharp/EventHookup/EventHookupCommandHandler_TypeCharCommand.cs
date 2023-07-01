@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Options;
 using Microsoft.CodeAnalysis.Internal.Log;

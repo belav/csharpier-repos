@@ -1,14 +1,14 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
     using System.Drawing.Printing;
-    using System.Drawing.Drawing2D;
-    using System.ComponentModel.Design;
+    using System.Windows.Forms;
 
     #region Class WorkflowLayout
     //All the coordinates and sizes are in logical coordinate system

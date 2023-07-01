@@ -1,3 +1,13 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Globalization;
+using System.IO;
+using System.Security.Permissions;
+
+using MonoTests.Helpers;
 //
 // Tests for System.Drawing.ImageConverter.cs
 //
@@ -29,16 +39,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Collections;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Security.Permissions;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Drawing
 {

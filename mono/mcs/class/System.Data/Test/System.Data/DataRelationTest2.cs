@@ -1,3 +1,8 @@
+using System;
+//using System.ComponentModel;
+using System.Data;
+
+using MonoTests.System.Data.Utils;
 // Authors:
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-//using System.ComponentModel;
-using System.Data;
-using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {

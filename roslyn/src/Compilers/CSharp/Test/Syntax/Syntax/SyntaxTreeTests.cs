@@ -10,15 +10,16 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
+using static Roslyn.Test.Utilities.TestHelpers;
 using Roslyn.Utilities;
+using KeyValuePair = Roslyn.Utilities.KeyValuePairUtil;
 using Xunit;
 using Xunit.Abstractions;
-using static Roslyn.Test.Utilities.TestHelpers;
-using KeyValuePair = Roslyn.Utilities.KeyValuePairUtil;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {

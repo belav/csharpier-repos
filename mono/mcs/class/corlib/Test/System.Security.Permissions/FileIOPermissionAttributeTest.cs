@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+
 //
 // FileIOPermissionAttributeTest.cs -
 //	NUnit Test Cases for FileIOPermissionAttribute
@@ -29,12 +36,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
 
 namespace MonoTests.System.Security.Permissions
 {

@@ -8,11 +8,12 @@
  */
 namespace System.ComponentModel.Design
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     This is a simple implementation of IServiceContainer.

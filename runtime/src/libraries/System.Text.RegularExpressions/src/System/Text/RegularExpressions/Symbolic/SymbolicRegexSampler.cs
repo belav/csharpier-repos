@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if DEBUG
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic;using System.Diagnostics;
 
 namespace System.Text.RegularExpressions.Symbolic
 {

@@ -25,10 +25,11 @@
 //   csc /r:C5.dll Toposort.cs
 
 using System;
-using System.Text;
-using C5;
 using SCG = System.Collections.Generic;
 using SDD = System.Diagnostics.Debug;
+using System.Text;
+
+using C5;
 
 namespace Toposort
 {

@@ -1,3 +1,11 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+
 //
 // X509CAPI.cs - NUnit Test Cases for X509 CAPI integration (IntPtr constructor)
 //
@@ -9,14 +17,6 @@
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).
 //
 using NUnit.Framework;
-
-using System;
-using System.Globalization;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

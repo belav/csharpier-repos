@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.MemoryTests;
 using System.Text;
+
 using Xunit;
 
 namespace System.Memory.Tests

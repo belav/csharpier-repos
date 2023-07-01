@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Windows.Shapes;
+
 using Microsoft.CodeAnalysis.Editor.Implementation.Adornments;
 using Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;

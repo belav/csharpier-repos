@@ -25,21 +25,13 @@
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System;using System.Collections.Generic;using System.Threading.Tasks;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Tests.TestObjects.Organization;
-using System.Linq;
-using System.IO;
+using Newtonsoft.Json.Converters;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Tests.TestObjects.Organization;using System.Linq;using System.IO;
 
 namespace Newtonsoft.Json.Tests.Linq
 {

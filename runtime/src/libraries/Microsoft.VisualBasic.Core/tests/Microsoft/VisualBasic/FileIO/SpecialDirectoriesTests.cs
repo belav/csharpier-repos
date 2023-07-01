@@ -3,6 +3,7 @@
 
 using System;
 using static System.Environment;
+
 using Xunit;
 
 namespace Microsoft.VisualBasic.FileIO.Tests

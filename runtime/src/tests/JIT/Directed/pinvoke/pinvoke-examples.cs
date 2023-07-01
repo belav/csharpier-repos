@@ -5,9 +5,9 @@
 // along with the impact of EH.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace PInvokeTest
 {

@@ -8,12 +8,11 @@
  */
 namespace System.ComponentModel.Design
 {
-    using System.Runtime.Remoting;
+    using System;
     using System.ComponentModel;
 
     using System.Diagnostics;
-
-    using System;
+    using System.Runtime.Remoting;
 
     /// <devdoc>
     ///    <para>Provides an interface for a designer to add menu items to the Visual Studio

@@ -10,7 +10,6 @@ using System;
 using System.Security.Cryptography;
 
 using Crimson.CommonCrypto;
-
 #if MONOTOUCH || XAMMAC
 using Mono.Security.Cryptography;
 

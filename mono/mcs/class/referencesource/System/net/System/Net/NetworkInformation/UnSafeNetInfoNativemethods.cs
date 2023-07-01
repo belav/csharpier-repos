@@ -3,8 +3,9 @@ namespace System.Net.NetworkInformation
     using System;
     using System.Net;
     using System.Net.Sockets;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+
     using Microsoft.Win32.SafeHandles;
 
     internal class IpHelperErrors

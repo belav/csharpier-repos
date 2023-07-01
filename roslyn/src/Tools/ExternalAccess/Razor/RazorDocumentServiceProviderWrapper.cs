@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CodeAnalysis.Host;
 using Roslyn.Utilities;
 

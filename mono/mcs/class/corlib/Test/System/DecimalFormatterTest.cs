@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 //
 // DecimalFormatterTest.cs - NUnit Test Cases for System.DecimalFormatter
 //
@@ -7,9 +11,6 @@
 // (C) 2003 Patrick Kalkman
 //
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Globalization;
 
 namespace MonoTests.System
 {

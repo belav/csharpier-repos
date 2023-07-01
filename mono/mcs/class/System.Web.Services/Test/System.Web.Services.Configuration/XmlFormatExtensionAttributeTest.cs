@@ -1,3 +1,7 @@
+using System;
+using System.Web.Services.Configuration;
+using System.Web.Services.Description;
+
 //
 // MonoTests.System.Web.Services.Configuration.XmlFormatExtensionAttributeTest.cs
 //
@@ -10,9 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Web.Services.Configuration;
-using System.Web.Services.Description;
 
 namespace MonoTests.System.Web.Services.Configuration
 {

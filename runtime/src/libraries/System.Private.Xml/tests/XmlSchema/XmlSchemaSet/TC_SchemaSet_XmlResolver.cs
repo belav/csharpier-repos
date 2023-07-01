@@ -4,6 +4,7 @@
 using System.IO;
 using System.Xml.Schema;
 using System.Xml.Tests;
+
 using Xunit;
 
 namespace System.Xml.XmlSchemaTests

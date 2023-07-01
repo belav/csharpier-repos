@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Security.Claims;
+
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Tests;
 using Microsoft.AspNetCore.Builder;

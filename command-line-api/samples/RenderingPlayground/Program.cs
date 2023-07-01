@@ -5,10 +5,10 @@ using System;
 using System.CommandLine.Invocation;
 using System.CommandLine.Rendering;
 using System.CommandLine.Rendering.Views;
+using Process = System.Diagnostics.Process;
 using System.IO;
 using System.Linq;
 using System.Reactive.Subjects;
-using Process = System.Diagnostics.Process;
 
 namespace RenderingPlayground
 {

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // ToolStripTextBox.cs
 //
@@ -27,9 +28,8 @@
 //
 
 using System.Drawing;
-using System.ComponentModel;
-using System.Windows.Forms.Design;
 using System.Runtime.InteropServices;
+using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {

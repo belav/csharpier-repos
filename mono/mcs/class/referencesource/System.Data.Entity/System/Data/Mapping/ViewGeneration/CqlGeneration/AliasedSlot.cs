@@ -1,3 +1,9 @@
+using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Diagnostics;
 //---------------------------------------------------------------------
 // <copyright file="AliasedSlot.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,13 +14,7 @@
 //---------------------------------------------------------------------
 
 using System.Linq;
-using System.Data.Mapping.ViewGeneration.Structures;
 using System.Text;
-using System.Diagnostics;
-using System.Data.Common.CommandTrees;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
-using System.Data.Common.Utils;
-using System.Collections.Generic;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {

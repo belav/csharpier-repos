@@ -12,10 +12,10 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel.Design;
     using System.Data;
     using System.Diagnostics;
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.Design.MobileControls.Adapters;
 
     using DataBinding = System.Web.UI.DataBinding;
+    using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

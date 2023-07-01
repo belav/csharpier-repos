@@ -1,4 +1,6 @@
-﻿//
+﻿using System.Collections;
+using System.Globalization;
+//
 // HttpServerChannel.cs
 //
 // Author:
@@ -27,11 +29,9 @@
 //
 
 using System.Net;
-using System.Collections;
-using System.Globalization;
-using System.Threading;
-using System.Runtime.Remoting.MetadataServices;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.MetadataServices;
+using System.Threading;
 
 namespace System.Runtime.Remoting.Channels.Http
 {

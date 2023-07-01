@@ -11,14 +11,7 @@ using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-
-using SdtEventSources;
-using System.Diagnostics;
-using System.Threading;
-using Microsoft.Diagnostics.Tracing.Session;
-using Microsoft.DotNet.RemoteExecutor;
-using Microsoft.Diagnostics.Tracing;
+using Xunit;using SdtEventSources;using System.Diagnostics;using System.Threading;using Microsoft.Diagnostics.Tracing.Session;using Microsoft.DotNet.RemoteExecutor;using Microsoft.Diagnostics.Tracing;
 
 namespace BasicEventSourceTests
 {

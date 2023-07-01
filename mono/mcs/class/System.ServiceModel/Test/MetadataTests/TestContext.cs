@@ -24,22 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.IO;
-using System.Text;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.XPath;
-using System.Reflection;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Configuration;
-using System.ServiceModel.Description;
-
-using SysConfig = System.Configuration.Configuration;
-
-using MonoTests.Helpers;
+using System;using System.IO;using System.Text;using System.Configuration;using System.Collections.Generic;using System.Xml;using System.Xml.XPath;using System.Reflection;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Configuration;using System.ServiceModel.Description;using SysConfig = System.Configuration.Configuration;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.MetadataTests
 {

@@ -28,6 +28,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using Mono.Cecil;
 
 namespace Mono.CodeContracts.Static.AST

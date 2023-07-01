@@ -1,7 +1,8 @@
 using System;
 using System.IO;
-using NUnit.Framework;
 using System.Runtime.Serialization.Formatters.Soap;
+
+using NUnit.Framework;
 
 namespace SoapShared
 {

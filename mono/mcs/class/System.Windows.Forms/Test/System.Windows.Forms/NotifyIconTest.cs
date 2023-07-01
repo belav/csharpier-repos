@@ -1,8 +1,9 @@
 using System;
-using NUnit.Framework;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

@@ -1,3 +1,4 @@
+using System.Globalization;
 //
 // System.Web.Compilation.IResourceProvider.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Resources;
-using System.Globalization;
 
 namespace System.Web.Compilation
 {

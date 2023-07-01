@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
-using System.IO;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
-using System.Globalization;
+
 using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq

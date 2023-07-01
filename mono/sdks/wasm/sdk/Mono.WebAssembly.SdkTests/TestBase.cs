@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.Build.Locator;
 
 // from https://raw.githubusercontent.com/Microsoft/MSBuildSdks/master/src/UnitTest.Common/MSBuildSdkTestBase.cs

@@ -6,6 +6,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.CodeGeneration;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Host;

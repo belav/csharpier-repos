@@ -3,16 +3,7 @@
 
 #if DEBUG
 
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Razor.Parser.SyntaxTree;
-using System.Web.Razor.Text;
+using System.CodeDom;using System.CodeDom.Compiler;using System.Collections.Generic;using System.Diagnostics.CodeAnalysis;using System.Globalization;using System.IO;using System.Text;using System.Threading.Tasks;using System.Web.Razor.Parser.SyntaxTree;using System.Web.Razor.Text;
 
 namespace System.Web.Razor
 {

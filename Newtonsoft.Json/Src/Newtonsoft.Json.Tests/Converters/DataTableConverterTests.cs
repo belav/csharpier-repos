@@ -24,13 +24,7 @@
 #endregion
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System.IO;
-using System.Text;
-using Newtonsoft.Json.Bson;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+using System.IO;using System.Text;using Newtonsoft.Json.Bson;using Newtonsoft.Json.Converters;using Newtonsoft.Json.Linq;using System;using System.Collections.Generic;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -38,10 +32,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using Newtonsoft.Json.Tests.TestObjects;
+using System.Data;using System.Data.SqlTypes;using System.Linq;using Newtonsoft.Json.Tests.TestObjects;
 #if !(NET20 || NET35)
 using System.Numerics;
 #endif

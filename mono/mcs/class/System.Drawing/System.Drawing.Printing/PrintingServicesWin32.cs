@@ -1,3 +1,6 @@
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing.Printing;
 //
 // Copyright (C) 2005 Novell, Inc. http://www.novell.com
 //
@@ -26,9 +29,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Collections;
-using System.Drawing.Printing;
-using System.ComponentModel;
 using System.Text;
 
 namespace System.Drawing.Printing

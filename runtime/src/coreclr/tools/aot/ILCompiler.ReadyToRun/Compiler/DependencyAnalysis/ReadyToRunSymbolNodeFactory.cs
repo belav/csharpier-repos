@@ -5,9 +5,9 @@ using System;
 using ILCompiler.DependencyAnalysis.ReadyToRun;
 
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis
 {

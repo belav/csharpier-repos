@@ -8,16 +8,17 @@
 namespace System.Net
 {
     using System.Collections;
-    using System.IO;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Globalization;
+    using System.Threading;
+
     using Microsoft.Win32;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
 
     [FriendAccessAllowed]
     internal class Logging

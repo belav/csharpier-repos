@@ -4,13 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
+using Encoder = System.Drawing.Imaging.Encoder;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
-using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace System.Drawing.Tests
 {

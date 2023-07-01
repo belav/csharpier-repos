@@ -1,10 +1,10 @@
+using System.Diagnostics.Contracts;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 // ==--==
 using System.Reflection;
-using System.Diagnostics.Contracts;
 
 namespace System.Runtime.CompilerServices
 {

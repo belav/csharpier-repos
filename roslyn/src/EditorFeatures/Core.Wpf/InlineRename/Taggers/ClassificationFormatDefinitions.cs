@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;

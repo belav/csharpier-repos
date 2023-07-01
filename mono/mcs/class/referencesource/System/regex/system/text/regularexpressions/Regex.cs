@@ -10,21 +10,15 @@
 namespace System.Text.RegularExpressions
 {
     using System;
-    using System.Threading;
     using System.Collections;
     using System.Reflection;
+    using System.Threading;
 #if !FULL_AOT_RUNTIME
     using System.Reflection.Emit;
 #endif
-    using System.Globalization;
-    using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-
+    using System.Globalization;using System.Security.Permissions;using System.Runtime.CompilerServices;using System.Collections.Generic;using System.Diagnostics.CodeAnalysis;
 #if !SILVERLIGHT
-    using System.Runtime.Serialization;
-    using System.Runtime.Versioning;
+    using System.Runtime.Serialization;using System.Runtime.Versioning;
 #endif
 
     /// <devdoc>

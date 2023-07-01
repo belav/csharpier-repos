@@ -6,9 +6,8 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.ComponentModel;
-
     using System;
+    using System.ComponentModel;
 
     /// <devdoc>
     ///    <para> Represents a calendar day.</para>

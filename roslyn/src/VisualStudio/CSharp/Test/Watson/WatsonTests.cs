@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.VisualStudio.Telemetry;
 using StreamJsonRpc;

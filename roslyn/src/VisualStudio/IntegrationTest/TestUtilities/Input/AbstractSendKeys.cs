@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.VisualStudio.IntegrationTest.Utilities.Interop;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input

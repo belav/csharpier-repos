@@ -4,20 +4,11 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime;
-using System.Text;
+using System.Collections.Concurrent;using System.Collections.Generic;using System.Linq;using System.Reflection.Emit;using System.Runtime;using System.Text;
 #endif
 
-using Castle.DynamicProxy;
-
-using Moq.Internals;
-using Moq.Properties;
+using Castle.DynamicProxy;using Moq.Internals;using Moq.Properties;
 
 namespace Moq
 {

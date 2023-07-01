@@ -1,8 +1,8 @@
 ﻿using System.CommandLine.Binding;
 using System.CommandLine.Invocation;
 using System.CommandLine.NamingConventionBinder;
-using System.Linq;
 using CommandHandler = System.CommandLine.NamingConventionBinder.CommandHandler;
+using System.Linq;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

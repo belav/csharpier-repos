@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Net.Http;
+
 using LocalizationSample;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;

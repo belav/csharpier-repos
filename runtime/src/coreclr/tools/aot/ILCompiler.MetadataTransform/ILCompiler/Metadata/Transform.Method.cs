@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using Debug = System.Diagnostics.Debug;
+
+using CallingConventions = System.Reflection.CallingConventions;
+using Ecma = System.Reflection.Metadata;
+using MethodAttributes = System.Reflection.MethodAttributes;
+using MethodImplAttributes = System.Reflection.MethodImplAttributes;
 
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
-using CallingConventions = System.Reflection.CallingConventions;
-using Debug = System.Diagnostics.Debug;
-using MethodAttributes = System.Reflection.MethodAttributes;
-using MethodImplAttributes = System.Reflection.MethodImplAttributes;
 
 namespace ILCompiler.Metadata
 {

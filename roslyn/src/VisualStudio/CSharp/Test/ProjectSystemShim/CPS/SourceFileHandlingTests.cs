@@ -6,6 +6,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.VisualStudio.LanguageServices.UnitTests.ProjectSystemShim.Framework;
@@ -16,6 +17,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using static CSharpHelpers;
 
     [UseExportProvider]

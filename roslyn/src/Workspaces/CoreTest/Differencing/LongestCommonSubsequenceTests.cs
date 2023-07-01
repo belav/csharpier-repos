@@ -5,9 +5,10 @@
 #nullable disable
 
 using System;
-using System.Text;
-using Xunit;
 using System.Collections.Generic;
+using System.Text;
+
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.Differencing.UnitTests
 {

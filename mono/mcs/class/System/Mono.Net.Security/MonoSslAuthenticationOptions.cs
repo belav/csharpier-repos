@@ -37,10 +37,7 @@ using Mono.Security.Interface;
 #endif
 #endif
 
-using System;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Authentication;
+using System;using System.Net.Security;using System.Security.Cryptography.X509Certificates;using System.Security.Authentication;
 
 namespace Mono.Net.Security
 {

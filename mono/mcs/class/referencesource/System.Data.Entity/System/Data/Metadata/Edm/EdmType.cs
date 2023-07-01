@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="EdmType.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -7,9 +8,8 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Data.Common;
-using System.Globalization;
 using System.Diagnostics;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 

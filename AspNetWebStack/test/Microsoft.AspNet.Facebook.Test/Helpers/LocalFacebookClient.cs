@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Facebook;
 
 namespace Microsoft.AspNet.Facebook.Test.Helpers

@@ -14,12 +14,12 @@
 
 namespace System.Runtime.Remoting.Metadata
 {
+    using System.Reflection;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
-    using System.Reflection;
-    using System.Threading;
-    using System.Runtime.Serialization;
     using TypeInfo = System.Runtime.Remoting.TypeInfo;
+    using System.Runtime.Serialization;
+    using System.Threading;
 
     // This is the data we store in MemberInfo.CachedData, mainly to cache custom
     //   attributes.

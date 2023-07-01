@@ -7,11 +7,12 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
     using System.Diagnostics;
     using System.Xml;
+    using Res = System.Xml.Utils.Res;
     using System.Xml.XPath;
+
     using MS.Internal.Xml.Cache;
 
     internal class NavigatorOutput : RecordOutput

@@ -4,26 +4,26 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.CSharp.Testing;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Testing.Model;
-using Microsoft.CodeAnalysis.Testing.Verifiers;
-using Microsoft.Interop.Analyzers;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Interop;
 
 using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     LibraryImportGenerator.UnitTests.AddDisableRuntimeMarshallingAttributeFixerTests.MockAnalyzer,
     Microsoft.Interop.Analyzers.AddDisableRuntimeMarshallingAttributeFixer
 >;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Testing;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Testing;
+using Microsoft.CodeAnalysis.Testing.Model;
+using Microsoft.CodeAnalysis.Testing.Verifiers;
+using Microsoft.Interop;
+using Microsoft.Interop.Analyzers;
 using Xunit;
-using System.IO;
 
 namespace LibraryImportGenerator.UnitTests
 {

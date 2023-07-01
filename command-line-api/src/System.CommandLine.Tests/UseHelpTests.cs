@@ -6,11 +6,12 @@ using System.CommandLine.Help;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
+using static System.Environment;
 using System.Linq;
 using System.Threading.Tasks;
+
 using FluentAssertions;
 using Xunit;
-using static System.Environment;
 
 namespace System.CommandLine.Tests
 {

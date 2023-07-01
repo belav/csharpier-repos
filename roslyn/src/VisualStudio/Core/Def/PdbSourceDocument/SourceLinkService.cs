@@ -8,6 +8,7 @@ using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.PdbSourceDocument;
 using Microsoft.CodeAnalysis.PooledObjects;

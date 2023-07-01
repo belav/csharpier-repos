@@ -8,9 +8,7 @@ using System.Runtime.InteropServices;
 #if NET7_0_OR_GREATER
 using System.Runtime.InteropServices.Marshalling;
 #endif
-using System.Runtime.Versioning;
-using System.Security;
-using System.Text;
+using System.Runtime.Versioning;using System.Security;using System.Text;
 
 internal static partial class Interop
 {

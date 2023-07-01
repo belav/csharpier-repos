@@ -26,11 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if MONODROID
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
+using System;using System.Collections.Generic;using System.Net;using System.Net.Security;using System.Security.Cryptography.X509Certificates;
 #if SECURITY_DEP
 using Mono;
 #if MONO_FEATURE_BTLS

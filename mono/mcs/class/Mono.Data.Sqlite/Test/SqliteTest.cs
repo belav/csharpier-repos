@@ -19,6 +19,7 @@
 
 using System;
 using System.Data;
+
 using Mono.Data.Sqlite;
 
 namespace Test.Mono.Data.Sqlite

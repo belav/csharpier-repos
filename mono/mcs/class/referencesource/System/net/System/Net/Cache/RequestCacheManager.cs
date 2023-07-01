@@ -22,8 +22,8 @@ namespace System.Net.Cache
 {
     using System;
     using System.Collections;
-    using System.Net.Configuration;
     using System.Configuration;
+    using System.Net.Configuration;
 
     /// <summary>  Specifies app domain-wide default settings for request caching </summary>
     internal sealed class RequestCacheManager

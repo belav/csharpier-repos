@@ -2,10 +2,10 @@
 #region Using directives
 
 using System;
-using System.Threading;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Threading;
 
 #endregion
 

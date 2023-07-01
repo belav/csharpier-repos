@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+
 // ForeignKeyConstraintTest.cs - NUnit Test Cases for [explain here]
 //
 // Authors:
@@ -32,8 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
 
 namespace MonoTests.System.Data
 {

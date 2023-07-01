@@ -17,17 +17,15 @@
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
+    using System.Collections;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization.Formatters;
     using System.Text;
-    using System.Collections;
-    using System.Reflection;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Messaging;
 #endif
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Diagnostics;using System.Globalization;using System.Diagnostics.Contracts;
 
     // Routines to convert between the runtime type and the type as it appears on the wire
     internal static class BinaryConverter

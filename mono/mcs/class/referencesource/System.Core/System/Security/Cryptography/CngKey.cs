@@ -6,10 +6,11 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.Contracts;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography

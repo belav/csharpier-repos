@@ -3,17 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Windows.Controls;
 using System.Runtime.InteropServices;
-using Microsoft.VisualStudio.Shell;
-using Roslyn.Utilities;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.VisualStudio.Shell;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 {

@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
-using Xunit;
-using Xunit.Abstractions;
 
 using SerializableTypes.XsdDataContractExporterTests;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 {

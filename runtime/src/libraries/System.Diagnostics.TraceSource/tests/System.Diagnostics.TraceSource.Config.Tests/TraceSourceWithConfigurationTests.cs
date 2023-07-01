@@ -4,6 +4,7 @@
 using System.Configuration;
 using System.IO;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Diagnostics.TraceSourceConfigTests

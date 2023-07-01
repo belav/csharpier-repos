@@ -7,13 +7,13 @@
 //-----------------------------------------------------------------------------------------------
 
 using System;
-using System.Text;
-using System.Security;
 using System.Reflection;
-using System.Security.Permissions;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
 
 [module: BidIdentity("System.Data.1")]
 [module: BidMetaText(":FormatControl: InstanceID='' ")]

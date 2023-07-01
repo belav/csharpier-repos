@@ -1,3 +1,9 @@
+using System;
+using System.Configuration;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Security;
+
 //
 // NullableStringValidatorTest.cs
 //	- unit tests from the aspect of NullableStringValidator usage.
@@ -29,12 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Configuration;
-using System.Web.Configuration;
-using System.Web;
-using System.Web.Security;
 
 namespace MonoTests.System.Web.Configuration
 {

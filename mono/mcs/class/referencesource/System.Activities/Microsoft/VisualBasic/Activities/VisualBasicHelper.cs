@@ -11,6 +11,7 @@ namespace Microsoft.VisualBasic.Activities
     using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
@@ -19,13 +20,13 @@ namespace Microsoft.VisualBasic.Activities
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Collections;
-    using System.Text;
-    using System.Threading;
-    using Microsoft.Compiler.VisualBasic;
-    using System.Collections.ObjectModel;
-    using Microsoft.VisualBasic.CompilerServices;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+
+    using Microsoft.Compiler.VisualBasic;
+    using Microsoft.VisualBasic.CompilerServices;
 
     class VisualBasicHelper
     {

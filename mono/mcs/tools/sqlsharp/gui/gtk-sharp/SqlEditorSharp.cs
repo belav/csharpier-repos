@@ -16,14 +16,15 @@
 namespace SqlEditorSharp
 {
     using System;
-    using Gtk;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Text;
+
     using Gdk;
     using GLib;
-    using System.Collections;
-    using System.IO;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
+    using Gtk;
     using Mono.Data.SqlSharp.Gui.GtkSharp;
 
     /// <summary> SqlEditor Class</summary>

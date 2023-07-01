@@ -1,3 +1,9 @@
+using System;
+
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Threading;
+
 // DecimalTest.cs - NUnit Test Cases for the System.Decimal struct
 //
 // Authors:
@@ -9,11 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace MonoTests.System
 {

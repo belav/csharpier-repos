@@ -56,6 +56,7 @@
 //---------------------------------------------------------------------------
 using System;
 using System.Collections;
+
 using RabbitMQ.Client.Apigen.Attributes;
 using RabbitMQ.Client.Events;
 

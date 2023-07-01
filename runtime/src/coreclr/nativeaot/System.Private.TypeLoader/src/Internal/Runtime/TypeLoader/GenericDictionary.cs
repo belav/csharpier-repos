@@ -3,8 +3,9 @@
 
 
 using System;
-using Internal.Runtime.Augments;
 using Debug = System.Diagnostics.Debug;
+
+using Internal.Runtime.Augments;
 
 namespace Internal.Runtime.TypeLoader
 {

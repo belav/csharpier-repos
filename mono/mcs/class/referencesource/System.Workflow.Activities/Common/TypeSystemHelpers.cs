@@ -15,14 +15,14 @@
 namespace System.Workflow.Activities.Common
 {
     using System;
+    using System.CodeDom;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
-    using System.CodeDom;
     using System.Text.RegularExpressions;
-    using System.Diagnostics.CodeAnalysis;
     using System.Workflow.ComponentModel.Compiler;
 
     internal static class ParseHelpers

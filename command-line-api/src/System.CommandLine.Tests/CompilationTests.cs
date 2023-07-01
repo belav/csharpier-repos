@@ -3,14 +3,7 @@
 
 #if NET6_0_OR_GREATER
 
-using System.CommandLine.Suggest;
-using System.CommandLine.Tests.Utility;
-using System.IO;
-using System.Text;
-using FluentAssertions;
-using Microsoft.DotNet.PlatformAbstractions;
-using Xunit;
-using Xunit.Abstractions;
+using System.CommandLine.Suggest;using System.CommandLine.Tests.Utility;using System.IO;using System.Text;using FluentAssertions;using Microsoft.DotNet.PlatformAbstractions;using Xunit;using Xunit.Abstractions;
 
 namespace System.CommandLine.Tests;
 

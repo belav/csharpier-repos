@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Activities.Tracking;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     public class TrackingSection : ConfigurationSection
     {

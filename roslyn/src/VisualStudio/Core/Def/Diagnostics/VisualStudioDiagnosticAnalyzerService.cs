@@ -9,6 +9,8 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
@@ -25,7 +27,6 @@ using Microsoft.VisualStudio.LanguageServices.Setup;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Roslyn.Utilities;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 {

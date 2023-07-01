@@ -2,10 +2,7 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 #if !FEATURE_TRACING
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Text;
+using System;using System.Diagnostics;using System.Globalization;using System.Text;
 
 namespace System.ComponentModel.Composition.Diagnostics
 {

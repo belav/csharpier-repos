@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Runtime.Remoting.Channels.ServerChannelSinkStack.cs
 //
@@ -32,7 +33,6 @@
 
 using System.IO;
 using System.Runtime.Remoting.Messaging;
-using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {

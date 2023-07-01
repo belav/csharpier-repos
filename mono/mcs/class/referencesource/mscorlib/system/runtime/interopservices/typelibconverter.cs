@@ -18,25 +18,26 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Runtime.InteropServices.TCEAdapterGen;
+    using System.Configuration.Assemblies;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Configuration.Assemblies;
-    using Microsoft.Win32;
     using System.Runtime.CompilerServices;
-    using System.Globalization;
+    using System.Runtime.InteropServices.ComTypes;
+    using _TYPELIBATTR = System.Runtime.InteropServices.ComTypes.TYPELIBATTR;
+    using System.Runtime.InteropServices.TCEAdapterGen;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices.ComTypes;
-    using System.Runtime.Versioning;
+    using System.Threading;
     using WORD = System.UInt16;
     using DWORD = System.UInt32;
-    using _TYPELIBATTR = System.Runtime.InteropServices.ComTypes.TYPELIBATTR;
+
+    using Microsoft.Win32;
 
     [Guid("F1C3BF79-C3E4-11d3-88E7-00902754C43A")]
     [ClassInterface(ClassInterfaceType.None)]

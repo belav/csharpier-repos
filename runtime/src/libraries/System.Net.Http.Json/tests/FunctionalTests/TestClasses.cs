@@ -3,6 +3,7 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Xunit;
 
 namespace System.Net.Http.Json.Functional.Tests

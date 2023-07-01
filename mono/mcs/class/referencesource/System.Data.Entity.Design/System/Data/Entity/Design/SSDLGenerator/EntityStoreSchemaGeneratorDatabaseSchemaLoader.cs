@@ -7,13 +7,13 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Globalization;
 using System.Data.Common;
-using System.Data.EntityClient;
 using System.Data.Entity.Design.Common;
-using System.Text;
+using System.Data.EntityClient;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {

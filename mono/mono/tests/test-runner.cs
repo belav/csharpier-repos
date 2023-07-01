@@ -9,16 +9,15 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 using System;
-using System.IO;
-using System.Threading;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
-using System.Xml;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Linq;
-
+using System.Threading;
+using System.Xml;
 #if !FULL_AOT_DESKTOP && !MOBILE
 using Mono.Unix.Native;
 #endif

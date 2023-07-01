@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using Xunit;
 
 public class ClassWithNoNamespace { }

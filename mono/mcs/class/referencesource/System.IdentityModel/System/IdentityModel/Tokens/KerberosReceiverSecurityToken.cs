@@ -7,9 +7,9 @@ namespace System.IdentityModel.Tokens
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IdentityModel.Diagnostics;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Principal;
-    using System.IdentityModel.Diagnostics;
 
     public class KerberosReceiverSecurityToken : WindowsSecurityToken
     {

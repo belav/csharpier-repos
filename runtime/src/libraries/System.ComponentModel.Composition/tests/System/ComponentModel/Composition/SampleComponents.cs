@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition.Primitives;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition

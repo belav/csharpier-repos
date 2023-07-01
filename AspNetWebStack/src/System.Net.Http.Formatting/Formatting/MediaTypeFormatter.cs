@@ -4,19 +4,11 @@
 #if !NETFX_CORE // In portable library we have our own implementation of Concurrent Dictionary which is in the internal namespace
 using System.Collections.Concurrent;
 #endif
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
+using System.Collections.Generic;using System.Collections.ObjectModel;using System.IO;using System.Linq;using System.Net.Http.Headers;
 #if NETFX_CORE // In portable library we have our own implementation of Concurrent Dictionary which is in the internal namespace
 using System.Net.Http.Internal;
 #endif
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
+using System.Reflection;using System.Text;using System.Threading;using System.Threading.Tasks;using System.Web.Http;
 
 namespace System.Net.Http.Formatting
 {

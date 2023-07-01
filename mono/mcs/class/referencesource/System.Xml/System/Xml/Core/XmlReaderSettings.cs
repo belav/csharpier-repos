@@ -1,3 +1,4 @@
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <copyright file="XmlReaderSettings.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,14 +7,9 @@
 //------------------------------------------------------------------------------
 
 using System.IO;
-using System.Diagnostics;
 using System.Security.Permissions;
 #if !SILVERLIGHT
-using Microsoft.Win32;
-using System.Globalization;
-using System.Security;
-using System.Xml.Schema;
-using System.Xml.XmlConfiguration;
+using Microsoft.Win32;using System.Globalization;using System.Security;using System.Xml.Schema;using System.Xml.XmlConfiguration;
 #endif
 using System.Runtime.Versioning;
 

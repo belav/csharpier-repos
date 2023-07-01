@@ -4,6 +4,7 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Threading;
+
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Session;
 

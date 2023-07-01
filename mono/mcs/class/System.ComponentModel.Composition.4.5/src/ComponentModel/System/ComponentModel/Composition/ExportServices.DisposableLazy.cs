@@ -2,11 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition.Primitives;
 using System.Globalization;
-using Microsoft.Internal;
 using System.Threading;
-using System.Collections.Generic;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition
 {

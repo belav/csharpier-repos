@@ -3,8 +3,8 @@
 
 using System.ComponentModel;
 using Castle.DynamicProxy;
-using Microsoft.EntityFrameworkCore.Internal;
 using IInterceptor = Castle.DynamicProxy.IInterceptor;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Proxies.Internal;
 

@@ -7,23 +7,23 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Text;
     using System.Collections;
-    using System.IO;
-    using System.Reflection;
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.Diagnostics;
-    using System.Xml.Schema;
-    using System.Web.Services.Description;
-    using System.Web.Services.Discovery;
-    using System.Web.Services.Configuration;
-    using System.Net;
-    using System.Security.Permissions;
-    using System.Threading;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Net;
+    using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services.Configuration;
+    using System.Web.Services.Description;
     using System.Web.Services.Diagnostics;
+    using System.Web.Services.Discovery;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     internal class SoapClientType
     {

@@ -1,3 +1,8 @@
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+
 //
 // IPAddressTest.cs - NUnit Test Cases for System.Net.IPAddress
 //
@@ -11,10 +16,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Runtime.InteropServices;
 
 namespace MonoTests.System.Net
 {

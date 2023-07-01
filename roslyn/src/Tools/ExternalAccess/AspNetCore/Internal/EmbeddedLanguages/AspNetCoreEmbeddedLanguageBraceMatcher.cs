@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.BraceMatching;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor;

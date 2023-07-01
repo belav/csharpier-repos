@@ -31,8 +31,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;using System.Runtime.InteropServices;
 
 namespace System.Net.NetworkInformation
 {

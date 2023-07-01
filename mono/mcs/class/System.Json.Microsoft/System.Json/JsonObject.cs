@@ -3,12 +3,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
-using System.Xml;
 using WrappedPair = System.Json.NGenWrapper<System.Collections.Generic.KeyValuePair<
     string,
     System.Json.JsonValue
 >>;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace System.Json
 {

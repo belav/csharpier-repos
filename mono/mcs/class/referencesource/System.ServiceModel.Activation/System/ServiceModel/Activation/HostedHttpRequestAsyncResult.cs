@@ -8,8 +8,8 @@ namespace System.ServiceModel.Activation
     using System.IO;
     using System.Net;
     using System.Runtime;
-    using System.Runtime.Diagnostics;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
@@ -17,14 +17,14 @@ namespace System.ServiceModel.Activation
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Activation.Configuration;
     using System.ServiceModel.Activation.Diagnostics;
+    using System.ServiceModel.Channels;
+    using TD2 = System.ServiceModel.Diagnostics.Application.TD;
     using System.Threading;
     using System.Web;
     using System.Web.Management;
     using System.Web.Routing;
-    using TD2 = System.ServiceModel.Diagnostics.Application.TD;
 
     class HostedHttpRequestAsyncResult : AsyncResult, HttpChannelListener.IHttpAuthenticationContext
     {

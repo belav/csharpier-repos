@@ -6,6 +6,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Roslyn.Utilities;
 

@@ -1,3 +1,6 @@
+using System;
+using SCG = System.Collections.Generic;
+
 /*
  Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -77,8 +80,6 @@
 // The code only supports "natural" equality of vertices.
 
 using C5;
-using System;
-using SCG = System.Collections.Generic;
 
 namespace Graph
 {

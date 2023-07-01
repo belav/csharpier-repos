@@ -24,10 +24,7 @@
 #endregion
 
 #if HAVE_DYNAMIC
-using System;
-using System.Dynamic;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json.Utilities;
+using System;using System.Dynamic;using System.Runtime.CompilerServices;using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {

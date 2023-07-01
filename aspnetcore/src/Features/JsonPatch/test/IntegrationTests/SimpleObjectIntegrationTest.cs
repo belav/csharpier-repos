@@ -3,6 +3,7 @@
 
 using System;
 using System.Dynamic;
+
 using Microsoft.AspNetCore.JsonPatch.Exceptions;
 using Xunit;
 

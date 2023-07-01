@@ -1,3 +1,4 @@
+using System;
 // MulticastDelegate.cs - NUnit Test Cases for MulticastDelegates (C# delegates)
 //
 // Daniel Stodden (stodden@in.tum.de)
@@ -6,7 +7,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

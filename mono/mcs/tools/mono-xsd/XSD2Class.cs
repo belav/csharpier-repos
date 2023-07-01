@@ -27,6 +27,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+
 using Microsoft.CSharp;
 
 namespace Commons.Xml.XSD2ClassLib

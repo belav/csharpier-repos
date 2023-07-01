@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CommonLanguageServerProtocol.Framework;
 using Roslyn.Utilities;

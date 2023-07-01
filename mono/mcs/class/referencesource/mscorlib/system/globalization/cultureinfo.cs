@@ -32,19 +32,20 @@
 namespace System.Globalization
 {
     using System;
-    using System.Security;
-    using System.Threading;
     using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Resources;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security;
     using System.Security.Permissions;
-    using System.Reflection;
+    using System.Threading;
+
     using Microsoft.Win32;
-    using System.Diagnostics.Contracts;
-    using System.Resources;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

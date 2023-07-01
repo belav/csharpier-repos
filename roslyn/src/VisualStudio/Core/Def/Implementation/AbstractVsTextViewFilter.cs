@@ -7,6 +7,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.BraceMatching;
 using Microsoft.CodeAnalysis.Debugging;
 using Microsoft.CodeAnalysis.Editor;
@@ -24,9 +25,9 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
+using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 using Microsoft.VisualStudio.Utilities;
 using Roslyn.Utilities;
-using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {

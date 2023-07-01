@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 

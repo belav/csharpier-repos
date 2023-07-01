@@ -16,8 +16,8 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
-    using System.Runtime.Interop;
     using System.Runtime.DurableInstancing;
+    using System.Runtime.Interop;
     using System.Security;
     using System.Security.Permissions;
     using System.ServiceModel.Activation;

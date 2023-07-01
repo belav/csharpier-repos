@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Immutable;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.Core.Imaging;

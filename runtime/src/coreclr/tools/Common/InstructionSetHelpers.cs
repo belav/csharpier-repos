@@ -3,9 +3,10 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using ILCompiler;
-using Internal.TypeSystem;
 using InstructionSet = Internal.JitInterface.InstructionSet;
+using Internal.TypeSystem;
 
 namespace System.CommandLine
 {

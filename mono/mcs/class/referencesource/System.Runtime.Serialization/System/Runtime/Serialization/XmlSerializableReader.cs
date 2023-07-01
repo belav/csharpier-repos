@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace System.Runtime.Serialization
 {
+    using System.Diagnostics;
     using System.IO;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Diagnostics;
 
     internal class XmlSerializableReader : XmlReader, IXmlLineInfo, IXmlTextParser
     {

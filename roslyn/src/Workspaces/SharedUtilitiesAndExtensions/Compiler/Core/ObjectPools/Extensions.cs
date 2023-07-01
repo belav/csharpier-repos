@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Text;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 

@@ -6,9 +6,10 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Xaml;
-    using System.Collections.ObjectModel;
+
     using XamlBuildTask;
 
     public sealed class PropertyData

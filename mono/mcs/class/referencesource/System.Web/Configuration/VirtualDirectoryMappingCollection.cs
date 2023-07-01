@@ -10,8 +10,8 @@ namespace System.Web.Configuration
     using System.Collections;
     using System.Collections.Specialized;
     using System.Configuration;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     //
     // Collection of VirtualDirectoryMappings.

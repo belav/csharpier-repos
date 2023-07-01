@@ -6,13 +6,7 @@
 #define RARE_ENUMS
 #endif
 
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Numerics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.Globalization;using System.Numerics;using System.Reflection;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;
 
 // This implementation includes partial support for float/double/nint/nuint-based enums.
 // The type loader does not prohibit such enums, and older versions of the ECMA spec include

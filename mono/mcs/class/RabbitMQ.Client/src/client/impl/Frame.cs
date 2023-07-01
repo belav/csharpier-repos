@@ -58,7 +58,6 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 
-using RabbitMQ.Util;
 using RabbitMQ.Client.Exceptions;
 
 // We use spec version 0-9 for common constants such as frame types,
@@ -66,6 +65,8 @@ using RabbitMQ.Client.Exceptions;
 // the versions we support*. Obviously we may need to revisit this if
 // that ever changes.
 using CommonFraming = RabbitMQ.Client.Framing.v0_9;
+
+using RabbitMQ.Util;
 
 namespace RabbitMQ.Client.Impl
 {

@@ -20,9 +20,9 @@
 */
 
 using System;
-using System.Text;
-using System.Diagnostics;
 using SCG = System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 
 namespace C5
 {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractInterface;
 using Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ImplementType;
 using Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.NavigateTo;

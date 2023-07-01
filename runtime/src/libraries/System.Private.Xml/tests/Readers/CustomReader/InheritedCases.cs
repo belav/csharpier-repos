@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Xml.Tests;
+
 using OLEDB.Test.ModuleCore;
 
 namespace System.Xml.CustomReaderTests

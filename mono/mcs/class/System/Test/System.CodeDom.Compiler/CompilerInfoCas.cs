@@ -1,3 +1,13 @@
+using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MCSharp = Microsoft.CSharp;
+using MonoTests.System.CodeDom.Compiler;
 //
 // CompilerInfoCas.cs -
 //	CAS unit tests for System.CodeDom.Compiler.CompilerInfo
@@ -29,17 +39,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MCSharp = Microsoft.CSharp;
-using MonoTests.System.CodeDom.Compiler;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Drawing;
+using static System.Drawing.FontConverter;
 using System.Drawing.Text;
 using System.Globalization;
 using System.Linq;
+
 using Xunit;
-using static System.Drawing.FontConverter;
 
 namespace System.ComponentModel.TypeConverterTests
 {

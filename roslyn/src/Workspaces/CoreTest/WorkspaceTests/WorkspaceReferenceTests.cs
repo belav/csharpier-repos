@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
 

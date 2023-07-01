@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System.Runtime;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     sealed class Msmq4PoisonHandler : IPoisonHandlingStrategy
     {

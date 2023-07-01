@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using Aliases = System.Collections.Generic.ValueListBuilder<(string aliasName, string symbolName)>;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
@@ -11,7 +12,6 @@ using System.Threading;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Aliases = System.Collections.Generic.ValueListBuilder<(string aliasName, string symbolName)>;
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 

@@ -9,6 +9,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.UnitTesting;
+
 using Xunit;
 
 namespace Tests.Integration

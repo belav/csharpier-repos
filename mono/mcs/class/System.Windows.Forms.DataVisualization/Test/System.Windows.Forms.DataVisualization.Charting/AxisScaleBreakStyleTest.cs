@@ -24,9 +24,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Windows.Forms.DataVisualization.Charting;
-using NUnit.Framework;
 using System.Drawing;
+using System.Windows.Forms.DataVisualization.Charting;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting
 {

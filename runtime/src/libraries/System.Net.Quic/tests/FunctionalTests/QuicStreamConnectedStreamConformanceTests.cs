@@ -4,11 +4,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Tests;
-using System.Net.Sockets;
 using System.Net.Security;
+using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Xunit;
 using Xunit.Abstractions;
 

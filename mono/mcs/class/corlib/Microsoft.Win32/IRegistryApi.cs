@@ -32,10 +32,7 @@
 
 #if WIN_PLATFORM || XAMMAC_4_5
 
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
+using System;using System.Text;using System.Runtime.InteropServices;using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.Win32
 {

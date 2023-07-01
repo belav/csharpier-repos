@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using EnvDTE;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;

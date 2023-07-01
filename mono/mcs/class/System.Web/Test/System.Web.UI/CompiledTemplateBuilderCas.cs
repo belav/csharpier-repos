@@ -1,3 +1,11 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // CompiledTemplateBuilderCas.cs
 //	- CAS unit tests for System.Web.UI.CompiledTemplateBuilder
@@ -28,14 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

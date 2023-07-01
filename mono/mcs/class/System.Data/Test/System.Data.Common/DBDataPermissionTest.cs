@@ -1,3 +1,10 @@
+using System;
+using System.Data;
+using System.Data.Common;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // DBDataPermissionTest.cs - NUnit Test Cases for DBDataPermission
 //
@@ -27,12 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Security;
-using System.Security.Permissions;
-using System.IO;
 
 namespace MonoTests.System.Data.Common
 {

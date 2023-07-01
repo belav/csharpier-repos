@@ -1,3 +1,4 @@
+using System.Text;
 //
 // System.Web.UrlUtils.cs
 //
@@ -30,7 +31,6 @@
 //
 
 using System.Web.SessionState;
-using System.Text;
 
 namespace System.Web.Util
 {

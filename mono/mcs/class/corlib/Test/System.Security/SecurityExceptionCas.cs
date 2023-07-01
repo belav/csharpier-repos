@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // SecurityExceptionCas.cs - CAS unit tests for
 //	System.Security.SecurityException
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.Security
 {

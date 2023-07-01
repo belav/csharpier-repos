@@ -4,18 +4,18 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
     using System.Diagnostics;
-    using System.ServiceModel;
-    using System.ServiceModel.Security;
-
-    using System.Transactions;
-    using System.ServiceModel.Transactions;
     using System.Runtime.CompilerServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
-    using SR = System.ServiceModel.SR;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
+    using SR = System.ServiceModel.SR;
+    using System.ServiceModel.Transactions;
+
+    using System.Transactions;
 
     internal interface ITransactionChannel
     {

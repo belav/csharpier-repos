@@ -2,13 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NETCOREAPP
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
-using Microsoft.AspNetCore.DataProtection.SP800_108;
+using System;using System.IO;using System.Security.Cryptography;using Microsoft.AspNetCore.Cryptography;using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;using Microsoft.AspNetCore.DataProtection.SP800_108;
 
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 

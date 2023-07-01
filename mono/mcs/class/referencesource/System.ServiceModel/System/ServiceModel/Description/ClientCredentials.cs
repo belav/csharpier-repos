@@ -6,12 +6,12 @@ namespace System.ServiceModel.Description
 {
     using System.Diagnostics.CodeAnalysis;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
-    using System.IdentityModel.Tokens;
 
     public class ClientCredentials : SecurityCredentialsManager, IEndpointBehavior
     {

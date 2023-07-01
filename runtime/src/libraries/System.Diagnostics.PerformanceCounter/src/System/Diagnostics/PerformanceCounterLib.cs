@@ -2,18 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Buffers;
-using System.Runtime.InteropServices;
+using System.Collections;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Threading;
-using System.Collections;
-using System.ComponentModel;
-using Microsoft.Win32;
-using System.IO;
 
 using static Interop.Advapi32;
-
+using Microsoft.Win32;
 #if !NETCOREAPP
 using MemoryMarshal = System.Diagnostics.PerformanceCounterLib;
 #endif

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.Console

@@ -1,3 +1,5 @@
+using System.IdentityModel.Selectors;
+using System.IdentityModel.Tokens;
 //
 // SspiSecurityTokenProvider.cs
 //
@@ -27,8 +29,6 @@
 //
 using System.Net;
 using System.Security.Principal;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
 
 using System.ServiceModel.Security.Tokens;
 

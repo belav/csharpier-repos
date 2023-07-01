@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Reflection;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;

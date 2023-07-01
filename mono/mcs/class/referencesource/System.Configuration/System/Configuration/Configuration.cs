@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Configuration;
 //------------------------------------------------------------------------------
 // <copyright file="Configuration.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,15 +7,13 @@
 //------------------------------------------------------------------------------
 
 using ClassConfiguration = System.Configuration.Configuration;
-using System.Collections;
-using System.Configuration;
 using System.Configuration.Internal;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System.Runtime.Versioning;
 
 namespace System.Configuration
 {

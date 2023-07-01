@@ -1,3 +1,4 @@
+using System.Collections;
 //---------------------------------------------------------------------
 // <copyright file="MetadataArtifactLoaderXmlReaderWrapper.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,11 +9,10 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Collections;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Text;
 using System.Xml;
-using System.Security.Permissions;
 
 namespace System.Data.Metadata.Edm
 {

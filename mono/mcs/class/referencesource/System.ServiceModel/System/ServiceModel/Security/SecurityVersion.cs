@@ -5,19 +5,19 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.IO;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
-    using System.ServiceModel.Security.Tokens;
-    using System.Threading;
     using System.Globalization;
-    using System.ServiceModel.Diagnostics;
-    using System.Xml;
+    using System.IdentityModel.Claims;
 
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
+    using System.IdentityModel.Policy;
+    using System.IO;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security.Tokens;
+    using System.Threading;
+    using System.Xml;
 
     public abstract class SecurityVersion
     {

@@ -12,14 +12,15 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
+
 using Microsoft.Win32.SafeHandles;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.Cryptography
 {

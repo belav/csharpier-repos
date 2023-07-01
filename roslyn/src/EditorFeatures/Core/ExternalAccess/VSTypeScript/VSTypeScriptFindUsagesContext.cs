@@ -4,8 +4,9 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.FindUsages;
+
 using Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
+using Microsoft.CodeAnalysis.FindUsages;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {

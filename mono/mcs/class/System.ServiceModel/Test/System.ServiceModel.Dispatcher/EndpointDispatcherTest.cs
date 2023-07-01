@@ -26,15 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using NUnit.Framework;
-using SMMessage = System.ServiceModel.Channels.Message;
+using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.ServiceModel.Channels;using System.ServiceModel;using System.ServiceModel.Description;using System.ServiceModel.Dispatcher;using NUnit.Framework;using SMMessage = System.ServiceModel.Channels.Message;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {

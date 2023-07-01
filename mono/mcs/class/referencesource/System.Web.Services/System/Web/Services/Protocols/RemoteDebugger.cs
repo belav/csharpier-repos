@@ -1,17 +1,17 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Web.Services;
-    using System.Diagnostics;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Web.Services.Interop;
-    using System.Reflection;
-    using System.Threading;
-    using System.Security.Permissions;
-    using System.Net;
     using System.ComponentModel; // for CompModSwitches
+    using System.Diagnostics;
+    using System.Net;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services;
     using System.Web.Services.Diagnostics;
+    using System.Web.Services.Interop;
 
     internal class RemoteDebugger : INotifySource2
     {

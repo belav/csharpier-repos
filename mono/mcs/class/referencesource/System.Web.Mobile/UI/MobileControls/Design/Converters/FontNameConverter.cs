@@ -6,13 +6,13 @@
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using Microsoft.Win32;
-
     using System.Collections;
     using System.ComponentModel;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
     using System.Globalization;
+
+    using Microsoft.Win32;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

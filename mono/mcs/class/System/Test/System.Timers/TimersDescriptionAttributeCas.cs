@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Timers;
+
 //
 // TimersDescriptionAttributeCas.cs
 //	- CAS unit tests for System.Timers.TimersDescriptionAttributeCas
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Timers;
 
 namespace MonoCasTests.System.Timers
 {

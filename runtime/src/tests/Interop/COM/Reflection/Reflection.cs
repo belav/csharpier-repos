@@ -3,10 +3,11 @@
 //
 
 using System;
-using System.Text;
-using System.Security;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+
 using Xunit;
 
 public class Reflection

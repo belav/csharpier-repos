@@ -1,3 +1,9 @@
+using System;
+
+using System.Diagnostics;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // UrlIdentityPermissionTest.cs - NUnit Test Cases for UrlIdentityPermission
 //
@@ -27,11 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-
-using System.Diagnostics;
 
 namespace MonoTests.System.Security.Permissions
 {

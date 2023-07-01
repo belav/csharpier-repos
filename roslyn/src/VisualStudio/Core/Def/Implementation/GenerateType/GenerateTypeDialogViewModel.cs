@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Security;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.GeneratedCodeRecognition;
 using Microsoft.CodeAnalysis.GenerateType;

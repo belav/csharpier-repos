@@ -1,3 +1,4 @@
+using System;
 /* ****************************************************************************
  *
  * Copyright (c) Microsoft Corporation.
@@ -14,7 +15,6 @@
  * ***************************************************************************/
 
 using System.Security;
-using System;
 
 namespace Microsoft.Scripting
 {

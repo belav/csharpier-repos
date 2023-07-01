@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Text;
+
 //
 // EncodingInfoTest.cs
 //
@@ -8,11 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
 
 namespace MonoTests.System.Text
 {

@@ -10,6 +10,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeGen;
 using Roslyn.Utilities;
 

@@ -3,6 +3,7 @@
 
 using System.Collections.Immutable;
 using System.IO;
+
 using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;

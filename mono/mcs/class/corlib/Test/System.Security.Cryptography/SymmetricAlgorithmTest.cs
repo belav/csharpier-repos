@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
 // !!! DO NOT EDIT - This file is generated automatically - DO NOT EDIT !!!
 // Note: Key and IV will be different each time the file is generated
 
@@ -11,9 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
+using System.IO;
 using Encoding = System.Text.Encoding;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Xml.Linq
 {

@@ -22,10 +22,7 @@
 //
 
 #if !FULL_AOT_RUNTIME
-using System;
-using System.Collections;
-using System.Reflection.Emit;
-using System.Reflection;
+using System;using System.Collections;using System.Reflection.Emit;using System.Reflection;
 
 namespace Mono.CodeGeneration
 {

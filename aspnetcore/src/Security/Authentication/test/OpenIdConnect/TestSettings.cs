@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Xml.Linq;
+
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;

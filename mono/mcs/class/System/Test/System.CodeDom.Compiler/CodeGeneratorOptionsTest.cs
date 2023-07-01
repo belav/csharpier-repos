@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom.Compiler;
+
 //
 // CodeGeneratorOptionsTest.cs
 //	- Unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
 
 namespace MonoTests.System.CodeDom.Compiler
 {

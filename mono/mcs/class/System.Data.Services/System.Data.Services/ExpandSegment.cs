@@ -1,4 +1,6 @@
-﻿//
+﻿using System.Collections.Generic;
+using System.Data.Services.Providers;
+//
 // ExpandSegment.cs
 //
 // Author:
@@ -27,10 +29,8 @@
 //
 
 using System.Diagnostics;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Services.Providers;
 
 namespace System.Data.Services
 {

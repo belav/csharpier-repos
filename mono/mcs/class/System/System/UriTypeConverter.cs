@@ -30,8 +30,7 @@ using System.ComponentModel;
 #if !MOBILE
 using System.ComponentModel.Design.Serialization;
 #endif
-using System.Globalization;
-using System.Reflection;
+using System.Globalization;using System.Reflection;
 
 namespace System
 {

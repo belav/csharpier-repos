@@ -1,13 +1,5 @@
 #if !XAMMAC_4_5
-using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.CompilerServices;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using System.Xml;
-using System.Threading;
+using System.Collections.Generic;using System.Reflection;using System.Runtime.Serialization;using System.Runtime.CompilerServices;using System.ServiceModel.Channels;using System.ServiceModel.Dispatcher;using System.Text;using System.Xml;using System.Threading;
 
 namespace System.ServiceModel
 {

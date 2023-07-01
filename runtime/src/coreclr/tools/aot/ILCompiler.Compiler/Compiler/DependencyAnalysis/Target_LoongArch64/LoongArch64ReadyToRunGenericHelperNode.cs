@@ -3,11 +3,11 @@
 
 using System;
 
+using Debug = System.Diagnostics.Debug;
+
 using ILCompiler.DependencyAnalysis.LoongArch64;
 
 using Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {

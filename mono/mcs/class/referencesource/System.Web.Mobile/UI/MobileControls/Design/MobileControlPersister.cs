@@ -7,20 +7,20 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
-    using System.Web.UI;
-    using System.Web.UI.HtmlControls;
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.WebControls;
     using System.Collections;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Text;
+    using System.Web.UI;
     using AttributeCollection = System.Web.UI.AttributeCollection;
-    using System.Globalization;
+    using System.Web.UI.HtmlControls;
+    using System.Web.UI.MobileControls;
+    using System.Web.UI.WebControls;
 
     /// <summary>
     ///    <para>

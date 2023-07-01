@@ -1,7 +1,8 @@
 using System;
-using Cairo;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
+
+using Cairo;
 
 namespace Cairo.Snippets
 {

@@ -24,31 +24,20 @@
 #region Used namespaces
 
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Design;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Resources;
-using System.Reflection;
-using System.IO;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-
+using System.IO;
+using System.Reflection;
+using System.Resources;
 #if Microsoft_CONTROL
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.DataVisualization.Charting.Data;
-using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-
-using System.Windows.Forms.Design;
+using System.Windows.Forms.DataVisualization.Charting;using System.Windows.Forms.DataVisualization.Charting.Data;using System.Windows.Forms.DataVisualization.Charting.ChartTypes;using System.Windows.Forms.DataVisualization.Charting.Utilities;using System.Windows.Forms.DataVisualization.Charting.Borders3D;using System.Windows.Forms.Design;
 #else
-using System.Web.UI;
-using System.Web.UI.DataVisualization.Charting.Data;
-using System.Web.UI.DataVisualization.Charting.ChartTypes;
-using System.Web.UI.DataVisualization.Charting;
-using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI;using System.Web.UI.DataVisualization.Charting.Data;using System.Web.UI.DataVisualization.Charting.ChartTypes;using System.Web.UI.DataVisualization.Charting;using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion

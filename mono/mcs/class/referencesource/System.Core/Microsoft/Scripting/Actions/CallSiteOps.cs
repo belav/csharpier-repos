@@ -1,4 +1,5 @@
-﻿/* ****************************************************************************
+﻿using System.Collections.Generic;
+/* ****************************************************************************
  *
  * Copyright (c) Microsoft Corporation.
  *
@@ -16,7 +17,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Dynamic;
-using System.Collections.Generic;
 
 namespace System.Runtime.CompilerServices
 {

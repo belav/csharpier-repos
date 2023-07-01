@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel.Description;
     using System.Collections;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
     public class OneWayBindingElementImporter : IPolicyImportExtension
     {

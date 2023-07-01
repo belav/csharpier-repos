@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 // ArraySegmentTest.cs - NUnit Test Cases for the System.ArraySegment class
 //
 // Ankit Jain  <jankit@novell.com>
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace MonoTests.System
 {

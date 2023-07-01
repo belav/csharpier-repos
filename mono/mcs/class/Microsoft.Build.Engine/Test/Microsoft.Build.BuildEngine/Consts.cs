@@ -27,6 +27,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.Build.Utilities;
 
 public static class Consts

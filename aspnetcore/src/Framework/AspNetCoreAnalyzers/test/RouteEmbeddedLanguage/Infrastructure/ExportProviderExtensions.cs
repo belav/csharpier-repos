@@ -8,6 +8,7 @@ using System.Composition.Hosting.Core;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.Composition;
 

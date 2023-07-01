@@ -27,13 +27,7 @@
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
 #endif
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-
+using System;using System.IO;using System.Collections.Generic;using System.Runtime.InteropServices;using System.Runtime.CompilerServices;using System.Security.Cryptography.X509Certificates;
 #if MONO_SECURITY_ALIAS
 using MonoSecurity::Mono.Security.Interface;
 #else

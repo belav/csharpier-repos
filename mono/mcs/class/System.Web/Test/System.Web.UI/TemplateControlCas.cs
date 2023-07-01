@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // TemplateControlCas.cs - CAS unit tests for System.Web.UI.TemplateControl
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.IO;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

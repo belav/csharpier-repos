@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
 //
 // HashAlgorithmTestBase.cs - NUnit Test Cases for HashAlgorithm
 //
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

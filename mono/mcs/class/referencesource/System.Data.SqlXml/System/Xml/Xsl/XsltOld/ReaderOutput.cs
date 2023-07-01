@@ -7,15 +7,15 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
-    using System.Globalization;
+    using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Xml;
+    using Res = System.Xml.Utils.Res;
     using System.Xml.XPath;
-    using System.Collections;
 
     internal class ReaderOutput : XmlReader, RecordOutput
     {

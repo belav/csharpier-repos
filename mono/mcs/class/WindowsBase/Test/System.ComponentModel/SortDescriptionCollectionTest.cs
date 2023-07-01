@@ -25,11 +25,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+
 using NUnit.Framework;
-using System.ComponentModel;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.ComponentModel
 {

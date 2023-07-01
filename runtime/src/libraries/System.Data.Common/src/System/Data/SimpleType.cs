@@ -1,12 +1,12 @@
+using System.Collections;
+using System.Data.Common;
+using System.Globalization;
+using System.Runtime.Serialization;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Xml;
 using System.Xml.Schema;
-using System.Runtime.Serialization;
-using System.Globalization;
-using System.Collections;
-using System.Data.Common;
 
 namespace System.Data
 {

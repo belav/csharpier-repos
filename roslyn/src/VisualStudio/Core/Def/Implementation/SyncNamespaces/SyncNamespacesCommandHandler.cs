@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.ComponentModel.Design;
 using System.Composition;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.Extensions;

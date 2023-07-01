@@ -1,11 +1,12 @@
+using System.IO;
+using System.Reflection.Internal;
+using System.Reflection.PortableExecutable;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.Win32.SafeHandles;
-using System.IO;
-using System.Reflection.PortableExecutable;
 using Xunit;
-using System.Reflection.Internal;
 
 namespace System.Reflection.Metadata.Tests
 {

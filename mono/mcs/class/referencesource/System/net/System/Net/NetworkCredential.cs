@@ -17,6 +17,7 @@ namespace System.Net
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
+
     using Microsoft.Win32;
 
     /// <devdoc>

@@ -29,13 +29,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using NUnit.Framework;
-using System.Net.Http;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http
 {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
 using System.Linq;
+
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;

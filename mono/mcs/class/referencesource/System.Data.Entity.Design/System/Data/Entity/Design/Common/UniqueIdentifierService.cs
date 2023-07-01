@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="UniqueIdentifierService.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,7 +10,6 @@
 
 
 using System.Diagnostics;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace System.Data.Entity.Design.Common

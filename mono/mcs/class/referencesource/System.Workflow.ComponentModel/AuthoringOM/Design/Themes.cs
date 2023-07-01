@@ -1,30 +1,31 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
-    using System.Drawing;
-    using System.Resources;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Drawing.Text;
-    using System.Globalization;
-    using System.Windows.Forms;
-    using System.Drawing.Design;
-    using System.ComponentModel;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel.Design;
     using System.Collections.Specialized;
-    using System.Runtime.InteropServices;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using Microsoft.Win32;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Windows.Forms.Design;
+    using System.Xml;
+
+    using Microsoft.Win32;
 
     //
 

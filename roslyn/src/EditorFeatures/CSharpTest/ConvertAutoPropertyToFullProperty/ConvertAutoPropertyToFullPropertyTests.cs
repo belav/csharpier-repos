@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;

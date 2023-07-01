@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;

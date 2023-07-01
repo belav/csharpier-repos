@@ -26,19 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.IO;
-using System.Text;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
-
-using Key = System.IdentityModel.Tokens.InMemorySymmetricSecurityKey;
-using AES = System.Security.Cryptography.RijndaelManaged;
-
-using MonoTests.Helpers;
+using System;using System.IO;using System.Text;using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using NUnit.Framework;using Key = System.IdentityModel.Tokens.InMemorySymmetricSecurityKey;using AES = System.Security.Cryptography.RijndaelManaged;using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Tokens
 {

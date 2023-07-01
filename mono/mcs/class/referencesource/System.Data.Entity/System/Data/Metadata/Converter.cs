@@ -9,11 +9,11 @@
 
 using System.Collections.Generic;
 using System.Data.Common;
+using Som = System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.Metadata.Edm
 {

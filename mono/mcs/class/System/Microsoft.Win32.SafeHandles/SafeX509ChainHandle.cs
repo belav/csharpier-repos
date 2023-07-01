@@ -28,9 +28,7 @@
 
 #if SECURITY_DEP
 
-using System;
-using System.Runtime.InteropServices;
-using System.Security;
+using System;using System.Runtime.InteropServices;using System.Security;
 
 namespace Microsoft.Win32.SafeHandles
 {

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Net.Http.Mocks;
+
 using Microsoft.TestCommon;
 
 namespace System.Net.Http

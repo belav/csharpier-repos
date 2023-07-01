@@ -6,21 +6,22 @@
 
 namespace System.Diagnostics
 {
-    using System.Security.Permissions;
-    using System.Security;
-    using System.Threading;
-    using System.Text;
-    using Microsoft.Win32;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Security.Principal;
-    using System.Security.AccessControl;
-    using System.Runtime.Versioning;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.AccessControl;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Threading;
+
+    using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
-    using System.Diagnostics.CodeAnalysis;
 
     internal static class SharedUtils
     {

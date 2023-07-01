@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Composition.Hosting.Core;
 using System.Globalization;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Composition.Runtime.Tests

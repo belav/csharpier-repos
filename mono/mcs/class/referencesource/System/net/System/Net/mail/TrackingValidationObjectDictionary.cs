@@ -8,8 +8,8 @@ namespace System.Net
 {
     using System;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Diagnostics;
 
     // TrackingValidationObjectDictionary uses an internal collection of objects to store

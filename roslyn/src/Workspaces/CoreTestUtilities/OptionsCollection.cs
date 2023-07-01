@@ -5,16 +5,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Options;
-using System.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;
-
 #if !NETCOREAPP
-using System;
-using Roslyn.Utilities;
+using System;using Roslyn.Utilities;
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

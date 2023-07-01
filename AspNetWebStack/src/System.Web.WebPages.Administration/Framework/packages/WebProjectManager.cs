@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+
 using Microsoft.Internal.Web.Utils;
 using NuGet;
 using NuGet.Runtime;

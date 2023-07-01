@@ -28,11 +28,11 @@ using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.Linq;
+
 using DbLinq.Schema.Dbml;
 using DbLinq.Schema.Dbml.Adapter;
 using DbLinq.Util;
 using DbMetal.Generator.EntityInterface;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

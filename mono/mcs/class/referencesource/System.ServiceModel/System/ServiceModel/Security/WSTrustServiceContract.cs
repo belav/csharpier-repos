@@ -11,27 +11,27 @@ namespace System.ServiceModel.Security
     using System.IdentityModel;
     using System.IdentityModel.Configuration;
     using System.IdentityModel.Diagnostics;
+    using DiagnosticUtility = System.IdentityModel.DiagnosticUtility;
     using System.IdentityModel.Protocols.WSTrust;
+    using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
+    using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
+    using STS = System.IdentityModel.SecurityTokenService;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.IO;
+    using Fx = System.Runtime.Fx;
     using System.Security.Claims;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
+    using Message = System.ServiceModel.Channels.Message;
+    using RequestContext = System.ServiceModel.Channels.RequestContext;
     using System.ServiceModel.Description;
+    using SR = System.ServiceModel.SR;
     using System.Threading;
     using System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
-    using DiagnosticUtility = System.IdentityModel.DiagnosticUtility;
-    using Message = System.ServiceModel.Channels.Message;
-    using RequestContext = System.ServiceModel.Channels.RequestContext;
-    using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
-    using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
-    using SR = System.ServiceModel.SR;
-    using STS = System.IdentityModel.SecurityTokenService;
-    using Fx = System.Runtime.Fx;
 
     /// <summary>
     /// Definition of Trust Contract Implementation. Implements the following ServiceContract interfaces,

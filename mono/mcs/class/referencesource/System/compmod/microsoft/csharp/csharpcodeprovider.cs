@@ -1,3 +1,10 @@
+using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 //------------------------------------------------------------------------------
 // <copyright file="CSharpCodeProvider.cs" company="Microsoft">
 //
@@ -7,21 +14,14 @@
 //------------------------------------------------------------------------------
 
 using System.Diagnostics;
-using System;
-using System.IO;
-using System.Collections;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Reflection;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
 using System.Security.Principal;
-using System.Collections.Generic;
-using System.Runtime.Versioning;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.CSharp
 {

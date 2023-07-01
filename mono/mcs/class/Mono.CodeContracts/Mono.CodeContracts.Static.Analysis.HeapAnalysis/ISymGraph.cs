@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;

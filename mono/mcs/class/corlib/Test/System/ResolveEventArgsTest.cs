@@ -1,3 +1,4 @@
+using System;
 //
 // System.ResolveEventArgs Test Cases
 //
@@ -5,7 +6,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

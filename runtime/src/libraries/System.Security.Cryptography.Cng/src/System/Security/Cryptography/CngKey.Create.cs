@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Cryptography;
-using Microsoft.Win32.SafeHandles;
 
 using ErrorCode = Interop.NCrypt.ErrorCode;
 using NCRYPT_UI_POLICY = Interop.NCrypt.NCRYPT_UI_POLICY;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

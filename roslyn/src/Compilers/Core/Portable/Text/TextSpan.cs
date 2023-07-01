@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.Serialization;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Text

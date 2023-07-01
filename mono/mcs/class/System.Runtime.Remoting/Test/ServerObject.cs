@@ -7,9 +7,10 @@
 //
 
 using System;
+using System.Collections;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Lifetime;
-using System.Collections;
+
 using NUnit.Framework;
 
 namespace MonoTests.Remoting

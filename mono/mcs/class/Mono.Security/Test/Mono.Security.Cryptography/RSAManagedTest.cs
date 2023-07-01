@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+
+using Mono.Security.Cryptography;
 //
 // RSAManagedTest.cs: NUnit Test Cases for RSAManaged
 //	- based on RSACryptoServiceProviderTest
@@ -29,10 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using Mono.Security.Cryptography;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Composition.Convention;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Providers;
-using System.Composition.Convention;
 using System.Reflection;
+using System.Text;
+
 using Xunit;
 
 namespace System.Composition.UnitTests

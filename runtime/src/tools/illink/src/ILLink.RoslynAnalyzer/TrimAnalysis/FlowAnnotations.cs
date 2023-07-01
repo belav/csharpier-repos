@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+
 using ILLink.RoslynAnalyzer;
 using ILLink.Shared.TypeSystemProxy;
 using Microsoft.CodeAnalysis;

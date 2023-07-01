@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+
 using static Roslyn.Test.Performance.Utilities.TestUtilities;
 
 namespace Roslyn.Test.Performance.Utilities

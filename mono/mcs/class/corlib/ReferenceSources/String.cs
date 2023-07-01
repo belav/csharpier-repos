@@ -40,13 +40,7 @@ using nuint = System.UInt64;
 using nuint = System.UInt32;
 #endif
 
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Globalization;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Runtime.CompilerServices;using System.Text;using System.Globalization;using System.Collections;using System.Collections.Generic;using System.Runtime.InteropServices;using System.Diagnostics;
 
 namespace System
 {

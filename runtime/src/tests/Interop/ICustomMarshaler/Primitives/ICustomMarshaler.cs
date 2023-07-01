@@ -3,8 +3,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
+
 using static TestLibrary.Utilities;
+using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {

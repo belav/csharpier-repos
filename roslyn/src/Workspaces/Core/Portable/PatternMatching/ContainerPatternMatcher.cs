@@ -7,6 +7,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Collections;
 

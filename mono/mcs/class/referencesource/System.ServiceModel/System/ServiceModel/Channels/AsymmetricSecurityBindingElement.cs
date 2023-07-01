@@ -4,17 +4,17 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel.Description;
-    using System.Xml;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.ServiceModel;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Security.Tokens;
 
     using System.Net.Security;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
     using System.Text;
+    using System.Xml;
 
     public sealed class AsymmetricSecurityBindingElement
         : SecurityBindingElement,

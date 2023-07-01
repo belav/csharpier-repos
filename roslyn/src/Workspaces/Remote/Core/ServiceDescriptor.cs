@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Microsoft.ServiceHub.Framework;
 using Roslyn.Utilities;
 using StreamJsonRpc;

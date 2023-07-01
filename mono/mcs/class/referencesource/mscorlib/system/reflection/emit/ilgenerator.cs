@@ -9,13 +9,13 @@
 namespace System.Reflection.Emit
 {
     using System;
-    using TextWriter = System.IO.TextWriter;
-    using System.Diagnostics.SymbolStore;
-    using System.Runtime.InteropServices;
-    using System.Reflection;
-    using System.Security.Permissions;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Diagnostics.SymbolStore;
+    using System.Globalization;
+    using TextWriter = System.IO.TextWriter;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_ILGenerator))]

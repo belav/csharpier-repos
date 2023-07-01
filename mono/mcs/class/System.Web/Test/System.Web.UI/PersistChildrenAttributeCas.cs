@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // PersistChildrenAttributeCas.cs
 //	- CAS unit tests for System.Web.UI.PersistChildrenAttribute
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

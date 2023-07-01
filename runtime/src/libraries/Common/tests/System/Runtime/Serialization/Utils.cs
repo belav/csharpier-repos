@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Xml.Linq;
+
 using Xunit;
 
 namespace System.Runtime.Serialization.Tests

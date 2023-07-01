@@ -4,14 +4,14 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;

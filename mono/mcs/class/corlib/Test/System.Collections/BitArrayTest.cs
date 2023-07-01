@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+
 //
 // BitArrayTest.cs - NUnit Test Cases for the System.Collections.BitArray class
 //
@@ -5,8 +8,6 @@
 //
 
 using NUnit.Framework;
-using System.Collections;
-using System;
 
 namespace MonoTests.System.Collections
 {

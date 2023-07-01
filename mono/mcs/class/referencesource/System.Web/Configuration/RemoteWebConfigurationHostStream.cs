@@ -8,14 +8,14 @@ namespace System.Web.Configuration
 {
     using System.Collections;
     using System.Configuration;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
-    using System.Security.Principal;
     using System.IO;
-    using System.Web.Hosting;
     using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
     [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
     internal class RemoteWebConfigurationHostStream : Stream

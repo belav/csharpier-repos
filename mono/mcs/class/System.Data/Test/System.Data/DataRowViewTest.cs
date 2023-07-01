@@ -1,3 +1,7 @@
+using System;
+using System.ComponentModel;
+using System.Data;
+
 //
 // DataRowViewTest.cs
 //
@@ -29,9 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.ComponentModel;
 
 namespace MonoTests.System.Data
 {

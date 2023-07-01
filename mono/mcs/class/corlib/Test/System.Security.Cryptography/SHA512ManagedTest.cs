@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
 //
 // SHA512ManagedTest.cs - NUnit Test Cases for SHA512Managed
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

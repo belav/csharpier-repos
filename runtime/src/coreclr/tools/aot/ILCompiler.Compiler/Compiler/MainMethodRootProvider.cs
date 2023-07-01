@@ -4,9 +4,10 @@
 using System;
 using System.Collections.Generic;
 
+using Internal.IL.Stubs.StartupCode;
+
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.IL.Stubs.StartupCode;
 
 namespace ILCompiler
 {

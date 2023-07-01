@@ -25,19 +25,11 @@
 
 #if (NET45 || NET5_0_OR_GREATER)
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.Collections.Generic;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Converters;
-using System.Collections;
-using System;
-using System.IO;
-using Newtonsoft.Json.Linq;
+using System.Collections.Generic;using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Converters;using System.Collections;using System;using System.IO;using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Tests.Issues
 {

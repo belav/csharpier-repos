@@ -14,14 +14,7 @@
 // <STRIP>This really shouldn't ship at all, but is intended as a quick, inefficient hack
 // for debugging.  -- BrianGru, 9/26/2000</STRIP>
 
-using System;
-using System.IO;
-using System.Text;
-using System.Security;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using Microsoft.Win32;
-using System.Globalization;
+using System;using System.IO;using System.Text;using System.Security;using System.Runtime.InteropServices;using System.Runtime.Versioning;using Microsoft.Win32;using System.Globalization;
 
 namespace System.IO
 {

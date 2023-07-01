@@ -1,7 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Buffers;
 using System.Diagnostics;
@@ -12,6 +8,11 @@ using System.Security.Cryptography.Asn1;
 using System.Security.Cryptography.Asn1.Pkcs12;
 using System.Security.Cryptography.Pkcs;
 using System.Security.Cryptography.X509Certificates;
+
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal
 {

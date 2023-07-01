@@ -4,9 +4,10 @@
 
 using System;
 using System.Threading.Tasks;
+using AutomationElementIdentifiers = System.Windows.Automation.AutomationElementIdentifiers;
+
 using Roslyn.Utilities;
 using UIAutomationClient;
-using AutomationElementIdentifiers = System.Windows.Automation.AutomationElementIdentifiers;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {

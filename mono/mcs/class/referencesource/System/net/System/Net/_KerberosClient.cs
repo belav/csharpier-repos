@@ -7,10 +7,10 @@
 namespace System.Net
 {
     using System.Collections;
+    using System.Globalization;
     using System.Net.Sockets;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System.Globalization;
 
     internal class KerberosClient : ISessionAuthenticationModule
     {

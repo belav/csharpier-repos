@@ -33,8 +33,9 @@ using System.Collections.Specialized;
 using System.Runtime.Caching;
 using System.Threading;
 
-using NUnit.Framework;
 using MonoTests.Common;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Caching
 {

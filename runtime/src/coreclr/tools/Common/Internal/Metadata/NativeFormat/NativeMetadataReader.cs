@@ -6,11 +6,12 @@
 #pragma warning disable CA1066 // IEquatable<T> implementations aren't used
 
 using System;
+using System.Collections.Generic;
 #pragma warning disable IDE0005 // Using directive is unnecessary.
 using System.IO;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 #pragma warning restore IDE0005 // Using directive is unnecessary.
 using Internal.NativeFormat;
 

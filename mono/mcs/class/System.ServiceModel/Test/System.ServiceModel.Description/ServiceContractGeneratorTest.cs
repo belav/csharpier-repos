@@ -26,17 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel.Channels;
-using NUnit.Framework;
+using System;using System.CodeDom;using System.Collections;using System.Collections.Generic;using System.Linq;using System.Text;using System.ServiceModel;using System.ServiceModel.Description;using System.ServiceModel.Dispatcher;using System.ServiceModel.Channels;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Description
 {

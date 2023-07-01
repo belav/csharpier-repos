@@ -30,9 +30,7 @@
 
 #if !MOBILE
 
-using System;
-using System.IO;
-using System.Diagnostics;
+using System;using System.IO;using System.Diagnostics;
 
 namespace MonoTests.System.Diagnostics
 {

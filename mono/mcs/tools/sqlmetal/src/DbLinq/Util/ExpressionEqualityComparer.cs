@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+
 using DbLinq.Data.Linq.Implementation;
 
 namespace DbLinq.Util

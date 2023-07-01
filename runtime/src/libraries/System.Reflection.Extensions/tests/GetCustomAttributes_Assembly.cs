@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Security;
-using Xunit;
 using Assembly = System.Reflection.Tests;
+using System.Security;
+
+using Xunit;
 
 [assembly:
     Assembly.MyAttribute_Single("single"),

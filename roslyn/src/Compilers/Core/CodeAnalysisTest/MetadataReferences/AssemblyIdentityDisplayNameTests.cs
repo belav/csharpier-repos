@@ -6,6 +6,7 @@
 
 using System;
 using System.Reflection;
+
 using Roslyn.Test.Utilities;
 using Xunit;
 

@@ -4,9 +4,10 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
-using Roslyn.Utilities;
 using System.Diagnostics;
+using System.Linq;
+
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {

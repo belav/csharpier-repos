@@ -1,3 +1,6 @@
+using System;
+using System.Text.RegularExpressions;
+
 //
 // RegexCompilationInfoTest.cs
 //	- Unit tests for System.Text.RegularExpressions.RegexCompilationInfo
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Text.RegularExpressions
 {

@@ -3,6 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -12,11 +17,6 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<
-    System.Xml.XmlQualifiedName,
-    System.Runtime.Serialization.DataContracts.DataContract
->;
 
 namespace System.Runtime.Serialization.DataContracts
 {

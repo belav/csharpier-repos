@@ -1,14 +1,14 @@
+using System.Collections;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 using System.Dynamic.Utils;
 using static System.Linq.Expressions.CachedReflectionInfo;
-using System.Collections;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions.Compiler
 {

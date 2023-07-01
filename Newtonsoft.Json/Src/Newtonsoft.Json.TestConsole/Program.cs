@@ -25,10 +25,11 @@
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
+
 using BenchmarkDotNet.Running;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Tests.Benchmarks;
-using System.Reflection;
 
 namespace Newtonsoft.Json.TestConsole
 {

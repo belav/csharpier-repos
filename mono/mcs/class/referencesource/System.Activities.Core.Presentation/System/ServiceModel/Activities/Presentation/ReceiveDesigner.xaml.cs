@@ -4,28 +4,29 @@
 
 namespace System.ServiceModel.Activities.Presentation
 {
-    using Microsoft.VisualBasic.Activities;
     using System;
     using System.Activities;
-    using System.Activities.Statements;
-    using System.Activities.Core.Presentation.Themes;
     using System.Activities.Core.Presentation;
+    using System.Activities.Core.Presentation.Themes;
+    using System.Activities.Expressions;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
-    using System.Activities.Presentation.View;
     using System.Activities.Presentation.PropertyEditing;
+    using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Runtime;
-    using System.Activities.Presentation.Services;
-    using System.Activities.Expressions;
+
+    using Microsoft.VisualBasic.Activities;
 
     partial class ReceiveDesigner
     {

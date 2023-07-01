@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Debugging;
 using Microsoft.CodeAnalysis.Editor.Host;
@@ -14,13 +15,13 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Text.Shared.Extensions;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Extensions;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
-using Microsoft.VisualStudio.Utilities;
-using Roslyn.Utilities;
 using IVsDebugName = Microsoft.VisualStudio.TextManager.Interop.IVsDebugName;
 using IVsEnumBSTR = Microsoft.VisualStudio.TextManager.Interop.IVsEnumBSTR;
 using IVsTextBuffer = Microsoft.VisualStudio.TextManager.Interop.IVsTextBuffer;
 using RESOLVENAMEFLAGS = Microsoft.VisualStudio.TextManager.Interop.RESOLVENAMEFLAGS;
 using VsTextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
+using Microsoft.VisualStudio.Utilities;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {

@@ -3,6 +3,7 @@
 
 using System.CommandLine.Parsing;
 using System.IO;
+
 using FluentAssertions;
 using Xunit;
 

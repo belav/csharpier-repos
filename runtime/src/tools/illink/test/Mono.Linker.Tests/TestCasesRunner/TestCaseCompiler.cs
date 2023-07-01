@@ -7,13 +7,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+
 using Mono.Linker.Tests.Extensions;
 using NUnit.Framework;
 #if NETCOREAPP
-using System.Runtime.InteropServices;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.CSharp;
+using System.Runtime.InteropServices;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.Emit;using Microsoft.CodeAnalysis.CSharp;
 #endif
 
 namespace Mono.Linker.Tests.TestCasesRunner

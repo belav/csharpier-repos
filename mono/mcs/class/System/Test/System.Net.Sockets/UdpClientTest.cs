@@ -11,9 +11,9 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Sockets
 {

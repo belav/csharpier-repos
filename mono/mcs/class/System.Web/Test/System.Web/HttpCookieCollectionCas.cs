@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpCookieCollectionCas.cs
 //	- CAS unit tests for System.Web.HttpCookieCollection
@@ -28,11 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // FileNotFoundExceptionCas.cs - CAS unit tests for
 //	System.IO.FileNotFoundException
@@ -28,11 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.IO
 {

@@ -8,14 +8,14 @@
  */
 namespace System.Web.Services
 {
-    using System.Diagnostics;
-    using System.Web;
     using System.ComponentModel;
-    using System.Web.SessionState;
-    using System.Web.Services.Protocols;
-    using System.Security.Principal;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web;
+    using System.Web.Services.Protocols;
+    using System.Web.SessionState;
 
     /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService"]/*' />
     /// <devdoc>

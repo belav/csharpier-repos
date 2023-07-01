@@ -16,8 +16,8 @@ namespace System.Security.Policy
 {
     using System;
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

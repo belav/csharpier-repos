@@ -1,11 +1,11 @@
 using System;
-using System.Threading;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using NUnit.Framework;
-using System.IO;
+using System.Threading;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Sockets
 {

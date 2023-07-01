@@ -1,14 +1,14 @@
 namespace System.Net.NetworkInformation
 {
-    using System.Net;
-    using System.Net.Sockets;
     using System;
-    using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Threading.Tasks;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public delegate void PingCompletedEventHandler(object sender, PingCompletedEventArgs e);
 

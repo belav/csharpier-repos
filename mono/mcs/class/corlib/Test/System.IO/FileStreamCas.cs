@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // FileStreamCas.cs -CAS unit tests for System.IO.FileStream
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.IO
 {

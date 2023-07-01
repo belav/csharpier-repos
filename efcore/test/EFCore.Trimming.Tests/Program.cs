@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+
 using EFCore.Trimming.Tests;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;

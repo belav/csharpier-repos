@@ -30,16 +30,17 @@ namespace System.Security.AccessControl
 namespace System.Threading
 {
     using System;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
+    using System.Diagnostics.Contracts;
     using System.IO;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security.AccessControl;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
+    using System.Threading;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     [HostProtection(Synchronization = true, ExternalThreading = true)]
     [ComVisibleAttribute(true)]

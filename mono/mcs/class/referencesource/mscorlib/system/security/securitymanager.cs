@@ -16,22 +16,16 @@
 namespace System.Security
 {
     using System;
-    using System.Security.Util;
-    using System.Security.Policy;
-    using System.Security.Permissions;
     using System.Collections;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Util;
 #if FEATURE_CLICKONCE
     using System.Runtime.Hosting;
 #endif // FEATURE_CLICKONCE
-    using System.Text;
-    using System.Threading;
-    using System.Reflection;
-    using System.IO;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Text;using System.Threading;using System.Reflection;using System.IO;using System.Globalization;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

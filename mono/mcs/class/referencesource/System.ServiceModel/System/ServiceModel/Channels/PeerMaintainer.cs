@@ -12,6 +12,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
+
     using Microsoft.Win32;
 
     delegate void NeighborClosedHandler(IPeerNeighbor neighbor);

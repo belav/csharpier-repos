@@ -29,9 +29,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Util;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

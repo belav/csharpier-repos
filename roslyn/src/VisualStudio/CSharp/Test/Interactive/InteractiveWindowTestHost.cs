@@ -6,6 +6,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Editor.UnitTests;
 using Microsoft.VisualStudio.Composition;
 using Microsoft.VisualStudio.InteractiveWindow;

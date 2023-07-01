@@ -28,10 +28,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.Apple;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace Mono.AppleTls

@@ -5,9 +5,7 @@
 #define HAVE_STORE_ISOPEN
 #endif
 
-using System.IO;
-using Test.Cryptography;
-using Xunit;
+using System.IO;using Test.Cryptography;using Xunit;
 
 namespace System.Security.Cryptography.X509Certificates.Tests
 {

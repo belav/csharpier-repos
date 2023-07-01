@@ -7,6 +7,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis.Editor;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;

@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Globalization;
+
 using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.Razor.Text

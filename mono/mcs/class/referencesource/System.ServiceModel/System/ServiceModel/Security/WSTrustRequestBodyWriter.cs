@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.Xml;
     using System.Diagnostics;
     using System.IdentityModel.Protocols.WSTrust;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.Xml;
 
     /// <summary>
     /// Defines a Body Writer that writes out a RequestSecurityToken into an XmlDictionaryWriter.

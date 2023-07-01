@@ -4,15 +4,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using VerifyCS = ILLink.RoslynAnalyzer.Tests.CSharpCodeFixVerifier<
+    ILLink.RoslynAnalyzer.RequiresAssemblyFilesAnalyzer,
+    ILLink.CodeFix.RequiresAssemblyFilesCodeFixProvider
+>;
 using ILLink.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Text;
 using Xunit;
-using VerifyCS = ILLink.RoslynAnalyzer.Tests.CSharpCodeFixVerifier<
-    ILLink.RoslynAnalyzer.RequiresAssemblyFilesAnalyzer,
-    ILLink.CodeFix.RequiresAssemblyFilesCodeFixProvider
->;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {

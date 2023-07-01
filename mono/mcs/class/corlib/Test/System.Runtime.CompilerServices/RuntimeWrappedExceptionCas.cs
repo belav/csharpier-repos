@@ -1,3 +1,11 @@
+using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.System.Runtime.CompilerServices;
 //
 // RuntimeWrappedExceptionCas.cs - CAS Test Cases for
 //	System.Runtime.CompilerServices.RuntimeWrappedException
@@ -29,14 +37,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System.Runtime.CompilerServices;
 
 namespace MonoCasTests.System.Runtime.CompilerServices
 {

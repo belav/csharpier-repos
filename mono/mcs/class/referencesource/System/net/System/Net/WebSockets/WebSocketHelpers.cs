@@ -16,6 +16,7 @@ namespace System.Net.WebSockets
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+
     using Microsoft.Win32;
 
     internal static class WebSocketHelpers

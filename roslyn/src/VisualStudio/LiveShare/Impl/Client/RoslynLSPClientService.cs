@@ -9,12 +9,13 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
+
+using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.LiveShare;
-using Newtonsoft.Json.Linq;
-using Task = System.Threading.Tasks.Task;
 using LS = Microsoft.VisualStudio.LiveShare.LanguageServices;
-using Microsoft.CodeAnalysis.Host.Mef;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 {

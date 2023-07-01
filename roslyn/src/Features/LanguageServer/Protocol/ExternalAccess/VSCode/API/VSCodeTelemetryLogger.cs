@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSCode.API;

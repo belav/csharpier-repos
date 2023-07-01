@@ -1,8 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Microsoft.CSharp;
-using Microsoft.VisualBasic;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections;
@@ -10,6 +5,12 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Versioning;
+
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using Microsoft.CSharp;
+using Microsoft.VisualBasic;
 
 namespace System.Management
 {

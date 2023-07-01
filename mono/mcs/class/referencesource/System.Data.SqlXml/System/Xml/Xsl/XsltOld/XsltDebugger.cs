@@ -7,9 +7,9 @@
 
 namespace System.Xml.Xsl.XsltOld.Debugger
 {
-    using Res = System.Xml.Utils.Res;
     using System;
     using System.Xml;
+    using Res = System.Xml.Utils.Res;
     using System.Xml.XPath;
 
     internal interface IStackFrame

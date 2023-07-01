@@ -1,8 +1,8 @@
 using System;
 using System.CodeDom;
+using System.Globalization;
 using System.Text;
 using System.Workflow.ComponentModel.Compiler;
-using System.Globalization;
 
 namespace System.Workflow.ComponentModel.Serialization
 {

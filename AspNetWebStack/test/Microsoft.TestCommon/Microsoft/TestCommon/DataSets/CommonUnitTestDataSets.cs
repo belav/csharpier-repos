@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+
 using Microsoft.TestCommon.Types;
 
 namespace Microsoft.TestCommon

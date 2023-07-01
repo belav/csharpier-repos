@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http.SelfHost;
 using System.Web.Http.Util;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.Http.ContentNegotiation

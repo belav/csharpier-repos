@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Loader;
+
 using ILVerify;
 using Mono.Linker.Tests.Extensions;
 

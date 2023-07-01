@@ -8,8 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Microsoft.Win32.SafeHandles;
 
+using Microsoft.Win32.SafeHandles;
 #if BIGENDIAN
 using System.Buffers.Binary;
 #endif

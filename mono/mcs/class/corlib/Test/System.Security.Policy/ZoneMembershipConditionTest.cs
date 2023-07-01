@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security;
+using System.Security.Policy;
+
 //
 // ZoneMembershipConditionTest.cs -
 //	NUnit Test Cases for ZoneMembershipCondition
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Composition;
+
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.FindSymbols.SymbolTree;
 using Microsoft.CodeAnalysis.Host;

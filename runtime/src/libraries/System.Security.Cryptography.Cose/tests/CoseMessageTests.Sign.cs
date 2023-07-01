@@ -3,9 +3,10 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
+
 using Test.Cryptography;
 using Xunit;
-using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests
 {

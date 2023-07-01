@@ -9,12 +9,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 using System.Data.Common;
 using System.Data.Metadata.Edm;
-using System.Linq;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Data.Common.CommandTrees.Internal
 {

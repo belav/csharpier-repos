@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Globalization;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -25,13 +27,12 @@
 
 
 using System.IO;
-using System.Diagnostics;
-using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Tests;
+
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Data.Tests
 {

@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.System.Reflection;
 //
 // StrongNameKeyPairCas.cs - CAS unit tests for System.Reflection.StrongNameKeyPair
 //
@@ -27,14 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System.Reflection;
 
 namespace MonoCasTests.System.Reflection
 {

@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using ILLink.Shared.DataFlow;
-using Microsoft.CodeAnalysis.FlowAnalysis;
 
 using Predecessor = ILLink.Shared.DataFlow.IControlFlowGraph<
     ILLink.RoslynAnalyzer.DataFlow.BlockProxy,
     ILLink.RoslynAnalyzer.DataFlow.RegionProxy
 >.Predecessor;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 
 namespace ILLink.RoslynAnalyzer.DataFlow
 {

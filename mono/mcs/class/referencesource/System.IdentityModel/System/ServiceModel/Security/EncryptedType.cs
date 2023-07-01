@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Security
 {
     using System.IdentityModel;
+    using DictionaryManager = System.IdentityModel.DictionaryManager;
+    using ISecurityElement = System.IdentityModel.ISecurityElement;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Xml;
-    using DictionaryManager = System.IdentityModel.DictionaryManager;
-    using ISecurityElement = System.IdentityModel.ISecurityElement;
 
     [TypeForwardedFrom(
         "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"

@@ -8,12 +8,12 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
-    using System.Diagnostics;
-    using System.Collections;
-    using System.Collections.Generic;
 
     internal sealed class SortQuery : Query
     {

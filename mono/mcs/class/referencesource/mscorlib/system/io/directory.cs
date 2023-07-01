@@ -20,17 +20,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System.Text;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
 using System.Threading;
 
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif

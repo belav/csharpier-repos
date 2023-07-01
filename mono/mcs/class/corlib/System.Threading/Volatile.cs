@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 //
 // Volatile.cs
 //
@@ -25,7 +26,6 @@
 // THE SOFTWARE.
 
 using System.Runtime.ConstrainedExecution;
-using System.Runtime.CompilerServices;
 
 namespace System.Threading
 {

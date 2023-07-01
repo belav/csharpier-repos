@@ -29,9 +29,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Runtime.InteropServices;
+
 using Microsoft.Win32.SafeHandles;
 #if !MOBILE
 using System.Security.Permissions;

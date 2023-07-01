@@ -8,23 +8,23 @@
 
 namespace System.Reflection.Emit
 {
-    using System.Runtime.InteropServices;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Diagnostics.SymbolStore;
     using System.Globalization;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.IO;
+    using System.Reflection;
     using System.Resources;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.Serialization;
     using System.Text;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
 
     internal sealed class InternalModuleBuilder : RuntimeModule
     {

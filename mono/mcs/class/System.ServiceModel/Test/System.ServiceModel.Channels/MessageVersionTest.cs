@@ -29,11 +29,12 @@ using System;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.Text;
-using NUnit.Framework;
 
 using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
+using System.ServiceModel.Description;
+using System.Text;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {

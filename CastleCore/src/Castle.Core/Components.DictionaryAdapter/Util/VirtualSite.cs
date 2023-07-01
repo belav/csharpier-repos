@@ -16,6 +16,7 @@ namespace Castle.Components.DictionaryAdapter
 {
     using System;
     using System.Collections.Generic;
+
     using Castle.Core;
 
     public sealed class VirtualSite<TNode, TMember>

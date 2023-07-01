@@ -1,3 +1,13 @@
+using System;
+using System.Collections;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using WebSpace = System.Web;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 //
 // Tests for System.Web.UI.WebControls.RangeValidator
 //
@@ -29,15 +39,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Drawing;
-using System.IO;
-using System.Globalization;
-using WebSpace = System.Web;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

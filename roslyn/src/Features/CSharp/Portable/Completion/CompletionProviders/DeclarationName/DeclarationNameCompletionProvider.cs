@@ -9,6 +9,7 @@ using System.Composition;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName;

@@ -1,3 +1,6 @@
+using System;
+using System.Web.UI;
+
 //
 // DataBindingHandlerAttributeTest.cs
 //
@@ -26,8 +29,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Web.UI;
 
 namespace MonoTests.System.Web.UI
 {

@@ -1,3 +1,5 @@
+using System;
+using Microsoft.Win32;
 //
 // SessionSwitchEventArgsTest.cs
 //	- Unit tests for Microsoft.Win32.SessionSwitchEventArgs
@@ -29,9 +31,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using Microsoft.Win32;
 
 namespace MonoTests.Microsoft.Win32
 {

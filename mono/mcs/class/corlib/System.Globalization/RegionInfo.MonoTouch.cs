@@ -34,8 +34,7 @@
 
 #if MONOTOUCH
 
-using System;
-using System.Runtime.InteropServices;
+using System;using System.Runtime.InteropServices;
 
 namespace System.Globalization
 {

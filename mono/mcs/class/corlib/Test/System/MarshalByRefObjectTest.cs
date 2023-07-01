@@ -6,10 +6,10 @@
 
 using System;
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Lifetime;
-using System.Runtime.Serialization;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
+using System.Runtime.Remoting.Lifetime;
+using System.Runtime.Serialization;
 
 // Just an internal test namespace for
 // the MarshalByRefObjectTest class

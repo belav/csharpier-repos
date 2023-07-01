@@ -9,11 +9,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Xml.XPath;
+
 using ILCompiler.Dataflow;
 using ILCompiler.DependencyAnalysis;
+using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 
 using Internal.TypeSystem;
-using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 
 #nullable enable
 

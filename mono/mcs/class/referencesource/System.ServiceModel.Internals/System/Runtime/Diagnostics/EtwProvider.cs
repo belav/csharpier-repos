@@ -5,14 +5,14 @@
 namespace System.Runtime.Diagnostics
 {
     using System;
-    using System.Text;
-    using System.Security;
-    using System.Diagnostics;
-    using System.Runtime.Interop;
     using System.Collections.Generic;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.Interop;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
 
     sealed class EtwProvider : DiagnosticsEventProvider
     {

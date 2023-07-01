@@ -16,10 +16,7 @@ using System.Runtime;
 #else
 using System.Runtime.Loader;
 #endif
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
-using Roslyn.Utilities;
+using System.Runtime.InteropServices;using System.Threading;using System.Threading.Tasks;using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CommandLine
 {

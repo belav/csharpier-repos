@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging;
+
 using Microsoft.DotNet.XHarness.Common;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Internal;
 

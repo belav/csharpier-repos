@@ -22,19 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if !FEATURE_NO_BSD_SOCKETS
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Threading;
-using System.ServiceModel.Channels;
-using System.Text;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.Collections.Generic;using System.Globalization;using System.Linq;using System.Runtime.Serialization;using System.ServiceModel;using System.ServiceModel.Description;using System.Threading;using System.ServiceModel.Channels;using System.Text;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel
 {

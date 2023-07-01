@@ -30,9 +30,10 @@
 //
 using System;
 using System.Collections;
-using Commons.Xml.Relaxng.XmlSchema;
 
 using XSchema = System.Xml.Schema.XmlSchema;
+
+using Commons.Xml.Relaxng.XmlSchema;
 
 namespace Commons.Xml.Relaxng
 {

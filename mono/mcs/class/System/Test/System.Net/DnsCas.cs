@@ -9,13 +9,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-
-using System;
-using System.Net;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
+using NUnit.Framework;using System;using System.Net;using System.Security;using System.Security.Permissions;using System.Threading;
 
 namespace MonoCasTests.System.Net
 {

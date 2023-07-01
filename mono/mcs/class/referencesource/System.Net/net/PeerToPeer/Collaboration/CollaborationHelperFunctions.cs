@@ -10,10 +10,10 @@ namespace System.Net.PeerToPeer.Collaboration
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Runtime.InteropServices;
-    using System.Net.Mail;
-    using System.Security.Cryptography.X509Certificates;
     using System.Diagnostics;
+    using System.Net.Mail;
+    using System.Runtime.InteropServices;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading;
 
     /// <summary>

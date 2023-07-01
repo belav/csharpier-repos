@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests

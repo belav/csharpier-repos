@@ -12,10 +12,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.ComponentModel;
-using System.ComponentModel.Design;
+using NUnit.Framework;using System;using System.ComponentModel;using System.ComponentModel.Design;
 
 namespace MonoTests.System.ComponentModel
 {

@@ -6,12 +6,12 @@ namespace System.ServiceModel
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ServiceModel.Activities;
-    using System.ServiceModel.Dispatcher;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.ServiceModel.Activities;
+    using System.ServiceModel.Dispatcher;
 
     [SuppressMessage(
         FxCop.Category.Naming,

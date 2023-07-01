@@ -1,3 +1,12 @@
+using System;
+using System.Collections;
+using System.Configuration;
+using System.Diagnostics;
+
+using Mono.Unix;
+
+using Passwd = Mono.Unix.Native.Passwd;
+using Syscall = Mono.Unix.Native.Syscall;
 //
 // UnixUserTest.cs:
 // 	NUnit Test Cases for Mono.Unix.UnixUser
@@ -9,15 +18,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Configuration;
-using System.Diagnostics;
-using System.Collections;
-
-using Mono.Unix;
-
-using Passwd = Mono.Unix.Native.Passwd;
-using Syscall = Mono.Unix.Native.Syscall;
 
 namespace MonoTests.Mono.Unix
 {

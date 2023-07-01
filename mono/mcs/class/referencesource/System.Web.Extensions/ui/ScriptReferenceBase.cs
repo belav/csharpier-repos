@@ -9,11 +9,11 @@ namespace System.Web.UI
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using Debug = System.Diagnostics.Debug;
     using System.Globalization;
     using System.Web;
     using System.Web.Resources;
     using System.Web.UI.WebControls;
-    using Debug = System.Diagnostics.Debug;
 
     [DefaultProperty("Path"),]
     public abstract class ScriptReferenceBase

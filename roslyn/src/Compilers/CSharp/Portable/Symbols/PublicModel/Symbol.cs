@@ -8,6 +8,7 @@ using System;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel

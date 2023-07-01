@@ -1,3 +1,7 @@
+using System;
+using System.Web.Services.Description;
+using System.Xml;
+
 //
 // MonoTests.System.Web.Services.Description.OperationMessageCollectionTest.cs
 //
@@ -8,10 +12,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Web.Services.Description;
-using System.Xml;
 
 namespace MonoTests.System.Web.Services.Description
 {

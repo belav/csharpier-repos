@@ -27,8 +27,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Text;
 using System.Collections;
+using System.Text;
 
 namespace System.Web.Mail
 {

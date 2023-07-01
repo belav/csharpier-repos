@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Globalization;
+using System.Security.Permissions;
 //
 // System.Web.UI.WebControls.FontUnit.cs
 //
@@ -28,9 +31,6 @@
 //
 
 using System.Threading;
-using System.Globalization;
-using System.ComponentModel;
-using System.Security.Permissions;
 using System.Web.Util;
 
 namespace System.Web.UI.WebControls

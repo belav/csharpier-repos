@@ -6,8 +6,8 @@
 
 namespace System.Net.Configuration
 {
-    using System.Configuration;
     using System.Collections;
+    using System.Configuration;
     using System.Threading;
 
     public sealed class ConnectionManagementSection : ConfigurationSection

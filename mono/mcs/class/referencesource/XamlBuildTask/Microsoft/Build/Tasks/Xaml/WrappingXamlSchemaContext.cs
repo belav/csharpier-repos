@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xaml;
 using System.Reflection;
 using System.Runtime;
+using System.Text;
+using System.Xaml;
+
 using XamlBuildTask;
 
 namespace Microsoft.Build.Tasks.Xaml

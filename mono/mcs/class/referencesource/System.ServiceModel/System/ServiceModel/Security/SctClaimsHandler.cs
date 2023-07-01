@@ -4,12 +4,12 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IdentityModel.Policy;
-using System.IdentityModel.Tokens;
-using System.ServiceModel.Security.Tokens;
 
 using SysClaim = System.IdentityModel.Claims.Claim;
+using System.IdentityModel.Policy;
 using SystemAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
+using System.IdentityModel.Tokens;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {

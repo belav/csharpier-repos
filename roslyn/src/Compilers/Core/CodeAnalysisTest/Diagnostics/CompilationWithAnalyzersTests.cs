@@ -7,12 +7,13 @@
 using System;
 using System.Collections.Immutable;
 using System.Threading;
+
+using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Roslyn.Test.Utilities;
-using Xunit;
-using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 using KeyValuePairUtil = Roslyn.Utilities.KeyValuePairUtil;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 {

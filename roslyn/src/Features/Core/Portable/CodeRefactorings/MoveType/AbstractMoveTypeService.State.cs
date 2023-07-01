@@ -7,6 +7,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeCleanup;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.LanguageService;

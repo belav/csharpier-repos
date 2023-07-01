@@ -9,20 +9,18 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Xml;
 using System.Xml.Schema;
-using System.Security.Permissions;
-using System.Linq;
-
 #if WEB_EXTENSIONS_CODE
-using System.Security;
-using System.Web.Resources;
+using System.Security;using System.Web.Resources;
 #else
 using Microsoft.VSDesigner.WCF.Resources;
 #endif
@@ -32,8 +30,7 @@ using Microsoft.VSDesigner.WCF.Resources;
 /// imports the metadata using a WsdlImporter and System.ServiceModel.ServiceContractGenerator
 /// that are configured according to the options set in the SvcMap file
 ///
-using Debug = System.Diagnostics.Debug;
-using System.Diagnostics.CodeAnalysis;
+using Debug = System.Diagnostics.Debug;using System.Diagnostics.CodeAnalysis;
 
 #if WEB_EXTENSIONS_CODE
 namespace System.Web.Compilation.WCFModel

@@ -15,8 +15,8 @@ namespace Microsoft.SqlServer.Server
     using System.Data.Common;
     using System.Data.ProviderBase;
     using System.Data.Sql;
-    using System.Data.SqlTypes;
     using System.Data.SqlClient;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
 
     public class SqlDataRecord : IDataRecord

@@ -4,12 +4,12 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel;
-    using System.Transactions;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using SR = System.ServiceModel.SR;
+    using System.Transactions;
 
     class TransactionProxyBuilder : IProxyCreator
     {

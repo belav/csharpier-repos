@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 //
 // System.Web.UI.Design.TemplateEditingService
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Web.UI.WebControls;
-using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design
 {

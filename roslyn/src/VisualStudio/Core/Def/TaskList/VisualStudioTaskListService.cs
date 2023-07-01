@@ -9,6 +9,7 @@ using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Editor.TaskList;
@@ -18,10 +19,10 @@ using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.TaskList;
+using TaskListItem = Microsoft.CodeAnalysis.TaskList.TaskListItem;
 using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using TaskListItem = Microsoft.CodeAnalysis.TaskList.TaskListItem;
 
 namespace Microsoft.VisualStudio.LanguageServices.TaskList
 {

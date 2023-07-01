@@ -17,8 +17,8 @@
 namespace System.Reflection
 {
     using System;
-    using System.Runtime.InteropServices;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.Runtime.InteropServices;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.AutoDual)]

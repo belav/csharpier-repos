@@ -25,19 +25,7 @@
 // THE SOFTWARE.
 #if !MOBILE && !XAMMAC_4_5
 
-using System;
-using System.Net;
-using System.Xml;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-
-using QName = System.Xml.XmlQualifiedName;
-using WS = System.Web.Services.Description;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
+using System;using System.Net;using System.Xml;using System.Collections.Generic;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using QName = System.Xml.XmlQualifiedName;using WS = System.Web.Services.Description;using NUnit.Framework;using NUnit.Framework.Constraints;
 
 namespace MonoTests.System.ServiceModel.MetadataTests
 {

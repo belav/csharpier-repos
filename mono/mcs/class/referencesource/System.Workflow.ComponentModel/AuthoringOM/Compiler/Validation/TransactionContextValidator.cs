@@ -1,9 +1,9 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Reflection;
-    using System.Globalization;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Reflection;
     using System.Workflow.ComponentModel.Design;
 
     internal sealed class TransactionContextValidator : Validator

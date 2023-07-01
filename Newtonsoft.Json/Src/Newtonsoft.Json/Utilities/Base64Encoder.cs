@@ -26,8 +26,7 @@
 using System;
 using System.IO;
 #if HAVE_ASYNC
-using System.Threading;
-using System.Threading.Tasks;
+using System.Threading;using System.Threading.Tasks;
 #endif
 
 namespace Newtonsoft.Json.Utilities

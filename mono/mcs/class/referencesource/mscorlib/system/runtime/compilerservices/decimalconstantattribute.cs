@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -7,8 +9,6 @@
 // Note: If you add a new ctor overloads you need to update ParameterInfo.RawDefaultValue
 
 using System.Reflection;
-using System.Diagnostics.Contracts;
-using System.Collections.Generic;
 
 namespace System.Runtime.CompilerServices
 {

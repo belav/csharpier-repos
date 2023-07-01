@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 //
 // ElementLocation.cs
 //
@@ -28,8 +31,6 @@
 
 
 using Microsoft.Build.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace Microsoft.Build.Construction
 {

@@ -3,8 +3,7 @@ using System.Web;
 #else
 using System.ComponentModel.DataAnnotations.Resources;
 #endif
-using System.Globalization;
-using System.Reflection;
+using System.Globalization;using System.Reflection;
 
 namespace System.ComponentModel.DataAnnotations
 {

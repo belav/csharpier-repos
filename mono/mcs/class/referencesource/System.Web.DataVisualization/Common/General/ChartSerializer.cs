@@ -30,20 +30,15 @@
 #region Used namespaces
 
 using System;
-using System.IO;
-using System.Xml;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-
+using System.IO;
+using System.Xml;
 #if Microsoft_CONTROL
-using System.Windows.Forms.DataVisualization.Charting.Data;
-using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;using System.Windows.Forms.DataVisualization.Charting.ChartTypes;using System.Windows.Forms.DataVisualization.Charting.Utilities;using System.Windows.Forms.DataVisualization.Charting;
 #else
-using System.Web.UI.DataVisualization.Charting;
-using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting;using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion

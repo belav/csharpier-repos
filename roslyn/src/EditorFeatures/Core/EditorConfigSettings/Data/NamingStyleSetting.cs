@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 using Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles;

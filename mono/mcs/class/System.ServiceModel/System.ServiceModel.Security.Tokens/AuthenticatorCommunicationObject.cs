@@ -27,9 +27,9 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Net.Security;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;

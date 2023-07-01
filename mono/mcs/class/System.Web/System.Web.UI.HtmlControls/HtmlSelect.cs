@@ -1,3 +1,8 @@
+using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Globalization;
+using System.Security.Permissions;
 //
 // System.Web.UI.HtmlControls.HtmlSelect.cs
 //
@@ -28,11 +33,6 @@
 
 using System.Web.UI.WebControls;
 using System.Web.Util;
-using System.ComponentModel;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {

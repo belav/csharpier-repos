@@ -6,10 +6,11 @@
 #pragma warning disable 649
 
 using System.Collections.Generic;
+using Debug = System.Diagnostics.Debug;
 using System.Reflection;
 using System.Threading;
+
 using Internal.NativeFormat;
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Metadata.NativeFormat.Writer
 {

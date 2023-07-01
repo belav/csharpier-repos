@@ -25,9 +25,7 @@
 
 #if !DNXCORE50 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System;using System.Collections.Generic;using System.Text;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

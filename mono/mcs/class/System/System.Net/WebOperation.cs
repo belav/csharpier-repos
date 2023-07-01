@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Diagnostics;
 //
 // WebOperation.cs
 //
@@ -24,12 +26,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System.IO;
-using System.Collections;
 using System.Net.Sockets;
+using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.ExceptionServices;
-using System.Diagnostics;
 
 namespace System.Net
 {

@@ -3,8 +3,9 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
-using Xunit;
 using System.Tests;
+
+using Xunit;
 
 namespace System.IO.Tests
 {

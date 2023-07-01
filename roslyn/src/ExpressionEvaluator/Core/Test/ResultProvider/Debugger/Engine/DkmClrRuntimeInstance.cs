@@ -14,11 +14,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
-using Microsoft.VisualStudio.Debugger.Symbols;
 using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
+using Microsoft.VisualStudio.Debugger.Symbols;
 
 namespace Microsoft.VisualStudio.Debugger.Clr
 {

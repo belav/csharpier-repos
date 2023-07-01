@@ -10,14 +10,14 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Reflection;
     using System.IO;
-    using System.Windows.Forms;
-    using System.Web.UI.MobileControls;
+    using System.Reflection;
     using System.Web.UI.Design;
     using System.Web.UI.Design.MobileControls;
-    using System.Xml;
     using SR = System.Web.UI.Design.MobileControls.SR;
+    using System.Web.UI.MobileControls;
+    using System.Windows.Forms;
+    using System.Xml;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

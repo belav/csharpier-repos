@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+
+using MonoTests.Helpers;
 //
 // FtpWebRequestTest.cs - NUnit Test Cases for System.Net.FtpWebRequest
 //
@@ -8,15 +17,6 @@
 // Copyright (c) 2006,2007,2008 Novell, Inc. (http://www.novell.com)
 //
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Net
 {

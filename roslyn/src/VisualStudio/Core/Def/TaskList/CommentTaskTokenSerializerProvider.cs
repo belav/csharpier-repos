@@ -6,13 +6,14 @@ using System;
 using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options;
 using IAsyncServiceProvider = Microsoft.VisualStudio.Shell.IAsyncServiceProvider;
-using ITaskList = Microsoft.VisualStudio.Shell.ITaskList;
 using SAsyncServiceProvider = Microsoft.VisualStudio.Shell.Interop.SAsyncServiceProvider;
 using SVsTaskList = Microsoft.VisualStudio.Shell.Interop.SVsTaskList;
+using ITaskList = Microsoft.VisualStudio.Shell.ITaskList;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 {

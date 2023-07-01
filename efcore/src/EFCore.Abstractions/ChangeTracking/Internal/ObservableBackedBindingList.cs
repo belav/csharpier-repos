@@ -3,6 +3,7 @@
 
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;

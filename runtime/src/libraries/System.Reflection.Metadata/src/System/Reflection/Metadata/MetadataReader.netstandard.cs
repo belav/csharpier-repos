@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Reflection.PortableExecutable;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Reflection.Metadata

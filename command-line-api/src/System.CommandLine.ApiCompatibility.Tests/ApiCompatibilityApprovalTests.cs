@@ -3,6 +3,7 @@
 
 using System.CommandLine.Hosting;
 using System.CommandLine.NamingConventionBinder;
+
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;

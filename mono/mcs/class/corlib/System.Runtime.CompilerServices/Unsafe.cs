@@ -27,11 +27,9 @@
 //
 
 #if BIT64
-using nuint = System.UInt64;
-using nint = System.Int64;
+using nuint = System.UInt64;using nint = System.Int64;
 #else
-using nuint = System.UInt32;
-using nint = System.Int32;
+using nuint = System.UInt32;using nint = System.Int32;
 #endif
 
 namespace System.Runtime.CompilerServices

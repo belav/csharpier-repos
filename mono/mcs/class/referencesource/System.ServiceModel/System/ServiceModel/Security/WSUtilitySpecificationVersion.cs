@@ -5,20 +5,20 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.IO;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
-    using System.ServiceModel.Security.Tokens;
-    using System.Threading;
     using System.Globalization;
-    using System.ServiceModel.Diagnostics;
-    using System.Text;
-    using System.Xml;
 
     using CanonicalFormWriter = System.IdentityModel.CanonicalFormWriter;
-    using SignatureResourcePool = System.IdentityModel.SignatureResourcePool;
+    using System.IdentityModel.Claims;
     using HashStream = System.IdentityModel.HashStream;
+    using System.IdentityModel.Policy;
+    using SignatureResourcePool = System.IdentityModel.SignatureResourcePool;
+    using System.IO;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security.Tokens;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
 
     abstract class WSUtilitySpecificationVersion
     {

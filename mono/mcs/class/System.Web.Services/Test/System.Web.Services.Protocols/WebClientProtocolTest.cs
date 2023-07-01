@@ -1,3 +1,8 @@
+using System;
+using System.Net;
+using System.Web.Services;
+using System.Web.Services.Protocols;
+
 //
 // System.Web.Services.Discovery.ContractReference.cs
 //
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
-using System.Web.Services;
-using System.Web.Services.Protocols;
 
 namespace MonoTests.System.Web.Services.Protocols
 {

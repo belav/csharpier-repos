@@ -10,14 +10,14 @@
 //
 
 using System;
-using System.Collections;
-using System.Xml;
-using System.IO;
-using System.Text;
-
-using NUnit.Framework;
 
 using InvalidNodeTypeArgException = System.ArgumentException;
+using System.Collections;
+using System.IO;
+using System.Text;
+using System.Xml;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

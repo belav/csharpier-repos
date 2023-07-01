@@ -15,13 +15,7 @@ namespace System.Net
 #if !FEATURE_NETCORE
     using System.Configuration;
 #endif
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
-    using System.IO;
-    using System.Net.Configuration;
-    using System.Runtime.Versioning;
-    using System.Text;
+    using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.Globalization;using System.IO;using System.Net.Configuration;using System.Runtime.Versioning;using System.Text;
 #if FEATURE_NETCORE
     using System.Security;
 #endif

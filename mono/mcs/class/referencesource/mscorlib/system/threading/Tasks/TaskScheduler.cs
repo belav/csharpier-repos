@@ -15,15 +15,15 @@
 // Disable the "reference to volatile field not treated as volatile" error.
 #pragma warning disable 0420
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
-using System.Threading;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Collections.Concurrent;
-using System.Diagnostics.Contracts;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace System.Threading.Tasks
 {

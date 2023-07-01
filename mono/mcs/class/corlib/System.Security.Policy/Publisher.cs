@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // Publisher.cs: Publisher Policy using X509 Certificate
 //
@@ -29,7 +30,6 @@
 
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
-using System.Runtime.InteropServices;
 
 namespace System.Security.Policy
 {

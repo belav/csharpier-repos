@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle;
 using Microsoft.CodeAnalysis.CSharp.UseObjectInitializer;

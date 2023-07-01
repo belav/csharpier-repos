@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 using Xunit;
 
 namespace Microsoft.Extensions.Hosting.Unit.Tests

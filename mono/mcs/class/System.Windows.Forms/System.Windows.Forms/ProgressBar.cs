@@ -1,3 +1,4 @@
+using System.ComponentModel;
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -26,9 +27,8 @@
 //
 
 using System.Drawing;
-using System.ComponentModel;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms

@@ -31,9 +31,7 @@
 
 #if SECURITY_DEP
 
-using System.Collections;
-using System.Globalization;
-using Mono.Security;
+using System.Collections;using System.Globalization;using Mono.Security;
 
 namespace System.Security.Cryptography.X509Certificates
 {

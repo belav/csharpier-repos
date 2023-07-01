@@ -30,12 +30,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.IO;
-using System.Diagnostics;
-using System.Threading;
-using System.Xml;
+using NUnit.Framework;using System;using System.IO;using System.Diagnostics;using System.Threading;using System.Xml;
 
 namespace MonoTests.System.Diagnostics
 {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Composition;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace;
 using Microsoft.CodeAnalysis.Host.Mef;

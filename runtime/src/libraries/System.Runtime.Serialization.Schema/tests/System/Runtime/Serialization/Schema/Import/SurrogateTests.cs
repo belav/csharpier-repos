@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Schema.Tests.DataContracts;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+
 using Xunit;
 using Xunit.Abstractions;
 

@@ -7,7 +7,11 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeActions;
+using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
+using CodeAction = Microsoft.CodeAnalysis.CodeActions.CodeAction;
+using CodeActionOptions = Microsoft.CodeAnalysis.CodeActions.CodeActionOptions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -15,11 +19,8 @@ using Microsoft.CodeAnalysis.Tags;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.UnifiedSuggestions;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
-using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
-using CodeAction = Microsoft.CodeAnalysis.CodeActions.CodeAction;
-using CodeActionOptions = Microsoft.CodeAnalysis.CodeActions.CodeActionOptions;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
 {

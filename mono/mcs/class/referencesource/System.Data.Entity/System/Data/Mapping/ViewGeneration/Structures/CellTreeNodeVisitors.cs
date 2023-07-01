@@ -8,21 +8,21 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Common.Utils.Boolean;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using System.Data.Common.Utils.Boolean;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-    using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
-    using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
     using WrapperAndExpr = AndExpr<LeftCellWrapper>;
-    using WrapperOrExpr = OrExpr<LeftCellWrapper>;
-    using WrapperNotExpr = NotExpr<LeftCellWrapper>;
-    using WrapperTermExpr = TermExpr<LeftCellWrapper>;
-    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
+    using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
     using WrapperFalseExpr = FalseExpr<LeftCellWrapper>;
+    using WrapperNotExpr = NotExpr<LeftCellWrapper>;
+    using WrapperOrExpr = OrExpr<LeftCellWrapper>;
+    using WrapperTermExpr = TermExpr<LeftCellWrapper>;
+    using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
+    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
 
     internal partial class CellTreeNode
     {

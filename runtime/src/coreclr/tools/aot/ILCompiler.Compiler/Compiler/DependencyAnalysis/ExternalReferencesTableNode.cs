@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 
-using Internal.Text;
-
 using Debug = System.Diagnostics.Debug;
+
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis
 {

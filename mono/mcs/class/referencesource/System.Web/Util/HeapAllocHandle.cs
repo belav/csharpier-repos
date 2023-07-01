@@ -8,6 +8,7 @@ namespace System.Web.Util
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+
     using Microsoft.Win32.SafeHandles;
 
     internal class HeapAllocHandle : SafeHandleZeroOrMinusOneIsInvalid

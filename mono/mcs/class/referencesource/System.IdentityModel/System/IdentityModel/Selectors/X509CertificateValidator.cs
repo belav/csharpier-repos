@@ -7,13 +7,13 @@ namespace System.IdentityModel.Selectors
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IdentityModel.Configuration;
+    // This is to allow easy rollback to CLR implementation by commenting out the below.
+    using X509Chain = System.IdentityModel.Selectors.X509CertificateChain;
     using System.IdentityModel.Tokens;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Text;
     using System.Xml;
-    // This is to allow easy rollback to CLR implementation by commenting out the below.
-    using X509Chain = System.IdentityModel.Selectors.X509CertificateChain;
 
     public abstract class X509CertificateValidator : ICustomIdentityConfiguration
     {

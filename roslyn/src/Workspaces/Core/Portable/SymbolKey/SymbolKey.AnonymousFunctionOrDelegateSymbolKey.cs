@@ -4,6 +4,7 @@
 
 using System.Diagnostics;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis

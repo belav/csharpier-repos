@@ -5,14 +5,15 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Completion;
-using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.VisualStudio.Text;
-using Roslyn.Utilities;
-using EditorAsyncCompletionData = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 using RoslynTrigger = Microsoft.CodeAnalysis.Completion.CompletionTrigger;
+using Microsoft.CodeAnalysis.PooledObjects;
+using EditorAsyncCompletionData = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using VSCompletionItem = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data.CompletionItem;
+using Microsoft.VisualStudio.Text;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {

@@ -1,3 +1,13 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+using ComponentSpace = System.ComponentModel;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 //
 // Tests for System.Web.UI.WebControls.ValidatedControlConverterTest.cs
 //
@@ -29,15 +39,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using ComponentSpace = System.ComponentModel;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

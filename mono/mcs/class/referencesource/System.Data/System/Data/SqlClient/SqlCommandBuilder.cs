@@ -17,8 +17,8 @@ namespace System.Data.SqlClient
     using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Text;
     using System.Runtime.CompilerServices;
+    using System.Text;
     using System.Threading;
 
     public sealed class SqlCommandBuilder : DbCommandBuilder

@@ -6,6 +6,7 @@
 
 using System;
 using System.Composition;
+
 using Microsoft.CodeAnalysis.CodeLens;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.LanguageService;

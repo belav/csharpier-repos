@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Options;
-
 #if !CODE_STYLE
 using Microsoft.CodeAnalysis.Host;
 #endif

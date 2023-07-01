@@ -1,3 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
+using System.Threading;
+
+using MonoTests.Helpers;
 //
 // ConditionalWeakTableTest.cs
 //
@@ -28,16 +39,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using System.Collections.Generic;
-using System.Threading;
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {

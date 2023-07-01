@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 //------------------------------------------------------------------------------
 // <copyright file="DbGeometry.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,11 +9,10 @@
 //------------------------------------------------------------------------------
 
 using System.Data.Common.Internal;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Spatial.Internal;
 using System.Diagnostics;
-using System.Runtime.Serialization;
 using System.Globalization;
+using System.Runtime.Serialization;
 
 namespace System.Data.Spatial
 {

@@ -32,8 +32,8 @@ namespace System.Text.RegularExpressions
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Security.Permissions;
     using System.Globalization;
+    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para>

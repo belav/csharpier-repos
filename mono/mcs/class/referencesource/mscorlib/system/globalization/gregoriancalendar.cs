@@ -5,6 +5,10 @@
 // ==--==
 namespace System.Globalization
 {
+    using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     //
     // N.B.:
     // A lot of this code is directly from DateTime.cs.  If you update that class,
@@ -15,10 +19,6 @@ namespace System.Globalization
     //
 
     using System.Threading;
-    using System;
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
     // This calendar recognizes two era values:
     // 0 CurrentEra (AD)

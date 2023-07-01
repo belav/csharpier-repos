@@ -30,19 +30,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-using DbLinq.Data.Linq.Implementation;
-using DbLinq.Data.Linq.Sugar;
-using DbLinq.Data.Linq.Sugar.ExpressionMutator;
-using DbLinq.Data.Linq.Sugar.Expressions;
-using DbLinq.Data.Linq.Sugar.Implementation;
-using DbLinq.Factory;
-using DbLinq.Util;
+using DbLinq.Data.Linq.Implementation;using DbLinq.Data.Linq.Sugar;using DbLinq.Data.Linq.Sugar.ExpressionMutator;using DbLinq.Data.Linq.Sugar.Expressions;using DbLinq.Data.Linq.Sugar.Implementation;using DbLinq.Factory;using DbLinq.Util;
 
 namespace DbLinq.Data.Linq.Sugar.Implementation
 {

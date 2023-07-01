@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+
 using Microsoft.Data.Sqlite.Properties;
 using SQLitePCL;
 

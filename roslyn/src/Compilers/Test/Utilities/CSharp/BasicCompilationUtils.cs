@@ -6,11 +6,12 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Roslyn.Test.Utilities;
+
+using static Microsoft.CodeAnalysis.CodeGen.CompilationTestData;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
-using static Microsoft.CodeAnalysis.CodeGen.CompilationTestData;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Roslyn.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {

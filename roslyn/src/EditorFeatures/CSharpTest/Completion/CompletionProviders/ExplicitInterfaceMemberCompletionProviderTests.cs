@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Completion.Providers;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;

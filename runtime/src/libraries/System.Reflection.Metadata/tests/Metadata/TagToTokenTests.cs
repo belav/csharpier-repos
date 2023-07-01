@@ -3,10 +3,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using Xunit;
 
 using BitArithmetic = System.Reflection.Internal.BitArithmetic;
+using System.Reflection.Metadata.Ecma335;
+
+using Xunit;
 
 namespace System.Reflection.Metadata.Tests
 {

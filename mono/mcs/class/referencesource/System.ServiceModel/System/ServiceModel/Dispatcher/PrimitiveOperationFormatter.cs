@@ -4,16 +4,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Xml;
-    using System.ServiceModel.Diagnostics;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.Xml;
 
     class PrimitiveOperationFormatter : IClientMessageFormatter, IDispatchMessageFormatter
     {

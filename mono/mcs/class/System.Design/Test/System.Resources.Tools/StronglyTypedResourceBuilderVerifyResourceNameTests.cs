@@ -1,3 +1,7 @@
+using System;
+using System.Resources.Tools;
+
+using Microsoft.CSharp;
 //
 // StronglyTypedResourceBuilderVerifyResourceNameTests.cs tests
 // the VerifyResourceName method
@@ -29,9 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Resources.Tools;
-using Microsoft.CSharp;
 
 namespace MonoTests.System.Resources.Tools
 {

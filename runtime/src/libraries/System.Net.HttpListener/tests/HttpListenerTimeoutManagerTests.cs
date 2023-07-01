@@ -3,6 +3,7 @@
 
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Net.Tests

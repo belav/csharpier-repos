@@ -27,13 +27,12 @@
 //
 
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
 #if (XML_DEP)
-using System.Xml;
-using System.Xml.Serialization;
+using System.Xml;using System.Xml.Serialization;
 #endif
 
 namespace System.Configuration

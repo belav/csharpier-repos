@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 
 using Internal.IL;
+using MethodDebugInformation = Internal.IL.MethodDebugInformation;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
-using MethodDebugInformation = Internal.IL.MethodDebugInformation;
 
 namespace ILCompiler
 {

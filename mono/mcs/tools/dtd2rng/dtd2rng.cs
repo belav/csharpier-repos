@@ -1,11 +1,12 @@
 using System;
 using System.Reflection;
-using System.Xml;
-using System.Xml.Schema;
-using Commons.Xml.Relaxng;
-using Commons.Xml.Relaxng.Rnc;
 
 using BF = System.Reflection.BindingFlags;
+using System.Xml;
+using System.Xml.Schema;
+
+using Commons.Xml.Relaxng;
+using Commons.Xml.Relaxng.Rnc;
 
 namespace Mono.XmlTools
 {

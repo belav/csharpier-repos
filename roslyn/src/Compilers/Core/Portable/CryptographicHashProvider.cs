@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
+
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 

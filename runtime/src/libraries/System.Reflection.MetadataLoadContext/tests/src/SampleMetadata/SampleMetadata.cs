@@ -7,10 +7,10 @@
 #pragma warning disable 0067 // Event is never used
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 public class TopLevelType { }
 

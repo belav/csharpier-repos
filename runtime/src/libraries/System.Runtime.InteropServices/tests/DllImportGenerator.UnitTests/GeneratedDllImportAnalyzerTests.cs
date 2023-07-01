@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
-using Xunit;
-using static Microsoft.Interop.Analyzers.GeneratedDllImportAnalyzer;
 
 using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.GeneratedDllImportAnalyzer>;
+using static Microsoft.Interop.Analyzers.GeneratedDllImportAnalyzer;
+using Xunit;
 
 namespace DllImportGenerator.UnitTests
 {

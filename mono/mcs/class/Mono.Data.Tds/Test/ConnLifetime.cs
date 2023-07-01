@@ -29,9 +29,9 @@
 
 using System;
 
-using NUnit.Framework;
-
 using Mono.Data.Tds.Protocol;
+
+using NUnit.Framework;
 
 namespace Mono.Data.Tds.Tests
 {

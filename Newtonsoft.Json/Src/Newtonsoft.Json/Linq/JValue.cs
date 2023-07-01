@@ -26,13 +26,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Newtonsoft.Json.Utilities;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+
+using Newtonsoft.Json.Utilities;
 #if HAVE_DYNAMIC
-using System.Dynamic;
-using System.Linq.Expressions;
+using System.Dynamic;using System.Linq.Expressions;
 #endif
 #if HAVE_BIG_INTEGER
 using System.Numerics;

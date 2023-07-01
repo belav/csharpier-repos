@@ -1,14 +1,6 @@
 #if USE_DEPRECATED
 // EmptyFaultException does not exist anymore
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Xml;
-
-using NUnit.Framework;
+using System;using System.Collections.Generic;using System.Runtime.Serialization;using System.ServiceModel;using System.ServiceModel.Channels;using System.Text;using System.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {

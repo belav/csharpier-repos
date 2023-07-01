@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Composition;
 using System.Diagnostics;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Roslyn.Utilities;
 

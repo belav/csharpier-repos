@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // System.Runtime.Remoting.Services.ITrackingHandler.cs
 //
@@ -30,7 +31,6 @@
 //
 
 using System.Runtime.Remoting;
-using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Services
 {

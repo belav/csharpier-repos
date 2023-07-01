@@ -7,9 +7,9 @@ namespace System.Activities.Statements
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime;
-    using System.Linq.Expressions;
 
     // Inverted Template Method pattern. MethodExecutor is the base class for executing a method; created by MethodResolver.
     // Private concrete implementations are created by MethodResolver, but this is the "public" API used by InvokeMethod.

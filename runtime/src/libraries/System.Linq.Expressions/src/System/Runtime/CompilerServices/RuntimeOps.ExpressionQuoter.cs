@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Dynamic.Utils;
 using System.Linq.Expressions;
-using System.Linq.Expressions.Compiler;
 using static System.Linq.Expressions.CachedReflectionInfo;
+using System.Linq.Expressions.Compiler;
 
 namespace System.Runtime.CompilerServices
 {

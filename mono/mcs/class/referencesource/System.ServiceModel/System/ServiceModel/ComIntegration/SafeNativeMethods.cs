@@ -6,6 +6,8 @@ namespace System.ServiceModel.ComIntegration
     using System;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
+    using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
@@ -15,9 +17,8 @@ namespace System.ServiceModel.ComIntegration
     using System.Security.Principal;
     using System.ServiceModel.Diagnostics;
     using System.Text;
+
     using Microsoft.Win32.SafeHandles;
-    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
-    using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
 
     [Flags]
     enum CLSCTX

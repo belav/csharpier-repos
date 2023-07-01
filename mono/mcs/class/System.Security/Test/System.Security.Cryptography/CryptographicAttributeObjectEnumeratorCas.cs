@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Cryptography;
+using System.Security.Permissions;
+
+using MonoTests.System.Security.Cryptography;
 //
 // CryptographicAttributeObjectEnumeratorCas.cs - CAS unit tests for
 //	System.Security.Cryptography.CryptographicAttributeObjectEnumerator
@@ -29,14 +36,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Permissions;
-
-using MonoTests.System.Security.Cryptography;
 
 namespace MonoCasTests.System.Security.Cryptography
 {

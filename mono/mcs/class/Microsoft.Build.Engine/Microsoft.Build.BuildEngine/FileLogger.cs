@@ -30,6 +30,7 @@
 using System;
 using System.IO;
 using System.Text;
+
 using Microsoft.Build.Framework;
 
 #if MICROSOFT_BUILD_DLL

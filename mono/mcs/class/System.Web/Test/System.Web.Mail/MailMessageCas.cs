@@ -1,3 +1,12 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Web;
+using System.Web.Mail;
+
 //
 // MailMessageCas.cs - CAS unit tests for System.Web.Mail.MailMessage
 //
@@ -27,15 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
-using System.Web;
-using System.Web.Mail;
 
 namespace MonoCasTests.System.Web.Mail
 {

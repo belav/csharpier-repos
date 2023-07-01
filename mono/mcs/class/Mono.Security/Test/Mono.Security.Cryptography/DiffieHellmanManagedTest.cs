@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Text;
+
+using Mono.Security.Cryptography;
 //
 // DiffieHellmanManagedTest.cs - NUnit Test Cases for DH (PKCS#3)
 //
@@ -10,10 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using Mono.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

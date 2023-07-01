@@ -3,8 +3,8 @@
 
 using System;
 using System.Globalization;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
 #pragma warning disable 618 // Must test deprecated features
 

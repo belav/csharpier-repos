@@ -9,10 +9,10 @@
     using System.Globalization;
     using System.Linq;
     using System.Web;
+    using System.Web.DynamicData.Util;
     using System.Web.Resources;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Web.DynamicData.Util;
 
     /// <summary>
     /// Validator that enforces model validation. It can be used either at the field level or the entity level

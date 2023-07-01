@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Hosting.Internal

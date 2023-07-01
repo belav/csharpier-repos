@@ -2,15 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Linq;
 using System.Data.Linq.Provider;
 using System.Data.Linq.SqlClient;
-using System.Threading;
-using LinqToSqlShared.Mapping;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+
+using LinqToSqlShared.Mapping;
 
 namespace System.Data.Linq.Mapping
 {

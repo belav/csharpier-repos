@@ -1,3 +1,15 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Security;
+
+using SSPermissionSet = System.Security.PermissionSet;
+using System.Text;
+
+using MIAssembly = Mono.ILASM.Assembly;
+using MIPermissionSet = Mono.ILASM.PermissionSet;
 //
 // Mono.ILASM.CodeGen.cs
 //
@@ -10,18 +22,6 @@
 //
 
 using PEAPI;
-using System;
-using System.IO;
-using System.Collections;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
-using System.Security;
-
-using SSPermissionSet = System.Security.PermissionSet;
-using MIPermissionSet = Mono.ILASM.PermissionSet;
-
-using MIAssembly = Mono.ILASM.Assembly;
 
 namespace Mono.ILASM
 {

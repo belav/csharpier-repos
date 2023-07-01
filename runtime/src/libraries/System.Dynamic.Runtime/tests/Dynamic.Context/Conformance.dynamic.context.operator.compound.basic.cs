@@ -786,13 +786,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.context02b.context02b
 {
+    using System.Collections.Generic;
     // <Title> Compound operator</Title>
     // <Description>context
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {
@@ -899,13 +899,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.context02c.context02c
 {
+    using System.Collections.Generic;
     // <Title> Compound operator</Title>
     // <Description>context
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

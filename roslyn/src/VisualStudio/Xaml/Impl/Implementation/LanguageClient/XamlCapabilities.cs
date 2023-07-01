@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Linq;
+using RoslynCompletion = Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.Editor.Xaml;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler;
-using RoslynCompletion = Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml
 {

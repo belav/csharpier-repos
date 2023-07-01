@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Runtime.Serialization;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     sealed class MessageSecurityTokenVersion : SecurityTokenVersion
     {

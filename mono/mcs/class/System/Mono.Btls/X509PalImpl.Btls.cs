@@ -34,12 +34,7 @@ using MonoSecurity::Mono.Security.Interface;
 using Mono.Security.Interface;
 #endif
 
-using System;
-using System.IO;
-using System.Text;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Win32.SafeHandles;
+using System;using System.IO;using System.Text;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using Microsoft.Win32.SafeHandles;
 
 namespace Mono.Btls
 {

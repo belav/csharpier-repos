@@ -4,20 +4,20 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.CodeDom.Compiler;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.Text;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using WsdlNS = System.Web.Services.Description;
 
     public class XmlSerializerImportOptions
     {

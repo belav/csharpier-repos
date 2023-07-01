@@ -1,4 +1,8 @@
-﻿#region License
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -26,9 +30,6 @@
 #pragma warning disable 618
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
 {

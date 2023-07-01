@@ -5,8 +5,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Xunit;
+
 using static TestHelpers;
+using Xunit;
 
 public class NativeLibraryTests : IDisposable
 {

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.VisualStudio.Text.Classification;

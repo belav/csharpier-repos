@@ -6,8 +6,8 @@ namespace System.IdentityModel
 {
     using System;
     using System.Diagnostics;
-    using System.Threading;
     using System.Runtime;
+    using System.Threading;
 
     /// <summary>
     /// Base class for common AsyncResult programming scenarios.

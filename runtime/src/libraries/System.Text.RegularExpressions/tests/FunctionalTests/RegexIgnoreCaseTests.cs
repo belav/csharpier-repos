@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Tests;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Text.RegularExpressions.Tests

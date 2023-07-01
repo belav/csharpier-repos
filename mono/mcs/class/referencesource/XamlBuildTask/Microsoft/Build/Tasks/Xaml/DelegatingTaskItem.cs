@@ -6,6 +6,7 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections;
+
     using Microsoft.Build.Framework;
 
     // In Dev10, we allowed use of non-remotable ITaskItems. While there's not really any good scenario

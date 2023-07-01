@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Reflection;
+
 //
 // System.Runtime.InteropServices.Marshal Test Cases
 //
@@ -8,15 +12,10 @@
 // Copyright (C) 2004-2007 Novell, Inc (http://www.novell.com)
 //
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
 #if !MOBILE
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
+using System.Runtime.InteropServices;using System.Security;using System.Text;
 
 namespace MonoTests.System.Runtime.InteropServices
 {

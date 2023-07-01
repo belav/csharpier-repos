@@ -13,7 +13,6 @@ namespace System.Data.Services.Client
 {
     using System;
     using System.Diagnostics;
-
 #if !ASTORIA_LIGHT
     using System.Net;
 #else

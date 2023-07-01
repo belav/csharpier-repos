@@ -18,20 +18,7 @@ using MSI = MonoSecurity::Mono.Security.Interface;
 using MSI = Mono.Security.Interface;
 #endif
 
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Security;
-using System.Globalization;
-using System.Security.Authentication;
-using System.Runtime.ExceptionServices;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
-
-using SD = System.Diagnostics;
-using SSA = System.Security.Authentication;
-using SslProtocols = System.Security.Authentication.SslProtocols;
+using System;using System.IO;using System.Net;using System.Net.Security;using System.Globalization;using System.Security.Authentication;using System.Runtime.ExceptionServices;using System.Threading;using System.Threading.Tasks;using System.Security.Cryptography.X509Certificates;using SD = System.Diagnostics;using SSA = System.Security.Authentication;using SslProtocols = System.Security.Authentication.SslProtocols;
 
 namespace Mono.Net.Security
 {

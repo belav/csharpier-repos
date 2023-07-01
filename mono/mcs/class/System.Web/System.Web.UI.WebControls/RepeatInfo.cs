@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.WebControls.RepeatInfo.cs
 //
@@ -29,7 +30,6 @@
 //#define DEBUG_REPEAT_INFO
 
 using System.Diagnostics;
-using System.ComponentModel;
 using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls

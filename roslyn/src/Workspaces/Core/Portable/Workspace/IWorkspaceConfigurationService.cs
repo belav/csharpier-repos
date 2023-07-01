@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Storage;
 

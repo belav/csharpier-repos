@@ -17,14 +17,9 @@ namespace System.Security.Principal
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
 #if !FEATURE_CORECLR
-    using System.Runtime.Serialization;
-    using System.Security.Claims;
-    using System.Collections.Generic;
+    using System.Runtime.Serialization;using System.Security.Claims;using System.Collections.Generic;
 #endif
-    using System.Security.Permissions;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
-    using Hashtable = System.Collections.Hashtable;
+    using System.Security.Permissions;using Microsoft.Win32;using Microsoft.Win32.SafeHandles;using Hashtable = System.Collections.Hashtable;
 
     [Serializable]
     [ComVisible(true)]

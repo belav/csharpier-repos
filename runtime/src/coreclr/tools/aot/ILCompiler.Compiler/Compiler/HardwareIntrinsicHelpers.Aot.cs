@@ -3,12 +3,13 @@
 
 using System;
 
-using Internal.TypeSystem;
+using Debug = System.Diagnostics.Debug;
+
 using Internal.IL;
 using Internal.IL.Stubs;
 using Internal.JitInterface;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

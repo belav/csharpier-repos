@@ -1,3 +1,10 @@
+using System;
+using System.Drawing;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // GraphicsCas.cs - CAS unit tests for System.Drawing.Graphics
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Drawing;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing
 {

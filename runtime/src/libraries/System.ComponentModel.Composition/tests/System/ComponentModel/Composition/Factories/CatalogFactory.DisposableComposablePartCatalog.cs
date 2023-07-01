@@ -3,6 +3,7 @@
 
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition.Factories

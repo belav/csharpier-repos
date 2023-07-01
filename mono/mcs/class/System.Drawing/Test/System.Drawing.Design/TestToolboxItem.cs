@@ -29,9 +29,10 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Reflection;
 using System.Drawing;
 using System.Drawing.Design;
+using System.Reflection;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Design

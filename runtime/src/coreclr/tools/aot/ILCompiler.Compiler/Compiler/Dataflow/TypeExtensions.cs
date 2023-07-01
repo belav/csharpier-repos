@@ -3,10 +3,10 @@
 
 using System;
 using ILLink.Shared.TypeSystemProxy;
+using ILLinkSharedWellKnownType = ILLink.Shared.TypeSystemProxy.WellKnownType;
 using Internal.TypeSystem;
 
 using TypeSystemWellKnownType = Internal.TypeSystem.WellKnownType;
-using ILLinkSharedWellKnownType = ILLink.Shared.TypeSystemProxy.WellKnownType;
 
 #nullable enable
 

@@ -7,23 +7,23 @@
 namespace System.Web.UI
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Collections;
-    using System.Collections.Specialized;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Compilation;
     using System.Web.Handlers;
+    using System.Web.Security.Cryptography;
     using System.Web.UI.WebControls;
     using System.Web.Util;
-    using ExceptionUtil = System.Web.Util.ExceptionUtil;
     using WebUtil = System.Web.Util;
-    using System.Security.Permissions;
-    using System.Reflection;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Web.Security.Cryptography;
+    using ExceptionUtil = System.Web.Util.ExceptionUtil;
 
     // The various types of client API's that can be registered
     internal enum ClientAPIRegisterType

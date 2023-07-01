@@ -4,6 +4,7 @@
 
 using System;
 using System.Composition;
+
 using Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace;
 using Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace;
 using Microsoft.CodeAnalysis.CSharp.Analyzers.MatchFolderAndNamespace;

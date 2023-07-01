@@ -6,8 +6,8 @@
 // <OWNER>WESU</OWNER>
 namespace System.Reflection
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
 
     // This Enum matchs the CorTypeAttr defined in CorHdr.h
     [Serializable]

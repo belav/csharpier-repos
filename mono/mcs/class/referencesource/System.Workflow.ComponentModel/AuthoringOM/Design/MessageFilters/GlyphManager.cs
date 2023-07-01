@@ -1,16 +1,16 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Windows.Forms;
     using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
     using System.Drawing.Design;
     using System.Drawing.Drawing2D;
-    using System.Collections.Generic;
-    using System.ComponentModel.Design;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Design;
 
     #region Class ActivityDesignerGlyphCollection

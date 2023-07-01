@@ -14,10 +14,10 @@ namespace System.Web.Handlers
     using System.Threading;
     using System.Web;
     using System.Web.ApplicationServices;
-    using System.Web.UI;
     using System.Web.Resources;
     using System.Web.Script.Services;
     using System.Web.Security;
+    using System.Web.UI;
 
     public class ScriptModule : IHttpModule
     {

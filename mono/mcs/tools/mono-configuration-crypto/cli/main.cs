@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-using Mono.Options;
 using Mono.Configuration.Crypto;
+
+using Mono.Options;
 
 [assembly: AssemblyTitle("mono-configuration-crypto")]
 [assembly: AssemblyDescription(

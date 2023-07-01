@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast;
 using Microsoft.CodeAnalysis.CSharp.Extensions;

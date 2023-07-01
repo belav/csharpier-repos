@@ -12,8 +12,8 @@
 
 namespace System.Web
 {
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     /*
      * Code to perform virtual path operations

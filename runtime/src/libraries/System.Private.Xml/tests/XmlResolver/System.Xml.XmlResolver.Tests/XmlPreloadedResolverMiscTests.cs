@@ -4,6 +4,7 @@
 using System.IO;
 using System.Net;
 using System.Xml.Resolvers;
+
 using Xunit;
 
 namespace System.Xml.XmlResolverTests

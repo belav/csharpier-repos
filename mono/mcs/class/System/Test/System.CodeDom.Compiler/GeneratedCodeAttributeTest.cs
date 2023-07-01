@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom.Compiler;
+
 //
 // GeneratedCodeAttributeTest.cs
 //	- Unit tests for System.CodeDom.Compiler.GeneratedCodeAttribute
@@ -29,9 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
 
 namespace MonoTests.System.CodeDom.Compiler
 {

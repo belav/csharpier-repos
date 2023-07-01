@@ -1,3 +1,6 @@
+using System;
+using System.Net;
+
 //
 // CookieTest.cs - NUnit Test Cases for System.Net.Cookie
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
 
 namespace MonoTests.System.Net
 {

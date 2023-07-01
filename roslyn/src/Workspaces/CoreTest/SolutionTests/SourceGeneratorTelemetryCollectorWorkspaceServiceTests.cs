@@ -5,15 +5,16 @@
 using System;
 using System.Composition;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.SourceGeneratorTelemetry;
 using Microsoft.CodeAnalysis.Test.Utilities;
+using static Microsoft.CodeAnalysis.UnitTests.SolutionTestHelpers;
+using static Microsoft.CodeAnalysis.UnitTests.SolutionUtilities;
 using Roslyn.Test.Utilities;
 using Roslyn.Test.Utilities.TestGenerators;
 using Xunit;
-using static Microsoft.CodeAnalysis.UnitTests.SolutionTestHelpers;
-using static Microsoft.CodeAnalysis.UnitTests.SolutionUtilities;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

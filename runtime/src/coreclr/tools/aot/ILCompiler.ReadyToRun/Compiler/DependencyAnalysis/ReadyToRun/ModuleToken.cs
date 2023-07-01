@@ -6,9 +6,10 @@ using System;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 
+using Internal.CorConstants;
+
 using Internal.JitInterface;
 using Internal.TypeSystem.Ecma;
-using Internal.CorConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

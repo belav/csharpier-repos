@@ -31,8 +31,7 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #if HAVE_CONCURRENT_DICTIONARY
 using System.Collections.Concurrent;
 #endif
-using System.Threading;
-using Newtonsoft.Json.Serialization;
+using System.Threading;using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities
 {

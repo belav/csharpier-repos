@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ObjectiveC;
 
+using static System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal;
+
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-
-using static System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal;
 
 namespace System.Runtime.InteropServices.Tests
 {

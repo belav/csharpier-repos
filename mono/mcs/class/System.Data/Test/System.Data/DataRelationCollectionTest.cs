@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+
 // DataRelationCollection.cs - Nunit Test Cases for for testing the DataRelationCollection
 // class
 // Author:
@@ -28,8 +31,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using NUnit.Framework;
-using System;
-using System.Data;
 
 namespace MonoTests.System.Data
 {

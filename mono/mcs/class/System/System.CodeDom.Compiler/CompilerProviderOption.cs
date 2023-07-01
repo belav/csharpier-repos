@@ -28,8 +28,7 @@
 //
 
 #if CONFIGURATION_DEP
-using System;
-using System.Configuration;
+using System;using System.Configuration;
 
 namespace System.CodeDom.Compiler
 {

@@ -1,3 +1,9 @@
+using System;
+using System.Configuration;
+using System.Web;
+using System.Web.Compilation;
+using System.Web.UI;
+
 //
 // ClientBuildManagerParameterTest.cs
 //	- unit tests for System.Web.Compilation.ClientBuildManagerParameter
@@ -29,12 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Configuration;
-using System.Web.Compilation;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoTests.System.Web.Compilation
 {

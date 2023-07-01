@@ -6,18 +6,18 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities;
-    using System.Activities.Statements;
+    using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Windows;
-    using System.Runtime;
-    using System.Activities.Presentation;
     using System.Reflection;
+    using System.Runtime;
+    using System.Windows;
 
     /// <summary>
     /// Interaction logic for ForEachDesigner.xaml

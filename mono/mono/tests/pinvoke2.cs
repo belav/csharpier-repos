@@ -4,10 +4,10 @@
 //
 
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 
 public unsafe class Tests
 {

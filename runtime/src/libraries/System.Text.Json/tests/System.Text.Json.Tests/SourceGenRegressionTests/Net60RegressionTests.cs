@@ -4,9 +4,10 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization.Metadata;
 using System.Text.Json.Tests.SourceGenRegressionTests.Net60;
-using Xunit;
 using HighLowTemps = System.Text.Json.Tests.SourceGenRegressionTests.Net60.HighLowTemps;
 using WeatherForecastWithPOCOs = System.Text.Json.Tests.SourceGenRegressionTests.Net60.WeatherForecastWithPOCOs;
+
+using Xunit;
 
 namespace System.Text.Json.Tests.SourceGenRegressionTests
 {

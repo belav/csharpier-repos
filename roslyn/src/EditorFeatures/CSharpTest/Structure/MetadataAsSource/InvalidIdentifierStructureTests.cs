@@ -7,6 +7,7 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Structure;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Structure;
 using Microsoft.CodeAnalysis.Shared.Extensions;

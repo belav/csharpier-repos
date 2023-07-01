@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
@@ -31,12 +32,12 @@ using Microsoft.VisualStudio.LanguageServices.SymbolSearch;
 using Microsoft.VisualStudio.LanguageServices.Utilities;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell.ServiceBroker;
+using SVsServiceProvider = Microsoft.VisualStudio.Shell.SVsServiceProvider;
 using Microsoft.VisualStudio.Threading;
+using VSUtilities = Microsoft.VisualStudio.Utilities;
 using NuGet.VisualStudio;
 using NuGet.VisualStudio.Contracts;
 using Roslyn.Utilities;
-using SVsServiceProvider = Microsoft.VisualStudio.Shell.SVsServiceProvider;
-using VSUtilities = Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Packaging
 {

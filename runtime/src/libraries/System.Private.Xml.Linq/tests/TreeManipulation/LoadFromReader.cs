@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XmlDiff;
+
 using CoreXml.Test.XLinq;
 using Microsoft.Test.ModuleCore;
 using XmlCoreTest.Common;

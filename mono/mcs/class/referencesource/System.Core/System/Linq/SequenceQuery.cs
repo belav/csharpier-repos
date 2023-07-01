@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-
 // Include Silverlight's managed resources
 #if SILVERLIGHT
 using System.Core;

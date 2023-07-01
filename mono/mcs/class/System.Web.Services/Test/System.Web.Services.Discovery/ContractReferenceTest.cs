@@ -1,3 +1,6 @@
+using System;
+using System.Web.Services.Discovery;
+
 //
 // MonoTests.System.Web.Services.Discovery.ContractReferenceTest.cs
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Web.Services.Discovery;
 
 namespace MonoTests.System.Web.Services.Discovery
 {

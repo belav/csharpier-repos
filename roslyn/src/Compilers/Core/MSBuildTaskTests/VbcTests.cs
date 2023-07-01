@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.CodeAnalysis.BuildTasks;
 using Microsoft.CodeAnalysis.BuildTasks.UnitTests.TestUtilities;
 using Roslyn.Test.Utilities;

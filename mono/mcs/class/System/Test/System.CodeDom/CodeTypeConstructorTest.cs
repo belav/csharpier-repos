@@ -1,3 +1,7 @@
+using System;
+using System.CodeDom;
+using System.Collections.Specialized;
+
 //
 // CodeTypeConstructorTest.cs
 //	- Unit tests for System.CodeDom.CodeTypeConstructor
@@ -28,10 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.CodeDom
 {

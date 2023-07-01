@@ -5,13 +5,14 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
+    using JsonSeparatedList = EmbeddedSeparatedSyntaxNodeList<JsonKind, JsonNode, JsonValueNode>;
     using JsonNodeOrToken = EmbeddedSyntaxNodeOrToken<JsonKind, JsonNode>;
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
-    using JsonSeparatedList = EmbeddedSeparatedSyntaxNodeList<JsonKind, JsonNode, JsonValueNode>;
 
     internal sealed class JsonCompilationUnit : JsonNode
     {

@@ -7,10 +7,11 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using Microsoft.Win32.SafeHandles;
+
+using PAL_ChainingMode = Interop.AppleCrypto.PAL_ChainingMode;
 
 using PAL_SymmetricAlgorithm = Interop.AppleCrypto.PAL_SymmetricAlgorithm;
-using PAL_ChainingMode = Interop.AppleCrypto.PAL_ChainingMode;
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography
 {

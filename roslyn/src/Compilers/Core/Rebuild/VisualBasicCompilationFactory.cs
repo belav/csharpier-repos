@@ -8,12 +8,13 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Roslyn.Utilities;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Rebuild
 {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Tests;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Text.RegularExpressions.Tests

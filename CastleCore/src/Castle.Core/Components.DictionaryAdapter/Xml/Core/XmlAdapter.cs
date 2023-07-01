@@ -17,12 +17,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Xml;
-    using System.Xml.Serialization;
     using IBindingList = System.ComponentModel.IBindingList;
     using ListChangedEventArgs = System.ComponentModel.ListChangedEventArgs;
     using ListChangedType = System.ComponentModel.ListChangedType;
+    using System.Linq;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     public class XmlAdapter
         : DictionaryBehaviorAttribute,

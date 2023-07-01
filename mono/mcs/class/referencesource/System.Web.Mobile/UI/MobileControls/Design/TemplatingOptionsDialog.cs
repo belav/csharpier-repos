@@ -7,25 +7,25 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
-    using System.Collections;
-    using System.Collections.Specialized;
     using System.Globalization;
     //    using System.Web.UI.Design.Util;
     using System.Web.UI.Design.MobileControls.Util;
+    using UnsettableComboBox = System.Web.UI.Design.MobileControls.Util.UnsettableComboBox;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
+    using Button = System.Windows.Forms.Button;
+    using ComboBox = System.Windows.Forms.ComboBox;
     using System.Windows.Forms.Design;
+    using Form = System.Windows.Forms.Form;
+    using Label = System.Windows.Forms.Label;
 
     using Panel = System.Windows.Forms.Panel;
-    using Button = System.Windows.Forms.Button;
-    using Label = System.Windows.Forms.Label;
-    using ComboBox = System.Windows.Forms.ComboBox;
-    using Form = System.Windows.Forms.Form;
-    using UnsettableComboBox = System.Web.UI.Design.MobileControls.Util.UnsettableComboBox;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

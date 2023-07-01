@@ -4,13 +4,7 @@
 #if !NETCOREAPP
 using System.Diagnostics;
 #endif
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;using System.IO;using System.Net.Http.Headers;using System.Text;using System.Text.Json;using System.Threading;using System.Threading.Tasks;
 
 namespace System.Net.Http.Json
 {

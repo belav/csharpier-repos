@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages;
 
 namespace Microsoft.CodeAnalysis.DocumentHighlighting

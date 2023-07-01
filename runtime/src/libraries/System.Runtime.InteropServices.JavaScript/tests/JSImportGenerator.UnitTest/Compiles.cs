@@ -1,13 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
+using System.Threading.Tasks;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.JavaScript;
-using System.Threading.Tasks;
-using System;
-using Xunit;
 using Microsoft.Interop.UnitTests;
+using Xunit;
 
 namespace JSImportGenerator.Unit.Tests
 {

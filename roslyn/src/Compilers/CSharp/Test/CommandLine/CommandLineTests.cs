@@ -20,7 +20,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+
+using Basic.Reference.Assemblies;
 using Microsoft.CodeAnalysis;
+using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -32,14 +35,12 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.DiaSymReader;
 using Roslyn.Test.PdbUtilities;
 using Roslyn.Test.Utilities;
+using static Roslyn.Test.Utilities.SharedResourceHelpers;
 using Roslyn.Test.Utilities.TestGenerators;
+using static Roslyn.Test.Utilities.TestMetadata;
 using Roslyn.Utilities;
 using TestResources.Analyzers;
 using Xunit;
-using Basic.Reference.Assemblies;
-using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
-using static Roslyn.Test.Utilities.SharedResourceHelpers;
-using static Roslyn.Test.Utilities.TestMetadata;
 
 namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
 {

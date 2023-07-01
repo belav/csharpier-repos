@@ -6,22 +6,22 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
-    using System.Reflection;
-    using System.Text;
-    using System.Xml;
+    using System.Collections.Generic;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
-    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Runtime.Serialization.Formatters;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
+    using System.Text;
+    using System.Xml;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerReadContextComplex : XmlObjectSerializerReadContext

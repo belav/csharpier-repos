@@ -9,10 +9,11 @@ namespace NetClient
     using System.Reflection;
     using System.Runtime.InteropServices;
 
-    using TestLibrary;
-    using Xunit;
     using Server.Contract;
     using Server.Contract.Servers;
+
+    using TestLibrary;
+    using Xunit;
 
     class Program
     {

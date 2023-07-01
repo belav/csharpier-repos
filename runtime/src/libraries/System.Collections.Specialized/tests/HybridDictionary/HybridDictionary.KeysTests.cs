@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Collections.Tests;
 using System.Diagnostics;
+
 using Xunit;
 
 namespace System.Collections.Specialized.Tests

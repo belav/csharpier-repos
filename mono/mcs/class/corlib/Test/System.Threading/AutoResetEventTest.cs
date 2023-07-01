@@ -1,3 +1,7 @@
+using System;
+using System.Threading;
+
+using Microsoft.Win32.SafeHandles;
 //
 // AutoResetEventTest.cs - NUnit test cases for System.Threading.AutoResetEvent
 //
@@ -10,9 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
-using Microsoft.Win32.SafeHandles;
 
 namespace MonoTests.System.Threading
 {

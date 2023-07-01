@@ -5,13 +5,13 @@
 //------------------------------------------------------------------------------
 namespace System.Web.Services.Description
 {
+    using System.CodeDom;
+    using System.Data;
     using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
     using System.Xml.Serialization;
     using System.Xml.Serialization.Advanced;
-    using System.Xml.Schema;
-    using System.Xml;
-    using System.Data;
-    using System.CodeDom;
 
     internal class MimeXmlReturn : MimeReturn
     {

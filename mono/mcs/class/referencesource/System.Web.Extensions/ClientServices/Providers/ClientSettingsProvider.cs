@@ -8,33 +8,33 @@ namespace System.Web.ClientServices.Providers
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Configuration;
     using System.Configuration.Provider;
+    using System.Data;
+    using System.Data.Common;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
-    using System.Security;
-    using System.Security.Principal;
-    using System.Security.Permissions;
     using System.Net;
+    using System.Reflection;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
+    using System.Threading;
+    using System.Web.ApplicationServices;
     using System.Web.ClientServices;
     using System.Web.Resources;
-    using System.Web.Security;
-    using System.Threading;
-    using System.Data;
-    using System.Data.Common;
-    using System.Reflection;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
-    using System.Web.ApplicationServices;
     using System.Web.Script.Serialization;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Web.Security;
 
     [SecurityCritical]
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]

@@ -1,3 +1,13 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Web;
+using System.Web.Caching;
+
 //
 // HttpResponseCas.cs - CAS unit tests for System.Web.HttpResponse
 //
@@ -27,16 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Text;
-using System.Web;
-using System.Web.Caching;
 
 namespace MonoCasTests.System.Web
 {

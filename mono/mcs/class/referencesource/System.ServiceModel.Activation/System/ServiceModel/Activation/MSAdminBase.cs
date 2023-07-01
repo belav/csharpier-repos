@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 using System.Runtime;
 using System.Runtime.InteropServices;
-using System.Security;
 using COMTypes = System.Runtime.InteropServices.ComTypes;
+using System.Security;
 
 namespace System.ServiceModel.Activation
 {

@@ -3,10 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
-using ILLink.Shared;
-using Microsoft.CodeAnalysis.Testing;
-using Microsoft.CodeAnalysis.Text;
-using Xunit;
+
 using VerifyCSUSMwithRAF = ILLink.RoslynAnalyzer.Tests.CSharpCodeFixVerifier<
     ILLink.RoslynAnalyzer.RequiresAssemblyFilesAnalyzer,
     ILLink.CodeFix.UnconditionalSuppressMessageCodeFixProvider
@@ -19,6 +16,10 @@ using VerifyCSUSMwithRUC = ILLink.RoslynAnalyzer.Tests.CSharpCodeFixVerifier<
     ILLink.RoslynAnalyzer.RequiresUnreferencedCodeAnalyzer,
     ILLink.CodeFix.UnconditionalSuppressMessageCodeFixProvider
 >;
+using ILLink.Shared;
+using Microsoft.CodeAnalysis.Testing;
+using Microsoft.CodeAnalysis.Text;
+using Xunit;
 
 namespace ILLink.RoslynAnalyzer.Tests
 {

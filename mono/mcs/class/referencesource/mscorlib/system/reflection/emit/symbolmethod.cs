@@ -8,11 +8,11 @@
 
 namespace System.Reflection.Emit
 {
-    using System.Runtime.InteropServices;
     using System;
-    using System.Reflection;
     using System.Diagnostics.Contracts;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
 
     internal sealed class SymbolMethod : MethodInfo
     {

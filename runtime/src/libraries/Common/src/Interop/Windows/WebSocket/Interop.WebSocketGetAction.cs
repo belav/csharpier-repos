@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using static System.Net.WebSockets.WebSocketProtocolComponent;
 using System.Runtime.InteropServices;
 using System.Security;
-using static System.Net.WebSockets.WebSocketProtocolComponent;
 
 internal static partial class Interop
 {

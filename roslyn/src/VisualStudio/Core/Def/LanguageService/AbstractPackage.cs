@@ -4,9 +4,10 @@
 
 using System;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
+
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {

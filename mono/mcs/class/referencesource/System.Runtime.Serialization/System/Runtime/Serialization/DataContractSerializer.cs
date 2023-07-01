@@ -6,20 +6,20 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
-    using System.Reflection;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Runtime.CompilerServices;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     public sealed class DataContractSerializer : XmlObjectSerializer
     {

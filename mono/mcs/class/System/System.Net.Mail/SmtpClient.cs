@@ -41,22 +41,7 @@ using MSI = Mono.Security.Interface;
 using System.Security.Cryptography.X509Certificates;
 #endif
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Net.Mime;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Net.Configuration;
-using System.Configuration;
-using System.Net.Security;
-using System.Security.Authentication;
-using System.Threading.Tasks;
-using Mono.Net.Security;
+using System;using System.Collections.Generic;using System.ComponentModel;using System.Globalization;using System.IO;using System.Net;using System.Net.Mime;using System.Net.Sockets;using System.Text;using System.Threading;using System.Net.Configuration;using System.Configuration;using System.Net.Security;using System.Security.Authentication;using System.Threading.Tasks;using Mono.Net.Security;
 
 namespace System.Net.Mail
 {

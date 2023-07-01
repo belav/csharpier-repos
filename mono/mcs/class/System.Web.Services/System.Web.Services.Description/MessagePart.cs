@@ -1,3 +1,4 @@
+using System.Web.Services.Configuration;
 //
 // System.Web.Services.Description.MessagePart.cs
 //
@@ -30,7 +31,6 @@
 
 using System.Xml;
 using System.Xml.Serialization;
-using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description
 {

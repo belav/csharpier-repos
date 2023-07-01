@@ -5,10 +5,10 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml;
-using System.Xml.Schema;
 
 using ExceptionUtil = System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Runtime.Serialization
 {

@@ -4,8 +4,9 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
-using Microsoft.CodeAnalysis.TodoComments;
+
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.TodoComments;
 using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList

@@ -3,6 +3,7 @@
 
 using System.CodeDom.Compiler;
 using System.Text;
+
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.VisualStudio.TextTemplating;
 using Engine = Mono.TextTemplating.TemplatingEngine;

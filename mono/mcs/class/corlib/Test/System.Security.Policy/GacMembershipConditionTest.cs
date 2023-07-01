@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Policy;
+
 //
 // GacMembershipConditionTest.cs - NUnit Test Cases for GacMembershipCondition
 //
@@ -28,9 +32,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

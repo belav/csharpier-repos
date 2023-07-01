@@ -10,9 +10,9 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal sealed class InternalDecoderBestFitFallback : DecoderFallback

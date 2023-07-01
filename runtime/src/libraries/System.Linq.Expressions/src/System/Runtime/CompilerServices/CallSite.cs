@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Dynamic.Utils;
 using System.Linq.Expressions;
+using static System.Linq.Expressions.CachedReflectionInfo;
 using System.Reflection;
 using System.Threading;
-using static System.Linq.Expressions.CachedReflectionInfo;
 
 namespace System.Runtime.CompilerServices
 {

@@ -29,15 +29,7 @@
 //
 #if !MOBILE
 
-using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using NUnit.Framework;using System;using System.Collections;using System.IO;using System.Security.Cryptography;using System.Security.Cryptography.Pkcs;using System.Security.Cryptography.X509Certificates;using System.Text;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

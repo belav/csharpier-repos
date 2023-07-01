@@ -8,13 +8,14 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Parsers;
 using Microsoft.Diagnostics.Tracing.Parsers.Clr;
-using Tracing.Tests.Common;
 using DebugInfoMethodsD = tests_d::DebugInfoMethods;
 using DebugInfoMethodsR = tests_r::DebugInfoMethods;
+using Tracing.Tests.Common;
 
 public unsafe class DebugInfoTest
 {

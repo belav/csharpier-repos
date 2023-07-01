@@ -4,6 +4,7 @@
 
 using System.Windows;
 using System.Windows.Media;
+
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;

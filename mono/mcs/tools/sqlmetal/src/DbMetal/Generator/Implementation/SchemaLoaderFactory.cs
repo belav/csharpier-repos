@@ -30,6 +30,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Reflection;
+
 using DbLinq.Util;
 using DbLinq.Vendor;
 using DbMetal.Configuration;

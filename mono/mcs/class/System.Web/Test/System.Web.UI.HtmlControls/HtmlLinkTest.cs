@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+
 //
 // HtmlLinkTest.cs - unit tests for System.Web.UI.HtmlControls.HtmlLink
 //
@@ -28,11 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 
 namespace MonoTests.System.Web.UI.HtmlControls
 {

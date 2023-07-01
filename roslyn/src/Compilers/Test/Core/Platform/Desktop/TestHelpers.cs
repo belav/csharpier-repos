@@ -4,20 +4,7 @@
 
 #if NET472
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Test.Resources.Proprietary;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.Win32;
-using Basic.Reference.Assemblies;
+using System;using System.Collections.Generic;using System.Collections.Immutable;using System.IO;using System.Linq;using System.Reflection;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.CSharp;using Microsoft.CodeAnalysis.Diagnostics;using Microsoft.CodeAnalysis.Test.Resources.Proprietary;using Microsoft.CodeAnalysis.Test.Utilities;using Microsoft.CodeAnalysis.Text;using Microsoft.Win32;using Basic.Reference.Assemblies;
 
 namespace Roslyn.Test.Utilities
 {

@@ -1,3 +1,11 @@
+using System;
+using System.Diagnostics;
+using System.Text;
+using System.Threading;
+
+using Mono.Unix;
+using Mono.Unix.Android;
+using Mono.Unix.Native;
 //
 // UnixSignalTest.cs - NUnit Test Cases for Mono.Unix.UnixSignal
 //
@@ -8,14 +16,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
-using Mono.Unix;
-using Mono.Unix.Android;
-using Mono.Unix.Native;
 
 namespace MonoTests.Mono.Unix
 {

@@ -1,7 +1,6 @@
 #if FEATURE_COMPILE_TO_METHODBUILDER
 
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
+using System.Reflection.Emit;using System.Runtime.CompilerServices;
 
 namespace System.Linq.Expressions
 {

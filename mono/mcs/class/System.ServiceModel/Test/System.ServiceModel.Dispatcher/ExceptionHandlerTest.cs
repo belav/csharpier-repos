@@ -25,11 +25,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System.ServiceModel.Dispatcher;
-using NUnit.Framework;
+using System;using System.Reflection;using System.Runtime.ConstrainedExecution;using System.ServiceModel.Dispatcher;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {

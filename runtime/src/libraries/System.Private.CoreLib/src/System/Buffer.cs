@@ -5,9 +5,7 @@
 #define HAS_CUSTOM_BLOCKS
 #endif
 
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System.Diagnostics;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;
 
 namespace System
 {

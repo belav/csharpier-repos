@@ -7,6 +7,7 @@
 // clauses that catch the base class of the exception being rethrown
 using System;
 using System.IO;
+
 using Xunit;
 
 namespace hello_rethrowwithhandlerscatchingbase_rethrow_cs

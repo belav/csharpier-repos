@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue

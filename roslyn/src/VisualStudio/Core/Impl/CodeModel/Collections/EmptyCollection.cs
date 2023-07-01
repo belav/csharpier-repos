@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
 

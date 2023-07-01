@@ -20,9 +20,10 @@
 */
 
 using System;
-using System.Diagnostics;
-using C5;
 using SCG = System.Collections.Generic;
+using System.Diagnostics;
+
+using C5;
 
 namespace PointLocation
 {

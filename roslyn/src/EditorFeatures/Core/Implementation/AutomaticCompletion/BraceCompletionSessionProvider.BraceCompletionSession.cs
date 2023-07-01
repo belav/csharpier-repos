@@ -7,6 +7,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.BraceCompletion;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;

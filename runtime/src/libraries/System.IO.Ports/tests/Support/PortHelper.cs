@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+
 using Microsoft.Win32;
 
 namespace Legacy.Support

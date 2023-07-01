@@ -27,12 +27,13 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+
 using Microsoft.Build.Construction;
 using Microsoft.Build.Internal;
-using System.Collections.Generic;
-using System.Reflection;
-using System.IO;
 
 namespace Microsoft.Build.Evaluation
 {

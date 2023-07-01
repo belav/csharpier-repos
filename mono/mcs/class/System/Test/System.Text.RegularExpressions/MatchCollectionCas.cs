@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Text.RegularExpressions;
+
 //
 // MatchCollectionCas.cs
 //	- CAS unit tests for System.Text.RegularExpressions.MatchCollection
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Text.RegularExpressions;
 
 namespace MonoCasTests.System.Text.RegularExpressions
 {

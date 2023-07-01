@@ -6,15 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
-
 #if ASPNETWEBAPI
-using System.Web.Http.Properties;
-using TRoute = System.Web.Http.Routing.IHttpRoute;
-using TRouteEntry = System.Web.Http.Routing.RouteEntry;
+using System.Web.Http.Properties;using TRoute = System.Web.Http.Routing.IHttpRoute;using TRouteEntry = System.Web.Http.Routing.RouteEntry;
 #else
-using System.Web.Mvc.Properties;
-using TRoute = System.Web.Routing.Route;
-using TRouteEntry = System.Web.Mvc.Routing.RouteEntry;
+using System.Web.Mvc.Properties;using TRoute = System.Web.Routing.Route;using TRouteEntry = System.Web.Mvc.Routing.RouteEntry;
 #endif
 
 #if ASPNETWEBAPI

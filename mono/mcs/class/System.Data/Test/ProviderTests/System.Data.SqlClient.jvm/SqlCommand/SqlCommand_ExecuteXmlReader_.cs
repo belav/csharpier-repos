@@ -1,10 +1,10 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
+using System.Text;
 
 using System.Xml;
-using System.Text;
-using System.IO;
 
 using MonoTests.System.Data.Utils;
 

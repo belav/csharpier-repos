@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Formats.Cbor;
+using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
+
 using Test.Cryptography;
 using Xunit;
-using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests
 {

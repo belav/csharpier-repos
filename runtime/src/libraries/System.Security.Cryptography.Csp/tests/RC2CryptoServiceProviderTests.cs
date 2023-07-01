@@ -6,8 +6,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Encryption.RC2.Tests
 {
-    using Csp.Tests;
     using RC2 = System.Security.Cryptography.RC2;
+    using Csp.Tests;
 
     public static partial class RC2CryptoServiceProviderTests
     {

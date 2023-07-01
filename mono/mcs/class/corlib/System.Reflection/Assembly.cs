@@ -1,3 +1,12 @@
+using System.Collections.Generic;
+using System.Configuration.Assemblies;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 //
 // System.Reflection/Assembly.cs
 //
@@ -29,19 +38,10 @@
 //
 
 using System.Security;
-using System.Security.Policy;
 using System.Security.Permissions;
-using System.Runtime.Serialization;
-using System.Reflection;
-using System.IO;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Configuration.Assemblies;
-using System.Threading;
+using System.Security.Policy;
 using System.Text;
-using System.Diagnostics.Contracts;
+using System.Threading;
 
 using Mono.Security;
 

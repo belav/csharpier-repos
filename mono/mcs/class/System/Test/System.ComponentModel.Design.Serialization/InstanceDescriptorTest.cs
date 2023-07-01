@@ -1,3 +1,10 @@
+using System;
+using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
+using System.Globalization;
+using System.Reflection;
+using System.Threading;
+
 //
 // InstanceDescriptorTest.cs - Unit tests for
 //	System.ComponentModel.Design.Serialization.InstanceDescriptor
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.ComponentModel;
-using System.ComponentModel.Design.Serialization;
-using System.Globalization;
-using System.Reflection;
-using System.Threading;
 
 namespace MonoTests.System.ComponentModel.Design.Serialization
 {

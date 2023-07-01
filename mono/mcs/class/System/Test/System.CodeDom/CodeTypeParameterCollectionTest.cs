@@ -1,3 +1,7 @@
+using System;
+using System.CodeDom;
+using System.Collections;
+
 //
 // CodeTypeParameterCollectionTest.cs
 //	- Unit tests for System.CodeDom.CodeTypeParameterCollection
@@ -29,10 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

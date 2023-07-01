@@ -26,9 +26,7 @@
 
 #if !MONOTOUCH && !XAMMAC
 
-using System;
-using System.Globalization;
-using System.Security.Cryptography;
+using System;using System.Globalization;using System.Security.Cryptography;
 
 namespace Mono.Security.Cryptography
 {

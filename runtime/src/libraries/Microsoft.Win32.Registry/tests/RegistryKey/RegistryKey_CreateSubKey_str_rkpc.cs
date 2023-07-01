@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
+
 using Xunit;
 
 namespace Microsoft.Win32.RegistryTests

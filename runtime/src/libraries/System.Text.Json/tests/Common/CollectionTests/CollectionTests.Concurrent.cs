@@ -3,6 +3,7 @@
 
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Text.Json.Serialization.Tests

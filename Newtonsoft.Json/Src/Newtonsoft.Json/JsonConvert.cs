@@ -24,20 +24,12 @@
 #endregion
 
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
-using System.Xml;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using System.Text;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;using Newtonsoft.Json.Utilities;using System.Xml;using Newtonsoft.Json.Converters;using Newtonsoft.Json.Serialization;using System.Text;using System.Diagnostics;using System.Runtime.CompilerServices;using System.Diagnostics.CodeAnalysis;
 #if HAVE_XLINQ
 using System.Xml.Linq;
 #endif

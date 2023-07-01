@@ -14,9 +14,9 @@ namespace System.Web.Configuration
     using System.Security.Permissions;
     using System.Text.RegularExpressions;
     using System.Web.Configuration;
+    using Pair = System.Web.UI.Pair;
     using System.Web.Util;
     using System.Xml;
-    using Pair = System.Web.UI.Pair;
 
     //
     // ConfigureCapabilities is used to configure the CapabilitiesEvaluator object

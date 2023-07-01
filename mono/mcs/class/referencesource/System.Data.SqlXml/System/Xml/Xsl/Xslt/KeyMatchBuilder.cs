@@ -5,14 +5,15 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using MS.Internal.Xml;
-using System.Xml.Xsl.XPath;
 using System.Xml.Xsl.Qil;
+using System.Xml.Xsl.XPath;
+
+using MS.Internal.Xml;
 
 namespace System.Xml.Xsl.Xslt
 {

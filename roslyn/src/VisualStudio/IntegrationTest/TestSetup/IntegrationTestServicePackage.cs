@@ -5,9 +5,10 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Task = System.Threading.Tasks.Task;
+
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Setup
 {

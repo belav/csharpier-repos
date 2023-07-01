@@ -10,9 +10,9 @@
 namespace System.Data.EntityModel.SchemaObjectModel
 {
     using System.Collections.Generic;
+    using Som = System.Data.EntityModel.SchemaObjectModel;
     using System.Data.Metadata.Edm;
     using System.Text;
-    using Som = System.Data.EntityModel.SchemaObjectModel;
 
     abstract class ModelFunctionTypeElement : FacetEnabledSchemaElement
     {

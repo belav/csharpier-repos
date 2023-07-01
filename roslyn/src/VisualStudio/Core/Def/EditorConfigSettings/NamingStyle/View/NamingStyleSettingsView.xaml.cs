@@ -4,6 +4,7 @@
 
 using System.Threading.Tasks;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Shell.TableControl;
 

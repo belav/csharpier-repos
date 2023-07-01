@@ -6,14 +6,15 @@
 
 namespace System.Timers
 {
+    using System;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System;
-    using System.Runtime.Versioning;
+
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
 

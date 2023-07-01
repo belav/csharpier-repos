@@ -5,9 +5,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 {
     using System.Globalization;
     using System.ServiceModel;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using SR2 = System.ServiceModel.Activities.SR;
 
     class OperationExecutionFault : MessageFault
     {

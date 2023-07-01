@@ -19,8 +19,8 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Reflection;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.Reflection;
 
     [Obsolete(
         "Use System.Runtime.InteropServices.ComTypes.IReflect instead. http://go.microsoft.com/fwlink/?linkid=14202",

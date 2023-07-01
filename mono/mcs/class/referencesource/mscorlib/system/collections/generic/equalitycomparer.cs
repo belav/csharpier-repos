@@ -9,16 +9,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security;
-using System.Runtime.Serialization;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using System.Security;
 
 namespace System.Collections.Generic
 {
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [TypeDependencyAttribute("System.Collections.Generic.ObjectEqualityComparer`1")]

@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;
 

@@ -1,13 +1,13 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using CultureInfo = System.Globalization.CultureInfo;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #pragma warning disable CA1852 // DefaultBinder is derived from in some targets
 
 using System.Reflection;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System
 {

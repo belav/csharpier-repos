@@ -4,13 +4,13 @@
 using System;
 using System.Collections.Generic;
 
+using Debug = System.Diagnostics.Debug;
+using FieldAttributes = System.Reflection.FieldAttributes;
+using Ecma = System.Reflection.Metadata;
+
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
-using Debug = System.Diagnostics.Debug;
-using FieldAttributes = System.Reflection.FieldAttributes;
 
 namespace ILCompiler.Metadata
 {

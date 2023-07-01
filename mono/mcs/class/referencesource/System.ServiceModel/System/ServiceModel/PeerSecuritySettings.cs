@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Xml;
-    using System.ComponentModel;
 
     public sealed class PeerSecuritySettings
     {

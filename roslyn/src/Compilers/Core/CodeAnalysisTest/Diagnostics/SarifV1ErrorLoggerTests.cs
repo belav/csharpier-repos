@@ -7,6 +7,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;

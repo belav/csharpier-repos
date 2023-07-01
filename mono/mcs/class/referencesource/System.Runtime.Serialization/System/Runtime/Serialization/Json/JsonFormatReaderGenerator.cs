@@ -9,11 +9,7 @@ namespace System.Runtime.Serialization.Json
 #if !NO_DYNAMIC_CODEGEN
     using System.Reflection.Emit;
 #endif
-    using System.Runtime;
-    using System.Runtime.Serialization.Diagnostics.Application;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Xml;
+    using System.Runtime;using System.Runtime.Serialization.Diagnostics.Application;using System.Security;using System.Security.Permissions;using System.Xml;
 
     delegate object JsonFormatClassReaderDelegate(
         XmlReaderDelegator xmlReader,

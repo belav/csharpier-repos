@@ -1,3 +1,11 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+
 // !!! DO NOT EDIT - This file is generated automatically - DO NOT EDIT !!!
 //
 // X509CertificateTest.cs - NUnit2 Test Cases for X509Certificate
@@ -9,13 +17,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

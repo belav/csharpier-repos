@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Xml;
+
 using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq

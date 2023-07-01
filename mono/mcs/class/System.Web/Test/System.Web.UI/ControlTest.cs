@@ -1,3 +1,18 @@
+using System;
+using System.Collections;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Web;
+
+using System.Web.Routing;
+using System.Web.UI;
+
+using System.Web.UI.Adapters;
+using System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.Control
 //
@@ -30,20 +45,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Drawing;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using MonoTests.SystemWeb.Framework;
-using MonoTests.stand_alone.WebHarness;
-
-using System.Web.UI.Adapters;
-
-using System.Web.Routing;
 
 namespace MonoTests.System.Web.UI
 {

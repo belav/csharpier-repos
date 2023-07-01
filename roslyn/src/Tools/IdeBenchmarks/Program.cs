@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
+
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 

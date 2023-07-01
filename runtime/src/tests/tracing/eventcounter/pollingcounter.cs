@@ -6,9 +6,7 @@ using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Threading;
+using System;using System.Collections.Generic;using System.Threading;
 
 namespace BasicEventSourceTests
 {

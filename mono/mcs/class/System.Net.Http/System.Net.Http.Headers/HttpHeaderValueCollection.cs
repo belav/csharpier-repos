@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // HttpHeaderValueCollection.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Collections.Generic;
-using System.Collections;
 
 namespace System.Net.Http.Headers
 {

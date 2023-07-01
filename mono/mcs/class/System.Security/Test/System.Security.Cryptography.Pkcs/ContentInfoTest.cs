@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+
 //
 // ContentInfoTest.cs - NUnit tests for ContentInfo
 //
@@ -29,10 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

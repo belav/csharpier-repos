@@ -7,8 +7,8 @@
 namespace System.Configuration
 {
     using System;
-    using System.Xml;
     using System.Configuration.Internal;
+    using System.Xml;
 
     internal static class ExceptionUtil
     {

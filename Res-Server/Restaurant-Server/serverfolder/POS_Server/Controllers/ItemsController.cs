@@ -1,22 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using System.Data.Entity;
-using POS_Server.Models;
+using System.Security.Claims;
 using System.Web;
-using System.IO;
+using System.Web;
+using System.Web.Http;
+
 using LinqKit;
 using Microsoft.Ajax.Utilities;
-using POS_Server.Classes;
-using POS_Server.Models.VM;
-using System.Security.Claims;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Web;
-using System.Data.Entity.Validation;
+using POS_Server.Classes;
+using POS_Server.Models;
+using POS_Server.Models.VM;
 
 namespace POS_Server.Controllers
 {

@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 //------------------------------------------------------------------------------
 // <copyright file="DesignerImageAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -10,7 +11,6 @@ using System.Web.Mobile;
 using System.Web.UI.Design.MobileControls;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.ComponentModel.Design;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {

@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+
 // -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
 //
 // StringBuilderTest.dll - NUnit Test Cases for the System.Text.StringBuilder class
@@ -21,8 +24,6 @@
 //
 
 using NUnit.Framework;
-using System.Text;
-using System;
 
 namespace MonoTests.System.Text
 {

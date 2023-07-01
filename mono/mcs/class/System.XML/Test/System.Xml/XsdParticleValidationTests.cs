@@ -9,11 +9,11 @@
 using System;
 using System.Xml;
 using System.Xml.Schema;
-using NUnit.Framework;
 
 using ValidationException = System.Xml.Schema.XmlSchemaValidationException;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

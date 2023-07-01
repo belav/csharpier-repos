@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
+using CultureInfo = System.Globalization.CultureInfo;
 using System.Reflection;
 using System.Reflection.TypeLoading;
-using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System
 {

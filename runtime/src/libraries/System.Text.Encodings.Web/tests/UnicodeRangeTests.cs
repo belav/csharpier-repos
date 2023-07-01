@@ -3,6 +3,7 @@
 
 using System;
 using System.Text.Unicode;
+
 using Xunit;
 
 namespace System.Text.Encodings.Web.Tests

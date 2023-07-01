@@ -4,6 +4,7 @@
 using System;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
+
 using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Storage.Internal

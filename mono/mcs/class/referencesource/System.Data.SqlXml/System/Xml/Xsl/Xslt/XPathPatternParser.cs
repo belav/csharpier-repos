@@ -13,9 +13,10 @@ using System.Xml.Xsl.XPath;
 
 namespace System.Xml.Xsl.Xslt
 {
-    using XPathParser = XPathParser<QilNode>;
-    using XPathNodeType = System.Xml.XPath.XPathNodeType;
     using Res = System.Xml.Utils.Res;
+    using XPathNodeType = System.Xml.XPath.XPathNodeType;
+
+    using XPathParser = XPathParser<QilNode>;
 
     internal class XPathPatternParser
     {

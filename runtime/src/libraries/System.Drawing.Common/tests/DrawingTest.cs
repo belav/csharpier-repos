@@ -3,6 +3,7 @@
 
 using System.Drawing.Imaging;
 using System.IO;
+
 using Xunit;
 
 namespace System.Drawing.Tests

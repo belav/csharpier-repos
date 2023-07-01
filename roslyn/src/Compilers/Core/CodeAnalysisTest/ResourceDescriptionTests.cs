@@ -6,6 +6,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Text;
 using Xunit;
 

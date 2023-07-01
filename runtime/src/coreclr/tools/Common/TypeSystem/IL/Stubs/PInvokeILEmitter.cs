@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using Debug = System.Diagnostics.Debug;
 
 using Internal.TypeSystem;
-using Internal.TypeSystem.Interop;
-using Debug = System.Diagnostics.Debug;
 using Internal.TypeSystem.Ecma;
+using Internal.TypeSystem.Interop;
 
 namespace Internal.IL.Stubs
 {

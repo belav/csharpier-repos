@@ -6,6 +6,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.CodeAnalysis.Editor

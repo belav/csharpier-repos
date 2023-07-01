@@ -4,9 +4,9 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.ComponentModel;
     using System.Activities.Presentation.Model;
     using System.Activities.Statements;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Data;
 

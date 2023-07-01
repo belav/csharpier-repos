@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection.Metadata;
-using System.Text;
 using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
+using System.Text;
 
 namespace System.Reflection
 {

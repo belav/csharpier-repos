@@ -5,6 +5,11 @@ using System;
 using System.Buffers.Binary;
 using System.Collections;
 using System.Collections.Generic;
+
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -15,11 +20,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.DataContracts;
 using System.Text;
 using System.Xml;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<
-    System.Xml.XmlQualifiedName,
-    System.Runtime.Serialization.DataContracts.DataContract
->;
 
 namespace System.Runtime.Serialization.DataContracts
 {

@@ -28,8 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if WIN_PLATFORM
-using System.Net.Sockets;
-using System.Diagnostics.Contracts;
+using System.Net.Sockets;using System.Diagnostics.Contracts;
 
 namespace System.Net.NetworkInformation
 {

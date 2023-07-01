@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.Storage

@@ -10,9 +10,9 @@ using System.Configuration.Internal;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
-using System.Web.Util;
-using System.Web.Hosting;
 using System.Web.Configuration;
+using System.Web.Hosting;
+using System.Web.Util;
 
 namespace System.Web.Configuration
 {

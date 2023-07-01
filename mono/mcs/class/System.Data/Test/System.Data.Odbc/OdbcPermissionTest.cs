@@ -28,13 +28,7 @@
 
 #if !NO_ODBC
 
-using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Data.Odbc;
-using System.Security;
-using System.Security.Permissions;
+using NUnit.Framework;using System;using System.Data;using System.Data.Common;using System.Data.Odbc;using System.Security;using System.Security.Permissions;
 
 namespace MonoTests.System.Data.Odbc
 {

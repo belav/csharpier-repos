@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // System.IO.UnexceptionalStreamReader.cs
 //
@@ -37,7 +38,6 @@
 // UnexceptionalStreamWriter too.
 
 using System.Text;
-using System.Runtime.InteropServices;
 
 namespace System.IO
 {

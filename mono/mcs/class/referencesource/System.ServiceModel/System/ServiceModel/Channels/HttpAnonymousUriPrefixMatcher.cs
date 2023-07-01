@@ -5,8 +5,8 @@ namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
     using System.Runtime;
-    using System.ServiceModel.Description;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
 
     class HttpAnonymousUriPrefixMatcher : IAnonymousUriPrefixMatcher
     {

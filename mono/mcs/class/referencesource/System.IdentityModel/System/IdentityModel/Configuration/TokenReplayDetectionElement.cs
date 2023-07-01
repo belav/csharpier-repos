@@ -1,9 +1,9 @@
-﻿//------------------------------------------------------------------------------
+﻿using System.ComponentModel;
+//------------------------------------------------------------------------------
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------------------------
 
 using System.Configuration;
-using System.ComponentModel;
 
 namespace System.IdentityModel.Configuration
 {

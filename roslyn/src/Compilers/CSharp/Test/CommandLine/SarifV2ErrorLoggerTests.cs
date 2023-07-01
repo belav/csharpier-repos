@@ -7,13 +7,14 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+
+using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using Xunit;
-using static Microsoft.CodeAnalysis.CommonDiagnosticAnalyzers;
 using static Roslyn.Test.Utilities.SharedResourceHelpers;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
 {

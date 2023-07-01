@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+
 using Roslyn.Test.Utilities;
 using Xunit;
 using Xunit.Abstractions;

@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml.Xsl.XPath;
 using System.Xml.Xsl.Qil;
 using T = System.Xml.Xsl.XmlQueryTypeFactory;
+using System.Xml.Xsl.XPath;
 
 namespace System.Xml.Xsl.Xslt
 {

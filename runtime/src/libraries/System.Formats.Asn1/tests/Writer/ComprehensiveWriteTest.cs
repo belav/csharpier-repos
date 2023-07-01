@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Formats.Asn1.Tests.Reader;
+using X509KeyUsageCSharpStyle = System.Formats.Asn1.Tests.Reader.ReadNamedBitList.X509KeyUsageCSharpStyle;
 using System.Numerics;
+
 using Test.Cryptography;
 using Xunit;
-using X509KeyUsageCSharpStyle = System.Formats.Asn1.Tests.Reader.ReadNamedBitList.X509KeyUsageCSharpStyle;
 
 namespace System.Formats.Asn1.Tests.Writer
 {

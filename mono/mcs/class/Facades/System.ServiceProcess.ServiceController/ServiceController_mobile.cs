@@ -30,8 +30,7 @@
 
 #if MOBILE || XAMMAC_4_5
 
-using System;
-using System.Runtime.InteropServices;
+using System;using System.Runtime.InteropServices;
 
 namespace System.ServiceProcess
 {

@@ -29,9 +29,9 @@
 //
 
 using System;
-using System.Text;
 using System.Collections;
 using System.Reflection;
+using System.Text;
 using System.Xml.Schema;
 
 namespace System.Xml.Serialization

@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.VisualStudio.IntegrationTest.Utilities.Input;
 using Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType;
 using Roslyn.Utilities;

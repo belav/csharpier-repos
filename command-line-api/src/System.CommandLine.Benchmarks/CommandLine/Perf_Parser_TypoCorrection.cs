@@ -6,6 +6,7 @@ using System.CommandLine.Benchmarks.Helpers;
 using System.CommandLine.Parsing;
 using System.Linq;
 using System.Threading.Tasks;
+
 using BenchmarkDotNet.Attributes;
 
 namespace System.CommandLine.Benchmarks.CommandLine

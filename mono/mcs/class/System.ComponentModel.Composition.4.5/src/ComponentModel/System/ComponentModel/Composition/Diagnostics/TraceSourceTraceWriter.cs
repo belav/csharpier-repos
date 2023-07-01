@@ -3,9 +3,7 @@
 // -----------------------------------------------------------------------
 #if FEATURE_TRACING
 
-using System;
-using System.Diagnostics;
-using Microsoft.Internal;
+using System;using System.Diagnostics;using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Diagnostics
 {

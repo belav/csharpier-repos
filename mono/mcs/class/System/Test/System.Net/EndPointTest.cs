@@ -1,3 +1,6 @@
+using System;
+using System.Net;
+
 //
 // EndPointTest.cs - Unit tests for System.Net.EndPoint
 //
@@ -27,9 +30,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Net;
 
 namespace MonoTests.System.Net
 {

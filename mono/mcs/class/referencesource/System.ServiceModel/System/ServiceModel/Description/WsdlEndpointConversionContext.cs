@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.IO;
-    using System.ServiceModel.Channels;
-    using System.Xml;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
+    using System.ServiceModel.Channels;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
 
     public class WsdlEndpointConversionContext
     {

@@ -11,9 +11,9 @@
 namespace System.Reflection
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.Runtime.InteropServices;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

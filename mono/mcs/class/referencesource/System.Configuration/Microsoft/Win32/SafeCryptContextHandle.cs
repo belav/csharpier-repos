@@ -7,9 +7,10 @@
 namespace Microsoft.Win32
 {
     using System;
-    using System.Security.Permissions;
-    using Microsoft.Win32.SafeHandles;
     using System.Configuration;
+    using System.Security.Permissions;
+
+    using Microsoft.Win32.SafeHandles;
 
     // Safehandle for crypt context handles
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]

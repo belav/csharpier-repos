@@ -7,6 +7,8 @@ using System.Collections.Immutable;
 using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeLens;
 using Microsoft.CodeAnalysis.Editor;
@@ -21,7 +23,6 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
 using Microsoft.VisualStudio.Utilities;
 using Roslyn.Utilities;
-using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.CodeLens
 {

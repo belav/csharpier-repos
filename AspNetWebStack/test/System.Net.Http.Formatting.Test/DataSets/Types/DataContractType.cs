@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+
 using Microsoft.TestCommon.Types;
 
 namespace System.Net.Http.Formatting.DataSets.Types

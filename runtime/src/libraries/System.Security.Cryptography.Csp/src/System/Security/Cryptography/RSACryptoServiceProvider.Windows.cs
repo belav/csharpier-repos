@@ -5,10 +5,11 @@ using System.Buffers.Binary;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
+
 using Internal.Cryptography;
 using Internal.NativeCrypto;
-using Microsoft.Win32.SafeHandles;
 using static Internal.NativeCrypto.CapiHelper;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

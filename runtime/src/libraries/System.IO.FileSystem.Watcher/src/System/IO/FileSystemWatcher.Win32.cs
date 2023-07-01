@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Microsoft.Win32.SafeHandles;
 
 using FILE_NOTIFY_INFORMATION = Interop.Kernel32.FILE_NOTIFY_INFORMATION;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {

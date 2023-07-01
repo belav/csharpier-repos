@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.Contracts;
+
 using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
+
 using Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Navigation;
 using Microsoft.CodeAnalysis.Text;
 

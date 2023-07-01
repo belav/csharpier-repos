@@ -3,6 +3,7 @@
 
 using System;
 using System.Text;
+
 using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis

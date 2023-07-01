@@ -8,17 +8,16 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Xml.Schema;
-    using System.Collections;
-    using System.ComponentModel;
-    using System.Reflection;
-    using System.Configuration;
-    using System.Xml.Serialization.Configuration;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Xml.Schema;
     using System.Xml.Serialization.Advanced;
-
+    using System.Xml.Serialization.Configuration;
 #if DEBUG
     using System.Diagnostics;
 #endif

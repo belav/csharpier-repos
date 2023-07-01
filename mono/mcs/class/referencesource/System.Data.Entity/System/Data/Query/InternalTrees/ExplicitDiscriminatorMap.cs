@@ -1,4 +1,5 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections.Generic;
+//---------------------------------------------------------------------
 // <copyright file="ExplicitDiscriminatorMap.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -8,7 +9,6 @@
 //---------------------------------------------------------------------
 
 using System.Data.Metadata.Edm;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace System.Data.Query.InternalTrees

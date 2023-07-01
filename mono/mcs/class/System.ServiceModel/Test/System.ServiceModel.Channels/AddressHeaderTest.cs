@@ -7,6 +7,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels

@@ -17,10 +17,10 @@ namespace System.ServiceModel.Activities
     using System.ServiceModel.Activation;
     using System.ServiceModel.Activities.Configuration;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Activities.Diagnostics;
     using System.ServiceModel.Activities.Dispatcher;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Activities.Diagnostics;
     using System.Xml;
     using System.Xml.Linq;
 

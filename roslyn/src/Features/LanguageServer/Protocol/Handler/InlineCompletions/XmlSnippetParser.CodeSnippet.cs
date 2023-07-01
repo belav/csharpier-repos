@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 

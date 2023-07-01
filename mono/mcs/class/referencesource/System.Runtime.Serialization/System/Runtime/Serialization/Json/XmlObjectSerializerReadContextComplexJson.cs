@@ -11,8 +11,7 @@ namespace System.Runtime.Serialization.Json
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Xml;
+    using System.Text;using System.Xml;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerReadContextComplexJson : XmlObjectSerializerReadContextComplex

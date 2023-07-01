@@ -9,8 +9,8 @@ namespace System.ServiceModel.Channels
     using System.IO;
     using System.Runtime;
     using System.ServiceModel;
-    using System.Xml;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
+    using System.Xml;
 
     class HttpStreamMessage : Message
     {

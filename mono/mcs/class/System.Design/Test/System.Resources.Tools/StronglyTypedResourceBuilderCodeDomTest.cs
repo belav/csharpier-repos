@@ -1,3 +1,13 @@
+using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Resources.Tools;
+using System.Text.RegularExpressions;
+
+using Microsoft.CSharp;
 //
 // StronglyTypedResourceBuilderCodeDomTest.cs - tests a CodeCompileUnit
 // is correctly created for a test set of resources when calling main Create
@@ -30,15 +40,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Resources.Tools;
-using System.CodeDom;
-using Microsoft.CSharp;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Resources.Tools
 {

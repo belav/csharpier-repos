@@ -3,8 +3,9 @@
 
 using System.CommandLine.Collections;
 using System.CommandLine.Parsing;
-using FluentAssertions;
 using System.Linq;
+
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests

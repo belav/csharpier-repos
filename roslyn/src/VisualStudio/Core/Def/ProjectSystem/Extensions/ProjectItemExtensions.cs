@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
 using EnvDTE;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Extensions

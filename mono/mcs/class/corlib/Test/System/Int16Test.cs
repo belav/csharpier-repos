@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 // Int16Test.cs - NUnit Test Cases for the System.Int16 struct
 //
 // Mario Martinez (mariom925@home.om)
@@ -6,9 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Globalization;
 
 namespace MonoTests.System
 {

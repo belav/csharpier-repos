@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using ILLink.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;

@@ -6,6 +6,7 @@
 
 using System.Linq;
 using System.Runtime.ExceptionServices;
+
 using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
@@ -14,8 +15,8 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
 using Microsoft.VisualStudio.LanguageServices.UnitTests;
 using Microsoft.VisualStudio.LanguageServices.UnitTests.CodeModel;
-using Microsoft.VisualStudio.LanguageServices.UnitTests.CodeModel.Mocks;
 using static Microsoft.VisualStudio.LanguageServices.UnitTests.CodeModel.CodeModelTestHelpers;
+using Microsoft.VisualStudio.LanguageServices.UnitTests.CodeModel.Mocks;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
 {

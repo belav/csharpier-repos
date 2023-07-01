@@ -25,15 +25,14 @@
 
 using System;
 using System.Collections.Generic;
+
 using Newtonsoft.Json.Serialization;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Globalization;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Linq;
+using System.Globalization;using Newtonsoft.Json.Utilities;using Newtonsoft.Json.Linq;
 
 #nullable disable
 

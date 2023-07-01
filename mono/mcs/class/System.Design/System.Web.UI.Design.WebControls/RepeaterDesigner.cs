@@ -29,8 +29,8 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Windows.Forms.Design;
 using System.Web.UI.Design;
+using System.Windows.Forms.Design;
 
 namespace System.Web.UI.Design.WebControls
 {

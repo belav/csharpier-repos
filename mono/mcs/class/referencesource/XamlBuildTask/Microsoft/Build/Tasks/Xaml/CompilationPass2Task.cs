@@ -9,6 +9,7 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Linq;
     using System.Reflection;
     using System.Runtime;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using XamlBuildTask;

@@ -18,18 +18,19 @@ namespace System.Web.Caching
     using System.Configuration.Provider;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Web.Util;
-    using System.Web;
-    using Microsoft.Win32;
     using System.Security.Permissions;
-    using System.Globalization;
+    using System.Threading;
+    using System.Web;
     using System.Web.Configuration;
     using System.Web.Hosting;
     using System.Web.Management;
+    using System.Web.Util;
     using Debug = System.Web.Util.Debug;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     /// <para>Represents the method that will handle the <see langword='onRemoveCallback'/>

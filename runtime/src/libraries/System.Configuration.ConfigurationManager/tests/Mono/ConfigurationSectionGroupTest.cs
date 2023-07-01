@@ -29,9 +29,10 @@
 
 using System;
 using System.Configuration;
-using Xunit;
 
 using Config = System.Configuration.Configuration;
+
+using Xunit;
 
 namespace MonoTests.System.Configuration
 {

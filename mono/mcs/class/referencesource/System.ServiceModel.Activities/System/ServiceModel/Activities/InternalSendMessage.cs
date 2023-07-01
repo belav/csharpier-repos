@@ -15,9 +15,11 @@ namespace System.ServiceModel.Activities
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Runtime.Diagnostics;
+    using System.Runtime.DurableInstancing;
+    using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Principal;
     using System.ServiceModel;
-    using System.Runtime.Serialization;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Activities.Dispatcher;
     using System.ServiceModel.Activities.Tracking;
@@ -27,8 +29,6 @@ namespace System.ServiceModel.Activities
     using System.Transactions;
     using System.Xaml;
     using System.Xml.Linq;
-    using System.Runtime.DurableInstancing;
-    using System.Security;
 
     // InternalSendMessage encapsulates both the server and client send.  For the server
     // send it provides the ability to persist after correlations have been initialized

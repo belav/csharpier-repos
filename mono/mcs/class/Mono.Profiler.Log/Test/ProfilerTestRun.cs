@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+
 using Mono.Profiler.Log;
 
 namespace MonoTests.Mono.Profiler.Log

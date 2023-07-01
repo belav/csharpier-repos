@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 //
 // FileStyleUriParserTest.cs - Unit tests for System.FileStyleUriParser
 //
@@ -28,9 +31,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
 
 namespace MonoTests.System
 {

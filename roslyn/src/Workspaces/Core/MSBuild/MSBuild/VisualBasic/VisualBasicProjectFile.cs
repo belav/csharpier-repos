@@ -4,10 +4,11 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
+using MSB = Microsoft.Build;
 using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.CodeAnalysis.MSBuild.Build;
 using Microsoft.CodeAnalysis.MSBuild.Logging;
-using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.VisualBasic
 {

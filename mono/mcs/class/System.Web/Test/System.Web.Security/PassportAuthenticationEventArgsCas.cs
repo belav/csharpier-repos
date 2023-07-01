@@ -1,3 +1,11 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Principal;
+using System.Web;
+using System.Web.Security;
+
 //
 // PassportAuthenticationEventArgsCas.cs
 //	- CAS unit tests for System.Web.Security.PassportAuthenticationEventArgs
@@ -28,14 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Web;
-using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security
 {

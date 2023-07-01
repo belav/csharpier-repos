@@ -6,9 +6,8 @@
 
 namespace System.IO
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Waits for a change in the specified path.</para>

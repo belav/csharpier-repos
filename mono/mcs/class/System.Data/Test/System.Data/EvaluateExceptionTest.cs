@@ -1,3 +1,8 @@
+using System;
+using System.Data;
+using System.IO;
+using System.Text;
+
 // Authors:
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Text;
-using System.IO;
-using System.Data;
 
 //using GHTUtils;
 

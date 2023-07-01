@@ -274,12 +274,12 @@
 namespace System.Numerics
 {
     using System;
+    using Conditional = System.Diagnostics.ConditionalAttribute;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Security;
     using System.Text;
-    using Conditional = System.Diagnostics.ConditionalAttribute;
 
     internal static class BigNumber
     {

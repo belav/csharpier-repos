@@ -5,6 +5,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 

@@ -3,11 +3,11 @@
 //------------------------------------------------------------
 namespace System.IdentityModel
 {
-    using System.IO;
-    using System.Xml;
-    using System.Text;
     using System.Diagnostics;
+    using System.IO;
     using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
+    using System.Text;
+    using System.Xml;
 
     sealed class WrappedReader : DelegatingXmlDictionaryReader, IXmlLineInfo
     {

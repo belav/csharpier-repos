@@ -7,10 +7,11 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+
 using Microsoft.VisualStudio.IntegrationTest.Utilities;
+using ProjectUtils = Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils;
 using Xunit;
 using Xunit.Abstractions;
-using ProjectUtils = Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils;
 
 namespace Roslyn.VisualStudio.IntegrationTests
 {

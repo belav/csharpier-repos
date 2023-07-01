@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // ToolStripProgressBar.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Drawing;
-using System.ComponentModel;
 
 namespace System.Windows.Forms
 {

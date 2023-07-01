@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Runtime;
-    using System.ServiceModel.Diagnostics;
-    using System.Xml;
-    using System.IO;
-    using System.Runtime.Diagnostics;
-    using SMTD = System.ServiceModel.Diagnostics.Application.TD;
     using System.Diagnostics;
+    using System.IO;
+    using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.ServiceModel.Diagnostics;
+    using SMTD = System.ServiceModel.Diagnostics.Application.TD;
+    using System.Xml;
 
     class ByteStreamMessageEncoder
         : MessageEncoder,

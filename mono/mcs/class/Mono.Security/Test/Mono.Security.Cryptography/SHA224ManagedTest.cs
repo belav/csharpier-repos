@@ -1,3 +1,8 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
+using Mono.Security.Cryptography;
 //
 // SHA224ManagedTest.cs - NUnit Test Cases for SHA224Managed
 //
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
-using System.Text;
-using Mono.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

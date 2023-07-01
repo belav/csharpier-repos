@@ -9,10 +9,10 @@ namespace System.ServiceModel.Activities
     using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.Threading;
     using System.Transactions;
-    using SR2 = System.ServiceModel.Activities.SR;
 
     public class WorkflowUpdateableControlClient : ClientBase<IWorkflowUpdateableInstanceManagement>
     {

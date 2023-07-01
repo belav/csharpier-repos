@@ -3,9 +3,9 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
+using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {

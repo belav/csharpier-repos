@@ -6,12 +6,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+
 using Microsoft.AspNetCore.BrowserTesting;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.CommandLineUtils;
-using Newtonsoft.Json.Linq;
 using Microsoft.Playwright;
+using Newtonsoft.Json.Linq;
 using Templates.Test.Helpers;
 
 namespace BlazorTemplates.Tests;

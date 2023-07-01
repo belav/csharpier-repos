@@ -7,10 +7,11 @@
 
 namespace System.Runtime.Interop
 {
-    using Microsoft.Win32.SafeHandles;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
+
+    using Microsoft.Win32.SafeHandles;
 
     sealed class SafeEventLogWriteHandle : SafeHandleZeroOrMinusOneIsInvalid
     {

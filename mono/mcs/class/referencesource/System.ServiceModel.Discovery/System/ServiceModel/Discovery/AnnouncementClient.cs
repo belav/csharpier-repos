@@ -11,9 +11,9 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Discovery.Configuration;
+    using SR2 = System.ServiceModel.Discovery.SR;
     using System.Threading.Tasks;
     using System.Xml;
-    using SR2 = System.ServiceModel.Discovery.SR;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class AnnouncementClient : ICommunicationObject, IDisposable

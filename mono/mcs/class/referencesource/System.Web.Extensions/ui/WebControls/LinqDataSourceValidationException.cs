@@ -7,14 +7,14 @@
 // NOTE: Suppress messages for CA2126 and CA2114 work around FxCop bugs that are resolved in the latest FxCop release.
 namespace System.Web.UI.WebControls
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Web.Resources;
     using System.Web.DynamicData;
-    using System;
+    using System.Web.Resources;
 
     [SuppressMessage(
         "Microsoft.Security",

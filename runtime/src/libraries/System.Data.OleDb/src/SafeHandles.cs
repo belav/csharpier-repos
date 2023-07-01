@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data.Common;
+using static System.Data.Common.UnsafeNativeMethods;
 using System.Data.ProviderBase;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using static System.Data.Common.UnsafeNativeMethods;
 
 namespace System.Data.OleDb
 {

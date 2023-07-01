@@ -6,8 +6,8 @@ namespace System.ServiceModel
 {
     using System;
     using System.Globalization;
-    using System.Text;
     using System.Runtime.Serialization;
+    using System.Text;
 
     [DataContract]
     public class ExceptionDetail

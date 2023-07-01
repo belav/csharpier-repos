@@ -6,7 +6,11 @@ namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+
+    using CanonicalizationDriver = System.IdentityModel.CanonicalizationDriver;
     using System.IdentityModel.Policy;
+    using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
+    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.IO;
@@ -18,10 +22,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
-    using CanonicalizationDriver = System.IdentityModel.CanonicalizationDriver;
-    using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
-    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
     abstract class SspiNegotiationTokenProvider
         : NegotiationTokenProvider<SspiNegotiationTokenProviderState>

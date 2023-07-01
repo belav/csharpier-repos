@@ -23,8 +23,7 @@ namespace System.Data.Services.Client
 #else
     using System.Data.Services.Http;
 #endif
-    using System.Reflection;
-    using System.Collections;
+    using System.Reflection;using System.Collections;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",

@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using System.IO;
 using System.Text;
+
 using Microsoft.AspNetCore.SignalR.Internal;
 using Xunit;
 

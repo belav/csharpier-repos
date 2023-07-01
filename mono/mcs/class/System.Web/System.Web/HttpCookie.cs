@@ -1,3 +1,5 @@
+using System.Collections.Specialized;
+using System.Security.Permissions;
 //
 // System.Web.HttpCookie.cs
 //
@@ -30,8 +32,6 @@
 //
 
 using System.Text;
-using System.Collections.Specialized;
-using System.Security.Permissions;
 using System.Web.Configuration;
 
 namespace System.Web

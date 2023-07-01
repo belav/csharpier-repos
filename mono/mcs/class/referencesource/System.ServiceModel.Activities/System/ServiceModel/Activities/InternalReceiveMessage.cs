@@ -16,19 +16,19 @@ namespace System.ServiceModel.Activities
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.Diagnostics;
+    using System.Runtime.DurableInstancing;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Activities.Description;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Activities.Tracking;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Transactions;
-    using System.Xml.Linq;
-    using SR2 = System.ServiceModel.Activities.SR;
-    using System.Runtime.DurableInstancing;
-    using System.Security;
-    using System.ServiceModel.Description;
     using System.Xml;
+    using System.Xml.Linq;
 
     sealed class InternalReceiveMessage : NativeActivity
     {

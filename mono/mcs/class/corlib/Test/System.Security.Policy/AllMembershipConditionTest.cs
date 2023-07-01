@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Policy;
+
 //
 // AllMembershipConditionTest.cs - NUnit Test Cases for AllMembershipCondition
 //
@@ -27,9 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

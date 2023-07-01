@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Host;

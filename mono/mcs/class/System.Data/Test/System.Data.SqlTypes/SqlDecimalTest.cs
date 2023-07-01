@@ -1,3 +1,11 @@
+using System;
+using System.Data.SqlTypes;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+using System.Xml;
+using System.Xml.Serialization;
+
 //
 // SqlDecimalTest.cs - NUnit Test Cases for System.Data.SqlTypes.SqlDecimal
 //
@@ -33,13 +41,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Xml;
-using System.Data.SqlTypes;
-using System.Threading;
-using System.Globalization;
-using System.Xml.Serialization;
-using System.IO;
 
 namespace MonoTests.System.Data.SqlTypes
 {

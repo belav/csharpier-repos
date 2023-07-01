@@ -1,3 +1,6 @@
+using System;
+using System.Reflection;
+
 //
 // System.Random Test Cases
 //
@@ -29,8 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
 
 namespace MonoTests.System
 {

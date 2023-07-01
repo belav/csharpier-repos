@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
+
 using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting

@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Tests;
+
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.ComponentModel.Tests
 {

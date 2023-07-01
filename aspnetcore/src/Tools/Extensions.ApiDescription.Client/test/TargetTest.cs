@@ -4,6 +4,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.AspNetCore.Internal;
 using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Tools.Internal;

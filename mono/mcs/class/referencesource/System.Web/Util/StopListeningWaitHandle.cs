@@ -6,7 +6,6 @@
 
 namespace System.Web.Util
 {
-    using Microsoft.Win32.SafeHandles;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ConstrainedExecution;
@@ -14,6 +13,8 @@ namespace System.Web.Util
     using System.Security;
     using System.Threading;
     using System.Web.Hosting;
+
+    using Microsoft.Win32.SafeHandles;
 
     // This is a ManualResetEvent that corresponds to the OnGlobalStopListening event.
     internal sealed class StopListeningWaitHandle : WaitHandle

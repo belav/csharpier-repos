@@ -1,3 +1,10 @@
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Common.Utils;
+using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.PluralizationServices;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.Metadata.Edm;
 //---------------------------------------------------------------------
 // <copyright file="EntityModelSchemaGenerator.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,18 +15,12 @@
 //---------------------------------------------------------------------
 
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Xml;
-using System.Data.Common;
-using System.Data.Common.Utils;
-using System.Data.Metadata.Edm;
-using System.Data.Entity.Design.Common;
-using System.Data.Entity.Design.SsdlGenerator;
-using System.Reflection;
-using System.Data.Entity.Design.PluralizationServices;
-using Microsoft.Build.Utilities;
-using System.Runtime.Versioning;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Versioning;
+using System.Xml;
+
+using Microsoft.Build.Utilities;
 
 namespace System.Data.Entity.Design
 {

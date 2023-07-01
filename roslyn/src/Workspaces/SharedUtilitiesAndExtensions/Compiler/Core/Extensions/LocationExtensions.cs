@@ -4,6 +4,7 @@
 
 using System.Diagnostics;
 using System.Threading;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions

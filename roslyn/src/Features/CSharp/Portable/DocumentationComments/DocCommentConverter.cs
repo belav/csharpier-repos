@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.DocumentationComments;
 using Microsoft.CodeAnalysis.MetadataAsSource;

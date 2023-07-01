@@ -7,8 +7,8 @@
 
 namespace System.Xml.Schema
 {
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
 
     internal sealed class BitSet
     {

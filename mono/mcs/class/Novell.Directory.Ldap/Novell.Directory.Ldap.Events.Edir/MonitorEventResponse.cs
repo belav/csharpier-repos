@@ -1,3 +1,4 @@
+using Novell.Directory.Ldap.Asn1;
 /******************************************************************************
 * The MIT License
 * Copyright (c) 2003 Novell Inc.  www.novell.com
@@ -30,7 +31,6 @@
 //
 
 using Novell.Directory.Ldap.Rfc2251;
-using Novell.Directory.Ldap.Asn1;
 
 namespace Novell.Directory.Ldap.Events.Edir
 {

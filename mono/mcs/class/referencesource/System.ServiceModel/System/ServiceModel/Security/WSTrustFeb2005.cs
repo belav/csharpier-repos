@@ -5,32 +5,33 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using System.Threading;
-    using System.Xml;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
-    using System.Security.Cryptography.X509Certificates;
-    using System.ServiceModel.Security.Tokens;
+    using System.IO;
     using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
     using System.Runtime.Serialization;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
+
+    using KeyIdentifierClauseEntry = WSSecurityTokenSerializer.KeyIdentifierClauseEntry;
 
     using KeyIdentifierEntry = WSSecurityTokenSerializer.KeyIdentifierEntry;
-    using KeyIdentifierClauseEntry = WSSecurityTokenSerializer.KeyIdentifierClauseEntry;
-    using TokenEntry = WSSecurityTokenSerializer.TokenEntry;
     using StrEntry = WSSecurityTokenSerializer.StrEntry;
+    using TokenEntry = WSSecurityTokenSerializer.TokenEntry;
 
     class WSTrustFeb2005 : WSTrust
     {

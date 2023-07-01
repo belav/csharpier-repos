@@ -26,14 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.Globalization;
-using System.IO;
-using System.IdentityModel.Claims;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.Xml;
-using NUnit.Framework;
+using System;using System.Globalization;using System.IO;using System.IdentityModel.Claims;using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Common
 {

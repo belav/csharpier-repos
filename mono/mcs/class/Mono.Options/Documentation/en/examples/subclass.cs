@@ -1,6 +1,7 @@
 // Case-Insensitive and Concatenating OptionSet
 using System;
 using System.Collections.Generic;
+
 using Mono.Options;
 
 class DemoOptionSet : OptionSet

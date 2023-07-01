@@ -30,14 +30,14 @@
 namespace System.Threading
 {
     using System;
-    using System.Runtime.InteropServices;
+    using System.Collections.Concurrent;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics.Contracts;
-    using System.Collections.Concurrent;
 
     #region struct NativeOverlapped
 

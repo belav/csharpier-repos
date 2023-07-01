@@ -15,16 +15,16 @@ namespace System.Text.RegularExpressions
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Threading;
 
     /*
      * RegexDynamicModule

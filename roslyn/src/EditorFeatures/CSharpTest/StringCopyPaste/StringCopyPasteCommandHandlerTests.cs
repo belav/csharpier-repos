@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste;
 using Microsoft.CodeAnalysis.Editor.StringCopyPaste;
 using Microsoft.CodeAnalysis.Editor.UnitTests;

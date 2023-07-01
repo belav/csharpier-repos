@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
 //
 // HMACMD5Test.cs - NUnit Test Cases for HMACMD5
 //
@@ -10,10 +15,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

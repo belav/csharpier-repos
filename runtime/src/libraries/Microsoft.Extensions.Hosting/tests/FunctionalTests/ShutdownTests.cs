@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Hosting.IntegrationTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Test;

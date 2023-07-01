@@ -6,17 +6,17 @@
 
 namespace System.Configuration
 {
+    using System.Collections;
     using System.Configuration.Internal;
     using System.Globalization;
-    using System.Collections;
     using System.IO;
-    using System.Xml;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Threading;
     using System.Net;
     using Assembly = System.Reflection.Assembly;
+    using System.Security;
+    using System.Security.Permissions;
     using StringBuilder = System.Text.StringBuilder;
+    using System.Threading;
+    using System.Xml;
 
     internal sealed class ClientConfigurationSystem : IInternalConfigSystem
     {

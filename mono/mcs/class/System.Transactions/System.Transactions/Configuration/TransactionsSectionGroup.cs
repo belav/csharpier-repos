@@ -9,10 +9,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Text;
+using System;using System.Collections.Generic;using System.Configuration;using System.Text;
 
 namespace System.Transactions.Configuration
 {

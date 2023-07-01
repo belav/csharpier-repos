@@ -28,10 +28,7 @@
 
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
 
-using System;
-using System.Security;
-
-using NUnit.Framework;
+using System;using System.Security;using NUnit.Framework;
 
 namespace MonoTests.System
 {

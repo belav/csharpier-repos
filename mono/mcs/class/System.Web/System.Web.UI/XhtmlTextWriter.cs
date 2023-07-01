@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // XhtmlTextWriter.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using System.IO;
-using System.Collections;
 
 namespace System.Web.UI
 {

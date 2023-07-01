@@ -6,8 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using Xunit;
 using static System.TestHelpers;
+
+using Xunit;
 
 namespace System.SpanTests
 {

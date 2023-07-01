@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Reflection.Metadata;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis.Symbols;
 

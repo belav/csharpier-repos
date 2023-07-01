@@ -9,6 +9,7 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Runtime.InteropServices.ComTypes;
+
 using DSR::Microsoft.DiaSymReader;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;

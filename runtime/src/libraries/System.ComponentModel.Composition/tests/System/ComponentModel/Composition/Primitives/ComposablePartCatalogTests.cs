@@ -5,6 +5,7 @@ using System.ComponentModel.Composition.Factories;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.UnitTesting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition

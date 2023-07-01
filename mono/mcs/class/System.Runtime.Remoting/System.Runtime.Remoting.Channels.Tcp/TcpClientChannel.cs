@@ -31,8 +31,8 @@
 using System.Collections;
 using System.IO;
 using System.Net.Sockets;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 
 namespace System.Runtime.Remoting.Channels.Tcp

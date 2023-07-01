@@ -30,9 +30,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
@@ -41,15 +39,7 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
-using Newtonsoft.Json.Tests.TestObjects.Organization;
-using System.Reflection;
-using Newtonsoft.Json.Utilities;
-using System.Globalization;
-using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Tests.TestObjects;using Newtonsoft.Json.Tests.TestObjects.Organization;using System.Reflection;using Newtonsoft.Json.Utilities;using System.Globalization;using Newtonsoft.Json.Linq;using System.Text.RegularExpressions;using Newtonsoft.Json.Converters;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {

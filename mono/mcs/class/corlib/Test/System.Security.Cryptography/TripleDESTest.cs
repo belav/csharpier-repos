@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // TripleDESTest.cs - NUnit Test Cases for TripleDES
 //
@@ -27,8 +30,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using ILLink.Shared;
 using ILLink.Shared.TrimAnalysis;
 using ILLink.Shared.TypeSystemProxy;

@@ -9,17 +9,17 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Security.Permissions;
-    using System.IO;
-    using System.Collections;
-    using System.Globalization;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Web.Hosting;
-    using System.Web.Util;
-    using System.Web.UI;
-    using System.Web.Configuration;
+    using System.Collections;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Security.Permissions;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.UI;
+    using System.Web.Util;
 
     /*
      * This class describes a CodeDom compiler, along with the parameters that it uses.

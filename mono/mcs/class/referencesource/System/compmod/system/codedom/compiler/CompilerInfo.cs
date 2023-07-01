@@ -9,12 +9,12 @@
 namespace System.CodeDom.Compiler
 {
     using System;
+    using System.CodeDom.Compiler;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Reflection;
     using System.Security.Permissions;
-    using System.CodeDom.Compiler;
-    using System.Configuration;
-    using System.Collections.Generic;
-    using System.Diagnostics;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
     public sealed class CompilerInfo

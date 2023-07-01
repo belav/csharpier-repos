@@ -18,11 +18,11 @@
 // Note: This file was generated without #define SILVERLIGHT
 
 using System;
-using System.IO;
-using System.Xml;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Xml;
 
 namespace System.Xml
 {

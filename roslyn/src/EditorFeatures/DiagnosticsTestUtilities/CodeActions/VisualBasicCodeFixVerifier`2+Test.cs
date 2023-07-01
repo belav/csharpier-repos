@@ -7,17 +7,15 @@ using System.Collections.Immutable;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Testing;
 using Xunit;
-
 #if !CODE_STYLE
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.Text;
-using Roslyn.Utilities;
+using Microsoft.CodeAnalysis.CodeActions;using Microsoft.CodeAnalysis.Text;using Roslyn.Utilities;
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

@@ -10,11 +10,12 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Text;
+
 using ILCompiler.Diagnostics;
 using ILCompiler.Reflection.ReadyToRun;
+using OperatingSystem = ILCompiler.Reflection.ReadyToRun.OperatingSystem;
 using Internal.Runtime;
 using Internal.TypeSystem;
-using OperatingSystem = ILCompiler.Reflection.ReadyToRun.OperatingSystem;
 
 namespace R2RDump
 {

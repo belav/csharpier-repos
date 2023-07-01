@@ -4,9 +4,9 @@
 #define DEBUG //make sure the Contract calls actually do something
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 public static class MonitorIsHeldTest
 {

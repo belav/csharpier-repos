@@ -12,8 +12,10 @@ using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Completion;
+using RoslynCompletion = Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
 using Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
@@ -32,7 +34,6 @@ using Moq;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
-using RoslynCompletion = Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
 {

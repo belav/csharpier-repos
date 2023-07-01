@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Factories;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition

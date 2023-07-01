@@ -26,8 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;
 #endif
 using System.ServiceModel.Security;
 

@@ -29,13 +29,14 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Xml;
+
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
 using NUnit.Framework;
-using System.Xml;
 
 namespace MonoTests.Microsoft.Build.Execution
 {

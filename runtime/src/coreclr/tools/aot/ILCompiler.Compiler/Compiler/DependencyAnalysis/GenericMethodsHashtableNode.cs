@@ -4,9 +4,10 @@
 using System;
 using System.Diagnostics;
 
+using Internal.NativeFormat;
+
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.NativeFormat;
 
 namespace ILCompiler.DependencyAnalysis
 {

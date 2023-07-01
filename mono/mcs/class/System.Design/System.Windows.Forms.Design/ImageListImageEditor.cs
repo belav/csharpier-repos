@@ -30,9 +30,7 @@
 
 #if DRAWING_DESIGN_DEP
 
-using System;
-using System.ComponentModel;
-using System.Drawing.Design;
+using System;using System.ComponentModel;using System.Drawing.Design;
 
 namespace System.Windows.Forms.Design
 {

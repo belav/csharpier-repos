@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.Net;
+using Socks = System.Net.Sockets;
+using System.Runtime.Serialization;
+using System.Threading;
+
+using MonoTests.Helpers;
 //
 // WebRequestTest.cs - NUnit Test Cases for System.Net.WebRequest
 //
@@ -11,13 +19,6 @@
 //
 
 using NUnit.Framework;
-using MonoTests.Helpers;
-using System;
-using System.Net;
-using System.Threading;
-using System.Collections;
-using System.Runtime.Serialization;
-using Socks = System.Net.Sockets;
 
 namespace MonoTests.System.Net
 {

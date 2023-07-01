@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using System.Web.WebPages.Resources;
+
 using Microsoft.TestCommon;
 using Moq;
 

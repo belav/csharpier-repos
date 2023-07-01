@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpStaticObjectsCollectionCas.cs
 //	- CAS unit tests for System.Web.HttpStaticObjectsCollection
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

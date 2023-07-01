@@ -8,11 +8,12 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
-    using System.Xml;
-    using System.Xml.XPath;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
     using System.Xml.Xsl;
+
     using FT = MS.Internal.Xml.XPath.Function.FunctionType;
 
     internal sealed class NodeFunctions : ValueQuery

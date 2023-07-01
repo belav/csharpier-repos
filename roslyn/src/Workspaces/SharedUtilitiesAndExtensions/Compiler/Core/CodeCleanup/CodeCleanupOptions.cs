@@ -1,21 +1,20 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿using System.Runtime.Serialization;
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Simplification;
+
 using Microsoft.CodeAnalysis.AddImport;
 using Microsoft.CodeAnalysis.CodeActions;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Options;
-
+using Microsoft.CodeAnalysis.Simplification;
+using Roslyn.Utilities;
 #if !CODE_STYLE
-using Microsoft.CodeAnalysis.Host;
-using Microsoft.CodeAnalysis.OrganizeImports;
+using Microsoft.CodeAnalysis.Host;using Microsoft.CodeAnalysis.OrganizeImports;
 #endif
 
 namespace Microsoft.CodeAnalysis.CodeCleanup;

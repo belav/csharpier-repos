@@ -7,6 +7,7 @@
 using System.Collections.Immutable;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Test.Utilities

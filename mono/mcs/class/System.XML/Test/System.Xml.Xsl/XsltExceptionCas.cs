@@ -1,3 +1,10 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+using System.Xml.Xsl;
+
 //
 // XsltExceptionCas.cs - CAS unit tests for System.Xml.Xsl.XsltException
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Xml.Xsl;
 
 namespace MonoCasTests.System.Xml.Xsl
 {

@@ -28,6 +28,7 @@
 
 using System;
 using System.Text;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities

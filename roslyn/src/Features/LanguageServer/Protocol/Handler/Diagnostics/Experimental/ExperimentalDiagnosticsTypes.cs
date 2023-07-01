@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -15,10 +16,6 @@ using DocumentDiagnosticReport = SumType<
     FullDocumentDiagnosticReport,
     UnchangedDocumentDiagnosticReport
 >;
-using WorkspaceDocumentDiagnosticReport = SumType<
-    WorkspaceFullDocumentDiagnosticReport,
-    WorkspaceUnchangedDocumentDiagnosticReport
->;
 
 // A document diagnostic partial report is defined as having the first literal send = DocumentDiagnosticReport (aka the sumtype of changed / unchanged) followed
 // by n DocumentDiagnosticPartialResult literals.
@@ -27,6 +24,10 @@ using DocumentDiagnosticPartialReport = SumType<
     FullDocumentDiagnosticReport,
     UnchangedDocumentDiagnosticReport,
     DocumentDiagnosticPartialResult
+>;
+using WorkspaceDocumentDiagnosticReport = SumType<
+    WorkspaceFullDocumentDiagnosticReport,
+    WorkspaceUnchangedDocumentDiagnosticReport
 >;
 
 internal class DocumentDiagnosticParams : IPartialResultParams<DocumentDiagnosticPartialReport[]>

@@ -5,6 +5,7 @@ using System.IO;
 using System.Web.Razor.Text;
 using System.Web.Razor.Tokenizer;
 using System.Web.Razor.Tokenizer.Symbols;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.Razor.Test.Tokenizer

@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using BenchmarkDotNet.Attributes;
 using Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders;
 using Microsoft.EntityFrameworkCore.Storage;

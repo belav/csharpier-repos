@@ -16,13 +16,13 @@ namespace System.IdentityModel.Tokens
     using System.Linq;
     using System.Runtime;
     using System.Security.Claims;
+    using Claim = System.Security.Claims.Claim;
+    using ClaimTypes = System.Security.Claims.ClaimTypes;
     using System.Security.Cryptography;
     using System.Security.Principal;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
-    using Claim = System.Security.Claims.Claim;
-    using ClaimTypes = System.Security.Claims.ClaimTypes;
 
     /// <summary>
     /// This class implements a SecurityTokenHandler for a Saml11 token.  It contains functionality for: Creating, Serializing and Validating

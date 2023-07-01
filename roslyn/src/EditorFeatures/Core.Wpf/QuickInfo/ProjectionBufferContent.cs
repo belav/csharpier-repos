@@ -7,6 +7,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Options;

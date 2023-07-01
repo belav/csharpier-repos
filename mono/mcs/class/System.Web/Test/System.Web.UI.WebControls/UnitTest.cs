@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.Threading;
+using System.Web;
+using System.Web.UI.WebControls;
+
 //
 // Tests for System.Web.UI.WebControls.Unit.cs
 //
@@ -29,11 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Threading;
-using System.Web;
-using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

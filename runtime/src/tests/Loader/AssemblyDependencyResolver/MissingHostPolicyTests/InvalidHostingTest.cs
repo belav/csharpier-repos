@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Runtime.Loader;
+
 using Xunit;
 
 namespace AssemblyDependencyResolverTests

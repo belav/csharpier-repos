@@ -26,9 +26,9 @@
 #undef debug
 
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Mono.Mozilla
 {

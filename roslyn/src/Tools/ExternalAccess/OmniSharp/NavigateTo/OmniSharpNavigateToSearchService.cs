@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Navigation;
 using Microsoft.CodeAnalysis.NavigateTo;
 using Microsoft.CodeAnalysis.Shared.TestHooks;

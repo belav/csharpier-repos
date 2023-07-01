@@ -31,10 +31,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Remoting.Messaging
 {

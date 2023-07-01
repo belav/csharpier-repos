@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+using System.Xml.Xsl;
+
 //
 // XmlSchemaExceptionCas.cs
 //	- CAS unit tests for System.Xml.Schema.XmlSchemaException
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Xml.Xsl;
 
 namespace MonoCasTests.System.Xml.Xsl
 {

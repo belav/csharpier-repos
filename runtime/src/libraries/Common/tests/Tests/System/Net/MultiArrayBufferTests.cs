@@ -3,8 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Linq;
+using System.Net;
+
 using Xunit;
 
 namespace Tests.System.Net

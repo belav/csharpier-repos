@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 

@@ -9,8 +9,8 @@ namespace System.Xml
 {
     using System;
     using System.IO;
-    using System.Text;
     using System.Runtime.Versioning;
+    using System.Text;
 
     // Represents a writer that will make it possible to work with prefixes even
     // if the namespace is not specified.

@@ -7,16 +7,7 @@
 
 #nullable enable
 
-using System;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Xml;
-using System.Xml.Serialization;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
+using System;using System.Collections.Immutable;using System.IO;using System.Linq;using System.Text;using System.Threading;using System.Xml;using System.Xml.Serialization;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.Text;
 
 namespace CSharpSyntaxGenerator
 {

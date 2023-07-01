@@ -8,9 +8,10 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Threading;
 using Lock = Microsoft.Internal.Lock;
 
 namespace System.ComponentModel.Composition.Hosting

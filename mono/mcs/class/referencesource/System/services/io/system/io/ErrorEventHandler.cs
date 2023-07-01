@@ -6,9 +6,9 @@
 
 namespace System.IO
 {
-    using System.Diagnostics;
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Represents the method that will

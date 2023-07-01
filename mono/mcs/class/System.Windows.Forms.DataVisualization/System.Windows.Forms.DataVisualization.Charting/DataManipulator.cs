@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 // Authors:
 // Francis Fisher (frankie@terrorise.me.uk)
 //
@@ -23,7 +24,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Data;
-using System.Collections.Generic;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {

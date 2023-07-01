@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.IdentityModel.Protocols.WSTrust;
+using STS = System.IdentityModel.SecurityTokenService;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using SecurityTokenTypes = System.IdentityModel.Tokens.SecurityTokenTypes;
-using STS = System.IdentityModel.SecurityTokenService;
 using System.Security.Cryptography.X509Certificates;
-using System.IdentityModel.Protocols.WSTrust;
 
 namespace System.IdentityModel.Configuration
 {

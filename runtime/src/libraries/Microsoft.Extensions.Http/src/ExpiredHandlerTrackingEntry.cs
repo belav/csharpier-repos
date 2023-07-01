@@ -3,6 +3,7 @@
 
 using System;
 using System.Net.Http;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Http

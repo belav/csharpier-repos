@@ -12,10 +12,10 @@
 
 namespace System.Web
 {
-    using System.Text;
     using System.Runtime.InteropServices;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>Provides a type-safe way to vary by Content-Encoding.</para>

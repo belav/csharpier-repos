@@ -1,3 +1,12 @@
+using System;
+using System.CodeDom.Compiler;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
+using MonoTests.System.CodeDom.Compiler;
 //
 // ExecutorCas.cs
 //	- CAS unit tests for System.CodeDom.Compiler.Executor
@@ -28,16 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-
-using MonoTests.System.CodeDom.Compiler;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

@@ -1,3 +1,4 @@
+using System.Globalization;
 //
 // System.Security.AccessControl.ObjectAce implementation
 //
@@ -31,7 +32,6 @@
 //
 
 using System.Security.Principal;
-using System.Globalization;
 
 namespace System.Security.AccessControl
 {

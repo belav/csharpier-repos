@@ -4,15 +4,7 @@
 
 #if !NETCOREAPP
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using Roslyn.Utilities;
+using System;using System.Collections.Generic;using System.Collections.Immutable;using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.Linq;using System.Reflection;using System.Threading;using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {

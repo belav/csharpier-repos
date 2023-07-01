@@ -1,3 +1,10 @@
+using System;
+using System.CodeDom;
+using System.Collections;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // CodeNamespaceImportCollectionCas.cs
 //	- CAS unit tests for System.CodeDom.CodeNamespaceImportCollection
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.Collections;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom
 {

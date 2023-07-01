@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.DocumentationComments;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api

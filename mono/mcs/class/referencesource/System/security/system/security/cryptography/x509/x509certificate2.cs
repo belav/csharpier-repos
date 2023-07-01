@@ -16,15 +16,15 @@ namespace System.Security.Cryptography.X509Certificates
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Text;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
-    using System.Runtime.Serialization;
-    using System.Security.Cryptography;
-    using System.Security.Permissions;
-    using System.Runtime.Versioning;
 
     using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security.Cryptography;
+    using System.Security.Permissions;
+    using System.Text;
 
     public enum X509NameType
     {

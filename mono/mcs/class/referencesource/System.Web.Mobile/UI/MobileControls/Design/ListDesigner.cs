@@ -15,13 +15,13 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Text;
     using System.Web.UI;
+
+    using DataBinding = System.Web.UI.DataBinding;
     using System.Web.UI.Design;
+    using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.MobileControls;
     using System.Web.UI.WebControls;
     using System.Windows.Forms;
-    using System.Web.UI.Design.MobileControls.Adapters;
-
-    using DataBinding = System.Web.UI.DataBinding;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

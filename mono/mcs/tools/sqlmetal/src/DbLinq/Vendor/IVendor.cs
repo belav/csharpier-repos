@@ -1,4 +1,5 @@
-﻿#region MIT license
+﻿using System.Collections.Generic;
+#region MIT license
 //
 // MIT license
 //
@@ -26,18 +27,13 @@
 
 using System.Data;
 using System.Reflection;
-using System.Collections.Generic;
-
 #if MONO_STRICT
-using DataContext = System.Data.Linq.DataContext;
-using System.Data.Linq;
+using DataContext = System.Data.Linq.DataContext;using System.Data.Linq;
 #else
 using DataContext = DbLinq.Data.Linq.DataContext;
 #endif
 
-using Data = DbLinq.Data;
-using DbLinq.Data.Linq;
-using IExecuteResult = System.Data.Linq.IExecuteResult;
+using Data = DbLinq.Data;using DbLinq.Data.Linq;using IExecuteResult = System.Data.Linq.IExecuteResult;
 
 namespace DbLinq.Vendor
 {

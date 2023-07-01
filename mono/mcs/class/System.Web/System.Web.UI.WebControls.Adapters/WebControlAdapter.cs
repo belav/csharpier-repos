@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.WebControls.Adapters.WebControlAdapter
 //
@@ -28,9 +29,8 @@
 
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.ComponentModel;
 using System.Web.UI.Adapters;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.WebControls.Adapters
 {

@@ -13,30 +13,26 @@
 //
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Text;
-using System.Diagnostics;
-using Mono.CompilerServices.SymbolWriter;
 
+using Mono.CompilerServices.SymbolWriter;
 #if MOBILE
 using XmlElement = System.Object;
 #endif
 
 #if STATIC
-using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;
-using IKVM.Reflection;
-using IKVM.Reflection.Emit;
+using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;using IKVM.Reflection;using IKVM.Reflection.Emit;
 #else
 using SecurityType = System.Collections.Generic.Dictionary<
     System.Security.Permissions.SecurityAction,
     System.Security.PermissionSet
->;
-using System.Reflection;
-using System.Reflection.Emit;
+>;using System.Reflection;using System.Reflection.Emit;
 #endif
 
 namespace Mono.CSharp

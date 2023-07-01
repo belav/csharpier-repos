@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Text;
+
 //
 // Mono.Data.Tds.Protocol.Tds50.cs
 //
@@ -29,9 +33,6 @@
 //
 
 using Mono.Data.Tds;
-using System;
-using System.Text;
-using System.Security;
 
 namespace Mono.Data.Tds.Protocol
 {

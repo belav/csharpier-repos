@@ -29,6 +29,7 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel

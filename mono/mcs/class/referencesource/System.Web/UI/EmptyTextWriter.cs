@@ -1,9 +1,5 @@
 #if WMLSUPPORT
-using System;
-using System.CodeDom.Compiler;
-using System.Collections;
-using System.IO;
-using System.Text;
+using System;using System.CodeDom.Compiler;using System.Collections;using System.IO;using System.Text;
 
 namespace System.Web.UI
 {

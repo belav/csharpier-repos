@@ -4,10 +4,10 @@
 namespace System.Activities.Statements
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime;
-    using System.Collections.ObjectModel;
     using SA = System.Activities;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
 
     sealed class DefaultCompensation : NativeActivity
     {

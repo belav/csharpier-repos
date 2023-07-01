@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Diagnostics.Contracts;
 //
 // System.Security.SecurityElement.cs
 //
@@ -30,10 +32,8 @@
 //
 
 using System.Globalization;
-using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Diagnostics.Contracts;
 
 using Mono.Xml;
 

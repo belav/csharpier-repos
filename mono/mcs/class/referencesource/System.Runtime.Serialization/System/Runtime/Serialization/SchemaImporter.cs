@@ -7,14 +7,6 @@ namespace System.Runtime.Serialization
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
-    using System.Security;
-    using System.Runtime.Diagnostics;
-    using System.Xml;
-    using System.Xml.Schema;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
@@ -23,7 +15,15 @@ namespace System.Runtime.Serialization
         System.Xml.XmlQualifiedName,
         SchemaObjectInfo
     >;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Diagnostics;
     using System.Runtime.Serialization.Diagnostics;
+    using System.Security;
+    using System.Xml;
+    using System.Xml.Schema;
 
     class SchemaImporter
     {

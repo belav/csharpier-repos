@@ -1,3 +1,11 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
+
+using MonoTests.System.Security.Cryptography.X509Certificates;
 //
 // X509CertificateCollectionCas.cs - CAS unit tests for
 //	System.Security.Cryptography.X509Certificates.X509CertificateCollection
@@ -28,15 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-
-using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates
 {

@@ -93,17 +93,18 @@ Details:
 --*/
 namespace System.IdentityModel
 {
-    using System.Security;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Threading;
-    using System.Security.Permissions;
     using System.ComponentModel;
-    using System.Text;
-    using System.ServiceModel.Diagnostics;
-    using Microsoft.Win32.SafeHandles;
+    using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Threading;
+
+    using Microsoft.Win32.SafeHandles;
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct SSPIHandle

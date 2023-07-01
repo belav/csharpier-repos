@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using static System.Formats.Tar.Tests.TarTestsBase;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+
 using Xunit;
-using static System.Formats.Tar.Tests.TarTestsBase;
 
 namespace System.Formats.Tar.Tests
 {

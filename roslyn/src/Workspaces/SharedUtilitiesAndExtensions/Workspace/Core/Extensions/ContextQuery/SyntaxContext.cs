@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.LanguageService;
 

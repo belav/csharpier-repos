@@ -1,3 +1,7 @@
+using System;
+using System.Data;
+using System.Data.Common;
+
 // DataTableMappingCollectionTest.cs - NUnit Test Cases for Testing the
 // DataTableMappingCollection class
 //
@@ -30,9 +34,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.Common;
 
 namespace MonoTests.System.Data.Common
 {

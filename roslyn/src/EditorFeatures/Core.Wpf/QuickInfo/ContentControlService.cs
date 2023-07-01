@@ -10,6 +10,7 @@ using System.Composition;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Preview;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;

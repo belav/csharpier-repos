@@ -4,14 +4,7 @@
 
 #if BOOTSTRAP
 
-using System;
-using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using Microsoft.Build.Utilities;
-using Roslyn.Utilities;
+using System;using System.Collections.Concurrent;using System.Diagnostics.CodeAnalysis;using System.IO;using System.Linq;using System.Threading;using Microsoft.Build.Utilities;using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.BuildTasks
 {

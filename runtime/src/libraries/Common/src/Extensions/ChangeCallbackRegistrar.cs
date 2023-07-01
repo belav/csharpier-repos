@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.Extensions.Internal

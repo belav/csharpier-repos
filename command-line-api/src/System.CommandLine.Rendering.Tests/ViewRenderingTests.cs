@@ -6,6 +6,7 @@ using System.CommandLine.Parsing;
 using System.CommandLine.Rendering.Views;
 using System.CommandLine.Tests.Utility;
 using System.Drawing;
+
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;

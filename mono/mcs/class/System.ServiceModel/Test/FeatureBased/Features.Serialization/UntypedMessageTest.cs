@@ -1,11 +1,5 @@
 ﻿#if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
-using Proxy.MonoTests.Features.Client;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
+using System;using System.Collections.Generic;using System.Text;using NUnit.Framework;using Proxy.MonoTests.Features.Client;using System.ServiceModel;using System.ServiceModel.Channels;
 
 namespace MonoTests.Features.Serialization
 {

@@ -3,8 +3,8 @@
 
 using System.Globalization;
 using System.Text;
-using Microsoft.AspNetCore.Testing;
 
+using Microsoft.AspNetCore.Testing;
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 

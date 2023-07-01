@@ -1,11 +1,5 @@
 #if !MOBILE
-using System;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-
-using NUnit.Framework;
+using System;using System.Collections.Generic;using System.ServiceModel;using System.ServiceModel.Dispatcher;using System.Text;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {

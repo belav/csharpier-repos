@@ -12,12 +12,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 using SetTriad = System.Tuple<
     System.Collections.Generic.IEnumerable<int>,
     System.Collections.Generic.IEnumerable<int>,
     bool
 >;
+
+using Xunit;
 
 #pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
 #pragma warning disable RS0002 // Use 'SpecializedCollections.SingletonEnumerable()'

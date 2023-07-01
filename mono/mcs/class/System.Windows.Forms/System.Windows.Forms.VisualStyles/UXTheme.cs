@@ -1,3 +1,4 @@
+using System.Drawing;
 //
 // UXTheme.cs
 // - Internal class for P/Invokes to uxtheme.dll
@@ -28,7 +29,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 

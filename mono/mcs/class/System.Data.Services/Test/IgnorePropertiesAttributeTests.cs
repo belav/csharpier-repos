@@ -29,6 +29,7 @@
 using System;
 using System.Data.Services;
 using System.Linq;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Services

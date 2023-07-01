@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue

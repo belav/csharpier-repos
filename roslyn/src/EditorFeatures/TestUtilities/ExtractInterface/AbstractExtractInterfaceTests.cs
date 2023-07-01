@@ -6,6 +6,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Test.Utilities;

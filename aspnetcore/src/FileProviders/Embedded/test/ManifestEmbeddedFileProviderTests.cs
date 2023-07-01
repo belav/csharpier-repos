@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Linq;
+
 using Microsoft.Extensions.FileProviders.Embedded.Manifest;
 using Xunit;
 

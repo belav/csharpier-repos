@@ -8,9 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Dynamic.Utils;
 using System.Linq.Expressions;
+using AstUtils = System.Linq.Expressions.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using AstUtils = System.Linq.Expressions.Utils;
 
 namespace System.Dynamic
 {

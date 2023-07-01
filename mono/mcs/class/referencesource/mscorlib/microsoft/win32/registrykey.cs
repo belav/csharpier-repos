@@ -59,17 +59,7 @@ namespace Microsoft.Win32
 #if FEATURE_MACL
     using System.Security.AccessControl;
 #endif
-    using System.Security.Permissions;
-    using System.Text;
-    using System.Threading;
-    using System.IO;
-    using System.Runtime.Remoting;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32.SafeHandles;
-    using System.Runtime.Versioning;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Security.Permissions;using System.Text;using System.Threading;using System.IO;using System.Runtime.Remoting;using System.Runtime.InteropServices;using Microsoft.Win32.SafeHandles;using System.Runtime.Versioning;using System.Globalization;using System.Diagnostics.Contracts;using System.Diagnostics.CodeAnalysis;
 
 #if !FEATURE_PAL
 

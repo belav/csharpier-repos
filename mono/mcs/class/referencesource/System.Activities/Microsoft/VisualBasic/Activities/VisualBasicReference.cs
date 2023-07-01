@@ -5,16 +5,16 @@
 namespace Microsoft.VisualBasic.Activities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Activities;
-    using System.Activities.Expressions;
     using System.Activities.ExpressionParser;
+    using System.Activities.Expressions;
     using System.Activities.XamlIntegration;
-    using System.Linq.Expressions;
-    using System.Windows.Markup;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Linq.Expressions;
     using System.Runtime;
+    using System.Windows.Markup;
 
     [DebuggerStepThrough]
     public sealed class VisualBasicReference<TResult>

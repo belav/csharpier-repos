@@ -6,12 +6,12 @@ namespace System.IdentityModel.Tokens
 {
     using System;
     using System.Collections.Generic;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Security.Tokens;
-    using System.Xml;
     using KeyIdentifierClauseEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierClauseEntry;
     using StrEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.StrEntry;
     using TokenEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.TokenEntry;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     class WSSecurityXXX2005 : WSSecurityJan2004
     {

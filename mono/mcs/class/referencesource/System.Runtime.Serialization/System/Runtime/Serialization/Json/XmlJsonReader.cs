@@ -9,10 +9,7 @@ namespace System.Runtime.Serialization.Json
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Xml;
+    using System.Text;using System.Runtime.Serialization;using System.Collections.Generic;using System.Xml;
 
     class XmlJsonReader : XmlBaseReader, IXmlJsonReaderInitializer
     {

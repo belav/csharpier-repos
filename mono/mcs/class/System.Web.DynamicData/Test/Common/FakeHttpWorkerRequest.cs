@@ -1,4 +1,7 @@
-﻿//
+﻿using System;
+using System.Collections;
+using System.Collections.Specialized;
+//
 // System.Web.HttpResponseTest.cs - Unit tests for System.Web.HttpResponse
 //
 // Author:
@@ -28,9 +31,7 @@
 
 using System.Text;
 using System.Web;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
+
 using NUnit.Framework;
 
 namespace MonoTests.Common

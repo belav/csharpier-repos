@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInternalUsageDiagnosticsAnalyzerTest

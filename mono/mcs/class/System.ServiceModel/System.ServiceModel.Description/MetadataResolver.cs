@@ -29,16 +29,16 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Text;
 using System.Web.Services.Description;
 using System.Web.Services.Discovery;
 using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Net;
-using System.IO;
-using System.Text;
 
 using QName = System.Xml.XmlQualifiedName;
 

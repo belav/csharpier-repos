@@ -14,8 +14,7 @@
  * ***************************************************************************/
 
 #if CLR2
-using Microsoft.Scripting.Ast;
-using Microsoft.Scripting.Utils;
+using Microsoft.Scripting.Ast;using Microsoft.Scripting.Utils;
 #else
 using System.Linq.Expressions;
 #endif
@@ -23,12 +22,7 @@ using System.Linq.Expressions;
 using System.Core;
 #endif
 
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Dynamic.Utils;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;using System.ComponentModel;using System.Diagnostics;using System.Dynamic;using System.Dynamic.Utils;using System.Runtime.CompilerServices;
 
 namespace System.Dynamic
 {

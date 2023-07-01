@@ -25,8 +25,7 @@
 // THE SOFTWARE.
 
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using NUnit.Framework;
+using System;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.MetadataTests
 {

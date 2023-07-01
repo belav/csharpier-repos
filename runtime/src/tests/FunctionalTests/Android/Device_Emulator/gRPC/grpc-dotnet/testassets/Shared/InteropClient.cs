@@ -1,4 +1,5 @@
-﻿#region Copyright notice and license
+﻿using System.Security.Authentication;
+#region Copyright notice and license
 
 // Copyright 2015-2016 gRPC authors.
 //
@@ -17,12 +18,12 @@
 #endregion
 
 using System.Security.Cryptography.X509Certificates;
+
 using Google.Protobuf;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Testing;
 using Empty = Grpc.Testing.Empty;
-using System.Security.Authentication;
 
 namespace Grpc.Shared.TestAssets
 {

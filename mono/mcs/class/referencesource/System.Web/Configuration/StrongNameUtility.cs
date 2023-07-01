@@ -10,6 +10,7 @@ namespace System.Web.Configuration
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
+
     using Microsoft.Runtime.Hosting;
 
     internal class StrongNameUtility

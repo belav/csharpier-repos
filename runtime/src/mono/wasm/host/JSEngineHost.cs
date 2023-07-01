@@ -5,12 +5,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
+
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.AppHost;
 

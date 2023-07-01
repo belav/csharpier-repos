@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Diagnostics;
+using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -34,10 +37,7 @@
 
 using System.IO;
 using System.Reflection;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 using System.Runtime.Serialization;
 
 namespace System.Drawing.Imaging

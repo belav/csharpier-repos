@@ -7,9 +7,10 @@
 // (C) 2005 Novell, Inc. (http://www.novell.com)
 //
 using System;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Reflection;
+using System.Windows.Forms;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

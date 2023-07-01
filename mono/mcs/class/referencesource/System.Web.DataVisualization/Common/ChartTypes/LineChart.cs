@@ -26,12 +26,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.Utilities;
 #else
-using System.Web.UI.DataVisualization.Charting;
-using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting;using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion

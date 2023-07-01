@@ -25,8 +25,9 @@
 //   csc /r:C5.dll EventPatterns.cs
 
 using System;
-using C5;
 using SCG = System.Collections.Generic;
+
+using C5;
 
 namespace EventPatterns
 {

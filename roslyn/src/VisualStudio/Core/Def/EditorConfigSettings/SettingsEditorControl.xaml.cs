@@ -5,6 +5,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Shared.Extensions;

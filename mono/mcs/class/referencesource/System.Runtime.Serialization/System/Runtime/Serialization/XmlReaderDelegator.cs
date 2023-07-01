@@ -5,13 +5,13 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Reflection;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Collections.Generic;
 
 #if USE_REFEMIT
     public class XmlReaderDelegator

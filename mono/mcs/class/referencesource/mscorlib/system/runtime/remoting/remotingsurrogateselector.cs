@@ -7,21 +7,21 @@
 namespace System.Runtime.Remoting.Messaging
 {
     using System;
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Metadata;
     using System.Runtime.Remoting.Activation;
+    using System.Runtime.Remoting.Metadata;
     using System.Runtime.Remoting.Proxies;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters;
-    using System.Text;
-    using System.Reflection;
-    using System.Threading;
-    using System.Globalization;
-    using System.Collections;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
+    using System.Text;
+    using System.Threading;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public delegate bool MessageSurrogateFilter(String key, Object value);

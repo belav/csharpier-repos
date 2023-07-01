@@ -3,6 +3,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
+using MethodOptions = global::Grpc.Shared.Server.MethodOptions;
 using Google.Api;
 using Google.Protobuf.Reflection;
 using Grpc.AspNetCore.Server;
@@ -14,7 +16,6 @@ using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.Logging;
-using MethodOptions = global::Grpc.Shared.Server.MethodOptions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 

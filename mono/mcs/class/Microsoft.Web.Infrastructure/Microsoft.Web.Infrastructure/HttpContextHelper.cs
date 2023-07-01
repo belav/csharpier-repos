@@ -1,4 +1,9 @@
-﻿//
+﻿using System;
+using System.ComponentModel;
+using System.Security;
+using System.Web;
+
+//
 // HttpContextHelper.cs
 //
 // Author:
@@ -25,10 +30,6 @@
 // THE SOFTWARE.
 
 using Microsoft.Web.Infrastructure;
-using System;
-using System.ComponentModel;
-using System.Security;
-using System.Web;
 
 namespace Microsoft.Web.Infrastructure
 {

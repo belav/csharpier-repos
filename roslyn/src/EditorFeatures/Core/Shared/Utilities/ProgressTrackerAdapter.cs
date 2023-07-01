@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Microsoft.VisualStudio.Utilities;
 

@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Threading;
+
 //
 // TimerTest.cs - NUnit test cases for System.Threading.Timer
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Collections;
 
 namespace MonoTests.System.Threading
 {

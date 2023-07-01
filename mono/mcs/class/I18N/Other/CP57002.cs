@@ -30,6 +30,7 @@ namespace I18N.Other
 {
     using System;
     using System.Text;
+
     using I18N.Common;
 
     // This class provides an abstract base for the ISCII encodings,

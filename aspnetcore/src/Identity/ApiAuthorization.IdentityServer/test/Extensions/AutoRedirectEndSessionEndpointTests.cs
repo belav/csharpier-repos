@@ -3,6 +3,7 @@
 
 using System.Collections.Specialized;
 using System.Security.Claims;
+
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.Endpoints.Results;
 using Duende.IdentityServer.Models;

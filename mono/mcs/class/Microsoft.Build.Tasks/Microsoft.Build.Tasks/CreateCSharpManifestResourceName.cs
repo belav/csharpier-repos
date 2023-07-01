@@ -29,6 +29,7 @@
 using System;
 using System.IO;
 using System.Text;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks

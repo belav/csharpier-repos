@@ -1,3 +1,8 @@
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Reflection;
+using System.Security.Permissions;
 //
 // System.Web.UI.WebControls.BaseValidator
 //
@@ -27,11 +32,6 @@
 //
 
 using System.Web.Configuration;
-using System.ComponentModel;
-using System.Drawing;
-using System.Reflection;
-using System.Collections;
-using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {

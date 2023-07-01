@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Documents;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Text;

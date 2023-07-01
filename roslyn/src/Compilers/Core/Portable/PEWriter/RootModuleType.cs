@@ -7,8 +7,9 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
-using Roslyn.Utilities;
+
 using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
+using Roslyn.Utilities;
 
 namespace Microsoft.Cci
 {

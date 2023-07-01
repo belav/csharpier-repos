@@ -5,6 +5,7 @@
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formatting.View

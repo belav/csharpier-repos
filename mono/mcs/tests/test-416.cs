@@ -1,7 +1,7 @@
+using System;
 // Compiler options: -addmodule:test-416-mod.netmodule
 
 using n1;
-using System;
 
 public class ModTest
 {

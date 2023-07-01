@@ -7,22 +7,22 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Resources;
-    using System.Resources.Tools;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Collections;
-    using System.IO;
-    using System.Xml;
-    using System.Xml.Schema;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Resources.Tools;
+    using System.Web.Compilation;
     using System.Web.Configuration;
     using System.Web.Hosting;
-    using System.Web.Compilation;
     using System.Web.UI;
-    using System.Web.Util;
     using Util = System.Web.UI.Util;
+    using System.Web.Util;
+    using System.Xml;
+    using System.Xml.Schema;
 
     /// Base class for BuildProviders that generate resources
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Resources)]

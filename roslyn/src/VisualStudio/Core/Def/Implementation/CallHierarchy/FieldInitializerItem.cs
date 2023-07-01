@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Windows.Media;
+
 using Microsoft.VisualStudio.Language.CallHierarchy;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy

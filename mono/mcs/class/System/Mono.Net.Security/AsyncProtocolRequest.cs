@@ -7,15 +7,7 @@
 //
 // Copyright (c) 2015 Xamarin, Inc.
 //
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Security;
-using System.Security.Authentication;
-using SD = System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Runtime.ExceptionServices;
+using System;using System.IO;using System.Net;using System.Net.Security;using System.Security.Authentication;using SD = System.Diagnostics;using System.Threading;using System.Threading.Tasks;using System.Runtime.ExceptionServices;
 
 namespace Mono.Net.Security
 {

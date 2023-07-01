@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 //
 // System.Configuration.AppSettingsReader
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Reflection;
-using System.Collections.Specialized;
 
 #pragma warning disable 618
 

@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis

@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 public class ReversePInvoke_MashalArrayByRef_AsManagedTest

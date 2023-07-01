@@ -1,3 +1,4 @@
+using System.Data.Metadata.Edm;
 //------------------------------------------------------------------------------
 // <copyright file="DbCommandDefinition.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 using System.Diagnostics;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Common
 {

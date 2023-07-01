@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Net;
+
 //
 // CookieCollectionTest.cs - NUnit Test Cases for System.Net.CookieCollection
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
-using System.Collections;
 
 namespace MonoTests.System.Net
 {

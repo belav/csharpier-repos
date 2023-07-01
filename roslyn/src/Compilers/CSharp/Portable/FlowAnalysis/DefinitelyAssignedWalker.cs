@@ -9,8 +9,7 @@
 #define REFERENCE_STATE
 #endif
 
-using System;
-using System.Collections.Generic;
+using System;using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {

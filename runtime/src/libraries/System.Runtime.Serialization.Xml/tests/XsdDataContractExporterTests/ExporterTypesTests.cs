@@ -4,10 +4,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using Xunit;
-using Xunit.Abstractions;
 
 using SerializableTypes.XsdDataContractExporterTests;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 {

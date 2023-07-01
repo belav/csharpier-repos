@@ -8,6 +8,7 @@
 
 using System;
 using System.Text;
+
 using I18N.Common;
 
 namespace I18N.CJK

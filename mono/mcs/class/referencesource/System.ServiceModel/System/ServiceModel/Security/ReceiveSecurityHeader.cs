@@ -7,23 +7,23 @@ namespace System.ServiceModel.Security
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
+    using SignatureResourcePool = System.IdentityModel.SignatureResourcePool;
+    using SignedXml = System.IdentityModel.SignedXml;
     using System.IdentityModel.Tokens;
+    using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime;
-    using System.Xml;
-    using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
-    using SignatureResourcePool = System.IdentityModel.SignatureResourcePool;
-    using SignedXml = System.IdentityModel.SignedXml;
-    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     abstract class ReceiveSecurityHeader : SecurityHeader
     {

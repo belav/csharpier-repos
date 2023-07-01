@@ -11,17 +11,17 @@
 namespace System.Security.Permissions
 {
     using System;
-    using SecurityElement = System.Security.SecurityElement;
-    using System.Security.Util;
-    using System.IO;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Security.Principal;
+    using SecurityElement = System.Security.SecurityElement;
+    using System.Security.Util;
     using System.Text;
     using System.Threading;
-    using System.Globalization;
-    using System.Reflection;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal class IDRole

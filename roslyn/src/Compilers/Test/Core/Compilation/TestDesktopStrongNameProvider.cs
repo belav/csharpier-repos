@@ -8,6 +8,7 @@ using System;
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
 using System.Security.Cryptography;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis.Interop;
 

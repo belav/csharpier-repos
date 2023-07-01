@@ -7,16 +7,17 @@
 using System;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
+using TextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.SnippetFunctions;
 using Microsoft.VisualStudio.Text;
-using Roslyn.Utilities;
-using TextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
 using VsTextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctions
 {

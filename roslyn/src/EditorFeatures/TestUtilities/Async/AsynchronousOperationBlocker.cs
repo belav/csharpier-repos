@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Test.Utilities

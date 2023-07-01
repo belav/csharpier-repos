@@ -15,9 +15,9 @@ namespace System.Web
     using System.Collections;
     using System.Configuration;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Text.RegularExpressions;
     using System.Web.Configuration;
-    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para> Enables the server to compile

@@ -6,10 +6,10 @@ namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ServiceModel;
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.Text;
     using System.Threading;
 

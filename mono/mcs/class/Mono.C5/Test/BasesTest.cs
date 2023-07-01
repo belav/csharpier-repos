@@ -20,9 +20,10 @@
 */
 
 using System;
+using SCG = System.Collections.Generic;
+
 using C5;
 using NUnit.Framework;
-using SCG = System.Collections.Generic;
 
 namespace C5UnitTests.support
 {

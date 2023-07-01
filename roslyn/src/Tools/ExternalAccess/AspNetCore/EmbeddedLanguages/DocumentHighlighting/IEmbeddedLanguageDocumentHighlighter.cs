@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Runtime.Serialization;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.DocumentHighlighting;
 using Microsoft.CodeAnalysis.Text;
 

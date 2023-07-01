@@ -25,21 +25,13 @@
 
 #pragma warning disable 618
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
-using System.Text;
+using System;using System.Collections.Generic;using System.Globalization;using System.Threading.Tasks;using System.Text;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Bson;
-using System.IO;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Bson;using System.IO;using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Tests.Bson
 {

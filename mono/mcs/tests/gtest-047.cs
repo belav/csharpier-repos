@@ -1,3 +1,4 @@
+using Bar;
 // Compiler options: -r:gtest-047-lib.dll
 
 // Important test: verify our namespace lookup rules
@@ -6,7 +7,6 @@
 // different namespaces: make sure we pick the correct one.
 
 using Foo;
-using Bar;
 
 class X
 {

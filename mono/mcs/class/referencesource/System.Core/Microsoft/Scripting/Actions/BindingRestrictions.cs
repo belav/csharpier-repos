@@ -19,11 +19,7 @@ using Microsoft.Scripting.Ast;
 using System.Linq.Expressions;
 #endif
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic.Utils;
-using System.Runtime.CompilerServices;
+using System;using System.Collections.Generic;using System.Diagnostics;using System.Dynamic.Utils;using System.Runtime.CompilerServices;
 
 namespace System.Dynamic
 {

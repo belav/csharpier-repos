@@ -1,3 +1,10 @@
+using System;
+using System.Drawing.Design;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // CategoryNameCollectionCas.cs
 //	- CAS unit tests for System.Drawing.Design.CategoryNameCollection
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Drawing.Design;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing.Design
 {

@@ -10,6 +10,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections

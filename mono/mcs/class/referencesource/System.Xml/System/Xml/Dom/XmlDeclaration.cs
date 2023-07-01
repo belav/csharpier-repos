@@ -7,8 +7,8 @@
 
 namespace System.Xml
 {
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
 
     // Represents the xml declaration nodes: <?xml version='1.0' ...?>
     public class XmlDeclaration : XmlLinkedNode

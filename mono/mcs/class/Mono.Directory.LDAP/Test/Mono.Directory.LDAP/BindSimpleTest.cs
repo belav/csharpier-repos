@@ -1,3 +1,5 @@
+using System;
+using Mono.Directory.LDAP;
 // BindSimpleTest.cs
 //
 // Authors:
@@ -7,8 +9,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using Mono.Directory.LDAP;
 
 namespace MonoTests.Directory.LDAP
 {

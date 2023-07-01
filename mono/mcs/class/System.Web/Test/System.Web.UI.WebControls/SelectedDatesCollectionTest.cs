@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Globalization;
+using System.Web;
+using System.Web.UI;
 //
 // Tests for System.Web.UI.WebControls.SelectedDatesCollection.cs
 //
@@ -29,12 +34,8 @@
 //
 
 using System.Web.UI.WebControls;
+
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Web;
-using System.Web.UI;
-using System.Globalization;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

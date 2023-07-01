@@ -1,3 +1,14 @@
+using System;
+using System.Data;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Xml;
+
+using MonoTests.Helpers;
+using MonoTests.System.Data.Utils;
 // Authors:
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
@@ -29,17 +40,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Text;
-using System.IO;
-using System.Data;
-using MonoTests.System.Data.Utils;
-using System.Xml;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Globalization;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Data
 {

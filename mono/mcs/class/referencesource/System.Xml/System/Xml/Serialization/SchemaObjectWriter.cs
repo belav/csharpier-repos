@@ -8,13 +8,13 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Text;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.IO;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Collections;
-    using System.Collections.Specialized;
 
     internal class XmlAttributeComparer : IComparer
     {

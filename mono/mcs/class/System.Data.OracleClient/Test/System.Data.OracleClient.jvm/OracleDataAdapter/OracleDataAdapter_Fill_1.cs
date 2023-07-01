@@ -22,9 +22,9 @@
 //
 
 using System;
-using System.Text;
 using System.Data;
 using System.Data.OracleClient;
+using System.Text;
 
 using MonoTests.System.Data.Utils;
 

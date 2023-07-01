@@ -1,3 +1,7 @@
+using System;
+using System.Drawing;
+using System.Security.Permissions;
+
 //
 // Tests for System.Drawing.Brushes.cs
 //
@@ -28,9 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing
 {

@@ -1,4 +1,7 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+//---------------------------------------------------------------------
 // <copyright file="ObjectItemLoadingSessionData.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -7,9 +10,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Reflection;
-using System.Linq;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace System.Data.Metadata.Edm
 {

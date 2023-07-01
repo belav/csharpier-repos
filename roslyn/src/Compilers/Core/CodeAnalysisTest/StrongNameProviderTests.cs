@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;

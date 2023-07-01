@@ -1,15 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
 //------------------------------------------------------------------------------
 // <copyright file="TypedElement.cs" company="Microsoft Corporation">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
 using System.Configuration;
-using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Globalization;
-using System.Collections;
-using System.Collections.Specialized;
 using System.Runtime.Versioning;
 
 namespace System.Diagnostics

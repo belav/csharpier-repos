@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+
 // DataTableCollectionTest.cs - NUnit Test Cases for for testing the DataTableCollection
 // class
 // Author:
@@ -30,8 +33,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Data;
 
 namespace MonoTests.System.Data
 {

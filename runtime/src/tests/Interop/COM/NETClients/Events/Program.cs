@@ -7,11 +7,12 @@ namespace NetClient
     using System.Reflection;
     using System.Runtime.InteropServices;
 
+    using Server.Contract;
+    using Server.Contract.Events;
+    using Server.Contract.Servers;
+
     using TestLibrary;
     using Xunit;
-    using Server.Contract;
-    using Server.Contract.Servers;
-    using Server.Contract.Events;
 
     class Program
     {

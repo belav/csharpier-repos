@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -11,16 +16,10 @@
 ===========================================================*/
 
 using Microsoft.Win32;
-using System;
-using System.Collections;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 #if FEATURE_CORRUPTING_EXCEPTIONS
 using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-using System.Security.Principal;
-using System.Threading;
-using System.Diagnostics.Contracts;
+using System.Security.Principal;using System.Threading;using System.Diagnostics.Contracts;
 
 namespace System.Security.AccessControl
 {

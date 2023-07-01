@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,7 +28,6 @@
 // (C) 2005-2010 Novell, Inc.
 
 using System.ComponentModel;
-using System.Collections.Specialized;
 using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using CorElementType = System.Reflection.CorElementType;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -11,16 +13,14 @@
 ===========================================================*/
 
 using System.Runtime;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 using Internal.Runtime.CompilerServices;
-
-using MethodTable = Internal.Runtime.MethodTable;
 using EETypeElementType = Internal.Runtime.EETypeElementType;
 using EETypeRef = Internal.Runtime.EETypeRef;
-using CorElementType = System.Reflection.CorElementType;
+
+using MethodTable = Internal.Runtime.MethodTable;
 
 namespace System
 {

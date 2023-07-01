@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 //
 // SoapAttributes.cs:
 //
@@ -29,8 +31,6 @@
 //
 
 using System.Reflection;
-using System;
-using System.ComponentModel;
 
 namespace System.Xml.Serialization
 {

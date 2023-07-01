@@ -1,18 +1,6 @@
 #if !MOBILE && !XAMMAC_4_5
 
-using System;
-using System.Runtime.Serialization;
-using System.IO;
-using System.Diagnostics;
-using System.Xml.Serialization;
-using System.Globalization;
-using System.ComponentModel;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.Xml;
-using System.CodeDom.Compiler;
-using NUnit.Framework;
+using System;using System.Runtime.Serialization;using System.IO;using System.Diagnostics;using System.Xml.Serialization;using System.Globalization;using System.ComponentModel;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.Xml;using System.CodeDom.Compiler;using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {

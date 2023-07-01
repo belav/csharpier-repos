@@ -5,6 +5,10 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections.Generic;
+    using DataContractDictionary = System.Collections.Generic.Dictionary<
+        System.Xml.XmlQualifiedName,
+        DataContract
+    >;
     using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
@@ -12,10 +16,6 @@ namespace System.Runtime.Serialization
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<
-        System.Xml.XmlQualifiedName,
-        DataContract
-    >;
 
     internal delegate IXmlSerializable CreateXmlSerializableDelegate();
 

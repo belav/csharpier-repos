@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using System.Net.Http;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http.Headers
 {

@@ -9,13 +9,13 @@ namespace System.Configuration
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Internal;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Text;
     using System.Xml;
-    using System.Globalization;
-    using System.Runtime.Versioning;
 
     public abstract class ConfigurationSection : ConfigurationElement
     {

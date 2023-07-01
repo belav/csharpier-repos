@@ -26,17 +26,18 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using Microsoft.Build.Framework;
-using System.Collections.Generic;
-using System.Xml;
-using System.IO;
-using Microsoft.Build.BuildEngine;
 using System.CodeDom;
-using Microsoft.CSharp;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Specialized;
+using System.Xml;
+
+using Microsoft.Build.BuildEngine;
+using Microsoft.Build.Framework;
+using Microsoft.CSharp;
 
 namespace Microsoft.Build.Tasks
 {

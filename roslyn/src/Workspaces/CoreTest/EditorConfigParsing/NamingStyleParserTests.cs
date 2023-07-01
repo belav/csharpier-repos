@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
+using static Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles.SymbolSpecification;
 using Microsoft.CodeAnalysis.Editing;
+using static Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles.EditorConfigNamingStylesParser;
 using Microsoft.CodeAnalysis.Text;
 using Xunit;
-using static Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles.SymbolSpecification;
-using static Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles.EditorConfigNamingStylesParser;
 
 namespace Microsoft.CodeAnalysis.EditorConfigParsing.NamingStyles.UnitTests;
 

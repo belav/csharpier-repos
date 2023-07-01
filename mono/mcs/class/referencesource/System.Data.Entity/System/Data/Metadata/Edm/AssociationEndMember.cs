@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 using System.Text;
 using System.Threading;
-using System.Data.Objects.DataClasses;
 
 namespace System.Data.Metadata.Edm
 {

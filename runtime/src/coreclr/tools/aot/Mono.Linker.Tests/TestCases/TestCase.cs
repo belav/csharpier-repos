@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+
 using Mono.Linker.Tests.Extensions;
 
 namespace Mono.Linker.Tests.TestCases

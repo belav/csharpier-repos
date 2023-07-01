@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text.Json;
+
 using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;

@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Windows.Documents;
+
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.StackTraceExplorer;

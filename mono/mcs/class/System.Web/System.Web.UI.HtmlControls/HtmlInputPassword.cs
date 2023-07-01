@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 //
 // System.Web.UI.HtmlControls.HtmlInputPassword.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.ComponentModel;
-using System.Collections.Specialized;
 using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls

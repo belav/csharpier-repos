@@ -34,11 +34,7 @@
 
 #if MONOTOUCH || XAMMAC
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Runtime.InteropServices;
+using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.IO;using System.Runtime.InteropServices;
 
 namespace System
 {

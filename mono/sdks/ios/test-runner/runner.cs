@@ -2,19 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Net.Sockets;
 #if XUNIT_RUNNER
-using Xunit;
-using Xunit.Abstractions;
-using Xunit.Sdk;
-using System.Xml.Linq;
+using Xunit;using Xunit.Abstractions;using Xunit.Sdk;using System.Xml.Linq;
 #else
-using NUnitLite.Runner;
-using NUnit.Framework.Api;
-using NUnit.Framework.Internal;
-using Mono.Security.Interface;
+using NUnitLite.Runner;using NUnit.Framework.Api;using NUnit.Framework.Internal;using Mono.Security.Interface;
 #endif
 
 class TcpWriter : TextWriter

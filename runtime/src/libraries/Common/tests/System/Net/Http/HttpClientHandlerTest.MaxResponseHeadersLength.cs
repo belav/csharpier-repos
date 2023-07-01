@@ -7,18 +7,11 @@ using System.Net.Test.Common;
 #if !WINHTTPHANDLER_TEST
 using System.Net.Quic;
 #endif
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.DotNet.XUnitExtensions;
-using Xunit;
-using Xunit.Abstractions;
+using System.Net.Sockets;using System.Text;using System.Threading;using System.Threading.Tasks;using Microsoft.DotNet.XUnitExtensions;using Xunit;using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif

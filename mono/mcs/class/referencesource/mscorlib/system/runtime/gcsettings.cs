@@ -7,10 +7,10 @@
 namespace System.Runtime
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     // These settings are the same format as in clr\src\vm\gcpriv.h
     // make sure you change that file if you change this file!

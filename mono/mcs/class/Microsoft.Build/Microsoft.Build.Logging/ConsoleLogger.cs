@@ -27,6 +27,7 @@
 
 using System;
 using System.Globalization;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Logging

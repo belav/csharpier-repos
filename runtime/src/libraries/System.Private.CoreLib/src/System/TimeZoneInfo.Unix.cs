@@ -7,9 +7,10 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Security;
 using System.Text;
 using System.Threading;
-using System.Security;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System

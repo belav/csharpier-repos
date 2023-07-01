@@ -3,6 +3,7 @@
 
 using System.ComponentModel;
 using System.Linq;
+
 using BenchmarkDotNet.Attributes;
 using Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders;
 using Xunit;

@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 //------------------------------------------------------------------------------
 // <copyright file="XmlParserContext.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,8 +8,6 @@
 //------------------------------------------------------------------------------
 
 using System.Xml;
-using System.Text;
-using System;
 
 namespace System.Xml
 {

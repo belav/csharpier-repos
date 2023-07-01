@@ -15,8 +15,8 @@
 namespace Castle.Components.DictionaryAdapter.Xml
 {
     using System;
-    using System.Linq;
     using System.Collections;
+    using System.Linq;
 
     public static class DictionaryAdapterExtensions
     {

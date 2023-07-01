@@ -6,10 +6,11 @@ This testcase attempts to checks GetDirectories/GetFiles with the following Repa
  - Mount Volumes
 **/
 using System;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
+
 using Xunit;
 
 namespace System.IO.Tests

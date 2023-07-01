@@ -1,3 +1,8 @@
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Security.Permissions;
 //------------------------------------------------------------------------------
 // <copyright file="FontInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,11 +10,6 @@
 //------------------------------------------------------------------------------
 
 using System.Web.UI;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {

@@ -7,8 +7,8 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Data.Common;
-using System.Threading;
 using System.Diagnostics;
+using System.Threading;
 
 namespace System.Data.Metadata.Edm
 {

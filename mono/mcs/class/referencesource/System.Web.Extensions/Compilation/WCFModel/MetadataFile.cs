@@ -8,16 +8,14 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using MetadataSection = System.ServiceModel.Description.MetadataSection;
+using Description = System.Web.Services.Description;
+using Discovery = System.Web.Services.Discovery;
 using System.Xml;
 using System.Xml.Schema;
-using Discovery = System.Web.Services.Discovery;
-using Description = System.Web.Services.Description;
-using MetadataSection = System.ServiceModel.Description.MetadataSection;
 using XmlSerialization = System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
-using System.Web.Resources;
-using System.Diagnostics.CodeAnalysis;
+using System.Web.Resources;using System.Diagnostics.CodeAnalysis;
 #else
 using Microsoft.VSDesigner.WCF.Resources;
 #endif

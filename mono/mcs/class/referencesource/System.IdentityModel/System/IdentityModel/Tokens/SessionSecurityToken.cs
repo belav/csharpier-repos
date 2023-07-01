@@ -9,21 +9,21 @@ namespace System.IdentityModel.Tokens
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IdentityModel.Claims;
+    using SysClaim = System.IdentityModel.Claims.Claim;
+    using SysClaimTypes = System.IdentityModel.Claims.ClaimTypes;
     using System.IdentityModel.Policy;
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Claims;
+    using Claim = System.Security.Claims.Claim;
+    using ClaimTypes = System.Security.Claims.ClaimTypes;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
     using System.Text;
     using System.Xml;
-    using Claim = System.Security.Claims.Claim;
-    using ClaimTypes = System.Security.Claims.ClaimTypes;
-    using SysClaim = System.IdentityModel.Claims.Claim;
-    using SysClaimTypes = System.IdentityModel.Claims.ClaimTypes;
     using SysUniqueId = System.Xml.UniqueId;
 
     /// <summary>

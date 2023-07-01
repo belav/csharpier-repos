@@ -12,27 +12,23 @@
 
 
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
-using Mono.Security.Cryptography;
-using Mono.CompilerServices.SymbolWriter;
-using System.Linq;
 
+using Mono.CompilerServices.SymbolWriter;
+using Mono.Security.Cryptography;
 #if STATIC
-using IKVM.Reflection;
-using IKVM.Reflection.Emit;
-using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;
+using IKVM.Reflection;using IKVM.Reflection.Emit;using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;
 #else
 using SecurityType = System.Collections.Generic.Dictionary<
     System.Security.Permissions.SecurityAction,
     System.Security.PermissionSet
->;
-using System.Reflection;
-using System.Reflection.Emit;
+>;using System.Reflection;using System.Reflection.Emit;
 #endif
 
 namespace Mono.CSharp

@@ -26,6 +26,7 @@
 
 using System.Linq;
 using System.Xml.Serialization;
+
 using DbLinq.Vendor;
 
 namespace DbMetal.Schema

@@ -11,8 +11,7 @@ namespace System.Diagnostics.Tracing.Internal
 #if ES_BUILD_AGAINST_DOTNET_V35
     using Microsoft.Internal;
 #endif
-    using Microsoft.Reflection;
-    using System.Reflection;
+    using Microsoft.Reflection;using System.Reflection;
 
     internal static class Environment
     {

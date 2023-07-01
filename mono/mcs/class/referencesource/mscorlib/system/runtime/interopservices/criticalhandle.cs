@@ -53,10 +53,7 @@ using System.Threading;
 #if !MONO
 using System.Security.Permissions;
 #endif
-using System.Runtime.CompilerServices;
-using System.Runtime.Versioning;
-using System.Runtime.ConstrainedExecution;
-using System.IO;
+using System.Runtime.CompilerServices;using System.Runtime.Versioning;using System.Runtime.ConstrainedExecution;using System.IO;
 
 /*
   Problems addressed by the CriticalHandle class:

@@ -18,15 +18,15 @@
 namespace System.Reflection
 {
     using System;
-    using System.IO;
     using System.Configuration.Assemblies;
-    using System.Runtime.CompilerServices;
-    using CultureInfo = System.Globalization.CultureInfo;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using CultureInfo = System.Globalization.CultureInfo;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]

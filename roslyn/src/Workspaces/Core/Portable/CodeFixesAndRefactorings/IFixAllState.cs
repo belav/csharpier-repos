@@ -4,8 +4,8 @@
 
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.Internal.Log;
 using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
+using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {

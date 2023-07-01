@@ -12,13 +12,14 @@ namespace System.CodeDom.Compiler
     using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
     using System.Runtime.InteropServices;
-    using System.Security.Permissions;
-    using System.Security.Policy;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     /// <devdoc>
     ///    <para>

@@ -11,15 +11,7 @@
 extern alias MonoSecurity;
 #endif
 
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Net.Security;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
-
-using MNS = Mono.Net.Security;
+using System;using System.IO;using System.Threading;using System.Threading.Tasks;using System.Net.Security;using System.Security.Authentication;using System.Security.Cryptography.X509Certificates;using MNS = Mono.Net.Security;
 #if MONO_SECURITY_ALIAS
 using MonoSecurity::Mono.Security.Interface;
 #else

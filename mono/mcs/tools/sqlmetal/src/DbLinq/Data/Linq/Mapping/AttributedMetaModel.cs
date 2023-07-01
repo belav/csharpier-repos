@@ -30,15 +30,13 @@ using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
 
-using DbLinq.Data.Linq.Mapping;
-using DbLinq.Util;
+using DbLinq.Data.Linq.Mapping;using DbLinq.Util;
 
 //Change notes:
 //removed virtual init call from constructor

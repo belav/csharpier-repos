@@ -5,9 +5,9 @@
 #nullable disable
 
 using System.Xml.Linq;
+using static Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo.AbstractNavigateToTests;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.VisualStudio.Composition;
-using static Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo.AbstractNavigateToTests;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {

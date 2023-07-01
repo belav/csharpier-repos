@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.Design;
+using IAsyncDisposable = System.IAsyncDisposable;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 using Microsoft.CodeAnalysis.UnitTests;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
@@ -19,7 +21,6 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
 using Microsoft.VisualStudio.Utilities;
 using Xunit;
-using IAsyncDisposable = System.IAsyncDisposable;
 
 namespace Microsoft.VisualStudio.Extensibility.Testing
 {

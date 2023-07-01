@@ -14,18 +14,15 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT
 
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;using System.Diagnostics.CodeAnalysis;
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else
 using Microsoft.Linq.Expressions;
 #endif
-using System.Security;
-using System.Security.Permissions;
+using System.Security;using System.Security.Permissions;
 
 #if CODEPLEX_40
 [assembly: SuppressMessage(

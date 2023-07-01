@@ -6,20 +6,18 @@
 
 namespace System.Configuration.Internal
 {
-    using Microsoft.Win32;
-    using System.Diagnostics.CodeAnalysis;
     using System.CodeDom.Compiler;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
     using System.Security;
+
+    using Microsoft.Win32;
 #if !FEATURE_PAL
     using System.Security.AccessControl;
 #endif
-    using System.Security.Permissions;
-    using System.Security.Policy;
-    using System.Threading;
-    using System.Xml;
+    using System.Security.Permissions;using System.Security.Policy;using System.Threading;using System.Xml;
 
     //
     // An IInternalConfigHost with common implementations of some file functions.

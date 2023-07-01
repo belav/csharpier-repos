@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using DbLinq.Util;
 
 namespace DbLinq.Data.Linq.Sugar.Implementation

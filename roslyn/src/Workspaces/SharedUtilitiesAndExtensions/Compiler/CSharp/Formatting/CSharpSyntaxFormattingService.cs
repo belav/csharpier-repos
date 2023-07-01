@@ -5,16 +5,14 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
+
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Formatting.Rules;
 using Microsoft.CodeAnalysis.Shared.Collections;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.CodeAnalysis.Diagnostics;
-
 #if !CODE_STYLE
-using System;
-using System.Composition;
-using Microsoft.CodeAnalysis.Host.Mef;
+using System;using System.Composition;using Microsoft.CodeAnalysis.Host.Mef;
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting

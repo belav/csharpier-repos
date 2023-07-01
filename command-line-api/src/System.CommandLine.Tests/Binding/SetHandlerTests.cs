@@ -6,6 +6,7 @@ using System.CommandLine.Binding;
 using System.CommandLine.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using FluentAssertions;
 using Xunit;
 

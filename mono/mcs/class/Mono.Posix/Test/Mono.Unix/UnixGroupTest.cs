@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
+
+using Mono.Unix;
+
+using Group = Mono.Unix.Native.Group;
+using Syscall = Mono.Unix.Native.Syscall;
 //
 // UnixGroupTest.cs:
 // 	NUnit Test Cases for Mono.Unix.UnixGroup
@@ -9,15 +18,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-
-using Mono.Unix;
-
-using Group = Mono.Unix.Native.Group;
-using Syscall = Mono.Unix.Native.Syscall;
 
 namespace MonoTests.Mono.Unix
 {

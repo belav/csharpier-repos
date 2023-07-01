@@ -3,8 +3,7 @@
 
 #if NET6_0_OR_GREATER
 
-using System.IO;
-using System.Runtime.InteropServices;
+using System.IO;using System.Runtime.InteropServices;
 
 namespace System.CommandLine.Suggest;
 

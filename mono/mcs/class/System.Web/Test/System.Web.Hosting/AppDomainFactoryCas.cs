@@ -1,3 +1,9 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.Hosting;
+
 //
 // AppDomainFactoryCas.cs
 //	- CAS unit tests for System.Web.Hosting.AppDomainFactory
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.Hosting;
 
 namespace MonoCasTests.System.Web.Hosting
 {

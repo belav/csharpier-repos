@@ -1,3 +1,7 @@
+using System;
+using System.Text;
+
+using Mono.Unix;
 //
 // UnixEncodingTest.cs - NUnit Test Cases for Mono.Unix.UnixEncoding
 //
@@ -12,9 +16,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Text;
-using Mono.Unix;
 
 namespace MonoTests.Mono.Unix
 {

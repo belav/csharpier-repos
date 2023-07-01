@@ -3,12 +3,12 @@
 //----------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Globalization;
 
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Globalization;
-using System.Web.Hosting;
 using System.Web;
+using System.Web.Hosting;
 
 namespace System.ServiceModel.Activation
 {

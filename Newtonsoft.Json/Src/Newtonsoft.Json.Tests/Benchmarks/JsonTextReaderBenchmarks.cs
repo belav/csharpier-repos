@@ -25,11 +25,7 @@
 
 #if HAVE_BENCHMARKS
 
-using System.IO;
-using System.Linq;
-using System.Xml;
-using BenchmarkDotNet.Attributes;
-using Newtonsoft.Json.Linq;
+using System.IO;using System.Linq;using System.Xml;using BenchmarkDotNet.Attributes;using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Tests.Benchmarks
 {

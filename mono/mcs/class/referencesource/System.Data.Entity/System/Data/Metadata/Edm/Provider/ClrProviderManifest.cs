@@ -8,12 +8,12 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Data.Spatial;
-using System.Threading;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace System.Data.Metadata.Edm
 {

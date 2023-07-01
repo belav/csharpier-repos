@@ -1,3 +1,10 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+
 //
 // TimeZoneTest.cs - NUnit Test Cases for the System.TimeZone struct
 //
@@ -10,12 +17,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Threading;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MonoTests.System
 {

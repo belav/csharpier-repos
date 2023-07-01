@@ -22,17 +22,16 @@
 #region Used namespaces
 
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-using System.ComponentModel.Design;
-using System.ComponentModel;
-using System.Text;
 using System.Collections.ObjectModel;
-
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Globalization;
+using System.Text;
 #if Microsoft_CONTROL
 using System.Windows.Forms;
 #endif

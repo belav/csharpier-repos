@@ -7,6 +7,7 @@ using System.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 

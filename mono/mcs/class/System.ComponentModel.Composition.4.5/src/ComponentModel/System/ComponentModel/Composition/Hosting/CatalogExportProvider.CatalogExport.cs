@@ -4,8 +4,9 @@
 using System;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Internal;
 using System.Threading;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {

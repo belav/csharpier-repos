@@ -3,16 +3,17 @@
 
 using System;
 using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
+using AssemblyContentType = System.Reflection.AssemblyContentType;
+using AssemblyName = System.Reflection.AssemblyName;
+using AssemblyNameFlags = System.Reflection.AssemblyNameFlags;
+using Ecma = System.Reflection.Metadata;
+
+using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
-using Debug = System.Diagnostics.Debug;
-using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
-using AssemblyNameFlags = System.Reflection.AssemblyNameFlags;
-using AssemblyContentType = System.Reflection.AssemblyContentType;
-using AssemblyName = System.Reflection.AssemblyName;
 
 namespace ILCompiler.Metadata
 {

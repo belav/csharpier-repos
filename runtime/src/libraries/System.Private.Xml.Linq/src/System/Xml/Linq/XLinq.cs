@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 using IEnumerable = System.Collections.IEnumerable;
 using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Xml.Linq
 {

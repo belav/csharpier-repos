@@ -6,6 +6,8 @@ namespace System.ServiceModel.ComIntegration
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
+    using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Security;
@@ -14,8 +16,6 @@ namespace System.ServiceModel.ComIntegration
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
-    using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
 
     static class SecurityUtils
     {

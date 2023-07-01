@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // DeflateStreamCas.cs -CAS unit tests for System.IO.Compression.DeflateStream
 //
@@ -28,13 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.IO.Compression;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.IO.Compression
 {

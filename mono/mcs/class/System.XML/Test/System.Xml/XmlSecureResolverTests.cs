@@ -10,15 +10,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Collections;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Policy;
-using System.Security.Permissions;
-using System.Xml;
-using NUnit.Framework;
+using System;using System.Collections;using System.IO;using System.Reflection;using System.Security;using System.Security.Policy;using System.Security.Permissions;using System.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

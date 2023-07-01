@@ -6,8 +6,8 @@
 // Copyright 2012-2014 Xamarin Inc.
 
 using System;
-using System.Security.Cryptography;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace Crimson.CommonCrypto
 {

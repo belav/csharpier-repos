@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+
 using static Microsoft.CodeAnalysis.EditorConfig.LanguageConstants;
 
 namespace Microsoft.CodeAnalysis.EditorConfig.Parsing

@@ -1,14 +1,14 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ManualTypeMarshallingAnalyzer>;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
 using static Microsoft.Interop.Analyzers.ManualTypeMarshallingAnalyzer;
-
-using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ManualTypeMarshallingAnalyzer>;
+using Xunit;
 
 namespace DllImportGenerator.UnitTests
 {

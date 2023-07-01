@@ -5,6 +5,7 @@ namespace System.ServiceModel.Security
 {
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
+    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.ServiceModel;
@@ -12,7 +13,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
     class AcceleratedTokenProvider : NegotiationTokenProvider<AcceleratedTokenProviderState>
     {

@@ -34,7 +34,6 @@
 using System;
 using System.Security;
 using System.Security.Permissions;
-
 #if !INSIDE_CORLIB && !INSIDE_SYSTEM
 using System.Net;
 #endif

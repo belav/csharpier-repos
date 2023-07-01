@@ -16,9 +16,9 @@ using System.Xml.Xsl.Qil;
 
 namespace System.Xml.Xsl.XPath
 {
-    using FunctionInfo = XPathBuilder.FunctionInfo<XPathBuilder.FuncId>;
     using Res = System.Xml.Utils.Res;
     using T = XmlQueryTypeFactory;
+    using FunctionInfo = XPathBuilder.FunctionInfo<XPathBuilder.FuncId>;
 
     internal class XPathBuilder : IXPathBuilder<QilNode>, IXPathEnvironment
     {

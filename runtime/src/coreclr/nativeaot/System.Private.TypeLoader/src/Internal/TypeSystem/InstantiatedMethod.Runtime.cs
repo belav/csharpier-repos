@@ -3,10 +3,11 @@
 
 
 using System;
+using Debug = System.Diagnostics.Debug;
+
 using Internal.NativeFormat;
 using Internal.Runtime.CompilerServices;
 using Internal.Runtime.TypeLoader;
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {

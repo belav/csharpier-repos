@@ -4,8 +4,7 @@
 #if !ASPNETWEBAPI
 using System.Web.Routing;
 #endif
-using Microsoft.TestCommon;
-using Moq;
+using Microsoft.TestCommon;using Moq;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing

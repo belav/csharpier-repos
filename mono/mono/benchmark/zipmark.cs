@@ -31,9 +31,10 @@
 
 using System;
 using System.IO;
-using NZlib.Streams;
+
 using NZlib.Checksums;
 using NZlib.Compression;
+using NZlib.Streams;
 
 class ZipMark
 {

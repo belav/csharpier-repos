@@ -6,8 +6,8 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Dynamic.Utils;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using AstUtils = System.Linq.Expressions.Utils;
+using System.Runtime.CompilerServices;
 
 namespace System.Dynamic
 {

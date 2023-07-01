@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 //
 // ListDictionaryCas.cs - CAS unit tests for
 //	System.Collections.Specialized.ListDictionary
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MonoTests.System.Collections.Specialized
 {

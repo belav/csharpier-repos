@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 //
 // SortKeyTest.cs
 //
@@ -8,11 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MonoTests.System.Globalization
 {

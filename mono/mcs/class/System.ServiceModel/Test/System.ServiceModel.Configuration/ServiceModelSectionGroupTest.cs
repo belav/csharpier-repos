@@ -26,21 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Configuration;
-using System.Text;
-using System.Xml;
-
-using NUnit.Framework;
-
-using ConfigurationType = System.Configuration.Configuration;
-
-using MonoTests.Helpers;
+using System;using System.Collections.Generic;using System.Configuration;using System.Runtime.Serialization;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Configuration;using System.Text;using System.Xml;using NUnit.Framework;using ConfigurationType = System.Configuration.Configuration;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {

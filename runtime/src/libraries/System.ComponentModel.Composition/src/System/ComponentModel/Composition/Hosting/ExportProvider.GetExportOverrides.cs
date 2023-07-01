@@ -7,6 +7,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+
 using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting

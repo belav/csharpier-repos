@@ -6,13 +6,13 @@
 
 namespace System.Web.Services.Discovery
 {
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.IO;
     using System;
-    using System.Text;
     using System.Collections;
+    using System.IO;
+    using System.Text;
     using System.Web.Services.Configuration;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument"]/*' />
     /// <devdoc>

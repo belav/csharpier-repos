@@ -7,9 +7,9 @@
 namespace System.ComponentModel
 {
     using System.Collections;
-    using System.Threading;
     using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Threading;
 
     [HostProtection(SharedState = true)]
     public static class AsyncOperationManager

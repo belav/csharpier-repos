@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeActions;
 using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 

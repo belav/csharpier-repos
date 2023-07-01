@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+
 //
 // DSACryptoServiceProviderTest.cs, NUnit Test Cases for DSACryptoServiceProvider
 //
@@ -28,9 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

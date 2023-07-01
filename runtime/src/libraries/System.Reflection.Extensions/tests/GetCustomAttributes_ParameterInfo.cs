@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Xunit;
 using Assembly = System.Reflection.Tests;
+
+using Xunit;
 
 [module:
     Assembly.MyAttribute_Single_P("single"),

@@ -3,6 +3,7 @@
 
 using System.CommandLine.Rendering;
 using System.Threading.Tasks;
+
 using FluentAssertions;
 using Xunit;
 

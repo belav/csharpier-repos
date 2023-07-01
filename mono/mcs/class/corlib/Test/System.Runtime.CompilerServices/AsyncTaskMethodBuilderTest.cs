@@ -27,11 +27,12 @@
 //
 
 using System;
-using System.Threading;
-using System.Threading.Tasks;
-using NUnit.Framework;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
+using System.Threading.Tasks;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {

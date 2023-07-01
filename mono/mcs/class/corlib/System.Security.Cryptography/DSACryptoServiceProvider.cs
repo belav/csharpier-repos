@@ -1,3 +1,4 @@
+using System.Globalization;
 //
 // System.Security.Cryptography.DSACryptoServiceProvider.cs
 //
@@ -32,7 +33,6 @@
 //
 
 using System.IO;
-using System.Globalization;
 using System.Runtime.InteropServices;
 
 using Mono.Security.Cryptography;

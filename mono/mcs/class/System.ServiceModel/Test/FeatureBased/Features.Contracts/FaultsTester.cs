@@ -1,9 +1,5 @@
 ﻿#if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ServiceModel;
-using System.Web.Services.Description;
+using System;using System.Collections.Generic;using System.Text;using System.ServiceModel;using System.Web.Services.Description;
 
 namespace MonoTests.Features.Contracts
 {

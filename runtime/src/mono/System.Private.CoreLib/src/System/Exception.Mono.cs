@@ -4,9 +4,9 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Tracing;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Diagnostics.Tracing;
 
 namespace System
 {

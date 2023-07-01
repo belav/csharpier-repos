@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 //
 // NullRefHandler.cs : Handles a ResXNullRef that was stored in a resx file.
 //
@@ -26,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Reflection;
-using System.ComponentModel.Design;
 
 namespace System.Resources
 {

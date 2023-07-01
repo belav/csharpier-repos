@@ -28,11 +28,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Runtime.Versioning;
-using System.Text;
-
-using NUnit.Framework;
+using System;using System.Runtime.Versioning;using System.Text;using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Versioning
 {

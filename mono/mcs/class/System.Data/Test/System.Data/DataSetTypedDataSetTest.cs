@@ -1,3 +1,15 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Schema;
+
+using MonoTests.Helpers;
+using MonoTests.System.Data.Utils;
 // Authors:
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
@@ -27,18 +39,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.ComponentModel;
-using System.Data;
-using MonoTests.System.Data.Utils;
-using System.Collections;
-using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Schema;
-using System.IO;
-using System.Globalization;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Data
 {

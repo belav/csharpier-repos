@@ -10,10 +10,11 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Threading;
+
 using Microsoft.Internal;
-using System.IO;
 
 namespace System.ComponentModel.Composition.Hosting
 {

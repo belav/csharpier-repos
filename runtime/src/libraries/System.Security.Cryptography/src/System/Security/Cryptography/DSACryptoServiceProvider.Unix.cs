@@ -1,10 +1,11 @@
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Versioning;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Cryptography;
-using System.IO;
-using System.Diagnostics;
-using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {

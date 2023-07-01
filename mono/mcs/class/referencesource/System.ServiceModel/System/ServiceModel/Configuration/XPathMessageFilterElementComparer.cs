@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
     using System.Collections;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Xml;
 

@@ -1,3 +1,8 @@
+using System;
+using System.Globalization;
+using System.Web;
+using System.Web.Hosting;
+
 //
 // Tests for System.Web.Hosting.SimpleWorkerRequest.cs
 //
@@ -29,10 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Web;
-using System.Web.Hosting;
 
 namespace MonoTests.System.Web
 {

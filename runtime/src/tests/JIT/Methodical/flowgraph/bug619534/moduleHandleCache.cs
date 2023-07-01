@@ -23,6 +23,7 @@ System.BadImageFormatException: [C:\tests\Dev10\640711\Lib1.dll] Bad string toke
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 namespace Test_moduleHandleCache_cs

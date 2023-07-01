@@ -27,15 +27,15 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.Xml;
 
 using Table = System.Collections.Generic.Dictionary<
     System.Xml.UniqueId,
     System.ServiceModel.Security.Tokens.SecurityContextSecurityToken
 >;
+using System.Collections.ObjectModel;
+using System.IdentityModel.Selectors;
+using System.IdentityModel.Tokens;
+using System.Xml;
 
 namespace System.ServiceModel.Security.Tokens
 {

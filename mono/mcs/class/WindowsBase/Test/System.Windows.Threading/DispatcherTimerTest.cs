@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Threading;
+
 //
 // Tests for System.Windows.Threading.DispatcherTimer
 //
@@ -6,8 +9,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Windows.Threading;
 
 namespace MonoTests.System.Windows.Threading
 {

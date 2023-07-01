@@ -6,11 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
 #if ASPNETWEBAPI
-using ErrorResources = System.Web.Http.Properties.SRResources;
-using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
+using ErrorResources = System.Web.Http.Properties.SRResources;using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
 #else
-using ErrorResources = System.Web.Mvc.Properties.MvcResources;
-using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
+using ErrorResources = System.Web.Mvc.Properties.MvcResources;using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
 #endif
 
 #if ASPNETWEBAPI

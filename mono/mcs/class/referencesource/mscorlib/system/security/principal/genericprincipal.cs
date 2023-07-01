@@ -14,11 +14,8 @@ namespace System.Security.Principal
 {
     using System;
     using System.Diagnostics.Contracts;
-
 #if !FEATURE_CORECLR
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Security.Claims;
+    using System.Collections.Generic;using System.Runtime.Serialization;using System.Security.Claims;
 #endif
 
     [Serializable]

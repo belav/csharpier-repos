@@ -6,29 +6,20 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Linq;
 #if ASPNETWEBAPI
-using System.Net.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Properties;
+using System.Net.Http;using System.Web.Http.Controllers;using System.Web.Http.Properties;
 #else
 using System.Web.Routing;
 #endif
 
 #if ASPNETWEBAPI
-using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
-using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
-using TResources = System.Web.Http.Properties.SRResources;
-using TRoute = System.Web.Http.Routing.IHttpRoute;
-using TRouteDictionary = System.Collections.Generic.IDictionary<string, object>;
-using TRouteDictionaryConcrete = System.Web.Http.Routing.HttpRouteValueDictionary;
+using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;using TResources = System.Web.Http.Properties.SRResources;using TRoute = System.Web.Http.Routing.IHttpRoute;using TRouteDictionary = System.Collections.Generic.IDictionary<
+    string,
+    object
+>;using TRouteDictionaryConcrete = System.Web.Http.Routing.HttpRouteValueDictionary;
 
 #else
 
-using TActionDescriptor = System.Web.Mvc.ActionDescriptor;
-using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
-using TResources = System.Web.Mvc.Properties.MvcResources;
-using TRoute = System.Web.Routing.Route;
-using TRouteDictionary = System.Web.Routing.RouteValueDictionary;
-using TRouteDictionaryConcrete = System.Web.Routing.RouteValueDictionary;
+using TActionDescriptor = System.Web.Mvc.ActionDescriptor;using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;using TResources = System.Web.Mvc.Properties.MvcResources;using TRoute = System.Web.Routing.Route;using TRouteDictionary = System.Web.Routing.RouteValueDictionary;using TRouteDictionaryConcrete = System.Web.Routing.RouteValueDictionary;
 #endif
 
 #if ASPNETWEBAPI

@@ -27,12 +27,9 @@
 //
 
 #if !MOBILE && !XAMMAC_4_5
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;
 #endif
-using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
-using System.Text;
+using System.ServiceModel.Channels;using System.ServiceModel.Security;using System.Text;
 
 namespace System.ServiceModel.Security.Tokens
 {

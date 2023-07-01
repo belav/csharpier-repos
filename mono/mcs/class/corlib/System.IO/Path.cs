@@ -1,3 +1,4 @@
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 //
 // System.IO.Path.cs
@@ -46,7 +47,6 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.IO
 {

@@ -36,8 +36,8 @@
 // exception statement from your version.
 
 using System;
-using System.Text;
 using System.IO;
+using System.Text;
 
 using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip.Compression;

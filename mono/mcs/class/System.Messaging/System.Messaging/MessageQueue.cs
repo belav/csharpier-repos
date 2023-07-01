@@ -35,10 +35,7 @@ using System.ComponentModel;
 #if !NO_SYSTEM_DRAWING_DEPENDENCY
 using System.Drawing;
 #endif
-using System.Messaging.Design;
-using System.Threading;
-
-using Mono.Messaging;
+using System.Messaging.Design;using System.Threading;using Mono.Messaging;
 
 namespace System.Messaging
 {

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IdentityModel;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
+using SysAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
@@ -17,7 +18,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Diagnostics;
 using System.Xml;
-using SysAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
 
 namespace System.ServiceModel.Security
 {

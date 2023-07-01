@@ -7,6 +7,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;

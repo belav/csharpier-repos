@@ -5,6 +5,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+
 using Microsoft.VisualStudio.Telemetry;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess

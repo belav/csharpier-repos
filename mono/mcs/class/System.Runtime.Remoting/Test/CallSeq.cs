@@ -7,8 +7,9 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections;
+using System.Threading;
+
 using NUnit.Framework;
 
 namespace MonoTests.Remoting

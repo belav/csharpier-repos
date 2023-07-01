@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 //
 // System.Configuration.DpapiProtectedConfigurationProvider.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Xml;
-using System.Collections.Specialized;
 
 namespace System.Configuration
 {

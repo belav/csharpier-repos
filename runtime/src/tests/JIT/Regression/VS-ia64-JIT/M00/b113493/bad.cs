@@ -3,10 +3,10 @@
 
 namespace DefaultNamespace
 {
-    using System.Threading;
-    using System.Runtime.InteropServices;
     using System;
     using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Threading;
 
     internal class ExternalClass
     {

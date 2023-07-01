@@ -1,7 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using POS_Server.Controllers;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,6 +11,10 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
+
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using POS_Server.Controllers;
 
 namespace POS_Server.Models.VM
 {

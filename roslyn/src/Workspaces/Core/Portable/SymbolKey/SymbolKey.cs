@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Roslyn.Utilities;
 

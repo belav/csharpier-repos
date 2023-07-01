@@ -19,12 +19,7 @@ using System.Linq.Expressions;
 using Microsoft.Scripting.Ast;
 #endif
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.Scripting.Utils;
-using System.Dynamic;
-using System.IO;
+using System;using System.Collections.Generic;using System.Diagnostics;using Microsoft.Scripting.Utils;using System.Dynamic;using System.IO;
 
 namespace Microsoft.Scripting
 {

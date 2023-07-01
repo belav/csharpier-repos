@@ -8,11 +8,12 @@
 
 namespace System.CodeDom
 {
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+
+    using Microsoft.Win32;
 
     [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
     public class CodeChecksumPragma : CodeDirective

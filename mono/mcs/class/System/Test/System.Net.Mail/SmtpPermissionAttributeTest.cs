@@ -29,11 +29,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.Net.Mail;
-using System.Security;
-using System.Security.Permissions;
+using NUnit.Framework;using System;using System.Net.Mail;using System.Security;using System.Security.Permissions;
 
 namespace MonoTests.System.Net.Mail
 {

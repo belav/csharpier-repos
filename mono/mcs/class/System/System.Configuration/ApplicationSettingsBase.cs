@@ -21,14 +21,10 @@
 //
 
 #if CONFIGURATION_DEP
-using System.IO;
-using System.Xml.Serialization;
+using System.IO;using System.Xml.Serialization;
 #endif
 
-using System.ComponentModel;
-using System.Reflection;
-using System.Threading;
-using System.Collections.Specialized;
+using System.ComponentModel;using System.Reflection;using System.Threading;using System.Collections.Specialized;
 
 namespace System.Configuration
 {

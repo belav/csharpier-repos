@@ -20,8 +20,8 @@
 namespace System.Reflection
 {
     using System;
-    using System.Runtime.InteropServices;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.Runtime.InteropServices;
 
     // Interface does not need to be marked with the serializable attribute
     [Guid("AFBF15E5-C37C-11d2-B88E-00A0C9B471B8")]

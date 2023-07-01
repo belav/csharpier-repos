@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
-using System.CommandLine.Parsing;
+﻿using System.CommandLine.Parsing;
 using System.Linq;
 using System.Threading.Tasks;
+
+using FluentAssertions;
 
 using Xunit;
 

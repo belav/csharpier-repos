@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Completion.Providers;
 using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
 

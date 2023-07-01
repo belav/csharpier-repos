@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings;
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;

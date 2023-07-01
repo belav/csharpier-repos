@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Threading;
+
 using BenchmarkDotNet.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;

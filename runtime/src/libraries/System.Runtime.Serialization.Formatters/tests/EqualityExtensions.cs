@@ -20,8 +20,8 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Security;
 using System.Threading;
-using Xunit;
 
+using Xunit;
 // System.Text.Json is a .NET Core 3.0 specific library
 #if NETCOREAPP
 using System.Text.Json;

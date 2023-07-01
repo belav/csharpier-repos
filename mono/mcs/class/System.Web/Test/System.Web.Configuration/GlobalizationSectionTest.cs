@@ -1,3 +1,16 @@
+using System;
+using System.Configuration;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Security;
+using System.Xml;
+
+using MonoTests.stand_alone.WebHarness;
+
+using MonoTests.SystemWeb.Framework;
 //
 // GlobalizationSectionTest.cs
 //	- unit tests for System.Web.Configuration.GlobalizationSection
@@ -29,19 +42,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Configuration;
-using System.Reflection;
-using System.Text;
-using System.IO;
-using System.Xml;
-using System.Web.Configuration;
-using System.Web;
-using System.Web.Security;
-
-using MonoTests.SystemWeb.Framework;
-using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.Configuration
 {

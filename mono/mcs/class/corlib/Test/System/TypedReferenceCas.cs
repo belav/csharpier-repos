@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // TypedReferenceCas.cs - CAS unit tests for System.TypedReference
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

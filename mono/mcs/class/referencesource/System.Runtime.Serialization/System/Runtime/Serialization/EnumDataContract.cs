@@ -9,10 +9,10 @@ namespace System.Runtime.Serialization
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
-    using System.Threading;
-    using System.Text;
-    using System.Xml;
     using System.Security;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
 
 #if USE_REFEMIT
     public sealed class EnumDataContract : DataContract

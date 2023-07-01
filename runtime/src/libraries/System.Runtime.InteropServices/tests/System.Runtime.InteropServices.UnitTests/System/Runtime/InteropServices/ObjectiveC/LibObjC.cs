@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-using Xunit;
-
 using static System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal;
+
+using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
 {

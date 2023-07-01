@@ -25,15 +25,13 @@
 
 #if !(NET20 || DNXCORE50)
 
-using System;
-using System.Collections.Generic;
+using System;using System.Collections.Generic;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using Newtonsoft.Json.Linq;
+using System.Text;using Newtonsoft.Json.Linq;
 
 namespace Newtonsoft.Json.Tests.LinqToSql
 {

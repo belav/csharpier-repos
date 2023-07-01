@@ -28,6 +28,7 @@ namespace I18N.CJK
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+
     using I18N.Common;
 
     // This class assists encoding classes for the large CJK character

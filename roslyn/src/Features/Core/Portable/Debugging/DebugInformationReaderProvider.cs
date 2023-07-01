@@ -11,6 +11,7 @@ using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.EditAndContinue;
 using Microsoft.DiaSymReader;
 using Roslyn.Utilities;

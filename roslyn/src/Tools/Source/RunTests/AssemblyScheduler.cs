@@ -12,6 +12,7 @@ using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace RunTests

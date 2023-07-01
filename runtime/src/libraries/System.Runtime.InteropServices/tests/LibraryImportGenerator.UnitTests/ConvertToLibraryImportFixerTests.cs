@@ -5,16 +5,16 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Interop.Analyzers;
-using Xunit;
-using static Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer;
 
 using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer,
     Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer
 >;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Interop.Analyzers;
+using static Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer;
+using Xunit;
 
 namespace LibraryImportGenerator.UnitTests
 {

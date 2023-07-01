@@ -8,6 +8,7 @@ using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
 using System.Reflection;
 using System.UnitTesting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition.AttributedModel

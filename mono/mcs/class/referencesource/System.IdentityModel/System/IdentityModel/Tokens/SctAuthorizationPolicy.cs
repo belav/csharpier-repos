@@ -4,8 +4,8 @@
 namespace System.IdentityModel.Tokens
 {
     using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
     using SysClaim = System.IdentityModel.Claims.Claim;
+    using System.IdentityModel.Policy;
 
     /// <summary>
     /// This class serves as a dummy AuthorizationPolicy on an issued token so that when

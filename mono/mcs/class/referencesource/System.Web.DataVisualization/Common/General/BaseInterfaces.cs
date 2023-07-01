@@ -6,9 +6,9 @@
 // @owner=alexgor, deliant, victark
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using System.Collections;
 
 #if WINFORMS_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting

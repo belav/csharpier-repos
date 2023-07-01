@@ -8,9 +8,10 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime;
     using System.Reflection;
+    using System.Runtime;
     using System.Xml.Linq;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
 

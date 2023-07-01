@@ -10,12 +10,7 @@ using System.Xml;
 #if !SILVERLIGHT
 using System.Net;
 #endif
-using System.Text;
-using System.Xml.Utils;
-using System.Reflection;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Runtime.Versioning;
+using System.Text;using System.Xml.Utils;using System.Reflection;using System.Diagnostics;using System.Collections.Generic;using System.Runtime.Versioning;
 
 namespace System.Xml.Resolvers
 {

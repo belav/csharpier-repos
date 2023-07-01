@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Linq;
-using System.Linq;
-using System.Reflection;
 using LinqMetaTable = System.Data.Linq.Mapping.MetaTable;
 using LinqMetaType = System.Data.Linq.Mapping.MetaType;
+using System.Linq;
+using System.Reflection;
 
 namespace System.Web.DynamicData.ModelProviders
 {

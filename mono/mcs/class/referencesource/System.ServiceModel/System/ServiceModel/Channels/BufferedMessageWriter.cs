@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Diagnostics;
     using System.IO;
     using System.Xml;
-    using System.Diagnostics;
 
     abstract class BufferedMessageWriter
     {

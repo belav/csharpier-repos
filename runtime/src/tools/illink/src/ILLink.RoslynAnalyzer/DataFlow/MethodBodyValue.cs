@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 

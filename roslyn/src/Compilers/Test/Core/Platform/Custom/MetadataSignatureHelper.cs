@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Roslyn.Utilities;
 
 namespace Roslyn.Test.Utilities

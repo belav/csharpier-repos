@@ -11,6 +11,7 @@ namespace System.Diagnostics
     using System;
     using System.IO;
     using System.Security.Permissions;
+
     using Microsoft.Win32;
 
     [HostProtection(Synchronization = true)]

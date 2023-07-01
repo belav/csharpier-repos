@@ -6,6 +6,8 @@
 
 namespace System
 {
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     // This file defines an internal class used to throw exceptions in BCL code.
     // The main purpose is to reduce code size.
     //
@@ -49,8 +51,6 @@ namespace System
 
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
-    using System.Collections.Generic;
 
     [Pure]
 #if MONO

@@ -4,8 +4,9 @@
 using System.Globalization;
 using System.Tests;
 using System.Text.Json.Serialization.Samples;
-using Xunit;
 using static System.Text.Json.Serialization.Samples.JsonSerializerExtensions;
+
+using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {

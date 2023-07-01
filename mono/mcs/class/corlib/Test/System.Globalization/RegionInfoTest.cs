@@ -1,3 +1,8 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+
 //
 // System.Globalization.RegionInfoTest.cs
 //
@@ -8,10 +13,6 @@
 //
 
 using NUnit.Framework;
-using System.IO;
-using System;
-using System.Globalization;
-using System.Threading;
 
 namespace MonoTests.System.Globalization
 {

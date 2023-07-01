@@ -43,13 +43,10 @@ using System.Collections;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.Utilities;
 #else
-using System.Web.UI.DataVisualization.Charting;
-
-using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting;using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 #endregion
 

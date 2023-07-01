@@ -29,10 +29,10 @@
 using System;
 using System.Text;
 
+using MonoTests.I18N;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-
-using MonoTests.I18N;
 
 namespace MonoTests.I18N.Other
 {

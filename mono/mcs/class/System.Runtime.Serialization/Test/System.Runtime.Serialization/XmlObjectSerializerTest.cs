@@ -40,15 +40,7 @@ using System.Collections.ObjectModel;
 #if !MOBILE
 using System.Data;
 #endif
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using NUnit.Framework;
+using System.IO;using System.Linq;using System.Net;using System.Runtime.Serialization;using System.Text;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using NUnit.Framework;
 
 [assembly: ContractNamespace(
     "http://www.u2u.be/samples/wcf/2009",

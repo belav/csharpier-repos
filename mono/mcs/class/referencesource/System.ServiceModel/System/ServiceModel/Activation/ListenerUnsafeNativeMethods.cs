@@ -5,15 +5,16 @@
 namespace System.ServiceModel.Activation
 {
     using System;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.ServiceModel.Channels;
     using System.ServiceModel.ComIntegration;
-    using Microsoft.Win32.SafeHandles;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
     using System.ServiceModel.Security;
     using System.Text;
+
+    using Microsoft.Win32.SafeHandles;
 
     [SuppressUnmanagedCodeSecurityAttribute()]
     static class ListenerUnsafeNativeMethods

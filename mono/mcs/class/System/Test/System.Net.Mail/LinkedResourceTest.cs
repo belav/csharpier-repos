@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Net.Mail;
+using System.Net.Mime;
+
 //
 // LinkedResourceTest.cs - NUnit Test Cases for System.Net.MailAddress.LinkedResource
 //
@@ -7,10 +12,6 @@
 // (C) 2005 John Luke
 //
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Net.Mail;
-using System.Net.Mime;
 
 namespace MonoTests.System.Net.Mail
 {

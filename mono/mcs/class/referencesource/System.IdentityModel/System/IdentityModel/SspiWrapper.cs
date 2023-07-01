@@ -4,14 +4,14 @@
 
 namespace System.IdentityModel
 {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Security.Authentication.ExtendedProtection;
     using System.Net;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
 
     //From Schannel.h
     internal enum SchProtocols

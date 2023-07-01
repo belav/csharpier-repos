@@ -35,34 +35,12 @@
 #if SUBAXES
 
 #region Used namespace
-using System;
-using System.Globalization;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design.Serialization;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
+using System;using System.Globalization;using System.Reflection;using System.Collections;using System.Collections.Specialized;using System.ComponentModel;using System.ComponentModel.Design;using System.ComponentModel.Design.Serialization;using System.Data;using System.Drawing;using System.Drawing.Design;using System.Drawing.Text;using System.Drawing.Drawing2D;
 #if WINFORMS_CONTROL
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.DataVisualization.Charting.Data;
-using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;using System.Windows.Forms.DataVisualization.Charting.Data;using System.Windows.Forms.DataVisualization.Charting.ChartTypes;using System.Windows.Forms.DataVisualization.Charting.Utilities;using System.Windows.Forms.DataVisualization.Charting.Borders3D;using System.Windows.Forms.DataVisualization.Charting;
 
 #else
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.DataVisualization.Charting;
-using System.Web.UI.DataVisualization.Charting.Data;
-using System.Web.UI.DataVisualization.Charting.Utilities;
-using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web;using System.Web.UI;using System.Web.UI.DataVisualization.Charting;using System.Web.UI.DataVisualization.Charting.Data;using System.Web.UI.DataVisualization.Charting.Utilities;using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif
 
 #endregion

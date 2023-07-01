@@ -1,6 +1,6 @@
+using System.Collections;
 // Bug #80314
 using System.Collections.Generic;
-using System.Collections;
 
 public class Temp<T> : IEnumerable<Temp<T>.Foo>
 {

@@ -28,6 +28,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using DbLinq.Util;
 
 namespace DbLinq.Schema.Dbml.Adapter

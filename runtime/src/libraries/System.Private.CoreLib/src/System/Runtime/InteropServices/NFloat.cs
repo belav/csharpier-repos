@@ -7,16 +7,11 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-
 #pragma warning disable SA1121 // We use our own aliases since they differ per platform
 #if TARGET_32BIT
-using NativeExponentType = System.SByte;
-using NativeSignificandType = System.UInt32;
-using NativeType = System.Single;
+using NativeExponentType = System.SByte;using NativeSignificandType = System.UInt32;using NativeType = System.Single;
 #else
-using NativeExponentType = System.Int16;
-using NativeSignificandType = System.UInt64;
-using NativeType = System.Double;
+using NativeExponentType = System.Int16;using NativeSignificandType = System.UInt64;using NativeType = System.Double;
 #endif
 
 namespace System.Runtime.InteropServices

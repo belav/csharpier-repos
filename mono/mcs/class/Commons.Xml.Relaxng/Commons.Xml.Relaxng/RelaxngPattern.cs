@@ -35,10 +35,11 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Xml;
-using Commons.Xml.Relaxng.Derivative;
-using Commons.Xml.Relaxng.Rnc;
 
 using NSResolver = System.Xml.IXmlNamespaceResolver;
+
+using Commons.Xml.Relaxng.Derivative;
+using Commons.Xml.Relaxng.Rnc;
 
 namespace Commons.Xml.Relaxng
 {

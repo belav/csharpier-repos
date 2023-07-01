@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
-using System.Threading.Tasks;
-using Xunit;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
+using System.Threading.Tasks;
+
+using Xunit;
 
 namespace System.Security.Cryptography.Cose.Tests
 {

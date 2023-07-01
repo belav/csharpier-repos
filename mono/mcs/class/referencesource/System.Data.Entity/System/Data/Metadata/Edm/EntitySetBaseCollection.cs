@@ -12,9 +12,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Data.Metadata.Edm
 {

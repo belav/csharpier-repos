@@ -3,17 +3,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 
+using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
+
 using ILCompiler.DependencyAnalysisFramework;
+using Internal.JitInterface;
 
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.TypesDebugInfo;
-using Internal.JitInterface;
-using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
 
 namespace ILCompiler.DependencyAnalysis
 {

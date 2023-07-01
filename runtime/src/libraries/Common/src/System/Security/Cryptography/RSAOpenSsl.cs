@@ -8,8 +8,9 @@ using System.Formats.Asn1;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Security.Cryptography.Asn1;
-using Microsoft.Win32.SafeHandles;
+
 using Internal.Cryptography;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

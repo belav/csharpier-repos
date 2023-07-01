@@ -18,9 +18,9 @@ namespace Castle.Services.Logging.NLogIntegration
 
     using Castle.Core.Logging;
 
-    using NLog;
-
     using ExtendedLogger = Castle.Core.Logging.IExtendedLogger;
+
+    using NLog;
 
     /// <summary>
     ///   Implementation of <see cref="IExtendedLogger" /> for NLog.

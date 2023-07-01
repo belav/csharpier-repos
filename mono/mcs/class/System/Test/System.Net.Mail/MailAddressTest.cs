@@ -1,3 +1,6 @@
+using System;
+using System.Net.Mail;
+
 //
 // MailAddressTest.cs - NUnit Test Cases for System.Net.MailAddress.MailAddress
 //
@@ -8,8 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net.Mail;
 
 namespace MonoTests.System.Net.Mail
 {

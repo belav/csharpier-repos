@@ -14,15 +14,13 @@
 **
 ===========================================================*/
 using System;
-using System.Runtime.InteropServices;
-using System.Globalization;
 using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading;
 #if FEATURE_ASYNC_IO
-using System.Collections.ObjectModel;
-using System.Security;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;using System.Security;using System.Threading.Tasks;
 #endif  // !FEATURE_PAL && FEATURE_ASYNC_IO
 
 namespace System.IO

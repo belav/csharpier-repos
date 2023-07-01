@@ -1,3 +1,8 @@
+using System;
+using System.Runtime.InteropServices;
+using System.Security;
+
+using Microsoft.Win32.SafeHandles;
 //
 // System.Runtime.InteropServices.SafeHandle Test Cases
 //
@@ -7,10 +12,6 @@
 // Copyright (C) 2004-2006 Novell, Inc (http://www.novell.com)
 //
 using NUnit.Framework;
-using System;
-using System.Runtime.InteropServices;
-using System.Security;
-using Microsoft.Win32.SafeHandles;
 
 namespace MonoTests.System.Runtime.InteropServices
 {

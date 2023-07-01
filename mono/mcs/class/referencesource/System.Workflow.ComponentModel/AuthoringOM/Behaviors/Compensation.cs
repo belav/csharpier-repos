@@ -1,12 +1,12 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Drawing;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Design;
+    using System.Drawing;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [ToolboxItem(false)]
     [Designer(typeof(CompensationHandlerActivityDesigner), typeof(IDesigner))]

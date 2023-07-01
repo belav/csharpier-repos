@@ -1,3 +1,6 @@
+using System;
+using System.Web.Configuration;
+
 //
 // HttpCapabilitiesBaseCas.cs
 //	- CAS unit tests for System.Web.Configuration.HttpCapabilitiesBase
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Web.Configuration;
 
 namespace MonoCasTests.System.Web.Configuration
 {

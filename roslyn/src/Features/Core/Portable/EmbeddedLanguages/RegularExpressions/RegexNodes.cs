@@ -7,18 +7,19 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
 using Microsoft.CodeAnalysis.Serialization;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 {
-    using RegexNodeOrToken = EmbeddedSyntaxNodeOrToken<RegexKind, RegexNode>;
-    using RegexToken = EmbeddedSyntaxToken<RegexKind>;
     using RegexAlternatingSequenceList = EmbeddedSeparatedSyntaxNodeList<
         RegexKind,
         RegexNode,
         RegexSequenceNode
     >;
+    using RegexNodeOrToken = EmbeddedSyntaxNodeOrToken<RegexKind, RegexNode>;
+    using RegexToken = EmbeddedSyntaxToken<RegexKind>;
 
     internal sealed class RegexCompilationUnit : RegexNode
     {

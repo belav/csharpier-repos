@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
+using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {

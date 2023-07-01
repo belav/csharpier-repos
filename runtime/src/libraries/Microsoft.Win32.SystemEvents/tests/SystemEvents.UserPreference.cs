@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Xunit;
+
 using static Interop;
+using Xunit;
 
 namespace Microsoft.Win32.SystemEventsTests
 {

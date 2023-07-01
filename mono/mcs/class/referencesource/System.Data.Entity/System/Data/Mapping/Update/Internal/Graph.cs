@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="Graph.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,11 +9,10 @@
 //---------------------------------------------------------------------
 
 using System.Data.Common.Utils;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.Update.Internal
 {

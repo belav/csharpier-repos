@@ -1,3 +1,7 @@
+using System;
+using System.Web;
+using System.Web.Security;
+
 //
 // FormsIdentityTest.cs - Unit tests for System.Web.Security.FormsIdentity
 //
@@ -27,10 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Web;
-using System.Web.Security;
 
 namespace MonoTests.System.Web.Security
 {

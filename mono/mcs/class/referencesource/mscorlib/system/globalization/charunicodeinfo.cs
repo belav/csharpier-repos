@@ -21,13 +21,13 @@ namespace System.Globalization
     //This class has only static members and therefore doesn't need to be serialized.
 
     using System;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Reflection;
-    using System.Security;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Threading;
 
     public static class CharUnicodeInfo
     {

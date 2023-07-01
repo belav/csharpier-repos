@@ -24,10 +24,10 @@
 #endregion
 
 using System;
-using System.Runtime.CompilerServices;
-using System.IO;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.CompilerServices;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif

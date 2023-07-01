@@ -11,11 +11,11 @@ namespace System.ServiceModel.Channels
     using System.Runtime.Diagnostics;
     using System.Runtime.Serialization.Json;
     using System.ServiceModel.Diagnostics;
+    using SMTD = System.ServiceModel.Diagnostics.Application.TD;
     using System.ServiceModel.Web;
+    using WebTD = System.ServiceModel.Web.Diagnostics.Application.TD;
     using System.Text;
     using System.Xml;
-    using SMTD = System.ServiceModel.Diagnostics.Application.TD;
-    using WebTD = System.ServiceModel.Web.Diagnostics.Application.TD;
 
     class JsonMessageEncoderFactory : MessageEncoderFactory
     {

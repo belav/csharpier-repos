@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using TelemData = System.Collections.Generic.KeyValuePair<string, object>;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TelemData = System.Collections.Generic.KeyValuePair<string, object>;
+
 using Xunit;
 
 namespace System.Diagnostics.Tests

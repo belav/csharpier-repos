@@ -2,15 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Net.Http;
-using System.Net;
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
-using static Interop.CoreFoundation;
-using static Interop.RunLoop;
 
 using CFRunLoopRef = System.IntPtr;
 using CFRunLoopSourceRef = System.IntPtr;
+using System.Net;
+using System.Net.Http;
+
+using static Interop.CoreFoundation;
+using static Interop.RunLoop;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Net.Http
 {

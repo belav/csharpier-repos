@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Image = System.Drawing.Image;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Globalization;
@@ -13,8 +14,8 @@ using System.IO;
 using System.Linq;
 using System.Web.Helpers.Resources;
 using System.Web.UI.WebControls;
+
 using Microsoft.Internal.Web.Utils;
-using Image = System.Drawing.Image;
 
 namespace System.Web.Helpers
 {

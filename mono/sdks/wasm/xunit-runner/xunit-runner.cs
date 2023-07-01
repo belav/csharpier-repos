@@ -1,14 +1,14 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Reflection;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 using Xunit.ConsoleClient;
+using Xunit.Sdk;
 
 class MsgBus : IMessageBus
 {

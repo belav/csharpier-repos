@@ -6,8 +6,8 @@
 
 namespace System.Diagnostics
 {
-    using System.Security.Permissions;
     using System.Collections;
+    using System.Security.Permissions;
 
     [Serializable()]
     public class EventLogPermissionEntryCollection : CollectionBase

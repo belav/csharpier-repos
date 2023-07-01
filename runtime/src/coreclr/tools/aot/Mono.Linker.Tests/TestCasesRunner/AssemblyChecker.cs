@@ -8,17 +8,18 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+
 using FluentAssertions;
 using ILCompiler;
 using Internal.IL.Stubs;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
+using MetadataType = Internal.TypeSystem.MetadataType;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Linker.Tests.Cases.Expectations.Assertions;
 using Mono.Linker.Tests.Extensions;
 using Xunit;
-using MetadataType = Internal.TypeSystem.MetadataType;
 
 namespace Mono.Linker.Tests.TestCasesRunner
 {

@@ -24,9 +24,7 @@
 #endregion
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40)
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters;
+using System;using System.Collections.Generic;using System.Runtime.Serialization.Formatters;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

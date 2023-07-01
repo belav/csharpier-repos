@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Threading;
-using UIAutomationClient;
 using AutomationElementIdentifiers = System.Windows.Automation.AutomationElementIdentifiers;
 using ControlType = System.Windows.Automation.ControlType;
+
+using UIAutomationClient;
 
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {

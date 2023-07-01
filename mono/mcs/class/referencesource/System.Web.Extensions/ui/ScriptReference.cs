@@ -10,13 +10,13 @@ namespace System.Web.UI
     using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using Debug = System.Diagnostics.Debug;
     using System.Globalization;
     using System.Reflection;
     using System.Web;
     using System.Web.Handlers;
     using System.Web.Resources;
     using System.Web.Util;
-    using Debug = System.Diagnostics.Debug;
 
     [DefaultProperty("Path"),]
     public class ScriptReference : ScriptReferenceBase

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Net.Http.HPack;
+
 using Xunit;
 
 namespace System.Net.Http.Unit.Tests.HPack

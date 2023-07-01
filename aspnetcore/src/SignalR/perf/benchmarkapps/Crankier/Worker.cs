@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Http.Connections;
 
 namespace Microsoft.AspNetCore.SignalR.Crankier

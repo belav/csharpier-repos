@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // X509BasicConstraintsExtensionTest.cs
 //	- NUnit tests for X509BasicConstraintsExtension
@@ -29,10 +33,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

@@ -18,6 +18,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     using System.Linq;
     using System.Xml.XPath;
     using System.Xml.Xsl;
+
     using Castle.Components.DictionaryAdapter.Tests;
     using NUnit.Framework;
 

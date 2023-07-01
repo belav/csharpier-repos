@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.IO;
+
 //
 // DateTimeFormatInfo.cs
 //
@@ -29,9 +33,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.IO;
 
 namespace MonoTests.System.Globalization
 {

@@ -4,6 +4,7 @@
 
 using System.Threading.Tasks;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.Editor;

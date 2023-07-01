@@ -8,6 +8,7 @@ namespace System.Configuration
 {
     using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
@@ -15,10 +16,10 @@ namespace System.Configuration
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security;
     using System.Security.Cryptography;
-    using System.Security.Policy;
     using System.Security.Permissions;
+    using System.Security.Policy;
     using System.Text;
-    using System.Globalization;
+
     using Microsoft.Win32;
 
     class ClientConfigPaths

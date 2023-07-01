@@ -4,17 +4,18 @@
 
 namespace System.IdentityModel.Selectors
 {
-    using Microsoft.Win32.SafeHandles;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
+
+    using Microsoft.Win32.SafeHandles;
 
     class X509CertificateStore
     {

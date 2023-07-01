@@ -1,3 +1,12 @@
+using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using Microsoft.VisualBasic;
 //
 // VBCodeProviderCas.cs
 //	- CAS unit tests for Microsoft.VisualBasic.VBCodeProvider
@@ -28,15 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using Microsoft.VisualBasic;
 
 namespace MonoCasTests.Microsoft.VisualBasic
 {

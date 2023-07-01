@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
 //
 // PkitsTest.cs - NUnit tests for
 //	NIST Public Key Interoperability Test Suite (PKITS)
@@ -30,14 +38,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Reflection;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

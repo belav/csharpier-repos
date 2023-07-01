@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Web.Services.Description.ExtensionManager.cs
 //
@@ -29,10 +30,9 @@
 //
 
 using System.Reflection;
-using System.Collections;
 using System.Web.Services.Configuration;
-using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {

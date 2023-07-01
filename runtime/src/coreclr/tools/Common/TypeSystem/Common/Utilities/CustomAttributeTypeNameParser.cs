@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Debug = System.Diagnostics.Debug;
 
 using AssemblyName = System.Reflection.AssemblyName;
-using Debug = System.Diagnostics.Debug;
+using System.Text;
 
 namespace Internal.TypeSystem
 {

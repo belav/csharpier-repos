@@ -4,11 +4,11 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Test.Common;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 
 using Xunit;
-using System.Runtime.Serialization;
 
 namespace System.Net.Tests
 {

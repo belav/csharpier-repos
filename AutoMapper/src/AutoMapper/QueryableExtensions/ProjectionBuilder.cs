@@ -2,8 +2,9 @@
 
 namespace AutoMapper.QueryableExtensions.Impl;
 
-using ParameterBag = IDictionary<string, object>;
 using TypePairCount = Dictionary<ProjectionRequest, int>;
+
+using ParameterBag = IDictionary<string, object>;
 
 [EditorBrowsable(EditorBrowsableState.Never)]
 public interface IProjectionBuilder

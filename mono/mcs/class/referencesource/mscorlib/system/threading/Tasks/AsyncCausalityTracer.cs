@@ -11,17 +11,9 @@
 #undef FEATURE_COMINTEROP
 #endif
 
-using System;
-using System.Security;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-
+using System;using System.Security;using System.Diagnostics;using System.Diagnostics.Contracts;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;
 #if FEATURE_COMINTEROP
-using System.Runtime.InteropServices.WindowsRuntime;
-
-using WFD = Windows.Foundation.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;using WFD = Windows.Foundation.Diagnostics;
 #endif
 
 namespace System.Threading.Tasks

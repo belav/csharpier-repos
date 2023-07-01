@@ -7,10 +7,7 @@
 #define OPTIMIZED_MODE_WITHOUT_SCANNER
 #endif
 
-using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
+using System;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Text;
 
 // Make sure the interop data are present even without reflection
 namespace System.Runtime.CompilerServices

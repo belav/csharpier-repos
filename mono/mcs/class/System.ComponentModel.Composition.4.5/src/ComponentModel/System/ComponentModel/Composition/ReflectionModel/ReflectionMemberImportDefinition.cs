@@ -4,12 +4,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Globalization;
 using System.Reflection;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {

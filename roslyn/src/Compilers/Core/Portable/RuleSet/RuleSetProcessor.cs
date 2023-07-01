@@ -8,10 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

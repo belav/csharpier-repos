@@ -12,8 +12,8 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System.Collections;
     using System.ComponentModel;
     using System.Data;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
     using System.Web.UI.Design.MobileControls;
     using System.Windows.Forms;
 

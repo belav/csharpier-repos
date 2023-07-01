@@ -3,6 +3,7 @@
 
 using System.Data;
 using System.Globalization;
+
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 #pragma warning disable EF1001

@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.VirtualChars;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;

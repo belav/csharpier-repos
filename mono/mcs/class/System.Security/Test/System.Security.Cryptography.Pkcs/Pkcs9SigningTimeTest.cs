@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+using System.Text;
+
 //
 // Pkcs9SigningTimeTest.cs - NUnit tests for Pkcs9SigningTime
 //
@@ -29,12 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

@@ -1,3 +1,4 @@
+using System;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -6,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Tracing;
 using System.Linq;
-using System;
 
 /// <summary>
 /// Tests that using an EventSource to get the manifest works without method references in a trimmed application.

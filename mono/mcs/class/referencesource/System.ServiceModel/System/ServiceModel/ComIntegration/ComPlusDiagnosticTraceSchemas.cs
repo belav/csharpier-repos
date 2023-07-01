@@ -12,10 +12,10 @@ namespace System.ServiceModel.ComIntegration
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.Text;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using WsdlNS = System.Web.Services.Description;
 
     class WsdlWrapper : IXmlSerializable
     {

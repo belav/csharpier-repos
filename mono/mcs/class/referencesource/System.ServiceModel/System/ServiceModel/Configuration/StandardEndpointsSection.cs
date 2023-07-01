@@ -8,11 +8,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.Xml;
-    using System.Runtime.Diagnostics;
 
     public sealed partial class StandardEndpointsSection
         : ConfigurationSection,

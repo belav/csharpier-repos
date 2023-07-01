@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Policy;
+
 //
 // ZoneTest.cs - NUnit Test Cases for Zone
 //
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

@@ -17,9 +17,9 @@ namespace System.Reflection
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
     using System.Security.Permissions;
     using System.Text;
-    using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]

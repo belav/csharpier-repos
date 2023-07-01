@@ -13,14 +13,14 @@
 namespace System.ComponentModel
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Security.Permissions;
+    using System.Reflection;
     using CodeAccessPermission = System.Security.CodeAccessPermission;
+    using System.Security.Permissions;
 
     /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList"]/*' />
     /// <devdoc>

@@ -3,6 +3,7 @@
 
 using System;
 using System.Xml;
+
 using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq

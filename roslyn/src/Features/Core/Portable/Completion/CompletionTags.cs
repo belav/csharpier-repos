@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+
 using Microsoft.CodeAnalysis.Tags;
 
 namespace Microsoft.CodeAnalysis.Completion

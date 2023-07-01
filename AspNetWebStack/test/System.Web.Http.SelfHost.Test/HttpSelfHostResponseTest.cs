@@ -8,6 +8,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.ServiceModel;
 using System.Threading.Tasks;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.Http.SelfHost

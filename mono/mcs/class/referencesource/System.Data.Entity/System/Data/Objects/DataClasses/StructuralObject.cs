@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //---------------------------------------------------------------------
 // <copyright file="DataObject.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -7,12 +8,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Data;
+using System.Data.Common.Utils;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
-using System.ComponentModel;
 using System.Runtime.Serialization;
-using System.Data.Common.Utils;
 
 namespace System.Data.Objects.DataClasses
 {

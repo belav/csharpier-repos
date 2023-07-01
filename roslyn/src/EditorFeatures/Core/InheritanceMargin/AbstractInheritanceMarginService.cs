@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+
+using static Microsoft.CodeAnalysis.InheritanceMargin.InheritanceMarginServiceHelper;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.SymbolMapping;
 using Microsoft.CodeAnalysis.Text;
-using static Microsoft.CodeAnalysis.InheritanceMargin.InheritanceMarginServiceHelper;
 
 namespace Microsoft.CodeAnalysis.InheritanceMargin
 {

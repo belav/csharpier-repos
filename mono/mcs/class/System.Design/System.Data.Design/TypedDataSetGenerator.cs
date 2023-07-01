@@ -36,10 +36,10 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Data.Common;
-using System.Reflection;
-using System.IO;
 
 using T = System.Data.TypedDataSetGenerator;
+using System.IO;
+using System.Reflection;
 
 namespace System.Data.Design
 {

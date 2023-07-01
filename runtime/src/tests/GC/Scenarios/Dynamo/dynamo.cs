@@ -31,8 +31,8 @@
 namespace Dynamo
 {
     using System;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Threading;
 
     public class Dynamo
     {

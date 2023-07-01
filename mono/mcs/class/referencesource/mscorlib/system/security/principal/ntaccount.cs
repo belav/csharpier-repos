@@ -1,3 +1,9 @@
+using System;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,11 +14,6 @@
 
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.Principal
 {

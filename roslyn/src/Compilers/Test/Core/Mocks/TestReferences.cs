@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Test.Resources.Proprietary;
 using Roslyn.Test.Utilities;

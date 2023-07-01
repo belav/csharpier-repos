@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.ComponentModel.Composition.Hosting;
 using System.Composition;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.LanguageServer.Handler;
 using Microsoft.CodeAnalysis.PooledObjects;

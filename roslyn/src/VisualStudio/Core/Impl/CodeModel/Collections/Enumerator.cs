@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections;
+
 using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Collections

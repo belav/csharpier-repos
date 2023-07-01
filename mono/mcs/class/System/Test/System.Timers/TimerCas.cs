@@ -1,3 +1,10 @@
+using System;
+using System.ComponentModel;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Timers;
+
 //
 // TimerCas.cs - CAS unit tests for System.Timers.Timer
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.ComponentModel;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Timers;
 
 namespace MonoCasTests.System.Timers
 {

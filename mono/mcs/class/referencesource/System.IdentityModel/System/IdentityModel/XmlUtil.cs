@@ -6,16 +6,15 @@
 
 namespace System.IdentityModel
 {
-    using System.Xml;
-    using System.Diagnostics;
-
     using System.Collections.Generic;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Selectors;
-    using System.Xml.Schema;
-    using System.Text;
-    using System.IO;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
 
     // Merged System.IdentityModel.XmlUtil with Microsoft.IdentityModel.XmlUtil by porting methods from the Microsoft.IdentityModel.XmlUtil to this.
     static class XmlUtil

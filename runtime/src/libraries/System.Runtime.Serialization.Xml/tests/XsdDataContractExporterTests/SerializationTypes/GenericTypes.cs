@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Security;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Security;
 
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests

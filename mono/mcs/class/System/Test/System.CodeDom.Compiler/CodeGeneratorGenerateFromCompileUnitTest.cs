@@ -29,8 +29,9 @@
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using Microsoft.CSharp;
 using System.IO;
+
+using Microsoft.CSharp;
 
 using NUnit.Framework;
 

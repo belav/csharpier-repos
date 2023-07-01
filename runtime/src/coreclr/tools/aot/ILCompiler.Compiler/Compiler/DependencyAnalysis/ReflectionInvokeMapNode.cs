@@ -3,12 +3,13 @@
 
 using System;
 
+using Debug = System.Diagnostics.Debug;
+
+using Internal.NativeFormat;
+using InvokeTableFlags = Internal.Runtime.InvokeTableFlags;
+
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.NativeFormat;
-
-using Debug = System.Diagnostics.Debug;
-using InvokeTableFlags = Internal.Runtime.InvokeTableFlags;
 
 namespace ILCompiler.DependencyAnalysis
 {

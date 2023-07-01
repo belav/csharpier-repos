@@ -5,10 +5,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.IO.Ports;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Signals = Interop.Termios.Signals;
 
 namespace System.IO.Ports

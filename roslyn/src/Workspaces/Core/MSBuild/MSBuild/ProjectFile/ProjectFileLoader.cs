@@ -6,12 +6,13 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
+using MSB = Microsoft.Build;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.MSBuild.Build;
 using Microsoft.CodeAnalysis.MSBuild.Logging;
 using Roslyn.Utilities;
-using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.MSBuild
 {

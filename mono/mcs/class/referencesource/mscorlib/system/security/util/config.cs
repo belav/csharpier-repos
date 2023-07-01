@@ -13,21 +13,18 @@
 namespace System.Security.Util
 {
     using System;
-    using System.Security.Util;
-    using System.Security.Policy;
-    using System.Security.Permissions;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Globalization;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Util;
     using System.Text;
 #if FEATURE_SERIALIZATION
     using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-    using System.Threading;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
+    using System.Threading;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Runtime.Versioning;
 
     // Duplicated in vm\COMSecurityConfig.h
     [Serializable]

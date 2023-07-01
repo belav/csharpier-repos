@@ -18,10 +18,10 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Reflection;
 
     using SysPropertyDescriptor = System.ComponentModel.PropertyDescriptor;
+    using System.Diagnostics;
+    using System.Reflection;
 
     [DebuggerDisplay("Count = {Count}, Adapter = {Adapter}")]
     [DebuggerTypeProxy(typeof(ListProjectionDebugView<>))]

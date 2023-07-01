@@ -6,6 +6,7 @@ namespace System.ServiceModel.Channels
 {
     using System.Security;
     using System.Security.Permissions;
+
     using Net;
 
     /// <summary>

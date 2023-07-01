@@ -20,6 +20,7 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.Emit;
@@ -30,10 +31,10 @@ using Microsoft.DiaSymReader;
 using Microsoft.Metadata.Tools;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
+using PDB::Roslyn.Test.PdbUtilities;
+using PDB::Roslyn.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using PDB::Roslyn.Test.Utilities;
-using PDB::Roslyn.Test.PdbUtilities;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 {

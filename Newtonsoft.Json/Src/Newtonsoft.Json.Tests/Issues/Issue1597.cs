@@ -24,20 +24,9 @@
 #endregion
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40 || PORTABLE) || NETSTANDARD1_0 || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
+using System;using System.Collections;using System.Collections.Generic;using System.Dynamic;using System.IO;using System.Linq;using System.Reflection;using System.Runtime.Serialization;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Serialization;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

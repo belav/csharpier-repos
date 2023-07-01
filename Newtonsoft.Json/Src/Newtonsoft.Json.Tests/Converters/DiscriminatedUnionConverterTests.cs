@@ -24,18 +24,7 @@
 #endregion
 
 #if !(NET40 || NET35 || NET20 || DNXCORE50) || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System.Diagnostics;
-using System.Reflection;
-using Microsoft.FSharp.Core;
-using Microsoft.FSharp.Reflection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Tests.TestObjects;
-using Newtonsoft.Json.Tests.TestObjects.GeometricForms;
-using Newtonsoft.Json.Tests.TestObjects.Money;
+using System.Diagnostics;using System.Reflection;using Microsoft.FSharp.Core;using Microsoft.FSharp.Reflection;using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using Newtonsoft.Json.Tests.TestObjects;using Newtonsoft.Json.Tests.TestObjects.GeometricForms;using Newtonsoft.Json.Tests.TestObjects.Money;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

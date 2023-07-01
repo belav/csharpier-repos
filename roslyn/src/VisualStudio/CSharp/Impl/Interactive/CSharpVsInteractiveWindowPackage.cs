@@ -7,9 +7,10 @@
 using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
+
+using LanguageServiceGuids = Microsoft.VisualStudio.LanguageServices.Guids;
 using Microsoft.VisualStudio.LanguageServices.Interactive;
 using Microsoft.VisualStudio.Shell;
-using LanguageServiceGuids = Microsoft.VisualStudio.LanguageServices.Guids;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
 {

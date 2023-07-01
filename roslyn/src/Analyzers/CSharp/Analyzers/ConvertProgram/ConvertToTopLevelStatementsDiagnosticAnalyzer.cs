@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;

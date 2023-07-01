@@ -8,14 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Security;
-using Microsoft.Win32.SafeHandles;
 using System.Data.Common;
-using System.Runtime.Versioning;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security;
+using System.Text;
+
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Data.SqlTypes
 {

@@ -6,16 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using SysClaim = System.IdentityModel.Claims.Claim;
 using System.IdentityModel.Policy;
+using SystemAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Reflection;
-using System.ServiceModel;
-using System.ServiceModel.Security.Tokens;
-using SysClaim = System.IdentityModel.Claims.Claim;
-using SystemAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
 
 using System.Security.Claims;
+using System.ServiceModel;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {

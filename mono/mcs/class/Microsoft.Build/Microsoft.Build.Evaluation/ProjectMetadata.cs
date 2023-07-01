@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 // Toolset.cs
 //
 // Author:
@@ -27,9 +31,6 @@
 //
 
 using Microsoft.Build.Construction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Microsoft.Build.Evaluation
 {

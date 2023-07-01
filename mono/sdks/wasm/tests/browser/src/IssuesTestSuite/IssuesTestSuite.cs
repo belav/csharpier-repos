@@ -1,10 +1,11 @@
 using System;
-using System.Threading.Tasks;
 using System.ComponentModel;
-using System.Reflection;
-using System.Net.Http;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
+using System.Reflection;
+using System.Threading.Tasks;
+
 using WebAssembly;
 
 namespace TestSuite

@@ -32,8 +32,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if MONO_FEATURE_CONSOLE
-using System;
-using System.Text;
+using System;using System.Text;
 
 namespace System.IO
 {

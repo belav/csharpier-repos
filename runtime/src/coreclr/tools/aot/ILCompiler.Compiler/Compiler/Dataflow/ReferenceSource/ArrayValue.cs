@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using ILLink.Shared.DataFlow;
+using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 using Mono.Cecil;
 using Mono.Linker.Dataflow;
-using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 namespace ILLink.Shared.TrimAnalysis
 {

@@ -8,6 +8,7 @@ using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeLens;
 using Microsoft.CodeAnalysis.Host;

@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.Xml;
-
-    using System.ServiceModel.Channels;
-
-    using System.Xml.Schema;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+
+    using System.ServiceModel.Channels;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
+
+    using System.Xml.Schema;
 
     // This class is created as part of the export process and passed to
     // Wsdlmporter and WsdlExporter implementations as a utility for

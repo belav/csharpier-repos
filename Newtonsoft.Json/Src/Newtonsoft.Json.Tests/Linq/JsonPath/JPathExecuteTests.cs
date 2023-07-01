@@ -29,16 +29,12 @@ using System.Text;
 #if !(PORTABLE || PORTABLE40 || NET35 || NET20) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Linq.JsonPath;
-using Newtonsoft.Json.Tests.Bson;
+using Newtonsoft.Json.Linq.JsonPath;using Newtonsoft.Json.Tests.Bson;
 #if HAVE_REGEX_TIMEOUTS
 using System.Text.RegularExpressions;
 #endif
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
-using TestCaseSource = Xunit.MemberDataAttribute;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;using TestCaseSource = Xunit.MemberDataAttribute;
 #else
 using NUnit.Framework;
 #endif

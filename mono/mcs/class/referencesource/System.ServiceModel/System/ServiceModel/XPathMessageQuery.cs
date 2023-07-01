@@ -9,11 +9,11 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Globalization;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Windows.Markup;
     using System.Xml;
     using System.Xml.Xsl;
-    using System.ServiceModel.Dispatcher;
 
     [ContentProperty("Expression")]
     public class XPathMessageQuery : MessageQuery

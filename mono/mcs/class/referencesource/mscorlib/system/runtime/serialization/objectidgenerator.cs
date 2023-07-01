@@ -16,9 +16,9 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.Remoting;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

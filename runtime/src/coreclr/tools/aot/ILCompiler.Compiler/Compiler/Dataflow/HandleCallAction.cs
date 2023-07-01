@@ -3,12 +3,13 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+
 using ILCompiler;
 using ILCompiler.Dataflow;
 using ILLink.Shared.TypeSystemProxy;
-using Internal.TypeSystem;
 
 using WellKnownType = ILLink.Shared.TypeSystemProxy.WellKnownType;
+using Internal.TypeSystem;
 
 #nullable enable
 

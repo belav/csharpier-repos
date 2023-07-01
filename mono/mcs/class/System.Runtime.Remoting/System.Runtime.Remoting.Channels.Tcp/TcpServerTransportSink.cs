@@ -30,9 +30,9 @@
 
 using System;
 using System.Collections;
-using System.Runtime.Remoting.Messaging;
-using System.Net.Sockets;
 using System.IO;
+using System.Net.Sockets;
+using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels.Tcp
 {

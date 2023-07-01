@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 //
 // System.IntPtr.cs
 //
@@ -43,9 +44,8 @@
 //
 
 using System.Globalization;
-using System.Runtime.Serialization;
 using System.Runtime.ConstrainedExecution;
-using System.Diagnostics.Contracts;
+using System.Runtime.Serialization;
 
 namespace System
 {

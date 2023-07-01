@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="IRelatedEnd.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,10 +11,8 @@
 using System.Data;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Objects.DataClasses
 {

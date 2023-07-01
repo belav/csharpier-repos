@@ -6,6 +6,7 @@ namespace System.ServiceModel.ComIntegration
     using System;
     using System.CodeDom;
     using System.Collections.ObjectModel;
+    using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.InteropServices;
@@ -13,7 +14,6 @@ namespace System.ServiceModel.ComIntegration
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
-    using SafeHGlobalHandle = System.IdentityModel.SafeHGlobalHandle;
 
     [
         InterfaceType(ComInterfaceType.InterfaceIsIUnknown),

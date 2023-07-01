@@ -1,3 +1,5 @@
+using System.IO;
+using System.Net.Http.Headers;
 //
 // HttpClient.cs
 //
@@ -27,9 +29,7 @@
 //
 
 using System.Threading;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace System.Net.Http
 {

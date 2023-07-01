@@ -27,8 +27,8 @@
 //
 
 using System;
-using NUnit.Framework;
 using Mono.CSharp;
+using NUnit.Framework;
 
 namespace MonoTests.EvaluatorTest
 {

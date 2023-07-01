@@ -6,10 +6,10 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
+using SyntaxUtilities = Microsoft.CodeAnalysis.CSharp.EditAndContinue.SyntaxUtilities;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Roslyn.Test.Utilities;
 using Xunit;
-using SyntaxUtilities = Microsoft.CodeAnalysis.CSharp.EditAndContinue.SyntaxUtilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditAndContinue
 {

@@ -1,3 +1,6 @@
+using System;
+using System.Runtime.InteropServices;
+
 //
 // IVbcHostObject.cs: Host object interface for VB.NET compiler.
 //
@@ -27,8 +30,6 @@
 
 
 using Microsoft.Build.Framework;
-using System;
-using System.Runtime.InteropServices;
 
 namespace Microsoft.Build.Tasks.Hosting
 {

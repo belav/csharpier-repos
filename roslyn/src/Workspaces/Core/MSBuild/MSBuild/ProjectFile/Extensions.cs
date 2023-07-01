@@ -6,9 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+
+using MSB = Microsoft.Build;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.MSBuild
 {

@@ -28,10 +28,10 @@
 //
 using System;
 using System.Net;
-using NUnit.Framework;
 using HLPC = System.Net.HttpListenerPrefixCollection;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

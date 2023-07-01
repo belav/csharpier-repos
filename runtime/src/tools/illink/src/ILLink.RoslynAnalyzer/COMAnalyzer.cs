@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Runtime.InteropServices;
+
 using ILLink.Shared;
 using ILLink.Shared.TypeSystemProxy;
 using Microsoft.CodeAnalysis;

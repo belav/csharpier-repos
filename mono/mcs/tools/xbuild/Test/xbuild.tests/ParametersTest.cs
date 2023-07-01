@@ -1,3 +1,5 @@
+using System.IO;
+using Mono.XBuild.CommandLine;
 // (C) 2009 Rodrigo B. de Oliveira
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -20,8 +22,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using NUnit.Framework;
-using Mono.XBuild.CommandLine;
-using System.IO;
 
 namespace xbuild.tests
 {

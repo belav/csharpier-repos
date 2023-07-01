@@ -6,14 +6,13 @@ namespace System.Runtime.Serialization.Json
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Text;
     using System.Xml;
-    using System.IO;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Runtime.Serialization.Json;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization.Json;using System.Runtime.CompilerServices;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

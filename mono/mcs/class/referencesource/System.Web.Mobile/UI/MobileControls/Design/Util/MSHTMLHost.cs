@@ -11,17 +11,16 @@
 
 namespace System.Web.UI.Design.MobileControls.Util
 {
-    using System.Runtime.Serialization.Formatters;
-
-    using System.Runtime.InteropServices;
+    using System;
     using System.ComponentModel;
 
     using System.Diagnostics;
 
-    using System;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
+    using System.Windows.Forms;
 
     using Microsoft.Win32;
-    using System.Windows.Forms;
 
     /// <include file='doc\MSHTMLHost.uex' path='docs/doc[@for="MSHTMLHost"]/*' />
     /// <devdoc>

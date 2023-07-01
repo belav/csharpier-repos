@@ -3,6 +3,7 @@
 
 using System.ComponentModel.Design;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.ComponentModel.Tests

@@ -1,10 +1,6 @@
 #if !MOBILE || MOBILE_DESKTOP_HOST
 
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Diagnostics;using System.IO;using System.Reflection;using System.Runtime.InteropServices;using System.Text;
 
 namespace System
 {

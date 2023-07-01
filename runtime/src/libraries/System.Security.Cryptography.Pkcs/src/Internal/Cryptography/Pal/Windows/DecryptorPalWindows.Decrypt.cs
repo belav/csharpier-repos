@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
 using System.Security.Cryptography.X509Certificates;
 
-using Microsoft.Win32.SafeHandles;
-
 using static Interop.Crypt32;
+
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography.Pal.Windows
 {

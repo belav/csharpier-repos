@@ -3,6 +3,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 // ReSharper disable UnusedMember.Local

@@ -1,6 +1,5 @@
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;

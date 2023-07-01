@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Web.Services.Protocols.SoapExtension.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using System.IO;
-using System.Collections;
 using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Protocols

@@ -30,6 +30,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 namespace Test_GCOverReporting_cs

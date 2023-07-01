@@ -7,6 +7,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities

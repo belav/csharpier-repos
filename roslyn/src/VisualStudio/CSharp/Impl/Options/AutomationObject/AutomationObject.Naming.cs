@@ -4,6 +4,7 @@
 
 using System;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
 

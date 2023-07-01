@@ -27,11 +27,12 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Options;
-using System.Collections.Generic;
 
 public class Program
 {

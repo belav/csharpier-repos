@@ -15,8 +15,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Dynamic.Utils;
+using System.Text;
 
 #if CLR2
 namespace Microsoft.Scripting.Ast

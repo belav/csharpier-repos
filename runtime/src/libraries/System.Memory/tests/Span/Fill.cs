@@ -3,8 +3,9 @@
 
 using System.Linq;
 using System.Runtime.InteropServices;
-using Xunit;
 using static System.TestHelpers;
+
+using Xunit;
 
 namespace System.SpanTests
 {

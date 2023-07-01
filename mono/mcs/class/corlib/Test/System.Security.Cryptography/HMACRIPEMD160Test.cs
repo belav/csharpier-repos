@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
 //
 // HMACRIPEMD160Test.cs - NUnit Test Cases for HMACRIPEMD160
 //	http://www.esat.kuleuven.ac.be/~bosselae/ripemd160.html
@@ -30,10 +35,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

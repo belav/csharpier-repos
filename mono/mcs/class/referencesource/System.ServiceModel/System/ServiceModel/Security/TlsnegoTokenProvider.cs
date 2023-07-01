@@ -7,13 +7,13 @@ namespace System.ServiceModel.Security
     using System;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
+    using SchProtocols = System.IdentityModel.SchProtocols;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel;
     using System.Xml;
-    using SchProtocols = System.IdentityModel.SchProtocols;
 
     class TlsnegoTokenProvider : SspiNegotiationTokenProvider
     {

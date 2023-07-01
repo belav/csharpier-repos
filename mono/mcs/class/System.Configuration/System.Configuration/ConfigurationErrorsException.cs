@@ -30,10 +30,10 @@
 //
 
 using System;
+using System.Collections;
 using System.Configuration.Internal;
 using System.Globalization;
 using System.Runtime.Serialization;
-using System.Collections;
 using System.Xml;
 
 namespace System.Configuration

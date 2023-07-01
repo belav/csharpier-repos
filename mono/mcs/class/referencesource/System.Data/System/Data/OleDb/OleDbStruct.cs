@@ -10,11 +10,8 @@ namespace System.Data.OleDb
 {
     using System;
     using System.Runtime.InteropServices;
-
 #if DEBUG
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Text;
+    using System.Diagnostics;using System.Globalization;using System.Text;
 #endif
 
     internal enum DBBindStatus

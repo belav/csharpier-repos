@@ -7,9 +7,10 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography

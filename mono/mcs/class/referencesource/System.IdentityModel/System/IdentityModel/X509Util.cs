@@ -11,12 +11,12 @@ namespace System.IdentityModel
     using System.Diagnostics;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.Runtime;
     using System.Security.Claims;
-    using System.Security.Cryptography;
-    using System.Security.Cryptography.X509Certificates;
 
     using Claim = System.Security.Claims.Claim;
-    using System.Runtime;
+    using System.Security.Cryptography;
+    using System.Security.Cryptography.X509Certificates;
 
     internal static class X509Util
     {

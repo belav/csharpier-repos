@@ -29,15 +29,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using System.IO;
-using System.Xml;
-using System.Globalization;
-using System.Configuration;
-
-using System.Data;
-using System.Data.Common;
-
-using NUnit.Framework;
+using System.IO;using System.Xml;using System.Globalization;using System.Configuration;using System.Data;using System.Data.Common;using NUnit.Framework;
 
 namespace MonoTests.System.Data.Common
 {

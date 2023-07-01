@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 static class GCPollNative

@@ -14,11 +14,9 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT
 
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic;using System.Diagnostics;
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else
@@ -26,11 +24,9 @@ using Microsoft.Linq.Expressions;
 #endif
 using System.Runtime.InteropServices;
 #if CODEPLEX_40
-using System.Dynamic;
-using System.Dynamic.Utils;
+using System.Dynamic;using System.Dynamic.Utils;
 #else
-using Microsoft.Scripting;
-using Microsoft.Scripting.Utils;
+using Microsoft.Scripting;using Microsoft.Scripting.Utils;
 #endif
 using ComTypes = System.Runtime.InteropServices.ComTypes;
 

@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Tools.Analyzers;
 
 namespace Microsoft.CodeAnalysis.Diagnostics

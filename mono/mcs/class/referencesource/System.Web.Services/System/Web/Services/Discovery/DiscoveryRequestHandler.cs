@@ -7,17 +7,17 @@
 namespace System.Web.Services.Discovery
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Web;
-    using System.Xml;
-    using System.Diagnostics;
     using System.ComponentModel;
-    using System.Text;
-    using System.Web.Services.Protocols;
+    using System.Diagnostics;
+    using System.IO;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web;
     using System.Web.Services.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.Xml;
 
     /// <include file='doc\DiscoveryRequestHandler.uex' path='docs/doc[@for="DiscoveryRequestHandler"]/*' />
     /// <devdoc>

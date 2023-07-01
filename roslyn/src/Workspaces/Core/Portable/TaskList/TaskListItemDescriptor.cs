@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.TaskList

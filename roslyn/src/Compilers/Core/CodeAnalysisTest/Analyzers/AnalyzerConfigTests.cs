@@ -8,12 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+
+using static Microsoft.CodeAnalysis.AnalyzerConfig;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Test.Utilities;
-using Xunit;
-using static Microsoft.CodeAnalysis.AnalyzerConfig;
 using static Roslyn.Test.Utilities.TestHelpers;
 using KeyValuePair = Roslyn.Utilities.KeyValuePairUtil;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

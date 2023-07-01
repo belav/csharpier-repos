@@ -30,10 +30,10 @@
 //
 
 using System;
-using System.Resources;
-using System.Threading;
 using System.Reflection;
+using System.Resources;
 using System.Text;
+using System.Threading;
 
 namespace Novell.Directory.Ldap.Utilclass
 {

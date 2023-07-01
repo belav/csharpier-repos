@@ -26,24 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.ObjectModel;
-using System.Net;
-using System.Net.Security;
-using System.Security.Principal;
-using System.Security.Cryptography.X509Certificates;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
-using System.Security.Cryptography.Xml;
-using System.Threading;
-using NUnit.Framework;
-
-using MonoTests.System.ServiceModel.Channels;
-
-using MonoTests.Helpers;
+using System;using System.Collections.ObjectModel;using System.Net;using System.Net.Security;using System.Security.Principal;using System.Security.Cryptography.X509Certificates;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Security;using System.ServiceModel.Security.Tokens;using System.Security.Cryptography.Xml;using System.Threading;using NUnit.Framework;using MonoTests.System.ServiceModel.Channels;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Security
 {

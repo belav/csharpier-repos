@@ -26,6 +26,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization.Tests;
+
 using Xunit;
 
 namespace System.Text.Json.Tests

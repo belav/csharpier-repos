@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.Tools.Utilities;
 using Microsoft.Extensions.Logging;
 

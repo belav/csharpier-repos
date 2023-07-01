@@ -25,10 +25,10 @@
 #endregion
 
 using System;
-using System.Linq;
-using System.Text;
 
 using System.Data.Linq;
+using System.Linq;
+using System.Text;
 
 using NUnit.Framework;
 

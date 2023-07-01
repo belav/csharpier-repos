@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Features.Intents;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;

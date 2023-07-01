@@ -7,8 +7,8 @@
 // The JIT32 only supports up to 32767 variables
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 //Disable the warning about having variables that are not used
 #pragma warning disable 219

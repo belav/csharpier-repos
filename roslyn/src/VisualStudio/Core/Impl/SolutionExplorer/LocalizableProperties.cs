@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer

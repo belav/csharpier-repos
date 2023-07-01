@@ -10,6 +10,7 @@ using System.Composition;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // HeaderInfo.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {

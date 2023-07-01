@@ -3,12 +3,12 @@
 
 using System.Collections.Generic;
 
-using Internal.IL;
-using Internal.TypeSystem;
-
 using ILCompiler.DependencyAnalysis;
 
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
+
+using Internal.IL;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

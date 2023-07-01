@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Text;
+
 using Xunit;
 
 namespace Tests.System.IO

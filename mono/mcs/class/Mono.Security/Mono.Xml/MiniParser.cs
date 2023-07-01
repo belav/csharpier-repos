@@ -29,9 +29,9 @@
 //
 
 using System;
-using System.Text;
 using System.Collections;
 using System.Globalization;
+using System.Text;
 
 namespace Mono.Xml
 {

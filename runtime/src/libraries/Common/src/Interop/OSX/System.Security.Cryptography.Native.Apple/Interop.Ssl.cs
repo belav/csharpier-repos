@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
+using SafeSslHandle = System.Net.SafeSslHandle;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security.Authentication;
+
 using Microsoft.Win32.SafeHandles;
-using SafeSslHandle = System.Net.SafeSslHandle;
 
 internal static partial class Interop
 {

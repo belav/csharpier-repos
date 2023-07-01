@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpCachePolicyCas.cs - CAS unit tests for System.Web.HttpCachePolicyCas
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

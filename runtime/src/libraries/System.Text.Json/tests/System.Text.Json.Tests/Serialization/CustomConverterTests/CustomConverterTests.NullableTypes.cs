@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Text.Json.Serialization.Tests

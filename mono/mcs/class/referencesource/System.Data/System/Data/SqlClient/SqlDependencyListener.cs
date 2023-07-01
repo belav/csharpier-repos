@@ -18,16 +18,16 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Xml;
-using System.Runtime.Versioning;
-using System.Diagnostics.CodeAnalysis;
 
 // This class is the process wide dependency dispatcher.  It contains all connection listeners for the entire process and
 // receives notifications on those connections to dispatch to the corresponding AppDomain dispatcher to notify the

@@ -1,3 +1,7 @@
+using System.Collections.Specialized;
+using System.IO;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 //
 // System.Configuration.RsaProtectedConfigurationProvider.cs
 //
@@ -27,10 +31,6 @@
 //
 
 using System.Xml;
-using System.IO;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
 
 namespace System.Configuration
 {

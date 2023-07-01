@@ -14,18 +14,19 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 using Microsoft.CodeAnalysis.Scripting.Test;
+using static Microsoft.CodeAnalysis.Scripting.TestCompilationFactory;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
-using Xunit;
 using AssertEx = PortableTestUtils::Roslyn.Test.Utilities.AssertEx;
 using TestBase = PortableTestUtils::Roslyn.Test.Utilities.TestBase;
 using WorkItemAttribute = PortableTestUtils::Roslyn.Test.Utilities.WorkItemAttribute;
-using static Microsoft.CodeAnalysis.Scripting.TestCompilationFactory;
+using Roslyn.Test.Utilities;
 using static Roslyn.Test.Utilities.TestMetadata;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.Scripting.Test
 {

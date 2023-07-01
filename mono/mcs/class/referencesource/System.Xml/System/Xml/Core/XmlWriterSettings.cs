@@ -8,10 +8,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Security.Permissions;
 using System.Runtime.Versioning;
-
+using System.Security.Permissions;
+using System.Text;
 #if !SILVERLIGHT
 #if !HIDE_XSL
 using System.Xml.Xsl.Runtime;

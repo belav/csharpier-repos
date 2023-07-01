@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

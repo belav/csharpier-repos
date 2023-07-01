@@ -6,6 +6,7 @@
 
 using System;
 using System.Globalization;
+
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 
 namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting

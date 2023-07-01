@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+using System.Windows.Threading;
+
 //
 // Tests for System.Windows.Threading.Dispatcher.cs
 //
@@ -29,11 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Globalization;
-using System.Windows.Threading;
-using System.Threading;
 
 namespace MonoTests.System.Windows.Threading
 {

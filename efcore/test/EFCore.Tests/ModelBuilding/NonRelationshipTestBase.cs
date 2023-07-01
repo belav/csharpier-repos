@@ -3,6 +3,7 @@
 
 using System.ComponentModel;
 using System.Dynamic;
+
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 

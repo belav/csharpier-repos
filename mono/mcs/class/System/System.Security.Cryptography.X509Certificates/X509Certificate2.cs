@@ -33,18 +33,10 @@ using MonoSecurity::Mono.Security;
 using MonoSecurity::Mono.Security.Cryptography;
 using MX = MonoSecurity::Mono.Security.X509;
 #else
-using Mono.Security;
-using Mono.Security.Cryptography;
-using MX = Mono.Security.X509;
+using Mono.Security;using Mono.Security.Cryptography;using MX = Mono.Security.X509;
 #endif
 
-using System.IO;
-using System.Text;
-using System.Collections;
-using System.Runtime.Serialization;
-using Microsoft.Win32.SafeHandles;
-using Internal.Cryptography;
-using Mono;
+using System.IO;using System.Text;using System.Collections;using System.Runtime.Serialization;using Microsoft.Win32.SafeHandles;using Internal.Cryptography;using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {

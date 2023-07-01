@@ -4,14 +4,14 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+
+using SafeSslHandle = System.Net.SafeSslHandle;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 
 using Microsoft.Win32.SafeHandles;
-
-using SafeSslHandle = System.Net.SafeSslHandle;
 
 internal static partial class Interop
 {

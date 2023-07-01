@@ -1,3 +1,18 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using MyWebControl = System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.WebControls.GridView.cs
 //
@@ -32,20 +47,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections;
-using MonoTests.SystemWeb.Framework;
-using MonoTests.stand_alone.WebHarness;
-using MyWebControl = System.Web.UI.WebControls;
-using System.Data;
-using System.Drawing;
-using System.Threading;
-using System.Collections.Generic;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

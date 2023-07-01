@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
 //
 // X509ExtensionCollectionTest.cs - NUnit tests for X509ExtensionCollection
 //
@@ -28,12 +34,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

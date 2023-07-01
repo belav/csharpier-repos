@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+
+using Mono.Security.Cryptography;
 //
 // KeyPairPersistenceTest.cs: Unit tests for keypair persistence
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-
-using Mono.Security.Cryptography;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

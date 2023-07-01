@@ -6,12 +6,12 @@
 
 namespace System.Web.Caching
 {
-    using System.Web.Configuration;
     using System.Runtime.InteropServices;
-    using System.Web.Util;
-    using System.Web;
-    using System.Web.Hosting;
     using System.Threading;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
     abstract class CacheMemoryPressure
     {

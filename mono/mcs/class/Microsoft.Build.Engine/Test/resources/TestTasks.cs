@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Text;
+
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Text;
 
 namespace Foo
 {

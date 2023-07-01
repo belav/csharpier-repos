@@ -25,13 +25,9 @@
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 
-using System;
-using System.Text;
-using System.Threading.Tasks;
+using System;using System.Text;using System.Threading.Tasks;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
@@ -39,9 +35,7 @@ using System.IO;
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Tests.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
+using Newtonsoft.Json.Linq;using Newtonsoft.Json.Tests.Serialization;using Newtonsoft.Json.Tests.TestObjects;
 
 namespace Newtonsoft.Json.Tests.Linq
 {

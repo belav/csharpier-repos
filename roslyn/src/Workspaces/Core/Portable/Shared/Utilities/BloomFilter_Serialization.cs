@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Utilities

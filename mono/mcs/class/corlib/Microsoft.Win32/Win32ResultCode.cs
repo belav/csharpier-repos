@@ -32,9 +32,7 @@
 
 #if WIN_PLATFORM || XAMMAC_4_5
 
-using System;
-using System.Runtime.InteropServices;
-using System.Text;
+using System;using System.Runtime.InteropServices;using System.Text;
 
 namespace Microsoft.Win32
 {

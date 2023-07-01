@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using Internal.TypeSystem;
-using Internal.Metadata.NativeFormat.Writer;
+
+using ILCompiler.DependencyAnalysis;
 
 using ILCompiler.Metadata;
-using ILCompiler.DependencyAnalysis;
+using Internal.Metadata.NativeFormat.Writer;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

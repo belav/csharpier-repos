@@ -6,11 +6,11 @@
 // @owner=alexgor, deliant, victark
 
 using System;
-using System.Text;
-using System.Globalization;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting

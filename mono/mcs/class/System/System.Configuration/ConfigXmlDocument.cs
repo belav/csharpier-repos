@@ -30,10 +30,7 @@
 #if CONFIGURATION_DEP
 using System.Configuration.Internal;
 #endif
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
-
+using System.IO;using System.Security;using System.Security.Permissions;
 #if (XML_DEP)
 using System.Xml;
 

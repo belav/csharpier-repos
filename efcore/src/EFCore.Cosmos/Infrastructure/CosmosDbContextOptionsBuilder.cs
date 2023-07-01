@@ -3,6 +3,7 @@
 
 using System.ComponentModel;
 using System.Net;
+
 using Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;

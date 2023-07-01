@@ -1,13 +1,10 @@
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 #if !SILVERLIGHT
 using System.Xml.XPath;
 #endif
-using System.Xml.Schema;
-using System.Collections;
-
-using System.Threading.Tasks;
+using System.Xml.Schema;using System.Collections;using System.Threading.Tasks;
 
 namespace System.Xml
 {

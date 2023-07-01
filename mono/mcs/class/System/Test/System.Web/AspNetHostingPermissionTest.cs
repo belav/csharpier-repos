@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // AspNetHostingPermissionTest.cs -
 //	NUnit Test Cases for AspNetHostingPermission
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoTests.System.Web
 {

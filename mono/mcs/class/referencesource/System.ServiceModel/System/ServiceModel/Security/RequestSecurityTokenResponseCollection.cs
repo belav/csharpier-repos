@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
-    using System.Xml;
-    using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.Globalization;
+    using System.Xml;
 
     sealed class RequestSecurityTokenResponseCollection : BodyWriter
     {

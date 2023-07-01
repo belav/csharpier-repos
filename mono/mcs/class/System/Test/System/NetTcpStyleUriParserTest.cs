@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 //
 // NetTcpStyleUriParserTest.cs - Unit tests for System.NetTcpStyleUriParser
 //
@@ -28,9 +31,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
 
 namespace MonoTests.System
 {

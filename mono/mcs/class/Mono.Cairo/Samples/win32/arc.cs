@@ -20,8 +20,9 @@
 //
 
 using System;
-using Cairo;
 using System.Windows.Forms;
+
+using Cairo;
 
 public class SwfCairo : Form
 {

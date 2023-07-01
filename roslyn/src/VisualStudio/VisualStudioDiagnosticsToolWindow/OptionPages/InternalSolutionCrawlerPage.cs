@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options

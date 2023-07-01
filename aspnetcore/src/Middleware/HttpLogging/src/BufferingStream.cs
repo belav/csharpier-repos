@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO.Pipelines;
 using System.Runtime.CompilerServices;
 using System.Text;
+
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HttpLogging;

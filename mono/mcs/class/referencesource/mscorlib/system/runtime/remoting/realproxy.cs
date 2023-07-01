@@ -16,14 +16,17 @@
 namespace System.Runtime.Remoting.Proxies
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Activation;
+    using System.Runtime.Remoting.Channels;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
-    using System.Runtime.Remoting.Channels;
-    using System.Runtime.Remoting.Activation;
     using System.Runtime.Remoting.Services;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
@@ -31,9 +34,6 @@ namespace System.Runtime.Remoting.Proxies
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Threading;
-    using System.Runtime.ConstrainedExecution;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
     // NOTE: Keep this in sync with unmanaged enum definition in Remoting.h
     [Serializable]

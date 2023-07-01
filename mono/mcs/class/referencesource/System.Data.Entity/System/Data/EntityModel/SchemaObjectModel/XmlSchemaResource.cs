@@ -1,4 +1,7 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections.Generic;
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+//---------------------------------------------------------------------
 // <copyright file="XmlSchemaResource.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -7,9 +10,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Diagnostics;
-using System.Data.Mapping;
-using System.Data.Metadata.Edm;
-using System.Collections.Generic;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {

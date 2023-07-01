@@ -8,8 +8,8 @@
 namespace System.Text
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Runtime.Serialization;
 
     [Serializable]
     public sealed class DecoderExceptionFallback : DecoderFallback

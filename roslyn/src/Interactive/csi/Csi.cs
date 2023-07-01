@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 
 namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting

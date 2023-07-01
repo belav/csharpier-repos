@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Reflection.Metadata;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
 

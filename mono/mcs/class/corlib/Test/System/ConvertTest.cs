@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 // TestConvert.cs - NUnit Test Cases for System.Convert class
 //
 // Krister Hansson (ds99krha@thn.htu.se)
@@ -7,8 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System
 {

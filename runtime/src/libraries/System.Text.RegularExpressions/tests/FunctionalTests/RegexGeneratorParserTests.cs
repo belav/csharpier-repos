@@ -1,14 +1,15 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.DotNet.RemoteExecutor;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Globalization;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace System.Text.RegularExpressions.Tests

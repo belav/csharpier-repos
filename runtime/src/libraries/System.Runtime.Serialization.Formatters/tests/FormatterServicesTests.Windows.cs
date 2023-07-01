@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Runtime.Serialization.Formatters.Tests

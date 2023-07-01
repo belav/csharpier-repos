@@ -16,10 +16,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic.Utils;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-using System.Dynamic.Utils;
-
 #if SILVERLIGHT
 using System.Core;
 #endif

@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+
 //
 // DecoderTest.cs
 //
@@ -7,8 +10,6 @@
 // (C) 2006 Novell, Inc.
 //
 using NUnit.Framework;
-using System;
-using System.Text;
 
 namespace MonoTests.System.Text
 {

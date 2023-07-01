@@ -9,11 +9,11 @@ namespace System.ServiceModel.Activities
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Description;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Serialization;
-    using SR2 = System.ServiceModel.Activities.SR;
 
     static class ContractValidationHelper
     {

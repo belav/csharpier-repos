@@ -1,3 +1,4 @@
+using System.Globalization;
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTextBoxAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,7 +6,6 @@
 //------------------------------------------------------------------------------
 
 using System.Security.Permissions;
-using System.Globalization;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource

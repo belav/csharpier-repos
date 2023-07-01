@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // RSAOAEPKeyExchangeDeformatterTest.cs - NUnit Test Cases for RSAOAEPKeyExchangeDeformatter
 //
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

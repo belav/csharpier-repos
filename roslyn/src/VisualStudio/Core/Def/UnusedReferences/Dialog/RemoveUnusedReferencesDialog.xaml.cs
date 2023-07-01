@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Windows;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.UnusedReferences;
 using Microsoft.VisualStudio.PlatformUI;

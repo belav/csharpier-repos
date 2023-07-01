@@ -17,9 +17,9 @@ namespace System.Web.UI.WebControls
     using System.Text;
     using System.Web.Compilation;
     using System.Web.UI;
-    using System.Web.Util;
 
     using ConflictOptions = System.Web.UI.ConflictOptions;
+    using System.Web.Util;
 
     /// <devdoc>
     /// Represents a single view of an ObjectDataSource.

@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // GacIdentityPermissionTest.cs - NUnit Test Cases for GacIdentityPermission
 //
@@ -28,9 +32,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

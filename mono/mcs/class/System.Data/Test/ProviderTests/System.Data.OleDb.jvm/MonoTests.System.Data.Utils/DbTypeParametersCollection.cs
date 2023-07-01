@@ -23,11 +23,11 @@
 
 
 using System;
+using Sys = System;
+using CollectionBase = System.Collections.CollectionBase;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using CollectionBase = System.Collections.CollectionBase;
-using Sys = System;
 
 namespace MonoTests.System.Data.Utils.Data
 {

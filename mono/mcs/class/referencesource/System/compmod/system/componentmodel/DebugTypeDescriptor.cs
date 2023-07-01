@@ -14,21 +14,22 @@
  */
 namespace System.ComponentModel
 {
-    using System.Runtime.Serialization.Formatters;
-    using System.Threading;
-    using System.Runtime.Remoting.Activation;
-    using System.Runtime.InteropServices;
+    using System;
+    using System.Collections;
+    using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System;
-    using CodeAccessPermission = System.Security.CodeAccessPermission;
-    using System.Security.Permissions;
-    using System.Collections;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting.Activation;
+    using System.Runtime.Serialization.Formatters;
+    using CodeAccessPermission = System.Security.CodeAccessPermission;
+    using System.Security.Permissions;
+    using System.Threading;
+
     using Microsoft.Win32;
-    using System.ComponentModel.Design;
 
     /// <devdoc>
     ///    <para>Provides information about the properties and events

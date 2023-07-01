@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+
 // KeyedCollectionTest.cs - NUnit Test Cases for System.Collections.ObjectModel.KeyedCollection
 //
 // Carlo Kok (ck@carlo-kok.com)
@@ -6,10 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace MonoTests.System.Collections.ObjectModel
 {

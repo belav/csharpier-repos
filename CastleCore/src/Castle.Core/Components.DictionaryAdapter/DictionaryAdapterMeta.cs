@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Diagnostics;
+    using System.Linq;
 
     [DebuggerDisplay("Type: {Type.FullName,nq}")]
     public class DictionaryAdapterMeta

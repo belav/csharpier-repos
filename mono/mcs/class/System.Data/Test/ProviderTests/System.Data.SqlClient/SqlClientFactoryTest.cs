@@ -29,14 +29,15 @@
 
 
 using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
-using NUnit.Framework;
-using System.Collections;
-using System.Security.Permissions;
 
 using System.Security;
+using System.Security.Permissions;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.SqlClient
 {

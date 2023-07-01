@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // Pkits_4_16_PrivateCertificateExtensions.cs -
 //	NUnit tests for Pkits 4.16 : PrivateCertificateExtensions
@@ -29,9 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

@@ -16,18 +16,18 @@
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.Serialization;
-    using System.Threading;
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
+    using System.Threading;
 
     // This class contains information about an object. It is used so that
     // the rest of the Formatter routines can use a common interface for

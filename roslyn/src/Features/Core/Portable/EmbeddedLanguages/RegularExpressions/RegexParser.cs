@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -16,16 +17,16 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 {
-    using static EmbeddedSyntaxHelpers;
-    using static RegexHelpers;
     using RegexAlternatingSequenceList = EmbeddedSeparatedSyntaxNodeList<
         RegexKind,
         RegexNode,
         RegexSequenceNode
     >;
+    using static EmbeddedSyntaxHelpers;
     using RegexNodeOrToken = EmbeddedSyntaxNodeOrToken<RegexKind, RegexNode>;
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
     using RegexTrivia = EmbeddedSyntaxTrivia<RegexKind>;
+    using static RegexHelpers;
 
     /// <summary>
     /// Produces a <see cref="RegexTree"/> from a sequence of <see cref="VirtualChar"/> characters.

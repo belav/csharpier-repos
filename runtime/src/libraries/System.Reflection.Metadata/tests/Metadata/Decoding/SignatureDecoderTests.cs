@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata.Tests;
 using System.Reflection.PortableExecutable;
+
 using Xunit;
 
 namespace System.Reflection.Metadata.Decoding.Tests

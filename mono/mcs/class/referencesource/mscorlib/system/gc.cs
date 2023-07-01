@@ -22,16 +22,7 @@ namespace System
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Reflection;
-    using System.Security;
-    using System.Threading;
-    using System.Runtime;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Globalization;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Reflection;using System.Security;using System.Threading;using System.Runtime;using System.Runtime.CompilerServices;using System.Runtime.ConstrainedExecution;using System.Globalization;using System.Runtime.InteropServices;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
     [Serializable]
     public enum GCCollectionMode

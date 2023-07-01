@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using ILLink.RoslynAnalyzer;
 using ILLink.Shared.DataFlow;
 using Microsoft.CodeAnalysis;

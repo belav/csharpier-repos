@@ -15,23 +15,24 @@
 ============================================================*/
 namespace System
 {
-    using System.IO;
-    using System.Security;
-    using System.Resources;
-    using System.Globalization;
     using System.Collections;
+    using System.Configuration.Assemblies;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
     using System.Security.Permissions;
     using System.Text;
-    using System.Configuration.Assemblies;
-    using System.Runtime.InteropServices;
-    using System.Reflection;
-    using System.Diagnostics;
-    using Microsoft.Win32;
-    using System.Runtime.CompilerServices;
     using System.Threading;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+
+    using Microsoft.Win32;
 
 #if !FEATURE_PAL
     [ComVisible(true)]

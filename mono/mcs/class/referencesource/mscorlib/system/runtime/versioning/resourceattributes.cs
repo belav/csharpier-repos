@@ -10,11 +10,12 @@
 ===========================================================*/
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
+
 using Microsoft.Win32;
-using System.Diagnostics.Contracts;
 
 namespace System.Runtime.Versioning
 {

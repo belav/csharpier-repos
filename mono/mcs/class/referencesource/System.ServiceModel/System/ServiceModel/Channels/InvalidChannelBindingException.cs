@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
 
     [Serializable]
     public class InvalidChannelBindingException : Exception

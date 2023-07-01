@@ -9,9 +9,9 @@ namespace System.ServiceModel.Channels
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Principal;
-    using System.Text;
 
     using SafeCloseHandle = System.ServiceModel.Activation.SafeCloseHandle;
+    using System.Text;
 
     /// <summary>
     /// This class provides the entry points into Application Container related functionality.

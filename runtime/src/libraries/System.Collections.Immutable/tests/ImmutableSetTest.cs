@@ -3,12 +3,13 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 using SetTriad = System.Tuple<
     System.Collections.Generic.IEnumerable<int>,
     System.Collections.Generic.IEnumerable<int>,
     bool
 >;
+
+using Xunit;
 
 namespace System.Collections.Immutable.Tests
 {

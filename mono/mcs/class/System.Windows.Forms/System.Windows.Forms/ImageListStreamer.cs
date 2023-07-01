@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Drawing;
+using System.Drawing.Imaging;
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -28,11 +31,8 @@
 //   Aleksey Ryabchuk (ryabchuk@yahoo.com)
 
 using System.IO;
-using System.Drawing;
-using System.Collections;
-using System.Drawing.Imaging;
-using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace System.Windows.Forms
 {

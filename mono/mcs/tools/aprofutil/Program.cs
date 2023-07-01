@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.Sockets;
-using System.Text.RegularExpressions;
-using Mono.Options;
-using System.Linq;
-using Mono.Profiler.Aot;
 
 using static System.Console;
+using System.IO;
+using System.Linq;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+
+using Mono.Options;
+using Mono.Profiler.Aot;
 
 namespace aotprofiletool
 {

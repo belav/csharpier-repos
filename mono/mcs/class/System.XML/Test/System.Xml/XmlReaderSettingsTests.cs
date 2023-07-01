@@ -10,15 +10,15 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-using NUnit.Framework;
-using System.Reflection;
 using ValidationFlags = System.Xml.Schema.XmlSchemaValidationFlags;
-using AssertType = NUnit.Framework.Assert;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
+using AssertType = NUnit.Framework.Assert;
 
 namespace MonoTests.System.Xml
 {

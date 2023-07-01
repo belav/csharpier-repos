@@ -33,10 +33,11 @@
 
 using System;
 using System.Collections;
-using System.Xml;
-using Commons.Xml.Relaxng;
 
 using LabelList = System.Collections.Hashtable;
+using System.Xml;
+
+using Commons.Xml.Relaxng;
 
 namespace Commons.Xml.Relaxng.Derivative
 {

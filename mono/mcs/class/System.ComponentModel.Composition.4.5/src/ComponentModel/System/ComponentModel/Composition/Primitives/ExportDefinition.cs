@@ -3,8 +3,9 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using Microsoft.Internal;
 using System.Diagnostics.Contracts;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Primitives
 {

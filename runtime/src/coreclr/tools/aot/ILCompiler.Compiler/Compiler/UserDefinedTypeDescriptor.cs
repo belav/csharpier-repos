@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 
+using ILCompiler.DependencyAnalysis;
+
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.TypesDebugInfo;
-
-using ILCompiler.DependencyAnalysis;
 
 namespace ILCompiler
 {

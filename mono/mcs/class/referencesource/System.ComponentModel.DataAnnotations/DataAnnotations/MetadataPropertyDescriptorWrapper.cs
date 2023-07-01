@@ -1,8 +1,6 @@
 ﻿#if !SILVERLIGHT
 
-using System;
-using System.Linq;
-using System.ComponentModel;
+using System;using System.Linq;using System.ComponentModel;
 
 namespace System.ComponentModel.DataAnnotations
 {

@@ -5,9 +5,10 @@ using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Xunit;
-using static VariantNative;
 using ComTypes = System.Runtime.InteropServices.ComTypes;
+
+using static VariantNative;
+using Xunit;
 
 #pragma warning disable CS0612, CS0618
 partial class Test_VariantTest

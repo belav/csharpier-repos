@@ -37,8 +37,7 @@ using MX = MonoSecurity::Mono.Security.X509;
 using MX = Mono.Security.X509;
 #endif
 
-using System.Collections;
-using System.Text;
+using System.Collections;using System.Text;
 
 namespace System.Security.Cryptography.X509Certificates
 {

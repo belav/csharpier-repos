@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
 // ReSharper disable once CheckNamespace

@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 // Int64Test.cs - NUnit Test Cases for the System.Int64 struct
 //
 // Author: Martin Weindel (martin.weindel@t-online.de)
@@ -8,9 +12,6 @@
 // NumberFormatInfo.InvariantInfo
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Threading;
 
 /// <summary>
 /// Tests for System.Int64

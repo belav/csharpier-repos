@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+
+using Microsoft.Build.Construction;
 //
 // CollectionFromEnumerableTest.cs
 //
@@ -27,9 +31,6 @@
 //
 
 using NUnit.Framework;
-using Microsoft.Build.Construction;
-using System.Collections.Generic;
-using System;
 
 namespace MonoTests.Microsoft.Build.Internal
 {

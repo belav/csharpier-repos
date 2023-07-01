@@ -16,6 +16,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -23,13 +24,13 @@ using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
-using Roslyn.Utilities;
-using Xunit;
 using static Roslyn.Test.Utilities.TestHelpers;
 using static Roslyn.Test.Utilities.TestMetadata;
+using Roslyn.Utilities;
 using KeyValuePairUtil = Roslyn.Utilities.KeyValuePairUtil;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {

@@ -4,6 +4,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
+
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect.Claims;

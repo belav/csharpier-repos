@@ -3,11 +3,11 @@
 
 using System.Collections.Generic;
 
+using Debug = System.Diagnostics.Debug;
+
 using ILCompiler.DependencyAnalysisFramework;
 
 using Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
 using EcmaAssembly = Internal.TypeSystem.Ecma.EcmaAssembly;
 
 namespace ILCompiler.DependencyAnalysis

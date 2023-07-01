@@ -17,9 +17,10 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Security;
+
     using Microsoft.Win32;
 
     // Exception for COM Interop errors where we don't recognize the HResult.

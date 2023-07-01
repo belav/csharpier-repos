@@ -14,11 +14,9 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT // ComObject
 
-using System.Runtime.InteropServices;
-using ComTypes = System.Runtime.InteropServices.ComTypes;
+using System.Runtime.InteropServices;using ComTypes = System.Runtime.InteropServices.ComTypes;
 
 #if CODEPLEX_40
 namespace System.Dynamic

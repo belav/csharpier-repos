@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 //
 // TimeSpanTest.cs - NUnit Test Cases for the System.TimeSpan struct
 //
@@ -10,9 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Threading;
 
 namespace MonoTests.System
 {

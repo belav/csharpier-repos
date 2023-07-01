@@ -7,6 +7,7 @@
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

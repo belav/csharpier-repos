@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 
-using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
+
+using Internal.TypeSystem;
 
 namespace Internal.IL.Stubs
 {

@@ -11,10 +11,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Common.Utils
 {

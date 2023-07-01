@@ -11,6 +11,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+
 using Xunit;
 
 namespace System.Text.RegularExpressions.Tests

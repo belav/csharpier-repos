@@ -6,11 +6,11 @@ namespace System.Activities
 {
     using System;
     using System.Activities.Runtime;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Runtime.Serialization;
     using System.Runtime;
-    using System.Collections.Specialized;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [DebuggerDisplay("{Value}")]

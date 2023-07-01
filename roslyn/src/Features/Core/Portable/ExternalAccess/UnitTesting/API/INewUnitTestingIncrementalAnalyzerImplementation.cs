@@ -4,6 +4,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api

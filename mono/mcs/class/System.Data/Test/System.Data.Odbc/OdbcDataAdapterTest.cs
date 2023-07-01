@@ -28,11 +28,7 @@
 
 #if !NO_ODBC
 
-using System;
-using System.Data;
-using System.Data.Odbc;
-using NUnit.Framework;
-using SqlCommand = System.Data.SqlClient.SqlCommand;
+using System;using System.Data;using System.Data.Odbc;using NUnit.Framework;using SqlCommand = System.Data.SqlClient.SqlCommand;
 
 namespace MonoTests.System.Data.Odbc
 {

@@ -3,11 +3,12 @@
 
 using System.Buffers;
 using System.IO.Pipelines;
+using PipeOptions = System.IO.Pipelines.PipeOptions;
 using System.IO.Pipes;
+
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.Extensions.Logging;
-using PipeOptions = System.IO.Pipelines.PipeOptions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 

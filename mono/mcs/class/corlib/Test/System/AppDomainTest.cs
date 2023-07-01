@@ -29,20 +29,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration.Assemblies;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Security.Principal;
+using NUnit.Framework;using System;using System.Collections;using System.Collections.Generic;using System.Configuration.Assemblies;using System.Globalization;using System.IO;using System.Reflection;using System.Reflection.Emit;using System.Runtime.InteropServices;using System.Security;using System.Security.Permissions;using System.Security.Policy;using System.Security.Principal;
 
 namespace MonoTests.System
 {

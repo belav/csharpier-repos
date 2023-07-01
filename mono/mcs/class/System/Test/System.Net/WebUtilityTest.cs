@@ -31,13 +31,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Collections.Specialized;
-
-using NUnit.Framework;
+using System;using System.Text;using System.Net;using System.IO;using System.Collections.Specialized;using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

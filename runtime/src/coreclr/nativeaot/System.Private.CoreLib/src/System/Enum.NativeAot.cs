@@ -5,13 +5,14 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Reflection;
-using System.Runtime;
-using System.Runtime.CompilerServices;
-using Internal.Runtime.Augments;
-using Internal.Runtime.CompilerServices;
-using Internal.Reflection.Augments;
 
 using CorElementType = System.Reflection.CorElementType;
+using System.Runtime;
+using System.Runtime.CompilerServices;
+
+using Internal.Reflection.Augments;
+using Internal.Runtime.Augments;
+using Internal.Runtime.CompilerServices;
 using EETypeElementType = Internal.Runtime.EETypeElementType;
 
 namespace System

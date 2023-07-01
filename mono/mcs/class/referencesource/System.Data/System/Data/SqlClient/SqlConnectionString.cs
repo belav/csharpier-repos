@@ -15,10 +15,10 @@ namespace System.Data.SqlClient
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
-    using System.Runtime.Versioning;
 
     internal sealed class SqlConnectionString : DbConnectionOptions
     {

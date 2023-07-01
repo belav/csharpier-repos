@@ -7,22 +7,22 @@ namespace System.ServiceModel.Activation
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security;
+    using System.ServiceModel.Activation.Diagnostics;
     using System.Text.RegularExpressions;
     using System.Web;
-    using System.Web.Hosting;
     using System.Web.Compilation;
+    using System.Web.Hosting;
     using System.Web.RegularExpressions;
-    using System.ServiceModel.Activation.Diagnostics;
-    using System.Security;
-    using System.Runtime.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
 
     /// <summary>
     /// This class will parse the .svc file and maintains a list of useful information that the build

@@ -6,29 +6,18 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Unicode;
-
 #if SUPPORT_JIT
 using Internal.Runtime.CompilerServices;
 #endif
 
-using Internal.IL;
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-using Internal.TypeSystem.Interop;
-using Internal.CorConstants;
-using Internal.Pgo;
-
-using ILCompiler;
-using ILCompiler.DependencyAnalysis;
-
+using Internal.IL;using Internal.TypeSystem;using Internal.TypeSystem.Ecma;using Internal.TypeSystem.Interop;using Internal.CorConstants;using Internal.Pgo;using ILCompiler;using ILCompiler.DependencyAnalysis;
 #if READYTORUN
-using System.Reflection.Metadata.Ecma335;
-using ILCompiler.DependencyAnalysis.ReadyToRun;
+using System.Reflection.Metadata.Ecma335;using ILCompiler.DependencyAnalysis.ReadyToRun;
 #endif
 
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;

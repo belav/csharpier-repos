@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using EnvDTE;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;

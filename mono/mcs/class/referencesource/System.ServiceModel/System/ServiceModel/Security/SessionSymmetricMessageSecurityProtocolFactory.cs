@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Tokens;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
 
     class SessionSymmetricMessageSecurityProtocolFactory : MessageSecurityProtocolFactory

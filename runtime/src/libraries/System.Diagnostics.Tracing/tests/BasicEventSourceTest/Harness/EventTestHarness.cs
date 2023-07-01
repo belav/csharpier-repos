@@ -6,10 +6,7 @@ using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using Xunit;using System;using System.Collections.Generic;using System.IO;
 
 namespace BasicEventSourceTests
 {

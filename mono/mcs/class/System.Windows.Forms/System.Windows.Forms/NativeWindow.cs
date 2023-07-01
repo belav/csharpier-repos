@@ -1,3 +1,8 @@
+using System.Collections;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -30,12 +35,7 @@
 //#define ExternalExceptionHandler
 
 using System.Runtime.Remoting;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Collections;
-using System.Diagnostics;
-using System.Drawing;
 
 namespace System.Windows.Forms
 {

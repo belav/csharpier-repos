@@ -3,6 +3,7 @@
 
 using System.CommandLine.Tests.Binding;
 using System.Linq;
+
 using FluentAssertions;
 using Xunit;
 

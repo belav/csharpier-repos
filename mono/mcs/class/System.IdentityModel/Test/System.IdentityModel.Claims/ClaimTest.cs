@@ -26,15 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.IdentityModel.Claims;
-using System.Net.Mail;
-using System.Security.Principal;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.IdentityModel.Claims;using System.Net.Mail;using System.Security.Principal;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Claims
 {

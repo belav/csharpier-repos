@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // X500DistinguishedNameTest.cs - NUnit Test Cases for
 //	System.Security.Cryptography.X509Certificates.X500DistinguishedName
@@ -29,9 +33,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

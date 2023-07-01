@@ -6,9 +6,9 @@ namespace System.ServiceModel.Discovery
     using System;
     using System.Collections.Generic;
     using System.Runtime;
+    using SR2 = System.ServiceModel.Discovery.SR;
     using System.Threading;
     using System.Xml;
-    using SR2 = System.ServiceModel.Discovery.SR;
 
     class AsyncOperationLifetimeManager
     {

@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
-using ILLink.Shared;
 
 using Debug = System.Diagnostics.Debug;
+using System.Text;
+
+using ILLink.Shared;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.Logging
 {

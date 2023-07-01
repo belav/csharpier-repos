@@ -4,15 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 #if CONFIGURATION_DEP
-using System.Configuration;
-using System;
-using System.Reflection;
-using System.Globalization;
-using System.Xml;
-using System.Collections.Specialized;
-using System.Collections;
-using System.Security;
-using System.Security.Permissions;
+using System.Configuration;using System;using System.Reflection;using System.Globalization;using System.Xml;using System.Collections.Specialized;using System.Collections;using System.Security;using System.Security.Permissions;
 
 namespace System.Diagnostics
 {

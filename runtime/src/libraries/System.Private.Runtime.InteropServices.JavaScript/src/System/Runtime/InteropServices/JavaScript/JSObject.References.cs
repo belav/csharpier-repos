@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Runtime.InteropServices.JavaScript

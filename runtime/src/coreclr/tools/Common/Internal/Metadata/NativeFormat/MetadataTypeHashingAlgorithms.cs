@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using Debug = System.Diagnostics.Debug;
 
 using TypeAttributes = System.Reflection.TypeAttributes;
-using Debug = System.Diagnostics.Debug;
-using HashCodeBuilder = Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder;
+
 using TypeHashingAlgorithms = Internal.NativeFormat.TypeHashingAlgorithms;
+using HashCodeBuilder = Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder;
 
 namespace Internal.Metadata.NativeFormat
 {

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using ILCompiler.Dataflow;
 using ILLink.Shared.DataFlow;
 using Internal.TypeSystem;

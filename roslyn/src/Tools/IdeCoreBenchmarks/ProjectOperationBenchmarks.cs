@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Text;
+
 using BenchmarkDotNet.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Shared.Extensions;

@@ -12,11 +12,11 @@
 
 namespace System.Data.Services.Client
 {
+    using System.Collections;
     #region Namespaces
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using System.Collections;
     #endregion
 
     internal static class BindingUtils

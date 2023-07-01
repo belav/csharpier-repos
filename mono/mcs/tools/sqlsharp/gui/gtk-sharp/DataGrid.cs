@@ -21,13 +21,13 @@ namespace Gtk.Controls
     using System.ComponentModel;
     using System.Drawing;
     using System.Reflection;
+
+    using System.Runtime.InteropServices;
     using System.Text;
 
     using GLib;
     using Gtk;
     using GtkSharp;
-
-    using System.Runtime.InteropServices;
 
     public class DataGridColumn
     {

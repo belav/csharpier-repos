@@ -1,18 +1,19 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using Microsoft.DotNet.XUnitExtensions;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net.Test.Common;
+using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.DotNet.RemoteExecutor;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using Microsoft.DotNet.XUnitExtensions;
 
 using Xunit;
 using Xunit.Abstractions;
-using System.Threading;
 
 namespace System.Net.NetworkInformation.Tests
 {

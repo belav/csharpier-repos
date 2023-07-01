@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // System.Configuration.ConfigurationPermissionAttribute.cs
 //
@@ -30,7 +31,6 @@
 
 using System.Security;
 using System.Security.Permissions;
-using System.Runtime.InteropServices;
 
 namespace System.Configuration
 {

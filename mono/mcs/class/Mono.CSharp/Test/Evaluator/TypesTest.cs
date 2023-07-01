@@ -26,10 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !FULL_AOT_RUNTIME
-using System;
-using NUnit.Framework;
-using Mono.CSharp;
-using System.Collections;
+using System;using NUnit.Framework;using Mono.CSharp;using System.Collections;
 
 namespace MonoTests.EvaluatorTest
 {

@@ -1,3 +1,4 @@
+using System;
 //
 // MonoTests.System.Collections.Generic.Test.ComparerTest
 //
@@ -33,7 +34,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System.Collections.Generic
 {

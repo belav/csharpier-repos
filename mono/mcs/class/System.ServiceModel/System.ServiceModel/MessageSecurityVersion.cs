@@ -28,13 +28,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 #if !MOBILE && !XAMMAC_4_5
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;
 #endif
-using System.ServiceModel.Description;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
+using System.ServiceModel.Description;using System.ServiceModel.Channels;using System.ServiceModel.Security;using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel
 {

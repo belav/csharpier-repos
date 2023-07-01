@@ -8,13 +8,14 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Text;
-    using System.Collections;
-    using System.IO;
-    using System.Globalization;
-    using System.Diagnostics;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
+
     using Microsoft.CSharp;
 
     /// <include file='doc\CodeIdentifier.uex' path='docs/doc[@for="CodeIdentifier"]/*' />

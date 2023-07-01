@@ -26,21 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
-using System.Xml;
-using NUnit.Framework;
+using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.Net;using System.Net.Security;using System.Security.Cryptography.X509Certificates;using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Security;using System.ServiceModel.Security.Tokens;using System.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels
 {

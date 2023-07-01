@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+
 // ConstraintTest.cs - NUnit Test Cases for testing the abstract class System.Data.Constraint
 // The tests use an inherited class (UniqueConstraint) to test the Constraint class.
 //
@@ -32,8 +35,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using NUnit.Framework;
-using System;
-using System.Data;
 
 namespace MonoTests.System.Data
 {

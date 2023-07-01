@@ -6,7 +6,6 @@
 #if MONO_FEATURE_WEB_STACK
 namespace System.Net
 {
-    using Diagnostics;
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -15,6 +14,8 @@ namespace System.Net
     using System.Runtime.CompilerServices;
     using System.Security.Authentication;
     using System.Threading;
+
+    using Diagnostics;
 
     //
     // The ServicePointManager class hands out ServicePoints (may exist or be created

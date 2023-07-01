@@ -8,11 +8,11 @@
 
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
-using System.Security;
 
 using ZErrorCode = System.IO.Compression.ZLibNative.ErrorCode;
 using ZFlushCode = System.IO.Compression.ZLibNative.FlushCode;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.IO.Compression
 {

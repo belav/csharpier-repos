@@ -5,11 +5,11 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
+    using System.Xml;
 
     struct ScopedKnownTypes
     {

@@ -8,12 +8,12 @@ namespace System.ServiceModel.WasHosting
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
     using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
     using System.Web;
     using System.Web.Hosting;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Activation;
-    using System.Runtime;
 
     abstract class BaseProcessProtocolHandler : ProcessProtocolHandler
     {

@@ -13,11 +13,11 @@ namespace System.IdentityModel.Tokens
     using System.Runtime;
     using System.Runtime.Remoting.Metadata.W3cXsd2001;
     using System.Security.Claims;
+    using Claim = System.Security.Claims.Claim;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
     using System.ServiceModel.Security;
     using System.Xml;
-    using Claim = System.Security.Claims.Claim;
 
     /// <summary>
     /// SecurityTokenHandler for X509SecurityToken. By default, the

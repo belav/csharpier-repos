@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using Debug = System.Diagnostics.Debug;
+using FieldAttributes = System.Reflection.FieldAttributes;
 
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
+using MethodAttributes = System.Reflection.MethodAttributes;
+using TypeAttributes = System.Reflection.TypeAttributes;
 
 using ILLink.Shared.TypeSystemProxy;
 
-using MethodAttributes = System.Reflection.MethodAttributes;
-using FieldAttributes = System.Reflection.FieldAttributes;
-using TypeAttributes = System.Reflection.TypeAttributes;
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.Dataflow
 {

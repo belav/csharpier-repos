@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.CodeGen

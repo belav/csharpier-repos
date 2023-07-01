@@ -6,6 +6,7 @@
 
 using System.Runtime.InteropServices;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Editor.Host;
 using Microsoft.VisualStudio.Shell.Interop;
 using Roslyn.Utilities;

@@ -4,8 +4,8 @@
 // Test register struct returns and local vars retyping cases.
 
 using System;
-using System.Numerics;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;

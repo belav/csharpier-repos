@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Net;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // HttpWebRequestCas.cs - CAS unit tests for System.Net.WebRequest class
 //
@@ -8,13 +15,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Net;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.Net
 {

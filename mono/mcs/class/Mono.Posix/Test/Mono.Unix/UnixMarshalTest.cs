@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+
+using Mono.Unix;
 // UnixMarshalTests.cs - NUnit2 Test Cases for Mono.Unix.UnixMarshal class
 //
 // Authors:
@@ -7,12 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using Mono.Unix;
 
 namespace MonoTests.Mono.Unix
 {

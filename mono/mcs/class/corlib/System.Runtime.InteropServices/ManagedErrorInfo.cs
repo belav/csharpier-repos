@@ -6,9 +6,7 @@
 
 #if FEATURE_COMINTEROP
 
-using System;
-using System.Runtime.CompilerServices;
-using System.Security;
+using System;using System.Runtime.CompilerServices;using System.Security;
 
 namespace System.Runtime.InteropServices
 {

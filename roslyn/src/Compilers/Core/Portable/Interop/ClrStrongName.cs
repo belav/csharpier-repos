@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Interop

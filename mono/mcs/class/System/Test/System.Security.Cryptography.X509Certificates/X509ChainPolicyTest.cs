@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+
 //
 // X509ChainPolicyTest.cs - NUnit tests for X509ChainPolicy
 //
@@ -29,12 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    using System.Xml;
-    using System.Text;
     using System.IO;
+    using System.Text;
+    using System.Xml;
 
     class EncodingFallbackAwareXmlTextWriter : XmlTextWriter
     {

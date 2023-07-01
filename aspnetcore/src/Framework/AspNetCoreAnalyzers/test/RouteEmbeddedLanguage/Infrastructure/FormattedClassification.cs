@@ -5,6 +5,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;

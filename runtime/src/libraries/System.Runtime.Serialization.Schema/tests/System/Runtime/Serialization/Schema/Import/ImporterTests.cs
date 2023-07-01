@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Schema;
 using System.Runtime.Serialization.Schema.Tests.DataContracts;
 using System.Xml;
 using System.Xml.Schema;
+
 using Xunit;
 using Xunit.Abstractions;
 

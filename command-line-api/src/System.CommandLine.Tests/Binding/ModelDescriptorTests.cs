@@ -3,8 +3,9 @@
 
 using System.CommandLine.Binding;
 using System.CommandLine.Tests.Utility;
-using FluentAssertions;
 using System.Linq;
+
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests.Binding

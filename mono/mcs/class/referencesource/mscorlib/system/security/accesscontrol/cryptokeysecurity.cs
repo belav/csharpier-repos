@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 // ==++==
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -11,8 +13,6 @@
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Security.Principal;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace System.Security.AccessControl
 {

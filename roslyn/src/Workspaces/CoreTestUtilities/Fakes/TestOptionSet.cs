@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities

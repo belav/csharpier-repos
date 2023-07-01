@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+using System.Text;
+
 //
 // PolicyLevelTest.cs - NUnit Test Cases for PolicyLevel
 //
@@ -28,12 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Text;
 
 namespace MonoTests.System.Security.Policy
 {

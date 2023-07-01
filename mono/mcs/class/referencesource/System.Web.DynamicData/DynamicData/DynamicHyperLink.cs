@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Web.Compilation;
+using System.Web.DynamicData.Util;
 using System.Web.Resources;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData.Util;
 
 namespace System.Web.DynamicData
 {

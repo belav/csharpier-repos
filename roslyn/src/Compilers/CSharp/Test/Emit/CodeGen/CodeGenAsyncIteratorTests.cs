@@ -9,13 +9,14 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using static Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen.Instruction;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen.Instruction;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {

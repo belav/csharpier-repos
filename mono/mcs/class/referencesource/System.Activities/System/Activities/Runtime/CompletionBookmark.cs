@@ -5,9 +5,9 @@
 namespace System.Activities.Runtime
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
 
     [DataContract]
     class CompletionBookmark

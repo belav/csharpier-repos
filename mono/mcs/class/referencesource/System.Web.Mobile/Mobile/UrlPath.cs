@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters;
 //------------------------------------------------------------------------------
 // <copyright file="UrlPath.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -11,10 +15,6 @@
  */
 
 using System.Text;
-using System.Runtime.Serialization.Formatters;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.Diagnostics;
 
 namespace System.Web.Mobile
 {

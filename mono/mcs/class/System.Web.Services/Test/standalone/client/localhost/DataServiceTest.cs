@@ -3,8 +3,9 @@
 
 using System;
 using System.Data;
-using NUnit.Framework;
+
 using DataServiceTests.Soap;
+using NUnit.Framework;
 
 //using DataServiceTests.HttpGet;
 //using DataServiceTests.HttpPost;

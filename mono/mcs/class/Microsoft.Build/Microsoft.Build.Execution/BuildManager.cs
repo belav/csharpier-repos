@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+
 // BuildManager.cs
 //
 // Author:
@@ -27,11 +32,7 @@
 //
 
 using Microsoft.Build.Evaluation;
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using Microsoft.Build.Internal;
-using System.Linq;
 
 namespace Microsoft.Build.Execution
 {

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
@@ -10,7 +11,6 @@ using System.Reflection;
 using System.Threading;
 using System.Web.Mvc.Properties;
 using System.Web.Security;
-using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace System.Web.Mvc
 {

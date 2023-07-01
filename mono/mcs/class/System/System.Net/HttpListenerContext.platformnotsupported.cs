@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 //
 // System.Net.HttpListenerContext
 //
@@ -28,7 +29,6 @@
 
 using System.Security.Principal;
 using System.Threading.Tasks;
-using System.Net.WebSockets;
 
 namespace System.Net
 {

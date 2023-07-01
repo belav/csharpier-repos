@@ -1,12 +1,11 @@
+using ILCompiler.DependencyAnalysis;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.IL;
-using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis;
 
 using ReflectionMapBlob = Internal.Runtime.ReflectionMapBlob;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

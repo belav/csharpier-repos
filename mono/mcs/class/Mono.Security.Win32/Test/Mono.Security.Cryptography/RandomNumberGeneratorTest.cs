@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+using Mono.Security.Cryptography;
 //
 // RandomNumberGeneratorTest.cs - NUnit Test Cases for RNG
 //
@@ -8,11 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using Mono.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.Security.Cryptography
 {

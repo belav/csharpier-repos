@@ -28,14 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !FULL_AOT_RUNTIME
-using System;
-using System.Collections;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Proxies;
-using System.Runtime.InteropServices;
+using System;using System.Collections;using System.Reflection;using System.Runtime.CompilerServices;using System.Runtime.Remoting;using System.Runtime.Remoting.Messaging;using System.Runtime.Remoting.Proxies;using System.Runtime.InteropServices;
 
 namespace Mono.Interop
 {

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.Design.IDocumentProjectItem
 //
@@ -30,7 +31,6 @@
 
 
 using System.IO;
-using System.ComponentModel;
 
 namespace System.Web.UI.Design
 {

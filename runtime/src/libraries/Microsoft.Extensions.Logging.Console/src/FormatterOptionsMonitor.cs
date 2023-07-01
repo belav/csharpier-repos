@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.Console

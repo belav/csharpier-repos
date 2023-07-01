@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
-using DbLinq.Util;
 using System.Linq.Expressions;
+using System.Reflection;
+
+using DbLinq.Util;
 using NUnit.Framework;
 
 namespace DbLinqTest

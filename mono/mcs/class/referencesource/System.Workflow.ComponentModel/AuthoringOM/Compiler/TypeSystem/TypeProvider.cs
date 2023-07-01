@@ -4,13 +4,13 @@ namespace System.Workflow.ComponentModel.Compiler
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Diagnostics;
-    using System.Resources;
-    using System.Reflection;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Resources;
     using System.Text.RegularExpressions;
 
     [Obsolete(

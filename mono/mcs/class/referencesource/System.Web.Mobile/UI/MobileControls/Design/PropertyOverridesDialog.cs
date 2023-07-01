@@ -11,19 +11,19 @@ namespace System.Web.UI.Design.MobileControls
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Globalization;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Globalization;
     using System.Reflection;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
 
     using Control = System.Web.UI.Control;
-
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls.Converters;
     using System.Web.UI.Design.MobileControls.Util;
+
+    using System.Web.UI.MobileControls;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

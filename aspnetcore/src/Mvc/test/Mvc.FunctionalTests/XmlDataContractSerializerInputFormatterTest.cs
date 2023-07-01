@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text;
+
 using XmlFormattersWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;

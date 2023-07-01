@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // CryptoConfigTest.cs - NUnit Test Cases for CryptoConfig
 //
@@ -29,8 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

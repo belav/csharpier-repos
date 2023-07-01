@@ -2,9 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 using System.Diagnostics.Contracts;
 using System.Globalization;
-using DataAnnotationsCompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace System.Web.Mvc
 {

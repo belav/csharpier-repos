@@ -10,6 +10,7 @@ namespace System.ServiceModel.Security
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Runtime;
+    using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel;
@@ -17,7 +18,7 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;
-    using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
+
     using KeyIdentifierClauseEntry = WSSecurityTokenSerializer.KeyIdentifierClauseEntry;
     using StrEntry = WSSecurityTokenSerializer.StrEntry;
     using TokenEntry = WSSecurityTokenSerializer.TokenEntry;

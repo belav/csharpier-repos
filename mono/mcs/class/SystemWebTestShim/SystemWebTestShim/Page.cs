@@ -1,3 +1,4 @@
+using System.Web;
 //
 // SystemWebTestShim/Page.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using Orig = System.Web.UI;
-using System.Web;
 
 namespace SystemWebTestShim
 {

@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.WebAssembly.Diagnostics;
 using Newtonsoft.Json.Linq;
-using System.IO;
 using Xunit;
 using Xunit.Abstractions;
 

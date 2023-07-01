@@ -8,11 +8,12 @@
 using System;
 using System.IO;
 using System.Xml;
+
 using Commons.Xml.Relaxng;
 using Commons.Xml.Relaxng.XmlSchema;
-using NUnit.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.Commons.Xml.Relaxng
 {

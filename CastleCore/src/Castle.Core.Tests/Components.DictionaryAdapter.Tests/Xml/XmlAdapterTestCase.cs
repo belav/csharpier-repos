@@ -17,6 +17,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     using System;
     using System.Xml;
     using System.Xml.Serialization;
+
     using NUnit.Framework;
 
     public abstract class XmlAdapterTestCase

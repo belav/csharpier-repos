@@ -755,6 +755,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclass.genclass017.genclass017
 {
+    using System.Collections.Generic;
     // <Title> Tests generic class indexer used in anonymous type.</Title>
     // <Description>
     // anonymous type inside a query expression that introduces dynamic variables.
@@ -763,7 +764,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
     //<Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

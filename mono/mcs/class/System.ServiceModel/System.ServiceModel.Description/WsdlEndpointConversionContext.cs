@@ -31,9 +31,9 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.Web.Services.Description;
-using System.Xml;
 
 using WSBinding = System.Web.Services.Description.Binding;
+using System.Xml;
 
 namespace System.ServiceModel.Description
 {

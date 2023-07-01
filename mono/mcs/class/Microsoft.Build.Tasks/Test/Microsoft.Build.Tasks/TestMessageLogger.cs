@@ -1,9 +1,10 @@
-using Microsoft.Build.Framework;
-using System.Collections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Text;
+
+using Microsoft.Build.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks
 {

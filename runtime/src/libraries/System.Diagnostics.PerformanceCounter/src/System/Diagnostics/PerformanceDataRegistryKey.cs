@@ -5,8 +5,9 @@ using System;
 using System.Buffers;
 using System.IO;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
+
 using Internal.Win32.SafeHandles;
+using Microsoft.Win32;
 
 namespace System.Diagnostics
 {

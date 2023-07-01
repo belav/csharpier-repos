@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.Design;
 using System.IO.Packaging;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.CodeAnalysis.Options;

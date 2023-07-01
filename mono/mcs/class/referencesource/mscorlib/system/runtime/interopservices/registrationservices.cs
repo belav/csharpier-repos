@@ -21,17 +21,18 @@ namespace System.Runtime.InteropServices
 {
     using System;
     using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
+
     using Microsoft.Win32;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     [Flags]
     public enum RegistrationClassContext

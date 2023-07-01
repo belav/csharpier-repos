@@ -6,15 +6,15 @@
 
 namespace System.Configuration
 {
+    using System.Collections;
     using System.Configuration.Internal;
     using System.Globalization;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Xml;
-    using System.Collections;
-    using System.Runtime.Versioning;
 
     // A config exception can contain a filename (of a config file)
     // and a line number (of the location in the file in which a problem was

@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using Debug = System.Diagnostics.Debug;
+
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {

@@ -17,6 +17,7 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Data;
     using System.Windows.Documents;
     using System.Windows.Media;
+
     using Microsoft.Activities.Presentation;
 
     partial class FlowDecisionDesigner

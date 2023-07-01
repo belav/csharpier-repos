@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Resources;
+
 using Microsoft.Build.Utilities;
 
 namespace Microsoft.CodeAnalysis.BuildTasks

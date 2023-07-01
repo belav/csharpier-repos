@@ -5,9 +5,9 @@
 // ==--==
 
 using System;
+using Conditional = System.Diagnostics.ConditionalAttribute;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
-using Conditional = System.Diagnostics.ConditionalAttribute;
 
 namespace System.Numerics
 {

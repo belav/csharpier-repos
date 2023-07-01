@@ -31,6 +31,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using Mono.Cecil;
 
 namespace Mono.Linker

@@ -1,3 +1,4 @@
+using System;
 /*
  Copyright (c) 2003-2010 Niels Kokholm and Peter Sestoft
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +22,6 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System;
 
 //
 // General Information about an assembly is controlled through the following

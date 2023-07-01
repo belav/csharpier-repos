@@ -40,10 +40,10 @@ using System.ServiceModel.Channels.Security;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
-using System.Xml;
-using System.Xml.XPath;
 
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
+using System.Xml;
+using System.Xml.XPath;
 
 namespace System.ServiceModel.Channels
 {

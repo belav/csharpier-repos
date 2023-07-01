@@ -6,14 +6,14 @@ namespace System.Workflow.Activities
 {
     using System.Collections;
     using System.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Reflection;
-    using System.Workflow.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Workflow.Activities.Design;
     using System.ServiceModel;
+    using System.Workflow.Activities.Design;
+    using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     internal class SendActivityDesignerTheme : ActivityDesignerTheme
     {

@@ -12,9 +12,10 @@
 
 namespace System.Security.Cryptography
 {
-    using Microsoft.Win32;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Runtime.Serialization;
+
+    using Microsoft.Win32;
 
     // This enum represents cipher chaining modes: cipher block chaining (CBC),
     // electronic code book (ECB), output feedback (OFB), cipher feedback (CFB),

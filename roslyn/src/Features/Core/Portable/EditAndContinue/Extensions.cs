@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.EditAndContinue.Contracts;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;

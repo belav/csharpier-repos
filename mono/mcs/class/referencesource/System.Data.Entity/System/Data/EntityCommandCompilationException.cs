@@ -10,9 +10,9 @@
 namespace System.Data
 {
     using System;
-    using System.IO;
     using System.Data.Common;
     using System.Globalization;
+    using System.IO;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
 

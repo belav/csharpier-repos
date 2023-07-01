@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Xunit;

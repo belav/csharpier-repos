@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Security
 {
     using System.Globalization;
+    using DiagnosticUtility = System.IdentityModel.DiagnosticUtility;
     using System.IdentityModel.Tokens;
     using System.Runtime.CompilerServices;
     using System.Xml;
-    using DiagnosticUtility = System.IdentityModel.DiagnosticUtility;
 
     [TypeForwardedFrom(
         "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"

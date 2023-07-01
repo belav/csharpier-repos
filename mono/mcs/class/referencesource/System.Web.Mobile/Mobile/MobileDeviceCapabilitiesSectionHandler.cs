@@ -9,8 +9,8 @@ namespace System.Web.Mobile
     using System.Collections;
     using System.Configuration;
     using System.Reflection;
-    using System.Xml;
     using System.Security.Permissions;
+    using System.Xml;
 
     /// <include file='doc\MobileDeviceCapabilitiesSectionHandler.uex' path='docs/doc[@for="MobileDeviceCapabilitiesSectionHandler"]/*' />
     [AspNetHostingPermission(

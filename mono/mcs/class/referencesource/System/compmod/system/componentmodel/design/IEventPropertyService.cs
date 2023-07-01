@@ -9,6 +9,7 @@ namespace System.ComponentModel.Design
     using System;
     using System.Collections;
     using System.ComponentModel;
+
     using Microsoft.Win32;
 
     /// <devdoc>

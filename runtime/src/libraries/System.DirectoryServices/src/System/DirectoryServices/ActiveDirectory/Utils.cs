@@ -1,12 +1,12 @@
+using System.Collections;
+using System.Diagnostics;
+using System.Net;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text;
-using System.Net;
-using System.Collections;
-using System.Security.Principal;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
 
 using Microsoft.Win32.SafeHandles;
 

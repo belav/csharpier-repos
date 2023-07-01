@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ServiceModel;
+using System.Text;
 using System.Threading;
 
 namespace MonoTests.Features.Contracts

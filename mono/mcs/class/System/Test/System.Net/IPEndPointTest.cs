@@ -1,3 +1,7 @@
+using System;
+using System.Net;
+using System.Runtime.InteropServices;
+
 //
 // IPEndPointTest.cs - NUnit Test Cases for System.Net.IPEndPoint
 //
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
-using System.Runtime.InteropServices;
 
 namespace MonoTests.System.Net
 {

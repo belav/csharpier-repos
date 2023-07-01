@@ -31,10 +31,10 @@
 //
 
 using System;
-using System.Text;
-using System.IO;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace System.Drawing.Design

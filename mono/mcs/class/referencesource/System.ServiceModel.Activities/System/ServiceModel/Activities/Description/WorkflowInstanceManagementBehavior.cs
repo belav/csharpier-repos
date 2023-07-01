@@ -2,16 +2,16 @@
 {
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Net.Security;
     using System.Runtime;
     using System.Security.Principal;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Activities.Dispatcher;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Activities.Dispatcher;
-    using System.Xml;
     using System.ServiceModel.Security;
-    using System.Net.Security;
+    using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class WorkflowInstanceManagementBehavior : IServiceBehavior

@@ -17,8 +17,8 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.InteropServices;
 
     [Serializable]
     [AttributeUsage(

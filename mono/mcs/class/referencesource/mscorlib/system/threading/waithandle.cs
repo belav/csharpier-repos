@@ -19,23 +19,17 @@
 #undef FEATURE_PAL
 #endif
 
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
+using Microsoft.Win32;using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
 {
-    using System.Threading;
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
+    using System.Threading;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Runtime.Versioning;using System.Runtime.ConstrainedExecution;using System.Diagnostics.Contracts;using System.Diagnostics.CodeAnalysis;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public abstract partial class WaitHandle : MarshalByRefObject, IDisposable

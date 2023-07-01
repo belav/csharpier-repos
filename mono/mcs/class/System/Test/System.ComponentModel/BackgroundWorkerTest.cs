@@ -8,10 +8,10 @@
 //
 
 using System;
-using System.Threading;
-using System.Reflection;
 using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
+using System.Threading;
 
 using NUnit.Framework;
 

@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+
 //
 // Mono.Data.Tds.TdsMetaParameter.cs
 //
@@ -29,8 +32,6 @@
 //
 
 using Mono.Data.Tds.Protocol;
-using System;
-using System.Text;
 
 namespace Mono.Data.Tds
 {

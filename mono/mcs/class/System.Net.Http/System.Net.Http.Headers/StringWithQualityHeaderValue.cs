@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // StringWithQualityHeaderValue.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Globalization;
-using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {

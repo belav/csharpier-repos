@@ -6,10 +6,10 @@ namespace System.ServiceModel.Discovery
     using System;
     using System.Collections.ObjectModel;
     using System.Runtime;
+    using SR2 = System.ServiceModel.Discovery.SR;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Schema;
-    using SR2 = System.ServiceModel.Discovery.SR;
 
     [Fx.Tag.XamlVisible(false)]
     public class ResolveCriteria

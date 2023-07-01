@@ -25,16 +25,13 @@
 
 #if !DNXCORE50 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 
-using System;
-using System.Collections.Generic;
+using System;using System.Collections.Generic;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using System.Web;
-using Newtonsoft.Json.Linq;
+using System.Text;using System.Web;using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

@@ -2,6 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -11,11 +16,6 @@ using System.Runtime.Serialization.DataContracts;
 using System.Security;
 using System.Text;
 using System.Xml;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<
-    System.Xml.XmlQualifiedName,
-    System.Runtime.Serialization.DataContracts.DataContract
->;
 
 namespace System.Runtime.Serialization
 {

@@ -14,13 +14,14 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+
 using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Shared.Utilities;
-using Roslyn.Utilities;
 
 using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
 {

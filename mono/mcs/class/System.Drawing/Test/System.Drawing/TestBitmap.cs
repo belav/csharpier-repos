@@ -39,13 +39,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 #if !NETCOREAPP2_0
 using System.Runtime.Serialization.Formatters.Soap;
 #endif
-using System.Security.Cryptography;
-using System.Security.Permissions;
-using System.Text;
-using System.Xml.Serialization;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System.Security.Cryptography;using System.Security.Permissions;using System.Text;using System.Xml.Serialization;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.Drawing
 {

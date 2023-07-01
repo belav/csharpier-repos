@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Web.Helpers.Claims;
 using System.Web.Helpers.Claims.Test;
+
 using Microsoft.TestCommon;
 using Moq;
 

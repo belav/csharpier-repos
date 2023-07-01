@@ -1,3 +1,6 @@
+using System;
+using System.DirectoryServices;
+
 //
 // DirectoryServicesSearchResultTest.cs -
 //	NUnit Test Cases for DirectoryServices.SearchResult
@@ -7,8 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.DirectoryServices;
 
 namespace MonoTests.System.DirectoryServices
 {

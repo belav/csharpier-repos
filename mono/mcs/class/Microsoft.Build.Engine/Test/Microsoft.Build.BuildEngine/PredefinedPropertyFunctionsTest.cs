@@ -25,6 +25,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 

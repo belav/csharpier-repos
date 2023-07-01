@@ -5,12 +5,12 @@
 #nullable disable
 
 using Microsoft.CodeAnalysis.AutomaticCompletion;
+using static Microsoft.CodeAnalysis.BraceCompletion.AbstractBraceCompletionService;
 using Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.BraceCompletion.AbstractBraceCompletionService;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
 {

@@ -4,19 +4,7 @@
 #if !NETFX_CORE // In portable library we have our own implementation of Concurrent Dictionary which is in the internal namespace
 using System.Collections.Concurrent;
 #endif
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
-using System.IO;
-using System.Net.Http.Headers;
-using System.Net.Http.Internal;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Xml;
-using System.Xml.Serialization;
+using System.ComponentModel;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.Contracts;using System.IO;using System.Net.Http.Headers;using System.Net.Http.Internal;using System.Runtime.Serialization;using System.Text;using System.Threading;using System.Threading.Tasks;using System.Web.Http;using System.Xml;using System.Xml.Serialization;
 
 namespace System.Net.Http.Formatting
 {

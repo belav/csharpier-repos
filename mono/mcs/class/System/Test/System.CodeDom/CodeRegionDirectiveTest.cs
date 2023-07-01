@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom;
+
 //
 // CodeRegionDirectiveTest.cs
 //	- Unit tests for System.CodeDom.CodeRegionDirective
@@ -29,9 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

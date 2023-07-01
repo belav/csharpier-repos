@@ -1,3 +1,7 @@
+using System;
+using System.Security.AccessControl;
+using System.Threading;
+
 //
 // SemaphoreTest.cs - Unit tests for System.Threading.Semaphore
 //
@@ -28,10 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.AccessControl;
-using System.Threading;
 
 namespace MonoTests.System.Threading
 {

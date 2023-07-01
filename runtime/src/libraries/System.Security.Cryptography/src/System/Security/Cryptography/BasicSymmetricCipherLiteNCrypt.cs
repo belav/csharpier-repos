@@ -5,12 +5,13 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Internal.Cryptography;
 using Internal.NativeCrypto;
-using Microsoft.Win32.SafeHandles;
+using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
 
 using ErrorCode = Interop.NCrypt.ErrorCode;
-using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

@@ -7,8 +7,9 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+
+using Xunit;
 
 namespace System.Net.NetworkInformation.Tests
 {

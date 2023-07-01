@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Diagnostics.PerformanceData

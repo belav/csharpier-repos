@@ -4,9 +4,10 @@
 using System;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.Build.Locator;
-using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.DotNet.OpenApi.Commands;
+using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.Extensions.CommandLineUtils;
 
 namespace Microsoft.DotNet.OpenApi;

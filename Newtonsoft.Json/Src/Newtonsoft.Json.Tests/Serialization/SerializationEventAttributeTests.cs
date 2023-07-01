@@ -32,20 +32,13 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
+using System.Reflection;using System.Runtime.Serialization;using System.Text;using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Tests.TestObjects;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
+using Newtonsoft.Json.Linq;using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {

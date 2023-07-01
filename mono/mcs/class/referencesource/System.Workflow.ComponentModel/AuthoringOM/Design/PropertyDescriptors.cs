@@ -3,22 +3,22 @@ namespace System.Workflow.ComponentModel.Design
     #region Imports
 
     using System;
-    using System.IO;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.CodeDom;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Serialization;
-
-    using System.Drawing.Design;
-    using System.Collections.Specialized;
-    using System.Diagnostics;
-    using System.Globalization;
 
     #endregion
 

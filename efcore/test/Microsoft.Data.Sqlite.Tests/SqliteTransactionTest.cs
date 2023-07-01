@@ -4,9 +4,10 @@
 using System;
 using System.Data;
 using System.IO;
+
 using Microsoft.Data.Sqlite.Properties;
-using Xunit;
 using static SQLitePCL.raw;
+using Xunit;
 
 namespace Microsoft.Data.Sqlite
 {

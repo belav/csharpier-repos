@@ -1,3 +1,4 @@
+using System.Configuration;
 //
 // System.Web.Security.Roles
 //
@@ -32,7 +33,6 @@
 
 using System.Configuration.Provider;
 using System.Web.Configuration;
-using System.Configuration;
 
 namespace System.Web.Security
 {

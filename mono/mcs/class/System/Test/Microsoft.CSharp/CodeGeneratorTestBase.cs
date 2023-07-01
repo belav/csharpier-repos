@@ -7,10 +7,11 @@
 // (c) 2003 Erik LeBel
 //
 using System;
-using System.IO;
-using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.IO;
+using System.Text;
+
 using Microsoft.CSharp;
 
 using NUnit.Framework;

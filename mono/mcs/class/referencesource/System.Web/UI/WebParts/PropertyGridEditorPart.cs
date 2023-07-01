@@ -9,15 +9,15 @@ namespace System.Web.UI.WebControls.WebParts
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using AttributeCollection = System.ComponentModel.AttributeCollection;
     using System.Diagnostics;
+
+    using Debug = System.Diagnostics.Debug;
     using System.Drawing;
     using System.Globalization;
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using System.Web.Util;
-
-    using Debug = System.Diagnostics.Debug;
-    using AttributeCollection = System.ComponentModel.AttributeCollection;
 
     public sealed class PropertyGridEditorPart : EditorPart
     {

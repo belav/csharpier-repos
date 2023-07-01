@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
-using System.IO;
 
 namespace ILCompiler.Reflection.ReadyToRun
 {

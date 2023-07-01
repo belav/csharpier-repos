@@ -19,11 +19,11 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Threading;
-    using System.Diagnostics;
 
     using Castle.Components.DictionaryAdapter.Xml;
     using Castle.Core.Internal;

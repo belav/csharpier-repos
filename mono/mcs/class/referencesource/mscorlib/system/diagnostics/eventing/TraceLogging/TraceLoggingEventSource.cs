@@ -16,19 +16,11 @@
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
 #endif
 
-using System;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Collections.ObjectModel;
-
+using System;using System.Runtime.InteropServices;using System.Security;using System.Collections.ObjectModel;
 #if !ES_BUILD_AGAINST_DOTNET_V35
-using Contract = System.Diagnostics.Contracts.Contract;
-using System.Collections.Generic;
-using System.Text;
+using Contract = System.Diagnostics.Contracts.Contract;using System.Collections.Generic;using System.Text;
 #else
-using Contract = Microsoft.Diagnostics.Contracts.Internal.Contract;
-using System.Collections.Generic;
-using System.Text;
+using Contract = Microsoft.Diagnostics.Contracts.Internal.Contract;using System.Collections.Generic;using System.Text;
 #endif
 
 #if ES_BUILD_STANDALONE

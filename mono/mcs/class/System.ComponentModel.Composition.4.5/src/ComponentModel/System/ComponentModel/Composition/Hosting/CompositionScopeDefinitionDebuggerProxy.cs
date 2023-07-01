@@ -4,9 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition.Primitives;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Hosting
 {

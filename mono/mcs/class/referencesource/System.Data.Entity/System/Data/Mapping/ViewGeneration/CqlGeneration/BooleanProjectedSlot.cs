@@ -1,3 +1,6 @@
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.Utils;
 //---------------------------------------------------------------------
 // <copyright file="BooleanProjectedSlot.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,11 +11,8 @@
 //---------------------------------------------------------------------
 
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Text;
 using System.Diagnostics;
-using System.Data.Common.CommandTrees;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
-using System.Data.Common.Utils;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {

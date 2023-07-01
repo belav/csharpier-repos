@@ -1,3 +1,4 @@
+using static System.Net.Quic.MsQuicHelpers;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -9,8 +10,8 @@ using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+
 using Microsoft.Quic;
-using static System.Net.Quic.MsQuicHelpers;
 using static Microsoft.Quic.MsQuic;
 
 using NEW_CONNECTION_DATA = Microsoft.Quic.QUIC_LISTENER_EVENT._Anonymous_e__Union._NEW_CONNECTION_e__Struct;

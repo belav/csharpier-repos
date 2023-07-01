@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Security.Cryptography.Pkcs.Asn1;
 using System.Security.Cryptography.X509Certificates;
 
-using Internal.Cryptography;
-
 using X509IssuerSerial = System.Security.Cryptography.Xml.X509IssuerSerial;
+
+using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
 {

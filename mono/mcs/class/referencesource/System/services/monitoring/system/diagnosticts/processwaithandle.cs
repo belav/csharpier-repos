@@ -1,9 +1,10 @@
 using System;
-using System.Threading;
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Threading;
+
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Diagnostics
 {

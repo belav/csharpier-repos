@@ -6,6 +6,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.Notification;
 using Microsoft.VisualStudio.PlatformUI;
 

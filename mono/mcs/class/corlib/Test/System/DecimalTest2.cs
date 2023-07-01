@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+
 // DecimalTest.cs - NUnit Test Cases for the System.Decimal struct
 //
 // Author: Martin Weindel (martin.weindel@t-online.de)
@@ -6,9 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 
 namespace MonoTests.System
 {

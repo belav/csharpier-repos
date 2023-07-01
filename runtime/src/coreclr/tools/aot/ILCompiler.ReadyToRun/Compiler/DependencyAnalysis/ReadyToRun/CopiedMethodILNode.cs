@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
+using Debug = System.Diagnostics.Debug;
 using System.Reflection.Metadata;
 
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     class WorkflowOperationBehavior : IOperationBehavior, IWmiInstanceProvider
     {

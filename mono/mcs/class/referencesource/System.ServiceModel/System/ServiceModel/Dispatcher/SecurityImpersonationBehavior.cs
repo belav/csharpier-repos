@@ -10,26 +10,26 @@ namespace System.ServiceModel.Dispatcher
     using System.Diagnostics;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Security;
+    using ClaimsIdentity = System.Security.Claims.ClaimsIdentity;
+    using ClaimsPrincipal = System.Security.Claims.ClaimsPrincipal;
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using EXTENDED_NAME_FORMAT = System.ServiceModel.ComIntegration.EXTENDED_NAME_FORMAT;
+    using SafeNativeMethods = System.ServiceModel.ComIntegration.SafeNativeMethods;
+    using Win32Error = System.ServiceModel.ComIntegration.Win32Error;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Threading;
-    using ClaimsIdentity = System.Security.Claims.ClaimsIdentity;
-    using ClaimsPrincipal = System.Security.Claims.ClaimsPrincipal;
-    using EXTENDED_NAME_FORMAT = System.ServiceModel.ComIntegration.EXTENDED_NAME_FORMAT;
-    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
-    using SafeNativeMethods = System.ServiceModel.ComIntegration.SafeNativeMethods;
-    using Win32Error = System.ServiceModel.ComIntegration.Win32Error;
 
     internal sealed class SecurityImpersonationBehavior
     {

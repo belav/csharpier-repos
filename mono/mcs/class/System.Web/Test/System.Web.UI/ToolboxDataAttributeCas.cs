@@ -1,3 +1,10 @@
+using System;
+using System.ComponentModel.Design;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // ToolboxDataAttributeCas.cs
 //	- CAS unit tests for System.Web.UI.ToolboxDataAttribute
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.ComponentModel.Design;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

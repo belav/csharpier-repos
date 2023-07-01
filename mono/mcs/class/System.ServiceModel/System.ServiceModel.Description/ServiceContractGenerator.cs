@@ -28,9 +28,15 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using OPair = System.Collections.Generic.KeyValuePair<
+    System.ServiceModel.Description.IOperationContractGenerationExtension,
+    System.ServiceModel.Description.OperationContractGenerationContext
+>;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
+
+using ConfigurationType = System.Configuration.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -40,13 +46,7 @@ using System.ServiceModel.Configuration;
 using System.Threading;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using ConfigurationType = System.Configuration.Configuration;
 using QName = System.Xml.XmlQualifiedName;
-using OPair = System.Collections.Generic.KeyValuePair<
-    System.ServiceModel.Description.IOperationContractGenerationExtension,
-    System.ServiceModel.Description.OperationContractGenerationContext
->;
 
 namespace System.ServiceModel.Description
 {

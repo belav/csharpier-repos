@@ -1,3 +1,13 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
+
 //
 // Copyright (c) 2007 Novell, Inc. (http://www.novell.com)
 //
@@ -5,15 +15,6 @@
 //	DataGridViewTest.GenerateClipboardTest (true);
 //
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.ComponentModel;
-using System.Collections;
-using System.Text;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 
 namespace MonoTests.System.Windows.Forms
 {

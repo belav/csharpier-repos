@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Web.Services.Protocols.LogicalMethodInfo.cs
 //
@@ -44,7 +45,6 @@
 //
 
 using System.Reflection;
-using System.Collections;
 using System.Text;
 using System.Web.Services;
 

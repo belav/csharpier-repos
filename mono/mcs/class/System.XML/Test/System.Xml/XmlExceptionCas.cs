@@ -1,3 +1,10 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+using System.Xml;
+
 //
 // XmlExceptionCas.cs - CAS unit tests for System.Xml.XmlException
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using System.Xml;
 
 namespace MonoCasTests.System.Xml
 {

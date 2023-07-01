@@ -1,8 +1,8 @@
 using System;
 using System.Data;
-using NUnit.Framework;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace Monotests_Mono.Data.SqlExpressions
 {

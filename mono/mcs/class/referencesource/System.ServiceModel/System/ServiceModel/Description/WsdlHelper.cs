@@ -11,10 +11,10 @@ namespace System.ServiceModel.Description
     using System.Linq;
     using System.Runtime;
     using System.Text;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using WsdlNS = System.Web.Services.Description;
 
     internal static class WsdlHelper
     {

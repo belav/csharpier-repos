@@ -6,6 +6,7 @@ using System;
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;

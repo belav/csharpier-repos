@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Concurrent;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Roslyn.Utilities

@@ -28,9 +28,10 @@
 
 
 using System;
-using System.Text;
-using System.Configuration;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Text;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration

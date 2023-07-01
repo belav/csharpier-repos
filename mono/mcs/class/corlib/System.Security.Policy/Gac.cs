@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // System.Security.Policy.Gac
 //
@@ -28,7 +29,6 @@
 
 
 using System.Security.Permissions;
-using System.Runtime.InteropServices;
 
 namespace System.Security.Policy
 {

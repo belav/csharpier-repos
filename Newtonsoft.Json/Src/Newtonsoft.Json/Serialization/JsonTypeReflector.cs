@@ -32,8 +32,7 @@ using System.Security;
 #if HAVE_CAS
 using System.Security.Permissions;
 #endif
-using Newtonsoft.Json.Utilities;
-using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Utilities;using System.Runtime.CompilerServices;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

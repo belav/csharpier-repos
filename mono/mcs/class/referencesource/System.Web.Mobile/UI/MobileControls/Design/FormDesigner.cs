@@ -7,13 +7,13 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
-    using System.Drawing;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
-    using System.Web.UI.Design.MobileControls.Util;
+    using System.Drawing;
     using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
 
     using Microsoft.Win32;

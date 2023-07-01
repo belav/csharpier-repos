@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+
 //
 // ListDictionaryTest.cs
 //      - NUnit Test Cases for System.Collections.Specialized.ListDictionary.cs
@@ -12,9 +16,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.Collections.Specialized
 {

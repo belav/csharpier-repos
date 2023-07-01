@@ -18,6 +18,7 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+
     using Castle.Core;
 
     public class DictionaryAdapterInstance

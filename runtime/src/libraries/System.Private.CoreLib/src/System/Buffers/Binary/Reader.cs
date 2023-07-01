@@ -4,15 +4,12 @@
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
-
 #pragma warning disable SA1121 // explicitly using type aliases instead of built-in types
 
 #if TARGET_64BIT
-using nint_t = System.Int64;
-using nuint_t = System.UInt64;
+using nint_t = System.Int64;using nuint_t = System.UInt64;
 #else
-using nint_t = System.Int32;
-using nuint_t = System.UInt32;
+using nint_t = System.Int32;using nuint_t = System.UInt32;
 #endif
 
 namespace System.Buffers.Binary

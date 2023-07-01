@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // SecurityManagerTest.cs - NUnit Test Cases for SecurityManager
 //
@@ -28,12 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security
 {

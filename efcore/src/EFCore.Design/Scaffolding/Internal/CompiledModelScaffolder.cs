@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using System.Text;
+
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;

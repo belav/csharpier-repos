@@ -9,6 +9,7 @@ using System.Collections.Immutable;
 using System.Composition;
 using System.Configuration;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;

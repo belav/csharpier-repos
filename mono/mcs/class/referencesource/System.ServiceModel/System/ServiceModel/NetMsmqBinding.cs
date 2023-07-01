@@ -7,8 +7,8 @@ namespace System.ServiceModel
     using System.Configuration;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.Xml;
     using Config = System.ServiceModel.Configuration;
+    using System.Xml;
 
     public class NetMsmqBinding : MsmqBindingBase
     {

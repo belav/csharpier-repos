@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Internal.Text;
-using Internal.ReadyToRunConstants;
 using System.Text;
+
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

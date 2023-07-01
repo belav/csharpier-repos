@@ -16,12 +16,12 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml.Xsl.IlGen;
 using System.Xml.Xsl.Runtime;
-using System.Runtime.Versioning;
 
 namespace System.Xml.Xsl.Xslt
 {

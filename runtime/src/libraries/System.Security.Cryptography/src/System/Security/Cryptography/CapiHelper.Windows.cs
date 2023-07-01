@@ -6,10 +6,11 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Internal.Cryptography;
-using Microsoft.Win32.SafeHandles;
-using static Interop.Crypt32;
 using CryptProvParam = Interop.Advapi32.CryptProvParam;
+using static Interop.Crypt32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

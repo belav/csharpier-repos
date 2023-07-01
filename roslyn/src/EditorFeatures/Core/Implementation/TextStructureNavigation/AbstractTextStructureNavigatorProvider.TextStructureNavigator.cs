@@ -6,6 +6,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Text.Shared.Extensions;

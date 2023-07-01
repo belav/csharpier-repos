@@ -12,12 +12,12 @@
 
 namespace System.Data.Services.Client.Xml
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
     #region Namespaces.
 
     using System.Xml;
     using System.Xml.Schema;
-    using System.Collections.Generic;
-    using System.Diagnostics;
 
     #endregion Namespaces.
 

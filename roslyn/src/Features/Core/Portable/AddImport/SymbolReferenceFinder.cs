@@ -12,14 +12,15 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.LanguageService;
 using Microsoft.CodeAnalysis.Packaging;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
+using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 using Microsoft.CodeAnalysis.SymbolSearch;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.AddImport
 {

@@ -25,18 +25,19 @@ namespace System.Globalization
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
-    using System.Runtime.Serialization;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Threading;
-    using System.Security.Permissions;
-    using Microsoft.Win32;
     using System.Security;
+    using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
+
+    using Microsoft.Win32;
 
     //
     //  Options can be used during string comparison.

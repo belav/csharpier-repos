@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using IAsyncDisposable = System.IAsyncDisposable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
@@ -20,15 +22,14 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.LanguageServer.Client;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Threading;
 using Moq;
 using Newtonsoft.Json.Linq;
 using Roslyn.Test.Utilities;
-using Xunit.Abstractions;
 using static Roslyn.Test.Utilities.AbstractLanguageServerProtocolTests;
-using IAsyncDisposable = System.IAsyncDisposable;
-using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
+using Xunit.Abstractions;
 
 namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
 {

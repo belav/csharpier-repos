@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Linq;
+
 using Xunit;
 
 namespace System.Text.Json.Serialization.Tests

@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration;
 using System.Collections.Specialized;
+using System.Configuration;
 
 namespace System.Workflow.Runtime.Configuration
 {

@@ -32,9 +32,10 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Xml;
-using Commons.Xml.Relaxng;
 
 using NSResolver = System.Xml.IXmlNamespaceResolver;
+
+using Commons.Xml.Relaxng;
 
 namespace Commons.Xml.Relaxng.Rnc
 {

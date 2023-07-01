@@ -1,13 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Composition.Hosting;
+using System.Composition.Hosting.Core;
+using System.Linq;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-using System.Composition.Hosting.Core;
-using System.Collections.Generic;
-using System.Linq;
-using System;
+
 using Microsoft.Composition.Demos.ExtendedCollectionImports.Util;
-using System.Composition.Hosting;
 
 namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollections
 {

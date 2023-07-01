@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.Win32.SafeHandles;
-using ErrorCode = Interop.NCrypt.ErrorCode;
 using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
+using ErrorCode = Interop.NCrypt.ErrorCode;
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography
 {

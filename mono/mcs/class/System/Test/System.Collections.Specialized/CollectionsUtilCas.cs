@@ -29,16 +29,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System.Collections.Specialized;
+using NUnit.Framework;using System;using System.Collections;using System.Collections.Specialized;using System.Reflection;using System.Security;using System.Security.Permissions;using MonoTests.System.Collections.Specialized;
 
 namespace MonoCasTests.System.Collections.Specialized
 {

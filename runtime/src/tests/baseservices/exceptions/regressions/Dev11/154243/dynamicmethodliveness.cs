@@ -6,9 +6,9 @@
 // with the bug present test was getting assert dialog box with message that Consistency check failed: FAILED: state.fFound
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 
 public class My
 {

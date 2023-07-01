@@ -9,15 +9,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Web.Services.Description;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.Collections;
+using NUnit.Framework;using System;using System.IO;using System.Web.Services.Description;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using System.Collections;
 
 namespace MonoTests.System.Web.Services.Description
 {

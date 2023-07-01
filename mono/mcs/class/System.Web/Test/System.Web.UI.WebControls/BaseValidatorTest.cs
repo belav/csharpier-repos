@@ -1,3 +1,13 @@
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+
+using Alternate;
 //
 // Tests for System.Web.UI.WebControls.BaseValidator
 //
@@ -29,15 +39,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Drawing;
-using System.Web;
-using System.Web.UI;
-using System.ComponentModel;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using Alternate;
 
 namespace Alternate
 {

@@ -3,9 +3,10 @@
 
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Threading.Tasks;
-using Xunit;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
+using System.Threading.Tasks;
+
+using Xunit;
 
 namespace System.Security.Cryptography.Cose.Tests
 {

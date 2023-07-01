@@ -12,12 +12,12 @@
 =============================================================================*/
 
 using System;
-using System.Diagnostics.Contracts;
 using System.Collections.Generic;
+using Conditional = System.Diagnostics.ConditionalAttribute;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Numerics;
 using System.Text;
-using Conditional = System.Diagnostics.ConditionalAttribute;
 
 namespace System.Numerics
 {

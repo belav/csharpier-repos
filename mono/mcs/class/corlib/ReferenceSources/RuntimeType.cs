@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 //
 // RuntimeType.cs
 //
@@ -28,16 +30,12 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Globalization;
+using System.Threading;
 #if MONO_COM
 using System.Reflection.Emit;
 #endif
-using System.Diagnostics.Contracts;
-using System.Security;
-using System.Runtime.Serialization;
+using System.Diagnostics.Contracts;using System.Security;using System.Runtime.Serialization;
 
 namespace System
 {

@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Text;
+
 //
 // System.IO.Path Test Cases
 //
@@ -17,9 +21,6 @@
 //
 
 using NUnit.Framework;
-using System.IO;
-using System;
-using System.Text;
 
 namespace MonoTests.System.IO
 {

@@ -3,16 +3,17 @@
 
 
 using System;
-using System.Text;
+
+using Debug = System.Diagnostics.Debug;
 using System.Reflection.Runtime.General;
+using System.Text;
+
+using Internal.Metadata.NativeFormat;
 using Internal.NativeFormat;
-using Internal.TypeSystem;
 using Internal.Runtime;
 using Internal.Runtime.Augments;
 using Internal.Runtime.TypeLoader;
-using Internal.Metadata.NativeFormat;
-
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
 
 namespace Internal.TypeSystem.NoMetadata
 {

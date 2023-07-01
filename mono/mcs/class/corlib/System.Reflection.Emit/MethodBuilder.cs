@@ -31,16 +31,7 @@
 //
 
 #if MONO_FEATURE_SRE
-using System;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Globalization;
-using System.Security;
-using System.Security.Permissions;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Diagnostics.SymbolStore;
-using System.Collections.Generic;
+using System;using System.Reflection;using System.Reflection.Emit;using System.Globalization;using System.Security;using System.Security.Permissions;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Diagnostics.SymbolStore;using System.Collections.Generic;
 
 namespace System.Reflection.Emit
 {

@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // PermissionSetCollectionTest.cs
 //	- NUnit Test Cases for PermissionSetCollection
@@ -29,10 +34,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security
 {

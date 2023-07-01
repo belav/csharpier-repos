@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Common.Utils;
 //---------------------------------------------------------------------
 // <copyright file="ObjectHelper.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,12 +13,8 @@
 
 using System.Data.Mapping;
 using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Data.Common.Utils;
 using System.IO;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {

@@ -6,8 +6,8 @@ namespace System.Activities.Statements
     using System;
     using System.Activities.DynamicUpdate;
     using System.Collections.Generic;
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
 
     sealed class CompensationParticipant : NativeActivity
     {

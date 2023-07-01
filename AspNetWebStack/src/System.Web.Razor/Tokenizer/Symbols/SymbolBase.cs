@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Web.Razor.Parser.SyntaxTree;
 using System.Web.Razor.Text;
+
 using Microsoft.Internal.Web.Utils;
 
 namespace System.Web.Razor.Tokenizer.Symbols

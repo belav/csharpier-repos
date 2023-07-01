@@ -638,6 +638,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.genclass.genclass016.genclass016
 {
+    using System.Collections.Generic;
     // <Title> Tests generic class regular method used in query expression.</Title>
     // <Description>
     // </Description>
@@ -645,7 +646,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     //<Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

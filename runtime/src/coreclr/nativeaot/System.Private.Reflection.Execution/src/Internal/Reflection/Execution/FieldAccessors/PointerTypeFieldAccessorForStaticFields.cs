@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Internal.Runtime;
-using Internal.Runtime.Augments;
 
 using Debug = System.Diagnostics.Debug;
+
+using Internal.Runtime;
+using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Execution.FieldAccessors
 {

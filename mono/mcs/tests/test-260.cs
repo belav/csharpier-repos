@@ -1,6 +1,6 @@
 using x;
-using y;
 using Test = x.Test;
+using y;
 
 namespace x
 {

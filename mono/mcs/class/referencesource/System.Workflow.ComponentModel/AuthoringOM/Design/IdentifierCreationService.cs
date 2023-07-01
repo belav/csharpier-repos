@@ -1,25 +1,26 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Text;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Reflection;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
     using System.Collections;
-    using System.Globalization;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Collections.Specialized;
+
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
 
     internal sealed class IdentifierCreationService : IIdentifierCreationService
     {

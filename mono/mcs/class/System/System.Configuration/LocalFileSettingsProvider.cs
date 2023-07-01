@@ -29,8 +29,7 @@
 
 #if CONFIGURATION_DEP
 
-using System;
-using System.Collections.Specialized;
+using System;using System.Collections.Specialized;
 
 namespace System.Configuration
 {

@@ -1,5 +1,6 @@
 using System.CommandLine.Builder;
 using System.CommandLine.Parsing;
+
 using FluentAssertions;
 using Xunit;
 

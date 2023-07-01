@@ -31,9 +31,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Xml;
-using System.IO;
 using System.Configuration;
+using System.IO;
+using System.Xml;
+
 using Xunit;
 
 namespace MonoTests.System.Configuration

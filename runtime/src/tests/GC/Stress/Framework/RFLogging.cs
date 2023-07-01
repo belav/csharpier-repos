@@ -6,11 +6,11 @@
 
 #define USE_INSTRUMENTATION
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading;
-using System.Collections.Generic;
 
 /// <summary>
 /// Classed used for all logging infrastructure

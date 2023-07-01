@@ -11,9 +11,10 @@ namespace System.Globalization
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using Microsoft.Win32;
-    using PermissionSet = System.Security.PermissionSet;
     using System.Security.Permissions;
+    using PermissionSet = System.Security.PermissionSet;
+
+    using Microsoft.Win32;
 
     /*=================================JapaneseCalendar==========================
     **

@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection.PortableExecutable;
+
 using Microsoft.CodeAnalysis.Interop;
 using Roslyn.Utilities;
 

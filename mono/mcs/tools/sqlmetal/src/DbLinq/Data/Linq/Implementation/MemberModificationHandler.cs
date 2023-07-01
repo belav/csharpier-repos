@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
 using System.Reflection;
+
 using DbLinq.Util;
 
 namespace DbLinq.Data.Linq.Implementation

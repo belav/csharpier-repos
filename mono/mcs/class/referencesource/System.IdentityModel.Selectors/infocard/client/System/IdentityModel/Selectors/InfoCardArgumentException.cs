@@ -6,6 +6,7 @@ namespace Microsoft.InfoCards
 {
     using System;
     using System.Runtime.Serialization;
+
     using Microsoft.InfoCards.Diagnostics;
 
     //

@@ -4,13 +4,14 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    using Microsoft.Win32.SafeHandles;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Globalization;
-    using System.Diagnostics;
     using System.Security;
-    using System.Runtime;
+
+    using Microsoft.Win32.SafeHandles;
 
     [Fx.Tag.SecurityNote(
         Critical = "Usage of SafeHandleZeroOrMinusOneIsInvalid, which is protected by a LinkDemand and InheritanceDemand"

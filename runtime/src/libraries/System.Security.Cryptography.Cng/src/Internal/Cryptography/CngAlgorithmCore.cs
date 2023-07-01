@@ -4,8 +4,9 @@
 using System;
 using System.Diagnostics;
 using System.Security.Cryptography;
-using Microsoft.Win32.SafeHandles;
+
 using static Interop.NCrypt;
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography
 {

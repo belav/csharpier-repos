@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // RSAPKCS1KeyExchangeFormatterTest.cs - NUnit Test Cases for RSAPKCS1KeyExchangeFormatter
 //
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

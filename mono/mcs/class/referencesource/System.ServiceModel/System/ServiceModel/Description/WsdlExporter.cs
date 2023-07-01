@@ -11,10 +11,10 @@ namespace System.ServiceModel.Description
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using WsdlNS = System.Web.Services.Description;
 
     public class WsdlExporter : MetadataExporter
     {

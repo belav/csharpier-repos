@@ -1,6 +1,7 @@
-﻿using BenchmarkDotNet.Attributes;
-using System.CommandLine.Parsing;
+﻿using System.CommandLine.Parsing;
 using System.Threading.Tasks;
+
+using BenchmarkDotNet.Attributes;
 
 namespace System.CommandLine.Benchmarks.CommandLine
 {

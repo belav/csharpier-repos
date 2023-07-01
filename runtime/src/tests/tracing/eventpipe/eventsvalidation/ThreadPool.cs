@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics.Tracing;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.Diagnostics.Tools.RuntimeClient;
 using Microsoft.Diagnostics.Tracing;
 using Tracing.Tests.Common;

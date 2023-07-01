@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.Options;
 using Roslyn.Utilities;

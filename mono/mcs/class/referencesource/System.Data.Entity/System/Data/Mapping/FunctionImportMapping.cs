@@ -11,6 +11,7 @@ namespace System.Data.Mapping
 {
     using System.Collections;
     using System.Collections.Generic;
+    using OM = System.Collections.ObjectModel;
     using System.Data.Common.Utils;
     using System.Data.Common.Utils.Boolean;
     using System.Data.Entity;
@@ -20,7 +21,6 @@ namespace System.Data.Mapping
     using System.Linq;
     using System.Xml;
     using System.Xml.XPath;
-    using OM = System.Collections.ObjectModel;
 
     /// <summary>
     /// Represents a mapping from a model function import to a store composable or non-composable function.

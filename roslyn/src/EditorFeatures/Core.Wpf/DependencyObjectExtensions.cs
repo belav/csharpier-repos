@@ -4,6 +4,7 @@
 
 using System.Windows;
 using System.Windows.Documents;
+
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Formatting;
 

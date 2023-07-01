@@ -1,3 +1,8 @@
+using System.CodeDom;
+using System.Collections;
+using System.Data;
+using System.Data.Common;
+using System.Security.Permissions;
 //
 // System.ComponentModel.Design.Data.IDataEnvironment
 //
@@ -30,11 +35,6 @@
 
 
 using System.Windows.Forms;
-using System.CodeDom;
-using System.Collections;
-using System.Data;
-using System.Data.Common;
-using System.Security.Permissions;
 
 namespace System.ComponentModel.Design.Data
 {

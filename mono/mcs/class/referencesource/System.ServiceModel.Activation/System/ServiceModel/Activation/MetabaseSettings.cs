@@ -17,6 +17,7 @@ namespace System.ServiceModel.Activation
     using System.ServiceModel;
     using System.ServiceModel.Activation.Diagnostics;
     using System.Web;
+
     using Microsoft.Win32;
 
     abstract class MetabaseSettings

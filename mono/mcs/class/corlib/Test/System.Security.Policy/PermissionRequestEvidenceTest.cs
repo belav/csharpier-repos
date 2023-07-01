@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // PermissionRequestEvidenceTest.cs -
 //	NUnit Test Cases for PermissionRequestEvidence
@@ -30,10 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

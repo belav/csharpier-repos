@@ -5,6 +5,7 @@
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.ConvertAnonymousType;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

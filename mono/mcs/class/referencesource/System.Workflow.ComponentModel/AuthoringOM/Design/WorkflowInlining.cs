@@ -1,24 +1,24 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
     using System.CodeDom;
-    using System.Drawing;
-    using System.Reflection;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Windows.Forms;
-    using System.ComponentModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
     using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     #region ActivityHostDesigner Class
     /// <summary>

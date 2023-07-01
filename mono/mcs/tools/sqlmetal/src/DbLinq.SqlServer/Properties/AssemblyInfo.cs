@@ -25,6 +25,7 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using DbLinq.Factory;
 
 // General Information about an assembly is controlled through the following

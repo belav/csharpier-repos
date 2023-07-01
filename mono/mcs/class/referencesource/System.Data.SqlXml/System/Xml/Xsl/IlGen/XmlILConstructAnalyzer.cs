@@ -5,13 +5,13 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.XPath;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 
 namespace System.Xml.Xsl.IlGen

@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 //
 // System.Threading.Timer.cs
 //
@@ -29,9 +32,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Collections;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace System.Threading

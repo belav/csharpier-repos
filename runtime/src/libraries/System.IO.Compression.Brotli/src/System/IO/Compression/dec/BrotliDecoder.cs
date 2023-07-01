@@ -4,6 +4,7 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Compression

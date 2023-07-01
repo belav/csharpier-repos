@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;

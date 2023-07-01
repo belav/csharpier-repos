@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // RuntimeMethodHandleCas.cs - CAS unit tests for System.RuntimeMethodHandle
 //
@@ -27,10 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

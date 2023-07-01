@@ -3,18 +3,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
+using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Text;
 
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysis.ReadyToRun;
 using ILCompiler.DependencyAnalysisFramework;
-using System.Linq;
-using System.Collections.Immutable;
-using System.Text;
-using System.Reflection.Metadata.Ecma335;
 using ILCompiler.PettisHansenSort;
+
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

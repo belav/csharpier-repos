@@ -24,11 +24,12 @@
 #endregion
 
 using System;
-using System.Runtime.Serialization;
-using System.Reflection;
-using System.Globalization;
-using Newtonsoft.Json.Utilities;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Runtime.Serialization;
+
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {

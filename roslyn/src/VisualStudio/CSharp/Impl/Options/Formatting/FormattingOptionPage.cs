@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.LanguageServices.Implementation.Options;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting

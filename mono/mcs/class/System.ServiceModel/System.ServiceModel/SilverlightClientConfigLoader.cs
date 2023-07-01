@@ -27,11 +27,7 @@
 //
 #if MOBILE || XAMMAC_4_5
 
-using System;
-using System.Collections.Generic;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Xml;
+using System;using System.Collections.Generic;using System.ServiceModel.Channels;using System.Text;using System.Xml;
 
 namespace System.ServiceModel
 {

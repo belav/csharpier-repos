@@ -4,6 +4,7 @@
 using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
+
 using Xunit;
 
 // Implementation is not robust with respect to concurrently writing and reading log

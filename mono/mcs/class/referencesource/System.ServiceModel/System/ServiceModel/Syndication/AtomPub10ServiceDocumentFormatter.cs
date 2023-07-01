@@ -4,17 +4,17 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
-    using System.Xml;
-    using System.Xml.Schema;
-    using System.ServiceModel.Channels;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     internal delegate InlineCategoriesDocument CreateInlineCategoriesDelegate();
     internal delegate ReferencedCategoriesDocument CreateReferencedCategoriesDelegate();

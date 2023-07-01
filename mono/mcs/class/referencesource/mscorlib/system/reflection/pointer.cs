@@ -15,10 +15,10 @@
 namespace System.Reflection
 {
     using System;
+    using System.Diagnostics.Contracts;
     using CultureInfo = System.Globalization.CultureInfo;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Diagnostics.Contracts;
 
     [CLSCompliant(false)]
     [Serializable]

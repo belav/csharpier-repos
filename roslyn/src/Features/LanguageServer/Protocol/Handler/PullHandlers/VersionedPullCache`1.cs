@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 using Roslyn.Utilities;
 

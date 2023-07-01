@@ -19,21 +19,15 @@
 namespace System
 {
     using System;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Security;
-    using System.IO;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Security;using System.IO;using System.Text;using System.Reflection;using System.Collections;using System.Globalization;using System.Diagnostics.Contracts;
 #if NETCORE
     using __HResults = System.HResults;
 #endif

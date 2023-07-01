@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.Remoting.Lifetime;
+
     using XamlBuildTask;
 
     internal static class XamlBuildTaskLeaseLifetimeHelper

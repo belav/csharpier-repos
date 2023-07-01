@@ -27,10 +27,11 @@
 //
 using System;
 using System.IO;
-using System.Text;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Xml;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization.Json

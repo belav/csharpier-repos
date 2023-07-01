@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization.Tests;
+
 using Xunit;
 
 namespace System.Text.Json.Node.Tests

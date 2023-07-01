@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 using System.Diagnostics;
-using System.IO;
 using System.Drawing;
-using System.Web.UI.MobileControls;
-using System.Security.Permissions;
 using System.Globalization;
+using System.IO;
+using System.Security.Permissions;
+using System.Web.UI.MobileControls;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource

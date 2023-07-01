@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // IBuiltInPermissionTest.cs - NUnit Test Cases for IBuiltInPermission
 //
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

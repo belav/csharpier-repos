@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Xml.Schema;
+
 using Xunit;
 
 namespace System.Xml.XmlSchemaTests

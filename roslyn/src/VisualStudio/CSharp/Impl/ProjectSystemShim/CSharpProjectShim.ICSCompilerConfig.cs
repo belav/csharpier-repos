@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim

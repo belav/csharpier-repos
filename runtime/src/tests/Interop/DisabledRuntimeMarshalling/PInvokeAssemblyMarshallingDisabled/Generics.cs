@@ -5,8 +5,9 @@ using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
-using Xunit;
+
 using static DisabledRuntimeMarshallingNative;
+using Xunit;
 
 namespace DisabledRuntimeMarshalling;
 

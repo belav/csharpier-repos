@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;

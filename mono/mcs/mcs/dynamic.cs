@@ -10,9 +10,9 @@
 //
 
 using System;
+using System.Dynamic;
 using System.Linq;
 using SLE = System.Linq.Expressions;
-using System.Dynamic;
 #if STATIC
 using IKVM.Reflection.Emit;
 #else

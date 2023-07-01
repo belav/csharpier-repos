@@ -6,18 +6,7 @@
 
 #if WIN_PLATFORM
 
-using Microsoft.Win32;
-using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
+using Microsoft.Win32;using System;using System.Collections;using System.Diagnostics;using System.Collections.Generic;using System.Collections.ObjectModel;using System.Globalization;using System.Diagnostics.Contracts;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Text;using System.Threading;
 
 namespace System
 {

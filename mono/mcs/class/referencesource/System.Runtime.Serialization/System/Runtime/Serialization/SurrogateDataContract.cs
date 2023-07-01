@@ -4,9 +4,9 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
 
 #if USE_REFEMIT
     public sealed class SurrogateDataContract : DataContract

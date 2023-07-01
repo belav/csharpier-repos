@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // Mono.Data.Tds.Protocol.TdsDataColumnCollection.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using Mono.Data.Tds.Protocol;
-using System.Collections;
 
 namespace Mono.Data.Tds.Protocol
 {

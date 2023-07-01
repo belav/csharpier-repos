@@ -2,10 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NETFRAMEWORK || NETCOREAPP
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
+using System.Collections.Concurrent;using System.Collections.Generic;using System.Diagnostics;using System.Threading;
 
 namespace System.Text.Json.Serialization.Metadata
 {

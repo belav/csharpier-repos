@@ -26,6 +26,7 @@
 
 using System.Collections.Generic;
 using System.Data;
+
 using DbLinq.Util;
 
 namespace DbLinq.Ingres

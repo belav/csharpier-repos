@@ -3,9 +3,9 @@
 
 using System.Configuration.Assemblies;
 using System.Diagnostics.CodeAnalysis;
+using CultureInfo = System.Globalization.CultureInfo;
 using System.Runtime.Serialization;
 using System.Text;
-using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System.Reflection
 {

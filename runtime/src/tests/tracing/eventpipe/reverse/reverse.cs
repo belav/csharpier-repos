@@ -2,18 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics.Tracing;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Tracing;
+using System.IO;
+using System.Linq;
 using System.Reflection;
-using Microsoft.Diagnostics.Tools.RuntimeClient;
-using Tracing.Tests.Common;
 using System.Text;
 using System.Threading;
-using System.IO;
+using System.Threading.Tasks;
+
+using Microsoft.Diagnostics.Tools.RuntimeClient;
 using Microsoft.Diagnostics.Tracing;
+using Tracing.Tests.Common;
 
 namespace Tracing.Tests.ReverseValidation
 {

@@ -4,11 +4,12 @@
 
 using System;
 using System.Collections.Generic;
+
 using AppKit;
 using Foundation;
-using ObjCRuntime;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.VisualStudio.Text.Differencing;
+using ObjCRuntime;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {

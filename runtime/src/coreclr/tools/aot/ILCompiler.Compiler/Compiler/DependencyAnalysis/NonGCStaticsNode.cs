@@ -3,10 +3,10 @@
 
 using System;
 
+using Debug = System.Diagnostics.Debug;
+
 using Internal.Text;
 using Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {

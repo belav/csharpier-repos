@@ -28,9 +28,10 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Text

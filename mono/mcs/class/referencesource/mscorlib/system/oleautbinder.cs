@@ -10,10 +10,11 @@
 namespace System
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Reflection;
-    using Microsoft.Win32;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+
+    using Microsoft.Win32;
 
     // Made serializable in anticipation of this class eventually having state.
     [Serializable]

@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Threading;
 

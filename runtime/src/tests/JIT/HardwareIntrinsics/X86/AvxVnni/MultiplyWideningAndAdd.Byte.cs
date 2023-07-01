@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using System.Text.RegularExpressions;
+
 using Xunit;
 
 namespace JIT.HardwareIntrinsics.X86._AvxVnni

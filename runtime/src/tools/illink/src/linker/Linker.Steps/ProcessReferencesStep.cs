@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+
 using ILLink.Shared;
 
 namespace Mono.Linker.Steps

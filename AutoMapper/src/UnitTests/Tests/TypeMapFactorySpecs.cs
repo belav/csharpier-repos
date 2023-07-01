@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Xunit;
-using Shouldly;
+
 using AutoMapper.Configuration.Conventions;
+using Shouldly;
+using Xunit;
 
 namespace AutoMapper.UnitTests.Tests
 {
-    using AutoMapper.Internal;
     using System;
     using Assembly = System.Reflection.Assembly;
+
+    using AutoMapper.Internal;
 
     public class StubNamingConvention : INamingConvention
     {

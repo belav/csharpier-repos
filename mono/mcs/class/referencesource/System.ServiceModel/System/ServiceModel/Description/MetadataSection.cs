@@ -7,11 +7,11 @@ namespace System.ServiceModel.Description
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
-    using System.Xml;
-    using WsdlNS = System.Web.Services.Description;
-    using XsdNS = System.Xml.Schema;
     using System.Reflection;
+    using System.Text;
+    using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
+    using XsdNS = System.Xml.Schema;
     using System.Xml.Serialization;
 
     [XmlRoot(

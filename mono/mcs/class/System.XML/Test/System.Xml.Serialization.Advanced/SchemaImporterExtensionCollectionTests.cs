@@ -30,13 +30,7 @@
 
 #if !MOBILE
 
-using System;
-using System.CodeDom;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.Xml.Serialization.Advanced;
-using NUnit.Framework;
+using System;using System.CodeDom;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using System.Xml.Serialization.Advanced;using NUnit.Framework;
 
 namespace MonoTests.System.Xml.Serialization.Advanced
 {

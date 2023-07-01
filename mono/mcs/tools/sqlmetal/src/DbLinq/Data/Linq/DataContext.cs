@@ -26,34 +26,23 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
-using System.Linq.Expressions;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
-
 #if MONO_STRICT
 using AttributeMappingSource = System.Data.Linq.Mapping.AttributeMappingSource;
 #else
 using AttributeMappingSource = DbLinq.Data.Linq.Mapping.AttributeMappingSource;
 #endif
 
-using DbLinq;
-using DbLinq.Data.Linq;
-using DbLinq.Data.Linq.Database;
-using DbLinq.Data.Linq.Database.Implementation;
-using DbLinq.Data.Linq.Identity;
-using DbLinq.Data.Linq.Implementation;
-using DbLinq.Data.Linq.Mapping;
-using DbLinq.Data.Linq.Sugar;
-using DbLinq.Factory;
-using DbLinq.Util;
-using DbLinq.Vendor;
+using DbLinq;using DbLinq.Data.Linq;using DbLinq.Data.Linq.Database;using DbLinq.Data.Linq.Database.Implementation;using DbLinq.Data.Linq.Identity;using DbLinq.Data.Linq.Implementation;using DbLinq.Data.Linq.Mapping;using DbLinq.Data.Linq.Sugar;using DbLinq.Factory;using DbLinq.Util;using DbLinq.Vendor;
 
 #if MONO_STRICT
 namespace System.Data.Linq

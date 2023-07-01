@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.TestHooks;

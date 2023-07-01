@@ -4,8 +4,8 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Runtime.Versioning;
+using System.Text;
 
 #if MS_IO_REDIST
 namespace Microsoft.IO

@@ -15,10 +15,10 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
-    using System.Xml;
-    using System.Transactions;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
+    using System.Transactions;
+    using System.Xml;
 
     delegate void MessageRpcProcessor(ref MessageRpc rpc);
 

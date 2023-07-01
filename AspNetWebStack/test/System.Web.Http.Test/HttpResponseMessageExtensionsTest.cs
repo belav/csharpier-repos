@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Net.Http.Formatting;
+
 using Microsoft.TestCommon;
 using Moq;
 

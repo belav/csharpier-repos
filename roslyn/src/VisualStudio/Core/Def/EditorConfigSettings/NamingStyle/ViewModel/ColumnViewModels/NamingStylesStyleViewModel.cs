@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingStyle.ViewModel

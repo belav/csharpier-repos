@@ -10,11 +10,11 @@ namespace System.Web.Services.Protocols
     using System.Collections;
     using System.IO;
     using System.Reflection;
-    using System.Xml.Serialization;
-    using System.Web.Services.Description;
-    using System.Security.Policy;
     using System.Security;
     using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Web.Services.Description;
+    using System.Xml.Serialization;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]

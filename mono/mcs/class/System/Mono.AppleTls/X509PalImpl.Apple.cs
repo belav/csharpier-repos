@@ -24,11 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if MONO_FEATURE_APPLETLS || MONO_FEATURE_APPLE_X509
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Win32.SafeHandles;
-using XamMac.CoreFoundation;
+using System;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using Microsoft.Win32.SafeHandles;using XamMac.CoreFoundation;
 
 namespace Mono.AppleTls
 {

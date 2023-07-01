@@ -7,6 +7,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using InlineIL;
 
 class ForwardSubNormalizeOnStore

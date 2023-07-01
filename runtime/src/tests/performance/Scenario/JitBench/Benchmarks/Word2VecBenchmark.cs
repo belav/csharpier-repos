@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using Microsoft.Xunit.Performance.Api;
-using System.Runtime.InteropServices;
-using System.Globalization;
 
 namespace JitBench
 {

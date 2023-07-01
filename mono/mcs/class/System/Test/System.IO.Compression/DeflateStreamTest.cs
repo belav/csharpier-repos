@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
+
+using MonoTests.Helpers;
 /* -*- Mode: csharp; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 //
 // DeflateStreamTest.cs - NUnit Test Cases for the System.IO.Compression.DeflateStream class
@@ -10,12 +16,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.IO.Compression
 {

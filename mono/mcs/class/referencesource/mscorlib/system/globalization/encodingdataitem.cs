@@ -5,10 +5,10 @@
 // ==--==
 namespace System.Globalization
 {
-    using System.Text;
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Security;
+    using System.Text;
 
     //
     // Data item for EncodingTable.  Along with EncodingTable, they are used by

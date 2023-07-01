@@ -24,8 +24,8 @@
 //
 
 using System;
-using System.Security;
 using System.Collections.ObjectModel;
+using System.Security;
 
 namespace System.Security.RightsManagement
 {

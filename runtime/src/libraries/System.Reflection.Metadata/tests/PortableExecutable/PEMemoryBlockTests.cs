@@ -4,6 +4,7 @@
 using System.Collections.Immutable;
 using System.Reflection.Internal;
 using System.Reflection.Metadata.Tests;
+
 using Xunit;
 
 namespace System.Reflection.PortableExecutable.Tests

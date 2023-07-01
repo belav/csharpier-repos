@@ -7,6 +7,7 @@ using System.Composition;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Versioning;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Host;

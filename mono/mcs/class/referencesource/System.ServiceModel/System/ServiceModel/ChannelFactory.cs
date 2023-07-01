@@ -5,14 +5,14 @@
 namespace System.ServiceModel
 {
     using System.Configuration;
+    using FederatedClientCredentialsParameters = System.IdentityModel.Protocols.WSTrust.FederatedClientCredentialsParameters;
+    using SecurityToken = System.IdentityModel.Tokens.SecurityToken;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Security;
-    using SecurityToken = System.IdentityModel.Tokens.SecurityToken;
-    using FederatedClientCredentialsParameters = System.IdentityModel.Protocols.WSTrust.FederatedClientCredentialsParameters;
 
     public abstract class ChannelFactory : CommunicationObject, IChannelFactory, IDisposable
     {

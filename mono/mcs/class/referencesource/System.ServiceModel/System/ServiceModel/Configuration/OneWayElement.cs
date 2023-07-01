@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     public sealed partial class OneWayElement : BindingElementExtensionElement
     {

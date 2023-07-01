@@ -1,3 +1,11 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using Microsoft.Win32;
+
+using MonoTests.System;
 //
 // UriBuilderCas.cs - CAS unit tests for System
 //
@@ -27,14 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using Microsoft.Win32;
-
-using MonoTests.System;
 
 namespace MonoCasTests.System
 {

@@ -8,11 +8,11 @@ namespace System.IdentityModel.Security
     using System.Collections.Generic;
     using System.IdentityModel;
     using System.IdentityModel.Selectors;
+    using KeyIdentifierClauseEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierClauseEntry;
     using System.IdentityModel.Tokens;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using KeyIdentifierClauseEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierClauseEntry;
 
     internal class WSTrust : SecurityTokenSerializer.SerializerEntries
     {

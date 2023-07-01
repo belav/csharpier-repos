@@ -1,10 +1,11 @@
 // This test is designed to find exactly what conditions cause the control's
 // Handle to be created.
 using System;
-using NUnit.Framework;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

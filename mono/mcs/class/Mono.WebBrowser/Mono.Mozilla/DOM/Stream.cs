@@ -24,10 +24,11 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Text;
 using io = System.IO;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+
 using Mono.Mozilla.DOM;
 
 namespace Mono.Mozilla

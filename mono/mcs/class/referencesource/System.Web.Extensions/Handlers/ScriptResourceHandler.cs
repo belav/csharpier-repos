@@ -9,6 +9,7 @@ namespace System.Web.Handlers
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using Debug = System.Diagnostics.Debug;
     using System.Globalization;
     using System.IO;
     using System.IO.Compression;
@@ -25,7 +26,6 @@ namespace System.Web.Handlers
     using System.Web.Security.Cryptography;
     using System.Web.UI;
     using System.Web.Util;
-    using Debug = System.Diagnostics.Debug;
 
     public class ScriptResourceHandler : IHttpHandler
     {

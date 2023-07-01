@@ -24,16 +24,12 @@
 #endregion
 
 #if NET6_0_OR_GREATER
-using System;
-using System.Collections.Generic;
+using System;using System.Collections.Generic;
 #if !NET20
 using System.Xml.Linq;
 #endif
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
-using Xunit.Abstractions;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;using Xunit.Abstractions;
 #else
 using NUnit.Framework;
 #endif

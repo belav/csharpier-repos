@@ -16,8 +16,8 @@ namespace System.Web
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Web.Hosting;
     using System.Web.Configuration;
+    using System.Web.Hosting;
     using System.Web.Management;
     using System.Web.Util;
 

@@ -3,18 +3,19 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Composition.Diagnostics;
 using System.ComponentModel.Composition.Primitives;
+using System.Composition.Diagnostics;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using IOPath = System.IO.Path;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using IOPath = System.IO.Path;
 
 namespace System.ComponentModel.Composition.Hosting
 {

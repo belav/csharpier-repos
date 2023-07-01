@@ -1,3 +1,4 @@
+using System;
 //
 // BitConverterTest.cs - NUnit Test Cases for System.BitConverter
 //
@@ -9,7 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

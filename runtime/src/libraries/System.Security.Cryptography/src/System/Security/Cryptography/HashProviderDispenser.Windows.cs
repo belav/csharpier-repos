@@ -3,12 +3,13 @@
 
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+
 using Internal.Cryptography;
-using Microsoft.Win32.SafeHandles;
-using NTSTATUS = Interop.BCrypt.NTSTATUS;
-using BCryptOpenAlgorithmProviderFlags = Interop.BCrypt.BCryptOpenAlgorithmProviderFlags;
-using BCryptCreateHashFlags = Interop.BCrypt.BCryptCreateHashFlags;
 using BCryptAlgorithmCache = Interop.BCrypt.BCryptAlgorithmCache;
+using BCryptCreateHashFlags = Interop.BCrypt.BCryptCreateHashFlags;
+using BCryptOpenAlgorithmProviderFlags = Interop.BCrypt.BCryptOpenAlgorithmProviderFlags;
+using NTSTATUS = Interop.BCrypt.NTSTATUS;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // ToolStripDropDownButton.cs
 //
@@ -29,7 +30,6 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.Design;
-using System.ComponentModel;
 
 namespace System.Windows.Forms
 {

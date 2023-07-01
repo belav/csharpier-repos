@@ -7,9 +7,9 @@
 namespace System.Web.Hosting
 {
     using System;
+    using System.Configuration;
     using System.Web;
     using System.Web.Util;
-    using System.Configuration;
 
     internal sealed class PreloadHost : MarshalByRefObject, IRegisteredObject
     {

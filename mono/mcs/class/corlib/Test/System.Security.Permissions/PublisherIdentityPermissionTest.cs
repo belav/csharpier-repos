@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
+
 //
 // PublisherIdentityPermissionTest.cs -
 //	NUnit Test Cases for PublisherIdentityPermission
@@ -29,10 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Permissions
 {

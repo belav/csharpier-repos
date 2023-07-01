@@ -3,6 +3,7 @@
 
 using System;
 using System.Windows.Forms;
+
 using Microsoft.Diagnostics.Tracing.Session;
 
 namespace DependencyLogViewer

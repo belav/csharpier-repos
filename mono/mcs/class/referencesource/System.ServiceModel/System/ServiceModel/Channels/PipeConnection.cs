@@ -5,6 +5,7 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -14,20 +15,19 @@ namespace System.ServiceModel.Channels
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Security.AccessControl;
-    using System.ComponentModel;
     using System.Security;
+    using System.Security.AccessControl;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using SafeCloseHandle = System.ServiceModel.Activation.SafeCloseHandle;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Security;
     using System.Text;
     using System.Threading;
-    using SafeCloseHandle = System.ServiceModel.Activation.SafeCloseHandle;
 
     sealed class PipeConnection : IConnection
     {

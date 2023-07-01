@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Xunit;
+
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.VisualStudio.LanguageServices.Options;
 using Roslyn.Test.Utilities;
-using Microsoft.CodeAnalysis.Options;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 

@@ -27,10 +27,10 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {

@@ -1,3 +1,4 @@
+using System.Reflection;
 //
 // System.Runtime.Remoting.Metadata.SoapFieldAttribute.cs
 //
@@ -32,7 +33,6 @@
 
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
-using System.Reflection;
 
 namespace System.Runtime.Remoting.Metadata
 {

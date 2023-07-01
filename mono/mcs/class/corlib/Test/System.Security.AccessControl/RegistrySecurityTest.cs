@@ -5,12 +5,7 @@
 
 #if !MOBILE
 
-using System;
-using System.IO;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using Microsoft.Win32;
-using NUnit.Framework;
+using System;using System.IO;using System.Security.AccessControl;using System.Security.Principal;using Microsoft.Win32;using NUnit.Framework;
 
 namespace MonoTests.System.Security.AccessControl
 {

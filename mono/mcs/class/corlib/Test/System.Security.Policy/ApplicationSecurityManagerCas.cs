@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // ApplicationSecurityManagerCas.cs -
 //	CAS unit tests for System.Security.Policy.ApplicationSecurityManager
@@ -29,13 +36,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoCasTests.System.Security.Policy
 {

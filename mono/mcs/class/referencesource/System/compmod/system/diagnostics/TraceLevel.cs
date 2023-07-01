@@ -6,9 +6,8 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies what messages to output for debugging

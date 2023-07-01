@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography.Pkcs;
+
 //
 // Unit tests for CmsRecipientCollection
 //
@@ -28,9 +31,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

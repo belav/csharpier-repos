@@ -8,11 +8,12 @@
 
 namespace System.CodeDom
 {
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     Represents a try block, with any number of catch clauses and an

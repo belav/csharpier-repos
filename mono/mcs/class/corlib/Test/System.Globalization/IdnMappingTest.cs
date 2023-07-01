@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Threading;
+
 //
 // IdnMappingTest.cs
 //
@@ -28,11 +34,6 @@
 
 
 using NUnit.Framework;
-using System.IO;
-using System;
-using System.Globalization;
-using System.Threading;
-using System.Text;
 
 namespace MonoTests.System.Globalization
 {

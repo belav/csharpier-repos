@@ -18,6 +18,7 @@
 
 using System.Diagnostics.Tracing;
 using System.Text;
+
 using Microsoft.Extensions.Logging;
 
 namespace Grpc.Tests.Shared

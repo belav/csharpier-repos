@@ -7,6 +7,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 using Roslyn.Utilities;

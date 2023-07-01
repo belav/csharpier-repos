@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using SQLitePCL;
 

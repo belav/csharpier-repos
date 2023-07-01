@@ -1,7 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using SharedTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +5,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.GeneratedMarshalling;
 using System.Text;
+
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using SharedTypes;
 
 using Xunit;
 

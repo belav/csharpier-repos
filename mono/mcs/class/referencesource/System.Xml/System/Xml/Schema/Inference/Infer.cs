@@ -7,12 +7,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.IO;
-using System.Xml;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Security.Permissions;
+using System.Xml;
 
 namespace System.Xml.Schema
 {

@@ -7,9 +7,10 @@
 
 namespace System.Web.Util
 {
-    using System.Threading;
     using System.Collections;
     using System.Globalization;
+    using System.Threading;
+
     using Microsoft.Win32;
 
     struct ReadWriteSpinLock

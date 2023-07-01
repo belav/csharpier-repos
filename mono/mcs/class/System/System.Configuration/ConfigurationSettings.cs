@@ -39,8 +39,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 #if (XML_DEP)
-using System.Xml;
-using System.Xml.XPath;
+using System.Xml;using System.Xml.XPath;
 #endif
 
 #pragma warning disable 618

@@ -5,8 +5,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
-using ILLink.Shared.TypeSystemProxy;
+
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
+using ILLink.Shared.TypeSystemProxy;
 
 // This is needed due to NativeAOT which doesn't enable nullable globally yet
 #nullable enable

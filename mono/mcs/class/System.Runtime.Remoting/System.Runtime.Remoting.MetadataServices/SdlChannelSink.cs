@@ -1,3 +1,5 @@
+using System.Collections;
+using System.IO;
 //
 // System.Runtime.Remoting.MetadataServices.SdlChannelSink
 //
@@ -30,8 +32,6 @@
 
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Messaging;
-using System.IO;
-using System.Collections;
 using System.Text;
 
 namespace System.Runtime.Remoting.MetadataServices

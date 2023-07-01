@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+
 // BarrierTest.cs
 //
 // Copyright (c) 2010 Jérémie "Garuma" Laval
@@ -25,9 +28,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Threading;
 
 namespace MonoTests.System.Threading
 {

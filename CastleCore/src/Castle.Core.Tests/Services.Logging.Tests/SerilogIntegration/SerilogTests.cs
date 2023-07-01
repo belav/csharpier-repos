@@ -17,9 +17,9 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
     using System;
     using System.IO;
 
-    using Serilog;
-
     using NUnit.Framework;
+
+    using Serilog;
 
     public class SerilogTests
     {

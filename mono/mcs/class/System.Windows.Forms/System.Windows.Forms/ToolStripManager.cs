@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.ComponentModel;
 //
 // ToolStripManager.cs
 //
@@ -28,8 +30,6 @@
 
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {

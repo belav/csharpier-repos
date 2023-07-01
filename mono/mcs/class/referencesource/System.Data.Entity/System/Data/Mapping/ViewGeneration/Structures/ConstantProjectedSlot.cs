@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
 //---------------------------------------------------------------------
 // <copyright file="ConstantProjectedSlot.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,11 +11,8 @@
 //---------------------------------------------------------------------
 
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
-using System.Data.Common.CommandTrees;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

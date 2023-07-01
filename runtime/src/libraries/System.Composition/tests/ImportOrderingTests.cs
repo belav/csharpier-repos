@@ -10,6 +10,7 @@ using System.Composition.UnitTests.Util;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Microsoft.Composition.Demos.ExtendedCollectionImports;
 using Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollections;
 using Xunit;

@@ -8,6 +8,7 @@
 // and niters it the number of type/method instantiations to create each thread
 using System;
 using System.Threading;
+
 using Xunit;
 
 // Spice things up a bit with some mutual recursion between instantiations

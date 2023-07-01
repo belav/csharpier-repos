@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests

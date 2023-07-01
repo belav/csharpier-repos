@@ -25,16 +25,15 @@
 #endregion
 
 using System;
-using System.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 
 using DbLinq.Data.Linq.Database;
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Util;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #endif

@@ -1,3 +1,8 @@
+using System;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Text;
 //
 // This code generates the ControlStylesTest.cs test
 //
@@ -6,11 +11,6 @@
 
 
 using System.Windows.Forms;
-using System.Drawing;
-using System;
-using System.Reflection;
-using System.IO;
-using System.Text;
 
 namespace TestApp
 {

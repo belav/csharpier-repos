@@ -16,12 +16,12 @@ namespace System.Security.Cryptography.X509Certificates
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
+
+    using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
+    using System.Runtime.Versioning;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Text;
-    using System.Runtime.Versioning;
-
-    using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     public enum X509FindType
     {

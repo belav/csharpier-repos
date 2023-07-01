@@ -29,10 +29,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
+using NUnit.Framework;using System;using System.Security;using System.Security.Permissions;
 
 namespace MonoTests.System.Security
 {

@@ -1,5 +1,5 @@
-using Xunit;
 using Shouldly;
+using Xunit;
 
 namespace AutoMapper.UnitTests
 {

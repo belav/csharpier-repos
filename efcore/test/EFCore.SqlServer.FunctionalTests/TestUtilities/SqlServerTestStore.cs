@@ -3,6 +3,7 @@
 
 using System.Data;
 using System.Text.RegularExpressions;
+
 using Microsoft.Data.SqlClient;
 
 #pragma warning disable IDE0022 // Use block body for methods

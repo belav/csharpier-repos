@@ -1,6 +1,5 @@
 ﻿#if (DOTNET || PORTABLE40 || PORTABLE)
-using System;
-using System.Reflection;
+using System;using System.Reflection;
 
 namespace Newtonsoft.Json
 {

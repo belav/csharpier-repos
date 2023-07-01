@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Text;
+
 using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.WebUtilities;

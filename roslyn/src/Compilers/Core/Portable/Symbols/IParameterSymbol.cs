@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis

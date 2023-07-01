@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Numerics;
+
 using Test.Cryptography;
 
 namespace System.Formats.Cbor.Tests

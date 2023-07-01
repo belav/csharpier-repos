@@ -5,23 +5,7 @@
 #if NETFRAMEWORK
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CommandLine;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-using Microsoft.CodeAnalysis.Text;
-using Roslyn.Test.Utilities;
-using Xunit;
-using Xunit.Abstractions;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Basic.Reference.Assemblies;
+using System;using System.Collections.Generic;using System.Collections.Immutable;using System.IO;using System.Linq;using System.Reflection;using System.Text;using System.Threading.Tasks;using Microsoft.CodeAnalysis.CommandLine;using Microsoft.CodeAnalysis.CSharp;using Microsoft.CodeAnalysis.CSharp.Test.Utilities;using Microsoft.CodeAnalysis.Text;using Roslyn.Test.Utilities;using Xunit;using Xunit.Abstractions;using Microsoft.CodeAnalysis.Test.Utilities;using Basic.Reference.Assemblies;
 
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {

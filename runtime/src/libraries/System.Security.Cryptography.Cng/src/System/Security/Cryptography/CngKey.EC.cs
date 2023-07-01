@@ -1,10 +1,10 @@
+using System.Diagnostics;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Cryptography;
-using System.Diagnostics;
-using BCRYPT_ECC_PARAMETER_HEADER = Interop.BCrypt.BCRYPT_ECC_PARAMETER_HEADER;
 using Internal.NativeCrypto;
+using BCRYPT_ECC_PARAMETER_HEADER = Interop.BCrypt.BCRYPT_ECC_PARAMETER_HEADER;
 
 namespace System.Security.Cryptography
 {

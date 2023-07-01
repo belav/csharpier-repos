@@ -28,17 +28,17 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
-using System.Windows.Forms;
+using System.Drawing;
 using System.IO;
 using System.Resources;
-using System.Collections;
-using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Windows.Forms;
 
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Resources
 {

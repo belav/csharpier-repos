@@ -18,15 +18,7 @@ using MonoSecurity::Mono.Security.Interface;
 using Mono.Security.Interface;
 #endif
 
-using System;
-using System.IO;
-using SD = System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
+using System;using System.IO;using SD = System.Diagnostics;using System.Collections;using System.Collections.Generic;using System.Threading;using System.Threading.Tasks;using System.Security.Authentication;using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Net.Security
 {

@@ -1,10 +1,11 @@
 // Compiler options: -r:$REF_DIR/Mono.Cecil.dll
 
 using System;
-using System.Threading.Tasks;
-using Mono.Cecil;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+
+using Mono.Cecil;
 
 namespace N
 {

@@ -28,23 +28,17 @@ using System.Collections.Generic;
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
-using System.Text;
-using Newtonsoft.Json.Converters;
+using System.Text;using Newtonsoft.Json.Converters;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
-using TestCase = Xunit.InlineDataAttribute;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;using TestCase = Xunit.InlineDataAttribute;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Linq;
-using System.IO;
+using Newtonsoft.Json.Linq;using System.IO;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
-using System.Linq;
-using Newtonsoft.Json.Utilities;
+using System.Linq;using Newtonsoft.Json.Utilities;
 
 #endif
 

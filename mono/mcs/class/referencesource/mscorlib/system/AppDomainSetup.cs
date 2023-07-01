@@ -21,27 +21,10 @@ namespace System
     using System;
 #if FEATURE_CLICKONCE
 #if !FEATURE_PAL
-    using System.Deployment.Internal.Isolation;
-    using System.Deployment.Internal.Isolation.Manifest;
-    using System.Runtime.Hosting;
+    using System.Deployment.Internal.Isolation;using System.Deployment.Internal.Isolation.Manifest;using System.Runtime.Hosting;
 #endif
 #endif
-    using System.Runtime.CompilerServices;
-    using System.Runtime;
-    using System.Text;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.Policy;
-    using System.Globalization;
-    using Path = System.IO.Path;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.Collections;
-    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;using System.Runtime;using System.Text;using System.Threading;using System.Runtime.InteropServices;using System.Runtime.Serialization;using System.Reflection;using System.Security;using System.Security.Permissions;using System.Security.Policy;using System.Globalization;using Path = System.IO.Path;using System.Runtime.Versioning;using System.Diagnostics.Contracts;using System.Collections;using System.Collections.Generic;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]

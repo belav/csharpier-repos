@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Mono.Cecil;
 
 namespace LinkerAnalyzer.Core

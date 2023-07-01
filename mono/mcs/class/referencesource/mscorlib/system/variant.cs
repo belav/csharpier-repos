@@ -15,13 +15,13 @@
 namespace System
 {
     using System;
-    using System.Reflection;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Globalization;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Threading;
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]

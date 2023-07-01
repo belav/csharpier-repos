@@ -1,3 +1,12 @@
+using System;
+using System.IO;
+using System.IO.IsolatedStorage;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
+using Microsoft.Win32.SafeHandles;
 //
 // IsolatedStorageFileStreamCas.cs - CAS unit tests for
 //	System.IO.IsolatedStorage.IsolatedStorageFileStream
@@ -28,16 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.IO.IsolatedStorage;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
-
-using Microsoft.Win32.SafeHandles;
 
 namespace MonoCasTests.System.IO.IsolatedStorageTest
 {

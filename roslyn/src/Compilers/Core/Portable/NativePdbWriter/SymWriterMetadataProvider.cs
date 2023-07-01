@@ -7,6 +7,7 @@
 using System;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
+
 using Microsoft.DiaSymReader;
 
 namespace Microsoft.Cci

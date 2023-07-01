@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Text;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Text

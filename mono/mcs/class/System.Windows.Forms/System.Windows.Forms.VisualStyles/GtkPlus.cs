@@ -1,3 +1,11 @@
+using gboolean = System.Boolean;
+using guint8 = System.Byte;
+
+using System.Collections;
+using gdouble = System.Double;
+using System.Drawing;
+using System.Drawing.Imaging;
+using gint = System.Int32;
 //
 // GtkPlus.cs: Wraps GTK+, exposing its control painting features to code
 // that uses System.Drawing types (such as IDeviceContext, Rectangle).
@@ -28,14 +36,6 @@
 //
 
 using gpointer = System.IntPtr;
-using gboolean = System.Boolean;
-using gint = System.Int32;
-using guint = System.UInt32;
-using guint8 = System.Byte;
-using guint16 = System.UInt16;
-using guint32 = System.UInt32;
-using gfloat = System.Single;
-using gdouble = System.Double;
 
 using PangoFontDescriptionPointer = System.IntPtr;
 
@@ -65,17 +65,17 @@ using GtkTreeViewPointer = System.IntPtr;
 using GtkTreeViewColumnPointer = System.IntPtr;
 using GtkWidgetPointer = System.IntPtr;
 using GtkWindowPointer = System.IntPtr;
-
-using GtkAllocation = System.Windows.Forms.VisualStyles.GtkPlus.GdkRectangle;
-using GInitiallyUnowned = System.Windows.Forms.VisualStyles.GtkPlus.GObject;
-
-using System.Collections;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using gfloat = System.Single;
+using guint16 = System.UInt16;
+using guint = System.UInt32;
+using guint32 = System.UInt32;
+
+using GtkAllocation = System.Windows.Forms.VisualStyles.GtkPlus.GdkRectangle;
+using GInitiallyUnowned = System.Windows.Forms.VisualStyles.GtkPlus.GObject;
 
 namespace System.Windows.Forms.VisualStyles
 {

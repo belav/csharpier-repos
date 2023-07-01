@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Runtime.Remoting.Channels;
-using System.Collections;
 
 namespace System.Runtime.Remoting.MetadataServices
 {

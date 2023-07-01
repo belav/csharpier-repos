@@ -7,10 +7,11 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 
-using Xunit;
+using ResolutionResult = BinderTracingTests.ResolutionAttempt.ResolutionResult;
 
 using ResolutionStage = BinderTracingTests.ResolutionAttempt.ResolutionStage;
-using ResolutionResult = BinderTracingTests.ResolutionAttempt.ResolutionResult;
+
+using Xunit;
 
 namespace BinderTracingTests
 {

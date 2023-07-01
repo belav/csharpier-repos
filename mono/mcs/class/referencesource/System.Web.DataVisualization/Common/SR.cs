@@ -10,8 +10,8 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     using System;
-    using System.Resources;
     using System.Globalization;
+    using System.Resources;
 
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class SR

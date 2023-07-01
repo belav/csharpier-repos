@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization.Metadata;
-using Xunit;
 using static System.Text.Json.Serialization.Tests.PolymorphicTests;
+
+using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {

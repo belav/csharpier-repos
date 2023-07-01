@@ -15,9 +15,9 @@
 namespace System.Runtime.Remoting.Messaging
 {
     using System;
+    using IList = System.Collections.IList;
     using System.Reflection;
     using System.Security.Permissions;
-    using IList = System.Collections.IList;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface IMethodMessage : IMessage

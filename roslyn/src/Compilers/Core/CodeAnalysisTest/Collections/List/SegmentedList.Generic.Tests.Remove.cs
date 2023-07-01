@@ -10,6 +10,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Collections;
 using Xunit;
 

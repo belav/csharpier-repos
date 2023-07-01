@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Windows;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.ChangeSignature;
 using Microsoft.CodeAnalysis.Shared.Extensions;

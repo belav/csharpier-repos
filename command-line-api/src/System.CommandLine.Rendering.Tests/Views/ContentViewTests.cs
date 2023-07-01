@@ -2,12 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
+using static System.CommandLine.Rendering.TestTerminal;
 using System.CommandLine.Rendering.Views;
 using System.CommandLine.Tests.Utility;
 using System.Drawing;
+
 using FluentAssertions;
 using Xunit;
-using static System.CommandLine.Rendering.TestTerminal;
 
 namespace System.CommandLine.Rendering.Tests.Views
 {

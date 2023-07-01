@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.Extensions.DependencyInjection.Specification.Fakes;
 using Newtonsoft.Json.Linq;
 using Xunit;

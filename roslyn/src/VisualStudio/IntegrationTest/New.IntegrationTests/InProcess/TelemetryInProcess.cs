@@ -4,13 +4,14 @@
 
 using System;
 using System.Collections.Generic;
+using IAsyncDisposable = System.IAsyncDisposable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.VisualStudio.Extensibility.Testing;
 using Microsoft.VisualStudio.Telemetry;
 using Microsoft.VisualStudio.Threading;
 using Xunit;
-using IAsyncDisposable = System.IAsyncDisposable;
 
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 {

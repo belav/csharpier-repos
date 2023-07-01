@@ -1,3 +1,8 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+
 //
 // System.Reflection.BinderTests - Tests Type.DefaultBinder
 //
@@ -8,10 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
 
 namespace MonoTests.System.Reflection
 {

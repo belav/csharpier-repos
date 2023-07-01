@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Scripting.Hosting;
 using Xunit;
 

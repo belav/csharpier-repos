@@ -24,11 +24,11 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Runtime.CompilerServices;
 
 namespace Microsoft.SqlServer.Server
 {

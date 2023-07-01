@@ -5,15 +5,15 @@ using System.CommandLine;
 using System.CommandLine.Binding;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
+using Process = System.CommandLine.Invocation.Process;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
+using static System.Environment;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Environment;
-using Process = System.CommandLine.Invocation.Process;
 
 namespace System.CommandLine
 {

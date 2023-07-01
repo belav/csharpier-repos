@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+
 using MessagePack;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;

@@ -3,11 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
+
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {

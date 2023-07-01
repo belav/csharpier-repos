@@ -33,12 +33,7 @@
 
 #define TRACE
 
-using NUnit.Framework;
-using System;
-using System.Text;
-using System.Collections;
-using System.Configuration;
-using System.Diagnostics;
+using NUnit.Framework;using System;using System.Text;using System.Collections;using System.Configuration;using System.Diagnostics;
 
 namespace MonoTests.System.Diagnostics
 {

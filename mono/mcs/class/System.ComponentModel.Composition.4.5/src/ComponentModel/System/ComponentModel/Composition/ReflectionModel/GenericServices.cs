@@ -2,14 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
-using Microsoft.Internal;
 using System.Threading;
-using System.Collections.Generic;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {

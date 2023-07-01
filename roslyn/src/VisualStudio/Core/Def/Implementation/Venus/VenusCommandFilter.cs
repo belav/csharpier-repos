@@ -6,6 +6,7 @@
 
 using System.Diagnostics;
 using System.Linq;
+
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Extensions;

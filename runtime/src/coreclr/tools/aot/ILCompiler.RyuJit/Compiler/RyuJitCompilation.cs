@@ -13,8 +13,8 @@ using ILLink.Shared;
 
 using Internal.IL;
 using Internal.IL.Stubs;
-using Internal.TypeSystem;
 using Internal.JitInterface;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

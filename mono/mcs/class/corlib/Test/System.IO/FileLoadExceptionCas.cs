@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // FileLoadExceptionCas.cs - CAS unit tests for System.IO.FileLoadException
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.IO
 {

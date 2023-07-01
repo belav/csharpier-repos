@@ -35,13 +35,7 @@ using System.Data.Common;
 #if !NO_ODBC
 using System.Data.Odbc;
 #endif
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System.Data.SqlClient;using System.IO;using System.Linq;using System.Text.RegularExpressions;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.Data.Connected
 {

@@ -3,10 +3,10 @@
 
 using System;
 
+using ILCompiler.DependencyAnalysis.ReadyToRun;
+
 using Internal.JitInterface;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis.ReadyToRun;
 
 namespace ILCompiler.DependencyAnalysis
 {

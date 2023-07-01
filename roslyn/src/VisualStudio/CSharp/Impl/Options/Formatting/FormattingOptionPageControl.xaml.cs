@@ -1,4 +1,5 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿using System.Runtime.CompilerServices;
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,7 +8,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Options;
-using System.Runtime.CompilerServices;
 
 // 🐉 The XAML markup compiler does not recognize InternalsVisibleTo. However, since it allows type
 // forwarding, we use TypeForwardedTo to make CodeStyleNoticeTextBlock appear to the markup compiler

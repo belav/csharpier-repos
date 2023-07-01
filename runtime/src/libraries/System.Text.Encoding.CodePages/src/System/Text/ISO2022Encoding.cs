@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -32,12 +34,10 @@
 //
 
 using System.Globalization;
-using System.Diagnostics;
-using System.Text;
-using System.Runtime.InteropServices;
-using System;
-using System.Security;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
 
 namespace System.Text
 {

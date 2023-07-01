@@ -26,11 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
+using System;using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.Security.Cryptography.X509Certificates;using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {

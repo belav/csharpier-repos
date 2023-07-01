@@ -1,3 +1,4 @@
+using System;
 //
 // BufferTest.cs - NUnit Test Cases for the Buffer class.
 //
@@ -10,7 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

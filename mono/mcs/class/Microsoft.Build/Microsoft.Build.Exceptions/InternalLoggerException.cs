@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Exceptions

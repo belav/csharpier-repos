@@ -4,18 +4,18 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
+    using System.Diagnostics;
+    using System.EnterpriseServices;
+    using System.Globalization;
     using System.Runtime.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Security.Principal;
     using System.ServiceModel;
-    using System.Transactions;
-    using System.Diagnostics;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
-    using System.EnterpriseServices;
+    using System.ServiceModel.Dispatcher;
     using SR = System.ServiceModel.SR;
-    using System.Globalization;
+    using System.Transactions;
 
     class ComPlusThreadInitializer : ICallContextInitializer
     {

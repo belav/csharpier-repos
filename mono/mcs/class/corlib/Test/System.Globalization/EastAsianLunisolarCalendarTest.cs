@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+
 // EastAsianLunisolarCalendarTest.cs
 //
 // Author:
@@ -29,10 +34,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 
 namespace MonoTests.System.Globalization
 {

@@ -17,8 +17,9 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using NUnit.Framework;
+
 using MonoTests.System.Xml.TestClasses;
+using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {

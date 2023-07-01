@@ -1,3 +1,9 @@
+using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Resources.Tools;
+
+using Microsoft.CSharp;
 //
 // StronglyTypedResourceBuilderResourceNameTests.cs - tests validation
 // of the Resource Names passed in the resourceList param of the main
@@ -30,11 +36,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Resources.Tools;
-using System.CodeDom;
-using Microsoft.CSharp;
-using System.Collections.Generic;
 
 namespace MonoTests.System.Resources.Tools
 {

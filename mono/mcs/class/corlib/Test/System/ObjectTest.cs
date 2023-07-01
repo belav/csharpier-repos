@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 // ObjectTest.cs - NUnit Test Cases for the System.Object struct
 //
 // David Brandt (bucky@keystreams.com)
@@ -6,8 +9,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System
 {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.Internal.Log;
 using Logger = Microsoft.CodeAnalysis.Internal.Log.Logger;
 

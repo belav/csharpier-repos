@@ -36,14 +36,7 @@ using System.Collections.ObjectModel;
 #if !MOBILE
 using System.Data;
 #endif
-using System.IO;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using NUnit.Framework;
+using System.IO;using System.Net;using System.Runtime.Serialization;using System.Text;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {

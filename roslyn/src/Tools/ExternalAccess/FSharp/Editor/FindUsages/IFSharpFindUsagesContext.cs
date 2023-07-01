@@ -6,6 +6,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.FindUsages;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.FindUsages

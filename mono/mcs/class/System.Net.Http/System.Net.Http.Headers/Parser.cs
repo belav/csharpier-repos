@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 //
 // Parser.cs
 //
@@ -27,8 +29,6 @@
 //
 
 using System.Net.Mail;
-using System.Globalization;
-using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {

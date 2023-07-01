@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -26,12 +29,10 @@
 
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using NUnit.Framework;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System;
-using System.Collections;
+
 using MonoTests.System.Collections.Specialized;
+using NUnit.Framework;
 
 namespace MonoTests.System.Collections.ObjectModel
 {

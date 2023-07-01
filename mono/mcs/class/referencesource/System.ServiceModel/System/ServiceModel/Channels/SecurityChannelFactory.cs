@@ -12,11 +12,11 @@ namespace System.ServiceModel.Channels
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics.Application;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Security;
 
     using ServiceModelActivity = System.ServiceModel.Diagnostics.ServiceModelActivity;
     using TraceUtility = System.ServiceModel.Diagnostics.TraceUtility;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
 
     sealed class SecurityChannelFactory<TChannel> : LayeredChannelFactory<TChannel>
     {

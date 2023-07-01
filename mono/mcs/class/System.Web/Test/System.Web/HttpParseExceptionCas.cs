@@ -1,3 +1,10 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpParseExceptionCas.cs
 //	- CAS unit tests for System.Web.HttpParseException
@@ -31,13 +38,6 @@
 // Note: class exists in 1.x but has no public ctor
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

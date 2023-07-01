@@ -1,3 +1,9 @@
+using System;
+using System.CodeDom;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // CodeDirectiveCas.cs
 //	- CAS unit tests for System.CodeDom.CodeDirective
@@ -29,12 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom
 {

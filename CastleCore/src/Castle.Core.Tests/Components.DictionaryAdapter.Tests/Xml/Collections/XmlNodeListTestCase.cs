@@ -17,8 +17,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
     using Castle.Components.DictionaryAdapter.Tests;
+    using NUnit.Framework;
 
     [TestFixture]
     public class XmlNodeListTestCase : XmlAdapterTestCase

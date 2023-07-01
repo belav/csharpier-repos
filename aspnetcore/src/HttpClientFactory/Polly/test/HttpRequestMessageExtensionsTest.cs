@@ -3,6 +3,7 @@
 
 using System;
 using System.Net.Http;
+
 using Xunit;
 
 namespace Polly;

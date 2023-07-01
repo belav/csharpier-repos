@@ -1,10 +1,11 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿using System.CommandLine.Rendering.Views;
+using System.Linq;
+
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using System.Linq;
 using Xunit;
-using System.CommandLine.Rendering.Views;
 
 namespace System.CommandLine.Rendering.Tests
 {

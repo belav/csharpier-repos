@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Net.HttpListener
 //
@@ -29,13 +30,12 @@
 //
 
 using System.IO;
-using System.Collections;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Net.Security;
 using System.Security.Authentication.ExtendedProtection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
 
 //TODO: logging
 namespace System.Net

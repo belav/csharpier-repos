@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
-using System.Threading;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Threading.Tasks;
 
 namespace System.Diagnostics.Tests
 {

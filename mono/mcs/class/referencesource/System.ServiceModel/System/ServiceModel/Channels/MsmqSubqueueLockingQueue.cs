@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Globalization;
     using System.Collections.Generic;
     using System.EnterpriseServices;
+    using System.Globalization;
     using System.Runtime;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
     using System.Transactions;
 
     class MsmqSubqueueLockingQueue : MsmqQueue, ILockingQueue

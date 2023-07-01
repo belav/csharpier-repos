@@ -9,16 +9,16 @@ namespace System.ServiceModel.Discovery
     using System.ComponentModel;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Discovery.Configuration;
-    using System.Threading;
-    using System.Xml;
-    using SR2 = System.ServiceModel.Discovery.SR;
-    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Discovery.Configuration;
+    using SR2 = System.ServiceModel.Discovery.SR;
+    using System.Threading;
     using System.Threading.Tasks;
+    using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class DiscoveryClient

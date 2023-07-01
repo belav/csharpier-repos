@@ -9,12 +9,13 @@
 
 namespace System.Data.SqlClient
 {
-    using Microsoft.SqlServer.Server;
     using System;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Diagnostics;
     using System.Data.SqlTypes;
+    using System.Diagnostics;
+
+    using Microsoft.SqlServer.Server;
 
     // TdsRecordBufferSetter handles writing a structured value out to a TDS stream
     internal class TdsRecordBufferSetter : SmiRecordBuffer

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
+
 using Xunit;
 
 public class WindowsPrincipalTests

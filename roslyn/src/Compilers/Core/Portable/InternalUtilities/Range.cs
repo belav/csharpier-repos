@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #if !NETCOREAPP
-using System.Runtime.CompilerServices;
-using Roslyn.Utilities;
+using System.Runtime.CompilerServices;using Roslyn.Utilities;
 
 namespace System
 {

@@ -7,9 +7,10 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Symbols;
 using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
+using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.Cci
 {

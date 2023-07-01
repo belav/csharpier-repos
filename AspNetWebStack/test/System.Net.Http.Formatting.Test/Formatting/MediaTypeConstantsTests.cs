@@ -3,6 +3,7 @@
 
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+
 using Microsoft.TestCommon;
 
 namespace System.Net.Http

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.Shell.Interop;
 

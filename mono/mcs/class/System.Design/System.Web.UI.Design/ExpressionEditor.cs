@@ -31,10 +31,10 @@
 
 using System;
 using System.Collections;
+using _Configuration = System.Configuration.Configuration;
 using System.Reflection;
 using System.Web.Compilation;
 using System.Web.Configuration;
-using _Configuration = System.Configuration.Configuration;
 
 namespace System.Web.UI.Design
 {

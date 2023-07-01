@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
 
     public class WSSecurityTokenSerializer : SecurityTokenSerializer
     {

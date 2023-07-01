@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Internal.TypeSystem;
 
 namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem

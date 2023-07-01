@@ -1,3 +1,4 @@
+using System;
 //
 // CharEnumeratorTest.cs - NUnit Test Cases for the System.CharEnumerator class
 //
@@ -8,7 +9,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

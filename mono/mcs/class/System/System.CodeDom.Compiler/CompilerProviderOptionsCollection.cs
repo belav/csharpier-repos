@@ -29,9 +29,7 @@
 //
 
 #if CONFIGURATION_DEP
-using System;
-using System.Configuration;
-using System.Collections.Generic;
+using System;using System.Configuration;using System.Collections.Generic;
 
 namespace System.CodeDom.Compiler
 {

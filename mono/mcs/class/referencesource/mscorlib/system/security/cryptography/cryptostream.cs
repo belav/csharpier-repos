@@ -13,13 +13,12 @@
 namespace System.Security.Cryptography
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
     using System.Threading;
 #if FEATURE_ASYNC_IO
-    using System.Threading.Tasks;
-    using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;using System.Runtime.CompilerServices;
 #endif
 
     [Serializable]

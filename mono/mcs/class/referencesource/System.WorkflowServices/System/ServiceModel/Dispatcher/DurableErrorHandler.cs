@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
     using System.Diagnostics.CodeAnalysis;
+    using System.ServiceModel.Channels;
 
     abstract class DurableErrorHandler : IErrorHandler
     {

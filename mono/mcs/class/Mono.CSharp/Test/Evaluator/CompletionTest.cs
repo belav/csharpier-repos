@@ -27,9 +27,7 @@
 //
 
 #if !FULL_AOT_RUNTIME
-using System;
-using NUnit.Framework;
-using Mono.CSharp;
+using System;using NUnit.Framework;using Mono.CSharp;
 
 namespace MonoTests.EvaluatorTest
 {

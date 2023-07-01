@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="BasicKeyConstraint.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,7 +10,6 @@
 
 
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Collections.Generic;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {

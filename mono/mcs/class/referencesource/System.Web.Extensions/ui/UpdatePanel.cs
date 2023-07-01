@@ -9,16 +9,16 @@ namespace System.Web.UI
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+
+    using Debug = System.Diagnostics.Debug;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Globalization;
     using System.IO;
     using System.Web;
-    using System.Web.UI;
     using System.Web.Resources;
+    using System.Web.UI;
     using System.Web.Util;
-
-    using Debug = System.Diagnostics.Debug;
 
     [
         DefaultProperty("Triggers"),

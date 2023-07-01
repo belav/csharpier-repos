@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+
 using Internal.NativeFormat;
 
 namespace Internal.Metadata.NativeFormat.Writer

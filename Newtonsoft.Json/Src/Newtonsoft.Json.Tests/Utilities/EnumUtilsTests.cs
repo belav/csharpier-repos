@@ -24,17 +24,9 @@
 #endregion
 
 #if !(NET20 || NET35)
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Newtonsoft.Json.Utilities;
+using System;using System.Collections.Generic;using System.Linq;using System.Reflection;using System.Text;using Newtonsoft.Json.Utilities;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
-using TestCaseSource = Xunit.MemberDataAttribute;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;using TestCaseSource = Xunit.MemberDataAttribute;
 #else
 using NUnit.Framework;
 #endif

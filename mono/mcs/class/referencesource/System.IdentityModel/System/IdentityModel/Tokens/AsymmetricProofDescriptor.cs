@@ -2,8 +2,8 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 using System;
-using System.Security.Cryptography;
 using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
+using System.Security.Cryptography;
 
 namespace System.IdentityModel.Tokens
 {

@@ -4,6 +4,7 @@
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
+
 using Xunit;
 
 namespace System.Text.RegularExpressions.Tests

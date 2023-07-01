@@ -11,9 +11,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
 namespace System.Data.Common.Utils
 {

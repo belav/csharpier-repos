@@ -1,8 +1,5 @@
 ﻿#if !SILVERLIGHT
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
+using System.Diagnostics.CodeAnalysis;using System.Runtime.Serialization;using System.Security;using System.Security.Permissions;
 #endif
 
 namespace System.ComponentModel.DataAnnotations

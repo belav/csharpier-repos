@@ -29,11 +29,7 @@
 //
 
 #if !MOBILE
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-using NUnit.Framework;
+using System;using System.ComponentModel;using System.ComponentModel.DataAnnotations;using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations
 {

@@ -1,4 +1,6 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Data.Common;
+using System.Data.Mapping;
+//---------------------------------------------------------------------
 // <copyright file="ComplexTypeMaterializer.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -8,9 +10,7 @@
 //---------------------------------------------------------------------
 
 using System.Data.Metadata.Edm;
-using System.Data.Common;
 using System.Diagnostics;
-using System.Data.Mapping;
 
 namespace System.Data.Objects.Internal
 {

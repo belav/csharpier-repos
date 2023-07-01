@@ -7,6 +7,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
+
 using Roslyn.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.UnitTests

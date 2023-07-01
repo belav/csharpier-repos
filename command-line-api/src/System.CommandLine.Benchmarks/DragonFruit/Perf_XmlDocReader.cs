@@ -6,6 +6,7 @@ using System.CommandLine.DragonFruit;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
 using BenchmarkDotNet.Attributes;
 
 namespace System.CommandLine.Benchmarks.DragonFruit

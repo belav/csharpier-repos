@@ -1,3 +1,6 @@
+using System;
+using System.Timers;
+
 //
 // TimersDescriptionAttributeTest.cs
 //	- Unit tests for System.Timers.TimersDescriptionAttribute
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Timers;
 
 namespace MonoTests.System.Timers
 {

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Runtime.ConstrainedExecution;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -13,8 +15,6 @@
 ===========================================================*/
 
 using System.Threading;
-using System.Runtime.ConstrainedExecution;
-using System.Diagnostics;
 
 /*
    This class allows an application to fail before starting certain

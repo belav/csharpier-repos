@@ -2,8 +2,9 @@
 // 2004-11-09
 
 using System;
-using C5;
 using SCG = System.Collections.Generic;
+
+using C5;
 
 namespace TreeTraversal
 {

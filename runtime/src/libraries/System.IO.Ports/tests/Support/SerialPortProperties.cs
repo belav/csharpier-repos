@@ -6,6 +6,7 @@ using System.Collections;
 using System.IO.Ports;
 using System.Reflection;
 using System.Text;
+
 using Xunit;
 
 namespace Legacy.Support

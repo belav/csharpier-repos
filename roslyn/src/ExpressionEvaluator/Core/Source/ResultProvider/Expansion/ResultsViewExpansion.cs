@@ -6,6 +6,7 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+
 using Microsoft.VisualStudio.Debugger.Clr;
 using Microsoft.VisualStudio.Debugger.ComponentInterfaces;
 using Microsoft.VisualStudio.Debugger.Evaluation;

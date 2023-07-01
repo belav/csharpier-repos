@@ -40,12 +40,13 @@
 
 
 using System;
+//using System.Xml.Query;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-//using System.Xml.Query;
-using System.Diagnostics;
+
 using MS.Internal.Xml;
 
 namespace System.Xml

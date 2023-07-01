@@ -4,6 +4,7 @@
 using System.Numerics;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Runtime.Intrinsics.Tests.Vectors

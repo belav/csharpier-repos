@@ -4,8 +4,7 @@ using nuint = System.UInt64;
 using nuint = System.UInt32;
 #endif
 
-using System.Runtime.CompilerServices;
-using System.Runtime;
+using System.Runtime.CompilerServices;using System.Runtime;
 
 namespace System
 {

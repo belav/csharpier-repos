@@ -14,18 +14,13 @@
 //
 
 using System;
-
 #if STATIC
-using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;
-using IKVM.Reflection;
-using IKVM.Reflection.Emit;
+using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;using IKVM.Reflection;using IKVM.Reflection.Emit;
 #else
 using SecurityType = System.Collections.Generic.Dictionary<
     System.Security.Permissions.SecurityAction,
     System.Security.PermissionSet
->;
-using System.Reflection;
-using System.Reflection.Emit;
+>;using System.Reflection;using System.Reflection.Emit;
 #endif
 
 namespace Mono.CSharp

@@ -1,3 +1,6 @@
+using System;
+using System.Reflection;
+
 //
 // UriBuilderTest.cs - NUnit Test Cases for System.UriBuilder
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
 
 namespace MonoTests.System
 {

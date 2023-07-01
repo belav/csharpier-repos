@@ -5,19 +5,19 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
-    using System.Xml;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Diagnostics;
-    using System.Text;
-    using System.Security;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Diagnostics;
     using System.Runtime.Serialization.Diagnostics;
+    using System.Security;
+    using System.Text;
+    using System.Xml;
 
     public abstract class XmlObjectSerializer
     {

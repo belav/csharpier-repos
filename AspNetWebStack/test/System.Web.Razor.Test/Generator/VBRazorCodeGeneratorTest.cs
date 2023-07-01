@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Web.Razor.Generator;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.Razor.Test.Generator

@@ -11,19 +11,19 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Test.Utilities;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using Microsoft.CodeAnalysis.VisualBasic;
 #if NETCOREAPP
-using Roslyn.Test.Utilities.CoreClr;
-using System.Runtime.Loader;
+using Roslyn.Test.Utilities.CoreClr;using System.Runtime.Loader;
 #else
 using Roslyn.Test.Utilities.Desktop;
 #endif

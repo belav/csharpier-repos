@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
-using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 using NUnit.Framework;
+using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Windows.Forms
 {

@@ -3,10 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using ILCompiler;
-using Internal.TypeSystem;
 using static Internal.JitInterface.SYSTEMV_AMD64_CORINFO_STRUCT_REG_PASSING_DESCRIPTOR;
 using static Internal.JitInterface.SystemVClassificationType;
+using Internal.TypeSystem;
 
 namespace Internal.JitInterface
 {

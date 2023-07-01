@@ -4,9 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Internal.Metadata.NativeFormat;
 using System.Reflection.Runtime.General;
 using System.Runtime.InteropServices;
+
+using Internal.Metadata.NativeFormat;
 
 namespace Internal.Reflection.Core
 {

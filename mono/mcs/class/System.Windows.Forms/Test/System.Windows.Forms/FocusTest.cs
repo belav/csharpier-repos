@@ -6,11 +6,11 @@
 //
 
 using System;
-using System.Text;
-using System.Windows.Forms;
 
 using CancelEventArgs = System.ComponentModel.CancelEventArgs;
 using CancelEventHandler = System.ComponentModel.CancelEventHandler;
+using System.Text;
+using System.Windows.Forms;
 
 using NUnit.Framework;
 

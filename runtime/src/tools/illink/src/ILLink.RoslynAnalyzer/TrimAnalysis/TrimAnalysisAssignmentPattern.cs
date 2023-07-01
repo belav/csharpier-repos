@@ -4,11 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using ILLink.Shared.DataFlow;
-using ILLink.Shared.TrimAnalysis;
-using Microsoft.CodeAnalysis;
 
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
+using ILLink.Shared.TrimAnalysis;
+using Microsoft.CodeAnalysis;
 
 namespace ILLink.RoslynAnalyzer.TrimAnalysis
 {

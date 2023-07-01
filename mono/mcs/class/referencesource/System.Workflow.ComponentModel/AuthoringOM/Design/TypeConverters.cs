@@ -3,18 +3,18 @@ namespace System.Workflow.ComponentModel.Design
     #region Imports
 
     using System;
-    using System.Drawing.Design;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Globalization;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.CodeDom;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Diagnostics;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.Reflection;
     using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
 
     #endregion
 

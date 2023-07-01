@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security.Tokens
 {
-    using System.Xml;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
+    using System.Xml;
 
     public class SecurityContextSecurityTokenResolver
         : SecurityTokenResolver,

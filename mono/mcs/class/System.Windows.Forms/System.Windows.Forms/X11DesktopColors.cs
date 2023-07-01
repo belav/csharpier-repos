@@ -1,3 +1,4 @@
+using System;
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -26,9 +27,8 @@
 //
 
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.IO;
-using System;
+using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {

@@ -1,4 +1,5 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections.Generic;
+//---------------------------------------------------------------------
 // <copyright file="DiscriminatorMap.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -9,12 +10,11 @@
 
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.Internal;
-using System.Collections.Generic;
-using System.Data.Metadata.Edm;
-using System.Linq;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Data.Mapping.ViewGeneration
 {

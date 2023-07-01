@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using ST = System.Threading;
+using System.Timers;
+
 //
 // ElapsedEventArgsCas.cs - CAS unit tests for System.Timers.ElapsedEventArgs
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Timers;
-using ST = System.Threading;
 
 namespace MonoCasTests.System.Timers
 {

@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+
 using Microsoft.Build.Exceptions;
 
 namespace Microsoft.Build.Construction

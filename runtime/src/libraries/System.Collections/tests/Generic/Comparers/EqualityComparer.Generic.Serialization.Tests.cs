@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Collections.Generic.Tests

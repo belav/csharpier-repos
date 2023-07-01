@@ -7,6 +7,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+
 using Microsoft.CodeAnalysis.Editor.UnitTests.Utilities;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
 using Microsoft.CodeAnalysis.Formatting;

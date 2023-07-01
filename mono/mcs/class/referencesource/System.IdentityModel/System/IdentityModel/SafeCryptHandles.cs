@@ -5,11 +5,12 @@
 namespace System.IdentityModel
 {
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.ServiceModel.Diagnostics;
+
     using Microsoft.Win32.SafeHandles;
 
     class SafeProvHandle : SafeHandleZeroOrMinusOneIsInvalid

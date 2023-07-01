@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.IO;
+
 using Xunit;
 
 namespace System.ComponentModel.Design.Serialization.Tests

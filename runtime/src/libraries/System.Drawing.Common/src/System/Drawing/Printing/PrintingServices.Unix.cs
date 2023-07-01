@@ -31,11 +31,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing.Printing
 {

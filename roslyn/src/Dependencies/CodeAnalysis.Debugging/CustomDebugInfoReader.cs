@@ -10,6 +10,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 
 #pragma warning disable CA1200 // Avoid using cref tags with a prefix

@@ -25,13 +25,13 @@
 #endregion
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
-
-using DbLinq.Vendor.Implementation;
+using System.Linq;
 
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
+
+using DbLinq.Vendor.Implementation;
 
 namespace DbLinq.SqlServer
 {

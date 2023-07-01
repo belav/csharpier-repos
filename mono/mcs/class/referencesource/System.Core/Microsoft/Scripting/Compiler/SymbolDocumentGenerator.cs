@@ -14,22 +14,16 @@
  * ***************************************************************************/
 
 #if CLR2
-using Microsoft.Scripting.Ast;
-using Microsoft.Scripting.Ast.Compiler;
+using Microsoft.Scripting.Ast;using Microsoft.Scripting.Ast.Compiler;
 #else
-using System.Linq.Expressions;
-using System.Linq.Expressions.Compiler;
+using System.Linq.Expressions;using System.Linq.Expressions.Compiler;
 #endif
 
 #if SILVERLIGHT
 using System.Core;
 #endif
 
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.SymbolStore;
-using System.Reflection;
-using System.Reflection.Emit;
+using System.Collections.Generic;using System.Diagnostics;using System.Diagnostics.SymbolStore;using System.Reflection;using System.Reflection.Emit;
 
 namespace System.Runtime.CompilerServices
 {

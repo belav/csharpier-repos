@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -13,10 +14,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     using static EmbeddedSyntaxHelpers;
-    using static JsonHelpers;
 
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonTrivia = EmbeddedSyntaxTrivia<JsonKind>;
+    using static JsonHelpers;
 
     [NonCopyable]
     internal struct JsonLexer

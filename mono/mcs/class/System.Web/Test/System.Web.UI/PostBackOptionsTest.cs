@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 //
 // Tests for System.Web.UI.PostBackOptions.cs
 //
@@ -29,13 +37,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections;
 
 namespace MonoTests.System.Web.UI
 {

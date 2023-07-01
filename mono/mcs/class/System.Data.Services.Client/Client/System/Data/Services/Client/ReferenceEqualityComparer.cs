@@ -13,13 +13,13 @@
 
 namespace System.Data.Services.Client
 {
+    using System.Collections;
     #region Namespaces.
 
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq.Expressions;
     using System.Text;
-    using System.Collections;
 
     #endregion Namespaces.
 

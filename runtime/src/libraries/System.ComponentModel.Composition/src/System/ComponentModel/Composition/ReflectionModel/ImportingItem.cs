@@ -3,6 +3,7 @@
 
 using System.ComponentModel.Composition.Primitives;
 using System.Globalization;
+
 using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel

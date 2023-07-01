@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Collections

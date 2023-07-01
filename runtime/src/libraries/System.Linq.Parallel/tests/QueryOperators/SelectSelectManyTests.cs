@@ -3,6 +3,7 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+
 using Xunit;
 
 namespace System.Linq.Parallel.Tests

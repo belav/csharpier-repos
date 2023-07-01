@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
@@ -19,10 +21,9 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.Extensions.Logging;
 using Microsoft.Metadata.Tools;
+using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
-using Roslyn.Test.Utilities;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {

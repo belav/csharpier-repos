@@ -3,11 +3,11 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel;
-    using System.ComponentModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.Xml;
 
     public class PolicyAssertionCollection : Collection<XmlElement>

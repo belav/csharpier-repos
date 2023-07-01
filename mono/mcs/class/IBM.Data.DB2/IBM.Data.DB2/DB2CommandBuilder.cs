@@ -19,8 +19,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Data;
 using System.ComponentModel;
+using System.Data;
 
 namespace IBM.Data.DB2
 {

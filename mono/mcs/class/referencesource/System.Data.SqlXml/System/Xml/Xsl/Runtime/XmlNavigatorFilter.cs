@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <copyright file="XmlNavigatorFilter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,8 +8,6 @@
 //------------------------------------------------------------------------------
 using System.Xml;
 using System.Xml.XPath;
-using System.Diagnostics;
-using System.ComponentModel;
 
 namespace System.Xml.Xsl.Runtime
 {

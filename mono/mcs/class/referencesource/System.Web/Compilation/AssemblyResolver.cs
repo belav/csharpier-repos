@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
+using FrameworkName = System.Runtime.Versioning.FrameworkName;
 using System.Web.Configuration;
+
 using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
-
-using FrameworkName = System.Runtime.Versioning.FrameworkName;
 
 namespace System.Web.Compilation
 {

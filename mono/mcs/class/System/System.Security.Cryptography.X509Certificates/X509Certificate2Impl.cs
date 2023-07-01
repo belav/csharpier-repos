@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // X509Certificate2Impl.cs
 //
@@ -26,7 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Text;
-using System.Collections.Generic;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates

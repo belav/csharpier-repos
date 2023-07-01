@@ -4,8 +4,8 @@
 // Tests Sleep in Finalizer for array of objects
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public class Test_finalizearraysleep
 {

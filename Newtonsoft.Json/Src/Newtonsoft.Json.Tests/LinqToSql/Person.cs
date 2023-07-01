@@ -25,10 +25,7 @@
 
 #if !(NET20 || DNXCORE50)
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System;using System.Collections.Generic;using System.ComponentModel.DataAnnotations;using System.Text;
 
 namespace Newtonsoft.Json.Tests.LinqToSql
 {

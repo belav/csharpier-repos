@@ -4,9 +4,10 @@
 
 using System;
 using System.Collections.Immutable;
+
+using MSB = Microsoft.Build;
 using Microsoft.CodeAnalysis.MSBuild;
 using Roslyn.Utilities;
-using MSB = Microsoft.Build;
 
 namespace Microsoft.CodeAnalysis.VisualBasic
 {

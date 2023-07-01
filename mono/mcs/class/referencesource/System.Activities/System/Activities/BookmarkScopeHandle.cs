@@ -6,8 +6,8 @@ namespace System.Activities
 {
     using System;
     using System.Runtime;
-    using System.Runtime.Serialization;
     using System.Runtime.DurableInstancing;
+    using System.Runtime.Serialization;
 
     [DataContract]
     public sealed class BookmarkScopeHandle : Handle

@@ -30,12 +30,9 @@ using System.Runtime.Serialization;
 #if !(NET20 || NET35 || PORTABLE || DNXCORE50)
 using System.Runtime.Serialization.Json;
 #endif
-using System.Text;
-using Newtonsoft.Json.Tests.TestObjects;
+using System.Text;using Newtonsoft.Json.Tests.TestObjects;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

@@ -3,9 +3,7 @@
 
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
 
-using System;
-
-using Xunit;
+using System;using Xunit;
 
 namespace Moq.Tests
 {

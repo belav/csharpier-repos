@@ -1,12 +1,12 @@
+using System.Collections;
+
+using INTPTR_INTPTRCAST = System.IntPtr;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Collections;
 using System.Text;
-
-using INTPTR_INTPTRCAST = System.IntPtr;
 
 namespace System.DirectoryServices
 {

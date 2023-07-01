@@ -5,16 +5,16 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.Linq.Mapping;
-using System.Linq.Expressions;
+using System.Data.Linq.Provider;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Xml;
 using System.Transactions;
-using System.Data.Linq.Provider;
-using System.Diagnostics.CodeAnalysis;
+using System.Xml;
 
 namespace System.Data.Linq
 {

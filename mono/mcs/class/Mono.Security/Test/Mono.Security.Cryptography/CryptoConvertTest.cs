@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+
+using Mono.Security.Cryptography;
 //
 // CryptoConvertTest.cs - NUnit Test Cases for CryptoConvert
 //
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
-using Mono.Security.Cryptography;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

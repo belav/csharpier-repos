@@ -12,11 +12,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.Configuration;
-using System.Diagnostics;
-using System.Xml;
+using NUnit.Framework;using System;using System.Configuration;using System.Diagnostics;using System.Xml;
 
 namespace MonoTests.System.Diagnostics
 {

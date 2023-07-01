@@ -6,10 +6,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Objects.Internal
 {

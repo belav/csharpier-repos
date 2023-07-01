@@ -7,13 +7,13 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Web.Services;
-    using System.Reflection;
     using System.Collections;
-    using System.Security.Permissions;
     using System.Globalization;
-    using System.Text;
+    using System.Reflection;
     using System.Security.Cryptography;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Services;
 
     /// <include file='doc\LogicalMethodInfo.uex' path='docs/doc[@for="LogicalMethodTypes"]/*' />
     /// <devdoc>

@@ -28,15 +28,7 @@
 
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
 
-using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Principal;
+using NUnit.Framework;using System;using System.IO;using System.Reflection;using System.Runtime.Serialization;using System.Security;using System.Security.Permissions;using System.Security.Principal;
 
 namespace MonoCasTests.System
 {

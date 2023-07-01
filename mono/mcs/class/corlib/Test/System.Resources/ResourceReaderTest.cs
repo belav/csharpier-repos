@@ -14,9 +14,9 @@ using System.IO;
 using System.Reflection;
 using System.Resources;
 
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Resources
 {

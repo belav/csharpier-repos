@@ -1,3 +1,4 @@
+using System.Collections;
 //---------------------------------------------------------------------
 // <copyright file="MetadataArtifactLoaderFile.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,20 +9,19 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Collections;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Mapping;
 using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
-using System.Text;
-using System.Xml;
-using System.Data.Mapping;
 using System.IO;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Cryptography;
-using System.Data.EntityModel.SchemaObjectModel;
-using System.Threading;
+using System.Reflection;
 using System.Runtime.Versioning;
+using System.Security;
+using System.Security.Cryptography;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
+using System.Xml;
 
 namespace System.Data.Metadata.Edm
 {

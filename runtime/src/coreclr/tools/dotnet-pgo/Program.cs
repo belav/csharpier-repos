@@ -19,15 +19,9 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Text.Json;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Threading.Tasks;
-
-using Microsoft.Diagnostics.Tools.Pgo;
-using Microsoft.Diagnostics.Tracing;
-using Microsoft.Diagnostics.Tracing.Etlx;
-using Microsoft.Diagnostics.Tracing.Parsers.Clr;
-using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
 
 using ILCompiler;
 using ILCompiler.IBC;
@@ -37,6 +31,12 @@ using Internal.IL;
 using Internal.Pgo;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
+
+using Microsoft.Diagnostics.Tools.Pgo;
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing.Etlx;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {

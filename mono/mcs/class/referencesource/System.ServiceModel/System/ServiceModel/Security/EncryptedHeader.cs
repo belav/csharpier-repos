@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Security
 {
     using System.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Globalization;
-    using System.Xml;
-    using System.IO;
 
     using ISecurityElement = System.IdentityModel.ISecurityElement;
+    using System.IO;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
     sealed class EncryptedHeader : DelegatingHeader
     {

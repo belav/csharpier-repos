@@ -27,8 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if MONO_FEATURE_CONSOLE
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Runtime.InteropServices;using System.Text;
 
 namespace System
 {

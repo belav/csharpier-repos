@@ -4,13 +4,14 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
+using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
+
+using NamedArgumentMemberKind = Internal.Metadata.NativeFormat.NamedArgumentMemberKind;
+
 using Internal.Metadata.NativeFormat.Writer;
 
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
-using Debug = System.Diagnostics.Debug;
-using NamedArgumentMemberKind = Internal.Metadata.NativeFormat.NamedArgumentMemberKind;
 
 namespace ILCompiler.Metadata
 {

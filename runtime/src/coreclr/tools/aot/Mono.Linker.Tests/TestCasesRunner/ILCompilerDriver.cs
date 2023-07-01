@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using ILCompiler;
 using ILCompiler.Dataflow;
 using ILLink.Shared.TrimAnalysis;

@@ -3,12 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization.Tests;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xunit;
-using System.Runtime.Serialization.Tests;
-using System.Drawing;
 
 namespace System.Drawing.Primitives.Tests
 {

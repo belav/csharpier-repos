@@ -1,3 +1,4 @@
+using System.ComponentModel.Design;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -14,7 +15,6 @@
 // (c) 2004 Ivan Hamilton
 
 using Xunit;
-using System.ComponentModel.Design;
 
 namespace System.ComponentModel.Tests
 {

@@ -32,6 +32,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.Design

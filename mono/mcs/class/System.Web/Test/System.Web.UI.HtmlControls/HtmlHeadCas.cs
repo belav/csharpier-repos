@@ -1,3 +1,6 @@
+using System;
+using System.Web.UI.HtmlControls;
+
 //
 // HtmlHeadCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlHead
 //
@@ -28,9 +31,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls
 {

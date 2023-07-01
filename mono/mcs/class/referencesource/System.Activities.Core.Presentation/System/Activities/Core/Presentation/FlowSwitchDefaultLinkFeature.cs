@@ -10,6 +10,7 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation.Metadata;
     using System.ComponentModel;
     using System.Runtime.Versioning;
+
     using Microsoft.Activities.Presentation;
 
     internal class FlowSwitchDefaultLinkFeature : Feature

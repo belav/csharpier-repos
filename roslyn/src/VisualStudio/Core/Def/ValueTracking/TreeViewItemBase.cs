@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+
 using Microsoft.VisualStudio.LanguageServices.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.ValueTracking

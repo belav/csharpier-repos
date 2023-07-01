@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // CodeAccessPermissionCas.cs -
 //	CAS unit tests for System.Security.CodeAccessPermission
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.Security
 {

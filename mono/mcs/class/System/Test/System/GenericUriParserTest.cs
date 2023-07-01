@@ -1,3 +1,4 @@
+using System;
 //
 // UriParserTest.cs - Unit tests for System.UriParser
 //
@@ -28,8 +29,6 @@
 
 
 using NUnit.Framework;
-
-using System;
 
 namespace MonoTests.System
 {

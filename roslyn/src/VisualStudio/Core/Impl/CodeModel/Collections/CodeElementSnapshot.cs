@@ -6,8 +6,9 @@
 
 using System;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.PooledObjects;
+
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 

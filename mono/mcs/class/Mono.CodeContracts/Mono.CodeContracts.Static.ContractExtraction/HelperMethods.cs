@@ -28,6 +28,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Mono.CodeContracts.Static.AST;
 
 namespace Mono.CodeContracts.Static.ContractExtraction

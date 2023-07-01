@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.ComponentModel.Design.DesignerActionPropertyItem.cs
 //
@@ -28,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Windows.Forms;
-using System.Collections;
 
 namespace System.ComponentModel.Design
 {

@@ -27,20 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.Collections.Generic;using System.IO;using System.Security.Cryptography.X509Certificates;using System.Security.Cryptography.Xml;using System.ServiceModel;using System.ServiceModel.Channels;using System.Text;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel
 {

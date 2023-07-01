@@ -24,6 +24,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceProcess;
     using System.Text;
     using System.Threading;
+
     using Microsoft.Win32.SafeHandles;
 
     sealed class PnrpPeerResolver : PeerResolver

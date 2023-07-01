@@ -16,12 +16,7 @@ namespace System.Web.Compilation
 #if !FEATURE_PAL
     using System.Configuration.Design;
 #endif
-    using System.Xml;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.Web.Hosting;
-    using System.Web.Util;
-    using Util = System.Web.UI.Util;
+    using System.Xml;using System.CodeDom;using System.CodeDom.Compiler;using System.Web.Hosting;using System.Web.Util;using Util = System.Web.UI.Util;
 
     internal class SettingsBuildProvider : BuildProvider
     {

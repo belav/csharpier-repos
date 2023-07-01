@@ -4,12 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection.Metadata;
-using Internal.TypeSystem;
-using System.Xml.XPath;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Xml.XPath;
+
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

@@ -1,3 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using MyWebControl = System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
 //
 // Tests for System.Web.UI.WebControls.ContentTest.cs
 //
@@ -30,17 +42,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.IO;
-using System.Drawing;
-using MyWebControl = System.Web.UI.WebControls;
-using System.Collections;
-using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // IsolatedStorageFilePermissionAttributeTest.cs - NUnit Test Cases for IsolatedStorageFilePermissionAttribute
 //
@@ -28,9 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

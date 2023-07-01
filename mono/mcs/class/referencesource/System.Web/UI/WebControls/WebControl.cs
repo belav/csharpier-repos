@@ -14,8 +14,8 @@ namespace System.Web.UI.WebControls
     using System.Globalization;
     using System.Web;
     using System.Web.UI;
-    using System.Web.Util;
     using AttributeCollection = System.Web.UI.AttributeCollection;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para> The base class for all Web controls. Defines the

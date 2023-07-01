@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+
 using Internal.NativeFormat;
 
 namespace Internal.TypeSystem

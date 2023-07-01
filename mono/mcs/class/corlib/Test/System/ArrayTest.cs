@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Threading;
+
 // ArrayTest.cs - NUnit Test Cases for the System.Array class
 //
 // David Brandt (bucky@keystreams.com)
@@ -8,12 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Globalization;
-using System.Reflection;
-using System.Threading;
-using System.Collections.Generic;
 
 namespace MonoTests.System
 {

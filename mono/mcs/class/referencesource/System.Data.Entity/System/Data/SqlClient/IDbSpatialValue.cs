@@ -1,3 +1,4 @@
+using System.Data.Metadata.Edm;
 //------------------------------------------------------------------------------
 // <copyright file="IDbSpatialValue.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 using System.Data.Spatial;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.SqlClient.Internal
 {

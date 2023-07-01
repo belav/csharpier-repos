@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Drawing.Imaging;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -39,11 +41,9 @@
 //
 
 using System.IO;
-using System.Drawing.Imaging;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace System.Drawing
 {

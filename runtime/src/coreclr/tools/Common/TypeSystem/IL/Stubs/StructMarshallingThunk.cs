@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using Debug = System.Diagnostics.Debug;
 using System.Runtime.InteropServices;
+
 using Internal.TypeSystem;
 using Internal.TypeSystem.Interop;
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {

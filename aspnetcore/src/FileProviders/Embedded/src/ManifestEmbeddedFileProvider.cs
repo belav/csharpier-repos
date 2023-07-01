@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.Extensions.FileProviders.Embedded.Manifest;
 using Microsoft.Extensions.Primitives;
 

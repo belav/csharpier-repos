@@ -1,3 +1,5 @@
+using System.Data.SqlTypes;
+using System.IO;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -26,10 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Xml;
-using System.Data.SqlTypes;
 
 using System.Xml.Serialization;
-using System.IO;
 
 using Xunit;
 

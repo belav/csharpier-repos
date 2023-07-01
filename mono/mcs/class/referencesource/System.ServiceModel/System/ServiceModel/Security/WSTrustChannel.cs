@@ -8,14 +8,14 @@ namespace System.ServiceModel.Security
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel;
+    using IM = System.IdentityModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Protocols.WSTrust;
-    using System.Runtime;
     using System.IdentityModel.Tokens;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
-    using IM = System.IdentityModel;
     using SR = System.ServiceModel.SR;
 
     /// <summary>

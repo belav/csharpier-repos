@@ -27,18 +27,7 @@
 //
 
 #if !TARGET_DOTNET
-using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Drawing;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.Adapters;
-using System.Web.Configuration;
-using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;using System;using System.Collections;using System.Drawing;using System.IO;using System.Globalization;using System.Web;using System.Web.UI;using System.Web.UI.WebControls;using System.Web.UI.WebControls.Adapters;using System.Web.Configuration;using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {

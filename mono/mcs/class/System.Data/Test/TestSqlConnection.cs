@@ -50,8 +50,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 #if IncludeSybaseAndTdsClient
-using Mono.Data.TdsClient;
-using Mono.Data.SybaseClient;
+using Mono.Data.TdsClient;using Mono.Data.SybaseClient;
 #endif // IncludeSybaseAndTdsClient
 
 public class TestSqlConnection

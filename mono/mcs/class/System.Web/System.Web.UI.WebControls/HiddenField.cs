@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.WebControls.HiddenField.cs
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Web.UI;
-using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {

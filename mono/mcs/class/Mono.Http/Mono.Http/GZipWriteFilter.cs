@@ -30,6 +30,7 @@
 
 using System;
 using System.IO;
+
 using ICSharpCode.SharpZipLib.GZip;
 
 namespace Mono.Http

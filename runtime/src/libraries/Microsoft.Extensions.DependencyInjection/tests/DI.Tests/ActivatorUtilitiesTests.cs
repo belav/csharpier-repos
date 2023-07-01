@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Xunit;
 using static Microsoft.Extensions.DependencyInjection.Tests.AsyncServiceScopeTests;
+using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection.Tests
 {

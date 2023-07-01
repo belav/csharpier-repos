@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 //------------------------------------------------------------------------------
 // <copyright file="XPathNavigator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,18 +8,17 @@
 //------------------------------------------------------------------------------
 
 using System.ComponentModel;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Xml.Schema;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.IO;
 using System.Security;
-using System.Security.Policy;
 using System.Security.Permissions;
+using System.Security.Policy;
 using System.Text;
 using System.Xml;
+using System.Xml.Schema;
+
 using MS.Internal.Xml.Cache;
 using MS.Internal.Xml.XPath;
 

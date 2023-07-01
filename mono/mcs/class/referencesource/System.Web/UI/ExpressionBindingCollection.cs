@@ -12,8 +12,8 @@ namespace System.Web.UI
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Data;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     /// <devdoc>
     /// </devdoc>

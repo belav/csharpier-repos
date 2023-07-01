@@ -1,4 +1,8 @@
-﻿//
+﻿using System;
+using System.ComponentModel;
+using System.Security;
+
+//
 // InfrastructureHelper.cs
 //
 // Author:
@@ -25,9 +29,6 @@
 // THE SOFTWARE.
 
 using Microsoft.Web.Infrastructure;
-using System;
-using System.ComponentModel;
-using System.Security;
 
 namespace Microsoft.Web.Infrastructure
 {

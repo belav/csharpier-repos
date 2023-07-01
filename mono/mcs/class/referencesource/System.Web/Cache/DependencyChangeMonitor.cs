@@ -2,10 +2,7 @@
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 #if USE_MEMORY_CACHE
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Caching;
-using System.Web.Util;
+using System;using System.Diagnostics.CodeAnalysis;using System.Runtime.Caching;using System.Web.Util;
 
 namespace System.Web.Caching
 {

@@ -7,12 +7,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Collections.Generic;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Threading;
-using NUnit.Framework;
+using System;using System.Collections.Generic;using System.Security.AccessControl;using System.Security.Principal;using System.Threading;using NUnit.Framework;
 
 namespace MonoTests.System.Security.AccessControl
 {

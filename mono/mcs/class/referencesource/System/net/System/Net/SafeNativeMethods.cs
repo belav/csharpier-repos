@@ -12,8 +12,8 @@
 namespace System.Net
 {
     using System.Runtime.InteropServices;
-    using System.Security.Permissions;
     using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
+    using System.Security.Permissions;
 
 #if TRAVE
     [StructLayout(LayoutKind.Sequential)]

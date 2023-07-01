@@ -1,3 +1,7 @@
+using System.Net;
+using System.Net.Cache;
+using System.Runtime.Versioning;
+using System.Security.Permissions;
 //------------------------------------------------------------------------------
 // <copyright file="XmlUrlResolver.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,10 +10,6 @@
 //------------------------------------------------------------------------------
 
 using System.Threading;
-using System.Security.Permissions;
-using System.Net;
-using System.Net.Cache;
-using System.Runtime.Versioning;
 
 namespace System.Xml
 {

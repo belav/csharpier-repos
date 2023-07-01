@@ -8,10 +8,10 @@
 
 namespace System.Web.UI.WebControls.Adapters
 {
-    using System.Globalization;
-    using System.Web.UI.WebControls;
-    using System.Web.UI.Adapters;
     using System.Collections.Specialized;
+    using System.Globalization;
+    using System.Web.UI.Adapters;
+    using System.Web.UI.WebControls;
     using System.Web.Util;
 
     // Adapts the ImageMap for wml.

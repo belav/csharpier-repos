@@ -14,9 +14,9 @@ namespace System.Web.UI
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.Reflection;
     using System.Web.Util;
-    using System.ComponentModel;
 
     internal sealed class PropertyMapper
     {

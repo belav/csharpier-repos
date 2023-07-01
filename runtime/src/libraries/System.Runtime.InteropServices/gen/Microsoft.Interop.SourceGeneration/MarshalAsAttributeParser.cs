@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop

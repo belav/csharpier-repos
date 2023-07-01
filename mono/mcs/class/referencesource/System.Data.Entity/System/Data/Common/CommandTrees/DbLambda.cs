@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Data.Common.CommandTrees.ExpressionBuilder.Internal;
 using ReadOnlyVariables = System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.CommandTrees.DbVariableReferenceExpression>;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.CommandTrees.ExpressionBuilder.Internal;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace System.Data.Common.CommandTrees

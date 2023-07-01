@@ -6,14 +6,14 @@ namespace System.Runtime.Serialization
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Security;
-    using System.Threading;
-    using System.Xml;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
+    using System.Reflection;
+    using System.Security;
+    using System.Threading;
+    using System.Xml;
 
 #if USE_REFEMIT
     public sealed class ClassDataContract : DataContract

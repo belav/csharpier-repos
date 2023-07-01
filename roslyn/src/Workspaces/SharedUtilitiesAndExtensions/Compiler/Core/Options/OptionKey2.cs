@@ -4,8 +4,8 @@
 
 using System;
 using System.Diagnostics;
-using Roslyn.Utilities;
 
+using Roslyn.Utilities;
 #if CODE_STYLE
 using WorkspacesResources = Microsoft.CodeAnalysis.CodeStyleResources;
 #endif

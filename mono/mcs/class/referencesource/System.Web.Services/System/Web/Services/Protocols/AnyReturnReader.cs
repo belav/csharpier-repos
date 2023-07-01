@@ -6,10 +6,10 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
-    using System.Web.Services;
+    using System.IO;
     using System.Net;
+    using System.Web.Services;
 
     /// <include file='doc\AnyReturnReader.uex' path='docs/doc[@for="AnyReturnReader"]/*' />
     /// <devdoc>

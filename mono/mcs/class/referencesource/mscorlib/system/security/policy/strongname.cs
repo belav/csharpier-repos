@@ -14,12 +14,12 @@
 
 namespace System.Security.Policy
 {
-    using System.IO;
-    using System.Reflection;
-    using System.Security.Util;
-    using System.Security.Permissions;
     using System.Diagnostics.Contracts;
     using CultureInfo = System.Globalization.CultureInfo;
+    using System.IO;
+    using System.Reflection;
+    using System.Security.Permissions;
+    using System.Security.Util;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

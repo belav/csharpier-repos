@@ -7,7 +7,11 @@ namespace System.ServiceModel.Security
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
+    using Reference = System.IdentityModel.Reference;
     using System.IdentityModel.Selectors;
+    using SignedInfo = System.IdentityModel.SignedInfo;
+    using SignedXml = System.IdentityModel.SignedXml;
+    using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.Diagnostics;
@@ -19,10 +23,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using Reference = System.IdentityModel.Reference;
-    using SignedInfo = System.IdentityModel.SignedInfo;
-    using SignedXml = System.IdentityModel.SignedXml;
-    using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
 
     class WSSecurityOneDotZeroReceiveSecurityHeader : ReceiveSecurityHeader
     {

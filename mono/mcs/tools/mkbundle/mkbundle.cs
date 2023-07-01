@@ -24,17 +24,18 @@
 // * Implement --list-targets lists all the available remote targets
 //
 using System;
-using System.Diagnostics;
-using System.Xml;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Runtime.InteropServices;
-using System.Text;
-using IKVM.Reflection;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+
+using IKVM.Reflection;
 
 class MakeBundle
 {

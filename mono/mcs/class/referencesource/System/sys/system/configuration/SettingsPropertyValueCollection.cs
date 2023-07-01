@@ -8,15 +8,15 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
+    using System.ComponentModel;
     using System.Configuration.Provider;
     using System.Globalization;
     using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Xml.Serialization;
-    using System.ComponentModel;
-    using System.Security.Permissions;
     using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security.Permissions;
+    using System.Xml.Serialization;
 
     //////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////

@@ -1,13 +1,13 @@
+using Debug = System.Diagnostics.Debug;
+using FieldAttributes = System.Reflection.FieldAttributes;
+using MethodAttributes = System.Reflection.MethodAttributes;
+using TypeAttributes = System.Reflection.TypeAttributes;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
-using TypeAttributes = System.Reflection.TypeAttributes;
-using MethodAttributes = System.Reflection.MethodAttributes;
-using FieldAttributes = System.Reflection.FieldAttributes;
 
 namespace ILCompiler
 {

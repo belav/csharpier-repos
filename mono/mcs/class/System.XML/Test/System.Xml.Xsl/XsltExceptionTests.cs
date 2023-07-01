@@ -1,3 +1,7 @@
+using System;
+using System.Runtime.Serialization;
+using System.Xml.Xsl;
+
 //
 // XsltExceptionTests.cs - Unit tests for System.Xml.Xsl.XsltException
 //
@@ -27,10 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Xml.Xsl;
 
 namespace MonoCasTests.System.Xml.Xsl
 {

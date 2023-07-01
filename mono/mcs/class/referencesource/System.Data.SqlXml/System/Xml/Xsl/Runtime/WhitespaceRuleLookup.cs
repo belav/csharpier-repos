@@ -5,12 +5,13 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using MS.Internal.Xml;
+using System.Xml;
 using System.Xml.Xsl.Qil;
+
+using MS.Internal.Xml;
 
 namespace System.Xml.Xsl.Runtime
 {

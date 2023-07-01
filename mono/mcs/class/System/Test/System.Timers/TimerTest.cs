@@ -1,3 +1,7 @@
+using System;
+using ST = System.Threading;
+using System.Timers;
+
 //
 // TimerTest.cs - NUnit Test Cases for System.Timers.Timer
 //
@@ -30,9 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Timers;
-using ST = System.Threading;
 
 namespace MonoTests.System.Timers
 {

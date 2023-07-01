@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.Editor.Options;
@@ -14,13 +15,13 @@ using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Internal.Log;
+using static Microsoft.CodeAnalysis.Internal.Log.FunctionId;
+using static Microsoft.CodeAnalysis.Internal.Log.Logger;
 using Microsoft.CodeAnalysis.Options;
+using static Microsoft.CodeAnalysis.RoslynAssemblyHelper;
 using Microsoft.CodeAnalysis.Telemetry;
 using Microsoft.VisualStudio.Text;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.Internal.Log.FunctionId;
-using static Microsoft.CodeAnalysis.Internal.Log.Logger;
-using static Microsoft.CodeAnalysis.RoslynAssemblyHelper;
 
 namespace Microsoft.CodeAnalysis.Editor
 {

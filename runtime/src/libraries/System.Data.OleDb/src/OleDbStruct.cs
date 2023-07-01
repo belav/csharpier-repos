@@ -3,8 +3,7 @@
 
 using System.Runtime.InteropServices;
 #if DEBUG
-using System.Globalization;
-using System.Text;
+using System.Globalization;using System.Text;
 #endif
 
 namespace System.Data.OleDb

@@ -9,6 +9,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 // Struct that's greater than 32-bits, but not a multiple of 32-bits.

@@ -11,19 +11,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Reflection;
-using System.Text;
 using System.IO;
+using System.Reflection;
+using System.Runtime.Versioning;
+using System.Text;
 using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
-using System.Runtime.Versioning;
 
 namespace System.Xml.Xsl.Xslt
 {
-    using ContextInfo = XsltInput.ContextInfo;
-    using f = AstFactory;
     using Res = System.Xml.Utils.Res;
+    using f = AstFactory;
     using TypeFactory = XmlQueryTypeFactory;
+    using ContextInfo = XsltInput.ContextInfo;
     using QName = XsltInput.DelayedQName;
     using XsltAttribute = XsltInput.XsltAttribute;
 

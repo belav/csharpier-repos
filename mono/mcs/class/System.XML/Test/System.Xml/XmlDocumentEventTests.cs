@@ -1,3 +1,7 @@
+using System;
+using System.Text;
+using System.Xml;
+
 //
 // XmlDocumentEventTests.cs
 //
@@ -9,9 +13,6 @@
 // This class is a set of event test.
 //
 using NUnit.Framework;
-using System;
-using System.Text;
-using System.Xml;
 
 namespace MonoTests.System.Xml
 {

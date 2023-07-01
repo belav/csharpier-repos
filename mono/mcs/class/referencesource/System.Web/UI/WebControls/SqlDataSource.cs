@@ -19,8 +19,8 @@ namespace System.Web.UI.WebControls
     using System.Web;
     using System.Web.Caching;
     using System.Web.UI;
-    using System.Web.Util;
     using ConflictOptions = System.Web.UI.ConflictOptions;
+    using System.Web.Util;
 
     /// <devdoc>
     /// This class represents a datasource that uses an ADO.net connection to get

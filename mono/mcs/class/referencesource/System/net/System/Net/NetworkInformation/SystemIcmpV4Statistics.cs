@@ -4,9 +4,9 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net.Sockets;
     using System;
     using System.ComponentModel;
+    using System.Net.Sockets;
 
     /// <summary>Icmp statistics for IPv4.</summary>
     internal class SystemIcmpV4Statistics : IcmpV4Statistics

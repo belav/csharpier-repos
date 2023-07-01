@@ -2,6 +2,7 @@ using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel

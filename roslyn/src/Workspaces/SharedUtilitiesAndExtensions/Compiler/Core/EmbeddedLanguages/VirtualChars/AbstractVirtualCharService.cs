@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.LanguageService;
 using Microsoft.CodeAnalysis.PooledObjects;

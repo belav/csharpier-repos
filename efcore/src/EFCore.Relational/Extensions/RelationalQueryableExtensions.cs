@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Runtime.CompilerServices;
+
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 

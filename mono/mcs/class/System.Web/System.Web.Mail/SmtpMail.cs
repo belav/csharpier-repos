@@ -1,3 +1,4 @@
+using System.IO;
 //
 // System.Web.Mail.SmtpMail.cs
 //
@@ -29,10 +30,9 @@
 
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
+using System.Text;
 
 namespace System.Web.Mail
 {

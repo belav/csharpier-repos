@@ -9,10 +9,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using IEnumerator = System.Collections.IEnumerator;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using IEnumerator = System.Collections.IEnumerator;
 
 namespace System.Linq.Parallel
 {

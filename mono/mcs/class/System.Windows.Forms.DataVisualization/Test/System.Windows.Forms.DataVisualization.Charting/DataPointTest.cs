@@ -25,6 +25,7 @@
 
 using System;
 using System.Windows.Forms.DataVisualization.Charting;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.DataVisualization.Charting

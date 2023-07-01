@@ -5,6 +5,7 @@
 
 using System;
 using System.Threading;
+
 using Xunit;
 
 namespace Precise

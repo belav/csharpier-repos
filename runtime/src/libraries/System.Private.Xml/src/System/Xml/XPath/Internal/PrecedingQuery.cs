@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Xml.XPath;
+
 using StackNav = MS.Internal.Xml.XPath.ClonableStack<System.Xml.XPath.XPathNavigator>;
 
 namespace MS.Internal.Xml.XPath

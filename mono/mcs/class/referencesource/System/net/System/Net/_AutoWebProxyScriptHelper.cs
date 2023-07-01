@@ -11,16 +11,9 @@
 namespace System.Net
 {
 #if AUTOPROXY_MANAGED_JSCRIPT
-    using System.Security.Permissions;
-    using System.Collections.Generic;
+    using System.Security.Permissions;using System.Collections.Generic;
 #endif
-    using System.Net.NetworkInformation;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Globalization;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
-    using System.Net.Sockets;
+    using System.Net.NetworkInformation;using System.Text;using System.Text.RegularExpressions;using System.Globalization;using System.Reflection;using System.Runtime.InteropServices;using System.Net.Sockets;
 
     /// <summary>
     /// Provides a set of functions that can be called by the JS script.  There are based on

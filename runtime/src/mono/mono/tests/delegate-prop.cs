@@ -1,7 +1,7 @@
 using System;
-using System.Reflection;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Reflection;
 
 /* Regression test for https://github.com/mono/mono/issues/7944 */
 public class MyClass

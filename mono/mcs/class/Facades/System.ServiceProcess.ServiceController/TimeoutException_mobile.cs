@@ -30,8 +30,7 @@
 
 #if MOBILE || XAMMAC_4_5
 
-using System;
-using System.Runtime.Serialization;
+using System;using System.Runtime.Serialization;
 
 namespace System.ServiceProcess
 {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.VisualStudio.LanguageServices;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;

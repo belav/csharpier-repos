@@ -6,11 +6,11 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Xml.Schema;
-using System.Xml.XPath;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.Xml.Schema;
+using System.Xml.XPath;
 
 namespace System.Xml
 {

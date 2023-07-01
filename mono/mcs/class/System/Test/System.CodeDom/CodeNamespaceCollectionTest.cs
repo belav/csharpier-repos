@@ -1,3 +1,7 @@
+using System;
+using System.CodeDom;
+using System.Collections;
+
 //
 // CodeNamespaceCollectionTest.cs
 //	- Unit tests for System.CodeDom.CodeNamespaceCollection
@@ -28,10 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

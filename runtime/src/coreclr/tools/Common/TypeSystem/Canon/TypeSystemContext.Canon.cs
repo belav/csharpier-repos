@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using Debug = System.Diagnostics.Debug;
 
 using Interlocked = System.Threading.Interlocked;
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {

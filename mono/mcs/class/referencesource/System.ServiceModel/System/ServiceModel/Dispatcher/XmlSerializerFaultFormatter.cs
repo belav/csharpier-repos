@@ -2,15 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 using System;
-using System.Xml;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
-using System.Xml.Serialization;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace System.ServiceModel.Dispatcher
 {

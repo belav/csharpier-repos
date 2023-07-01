@@ -11,13 +11,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Navigation;
+
 using Microsoft.CodeAnalysis.Diagnostics.Log;
-using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Editor.Implementation.Preview;
-using IVsUIShell = Microsoft.VisualStudio.Shell.Interop.IVsUIShell;
+using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 using OLECMDEXECOPT = Microsoft.VisualStudio.OLE.Interop.OLECMDEXECOPT;
+using IVsUIShell = Microsoft.VisualStudio.Shell.Interop.IVsUIShell;
 using Microsoft.VisualStudio.Text.Differencing;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 {

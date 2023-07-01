@@ -1,16 +1,16 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Drawing.Imaging;
     using System.Collections.Generic;
-    using System.Windows.Forms.Design;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
 
     #region Class DragDropManager
     //This behavior needs the logical coordinates

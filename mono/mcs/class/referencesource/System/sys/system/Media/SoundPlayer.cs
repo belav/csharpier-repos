@@ -1,18 +1,18 @@
 namespace System.Media
 {
     using System;
-    using System.IO;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics;
-    using System.Threading;
-    using System.Net;
-    using System.Globalization;
-    using System.Security.Permissions;
     using System.Security;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Security.Permissions;
+    using System.Threading;
 
     /// <include file='doc\SoundPlayer.uex' path='docs/doc[@for="SoundPlayer"]/*' />
     [

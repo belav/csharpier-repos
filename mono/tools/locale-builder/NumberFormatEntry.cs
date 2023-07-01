@@ -1,4 +1,5 @@
-﻿//
+﻿using System.Globalization;
+//
 // DateTimeFormatEntry.cs
 //
 // Authors:
@@ -29,7 +30,6 @@
 //
 
 using System.Text;
-using System.Globalization;
 
 namespace Mono.Tools.LocaleBuilder
 {

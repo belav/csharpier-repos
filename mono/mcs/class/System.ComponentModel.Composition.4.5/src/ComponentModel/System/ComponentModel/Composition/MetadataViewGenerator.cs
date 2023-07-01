@@ -2,18 +2,7 @@
 // -----------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using Microsoft.Internal;
-using System.Reflection.Emit;
-using System.Collections;
-using System.Security;
-using Lock = Microsoft.Internal.Lock;
+using System;using System.Collections.Generic;using System.ComponentModel;using System.Globalization;using System.Linq;using System.Reflection;using System.Threading;using Microsoft.Internal;using System.Reflection.Emit;using System.Collections;using System.Security;using Lock = Microsoft.Internal.Lock;
 
 namespace System.ComponentModel.Composition
 {

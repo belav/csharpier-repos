@@ -5,8 +5,8 @@
 // Checks that there are no overflows for the interlocked intrinsics generated.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public class IntrinsicTest
 {

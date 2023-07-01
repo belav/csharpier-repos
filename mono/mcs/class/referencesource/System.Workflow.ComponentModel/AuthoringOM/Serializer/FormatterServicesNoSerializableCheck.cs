@@ -18,12 +18,12 @@
 **
 ============================================================*/
 using System;
-using System.Reflection;
-using System.Threading;
-using System.Globalization;
-using System.Security.Permissions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Threading;
 using System.Workflow.ComponentModel;
 
 namespace System.Runtime.Serialization

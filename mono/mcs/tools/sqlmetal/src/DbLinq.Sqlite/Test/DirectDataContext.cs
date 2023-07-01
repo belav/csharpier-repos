@@ -30,7 +30,6 @@ using System.Linq;
 using Mono.Data.Sqlite;
 
 using nwind;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

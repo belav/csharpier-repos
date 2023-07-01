@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
+
 using Xunit;
 
 namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests

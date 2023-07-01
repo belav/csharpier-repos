@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CSharp.LanguageService;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;

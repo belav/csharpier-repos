@@ -7,28 +7,29 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Xml;
-    using System.Xml.XPath;
-    using System.Xml.Xsl.Runtime;
-    using MS.Internal.Xml.XPath;
-    using System.Xml.Xsl.XsltOld.Debugger;
-    using System.Text;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
     using System.Reflection;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using Keywords = System.Xml.Xsl.Xslt.KeywordsTable;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Text;
+    using System.Xml;
+    using Res = System.Xml.Utils.Res;
+    using System.Xml.XPath;
+    using System.Xml.Xsl.Runtime;
+    using Keywords = System.Xml.Xsl.Xslt.KeywordsTable;
+    using System.Xml.Xsl.XsltOld.Debugger;
+
+    using MS.Internal.Xml.XPath;
 
     internal class Sort
     {

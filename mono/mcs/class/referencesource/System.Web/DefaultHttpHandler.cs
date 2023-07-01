@@ -10,9 +10,9 @@ namespace System.Web
     using System.Collections;
     using System.Collections.Specialized;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.Security.Permissions;
 
     public class DefaultHttpHandler : IHttpAsyncHandler
     {

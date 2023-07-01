@@ -1,14 +1,14 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Windows.Forms;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Windows.Forms;
 
     #region Class WindowManager
     //This behavior needs the logical coordinates

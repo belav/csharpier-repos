@@ -2,6 +2,7 @@
 
 using System.Collections.Immutable;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Tools.Utilities;
 
 namespace Microsoft.CodeAnalysis.Tools.Workspaces

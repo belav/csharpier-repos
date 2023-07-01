@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using AttributeCollection = System.ComponentModel.AttributeCollection;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -17,7 +18,6 @@ using System.Web.Resources;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AttributeCollection = System.ComponentModel.AttributeCollection;
 
 namespace System.Web.DynamicData
 {

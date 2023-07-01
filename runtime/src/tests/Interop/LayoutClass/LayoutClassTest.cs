@@ -1,8 +1,9 @@
 using System;
-using System.Security;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+
 using Xunit;
 
 namespace PInvokeTests

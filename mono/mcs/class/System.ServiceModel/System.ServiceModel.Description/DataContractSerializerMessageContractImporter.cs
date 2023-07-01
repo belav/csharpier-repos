@@ -35,13 +35,13 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Web.Services.Description;
+using Message = System.Web.Services.Description.Message;
+using WSDL = System.Web.Services.Description.ServiceDescription;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 using QName = System.Xml.XmlQualifiedName;
-using WSDL = System.Web.Services.Description.ServiceDescription;
-using Message = System.Web.Services.Description.Message;
 
 namespace System.ServiceModel.Description
 {

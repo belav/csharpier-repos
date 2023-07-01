@@ -32,7 +32,6 @@ using System.Linq;
 using System.Reflection;
 
 using DbLinq.Data.Linq.Sugar.Expressions;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

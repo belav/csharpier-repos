@@ -6,11 +6,11 @@ namespace System.ServiceModel.Activities.Description
     using System.Collections.ObjectModel;
     using System.Runtime;
     using System.ServiceModel.Activities.Dispatcher;
+    using SR = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using System.Xml;
-    using SR = System.ServiceModel.Activities.SR;
 
     public sealed class BufferedReceiveServiceBehavior : IServiceBehavior
     {

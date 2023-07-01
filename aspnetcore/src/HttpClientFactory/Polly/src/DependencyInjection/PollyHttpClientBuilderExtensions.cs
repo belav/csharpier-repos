@@ -3,6 +3,7 @@
 
 using System;
 using System.Net.Http;
+
 using Microsoft.Extensions.Http;
 using Polly;
 using Polly.Extensions.Http;

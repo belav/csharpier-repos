@@ -9,10 +9,10 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Activities;
+    using SMASR = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.ServiceModel.XamlIntegration;
     using System.Xml.Linq;
-    using SMASR = System.ServiceModel.Activities.SR;
 
     public class Endpoint
     {

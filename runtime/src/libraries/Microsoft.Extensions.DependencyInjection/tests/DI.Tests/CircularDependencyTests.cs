@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.Extensions.DependencyInjection.Tests.Fakes;
 using Xunit;
 

@@ -9,15 +9,7 @@
 
 #if !MOBILE && !XAMMAC_4_5
 
-using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using Microsoft.CSharp;
-using System.Web.Services.Description;
-
-using MonoTests.Helpers;
+using NUnit.Framework;using System;using System.CodeDom;using System.CodeDom.Compiler;using Microsoft.CSharp;using System.Web.Services.Description;using MonoTests.Helpers;
 
 namespace MonoTests.System.Web.Services.Description
 {

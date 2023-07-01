@@ -1,3 +1,7 @@
+using System;
+using System.Data;
+using System.Xml;
+
 // DataColumnCollectionTest.cs - NUnit Test Cases for System.Data.DataColumnCollection
 //
 // Authors:
@@ -34,9 +38,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Xml;
 
 namespace MonoTests.System.Data
 {

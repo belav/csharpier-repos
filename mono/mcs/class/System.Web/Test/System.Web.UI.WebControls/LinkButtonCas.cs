@@ -1,3 +1,9 @@
+using System;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI.WebControls;
+
+using MonoTests.System.Web.UI.WebControls;
 //
 // LinkButtonCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.LinkButton
@@ -28,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI.WebControls;
-
-using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls
 {

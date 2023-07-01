@@ -9,8 +9,8 @@ namespace System.Web.UI.WebControls
     using System.Collections;
     using System.ComponentModel;
     using System.Drawing.Design;
-    using System.Web.UI;
     using System.Globalization;
+    using System.Web.UI;
 
     /// <devdoc>
     /// <para>Defines abstract class from which all HotSpot shapes must inherit.</para>

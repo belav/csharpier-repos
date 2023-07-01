@@ -6,15 +6,16 @@
 
 namespace Microsoft.Win32
 {
-    using System.Runtime.InteropServices;
-    using System.Threading;
     using System;
-    using System.Security.Permissions;
     using System.Collections;
-    using System.IO;
-    using System.Text;
-    using Microsoft.Win32.SafeHandles;
     using System.Configuration;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+
+    using Microsoft.Win32.SafeHandles;
 
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal static class UnsafeNativeMethods

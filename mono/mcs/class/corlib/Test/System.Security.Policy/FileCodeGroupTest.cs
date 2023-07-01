@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // MonoTests.System.Security.Policy.FileCodeGroupTest
 //
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Security;
-using System.Security.Policy;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Policy
 {

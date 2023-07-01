@@ -24,9 +24,10 @@
 //
 
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Collections;
+using System.Runtime.InteropServices;
+using System.Text;
+
 using Mono.WebBrowser;
 using Mono.WebBrowser.DOM;
 

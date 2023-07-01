@@ -8,9 +8,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+
+using static Microsoft.CodeAnalysis.FindUsages.DefinitionItem;
 using Microsoft.CodeAnalysis.Shared.Collections;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.FindUsages.DefinitionItem;
 
 namespace Microsoft.CodeAnalysis.FindUsages
 {

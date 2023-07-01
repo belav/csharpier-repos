@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+
 using Microsoft.EntityFrameworkCore.Metadata;
 
 // ReSharper disable once CheckNamespace

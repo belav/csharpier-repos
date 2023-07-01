@@ -7,14 +7,13 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
-
 #if CODE_STYLE
-using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;
-using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
+using OptionSet = Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions;using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
 #endif
 
 namespace Microsoft.CodeAnalysis.CodeStyle

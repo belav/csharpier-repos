@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
+
 using Internal.TypeSystem;
 
 namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem

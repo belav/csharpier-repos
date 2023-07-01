@@ -3,6 +3,7 @@
 
 using System.Security.Cryptography;
 using System.Text;
+
 using Microsoft.AspNetCore.Cryptography.Cng;
 using Microsoft.AspNetCore.DataProtection.Test.Shared;
 using Microsoft.AspNetCore.Testing;

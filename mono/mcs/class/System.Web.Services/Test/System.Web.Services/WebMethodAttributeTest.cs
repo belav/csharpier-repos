@@ -1,3 +1,6 @@
+using System;
+using System.Web.Services;
+
 //
 // MonoTests.System.Web.Services.WebMethodAttributeTest.cs
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Web.Services;
 #if !MOBILE
 using System.EnterpriseServices;
 #endif

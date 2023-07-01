@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
 using System.IO;
-using FluentAssertions;
-using FluentAssertions.Equivalency;
 using System.Linq;
+
+using FluentAssertions;
 using FluentAssertions.Common;
+using FluentAssertions.Equivalency;
 using Xunit;
 using Xunit.Abstractions;
 

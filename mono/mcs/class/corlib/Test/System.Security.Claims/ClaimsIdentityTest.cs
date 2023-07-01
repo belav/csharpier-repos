@@ -1,14 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+
 //
 // ClaimsIdentityTest.cs - NUnit Test Cases for System.Security.Claims.ClaimsIdentity
 //
 
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
 
 namespace MonoTests.System.Security.Claims
 {

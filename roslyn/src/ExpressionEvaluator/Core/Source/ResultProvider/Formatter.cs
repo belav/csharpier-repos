@@ -10,6 +10,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.MetadataReader;
 using Microsoft.VisualStudio.Debugger;

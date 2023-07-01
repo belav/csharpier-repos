@@ -6,21 +6,21 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Parsing;
+
+using Debug = System.Diagnostics.Debug;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using Internal.IL;
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
 using ILCompiler.Dataflow;
 using ILLink.Shared;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.IL;
 using InstructionSet = Internal.JitInterface.InstructionSet;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
 {

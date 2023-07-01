@@ -11,6 +11,7 @@ namespace System.Data.Objects.ELinq
     using System.Collections.Generic;
     using System.Data.Common;
     using System.Data.Common.CommandTrees;
+    using CqtExpression = System.Data.Common.CommandTrees.DbExpression;
     using System.Data.Common.CommandTrees.ExpressionBuilder;
     using System.Data.Entity;
     using System.Data.Metadata.Edm;
@@ -18,9 +19,8 @@ namespace System.Data.Objects.ELinq
     using System.Diagnostics;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
-    using CqtExpression = System.Data.Common.CommandTrees.DbExpression;
     using LinqExpression = System.Linq.Expressions.Expression;
+    using System.Reflection;
 #if MONO
     using System.Globalization;
 #endif

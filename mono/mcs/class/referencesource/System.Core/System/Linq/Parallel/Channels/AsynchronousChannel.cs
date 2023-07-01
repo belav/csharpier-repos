@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -12,7 +13,6 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Threading;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {

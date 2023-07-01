@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security;
+
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests

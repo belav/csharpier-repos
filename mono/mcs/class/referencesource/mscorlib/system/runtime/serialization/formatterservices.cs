@@ -16,21 +16,21 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.Remoting;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Threading;
-    using System.IO;
     using System.Text;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public static class FormatterServices

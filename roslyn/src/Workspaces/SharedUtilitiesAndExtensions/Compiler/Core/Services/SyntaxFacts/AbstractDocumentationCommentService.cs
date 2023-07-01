@@ -6,9 +6,10 @@
 
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
-using Roslyn.Utilities;
 using System.Text;
+using System.Threading;
+
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageService
 {

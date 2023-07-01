@@ -3,6 +3,7 @@
 
 using System.Data;
 using System.Globalization;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;

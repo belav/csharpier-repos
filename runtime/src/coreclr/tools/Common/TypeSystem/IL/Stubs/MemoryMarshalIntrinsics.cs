@@ -3,9 +3,7 @@
 #if READYTORUN
 using ILCompiler;
 #endif
-using Internal.TypeSystem;
-
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {

@@ -14,8 +14,8 @@ namespace System.ServiceModel.Activities
     using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.Collections;
-    using System.Windows.Markup;
     using SR2 = System.ServiceModel.Activities.SR;
+    using System.Windows.Markup;
 
     [ContentProperty("Body")]
     public sealed class TransactedReceiveScope : NativeActivity

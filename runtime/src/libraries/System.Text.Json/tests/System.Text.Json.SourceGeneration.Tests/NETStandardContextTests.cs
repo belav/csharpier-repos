@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+
 using Xunit;
 
 namespace System.Text.Json.SourceGeneration.Tests.NETStandard

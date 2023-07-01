@@ -1,3 +1,11 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text;
+
+using DecoderException = System.Text.DecoderFallbackException;
+
+using MonoTests.Helpers;
 //
 // UTF8EncodingTest.cs - NUnit Test Cases for System.Text.UTF8Encoding
 //
@@ -10,16 +18,8 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.IO;
-using System.Text;
-
-using DecoderException = System.Text.DecoderFallbackException;
 
 using AssertType = NUnit.Framework.Assert;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Text
 {

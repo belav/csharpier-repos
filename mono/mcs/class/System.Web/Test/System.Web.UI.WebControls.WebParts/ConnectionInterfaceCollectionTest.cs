@@ -30,8 +30,9 @@
 
 using System;
 using System.Collections;
-using NUnit.Framework;
 using CIC = System.Web.UI.WebControls.WebParts.ConnectionInterfaceCollection;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls.WebParts
 {

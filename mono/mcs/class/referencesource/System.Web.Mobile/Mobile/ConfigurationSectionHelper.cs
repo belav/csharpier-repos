@@ -6,10 +6,10 @@
 
 namespace System.Web.Mobile
 {
-    using System.Xml;
     using System.Configuration;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Xml;
 
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."

@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Editor.CSharp.FixInterpolatedVerbatimString;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Extensions;

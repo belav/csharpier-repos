@@ -13,9 +13,10 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+
 using Roslyn.Utilities;
-using Xunit;
 using ReferenceEqualityComparer = Roslyn.Utilities.ReferenceEqualityComparer;
+using Xunit;
 
 namespace Roslyn.Test.Utilities
 {

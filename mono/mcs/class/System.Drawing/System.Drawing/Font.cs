@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Drawing.Fonts.cs
 //
@@ -32,9 +33,8 @@
 //
 
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace System.Drawing
 {

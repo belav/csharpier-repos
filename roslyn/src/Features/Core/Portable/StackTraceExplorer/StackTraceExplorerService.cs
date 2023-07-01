@@ -8,6 +8,7 @@ using System.Composition;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame;
 using Microsoft.CodeAnalysis.FindUsages;
 using Microsoft.CodeAnalysis.Host.Mef;

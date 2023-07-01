@@ -9,6 +9,7 @@ using System.Composition.Hosting.Core;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Composition.Hosting.Tests

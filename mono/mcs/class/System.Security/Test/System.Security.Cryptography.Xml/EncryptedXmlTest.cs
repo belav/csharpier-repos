@@ -8,17 +8,7 @@
 //
 #if !MOBILE
 
-using System;
-using System.Collections;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
-using System.Xml;
-
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.Collections;using System.IO;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using System.Security.Cryptography.Xml;using System.Xml;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.Security.Cryptography.Xml
 {

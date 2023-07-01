@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Linq;
+
 using BundleTests.Helpers;
 using Microsoft.DotNet.Cli.Build.Framework;
 using Microsoft.DotNet.CoreSetup.Test;

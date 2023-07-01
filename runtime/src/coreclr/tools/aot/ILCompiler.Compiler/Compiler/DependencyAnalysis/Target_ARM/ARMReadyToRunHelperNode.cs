@@ -3,8 +3,9 @@
 
 using System;
 using System.Diagnostics;
-using Internal.TypeSystem;
+
 using ILCompiler.DependencyAnalysis.ARM;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

@@ -7,8 +7,8 @@
 namespace System.Web.Configuration
 {
     using System.Collections;
-    using System.Configuration.Internal;
     using System.Configuration;
+    using System.Configuration.Internal;
     using System.Globalization;
     using System.IO;
     using System.Reflection;

@@ -8,12 +8,13 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Scripting.Hosting;
+using static Microsoft.CodeAnalysis.Scripting.TestCompilationFactory;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.Scripting.TestCompilationFactory;
 
 namespace Microsoft.CodeAnalysis.CSharp.Scripting.Test
 {

@@ -10,10 +10,10 @@ namespace System.Activities
     using System.Activities.XamlIntegration;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Runtime;
     using System.Windows.Markup;
-    using System.Diagnostics.CodeAnalysis;
 
     public abstract class InArgument : Argument
     {

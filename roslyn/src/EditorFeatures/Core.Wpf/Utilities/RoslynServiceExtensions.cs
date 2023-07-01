@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Threading;
 

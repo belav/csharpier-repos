@@ -3,16 +3,17 @@
 
 using System;
 using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-using Internal.JitInterface;
 using Internal.CorConstants;
+using Internal.JitInterface;
 using Internal.ReadyToRunConstants;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

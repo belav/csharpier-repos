@@ -26,13 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if true
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.PeerResolvers;
+using System;using System.Collections.Generic;using System.IO;using System.Linq;using System.Runtime.Serialization;using System.ServiceModel;using System.ServiceModel.PeerResolvers;
 
 namespace System.ServiceModel.PeerResolvers
 {

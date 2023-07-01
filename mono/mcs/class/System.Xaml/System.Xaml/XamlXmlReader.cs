@@ -22,12 +22,12 @@
 //
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Xaml.Schema;
 
 using Pair = System.Collections.Generic.KeyValuePair<System.Xaml.XamlMember, string>;
+using System.IO;
+using System.Linq;
+using System.Xaml.Schema;
+using System.Xml;
 
 namespace System.Xaml
 {

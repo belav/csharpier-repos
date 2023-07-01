@@ -6,6 +6,7 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 

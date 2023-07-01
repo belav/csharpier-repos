@@ -4,12 +4,12 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Xml;
-    using System.Text;
-    using System.Globalization;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
+    using System.Globalization;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.Text;
+    using System.Xml;
 
     [Serializable]
     internal class MustUnderstandSoapException : CommunicationException

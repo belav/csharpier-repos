@@ -8,8 +8,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
-    using System.Transactions;
     using SR = System.ServiceModel.SR;
+    using System.Transactions;
 
     sealed class MsmqOutputSessionChannel : TransportOutputChannel, IOutputSessionChannel
     {

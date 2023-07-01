@@ -4,6 +4,7 @@
 
 using System.Collections.Concurrent;
 using System.IO;
+
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Microsoft.CodeAnalysis.SQLite.v2.Interop;
 using Microsoft.CodeAnalysis.Storage;

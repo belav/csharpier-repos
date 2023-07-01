@@ -4,8 +4,9 @@
 using System.Collections.Generic;
 using System.CommandLine.Builder;
 using System.CommandLine.Parsing;
-using FluentAssertions;
 using System.Linq;
+
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests

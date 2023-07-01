@@ -14,16 +14,10 @@ namespace System.Runtime.Serialization
 #if !NO_CONFIGURATION
     using System.Runtime.Serialization.Configuration;
 #endif
-    using System.Runtime.Serialization.Diagnostics.Application;
-    using System.Security;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Schema;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<
+    using System.Runtime.Serialization.Diagnostics.Application;using System.Security;using System.Text;using System.Xml;using System.Xml.Schema;using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
-    >;
-    using System.Text.RegularExpressions;
+    >;using System.Text.RegularExpressions;
 
 #if USE_REFEMIT
     public abstract class DataContract

@@ -8,14 +8,15 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
-using Microsoft.CodeAnalysis.PooledObjects;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Collections;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
-    using static ObjectFormatterHelpers;
     using TypeInfo = System.Reflection.TypeInfo;
+    using static ObjectFormatterHelpers;
 
     internal abstract partial class CommonTypeNameFormatter
     {

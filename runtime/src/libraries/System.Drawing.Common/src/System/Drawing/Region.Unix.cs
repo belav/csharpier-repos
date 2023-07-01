@@ -3,8 +3,8 @@
 
 using System.Drawing.Drawing2D;
 using System.Drawing.Internal;
-using System.Runtime.InteropServices;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
+using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {

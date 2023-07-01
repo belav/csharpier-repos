@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Speech.Internal.Synthesis;
+
 using Microsoft.Win32;
 
 namespace System.Speech.Internal.ObjectTokens

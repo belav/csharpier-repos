@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.Adapters.ControlAdapter
 //
@@ -28,7 +29,6 @@
 
 using System.Web;
 using System.Web.UI;
-using System.ComponentModel;
 
 namespace System.Web.UI.Adapters
 {

@@ -30,6 +30,7 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 using NUnit.Framework;
 
 // We need a different namespace because we pollute it with

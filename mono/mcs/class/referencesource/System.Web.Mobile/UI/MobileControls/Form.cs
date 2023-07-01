@@ -1,3 +1,8 @@
+using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Globalization;
+using System.Security.Permissions;
 //------------------------------------------------------------------------------
 // <copyright file="Form.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,11 +11,6 @@
 
 using System.Web.Mobile;
 using System.Web.UI;
-using System.Collections;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Globalization;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {

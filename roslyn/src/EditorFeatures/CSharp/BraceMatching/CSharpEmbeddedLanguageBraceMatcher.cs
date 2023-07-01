@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.BraceMatching;
 using Microsoft.CodeAnalysis.Host.Mef;
 

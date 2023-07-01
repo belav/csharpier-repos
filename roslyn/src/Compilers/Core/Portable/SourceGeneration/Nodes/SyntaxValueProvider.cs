@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.SourceGeneration;
 

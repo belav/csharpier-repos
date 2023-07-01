@@ -1,3 +1,11 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using Microsoft.Win32;
+
+using MonoTests.Microsoft.Win32;
 //
 // IntranetZoneCredentialPolicyCas.cs
 //	- CAS unit tests for Microsoft.Win32.IntranetZoneCredentialPolicy
@@ -29,14 +37,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using Microsoft.Win32;
-
-using MonoTests.Microsoft.Win32;
 
 namespace MonoCasTests.Microsoft.Win32
 {

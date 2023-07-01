@@ -8,6 +8,7 @@ using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes.ErrorCases

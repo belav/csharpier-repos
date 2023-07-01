@@ -27,18 +27,18 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Security;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Text;
+
+using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 
 namespace System.ServiceModel.Description
 {

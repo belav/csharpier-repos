@@ -4,8 +4,9 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Xunit;
+
 using static DisabledRuntimeMarshallingNative;
+using Xunit;
 
 namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingDisabled;
 

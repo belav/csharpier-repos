@@ -1,9 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
-using Roslyn.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -13,8 +8,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using static Microsoft.CodeAnalysis.CommandLine.BuildProtocolConstants;
 using static Microsoft.CodeAnalysis.CommandLine.CompilerServerLogger;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+using Roslyn.Utilities;
 
 // This file describes data structures about the protocol from client program to server that is
 // used. The basic protocol is this.

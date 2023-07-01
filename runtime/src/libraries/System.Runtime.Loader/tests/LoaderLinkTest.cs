@@ -5,9 +5,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Xunit;
 
 using LoaderLinkTest.Shared;
+using Xunit;
 
 namespace LoaderLinkTest
 {

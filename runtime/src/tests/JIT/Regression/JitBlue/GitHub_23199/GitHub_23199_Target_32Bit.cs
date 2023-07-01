@@ -1,12 +1,12 @@
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 // The test revealed some problems of GCStress infrastructure on platforms with multi reg returns (arm64, amd64 Unix).
 // It required GCStress=0xc and GcStressOnDirectCalls=1 to hit issues. The issues were with saving GC pointers in the return registers.
 // The GC infra has to correctly mark registers with pointers as alive and must not report registers without pointers.
 
 using nint = System.Int32;
+using System.Runtime.CompilerServices;
 
 namespace GitHub_23199_32Bit
 {

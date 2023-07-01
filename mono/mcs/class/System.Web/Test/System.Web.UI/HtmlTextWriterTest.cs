@@ -31,10 +31,10 @@
 using System;
 using System.IO;
 using System.Web.UI;
-
-using HtwTag = System.Web.UI.HtmlTextWriterTag;
 using HtwAttribute = System.Web.UI.HtmlTextWriterAttribute;
 using HtwStyle = System.Web.UI.HtmlTextWriterStyle;
+
+using HtwTag = System.Web.UI.HtmlTextWriterTag;
 
 using NUnit.Framework;
 

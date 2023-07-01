@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 //
 // BooleanTest.cs - NUnit Test Cases for the System.Boolean class
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System
 {

@@ -4,6 +4,7 @@
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+
 using FT = MS.Internal.Xml.XPath.Function.FunctionType;
 
 namespace MS.Internal.Xml.XPath

@@ -8,13 +8,13 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Text;
 using System.Collections.Generic;
-using md = System.Data.Metadata.Edm;
-using mp = System.Data.Mapping;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using mp = System.Data.Mapping;
+using md = System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
 // A ColumnMap is a data structure that maps columns from the C space to
 // the corresponding columns from one or more underlying readers.

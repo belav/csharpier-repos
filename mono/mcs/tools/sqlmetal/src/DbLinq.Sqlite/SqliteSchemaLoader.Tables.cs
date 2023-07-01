@@ -25,6 +25,7 @@
 #endregion
 using System.Collections.Generic;
 using System.Data;
+
 using DbLinq.Vendor;
 
 namespace DbLinq.Sqlite

@@ -11,12 +11,12 @@ namespace System.Data.Mapping
 {
     using System.Collections;
     using System.Collections.Generic;
+    using OM = System.Collections.ObjectModel;
     using System.Data.Common;
     using System.Data.Common.Utils;
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
     using System.Linq;
-    using OM = System.Collections.ObjectModel;
 
     /// <summary>
     /// Represents a mapping from a model function import to a store non-composable function.

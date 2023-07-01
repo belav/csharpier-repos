@@ -7,18 +7,18 @@
 namespace System.Web.Services.Discovery
 {
     using System;
-    using System.Net;
-    using System.Xml.Serialization;
-    using System.Web.Services.Description;
+    using System.Collections;
+    using System.Diagnostics;
     using System.IO;
+    using System.Net;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services.Description;
+    using System.Web.Services.Diagnostics;
+    using System.Web.Services.Protocols;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Web.Services.Protocols;
-    using System.Text;
-    using System.Collections;
-    using System.Threading;
-    using System.Diagnostics;
-    using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ContractReference.uex' path='docs/doc[@for="ContractReference"]/*' />
     /// <devdoc>

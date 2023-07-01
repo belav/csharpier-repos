@@ -1,4 +1,6 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+//---------------------------------------------------------------------
 // <copyright file="LinqExpressionNormalizer.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -7,8 +9,6 @@
 //---------------------------------------------------------------------
 
 using System.Linq.Expressions;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace System.Data.Objects.ELinq

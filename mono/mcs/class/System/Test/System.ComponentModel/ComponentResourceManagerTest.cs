@@ -9,14 +9,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
-using System.Resources;
-
-using NUnit.Framework;
+using System;using System.Collections;using System.ComponentModel;using System.Globalization;using System.Reflection;using System.Resources;using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel
 {

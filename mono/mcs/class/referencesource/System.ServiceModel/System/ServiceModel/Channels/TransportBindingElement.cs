@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
-    using System.Runtime.Serialization;
-    using System.ServiceModel.Security;
-    using System.ServiceModel;
-    using System.Xml;
-    using WsdlNS = System.Web.Services.Description;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
+    using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
 
     public abstract class TransportBindingElement : BindingElement
     {

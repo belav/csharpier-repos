@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // MarshalByRefObjectCas.cs - CAS unit tests for System.MarshalByRefObject
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

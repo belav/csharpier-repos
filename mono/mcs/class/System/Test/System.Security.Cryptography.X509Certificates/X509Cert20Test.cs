@@ -1,3 +1,12 @@
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
 //
 // X509Cert20Test.cs - Unit Tests for new 2.0 features in X509Certificate
 //
@@ -28,14 +37,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

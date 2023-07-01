@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+
 using Xunit;
 
 namespace Microsoft.Extensions.Http.Logging

@@ -7,6 +7,7 @@ using System.Composition;
 using System.IO;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Microsoft.CodeAnalysis.Text;

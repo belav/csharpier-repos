@@ -9,7 +9,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CodeFixGroupKey = System.Tuple<
+    Microsoft.CodeAnalysis.Diagnostics.DiagnosticData,
+    Microsoft.CodeAnalysis.CodeActions.CodeActionPriority,
+    Microsoft.CodeAnalysis.CodeActions.CodeActionPriority?
+>;
+
 using Microsoft.CodeAnalysis.CodeActions;
+using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixesAndRefactorings;
 using Microsoft.CodeAnalysis.CodeRefactorings;
@@ -17,12 +24,6 @@ using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
-using CodeFixGroupKey = System.Tuple<
-    Microsoft.CodeAnalysis.Diagnostics.DiagnosticData,
-    Microsoft.CodeAnalysis.CodeActions.CodeActionPriority,
-    Microsoft.CodeAnalysis.CodeActions.CodeActionPriority?
->;
 
 namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 {

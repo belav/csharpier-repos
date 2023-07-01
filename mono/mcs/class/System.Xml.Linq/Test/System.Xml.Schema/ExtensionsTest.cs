@@ -11,14 +11,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.Xml;
-using System.IO;
-using System.Xml.Linq;
-using System.Xml.Schema;
-using System.Collections.Generic;
-using ExtensionsClass = System.Xml.Schema.Extensions;
+using NUnit.Framework;using System;using System.Xml;using System.IO;using System.Xml.Linq;using System.Xml.Schema;using System.Collections.Generic;using ExtensionsClass = System.Xml.Schema.Extensions;
 
 namespace MonoTests.System.Xml.Schema
 {

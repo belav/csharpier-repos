@@ -7,10 +7,10 @@
 
 namespace System.Xml
 {
-    using System.Xml.XPath;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Xml.XPath;
 
     internal class XPathNodeList : XmlNodeList
     {

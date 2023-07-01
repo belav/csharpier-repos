@@ -1,3 +1,6 @@
+using System;
+using System.Security;
+
 //
 // SecurityCriticalAttributeTest.cs -
 //	NUnit Test Cases for SecurityCriticalAttribute
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
 
 namespace MonoTests.System.Security
 {

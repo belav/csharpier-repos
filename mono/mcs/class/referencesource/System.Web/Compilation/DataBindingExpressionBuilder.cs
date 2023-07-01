@@ -7,10 +7,10 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Security.Permissions;
     using System.CodeDom;
     using System.Diagnostics;
     using System.Reflection;
+    using System.Security.Permissions;
     using System.Web.UI;
 
     internal class DataBindingExpressionBuilder : ExpressionBuilder

@@ -2,21 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 #if NETFX_CORE
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Web.Http;
+using System.Collections;using System.Collections.Generic;using System.Diagnostics.Contracts;using System.Linq;using System.Text;using System.Web.Http;
 #else
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Net.Http.Internal;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Web.Http;
+using System.Collections.Generic;using System.Collections.Specialized;using System.Diagnostics.Contracts;using System.Linq;using System.Net.Http.Internal;using System.Runtime.Serialization;using System.Text;using System.Web.Http;
 #endif
 
 #if NETFX_CORE

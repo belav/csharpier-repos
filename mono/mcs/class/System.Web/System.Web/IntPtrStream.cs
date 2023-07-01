@@ -1,3 +1,4 @@
+using System.IO;
 //
 // System.IO.IntPtrStream: A stream that is backed up by unmanaged memory
 //
@@ -37,7 +38,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.IO;
 
 namespace System.Web
 {

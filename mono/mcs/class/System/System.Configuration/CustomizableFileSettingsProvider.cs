@@ -29,17 +29,7 @@
 
 #if CONFIGURATION_DEP
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Xml;
+using System;using System.Collections;using System.Collections.Generic;using System.Collections.Specialized;using System.Configuration;using System.Globalization;using System.IO;using System.Reflection;using System.Security.Cryptography;using System.Text;using System.Xml;
 
 namespace System.Configuration
 {

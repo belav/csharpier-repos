@@ -4,19 +4,19 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Configuration;
     using System.Globalization;
+    using System.IO;
     using System.Net.Security;
+    using System.Runtime.Remoting.Messaging;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.Runtime.Remoting.Messaging;
     using System.Xml;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
-    using System.IO;
 
     public sealed partial class SecurityElement : SecurityElementBase
     {

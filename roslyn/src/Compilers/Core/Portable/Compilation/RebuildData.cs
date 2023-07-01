@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection.Metadata;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis

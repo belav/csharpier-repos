@@ -5,8 +5,9 @@ using System;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
-using Microsoft.Internal;
 using System.Reflection;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Diagnostics
 {

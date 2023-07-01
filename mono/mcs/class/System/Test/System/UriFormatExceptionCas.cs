@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // UriFormatExceptionCas.cs - CAS unit tests for System.UriFormatException
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

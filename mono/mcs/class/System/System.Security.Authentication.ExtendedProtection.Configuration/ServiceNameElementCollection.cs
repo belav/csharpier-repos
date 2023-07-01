@@ -27,18 +27,7 @@
 //
 #if CONFIGURATION_DEP
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
+using System;using System.Collections;using System.Collections.Generic;using System.Collections.ObjectModel;using System.ComponentModel;using System.Configuration;using System.Net;using System.Net.Security;using System.Reflection;using System.Runtime.Serialization;using System.Text;using System.Xml;
 
 namespace System.Security.Authentication.ExtendedProtection.Configuration
 {

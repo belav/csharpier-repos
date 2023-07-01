@@ -1,3 +1,8 @@
+using System;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // LiteralControlCas.cs
 //	- CAS unit tests for System.Web.UI.LiteralControlCas
@@ -28,11 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

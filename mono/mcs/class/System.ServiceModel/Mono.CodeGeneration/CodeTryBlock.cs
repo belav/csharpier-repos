@@ -22,17 +22,10 @@
 //
 
 #if !FULL_AOT_RUNTIME
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Emit;
-
-using DictionaryEntry = System.Collections.Generic.KeyValuePair<
+using System;using System.Collections;using System.Collections.Generic;using System.Reflection;using System.Reflection.Emit;using DictionaryEntry = System.Collections.Generic.KeyValuePair<
     Mono.CodeGeneration.CodeVariableDeclaration,
     Mono.CodeGeneration.CodeBlock
->;
-using ArrayList = System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<
+>;using ArrayList = System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<
     Mono.CodeGeneration.CodeVariableDeclaration,
     Mono.CodeGeneration.CodeBlock
 >>;

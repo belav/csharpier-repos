@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.BuildEngine

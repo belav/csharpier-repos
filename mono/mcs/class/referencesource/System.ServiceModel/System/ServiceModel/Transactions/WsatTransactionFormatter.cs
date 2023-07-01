@@ -7,12 +7,13 @@ namespace System.ServiceModel.Transactions
     using System.Runtime;
     using System.Security.Permissions;
     using System.ServiceModel.Channels;
+    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
     using System.ServiceModel.Security;
     using System.Transactions;
     using System.Xml;
+
     using Microsoft.Transactions.Wsat.Messaging;
     using Microsoft.Transactions.Wsat.Protocol;
-    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
 
     abstract class WsatTransactionFormatter : TransactionFormatter
     {

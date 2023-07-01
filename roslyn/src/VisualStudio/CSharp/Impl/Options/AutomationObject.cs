@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.BraceCompletion;
 using Microsoft.CodeAnalysis.CodeStyle;

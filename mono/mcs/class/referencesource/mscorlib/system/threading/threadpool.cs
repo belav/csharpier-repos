@@ -32,20 +32,12 @@
 
 namespace System.Threading
 {
-    using System.Security;
     using System.Runtime.Remoting;
+    using System.Security;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Tracing;
+    using System;using System.Runtime.CompilerServices;using System.Runtime.ConstrainedExecution;using System.Runtime.InteropServices;using System.Runtime.Versioning;using System.Collections.Generic;using System.Diagnostics.Contracts;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.Tracing;
 #if !MONO
     using Microsoft.Win32;
 #endif

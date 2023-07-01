@@ -32,13 +32,14 @@
 
 
 using System;
-using System.Text;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
+using System.IO;
 using System.Reflection;
+using System.Resources;
+using System.Text;
 using System.Xml;
+
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Tasks.GenerateResourceInternal;

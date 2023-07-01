@@ -1,3 +1,5 @@
+using System.CodeDom;
+using System.Collections.Specialized;
 //
 // System.Web.Services.Description.WebReference.cs
 //
@@ -29,8 +31,6 @@
 //
 
 using System.Web.Services.Discovery;
-using System.Collections.Specialized;
-using System.CodeDom;
 
 namespace System.Web.Services.Description
 {

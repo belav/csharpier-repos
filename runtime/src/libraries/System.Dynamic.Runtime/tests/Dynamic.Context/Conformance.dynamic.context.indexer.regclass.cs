@@ -1490,6 +1490,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclass.regclass023.regclass023
 {
+    using System.Collections.Generic;
     // <Title> Tests regular class indexer used in query expression.</Title>
     // <Description>
     // </Description>
@@ -1497,7 +1498,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
     //<Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

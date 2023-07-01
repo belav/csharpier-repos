@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
+using Debug = System.Diagnostics.Debug;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 using Internal.NativeFormat;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime
 {

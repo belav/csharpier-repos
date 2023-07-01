@@ -6,9 +6,9 @@ namespace System.ServiceModel
 {
     using System.Globalization;
     using System.ServiceModel.Activities;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using SR2 = System.ServiceModel.Activities.SR;
 
     public class CorrelationActionMessageFilter : MessageFilter
     {

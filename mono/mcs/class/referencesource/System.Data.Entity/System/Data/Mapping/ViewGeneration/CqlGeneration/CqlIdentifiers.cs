@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="CqlIdentifiers.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,10 +10,9 @@
 
 
 using System.Data.Common.Utils;
-using System.Text;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

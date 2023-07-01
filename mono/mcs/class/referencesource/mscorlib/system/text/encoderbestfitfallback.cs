@@ -10,10 +10,10 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal class InternalEncoderBestFitFallback : EncoderFallback

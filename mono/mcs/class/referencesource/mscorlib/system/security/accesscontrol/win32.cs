@@ -1,17 +1,14 @@
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 #if FEATURE_CORRUPTING_EXCEPTIONS
 using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-using System.Runtime.Versioning;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Diagnostics.Contracts;
+using System.Runtime.Versioning;using System.Security;using System.Security.Permissions;using System.Security.Principal;using System.Diagnostics.Contracts;
 
 namespace System.Security.AccessControl
 {

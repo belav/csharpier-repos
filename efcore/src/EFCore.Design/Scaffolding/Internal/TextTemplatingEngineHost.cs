@@ -4,6 +4,7 @@
 using System.CodeDom.Compiler;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.VisualStudio.TextTemplating;

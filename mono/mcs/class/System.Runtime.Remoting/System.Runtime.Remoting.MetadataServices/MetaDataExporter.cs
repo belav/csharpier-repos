@@ -30,13 +30,13 @@
 
 using System.Collections;
 using System.IO;
-using System.Text;
-using System.Xml;
-using System.Reflection;
 using System.Net;
+using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
 
 namespace System.Runtime.Remoting.MetadataServices
 {

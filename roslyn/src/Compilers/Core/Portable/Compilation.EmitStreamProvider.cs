@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

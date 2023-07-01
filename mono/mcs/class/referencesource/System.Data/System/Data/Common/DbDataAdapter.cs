@@ -9,9 +9,9 @@
 namespace System.Data.Common
 {
     using System;
-    using System.ComponentModel;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.ProviderBase;
     using System.Diagnostics;

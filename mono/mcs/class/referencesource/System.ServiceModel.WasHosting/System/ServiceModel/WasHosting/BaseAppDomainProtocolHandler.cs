@@ -7,15 +7,15 @@ namespace System.ServiceModel.WasHosting
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
-    using System.Web;
-    using System.Web.Hosting;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.Web;
+    using System.Web.Hosting;
 
     abstract class BaseAppDomainProtocolHandler : AppDomainProtocolHandler
     {

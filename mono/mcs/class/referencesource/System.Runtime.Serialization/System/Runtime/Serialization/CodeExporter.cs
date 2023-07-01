@@ -9,6 +9,10 @@ namespace System.Runtime.Serialization
     using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
+    using DataContractDictionary = System.Collections.Generic.Dictionary<
+        System.Xml.XmlQualifiedName,
+        DataContract
+    >;
     using System.ComponentModel;
     using System.Globalization;
     using System.Reflection;
@@ -16,10 +20,6 @@ namespace System.Runtime.Serialization
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<
-        System.Xml.XmlQualifiedName,
-        DataContract
-    >;
 
     class CodeExporter
     {

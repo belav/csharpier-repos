@@ -2,10 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using static System.Collections.Specialized.BitVector32;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

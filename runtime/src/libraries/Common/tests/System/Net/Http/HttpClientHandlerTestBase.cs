@@ -5,10 +5,7 @@ using System.Collections.Generic;
 #if !NETCOREAPP
 using System.Diagnostics;
 #endif
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit.Abstractions;
+using System.IO;using System.Threading;using System.Threading.Tasks;using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {

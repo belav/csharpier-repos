@@ -4,14 +4,7 @@
 
 #if FEATURE_REFLECTIONCONTEXT
 
-using System;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Reflection;
-using System.Threading;
-using Microsoft.Internal;
+using System;using System.ComponentModel.Composition.Hosting;using System.ComponentModel.Composition.Primitives;using System.Diagnostics.CodeAnalysis;using System.Globalization;using System.Reflection;using System.Threading;using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition
 {

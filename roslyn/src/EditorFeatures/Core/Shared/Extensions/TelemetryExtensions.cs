@@ -5,6 +5,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;

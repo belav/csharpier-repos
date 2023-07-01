@@ -8,6 +8,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+
 using Xunit;
 
 namespace System.Diagnostics.TextWriterTraceListenerTests

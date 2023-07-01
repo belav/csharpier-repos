@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 // System.Runtime.CompilerServices.RuntimeHelpers
 //
 // Sean MacIsaac (macisaac@ximian.com)
@@ -30,8 +32,6 @@
 
 using System.Runtime.Serialization;
 using System.Runtime.Versioning;
-using System.Runtime.ConstrainedExecution;
-using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {

@@ -1,3 +1,9 @@
+using System;
+using System.Data;
+using System.Data.OleDb;
+
+using GHTUtils;
+using GHTUtils.Base;
 // Authors:
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.OleDb;
-
-using GHTUtils;
-using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {

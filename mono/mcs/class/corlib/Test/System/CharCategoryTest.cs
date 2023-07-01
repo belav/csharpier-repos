@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Reflection;
+
 //
 // CharCategoryTest.cs
 //
@@ -12,9 +16,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
 
 namespace MonoTests.System
 {

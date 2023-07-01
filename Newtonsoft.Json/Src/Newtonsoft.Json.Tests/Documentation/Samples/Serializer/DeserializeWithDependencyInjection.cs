@@ -25,9 +25,7 @@
 
 #if !(NET20 || NET35 || NET40 || DNXCORE50 || PORTABLE40 || PORTABLE) || NETSTANDARD1_0 || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System;using System.Collections.Generic;using System.Text;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -35,14 +33,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using Autofac;
-using Autofac.Core;
-using Autofac.Core.Activators.Reflection;
-using Newtonsoft.Json.Tests.Serialization;
-using LogService = Newtonsoft.Json.Tests.Serialization.LogManager;
+using System.Runtime.Serialization;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Serialization;using Autofac;using Autofac.Core;using Autofac.Core.Activators.Reflection;using Newtonsoft.Json.Tests.Serialization;using LogService = Newtonsoft.Json.Tests.Serialization.LogManager;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 {

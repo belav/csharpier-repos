@@ -14,6 +14,7 @@ namespace Microsoft.Win32.SafeHandles
     using System.IO;
     using System.Runtime.Versioning;
     using System.Security.Permissions;
+
     using Microsoft.Win32.SafeHandles;
 
 #pragma warning disable 618    // Have not migrated to v4 transparency yet

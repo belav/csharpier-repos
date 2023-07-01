@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Globalization;
+using System.Reflection;
 //
 // XmlTypeMapping.cs:
 //
@@ -30,11 +34,7 @@
 //
 
 using System.Xml;
-using System;
-using System.Collections;
-using System.Globalization;
 using System.Xml.Schema;
-using System.Reflection;
 
 namespace System.Xml.Serialization
 {

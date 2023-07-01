@@ -13,8 +13,8 @@
 
 namespace System.Web.Util
 {
-    using System.Text;
     using System.Runtime.Serialization.Formatters;
+    using System.Text;
 
     internal class DoubleLinkList : DoubleLink
     {

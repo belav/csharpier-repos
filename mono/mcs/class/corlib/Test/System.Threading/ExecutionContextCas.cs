@@ -27,12 +27,7 @@
 //
 #if MONO_FEATURE_CAS
 
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
-
-using NUnit.Framework;
+using System;using System.Security;using System.Security.Permissions;using System.Threading;using NUnit.Framework;
 
 namespace MonoCasTests.System.Threading
 {

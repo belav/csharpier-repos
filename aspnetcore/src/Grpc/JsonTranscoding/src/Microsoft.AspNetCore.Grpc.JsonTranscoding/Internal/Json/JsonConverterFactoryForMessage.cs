@@ -4,8 +4,9 @@
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Google.Protobuf;
 using Type = System.Type;
+
+using Google.Protobuf;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

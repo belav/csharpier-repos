@@ -37,10 +37,7 @@ using MonoSecurity::Mono.Security.Protocol.Ntlm;
 using Mono.Security.Protocol.Ntlm;
 #endif
 
-using System;
-using System.Collections;
-using System.Net;
-using System.Runtime.CompilerServices;
+using System;using System.Collections;using System.Net;using System.Runtime.CompilerServices;
 
 namespace Mono.Http
 {

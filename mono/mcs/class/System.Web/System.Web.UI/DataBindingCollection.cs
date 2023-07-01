@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Web.UI.DataBindingCollection.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.ComponentModel;
-using System.Collections;
 using System.Security.Permissions;
 
 namespace System.Web.UI

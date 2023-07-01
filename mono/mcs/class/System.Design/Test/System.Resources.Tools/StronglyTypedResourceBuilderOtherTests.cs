@@ -1,3 +1,12 @@
+using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Resources.Tools;
+
+using Microsoft.CSharp;
 //
 // StronglyTypedResourceBuilderOtherTests.cs - tests the internalClass,
 // codeProvider and resourceList params of the main Create overload
@@ -29,14 +38,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Resources.Tools;
-using System.CodeDom;
-using Microsoft.CSharp;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Drawing;
 
 namespace MonoTests.System.Resources.Tools
 {

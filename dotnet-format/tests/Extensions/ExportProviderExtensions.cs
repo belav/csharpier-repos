@@ -6,6 +6,7 @@ using System.Composition;
 using System.Composition.Hosting.Core;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.VisualStudio.Composition;
 
 namespace Microsoft.CodeAnalysis.Tools.Tests

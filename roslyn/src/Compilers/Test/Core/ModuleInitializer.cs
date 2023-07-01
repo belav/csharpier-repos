@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Test.Utilities

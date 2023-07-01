@@ -7,11 +7,12 @@
 namespace System.Text
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Collections;
-    using System.Runtime.Remoting;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Runtime.Remoting;
     using System.Threading;
+
     using Win32Native = Microsoft.Win32.Win32Native;
 
     // This class overrides Encoding with the things we need for our NLS Encodings

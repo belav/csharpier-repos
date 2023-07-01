@@ -31,17 +31,13 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
 #if MONO_STRICT
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
+using System.Data.Linq;using System.Data.Linq.Mapping;
 #else
-using DbLinq.Data.Linq;
-using DbLinq.Data.Linq.Mapping;
+using DbLinq.Data.Linq;using DbLinq.Data.Linq.Mapping;
 #endif
 
-using DbLinq.Null;
-using NUnit.Framework;
+using DbLinq.Null;using NUnit.Framework;
 
 namespace DbLinqTest
 {

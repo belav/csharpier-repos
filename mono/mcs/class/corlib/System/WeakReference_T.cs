@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // WeakReference_T.cs
 //
@@ -25,7 +26,6 @@
 // THE SOFTWARE.
 
 using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
 
 namespace System
 {

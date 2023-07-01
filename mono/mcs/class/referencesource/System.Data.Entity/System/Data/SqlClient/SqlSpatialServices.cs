@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Spatial;
-using System.Data.SqlClient.Internal;
-using System.Data.Spatial.Internal;
 using System.Data.Common.Utils;
+using System.Data.Spatial;
+using System.Data.Spatial.Internal;
+using System.Data.SqlClient.Internal;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Serialization;

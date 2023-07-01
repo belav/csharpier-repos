@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Json;
+using System.Text;
+
 //
 // JsonValueTest.cs: Tests for JSonValue
 //
@@ -7,10 +12,6 @@
 //   Miguel de Icaza
 //
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
-using System.Json;
 
 namespace MonoTests.System
 {

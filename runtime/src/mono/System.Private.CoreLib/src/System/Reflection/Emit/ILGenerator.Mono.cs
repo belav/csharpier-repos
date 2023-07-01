@@ -34,11 +34,7 @@
 //
 
 #if MONO_FEATURE_SRE
-using System.Buffers.Binary;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.SymbolStore;
-using System.Runtime.InteropServices;
+using System.Buffers.Binary;using System.Collections.Generic;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.SymbolStore;using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {

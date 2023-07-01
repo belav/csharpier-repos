@@ -1,3 +1,4 @@
+using System.IO;
 //
 // System.Threading.Mutex.cs
 //
@@ -29,12 +30,11 @@
 //
 
 using System.Runtime.CompilerServices;
-using System.Security.Permissions;
 
 using System.Runtime.ConstrainedExecution;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
+using System.Security.Permissions;
 
 namespace System.Threading
 {

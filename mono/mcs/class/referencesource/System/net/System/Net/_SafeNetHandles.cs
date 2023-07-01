@@ -100,23 +100,24 @@ Revision History:
 
 namespace System.Net
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Net.Cache;
-    using System.Net.Sockets;
     using System.Net.NetworkInformation;
+    using System.Net.Sockets;
     using System.Net.WebSockets;
-    using System.Security;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Threading;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System.ComponentModel;
     using System.Text;
-    using System.Globalization;
+    using System.Threading;
+
     using Microsoft.Win32.SafeHandles;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.Generic;
 
 #if DEBUG
     //

@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis.BraceCompletion;
+using static Microsoft.CodeAnalysis.BraceCompletion.AbstractBraceCompletionService;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
@@ -15,7 +17,6 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.VisualStudio.Text.Editor;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.BraceCompletion.AbstractBraceCompletionService;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
 {

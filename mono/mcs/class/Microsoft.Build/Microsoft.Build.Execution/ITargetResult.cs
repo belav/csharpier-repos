@@ -1,3 +1,4 @@
+using System;
 // ITargetResult.cs
 //
 // Author:
@@ -26,8 +27,6 @@
 //
 
 using Microsoft.Build.Framework;
-
-using System;
 
 namespace Microsoft.Build.Execution
 {

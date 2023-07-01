@@ -4,10 +4,10 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Description;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
-    using System.Diagnostics;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
 
     class ComPlusServiceLoader

@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Security.Cryptography;
+
 using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Antiforgery;

@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Threading;
+
+using MonoTests.Helpers;
 //
 // SmtpClientTest.cs - NUnit Test Cases for System.Net.Mail.SmtpClient
 //
@@ -7,13 +14,6 @@
 // (C) 2006 John Luke
 //
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Net.Mail;
-using System.Net.Mime;
-using System.Threading;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Net.Mail
 {

@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Collections.Generic;
 using System.Reflection.Runtime.BindingFlagSupport;
 
 namespace System.Reflection.Runtime.TypeInfos

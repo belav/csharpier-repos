@@ -1,3 +1,13 @@
+using System;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.WebControls.Panel.cs
 //
@@ -30,15 +40,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Drawing;
-using MonoTests.stand_alone.WebHarness;
-using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

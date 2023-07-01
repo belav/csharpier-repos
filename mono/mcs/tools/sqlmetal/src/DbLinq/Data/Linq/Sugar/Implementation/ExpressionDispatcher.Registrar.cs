@@ -30,12 +30,11 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DbLinq.Util;
 
 using DbLinq.Data.Linq.Mapping;
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.Expressions;
-
+using DbLinq.Util;
 #if MONO_STRICT
 using DataContext = System.Data.Linq.DataContext;
 #else

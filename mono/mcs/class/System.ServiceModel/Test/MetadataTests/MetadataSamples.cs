@@ -24,15 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.IO;
-using System.Reflection;
-using System.ServiceModel;
-using System.ServiceModel.Security;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Configuration;
-using WS = System.Web.Services.Description;
+using System;using System.IO;using System.Reflection;using System.ServiceModel;using System.ServiceModel.Security;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Configuration;using WS = System.Web.Services.Description;
 
 namespace MonoTests.System.ServiceModel.MetadataTests
 {

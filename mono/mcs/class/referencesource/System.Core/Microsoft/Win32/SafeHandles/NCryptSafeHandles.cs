@@ -6,12 +6,12 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 
 namespace Microsoft.Win32.SafeHandles
 {

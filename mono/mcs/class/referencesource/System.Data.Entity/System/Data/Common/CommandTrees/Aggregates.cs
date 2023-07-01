@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Data.Common;
 using System.Collections.Generic;
-using System.Data.Metadata.Edm;
+using System.Data.Common;
 using System.Data.Common.CommandTrees.Internal;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
 namespace System.Data.Common.CommandTrees

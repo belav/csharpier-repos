@@ -6,14 +6,14 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.Web.Services;
-    using System.Xml.Serialization;
     using System;
-    using System.Reflection;
-    using System.Xml;
     using System.Collections;
-    using System.IO;
     using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Web.Services;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapUnknownHeader.uex' path='docs/doc[@for="SoapUnknownHeader"]/*' />
     /// <devdoc>

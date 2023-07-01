@@ -25,13 +25,7 @@
 
 #if !(NET20 || NET35)
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;using System.Linq;using System.Text;using System;using System.Linq.Expressions;using System.Reflection;using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities
 {

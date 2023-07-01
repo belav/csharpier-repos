@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
-    using System.ServiceModel;
     using System.IdentityModel.Tokens;
     using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
+    using System.ServiceModel;
 
     public sealed class SecureConversationServiceCredential
     {

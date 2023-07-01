@@ -5,14 +5,14 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 using ILCompiler.DependencyAnalysis;
+
+using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 using ILCompiler.Logging;
+using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 using ILLink.Shared.TrimAnalysis;
 
 using Internal.TypeSystem;
-
-using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
-using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 #nullable enable
 

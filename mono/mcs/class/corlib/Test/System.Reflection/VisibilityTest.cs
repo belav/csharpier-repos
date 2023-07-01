@@ -26,11 +26,7 @@
 
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 
-using System;
-using System.Linq;
-using System.Reflection;
-using NUnit.Framework;
-using System.Collections;
+using System;using System.Linq;using System.Reflection;using NUnit.Framework;using System.Collections;
 
 namespace MonoTests.System.Reflection.VisibilityTypes
 {

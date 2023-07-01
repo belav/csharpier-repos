@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
+
 /* -*- Mode: csharp; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 //
 // GZipStreamTest.cs - NUnit Test Cases for the System.IO.Compression.GZipStream class
@@ -9,10 +14,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
 
 namespace MonoTests.System.IO.Compression
 {

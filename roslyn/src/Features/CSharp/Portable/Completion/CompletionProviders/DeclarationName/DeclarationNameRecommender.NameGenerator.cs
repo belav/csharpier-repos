@@ -3,12 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
+using Words = System.Collections.Immutable.ImmutableArray<string>;
+
 using Humanizer;
 using Microsoft.CodeAnalysis.Shared.Collections;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Microsoft.CodeAnalysis.Text;
-using Words = System.Collections.Immutable.ImmutableArray<string>;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
 {

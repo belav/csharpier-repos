@@ -3,10 +3,11 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Mono.Linker.Tests.Cases.Expectations.Assertions;
-using Mono.Linker.Tests.Cases.Expectations.Helpers;
 using DAM = System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute;
 using DAMT = System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
+
+using Mono.Linker.Tests.Cases.Expectations.Assertions;
+using Mono.Linker.Tests.Cases.Expectations.Helpers;
 
 namespace Mono.Linker.Tests.Cases.DataFlow
 {

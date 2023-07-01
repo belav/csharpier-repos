@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using Mono.CodeContracts.Static.AST;
 
 namespace Mono.CodeContracts.Static.ContractExtraction

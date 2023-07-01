@@ -24,16 +24,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using SysConfig = System.Configuration.Configuration;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Text;
-using System.Reflection;
-using System.Globalization;
-using System.Configuration;
-using System.Collections.Generic;
-using SysConfig = System.Configuration.Configuration;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;

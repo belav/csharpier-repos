@@ -4,7 +4,6 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -17,6 +16,7 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
+    using System.Text;
 
     using System.Xml;
 

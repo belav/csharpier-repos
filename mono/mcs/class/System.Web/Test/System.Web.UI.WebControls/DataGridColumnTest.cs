@@ -28,12 +28,12 @@
 //
 
 using System;
+//using System.Drawing;
+using SDColor = System.Drawing.Color;
 using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-//using System.Drawing;
-using SDColor = System.Drawing.Color;
 
 using NUnit.Framework;
 

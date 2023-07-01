@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Automation;
 using System.Windows.Documents;
+
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;

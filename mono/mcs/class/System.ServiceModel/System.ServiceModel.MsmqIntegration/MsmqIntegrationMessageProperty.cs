@@ -27,12 +27,12 @@
 
 using System;
 using System.Messaging;
+using MQMessage = System.Messaging.Message;
+using MQMessageType = System.Messaging.MessageType;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
 using SMessage = System.ServiceModel.Channels.Message;
-using MQMessage = System.Messaging.Message;
-using MQMessageType = System.Messaging.MessageType;
 
 namespace System.ServiceModel.MsmqIntegration
 {

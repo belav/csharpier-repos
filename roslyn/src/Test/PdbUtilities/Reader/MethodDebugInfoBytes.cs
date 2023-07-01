@@ -7,6 +7,7 @@
 extern alias DSR;
 using System.Collections.Immutable;
 using System.Linq;
+
 using DSR::Microsoft.DiaSymReader;
 using Microsoft.CodeAnalysis.Debugging;
 using Microsoft.CodeAnalysis.PooledObjects;

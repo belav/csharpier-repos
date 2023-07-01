@@ -3,18 +3,10 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.DependencyInjection;
 #if GENEVA_TELEMETRY
-using OpenTelemetry.Trace;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Exporter.Geneva;
-using System.Diagnostics.Metrics;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Collections.Generic;
+using OpenTelemetry.Trace;using OpenTelemetry.Metrics;using OpenTelemetry.Exporter.Geneva;using System.Diagnostics.Metrics;using Microsoft.AspNetCore.Http;using System.Threading.Tasks;using System.Diagnostics;using System.Collections.Generic;
 #endif
 
 namespace NetCoreServer

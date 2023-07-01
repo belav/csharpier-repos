@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+
 //
 //
 // ClaimsPrincipalTest.cs - NUnit Test Cases for System.Security.Claims.ClaimsPrincipal
@@ -5,11 +11,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
 
 namespace MonoTests.System.Security.Claims
 {

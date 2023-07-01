@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal

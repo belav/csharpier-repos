@@ -11,13 +11,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
 {
     using System.Collections.Generic;
     using System.Data.Entity;
+    using Som = System.Data.EntityModel.SchemaObjectModel;
     using System.Data.Metadata.Edm;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Xml;
-    using Som = System.Data.EntityModel.SchemaObjectModel;
 
     class ReturnType : ModelFunctionTypeElement
     {

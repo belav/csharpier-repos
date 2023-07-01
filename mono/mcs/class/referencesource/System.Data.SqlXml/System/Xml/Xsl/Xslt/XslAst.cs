@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Globalization;
 //------------------------------------------------------------------------------
 // <copyright file="XslAst.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,16 +10,12 @@
 //------------------------------------------------------------------------------
 
 using System.Text;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Xml.Xsl.Qil;
 
 namespace System.Xml.Xsl.Xslt
 {
-    using ContextInfo = XsltInput.ContextInfo;
     using XPathQilFactory = System.Xml.Xsl.XPath.XPathQilFactory;
+    using ContextInfo = XsltInput.ContextInfo;
 
     // Set of classes that represent XSLT AST
 

@@ -26,19 +26,13 @@
 using System;
 using System.Collections.Generic;
 #if HAVE_INOTIFY_COLLECTION_CHANGED
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using System.Collections.ObjectModel;using System.Collections.Specialized;
 #endif
 using System.ComponentModel;
 #if HAVE_DYNAMIC
-using System.Dynamic;
-using System.Linq.Expressions;
+using System.Dynamic;using System.Linq.Expressions;
 #endif
-using System.IO;
-using Newtonsoft.Json.Utilities;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+using System.IO;using Newtonsoft.Json.Utilities;using System.Globalization;using System.Runtime.CompilerServices;using System.Diagnostics.CodeAnalysis;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

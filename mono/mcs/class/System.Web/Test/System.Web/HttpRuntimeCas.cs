@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Principal;
+using System.Web;
+
 //
 // HttpRuntimeCas.cs - CAS unit tests for System.Web.HttpRuntime
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

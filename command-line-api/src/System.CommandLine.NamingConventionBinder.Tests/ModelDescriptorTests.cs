@@ -4,6 +4,7 @@
 using System.CommandLine.Tests.Binding;
 using System.CommandLine.Tests.Utility;
 using System.Linq;
+
 using FluentAssertions;
 using Xunit;
 

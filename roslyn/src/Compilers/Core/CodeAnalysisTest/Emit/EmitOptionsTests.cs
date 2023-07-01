@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Security.Cryptography;
+
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;

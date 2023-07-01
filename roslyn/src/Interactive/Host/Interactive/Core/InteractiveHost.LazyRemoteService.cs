@@ -13,10 +13,11 @@ using System.IO.Pipes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Roslyn.Utilities;
-using StreamJsonRpc;
 using Scripting::Microsoft.CodeAnalysis.Scripting.Hosting;
+using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.Interactive
 {

@@ -16,8 +16,8 @@
 namespace System.Runtime.Remoting.Activation
 {
     using System;
-    using System.Runtime.Remoting.Messaging;
     using System.Collections;
+    using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
 
     [System.Runtime.InteropServices.ComVisible(true)]

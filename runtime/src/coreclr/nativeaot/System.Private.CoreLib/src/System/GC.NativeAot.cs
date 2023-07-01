@@ -12,8 +12,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-using Internal.Runtime.CompilerServices;
 using Internal.Runtime;
+
+using Internal.Runtime.CompilerServices;
 
 namespace System
 {

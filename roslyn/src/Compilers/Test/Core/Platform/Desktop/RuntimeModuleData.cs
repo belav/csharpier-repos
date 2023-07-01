@@ -6,21 +6,7 @@
 
 #if NET472
 
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeGen;
-using Microsoft.CodeAnalysis.Emit;
-using Roslyn.Utilities;
+using System;using System.Collections.Concurrent;using System.Collections.Generic;using System.Collections.Immutable;using System.Diagnostics;using System.IO;using System.Linq;using System.Reflection;using System.Runtime.Serialization;using System.Text;using System.Threading;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.CodeGen;using Microsoft.CodeAnalysis.Emit;using Roslyn.Utilities;
 
 namespace Roslyn.Test.Utilities.Desktop
 {

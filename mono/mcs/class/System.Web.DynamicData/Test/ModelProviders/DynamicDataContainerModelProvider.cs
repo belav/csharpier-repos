@@ -6,8 +6,9 @@ using System.Web;
 using System.Web.DynamicData;
 using System.Web.DynamicData.ModelProviders;
 
-using MonoTests.DataSource;
 using MonoTests.Common;
+
+using MonoTests.DataSource;
 
 namespace MonoTests.ModelProviders
 {

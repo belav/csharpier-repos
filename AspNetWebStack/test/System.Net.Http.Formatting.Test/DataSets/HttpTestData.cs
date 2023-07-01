@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http.Formatting.DataSets.Types;
 using System.Net.Http.Headers;
 using System.Text;
+
 using Microsoft.TestCommon;
 
 namespace System.Net.Http.Formatting.DataSets

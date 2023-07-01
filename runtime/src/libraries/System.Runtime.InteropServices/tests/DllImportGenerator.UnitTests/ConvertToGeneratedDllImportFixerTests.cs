@@ -5,13 +5,13 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Xunit;
-using static Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportFixer;
 
 using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportAnalyzer,
     Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportFixer
 >;
+using static Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportFixer;
+using Xunit;
 
 namespace DllImportGenerator.UnitTests
 {

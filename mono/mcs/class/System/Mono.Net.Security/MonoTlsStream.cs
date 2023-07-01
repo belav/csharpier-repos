@@ -36,17 +36,7 @@ using Mono.Security.Interface;
 #endif
 #endif
 
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.Security;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
-using System.Security.Cryptography;
+using System;using System.IO;using System.Net;using System.Net.Sockets;using System.Net.Security;using System.Threading;using System.Threading.Tasks;using System.Security.Authentication;using System.Security.Cryptography.X509Certificates;using System.Security.Principal;using System.Security.Cryptography;
 
 namespace Mono.Net.Security
 {

@@ -6,9 +6,9 @@ namespace System.ServiceModel.Channels
 {
     using System.IO;
     using System.ServiceModel.Diagnostics;
+    using WebTD = System.ServiceModel.Web.Diagnostics.Application.TD;
     using System.Text;
     using System.Xml;
-    using WebTD = System.ServiceModel.Web.Diagnostics.Application.TD;
 
     class WebScriptMetadataMessageEncoderFactory : MessageEncoderFactory
     {

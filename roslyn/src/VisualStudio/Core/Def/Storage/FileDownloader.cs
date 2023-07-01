@@ -4,6 +4,7 @@
 
 using System.IO;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.SymbolSearch;
 using Microsoft.VisualStudio.RemoteControl;
 

@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Activation;
     using System.Collections.Generic;
     using System.Net.Security;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Security;
 
     using System.Xml;

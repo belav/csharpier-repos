@@ -25,13 +25,13 @@
 //	Gary Barnett	gary.barnett.mono@gmail.com
 
 using System;
-using System.Runtime.Serialization;
-using System.Drawing;
 using System.ComponentModel;
-using System.Reflection;
 using System.ComponentModel.Design;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Drawing;
 using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace System.Resources

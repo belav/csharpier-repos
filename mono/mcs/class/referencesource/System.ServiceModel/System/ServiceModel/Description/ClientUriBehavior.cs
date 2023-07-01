@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Description
 {
     using System;
+    using System.Collections.Generic;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.Collections.Generic;
 
     public class ClientViaBehavior : IEndpointBehavior
     {

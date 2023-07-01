@@ -7,11 +7,11 @@
 // correctness and assembly diffs.
 //
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using System.Diagnostics;
 
 public class BilinearTest
 {

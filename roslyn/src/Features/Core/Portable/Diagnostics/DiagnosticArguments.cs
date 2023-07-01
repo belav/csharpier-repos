@@ -4,6 +4,7 @@
 
 using System.Diagnostics;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Diagnostics

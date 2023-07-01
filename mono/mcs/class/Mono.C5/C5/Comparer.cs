@@ -1,3 +1,9 @@
+using System;
+using SCG = System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Reflection.Emit;
+
 /*
  Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,11 +26,6 @@
 */
 
 using C5;
-using System;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Diagnostics;
-using SCG = System.Collections.Generic;
 
 namespace C5
 {

@@ -3,8 +3,8 @@
 //
 
 using System;
-using System.Numerics;
 using System.IO;
+using System.Numerics;
 
 internal partial class VectorTest
 {

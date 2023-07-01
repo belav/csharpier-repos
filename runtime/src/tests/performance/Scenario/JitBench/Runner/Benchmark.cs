@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+
 using Microsoft.Xunit.Performance.Api;
 using Microsoft.Xunit.Performance.Api.Profilers.Etw;
 

@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.Extensions.FileSystemGlobbing.Util;
 
 namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments

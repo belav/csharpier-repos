@@ -4,8 +4,9 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Xunit;
+
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {

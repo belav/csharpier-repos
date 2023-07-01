@@ -7,16 +7,17 @@
 //
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Soap;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Messaging;
-using System.Collections;
+using System.Runtime.Remoting.Proxies;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Soap;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization.Formatters.Soap

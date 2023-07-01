@@ -7,6 +7,7 @@ namespace Microsoft.Build.Tasks.Xaml
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+
     using Microsoft.Build.Utilities;
 
     public class BuildExtensionContext

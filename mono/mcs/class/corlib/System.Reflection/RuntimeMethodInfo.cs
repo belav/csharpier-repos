@@ -39,10 +39,7 @@ using System.Runtime.Serialization;
 #if !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Security;
-using System.Threading;
-using System.Text;
-using System.Diagnostics;
+using System.Security;using System.Threading;using System.Text;using System.Diagnostics;
 
 namespace System.Reflection
 {

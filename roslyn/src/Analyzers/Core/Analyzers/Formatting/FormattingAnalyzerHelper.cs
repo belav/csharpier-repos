@@ -6,10 +6,10 @@
 
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Text;
 
 using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
 using FormattingProvider = Microsoft.CodeAnalysis.Formatting.ISyntaxFormatting;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {

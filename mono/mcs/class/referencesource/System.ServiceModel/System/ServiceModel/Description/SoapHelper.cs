@@ -6,8 +6,8 @@ namespace System.ServiceModel.Description
     using System.Collections.Generic;
     using System.Runtime;
     using System.ServiceModel.Dispatcher;
-    using System.Xml;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
 
     static class SoapHelper
     {

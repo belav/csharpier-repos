@@ -1,3 +1,6 @@
+using System;
+using System.Net.Mime;
+
 //
 // ContentTypeTest.cs - NUnit Test Cases for System.Net.Mime.ContentType
 //
@@ -7,8 +10,6 @@
 // (C) 2005 John Luke
 //
 using NUnit.Framework;
-using System;
-using System.Net.Mime;
 
 namespace MonoTests.System.Net.Mime
 {

@@ -1,3 +1,10 @@
+using System;
+using System.EnterpriseServices;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.Util;
+
 //
 // TransactionsCas.cs - CAS unit tests for System.Web.Util.Transactions
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.EnterpriseServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.Util;
 
 namespace MonoCasTests.System.Web.Util
 {

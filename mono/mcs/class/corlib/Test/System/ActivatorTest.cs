@@ -18,13 +18,9 @@ using System.Reflection.Emit;
 #endif
 using System.Runtime.InteropServices;
 #if !DISABLE_REMOTING
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting;using System.Runtime.Remoting.Channels;
 #endif
-using System.Security;
-using System.Security.Permissions;
-
-using NUnit.Framework;
+using System.Security;using System.Security.Permissions;using NUnit.Framework;
 
 // The class in this namespace is used by the main test class
 namespace MonoTests.System.ActivatorTestInternal

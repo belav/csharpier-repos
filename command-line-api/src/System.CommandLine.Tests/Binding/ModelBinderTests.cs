@@ -7,9 +7,10 @@ using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.IO;
+using System.Threading.Tasks;
+
 using FluentAssertions;
 using Xunit;
-using System.Threading.Tasks;
 
 namespace System.CommandLine.Tests.Binding
 {

@@ -29,6 +29,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows

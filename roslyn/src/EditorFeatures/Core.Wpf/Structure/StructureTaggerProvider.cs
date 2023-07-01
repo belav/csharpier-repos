@@ -5,7 +5,9 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis.Editor.Implementation.Structure;
+using StructureTag = Microsoft.CodeAnalysis.Editor.Implementation.Structure.StructureTag;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Host.Mef;
@@ -17,7 +19,6 @@ using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Projection;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
-using StructureTag = Microsoft.CodeAnalysis.Editor.Implementation.Structure.StructureTag;
 
 namespace Microsoft.CodeAnalysis.Editor.Structure
 {

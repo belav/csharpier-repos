@@ -1,3 +1,4 @@
+using System.Collections;
 //---------------------------------------------------------------------
 // <copyright file="ObjectStateEntry.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -11,7 +12,6 @@ using System.Data.Common;
 using System.Data.Metadata.Edm;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
-using System.Collections;
 
 namespace System.Data.Objects
 {

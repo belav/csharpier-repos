@@ -14,20 +14,15 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT // ComObject
 
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic;using System.Diagnostics;
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else
 using Microsoft.Linq.Expressions;
 #endif
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
+using System.Reflection;using System.Runtime.InteropServices;using System.Security;using System.Security.Permissions;
 
 #if CODEPLEX_40
 namespace System.Dynamic

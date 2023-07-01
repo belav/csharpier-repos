@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using System.Text.Json.Serialization.Tests;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Text.Json.SourceGeneration.Tests

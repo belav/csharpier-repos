@@ -5,8 +5,8 @@
 namespace System.IdentityModel.Metadata
 {
     using System.Collections.Generic;
-    using System.Security.Claims;
     using SysClaimTypes = System.IdentityModel.Claims.ClaimTypes;
+    using System.Security.Claims;
 
     /// <summary>
     /// This class represents the displayable claim object. Usually, the display tag

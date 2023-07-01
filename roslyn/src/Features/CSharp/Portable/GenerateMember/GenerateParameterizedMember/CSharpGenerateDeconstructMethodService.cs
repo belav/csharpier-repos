@@ -8,6 +8,7 @@ using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.CodeGeneration;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMember;

@@ -21,14 +21,7 @@ namespace Castle.DynamicProxy.Tests
     using System.Xml.Serialization;
 #endif
 
-    using Castle.DynamicProxy.Generators;
-    using Castle.DynamicProxy.Internal;
-    using Castle.DynamicProxy.Tests.Classes;
-    using Castle.DynamicProxy.Tests.InterClasses;
-    using Castle.DynamicProxy.Tests.Interceptors;
-    using Castle.DynamicProxy.Tests.Interfaces;
-
-    using NUnit.Framework;
+    using Castle.DynamicProxy.Generators;using Castle.DynamicProxy.Internal;using Castle.DynamicProxy.Tests.Classes;using Castle.DynamicProxy.Tests.InterClasses;using Castle.DynamicProxy.Tests.Interceptors;using Castle.DynamicProxy.Tests.Interfaces;using NUnit.Framework;
 
     [TestFixture]
     public class InterceptorSelectorTestCase : BasePEVerifyTestCase

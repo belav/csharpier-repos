@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CommandLine;
 using Roslyn.Test.Utilities;
 using Xunit;

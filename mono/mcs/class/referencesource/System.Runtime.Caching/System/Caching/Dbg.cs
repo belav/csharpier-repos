@@ -1,8 +1,3 @@
-// <copyright file="Dbg.cs" company="Microsoft">
-//   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
-// </copyright>
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,10 +8,16 @@ using System.Globalization;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System.Runtime.Versioning;
+
+// <copyright file="Dbg.cs" company="Microsoft">
+//   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+// </copyright>
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Runtime.Caching
 {

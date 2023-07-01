@@ -7,14 +7,15 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using Microsoft.CodeAnalysis.CodeGen;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Roslyn.Utilities;
 
 using static System.Linq.ImmutableArrayExtensions;
+using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
+
+using Microsoft.CodeAnalysis.CodeGen;
 using static Microsoft.CodeAnalysis.CSharp.Binder;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {

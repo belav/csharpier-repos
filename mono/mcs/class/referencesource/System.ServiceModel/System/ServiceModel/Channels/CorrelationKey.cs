@@ -9,11 +9,11 @@ namespace System.ServiceModel.Channels
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+
+    using ReadOnlyStringDictionary = System.Runtime.ReadOnlyDictionaryInternal<string, string>;
     using System.Security.Cryptography;
     using System.Text;
     using System.Xml.Linq;
-
-    using ReadOnlyStringDictionary = System.Runtime.ReadOnlyDictionaryInternal<string, string>;
 
     public sealed class CorrelationKey : InstanceKey
     {

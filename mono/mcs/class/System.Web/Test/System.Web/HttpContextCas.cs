@@ -1,3 +1,13 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Principal;
+using System.Web;
+using System.Web.Handlers;
+
 //
 // HttpContextCas.cs - CAS unit tests for System.Web.HttpContext
 //
@@ -27,16 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Web;
-using System.Web.Handlers;
 
 namespace MonoCasTests.System.Web
 {

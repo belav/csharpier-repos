@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http.HPack;
+
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 

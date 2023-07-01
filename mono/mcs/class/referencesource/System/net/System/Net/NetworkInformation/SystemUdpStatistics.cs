@@ -4,9 +4,9 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net.Sockets;
     using System;
     using System.ComponentModel;
+    using System.Net.Sockets;
 
     /// <summary>Udp statistics.</summary>
     internal class SystemUdpStatistics : UdpStatistics

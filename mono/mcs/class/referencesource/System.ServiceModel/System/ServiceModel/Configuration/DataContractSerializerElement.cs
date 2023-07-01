@@ -8,9 +8,9 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
 
     public sealed partial class DataContractSerializerElement : BehaviorExtensionElement
     {

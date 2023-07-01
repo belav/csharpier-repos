@@ -1,10 +1,10 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿using System.IO;
+using ApprovalTests;
+using ApprovalTests.Reporters;
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Xunit;
-using System.IO;
-using ApprovalTests;
-using ApprovalTests.Reporters;
 
 namespace System.CommandLine.Tests.Help
 {

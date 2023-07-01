@@ -19,13 +19,9 @@ namespace System.Security.Policy
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
 #if FEATURE_SERIALIZATION
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Runtime.Serialization;using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-    using System.Security.Permissions;
-    using System.Security.Util;
-    using System.Threading;
-    using Microsoft.Win32.SafeHandles;
+    using System.Security.Permissions;using System.Security.Util;using System.Threading;using Microsoft.Win32.SafeHandles;
 
     /// <summary>
     ///     The Evidence class keeps track of information that can be used to make security decisions about

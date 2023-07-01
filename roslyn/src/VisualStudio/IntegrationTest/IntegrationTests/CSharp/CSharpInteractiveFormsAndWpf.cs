@@ -6,6 +6,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.VisualStudio.IntegrationTest.Utilities;
 using Microsoft.VisualStudio.Threading;
 using Roslyn.Test.Utilities;

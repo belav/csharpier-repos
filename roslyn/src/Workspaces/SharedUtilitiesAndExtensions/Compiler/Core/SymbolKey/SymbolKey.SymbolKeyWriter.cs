@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;

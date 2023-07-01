@@ -22,8 +22,7 @@ using System.Linq.Expressions;
 using System.Core;
 #endif
 
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic;using System.Diagnostics;
 
 namespace System.Dynamic.Utils
 {

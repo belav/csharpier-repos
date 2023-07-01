@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading;
+
 using Microsoft.TestCommon;
 
 namespace System.Web.Http.Owin

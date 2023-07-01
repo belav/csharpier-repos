@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // ValidationPropertyAttributeCas.cs
 //	- CAS unit tests for System.Web.UI.ValidationPropertyAttribute
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

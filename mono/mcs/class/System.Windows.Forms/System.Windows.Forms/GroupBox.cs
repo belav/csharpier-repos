@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.ComponentModel.Design;
 //
 // System.Windows.Forms.GroupBox.cs
 //
@@ -30,8 +32,6 @@
 //
 
 using System.Drawing;
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms

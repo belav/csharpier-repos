@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 namespace Test_StructWithSingleFloat

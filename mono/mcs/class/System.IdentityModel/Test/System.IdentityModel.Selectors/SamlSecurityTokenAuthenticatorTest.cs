@@ -26,23 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Claims;
-using System.IdentityModel.Policy;
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.Security.Principal;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml;
-using NUnit.Framework;
-
-using MonoTests.Helpers;
-
-using MonoTests.System.IdentityModel.Common;
-
-using Authenticator = System.IdentityModel.Selectors.SamlSecurityTokenAuthenticator;
-using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<System.IdentityModel.Policy.IAuthorizationPolicy>;
+using System;using System.Collections.Generic;using System.IdentityModel.Claims;using System.IdentityModel.Policy;using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.Security.Principal;using System.Security.Cryptography.X509Certificates;using System.Xml;using NUnit.Framework;using MonoTests.Helpers;using MonoTests.System.IdentityModel.Common;using Authenticator = System.IdentityModel.Selectors.SamlSecurityTokenAuthenticator;using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<System.IdentityModel.Policy.IAuthorizationPolicy>;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {

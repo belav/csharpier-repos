@@ -31,10 +31,7 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Newtonsoft.Json.Serialization;
+using System.Reflection;using System.Runtime.CompilerServices;using System.Text;using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities
 {

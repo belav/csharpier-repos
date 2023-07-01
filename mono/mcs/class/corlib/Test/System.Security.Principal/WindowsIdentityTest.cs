@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Principal;
+
 //
 // WindowsIdentityTest.cs - NUnit Test Cases for WindowsIdentity
 //
@@ -9,12 +16,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Principal;
 
 namespace MonoTests.System.Security.Principal
 {

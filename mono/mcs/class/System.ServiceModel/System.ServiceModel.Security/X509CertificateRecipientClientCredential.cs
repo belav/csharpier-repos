@@ -30,11 +30,7 @@ using System.Collections.Generic;
 #if !MOBILE
 using System.IdentityModel.Selectors;
 #endif
-using System.Security.Cryptography.X509Certificates;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Configuration;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security.Tokens;
+using System.Security.Cryptography.X509Certificates;using System.ServiceModel.Channels;using System.ServiceModel.Configuration;using System.ServiceModel.Description;using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {

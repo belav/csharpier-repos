@@ -14,7 +14,6 @@
 
 using System;
 using SLE = System.Linq.Expressions;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else

@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Net;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+
+using Debug = System.Diagnostics.Debug;
+using System.Net;
 using System.Runtime.CompilerServices;
 
 using ILCompiler;
+using Internal.JitInterface;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Interop;
-using Internal.JitInterface;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
 {

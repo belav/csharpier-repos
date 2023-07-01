@@ -27,10 +27,11 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
+using System.Threading;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Remoting.Channels

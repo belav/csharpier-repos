@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Permissions;
 using System.Windows;
+
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.ColorSchemes;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;

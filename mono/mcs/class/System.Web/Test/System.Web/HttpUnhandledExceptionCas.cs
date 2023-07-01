@@ -1,3 +1,9 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpUnhandledExceptionCas.cs
 //	- CAS unit tests for System.Web.HttpUnhandledException
@@ -31,12 +37,6 @@
 // Note: class exists in 1.x but has no public ctor
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

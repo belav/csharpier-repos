@@ -19,9 +19,9 @@ Revision History:
 --*/
 namespace System.Net.Security
 {
+    using System.Collections;
     using System.Net;
     using System.Threading;
-    using System.Collections;
 
     //
     // Implements delayed SSPI handle release, like a finalizable object though the handles are kept alive until being pushed out

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun

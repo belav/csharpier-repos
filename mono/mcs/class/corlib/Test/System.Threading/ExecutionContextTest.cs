@@ -1,3 +1,4 @@
+using System;
 //
 // ExecutionContextTest.cs - NUnit tests for ExecutionContext
 //
@@ -26,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Runtime.Remoting.Messaging;
-
-using System;
 using System.Security;
 using System.Threading;
 

@@ -10,11 +10,12 @@ namespace System.Diagnostics
 {
     using System;
     using System.IO;
-    using System.Text;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
-    using Microsoft.Win32;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Text;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Directs tracing or debugging output to

@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis.Symbols;
 

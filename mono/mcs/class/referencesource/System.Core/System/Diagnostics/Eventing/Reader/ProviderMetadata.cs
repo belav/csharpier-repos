@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -14,12 +16,11 @@
 **
 ============================================================*/
 using System.Globalization;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Security.Permissions;
+using System.Text;
+
 using Microsoft.Win32;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics.Eventing.Reader
 {

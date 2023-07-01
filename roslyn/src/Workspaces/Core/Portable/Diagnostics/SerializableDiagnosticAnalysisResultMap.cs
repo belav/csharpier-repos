@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.Diagnostics.Telemetry;
 
 namespace Microsoft.CodeAnalysis.Diagnostics

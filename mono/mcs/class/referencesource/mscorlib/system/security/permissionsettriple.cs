@@ -18,10 +18,10 @@
 namespace System.Security
 {
     using IEnumerator = System.Collections.IEnumerator;
+    using System.Diagnostics.Contracts;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal sealed class PermissionSetTriple

@@ -12,9 +12,10 @@
 ===========================================================*/
 
 using System.IO;
+using Marshal = System.Runtime.InteropServices.Marshal;
 using System.Security;
 using System.Text;
-using Marshal = System.Runtime.InteropServices.Marshal;
+
 using Microsoft.Win32;
 
 namespace System.IO.Ports

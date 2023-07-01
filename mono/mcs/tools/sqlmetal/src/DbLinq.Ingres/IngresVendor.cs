@@ -25,16 +25,16 @@
 #endregion
 
 using System;
-using System.Data;
-using System.Linq;
-using System.Data.Linq.Mapping;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Linq.Mapping;
+using System.Linq;
+using System.Reflection;
 using System.Text;
+
 using DbLinq.Data.Linq.SqlClient;
 using DbLinq.Util;
 using DbLinq.Vendor;
-
 #if MONO_STRICT
 using DataContext = System.Data.Linq.DataContext;
 #else

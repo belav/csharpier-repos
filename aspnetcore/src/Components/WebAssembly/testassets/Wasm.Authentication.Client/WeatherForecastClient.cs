@@ -3,6 +3,7 @@
 
 using System.Net.Http;
 using System.Net.Http.Json;
+
 using Wasm.Authentication.Shared;
 
 namespace Wasm.Authentication.Client;

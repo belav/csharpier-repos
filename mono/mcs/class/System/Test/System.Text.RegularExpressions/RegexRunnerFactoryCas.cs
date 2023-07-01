@@ -29,13 +29,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Text.RegularExpressions;
+using NUnit.Framework;using System;using System.Reflection;using System.Security;using System.Security.Permissions;using System.Text.RegularExpressions;
 
 namespace MonoCasTests.System.Text.RegularExpressions
 {

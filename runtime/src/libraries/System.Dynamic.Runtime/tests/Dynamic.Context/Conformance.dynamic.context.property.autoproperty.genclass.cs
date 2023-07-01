@@ -74,6 +74,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass002.genclass002
 {
+    using System.Collections.Generic;
     // <Title> Tests generic class auto property used in query expression.</Title>
     // <Description>
     // </Description>
@@ -81,7 +82,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     // <Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

@@ -3,10 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Runtime.InteropServices;
-using System.IO.Compression;
-using Microsoft.Win32.SafeHandles;
 using size_t = System.IntPtr;
+using System.IO.Compression;
+using System.Runtime.InteropServices;
+
+using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
 {

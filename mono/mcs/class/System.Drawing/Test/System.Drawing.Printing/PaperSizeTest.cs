@@ -1,3 +1,7 @@
+using System;
+using System.Drawing;
+using System.Drawing.Printing;
+
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
@@ -25,9 +29,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Drawing.Printing;
 
 namespace MonoTests.System.Drawing.Printing
 {

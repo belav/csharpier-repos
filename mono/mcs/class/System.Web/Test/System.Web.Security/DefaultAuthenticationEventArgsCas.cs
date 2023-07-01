@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.Security;
+
 //
 // DefaultAuthenticationEventArgsCas.cs
 //	- CAS unit tests for System.Web.Security.DefaultAuthenticationEventArgs
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security
 {

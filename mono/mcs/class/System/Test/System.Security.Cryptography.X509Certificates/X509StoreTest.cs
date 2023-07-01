@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
 //
 // X509StoreTest.cs - NUnit tests for X509Store
 //
@@ -9,13 +16,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

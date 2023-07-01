@@ -3,6 +3,7 @@
 
 using System.Buffers;
 using System.Text;
+
 using Xunit;
 
 namespace System.Memory.Tests.SequenceReader

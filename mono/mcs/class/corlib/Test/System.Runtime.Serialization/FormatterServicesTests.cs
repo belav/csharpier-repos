@@ -1,3 +1,7 @@
+using System;
+using System.Reflection;
+using System.Runtime.Serialization;
+
 //
 // System.Runtime.Serialization.FormatterServicesTests: NUnit test
 //
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace MonoTests.System.Runtime.Serialization
 {

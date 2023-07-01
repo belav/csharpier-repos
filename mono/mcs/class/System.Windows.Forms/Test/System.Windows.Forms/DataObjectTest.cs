@@ -22,10 +22,11 @@
 
 
 using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
-using System.Collections.Specialized;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

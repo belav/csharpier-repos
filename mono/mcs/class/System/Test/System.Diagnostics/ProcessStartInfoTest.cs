@@ -10,11 +10,7 @@
 
 #if MONO_FEATURE_PROCESS_START
 
-using System;
-using System.Diagnostics;
-using System.Text;
-
-using NUnit.Framework;
+using System;using System.Diagnostics;using System.Text;using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics
 {

@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics;
-using Roslyn.Utilities;
 using MSB = Microsoft.Build;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.MSBuild.Logging
 {

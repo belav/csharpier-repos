@@ -9,12 +9,13 @@ extern alias PortableTestUtils;
 using System;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.Scripting;
+using AssertEx = PortableTestUtils::Roslyn.Test.Utilities.AssertEx;
+using TestBase = PortableTestUtils::Roslyn.Test.Utilities.TestBase;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
-using AssertEx = PortableTestUtils::Roslyn.Test.Utilities.AssertEx;
-using TestBase = PortableTestUtils::Roslyn.Test.Utilities.TestBase;
 
 namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 {

@@ -22,12 +22,13 @@
 //
 
 using System;
-using System.Threading;
 using System.Data;
-using NUnit.Framework;
-using MonoTests.System.Data.Utils;
 
 using System.Data.OracleClient;
+using System.Threading;
+
+using MonoTests.System.Data.Utils;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {

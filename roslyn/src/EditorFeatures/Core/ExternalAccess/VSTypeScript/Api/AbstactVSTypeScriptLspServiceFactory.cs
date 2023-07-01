@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Microsoft.CodeAnalysis.LanguageServer;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;

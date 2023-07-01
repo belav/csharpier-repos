@@ -34,24 +34,18 @@ using Newtonsoft.Json.Serialization;
 #else
 using System.Runtime.Serialization.Json;
 #endif
-using System.Text;
-using System.Threading;
-using Newtonsoft.Json.Linq;
+using System.Text;using System.Threading;using Newtonsoft.Json.Linq;
 #if DNXCORE50
-using Xunit;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
-using XAssert = Xunit.Assert;
+using Xunit;using Assert = Newtonsoft.Json.Tests.XUnitAssert;using XAssert = Xunit.Assert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Utilities;
-using System.Collections;
+using Newtonsoft.Json.Utilities;using System.Collections;
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 using System.Threading.Tasks;
 #endif
 #if NET20
-using Newtonsoft.Json.Utilities.LinqBridge;
-using Action = Newtonsoft.Json.Serialization.Action;
+using Newtonsoft.Json.Utilities.LinqBridge;using Action = Newtonsoft.Json.Serialization.Action;
 #else
 using System.Linq;
 

@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Web.Services.Discovery;
+
 //
 // MonoTests.System.Web.Services.Discovery.DiscoveryClientProtocolTest.cs
 //
@@ -8,9 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Web.Services.Discovery;
 
 namespace MonoTests.System.Web.Services.Discovery
 {

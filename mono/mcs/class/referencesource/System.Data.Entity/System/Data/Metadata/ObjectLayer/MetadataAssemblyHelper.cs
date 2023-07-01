@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Data.Common.Utils;
+using System.Diagnostics;
 //---------------------------------------------------------------------
 // <copyright file="MetadataAssemblyHelper.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,9 +11,6 @@
 //---------------------------------------------------------------------
 
 using System.Reflection;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Data.Common.Utils;
 
 namespace System.Data.Metadata.Edm
 {

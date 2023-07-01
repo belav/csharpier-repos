@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition.Factories;
 using System.ComponentModel.Composition.Hosting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition.AttributedModel

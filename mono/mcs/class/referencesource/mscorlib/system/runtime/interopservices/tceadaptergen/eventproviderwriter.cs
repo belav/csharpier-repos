@@ -5,14 +5,14 @@
 // ==--==
 namespace System.Runtime.InteropServices.TCEAdapterGen
 {
-    using System.Runtime.InteropServices.ComTypes;
-    using ubyte = System.Byte;
     using System;
+    using ubyte = System.Byte;
+    using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Collections;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     internal class EventProviderWriter
     {

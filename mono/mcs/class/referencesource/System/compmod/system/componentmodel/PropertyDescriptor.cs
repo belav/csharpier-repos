@@ -16,7 +16,6 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections;
     using System.ComponentModel.Design;
@@ -27,6 +26,8 @@ namespace System.ComponentModel
     using System.Runtime.Serialization.Formatters;
     using System.Security;
     using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides a description of a property.</para>

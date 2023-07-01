@@ -8,6 +8,7 @@ using System.Net.Connections;
 using System.Net.Sockets;
 using System.Net.Sockets.Tests;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace System.Net.Connections.Tests

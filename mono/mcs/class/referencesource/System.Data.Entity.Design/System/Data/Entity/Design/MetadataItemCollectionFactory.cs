@@ -9,18 +9,19 @@
 
 namespace System.Data.Entity.Design
 {
-    using System.Data.Entity;
-    using System.Data.EntityModel;
-    using System.Xml;
     using System.Collections.Generic;
     using System.Data.Common;
-    using System.Data.Metadata.Edm;
-    using System.Data.Mapping;
+    using System.Data.Entity;
     using System.Data.Entity.Design.Common;
-    using Microsoft.Build.Utilities;
     using System.Data.Entity.Design.SsdlGenerator;
+    using System.Data.EntityModel;
+    using System.Data.Mapping;
+    using System.Data.Metadata.Edm;
     using System.Diagnostics;
     using System.Linq;
+    using System.Xml;
+
+    using Microsoft.Build.Utilities;
 
     /// <summary>
     /// Factory for creating ItemCollections. This class is to be used for

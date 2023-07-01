@@ -7,12 +7,13 @@
 
 namespace System.Xml.Schema
 {
-    using System.Xml.XPath;
+    using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Collections;
     using System.Xml.Schema;
+    using System.Xml.XPath;
+
     using MS.Internal.Xml.XPath;
 
     /*--------------------------------------------------------------------------------------------- *

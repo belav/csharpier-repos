@@ -23,8 +23,9 @@
 
 using System;
 using System.IO;
-using NUnitLite.Runner;
+
 using NUnit.Framework.Internal;
+using NUnitLite.Runner;
 
 namespace NUnitLite
 {

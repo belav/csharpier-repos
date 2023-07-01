@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.NavigateTo;
 using Microsoft.CodeAnalysis.NavigateTo;

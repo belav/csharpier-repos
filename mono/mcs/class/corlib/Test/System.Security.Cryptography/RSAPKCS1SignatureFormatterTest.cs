@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // RSAPKCS1SignatureFormatterTest.cs - NUnit tests for PKCS#1 v.1.5 signature.
 //
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

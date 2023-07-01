@@ -29,10 +29,7 @@
 
 #if !FEATURE_COMPRESSEDSTACK
 
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Security.Principal;
-using System.Threading;
+using System.Runtime.InteropServices;using System.Security.Permissions;using System.Security.Principal;using System.Threading;
 
 namespace System.Security
 {

@@ -4,13 +4,14 @@
 namespace NetClient
 {
     using System;
-    using System.Threading;
     using System.Runtime.InteropServices;
+    using System.Threading;
+
+    using Server.Contract;
+    using Server.Contract.Servers;
 
     using TestLibrary;
     using Xunit;
-    using Server.Contract;
-    using Server.Contract.Servers;
 
     unsafe class Program
     {

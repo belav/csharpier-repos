@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
+
 //
 // CryptoStreamTest.cs - NUnit Test Cases for CryptoStream
 //
@@ -35,12 +42,6 @@
  * WARNING * WARNING * WARNING * WARNING * WARNING * WARNING * WARNING */
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

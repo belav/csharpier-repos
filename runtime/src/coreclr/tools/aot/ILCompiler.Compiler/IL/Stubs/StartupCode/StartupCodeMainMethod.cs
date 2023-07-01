@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using Debug = System.Diagnostics.Debug;
 
 using Internal.TypeSystem;
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs.StartupCode
 {

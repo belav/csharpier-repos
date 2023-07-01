@@ -21,27 +21,19 @@ namespace System.Reflection
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using CultureInfo = System.Globalization.CultureInfo;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.IO;
-    using StringBuilder = System.Text.StringBuilder;
     using System.Configuration.Assemblies;
-    using StackCrawlMark = System.Threading.StackCrawlMark;
+    using CultureInfo = System.Globalization.CultureInfo;
+    using System.IO;
     using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using StringBuilder = System.Text.StringBuilder;
+    using StackCrawlMark = System.Threading.StackCrawlMark;
 #if FEATURE_SERIALIZATION
     using BinaryFormatter = System.Runtime.Serialization.Formatters.Binary.BinaryFormatter;
 #endif // FEATURE_SERIALIZATION
-    using System.Runtime.CompilerServices;
-    using SecurityZone = System.Security.SecurityZone;
-    using IEvidenceFactory = System.Security.IEvidenceFactory;
-    using System.Runtime.Serialization;
-    using Microsoft.Win32;
-    using System.Threading;
-    using __HResults = System.__HResults;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;using SecurityZone = System.Security.SecurityZone;using IEvidenceFactory = System.Security.IEvidenceFactory;using System.Runtime.Serialization;using Microsoft.Win32;using System.Threading;using __HResults = System.__HResults;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -1,4 +1,5 @@
-﻿#region MIT license
+﻿using System.Collections.Generic;
+#region MIT license
 //
 // MIT license
 //
@@ -25,7 +26,6 @@
 #endregion
 
 using DbMetal.Language;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 // These don't build in tools/sqlmetal

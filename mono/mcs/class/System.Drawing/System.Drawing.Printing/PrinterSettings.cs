@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Drawing.Imaging;
 //
 // System.Drawing.PrinterSettings.cs
 //
@@ -30,10 +34,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Collections;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Drawing.Imaging;
 
 namespace System.Drawing.Printing
 {

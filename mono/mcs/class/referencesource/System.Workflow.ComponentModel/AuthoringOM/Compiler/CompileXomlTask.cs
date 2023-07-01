@@ -1,33 +1,34 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Resources;
-    using System.Reflection;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Xml;
-    using System.Text;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using Microsoft.Win32;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Serialization;
-    using Microsoft.Build.Framework;
-    using Microsoft.Build.Utilities;
+    using System.Reflection;
+    using System.Resources;
     using System.Runtime.InteropServices;
-    using Microsoft.Build.Tasks;
-    using System.Collections.Generic;
-    using Microsoft.Workflow.Compiler;
     using System.Runtime.Versioning;
     using System.Security;
+    using System.Text;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
+
+    using Microsoft.Build.Framework;
+    using Microsoft.Build.Tasks;
+    using Microsoft.Build.Utilities;
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
+    using Microsoft.Win32;
+    using Microsoft.Workflow.Compiler;
 
     [Guid("59B2D1D0-5DB0-4F9F-9609-13F0168516D6")]
     [ComImport]

@@ -7,31 +7,31 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
-    using System.Globalization;
     using System.CodeDom;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using PropertyDescriptor = System.ComponentModel.PropertyDescriptor;
     using System.Data;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Globalization;
     using System.Web.UI;
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.WebControls;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
-
-    using System.Web.UI.Design.MobileControls.Util;
 
     using DataBinding = System.Web.UI.DataBinding;
-    using DataList = System.Web.UI.WebControls.DataList;
 
-    using TextBox = System.Windows.Forms.TextBox;
+    using System.Web.UI.Design.MobileControls.Util;
+    using System.Web.UI.MobileControls;
+    using System.Web.UI.WebControls;
+    using DataList = System.Web.UI.WebControls.DataList;
+    using System.Windows.Forms;
     using CheckBox = System.Windows.Forms.CheckBox;
     using ComboBox = System.Windows.Forms.ComboBox;
     using Control = System.Windows.Forms.Control;
+    using System.Windows.Forms.Design;
     using Label = System.Windows.Forms.Label;
-    using PropertyDescriptor = System.ComponentModel.PropertyDescriptor;
+
+    using TextBox = System.Windows.Forms.TextBox;
 
     /// <summary>
     ///   The General page for the DataList control.

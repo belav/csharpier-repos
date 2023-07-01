@@ -26,9 +26,10 @@
 
 using System;
 using System.Drawing;
-using System.Windows.Forms;
-using NUnit.Framework;
 using io = System.IO;
+using System.Windows.Forms;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

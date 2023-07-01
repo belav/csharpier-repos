@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 

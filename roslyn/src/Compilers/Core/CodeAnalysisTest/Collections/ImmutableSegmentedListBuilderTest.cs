@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CodeAnalysis.Collections;
 using Xunit;
 

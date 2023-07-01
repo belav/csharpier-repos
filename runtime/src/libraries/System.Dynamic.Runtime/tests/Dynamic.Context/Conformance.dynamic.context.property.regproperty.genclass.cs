@@ -229,6 +229,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass005.genclass005
 {
+    using System.Collections.Generic;
     // <Title> Tests generic class regular property used in query expression.</Title>
     // <Description>
     // </Description>
@@ -236,7 +237,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     //<Expects Status=success></Expects>
     // <Code>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {
@@ -438,6 +438,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass012.genclass012
 {
+    using System.Collections.Generic;
     // <Title> Tests generic class regular property used in volatile field initializer.</Title>
     // <Description>
     // </Description>
@@ -446,7 +447,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     // <Code>
     //<Expects Status=warning>\(17,16\).*CS0219</Expects>
     using System.Linq;
-    using System.Collections.Generic;
 
     public class Test
     {

@@ -8,13 +8,13 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Globalization;
     using System.Runtime;
     using System.Windows;
     using System.Windows.Input;
-    using System.Globalization;
-    using System.Collections.Generic;
 
     internal partial class CorrelationInitializerDesigner
     {

@@ -9,6 +9,10 @@
 
 using System;
 using System.Collections.Generic;
+using cqt = System.Data.Common.CommandTrees;
+
+using md = System.Data.Metadata.Edm;
+using System.Data.Query.InternalTrees;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
@@ -26,12 +30,8 @@ using System.Collections.Generic;
 // PlanCompiler.Assert.
 
 using System.Globalization;
-using System.Text;
 using System.Linq;
-
-using md = System.Data.Metadata.Edm;
-using cqt = System.Data.Common.CommandTrees;
-using System.Data.Query.InternalTrees;
+using System.Text;
 
 namespace System.Data.Query.PlanCompiler
 {

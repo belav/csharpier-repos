@@ -7,8 +7,8 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Runtime;
     using System.ServiceModel;
-    using System.ServiceModel.Security;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
 
     abstract class ClientReliableChannelBinder<TChannel>
         : ReliableChannelBinder<TChannel>,

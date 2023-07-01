@@ -28,6 +28,7 @@
 
 using System;
 using System.Xml;
+
 using Microsoft.Build.Exceptions;
 
 namespace Microsoft.Build.Construction

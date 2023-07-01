@@ -5,6 +5,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp

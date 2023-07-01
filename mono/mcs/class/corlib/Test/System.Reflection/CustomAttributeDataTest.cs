@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+
 //
 // System.Reflection.CustomAttributeData Test Cases
 //
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace MonoTests.System.Reflection
 {

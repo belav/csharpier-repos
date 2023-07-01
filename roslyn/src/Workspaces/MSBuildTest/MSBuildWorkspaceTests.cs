@@ -14,21 +14,22 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+
+using CS = Microsoft.CodeAnalysis.CSharp;
+using static Microsoft.CodeAnalysis.CSharp.LanguageVersionFacts;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.MSBuild.Build;
+using static Microsoft.CodeAnalysis.MSBuild.UnitTests.SolutionGeneration;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.UnitTests;
 using Microsoft.CodeAnalysis.UnitTests.TestFiles;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.MSBuild.UnitTests.SolutionGeneration;
-using static Microsoft.CodeAnalysis.CSharp.LanguageVersionFacts;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 {

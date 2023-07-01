@@ -21,6 +21,7 @@ namespace System.ServiceModel.WasHosting
     using System.ServiceModel.Channels;
     using System.Web;
     using System.Web.Hosting;
+
     using Microsoft.Web.Administration;
 
     static class MetabaseSettingsIis7Constants

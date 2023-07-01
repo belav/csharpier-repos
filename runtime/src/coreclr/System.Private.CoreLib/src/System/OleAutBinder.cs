@@ -1,3 +1,4 @@
+using CultureInfo = System.Globalization.CultureInfo;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -6,8 +7,8 @@
 // #define DISPLAY_DEBUG_INFO
 
 using System.Runtime.InteropServices;
+
 using Microsoft.Win32;
-using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System
 {

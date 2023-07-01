@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;

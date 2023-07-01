@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO.Enumeration;
+
 using Xunit;
 
 namespace System.IO.Tests.Enumeration

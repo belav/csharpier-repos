@@ -21,8 +21,8 @@ namespace System.ServiceModel.Description
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Xml;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
     using XsdNS = System.Xml.Schema;
 
     public class MetadataExchangeClient

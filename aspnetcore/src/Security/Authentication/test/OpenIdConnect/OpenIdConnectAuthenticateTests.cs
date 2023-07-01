@@ -4,6 +4,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Text.Encodings.Web;
+
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 

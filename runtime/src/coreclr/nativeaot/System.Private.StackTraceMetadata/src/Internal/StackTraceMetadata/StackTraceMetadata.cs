@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 
 using Internal.Metadata.NativeFormat;
+
+using ReflectionExecution = Internal.Reflection.Execution.ReflectionExecution;
 using Internal.Runtime;
 using Internal.Runtime.Augments;
 using Internal.Runtime.TypeLoader;
 using Internal.TypeSystem;
-
-using ReflectionExecution = Internal.Reflection.Execution.ReflectionExecution;
 
 namespace Internal.StackTraceMetadata
 {

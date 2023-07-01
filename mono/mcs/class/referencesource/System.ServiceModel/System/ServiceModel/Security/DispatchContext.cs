@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Protocols.WSTrust;
-    using System.Security.Claims;
-    using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
     using System.IdentityModel;
+    using System.IdentityModel.Protocols.WSTrust;
+    using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
+    using System.Security.Claims;
 
     /// <summary>
     /// Defines the inputs and outputs to the <see cref="WSTrustServiceContract.DispatchRequest"/> method.

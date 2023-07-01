@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Interop;
 using Roslyn.Utilities;

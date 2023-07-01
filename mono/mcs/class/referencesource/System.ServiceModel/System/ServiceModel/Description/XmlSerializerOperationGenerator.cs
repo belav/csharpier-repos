@@ -1,17 +1,17 @@
+using System.CodeDom;
+using System.CodeDom.Compiler;
 //-----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.ServiceModel.Channels;
-using System.ServiceModel;
-using System.ServiceModel.Dispatcher;
-using System.CodeDom;
 using System.Globalization;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Xml.Serialization;
-using System.CodeDom.Compiler;
-using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Description
 {

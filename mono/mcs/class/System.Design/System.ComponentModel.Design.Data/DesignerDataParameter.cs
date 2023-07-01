@@ -1,3 +1,4 @@
+using System.Data;
 //
 // System.ComponentModel.Design.Data.DesignerDataParameter
 //
@@ -30,7 +31,6 @@
 
 
 using System.Drawing;
-using System.Data;
 
 namespace System.ComponentModel.Design.Data
 {

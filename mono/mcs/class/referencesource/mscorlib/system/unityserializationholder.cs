@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Reflection;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,11 +10,7 @@
 
 using System.Runtime.Remoting;
 using System.Runtime.Serialization;
-using System.Reflection;
-using System.Globalization;
 using System.Runtime.Versioning;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace System
 {

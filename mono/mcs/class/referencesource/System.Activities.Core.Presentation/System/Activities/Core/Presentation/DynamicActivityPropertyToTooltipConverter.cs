@@ -9,6 +9,7 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation;
     using System.Globalization;
     using System.Windows.Data;
+
     using Microsoft.Activities.Presentation;
 
     internal sealed class DynamicActivityPropertyToTooltipConverter : IValueConverter

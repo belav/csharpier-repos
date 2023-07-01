@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // RSATest.cs - NUnit Test Cases for RSA
 //
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

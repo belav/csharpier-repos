@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
-using Internal.IL.Stubs;
-using Internal.IL;
 
 using Debug = System.Diagnostics.Debug;
+using System.Runtime.InteropServices;
+
+using Internal.IL;
+using Internal.IL.Stubs;
 using ILLocalVariable = Internal.IL.Stubs.ILLocalVariable;
 
 namespace Internal.TypeSystem.Interop

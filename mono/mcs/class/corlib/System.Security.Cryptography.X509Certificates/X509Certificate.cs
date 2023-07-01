@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Globalization;
 //
 // X509Certificate.cs: Handles X.509 certificates.
 //
@@ -28,12 +30,11 @@
 //
 
 using System.IO;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Diagnostics;
 using System.Text;
+
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
 

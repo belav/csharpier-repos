@@ -4,6 +4,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+
 using BenchmarkDotNet.Attributes;
 using Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks;
 using Xunit;

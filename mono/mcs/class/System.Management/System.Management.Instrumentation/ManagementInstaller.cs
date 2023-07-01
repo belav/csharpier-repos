@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // System.Management.Instrumentation.ManagementInstaller
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Configuration.Install;
-using System.Collections;
 
 namespace System.Management.Instrumentation
 {

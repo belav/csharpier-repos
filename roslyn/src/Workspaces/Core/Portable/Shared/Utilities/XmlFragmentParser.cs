@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 

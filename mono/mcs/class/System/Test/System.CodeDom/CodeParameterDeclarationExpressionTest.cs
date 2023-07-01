@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom;
+
 //
 // CodeParameterDeclarationExpressionTest.cs
 //	- Unit tests for System.CodeDom.CodeParameterDeclarationExpression
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

@@ -3,8 +3,9 @@
 
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
-using FluentAssertions;
 using System.Linq;
+
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 

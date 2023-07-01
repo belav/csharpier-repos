@@ -1,9 +1,10 @@
+using System.Security.Cryptography.EcDsa.Tests;
+using System.Security.Cryptography.Tests;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-using System.Security.Cryptography.EcDsa.Tests;
-using System.Security.Cryptography.Tests;
 
 namespace System.Security.Cryptography.Cng.Tests
 {

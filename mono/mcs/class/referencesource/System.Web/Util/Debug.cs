@@ -6,8 +6,6 @@
 
 namespace System.Web.Util
 {
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -16,10 +14,13 @@ namespace System.Web.Util
     using System.Reflection;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Runtime.Versioning;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     internal static class Debug
     {

@@ -4,11 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using FluentAssertions;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.DependencyModel.Resolution;
 using Moq;
 using Xunit;
-using FluentAssertions;
 
 namespace Microsoft.Extensions.DependencyModel.Tests
 {

@@ -1,3 +1,8 @@
+using System;
+using System.Data;
+using System.Data.Common;
+using System.IO;
+
 // DbDataReaderTest.cs - NUnit Test Cases for DbDataReader class
 //
 // Author:
@@ -27,10 +32,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.Common;
-using System.IO;
 
 namespace MonoTests.System.Data.Common
 {

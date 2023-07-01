@@ -4,6 +4,7 @@
 
 using System.Composition;
 using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.CodeAnalysis.AddFileBanner;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 

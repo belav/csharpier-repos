@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+
 //
 // MonitorTest.cs - NUnit test cases for System.Threading.Monitor
 //
@@ -9,8 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
 
 namespace MonoTests.System.Threading
 {

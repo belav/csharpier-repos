@@ -1,14 +1,14 @@
 namespace Microsoft.Win32
 {
     using System;
-    using System.Net;
+    using System.ComponentModel;
     using System.Globalization;
     using System.IO;
+    using System.Net;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.ComponentModel;
     using System.Text;
-    using System.Runtime.InteropServices;
 
     // IID_IInternetSecurityManager = 79eac9ee-baf9-11ce-8c82-00aa004ba90b
     // IID_IInternetZoneManager     = 79eac9ef-baf9-11ce-8c82-00aa004ba90b

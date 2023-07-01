@@ -17,11 +17,11 @@ namespace System.Data.SqlClient
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Runtime.Versioning;
 
     internal sealed class TdsParserStaticMethods
     {

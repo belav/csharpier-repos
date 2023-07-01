@@ -51,8 +51,8 @@
 //#define DEBUG
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -66,8 +66,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
-using Mono.Unix.Native;
+
 using Mono.Unix;
+using Mono.Unix.Native;
 
 /// X11 Version
 namespace System.Windows.Forms

@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using Internal.Text;
-using Internal.TypeSystem;
 
 using Debug = System.Diagnostics.Debug;
+
+using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

@@ -1,3 +1,5 @@
+using myalias = System;
+using Mono.Math;
 //
 // BigIntegerTest.cs - NUnit Test Cases for BigInteger
 //
@@ -27,8 +29,6 @@
 //
 
 using NUnit.Framework;
-using myalias = System;
-using Mono.Math;
 
 namespace MonoTests.Mono.Math
 {

@@ -11,12 +11,12 @@ namespace System.ServiceModel.Description
     using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Schema;
     using ConfigNS = System.ServiceModel.Configuration;
+    using System.Text;
     using WsdlConfigNS = System.Web.Services.Configuration;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
+    using System.Xml.Schema;
 
     public class WsdlImporter : MetadataImporter
     {

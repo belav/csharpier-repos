@@ -29,18 +29,13 @@ using System;
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
-using System.Text;
-using System.Threading.Tasks;
+using System.Text;using System.Threading.Tasks;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Bson;
-using System.IO;
-using System.Globalization;
+using Newtonsoft.Json.Bson;using System.IO;using System.Globalization;
 
 namespace Newtonsoft.Json.Tests.Bson
 {

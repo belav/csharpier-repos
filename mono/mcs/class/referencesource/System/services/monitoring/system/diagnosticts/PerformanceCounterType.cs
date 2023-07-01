@@ -8,6 +8,7 @@ namespace System.Diagnostics
 {
     using System;
     using System.ComponentModel;
+
     using Microsoft.Win32;
 
     /// <devdoc>

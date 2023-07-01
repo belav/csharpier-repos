@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Runtime.Intrinsics.X86;
+
 using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 

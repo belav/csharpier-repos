@@ -8,11 +8,11 @@ namespace System.Net.Mail
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.IO;
     using System.Net;
-    using System.Security.Permissions;
-    using System.ComponentModel;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
 
     internal class SmtpNegotiateAuthenticationModule : ISmtpAuthenticationModule
     {

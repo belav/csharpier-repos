@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection.Metadata;
+
 using ILCompiler.Logging;
 using ILLink.Shared;
 using Internal.IL;

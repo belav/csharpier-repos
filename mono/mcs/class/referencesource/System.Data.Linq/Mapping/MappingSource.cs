@@ -1,14 +1,15 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+
 using LinqToSqlShared.Mapping;
 
 namespace System.Data.Linq.Mapping

@@ -14,24 +14,23 @@
 
 namespace System.Security.Policy
 {
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Security.Permissions;
-    using System.Security.Util;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Security.Util;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
+
+    using Microsoft.Win32;
 #if !FEATURE_PAL
-    using System.Runtime.Hosting;
-    using System.Deployment.Internal.Isolation.Manifest;
-    using System.Deployment.Internal.Isolation;
+    using System.Runtime.Hosting;using System.Deployment.Internal.Isolation.Manifest;using System.Deployment.Internal.Isolation;
 #endif
     // Duplicated in vm\SecurityConfig.h
     [Serializable]

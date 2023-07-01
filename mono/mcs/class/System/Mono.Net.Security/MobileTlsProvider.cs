@@ -9,10 +9,7 @@ using MonoSecurity::Mono.Security.Interface;
 using Mono.Security.Interface;
 #endif
 
-using System;
-using System.IO;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
+using System;using System.IO;using System.Net.Security;using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Net.Security
 {

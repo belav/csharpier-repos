@@ -4,10 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Debug = System.Diagnostics.Debug;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
 {

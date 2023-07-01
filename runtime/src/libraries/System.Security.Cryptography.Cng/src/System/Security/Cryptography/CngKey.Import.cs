@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
 
 using Internal.Cryptography;
 
 using ErrorCode = Interop.NCrypt.ErrorCode;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

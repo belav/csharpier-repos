@@ -2,9 +2,9 @@
 {
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel.Configuration;
-    using System.ServiceModel.Activities.Description;
     using System.Runtime;
+    using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
     public class WorkflowInstanceManagementElement : BehaviorExtensionElement

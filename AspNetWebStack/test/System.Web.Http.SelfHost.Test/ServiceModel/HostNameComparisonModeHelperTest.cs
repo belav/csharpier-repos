@@ -3,6 +3,7 @@
 
 using System.ServiceModel;
 using System.Web.Http.SelfHost.ServiceModel;
+
 using Microsoft.TestCommon;
 
 namespace System.Net.Http.Formatting

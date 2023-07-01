@@ -4,6 +4,7 @@
 using System.CommandLine.Generator.Invocations;
 using System.Linq;
 using System.Text;
+
 using Microsoft.CodeAnalysis;
 
 namespace System.CommandLine.Generator

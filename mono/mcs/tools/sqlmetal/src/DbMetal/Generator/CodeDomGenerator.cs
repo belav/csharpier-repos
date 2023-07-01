@@ -36,12 +36,12 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using Microsoft.CSharp;
-using Microsoft.VisualBasic;
-
 using DbLinq.Schema.Dbml;
 using DbLinq.Schema.Dbml.Adapter;
 using DbLinq.Util;
+
+using Microsoft.CSharp;
+using Microsoft.VisualBasic;
 
 namespace DbMetal.Generator
 {

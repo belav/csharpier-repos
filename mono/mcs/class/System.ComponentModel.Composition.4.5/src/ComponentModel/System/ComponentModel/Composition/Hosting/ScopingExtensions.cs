@@ -2,10 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using Microsoft.Internal;
 using System.ComponentModel.Composition.Primitives;
+using System.Diagnostics;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {

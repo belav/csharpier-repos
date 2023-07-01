@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+
 //
 // RootBuilderCas.cs - CAS unit tests for System.Web.UI.RootBuilder
 //
@@ -27,14 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI
 {

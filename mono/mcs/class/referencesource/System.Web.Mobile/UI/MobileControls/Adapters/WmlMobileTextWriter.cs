@@ -7,17 +7,16 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Web.Mobile;
-using System.Web.UI.MobileControls;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-using System.Web.Security;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
+using System.Web.Mobile;
+using System.Web.Security;
+using System.Web.UI.MobileControls;
 
 using SR = System.Web.UI.MobileControls.Adapters.SR;
-
 #if COMPILING_FOR_SHIPPED_SOURCE
 using Adapters = System.Web.UI.MobileControls.ShippedAdapterSource;
 

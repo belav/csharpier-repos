@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json;
+
 using Microsoft.Build.Evaluation;
 using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.DotNet.Openapi.Tools.Internal;

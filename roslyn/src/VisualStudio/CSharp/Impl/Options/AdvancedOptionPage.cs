@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Options;
 

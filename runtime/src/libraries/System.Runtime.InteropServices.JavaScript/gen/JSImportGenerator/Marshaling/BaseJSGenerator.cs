@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace Microsoft.Interop.JavaScript
 {

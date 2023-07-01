@@ -4,17 +4,17 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Description;
-    using System.Reflection;
+    using System.Collections.Generic;
     using System.Net;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.AccessControl;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
 

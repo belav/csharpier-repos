@@ -55,13 +55,14 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections;
+
+using RabbitMQ.Client.Exceptions;
 
 using RabbitMQ.Client.Impl;
-using RabbitMQ.Client.Exceptions;
 
 namespace RabbitMQ.Client
 {

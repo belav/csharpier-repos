@@ -6,10 +6,11 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens;
+using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 using Roslyn.Test.Utilities;
 using Xunit;
-using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
 {

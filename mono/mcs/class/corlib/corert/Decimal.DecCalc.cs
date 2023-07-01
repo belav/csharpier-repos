@@ -3,10 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #if !__MonoCS__
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Internal.Runtime.CompilerServices;
+using System.Diagnostics;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using Internal.Runtime.CompilerServices;
 
 namespace System
 {

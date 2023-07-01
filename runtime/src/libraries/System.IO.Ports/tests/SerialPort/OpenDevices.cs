@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.PortsTests;
 using System.Text.RegularExpressions;
+
 using Xunit;
 
 namespace System.IO.Ports.Tests

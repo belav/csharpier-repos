@@ -8,14 +8,15 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.Remoting;
     using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides

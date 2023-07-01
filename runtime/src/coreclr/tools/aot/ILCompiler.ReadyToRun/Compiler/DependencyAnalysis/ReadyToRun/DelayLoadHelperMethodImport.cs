@@ -4,9 +4,9 @@
 using System.Collections.Generic;
 
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

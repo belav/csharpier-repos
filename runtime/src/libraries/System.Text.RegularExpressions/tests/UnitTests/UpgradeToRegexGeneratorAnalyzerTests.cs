@@ -7,13 +7,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions.Generator;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Testing;
-using Xunit;
 using VerifyCS = System.Text.RegularExpressions.Unit.Tests.CSharpCodeFixVerifier<
     System.Text.RegularExpressions.Generator.UpgradeToRegexGeneratorAnalyzer,
     System.Text.RegularExpressions.Generator.UpgradeToRegexGeneratorCodeFixer
 >;
+using System.Threading.Tasks;
+
+using Microsoft.CodeAnalysis.Testing;
+using Xunit;
 
 namespace System.Text.RegularExpressions.Unit.Tests
 {

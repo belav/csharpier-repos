@@ -11,8 +11,9 @@
 using System;
 using System.Security.Cryptography;
 
-using NUnit.Framework;
 using Mono.Security.Cryptography;
+
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

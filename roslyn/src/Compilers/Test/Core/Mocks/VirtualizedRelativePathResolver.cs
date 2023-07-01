@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
+
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Test.Utilities

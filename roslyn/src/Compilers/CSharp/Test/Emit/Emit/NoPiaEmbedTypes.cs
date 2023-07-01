@@ -10,20 +10,7 @@
 
 #if NET472
 
-using Microsoft.Cci;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
-using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata;
-using Xunit;
-using MemoryStream = System.IO.MemoryStream;
-using System;
-using Microsoft.CodeAnalysis.Emit;
-using System.Collections.Immutable;
+using Microsoft.Cci;using Microsoft.CodeAnalysis.CSharp.Symbols;using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;using Microsoft.CodeAnalysis.CSharp.Test.Utilities;using Microsoft.CodeAnalysis.Test.Utilities;using Roslyn.Test.Utilities;using System.Linq;using System.Reflection;using System.Reflection.Metadata;using Xunit;using MemoryStream = System.IO.MemoryStream;using System;using Microsoft.CodeAnalysis.Emit;using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 {

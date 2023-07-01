@@ -9,15 +9,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
-using Xunit;
-using static Roslyn.Test.Utilities.SharedResourceHelpers;
 using System.Reflection;
+using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.CompilerServer;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Roslyn.Test.Utilities;
+using static Roslyn.Test.Utilities.SharedResourceHelpers;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {

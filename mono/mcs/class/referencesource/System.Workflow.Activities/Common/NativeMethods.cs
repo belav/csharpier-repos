@@ -15,8 +15,8 @@
 namespace System.Workflow.Activities.Common
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
 
     static class NativeMethods
     {

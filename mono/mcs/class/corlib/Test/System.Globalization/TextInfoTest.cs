@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 // TextInfoTest.cs - NUnit Test Cases for the
 // System.Globalization.TextInfo class
 //
@@ -7,11 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MonoTests.System.Globalization
 {

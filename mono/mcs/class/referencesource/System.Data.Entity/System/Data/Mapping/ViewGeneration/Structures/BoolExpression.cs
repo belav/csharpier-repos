@@ -18,9 +18,9 @@ using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-    using BoolDomainConstraint = DomainConstraint<BoolLiteral, Constant>;
     using DomainAndExpr = AndExpr<DomainConstraint<BoolLiteral, Constant>>;
     using DomainBoolExpr = BoolExpr<DomainConstraint<BoolLiteral, Constant>>;
+    using BoolDomainConstraint = DomainConstraint<BoolLiteral, Constant>;
     using DomainFalseExpr = FalseExpr<DomainConstraint<BoolLiteral, Constant>>;
     using DomainNotExpr = NotExpr<DomainConstraint<BoolLiteral, Constant>>;
     using DomainOrExpr = OrExpr<DomainConstraint<BoolLiteral, Constant>>;

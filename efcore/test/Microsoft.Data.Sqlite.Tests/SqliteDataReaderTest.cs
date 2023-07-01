@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.IO;
+
 using Microsoft.Data.Sqlite.Properties;
 using Xunit;
 

@@ -5,6 +5,7 @@
 namespace System.Activities.Statements
 {
     using System.Activities;
+    using SA = System.Activities;
     using System.Activities.Expressions;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -12,7 +13,6 @@ namespace System.Activities.Statements
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Windows.Markup;
-    using SA = System.Activities;
 
     [ContentProperty("Body")]
     public sealed class DoWhile : NativeActivity

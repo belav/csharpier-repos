@@ -3,6 +3,7 @@
 
 using System.CodeDom.Compiler;
 using System.Text;
+
 using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
 using Mono.TextTemplating;

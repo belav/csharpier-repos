@@ -7,6 +7,7 @@
 using System;
 using System.Diagnostics.Tracing;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Internal.Log

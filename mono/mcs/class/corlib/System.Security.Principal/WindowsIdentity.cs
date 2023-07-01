@@ -32,8 +32,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Security.Claims;
+using System.Security.Permissions;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Principal

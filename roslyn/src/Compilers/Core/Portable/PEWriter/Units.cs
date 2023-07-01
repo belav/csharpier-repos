@@ -8,9 +8,10 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CodeAnalysis;
-using Roslyn.Utilities;
 using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
+using Roslyn.Utilities;
 
 namespace Microsoft.Cci
 {

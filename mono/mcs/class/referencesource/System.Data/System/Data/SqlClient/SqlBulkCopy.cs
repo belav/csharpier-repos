@@ -20,26 +20,19 @@ namespace System.Data.SqlClient
 #if !PROJECTK
     using System.ComponentModel;
 #endif // !PROJECTK
-    using System.Data;
-    using System.Data.Common;
+    using System.Data;using System.Data.Common;
 #if !PROJECTK
     using System.Data.Sql;
 #endif //PROJECTK
-    using System.Data.SqlTypes;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Runtime.CompilerServices;
+    using System.Data.SqlTypes;using System.Diagnostics;using System.Globalization;using System.Runtime.CompilerServices;
 #if !PROJECTK
     using System.Runtime.ConstrainedExecution;
 #endif // !PROJECTK
-    using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using System.Text;using System.Threading;using System.Threading.Tasks;
 #if !PROJECTK
     using System.Transactions;
 #endif //PROJECTK
     using System.Xml;
-
 #if !PROJECTK
     using MSS = Microsoft.SqlServer.Server;
 #else

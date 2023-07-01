@@ -19,24 +19,21 @@
 namespace System.IO.IsolatedStorage
 {
     using System;
+    using System.Collections;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Cryptography;
+    using System.Security.Permissions;
+    using System.Security.Policy;
     using System.Text;
     using System.Threading;
-    using System.Reflection;
-    using System.Collections;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.Security.Cryptography;
-    using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
 #if FEATURE_SERIALIZATION
     using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
-    using Microsoft.Win32;
-    using System.Diagnostics.Contracts;
+    using System.Runtime.InteropServices;using System.Runtime.Versioning;using Microsoft.Win32;using System.Diagnostics.Contracts;
 
     [Serializable]
     [Flags]

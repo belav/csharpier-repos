@@ -9,15 +9,15 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
-using System.Collections.Generic;
+using System.Reflection;
 
 using NUnit.Framework;
-using System.Reflection;
 
 namespace MonoTests.System.ComponentModel
 {

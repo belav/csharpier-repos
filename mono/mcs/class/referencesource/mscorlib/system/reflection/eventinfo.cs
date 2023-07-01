@@ -12,11 +12,11 @@ namespace System.Reflection
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Runtime.ConstrainedExecution;
-    using System.Security.Permissions;
     using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
+    using System.Security.Permissions;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]

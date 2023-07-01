@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+
+using ConfigurationType = System.Configuration.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Xml;
-
-using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {

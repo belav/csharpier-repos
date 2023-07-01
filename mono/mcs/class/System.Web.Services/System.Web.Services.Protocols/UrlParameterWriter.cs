@@ -1,3 +1,4 @@
+using System.IO;
 //
 // System.Web.Services.Protocols.UrlParameterWriter.cs
 //
@@ -30,7 +31,6 @@
 //
 
 using System.Web.Services;
-using System.IO;
 
 namespace System.Web.Services.Protocols
 {

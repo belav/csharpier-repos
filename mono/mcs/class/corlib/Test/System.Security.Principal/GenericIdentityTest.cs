@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Principal;
+
 //
 // GenericIdentityTest.cs - NUnit Test Cases for GenericIdentity
 //
@@ -9,11 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Principal;
 
 namespace MonoTests.System.Security.Principal
 {

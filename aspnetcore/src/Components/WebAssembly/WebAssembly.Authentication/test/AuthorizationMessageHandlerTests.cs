@@ -3,6 +3,7 @@
 
 using System.Net;
 using System.Net.Http;
+
 using Moq;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;

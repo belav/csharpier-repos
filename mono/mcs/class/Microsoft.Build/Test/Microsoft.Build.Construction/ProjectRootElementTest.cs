@@ -2,10 +2,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Xml;
+
 using Microsoft.Build.Construction;
-using NUnit.Framework;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Exceptions;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Construction
 {

@@ -27,13 +27,13 @@
 //
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
+using ParamList = System.Collections.ObjectModel.Collection<System.ServiceModel.Security.Tokens.SecurityTokenParameters>;
 using System.Net.Security;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
-
-using ParamList = System.Collections.ObjectModel.Collection<System.ServiceModel.Security.Tokens.SecurityTokenParameters>;
 
 namespace System.ServiceModel.Security.Tokens
 {

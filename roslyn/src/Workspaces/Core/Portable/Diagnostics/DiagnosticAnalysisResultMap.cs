@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using Microsoft.CodeAnalysis.Diagnostics.Telemetry;
 
 namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics

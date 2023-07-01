@@ -10,19 +10,20 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    using Microsoft.Win32;
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Util;
     using System.Text;
-    using System.Runtime.Versioning;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+
+    using Microsoft.Win32;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public enum X509ContentType

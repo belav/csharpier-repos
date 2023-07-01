@@ -3,9 +3,10 @@
 
 using System.Collections;
 using System.Text.Json;
+using Type = System.Type;
+
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

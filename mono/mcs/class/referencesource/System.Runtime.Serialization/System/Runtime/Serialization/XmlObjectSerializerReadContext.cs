@@ -12,10 +12,7 @@ namespace System.Runtime.Serialization
 #if !MONO
     using System.ServiceModel.Diagnostics;
 #endif
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Serialization;
-    using System.Runtime.Serialization.Diagnostics;
+    using System.Text;using System.Xml;using System.Xml.Serialization;using System.Runtime.Serialization.Diagnostics;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerReadContext : XmlObjectSerializerContext

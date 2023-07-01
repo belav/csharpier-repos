@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Tags;
 using Roslyn.Utilities;
 

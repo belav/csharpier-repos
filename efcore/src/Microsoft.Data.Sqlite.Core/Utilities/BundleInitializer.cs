@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+
 using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite.Utilities

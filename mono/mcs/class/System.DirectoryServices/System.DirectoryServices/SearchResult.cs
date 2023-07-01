@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 /******************************************************************************
 * The MIT License
 * Copyright (c) 2003 Novell Inc.,  www.novell.com
@@ -31,8 +32,8 @@
 //
 
 using System.ComponentModel;
+
 using Novell.Directory.Ldap;
-using System.Collections.Specialized;
 
 namespace System.DirectoryServices
 {

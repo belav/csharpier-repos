@@ -16,14 +16,15 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Reflection;
     using System.Web.UI;
+    using System.Web.UI.Design.MobileControls.Util;
     //    using System.Web.UI.Design.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
-    using System.Web.UI.Design.MobileControls.Util;
 
     using Control = System.Windows.Forms.Control;
     using Label = System.Windows.Forms.Label;
     using TextBox = System.Windows.Forms.TextBox;
+
     using DeviceFilterMode = Util.DeviceFilterNode.DeviceFilterMode;
 
     /// <summary>

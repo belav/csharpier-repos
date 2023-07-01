@@ -1,3 +1,8 @@
+using System;
+using System.Security.Permissions;
+using System.Web.UI.HtmlControls;
+
+using MonoTests.System.Web.UI.HtmlControls;
 //
 // HtmlAnchorCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlAnchor
 //
@@ -27,12 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Permissions;
-using System.Web.UI.HtmlControls;
-
-using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls
 {

@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.Contracts;
 using System.Linq;
+
 using Microsoft.FxCop.Sdk;
 
 namespace Microsoft.Web.FxCop

@@ -24,22 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Net;
-using System.Net.Security;
-using System.Xml;
-using System.Xml.XPath;
-using System.Text;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Security;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
-using QName = System.Xml.XmlQualifiedName;
-using WS = System.Web.Services.Description;
+using System;using System.Net;using System.Net.Security;using System.Xml;using System.Xml.XPath;using System.Text;using System.Collections.Generic;using System.ServiceModel;using System.ServiceModel.Security;using System.ServiceModel.Channels;using System.ServiceModel.Description;using NUnit.Framework;using NUnit.Framework.Constraints;using QName = System.Xml.XmlQualifiedName;using WS = System.Web.Services.Description;
 
 namespace MonoTests.System.ServiceModel.MetadataTests
 {

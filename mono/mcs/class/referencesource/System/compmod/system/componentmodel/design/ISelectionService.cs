@@ -8,10 +8,11 @@
  */
 namespace System.ComponentModel.Design
 {
-    using System.Diagnostics;
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
+
     using Microsoft.Win32;
 
     /// <devdoc>

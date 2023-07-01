@@ -4,6 +4,7 @@
 using System.Buffers;
 using System.IO;
 using System.Text;
+
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Xunit;
 

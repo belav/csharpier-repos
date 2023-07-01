@@ -1,3 +1,8 @@
+using System;
+using System.Security.Permissions;
+using System.Web.UI.HtmlControls;
+
+using MonoTests.System.Web.UI.HtmlControls;
 //
 // HtmlTableRowCas.cs
 //	- CAS unit tests for System.Web.UI.HtmlControls.HtmlTableRow
@@ -28,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Permissions;
-using System.Web.UI.HtmlControls;
-
-using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls
 {

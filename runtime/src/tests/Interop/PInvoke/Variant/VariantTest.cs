@@ -3,8 +3,9 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Xunit;
+
 using static VariantNative;
+using Xunit;
 
 // Class used to validate the IClassX generation path doesn't fail.
 // Support for this scenario is extremely limited so we simply validate

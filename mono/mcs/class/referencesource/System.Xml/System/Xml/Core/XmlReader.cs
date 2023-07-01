@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Diagnostics;
+using System.Globalization;
 //------------------------------------------------------------------------------
 // <copyright file="XmlReader.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,15 +9,11 @@
 //------------------------------------------------------------------------------
 
 using System.IO;
-using System.Text;
-using System.Security;
-using System.Diagnostics;
-using System.Collections;
-using System.Globalization;
-using System.Security.Permissions;
-using System.Xml.Schema;
 using System.Runtime.Versioning;
-
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Xml.Schema;
 #if SILVERLIGHT
 using BufferBuilder = System.Xml.BufferBuilder;
 #else

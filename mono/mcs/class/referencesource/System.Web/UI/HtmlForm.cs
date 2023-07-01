@@ -9,18 +9,18 @@
 
 namespace System.Web.UI.HtmlControls
 {
-    using System.ComponentModel;
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Configuration;
-    using System.Web.Util;
+    using System.Web.Security;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Web.Security;
-    using System.Security.Permissions;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>

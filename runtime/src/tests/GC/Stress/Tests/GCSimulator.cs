@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-using System;
-using System.Threading;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 // disable warning about unused weakref
 #pragma warning disable 414

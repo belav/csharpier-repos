@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // CryptoConfig.cs - NUnit tests for CryptoConfig
 //
@@ -27,10 +31,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography
 {

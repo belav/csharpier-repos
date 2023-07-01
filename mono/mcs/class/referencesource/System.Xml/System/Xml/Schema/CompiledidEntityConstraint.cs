@@ -7,10 +7,11 @@
 
 namespace System.Xml.Schema
 {
-    using System.Text;
     using System.Collections;
     using System.Diagnostics;
+    using System.Text;
     using System.Xml.XPath;
+
     using MS.Internal.Xml.XPath;
 
     internal class CompiledIdentityConstraint

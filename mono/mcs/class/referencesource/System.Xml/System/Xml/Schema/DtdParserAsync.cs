@@ -1,12 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml.Schema;
-using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-
 #if SILVERLIGHT
 using BufferBuilder = System.Xml.BufferBuilder;
 #else

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Experiments;
 using Microsoft.CodeAnalysis.Host.Mef;

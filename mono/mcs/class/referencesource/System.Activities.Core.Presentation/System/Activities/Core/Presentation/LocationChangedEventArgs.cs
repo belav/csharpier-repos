@@ -4,8 +4,8 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.Windows;
     using System.Runtime;
+    using System.Windows;
 
     [Fx.Tag.XamlVisible(false)]
     public class LocationChangedEventArgs : EventArgs

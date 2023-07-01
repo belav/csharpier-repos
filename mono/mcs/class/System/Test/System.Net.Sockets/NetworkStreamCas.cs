@@ -1,3 +1,13 @@
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
+
 //
 // NetworkStreamCas.cs -CAS unit tests for System.Net.Sockets.NetworkStream
 //
@@ -27,16 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
-using System.Text;
 
 namespace MonoCasTests.System.Net.Sockets
 {

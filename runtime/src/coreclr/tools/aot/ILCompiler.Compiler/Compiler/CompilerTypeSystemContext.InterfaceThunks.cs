@@ -3,11 +3,12 @@
 
 using System;
 
-using Internal.TypeSystem;
+using Debug = System.Diagnostics.Debug;
+
 using Internal.IL;
 using Internal.IL.Stubs;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
 
 // Default interface method implementation thunks
 //

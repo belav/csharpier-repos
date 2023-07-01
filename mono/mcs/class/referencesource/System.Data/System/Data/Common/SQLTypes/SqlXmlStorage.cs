@@ -10,13 +10,13 @@
 namespace System.Data.Common
 {
     using System;
-    using System.Xml;
-    using System.IO;
-    using System.Xml.Serialization;
+    using System.Collections;
     using System.Data.SqlTypes;
     using System.Diagnostics;
+    using System.IO;
     using System.Text;
-    using System.Collections;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal sealed class SqlXmlStorage : DataStorage
     {

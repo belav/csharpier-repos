@@ -9,6 +9,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 namespace Test_singleRefField_cs

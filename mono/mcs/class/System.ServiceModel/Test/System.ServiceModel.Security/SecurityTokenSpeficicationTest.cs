@@ -26,18 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.Collections.ObjectModel;
-using System.IdentityModel.Policy;
-using System.IdentityModel.Tokens;
-using System.Net;
-using System.Net.Security;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
-using System.Security.Cryptography.Xml;
-using NUnit.Framework;
+using System;using System.Collections.ObjectModel;using System.IdentityModel.Policy;using System.IdentityModel.Tokens;using System.Net;using System.Net.Security;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Security;using System.ServiceModel.Security.Tokens;using System.Security.Cryptography.Xml;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {

@@ -9,6 +9,7 @@ using System.CommandLine.IO;
 using System.CommandLine.Parsing;
 using System.IO;
 using System.Threading.Tasks;
+
 using static Binding.Formatter;
 
 namespace Binding

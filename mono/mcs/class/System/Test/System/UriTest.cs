@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 //
 // UriTest.cs - NUnit Test Cases for System.Uri
 //
@@ -11,10 +13,9 @@
 //
 
 using System.Reflection;
-using NUnit.Framework;
-using System;
-using System.IO;
 using System.Text;
+
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

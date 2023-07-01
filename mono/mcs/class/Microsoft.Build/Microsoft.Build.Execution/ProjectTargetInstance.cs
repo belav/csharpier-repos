@@ -29,9 +29,10 @@
 
 
 using System;
-using Microsoft.Build.Construction;
 using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {

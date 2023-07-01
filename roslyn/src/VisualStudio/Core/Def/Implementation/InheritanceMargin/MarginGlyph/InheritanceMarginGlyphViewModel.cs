@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;

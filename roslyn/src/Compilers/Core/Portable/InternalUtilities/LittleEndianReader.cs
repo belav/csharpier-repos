@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Roslyn.Utilities;
 using static System.Buffers.Binary.BinaryPrimitives;
+
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {

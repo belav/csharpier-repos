@@ -7,6 +7,7 @@
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Test.Utilities

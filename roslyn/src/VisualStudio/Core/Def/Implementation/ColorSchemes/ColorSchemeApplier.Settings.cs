@@ -7,12 +7,13 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Editor.ColorSchemes;
 using Microsoft.CodeAnalysis.Editor.Options;
+using NativeMethods = Microsoft.CodeAnalysis.Editor.Wpf.Utilities.NativeMethods;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using NativeMethods = Microsoft.CodeAnalysis.Editor.Wpf.Utilities.NativeMethods;
 
 namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
 {

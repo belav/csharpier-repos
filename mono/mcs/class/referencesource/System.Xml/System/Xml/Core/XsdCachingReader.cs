@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Diagnostics;
+using System.Globalization;
 //------------------------------------------------------------------------------
 // <copyright file="XsdCachingReader.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,13 +9,10 @@
 //------------------------------------------------------------------------------
 
 using System.IO;
+using System.Security.Policy;
 using System.Text;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Diagnostics;
-using System.Globalization;
-using System.Collections;
-using System.Security.Policy;
 
 namespace System.Xml
 {

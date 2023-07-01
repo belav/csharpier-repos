@@ -24,17 +24,9 @@
 #endregion
 
 #if NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities;
+using System;using System.Data;using System.IO;using System.Linq;using System.Runtime.Serialization;using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Utilities;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

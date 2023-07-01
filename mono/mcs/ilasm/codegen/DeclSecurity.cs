@@ -14,6 +14,7 @@ using System.Security;
 using System.Security.Permissions;
 
 using SSPermissionSet = System.Security.PermissionSet;
+
 using MIPermissionSet = Mono.ILASM.PermissionSet;
 
 namespace Mono.ILASM

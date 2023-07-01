@@ -1,3 +1,4 @@
+using System;
 //
 // DateTimeOffsetTest.cs - NUnit Test Cases for the System.DateTimeOffset struct
 //
@@ -10,8 +11,8 @@
 //
 
 using System.Globalization;
+
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

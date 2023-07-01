@@ -7,9 +7,9 @@ namespace System.ServiceModel.Discovery
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Runtime;
+    using SR2 = System.ServiceModel.Discovery.SR;
     using System.Text;
     using System.Xml;
-    using SR2 = System.ServiceModel.Discovery.SR;
 
     static class SerializationUtility
     {

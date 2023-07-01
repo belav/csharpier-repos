@@ -5,8 +5,8 @@
 // by loading 4-bytes, which is not always safe.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 public class GitHub_19288
 {

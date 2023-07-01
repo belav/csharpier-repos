@@ -9,8 +9,8 @@ namespace System.ServiceModel.Channels
     using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Configuration;
     using System.Net.Security;
+    using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
     using System.Windows.Markup;
 

@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 

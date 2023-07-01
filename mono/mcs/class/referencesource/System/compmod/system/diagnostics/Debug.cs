@@ -10,11 +10,11 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.Text;
-    using System.Reflection;
     using System.Collections;
-    using System.Security.Permissions;
     using System.Globalization;
+    using System.Reflection;
+    using System.Security.Permissions;
+    using System.Text;
 
     /// <devdoc>
     ///    <para>Provides a set of properties and

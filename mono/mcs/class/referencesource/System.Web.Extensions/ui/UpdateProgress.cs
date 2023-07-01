@@ -14,9 +14,9 @@ namespace System.Web.UI
     using System.Globalization;
     using System.Text;
     using System.Web;
-    using System.Web.UI;
-    using System.Web.Script;
     using System.Web.Resources;
+    using System.Web.Script;
+    using System.Web.UI;
     using System.Web.Util;
 
     [

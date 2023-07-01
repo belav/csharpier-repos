@@ -3,13 +3,13 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ServiceModel;
     using System.ServiceModel.Description;
-    using System.Xml.Schema;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
+    using System.Xml.Schema;
 
     public class StandardBindingImporter : IWsdlImportExtension
     {

@@ -9,22 +9,17 @@
 namespace System.Security
 {
     using System;
-    using System.Threading;
-    using System.Security.Util;
     using System.Collections;
     using System.IO;
-    using System.Security.Permissions;
     using System.Runtime.CompilerServices;
+    using System.Security.Permissions;
     using System.Security.Policy;
+    using System.Security.Util;
+    using System.Threading;
 #if FEATURE_SERIALIZATION
     using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-    using BindingFlags = System.Reflection.BindingFlags;
-    using System.Runtime.Serialization;
-    using System.Text;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using BindingFlags = System.Reflection.BindingFlags;using System.Runtime.Serialization;using System.Text;using System.Globalization;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
     [Serializable]
     internal enum SpecialPermissionSetFlag

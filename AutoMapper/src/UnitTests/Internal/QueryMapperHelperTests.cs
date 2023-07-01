@@ -1,7 +1,7 @@
 using System;
-using Xunit;
-using Shouldly;
 using AutoMapper.QueryableExtensions.Impl;
+using Shouldly;
+using Xunit;
 
 namespace AutoMapper.UnitTests
 {

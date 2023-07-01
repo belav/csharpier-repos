@@ -1,3 +1,14 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+
 //
 // Mono.Data.Tds.Protocol.Tds.cs
 //
@@ -34,16 +45,6 @@
 //
 
 using Mono.Security.Protocol.Ntlm;
-using System;
-using System.IO;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Net.Sockets;
-using System.Globalization;
-using System.Security;
-using System.Text;
-using System.Runtime.InteropServices;
 
 namespace Mono.Data.Tds.Protocol
 {

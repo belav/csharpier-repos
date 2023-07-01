@@ -32,6 +32,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Discovery;
 using System.ServiceModel.Dispatcher;
 using System.Threading;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Discovery

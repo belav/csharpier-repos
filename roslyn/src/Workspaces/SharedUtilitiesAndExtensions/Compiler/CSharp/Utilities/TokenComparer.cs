@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Utilities

@@ -14,8 +14,8 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     public interface ICollectionAdapter<T>
     {

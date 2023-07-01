@@ -3,15 +3,15 @@
 
 
 using System;
-using System.Text;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection.PortableExecutable;
+using System.Text;
 
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using System.IO;
-using System.Collections.Immutable;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

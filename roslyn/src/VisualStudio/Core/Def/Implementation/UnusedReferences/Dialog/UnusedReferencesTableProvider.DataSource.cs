@@ -6,6 +6,7 @@ using System;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.UnusedReferences;
 using Microsoft.VisualStudio.Shell.TableManager;

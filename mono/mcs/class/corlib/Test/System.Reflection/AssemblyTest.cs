@@ -1,3 +1,9 @@
+using System;
+using System.Configuration.Assemblies;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+
 //
 // System.Reflection.Assembly Test Cases
 //
@@ -32,20 +38,10 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Configuration.Assemblies;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Threading;
-using System.Runtime.Serialization;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Linq;
-using System.Resources;
+using System.Threading;using System.Runtime.Serialization;using System.Runtime.CompilerServices;using System.Security;using System.Linq;using System.Resources;
 
 // Used by GetType_TypeForwarder_Nested ()
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(

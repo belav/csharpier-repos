@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Drawing.Imaging.Metafile.cs
 //
@@ -31,7 +32,6 @@
 
 using System.IO;
 using System.Reflection;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace System.Drawing.Imaging

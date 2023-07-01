@@ -1,4 +1,9 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+//---------------------------------------------------------------------
 // <copyright file="DefaultAssemblyResolver.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -8,11 +13,6 @@
 //---------------------------------------------------------------------
 
 using System.Reflection;
-using System.IO;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
 
 namespace System.Data.Metadata.Edm
 {

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+
 using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Utilities

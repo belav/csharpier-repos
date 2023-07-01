@@ -31,10 +31,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Mono.CodeContracts.Static.AST;
-using Mono.CodeContracts.Static.AST.Visitors;
+
 using Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding;
 using Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths;
+using Mono.CodeContracts.Static.AST;
+using Mono.CodeContracts.Static.AST.Visitors;
 using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;

@@ -12,10 +12,11 @@
 
 namespace System.Collections.Specialized
 {
-    using Microsoft.Win32;
     using System.Collections;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Runtime.Serialization;
+
+    using Microsoft.Win32;
 
     internal class BackCompatibleStringComparer : IEqualityComparer
     {

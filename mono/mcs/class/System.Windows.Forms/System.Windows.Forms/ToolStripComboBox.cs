@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // ToolStripComboBox.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Drawing;
-using System.ComponentModel;
 using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms

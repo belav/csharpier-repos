@@ -26,16 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using NUnit.Framework;
-using System;
-using System.Configuration;
-using System.ServiceModel.Configuration;
-using System.Text;
-using System.ServiceModel.Security;
-using System.ServiceModel;
-using System.Net.Security;
-
-using MonoTests.Helpers;
+using NUnit.Framework;using System;using System.Configuration;using System.ServiceModel.Configuration;using System.Text;using System.ServiceModel.Security;using System.ServiceModel;using System.Net.Security;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {

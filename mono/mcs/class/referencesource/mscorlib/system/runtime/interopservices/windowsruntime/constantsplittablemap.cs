@@ -1,4 +1,7 @@
-﻿///----------- ----------- ----------- ----------- ----------- -----------
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+///----------- ----------- ----------- ----------- ----------- -----------
 /// <copyright file="ConstantSplittableMap.cs" company="Microsoft">
 ///     Copyright (c) Microsoft Corporation.  All rights reserved.
 /// </copyright>
@@ -8,9 +11,6 @@
 
 
 using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 

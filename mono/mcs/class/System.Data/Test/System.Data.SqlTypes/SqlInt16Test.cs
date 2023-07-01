@@ -1,3 +1,9 @@
+using System;
+using System.Data.SqlTypes;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+
 //
 // SqlInt16Test.cs - NUnit Test Cases for System.Data.SqlTypes.SqlInt16
 //
@@ -32,11 +38,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Xml;
-using System.Data.SqlTypes;
-using System.Xml.Serialization;
-using System.IO;
 
 namespace MonoTests.System.Data.SqlTypes
 {

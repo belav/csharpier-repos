@@ -4,11 +4,12 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
-using Xunit;
 using static Microsoft.CodeAnalysis.UnitTests.SolutionTestHelpers;
 using static Microsoft.CodeAnalysis.UnitTests.SolutionUtilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

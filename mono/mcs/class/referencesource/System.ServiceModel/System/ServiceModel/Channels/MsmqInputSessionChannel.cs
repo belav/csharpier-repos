@@ -6,9 +6,9 @@ namespace System.ServiceModel.Channels
 {
     using System.Runtime;
     using System.ServiceModel;
-    using System.Transactions;
     using SR = System.ServiceModel.SR;
     using System.Threading;
+    using System.Transactions;
 
     sealed class MsmqInputSessionChannel : InputChannel, IInputSessionChannel
     {

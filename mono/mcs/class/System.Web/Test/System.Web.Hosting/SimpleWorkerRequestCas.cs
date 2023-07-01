@@ -1,3 +1,11 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.Hosting;
+
 //
 // SimpleWorkerRequestCas.cs
 //	- CAS unit tests for System.Web.Hosting.SimpleWorkerRequest
@@ -28,14 +36,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.Hosting;
 
 namespace MonoCasTests.System.Web.Hosting
 {

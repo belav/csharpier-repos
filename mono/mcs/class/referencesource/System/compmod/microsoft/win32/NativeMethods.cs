@@ -9,18 +9,7 @@ namespace Microsoft.Win32
     using System;
     using System.Runtime.InteropServices;
 #if !SILVERLIGHT
-    using System.Text;
-    using System.Threading;
-    using System.Globalization;
-    using System.Runtime.Remoting;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.ComponentModel;
-    using System.Security.Permissions;
-    using Microsoft.Win32.SafeHandles;
+    using System.Text;using System.Threading;using System.Globalization;using System.Runtime.Remoting;using System.Runtime.CompilerServices;using System.Runtime.ConstrainedExecution;using System.Runtime.Versioning;using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.ComponentModel;using System.Security.Permissions;using Microsoft.Win32.SafeHandles;
 
     // not public!
     [HostProtection(MayLeakOnAbort = true)]

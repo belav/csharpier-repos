@@ -29,12 +29,12 @@
 
 
 using System;
-using System.Collections;
-using System.ComponentModel;
-using System.ComponentModel.Design;
 
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
 
 namespace System.ComponentModel.Design.Serialization
 {

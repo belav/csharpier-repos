@@ -10,9 +10,14 @@ namespace System.ServiceModel.Security
     using System.Diagnostics;
     using System.DirectoryServices.ActiveDirectory;
     using System.Globalization;
+    using AuthIdentityEx = System.IdentityModel.AuthIdentityEx;
     using System.IdentityModel.Claims;
+    using CredentialUse = System.IdentityModel.CredentialUse;
+    using DictionaryManager = System.IdentityModel.DictionaryManager;
     using System.IdentityModel.Policy;
+    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using System.IdentityModel.Selectors;
+    using SspiWrapper = System.IdentityModel.SspiWrapper;
     using System.IdentityModel.Tokens;
     using System.Net;
     using System.Net.Security;
@@ -33,12 +38,8 @@ namespace System.ServiceModel.Security
     using System.Text;
     using System.Threading;
     using System.Xml;
+
     using Microsoft.Win32;
-    using AuthIdentityEx = System.IdentityModel.AuthIdentityEx;
-    using CredentialUse = System.IdentityModel.CredentialUse;
-    using DictionaryManager = System.IdentityModel.DictionaryManager;
-    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
-    using SspiWrapper = System.IdentityModel.SspiWrapper;
 
     static class StoreLocationHelper
     {

@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using Microsoft.Win32;
 //
 // SystemEventsCas.cs - CAS unit tests for Microsoft.Win32.SystemEvents
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using Microsoft.Win32;
 
 namespace MonoCasTests.Microsoft.Win32
 {

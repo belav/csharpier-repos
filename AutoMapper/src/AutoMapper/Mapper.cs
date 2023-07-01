@@ -1,7 +1,8 @@
 namespace AutoMapper;
 
-using IObjectMappingOperationOptions = IMappingOperationOptions<object, object>;
 using Factory = Func<Type, object>;
+
+using IObjectMappingOperationOptions = IMappingOperationOptions<object, object>;
 
 public interface IMapperBase
 {

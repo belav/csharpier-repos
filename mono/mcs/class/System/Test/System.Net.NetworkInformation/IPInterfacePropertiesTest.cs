@@ -1,3 +1,9 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Net.NetworkInformation;
+
 //
 // IPInterfacePropertiesTest.cs - NUnit Test Cases for System.Net.NetworkInformation.IPInterfaceProperties
 //
@@ -6,11 +12,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Net.NetworkInformation;
 
 namespace MonoTests.System.Net.NetworkInformation
 {

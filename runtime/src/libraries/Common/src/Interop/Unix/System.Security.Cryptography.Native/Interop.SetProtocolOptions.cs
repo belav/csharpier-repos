@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Security.Authentication;
+
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop

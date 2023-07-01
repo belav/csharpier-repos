@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Runtime;
 using System.Windows;
+
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingStyle.ViewModel;

@@ -18,9 +18,9 @@ namespace System.ServiceModel.Activities
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using TD2 = System.ServiceModel.Diagnostics.Application.TD;
     using System.ServiceModel.Dispatcher;
     using System.Transactions;
-    using TD2 = System.ServiceModel.Diagnostics.Application.TD;
 
     // This AsyncResult completion is very tricky. It can complete in two path.
     // FastPath: When workflow executes synchronously(SendFault/SendReply called before ResumeBookmark completes) we complete the AsyncResult at HandleEndResumeBookmark;

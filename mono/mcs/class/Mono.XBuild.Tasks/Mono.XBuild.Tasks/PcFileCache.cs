@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml;
-using System.IO;
-using System.Collections.Generic;
 
 // IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT IMPORTANT
 // This code is shared with xbuild, which has to build with .NET 2.0,

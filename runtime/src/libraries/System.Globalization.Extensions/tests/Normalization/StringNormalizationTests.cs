@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using Xunit;
 using System.Collections.Generic;
+using System.Text;
+
+using Xunit;
 
 namespace System.Globalization.Tests
 {

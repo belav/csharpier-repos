@@ -10,13 +10,13 @@ namespace System.Web.UI
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Configuration;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
     using System.Security.Permissions;
     using System.Text;
     using System.Web;
-    using System.Web.Util;
     using System.Web.Configuration;
+    using System.Web.Util;
 
     /// <internalonly/>
     public static class DesignTimeTemplateParser

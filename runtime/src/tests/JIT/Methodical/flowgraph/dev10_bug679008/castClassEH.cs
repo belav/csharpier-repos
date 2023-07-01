@@ -13,6 +13,7 @@ Fix: Use an intermediate temporary, just like for other patterns, when the cast 
 
 using System;
 using System.Runtime.CompilerServices;
+
 using Xunit;
 
 namespace Test_castClassEH_cs

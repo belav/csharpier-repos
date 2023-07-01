@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="BoolLiteral.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,22 +10,21 @@
 
 using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
+    using DomainBoolExpr = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
     using DomainConstraint = System.Data.Common.Utils.Boolean.DomainConstraint<
         BoolLiteral,
         Constant
     >;
     using DomainVariable = System.Data.Common.Utils.Boolean.DomainVariable<BoolLiteral, Constant>;
-    using DomainBoolExpr = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
-        BoolLiteral,
-        Constant
-    >>;
     using DomainNotExpr = System.Data.Common.Utils.Boolean.NotExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
         BoolLiteral,
         Constant

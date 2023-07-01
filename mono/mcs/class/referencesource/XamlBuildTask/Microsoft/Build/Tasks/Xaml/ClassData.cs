@@ -5,15 +5,15 @@
 namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
-    using System.Collections.Generic;
-    using System.Xml.Linq;
-    using System.Xaml.Schema;
-    using System.Xaml;
-    using System.Windows.Markup;
-    using System.Runtime;
-    using System.Reflection;
-    using System.Collections.ObjectModel;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Windows.Markup;
+    using System.Xaml;
+    using System.Xaml.Schema;
+    using System.Xml.Linq;
 
     public class ClassData
     {

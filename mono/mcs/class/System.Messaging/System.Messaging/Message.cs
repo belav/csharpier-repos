@@ -30,8 +30,8 @@
 //
 
 using System;
-using System.IO;
 using System.ComponentModel;
+using System.IO;
 
 using Mono.Messaging;
 

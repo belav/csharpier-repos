@@ -7,11 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Xml;
-using System.Data.Common;
-using System.Globalization;
 using System.Data;
+using System.Data.Common;
 using System.Data.Entity.Design.Common;
+using System.Globalization;
+using System.Xml;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {

@@ -1,4 +1,5 @@
-﻿#region License
+﻿using System.Globalization;
+#region License
 // Copyright (c) 2022 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -24,13 +25,9 @@
 #endregion
 
 using Newtonsoft.Json.Linq;
-using System.Globalization;
 using Newtonsoft.Json.Tests.Documentation.Samples.Linq;
-
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

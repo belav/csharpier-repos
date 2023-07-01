@@ -4,6 +4,7 @@
 using System.Buffers;
 using System.MemoryTests;
 using System.Runtime.InteropServices;
+
 using Xunit;
 
 namespace System.Memory.Tests

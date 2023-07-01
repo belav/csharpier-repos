@@ -3,9 +3,9 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.EntityFrameworkCore;
 

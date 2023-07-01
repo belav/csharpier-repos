@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using System.Text.Json.Serialization.Tests;
+
 using Xunit;
 
 namespace System.Text.Json.Tests.Serialization

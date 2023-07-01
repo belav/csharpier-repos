@@ -8,6 +8,7 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Runtime;
 using System.Runtime.InteropServices;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host

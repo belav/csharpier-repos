@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Runtime.Loader;
+
 using Xunit;
 
 namespace System.Reflection.Tests

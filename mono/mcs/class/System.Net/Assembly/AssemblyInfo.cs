@@ -29,13 +29,13 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
-using System.Diagnostics;
-using System.Security;
-using System.Security.Permissions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 
 // General Information about the System.Net assembly
 

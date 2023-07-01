@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+
 // DataRowCollectionTest.cs - NUnit Test Cases for System.DataRowCollection
 //
 // Authors:
@@ -33,8 +36,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Data;
 
 namespace MonoTests.System.Data
 {

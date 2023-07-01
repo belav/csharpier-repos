@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
+
 using ILCompiler.Reflection.ReadyToRun;
 
 namespace R2RDump

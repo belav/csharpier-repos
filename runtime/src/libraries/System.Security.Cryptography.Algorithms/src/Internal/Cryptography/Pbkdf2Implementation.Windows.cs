@@ -3,14 +3,15 @@
 
 using System;
 using System.Diagnostics;
-using System.Threading;
 using System.Security.Cryptography;
-using Microsoft.Win32.SafeHandles;
+using System.Threading;
+
 using BCryptAlgPseudoHandle = Interop.BCrypt.BCryptAlgPseudoHandle;
 using BCryptBuffer = Interop.BCrypt.BCryptBuffer;
 using BCryptOpenAlgorithmProviderFlags = Interop.BCrypt.BCryptOpenAlgorithmProviderFlags;
 using CngBufferDescriptors = Interop.BCrypt.CngBufferDescriptors;
 using NTSTATUS = Interop.BCrypt.NTSTATUS;
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography
 {

@@ -1,3 +1,7 @@
+using System;
+using System.Data;
+
+using MonoTests.Helpers;
 //
 // DataRelationTest.cs - NUnit Test Cases for  DataRelation
 //
@@ -32,10 +36,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using NUnit.Framework;
-using System;
-using System.Data;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Data
 {

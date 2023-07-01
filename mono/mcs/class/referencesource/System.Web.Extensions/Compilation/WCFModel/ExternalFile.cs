@@ -9,7 +9,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using XmlSerialization = System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else

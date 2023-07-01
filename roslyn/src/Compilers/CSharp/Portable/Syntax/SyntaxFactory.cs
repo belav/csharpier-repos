@@ -11,11 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using InternalSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax;
 using Microsoft.CodeAnalysis.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using InternalSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {

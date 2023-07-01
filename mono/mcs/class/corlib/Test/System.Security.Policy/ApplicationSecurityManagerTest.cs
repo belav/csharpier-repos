@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security;
+using System.Security.Policy;
+
 //
 // ApplicationSecurityManagerTest.cs -
 //	NUnit Test Cases for ApplicationSecurityManager
@@ -29,10 +34,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

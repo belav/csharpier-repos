@@ -8,13 +8,7 @@
 #endif
 
 #nullable enable
-using System.Collections;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Tracing;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System.Collections;using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.Tracing;using System.Globalization;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;
 
 #pragma warning disable CA1823 // not all IDs are used by all partial providers
 

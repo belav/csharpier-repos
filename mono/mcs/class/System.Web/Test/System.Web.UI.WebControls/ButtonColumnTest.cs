@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Diagnostics;
+using System.Web.UI.WebControls;
+
 //
 // ButtonColumnTest.cs
 //
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

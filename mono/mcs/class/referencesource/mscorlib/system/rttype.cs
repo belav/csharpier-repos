@@ -14,40 +14,26 @@
 
 
 using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
-using System.Globalization;
 using System.Threading;
-using System.Diagnostics;
 #if !NETCORE
 using System.Security.Permissions;
 #endif
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime;
-using System.Runtime.Serialization;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Text;
-using System.Runtime.Remoting;
+using System.Collections;using System.Collections.Generic;using System.Runtime;using System.Runtime.Serialization;using System.Runtime.CompilerServices;using System.Security;using System.Text;using System.Runtime.Remoting;
 #if FEATURE_REMOTING
-using System.Runtime.Remoting.Proxies;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Activation;
-using System.Runtime.Remoting.Metadata;
+using System.Runtime.Remoting.Proxies;using System.Runtime.Remoting.Messaging;using System.Runtime.Remoting.Activation;using System.Runtime.Remoting.Metadata;
 #endif
 #if !MONO
-using MdSigCallingConvention = System.Signature.MdSigCallingConvention;
-using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
+using MdSigCallingConvention = System.Signature.MdSigCallingConvention;using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 #endif
-using System.Runtime.InteropServices;
-using DebuggerStepThroughAttribute = System.Diagnostics.DebuggerStepThroughAttribute;
+using System.Runtime.InteropServices;using DebuggerStepThroughAttribute = System.Diagnostics.DebuggerStepThroughAttribute;
 #if !MONO
 using MdToken = System.Reflection.MetadataToken;
 #endif
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
-
+using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 #if MONO || NETCORE
 using CustomAttribute = System.MonoCustomAttrs;
 #endif

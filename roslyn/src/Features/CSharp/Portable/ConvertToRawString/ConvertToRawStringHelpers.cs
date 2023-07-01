@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Reflection.PortableExecutable;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;

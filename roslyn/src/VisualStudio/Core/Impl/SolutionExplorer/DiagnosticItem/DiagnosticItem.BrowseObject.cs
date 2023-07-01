@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.VisualStudio.Shell;

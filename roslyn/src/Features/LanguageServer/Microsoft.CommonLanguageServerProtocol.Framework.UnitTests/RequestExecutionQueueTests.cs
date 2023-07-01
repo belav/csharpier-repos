@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.CommonLanguageServerProtocol.Framework;
+using static Microsoft.CommonLanguageServerProtocol.Framework.UnitTests.HandlerProviderTests;
 using Moq;
 using Nerdbank.Streams;
 using StreamJsonRpc;
 using Xunit;
-using static Microsoft.CommonLanguageServerProtocol.Framework.UnitTests.HandlerProviderTests;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 

@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Linq;
+
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Physical.Internal

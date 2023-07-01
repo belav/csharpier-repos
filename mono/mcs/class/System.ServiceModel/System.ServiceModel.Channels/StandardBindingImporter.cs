@@ -25,15 +25,15 @@
 // THE SOFTWARE.
 
 using System;
-using System.Net;
-using System.Xml;
-using System.Xml.Schema;
 using System.Collections.Generic;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 
 using WS = System.Web.Services.Description;
+using System.Xml;
+using System.Xml.Schema;
 using QName = System.Xml.XmlQualifiedName;
 
 namespace System.ServiceModel.Channels

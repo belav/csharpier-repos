@@ -8,9 +8,9 @@ namespace System.Web.UI.Design.MobileControls
 {
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Web.Mobile;
     using System.Web.UI;
-    using System.Globalization;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

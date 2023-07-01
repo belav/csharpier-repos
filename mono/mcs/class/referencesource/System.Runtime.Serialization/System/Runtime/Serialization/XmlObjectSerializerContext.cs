@@ -6,14 +6,14 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Runtime.Serialization.Diagnostics.Application;
-    using System.Security;
-    using System.Xml;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
+    using System.Reflection;
+    using System.Runtime.Serialization.Diagnostics.Application;
+    using System.Security;
+    using System.Xml;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerContext

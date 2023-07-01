@@ -18,11 +18,7 @@ using System.Security;
 #if !MONO
 using System.Security.Permissions;
 #endif
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Versioning;
-using Microsoft.Win32;
+using System.Runtime.InteropServices;using System.Runtime.CompilerServices;using System.Runtime.ConstrainedExecution;using System.Runtime.Versioning;using Microsoft.Win32;
 
 namespace Microsoft.Win32.SafeHandles
 {

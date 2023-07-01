@@ -1,4 +1,10 @@
-﻿//
+﻿using System;
+using System.ComponentModel;
+using System.Security;
+using System.Web;
+using System.Web.Configuration;
+
+//
 // DynamicModuleUtility.cs
 //
 // Author:
@@ -25,11 +31,6 @@
 // THE SOFTWARE.
 
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using System;
-using System.ComponentModel;
-using System.Security;
-using System.Web;
-using System.Web.Configuration;
 
 namespace Microsoft.Web.Infrastructure.DynamicModuleHelper
 {

@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.Text;
 

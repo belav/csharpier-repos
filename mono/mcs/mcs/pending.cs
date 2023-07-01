@@ -15,13 +15,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 #if STATIC
-using IKVM.Reflection;
-using IKVM.Reflection.Emit;
+using IKVM.Reflection;using IKVM.Reflection.Emit;
 #else
-using System.Reflection;
-using System.Reflection.Emit;
+using System.Reflection;using System.Reflection.Emit;
 #endif
 
 namespace Mono.CSharp

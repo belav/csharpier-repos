@@ -10,8 +10,8 @@ namespace System.Activities.Expressions
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Runtime.Serialization;
-    using System.Windows.Markup;
     using System.Threading;
+    using System.Windows.Markup;
 
     [ContentProperty("Indices")]
     public sealed class IndexerReference<TOperand, TItem> : CodeActivity<Location<TItem>>

@@ -1,13 +1,13 @@
+using System.Collections;
+using System.Data.SqlTypes;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Xml;
-using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.IO;
 using System.Xml.Serialization;
-using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Common
 {

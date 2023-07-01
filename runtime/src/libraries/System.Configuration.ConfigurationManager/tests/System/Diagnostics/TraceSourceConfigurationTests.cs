@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.DiagnosticsTests;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Diagnostics.Tests

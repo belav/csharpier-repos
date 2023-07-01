@@ -15,21 +15,21 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Diagnostics;
     using System.IdentityModel.Protocols.WSTrust;
     using System.IdentityModel.Selectors;
+    using SAML2 = System.IdentityModel.Tokens.Saml2Constants;
+    using WSC13 = System.IdentityModel.WSSecureConversation13Constants;
+    using WSC = System.IdentityModel.WSSecureConversationFeb2005Constants;
+    using WSSE = System.IdentityModel.WSSecurity10Constants;
+    using WSSE11 = System.IdentityModel.WSSecurity11Constants;
     using System.IO;
     using System.Linq;
     using System.Runtime;
     using System.Security.Claims;
+    using Claim = System.Security.Claims.Claim;
     using System.Security.Cryptography;
     using System.Security.Principal;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
-    using Claim = System.Security.Claims.Claim;
-    using SAML2 = System.IdentityModel.Tokens.Saml2Constants;
-    using WSC = System.IdentityModel.WSSecureConversationFeb2005Constants;
-    using WSC13 = System.IdentityModel.WSSecureConversation13Constants;
-    using WSSE = System.IdentityModel.WSSecurity10Constants;
-    using WSSE11 = System.IdentityModel.WSSecurity11Constants;
 
     /// <summary>
     /// Creates SAML2 assertion-based security tokens

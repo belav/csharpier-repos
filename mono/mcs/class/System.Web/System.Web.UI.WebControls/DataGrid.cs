@@ -1,3 +1,8 @@
+using System.Collections;
+using System.ComponentModel;
+using System.Globalization;
+using System.Reflection;
+using System.Security.Permissions;
 //
 // System.Web.UI.WebControls.DataGrid.cs
 //
@@ -28,11 +33,6 @@
 //
 
 using System.Web.Util;
-using System.Collections;
-using System.Globalization;
-using System.ComponentModel;
-using System.Reflection;
-using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {

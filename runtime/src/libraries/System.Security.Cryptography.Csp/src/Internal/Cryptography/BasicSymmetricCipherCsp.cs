@@ -4,9 +4,10 @@
 using System;
 using System.Diagnostics;
 using System.Security.Cryptography;
+
 using Internal.NativeCrypto;
-using Microsoft.Win32.SafeHandles;
 using static Internal.NativeCrypto.CapiHelper;
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography
 {

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using ILCompiler.Sorting.Implementation;
 
 namespace ILCompiler

@@ -3,15 +3,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.DataContracts;
-using System.Xml;
-using System.Xml.Schema;
 
 using DataContractDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
@@ -21,6 +12,15 @@ using SchemaObjectDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
     System.Runtime.Serialization.SchemaObjectInfo
 >;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.DataContracts;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Runtime.Serialization
 {

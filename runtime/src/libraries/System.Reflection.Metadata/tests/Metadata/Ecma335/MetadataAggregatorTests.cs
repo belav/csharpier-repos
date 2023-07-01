@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection.Internal;
-using System.Runtime.InteropServices;
-using Xunit;
 using RowCounts = System.Reflection.Metadata.Ecma335.MetadataAggregator.RowCounts;
+using System.Runtime.InteropServices;
+
+using Xunit;
 
 namespace System.Reflection.Metadata.Ecma335.Tests
 {

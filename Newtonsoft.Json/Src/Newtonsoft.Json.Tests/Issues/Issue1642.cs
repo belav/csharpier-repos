@@ -24,16 +24,7 @@
 #endregion
 
 #if !(PORTABLE || PORTABLE40 || DNXCORE50)
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities;
+using System;using System.Collections;using System.Collections.Generic;using System.Reflection;using System.Reflection.Emit;using System.Runtime.Serialization;using Newtonsoft.Json.Converters;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Utilities;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

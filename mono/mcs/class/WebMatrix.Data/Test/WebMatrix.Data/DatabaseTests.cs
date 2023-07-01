@@ -26,16 +26,16 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
-using System.Data.Common;
-using System.Collections.Generic;
 
-using WebMatrix.Data;
+using MonoTests.Helpers;
 
 using NUnit.Framework;
 
-using MonoTests.Helpers;
+using WebMatrix.Data;
 
 namespace MonoTests.WebMatrix.Data
 {

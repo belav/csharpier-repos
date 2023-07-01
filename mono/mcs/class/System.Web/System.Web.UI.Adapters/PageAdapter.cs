@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Specialized;
 //
 // System.Web.UI.Adapters.PageAdapter
 //
@@ -28,8 +30,6 @@
 
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections;
-using System.Collections.Specialized;
 
 namespace System.Web.UI.Adapters
 {

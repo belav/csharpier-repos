@@ -25,14 +25,11 @@
 
 #if HAVE_ASYNC
 
-using System;
-using System.Globalization;
+using System;using System.Globalization;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Utilities;
+using System.Threading;using System.Threading.Tasks;using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {

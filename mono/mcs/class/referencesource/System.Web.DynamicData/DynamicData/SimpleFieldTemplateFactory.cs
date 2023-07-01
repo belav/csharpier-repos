@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Web.UI.WebControls;
     using System.Web.Hosting;
+    using System.Web.UI.WebControls;
 
     // This FieldTemplateFactory is used for the simple cases where the user doesn't have
     // a FieldTemplate directory but wants to get basic validation logic. In a sense

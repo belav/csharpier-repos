@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
-    using System.Threading;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
     sealed class PeerInputChannelAcceptor
         : SingletonChannelAcceptor<IInputChannel, PeerInputChannel, Message>

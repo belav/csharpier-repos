@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
 
     [SuppressMessage(
         "Microsoft.Naming",

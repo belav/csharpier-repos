@@ -8,8 +8,8 @@ namespace System.Configuration
 {
     using System.Configuration.Internal;
     using System.IO;
-    using System.Xml;
     using System.Security.Permissions;
+    using System.Xml;
 
     internal sealed class ConfigXmlWhitespace : XmlWhitespace, IConfigErrorInfo
     {

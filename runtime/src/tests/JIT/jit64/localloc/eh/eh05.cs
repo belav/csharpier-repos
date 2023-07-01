@@ -6,8 +6,9 @@
  */
 
 using System;
-using LocallocTesting;
 using System.Runtime.CompilerServices;
+
+using LocallocTesting;
 
 internal class LocallocTest
 {

@@ -4,14 +4,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using ILLink.Shared.DataFlow;
-using Mono.Cecil;
-using Mono.Cecil.Cil;
 using HoistedLocalState = ILLink.Shared.DataFlow.DefaultValueDictionary<
     Mono.Linker.Dataflow.HoistedLocalKey,
     ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>
 >;
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 namespace Mono.Linker.Dataflow
 {

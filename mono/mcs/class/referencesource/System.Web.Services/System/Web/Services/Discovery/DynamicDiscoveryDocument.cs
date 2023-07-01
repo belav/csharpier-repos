@@ -7,10 +7,10 @@
 namespace System.Web.Services.Discovery
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Xml.Serialization;
+    using System.IO;
     using System.Text;
+    using System.Xml.Serialization;
 
     /// <include file='doc\DynamicDiscoveryDocument.uex' path='docs/doc[@for="DynamicDiscoveryDocument"]/*' />
     /// <devdoc>

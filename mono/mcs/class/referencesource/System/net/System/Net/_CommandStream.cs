@@ -10,12 +10,12 @@ namespace System.Net
 {
     using System.Collections;
     using System.IO;
-    using System.Security.Cryptography.X509Certificates;
     using System.Net.Sockets;
+    using System.Security.Authentication;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Security.Authentication;
 
     /// <devdoc>
     /// <para>

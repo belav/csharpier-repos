@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime;
 using System.Reflection;
+using System.Runtime;
+
 using Xunit;
 
 public static class HandleTests

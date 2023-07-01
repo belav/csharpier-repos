@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+
 //
 // BitVector32Test.cs - NUnit Test Cases for System.Net.BitVector32
 //
@@ -11,9 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.Collections.Specialized
 {

@@ -55,8 +55,9 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.IO;
 using System.Collections;
+using System.IO;
+
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Util;

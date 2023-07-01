@@ -2,18 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.IdentityModel.Diagnostics;
     using System.Diagnostics;
-    using System.Runtime.Diagnostics;
-    using System.Security.Authentication.ExtendedProtection;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.ServiceModel.Diagnostics;
-    using System.Xml;
+    using System.IdentityModel.Diagnostics;
     using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography;
+    using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Xml;
 
     class SecurityTraceRecord : TraceRecord
     {

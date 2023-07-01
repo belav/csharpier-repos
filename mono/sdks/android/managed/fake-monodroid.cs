@@ -1,9 +1,9 @@
 using System;
-using System.Threading;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Android.Runtime
 {

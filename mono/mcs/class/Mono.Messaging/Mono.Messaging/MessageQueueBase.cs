@@ -29,8 +29,8 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections;
+using System.Threading;
 
 namespace Mono.Messaging
 {

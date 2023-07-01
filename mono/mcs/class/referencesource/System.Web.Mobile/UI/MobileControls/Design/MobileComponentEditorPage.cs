@@ -14,13 +14,13 @@ namespace System.Web.UI.Design.MobileControls
     using System.Diagnostics;
     using System.Drawing;
     using System.Web.UI.Design;
+
+    using ControlDesigner = System.Web.UI.Design.ControlDesigner;
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Web.UI.WebControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-
-    using ControlDesigner = System.Web.UI.Design.ControlDesigner;
 
     /// <summary>
     ///   The base class for all mobile component editor pages.

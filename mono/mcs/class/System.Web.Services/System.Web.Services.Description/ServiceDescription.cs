@@ -1,3 +1,7 @@
+using System.Collections;
+
+using System.Collections.Generic;
+using System.Collections.Specialized;
 //
 // System.Web.Services.Description.ServiceDescription.cs
 //
@@ -30,16 +34,12 @@
 //
 
 using System.IO;
-using System.Collections;
-using System.Collections.Specialized;
 using System.Reflection;
 using System.Web.Services;
 using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using System.Collections.Generic;
 
 namespace System.Web.Services.Description
 {

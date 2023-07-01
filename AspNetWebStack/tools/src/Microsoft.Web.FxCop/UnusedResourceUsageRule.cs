@@ -4,6 +4,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.FxCop.Sdk;
 
 namespace Microsoft.Web.FxCop

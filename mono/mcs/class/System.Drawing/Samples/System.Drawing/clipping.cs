@@ -1,3 +1,5 @@
+using System;
+using System.Drawing;
 //
 // Author:
 //   Jordi Mas i Hernandez
@@ -27,8 +29,6 @@
 //
 
 using System.Windows.Forms;
-using System.Drawing;
-using System;
 
 namespace MyFormProject
 {

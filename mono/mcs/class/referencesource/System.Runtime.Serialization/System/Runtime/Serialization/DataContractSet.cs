@@ -5,16 +5,16 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Xml.Schema;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
+    using System.Reflection;
     using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
 
     internal class DataContractSet
     {

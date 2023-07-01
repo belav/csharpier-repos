@@ -8,9 +8,9 @@ namespace System.ServiceModel.Activities
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using SR2 = System.ServiceModel.Activities.SR;
 
     class FromReply : CodeActivity
     {

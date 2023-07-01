@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using NumberStyles = System.Globalization.NumberStyles;
 using System.Runtime.InteropServices;
 using System.Threading;
+
 using Internal.TypeSystem;
-using NumberStyles = System.Globalization.NumberStyles;
 
 namespace Internal.JitInterface
 {

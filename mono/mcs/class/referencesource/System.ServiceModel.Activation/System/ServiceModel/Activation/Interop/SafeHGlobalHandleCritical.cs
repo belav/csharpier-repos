@@ -10,6 +10,7 @@ namespace System.ServiceModel.Activation.Interop
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Text;
+
     using Microsoft.Win32.SafeHandles;
 
 #pragma warning disable 618 // have not moved to the v4 security model yet

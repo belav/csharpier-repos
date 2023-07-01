@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.Extensions.Configuration.Memory;
 
 namespace Microsoft.Extensions.Configuration

@@ -17,11 +17,12 @@ namespace System.Data.OleDb
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
+
     using Microsoft.Win32;
-    using System.Runtime.Versioning;
 
     internal struct SchemaSupport
     {

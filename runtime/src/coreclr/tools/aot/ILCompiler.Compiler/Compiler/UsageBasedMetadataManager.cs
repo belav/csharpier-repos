@@ -3,29 +3,29 @@
 
 using System;
 using System.Collections.Generic;
+
+using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
+using Debug = System.Diagnostics.Debug;
 using System.IO;
 using System.Reflection.Metadata;
+using CustomAttributeHandle = System.Reflection.Metadata.CustomAttributeHandle;
+using CustomAttributeValue = System.Reflection.Metadata.CustomAttributeValue<Internal.TypeSystem.TypeDesc>;
 using System.Reflection.PortableExecutable;
 using System.Xml.XPath;
 
 using ILCompiler.Dataflow;
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
+using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 using ILCompiler.Metadata;
 using ILLink.Shared;
+using FlowAnnotations = ILLink.Shared.TrimAnalysis.FlowAnnotations;
 
 using Internal.IL;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
-using CustomAttributeHandle = System.Reflection.Metadata.CustomAttributeHandle;
-using CustomAttributeValue = System.Reflection.Metadata.CustomAttributeValue<Internal.TypeSystem.TypeDesc>;
-using Debug = System.Diagnostics.Debug;
-using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 using EcmaModule = Internal.TypeSystem.Ecma.EcmaModule;
 using EcmaType = Internal.TypeSystem.Ecma.EcmaType;
-using FlowAnnotations = ILLink.Shared.TrimAnalysis.FlowAnnotations;
 
 namespace ILCompiler
 {

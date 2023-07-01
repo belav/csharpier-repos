@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.TodoComments;
 
 namespace Microsoft.CodeAnalysis.Editor

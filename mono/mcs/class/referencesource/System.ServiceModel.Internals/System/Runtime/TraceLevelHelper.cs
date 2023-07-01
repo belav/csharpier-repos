@@ -6,8 +6,8 @@ namespace System.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
 
     /// <remarks>
     /// Microsoft (11/15/10, CSDMain 194940) - Previously, this code first checked that the opcode was set to informational.  If not, it would check

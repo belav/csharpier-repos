@@ -1,13 +1,13 @@
+using System.Runtime.Diagnostics;
+using System.Security.Claims;
+
+using DiagnosticStrings = System.ServiceModel.Diagnostics.DiagnosticStrings;
 //------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
 using System.Web;
-using System.Runtime.Diagnostics;
-using System.Security.Claims;
 using System.Xml;
-
-using DiagnosticStrings = System.ServiceModel.Diagnostics.DiagnosticStrings;
 
 namespace System.IdentityModel.Diagnostics
 {

@@ -3,6 +3,7 @@
 
 using System;
 using System.Security.Principal;
+
 using Xunit;
 
 public class WellKnownSidTypeTests

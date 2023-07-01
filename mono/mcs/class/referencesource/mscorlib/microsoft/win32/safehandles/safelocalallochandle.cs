@@ -2,10 +2,7 @@
 namespace Microsoft.Win32.SafeHandles
 {
 #if !FEATURE_PAL
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.ConstrainedExecution;
+    using System;using System.Runtime.CompilerServices;using System.Runtime.InteropServices;using System.Runtime.ConstrainedExecution;
 
     [System.Security.SecurityCritical] // auto-generated
     internal sealed class SafeLocalAllocHandle : SafeBuffer

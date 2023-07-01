@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Xml;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
     abstract class DelegatingHeader : MessageHeader
     {

@@ -25,6 +25,7 @@
 
 using System;
 using System.Runtime.Serialization;
+
 using Newtonsoft.Json.Tests.TestObjects.Organization;
 
 namespace Newtonsoft.Json.Tests.TestObjects

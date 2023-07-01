@@ -8,8 +8,8 @@
 namespace System.Text
 {
     using System;
-    using System.Runtime;
     using System.Diagnostics.Contracts;
+    using System.Runtime;
 
     [Serializable]
     public sealed class EncoderReplacementFallback : EncoderFallback

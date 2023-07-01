@@ -28,6 +28,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Evaluation

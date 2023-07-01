@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 //
 // CalendarData.cs
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 
 namespace System.Globalization
 {

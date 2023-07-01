@@ -20,10 +20,11 @@
 */
 
 using System;
-using C5;
-using NUnit.Framework;
 using SCG = System.Collections.Generic;
 using System.Reflection;
+
+using C5;
+using NUnit.Framework;
 
 namespace C5UnitTests.Templates.Events
 {

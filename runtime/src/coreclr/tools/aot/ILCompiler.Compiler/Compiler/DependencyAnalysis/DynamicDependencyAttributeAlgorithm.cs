@@ -7,16 +7,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection.Metadata;
 
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
+using static ILCompiler.Dataflow.DynamicallyAccessedMembersBinder;
+
+using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 
 using ILCompiler.Logging;
 
 using ILLink.Shared;
 
-using static ILCompiler.Dataflow.DynamicallyAccessedMembersBinder;
-
-using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.DependencyAnalysis
 {

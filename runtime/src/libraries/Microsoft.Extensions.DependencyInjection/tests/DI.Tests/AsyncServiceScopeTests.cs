@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection.Tests

@@ -9,10 +9,10 @@ namespace System.ServiceModel.Activities
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.DurableInstancing;
+    using SR2 = System.ServiceModel.Activities.SR;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using SR2 = System.ServiceModel.Activities.SR;
-    using System.Runtime.DurableInstancing;
     using System.Xml.Linq;
 
     class ToReply : NativeActivity

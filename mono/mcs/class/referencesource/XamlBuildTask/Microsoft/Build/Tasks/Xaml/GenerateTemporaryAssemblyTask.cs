@@ -9,18 +9,19 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime;
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml;
     using System.Xml.Linq;
+
+    using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using Microsoft.Build.BuildEngine;
 
     [Fx.Tag.XamlVisible(true)]
     public class GenerateTemporaryAssemblyTask : Task

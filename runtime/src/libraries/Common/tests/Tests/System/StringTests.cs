@@ -8,12 +8,13 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using static System.Text.Tests.StringBuilderTests;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.DotNet.RemoteExecutor;
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
-using static System.Text.Tests.StringBuilderTests;
 
 #pragma warning disable xUnit2009 // these are the tests for String and so should be using the explicit methods on String
 

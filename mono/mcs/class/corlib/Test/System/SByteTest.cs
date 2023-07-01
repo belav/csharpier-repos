@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 // SByteTest.cs - NUnit Test Cases for the System.SByte struct
 //
 // Mario Martinez (mariom925@home.om)
@@ -7,8 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System
 {

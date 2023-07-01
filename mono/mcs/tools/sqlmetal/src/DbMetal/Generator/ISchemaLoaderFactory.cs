@@ -25,6 +25,7 @@
 #endregion
 using System;
 using System.IO;
+
 using DbLinq.Vendor;
 
 namespace DbMetal.Generator

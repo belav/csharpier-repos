@@ -30,13 +30,12 @@
 //
 
 using System;
-using System.Collections;
 using System.CodeDom.Compiler;
+using System.Collections;
 using System.IO;
 using System.Text;
 #if STATIC
-using IKVM.Reflection;
-using Type = IKVM.Reflection.Type;
+using IKVM.Reflection;using Type = IKVM.Reflection.Type;
 #else
 using System.Reflection;
 #endif

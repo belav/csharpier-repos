@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+
+using MonoTests.stand_alone.WebHarness;
 //
 // HtmlMetaTest.cs - unit tests for System.Web.UI.HtmlControls.HtmlMeta
 //
@@ -28,11 +34,6 @@
 
 
 using NUnit.Framework;
-using MonoTests.stand_alone.WebHarness;
-using System;
-using System.IO;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 
 namespace MonoTests.System.Web.UI.HtmlControls
 {

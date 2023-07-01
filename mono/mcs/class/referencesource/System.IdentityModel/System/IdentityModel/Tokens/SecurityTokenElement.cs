@@ -5,12 +5,12 @@
 //-----------------------------------------------------------------------
 
 using System;
+using System.Collections.ObjectModel;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.IO;
-using System.Xml;
 using System.Security.Claims;
-using System.Collections.ObjectModel;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {

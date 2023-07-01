@@ -27,11 +27,11 @@
 //
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Security.Tokens;
 using System.ServiceModel.PeerResolvers;
-using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel
 {

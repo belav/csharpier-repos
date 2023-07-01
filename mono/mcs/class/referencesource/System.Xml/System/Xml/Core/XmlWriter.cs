@@ -11,11 +11,7 @@ using System.Text;
 #if !SILVERLIGHT
 using System.Xml.XPath;
 #endif
-using System.Xml.Schema;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.Versioning;
+using System.Xml.Schema;using System.Diagnostics;using System.Collections.Generic;using System.Globalization;using System.Runtime.Versioning;
 
 namespace System.Xml
 {

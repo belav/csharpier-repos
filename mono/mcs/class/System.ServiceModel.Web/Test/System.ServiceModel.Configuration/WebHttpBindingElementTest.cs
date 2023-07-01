@@ -1,12 +1,5 @@
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.ServiceModel.Configuration;
-using NUnit.Framework;
-using System.ServiceModel;
-using System.Text;
-using System.Configuration;
-
-using MonoTests.Helpers;
+using System;using System.ServiceModel.Configuration;using NUnit.Framework;using System.ServiceModel;using System.Text;using System.Configuration;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {

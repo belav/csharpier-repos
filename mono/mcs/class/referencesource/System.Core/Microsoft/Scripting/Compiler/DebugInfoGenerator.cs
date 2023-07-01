@@ -14,20 +14,12 @@
  * ***************************************************************************/
 
 #if CLR2
-using Microsoft.Scripting.Ast;
-using Microsoft.Scripting.Ast.Compiler;
+using Microsoft.Scripting.Ast;using Microsoft.Scripting.Ast.Compiler;
 #else
-using System.Linq.Expressions;
-using System.Linq.Expressions.Compiler;
+using System.Linq.Expressions;using System.Linq.Expressions.Compiler;
 #endif
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection.Emit;
-using System.Diagnostics;
-using System.Diagnostics.SymbolStore;
-using System.Reflection;
+using System;using System.Collections.Generic;using System.Text;using System.Reflection.Emit;using System.Diagnostics;using System.Diagnostics.SymbolStore;using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {

@@ -30,6 +30,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper

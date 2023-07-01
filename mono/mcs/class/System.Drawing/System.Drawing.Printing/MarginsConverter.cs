@@ -32,10 +32,10 @@
 //
 using System;
 using System.ComponentModel;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.ComponentModel.Design.Serialization;
+using System.Globalization;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace System.Drawing.Printing
 {

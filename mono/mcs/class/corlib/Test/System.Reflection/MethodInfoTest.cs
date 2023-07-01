@@ -1,3 +1,8 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+
 //
 // System.Reflection.MethodInfo Test Cases
 //
@@ -30,17 +35,10 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Reflection;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-
-using System.Collections.Generic;
+using System.Runtime.InteropServices;using System.Runtime.CompilerServices;using System.Collections.Generic;
 
 namespace A.B.C
 {

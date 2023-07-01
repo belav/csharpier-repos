@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
 //
 // SymmetricAlgorithm2Test.cs -
 //	Non generated NUnit Test Cases for SymmetricAlgorithm
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace MonoTests.System.Security.Cryptography
 {

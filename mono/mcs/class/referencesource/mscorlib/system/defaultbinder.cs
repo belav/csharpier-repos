@@ -12,11 +12,11 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using CultureInfo = System.Globalization.CultureInfo;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using CultureInfo = System.Globalization.CultureInfo;
 
     //Marked serializable even though it has no state.
     [Serializable]

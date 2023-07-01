@@ -1,10 +1,10 @@
-﻿//------------------------------------------------------------------------------
+﻿using System.IO;
+//------------------------------------------------------------------------------
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------------------------
 
 using System.Runtime.Serialization;
 using System.Xml;
-using System.IO;
 
 namespace System.IdentityModel.Tokens
 {

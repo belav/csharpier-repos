@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Activation;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Net;
     using System.Net.Security;
     using System.Net.Sockets;
     using System.Runtime.Serialization;
     using System.Security.Authentication.ExtendedProtection;
+    using System.ServiceModel.Activation;
     using System.Xml;
-    using System.ComponentModel;
 
     public class TcpTransportBindingElement : ConnectionOrientedTransportBindingElement
     {

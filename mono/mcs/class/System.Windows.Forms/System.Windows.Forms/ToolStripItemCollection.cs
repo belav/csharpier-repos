@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 //
 // ToolStripItemCollection.cs
 //
@@ -27,9 +30,6 @@
 //
 
 using System.Drawing;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms

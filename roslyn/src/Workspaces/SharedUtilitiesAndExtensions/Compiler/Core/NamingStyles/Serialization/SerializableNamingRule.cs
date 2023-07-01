@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles

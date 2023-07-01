@@ -8,6 +8,7 @@ using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
+
 using UnsafeNativeMethods = Microsoft.Win32.UnsafeNativeMethods;
 
 namespace System.IO.Pipes

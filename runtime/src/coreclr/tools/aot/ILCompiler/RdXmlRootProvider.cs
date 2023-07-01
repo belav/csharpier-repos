@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using AssemblyName = System.Reflection.AssemblyName;
 using System.Xml.Linq;
 
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using AssemblyName = System.Reflection.AssemblyName;
 
 namespace ILCompiler
 {

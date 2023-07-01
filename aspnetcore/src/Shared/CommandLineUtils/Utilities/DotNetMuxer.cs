@@ -6,10 +6,7 @@
 
 #if !NETFRAMEWORK
 
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.InteropServices;
+using System;using System.Diagnostics;using System.IO;using System.Runtime.InteropServices;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 

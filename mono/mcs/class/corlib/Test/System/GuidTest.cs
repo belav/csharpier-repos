@@ -1,3 +1,4 @@
+using System;
 //
 // GuidTest.cs - NUnit Test Cases for the System.Guid struct
 //
@@ -10,7 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

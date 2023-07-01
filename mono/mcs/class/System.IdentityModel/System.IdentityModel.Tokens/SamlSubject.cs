@@ -27,9 +27,9 @@
 //
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Selectors;
+using System.Runtime.Serialization;
 using System.Xml;
 
 namespace System.IdentityModel.Tokens

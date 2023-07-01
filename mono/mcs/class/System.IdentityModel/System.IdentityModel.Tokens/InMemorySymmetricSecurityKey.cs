@@ -27,14 +27,14 @@
 //
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 using System.IdentityModel.Policy;
+using System.IO;
 using System.Security.Cryptography;
+using AES = System.Security.Cryptography.RijndaelManaged;
 using System.Security.Cryptography.Xml;
+using System.Xml;
 
 using M = Mono.Security.Cryptography;
-using AES = System.Security.Cryptography.RijndaelManaged;
 
 namespace System.IdentityModel.Tokens
 {

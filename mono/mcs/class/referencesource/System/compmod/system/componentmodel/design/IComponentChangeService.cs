@@ -8,9 +8,9 @@
  */
 namespace System.ComponentModel.Design
 {
-    using System.Diagnostics;
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     /// <para>Provides an interface to add and remove the event handlers for System.ComponentModel.Design.IComponentChangeService.ComponentAdded, System.ComponentModel.Design.IComponentChangeService.ComponentAdding, System.ComponentModel.Design.IComponentChangeService.ComponentChanged, System.ComponentModel.Design.IComponentChangeService.ComponentChanging, System.ComponentModel.Design.IComponentChangeService.ComponentRemoved, System.ComponentModel.Design.IComponentChangeService.ComponentRemoving, and System.ComponentModel.Design.IComponentChangeService.ComponentRename events.</para>

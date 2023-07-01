@@ -11,9 +11,7 @@ namespace System.Xml.Schema
     //Empty parent class for XmlSchema
     public abstract class XmlSchemaObject { }
 #else
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-    using System.Security.Permissions;
+    using System.Diagnostics;using System.Xml.Serialization;using System.Security.Permissions;
 
     /// <include file='doc\XmlSchemaObject.uex' path='docs/doc[@for="XmlSchemaObject"]/*' />
     /// <devdoc>

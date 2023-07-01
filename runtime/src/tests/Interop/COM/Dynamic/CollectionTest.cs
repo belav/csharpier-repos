@@ -5,6 +5,7 @@ namespace Dynamic
 {
     using System;
     using System.Collections.Generic;
+
     using Xunit;
 
     internal class CollectionTest

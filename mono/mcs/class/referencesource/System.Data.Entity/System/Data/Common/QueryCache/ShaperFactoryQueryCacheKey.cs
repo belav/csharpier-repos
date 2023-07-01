@@ -1,4 +1,5 @@
-﻿//------------------------------------------------------------------------------
+﻿using System.Data.Objects;
+//------------------------------------------------------------------------------
 // <copyright file="ShaperFactoryQueryCacheKey.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -8,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 using System.Diagnostics;
-using System.Data.Objects;
 
 namespace System.Data.Common.QueryCache
 {

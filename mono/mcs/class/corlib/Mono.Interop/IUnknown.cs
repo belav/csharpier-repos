@@ -29,8 +29,7 @@
 //
 
 #if !FULL_AOT_RUNTIME
-using System;
-using System.Runtime.InteropServices;
+using System;using System.Runtime.InteropServices;
 
 namespace Mono.Interop
 {

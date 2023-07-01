@@ -1,4 +1,9 @@
-﻿// ==++==
+﻿using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
+// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -7,11 +12,6 @@
 // <OWNER>Microsoft</OWNER>
 
 using System.Security;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.Contracts;
-using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace System.Runtime.InteropServices.WindowsRuntime

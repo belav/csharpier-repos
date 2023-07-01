@@ -7,8 +7,8 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
-    using System.Web.UI.Design;
     using System.Security.Permissions;
+    using System.Web.UI.Design;
 
     /// <include file='doc\MobileResource.uex' path='docs/doc[@for="MobileResource"]/*' />
     [System.Security.Permissions.SecurityPermission(

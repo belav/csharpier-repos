@@ -28,10 +28,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Security.Cryptography;
-
-using NUnit.Framework;
+using System;using System.Security.Cryptography;using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography
 {

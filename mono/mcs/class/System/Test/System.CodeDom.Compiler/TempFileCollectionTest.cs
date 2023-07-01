@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom.Compiler;
+
 //
 // TempFileCollectionTest.cs
 //	- Unit tests for System.CodeDom.Compiler.TempFileCollection
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
 
 namespace MonoTests.System.CodeDom.Compiler
 {

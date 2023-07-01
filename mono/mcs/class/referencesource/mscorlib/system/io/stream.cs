@@ -22,16 +22,11 @@ using System.Threading;
 using System.Threading.Tasks;
 #endif
 
-using System.Runtime;
-using System.Runtime.InteropServices;
+using System.Runtime;using System.Runtime.InteropServices;
 #if NEW_EXPERIMENTAL_ASYNC_IO
 using System.Runtime.CompilerServices;
 #endif
-using System.Runtime.ExceptionServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Diagnostics.Contracts;
-using System.Reflection;
+using System.Runtime.ExceptionServices;using System.Security;using System.Security.Permissions;using System.Diagnostics.Contracts;using System.Reflection;
 
 namespace System.IO
 {

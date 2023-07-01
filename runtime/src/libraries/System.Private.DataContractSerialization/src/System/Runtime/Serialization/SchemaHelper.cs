@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Xml;
-using System.Xml.Schema;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,6 +9,8 @@ using SchemaObjectDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
     System.Runtime.Serialization.SchemaObjectInfo
 >;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Runtime.Serialization
 {

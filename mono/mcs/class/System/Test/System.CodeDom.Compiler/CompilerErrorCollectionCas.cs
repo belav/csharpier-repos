@@ -1,3 +1,9 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // CompilerErrorCollectionCas.cs
 //	- CAS unit tests for System.CodeDom.Compiler.CompilerErrorCollection
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

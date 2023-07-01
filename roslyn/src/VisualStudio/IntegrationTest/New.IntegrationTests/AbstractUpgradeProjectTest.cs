@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+
 using Xunit;
 
 namespace Roslyn.VisualStudio.IntegrationTests

@@ -1,7 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using OLEDB.Test.ModuleCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +8,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.XmlDiff;
+
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common
 {

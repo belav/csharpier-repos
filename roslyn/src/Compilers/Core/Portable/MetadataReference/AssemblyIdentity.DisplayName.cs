@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 

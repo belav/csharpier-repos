@@ -6,15 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Threading.Tasks;
-using Microsoft.CommonLanguageServerProtocol.Framework;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.LanguageServer;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.CommonLanguageServerProtocol.Framework;
+using Microsoft.VisualStudio.Composition;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Newtonsoft.Json.Linq;
 using StreamJsonRpc;
-using Microsoft.VisualStudio.Composition;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {

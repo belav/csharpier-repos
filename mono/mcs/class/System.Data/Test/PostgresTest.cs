@@ -32,6 +32,7 @@
 
 using System;
 using System.Data;
+
 using Mono.Data.PostgreSqlClient;
 
 namespace Test.Mono.Data.PostgreSqlClient

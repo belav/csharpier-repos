@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Policy;
+
 //
 // ApplicationDirectoryMembershipConditionTest.cs -
 //	NUnit Test Cases for ApplicationDirectoryMembershipCondition
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

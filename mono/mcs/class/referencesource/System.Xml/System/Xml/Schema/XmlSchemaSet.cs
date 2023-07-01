@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 //------------------------------------------------------------------------------
 // <copyright file="XmlSchemaSet.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,10 +7,8 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System.Diagnostics;
-using System.Collections;
-using System.Threading;
-using System.Collections.Generic;
 using System.Runtime.Versioning;
+using System.Threading;
 
 namespace System.Xml.Schema
 {

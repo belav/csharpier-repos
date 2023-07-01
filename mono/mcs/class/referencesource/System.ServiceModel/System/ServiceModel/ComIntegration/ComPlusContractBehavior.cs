@@ -4,11 +4,11 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     class ComPlusContractBehavior : IContractBehavior
     {

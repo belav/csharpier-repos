@@ -1,21 +1,21 @@
+using System.Collections.Generic;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
-using System.Collections.Generic;
-
-using System.Reflection.Runtime.General;
-using System.Reflection.Runtime.TypeInfos;
-using System.Reflection.Runtime.TypeInfos.NativeFormat;
 using System.Reflection.Runtime.Assemblies;
 using System.Reflection.Runtime.Assemblies.NativeFormat;
 using System.Reflection.Runtime.Dispensers;
+
+using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.PropertyInfos;
+using System.Reflection.Runtime.TypeInfos;
+using System.Reflection.Runtime.TypeInfos.NativeFormat;
+
+using Internal.Metadata.NativeFormat;
 
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
-
-using Internal.Metadata.NativeFormat;
 
 //=================================================================================================================
 // This file collects the various chokepoints that create the various Runtime*Info objects. This allows

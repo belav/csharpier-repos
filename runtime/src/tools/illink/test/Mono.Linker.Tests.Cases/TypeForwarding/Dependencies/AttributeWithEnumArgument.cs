@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+
 using Mono.Linker.Tests.Cases.TypeForwarding.Dependencies;
 
 #if INCLUDE_FORWARDER

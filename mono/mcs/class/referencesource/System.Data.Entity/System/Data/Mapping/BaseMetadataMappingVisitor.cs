@@ -9,14 +9,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Metadata.Edm;
 using System.Data.Common;
 using System.Data.Common.Utils;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping
 {

@@ -3,6 +3,7 @@
 
 using System.Collections.Specialized;
 using System.ComponentModel;
+
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 // ReSharper disable ParameterOnlyUsedForPreconditionCheck.Local

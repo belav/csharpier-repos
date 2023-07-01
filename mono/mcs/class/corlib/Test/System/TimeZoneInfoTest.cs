@@ -27,13 +27,13 @@
  */
 
 using System;
+using System.Collections;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Collections;
-using System.Reflection;
-using System.Globalization;
 
 using NUnit.Framework;
 

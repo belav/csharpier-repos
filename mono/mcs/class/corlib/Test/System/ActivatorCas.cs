@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // ActivatorCas.cs - CAS unit tests for System.Activator
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

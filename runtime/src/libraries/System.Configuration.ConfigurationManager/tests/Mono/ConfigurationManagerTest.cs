@@ -32,9 +32,10 @@
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.IO;
-using Xunit;
 using SysConfig = System.Configuration.Configuration;
+using System.IO;
+
+using Xunit;
 
 namespace MonoTests.System.Configuration
 {

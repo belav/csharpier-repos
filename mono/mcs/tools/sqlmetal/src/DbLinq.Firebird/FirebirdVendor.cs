@@ -24,23 +24,20 @@
 //
 #endregion
 using System;
-using System.Data.Common;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Linq.Mapping;
-using System.Reflection;
 using System.Data;
-
+using System.Data.Common;
+using System.Data.Linq.Mapping;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
 
-using DbLinq.Data.Linq.SqlClient;
-using DbLinq.Util;
-using DbLinq.Vendor;
+using DbLinq.Data.Linq.SqlClient;using DbLinq.Util;using DbLinq.Vendor;
 
 namespace DbLinq.Firebird
 {

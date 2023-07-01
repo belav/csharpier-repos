@@ -9,9 +9,9 @@ namespace System.Activities.DurableInstancing
     using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+    using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Threading;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class SqlWorkflowInstanceStore : InstanceStore

@@ -13,8 +13,8 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Description;
-    using System.Xml;
     using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
 
     public class HttpTransportBindingElement
         : TransportBindingElement,

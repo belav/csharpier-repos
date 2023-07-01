@@ -1,12 +1,12 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Reflection;
-    using System.Xml;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections;
-    using System.Workflow.ComponentModel.Design;
     using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Reflection;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     #region Class PropertySegmentSerializer
     internal sealed class PropertySegmentSerializer : WorkflowMarkupSerializer

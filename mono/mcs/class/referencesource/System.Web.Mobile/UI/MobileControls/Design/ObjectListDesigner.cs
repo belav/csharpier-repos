@@ -10,22 +10,22 @@ namespace System.Web.UI.Design.MobileControls
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Diagnostics;
     using System.Data;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
     using System.IO;
     using System.Text;
     using System.Web.UI;
-    using System.Web.UI.Design;
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.WebControls;
-    using System.Windows.Forms;
-
-    using System.Web.UI.MobileControls.Adapters;
-    using System.Web.UI.Design.MobileControls.Adapters;
 
     using DataBinding = System.Web.UI.DataBinding;
+    using System.Web.UI.Design;
+    using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls;
+
+    using System.Web.UI.MobileControls.Adapters;
+    using System.Web.UI.WebControls;
+    using System.Windows.Forms;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+
 //
 // TripletCas.cs - CAS unit tests for System.Web.UI.Triplet
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoCasTests.System.Web.UI
 {

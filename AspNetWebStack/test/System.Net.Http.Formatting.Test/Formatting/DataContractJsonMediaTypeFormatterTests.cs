@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+
 using Microsoft.TestCommon;
 
 namespace System.Net.Http.Formatting

@@ -9,14 +9,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
+using CS = Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Host;
+using static Microsoft.CodeAnalysis.MSBuild.UnitTests.SolutionGeneration;
 using Microsoft.CodeAnalysis.UnitTests;
 using Microsoft.CodeAnalysis.UnitTests.TestFiles;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.MSBuild.UnitTests.SolutionGeneration;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 {

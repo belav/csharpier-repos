@@ -6,18 +6,19 @@
 
 namespace System.Net
 {
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
-    using System.Security.Authentication.ExtendedProtection;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Net.WebSockets;
-    using System.Threading.Tasks;
-    using Microsoft.Win32;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
+    using System.Net.WebSockets;
+    using System.Runtime.InteropServices;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading.Tasks;
+
+    using Microsoft.Win32;
 
     public sealed unsafe class HttpListenerContext /* BaseHttpContext, */
     {

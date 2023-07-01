@@ -5,14 +5,7 @@
 // <owner current="true" primary="true">derekdb</owner>
 //------------------------------------------------------------------------------
 #if ENABLEDATABINDING
-using System;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.XPath;
-using System.Collections;
-using System.Diagnostics;
-using System.ComponentModel;
-using System.Text;
+using System;using System.Xml;using System.Xml.Schema;using System.Xml.XPath;using System.Collections;using System.Diagnostics;using System.ComponentModel;using System.Text;
 
 namespace System.Xml.XPath.DataBinding
 {

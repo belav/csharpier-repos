@@ -3,11 +3,12 @@
 
 using System;
 using System.Diagnostics;
+
 using ILCompiler.Logging;
 using ILLink.Shared.DataFlow;
-using ILLink.Shared.TrimAnalysis;
 
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
+using ILLink.Shared.TrimAnalysis;
 
 #nullable enable
 

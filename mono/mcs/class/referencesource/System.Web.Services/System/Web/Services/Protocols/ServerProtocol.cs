@@ -7,19 +7,19 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
-    using System.IO;
-    using System.Reflection;
-    using System.Xml.Serialization;
-    using System.Web.Caching;
     using System.ComponentModel;
-    using System.Text;
+    using System.Diagnostics;
+    using System.IO;
     using System.Net;
-    using System.Web.Services;
-    using System.Threading;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Caching;
+    using System.Web.Services;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]

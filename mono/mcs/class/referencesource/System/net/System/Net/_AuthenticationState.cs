@@ -7,7 +7,9 @@
 namespace System.Net
 {
     using System.Collections;
+    using System.Globalization;
     using System.IO;
+    using System.Net.Security;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
@@ -16,8 +18,6 @@ namespace System.Net
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading;
-    using System.Globalization;
-    using System.Net.Security;
 
     /// <devdoc>
     /// <para>Used by HttpWebRequest to syncronize and orchestrate authentication<para>

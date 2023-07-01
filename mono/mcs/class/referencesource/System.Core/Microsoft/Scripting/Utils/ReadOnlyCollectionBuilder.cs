@@ -22,9 +22,7 @@ using System.Linq.Expressions;
 using System.Core;
 #endif
 
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Dynamic.Utils;
+using System.Collections.Generic;using System.Collections.ObjectModel;using System.Dynamic.Utils;
 
 namespace System.Runtime.CompilerServices
 {

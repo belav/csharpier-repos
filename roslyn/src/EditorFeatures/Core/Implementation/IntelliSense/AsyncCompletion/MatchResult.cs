@@ -5,12 +5,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.Completion;
+using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 using Microsoft.CodeAnalysis.PatternMatching;
+using VSCompletionItem = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data.CompletionItem;
 using Microsoft.VisualStudio.Text;
 using Roslyn.Utilities;
-using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
-using VSCompletionItem = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data.CompletionItem;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {

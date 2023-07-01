@@ -35,18 +35,11 @@ using System.Numerics;
 #endif
 using System.Text;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.Xml;
-using System.Xml.Schema;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Utilities;
-using ValidationEventArgs = Newtonsoft.Json.Schema.ValidationEventArgs;
+using System.Xml;using System.Xml.Schema;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Schema;using Newtonsoft.Json.Utilities;using ValidationEventArgs = Newtonsoft.Json.Schema.ValidationEventArgs;
 
 namespace Newtonsoft.Json.Tests
 {

@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+
+using Mono.Security.Cryptography;
 //
 // ARC4ManagedTest.cs - NUnit Test Cases for Alleged RC4(tm)
 //	RC4 is a trademark of RSA Security
@@ -9,9 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
-using Mono.Security.Cryptography;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

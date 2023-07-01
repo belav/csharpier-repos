@@ -7,6 +7,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+
 using EnvDTE;
 using Microsoft.CodeAnalysis.CodeGeneration;
 using Microsoft.CodeAnalysis.LanguageService;

@@ -5,16 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+
+using System.Net.Http.WinHttpHandlerUnitTests;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.Win32.SafeHandles;
-
-using System.Net.Http.WinHttpHandlerUnitTests;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
+
+using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
 {

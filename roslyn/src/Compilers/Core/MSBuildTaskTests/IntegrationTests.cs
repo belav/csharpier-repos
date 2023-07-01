@@ -3,14 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #if NET472
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
-using Xunit;
+using System;using System.Collections.Generic;using System.Diagnostics;using System.IO;using System.Linq;using Microsoft.CodeAnalysis.Test.Utilities;using Roslyn.Test.Utilities;using Xunit;
 
 namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {

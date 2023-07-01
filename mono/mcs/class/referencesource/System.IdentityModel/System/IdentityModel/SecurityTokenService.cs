@@ -5,12 +5,12 @@
 namespace System.IdentityModel
 {
     using System;
-    using System.IdentityModel.Tokens;
-    using System.Security.Claims;
+    using System.IdentityModel.Configuration;
+    using System.IdentityModel.Protocols.WSTrust;
     using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
-    using System.IdentityModel.Protocols.WSTrust;
-    using System.IdentityModel.Configuration;
+    using System.IdentityModel.Tokens;
+    using System.Security.Claims;
 
     /// <summary>
     /// Abstract class for building WS-Security token services.

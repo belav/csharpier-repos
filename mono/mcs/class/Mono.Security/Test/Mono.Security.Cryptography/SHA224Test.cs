@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+using Mono.Security.Cryptography;
 //
 // SHA224Test.cs - NUnit Test Cases for SHA224
 //
@@ -27,11 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using Mono.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

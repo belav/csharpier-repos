@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 //
 // AppDomainSetupTest.cs - NUnit Test Cases for the System.AppDomainSetup class
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
 
 namespace MonoTests.System
 {

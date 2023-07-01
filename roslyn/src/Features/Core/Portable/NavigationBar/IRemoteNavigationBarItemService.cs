@@ -6,9 +6,10 @@ using System.Collections.Immutable;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+
+using static Microsoft.CodeAnalysis.NavigationBar.RoslynNavigationBarItem;
 using Microsoft.CodeAnalysis.Remote;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.NavigationBar.RoslynNavigationBarItem;
 
 namespace Microsoft.CodeAnalysis.NavigationBar
 {

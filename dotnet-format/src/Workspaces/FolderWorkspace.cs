@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Text;

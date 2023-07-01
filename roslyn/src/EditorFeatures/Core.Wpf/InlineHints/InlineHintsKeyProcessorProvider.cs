@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.InlineHints;
 using Microsoft.CodeAnalysis.Options;

@@ -2,11 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 #if NETFRAMEWORK
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
+using System;using System.Collections.Generic;using System.Diagnostics;using Microsoft.Extensions.DependencyInjection;using Xunit;
 
 namespace Microsoft.Extensions.Logging.Test
 {

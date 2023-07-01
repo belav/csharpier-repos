@@ -1,3 +1,10 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.System.CodeDom.Compiler;
 //
 // CodeGeneratorOptionsCas.cs
 //	- CAS unit tests for System.CodeDom.Compiler.CodeGeneratorOptions
@@ -28,14 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.System.CodeDom.Compiler;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

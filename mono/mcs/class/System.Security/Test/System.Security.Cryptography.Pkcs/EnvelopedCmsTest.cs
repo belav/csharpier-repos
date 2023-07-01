@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // EnvelopedCmsTest.cs - NUnit tests for EnvelopedCms
 //
@@ -29,13 +36,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

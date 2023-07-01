@@ -3,6 +3,7 @@
 
 using System.Security.AccessControl;
 using System.Security.Principal;
+
 using Xunit;
 
 namespace System.IO.Pipes.Tests

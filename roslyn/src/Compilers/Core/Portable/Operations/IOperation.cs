@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis

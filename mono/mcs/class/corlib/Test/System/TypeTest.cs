@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Threading;
+
 // TypeTest.cs - NUnit Test Cases for the System.Type class
 //
 // Authors:
@@ -10,18 +17,10 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Globalization;
+using System.Runtime.InteropServices;using System.Text;using System.Globalization;
 
 class NoNamespaceClass { }
 

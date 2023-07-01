@@ -22,9 +22,7 @@
 //
 #if SECURITY_DEP
 
-using System;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+using System;using System.Runtime.InteropServices;using System.Security.Cryptography.X509Certificates;
 
 namespace System.Security.Cryptography.X509Certificates
 {

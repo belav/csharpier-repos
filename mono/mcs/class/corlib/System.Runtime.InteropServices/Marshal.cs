@@ -34,17 +34,7 @@
 #define FULL_AOT_RUNTIME
 #endif
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System;
-using System.Security;
-using System.Reflection;
-using System.Threading;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-
-using System.Runtime.ConstrainedExecution;
+using System.Collections;using System.Collections.Generic;using System.Runtime.CompilerServices;using System;using System.Security;using System.Reflection;using System.Threading;using System.Runtime.InteropServices.ComTypes;using System.Text;using System.Runtime.ConstrainedExecution;
 #if !FULL_AOT_RUNTIME && !DISABLE_REMOTING
 using Mono.Interop;
 #endif

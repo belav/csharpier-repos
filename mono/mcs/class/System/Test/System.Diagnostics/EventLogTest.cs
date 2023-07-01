@@ -41,22 +41,7 @@
 
 #if !MOBILE
 
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Security;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Threading;
-
-using Microsoft.Win32;
-
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.Collections;using System.ComponentModel;using System.Diagnostics;using System.Globalization;using System.IO;using System.Security;using System.Security.AccessControl;using System.Security.Principal;using System.Threading;using Microsoft.Win32;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.Diagnostics
 {

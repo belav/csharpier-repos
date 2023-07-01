@@ -1,9 +1,5 @@
 ﻿#if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
-using MonoTests.Features.Contracts;
+using System;using System.Collections.Generic;using System.Text;using NUnit.Framework;using MonoTests.Features.Contracts;
 
 namespace MonoTests.Features.Serialization
 {

@@ -4,6 +4,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;

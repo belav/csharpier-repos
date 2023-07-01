@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Storage;
 

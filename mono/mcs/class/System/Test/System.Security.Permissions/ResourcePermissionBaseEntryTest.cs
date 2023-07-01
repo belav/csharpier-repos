@@ -1,3 +1,6 @@
+using System;
+using System.Security.Permissions;
+
 //
 // ResourcePermissionBaseEntryTest.cs -
 //	NUnit Test Cases for ResourcePermissionBaseEntry
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

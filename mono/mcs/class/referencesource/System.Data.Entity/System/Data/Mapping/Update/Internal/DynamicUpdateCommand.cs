@@ -9,15 +9,15 @@
 
 
 using System.Collections.Generic;
-using System.Data.Common.CommandTrees;
-using System.Data.Metadata.Edm;
 using System.Data.Common;
-using System.Data.EntityClient;
-using System.Diagnostics;
-using System.Data.Common.Utils;
-using System.Linq;
+using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.Utils;
+using System.Data.EntityClient;
+using System.Data.Metadata.Edm;
 using System.Data.Spatial;
+using System.Diagnostics;
+using System.Linq;
 
 namespace System.Data.Mapping.Update.Internal
 {

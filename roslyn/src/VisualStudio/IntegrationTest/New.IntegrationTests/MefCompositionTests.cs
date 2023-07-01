@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+
 using Castle.Core.Internal;
 using Microsoft.VisualStudio.Shell.Interop;
 using Roslyn.Test.Utilities;

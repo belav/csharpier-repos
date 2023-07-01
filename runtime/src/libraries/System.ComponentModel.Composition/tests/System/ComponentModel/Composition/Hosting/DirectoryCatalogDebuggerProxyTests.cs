@@ -4,8 +4,9 @@
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using System.UnitTesting;
 using System.Reflection;
+using System.UnitTesting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition.Primitives

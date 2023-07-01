@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.BasePartialCachingControl.cs
 //
@@ -29,9 +30,8 @@
 //
 
 using System.IO;
-using System.Text;
-using System.ComponentModel;
 using System.Security.Permissions;
+using System.Text;
 using System.Web.Caching;
 
 namespace System.Web.UI

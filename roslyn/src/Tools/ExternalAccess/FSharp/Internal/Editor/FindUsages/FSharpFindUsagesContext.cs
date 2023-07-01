@@ -4,6 +4,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.FindUsages;
 using Microsoft.CodeAnalysis.FindUsages;
 

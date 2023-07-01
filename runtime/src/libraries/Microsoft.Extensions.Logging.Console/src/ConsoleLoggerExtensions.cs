@@ -5,13 +5,14 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Versioning;
 using System.Text.Json;
+using ThrowHelper = System.ThrowHelper;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging.Configuration;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
-using ThrowHelper = System.ThrowHelper;
 
 namespace Microsoft.Extensions.Logging
 {

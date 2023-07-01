@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
 using Roslyn.Test.Utilities;

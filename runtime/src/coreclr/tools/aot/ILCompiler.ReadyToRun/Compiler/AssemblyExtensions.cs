@@ -3,12 +3,12 @@
 
 using System;
 using System.Diagnostics;
+
+using Debug = System.Diagnostics.Debug;
 using System.Reflection.Metadata;
 
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {

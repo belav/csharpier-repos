@@ -7,16 +7,7 @@
 // Copyright 2007 Marcos Cobena (http://www.youcannoteatbits.org/)
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.ServiceModel.PeerResolvers;
-using System.Text;
-
-using NUnit.Framework;
-
-using MonoTests.Helpers;
+using System;using System.Collections.Generic;using System.ServiceModel;using System.ServiceModel.Description;using System.ServiceModel.PeerResolvers;using System.Text;using NUnit.Framework;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.PeerResolvers
 {

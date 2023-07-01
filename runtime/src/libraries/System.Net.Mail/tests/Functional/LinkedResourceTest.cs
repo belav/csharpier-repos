@@ -11,6 +11,7 @@
 
 using System.IO;
 using System.Net.Mime;
+
 using Xunit;
 
 namespace System.Net.Mail.Tests

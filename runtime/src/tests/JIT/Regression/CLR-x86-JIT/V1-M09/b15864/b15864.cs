@@ -4,10 +4,10 @@
 
 namespace DefaultNamespace
 {
-    //@BEGINRENAME; Verify this renames
-    using System.Security;
     //@ENDRENAME; Verify this renames
     using System;
+    //@BEGINRENAME; Verify this renames
+    using System.Security;
 
     public class TestClass
     {

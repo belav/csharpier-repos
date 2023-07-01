@@ -26,10 +26,11 @@
 #endregion
 
 using System;
-using System.Linq.Expressions;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+
 using Ingres.Client;
 
 namespace DbLinq.Ingres.Example

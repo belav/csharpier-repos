@@ -1,3 +1,7 @@
+using System;
+using System.CodeDom;
+using System.Collections.Specialized;
+
 //
 // CodeSnippetStatementTest.cs
 //	- Unit tests for System.CodeDom.CodeSnippetStatement
@@ -28,10 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.CodeDom
 {

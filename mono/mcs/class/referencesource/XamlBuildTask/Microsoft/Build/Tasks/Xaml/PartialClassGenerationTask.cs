@@ -13,6 +13,7 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Runtime;
     using System.Threading;
     using System.Xaml;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using Microsoft.VisualStudio.Activities;

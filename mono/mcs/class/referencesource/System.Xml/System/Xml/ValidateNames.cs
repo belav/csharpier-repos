@@ -9,8 +9,7 @@ using System;
 #if !SILVERLIGHT
 using System.Xml.XPath;
 #endif
-using System.Diagnostics;
-using System.Globalization;
+using System.Diagnostics;using System.Globalization;
 
 #if SILVERLIGHT_XPATH
 namespace System.Xml.XPath

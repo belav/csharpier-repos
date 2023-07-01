@@ -30,12 +30,7 @@ using MX = MonoSecurity::Mono.Security.X509;
 #else
 using MX = Mono.Security.X509;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using System;using System.Collections.Generic;using System.Text;using System.Security;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Btls
 {

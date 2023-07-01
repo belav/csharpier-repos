@@ -1,3 +1,9 @@
+using System;
+using System.Runtime.Serialization;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // ApplicationTrustTest.cs - NUnit tests for ApplicationTrust
 //
@@ -28,12 +34,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Runtime.Serialization;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoTests.System.Security.Policy
 {

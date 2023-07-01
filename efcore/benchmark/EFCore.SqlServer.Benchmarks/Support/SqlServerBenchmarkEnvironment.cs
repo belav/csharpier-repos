@@ -6,8 +6,7 @@ using System.Data.SqlClient;
 #else
 using Microsoft.Data.SqlClient;
 #endif
-using System.IO;
-using Microsoft.Extensions.Configuration;
+using System.IO;using Microsoft.Extensions.Configuration;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Benchmarks

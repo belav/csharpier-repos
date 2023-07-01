@@ -8,8 +8,8 @@
 namespace Mono.Data.Sqlite
 {
     using System;
-    using System.Security;
     using System.Runtime.InteropServices;
+    using System.Security;
 
 #if !PLATFORM_COMPACTFRAMEWORK
     [SuppressUnmanagedCodeSecurity]

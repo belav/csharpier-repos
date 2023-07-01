@@ -4,16 +4,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.AttributedModel;
 using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition.ReflectionModel;
 
 namespace System.ComponentModel.Composition.Hosting
 {

@@ -1,3 +1,5 @@
+using System.Collections.Specialized;
+using System.Security.Cryptography;
 //
 // System.Configuration.ProtectedConfiguration.cs
 //
@@ -27,8 +29,6 @@
 //
 
 using System.Xml;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
 
 namespace System.Configuration
 {

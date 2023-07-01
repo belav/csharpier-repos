@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+
 //
 // ProtectedDataTest.cs - NUnit Test Cases for ProtectedData
 //
@@ -10,12 +16,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

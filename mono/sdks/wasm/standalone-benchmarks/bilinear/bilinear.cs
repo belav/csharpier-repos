@@ -6,11 +6,9 @@
 using System;
 using System.Linq;
 using System.Numerics;
-
 // HW Intrinsic APIs are available only in .NET Core 3.0+
 #if !NETCOREAPP2_1 && !NETFRAMEWORK
-using System.Runtime.Intrinsics;
-using System.Runtime.Intrinsics.X86;
+using System.Runtime.Intrinsics;using System.Runtime.Intrinsics.X86;
 #endif
 
 public partial class Benchmark

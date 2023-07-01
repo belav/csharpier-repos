@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSMac.API;

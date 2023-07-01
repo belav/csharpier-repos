@@ -30,12 +30,14 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+
 using Microsoft.Build.Construction;
 using Microsoft.Build.Exceptions;
 using Microsoft.Build.Execution;
@@ -43,7 +45,6 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Internal;
 using Microsoft.Build.Internal.Expressions;
 using Microsoft.Build.Logging;
-using System.Collections;
 
 // Basically there are two semantic Project object models and their relationship is not obvious
 // (apart from Microsoft.Build.Construction.ProjectRootElement which is a "construction rule").

@@ -27,10 +27,10 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 using Pair = System.Collections.Generic.KeyValuePair<System.UriTemplate, object>;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace System
 {

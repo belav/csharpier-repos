@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.IO.IsolatedStorage;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
+
 //
 // IsolatedStorageFileCas.cs - CAS unit tests for
 //	System.IO.IsolatedStorage.IsolatedStorageFile
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.IO.IsolatedStorage;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
 
 namespace MonoCasTests.System.IO.IsolatedStorageTest
 {

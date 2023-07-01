@@ -5,15 +5,16 @@
 namespace System.ServiceModel.Activities.Presentation.Factories
 {
     using System.Activities;
+    using System.Activities.Expressions;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.View;
     using System.Activities.Statements;
     using System.ServiceModel.Activities;
     using System.Windows;
     using System.Xml.Linq;
+
     using Microsoft.VisualBasic.Activities;
-    using System.Activities.Presentation.View;
-    using System.Activities.Presentation.Services;
-    using System.Activities.Expressions;
 
     public sealed class ReceiveAndSendReplyFactory : IActivityTemplateFactory
     {

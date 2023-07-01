@@ -1,10 +1,9 @@
+using Debug = System.Diagnostics.Debug;
+using Internal.IL.Stubs;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-using Internal.IL.Stubs;
-
-using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL
 {

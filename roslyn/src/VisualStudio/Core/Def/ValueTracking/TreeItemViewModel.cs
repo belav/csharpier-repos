@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.Windows.Documents;
 using System.Windows.Media;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;

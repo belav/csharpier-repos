@@ -3,8 +3,9 @@
 
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
-using Xunit;
+
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {

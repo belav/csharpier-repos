@@ -9,6 +9,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+
 using Microsoft.NET.HostModel.AppHost;
 
 namespace Microsoft.NET.HostModel.Bundle

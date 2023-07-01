@@ -3,9 +3,9 @@
 
 using System.Diagnostics;
 using Internal.Cryptography;
-using Microsoft.Win32.SafeHandles;
 using static Interop.BCrypt;
 using static Interop.NCrypt;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

@@ -30,8 +30,8 @@
 //
 
 using System;
-using Novell.Directory.Ldap.Asn1;
 using Novell.Directory.Ldap;
+using Novell.Directory.Ldap.Asn1;
 
 namespace Novell.Directory.Ldap.Rfc2251
 {

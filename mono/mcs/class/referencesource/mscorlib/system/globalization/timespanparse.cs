@@ -55,10 +55,10 @@
 ////////////////////////////////////////////////////////////////////////////
 namespace System.Globalization
 {
-    using System.Text;
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Text;
 
     [Flags]
     public enum TimeSpanStyles

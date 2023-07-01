@@ -28,17 +28,11 @@
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Xml;
-using Newtonsoft.Json.Serialization;
+using System;using System.Collections.Generic;using System.Globalization;using System.Xml;using Newtonsoft.Json.Serialization;
 #if HAVE_XLINQ
 using System.Xml.Linq;
 #endif
-using Newtonsoft.Json.Utilities;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Utilities;using System.Runtime.CompilerServices;using System.Diagnostics.CodeAnalysis;
 
 namespace Newtonsoft.Json.Converters
 {

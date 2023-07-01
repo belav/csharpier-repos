@@ -1,3 +1,4 @@
+using System.IO;
 //
 // HttpContent.cs
 //
@@ -27,9 +28,8 @@
 //
 
 using System.Net.Http.Headers;
-using System.IO;
-using System.Threading.Tasks;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace System.Net.Http
 {

@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
-using System.Text;
-using Microsoft.Win32.SafeHandles;
 using System.Runtime.InteropServices.JavaScript;
+using System.Text;
+
+using Microsoft.Win32.SafeHandles;
 
 #pragma warning disable CS0612 // using obsolete members until we finish https://github.com/dotnet/runtime/pull/66304/
 #pragma warning disable IDE0060

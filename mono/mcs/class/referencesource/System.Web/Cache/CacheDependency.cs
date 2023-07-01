@@ -15,16 +15,14 @@
 namespace System.Web.Caching
 {
     using System.Collections;
-    using System.Text;
+    using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
+    using System.Text;
     using System.Threading;
     using System.Web.Util;
-    using System.Security.Permissions;
-    using System.Globalization;
 #if USE_MEMORY_CACHE
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Runtime.Caching;
+    using System.Collections.Generic;using System.Collections.ObjectModel;using System.Runtime.Caching;
 #endif
 
     /// <devdoc>

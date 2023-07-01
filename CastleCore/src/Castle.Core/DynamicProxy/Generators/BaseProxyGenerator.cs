@@ -20,15 +20,10 @@ namespace Castle.DynamicProxy.Generators
     using System.Linq;
     using System.Reflection;
 #if FEATURE_SERIALIZATION
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
+    using System.Runtime.Serialization;using System.Xml.Serialization;
 #endif
 
-    using Castle.Core.Logging;
-    using Castle.DynamicProxy.Contributors;
-    using Castle.DynamicProxy.Generators.Emitters;
-    using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-    using Castle.DynamicProxy.Internal;
+    using Castle.Core.Logging;using Castle.DynamicProxy.Contributors;using Castle.DynamicProxy.Generators.Emitters;using Castle.DynamicProxy.Generators.Emitters.SimpleAST;using Castle.DynamicProxy.Internal;
 
     /// <summary>
     ///   Base class that exposes the common functionalities

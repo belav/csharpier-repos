@@ -35,14 +35,7 @@
 
 #if WIN_PLATFORM
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
-using Microsoft.Win32.SafeHandles;
+using System;using System.Collections;using System.Collections.Generic;using System.IO;using System.Runtime.InteropServices;using System.Security;using System.Text;using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.Win32
 {

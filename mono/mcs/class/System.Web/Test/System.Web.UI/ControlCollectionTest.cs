@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Security.Principal;
+using System.Web;
+using System.Web.UI;
+
 //
 // Tests for System.Web.UI.ControlCollection
 //
@@ -27,11 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Security.Principal;
-using System.Web;
-using System.Web.UI;
 
 namespace MonoTests.System.Web.UI
 {

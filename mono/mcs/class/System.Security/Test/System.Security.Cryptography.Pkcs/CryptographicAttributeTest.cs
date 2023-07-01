@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+
 //
 // CryptographicAttributeTest.cs - NUnit tests for CryptographicAttribute
 //
@@ -9,11 +14,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

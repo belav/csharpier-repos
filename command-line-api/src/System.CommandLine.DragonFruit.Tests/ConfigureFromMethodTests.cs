@@ -8,11 +8,12 @@ using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Binding;
 using System.CommandLine.Tests.Utility;
 using System.IO;
-using FluentAssertions;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.DragonFruit.Tests

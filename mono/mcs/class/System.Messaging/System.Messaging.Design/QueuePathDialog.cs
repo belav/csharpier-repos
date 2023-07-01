@@ -28,9 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !NO_WINFORMS_DEPENDENCY
-using System.ComponentModel;
-using System.Drawing.Design;
-using System.Windows.Forms;
+using System.ComponentModel;using System.Drawing.Design;using System.Windows.Forms;
 
 namespace System.Messaging.Design
 {

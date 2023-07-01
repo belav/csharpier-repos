@@ -23,8 +23,9 @@
 
 
 using System.Collections;
-using NUnit.Framework;
 using System.Collections.Specialized;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Specialized
 {

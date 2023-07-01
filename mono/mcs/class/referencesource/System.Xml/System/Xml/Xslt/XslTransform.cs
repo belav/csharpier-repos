@@ -7,19 +7,20 @@
 
 namespace System.Xml.Xsl
 {
-    using System.Reflection;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Xml.XmlConfiguration;
     using System.Xml.XPath;
     using System.Xml.Xsl.XsltOld;
-    using MS.Internal.Xml.XPath;
-    using MS.Internal.Xml.Cache;
-    using System.Collections.Generic;
     using System.Xml.Xsl.XsltOld.Debugger;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.Runtime.Versioning;
-    using System.Xml.XmlConfiguration;
+
+    using MS.Internal.Xml.Cache;
+    using MS.Internal.Xml.XPath;
 
     [Obsolete(
         "This class has been deprecated. Please use System.Xml.Xsl.XslCompiledTransform instead. http://go.microsoft.com/fwlink/?linkid=14202"

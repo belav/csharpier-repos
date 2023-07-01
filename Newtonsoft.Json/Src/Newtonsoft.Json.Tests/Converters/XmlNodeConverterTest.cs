@@ -30,11 +30,7 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json.Tests.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
+using System.Text;using System;using System.Collections.Generic;using Newtonsoft.Json.Tests.Serialization;using Newtonsoft.Json.Tests.TestObjects;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -42,12 +38,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json;
-using System.IO;
-using System.Xml;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Utilities;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;using System.IO;using System.Xml;using Newtonsoft.Json.Converters;using Newtonsoft.Json.Utilities;using Newtonsoft.Json.Linq;
 #if !NET20
 using System.Xml.Linq;
 

@@ -10,11 +10,11 @@ namespace System.IdentityModel.Tokens
     using System.Collections.Generic;
     using System.IdentityModel;
     using System.IdentityModel.Protocols.WSTrust;
-    using System.Security.Claims;
-    using System.Xml;
 
     using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
+    using System.Security.Claims;
+    using System.Xml;
 
     /// <summary>
     /// This is a place holder for all the attributes related to the issued token.

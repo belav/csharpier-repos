@@ -39,17 +39,7 @@
 
 #if WIN_PLATFORM || XAMMAC_4_5
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Reflection;
-using System.Security;
-using System.Threading;
-using Microsoft.Win32.SafeHandles;
+using System;using System.Collections;using System.Collections.Generic;using System.Globalization;using System.IO;using System.Text;using System.Runtime.InteropServices;using System.Reflection;using System.Security;using System.Threading;using Microsoft.Win32.SafeHandles;
 
 namespace Microsoft.Win32
 {

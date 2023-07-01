@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool;

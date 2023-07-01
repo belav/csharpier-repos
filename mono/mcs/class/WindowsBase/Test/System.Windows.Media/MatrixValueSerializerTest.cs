@@ -1,7 +1,8 @@
-using NUnit.Framework;
 using System;
-using System.Windows.Media.Converters;
 using System.Windows.Media;
+using System.Windows.Media.Converters;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Media
 {

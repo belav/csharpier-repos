@@ -5,18 +5,18 @@
 namespace System.ServiceModel.Routing.Configuration
 {
     using System;
-    using System.Xml;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
-    using System.Text;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using SR2 = System.ServiceModel.Routing.SR;
+    using System.Text;
+    using System.Xml;
 
     public class RoutingSection : ConfigurationSection
     {

@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // AspNetHostingNone.cs - CAS unit tests helper for System.Web
 //
@@ -27,10 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests
 {

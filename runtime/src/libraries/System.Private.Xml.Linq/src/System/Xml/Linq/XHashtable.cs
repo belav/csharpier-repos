@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
+using Debug = System.Diagnostics.Debug;
 using System.Numerics;
 using System.Threading;
-using Debug = System.Diagnostics.Debug;
 using Interlocked = System.Threading.Interlocked;
 
 namespace System.Xml.Linq

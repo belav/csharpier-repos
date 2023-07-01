@@ -3,6 +3,7 @@
 using System.CommandLine;
 using System.CommandLine.Parsing;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Tools.Commands;
 
 namespace Microsoft.CodeAnalysis.Tools

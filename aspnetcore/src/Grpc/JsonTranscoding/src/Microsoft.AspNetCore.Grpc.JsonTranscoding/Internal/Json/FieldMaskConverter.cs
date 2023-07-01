@@ -4,9 +4,10 @@
 using System.Collections;
 using System.Linq;
 using System.Text.Json;
+using Type = System.Type;
+
 using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

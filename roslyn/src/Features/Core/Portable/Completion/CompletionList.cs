@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 

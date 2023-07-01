@@ -7,17 +7,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
-using Internal.IL;
-using Internal.TypeSystem;
-using Internal.ReadyToRunConstants;
-
 using ILCompiler;
 using ILCompiler.DependencyAnalysis;
-using Internal.TypeSystem.Ecma;
 
+using Internal.IL;
+using Internal.ReadyToRunConstants;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 #if SUPPORT_JIT
-using MethodCodeNode = Internal.Runtime.JitSupport.JitMethodCodeNode;
-using RyuJitCompilation = ILCompiler.Compilation;
+using MethodCodeNode = Internal.Runtime.JitSupport.JitMethodCodeNode;using RyuJitCompilation = ILCompiler.Compilation;
 #endif
 
 #pragma warning disable IDE0060

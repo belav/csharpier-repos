@@ -31,18 +31,7 @@
 
 #region Used namespaces
 
-using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Forms.DataVisualization.Charting.Data;
-using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using System.Windows.Forms.DataVisualization.Charting.Borders3D;
-using System.Diagnostics.CodeAnalysis;
+using System;using System.ComponentModel;using System.Drawing;using System.Drawing.Design;using System.Drawing.Drawing2D;using System.Windows.Forms;using System.Windows.Forms.DataVisualization.Charting;using System.Windows.Forms.DataVisualization.Charting.Data;using System.Windows.Forms.DataVisualization.Charting.ChartTypes;using System.Windows.Forms.DataVisualization.Charting.Utilities;using System.Windows.Forms.DataVisualization.Charting.Borders3D;using System.Diagnostics.CodeAnalysis;
 
 #endregion
 

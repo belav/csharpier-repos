@@ -1,3 +1,7 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+
 //
 // X509KeyUsageExtensionTest.cs - NUnit tests for X509KeyUsageExtension
 //
@@ -28,10 +32,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

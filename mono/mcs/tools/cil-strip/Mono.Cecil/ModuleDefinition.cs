@@ -34,8 +34,9 @@ namespace Mono.Cecil
     using SSP = System.Security.Permissions;
     using System.Text;
 
-    using Mono.Cecil.Cil;
     using Mono.Cecil.Binary;
+
+    using Mono.Cecil.Cil;
     using Mono.Cecil.Metadata;
 
     internal sealed class ModuleDefinition

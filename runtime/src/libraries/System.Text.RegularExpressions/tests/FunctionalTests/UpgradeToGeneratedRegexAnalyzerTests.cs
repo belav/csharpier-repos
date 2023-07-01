@@ -8,16 +8,17 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions.Generator;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Testing;
-using Xunit;
 using VerifyCS = System.Text.RegularExpressions.Tests.CSharpCodeFixVerifier<
     System.Text.RegularExpressions.Generator.UpgradeToGeneratedRegexAnalyzer,
     System.Text.RegularExpressions.Generator.UpgradeToGeneratedRegexCodeFixer
 >;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Testing;
+using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
 {

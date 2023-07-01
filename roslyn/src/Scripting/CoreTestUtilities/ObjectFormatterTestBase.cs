@@ -6,6 +6,7 @@
 
 using System;
 using System.Text.RegularExpressions;
+
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests

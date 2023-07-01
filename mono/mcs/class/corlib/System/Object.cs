@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 //
 // System.Object.cs
 //
@@ -32,8 +34,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
 
 namespace System
 {

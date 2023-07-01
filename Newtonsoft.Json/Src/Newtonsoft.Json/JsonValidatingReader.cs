@@ -28,12 +28,7 @@ using System.Collections.Generic;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Utilities;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.IO;
+using Newtonsoft.Json.Linq;using Newtonsoft.Json.Schema;using Newtonsoft.Json.Utilities;using System.Globalization;using System.Text.RegularExpressions;using System.IO;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

@@ -29,14 +29,7 @@
 extern alias MonoSecurity;
 #endif
 
-using System.Text;
-using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
-using Internal.Cryptography;
-using Internal.Cryptography.Pal;
-using Microsoft.Win32.SafeHandles;
-
+using System.Text;using System.Diagnostics;using System.Collections;using System.Collections.Generic;using Internal.Cryptography;using Internal.Cryptography.Pal;using Microsoft.Win32.SafeHandles;
 #if MONO_SECURITY_ALIAS
 using MX = MonoSecurity::Mono.Security.X509;
 #else

@@ -6,17 +6,18 @@
 
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Formatting.Rules;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Text;
+using RoslynTextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
 using Microsoft.VisualStudio.TextManager.Interop;
+using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 using Microsoft.VisualStudio.Utilities;
 using Roslyn.Utilities;
-using RoslynTextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
-using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {

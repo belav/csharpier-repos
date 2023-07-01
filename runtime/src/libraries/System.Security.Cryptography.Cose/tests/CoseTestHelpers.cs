@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Formats.Cbor;
 using System.IO;
 using System.Linq;
+
 using Microsoft.IdentityModel.Tokens;
 using Test.Cryptography;
 using Xunit;

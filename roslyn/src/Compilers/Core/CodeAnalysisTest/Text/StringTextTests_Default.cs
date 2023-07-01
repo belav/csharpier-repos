@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Xunit;

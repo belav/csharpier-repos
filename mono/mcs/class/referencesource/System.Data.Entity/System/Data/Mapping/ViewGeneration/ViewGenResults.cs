@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="ViewgenResults.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,10 +9,9 @@
 //---------------------------------------------------------------------
 
 using System.Data.Common.Utils;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.EntityModel;
-using System.Collections.Generic;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Data.Metadata.Edm;
 using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration

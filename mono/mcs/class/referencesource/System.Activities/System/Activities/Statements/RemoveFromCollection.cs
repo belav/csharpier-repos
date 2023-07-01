@@ -6,11 +6,11 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Windows.Markup;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Collections.ObjectModel;
+    using System.Windows.Markup;
 
     [SuppressMessage(
         FxCop.Category.Naming,

@@ -18,16 +18,17 @@
 
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Security;
-using System.Security.Permissions;
-using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+
+using Microsoft.Win32;
 
 namespace System.IO.Ports
 {

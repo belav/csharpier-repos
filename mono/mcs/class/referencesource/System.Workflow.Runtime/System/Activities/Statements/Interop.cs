@@ -9,6 +9,7 @@ namespace System.Activities.Statements
     using System.Activities.Persistence;
     using System.Activities.Tracking;
     using System.Activities.Validation;
+    using ValidationError = System.Activities.Validation.ValidationError;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -18,15 +19,14 @@ namespace System.Activities.Statements
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Threading;
     using System.Transactions;
-    using System.Xml.Linq;
-    using System.Workflow.Runtime;
-    using System.Workflow.ComponentModel.Compiler;
-    using ValidationError = System.Activities.Validation.ValidationError;
-    using System.Workflow.Runtime.Hosting;
     using System.Workflow.Activities;
-    using System.Runtime.Serialization;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.Runtime;
+    using System.Workflow.Runtime.Hosting;
+    using System.Xml.Linq;
 
     [SuppressMessage(
         "Microsoft.Naming",

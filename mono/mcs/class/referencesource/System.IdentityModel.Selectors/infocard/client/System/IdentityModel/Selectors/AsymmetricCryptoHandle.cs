@@ -6,12 +6,12 @@ namespace System.IdentityModel.Selectors
     using System;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:

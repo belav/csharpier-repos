@@ -1,3 +1,9 @@
+using System;
+using System.Diagnostics;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // StackFrameCas.cs - CAS unit tests for System.Diagnostics.StackFrame
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Diagnostics;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.Diagnostics
 {

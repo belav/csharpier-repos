@@ -30,6 +30,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
+
 using Mono.Cecil;
 
 namespace Mono.Linker

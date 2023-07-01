@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Net;
+using System.Threading;
+
 //
 // ServicePointManagerTest.cs - NUnit Test Cases for System.Net.ServicePointManager
 //
@@ -9,11 +15,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections;
-using System.IO;
-using System.Net;
-using System.Threading;
 
 namespace MonoTests.System.Net
 {

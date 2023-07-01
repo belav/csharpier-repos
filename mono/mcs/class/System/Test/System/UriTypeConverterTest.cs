@@ -1,3 +1,9 @@
+using System;
+using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
+using System.Globalization;
+using System.IO;
+
 //
 // UriTypeConverterTest.cs - Unit tests for System.UriTypeConverter
 //
@@ -28,12 +34,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.ComponentModel;
-using System.ComponentModel.Design.Serialization;
-using System.Globalization;
 
 namespace MonoTests.System
 {

@@ -1,3 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Build.Construction;
+using Microsoft.Build.Evaluation;
+
+using MonoTests.Helpers;
 //
 // FunctionalTest.cs
 //
@@ -27,16 +38,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Build.Construction;
-using Microsoft.Build.Evaluation;
-using System.IO;
-using System.Globalization;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.Microsoft.Build
 {

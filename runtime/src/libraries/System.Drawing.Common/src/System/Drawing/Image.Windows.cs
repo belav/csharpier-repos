@@ -5,10 +5,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Drawing.Internal;
+using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
-using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {

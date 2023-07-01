@@ -24,12 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-
+using System;using System.IO;using System.Runtime.InteropServices;using System.Runtime.CompilerServices;using System.Security.Cryptography.X509Certificates;
 #if MONOTOUCH
 using MonoTouch;
 #endif

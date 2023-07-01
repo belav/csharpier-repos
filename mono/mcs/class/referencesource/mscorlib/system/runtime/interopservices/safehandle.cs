@@ -24,11 +24,7 @@ namespace System.Runtime.InteropServices
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Runtime;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
+    using System.Runtime;using System.Runtime.CompilerServices;using System.IO;using System.Runtime.ConstrainedExecution;using System.Runtime.Versioning;
 
     /*
       Problems addressed by the SafeHandle class:

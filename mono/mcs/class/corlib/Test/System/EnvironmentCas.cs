@@ -27,13 +27,7 @@
 //
 
 #if !MOBILE
-using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
+using NUnit.Framework;using System;using System.Collections;using System.IO;using System.Security;using System.Security.Permissions;
 
 namespace MonoCasTests.System
 {

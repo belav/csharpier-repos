@@ -11,8 +11,8 @@ namespace System.Workflow.Activities
     using System.Reflection;
     using System.ServiceModel;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

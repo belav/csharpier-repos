@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Xml;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.ServiceModel;
+    using System.Xml;
 
     sealed class SctClaimDictionary : XmlDictionary
     {

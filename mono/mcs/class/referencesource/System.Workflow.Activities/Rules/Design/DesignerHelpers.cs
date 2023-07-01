@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Serialization;
-using System.Text;
 
 namespace System.Workflow.Activities.Rules.Design
 {

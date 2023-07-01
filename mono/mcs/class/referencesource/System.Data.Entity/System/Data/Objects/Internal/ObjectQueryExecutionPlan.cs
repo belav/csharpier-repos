@@ -9,6 +9,10 @@
 namespace System.Data.Objects.Internal
 {
     using System;
+    using CompiledQueryParameters = System.Collections.ObjectModel.ReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+        ObjectParameter,
+        System.Data.Objects.ELinq.QueryParameterExpression
+    >>;
     using System.Data.Common;
     using System.Data.Common.CommandTrees;
     using System.Data.Common.Internal.Materialization;
@@ -18,10 +22,6 @@ namespace System.Data.Objects.Internal
     using System.Data.Metadata.Edm;
     using System.Data.Objects;
     using System.Diagnostics;
-    using CompiledQueryParameters = System.Collections.ObjectModel.ReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-        ObjectParameter,
-        System.Data.Objects.ELinq.QueryParameterExpression
-    >>;
 
     /// <summary>
     /// Represents the 'compiled' form of all elements (query + result assembly) required to execute a specific <see cref="ObjectQuery"/>

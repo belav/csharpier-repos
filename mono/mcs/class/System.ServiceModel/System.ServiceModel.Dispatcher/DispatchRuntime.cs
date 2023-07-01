@@ -35,11 +35,7 @@ using System.IdentityModel.Policy;
 using System.Web.Security;
 #endif
 #endif
-using System.Text;
-using System.Threading;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
+using System.Text;using System.Threading;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Dispatcher
 {

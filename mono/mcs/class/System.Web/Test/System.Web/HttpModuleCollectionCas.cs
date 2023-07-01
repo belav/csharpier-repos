@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpModuleCollectionCas.cs
 //	- CAS unit tests for System.Web.HttpModuleCollection
@@ -28,11 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

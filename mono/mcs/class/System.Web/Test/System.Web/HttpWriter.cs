@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Web;
+using System.Web.Caching;
+
 //
 // HttpWriter.cs - HttpWriter tests.
 //
@@ -27,14 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Web;
-using System.Web.Caching;
 
 namespace MonoCasTests.System.Web
 {

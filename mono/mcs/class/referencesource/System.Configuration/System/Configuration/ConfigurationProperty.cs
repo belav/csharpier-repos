@@ -5,13 +5,13 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Security.Permissions;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Reflection;
-using System.Text;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Text;
 
 namespace System.Configuration
 {

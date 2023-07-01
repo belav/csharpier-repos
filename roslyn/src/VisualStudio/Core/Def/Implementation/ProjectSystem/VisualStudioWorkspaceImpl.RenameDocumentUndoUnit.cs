@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem

@@ -1,7 +1,7 @@
 ﻿namespace System.Web.UI.WebControls.Expressions
 {
-    using System.Web.UI.WebControls;
     using System.Security.Permissions;
+    using System.Web.UI.WebControls;
 
     public class ThenBy
     {

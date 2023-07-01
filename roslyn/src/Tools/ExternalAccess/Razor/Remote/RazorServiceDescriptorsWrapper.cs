@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Runtime;
+
 using MessagePack;
 using MessagePack.Formatters;
 using Microsoft.CodeAnalysis.Remote;

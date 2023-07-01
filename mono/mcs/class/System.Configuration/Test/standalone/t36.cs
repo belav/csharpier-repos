@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+
 using FrontDesk.Testing.Configuration;
 
 class X

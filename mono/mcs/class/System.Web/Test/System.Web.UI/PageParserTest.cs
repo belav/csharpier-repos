@@ -1,3 +1,8 @@
+using System;
+using System.Web;
+using System.Web.UI;
+
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.PageParser
 //
@@ -26,10 +31,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using NUnit.Framework;
-using System;
-using System.Web;
-using System.Web.UI;
-using MonoTests.SystemWeb.Framework;
 
 namespace MonoTests.System.Web.UI
 {

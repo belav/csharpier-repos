@@ -6,10 +6,11 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using UIAutomationClient;
 using AutomationElementIdentifiers = System.Windows.Automation.AutomationElementIdentifiers;
 using AutomationProperty = System.Windows.Automation.AutomationProperty;
 using ControlType = System.Windows.Automation.ControlType;
+
+using UIAutomationClient;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {

@@ -30,9 +30,7 @@
 
 #if CONFIGURATION_DEP
 
-using System;
-using System.Configuration;
-using System.Net.Mail;
+using System;using System.Configuration;using System.Net.Mail;
 
 namespace System.Net.Configuration
 {

@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using System.Security.Principal;
+
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -11,12 +18,6 @@
 ===========================================================*/
 
 using Microsoft.Win32;
-using System;
-using System.Collections;
-using System.Security.Principal;
-using System.Security.Permissions;
-using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.AccessControl
 {

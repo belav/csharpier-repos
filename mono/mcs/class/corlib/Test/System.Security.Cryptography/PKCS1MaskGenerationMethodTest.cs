@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // PKCS1MaskGenerationMethodTest.cs - NUnit Test Cases for PKCS1MaskGenerationMethod
 //
@@ -28,8 +31,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

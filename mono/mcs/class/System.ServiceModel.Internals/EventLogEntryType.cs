@@ -37,8 +37,7 @@ API in mobile world, this will conflict and can be removed.
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-using System.Diagnostics;
+using System;using System.Diagnostics;
 
 namespace System.Diagnostics
 {

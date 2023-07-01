@@ -12,11 +12,11 @@
 
 namespace System.Security.Cryptography
 {
-    using System.Security.AccessControl;
-    using System.Security.Permissions;
+    using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security.AccessControl;
+    using System.Security.Permissions;
 
 #if FEATURE_MACL && FEATURE_CRYPTO && !MONO
 

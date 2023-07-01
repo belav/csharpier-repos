@@ -4,23 +4,23 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Net;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Net.Sockets;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.IdentityModel.Selectors;
+    using System.Globalization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.Security.Principal;
-    using System.ServiceModel.Security.Tokens;
-    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Runtime.Diagnostics;
     using System.Runtime.Serialization;
-    using System.Globalization;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Diagnostics;
+    using System.ServiceModel.Security.Tokens;
 
     public abstract class IdentityVerifier
     {

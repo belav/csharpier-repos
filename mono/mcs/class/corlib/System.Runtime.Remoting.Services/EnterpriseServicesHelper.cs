@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 //
 // System.Runtime.Remoting.Services.EnterpriseServicesHelper.cs
 //
@@ -30,10 +31,9 @@
 //
 
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Activation;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
-using System.Runtime.InteropServices;
 
 namespace System.Runtime.Remoting.Services
 {

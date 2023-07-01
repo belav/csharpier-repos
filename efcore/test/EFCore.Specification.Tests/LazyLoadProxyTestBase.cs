@@ -3,11 +3,12 @@
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 using System.Text.Json.Serialization;
+
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;

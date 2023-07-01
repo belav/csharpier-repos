@@ -4,16 +4,16 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Policy;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
+    using System.IdentityModel.Policy;
     using System.IO;
-    using System.Xml;
-    using System.ServiceModel.Dispatcher;
+    using System.Runtime.Serialization;
     using System.Security.Principal;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     [Serializable]
     class SerializableAuthorizationContext

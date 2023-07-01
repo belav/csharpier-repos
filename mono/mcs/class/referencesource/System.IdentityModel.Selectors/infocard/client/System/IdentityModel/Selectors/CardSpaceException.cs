@@ -6,9 +6,10 @@ namespace System.IdentityModel.Selectors
 {
     using System;
     using System.Runtime.Serialization;
+
+    using Microsoft.InfoCards;
     using Microsoft.InfoCards.Diagnostics;
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-    using Microsoft.InfoCards;
 
     internal static class ExceptionHelper
     {

@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Configuration.Provider;
 using System.Data.Common;
@@ -38,7 +39,6 @@ using System.IO;
 using System.Reflection;
 using System.Web;
 using System.Web.Compilation;
-using System.Collections.Specialized;
 
 namespace System.Web.Configuration
 {

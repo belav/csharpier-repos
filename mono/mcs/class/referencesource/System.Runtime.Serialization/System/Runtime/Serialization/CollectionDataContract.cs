@@ -5,10 +5,10 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
     using System.Collections.Generic;
-    using System.IO;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Threading;
     using System.Xml;
@@ -18,9 +18,7 @@ namespace System.Runtime.Serialization
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
-    >;
-    using System.Security;
-    using System.Security.Permissions;
+    >;using System.Security;using System.Security.Permissions;
 
     [DataContract(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")]
 #if USE_REFEMIT

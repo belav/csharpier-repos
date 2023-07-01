@@ -1,3 +1,6 @@
+using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Diagnostics;
 //---------------------------------------------------------------------
 // <copyright file="ExceptionHelpers.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,9 +11,6 @@
 //---------------------------------------------------------------------
 
 using System.Text;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Diagnostics;
-using System.Data.Common.Utils;
 
 namespace System.Data.Mapping.ViewGeneration.Utils
 {

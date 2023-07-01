@@ -6,16 +6,17 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
     using System;
     using System.Collections;
-    using System.IO;
-    using Microsoft.Win32;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Security.Permissions;
+    using System.IO;
     //    using System.Windows.Forms;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     A process module component represents a DLL or EXE loaded into

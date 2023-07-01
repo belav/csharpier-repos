@@ -1,14 +1,15 @@
+using System.Buffers.Binary;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-using System.Buffers.Binary;
-using System.Text;
-using System.Net;
-using System.Security.Cryptography;
-using System.Net.Security;
 using System.Formats.Asn1;
+using System.Net;
+using System.Net.Security;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text;
+
 using Xunit;
 
 namespace System.Net.Security

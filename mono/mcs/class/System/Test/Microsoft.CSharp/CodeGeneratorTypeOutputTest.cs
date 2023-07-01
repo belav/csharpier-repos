@@ -11,9 +11,9 @@ using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 
-using NUnit.Framework;
-
 using Microsoft.CSharp;
+
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.CSharp
 {

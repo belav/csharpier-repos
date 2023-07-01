@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
 //---------------------------------------------------------------------
 // <copyright file="BindingContext.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -7,18 +11,14 @@
 //---------------------------------------------------------------------
 
 using CqtExpression = System.Data.Common.CommandTrees.DbExpression;
-using LinqExpression = System.Linq.Expressions.Expression;
-using System.Linq.Expressions;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Collections.Generic;
-using System.Data.Common.CommandTrees;
-using System.Data.Metadata.Edm;
-using System.Reflection;
 using System.Data.Common.EntitySql;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Data.Common;
 using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using LinqExpression = System.Linq.Expressions.Expression;
+using System.Reflection;
 
 namespace System.Data.Objects.ELinq
 {

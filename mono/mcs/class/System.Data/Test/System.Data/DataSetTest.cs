@@ -1,3 +1,15 @@
+using System;
+using System.Data;
+using System.Data.SqlTypes;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+using MonoTests.Helpers;
 // MonoTests.System.Data.DataSetTest.cs
 //
 // Authors:
@@ -35,18 +47,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.IO;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Globalization;
-using System.Threading;
-using System.Text;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Data
 {

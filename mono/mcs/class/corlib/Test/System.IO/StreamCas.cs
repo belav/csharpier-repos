@@ -1,3 +1,9 @@
+using System;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // StreamCas.cs - CAS unit tests for System.IO.Stream
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.IO
 {

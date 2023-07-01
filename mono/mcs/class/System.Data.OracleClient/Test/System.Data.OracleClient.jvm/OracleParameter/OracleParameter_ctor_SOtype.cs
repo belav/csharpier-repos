@@ -28,7 +28,6 @@ using System.Data.OracleClient;
 using MonoTests.System.Data.Utils;
 
 using NUnit.Framework;
-
 #if DAAB
 using Microsoft.ApplicationBlocks;
 #endif

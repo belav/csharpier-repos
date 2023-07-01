@@ -1,3 +1,9 @@
+using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Drawing.Imaging;
+using System.Drawing.Printing;
+using System.IO;
 //#define PrintDebug
 //
 // Copyright (C) 2005, 2007 Novell, Inc. http://www.novell.com
@@ -27,13 +33,7 @@
 //
 
 using System.Runtime.InteropServices;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Drawing.Printing;
-using System.ComponentModel;
-using System.Drawing.Imaging;
 using System.Text;
-using System.IO;
 
 namespace System.Drawing.Printing
 {

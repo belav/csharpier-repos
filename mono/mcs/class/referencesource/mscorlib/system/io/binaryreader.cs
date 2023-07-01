@@ -18,12 +18,12 @@
 namespace System.IO
 {
     using System;
-    using System.Runtime;
-    using System.Text;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Security;
     using System.Buffers.Binary;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime;
+    using System.Security;
+    using System.Text;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class BinaryReader : IDisposable

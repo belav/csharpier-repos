@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
 //
 // ThreadExceptionEventArgsCas.cs
 //	- CAS unit tests for System.Threading.ThreadExceptionEventArgs
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
 
 namespace MonoCasTests.System.Threading
 {

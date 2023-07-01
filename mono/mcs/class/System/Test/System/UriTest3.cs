@@ -1,3 +1,4 @@
+using System;
 //
 // UriTest3.cs - Even more (2.0 specific) unit tests for System.Uri
 //
@@ -27,8 +28,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
 
 namespace MonoTests.System
 {

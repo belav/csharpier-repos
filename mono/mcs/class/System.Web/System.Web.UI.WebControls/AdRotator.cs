@@ -1,3 +1,7 @@
+using System.Collections;
+using System.ComponentModel;
+using System.Security.Permissions;
+using System.Web.Util;
 //
 // System.Web.UI.WebControls.AdRotator
 //
@@ -27,10 +31,6 @@
 //
 
 using System.Xml;
-using System.Collections;
-using System.ComponentModel;
-using System.Security.Permissions;
-using System.Web.Util;
 
 namespace System.Web.UI.WebControls
 {

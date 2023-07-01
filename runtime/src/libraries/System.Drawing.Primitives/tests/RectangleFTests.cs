@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using System.Numerics;
+
 using Xunit;
 
 namespace System.Drawing.PrimitivesTest

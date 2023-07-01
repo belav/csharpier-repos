@@ -7,16 +7,16 @@
 
 namespace System.Web.Services.Description
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Security.Permissions;
     using System.Web.Services;
     using System.Web.Services.Protocols;
     using System.Xml;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Collections;
-    using System;
-    using System.Reflection;
-    using System.Security.Permissions;
-    using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector"]/*' />
     /// <devdoc>

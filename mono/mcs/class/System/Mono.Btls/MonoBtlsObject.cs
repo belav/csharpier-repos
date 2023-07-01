@@ -24,12 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
-using System;
-using System.Threading;
-using System.Security.Authentication;
-using System.Security.Cryptography;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
+using System;using System.Threading;using System.Security.Authentication;using System.Security.Cryptography;using System.Runtime.InteropServices;using System.Runtime.CompilerServices;
 
 namespace Mono.Btls
 {

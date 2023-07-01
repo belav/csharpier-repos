@@ -7,10 +7,10 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Microsoft.Win32.SafeHandles;
 
 using SYSTEM_PROCESS_INFORMATION = Interop.NtDll.SYSTEM_PROCESS_INFORMATION;
 using SYSTEM_THREAD_INFORMATION = Interop.NtDll.SYSTEM_THREAD_INFORMATION;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Diagnostics
 {

@@ -6,9 +6,9 @@ namespace System.ServiceModel.Security
 {
     using System;
     using System.IdentityModel.Protocols.WSTrust;
+    using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
 
     /// <summary>
     /// Defines a Body Writer that writes out the RSTR to a outgoing message.

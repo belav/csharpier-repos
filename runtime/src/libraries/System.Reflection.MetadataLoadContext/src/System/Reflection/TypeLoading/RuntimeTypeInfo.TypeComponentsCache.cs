@@ -4,8 +4,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection.Runtime.BindingFlagSupport;
-using System.Threading;
 using RuntimeTypeInfo = System.Reflection.TypeLoading.RoType;
+using System.Threading;
 
 namespace System.Reflection.TypeLoading
 {

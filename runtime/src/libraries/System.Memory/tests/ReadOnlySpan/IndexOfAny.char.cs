@@ -4,6 +4,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Text;
+
 using Xunit;
 
 namespace System.SpanTests

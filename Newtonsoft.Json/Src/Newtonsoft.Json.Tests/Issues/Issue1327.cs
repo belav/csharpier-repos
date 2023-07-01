@@ -24,13 +24,7 @@
 #endregion
 
 #if !(DNXCORE50 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Xml;
+using System;using System.Collections.Generic;using System.Linq;using System.Text;using Newtonsoft.Json;using Newtonsoft.Json.Linq;using System.Xml;
 #if !NET20
 using System.Xml.Linq;
 #endif

@@ -16,14 +16,14 @@
 **
 ===========================================================*/
 using System;
+using System.Security;
+
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Security;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif
-using System.Security.Permissions;
-using System.Threading;
+using System.Security.Permissions;using System.Threading;
 #if FEATURE_ASYNC_IO
 using System.Threading.Tasks;
 #endif
@@ -31,11 +31,7 @@ using System.Runtime.InteropServices;
 #if FEATURE_REMOTING
 using System.Runtime.Remoting.Messaging;
 #endif
-using System.Runtime.CompilerServices;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
-using System.Diagnostics.Tracing;
+using System.Runtime.CompilerServices;using System.Globalization;using System.Runtime.Versioning;using System.Diagnostics.Contracts;using System.Diagnostics.Tracing;
 
 /*
  * FileStream supports different modes of accessing the disk - async mode

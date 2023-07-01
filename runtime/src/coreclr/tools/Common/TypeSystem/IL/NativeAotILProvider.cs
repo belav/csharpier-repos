@@ -3,12 +3,12 @@
 
 using System;
 
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
+using Debug = System.Diagnostics.Debug;
 
 using Internal.IL.Stubs;
 
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace Internal.IL
 {

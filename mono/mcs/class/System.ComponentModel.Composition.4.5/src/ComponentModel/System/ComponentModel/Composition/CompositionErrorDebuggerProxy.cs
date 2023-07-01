@@ -4,6 +4,7 @@
 using System;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
+
 using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Win32.SafeHandles;
+
+using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
 
 using ErrorCode = Interop.NCrypt.ErrorCode;
-using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
+using Microsoft.Win32.SafeHandles;
 
 namespace Internal.Cryptography
 {

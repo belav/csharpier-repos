@@ -7,10 +7,10 @@
 namespace System.Net
 {
     using System.Collections;
-    using System.Globalization;
-    using System.Threading;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Runtime.InteropServices;
+    using System.Threading;
 
     /// <summary>
     /// <para>Acts as countdown timer, used to measure elapsed time over a sync operation.</para>

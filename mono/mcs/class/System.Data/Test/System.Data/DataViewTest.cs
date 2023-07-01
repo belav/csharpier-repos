@@ -1,3 +1,8 @@
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
+
 // DataViewTest.cs - Nunit Test Cases for for testing the DataView
 // class
 // Authors:
@@ -34,10 +39,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.ComponentModel;
-using System.IO;
 
 namespace MonoTests.System.Data
 {

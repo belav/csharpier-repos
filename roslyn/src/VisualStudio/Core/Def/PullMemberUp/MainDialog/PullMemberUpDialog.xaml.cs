@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+
 using Microsoft.CodeAnalysis.PullMemberUp;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls;
 using Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.WarningDialog;

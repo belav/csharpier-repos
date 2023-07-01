@@ -21,21 +21,19 @@
 //#define BID_USE_ALL_APIGROUP
 
 using System;
-using System.IO;
-using System.Text;
-using System.Security;
-using System.Reflection;
 using System.Collections;
-using System.Globalization;
-using System.Security.Permissions;
 using System.Collections.Specialized;
-using System.Runtime.InteropServices;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
 #if BID_AUTOSIG
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;using System.Runtime.Serialization.Formatters.Binary;
 #endif
 
 //

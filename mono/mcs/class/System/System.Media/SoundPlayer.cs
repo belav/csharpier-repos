@@ -26,10 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.IO;
-using System.Threading;
-using System.Runtime.Serialization;
 using System.ComponentModel;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Threading;
+
 using Mono.Audio;
 
 namespace System.Media

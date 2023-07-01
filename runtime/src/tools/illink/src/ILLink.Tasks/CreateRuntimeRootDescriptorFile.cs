@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+
 using Microsoft.Build.Framework; // ITaskItem
 using Microsoft.Build.Utilities; // Task
 

@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribute;
+using System.Text;
 
 namespace System.Reflection.TypeLoading
 {

@@ -27,10 +27,10 @@
 //
 
 using System;
+using Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding;
 
 using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.AST.Visitors;
-using Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 using Mono.CodeContracts.Static.Providers;

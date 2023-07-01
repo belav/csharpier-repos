@@ -4,6 +4,7 @@
 
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Formatting

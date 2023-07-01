@@ -1,3 +1,7 @@
+using System;
+using System.Drawing;
+using System.Security.Permissions;
+
 // Tests for System.Drawing.Point.cs
 //
 // Author: Mike Kestner (mkestner@speakeasy.net)
@@ -28,9 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing
 {

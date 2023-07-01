@@ -28,8 +28,7 @@
 
 #if !MONO_FEATURE_SRE
 
-using System;
-using System.Collections.Generic;
+using System;using System.Collections.Generic;
 
 namespace System.Reflection.Emit
 {

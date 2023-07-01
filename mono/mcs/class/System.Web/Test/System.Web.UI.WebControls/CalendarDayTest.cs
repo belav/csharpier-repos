@@ -1,3 +1,9 @@
+using System;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Web;
+using System.Web.UI;
 //
 // Tests for System.Web.UI.WebControls.CalendarDay.cs
 //
@@ -29,13 +35,8 @@
 //
 
 using System.Web.UI.WebControls;
+
 using NUnit.Framework;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Web;
-using System.Web.UI;
-using System.Globalization;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

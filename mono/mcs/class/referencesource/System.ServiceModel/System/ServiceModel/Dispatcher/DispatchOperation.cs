@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel;
     using System.Collections.Generic;
+    using System.ServiceModel;
 
     public sealed class DispatchOperation
     {

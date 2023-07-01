@@ -1,4 +1,5 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Collections.Generic;
+//---------------------------------------------------------------------
 // <copyright file="EntityStoreSchemaGenerator.LoadMethodSessionState.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -7,9 +8,8 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Data.Entity.Design.Common;
-using System.Collections.Generic;
-using System.Data.Metadata.Edm;
 using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
 namespace System.Data.Entity.Design

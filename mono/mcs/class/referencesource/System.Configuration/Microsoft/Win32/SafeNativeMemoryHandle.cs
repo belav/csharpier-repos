@@ -6,11 +6,12 @@
 
 namespace Microsoft.Win32
 {
-    using System.Runtime.InteropServices;
     using System;
-    using System.Security.Permissions;
-    using Microsoft.Win32.SafeHandles;
     using System.Configuration;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+
+    using Microsoft.Win32.SafeHandles;
 
     // Safehandle for memory handles
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]

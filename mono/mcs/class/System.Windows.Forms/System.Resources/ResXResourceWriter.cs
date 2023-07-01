@@ -28,10 +28,10 @@
 
 using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
-using System.Reflection;
 
 namespace System.Resources
 {

@@ -14,8 +14,8 @@ namespace System.Data.Odbc
     using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Text;
 
     internal static class ODBC

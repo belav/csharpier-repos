@@ -3,8 +3,9 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Reflection;
+using System.Text;
+
 using Microsoft.Diagnostics.NETCore.Client;
 using Tracing.Tests.Common;
 

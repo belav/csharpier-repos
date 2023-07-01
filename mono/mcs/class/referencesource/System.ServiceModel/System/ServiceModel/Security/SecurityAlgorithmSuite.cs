@@ -4,20 +4,20 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
 
     using System.Text;
-    using System.Runtime.Serialization;
     using System.Xml;
-    using System.ComponentModel;
 
     [TypeConverter(typeof(System.ServiceModel.Configuration.SecurityAlgorithmSuiteConverter))]
     public abstract class SecurityAlgorithmSuite

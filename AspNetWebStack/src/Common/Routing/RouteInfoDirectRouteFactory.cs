@@ -2,12 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Diagnostics.Contracts;
-
 #if ASPNETWEBAPI
 using TRouteInfoProvider = System.Web.Http.Routing.IHttpRouteInfoProvider;
 #else
-using System.Web.Mvc.Properties;
-using TRouteInfoProvider = System.Web.Mvc.Routing.IRouteInfoProvider;
+using System.Web.Mvc.Properties;using TRouteInfoProvider = System.Web.Mvc.Routing.IRouteInfoProvider;
 #endif
 
 #if ASPNETWEBAPI

@@ -4,8 +4,9 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Xunit;
+
 using static ExceptionInteropNative;
+using Xunit;
 
 internal static unsafe class ExceptionInteropNative
 {

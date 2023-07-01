@@ -32,8 +32,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Xml;
 #if !MOBILE
-using System.Configuration;
-using System.ServiceModel.Configuration;
+using System.Configuration;using System.ServiceModel.Configuration;
 #endif
 
 namespace System.ServiceModel

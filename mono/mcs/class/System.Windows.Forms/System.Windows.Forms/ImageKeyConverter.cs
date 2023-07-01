@@ -1,3 +1,6 @@
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics;
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -24,9 +27,6 @@
 //
 
 using System.Drawing;
-using System.ComponentModel;
-using System.Collections;
-using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 

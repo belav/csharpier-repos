@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Windows.Forms.HScrollBar.cs
 //
@@ -28,7 +29,6 @@
 
 
 using System.Drawing;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms

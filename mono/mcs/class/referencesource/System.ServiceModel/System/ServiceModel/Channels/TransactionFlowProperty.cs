@@ -5,13 +5,13 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Remoting.Messaging;
     using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
+    using System.ServiceModel.Transactions;
 
     using System.Transactions;
-    using System.Runtime.Remoting.Messaging;
-    using System.ServiceModel.Transactions;
-    using System.ServiceModel.Diagnostics;
 
     public sealed class TransactionMessageProperty
     {

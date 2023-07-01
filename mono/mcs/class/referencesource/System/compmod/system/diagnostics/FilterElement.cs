@@ -4,8 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 #if CONFIGURATION_DEP
-using System.Configuration;
-using System;
+using System.Configuration;using System;
 
 namespace System.Diagnostics
 {

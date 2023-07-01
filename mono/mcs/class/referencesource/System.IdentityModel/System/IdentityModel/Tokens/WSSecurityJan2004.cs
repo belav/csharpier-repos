@@ -9,14 +9,14 @@ namespace System.IdentityModel.Tokens
     using System.Globalization;
     using System.IdentityModel;
     using System.IdentityModel.Selectors;
+    using KeyIdentifierClauseEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierClauseEntry;
+    using StrEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.StrEntry;
+    using TokenEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.TokenEntry;
+    using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;
-    using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
-    using KeyIdentifierClauseEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierClauseEntry;
-    using StrEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.StrEntry;
-    using TokenEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.TokenEntry;
 
     class WSSecurityJan2004 : SecurityTokenSerializer.SerializerEntries
     {

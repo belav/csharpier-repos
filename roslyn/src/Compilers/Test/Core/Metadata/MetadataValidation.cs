@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.Metadata.Tools;
 using Roslyn.Utilities;

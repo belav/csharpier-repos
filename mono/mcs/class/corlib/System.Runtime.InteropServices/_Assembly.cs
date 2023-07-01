@@ -1,3 +1,4 @@
+using System.Globalization;
 //
 // System.Runtime.InteropServices._Assembly interface
 //
@@ -27,7 +28,6 @@
 //
 
 using System.IO;
-using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security.Policy;

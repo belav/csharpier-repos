@@ -4,6 +4,7 @@
 
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Syntax

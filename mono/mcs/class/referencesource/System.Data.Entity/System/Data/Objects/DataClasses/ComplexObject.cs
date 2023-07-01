@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //---------------------------------------------------------------------
 // <copyright file="ComplexObject.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -9,7 +10,6 @@
 using System.Data;
 using System.Diagnostics;
 using System.Reflection;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace System.Data.Objects.DataClasses

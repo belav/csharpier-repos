@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization.Metadata;
 using System.Text.Json.Tests;
+
 using Xunit;
 
 namespace System.Text.Json.Serialization.Tests

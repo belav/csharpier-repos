@@ -4,6 +4,7 @@
 
 using System.Text;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral;
 using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;

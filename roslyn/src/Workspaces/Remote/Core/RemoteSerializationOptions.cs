@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using MessagePack;
 using MessagePack.Formatters;
 using MessagePack.Resolvers;

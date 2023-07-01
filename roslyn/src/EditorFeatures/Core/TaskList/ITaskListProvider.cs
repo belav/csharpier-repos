@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.TaskList;
 
 namespace Microsoft.CodeAnalysis.Editor.TaskList

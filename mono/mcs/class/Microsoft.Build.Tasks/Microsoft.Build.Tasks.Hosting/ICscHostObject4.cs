@@ -28,8 +28,7 @@
 
 #if XBUILD_12
 
-using System.Runtime.InteropServices;
-using Microsoft.Build.Framework;
+using System.Runtime.InteropServices;using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Hosting
 {

@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
+    using System.Xml;
     using System.Xml.Serialization;
 
     class SingleBodyParameterXmlSerializerMessageFormatter : SingleBodyParameterMessageFormatter

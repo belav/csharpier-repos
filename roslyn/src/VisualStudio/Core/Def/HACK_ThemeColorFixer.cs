@@ -7,6 +7,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.Host.Mef;

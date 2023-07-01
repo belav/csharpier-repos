@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 using Internal.NativeFormat;
-
 #if TYPE_LOADER_IMPLEMENTATION
 using MetadataType = Internal.TypeSystem.DefType;
 #endif

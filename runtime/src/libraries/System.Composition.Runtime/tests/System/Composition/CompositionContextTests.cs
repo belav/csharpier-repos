@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Core;
+
 using Xunit;
 
 namespace System.Composition.Runtime.Tests

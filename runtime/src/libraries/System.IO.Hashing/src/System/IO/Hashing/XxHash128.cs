@@ -5,10 +5,10 @@
 
 using System.Buffers.Binary;
 using System.Diagnostics;
+using static System.IO.Hashing.XxHashShared;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static System.IO.Hashing.XxHashShared;
 
 namespace System.IO.Hashing
 {

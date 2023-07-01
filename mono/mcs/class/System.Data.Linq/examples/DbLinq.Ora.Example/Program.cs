@@ -25,9 +25,8 @@
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-
+using System.Text;
 #if DEBUG
 //using System.Data.OracleClient;
 //using XSqlCommand = System.Data.OracleClient.OracleCommand;

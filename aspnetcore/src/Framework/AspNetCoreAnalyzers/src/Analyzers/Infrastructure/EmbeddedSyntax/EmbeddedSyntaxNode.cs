@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+
 using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 using Microsoft.CodeAnalysis.Text;
 

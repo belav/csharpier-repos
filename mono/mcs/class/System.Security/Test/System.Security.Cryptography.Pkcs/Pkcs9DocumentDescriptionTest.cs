@@ -1,3 +1,8 @@
+using System;
+using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Pkcs;
+
 //
 // Pkcs9DocumentDescriptionTest.cs - NUnit tests for Pkcs9DocumentDescription
 //
@@ -29,11 +34,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.Security.Cryptography;
-using System.Security.Cryptography.Pkcs;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {

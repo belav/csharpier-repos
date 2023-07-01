@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Cryptography;
+using System.Security.Permissions;
+
 //
 // CryptoConfigCas.cs -
 //	CAS unit tests for System.Security.Cryptography.CryptoConfig
@@ -28,12 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.Security.Cryptography
 {

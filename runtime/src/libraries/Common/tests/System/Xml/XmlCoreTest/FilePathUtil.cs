@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+
 using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common

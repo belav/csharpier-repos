@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+
 //
 // HttpFileCollectionCas.cs
 //	- CAS unit tests for System.Web.HttpFileCollection
@@ -28,11 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
 
 namespace MonoCasTests.System.Web
 {

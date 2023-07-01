@@ -25,28 +25,17 @@
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 
-using System;
-using System.Globalization;
-using Newtonsoft.Json.Linq;
+using System;using System.Globalization;using Newtonsoft.Json.Linq;
 #if !PORTABLE || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
 using System.Text;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Linq;
-using Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests;
-using Newtonsoft.Json.Utilities;
+using System.IO;using System.Net;using System.Net.Sockets;using System.Threading;using System.Threading.Tasks;using System.Linq;using Newtonsoft.Json.Tests.TestObjects.JsonTextReaderTests;using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.JsonTextReaderTests
 {

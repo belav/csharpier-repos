@@ -16,10 +16,10 @@
 namespace System.Collections
 {
     using System;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
 
     // A simple stack of objects.  Internally it is implemented as an array,
     // so Push can be O(n).  Pop is O(1).

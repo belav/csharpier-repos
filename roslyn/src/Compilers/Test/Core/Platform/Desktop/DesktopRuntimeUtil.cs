@@ -5,20 +5,7 @@
 #nullable disable
 
 #if NET472
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Test.Utilities;
+using System;using System.Collections.Generic;using System.Collections.Immutable;using System.Diagnostics;using System.IO;using System.IO.Compression;using System.Linq;using System.Reflection;using System.Reflection.Emit;using System.Runtime.Remoting.Metadata.W3cXsd2001;using System.Text;using System.Threading.Tasks;using Microsoft.CodeAnalysis;using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Roslyn.Test.Utilities.Desktop
 {

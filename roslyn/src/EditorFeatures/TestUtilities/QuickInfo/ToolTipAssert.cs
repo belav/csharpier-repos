@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Text;
+
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo;
 using Microsoft.VisualStudio.Core.Imaging;

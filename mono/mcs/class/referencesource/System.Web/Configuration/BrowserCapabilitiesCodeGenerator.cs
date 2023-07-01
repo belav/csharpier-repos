@@ -9,31 +9,14 @@ namespace System.Web.Configuration
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Configuration;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
 #if !FEATURE_PAL
     using System.ServiceProcess;
 #endif // !FEATURE_PAL
-    using System.Linq;
-    using System.Reflection;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Web;
-    using System.Web.Compilation;
-    using System.Web.Configuration;
-    using System.Web.Hosting;
-    using System.Web.UI;
-    using System.Web.Util;
-    using System.Xml;
-    using System.Xml.Schema;
-
-    using Microsoft.Build.Utilities;
-    using Microsoft.CSharp;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;using System.Reflection;using System.Security;using System.Security.Permissions;using System.Text;using System.Text.RegularExpressions;using System.Web;using System.Web.Compilation;using System.Web.Configuration;using System.Web.Hosting;using System.Web.UI;using System.Web.Util;using System.Xml;using System.Xml.Schema;using Microsoft.Build.Utilities;using Microsoft.CSharp;using System.Diagnostics.CodeAnalysis;
 
     [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
     [PermissionSet(SecurityAction.InheritanceDemand, Unrestricted = true)]

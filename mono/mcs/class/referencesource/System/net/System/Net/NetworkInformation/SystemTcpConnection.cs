@@ -1,12 +1,12 @@
 namespace System.Net.NetworkInformation
 {
-    using System.Net;
-    using System.Net.Sockets;
-    using System.Security.Permissions;
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections;
     using System.ComponentModel;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Threading;
 
     /// <summary>

@@ -6,18 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Process = System.Diagnostics.Process;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+
 using EnvDTE;
 using Microsoft.VisualStudio.Setup.Configuration;
 using Microsoft.Win32;
 using Roslyn.Utilities;
 using RunTests;
 using Xunit;
-using Process = System.Diagnostics.Process;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {

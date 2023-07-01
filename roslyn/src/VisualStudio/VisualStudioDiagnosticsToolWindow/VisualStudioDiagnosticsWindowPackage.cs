@@ -10,6 +10,8 @@ using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
+
 using Microsoft;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
@@ -21,7 +23,6 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Options;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages;
-using Task = System.Threading.Tasks.Task;
 
 namespace Roslyn.VisualStudio.DiagnosticsWindow
 {

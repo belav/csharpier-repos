@@ -7,6 +7,7 @@ using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using ILLink.CodeFixProvider;
 using ILLink.RoslynAnalyzer;
 using ILLink.Shared;

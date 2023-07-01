@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Web.Services.Description;
+using System.Xml;
+using System.Xml.Serialization;
+
+using MonoTests.Helpers;
 //
 // ServiceDescriptionTest.cs
 //
@@ -10,15 +18,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Web.Services.Description;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Collections;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Web.Services.Description
 {

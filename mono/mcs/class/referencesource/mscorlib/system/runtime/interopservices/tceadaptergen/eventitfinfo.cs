@@ -6,8 +6,8 @@
 namespace System.Runtime.InteropServices.TCEAdapterGen
 {
     using System;
-    using System.Reflection;
     using System.Collections;
+    using System.Reflection;
 
     internal class EventItfInfo
     {

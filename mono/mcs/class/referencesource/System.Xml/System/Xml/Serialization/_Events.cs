@@ -7,10 +7,10 @@
 
 namespace System.Xml.Serialization
 {
-    using System.IO;
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.IO;
 
     /// <include file='doc\_Events.uex' path='docs/doc[@for="XmlAttributeEventHandler"]/*' />
     /// <devdoc>

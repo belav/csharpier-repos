@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+
 using Microsoft.Extensions.SecretManager.Tools.Internal;
 using Microsoft.Extensions.Tools.Internal;
 using Xunit;

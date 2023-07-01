@@ -15,9 +15,9 @@ using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
+using Edm = System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Runtime.Serialization;
-using Edm = System.Data.Metadata.Edm;
 
 namespace System.Data
 {

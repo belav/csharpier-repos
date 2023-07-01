@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using Microsoft.VisualStudio.Debugger.Contracts.EditAndContinue;
-using Microsoft.VisualStudio.Debugger.Contracts.HotReload;
 
 using Contracts = Microsoft.CodeAnalysis.EditAndContinue.Contracts;
+using Microsoft.VisualStudio.Debugger.Contracts.EditAndContinue;
+using Microsoft.VisualStudio.Debugger.Contracts.HotReload;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
 {

@@ -10,6 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+
 using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests

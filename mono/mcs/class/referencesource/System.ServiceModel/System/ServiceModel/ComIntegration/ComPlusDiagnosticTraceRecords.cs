@@ -15,11 +15,11 @@ namespace System.ServiceModel.ComIntegration
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using ServiceModelSR = System.ServiceModel.SR;
+    using WsdlNS = System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using ServiceModelSR = System.ServiceModel.SR;
-    using WsdlNS = System.Web.Services.Description;
 
     static class ComPlusServiceHostTrace
     {

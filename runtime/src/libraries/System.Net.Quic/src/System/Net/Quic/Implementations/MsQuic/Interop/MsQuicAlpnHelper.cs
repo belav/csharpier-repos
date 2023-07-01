@@ -4,8 +4,8 @@
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Security;
 using static System.Net.Quic.Implementations.MsQuic.Internal.MsQuicNativeMethods;
+using System.Net.Security;
 
 namespace System.Net.Quic.Implementations.MsQuic.Internal
 {

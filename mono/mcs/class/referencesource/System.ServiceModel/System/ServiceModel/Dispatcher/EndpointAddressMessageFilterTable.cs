@@ -4,19 +4,19 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
-    using System.ServiceModel.Security;
-    using System.Xml;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using HeaderBit = System.ServiceModel.Dispatcher.EndpointAddressProcessor.HeaderBit;
 
     using QName = System.ServiceModel.Dispatcher.EndpointAddressProcessor.QName;
-    using HeaderBit = System.ServiceModel.Dispatcher.EndpointAddressProcessor.HeaderBit;
-    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
+    using System.Xml;
 
     internal class EndpointAddressMessageFilterTable<TFilterData> : IMessageFilterTable<TFilterData>
     {

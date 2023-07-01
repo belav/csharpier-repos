@@ -5,6 +5,7 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -13,10 +14,9 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Web;
     using System.ServiceModel.Web.Configuration;
     using System.Text;
+    using System.Web;
     using System.Xml;
     using System.Xml.Linq;
-    using System.Globalization;
-    using System.Web;
     using System.Xml.Schema;
 
     class HelpHtmlBuilder

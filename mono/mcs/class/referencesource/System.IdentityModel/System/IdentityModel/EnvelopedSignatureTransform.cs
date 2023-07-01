@@ -4,8 +4,8 @@
 
 namespace System.IdentityModel
 {
-    using System.Xml;
     using System.Security.Cryptography;
+    using System.Xml;
 
     sealed class EnvelopedSignatureTransform : Transform
     {

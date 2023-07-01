@@ -27,10 +27,10 @@
 //
 using System;
 using System.Reflection;
-using System.ServiceModel.Channels;
-using System.Threading;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
+using System.Threading;
 
 namespace System.ServiceModel.Dispatcher
 {

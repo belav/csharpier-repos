@@ -7,8 +7,7 @@ using System.Net.Http.Formatting;
 #if !NETFX_CORE
 using System.Net.Http.Formatting.Internal;
 #endif
-using System.Web.WebPages.TestUtils;
-using Microsoft.TestCommon;
+using System.Web.WebPages.TestUtils;using Microsoft.TestCommon;
 
 namespace System.Net.Http.Internal
 {

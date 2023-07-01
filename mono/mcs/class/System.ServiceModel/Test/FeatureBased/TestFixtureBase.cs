@@ -1,21 +1,5 @@
 ﻿#if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using NUnit.Framework;
-using System.Reflection;
-using System.Threading;
-using System.Configuration;
-using System.IO;
-using System.Net;
-using MonoTests.stand_alone.WebHarness;
-using System.ServiceModel.Dispatcher;
-using System.Collections.ObjectModel;
-
-using MonoTests.Helpers;
+using System;using System.Collections.Generic;using System.Text;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using NUnit.Framework;using System.Reflection;using System.Threading;using System.Configuration;using System.IO;using System.Net;using MonoTests.stand_alone.WebHarness;using System.ServiceModel.Dispatcher;using System.Collections.ObjectModel;using MonoTests.Helpers;
 
 namespace MonoTests.Features
 {

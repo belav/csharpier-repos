@@ -1,3 +1,5 @@
+using System.Runtime.Remoting.Activation;
+using System.Runtime.Remoting.Messaging;
 //
 // System.Runtime.Remoting.Contexts.SynchronizationAttribute.cs
 //
@@ -28,8 +30,6 @@
 //
 
 using System.Threading;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Activation;
 
 namespace System.Runtime.Remoting.Contexts
 {

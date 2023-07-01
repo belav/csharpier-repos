@@ -15,16 +15,9 @@ namespace System.Security
 {
     using System.Collections;
 #if FEATURE_CLICKONCE
-    using System.Deployment.Internal.Isolation;
-    using System.Deployment.Internal.Isolation.Manifest;
-    using System.Runtime.Hosting;
+    using System.Deployment.Internal.Isolation;using System.Deployment.Internal.Isolation.Manifest;using System.Runtime.Hosting;
 #endif
-    using System.Reflection;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.Policy;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Reflection;using System.Security;using System.Security.Permissions;using System.Security.Policy;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
     [Serializable]
     [Flags]

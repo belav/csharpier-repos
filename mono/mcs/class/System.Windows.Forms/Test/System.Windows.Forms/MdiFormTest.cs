@@ -8,13 +8,14 @@
 //
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
-using System.ComponentModel;
+
 using NUnit.Framework;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-using System.Threading;
 
 namespace MonoTests.System.Windows.Forms
 {

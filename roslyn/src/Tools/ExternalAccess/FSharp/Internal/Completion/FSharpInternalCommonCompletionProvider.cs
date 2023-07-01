@@ -6,6 +6,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Completion;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion;
 using Microsoft.CodeAnalysis.Text;

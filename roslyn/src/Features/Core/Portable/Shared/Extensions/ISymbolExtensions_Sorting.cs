@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.LanguageService;
 using Roslyn.Utilities;
 

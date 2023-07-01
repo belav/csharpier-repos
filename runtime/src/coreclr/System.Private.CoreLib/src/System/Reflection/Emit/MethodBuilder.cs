@@ -4,10 +4,10 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.SymbolStore;
+using CultureInfo = System.Globalization.CultureInfo;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System.Reflection.Emit
 {

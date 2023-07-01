@@ -15,12 +15,13 @@ namespace System.Security.Cryptography.X509Certificates
     using System.Net;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
+
+    using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Text;
-    using Microsoft.Win32.SafeHandles;
 
-    using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
+    using Microsoft.Win32.SafeHandles;
 
     [Flags]
     public enum X509ChainStatusFlags

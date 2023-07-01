@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
+using MonoTests.System.Threading;
 //
 // SemaphoreCas.cs - CAS unit tests for System.Threading.Semaphore
 //
@@ -28,14 +35,6 @@
 
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
-
-using MonoTests.System.Threading;
 
 namespace MonoCasTests.System.Threading
 {

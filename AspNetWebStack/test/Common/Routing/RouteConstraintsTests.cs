@@ -4,14 +4,11 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 #if ASPNETWEBAPI
-using System.Net.Http;
-using System.Web.Http.Routing.Constraints;
+using System.Net.Http;using System.Web.Http.Routing.Constraints;
 #else
-using System.Web.Mvc.Routing.Constraints;
-using System.Web.Routing;
+using System.Web.Mvc.Routing.Constraints;using System.Web.Routing;
 #endif
-using Microsoft.TestCommon;
-using Moq;
+using Microsoft.TestCommon;using Moq;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing

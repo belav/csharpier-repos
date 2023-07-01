@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Microsoft.DotNet.RemoteExecutor;
 using System.Text;
-using System.Diagnostics;
+
+using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
 namespace System.Globalization.Tests

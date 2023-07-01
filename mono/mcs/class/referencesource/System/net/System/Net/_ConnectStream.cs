@@ -6,18 +6,18 @@
 
 namespace System.Net
 {
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Net.Security;
     using System.Net.Sockets;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System.ComponentModel;
+    using System.Threading;
     using System.Threading.Tasks;
-    using System.Configuration;
-    using System.Globalization;
 
     internal struct WriteHeadersCallbackState
     {

@@ -8,13 +8,7 @@ using MX = MonoSecurity::Mono.Security.X509;
 using MX = Mono.Security.X509;
 #endif
 
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Win32.SafeHandles;
-using XamMac.CoreFoundation;
+using System;using System.Text;using System.Runtime.InteropServices;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using Microsoft.Win32.SafeHandles;using XamMac.CoreFoundation;
 
 namespace Mono.AppleTls
 {

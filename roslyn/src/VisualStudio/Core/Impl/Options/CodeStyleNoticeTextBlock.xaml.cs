@@ -7,6 +7,7 @@
 using System;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+
 using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options

@@ -34,13 +34,7 @@ using System.ServiceModel.Description;
 #if !MOBILE
 using System.ServiceModel.Syndication;
 #endif
-using System.ServiceModel.Web;
-using System.Xml;
-using NUnit.Framework;
-
-using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-
-using MonoTests.Helpers;
+using System.ServiceModel.Web;using System.Xml;using NUnit.Framework;using CategoryAttribute = NUnit.Framework.CategoryAttribute;using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Web
 {

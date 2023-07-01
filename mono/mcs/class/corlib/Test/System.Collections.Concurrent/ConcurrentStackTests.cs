@@ -23,9 +23,10 @@
 //
 
 using System;
-using System.Threading;
-using System.Linq;
 using System.Collections.Concurrent;
+using System.Linq;
+using System.Threading;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

@@ -5,14 +5,14 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
-    using System.IdentityModel.Tokens;
-    using System.ServiceModel.Channels;
+    using System.Globalization;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
 
     using System.Text;
-    using System.Globalization;
 
     public class SecureConversationSecurityTokenParameters : SecurityTokenParameters
     {

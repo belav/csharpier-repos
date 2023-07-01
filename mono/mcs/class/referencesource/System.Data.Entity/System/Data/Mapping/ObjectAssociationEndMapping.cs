@@ -10,9 +10,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Mapping
 {

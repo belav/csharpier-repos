@@ -7,8 +7,8 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Web.Services.Description;
     using System.Runtime.InteropServices;
+    using System.Web.Services.Description;
 
     /// <include file='doc\SoapRpcMethodAttribute.uex' path='docs/doc[@for="SoapRpcMethodAttribute"]/*' />
     /// <devdoc>

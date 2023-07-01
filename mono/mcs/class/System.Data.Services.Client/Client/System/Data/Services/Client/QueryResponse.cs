@@ -17,8 +17,8 @@ namespace System.Data.Services.Client
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.Diagnostics;
+    using System.Reflection;
 
     #endregion Namespaces.
 

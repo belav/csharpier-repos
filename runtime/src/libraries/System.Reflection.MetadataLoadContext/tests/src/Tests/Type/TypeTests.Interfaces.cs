@@ -1,10 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
 using SampleMetadata;
-using System.Collections;
-using System.Collections.Generic;
 using Xunit;
 
 namespace System.Reflection.Tests

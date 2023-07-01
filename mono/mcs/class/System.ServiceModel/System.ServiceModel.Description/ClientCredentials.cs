@@ -32,9 +32,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Security;
 #if !MOBILE
-using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
-using System.ServiceModel.Security.Tokens;
+using System.IdentityModel.Selectors;using System.IdentityModel.Tokens;using System.ServiceModel.Security.Tokens;
 #endif
 
 namespace System.ServiceModel.Description

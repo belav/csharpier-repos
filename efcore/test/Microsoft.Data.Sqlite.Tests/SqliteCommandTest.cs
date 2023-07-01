@@ -7,9 +7,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.Data.Sqlite.Properties;
-using Xunit;
 using static SQLitePCL.raw;
+using Xunit;
 
 namespace Microsoft.Data.Sqlite
 {

@@ -3,13 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
-using Microsoft.CodeAnalysis.Diagnostics;
-
 #if !CODE_STYLE
-using Microsoft.CodeAnalysis.CodeActions;
-using Roslyn.Utilities;
+using Microsoft.CodeAnalysis.CodeActions;using Roslyn.Utilities;
 #endif
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions

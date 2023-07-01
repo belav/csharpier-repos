@@ -10,13 +10,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using Internal.JitInterface;
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysis.ReadyToRun;
 using ILCompiler.Diagnostics;
+
+using Internal.JitInterface;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.PEWriter
 {

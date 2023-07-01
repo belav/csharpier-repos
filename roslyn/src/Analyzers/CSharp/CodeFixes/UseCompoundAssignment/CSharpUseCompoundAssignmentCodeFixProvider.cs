@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Host.Mef;

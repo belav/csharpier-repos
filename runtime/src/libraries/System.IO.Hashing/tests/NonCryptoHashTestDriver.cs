@@ -4,6 +4,7 @@
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.IO.Hashing.Tests

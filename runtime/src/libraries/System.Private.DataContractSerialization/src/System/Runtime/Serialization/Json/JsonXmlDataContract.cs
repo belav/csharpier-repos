@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Runtime.Serialization.DataContracts;
-using System.Text;
-using System.Xml;
 
 using DataContractDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
     System.Runtime.Serialization.DataContracts.DataContract
 >;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Runtime.Serialization.DataContracts;
+using System.Text;
+using System.Xml;
 
 namespace System.Runtime.Serialization.Json
 {

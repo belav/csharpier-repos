@@ -8,6 +8,7 @@ This test stimulates heap expansion with both Pinned and unpinned handles
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 using TestLibrary;
 
 public class Test_Handles

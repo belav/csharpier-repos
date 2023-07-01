@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.Cci;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

@@ -21,12 +21,7 @@ using System.Security;
 #if MONO_FEATURE_CAS
 using System.Security.Permissions;
 #endif
-using Microsoft.Win32;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
+using Microsoft.Win32;using System.Text;using System.Runtime.InteropServices;using System.Runtime.Serialization;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
 namespace System.IO
 {

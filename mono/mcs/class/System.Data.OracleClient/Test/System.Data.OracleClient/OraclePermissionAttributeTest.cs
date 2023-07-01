@@ -1,3 +1,9 @@
+using System;
+using System.Data;
+using System.Data.OracleClient;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // OraclePermissionAttributeTest.cs -
 //	NUnit Test Cases for OraclePermissionAttribute
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Data;
-using System.Data.OracleClient;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Data.OracleClient
 {

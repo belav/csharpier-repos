@@ -12,13 +12,13 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.ServiceModel.Activation;
 
     sealed class DurableInstanceManager
     {

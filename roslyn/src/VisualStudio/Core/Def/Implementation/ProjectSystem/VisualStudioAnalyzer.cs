@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Immutable;
 using System.IO;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.LanguageServices.Implementation.TaskList;

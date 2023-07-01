@@ -1,3 +1,12 @@
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+
+using MonoTests.System.Net.Sockets;
 //
 // TcpClientCas.cs - CAS unit tests for System.Net.Sockets.TcpClient class
 //
@@ -8,16 +17,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading;
-
-using MonoTests.System.Net.Sockets;
 
 namespace MonoCasTests.System.Net.Sockets
 {

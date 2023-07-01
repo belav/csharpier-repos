@@ -1,7 +1,8 @@
-﻿using Data;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using Data;
+using Microsoft.Extensions.Logging;
 
 namespace Pages
 {

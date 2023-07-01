@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Xunit;
 using static System.Linq.Tests.SkipTakeData;
+
+using Xunit;
 
 namespace System.Linq.Tests
 {

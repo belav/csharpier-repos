@@ -1,4 +1,5 @@
-﻿//
+﻿using System;
+//
 // Authors:
 //   Marek Habersack <grendel@twistedcode.net>
 //
@@ -26,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Security.Cryptography;
-
-using System;
 using System.Text;
 using System.Web.Security;
 

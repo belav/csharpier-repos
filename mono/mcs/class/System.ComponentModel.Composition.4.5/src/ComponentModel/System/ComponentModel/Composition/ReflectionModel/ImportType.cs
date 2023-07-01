@@ -3,9 +3,10 @@
 // -----------------------------------------------------------------------
 using System;
 using System.ComponentModel.Composition.Primitives;
+using System.Reflection;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Reflection;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {

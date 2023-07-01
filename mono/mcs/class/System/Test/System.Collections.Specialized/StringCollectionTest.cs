@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Specialized;
+
 // System.Collections.Specialized.StringCollection.cs
 //
 // Authors:
@@ -11,8 +14,6 @@
 //
 
 using NUnit.Framework;
-using System.Collections;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.Collections.Specialized
 {

@@ -31,20 +31,12 @@ using System.Collections.Generic;
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Data;
 #endif
-using System.IO;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Serialization;
+using System.IO;using System.Linq;using System.Text;using Newtonsoft.Json.Converters;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Schema;using Newtonsoft.Json.Serialization;
 #if !(NET20 || NET35 || NET40)
 using System.Threading.Tasks;
 #endif
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 

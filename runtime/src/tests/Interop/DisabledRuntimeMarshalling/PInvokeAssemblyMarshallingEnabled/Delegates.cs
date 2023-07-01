@@ -3,8 +3,9 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Xunit;
+
 using static DisabledRuntimeMarshallingNative;
+using Xunit;
 
 namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingEnabled;
 

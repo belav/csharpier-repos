@@ -6,18 +6,18 @@
 namespace System
 {
     using System;
-    using System.Threading;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using Calendar = System.Globalization.Calendar;
+    using CultureInfo = System.Globalization.CultureInfo;
     using System.Runtime;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
-    using CultureInfo = System.Globalization.CultureInfo;
-    using Calendar = System.Globalization.Calendar;
+    using System.Threading;
 
     // This value type represents a date and time.  Every DateTime
     // object has a private field (Ticks) of type Int64 that stores the

@@ -22,13 +22,13 @@
 //
 using System;
 using System.Collections.Generic;
+
+using Pair = System.Collections.Generic.KeyValuePair<string, string>;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Markup;
 using System.Xaml.Schema;
-
-using Pair = System.Collections.Generic.KeyValuePair<string, string>;
 
 namespace System.Xaml
 {

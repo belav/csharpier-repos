@@ -6,6 +6,7 @@
 
 using System;
 using System.Globalization;
+
 using Microsoft.CodeAnalysis.CSharp.Scripting.Hosting;
 
 namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests

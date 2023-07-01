@@ -24,10 +24,11 @@
 #endregion
 
 using System;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json.Bson;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+
+using Newtonsoft.Json.Bson;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities;
 

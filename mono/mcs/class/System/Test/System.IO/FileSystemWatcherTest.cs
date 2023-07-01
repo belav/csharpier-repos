@@ -8,12 +8,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.IO;
-using System.Reflection;
-
-using MonoTests.Helpers;
+using NUnit.Framework;using System;using System.IO;using System.Reflection;using MonoTests.Helpers;
 
 namespace MonoTests.System.IO
 {

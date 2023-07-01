@@ -6,6 +6,7 @@
 
 using System;
 using System.Reflection;
+
 using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics

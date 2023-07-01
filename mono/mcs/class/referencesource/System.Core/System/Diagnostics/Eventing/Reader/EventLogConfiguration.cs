@@ -17,6 +17,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+
 using Microsoft.Win32;
 
 namespace System.Diagnostics.Eventing.Reader

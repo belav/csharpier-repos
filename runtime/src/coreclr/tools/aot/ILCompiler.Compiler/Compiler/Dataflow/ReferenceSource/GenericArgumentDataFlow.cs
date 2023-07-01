@@ -3,10 +3,11 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+
+using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 using ILLink.Shared.TrimAnalysis;
 using Mono.Cecil;
 using Mono.Linker.Steps;
-using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 namespace Mono.Linker.Dataflow
 {

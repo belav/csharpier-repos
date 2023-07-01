@@ -7,11 +7,12 @@
 //
 
 using System;
-using System.Reflection;
 using System.Collections;
-using NUnit.Framework;
-using System.Text;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
+
+using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {

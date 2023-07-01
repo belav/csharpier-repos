@@ -8,15 +8,15 @@
 namespace System.Xml.Schema
 {
     using System;
-    using System.IO;
     using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Xml;
-    using System.Xml.XPath;
     using System.Xml.Serialization;
+    using System.Xml.XPath;
 
     /// <include file='doc\DatatypeImplementation.uex' path='docs/doc[@for="XmlSchemaDatatypeVariety"]/*' />
     public enum XmlSchemaDatatypeVariety

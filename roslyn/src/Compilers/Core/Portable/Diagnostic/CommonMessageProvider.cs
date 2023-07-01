@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Globalization;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis

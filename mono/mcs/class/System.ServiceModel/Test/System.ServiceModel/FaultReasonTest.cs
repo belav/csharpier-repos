@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.ServiceModel;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel

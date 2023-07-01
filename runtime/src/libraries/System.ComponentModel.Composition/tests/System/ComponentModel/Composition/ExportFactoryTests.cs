@@ -9,6 +9,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
 using System.Reflection;
+
 using Xunit;
 
 namespace Tests.Integration

@@ -5,6 +5,7 @@
 using System;
 using System.Composition;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 

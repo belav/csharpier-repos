@@ -8,11 +8,12 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
-    using System.Xml;
-    using System.Xml.XPath;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Collections.Generic;
+    using System.Xml;
+    using System.Xml.XPath;
+
     using StackInt = ClonableStack<int>;
     using StackNav = ClonableStack<System.Xml.XPath.XPathNavigator>;
 

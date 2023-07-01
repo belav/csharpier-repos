@@ -16,8 +16,8 @@ namespace System.Data.Objects.Internal
 {
     using System.Collections.Generic;
     using System.Data.Objects;
-    using System.Diagnostics;
     using System.Data.Objects.DataClasses;
+    using System.Diagnostics;
 
     class TransactionManager
     {

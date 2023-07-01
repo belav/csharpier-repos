@@ -1,3 +1,10 @@
+using System;
+using System.Configuration;
+using System.Data;
+using System.Data.OracleClient;
+using System.Globalization;
+using System.Threading;
+
 //
 // OracleParameterTest.cs -
 //      NUnit Test Cases for OciDefineHandle
@@ -28,12 +35,6 @@
 //
 
 using NUnit.Framework;
-using System.Configuration;
-using System.Globalization;
-using System.Threading;
-using System.Data.OracleClient;
-using System.Data;
-using System;
 
 namespace MonoTests.System.Data.OracleClient
 {

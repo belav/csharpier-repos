@@ -5,12 +5,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using TOutput = System.Collections.Immutable.ImmutableArray<(string, string)>;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using TOutput = System.Collections.Immutable.ImmutableArray<(string, string)>;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler
 {

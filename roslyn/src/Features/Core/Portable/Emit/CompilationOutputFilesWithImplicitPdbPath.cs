@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+
 using Microsoft.CodeAnalysis.Debugging;
 using Roslyn.Utilities;
 

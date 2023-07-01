@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using ILCompiler.Reflection.ReadyToRun;
 
 namespace R2RDump

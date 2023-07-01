@@ -2,18 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 
 using ILCompiler;
 
+using Internal.IL.Stubs;
+
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Internal.IL.Stubs;
-using System.Buffers.Binary;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Internal.IL
 {

@@ -9,6 +9,8 @@ namespace System.Web.UI.WebControls
     using System;
     using System.Collections;
     using System.ComponentModel;
+
+    using AttributeCollection = System.ComponentModel.AttributeCollection;
     using System.Data;
     using System.Drawing.Design;
     using System.Security.Permissions;
@@ -18,8 +20,6 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
     using System.Xml;
     using System.Xml.XPath;
-
-    using AttributeCollection = System.ComponentModel.AttributeCollection;
 
     /// <devdoc>
     /// </devdoc>

@@ -7,12 +7,7 @@
 // We only support grammar generation in the command line version for now which is the netcoreapp target
 #if NETCOREAPP
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis.CSharp;
+using System;using System.Collections.Generic;using System.Collections.Immutable;using System.Linq;using System.Text.RegularExpressions;using Microsoft.CodeAnalysis.CSharp;
 
 namespace CSharpSyntaxGenerator.Grammar
 {

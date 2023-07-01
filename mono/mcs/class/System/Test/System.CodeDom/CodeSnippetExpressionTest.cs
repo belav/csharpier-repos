@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom;
+
 //
 // CodeSnippetExpressionTest.cs
 //	- Unit tests for System.CodeDom.CodeSnippetExpression
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

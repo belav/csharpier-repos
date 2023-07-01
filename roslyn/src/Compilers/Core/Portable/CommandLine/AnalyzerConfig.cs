@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 

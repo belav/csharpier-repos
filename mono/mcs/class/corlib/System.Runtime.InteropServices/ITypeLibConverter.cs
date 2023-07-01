@@ -31,8 +31,7 @@
 //
 
 #if !FULL_AOT_RUNTIME && !MONOTOUCH
-using System.Reflection;
-using System.Reflection.Emit;
+using System.Reflection;using System.Reflection.Emit;
 
 namespace System.Runtime.InteropServices
 {

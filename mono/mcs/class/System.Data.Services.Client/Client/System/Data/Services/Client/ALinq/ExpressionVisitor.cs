@@ -19,9 +19,7 @@ namespace System.Data.Services.Client
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
 #if ASTORIA_LIGHT
-    using System.Reflection;
-    using System.Security;
-    using System.Security.Permissions;
+    using System.Reflection;using System.Security;using System.Security.Permissions;
 
     internal static class ExpressionHelpers
     {

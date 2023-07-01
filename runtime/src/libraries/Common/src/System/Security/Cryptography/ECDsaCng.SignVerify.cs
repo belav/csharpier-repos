@@ -3,11 +3,11 @@
 
 using System.Diagnostics;
 
-using Microsoft.Win32.SafeHandles;
-
 using Internal.Cryptography;
 
 using AsymmetricPaddingMode = Interop.NCrypt.AsymmetricPaddingMode;
+
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

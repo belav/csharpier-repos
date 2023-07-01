@@ -21,36 +21,36 @@
 #region Used namespaces
 
 using System;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing.Design;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Data;
-using System.Web;
-using System.Net;
-using System.IO;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics.CodeAnalysis;
 
 using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Data;
 using System.Diagnostics;
-using System.Xml;
-using System.Web.UI.DataVisualization.Charting;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Globalization;
-
-using System.Web.UI.DataVisualization.Charting.Data;
-using System.Web.UI.DataVisualization.Charting.Utilities;
-using System.Web.UI.DataVisualization.Charting.ChartTypes;
-using System.Web.UI.DataVisualization.Charting.Borders3D;
-
-using System.Web.UI.DataVisualization.Charting.Formulas;
+using System.IO;
+using System.Net;
+using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Borders3D;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
+
+using System.Web.UI.DataVisualization.Charting.Data;
+
+using System.Web.UI.DataVisualization.Charting.Formulas;
+using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.WebControls;
+using System.Xml;
 
 #endregion
 

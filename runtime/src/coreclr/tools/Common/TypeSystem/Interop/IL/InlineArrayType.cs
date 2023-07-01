@@ -4,9 +4,10 @@
 using System;
 using System.Collections.Generic;
 using Debug = System.Diagnostics.Debug;
-using Internal.IL.Stubs;
-using Internal.IL;
 using System.Threading;
+
+using Internal.IL;
+using Internal.IL.Stubs;
 
 namespace Internal.TypeSystem.Interop
 {

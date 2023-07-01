@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Security.Cryptography.Encryption.Tests.Symmetric

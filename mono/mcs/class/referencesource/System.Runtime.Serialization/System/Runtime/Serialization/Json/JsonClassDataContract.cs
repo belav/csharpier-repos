@@ -4,14 +4,13 @@
 
 namespace System.Runtime.Serialization.Json
 {
+    using System.Diagnostics;
     using System.Threading;
     using System.Xml;
-    using System.Diagnostics;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Collections.Generic;
-    using System.Security;
+    using System.Collections.Generic;using System.Security;
 
     class JsonClassDataContract : JsonDataContract
     {

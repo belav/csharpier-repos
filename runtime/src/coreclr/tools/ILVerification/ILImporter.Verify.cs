@@ -4,10 +4,10 @@
 using System;
 using System.Diagnostics;
 
+using ILVerify;
+
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using ILVerify;
 
 #pragma warning disable IDE0060
 

@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 // CharTest.cs - NUnit Test Cases for the System.Char struct
 //
 // David Brandt (bucky@keystreams.com)
@@ -7,8 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System
 {

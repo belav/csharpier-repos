@@ -1,3 +1,4 @@
+using System.Security;
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,7 +7,6 @@
 //
 
 using Microsoft.Win32.SafeHandles;
-using System.Security;
 
 namespace System.Threading
 {

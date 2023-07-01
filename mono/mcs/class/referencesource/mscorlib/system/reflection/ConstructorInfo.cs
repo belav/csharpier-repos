@@ -19,13 +19,7 @@ namespace System.Reflection
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Metadata;
 #endif //FEATURE_REMOTING
-    using System.Runtime.Serialization;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Threading;
-    using MemberListType = System.RuntimeType.MemberListType;
-    using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;using System.Security;using System.Security.Permissions;using System.Threading;using MemberListType = System.RuntimeType.MemberListType;using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;using System.Runtime.CompilerServices;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]

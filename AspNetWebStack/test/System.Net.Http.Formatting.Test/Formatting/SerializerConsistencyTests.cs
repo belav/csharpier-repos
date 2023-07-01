@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
+
 using Microsoft.TestCommon;
 
 namespace System.Net.Formatting.Tests

@@ -6,11 +6,11 @@
 
 namespace System.Configuration
 {
-    using System.Collections.Specialized;
-    using System.Runtime.Serialization;
-    using System.Configuration.Provider;
     using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Configuration.Provider;
+    using System.Runtime.Serialization;
 
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////

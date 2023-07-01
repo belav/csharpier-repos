@@ -9,12 +9,12 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation.View;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Runtime;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Runtime;
-    using System.Windows.Controls;
 
     internal class StateMachineConnectionPointsAdorner : ConnectionPointsAdorner
     {

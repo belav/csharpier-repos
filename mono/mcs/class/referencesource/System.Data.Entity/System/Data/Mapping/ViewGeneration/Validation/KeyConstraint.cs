@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //---------------------------------------------------------------------
 // <copyright file="KeyConstraint.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,9 +9,8 @@
 //---------------------------------------------------------------------
 
 using System.Data.Common.Utils;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {

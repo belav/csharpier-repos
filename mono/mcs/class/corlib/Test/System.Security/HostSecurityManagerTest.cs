@@ -30,11 +30,7 @@
 // MOBILE profile lacks some (of the few) CAS features required to execute those tests
 #if !MOBILE && !XAMMAC_4_5
 
-using NUnit.Framework;
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Policy;
+using NUnit.Framework;using System;using System.Reflection;using System.Security;using System.Security.Policy;
 
 namespace MonoTests.System.Security
 {

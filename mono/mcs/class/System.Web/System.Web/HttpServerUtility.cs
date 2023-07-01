@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 //
 // System.Web.HttpRequest.cs
 //
@@ -31,14 +32,13 @@
 //
 
 using System.IO;
-using System.Web.UI;
-using System.Web.Util;
-using System.Collections.Specialized;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Web.Configuration;
 using System.Web.SessionState;
+using System.Web.UI;
+using System.Web.Util;
 
 namespace System.Web
 {

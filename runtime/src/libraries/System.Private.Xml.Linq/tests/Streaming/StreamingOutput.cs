@@ -2,13 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
 using System.Xml.XmlDiff;
+
 using CoreXml.Test.XLinq;
 
 using Xunit;

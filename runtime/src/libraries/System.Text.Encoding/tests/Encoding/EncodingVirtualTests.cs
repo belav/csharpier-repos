@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Tests;
+
 using Xunit;
 
 namespace System.Text.Encodings.Tests

@@ -1,4 +1,6 @@
-﻿//---------------------------------------------------------------------
+﻿using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+//---------------------------------------------------------------------
 // <copyright file="EntityDesignerUtils.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -10,8 +12,6 @@
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping;
 
 namespace System.Data.Entity.Design
 {

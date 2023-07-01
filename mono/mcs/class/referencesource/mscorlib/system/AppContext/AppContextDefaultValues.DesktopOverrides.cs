@@ -1,4 +1,9 @@
-﻿// ==++==
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Security;
+
+// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -6,10 +11,6 @@
 
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security;
 
 namespace System
 {

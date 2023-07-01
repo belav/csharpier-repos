@@ -5,19 +5,19 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
-    using System.Security.Cryptography;
-    using System.Security.Cryptography.X509Certificates;
-    using System.ServiceModel.Security.Tokens;
-    using System.IO;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Net.Mail;
-    using System.Xml;
-    using System.Runtime.Serialization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IO;
+    using System.Net.Mail;
+    using System.Runtime.Serialization;
+    using System.Security.Cryptography;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     static class SctClaimSerializer
     {

@@ -1,7 +1,8 @@
 using System;
-using System.Threading;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Net.Sockets

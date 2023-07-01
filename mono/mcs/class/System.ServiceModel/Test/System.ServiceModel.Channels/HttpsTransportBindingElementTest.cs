@@ -36,6 +36,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Threading;
 using System.Xml;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Channels

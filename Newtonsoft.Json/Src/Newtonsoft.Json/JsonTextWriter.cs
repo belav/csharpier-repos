@@ -29,11 +29,7 @@ using System.Globalization;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System.Text;
-using System.IO;
-using System.Xml;
-using Newtonsoft.Json.Utilities;
-using System.Diagnostics;
+using System.Text;using System.IO;using System.Xml;using Newtonsoft.Json.Utilities;using System.Diagnostics;
 
 namespace Newtonsoft.Json
 {

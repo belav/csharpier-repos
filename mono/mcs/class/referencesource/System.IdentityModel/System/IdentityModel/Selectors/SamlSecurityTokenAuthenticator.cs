@@ -7,12 +7,12 @@ namespace System.IdentityModel.Selectors
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
     using System.IdentityModel.Claims;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Policy;
-    using System.Security.Principal;
+    using System.IdentityModel.Tokens;
     using System.Security;
+    using System.Security.Principal;
+    using System.Text;
 
     public class SamlSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {

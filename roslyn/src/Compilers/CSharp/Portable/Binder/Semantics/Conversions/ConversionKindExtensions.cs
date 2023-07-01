@@ -1,9 +1,9 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿using static Microsoft.CodeAnalysis.CSharp.ConversionKind;
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.CSharp.ConversionKind;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {

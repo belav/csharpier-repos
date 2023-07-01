@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
+
 using Xunit;
 
 unsafe class ArrayWithOffsetTest

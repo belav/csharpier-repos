@@ -15,14 +15,15 @@ namespace System.Net.WebSockets
     using System.Net.Cache;
     using System.Net.Sockets;
     using System.Net.WebSockets;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
+
     using Microsoft.Win32.SafeHandles;
 
     internal static class WebSocketProtocolComponent

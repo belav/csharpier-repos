@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Text;
+
 // ConsoleTest.cs - NUnit Test Cases for the System.Console class
 //
 // David Brandt (bucky@keystreams.com)
@@ -6,9 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
 
 namespace MonoTests.System
 {

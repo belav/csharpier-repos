@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Microsoft.VisualStudio.Shell.Interop;
 using vsStartUp = EnvDTE.vsStartUp;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {

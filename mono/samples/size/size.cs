@@ -1,3 +1,9 @@
+using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Security;
+using System.Threading;
+
 //
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
@@ -21,11 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using Mono.Interop;
-using System.Runtime.CompilerServices;
-using System;
-using System.Security;
-using System.Reflection;
-using System.Threading;
 
 namespace Mono.ObjectServices
 {

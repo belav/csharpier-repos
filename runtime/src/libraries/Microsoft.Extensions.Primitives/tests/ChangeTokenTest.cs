@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+
 using Xunit;
 
 namespace Microsoft.Extensions.Primitives

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Tests;
+
 using Xunit;
 
 [module: Attr(77, name = "AttrSimple")]

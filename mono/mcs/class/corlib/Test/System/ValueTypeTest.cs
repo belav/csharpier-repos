@@ -1,3 +1,4 @@
+using System;
 //
 // VersionTest.cs - NUnit Test Cases for the System.ValueType class
 //
@@ -8,7 +9,6 @@
 //
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote

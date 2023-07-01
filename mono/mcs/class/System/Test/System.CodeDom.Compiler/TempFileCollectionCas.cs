@@ -1,3 +1,12 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Collections;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+
+using MonoTests.Helpers;
 //
 // TempFileCollectionCas.cs
 //	- CAS unit tests for System.CodeDom.Compiler.TempFileCollection
@@ -28,16 +37,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom.Compiler;
-using System.Collections;
-using System.IO;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-
-using MonoTests.Helpers;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

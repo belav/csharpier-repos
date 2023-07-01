@@ -9,17 +9,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-
-using System;
-using System.CodeDom;
-using System.IO;
-using System.Web.Services.Description;
-using System.Web.Services.Discovery;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.Collections;
+using NUnit.Framework;using System;using System.CodeDom;using System.IO;using System.Web.Services.Description;using System.Web.Services.Discovery;using System.Xml;using System.Xml.Schema;using System.Xml.Serialization;using System.Collections;
 
 namespace MonoTests.System.Web.Services.Description
 {

@@ -26,6 +26,7 @@
 
 using System.Collections;
 using System.Linq;
+
 using DbLinq.Util;
 
 namespace DbLinq.Schema.Dbml.Adapter

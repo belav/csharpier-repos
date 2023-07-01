@@ -3,24 +3,18 @@ using Microsoft.AspNetCore.Authentication;
 #endif
 using Microsoft.AspNetCore.Builder;
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Authentication.JwtBearer;using Microsoft.Identity.Web;
 #endif
 #if (RequiresHttps)
 using Microsoft.AspNetCore.HttpsPolicy;
 #endif
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Hosting;using Microsoft.AspNetCore.ResponseCompression;
 #if (IndividualLocalAuth)
 using Microsoft.EntityFrameworkCore;
 #endif
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Linq;
+using Microsoft.Extensions.Configuration;using Microsoft.Extensions.DependencyInjection;using Microsoft.Extensions.Hosting;using System.Linq;
 #if (IndividualLocalAuth)
-using ComponentsWebAssembly_CSharp.Server.Data;
-using ComponentsWebAssembly_CSharp.Server.Models;
+using ComponentsWebAssembly_CSharp.Server.Data;using ComponentsWebAssembly_CSharp.Server.Models;
 #endif
 #if (GenerateGraph)
 using Microsoft.Graph;

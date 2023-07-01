@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Diagnostics;
 
     abstract class HttpTransportManager : TransportManager, ITransportManagerRegistration
     {

@@ -10,9 +10,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Security;
-using System.Globalization;
+
 using PEAPI;
 
 namespace Mono.ILASM

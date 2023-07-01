@@ -4,12 +4,13 @@
 using System.CommandLine.Completions;
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
+using static System.Environment;
 using System.IO;
 using System.Linq;
+
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using static System.Environment;
 
 namespace System.CommandLine.Tests
 {

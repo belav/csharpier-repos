@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 //------------------------------------------------------------------------------
 // <copyright file="_DynamicWinsockMethods.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -5,8 +7,6 @@
 //------------------------------------------------------------------------------
 
 using System.Security;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace System.Net.Sockets
 {

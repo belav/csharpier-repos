@@ -3,22 +3,15 @@
 
 using System.Collections.Generic;
 #if ASPNETWEBAPI
-using System.Net.Http;
-using System.Web.Http.Routing.Constraints;
+using System.Net.Http;using System.Web.Http.Routing.Constraints;
 #else
 using System.Web.Mvc.Routing.Constraints;
 #endif
-using Microsoft.TestCommon;
-using Moq;
-
+using Microsoft.TestCommon;using Moq;
 #if ASPNETWEBAPI
-using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
-using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;
-using TRouteValueDictionary = System.Web.Http.Routing.HttpRouteValueDictionary;
+using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;using TParsedRoute = System.Web.Http.Routing.HttpParsedRoute;using TRouteValueDictionary = System.Web.Http.Routing.HttpRouteValueDictionary;
 #else
-using TActionDescriptor = System.Web.Mvc.ActionDescriptor;
-using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;
-using TRouteValueDictionary = System.Web.Routing.RouteValueDictionary;
+using TActionDescriptor = System.Web.Mvc.ActionDescriptor;using TParsedRoute = System.Web.Mvc.Routing.ParsedRoute;using TRouteValueDictionary = System.Web.Routing.RouteValueDictionary;
 #endif
 
 #if ASPNETWEBAPI

@@ -4,10 +4,11 @@
 using System.CommandLine.Help;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
+using static System.Environment;
 using System.IO;
+
 using FluentAssertions;
 using Xunit;
-using static System.Environment;
 
 namespace System.CommandLine.Tests.Help
 {

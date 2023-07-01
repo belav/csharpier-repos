@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixesAndRefactorings;
@@ -23,13 +24,20 @@ using Microsoft.CodeAnalysis.GoToBase;
 using Microsoft.CodeAnalysis.GoToImplementation;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.Text;
+using TextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
 using Microsoft.CodeAnalysis.UnitTests;
 using Microsoft.VisualStudio.Commanding;
+using IComponentModel = Microsoft.VisualStudio.ComponentModelHost.IComponentModel;
+using SComponentModel = Microsoft.VisualStudio.ComponentModelHost.SComponentModel;
 using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.IntegrationTest.Utilities;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
 using Microsoft.VisualStudio.LanguageServices.FindUsages;
+using IObjectWithSite = Microsoft.VisualStudio.OLE.Interop.IObjectWithSite;
+using IPersistFile = Microsoft.VisualStudio.OLE.Interop.IPersistFile;
+using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+using OLECMDEXECOPT = Microsoft.VisualStudio.OLE.Interop.OLECMDEXECOPT;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -47,13 +55,6 @@ using Roslyn.VisualStudio.IntegrationTests;
 using Roslyn.VisualStudio.IntegrationTests.InProcess;
 using WindowsInput.Native;
 using Xunit;
-using IComponentModel = Microsoft.VisualStudio.ComponentModelHost.IComponentModel;
-using IObjectWithSite = Microsoft.VisualStudio.OLE.Interop.IObjectWithSite;
-using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
-using IPersistFile = Microsoft.VisualStudio.OLE.Interop.IPersistFile;
-using OLECMDEXECOPT = Microsoft.VisualStudio.OLE.Interop.OLECMDEXECOPT;
-using SComponentModel = Microsoft.VisualStudio.ComponentModelHost.SComponentModel;
-using TextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
 
 namespace Microsoft.VisualStudio.Extensibility.Testing
 {

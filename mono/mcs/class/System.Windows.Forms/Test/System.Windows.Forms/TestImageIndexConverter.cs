@@ -1,3 +1,8 @@
+using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Forms;
+
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -25,10 +30,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Globalization;
 
 namespace MonoTests.System.Windows.Forms
 {

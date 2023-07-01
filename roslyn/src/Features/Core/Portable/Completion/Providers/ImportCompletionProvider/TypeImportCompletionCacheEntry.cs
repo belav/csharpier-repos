@@ -4,11 +4,12 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
-using Roslyn.Utilities;
 
 using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {

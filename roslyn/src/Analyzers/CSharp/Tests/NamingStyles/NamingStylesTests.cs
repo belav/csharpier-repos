@@ -7,6 +7,7 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeFixes.NamingStyles;
 using Microsoft.CodeAnalysis.CSharp.Diagnostics.NamingStyles;

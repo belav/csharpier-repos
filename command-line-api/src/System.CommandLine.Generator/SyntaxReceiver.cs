@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.CommandLine.Generator.Invocations;
 using System.CommandLine.Generator.Parameters;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 

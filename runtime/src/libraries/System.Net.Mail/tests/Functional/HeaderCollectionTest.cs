@@ -3,6 +3,7 @@
 
 using System;
 using System.Net.Mail;
+
 using Xunit;
 
 namespace System.Net.Mime.Tests

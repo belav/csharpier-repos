@@ -1,3 +1,4 @@
+using System.ComponentModel;
 //
 // System.Web.UI.WebControls.Adapters.MenuAdapter
 //
@@ -29,7 +30,6 @@
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.ComponentModel;
 
 namespace System.Web.UI.WebControls.Adapters
 {

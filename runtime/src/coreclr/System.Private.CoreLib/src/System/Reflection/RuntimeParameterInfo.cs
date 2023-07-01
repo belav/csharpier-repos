@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using MdToken = System.Reflection.MetadataToken;
+using System.Runtime.CompilerServices;
 
 namespace System.Reflection
 {

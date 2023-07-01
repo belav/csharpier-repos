@@ -8,9 +8,9 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Diagnostics;
+    using System.Reflection;
 
     // These classes define the abstract serialization model, e.g. the rules for WHAT is serialized.
     // The answer of HOW the values are serialized is answered by a particular reflection importer

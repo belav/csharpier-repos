@@ -10,23 +10,24 @@
 
 namespace System.Diagnostics
 {
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System;
-    using System.Security;
-    using System.Security.Permissions;
-    using Microsoft.Win32;
-    using System.IO;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Text;
+    using System.IO;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     A set of values used to specify a process to start.  This is

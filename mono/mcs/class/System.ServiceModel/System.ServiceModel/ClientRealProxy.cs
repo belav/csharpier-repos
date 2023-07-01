@@ -26,18 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !DISABLE_REAL_PROXY
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Proxies;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel.MonoInternal;
-using System.Threading;
+using System;using System.Collections.Generic;using System.Linq;using System.Reflection;using System.Runtime.Remoting;using System.Runtime.Remoting.Messaging;using System.Runtime.Remoting.Proxies;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Dispatcher;using System.ServiceModel.MonoInternal;using System.Threading;
 
 namespace System.ServiceModel
 {

@@ -8,9 +8,10 @@ using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Globalization;
 using System.Reflection;
+using System.Threading;
+
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Threading;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {

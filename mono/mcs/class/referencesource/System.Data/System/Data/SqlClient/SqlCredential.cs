@@ -9,8 +9,8 @@
 namespace System.Data.SqlClient
 {
     using System;
-    using System.Security;
     using System.Data.Common;
+    using System.Security;
 
     // Represent a pair of user id and password which to be used for SQL Authentication
     // SqlCredential takes password as SecureString which is better way to store security sensitive information

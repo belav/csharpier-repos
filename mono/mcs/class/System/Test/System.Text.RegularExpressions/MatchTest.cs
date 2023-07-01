@@ -1,3 +1,6 @@
+using System;
+using System.Text.RegularExpressions;
+
 //
 // MatchTest.cs - Unit tests for System.Text.RegularExpressions.Match
 //
@@ -27,9 +30,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Text.RegularExpressions
 {

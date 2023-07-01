@@ -25,9 +25,10 @@
 //   csc /r:C5.dll Try.cs
 
 using System;
-using System.Text;
-using C5;
 using SCG = System.Collections.Generic;
+using System.Text;
+
+using C5;
 
 namespace Try
 {

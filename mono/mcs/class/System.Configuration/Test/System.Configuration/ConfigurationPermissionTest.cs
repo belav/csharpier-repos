@@ -32,6 +32,7 @@ using System;
 using System.Configuration;
 using System.Security;
 using System.Security.Permissions;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration

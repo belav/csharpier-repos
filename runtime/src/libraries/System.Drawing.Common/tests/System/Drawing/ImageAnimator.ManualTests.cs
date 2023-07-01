@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
+
 using Xunit;
 
 namespace System.Drawing.Tests

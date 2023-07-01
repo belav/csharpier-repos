@@ -1,3 +1,8 @@
+using System;
+using System.Reflection.Emit;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // MethodRentalCas.cs - CAS unit tests for System.Reflection.Emit.MethodRental
 //
@@ -27,11 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection.Emit;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.Reflection.Emit
 {

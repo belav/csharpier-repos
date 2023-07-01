@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.DirectoryServices;
+
+using System.Threading;
+
 //
 // DirectoryServicesDirectorySearcherTest.cs -
 //	NUnit Test Cases for DirectoryServices.DirectorySearcher
@@ -6,11 +12,6 @@
 //	Boris Kirzner  <borisk@mainsoft.com>
 //
 using NUnit.Framework;
-using System;
-using System.DirectoryServices;
-using System.Collections;
-
-using System.Threading;
 
 namespace MonoTests.System.DirectoryServices
 {

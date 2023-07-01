@@ -33,12 +33,12 @@ namespace Mono.Cecil
 {
     using System;
     using System.Collections;
+    using Cmp = System.Collections.Comparer;
     using System.Collections.Specialized;
 
     using Mono.Cecil.Cil;
 
     using Hcp = Mono.Cecil.HashCodeProvider;
-    using Cmp = System.Collections.Comparer;
 
     internal sealed class TypeDefinitionCollection
         : NameObjectCollectionBase,

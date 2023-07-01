@@ -31,24 +31,7 @@
 //
 
 #if MONO_FEATURE_SRE
-using System;
-using System.Reflection;
-using System.Resources;
-using System.IO;
-using System.Security.Policy;
-using System.Runtime.Serialization;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Permissions;
-using System.Threading;
-
-using Mono.Security;
-using Mono.Security.Cryptography;
+using System;using System.Reflection;using System.Resources;using System.IO;using System.Security.Policy;using System.Runtime.Serialization;using System.Globalization;using System.Runtime.CompilerServices;using System.Collections;using System.Collections.Generic;using System.Runtime.InteropServices;using System.Security;using System.Security.Cryptography;using System.Security.Permissions;using System.Threading;using Mono.Security;using Mono.Security.Cryptography;
 
 namespace System.Reflection.Emit
 {

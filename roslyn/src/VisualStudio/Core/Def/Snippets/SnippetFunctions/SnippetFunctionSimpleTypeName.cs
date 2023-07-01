@@ -5,11 +5,12 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.VisualStudio.Text;
 using TextSpan = Microsoft.CodeAnalysis.Text.TextSpan;
+using Microsoft.VisualStudio.Text;
 using VsTextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets

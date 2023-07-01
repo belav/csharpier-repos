@@ -1,3 +1,6 @@
+using System;
+using System.CodeDom;
+
 //
 // CodeMethodReferenceExpressionTest.cs
 //	- Unit tests for System.CodeDom.CodeMethodReferenceExpression
@@ -28,9 +31,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.CodeDom;
 
 namespace MonoTests.System.CodeDom
 {

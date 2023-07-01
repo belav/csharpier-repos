@@ -14,11 +14,7 @@ namespace System.Security.Permissions
 #if FEATURE_CAS_POLICY
     using SecurityElement = System.Security.SecurityElement;
 #endif // FEATURE_CAS_POLICY
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
+    using System.Globalization;using System.Runtime.Serialization;using System.Collections;using System.Collections.Generic;using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

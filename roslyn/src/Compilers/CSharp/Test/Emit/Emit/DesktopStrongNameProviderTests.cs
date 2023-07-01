@@ -6,10 +6,11 @@
 
 using System.Collections.Immutable;
 using System.IO;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Roslyn.Test.Utilities;
-using Xunit;
 using static Roslyn.Test.Utilities.SigningTestHelpers;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {

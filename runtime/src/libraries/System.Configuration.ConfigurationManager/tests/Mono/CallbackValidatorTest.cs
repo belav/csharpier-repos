@@ -30,6 +30,7 @@
 
 using System;
 using System.Configuration;
+
 using Xunit;
 
 namespace MonoTests.System.Configuration

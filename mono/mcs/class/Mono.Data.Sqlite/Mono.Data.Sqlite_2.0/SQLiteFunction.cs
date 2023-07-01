@@ -10,8 +10,8 @@ namespace Mono.Data.Sqlite
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
     using System.Globalization;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// This abstract class is designed to handle user-defined functions easily.  An instance of the derived class is made for each

@@ -25,8 +25,9 @@
 //   csc /r:C5.dll Cloning.cs
 
 using System;
-using C5;
 using SCG = System.Collections.Generic;
+
+using C5;
 
 namespace MyCloningTest
 {

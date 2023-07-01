@@ -5,6 +5,7 @@
 using System.Reflection.PortableExecutable;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.PdbSourceDocument;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument

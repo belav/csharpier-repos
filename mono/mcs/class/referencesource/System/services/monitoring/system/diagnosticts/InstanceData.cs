@@ -6,10 +6,9 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
-
     using System;
     using System.Collections;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///     A holder of instance data.

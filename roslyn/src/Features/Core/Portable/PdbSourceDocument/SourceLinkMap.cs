@@ -9,7 +9,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-
 #if NETCOREAPP
 using System.Diagnostics.CodeAnalysis;
 #endif

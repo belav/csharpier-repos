@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+
 using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests

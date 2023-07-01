@@ -31,12 +31,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.FSharp.Collections;
+using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using Microsoft.FSharp.Collections;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {

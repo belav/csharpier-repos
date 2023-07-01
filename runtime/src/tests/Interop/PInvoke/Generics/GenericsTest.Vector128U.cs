@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
+
 using Xunit;
 
 unsafe partial class GenericsNative

@@ -28,9 +28,9 @@
 using System;
 using System.Collections.Generic;
 
-using WebMatrix.Data;
-
 using NUnit.Framework;
+
+using WebMatrix.Data;
 
 namespace MonoTests.WebMatrix.Data
 {

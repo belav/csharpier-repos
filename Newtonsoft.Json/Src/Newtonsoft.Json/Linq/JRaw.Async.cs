@@ -25,10 +25,7 @@
 
 #if HAVE_ASYNC
 
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Globalization;using System.IO;using System.Threading;using System.Threading.Tasks;
 
 namespace Newtonsoft.Json.Linq
 {

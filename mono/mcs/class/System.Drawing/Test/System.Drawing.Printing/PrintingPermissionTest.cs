@@ -27,12 +27,7 @@
 //
 #if MONO_FEATURE_CAS
 
-using NUnit.Framework;
-using System;
-using System.IO;
-using System.Drawing.Printing;
-using System.Security;
-using System.Security.Permissions;
+using NUnit.Framework;using System;using System.IO;using System.Drawing.Printing;using System.Security;using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing.Printing
 {

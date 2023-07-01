@@ -1,3 +1,9 @@
+using System;
+using System.Net;
+using System.Security;
+using System.Security.Permissions;
+using System.Text.RegularExpressions;
+
 //
 // WebPermissionAttributeTest.cs - NUnit Test Cases for WebPermissionAttribute
 //
@@ -27,11 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Net;
-using System.Security;
-using System.Security.Permissions;
-using System.Text.RegularExpressions;
 
 namespace MonoTests.System.Net
 {

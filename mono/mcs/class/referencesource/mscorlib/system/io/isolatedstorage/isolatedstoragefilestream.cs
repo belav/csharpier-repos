@@ -18,16 +18,17 @@
 namespace System.IO.IsolatedStorage
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.IO;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class IsolatedStorageFileStream : FileStream

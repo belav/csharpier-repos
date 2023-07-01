@@ -4,8 +4,8 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.Net;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;

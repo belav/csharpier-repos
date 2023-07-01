@@ -1,8 +1,8 @@
 // Compiler options: -r:test-748-lib.dll
 
 using System;
-using Test;
 using RealTest;
+using Test;
 
 class M
 {

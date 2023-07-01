@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.Xml;
     using System.Collections.Generic;
+    using System.Xml;
 
     class ServiceModelDictionary : IXmlDictionary
     {

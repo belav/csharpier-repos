@@ -1,3 +1,4 @@
+using System.Collections;
 //
 // ServerType.cs
 //
@@ -30,7 +31,6 @@
 using System.Reflection;
 using System.Web.Services;
 using System.Web.Services.Description;
-using System.Collections;
 
 namespace System.Web.Services.Protocols
 {

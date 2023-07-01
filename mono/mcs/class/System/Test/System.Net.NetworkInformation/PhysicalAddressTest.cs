@@ -1,6 +1,7 @@
-using NUnit.Framework;
 using System;
 using System.Net.NetworkInformation;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.NetworkInformation
 {

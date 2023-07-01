@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using Internal.TypeSystem;
-using Internal.IL;
-
 using ILCompiler.Dataflow;
 using ILCompiler.DependencyAnalysisFramework;
+using Internal.IL;
+
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

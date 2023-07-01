@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.PooledObjects;
 

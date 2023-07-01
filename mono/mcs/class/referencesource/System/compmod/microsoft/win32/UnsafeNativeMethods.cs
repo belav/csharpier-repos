@@ -6,20 +6,13 @@
 
 namespace Microsoft.Win32
 {
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
 #if !SILVERLIGHT
-    using System.Threading;
-    using System.Security.Permissions;
-    using System.Collections;
-    using System.IO;
-    using System.Text;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
-    using System.Configuration;
+    using System.Threading;using System.Security.Permissions;using System.Collections;using System.IO;using System.Text;using Microsoft.Win32;using Microsoft.Win32.SafeHandles;using System.Configuration;
 
     [HostProtectionAttribute(MayLeakOnAbort = true)]
     [System.Security.SuppressUnmanagedCodeSecurity]

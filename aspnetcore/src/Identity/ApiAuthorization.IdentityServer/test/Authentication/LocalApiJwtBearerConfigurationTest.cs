@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+
 using Duende.IdentityServer.Configuration;
 using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;

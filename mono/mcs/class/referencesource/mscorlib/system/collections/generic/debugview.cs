@@ -18,9 +18,9 @@ namespace System.Collections.Generic
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
 
     //
     // VS IDE can't differentiate between types with the same name from different

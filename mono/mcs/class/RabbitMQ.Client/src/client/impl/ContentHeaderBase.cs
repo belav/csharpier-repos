@@ -1,3 +1,4 @@
+using System;
 // This source code is dual-licensed under the Apache License, version
 // 2.0, and the Mozilla Public License, version 1.1.
 //
@@ -56,7 +57,6 @@
 //---------------------------------------------------------------------------
 using RabbitMQ.Client;
 using RabbitMQ.Util;
-using System;
 
 namespace RabbitMQ.Client.Impl
 {

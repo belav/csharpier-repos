@@ -10,8 +10,8 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.Xml.Linq;
     using System.Xml;
+    using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
     public class EndpointDiscoveryBehavior : IEndpointBehavior

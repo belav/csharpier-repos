@@ -1,10 +1,10 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 //------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ServiceModel.PeerResolvers;
 
 namespace System.ServiceModel.PeerResolvers

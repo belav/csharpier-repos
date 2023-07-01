@@ -17,12 +17,13 @@ using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Emit;
+using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
+using static Microsoft.CodeAnalysis.SigningUtilities;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.DiaSymReader;
-using static Microsoft.CodeAnalysis.SigningUtilities;
-using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
 
 namespace Microsoft.Cci
 {

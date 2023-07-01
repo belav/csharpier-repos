@@ -9,13 +9,13 @@ namespace System.Workflow.Runtime.Hosting
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Diagnostics;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Workflow.Activities;
-    using System.Diagnostics;
     using System.Workflow.ComponentModel;
 
     class ChannelManager

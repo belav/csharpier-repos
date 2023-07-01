@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+
 using Microsoft.Extensions.Primitives;
 
 namespace System.Text.Json.SourceGeneration.Tests.RepeatedTypes

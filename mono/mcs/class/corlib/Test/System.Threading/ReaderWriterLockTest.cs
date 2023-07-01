@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+
 //
 // ReaderWriterLockTest.cs - NUnit Test Cases for System.Threading.ReaderWriterLock
 //
@@ -8,8 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
 
 namespace MonoTests.System.Threading
 {

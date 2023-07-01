@@ -1,3 +1,10 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Resources;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // ResourceReaderCas.cs - CAS unit tests for System.Resources.ResourceReader
 //
@@ -27,13 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Reflection;
-using System.Resources;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.Resources
 {

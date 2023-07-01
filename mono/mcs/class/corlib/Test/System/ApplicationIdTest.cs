@@ -1,3 +1,4 @@
+using System;
 //
 // ApplicationIdTest.cs - NUnit Test Cases for ApplicationId
 //
@@ -28,7 +29,6 @@
 
 
 using NUnit.Framework;
-using System;
 
 namespace MonoTests.System
 {

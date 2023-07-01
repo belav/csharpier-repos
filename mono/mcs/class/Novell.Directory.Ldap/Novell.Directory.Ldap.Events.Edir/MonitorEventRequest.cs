@@ -33,8 +33,9 @@
 using System;
 using System.IO;
 
-using Novell.Directory.Ldap.Utilclass;
 using Novell.Directory.Ldap.Asn1;
+
+using Novell.Directory.Ldap.Utilclass;
 
 namespace Novell.Directory.Ldap.Events.Edir
 {

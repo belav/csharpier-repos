@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 // DoubleFormatterTest.cs - NUnit Test Cases for System.DoubleFormatter
 //
 // Author:
@@ -6,9 +10,6 @@
 // (C) 2003 Patrick Kalkman
 //
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Globalization;
 
 namespace MonoTests.System
 {

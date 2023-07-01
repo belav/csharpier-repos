@@ -1,3 +1,8 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.ServiceProcess;
+
 //
 // ServiceControllerPermissionAttributeTest.cs -
 //	NUnit Test Cases for ServiceControllerPermissionAttribute
@@ -28,10 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.ServiceProcess;
 
 namespace MonoTests.System.ServiceProcess
 {

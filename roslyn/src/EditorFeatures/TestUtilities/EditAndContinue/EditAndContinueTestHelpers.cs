@@ -9,7 +9,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Differencing;
+using static Microsoft.CodeAnalysis.EditAndContinue.AbstractEditAndContinueAnalyzer;
 using Microsoft.CodeAnalysis.EditAndContinue.Contracts;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -18,7 +20,6 @@ using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.EditAndContinue.AbstractEditAndContinueAnalyzer;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {

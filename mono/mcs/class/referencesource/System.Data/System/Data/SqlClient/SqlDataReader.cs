@@ -13,20 +13,20 @@ namespace System.Data.SqlClient
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Data;
-    using System.Data.Sql;
-    using System.Data.SqlTypes;
     using System.Data.Common;
     using System.Data.ProviderBase;
+    using System.Data.Sql;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Xml;
 
     using Microsoft.SqlServer.Server;
-    using System.Threading.Tasks;
 
     public class SqlDataReader : DbDataReader, IDataReader
     {

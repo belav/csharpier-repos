@@ -9,12 +9,12 @@ namespace System.IdentityModel.Selectors
     using System.Net;
     using System.Runtime;
     using System.Runtime.InteropServices;
+    using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Text;
-    using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     // Most of codes are copied from \ndp\fx\src\security\system\security\cryptography\x509\X509Chain.cs
     class X509CertificateChain

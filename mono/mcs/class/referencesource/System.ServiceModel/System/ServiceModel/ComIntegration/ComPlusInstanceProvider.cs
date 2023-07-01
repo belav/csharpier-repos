@@ -8,6 +8,7 @@ namespace System.ServiceModel.ComIntegration
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.EnterpriseServices;
+    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
@@ -16,7 +17,6 @@ namespace System.ServiceModel.ComIntegration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
-    using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
 
     class ComPlusInstanceProvider : IInstanceProvider
     {

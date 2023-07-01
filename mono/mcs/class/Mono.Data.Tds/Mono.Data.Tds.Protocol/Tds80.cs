@@ -1,3 +1,4 @@
+using System;
 //
 // Mono.Data.Tds.Protocol.Tds80.cs
 //
@@ -31,7 +32,6 @@
 //
 
 using Mono.Data.Tds;
-using System;
 
 namespace Mono.Data.Tds.Protocol
 {

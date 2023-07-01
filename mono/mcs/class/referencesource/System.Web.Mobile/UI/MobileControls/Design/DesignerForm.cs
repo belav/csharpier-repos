@@ -13,9 +13,9 @@ namespace System.Web.UI.Design.MobileControls
     using System.Diagnostics;
     using System.Drawing;
     using System.Globalization;
+    using System.Web.UI.MobileControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-    using System.Web.UI.MobileControls;
 
     using Form = System.Windows.Forms.Form;
 

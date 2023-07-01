@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
+
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGen

@@ -6,6 +6,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.CommentSelection;
 using Microsoft.CodeAnalysis.Editor.CSharp.CommentSelection;
 using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;

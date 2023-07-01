@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
 using EnvDTE80;
 using Microsoft.VisualStudio.IntegrationTest.Utilities.Common;
 using Microsoft.VisualStudio.Shell;

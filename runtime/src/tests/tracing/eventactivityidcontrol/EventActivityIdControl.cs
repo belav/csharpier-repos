@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Tracing.Tests.Common;
 
 namespace Tracing.Tests

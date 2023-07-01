@@ -10,10 +10,7 @@ namespace System.Runtime.Serialization
 #if !NO_DYNAMIC_CODEGEN
     using System.Reflection.Emit;
 #endif
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Runtime.Serialization.Diagnostics.Application;
-    using System.Xml;
+    using System.Security;using System.Security.Permissions;using System.Runtime.Serialization.Diagnostics.Application;using System.Xml;
 
 #if USE_REFEMIT
     public delegate void XmlFormatClassWriterDelegate(

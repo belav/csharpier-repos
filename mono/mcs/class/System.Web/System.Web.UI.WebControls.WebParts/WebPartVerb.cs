@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 //
 // System.Web.UI.WebControls.WebParts.WebPartVerb.cs
 //
@@ -30,8 +32,6 @@
 
 using System.Web;
 using System.Web.UI;
-using System.ComponentModel;
-using System;
 
 namespace System.Web.UI.WebControls.WebParts
 {

@@ -6,14 +6,14 @@
 
 namespace System.Web.Mobile
 {
-    using System.Web;
     using System.Collections;
-    using System.Configuration;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Web;
 
     /// <include file='doc\MobileCapabilities.uex' path='docs/doc[@for="MobileCapabilities"]/*' />
     [AspNetHostingPermission(

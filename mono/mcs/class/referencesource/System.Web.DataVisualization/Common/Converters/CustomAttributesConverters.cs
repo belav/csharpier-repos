@@ -25,16 +25,13 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-
 #if Microsoft_CONTROL
-using System.Windows.Forms.DataVisualization.Charting.Utilities;
-using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;using System.Windows.Forms.DataVisualization.Charting;
 #else
-using System.Web.UI.DataVisualization.Charting.Utilities;
-using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Utilities;using System.Web.UI.DataVisualization.Charting;
 #endif
 
 #endregion

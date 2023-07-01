@@ -29,8 +29,7 @@
 #endif
 #endif
 
-using System;
-using SCG = System.Collections.Generic;
+using System;using SCG = System.Collections.Generic;
 
 // NOTE NOTE NOTE NOTE
 // This source file is used to produce both TreeBag<T> and TreeBag<T>

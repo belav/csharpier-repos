@@ -9,9 +9,9 @@ namespace System.ServiceModel.Dispatcher
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel;
+    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
     using System.Xml;
     using System.Xml.Serialization;
-    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
 
     class UnwrappedTypesXmlSerializerManager
     {

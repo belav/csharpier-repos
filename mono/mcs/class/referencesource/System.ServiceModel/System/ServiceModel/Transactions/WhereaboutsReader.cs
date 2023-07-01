@@ -10,6 +10,7 @@ namespace System.ServiceModel.Transactions
     using System.Runtime;
     using System.Security.Permissions;
     using System.Text;
+
     using Microsoft.Transactions.Wsat.Protocol;
     using Microsoft.Transactions.Wsat.Recovery;
 

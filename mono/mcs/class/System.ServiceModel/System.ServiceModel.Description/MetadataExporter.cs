@@ -30,10 +30,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.Web.Services.Description;
-using System.Xml;
-using System.Xml.Schema;
 
 using WSBinding = System.Web.Services.Description.Binding;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.ServiceModel.Description
 {

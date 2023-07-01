@@ -27,14 +27,15 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NUnit.Framework;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Reflection;
-using System.Collections;
+using System.Runtime.CompilerServices;
+using System.Text;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Linq
 {

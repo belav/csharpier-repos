@@ -1,13 +1,14 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+
+using ILCompiler.DependencyAnalysis.ReadyToRun;
+using Internal.ReadyToRunConstants;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-using ILCompiler.DependencyAnalysis.ReadyToRun;
-using Internal.ReadyToRunConstants;
 using Internal.TypeSystem.Ecma;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace ILCompiler
 {

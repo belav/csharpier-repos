@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // DirectoryCas.cs - CAS unit tests for System.IO.Directory
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Collections;
-using System.IO;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoCasTests.System.IO
 {

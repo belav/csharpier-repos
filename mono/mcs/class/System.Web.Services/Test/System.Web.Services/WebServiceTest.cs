@@ -8,9 +8,7 @@
 //
 
 #if !MOBILE && !XAMMAC_4_5
-using NUnit.Framework;
-using System;
-using System.Web.Services;
+using NUnit.Framework;using System;using System.Web.Services;
 
 namespace MonoTests.System.Web.Services
 {

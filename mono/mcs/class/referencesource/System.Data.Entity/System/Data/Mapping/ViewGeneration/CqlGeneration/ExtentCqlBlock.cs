@@ -1,3 +1,9 @@
+using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Data.Metadata.Edm;
 //---------------------------------------------------------------------
 // <copyright file="ExtentCqlBlock.cs" company="Microsoft">
 //      Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -8,12 +14,6 @@
 //---------------------------------------------------------------------
 
 using System.Text;
-using System.Collections.Generic;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Data.Common.CommandTrees;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
-using System.Data.Common.Utils;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {

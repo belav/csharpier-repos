@@ -7,11 +7,11 @@ namespace System.IdentityModel.Tokens
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Selectors;
+    using KeyIdentifierEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierEntry;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Security;
     using System.Xml;
-    using KeyIdentifierEntry = System.IdentityModel.Selectors.SecurityTokenSerializer.KeyIdentifierEntry;
 
     class XmlDsigSep2000 : SecurityTokenSerializer.SerializerEntries
     {

@@ -9,8 +9,8 @@
  */
 namespace System.Web
 {
-    using System.Threading;
     using System.Collections;
+    using System.Threading;
     using System.Web.Util;
 
     internal class RequestTimeoutManager

@@ -14,17 +14,9 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT // ComObject
 
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Proxies;
-using System.Security;
-using System.Security.Permissions;
+using System.Globalization;using System.Reflection;using System.Runtime.InteropServices;using System.Runtime.Remoting;using System.Runtime.Remoting.Messaging;using System.Runtime.Remoting.Proxies;using System.Security;using System.Security.Permissions;
 
 #if CODEPLEX_40
 namespace System.Dynamic

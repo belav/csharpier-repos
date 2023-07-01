@@ -8,6 +8,7 @@ using System;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Threading;
+
 using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Roslyn.Test.Utilities

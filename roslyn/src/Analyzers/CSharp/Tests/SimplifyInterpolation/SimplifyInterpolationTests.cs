@@ -6,6 +6,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.SimplifyInterpolation;
 using Microsoft.CodeAnalysis.Diagnostics;

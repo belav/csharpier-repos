@@ -26,16 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE
-using System;
-using System.Collections.ObjectModel;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using System.Text;
-using NUnit.Framework;
-
-using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
+using System;using System.Collections.ObjectModel;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Dispatcher;using System.Text;using NUnit.Framework;using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {

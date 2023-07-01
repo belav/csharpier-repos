@@ -31,13 +31,14 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-using NUnit.Framework;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Drawing.Imaging;
-using DrawingTestHelper;
+using System.Drawing.Text;
 using System.IO;
+
+using DrawingTestHelper;
+using NUnit.Framework;
 
 namespace Test.Sys.Drawing.GraphicsFixtures
 {

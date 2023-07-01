@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportAnalyzer>;
+
 using Microsoft.CodeAnalysis;
-using Xunit;
 
 using static Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportAnalyzer;
-
-using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportAnalyzer>;
+using Xunit;
 
 namespace DllImportGenerator.UnitTests
 {

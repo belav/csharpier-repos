@@ -6,13 +6,14 @@
 
 namespace System.Configuration.Internal
 {
+    using System.CodeDom.Compiler;
     using System.Configuration;
     using System.IO;
-    using System.Security.Permissions;
     using System.Reflection;
-    using System.Threading;
     using System.Security;
-    using System.CodeDom.Compiler;
+    using System.Security.Permissions;
+    using System.Threading;
+
     using Microsoft.Win32;
 #if !FEATURE_PAL
     using System.Security.AccessControl;

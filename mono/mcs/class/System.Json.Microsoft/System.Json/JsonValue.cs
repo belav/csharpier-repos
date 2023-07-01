@@ -7,13 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 #if FEATURE_DYNAMIC
 using System.Dynamic;
 #endif
-using System.Globalization;
-using System.IO;
-using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Xml;
+using System.Globalization;using System.IO;using System.Linq.Expressions;using System.Runtime.Serialization;using System.Runtime.Serialization.Json;using System.Text;using System.Xml;
 
 namespace System.Json
 {

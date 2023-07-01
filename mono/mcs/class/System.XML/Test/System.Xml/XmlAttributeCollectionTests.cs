@@ -7,10 +7,10 @@
 // (C) 2003 Martin Willemoes Hansen
 
 using System;
-using System.Xml;
-using System.Text;
-using System.IO;
 using System.Collections;
+using System.IO;
+using System.Text;
+using System.Xml;
 
 using NUnit.Framework;
 

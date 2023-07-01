@@ -6,22 +6,16 @@
 
 namespace System.Net
 {
-    using System.IO;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Threading;
-    using System.Text;
+    using System.IO;
     using System.Net.Cache;
+    using System.Text;
+    using System.Threading;
 #if !FEATURE_PAL
-    using System.Net.NetworkInformation;
-    using System.Security.Principal;
+    using System.Net.NetworkInformation;using System.Security.Principal;
 #endif
-    using System.Globalization;
-    using System.Net.Configuration;
-    using System.Security.Permissions;
-    using System.Collections.Generic;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
+    using System.Globalization;using System.Net.Configuration;using System.Security.Permissions;using System.Collections.Generic;using System.Runtime.InteropServices;using Microsoft.Win32;
 
     // This class (and its helper classes implementing IWebRequestFinder interface) are responsible for
     // determining the location of the PAC file, download and execute it, in order to retrieve proxy

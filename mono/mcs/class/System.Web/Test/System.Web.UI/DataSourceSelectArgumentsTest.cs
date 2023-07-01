@@ -1,3 +1,11 @@
+using System;
+using System.Collections;
+using System.IO;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
 //
 // DataSourceSelectArgumentsTest.cs - unit tests for System.Web.UI.DataSourceSelectArguments
 //
@@ -27,14 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.IO;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI;
-using System.Collections;
-using System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI
 {

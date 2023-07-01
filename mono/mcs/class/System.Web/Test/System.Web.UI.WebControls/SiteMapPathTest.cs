@@ -1,3 +1,15 @@
+using System;
+using System.Collections;
+using System.Configuration;
+using System.Drawing;
+using System.Threading;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using MyWebControl = System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.WebControls.SiteMapPath.cs
 //
@@ -29,17 +41,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Threading;
-using System.Drawing;
-using System.Configuration;
-using MyWebControl = System.Web.UI.WebControls;
-using MonoTests.SystemWeb.Framework;
-using MonoTests.stand_alone.WebHarness;
-using System.Collections;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

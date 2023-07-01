@@ -14,17 +14,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-
+using System.Text;
 #if STATIC
-using MetaType = IKVM.Reflection.Type;
-using IKVM.Reflection;
-using IKVM.Reflection.Emit;
+using MetaType = IKVM.Reflection.Type;using IKVM.Reflection;using IKVM.Reflection.Emit;
 #else
-using MetaType = System.Type;
-using System.Reflection;
-using System.Reflection.Emit;
+using MetaType = System.Type;using System.Reflection;using System.Reflection.Emit;
 #endif
 
 namespace Mono.CSharp

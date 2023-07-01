@@ -8,8 +8,8 @@
  */
 namespace System.ComponentModel
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies which values to say if property or event value can be bound to a data

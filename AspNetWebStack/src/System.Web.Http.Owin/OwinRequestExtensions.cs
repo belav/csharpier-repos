@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+
 using Microsoft.Owin;
 
 namespace System.Web.Http.Owin

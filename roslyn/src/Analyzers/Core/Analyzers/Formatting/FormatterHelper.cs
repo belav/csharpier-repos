@@ -4,10 +4,11 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
+using static Microsoft.CodeAnalysis.Formatting.FormattingExtensions;
 using Microsoft.CodeAnalysis.Formatting.Rules;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using static Microsoft.CodeAnalysis.Formatting.FormattingExtensions;
 
 namespace Microsoft.CodeAnalysis.Formatting
 {

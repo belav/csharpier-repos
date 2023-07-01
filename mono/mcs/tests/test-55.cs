@@ -1,6 +1,6 @@
-using c = System.Console;
 using s = System;
 using System2 = System;
+using c = System.Console;
 
 namespace A
 {

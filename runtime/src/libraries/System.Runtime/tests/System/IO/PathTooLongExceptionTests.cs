@@ -3,9 +3,10 @@
 
 using System;
 using System.IO;
-using System.Text;
-using Xunit;
 using System.Tests;
+using System.Text;
+
+using Xunit;
 
 namespace System.IO.Tests
 {

@@ -10,6 +10,7 @@ using System.IO.Pipelines;
 using System.Runtime;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.Remote.Host;
 using Microsoft.ServiceHub.Framework;

@@ -7,10 +7,10 @@ using Microsoft.Cci;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using static Microsoft.CodeAnalysis.CSharp.UnitTests.FunctionPointerUtilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using static Microsoft.CodeAnalysis.CSharp.UnitTests.FunctionPointerUtilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {

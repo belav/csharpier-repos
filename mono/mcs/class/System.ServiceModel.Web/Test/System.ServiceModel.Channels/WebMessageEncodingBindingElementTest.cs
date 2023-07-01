@@ -1,10 +1,5 @@
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.IO;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Text;
-using NUnit.Framework;
+using System;using System.IO;using System.ServiceModel;using System.ServiceModel.Channels;using System.Text;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {

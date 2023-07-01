@@ -8,18 +8,18 @@ using System.Data.Common;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Data.Linq.Provider;
+using Me = System.Data.Linq.SqlClient;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-using Me = System.Data.Linq.SqlClient;
-using System.Runtime.Versioning;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
+using System.Text;
 
 namespace System.Data.Linq.SqlClient
 {

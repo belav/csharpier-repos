@@ -32,12 +32,9 @@ using System.Data.Linq;
 #if !DNXCORE50
 using System.Data.SqlTypes;
 #endif
-using System.Text;
-using Newtonsoft.Json.Converters;
+using System.Text;using Newtonsoft.Json.Converters;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 

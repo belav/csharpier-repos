@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+
 using Microsoft.CodeAnalysis;
 
 namespace ILLink.RoslynAnalyzer

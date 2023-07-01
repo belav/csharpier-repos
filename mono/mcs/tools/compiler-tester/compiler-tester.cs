@@ -28,15 +28,16 @@
 //
 
 using System;
-using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Collections;
 using System.Xml;
-using System.Collections.Generic;
+
 using Mono.CompilerServices.SymbolWriter;
-using System.Globalization;
 
 namespace TestRunner
 {

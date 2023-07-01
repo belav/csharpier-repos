@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Text;
+
 using OLEDB.Test.ModuleCore;
 using XmlCoreTest.Common;
 using Xunit;

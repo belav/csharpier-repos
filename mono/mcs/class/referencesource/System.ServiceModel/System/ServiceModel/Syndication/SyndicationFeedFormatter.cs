@@ -8,11 +8,11 @@ namespace System.ServiceModel.Syndication
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.Runtime.CompilerServices;
+    using System.Xml;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

@@ -6,9 +6,9 @@ namespace System.ServiceModel.Description
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml;
-    using WsdlNS = System.Web.Services.Description;
     using System.Globalization;
+    using WsdlNS = System.Web.Services.Description;
+    using System.Xml;
 
     //
     // PolicyReader is a complex nested class in the MetadataImporter

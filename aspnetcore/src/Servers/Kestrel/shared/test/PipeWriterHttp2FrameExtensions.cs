@@ -7,9 +7,10 @@ using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Net.Http.HPack;
+
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
-using Http2HeadersEnumerator = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2HeadersEnumerator;
 using HPackHeaderWriter = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.HPackHeaderWriter;
+using Http2HeadersEnumerator = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2HeadersEnumerator;
 
 namespace Microsoft.AspNetCore.Testing;
 

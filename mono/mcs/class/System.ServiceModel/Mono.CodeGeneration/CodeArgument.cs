@@ -1,9 +1,7 @@
 // created on 28/08/2004 at 17:07
 
 #if !FULL_AOT_RUNTIME
-using System;
-using System.Reflection;
-using System.Reflection.Emit;
+using System;using System.Reflection;using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {

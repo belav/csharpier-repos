@@ -7,6 +7,7 @@ namespace System.ServiceModel.Security
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using IM = System.IdentityModel;
     using System.IdentityModel.Protocols.WSTrust;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
@@ -15,7 +16,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using IM = System.IdentityModel;
 
     /// <summary>
     /// A <see cref="ChannelFactory" /> that produces <see cref="WSTrustChannel" /> objects used to

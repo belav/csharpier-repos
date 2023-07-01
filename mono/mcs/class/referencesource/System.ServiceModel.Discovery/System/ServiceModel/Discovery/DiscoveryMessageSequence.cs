@@ -8,8 +8,8 @@ namespace System.ServiceModel.Discovery
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime;
-    using System.Xml;
     using SR2 = System.ServiceModel.Discovery.SR;
+    using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes")]

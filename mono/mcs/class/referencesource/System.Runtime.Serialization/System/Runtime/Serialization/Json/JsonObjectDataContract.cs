@@ -8,8 +8,7 @@ namespace System.Runtime.Serialization.Json
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Runtime.Serialization;
-    using System.Globalization;
+    using System.Runtime.Serialization;using System.Globalization;
 
     class JsonObjectDataContract : JsonDataContract
     {

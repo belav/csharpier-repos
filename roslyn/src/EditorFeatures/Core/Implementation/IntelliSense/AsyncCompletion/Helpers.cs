@@ -4,13 +4,14 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.CodeAnalysis.Completion;
-using Microsoft.VisualStudio.Text;
-using EditorAsyncCompletion = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
-using EditorAsyncCompletionData = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using RoslynCompletionItem = Microsoft.CodeAnalysis.Completion.CompletionItem;
 using RoslynTrigger = Microsoft.CodeAnalysis.Completion.CompletionTrigger;
+using EditorAsyncCompletion = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
+using EditorAsyncCompletionData = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using VSCompletionItem = Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data.CompletionItem;
+using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncCompletion
 {

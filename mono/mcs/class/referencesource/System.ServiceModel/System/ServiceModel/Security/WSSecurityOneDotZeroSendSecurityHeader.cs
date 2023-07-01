@@ -4,15 +4,6 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Tokens;
-    using System.IO;
-    using System.Runtime;
-    using System.Security.Cryptography;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using ExclusiveCanonicalizationTransform = System.IdentityModel.ExclusiveCanonicalizationTransform;
     using HashStream = System.IdentityModel.HashStream;
     using IPrefixGenerator = System.IdentityModel.IPrefixGenerator;
@@ -23,7 +14,16 @@ namespace System.ServiceModel.Security
     using SignedInfo = System.IdentityModel.SignedInfo;
     using SignedXml = System.IdentityModel.SignedXml;
     using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Runtime;
+    using System.Security.Cryptography;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     class WSSecurityOneDotZeroSendSecurityHeader : SendSecurityHeader
     {

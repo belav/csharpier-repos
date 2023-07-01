@@ -6,8 +6,7 @@ using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-using System;
+using Xunit;using System;
 
 namespace BasicEventSourceTests
 {

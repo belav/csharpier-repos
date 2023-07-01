@@ -1,19 +1,19 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿using System;
+using Microsoft.CodeAnalysis.Editor.UnitTests.Formating;
+using Microsoft.CodeAnalysis.Formatting;
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
 #nullable disable
 
 using Microsoft.CodeAnalysis.Host;
+using Microsoft.CodeAnalysis.Indentation;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
-using Xunit;
-using System;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Indentation;
-using Microsoft.CodeAnalysis.Editor.UnitTests.Formating;
 using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

@@ -1,3 +1,8 @@
+using System;
+using System.Security.Permissions;
+using System.Web.UI.HtmlControls;
+
+using MonoTests.System.Web.UI.HtmlControls;
 //
 // HtmlImageCas.cs - CAS unit tests for System.Web.UI.HtmlControls.HtmlImage
 //
@@ -27,12 +32,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security.Permissions;
-using System.Web.UI.HtmlControls;
-
-using MonoTests.System.Web.UI.HtmlControls;
 
 namespace MonoCasTests.System.Web.UI.HtmlControls
 {

@@ -4,12 +4,11 @@
 
 namespace System.ServiceModel.Security
 {
+    using SignedXml = System.IdentityModel.SignedXml;
+    using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
-    using SignedXml = System.IdentityModel.SignedXml;
-    using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
 
     class LaxModeSecurityHeaderElementInferenceEngine : SecurityHeaderElementInferenceEngine
     {

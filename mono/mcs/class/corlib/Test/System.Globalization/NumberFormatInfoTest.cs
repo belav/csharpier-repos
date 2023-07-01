@@ -1,3 +1,6 @@
+using System;
+using System.Globalization;
+
 //
 // NumberFormatInfoTest.cs
 //
@@ -28,8 +31,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
 
 namespace MonoTests.System.Globalization
 {

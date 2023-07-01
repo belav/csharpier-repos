@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+
 //
 // UTF7EncodingTest.cs - NUnit Test Cases for System.Text.UTF7Encoding
 //
@@ -10,8 +13,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Text;
 
 using AssertType = NUnit.Framework.Assert;
 

@@ -6,10 +6,10 @@ namespace System.Activities.Expressions
 {
     using System.Activities.Validation;
     using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Linq.Expressions;
     using System.Reflection;
+    using System.Runtime;
 
     static class IndexerHelper
     {

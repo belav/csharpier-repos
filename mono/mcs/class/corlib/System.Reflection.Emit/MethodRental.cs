@@ -27,8 +27,7 @@
 //
 
 #if MONO_FEATURE_SRE
-using System.Security.Permissions;
-using System.Runtime.InteropServices;
+using System.Security.Permissions;using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {

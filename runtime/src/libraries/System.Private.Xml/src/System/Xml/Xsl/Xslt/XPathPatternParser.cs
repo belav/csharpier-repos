@@ -4,10 +4,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
+using XPathNodeType = System.Xml.XPath.XPathNodeType;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.XPath;
 using XPathParser = System.Xml.Xsl.XPath.XPathParser<System.Xml.Xsl.Qil.QilNode>;
-using XPathNodeType = System.Xml.XPath.XPathNodeType;
 
 namespace System.Xml.Xsl.Xslt
 {

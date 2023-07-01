@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // VisualStylesGtkPlus.cs: IVisualStyles that uses GtkPlus.
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Drawing;
-using System.Collections.Generic;
 
 namespace System.Windows.Forms.VisualStyles
 {

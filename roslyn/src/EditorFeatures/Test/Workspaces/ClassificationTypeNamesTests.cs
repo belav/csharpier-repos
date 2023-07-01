@@ -7,6 +7,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using Castle.DynamicProxy.Internal;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Test.Utilities;

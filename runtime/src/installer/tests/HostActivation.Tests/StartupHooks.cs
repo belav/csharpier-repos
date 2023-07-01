@@ -4,8 +4,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using Xunit;
+
 using Microsoft.Extensions.DependencyModel;
+using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 {

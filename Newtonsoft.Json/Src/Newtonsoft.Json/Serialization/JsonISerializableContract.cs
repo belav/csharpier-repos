@@ -24,8 +24,7 @@
 #endregion
 
 #if HAVE_BINARY_SERIALIZATION
-using System;
-using System.Runtime.Serialization;
+using System;using System.Runtime.Serialization;
 
 namespace Newtonsoft.Json.Serialization
 {

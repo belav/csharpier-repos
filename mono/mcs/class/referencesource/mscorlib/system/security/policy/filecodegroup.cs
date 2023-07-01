@@ -16,12 +16,12 @@ namespace System.Security.Policy
 {
     using System;
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Security.Permissions;
-    using System.Security.Util;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
+    using System.Security.Util;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -41,12 +41,13 @@ using System.Data.SqlTypes;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Threading;
 using System.Xml;
-using System.Text;
+
+using MonoTests.Helpers;
 
 using MonoTests.System.Data.Utils;
-using MonoTests.Helpers;
 
 using NUnit.Framework;
 

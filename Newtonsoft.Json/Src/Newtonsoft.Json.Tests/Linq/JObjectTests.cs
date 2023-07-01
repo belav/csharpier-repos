@@ -30,19 +30,13 @@ using System.ComponentModel;
 #if !(NET20 || NET35 || PORTABLE)
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
-using Newtonsoft.Json.Tests.TestObjects.Organization;
+using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Tests.TestObjects;using Newtonsoft.Json.Tests.TestObjects.Organization;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Linq;
-using System.IO;
-using System.Collections;
+using Newtonsoft.Json.Linq;using System.IO;using System.Collections;
 #if !(DNXCORE50)
 using System.Web.UI;
 #endif

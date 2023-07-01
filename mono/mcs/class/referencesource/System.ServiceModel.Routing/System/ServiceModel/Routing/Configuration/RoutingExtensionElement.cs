@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Routing.Configuration
 {
     using System;
-    using System.Linq;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;

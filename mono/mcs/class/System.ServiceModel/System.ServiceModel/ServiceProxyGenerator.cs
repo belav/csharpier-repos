@@ -26,15 +26,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
-using Mono.CodeGeneration;
-using System.ServiceModel.MonoInternal;
+using System;using System.Collections.Generic;using System.Linq;using System.Reflection;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Dispatcher;using Mono.CodeGeneration;using System.ServiceModel.MonoInternal;
 
 namespace System.ServiceModel
 {

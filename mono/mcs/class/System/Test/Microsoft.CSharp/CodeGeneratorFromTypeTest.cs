@@ -16,9 +16,9 @@ using System.IO;
 
 using Microsoft.CSharp;
 
-using NUnit.Framework;
-
 using MonoTests.System.CodeDom.Compiler;
+
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.CSharp
 {

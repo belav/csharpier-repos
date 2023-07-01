@@ -17,10 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic.Utils;
+using System.Globalization;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Globalization;
-
 #if SILVERLIGHT
 using System.Core;
 #endif

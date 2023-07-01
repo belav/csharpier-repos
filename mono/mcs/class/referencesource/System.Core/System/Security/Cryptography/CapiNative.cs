@@ -8,17 +8,7 @@ using System;
 #if FEATURE_CORESYSTEM
 using System.Core;
 #endif
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using System.Security;
-using System.Text;
-using Microsoft.Win32.SafeHandles;
+using System.Diagnostics;using System.Diagnostics.CodeAnalysis;using System.Diagnostics.Contracts;using System.Globalization;using System.Runtime.CompilerServices;using System.Runtime.ConstrainedExecution;using System.Runtime.InteropServices;using System.Runtime.Versioning;using System.Security;using System.Text;using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
 {

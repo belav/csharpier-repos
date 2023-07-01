@@ -2,9 +2,10 @@
 // http://localhost:8080/TestBinding4.asmx?wsdl
 
 using System;
+using System.Xml;
+
 using NUnit.Framework;
 using TestBinding4Tests.Soap;
-using System.Xml;
 
 namespace Localhost.TestBinding4Tests
 {

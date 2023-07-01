@@ -1,10 +1,9 @@
+using static Dynamic.Operator.Tests.TypeCommon;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.CSharp.RuntimeBinder;
 using Xunit;
-
-using static Dynamic.Operator.Tests.TypeCommon;
 
 namespace Dynamic.Operator.Tests
 {

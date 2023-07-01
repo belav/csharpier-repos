@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+
 //
 // Mono.ILASM.InstrTable
 //
@@ -8,8 +11,6 @@
 //
 
 using PEAPI;
-using System;
-using System.Collections;
 
 namespace Mono.ILASM
 {

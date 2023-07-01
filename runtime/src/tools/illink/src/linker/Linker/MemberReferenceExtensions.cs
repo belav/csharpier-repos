@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Text;
+
 using Mono.Cecil;
 
 namespace Mono.Linker

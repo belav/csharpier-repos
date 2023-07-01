@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Net;
 // System.Net.Sockets.NetworkStreamTest.cs
 //
 // Author:
@@ -7,9 +10,7 @@
 //
 
 using System.Net.Sockets;
-using System.Net;
-using System;
-using System.IO;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Net.Sockets

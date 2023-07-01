@@ -28,6 +28,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
 using NUnit.Framework;

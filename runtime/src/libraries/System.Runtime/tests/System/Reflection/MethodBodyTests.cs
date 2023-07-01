@@ -3,6 +3,7 @@
 
 using System;
 using System.Reflection;
+
 using Xunit;
 
 #pragma warning disable 0219  // field is never used

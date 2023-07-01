@@ -26,13 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if USE_DEPRECATED
-using System;
-using System.Collections.ObjectModel;
-using System.Net.Security;
-using System.Reflection;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using NUnit.Framework;
+using System;using System.Collections.ObjectModel;using System.Net.Security;using System.Reflection;using System.ServiceModel;using System.ServiceModel.Description;using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {

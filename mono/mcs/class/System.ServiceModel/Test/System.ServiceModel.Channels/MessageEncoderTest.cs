@@ -26,19 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.Text;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
-using TextElement = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
-using BinaryElement = System.ServiceModel.Channels.BinaryMessageEncodingBindingElement;
-using MtomElement = System.ServiceModel.Channels.MtomMessageEncodingBindingElement;
+using System;using System.Collections.ObjectModel;using System.IO;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.Text;using NUnit.Framework;using NUnit.Framework.Constraints;using TextElement = System.ServiceModel.Channels.TextMessageEncodingBindingElement;using BinaryElement = System.ServiceModel.Channels.BinaryMessageEncodingBindingElement;using MtomElement = System.ServiceModel.Channels.MtomMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Channels
 {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+
 using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.Configuration

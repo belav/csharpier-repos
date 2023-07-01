@@ -1,8 +1,9 @@
-﻿using Xunit;
-using Test.Cryptography;
+﻿using System.Collections.ObjectModel;
 using System.Formats.Cbor;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
-using System.Collections.ObjectModel;
+
+using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Cose.Tests
 {

@@ -1,3 +1,4 @@
+using System.IO;
 //
 // System.Web.OutputFilterStream
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Runtime.InteropServices;
-using System.IO;
 
 namespace System.Web
 {

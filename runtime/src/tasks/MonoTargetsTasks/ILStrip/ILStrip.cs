@@ -2,16 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
+
 using CilStrip.Mono.Cecil;
 using CilStrip.Mono.Cecil.Binary;
 using CilStrip.Mono.Cecil.Cil;
 using CilStrip.Mono.Cecil.Metadata;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 public class ILStrip : Microsoft.Build.Utilities.Task
 {

@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 using System;
 using System.IO;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 using NUnit.Framework;
 

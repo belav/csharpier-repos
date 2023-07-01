@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // CspParametersTest.cs - NUnit Test Cases for CspParameters
 //
@@ -27,8 +30,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

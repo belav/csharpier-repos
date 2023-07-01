@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Text;
+
+using Mono.Unix;
 //
 // Mono.Unix.UnixPath Test Cases
 //
@@ -8,10 +13,6 @@
 //
 
 using NUnit.Framework;
-using System.IO;
-using System;
-using System.Text;
-using Mono.Unix;
 
 namespace MonoTests.Mono.Unix
 {

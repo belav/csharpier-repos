@@ -11,13 +11,7 @@ using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-using System.Reflection;
-
-using SdtEventSources;
-using System.Diagnostics;
-using System.Threading;
-using System.Text.RegularExpressions;
+using Xunit;using System.Reflection;using SdtEventSources;using System.Diagnostics;using System.Threading;using System.Text.RegularExpressions;
 
 namespace BasicEventSourceTests
 {

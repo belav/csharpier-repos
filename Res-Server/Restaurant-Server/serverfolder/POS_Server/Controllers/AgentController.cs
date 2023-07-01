@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using POS_Server.Classes;
-using POS_Server.Models;
-using POS_Server.Models.VM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -16,8 +11,14 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http;
 using System.Web;
+using System.Web.Http;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using POS_Server.Classes;
+using POS_Server.Models;
+using POS_Server.Models.VM;
 
 namespace POS_Server.Controllers
 {

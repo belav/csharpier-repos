@@ -4,6 +4,7 @@
 
 using System;
 using System.Windows;
+
 using Microsoft.VisualStudio.PlatformUI;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature

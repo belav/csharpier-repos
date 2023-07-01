@@ -1,4 +1,3 @@
-using AutoMapper.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+
+using AutoMapper.Internal;
 
 namespace AutoMapper.Configuration.Conventions
 {

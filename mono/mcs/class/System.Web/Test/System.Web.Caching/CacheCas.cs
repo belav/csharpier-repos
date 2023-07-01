@@ -1,3 +1,9 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.Caching;
+
 //
 // CacheCas.cs - CAS unit tests for System.Web.Caching.Cache
 //
@@ -27,12 +33,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.Caching;
 
 namespace MonoCasTests.System.Web.Caching
 {

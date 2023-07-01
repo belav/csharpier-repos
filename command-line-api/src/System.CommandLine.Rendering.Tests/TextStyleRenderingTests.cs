@@ -1,11 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+﻿using static System.CommandLine.Rendering.TestTerminal;
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Tests.Utility;
 using System.Drawing;
+
 using FluentAssertions;
 using Xunit;
-using static System.CommandLine.Rendering.TestTerminal;
 
 namespace System.CommandLine.Rendering.Tests
 {

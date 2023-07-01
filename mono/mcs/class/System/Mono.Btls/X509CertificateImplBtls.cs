@@ -29,24 +29,12 @@ extern alias MonoSecurity;
 #endif
 
 #if MONO_SECURITY_ALIAS
-using MX = MonoSecurity::Mono.Security.X509;
-using MonoSecurity::Mono.Security.Cryptography;
-using MonoSecurity::Mono.Security.Authenticode;
+using MX = MonoSecurity::Mono.Security.X509;using MonoSecurity::Mono.Security.Cryptography;using MonoSecurity::Mono.Security.Authenticode;
 #else
-using MX = Mono.Security.X509;
-using Mono.Security.Cryptography;
-using Mono.Security.Authenticode;
+using MX = Mono.Security.X509;using Mono.Security.Cryptography;using Mono.Security.Authenticode;
 #endif
 
-using System;
-using System.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
+using System;using System.Text;using System.Collections;using System.Collections.Generic;using System.Security;using System.Security.Cryptography;using System.Security.Cryptography.X509Certificates;using System.Runtime.InteropServices;using Microsoft.Win32.SafeHandles;
 
 namespace Mono.Btls
 {

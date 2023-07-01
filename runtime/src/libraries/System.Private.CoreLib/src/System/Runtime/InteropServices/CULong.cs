@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-
 #pragma warning disable SA1121 // We use our own aliases since they differ per platform
 #if TARGET_WINDOWS
 using NativeType = System.UInt32;

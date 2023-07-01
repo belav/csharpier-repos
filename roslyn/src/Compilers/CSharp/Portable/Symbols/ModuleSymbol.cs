@@ -10,6 +10,7 @@ using System.Collections.Immutable;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.Symbols;
 using Roslyn.Utilities;
 

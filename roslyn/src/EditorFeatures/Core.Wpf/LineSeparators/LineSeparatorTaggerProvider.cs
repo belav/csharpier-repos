@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using System.ComponentModel.Composition;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Editor.Implementation.Tagging;
 using Microsoft.CodeAnalysis.Editor.LineSeparators;
 using Microsoft.CodeAnalysis.Editor.Shared.Extensions;

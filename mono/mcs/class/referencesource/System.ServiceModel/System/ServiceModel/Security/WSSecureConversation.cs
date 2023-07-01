@@ -12,6 +12,7 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
+
     using StrEntry = WSSecurityTokenSerializer.StrEntry;
     using TokenEntry = WSSecurityTokenSerializer.TokenEntry;
 

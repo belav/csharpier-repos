@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+
+using Debug = System.Diagnostics.Debug;
 using System.Threading.Tasks;
 
 using ILCompiler.DependencyAnalysis;
@@ -12,10 +14,8 @@ using ILCompiler.DependencyAnalysisFramework;
 using Internal.IL;
 using Internal.IL.Stubs;
 using Internal.JitInterface;
-using Internal.TypeSystem;
 using Internal.ReadyToRunConstants;
-
-using Debug = System.Diagnostics.Debug;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

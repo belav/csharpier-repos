@@ -7,11 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Runtime.General;
 
-using Internal.Runtime.Augments;
-
 using Internal.Reflection.Core.Execution;
 using Internal.Reflection.Execution.FieldAccessors;
 using Internal.Reflection.Execution.MethodInvokers;
+
+using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Execution
 {

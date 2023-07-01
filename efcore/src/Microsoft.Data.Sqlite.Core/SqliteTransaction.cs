@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Text;
+
 using Microsoft.Data.Sqlite.Properties;
 using static SQLitePCL.raw;
 

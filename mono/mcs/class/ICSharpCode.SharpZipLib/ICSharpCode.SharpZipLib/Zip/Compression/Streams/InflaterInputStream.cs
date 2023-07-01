@@ -38,11 +38,12 @@
 // exception statement from your version.
 
 using System;
-using System.Security.Cryptography;
 using System.IO;
+using System.Security.Cryptography;
+
+using ICSharpCode.SharpZipLib.Checksums;
 
 using ICSharpCode.SharpZipLib.Zip.Compression;
-using ICSharpCode.SharpZipLib.Checksums;
 
 namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {

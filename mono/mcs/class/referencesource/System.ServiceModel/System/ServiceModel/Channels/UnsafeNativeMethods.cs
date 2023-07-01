@@ -4,24 +4,25 @@
 #define WSARECV
 namespace System.ServiceModel.Channels
 {
+    using System.ComponentModel;
+    using System.EnterpriseServices;
     using System.Runtime;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Threading;
-    using Microsoft.Win32.SafeHandles;
-    using System.ComponentModel;
-    using System.Text;
-    using System.Transactions;
     using System.ServiceModel.Activation;
-    using System.ServiceModel.Security;
-    using System.EnterpriseServices;
+    using TOKEN_INFORMATION_CLASS = System.ServiceModel.Activation.ListenerUnsafeNativeMethods.TOKEN_INFORMATION_CLASS;
 
     using SafeCloseHandle = System.ServiceModel.Activation.SafeCloseHandle;
-    using TOKEN_INFORMATION_CLASS = System.ServiceModel.Activation.ListenerUnsafeNativeMethods.TOKEN_INFORMATION_CLASS;
+    using System.ServiceModel.Security;
+    using System.Text;
+    using System.Threading;
+    using System.Transactions;
+
+    using Microsoft.Win32.SafeHandles;
 
     [SuppressUnmanagedCodeSecurity]
     internal static class UnsafeNativeMethods

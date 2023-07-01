@@ -2,16 +2,17 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.ComponentModel.Composition.Hosting;
-using Microsoft.Internal;
+using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Threading;
-using System.ComponentModel.Composition.ReflectionModel;
-using System.ComponentModel.Composition.Primitives;
+
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {

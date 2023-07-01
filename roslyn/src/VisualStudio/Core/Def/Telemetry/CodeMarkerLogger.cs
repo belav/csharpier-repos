@@ -6,10 +6,11 @@
 
 using System;
 using System.Collections.Generic;
+using CodeMarkerId = System.Int32;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.Internal.Performance;
-using CodeMarkerId = System.Int32;
 
 namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 {

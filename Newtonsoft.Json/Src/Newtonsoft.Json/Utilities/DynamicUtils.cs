@@ -24,21 +24,13 @@
 #endregion
 
 #if HAVE_DYNAMIC
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Linq.Expressions;
+using System;using System.Collections.Generic;using System.Dynamic;using System.Linq;using System.Linq.Expressions;
 #if !HAVE_REFLECTION_BINDER
 using System.Reflection;
 #else
 using Microsoft.CSharp.RuntimeBinder;
 #endif
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Globalization;
-using Newtonsoft.Json.Serialization;
-using System.Diagnostics;
+using System.Runtime.CompilerServices;using System.Text;using System.Globalization;using Newtonsoft.Json.Serialization;using System.Diagnostics;
 
 namespace Newtonsoft.Json.Utilities
 {

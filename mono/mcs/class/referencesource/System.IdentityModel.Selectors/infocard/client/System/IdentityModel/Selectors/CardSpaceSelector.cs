@@ -12,27 +12,27 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.IO;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
+    using System.Globalization;
     using System.IdentityModel.Claims;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.ServiceProcess;
     using System.Text;
     using System.Xml;
-    using System.IdentityModel.Tokens;
-    using System.ServiceProcess;
-    using System.Globalization;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
-    using Microsoft.InfoCards.Diagnostics;
-    using Microsoft.Win32;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using Microsoft.InfoCards.Diagnostics;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
+    using Microsoft.Win32;
 
     //
     // Summary

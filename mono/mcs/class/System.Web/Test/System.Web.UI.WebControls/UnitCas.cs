@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.UI.WebControls;
+
+using MonoTests.System.Web.UI.WebControls;
 //
 // UnitCas.cs - CAS unit tests for System.Web.UI.WebControls.Unit
 //
@@ -27,14 +34,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.UI.WebControls;
-
-using MonoTests.System.Web.UI.WebControls;
 
 namespace MonoCasTests.System.Web.UI.WebControls
 {

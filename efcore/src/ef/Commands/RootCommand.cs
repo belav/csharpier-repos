@@ -3,9 +3,10 @@
 
 using System;
 using System.Reflection;
+
 using Microsoft.DotNet.Cli.CommandLine;
-using Microsoft.EntityFrameworkCore.Tools.Properties;
 using static Microsoft.EntityFrameworkCore.Tools.AnsiConstants;
+using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 

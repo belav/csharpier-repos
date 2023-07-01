@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Cryptography;
+
 //
 // DSASignatureDeformatterTest.cs - NUnit Test Cases for DSASignatureDeformatter
 //
@@ -28,9 +32,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

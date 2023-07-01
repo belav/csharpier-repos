@@ -4,15 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 #if XML_DEP
-using System;
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-using System.IO;
-using System.Globalization;
-using System.Collections;
-using System.Security.Permissions;
-using System.Runtime.Versioning;
+using System;using System.Text;using System.Xml;using System.Xml.XPath;using System.IO;using System.Globalization;using System.Collections;using System.Security.Permissions;using System.Runtime.Versioning;
 
 namespace System.Diagnostics
 {

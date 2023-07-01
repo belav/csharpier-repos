@@ -1,3 +1,5 @@
+using System.Collections.Specialized;
+using System.Security.Permissions;
 //
 // System.Web.HttpApplicationState
 //
@@ -27,8 +29,6 @@
 //
 
 using System.Threading;
-using System.Collections.Specialized;
-using System.Security.Permissions;
 
 namespace System.Web
 {

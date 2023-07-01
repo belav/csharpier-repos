@@ -29,8 +29,7 @@ using System.IO;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Utilities;
-using System.Globalization;
+using Newtonsoft.Json.Utilities;using System.Globalization;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

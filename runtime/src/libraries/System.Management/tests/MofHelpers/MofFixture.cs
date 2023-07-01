@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+
 using Xunit;
 
 namespace System.Management.Tests

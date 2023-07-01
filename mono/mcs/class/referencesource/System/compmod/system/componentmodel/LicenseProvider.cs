@@ -6,11 +6,12 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Runtime.Remoting;
     using System.Security.Permissions;
+
+    using Microsoft.Win32;
 
     /// <include file='doc\LicenseProvider.uex' path='docs/doc[@for="LicenseProvider"]/*' />
     /// <devdoc>

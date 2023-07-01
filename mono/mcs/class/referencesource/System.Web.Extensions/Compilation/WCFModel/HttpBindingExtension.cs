@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using System.ServiceModel.Description;
+using WsdlNS = System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
-using WsdlNS = System.Web.Services.Description;
 
 #if WEB_EXTENSIONS_CODE
 namespace System.Web.Compilation.WCFModel

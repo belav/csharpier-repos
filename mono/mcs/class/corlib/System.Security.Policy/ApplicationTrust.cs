@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // System.Security.Policy.ApplicationTrust.cs
 //
@@ -33,7 +34,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Permissions;
 
 using Mono.Security.Cryptography;
-using System.Collections.Generic;
 
 namespace System.Security.Policy
 {

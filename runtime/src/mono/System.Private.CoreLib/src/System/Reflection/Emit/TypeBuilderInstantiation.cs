@@ -35,11 +35,7 @@
 //
 
 #if MONO_FEATURE_SRE
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;using System.Globalization;using System.Text;using System.Runtime.InteropServices;using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection.Emit
 {

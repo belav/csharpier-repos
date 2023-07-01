@@ -1,3 +1,7 @@
+using System;
+using System.Security;
+using System.Security.Permissions;
+
 //
 // SiteIdentityPermissionAttributeTest.cs -
 //	NUnit Test Cases for SiteIdentityPermissionAttribute
@@ -29,9 +33,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security;
-using System.Security.Permissions;
 
 namespace MonoTests.System.Security.Permissions
 {

@@ -14,7 +14,6 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT // ComObject
 
 #if CODEPLEX_40
@@ -27,8 +26,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Runtime.CompilerServices;
 #endif
 
-using System.Security;
-using System.Security.Permissions;
+using System.Security;using System.Security.Permissions;
 
 #if CODEPLEX_40
 namespace System.Dynamic

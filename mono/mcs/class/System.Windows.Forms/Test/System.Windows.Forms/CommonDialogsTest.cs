@@ -28,11 +28,12 @@
 
 using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Windows.Forms;
 using System.IO;
-using System.ComponentModel;
+using System.Windows.Forms;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

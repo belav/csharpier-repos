@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.IO;
+using System.Web.Services;
 //
 // System.Web.Services.Protocols.SoapMessage.cs
 //
@@ -30,10 +33,6 @@
 //
 
 using HeaderInfo = System.Web.Services.Protocols.SoapHeaderMapping;
-
-using System.ComponentModel;
-using System.IO;
-using System.Web.Services;
 
 namespace System.Web.Services.Protocols
 {

@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
+using Debug = System.Diagnostics.Debug;
 using System.Reflection.Metadata;
 
 using ILCompiler;
@@ -14,8 +16,6 @@ using ILLink.Shared.TypeSystemProxy;
 using Internal.IL;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Debug = System.Diagnostics.Debug;
 using WellKnownType = Internal.TypeSystem.WellKnownType;
 
 #nullable enable

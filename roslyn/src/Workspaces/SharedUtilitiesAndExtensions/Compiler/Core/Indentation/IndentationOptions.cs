@@ -4,7 +4,6 @@
 
 using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis.Formatting;
-
 #if !CODE_STYLE
 using Microsoft.CodeAnalysis.Host;
 #endif

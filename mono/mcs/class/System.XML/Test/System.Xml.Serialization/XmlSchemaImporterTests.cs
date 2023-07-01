@@ -42,11 +42,7 @@ using System.Xml.Serialization;
 #if !MOBILE
 using Microsoft.CSharp;
 #endif
-using NUnit.Framework;
-
-using MonoTests.System.Xml.TestClasses;
-
-using MonoTests.Helpers;
+using NUnit.Framework;using MonoTests.System.Xml.TestClasses;using MonoTests.Helpers;
 
 namespace MonoTests.System.Xml.Serialization
 {

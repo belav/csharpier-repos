@@ -12,17 +12,17 @@
 
 namespace System.Web.Security
 {
-    using System.Globalization;
-    using System.Web;
-    using System.Text;
-    using System.Web.Configuration;
-    using System.Web.Caching;
-    using System.Web.Handlers;
     using System.Collections;
-    using System.Web.Util;
-    using System.Security.Principal;
+    using System.Globalization;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Web;
+    using System.Web.Caching;
+    using System.Web.Configuration;
+    using System.Web.Handlers;
     using System.Web.Management;
+    using System.Web.Util;
 
     public sealed class FormsAuthenticationModule : IHttpModule
     {

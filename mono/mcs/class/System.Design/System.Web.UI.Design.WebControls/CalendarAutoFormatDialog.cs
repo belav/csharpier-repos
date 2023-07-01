@@ -1,3 +1,4 @@
+using System.Web.UI.WebControls;
 //
 // System.Web.UI.Design.WebControls.CalendarAutoFormatDialog.cs
 //
@@ -27,7 +28,6 @@
 
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design.WebControls
 {

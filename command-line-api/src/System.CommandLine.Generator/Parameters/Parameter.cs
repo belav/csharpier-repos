@@ -1,6 +1,7 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
+using Microsoft.CodeAnalysis;
 
 namespace System.CommandLine.Generator.Parameters
 {

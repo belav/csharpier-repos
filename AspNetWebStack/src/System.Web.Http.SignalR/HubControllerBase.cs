@@ -3,6 +3,7 @@
 
 using System.Diagnostics.Contracts;
 using System.Web.Http.Properties;
+
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Infrastructure;

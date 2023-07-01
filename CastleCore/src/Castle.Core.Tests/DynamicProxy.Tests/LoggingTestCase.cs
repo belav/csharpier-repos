@@ -17,6 +17,7 @@ namespace Castle.DynamicProxy.Tests
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+
     using Castle.Core.Logging;
 
     using Castle.DynamicProxy.Tests.Classes;

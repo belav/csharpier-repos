@@ -1,9 +1,9 @@
+using DirectoryNode = Microsoft.AspNetCore.Razor.Language.VirtualRazorProjectFileSystem.DirectoryNode;
+using FileNode = Microsoft.AspNetCore.Razor.Language.VirtualRazorProjectFileSystem.FileNode;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
-using DirectoryNode = Microsoft.AspNetCore.Razor.Language.VirtualRazorProjectFileSystem.DirectoryNode;
-using FileNode = Microsoft.AspNetCore.Razor.Language.VirtualRazorProjectFileSystem.FileNode;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 

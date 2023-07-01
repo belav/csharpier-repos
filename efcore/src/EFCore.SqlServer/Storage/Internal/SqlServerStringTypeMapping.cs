@@ -3,6 +3,7 @@
 
 using System.Data;
 using System.Text;
+
 using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;

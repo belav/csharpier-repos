@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+
 using DSR::Microsoft.DiaSymReader;
 using PortablePdb = Microsoft.DiaSymReader.PortablePdb;
 

@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Text;
+
 using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;

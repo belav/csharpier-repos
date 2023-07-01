@@ -28,6 +28,7 @@
 
 using System;
 using System.Runtime.Serialization;
+
 using Microsoft.Build.Construction;
 using Microsoft.Build.Internal.Expressions;
 

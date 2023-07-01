@@ -5,6 +5,7 @@ namespace NetClient
 {
     using System;
     using System.Runtime.InteropServices;
+
     using Xunit;
 
     class ErrorTests

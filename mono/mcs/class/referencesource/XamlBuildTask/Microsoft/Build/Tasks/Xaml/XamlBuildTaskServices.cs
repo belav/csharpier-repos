@@ -5,23 +5,24 @@
 namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Security;
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml;
     using System.Xml.Linq;
-    using Microsoft.Build.Utilities;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using System.CodeDom;
-    using System.ComponentModel;
-    using System.CodeDom.Compiler;
-    using System.Linq;
+
     using Microsoft.Build.Framework;
+    using Microsoft.Build.Utilities;
     using XamlBuildTask;
 
     internal static class XamlBuildTaskServices

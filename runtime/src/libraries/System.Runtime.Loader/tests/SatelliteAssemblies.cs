@@ -2,13 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Resources;
-using System.Globalization;
-using Xunit;
+
 using ReferencedClassLib;
 using ReferencedClassLibNeutralIsSatellite;
+using Xunit;
 
 namespace System.Runtime.Loader.Tests
 {

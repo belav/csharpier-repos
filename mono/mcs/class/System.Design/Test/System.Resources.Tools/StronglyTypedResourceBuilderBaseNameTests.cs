@@ -1,3 +1,9 @@
+using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Resources.Tools;
+
+using Microsoft.CSharp;
 //
 // StronglyTypedResourceBuilderBaseNameTests.cs - tests the baseName
 // parameter passed to main Create overload
@@ -29,11 +35,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Resources.Tools;
-using System.CodeDom;
-using Microsoft.CSharp;
-using System.Collections.Generic;
 
 namespace MonoTests.System.Resources.Tools
 {

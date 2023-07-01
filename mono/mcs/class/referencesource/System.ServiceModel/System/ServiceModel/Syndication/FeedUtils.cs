@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Syndication
 {
     using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.Globalization;
 
     static class FeedUtils
     {

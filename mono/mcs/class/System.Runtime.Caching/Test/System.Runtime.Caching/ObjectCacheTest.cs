@@ -29,8 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Caching;
 
-using NUnit.Framework;
 using MonoTests.Common;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Caching
 {

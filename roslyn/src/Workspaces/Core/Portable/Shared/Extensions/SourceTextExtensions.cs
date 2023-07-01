@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Text;
 using System.Threading;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Microsoft.CodeAnalysis.Text;

@@ -4,15 +4,7 @@
 
 #if NET472 // AppDomains
 
-using System;
-using System.Collections.Immutable;
-using System.Reflection;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Roslyn.Test.Utilities;
-using Roslyn.Test.Utilities.Desktop;
-using Xunit;
-using Basic.Reference.Assemblies;
+using System;using System.Collections.Immutable;using System.Reflection;using Microsoft.CodeAnalysis.Diagnostics;using Microsoft.CodeAnalysis.Test.Utilities;using Roslyn.Test.Utilities;using Roslyn.Test.Utilities.Desktop;using Xunit;using Basic.Reference.Assemblies;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {

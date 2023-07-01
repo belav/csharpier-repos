@@ -6,14 +6,14 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
-    using System.Xml.Serialization;
-    using System.Reflection;
     using System.Collections;
-    using System.Web.Services;
+    using System.IO;
+    using System.Reflection;
     using System.Text;
+    using System.Web.Services;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     internal class XmlReturnWriter : MimeReturnWriter
     {

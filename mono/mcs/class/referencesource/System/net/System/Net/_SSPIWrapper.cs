@@ -6,13 +6,13 @@
 
 namespace System.Net
 {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System.ComponentModel;
-    using System.Net.Sockets;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Net.Security;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     internal static class SSPIWrapper
     {

@@ -1,3 +1,4 @@
+using System.Collections;
 //------------------------------------------------------------------------------
 // <copyright file="IXmlSchemaInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,7 +7,6 @@
 //------------------------------------------------------------------------------
 
 using System.Xml;
-using System.Collections;
 
 namespace System.Xml.Schema
 {

@@ -3,20 +3,21 @@
 
 using System;
 using System.Collections.Generic;
+using LocalVariableStore = System.Collections.Generic.Dictionary<
+    Mono.Cecil.Cil.VariableDefinition,
+    Mono.Linker.Dataflow.ValueBasicBlockPair
+>;
 using System.Diagnostics;
 using System.Linq;
+
 using ILLink.Shared;
 using ILLink.Shared.DataFlow;
+using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 using ILLink.Shared.TrimAnalysis;
 using ILLink.Shared.TypeSystemProxy;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Collections.Generic;
-using LocalVariableStore = System.Collections.Generic.Dictionary<
-    Mono.Cecil.Cil.VariableDefinition,
-    Mono.Linker.Dataflow.ValueBasicBlockPair
->;
-using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 namespace Mono.Linker.Dataflow
 {

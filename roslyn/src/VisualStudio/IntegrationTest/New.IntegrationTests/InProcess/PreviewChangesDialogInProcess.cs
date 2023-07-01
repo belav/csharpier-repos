@@ -4,6 +4,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.VisualStudio.Extensibility.Testing;
 
 namespace Roslyn.VisualStudio.IntegrationTests.InProcess

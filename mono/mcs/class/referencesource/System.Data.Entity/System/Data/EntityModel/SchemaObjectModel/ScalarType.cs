@@ -11,11 +11,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.Metadata.Edm;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Globalization;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {

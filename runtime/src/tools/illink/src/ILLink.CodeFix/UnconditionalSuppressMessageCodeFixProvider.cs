@@ -6,6 +6,7 @@ using System.Composition;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+
 using ILLink.CodeFixProvider;
 using ILLink.Shared;
 using Microsoft.CodeAnalysis;

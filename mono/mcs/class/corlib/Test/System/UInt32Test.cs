@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.Threading;
+
 // UInt32Test.cs - NUnit Test Cases for the System.UInt32 struct
 //
 // Mario Martinez (mariom925@home.om)
@@ -6,9 +10,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Globalization;
-using System.Threading;
 
 namespace MonoTests.System
 {

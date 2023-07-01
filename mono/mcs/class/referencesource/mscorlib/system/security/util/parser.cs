@@ -18,13 +18,13 @@
 ===========================================================*/
 namespace System.Security.Util
 {
-    using System.Text;
-    using System.Runtime.InteropServices;
     using System;
-    using BinaryReader = System.IO.BinaryReader;
     using ArrayList = System.Collections.ArrayList;
+    using BinaryReader = System.IO.BinaryReader;
     using Stream = System.IO.Stream;
     using StreamReader = System.IO.StreamReader;
+    using System.Runtime.InteropServices;
+    using System.Text;
     using Encoding = System.Text.Encoding;
 
     internal sealed class Parser

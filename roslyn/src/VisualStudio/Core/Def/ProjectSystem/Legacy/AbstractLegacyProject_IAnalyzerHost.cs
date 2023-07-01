@@ -6,6 +6,7 @@
 
 using System;
 using System.IO;
+
 using Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy

@@ -14,11 +14,7 @@
 // We want tracing enabled, so...
 #define TRACE
 
-using NUnit.Framework;
-using System;
-using System.IO;
-using System.Diagnostics;
-using System.Threading;
+using NUnit.Framework;using System;using System.IO;using System.Diagnostics;using System.Threading;
 
 namespace MonoTests.System.Diagnostics
 {

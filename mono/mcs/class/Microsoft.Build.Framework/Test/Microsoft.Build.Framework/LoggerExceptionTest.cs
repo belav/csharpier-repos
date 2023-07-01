@@ -27,6 +27,7 @@
 
 using System;
 using System.Runtime.Serialization;
+
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 

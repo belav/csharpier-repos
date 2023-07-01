@@ -1,9 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Globalization;
 using System.Text;
-using System.Collections.Generic;
 
 class TestCulture
 {

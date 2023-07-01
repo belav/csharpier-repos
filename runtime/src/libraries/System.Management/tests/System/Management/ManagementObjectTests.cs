@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 using Xunit.Sdk;

@@ -19,10 +19,10 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     // Encodes text into and out of UTF-8.  UTF-8 is a way of writing
     // Unicode characters with variable numbers of bytes per character,

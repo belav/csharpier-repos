@@ -1,6 +1,6 @@
 using System;
-using System.Reflection;
 using System.Configuration.Assemblies;
+using System.Reflection;
 
 [assembly: AssemblyVersion("7.0")]
 [assembly: AssemblyAlgorithmId(AssemblyHashAlgorithm.MD5)]

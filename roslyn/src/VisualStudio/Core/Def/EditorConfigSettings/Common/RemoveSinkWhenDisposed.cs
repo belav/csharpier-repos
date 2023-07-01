@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common

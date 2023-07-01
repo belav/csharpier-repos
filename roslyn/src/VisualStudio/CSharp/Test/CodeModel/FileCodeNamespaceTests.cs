@@ -6,6 +6,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using EnvDTE;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;

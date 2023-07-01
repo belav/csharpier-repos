@@ -5,11 +5,11 @@
 using System.IdentityModel;
 using System.IdentityModel.Tokens;
 using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.Security.Claims;
 
 using Claim = System.Security.Claims.Claim;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 
 namespace System.Security.Claims
 {

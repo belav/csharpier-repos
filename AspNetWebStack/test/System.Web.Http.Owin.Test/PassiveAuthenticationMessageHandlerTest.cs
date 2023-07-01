@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
+
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.TestCommon;

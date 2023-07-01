@@ -15,12 +15,7 @@ namespace System.Xml.Schema
         XmlSchema() { }
     }
 #else
-    using System.IO;
-    using System.Collections;
-    using System.ComponentModel;
-    using System.Xml.Serialization;
-    using System.Threading;
-    using System.Diagnostics;
+    using System.IO;using System.Collections;using System.ComponentModel;using System.Xml.Serialization;using System.Threading;using System.Diagnostics;
 
     /// <include file='doc\XmlSchema.uex' path='docs/doc[@for="XmlSchema"]/*' />
     /// <devdoc>

@@ -22,10 +22,7 @@ namespace Castle.DynamicProxy.Generators
     using System.Xml.Serialization;
 #endif
 
-    using Castle.DynamicProxy.Contributors;
-    using Castle.DynamicProxy.Generators.Emitters;
-    using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-    using Castle.DynamicProxy.Internal;
+    using Castle.DynamicProxy.Contributors;using Castle.DynamicProxy.Generators.Emitters;using Castle.DynamicProxy.Generators.Emitters.SimpleAST;using Castle.DynamicProxy.Internal;
 
     internal abstract class BaseInterfaceProxyGenerator : BaseProxyGenerator
     {

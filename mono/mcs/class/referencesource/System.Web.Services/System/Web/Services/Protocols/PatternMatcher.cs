@@ -1,10 +1,10 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.Text.RegularExpressions;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Text.RegularExpressions;
 
     /// <include file='doc\PatternMatcher.uex' path='docs/doc[@for="PatternMatcher"]/*' />
     /// <devdoc>

@@ -37,8 +37,9 @@
 
 using System;
 using System.Security.Cryptography;
-using Mono.Math.Prime.Generator;
+
 using Mono.Math.Prime;
+using Mono.Math.Prime.Generator;
 
 namespace Mono.Math
 {

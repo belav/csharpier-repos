@@ -27,10 +27,11 @@
 //
 
 using System;
-using NUnit.Framework;
-using System.Net.Http;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
+
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http
 {

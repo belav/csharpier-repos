@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Activation
 {
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.ServiceModel.Channels;
 
     class HostedTcpTransportManager : SharedTcpTransportManager
     {

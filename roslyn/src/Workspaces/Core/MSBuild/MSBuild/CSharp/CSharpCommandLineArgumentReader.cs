@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.MSBuild;
 using MSB = Microsoft.Build;
+using Microsoft.CodeAnalysis.MSBuild;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {

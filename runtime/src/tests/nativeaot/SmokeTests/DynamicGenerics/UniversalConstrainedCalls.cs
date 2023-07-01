@@ -3,11 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
+
 using CoreFXTestLibrary;
 using TypeOfRepo;
-using System.Runtime.CompilerServices;
 
 namespace UnivConstCalls
 {

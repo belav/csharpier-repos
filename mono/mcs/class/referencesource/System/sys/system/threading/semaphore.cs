@@ -11,20 +11,19 @@ namespace System.Threading
 {
     using System.IO;
     using System.IO.Ports; // For InternalResources class
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
+    using ComVisibleAttribute = System.Runtime.InteropServices.ComVisibleAttribute;
     // CoreSys build problem - we're using mscorlib's implementation assembly instead of one from asmmeta.  There's a conflicting NativeMethods type.
     using Marshal = System.Runtime.InteropServices.Marshal;
-    using ComVisibleAttribute = System.Runtime.InteropServices.ComVisibleAttribute;
-    using System.Threading;
     using System.Security;
     using System.Security.Permissions;
+    using System.Threading;
+
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 #if !FEATURE_PAL && !FEATURE_NETCORE
     using System.Security.AccessControl;
 #endif
-    using System.Runtime.Versioning;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;using System.Runtime.ConstrainedExecution;using System.Runtime.CompilerServices;
 
     [HostProtection(Synchronization = true, ExternalThreading = true)]
     [ComVisibleAttribute(false)]

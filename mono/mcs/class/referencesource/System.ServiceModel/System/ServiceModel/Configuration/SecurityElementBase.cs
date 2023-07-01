@@ -9,12 +9,12 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.Configuration;
     using System.IdentityModel.Tokens;
+    using System.Linq;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.Linq;
 
     public partial class SecurityElementBase : BindingElementExtensionElement
     {

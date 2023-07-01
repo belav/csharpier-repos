@@ -5,8 +5,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Internal;
-using System.Runtime.InteropServices;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
+using System.Runtime.InteropServices;
 
 namespace System.Drawing
 {

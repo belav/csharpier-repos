@@ -32,6 +32,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Xml;
+
 using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel

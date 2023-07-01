@@ -1,3 +1,4 @@
+using System.Runtime.ConstrainedExecution;
 //
 // System.Threading.HostExecutionContextManager class
 //
@@ -27,7 +28,6 @@
 //
 
 using System.Security.Permissions;
-using System.Runtime.ConstrainedExecution;
 
 namespace System.Threading
 {

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+
 using ILLink.Shared.DataFlow;
 
 namespace ILLink.RoslynAnalyzer.DataFlow

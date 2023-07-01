@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Tests;
+
 using Xunit;
 
 namespace System.Collections.Tests

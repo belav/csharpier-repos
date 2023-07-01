@@ -7,7 +7,6 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
-    using System.Globalization;
     using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
@@ -16,19 +15,20 @@ namespace System.Web.UI.Design.MobileControls
     using System.Data;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Globalization;
     using System.Web.UI;
+    using DataBinding = System.Web.UI.DataBinding;
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Web.UI.WebControls;
     using System.Windows.Forms;
-    using System.Windows.Forms.Design;
+    using CheckBox = System.Windows.Forms.CheckBox;
+    using ComboBox = System.Windows.Forms.ComboBox;
 
     using Control = System.Windows.Forms.Control;
+    using System.Windows.Forms.Design;
     using Label = System.Windows.Forms.Label;
-    using CheckBox = System.Windows.Forms.CheckBox;
     using TextBox = System.Windows.Forms.TextBox;
-    using ComboBox = System.Windows.Forms.ComboBox;
-    using DataBinding = System.Web.UI.DataBinding;
 
     /// <summary>
     ///   The General page for the ObjectList control.

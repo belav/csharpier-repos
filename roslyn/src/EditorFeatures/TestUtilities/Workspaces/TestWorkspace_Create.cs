@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel.Configuration;
 using System.Xml.Linq;
+
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.VisualStudio.Composition;

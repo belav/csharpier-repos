@@ -27,12 +27,12 @@
 using System;
 using System.Data;
 using System.IO;
-using System.Xml;
 using System.Reflection;
+using System.Xml;
+
 using NUnit.Framework;
 
 using nwind;
-
 #if MONO_STRICT
 using System.Diagnostics;
 

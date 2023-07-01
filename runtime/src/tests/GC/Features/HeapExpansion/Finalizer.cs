@@ -8,6 +8,7 @@ This test stimulates heap expansion on the finalizer thread
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
 using TestLibrary;
 
 public class Test_Finalizer

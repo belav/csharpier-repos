@@ -1,7 +1,7 @@
+using System;
 // Compiler options: -res:test-464.cs,TEST,private
 
 using System.Reflection;
-using System;
 
 class C
 {

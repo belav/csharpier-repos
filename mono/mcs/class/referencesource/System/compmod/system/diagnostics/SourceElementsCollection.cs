@@ -5,10 +5,7 @@
 //------------------------------------------------------------------------------
 
 #if CONFIGURATION_DEP
-using System.Configuration;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Xml;
+using System.Configuration;using System.Collections;using System.Collections.Specialized;using System.Xml;
 
 namespace System.Diagnostics
 {

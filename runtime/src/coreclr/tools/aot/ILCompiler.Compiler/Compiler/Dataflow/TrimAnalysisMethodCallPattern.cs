@@ -3,12 +3,13 @@
 
 using System.Collections.Immutable;
 using System.Diagnostics;
+
 using ILCompiler.Logging;
 using ILLink.Shared.DataFlow;
+using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 using ILLink.Shared.TrimAnalysis;
 using Internal.IL;
 using Internal.TypeSystem;
-using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 #nullable enable
 

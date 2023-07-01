@@ -26,29 +26,20 @@
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
-using System.Collections.Specialized;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
+using System.Runtime.Serialization;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using System.Xml;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
-using Newtonsoft.Json.Tests.TestObjects.Events;
-using Newtonsoft.Json.Tests.TestObjects.Organization;
-using Newtonsoft.Json.Utilities;
+using System.Text;using System.Xml;using Newtonsoft.Json.Linq;using Newtonsoft.Json.Serialization;using Newtonsoft.Json.Tests.TestObjects;using Newtonsoft.Json.Tests.TestObjects.Events;using Newtonsoft.Json.Tests.TestObjects.Organization;using Newtonsoft.Json.Utilities;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif

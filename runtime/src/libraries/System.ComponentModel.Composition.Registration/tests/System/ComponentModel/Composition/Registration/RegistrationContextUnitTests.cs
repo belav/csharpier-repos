@@ -3,6 +3,7 @@
 
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition.Registration.Tests

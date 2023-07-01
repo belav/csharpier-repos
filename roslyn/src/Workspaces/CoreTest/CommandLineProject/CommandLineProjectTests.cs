@@ -8,6 +8,7 @@ using System;
 using System.Composition.Hosting;
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;

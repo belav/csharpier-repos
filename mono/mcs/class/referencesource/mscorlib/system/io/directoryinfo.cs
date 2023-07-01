@@ -24,14 +24,7 @@ using System.Security;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif
-using System.Security.Permissions;
-using Microsoft.Win32;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
+using System.Security.Permissions;using Microsoft.Win32;using System.Text;using System.Runtime.InteropServices;using System.Globalization;using System.Runtime.Serialization;using System.Runtime.Versioning;using System.Diagnostics.Contracts;
 
 namespace System.IO
 {

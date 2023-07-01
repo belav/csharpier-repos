@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Xml;
+    using DictionaryManager = System.IdentityModel.DictionaryManager;
 
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
-    using DictionaryManager = System.IdentityModel.DictionaryManager;
+    using System.Xml;
 
     class SignatureConfirmationElement : ISignatureValueSecurityElement
     {

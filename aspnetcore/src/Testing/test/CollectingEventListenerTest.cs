@@ -3,6 +3,7 @@
 
 using System.Diagnostics.Tracing;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Testing.Tracing;
 using Xunit;
 

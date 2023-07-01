@@ -5,8 +5,7 @@
 #if !NO_CODEDOM
 using System.CodeDom;
 #endif
-using System.Collections.ObjectModel;
-using System.Reflection;
+using System.Collections.ObjectModel;using System.Reflection;
 
 namespace System.Runtime.Serialization
 {

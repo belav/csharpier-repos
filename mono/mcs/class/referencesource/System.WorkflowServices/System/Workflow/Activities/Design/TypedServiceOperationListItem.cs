@@ -5,8 +5,8 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.ServiceModel;
+    using System.Text;
 
     [ListItemView(typeof(ServiceOperationViewControl))]
     [ListItemDetailView(typeof(ServiceOperationDetailViewControl))]

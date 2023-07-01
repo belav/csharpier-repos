@@ -3,6 +3,7 @@
 
 using System.ComponentModel.Composition.Factories;
 using System.ComponentModel.Composition.Hosting;
+
 using Xunit;
 
 namespace System.ComponentModel.Composition

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis.MSBuild.Logging;
 using Roslyn.Utilities;
 

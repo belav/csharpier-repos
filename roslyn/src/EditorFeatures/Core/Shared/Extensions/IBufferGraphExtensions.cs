@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Projection;
 

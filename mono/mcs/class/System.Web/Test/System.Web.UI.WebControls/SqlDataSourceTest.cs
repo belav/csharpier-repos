@@ -1,3 +1,19 @@
+using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
+
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.WebControls.SqlDataSource
 //
@@ -30,21 +46,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.Configuration;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.IO;
-using System.Globalization;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Collections;
-using System.Text;
-using System.Data;
-
-using MonoTests.SystemWeb.Framework;
-using MonoTests.stand_alone.WebHarness;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

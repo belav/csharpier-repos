@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using DotNetOpenAuth.AspNet;
 
 namespace Microsoft.Web.WebPages.OAuth

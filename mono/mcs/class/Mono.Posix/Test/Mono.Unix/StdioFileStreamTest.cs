@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Text;
+
+using Mono.Unix;
 // StdioFileStreamTest.cs - NUnit2 Test Cases for Mono.Unix.StdioFileStream class
 //
 // Authors:
@@ -11,10 +16,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
-using Mono.Unix;
 
 namespace MonoTests.System.IO
 {

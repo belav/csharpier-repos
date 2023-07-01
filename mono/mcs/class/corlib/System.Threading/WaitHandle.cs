@@ -34,9 +34,7 @@ using System.Runtime.CompilerServices;
 #if FEATURE_REMOTING
 using System.Runtime.Remoting.Contexts;
 #endif
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
-using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;using Microsoft.Win32.SafeHandles;using System.Runtime.ConstrainedExecution;
 
 namespace System.Threading
 {

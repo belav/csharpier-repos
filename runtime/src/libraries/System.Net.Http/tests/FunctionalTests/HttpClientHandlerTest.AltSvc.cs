@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Net.Quic;
+using System.Net.Test.Common;
 using System.Threading.Tasks;
+
 using Xunit;
 using Xunit.Abstractions;
-using System.Net.Test.Common;
-using System.Net.Quic;
 
 namespace System.Net.Http.Functional.Tests
 {

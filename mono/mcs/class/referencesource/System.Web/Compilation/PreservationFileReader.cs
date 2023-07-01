@@ -9,15 +9,15 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Xml;
+    using System.IO;
     using System.Security;
     using System.Web.Configuration;
-    using System.Web.Util;
     using System.Web.UI;
+    using System.Web.Util;
+    using System.Xml;
 
     internal class PreservationFileReader
     {

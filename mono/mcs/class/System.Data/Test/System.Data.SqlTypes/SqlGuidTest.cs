@@ -1,3 +1,7 @@
+using System;
+using System.Data.SqlTypes;
+using System.Xml;
+
 //
 // SqlGuidTest.cs - NUnit Test Cases for System.Data.SqlTypes.SqlGuid
 //
@@ -33,9 +37,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Xml;
-using System.Data.SqlTypes;
 
 namespace MonoTests.System.Data.SqlTypes
 {

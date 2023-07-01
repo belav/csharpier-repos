@@ -7,11 +7,11 @@
 #region Using directives
 
 using System;
-using System.Diagnostics;
-using System.Transactions;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Threading;
+using System.Transactions;
 
 #endregion
 

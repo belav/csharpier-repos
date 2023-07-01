@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.IO;
+using System.Xml.Serialization;
+
 //
 // System.ComponentModel.CollectionConverterTest.cs -
 //	NUnit Test Cases for System.ComponentModel.CollectionConverter
@@ -28,11 +34,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Xml.Serialization;
 
 namespace MonoTests.System.ComponentModel
 {

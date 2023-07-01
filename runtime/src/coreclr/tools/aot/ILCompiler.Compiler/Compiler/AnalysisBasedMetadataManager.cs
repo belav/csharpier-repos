@@ -4,15 +4,16 @@
 using System;
 using System.Collections.Generic;
 
-using Internal.TypeSystem;
-
-using ILCompiler.Metadata;
-using ILCompiler.DependencyAnalysis;
-
 using Debug = System.Diagnostics.Debug;
-using EcmaModule = Internal.TypeSystem.Ecma.EcmaModule;
 using CustomAttributeHandle = System.Reflection.Metadata.CustomAttributeHandle;
 using ExportedTypeHandle = System.Reflection.Metadata.ExportedTypeHandle;
+
+using ILCompiler.DependencyAnalysis;
+
+using ILCompiler.Metadata;
+
+using Internal.TypeSystem;
+using EcmaModule = Internal.TypeSystem.Ecma.EcmaModule;
 
 namespace ILCompiler
 {

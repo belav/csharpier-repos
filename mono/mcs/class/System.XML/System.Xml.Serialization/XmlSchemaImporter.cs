@@ -33,12 +33,9 @@ using System.Xml;
 #if !MOBILE
 using System.CodeDom.Compiler;
 #endif
-using System.Xml.Schema;
-using System.Collections;
-using System.Collections.Generic;
+using System.Xml.Schema;using System.Collections;using System.Collections.Generic;
 #if CONFIGURATION_DEP
-using System.Configuration;
-using System.Xml.Serialization.Configuration;
+using System.Configuration;using System.Xml.Serialization.Configuration;
 #endif
 
 namespace System.Xml.Serialization

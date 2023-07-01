@@ -1,3 +1,10 @@
+using System;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Web;
+using System.Web.Security;
+
 //
 // UrlAuthorizationModuleCas.cs
 //	- CAS unit tests for System.Web.Security.UrlAuthorizationModule
@@ -28,13 +35,6 @@
 //
 
 using NUnit.Framework;
-
-using System;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Web;
-using System.Web.Security;
 
 namespace MonoCasTests.System.Web.Security
 {

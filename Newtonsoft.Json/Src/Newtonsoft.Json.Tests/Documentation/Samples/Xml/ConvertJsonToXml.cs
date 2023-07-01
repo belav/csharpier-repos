@@ -25,14 +25,9 @@
 
 #if !(NET20 || PORTABLE40)
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
+using System;using System.Collections.Generic;using System.Text;using System.Xml.Linq;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 

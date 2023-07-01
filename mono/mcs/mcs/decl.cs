@@ -16,8 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Mono.CompilerServices.SymbolWriter;
 
+using Mono.CompilerServices.SymbolWriter;
 #if MOBILE
 using XmlElement = System.Object;
 #else
@@ -25,11 +25,9 @@ using System.Xml;
 #endif
 
 #if STATIC
-using IKVM.Reflection;
-using IKVM.Reflection.Emit;
+using IKVM.Reflection;using IKVM.Reflection.Emit;
 #else
-using System.Reflection;
-using System.Reflection.Emit;
+using System.Reflection;using System.Reflection.Emit;
 #endif
 
 namespace Mono.CSharp

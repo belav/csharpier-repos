@@ -15,8 +15,8 @@
 namespace Castle.Core.Logging
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     ///   The TraceLogger sends all logging to the System.Diagnostics.TraceSource

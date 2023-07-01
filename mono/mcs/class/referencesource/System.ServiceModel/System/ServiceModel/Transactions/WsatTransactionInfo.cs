@@ -7,6 +7,7 @@ namespace System.ServiceModel.Transactions
     using System.Runtime;
     using System.ServiceModel.Security;
     using System.Transactions;
+
     using Microsoft.Transactions.Wsat.Messaging;
 
     class WsatTransactionInfo : TransactionInfo

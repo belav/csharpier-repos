@@ -2,14 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 #if NETFX_CORE // This file should only be included by the NetCore version of the formatting project, but adding a guard here just in case.
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System;using System.Collections;using System.Collections.Generic;using System.Diagnostics.CodeAnalysis;using System.Linq;using System.Text;using System.Threading;using System.Threading.Tasks;
 
 namespace System.Net.Http.Internal
 {

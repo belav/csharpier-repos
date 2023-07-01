@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Threading;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Extensions;

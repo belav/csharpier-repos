@@ -6,11 +6,11 @@ namespace System.ServiceModel.Discovery
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Channels;
+    using SR2 = System.ServiceModel.Discovery.SR;
     using System.ServiceModel.Discovery.Version11;
     using System.ServiceModel.Discovery.VersionApril2005;
     using System.ServiceModel.Discovery.VersionCD1;
     using System.Xml;
-    using SR2 = System.ServiceModel.Discovery.SR;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class DiscoveryVersion

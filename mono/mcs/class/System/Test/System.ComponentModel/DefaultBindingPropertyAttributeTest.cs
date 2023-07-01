@@ -22,12 +22,7 @@
 
 #if !MOBILE
 
-using NUnit.Framework;
-using System;
-using System.IO;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using NUnit.Framework;using System;using System.IO;using System.Collections.Specialized;using System.ComponentModel;using System.Xml.Serialization;
 
 namespace MonoTests.System.ComponentModel
 {

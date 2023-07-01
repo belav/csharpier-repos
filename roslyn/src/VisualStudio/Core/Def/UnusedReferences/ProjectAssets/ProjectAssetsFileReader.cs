@@ -5,6 +5,7 @@
 using System.Collections.Immutable;
 using System.IO;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.Shared.Utilities;
 using Newtonsoft.Json;
 

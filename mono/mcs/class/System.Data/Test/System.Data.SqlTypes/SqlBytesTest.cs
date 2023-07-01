@@ -1,3 +1,10 @@
+using System;
+using System.Data.SqlTypes;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+using System.Xml;
+
 //
 // SqlBytesTest.cs - NUnit Test Cases for System.Data.SqlTypes.SqlBytes
 //
@@ -29,12 +36,6 @@
 
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Xml;
-using System.Data.SqlTypes;
-using System.Threading;
-using System.Globalization;
 
 namespace MonoTests.System.Data.SqlTypes
 {

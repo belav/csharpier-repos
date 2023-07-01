@@ -7,8 +7,8 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Microsoft.Extensions.Internal;
 
+using Microsoft.Extensions.Internal;
 #if JSONNET
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 

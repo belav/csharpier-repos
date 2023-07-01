@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //
 // System.AppDomainSetup.cs
 //
@@ -32,15 +33,14 @@
 //
 
 using System.Globalization;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Runtime.Serialization.Formatters.Binary;
 
 using System.Runtime.Hosting;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security;
+using System.Security.Permissions;
 using System.Security.Policy;
 
 namespace System

@@ -4,6 +4,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
 

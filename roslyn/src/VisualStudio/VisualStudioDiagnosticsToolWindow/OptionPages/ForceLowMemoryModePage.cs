@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+
 using Microsoft.CodeAnalysis.Editor.Shared.Options;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.NavigateTo;

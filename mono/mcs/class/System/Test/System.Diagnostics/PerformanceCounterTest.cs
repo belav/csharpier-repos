@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Threading;
+
 // This test code derives from two places:
 //
 // 1.
@@ -13,11 +19,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Threading;
-using System.Diagnostics;
-using System.Collections;
-using System.Collections.Specialized;
 
 #if !MOBILE
 

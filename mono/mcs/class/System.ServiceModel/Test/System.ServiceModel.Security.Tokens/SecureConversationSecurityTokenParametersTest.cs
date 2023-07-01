@@ -26,20 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 #if !MOBILE && !XAMMAC_4_5
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Net;
-using System.Net.Security;
-using System.IdentityModel.Selectors;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
-using NUnit.Framework;
-
-using Parameters = System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters;
+using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.Net;using System.Net.Security;using System.IdentityModel.Selectors;using System.ServiceModel;using System.ServiceModel.Channels;using System.ServiceModel.Description;using System.ServiceModel.Security;using System.ServiceModel.Security.Tokens;using NUnit.Framework;using Parameters = System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters;
 
 namespace MonoTests.System.ServiceModel
 {

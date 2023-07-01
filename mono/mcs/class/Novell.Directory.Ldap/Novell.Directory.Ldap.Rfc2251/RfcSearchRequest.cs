@@ -30,9 +30,9 @@
 //
 
 using System;
-using LdapException = Novell.Directory.Ldap.LdapException;
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Asn1;
+using LdapException = Novell.Directory.Ldap.LdapException;
 
 namespace Novell.Directory.Ldap.Rfc2251
 {

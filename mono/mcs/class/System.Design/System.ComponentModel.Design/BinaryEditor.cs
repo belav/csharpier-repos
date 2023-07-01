@@ -1,3 +1,4 @@
+using System.Drawing.Design;
 //
 // System.ComponentModel.Design.BinaryEditor
 //
@@ -29,7 +30,6 @@
 //
 
 using System.Windows.Forms;
-using System.Drawing.Design;
 
 namespace System.ComponentModel.Design
 {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.Serialization;
+
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.Formatting;

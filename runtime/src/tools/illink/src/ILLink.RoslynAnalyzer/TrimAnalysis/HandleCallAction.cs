@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+
 using ILLink.RoslynAnalyzer;
 using ILLink.RoslynAnalyzer.DataFlow;
 using ILLink.RoslynAnalyzer.TrimAnalysis;

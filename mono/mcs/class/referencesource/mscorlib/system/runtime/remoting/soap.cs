@@ -15,8 +15,10 @@ namespace System.Runtime.Remoting
 {
     using System;
     using System.Collections;
+    using System.Diagnostics.Contracts;
+
+    using CultureInfo = System.Globalization.CultureInfo;
     using System.IO;
-    using System.Text;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting.Activation;
@@ -25,10 +27,8 @@ namespace System.Runtime.Remoting
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Permissions;
+    using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
-
-    using CultureInfo = System.Globalization.CultureInfo;
 
     [System.Security.SecurityCritical] // auto-generated_required
     [System.Runtime.InteropServices.ComVisible(true)]

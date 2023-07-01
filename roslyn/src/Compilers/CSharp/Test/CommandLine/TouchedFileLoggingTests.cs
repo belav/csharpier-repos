@@ -10,13 +10,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Resources.Proprietary;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using Xunit;
 using static Roslyn.Test.Utilities.SharedResourceHelpers;
 using static Roslyn.Test.Utilities.TestMetadata;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
 {

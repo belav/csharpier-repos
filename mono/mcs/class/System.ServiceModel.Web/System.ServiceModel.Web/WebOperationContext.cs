@@ -30,15 +30,10 @@ using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-
 #if MOBILE // Note that moonlight System.ServiceModel.Web.dll does not contain this class.
-using IncomingWebRequestContext = System.Object;
-using OutgoingWebResponseContext = System.Object;
+using IncomingWebRequestContext = System.Object;using OutgoingWebResponseContext = System.Object;
 #else
-using System.Runtime.Serialization.Json;
-using System.ServiceModel.Syndication;
-using System.Xml;
-using System.Xml.Serialization;
+using System.Runtime.Serialization.Json;using System.ServiceModel.Syndication;using System.Xml;using System.Xml.Serialization;
 #endif
 
 namespace System.ServiceModel.Web

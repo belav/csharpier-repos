@@ -14,10 +14,10 @@ namespace System.Web.UI.HtmlControls
 {
     using System;
     using System.ComponentModel;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
     using Debug = System.Web.Util.Debug;
-    using System.Security.Permissions;
 
     /*
      * An abstract base class representing an intrinsic INPUT tag.

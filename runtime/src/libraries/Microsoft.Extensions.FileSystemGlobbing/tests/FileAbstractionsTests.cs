@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Linq;
+
 using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 using Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility;
 using Xunit;

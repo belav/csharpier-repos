@@ -16,6 +16,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+
     using CellConstantSet = Common.Utils.Set<Constant>;
 
     // This class keeps track of the domain values of the different members

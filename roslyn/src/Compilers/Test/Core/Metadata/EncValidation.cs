@@ -6,6 +6,7 @@
 
 using System;
 using System.Reflection.Metadata;
+
 using Xunit;
 
 namespace Roslyn.Test.Utilities

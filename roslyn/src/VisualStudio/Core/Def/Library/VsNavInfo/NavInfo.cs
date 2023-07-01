@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Immutable;
+
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavInfo

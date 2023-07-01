@@ -7,10 +7,10 @@
 namespace System.Net.Mime
 {
     using System;
-    using System.Net.Mail;
-    using System.Globalization;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Net.Mail;
 
     #region RFC2822 date time string format description
     // Format of Date Time string as described by RFC 2822 section 4.3 which obsoletes

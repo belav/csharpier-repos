@@ -1,18 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
+using Internal.Cryptography.Pal.Native;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.Win32.SafeHandles;
-using System;
-using System.Text;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Internal.Cryptography.Pal.Native;
-
-using System.Security.Cryptography;
-using SafeX509ChainHandle = Microsoft.Win32.SafeHandles.SafeX509ChainHandle;
 using SafePasswordHandle = Microsoft.Win32.SafeHandles.SafePasswordHandle;
-using System.Security.Cryptography.X509Certificates;
+using SafeX509ChainHandle = Microsoft.Win32.SafeHandles.SafeX509ChainHandle;
 
 namespace Internal.Cryptography.Pal
 {

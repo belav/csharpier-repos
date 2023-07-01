@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+
 //
 // ToBase64TransformTest.cs - NUnit Test Cases for ToBase64Transform
 //
@@ -27,8 +30,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Security.Cryptography;
 
 namespace MonoTests.System.Security.Cryptography
 {

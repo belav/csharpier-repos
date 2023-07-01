@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Collections;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Xml;
-using System.Runtime;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Xml;
 
 namespace GCTest
 {

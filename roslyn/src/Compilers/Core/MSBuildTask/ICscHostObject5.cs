@@ -4,6 +4,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Microsoft.Build.Tasks.Hosting;
 
 namespace Microsoft.CodeAnalysis.BuildTasks

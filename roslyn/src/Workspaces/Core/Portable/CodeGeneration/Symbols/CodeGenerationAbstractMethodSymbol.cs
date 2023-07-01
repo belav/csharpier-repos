@@ -6,6 +6,7 @@
 
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
+
 using Microsoft.CodeAnalysis.Editing;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration

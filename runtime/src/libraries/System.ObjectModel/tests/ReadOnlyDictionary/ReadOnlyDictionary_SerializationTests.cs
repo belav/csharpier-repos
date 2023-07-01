@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Tests;
+
 using Xunit;
 
 namespace System.Collections.ObjectModel.Tests

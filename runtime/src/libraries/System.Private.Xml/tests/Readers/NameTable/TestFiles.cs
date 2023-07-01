@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Tests;
+
 using XmlCoreTest.Common;
 
 namespace System.Xml.NameTableTests

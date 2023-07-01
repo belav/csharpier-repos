@@ -8,6 +8,7 @@ using System.Runtime;
 using System.Runtime.Serialization;
 using System.Security;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Diagnostics;
 using System.ServiceModel.Dispatcher;
@@ -15,7 +16,6 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Configuration;
 using System.Web.UI;
-using System.ServiceModel.Activation;
 
 namespace System.ServiceModel.Web
 {

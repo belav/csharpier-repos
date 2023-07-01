@@ -1,4 +1,7 @@
-﻿#region License
+﻿using System;
+using System.Collections.Generic;
+
+#region License
 // Copyright (c) 2007 James Newton-King
 //
 // Permission is hereby granted, free of charge, to any person
@@ -24,8 +27,6 @@
 #endregion
 
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -33,9 +34,7 @@ using System.Linq;
 #endif
 using System.Text;
 #if DNXCORE50
-using Xunit;
-using Test = Xunit.FactAttribute;
-using Assert = Newtonsoft.Json.Tests.XUnitAssert;
+using Xunit;using Test = Xunit.FactAttribute;using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 

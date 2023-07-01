@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Globalization;
 //------------------------------------------------------------------------------
 // <copyright file="CharEntitiesEncodingFallback.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -6,8 +8,6 @@
 //------------------------------------------------------------------------------
 
 using System.Text;
-using System.Diagnostics;
-using System.Globalization;
 
 namespace System.Xml
 {

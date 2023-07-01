@@ -12,10 +12,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
+using static AnalyzerRunner.Program;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Diagnostics.Telemetry;
-using static AnalyzerRunner.Program;
 
 namespace AnalyzerRunner
 {

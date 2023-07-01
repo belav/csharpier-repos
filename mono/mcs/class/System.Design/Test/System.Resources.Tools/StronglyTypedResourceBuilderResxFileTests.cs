@@ -1,3 +1,11 @@
+using System;
+using System.CodeDom;
+using System.Drawing;
+using System.IO;
+using System.Resources;
+using System.Resources.Tools;
+
+using Microsoft.CSharp;
 //
 // StronglyTypedResourceBuilderResxFileTests.cs - tests overloads of Create
 // method that accept resx file names
@@ -29,13 +37,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.Resources.Tools;
-using Microsoft.CSharp;
-using System.IO;
-using System.CodeDom;
-using System.Resources;
-using System.Drawing;
 
 namespace MonoTests.System.Resources.Tools
 {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
 

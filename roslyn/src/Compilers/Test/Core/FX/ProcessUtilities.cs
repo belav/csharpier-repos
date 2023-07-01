@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+
 using Xunit;
 
 namespace Roslyn.Test.Utilities

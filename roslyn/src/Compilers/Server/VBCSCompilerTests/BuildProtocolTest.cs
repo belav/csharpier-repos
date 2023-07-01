@@ -9,6 +9,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis.CommandLine;
 using Roslyn.Test.Utilities;
 using Xunit;

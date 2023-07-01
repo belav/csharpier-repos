@@ -33,8 +33,8 @@ namespace System.Web.UI
     using System.Web.Caching;
     using System.Web.Compilation;
     using System.Web.Util;
-    using System.Xml;
     using Debug = System.Web.Util.Debug;
+    using System.Xml;
 
     /*
      * Base class for Pages and UserControls

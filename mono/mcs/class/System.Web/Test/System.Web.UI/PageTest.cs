@@ -1,3 +1,18 @@
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Security.Principal;
+using System.Threading;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.Adapters;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+
+using MonoTests.stand_alone.WebHarness;
+using MonoTests.SystemWeb.Framework;
 //
 // Tests for System.Web.UI.Page
 //
@@ -29,20 +44,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Threading;
-using System.Security.Principal;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.Adapters;
-using MonoTests.SystemWeb.Framework;
-using MonoTests.stand_alone.WebHarness;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Collections;
-using System.Collections.Specialized;
-using System.Net;
 
 namespace MonoTests.System.Web.UI
 {

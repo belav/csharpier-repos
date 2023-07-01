@@ -18,12 +18,12 @@ namespace System.Security
 {
     using System;
     using System.Collections;
-    using System.Security.Util;
-    using System.Text;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
-    using System.Diagnostics.Contracts;
+    using System.Security.Util;
     using StringMaker = System.Security.Util.Tokenizer.StringMaker;
+    using System.Text;
 #if !MONO
     [Serializable]
     internal sealed class SecurityDocumentElement : ISecurityElementFactory

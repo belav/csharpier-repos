@@ -1,14 +1,3 @@
-//
-// SocketCas.cs - CAS unit tests for System.Net.WebRequest class
-//
-// Author:
-//	Sebastien Pouliot  <sebastien@ximian.com>
-//
-// Copyright (C) 2005 Novell, Inc (http://www.novell.com)
-//
-
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Net;
@@ -19,6 +8,16 @@ using System.Text;
 using System.Threading;
 
 using MonoTests.System.Net.Sockets;
+//
+// SocketCas.cs - CAS unit tests for System.Net.WebRequest class
+//
+// Author:
+//	Sebastien Pouliot  <sebastien@ximian.com>
+//
+// Copyright (C) 2005 Novell, Inc (http://www.novell.com)
+//
+
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Net.Sockets
 {

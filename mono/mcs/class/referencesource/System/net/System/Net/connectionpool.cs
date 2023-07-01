@@ -7,10 +7,10 @@
 namespace System.Net
 {
     using System;
-    using System.Net.Sockets;
     using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Net.Sockets;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;

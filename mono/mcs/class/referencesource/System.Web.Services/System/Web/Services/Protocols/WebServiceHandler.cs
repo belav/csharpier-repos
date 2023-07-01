@@ -6,26 +6,27 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.Diagnostics;
     using System;
-    using System.Runtime.InteropServices;
-    using System.Reflection;
-    using System.IO;
     using System.Collections;
-    using System.Web;
-    using System.Web.SessionState;
-    using System.Web.Services.Interop;
-    using System.Configuration;
-    using Microsoft.Win32;
-    using System.Threading;
-    using System.Text;
-    using System.Web.UI;
-    using System.Web.Util;
-    using System.Web.UI.WebControls;
     using System.ComponentModel; // for CompModSwitches
+    using System.Configuration;
+    using System.Diagnostics;
     using System.EnterpriseServices;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting.Messaging;
+    using System.Text;
+    using System.Threading;
+    using System.Web;
     using System.Web.Services.Diagnostics;
+    using System.Web.Services.Interop;
+    using System.Web.SessionState;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+    using System.Web.Util;
+
+    using Microsoft.Win32;
 
     internal class WebServiceHandler
     {

@@ -19,24 +19,25 @@ namespace System.Workflow.ComponentModel.Design
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Serialization;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Windows.Forms;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Text;
-    using System.Reflection;
+    using System.Workflow.ComponentModel.Serialization;
     using System.Xml;
-    using System.Globalization;
+
     using Microsoft.Win32;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics.CodeAnalysis;
 
     #region Class Helpers
     internal static class Helpers

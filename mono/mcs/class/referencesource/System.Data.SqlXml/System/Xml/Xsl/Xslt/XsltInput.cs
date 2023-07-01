@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 //------------------------------------------------------------------------------
 // <copyright file="XsltInput.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -10,7 +11,6 @@
 using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
-using System.Collections.Generic;
 
 namespace System.Xml.Xsl.Xslt
 {

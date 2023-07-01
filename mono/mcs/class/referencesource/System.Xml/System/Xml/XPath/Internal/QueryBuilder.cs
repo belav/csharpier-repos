@@ -8,11 +8,12 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
-    using System.Xml;
-    using System.Xml.XPath;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Xml;
+    using System.Xml.XPath;
+
     using FT = Function.FunctionType;
 
     internal sealed class QueryBuilder

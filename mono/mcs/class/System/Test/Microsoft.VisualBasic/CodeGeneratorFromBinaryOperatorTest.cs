@@ -8,10 +8,10 @@
 // (c) 2005 Novell
 //
 using System;
-using System.IO;
-using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.IO;
+using System.Text;
 
 using Microsoft.VisualBasic;
 

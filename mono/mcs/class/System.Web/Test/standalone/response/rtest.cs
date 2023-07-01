@@ -6,8 +6,8 @@
 // headers
 //
 using System;
-using System.Net;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 
 class X

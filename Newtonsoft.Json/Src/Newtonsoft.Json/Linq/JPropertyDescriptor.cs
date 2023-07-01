@@ -24,8 +24,7 @@
 #endregion
 
 #if HAVE_COMPONENT_MODEL
-using System;
-using System.ComponentModel;
+using System;using System.ComponentModel;
 
 namespace Newtonsoft.Json.Linq
 {

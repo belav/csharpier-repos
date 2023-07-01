@@ -1,3 +1,8 @@
+using System;
+using System.IO;
+using System.Text;
+using System.Threading;
+
 // StreamWriterTest.cs - NUnit Test Cases for the SystemIO.StreamWriter class
 //
 // David Brandt (bucky@keystreams.com)
@@ -6,10 +11,6 @@
 //
 
 using NUnit.Framework;
-using System;
-using System.IO;
-using System.Text;
-using System.Threading;
 
 namespace MonoTests.System.IO
 {

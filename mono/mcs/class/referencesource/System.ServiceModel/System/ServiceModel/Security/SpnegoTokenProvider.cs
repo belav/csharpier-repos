@@ -9,16 +9,16 @@ namespace System.ServiceModel.Security
     using System.Globalization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+
+    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using System.Net;
     using System.Runtime;
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-
-    using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
-    using System.ServiceModel.Description;
 
     class SpnegoTokenProvider : SspiNegotiationTokenProvider
     {
