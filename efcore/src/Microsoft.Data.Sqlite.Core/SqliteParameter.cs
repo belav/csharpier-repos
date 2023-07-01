@@ -6,8 +6,7 @@ using System.Data;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Data.Sqlite.Properties;
-using SQLitePCL;
-using static SQLitePCL.raw;
+using SQLitePCL;using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
 {

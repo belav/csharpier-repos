@@ -3,8 +3,7 @@
 
 using System.Data.Common;
 using Microsoft.Data.Sqlite.Properties;
-using SQLitePCL;
-using static SQLitePCL.raw;
+using SQLitePCL;using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
 {

@@ -3,8 +3,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using static Microsoft.EntityFrameworkCore.Tools.AnsiConstants;
+using System.Linq;using static Microsoft.EntityFrameworkCore.Tools.AnsiConstants;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 

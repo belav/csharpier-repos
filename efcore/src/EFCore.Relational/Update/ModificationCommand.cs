@@ -6,8 +6,8 @@ using System.Data;
 using System.Text.Json.Nodes;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using IColumnMapping = Microsoft.EntityFrameworkCore.Metadata.IColumnMapping;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ITableMapping = Microsoft.EntityFrameworkCore.Metadata.ITableMapping;
 
 namespace Microsoft.EntityFrameworkCore.Update;

@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using SQLitePCL;
-using static SQLitePCL.raw;
+using SQLitePCL;using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
 {

@@ -5,8 +5,7 @@ using System.Data;
 using System.Text;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
-using Microsoft.EntityFrameworkCore.Sqlite.Internal;
-using static SQLitePCL.raw;
+using Microsoft.EntityFrameworkCore.Sqlite.Internal;using static SQLitePCL.raw;
 
 namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal;
 

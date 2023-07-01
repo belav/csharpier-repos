@@ -11,18 +11,17 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
+using Index = Microsoft.EntityFrameworkCore.Scaffolding.Internal.Index;
 using Microsoft.EntityFrameworkCore.Scaffolding.TestModel.Internal;
 using Microsoft.EntityFrameworkCore.Sqlite.Design.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Design.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
+using IdentityUser = Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity.IdentityUser;
 using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
-using Newtonsoft.Json.Linq;
-using static Microsoft.EntityFrameworkCore.Migrations.Design.CSharpMigrationsGeneratorTest;
+using Newtonsoft.Json.Linq;using static Microsoft.EntityFrameworkCore.Migrations.Design.CSharpMigrationsGeneratorTest;
 using static Microsoft.EntityFrameworkCore.Scaffolding.Internal.CSharpRuntimeModelCodeGeneratorTest;
-using IdentityUser = Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity.IdentityUser;
-using Index = Microsoft.EntityFrameworkCore.Scaffolding.Internal.Index;
 
 public class GlobalNamespaceContext : ContextBase
 {

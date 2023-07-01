@@ -4,8 +4,7 @@
 using System;
 using System.IO;
 using Microsoft.Data.Sqlite.Properties;
-using Xunit;
-using static SQLitePCL.raw;
+using Xunit;using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
 {

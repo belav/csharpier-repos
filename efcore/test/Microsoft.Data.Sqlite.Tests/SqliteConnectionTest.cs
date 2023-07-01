@@ -8,8 +8,7 @@ using System.Data.Common;
 using System.IO;
 using System.Linq;
 using Microsoft.Data.Sqlite.Properties;
-using Xunit;
-using static SQLitePCL.raw;
+using Xunit;using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
 {

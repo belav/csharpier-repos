@@ -3,13 +3,13 @@
 
 using System.Collections;
 using System.Data;
+using IsolationLevel = System.Data.IsolationLevel;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Index = Microsoft.EntityFrameworkCore.Metadata.Internal.Index;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
-using Index = Microsoft.EntityFrameworkCore.Metadata.Internal.Index;
-using IsolationLevel = System.Data.IsolationLevel;
 
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
