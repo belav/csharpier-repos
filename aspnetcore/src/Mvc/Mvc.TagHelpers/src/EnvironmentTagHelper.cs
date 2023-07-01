@@ -79,7 +79,11 @@ public class EnvironmentTagHelper : TagHelper
         // Always strip the outer tag name as we never want <environment> to render
         output.TagName = null;
 
-        if (string.IsNullOrWhiteSpace(Names) && string.IsNullOrWhiteSpace(Include) && string.IsNullOrWhiteSpace(Exclude))
+        if (
+            string.IsNullOrWhiteSpace(Names)
+            && string.IsNullOrWhiteSpace(Include)
+            && string.IsNullOrWhiteSpace(Exclude)
+        )
         {
             // No names specified, do nothing
             return;
@@ -100,7 +104,12 @@ public class EnvironmentTagHelper : TagHelper
                 var environment = item.Trim();
                 if (environment.HasValue && environment.Length > 0)
                 {
-                    if (environment.Equals(currentEnvironmentName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        environment.Equals(
+                            currentEnvironmentName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // Matching environment name found, suppress output
                         output.SuppressOutput();
@@ -120,7 +129,12 @@ public class EnvironmentTagHelper : TagHelper
                 if (environment.HasValue && environment.Length > 0)
                 {
                     hasEnvironments = true;
-                    if (environment.Equals(currentEnvironmentName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        environment.Equals(
+                            currentEnvironmentName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // Matching environment name found, do nothing
                         return;
@@ -138,7 +152,12 @@ public class EnvironmentTagHelper : TagHelper
                 if (environment.HasValue && environment.Length > 0)
                 {
                     hasEnvironments = true;
-                    if (environment.Equals(currentEnvironmentName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        environment.Equals(
+                            currentEnvironmentName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // Matching environment name found, do nothing
                         return;

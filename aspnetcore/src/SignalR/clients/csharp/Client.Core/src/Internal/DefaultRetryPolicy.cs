@@ -9,11 +9,11 @@ internal sealed class DefaultRetryPolicy : IRetryPolicy
 {
     internal static TimeSpan?[] DEFAULT_RETRY_DELAYS_IN_MILLISECONDS = new TimeSpan?[]
     {
-            TimeSpan.Zero,
-            TimeSpan.FromSeconds(2),
-            TimeSpan.FromSeconds(10),
-            TimeSpan.FromSeconds(30),
-            null,
+        TimeSpan.Zero,
+        TimeSpan.FromSeconds(2),
+        TimeSpan.FromSeconds(10),
+        TimeSpan.FromSeconds(30),
+        null,
     };
 
     private readonly TimeSpan?[] _retryDelays;

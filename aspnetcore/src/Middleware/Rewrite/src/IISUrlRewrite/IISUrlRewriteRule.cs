@@ -14,19 +14,21 @@ internal sealed class IISUrlRewriteRule : IRule
     public UrlAction Action { get; }
     public bool Global { get; }
 
-    public IISUrlRewriteRule(string? name,
+    public IISUrlRewriteRule(
+        string? name,
         UrlMatch initialMatch,
         ConditionCollection? conditions,
-        UrlAction action)
-        : this(name, initialMatch, conditions, action, false)
-    {
-    }
+        UrlAction action
+    )
+        : this(name, initialMatch, conditions, action, false) { }
 
-    public IISUrlRewriteRule(string? name,
+    public IISUrlRewriteRule(
+        string? name,
         UrlMatch initialMatch,
         ConditionCollection? conditions,
         UrlAction action,
-        bool global)
+        bool global
+    )
     {
         Name = name;
         InitialMatch = initialMatch;
@@ -59,7 +61,11 @@ internal sealed class IISUrlRewriteRule : IRule
         MatchResults? condResult = null;
         if (Conditions != null)
         {
-            condResult = ConditionEvaluator.Evaluate(Conditions, context, initMatchResults.BackReferences);
+            condResult = ConditionEvaluator.Evaluate(
+                Conditions,
+                context,
+                initMatchResults.BackReferences
+            );
             if (!condResult.Success)
             {
                 context.Logger.UrlRewriteNotMatchedRule(Name);

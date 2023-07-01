@@ -132,7 +132,13 @@ public class StringSegmentTest
     [InlineData("abcdef", 1, 4, 1, 'c')]
     [InlineData("abcdef", 1, 4, 2, 'd')]
     [InlineData("abcdef", 1, 4, 3, 'e')]
-    public void StringSegment_Indexer_InRange(string value, int offset, int length, int index, char expected)
+    public void StringSegment_Indexer_InRange(
+        string value,
+        int offset,
+        int length,
+        int index,
+        char expected
+    )
     {
         var segment = new StringSegment(value, offset, length);
 
@@ -145,7 +151,12 @@ public class StringSegmentTest
     [InlineData("", 0, 0, 0)]
     [InlineData("a", 0, 1, -1)]
     [InlineData("a", 0, 1, 1)]
-    public void StringSegment_Indexer_OutOfRangeThrows(string value, int offset, int length, int index)
+    public void StringSegment_Indexer_OutOfRangeThrows(
+        string value,
+        int offset,
+        int length,
+        int index
+    )
     {
         var segment = new StringSegment(value, offset, length);
 
@@ -158,18 +169,18 @@ public class StringSegmentTest
         {
             // candidate / comparer / expected result
             return new TheoryData<string, StringComparison, bool>()
-                {
-                    { "Hello", StringComparison.Ordinal, false },
-                    { "ello ", StringComparison.Ordinal, false },
-                    { "ll", StringComparison.Ordinal, false },
-                    { "ello", StringComparison.Ordinal, true },
-                    { "llo", StringComparison.Ordinal, true },
-                    { "lo", StringComparison.Ordinal, true },
-                    { "o", StringComparison.Ordinal, true },
-                    { string.Empty, StringComparison.Ordinal, true },
-                    { "eLLo", StringComparison.Ordinal, false },
-                    { "eLLo", StringComparison.OrdinalIgnoreCase, true },
-                };
+            {
+                { "Hello", StringComparison.Ordinal, false },
+                { "ello ", StringComparison.Ordinal, false },
+                { "ll", StringComparison.Ordinal, false },
+                { "ello", StringComparison.Ordinal, true },
+                { "llo", StringComparison.Ordinal, true },
+                { "lo", StringComparison.Ordinal, true },
+                { "o", StringComparison.Ordinal, true },
+                { string.Empty, StringComparison.Ordinal, true },
+                { "eLLo", StringComparison.Ordinal, false },
+                { "eLLo", StringComparison.OrdinalIgnoreCase, true },
+            };
         }
     }
 
@@ -179,24 +190,28 @@ public class StringSegmentTest
         {
             // candidate / comparer / expected result
             return new TheoryData<string, StringComparison, bool>()
-                {
-                    { "Hello", StringComparison.Ordinal, false },
-                    { "ello ", StringComparison.Ordinal, false },
-                    { "ll", StringComparison.Ordinal, false },
-                    { "ello", StringComparison.Ordinal, true },
-                    { "ell", StringComparison.Ordinal, true },
-                    { "el", StringComparison.Ordinal, true },
-                    { "e", StringComparison.Ordinal, true },
-                    { string.Empty, StringComparison.Ordinal, true },
-                    { "eLLo", StringComparison.Ordinal, false },
-                    { "eLLo", StringComparison.OrdinalIgnoreCase, true },
-                };
+            {
+                { "Hello", StringComparison.Ordinal, false },
+                { "ello ", StringComparison.Ordinal, false },
+                { "ll", StringComparison.Ordinal, false },
+                { "ello", StringComparison.Ordinal, true },
+                { "ell", StringComparison.Ordinal, true },
+                { "el", StringComparison.Ordinal, true },
+                { "e", StringComparison.Ordinal, true },
+                { string.Empty, StringComparison.Ordinal, true },
+                { "eLLo", StringComparison.Ordinal, false },
+                { "eLLo", StringComparison.OrdinalIgnoreCase, true },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(StartsWithData))]
-    public void StringSegment_StartsWith_Valid(string candidate, StringComparison comparison, bool expectedResult)
+    public void StringSegment_StartsWith_Valid(
+        string candidate,
+        StringComparison comparison,
+        bool expectedResult
+    )
     {
         // Arrange
         var segment = new StringSegment("Hello, World!", 1, 4);
@@ -227,16 +242,20 @@ public class StringSegmentTest
         {
             // candidate / comparer / expected result
             return new TheoryData<string, StringComparison, bool>()
-                {
-                    { "eLLo", StringComparison.OrdinalIgnoreCase, true },
-                    { "eLLo", StringComparison.Ordinal, false },
-                };
+            {
+                { "eLLo", StringComparison.OrdinalIgnoreCase, true },
+                { "eLLo", StringComparison.Ordinal, false },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(EqualsStringData))]
-    public void StringSegment_Equals_String_Valid(string candidate, StringComparison comparison, bool expectedResult)
+    public void StringSegment_Equals_String_Valid(
+        string candidate,
+        StringComparison comparison,
+        bool expectedResult
+    )
     {
         // Arrange
         var segment = new StringSegment("Hello, World!", 1, 4);
@@ -335,14 +354,14 @@ public class StringSegmentTest
         get
         {
             return new TheoryData<StringSegment, StringSegment>
-                {
-                    { default(StringSegment), default(StringSegment) },
-                    { default(StringSegment), new StringSegment() },
-                    { new StringSegment("Test123", 0, 0), new StringSegment(string.Empty) },
-                    { new StringSegment("C`est si bon", 2, 3), new StringSegment("Yesterday", 1, 3) },
-                    { new StringSegment("Hello", 1, 4), new StringSegment("Hello world", 1, 4) },
-                    { new StringSegment("Hello"), new StringSegment("Hello", 0, 5) },
-                };
+            {
+                { default(StringSegment), default(StringSegment) },
+                { default(StringSegment), new StringSegment() },
+                { new StringSegment("Test123", 0, 0), new StringSegment(string.Empty) },
+                { new StringSegment("C`est si bon", 2, 3), new StringSegment("Yesterday", 1, 3) },
+                { new StringSegment("Hello", 1, 4), new StringSegment("Hello world", 1, 4) },
+                { new StringSegment("Hello"), new StringSegment("Hello", 0, 5) },
+            };
         }
     }
 
@@ -364,12 +383,12 @@ public class StringSegmentTest
         {
             var testString = "Test123";
             return new TheoryData<StringSegment, StringSegment>
-                {
-                    { new StringSegment(testString, 0, 1), new StringSegment(string.Empty) },
-                    { new StringSegment(testString, 0, 1), new StringSegment(testString, 1, 1) },
-                    { new StringSegment(testString, 1, 2), new StringSegment(testString, 1, 3) },
-                    { new StringSegment(testString, 0, 4), new StringSegment("TEST123", 0, 4) },
-                };
+            {
+                { new StringSegment(testString, 0, 1), new StringSegment(string.Empty) },
+                { new StringSegment(testString, 0, 1), new StringSegment(testString, 1, 1) },
+                { new StringSegment(testString, 1, 2), new StringSegment(testString, 1, 3) },
+                { new StringSegment(testString, 0, 4), new StringSegment("TEST123", 0, 4) },
+            };
         }
     }
 
@@ -377,7 +396,8 @@ public class StringSegmentTest
     [MemberData(nameof(GetHashCode_ReturnsDifferentValuesForInequalSubstringsData))]
     public void GetHashCode_ReturnsDifferentValuesForInequalSubstrings(
         object segment1,
-        object segment2)
+        object segment2
+    )
     {
         // Act
         var hashCode1 = segment1.GetHashCode();
@@ -406,10 +426,10 @@ public class StringSegmentTest
         {
             // candidate
             return new TheoryData<object>()
-                {
-                    { default(StringSegment) },
-                    { new StringSegment() },
-                };
+            {
+                { default(StringSegment) },
+                { new StringSegment() },
+            };
         }
     }
 
@@ -433,11 +453,11 @@ public class StringSegmentTest
         {
             // candidate
             return new TheoryData<object>()
-                {
-                    { new StringSegment("Hello, World!", 1, 4) },
-                    { new StringSegment("Hello", 1, 0) },
-                    { new StringSegment(string.Empty) },
-                };
+            {
+                { new StringSegment("Hello, World!", 1, 4) },
+                { new StringSegment("Hello", 1, 0) },
+                { new StringSegment(string.Empty) },
+            };
         }
     }
 
@@ -460,11 +480,7 @@ public class StringSegmentTest
         get
         {
             // candidate
-            return new TheoryData<string>()
-                {
-                    { string.Empty },
-                    { "Hello, World!" },
-                };
+            return new TheoryData<string>() { { string.Empty }, { "Hello, World!" }, };
         }
     }
 
@@ -488,20 +504,28 @@ public class StringSegmentTest
         {
             // candidate / comparer / expected result
             return new TheoryData<object, object, bool>()
+            {
+                { new StringSegment("Hello, World!", 1, 4), StringComparison.Ordinal, true },
+                { new StringSegment("HELlo, World!", 1, 4), StringComparison.Ordinal, false },
                 {
-                    { new StringSegment("Hello, World!", 1, 4), StringComparison.Ordinal, true },
-                    { new StringSegment("HELlo, World!", 1, 4), StringComparison.Ordinal, false },
-                    { new StringSegment("HELlo, World!", 1, 4), StringComparison.OrdinalIgnoreCase, true },
-                    { new StringSegment("ello, World!", 0, 4), StringComparison.Ordinal, true },
-                    { new StringSegment("ello, World!", 0, 3), StringComparison.Ordinal, false },
-                    { new StringSegment("ello, World!", 1, 3), StringComparison.Ordinal, false },
-                };
+                    new StringSegment("HELlo, World!", 1, 4),
+                    StringComparison.OrdinalIgnoreCase,
+                    true
+                },
+                { new StringSegment("ello, World!", 0, 4), StringComparison.Ordinal, true },
+                { new StringSegment("ello, World!", 0, 3), StringComparison.Ordinal, false },
+                { new StringSegment("ello, World!", 1, 3), StringComparison.Ordinal, false },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(EqualsStringSegmentData))]
-    public void StringSegment_Equals_StringSegment_Valid(object candidate, StringComparison comparison, bool expectedResult)
+    public void StringSegment_Equals_StringSegment_Valid(
+        object candidate,
+        StringComparison comparison,
+        bool expectedResult
+    )
     {
         // Arrange
         var segment = new StringSegment("Hello, World!", 1, 4);
@@ -526,7 +550,6 @@ public class StringSegmentTest
         // Assert
         Assert.False(result);
     }
-
 
     [Fact]
     public void StringSegment_SubsegmentOffset_Valid()
@@ -663,7 +686,6 @@ public class StringSegmentTest
         // Assert
         Assert.Equal(-1, result);
     }
-
 
     [Fact]
     public void Value_DoesNotAllocateANewString_IfTheSegmentContainsTheWholeBuffer()

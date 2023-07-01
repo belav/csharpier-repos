@@ -19,7 +19,5 @@ public class BadRequestResult : StatusCodeResult
     /// Creates a new <see cref="BadRequestResult"/> instance.
     /// </summary>
     public BadRequestResult()
-        : base(DefaultStatusCode)
-    {
-    }
+        : base(DefaultStatusCode) { }
 }

@@ -35,6 +35,8 @@ public abstract class ExtensionIntermediateNode : IntermediateNode
         context.Diagnostics.Add(
             RazorDiagnosticFactory.CreateCodeTarget_UnsupportedExtension(
                 documentKind,
-                typeof(TDependency)));
+                typeof(TDependency)
+            )
+        );
     }
 }

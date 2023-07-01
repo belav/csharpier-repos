@@ -11,7 +11,10 @@ internal sealed class DefaultRateLimiterPolicy : IRateLimiterPolicy<DefaultKeyTy
     private readonly Func<HttpContext, RateLimitPartition<DefaultKeyType>> _partitioner;
     private readonly Func<OnRejectedContext, CancellationToken, ValueTask>? _onRejected;
 
-    public DefaultRateLimiterPolicy(Func<HttpContext, RateLimitPartition<DefaultKeyType>> partitioner, Func<OnRejectedContext, CancellationToken, ValueTask>? onRejected)
+    public DefaultRateLimiterPolicy(
+        Func<HttpContext, RateLimitPartition<DefaultKeyType>> partitioner,
+        Func<OnRejectedContext, CancellationToken, ValueTask>? onRejected
+    )
     {
         _partitioner = partitioner;
         _onRejected = onRejected;

@@ -39,7 +39,8 @@ public partial class CookieTempDataProvider : ITempDataProvider
         IDataProtectionProvider dataProtectionProvider,
         ILoggerFactory loggerFactory,
         IOptions<CookieTempDataProviderOptions> options,
-        TempDataSerializer tempDataSerializer)
+        TempDataSerializer tempDataSerializer
+    )
     {
         _dataProtector = dataProtectionProvider.CreateProtector(Purpose);
         _logger = loggerFactory.CreateLogger<CookieTempDataProvider>();
@@ -70,7 +71,10 @@ public partial class CookieTempDataProvider : ITempDataProvider
             // cookie to no longer be available.
             try
             {
-                var encodedValue = _chunkingCookieManager.GetRequestCookie(context, _options.Cookie.Name);
+                var encodedValue = _chunkingCookieManager.GetRequestCookie(
+                    context,
+                    _options.Cookie.Name
+                );
                 if (!string.IsNullOrEmpty(encodedValue))
                 {
                     var protectedData = WebEncoders.Base64UrlDecode(encodedValue);
@@ -88,7 +92,11 @@ public partial class CookieTempDataProvider : ITempDataProvider
                 // over and over.
                 if (!context.Response.HasStarted)
                 {
-                    _chunkingCookieManager.DeleteCookie(context, _options.Cookie.Name, _options.Cookie.Build(context));
+                    _chunkingCookieManager.DeleteCookie(
+                        context,
+                        _options.Cookie.Name,
+                        _options.Cookie.Build(context)
+                    );
                 }
             }
         }
@@ -118,7 +126,12 @@ public partial class CookieTempDataProvider : ITempDataProvider
             var bytes = _tempDataSerializer.Serialize(values);
             bytes = _dataProtector.Protect(bytes);
             var encodedValue = WebEncoders.Base64UrlEncode(bytes);
-            _chunkingCookieManager.AppendResponseCookie(context, _options.Cookie.Name, encodedValue, cookieOptions);
+            _chunkingCookieManager.AppendResponseCookie(
+                context,
+                _options.Cookie.Name,
+                encodedValue,
+                cookieOptions
+            );
         }
         else
         {
@@ -144,13 +157,32 @@ public partial class CookieTempDataProvider : ITempDataProvider
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "The temp data cookie {CookieName} was not found.", EventName = "TempDataCookieNotFound")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "The temp data cookie {CookieName} was not found.",
+            EventName = "TempDataCookieNotFound"
+        )]
         public static partial void TempDataCookieNotFound(ILogger logger, string cookieName);
 
-        [LoggerMessage(2, LogLevel.Debug, "The temp data cookie {CookieName} was used to successfully load temp data.", EventName = "TempDataCookieLoadSuccess")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "The temp data cookie {CookieName} was used to successfully load temp data.",
+            EventName = "TempDataCookieLoadSuccess"
+        )]
         public static partial void TempDataCookieLoadSuccess(ILogger logger, string cookieName);
 
-        [LoggerMessage(3, LogLevel.Warning, "The temp data cookie {CookieName} could not be loaded.", EventName = "TempDataCookieLoadFailure")]
-        public static partial void TempDataCookieLoadFailure(ILogger logger, string cookieName, Exception exception);
+        [LoggerMessage(
+            3,
+            LogLevel.Warning,
+            "The temp data cookie {CookieName} could not be loaded.",
+            EventName = "TempDataCookieLoadFailure"
+        )]
+        public static partial void TempDataCookieLoadFailure(
+            ILogger logger,
+            string cookieName,
+            Exception exception
+        );
     }
 }

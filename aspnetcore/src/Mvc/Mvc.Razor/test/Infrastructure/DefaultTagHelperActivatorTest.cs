@@ -47,7 +47,8 @@ public class DefaultTagHelperActivatorTest
             viewData,
             Mock.Of<ITempDataDictionary>(),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
 
         return viewContext;
     }

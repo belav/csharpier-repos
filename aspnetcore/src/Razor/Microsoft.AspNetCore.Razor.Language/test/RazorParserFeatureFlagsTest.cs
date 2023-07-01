@@ -24,7 +24,10 @@ public class RazorParserFeatureFlagsTest
     public void Create_21Version_Allows21Features()
     {
         // Arrange & Act
-        var context = RazorParserFeatureFlags.Create(RazorLanguageVersion.Version_2_1, FileKinds.Legacy);
+        var context = RazorParserFeatureFlags.Create(
+            RazorLanguageVersion.Version_2_1,
+            FileKinds.Legacy
+        );
 
         // Assert
         Assert.True(context.AllowMinimizedBooleanTagHelperAttributes);
@@ -35,7 +38,10 @@ public class RazorParserFeatureFlagsTest
     public void Create_OldestVersion_DoesNotAllowLatestFeatures()
     {
         // Arrange & Act
-        var context = RazorParserFeatureFlags.Create(RazorLanguageVersion.Version_1_0, FileKinds.Legacy);
+        var context = RazorParserFeatureFlags.Create(
+            RazorLanguageVersion.Version_1_0,
+            FileKinds.Legacy
+        );
 
         // Assert
         Assert.False(context.AllowMinimizedBooleanTagHelperAttributes);

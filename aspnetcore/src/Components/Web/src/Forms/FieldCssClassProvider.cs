@@ -19,7 +19,10 @@ public class FieldCssClassProvider
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
     /// <param name="fieldIdentifier">The <see cref="FieldIdentifier"/>.</param>
     /// <returns>A CSS class name string.</returns>
-    public virtual string GetFieldCssClass(EditContext editContext, in FieldIdentifier fieldIdentifier)
+    public virtual string GetFieldCssClass(
+        EditContext editContext,
+        in FieldIdentifier fieldIdentifier
+    )
     {
         var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
         if (editContext.IsModified(fieldIdentifier))

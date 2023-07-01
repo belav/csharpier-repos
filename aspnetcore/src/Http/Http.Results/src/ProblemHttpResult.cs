@@ -11,7 +11,12 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="IResult"/> that on execution will write Problem Details
 /// HTTP API responses based on <see href="https://tools.ietf.org/html/rfc7807"/>
 /// </summary>
-public sealed class ProblemHttpResult : IResult, IStatusCodeHttpResult, IContentTypeHttpResult, IValueHttpResult, IValueHttpResult<ProblemDetails>
+public sealed class ProblemHttpResult
+    : IResult,
+        IStatusCodeHttpResult,
+        IContentTypeHttpResult,
+        IValueHttpResult,
+        IValueHttpResult<ProblemDetails>
 {
     /// <summary>
     /// Creates a new <see cref="ProblemHttpResult"/> instance with
@@ -60,9 +65,10 @@ public sealed class ProblemHttpResult : IResult, IStatusCodeHttpResult, IContent
         }
 
         return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger,
-                value: ProblemDetails,
-                ContentType);
+            httpContext,
+            logger,
+            value: ProblemDetails,
+            ContentType
+        );
     }
 }

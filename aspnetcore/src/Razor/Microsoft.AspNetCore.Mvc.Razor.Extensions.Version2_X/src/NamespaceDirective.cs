@@ -21,10 +21,12 @@ public static class NamespaceDirective
         {
             builder.AddNamespaceToken(
                 Resources.NamespaceDirective_NamespaceToken_Name,
-                Resources.NamespaceDirective_NamespaceToken_Description);
+                Resources.NamespaceDirective_NamespaceToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = Resources.NamespaceDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
@@ -40,10 +42,15 @@ public static class NamespaceDirective
     // internal for testing
     internal class Pass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
     {
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
-            if (documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-                documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind)
+            if (
+                documentNode.DocumentKind != RazorPageDocumentClassifierPass.RazorPageDocumentKind
+                && documentNode.DocumentKind != MvcViewDocumentClassifierPass.MvcViewDocumentKind
+            )
             {
                 // Not a page. Skip.
                 return;
@@ -95,8 +102,10 @@ public static class NamespaceDirective
         }
 
         // We're specifically using OrdinalIgnoreCase here because Razor treats all paths as case-insensitive.
-        if (!source.StartsWith(directiveSource, StringComparison.OrdinalIgnoreCase) ||
-            source.Length <= directiveSource.Length)
+        if (
+            !source.StartsWith(directiveSource, StringComparison.OrdinalIgnoreCase)
+            || source.Length <= directiveSource.Length
+        )
         {
             // The imports are not from the directory hierarchy, can't compute a suffix.
             return baseNamespace;

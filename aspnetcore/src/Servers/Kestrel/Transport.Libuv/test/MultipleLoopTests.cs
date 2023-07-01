@@ -47,33 +47,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             loop.Init(_uv);
             serverListenPipe.Init(loop, (a, b) => { }, false);
             serverListenPipe.Bind(pipeName);
-            serverListenPipe.Listen(128, async (backlog, status, error, state) =>
-            {
-                var serverConnectionPipe = new UvPipeHandle(_logger);
-                serverConnectionPipe.Init(loop, (a, b) => { }, true);
+            serverListenPipe.Listen(
+                128,
+                async (backlog, status, error, state) =>
+                {
+                    var serverConnectionPipe = new UvPipeHandle(_logger);
+                    serverConnectionPipe.Init(loop, (a, b) => { }, true);
 
-                try
-                {
-                    serverListenPipe.Accept(serverConnectionPipe);
-                }
-                catch (Exception)
-                {
+                    try
+                    {
+                        serverListenPipe.Accept(serverConnectionPipe);
+                    }
+                    catch (Exception)
+                    {
+                        serverConnectionPipe.Dispose();
+                        return;
+                    }
+
+                    var writeRequest = new UvWriteReq(_logger);
+                    writeRequest.DangerousInit(loop);
+
+                    await writeRequest.WriteAsync(
+                        serverConnectionPipe,
+                        new ReadOnlySequence<byte>(new byte[] { 1, 2, 3, 4 })
+                    );
+
+                    writeRequest.Dispose();
                     serverConnectionPipe.Dispose();
-                    return;
-                }
-
-                var writeRequest = new UvWriteReq(_logger);
-                writeRequest.DangerousInit(loop);
-
-                await writeRequest.WriteAsync(
-                    serverConnectionPipe,
-                    new ReadOnlySequence<byte>(new byte[] { 1, 2, 3, 4 }));
-
-                writeRequest.Dispose();
-                serverConnectionPipe.Dispose();
-                serverListenPipe.Dispose();
-
-            }, null);
+                    serverListenPipe.Dispose();
+                },
+                null
+            );
 
             var worker = new Thread(() =>
             {
@@ -84,22 +88,28 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 loop2.Init(_uv);
                 clientConnectionPipe.Init(loop2, (a, b) => { }, true);
                 connect.DangerousInit(loop2);
-                connect.Connect(clientConnectionPipe, pipeName, (handle, status, error, state) =>
-                {
-                    var buf = loop2.Libuv.buf_init(Marshal.AllocHGlobal(8192), 8192);
-                    connect.Dispose();
+                connect.Connect(
+                    clientConnectionPipe,
+                    pipeName,
+                    (handle, status, error, state) =>
+                    {
+                        var buf = loop2.Libuv.buf_init(Marshal.AllocHGlobal(8192), 8192);
+                        connect.Dispose();
 
-                    clientConnectionPipe.ReadStart(
-                        (handle2, cb, state2) => buf,
-                        (handle2, status2, state2) =>
-                        {
-                            if (status2 == TestConstants.EOF)
+                        clientConnectionPipe.ReadStart(
+                            (handle2, cb, state2) => buf,
+                            (handle2, status2, state2) =>
                             {
-                                clientConnectionPipe.Dispose();
-                            }
-                        },
-                        null);
-                }, null);
+                                if (status2 == TestConstants.EOF)
+                                {
+                                    clientConnectionPipe.Dispose();
+                                }
+                            },
+                            null
+                        );
+                    },
+                    null
+                );
                 loop2.Run();
                 loop2.Dispose();
             });
@@ -124,54 +134,68 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var serverListenPipe = new UvPipeHandle(_logger);
             serverListenPipe.Init(loop, (a, b) => { }, false);
             serverListenPipe.Bind(pipeName);
-            serverListenPipe.Listen(128, (handle, status, error, state) =>
-            {
-                serverConnectionPipe = new UvPipeHandle(_logger);
-                serverConnectionPipe.Init(loop, (a, b) => { }, true);
+            serverListenPipe.Listen(
+                128,
+                (handle, status, error, state) =>
+                {
+                    serverConnectionPipe = new UvPipeHandle(_logger);
+                    serverConnectionPipe.Init(loop, (a, b) => { }, true);
 
-                try
-                {
-                    serverListenPipe.Accept(serverConnectionPipe);
-                    serverConnectionPipeAcceptedEvent.Set();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    serverConnectionPipe.Dispose();
-                    serverConnectionPipe = null;
-                }
-            }, null);
+                    try
+                    {
+                        serverListenPipe.Accept(serverConnectionPipe);
+                        serverConnectionPipeAcceptedEvent.Set();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        serverConnectionPipe.Dispose();
+                        serverConnectionPipe = null;
+                    }
+                },
+                null
+            );
 
             var serverListenTcp = new UvTcpHandle(_logger);
             serverListenTcp.Init(loop, (a, b) => { });
             var endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             serverListenTcp.Bind(endPoint);
             var port = serverListenTcp.GetSockIPEndPoint().Port;
-            serverListenTcp.Listen(128, (handle, status, error, state) =>
-            {
-                var serverConnectionTcp = new UvTcpHandle(_logger);
-                serverConnectionTcp.Init(loop, (a, b) => { });
-                serverListenTcp.Accept(serverConnectionTcp);
+            serverListenTcp.Listen(
+                128,
+                (handle, status, error, state) =>
+                {
+                    var serverConnectionTcp = new UvTcpHandle(_logger);
+                    serverConnectionTcp.Init(loop, (a, b) => { });
+                    serverListenTcp.Accept(serverConnectionTcp);
 
-                serverConnectionPipeAcceptedEvent.WaitOne();
+                    serverConnectionPipeAcceptedEvent.WaitOne();
 
-                var writeRequest = new UvWriteReq(_logger);
-                writeRequest.DangerousInit(loop);
-                writeRequest.Write2(
-                    serverConnectionPipe,
-                    new ArraySegment<ArraySegment<byte>>(new ArraySegment<byte>[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 }) }),
-                    serverConnectionTcp,
-                    (handle2, status2, error2, state2) =>
-                    {
-                        writeRequest.Dispose();
-                        serverConnectionTcp.Dispose();
-                        serverConnectionTcpDisposedEvent.Set();
-                        serverConnectionPipe.Dispose();
-                        serverListenPipe.Dispose();
-                        serverListenTcp.Dispose();
-                    },
-                    null);
-            }, null);
+                    var writeRequest = new UvWriteReq(_logger);
+                    writeRequest.DangerousInit(loop);
+                    writeRequest.Write2(
+                        serverConnectionPipe,
+                        new ArraySegment<ArraySegment<byte>>(
+                            new ArraySegment<byte>[]
+                            {
+                                new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 })
+                            }
+                        ),
+                        serverConnectionTcp,
+                        (handle2, status2, error2, state2) =>
+                        {
+                            writeRequest.Dispose();
+                            serverConnectionTcp.Dispose();
+                            serverConnectionTcpDisposedEvent.Set();
+                            serverConnectionPipe.Dispose();
+                            serverListenPipe.Dispose();
+                            serverListenTcp.Dispose();
+                        },
+                        null
+                    );
+                },
+                null
+            );
 
             var worker = new Thread(() =>
             {
@@ -182,41 +206,48 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 loop2.Init(_uv);
                 clientConnectionPipe.Init(loop2, (a, b) => { }, true);
                 connect.DangerousInit(loop2);
-                connect.Connect(clientConnectionPipe, pipeName, (handle, status, error, state) =>
-                {
-                    connect.Dispose();
+                connect.Connect(
+                    clientConnectionPipe,
+                    pipeName,
+                    (handle, status, error, state) =>
+                    {
+                        connect.Dispose();
 
-                    var buf = loop2.Libuv.buf_init(Marshal.AllocHGlobal(64), 64);
+                        var buf = loop2.Libuv.buf_init(Marshal.AllocHGlobal(64), 64);
 
-                    serverConnectionTcpDisposedEvent.WaitOne();
+                        serverConnectionTcpDisposedEvent.WaitOne();
 
-                    clientConnectionPipe.ReadStart(
-                        (handle2, cb, state2) => buf,
-                        (handle2, status2, state2) =>
-                        {
-                            if (status2 == TestConstants.EOF)
+                        clientConnectionPipe.ReadStart(
+                            (handle2, cb, state2) => buf,
+                            (handle2, status2, state2) =>
                             {
-                                clientConnectionPipe.Dispose();
-                                return;
-                            }
-
-                            var clientConnectionTcp = new UvTcpHandle(_logger);
-                            clientConnectionTcp.Init(loop2, (a, b) => { });
-                            clientConnectionPipe.Accept(clientConnectionTcp);
-                            var buf2 = loop2.Libuv.buf_init(Marshal.AllocHGlobal(64), 64);
-                            clientConnectionTcp.ReadStart(
-                                (handle3, cb, state3) => buf2,
-                                (handle3, status3, state3) =>
+                                if (status2 == TestConstants.EOF)
                                 {
-                                    if (status3 == TestConstants.EOF)
+                                    clientConnectionPipe.Dispose();
+                                    return;
+                                }
+
+                                var clientConnectionTcp = new UvTcpHandle(_logger);
+                                clientConnectionTcp.Init(loop2, (a, b) => { });
+                                clientConnectionPipe.Accept(clientConnectionTcp);
+                                var buf2 = loop2.Libuv.buf_init(Marshal.AllocHGlobal(64), 64);
+                                clientConnectionTcp.ReadStart(
+                                    (handle3, cb, state3) => buf2,
+                                    (handle3, status3, state3) =>
                                     {
-                                        clientConnectionTcp.Dispose();
-                                    }
-                                },
-                                null);
-                        },
-                        null);
-                }, null);
+                                        if (status3 == TestConstants.EOF)
+                                        {
+                                            clientConnectionTcp.Dispose();
+                                        }
+                                    },
+                                    null
+                                );
+                            },
+                            null
+                        );
+                    },
+                    null
+                );
                 loop2.Run();
                 loop2.Dispose();
             });

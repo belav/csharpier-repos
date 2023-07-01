@@ -8,12 +8,11 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase<FormatterWebSite.Startup>
+public class NewtonsoftJsonOutputFormatterTest
+    : JsonOutputFormatterTestBase<FormatterWebSite.Startup>
 {
     public NewtonsoftJsonOutputFormatterTest(MvcTestFixture<FormatterWebSite.Startup> fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [Fact]
     public async Task JsonOutputFormatter_ReturnsIndentedJson()
@@ -45,7 +44,9 @@ public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase<For
     public async Task JsonOutputFormatter_SetsContentLength()
     {
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.SimpleModelResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.SimpleModelResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);

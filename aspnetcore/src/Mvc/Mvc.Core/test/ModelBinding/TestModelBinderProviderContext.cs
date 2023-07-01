@@ -14,27 +14,28 @@ public class TestModelBinderProviderContext : ModelBinderProviderContext
     private BindingInfo _bindingInfo;
 
     // Has to be internal because TestModelMetadataProvider is 'shared' code.
-    internal static readonly TestModelMetadataProvider CachedMetadataProvider = new TestModelMetadataProvider();
+    internal static readonly TestModelMetadataProvider CachedMetadataProvider =
+        new TestModelMetadataProvider();
 
     private readonly List<Func<ModelMetadata, IModelBinder>> _binderCreators =
         new List<Func<ModelMetadata, IModelBinder>>();
 
     public TestModelBinderProviderContext(Type modelType)
-        : this(modelType, bindingInfo: null)
-    {
-    }
+        : this(modelType, bindingInfo: null) { }
 
     public TestModelBinderProviderContext(Type modelType, BindingInfo bindingInfo)
     {
         Metadata = CachedMetadataProvider.GetMetadataForType(modelType);
         MetadataProvider = CachedMetadataProvider;
-        _bindingInfo = bindingInfo ?? new BindingInfo
-        {
-            BinderModelName = Metadata.BinderModelName,
-            BinderType = Metadata.BinderType,
-            BindingSource = Metadata.BindingSource,
-            PropertyFilterProvider = Metadata.PropertyFilterProvider,
-        };
+        _bindingInfo =
+            bindingInfo
+            ?? new BindingInfo
+            {
+                BinderModelName = Metadata.BinderModelName,
+                BinderType = Metadata.BinderType,
+                BindingSource = Metadata.BindingSource,
+                PropertyFilterProvider = Metadata.PropertyFilterProvider,
+            };
 
         (Services, MvcOptions) = GetServicesAndOptions();
     }

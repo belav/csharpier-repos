@@ -69,7 +69,7 @@ namespace System.IO.Pipelines
         /// </summary>
         /// <remarks>
         /// We use <see cref="SegmentAsValueType"/> as a wrapper to avoid paying the cost of covariant checks whenever
-        /// the underlying array that the <see cref="BufferSegmentStack"/> class uses is written to. 
+        /// the underlying array that the <see cref="BufferSegmentStack"/> class uses is written to.
         /// We've recognized this as a perf win in ETL traces for these stack frames:
         /// clr!JIT_Stelem_Ref
         ///   clr!ArrayStoreCheck
@@ -78,8 +78,12 @@ namespace System.IO.Pipelines
         private readonly struct SegmentAsValueType
         {
             private readonly BufferSegment _value;
+
             private SegmentAsValueType(BufferSegment value) => _value = value;
-            public static implicit operator SegmentAsValueType(BufferSegment s) => new SegmentAsValueType(s);
+
+            public static implicit operator SegmentAsValueType(BufferSegment s) =>
+                new SegmentAsValueType(s);
+
             public static implicit operator BufferSegment(SegmentAsValueType s) => s._value;
         }
     }

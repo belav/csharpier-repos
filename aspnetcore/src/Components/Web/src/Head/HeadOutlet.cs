@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.Web;
 /// </summary>
 public sealed class HeadOutlet : ComponentBase
 {
-    private const string GetAndRemoveExistingTitle = "Blazor._internal.PageTitle.getAndRemoveExistingTitle";
+    private const string GetAndRemoveExistingTitle =
+        "Blazor._internal.PageTitle.getAndRemoveExistingTitle";
 
     internal const string HeadSectionOutletName = "head";
     internal const string TitleSectionOutletName = "title";
@@ -46,7 +47,11 @@ public sealed class HeadOutlet : ComponentBase
             builder.OpenComponent<SectionContent>(2);
             builder.AddAttribute(3, nameof(SectionContent.Name), TitleSectionOutletName);
             builder.AddAttribute(4, nameof(SectionContent.IsDefaultContent), true);
-            builder.AddAttribute(5, nameof(SectionContent.ChildContent), (RenderFragment)BuildDefaultTitleRenderTree);
+            builder.AddAttribute(
+                5,
+                nameof(SectionContent.ChildContent),
+                (RenderFragment)BuildDefaultTitleRenderTree
+            );
             builder.CloseComponent();
         }
 

@@ -17,11 +17,13 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirective_GetModelType_GetsTypeFromFirstWellFormedDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @model Type1
 @model Type2
 @model
-");
+"
+        );
 
         var engine = CreateRuntimeEngine();
 
@@ -55,16 +57,15 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @inherits BaseType<TModel>
 @model Type1
-");
+"
+        );
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass() { Engine = engine, };
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -81,17 +82,16 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DifferentOrdering()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @model Type1
 @inherits BaseType<TModel>
 @model Type2
-");
+"
+        );
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass() { Engine = engine, };
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -108,16 +108,15 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_NoOpWithoutTModel()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @inherits BaseType
 @model Type1
-");
+"
+        );
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass() { Engine = engine, };
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -134,15 +133,14 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_Execute_ReplacesTModelInBaseType_DefaultDynamic()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @inherits BaseType<TModel>
-");
+"
+        );
 
         var engine = CreateRuntimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass() { Engine = engine, };
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -159,15 +157,14 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_DesignTime_AddsTModelUsingDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @inherits BaseType<TModel>
-");
+"
+        );
 
         var engine = CreateDesignTimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass() { Engine = engine, };
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -188,16 +185,15 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     public void ModelDirectivePass_DesignTime_WithModel_AddsTModelUsingDirective()
     {
         // Arrange
-        var codeDocument = CreateDocument(@"
+        var codeDocument = CreateDocument(
+            @"
 @inherits BaseType<TModel>
 @model SomeType
-");
+"
+        );
 
         var engine = CreateDesignTimeEngine();
-        var pass = new ModelDirective.Pass()
-        {
-            Engine = engine,
-        };
+        var pass = new ModelDirective.Pass() { Engine = engine, };
 
         var irDocument = CreateIRDocument(engine, codeDocument);
 
@@ -248,17 +244,20 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
     {
         return CreateProjectEngine(b =>
         {
-                // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
-                b.AddDirective(ModelDirective.Directive);
+            // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
+            b.AddDirective(ModelDirective.Directive);
 
-                // There's some special interaction with the inherits directive
-                InheritsDirective.Register(b);
+            // There's some special interaction with the inherits directive
+            InheritsDirective.Register(b);
 
             b.Features.Add(new DesignTimeOptionsFeature(designTime));
         }).Engine;
     }
 
-    private DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private DocumentIntermediateNode CreateIRDocument(
+        RazorEngine engine,
+        RazorCodeDocument codeDocument
+    )
     {
         for (var i = 0; i < engine.Phases.Count; i++)
         {
@@ -272,10 +271,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         }
 
         // InheritsDirectivePass needs to run before ModelDirective.
-        var pass = new InheritsDirectivePass()
-        {
-            Engine = engine
-        };
+        var pass = new InheritsDirectivePass() { Engine = engine };
         pass.Execute(codeDocument, codeDocument.GetDocumentIntermediateNode());
 
         return codeDocument.GetDocumentIntermediateNode();
@@ -316,7 +312,9 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
         }
     }
 
-    private class DesignTimeOptionsFeature : IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+    private class DesignTimeOptionsFeature
+        : IConfigureRazorParserOptionsFeature,
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly bool _designTime;
 

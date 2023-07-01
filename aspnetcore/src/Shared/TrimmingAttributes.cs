@@ -13,7 +13,10 @@ namespace System.Diagnostics.CodeAnalysis;
 /// This allows tools to understand which methods are unsafe to call when removing unreferenced
 /// code from an application.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class,
+    Inherited = false
+)]
 internal sealed class RequiresUnreferencedCodeAttribute : Attribute
 {
     /// <summary>
@@ -121,10 +124,17 @@ internal sealed class UnconditionalSuppressMessageAttribute : Attribute
 }
 
 [AttributeUsage(
-        AttributeTargets.Field | AttributeTargets.ReturnValue | AttributeTargets.GenericParameter |
-        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Method |
-        AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
-        Inherited = false)]
+    AttributeTargets.Field
+        | AttributeTargets.ReturnValue
+        | AttributeTargets.GenericParameter
+        | AttributeTargets.Parameter
+        | AttributeTargets.Property
+        | AttributeTargets.Method
+        | AttributeTargets.Class
+        | AttributeTargets.Interface
+        | AttributeTargets.Struct,
+    Inherited = false
+)]
 internal sealed class DynamicallyAccessedMembersAttribute : Attribute
 {
     /// <summary>

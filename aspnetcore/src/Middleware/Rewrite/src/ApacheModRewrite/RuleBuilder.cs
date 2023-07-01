@@ -22,7 +22,9 @@ internal sealed class RuleBuilder
     {
         if (_actions.Count == 0 || _match == null)
         {
-            throw new InvalidOperationException("Cannot create ModRewriteRule without action and match");
+            throw new InvalidOperationException(
+                "Cannot create ModRewriteRule without action and match"
+            );
         }
         return new ApacheModRewriteRule(_match, _conditions, _actions);
     }
@@ -46,10 +48,7 @@ internal sealed class RuleBuilder
         AddAction(pattern, flags);
     }
 
-    public void AddConditionFromParts(
-        Pattern pattern,
-        ParsedModRewriteInput input,
-        Flags flags)
+    public void AddConditionFromParts(Pattern pattern, ParsedModRewriteInput input, Flags flags)
     {
         if (_conditions == null)
         {
@@ -65,11 +64,27 @@ internal sealed class RuleBuilder
                 Debug.Assert(input.Operand != null);
                 if (flags.HasFlag(FlagType.NoCase))
                 {
-                    match = new RegexMatch(new Regex(input.Operand, RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase, _regexTimeout), input.Invert);
+                    match = new RegexMatch(
+                        new Regex(
+                            input.Operand,
+                            RegexOptions.CultureInvariant
+                                | RegexOptions.Compiled
+                                | RegexOptions.IgnoreCase,
+                            _regexTimeout
+                        ),
+                        input.Invert
+                    );
                 }
                 else
                 {
-                    match = new RegexMatch(new Regex(input.Operand, RegexOptions.CultureInvariant | RegexOptions.Compiled, _regexTimeout), input.Invert);
+                    match = new RegexMatch(
+                        new Regex(
+                            input.Operand,
+                            RegexOptions.CultureInvariant | RegexOptions.Compiled,
+                            _regexTimeout
+                        ),
+                        input.Invert
+                    );
                 }
                 break;
             case ConditionType.IntComp:
@@ -103,19 +118,39 @@ internal sealed class RuleBuilder
                 switch (input.OperationType)
                 {
                     case OperationType.Equal:
-                        match = new StringMatch(input.Operand, StringOperationType.Equal, input.Invert);
+                        match = new StringMatch(
+                            input.Operand,
+                            StringOperationType.Equal,
+                            input.Invert
+                        );
                         break;
                     case OperationType.Greater:
-                        match = new StringMatch(input.Operand, StringOperationType.Greater, input.Invert);
+                        match = new StringMatch(
+                            input.Operand,
+                            StringOperationType.Greater,
+                            input.Invert
+                        );
                         break;
                     case OperationType.GreaterEqual:
-                        match = new StringMatch(input.Operand, StringOperationType.GreaterEqual, input.Invert);
+                        match = new StringMatch(
+                            input.Operand,
+                            StringOperationType.GreaterEqual,
+                            input.Invert
+                        );
                         break;
                     case OperationType.Less:
-                        match = new StringMatch(input.Operand, StringOperationType.Less, input.Invert);
+                        match = new StringMatch(
+                            input.Operand,
+                            StringOperationType.Less,
+                            input.Invert
+                        );
                         break;
                     case OperationType.LessEqual:
-                        match = new StringMatch(input.Operand, StringOperationType.LessEqual, input.Invert);
+                        match = new StringMatch(
+                            input.Operand,
+                            StringOperationType.LessEqual,
+                            input.Invert
+                        );
                         break;
                     default:
                         throw new ArgumentException("Invalid operation for string comparison.");
@@ -135,16 +170,22 @@ internal sealed class RuleBuilder
                         break;
                     case OperationType.SymbolicLink:
                         // TODO see if FileAttributes.ReparsePoint works for this?
-                        throw new NotImplementedException("Symbolic links are not supported because " +
-                                                        "of cross platform implementation");
+                        throw new NotImplementedException(
+                            "Symbolic links are not supported because "
+                                + "of cross platform implementation"
+                        );
                     case OperationType.Size:
                         match = new FileSizeMatch(input.Invert);
                         break;
                     case OperationType.ExistingUrl:
-                        throw new NotSupportedException("Existing Url lookups not supported because it requires a subrequest");
+                        throw new NotSupportedException(
+                            "Existing Url lookups not supported because it requires a subrequest"
+                        );
                     case OperationType.Executable:
-                        throw new NotSupportedException("Executable Property is not supported because Windows " +
-                                                        "requires a pinvoke to get this property");
+                        throw new NotSupportedException(
+                            "Executable Property is not supported because Windows "
+                                + "requires a pinvoke to get this property"
+                        );
                     default:
                         throw new ArgumentException("Invalid operation for property comparison");
                 }
@@ -155,24 +196,34 @@ internal sealed class RuleBuilder
         _conditions.Add(condition);
     }
 
-    public void AddMatch(
-        ParsedModRewriteInput input,
-        Flags flags)
+    public void AddMatch(ParsedModRewriteInput input, Flags flags)
     {
         Debug.Assert(input.Operand != null);
         if (flags.HasFlag(FlagType.NoCase))
         {
-            _match = new RegexMatch(new Regex(input.Operand, RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase, _regexTimeout), input.Invert);
+            _match = new RegexMatch(
+                new Regex(
+                    input.Operand,
+                    RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase,
+                    _regexTimeout
+                ),
+                input.Invert
+            );
         }
         else
         {
-            _match = new RegexMatch(new Regex(input.Operand, RegexOptions.CultureInvariant | RegexOptions.Compiled, _regexTimeout), input.Invert);
+            _match = new RegexMatch(
+                new Regex(
+                    input.Operand,
+                    RegexOptions.CultureInvariant | RegexOptions.Compiled,
+                    _regexTimeout
+                ),
+                input.Invert
+            );
         }
     }
 
-    public void AddAction(
-        Pattern pattern,
-        Flags flags)
+    public void AddAction(Pattern pattern, Flags flags)
     {
         if (flags.GetValue(FlagType.Cookie, out var flag))
         {
@@ -207,17 +258,42 @@ internal sealed class RuleBuilder
                 {
                     responseStatusCode = StatusCodes.Status302Found;
                 }
-                else if (!int.TryParse(statusCode, NumberStyles.None, CultureInfo.InvariantCulture, out responseStatusCode))
+                else if (
+                    !int.TryParse(
+                        statusCode,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out responseStatusCode
+                    )
+                )
                 {
-                    throw new FormatException(Resources.FormatError_InputParserInvalidInteger(statusCode, -1));
+                    throw new FormatException(
+                        Resources.FormatError_InputParserInvalidInteger(statusCode, -1)
+                    );
                 }
-                _actions.Add(new RedirectAction(responseStatusCode, pattern, queryStringAppend, queryStringDelete, escapeBackReference));
+                _actions.Add(
+                    new RedirectAction(
+                        responseStatusCode,
+                        pattern,
+                        queryStringAppend,
+                        queryStringDelete,
+                        escapeBackReference
+                    )
+                );
             }
             else
             {
                 var last = flags.HasFlag(FlagType.End) || flags.HasFlag(FlagType.Last);
                 var termination = last ? RuleResult.SkipRemainingRules : RuleResult.ContinueRules;
-                _actions.Add(new RewriteAction(termination, pattern, queryStringAppend, queryStringDelete, escapeBackReference));
+                _actions.Add(
+                    new RewriteAction(
+                        termination,
+                        pattern,
+                        queryStringAppend,
+                        queryStringDelete,
+                        escapeBackReference
+                    )
+                );
             }
         }
     }

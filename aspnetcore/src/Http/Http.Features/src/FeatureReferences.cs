@@ -57,7 +57,7 @@ namespace Microsoft.AspNetCore.Http.Features
         public int Revision { get; private set; }
 
         // cache is a public field because the code calling Fetch must
-        // be able to pass ref values that "dot through" the TCache struct memory, 
+        // be able to pass ref values that "dot through" the TCache struct memory,
         // if it was a Property then that getter would return a copy of the memory
         // preventing the use of "ref"
         /// <summary>
@@ -93,7 +93,9 @@ namespace Microsoft.AspNetCore.Http.Features
         public TFeature? Fetch<TFeature, TState>(
             ref TFeature? cached,
             TState state,
-            Func<TState, TFeature?> factory) where TFeature : class?
+            Func<TState, TFeature?> factory
+        )
+            where TFeature : class?
         {
             var flush = false;
             var revision = Collection?.Revision ?? ContextDisposed();
@@ -109,7 +111,14 @@ namespace Microsoft.AspNetCore.Http.Features
         }
 
         // Update and cache clearing logic, when the fast-path in Fetch isn't applicable
-        private TFeature? UpdateCached<TFeature, TState>(ref TFeature? cached, TState state, Func<TState, TFeature?> factory, int revision, bool flush) where TFeature : class?
+        private TFeature? UpdateCached<TFeature, TState>(
+            ref TFeature? cached,
+            TState state,
+            Func<TState, TFeature?> factory,
+            int revision,
+            bool flush
+        )
+            where TFeature : class?
         {
             if (flush)
             {
@@ -140,7 +149,10 @@ namespace Microsoft.AspNetCore.Http.Features
         /// <summary>
         /// This API is part of ASP.NET Core's infrastructure and should not be referenced by application code.
         /// </summary>
-        public TFeature? Fetch<TFeature>(ref TFeature? cached, Func<IFeatureCollection, TFeature?> factory)
+        public TFeature? Fetch<TFeature>(
+            ref TFeature? cached,
+            Func<IFeatureCollection, TFeature?> factory
+        )
             where TFeature : class? => Fetch(ref cached, Collection, factory);
 
         private static int ContextDisposed()
@@ -151,7 +163,10 @@ namespace Microsoft.AspNetCore.Http.Features
 
         private static void ThrowContextDisposed()
         {
-            throw new ObjectDisposedException(nameof(Collection), nameof(IFeatureCollection) + " has been disposed.");
+            throw new ObjectDisposedException(
+                nameof(Collection),
+                nameof(IFeatureCollection) + " has been disposed."
+            );
         }
     }
 }

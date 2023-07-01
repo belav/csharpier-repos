@@ -43,7 +43,8 @@ public abstract class BindingSourceValueProvider : IBindingSourceValueProvider
         {
             var message = Resources.FormatBindingSource_CannotBeGreedy(
                 bindingSource.DisplayName,
-                nameof(BindingSourceValueProvider));
+                nameof(BindingSourceValueProvider)
+            );
             throw new ArgumentException(message, nameof(bindingSource));
         }
 
@@ -51,7 +52,8 @@ public abstract class BindingSourceValueProvider : IBindingSourceValueProvider
         {
             var message = Resources.FormatBindingSource_CannotBeComposite(
                 bindingSource.DisplayName,
-                nameof(BindingSourceValueProvider));
+                nameof(BindingSourceValueProvider)
+            );
             throw new ArgumentException(message, nameof(bindingSource));
         }
 

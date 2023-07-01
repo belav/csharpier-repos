@@ -41,7 +41,10 @@ public class JsonTranscodingServerCallContextTests
         httpContext.Request.Headers.Append(":method", "GET");
         httpContext.Request.Headers.Append("grpc-encoding", "identity");
         httpContext.Request.Headers.Append("grpc-timeout", "1S");
-        httpContext.Request.Headers.Append("hello-bin", Convert.ToBase64String(new byte[] { 1, 2, 3 }));
+        httpContext.Request.Headers.Append(
+            "hello-bin",
+            Convert.ToBase64String(new byte[] { 1, 2, 3 })
+        );
         var serverCallContext = CreateServerCallContext(httpContext);
 
         // Act
@@ -56,7 +59,9 @@ public class JsonTranscodingServerCallContextTests
         Assert.Equal(new byte[] { 1, 2, 3 }, headers[1].ValueBytes);
     }
 
-    private static DefaultHttpContext CreateHttpContext(CancellationToken cancellationToken = default)
+    private static DefaultHttpContext CreateHttpContext(
+        CancellationToken cancellationToken = default
+    )
     {
         var serviceCollection = new ServiceCollection();
         var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -65,7 +70,9 @@ public class JsonTranscodingServerCallContextTests
         httpContext.RequestServices = serviceProvider;
         httpContext.Response.Body = new MemoryStream();
         httpContext.Connection.RemoteIpAddress = IPAddress.Parse("127.0.0.1");
-        httpContext.Features.Set<IHttpRequestLifetimeFeature>(new HttpRequestLifetimeFeature(cancellationToken));
+        httpContext.Features.Set<IHttpRequestLifetimeFeature>(
+            new HttpRequestLifetimeFeature(cancellationToken)
+        );
         return httpContext;
     }
 
@@ -78,12 +85,12 @@ public class JsonTranscodingServerCallContextTests
 
         public CancellationToken RequestAborted { get; set; }
 
-        public void Abort()
-        {
-        }
+        public void Abort() { }
     }
 
-    private static JsonTranscodingServerCallContext CreateServerCallContext(DefaultHttpContext httpContext)
+    private static JsonTranscodingServerCallContext CreateServerCallContext(
+        DefaultHttpContext httpContext
+    )
     {
         return new JsonTranscodingServerCallContext(
             httpContext,
@@ -93,14 +100,17 @@ public class JsonTranscodingServerCallContextTests
                 "Server",
                 "Method",
                 new Marshaller<object>(o => null!, c => null!),
-                new Marshaller<object>(o => null!, c => null!)),
+                new Marshaller<object>(o => null!, c => null!)
+            ),
             new CallHandlerDescriptorInfo(
                 null,
                 null,
                 false,
                 null,
                 new Dictionary<string, RouteParameter>(),
-                JsonTranscodingRouteAdapter.Parse(HttpRoutePattern.Parse("/")!)),
-            NullLogger.Instance);
+                JsonTranscodingRouteAdapter.Parse(HttpRoutePattern.Parse("/")!)
+            ),
+            NullLogger.Instance
+        );
     }
 }

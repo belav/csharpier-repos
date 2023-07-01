@@ -24,7 +24,8 @@ public class DateTimeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMa
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -52,7 +53,12 @@ public class DateTimeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMa
 
     private static bool CheckConstraintCore(string? valueString)
     {
-        return DateTime.TryParse(valueString, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+        return DateTime.TryParse(
+            valueString,
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out _
+        );
     }
 
     bool IParameterLiteralNodeMatchingPolicy.MatchesLiteral(string parameterName, string literal)

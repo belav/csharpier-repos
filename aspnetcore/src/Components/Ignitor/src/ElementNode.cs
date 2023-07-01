@@ -25,6 +25,7 @@ public class ElementNode : ContainerNode
         _properties = new Dictionary<string, object>(StringComparer.Ordinal);
         _events = new Dictionary<string, ElementEventDescriptor>(StringComparer.Ordinal);
     }
+
     public string TagName { get; }
 
     public IReadOnlyDictionary<string, object> Attributes => _attributes;
@@ -81,20 +82,13 @@ public class ElementNode : ContainerNode
             throw new InvalidOperationException("Element does not have a change event.");
         }
 
-        var args = new TestChangeEventArgs
-        {
-            Value = value
-        };
+        var args = new TestChangeEventArgs { Value = value };
 
         var webEventDescriptor = new WebEventDescriptor
         {
             EventHandlerId = changeEventDescriptor.EventId,
             EventName = "change",
-            EventFieldInfo = new EventFieldInfo
-            {
-                ComponentId = 0,
-                FieldValue = value
-            }
+            EventFieldInfo = new EventFieldInfo { ComponentId = 0, FieldValue = value }
         };
 
         return DispatchEventCore(client, webEventDescriptor, args);
@@ -121,8 +115,11 @@ public class ElementNode : ContainerNode
         return DispatchEventCore(client, webEventDescriptor, mouseEventArgs);
     }
 
-    private static Task DispatchEventCore(BlazorClient client, WebEventDescriptor descriptor, EventArgs eventArgs) =>
-        client.DispatchEventAsync(descriptor, eventArgs);
+    private static Task DispatchEventCore(
+        BlazorClient client,
+        WebEventDescriptor descriptor,
+        EventArgs eventArgs
+    ) => client.DispatchEventAsync(descriptor, eventArgs);
 
     public class ElementEventDescriptor
     {

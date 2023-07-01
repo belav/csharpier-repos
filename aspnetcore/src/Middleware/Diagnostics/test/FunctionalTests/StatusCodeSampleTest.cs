@@ -40,7 +40,10 @@ public class StatusCodeSampleTest : IClassFixture<TestFixture<StatusCodePagesSam
     {
         //Arrange
         var httpStatusCode = 541;
-        var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost/?statuscode={httpStatusCode}");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"http://localhost/?statuscode={httpStatusCode}"
+        );
 
         //Act
         var response = await Client.SendAsync(request);
@@ -57,7 +60,10 @@ public class StatusCodeSampleTest : IClassFixture<TestFixture<StatusCodePagesSam
     {
         //Arrange
         var httpStatusCode = 400;
-        var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost/?statuscode={httpStatusCode}");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"http://localhost/?statuscode={httpStatusCode}"
+        );
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
 
         //Act
@@ -78,7 +84,10 @@ public class StatusCodeSampleTest : IClassFixture<TestFixture<StatusCodePagesSam
     {
         // Arrange
         var httpStatusCode = 400;
-        var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost?statuscode={httpStatusCode}");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"http://localhost?statuscode={httpStatusCode}"
+        );
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         // Act
@@ -96,7 +105,10 @@ public class StatusCodeSampleTest : IClassFixture<TestFixture<StatusCodePagesSam
     {
         // Arrange
         var httpStatusCode = 400;
-        var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost?statuscode={httpStatusCode}");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"http://localhost?statuscode={httpStatusCode}"
+        );
 
         // Act
         var response = await Client.SendAsync(request);

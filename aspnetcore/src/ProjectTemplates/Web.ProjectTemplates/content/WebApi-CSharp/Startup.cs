@@ -39,27 +39,29 @@ namespace Company.WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
 #if (OrganizationalAuth)
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
-                    .EnableTokenAcquisitionToCallDownstreamApi()
+                .EnableTokenAcquisitionToCallDownstreamApi()
 #if (GenerateApi)
                         .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
                         .AddMicrosoftGraph(Configuration.GetSection("DownstreamApi"))
 #endif
-                        .AddInMemoryTokenCaches();
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 #endif
 #elif (IndividualB2CAuth)
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"))
-                    .EnableTokenAcquisitionToCallDownstreamApi()
-                        .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
-                        .AddInMemoryTokenCaches();
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
 #endif
@@ -69,7 +71,10 @@ namespace Company.WebApplication1
 #if (EnableOpenAPI)
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" });
+                c.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Title = "Company.WebApplication1", Version = "v1" }
+                );
             });
 #endif
         }
@@ -80,10 +85,12 @@ namespace Company.WebApplication1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                #if (EnableOpenAPI)
+#if (EnableOpenAPI)
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company.WebApplication1 v1"));
-                #endif
+                app.UseSwaggerUI(
+                    c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company.WebApplication1 v1")
+                );
+#endif
             }
 #if (RequiresHttps)
 
