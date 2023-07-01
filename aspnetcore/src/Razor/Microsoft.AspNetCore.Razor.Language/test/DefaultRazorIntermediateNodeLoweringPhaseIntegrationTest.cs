@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Moq;
 using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 

@@ -6,15 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Owin;
 
-using WebSocketCloseAsync = Func<
-    int /* closeStatus */
-    ,
-    string /* closeDescription */
-    ,
-    CancellationToken /* cancel */
-    ,
-    Task
->;
 using WebSocketReceiveAsync = Func<
     ArraySegment<byte> /* data */
     ,
@@ -30,13 +21,6 @@ using WebSocketReceiveAsync = Func<
         >
     >
 >;
-using WebSocketReceiveTuple = Tuple<
-    int /* messageType */
-    ,
-    bool /* endOfMessage */
-    ,
-    int /* count */
->;
 using WebSocketSendAsync = Func<
     ArraySegment<byte> /* data */
     ,
@@ -47,6 +31,23 @@ using WebSocketSendAsync = Func<
     CancellationToken /* cancel */
     ,
     Task
+>;
+
+using WebSocketCloseAsync = Func<
+    int /* closeStatus */
+    ,
+    string /* closeDescription */
+    ,
+    CancellationToken /* cancel */
+    ,
+    Task
+>;
+using WebSocketReceiveTuple = Tuple<
+    int /* messageType */
+    ,
+    bool /* endOfMessage */
+    ,
+    int /* count */
 >;
 
 /// <summary>

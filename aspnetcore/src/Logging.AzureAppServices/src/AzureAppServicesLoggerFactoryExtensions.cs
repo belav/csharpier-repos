@@ -5,10 +5,10 @@ using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using static Microsoft.Extensions.DependencyInjection.ServiceDescriptor;
 using Microsoft.Extensions.Logging.AzureAppServices;
 using Microsoft.Extensions.Logging.Configuration;
 using Microsoft.Extensions.Options;
-using static Microsoft.Extensions.DependencyInjection.ServiceDescriptor;
 
 namespace Microsoft.Extensions.Logging;
 

@@ -3,12 +3,12 @@
 
 using System.Linq;
 using System.Reflection;
+using Type = System.Type;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Shared;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Internal;
 

@@ -4,8 +4,8 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.HttpSys.Internal;
-using Microsoft.Extensions.Logging;
 using static Microsoft.AspNetCore.HttpSys.Internal.UnsafeNclNativeMethods;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 

@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Hosting;
+using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
-using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 

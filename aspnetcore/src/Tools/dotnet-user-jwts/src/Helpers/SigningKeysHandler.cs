@@ -1,12 +1,12 @@
+using System.Globalization;
+using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using Microsoft.Extensions.Configuration;
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.Extensions.Configuration.UserSecrets;
-using Microsoft.Extensions.Configuration;
-using System.Text.Json.Nodes;
-using System.Text.Json;
-using System.Linq;
-using System.Globalization;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 

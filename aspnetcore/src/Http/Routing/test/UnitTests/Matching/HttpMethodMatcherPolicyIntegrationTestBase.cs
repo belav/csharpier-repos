@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using static Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
-using static Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 

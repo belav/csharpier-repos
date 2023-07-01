@@ -3,6 +3,7 @@
 
 using System.Text;
 using System.Text.Json;
+using Type = System.Type;
 using Example.Hello;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 using Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.Infrastructure;
 using Transcoding;
 using Xunit.Abstractions;
-using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.ConverterTests;
 

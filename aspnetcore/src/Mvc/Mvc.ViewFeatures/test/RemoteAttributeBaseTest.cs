@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Test.Resources;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Moq;
-using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Test.Resources;
 
 namespace Microsoft.AspNetCore.Mvc;
 

@@ -8,8 +8,7 @@ using System.Reflection;
 #if NETCOREAPP
 using System.Runtime.Loader;
 #endif
-using Microsoft.Extensions.CommandLineUtils;
-using Microsoft.Extensions.Tools.Internal;
+using Microsoft.Extensions.CommandLineUtils;using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 

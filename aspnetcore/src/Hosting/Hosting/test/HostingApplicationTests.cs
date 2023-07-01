@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Diagnostics;
+using static Microsoft.AspNetCore.Hosting.HostingApplication;
 using Microsoft.AspNetCore.Hosting.Server.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -10,7 +11,6 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
-using static Microsoft.AspNetCore.Hosting.HostingApplication;
 
 namespace Microsoft.AspNetCore.Hosting.Tests;
 

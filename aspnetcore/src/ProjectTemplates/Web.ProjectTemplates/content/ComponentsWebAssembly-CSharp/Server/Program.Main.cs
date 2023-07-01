@@ -15,8 +15,7 @@ using Graph = Microsoft.Graph;
 using Microsoft.Identity.Web;
 #endif
 #if (IndividualLocalAuth)
-using ComponentsWebAssembly_CSharp.Server.Data;
-using ComponentsWebAssembly_CSharp.Server.Models;
+using ComponentsWebAssembly_CSharp.Server.Data;using ComponentsWebAssembly_CSharp.Server.Models;
 #endif
 
 namespace ComponentsWebAssembly_CSharp;

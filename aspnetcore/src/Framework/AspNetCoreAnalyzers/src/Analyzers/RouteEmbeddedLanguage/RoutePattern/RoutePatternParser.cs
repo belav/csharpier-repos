@@ -11,8 +11,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.RoutePattern;
 
-using static RoutePatternHelpers;
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
+
+using static RoutePatternHelpers;
 
 internal partial struct RoutePatternParser
 {

@@ -15,11 +15,12 @@ using Microsoft.AspNetCore.Http.Features.Authentication;
 
 namespace Microsoft.AspNetCore.Owin;
 
-using SendFileFunc = Func<string, long, long?, CancellationToken, Task>;
 using WebSocketAcceptAlt = Func<
     WebSocketAcceptContext, // WebSocket Accept parameters
     Task<WebSocket>
 >;
+
+using SendFileFunc = Func<string, long, long?, CancellationToken, Task>;
 
 /// <summary>
 /// A loosely-typed OWIN environment wrapper over an <see cref="HttpContext"/>.

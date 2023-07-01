@@ -8,10 +8,10 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpSys.Internal;
-using Microsoft.Extensions.Primitives;
-using Microsoft.Net.Http.Headers;
 
 using static Microsoft.AspNetCore.HttpSys.Internal.UnsafeNclNativeMethods;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 

@@ -1,8 +1,5 @@
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
+using Microsoft.AspNetCore.Authentication;using Microsoft.AspNetCore.Authentication.OpenIdConnect;using Microsoft.Identity.Web;using Microsoft.Identity.Web.UI;
 #endif
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -13,12 +10,9 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 #endif
 using Microsoft.AspNetCore.Authorization;
 #endif
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components;using Microsoft.AspNetCore.Components.Web;
 #if (IndividualLocalAuth)
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Components.Authorization;using Microsoft.AspNetCore.Identity;using Microsoft.AspNetCore.Identity.UI;
 #endif
 #if (OrganizationalAuth)
 using Microsoft.AspNetCore.Mvc.Authorization;

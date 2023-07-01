@@ -1,7 +1,5 @@
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authentication;using Microsoft.AspNetCore.Authorization;using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 #endif
 #if (WindowsAuth)
 using Microsoft.AspNetCore.Authentication.Negotiate;
@@ -16,8 +14,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
+using Microsoft.Identity.Web;using Microsoft.Identity.Web.UI;
 #endif
 #if (MultiOrgAuth)
 using Microsoft.IdentityModel.Tokens;

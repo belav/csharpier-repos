@@ -4,8 +4,8 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Xunit;
 using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
+using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 

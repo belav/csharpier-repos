@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 using Constants = Microsoft.AspNetCore.Http.Connections.Client.Internal.Constants;
+using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 

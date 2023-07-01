@@ -11,10 +11,10 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
+using Http2HeadersEnumerator = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2HeadersEnumerator;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
-using Http2HeadersEnumerator = Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2HeadersEnumerator;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 

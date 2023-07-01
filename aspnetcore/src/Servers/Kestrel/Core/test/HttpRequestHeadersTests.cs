@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using static CodeGenerator.KnownHeaders;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using Xunit;
-using static CodeGenerator.KnownHeaders;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 

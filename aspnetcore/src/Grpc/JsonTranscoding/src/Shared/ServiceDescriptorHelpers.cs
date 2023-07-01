@@ -21,12 +21,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Type = System.Type;
 using Google.Api;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.Extensions.Primitives;
-using Type = System.Type;
 
 namespace Grpc.Shared;
 

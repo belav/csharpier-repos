@@ -7,14 +7,15 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
-using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
-using static RoutePatternHelpers;
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
+
+using static RoutePatternHelpers;
 
 internal partial struct RoutePatternParser
 {
