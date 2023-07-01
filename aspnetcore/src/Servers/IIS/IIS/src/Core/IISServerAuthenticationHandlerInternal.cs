@@ -27,7 +27,9 @@ internal sealed class IISServerAuthenticationHandlerInternal : IAuthenticationHa
         var user = _iisHttpContext.WindowsUser;
         if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
         {
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(user, Scheme.Name)));
+            return Task.FromResult(
+                AuthenticateResult.Success(new AuthenticationTicket(user, Scheme.Name))
+            );
         }
         else
         {

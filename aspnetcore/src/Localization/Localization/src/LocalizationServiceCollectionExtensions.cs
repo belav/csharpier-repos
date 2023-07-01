@@ -41,7 +41,8 @@ public static class LocalizationServiceCollectionExtensions
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddLocalization(
         this IServiceCollection services,
-        Action<LocalizationOptions> setupAction)
+        Action<LocalizationOptions> setupAction
+    )
     {
         if (services == null)
         {
@@ -67,7 +68,8 @@ public static class LocalizationServiceCollectionExtensions
 
     internal static void AddLocalizationServices(
         IServiceCollection services,
-        Action<LocalizationOptions> setupAction)
+        Action<LocalizationOptions> setupAction
+    )
     {
         AddLocalizationServices(services);
         services.Configure(setupAction);

@@ -20,7 +20,10 @@ public sealed class RouteHandlerBuilder : IEndpointConventionBuilder
     /// </summary>
     /// <param name="conventions">The convention list returned from <see cref="RouteEndpointDataSource"/>.</param>
     /// <param name="finallyConventions">The final convention list returned from <see cref="RouteEndpointDataSource"/>.</param>
-    internal RouteHandlerBuilder(ICollection<Action<EndpointBuilder>> conventions, ICollection<Action<EndpointBuilder>> finallyConventions)
+    internal RouteHandlerBuilder(
+        ICollection<Action<EndpointBuilder>> conventions,
+        ICollection<Action<EndpointBuilder>> finallyConventions
+    )
     {
         _conventions = conventions;
         _finallyConventions = finallyConventions;

@@ -5,8 +5,10 @@ using System.Runtime.CompilerServices;
 
 #if BLAZOR_WEBVIEW
 namespace Microsoft.AspNetCore.Components.WebView;
+
 #else
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
+
 #endif
 
 /// <summary>
@@ -44,15 +46,21 @@ internal sealed class ArrayBuilderMemoryStream : Stream
     public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
     /// <inheritdoc />
-    public override int Read(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException();
+    public override int Read(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
     /// <inheritdoc />
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => throw new NotSupportedException();
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
-    public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
-        => throw new NotSupportedException();
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
     /// <inheritdoc />
     public override void Write(byte[] buffer, int offset, int count)
@@ -67,14 +75,22 @@ internal sealed class ArrayBuilderMemoryStream : Stream
         ArrayBuilder.Append(buffer);
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> memory, CancellationToken cancellationToken)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> memory,
+        CancellationToken cancellationToken
+    )
     {
         ArrayBuilder.Append(memory.Span);
         return default;
     }
 
     /// <inheritdoc />
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         ValidateBufferArguments(buffer, offset, count);
 
@@ -105,10 +121,10 @@ internal sealed class ArrayBuilderMemoryStream : Stream
 
     private static class ThrowHelper
     {
-        public static void ThrowArgumentNullException(string name)
-            => throw new ArgumentNullException(name);
+        public static void ThrowArgumentNullException(string name) =>
+            throw new ArgumentNullException(name);
 
-        public static void ThrowArgumentOutOfRangeException(string name)
-            => throw new ArgumentOutOfRangeException(name);
+        public static void ThrowArgumentOutOfRangeException(string name) =>
+            throw new ArgumentOutOfRangeException(name);
     }
 }

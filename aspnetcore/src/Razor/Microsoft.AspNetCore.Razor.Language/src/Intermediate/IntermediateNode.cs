@@ -63,8 +63,5 @@ public abstract class IntermediateNode
         return formatter.ToString();
     }
 
-
-    public virtual void FormatNode(IntermediateNodeFormatter formatter)
-    {
-    }
+    public virtual void FormatNode(IntermediateNodeFormatter formatter) { }
 }

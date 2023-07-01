@@ -41,7 +41,10 @@ public class XmlDocServiceWithComments : XmlDoc.XmlDocBase
     /// <param name="request">Request XML param!</param>
     /// <param name="context"></param>
     /// <returns></returns>
-    public override Task<StringReply> BodyRootPost(StringRequestWithDetail request, ServerCallContext context)
+    public override Task<StringReply> BodyRootPost(
+        StringRequestWithDetail request,
+        ServerCallContext context
+    )
     {
         return base.BodyRootPost(request, context);
     }

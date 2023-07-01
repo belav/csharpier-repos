@@ -29,7 +29,8 @@ internal static class ResponseContentTypeHelper
         (string defaultContentType, Encoding defaultEncoding) @default,
         Func<string, Encoding?> getEncoding,
         out string resolvedContentType,
-        out Encoding resolvedContentTypeEncoding)
+        out Encoding resolvedContentTypeEncoding
+    )
     {
         var (defaultContentType, defaultContentTypeEncoding) = @default;
 

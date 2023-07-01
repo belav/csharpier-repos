@@ -42,17 +42,19 @@ public static class DirectoryBrowserExtensions
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
     /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
     /// </remarks>
-    public static IApplicationBuilder UseDirectoryBrowser(this IApplicationBuilder app, string requestPath)
+    public static IApplicationBuilder UseDirectoryBrowser(
+        this IApplicationBuilder app,
+        string requestPath
+    )
     {
         if (app == null)
         {
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseDirectoryBrowser(new DirectoryBrowserOptions
-        {
-            RequestPath = new PathString(requestPath)
-        });
+        return app.UseDirectoryBrowser(
+            new DirectoryBrowserOptions { RequestPath = new PathString(requestPath) }
+        );
     }
 
     /// <summary>
@@ -61,7 +63,10 @@ public static class DirectoryBrowserExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseDirectoryBrowser(this IApplicationBuilder app, DirectoryBrowserOptions options)
+    public static IApplicationBuilder UseDirectoryBrowser(
+        this IApplicationBuilder app,
+        DirectoryBrowserOptions options
+    )
     {
         if (app == null)
         {

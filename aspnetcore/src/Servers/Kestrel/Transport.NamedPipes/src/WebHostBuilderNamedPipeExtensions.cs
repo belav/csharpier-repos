@@ -33,11 +33,16 @@ public static class WebHostBuilderNamedPipeExtensions
     /// <param name="hostBuilder">The <see cref="IWebHostBuilder"/> to configure.</param>
     /// <param name="configureOptions">A callback to configure transport options.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    public static IWebHostBuilder UseNamedPipes(this IWebHostBuilder hostBuilder, Action<NamedPipeTransportOptions> configureOptions)
+    public static IWebHostBuilder UseNamedPipes(
+        this IWebHostBuilder hostBuilder,
+        Action<NamedPipeTransportOptions> configureOptions
+    )
     {
-        return hostBuilder.UseNamedPipes().ConfigureServices(services =>
-        {
-            services.Configure(configureOptions);
-        });
+        return hostBuilder
+            .UseNamedPipes()
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            });
     }
 }

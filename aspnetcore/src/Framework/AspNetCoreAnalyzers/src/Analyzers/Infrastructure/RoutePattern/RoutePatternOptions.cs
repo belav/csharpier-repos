@@ -6,6 +6,7 @@ namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 internal sealed class RoutePatternOptions
 {
     private RoutePatternOptions() { }
+
     public bool SupportTokenReplacement { get; private set; }
     public bool SupportComplexSegments { get; private set; }
     public bool SupportDefaultValues { get; private set; }

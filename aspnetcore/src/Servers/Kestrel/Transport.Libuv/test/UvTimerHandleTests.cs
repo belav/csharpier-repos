@@ -22,10 +22,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             timer.Init(loop, (a, b) => { });
 
             var callbackInvoked = false;
-            timer.Start(_ =>
-            {
-                callbackInvoked = true;
-            }, 1, 0);
+            timer.Start(
+                _ =>
+                {
+                    callbackInvoked = true;
+                },
+                1,
+                0
+            );
             loop.Run();
 
             timer.Dispose();
@@ -46,17 +50,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             timer.Init(loop, (callback, handle) => { });
 
             var callbackCount = 0;
-            timer.Start(_ =>
-            {
-                if (callbackCount < 2)
+            timer.Start(
+                _ =>
                 {
-                    callbackCount++;
-                }
-                else
-                {
-                    timer.Stop();
-                }
-            }, 1, 1);
+                    if (callbackCount < 2)
+                    {
+                        callbackCount++;
+                    }
+                    else
+                    {
+                        timer.Stop();
+                    }
+                },
+                1,
+                1
+            );
 
             loop.Run();
 

@@ -56,7 +56,11 @@ internal static class AuthContextHelpers
 
         return new AuthContext(peerIdentityPropertyName, properties);
 
-        static void AddProperty(Dictionary<string, List<AuthProperty>> properties, string name, string value)
+        static void AddProperty(
+            Dictionary<string, List<AuthProperty>> properties,
+            string name,
+            string value
+        )
         {
             if (!properties.TryGetValue(name, out var values))
             {
@@ -67,5 +71,4 @@ internal static class AuthContextHelpers
             values.Add(AuthProperty.Create(name, Encoding.UTF8.GetBytes(value)));
         }
     }
-
 }

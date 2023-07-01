@@ -84,7 +84,8 @@ public class HttpProtocolFeatureCollection
             "IBadRequestExceptionFeature"
         };
 
-        var usings = $@"
+        var usings =
+            $@"
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Features.Authentication;
@@ -98,6 +99,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
             allFeatures: allFeatures,
             implementedFeatures: implementedFeatures,
             extraUsings: usings,
-            fallbackFeatures: "ConnectionFeatures");
+            fallbackFeatures: "ConnectionFeatures"
+        );
     }
 }

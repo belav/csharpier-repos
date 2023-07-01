@@ -71,7 +71,9 @@ internal sealed class DefaultTempDataSerializer : TempDataSerializer
                     break;
 
                 default:
-                    throw new InvalidOperationException(Resources.FormatTempData_CannotDeserializeType(item.Value.ValueKind));
+                    throw new InvalidOperationException(
+                        Resources.FormatTempData_CannotDeserializeType(item.Value.ValueKind)
+                    );
             }
 
             deserialized[item.Name] = deserializedValue;
@@ -114,7 +116,9 @@ internal sealed class DefaultTempDataSerializer : TempDataSerializer
             return array.ToArray();
         }
 
-        throw new InvalidOperationException(Resources.FormatTempData_CannotDeserializeType(arrayElement.ValueKind));
+        throw new InvalidOperationException(
+            Resources.FormatTempData_CannotDeserializeType(arrayElement.ValueKind)
+        );
     }
 
     private static object DeserializeDictionaryEntry(in JsonElement objectElement)
@@ -153,7 +157,9 @@ internal sealed class DefaultTempDataSerializer : TempDataSerializer
                     throw new InvalidOperationException(
                         Resources.FormatTempData_CannotSerializeType(
                             typeof(DefaultTempDataSerializer).FullName,
-                            value.GetType()));
+                            value.GetType()
+                        )
+                    );
                 }
 
                 switch (value)
@@ -226,15 +232,14 @@ internal sealed class DefaultTempDataSerializer : TempDataSerializer
 
         type = Nullable.GetUnderlyingType(type) ?? type;
 
-        return
-            type.IsEnum ||
-            type == typeof(int) ||
-            type == typeof(string) ||
-            type == typeof(bool) ||
-            type == typeof(DateTime) ||
-            type == typeof(Guid) ||
-            typeof(ICollection<int>).IsAssignableFrom(type) ||
-            typeof(ICollection<string>).IsAssignableFrom(type) ||
-            typeof(IDictionary<string, string>).IsAssignableFrom(type);
+        return type.IsEnum
+            || type == typeof(int)
+            || type == typeof(string)
+            || type == typeof(bool)
+            || type == typeof(DateTime)
+            || type == typeof(Guid)
+            || typeof(ICollection<int>).IsAssignableFrom(type)
+            || typeof(ICollection<string>).IsAssignableFrom(type)
+            || typeof(IDictionary<string, string>).IsAssignableFrom(type);
     }
 }

@@ -5,9 +5,11 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 internal sealed class AzureADB2CSchemeOptions
 {
-    public IDictionary<string, AzureADB2COpenIDSchemeMapping> OpenIDMappings { get; set; } = new Dictionary<string, AzureADB2COpenIDSchemeMapping>();
+    public IDictionary<string, AzureADB2COpenIDSchemeMapping> OpenIDMappings { get; set; } =
+        new Dictionary<string, AzureADB2COpenIDSchemeMapping>();
 
-    public IDictionary<string, JwtBearerSchemeMapping> JwtBearerMappings { get; set; } = new Dictionary<string, JwtBearerSchemeMapping>();
+    public IDictionary<string, JwtBearerSchemeMapping> JwtBearerMappings { get; set; } =
+        new Dictionary<string, JwtBearerSchemeMapping>();
 
     public sealed class AzureADB2COpenIDSchemeMapping
     {

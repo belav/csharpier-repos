@@ -15,9 +15,7 @@ public sealed class UnauthorizedHttpResult : IResult, IStatusCodeHttpResult
     /// <summary>
     /// Initializes a new instance of the <see cref="UnauthorizedHttpResult"/> class.
     /// </summary>
-    internal UnauthorizedHttpResult()
-    {
-    }
+    internal UnauthorizedHttpResult() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status401Unauthorized"/>
@@ -33,7 +31,9 @@ public sealed class UnauthorizedHttpResult : IResult, IStatusCodeHttpResult
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.UnauthorizedResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.UnauthorizedResult"
+        );
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
 
         httpContext.Response.StatusCode = StatusCode;

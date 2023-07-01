@@ -19,7 +19,6 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
         return directory?.EnumerateItems() ?? Enumerable.Empty<RazorProjectItem>();
     }
 
-
     public override RazorProjectItem GetItem(string path)
     {
         return GetItem(path, fileKind: null);
@@ -62,7 +61,10 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
             var filePath = fileNode.Path;
             if (!filePath.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
             {
-                var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(fileNode.Path, Path);
+                var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(
+                    fileNode.Path,
+                    Path
+                );
                 throw new InvalidOperationException(message);
             }
 
@@ -77,7 +79,10 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
         {
             if (!path.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
             {
-                var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(path, Path);
+                var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(
+                    path,
+                    Path
+                );
                 throw new InvalidOperationException(message);
             }
 
@@ -104,7 +109,9 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
         {
             if (!path.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidOperationException(Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(path, Path));
+                throw new InvalidOperationException(
+                    Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(path, Path)
+                );
             }
 
             var directoryPath = GetDirectoryPath(path);
@@ -122,7 +129,16 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
                 // path, filePath -> /Views/Home/Index.cshtml
                 // directory.Path -> /Views/Home/
                 // We only need to match the file name portion since we've already matched the directory segment.
-                if (string.Compare(path, directoryLength, filePath, directoryLength, path.Length - directoryLength, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        path,
+                        directoryLength,
+                        filePath,
+                        directoryLength,
+                        path.Length - directoryLength,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return file.ProjectItem;
                 }
@@ -146,7 +162,8 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
         private static DirectoryNode GetOrAddDirectory(
             DirectoryNode directory,
             string path,
-            bool createIfNotExists = false)
+            bool createIfNotExists = false
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(path));
             if (path[path.Length - 1] != '/')
@@ -193,7 +210,16 @@ internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
                 var startIndex = parentDirectory.Path.Length;
                 var directoryNameLength = directoryPath.Length - startIndex;
 
-                if (string.Compare(path, startIndex, directoryPath, startIndex, directoryPath.Length - startIndex, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        path,
+                        startIndex,
+                        directoryPath,
+                        startIndex,
+                        directoryPath.Length - startIndex,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return currentDirectory;
                 }

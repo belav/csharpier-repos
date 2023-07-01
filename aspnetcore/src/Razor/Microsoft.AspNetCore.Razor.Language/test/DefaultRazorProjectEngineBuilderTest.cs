@@ -13,7 +13,10 @@ public class DefaultRazorProjectEngineBuilderTest
     public void Build_AddsFeaturesToRazorEngine()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         builder.Features.Add(Mock.Of<IRazorEngineFeature>());
         builder.Features.Add(Mock.Of<IRazorEngineFeature>());
         builder.Features.Add(Mock.Of<IRazorProjectEngineFeature>());
@@ -24,16 +27,21 @@ public class DefaultRazorProjectEngineBuilderTest
         var projectEngine = builder.Build();
 
         // Assert
-        Assert.Collection(projectEngine.Engine.Features,
+        Assert.Collection(
+            projectEngine.Engine.Features,
             feature => Assert.Same(features[0], feature),
-            feature => Assert.Same(features[1], feature));
+            feature => Assert.Same(features[1], feature)
+        );
     }
 
     [Fact]
     public void Build_AddsPhasesToRazorEngine()
     {
         // Arrange
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
         builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
         builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
 
@@ -43,9 +51,11 @@ public class DefaultRazorProjectEngineBuilderTest
         var projectEngine = builder.Build();
 
         // Assert
-        Assert.Collection(projectEngine.Engine.Phases,
+        Assert.Collection(
+            projectEngine.Engine.Phases,
             phase => Assert.Same(phases[0], phase),
-            phase => Assert.Same(phases[1], phase));
+            phase => Assert.Same(phases[1], phase)
+        );
     }
 
     [Fact]

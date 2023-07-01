@@ -32,7 +32,8 @@ public class MaxRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchin
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -55,7 +56,14 @@ public class MaxRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchin
 
     private bool CheckConstraintCore(string? valueString)
     {
-        if (long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var longValue))
+        if (
+            long.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var longValue
+            )
+        )
         {
             return longValue <= Max;
         }

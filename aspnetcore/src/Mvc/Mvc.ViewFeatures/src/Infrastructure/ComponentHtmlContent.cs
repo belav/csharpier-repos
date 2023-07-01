@@ -19,8 +19,11 @@ internal class ComponentHtmlContent : IHtmlContent
     public ComponentHtmlContent(IEnumerable<string> componentResult)
         : this(Array.Empty<string>(), componentResult, Array.Empty<string>()) { }
 
-    public ComponentHtmlContent(IEnumerable<string> preamble, IEnumerable<string> componentResult, IEnumerable<string> epilogue) =>
-        (_preamble, _componentResult, _epilogue) = (preamble, componentResult, epilogue);
+    public ComponentHtmlContent(
+        IEnumerable<string> preamble,
+        IEnumerable<string> componentResult,
+        IEnumerable<string> epilogue
+    ) => (_preamble, _componentResult, _epilogue) = (preamble, componentResult, epilogue);
 
     public void WriteTo(TextWriter writer, HtmlEncoder encoder)
     {

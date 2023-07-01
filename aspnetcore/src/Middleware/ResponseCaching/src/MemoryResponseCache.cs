@@ -51,7 +51,8 @@ internal sealed class MemoryResponseCache : IResponseCache
                 {
                     AbsoluteExpirationRelativeToNow = validFor,
                     Size = CacheEntryHelpers.EstimateCachedResponseSize(cachedResponse)
-                });
+                }
+            );
         }
         else
         {
@@ -61,8 +62,11 @@ internal sealed class MemoryResponseCache : IResponseCache
                 new MemoryCacheEntryOptions
                 {
                     AbsoluteExpirationRelativeToNow = validFor,
-                    Size = CacheEntryHelpers.EstimateCachedVaryByRulesySize(entry as CachedVaryByRules)
-                });
+                    Size = CacheEntryHelpers.EstimateCachedVaryByRulesySize(
+                        entry as CachedVaryByRules
+                    )
+                }
+            );
         }
     }
 }

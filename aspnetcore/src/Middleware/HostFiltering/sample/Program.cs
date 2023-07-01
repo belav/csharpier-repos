@@ -12,24 +12,32 @@ public class Program
 
     public static IHost BuildWebHost(string[] args)
     {
-        var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureLogging((_, factory) =>
-                {
-                    factory.SetMinimumLevel(LogLevel.Debug);
-                    factory.AddConsole();
-                })
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    var env = hostingContext.HostingEnvironment;
-                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-                })
+        var hostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .ConfigureLogging(
+                    (_, factory) =>
+                    {
+                        factory.SetMinimumLevel(LogLevel.Debug);
+                        factory.AddConsole();
+                    }
+                )
+                .ConfigureAppConfiguration(
+                    (hostingContext, config) =>
+                    {
+                        var env = hostingContext.HostingEnvironment;
+                        config
+                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                            .AddJsonFile(
+                                $"appsettings.{env.EnvironmentName}.json",
+                                optional: true,
+                                reloadOnChange: true
+                            );
+                    }
+                )
                 .UseKestrel()
                 .UseStartup<Startup>();
-            });
+        });
 
         return hostBuilder.Build();
     }

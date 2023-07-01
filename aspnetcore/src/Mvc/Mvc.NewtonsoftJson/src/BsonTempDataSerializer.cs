@@ -15,30 +15,42 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 internal sealed class BsonTempDataSerializer : TempDataSerializer
 {
-    private readonly JsonSerializer _jsonSerializer =
-        JsonSerializer.Create(JsonSerializerSettingsProvider.CreateSerializerSettings());
+    private readonly JsonSerializer _jsonSerializer = JsonSerializer.Create(
+        JsonSerializerSettingsProvider.CreateSerializerSettings()
+    );
 
-    private static readonly MethodInfo _convertArrayMethodInfo = typeof(BsonTempDataSerializer).GetMethod(
-        nameof(ConvertArray), BindingFlags.Static | BindingFlags.NonPublic)!;
-    private static readonly MethodInfo _convertDictionaryMethodInfo = typeof(BsonTempDataSerializer).GetMethod(
-        nameof(ConvertDictionary), BindingFlags.Static | BindingFlags.NonPublic)!;
+    private static readonly MethodInfo _convertArrayMethodInfo =
+        typeof(BsonTempDataSerializer).GetMethod(
+            nameof(ConvertArray),
+            BindingFlags.Static | BindingFlags.NonPublic
+        )!;
+    private static readonly MethodInfo _convertDictionaryMethodInfo =
+        typeof(BsonTempDataSerializer).GetMethod(
+            nameof(ConvertDictionary),
+            BindingFlags.Static | BindingFlags.NonPublic
+        )!;
 
     private static readonly ConcurrentDictionary<Type, Func<JArray, object>> _arrayConverters =
         new ConcurrentDictionary<Type, Func<JArray, object>>();
-    private static readonly ConcurrentDictionary<Type, Func<JObject, object>> _dictionaryConverters =
-        new ConcurrentDictionary<Type, Func<JObject, object>>();
+    private static readonly ConcurrentDictionary<
+        Type,
+        Func<JObject, object>
+    > _dictionaryConverters = new ConcurrentDictionary<Type, Func<JObject, object>>();
 
-    private static readonly Dictionary<JTokenType, Type> _tokenTypeLookup = new Dictionary<JTokenType, Type>(8)
-        {
-            { JTokenType.String, typeof(string) },
-            { JTokenType.Integer, typeof(int) },
-            { JTokenType.Boolean, typeof(bool) },
-            { JTokenType.Float, typeof(float) },
-            { JTokenType.Guid, typeof(Guid) },
-            { JTokenType.Date, typeof(DateTime) },
-            { JTokenType.TimeSpan, typeof(TimeSpan) },
-            { JTokenType.Uri, typeof(Uri) },
-        };
+    private static readonly Dictionary<JTokenType, Type> _tokenTypeLookup = new Dictionary<
+        JTokenType,
+        Type
+    >(8)
+    {
+        { JTokenType.String, typeof(string) },
+        { JTokenType.Integer, typeof(int) },
+        { JTokenType.Boolean, typeof(bool) },
+        { JTokenType.Float, typeof(float) },
+        { JTokenType.Guid, typeof(Guid) },
+        { JTokenType.Date, typeof(DateTime) },
+        { JTokenType.TimeSpan, typeof(TimeSpan) },
+        { JTokenType.Uri, typeof(Uri) },
+    };
 
     public override IDictionary<string, object?> Deserialize(byte[] value)
     {
@@ -56,7 +68,8 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
 
         var convertedDictionary = new Dictionary<string, object?>(
             tempDataDictionary,
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var item in tempDataDictionary)
         {
             if (item.Value is JArray jArrayValue && jArrayValue.Count > 0)
@@ -64,19 +77,26 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
                 var arrayType = jArrayValue[0].Type;
                 if (_tokenTypeLookup.TryGetValue(arrayType, out var returnType))
                 {
-                    var arrayConverter = _arrayConverters.GetOrAdd(returnType, type =>
-                    {
-                        return (Func<JArray, object>)_convertArrayMethodInfo
-                            .MakeGenericMethod(type)
-                            .CreateDelegate(typeof(Func<JArray, object>));
-                    });
+                    var arrayConverter = _arrayConverters.GetOrAdd(
+                        returnType,
+                        type =>
+                        {
+                            return (Func<JArray, object>)
+                                _convertArrayMethodInfo
+                                    .MakeGenericMethod(type)
+                                    .CreateDelegate(typeof(Func<JArray, object>));
+                        }
+                    );
                     var result = arrayConverter(jArrayValue);
 
                     convertedDictionary[item.Key] = result;
                 }
                 else
                 {
-                    var message = Resources.FormatTempData_CannotDeserializeToken(nameof(JToken), arrayType);
+                    var message = Resources.FormatTempData_CannotDeserializeToken(
+                        nameof(JToken),
+                        arrayType
+                    );
                     throw new InvalidOperationException(message);
                 }
             }
@@ -91,19 +111,26 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
                 var jTokenType = jObjectValue.Properties().First().Value.Type;
                 if (_tokenTypeLookup.TryGetValue(jTokenType, out var valueType))
                 {
-                    var dictionaryConverter = _dictionaryConverters.GetOrAdd(valueType, type =>
-                    {
-                        return (Func<JObject, object>)_convertDictionaryMethodInfo
-                            .MakeGenericMethod(type)
-                            .CreateDelegate(typeof(Func<JObject, object>));
-                    });
+                    var dictionaryConverter = _dictionaryConverters.GetOrAdd(
+                        valueType,
+                        type =>
+                        {
+                            return (Func<JObject, object>)
+                                _convertDictionaryMethodInfo
+                                    .MakeGenericMethod(type)
+                                    .CreateDelegate(typeof(Func<JObject, object>));
+                        }
+                    );
                     var result = dictionaryConverter(jObjectValue);
 
                     convertedDictionary[item.Key] = result;
                 }
                 else
                 {
-                    var message = Resources.FormatTempData_CannotDeserializeToken(nameof(JToken), jTokenType);
+                    var message = Resources.FormatTempData_CannotDeserializeToken(
+                        nameof(JToken),
+                        jTokenType
+                    );
                     throw new InvalidOperationException(message);
                 }
             }
@@ -165,7 +192,8 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
 
     private static bool CanSerializeType(Type typeToSerialize, out string? errorMessage)
     {
-        typeToSerialize = typeToSerialize ?? throw new ArgumentNullException(nameof(typeToSerialize));
+        typeToSerialize =
+            typeToSerialize ?? throw new ArgumentNullException(nameof(typeToSerialize));
 
         errorMessage = null;
 
@@ -176,18 +204,27 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
         }
         else if (typeToSerialize.IsGenericType)
         {
-            if (ClosedGenericMatcher.ExtractGenericInterface(typeToSerialize, typeof(IList<>)) != null)
+            if (
+                ClosedGenericMatcher.ExtractGenericInterface(typeToSerialize, typeof(IList<>))
+                != null
+            )
             {
                 var genericTypeArguments = typeToSerialize.GenericTypeArguments;
                 Debug.Assert(genericTypeArguments.Length == 1, "IList<T> has one generic argument");
                 actualType = genericTypeArguments[0];
             }
-            else if (ClosedGenericMatcher.ExtractGenericInterface(typeToSerialize, typeof(IDictionary<,>)) != null)
+            else if (
+                ClosedGenericMatcher.ExtractGenericInterface(
+                    typeToSerialize,
+                    typeof(IDictionary<,>)
+                ) != null
+            )
             {
                 var genericTypeArguments = typeToSerialize.GenericTypeArguments;
                 Debug.Assert(
                     genericTypeArguments.Length == 2,
-                    "IDictionary<TKey, TValue> has two generic arguments");
+                    "IDictionary<TKey, TValue> has two generic arguments"
+                );
 
                 // The key must be of type string.
                 if (genericTypeArguments[0] != typeof(string))
@@ -195,7 +232,8 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
                     errorMessage = Resources.FormatTempData_CannotSerializeDictionary(
                         typeof(BsonTempDataSerializer).FullName,
                         genericTypeArguments[0],
-                        typeof(string).FullName);
+                        typeof(string).FullName
+                    );
                     return false;
                 }
                 else
@@ -212,7 +250,8 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
         {
             errorMessage = Resources.FormatTempData_CannotSerializeType(
                 typeof(BsonTempDataSerializer).FullName,
-                actualType);
+                actualType
+            );
             return false;
         }
 
@@ -236,14 +275,14 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
 
     private static bool IsSimpleType(Type type)
     {
-        return type.IsPrimitive ||
-            type.IsEnum ||
-            type.Equals(typeof(decimal)) ||
-            type.Equals(typeof(string)) ||
-            type.Equals(typeof(DateTime)) ||
-            type.Equals(typeof(Guid)) ||
-            type.Equals(typeof(DateTimeOffset)) ||
-            type.Equals(typeof(TimeSpan)) ||
-            type.Equals(typeof(Uri));
+        return type.IsPrimitive
+            || type.IsEnum
+            || type.Equals(typeof(decimal))
+            || type.Equals(typeof(string))
+            || type.Equals(typeof(DateTime))
+            || type.Equals(typeof(Guid))
+            || type.Equals(typeof(DateTimeOffset))
+            || type.Equals(typeof(TimeSpan))
+            || type.Equals(typeof(Uri));
     }
 }

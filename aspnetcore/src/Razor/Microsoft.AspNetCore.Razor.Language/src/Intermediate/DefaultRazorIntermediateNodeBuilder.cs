@@ -18,10 +18,7 @@ internal class DefaultRazorIntermediateNodeBuilder : IntermediateNodeBuilder
 
     public override IntermediateNode Current
     {
-        get
-        {
-            return _depth > 0 ? _stack[_depth - 1] : null;
-        }
+        get { return _depth > 0 ? _stack[_depth - 1] : null; }
     }
 
     public override void Add(IntermediateNode node)
@@ -67,7 +64,9 @@ internal class DefaultRazorIntermediateNodeBuilder : IntermediateNodeBuilder
     {
         if (_depth == 0)
         {
-            throw new InvalidOperationException(Resources.FormatIntermediateNodeBuilder_PopInvalid(nameof(Pop)));
+            throw new InvalidOperationException(
+                Resources.FormatIntermediateNodeBuilder_PopInvalid(nameof(Pop))
+            );
         }
 
         var node = _stack[--_depth];

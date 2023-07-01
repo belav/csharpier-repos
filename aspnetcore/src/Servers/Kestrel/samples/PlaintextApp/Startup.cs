@@ -20,17 +20,19 @@ public class Startup
 
     public void Configure(IApplicationBuilder app)
     {
-        app.Run((httpContext) =>
-        {
-            var payload = _helloWorldBytes;
-            var response = httpContext.Response;
+        app.Run(
+            (httpContext) =>
+            {
+                var payload = _helloWorldBytes;
+                var response = httpContext.Response;
 
-            response.StatusCode = 200;
-            response.ContentType = "text/plain";
-            response.ContentLength = payload.Length;
+                response.StatusCode = 200;
+                response.ContentType = "text/plain";
+                response.ContentLength = payload.Length;
 
-            return response.BodyWriter.WriteAsync(payload).GetAsTask();
-        });
+                return response.BodyWriter.WriteAsync(payload).GetAsTask();
+            }
+        );
     }
 
     public static async Task Main(string[] args)

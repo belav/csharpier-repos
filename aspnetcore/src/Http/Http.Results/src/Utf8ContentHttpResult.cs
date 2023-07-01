@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="Utf8ContentHttpResult"/> that when executed
 /// will produce a response with content.
 /// </summary>
-public sealed partial class Utf8ContentHttpResult : IResult, IStatusCodeHttpResult, IContentTypeHttpResult
+public sealed partial class Utf8ContentHttpResult
+    : IResult,
+        IStatusCodeHttpResult,
+        IContentTypeHttpResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Utf8ContentHttpResult"/> class with the values
@@ -18,7 +21,11 @@ public sealed partial class Utf8ContentHttpResult : IResult, IStatusCodeHttpResu
     /// <param name="utf8Content">The value to format in the entity body.</param>
     /// <param name="statusCode">The HTTP status code of the response.</param>
     /// <param name="contentType">The Content-Type header for the response.</param>
-    internal Utf8ContentHttpResult(ReadOnlySpan<byte> utf8Content, string? contentType, int? statusCode)
+    internal Utf8ContentHttpResult(
+        ReadOnlySpan<byte> utf8Content,
+        string? contentType,
+        int? statusCode
+    )
     {
         // We need to make a copy here since we have to stash it on the heap
         ResponseContent = utf8Content.ToArray();
@@ -52,7 +59,9 @@ public sealed partial class Utf8ContentHttpResult : IResult, IStatusCodeHttpResu
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.Utf8ContentHttpResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.Utf8ContentHttpResult"
+        );
 
         if (StatusCode is { } statusCode)
         {

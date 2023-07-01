@@ -8,9 +8,7 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 public class TestDbContext : DbContext
 {
     public TestDbContext(DbContextOptions<TestDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<Blog> Blogs { get; set; }
 }

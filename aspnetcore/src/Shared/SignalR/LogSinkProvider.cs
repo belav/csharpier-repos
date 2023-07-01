@@ -23,13 +23,18 @@ internal sealed class LogSinkProvider : ILoggerProvider
         return new LogSinkLogger(categoryName, this);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     public IList<LogRecord> GetLogs() => _logs.ToList();
 
-    public void Log<TState>(string categoryName, LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(
+        string categoryName,
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception exception,
+        Func<TState, Exception, string> formatter
+    )
     {
         var record = new LogRecord(
             DateTime.Now,
@@ -41,7 +46,8 @@ internal sealed class LogSinkProvider : ILoggerProvider
                 State = state,
                 Exception = exception,
                 Formatter = (o, e) => formatter((TState)o, e),
-            });
+            }
+        );
         _logs.Enqueue(record);
 
         RecordLogged?.Invoke(record);
@@ -68,7 +74,13 @@ internal sealed class LogSinkProvider : ILoggerProvider
             return true;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             _logSinkProvider.Log(_categoryName, logLevel, eventId, state, exception, formatter);
         }

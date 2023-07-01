@@ -13,7 +13,11 @@ internal class StringSourceDocument : RazorSourceDocument
     private readonly RazorSourceLineCollection _lines;
     private byte[] _checksum;
 
-    public StringSourceDocument(string content, Encoding encoding, RazorSourceDocumentProperties properties)
+    public StringSourceDocument(
+        string content,
+        Encoding encoding,
+        RazorSourceDocumentProperties properties
+    )
     {
         if (content == null)
         {
@@ -50,7 +54,12 @@ internal class StringSourceDocument : RazorSourceDocument
 
     public override string RelativePath { get; }
 
-    public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+    public override void CopyTo(
+        int sourceIndex,
+        char[] destination,
+        int destinationIndex,
+        int count
+    )
     {
         if (destination == null)
         {
@@ -67,7 +76,11 @@ internal class StringSourceDocument : RazorSourceDocument
             throw new ArgumentOutOfRangeException(nameof(destinationIndex));
         }
 
-        if (count < 0 || count > Length - sourceIndex || count > destination.Length - destinationIndex)
+        if (
+            count < 0
+            || count > Length - sourceIndex
+            || count > destination.Length - destinationIndex
+        )
         {
             throw new ArgumentOutOfRangeException(nameof(count));
         }

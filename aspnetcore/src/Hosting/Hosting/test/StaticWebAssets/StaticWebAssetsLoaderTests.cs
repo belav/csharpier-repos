@@ -19,16 +19,14 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         public void UseStaticWebAssetsCore_CreatesCompositeRoot_WhenThereAreContentRootsInTheManifest()
         {
             // Arrange
-            var manifestContent = @$"<StaticWebAssets Version=""1.0"">
+            var manifestContent =
+                @$"<StaticWebAssets Version=""1.0"">
     <ContentRoot Path=""{AppContext.BaseDirectory}"" BasePath=""/BasePath"" />
 </StaticWebAssets>";
 
             var manifest = CreateManifest(manifestContent);
             var originalRoot = new NullFileProvider();
-            var environment = new HostingEnvironment()
-            {
-                WebRootFileProvider = originalRoot
-            };
+            var environment = new HostingEnvironment() { WebRootFileProvider = originalRoot };
 
             // Act
             StaticWebAssetsLoader.UseStaticWebAssetsCore(environment, manifest);
@@ -43,15 +41,13 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         public void UseStaticWebAssetsCore_DoesNothing_WhenManifestDoesNotContainEntries()
         {
             // Arrange
-            var manifestContent = @$"<StaticWebAssets Version=""1.0"">
+            var manifestContent =
+                @$"<StaticWebAssets Version=""1.0"">
 </StaticWebAssets>";
 
             var manifest = CreateManifest(manifestContent);
             var originalRoot = new NullFileProvider();
-            var environment = new HostingEnvironment()
-            {
-                WebRootFileProvider = originalRoot
-            };
+            var environment = new HostingEnvironment() { WebRootFileProvider = originalRoot };
 
             // Act
             StaticWebAssetsLoader.UseStaticWebAssetsCore(environment, manifest);
@@ -64,7 +60,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         public void ResolveManifest_ManifestFromFile()
         {
             // Arrange
-            var expectedManifest = @"<StaticWebAssets Version=""1.0"">
+            var expectedManifest =
+                @"<StaticWebAssets Version=""1.0"">
   <ContentRoot Path=""/Path"" BasePath=""/BasePath"" />
 </StaticWebAssets>
 ";
@@ -75,7 +72,10 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             };
 
             // Act
-            var manifest = StaticWebAssetsLoader.ResolveManifest(environment, new ConfigurationBuilder().Build());
+            var manifest = StaticWebAssetsLoader.ResolveManifest(
+                environment,
+                new ConfigurationBuilder().Build()
+            );
 
             // Assert
             Assert.Equal(expectedManifest, new StreamReader(manifest).ReadToEnd());
@@ -85,20 +85,22 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
         public void ResolveManifest_UsesConfigurationKey_WhenProvided()
         {
             // Arrange
-            var expectedManifest = @"<StaticWebAssets Version=""1.0"">
+            var expectedManifest =
+                @"<StaticWebAssets Version=""1.0"">
   <ContentRoot Path=""/Path"" BasePath=""/BasePath"" />
 </StaticWebAssets>
 ";
-            var path = Path.ChangeExtension(typeof(StaticWebAssetsLoader).Assembly.Location, ".StaticWebAssets.xml");
-            var environment = new HostingEnvironment()
-            {
-                ApplicationName = "NonExistingDll"
-            };
+            var path = Path.ChangeExtension(
+                typeof(StaticWebAssetsLoader).Assembly.Location,
+                ".StaticWebAssets.xml"
+            );
+            var environment = new HostingEnvironment() { ApplicationName = "NonExistingDll" };
 
             var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>() {
-                    [WebHostDefaults.StaticWebAssetsKey] = path
-                }).Build();
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>() { [WebHostDefaults.StaticWebAssetsKey] = path }
+                )
+                .Build();
 
             // Act
             var manifest = StaticWebAssetsLoader.ResolveManifest(environment, configuration);
@@ -106,7 +108,6 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             // Assert
             Assert.Equal(expectedManifest, new StreamReader(manifest).ReadToEnd());
         }
-
 
         private Stream CreateManifest(string manifestContent)
         {

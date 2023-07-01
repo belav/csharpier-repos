@@ -13,7 +13,11 @@ public static class IHtmlDocumentExtensions
         var element = document.QuerySelector(selector);
         if (element == null)
         {
-            throw new ArgumentException($"Document does not contain element that matches the selector {selector}: " + Environment.NewLine + document.DocumentElement.OuterHtml);
+            throw new ArgumentException(
+                $"Document does not contain element that matches the selector {selector}: "
+                    + Environment.NewLine
+                    + document.DocumentElement.OuterHtml
+            );
         }
 
         return element;
@@ -30,12 +34,17 @@ public static class IHtmlDocumentExtensions
             }
 
             var name = input.GetAttribute("name");
-            if (name == "__RequestVerificationToken" || name == "HtmlEncode[[__RequestVerificationToken]]")
+            if (
+                name == "__RequestVerificationToken"
+                || name == "HtmlEncode[[__RequestVerificationToken]]"
+            )
             {
                 return input.GetAttribute("value");
             }
         }
 
-        throw new Exception($"Antiforgery token could not be located in {htmlDocument.Source.Text}.");
+        throw new Exception(
+            $"Antiforgery token could not be located in {htmlDocument.Source.Text}."
+        );
     }
 }
