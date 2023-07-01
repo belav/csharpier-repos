@@ -3,8 +3,7 @@
 
 using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
-using Xunit;
-using static Microsoft.CodeAnalysis.Razor.RazorProjectEngineBuilderExtensions;
+using Xunit;using static Microsoft.CodeAnalysis.Razor.RazorProjectEngineBuilderExtensions;
 
 namespace Microsoft.CodeAnalysis.Razor;
 

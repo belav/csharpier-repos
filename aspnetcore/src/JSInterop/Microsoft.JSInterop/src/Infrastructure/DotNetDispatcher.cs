@@ -10,8 +10,7 @@ using System.Reflection.Metadata;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.Json;
-using Microsoft.AspNetCore.Internal;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.AspNetCore.Internal;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 [assembly: MetadataUpdateHandler(
     typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher.MetadataUpdateHandler)

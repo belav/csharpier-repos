@@ -3,8 +3,7 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Components.Web;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.AspNetCore.Components.Web;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

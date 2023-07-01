@@ -2,45 +2,49 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorServerWeb_CSharp.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+#if (IndividualLocalAuth)
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
 #endif
 #if (OrganizationalAuth)
 #if (MultiOrgAuth)
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 #endif
 using Microsoft.AspNetCore.Authorization;
-#endif
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
-#if (IndividualLocalAuth)
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-#endif
-using Microsoft.AspNetCore.Hosting;
 #if (RequiresHttps)
 using Microsoft.AspNetCore.HttpsPolicy;
 #endif
 #if (OrganizationalAuth)
 using Microsoft.AspNetCore.Mvc.Authorization;
-#endif
-#if (IndividualLocalAuth)
-using Microsoft.EntityFrameworkCore;
-#endif
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 #if(MultiOrgAuth)
 using Microsoft.IdentityModel.Tokens;
 #endif
 #if (IndividualLocalAuth)
 using BlazorServerWeb_CSharp.Areas.Identity;
 #endif
-using BlazorServerWeb_CSharp.Data;
+
+#endif
+
+#endif
+#if (IndividualLocalAuth)
+using Microsoft.EntityFrameworkCore;
+#endif
+
+#endif
+
 #if (GenerateGraph)
 using Microsoft.Graph;
 #endif

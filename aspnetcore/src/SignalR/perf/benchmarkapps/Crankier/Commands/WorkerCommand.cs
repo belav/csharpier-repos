@@ -5,9 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.CommandLineUtils;
-
-using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
+using Microsoft.Extensions.CommandLineUtils;using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
 
 namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 {

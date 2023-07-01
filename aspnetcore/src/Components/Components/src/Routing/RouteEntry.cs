@@ -4,8 +4,7 @@
 #nullable disable warnings
 
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using System.Diagnostics.CodeAnalysis;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 

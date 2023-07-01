@@ -6,8 +6,7 @@ using System.IO.Pipelines;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.Extensions.Logging;
-using static Microsoft.AspNetCore.HttpLogging.MediaTypeOptions;
+using Microsoft.Extensions.Logging;using static Microsoft.AspNetCore.HttpLogging.MediaTypeOptions;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 

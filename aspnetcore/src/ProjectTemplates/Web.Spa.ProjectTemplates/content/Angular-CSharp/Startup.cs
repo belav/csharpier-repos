@@ -1,8 +1,12 @@
-#if (IndividualLocalAuth)
-using Microsoft.AspNetCore.Authentication;
-#endif
+using Company.WebApplication1.Data;
+using Company.WebApplication1.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+#if (IndividualLocalAuth)
+using Microsoft.AspNetCore.Authentication;
 #if (IndividualLocalAuth)
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -12,12 +16,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 #endif
 #if (IndividualLocalAuth)
 using Microsoft.EntityFrameworkCore;
-using Company.WebApplication1.Data;
-using Company.WebApplication1.Models;
 #endif
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
+#endif
 
 namespace Company.WebApplication1
 {

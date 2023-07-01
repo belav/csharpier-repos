@@ -6,8 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using Xunit.Abstractions;
-using static Microsoft.AspNetCore.Testing.TestApplicationErrorLogger;
+using Xunit.Abstractions;using static Microsoft.AspNetCore.Testing.TestApplicationErrorLogger;
 
 namespace Microsoft.AspNetCore.Testing;
 

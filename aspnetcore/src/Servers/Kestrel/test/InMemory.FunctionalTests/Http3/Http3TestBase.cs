@@ -30,8 +30,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using Xunit;
-using Xunit.Abstractions;
-using static System.IO.Pipelines.DuplexPipe;
+using Xunit.Abstractions;using static System.IO.Pipelines.DuplexPipe;
 using static Microsoft.AspNetCore.Server.Kestrel.Core.Tests.Http2TestBase;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;

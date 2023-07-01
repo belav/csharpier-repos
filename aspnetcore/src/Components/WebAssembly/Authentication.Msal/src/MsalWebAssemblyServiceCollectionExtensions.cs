@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Authentication.WebAssembly.Msal;
 using Microsoft.Authentication.WebAssembly.Msal.Models;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.Extensions.Options;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

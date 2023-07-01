@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.IIS;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
-using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
 namespace IIS.Tests;
 

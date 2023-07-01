@@ -3,8 +3,8 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Google.Protobuf.WellKnownTypes;
 using Type = System.Type;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 

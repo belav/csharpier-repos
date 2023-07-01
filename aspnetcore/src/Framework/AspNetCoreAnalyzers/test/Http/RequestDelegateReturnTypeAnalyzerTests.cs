@@ -4,8 +4,8 @@
 namespace Microsoft.AspNetCore.Analyzers.Http;
 
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier<Microsoft.AspNetCore.Analyzers.Http.RequestDelegateReturnTypeAnalyzer>;
+using Microsoft.CodeAnalysis.Testing;
 
 public class RequestDelegateReturnTypeAnalyzerTests
 {

@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
-using Moq;
-using static Microsoft.AspNetCore.Hosting.HostingApplication;
+using Moq;using static Microsoft.AspNetCore.Hosting.HostingApplication;
 
 namespace Microsoft.AspNetCore.Hosting.Tests;
 

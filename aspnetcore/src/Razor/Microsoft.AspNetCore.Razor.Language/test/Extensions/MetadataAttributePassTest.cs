@@ -3,8 +3,7 @@
 
 using Microsoft.AspNetCore.Razor.Language.Components;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Xunit;
-using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
+using Xunit;using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAssert;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 

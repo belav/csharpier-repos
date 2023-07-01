@@ -11,8 +11,7 @@ using Microsoft.CodeAnalysis.Emit;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
-using Moq;
-using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
+using Moq;using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 

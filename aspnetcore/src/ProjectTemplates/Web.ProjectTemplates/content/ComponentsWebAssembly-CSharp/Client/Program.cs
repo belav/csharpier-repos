@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Components.Web;
-#if (!NoAuth && Hosted)
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-#endif
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 #if (Hosted)
 using ComponentsWebAssembly_CSharp.Client;
+#if (!NoAuth && Hosted)
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+#endif
+
 #else
 using ComponentsWebAssembly_CSharp;
 #endif

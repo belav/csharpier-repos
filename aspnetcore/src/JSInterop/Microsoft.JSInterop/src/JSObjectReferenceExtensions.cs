@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.JSInterop.Infrastructure;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.JSInterop.Infrastructure;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 

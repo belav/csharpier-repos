@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Components.Web.Infrastructure;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.JSInterop;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 

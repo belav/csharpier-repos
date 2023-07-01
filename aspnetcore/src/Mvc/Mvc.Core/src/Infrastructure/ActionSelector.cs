@@ -6,9 +6,9 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 

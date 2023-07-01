@@ -10,8 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
-using Xunit;
-using static CodeGenerator.KnownHeaders;
+using Xunit;using static CodeGenerator.KnownHeaders;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 

@@ -5,8 +5,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using Microsoft.JSInterop.Infrastructure;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using Microsoft.JSInterop.Infrastructure;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 

@@ -13,8 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Tools.Internal;
 #if NET7_0_OR_GREATER
 using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.DependencyInjection;
 #endif
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;

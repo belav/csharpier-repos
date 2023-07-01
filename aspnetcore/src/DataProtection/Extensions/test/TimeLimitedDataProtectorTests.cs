@@ -4,10 +4,10 @@
 using System;
 using System.Globalization;
 using System.Security.Cryptography;
+using ExtResources = Microsoft.AspNetCore.DataProtection.Extensions.Resources;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using Xunit;
-using ExtResources = Microsoft.AspNetCore.DataProtection.Extensions.Resources;
 
 namespace Microsoft.AspNetCore.DataProtection;
 

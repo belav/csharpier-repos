@@ -5,11 +5,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.Tools.Internal;
 #if NETCOREAPP
 using System.Runtime.Loader;
 #endif
-using Microsoft.Extensions.CommandLineUtils;
-using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 

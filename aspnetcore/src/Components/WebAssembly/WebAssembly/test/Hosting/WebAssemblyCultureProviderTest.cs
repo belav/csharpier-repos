@@ -5,8 +5,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.JSInterop;
-using Moq;
-using static Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyCultureProvider;
+using Moq;using static Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyCultureProvider;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

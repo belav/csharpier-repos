@@ -2,16 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Connections;
-using Microsoft.Extensions.CommandLineUtils;
-using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.SignalR.Crankier.Server;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.SignalR.Crankier.Server;
+using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
 
 namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 {

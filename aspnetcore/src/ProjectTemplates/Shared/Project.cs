@@ -16,8 +16,7 @@ using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
-using static Templates.Test.Helpers.ProcessLock;
+using Xunit.Sdk;using static Templates.Test.Helpers.ProcessLock;
 
 namespace Templates.Test.Helpers;
 

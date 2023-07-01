@@ -3,8 +3,7 @@
 
 using System;
 using System.Runtime.ExceptionServices;
-using System.Threading.Tasks;
-using static System.Windows.Threading.Dispatcher;
+using System.Threading.Tasks;using static System.Windows.Threading.Dispatcher;
 
 namespace Microsoft.AspNetCore.Components.WebView.Wpf
 {

@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using static Microsoft.AspNetCore.Components.BindConverter;
+using System.Globalization;using static Microsoft.AspNetCore.Components.BindConverter;
 
 namespace Microsoft.AspNetCore.Components;
 

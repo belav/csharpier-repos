@@ -3,8 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using static Microsoft.AspNetCore.Internal.LinkerFlags;
+using System.Text.Json.Serialization;using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
