@@ -4,7 +4,6 @@
 using System.Linq;
 
 
-
 using Xunit;
 
 namespace Moq.Tests.Linq

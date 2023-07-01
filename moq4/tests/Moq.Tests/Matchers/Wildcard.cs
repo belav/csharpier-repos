@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 using Xunit;
 
 /// <summary>
@@ -8,7 +9,7 @@ using Xunit;
 
 namespace Moq.Tests.Matchers.Wildcard
 {
-        using static AutoIsAny; // note using static to simplify syntax
+    using static AutoIsAny; // note using static to simplify syntax
 
     /// <summary>
     /// Helper class provided by user
