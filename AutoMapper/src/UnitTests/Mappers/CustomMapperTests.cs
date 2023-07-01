@@ -1,5 +1,5 @@
-﻿using AutoMapper.Internal.Mappers;
-using System.Globalization;
+﻿using System.Globalization;
+using AutoMapper.Internal.Mappers;
 
 namespace AutoMapper.UnitTests.Mappers;
 

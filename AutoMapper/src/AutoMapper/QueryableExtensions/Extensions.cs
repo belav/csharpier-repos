@@ -1,7 +1,8 @@
 namespace AutoMapper.QueryableExtensions;
 
-using MemberPaths = IEnumerable<MemberInfo[]>;
 using ParameterBag = IDictionary<string, object>;
+
+using MemberPaths = IEnumerable<MemberInfo[]>;
 
 /// <summary>
 /// Queryable extensions for AutoMapper

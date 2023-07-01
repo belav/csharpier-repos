@@ -6,8 +6,8 @@ using AutoMapper.Internal;
 
 namespace AutoMapper.QueryableExtensions.Impl
 {
-    using static Expression;
     using static Execution.ExpressionBuilder;
+    using static Expression;
     using static ReflectionHelper;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
