@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using IOPath = System.IO.Path;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyModel;
-using IOPath = System.IO.Path;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities
 {

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Data;
+using IsolationLevel = System.Data.IsolationLevel;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
-using IsolationLevel = System.Data.IsolationLevel;
 
 // ReSharper disable MethodHasAsyncOverload
 // ReSharper disable InconsistentNaming

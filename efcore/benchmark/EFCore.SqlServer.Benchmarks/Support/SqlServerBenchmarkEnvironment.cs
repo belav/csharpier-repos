@@ -4,10 +4,10 @@
 #if RELEASE20 || RELEASE21 || RELEASE22 || DEBUG20 || DEBUG21 || DEBUG22
 using System.Data.SqlClient;
 #else
-using Microsoft.Data.SqlClient;
-#endif
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
+#endif
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Benchmarks

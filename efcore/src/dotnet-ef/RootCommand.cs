@@ -6,8 +6,8 @@ using System.Runtime.Versioning;
 using System.Text.Json;
 using Microsoft.DotNet.Cli.CommandLine;
 using Microsoft.EntityFrameworkCore.Tools.Commands;
-using Microsoft.EntityFrameworkCore.Tools.Properties;
 using EFCommand = Microsoft.EntityFrameworkCore.Tools.Commands.RootCommand;
+using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
