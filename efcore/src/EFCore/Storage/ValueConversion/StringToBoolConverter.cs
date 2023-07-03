@@ -18,9 +18,7 @@ public class StringToBoolConverter : ValueConverter<string, bool>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public StringToBoolConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -33,16 +31,11 @@ public class StringToBoolConverter : ValueConverter<string, bool>
     ///     facets for the converted data.
     /// </param>
     public StringToBoolConverter(ConverterMappingHints? mappingHints)
-        : base(
-            v => Convert.ToBoolean(v),
-            v => Convert.ToString(v),
-            mappingHints)
-    {
-    }
+        : base(v => Convert.ToBoolean(v), v => Convert.ToString(v), mappingHints) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(string), typeof(bool), i => new StringToBoolConverter(i.MappingHints));
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(typeof(string), typeof(bool), i => new StringToBoolConverter(i.MappingHints));
 }

@@ -21,9 +21,7 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerOptionsExtension()
-    {
-    }
+    public SqlServerOptionsExtension() { }
 
     // NB: When adding new options, make sure to update the copy ctor below.
 
@@ -34,9 +32,7 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerOptionsExtension(SqlServerOptionsExtension copyFrom)
-        : base(copyFrom)
-    {
-    }
+        : base(copyFrom) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +40,7 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override DbContextOptionsExtensionInfo Info
-        => _info ??= new ExtensionInfo(this);
+    public override DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,8 +48,7 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalOptionsExtension Clone()
-        => new SqlServerOptionsExtension(this);
+    protected override RelationalOptionsExtension Clone() => new SqlServerOptionsExtension(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,26 +56,23 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override void ApplyServices(IServiceCollection services)
-        => services.AddEntityFrameworkSqlServer();
+    public override void ApplyServices(IServiceCollection services) =>
+        services.AddEntityFrameworkSqlServer();
 
     private sealed class ExtensionInfo : RelationalExtensionInfo
     {
         private string? _logFragment;
 
         public ExtensionInfo(IDbContextOptionsExtension extension)
-            : base(extension)
-        {
-        }
+            : base(extension) { }
 
-        private new SqlServerOptionsExtension Extension
-            => (SqlServerOptionsExtension)base.Extension;
+        private new SqlServerOptionsExtension Extension =>
+            (SqlServerOptionsExtension)base.Extension;
 
-        public override bool IsDatabaseProvider
-            => true;
+        public override bool IsDatabaseProvider => true;
 
-        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-            => other is ExtensionInfo;
+        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) =>
+            other is ExtensionInfo;
 
         public override string LogFragment
         {
@@ -100,7 +91,7 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
             }
         }
 
-        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-            => debugInfo["SqlServer"] = "1";
+        public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
+            debugInfo["SqlServer"] = "1";
     }
 }

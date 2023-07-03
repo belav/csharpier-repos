@@ -19,6 +19,5 @@ public class TemporarySByteValueGenerator : TemporaryNumberValueGenerator<sbyte>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override sbyte Next(EntityEntry entry)
-        => (sbyte)Interlocked.Increment(ref _current);
+    public override sbyte Next(EntityEntry entry) => (sbyte)Interlocked.Increment(ref _current);
 }

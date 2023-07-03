@@ -19,7 +19,12 @@ public class GlobExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public GlobExpression(SqlExpression match, SqlExpression pattern, bool negated, RelationalTypeMapping typeMapping)
+    public GlobExpression(
+        SqlExpression match,
+        SqlExpression pattern,
+        bool negated,
+        RelationalTypeMapping typeMapping
+    )
         : base(typeof(bool), typeMapping)
     {
         Match = match;
@@ -33,8 +38,7 @@ public class GlobExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override RelationalTypeMapping TypeMapping
-        => base.TypeMapping!;
+    public override RelationalTypeMapping TypeMapping => base.TypeMapping!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,8 +84,8 @@ public class GlobExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual GlobExpression Negate()
-        => new GlobExpression(Match, Pattern, !IsNegated, TypeMapping);
+    public virtual GlobExpression Negate() =>
+        new GlobExpression(Match, Pattern, !IsNegated, TypeMapping);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,8 +93,8 @@ public class GlobExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual GlobExpression Update(SqlExpression match, SqlExpression pattern)
-        => match != Match || pattern != Pattern
+    public virtual GlobExpression Update(SqlExpression match, SqlExpression pattern) =>
+        match != Match || pattern != Pattern
             ? new GlobExpression(match, pattern, IsNegated, TypeMapping)
             : this;
 
@@ -119,17 +123,18 @@ public class GlobExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is GlobExpression globExpression
-                && Equals(globExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is GlobExpression globExpression && Equals(globExpression)
+        );
 
-    private bool Equals(GlobExpression globExpression)
-        => base.Equals(globExpression)
-            && Match.Equals(globExpression.Match)
-            && Pattern.Equals(globExpression.Pattern)
-            && IsNegated.Equals(globExpression.IsNegated);
+    private bool Equals(GlobExpression globExpression) =>
+        base.Equals(globExpression)
+        && Match.Equals(globExpression.Match)
+        && Pattern.Equals(globExpression.Pattern)
+        && IsNegated.Equals(globExpression.IsNegated);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,6 +142,6 @@ public class GlobExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Match, Pattern, IsNegated);
+    public override int GetHashCode() =>
+        HashCode.Combine(base.GetHashCode(), Match, Pattern, IsNegated);
 }

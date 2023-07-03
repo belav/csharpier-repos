@@ -3,7 +3,9 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-public class ForeignKeyStrictComparer : IEqualityComparer<IReadOnlyForeignKey>, IComparer<IReadOnlyForeignKey>
+public class ForeignKeyStrictComparer
+    : IEqualityComparer<IReadOnlyForeignKey>,
+        IComparer<IReadOnlyForeignKey>
 {
     private readonly bool _compareAnnotations;
     private readonly bool _compareNavigations;
@@ -14,8 +16,8 @@ public class ForeignKeyStrictComparer : IEqualityComparer<IReadOnlyForeignKey>, 
         _compareNavigations = compareNavigations;
     }
 
-    public int Compare(IReadOnlyForeignKey x, IReadOnlyForeignKey y)
-        => ForeignKeyComparer.Instance.Compare(x, y);
+    public int Compare(IReadOnlyForeignKey x, IReadOnlyForeignKey y) =>
+        ForeignKeyComparer.Instance.Compare(x, y);
 
     public bool Equals(IReadOnlyForeignKey x, IReadOnlyForeignKey y)
     {
@@ -27,14 +29,27 @@ public class ForeignKeyStrictComparer : IEqualityComparer<IReadOnlyForeignKey>, 
         return y == null
             ? false
             : ForeignKeyComparer.Instance.Equals(x, y)
-            && (x.IsUnique == y.IsUnique)
-            && (x.IsRequired == y.IsRequired)
-            && (!_compareNavigations
-                || (new NavigationComparer(_compareAnnotations).Equals(x.DependentToPrincipal, y.DependentToPrincipal)
-                    && new NavigationComparer(_compareAnnotations).Equals(x.PrincipalToDependent, y.PrincipalToDependent)))
-            && (!_compareAnnotations || x.GetAnnotations().SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance));
+                && (x.IsUnique == y.IsUnique)
+                && (x.IsRequired == y.IsRequired)
+                && (
+                    !_compareNavigations
+                    || (
+                        new NavigationComparer(_compareAnnotations).Equals(
+                            x.DependentToPrincipal,
+                            y.DependentToPrincipal
+                        )
+                        && new NavigationComparer(_compareAnnotations).Equals(
+                            x.PrincipalToDependent,
+                            y.PrincipalToDependent
+                        )
+                    )
+                )
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
     }
 
-    public int GetHashCode(IReadOnlyForeignKey obj)
-        => ForeignKeyComparer.Instance.GetHashCode(obj);
+    public int GetHashCode(IReadOnlyForeignKey obj) => ForeignKeyComparer.Instance.GetHashCode(obj);
 }
