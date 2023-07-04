@@ -13,7 +13,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class FieldAccessException : MemberAccessException
     {
         public FieldAccessException()
@@ -34,8 +36,7 @@ namespace System
             HResult = HResults.COR_E_FIELDACCESS;
         }
 
-        protected FieldAccessException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected FieldAccessException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

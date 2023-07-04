@@ -12,7 +12,10 @@ namespace JitBench
             EnvironmentVariables = new Dictionary<string, string>();
         }
 
-        public bool IsDefault {  get { return Name == "Default"; } }
+        public bool IsDefault
+        {
+            get { return Name == "Default"; }
+        }
         public string Name { get; set; }
         public Dictionary<string, string> EnvironmentVariables { get; private set; }
 
@@ -36,7 +39,11 @@ namespace JitBench
             return WithModifier("NoNgen", "COMPlus_ZapDisable", "1");
         }
 
-        private BenchmarkConfiguration WithModifier(string modifier, string variableName, string variableValue)
+        private BenchmarkConfiguration WithModifier(
+            string modifier,
+            string variableName,
+            string variableValue
+        )
         {
             if (IsDefault)
             {

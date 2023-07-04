@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public class X<K> 
+public class X<K>
 {
     public X(K k1)
     {

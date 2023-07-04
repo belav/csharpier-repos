@@ -39,15 +39,27 @@ namespace ILCompiler.DependencyAnalysis
             if (_type.IsInterface)
                 return Array.Empty<DependencyListEntry>();
 
-            return Dataflow.ReflectionMethodBodyScanner.ProcessTypeGetTypeDataflow(factory, mdManager.FlowAnnotations, mdManager.Logger, _type);
+            return Dataflow.ReflectionMethodBodyScanner.ProcessTypeGetTypeDataflow(
+                factory,
+                mdManager.FlowAnnotations,
+                mdManager.Logger,
+                _type
+            );
         }
 
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
 
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

@@ -140,7 +140,9 @@ namespace System.Text.Json.Nodes
         /// <returns>
         ///   <see langword="true"/> if the <see cref="JsonObject"/> contains an element with the property name; otherwise, <see langword="false"/>.
         /// </returns>
-        bool ICollection<KeyValuePair<string, JsonNode?>>.Contains(KeyValuePair<string, JsonNode?> item)
+        bool ICollection<KeyValuePair<string, JsonNode?>>.Contains(
+            KeyValuePair<string, JsonNode?> item
+        )
         {
             InitializeIfRequired();
             Debug.Assert(_dictionary != null);
@@ -164,7 +166,10 @@ namespace System.Text.Json.Nodes
         ///   The number of elements in the source ICollection is greater than the available space from <paramref name="index"/>
         ///   to the end of the destination <paramref name="array"/>.
         /// </exception>
-        void ICollection<KeyValuePair<string, JsonNode?>>.CopyTo(KeyValuePair<string, JsonNode?>[] array, int index)
+        void ICollection<KeyValuePair<string, JsonNode?>>.CopyTo(
+            KeyValuePair<string, JsonNode?>[] array,
+            int index
+        )
         {
             InitializeIfRequired();
             Debug.Assert(_dictionary != null);
@@ -193,7 +198,9 @@ namespace System.Text.Json.Nodes
         /// <returns>
         ///   <see langword="true"/> if the element is successfully removed; otherwise, <see langword="false"/>.
         /// </returns>
-        bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(KeyValuePair<string, JsonNode?> item) => Remove(item.Key);
+        bool ICollection<KeyValuePair<string, JsonNode?>>.Remove(
+            KeyValuePair<string, JsonNode?> item
+        ) => Remove(item.Key);
 
         /// <summary>
         ///   Gets a collection containing the property names in the <see cref="JsonObject"/>.
@@ -281,19 +288,28 @@ namespace System.Text.Json.Nodes
 
                 if (dictionary is null)
                 {
-                    bool caseInsensitive = Options.HasValue ? Options.Value.PropertyNameCaseInsensitive : false;
+                    bool caseInsensitive = Options.HasValue
+                        ? Options.Value.PropertyNameCaseInsensitive
+                        : false;
                     dictionary = new JsonPropertyDictionary<JsonNode?>(caseInsensitive);
                     if (jsonElement.HasValue)
                     {
-                        foreach (JsonProperty jElementProperty in jsonElement.Value.EnumerateObject())
+                        foreach (
+                            JsonProperty jElementProperty in jsonElement.Value.EnumerateObject()
+                        )
                         {
-                            JsonNode? node = JsonNodeConverter.Create(jElementProperty.Value, Options);
+                            JsonNode? node = JsonNodeConverter.Create(
+                                jElementProperty.Value,
+                                Options
+                            );
                             if (node != null)
                             {
                                 node.Parent = this;
                             }
 
-                            dictionary.Add(new KeyValuePair<string, JsonNode?>(jElementProperty.Name, node));
+                            dictionary.Add(
+                                new KeyValuePair<string, JsonNode?>(jElementProperty.Name, node)
+                            );
                         }
                     }
 

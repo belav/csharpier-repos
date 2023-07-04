@@ -9,12 +9,12 @@ public class Writer
     public object Data { get; set; }
     public int Position { get; set; }
 
-   [MethodImpl(MethodImplOptions.NoInlining)]
-   Writer()
-   {
-       Data = new int[] { 100, -1, -2, -3 };
-       Position = 4;
-   }
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    Writer()
+    {
+        Data = new int[] { 100, -1, -2, -3 };
+        Position = 4;
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ArraySegment<byte> Test()
@@ -24,7 +24,7 @@ public class Writer
         byte[] data = Unsafe.As<object, byte[]>(ref temp);
         return new ArraySegment<byte>(data, 0, writer.Position);
     }
-    
+
     public static int Main()
     {
         var x = Test();

@@ -11,21 +11,23 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
 {
-    public class ReadyToRunSingleAssemblyCompilationModuleGroup : ReadyToRunCompilationModuleGroupBase
+    public class ReadyToRunSingleAssemblyCompilationModuleGroup
+        : ReadyToRunCompilationModuleGroupBase
     {
         private ProfileDataManager _profileGuidedCompileRestriction;
         private bool _profileGuidedCompileRestrictionSet;
 
         public ReadyToRunSingleAssemblyCompilationModuleGroup(
-            ReadyToRunCompilationModuleGroupConfig config) :
-                base(config)
-        {
-        }
+            ReadyToRunCompilationModuleGroupConfig config
+        )
+            : base(config) { }
 
         public sealed override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
             if (!_profileGuidedCompileRestrictionSet)
-                throw new InternalCompilerErrorException("Called ContainsMethodBody without setting profile guided restriction");
+                throw new InternalCompilerErrorException(
+                    "Called ContainsMethodBody without setting profile guided restriction"
+                );
 
             if (_profileGuidedCompileRestriction != null)
             {
@@ -40,13 +42,20 @@ namespace ILCompiler
                 return false;
             }
 
-            return (ContainsType(method.OwningType) && VersionsWithMethodBody(method)) || CompileVersionBubbleGenericsIntoCurrentModule(method) || this.CrossModuleCompileable(method);
+            return (ContainsType(method.OwningType) && VersionsWithMethodBody(method))
+                || CompileVersionBubbleGenericsIntoCurrentModule(method)
+                || this.CrossModuleCompileable(method);
         }
 
-        public sealed override void ApplyProfileGuidedOptimizationData(ProfileDataManager profileGuidedCompileRestriction, bool partial)
+        public sealed override void ApplyProfileGuidedOptimizationData(
+            ProfileDataManager profileGuidedCompileRestriction,
+            bool partial
+        )
         {
             if (_profileGuidedCompileRestrictionSet)
-                throw new InternalCompilerErrorException("Called ApplyProfileGuidedOptimizationData twice.");
+                throw new InternalCompilerErrorException(
+                    "Called ApplyProfileGuidedOptimizationData twice."
+                );
 
             _profileGuidedCompileRestrictionSet = true;
             if (partial)

@@ -18,9 +18,7 @@ namespace Server.Contract
         [ComImport]
         [CoClass(typeof(EventTestingClass))]
         [Guid("83AFF8E4-C46A-45DB-9D91-2ADB5164545E")]
-        internal interface EventTesting : IEventTesting, Events.TestingEvents_Event
-        {
-        }
+        internal interface EventTesting : IEventTesting, Events.TestingEvents_Event { }
 
         /// <summary>
         /// Managed activation for CoClass
@@ -28,9 +26,7 @@ namespace Server.Contract
         [ComImport]
         [ComSourceInterfaces("Server.Contract.Events.TestingEvents\0")]
         [Guid(Server.Contract.Guids.EventTesting)]
-        internal class EventTestingClass
-        {
-        }
+        internal class EventTestingClass { }
     }
 
     /// <summary>
@@ -63,14 +59,18 @@ namespace Server.Contract
         public sealed class TestingEvents_EventProvider : TestingEvents_Event, IDisposable
         {
             private readonly WeakReference ConnectionPointContainer;
-            private readonly List<TestingEvents_SinkHelper> eventSinkHelpers = new List<TestingEvents_SinkHelper>();
+            private readonly List<TestingEvents_SinkHelper> eventSinkHelpers =
+                new List<TestingEvents_SinkHelper>();
 
             private IConnectionPoint connectionPoint;
             private bool isDisposed = false;
 
             public TestingEvents_EventProvider(object container)
             {
-                this.ConnectionPointContainer = new WeakReference((IConnectionPointContainer)container, false);
+                this.ConnectionPointContainer = new WeakReference(
+                    (IConnectionPointContainer)container,
+                    false
+                );
             }
 
             event TestingEvents_OnEventEventHandler TestingEvents_Event.OnEvent

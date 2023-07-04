@@ -16,6 +16,7 @@ namespace DelegateTest
     class BeginInvokeEndInvokeTest
     {
         public delegate string AsyncMethodCaller(int input);
+
         static int Main()
         {
             IAsyncResult result = null;
@@ -31,7 +32,10 @@ namespace DelegateTest
             }
             catch (Exception ex)
             {
-                Console.WriteLine("BeginInvoke resulted in unexpected exception: {0}", ex.ToString());
+                Console.WriteLine(
+                    "BeginInvoke resulted in unexpected exception: {0}",
+                    ex.ToString()
+                );
                 Console.WriteLine("FAILED!");
                 return -1;
             }

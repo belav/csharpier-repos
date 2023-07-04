@@ -11,15 +11,15 @@ internal class ConcatTest
     static string strD = "D";
     static string strE = "E";
 
-    static string strAB      = "AB";
-    static string strABC     = "ABC";
-    static string strABCD    = "ABCD";
-    static string strABCDE   = "ABCDE";
-    static string strABCDx2  = "ABCDABCD";
+    static string strAB = "AB";
+    static string strABC = "ABC";
+    static string strABCD = "ABCD";
+    static string strABCDE = "ABCDE";
+    static string strABCDx2 = "ABCDABCD";
 
     static int iReturn = 100;
 
-    static public int Main()
+    public static int Main()
     {
         iReturn = 100;
         try
@@ -57,8 +57,9 @@ internal class ConcatTest
     {
         if (result != expected)
         {
-            Console.WriteLine("FAILED: result was '" + result +
-                              "', expected was '" + expected + "'");
+            Console.WriteLine(
+                "FAILED: result was '" + result + "', expected was '" + expected + "'"
+            );
             iReturn++;
         }
     }

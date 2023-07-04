@@ -26,7 +26,10 @@ namespace ILCompiler.DependencyAnalysisFramework
         /// <summary>
         /// Add a root node
         /// </summary>
-        public abstract void AddRoot(DependencyNodeCore<DependencyContextType> rootNode, string reason);
+        public abstract void AddRoot(
+            DependencyNodeCore<DependencyContextType> rootNode,
+            string reason
+        );
 
         /// <summary>
         /// Add a root node
@@ -40,10 +43,9 @@ namespace ILCompiler.DependencyAnalysisFramework
         /// Return the marked node list. Do not modify this list, as it will cause unexpected behavior.
         /// Call <see cref="ComputeMarkedNodes"/> to compute the list first.
         /// </summary>
-        public abstract ImmutableArray<DependencyNodeCore<DependencyContextType>> MarkedNodeList
-        {
-            get;
-        }
+        public abstract ImmutableArray<
+            DependencyNodeCore<DependencyContextType>
+        > MarkedNodeList { get; }
 
         /// <summary>
         /// Computes the list of marked nodes. This is a no-op if the marked nodes are already computed.
@@ -61,7 +63,9 @@ namespace ILCompiler.DependencyAnalysisFramework
         /// nodes be computed.
         /// </summary>
 
-        public abstract event Action<List<DependencyNodeCore<DependencyContextType>>> ComputeDependencyRoutine;
+        public abstract event Action<
+            List<DependencyNodeCore<DependencyContextType>>
+        > ComputeDependencyRoutine;
 
         /// <summary>
         /// This event is triggered when all of the deferred dependencies from a phase have finished, and
@@ -73,12 +77,16 @@ namespace ILCompiler.DependencyAnalysisFramework
         /// Used to walk all nodes that should be emitted to a log. Not intended for other purposes.
         /// </summary>
         /// <param name="logNodeVisitor"></param>
-        public abstract void VisitLogNodes(IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor);
+        public abstract void VisitLogNodes(
+            IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor
+        );
 
         /// <summary>
         /// Used to walk the logical edges in the graph as part of log building.
         /// </summary>
         /// <param name="logEdgeVisitor"></param>
-        public abstract void VisitLogEdges(IDependencyAnalyzerLogEdgeVisitor<DependencyContextType> logEdgeVisitor);
+        public abstract void VisitLogEdges(
+            IDependencyAnalyzerLogEdgeVisitor<DependencyContextType> logEdgeVisitor
+        );
     }
 }

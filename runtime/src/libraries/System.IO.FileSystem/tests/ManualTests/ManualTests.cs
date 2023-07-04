@@ -10,7 +10,8 @@ namespace System.IO.ManualTests
 {
     public class FileSystemManualTests
     {
-        public static bool ManualTestsEnabled => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
+        public static bool ManualTestsEnabled =>
+            !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
 
         [ConditionalFact(nameof(ManualTestsEnabled))]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
@@ -67,7 +68,11 @@ namespace System.IO.ManualTests
             Assert.True(File.Exists(origin));
 
             using FileStream originStream = new FileStream(origin, FileMode.Open, FileAccess.Read);
-            Stream destinationStream = new FileStream(destination, FileMode.Create, FileAccess.Write);
+            Stream destinationStream = new FileStream(
+                destination,
+                FileMode.Create,
+                FileAccess.Write
+            );
             originStream.CopyTo(destinationStream, 1);
 
             Assert.Throws<IOException>(() =>

@@ -10,7 +10,11 @@ namespace System.Text.Json.Serialization.Converters
     {
         private const int MaxEscapedCharacterLength = JsonConstants.MaxExpansionFactorWhileEscaping;
 
-        public override char Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override char Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (!JsonHelpers.IsInRangeInclusive(reader.ValueLength, 1, MaxEscapedCharacterLength))
             {
@@ -36,16 +40,25 @@ namespace System.Text.Json.Serialization.Converters
 #else
                 value.ToString()
 #endif
-                );
+            );
         }
 
-        internal override char ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override char ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             return Read(ref reader, typeToConvert, options);
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, char value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            char value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             writer.WritePropertyName(
 #if NETCOREAPP
@@ -53,7 +66,7 @@ namespace System.Text.Json.Serialization.Converters
 #else
                 value.ToString()
 #endif
-                );
+            );
         }
     }
 }

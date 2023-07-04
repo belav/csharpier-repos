@@ -16,6 +16,11 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static unsafe partial bool SystemParametersInfoW(SystemParametersAction uiAction, uint uiParam, void* pvParam, uint fWinIni);
+        public static unsafe partial bool SystemParametersInfoW(
+            SystemParametersAction uiAction,
+            uint uiParam,
+            void* pvParam,
+            uint fWinIni
+        );
     }
 }

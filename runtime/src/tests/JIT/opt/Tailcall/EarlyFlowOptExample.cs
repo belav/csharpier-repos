@@ -7,9 +7,7 @@ using System.Runtime.CompilerServices;
 // Test case showing that we can have "more complex"
 // IR after a tail call if we do early flow opts.
 
-interface IX
-{
-}
+interface IX { }
 
 class X : IX
 {

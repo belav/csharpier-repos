@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class C
 {
     private string s = "This is private";
@@ -33,4 +34,3 @@ public class Class1
         return 1;
     }
 }
-

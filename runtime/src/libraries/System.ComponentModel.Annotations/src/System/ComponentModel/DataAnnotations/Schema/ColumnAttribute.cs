@@ -18,9 +18,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColumnAttribute" /> class.
         /// </summary>
-        public ColumnAttribute()
-        {
-        }
+        public ColumnAttribute() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ColumnAttribute" /> class.
@@ -30,7 +28,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(name)),
+                    nameof(name)
+                );
             }
 
             Name = name;
@@ -66,7 +67,10 @@ namespace System.ComponentModel.DataAnnotations.Schema
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(value)), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.ArgumentIsNullOrWhitespace, nameof(value)),
+                        nameof(value)
+                    );
                 }
 
                 _typeName = value;

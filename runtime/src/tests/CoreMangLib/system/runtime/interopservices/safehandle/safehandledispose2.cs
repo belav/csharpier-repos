@@ -4,15 +4,12 @@ using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHandle
 
-
 [SecurityCritical]
 public class MySafeValidHandle : SafeHandle
 {
-[SecurityCritical]
+    [SecurityCritical]
     public MySafeValidHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public MySafeValidHandle(IntPtr handleValue)
         : base(IntPtr.Zero, true)
@@ -41,11 +38,9 @@ public class MySafeValidHandle : SafeHandle
 [SecurityCritical]
 public class MySafeInValidHandle : SafeHandle
 {
-[SecurityCritical]
+    [SecurityCritical]
     public MySafeInValidHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public MySafeInValidHandle(IntPtr handleValue)
         : base(IntPtr.Zero, true)
@@ -108,7 +103,9 @@ public class SafeHandleDispose2
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest1: call Dispose on valid SafeHandle instance");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: call Dispose on valid SafeHandle instance"
+        );
 
         try
         {
@@ -122,7 +119,9 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("001", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -130,15 +129,15 @@ public class SafeHandleDispose2
         return retVal;
     }
 
-
-
     [SecuritySafeCritical]
     public bool PosTest2()
     {
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: call Dispose on an invalid SafeHandle instance");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: call Dispose on an invalid SafeHandle instance"
+        );
 
         try
         {
@@ -152,7 +151,9 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("002", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -160,15 +161,15 @@ public class SafeHandleDispose2
         return retVal;
     }
 
-
-
     [SecuritySafeCritical]
     public bool PosTest3()
     {
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest3: call Dispose on valid SafeHandle instance with false");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: call Dispose on valid SafeHandle instance with false"
+        );
 
         try
         {
@@ -182,7 +183,9 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("003", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -190,15 +193,15 @@ public class SafeHandleDispose2
         return retVal;
     }
 
-
-
     [SecuritySafeCritical]
     public bool PosTest4()
     {
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest4: call Dispose on an invalid SafeHandle instance with false");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest4: call Dispose on an invalid SafeHandle instance with false"
+        );
 
         try
         {
@@ -212,7 +215,9 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("004", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -242,15 +247,15 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("101", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
 
         return retVal;
     }
-
-
 
     [SecuritySafeCritical]
     public bool NegTest2()
@@ -270,14 +275,15 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("102", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
 
         return retVal;
     }
-
 
     [SecuritySafeCritical]
     public bool NegTest3()
@@ -297,15 +303,15 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("103", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
 
         return retVal;
     }
-
-
 
     [SecuritySafeCritical]
     public bool NegTest4()
@@ -325,7 +331,9 @@ public class SafeHandleDispose2
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("104", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
 // Declared as signed long, which has sizeof(void*) on OSX.
-using CFIndex=System.IntPtr;
+using CFIndex = System.IntPtr;
 
 internal static partial class Interop
 {
@@ -52,9 +52,7 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeCFErrorHandle : SafeHandle
     {
         public SafeCFErrorHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

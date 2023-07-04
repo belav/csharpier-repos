@@ -19,7 +19,8 @@ namespace System.Security.Permissions.Tests
             int hash = amc.GetHashCode();
             string str = amc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             amc.FromXml(se);
             amc.FromXml(se, pl);
             se = amc.ToXml();
@@ -29,14 +30,16 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void ApplicationDirectoryMembershipConditionCallMethods()
         {
-            ApplicationDirectoryMembershipCondition admc = new ApplicationDirectoryMembershipCondition();
+            ApplicationDirectoryMembershipCondition admc =
+                new ApplicationDirectoryMembershipCondition();
             bool check = admc.Check(new Evidence());
             IMembershipCondition obj = admc.Copy();
             check = admc.Equals(new object());
             int hash = admc.GetHashCode();
             string str = admc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             admc.FromXml(se);
             admc.FromXml(se, pl);
             se = admc.ToXml();
@@ -53,7 +56,8 @@ namespace System.Security.Permissions.Tests
             int hash = gmc.GetHashCode();
             string str = gmc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             gmc.FromXml(se);
             gmc.FromXml(se, pl);
             se = gmc.ToXml();
@@ -61,17 +65,24 @@ namespace System.Security.Permissions.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Security.Cryptography.Algorithms is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Security.Cryptography.Algorithms is not supported on this platform."
+        )]
         public static void HashMembershipConditionCallMethods()
         {
-            HashMembershipCondition hmc = new HashMembershipCondition(Cryptography.SHA1.Create(), new byte[1]);
+            HashMembershipCondition hmc = new HashMembershipCondition(
+                Cryptography.SHA1.Create(),
+                new byte[1]
+            );
             bool check = hmc.Check(new Evidence());
             IMembershipCondition obj = hmc.Copy();
             check = hmc.Equals(new object());
             int hash = hmc.GetHashCode();
             string str = hmc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             hmc.FromXml(se);
             hmc.FromXml(se, pl);
             se = hmc.ToXml();
@@ -79,17 +90,25 @@ namespace System.Security.Permissions.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Security.Cryptography.X509Certificates is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Security.Cryptography.X509Certificates is not supported on this platform."
+        )]
         public static void PublisherMembershipConditionCallMethods()
         {
-            PublisherMembershipCondition pmc = new PublisherMembershipCondition(new System.Security.Cryptography.X509Certificates.X509Certificate2(stackalloc byte[0]));
+            PublisherMembershipCondition pmc = new PublisherMembershipCondition(
+                new System.Security.Cryptography.X509Certificates.X509Certificate2(
+                    stackalloc byte[0]
+                )
+            );
             bool check = pmc.Check(new Evidence());
             IMembershipCondition obj = pmc.Copy();
             check = pmc.Equals(new object());
             int hash = pmc.GetHashCode();
             string str = pmc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             pmc.FromXml(se);
             pmc.FromXml(se, pl);
             se = pmc.ToXml();
@@ -106,7 +125,8 @@ namespace System.Security.Permissions.Tests
             int hash = smc.GetHashCode();
             string str = smc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             smc.FromXml(se);
             smc.FromXml(se, pl);
             se = smc.ToXml();
@@ -116,14 +136,19 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void StrongNameMembershipConditionCallMethods()
         {
-            StrongNameMembershipCondition snmc = new StrongNameMembershipCondition(new StrongNamePublicKeyBlob(new byte[1]), "test", new Version(0, 1));
+            StrongNameMembershipCondition snmc = new StrongNameMembershipCondition(
+                new StrongNamePublicKeyBlob(new byte[1]),
+                "test",
+                new Version(0, 1)
+            );
             bool check = snmc.Check(new Evidence());
             IMembershipCondition obj = snmc.Copy();
             check = snmc.Equals(new object());
             int hash = snmc.GetHashCode();
             string str = snmc.ToString();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             snmc.FromXml(se);
             snmc.FromXml(se, pl);
             se = snmc.ToXml();

@@ -3,17 +3,13 @@
 
 using System;
 
-public class Base<T>
-{
-}
+public class Base<T> { }
 
-public class Child<T> : Base<T>
-{
-}
+public class Child<T> : Base<T> { }
 
 public class VarType
 {
-    static public void foo<T>()
+    public static void foo<T>()
     {
         Console.WriteLine(typeof(T).ToString());
     }

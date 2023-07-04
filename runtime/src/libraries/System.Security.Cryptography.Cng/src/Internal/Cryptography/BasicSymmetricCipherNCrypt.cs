@@ -21,7 +21,14 @@ namespace Internal.Cryptography
         //
         // The delegate must instantiate a new CngKey, based on a new underlying NCryptKeyHandle, each time is called.
         //
-        public BasicSymmetricCipherNCrypt(Func<CngKey> cngKeyFactory, CipherMode cipherMode, int blockSizeInBytes, byte[]? iv, bool encrypting, int paddingSize)
+        public BasicSymmetricCipherNCrypt(
+            Func<CngKey> cngKeyFactory,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            byte[]? iv,
+            bool encrypting,
+            int paddingSize
+        )
             : base(iv, blockSizeInBytes, paddingSize)
         {
             _encrypting = encrypting;
@@ -49,9 +56,27 @@ namespace Internal.Cryptography
             {
                 unsafe
                 {
-                    errorCode = _encrypting ?
-                        Interop.NCrypt.NCryptEncrypt(keyHandle, input, input.Length, null, output, output.Length, out numBytesWritten, AsymmetricPaddingMode.None) :
-                        Interop.NCrypt.NCryptDecrypt(keyHandle, input, input.Length, null, output, output.Length, out numBytesWritten, AsymmetricPaddingMode.None);
+                    errorCode = _encrypting
+                        ? Interop.NCrypt.NCryptEncrypt(
+                            keyHandle,
+                            input,
+                            input.Length,
+                            null,
+                            output,
+                            output.Length,
+                            out numBytesWritten,
+                            AsymmetricPaddingMode.None
+                        )
+                        : Interop.NCrypt.NCryptDecrypt(
+                            keyHandle,
+                            input,
+                            input.Length,
+                            null,
+                            output,
+                            output.Length,
+                            out numBytesWritten,
+                            AsymmetricPaddingMode.None
+                        );
                 }
             }
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -79,7 +104,7 @@ namespace Internal.Cryptography
             if (input.Length != 0)
             {
                 numBytesWritten = Transform(input, output);
-                Debug.Assert(numBytesWritten == input.Length);  // Our implementation of Transform() guarantees this. See comment above.
+                Debug.Assert(numBytesWritten == input.Length); // Our implementation of Transform() guarantees this. See comment above.
             }
 
             Reset();
@@ -104,7 +129,11 @@ namespace Internal.Cryptography
         {
             if (IV != null)
             {
-                CngProperty prop = new CngProperty(Interop.NCrypt.NCRYPT_INITIALIZATION_VECTOR, IV, CngPropertyOptions.None);
+                CngProperty prop = new CngProperty(
+                    Interop.NCrypt.NCRYPT_INITIALIZATION_VECTOR,
+                    IV,
+                    CngPropertyOptions.None
+                );
                 _cngKey!.SetProperty(prop);
             }
         }
@@ -112,11 +141,20 @@ namespace Internal.Cryptography
         private CngKey _cngKey;
         private readonly bool _encrypting;
 
-        private static readonly CngProperty s_ECBMode =
-            new CngProperty(Interop.NCrypt.NCRYPT_CHAINING_MODE_PROPERTY, Encoding.Unicode.GetBytes(Interop.BCrypt.BCRYPT_CHAIN_MODE_ECB + "\0"), CngPropertyOptions.None);
-        private static readonly CngProperty s_CBCMode =
-            new CngProperty(Interop.NCrypt.NCRYPT_CHAINING_MODE_PROPERTY, Encoding.Unicode.GetBytes(Interop.BCrypt.BCRYPT_CHAIN_MODE_CBC + "\0"), CngPropertyOptions.None);
-        private static readonly CngProperty s_CFBMode =
-            new CngProperty(Interop.NCrypt.NCRYPT_CHAINING_MODE_PROPERTY, Encoding.Unicode.GetBytes(Interop.BCrypt.BCRYPT_CHAIN_MODE_CFB + "\0"), CngPropertyOptions.None);
+        private static readonly CngProperty s_ECBMode = new CngProperty(
+            Interop.NCrypt.NCRYPT_CHAINING_MODE_PROPERTY,
+            Encoding.Unicode.GetBytes(Interop.BCrypt.BCRYPT_CHAIN_MODE_ECB + "\0"),
+            CngPropertyOptions.None
+        );
+        private static readonly CngProperty s_CBCMode = new CngProperty(
+            Interop.NCrypt.NCRYPT_CHAINING_MODE_PROPERTY,
+            Encoding.Unicode.GetBytes(Interop.BCrypt.BCRYPT_CHAIN_MODE_CBC + "\0"),
+            CngPropertyOptions.None
+        );
+        private static readonly CngProperty s_CFBMode = new CngProperty(
+            Interop.NCrypt.NCRYPT_CHAINING_MODE_PROPERTY,
+            Encoding.Unicode.GetBytes(Interop.BCrypt.BCRYPT_CHAIN_MODE_CFB + "\0"),
+            CngPropertyOptions.None
+        );
     }
 }

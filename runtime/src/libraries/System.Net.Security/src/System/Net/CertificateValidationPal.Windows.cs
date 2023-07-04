@@ -14,14 +14,22 @@ namespace System.Net
     internal static partial class CertificateValidationPal
     {
         internal static SslPolicyErrors VerifyCertificateProperties(
-            SafeDeleteContext? _ /*securityContext*/,
+            SafeDeleteContext? _ /*securityContext*/
+            ,
             X509Chain chain,
             X509Certificate2 remoteCertificate,
             bool checkCertName,
             bool isServer,
-            string? hostName)
+            string? hostName
+        )
         {
-            return CertificateValidation.BuildChainAndVerifyProperties(chain, remoteCertificate, checkCertName, isServer, hostName);
+            return CertificateValidation.BuildChainAndVerifyProperties(
+                chain,
+                remoteCertificate,
+                checkCertName,
+                isServer,
+                hostName
+            );
         }
 
         //
@@ -32,7 +40,8 @@ namespace System.Net
             SafeDeleteContext? securityContext,
             bool retrieveChainCertificates,
             ref X509Chain? chain,
-            X509ChainPolicy? chainPolicy)
+            X509ChainPolicy? chainPolicy
+        )
         {
             if (securityContext == null)
             {
@@ -51,11 +60,19 @@ namespace System.Net
                 // the collection is retrieved for cert validation purposes after the handshake completes.
                 if (retrieveChainCertificates) // handshake completed
                 {
-                    SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CONTEXT(GlobalSSPI.SSPISecureChannel, securityContext, out remoteContext);
+                    SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CONTEXT(
+                        GlobalSSPI.SSPISecureChannel,
+                        securityContext,
+                        out remoteContext
+                    );
                 }
                 else // in handshake
                 {
-                    SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CHAIN(GlobalSSPI.SSPISecureChannel, securityContext, out remoteContext);
+                    SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_REMOTE_CERT_CHAIN(
+                        GlobalSSPI.SSPISecureChannel,
+                        securityContext,
+                        out remoteContext
+                    );
                 }
 
                 if (remoteContext != null && !remoteContext.IsInvalid)
@@ -77,7 +94,10 @@ namespace System.Net
                                 chain.ChainPolicy = chainPolicy;
                             }
 
-                            UnmanagedCertificateContext.GetRemoteCertificatesFromStoreContext(remoteContext, chain.ChainPolicy.ExtraStore);
+                            UnmanagedCertificateContext.GetRemoteCertificatesFromStoreContext(
+                                remoteContext,
+                                chain.ChainPolicy.ExtraStore
+                            );
                         }
                     }
 
@@ -85,7 +105,8 @@ namespace System.Net
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Log.RemoteCertificate(result);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Log.RemoteCertificate(result);
             return result;
         }
 
@@ -95,8 +116,14 @@ namespace System.Net
             SafeFreeCertContext? localContext = null;
             try
             {
-                if (SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_LOCAL_CERT_CONTEXT(GlobalSSPI.SSPISecureChannel, securityContext, out localContext) &&
-                    localContext != null)
+                if (
+                    SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_LOCAL_CERT_CONTEXT(
+                        GlobalSSPI.SSPISecureChannel,
+                        securityContext,
+                        out localContext
+                    )
+                    && localContext != null
+                )
                 {
                     return !localContext.IsInvalid;
                 }
@@ -117,7 +144,12 @@ namespace System.Net
         internal static string[] GetRequestCertificateAuthorities(SafeDeleteContext securityContext)
         {
             Interop.SspiCli.SecPkgContext_IssuerListInfoEx issuerList = default;
-            bool success = SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_ISSUER_LIST_EX(GlobalSSPI.SSPISecureChannel, securityContext, ref issuerList, out SafeHandle? sspiHandle);
+            bool success = SSPIWrapper.QueryContextAttributes_SECPKG_ATTR_ISSUER_LIST_EX(
+                GlobalSSPI.SSPISecureChannel,
+                securityContext,
+                ref issuerList,
+                out SafeHandle? sspiHandle
+            );
 
             string[] issuers = Array.Empty<string>();
             try
@@ -127,16 +159,29 @@ namespace System.Net
                     unsafe
                     {
                         issuers = new string[issuerList.cIssuers];
-                        var elements = new Span<Interop.SspiCli.CERT_CHAIN_ELEMENT>((void*)sspiHandle!.DangerousGetHandle(), issuers.Length);
+                        var elements = new Span<Interop.SspiCli.CERT_CHAIN_ELEMENT>(
+                            (void*)sspiHandle!.DangerousGetHandle(),
+                            issuers.Length
+                        );
                         for (int i = 0; i < elements.Length; ++i)
                         {
-                            Debug.Assert(elements[i].cbSize > 0, $"Interop.SspiCli._CERT_CHAIN_ELEMENT size is not positive: {elements[i].cbSize}");
+                            Debug.Assert(
+                                elements[i].cbSize > 0,
+                                $"Interop.SspiCli._CERT_CHAIN_ELEMENT size is not positive: {elements[i].cbSize}"
+                            );
                             if (elements[i].cbSize > 0)
                             {
-                                byte[] x = new Span<byte>((byte*)elements[i].pCertContext, checked((int)elements[i].cbSize)).ToArray();
+                                byte[] x = new Span<byte>(
+                                    (byte*)elements[i].pCertContext,
+                                    checked((int)elements[i].cbSize)
+                                ).ToArray();
                                 var x500DistinguishedName = new X500DistinguishedName(x);
                                 issuers[i] = x500DistinguishedName.Name;
-                                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(securityContext, $"IssuerListEx[{issuers[i]}]");
+                                if (NetEventSource.Log.IsEnabled())
+                                    NetEventSource.Info(
+                                        securityContext,
+                                        $"IssuerListEx[{issuers[i]}]"
+                                    );
                             }
                         }
                     }
@@ -161,10 +206,13 @@ namespace System.Net
             try
             {
                 using SafeAccessTokenHandle invalidHandle = SafeAccessTokenHandle.InvalidHandle;
-                WindowsIdentity.RunImpersonated(invalidHandle, () =>
-                {
-                    store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                });
+                WindowsIdentity.RunImpersonated(
+                    invalidHandle,
+                    () =>
+                    {
+                        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                    }
+                );
             }
             catch
             {

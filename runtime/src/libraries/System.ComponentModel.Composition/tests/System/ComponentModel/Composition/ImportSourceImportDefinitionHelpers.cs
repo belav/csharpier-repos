@@ -12,7 +12,6 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-
     internal static class ImportSourceImportDefinitionHelpers
     {
         public static ImportDefinition RemoveImportSource(this ImportDefinition definition)
@@ -52,7 +51,7 @@ namespace System.ComponentModel.Composition.Hosting
                     var reply = this._metadata;
                     if (reply == null)
                     {
-                        reply = new Dictionary<string, object> (this._sourceDefinition.Metadata);
+                        reply = new Dictionary<string, object>(this._sourceDefinition.Metadata);
                         reply.Remove(CompositionConstants.ImportSourceMetadataName);
                         this._metadata = reply;
                     }
@@ -100,10 +99,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             public override IEnumerable<KeyValuePair<string, Type>> RequiredMetadata
             {
-                get
-                {
-                    return this._sourceDefinition.RequiredMetadata;
-                }
+                get { return this._sourceDefinition.RequiredMetadata; }
             }
 
             public override CreationPolicy RequiredCreationPolicy

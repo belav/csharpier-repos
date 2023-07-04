@@ -7,7 +7,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
 {
     public class CheckPlatformTests
     {
-        [Fact, PlatformSpecific(TestPlatforms.Linux)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.Linux)] // Tests RuntimeInformation OS platform
         public void CheckLinux()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Linux));
@@ -26,7 +26,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.NetBSD)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.NetBSD)] // Tests RuntimeInformation OS platform
         public void CheckNetBSD()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Create("NETBSD")));
@@ -45,7 +45,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.OSX)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.OSX)] // Tests RuntimeInformation OS platform
         public void CheckOSX()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.OSX));
@@ -64,7 +64,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.iOS)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.iOS)] // Tests RuntimeInformation OS platform
         public void CheckiOS()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS")));
@@ -84,7 +84,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.tvOS)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.tvOS)] // Tests RuntimeInformation OS platform
         public void ChecktvOS()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Create("TVOS")));
@@ -104,7 +104,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.Android)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.Android)] // Tests RuntimeInformation OS platform
         public void CheckAndroid()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Create("ANDROID")));
@@ -123,7 +123,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.Browser)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.Browser)] // Tests RuntimeInformation OS platform
         public void CheckBrowser()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER")));
@@ -142,7 +142,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.Windows)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.Windows)] // Tests RuntimeInformation OS platform
         public void CheckWindows()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
@@ -160,7 +160,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.FreeBSD)]  // Tests RuntimeInformation OS platform
+        [Fact, PlatformSpecific(TestPlatforms.FreeBSD)] // Tests RuntimeInformation OS platform
         public void CheckFreeBSD()
         {
             Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD));
@@ -185,8 +185,17 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             OSPlatform randomObj = OSPlatform.Create("random");
             OSPlatform defaultObj = default(OSPlatform);
             OSPlatform conObj = new OSPlatform();
-            Assert.Throws<ArgumentNullException>(() => { OSPlatform nullObj = OSPlatform.Create(null); });
-            AssertExtensions.Throws<ArgumentException>("osPlatform", () => { OSPlatform emptyObj = OSPlatform.Create(""); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                OSPlatform nullObj = OSPlatform.Create(null);
+            });
+            AssertExtensions.Throws<ArgumentException>(
+                "osPlatform",
+                () =>
+                {
+                    OSPlatform emptyObj = OSPlatform.Create("");
+                }
+            );
 
             Assert.True(winObj == winProp);
             Assert.True(winObj != randomObj);
@@ -223,9 +232,18 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.Equal(OSPlatform.Create("A"), OSPlatform.Create("A"));
             Assert.Equal(OSPlatform.Create("a"), OSPlatform.Create("a"));
 
-            Assert.Equal(OSPlatform.Create("A").GetHashCode(), OSPlatform.Create("a").GetHashCode());
-            Assert.Equal(OSPlatform.Create("A").GetHashCode(), OSPlatform.Create("A").GetHashCode());
-            Assert.Equal(OSPlatform.Create("a").GetHashCode(), OSPlatform.Create("a").GetHashCode());
+            Assert.Equal(
+                OSPlatform.Create("A").GetHashCode(),
+                OSPlatform.Create("a").GetHashCode()
+            );
+            Assert.Equal(
+                OSPlatform.Create("A").GetHashCode(),
+                OSPlatform.Create("A").GetHashCode()
+            );
+            Assert.Equal(
+                OSPlatform.Create("a").GetHashCode(),
+                OSPlatform.Create("a").GetHashCode()
+            );
         }
     }
 }

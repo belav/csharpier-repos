@@ -10,7 +10,9 @@ namespace System.Xml.Tests
     public class XsltcTestBasicFunctionality : XsltcTestCaseBase
     {
         private ITestOutputHelper _output;
-        public XsltcTestBasicFunctionality(ITestOutputHelper output) : base(output)
+
+        public XsltcTestBasicFunctionality(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -34,7 +36,7 @@ namespace System.Xml.Tests
         {
             if (ShouldSkip(englishOnly))
             {
-                return;// TEST_SKIPPED;
+                return; // TEST_SKIPPED;
             }
             string cmdLine = param0.ToString();
             string baselineFile = param1.ToString();

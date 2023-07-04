@@ -12,7 +12,12 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void HandleDuplication()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 SafeNCryptKeyHandle keyHandle1 = key.Handle;
                 SafeNCryptKeyHandle keyHandle2 = key.Handle;
@@ -28,10 +33,18 @@ namespace System.Security.Cryptography.Cng.Tests
                 Assert.False(hasProperty);
 
                 byte[] propertyValue = { 1, 2, 3 };
-                CngProperty property = new CngProperty(propertyName, propertyValue, CngPropertyOptions.CustomProperty);
+                CngProperty property = new CngProperty(
+                    propertyName,
+                    propertyValue,
+                    CngPropertyOptions.CustomProperty
+                );
                 key.SetProperty(property);
 
-                byte[] actualValue = key.GetProperty(propertyName, CngPropertyOptions.CustomProperty).GetValue();
+                byte[] actualValue = key.GetProperty(
+                        propertyName,
+                        CngPropertyOptions.CustomProperty
+                    )
+                    .GetValue();
                 Assert.Equal<byte>(propertyValue, actualValue);
             }
         }
@@ -57,9 +70,18 @@ namespace System.Security.Cryptography.Cng.Tests
                 Assert.True(closedAndInvalid.IsInvalid, "closedAndInvalid.IsInvalid");
 
                 // Tests
-                AssertExtensions.Throws<ArgumentException>("parentHandle", () => new SafeNCryptKeyHandle(IntPtr.Zero, openButInvalid));
-                AssertExtensions.Throws<ArgumentException>("parentHandle", () => new SafeNCryptKeyHandle(IntPtr.Zero, closedButValid));
-                AssertExtensions.Throws<ArgumentException>("parentHandle", () => new SafeNCryptKeyHandle(IntPtr.Zero, closedAndInvalid));
+                AssertExtensions.Throws<ArgumentException>(
+                    "parentHandle",
+                    () => new SafeNCryptKeyHandle(IntPtr.Zero, openButInvalid)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "parentHandle",
+                    () => new SafeNCryptKeyHandle(IntPtr.Zero, closedButValid)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "parentHandle",
+                    () => new SafeNCryptKeyHandle(IntPtr.Zero, closedAndInvalid)
+                );
             }
         }
 
@@ -74,8 +96,14 @@ namespace System.Security.Cryptography.Cng.Tests
 
                 parentHandle.Dispose();
 
-                Assert.True(parentHandle.IsInvalid, "After parentHandle.Dispose, parentHandle.IsInvalid");
-                Assert.True(parentHandle.IsClosed, "After parentHandle.Dispose, parentHandle.IsClosed");
+                Assert.True(
+                    parentHandle.IsInvalid,
+                    "After parentHandle.Dispose, parentHandle.IsInvalid"
+                );
+                Assert.True(
+                    parentHandle.IsClosed,
+                    "After parentHandle.Dispose, parentHandle.IsClosed"
+                );
             }
         }
 
@@ -99,12 +127,24 @@ namespace System.Security.Cryptography.Cng.Tests
 
                         parentHandle.Dispose();
 
-                        Assert.False(parentHandle.IsInvalid, "After parentHandle.Dispose, parentHandle.IsInvalid");
-                        Assert.False(parentHandle.IsClosed, "After parentHandle.Dispose, parentHandle.IsClosed");
+                        Assert.False(
+                            parentHandle.IsInvalid,
+                            "After parentHandle.Dispose, parentHandle.IsInvalid"
+                        );
+                        Assert.False(
+                            parentHandle.IsClosed,
+                            "After parentHandle.Dispose, parentHandle.IsClosed"
+                        );
                     }
 
-                    Assert.True(parentHandle.IsInvalid, "After keyHandle.Dispose, parentHandle.IsInvalid");
-                    Assert.True(parentHandle.IsClosed, "After keyHandle.Dispose, parentHandle.IsClosed");
+                    Assert.True(
+                        parentHandle.IsInvalid,
+                        "After keyHandle.Dispose, parentHandle.IsInvalid"
+                    );
+                    Assert.True(
+                        parentHandle.IsClosed,
+                        "After keyHandle.Dispose, parentHandle.IsClosed"
+                    );
                 }
             }
             finally
@@ -126,12 +166,16 @@ namespace System.Security.Cryptography.Cng.Tests
 
                 using (SafeHandle parentHandle = new StateInformingSafeHandle())
                 {
-                    using (var keyHandle = new SafeNCryptKeyHandle(fakeKeyPtr, parentHandle))
-                    {
-                    }
+                    using (var keyHandle = new SafeNCryptKeyHandle(fakeKeyPtr, parentHandle)) { }
 
-                    Assert.False(parentHandle.IsInvalid, "After keyHandle.Dispose, parentHandle.IsInvalid");
-                    Assert.False(parentHandle.IsClosed, "After keyHandle.Dispose, parentHandle.IsClosed");
+                    Assert.False(
+                        parentHandle.IsInvalid,
+                        "After keyHandle.Dispose, parentHandle.IsInvalid"
+                    );
+                    Assert.False(
+                        parentHandle.IsClosed,
+                        "After keyHandle.Dispose, parentHandle.IsClosed"
+                    );
                 }
             }
             finally
@@ -146,14 +190,10 @@ namespace System.Security.Cryptography.Cng.Tests
             private readonly bool _invalidateOnClose;
 
             public StateInformingSafeHandle()
-                : this(true)
-            {
-            }
+                : this(true) { }
 
             public StateInformingSafeHandle(bool isOpen)
-                : this(isOpen, true)
-            {
-            }
+                : this(isOpen, true) { }
 
             public StateInformingSafeHandle(bool isOpen, bool invalidateOnClose)
                 : base(IntPtr.Zero, true)

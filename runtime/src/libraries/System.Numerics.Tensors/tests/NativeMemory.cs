@@ -42,7 +42,7 @@ namespace System.Numerics.Tensors.Tests
 
         public bool IsDisposed => disposed;
 
-        public unsafe override Span<T> GetSpan() => new Span<T>((void*)memory, length);
+        public override unsafe Span<T> GetSpan() => new Span<T>((void*)memory, length);
 
         protected bool IsRetained => refCount > 0;
 
@@ -51,7 +51,8 @@ namespace System.Numerics.Tensors.Tests
             unsafe
             {
                 Retain();
-                if ((uint)elementIndex > length) throw new ArgumentOutOfRangeException(nameof(elementIndex));
+                if ((uint)elementIndex > length)
+                    throw new ArgumentOutOfRangeException(nameof(elementIndex));
                 void* pointer = Unsafe.Add<T>((void*)memory, elementIndex);
                 return new MemoryHandle(pointer, default, this);
             }

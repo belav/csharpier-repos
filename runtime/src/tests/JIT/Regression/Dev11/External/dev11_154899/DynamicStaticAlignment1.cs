@@ -22,7 +22,6 @@ namespace Test
         }
     }
 
-
     public static class App
     {
         public static int Main()
@@ -33,7 +32,7 @@ namespace Test
             var container4 = new Container<Stream>();
             var container5 = new Container<BinaryReader>();
             var container6 = new Container<BinaryWriter>();
-            return 100;  //assume if no unhandled exception the test passes
+            return 100; //assume if no unhandled exception the test passes
         }
     }
 }

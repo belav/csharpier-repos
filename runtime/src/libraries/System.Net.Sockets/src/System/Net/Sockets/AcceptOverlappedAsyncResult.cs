@@ -9,26 +9,24 @@ namespace System.Net.Sockets
         private readonly Socket _listenSocket;
         private byte[]? _buffer;
 
-        internal AcceptOverlappedAsyncResult(Socket listenSocket, object? asyncState, AsyncCallback? asyncCallback) :
-            base(listenSocket, asyncState, asyncCallback)
+        internal AcceptOverlappedAsyncResult(
+            Socket listenSocket,
+            object? asyncState,
+            AsyncCallback? asyncCallback
+        )
+            : base(listenSocket, asyncState, asyncCallback)
         {
             _listenSocket = listenSocket;
         }
 
         internal byte[]? Buffer
         {
-            get
-            {
-                return _buffer;
-            }
+            get { return _buffer; }
         }
 
         internal int BytesTransferred
         {
-            get
-            {
-                return _numBytes;
-            }
+            get { return _numBytes; }
         }
     }
 }

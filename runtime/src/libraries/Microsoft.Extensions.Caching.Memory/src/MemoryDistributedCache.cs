@@ -18,7 +18,10 @@ namespace Microsoft.Extensions.Caching.Distributed
         public MemoryDistributedCache(IOptions<MemoryDistributedCacheOptions> optionsAccessor)
             : this(optionsAccessor, NullLoggerFactory.Instance) { }
 
-        public MemoryDistributedCache(IOptions<MemoryDistributedCacheOptions> optionsAccessor, ILoggerFactory loggerFactory)
+        public MemoryDistributedCache(
+            IOptions<MemoryDistributedCacheOptions> optionsAccessor,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(optionsAccessor);
             ThrowHelper.ThrowIfNull(loggerFactory);
@@ -33,7 +36,10 @@ namespace Microsoft.Extensions.Caching.Distributed
             return (byte[]?)_memCache.Get(key);
         }
 
-        public Task<byte[]?> GetAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<byte[]?> GetAsync(
+            string key,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             ThrowHelper.ThrowIfNull(key);
 
@@ -48,14 +54,20 @@ namespace Microsoft.Extensions.Caching.Distributed
 
             var memoryCacheEntryOptions = new MemoryCacheEntryOptions();
             memoryCacheEntryOptions.AbsoluteExpiration = options.AbsoluteExpiration;
-            memoryCacheEntryOptions.AbsoluteExpirationRelativeToNow = options.AbsoluteExpirationRelativeToNow;
+            memoryCacheEntryOptions.AbsoluteExpirationRelativeToNow =
+                options.AbsoluteExpirationRelativeToNow;
             memoryCacheEntryOptions.SlidingExpiration = options.SlidingExpiration;
             memoryCacheEntryOptions.Size = value.Length;
 
             _memCache.Set(key, value, memoryCacheEntryOptions);
         }
 
-        public Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
+        public Task SetAsync(
+            string key,
+            byte[] value,
+            DistributedCacheEntryOptions options,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             ThrowHelper.ThrowIfNull(key);
             ThrowHelper.ThrowIfNull(value);

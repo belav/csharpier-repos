@@ -21,7 +21,10 @@ namespace ILLink.Shared.TrimAnalysis
             MultiValue result = MultiValueLattice.Top;
             foreach (var sizeValue in size)
             {
-                result = MultiValueLattice.Meet(result, new MultiValue(new ArrayValue(sizeValue, elementType)));
+                result = MultiValueLattice.Meet(
+                    result,
+                    new MultiValue(new ArrayValue(sizeValue, elementType))
+                );
             }
 
             return result;
@@ -74,7 +77,8 @@ namespace ILLink.Shared.TrimAnalysis
 
             // If both sets T and O are the same size and "T intersect O" is empty, then T == O.
             HashSet<KeyValuePair<int, ValueBasicBlockPair>> thisValueSet = new(IndexValues);
-            HashSet<KeyValuePair<int, ValueBasicBlockPair>> otherValueSet = new(otherArr.IndexValues);
+            HashSet<KeyValuePair<int, ValueBasicBlockPair>> otherValueSet =
+                new(otherArr.IndexValues);
             thisValueSet.ExceptWith(otherValueSet);
             return thisValueSet.Count == 0;
         }
@@ -84,7 +88,10 @@ namespace ILLink.Shared.TrimAnalysis
             var newValue = new ArrayValue(Size.DeepCopy(), ElementType);
             foreach (var kvp in IndexValues)
             {
-                newValue.IndexValues.Add(kvp.Key, new ValueBasicBlockPair(kvp.Value.Value.Clone(), kvp.Value.BasicBlockIndex));
+                newValue.IndexValues.Add(
+                    kvp.Key,
+                    new ValueBasicBlockPair(kvp.Value.Value.Clone(), kvp.Value.BasicBlockIndex)
+                );
             }
 
             return newValue;

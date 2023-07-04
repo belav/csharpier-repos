@@ -9,7 +9,10 @@ namespace System.Collections.Generic
         int Count
         {
 #if MONO
-            [System.Diagnostics.CodeAnalysis.DynamicDependency(nameof(Array.InternalArray__IReadOnlyCollection_get_Count), typeof(Array))]
+            [System.Diagnostics.CodeAnalysis.DynamicDependency(
+                nameof(Array.InternalArray__IReadOnlyCollection_get_Count),
+                typeof(Array)
+            )]
 #endif
             get;
         }

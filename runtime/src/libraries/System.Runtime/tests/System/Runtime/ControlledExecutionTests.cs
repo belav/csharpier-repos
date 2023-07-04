@@ -13,12 +13,17 @@ namespace System.Runtime.Tests
     public sealed class ControlledExecutionTests
     {
         private volatile bool _readyForCancellation;
-        private bool _caughtException, _finishedExecution;
+        private bool _caughtException,
+            _finishedExecution;
         private Exception _exception;
         private volatile int _counter;
 
         // Tests that the Run method finishes normally if no cancellation is requested
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void RunWithoutCancelling()
         {
             var cts = new CancellationTokenSource();
@@ -34,7 +39,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests that a nested invocation of the Run method throws an InvalidOperationException
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void TestNestedRunInvocation()
         {
             bool nestedExecution = false;
@@ -53,7 +62,11 @@ namespace System.Runtime.Tests
 
         // Tests that an infinite loop may be aborted and that the ThreadAbortException is translated
         // to an OperationCanceledException.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelOutsideOfTryCatchFinally()
         {
             var cts = new CancellationTokenSource();
@@ -73,7 +86,11 @@ namespace System.Runtime.Tests
 
         // Tests that an infinite loop may be aborted, that the ThreadAbortException is automatically rethrown,
         // and that it is eventually translated to an OperationCanceledException.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelInTryAndExitCatchNormally()
         {
             var cts = new CancellationTokenSource();
@@ -109,7 +126,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests that catch blocks are not aborted. The catch block swallows the ThreadAbortException and throws a different exception.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelInTryAndThrowFromCatch()
         {
             var cts = new CancellationTokenSource();
@@ -137,7 +158,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests that finally blocks are not aborted. The finally block exits normally.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelInFinallyThatSleeps()
         {
             var cts = new CancellationTokenSource();
@@ -166,7 +191,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests that finally blocks are not aborted. The finally block throws an exception.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelInFinallyThatSleepsAndThrows()
         {
             var cts = new CancellationTokenSource();
@@ -194,7 +223,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests cancellation before calling the Run method. The action must never start.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelBeforeRun()
         {
             var cts = new CancellationTokenSource();
@@ -211,7 +244,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests cancellation by the action itself
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelItselfOutsideOfTryCatchFinally()
         {
             var cts = new CancellationTokenSource();
@@ -230,7 +267,11 @@ namespace System.Runtime.Tests
         }
 
         // Tests cancellation by the action itself. Finally blocks must be executed except the one that triggered cancellation.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMonoRuntime),
+            nameof(PlatformDetection.IsNotNativeAot)
+        )]
         public void CancelItselfFromFinally()
         {
             bool finishedContainingFinally = false;
@@ -314,8 +355,6 @@ namespace System.Runtime.Tests
             }
         }
 
-        private sealed class TestException : Exception
-        {
-        }
+        private sealed class TestException : Exception { }
     }
 }

@@ -16,11 +16,9 @@ class Class1
         for (int i = 0; i < threads.Length - 1; i++)
         {
             if (i % 2 == 0)
-                threads[i] = new Thread(new
-                    ParameterizedThreadStart(tsi.ThreadWorkerA));
+                threads[i] = new Thread(new ParameterizedThreadStart(tsi.ThreadWorkerA));
             else
-                threads[i] = new Thread(new
-                    ParameterizedThreadStart(tsi.ThreadWorkerB));
+                threads[i] = new Thread(new ParameterizedThreadStart(tsi.ThreadWorkerB));
 
             threads[i].Start(args);
         }
@@ -51,7 +49,8 @@ public class ThreadSafe
     private string newValueB = "world";
     private bool success;
 
-    public ThreadSafe() : this(10000) { }
+    public ThreadSafe()
+        : this(10000) { }
 
     public ThreadSafe(int loops)
     {
@@ -93,7 +92,6 @@ public class ThreadSafe
                 success = false;
             }
         }
-
     }
 
     public void ThreadWorkerB(object obj)
@@ -131,7 +129,7 @@ public class ThreadSafe
     {
         signal.WaitOne();
 
-        while(curVal == "start string")
+        while (curVal == "start string")
         {
             Thread.Sleep(0);
         }
@@ -151,9 +149,6 @@ public class ThreadSafe
 
     public bool Pass
     {
-        get
-        {
-            return (success);
-        }
+        get { return (success); }
     }
 }

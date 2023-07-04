@@ -11,17 +11,36 @@ namespace System.Globalization.Tests
         public static IEnumerable<object[]> CurrencyGroupSizes_TestData()
         {
             yield return new object[] { NumberFormatInfo.InvariantInfo, new int[] { 3 } };
-            yield return new object[] { CultureInfo.GetCultureInfo("en-US").NumberFormat, new int[] { 3 } };
-
-            if (PlatformDetection.IsNotUsingLimitedCultures && !PlatformDetection.IsUbuntu && !PlatformDetection.IsWindows7 && !PlatformDetection.IsWindows8x && !PlatformDetection.IsFedora)
+            yield return new object[]
             {
-                yield return new object[] { CultureInfo.GetCultureInfo("ur-IN").NumberFormat, new int[] { 3, 2 } };
+                CultureInfo.GetCultureInfo("en-US").NumberFormat,
+                new int[] { 3 }
+            };
+
+            if (
+                PlatformDetection.IsNotUsingLimitedCultures
+                && !PlatformDetection.IsUbuntu
+                && !PlatformDetection.IsWindows7
+                && !PlatformDetection.IsWindows8x
+                && !PlatformDetection.IsFedora
+            )
+            {
+                yield return new object[]
+                {
+                    CultureInfo.GetCultureInfo("ur-IN").NumberFormat,
+                    new int[] { 3, 2 }
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(CurrencyGroupSizes_TestData))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/79867", typeof(PlatformDetection), nameof(PlatformDetection.IsArm64Process), nameof(PlatformDetection.IsWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/79867",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsArm64Process),
+            nameof(PlatformDetection.IsWindows)
+        )]
         public void CurrencyGroupSizes_Get_ReturnsExpected(NumberFormatInfo format, int[] expected)
         {
             Assert.Equal(expected, format.CurrencyGroupSizes);
@@ -43,7 +62,11 @@ namespace System.Globalization.Tests
         public void CurrencyGroupSizes_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "CurrencyGroupSizes", () => format.CurrencyGroupSizes = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "CurrencyGroupSizes",
+                () => format.CurrencyGroupSizes = null
+            );
         }
 
         [Theory]
@@ -53,13 +76,19 @@ namespace System.Globalization.Tests
         public void CurrencyGroupSizes_SetInvalid_ThrowsArgumentException(int[] value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>("value", "CurrencyGroupSizes", () => format.CurrencyGroupSizes = value);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                "CurrencyGroupSizes",
+                () => format.CurrencyGroupSizes = value
+            );
         }
 
         [Fact]
         public void CurrencyGroupSizes_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.CurrencyGroupSizes = new int[] { 1, 2, 3 });
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyGroupSizes = new int[] { 1, 2, 3 }
+            );
         }
     }
 }

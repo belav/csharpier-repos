@@ -19,7 +19,12 @@ namespace ILCompiler.DependencyAnalysis
 
         public BlockReflectionTypeMapNode(ExternalReferencesTableNode externalReferences)
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__block_reflection_type_map_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__block_reflection_type_map_End",
+                true
+            );
             _externalReferences = externalReferences;
         }
 
@@ -29,20 +34,28 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__block_reflection_type_map");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var writer = new NativeWriter();
             var reflectionBlockTypeMapHashTable = new VertexHashtable();
@@ -68,17 +81,27 @@ namespace ILCompiler.DependencyAnalysis
                 // Go with a necessary type symbol. It will be upgraded to a constructed one if a constructed was emitted.
                 IEETypeNode typeSymbol = factory.NecessaryTypeSymbol(type);
 
-                Vertex vertex = writer.GetUnsignedConstant(_externalReferences.GetIndex(typeSymbol));
+                Vertex vertex = writer.GetUnsignedConstant(
+                    _externalReferences.GetIndex(typeSymbol)
+                );
 
                 int hashCode = typeSymbol.Type.GetHashCode();
-                reflectionBlockTypeMapHashTable.Append((uint)hashCode, hashTableSection.Place(vertex));
+                reflectionBlockTypeMapHashTable.Append(
+                    (uint)hashCode,
+                    hashTableSection.Place(vertex)
+                );
             }
 
             byte[] hashTableBytes = writer.Save();
 
             _endSymbol.SetSymbolOffset(hashTableBytes.Length);
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

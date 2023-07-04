@@ -12,7 +12,12 @@ namespace System.Runtime.InteropServices.ComTypes
     public interface IEnumMoniker
     {
         [PreserveSig]
-        int Next(int celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IMoniker[] rgelt, IntPtr pceltFetched);
+        int Next(
+            int celt,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IMoniker[] rgelt,
+            IntPtr pceltFetched
+        );
+
         [PreserveSig]
         int Skip(int celt);
         void Reset();

@@ -7,7 +7,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
 {
     internal static class NameManager
     {
-        private static readonly Name[] s_predefinedNames = {
+        private static readonly Name[] s_predefinedNames =
+        {
             new Name(".ctor"),
             new Name("Finalize"),
             new Name(".cctor"),

@@ -23,7 +23,9 @@ namespace Internal.IL.Stubs.StartupCode
             {
                 int index = s.IndexOf('=');
                 if (index <= 0)
-                    throw new ArgumentException($"String '{s}' in unexpected format. Expected 'Key=Value'");
+                    throw new ArgumentException(
+                        $"String '{s}' in unexpected format. Expected 'Key=Value'"
+                    );
                 switches.Add(KeyValuePair.Create(s.Substring(0, index), s.Substring(index + 1)));
             }
 
@@ -32,34 +34,22 @@ namespace Internal.IL.Stubs.StartupCode
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return "SetAppContextSwitches";
-            }
+            get { return "SetAppContextSwitches"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "SetAppContextSwitches";
-            }
+            get { return "SetAppContextSwitches"; }
         }
 
         public override MethodIL EmitIL()
@@ -87,9 +77,12 @@ namespace Internal.IL.Stubs.StartupCode
         {
             get
             {
-                _signature ??= new MethodSignature(MethodSignatureFlags.Static, 0,
-                            Context.GetWellKnownType(WellKnownType.Void),
-                            TypeDesc.EmptyTypes);
+                _signature ??= new MethodSignature(
+                    MethodSignatureFlags.Static,
+                    0,
+                    Context.GetWellKnownType(WellKnownType.Void),
+                    TypeDesc.EmptyTypes
+                );
 
                 return _signature;
             }

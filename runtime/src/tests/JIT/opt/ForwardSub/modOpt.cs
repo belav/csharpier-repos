@@ -7,9 +7,7 @@
 // Reduced from 169.3 KiB to 0.7 KiB in 00:44:43
 // Debug: Outputs 0
 // Release: Outputs 1
-public class C0
-{
-}
+public class C0 { }
 
 public struct S0
 {
@@ -18,14 +16,16 @@ public struct S0
     public uint F5;
     public int F7;
     public short F9;
-    public S0(uint f2, int f7): this()
+
+    public S0(uint f2, int f7)
+        : this()
     {
         F7 = f7;
     }
 
     public int M21(uint arg0)
     {
-        S0[] var0 = new S0[]{new S0(0, 0)};
+        S0[] var0 = new S0[] { new S0(0, 0) };
         var vr1 = new S0(this.F2++, ForwardSubModOpt.M23());
         return ForwardSubModOpt.s_8.F7;
     }
@@ -36,6 +36,7 @@ public class ForwardSubModOpt
     public static IRT s_rt;
     public static uint s_2;
     public static S0 s_8 = new S0(0, 1);
+
     public static int Main()
     {
         s_rt = new C();

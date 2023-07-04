@@ -13,7 +13,10 @@ namespace Test
 
     public struct AA
     {
-        bool Method1() { return false; }
+        bool Method1()
+        {
+            return false;
+        }
 
         static void Method4(int param1, ref uint param2)
         {

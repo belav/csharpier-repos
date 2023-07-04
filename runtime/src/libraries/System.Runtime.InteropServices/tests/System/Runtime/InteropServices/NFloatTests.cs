@@ -83,7 +83,6 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(0.0f)]
         [InlineData(4567.0f)]
         [InlineData(4567.89101f)]
-
         [InlineData(float.NaN)]
         public static void ToStringTest64(float value)
         {
@@ -98,7 +97,6 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(0.0f)]
         [InlineData(4567.0f)]
         [InlineData(4567.89101f)]
-
         [InlineData(float.NaN)]
         public static void ToStringTest32(float value)
         {

@@ -17,7 +17,11 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(CurrencyDecimalDigits_TestData))]
-        public void CurrencyDecimalDigits_Get_ReturnsExpected(NumberFormatInfo format, int expectedNls, int expectedIcu)
+        public void CurrencyDecimalDigits_Get_ReturnsExpected(
+            NumberFormatInfo format,
+            int expectedNls,
+            int expectedIcu
+        )
         {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedIcu;
             Assert.Equal(expected, format.CurrencyDecimalDigits);
@@ -40,13 +44,19 @@ namespace System.Globalization.Tests
         public void CurrencyDecimalDigits_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "CurrencyDecimalDigits", () => format.CurrencyDecimalDigits = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "CurrencyDecimalDigits",
+                () => format.CurrencyDecimalDigits = value
+            );
         }
 
         [Fact]
         public void CurrencyDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.CurrencyDecimalDigits = 2);
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyDecimalDigits = 2
+            );
         }
     }
 }

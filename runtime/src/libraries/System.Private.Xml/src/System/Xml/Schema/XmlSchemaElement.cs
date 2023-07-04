@@ -35,7 +35,6 @@ namespace System.Xml.Schema
         private XmlSchemaObjectCollection? _constraints;
         private SchemaElementDecl? _elementDecl;
 
-
         [XmlAttribute("abstract"), DefaultValue(false)]
         public bool IsAbstract
         {
@@ -95,7 +94,11 @@ namespace System.Xml.Schema
         public bool IsNillable
         {
             get { return _isNillable; }
-            set { _isNillable = value; _hasNillableAttribute = true; }
+            set
+            {
+                _isNillable = value;
+                _hasNillableAttribute = true;
+            }
         }
 
         [XmlIgnore]
@@ -134,17 +137,21 @@ namespace System.Xml.Schema
             set { _typeName = value ?? XmlQualifiedName.Empty; }
         }
 
-        [XmlElement("complexType", typeof(XmlSchemaComplexType)),
-         XmlElement("simpleType", typeof(XmlSchemaSimpleType))]
+        [
+            XmlElement("complexType", typeof(XmlSchemaComplexType)),
+            XmlElement("simpleType", typeof(XmlSchemaSimpleType))
+        ]
         public XmlSchemaType? SchemaType
         {
             get { return _type; }
             set { _type = value; }
         }
 
-        [XmlElement("key", typeof(XmlSchemaKey)),
-         XmlElement("keyref", typeof(XmlSchemaKeyref)),
-         XmlElement("unique", typeof(XmlSchemaUnique))]
+        [
+            XmlElement("key", typeof(XmlSchemaKey)),
+            XmlElement("keyref", typeof(XmlSchemaKeyref)),
+            XmlElement("unique", typeof(XmlSchemaUnique))
+        ]
         public XmlSchemaObjectCollection Constraints =>
             _constraints ??= new XmlSchemaObjectCollection();
 
@@ -155,7 +162,9 @@ namespace System.Xml.Schema
         }
 
         [XmlIgnore]
-        [Obsolete("XmlSchemaElement.ElementType has been deprecated. Use the ElementSchemaType property that returns a strongly typed element type instead.")]
+        [Obsolete(
+            "XmlSchemaElement.ElementType has been deprecated. Use the ElementSchemaType property that returns a strongly typed element type instead."
+        )]
         public object? ElementType
         {
             get
@@ -190,7 +199,12 @@ namespace System.Xml.Schema
         }
 
         [return: NotNullIfNotNull(nameof(schemaSet))]
-        internal XmlReader? Validate(XmlReader reader, XmlResolver? resolver, XmlSchemaSet schemaSet, ValidationEventHandler valEventHandler)
+        internal XmlReader? Validate(
+            XmlReader reader,
+            XmlResolver? resolver,
+            XmlSchemaSet schemaSet,
+            ValidationEventHandler valEventHandler
+        )
         {
             if (schemaSet != null)
             {
@@ -236,14 +250,8 @@ namespace System.Xml.Schema
 
         internal bool IsLocalTypeDerivationChecked
         {
-            get
-            {
-                return _isLocalTypeDerivationChecked;
-            }
-            set
-            {
-                _isLocalTypeDerivationChecked = value;
-            }
+            get { return _isLocalTypeDerivationChecked; }
+            set { _isLocalTypeDerivationChecked = value; }
         }
 
         internal SchemaElementDecl? ElementDecl
@@ -262,15 +270,14 @@ namespace System.Xml.Schema
         [XmlIgnore]
         internal override string NameString
         {
-            get
-            {
-                return _qualifiedName.ToString();
-            }
+            get { return _qualifiedName.ToString(); }
         }
 
         internal override XmlSchemaObject Clone()
         {
-            System.Diagnostics.Debug.Fail("Should never call Clone() on XmlSchemaElement. Call Clone(XmlSchema) instead.");
+            System.Diagnostics.Debug.Fail(
+                "Should never call Clone() on XmlSchemaElement. Call Clone(XmlSchema) instead."
+            );
             return Clone(null);
         }
 

@@ -11,16 +11,17 @@
 //
 
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     public class SimpObject
     {
-        public static int Main ()
+        public static int Main()
         {
             Console.WriteLine("Test should return with ExitCode 100 ...");
-            SimpObject sv = new SimpObject( );
-            sv.RunTest( );
+            SimpObject sv = new SimpObject();
+            sv.RunTest();
             return 100;
         }
 
@@ -28,14 +29,14 @@ namespace DefaultNamespace {
         {
             int Size = 500;
 
-            Console.WriteLine( "Simple Object GC Test" );
-            Console.WriteLine( "Starting int & String Test..." );
+            Console.WriteLine("Simple Object GC Test");
+            Console.WriteLine("Starting int & String Test...");
 
-            Object [] tempArray = new Object[ Size ];
+            Object[] tempArray = new Object[Size];
 
-            for( int i = 0; i < Size; i++ )
+            for (int i = 0; i < Size; i++)
             {
-                if( i % 2 == 1 )
+                if (i % 2 == 1)
                 {
                     tempArray[i] = i;
                 }
@@ -46,33 +47,32 @@ namespace DefaultNamespace {
                     tempArray[i] = new string(carr);
                 }
 
-                GC.Collect( );
+                GC.Collect();
             }
 
             tempArray = null;
 
-            GC.Collect( );
+            GC.Collect();
 
-            Console.WriteLine( "int & String Test Complete." );
+            Console.WriteLine("int & String Test Complete.");
             Console.WriteLine();
-            Console.WriteLine( "Starting float, long, & String Test..." );
+            Console.WriteLine("Starting float, long, & String Test...");
 
-            tempArray = new Object[ Size ];
+            tempArray = new Object[Size];
 
-            for( int i = 0; i < Size; i++ )
+            for (int i = 0; i < Size; i++)
             {
-                if( i % 2 == 1 )
+                if (i % 2 == 1)
                 {
-
-                    if( i < Size / 2 )
+                    if (i < Size / 2)
                     {
                         float foo = i;
-                        tempArray[ i ] = foo;
+                        tempArray[i] = foo;
                     }
                     else
                     {
                         long foo = i;
-                        tempArray[ i ] = foo;
+                        tempArray[i] = foo;
                     }
                 }
                 else
@@ -82,15 +82,14 @@ namespace DefaultNamespace {
                     tempArray[i] = new string(carr);
                 }
 
-                GC.Collect( );
+                GC.Collect();
             }
 
             tempArray = null;
 
-            GC.Collect( );
+            GC.Collect();
 
-            Console.WriteLine( "float, long, & String Test complete." );
-
+            Console.WriteLine("float, long, & String Test complete.");
         }
     }
 }

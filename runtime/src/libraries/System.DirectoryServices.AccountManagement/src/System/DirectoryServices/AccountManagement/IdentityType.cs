@@ -18,13 +18,14 @@ namespace System.DirectoryServices.AccountManagement
 
     internal static class IdentMap
     {
-        internal static object[,] StringMap = {
-            {IdentityType.SamAccountName, IdentityTypeStringMap.SamAccount},
-            {IdentityType.Name, IdentityTypeStringMap.Name},
-            {IdentityType.UserPrincipalName, IdentityTypeStringMap.Upn},
-            {IdentityType.DistinguishedName, IdentityTypeStringMap.DistinguishedName},
-            {IdentityType.Sid, IdentityTypeStringMap.Sid},
-            {IdentityType.Guid, IdentityTypeStringMap.Guid}
+        internal static object[,] StringMap =
+        {
+            { IdentityType.SamAccountName, IdentityTypeStringMap.SamAccount },
+            { IdentityType.Name, IdentityTypeStringMap.Name },
+            { IdentityType.UserPrincipalName, IdentityTypeStringMap.Upn },
+            { IdentityType.DistinguishedName, IdentityTypeStringMap.DistinguishedName },
+            { IdentityType.Sid, IdentityTypeStringMap.Sid },
+            { IdentityType.Guid, IdentityTypeStringMap.Guid }
         };
     }
 

@@ -40,9 +40,9 @@ public class Repro
     public static int ReadInt(byte[] buf, int offset)
     {
         return (buf[offset + 0] << 24)
-             + (buf[offset + 1] << 16)
-             + (buf[offset + 2] << 8)
-             + (buf[offset + 3] << 0);
+            + (buf[offset + 1] << 16)
+            + (buf[offset + 2] << 8)
+            + (buf[offset + 3] << 0);
     }
 
     public static float ReadFloat(byte[] buf, int offset)
@@ -81,6 +81,7 @@ public struct FloatConverter
 {
     [FieldOffset(0)]
     private float _f;
+
     [FieldOffset(0)]
     private int _i;
 
@@ -96,4 +97,3 @@ public struct FloatConverter
         return converter._f;
     }
 }
-

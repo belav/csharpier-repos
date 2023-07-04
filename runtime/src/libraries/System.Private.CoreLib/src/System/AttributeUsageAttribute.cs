@@ -20,7 +20,9 @@ namespace System
         private bool _allowMultiple;
         private bool _inherited;
 
-        internal static readonly AttributeUsageAttribute Default = new AttributeUsageAttribute(AttributeTargets.All);
+        internal static readonly AttributeUsageAttribute Default = new AttributeUsageAttribute(
+            AttributeTargets.All
+        );
 
         public AttributeUsageAttribute(AttributeTargets validOn)
         {
@@ -28,7 +30,11 @@ namespace System
             _inherited = true;
         }
 
-        internal AttributeUsageAttribute(AttributeTargets validOn, bool allowMultiple, bool inherited)
+        internal AttributeUsageAttribute(
+            AttributeTargets validOn,
+            bool allowMultiple,
+            bool inherited
+        )
         {
             _attributeTarget = validOn;
             _allowMultiple = allowMultiple;

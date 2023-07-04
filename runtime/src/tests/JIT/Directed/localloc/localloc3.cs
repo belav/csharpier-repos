@@ -6,14 +6,14 @@ using System;
 
 internal unsafe class test1
 {
-    static public int f(int i)
+    public static int f(int i)
     {
         byte* p = stackalloc byte[i];
         p[0] = 4;
         return p[0];
     }
 
-    static public void f0()
+    public static void f0()
     {
         while (true)
         {
@@ -21,12 +21,12 @@ internal unsafe class test1
         }
     }
 
-    static public void f1()
+    public static void f1()
     {
         char* p = stackalloc char[1000000];
     }
 
-    unsafe public static int Main()
+    public static unsafe int Main()
     {
         bool pass = true;
 
@@ -73,7 +73,7 @@ internal unsafe class test1
             pass = false;
         }
 
-    output:
+        output:
         if (pass)
         {
             Console.WriteLine("PASSED");

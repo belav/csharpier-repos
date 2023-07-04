@@ -24,7 +24,11 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(null, TextSyndicationContentKind.Html, "html")]
         [InlineData("", TextSyndicationContentKind.Plaintext, "text")]
         [InlineData("text", TextSyndicationContentKind.XHtml, "xhtml")]
-        public void Ctor_String_TextSyndicationContentKind(string text, TextSyndicationContentKind textKind, string type)
+        public void Ctor_String_TextSyndicationContentKind(
+            string text,
+            TextSyndicationContentKind textKind,
+            string type
+        )
         {
             var content = new TextSyndicationContent(text, textKind);
             Assert.Empty(content.AttributeExtensions);
@@ -35,9 +39,14 @@ namespace System.ServiceModel.Syndication.Tests
         [Theory]
         [InlineData(TextSyndicationContentKind.Plaintext - 1)]
         [InlineData(TextSyndicationContentKind.XHtml + 1)]
-        public void Ctor_InvalidTextKind_ThrowsArgumentOutOfRangeException(TextSyndicationContentKind textKind)
+        public void Ctor_InvalidTextKind_ThrowsArgumentOutOfRangeException(
+            TextSyndicationContentKind textKind
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("textKind", () => new TextSyndicationContent(null, textKind));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "textKind",
+                () => new TextSyndicationContent(null, textKind)
+            );
         }
 
         [Fact]
@@ -68,7 +77,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => new TextSyndicationContentSubclass(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => new TextSyndicationContentSubclass(null)
+            );
         }
 
         [Fact]
@@ -98,9 +110,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class TextSyndicationContentSubclass : TextSyndicationContent
         {
-            public TextSyndicationContentSubclass(TextSyndicationContent source) : base(source)
-            {
-            }
+            public TextSyndicationContentSubclass(TextSyndicationContent source)
+                : base(source) { }
         }
     }
 }

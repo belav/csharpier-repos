@@ -13,7 +13,10 @@ namespace DllImportGenerator.IntegrationTests
     {
         public partial class FunctionPointer
         {
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_managed_callback_after_gc")]
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "invoke_managed_callback_after_gc"
+            )]
             public static unsafe partial void InvokeAfterGC(delegate* <void> cb);
 
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_callback_after_gc")]
@@ -22,14 +25,35 @@ namespace DllImportGenerator.IntegrationTests
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_callback_after_gc")]
             public static unsafe partial void InvokeAfterGC(delegate* unmanaged[Stdcall]<void> cb);
 
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_managed_callback_blittable_args")]
-            public static unsafe partial int InvokeWithBlittableArgument(delegate* <int, int, int> cb, int a, int b);
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "invoke_managed_callback_blittable_args"
+            )]
+            public static unsafe partial int InvokeWithBlittableArgument(
+                delegate* <int, int, int> cb,
+                int a,
+                int b
+            );
 
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_callback_blittable_args")]
-            public static unsafe partial int InvokeWithBlittableArgument(delegate* unmanaged<int, int, int> cb, int a, int b);
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "invoke_callback_blittable_args"
+            )]
+            public static unsafe partial int InvokeWithBlittableArgument(
+                delegate* unmanaged<int, int, int> cb,
+                int a,
+                int b
+            );
 
-            [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "invoke_callback_blittable_args")]
-            public static unsafe partial int InvokeWithBlittableArgument(delegate* unmanaged[Stdcall]<int, int, int> cb, int a, int b);
+            [GeneratedDllImport(
+                NativeExportsNE_Binary,
+                EntryPoint = "invoke_callback_blittable_args"
+            )]
+            public static unsafe partial int InvokeWithBlittableArgument(
+                delegate* unmanaged[Stdcall]<int, int, int> cb,
+                int a,
+                int b
+            );
         }
     }
 
@@ -81,20 +105,36 @@ namespace DllImportGenerator.IntegrationTests
             result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&Callback, a, b);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&CallbackUnmanaged, a, b);
+            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
+                &CallbackUnmanaged,
+                a,
+                b
+            );
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&CallbackUnmanagedStdcall, a, b);
+            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
+                &CallbackUnmanagedStdcall,
+                a,
+                b
+            );
             Assert.Equal(expected, result);
 
             expected = Callback(b, a);
             result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&Callback, b, a);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&CallbackUnmanaged, b, a);
+            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
+                &CallbackUnmanaged,
+                b,
+                a
+            );
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&CallbackUnmanagedStdcall, b, a);
+            result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(
+                &CallbackUnmanagedStdcall,
+                b,
+                a
+            );
             Assert.Equal(expected, result);
 
             static int Callback(int a, int b)

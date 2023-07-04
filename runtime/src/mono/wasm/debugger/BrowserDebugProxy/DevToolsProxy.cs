@@ -17,7 +17,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 {
     internal class DevToolsProxy
     {
-        protected Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<MessageId, TaskCompletionSource<Result>>();
+        protected Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds =
+            new Dictionary<MessageId, TaskCompletionSource<Result>>();
         protected DevToolsQueue browser;
         protected DevToolsQueue ide;
         private int next_cmd_id;
@@ -36,13 +37,23 @@ namespace Microsoft.WebAssembly.Diagnostics
         }
 
         protected int GetNewCmdId() => Interlocked.Increment(ref next_cmd_id);
+
         protected int ResetCmdId() => next_cmd_id = 0;
-        protected virtual Task<bool> AcceptEvent(SessionId sessionId, JObject args, CancellationToken token)
+
+        protected virtual Task<bool> AcceptEvent(
+            SessionId sessionId,
+            JObject args,
+            CancellationToken token
+        )
         {
             return Task.FromResult(false);
         }
 
-        protected virtual Task<bool> AcceptCommand(MessageId id, JObject args, CancellationToken token)
+        protected virtual Task<bool> AcceptCommand(
+            MessageId id,
+            JObject args,
+            CancellationToken token
+        )
         {
             return Task.FromResult(false);
         }
@@ -56,7 +67,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             return _runLoop.Send(bytes, token, queue);
         }
 
-        protected virtual async Task OnEvent(SessionId sessionId, JObject parms, CancellationToken token)
+        protected virtual async Task OnEvent(
+            SessionId sessionId,
+            JObject parms,
+            CancellationToken token
+        )
         {
             try
             {
@@ -101,7 +116,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 task.SetResult(result);
                 return;
             }
-            logger.LogError($"Cannot respond to command: {id} with result: {result} - command is not pending");
+            logger.LogError(
+                $"Cannot respond to command: {id} with result: {result} - command is not pending"
+            );
         }
 
         protected virtual Task ProcessBrowserMessage(string msg, CancellationToken token)
@@ -139,10 +156,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 {
                     var res = JObject.Parse(msg);
                     var id = res.ToObject<MessageId>();
-                    return OnCommand(
-                        id,
-                        res,
-                        token);
+                    return OnCommand(id, res, token);
                 }
 
                 return null;
@@ -154,22 +168,34 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        public virtual async Task<Result> SendCommand(SessionId id, string method, JObject args, CancellationToken token)
+        public virtual async Task<Result> SendCommand(
+            SessionId id,
+            string method,
+            JObject args,
+            CancellationToken token
+        )
         {
             // Log ("protocol", $"sending command {method}: {args}");
             return await SendCommandInternal(id, method, args, token);
         }
 
-        protected virtual async Task<Result> SendCommandInternal(SessionId sessionId, string method, JObject args, CancellationToken token)
+        protected virtual async Task<Result> SendCommandInternal(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        )
         {
             int id = GetNewCmdId();
 
-            var o = JObject.FromObject(new
-            {
-                id,
-                method,
-                @params = args
-            });
+            var o = JObject.FromObject(
+                new
+                {
+                    id,
+                    method,
+                    @params = args
+                }
+            );
             if (sessionId.sessionId != null)
                 o["sessionId"] = sessionId.sessionId;
             var tcs = new TaskCompletionSource<Result>();
@@ -181,19 +207,25 @@ namespace Microsoft.WebAssembly.Diagnostics
             return await tcs.Task;
         }
 
-        public virtual Task SendEvent(SessionId sessionId, string method, JObject args, CancellationToken token)
+        public virtual Task SendEvent(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        )
         {
             // logger.LogTrace($"sending event {method}: {args}");
             return SendEventInternal(sessionId, method, args, token);
         }
 
-        protected virtual Task SendEventInternal(SessionId sessionId, string method, JObject args, CancellationToken token)
+        protected virtual Task SendEventInternal(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        )
         {
-            var o = JObject.FromObject(new
-            {
-                method,
-                @params = args
-            });
+            var o = JObject.FromObject(new { method, @params = args });
             if (sessionId.sessionId != null)
                 o["sessionId"] = sessionId.sessionId;
 
@@ -205,7 +237,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             SendResponseInternal(id, result, token);
         }
 
-        protected virtual Task SendResponseInternal(MessageId id, Result result, CancellationToken token)
+        protected virtual Task SendResponseInternal(
+            MessageId id,
+            Result result,
+            CancellationToken token
+        )
         {
             JObject o = result.ToJObject(id);
             if (!result.IsOk)
@@ -226,19 +262,29 @@ namespace Microsoft.WebAssembly.Diagnostics
             return Send(this.browser, msg, token);
         }
 
-        public async Task RunForDevTools(Uri browserUri, WebSocket ideSocket, CancellationTokenSource cts)
+        public async Task RunForDevTools(
+            Uri browserUri,
+            WebSocket ideSocket,
+            CancellationTokenSource cts
+        )
         {
             try
             {
                 logger.LogDebug($"DevToolsProxy: Starting for browser at {browserUri}");
-                logger.LogDebug($"DevToolsProxy: Proxy waiting for connection to the browser at {browserUri}");
+                logger.LogDebug(
+                    $"DevToolsProxy: Proxy waiting for connection to the browser at {browserUri}"
+                );
 
                 ClientWebSocket browserSocket = new();
                 browserSocket.Options.KeepAliveInterval = Timeout.InfiniteTimeSpan;
                 await browserSocket.ConnectAsync(browserUri, cts.Token);
 
                 using var ideConn = new DevToolsDebuggerConnection(ideSocket, "ide", logger);
-                using var browserConn = new DevToolsDebuggerConnection(browserSocket, "browser", logger);
+                using var browserConn = new DevToolsDebuggerConnection(
+                    browserSocket,
+                    "browser",
+                    logger
+                );
 
                 await RunLoopAsync(ideConn: ideConn, browserConn: browserConn, cts);
             }
@@ -249,7 +295,11 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        protected async Task RunLoopAsync(WasmDebuggerConnection ideConn, WasmDebuggerConnection browserConn, CancellationTokenSource cts)
+        protected async Task RunLoopAsync(
+            WasmDebuggerConnection ideConn,
+            WasmDebuggerConnection browserConn,
+            CancellationTokenSource cts
+        )
         {
             try
             {
@@ -269,6 +319,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         }
 
         public virtual void Shutdown() => _runLoop?.Shutdown();
+
         public void Fail(Exception exception) => _runLoop?.Fail(exception);
 
         protected virtual string GetFromOrTo(JObject o) => string.Empty;

@@ -14,9 +14,7 @@ namespace System.Drawing.Imaging
         /// <summary>
         /// Initializes a new instance of the <see cref='ColorMap'/> class.
         /// </summary>
-        public ColorMap()
-        {
-        }
+        public ColorMap() { }
 
         /// <summary>
         /// Specifies the existing <see cref='Color'/> to be converted.
@@ -26,6 +24,7 @@ namespace System.Drawing.Imaging
             get { return _oldColor; }
             set { _oldColor = value; }
         }
+
         /// <summary>
         /// Specifies the new <see cref='Color'/> to which to convert.
         /// </summary>

@@ -45,10 +45,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public EntityHandle Constructor
         {
-            get
-            {
-                return _reader.CustomAttributeTable.GetConstructor(Handle);
-            }
+            get { return _reader.CustomAttributeTable.GetConstructor(Handle); }
         }
 
         /// <summary>
@@ -59,10 +56,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public EntityHandle Parent
         {
-            get
-            {
-                return _reader.CustomAttributeTable.GetParent(Handle);
-            }
+            get { return _reader.CustomAttributeTable.GetParent(Handle); }
         }
 
         /// <summary>
@@ -87,7 +81,9 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Decodes the arguments encoded in the value blob.
         /// </summary>
-        public CustomAttributeValue<TType> DecodeValue<TType>(ICustomAttributeTypeProvider<TType> provider)
+        public CustomAttributeValue<TType> DecodeValue<TType>(
+            ICustomAttributeTypeProvider<TType> provider
+        )
         {
             var decoder = new CustomAttributeDecoder<TType>(provider, _reader);
             return decoder.DecodeValue(Constructor, Value);
@@ -106,7 +102,8 @@ namespace System.Reflection.Metadata
             // avoid calculating the treatment when the CustomAttributeHandle is looked up and CustomAttribute struct
             // is initialized.
 
-            CustomAttributeValueTreatment treatment = _reader.CalculateCustomAttributeValueTreatment(Handle);
+            CustomAttributeValueTreatment treatment =
+                _reader.CalculateCustomAttributeValueTreatment(Handle);
             if (treatment == 0)
             {
                 return _reader.CustomAttributeTable.GetValue(Handle);
@@ -158,7 +155,9 @@ namespace System.Reflection.Metadata
                 return rawBlob;
             }
 
-            AttributeTargets projectedValue = ProjectAttributeTargetValue(rawBlobReader.ReadUInt32());
+            AttributeTargets projectedValue = ProjectAttributeTargetValue(
+                rawBlobReader.ReadUInt32()
+            );
             if (isVersionOrDeprecated)
             {
                 projectedValue |= AttributeTargets.Constructor | AttributeTargets.Property;
@@ -177,17 +176,27 @@ namespace System.Reflection.Metadata
 
             AttributeTargets result = 0;
 
-            if ((rawValue & 0x00000001) != 0) result |= AttributeTargets.Delegate;
-            if ((rawValue & 0x00000002) != 0) result |= AttributeTargets.Enum;
-            if ((rawValue & 0x00000004) != 0) result |= AttributeTargets.Event;
-            if ((rawValue & 0x00000008) != 0) result |= AttributeTargets.Field;
-            if ((rawValue & 0x00000010) != 0) result |= AttributeTargets.Interface;
+            if ((rawValue & 0x00000001) != 0)
+                result |= AttributeTargets.Delegate;
+            if ((rawValue & 0x00000002) != 0)
+                result |= AttributeTargets.Enum;
+            if ((rawValue & 0x00000004) != 0)
+                result |= AttributeTargets.Event;
+            if ((rawValue & 0x00000008) != 0)
+                result |= AttributeTargets.Field;
+            if ((rawValue & 0x00000010) != 0)
+                result |= AttributeTargets.Interface;
             // InterfaceGroup (no equivalent in CLR)
-            if ((rawValue & 0x00000040) != 0) result |= AttributeTargets.Method;
-            if ((rawValue & 0x00000080) != 0) result |= AttributeTargets.Parameter;
-            if ((rawValue & 0x00000100) != 0) result |= AttributeTargets.Property;
-            if ((rawValue & 0x00000200) != 0) result |= AttributeTargets.Class;
-            if ((rawValue & 0x00000400) != 0) result |= AttributeTargets.Struct;
+            if ((rawValue & 0x00000040) != 0)
+                result |= AttributeTargets.Method;
+            if ((rawValue & 0x00000080) != 0)
+                result |= AttributeTargets.Parameter;
+            if ((rawValue & 0x00000100) != 0)
+                result |= AttributeTargets.Property;
+            if ((rawValue & 0x00000200) != 0)
+                result |= AttributeTargets.Class;
+            if ((rawValue & 0x00000400) != 0)
+                result |= AttributeTargets.Struct;
             // InterfaceImpl (no equivalent in CLR)
 
             return result;

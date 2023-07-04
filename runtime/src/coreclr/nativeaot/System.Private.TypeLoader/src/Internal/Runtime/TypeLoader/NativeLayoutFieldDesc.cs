@@ -16,7 +16,11 @@ namespace Internal.Runtime.TypeLoader
         private TypeDesc _fieldType;
         private FieldStorage _fieldStorage;
 
-        public NativeLayoutFieldDesc(DefType owningType, TypeDesc fieldType, FieldStorage fieldStorage)
+        public NativeLayoutFieldDesc(
+            DefType owningType,
+            TypeDesc fieldType,
+            FieldStorage fieldStorage
+        )
         {
             _owningType = owningType;
             _fieldType = fieldType;
@@ -25,76 +29,49 @@ namespace Internal.Runtime.TypeLoader
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc FieldType
         {
-            get
-            {
-                return _fieldType;
-            }
+            get { return _fieldType; }
         }
 
         public override EmbeddedSignatureData[] GetEmbeddedSignatureData() => null;
 
         public override bool HasRva
         {
-            get
-            {
-                throw NotImplemented.ByDesign;
-            }
+            get { throw NotImplemented.ByDesign; }
         }
 
         public override bool IsInitOnly
         {
-            get
-            {
-                throw NotImplemented.ByDesign;
-            }
+            get { throw NotImplemented.ByDesign; }
         }
 
         public override bool IsLiteral
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return _fieldStorage != FieldStorage.Instance;
-            }
+            get { return _fieldStorage != FieldStorage.Instance; }
         }
 
         public override bool IsThreadStatic
         {
-            get
-            {
-                return _fieldStorage == FieldStorage.TLSStatic;
-            }
+            get { return _fieldStorage == FieldStorage.TLSStatic; }
         }
 
         internal FieldStorage FieldStorage
         {
-            get
-            {
-                return _fieldStorage;
-            }
+            get { return _fieldStorage; }
         }
 
         public override DefType OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)

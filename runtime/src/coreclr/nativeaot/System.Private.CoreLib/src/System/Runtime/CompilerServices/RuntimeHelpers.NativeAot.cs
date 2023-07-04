@@ -29,7 +29,8 @@ namespace System.Runtime.CompilerServices
         private static unsafe void* GetSpanDataFrom(
             RuntimeFieldHandle fldHandle,
             RuntimeTypeHandle targetTypeHandle,
-            out int count)
+            out int count
+        )
         {
             // We only support this intrinsic when it occurs within a well-defined IL sequence.
             // If a call to this method occurs within the recognized sequence, codegen must expand the IL sequence completely.
@@ -45,13 +46,16 @@ namespace System.Runtime.CompilerServices
             if (type.IsNull)
                 throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized);
 
-            IntPtr pStaticClassConstructionContext = RuntimeAugments.Callbacks.TryGetStaticClassConstructionContext(type);
+            IntPtr pStaticClassConstructionContext =
+                RuntimeAugments.Callbacks.TryGetStaticClassConstructionContext(type);
             if (pStaticClassConstructionContext == IntPtr.Zero)
                 return;
 
             unsafe
             {
-                ClassConstructorRunner.EnsureClassConstructorRun((StaticClassConstructionContext*)pStaticClassConstructionContext);
+                ClassConstructorRunner.EnsureClassConstructorRun(
+                    (StaticClassConstructionContext*)pStaticClassConstructionContext
+                );
             }
         }
 
@@ -60,7 +64,9 @@ namespace System.Runtime.CompilerServices
             if (module.AssociatedModule == null)
                 throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized);
 
-            ReflectionAugments.ReflectionCoreCallbacks.RunModuleConstructor(module.AssociatedModule);
+            ReflectionAugments.ReflectionCoreCallbacks.RunModuleConstructor(
+                module.AssociatedModule
+            );
         }
 
         public static object GetObjectValue(object? obj)
@@ -104,7 +110,9 @@ namespace System.Runtime.CompilerServices
             return ObjectHeader.GetHashCode(o);
         }
 
-        [Obsolete("OffsetToStringData has been deprecated. Use string.GetPinnableReference() instead.")]
+        [Obsolete(
+            "OffsetToStringData has been deprecated. Use string.GetPinnableReference() instead."
+        )]
         public static int OffsetToStringData
         {
             // This offset is baked in by string indexer intrinsic, so there is no harm
@@ -123,7 +131,6 @@ namespace System.Runtime.CompilerServices
 #else // 32
                 8;
 #endif // TARGET_64BIT
-
         }
 
         [ThreadStatic]
@@ -153,7 +160,8 @@ namespace System.Runtime.CompilerServices
         [MethodImpl(MethodImplOptions.NoInlining)] // Only called once per thread, no point in inlining.
         private static unsafe byte* GetSufficientStackLimit()
         {
-            IntPtr lower, upper;
+            IntPtr lower,
+                upper;
             RuntimeImports.RhGetCurrentThreadStackBounds(out lower, out upper);
 
             // Compute the limit used by EnsureSufficientExecutionStack and cache it on the thread. This minimum
@@ -166,8 +174,10 @@ namespace System.Runtime.CompilerServices
             const int MinExecutionStackSize = 64 * 1024;
 #endif
 
-            byte* limit = (((byte*)upper - (byte*)lower > MinExecutionStackSize)) ?
-                ((byte*)lower + MinExecutionStackSize) : ((byte*)upper);
+            byte* limit =
+                (((byte*)upper - (byte*)lower > MinExecutionStackSize))
+                    ? ((byte*)lower + MinExecutionStackSize)
+                    : ((byte*)upper);
 
             return (t_sufficientStackLimit = limit);
         }
@@ -195,8 +205,7 @@ namespace System.Runtime.CompilerServices
             return false;
         }
 
-        internal static ref byte GetRawData(this object obj) =>
-            ref Unsafe.As<RawData>(obj).Data;
+        internal static ref byte GetRawData(this object obj) => ref Unsafe.As<RawData>(obj).Data;
 
         internal static unsafe nuint GetRawObjectDataSize(this object obj)
         {
@@ -217,14 +226,13 @@ namespace System.Runtime.CompilerServices
             return array.GetMethodTable()->ComponentSize;
         }
 
-        internal static unsafe MethodTable* GetMethodTable(this object obj)
-            => obj.m_pEEType;
+        internal static unsafe MethodTable* GetMethodTable(this object obj) => obj.m_pEEType;
 
-        internal static unsafe ref MethodTable* GetMethodTableRef(this object obj)
-            => ref obj.m_pEEType;
+        internal static unsafe ref MethodTable* GetMethodTableRef(this object obj) =>
+            ref obj.m_pEEType;
 
-        internal static unsafe EETypePtr GetEETypePtr(this object obj)
-            => new EETypePtr(obj.m_pEEType);
+        internal static unsafe EETypePtr GetEETypePtr(this object obj) =>
+            new EETypePtr(obj.m_pEEType);
 
         // Returns true iff the object has a component size;
         // i.e., is variable length like System.String or Array.
@@ -238,13 +246,22 @@ namespace System.Runtime.CompilerServices
         public static void PrepareMethod(RuntimeMethodHandle method)
         {
             if (method.Value == IntPtr.Zero)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(method));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(method)
+                );
         }
 
-        public static void PrepareMethod(RuntimeMethodHandle method, RuntimeTypeHandle[] instantiation)
+        public static void PrepareMethod(
+            RuntimeMethodHandle method,
+            RuntimeTypeHandle[] instantiation
+        )
         {
             if (method.Value == IntPtr.Zero)
-                throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized, nameof(method));
+                throw new ArgumentException(
+                    SR.InvalidOperation_HandleIsNotInitialized,
+                    nameof(method)
+                );
         }
 
         /// <summary>
@@ -266,22 +283,30 @@ namespace System.Runtime.CompilerServices
             return (IntPtr)NativeMemory.Alloc((uint)size);
         }
 
-        public static void PrepareDelegate(Delegate d)
-        {
-        }
+        public static void PrepareDelegate(Delegate d) { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2059:UnrecognizedReflectionPattern",
-            Justification = "We keep class constructors of all types with an MethodTable")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-            Justification = "Constructed MethodTable of a Nullable forces a constructed MethodTable of the element type")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2059:UnrecognizedReflectionPattern",
+            Justification = "We keep class constructors of all types with an MethodTable"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2072:UnrecognizedReflectionPattern",
+            Justification = "Constructed MethodTable of a Nullable forces a constructed MethodTable of the element type"
+        )]
         public static object GetUninitializedObject(
             // This API doesn't call any constructors, but the type needs to be seen as constructed.
             // A type is seen as constructed if a constructor is kept.
             // This obviously won't cover a type with no constructor. Reference types with no
             // constructor are an academic problem. Valuetypes with no constructors are a problem,
             // but IL Linker currently treats them as always implicitly boxed.
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type
+        )
         {
             if (type is null)
             {

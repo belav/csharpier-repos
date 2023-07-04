@@ -87,6 +87,7 @@ namespace Internal.Runtime
         IntPtr a;
         IntPtr b;
     }
+
     struct FloatArgumentRegisters
     {
         M128A d0;
@@ -118,7 +119,11 @@ namespace Internal.Runtime
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE_PRIMITIVE = 8;
         public const int ENREGISTERED_PARAMTYPE_MAXSIZE = 8;
         public const int STACK_ELEM_SIZE = 8;
-        public static int StackElemSize(int size) { return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1)); }
+
+        public static int StackElemSize(int size)
+        {
+            return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1));
+        }
     }
 #elif TARGET_ARM64
 #pragma warning disable 0169
@@ -141,6 +146,7 @@ namespace Internal.Runtime
         IntPtr x6;
         IntPtr x7;
         IntPtr x8;
+
         public static unsafe int GetOffsetOfx8()
         {
             return sizeof(IntPtr) * 8;
@@ -169,12 +175,16 @@ namespace Internal.Runtime
 
         public const int NUM_ARGUMENT_REGISTERS = 8;
         public const int ARGUMENTREGISTERS_SIZE = NUM_ARGUMENT_REGISTERS * 8;
-        public const int ENREGISTERED_RETURNTYPE_MAXSIZE = 32;                  // bytes (four FP registers: d0,d1,d2 and d3)
-        public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE = 16;          // bytes (two int registers: x0 and x1)
+        public const int ENREGISTERED_RETURNTYPE_MAXSIZE = 32; // bytes (four FP registers: d0,d1,d2 and d3)
+        public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE = 16; // bytes (two int registers: x0 and x1)
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE_PRIMITIVE = 8;
-        public const int ENREGISTERED_PARAMTYPE_MAXSIZE = 16;                   // bytes (max value type size that can be passed by value)
+        public const int ENREGISTERED_PARAMTYPE_MAXSIZE = 16; // bytes (max value type size that can be passed by value)
         public const int STACK_ELEM_SIZE = 8;
-        public static int StackElemSize(int size) { return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1)); }
+
+        public static int StackElemSize(int size)
+        {
+            return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1));
+        }
     }
 #elif TARGET_X86
 #pragma warning disable 0169, 0649
@@ -187,20 +197,22 @@ namespace Internal.Runtime
     struct ArgumentRegisters
     {
         public IntPtr edx;
+
         public static unsafe int GetOffsetOfEdx()
         {
             return 0;
         }
+
         public IntPtr ecx;
+
         public static unsafe int GetOffsetOfEcx()
         {
             return sizeof(IntPtr);
         }
     }
+
     // This struct isn't used by x86, but exists for compatibility with the definition of the CallDescrData struct
-    struct FloatArgumentRegisters
-    {
-    }
+    struct FloatArgumentRegisters { }
 #pragma warning restore 0169, 0649
 
     struct ArchitectureConstants
@@ -214,7 +226,11 @@ namespace Internal.Runtime
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE = 4;
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE_PRIMITIVE = 4;
         public const int STACK_ELEM_SIZE = 4;
-        public static int StackElemSize(int size) { return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1)); }
+
+        public static int StackElemSize(int size)
+        {
+            return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1));
+        }
     }
 #elif TARGET_ARM
 #pragma warning disable 0169
@@ -262,7 +278,11 @@ namespace Internal.Runtime
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE = 4;
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE_PRIMITIVE = 8;
         public const int STACK_ELEM_SIZE = 4;
-        public static int StackElemSize(int size) { return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1)); }
+
+        public static int StackElemSize(int size)
+        {
+            return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1));
+        }
     }
 
 #elif TARGET_WASM
@@ -294,7 +314,11 @@ namespace Internal.Runtime
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE = 4;
         public const int ENREGISTERED_RETURNTYPE_INTEGER_MAXSIZE_PRIMITIVE = 8;
         public const int STACK_ELEM_SIZE = 4;
-        public static int StackElemSize(int size) { return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1)); }
+
+        public static int StackElemSize(int size)
+        {
+            return (((size) + STACK_ELEM_SIZE - 1) & ~(STACK_ELEM_SIZE - 1));
+        }
     }
 #endif
 
@@ -308,27 +332,33 @@ namespace Internal.Runtime
 
 #if TARGET_X86
         public ArgumentRegisters m_argumentRegisters;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return 0;
         }
+
         public ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return sizeof(ArgumentRegisters);
         }
+
         IntPtr m_ebp;
         IntPtr m_ReturnAddress;
 #elif TARGET_AMD64
 
 #if UNIX_AMD64_ABI
         public ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return 0;
         }
 
         public ArgumentRegisters m_argumentRegisters;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return sizeof(ReturnBlock);
@@ -339,12 +369,15 @@ namespace Internal.Runtime
 #else // UNIX_AMD64_ABI
         IntPtr m_returnBlockPadding;
         ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return sizeof(IntPtr);
         }
+
         IntPtr m_alignmentPadding;
         IntPtr m_ReturnAddress;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return sizeof(TransitionBlock);
@@ -353,24 +386,28 @@ namespace Internal.Runtime
 
 #elif TARGET_ARM
         public ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return 0;
         }
 
         public ArgumentRegisters m_argumentRegisters;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return sizeof(ReturnBlock);
         }
 #elif TARGET_ARM64
         public ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return 0;
         }
 
         public ArgumentRegisters m_argumentRegisters;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return sizeof(ReturnBlock);
@@ -379,12 +416,14 @@ namespace Internal.Runtime
         public IntPtr m_alignmentPad;
 #elif TARGET_WASM
         public ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return 0;
         }
 
         public ArgumentRegisters m_argumentRegisters;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return sizeof(ReturnBlock);
@@ -402,7 +441,6 @@ namespace Internal.Runtime
             return (byte)sizeof(TransitionBlock);
         }
 
-
         public static bool IsStackArgumentOffset(int offset)
         {
             int ofsArgRegs = GetOffsetOfArgumentRegisters();
@@ -414,7 +452,8 @@ namespace Internal.Runtime
         {
             int ofsArgRegs = GetOffsetOfArgumentRegisters();
 
-            return offset >= ofsArgRegs && offset < (int)(ofsArgRegs + ArchitectureConstants.ARGUMENTREGISTERS_SIZE);
+            return offset >= ofsArgRegs
+                && offset < (int)(ofsArgRegs + ArchitectureConstants.ARGUMENTREGISTERS_SIZE);
         }
 
 #if !TARGET_X86

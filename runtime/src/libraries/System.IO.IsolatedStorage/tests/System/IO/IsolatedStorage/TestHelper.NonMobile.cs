@@ -16,15 +16,14 @@ namespace System.IO.IsolatedStorage
             List<string> roots = new List<string>();
             string userRoot = Helper.GetDataDirectory(IsolatedStorageScope.User);
             string randomUserRoot = Helper.GetRandomDirectory(userRoot, IsolatedStorageScope.User);
-            
+
             roots.Add(Path.Combine(randomUserRoot, hash));
             // Application scope doesn't go under a random dir
             roots.Add(Path.Combine(userRoot, hash));
 
             // https://github.com/dotnet/runtime/issues/2092
             // https://github.com/dotnet/runtime/issues/21742
-            if (OperatingSystem.IsWindows()
-                && !PlatformDetection.IsInAppContainer)
+            if (OperatingSystem.IsWindows() && !PlatformDetection.IsInAppContainer)
             {
                 roots.Add(Helper.GetDataDirectory(IsolatedStorageScope.Machine));
             }
@@ -33,4 +32,3 @@ namespace System.IO.IsolatedStorage
         }
     }
 }
-    

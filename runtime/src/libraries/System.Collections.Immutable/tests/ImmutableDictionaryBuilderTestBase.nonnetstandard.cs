@@ -12,8 +12,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void TryGetKey()
         {
-            var builder = Empty<int>(StringComparer.OrdinalIgnoreCase)
-                .Add("a", 1).ToBuilder();
+            var builder = Empty<int>(StringComparer.OrdinalIgnoreCase).Add("a", 1).ToBuilder();
             string actualKey;
             Assert.True(TryGetKeyHelper(builder, "a", out actualKey));
             Assert.Equal("a", actualKey);

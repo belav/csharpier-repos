@@ -19,7 +19,9 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2, attr3;
+            XmlAttribute attr1,
+                attr2,
+                attr3;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr2"));
             attr3 = element.Attributes.Append(doc.CreateAttribute("attr3"));
@@ -45,11 +47,15 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public void IndexerByLocalNameReturnsAttribute()
         {
-            const string attrName1 = "attr1", attrName2 = "attr2", attrName3 = "attr3";
+            const string attrName1 = "attr1",
+                attrName2 = "attr2",
+                attrName3 = "attr3";
             const string attrUri = "some:uri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2, attr3;
+            XmlAttribute attr1,
+                attr2,
+                attr3;
             attr1 = element.Attributes.Append(doc.CreateAttribute(attrName1, attrUri));
             attr2 = element.Attributes.Append(doc.CreateAttribute(attrName2, attrUri));
             attr3 = element.Attributes.Append(doc.CreateAttribute(attrName3, attrUri));
@@ -65,11 +71,15 @@ namespace System.Xml.XmlDocumentTests
         public void IndexerByLocalNameReturnsFirstMatch()
         {
             const string attrName = "attr";
-            const string attrUri1 = "some:uri1", attrUri2 = "some:uri2", attrUri3 = "some:uri3";
+            const string attrUri1 = "some:uri1",
+                attrUri2 = "some:uri2",
+                attrUri3 = "some:uri3";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute("someAttr", attrUri1));
-            XmlAttribute expectedAttr = element.Attributes.Append(doc.CreateAttribute(attrName, attrUri2));
+            XmlAttribute expectedAttr = element.Attributes.Append(
+                doc.CreateAttribute(attrName, attrUri2)
+            );
             element.Attributes.Append(doc.CreateAttribute(attrName, attrUri3));
 
             XmlAttributeCollection target = element.Attributes;
@@ -80,12 +90,16 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public void IndexerByLocalNameIsCaseSensitive()
         {
-            const string attrName1 = "attr", attrName2 = "ATTR", attrName3 = "Attr";
+            const string attrName1 = "attr",
+                attrName2 = "ATTR",
+                attrName3 = "Attr";
             const string attrUri = "some:uri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute(attrName1, attrUri));
-            XmlAttribute expectedAttr = element.Attributes.Append(doc.CreateAttribute(attrName2, attrUri));
+            XmlAttribute expectedAttr = element.Attributes.Append(
+                doc.CreateAttribute(attrName2, attrUri)
+            );
             element.Attributes.Append(doc.CreateAttribute(attrName3, attrUri));
 
             XmlAttributeCollection target = element.Attributes;
@@ -108,11 +122,17 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public void IndexerByNameReturnsAttribute()
         {
-            const string attrName1 = "attr", attrName2 = "anotherAttr", attrName3 = "attr";
-            const string attrUri1 = "some:uri", attrUri2 = "some:uri", attrUri3 = "some:anotherUri";
+            const string attrName1 = "attr",
+                attrName2 = "anotherAttr",
+                attrName3 = "attr";
+            const string attrUri1 = "some:uri",
+                attrUri2 = "some:uri",
+                attrUri3 = "some:anotherUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2, attr3;
+            XmlAttribute attr1,
+                attr2,
+                attr3;
             attr1 = element.Attributes.Append(doc.CreateAttribute(attrName1, attrUri1));
             attr2 = element.Attributes.Append(doc.CreateAttribute(attrName2, attrUri2));
             attr3 = element.Attributes.Append(doc.CreateAttribute(attrName3, attrUri3));
@@ -127,12 +147,18 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public void IndexerByNameIsCaseSensitive()
         {
-            const string attrName1 = "attr", attrName2 = "ATTR", attrName3 = "Attr";
-            const string attrUri1 = "some:uri", attrUri2 = "SOME:URI", attrUri3 = "Some:Uri";
+            const string attrName1 = "attr",
+                attrName2 = "ATTR",
+                attrName3 = "Attr";
+            const string attrUri1 = "some:uri",
+                attrUri2 = "SOME:URI",
+                attrUri3 = "Some:Uri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute(attrName1, attrUri1));
-            XmlAttribute expectedAttr = element.Attributes.Append(doc.CreateAttribute(attrName2, attrUri2));
+            XmlAttribute expectedAttr = element.Attributes.Append(
+                doc.CreateAttribute(attrName2, attrUri2)
+            );
             element.Attributes.Append(doc.CreateAttribute(attrName3, attrUri3));
 
             XmlAttributeCollection target = element.Attributes;

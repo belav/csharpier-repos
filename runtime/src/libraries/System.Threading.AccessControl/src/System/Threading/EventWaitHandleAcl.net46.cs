@@ -13,7 +13,8 @@ namespace System.Threading
             EventResetMode mode,
             string? name,
             out bool createdNew,
-            EventWaitHandleSecurity? eventSecurity)
+            EventWaitHandleSecurity? eventSecurity
+        )
         {
             return new EventWaitHandle(initialState, mode, name, out createdNew, eventSecurity);
         }
@@ -23,7 +24,11 @@ namespace System.Threading
             return EventWaitHandle.OpenExisting(name, rights);
         }
 
-        public static bool TryOpenExisting(string name, EventWaitHandleRights rights, [NotNullWhen(true)] out EventWaitHandle result)
+        public static bool TryOpenExisting(
+            string name,
+            EventWaitHandleRights rights,
+            [NotNullWhen(true)] out EventWaitHandle result
+        )
         {
             return EventWaitHandle.TryOpenExisting(name, rights, out result);
         }

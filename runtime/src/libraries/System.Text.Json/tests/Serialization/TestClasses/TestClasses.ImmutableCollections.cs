@@ -47,16 +47,17 @@ namespace System.Text.Json.Serialization.Tests
         public StringToStringIImmutableDictionaryWrapper MyStringToStringImmutableDictionaryWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringToStringImmutableDictionaryWrapper"" : {""key"" : ""value""}" +
-            @"}";
+            @"{" + @"""MyStringToStringImmutableDictionaryWrapper"" : {""key"" : ""value""}" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringToStringImmutableDictionaryWrapper = new StringToStringIImmutableDictionaryWrapper(new Dictionary<string, string> { { "key", "value" } });
+            MyStringToStringImmutableDictionaryWrapper =
+                new StringToStringIImmutableDictionaryWrapper(
+                    new Dictionary<string, string> { { "key", "value" } }
+                );
         }
     }
 
@@ -65,16 +66,16 @@ namespace System.Text.Json.Serialization.Tests
         public StringIImmutableListWrapper MyStringIImmutableListWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIImmutableListWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIImmutableListWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIImmutableListWrapper = new StringIImmutableListWrapper(new List<string> { "Hello" });
+            MyStringIImmutableListWrapper = new StringIImmutableListWrapper(
+                new List<string> { "Hello" }
+            );
         }
     }
 
@@ -83,16 +84,16 @@ namespace System.Text.Json.Serialization.Tests
         public StringIImmutableStackWrapper MyStringIImmutableStackWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIImmutableStackWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIImmutableStackWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIImmutableStackWrapper = new StringIImmutableStackWrapper(new List<string> { "Hello" });
+            MyStringIImmutableStackWrapper = new StringIImmutableStackWrapper(
+                new List<string> { "Hello" }
+            );
         }
     }
 
@@ -101,16 +102,16 @@ namespace System.Text.Json.Serialization.Tests
         public StringIImmutableQueueWrapper MyStringIImmutableQueueWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIImmutableQueueWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIImmutableQueueWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIImmutableQueueWrapper = new StringIImmutableQueueWrapper(new List<string> { "Hello" });
+            MyStringIImmutableQueueWrapper = new StringIImmutableQueueWrapper(
+                new List<string> { "Hello" }
+            );
         }
     }
 
@@ -119,16 +120,16 @@ namespace System.Text.Json.Serialization.Tests
         public StringIImmutableSetWrapper MyStringIImmutableSetWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIImmutableSetWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIImmutableSetWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIImmutableSetWrapper = new StringIImmutableSetWrapper(new List<string> { "Hello" });
+            MyStringIImmutableSetWrapper = new StringIImmutableSetWrapper(
+                new List<string> { "Hello" }
+            );
         }
     }
 
@@ -156,7 +157,9 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableDictionary<string, string>)_dictionary).Add(key, value);
         }
 
-        public IImmutableDictionary<string, string> AddRange(IEnumerable<KeyValuePair<string, string>> pairs)
+        public IImmutableDictionary<string, string> AddRange(
+            IEnumerable<KeyValuePair<string, string>> pairs
+        )
         {
             return ((IImmutableDictionary<string, string>)_dictionary).AddRange(pairs);
         }
@@ -196,7 +199,9 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableDictionary<string, string>)_dictionary).SetItem(key, value);
         }
 
-        public IImmutableDictionary<string, string> SetItems(IEnumerable<KeyValuePair<string, string>> items)
+        public IImmutableDictionary<string, string> SetItems(
+            IEnumerable<KeyValuePair<string, string>> items
+        )
         {
             return ((IImmutableDictionary<string, string>)_dictionary).SetItems(items);
         }
@@ -217,7 +222,8 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class GenericIImmutableDictionaryWrapper<TKey, TValue> : IImmutableDictionary<TKey, TValue>
+    public class GenericIImmutableDictionaryWrapper<TKey, TValue>
+        : IImmutableDictionary<TKey, TValue>
     {
         private ImmutableDictionary<TKey, TValue> _dictionary;
 
@@ -241,7 +247,9 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableDictionary<TKey, TValue>)_dictionary).Add(key, value);
         }
 
-        public IImmutableDictionary<TKey, TValue> AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
+        public IImmutableDictionary<TKey, TValue> AddRange(
+            IEnumerable<KeyValuePair<TKey, TValue>> pairs
+        )
         {
             return ((IImmutableDictionary<TKey, TValue>)_dictionary).AddRange(pairs);
         }
@@ -281,7 +289,9 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableDictionary<TKey, TValue>)_dictionary).SetItem(key, value);
         }
 
-        public IImmutableDictionary<TKey, TValue> SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items)
+        public IImmutableDictionary<TKey, TValue> SetItems(
+            IEnumerable<KeyValuePair<TKey, TValue>> items
+        )
         {
             return ((IImmutableDictionary<TKey, TValue>)_dictionary).SetItems(items);
         }
@@ -337,7 +347,12 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableList<string>)_list).GetEnumerator();
         }
 
-        public int IndexOf(string item, int index, int count, IEqualityComparer<string> equalityComparer)
+        public int IndexOf(
+            string item,
+            int index,
+            int count,
+            IEqualityComparer<string> equalityComparer
+        )
         {
             return _list.IndexOf(item, index, count, equalityComparer);
         }
@@ -352,12 +367,20 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableList<string>)_list).InsertRange(index, items);
         }
 
-        public int LastIndexOf(string item, int index, int count, IEqualityComparer<string> equalityComparer)
+        public int LastIndexOf(
+            string item,
+            int index,
+            int count,
+            IEqualityComparer<string> equalityComparer
+        )
         {
             return _list.LastIndexOf(item, index, count, equalityComparer);
         }
 
-        public IImmutableList<string> Remove(string value, IEqualityComparer<string> equalityComparer)
+        public IImmutableList<string> Remove(
+            string value,
+            IEqualityComparer<string> equalityComparer
+        )
         {
             return ((IImmutableList<string>)_list).Remove(value, equalityComparer);
         }
@@ -372,7 +395,10 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableList<string>)_list).RemoveAt(index);
         }
 
-        public IImmutableList<string> RemoveRange(IEnumerable<string> items, IEqualityComparer<string> equalityComparer)
+        public IImmutableList<string> RemoveRange(
+            IEnumerable<string> items,
+            IEqualityComparer<string> equalityComparer
+        )
         {
             return ((IImmutableList<string>)_list).RemoveRange(items, equalityComparer);
         }
@@ -382,7 +408,11 @@ namespace System.Text.Json.Serialization.Tests
             return ((IImmutableList<string>)_list).RemoveRange(index, count);
         }
 
-        public IImmutableList<string> Replace(string oldValue, string newValue, IEqualityComparer<string> equalityComparer)
+        public IImmutableList<string> Replace(
+            string oldValue,
+            string newValue,
+            IEqualityComparer<string> equalityComparer
+        )
         {
             return ((IImmutableList<string>)_list).Replace(oldValue, newValue, equalityComparer);
         }

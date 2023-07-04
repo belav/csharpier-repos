@@ -11,7 +11,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class MulticastNotSupportedException : SystemException
     {
         public MulticastNotSupportedException()
@@ -32,8 +34,7 @@ namespace System
             HResult = HResults.COR_E_MULTICASTNOTSUPPORTED;
         }
 
-        private MulticastNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private MulticastNotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

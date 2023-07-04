@@ -6,18 +6,16 @@ using System.Runtime.Serialization;
 namespace System.Reflection
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class TargetException : ApplicationException
     {
         public TargetException()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public TargetException(string? message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public TargetException(string? message, Exception? inner)
             : base(message, inner)
@@ -26,8 +24,6 @@ namespace System.Reflection
         }
 
         protected TargetException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -32,10 +32,16 @@ namespace System.Reflection
             return false;
         }
 
-        public virtual IEnumerable<CustomAttributeData> CustomAttributes => GetCustomAttributesData();
-        public virtual IList<CustomAttributeData> GetCustomAttributesData() { throw NotImplemented.ByDesign; }
+        public virtual IEnumerable<CustomAttributeData> CustomAttributes =>
+            GetCustomAttributesData();
+
+        public virtual IList<CustomAttributeData> GetCustomAttributesData()
+        {
+            throw NotImplemented.ByDesign;
+        }
 
         public virtual object[] GetCustomAttributes(bool inherit) => Array.Empty<object>();
+
         public virtual object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
@@ -43,6 +49,7 @@ namespace System.Reflection
         }
 
         public virtual Type[] GetOptionalCustomModifiers() => Type.EmptyTypes;
+
         public virtual Type[] GetRequiredCustomModifiers() => Type.EmptyTypes;
 
         public virtual int MetadataToken => MetadataToken_ParamDef;

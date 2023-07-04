@@ -32,8 +32,8 @@ namespace System.IO.Tests
             public int WriteCalls { get; private set; }
             public int WriteLineCalls { get; private set; }
 
-            public TestFormatWriter(Stream stream) : base(stream)
-            { }
+            public TestFormatWriter(Stream stream)
+                : base(stream) { }
 
             public override void Write(string value)
             {

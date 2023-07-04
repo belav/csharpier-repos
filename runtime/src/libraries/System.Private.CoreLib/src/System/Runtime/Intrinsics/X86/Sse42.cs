@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Sse42() { }
 
-        public static new bool IsSupported { get => IsSupported; }
+        public static new bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public new abstract class X64 : Sse41.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { get => IsSupported; }
+            public static new bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             /// unsigned __int64 _mm_crc32_u64 (unsigned __int64 crc, unsigned __int64 v)
@@ -35,18 +41,23 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128i _mm_cmpgt_epi64 (__m128i a, __m128i b)
         ///   PCMPGTQ xmm, xmm/m128
         /// </summary>
-        public static Vector128<long> CompareGreaterThan(Vector128<long> left, Vector128<long> right) => CompareGreaterThan(left, right);
+        public static Vector128<long> CompareGreaterThan(
+            Vector128<long> left,
+            Vector128<long> right
+        ) => CompareGreaterThan(left, right);
 
         /// <summary>
         /// unsigned int _mm_crc32_u8 (unsigned int crc, unsigned char v)
         ///   CRC32 reg, reg/m8
         /// </summary>
         public static uint Crc32(uint crc, byte data) => Crc32(crc, data);
+
         /// <summary>
         /// unsigned int _mm_crc32_u16 (unsigned int crc, unsigned short v)
         ///   CRC32 reg, reg/m16
         /// </summary>
         public static uint Crc32(uint crc, ushort data) => Crc32(crc, data);
+
         /// <summary>
         /// unsigned int _mm_crc32_u32 (unsigned int crc, unsigned int v)
         ///   CRC32 reg, reg/m32
