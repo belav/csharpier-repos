@@ -3,11 +3,9 @@
 
 using System;
 using System.Text;
+using ILLink.Shared;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using ILLink.Shared;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Logging

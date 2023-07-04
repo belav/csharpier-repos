@@ -159,8 +159,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     // <Description>Optional Parameters declared with Attributes</Description>
     // <Expects status=success></Expects>
     // <Code>
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
 
     public class Parent
     {

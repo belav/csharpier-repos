@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Text;
-
+using System.Threading.Tasks;
 using Microsoft.DotNet.XUnitExtensions;
-
 using Xunit;
 using Xunit.Abstractions;
 

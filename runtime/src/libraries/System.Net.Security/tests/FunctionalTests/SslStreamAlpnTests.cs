@@ -8,7 +8,6 @@ using System.Net.Test.Common;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 

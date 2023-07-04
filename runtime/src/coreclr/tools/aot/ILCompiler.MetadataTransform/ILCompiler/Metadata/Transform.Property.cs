@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Metadata.NativeFormat.Writer;
-
-using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
-using MethodSemanticsAttributes = Internal.Metadata.NativeFormat.MethodSemanticsAttributes;
 using CallingConventions = System.Reflection.CallingConventions;
+using Ecma = System.Reflection.Metadata;
+using MethodSemanticsAttributes = Internal.Metadata.NativeFormat.MethodSemanticsAttributes;
+using Cts = Internal.TypeSystem;
 
 namespace ILCompiler.Metadata
 {

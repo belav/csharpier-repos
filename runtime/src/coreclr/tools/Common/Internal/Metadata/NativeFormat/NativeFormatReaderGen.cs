@@ -11,8 +11,8 @@
 #pragma warning disable IDE0059
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Internal.NativeFormat;
 

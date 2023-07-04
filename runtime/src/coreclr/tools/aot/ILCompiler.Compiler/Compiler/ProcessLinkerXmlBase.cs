@@ -12,9 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
-
 using ILCompiler.Dataflow;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 

@@ -4,7 +4,6 @@
 using System.Net.Test.Common;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 

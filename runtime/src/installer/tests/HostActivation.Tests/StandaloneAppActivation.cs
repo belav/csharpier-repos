@@ -4,7 +4,6 @@
 using System;
 using System.IO;
 using System.Text;
-
 using FluentAssertions;
 using Microsoft.DotNet.Cli.Build.Framework;
 using Microsoft.DotNet.CoreSetup.Test;

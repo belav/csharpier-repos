@@ -3,24 +3,22 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.IO;
-using System.Text;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization;
+using System.Reflection.Runtime.CustomAttributes;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.Modules;
 using System.Reflection.Runtime.TypeInfos;
 using System.Reflection.Runtime.TypeParsing;
-using System.Reflection.Runtime.CustomAttributes;
-using System.Collections.Generic;
-
+using System.Runtime.Serialization;
+using System.Security;
+using System.Text;
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 using Internal.Reflection.Core.NonPortable;
-
-using System.Security;
 
 namespace System.Reflection.Runtime.Assemblies
 {

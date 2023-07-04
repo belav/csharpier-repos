@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Aliases = System.Collections.Generic.ValueListBuilder<(string aliasName, string symbolName)>;

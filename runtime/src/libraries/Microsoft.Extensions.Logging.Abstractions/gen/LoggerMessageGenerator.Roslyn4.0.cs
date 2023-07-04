@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 #if !ROSLYN4_4_OR_GREATER
 using Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 #endif
-using Microsoft.CodeAnalysis.Text;
+
 
 [assembly: System.Resources.NeutralResourcesLanguage("en-us")]
 

@@ -4,10 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
-
 using ILCompiler.DependencyAnalysisFramework;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

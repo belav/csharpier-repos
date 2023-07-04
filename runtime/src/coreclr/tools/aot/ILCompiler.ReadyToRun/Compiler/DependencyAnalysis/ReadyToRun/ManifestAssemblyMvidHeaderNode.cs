@@ -4,10 +4,8 @@
 using System;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun

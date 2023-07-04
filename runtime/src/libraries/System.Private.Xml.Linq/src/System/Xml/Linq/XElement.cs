@@ -2,19 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using System.Xml.Schema;
-
-using CultureInfo = System.Globalization.CultureInfo;
+using System.Xml.Serialization;
 using IEnumerable = System.Collections.IEnumerable;
 using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
+using CultureInfo = System.Globalization.CultureInfo;
 using StringBuilder = System.Text.StringBuilder;
-using System.Diagnostics;
 
 namespace System.Xml.Linq
 {

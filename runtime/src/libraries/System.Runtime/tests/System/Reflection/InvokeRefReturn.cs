@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-
 using Xunit;
 
 namespace System.Reflection.Tests

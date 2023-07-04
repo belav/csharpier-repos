@@ -4,10 +4,8 @@
 using System;
 using System.Diagnostics;
 using System.Reflection.Metadata;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler

@@ -1,5 +1,4 @@
 //Auto-edited to add globalization coverage by Globalizer, 6/3/2004 11:54:49 AM, written by RDawson
-using System.Text;
 // ClassLib\Test\Utilities\Central.cool    GeneMi    1999/12/08
 
 /**
@@ -11,6 +10,7 @@ that has tests, so that it will be auto imported.
 
 
 using System;
+using System.Text;
 
 public class Central_GlobIi
 {

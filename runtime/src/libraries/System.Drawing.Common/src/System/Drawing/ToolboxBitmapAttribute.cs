@@ -5,8 +5,8 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Imaging;
 using System.IO;
-using DpiHelper = System.Windows.Forms.DpiHelper;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
+using DpiHelper = System.Windows.Forms.DpiHelper;
 
 namespace System.Drawing
 {

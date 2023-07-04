@@ -6,15 +6,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
-
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
 using ILCompiler.Dataflow;
 using ILCompiler.Logging;
 using ILLink.Shared;
-using MethodIL = Internal.IL.MethodIL;
 using Internal.IL;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
+using MethodIL = Internal.IL.MethodIL;
 
 namespace ILCompiler
 {

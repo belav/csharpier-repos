@@ -1,14 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Interop;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 using static Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer;
-
 using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer,
     Microsoft.Interop.Analyzers.CustomMarshallerAttributeFixer

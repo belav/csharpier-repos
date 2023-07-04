@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Security.Cryptography.Apple;
-
 using PAL_HashAlgorithm = Interop.AppleCrypto.PAL_HashAlgorithm;
 
 namespace System.Security.Cryptography

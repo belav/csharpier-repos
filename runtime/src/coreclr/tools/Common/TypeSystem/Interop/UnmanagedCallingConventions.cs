@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Numerics;
 using System.Reflection.Metadata;
-
 using Internal.IL;
 using Internal.TypeSystem.Ecma;
 

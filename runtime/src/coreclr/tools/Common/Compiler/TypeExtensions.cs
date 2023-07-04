@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler

@@ -7,9 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Internal.TypeSystem;
 using ILCompiler.Diagnostics;
+using Internal.TypeSystem;
 
 namespace ILCompiler.PEWriter
 {

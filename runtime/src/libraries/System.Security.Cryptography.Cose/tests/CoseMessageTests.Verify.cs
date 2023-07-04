@@ -1,6 +1,6 @@
-﻿using Xunit;
+﻿using System.Formats.Cbor;
 using Test.Cryptography;
-using System.Formats.Cbor;
+using Xunit;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests

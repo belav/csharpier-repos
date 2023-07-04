@@ -5,11 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-
 using ILLink.Shared.DataFlow;
 using Internal.IL;
 using Internal.TypeSystem;
-
 using HoistedLocalState = ILLink.Shared.DataFlow.DefaultValueDictionary<
     ILCompiler.Dataflow.HoistedLocalKey,
     ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>

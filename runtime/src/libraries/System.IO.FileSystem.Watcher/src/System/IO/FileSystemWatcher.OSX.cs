@@ -4,17 +4,16 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Text;
-
+using System.Threading;
+using Microsoft.Win32.SafeHandles;
 #pragma warning disable SA1121 // we don't want to simplify built-ins here as we're using aliasing
 using CFStringRef = System.IntPtr;
 using FSEventStreamRef = System.IntPtr;
 using size_t = System.IntPtr;
+using CFRunLoopRef = System.IntPtr;
 using FSEventStreamEventId = System.UInt64;
 using FSEventStreamEventFlags = Interop.EventStream.FSEventStreamEventFlags;
-using CFRunLoopRef = System.IntPtr;
-using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {

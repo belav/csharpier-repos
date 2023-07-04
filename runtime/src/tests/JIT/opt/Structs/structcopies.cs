@@ -5,11 +5,11 @@
 // struct optimizations with existing retyping or missing field sequences.
 
 using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics;
 using System.Numerics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
 
 namespace TestStructFields
 {

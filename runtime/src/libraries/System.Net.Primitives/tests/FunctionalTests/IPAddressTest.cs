@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests

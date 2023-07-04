@@ -3,7 +3,6 @@
 
 using System.Reflection;
 using System.Text;
-
 using Xunit;
 
 namespace System.PrivateUri.Tests

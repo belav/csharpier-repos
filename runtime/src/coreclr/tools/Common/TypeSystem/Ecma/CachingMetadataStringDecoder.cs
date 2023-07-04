@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection.Metadata;
-using Debug = System.Diagnostics.Debug;
-
 using Internal.NativeFormat;
+using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma
 {

@@ -7,9 +7,7 @@ using ILCompiler.Dataflow;
 using Internal.IL;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Xunit;
-
 using CustomAttributeValue = System.Reflection.Metadata.CustomAttributeValue<Internal.TypeSystem.TypeDesc>;
 
 namespace ILCompiler.Compiler.Tests

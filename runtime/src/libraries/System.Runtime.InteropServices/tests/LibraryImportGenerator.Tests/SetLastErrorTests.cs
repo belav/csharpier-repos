@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
-
 using Xunit;
 
 namespace LibraryImportGenerator.IntegrationTests

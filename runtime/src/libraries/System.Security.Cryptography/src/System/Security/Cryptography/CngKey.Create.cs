@@ -4,7 +4,6 @@
 using System.Runtime.Versioning;
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
-
 using ErrorCode = Interop.NCrypt.ErrorCode;
 using NCRYPT_UI_POLICY = Interop.NCrypt.NCRYPT_UI_POLICY;
 

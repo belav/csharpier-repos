@@ -5,8 +5,8 @@
 // Retrieves or assigns the object an IsAlive status.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 public class Dummy
 {

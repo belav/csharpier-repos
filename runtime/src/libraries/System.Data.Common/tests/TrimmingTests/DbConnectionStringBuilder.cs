@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Data.Common;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
+using System.Data.Common;
 
 namespace DbConnectionStringBuilderTrimmingTests
 {

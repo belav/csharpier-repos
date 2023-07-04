@@ -8,8 +8,8 @@
 // Each of the data types has a data contract with the runtime. See the contract in the type definition
 //
 
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace System
 {

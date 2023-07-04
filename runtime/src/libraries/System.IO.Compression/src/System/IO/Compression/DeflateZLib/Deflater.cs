@@ -4,7 +4,6 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Security;
-
 using ZErrorCode = System.IO.Compression.ZLibNative.ErrorCode;
 using ZFlushCode = System.IO.Compression.ZLibNative.FlushCode;
 

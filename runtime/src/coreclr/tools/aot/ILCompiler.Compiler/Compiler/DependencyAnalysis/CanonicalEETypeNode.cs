@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
-using Internal.TypeSystem;
 using Internal.Runtime;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

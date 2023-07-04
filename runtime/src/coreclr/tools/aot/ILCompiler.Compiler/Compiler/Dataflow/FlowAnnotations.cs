@@ -5,16 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
-
 using ILCompiler;
 using ILCompiler.Dataflow;
 using ILLink.Shared.DataFlow;
 using ILLink.Shared.TypeSystemProxy;
-
 using Internal.IL;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 using WellKnownType = Internal.TypeSystem.WellKnownType;
 

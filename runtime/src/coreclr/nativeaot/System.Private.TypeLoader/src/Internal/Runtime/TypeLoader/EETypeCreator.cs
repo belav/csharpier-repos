@@ -3,12 +3,10 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime.Augments;
-using System.Collections.Generic;
-
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader

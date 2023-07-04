@@ -3,27 +3,23 @@
 
 using System;
 using System.Collections.Generic;
-
-using Internal.TypeSystem;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
-using Debug = System.Diagnostics.Debug;
-using ReadyToRunSectionType = Internal.Runtime.ReadyToRunSectionType;
-using ReflectionMapBlob = Internal.Runtime.ReflectionMapBlob;
-using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
+using Internal.TypeSystem;
 using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
-using MethodIL = Internal.IL.MethodIL;
+using Debug = System.Diagnostics.Debug;
 using CustomAttributeValue = System.Reflection.Metadata.CustomAttributeValue<Internal.TypeSystem.TypeDesc>;
-
-using MetadataRecord = Internal.Metadata.NativeFormat.Writer.MetadataRecord;
+using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
+using MethodIL = Internal.IL.MethodIL;
+using ConstantStringValue = Internal.Metadata.NativeFormat.Writer.ConstantStringValue;
 using MemberReference = Internal.Metadata.NativeFormat.Writer.MemberReference;
+using MetadataRecord = Internal.Metadata.NativeFormat.Writer.MetadataRecord;
+using MethodInstantiation = Internal.Metadata.NativeFormat.Writer.MethodInstantiation;
+using TypeInstantiationSignature = Internal.Metadata.NativeFormat.Writer.TypeInstantiationSignature;
 using TypeReference = Internal.Metadata.NativeFormat.Writer.TypeReference;
 using TypeSpecification = Internal.Metadata.NativeFormat.Writer.TypeSpecification;
-using ConstantStringValue = Internal.Metadata.NativeFormat.Writer.ConstantStringValue;
-using TypeInstantiationSignature = Internal.Metadata.NativeFormat.Writer.TypeInstantiationSignature;
-using MethodInstantiation = Internal.Metadata.NativeFormat.Writer.MethodInstantiation;
+using ReadyToRunSectionType = Internal.Runtime.ReadyToRunSectionType;
+using ReflectionMapBlob = Internal.Runtime.ReflectionMapBlob;
 
 namespace ILCompiler
 {

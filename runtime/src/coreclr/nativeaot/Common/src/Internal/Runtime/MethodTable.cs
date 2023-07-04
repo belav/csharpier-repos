@@ -5,9 +5,7 @@ using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.NativeFormat;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime

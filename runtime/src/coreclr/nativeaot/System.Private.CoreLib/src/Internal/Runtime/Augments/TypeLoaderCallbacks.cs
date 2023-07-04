@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime;
 using System.Collections.Generic;
-
-using Internal.Runtime.CompilerServices;
-using Internal.NativeFormat;
+using System.Runtime;
 using Internal.Metadata.NativeFormat;
+using Internal.NativeFormat;
+using Internal.Runtime.CompilerServices;
 
 namespace Internal.Runtime.Augments
 {

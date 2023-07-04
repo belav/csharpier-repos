@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Internal.TypeSystem;
-
 using Xunit;
 
 namespace TypeSystemTests

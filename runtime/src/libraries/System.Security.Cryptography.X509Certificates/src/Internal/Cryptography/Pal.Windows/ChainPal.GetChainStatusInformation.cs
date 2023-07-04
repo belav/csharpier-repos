@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
-
+using System.Text;
 using Internal.Cryptography.Pal.Native;
 
 namespace Internal.Cryptography.Pal

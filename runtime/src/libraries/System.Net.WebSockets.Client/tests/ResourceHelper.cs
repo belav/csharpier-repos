@@ -4,7 +4,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-
 using Xunit;
 
 namespace System.Net.WebSockets.Client.Tests

@@ -3,24 +3,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Reflection.PortableExecutable;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
-using System.IO.Compression;
-using System.Reflection;
-using System.Diagnostics;
-using System.Text;
 
 namespace Microsoft.WebAssembly.Diagnostics
 {

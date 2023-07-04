@@ -3,7 +3,6 @@
 
 using Internal.IL;
 using Internal.IL.Stubs;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Interop

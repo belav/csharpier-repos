@@ -7,11 +7,10 @@
 
 using System;
 using System.Diagnostics;
-
+using Internal.CorConstants;
 using Internal.JitInterface;
 using Internal.NativeFormat;
 using Internal.TypeSystem;
-using Internal.CorConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Tests;
 using System.Text;
-
 using Xunit;
 
 namespace System.PrivateUri.Tests

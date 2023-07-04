@@ -3,10 +3,9 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.JitInterface;
-using Internal.TypeSystem;
 using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

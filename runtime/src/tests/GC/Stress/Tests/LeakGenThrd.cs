@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using System.Threading;
 using System;
 using System.IO;
+using System.Threading;
 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //

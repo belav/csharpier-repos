@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-
 using Internal.NativeFormat;
 
 namespace Internal.TypeSystem

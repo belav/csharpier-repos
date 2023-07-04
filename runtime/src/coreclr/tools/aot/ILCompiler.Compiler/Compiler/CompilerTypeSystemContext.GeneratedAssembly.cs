@@ -3,13 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.TypeSystem;
-
-using TypeHashingAlgorithms = Internal.NativeFormat.TypeHashingAlgorithms;
-using Interlocked = System.Threading.Interlocked;
-using AssemblyName = System.Reflection.AssemblyName;
 using Debug = System.Diagnostics.Debug;
+using AssemblyName = System.Reflection.AssemblyName;
+using Interlocked = System.Threading.Interlocked;
+using TypeHashingAlgorithms = Internal.NativeFormat.TypeHashingAlgorithms;
 
 namespace ILCompiler
 {

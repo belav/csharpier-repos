@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 #pragma warning disable CA1844 // lack of WriteAsync(ReadOnlyMemory) override in .NET Standard 2.1 build

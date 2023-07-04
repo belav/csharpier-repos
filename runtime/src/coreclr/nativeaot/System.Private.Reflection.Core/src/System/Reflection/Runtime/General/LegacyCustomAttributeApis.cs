@@ -14,11 +14,10 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Collections.Generic;
 using System.Reflection.Runtime.General;
-
 using Internal.LowLevelLinq;
 using Internal.Reflection.Extensions.NonPortable;
 

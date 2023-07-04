@@ -3,12 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.ServiceModel.Syndication;
-using System.Xml;
 using System.IO;
-using Xunit;
 using System.Linq;
+using System.ServiceModel.Syndication;
+using System.Text;
+using System.Xml;
+using Xunit;
 
 namespace System.ServiceModel.Syndication.Tests
 {

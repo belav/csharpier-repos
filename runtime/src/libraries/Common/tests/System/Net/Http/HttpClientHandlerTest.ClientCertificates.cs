@@ -15,10 +15,9 @@ using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-    using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+    using Configuration = System.Net.Test.Common.Configuration;
 #endif
 
     public abstract class HttpClientHandler_ClientCertificates_Test : HttpClientHandlerTestBase

@@ -5,10 +5,10 @@
 // It tries to access field from a promoted struct with an offset that
 // is not valid for the promoted struct type.
 
+using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System;
 
 class TestStructAccessThroughRef
 {

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader

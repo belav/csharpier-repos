@@ -4,8 +4,8 @@
 using System.Buffers;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Security.Principal;
 using System.Security.Authentication.ExtendedProtection;
+using System.Security.Principal;
 
 namespace System.Net.Security
 {

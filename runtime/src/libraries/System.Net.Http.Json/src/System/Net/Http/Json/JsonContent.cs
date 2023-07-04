@@ -1,9 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#if !NETCOREAPP
-using System.Diagnostics;
-#endif
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Http.Headers;
@@ -11,6 +8,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+#if !NETCOREAPP
+using System.Diagnostics;
+#endif
 
 namespace System.Net.Http.Json
 {

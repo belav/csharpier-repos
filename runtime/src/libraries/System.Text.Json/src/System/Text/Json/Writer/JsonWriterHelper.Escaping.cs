@@ -5,7 +5,6 @@ using System.Buffers;
 using System.Buffers.Text;
 using System.Diagnostics;
 using System.Text.Encodings.Web;
-
 #if !NETCOREAPP
 using System.Runtime.CompilerServices;
 #endif

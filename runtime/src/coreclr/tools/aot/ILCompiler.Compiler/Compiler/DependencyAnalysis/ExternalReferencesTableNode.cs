@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis

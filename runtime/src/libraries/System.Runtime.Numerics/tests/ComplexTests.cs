@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
-
 using Xunit;
 
 namespace System.Numerics.Tests

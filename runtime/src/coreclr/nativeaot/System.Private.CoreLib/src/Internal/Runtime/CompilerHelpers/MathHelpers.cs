@@ -4,7 +4,6 @@
 using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime;
 
 namespace Internal.Runtime.CompilerHelpers

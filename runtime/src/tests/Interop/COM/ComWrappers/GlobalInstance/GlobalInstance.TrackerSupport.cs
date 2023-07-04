@@ -5,7 +5,6 @@ namespace ComWrappersTests.GlobalInstance
 {
     using System;
     using System.Runtime.InteropServices;
-
     using ComWrappersTests.Common;
     using TestLibrary;
     using Xunit;

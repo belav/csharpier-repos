@@ -762,8 +762,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {

@@ -3,7 +3,6 @@
 
 using System;
 using System.Security.Authentication.ExtendedProtection;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 namespace System.Net.Http

@@ -9,16 +9,14 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
+using ILCompiler.DependencyAnalysis;
+using ILCompiler.DependencyAnalysis.ReadyToRun;
+using ILCompiler.DependencyAnalysisFramework;
 using Internal.IL;
 using Internal.IL.Stubs;
 using Internal.JitInterface;
 using Internal.ReadyToRunConstants;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis;
-using ILCompiler.DependencyAnalysis.ReadyToRun;
-using ILCompiler.DependencyAnalysisFramework;
 using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler

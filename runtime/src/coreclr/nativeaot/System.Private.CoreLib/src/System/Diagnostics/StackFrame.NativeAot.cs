@@ -4,7 +4,6 @@
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Text;
-
 using Internal.DeveloperExperience;
 
 namespace System.Diagnostics

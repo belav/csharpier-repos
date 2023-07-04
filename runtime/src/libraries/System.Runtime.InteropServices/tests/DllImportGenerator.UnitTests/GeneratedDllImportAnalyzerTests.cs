@@ -4,7 +4,6 @@
 using System.Threading.Tasks;
 using Xunit;
 using static Microsoft.Interop.Analyzers.GeneratedDllImportAnalyzer;
-
 using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.GeneratedDllImportAnalyzer>;
 
 namespace DllImportGenerator.UnitTests

@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 #nullable enable

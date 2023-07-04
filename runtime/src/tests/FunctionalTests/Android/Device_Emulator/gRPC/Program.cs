@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-
 // The code of the tests is cloned from https://github.com/grpc/grpc-dotnet
 using Grpc.Shared.TestAssets;
 

@@ -22,9 +22,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-using System.Data.Common;
 using System.Collections;
-
+using System.Data.Common;
 using Xunit;
 
 namespace System.Data.Tests

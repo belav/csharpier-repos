@@ -8,7 +8,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop

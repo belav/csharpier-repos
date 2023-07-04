@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Tests;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.WebSockets.Client.Tests

@@ -3,10 +3,10 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using Xunit;
-using Tests.Collections;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using Tests.Collections;
+using Xunit;
 
 namespace System.Collections.ObjectModel.Tests
 {

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
+using System.Threading;
 
 // disable warnings about various Monitor members being obsolete
 #pragma warning disable 0618

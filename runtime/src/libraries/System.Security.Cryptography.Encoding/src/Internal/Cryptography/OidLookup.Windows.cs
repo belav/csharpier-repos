@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Security.Cryptography;
-
 using static Interop.Crypt32;
 
 namespace Internal.Cryptography

@@ -4,16 +4,14 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-    using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+    using Configuration = System.Net.Test.Common.Configuration;
 #endif
 
     [PlatformSpecific(TestPlatforms.Windows)]

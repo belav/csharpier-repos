@@ -5,13 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
+using Internal.CorConstants;
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.CorConstants;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

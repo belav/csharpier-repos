@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-
 #pragma warning disable SA1121 // We use our own aliases since they differ per platform
 #if TARGET_32BIT
 using NativeExponentType = System.SByte;

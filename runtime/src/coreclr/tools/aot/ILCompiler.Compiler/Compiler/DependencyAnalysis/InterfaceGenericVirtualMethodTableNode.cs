@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-
-using Internal.Text;
-using Internal.TypeSystem;
+using System.Diagnostics;
 using Internal.NativeFormat;
 using Internal.Runtime;
+using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {

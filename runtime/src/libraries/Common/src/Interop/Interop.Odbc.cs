@@ -5,12 +5,13 @@ using System;
 using System.Data.Odbc;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
-#if NET7_0_OR_GREATER
-using System.Runtime.InteropServices.Marshalling;
-#endif
 using System.Runtime.Versioning;
 using System.Security;
 using System.Text;
+#if NET7_0_OR_GREATER
+using System.Runtime.InteropServices.Marshalling;
+#endif
+
 
 internal static partial class Interop
 {

@@ -4,9 +4,8 @@
 using System;
 using ILLink.Shared.TypeSystemProxy;
 using Internal.TypeSystem;
-
-using TypeSystemWellKnownType = Internal.TypeSystem.WellKnownType;
 using ILLinkSharedWellKnownType = ILLink.Shared.TypeSystemProxy.WellKnownType;
+using TypeSystemWellKnownType = Internal.TypeSystem.WellKnownType;
 
 #nullable enable
 

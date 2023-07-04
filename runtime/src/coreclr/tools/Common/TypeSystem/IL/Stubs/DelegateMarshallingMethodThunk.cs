@@ -4,9 +4,9 @@
 using System;
 using System.Runtime.InteropServices;
 using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
 using Debug = System.Diagnostics.Debug;
-using Internal.TypeSystem.Ecma;
 
 namespace Internal.IL.Stubs
 {

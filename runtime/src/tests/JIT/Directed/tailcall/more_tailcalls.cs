@@ -5,11 +5,11 @@
 // InlineIL.Fody to compile. It is not used as anything but a reference of that
 // IL file.
 
-using InlineIL;
 using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using InlineIL;
 
 struct S16
 {

@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.IL.Stubs;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using Interlocked = System.Threading.Interlocked;
 

@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 using System;
-using System.Reflection;
-using System.IO;
-using System.Runtime.Loader;
-using System.Runtime.CompilerServices;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
 
 class RuntimeHelperTest
 {

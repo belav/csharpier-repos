@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 // Verify that jit test project files specify DebugType properly.
 // Returns error status (-1) if any project files are in error.

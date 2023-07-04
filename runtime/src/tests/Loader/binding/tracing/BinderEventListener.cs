@@ -5,9 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
-using System.Threading;
 using System.Reflection;
-
+using System.Threading;
 using Xunit;
 
 namespace BinderTracingTests

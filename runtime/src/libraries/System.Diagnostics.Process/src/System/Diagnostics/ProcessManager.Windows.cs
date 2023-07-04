@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
-
 using static Interop.Advapi32;
 
 namespace System.Diagnostics

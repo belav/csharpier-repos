@@ -24,9 +24,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.Xml;
 using System.Data.SqlTypes;
+using System.Xml;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {

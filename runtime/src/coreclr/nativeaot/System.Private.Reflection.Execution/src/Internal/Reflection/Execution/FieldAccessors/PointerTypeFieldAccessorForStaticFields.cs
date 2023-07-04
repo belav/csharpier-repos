@@ -4,7 +4,6 @@
 using System;
 using Internal.Runtime;
 using Internal.Runtime.Augments;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution.FieldAccessors

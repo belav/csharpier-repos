@@ -1341,7 +1341,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum005.enum005
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
     // <Area>Enum -- binary operator</Area>
     // <Title>Predefined enum binary operators</Title>
     // <Description>
@@ -1360,6 +1359,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     //
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
 
     public class Test
     {
@@ -1617,7 +1617,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum005b.enum005b
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
     // <Area>Enum -- binary operator</Area>
     // <Title>Predefined enum binary operators</Title>
     // <Description>
@@ -1638,6 +1637,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     //<Expects Status=warning>\(32,16\).*CS0219</Expects>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
 
     public class Test
     {
@@ -1978,7 +1978,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enum005c.enum005c
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
     // <Area>Enum -- binary operator</Area>
     // <Title>Predefined enum binary operators</Title>
     // <Description>
@@ -1995,6 +1994,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     //
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.basic.enumhelper.enumhelper;
 
     public class Test
     {

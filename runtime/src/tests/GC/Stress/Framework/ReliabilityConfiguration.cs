@@ -5,11 +5,11 @@
 //
 
 using System;
-using System.Xml;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
 
 // General Notes:
 // we use the same modem for our config here as we use for icorhost.exe.  There are 2 config files.  The 1st specifies the tests

@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections;
-using System.Globalization;
 using System.Collections.Specialized;
-using Microsoft.DotNet.RemoteExecutor;
+using System.Globalization;
 using System.Threading;
+using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
 namespace System.Diagnostics.Tests

@@ -4,14 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using Internal.CorConstants;
+using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
-using Internal.ReadyToRunConstants;
-using Internal.CorConstants;
-using Internal.JitInterface;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

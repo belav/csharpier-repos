@@ -13,9 +13,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime.Augments;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace System

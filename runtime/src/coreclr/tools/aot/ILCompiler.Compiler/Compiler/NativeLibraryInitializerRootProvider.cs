@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Internal.TypeSystem;
 using Internal.IL.Stubs.StartupCode;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

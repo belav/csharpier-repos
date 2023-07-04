@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using static Interop.Crypt32;
 
 namespace Microsoft.Win32.SafeHandles

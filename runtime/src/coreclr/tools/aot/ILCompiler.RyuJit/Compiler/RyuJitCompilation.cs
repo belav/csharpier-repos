@@ -6,15 +6,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
 using ILLink.Shared;
-
 using Internal.IL;
 using Internal.IL.Stubs;
-using Internal.TypeSystem;
 using Internal.JitInterface;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

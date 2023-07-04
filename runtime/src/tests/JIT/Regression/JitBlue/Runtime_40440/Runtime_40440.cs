@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography;
 

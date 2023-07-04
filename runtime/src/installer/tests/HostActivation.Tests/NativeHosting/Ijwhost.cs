@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
-
 using Microsoft.DotNet.Cli.Build.Framework;
 using Xunit;
 

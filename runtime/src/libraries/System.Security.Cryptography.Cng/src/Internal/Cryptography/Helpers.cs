@@ -4,11 +4,9 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Security.Cryptography;
 using System.Runtime.InteropServices;
-
+using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
-
 using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace Internal.Cryptography

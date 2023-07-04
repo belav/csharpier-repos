@@ -23,8 +23,8 @@ In E.cctor: thread T4: A.i 5
 */
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public struct A
 {

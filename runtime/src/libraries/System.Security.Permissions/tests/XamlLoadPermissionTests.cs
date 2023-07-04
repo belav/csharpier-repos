@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Configuration;
 using System.DirectoryServices;
 using System.Reflection;
@@ -9,6 +8,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Xaml.Permissions;
+using Xunit;
 
 namespace System.Xaml.Permissions.Tests
 {

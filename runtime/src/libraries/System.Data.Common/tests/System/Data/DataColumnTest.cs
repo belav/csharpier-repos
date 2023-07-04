@@ -33,7 +33,6 @@
 
 using System.ComponentModel;
 using System.Data.SqlTypes;
-
 using Xunit;
 
 namespace System.Data.Tests

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using ILCompiler.IBC;
-
 using Internal.Pgo;
 using Internal.TypeSystem;
 

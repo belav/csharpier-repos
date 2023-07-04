@@ -4,13 +4,10 @@
 
 using System;
 using System.Diagnostics;
-
 using System.Reflection.Runtime.General;
-
-using Internal.Runtime.Augments;
-
 using Internal.Metadata.NativeFormat;
 using Internal.NativeFormat;
+using Internal.Runtime.Augments;
 using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader

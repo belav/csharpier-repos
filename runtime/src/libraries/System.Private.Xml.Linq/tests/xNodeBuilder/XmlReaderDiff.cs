@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
-using Microsoft.Test.ModuleCore;
 using System.Xml.Linq;
+using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq
 {

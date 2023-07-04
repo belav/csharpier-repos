@@ -25,7 +25,6 @@ using System.Data.SqlTypes;
 using System.IO;
 using System.Text;
 using System.Xml;
-
 using Xunit;
 
 namespace System.Data.Tests.SqlTypes

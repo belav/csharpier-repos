@@ -3,7 +3,6 @@
 
 using System.IO;
 using System.Reflection;
-
 using LibraryNameVariation = System.Runtime.Loader.LibraryNameVariation;
 
 namespace System.Runtime.InteropServices

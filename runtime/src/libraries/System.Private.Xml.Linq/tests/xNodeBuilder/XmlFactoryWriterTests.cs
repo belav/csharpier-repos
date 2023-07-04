@@ -3,11 +3,11 @@
 
 using System;
 using System.Globalization;
-using System.Xml;
-using System.Xml.Linq;
+using System.IO;
 //using System.Xml.XPath;
 using System.Text;
-using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 using Microsoft.Test.ModuleCore;
 
 namespace CoreXml.Test.XLinq

@@ -230,7 +230,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.derived.derived001.derived001
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.derived.errorverifier.errorverifier;
     // <Title>Generic constraints</Title>
     // <Description>
     // </Description>
@@ -238,6 +237,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Expects Status=success></Expects>
     // <Code>
     using System.Collections.Generic;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.derived.errorverifier.errorverifier;
 
     public class MyClass<T, U>
         where T : List<object>, new()

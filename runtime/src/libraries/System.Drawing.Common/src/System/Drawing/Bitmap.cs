@@ -6,8 +6,8 @@ using System.Drawing.Imaging;
 using System.Drawing.Internal;
 using System.IO;
 using System.Runtime.InteropServices;
-using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 using System.Runtime.Serialization;
+using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing
 {

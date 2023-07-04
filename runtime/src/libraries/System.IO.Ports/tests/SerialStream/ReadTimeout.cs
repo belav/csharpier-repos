@@ -6,8 +6,8 @@ using System.IO.PortsTests;
 using System.Threading;
 using System.Threading.Tasks;
 using Legacy.Support;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.IO.Ports.Tests
 {

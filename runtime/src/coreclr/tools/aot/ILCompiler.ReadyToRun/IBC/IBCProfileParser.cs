@@ -7,12 +7,10 @@ using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
-
+using ILCompiler.Win32Resources;
+using Internal.CorConstants;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.CorConstants;
-
-using ILCompiler.Win32Resources;
 
 namespace ILCompiler.IBC
 {

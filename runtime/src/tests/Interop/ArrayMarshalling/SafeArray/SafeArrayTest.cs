@@ -3,8 +3,8 @@
 
 using System;
 using System.Linq;
-using System.Threading;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Xunit;
 
 #pragma warning disable CS0612, CS0618

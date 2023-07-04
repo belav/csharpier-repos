@@ -3,10 +3,8 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-
-using AllocationHelper = System.SpanTests.AllocationHelper;
-
 using Xunit;
+using AllocationHelper = System.SpanTests.AllocationHelper;
 
 namespace System.Buffers.Text.Tests
 {

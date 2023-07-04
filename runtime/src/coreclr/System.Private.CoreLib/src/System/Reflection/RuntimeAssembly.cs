@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Configuration.Assemblies;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using CultureInfo = System.Globalization.CultureInfo;
 using System.IO;
-using System.Configuration.Assemblies;
-using StackCrawlMark = System.Threading.StackCrawlMark;
-using System.Runtime.Loader;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using System.Runtime.Serialization;
 using System.Threading;
+using CultureInfo = System.Globalization.CultureInfo;
+using StackCrawlMark = System.Threading.StackCrawlMark;
 
 namespace System.Reflection
 {

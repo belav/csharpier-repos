@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
-using XmlCoreTest.Common;
 using OLEDB.Test.ModuleCore;
+using XmlCoreTest.Common;
 
 namespace System.Xml.Tests
 {

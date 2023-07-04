@@ -4,7 +4,6 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 #if NETCOREAPP
 using System.Runtime.Intrinsics.X86;
 #endif

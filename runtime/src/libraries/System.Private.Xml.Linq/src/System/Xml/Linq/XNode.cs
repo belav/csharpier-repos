@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
-using CultureInfo = System.Globalization.CultureInfo;
 using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
+using CultureInfo = System.Globalization.CultureInfo;
 using StringBuilder = System.Text.StringBuilder;
-using System.Diagnostics;
 
 namespace System.Xml.Linq
 {

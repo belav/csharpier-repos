@@ -10,9 +10,9 @@
 
 namespace DefaultNamespace
 {
-    using System.Threading;
     using System;
     using System.IO;
+    using System.Threading;
 
     public class ThdChaos
     {

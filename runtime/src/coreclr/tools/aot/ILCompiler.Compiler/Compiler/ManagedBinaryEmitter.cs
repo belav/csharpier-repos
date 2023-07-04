@@ -2,19 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata;
-using System.Collections.Immutable;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
-using System.IO;
-using System.Diagnostics;
-
+using ILCompiler.DependencyAnalysis;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using ILCompiler.DependencyAnalysis;
 
 namespace ILCompiler
 {

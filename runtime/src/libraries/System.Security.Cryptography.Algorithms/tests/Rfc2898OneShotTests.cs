@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.Text;
-using Xunit;
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.DeriveBytesTests
 {

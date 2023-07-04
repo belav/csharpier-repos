@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
 using Microsoft.Internal;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.Hosting
 {

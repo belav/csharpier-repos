@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Xml.Schema;
+using System.Xml.Serialization;
 
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests

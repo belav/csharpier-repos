@@ -8,10 +8,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
-
 using BCRYPT_RSAKEY_BLOB = Interop.BCrypt.BCRYPT_RSAKEY_BLOB;
-using ErrorCode = Interop.NCrypt.ErrorCode;
 using KeyBlobMagicNumber = Interop.BCrypt.KeyBlobMagicNumber;
+using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace System.Security.Cryptography
 {

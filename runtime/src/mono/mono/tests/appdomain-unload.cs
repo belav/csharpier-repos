@@ -1,7 +1,7 @@
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Threading;
 
 [Serializable]
 public class Foo

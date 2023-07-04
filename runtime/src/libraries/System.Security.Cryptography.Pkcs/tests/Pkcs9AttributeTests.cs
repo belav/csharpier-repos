@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Xunit;
-
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.Tests
 {

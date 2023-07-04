@@ -3,11 +3,10 @@
 
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
-using TypeAttributes = System.Reflection.TypeAttributes;
-using MethodAttributes = System.Reflection.MethodAttributes;
 using FieldAttributes = System.Reflection.FieldAttributes;
+using MethodAttributes = System.Reflection.MethodAttributes;
+using TypeAttributes = System.Reflection.TypeAttributes;
 
 namespace ILCompiler
 {

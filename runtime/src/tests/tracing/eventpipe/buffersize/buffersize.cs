@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Tracing.Tests.Common;
 using Microsoft.Diagnostics.NETCore.Client;
+using Tracing.Tests.Common;
 
 namespace Tracing.Tests.BufferValidation
 {

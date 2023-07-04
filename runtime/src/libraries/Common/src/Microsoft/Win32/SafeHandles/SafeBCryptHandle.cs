@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using NTSTATUS = Interop.BCrypt.NTSTATUS;
 
 namespace Microsoft.Win32.SafeHandles

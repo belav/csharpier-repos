@@ -2,12 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
+using Internal.IL.Stubs;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using Internal.IL.Stubs;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL

@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-
 using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace Microsoft.Win32.SafeHandles

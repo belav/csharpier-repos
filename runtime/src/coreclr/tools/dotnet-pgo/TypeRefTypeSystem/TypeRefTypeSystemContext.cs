@@ -5,15 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using System.Reflection.PortableExecutable;
-using System.Reflection.Metadata.Ecma335;
-using System.Reflection;
 
 namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 {

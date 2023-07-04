@@ -35,9 +35,8 @@ using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.Caching.Hosting;
 using System.Text;
-
-using Xunit;
 using MonoTests.Common;
+using Xunit;
 
 namespace MonoTests.System.Runtime.Caching
 {

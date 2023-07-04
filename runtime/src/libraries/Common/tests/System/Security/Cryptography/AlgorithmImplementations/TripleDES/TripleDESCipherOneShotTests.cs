@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Security.Cryptography;
-
 using System.Security.Cryptography.Tests;
 using Xunit;
 

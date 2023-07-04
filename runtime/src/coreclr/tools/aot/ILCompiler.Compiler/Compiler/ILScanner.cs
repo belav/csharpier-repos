@@ -5,16 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.IL;
 using Internal.IL.Stubs;
 using Internal.JitInterface;
-using Internal.TypeSystem;
 using Internal.ReadyToRunConstants;
-
+using Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler

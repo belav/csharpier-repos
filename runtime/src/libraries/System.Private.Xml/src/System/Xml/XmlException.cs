@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Resources;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
-using System.Threading;
+using System.Resources;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Threading;
 
 namespace System.Xml
 {

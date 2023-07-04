@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
-using Debug = System.Diagnostics.Debug;
-using ConditionalAttribute = System.Diagnostics.ConditionalAttribute;
 using Internal.LowLevelLinq;
 using Internal.NativeFormat;
+using ConditionalAttribute = System.Diagnostics.ConditionalAttribute;
+using Debug = System.Diagnostics.Debug;
 using Graph = Internal.Metadata.NativeFormat.Writer.AdjacencyGraph;
 
 namespace Internal.Metadata.NativeFormat.Writer

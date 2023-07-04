@@ -2,21 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics;
-using System.Reflection.PortableExecutable;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.IO;
+using System.IO.MemoryMappedFiles;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
 using System.Text;
+using ILCompiler.Reflection.ReadyToRun;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Microsoft.Diagnostics.Tracing.Etlx;
-using System.IO;
-using System.IO.MemoryMappedFiles;
-
 using Microsoft.Diagnostics.Tracing.Parsers.Clr;
-using System.Reflection.Metadata;
-using ILCompiler.Reflection.ReadyToRun;
-using System.Runtime.CompilerServices;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {

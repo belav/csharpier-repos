@@ -2,18 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Reflection.Runtime.General;
-using System.Reflection.Runtime.TypeInfos;
+using System.Diagnostics;
+using System.Reflection;
 using System.Reflection.Runtime.Assemblies;
 using System.Reflection.Runtime.CustomAttributes;
-
+using System.Reflection.Runtime.General;
+using System.Reflection.Runtime.TypeInfos;
 using Internal.LowLevelLinq;
-using Internal.Reflection.Tracing;
 using Internal.Reflection.Core.Execution;
-
+using Internal.Reflection.Tracing;
 using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribute;
 
 namespace System.Reflection.Runtime.TypeInfos

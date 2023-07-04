@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-
 using Internal.Runtime.CompilerServices;
 
 namespace System

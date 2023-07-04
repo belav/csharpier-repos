@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
+using ILCompiler.DependencyAnalysis.ReadyToRun;
 using Internal.JitInterface;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis.ReadyToRun;
 
 namespace ILCompiler.DependencyAnalysis
 {

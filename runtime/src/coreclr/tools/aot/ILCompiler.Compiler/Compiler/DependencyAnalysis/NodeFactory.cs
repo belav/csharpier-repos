@@ -6,9 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.IL;
 using Internal.Runtime;
 using Internal.Text;

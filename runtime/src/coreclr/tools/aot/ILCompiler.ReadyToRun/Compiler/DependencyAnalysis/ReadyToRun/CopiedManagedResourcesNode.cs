@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.PortableExecutable;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
 

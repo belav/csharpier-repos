@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 
 // Test derived from dotnet/corefx src\System.Numerics.Vectors\src\System\Numerics\Matrix4x4.cs, op_Multiply().
 // This was an ARM32-specific bug for addressing local variables as floats. ARM32 floating-point instructions

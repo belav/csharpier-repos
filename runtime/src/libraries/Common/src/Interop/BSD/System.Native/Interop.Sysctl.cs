@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
-
 using size_t = System.IntPtr;
 
 // This implements shim for sysctl calls.

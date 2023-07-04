@@ -4,7 +4,6 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xunit;
-
 using static System.Linq.Expressions.Expression;
 
 namespace System.Linq.Expressions.Tests

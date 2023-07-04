@@ -15,13 +15,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
 using ILCompiler.Diagnostics;
 using ILCompiler.Reflection.ReadyToRun;
-
 using Internal.Runtime;
 using Internal.TypeSystem;
-
 using OperatingSystem = ILCompiler.Reflection.ReadyToRun.OperatingSystem;
 
 namespace R2RDump

@@ -6,9 +6,9 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Dynamic.Utils;
 
 namespace System.Linq.Expressions.Interpreter
 {

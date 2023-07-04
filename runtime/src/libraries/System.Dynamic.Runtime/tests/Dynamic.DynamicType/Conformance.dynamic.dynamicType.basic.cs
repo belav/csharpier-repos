@@ -7347,7 +7347,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate010.operate010
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     // <Title>Conditional operator ? :</Title>
     // <Description>
     // </Description>
@@ -7355,6 +7354,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
 
     public class Test
     {
@@ -7587,7 +7587,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate010a.operate010a
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     // <Title>Conditional operator ? :</Title>
     // <Description>
     // dynamic op literals
@@ -7596,6 +7595,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
 
     public class Test
     {
@@ -7819,7 +7819,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate011.operate011
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     // <Title>Equality operator</Title>
     // <Description>
     // </Description>
@@ -7827,6 +7826,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     //<Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
 
     public class Test
     {
@@ -10235,7 +10235,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate017.operate017
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     // <Title>Unary operators with operand null</Title>
     // <Description>
     // The related
@@ -10244,6 +10243,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     // <Expects Status=success></Expects>
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     using Microsoft.CSharp.RuntimeBinder;
 
     public class Test
@@ -10342,7 +10342,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate018.operate018
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     // <Title>Binary operators with both operands are null</Title>
     // <Description>
     // </Description>
@@ -10354,6 +10353,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 #pragma warning disable 0464 // Comparing with null of type 'int?' always produces 'false'
 
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     using Microsoft.CSharp.RuntimeBinder;
 
     public class Test
@@ -10495,7 +10495,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate019.operate019
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     // <Title>Other operators with both operand null</Title>
     // <Description>Conditional logical, conditional, compound</Description>
     // <RelatedBugs></RelatedBugs>
@@ -10506,6 +10505,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 #pragma warning disable 0464 // Comparing with null of type 'int?' always produces 'false'
 
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
     using Microsoft.CSharp.RuntimeBinder;
 
     public class Test

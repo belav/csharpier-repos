@@ -1,15 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using global::System;
-using global::System.Text;
-using global::System.Reflection;
-using global::System.Diagnostics;
-using global::System.Collections.Generic;
-
-using global::Internal.Runtime.Augments;
-
 using global::Internal.Reflection.Core.Execution;
+using global::Internal.Runtime.Augments;
+using global::System;
+using global::System.Collections.Generic;
+using global::System.Diagnostics;
+using global::System.Reflection;
+using global::System.Text;
 
 namespace Internal.Reflection.Execution.PayForPlayExperience
 {

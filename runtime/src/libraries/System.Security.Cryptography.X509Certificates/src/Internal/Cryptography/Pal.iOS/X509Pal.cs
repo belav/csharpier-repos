@@ -4,10 +4,10 @@
 using System;
 using System.Buffers;
 using System.Diagnostics;
-using System.Text;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace Internal.Cryptography.Pal
 {

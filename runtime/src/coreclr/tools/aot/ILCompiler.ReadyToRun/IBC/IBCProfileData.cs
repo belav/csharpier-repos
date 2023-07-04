@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using Internal.TypeSystem;
 using System.Linq;
+using Internal.TypeSystem;
 
 namespace ILCompiler.IBC
 {

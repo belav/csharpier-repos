@@ -3,8 +3,8 @@
 
 // created 10/24/2002, mwilk
 using System;
-using System.Text;
 using System.Reflection;
+using System.Text;
 
 public class MyObject
 {

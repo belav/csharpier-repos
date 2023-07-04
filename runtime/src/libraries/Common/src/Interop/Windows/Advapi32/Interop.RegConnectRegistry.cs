@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 #if REGISTRY_ASSEMBLY
 using Microsoft.Win32.SafeHandles;
 #else

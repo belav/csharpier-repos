@@ -4,13 +4,14 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Configuration;
-#if DEBUG
-using System.Diagnostics;
-#endif
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Xml.Schema;
 using System.Xml.Serialization.Configuration;
+#if DEBUG
+using System.Diagnostics;
+#endif
+
 
 namespace System.Xml.Serialization
 {

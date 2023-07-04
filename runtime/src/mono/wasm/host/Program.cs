@@ -3,12 +3,12 @@
 
 #nullable enable
 
-using Mono.Options;
 using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Mono.Options;
 
 namespace Microsoft.WebAssembly.AppHost;
 

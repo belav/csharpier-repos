@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs

@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
-
 using CFRunLoopSourceRef = System.IntPtr;
 
 internal static partial class Interop

@@ -11,10 +11,9 @@ using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-    using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+    using Configuration = System.Net.Test.Common.Configuration;
 #endif
 
     // Note:  Disposing the HttpClient object automatically disposes the handler within. So, it is not necessary

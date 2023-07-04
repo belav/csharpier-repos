@@ -4,7 +4,6 @@
 namespace ComWrappersTests.GlobalInstance
 {
     using System;
-
     using ComWrappersTests.Common;
     using TestLibrary;
     using Xunit;

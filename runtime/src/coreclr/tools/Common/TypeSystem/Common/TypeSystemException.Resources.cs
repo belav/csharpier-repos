@@ -3,8 +3,8 @@
 
 using System;
 using System.Globalization;
-using System.Resources;
 using System.Reflection;
+using System.Resources;
 
 // This partial file is designed to allow the runtime variant of the type system to not
 // need to support accessing these strings via the ResourceManager

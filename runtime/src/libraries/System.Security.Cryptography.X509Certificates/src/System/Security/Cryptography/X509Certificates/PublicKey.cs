@@ -7,7 +7,6 @@ using System.Formats.Asn1;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Cryptography.Asn1;
-
 using Internal.Cryptography;
 using Internal.Cryptography.Pal;
 

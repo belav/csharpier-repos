@@ -8,16 +8,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
+using System.Security.Cryptography;
 using ILCompiler.DependencyAnalysis.ReadyToRun;
 using ILCompiler.DependencyAnalysisFramework;
 using ILCompiler.Diagnostics;
 using ILCompiler.PEWriter;
-using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using System.Security.Cryptography;
+using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
 
 namespace ILCompiler.DependencyAnalysis
 {

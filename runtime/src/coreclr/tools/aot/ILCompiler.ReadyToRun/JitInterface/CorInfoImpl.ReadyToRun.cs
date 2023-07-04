@@ -9,21 +9,19 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
-
+using System.Text;
+using ILCompiler;
+using ILCompiler.DependencyAnalysis;
+using ILCompiler.DependencyAnalysis.ReadyToRun;
+using Internal.CorConstants;
 using Internal.IL;
 using Internal.IL.Stubs;
+using Internal.Pgo;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
-using Internal.CorConstants;
-using Internal.Pgo;
-using Internal.ReadyToRunConstants;
-
-using ILCompiler;
-using ILCompiler.DependencyAnalysis;
-using ILCompiler.DependencyAnalysis.ReadyToRun;
-using System.Text;
 
 namespace Internal.JitInterface
 {

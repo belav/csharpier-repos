@@ -3,15 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
+using System.Composition.Convention;
+using System.Composition.Hosting;
+using System.Composition.Hosting.Core;
+using System.Composition.Runtime;
+using System.Composition.UnitTests.Util;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Composition;
-using System.Composition.Hosting;
-using System.Composition.Hosting.Core;
-using System.Composition.Convention;
-using System.Composition.UnitTests.Util;
-using System.Composition.Runtime;
 using Microsoft.Composition.Demos.ExtendedCollectionImports;
 using Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries;
 using Xunit;

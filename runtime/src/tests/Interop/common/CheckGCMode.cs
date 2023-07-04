@@ -4,7 +4,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 internal unsafe class CheckGCMode

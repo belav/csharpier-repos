@@ -2,25 +2,24 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Collections.Generic;
-using System.Reflection.Runtime.General;
-using System.Reflection.Runtime.TypeInfos;
-using System.Reflection.Runtime.TypeInfos.NativeFormat;
+using System.Reflection;
 using System.Reflection.Runtime.Assemblies;
+using System.Reflection.Runtime.BindingFlagSupport;
 using System.Reflection.Runtime.FieldInfos;
 using System.Reflection.Runtime.FieldInfos.NativeFormat;
+using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.MethodInfos;
-using System.Reflection.Runtime.BindingFlagSupport;
 using System.Reflection.Runtime.Modules;
-
-using Internal.Runtime.Augments;
+using System.Reflection.Runtime.TypeInfos;
+using System.Reflection.Runtime.TypeInfos.NativeFormat;
+using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Augments;
 using Internal.Reflection.Core.Execution;
-using Internal.Metadata.NativeFormat;
+using Internal.Runtime.Augments;
 
 namespace System.Reflection.Runtime.General
 {

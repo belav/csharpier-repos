@@ -3,15 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using System.IO;
-
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
+using System.Reflection.Metadata;
 using ILCompiler.Logging;
 using ILLink.Shared;
-
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 using ILSequencePoint = Internal.IL.ILSequencePoint;
 using MethodIL = Internal.IL.MethodIL;
 

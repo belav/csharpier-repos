@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
-using Debug = System.Diagnostics.Debug;
 using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
+using Debug = System.Diagnostics.Debug;
 
 namespace System.Xml.Linq
 {

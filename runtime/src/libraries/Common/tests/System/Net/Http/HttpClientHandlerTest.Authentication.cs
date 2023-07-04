@@ -8,18 +8,15 @@ using System.Net.Test.Common;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Microsoft.DotNet.XUnitExtensions;
-
 using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-    using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
+    using Configuration = System.Net.Test.Common.Configuration;
 #endif
 
     public abstract class HttpClientHandler_Authentication_Test : HttpClientHandlerTestBase

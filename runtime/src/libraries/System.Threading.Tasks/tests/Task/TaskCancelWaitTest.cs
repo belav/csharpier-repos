@@ -4,13 +4,13 @@
 // Summary:
 // Implements the exhaustive task cancel and wait scenarios.
 
-using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics; // for Stopwatch
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests.CancelWait
 {

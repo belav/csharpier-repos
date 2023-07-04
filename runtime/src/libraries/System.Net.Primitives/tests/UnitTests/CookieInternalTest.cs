@@ -3,7 +3,6 @@
 
 using System;
 using System.Net;
-
 using Xunit;
 
 namespace NetPrimitivesUnitTests

@@ -36,12 +36,12 @@
 //
 
 using System;
-using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing

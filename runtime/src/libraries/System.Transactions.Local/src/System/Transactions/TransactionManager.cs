@@ -7,10 +7,11 @@ using System.IO;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Transactions.Configuration;
+using System.Transactions.Oletx;
 #if WINDOWS
 using System.Transactions.DtcProxyShim;
 #endif
-using System.Transactions.Oletx;
+
 
 namespace System.Transactions
 {

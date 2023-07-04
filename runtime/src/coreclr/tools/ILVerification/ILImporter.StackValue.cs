@@ -3,9 +3,8 @@
 
 using System;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
 using ILVerify;
+using Internal.TypeSystem;
 
 namespace Internal.IL
 {

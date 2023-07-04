@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
-using System.Threading;
 using System.Runtime.Serialization;
-using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 
 namespace System.Text
 {

@@ -3,8 +3,8 @@
 
 using System;
 using System.Diagnostics;
-using System.Threading;
 using System.Security.Cryptography;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 using BCryptAlgPseudoHandle = Interop.BCrypt.BCryptAlgPseudoHandle;
 using BCryptBuffer = Interop.BCrypt.BCryptBuffer;

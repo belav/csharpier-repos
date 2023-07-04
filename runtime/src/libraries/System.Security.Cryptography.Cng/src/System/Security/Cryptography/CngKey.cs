@@ -3,11 +3,8 @@
 
 using System;
 using System.Diagnostics;
-
-using Microsoft.Win32.SafeHandles;
-
 using Internal.Cryptography;
-
+using Microsoft.Win32.SafeHandles;
 using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace System.Security.Cryptography

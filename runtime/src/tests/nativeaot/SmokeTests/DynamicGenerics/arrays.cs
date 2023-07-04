@@ -4,13 +4,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using CoreFXTestLibrary;
+using TypeOfRepo;
 #if INTERNAL_CONTRACTS
 using Internal.Runtime.Augments;
 #endif
-using CoreFXTestLibrary;
-using TypeOfRepo;
 
 namespace ArrayTests
 {

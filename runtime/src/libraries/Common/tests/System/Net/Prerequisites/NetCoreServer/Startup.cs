@@ -3,9 +3,8 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.DependencyInjection;
 #if GENEVA_TELEMETRY
 using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;

@@ -3,9 +3,8 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Internal.IL.Stubs;
 using Internal.IL;
-
+using Internal.IL.Stubs;
 using Debug = System.Diagnostics.Debug;
 using ILLocalVariable = Internal.IL.Stubs.ILLocalVariable;
 

@@ -3,21 +3,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using SdtEventSources;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-using System.Reflection;
-
-using SdtEventSources;
-using System.Diagnostics;
-using System.Threading;
-using System.Text.RegularExpressions;
 
 namespace BasicEventSourceTests
 {

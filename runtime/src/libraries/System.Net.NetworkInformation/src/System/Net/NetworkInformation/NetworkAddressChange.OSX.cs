@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using Microsoft.Win32.SafeHandles;
-using System.Diagnostics;
 using System.Threading;
-
+using Microsoft.Win32.SafeHandles;
 using CFStringRef = System.IntPtr;
 using CFRunLoopRef = System.IntPtr;
 

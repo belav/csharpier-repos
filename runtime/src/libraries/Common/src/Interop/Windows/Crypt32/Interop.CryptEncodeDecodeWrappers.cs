@@ -3,9 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Internal.Cryptography;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop

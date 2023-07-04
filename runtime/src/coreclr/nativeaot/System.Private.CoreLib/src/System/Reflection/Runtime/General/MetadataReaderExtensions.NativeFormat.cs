@@ -2,21 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Reflection.Runtime.Assemblies;
 using System.Runtime.CompilerServices;
-
+using System.Text;
 using Internal.LowLevelLinq;
-using Internal.Reflection.Core;
-
-using Internal.Runtime.Augments;
-
 using Internal.Metadata.NativeFormat;
+using Internal.Reflection.Core;
+using Internal.Runtime.Augments;
 using NativeFormatAssemblyFlags = global::Internal.Metadata.NativeFormat.AssemblyFlags;
 
 namespace System.Reflection.Runtime.General

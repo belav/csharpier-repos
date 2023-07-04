@@ -6,8 +6,8 @@ This test fragments the heap with ~50 byte holes, then allocates ~50 byte object
 */
 
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public class Test_pluggaps
 {

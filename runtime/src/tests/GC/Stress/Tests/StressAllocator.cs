@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 // Purpose of program: exercise the GC, with various object sizes and lifetimes.
 // Allocate objects that have an expiration time specified. When the object's lifetime expires, it is made garbage and then other new objects are created.

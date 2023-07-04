@@ -5,9 +5,8 @@ using System;
 using System.Numerics;
 using System.Reflection;
 using System.Reflection.Runtime.General;
-
-using Internal.Runtime.Augments;
 using Internal.Metadata.NativeFormat;
+using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Execution
 {

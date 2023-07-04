@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-
 using BindingFlags = System.Reflection.BindingFlags;
 
 class FeatureSwitches

@@ -11,7 +11,6 @@ using System.Reflection;
 using System.Security;
 using System.Threading;
 using System.Xml;
-
 using DataContractDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
     System.Runtime.Serialization.DataContracts.DataContract

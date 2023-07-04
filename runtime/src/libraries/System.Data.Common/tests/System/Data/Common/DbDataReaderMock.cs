@@ -25,8 +25,8 @@
 //
 
 using System.Collections;
-using System.Linq;
 using System.Data.Common;
+using System.Linq;
 
 namespace System.Data.Common.Tests
 {

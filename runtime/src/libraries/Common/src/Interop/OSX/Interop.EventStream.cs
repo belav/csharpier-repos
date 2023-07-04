@@ -3,18 +3,16 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
-
+using CFTimeInterval = System.Double;
 #pragma warning disable SA1121 // we don't want to simplify built-ins here as we're using aliasing
 using CFStringRef = System.IntPtr;
 using CFArrayRef = System.IntPtr;
 using FSEventStreamRef = System.IntPtr;
 using CFIndex = System.IntPtr;
 using size_t = System.IntPtr;
-using FSEventStreamEventId = System.UInt64;
-using CFTimeInterval = System.Double;
 using CFRunLoopRef = System.IntPtr;
+using FSEventStreamEventId = System.UInt64;
 
 internal static partial class Interop
 {

@@ -3,9 +3,8 @@
 
 using System;
 using System.Diagnostics;
-
-using Internal.Text;
 using Internal.ReadyToRunConstants;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {

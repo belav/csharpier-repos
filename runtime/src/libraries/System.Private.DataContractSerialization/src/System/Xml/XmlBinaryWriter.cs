@@ -6,13 +6,13 @@
 // This can help identify element/attribute name/ns that could be written as XmlDictionaryStrings to get better compactness and performance.
 // #define LOG_NON_DICTIONARY_WRITES
 
-using System.IO;
-using System.Text;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-using System.Globalization;
-using System.Collections.Generic;
 using System.Buffers.Binary;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace System.Xml
 {

@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using FluentAssertions;
-using Xunit;
-using Microsoft.NET.HostModel.AppHost;
 using Microsoft.DotNet.CoreSetup.Test;
-using System.Diagnostics;
+using Microsoft.NET.HostModel.AppHost;
+using Xunit;
 
 namespace Microsoft.NET.HostModel.Tests
 {

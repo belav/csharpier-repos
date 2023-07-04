@@ -7,9 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tests;
-
 using Microsoft.DotNet.XUnitExtensions;
-
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;

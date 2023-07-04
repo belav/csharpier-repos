@@ -6,18 +6,16 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-
 using ILCompiler.DependencyAnalysis.ReadyToRun;
 using ILCompiler.DependencyAnalysisFramework;
 using ILCompiler.Win32Resources;
-
+using Internal.CorConstants;
 using Internal.IL;
 using Internal.JitInterface;
-using Internal.TypeSystem;
-using Internal.Text;
-using Internal.TypeSystem.Ecma;
-using Internal.CorConstants;
 using Internal.ReadyToRunConstants;
+using Internal.Text;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.DependencyAnalysis
 {

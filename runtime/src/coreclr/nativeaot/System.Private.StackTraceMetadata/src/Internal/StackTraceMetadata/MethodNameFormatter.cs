@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Text;
-
 using Internal.Metadata.NativeFormat;
 
 namespace Internal.StackTraceMetadata

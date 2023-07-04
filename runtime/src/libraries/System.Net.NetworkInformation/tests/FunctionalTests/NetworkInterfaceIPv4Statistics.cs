@@ -4,7 +4,6 @@
 using System.Net.Sockets;
 using System.Net.Test.Common;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 

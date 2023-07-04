@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using ILCompiler.DependencyAnalysis.LoongArch64;
 using Internal.TypeSystem;
 

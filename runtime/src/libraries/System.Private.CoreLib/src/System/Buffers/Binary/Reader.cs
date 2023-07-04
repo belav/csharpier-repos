@@ -4,7 +4,6 @@
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
-
 #pragma warning disable SA1121 // explicitly using type aliases instead of built-in types
 
 #if TARGET_64BIT

@@ -3,9 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using static System.Runtime.Intrinsics.X86.Avx;
-using System.Runtime.Intrinsics;
-using System.Runtime.CompilerServices;
 
 internal sealed class SpherePacket256 : ObjectPacket256
 {

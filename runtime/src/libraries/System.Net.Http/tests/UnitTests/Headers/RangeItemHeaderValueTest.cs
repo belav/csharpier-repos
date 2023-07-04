@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests

@@ -1,11 +1,11 @@
 using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Reflection.PortableExecutable;
-using System.Linq;
-using Xunit;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
+using Xunit;
 
 namespace IlasmPortablePdbTests
 {

@@ -3,10 +3,10 @@
 
 using System;
 using System.Reflection;
-using System.Text;
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
+using Xunit;
 
 unsafe class ThisCallNative
 {
