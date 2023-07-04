@@ -17,9 +17,11 @@ internal sealed class ChangeDetection
         {
             var oldValueType = oldValue!.GetType();
             var newValueType = newValue!.GetType();
-            if (oldValueType != newValueType            // Definitely different
-                || !IsKnownImmutableType(oldValueType)  // Maybe different
-                || !oldValue.Equals(newValue))          // Somebody says they are different
+            if (
+                oldValueType != newValueType // Definitely different
+                || !IsKnownImmutableType(oldValueType) // Maybe different
+                || !oldValue.Equals(newValue)
+            ) // Somebody says they are different
             {
                 return true;
             }
@@ -34,8 +36,8 @@ internal sealed class ChangeDetection
     // time. So we don't want a huge list of types to check (or would have to move to
     // a hashtable lookup, which is differently expensive). It's better not to include
     // uncommon types here even if they are known to be immutable.
-    private static bool IsKnownImmutableType(Type type)
-        => type.IsPrimitive
+    private static bool IsKnownImmutableType(Type type) =>
+        type.IsPrimitive
         || type == typeof(string)
         || type == typeof(DateTime)
         || type == typeof(Type)

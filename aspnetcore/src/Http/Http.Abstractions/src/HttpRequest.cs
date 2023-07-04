@@ -109,7 +109,10 @@ public abstract class HttpRequest
     /// Gets the request body <see cref="PipeReader"/>.
     /// </summary>
     /// <value>The request body <see cref="PipeReader"/>.</value>
-    public virtual PipeReader BodyReader { get => throw new NotImplementedException(); }
+    public virtual PipeReader BodyReader
+    {
+        get => throw new NotImplementedException();
+    }
 
     /// <summary>
     /// Checks the Content-Type header for form types.
@@ -126,7 +129,9 @@ public abstract class HttpRequest
     /// Reads the request body if it is a form.
     /// </summary>
     /// <returns></returns>
-    public abstract Task<IFormCollection> ReadFormAsync(CancellationToken cancellationToken = new CancellationToken());
+    public abstract Task<IFormCollection> ReadFormAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    );
 
     /// <summary>
     /// Gets the collection of route values for this request.

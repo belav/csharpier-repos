@@ -46,9 +46,8 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
     /// <summary>
     /// Initializes a new instance of the <see cref="NewtonsoftJsonHubProtocol"/> class.
     /// </summary>
-    public NewtonsoftJsonHubProtocol() : this(Options.Create(new NewtonsoftJsonHubProtocolOptions()))
-    {
-    }
+    public NewtonsoftJsonHubProtocol()
+        : this(Options.Create(new NewtonsoftJsonHubProtocolOptions())) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NewtonsoftJsonHubProtocol"/> class.
@@ -75,7 +74,11 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
     }
 
     /// <inheritdoc />
-    public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, [NotNullWhen(true)] out HubMessage? message)
+    public bool TryParseMessage(
+        ref ReadOnlySequence<byte> input,
+        IInvocationBinder binder,
+        [NotNullWhen(true)] out HubMessage? message
+    )
     {
         if (!TextMessageParser.TryParseMessage(ref input, out var payload))
         {
@@ -156,24 +159,34 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                             switch (memberName)
                             {
                                 case TypePropertyName:
-                                    var messageType = JsonUtils.ReadAsInt32(reader, TypePropertyName);
+                                    var messageType = JsonUtils.ReadAsInt32(
+                                        reader,
+                                        TypePropertyName
+                                    );
 
                                     if (messageType == null)
                                     {
-                                        throw new InvalidDataException($"Missing required property '{TypePropertyName}'.");
+                                        throw new InvalidDataException(
+                                            $"Missing required property '{TypePropertyName}'."
+                                        );
                                     }
 
                                     type = messageType.Value;
                                     break;
                                 case InvocationIdPropertyName:
-                                    invocationId = JsonUtils.ReadAsString(reader, InvocationIdPropertyName);
+                                    invocationId = JsonUtils.ReadAsString(
+                                        reader,
+                                        InvocationIdPropertyName
+                                    );
                                     break;
                                 case StreamIdsPropertyName:
                                     JsonUtils.CheckRead(reader);
 
                                     if (reader.TokenType != JsonToken.StartArray)
                                     {
-                                        throw new InvalidDataException($"Expected '{StreamIdsPropertyName}' to be of type {JTokenType.Array}.");
+                                        throw new InvalidDataException(
+                                            $"Expected '{StreamIdsPropertyName}' to be of type {JTokenType.Array}."
+                                        );
                                     }
 
                                     List<string>? newStreamIds = null;
@@ -181,7 +194,12 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                     while (reader.TokenType != JsonToken.EndArray)
                                     {
                                         newStreamIds ??= new();
-                                        newStreamIds.Add(reader.Value?.ToString() ?? throw new InvalidDataException($"Null value for '{StreamIdsPropertyName}' is not valid."));
+                                        newStreamIds.Add(
+                                            reader.Value?.ToString()
+                                                ?? throw new InvalidDataException(
+                                                    $"Null value for '{StreamIdsPropertyName}' is not valid."
+                                                )
+                                        );
                                         reader.Read();
                                     }
 
@@ -194,7 +212,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                     error = JsonUtils.ReadAsString(reader, ErrorPropertyName);
                                     break;
                                 case AllowReconnectPropertyName:
-                                    allowReconnect = JsonUtils.ReadAsBoolean(reader, AllowReconnectPropertyName);
+                                    allowReconnect = JsonUtils.ReadAsBoolean(
+                                        reader,
+                                        AllowReconnectPropertyName
+                                    );
                                     break;
                                 case ResultPropertyName:
                                     hasResult = true;
@@ -209,7 +230,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                     else
                                     {
                                         // If we have an invocation id already we can parse the end result
-                                        var returnType = ProtocolHelper.TryGetReturnType(binder, invocationId);
+                                        var returnType = ProtocolHelper.TryGetReturnType(
+                                            binder,
+                                            invocationId
+                                        );
                                         if (returnType is null)
                                         {
                                             reader.Skip();
@@ -219,7 +243,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                         {
                                             if (!JsonUtils.ReadForType(reader, returnType))
                                             {
-                                                throw new JsonReaderException("Unexpected end when reading JSON");
+                                                throw new JsonReaderException(
+                                                    "Unexpected end when reading JSON"
+                                                );
                                             }
 
                                             if (returnType == typeof(RawResult))
@@ -231,11 +257,15 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                             {
                                                 try
                                                 {
-                                                    result = PayloadSerializer.Deserialize(reader, returnType);
+                                                    result = PayloadSerializer.Deserialize(
+                                                        reader,
+                                                        returnType
+                                                    );
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    error = $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
+                                                    error =
+                                                        $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
                                                     hasResult = false;
                                                 }
                                             }
@@ -266,7 +296,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                     }
                                     catch (Exception ex)
                                     {
-                                        return new StreamBindingFailureMessage(id, ExceptionDispatchInfo.Capture(ex));
+                                        return new StreamBindingFailureMessage(
+                                            id,
+                                            ExceptionDispatchInfo.Capture(ex)
+                                        );
                                     }
                                     break;
                                 case ArgumentsPropertyName:
@@ -275,7 +308,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                     int initialDepth = reader.Depth;
                                     if (reader.TokenType != JsonToken.StartArray)
                                     {
-                                        throw new InvalidDataException($"Expected '{ArgumentsPropertyName}' to be of type {JTokenType.Array}.");
+                                        throw new InvalidDataException(
+                                            $"Expected '{ArgumentsPropertyName}' to be of type {JTokenType.Array}."
+                                        );
                                     }
 
                                     hasArguments = true;
@@ -294,12 +329,16 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                         }
                                         catch (Exception ex)
                                         {
-                                            argumentBindingException = ExceptionDispatchInfo.Capture(ex);
+                                            argumentBindingException =
+                                                ExceptionDispatchInfo.Capture(ex);
 
                                             // Could be at any point in argument array JSON when an error is thrown
                                             // Read until the end of the argument JSON array
-                                            while (reader.Depth == initialDepth && reader.TokenType == JsonToken.StartArray ||
-                                                   reader.Depth > initialDepth)
+                                            while (
+                                                reader.Depth == initialDepth
+                                                    && reader.TokenType == JsonToken.StartArray
+                                                || reader.Depth > initialDepth
+                                            )
                                             {
                                                 JsonUtils.CheckRead(reader);
                                             }
@@ -322,8 +361,7 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                             completed = true;
                             break;
                     }
-                }
-                while (!completed && JsonUtils.CheckRead(reader));
+                } while (!completed && JsonUtils.CheckRead(reader));
             }
 
             HubMessage message;
@@ -331,10 +369,13 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
             switch (type)
             {
                 case HubProtocolConstants.InvocationMessageType:
+
                     {
                         if (target is null)
                         {
-                            throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{TargetPropertyName}'."
+                            );
                         }
 
                         if (argumentsToken != null)
@@ -351,16 +392,30 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                             }
                         }
 
-                        message = argumentBindingException != null
-                            ? new InvocationBindingFailureMessage(invocationId, target, argumentBindingException)
-                            : BindInvocationMessage(invocationId, target, arguments, hasArguments, streamIds);
+                        message =
+                            argumentBindingException != null
+                                ? new InvocationBindingFailureMessage(
+                                    invocationId,
+                                    target,
+                                    argumentBindingException
+                                )
+                                : BindInvocationMessage(
+                                    invocationId,
+                                    target,
+                                    arguments,
+                                    hasArguments,
+                                    streamIds
+                                );
                     }
                     break;
                 case HubProtocolConstants.StreamInvocationMessageType:
+
                     {
                         if (target is null)
                         {
-                            throw new InvalidDataException($"Missing required property '{TargetPropertyName}'.");
+                            throw new InvalidDataException(
+                                $"Missing required property '{TargetPropertyName}'."
+                            );
                         }
 
                         if (argumentsToken != null)
@@ -377,15 +432,28 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                             }
                         }
 
-                        message = argumentBindingException != null
-                            ? new InvocationBindingFailureMessage(invocationId, target, argumentBindingException)
-                            : BindStreamInvocationMessage(invocationId, target, arguments, hasArguments, streamIds);
+                        message =
+                            argumentBindingException != null
+                                ? new InvocationBindingFailureMessage(
+                                    invocationId,
+                                    target,
+                                    argumentBindingException
+                                )
+                                : BindStreamInvocationMessage(
+                                    invocationId,
+                                    target,
+                                    arguments,
+                                    hasArguments,
+                                    streamIds
+                                );
                     }
                     break;
                 case HubProtocolConstants.StreamItemMessageType:
                     if (invocationId is null)
                     {
-                        throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{InvocationIdPropertyName}'."
+                        );
                     }
 
                     if (itemToken != null)
@@ -397,9 +465,13 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                         }
                         catch (Exception ex)
                         {
-                            message = new StreamBindingFailureMessage(invocationId, ExceptionDispatchInfo.Capture(ex));
+                            message = new StreamBindingFailureMessage(
+                                invocationId,
+                                ExceptionDispatchInfo.Capture(ex)
+                            );
                             break;
-                        };
+                        }
+                        ;
                     }
 
                     message = BindStreamItemMessage(invocationId, item, hasItem);
@@ -407,7 +479,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                 case HubProtocolConstants.CompletionMessageType:
                     if (invocationId is null)
                     {
-                        throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+                        throw new InvalidDataException(
+                            $"Missing required property '{InvocationIdPropertyName}'."
+                        );
                     }
 
                     if (resultToken != null)
@@ -431,7 +505,8 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                                 }
                                 catch (Exception ex)
                                 {
-                                    error = $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
+                                    error =
+                                        $"Error trying to deserialize result to {returnType.Name}. {ex.Message}";
                                     hasResult = false;
                                 }
                             }
@@ -448,7 +523,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                 case HubProtocolConstants.CloseMessageType:
                     return BindCloseMessage(error, allowReconnect);
                 case null:
-                    throw new InvalidDataException($"Missing required property '{TypePropertyName}'.");
+                    throw new InvalidDataException(
+                        $"Missing required property '{TypePropertyName}'."
+                    );
                 default:
                     // Future protocol changes can add message types, old clients can ignore them
                     return null;
@@ -468,7 +545,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
 
         if (reader.TokenType != JsonToken.StartObject)
         {
-            throw new InvalidDataException($"Expected '{HeadersPropertyName}' to be of type {JTokenType.Object}.");
+            throw new InvalidDataException(
+                $"Expected '{HeadersPropertyName}' to be of type {JTokenType.Object}."
+            );
         }
 
         while (reader.Read())
@@ -482,7 +561,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
 
                     if (reader.TokenType != JsonToken.String)
                     {
-                        throw new InvalidDataException($"Expected header '{propertyName}' to be of type {JTokenType.String}.");
+                        throw new InvalidDataException(
+                            $"Expected header '{propertyName}' to be of type {JTokenType.String}."
+                        );
                     }
 
                     headers[propertyName] = reader.Value.ToString()!;
@@ -540,7 +621,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                         WriteCloseMessage(m, writer);
                         break;
                     default:
-                        throw new InvalidOperationException($"Unsupported message type: {message.GetType().FullName}");
+                        throw new InvalidOperationException(
+                            $"Unsupported message type: {message.GetType().FullName}"
+                        );
                 }
                 writer.WriteEndObject();
                 writer.Flush();
@@ -593,7 +676,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         }
     }
 
-    private static void WriteCancelInvocationMessage(CancelInvocationMessage message, JsonTextWriter writer)
+    private static void WriteCancelInvocationMessage(
+        CancelInvocationMessage message,
+        JsonTextWriter writer
+    )
     {
         WriteInvocationId(message, writer);
     }
@@ -616,7 +702,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         WriteStreamIds(message.StreamIds, writer);
     }
 
-    private void WriteStreamInvocationMessage(StreamInvocationMessage message, JsonTextWriter writer)
+    private void WriteStreamInvocationMessage(
+        StreamInvocationMessage message,
+        JsonTextWriter writer
+    )
     {
         WriteInvocationId(message, writer);
         writer.WritePropertyName(TargetPropertyName);
@@ -689,22 +778,33 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         return new CancelInvocationMessage(invocationId);
     }
 
-    private static HubMessage BindCompletionMessage(string invocationId, string? error, object? result, bool hasResult)
+    private static HubMessage BindCompletionMessage(
+        string invocationId,
+        string? error,
+        object? result,
+        bool hasResult
+    )
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         if (error != null && hasResult)
         {
-            throw new InvalidDataException("The 'error' and 'result' properties are mutually exclusive.");
+            throw new InvalidDataException(
+                "The 'error' and 'result' properties are mutually exclusive."
+            );
         }
 
         if (hasResult)
@@ -719,7 +819,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         if (!hasItem)
@@ -730,11 +832,19 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         return new StreamItemMessage(invocationId, item);
     }
 
-    private static HubMessage BindStreamInvocationMessage(string? invocationId, string target, object?[]? arguments, bool hasArguments, string[]? streamIds)
+    private static HubMessage BindStreamInvocationMessage(
+        string? invocationId,
+        string target,
+        object?[]? arguments,
+        bool hasArguments,
+        string[]? streamIds
+    )
     {
         if (string.IsNullOrEmpty(invocationId))
         {
-            throw new InvalidDataException($"Missing required property '{InvocationIdPropertyName}'.");
+            throw new InvalidDataException(
+                $"Missing required property '{InvocationIdPropertyName}'."
+            );
         }
 
         if (!hasArguments)
@@ -752,7 +862,13 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         return new StreamInvocationMessage(invocationId, target, arguments, streamIds);
     }
 
-    private static HubMessage BindInvocationMessage(string? invocationId, string target, object?[]? arguments, bool hasArguments, string[]? streamIds)
+    private static HubMessage BindInvocationMessage(
+        string? invocationId,
+        string target,
+        object?[]? arguments,
+        bool hasArguments,
+        string[]? streamIds
+    )
     {
         if (string.IsNullOrEmpty(target))
         {
@@ -769,7 +885,11 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         return new InvocationMessage(invocationId, target, arguments, streamIds);
     }
 
-    private static bool ReadArgumentAsType(JsonTextReader reader, IReadOnlyList<Type> paramTypes, int paramIndex)
+    private static bool ReadArgumentAsType(
+        JsonTextReader reader,
+        IReadOnlyList<Type> paramTypes,
+        int paramIndex
+    )
     {
         if (paramIndex < paramTypes.Count)
         {
@@ -794,7 +914,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
             {
                 if (argumentsCount != paramCount)
                 {
-                    throw new InvalidDataException($"Invocation provides {argumentsCount} argument(s) but target expects {paramCount}.");
+                    throw new InvalidDataException(
+                        $"Invocation provides {argumentsCount} argument(s) but target expects {paramCount}."
+                    );
                 }
 
                 return arguments ?? Array.Empty<object?>();
@@ -809,7 +931,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
             {
                 if (paramIndex < paramCount)
                 {
-                    arguments[paramIndex] = PayloadSerializer.Deserialize(reader, paramTypes[paramIndex]);
+                    arguments[paramIndex] = PayloadSerializer.Deserialize(
+                        reader,
+                        paramTypes[paramIndex]
+                    );
                 }
                 else
                 {
@@ -821,7 +946,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
             }
             catch (Exception ex)
             {
-                throw new InvalidDataException("Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.", ex);
+                throw new InvalidDataException(
+                    "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
+                    ex
+                );
             }
         }
 
@@ -845,7 +973,9 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         var argCount = args.Count;
         if (paramCount != argCount)
         {
-            throw new InvalidDataException($"Invocation provides {argCount} argument(s) but target expects {paramCount}.");
+            throw new InvalidDataException(
+                $"Invocation provides {argCount} argument(s) but target expects {paramCount}."
+            );
         }
 
         if (paramCount == 0)
@@ -867,7 +997,10 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
         }
         catch (Exception ex)
         {
-            throw new InvalidDataException("Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.", ex);
+            throw new InvalidDataException(
+                "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.",
+                ex
+            );
         }
     }
 
@@ -898,8 +1031,12 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
             MemoryBufferWriter.Return(strm);
         }
     }
+
     internal static JsonSerializerSettings CreateDefaultSerializerSettings()
     {
-        return new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+        return new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
     }
 }

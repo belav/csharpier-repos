@@ -13,12 +13,14 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
 {
     // Using explicit newlines here to avoid fooling our baseline tests
     private const string DefaultUsingImportContent =
-        "\r\n" +
-        "@using System\r\n" +
-        "@using System.Collections.Generic\r\n" +
-        "@using System.Linq\r\n" +
-        "@using System.Threading.Tasks\r\n" +
-        "@using " + ComponentsApi.RenderFragment.Namespace + "\r\n"; // Microsoft.AspNetCore.Components
+        "\r\n"
+        + "@using System\r\n"
+        + "@using System.Collections.Generic\r\n"
+        + "@using System.Linq\r\n"
+        + "@using System.Threading.Tasks\r\n"
+        + "@using "
+        + ComponentsApi.RenderFragment.Namespace
+        + "\r\n"; // Microsoft.AspNetCore.Components
 
     public RazorProjectEngine ProjectEngine { get; set; }
 
@@ -36,9 +38,9 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
         }
 
         var imports = new List<RazorProjectItem>()
-            {
-                 new VirtualProjectItem(DefaultUsingImportContent),
-            };
+        {
+            new VirtualProjectItem(DefaultUsingImportContent),
+        };
 
         // We add hierarchical imports second so any default directive imports can be overridden.
         imports.AddRange(GetHierarchicalImports(ProjectEngine.FileSystem, projectItem));
@@ -47,10 +49,15 @@ internal class ComponentImportProjectFeature : IImportProjectFeature
     }
 
     // Temporary API until we fully convert to RazorProjectEngine
-    public IEnumerable<RazorProjectItem> GetHierarchicalImports(RazorProject project, RazorProjectItem projectItem)
+    public IEnumerable<RazorProjectItem> GetHierarchicalImports(
+        RazorProject project,
+        RazorProjectItem projectItem
+    )
     {
         // We want items in descending order. FindHierarchicalItems returns items in ascending order.
-        return project.FindHierarchicalItems(projectItem.FilePath, ComponentMetadata.ImportsFileName).Reverse();
+        return project
+            .FindHierarchicalItems(projectItem.FilePath, ComponentMetadata.ImportsFileName)
+            .Reverse();
     }
 
     private class VirtualProjectItem : RazorProjectItem

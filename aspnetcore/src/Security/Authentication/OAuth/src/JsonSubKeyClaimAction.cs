@@ -44,8 +44,11 @@ public class JsonSubKeyClaimAction : JsonKeyClaimAction
     // Get the given subProperty from a property.
     private static string? GetValue(JsonElement userData, string propertyName, string subProperty)
     {
-        if (userData.TryGetProperty(propertyName, out var value)
-            && value.ValueKind == JsonValueKind.Object && value.TryGetProperty(subProperty, out value))
+        if (
+            userData.TryGetProperty(propertyName, out var value)
+            && value.ValueKind == JsonValueKind.Object
+            && value.TryGetProperty(subProperty, out value)
+        )
         {
             return value.ToString();
         }

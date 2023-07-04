@@ -9,11 +9,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
 public sealed class DefaultTagHelperHtmlAttributeIntermediateNode : ExtensionIntermediateNode
 {
-    public DefaultTagHelperHtmlAttributeIntermediateNode()
-    {
-    }
+    public DefaultTagHelperHtmlAttributeIntermediateNode() { }
 
-    public DefaultTagHelperHtmlAttributeIntermediateNode(TagHelperHtmlAttributeIntermediateNode htmlAttributeNode)
+    public DefaultTagHelperHtmlAttributeIntermediateNode(
+        TagHelperHtmlAttributeIntermediateNode htmlAttributeNode
+    )
     {
         if (htmlAttributeNode == null)
         {

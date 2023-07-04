@@ -11,18 +11,25 @@ internal class DirectiveCSharpTokenizer : CSharpTokenizer
     private bool _visitedFirstTokenStart;
     private bool _visitedFirstTokenLineEnd;
 
-    public DirectiveCSharpTokenizer(ITextDocument source) : base(source)
-    {
-    }
+    public DirectiveCSharpTokenizer(ITextDocument source)
+        : base(source) { }
 
     protected override StateResult Dispatch()
     {
         var result = base.Dispatch();
-        if (result.Result != null && !_visitedFirstTokenStart && IsValidTokenType(result.Result.Kind))
+        if (
+            result.Result != null
+            && !_visitedFirstTokenStart
+            && IsValidTokenType(result.Result.Kind)
+        )
         {
             _visitedFirstTokenStart = true;
         }
-        else if (result.Result != null && _visitedFirstTokenStart && result.Result.Kind == SyntaxKind.NewLine)
+        else if (
+            result.Result != null
+            && _visitedFirstTokenStart
+            && result.Result.Kind == SyntaxKind.NewLine
+        )
         {
             _visitedFirstTokenLineEnd = true;
         }
@@ -51,12 +58,12 @@ internal class DirectiveCSharpTokenizer : CSharpTokenizer
 
     private bool IsValidTokenType(SyntaxKind kind)
     {
-        return kind != SyntaxKind.Whitespace &&
-            kind != SyntaxKind.NewLine &&
-            kind != SyntaxKind.CSharpComment &&
-            kind != SyntaxKind.RazorCommentLiteral &&
-            kind != SyntaxKind.RazorCommentStar &&
-            kind != SyntaxKind.RazorCommentTransition &&
-            kind != SyntaxKind.Transition;
+        return kind != SyntaxKind.Whitespace
+            && kind != SyntaxKind.NewLine
+            && kind != SyntaxKind.CSharpComment
+            && kind != SyntaxKind.RazorCommentLiteral
+            && kind != SyntaxKind.RazorCommentStar
+            && kind != SyntaxKind.RazorCommentTransition
+            && kind != SyntaxKind.Transition;
     }
 }

@@ -21,7 +21,10 @@ public partial class RedirectToRouteResultExecutor : IActionResultExecutor<Redir
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="urlHelperFactory">The factory used to create url helpers.</param>
-    public RedirectToRouteResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public RedirectToRouteResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         if (loggerFactory == null)
         {
@@ -47,7 +50,8 @@ public partial class RedirectToRouteResultExecutor : IActionResultExecutor<Redir
             result.RouteValues,
             protocol: null,
             host: null,
-            fragment: result.Fragment);
+            fragment: result.Fragment
+        );
         if (string.IsNullOrEmpty(destinationUrl))
         {
             throw new InvalidOperationException(Resources.NoRoutesMatched);
@@ -57,8 +61,9 @@ public partial class RedirectToRouteResultExecutor : IActionResultExecutor<Redir
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -71,7 +76,16 @@ public partial class RedirectToRouteResultExecutor : IActionResultExecutor<Redir
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.", EventName = "RedirectToRouteResultExecuting")]
-        public static partial void RedirectToRouteResultExecuting(ILogger logger, string destination, string? routeName);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.",
+            EventName = "RedirectToRouteResultExecuting"
+        )]
+        public static partial void RedirectToRouteResultExecuting(
+            ILogger logger,
+            string destination,
+            string? routeName
+        );
     }
 }

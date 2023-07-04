@@ -19,35 +19,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         protected readonly ILibuvTrace _log;
         private readonly GCHandleType _handleType;
 
-        protected UvMemory(ILibuvTrace logger, GCHandleType handleType = GCHandleType.Weak) : base(IntPtr.Zero, true)
+        protected UvMemory(ILibuvTrace logger, GCHandleType handleType = GCHandleType.Weak)
+            : base(IntPtr.Zero, true)
         {
             _log = logger;
             _handleType = handleType;
         }
 
-        public LibuvFunctions Libuv { get { return _uv; } }
+        public LibuvFunctions Libuv
+        {
+            get { return _uv; }
+        }
 
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
 
         public int ThreadId
         {
-            get
-            {
-                return _threadId;
-            }
-            private set
-            {
-                _threadId = value;
-            }
+            get { return _threadId; }
+            private set { _threadId = value; }
         }
 
-        unsafe protected void CreateMemory(LibuvFunctions uv, int threadId, int size)
+        protected unsafe void CreateMemory(LibuvFunctions uv, int threadId, int size)
         {
             _uv = uv;
             ThreadId = threadId;
@@ -56,7 +51,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             *(IntPtr*)handle = GCHandle.ToIntPtr(GCHandle.Alloc(this, _handleType));
         }
 
-        unsafe protected static void DestroyMemory(IntPtr memory)
+        protected static unsafe void DestroyMemory(IntPtr memory)
         {
             var gcHandlePtr = *(IntPtr*)memory;
             DestroyMemory(memory, gcHandlePtr);
@@ -84,7 +79,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             Debug.Assert(_threadId == Environment.CurrentManagedThreadId, "ThreadId is incorrect");
         }
 
-        unsafe public static THandle FromIntPtr<THandle>(IntPtr handle)
+        public static unsafe THandle FromIntPtr<THandle>(IntPtr handle)
         {
             GCHandle gcHandle = GCHandle.FromIntPtr(*(IntPtr*)handle);
             return (THandle)gcHandle.Target;

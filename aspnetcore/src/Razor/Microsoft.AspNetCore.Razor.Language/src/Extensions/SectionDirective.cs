@@ -13,9 +13,13 @@ public static class SectionDirective
         DirectiveKind.RazorBlock,
         builder =>
         {
-            builder.AddMemberToken(Resources.SectionDirective_NameToken_Name, Resources.SectionDirective_NameToken_Description);
+            builder.AddMemberToken(
+                Resources.SectionDirective_NameToken_Name,
+                Resources.SectionDirective_NameToken_Description
+            );
             builder.Description = Resources.SectionDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {

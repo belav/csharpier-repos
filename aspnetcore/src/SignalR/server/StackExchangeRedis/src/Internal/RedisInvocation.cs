@@ -20,8 +20,12 @@ internal readonly struct RedisInvocation
 
     public string? InvocationId { get; }
 
-    public RedisInvocation(SerializedHubMessage message, IReadOnlyList<string>? excludedConnectionIds,
-        string? invocationId = null, string? returnChannel = null)
+    public RedisInvocation(
+        SerializedHubMessage message,
+        IReadOnlyList<string>? excludedConnectionIds,
+        string? invocationId = null,
+        string? returnChannel = null
+    )
     {
         Message = message;
         ExcludedConnectionIds = excludedConnectionIds;

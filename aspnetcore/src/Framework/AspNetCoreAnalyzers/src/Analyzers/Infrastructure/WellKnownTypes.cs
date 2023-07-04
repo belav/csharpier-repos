@@ -62,7 +62,10 @@ internal enum WellKnownType
 
 internal sealed class WellKnownTypes
 {
-    private static readonly BoundedCacheWithFactory<Compilation, WellKnownTypes> LazyWellKnownTypesCache = new();
+    private static readonly BoundedCacheWithFactory<
+        Compilation,
+        WellKnownTypes
+    > LazyWellKnownTypesCache = new();
     private static readonly string[] WellKnownTypeNames = new[]
     {
         "Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder",
@@ -142,7 +145,10 @@ internal sealed class WellKnownTypes
                 typeIdName = typeIdName.Substring(0, separator);
             }
 
-            Debug.Assert(name == typeIdName, $"Enum name ({typeIdName}) and type name ({name}) must match at {i}");
+            Debug.Assert(
+                name == typeIdName,
+                $"Enum name ({typeIdName}) and type name ({name}) must match at {i}"
+            );
         }
     }
 
@@ -171,7 +177,9 @@ internal sealed class WellKnownTypes
         var result = _compilation.GetTypeByMetadataName(WellKnownTypeNames[index]);
         if (result == null)
         {
-            throw new InvalidOperationException($"Failed to resolve well-known type '{WellKnownTypeNames[index]}'.");
+            throw new InvalidOperationException(
+                $"Failed to resolve well-known type '{WellKnownTypeNames[index]}'."
+            );
         }
         Interlocked.CompareExchange(ref _lazyWellKnownTypes[index], result, null);
 

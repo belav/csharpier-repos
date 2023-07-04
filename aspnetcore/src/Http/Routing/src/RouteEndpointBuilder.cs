@@ -30,9 +30,10 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
     /// <param name="routePattern">The <see cref="RoutePattern"/> to use in URL matching.</param>
     /// <param name="order">The order assigned to the endpoint.</param>
     public RouteEndpointBuilder(
-       RequestDelegate? requestDelegate,
-       RoutePattern routePattern,
-       int order)
+        RequestDelegate? requestDelegate,
+        RoutePattern routePattern,
+        int order
+    )
     {
         ArgumentNullException.ThrowIfNull(routePattern);
 
@@ -46,7 +47,9 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
     {
         if (RequestDelegate is null)
         {
-            throw new InvalidOperationException($"{nameof(RequestDelegate)} must be specified to construct a {nameof(RouteEndpoint)}.");
+            throw new InvalidOperationException(
+                $"{nameof(RequestDelegate)} must be specified to construct a {nameof(RouteEndpoint)}."
+            );
         }
 
         return new RouteEndpoint(
@@ -54,7 +57,8 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
             RoutePattern,
             Order,
             CreateMetadataCollection(Metadata),
-            DisplayName);
+            DisplayName
+        );
     }
 
     private static EndpointMetadataCollection CreateMetadataCollection(IList<object> metadata)
@@ -87,7 +91,11 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
                 }
             }
 
-            if (hasCorsMetadata && httpMethodMetadata is not null && !httpMethodMetadata.AcceptCorsPreflight)
+            if (
+                hasCorsMetadata
+                && httpMethodMetadata is not null
+                && !httpMethodMetadata.AcceptCorsPreflight
+            )
             {
                 // Since we found a CORS metadata we will update it
                 // to make sure the acceptCorsPreflight is set to true.

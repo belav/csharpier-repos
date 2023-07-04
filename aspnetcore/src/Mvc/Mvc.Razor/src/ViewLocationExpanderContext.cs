@@ -23,7 +23,8 @@ public class ViewLocationExpanderContext
         string? controllerName,
         string? areaName,
         string? pageName,
-        bool isMainPage)
+        bool isMainPage
+    )
     {
         if (actionContext == null)
         {

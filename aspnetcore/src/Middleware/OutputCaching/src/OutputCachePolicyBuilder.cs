@@ -13,15 +13,15 @@ namespace Microsoft.AspNetCore.OutputCaching;
 /// </summary>
 public sealed class OutputCachePolicyBuilder
 {
-    private const DynamicallyAccessedMemberTypes ActivatorAccessibility = DynamicallyAccessedMemberTypes.PublicConstructors;
+    private const DynamicallyAccessedMemberTypes ActivatorAccessibility =
+        DynamicallyAccessedMemberTypes.PublicConstructors;
 
     private IOutputCachePolicy? _builtPolicy;
     private readonly List<IOutputCachePolicy> _policies = new();
     private List<Func<OutputCacheContext, CancellationToken, ValueTask<bool>>>? _requirements;
 
-    internal OutputCachePolicyBuilder() : this(false)
-    {
-    }
+    internal OutputCachePolicyBuilder()
+        : this(false) { }
 
     internal OutputCachePolicyBuilder(bool excludeDefaultPolicy)
     {
@@ -43,7 +43,10 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a dynamically resolved policy.
     /// </summary>
     /// <param name="policyType">The type of policy to add</param>
-    public OutputCachePolicyBuilder AddPolicy([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type policyType)
+    public OutputCachePolicyBuilder AddPolicy(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type policyType
+    )
     {
         return AddPolicy(new TypedPolicy(policyType));
     }
@@ -52,7 +55,10 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a dynamically resolved policy.
     /// </summary>
     /// <typeparam name="T">The policy type.</typeparam>
-    public OutputCachePolicyBuilder AddPolicy<[DynamicallyAccessedMembers(ActivatorAccessibility)] T>() where T : IOutputCachePolicy
+    public OutputCachePolicyBuilder AddPolicy<
+        [DynamicallyAccessedMembers(ActivatorAccessibility)] T
+    >()
+        where T : IOutputCachePolicy
     {
         return AddPolicy(typeof(T));
     }
@@ -61,7 +67,9 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a requirement to the current policy.
     /// </summary>
     /// <param name="predicate">The predicate applied to the policy.</param>
-    public OutputCachePolicyBuilder With(Func<OutputCacheContext, CancellationToken, ValueTask<bool>> predicate)
+    public OutputCachePolicyBuilder With(
+        Func<OutputCacheContext, CancellationToken, ValueTask<bool>> predicate
+    )
     {
         ArgumentNullException.ThrowIfNull(predicate);
 
@@ -124,6 +132,7 @@ public sealed class OutputCachePolicyBuilder
 
         return AddPolicy(new VaryByHeaderPolicy(headerName, headerNames));
     }
+
     /// <summary>
     /// Adds a policy to vary the cached responses by header.
     /// </summary>
@@ -140,7 +149,10 @@ public sealed class OutputCachePolicyBuilder
     /// </summary>
     /// <param name="routeValueName">The route value name to vary the cached responses by.</param>
     /// <param name="routeValueNames">The extra route value names to vary the cached responses by.</param>
-    public OutputCachePolicyBuilder SetVaryByRouteValue(string routeValueName, params string[] routeValueNames)
+    public OutputCachePolicyBuilder SetVaryByRouteValue(
+        string routeValueName,
+        params string[] routeValueNames
+    )
     {
         ArgumentNullException.ThrowIfNull(routeValueName);
 
@@ -194,7 +206,9 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a policy that varies the cache key using the specified value.
     /// </summary>
     /// <param name="keyPrefix">The value to vary the cache key by.</param>
-    public OutputCachePolicyBuilder SetCacheKeyPrefix(Func<HttpContext, CancellationToken, ValueTask<string>> keyPrefix)
+    public OutputCachePolicyBuilder SetCacheKeyPrefix(
+        Func<HttpContext, CancellationToken, ValueTask<string>> keyPrefix
+    )
     {
         ArgumentNullException.ThrowIfNull(keyPrefix);
 
@@ -211,7 +225,10 @@ public sealed class OutputCachePolicyBuilder
         ArgumentNullException.ThrowIfNull(key);
         ArgumentNullException.ThrowIfNull(value);
 
-        ValueTask<KeyValuePair<string, string>> varyByFunc(HttpContext context, CancellationToken cancellationToken)
+        ValueTask<KeyValuePair<string, string>> varyByFunc(
+            HttpContext context,
+            CancellationToken cancellationToken
+        )
         {
             return ValueTask.FromResult(new KeyValuePair<string, string>(key, value));
         }
@@ -223,11 +240,16 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a policy to vary the cached responses by custom key/value.
     /// </summary>
     /// <param name="varyBy">The key/value to vary the cached responses by.</param>
-    public OutputCachePolicyBuilder VaryByValue(Func<HttpContext, KeyValuePair<string, string>> varyBy)
+    public OutputCachePolicyBuilder VaryByValue(
+        Func<HttpContext, KeyValuePair<string, string>> varyBy
+    )
     {
         ArgumentNullException.ThrowIfNull(varyBy);
 
-        ValueTask<KeyValuePair<string, string>> varyByFunc(HttpContext context, CancellationToken cancellationToken)
+        ValueTask<KeyValuePair<string, string>> varyByFunc(
+            HttpContext context,
+            CancellationToken cancellationToken
+        )
         {
             return ValueTask.FromResult(varyBy(context));
         }
@@ -239,7 +261,9 @@ public sealed class OutputCachePolicyBuilder
     /// Adds a policy that vary the cached content based on the specified value.
     /// </summary>
     /// <param name="varyBy">The key/value to vary the cached responses by.</param>
-    public OutputCachePolicyBuilder VaryByValue(Func<HttpContext, CancellationToken, ValueTask<KeyValuePair<string, string>>> varyBy)
+    public OutputCachePolicyBuilder VaryByValue(
+        Func<HttpContext, CancellationToken, ValueTask<KeyValuePair<string, string>>> varyBy
+    )
     {
         ArgumentNullException.ThrowIfNull(varyBy);
 
@@ -271,7 +295,8 @@ public sealed class OutputCachePolicyBuilder
     /// </summary>
     /// <param name="lockResponse">Whether the request should be locked.</param>
     /// <remarks>When the default policy is used, locking is enabled by default.</remarks>
-    public OutputCachePolicyBuilder SetLocking(bool enabled) => AddPolicy(enabled ? LockingPolicy.Enabled : LockingPolicy.Disabled);
+    public OutputCachePolicyBuilder SetLocking(bool enabled) =>
+        AddPolicy(enabled ? LockingPolicy.Enabled : LockingPolicy.Disabled);
 
     /// <summary>
     /// Clears the policies and adds one preventing any caching logic to happen.
@@ -328,18 +353,21 @@ public sealed class OutputCachePolicyBuilder
         // If the policy was built with requirements, wrap it
         if (_requirements != null && _requirements.Any())
         {
-            policies = new PredicatePolicy(async c =>
-            {
-                foreach (var r in _requirements)
+            policies = new PredicatePolicy(
+                async c =>
                 {
-                    if (!await r(c, c.HttpContext.RequestAborted))
+                    foreach (var r in _requirements)
                     {
-                        return false;
+                        if (!await r(c, c.HttpContext.RequestAborted))
+                        {
+                            return false;
+                        }
                     }
-                }
 
-                return true;
-            }, policies);
+                    return true;
+                },
+                policies
+            );
         }
 
         return _builtPolicy = policies;

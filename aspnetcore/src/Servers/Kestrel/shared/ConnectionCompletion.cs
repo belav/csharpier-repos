@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Connections;
 
 internal static class ConnectionCompletion
 {
-    public static Task FireOnCompletedAsync(ILogger logger, Stack<KeyValuePair<Func<object, Task>, object>>? onCompleted)
+    public static Task FireOnCompletedAsync(
+        ILogger logger,
+        Stack<KeyValuePair<Func<object, Task>, object>>? onCompleted
+    )
     {
         if (onCompleted == null || onCompleted.Count == 0)
         {
@@ -19,7 +22,10 @@ internal static class ConnectionCompletion
         return CompleteAsyncMayAwait(logger, onCompleted);
     }
 
-    private static Task CompleteAsyncMayAwait(ILogger logger, Stack<KeyValuePair<Func<object, Task>, object>> onCompleted)
+    private static Task CompleteAsyncMayAwait(
+        ILogger logger,
+        Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
+    )
     {
         while (onCompleted.TryPop(out var entry))
         {
@@ -33,14 +39,21 @@ internal static class ConnectionCompletion
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                logger.LogError(
+                    ex,
+                    "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                );
             }
         }
 
         return Task.CompletedTask;
     }
 
-    private static async Task CompleteAsyncAwaited(Task currentTask, ILogger logger, Stack<KeyValuePair<Func<object, Task>, object>> onCompleted)
+    private static async Task CompleteAsyncAwaited(
+        Task currentTask,
+        ILogger logger,
+        Stack<KeyValuePair<Func<object, Task>, object>> onCompleted
+    )
     {
         try
         {
@@ -48,7 +61,10 @@ internal static class ConnectionCompletion
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+            logger.LogError(
+                ex,
+                "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+            );
         }
 
         while (onCompleted.TryPop(out var entry))
@@ -59,7 +75,10 @@ internal static class ConnectionCompletion
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.");
+                logger.LogError(
+                    ex,
+                    "An error occurred running an IConnectionCompleteFeature.OnCompleted callback."
+                );
             }
         }
     }

@@ -45,7 +45,8 @@ public class ContentViewComponentResultTest
             viewData,
             new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
 
         var writer = new StreamWriter(stream) { AutoFlush = true };
 
@@ -59,7 +60,8 @@ public class ContentViewComponentResultTest
             new Dictionary<string, object>(),
             new HtmlTestEncoder(),
             viewContext,
-            writer);
+            writer
+        );
 
         return viewComponentContext;
     }

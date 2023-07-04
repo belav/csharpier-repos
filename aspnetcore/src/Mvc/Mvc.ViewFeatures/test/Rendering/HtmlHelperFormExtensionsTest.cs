@@ -14,25 +14,29 @@ namespace Microsoft.AspNetCore.Mvc.Rendering;
 public class HtmlHelperFormExtensionsTest
 {
     private static readonly IEnumerable<string> _actionNames = new List<string> { null, "Details" };
-    private static readonly IEnumerable<string> _controllerNames = new List<string> { null, "Product" };
+    private static readonly IEnumerable<string> _controllerNames = new List<string>
+    {
+        null,
+        "Product"
+    };
     private static readonly IEnumerable<object> _htmlAttributes = new List<object>
-        {
-            null,
-            new { isprint = "false", showreviews = "false" },
-            new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "true" }, },
-        };
+    {
+        null,
+        new { isprint = "false", showreviews = "false" },
+        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "true" }, },
+    };
     private static readonly IEnumerable<FormMethod> _methods = new List<FormMethod>
-        {
-            FormMethod.Get,
-            FormMethod.Post,
-        };
+    {
+        FormMethod.Get,
+        FormMethod.Post,
+    };
     private static readonly IEnumerable<string> _routeNames = new List<string> { null, "default" };
     private static readonly IEnumerable<object> _routeValues = new List<object>
-        {
-            null,
-            new { p1_name = "p1-value" },
-            new Dictionary<string, object> { { "p1-name", "p1-value" }, { "p2-name", "p2-value" } },
-        };
+    {
+        null,
+        new { p1_name = "p1-value" },
+        new Dictionary<string, object> { { "p1-name", "p1-value" }, { "p2-name", "p2-value" } },
+    };
 
     public static TheoryData<string, string> ActionNameAndControllerNameDataSet
     {
@@ -71,7 +75,12 @@ public class HtmlHelperFormExtensionsTest
         }
     }
 
-    public static TheoryData<string, string, FormMethod, object> ActionNameControllerNameMethodAndHtmlAttributesDataSet
+    public static TheoryData<
+        string,
+        string,
+        FormMethod,
+        object
+    > ActionNameControllerNameMethodAndHtmlAttributesDataSet
     {
         get
         {
@@ -114,7 +123,12 @@ public class HtmlHelperFormExtensionsTest
         }
     }
 
-    public static TheoryData<string, string, object, FormMethod> ActionNameControllerNameRouteValuesAndMethodDataSet
+    public static TheoryData<
+        string,
+        string,
+        object,
+        FormMethod
+    > ActionNameControllerNameRouteValuesAndMethodDataSet
     {
         get
         {
@@ -278,13 +292,17 @@ public class HtmlHelperFormExtensionsTest
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -315,13 +333,17 @@ public class HtmlHelperFormExtensionsTest
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -352,13 +374,17 @@ public class HtmlHelperFormExtensionsTest
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -386,13 +412,17 @@ public class HtmlHelperFormExtensionsTest
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -423,20 +453,25 @@ public class HtmlHelperFormExtensionsTest
     [MemberData(nameof(MethodAndHtmlAttributesDataSet))]
     public void BeginFormWithMethodAndHtmlAttributesParameters_CallsHtmlGeneratorWithExpectedValues(
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -467,20 +502,25 @@ public class HtmlHelperFormExtensionsTest
     [MemberData(nameof(MethodAndHtmlAttributesDataSet))]
     public void BeginFormWithMethodAndHtmlAttributesParameters_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -495,7 +535,11 @@ public class HtmlHelperFormExtensionsTest
         Assert.NotNull(builder);
 
         // Act
-        var mvcForm = htmlHelper.BeginForm(method, antiforgery: true, htmlAttributes: htmlAttributes);
+        var mvcForm = htmlHelper.BeginForm(
+            method,
+            antiforgery: true,
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         Assert.NotNull(mvcForm);
@@ -507,20 +551,25 @@ public class HtmlHelperFormExtensionsTest
     [MemberData(nameof(MethodAndHtmlAttributesDataSet))]
     public void BeginFormWithMethodAndHtmlAttributesParameters_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -531,7 +580,11 @@ public class HtmlHelperFormExtensionsTest
         Assert.NotNull(builder);
 
         // Act
-        var mvcForm = htmlHelper.BeginForm(method, antiforgery: false, htmlAttributes: htmlAttributes);
+        var mvcForm = htmlHelper.BeginForm(
+            method,
+            antiforgery: false,
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         Assert.NotNull(mvcForm);
@@ -541,20 +594,26 @@ public class HtmlHelperFormExtensionsTest
 
     [Theory]
     [MemberData(nameof(RouteValuesDataSet))]
-    public void BeginFormWithRouteValuesParameter_CallsHtmlGeneratorWithExpectedValues(object routeValues)
+    public void BeginFormWithRouteValuesParameter_CallsHtmlGeneratorWithExpectedValues(
+        object routeValues
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                null,   // actionName
-                null,   // controllerName
-                routeValues,
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        null, // actionName
+                        null, // controllerName
+                        routeValues,
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -581,20 +640,25 @@ public class HtmlHelperFormExtensionsTest
     [MemberData(nameof(ActionNameAndControllerNameDataSet))]
     public void BeginFormWithActionNameAndControllerNameParameters_CallsHtmlGeneratorWithExpectedValues(
         string actionName,
-        string controllerName)
+        string controllerName
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -622,20 +686,25 @@ public class HtmlHelperFormExtensionsTest
     public void BeginFormWithActionNameControllerNameAndRouteValuesParameters_CallsHtmlGeneratorWithExpectedValues(
         string actionName,
         string controllerName,
-        object routeValues)
+        object routeValues
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                routeValues,
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        routeValues,
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -663,20 +732,25 @@ public class HtmlHelperFormExtensionsTest
     public void BeginFormWithActionNameControllerNameAndMethodParameters_CallsHtmlGeneratorWithExpectedValues(
         string actionName,
         string controllerName,
-        FormMethod method)
+        FormMethod method
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -709,29 +783,34 @@ public class HtmlHelperFormExtensionsTest
         string actionName,
         string controllerName,
         object routeValues,
-        FormMethod method)
+        FormMethod method
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                routeValues,
-                method.ToString().ToLowerInvariant(),
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        routeValues,
+                        method.ToString().ToLowerInvariant(),
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
         if (method != FormMethod.Get)
         {
             htmlGenerator
-            .Setup(g => g.GenerateAntiforgery(htmlHelper.ViewContext))
-            .Returns(HtmlString.Empty)
-            .Verifiable();
+                .Setup(g => g.GenerateAntiforgery(htmlHelper.ViewContext))
+                .Returns(HtmlString.Empty)
+                .Verifiable();
         }
 
         // Guards
@@ -755,20 +834,25 @@ public class HtmlHelperFormExtensionsTest
         string actionName,
         string controllerName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -801,20 +885,25 @@ public class HtmlHelperFormExtensionsTest
         string actionName,
         string controllerName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -835,7 +924,8 @@ public class HtmlHelperFormExtensionsTest
             routeValues: null,
             method: method,
             antiforgery: true,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         Assert.NotNull(mvcForm);
@@ -849,20 +939,25 @@ public class HtmlHelperFormExtensionsTest
         string actionName,
         string controllerName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateForm(
-                htmlHelper.ViewContext,
-                actionName,
-                controllerName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateForm(
+                        htmlHelper.ViewContext,
+                        actionName,
+                        controllerName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -879,7 +974,8 @@ public class HtmlHelperFormExtensionsTest
             routeValues: null,
             method: method,
             antiforgery: false,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         Assert.NotNull(mvcForm);
@@ -889,19 +985,25 @@ public class HtmlHelperFormExtensionsTest
 
     [Theory]
     [MemberData(nameof(RouteValuesDataSet))]
-    public void BeginRouteFormWithRouteValuesParameter_CallsHtmlGeneratorWithExpectedValues(object routeValues)
+    public void BeginRouteFormWithRouteValuesParameter_CallsHtmlGeneratorWithExpectedValues(
+        object routeValues
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                null,   // routeName
-                routeValues,
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        null, // routeName
+                        routeValues,
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -927,19 +1029,24 @@ public class HtmlHelperFormExtensionsTest
     [Theory]
     [MemberData(nameof(RouteValuesDataSet))]
     public void BeginRouteFormWithRouteValuesParameter_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
-        object routeValues)
+        object routeValues
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                null,   // routeName
-                routeValues,
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        null, // routeName
+                        routeValues,
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -965,19 +1072,24 @@ public class HtmlHelperFormExtensionsTest
     [Theory]
     [MemberData(nameof(RouteValuesDataSet))]
     public void BeginRouteFormWithRouteValuesParameter_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
-        object routeValues)
+        object routeValues
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                null,   // routeName
-                routeValues,
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        null, // routeName
+                        routeValues,
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -998,19 +1110,25 @@ public class HtmlHelperFormExtensionsTest
 
     [Theory]
     [MemberData(nameof(RouteNameDataSet))]
-    public void BeginRouteFormWithRouteNameParameter_CallsHtmlGeneratorWithExpectedValues(string routeName)
+    public void BeginRouteFormWithRouteNameParameter_CallsHtmlGeneratorWithExpectedValues(
+        string routeName
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -1036,19 +1154,24 @@ public class HtmlHelperFormExtensionsTest
     [Theory]
     [MemberData(nameof(RouteNameDataSet))]
     public void BeginRouteFormWithRouteNameParameter_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
-        string routeName)
+        string routeName
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -1074,19 +1197,24 @@ public class HtmlHelperFormExtensionsTest
     [Theory]
     [MemberData(nameof(RouteNameDataSet))]
     public void BeginRouteFormWithRouteNameParameter_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
-        string routeName)
+        string routeName
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1109,19 +1237,24 @@ public class HtmlHelperFormExtensionsTest
     [MemberData(nameof(RouteNameAndRouteValuesDataSet))]
     public void BeginRouteFormWithRouteNameAndRouteValuesParameters_CallsHtmlGeneratorWithExpectedValues(
         string routeName,
-        object routeValues)
+        object routeValues
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                routeValues,
-                "post", // method
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        routeValues,
+                        "post", // method
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -1148,19 +1281,24 @@ public class HtmlHelperFormExtensionsTest
     [MemberData(nameof(RouteNameAndMethodDataSet))]
     public void BeginRouteFormWithRouteNameAndMethodParameters_CallsHtmlGeneratorWithExpectedValues(
         string routeName,
-        FormMethod method)
+        FormMethod method
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1192,19 +1330,24 @@ public class HtmlHelperFormExtensionsTest
     public void BeginRouteFormWithRouteNameRouteValuesAndMethodParameters_CallsHtmlGeneratorWithExpectedValues(
         string routeName,
         object routeValues,
-        FormMethod method)
+        FormMethod method
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                routeValues,
-                method.ToString().ToLowerInvariant(),
-                null))  // htmlAttributes
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        routeValues,
+                        method.ToString().ToLowerInvariant(),
+                        null
+                    )
+            ) // htmlAttributes
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1236,19 +1379,24 @@ public class HtmlHelperFormExtensionsTest
     public void BeginRouteFormWithRouteNameMethodAndHtmlAttributesParameters_CallsHtmlGeneratorWithExpectedValues(
         string routeName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1280,19 +1428,24 @@ public class HtmlHelperFormExtensionsTest
     public void BeginRouteFormWithRouteNameMethodAndHtmlAttributesParameters_WithAntiforgery_CallsHtmlGeneratorWithExpectedValues(
         string routeName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
         htmlGenerator
@@ -1312,7 +1465,8 @@ public class HtmlHelperFormExtensionsTest
             routeValues: null,
             method: method,
             antiforgery: true,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         Assert.NotNull(mvcForm);
@@ -1325,19 +1479,24 @@ public class HtmlHelperFormExtensionsTest
     public void BeginRouteFormWithRouteNameMethodAndHtmlAttributesParameters_SuppressAntiforgery_CallsHtmlGeneratorWithExpectedValues(
         string routeName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Arrange
         var tagBuilder = new TagBuilder(tagName: "form");
         var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
         var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
         htmlGenerator
-            .Setup(g => g.GenerateRouteForm(
-                htmlHelper.ViewContext,
-                routeName,
-                null,   // routeValues
-                method.ToString().ToLowerInvariant(),
-                htmlAttributes))
+            .Setup(
+                g =>
+                    g.GenerateRouteForm(
+                        htmlHelper.ViewContext,
+                        routeName,
+                        null, // routeValues
+                        method.ToString().ToLowerInvariant(),
+                        htmlAttributes
+                    )
+            )
             .Returns(tagBuilder)
             .Verifiable();
 
@@ -1353,7 +1512,8 @@ public class HtmlHelperFormExtensionsTest
             routeValues: null,
             method: method,
             antiforgery: false,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         Assert.NotNull(mvcForm);

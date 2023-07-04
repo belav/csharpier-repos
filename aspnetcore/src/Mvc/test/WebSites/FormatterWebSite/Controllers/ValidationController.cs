@@ -13,10 +13,15 @@ public class ValidationController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return Content(ModelState["Id"].Errors[0].ErrorMessage + "," +
-                ModelState["Name"].Errors[0].ErrorMessage + "," +
-                ModelState["Alias"].Errors[0].ErrorMessage + "," +
-                ModelState["Designation"].Errors[0].ErrorMessage);
+            return Content(
+                ModelState["Id"].Errors[0].ErrorMessage
+                    + ","
+                    + ModelState["Name"].Errors[0].ErrorMessage
+                    + ","
+                    + ModelState["Alias"].Errors[0].ErrorMessage
+                    + ","
+                    + ModelState["Designation"].Errors[0].ErrorMessage
+            );
         }
 
         return Content("User has been registered : " + user.Name);
@@ -63,13 +68,17 @@ public class ValidationController : Controller
     }
 
     [ModelStateValidationFilter]
-    public SimpleTypePropertiesModel CreateSimpleTypePropertiesModel([FromBody] SimpleTypePropertiesModel simpleTypePropertiesModel)
+    public SimpleTypePropertiesModel CreateSimpleTypePropertiesModel(
+        [FromBody] SimpleTypePropertiesModel simpleTypePropertiesModel
+    )
     {
         return simpleTypePropertiesModel;
     }
 
     [HttpPost]
-    public IActionResult ValidationProviderAttribute([FromBody] ValidationProviderAttributeModel validationProviderAttributeModel)
+    public IActionResult ValidationProviderAttribute(
+        [FromBody] ValidationProviderAttributeModel validationProviderAttributeModel
+    )
     {
         if (!ModelState.IsValid)
         {
@@ -80,7 +89,9 @@ public class ValidationController : Controller
     }
 
     [HttpPost]
-    public IActionResult ValidationThrowsError_WhenValidationExceedsMaxValidationDepth([FromBody] InfinitelyRecursiveModel model)
+    public IActionResult ValidationThrowsError_WhenValidationExceedsMaxValidationDepth(
+        [FromBody] InfinitelyRecursiveModel model
+    )
     {
         return Ok();
     }

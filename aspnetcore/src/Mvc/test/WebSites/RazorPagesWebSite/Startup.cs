@@ -9,13 +9,14 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options => options.LoginPath = "/Login");
 
         services.AddRazorPages(options =>
-            {
-                options.Conventions.AuthorizeFolder("/Admin");
-            });
+        {
+            options.Conventions.AuthorizeFolder("/Admin");
+        });
     }
 
     public void Configure(IApplicationBuilder app)

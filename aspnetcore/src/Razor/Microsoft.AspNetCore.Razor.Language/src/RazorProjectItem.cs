@@ -45,10 +45,7 @@ public abstract class RazorProjectItem
     /// </summary>
     public virtual string FileKind
     {
-        get
-        {
-            return FilePath == null ? null : FileKinds.GetFileKindFromFilePath(FilePath);
-        }
+        get { return FilePath == null ? null : FileKinds.GetFileKindFromFilePath(FilePath); }
     }
 
     /// <summary>

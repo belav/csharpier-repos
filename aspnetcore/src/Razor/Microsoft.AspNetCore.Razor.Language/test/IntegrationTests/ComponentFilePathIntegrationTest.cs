@@ -31,7 +31,11 @@ public class ComponentFilePathIntegrationTest : RazorIntegrationTestBase
     [InlineData("ItemAtRoot.cs", "Test", "ItemAtRoot")]
     [InlineData("Dir1\\MyFile.cs", "Test.Dir1", "MyFile")]
     [InlineData("Dir1\\Dir2\\MyFile.cs", "Test.Dir1.Dir2", "MyFile")]
-    public void CreatesClassWithCorrectNameAndNamespace(string relativePath, string expectedNamespace, string expectedClassName)
+    public void CreatesClassWithCorrectNameAndNamespace(
+        string relativePath,
+        string expectedNamespace,
+        string expectedClassName
+    )
     {
         // Arrange
         relativePath = relativePath.Replace('\\', Path.DirectorySeparatorChar);

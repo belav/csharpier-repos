@@ -35,13 +35,11 @@ public class AsciiTest
     }
 
     [Theory]
-
     // Identity
     [InlineData('c', 'c')]
     [InlineData('C', 'C')]
     [InlineData('#', '#')]
     [InlineData('\u0080', '\u0080')]
-
     // Case-insensitive
     [InlineData('c', 'C')]
     public void AsciiIgnoreCaseEquals_ReturnsTrue(char x, char y)
@@ -56,11 +54,9 @@ public class AsciiTest
     }
 
     [Theory]
-
     // Different letter
     [InlineData('c', 'd')]
     [InlineData('C', 'D')]
-
     // Non-letter + casing difference - 'a' and 'A' are 32 bits apart and so are ' ' and '@'
     [InlineData(' ', '@')]
     [InlineData('\u0080', '\u0080' + 32)] // Outside of ASCII range

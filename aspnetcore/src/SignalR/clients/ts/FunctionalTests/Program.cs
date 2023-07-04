@@ -21,10 +21,9 @@ public class Program
             }
         }
 
-        var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
+        var hostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
                 .ConfigureLogging(factory =>
                 {
                     factory.AddSimpleConsole(options =>
@@ -36,23 +35,25 @@ public class Program
                     factory.AddDebug();
                     factory.SetMinimumLevel(LogLevel.Debug);
                 })
-                .UseKestrel((builderContext, options) =>
-                {
-                    options.ConfigureHttpsDefaults(httpsOptions =>
+                .UseKestrel(
+                    (builderContext, options) =>
                     {
-                        httpsOptions.ServerCertificate = TestCertificateHelper.GetTestCert();
-                    });
-                })
+                        options.ConfigureHttpsDefaults(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestCertificateHelper.GetTestCert();
+                        });
+                    }
+                )
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>();
 
-                if (!string.IsNullOrEmpty(url))
-                {
-                    Console.WriteLine($"Forcing URL to: {url}");
-                    webHostBuilder.UseUrls(url);
-                }
-            });
+            if (!string.IsNullOrEmpty(url))
+            {
+                Console.WriteLine($"Forcing URL to: {url}");
+                webHostBuilder.UseUrls(url);
+            }
+        });
 
         return hostBuilder.Build().RunAsync();
     }

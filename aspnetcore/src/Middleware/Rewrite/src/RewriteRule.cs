@@ -14,6 +14,7 @@ internal sealed class RewriteRule : IRule
     public Regex InitialMatch { get; }
     public string Replacement { get; }
     public bool StopProcessing { get; }
+
     public RewriteRule(string regex, string replacement, bool stopProcessing)
     {
         if (string.IsNullOrEmpty(regex))
@@ -26,7 +27,11 @@ internal sealed class RewriteRule : IRule
             throw new ArgumentNullException(nameof(replacement));
         }
 
-        InitialMatch = new Regex(regex, RegexOptions.Compiled | RegexOptions.CultureInvariant, _regexTimeout);
+        InitialMatch = new Regex(
+            regex,
+            RegexOptions.Compiled | RegexOptions.CultureInvariant,
+            _regexTimeout
+        );
         Replacement = replacement;
         StopProcessing = stopProcessing;
     }
@@ -65,7 +70,14 @@ internal sealed class RewriteRule : IRule
                 HostString host;
                 PathString pathString;
                 QueryString query;
-                UriHelper.FromAbsolute(result, out scheme, out host, out pathString, out query, out _);
+                UriHelper.FromAbsolute(
+                    result,
+                    out scheme,
+                    out host,
+                    out pathString,
+                    out query,
+                    out _
+                );
 
                 request.Scheme = scheme;
                 request.Host = host;
@@ -87,8 +99,8 @@ internal sealed class RewriteRule : IRule
                         request.Path = PathString.FromUriComponent('/' + newPath);
                     }
                     request.QueryString = request.QueryString.Add(
-                        QueryString.FromUriComponent(
-                            result.Substring(split)));
+                        QueryString.FromUriComponent(result.Substring(split))
+                    );
                 }
                 else
                 {

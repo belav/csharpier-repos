@@ -24,8 +24,9 @@ public static class HealthCheckEndpointRouteBuilderExtensions
     /// <param name="pattern">The URL pattern of the health checks endpoint.</param>
     /// <returns>A convention routes for the health checks endpoint.</returns>
     public static IEndpointConventionBuilder MapHealthChecks(
-       this IEndpointRouteBuilder endpoints,
-       [StringSyntax("Route")] string pattern)
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern
+    )
     {
         if (endpoints == null)
         {
@@ -43,9 +44,10 @@ public static class HealthCheckEndpointRouteBuilderExtensions
     /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the health checks.</param>
     /// <returns>A convention routes for the health checks endpoint.</returns>
     public static IEndpointConventionBuilder MapHealthChecks(
-       this IEndpointRouteBuilder endpoints,
-       [StringSyntax("Route")] string pattern,
-       HealthCheckOptions options)
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        HealthCheckOptions options
+    )
     {
         if (endpoints == null)
         {
@@ -60,23 +62,34 @@ public static class HealthCheckEndpointRouteBuilderExtensions
         return MapHealthChecksCore(endpoints, pattern, options);
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2026",
-        Justification = "MapHealthChecksCore only RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here.")]
-    private static IEndpointConventionBuilder MapHealthChecksCore(IEndpointRouteBuilder endpoints, string pattern, HealthCheckOptions? options)
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "MapHealthChecksCore only RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here."
+    )]
+    private static IEndpointConventionBuilder MapHealthChecksCore(
+        IEndpointRouteBuilder endpoints,
+        string pattern,
+        HealthCheckOptions? options
+    )
     {
         if (endpoints.ServiceProvider.GetService(typeof(HealthCheckService)) == null)
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(HealthCheckServiceCollectionExtensions.AddHealthChecks),
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(HealthCheckServiceCollectionExtensions.AddHealthChecks),
+                    "ConfigureServices(...)"
+                )
+            );
         }
 
         var args = options != null ? new[] { Options.Create(options) } : Array.Empty<object>();
 
-        var pipeline = endpoints.CreateApplicationBuilder()
-           .UseMiddleware<HealthCheckMiddleware>(args)
-           .Build();
+        var pipeline = endpoints
+            .CreateApplicationBuilder()
+            .UseMiddleware<HealthCheckMiddleware>(args)
+            .Build();
 
         return endpoints.Map(pattern, pipeline).WithDisplayName(DefaultDisplayName);
     }
