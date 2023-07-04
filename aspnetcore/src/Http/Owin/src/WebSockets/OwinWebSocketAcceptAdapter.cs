@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Owin;
 
-using AppFunc = Func<IDictionary<string, object>, Task>;
 using WebSocketAccept = Action<
     IDictionary<string, object>, // WebSocket Accept parameters
     Func // WebSocketFunc callback
@@ -19,6 +18,7 @@ using WebSocketAcceptAlt = Func<
     WebSocketAcceptContext, // WebSocket Accept parameters
     Task<WebSocket>
 >;
+using AppFunc = Func<IDictionary<string, object>, Task>;
 
 /// <summary>
 /// This adapts the OWIN WebSocket accept flow to match the ASP.NET Core WebSocket Accept flow.

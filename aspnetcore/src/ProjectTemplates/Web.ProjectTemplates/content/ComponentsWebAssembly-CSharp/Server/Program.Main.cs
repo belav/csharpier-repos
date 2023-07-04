@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.ResponseCompression;
 #if (OrganizationalAuth || IndividualB2CAuth || IndividualLocalAuth)
 using Microsoft.AspNetCore.Authentication;
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 #endif
-using Microsoft.AspNetCore.ResponseCompression;
+
 #if (IndividualLocalAuth)
 using Microsoft.EntityFrameworkCore;
 #endif

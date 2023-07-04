@@ -9,8 +9,8 @@ using System.Net;
 using System.Threading.Channels;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
-using NamedPipeOptions = System.IO.Pipes.PipeOptions;
 using PipeOptions = System.IO.Pipelines.PipeOptions;
+using NamedPipeOptions = System.IO.Pipes.PipeOptions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 

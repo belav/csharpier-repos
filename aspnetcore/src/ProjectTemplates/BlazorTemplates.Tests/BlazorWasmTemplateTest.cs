@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.BrowserTesting;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.CommandLineUtils;
-using Newtonsoft.Json.Linq;
 using Microsoft.Playwright;
+using Newtonsoft.Json.Linq;
 using Templates.Test.Helpers;
 
 namespace BlazorTemplates.Tests;
