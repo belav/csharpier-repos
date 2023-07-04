@@ -7,6 +7,15 @@ using System.Net.WebSockets;
 namespace Microsoft.AspNetCore.Owin;
 
 // http://owin.org/extensions/owin-WebSocket-Extension-v0.4.0.htm
+using WebSocketCloseAsync = Func<
+    int /* closeStatus */
+    ,
+    string /* closeDescription */
+    ,
+    CancellationToken /* cancel */
+    ,
+    Task
+>;
 using WebSocketReceiveAsync = Func<
     ArraySegment<byte> /* data */
     ,
@@ -28,15 +37,6 @@ using WebSocketSendAsync = Func<
     int /* messageType */
     ,
     bool /* endOfMessage */
-    ,
-    CancellationToken /* cancel */
-    ,
-    Task
->;
-using WebSocketCloseAsync = Func<
-    int /* closeStatus */
-    ,
-    string /* closeDescription */
     ,
     CancellationToken /* cancel */
     ,

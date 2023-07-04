@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 #endif
 
-
 namespace Company.WebApplication1.Controllers
 {
 #if (!NoAuth)

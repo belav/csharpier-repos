@@ -10,11 +10,11 @@ namespace Microsoft.AspNetCore.Builder;
 using AddMiddleware = Action<
     Func<Func<IDictionary<string, object>, Task>, Func<IDictionary<string, object>, Task>>
 >;
+using AppFunc = Func<IDictionary<string, object>, Task>;
 using CreateMiddleware = Func<
     Func<IDictionary<string, object>, Task>,
     Func<IDictionary<string, object>, Task>
 >;
-using AppFunc = Func<IDictionary<string, object>, Task>;
 
 /// <summary>
 /// Extension methods to add OWIN to an HTTP application pipeline.

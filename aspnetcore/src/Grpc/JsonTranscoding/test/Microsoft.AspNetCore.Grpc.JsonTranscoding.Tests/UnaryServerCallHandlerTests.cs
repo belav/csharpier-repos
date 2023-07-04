@@ -25,8 +25,8 @@ using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Primitives;
 using Transcoding;
 using Xunit.Abstractions;
-using Type = System.Type;
 using MethodOptions = Grpc.Shared.Server.MethodOptions;
+using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
