@@ -1,17 +1,17 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.CommandLine.Rendering.Views;
+using System.CommandLine.Tests.Utility;
 using System.Drawing;
 using System.IO;
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using static System.CommandLine.Rendering.Ansi;
 using static System.CommandLine.Rendering.TestTerminal;
 using static System.Environment;
-using System.CommandLine.Rendering.Views;
-using System.CommandLine.Tests.Utility;
 
 namespace System.CommandLine.Rendering.Tests
 {

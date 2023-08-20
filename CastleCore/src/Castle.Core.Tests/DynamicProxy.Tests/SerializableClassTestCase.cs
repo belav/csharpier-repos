@@ -22,13 +22,11 @@ namespace Castle.DynamicProxy.Tests
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
-
     using Castle.DynamicProxy.Serialization;
-    using Castle.DynamicProxy.Tests.Classes;
     using Castle.DynamicProxy.Tests.BugsReported;
+    using Castle.DynamicProxy.Tests.Classes;
     using Castle.DynamicProxy.Tests.InterClasses;
     using Castle.DynamicProxy.Tests.Serialization;
-
     using NUnit.Framework;
 
     [TestFixture]

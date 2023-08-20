@@ -4,8 +4,8 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Xml;
     using System.Security;
+    using System.Xml;
 
     class JsonEnumDataContract : JsonDataContract
     {

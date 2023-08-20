@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net.Test.Common;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 

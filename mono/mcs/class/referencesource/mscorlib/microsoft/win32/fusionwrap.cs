@@ -11,11 +11,11 @@
 namespace Microsoft.Win32
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     using System.Globalization;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using StringBuilder = System.Text.StringBuilder;
 
     //-------------------------------------------------------------

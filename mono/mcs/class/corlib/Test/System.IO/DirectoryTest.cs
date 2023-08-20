@@ -16,11 +16,11 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
-
+using NUnit.Framework;
 #if !MOBILE
 using Mono.Unix;
 #endif
-using NUnit.Framework;
+
 
 namespace MonoTests.System.IO
 {

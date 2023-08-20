@@ -11,12 +11,9 @@ using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Globalization;
-
 using Microsoft.VisualBasic;
-
-using NUnit.Framework;
-
 using MonoTests.System.CodeDom.Compiler;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.VisualBasic
 {

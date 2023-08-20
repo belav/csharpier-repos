@@ -12,7 +12,6 @@
 
 using System;
 using System.Globalization;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else

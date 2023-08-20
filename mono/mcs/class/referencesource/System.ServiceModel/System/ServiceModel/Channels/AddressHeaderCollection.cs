@@ -4,17 +4,17 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Security;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.ServiceModel.Security;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
 
     public sealed class AddressHeaderCollection : ReadOnlyCollection<AddressHeader>
     {

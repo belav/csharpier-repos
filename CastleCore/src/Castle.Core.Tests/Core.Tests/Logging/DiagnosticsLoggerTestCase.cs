@@ -18,7 +18,6 @@ namespace Castle.Core.Logging.Tests
     using System.Diagnostics;
     using System.Security;
     using System.Security.Principal;
-
     using NUnit.Framework;
 
     [TestFixture]

@@ -10,7 +10,6 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom

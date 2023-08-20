@@ -5,14 +5,14 @@ namespace System.Workflow.ComponentModel
     #region Imports
 
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
+    using System.Diagnostics;
     using System.IO;
+    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
     #endregion
 

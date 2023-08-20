@@ -4,13 +4,13 @@
 
 namespace System.IdentityModel.Tokens
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.IdentityModel;
     using System.IdentityModel.Security;
     using System.IdentityModel.Selectors;
     using System.Runtime;
     using System.Xml;
-    using System.Collections;
 
     /// <summary>
     /// Abstract class for SecurityKeyIdentifierClause Serializer.

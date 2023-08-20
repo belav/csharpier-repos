@@ -3,9 +3,9 @@
 //array<T> IList properties
 
 using System;
+using System.Collections;
 using System.IO;
 using System.Reflection;
-using System.Collections;
 
 public class GenClass<T>
 {

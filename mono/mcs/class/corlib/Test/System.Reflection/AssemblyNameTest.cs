@@ -8,20 +8,20 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Configuration.Assemblies;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-#if !MOBILE
-using System.Reflection.Emit;
-#endif
 using System.Runtime.Serialization;
-using System.Threading;
-using System.Globalization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Permissions;
+using System.Threading;
+using NUnit.Framework;
+#if !MOBILE
+using System.Reflection.Emit;
+#endif
 
 namespace MonoTests.System.Reflection
 {

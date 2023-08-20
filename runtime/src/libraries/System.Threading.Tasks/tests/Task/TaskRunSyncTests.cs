@@ -9,14 +9,14 @@
 // Test class using UnitTestDriver that ensures that the Runsynchronously method works as excepted
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-using Xunit;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests
 {

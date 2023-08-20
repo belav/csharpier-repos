@@ -6,7 +6,6 @@
 
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-
 #if CODE_STYLE
 using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
 using FormatterState = Microsoft.CodeAnalysis.Formatting.ISyntaxFormattingService;

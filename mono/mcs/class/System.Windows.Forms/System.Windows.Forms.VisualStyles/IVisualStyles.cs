@@ -27,8 +27,8 @@
 //	George Giolfan (georgegiolfan@yahoo.com)
 //
 
-using HRESULT = System.Int32;
 using System.Drawing;
+using HRESULT = System.Int32;
 
 namespace System.Windows.Forms.VisualStyles
 {

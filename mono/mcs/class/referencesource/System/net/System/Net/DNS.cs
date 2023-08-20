@@ -7,15 +7,15 @@
 
 namespace System.Net
 {
-    using System.Text;
     using System.Collections;
+    using System.Globalization;
+    using System.Net.NetworkInformation;
     using System.Net.Sockets;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Globalization;
-    using System.Net.NetworkInformation;
 
     /// <devdoc>
     ///    <para>Provides simple

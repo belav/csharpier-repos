@@ -5,17 +5,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using System.Runtime;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-
-using Internal.Runtime.Augments;
-using Internal.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Threading;
 using Internal.NativeFormat;
-using Internal.TypeSystem;
+using Internal.Runtime.Augments;
 using Internal.Runtime.CallConverter;
-
+using Internal.Runtime.CompilerServices;
+using Internal.TypeSystem;
 using ThunkKind = Internal.Runtime.TypeLoader.CallConverterThunk.ThunkKind;
 
 namespace Internal.Runtime.TypeLoader

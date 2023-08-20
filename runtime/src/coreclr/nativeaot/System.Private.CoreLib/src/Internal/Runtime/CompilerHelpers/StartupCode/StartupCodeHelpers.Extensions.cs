@@ -4,9 +4,7 @@
 using System;
 using System.Runtime.Versioning;
 using System.Threading;
-
 using Internal.Runtime.Augments;
-
 using Debug = Internal.Runtime.CompilerHelpers.StartupDebug;
 
 namespace Internal.Runtime.CompilerHelpers

@@ -1,12 +1,12 @@
 // <copyright file="SafeRegistryHandle.cs" company="Microsoft">
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
-using System.Security;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Security;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Runtime.Caching
 {

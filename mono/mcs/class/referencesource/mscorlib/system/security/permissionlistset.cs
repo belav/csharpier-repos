@@ -17,15 +17,15 @@
 
 namespace System.Security
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal sealed class PermissionListSet

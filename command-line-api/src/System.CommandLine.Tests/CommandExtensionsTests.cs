@@ -4,10 +4,10 @@
 using System.Collections.Generic;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
+using System.CommandLine.Tests.Utility;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using System.CommandLine.Tests.Utility;
 using Xunit.Abstractions;
 
 namespace System.CommandLine.Tests

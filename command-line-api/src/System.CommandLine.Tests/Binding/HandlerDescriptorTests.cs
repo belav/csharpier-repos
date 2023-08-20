@@ -4,8 +4,8 @@
 using System.CommandLine.Binding;
 using System.CommandLine.Tests.Utility;
 using System.IO;
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests.Binding

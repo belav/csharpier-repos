@@ -1,10 +1,11 @@
 ﻿namespace System.Web.UI.WebControls
 {
-    using System.Web.UI.WebControls.Expressions;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Security.Permissions;
@@ -12,8 +13,7 @@
     using System.Web.Resources;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Diagnostics.CodeAnalysis;
-    using System.ComponentModel;
+    using System.Web.UI.WebControls.Expressions;
 
     public abstract class QueryableDataSourceView : DataSourceView, IStateManager
     {

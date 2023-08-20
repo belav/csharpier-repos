@@ -4,17 +4,17 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
+    using System.EnterpriseServices;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
-    using System.Transactions;
-    using System.ServiceModel.Transactions;
     using System.ServiceModel.Diagnostics;
-    using System.EnterpriseServices;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Transactions;
+    using System.Transactions;
 
     static class MessageUtil
     {

@@ -3,13 +3,12 @@
 
 using System;
 using System.Buffers.Binary;
-using Internal.IL.Stubs;
+using System.Reflection.Metadata;
 using Internal.IL;
-
+using Internal.IL.Stubs;
+using Internal.TypeSystem.Ecma;
 using Debug = System.Diagnostics.Debug;
 using ILLocalVariable = Internal.IL.Stubs.ILLocalVariable;
-using Internal.TypeSystem.Ecma;
-using System.Reflection.Metadata;
 
 namespace Internal.TypeSystem.Interop
 {

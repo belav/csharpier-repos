@@ -11,15 +11,16 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using NUnit.Framework;
 #if !MOBILE && !XAMMAC_4_5
 using System.Drawing.Design;
 #endif
-using NUnit.Framework;
+
+using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
 namespace MonoTests.System.ComponentModel
 {

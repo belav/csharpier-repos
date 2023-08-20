@@ -6,10 +6,10 @@ namespace System.ServiceModel.Syndication
 {
     using System.Collections.ObjectModel;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.CompilerServices;
 
     // sealed because the ctor results in a call to the virtual InsertItem method
     [TypeForwardedFrom(

@@ -29,7 +29,6 @@
 namespace Mono.Cecil
 {
     using System;
-
     using Mono.Cecil.Metadata;
     using Mono.Cecil.Signatures;
 

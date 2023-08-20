@@ -3,19 +3,19 @@ namespace System.Workflow.ComponentModel
     #region Imports
 
     using System;
-    using System.Xml;
-    using System.Xml.Serialization;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.CodeDom;
-    using System.Reflection;
+    using System.ComponentModel.Design.Serialization;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.ComponentModel.Design.Serialization;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     #endregion
 

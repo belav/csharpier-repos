@@ -4,7 +4,6 @@
 #pragma warning disable 0618 // use of obsolete methods
 
 using System.Net.Sockets;
-
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 

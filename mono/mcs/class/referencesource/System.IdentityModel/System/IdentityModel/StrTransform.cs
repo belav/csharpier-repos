@@ -4,10 +4,10 @@
 
 namespace System.IdentityModel
 {
-    using System.IO;
-    using System.Security.Cryptography;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Security.Cryptography;
     using System.Text;
     using System.Xml;
 

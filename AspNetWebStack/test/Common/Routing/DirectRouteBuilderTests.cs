@@ -2,14 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using Microsoft.TestCommon;
+using Moq;
 #if ASPNETWEBAPI
 using System.Net.Http;
 using System.Web.Http.Routing.Constraints;
 #else
 using System.Web.Mvc.Routing.Constraints;
 #endif
-using Microsoft.TestCommon;
-using Moq;
 
 #if ASPNETWEBAPI
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;

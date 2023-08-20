@@ -29,12 +29,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.ComponentModel;
 using System.Collections;
-using System.Globalization;
-using System.Text;
+using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+using System.Globalization;
 using System.Reflection;
+using System.Text;
 
 namespace System.Drawing
 {

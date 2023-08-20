@@ -7,8 +7,8 @@ namespace System.Activities.Validation
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime;
     using System.ComponentModel;
+    using System.Runtime;
 
     public sealed class AssertValidation : NativeActivity
     {

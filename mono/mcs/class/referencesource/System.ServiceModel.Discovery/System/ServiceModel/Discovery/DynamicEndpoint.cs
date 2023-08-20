@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Discovery
 {
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.Runtime;
     using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]

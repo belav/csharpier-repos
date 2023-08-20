@@ -6,10 +6,10 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography

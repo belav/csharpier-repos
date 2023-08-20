@@ -25,7 +25,6 @@
 #endregion
 
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator.Implementation;
 

@@ -36,8 +36,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Configuration
 {
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Reflection;
     using System.Runtime.CompilerServices;

@@ -9,7 +9,6 @@ namespace ComWrappersTests
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
     using ComWrappersTests.Common;
     using Xunit;
 

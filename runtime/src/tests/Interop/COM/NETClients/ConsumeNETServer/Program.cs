@@ -7,11 +7,9 @@ namespace NetClient
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
+    using Server.Contract;
     using TestLibrary;
     using Xunit;
-    using Server.Contract;
-
     using CoClass = Server.Contract.Servers;
 
     class Program

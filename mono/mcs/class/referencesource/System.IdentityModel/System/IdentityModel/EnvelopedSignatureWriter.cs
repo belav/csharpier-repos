@@ -10,10 +10,10 @@ namespace System.IdentityModel
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.IO;
+    using System.Runtime;
     using System.Security.Cryptography;
     using System.Text;
     using System.Xml;
-    using System.Runtime;
 
     /// <summary>
     /// Wraps a writer and generates a signature automatically when the envelope

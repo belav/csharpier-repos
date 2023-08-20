@@ -10,8 +10,8 @@ namespace System.Web.UI
     using System.Collections;
     using System.Collections.Specialized;
     using System.IO;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
     using System.Web.Security.Cryptography;
 
     public class HiddenFieldPageStatePersister : PageStatePersister

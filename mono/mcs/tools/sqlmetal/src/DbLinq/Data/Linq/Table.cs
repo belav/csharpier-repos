@@ -25,25 +25,23 @@
 #endregion
 
 using System;
-using System.Data;
-using System.Data.Linq;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Linq;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.ComponentModel;
-
+using System.Reflection;
+using DbLinq;
+using DbLinq.Data.Linq.Implementation;
+using DbLinq.Data.Linq.Sugar;
 #if MONO_STRICT
 using ITable = System.Data.Linq.ITable;
 #else
 using ITable = DbLinq.Data.Linq.ITable;
 #endif
-
-using DbLinq;
-using DbLinq.Data.Linq.Implementation;
-using DbLinq.Data.Linq.Sugar;
 
 #if MONO_STRICT
 namespace System.Data.Linq

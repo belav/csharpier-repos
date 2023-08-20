@@ -6,14 +6,14 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml;
-    using System.Net;
-    using System.IO;
-    using System.Text;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Net;
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
+    using System.Text;
+    using System.Xml;
 
     abstract class ContextProtocol
     {

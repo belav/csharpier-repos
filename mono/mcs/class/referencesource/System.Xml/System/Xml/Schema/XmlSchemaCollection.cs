@@ -8,10 +8,10 @@
 namespace System.Xml.Schema
 {
     using System;
-    using System.Threading;
     using System.Collections;
-    using System.Xml.Schema;
     using System.Runtime.Versioning;
+    using System.Threading;
+    using System.Xml.Schema;
 
     /// <include file='doc\XmlSchemaCollection.uex' path='docs/doc[@for="XmlSchemaCollection"]/*' />
     /// <devdoc>

@@ -9,8 +9,8 @@ namespace System.Web.Util
     using System;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
 
     /*
      * Proxy that provides EventHandler and redirects it to arg-less method on the given object

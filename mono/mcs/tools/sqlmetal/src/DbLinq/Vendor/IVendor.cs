@@ -24,10 +24,10 @@
 //
 #endregion
 
+using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
-using System.Collections.Generic;
-
+using DbLinq.Data.Linq;
 #if MONO_STRICT
 using DataContext = System.Data.Linq.DataContext;
 using System.Data.Linq;
@@ -35,8 +35,8 @@ using System.Data.Linq;
 using DataContext = DbLinq.Data.Linq.DataContext;
 #endif
 
+
 using Data = DbLinq.Data;
-using DbLinq.Data.Linq;
 using IExecuteResult = System.Data.Linq.IExecuteResult;
 
 namespace DbLinq.Vendor

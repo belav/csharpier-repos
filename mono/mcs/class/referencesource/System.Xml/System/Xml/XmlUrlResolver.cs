@@ -5,11 +5,11 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Threading;
-using System.Security.Permissions;
 using System.Net;
 using System.Net.Cache;
 using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Threading;
 
 namespace System.Xml
 {

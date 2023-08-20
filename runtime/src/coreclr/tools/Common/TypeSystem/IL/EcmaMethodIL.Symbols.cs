@@ -4,9 +4,7 @@
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL

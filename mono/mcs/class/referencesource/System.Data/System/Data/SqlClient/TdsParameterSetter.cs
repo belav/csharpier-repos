@@ -13,7 +13,6 @@ namespace System.Data.SqlClient
     using System.Data;
     using System.Data.SqlTypes;
     using System.Diagnostics;
-
     using Microsoft.SqlServer.Server;
 
     // Simple Getter/Setter for structured parameters to allow using common ValueUtilsSmi code.

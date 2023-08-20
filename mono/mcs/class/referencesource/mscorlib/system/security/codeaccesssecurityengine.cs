@@ -9,16 +9,16 @@
 namespace System.Security
 {
     using System;
-    using System.Threading;
-    using System.Security.Util;
     using System.Collections;
-    using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Security.Policy;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Util;
+    using System.Threading;
 
     // Used in DemandInternal, to remember the result of previous demands
     // KEEP IN SYNC WITH DEFINITIONS IN SECURITYPOLICY.H

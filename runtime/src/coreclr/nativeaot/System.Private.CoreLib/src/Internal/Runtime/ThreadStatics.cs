@@ -4,9 +4,7 @@
 using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime.CompilerHelpers;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime

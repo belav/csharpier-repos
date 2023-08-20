@@ -7,9 +7,9 @@
 // (C) 2003-2005 Novell, Inc.  http://www.novell.com
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace MonoTests.System.Globalization
 {

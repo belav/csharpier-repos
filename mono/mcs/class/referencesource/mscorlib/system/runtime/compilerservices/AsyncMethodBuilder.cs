@@ -24,7 +24,6 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
-
 #if FEATURE_COMINTEROP
 using System.Runtime.InteropServices.WindowsRuntime;
 #endif // FEATURE_COMINTEROP

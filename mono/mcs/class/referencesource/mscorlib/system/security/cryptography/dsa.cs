@@ -12,15 +12,15 @@
 
 namespace System.Security.Cryptography
 {
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.Security.Util;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Serialization;
+    using System.Security.Util;
+    using System.Text;
 #if MONO
     using System.Buffers;
 #endif
-    using System.Diagnostics.Contracts;
 
     // DSAParameters is serializable so that one could pass the public parameters
     // across a remote call, but we explicitly make the private key X non-serializable

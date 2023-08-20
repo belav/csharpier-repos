@@ -6,10 +6,10 @@
 // Especially if the struct was casted by 'Unsafe.As` from a promoted type
 // and the promoted type had another field on the same offset but with a different type/size.
 
+using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System;
 
 class TestAssignFieldsBetweenPromotedNotPromotedStructs
 {

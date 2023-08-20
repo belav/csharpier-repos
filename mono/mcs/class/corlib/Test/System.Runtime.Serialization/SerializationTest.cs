@@ -7,20 +7,20 @@
 //
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using NUnit.Framework;
 #if !DISABLE_REMOTING
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Messaging;
 #endif
-using System.Collections;
-using NUnit.Framework;
-using System.Text;
 
 namespace MonoTests.System.Runtime.Serialization
 {

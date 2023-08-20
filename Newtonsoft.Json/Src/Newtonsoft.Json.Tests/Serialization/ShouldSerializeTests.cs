@@ -27,15 +27,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Reflection;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

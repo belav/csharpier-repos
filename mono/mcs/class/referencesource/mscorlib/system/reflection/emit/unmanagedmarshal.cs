@@ -6,8 +6,8 @@
 // <OWNER>Microsoft</OWNER>
 namespace System.Reflection.Emit
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
 
     // This class is describing the fieldmarshal.

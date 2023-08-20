@@ -25,10 +25,11 @@
 
 using System;
 using System.IO;
+using Newtonsoft.Json.Schema;
 #if !(PORTABLE || DNXCORE50) || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Runtime.Serialization.Formatters.Binary;
 #endif
-using Newtonsoft.Json.Schema;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

@@ -5,8 +5,8 @@
 // for a struct which size was rounded to 4-byte.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Runtime_46239
 {

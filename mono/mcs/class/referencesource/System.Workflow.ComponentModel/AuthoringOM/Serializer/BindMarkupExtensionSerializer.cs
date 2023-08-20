@@ -1,14 +1,14 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
-    using System.Text;
-    using System.Diagnostics;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     #region Class BindMarkupExtensionSerializer
     internal class BindMarkupExtensionSerializer : MarkupExtensionSerializer

@@ -3,10 +3,10 @@ namespace System.Collections.Generic
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Security.Permissions;
 #if !SILVERLIGHT
     using System.Runtime.Serialization;
 #endif
-    using System.Security.Permissions;
 
     [System.Runtime.InteropServices.ComVisible(false)]
     [DebuggerTypeProxy(typeof(System_CollectionDebugView<>))]

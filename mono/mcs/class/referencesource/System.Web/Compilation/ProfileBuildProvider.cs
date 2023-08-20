@@ -12,23 +12,23 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Reflection;
-    using System.Text;
-    using System.Globalization;
-    using System.Resources;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Web.Configuration;
-    using System.Web.Util;
-    using System.Web.Caching;
-    using System.Web.UI;
-    using System.Web.Security;
-    using System.Web.Profile;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.Configuration;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Text;
+    using System.Web.Caching;
+    using System.Web.Configuration;
     using System.Web.Hosting;
+    using System.Web.Profile;
+    using System.Web.Security;
+    using System.Web.UI;
+    using System.Web.Util;
 
     internal class ProfileBuildProvider : BuildProvider
     {

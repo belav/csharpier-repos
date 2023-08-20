@@ -3,8 +3,8 @@
 
 using System;
 using System.Diagnostics;
-using System.Threading;
 using System.Runtime;
+using System.Threading;
 
 //This test creates high fragmentation in the large object heap
 //LOH fragmentation: up to 80-90%

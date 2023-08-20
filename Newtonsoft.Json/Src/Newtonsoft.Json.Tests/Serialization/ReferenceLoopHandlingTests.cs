@@ -27,6 +27,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using Newtonsoft.Json.Tests.Linq;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -37,8 +39,6 @@ using NUnit.Framework;
 #if !(NET20 || NET35)
 using System.Dynamic;
 #endif
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Tests.Linq;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {

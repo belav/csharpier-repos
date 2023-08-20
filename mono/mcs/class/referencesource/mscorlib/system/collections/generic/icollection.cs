@@ -17,8 +17,8 @@
 namespace System.Collections.Generic
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     // Base interface for all collections, defining enumerators, size, and
     // synchronization methods.

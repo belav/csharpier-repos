@@ -8,13 +8,13 @@
 namespace System.Xml
 {
     using System;
-    using System.Text;
-    using System.IO;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Xml.Schema;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Text;
+    using System.Xml.Schema;
 
     internal class XmlNodeReaderNavigator
     {

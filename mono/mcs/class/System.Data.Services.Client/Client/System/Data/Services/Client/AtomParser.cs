@@ -20,9 +20,9 @@ namespace System.Data.Services.Client
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
-    using System.Text;
 
     #endregion Namespaces.
 

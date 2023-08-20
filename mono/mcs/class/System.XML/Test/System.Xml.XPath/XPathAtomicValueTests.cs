@@ -33,7 +33,6 @@ using System.Collections;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Xml

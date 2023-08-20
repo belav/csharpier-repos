@@ -10,8 +10,8 @@ namespace System.Net.Mail
     using System.Collections;
     using System.IO;
     using System.Net;
-    using System.Security.Permissions;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
 
     //
 

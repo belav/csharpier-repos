@@ -21,9 +21,7 @@ namespace Castle.DynamicProxy.Tests.BugsReported
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
-
     using Castle.DynamicProxy.Tests;
-
     using NUnit.Framework;
 
     [TestFixture]

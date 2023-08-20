@@ -1,27 +1,31 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Diagnostics.Contracts;
+using System.IO;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using System.Web.Http;
+using Newtonsoft.Json;
 #if !NETFX_CORE
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 #endif
-using System.Diagnostics.Contracts;
-using System.IO;
-using System.Net.Http.Headers;
+
 #if !NETFX_CORE
 using System.Net.Http.Internal;
 using System.Runtime.Serialization.Json;
 #endif
-using System.Text;
-using System.Threading;
+
 #if !NETFX_CORE
 using System.Threading.Tasks;
 #endif
-using System.Web.Http;
+
 #if !NETFX_CORE
 using System.Xml;
 #endif
-using Newtonsoft.Json;
+
 
 namespace System.Net.Http.Formatting
 {

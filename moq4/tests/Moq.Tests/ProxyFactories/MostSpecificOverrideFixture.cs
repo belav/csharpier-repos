@@ -5,9 +5,7 @@
 
 using System;
 using System.Reflection;
-
 using Xunit;
-
 using static Moq.CastleProxyFactory;
 
 namespace Moq.Tests.ProxyFactories

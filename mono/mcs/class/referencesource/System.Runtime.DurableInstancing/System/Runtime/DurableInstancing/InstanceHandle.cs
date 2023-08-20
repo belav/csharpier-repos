@@ -6,10 +6,10 @@ namespace System.Runtime.DurableInstancing
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Diagnostics;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Runtime.Diagnostics;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstanceHandle

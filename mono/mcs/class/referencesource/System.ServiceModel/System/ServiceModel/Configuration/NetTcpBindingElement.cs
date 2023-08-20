@@ -6,12 +6,12 @@ namespace System.ServiceModel.Configuration
 {
     using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
     using System.Net.Security;
     using System.Net.Sockets;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public partial class NetTcpBindingElement : StandardBindingElement
     {

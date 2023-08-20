@@ -3,11 +3,11 @@
 //------------------------------------------------------------------------------
 namespace System.ServiceModel.Activities.Configuration
 {
-    using System.Runtime;
-    using System.Configuration;
     using System.ComponentModel;
-    using System.ServiceModel.Configuration;
+    using System.Configuration;
+    using System.Runtime;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     public sealed class BufferedReceiveElement : BehaviorExtensionElement
     {

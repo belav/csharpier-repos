@@ -2,18 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
+using ILCompiler.DependencyAnalysis;
 using Internal.Text;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis;
-
-using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
 using AssemblyName = System.Reflection.AssemblyName;
-using System.Collections.Generic;
+using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
 
 namespace ILCompiler
 {

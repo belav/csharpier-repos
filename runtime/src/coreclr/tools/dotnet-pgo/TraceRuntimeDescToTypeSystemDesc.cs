@@ -1,19 +1,19 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Diagnostics.Tracing.Etlx;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using System.IO;
+using System.Net;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-using System.Reflection;
-using System.IO;
 using System.Text;
-using System.Net;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
+using Microsoft.Diagnostics.Tracing.Etlx;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {

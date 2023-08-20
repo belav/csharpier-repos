@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
 using System.Data;
 using System.Data.Common;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Data.Linq.Provider;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using System.Security;
@@ -20,9 +20,8 @@ using System.Threading;
 namespace System.Data.Linq.SqlClient
 {
     using System.Data.Linq.SqlClient.Implementation;
-
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
 #if ILGEN || DEBUG
     namespace Implementation
     {

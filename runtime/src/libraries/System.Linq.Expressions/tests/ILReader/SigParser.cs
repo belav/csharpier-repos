@@ -4,10 +4,10 @@
 // Code adapted from https://blogs.msdn.microsoft.com/davbr/2005/10/13/sigparse-cpp
 
 using sig_byte = System.Byte;
-using sig_elem_type = System.Byte;
-using sig_index_type = System.Byte;
-using sig_index = System.Int32;
 using sig_count = System.Int32;
+using sig_elem_type = System.Byte;
+using sig_index = System.Int32;
+using sig_index_type = System.Byte;
 using sig_mem_number = System.Int32;
 
 namespace System.Linq.Expressions.Tests

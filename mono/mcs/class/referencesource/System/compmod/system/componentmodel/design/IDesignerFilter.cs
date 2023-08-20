@@ -8,10 +8,10 @@
  */
 namespace System.ComponentModel.Design
 {
-    using System.Diagnostics;
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Provides access to, and

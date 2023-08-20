@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-
 using DataContractDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
     System.Runtime.Serialization.DataContracts.DataContract

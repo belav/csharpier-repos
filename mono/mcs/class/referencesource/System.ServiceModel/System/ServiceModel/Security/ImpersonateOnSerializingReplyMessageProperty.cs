@@ -11,8 +11,8 @@ namespace System.ServiceModel.Security
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
 
     /// <summary>
     /// The helper class to enable impersonation while serializing the body of the reply message.

@@ -13,8 +13,8 @@
 // (c) 2003 Martin Willemoes Hansen
 // (c) 2004 Ivan Hamilton
 
-using Xunit;
 using System.ComponentModel.Design;
+using Xunit;
 
 namespace System.ComponentModel.Tests
 {

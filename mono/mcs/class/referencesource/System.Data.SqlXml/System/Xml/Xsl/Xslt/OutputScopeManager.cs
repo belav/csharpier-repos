@@ -5,9 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Xml;
-using System.Collections;
 
 namespace System.Xml.Xsl.Xslt
 {

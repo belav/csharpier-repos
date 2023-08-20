@@ -33,7 +33,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.IO

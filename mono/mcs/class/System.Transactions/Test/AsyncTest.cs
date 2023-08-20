@@ -8,9 +8,9 @@
 //
 
 using System;
+using System.Threading;
 using System.Transactions;
 using NUnit.Framework;
-using System.Threading;
 
 namespace MonoTests.System.Transactions
 {

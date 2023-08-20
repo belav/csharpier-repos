@@ -5,10 +5,10 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.IO;
-using System.Xml.Schema;
 using System.Collections;
 using System.Diagnostics;
+using System.IO;
+using System.Xml.Schema;
 using MS.Internal.Xml.Cache;
 
 namespace System.Xml.XPath

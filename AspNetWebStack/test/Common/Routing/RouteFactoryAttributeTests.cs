@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Diagnostics.Contracts;
+using Microsoft.TestCommon;
+using Moq;
 #if ASPNETWEBAPI
 using System.Web.Http.Controllers;
 #endif
-using Microsoft.TestCommon;
-using Moq;
 
 #if ASPNETWEBAPI
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;

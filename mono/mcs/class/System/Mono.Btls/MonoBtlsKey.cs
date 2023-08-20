@@ -26,15 +26,15 @@
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MX = MonoSecurity::Mono.Security.Cryptography;
 #else
 using MX = Mono.Security.Cryptography;
 #endif
 using System;
 using System.IO;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using MX = MonoSecurity::Mono.Security.Cryptography;
 
 namespace Mono.Btls
 {

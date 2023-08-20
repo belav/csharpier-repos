@@ -24,9 +24,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xaml.Schema;
-
+using System.Xml;
 using Pair = System.Collections.Generic.KeyValuePair<System.Xaml.XamlMember, string>;
 
 namespace System.Xaml

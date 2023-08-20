@@ -23,19 +23,17 @@
 #region Used Namespaces
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Collections;
 using System.Globalization;
 using System.Reflection;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 #else
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
-
 using System.Web.UI.DataVisualization.Charting.Data;
 using System.Web.UI.DataVisualization.Charting.ChartTypes;
 #endif

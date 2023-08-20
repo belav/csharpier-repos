@@ -6,18 +6,18 @@ namespace System.Runtime.Diagnostics
 {
     using System;
     using System.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Security;
+    using System.Security.Permissions;
+    using System.ServiceModel.Internals;
     using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
-    using System.ServiceModel.Internals;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
 
     sealed class EtwDiagnosticTrace : DiagnosticTraceBase
     {

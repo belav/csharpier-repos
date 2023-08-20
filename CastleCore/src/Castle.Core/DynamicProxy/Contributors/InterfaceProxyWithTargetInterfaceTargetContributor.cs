@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Contributors
 {
     using System;
-
     using Castle.DynamicProxy.Generators;
 
     internal class InterfaceProxyWithTargetInterfaceTargetContributor

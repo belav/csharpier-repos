@@ -13,7 +13,6 @@
 //
 
 using System;
-
 #if STATIC
 using MetaType = IKVM.Reflection.Type;
 using IKVM.Reflection;

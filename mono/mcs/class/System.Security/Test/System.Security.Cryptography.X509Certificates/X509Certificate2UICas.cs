@@ -29,13 +29,11 @@
 
 
 using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Cryptography.X509Certificates;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates

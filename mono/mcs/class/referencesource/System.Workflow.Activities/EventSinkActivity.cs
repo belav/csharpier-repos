@@ -1,22 +1,22 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Drawing;
-    using System.Drawing.Design;
-    using System.Workflow.Runtime;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.Runtime.Hosting;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime;
+    using System.Workflow.Runtime.Hosting;
 
     [SRDescription(SR.HandleExternalEventActivityDescription)]
     [DefaultEvent("Invoked")]

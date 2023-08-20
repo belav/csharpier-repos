@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
+    using System.Activities.Hosting;
     using System.Activities.Runtime;
     using System.Runtime;
-    using System.Activities.Hosting;
 
     class AsyncOperationContext
     {

@@ -3,9 +3,9 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Net.Security;
     using System.ServiceModel.Channels;
-    using System.ComponentModel;
 
     public sealed class NetNamedPipeSecurity
     {

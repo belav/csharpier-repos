@@ -12,7 +12,6 @@ The code was copied from DateTimeConverter and adapted for DateTimeOffset.
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
     using System.Globalization;
@@ -21,6 +20,7 @@ namespace System.ComponentModel
     using System.Runtime.Remoting;
     using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     /// <para>Provides a type converter to convert <see cref='System.DateTimeOffset'/>

@@ -14,15 +14,15 @@
 ===========================================================*/
 
 using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
+using Microsoft.Win32;
 #if !MONO
 using System.Security.Permissions;
 #endif
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Versioning;
-using Microsoft.Win32;
 
 namespace Microsoft.Win32.SafeHandles
 {

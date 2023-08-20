@@ -4,16 +4,16 @@
 
 namespace System.Activities.Debugger
 {
+    using System.Activities.XamlIntegration;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
     using System.Runtime;
+    using System.Windows.Markup;
     using System.Xaml;
     using System.Xaml.Schema;
-    using System.ComponentModel;
-    using System.Windows.Markup;
-    using System.Activities.XamlIntegration;
 
     public class XamlDebuggerXmlReader : XamlReader, IXamlLineInfo
     {

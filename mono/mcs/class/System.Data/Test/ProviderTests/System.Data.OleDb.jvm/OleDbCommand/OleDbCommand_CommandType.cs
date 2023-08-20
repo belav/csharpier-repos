@@ -24,9 +24,7 @@
 using System;
 using System.Data;
 using System.Data.OleDb;
-
 using MonoTests.System.Data.Utils;
-
 using NUnit.Framework;
 #if DAAB
 using Microsoft.ApplicationBlocks.Data;

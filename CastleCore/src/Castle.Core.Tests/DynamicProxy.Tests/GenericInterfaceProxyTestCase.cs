@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Tests
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-
     using Castle.DynamicProxy.Generators;
     using Castle.DynamicProxy.Tests.GenInterfaces;
     using Castle.DynamicProxy.Tests.Interceptors;

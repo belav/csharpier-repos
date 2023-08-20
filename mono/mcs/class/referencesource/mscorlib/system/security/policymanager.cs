@@ -13,18 +13,18 @@
 namespace System.Security
 {
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Versioning;
-    using System.Security.Util;
-    using System.Security.Policy;
     using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Util;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     internal class PolicyManager
     {

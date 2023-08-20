@@ -5,17 +5,16 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Security.Tokens;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-
-    using System.Xml;
     using System.Runtime.CompilerServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     class SecurityStandardsManager
     {

@@ -10,10 +10,8 @@
 
 using System;
 using System.Text;
-
-using NUnit.Framework;
-
 using Mono.Unix.Native;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix.Native
 {

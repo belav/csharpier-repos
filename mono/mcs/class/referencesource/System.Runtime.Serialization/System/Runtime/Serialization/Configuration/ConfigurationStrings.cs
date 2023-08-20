@@ -5,8 +5,8 @@
 namespace System.Runtime.Serialization.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Globalization;
 

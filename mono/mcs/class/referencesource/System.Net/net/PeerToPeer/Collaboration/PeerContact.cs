@@ -5,20 +5,20 @@
 //------------------------------------------------------------------------------
 namespace System.Net.PeerToPeer.Collaboration
 {
-    using System.Net.Mail;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Runtime.InteropServices;
-    using System.Net.PeerToPeer;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Threading;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Net.Mail;
+    using System.Net.PeerToPeer;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This is the event args class we give back when

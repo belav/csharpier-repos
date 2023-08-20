@@ -25,15 +25,16 @@
 
 using System;
 using System.Collections.Generic;
-#if HAVE_BIG_INTEGER
-using System.Numerics;
-#endif
+using System.Globalization;
+using System.IO;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Utilities;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.IO;
+#if HAVE_BIG_INTEGER
+using System.Numerics;
+#endif
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

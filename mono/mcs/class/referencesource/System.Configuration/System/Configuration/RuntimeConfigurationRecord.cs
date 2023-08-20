@@ -8,17 +8,17 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Configuration.Internal;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
+    using System.Net;
     using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
     using System.Xml;
-    using System.Net;
-    using System.Configuration.Internal;
     using Assembly = System.Reflection.Assembly;
-    using System.Diagnostics.CodeAnalysis;
 
     internal sealed class RuntimeConfigurationRecord : BaseConfigurationRecord
     {

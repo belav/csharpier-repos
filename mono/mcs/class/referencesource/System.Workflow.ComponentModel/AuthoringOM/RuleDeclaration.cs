@@ -2,13 +2,13 @@ namespace System.Workflow.ComponentModel
 {
     using System;
     using System.CodeDom;
-    using System.ComponentModel;
     using System.Collections.Generic;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
+    using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
     using System.Reflection;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //TODO: remove this inheritence, when event binding service line UseMethod and FreeMethod methods are fixed.
     [DesignerSerializer(typeof(WorkflowMarkupSerializer), typeof(WorkflowMarkupSerializer))]

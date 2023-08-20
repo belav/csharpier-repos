@@ -1,18 +1,16 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Internal.Cryptography.Pal.Native;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-
+using Internal.Cryptography.Pal.Native;
+using Microsoft.Win32.SafeHandles;
+using static Interop.Crypt32;
 using NTSTATUS = Interop.BCrypt.NTSTATUS;
 using SafeBCryptKeyHandle = Microsoft.Win32.SafeHandles.SafeBCryptKeyHandle;
-
-using static Interop.Crypt32;
 
 namespace Internal.Cryptography.Pal
 {

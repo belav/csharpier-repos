@@ -8,14 +8,14 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-using System.Data.Entity.Design.PluralizationServices;
-using System.Data.Metadata.Edm;
-using System.IO;
-using System.Data.Entity.Design.SsdlGenerator;
 using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.PluralizationServices;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace System.Data.Entity.Design
 {

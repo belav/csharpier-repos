@@ -9,15 +9,15 @@
 
 using System;
 using System.Data.Common;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32.SafeHandles;
-using System.Diagnostics;
-using System.Security;
-using System.Runtime.Versioning;
 
 namespace System.Data.SqlTypes
 {

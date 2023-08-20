@@ -12,21 +12,21 @@
 extern alias MonoSecurity;
 #endif
 
-#if MONO_SECURITY_ALIAS
-using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;
 #endif
 
 using System;
-using System.IO;
-using SD = System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.IO;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
+#if MONO_SECURITY_ALIAS
+using MonoSecurity::Mono.Security.Interface;
+using SD = System.Diagnostics;
 
 namespace Mono.Net.Security
 {

@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
+    using System.Runtime;
     using System.ServiceModel.Description;
     using System.Workflow.Runtime;
-    using System.Runtime;
 
     class DurableRuntimeValidator
     {

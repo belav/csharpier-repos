@@ -14,9 +14,9 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
-using System.Threading;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 #pragma warning disable 0420
 

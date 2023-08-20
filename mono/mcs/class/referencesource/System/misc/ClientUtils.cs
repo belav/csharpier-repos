@@ -19,11 +19,11 @@ namespace System.Windows.Forms
 #endif
 {
     using System;
-    using System.Reflection;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Collections;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Reflection;
     using System.Security.Permissions;
 
     // Miscellaneous utilities

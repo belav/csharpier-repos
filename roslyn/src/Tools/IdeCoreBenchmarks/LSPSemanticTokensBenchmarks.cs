@@ -6,12 +6,12 @@
 
 using System;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens;
-using System.Threading;
-using System.Linq;
 
 namespace IdeCoreBenchmarks
 {

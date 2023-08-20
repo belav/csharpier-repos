@@ -7,13 +7,13 @@ namespace System.Activities.Debugger
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
     using System.Security;
     using System.Text;
-    using System.IO;
-    using System.Globalization;
 
     // Describes a "state" in the interpretter. A state is any source location that
     // a breakpoint could be set on or that could be stepped to.

@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Runtime;
-    using System.ServiceModel.Routing;
     using System.Collections.Generic;
+    using System.Runtime;
     using System.Security.Principal;
+    using System.ServiceModel.Routing;
     using SR2 = System.ServiceModel.SR;
 
     class SynchronousSendBindingElement : BindingElement

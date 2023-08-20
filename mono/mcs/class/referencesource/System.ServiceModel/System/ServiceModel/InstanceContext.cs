@@ -10,9 +10,9 @@ namespace System.ServiceModel
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.ServiceModel.Diagnostics.Application;
 
     public sealed class InstanceContext : CommunicationObject, IExtensibleObject<InstanceContext>
     {

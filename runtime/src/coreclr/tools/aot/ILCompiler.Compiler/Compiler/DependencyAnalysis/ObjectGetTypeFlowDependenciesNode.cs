@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis

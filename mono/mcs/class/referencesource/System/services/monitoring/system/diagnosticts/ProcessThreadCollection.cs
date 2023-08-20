@@ -6,11 +6,11 @@
 
 namespace System.Diagnostics
 {
-    using System.Collections;
     using System;
-    using System.IO;
+    using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.IO;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

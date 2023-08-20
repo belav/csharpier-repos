@@ -12,12 +12,12 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.Concurrent;
-using System.Linq.Parallel;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Linq.Parallel;
+using System.Text;
 using System.Threading;
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR

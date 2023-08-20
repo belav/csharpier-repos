@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-
 #if MS_IO_REDIST
 using Microsoft.IO.Enumeration;
 

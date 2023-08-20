@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 partial class Program

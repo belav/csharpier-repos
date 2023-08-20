@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.Playwright;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using Microsoft.Playwright;
 
 #nullable enable
 

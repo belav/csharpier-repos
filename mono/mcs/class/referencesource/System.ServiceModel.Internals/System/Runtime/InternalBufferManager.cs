@@ -6,7 +6,6 @@ namespace System.Runtime
     using System;
     using System.Collections.Generic;
     using System.Threading;
-
 #if DEBUG
     using System.Collections.Concurrent;
     using System.Diagnostics;

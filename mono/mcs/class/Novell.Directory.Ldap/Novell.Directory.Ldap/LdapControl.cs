@@ -30,9 +30,9 @@
 //
 
 using System;
-using Novell.Directory.Ldap.Utilclass;
 using Novell.Directory.Ldap.Asn1;
 using Novell.Directory.Ldap.Rfc2251;
+using Novell.Directory.Ldap.Utilclass;
 
 namespace Novell.Directory.Ldap
 {

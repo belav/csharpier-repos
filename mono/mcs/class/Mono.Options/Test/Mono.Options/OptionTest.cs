@@ -27,14 +27,12 @@
 //
 
 using System;
-
+using NUnit.Framework;
 #if NDESK_OPTIONS
 using NDesk.Options;
 #else
 using Mono.Options;
 #endif
-
-using NUnit.Framework;
 
 #if NDESK_OPTIONS
 namespace Tests.NDesk.Options

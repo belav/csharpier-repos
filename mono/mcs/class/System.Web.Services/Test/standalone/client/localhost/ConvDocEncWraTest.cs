@@ -5,10 +5,10 @@ Changes to this file will be lost if the code is regenerated
 
 using System;
 using System.Threading;
-using NUnit.Framework;
 using System.Web.Services.Protocols;
 using System.Xml;
 using ConvDocEncWraTests.Soap;
+using NUnit.Framework;
 
 namespace Localhost.ConvDocEncWraTests
 {

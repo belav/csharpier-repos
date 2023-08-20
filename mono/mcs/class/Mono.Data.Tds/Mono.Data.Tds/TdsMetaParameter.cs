@@ -28,9 +28,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Mono.Data.Tds.Protocol;
 using System;
 using System.Text;
+using Mono.Data.Tds.Protocol;
 
 namespace Mono.Data.Tds
 {

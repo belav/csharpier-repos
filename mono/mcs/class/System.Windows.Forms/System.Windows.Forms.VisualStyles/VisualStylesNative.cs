@@ -27,8 +27,8 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-using System.Drawing;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace System.Windows.Forms.VisualStyles
 {

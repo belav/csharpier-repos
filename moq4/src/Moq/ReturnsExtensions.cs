@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-
 using Moq.Language;
 using Moq.Language.Flow;
 using Moq.Properties;

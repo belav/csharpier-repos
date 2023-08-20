@@ -11,9 +11,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
-
+using System.Text;
 #if STATIC
 using MetaType = IKVM.Reflection.Type;
 using IKVM.Reflection;

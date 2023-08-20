@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
     using System.Configuration;
     using System.Globalization;
     using System.ServiceModel;
+    using System.ServiceModel.Dispatcher;
 
     [ConfigurationCollection(typeof(XPathMessageFilterElement))]
     public sealed class XPathMessageFilterElementCollection

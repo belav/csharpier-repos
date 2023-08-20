@@ -1,19 +1,17 @@
 using System;
-using System.IO;
-using System.Text;
-using System.Xml.Schema;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
-
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Schema;
 #if SILVERLIGHT
 using BufferBuilder = System.Xml.BufferBuilder;
 #else
 using BufferBuilder = System.Text.StringBuilder;
 #endif
-
-using System.Threading.Tasks;
 
 namespace System.Xml
 {

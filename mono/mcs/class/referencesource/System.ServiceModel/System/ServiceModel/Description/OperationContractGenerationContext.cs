@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Collections.Generic;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections.Generic;
     using System.ServiceModel;
 
     public class OperationContractGenerationContext

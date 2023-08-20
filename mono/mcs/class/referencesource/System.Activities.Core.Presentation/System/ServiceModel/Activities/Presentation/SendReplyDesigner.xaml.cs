@@ -5,10 +5,11 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
+    using System.Activities;
     using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation;
-    using System.Activities.Presentation.Model;
     using System.Activities.Presentation.Metadata;
+    using System.Activities.Presentation.Model;
     using System.Activities.Presentation.PropertyEditing;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -16,7 +17,6 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Runtime;
     using System.Windows;
     using System.Windows.Input;
-    using System.Activities;
 
     partial class SendReplyDesigner
     {

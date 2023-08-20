@@ -18,8 +18,6 @@
 
 namespace System
 {
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -36,6 +34,8 @@ namespace System
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     //
     // DateTime uses TimeZoneInfo under the hood for IsDaylightSavingTime, IsAmbiguousTime, and GetUtcOffset.

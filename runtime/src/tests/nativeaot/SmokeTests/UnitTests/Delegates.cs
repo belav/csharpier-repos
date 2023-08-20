@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Pointer = System.Reflection.Pointer;
 
 public class Delegates

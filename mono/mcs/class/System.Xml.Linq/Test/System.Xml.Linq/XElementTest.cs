@@ -34,7 +34,6 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Xml.Linq

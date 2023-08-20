@@ -34,9 +34,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ServiceProcess;
-using TimeoutException = System.ServiceProcess.TimeoutException;
-
 using NUnit.Framework;
+using TimeoutException = System.ServiceProcess.TimeoutException;
 
 namespace MonoTests.System.ServiceProcess
 {

@@ -8,8 +8,8 @@ namespace System.Web.Services
 {
     using System;
     using System.ComponentModel;
-    using System.Web.Services.Protocols;
     using System.Runtime.InteropServices;
+    using System.Web.Services.Protocols;
 
     /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute"]/*' />
     /// <devdoc>

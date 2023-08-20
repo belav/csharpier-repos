@@ -2,16 +2,13 @@
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Linq;
-using CommandHandler = System.CommandLine.NamingConventionBinder.CommandHandler;
-
 using FluentAssertions;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-
 using Xunit;
+using CommandHandler = System.CommandLine.NamingConventionBinder.CommandHandler;
 
 namespace System.CommandLine.Hosting.Tests
 {

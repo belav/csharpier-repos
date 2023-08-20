@@ -1,12 +1,12 @@
 namespace System.Web.Services.Description
 {
-    using System.Web.Services;
-    using System.Web.Services.Protocols;
-    using System.Collections;
     using System;
-    using System.Reflection;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Reflection;
+    using System.Web.Services;
+    using System.Web.Services.Protocols;
     using System.Xml.Serialization;
 
     internal class MimeTextReturn : MimeReturn

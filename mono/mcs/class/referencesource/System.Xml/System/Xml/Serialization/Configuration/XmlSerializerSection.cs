@@ -2,13 +2,13 @@
 namespace System.Xml.Serialization.Configuration
 {
     using System;
-    using System.IO;
-    using System.Web;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Resources;
+    using System.Web;
 
     public sealed class XmlSerializerSection : ConfigurationSection
     {

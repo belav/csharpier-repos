@@ -14,8 +14,8 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
-    using System.Xml.Linq;
     using System.Text;
+    using System.Xml.Linq;
     using SR2 = System.ServiceModel.Activities.SR;
 
     class CorrelationKeyCalculator

@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Mapping.ViewGeneration.QueryRewriting;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

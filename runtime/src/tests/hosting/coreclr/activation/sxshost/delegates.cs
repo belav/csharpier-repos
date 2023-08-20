@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
-using System.Security;
 using System.Runtime.InteropServices;
+using System.Security;
 
 [SecuritySafeCritical]
 public delegate int ManagedDelegate(int level, int stackId, int maxStackHeight);

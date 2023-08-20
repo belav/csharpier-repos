@@ -8,13 +8,12 @@
 #pragma warning disable CS0649
 
 // Polyfill for MemoryMarshal on .NET Standard
+using System.Runtime.InteropServices;
 #if NETSTANDARD && !NETSTANDARD2_1_OR_GREATER
 using MemoryMarshal = Microsoft.Quic.Polyfill.MemoryMarshal;
 #else
 using MemoryMarshal = System.Runtime.InteropServices.MemoryMarshal;
 #endif
-
-using System.Runtime.InteropServices;
 
 namespace Microsoft.Quic
 {

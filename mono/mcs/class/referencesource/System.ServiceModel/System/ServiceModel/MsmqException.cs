@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel
 {
-    using System.Text;
     using System.Globalization;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
     using System.ServiceModel.Channels;
+    using System.Text;
 
     [Serializable]
     public class MsmqException : ExternalException

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.IL;
 
 namespace Internal.TypeSystem.Ecma

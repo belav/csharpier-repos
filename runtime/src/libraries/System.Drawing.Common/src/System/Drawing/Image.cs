@@ -4,16 +4,17 @@
 using System.Buffers;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Imaging;
 using System.Drawing.Internal;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Diagnostics.CodeAnalysis;
 #if NET7_0_OR_GREATER
 using System.Runtime.InteropServices.Marshalling;
 #endif
+
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
 
 namespace System.Drawing

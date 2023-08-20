@@ -4,20 +4,20 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
-    using System.Collections.Generic;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.EnterpriseServices;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
     using System.Transactions;
     using SR = System.ServiceModel.SR;
-    using System.ServiceModel.Diagnostics;
-    using System.Runtime;
 
     // The values of the enum are reflected from the values in the
     // COM+ Admin SDK.

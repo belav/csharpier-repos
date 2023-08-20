@@ -9,10 +9,10 @@
 namespace System.Data.Common
 {
     using System;
-    using System.Xml;
-    using System.Numerics;
-    using System.Data.SqlTypes;
     using System.Collections;
+    using System.Data.SqlTypes;
+    using System.Numerics;
+    using System.Xml;
 
     internal sealed class BigIntegerStorage : DataStorage
     {

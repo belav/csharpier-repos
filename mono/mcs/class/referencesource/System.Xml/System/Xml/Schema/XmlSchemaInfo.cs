@@ -5,8 +5,8 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Xml;
 using System.Collections;
+using System.Xml;
 
 namespace System.Xml.Schema
 {

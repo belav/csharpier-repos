@@ -9,12 +9,12 @@ namespace System.Xml.Schema
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Text;
-    using System.IO;
     using System.Diagnostics;
+    using System.IO;
+    using System.Runtime.Versioning;
+    using System.Text;
     using System.Xml.Schema;
     using System.Xml.XPath;
-    using System.Runtime.Versioning;
 
 #pragma warning disable 618
     internal sealed class XsdValidator : BaseValidator

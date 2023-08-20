@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Contributors
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-
     using Castle.DynamicProxy.Generators;
     using Castle.DynamicProxy.Generators.Emitters;
     using Castle.DynamicProxy.Internal;

@@ -8,9 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
 using ILCompiler.DependencyAnalysis;
-
 using Internal.Text;
 using Internal.TypeSystem;
 

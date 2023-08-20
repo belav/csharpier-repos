@@ -4,19 +4,19 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Xml;
-    using System.Xml.Serialization;
-    using System.ServiceModel.Diagnostics;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.Xml;
     using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     class XmlSerializerOperationFormatter : OperationFormatter
     {

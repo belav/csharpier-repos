@@ -6,8 +6,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Diagnostics.SymbolStore;
+using System.IO;
 
 namespace Microsoft.Cci.Pdb
 {

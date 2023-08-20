@@ -12,8 +12,8 @@
 
 namespace System.Security.Policy
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Security.Util;
 
     [System.Runtime.InteropServices.ComVisible(true)]

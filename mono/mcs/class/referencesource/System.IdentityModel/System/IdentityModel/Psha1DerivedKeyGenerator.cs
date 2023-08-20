@@ -7,8 +7,8 @@ namespace System.IdentityModel
     using System;
     using System.IO;
     using System.Security.Cryptography;
-    using System.Text;
     using System.ServiceModel.Diagnostics;
+    using System.Text;
 
     sealed class Psha1DerivedKeyGenerator
     {

@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.IO;
 using System.Linq;
-using Microsoft.Build.Framework;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
-using System.IO;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Internal
 {

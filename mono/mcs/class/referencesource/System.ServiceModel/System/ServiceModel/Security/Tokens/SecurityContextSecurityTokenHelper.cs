@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Runtime;
+using System.Security.Claims;
 
 namespace System.ServiceModel.Security.Tokens
 {

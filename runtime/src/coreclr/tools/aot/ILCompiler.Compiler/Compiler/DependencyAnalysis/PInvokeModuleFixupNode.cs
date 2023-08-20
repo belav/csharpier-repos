@@ -3,10 +3,8 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using InteropDataConstants = Internal.Runtime.InteropDataConstants;
 

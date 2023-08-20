@@ -48,14 +48,13 @@
 //    data [(astral_index [(cp - 0x10000) >> 8] << 8) + (cp & 0xff)]
 
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Globalization;
-
 // No .Generics mean this program can be compiled and run on v1.1
 // after updating MaxCodePoint and removing Char.ConvertFromUtf32
 // below.
 using System.Collections;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 
 namespace Mono.Globalization.Unicode
 {

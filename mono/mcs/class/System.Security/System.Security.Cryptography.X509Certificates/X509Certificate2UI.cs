@@ -41,7 +41,6 @@
 //
 
 using System.Security.Permissions;
-
 using Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates

@@ -10,15 +10,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Data.EntityModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Text;
-using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Schema;
-using System.IO;
-using System.Data.Common;
-using System.Globalization;
+using System.Xml.Serialization;
 
 namespace System.Data.Metadata.Edm
 {

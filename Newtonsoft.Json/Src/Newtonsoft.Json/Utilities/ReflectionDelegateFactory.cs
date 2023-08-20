@@ -27,7 +27,6 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json.Serialization;
-
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif

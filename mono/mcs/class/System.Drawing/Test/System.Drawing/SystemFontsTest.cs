@@ -30,7 +30,6 @@
 
 using System;
 using System.Drawing;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing

@@ -7,11 +7,11 @@
 
 namespace System.Xml.Schema
 {
-    using System.IO;
-    using System.Diagnostics;
-    using System.Xml;
-    using System.Text;
     using System.Collections;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
 
 #pragma warning disable 618
 

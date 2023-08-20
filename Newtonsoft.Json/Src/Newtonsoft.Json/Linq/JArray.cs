@@ -26,9 +26,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Utilities;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {

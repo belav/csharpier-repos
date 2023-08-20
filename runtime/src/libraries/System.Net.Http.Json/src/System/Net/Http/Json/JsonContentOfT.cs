@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-#if !NETCOREAPP
-using System.Diagnostics;
-#endif
 using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
+#if !NETCOREAPP
+using System.Diagnostics;
+#endif
 
 namespace System.Net.Http.Json
 {

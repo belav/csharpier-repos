@@ -29,8 +29,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Net.Http.Headers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http.Headers
 {

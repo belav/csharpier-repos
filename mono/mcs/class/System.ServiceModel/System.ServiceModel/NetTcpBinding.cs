@@ -29,10 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Net.Security;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
-using System.ServiceModel.Configuration;
 using System.Text;
 using System.Xml;
 

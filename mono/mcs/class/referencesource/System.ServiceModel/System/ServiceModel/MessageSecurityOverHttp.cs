@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.ComponentModel;
 
     public class MessageSecurityOverHttp
     {

@@ -3,8 +3,8 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.JavaScript;
 
 namespace Sample
 {

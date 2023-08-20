@@ -5,10 +5,10 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Xml.Schema;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Xml;
+    using System.Xml.Schema;
     using SchemaObjectDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         SchemaObjectInfo

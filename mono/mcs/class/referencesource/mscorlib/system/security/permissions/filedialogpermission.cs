@@ -11,15 +11,15 @@
 namespace System.Security.Permissions
 {
     using System;
-    using System.Text;
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Util;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Collections;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Text;
 
     [Serializable]
     [Flags]

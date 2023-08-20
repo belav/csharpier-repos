@@ -8,13 +8,12 @@
 namespace Mono.Data.Sqlite
 {
     using System;
+    using System.Collections;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
-    using System.ComponentModel;
-    using System.Collections;
     using System.Globalization;
     using System.Reflection;
-
 #if !PLATFORM_COMPACTFRAMEWORK
     using System.ComponentModel.Design;
 

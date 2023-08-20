@@ -6,11 +6,11 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.ServiceModel;
+    using System.Text;
+    using System.Workflow.ComponentModel.Design;
 
     // <summary>
     // Helper class for visuaulizing the highlighted activity group

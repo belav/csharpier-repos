@@ -19,9 +19,7 @@ namespace Castle
     using System;
     using System.IO;
     using System.Reflection;
-
     using NUnit.Framework;
-
     using PublicApiGenerator;
 
     /// <summary>

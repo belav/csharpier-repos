@@ -5,13 +5,13 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Text;
     using System.Globalization;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
+    using System.Text;
 
     public abstract class SecurityTokenParameters
     {

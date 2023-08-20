@@ -5,8 +5,8 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.HPack;
 using System.Net.Http.Headers;
+using System.Net.Http.HPack;
 using System.Text;
 using Xunit;
 

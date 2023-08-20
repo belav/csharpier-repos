@@ -1,9 +1,9 @@
 namespace System.Net.Mail
 {
     using System;
+    using System.Collections;
     using System.IO;
     using System.Text;
-    using System.Collections;
 
     //Streams created are read only and return 0 once a full server reply has been read
     //To get the next server reply, call GetNextReplyReader

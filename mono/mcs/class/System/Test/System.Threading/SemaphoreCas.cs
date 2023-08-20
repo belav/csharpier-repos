@@ -27,15 +27,13 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-
 using MonoTests.System.Threading;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Threading
 {

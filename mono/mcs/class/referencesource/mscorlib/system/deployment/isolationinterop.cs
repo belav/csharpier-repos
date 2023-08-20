@@ -3,7 +3,6 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
-
 using CMS = System.Deployment.Internal.Isolation.Manifest;
 
 namespace System.Deployment.Internal.Isolation

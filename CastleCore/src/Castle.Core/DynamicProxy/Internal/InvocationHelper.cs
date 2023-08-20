@@ -19,7 +19,6 @@ namespace Castle.DynamicProxy.Internal
     using System.Diagnostics;
     using System.Reflection;
     using System.Threading;
-
     using Castle.Core.Internal;
     using Castle.DynamicProxy.Generators;
 

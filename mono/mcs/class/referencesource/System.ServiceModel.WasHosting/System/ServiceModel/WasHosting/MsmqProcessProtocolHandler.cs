@@ -7,8 +7,8 @@ namespace System.ServiceModel.WasHosting
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.InteropServices;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
     using System.Web.Hosting;
 
     [SuppressMessage(

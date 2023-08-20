@@ -7,14 +7,14 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Remoting.Messaging;
+    using System.Security;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Remoting.Messaging;
     using System.ServiceModel.Dispatcher;
-    using System.Security;
+    using System.Threading;
 
     public abstract class ClientBase<TChannel> : ICommunicationObject, IDisposable
         where TChannel : class

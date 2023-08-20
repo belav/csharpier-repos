@@ -15,17 +15,17 @@
 ===========================================================*/
 namespace System.Runtime.Remoting.Messaging
 {
+    /* Assembly Access */
+    using System;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Channels;
     using System.Runtime.Remoting.Metadata;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Security.Principal;
-    /* Assembly Access */
-    using System;
-    using System.Globalization;
     using System.Threading;
 
     [Serializable]

@@ -33,9 +33,7 @@ using System.Collections;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-
 using Mono.Messaging;
-
 using RabbitMQ.Client;
 
 namespace Mono.Messaging.RabbitMQ

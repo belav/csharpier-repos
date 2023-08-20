@@ -134,7 +134,6 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
-
 #if LINQ
 using System.Linq;
 #endif

@@ -27,9 +27,7 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.Lattices;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.CodeContracts

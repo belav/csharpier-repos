@@ -11,8 +11,8 @@
 // 6) the threshold can be set by registry key DoubleArrayToLargeObjectHeap
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class DblArray

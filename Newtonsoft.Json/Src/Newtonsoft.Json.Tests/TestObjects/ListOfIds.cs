@@ -25,8 +25,8 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Utilities;
 using System.Reflection;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {

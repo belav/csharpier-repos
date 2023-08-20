@@ -8,12 +8,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using System.Linq.Expressions;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.DataSetExtensions;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Xml;
 
 namespace System.Data
 {

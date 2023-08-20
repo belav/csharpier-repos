@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
 
 using static System.WeakReferenceHandleTags;

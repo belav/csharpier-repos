@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    using System.Xml;
-    using System.Runtime;
     using System.Diagnostics;
+    using System.Runtime;
+    using System.Xml;
 
     /// <summary>
     /// Very basic performance-oriented XmlWriter implementation. No validation/encoding is made.

@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
     using System.Diagnostics;
     using System.Runtime;
     using System.Threading;
+    using System.Xml;
 
     public abstract class BodyWriter
     {

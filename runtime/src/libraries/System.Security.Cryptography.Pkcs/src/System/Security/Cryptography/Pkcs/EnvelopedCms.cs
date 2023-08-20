@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs

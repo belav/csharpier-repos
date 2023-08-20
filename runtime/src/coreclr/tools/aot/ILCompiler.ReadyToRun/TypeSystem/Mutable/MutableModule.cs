@@ -3,15 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
-using System.Diagnostics;
-using System.IO;
-
-using ILCompiler;
 using System.Runtime.CompilerServices;
+using ILCompiler;
 
 namespace Internal.TypeSystem.Ecma
 {

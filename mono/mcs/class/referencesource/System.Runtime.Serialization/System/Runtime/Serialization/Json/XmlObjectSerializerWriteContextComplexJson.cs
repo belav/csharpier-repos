@@ -1,12 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Reflection;
 #if !MONO
 using System.ServiceModel;
 #endif
-using System.Collections;
 
 namespace System.Runtime.Serialization.Json
 {

@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
 
     public class FaultContractInfo
     {

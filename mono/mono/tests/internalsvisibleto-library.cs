@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-
 #if SIGN2048
 using System.Reflection;
 

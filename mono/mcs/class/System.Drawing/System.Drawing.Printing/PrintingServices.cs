@@ -25,11 +25,11 @@
 //	Jordi Mas i Hernandez, jordimash@gmail.com
 //
 
-using System.Runtime.InteropServices;
 using System.Collections;
-using System.Drawing.Printing;
 using System.ComponentModel;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
+using System.Runtime.InteropServices;
 
 namespace System.Drawing.Printing
 {

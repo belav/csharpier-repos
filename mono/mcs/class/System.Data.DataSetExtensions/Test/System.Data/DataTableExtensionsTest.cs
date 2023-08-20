@@ -32,9 +32,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {

@@ -1,8 +1,8 @@
 // Compiler options: -warnaserror
 
 using System;
-using System.Reflection;
 using System.ComponentModel;
+using System.Reflection;
 
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyTitle("")]

@@ -13,12 +13,11 @@
 //
 
 using System;
-using SLE = System.Linq.Expressions;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else
 using System.Reflection.Emit;
+using SLE = System.Linq.Expressions;
 #endif
 namespace Mono.CSharp.Nullable
 {

@@ -5,36 +5,35 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using System.Threading;
-    using System.Xml;
-    using System.Runtime;
-    using System.Security.Cryptography;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.Security.Cryptography.X509Certificates;
-    using System.ServiceModel.Security.Tokens;
-    using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
+    using System.IO;
+    using System.Runtime;
     using System.Runtime.Serialization;
-
-    using KeyIdentifierEntry = WSSecurityTokenSerializer.KeyIdentifierEntry;
+    using System.Security.Cryptography;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
+    using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
     using KeyIdentifierClauseEntry = WSSecurityTokenSerializer.KeyIdentifierClauseEntry;
-    using TokenEntry = WSSecurityTokenSerializer.TokenEntry;
-    using StrEntry = WSSecurityTokenSerializer.StrEntry;
+    using KeyIdentifierEntry = WSSecurityTokenSerializer.KeyIdentifierEntry;
     using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
+    using StrEntry = WSSecurityTokenSerializer.StrEntry;
+    using TokenEntry = WSSecurityTokenSerializer.TokenEntry;
 
     abstract class WSTrust : WSSecurityTokenSerializer.SerializerEntries
     {

@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler

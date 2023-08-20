@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Shared.Extensions;
-
 using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
 
 namespace Microsoft.CodeAnalysis.CodeStyle

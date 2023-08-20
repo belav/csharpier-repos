@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.Security.Principal;
+    using System.ServiceModel;
 
     class WindowsSidIdentity : IIdentity
     {

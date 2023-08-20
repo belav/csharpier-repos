@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.IO;
-
 using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System.Xml.Linq

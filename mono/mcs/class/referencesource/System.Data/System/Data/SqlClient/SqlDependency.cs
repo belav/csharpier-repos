@@ -20,19 +20,19 @@ namespace System.Data.SqlClient
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Net;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Text;
     using System.Threading;
-    using System.Net;
     using System.Xml;
-    using System.Runtime.Versioning;
 
     public sealed class SqlDependency
     {

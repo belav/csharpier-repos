@@ -30,28 +30,28 @@
 extern alias MonoSecurity;
 #endif
 
-#if MONO_SECURITY_ALIAS
-using MonoSecurity::Mono.Security.Interface;
-#else
-using Mono.Security.Interface;
-#endif
-
-using CipherAlgorithmType = System.Security.Authentication.CipherAlgorithmType;
-using HashAlgorithmType = System.Security.Authentication.HashAlgorithmType;
-using ExchangeAlgorithmType = System.Security.Authentication.ExchangeAlgorithmType;
 #endif
 
 using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Security.Authentication;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Security.Principal;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
+#if MONO_SECURITY_ALIAS
+using MonoSecurity::Mono.Security.Interface;
+#else
+using Mono.Security.Interface;
+#endif
 
+
+using CipherAlgorithmType = System.Security.Authentication.CipherAlgorithmType;
+using ExchangeAlgorithmType = System.Security.Authentication.ExchangeAlgorithmType;
+using HashAlgorithmType = System.Security.Authentication.HashAlgorithmType;
 using MNS = Mono.Net.Security;
 
 namespace System.Net.Security

@@ -8,11 +8,9 @@
 using System;
 using System.Text;
 using System.Windows.Forms;
-
+using NUnit.Framework;
 using CancelEventArgs = System.ComponentModel.CancelEventArgs;
 using CancelEventHandler = System.ComponentModel.CancelEventHandler;
-
-using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.Collections;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Security.Cryptography;
+    using System.ServiceModel;
     using System.Text;
     using System.Xml;
 

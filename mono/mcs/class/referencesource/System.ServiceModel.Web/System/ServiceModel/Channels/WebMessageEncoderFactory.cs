@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Channels
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Runtime;
     using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Xml;
-    using System.Diagnostics;
 
     class WebMessageEncoderFactory : MessageEncoderFactory
     {

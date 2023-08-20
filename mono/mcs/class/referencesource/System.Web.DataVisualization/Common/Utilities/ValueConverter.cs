@@ -25,7 +25,6 @@
 
 using System;
 using System.Globalization;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 #else

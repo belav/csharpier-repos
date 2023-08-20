@@ -31,7 +31,6 @@ namespace Mono.Cecil.Cil
     using System;
     using System.Collections;
     using System.IO;
-
     using Mono.Cecil;
     using Mono.Cecil.Metadata;
     using Mono.Cecil.Signatures;

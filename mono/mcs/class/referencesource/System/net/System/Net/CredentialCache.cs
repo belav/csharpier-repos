@@ -6,11 +6,11 @@
 
 namespace System.Net
 {
-    using System.Net.Sockets;
     using System.Collections;
+    using System.Globalization;
+    using System.Net.Sockets;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
-    using System.Globalization;
 
     // More sophisticated password cache that stores multiple
     // name-password pairs and associates these with host/realm

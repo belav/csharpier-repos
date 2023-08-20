@@ -29,23 +29,25 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
-using Newtonsoft.Json.Schema;
-#if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System.Numerics;
-#endif
 using System.Runtime.Serialization;
 using System.Text;
-#if !(NET20 || NET35)
-using System.Threading.Tasks;
-#endif
 using System.Xml;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Tests.Serialization;
 using Newtonsoft.Json.Tests.TestObjects;
 using Newtonsoft.Json.Tests.TestObjects.Organization;
 using Newtonsoft.Json.Utilities;
+#if !(NET20 || NET35 || PORTABLE40 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
+using System.Numerics;
+#endif
+
+#if !(NET20 || NET35)
+using System.Threading.Tasks;
+#endif
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

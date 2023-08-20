@@ -28,8 +28,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Security.Permissions;
 using System.Data.SqlClient;
+using System.Security.Permissions;
 using System.Web;
 
 namespace System.Web.Caching

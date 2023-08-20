@@ -8,12 +8,12 @@ This is meant to contain useful utilities for IO related work
 #define TRACE
 #define DEBUG
 using System;
-using System.IO;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 
 //machine information
 public static class FileSystemDebugInfo

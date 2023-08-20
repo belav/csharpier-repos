@@ -19,11 +19,12 @@ namespace Castle.DynamicProxy
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
+    using Castle.DynamicProxy.Internal;
 #if FEATURE_SERIALIZATION
     using System.Runtime.Serialization;
 #endif
 
-    using Castle.DynamicProxy.Internal;
+
 
     /// <summary>
     ///   <see cref="ProxyGenerationOptions"/> allows customization of the behavior of proxies created by

@@ -12,13 +12,13 @@
 
 namespace System.Security.Policy
 {
-    using System.Runtime.Remoting;
     using System;
-    using System.IO;
-    using System.Security.Util;
     using System.Collections;
-    using System.Runtime.Serialization;
     using System.Diagnostics.Contracts;
+    using System.IO;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Security.Util;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -15,7 +15,6 @@
 namespace Castle.Components.DictionaryAdapter.Tests
 {
     using System.Collections.Specialized;
-
     using NUnit.Framework;
 
     [TestFixture]

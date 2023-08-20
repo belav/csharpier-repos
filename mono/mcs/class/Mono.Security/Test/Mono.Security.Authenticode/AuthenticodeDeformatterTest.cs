@@ -31,7 +31,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
-
 using Mono.Security.Authenticode;
 using NUnit.Framework;
 

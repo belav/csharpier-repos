@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Runtime;
 
     [Serializable]
     public class VersionMismatchException : Exception

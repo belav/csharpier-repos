@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Globalization;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
 
     struct ChannelRequirements

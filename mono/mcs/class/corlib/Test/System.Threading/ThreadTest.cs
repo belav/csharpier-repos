@@ -10,15 +10,14 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Collections.Generic;
-using SD = System.Diagnostics;
-
 using NUnit.Framework;
+using SD = System.Diagnostics;
 
 namespace MonoTests.System.Threading
 {

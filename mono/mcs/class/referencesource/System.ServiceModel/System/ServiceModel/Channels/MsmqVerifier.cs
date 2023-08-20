@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Net.Security;
+    using System.Runtime.CompilerServices;
     using System.ServiceModel;
 
     internal static class MsmqVerifier

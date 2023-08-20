@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
-using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.BraceMatching;
+using Microsoft.CodeAnalysis.Editor;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
 {

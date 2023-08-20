@@ -28,7 +28,6 @@ using System.Reflection;
 using System.Xaml;
 using System.Xaml.Schema;
 using NUnit.Framework;
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Xaml

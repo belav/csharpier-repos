@@ -29,18 +29,18 @@
 //
 
 using System.ComponentModel;
+using System.Data.SqlTypes;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Tests;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.IO;
-using System.Data.SqlTypes;
-using System.Globalization;
-using System.Text;
-using System.Diagnostics;
-using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Data.Tests
 {

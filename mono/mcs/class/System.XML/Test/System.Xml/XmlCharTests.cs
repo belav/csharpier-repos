@@ -9,7 +9,6 @@
 //
 using System;
 using System.Xml;
-
 using NUnit.Framework;
 
 // The following is #if'ed out because it's specific to the Mono

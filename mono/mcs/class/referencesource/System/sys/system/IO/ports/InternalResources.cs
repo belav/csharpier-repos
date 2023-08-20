@@ -14,8 +14,8 @@
 using System.IO;
 using System.Security;
 using System.Text;
-using Marshal = System.Runtime.InteropServices.Marshal;
 using Microsoft.Win32;
+using Marshal = System.Runtime.InteropServices.Marshal;
 
 namespace System.IO.Ports
 {

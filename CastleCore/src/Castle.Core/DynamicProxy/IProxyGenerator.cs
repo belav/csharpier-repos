@@ -16,7 +16,6 @@ namespace Castle.DynamicProxy
 {
     using System;
     using System.Reflection;
-
     using Castle.Core.Logging;
 
     /// <summary>

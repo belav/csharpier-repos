@@ -31,7 +31,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-
 using NUnit.Framework;
 
 namespace MonoCasTests.System.Runtime.InteropServices

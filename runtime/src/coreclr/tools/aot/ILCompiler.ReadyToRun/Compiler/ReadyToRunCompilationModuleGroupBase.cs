@@ -10,11 +10,11 @@ using System.Threading;
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysis.ReadyToRun;
 using Internal.IL;
+using Internal.ReadyToRunConstants;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
 using Debug = System.Diagnostics.Debug;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler
 {

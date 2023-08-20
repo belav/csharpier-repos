@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime;
 
 // Disable: Filter expression is a constant. We know. We just can't do an unfiltered catch.

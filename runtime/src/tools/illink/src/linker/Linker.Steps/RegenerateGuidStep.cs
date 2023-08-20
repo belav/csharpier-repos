@@ -30,7 +30,6 @@
 //
 
 using System;
-
 using Mono.Cecil;
 
 namespace Mono.Linker.Steps

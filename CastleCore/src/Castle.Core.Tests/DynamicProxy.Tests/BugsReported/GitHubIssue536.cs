@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Tests.BugsReported
     using System;
     using System.Reflection;
     using System.Threading.Tasks;
-
     using NUnit.Framework;
 
     [TestFixture]

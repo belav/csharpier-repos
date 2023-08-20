@@ -24,15 +24,20 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-#if !(NET20 || NET35 || PORTABLE)
-using System.Numerics;
-#endif
+using System.IO;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Tests.TestObjects;
 using Newtonsoft.Json.Tests.TestObjects.Organization;
+using Newtonsoft.Json.Utilities;
+#if !(NET20 || NET35 || PORTABLE)
+using System.Numerics;
+#endif
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -40,9 +45,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Linq;
-using System.IO;
-using System.Collections;
+
 #if !(DNXCORE50)
 using System.Web.UI;
 #endif
@@ -51,7 +54,6 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.Linq
 {

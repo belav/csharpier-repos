@@ -18,11 +18,10 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Reflection;
     using System.Text;
+    using System.Web.UI.Design.MobileControls.Util;
+    using System.Web.UI.MobileControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.Design.MobileControls.Util;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

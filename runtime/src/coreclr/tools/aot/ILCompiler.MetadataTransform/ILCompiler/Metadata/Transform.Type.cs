@@ -4,11 +4,9 @@
 using System;
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
-using Ecma = System.Reflection.Metadata;
 using Cts = Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 using TypeAttributes = System.Reflection.TypeAttributes;
 
 namespace ILCompiler.Metadata

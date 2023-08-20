@@ -7,8 +7,8 @@ namespace System.Runtime.Serialization.Configuration
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
 
     public sealed partial class NetDataContractSerializerSection : ConfigurationSection
     {

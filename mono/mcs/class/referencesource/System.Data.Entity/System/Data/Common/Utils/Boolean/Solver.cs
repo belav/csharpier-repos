@@ -13,8 +13,8 @@ using System.Linq;
 
 namespace System.Data.Common.Utils.Boolean
 {
-    using IfThenElseKey = Triple<Vertex, Vertex, Vertex>;
     using System.Diagnostics;
+    using IfThenElseKey = Triple<Vertex, Vertex, Vertex>;
 
     /// <summary>
     /// Supports construction of canonical Boolean expressions as Reduced Ordered

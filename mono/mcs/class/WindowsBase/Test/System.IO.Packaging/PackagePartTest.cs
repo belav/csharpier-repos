@@ -30,8 +30,8 @@ using System.IO;
 using System.IO.Packaging;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
 using System.Xml;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO.Packaging
 {

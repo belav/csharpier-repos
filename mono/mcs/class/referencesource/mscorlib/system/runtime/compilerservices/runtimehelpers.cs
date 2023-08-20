@@ -14,15 +14,15 @@
 namespace System.Runtime.CompilerServices
 {
     using System;
-    using System.Security;
+    using System.Diagnostics.Contracts;
     using System.Runtime;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     public static class RuntimeHelpers
     {

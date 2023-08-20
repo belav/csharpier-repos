@@ -20,7 +20,6 @@ namespace Castle.Components.DictionaryAdapter.Tests
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-
     using NUnit.Framework;
 
     [TestFixture]

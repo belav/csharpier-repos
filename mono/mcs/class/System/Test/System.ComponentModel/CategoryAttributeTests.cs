@@ -25,8 +25,8 @@
 //
 
 using System;
-using CM = System.ComponentModel;
 using NUnit.Framework;
+using CM = System.ComponentModel;
 
 namespace MonoTests.System.ComponentModel
 {

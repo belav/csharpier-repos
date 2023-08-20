@@ -23,16 +23,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.ComponentModel;
-
 using System.Collections;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Tests;
 using System.Xml;
 using System.Xml.Schema;
-using System.IO;
-using System.Globalization;
+using Xunit;
 
 namespace System.Data.Tests
 {

@@ -9,14 +9,14 @@
 //
 
 using System;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Reflection;
 using System.Collections;
-using NUnit.Framework;
-using System.IO;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

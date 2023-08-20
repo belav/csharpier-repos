@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CoreFXTestLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using TypeOfRepo;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using CoreFXTestLibrary;
+using TypeOfRepo;
 
 public class FieldLayoutTests
 {

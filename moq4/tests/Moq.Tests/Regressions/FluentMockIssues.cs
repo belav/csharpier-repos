@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.Serialization;
-
 using Xunit;
 
 namespace Moq.Tests.Regressions

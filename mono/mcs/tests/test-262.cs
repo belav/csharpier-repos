@@ -5,8 +5,8 @@ namespace n1
 
 namespace n3
 {
-    using n1;
     using System;
+    using n1;
 
     class A
     {

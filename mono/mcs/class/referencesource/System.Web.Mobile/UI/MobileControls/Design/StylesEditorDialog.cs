@@ -12,29 +12,26 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Globalization;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Globalization;
     using System.Reflection;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
     using System.Web.UI;
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Util;
-
+    using System.Web.UI.MobileControls;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using AttributeCollection = System.ComponentModel.AttributeCollection;
-    using Control = System.Windows.Forms.Control;
-
     using Button = System.Windows.Forms.Button;
-    using Label = System.Windows.Forms.Label;
-    using TextBox = System.Windows.Forms.TextBox;
-    using ListView = System.Windows.Forms.ListView;
-    using ListBox = System.Windows.Forms.ListBox;
-
+    using Control = System.Windows.Forms.Control;
     using FontSize = System.Web.UI.MobileControls.FontSize;
+    using Label = System.Windows.Forms.Label;
+    using ListBox = System.Windows.Forms.ListBox;
+    using ListView = System.Windows.Forms.ListView;
     using Style = System.Web.UI.MobileControls.Style;
+    using TextBox = System.Windows.Forms.TextBox;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

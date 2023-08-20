@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.ComponentModel;
 
     public sealed class WebHttpSecurity
     {

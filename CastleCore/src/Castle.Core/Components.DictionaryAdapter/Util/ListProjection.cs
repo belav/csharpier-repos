@@ -20,7 +20,6 @@ namespace Castle.Components.DictionaryAdapter
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Reflection;
-
     using SysPropertyDescriptor = System.ComponentModel.PropertyDescriptor;
 
     [DebuggerDisplay("Count = {Count}, Adapter = {Adapter}")]

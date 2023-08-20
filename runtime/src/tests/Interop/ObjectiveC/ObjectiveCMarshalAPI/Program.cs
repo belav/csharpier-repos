@@ -10,7 +10,6 @@ namespace ObjectiveCMarshalAPI
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ObjectiveC;
-
     using Xunit;
 
     class NativeObjCMarshalTests

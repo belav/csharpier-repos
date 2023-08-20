@@ -14,7 +14,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.X509Certificates.Asn1;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
-
 using X509VerifyStatusCodeUniversal = Interop.Crypto.X509VerifyStatusCodeUniversal;
 
 namespace Internal.Cryptography.Pal

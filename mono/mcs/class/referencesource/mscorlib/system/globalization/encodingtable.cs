@@ -6,15 +6,15 @@
 namespace System.Globalization
 {
     using System;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
+    using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     //
     // Data table for encoding classes.  Used by System.Text.Encoding.

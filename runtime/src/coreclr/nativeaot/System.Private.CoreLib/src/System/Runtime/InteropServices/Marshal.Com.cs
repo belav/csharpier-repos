@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Versioning;
-
 using Internal.Reflection.Augments;
 
 namespace System.Runtime.InteropServices

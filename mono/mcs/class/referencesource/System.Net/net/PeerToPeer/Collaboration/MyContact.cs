@@ -7,13 +7,13 @@
 namespace System.Net.PeerToPeer.Collaboration
 {
     using System;
-    using System.Net.Mail;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Net.Mail;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Threading;
 
     /// <summary>
     /// This class handles events specific to my contact in windows collaboration and

@@ -7,8 +7,8 @@
 
 namespace System.Xml
 {
-    using System.Xml.Schema;
     using System.Diagnostics;
+    using System.Xml.Schema;
 
     // Contains information associated with the document type declaration.
     public class XmlDocumentType : XmlLinkedNode

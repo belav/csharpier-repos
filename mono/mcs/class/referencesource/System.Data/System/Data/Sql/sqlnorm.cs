@@ -18,15 +18,15 @@
 
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Data;
-using System.IO;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
-using System.Runtime.CompilerServices;
 
 namespace Microsoft.SqlServer.Server
 {

@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-
 using Xunit;
 
 namespace System.Net.Sockets.Tests

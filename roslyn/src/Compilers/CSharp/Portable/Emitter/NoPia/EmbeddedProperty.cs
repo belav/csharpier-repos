@@ -7,10 +7,9 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Cci = Microsoft.Cci;
-
 #if !DEBUG
 using PropertySymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.PropertySymbol;
+using Cci = Microsoft.Cci;
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

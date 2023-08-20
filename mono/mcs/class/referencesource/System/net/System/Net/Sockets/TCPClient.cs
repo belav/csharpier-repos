@@ -7,9 +7,9 @@
 
 namespace System.Net.Sockets
 {
+    using System.Security.Permissions;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Security.Permissions;
 
     /// <devdoc>
     /// <para>The <see cref='System.Net.Sockets.TcpClient'/> class provide TCP services at a higher level

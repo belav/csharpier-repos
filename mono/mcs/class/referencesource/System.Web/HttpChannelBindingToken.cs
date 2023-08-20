@@ -12,8 +12,8 @@
 
 namespace System.Web
 {
-    using System.Security.Permissions;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
 
     internal sealed class HttpChannelBindingToken : ChannelBinding
     {

@@ -17,8 +17,8 @@ generic interfaces:
 
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 public struct MyClassICollection : ICollection<MyClassICollection>
 {

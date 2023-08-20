@@ -4,8 +4,8 @@
 namespace System.ServiceModel
 {
     using System.Runtime.Serialization;
-    using System.Xml;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     public sealed class EnvelopeVersion
     {

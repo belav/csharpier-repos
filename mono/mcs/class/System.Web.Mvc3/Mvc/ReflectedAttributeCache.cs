@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Diagnostics;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Reflection;
 
     internal static class ReflectedAttributeCache
     {

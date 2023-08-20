@@ -15,8 +15,8 @@
 namespace Castle.Components.DictionaryAdapter.Xml
 {
     using System;
-    using System.Xml.XPath;
     using System.Xml;
+    using System.Xml.XPath;
 
     public class SysXmlCursor : SysXmlNode, IXmlCursor
     {

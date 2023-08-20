@@ -18,8 +18,8 @@ In C.cctor: thread T2: D.i 8
 */
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public class A
 {

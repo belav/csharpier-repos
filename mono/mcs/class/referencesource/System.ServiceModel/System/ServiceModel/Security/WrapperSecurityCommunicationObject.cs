@@ -3,11 +3,11 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Diagnostics;
     using System.IdentityModel.Selectors;
     using System.Runtime.Diagnostics;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
 
     class WrapperSecurityCommunicationObject : CommunicationObject
     {

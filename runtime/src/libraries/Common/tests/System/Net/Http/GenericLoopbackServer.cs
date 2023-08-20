@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Net.WebSockets;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Net.Test.Common
 {

@@ -21,9 +21,9 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Reflection;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
     using System.Threading;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Metadata;

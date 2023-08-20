@@ -4,8 +4,8 @@
 
 using System;
 using System.Composition;
-using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.ErrorReporting;
+using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Telemetry;
 using Xunit;

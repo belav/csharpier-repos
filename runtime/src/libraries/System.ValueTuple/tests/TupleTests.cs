@@ -4,8 +4,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Xunit;
 using System.Runtime.CompilerServices;
+using Xunit;
 
 namespace System.Tests
 {

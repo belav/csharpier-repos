@@ -14,16 +14,13 @@
 namespace System.Runtime
 {
     using System;
-
     using System.Reflection;
-
-    using System.Security;
-    using System.Security.Permissions;
-
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
+    using System.Security;
+    using System.Security.Permissions;
 
 #if FEATURE_MULTICOREJIT || MONO
 

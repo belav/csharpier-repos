@@ -1,7 +1,7 @@
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using System.IO;
 
 // The XmlRootAttribute allows you to set an alterate name
 // (PurchaseOrder) for the XML element and its namespace. By

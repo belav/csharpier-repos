@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
-
 using static Microsoft.CodeAnalysis.CommandLine.CompilerServerLogger;
 
 namespace Microsoft.CodeAnalysis.CompilerServer

@@ -4,12 +4,12 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Runtime.Serialization;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
     using System.ServiceModel.Transactions;
     using System.Xml;
 

@@ -23,10 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
 using System.Globalization;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Tests.Documentation.Samples.Linq;
-
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

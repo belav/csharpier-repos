@@ -38,7 +38,6 @@ using System.ServiceModel.Description;
 using System.Threading;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 using System.Security.Authentication.ExtendedProtection;
 

@@ -8,9 +8,9 @@
 
 using System;
 using System.Collections;
-using NUnit.Framework;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {

@@ -5,11 +5,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Quic;
-
-using static Microsoft.Quic.MsQuic;
-
 #if TARGET_WINDOWS
 using Microsoft.Win32;
+using static Microsoft.Quic.MsQuic;
 #endif
 
 namespace System.Net.Quic.Implementations.MsQuic.Internal

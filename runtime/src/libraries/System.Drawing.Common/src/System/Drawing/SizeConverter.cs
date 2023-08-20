@@ -3,18 +3,16 @@
 
 namespace System.Drawing
 {
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.InteropServices;
-
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-
-    using Microsoft.Win32;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
+    using Microsoft.Win32;
 
     /// <include file='doc\SizeConverter.uex' path='docs/doc[@for="SizeConverter"]/*' />
     /// <devdoc>

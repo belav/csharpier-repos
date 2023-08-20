@@ -1,9 +1,9 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Windows.Forms;
-    using System.ComponentModel.Design;
 
     #region Class PanningMessageFilter
     /// This behavior needs and stores coordinates in client coordinates

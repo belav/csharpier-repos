@@ -3,9 +3,7 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Moq.Tests.ComTypes;
-
 using Xunit;
 
 namespace Moq.Tests

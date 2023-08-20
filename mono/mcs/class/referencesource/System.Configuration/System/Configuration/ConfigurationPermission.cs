@@ -6,10 +6,10 @@
 
 namespace System.Configuration
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     [Serializable]

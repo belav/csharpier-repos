@@ -2,8 +2,8 @@
 // http://appserver.pepperzak.net/bankcode/BankCodeEJBHome/wsdl.jsp
 
 using System;
-using NUnit.Framework;
 using BankCodeEJBHomeTests.Soap;
+using NUnit.Framework;
 
 namespace External.BankCodeEJBHomeTests
 {

@@ -3,8 +3,8 @@
 // Tests GC.Collect()
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 
 public class Test_GetAllocatedBytesForCurrentThread

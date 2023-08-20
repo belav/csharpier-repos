@@ -8,8 +8,8 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Xml.Schema;
     using System.Reflection;
+    using System.Xml.Schema;
 
     /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute"]/*' />
     /// <devdoc>

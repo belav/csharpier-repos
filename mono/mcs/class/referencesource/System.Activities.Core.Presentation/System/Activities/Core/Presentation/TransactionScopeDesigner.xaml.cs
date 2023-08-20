@@ -6,7 +6,6 @@ namespace System.Activities.Core.Presentation
 {
     using System.Activities.Presentation.Metadata;
     using System.Activities.Statements;
-
     using System.ComponentModel;
 
     partial class TransactionScopeDesigner

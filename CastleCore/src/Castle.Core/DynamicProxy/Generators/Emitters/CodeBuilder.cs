@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Generators.Emitters
     using System;
     using System.Collections.Generic;
     using System.Reflection.Emit;
-
     using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 
     internal sealed class CodeBuilder

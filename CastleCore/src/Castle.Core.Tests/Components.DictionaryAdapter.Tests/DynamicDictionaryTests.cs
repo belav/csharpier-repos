@@ -15,7 +15,6 @@
 namespace Castle.Components.DictionaryAdapter.Tests
 {
     using System.Collections.Generic;
-
     using NUnit.Framework;
 
     public class DynamicDictionaryTests

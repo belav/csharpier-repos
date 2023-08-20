@@ -16,7 +16,6 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
 {
     using System;
     using System.Reflection.Emit;
-
     using Castle.DynamicProxy.Tokens;
 
     internal class TypeTokenExpression : IExpression

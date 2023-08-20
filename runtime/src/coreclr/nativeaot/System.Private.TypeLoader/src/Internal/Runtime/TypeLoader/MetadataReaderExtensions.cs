@@ -3,13 +3,11 @@
 
 
 using global::System;
-using global::System.Reflection;
-using global::System.Collections.Generic;
-
 using global::Internal.Metadata.NativeFormat;
-
-using Debug = System.Diagnostics.Debug;
+using global::System.Collections.Generic;
+using global::System.Reflection;
 using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
+using Debug = System.Diagnostics.Debug;
 
 namespace System.Reflection.Runtime.General
 {

@@ -14,7 +14,6 @@
 using System;
 using System.Collections.Generic;
 using Mono.CompilerServices.SymbolWriter;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else

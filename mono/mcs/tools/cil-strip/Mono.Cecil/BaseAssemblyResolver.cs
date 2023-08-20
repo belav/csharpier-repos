@@ -31,8 +31,8 @@ namespace Mono.Cecil
     using System;
     using System.Collections;
     using System.IO;
-    using SR = System.Reflection;
     using System.Text;
+    using SR = System.Reflection;
 
     internal abstract class BaseAssemblyResolver : IAssemblyResolver
     {

@@ -9,16 +9,14 @@
 // Copyright (C) 2006 Novell, Inc.
 //
 
-using NUnit.Framework;
-
 using System;
+using System.Collections;
 using System.IO;
 using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Collections;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Description
 {

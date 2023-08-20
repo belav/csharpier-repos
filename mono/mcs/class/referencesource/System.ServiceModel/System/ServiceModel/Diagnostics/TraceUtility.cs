@@ -3,21 +3,21 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel.Diagnostics
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.Diagnostics;
+    using System.Security;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Security;
-    using System.ServiceModel.Configuration;
-    using System.ServiceModel.Activation;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Globalization;
-    using System.Collections.Generic;
 
     static class TraceUtility
     {

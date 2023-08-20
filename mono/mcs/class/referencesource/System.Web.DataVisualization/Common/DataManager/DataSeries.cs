@@ -22,16 +22,15 @@
 #region Used namespaces
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Collections.Generic;
-using System.Collections;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.Data;
 using System.Windows.Forms.DataVisualization.Charting.ChartTypes;

@@ -17,7 +17,6 @@ namespace Castle.Components.DictionaryAdapter.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Castle.Core.Internal;
 
     public interface IValidationRule

@@ -1,5 +1,5 @@
-using AutoMapper.Configuration.Conventions;
 using System.Collections.Concurrent;
+using AutoMapper.Configuration.Conventions;
 
 namespace AutoMapper;
 

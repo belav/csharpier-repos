@@ -25,7 +25,6 @@
 //}
 
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 namespace System.DirectoryServices.ActiveDirectory

@@ -5,15 +5,15 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
 
     [DebuggerDisplay("ServiceType={serviceType}")]
     public class ServiceDescription

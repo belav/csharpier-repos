@@ -31,14 +31,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Xml;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Utilities;
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 using System.Threading.Tasks;
 #endif
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Xml;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Utilities;
+
 #if !NET20
 using System.Xml.Linq;
 #endif

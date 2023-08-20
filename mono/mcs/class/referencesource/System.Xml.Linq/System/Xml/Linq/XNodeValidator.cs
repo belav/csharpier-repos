@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Versioning;
 using System.Xml;
 using System.Xml.Linq;
-using System.Runtime.Versioning;
 
 namespace System.Xml.Schema
 {

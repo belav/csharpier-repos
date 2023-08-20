@@ -30,9 +30,9 @@
 //
 
 
+using System.Configuration;
 using System.Configuration.Provider;
 using System.Web.Configuration;
-using System.Configuration;
 
 namespace System.Web.Security
 {

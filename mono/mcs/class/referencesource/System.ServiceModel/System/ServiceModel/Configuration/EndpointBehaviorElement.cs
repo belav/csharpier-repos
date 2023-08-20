@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
+    using System.ServiceModel;
     using System.Xml;
 
     public partial class EndpointBehaviorElement

@@ -20,9 +20,8 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Threading;
 using System.Runtime.CompilerServices;
-
+using System.Threading;
 #if SILVERLIGHT
 using System.Core;
 #endif

@@ -4,7 +4,6 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Http.Functional.Tests

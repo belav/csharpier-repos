@@ -17,7 +17,6 @@ namespace Castle.Components.DictionaryAdapter.Tests
     using System;
     using System.Xml;
     using System.Xml.XPath;
-
     using NUnit.Framework;
 
     internal static class CustomAssert

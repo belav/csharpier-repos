@@ -7,12 +7,12 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.Xml;
     using System.Xml.XPath;
+    using Res = System.Xml.Utils.Res;
 
     internal class SortAction : CompiledAction
     {

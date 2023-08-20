@@ -13,6 +13,11 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.SymbolStore;
+using System.Reflection;
+using System.Reflection.Emit;
 #if CLR2
 using Microsoft.Scripting.Ast;
 using Microsoft.Scripting.Ast.Compiler;
@@ -24,12 +29,6 @@ using System.Linq.Expressions.Compiler;
 #if SILVERLIGHT
 using System.Core;
 #endif
-
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.SymbolStore;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace System.Runtime.CompilerServices
 {

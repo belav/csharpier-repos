@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using Moq.Async;
 
 namespace Moq

@@ -54,20 +54,19 @@
 #region Used Namespaces
 
 using System;
-using System.Xml;
-using System.Reflection;
 using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.ComponentModel;
-using System.IO;
-using System.Text;
 using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-using System.Collections.Specialized;
+using System.IO;
+using System.Reflection;
 using System.Security;
-
+using System.Text;
+using System.Xml;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
 #else

@@ -9,9 +9,9 @@ namespace System.Web.Script.Services
     using System;
     using System.IO;
     using System.Reflection;
-    using System.Web;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
+    using System.Web;
 
     internal class WebServiceClientProxyGenerator : ClientProxyGenerator
     {

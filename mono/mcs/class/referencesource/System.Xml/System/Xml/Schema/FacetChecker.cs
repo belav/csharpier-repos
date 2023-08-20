@@ -8,16 +8,16 @@
 namespace System.Xml.Schema
 {
     using System;
-    using System.ComponentModel;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Xml.XPath;
-    using System.Diagnostics;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading;
-    using System.Globalization;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
+    using System.Xml.XPath;
 
     /// <include file='doc\XmlSchemaFacet.uex' path='docs/doc[@for="XmlSchemaFacet"]/*' />
     internal abstract class FacetsChecker

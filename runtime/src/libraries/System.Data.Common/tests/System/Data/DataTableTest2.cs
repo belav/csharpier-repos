@@ -24,10 +24,9 @@
 //
 
 using System.Collections;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-
 using Xunit;
 
 namespace System.Data.Tests

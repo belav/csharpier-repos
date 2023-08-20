@@ -40,13 +40,12 @@ using System.ServiceModel.Configuration;
 using System.Threading;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 using ConfigurationType = System.Configuration.Configuration;
-using QName = System.Xml.XmlQualifiedName;
 using OPair = System.Collections.Generic.KeyValuePair<
     System.ServiceModel.Description.IOperationContractGenerationExtension,
     System.ServiceModel.Description.OperationContractGenerationContext
 >;
+using QName = System.Xml.XmlQualifiedName;
 
 namespace System.ServiceModel.Description
 {

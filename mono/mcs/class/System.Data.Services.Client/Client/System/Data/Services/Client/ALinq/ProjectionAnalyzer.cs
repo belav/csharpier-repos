@@ -15,10 +15,10 @@ namespace System.Data.Services.Client
     #region Namespaces.
 
     using System;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;

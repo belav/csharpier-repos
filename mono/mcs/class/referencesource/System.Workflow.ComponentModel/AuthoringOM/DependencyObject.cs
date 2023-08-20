@@ -1,15 +1,15 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.Workflow.ComponentModel.Design;
-using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.ComponentModel.Serialization;
-using System.Reflection;
 using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text;
+using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
+using System.Workflow.ComponentModel.Serialization;
 
 namespace System.Workflow.ComponentModel
 {

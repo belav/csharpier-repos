@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Xunit;
 
 namespace Moq.Tests

@@ -7,9 +7,9 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Text;
     using System.Diagnostics;
     using System.Net.Mime;
+    using System.Text;
 
     // RFC 2822 Section 3.2.2 - Quoted Characters
     // As in C# strings, characters that would otherwise have special meaning should be ignored when quoted/escaped

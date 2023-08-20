@@ -9,8 +9,8 @@ namespace System.Runtime.DurableInstancing
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Xml.Linq;
     using System.Threading;
+    using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstanceView

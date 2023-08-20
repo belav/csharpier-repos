@@ -3,11 +3,11 @@
 
 using System;
 using System.IO;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace Profiler.Tests
 {

@@ -5,15 +5,14 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
-    using System.ServiceModel;
-    using System.Xml;
-
-    using Microsoft.Transactions.Wsat.Messaging;
-    using XD = System.ServiceModel.XD;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
+    using Microsoft.Transactions.Wsat.Messaging;
+    using XD = System.ServiceModel.XD;
 
     class WsatRegistrationHeader : AddressHeader
     {

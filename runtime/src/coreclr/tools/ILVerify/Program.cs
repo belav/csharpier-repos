@@ -12,7 +12,6 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.RegularExpressions;
 using Internal.TypeSystem.Ecma;
-
 using static System.Console;
 
 namespace ILVerify

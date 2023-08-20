@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests.BugsReported
 {
     using Castle.DynamicProxy.Tests.Interfaces;
-
     using NUnit.Framework;
 
     [TestFixture]

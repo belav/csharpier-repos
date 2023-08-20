@@ -7,9 +7,9 @@
 
 namespace System.Xml.Schema
 {
-    using System.IO;
     using System.Collections;
     using System.Diagnostics;
+    using System.IO;
     using System.Xml.Serialization;
 
     internal sealed class XsdBuilder : SchemaBuilder

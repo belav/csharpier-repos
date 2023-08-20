@@ -47,9 +47,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using Microsoft.CSharp;
 using NUnit.Framework;
-
 using QName = System.Xml.XmlQualifiedName;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.Runtime.Serialization

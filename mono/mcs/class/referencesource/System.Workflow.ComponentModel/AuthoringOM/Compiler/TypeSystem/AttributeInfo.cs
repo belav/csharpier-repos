@@ -3,10 +3,10 @@ namespace System.Workflow.ComponentModel.Compiler
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
     using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Summary description for AttributeInfo.

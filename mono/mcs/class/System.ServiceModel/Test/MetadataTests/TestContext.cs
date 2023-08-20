@@ -36,9 +36,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
-
 using SysConfig = System.Configuration.Configuration;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.MetadataTests

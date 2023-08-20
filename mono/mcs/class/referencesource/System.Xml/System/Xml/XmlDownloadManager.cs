@@ -8,12 +8,12 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
-    using System.Security;
     using System.Collections;
+    using System.IO;
     using System.Net;
     using System.Net.Cache;
     using System.Runtime.Versioning;
+    using System.Security;
 
     //
     // XmlDownloadManager

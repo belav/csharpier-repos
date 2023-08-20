@@ -5,9 +5,9 @@
 namespace System.Web.Services.Configuration
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Configuration;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.Security.Permissions;

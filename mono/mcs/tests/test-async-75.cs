@@ -1,7 +1,7 @@
 using System;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 class CorrectEncodingOfNestedTypes
 {

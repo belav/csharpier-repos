@@ -513,8 +513,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.regr002.regr002
 {
-    using ManagedTests.DynamicCSharp.Test;
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.regr002.regr002;
     // <Title>Overload resolution of methods involving pointer types</Title>
     // <Description>
     // Method overload resolution with dynamic argument resolving to array parameter with the corresponding pointer type as the parameter for the other method
@@ -526,6 +524,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
     // <Code>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Oneparam.regr002.regr002;
+    using ManagedTests.DynamicCSharp.Test;
 
     public class Program
     {

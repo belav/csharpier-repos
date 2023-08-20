@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace System.Reflection

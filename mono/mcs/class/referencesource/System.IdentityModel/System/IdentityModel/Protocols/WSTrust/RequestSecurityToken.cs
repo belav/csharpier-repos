@@ -6,8 +6,8 @@
 
 namespace System.IdentityModel.Protocols.WSTrust
 {
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Configuration;
+    using System.IdentityModel.Tokens;
 
     /// <summary>
     /// The class defines the wst:RequestSecurityToken element which

@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
 
 namespace ILCompiler.Metadata

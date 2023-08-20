@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.IL;
 using Internal.TypeSystem;
-
 using Xunit;
 
 namespace ILCompiler.Compiler.Tests

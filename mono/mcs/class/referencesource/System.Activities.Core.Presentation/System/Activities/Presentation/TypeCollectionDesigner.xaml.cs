@@ -11,16 +11,16 @@ namespace System.Activities.Presentation
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Input;
-    using System.ComponentModel;
-    using System.Windows.Threading;
     using System.Windows.Data;
+    using System.Windows.Input;
+    using System.Windows.Threading;
     using Microsoft.Activities.Presentation;
 
     [Fx.Tag.XamlVisible(false)]

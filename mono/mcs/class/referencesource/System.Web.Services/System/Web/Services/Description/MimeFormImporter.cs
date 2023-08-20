@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 namespace System.Web.Services.Description
 {
-    using System.Web.Services.Protocols;
     using System.Globalization;
+    using System.Web.Services.Protocols;
 
     internal class MimeFormImporter : MimeImporter
     {

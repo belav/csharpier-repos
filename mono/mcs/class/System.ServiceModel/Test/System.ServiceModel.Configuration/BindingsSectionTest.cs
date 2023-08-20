@@ -33,7 +33,6 @@ using NUnit.Framework;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Channels;
 using System.Configuration;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration

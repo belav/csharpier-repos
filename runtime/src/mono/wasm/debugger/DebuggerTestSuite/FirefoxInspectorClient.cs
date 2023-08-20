@@ -1,17 +1,17 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using Microsoft.WebAssembly.Diagnostics;
-using System;
-using System.Net.WebSockets;
-using System.Net.Sockets;
-using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 #nullable enable
 

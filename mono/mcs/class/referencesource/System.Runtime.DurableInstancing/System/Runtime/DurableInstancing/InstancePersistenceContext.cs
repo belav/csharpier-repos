@@ -6,12 +6,12 @@ namespace System.Runtime.DurableInstancing
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Runtime.Diagnostics;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Runtime.Diagnostics;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstancePersistenceContext

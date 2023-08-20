@@ -1,11 +1,11 @@
 namespace System.Net.NetworkInformation
 {
+    using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Sockets;
-    using System;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using System.Collections.Generic;
 
 #if !MONO
     internal class SystemIPGlobalProperties : IPGlobalProperties

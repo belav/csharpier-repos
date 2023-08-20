@@ -39,14 +39,13 @@ using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using MonoTests.Helpers;
+using MonoTests.System.Xml.TestClasses;
+using NUnit.Framework;
 #if !MOBILE
 using Microsoft.CSharp;
 #endif
-using NUnit.Framework;
 
-using MonoTests.System.Xml.TestClasses;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Xml.Serialization
 {

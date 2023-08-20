@@ -7,13 +7,13 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
     using System;
-    using System.Globalization;
-    using System.Xml.Schema;
     using System.Collections;
     using System.ComponentModel;
+    using System.Globalization;
+    using System.Reflection;
     using System.Threading;
+    using System.Xml.Schema;
 
     /// <include file='doc\SoapReflectionImporter.uex' path='docs/doc[@for="SoapReflectionImporter"]/*' />
     /// <devdoc>

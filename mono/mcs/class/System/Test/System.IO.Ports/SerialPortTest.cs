@@ -30,7 +30,6 @@
 using System;
 using System.IO;
 using System.IO.Ports;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.IO.Ports

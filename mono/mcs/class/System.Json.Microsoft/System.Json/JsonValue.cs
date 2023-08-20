@@ -4,9 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-#if FEATURE_DYNAMIC
-using System.Dynamic;
-#endif
 using System.Globalization;
 using System.IO;
 using System.Linq.Expressions;
@@ -14,6 +11,10 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
+#if FEATURE_DYNAMIC
+using System.Dynamic;
+#endif
+
 
 namespace System.Json
 {

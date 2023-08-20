@@ -9,18 +9,18 @@
 
 using System;
 using System.CodeDom;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Data;
 using System.Data.Common.Utils;
-using System.Data.EntityModel.SchemaObjectModel;
-using System.Globalization;
-using System.Data.Entity.Design.Common;
 using System.Data.Entity.Design;
+using System.Data.Entity.Design.Common;
+using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
-using System.Reflection;
-using System.Xml;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace System.Data.EntityModel.Emitters
 {

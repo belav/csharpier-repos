@@ -17,9 +17,7 @@ namespace Castle.DynamicProxy.Tests
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-
     using Castle.DynamicProxy.Generators.Emitters;
-
     using NUnit.Framework;
 
     [TestFixture]

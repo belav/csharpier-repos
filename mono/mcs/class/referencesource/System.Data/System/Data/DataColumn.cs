@@ -9,16 +9,16 @@
 namespace System.Data
 {
     using System;
-    using System.Xml;
-    using System.Data.Common;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Globalization;
-    using System.Data.SqlTypes;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data.Common;
+    using System.Data.SqlTypes;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <devdoc>
     ///    <para>

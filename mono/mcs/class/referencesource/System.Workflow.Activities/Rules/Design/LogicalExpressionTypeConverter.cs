@@ -7,9 +7,9 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Security.Permissions;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules.Design
 {

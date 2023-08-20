@@ -2,14 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
+using System.CommandLine.Completions;
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
 using System.IO;
-using FluentAssertions;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
-using System.CommandLine.Completions;
 
 namespace System.CommandLine.Tests
 {

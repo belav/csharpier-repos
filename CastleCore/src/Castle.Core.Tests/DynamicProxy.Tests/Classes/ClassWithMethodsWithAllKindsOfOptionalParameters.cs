@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests.Classes
 {
     using System;
-
     using Castle.DynamicProxy.Tests.Interfaces;
 
     public class ClassWithMethodsWithAllKindsOfOptionalParameters

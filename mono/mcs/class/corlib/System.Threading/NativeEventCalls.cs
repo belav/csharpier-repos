@@ -34,7 +34,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using Microsoft.Win32.SafeHandles;
-
 #if !MOBILE
 using System.Security.AccessControl;
 using System.IO;

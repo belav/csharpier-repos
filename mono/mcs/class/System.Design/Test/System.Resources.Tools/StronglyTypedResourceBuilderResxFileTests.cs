@@ -28,14 +28,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
+using System.CodeDom;
+using System.Drawing;
+using System.IO;
+using System.Resources;
 using System.Resources.Tools;
 using Microsoft.CSharp;
-using System.IO;
-using System.CodeDom;
-using System.Resources;
-using System.Drawing;
+using NUnit.Framework;
 
 namespace MonoTests.System.Resources.Tools
 {

@@ -11,9 +11,9 @@
 //M--->N  true,true,true,true,true
 //N----M  true,false,true,false,true
 using System;
-using System.Text;
-using System.Security;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
 using TestLibrary;
 
 public class MarshalBoolArray

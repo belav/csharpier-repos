@@ -31,7 +31,6 @@ namespace Mono.Cecil.Metadata
     using System;
     using System.IO;
     using System.Text;
-
     using Mono.Cecil.Binary;
 
     sealed class MetadataReader : BaseMetadataVisitor

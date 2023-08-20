@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Security.Cryptography.Pkcs.Tests;
-using System.Security.Cryptography.Xml;
 using System.Security.Cryptography.X509Certificates;
-using Xunit;
-
+using System.Security.Cryptography.Xml;
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {

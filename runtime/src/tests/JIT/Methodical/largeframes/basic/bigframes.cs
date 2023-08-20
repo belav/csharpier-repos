@@ -16,8 +16,8 @@
 // Note that OS page sizes are typically 0x1000 (4096) bytes, but could be bigger.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace BigFrames_bigframes

@@ -7,13 +7,13 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
-    using System.Collections.Generic;
     using System.Xml;
     using System.Xml.XPath;
+    using Res = System.Xml.Utils.Res;
 
     internal class BuilderInfo
     {

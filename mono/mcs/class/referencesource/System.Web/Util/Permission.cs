@@ -12,9 +12,9 @@
 
 namespace System.Web.Util
 {
-    using System.Security.Permissions;
-    using System.Security;
     using System.Data.SqlClient;
+    using System.Security;
+    using System.Security.Permissions;
 
     static class Permission
     {

@@ -8,8 +8,8 @@ This should form a three thread deadlock, which we will detect and allow one of 
 */
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public class A
 {

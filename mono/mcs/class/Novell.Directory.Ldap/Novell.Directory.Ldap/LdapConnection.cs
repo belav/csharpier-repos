@@ -30,11 +30,11 @@
 //
 
 using System;
+using System.Security.Cryptography.X509Certificates;
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Asn1;
 using Novell.Directory.Ldap.Rfc2251;
 using Novell.Directory.Ldap.Utilclass;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Novell.Directory.Ldap
 {

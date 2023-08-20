@@ -36,11 +36,8 @@ using System.Security.Principal;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
-
 using MonoTests.System.IdentityModel.Common;
-
 using Authenticator = System.IdentityModel.Selectors.SamlSecurityTokenAuthenticator;
 using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<System.IdentityModel.Policy.IAuthorizationPolicy>;
 

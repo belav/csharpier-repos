@@ -27,9 +27,9 @@
 
 
 
-using Xunit;
 using System.ComponentModel;
 using System.IO;
+using Xunit;
 
 namespace System.Data.Tests
 {

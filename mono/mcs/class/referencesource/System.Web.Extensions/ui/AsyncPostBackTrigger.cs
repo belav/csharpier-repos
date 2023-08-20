@@ -12,8 +12,8 @@ namespace System.Web.UI
     using System.Globalization;
     using System.Reflection;
     using System.Web;
-    using System.Web.UI;
     using System.Web.Resources;
+    using System.Web.UI;
     using System.Web.Util;
 
     public class AsyncPostBackTrigger : UpdatePanelControlTrigger

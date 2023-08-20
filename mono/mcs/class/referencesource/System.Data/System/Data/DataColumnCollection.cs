@@ -10,12 +10,12 @@
 namespace System.Data
 {
     using System;
-    using System.Xml;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Common;
     using System.Diagnostics;
+    using System.Xml;
 
     /// <devdoc>
     /// <para>Represents a collection of <see cref='System.Data.DataColumn'/>

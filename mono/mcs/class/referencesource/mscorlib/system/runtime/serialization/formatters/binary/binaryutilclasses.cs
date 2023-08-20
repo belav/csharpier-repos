@@ -22,15 +22,15 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
     using System.Collections;
-    using System.Reflection;
-    using System.Text;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.Serialization.Formatters;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
-    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Diagnostics;
+    using System.Runtime.Serialization.Formatters;
+    using System.Text;
 
     // The ParseRecord class holds the parsed XML information. There is a
     // ParsedRecord for each XML Element

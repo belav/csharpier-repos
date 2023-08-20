@@ -1,4 +1,3 @@
-using AutoMapper.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using AutoMapper.Internal;
 
 namespace AutoMapper.QueryableExtensions.Impl
 {

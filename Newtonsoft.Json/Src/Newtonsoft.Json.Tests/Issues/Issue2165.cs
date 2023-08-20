@@ -25,10 +25,11 @@
 
 using System;
 using System.IO;
+using Newtonsoft.Json.Linq;
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
 using System.Threading.Tasks;
 #endif
-using Newtonsoft.Json.Linq;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

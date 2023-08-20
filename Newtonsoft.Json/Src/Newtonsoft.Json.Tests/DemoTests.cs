@@ -24,13 +24,7 @@
 #endregion
 
 using System;
-#if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System.Buffers;
-#endif
 using System.Collections.Generic;
-#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
-using System.Data;
-#endif
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -38,6 +32,14 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Serialization;
+#if !(NET20 || NET35 || NET40 || PORTABLE || PORTABLE40 || DNXCORE50) || NETSTANDARD2_0 || NET6_0_OR_GREATER
+using System.Buffers;
+#endif
+
+#if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD2_0 || NET6_0_OR_GREATER
+using System.Data;
+#endif
+
 #if !(NET20 || NET35 || NET40)
 using System.Threading.Tasks;
 #endif

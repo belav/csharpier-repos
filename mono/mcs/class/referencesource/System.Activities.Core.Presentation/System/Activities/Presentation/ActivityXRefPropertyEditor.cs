@@ -4,8 +4,8 @@
 
 namespace System.Activities.Presentation
 {
-    using System.Activities.Presentation.PropertyEditing;
     using System.Activities.Core.Presentation.Themes;
+    using System.Activities.Presentation.PropertyEditing;
 
     sealed class ActivityXRefPropertyEditor : PropertyValueEditor
     {

@@ -8,9 +8,9 @@
 //
 
 using System;
-using System.Xml;
-using System.Net;
 using System.IO;
+using System.Net;
+using System.Xml;
 
 namespace Mono.Xml
 {

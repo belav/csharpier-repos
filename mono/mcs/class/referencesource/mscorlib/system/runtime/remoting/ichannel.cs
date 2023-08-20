@@ -14,14 +14,14 @@
 ===========================================================*/
 namespace System.Runtime.Remoting.Channels
 {
+    using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
     using System.Security.Permissions;
-    using System;
-    using System.Globalization;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface IChannel

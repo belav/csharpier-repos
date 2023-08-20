@@ -1,16 +1,16 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.AspNetCore.SpaServices.Extensions.Proxy;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Xunit;
-using System.Threading.Tasks;
 using System;
-using System.Net.Http;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SpaServices.Extensions.Proxy;
+using Moq;
 using Moq.Protected;
+using Xunit;
 
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests;
 

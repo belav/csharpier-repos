@@ -27,10 +27,10 @@
 //
 
 using System;
+using System.Collections;
 using System.Data;
 using System.Data.OracleClient;
 using System.IO;
-using System.Collections;
 using MonoTests.System.Data.Utils.Data;
 using Sys = System;
 

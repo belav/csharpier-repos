@@ -17,9 +17,7 @@ namespace Castle.Services.Logging.Log4netIntegration
     using System;
     using System.IO;
     using System.Reflection;
-
     using Castle.Core.Logging;
-
     using log4net;
     using log4net.Config;
 

@@ -42,8 +42,8 @@ namespace System
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using HashHelpers = System.Numerics.Hashing.HashHelpers;
 
     /// <summary>

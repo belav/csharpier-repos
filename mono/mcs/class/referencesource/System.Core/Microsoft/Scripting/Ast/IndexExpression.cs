@@ -21,7 +21,6 @@ using System.Dynamic.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-
 #if SILVERLIGHT
 using System.Core;
 #endif

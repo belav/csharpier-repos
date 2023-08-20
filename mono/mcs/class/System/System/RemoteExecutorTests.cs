@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Xunit;
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using Xunit;
 
 public class RemoteExecutorTests : RemoteExecutorTestBase
 {

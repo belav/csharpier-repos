@@ -14,10 +14,10 @@ namespace System.Data.Services.Client.Xml
 {
     #region Namespaces.
 
-    using System.Xml;
-    using System.Xml.Schema;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Xml;
+    using System.Xml.Schema;
 
     #endregion Namespaces.
 

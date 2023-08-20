@@ -8,13 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.CodeAnalysis;
-using System.Runtime.ExceptionServices;
 
 namespace Roslyn.Utilities
 {
@@ -25,6 +25,7 @@ namespace Roslyn.Utilities
 #else
     using Resources = WorkspacesResources;
 #endif
+
 
     using TypeCode = ObjectWriter.TypeCode;
 

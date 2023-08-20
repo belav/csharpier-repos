@@ -12,9 +12,8 @@
 
 namespace System.Web.UI
 {
-    using System.Runtime.Serialization.Formatters;
-
     using System.IO;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
     using System.Web.Compilation;
     using System.Web.Util;

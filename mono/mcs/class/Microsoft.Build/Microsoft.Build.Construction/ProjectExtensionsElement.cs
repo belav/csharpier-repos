@@ -27,8 +27,8 @@
 //
 
 using System;
-using System.Xml;
 using System.Text;
+using System.Xml;
 
 namespace Microsoft.Build.Construction
 {

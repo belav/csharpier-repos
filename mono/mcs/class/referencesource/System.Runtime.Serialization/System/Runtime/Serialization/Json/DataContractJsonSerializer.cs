@@ -4,22 +4,23 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Runtime.Serialization;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.Text;
     using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Collections;
+
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
-    using System.Runtime.CompilerServices;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

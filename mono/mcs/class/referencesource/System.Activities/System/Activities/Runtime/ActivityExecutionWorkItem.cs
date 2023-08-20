@@ -5,10 +5,10 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
-    using System.Reflection;
-    using System.Runtime.Serialization;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     abstract class ActivityExecutionWorkItem : WorkItem

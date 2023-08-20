@@ -6,14 +6,14 @@
 
 namespace System.Configuration
 {
-    using System.Configuration.Internal;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Configuration;
+    using System.Configuration.Internal;
+    using System.Reflection;
     using System.Text;
     using System.Threading;
-    using System.Reflection;
     using System.Xml;
 
     [System.Diagnostics.DebuggerDisplay("FactoryRecord {ConfigKey}")]

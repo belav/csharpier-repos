@@ -25,12 +25,12 @@
 //
 
 
-using System.IO;
 using System.Globalization;
+using System.IO;
+using System.Tests;
 using System.Xml;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Data.Tests
 {

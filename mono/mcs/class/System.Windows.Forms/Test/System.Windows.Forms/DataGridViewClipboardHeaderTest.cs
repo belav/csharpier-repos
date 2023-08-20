@@ -4,16 +4,16 @@
 // Author:
 //	DataGridViewTest.GenerateClipboardTest (true);
 //
-using NUnit.Framework;
 using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.ComponentModel;
 using System.Collections;
-using System.Text;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Text;
+using System.Windows.Forms;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

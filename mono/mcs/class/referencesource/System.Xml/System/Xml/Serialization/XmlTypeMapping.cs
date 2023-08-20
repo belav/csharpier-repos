@@ -7,8 +7,8 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
     using System;
+    using System.Reflection;
 
     /// <include file='doc\XmlTypeMapping.uex' path='docs/doc[@for="XmlTypeMapping"]/*' />
     /// <devdoc>

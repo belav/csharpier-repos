@@ -16,9 +16,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
     using System;
     using System.Xml;
-
     using Castle.Components.DictionaryAdapter.Tests;
-
     using NUnit.Framework;
 
     [TestFixture]

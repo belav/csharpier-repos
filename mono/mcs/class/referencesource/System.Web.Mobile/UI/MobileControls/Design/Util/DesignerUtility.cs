@@ -12,9 +12,9 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Reflection;
     using System.Web.UI.MobileControls;
-    using System.Globalization;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

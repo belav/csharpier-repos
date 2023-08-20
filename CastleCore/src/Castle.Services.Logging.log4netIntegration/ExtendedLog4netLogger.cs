@@ -15,14 +15,11 @@
 namespace Castle.Services.Logging.Log4netIntegration
 {
     using System;
-
     using Castle.Core.Logging;
-
     using log4net;
-
+    using ExtendedLogger = Castle.Core.Logging.IExtendedLogger;
     using ILogger = log4net.Core.ILogger;
     using Logger = Castle.Core.Logging.ILogger;
-    using ExtendedLogger = Castle.Core.Logging.IExtendedLogger;
 
     public class ExtendedLog4netLogger : Log4netLogger, ExtendedLogger
     {

@@ -6,16 +6,16 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     ///#if GENERICS_WORK
     ///    using System.Numerics;
     ///#endif
     using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
+    using System.Runtime.Versioning;
 
     // Implements the Decimal data type. The Decimal data type can
     // represent values ranging from -79,228,162,514,264,337,593,543,950,335 to

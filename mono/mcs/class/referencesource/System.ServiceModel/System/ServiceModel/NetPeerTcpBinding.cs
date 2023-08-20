@@ -4,6 +4,7 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Net;
     using System.Runtime;
@@ -11,7 +12,6 @@ namespace System.ServiceModel
     using System.ServiceModel.Configuration;
     using System.ServiceModel.PeerResolvers;
     using System.Xml;
-    using System.ComponentModel;
 
     [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     public class NetPeerTcpBinding : Binding, IBindingRuntimePreferences

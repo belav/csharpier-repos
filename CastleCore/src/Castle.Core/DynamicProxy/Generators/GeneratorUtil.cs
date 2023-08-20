@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Generators
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
-
     using Castle.DynamicProxy.Generators.Emitters;
     using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
     using Castle.DynamicProxy.Tokens;

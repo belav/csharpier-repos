@@ -4,16 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using ClassConfiguration = System.Configuration.Configuration;
 using System.Collections;
 using System.Configuration;
 using System.Configuration.Internal;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System.Runtime.Versioning;
+using ClassConfiguration = System.Configuration.Configuration;
 
 namespace System.Configuration
 {

@@ -14,7 +14,6 @@ using System.Net;
 using MonoTests.stand_alone.WebHarness;
 using System.ServiceModel.Dispatcher;
 using System.Collections.ObjectModel;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.Features

@@ -15,11 +15,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Experimental;
 
-using DocumentDiagnosticReport = SumType<
-    FullDocumentDiagnosticReport,
-    UnchangedDocumentDiagnosticReport
->;
-
 // A document diagnostic partial report is defined as having the first literal send = DocumentDiagnosticReport (aka the sumtype of changed / unchanged) followed
 // by n DocumentDiagnosticPartialResult literals.
 // See https://github.com/microsoft/vscode-languageserver-node/blob/main/protocol/src/common/proposed.diagnostics.md#textDocument_diagnostic
@@ -27,6 +22,10 @@ using DocumentDiagnosticPartialReport = SumType<
     FullDocumentDiagnosticReport,
     UnchangedDocumentDiagnosticReport,
     DocumentDiagnosticPartialResult
+>;
+using DocumentDiagnosticReport = SumType<
+    FullDocumentDiagnosticReport,
+    UnchangedDocumentDiagnosticReport
 >;
 
 [Method(ExperimentalMethods.TextDocumentDiagnostic)]

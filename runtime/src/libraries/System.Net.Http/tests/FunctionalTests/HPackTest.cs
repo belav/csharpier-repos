@@ -4,17 +4,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Test.Common;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-using System.Data;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace System.Net.Http.Functional.Tests
 {

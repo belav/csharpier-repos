@@ -3,9 +3,6 @@
 
 using System;
 using System.IO;
-#if GENERATE_SQL_SCRIPTS
-using System.Linq;
-#endif
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +11,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+#if GENERATE_SQL_SCRIPTS
+using System.Linq;
+#endif
+
 
 namespace BasicViews
 {

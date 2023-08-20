@@ -4,10 +4,8 @@
 using System;
 using System.Buffers.Binary;
 using System.Linq;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Xunit;
 
 namespace TypeSystemTests

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 // This test case reproduces a race condition involving type initialization (aka, .cctor, aka static constructor).
 //

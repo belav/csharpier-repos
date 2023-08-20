@@ -6,10 +6,9 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
-
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>

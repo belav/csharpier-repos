@@ -20,11 +20,11 @@
 // Copyright (c) 2007 Novell, Inc.
 //
 
-using System.ComponentModel;
 using System.Collections;
-using System.Reflection;
-using System.Globalization;
+using System.ComponentModel;
 using System.ComponentModel.Design.Serialization; // e.g. InstanceDescriptor
+using System.Globalization;
+using System.Reflection;
 
 namespace System.Windows.Forms
 {

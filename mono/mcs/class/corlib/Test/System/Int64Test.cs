@@ -7,10 +7,10 @@
 // tests ToString and Parse function with the culture independent
 // NumberFormatInfo.InvariantInfo
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
 using System.Threading;
+using NUnit.Framework;
 
 /// <summary>
 /// Tests for System.Int64

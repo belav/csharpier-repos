@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-
 using Moq.Language;
 
 namespace Moq

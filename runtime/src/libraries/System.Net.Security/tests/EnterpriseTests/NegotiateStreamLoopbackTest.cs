@@ -8,7 +8,6 @@ using System.Security.Authentication;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Security.Enterprise.Tests

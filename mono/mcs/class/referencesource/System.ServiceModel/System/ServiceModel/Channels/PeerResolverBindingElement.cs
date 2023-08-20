@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.PeerResolvers;
     using System.ServiceModel;
+    using System.ServiceModel.PeerResolvers;
 
     public abstract class PeerResolverBindingElement : BindingElement
     {

@@ -13,17 +13,16 @@ namespace System.IdentityModel.Selectors
 {
     using System;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-    using DiagnosticUtility = Microsoft.InfoCards.Diagnostics.DiagnosticUtility;
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using DiagnosticUtility = Microsoft.InfoCards.Diagnostics.DiagnosticUtility;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:

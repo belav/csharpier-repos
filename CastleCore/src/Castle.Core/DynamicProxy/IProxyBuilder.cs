@@ -16,7 +16,6 @@ namespace Castle.DynamicProxy
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using Castle.Core.Logging;
     using Castle.DynamicProxy.Generators;
 

@@ -7,9 +7,9 @@
 namespace System.Web.Hosting
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Security.Principal;
+    using System.Text;
 
     internal sealed class IIS7UserPrincipal : IPrincipal
     {

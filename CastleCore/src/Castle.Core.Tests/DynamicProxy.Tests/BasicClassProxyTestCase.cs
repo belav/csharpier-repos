@@ -15,20 +15,16 @@
 namespace Castle.DynamicProxy.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
     using System.Reflection.Emit;
-
     using Castle.DynamicProxy.Generators;
+    using Castle.DynamicProxy.Generators.Emitters;
     using Castle.DynamicProxy.Tests.BugsReported;
     using Castle.DynamicProxy.Tests.Classes;
     using Castle.DynamicProxy.Tests.Interceptors;
     using Castle.DynamicProxy.Tests.InterClasses;
-    using Castle.DynamicProxy.Generators.Emitters;
-
     using NUnit.Framework;
-
-    using System.Collections.Generic;
-
     using ClassWithIndexer = Castle.DynamicProxy.Tests.Classes.ClassWithIndexer;
 
     [TestFixture]

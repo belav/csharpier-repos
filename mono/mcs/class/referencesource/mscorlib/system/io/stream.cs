@@ -17,21 +17,21 @@
 **
 ===========================================================*/
 using System;
-using System.Threading;
-#if FEATURE_ASYNC_IO
-using System.Threading.Tasks;
-#endif
-
+using System.Diagnostics.Contracts;
+using System.Reflection;
 using System.Runtime;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
 #if NEW_EXPERIMENTAL_ASYNC_IO
 using System.Runtime.CompilerServices;
 #endif
-using System.Runtime.ExceptionServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Diagnostics.Contracts;
-using System.Reflection;
+
+#if FEATURE_ASYNC_IO
+using System.Threading.Tasks;
+#endif
 
 namespace System.IO
 {

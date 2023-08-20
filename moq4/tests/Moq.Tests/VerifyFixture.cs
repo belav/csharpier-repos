@@ -4,10 +4,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
 using Moq;
 using Moq.Protected;
-
 using Xunit;
 
 namespace Moq.Tests

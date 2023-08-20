@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Diagnostics
 {
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics;
-    using System.Threading;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Threading;
 
     class Utility
     {

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection.Metadata;
-using System.Diagnostics;
-using System.Text;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection.Metadata;
+using System.Text;
 
 namespace Internal.TypeSystem.Ecma
 {

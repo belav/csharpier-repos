@@ -6,14 +6,14 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.Versioning;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-using System.Collections.Generic;
 using MS.Internal.Xml.Cache;
-using System.Diagnostics;
-using System.Text;
-using System.Runtime.Versioning;
 
 namespace System.Xml.XPath
 {

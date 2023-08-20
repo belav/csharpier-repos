@@ -4,11 +4,11 @@
 ///
 namespace System.Net.NetworkInformation
 {
+    using System;
+    using System.Diagnostics.Contracts;
     using System.Net;
     using System.Net.Sockets;
-    using System;
     using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
     /// <include file='doc\NetworkInterface.uex' path='docs/doc[@for="IPUnicastAddressInformation"]/*' />
     /// <summary>Specifies the unicast addresses for an interface.</summary>

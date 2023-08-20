@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.Security;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SslStress
 {

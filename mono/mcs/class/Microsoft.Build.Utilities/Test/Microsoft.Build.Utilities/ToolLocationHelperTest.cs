@@ -1,6 +1,6 @@
 ﻿using System;
-using NUnit.Framework;
 using Microsoft.Build.Utilities;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Utilities
 {

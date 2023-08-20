@@ -24,8 +24,8 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
 {

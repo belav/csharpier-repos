@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Discovery
 {
     using System.Runtime;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
 
     // This behavior sets the contract filter and unhandled operation invoker in the dispatch
     // runtime to avoid contract filter mismatch exceptions raised by runtime during normal operation.

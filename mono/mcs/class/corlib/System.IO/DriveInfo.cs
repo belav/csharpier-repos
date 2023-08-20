@@ -23,10 +23,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace System.IO
 {

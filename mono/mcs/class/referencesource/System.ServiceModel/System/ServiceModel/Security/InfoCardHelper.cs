@@ -11,20 +11,20 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Security.Tokens;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.Xml;
     using System.IO;
-    using System.Text;
     using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security.Tokens;
+    using System.Text;
+    using System.Xml;
 
     //
     // Summary:

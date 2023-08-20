@@ -7,10 +7,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Async;
 using Moq.Expressions.Visitors;
-
 using E = System.Linq.Expressions.Expression;
 
 namespace Moq

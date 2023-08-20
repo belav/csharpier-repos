@@ -37,7 +37,6 @@ using NUnit.Framework;
 using System.ServiceModel.Configuration;
 using System.Configuration;
 using System.Text;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel

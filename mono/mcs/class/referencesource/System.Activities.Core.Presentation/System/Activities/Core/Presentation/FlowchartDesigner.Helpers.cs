@@ -4,20 +4,20 @@
 
 namespace System.Activities.Core.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Internal.PropertyEditing;
+    using System.Activities.Presentation.Model;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Linq;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Documents;
     using System.Windows.Media;
     using System.Windows.Shapes;
-    using System.Activities.Statements;
-    using System.Activities.Presentation.Model;
-    using System.Linq;
-    using System.Runtime;
-    using System.Globalization;
-    using System.Activities.Presentation;
-    using System.Activities.Presentation.FreeFormEditing;
-    using System.Activities.Presentation.Internal.PropertyEditing;
 
     partial class FlowchartDesigner
     {

@@ -26,7 +26,6 @@
 
 using System;
 using System.Threading;
-
 using NUnit;
 using NUnit.Framework;
 

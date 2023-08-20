@@ -9,10 +9,10 @@ namespace System.Activities.DurableInstancing
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
+    using System.Runtime.DurableInstancing;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Serialization;
-    using System.Runtime.DurableInstancing;
 
     sealed class CorrelationKey
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Reflection;
-using System.Data.Linq.Mapping;
 using System.Reflection.Emit;
+using System.Text;
 
 namespace DbLinq.Data.Linq.Mapping
 {

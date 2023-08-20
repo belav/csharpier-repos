@@ -31,10 +31,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Utilities

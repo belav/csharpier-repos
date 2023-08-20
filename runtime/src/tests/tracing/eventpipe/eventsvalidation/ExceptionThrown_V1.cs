@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics.Tracing;
 using System.Collections.Generic;
-using Tracing.Tests.Common;
+using System.Diagnostics.Tracing;
 using Microsoft.Diagnostics.NETCore.Client;
+using Tracing.Tests.Common;
 
 namespace Tracing.Tests.ExceptionThrown_V1
 {

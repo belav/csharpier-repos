@@ -8,13 +8,13 @@
 namespace System.Xml.Schema
 {
     using System;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
-    using System.Text;
     using System.Resources;
     using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Text;
 
     /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException"]/*' />
     [Serializable]

@@ -26,8 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 #region old
 /*
 using System;
@@ -131,9 +129,9 @@ namespace tests.system_data_dll.System_Data
 
 using System;
 using System.Data;
-
 using GHTUtils;
 using GHTUtils.Base;
+using NUnit.Framework;
 
 namespace tests.system_data_dll.System_Data
 {

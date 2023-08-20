@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Reflection;
-
 using Internal.Runtime.Augments;
 
 namespace System

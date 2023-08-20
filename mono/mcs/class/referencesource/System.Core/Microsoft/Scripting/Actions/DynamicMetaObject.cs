@@ -13,6 +13,9 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
+using System.Dynamic.Utils;
+using System.Reflection;
 #if CLR2
 using Microsoft.Scripting.Ast;
 #else
@@ -24,10 +27,6 @@ using System.Core;
 #else
 using System.Runtime.Remoting;
 #endif
-
-using System.Collections.Generic;
-using System.Dynamic.Utils;
-using System.Reflection;
 
 namespace System.Dynamic
 {

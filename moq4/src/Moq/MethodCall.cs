@@ -10,10 +10,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-
 using Moq.Behaviors;
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq

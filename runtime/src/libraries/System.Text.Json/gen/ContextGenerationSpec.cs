@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using System.Text.Json.Reflection;
 using System.Diagnostics;
+using System.Text.Json.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.CodeAnalysis;
 
 namespace System.Text.Json.SourceGeneration

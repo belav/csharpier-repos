@@ -4,10 +4,8 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection.Metadata;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 using MethodAttributes = System.Reflection.MethodAttributes;
 

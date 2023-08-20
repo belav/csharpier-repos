@@ -10,14 +10,14 @@
 namespace System.Data
 {
     using System;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Data.Common;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Diagnostics;
-    using System.ComponentModel;
-    using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.Collections;
-    using System.Data.Common;
 
     /// <devdoc>
     /// </devdoc>

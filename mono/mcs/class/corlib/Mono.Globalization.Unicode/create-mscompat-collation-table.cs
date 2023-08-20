@@ -39,12 +39,11 @@
 #define Binary
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Xml;
-
 using UUtil = Mono.Globalization.Unicode.MSCompatUnicodeTableUtil;
 
 namespace Mono.Globalization.Unicode

@@ -26,14 +26,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using Newtonsoft.Json.Converters;
 #if !(NET20 || DNXCORE50)
 using System.Data.Linq;
 #endif
 #if !DNXCORE50
 using System.Data.SqlTypes;
 #endif
-using System.Text;
-using Newtonsoft.Json.Converters;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

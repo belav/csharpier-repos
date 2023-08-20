@@ -7,12 +7,12 @@
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
-    using System.Collections;
     using System.Globalization;
     using System.IO;
     using System.Reflection;

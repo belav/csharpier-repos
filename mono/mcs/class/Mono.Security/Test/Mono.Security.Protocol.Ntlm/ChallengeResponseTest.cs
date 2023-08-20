@@ -10,7 +10,6 @@
 
 using System;
 using System.Text;
-
 using Mono.Security.Protocol.Ntlm;
 using NUnit.Framework;
 

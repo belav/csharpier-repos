@@ -18,15 +18,15 @@ namespace System.Web.UI.WebControls
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Web.Compilation;
     using System.Web.Query.Dynamic;
     using System.Web.Resources;
-    using System.Security;
-    using System.Security.Permissions;
-    using DynamicValidatorEventArgs = System.Web.DynamicData.DynamicValidatorEventArgs;
     using DynamicDataSourceOperation = System.Web.DynamicData.DynamicDataSourceOperation;
+    using DynamicValidatorEventArgs = System.Web.DynamicData.DynamicValidatorEventArgs;
 
     public partial class LinqDataSourceView : ContextDataSourceView
     {

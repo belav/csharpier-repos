@@ -3,16 +3,16 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Activities.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.Model;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Activities.Presentation.Model;
-    using System.Configuration;
-    using System.ServiceModel.Configuration;
-    using System.Activities.Presentation;
 
     partial class BindingEditor
     {

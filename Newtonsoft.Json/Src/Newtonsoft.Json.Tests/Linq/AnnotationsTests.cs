@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using Newtonsoft.Json.Linq;
+
 #if DNXCORE50
 using Xunit;
 using TestAttribute = Xunit.FactAttribute;

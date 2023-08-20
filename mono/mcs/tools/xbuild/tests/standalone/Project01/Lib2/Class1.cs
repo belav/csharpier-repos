@@ -1,6 +1,6 @@
 using System;
-using System.Resources;
 using System.Reflection;
+using System.Resources;
 
 namespace Lib2
 {

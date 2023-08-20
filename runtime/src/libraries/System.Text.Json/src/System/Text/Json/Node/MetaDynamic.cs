@@ -3,10 +3,10 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Dynamic;
 
 namespace System.Text.Json.Node
 {

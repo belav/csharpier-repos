@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.ComponentModel;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.ComponentModel;
 using System.Web.UI.Adapters;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.WebControls.Adapters
 {

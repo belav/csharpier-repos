@@ -3,7 +3,6 @@
 
 using System.IO;
 using System.Text;
-
 using Xunit;
 
 namespace System.Reflection.PortableExecutable.Tests

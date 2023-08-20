@@ -6,12 +6,12 @@
 
 namespace System.Web.DataAccess
 {
-    using System.Net;
     using System.Diagnostics;
-    using System.Web.Hosting;
-    using System.Web.Security;
     using System.DirectoryServices;
     using System.DirectoryServices.Protocols;
+    using System.Net;
+    using System.Web.Hosting;
+    using System.Web.Security;
 
     internal static class ActiveDirectoryConnectionHelper
     {

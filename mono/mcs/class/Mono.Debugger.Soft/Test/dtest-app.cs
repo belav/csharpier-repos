@@ -4,17 +4,17 @@
  *   Application program used by the debugger tests.
  */
 using System;
-using System.Runtime.CompilerServices;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
-using System.Collections.Concurrent;
-using System.Collections;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 #if !MOBILE
 using MonoTests.Helpers;
 #endif

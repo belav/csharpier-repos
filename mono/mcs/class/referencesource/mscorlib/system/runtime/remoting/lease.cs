@@ -17,13 +17,13 @@
 namespace System.Runtime.Remoting.Lifetime
 {
     using System;
-    using System.Security;
-    using System.Security.Permissions;
     using System.Collections;
-    using System.Threading;
+    using System.Globalization;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Proxies;
-    using System.Globalization;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
 
     internal class Lease : MarshalByRefObject, ILease
     {

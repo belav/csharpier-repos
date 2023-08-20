@@ -1,5 +1,4 @@
 using System;
-
 using System.Runtime.CompilerServices;
 
 // This class references "AClass.X" which comes from

@@ -21,8 +21,8 @@
 namespace System.Globalization
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Diagnostics.Contracts;
+    using System.Runtime.Serialization;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

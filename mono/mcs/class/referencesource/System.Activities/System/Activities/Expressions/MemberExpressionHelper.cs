@@ -5,12 +5,12 @@
 namespace System.Activities.Expressions
 {
     using System.Activities.Statements;
+    using System.Activities.Validation;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime;
-    using System.Collections.ObjectModel;
-    using System.Activities.Validation;
 
     static class MemberExpressionHelper
     {

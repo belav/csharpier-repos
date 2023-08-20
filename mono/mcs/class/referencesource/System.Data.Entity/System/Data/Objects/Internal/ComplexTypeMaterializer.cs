@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
 using System.Data.Common;
-using System.Diagnostics;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Objects.Internal
 {

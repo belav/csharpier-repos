@@ -24,7 +24,6 @@
 
 using System.Data.Common;
 using System.Globalization;
-
 using Xunit;
 
 namespace System.Data.Tests.Common

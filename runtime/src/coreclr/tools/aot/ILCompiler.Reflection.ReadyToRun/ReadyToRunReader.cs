@@ -12,10 +12,8 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-
 using Internal.ReadyToRunConstants;
 using Internal.Runtime;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Reflection.ReadyToRun

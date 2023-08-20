@@ -23,6 +23,10 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using Newtonsoft.Json.Serialization;
 #if DNXCORE50
 using Xunit;
@@ -31,10 +35,8 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+
+
 using User = Newtonsoft.Json.Tests.Serialization.MetadataPropertyHandlingTests.User;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer

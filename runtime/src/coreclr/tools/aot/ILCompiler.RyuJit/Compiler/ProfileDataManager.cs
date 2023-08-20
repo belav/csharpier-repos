@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Reflection.PortableExecutable;
-
 using ILCompiler.IBC;
 using Internal.TypeSystem;
 

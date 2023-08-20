@@ -5,13 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
-#if !NETFX_CORE
-using System.Net.Http.Formatting.Internal;
-#endif
 using System.Net.Http.Formatting.Parsers;
 using System.Text;
 using System.Threading;
 using System.Web.Http;
+#if !NETFX_CORE
+using System.Net.Http.Formatting.Internal;
+#endif
 
 #if NETFX_CORE
 using NameValueCollection = System.Net.Http.Formatting.HttpValueCollection;

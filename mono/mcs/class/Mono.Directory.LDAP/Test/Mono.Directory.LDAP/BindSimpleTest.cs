@@ -6,9 +6,9 @@
 // (C) 2003 Martin Willemoes Hansen
 //
 
-using NUnit.Framework;
 using System;
 using Mono.Directory.LDAP;
+using NUnit.Framework;
 
 namespace MonoTests.Directory.LDAP
 {

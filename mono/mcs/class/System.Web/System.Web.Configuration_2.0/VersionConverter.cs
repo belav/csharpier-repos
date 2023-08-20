@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 
 namespace System.Web.Configuration

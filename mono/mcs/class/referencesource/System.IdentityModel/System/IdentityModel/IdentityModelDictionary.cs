@@ -4,8 +4,8 @@
 
 namespace System.IdentityModel
 {
-    using System.Xml;
     using System.Collections.Generic;
+    using System.Xml;
 
     class IdentityModelDictionary : IXmlDictionary
     {

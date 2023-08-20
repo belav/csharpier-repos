@@ -6,8 +6,8 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.ComponentModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
 
     /// <devdoc>
     /// Inserts a hidden field into the web form.

@@ -2,10 +2,8 @@
 
 using System;
 using System.Collections.Immutable;
-
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
-
 using Microsoft.CodeAnalysis.Tools.Utilities;
 using Microsoft.Extensions.Logging;
 

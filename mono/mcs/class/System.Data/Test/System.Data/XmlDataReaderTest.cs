@@ -24,15 +24,14 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.IO;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Xml.Schema;
-using NUnit.Framework;
-
+using System.Xml.Serialization;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {

@@ -10,14 +10,13 @@
 //  - implement Equals and test it
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Runtime.InteropServices;
-
+using System.Threading;
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection.Emit

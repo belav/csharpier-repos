@@ -23,13 +23,13 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Linq.JsonPath;
 using System;
-using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq.JsonPath;
+using Newtonsoft.Json.Serialization;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

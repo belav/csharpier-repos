@@ -10,9 +10,9 @@ namespace System.Net
     using System.Collections;
     using System.IO;
     using System.Net.Sockets;
-    using System.Threading;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
+    using System.Threading;
 
     /// <summary>
     /// <para>The FtpWebResponse class contains the result of the FTP request

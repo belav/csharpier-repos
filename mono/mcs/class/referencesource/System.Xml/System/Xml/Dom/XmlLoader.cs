@@ -7,12 +7,12 @@
 
 namespace System.Xml
 {
-    using System.IO;
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Text;
     using System.Xml.Schema;
-    using System.Globalization;
 
     internal class XmlLoader
     {

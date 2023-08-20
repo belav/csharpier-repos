@@ -7,12 +7,12 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-using System.Data.Common.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common.Internal;
 using System.Data.Spatial.Internal;
 using System.Diagnostics;
-using System.Runtime.Serialization;
 using System.Globalization;
+using System.Runtime.Serialization;
 
 namespace System.Data.Spatial
 {

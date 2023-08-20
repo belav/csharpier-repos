@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
+    using System.ServiceModel;
 
     [MessageContract(IsWrapped = false)]
     class ProbeMatchesMessageApril2005

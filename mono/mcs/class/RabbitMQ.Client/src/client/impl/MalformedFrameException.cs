@@ -56,7 +56,6 @@
 //---------------------------------------------------------------------------
 using System;
 using System.Net;
-
 // We use spec version 0-9 for common constants such as frame types,
 // error codes, and the frame end byte, since they don't vary *within
 // the versions we support*. Obviously we may need to revisit this if

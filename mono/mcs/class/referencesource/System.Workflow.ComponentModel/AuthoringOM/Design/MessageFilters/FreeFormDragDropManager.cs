@@ -1,15 +1,15 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Text;
+    using System.Windows.Forms;
 
     #region Class FreeFormDragDropManager
     internal sealed class FreeFormDragDropManager : DragDropManager

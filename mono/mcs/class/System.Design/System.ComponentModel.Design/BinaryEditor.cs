@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Windows.Forms;
 using System.Drawing.Design;
+using System.Windows.Forms;
 
 namespace System.ComponentModel.Design
 {

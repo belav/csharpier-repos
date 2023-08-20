@@ -5,16 +5,16 @@
 // ==--==
 namespace System.Diagnostics
 {
-    using System.Runtime.Remoting;
     using System;
-    using System.Security.Permissions;
-    using System.IO;
     using System.Collections;
-    using System.Runtime.CompilerServices;
-    using Encoding = System.Text.Encoding;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using Encoding = System.Text.Encoding;
 
     // LogMessageEventHandlers are triggered when a message is generated which is
     // "on" per its switch.

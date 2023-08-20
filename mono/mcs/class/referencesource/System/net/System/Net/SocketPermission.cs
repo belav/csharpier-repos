@@ -7,9 +7,9 @@
 namespace System.Net
 {
     using System.Collections;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
     using System.Threading;
 
     //NOTE: While SocketPermissionAttribute resides in System.DLL,

@@ -12,10 +12,10 @@ namespace Microsoft.SqlServer.Server
     using System;
     using System.Data;
     using System.Data.Common;
+    using System.Data.SqlClient;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Data.SqlTypes;
-    using System.Data.SqlClient;
 
     // class SqlMetaData
     //   Simple immutable implementation of the a metadata-holding class.  Only

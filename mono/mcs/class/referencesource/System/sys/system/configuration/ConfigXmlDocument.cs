@@ -8,8 +8,8 @@ namespace System.Configuration
 {
     using System.Configuration.Internal;
     using System.IO;
-    using System.Xml;
     using System.Security.Permissions;
+    using System.Xml;
 
     // ConfigXmlDocument - the default Xml Document doesn't track line numbers, and line
     // numbers are necessary to display source on config errors.

@@ -15,10 +15,10 @@
 #if FEATURE_REMOTING || MOBILE_LEGACY
 namespace System.Runtime.Serialization.Formatters
 {
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Serialization;
-    using System;
 
     // Class is used to return the call object for a SOAP call.
     // This is used when the top SOAP object is a fake object, it contains

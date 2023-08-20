@@ -1,8 +1,8 @@
 namespace System.Net
 {
     using System;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
 
     // NOTE [Microsoft]: The old validation attribute was removed from System.ll and is
     // replaced by more flexible and robust validation/conversion design.

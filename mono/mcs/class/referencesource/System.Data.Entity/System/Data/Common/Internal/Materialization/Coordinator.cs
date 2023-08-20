@@ -7,11 +7,11 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Data.Objects.Internal;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
-using System.Data.Objects.Internal;
 
 namespace System.Data.Common.Internal.Materialization
 {

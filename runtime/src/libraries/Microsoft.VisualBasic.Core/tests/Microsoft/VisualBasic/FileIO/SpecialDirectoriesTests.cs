@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using static System.Environment;
 using Xunit;
+using static System.Environment;
 
 namespace Microsoft.VisualBasic.FileIO.Tests
 {

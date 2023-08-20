@@ -55,7 +55,6 @@
 //
 //---------------------------------------------------------------------------
 using System;
-
 using RabbitMQ.Client;
 
 namespace RabbitMQ.Client.Impl

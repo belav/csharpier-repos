@@ -6,9 +6,9 @@
 
 namespace System.Diagnostics
 {
+    using System;
     using System.Collections;
     using System.ComponentModel;
-    using System;
     using System.Globalization;
 
     /// <internalonly/>

@@ -27,7 +27,6 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.Analysis.Numerical;
 
 namespace Mono.CodeContracts.Static.AST

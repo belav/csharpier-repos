@@ -19,7 +19,6 @@ namespace Castle.DynamicProxy.Internal
     using System.Diagnostics;
     using System.Reflection;
     using System.Reflection.Emit;
-
     using Castle.DynamicProxy.Generators.Emitters;
 
     public static class TypeUtil

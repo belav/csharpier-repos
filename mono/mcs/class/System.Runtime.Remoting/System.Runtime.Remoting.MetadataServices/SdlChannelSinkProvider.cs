@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Runtime.Remoting.Channels;
 using System.Collections;
+using System.Runtime.Remoting.Channels;
 
 namespace System.Runtime.Remoting.MetadataServices
 {

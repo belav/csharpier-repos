@@ -5,12 +5,12 @@
 //   Ben Woods (woodsb02@gmail.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.NetworkInformation
 {

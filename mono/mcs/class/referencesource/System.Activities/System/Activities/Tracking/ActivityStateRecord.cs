@@ -5,14 +5,14 @@
 namespace System.Activities.Tracking
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Collections;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]

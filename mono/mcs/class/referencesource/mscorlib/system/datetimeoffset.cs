@@ -4,13 +4,13 @@
 namespace System
 {
     using System;
-    using System.Threading;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
 
     // DateTimeOffset is a value type that consists of a DateTime and a time zone offset,
     // ie. how far away the time is from GMT. The DateTime is stored whole, and the offset

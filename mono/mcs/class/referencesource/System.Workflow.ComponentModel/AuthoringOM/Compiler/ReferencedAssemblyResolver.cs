@@ -1,9 +1,9 @@
 ﻿namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Reflection;
     using System.Collections.Specialized;
     using System.ComponentModel.Design;
+    using System.Reflection;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
 

@@ -6,13 +6,13 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Windows.Forms;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.IO;
     using System.Reflection;
     using System.ServiceModel;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Design;
 
     internal class RichListBox : ListBox

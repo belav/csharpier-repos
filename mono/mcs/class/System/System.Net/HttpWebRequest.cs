@@ -32,15 +32,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-#if SECURITY_DEP
-#if MONO_SECURITY_ALIAS
-extern alias MonoSecurity;
-using MonoSecurity::Mono.Security.Interface;
-#else
-using Mono.Security.Interface;
-#endif
-#endif
-
 using System;
 using System.Collections;
 using System.Configuration;
@@ -48,8 +39,8 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
-using System.Net.Sockets;
 using System.Net.Security;
+using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
@@ -57,6 +48,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Mono.Net.Security;
+using MonoSecurity::Mono.Security.Interface;
+#if SECURITY_DEP
+#if MONO_SECURITY_ALIAS
+extern alias MonoSecurity;
+#else
+using Mono.Security.Interface;
+#endif
+#endif
 
 namespace System.Net
 {

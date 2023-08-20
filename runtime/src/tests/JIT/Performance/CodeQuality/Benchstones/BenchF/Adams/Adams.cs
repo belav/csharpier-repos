@@ -5,8 +5,8 @@
 // original source: adams_d.c
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Benchstone.BenchF
 {

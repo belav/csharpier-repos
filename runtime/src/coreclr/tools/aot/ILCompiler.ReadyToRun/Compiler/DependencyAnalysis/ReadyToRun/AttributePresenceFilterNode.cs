@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
 

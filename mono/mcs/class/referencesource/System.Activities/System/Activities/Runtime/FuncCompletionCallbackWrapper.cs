@@ -6,10 +6,10 @@ namespace System.Activities.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
     using System.Security;
+    using System.Text;
 
     [DataContract]
     class FuncCompletionCallbackWrapper<T> : CompletionCallbackWrapper

@@ -7,9 +7,9 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel; //Component
 using System.Data;
 using System.Data.Common; //DbDataAdapter
-using System.ComponentModel; //Component
 
 namespace System.Data.Odbc
 {

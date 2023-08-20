@@ -6,13 +6,13 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Text;
-    using System.Diagnostics.Contracts;
 
     // The Number class implements methods for formatting and parsing
     // numeric values. To format and parse numeric values, applications should

@@ -5,8 +5,8 @@
 // ==--==
 
 using System;
-using System.Runtime.Serialization;
 using System.Diagnostics.Contracts;
+using System.Runtime.Serialization;
 
 namespace System.Security.Cryptography
 {

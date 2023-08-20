@@ -4,11 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-using Internal.TypeSystem;
 using Internal.IL;
 using Internal.IL.Stubs;
-
+using Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
 // Default interface method implementation thunks

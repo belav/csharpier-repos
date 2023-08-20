@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using SerializationTypes;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -13,12 +12,13 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization.Tests;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
+using SerializationTypes;
 using Xunit;
-using System.Runtime.Serialization.Tests;
 
 public static partial class DataContractSerializerTests
 {

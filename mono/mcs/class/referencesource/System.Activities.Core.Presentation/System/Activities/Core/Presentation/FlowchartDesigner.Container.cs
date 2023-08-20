@@ -5,6 +5,7 @@
 namespace System.Activities.Core.Presentation
 {
     using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
     using System.Activities.Statements;
@@ -18,7 +19,6 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Media;
     using System.Windows.Threading;
     using System.Xaml;
-    using System.Activities.Presentation.FreeFormEditing;
 
     partial class FlowchartDesigner : IMultipleDragEnabledCompositeView
     {

@@ -17,10 +17,8 @@
 namespace Castle.DynamicProxy.Tests
 {
     using System.Reflection;
-
     using Castle.DynamicProxy.Tests.Classes;
     using Castle.DynamicProxy.Tests.Interceptors;
-
     using NUnit.Framework;
 
     public interface IGenericInterface<T>

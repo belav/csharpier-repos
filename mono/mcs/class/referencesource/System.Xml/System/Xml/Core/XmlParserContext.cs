@@ -5,9 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Xml;
-using System.Text;
 using System;
+using System.Text;
+using System.Xml;
 
 namespace System.Xml
 {

@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Tests
     using System;
     using System.Diagnostics;
     using System.IO;
-
     using NUnit.Framework;
 
     public class FindPeVerify

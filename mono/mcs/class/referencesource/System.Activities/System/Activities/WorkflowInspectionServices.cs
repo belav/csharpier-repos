@@ -5,10 +5,10 @@
 namespace System.Activities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections;
-    using System.Runtime;
     using System.Activities.Validation;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Runtime;
 
     public static class WorkflowInspectionServices
     {

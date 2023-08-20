@@ -4,12 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-
 using CoreFXTestLibrary;
 
 // Regression test for https://github.com/dotnet/corefx/issues/21379

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 
 // The GCRef map is used to encode GC type of arguments for callsites. Logically, it is sequence <pos, token> where pos is

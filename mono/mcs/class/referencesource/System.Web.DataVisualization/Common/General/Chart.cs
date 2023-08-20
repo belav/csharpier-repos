@@ -24,26 +24,25 @@
 #region Used Namespaces
 
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Design;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Resources;
-using System.Reflection;
-using System.IO;
 using System.Data;
-using System.Collections;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
-using System.Xml;
 using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics;
-using System.Security;
+using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-
+using System.Security;
+using System.Xml;
 #if Microsoft_CONTROL
 
 using System.Windows.Forms.DataVisualization.Charting.Data;

@@ -34,6 +34,8 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
+
+
 using JsonConstructor = Newtonsoft.Json.JsonConstructorAttribute;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer

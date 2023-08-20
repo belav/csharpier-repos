@@ -4,14 +4,13 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.Emit;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Cci = Microsoft.Cci;
-
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.Emit;
 #if !DEBUG
 using TypeParameterSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.TypeParameterSymbol;
+using Cci = Microsoft.Cci;
 #endif
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia

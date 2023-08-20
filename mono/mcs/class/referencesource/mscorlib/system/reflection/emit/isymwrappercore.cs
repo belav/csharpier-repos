@@ -11,10 +11,10 @@
 namespace System.Reflection.Emit
 {
     using System;
-    using System.Security;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.SymbolStore;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security;
 
     //-----------------------------------------------------------------------------------
     // On Telesto, we don't ship the ISymWrapper.dll assembly. However, ReflectionEmit

@@ -8,12 +8,10 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Async;
 using Moq.Expressions.Visitors;
 using Moq.Internals;
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq

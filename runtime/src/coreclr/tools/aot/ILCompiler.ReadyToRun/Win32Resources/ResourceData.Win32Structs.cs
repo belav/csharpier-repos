@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Reflection.Metadata;
-
+using System.Runtime.InteropServices;
 using ILCompiler.DependencyAnalysis;
 
 namespace ILCompiler.Win32Resources

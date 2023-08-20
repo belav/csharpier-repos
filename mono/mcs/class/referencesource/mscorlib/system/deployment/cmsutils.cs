@@ -1,17 +1,17 @@
-using Microsoft.Win32;
 using System;
 using System.Deployment.Internal;
 using System.Deployment.Internal.Isolation;
 using System.Deployment.Internal.Isolation.Manifest;
-using System.IO;
+using System.Diagnostics.Contracts;
 using System.Globalization;
+using System.IO;
 using System.Runtime.Hosting;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
+using Microsoft.Win32;
 
 namespace System.Deployment.Internal.Isolation.Manifest
 {

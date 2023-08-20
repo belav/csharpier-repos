@@ -2,8 +2,8 @@
 // http://live.capescience.com/wsdl/GlobalWeather.wsdl
 
 using System;
-using NUnit.Framework;
 using GlobalWeatherTests.Soap;
+using NUnit.Framework;
 
 namespace External.GlobalWeatherTests
 {

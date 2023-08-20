@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Xml;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
     using System.ComponentModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Text;
+    using System.Xml;
 
     public class MessageHeaderDescription : MessagePartDescription
     {

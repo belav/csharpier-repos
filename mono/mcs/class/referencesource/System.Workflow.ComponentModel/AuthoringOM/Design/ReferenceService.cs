@@ -5,8 +5,8 @@ namespace System.Workflow.ComponentModel.Design
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Globalization;
+    using System.Reflection;
 
     internal sealed class ReferenceService : IReferenceService, IDisposable
     {

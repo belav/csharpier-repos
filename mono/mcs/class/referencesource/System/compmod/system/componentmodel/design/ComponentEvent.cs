@@ -8,11 +8,11 @@
  */
 namespace System.ComponentModel.Design
 {
-    using Microsoft.Win32;
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     /// <para>Provides data for the System.ComponentModel.Design.IComponentChangeService.ComponentEvent

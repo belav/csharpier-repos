@@ -4,10 +4,10 @@
 
 namespace System.Activities.Hosting
 {
+    using System.Activities.Tracking;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime;
-    using System.Activities.Tracking;
 
     // One workflow host should have one manager, and one manager should have one catalog.
     // One workflow instance should have one container as the instance itself would be

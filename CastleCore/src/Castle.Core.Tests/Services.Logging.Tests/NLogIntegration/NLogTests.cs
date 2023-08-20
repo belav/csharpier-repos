@@ -15,11 +15,9 @@
 namespace Castle.Services.Logging.NLogIntegration.Tests
 {
     using System.Runtime.CompilerServices;
-
     using NLog;
     using NLog.Config;
     using NLog.Targets;
-
     using NUnit.Framework;
 
     public class NLogTests

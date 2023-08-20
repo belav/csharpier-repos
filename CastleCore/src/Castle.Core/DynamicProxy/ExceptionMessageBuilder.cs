@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy
     using System;
     using System.Linq;
     using System.Reflection;
-
     using Castle.Core.Internal;
     using Castle.DynamicProxy.Generators.Emitters;
 

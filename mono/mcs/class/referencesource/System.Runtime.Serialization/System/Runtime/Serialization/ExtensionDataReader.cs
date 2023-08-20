@@ -4,14 +4,14 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Text;
-    using System.IO;
-    using System.Xml;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Security;
+    using System.Text;
+    using System.Xml;
 
     // NOTE: XmlReader methods that are not needed have been left un-implemented
 

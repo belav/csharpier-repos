@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
+    using System.ServiceModel.Channels;
 
     public interface IMessageFilterTable<TFilterData> : IDictionary<MessageFilter, TFilterData>
     {

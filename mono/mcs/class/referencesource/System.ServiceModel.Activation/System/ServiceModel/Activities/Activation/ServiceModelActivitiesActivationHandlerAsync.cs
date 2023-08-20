@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Activities.Activation
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
     using System.Xaml.Hosting;
 
     [SuppressMessage(

@@ -30,10 +30,10 @@
 
 using System.Collections;
 using System.IO;
-using System.Xml;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
+using System.Xml;
 
 namespace System.Runtime.Remoting.MetadataServices
 {

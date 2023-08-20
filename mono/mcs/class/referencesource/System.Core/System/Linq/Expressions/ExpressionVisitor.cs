@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
-
 // Include Silverlight's managed resources
 #if SILVERLIGHT
 using System.Core;

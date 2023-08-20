@@ -15,8 +15,8 @@
 */
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace BenchmarksGame
 {

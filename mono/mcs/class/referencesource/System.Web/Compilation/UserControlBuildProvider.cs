@@ -9,8 +9,8 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Web.UI;
     using System.Web.Configuration;
+    using System.Web.UI;
 
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Code | BuildProviderAppliesTo.Web)]
     internal class UserControlBuildProvider : TemplateControlBuildProvider

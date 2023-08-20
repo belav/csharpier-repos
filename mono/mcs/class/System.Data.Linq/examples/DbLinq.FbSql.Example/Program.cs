@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
+using System.IO;
 using System.Linq;
 using System.Text;
 using FirebirdSql.Data.FirebirdClient;
-using System.Data.Linq;
-using System.IO;
 using nwind;
 
 // DbMetal.exe /server:localhost /user:sysdba /password:masterkey "/database=C:\Program Files\Firebird\Firebird_2_1\examples\empbuild\EMPLOYEE.FDB" /provider:FirebirdSql /code:..\..\..\examples\DbLinq.FbSql.Example\Employee.cs

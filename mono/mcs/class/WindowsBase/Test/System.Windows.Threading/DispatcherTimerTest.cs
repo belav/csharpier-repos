@@ -5,9 +5,9 @@
 //    Konrad M. Kruczynski
 //
 
-using NUnit.Framework;
 using System;
 using System.Windows.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Threading
 {

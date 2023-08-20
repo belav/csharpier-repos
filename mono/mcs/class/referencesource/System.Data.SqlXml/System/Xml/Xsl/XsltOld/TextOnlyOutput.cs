@@ -7,13 +7,13 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
+    using System.Collections;
     using System.IO;
+    using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Text;
-    using System.Collections;
+    using Res = System.Xml.Utils.Res;
 
     internal class TextOnlyOutput : RecordOutput
     {

@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Query.InternalTrees;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.PlanCompiler
 {

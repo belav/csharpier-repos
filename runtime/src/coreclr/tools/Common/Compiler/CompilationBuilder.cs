@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.IL;
 
 namespace ILCompiler

@@ -6,9 +6,9 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

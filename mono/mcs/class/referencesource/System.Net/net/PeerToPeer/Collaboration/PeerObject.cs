@@ -10,14 +10,14 @@ namespace System.Net.PeerToPeer.Collaboration
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Text;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.ComponentModel;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This class handles all the functionality and events associated with the Collaboration

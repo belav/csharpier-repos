@@ -26,11 +26,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq.JsonPath;
+using Newtonsoft.Json.Tests.Bson;
 #if !(PORTABLE || PORTABLE40 || NET35 || NET20) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Linq.JsonPath;
-using Newtonsoft.Json.Tests.Bson;
+
 #if HAVE_REGEX_TIMEOUTS
 using System.Text.RegularExpressions;
 #endif
@@ -42,7 +44,7 @@ using TestCaseSource = Xunit.MemberDataAttribute;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Linq;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

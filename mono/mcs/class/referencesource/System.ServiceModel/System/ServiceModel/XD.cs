@@ -6,8 +6,8 @@
 
 namespace System.ServiceModel
 {
-    using System.Xml;
     using System.Runtime.CompilerServices;
+    using System.Xml;
 
     // Static Xml Dictionary
     static class XD

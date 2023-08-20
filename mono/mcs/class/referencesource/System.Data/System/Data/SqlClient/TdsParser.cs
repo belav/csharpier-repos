@@ -23,7 +23,6 @@ namespace System.Data.SqlClient
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
-
     using MSS = Microsoft.SqlServer.Server;
 
     // The TdsParser Object controls reading/writing to the netlib, parsing the tds,

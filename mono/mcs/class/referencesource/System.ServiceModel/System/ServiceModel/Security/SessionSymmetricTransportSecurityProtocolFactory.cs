@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel;
+    using System.ServiceModel.Security.Tokens;
 
     class SessionSymmetricTransportSecurityProtocolFactory : TransportSecurityProtocolFactory
     {

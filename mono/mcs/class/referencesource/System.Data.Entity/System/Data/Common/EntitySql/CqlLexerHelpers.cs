@@ -10,12 +10,12 @@
 namespace System.Data.Common.EntitySql
 {
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-    using System.Diagnostics;
-    using System.Text;
     using System.Data.Entity;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Text;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Represents eSQL error context.

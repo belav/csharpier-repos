@@ -6,9 +6,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.FlowAnalysis;
-
+using Microsoft.CodeAnalysis.Operations;
 #if DEBUG
 using System.Diagnostics;
 #endif

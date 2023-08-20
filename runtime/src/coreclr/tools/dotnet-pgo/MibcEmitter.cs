@@ -1,32 +1,32 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-using Internal.IL;
-using Microsoft.Diagnostics.Tracing;
-using Microsoft.Diagnostics.Tracing.Etlx;
-using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Linq;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Threading.Tasks;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-using System.IO.Compression;
-using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
-using System.Diagnostics.CodeAnalysis;
-using ILCompiler.Reflection.ReadyToRun;
-using Microsoft.Diagnostics.Tools.Pgo;
-using Internal.Pgo;
-using ILCompiler.IBC;
+using System.Text;
+using System.Threading.Tasks;
 using ILCompiler;
+using ILCompiler.IBC;
+using ILCompiler.Reflection.ReadyToRun;
+using Internal.IL;
+using Internal.Pgo;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
+using Microsoft.Diagnostics.Tools.Pgo;
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing.Etlx;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
 
 namespace Microsoft.Diagnostics.Tools.Pgo
 {

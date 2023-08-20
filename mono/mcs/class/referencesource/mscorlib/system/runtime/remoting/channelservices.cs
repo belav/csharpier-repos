@@ -17,6 +17,7 @@ namespace System.Runtime.Remoting.Channels
 {
     using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
@@ -27,10 +28,9 @@ namespace System.Runtime.Remoting.Channels
     using System.Runtime.Remoting.Metadata;
     using System.Runtime.Remoting.Proxies;
     using System.Runtime.Versioning;
-    using System.Threading;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
+    using System.Threading;
 
     // ChannelServices
 

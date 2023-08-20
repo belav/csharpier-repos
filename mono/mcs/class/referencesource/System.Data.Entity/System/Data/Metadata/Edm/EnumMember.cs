@@ -10,8 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {

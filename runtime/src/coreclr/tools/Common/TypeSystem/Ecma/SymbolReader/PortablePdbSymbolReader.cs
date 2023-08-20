@@ -7,7 +7,6 @@ using System.IO.MemoryMappedFiles;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
-
 using Internal.IL;
 
 namespace Internal.TypeSystem.Ecma

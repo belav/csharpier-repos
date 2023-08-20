@@ -4,17 +4,15 @@
 #nullable enable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
+using System.Runtime.InteropServices;
+using Internal.IL;
 #if !DISABLE_UNMANAGED_PDB_SYMBOLS
 using Microsoft.DiaSymReader;
 #endif
-
-using Internal.IL;
 
 namespace Internal.TypeSystem.Ecma
 {

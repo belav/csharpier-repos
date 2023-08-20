@@ -11,10 +11,10 @@
 // (See the bottom of this file.)
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Reflection;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

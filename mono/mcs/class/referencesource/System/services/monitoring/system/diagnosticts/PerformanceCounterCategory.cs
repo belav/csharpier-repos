@@ -6,18 +6,18 @@
 
 namespace System.Diagnostics
 {
-    using System.Runtime.Serialization.Formatters;
+    using System;
+    using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System;
-    using System.Threading;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Collections;
-    using Microsoft.Win32;
     using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization.Formatters;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     A Performance counter category object.

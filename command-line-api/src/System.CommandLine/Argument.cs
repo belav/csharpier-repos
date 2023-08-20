@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Binding;
-using System.CommandLine.Parsing;
 using System.CommandLine.Completions;
+using System.CommandLine.Parsing;
 using System.Linq;
 
 namespace System.CommandLine

@@ -7,16 +7,16 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Web.Hosting;
 using System.Web.Compilation;
+using System.Web.Hosting;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Entity.Design.AspNet
 {

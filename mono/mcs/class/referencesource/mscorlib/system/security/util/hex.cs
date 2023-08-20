@@ -15,8 +15,8 @@
 namespace System.Security.Util
 {
     using System;
-    using System.Security;
     using System.Diagnostics.Contracts;
+    using System.Security;
 
     internal static class Hex
     {

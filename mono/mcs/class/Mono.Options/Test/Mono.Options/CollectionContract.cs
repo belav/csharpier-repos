@@ -29,11 +29,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using NUnit.Framework;
-
 using Cadenza.Collections;
 using Cadenza.Tests;
+using NUnit.Framework;
 
 namespace Cadenza.Collections.Tests
 {

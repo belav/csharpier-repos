@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
-using NUnit.Framework;
 using Microsoft.Build.BuildEngine;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks
 {

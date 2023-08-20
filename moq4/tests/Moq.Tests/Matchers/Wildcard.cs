@@ -1,5 +1,5 @@
-﻿using Xunit;
-using System;
+﻿using System;
+using Xunit;
 
 /// <summary>
 /// Tests for https://github.com/moq/moq4/issues/1199

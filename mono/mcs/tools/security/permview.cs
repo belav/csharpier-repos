@@ -13,10 +13,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Security;
-using SSP = System.Security.Permissions;
 using System.Text;
-
 using Mono.Cecil;
+using SSP = System.Security.Permissions;
 
 [assembly: AssemblyTitle("Mono PermView")]
 [assembly: AssemblyDescription("Managed Permission Viewer for .NET assemblies")]

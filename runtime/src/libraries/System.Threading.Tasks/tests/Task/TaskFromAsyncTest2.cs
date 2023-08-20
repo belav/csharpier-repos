@@ -9,12 +9,12 @@
 //
 // Test class using UnitTestDriver that ensures that the FromAsync overload methods are tested
 
-using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests.FromAsync
 {

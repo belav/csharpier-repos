@@ -24,10 +24,10 @@
 //      Chris Toshok <toshok@ximian.com>
 //
 
-using System.Drawing;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {

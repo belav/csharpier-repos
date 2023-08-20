@@ -138,8 +138,8 @@ namespace ReferenceTypeCounters
 
 namespace Test
 {
-    using V = ValueTypeCounters;
     using R = ReferenceTypeCounters;
+    using V = ValueTypeCounters;
 
     public class Test<T>
         where T : ICounter

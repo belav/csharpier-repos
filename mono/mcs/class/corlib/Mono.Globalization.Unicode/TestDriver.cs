@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-
 using Uni = Mono.Globalization.Unicode.MSCompatUnicodeTable;
 
 namespace Mono.Globalization.Unicode

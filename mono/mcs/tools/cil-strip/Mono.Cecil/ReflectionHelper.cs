@@ -32,8 +32,8 @@ namespace Mono.Cecil
 {
     using System;
     using System.Collections;
-    using SR = System.Reflection;
     using System.Text;
+    using SR = System.Reflection;
 
     internal sealed class ReflectionHelper
     {

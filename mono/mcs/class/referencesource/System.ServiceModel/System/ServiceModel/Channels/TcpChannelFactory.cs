@@ -9,10 +9,10 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Text;
-    using System.Threading;
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Threading;
 
     class TcpChannelFactory<TChannel>
         : ConnectionOrientedTransportChannelFactory<TChannel>,

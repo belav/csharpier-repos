@@ -4,8 +4,8 @@
 // this test case contains various types with recursive constraints
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 // Test 1: Base class with recursive constraint, derived class

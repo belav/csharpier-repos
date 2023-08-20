@@ -18,7 +18,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateDefaultConstruc
         EmptyDiagnosticAnalyzer,
         CSharpGenerateDefaultConstructorsCodeFixProvider
     >;
-
     using VerifyRefactoring = CSharpCodeRefactoringVerifier<GenerateDefaultConstructorsCodeRefactoringProvider>;
 
     public class GenerateDefaultConstructorsTests

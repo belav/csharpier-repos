@@ -1,9 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-#if !NETFX_CORE // In portable library we have our own implementation of Concurrent Dictionary which is in the internal namespace
-using System.Collections.Concurrent;
-#endif
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -17,6 +14,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Xml;
 using System.Xml.Serialization;
+#if !NETFX_CORE // In portable library we have our own implementation of Concurrent Dictionary which is in the internal namespace
+using System.Collections.Concurrent;
+#endif
 
 namespace System.Net.Http.Formatting
 {

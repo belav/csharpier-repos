@@ -29,7 +29,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Globalization;
-
 #if Microsoft_CONTROL
 
 using System.Windows.Forms.DataVisualization.Charting.Data;

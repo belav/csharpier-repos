@@ -9,10 +9,10 @@
 namespace System.Reflection
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     // This is not serializable because it is a reflection command.
     [Serializable]

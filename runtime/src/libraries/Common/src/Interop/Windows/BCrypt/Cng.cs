@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
+using System.Text;
 using Internal.Cryptography;
+using Microsoft.Win32.SafeHandles;
 using static Interop;
 using static Interop.BCrypt;
-using Microsoft.Win32.SafeHandles;
 
 namespace Internal.NativeCrypto
 {

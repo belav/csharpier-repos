@@ -1,6 +1,6 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 public class TestQueryableOrderBy
 {

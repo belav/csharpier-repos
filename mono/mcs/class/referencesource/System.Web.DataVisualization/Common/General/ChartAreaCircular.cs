@@ -37,7 +37,6 @@ using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
 using System.Windows.Forms.DataVisualization.Charting.Utilities;
 using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 using System.Windows.Forms.DataVisualization.Charting;
-
 using System.Globalization;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;

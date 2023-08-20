@@ -13,6 +13,7 @@ namespace System.ServiceModel.Description
     using System.IdentityModel.Selectors;
     using System.Reflection;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Cryptography.X509Certificates;
@@ -22,7 +23,6 @@ namespace System.ServiceModel.Description
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.Text;
-    using System.Runtime.CompilerServices;
 
     class ConfigLoader
     {

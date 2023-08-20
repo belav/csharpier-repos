@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Reflection.Metadata;
-
 using Debug = System.Diagnostics.Debug;
 using GenericParameterAttributes = System.Reflection.GenericParameterAttributes;
 

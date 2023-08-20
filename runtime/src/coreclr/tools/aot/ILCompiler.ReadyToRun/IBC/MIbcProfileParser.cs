@@ -3,19 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
-
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
+using System.Reflection.PortableExecutable;
 using Internal.IL;
 using Internal.Pgo;
-
-using System.Linq;
-using System.IO;
-using System.Diagnostics;
-
-using System.Reflection.PortableExecutable;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.IBC
 {

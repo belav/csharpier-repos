@@ -1,9 +1,4 @@
-﻿using LinqKit;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using POS_Server.Models;
-using POS_Server.Models.VM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
@@ -14,6 +9,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using LinqKit;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using POS_Server.Models;
+using POS_Server.Models.VM;
 
 namespace POS_Server.Controllers
 {

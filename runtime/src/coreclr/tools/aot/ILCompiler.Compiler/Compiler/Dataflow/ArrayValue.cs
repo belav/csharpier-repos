@@ -7,7 +7,6 @@ using System.Text;
 using ILCompiler.Dataflow;
 using ILLink.Shared.DataFlow;
 using Internal.TypeSystem;
-
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 #nullable enable

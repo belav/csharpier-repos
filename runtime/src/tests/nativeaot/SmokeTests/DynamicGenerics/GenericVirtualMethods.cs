@@ -4,10 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CoreFXTestLibrary;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using CoreFXTestLibrary;
 
 public static class GenericVirtualMethods
 {

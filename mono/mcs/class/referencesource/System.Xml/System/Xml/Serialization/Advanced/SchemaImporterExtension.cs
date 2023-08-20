@@ -7,12 +7,12 @@
 
 namespace System.Xml.Serialization.Advanced
 {
-    using System.Xml.Schema;
-    using System.Xml;
-    using System.Collections;
-    using System.Collections.Specialized;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Xml;
+    using System.Xml.Schema;
     using System.Xml.Serialization;
 
     /// <include file='doc\SchemaImporterExtension.uex' path='docs/doc[@for="SchemaImporterExtension"]/*' />

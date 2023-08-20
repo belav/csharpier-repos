@@ -17,7 +17,6 @@ namespace Castle.Core.Internal.Tests
     using System;
     using System.Collections;
     using System.Collections.Generic;
-
     using NUnit.Framework;
 
     [TestFixture]

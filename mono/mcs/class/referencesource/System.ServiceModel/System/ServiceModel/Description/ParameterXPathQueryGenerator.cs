@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.Xml.Linq;
-    using System.Xml;
-    using System.Text;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.ServiceModel.Description;
-    using System.Reflection;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Linq;
 
     public static class ParameterXPathQueryGenerator
     {

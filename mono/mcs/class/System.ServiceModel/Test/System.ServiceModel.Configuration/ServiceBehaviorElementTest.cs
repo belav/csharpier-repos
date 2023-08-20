@@ -36,7 +36,6 @@ using System.Configuration;
 using System.ServiceModel;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Security;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration

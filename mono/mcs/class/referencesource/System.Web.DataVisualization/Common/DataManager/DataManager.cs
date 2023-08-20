@@ -26,7 +26,6 @@ using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Design;
-
 #if Microsoft_CONTROL
 
 using System.Windows.Forms.DataVisualization.Charting;

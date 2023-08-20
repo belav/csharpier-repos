@@ -26,16 +26,16 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
-using NUnit.Framework;
 using Microsoft.Build.Exceptions;
-using Microsoft.Build.Logging;
 using Microsoft.Build.Framework;
-using System.Collections.Generic;
+using Microsoft.Build.Logging;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Evaluation
 {

@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
     using System.Configuration;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
 
     public sealed partial class ServiceDebugElement : BehaviorExtensionElement
     {

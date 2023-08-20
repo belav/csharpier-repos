@@ -4,23 +4,23 @@
 
 namespace System.Activities.Presentation
 {
+    using System.Activities.Presentation.Hosting;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
-    using System.Activities.Presentation.Hosting;
-    using System.Runtime;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Linq;
     using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using System.Reflection;
 
     internal sealed partial class DynamicArgumentDesigner : UserControl
     {

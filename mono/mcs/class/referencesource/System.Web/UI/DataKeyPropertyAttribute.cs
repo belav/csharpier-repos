@@ -9,9 +9,9 @@ namespace System.Web.UI
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Security.Permissions;
     using System.Web.Util;
-    using System.Diagnostics.CodeAnalysis;
 
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class DataKeyPropertyAttribute : Attribute

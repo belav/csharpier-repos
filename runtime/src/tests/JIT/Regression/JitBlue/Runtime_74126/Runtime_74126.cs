@@ -3,8 +3,8 @@
 
 using System;
 using System.Numerics;
-using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 
 public class Runtime_74126
 {

@@ -6,10 +6,10 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Runtime;
+    using System.Security;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using System.Security;
-    using System.Runtime;
 
     public sealed partial class AddressHeaderCollectionElement : ServiceModelConfigurationElement
     {

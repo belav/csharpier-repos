@@ -16,7 +16,6 @@ namespace Castle.DynamicProxy.Generators
 {
     using System;
     using System.Reflection;
-
     using Castle.DynamicProxy.Generators.Emitters;
     using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
     using Castle.DynamicProxy.Internal;

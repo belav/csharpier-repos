@@ -33,7 +33,6 @@ using System.Collections;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-
 using XSchema = System.Xml.Schema.XmlSchema;
 
 namespace Commons.Xml.Relaxng.XmlSchema

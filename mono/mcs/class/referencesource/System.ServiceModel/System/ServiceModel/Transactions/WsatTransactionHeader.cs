@@ -4,17 +4,16 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.ServiceModel.Channels;
-    using System.Diagnostics;
+    using System.Security.Permissions;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Transactions;
     using System.Xml;
-
     using Microsoft.Transactions.Wsat.Messaging;
     using Microsoft.Transactions.Wsat.Protocol;
-    using System.Security.Permissions;
 
     class WsatTransactionHeader : MessageHeader
     {

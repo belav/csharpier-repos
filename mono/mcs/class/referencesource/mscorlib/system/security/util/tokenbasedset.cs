@@ -14,11 +14,11 @@ namespace System.Security.Util
 {
     using System;
     using System.Collections;
-    using System.Security.Permissions;
-    using System.Runtime.Serialization;
-    using System.Threading;
-    using System.Diagnostics.Contracts;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Threading;
 
     [Serializable]
     internal class TokenBasedSet

@@ -10,7 +10,6 @@ using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Text;
-
 using Moq.Async;
 using Moq.Language;
 using Moq.Properties;

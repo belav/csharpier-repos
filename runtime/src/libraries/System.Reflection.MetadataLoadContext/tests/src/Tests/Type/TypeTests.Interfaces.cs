@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using SampleMetadata;
 using System.Collections;
 using System.Collections.Generic;
+using SampleMetadata;
 using Xunit;
 
 namespace System.Reflection.Tests

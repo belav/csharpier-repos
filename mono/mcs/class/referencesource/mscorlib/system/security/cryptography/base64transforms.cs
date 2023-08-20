@@ -16,9 +16,9 @@
 namespace System.Security.Cryptography
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Text;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

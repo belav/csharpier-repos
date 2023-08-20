@@ -7,10 +7,10 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Text;
-    using System.Net.Mime;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Net.Mime;
+    using System.Text;
 
     //
     // This class stores the basic components of an e-mail address as described in RFC 2822 Section 3.4.

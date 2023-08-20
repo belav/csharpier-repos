@@ -31,10 +31,10 @@
 
 using System;
 using Novell.Directory.Ldap.Asn1;
+using Novell.Directory.Ldap.Utilclass;
 using LdapException = Novell.Directory.Ldap.LdapException;
 using LdapLocalException = Novell.Directory.Ldap.LdapLocalException;
 using LdapSearchRequest = Novell.Directory.Ldap.LdapSearchRequest;
-using Novell.Directory.Ldap.Utilclass;
 
 namespace Novell.Directory.Ldap.Rfc2251
 {

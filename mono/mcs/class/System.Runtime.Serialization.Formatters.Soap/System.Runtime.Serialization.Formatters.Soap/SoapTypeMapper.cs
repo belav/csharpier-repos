@@ -28,16 +28,16 @@
 //
 
 using System;
-using System.Reflection;
 using System.Collections;
-using System.Runtime.Remoting;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters;
-using System.Xml.Schema;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace System.Runtime.Serialization.Formatters.Soap
 {

@@ -5,12 +5,11 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
+    using System.ComponentModel;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
-
     using System.Xml;
 
     public class WindowsStreamSecurityBindingElement

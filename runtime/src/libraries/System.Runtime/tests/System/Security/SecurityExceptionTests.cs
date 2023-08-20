@@ -3,7 +3,6 @@
 
 using System.Reflection;
 using System.Security;
-
 using Xunit;
 
 namespace System.Tests

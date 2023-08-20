@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.NativeFormat;
 
 namespace Internal.TypeSystem

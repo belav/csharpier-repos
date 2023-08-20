@@ -6,9 +6,7 @@ using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Xml.XPath;
-
 using Internal.TypeSystem;
-
 using EcmaModule = Internal.TypeSystem.Ecma.EcmaModule;
 
 namespace ILCompiler

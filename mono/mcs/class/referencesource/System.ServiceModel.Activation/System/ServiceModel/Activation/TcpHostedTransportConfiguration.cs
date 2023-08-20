@@ -6,9 +6,9 @@
 namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Diagnostics;
 
     sealed class TcpHostedTransportConfiguration : HostedTransportConfigurationBase
     {

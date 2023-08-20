@@ -15,9 +15,9 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {

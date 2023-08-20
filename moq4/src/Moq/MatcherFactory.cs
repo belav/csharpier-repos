@@ -7,10 +7,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Matchers;
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq

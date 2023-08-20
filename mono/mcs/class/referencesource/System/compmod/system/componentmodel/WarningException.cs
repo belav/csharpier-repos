@@ -8,12 +8,12 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Specifies an exception that is handled as a warning instead of an error.</para>

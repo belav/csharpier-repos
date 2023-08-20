@@ -3,9 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
-using Internal.Text;
 using Internal.NativeFormat;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis
 {

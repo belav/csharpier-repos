@@ -162,14 +162,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 #if PCL
 using System.Reflection;
 #else
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 #endif
-using System.Text;
-using System.Text.RegularExpressions;
 
 #if LINQ
 using System.Linq;

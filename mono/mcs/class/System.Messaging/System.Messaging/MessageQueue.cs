@@ -32,13 +32,13 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Messaging.Design;
+using System.Threading;
+using Mono.Messaging;
 #if !NO_SYSTEM_DRAWING_DEPENDENCY
 using System.Drawing;
 #endif
-using System.Messaging.Design;
-using System.Threading;
 
-using Mono.Messaging;
 
 namespace System.Messaging
 {

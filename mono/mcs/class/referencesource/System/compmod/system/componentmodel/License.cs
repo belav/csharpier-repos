@@ -6,10 +6,10 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <include file='doc\License.uex' path='docs/doc[@for="License"]/*' />
     /// <devdoc>

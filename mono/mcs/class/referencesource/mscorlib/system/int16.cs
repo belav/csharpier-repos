@@ -17,12 +17,12 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     ///#if GENERICS_WORK
     ///    using System.Numerics;
     ///#endif
     using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

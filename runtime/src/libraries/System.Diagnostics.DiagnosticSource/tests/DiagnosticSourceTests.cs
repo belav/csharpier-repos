@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TelemData = System.Collections.Generic.KeyValuePair<string, object>;
 using Xunit;
+using TelemData = System.Collections.Generic.KeyValuePair<string, object>;
 
 namespace System.Diagnostics.Tests
 {

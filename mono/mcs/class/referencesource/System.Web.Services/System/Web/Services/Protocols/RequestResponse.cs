@@ -6,17 +6,17 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Reflection;
-    using System.Threading;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Net;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
     using System.Web.Services.Diagnostics;
 
     internal class RequestResponseUtils

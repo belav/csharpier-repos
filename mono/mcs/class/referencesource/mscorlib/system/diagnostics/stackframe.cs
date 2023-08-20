@@ -5,12 +5,12 @@
 // ==--==
 namespace System.Diagnostics
 {
-    using System.Text;
     using System;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Reflection;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
+    using System.Text;
 
     // There is no good reason for the methods of this class to be virtual.
     // In order to ensure trusted code can trust the data it gets from a

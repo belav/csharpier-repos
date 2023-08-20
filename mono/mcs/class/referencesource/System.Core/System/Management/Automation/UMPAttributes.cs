@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace System.Management.Instrumentation
 {

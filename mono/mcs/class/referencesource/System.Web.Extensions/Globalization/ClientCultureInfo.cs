@@ -11,8 +11,8 @@ namespace System.Web.Globalization
     using System.Collections.Specialized;
     using System.Globalization;
     using System.Text;
-    using System.Web.Util;
     using System.Web.Script.Serialization;
+    using System.Web.Util;
 
     internal class ClientCultureInfo
     {

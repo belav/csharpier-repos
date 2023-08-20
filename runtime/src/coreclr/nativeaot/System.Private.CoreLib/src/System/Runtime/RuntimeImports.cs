@@ -3,12 +3,10 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-
+using System.Runtime.InteropServices;
 using Internal.Runtime;
 using Internal.Runtime.CompilerServices;
-
 using CorElementType = System.Reflection.CorElementType;
 
 namespace System.Runtime

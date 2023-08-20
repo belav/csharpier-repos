@@ -33,15 +33,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Internal;
 using System.Drawing.Text;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 using Gdip = System.Drawing.SafeNativeMethods.Gdip;
-using System.Runtime.Versioning;
 
 namespace System.Drawing
 {

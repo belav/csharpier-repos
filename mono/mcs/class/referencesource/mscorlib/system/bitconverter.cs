@@ -16,8 +16,8 @@
 namespace System
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
     using System.Security;
 
     // The BitConverter class contains methods for

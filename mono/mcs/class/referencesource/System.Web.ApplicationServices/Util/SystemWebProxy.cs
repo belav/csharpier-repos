@@ -10,8 +10,8 @@ namespace System.Web.Util
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
-    using System.Web.Security;
     using System.Security.Permissions;
+    using System.Web.Security;
 
     // Because this assembly ships in the client SKU, whereas System.Web.dll ships in the Extended SKU, we need to
     // proxy any usage of System.Web.dll. This allows us to fail gracefully if the Extended SKU is not present.

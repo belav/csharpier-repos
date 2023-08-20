@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Web.DynamicData.ModelProviders;
-
 using MonoTests.ModelProviders;
 
 namespace MonoTests.Common

@@ -9,7 +9,6 @@
 
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization

@@ -1,11 +1,11 @@
 using System;
+using System.Collections;
+using System.Deployment.Internal.Isolation;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Collections;
-using System.Globalization;
-using System.Threading;
 using System.Security;
-using System.Deployment.Internal.Isolation;
+using System.Threading;
 
 namespace System.Deployment.Internal.Isolation.Manifest
 {

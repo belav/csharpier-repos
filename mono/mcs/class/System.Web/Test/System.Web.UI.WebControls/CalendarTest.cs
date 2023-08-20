@@ -36,7 +36,6 @@ using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
 class PokerCalendar : System.Web.UI.WebControls.Calendar

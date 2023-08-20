@@ -8,11 +8,10 @@
 //
 using System;
 using System.IO;
-using System.Xml;
-using NUnit.Framework;
 using System.Reflection;
-
+using System.Xml;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

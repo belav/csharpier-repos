@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Selectors;
 
     public sealed partial class SecureConversationServiceElement : ConfigurationElement
     {

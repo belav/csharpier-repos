@@ -27,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -36,8 +35,8 @@ using System.Drawing.Text;
 using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing
 {

@@ -6,11 +6,11 @@
 
 namespace System.Net
 {
+    using System.Globalization;
     using System.Net.Sockets;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
-    using System.Globalization;
+    using System.Runtime.InteropServices;
 
     // need a global so we can pass the interfaces as variables,
     // is there a better way?

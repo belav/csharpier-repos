@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Discovery
 {
+    using System.Globalization;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Discovery.Version11;
     using System.ServiceModel.Discovery.VersionApril2005;
     using System.ServiceModel.Discovery.VersionCD1;
     using System.Xml;
-    using System.Globalization;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     [Fx.Tag.XamlVisible(false)]
     public abstract class DiscoveryService

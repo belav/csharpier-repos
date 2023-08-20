@@ -12,10 +12,10 @@
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Net.Test.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Systen.Net.Mail.Tests;
-using System.Net.Test.Common;
 using Xunit;
 
 namespace System.Net.Mail.Tests

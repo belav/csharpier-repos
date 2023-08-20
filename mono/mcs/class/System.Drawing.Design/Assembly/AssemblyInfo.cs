@@ -29,11 +29,11 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 
 // General Information about the System.Drawing.Design assembly
 

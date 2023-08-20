@@ -28,7 +28,6 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Xml.Linq

@@ -3,14 +3,14 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security.Tokens
 {
-    using System.IdentityModel.Claims;
-    using System.ServiceModel;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Security.Principal;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
     using System.Net;
+    using System.Security.Principal;
+    using System.ServiceModel;
 
     public class SspiSecurityToken : SecurityToken
     {

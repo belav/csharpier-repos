@@ -3,14 +3,16 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Activities.Presentation
 {
-    using System.Activities.Presentation.Model;
     using System.Activities.Core.Presentation;
+    using System.Activities.Presentation.Model;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Windows;
@@ -19,8 +21,6 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Windows.Input;
     using System.Xml;
     using System.Xml.Linq;
-    using System.ServiceModel.Description;
-    using System.Runtime;
 
     partial class MessageQueryEditor
     {

@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
     using System.Net.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public partial class NetMsmqBindingElement : MsmqBindingElementBase
     {

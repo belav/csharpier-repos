@@ -5,9 +5,8 @@
 // This is where we group together all the internal calls.
 //
 
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-
+using System.Runtime.InteropServices;
 using Internal.Runtime;
 
 namespace System.Runtime

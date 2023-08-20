@@ -5,9 +5,6 @@
 // ==--==
 
 using System;
-#if FEATURE_CORESYSTEM
-using System.Core;
-#endif
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -19,6 +16,10 @@ using System.Runtime.Versioning;
 using System.Security;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
+#if FEATURE_CORESYSTEM
+using System.Core;
+#endif
+
 
 namespace System.Security.Cryptography
 {

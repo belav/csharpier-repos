@@ -12,12 +12,12 @@
 
 namespace System
 {
+    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Security;
     using System.Security.Policy;
     using System.Security.Util;
     using System.Text;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -4,8 +4,8 @@
 using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 using Moq;
+using Xunit;
 
 namespace Microsoft.Extensions.Logging.Test
 {

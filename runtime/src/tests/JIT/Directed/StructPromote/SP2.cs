@@ -3,8 +3,8 @@
 //
 
 #define USE_STRUCT
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
 
 class SP2
 {

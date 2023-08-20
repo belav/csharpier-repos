@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using System.Collections.Generic;
 
 //Repro from http://www.simple-talk.com/dotnet/.net-framework/the-dangers-of-the-large-object-heap/

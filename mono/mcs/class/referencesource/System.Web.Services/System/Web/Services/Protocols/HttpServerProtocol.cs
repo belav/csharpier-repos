@@ -7,16 +7,16 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
+    using System.Net;
     using System.Reflection;
     using System.Text;
-    using System.Xml.Serialization;
-    using System.Web.Services.Description;
     using System.Web.Services.Configuration;
-    using System.Net;
-    using System.Globalization;
+    using System.Web.Services.Description;
+    using System.Xml.Serialization;
 
     internal class HttpServerType : ServerType
     {

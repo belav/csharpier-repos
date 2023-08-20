@@ -12,11 +12,11 @@
 
 namespace System.Web.Util
 {
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.InteropServices;
+    using System.Text;
     using System.Web.Hosting;
-    using System.Diagnostics.CodeAnalysis;
 
     /*
      * Various string handling utilities

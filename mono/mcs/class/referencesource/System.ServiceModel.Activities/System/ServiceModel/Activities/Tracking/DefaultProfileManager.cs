@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Activities.Tracking
 {
-    using System.Runtime.Remoting.Messaging;
-    using System.Runtime;
     using System.Activities.Tracking;
-    using System.Collections.Specialized;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Configuration;
-    using System.ServiceModel.Configuration;
+    using System.Runtime;
+    using System.Runtime.Remoting.Messaging;
     using System.ServiceModel.Activities.Tracking.Configuration;
+    using System.ServiceModel.Configuration;
 
     class DefaultProfileManager : TrackingProfileManager
     {

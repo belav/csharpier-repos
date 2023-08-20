@@ -12,9 +12,8 @@
  */
 namespace System.Web.UI
 {
-    using System.ComponentModel;
-
     using System;
+    using System.ComponentModel;
 
     /// <devdoc>
     ///    <para>Identifies

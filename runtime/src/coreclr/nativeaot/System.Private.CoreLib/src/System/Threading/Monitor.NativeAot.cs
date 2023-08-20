@@ -15,7 +15,6 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-
 using Internal.Runtime.CompilerServices;
 
 namespace System.Threading

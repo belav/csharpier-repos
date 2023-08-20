@@ -3,13 +3,13 @@
 
 #nullable enable
 
-using Mono.Options;
-using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using Microsoft.WebAssembly.Diagnostics;
+using Mono.Options;
 
 namespace Microsoft.WebAssembly.AppHost;
 

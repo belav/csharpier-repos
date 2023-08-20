@@ -18,12 +18,10 @@ namespace Castle.Services.Logging.Log4netIntegration.Tests
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
-    using NUnit.Framework;
-
     using log4net;
     using log4net.Appender;
     using log4net.Repository.Hierarchy;
+    using NUnit.Framework;
 
     [TestFixture]
     public class Log4netFactoryTestCase

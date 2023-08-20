@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Moq.Behaviors;
 
 namespace Moq.Language.Flow

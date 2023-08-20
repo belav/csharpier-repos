@@ -14,7 +14,6 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
-
     using ServiceModelActivity = System.ServiceModel.Diagnostics.ServiceModelActivity;
     using TraceUtility = System.ServiceModel.Diagnostics.TraceUtility;
 

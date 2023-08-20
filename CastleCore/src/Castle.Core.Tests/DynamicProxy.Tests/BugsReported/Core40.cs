@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests.BugsReported
 {
     using System;
-
     using NUnit.Framework;
 
     public class Core40ClassToProxy

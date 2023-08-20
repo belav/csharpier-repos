@@ -16,7 +16,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 {
     using static EmbeddedSyntaxHelpers;
     using static RegexHelpers;
-
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
 
     internal partial struct RegexParser

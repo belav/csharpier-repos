@@ -27,12 +27,11 @@
 #region Used namespaces
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Drawing.Imaging;
-using System.Diagnostics.CodeAnalysis;
-
+using System.Drawing.Text;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.Utilities;
 using System.Windows.Forms.DataVisualization.Charting.Borders3D;

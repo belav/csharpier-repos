@@ -3,7 +3,6 @@
 
 using System;
 using System.Numerics;
-
 using Point = System.Numerics.Vector2;
 
 namespace GitHub_21854

@@ -18,7 +18,6 @@ namespace Castle.DynamicProxy.Generators
     using System.Collections.Generic;
     using System.Reflection;
     using System.Reflection.Emit;
-
     using Castle.DynamicProxy.Generators.Emitters;
 
     internal class MetaProperty : MetaTypeElement, IEquatable<MetaProperty>

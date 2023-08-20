@@ -16,10 +16,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic.Utils;
 using System.Reflection;
 using System.Text;
-using System.Dynamic.Utils;
-
 #if SILVERLIGHT
 using System.Core;
 #endif

@@ -13,15 +13,15 @@ namespace System.Data.SqlClient
     using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Text;
-    using System.Xml;
-    using System.Data.SqlTypes;
     using System.IO;
-    using System.Runtime.InteropServices;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Xml;
 
     // Caches the bytes returned from partial length prefixed datatypes, like XML
     sealed internal class SqlCachedBuffer : System.Data.SqlTypes.INullable

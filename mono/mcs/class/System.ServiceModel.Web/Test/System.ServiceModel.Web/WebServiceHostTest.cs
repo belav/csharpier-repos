@@ -36,7 +36,6 @@ using System.ServiceModel.Web;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Net;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Web

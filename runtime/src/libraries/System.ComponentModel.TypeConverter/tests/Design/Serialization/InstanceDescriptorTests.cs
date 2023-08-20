@@ -30,9 +30,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using Xunit;
 
 namespace System.ComponentModel.Design.Serialization.Tests
 {

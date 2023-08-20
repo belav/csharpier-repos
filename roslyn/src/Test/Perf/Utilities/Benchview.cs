@@ -7,7 +7,6 @@
 using System;
 using System.IO;
 using System.Linq;
-
 using static Roslyn.Test.Performance.Utilities.TestUtilities;
 
 namespace Roslyn.Test.Performance.Utilities

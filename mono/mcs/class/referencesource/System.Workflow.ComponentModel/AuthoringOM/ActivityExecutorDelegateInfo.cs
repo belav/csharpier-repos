@@ -1,9 +1,9 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
 
     [Obsolete(

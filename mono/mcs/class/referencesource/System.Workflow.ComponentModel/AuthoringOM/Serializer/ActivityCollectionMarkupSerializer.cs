@@ -1,9 +1,9 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Workflow.ComponentModel.Design;
     using System.Xml;
 

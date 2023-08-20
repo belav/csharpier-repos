@@ -3,7 +3,6 @@
 
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Internal.Reflection.Augments;
 
 // This type is just stubbed out to be harmonious with CoreCLR

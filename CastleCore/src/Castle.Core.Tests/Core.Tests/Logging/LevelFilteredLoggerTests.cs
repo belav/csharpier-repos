@@ -16,10 +16,8 @@ namespace Castle.Core.Logging.Tests
 {
     using System;
     using System.ComponentModel;
-
-    using NUnit.Framework;
-
     using Castle.Core.Logging;
+    using NUnit.Framework;
 
     /// <summary>
     /// Contains all tests relating to the properties.

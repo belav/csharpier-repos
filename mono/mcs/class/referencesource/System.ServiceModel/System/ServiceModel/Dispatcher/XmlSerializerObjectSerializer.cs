@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Xml;
-    using System.ServiceModel;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal class XmlSerializerObjectSerializer : XmlObjectSerializer
     {

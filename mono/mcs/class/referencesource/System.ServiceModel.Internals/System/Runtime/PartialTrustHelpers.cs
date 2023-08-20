@@ -4,10 +4,10 @@
 
 namespace System.Runtime
 {
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     static class PartialTrustHelpers
     {

@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.InternalTrees
 {

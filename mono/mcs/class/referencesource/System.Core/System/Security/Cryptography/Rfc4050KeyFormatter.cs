@@ -7,13 +7,13 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-using System.Text;
-using System.Diagnostics.Contracts;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography

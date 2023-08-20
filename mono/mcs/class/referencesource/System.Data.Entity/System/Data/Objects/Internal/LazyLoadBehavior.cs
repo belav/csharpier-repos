@@ -8,7 +8,10 @@
 //---------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,9 +19,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Security;
 using System.Security.Permissions;
-using System.Data.Metadata.Edm;
-using System.Data.Objects.DataClasses;
-using System.Collections;
 
 namespace System.Data.Objects.Internal
 {

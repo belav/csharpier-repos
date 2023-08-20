@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Resources;
 using System.Reflection;
+using System.Resources;
 
 // needed for ../referencesource/System.Data/System/Data/CodeGen/datacache.cs
 internal static partial class Res

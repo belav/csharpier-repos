@@ -7,10 +7,9 @@ using System.Numerics;
 using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using Internal.Reflection.Augments;
 using Internal.Runtime.Augments;
 using Internal.Runtime.CompilerServices;
-using Internal.Reflection.Augments;
-
 using CorElementType = System.Reflection.CorElementType;
 using EETypeElementType = Internal.Runtime.EETypeElementType;
 

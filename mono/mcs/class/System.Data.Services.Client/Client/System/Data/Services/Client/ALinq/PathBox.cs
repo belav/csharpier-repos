@@ -14,12 +14,12 @@ namespace System.Data.Services.Client
     #region Namespaces.
 
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
 
     #endregion Namespaces.
 

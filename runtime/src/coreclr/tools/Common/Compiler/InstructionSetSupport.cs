@@ -4,9 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
 using Internal.JitInterface;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {

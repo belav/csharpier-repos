@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
 

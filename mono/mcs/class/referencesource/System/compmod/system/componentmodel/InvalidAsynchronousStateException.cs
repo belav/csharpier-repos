@@ -6,12 +6,12 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>The exception that is thrown when a thread that an operation should execute on no longer exists or is not pumping messages</para>

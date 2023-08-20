@@ -5,19 +5,19 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.Globalization;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Description;
-    using System.Configuration;
-    using System.ComponentModel;
-    using System.Runtime;
 
     public class WebHttpEndpointElement : StandardEndpointElement
     {

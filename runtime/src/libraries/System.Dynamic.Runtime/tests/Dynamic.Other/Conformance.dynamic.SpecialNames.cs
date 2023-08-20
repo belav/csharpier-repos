@@ -344,8 +344,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // <Description></Description>
     // <Expects status=success></Expects>
     // <Code>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class TestClass
     {

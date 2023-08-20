@@ -5,16 +5,16 @@
 namespace System.Activities.Expressions
 {
     using System.Activities;
+    using System.Activities.Validation;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Collections;
-    using System.Windows.Markup;
-    using System.Linq.Expressions;
-    using System.Collections.Generic;
-    using System.Activities.Validation;
     using System.Threading;
+    using System.Windows.Markup;
 
     [SuppressMessage(
         FxCop.Category.Naming,

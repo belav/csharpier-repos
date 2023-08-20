@@ -32,21 +32,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Runtime.Serialization;
-
+using QName = System.Xml.XmlQualifiedName;
 using SMBinding = System.ServiceModel.Channels.Binding;
 using SMMessage = System.ServiceModel.Channels.Message;
-
-using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 using WSBinding = System.Web.Services.Description.Binding;
 using WSMessage = System.Web.Services.Description.Message;
-using QName = System.Xml.XmlQualifiedName;
+using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 
 namespace System.ServiceModel.Description
 {

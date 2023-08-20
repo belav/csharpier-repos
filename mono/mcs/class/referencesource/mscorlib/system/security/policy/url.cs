@@ -14,11 +14,11 @@
 
 namespace System.Security.Policy
 {
+    using System.Diagnostics.Contracts;
     using System.IO;
+    using System.Runtime.Serialization;
     using System.Security.Util;
     using UrlIdentityPermission = System.Security.Permissions.UrlIdentityPermission;
-    using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

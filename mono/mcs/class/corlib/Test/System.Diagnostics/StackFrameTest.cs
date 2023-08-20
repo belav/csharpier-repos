@@ -10,9 +10,9 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using NUnit.Framework;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics
 {

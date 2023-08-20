@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
-
 using Moq.Expressions.Visitors;
 
 namespace Moq

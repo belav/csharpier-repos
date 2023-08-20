@@ -11,10 +11,9 @@ using System;
 using System.IO;
 using System.Xml;
 using Commons.Xml.Relaxng;
-using NUnit.Framework;
-
-using RVR = Commons.Xml.Relaxng.RelaxngValidatingReader;
 using MonoTests.Helpers;
+using NUnit.Framework;
+using RVR = Commons.Xml.Relaxng.RelaxngValidatingReader;
 
 namespace MonoTests.Commons.Xml.Relaxng
 {

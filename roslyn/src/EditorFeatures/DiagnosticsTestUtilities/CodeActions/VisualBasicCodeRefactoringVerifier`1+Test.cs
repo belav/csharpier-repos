@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Testing;
-
 #if !CODE_STYLE
 using System;
 using Microsoft.CodeAnalysis.Diagnostics;

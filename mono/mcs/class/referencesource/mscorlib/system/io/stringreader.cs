@@ -15,8 +15,8 @@
 ===========================================================*/
 
 using System;
-using System.Runtime.InteropServices;
 using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 #if FEATURE_ASYNC_IO
 using System.Threading.Tasks;

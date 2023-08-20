@@ -7,9 +7,10 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Security.Permissions;
     using System.Security.Principal;
     using System.Web;
     using System.Web.Compilation;
@@ -19,7 +20,6 @@ namespace System.Web.Configuration
     using System.Web.UI.WebControls.WebParts;
     using System.Web.Util;
     using System.Xml;
-    using System.Security.Permissions;
 
     /*  <!-- Configuration for webParts:
                 enableExport="[true|false]" - Enable the export of Web Parts (defaults to false)

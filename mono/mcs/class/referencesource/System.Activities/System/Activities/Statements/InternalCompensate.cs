@@ -4,8 +4,8 @@
 namespace System.Activities.Statements
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime;
 
     sealed class InternalCompensate : NativeActivity

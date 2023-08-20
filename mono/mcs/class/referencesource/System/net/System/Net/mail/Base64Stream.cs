@@ -7,10 +7,10 @@
 namespace System.Net
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Net.Mime;
     using System.Text;
-    using System.Diagnostics;
 
     internal class Base64Stream : DelegatedStream, IEncodableStream
     {

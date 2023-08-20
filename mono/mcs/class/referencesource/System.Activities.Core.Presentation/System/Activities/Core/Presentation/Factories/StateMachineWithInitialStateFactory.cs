@@ -6,8 +6,8 @@ namespace System.Activities.Core.Presentation.Factories
 {
     using System.Activities;
     using System.Activities.Presentation;
-    using System.Windows;
     using System.Activities.Statements;
+    using System.Windows;
 
     /// <summary>
     /// The type that is added to the toolbox, which defines the factory method

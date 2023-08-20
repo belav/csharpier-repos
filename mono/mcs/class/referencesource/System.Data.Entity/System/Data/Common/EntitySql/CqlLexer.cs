@@ -19,9 +19,9 @@ namespace System.Data.Common.EntitySql
     // @backupOwner Microsoft
     //----------------------------------------------------------------------------*/
     using System;
-    using System.Globalization;
     using System.Data.Common.EntitySql.AST;
     using System.Data.Entity;
+    using System.Globalization;
 
     internal partial class CqlLexer
     {

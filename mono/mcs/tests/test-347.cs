@@ -18,8 +18,8 @@ namespace SomethingElse.Core
 
 namespace Whatever.App
 {
-    using Whatever.Core;
     using SomethingElse.Core;
+    using Whatever.Core;
 
     public class B : A
     {

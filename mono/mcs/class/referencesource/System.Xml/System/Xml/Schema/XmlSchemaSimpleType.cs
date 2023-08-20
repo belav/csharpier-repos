@@ -7,8 +7,8 @@
 
 namespace System.Xml.Schema
 {
-    using System.Xml.Serialization;
     using System.Diagnostics;
+    using System.Xml.Serialization;
 
     /// <include file='doc\XmlSchemaSimpleType.uex' path='docs/doc[@for="XmlSchemaSimpleType"]/*' />
     /// <devdoc>

@@ -29,14 +29,13 @@
 namespace Mono.Cecil
 {
     using System;
+    using System.Text;
+    using Mono.Cecil.Binary;
+    using Mono.Cecil.Cil;
+    using Mono.Cecil.Metadata;
     using SR = System.Reflection;
     using SS = System.Security;
     using SSP = System.Security.Permissions;
-    using System.Text;
-
-    using Mono.Cecil.Cil;
-    using Mono.Cecil.Binary;
-    using Mono.Cecil.Metadata;
 
     internal sealed class ModuleDefinition
         : ModuleReference,

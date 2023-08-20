@@ -24,18 +24,19 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using Newtonsoft.Json.Utilities;
 #if HAVE_INOTIFY_COLLECTION_CHANGED
 using System.Collections.Specialized;
 #endif
-using System.Threading;
-using Newtonsoft.Json.Utilities;
-using System.Collections;
-using System.Globalization;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

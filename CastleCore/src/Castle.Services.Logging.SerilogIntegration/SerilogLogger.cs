@@ -15,7 +15,6 @@
 namespace Castle.Services.Logging.SerilogIntegration
 {
     using System;
-
     using Serilog;
     using Serilog.Events;
 

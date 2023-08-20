@@ -3,8 +3,8 @@
 
 using System.CommandLine.Tests.Utility;
 using System.Drawing;
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Rendering.Tests

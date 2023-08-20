@@ -16,7 +16,6 @@ namespace Castle.DynamicProxy.Tests.Interceptors
 {
     using System.Linq;
     using System.Reflection;
-
     using Castle.DynamicProxy.Tests.Classes;
 
     public class RequiredParamInterceptor : IInterceptor

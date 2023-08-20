@@ -6,9 +6,9 @@
 
 namespace Microsoft.Win32
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System;
     using System.Security;
 #if !SILVERLIGHT || FEATURE_NETCORE
     using System.Diagnostics.CodeAnalysis;

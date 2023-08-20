@@ -1,9 +1,9 @@
 namespace System.Web
 {
-    using System.Web;
-    using System.Web.Util;
     using System.Security;
     using System.Security.Permissions;
+    using System.Web;
+    using System.Web.Util;
 
     internal static class InternalSecurityPermissions
     {

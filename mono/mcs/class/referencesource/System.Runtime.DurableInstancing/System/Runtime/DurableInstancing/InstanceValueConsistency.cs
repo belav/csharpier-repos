@@ -5,8 +5,8 @@
 namespace System.Runtime.DurableInstancing
 {
     using System;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     [SuppressMessage(
         FxCop.Category.Naming,

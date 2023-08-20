@@ -1,9 +1,9 @@
-using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Permissions;
 using System.Security.Principal;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {

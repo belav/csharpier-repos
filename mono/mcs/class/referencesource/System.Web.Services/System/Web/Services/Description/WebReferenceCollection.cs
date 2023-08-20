@@ -7,18 +7,18 @@
 namespace System.Web.Services.Description
 {
     using System;
-    using System.Net;
-    using System.Web.Services.Description;
-    using System.IO;
-    using System.Xml;
-    using System.Xml.Schema;
-    using System.Web.Services.Protocols;
-    using System.Text;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.IO;
+    using System.Net;
+    using System.Text;
     using System.Threading;
-    using System.CodeDom;
+    using System.Web.Services.Description;
     using System.Web.Services.Discovery;
+    using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
 
     /// <include file='doc\WebReferenceCollection.uex' path='docs/doc[@for="WebReferenceCollection"]/*' />
     /// <devdoc>

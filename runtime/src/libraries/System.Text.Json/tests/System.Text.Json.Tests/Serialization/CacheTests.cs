@@ -8,8 +8,8 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
-using Xunit;
 using Microsoft.DotNet.RemoteExecutor;
+using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
 {

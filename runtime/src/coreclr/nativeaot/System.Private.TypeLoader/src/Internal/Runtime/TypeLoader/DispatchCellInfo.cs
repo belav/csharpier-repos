@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime;
-using Internal.Runtime.Augments;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-using Internal.TypeSystem;
+using System.Runtime.InteropServices;
 using Internal.NativeFormat;
+using Internal.Runtime.Augments;
+using Internal.TypeSystem;
 
 namespace Internal.Runtime.TypeLoader
 {

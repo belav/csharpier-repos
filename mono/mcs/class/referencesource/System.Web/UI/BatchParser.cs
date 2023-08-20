@@ -7,19 +7,19 @@
 namespace System.Web.UI
 {
     using System;
-    using System.IO;
-    using System.Web.Configuration;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Threading;
     using System.Globalization;
-    using System.Web.Hosting;
-    using System.Web.Caching;
-    using System.Web.Util;
-    using System.Web.Compilation;
-    using HttpException = System.Web.HttpException;
-    using Debug = System.Web.Util.Debug;
+    using System.IO;
     using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Web.Caching;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using Debug = System.Web.Util.Debug;
+    using HttpException = System.Web.HttpException;
 
     internal abstract class DependencyParser : BaseParser
     {

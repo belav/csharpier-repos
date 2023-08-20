@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.DataContracts;
 using System.Text;
 using System.Xml;
-
 using DataContractDictionary = System.Collections.Generic.Dictionary<
     System.Xml.XmlQualifiedName,
     System.Runtime.Serialization.DataContracts.DataContract

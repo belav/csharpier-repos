@@ -3,14 +3,10 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.Logging;
-
 using ILLink.Shared.TrimAnalysis;
-
 using Internal.TypeSystem;
-
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 

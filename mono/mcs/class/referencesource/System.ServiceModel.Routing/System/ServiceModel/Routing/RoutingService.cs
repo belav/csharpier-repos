@@ -18,15 +18,15 @@ namespace System.ServiceModel.Routing
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.Transactions;
     using SR2 = System.ServiceModel.Routing.SR;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     // Some of the [ServiceBehavior] settings are configured in RoutingBehavior class since
     // we need to pick the options dynamically based on whether we have transactions or not

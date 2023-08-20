@@ -16,9 +16,8 @@ namespace Castle.Core.Logging.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Diagnostics;
-
+    using System.Text;
     using NUnit.Framework;
 
     /// <summary>

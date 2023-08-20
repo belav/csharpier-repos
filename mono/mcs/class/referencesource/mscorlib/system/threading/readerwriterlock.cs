@@ -19,15 +19,15 @@
 #if FEATURE_RWLOCK
 namespace System.Threading
 {
-    using System.Threading;
-    using System.Security.Permissions;
-    using System.Runtime.Remoting;
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Threading;
 
     [HostProtection(Synchronization = true, ExternalThreading = true)]
     [ComVisible(true)]

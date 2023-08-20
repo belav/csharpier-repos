@@ -4,9 +4,9 @@
 
 using System;
 using System.Composition;
-using Microsoft.CommonLanguageServerProtocol.Framework;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.LanguageServer.Handler;
+using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 

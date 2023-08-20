@@ -28,7 +28,6 @@
 
 
 using System.Collections.Generic;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Generic

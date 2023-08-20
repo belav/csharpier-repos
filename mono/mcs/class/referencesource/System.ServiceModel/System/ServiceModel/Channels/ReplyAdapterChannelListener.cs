@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.Runtime.Serialization;
     using System.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using System.Threading;
+    using System.Xml;
 
     abstract class ReplyOverDuplexChannelListenerBase<TOuterChannel, TInnerChannel>
         : LayeredChannelListener<TOuterChannel>

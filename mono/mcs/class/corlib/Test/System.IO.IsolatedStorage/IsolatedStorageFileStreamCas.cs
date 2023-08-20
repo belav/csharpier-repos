@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -36,8 +34,8 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-
 using Microsoft.Win32.SafeHandles;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.IO.IsolatedStorageTest
 {

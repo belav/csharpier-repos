@@ -7,8 +7,8 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
-    using System.Text;
     using System.ServiceModel.Channels;
+    using System.Text;
 
     public sealed partial class TextMessageEncodingElement : BindingElementExtensionElement
     {

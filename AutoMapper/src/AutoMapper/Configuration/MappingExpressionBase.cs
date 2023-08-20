@@ -1,6 +1,6 @@
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -9,8 +9,8 @@ using AutoMapper.Internal;
 
 namespace AutoMapper.Configuration
 {
-    using static Expression;
     using Execution;
+    using static Expression;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ITypeMapConfiguration

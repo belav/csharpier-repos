@@ -7,8 +7,6 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Net;
@@ -16,8 +14,8 @@ using System.Net.Sockets;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-
 using MonoTests.System.Net.Sockets;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Net.Sockets
 {

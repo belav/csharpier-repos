@@ -27,8 +27,8 @@
 //
 
 
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

@@ -26,9 +26,8 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Concurrent

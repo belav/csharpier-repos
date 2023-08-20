@@ -24,28 +24,30 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq.JsonPath;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Utilities;
+#if HAVE_BIG_INTEGER
+using System.Numerics;
+#endif
+
 #if HAVE_DYNAMIC
 using System.Dynamic;
 using System.Linq.Expressions;
 #endif
-using System.IO;
-#if HAVE_BIG_INTEGER
-using System.Numerics;
-#endif
-using Newtonsoft.Json.Utilities;
-using System.Diagnostics;
-using System.Globalization;
-using System.Collections;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Linq
 {

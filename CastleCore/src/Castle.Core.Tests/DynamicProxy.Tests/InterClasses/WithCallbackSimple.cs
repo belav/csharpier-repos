@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
     using System;
-
     using Castle.DynamicProxy.Tests.Interfaces;
 
     public sealed class WithCallbackSimple : ISimple

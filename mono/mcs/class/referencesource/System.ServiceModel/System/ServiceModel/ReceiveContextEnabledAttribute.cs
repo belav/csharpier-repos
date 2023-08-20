@@ -4,8 +4,8 @@
 namespace System.ServiceModel
 {
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     [AttributeUsage(ServiceModelAttributeTargets.OperationBehavior)]
     public sealed class ReceiveContextEnabledAttribute : Attribute, IOperationBehavior

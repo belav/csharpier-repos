@@ -10,10 +10,10 @@
 // etc.
 
 using System;
-using System.Runtime.Loader;
+using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.IO;
+using System.Runtime.Loader;
 
 class TestAssemblyLoadContext : AssemblyLoadContext
 {

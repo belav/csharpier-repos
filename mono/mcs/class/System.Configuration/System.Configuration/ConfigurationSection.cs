@@ -30,10 +30,10 @@
 //
 
 using System.Collections;
-using System.Xml;
+using System.Configuration.Internal;
 using System.IO;
 using System.Security.Cryptography.Xml;
-using System.Configuration.Internal;
+using System.Xml;
 
 namespace System.Configuration
 {

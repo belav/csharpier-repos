@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Xunit;
-
 using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace System.Buffers.Binary.Tests

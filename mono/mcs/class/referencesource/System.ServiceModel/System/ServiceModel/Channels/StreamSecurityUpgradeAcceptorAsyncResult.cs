@@ -6,8 +6,8 @@ namespace System.ServiceModel.Channels
     using System.IO;
     using System.Runtime;
     using System.Security.Authentication;
-    using System.ServiceModel.Security;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
 
     abstract class StreamSecurityUpgradeAcceptorAsyncResult : TraceAsyncResult
     {

@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.Reflection;
+    using System.ServiceModel.Channels;
 
 #if USE_REFEMIT
     public static class OperationInvokerTrace

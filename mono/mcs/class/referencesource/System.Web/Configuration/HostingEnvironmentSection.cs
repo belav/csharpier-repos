@@ -7,16 +7,16 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
     public sealed class HostingEnvironmentSection : ConfigurationSection
     {

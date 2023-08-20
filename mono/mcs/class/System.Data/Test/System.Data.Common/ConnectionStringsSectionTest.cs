@@ -31,7 +31,6 @@
 
 using System;
 using System.Configuration;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration

@@ -1,11 +1,11 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Hosting;
 using System.CommandLine.NamingConventionBinder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.CommandLine.Parsing;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using static HostingPlayground.HostingPlaygroundLogEvents;
 
 namespace HostingPlayground

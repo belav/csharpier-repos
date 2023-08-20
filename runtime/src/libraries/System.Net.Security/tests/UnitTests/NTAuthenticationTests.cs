@@ -5,9 +5,9 @@ using System;
 using System.Buffers.Binary;
 using System.IO;
 using System.Net.Security;
+using System.Net.Test.Common;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Test.Common;
 using Xunit;
 
 namespace System.Net.Security.Tests

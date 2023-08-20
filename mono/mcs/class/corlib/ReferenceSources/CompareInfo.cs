@@ -32,8 +32,8 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Mono.Globalization.Unicode;
 using System.Threading;
+using Mono.Globalization.Unicode;
 
 namespace System.Globalization
 {

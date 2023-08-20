@@ -5,6 +5,7 @@
 namespace System.Workflow.Activities
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
@@ -16,7 +17,6 @@ namespace System.Workflow.Activities
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Collections.Generic;
 
     [TypeConverter(typeof(ServiceOperationInfoTypeConverter))]
     [Editor(typeof(ServiceOperationUIEditor), typeof(UITypeEditor))]

@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-
 #if MS_IO_REDIST
 using Microsoft.IO.Enumeration;
 

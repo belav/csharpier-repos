@@ -5,9 +5,9 @@
 // seg 8MB, gen0 4MB regression test for 460373
 
 using System;
-using System.Runtime;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime;
 using System.Runtime.InteropServices;
 
 namespace b424916

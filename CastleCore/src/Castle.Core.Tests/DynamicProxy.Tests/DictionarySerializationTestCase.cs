@@ -20,9 +20,7 @@ namespace Castle.DynamicProxy.Tests
     using System.Collections.Generic;
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
-
     using Castle.DynamicProxy.Tests.Classes;
-
     using NUnit.Framework;
 
     [TestFixture]

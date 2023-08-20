@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Routing
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Collections.Generic;
-    using System.Runtime;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Channels;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.Threading;
 
     class SessionChannels

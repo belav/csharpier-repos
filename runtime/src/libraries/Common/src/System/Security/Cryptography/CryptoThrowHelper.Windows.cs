@@ -3,7 +3,6 @@
 
 using System;
 using System.Security.Cryptography;
-
 #if !NETCOREAPP3_1_OR_GREATER
 using System.Diagnostics;
 using System.Runtime.Serialization;

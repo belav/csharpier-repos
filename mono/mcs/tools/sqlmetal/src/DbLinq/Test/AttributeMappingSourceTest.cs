@@ -28,13 +28,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Linq.Mapping;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
-using System.Data.Linq.Mapping;
-
+using DbLinq.Null;
+using NUnit.Framework;
 #if MONO_STRICT
 using System.Data.Linq;
 using AttributeMappingSource = System.Data.Linq.Mapping.AttributeMappingSource;
@@ -42,9 +42,6 @@ using AttributeMappingSource = System.Data.Linq.Mapping.AttributeMappingSource;
 using DbLinq.Data.Linq;
 using AttributeMappingSource = DbLinq.Data.Linq.Mapping.AttributeMappingSource;
 #endif
-
-using DbLinq.Null;
-using NUnit.Framework;
 
 namespace DbLinqTest
 {

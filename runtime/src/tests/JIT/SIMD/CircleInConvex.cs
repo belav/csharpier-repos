@@ -5,9 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Numerics;
-
+using System.Text;
 using Point = System.Numerics.Vector2;
 
 namespace ClassLibrary

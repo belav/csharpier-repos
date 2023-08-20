@@ -2,9 +2,9 @@
 // Author: Sergey Chaban (serge@wildwestsoftware.com)
 
 using System;
+using System.Collections;
 using System.IO;
 using System.Text;
-using System.Collections;
 
 namespace Mono.ILASM
 {

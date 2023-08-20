@@ -7,11 +7,11 @@
 // Copyright (C) 2004 Novell, Inc.
 //
 
-using PEAPI;
 using System;
-using System.IO;
 using System.Collections;
+using System.IO;
 using Mono.CompilerServices.SymbolWriter;
+using PEAPI;
 
 namespace Mono.ILASM
 {

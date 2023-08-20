@@ -4,8 +4,8 @@
 // static field
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
 
 namespace Precise

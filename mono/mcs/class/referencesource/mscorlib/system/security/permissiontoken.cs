@@ -7,14 +7,14 @@
 namespace System.Security
 {
     using System;
-    using System.Security.Util;
-    using System.Security.Permissions;
-    using System.Reflection;
     using System.Collections;
-    using System.Threading;
-    using System.Globalization;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Security.Permissions;
+    using System.Security.Util;
+    using System.Threading;
 
     [Flags]
     internal enum PermissionTokenType

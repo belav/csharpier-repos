@@ -19,7 +19,6 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Net

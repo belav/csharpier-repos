@@ -4,8 +4,8 @@
 namespace NetClient
 {
     using System;
-    using System.Threading;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Xunit;
 
     class Program

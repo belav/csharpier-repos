@@ -27,16 +27,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.IO;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Diagnostics;
 using System.Text;
 using Internal.Cryptography;
 using Microsoft.Win32.SafeHandles;
-
 using Mono.Security;
 
 namespace System.Security.Cryptography.X509Certificates

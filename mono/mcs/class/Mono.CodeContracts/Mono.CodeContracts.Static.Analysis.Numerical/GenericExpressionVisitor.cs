@@ -27,9 +27,7 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.DataStructures;
-
 using Op = Mono.CodeContracts.Static.Analysis.Numerical.ExpressionOperator;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical

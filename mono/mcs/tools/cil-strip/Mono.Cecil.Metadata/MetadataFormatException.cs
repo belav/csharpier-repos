@@ -29,7 +29,6 @@
 namespace Mono.Cecil.Metadata
 {
     using System;
-
     using Mono.Cecil.Binary;
 
     internal class MetadataFormatException : ImageFormatException

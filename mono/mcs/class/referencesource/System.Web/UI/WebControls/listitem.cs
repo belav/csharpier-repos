@@ -10,8 +10,8 @@ namespace System.Web.UI.WebControls
     using System.Collections;
     using System.ComponentModel;
     using System.Globalization;
-    using AttributeCollection = System.Web.UI.AttributeCollection;
     using System.Web.Util;
+    using AttributeCollection = System.Web.UI.AttributeCollection;
 
     /// <devdoc>
     /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.ListItem'/> control.</para>

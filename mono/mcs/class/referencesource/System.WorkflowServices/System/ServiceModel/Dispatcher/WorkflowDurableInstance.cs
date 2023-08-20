@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Workflow.Runtime;
+    using System.Diagnostics;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
+    using System.Workflow.Runtime;
 
     class WorkflowDurableInstance : DurableInstance
     {

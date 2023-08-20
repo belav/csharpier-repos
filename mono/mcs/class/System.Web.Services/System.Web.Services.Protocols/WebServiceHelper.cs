@@ -32,10 +32,10 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Web.Services.Description;
 
 namespace System.Web.Services.Protocols
 {

@@ -27,9 +27,9 @@
 //
 
 using System;
-using System.IO;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Security.Permissions;
 using NUnit.Framework;
 

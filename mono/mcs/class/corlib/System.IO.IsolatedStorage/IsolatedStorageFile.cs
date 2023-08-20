@@ -37,7 +37,6 @@ using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
-
 using Mono.Security.Cryptography;
 
 namespace System.IO.IsolatedStorage

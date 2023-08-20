@@ -6,8 +6,8 @@
 namespace System.Globalization
 {
     using System;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Runtime.Versioning;
 #if !FEATURE_WIN32_REGISTRY
     using System.Text;
     using Microsoft.Win32;

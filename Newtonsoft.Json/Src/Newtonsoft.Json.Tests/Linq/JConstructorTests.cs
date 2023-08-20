@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
@@ -33,7 +34,7 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.IO;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

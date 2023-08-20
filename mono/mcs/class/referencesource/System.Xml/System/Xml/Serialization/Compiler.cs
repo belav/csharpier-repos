@@ -7,24 +7,24 @@
 
 namespace System.Xml.Serialization
 {
+    using System;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Collections;
-    using System.IO;
-    using System;
-    using System.Text;
-    using System.ComponentModel;
-    using System.CodeDom.Compiler;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics;
-    using System.Security.Principal;
     using System.Security.Policy;
+    using System.Security.Principal;
+    using System.Text;
     using System.Threading;
     using System.Xml.Serialization.Configuration;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
 
     internal class Compiler
     {

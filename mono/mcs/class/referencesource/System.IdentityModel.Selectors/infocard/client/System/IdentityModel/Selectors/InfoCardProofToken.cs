@@ -5,11 +5,11 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Claims;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
 
     //
     // Summary:

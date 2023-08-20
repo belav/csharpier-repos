@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Runtime.CompilerHelpers

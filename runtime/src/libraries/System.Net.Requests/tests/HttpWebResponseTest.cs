@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Test.Common;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Tests

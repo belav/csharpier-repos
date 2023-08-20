@@ -1,9 +1,9 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.CommandLine.Generator.Parameters;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis;
 
 namespace System.CommandLine.Generator.Invocations
 {

@@ -3,18 +3,15 @@
 
 
 using System;
-using System.Threading;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Reflection.Runtime.General;
-
-using Internal.Runtime.Augments;
-using Internal.Runtime.CompilerServices;
-
+using System.Runtime.InteropServices;
+using System.Threading;
 using Internal.Metadata.NativeFormat;
 using Internal.NativeFormat;
+using Internal.Runtime.Augments;
+using Internal.Runtime.CompilerServices;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime.TypeLoader

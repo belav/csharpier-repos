@@ -28,16 +28,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Xml;
+using Microsoft.Build.Construction;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Exceptions;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
-using Microsoft.Build.Evaluation;
-using System.Linq;
-using System.IO;
-using Microsoft.Build.Exceptions;
-using System.Globalization;
-using Microsoft.Build.Construction;
 using Microsoft.Build.Internal.Expressions;
-using System.Xml;
 
 namespace Microsoft.Build.Internal
 {

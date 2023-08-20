@@ -22,7 +22,6 @@ namespace Castle.DynamicProxy
     using System.Reflection.Emit;
     using System.Resources;
     using System.Threading;
-
     using Castle.Core.Internal;
     using Castle.DynamicProxy.Generators;
 #if FEATURE_SERIALIZATION

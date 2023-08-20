@@ -4,11 +4,9 @@
 
 using System;
 using System.Diagnostics;
-
+using Internal.NativeFormat;
 using Internal.Runtime.Augments;
 using Internal.Runtime.CompilerServices;
-
-using Internal.NativeFormat;
 using Internal.TypeSystem;
 using Internal.TypeSystem.NoMetadata;
 

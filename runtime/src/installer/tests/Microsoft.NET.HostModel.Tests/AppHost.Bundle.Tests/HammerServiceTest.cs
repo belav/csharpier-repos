@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using BundleTests.Helpers;
-using Microsoft.DotNet.Cli.Build.Framework;
-using Microsoft.DotNet.CoreSetup.Test;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using BundleTests.Helpers;
+using Microsoft.DotNet.Cli.Build.Framework;
+using Microsoft.DotNet.CoreSetup.Test;
 using Xunit;
 
 namespace AppHost.Bundle.Tests

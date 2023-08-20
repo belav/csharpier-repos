@@ -30,10 +30,9 @@
 
 
 using System;
-using System.Text;
 using System.Data;
 using System.Data.Odbc;
-
+using System.Text;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Odbc

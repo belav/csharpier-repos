@@ -6,9 +6,9 @@
 
 namespace System.Net
 {
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
 
     //NOTE: While DnsPermissionAttribute resides in System.DLL,
     //      no classes from that DLL are able to make declarative usage of DnsPermission.

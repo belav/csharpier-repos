@@ -14,9 +14,9 @@
 ===========================================================*/
 namespace System.Runtime.Serialization
 {
-    using System.Runtime.Remoting;
     using System;
     using System.IO;
+    using System.Runtime.Remoting;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface IFormatter

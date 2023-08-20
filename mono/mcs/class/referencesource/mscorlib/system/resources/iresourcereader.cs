@@ -17,8 +17,8 @@
 namespace System.Resources
 {
     using System;
-    using System.IO;
     using System.Collections;
+    using System.IO;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface IResourceReader : IEnumerable, IDisposable

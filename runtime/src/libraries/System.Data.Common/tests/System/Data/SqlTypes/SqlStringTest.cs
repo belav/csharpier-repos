@@ -28,12 +28,12 @@
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.IO;
+using System.Tests;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Text;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Data.Tests.SqlTypes
 {

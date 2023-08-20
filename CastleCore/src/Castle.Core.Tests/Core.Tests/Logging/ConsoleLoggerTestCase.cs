@@ -16,9 +16,7 @@ namespace Castle.Core.Logging.Tests
 {
     using System;
     using System.IO;
-
     using Castle.Core.Logging;
-
     using NUnit.Framework;
 
     [TestFixture]

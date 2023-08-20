@@ -23,9 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Linq.JsonPath;
-using System;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

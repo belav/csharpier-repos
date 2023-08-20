@@ -1,22 +1,20 @@
 using System;
-using System.Drawing;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using Exocortex.DSP;
-using System.Reflection;
-using System.Xml.Serialization;
 using System.Collections;
-using System.Security.Cryptography;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Imaging;
-
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml.Serialization;
+using Exocortex.DSP;
+using NUnit.Framework;
 #if MONOTOUCH
 #else
 using System.Windows.Forms;
 #endif
-
-using NUnit.Framework;
 
 namespace DrawingTestHelper
 {

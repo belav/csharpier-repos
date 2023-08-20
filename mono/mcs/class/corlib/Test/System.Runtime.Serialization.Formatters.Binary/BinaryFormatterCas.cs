@@ -33,9 +33,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.Runtime.Serialization.Formatters.Binary;
-
 using NUnit.Framework;
 
 namespace MonoCasTests.System.Runtime.Serialization.Formatters.Binary

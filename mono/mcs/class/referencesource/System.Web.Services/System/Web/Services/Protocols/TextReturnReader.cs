@@ -1,11 +1,11 @@
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
-    using System.Web.Services;
-    using System.Text;
+    using System.IO;
     using System.Net;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Services;
 
     /// <include file='doc\TextReturnReader.uex' path='docs/doc[@for="TextReturnReader"]/*' />
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]

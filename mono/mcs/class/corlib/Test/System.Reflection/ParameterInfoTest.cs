@@ -9,18 +9,17 @@
 //
 
 using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using NUnit.Framework;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using NUnit.Framework;
 
 namespace MonoTests.System.Reflection
 {

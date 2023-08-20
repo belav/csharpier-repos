@@ -6,20 +6,20 @@
 
 namespace System.Web.UI.HtmlControls
 {
-    using System.Runtime.Serialization.Formatters;
-    using System.Text;
-    using System.ComponentModel;
     using System;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Data;
+    using System.Globalization;
+    using System.Runtime.Serialization.Formatters;
+    using System.Security.Permissions;
+    using System.Text;
     using System.Web;
-    using System.Web.Util;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Globalization;
+    using System.Web.Util;
     using Debug = System.Web.Util.Debug;
-    using System.Security.Permissions;
 
     public class HtmlSelectBuilder : ControlBuilder
     {

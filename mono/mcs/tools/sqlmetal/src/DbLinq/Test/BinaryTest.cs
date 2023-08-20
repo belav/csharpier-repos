@@ -25,11 +25,9 @@
 #endregion
 
 using System;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
-
-using System.Data.Linq;
-
 using NUnit.Framework;
 
 namespace DbLinqTest

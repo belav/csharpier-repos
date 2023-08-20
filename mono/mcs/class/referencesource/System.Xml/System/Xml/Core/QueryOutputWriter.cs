@@ -8,11 +8,11 @@
 namespace System.Xml
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Collections.Generic;
     using System.Xml.Schema;
-    using System.Diagnostics;
 
     /// <summary>
     /// This writer wraps an XmlRawWriter and inserts additional lexical information into the resulting

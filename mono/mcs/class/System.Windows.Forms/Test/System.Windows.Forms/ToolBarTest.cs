@@ -11,10 +11,8 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

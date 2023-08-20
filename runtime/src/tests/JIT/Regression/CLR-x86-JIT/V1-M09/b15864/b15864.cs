@@ -5,9 +5,9 @@
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
-    using System.Security;
     //@ENDRENAME; Verify this renames
     using System;
+    using System.Security;
 
     public class TestClass
     {

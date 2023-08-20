@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Runtime.TypeLoader;
 

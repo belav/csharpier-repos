@@ -9,8 +9,8 @@ namespace System.Web.Configuration
     using System;
     using System.Configuration;
     using System.IO;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     //
     // Maps a virtual directory to a physical directory and its config file.

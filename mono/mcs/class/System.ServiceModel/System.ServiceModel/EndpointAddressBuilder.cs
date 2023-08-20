@@ -29,8 +29,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.ServiceModel.Channels;
+using System.Xml;
 
 namespace System.ServiceModel
 {

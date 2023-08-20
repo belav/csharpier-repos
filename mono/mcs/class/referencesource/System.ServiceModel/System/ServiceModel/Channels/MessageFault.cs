@@ -5,15 +5,15 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Description;
-    using System.Text;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
-    using System.Globalization;
+    using System.Text;
+    using System.Xml;
 
     public abstract class MessageFault
     {

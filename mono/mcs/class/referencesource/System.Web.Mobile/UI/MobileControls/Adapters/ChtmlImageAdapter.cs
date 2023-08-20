@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 using System.Globalization;
-using System.Web.UI.MobileControls.Adapters;
 using System.Security.Permissions;
+using System.Web.UI.MobileControls.Adapters;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource

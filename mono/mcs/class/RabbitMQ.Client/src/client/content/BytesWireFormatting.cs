@@ -55,9 +55,8 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.Text;
 using System.IO;
-
+using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Util;
 

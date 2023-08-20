@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Numerics;
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 
 // This test executes the same computation on a wrapped Vector4 ('float4') and a
 // (not wrapped) Vector4. The code should be similar.

@@ -4,11 +4,11 @@
 // </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
-using System.Diagnostics;
 using System.Collections;
-using System.Threading;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Versioning;
+using System.Threading;
 
 namespace System.Xml.Schema
 {

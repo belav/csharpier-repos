@@ -4,14 +4,14 @@
 
 namespace System.Activities.Core.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.Model;
+    using System.Activities.Presentation.View;
     using System.Linq;
     using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using System.Activities.Presentation;
-    using System.Activities.Presentation.View;
-    using System.Activities.Presentation.Model;
 
     partial class StartSymbol
     {

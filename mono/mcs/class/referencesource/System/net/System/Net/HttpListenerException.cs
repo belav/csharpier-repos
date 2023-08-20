@@ -8,8 +8,8 @@ namespace System.Net
 {
     using System;
     using System.ComponentModel;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     [Serializable]
     public class HttpListenerException : Win32Exception

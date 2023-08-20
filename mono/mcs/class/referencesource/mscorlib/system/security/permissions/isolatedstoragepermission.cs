@@ -9,10 +9,10 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Security;
     using System.Security.Util;
-    using System.Globalization;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

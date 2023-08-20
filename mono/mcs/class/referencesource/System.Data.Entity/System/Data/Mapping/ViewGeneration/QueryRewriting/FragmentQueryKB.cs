@@ -8,14 +8,14 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Common.Utils;
 using System.Data.Common.Utils.Boolean;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 {

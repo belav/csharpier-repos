@@ -7,8 +7,8 @@
 // Copyright (C) 2006 Novell, Inc. http://www.novell.com
 //
 using System;
-using System.Globalization;
 using System.Collections;
+using System.Globalization;
 using System.Xml;
 
 namespace Mono.ApiTools

@@ -5,9 +5,9 @@ using StringHandle = System.Int64;
 
 namespace System.Xml
 {
-    using System.Xml;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using System.Xml;
 
     public class XmlBinaryReaderSession : IXmlDictionary
     {

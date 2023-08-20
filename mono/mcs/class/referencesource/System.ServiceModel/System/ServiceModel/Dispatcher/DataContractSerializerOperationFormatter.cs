@@ -6,13 +6,13 @@ namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Xml;
-    using System.Linq;
 
     static class DataContractSerializerDefaults
     {

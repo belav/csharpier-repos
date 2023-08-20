@@ -1,12 +1,12 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Xunit;
-using FluentAssertions;
 using System;
 using System.IO;
-using Microsoft.DotNet.CoreSetup.Test;
+using FluentAssertions;
 using Microsoft.DotNet.Cli.Build.Framework;
+using Microsoft.DotNet.CoreSetup.Test;
+using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeUnitTests
 {

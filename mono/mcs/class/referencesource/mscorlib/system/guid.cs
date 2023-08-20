@@ -6,12 +6,12 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Text;
     using Microsoft.Win32;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
 
     // Represents a Globally Unique Identifier.
     [StructLayout(LayoutKind.Sequential)]

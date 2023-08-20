@@ -5,24 +5,22 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.IO;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Security.Cryptography;
-
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.ServiceModel.Diagnostics;
-
     using DictionaryManager = System.IdentityModel.DictionaryManager;
+    using IPrefixGenerator = System.IdentityModel.IPrefixGenerator;
     using ISecurityElement = System.IdentityModel.ISecurityElement;
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
-    using IPrefixGenerator = System.IdentityModel.IPrefixGenerator;
 
     abstract class SendSecurityHeader : SecurityHeader, IMessageHeaderWithSharedNamespace
     {

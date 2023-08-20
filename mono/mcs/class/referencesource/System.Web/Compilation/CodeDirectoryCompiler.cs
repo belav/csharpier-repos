@@ -9,16 +9,16 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
-    using System.Collections;
     using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Configuration;
     using System.Globalization;
-    using System.Web.Configuration;
+    using System.IO;
     using System.Reflection;
+    using System.Web.Configuration;
     using System.Web.Hosting;
-    using System.Web.Util;
     using System.Web.UI;
+    using System.Web.Util;
 
     // The different types of directory that we treat as 'Code' (with minor differences)
     internal enum CodeDirectoryType

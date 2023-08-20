@@ -6,8 +6,8 @@
 //------------------------------------------------------------------------------
 
 using System.ComponentModel;
-using System.Xml.Serialization;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace System.Xml.Schema
 {

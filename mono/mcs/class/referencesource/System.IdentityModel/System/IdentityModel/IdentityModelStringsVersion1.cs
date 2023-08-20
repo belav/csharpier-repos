@@ -6,8 +6,8 @@
 
 namespace System.IdentityModel
 {
-    using System.Xml;
     using System.Runtime.CompilerServices;
+    using System.Xml;
 
     class IdentityModelStringsVersion1 : IdentityModelStrings
     {

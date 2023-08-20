@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     using static EmbeddedSyntaxHelpers;
-
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
 
     internal partial struct JsonParser

@@ -21,8 +21,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using NUnit.Framework;
     using Castle.Components.DictionaryAdapter.Tests;
+    using NUnit.Framework;
 
     [TestFixture]
     public class XmlAdapterAcceptanceTestCase

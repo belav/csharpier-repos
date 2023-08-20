@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests.InterClasses
 {
     using System;
-
     using Castle.DynamicProxy.Tests.Interfaces;
 
 #if FEATURE_SERIALIZATION

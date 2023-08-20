@@ -3,10 +3,8 @@
 
 using System;
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
 using Ecma = System.Reflection.Metadata;
-
 using GenericParameterKind = Internal.Metadata.NativeFormat.GenericParameterKind;
 
 namespace ILCompiler.Metadata

@@ -1,8 +1,8 @@
 using System;
-using global::System.Runtime.Serialization;
-using global::System.Diagnostics;
-using global::System.ServiceModel;
 using System.IO;
+using global::System.Diagnostics;
+using global::System.Runtime.Serialization;
+using global::System.ServiceModel;
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization

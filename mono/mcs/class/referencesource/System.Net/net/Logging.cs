@@ -6,14 +6,14 @@
 namespace System.Net
 {
     using System.Collections;
-    using System.IO;
-    using System.Threading;
     using System.Diagnostics;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
     using System.Globalization;
-    using Microsoft.Win32;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 
     internal static class Logging
     {

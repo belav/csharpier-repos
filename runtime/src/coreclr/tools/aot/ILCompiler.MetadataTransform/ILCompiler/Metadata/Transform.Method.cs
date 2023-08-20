@@ -3,14 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Metadata.NativeFormat.Writer;
-
-using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
 using CallingConventions = System.Reflection.CallingConventions;
+using Cts = Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 using MethodAttributes = System.Reflection.MethodAttributes;
 using MethodImplAttributes = System.Reflection.MethodImplAttributes;
 

@@ -8,12 +8,12 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
 using System.Data.Objects.ELinq;
-using System.Diagnostics;
 using System.Data.Objects.Internal;
+using System.Diagnostics;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using OM = System.Collections.ObjectModel;
 
 namespace System.Data.Objects

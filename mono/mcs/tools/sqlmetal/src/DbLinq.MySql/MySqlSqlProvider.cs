@@ -27,7 +27,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Util;
 using DbLinq.Vendor.Implementation;

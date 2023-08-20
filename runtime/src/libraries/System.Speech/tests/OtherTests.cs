@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32;
 using System;
 using System.Globalization;
 using System.IO;
@@ -9,6 +8,7 @@ using System.Speech.Synthesis;
 using System.Tests;
 using System.Text;
 using System.Xml;
+using Microsoft.Win32;
 using Xunit;
 
 namespace SampleSynthesisTests

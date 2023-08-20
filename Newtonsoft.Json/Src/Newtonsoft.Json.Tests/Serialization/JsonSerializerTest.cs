@@ -24,11 +24,34 @@
 #endregion
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Tests.Linq;
+using Newtonsoft.Json.Tests.TestObjects;
+using Newtonsoft.Json.Tests.TestObjects.Events;
+using Newtonsoft.Json.Tests.TestObjects.GeoCoding;
+using Newtonsoft.Json.Tests.TestObjects.Organization;
+using Newtonsoft.Json.Utilities;
 #if !(NET35 || NET20)
 using System.Collections.Concurrent;
 #endif
-using System.Collections.Generic;
+
 #if !(NET20 || NET35 || PORTABLE) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
 using System.Numerics;
 #endif
@@ -42,8 +65,7 @@ using System.Threading;
 #if !(NET20 || DNXCORE50)
 using System.Web.Script.Serialization;
 #endif
-using System.Text;
-using System.Text.RegularExpressions;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -52,29 +74,11 @@ using TestCase = Xunit.InlineDataAttribute;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json;
-using System.IO;
-using System.Collections;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using Newtonsoft.Json.Bson;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
+
 #if !(NET20 || NET35)
 using System.Runtime.Serialization.Json;
 #endif
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.Linq;
-using Newtonsoft.Json.Tests.TestObjects;
-using Newtonsoft.Json.Tests.TestObjects.Events;
-using Newtonsoft.Json.Tests.TestObjects.GeoCoding;
-using Newtonsoft.Json.Tests.TestObjects.Organization;
-using System.Runtime.Serialization;
-using System.Globalization;
-using Newtonsoft.Json.Utilities;
-using System.Reflection;
+
 #if !NET20
 using System.Xml.Linq;
 using System.Collections.Specialized;

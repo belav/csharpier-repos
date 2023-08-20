@@ -6,10 +6,9 @@
 
 namespace System.Web.UI
 {
-    using System.Runtime.InteropServices;
-
     using System;
     using System.ComponentModel;
+    using System.Runtime.InteropServices;
 
     /// <devdoc>
     ///     LiteralContentAttribute indicates whether the contents within a tag representing

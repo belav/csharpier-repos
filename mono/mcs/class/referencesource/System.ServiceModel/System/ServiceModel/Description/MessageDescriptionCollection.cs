@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
 
     public class MessageDescriptionCollection : Collection<MessageDescription>
     {

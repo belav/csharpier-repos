@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 

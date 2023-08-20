@@ -20,7 +20,6 @@ namespace Castle.DynamicProxy
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Text;
-
     using Castle.Core.Internal;
     using Castle.Core.Logging;
     using Castle.DynamicProxy.Generators;

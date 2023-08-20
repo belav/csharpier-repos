@@ -5,9 +5,8 @@
 using System;
 using System.Text;
 using System.Threading;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
-
+using Microsoft.CodeAnalysis.PooledObjects;
 #if DEBUG
 using System.Diagnostics;
 #endif

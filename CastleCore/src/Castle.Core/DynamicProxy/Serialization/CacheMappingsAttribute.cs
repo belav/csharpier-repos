@@ -22,7 +22,6 @@ namespace Castle.DynamicProxy.Serialization
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.Serialization.Formatters.Binary;
-
     using Castle.DynamicProxy.Generators;
 
     /// <summary>

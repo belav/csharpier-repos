@@ -7,11 +7,11 @@ namespace System.ServiceModel.Web
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Net.Mime;
     using System.Runtime;
-    using System.Text;
-    using System.Globalization;
     using System.ServiceModel.Channels;
+    using System.Text;
 
     static class Utility
     {

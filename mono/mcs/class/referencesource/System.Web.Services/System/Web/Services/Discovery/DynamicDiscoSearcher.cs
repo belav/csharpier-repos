@@ -7,14 +7,14 @@
 namespace System.Web.Services.Discovery
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Text;
-    using System.DirectoryServices;
-    using System.Web.Services.Configuration;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.DirectoryServices;
     using System.Globalization;
+    using System.IO;
+    using System.Text;
+    using System.Web.Services.Configuration;
 
     /// <include file='doc\DynamicDiscoSearcher.uex' path='docs/doc[@for="DynamicDiscoSearcher"]/*' />
     /// <devdoc>

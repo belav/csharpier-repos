@@ -18,10 +18,10 @@ namespace System.Web.UI
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Globalization;
-    using System.Security.Permissions;
     using System.Reflection;
-    using System.Web.Hosting;
+    using System.Security.Permissions;
     using System.Web.Compilation;
+    using System.Web.Hosting;
     using System.Web.UI.WebControls;
     using System.Web.Util;
 

@@ -12,8 +12,8 @@
 
 // Variation on array length
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class DblArray1

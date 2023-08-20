@@ -32,7 +32,6 @@ using System.Xaml;
 using System.Xaml.Schema;
 using System.Xml;
 using NUnit.Framework;
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 // Some test result remarks:

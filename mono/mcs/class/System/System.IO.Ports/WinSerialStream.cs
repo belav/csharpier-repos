@@ -8,11 +8,11 @@
 //
 
 using System;
-using System.Text;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
-using System.ComponentModel;
 
 namespace System.IO.Ports
 {

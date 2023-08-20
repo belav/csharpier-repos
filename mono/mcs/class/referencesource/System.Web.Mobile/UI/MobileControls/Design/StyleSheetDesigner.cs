@@ -22,7 +22,6 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
-
     using Control = System.Web.UI.Control;
     using DataBindingCollectionEditor = System.Web.UI.Design.DataBindingCollectionEditor;
 

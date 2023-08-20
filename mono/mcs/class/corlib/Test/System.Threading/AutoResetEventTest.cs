@@ -9,10 +9,10 @@
 // Copyright 2007 Gert Driesen
 //
 
-using NUnit.Framework;
 using System;
 using System.Threading;
 using Microsoft.Win32.SafeHandles;
+using NUnit.Framework;
 
 namespace MonoTests.System.Threading
 {

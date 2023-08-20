@@ -36,9 +36,7 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
-
 using Element = System.ServiceModel.Channels.BinaryMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Channels

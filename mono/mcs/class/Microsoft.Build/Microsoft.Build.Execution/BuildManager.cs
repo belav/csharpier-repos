@@ -26,12 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Microsoft.Build.Evaluation;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using Microsoft.Build.Internal;
 using System.Linq;
+using System.Threading;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Execution
 {

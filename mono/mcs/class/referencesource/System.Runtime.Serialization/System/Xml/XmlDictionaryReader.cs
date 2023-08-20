@@ -5,14 +5,14 @@
 namespace System.Xml
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Collections;
-    using System.IO;
-    using System.Xml;
     using System.Diagnostics;
-    using System.Text;
-    using System.Runtime.Serialization;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
 
     public delegate void OnXmlDictionaryReaderClose(XmlDictionaryReader reader);
 

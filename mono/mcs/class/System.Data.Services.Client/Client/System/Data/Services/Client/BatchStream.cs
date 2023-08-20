@@ -18,7 +18,6 @@ namespace System.Data.Services.Client
     using System.Globalization;
     using System.IO;
     using System.Text;
-
 #if !ASTORIA_LIGHT
     using System.Net;
 #else

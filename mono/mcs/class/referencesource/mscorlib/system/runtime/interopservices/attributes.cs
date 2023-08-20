@@ -11,8 +11,8 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Reflection;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
 
     [AttributeUsage(AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]

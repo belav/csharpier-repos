@@ -4,7 +4,9 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-
+using Castle.DynamicProxy;
+using Moq.Internals;
+using Moq.Properties;
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -14,10 +16,7 @@ using System.Runtime;
 using System.Text;
 #endif
 
-using Castle.DynamicProxy;
 
-using Moq.Internals;
-using Moq.Properties;
 
 namespace Moq
 {

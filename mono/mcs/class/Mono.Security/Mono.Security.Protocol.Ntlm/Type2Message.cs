@@ -34,8 +34,8 @@
 //
 
 using System;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Mono.Security.Protocol.Ntlm
 {

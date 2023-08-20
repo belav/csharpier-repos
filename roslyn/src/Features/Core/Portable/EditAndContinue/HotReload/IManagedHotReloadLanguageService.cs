@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Immutable;
 using Microsoft.VisualStudio.Debugger.Contracts.EditAndContinue;
 
 // These types are available in newer version of Debugger.Contracts package in main-vs-deps.

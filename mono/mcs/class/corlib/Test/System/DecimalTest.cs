@@ -8,12 +8,11 @@
 // Copyright (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
-
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

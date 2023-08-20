@@ -14,7 +14,6 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
-
 using Mono.Security.Authenticode;
 using Mono.Security.X509;
 using Mono.Security.X509.Extensions;

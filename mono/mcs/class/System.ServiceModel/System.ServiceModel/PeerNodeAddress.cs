@@ -28,8 +28,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
 using System.Net;
+using System.Runtime.Serialization;
 
 namespace System.ServiceModel
 {

@@ -39,7 +39,6 @@ using System.ServiceModel.Dispatcher;
 using System.Transactions;
 using System.Threading;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel

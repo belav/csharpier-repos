@@ -9,10 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-
-using System.Data.Metadata.Edm;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Linq;
 
 namespace System.Data.Common.CommandTrees

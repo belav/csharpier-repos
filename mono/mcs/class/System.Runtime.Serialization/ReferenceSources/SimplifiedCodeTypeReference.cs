@@ -10,14 +10,14 @@
 
 namespace System.Runtime.Serialization
 {
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Globalization;
+    using Microsoft.Win32;
 
     enum CodeTypeReferenceOptions
     {

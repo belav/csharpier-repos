@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Text;
-
 using Formatter = Microsoft.CodeAnalysis.Formatting.FormatterHelper;
 using FormattingProvider = Microsoft.CodeAnalysis.Formatting.ISyntaxFormatting;
 

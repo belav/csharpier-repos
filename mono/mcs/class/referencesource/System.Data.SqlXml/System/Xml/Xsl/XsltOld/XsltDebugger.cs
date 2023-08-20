@@ -7,10 +7,10 @@
 
 namespace System.Xml.Xsl.XsltOld.Debugger
 {
-    using Res = System.Xml.Utils.Res;
     using System;
     using System.Xml;
     using System.Xml.XPath;
+    using Res = System.Xml.Utils.Res;
 
     internal interface IStackFrame
     {

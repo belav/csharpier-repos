@@ -9,12 +9,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.//
 //
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Diagnostics;
 using System.Security;
-using System.Security.Policy;
 using System.Security.Permissions;
+using System.Security.Policy;
 using System.Threading;
 
 namespace AssemblyRunner

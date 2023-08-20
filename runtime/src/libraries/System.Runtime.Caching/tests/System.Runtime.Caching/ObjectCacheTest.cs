@@ -31,9 +31,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Caching;
-
-using Xunit;
 using MonoTests.Common;
+using Xunit;
 
 namespace MonoTests.System.Runtime.Caching
 {

@@ -1,18 +1,4 @@
-#if (OrganizationalAuth || IndividualB2CAuth)
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
-#endif
-#if (WindowsAuth)
-using Microsoft.AspNetCore.Authentication.Negotiate;
-#endif
-#if (OrganizationalAuth)
-#if (MultiOrgAuth)
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-#endif
-using Microsoft.AspNetCore.Authorization;
-#endif
+using BlazorServerWeb_CSharp.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 #if (IndividualLocalAuth)
@@ -35,7 +21,22 @@ using Microsoft.IdentityModel.Tokens;
 #if (IndividualLocalAuth)
 using BlazorServerWeb_CSharp.Areas.Identity;
 #endif
-using BlazorServerWeb_CSharp.Data;
+
+#if (OrganizationalAuth || IndividualB2CAuth)
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+#endif
+#if (WindowsAuth)
+using Microsoft.AspNetCore.Authentication.Negotiate;
+#endif
+#if (OrganizationalAuth)
+#if (MultiOrgAuth)
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+#endif
+using Microsoft.AspNetCore.Authorization;
+#endif
 
 namespace BlazorServerWeb_CSharp;
 

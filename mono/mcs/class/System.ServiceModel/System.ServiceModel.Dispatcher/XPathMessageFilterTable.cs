@@ -30,9 +30,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Xml.XPath;
-using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {

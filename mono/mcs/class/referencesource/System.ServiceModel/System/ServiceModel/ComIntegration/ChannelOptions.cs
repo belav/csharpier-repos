@@ -4,8 +4,8 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 

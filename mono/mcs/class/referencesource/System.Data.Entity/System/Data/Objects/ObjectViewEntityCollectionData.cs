@@ -9,10 +9,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Data.Objects.DataClasses;
 using System.Data.Objects.Internal;
 using System.Diagnostics;
-using System.Data.Common;
 
 namespace System.Data.Objects
 {

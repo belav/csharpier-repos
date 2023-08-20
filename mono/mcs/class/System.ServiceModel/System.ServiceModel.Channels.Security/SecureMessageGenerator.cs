@@ -44,7 +44,6 @@ using System.ServiceModel.Security.Tokens;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
 
 namespace System.ServiceModel.Channels.Security

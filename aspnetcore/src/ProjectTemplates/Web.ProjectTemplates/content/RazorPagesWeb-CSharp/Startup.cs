@@ -2,6 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+#if (IndividualLocalAuth)
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+#endif
+
 #if (OrganizationalAuth || IndividualB2CAuth)
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Identity.Web;
@@ -9,12 +19,7 @@ using Microsoft.Identity.Web.UI;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 #endif
-using Microsoft.AspNetCore.Builder;
-#if (IndividualLocalAuth)
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-#endif
-using Microsoft.AspNetCore.Hosting;
+
 #if (RequiresHttps)
 using Microsoft.AspNetCore.HttpsPolicy;
 #endif
@@ -25,9 +30,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Company.WebApplication1.Data;
 #endif
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
 #if(MultiOrgAuth)
 using Microsoft.IdentityModel.Tokens;
 #endif

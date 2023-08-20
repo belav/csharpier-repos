@@ -10,14 +10,14 @@ namespace System.Xml
     using System;
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Xml.Schema;
     using System.Xml.XPath;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Globalization;
-    using System.Runtime.Versioning;
 
     // Represents an entire document. An XmlDocument contains XML data.
     public class XmlDocument : XmlNode

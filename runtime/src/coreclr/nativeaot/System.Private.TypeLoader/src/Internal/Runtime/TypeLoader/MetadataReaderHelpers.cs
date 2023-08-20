@@ -3,11 +3,10 @@
 
 
 using global::System;
-using global::System.Reflection;
 using global::Internal.Metadata.NativeFormat;
-
-using Debug = System.Diagnostics.Debug;
+using global::System.Reflection;
 using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
+using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime.TypeLoader
 {

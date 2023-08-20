@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using ILCompiler.DependencyAnalysis;
-
 using Internal.IL;
 using Internal.TypeSystem;
 

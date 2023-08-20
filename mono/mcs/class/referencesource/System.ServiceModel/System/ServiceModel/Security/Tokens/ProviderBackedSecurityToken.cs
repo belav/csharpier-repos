@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Runtime;
-using System.Security.Cryptography;
 using System.Security.Authentication.ExtendedProtection;
+using System.Security.Cryptography;
 using System.ServiceModel.Diagnostics;
 
 namespace System.ServiceModel.Security.Tokens

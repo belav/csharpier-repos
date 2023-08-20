@@ -25,12 +25,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using Newtonsoft.Json.Utilities;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Utilities;
-using System.Globalization;
+
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

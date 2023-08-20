@@ -5,19 +5,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Basic.Reference.Assemblies;
-using static TestReferences;
-using static Roslyn.Test.Utilities.TestMetadata;
-using Microsoft.CodeAnalysis.CodeGen;
+using System.Linq;
 using System.Reflection;
-using System.Collections.Concurrent;
+using Basic.Reference.Assemblies;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeGen;
+using Microsoft.CodeAnalysis.Test.Utilities;
+using static Roslyn.Test.Utilities.TestMetadata;
+using static TestReferences;
 
 namespace Roslyn.Test.Utilities
 {

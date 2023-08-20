@@ -6,11 +6,11 @@ namespace System.ServiceModel.Dispatcher
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.ServiceModel.Description;
     using System.Runtime.Serialization;
-    using System.Xml;
     using System.Runtime.Serialization.Json;
+    using System.ServiceModel.Description;
+    using System.Text;
+    using System.Xml;
 
     class DataContractJsonSerializerOperationBehavior : DataContractSerializerOperationBehavior
     {

@@ -34,11 +34,9 @@ namespace Mono.Cecil
     using System;
     using System.Collections;
     using System.Collections.Specialized;
-
     using Mono.Cecil.Cil;
-
-    using Hcp = Mono.Cecil.HashCodeProvider;
     using Cmp = System.Collections.Comparer;
+    using Hcp = Mono.Cecil.HashCodeProvider;
 
     internal sealed class TypeReferenceCollection
         : NameObjectCollectionBase,

@@ -28,7 +28,6 @@
 #if !MOBILE
 
 using NUnit.Framework;
-
 using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;

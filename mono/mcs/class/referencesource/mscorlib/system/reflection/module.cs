@@ -11,20 +11,20 @@
 namespace System.Reflection
 {
     using System;
-    using System.Diagnostics.SymbolStore;
-    using System.Runtime.Remoting;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Threading;
+    using System.Diagnostics.Contracts;
+    using System.Diagnostics.SymbolStore;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.IO;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
 
     [Serializable]
     [Flags]

@@ -5,7 +5,6 @@
 using System.Collections.Immutable;
 using Microsoft.VisualStudio.Debugger.Contracts.EditAndContinue;
 using Microsoft.VisualStudio.Debugger.Contracts.HotReload;
-
 using Contracts = Microsoft.CodeAnalysis.EditAndContinue.Contracts;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue

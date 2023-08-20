@@ -4,13 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler

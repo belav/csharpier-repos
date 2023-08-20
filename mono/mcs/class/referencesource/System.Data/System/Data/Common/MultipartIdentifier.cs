@@ -9,8 +9,8 @@
 namespace System.Data.Common
 {
     using System.Diagnostics;
-    using System.Text;
     using System.Globalization;
+    using System.Text;
 
     internal class MultipartIdentifier
     {

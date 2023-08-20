@@ -28,14 +28,12 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Permissions;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Security.Permissions
 {

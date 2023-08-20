@@ -7,8 +7,8 @@
 
 namespace System.Xml
 {
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
     using System.Xml.Schema;
 
     internal class XmlName : IXmlSchemaInfo

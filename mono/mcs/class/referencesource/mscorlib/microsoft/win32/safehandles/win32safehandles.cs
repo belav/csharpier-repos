@@ -17,10 +17,10 @@
 namespace Microsoft.Win32.SafeHandles
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     // Class of safe handle which uses 0 or -1 as an invalid handle.
     [System.Security.SecurityCritical] // auto-generated_required

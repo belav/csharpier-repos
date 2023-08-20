@@ -23,10 +23,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.ComponentModel;
-
 using System.Collections;
+using System.ComponentModel;
+using Xunit;
 
 namespace System.Data.Tests
 {

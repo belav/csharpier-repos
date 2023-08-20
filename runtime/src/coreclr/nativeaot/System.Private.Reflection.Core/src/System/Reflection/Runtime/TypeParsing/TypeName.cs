@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections;
 using System.Reflection;
-using System.Collections.Generic;
-
+using System.Reflection.Runtime.Assemblies;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-using System.Reflection.Runtime.Assemblies;
 
 namespace System.Reflection.Runtime.TypeParsing
 {

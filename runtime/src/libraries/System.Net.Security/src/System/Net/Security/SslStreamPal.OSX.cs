@@ -9,7 +9,6 @@ using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Authentication.ExtendedProtection;
 using System.Security.Cryptography.X509Certificates;
-
 using PAL_TlsHandshakeState = Interop.AppleCrypto.PAL_TlsHandshakeState;
 using PAL_TlsIo = Interop.AppleCrypto.PAL_TlsIo;
 

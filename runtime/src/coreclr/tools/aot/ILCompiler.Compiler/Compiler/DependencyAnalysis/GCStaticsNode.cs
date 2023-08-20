@@ -3,7 +3,6 @@
 
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using GCStaticRegionConstants = Internal.Runtime.GCStaticRegionConstants;
 

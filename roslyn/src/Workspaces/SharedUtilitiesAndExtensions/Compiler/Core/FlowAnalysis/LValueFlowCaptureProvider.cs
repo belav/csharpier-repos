@@ -8,7 +8,6 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-
 #if DEBUG
 using System.Diagnostics;
 #endif

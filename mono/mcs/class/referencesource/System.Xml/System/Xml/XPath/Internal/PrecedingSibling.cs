@@ -8,10 +8,10 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
-    using System.Collections.Generic;
 
     // This class can be rewritten much more efficient.
     // Algorithm could be like one for FollowingSibling:

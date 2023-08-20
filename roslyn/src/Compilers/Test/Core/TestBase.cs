@@ -10,15 +10,15 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Xml.Linq;
+using Basic.Reference.Assemblies;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Test.Resources.Proprietary;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
-using static TestReferences.NetFx;
 using static Roslyn.Test.Utilities.TestMetadata;
-using Microsoft.CodeAnalysis.Test.Resources.Proprietary;
-using Basic.Reference.Assemblies;
+using static TestReferences.NetFx;
 
 namespace Roslyn.Test.Utilities
 {

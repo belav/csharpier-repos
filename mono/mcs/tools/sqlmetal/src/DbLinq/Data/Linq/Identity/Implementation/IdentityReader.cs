@@ -25,11 +25,10 @@
 #endregion
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 using DbLinq.Data.Linq.Identity;
 using DbLinq.Util;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

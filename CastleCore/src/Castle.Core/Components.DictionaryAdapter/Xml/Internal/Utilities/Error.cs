@@ -15,8 +15,8 @@
 namespace Castle.Components.DictionaryAdapter.Xml
 {
     using System;
-    using SerializationException = System.Runtime.Serialization.SerializationException;
     using System.Xml.XPath;
+    using SerializationException = System.Runtime.Serialization.SerializationException;
 
     internal static class Error
     {

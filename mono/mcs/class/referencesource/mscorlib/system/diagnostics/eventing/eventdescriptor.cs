@@ -6,7 +6,6 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Runtime.InteropServices;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
 #endif

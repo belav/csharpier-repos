@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CoreXml.Test.XLinq;
-using Microsoft.Test.ModuleCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using CoreXml.Test.XLinq;
+using Microsoft.Test.ModuleCore;
 
 namespace XLinqTests
 {

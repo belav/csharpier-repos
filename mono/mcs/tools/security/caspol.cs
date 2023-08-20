@@ -17,7 +17,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text;
-
 using Mono.Security.Cryptography;
 
 [assembly: AssemblyTitle("Mono CasPol")]

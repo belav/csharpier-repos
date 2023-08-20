@@ -13,16 +13,16 @@ namespace System.Web.UI
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
     using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web;
     using System.Web.Configuration;
-    using System.Web.UI;
-    using System.Web.UI.HtmlControls;
     using System.Web.Resources;
     using System.Web.Script.Serialization;
-    using System.Reflection;
-    using System.Security.Permissions;
+    using System.Web.UI;
+    using System.Web.UI.HtmlControls;
 
     internal sealed class PageRequestManager
     {

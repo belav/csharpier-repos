@@ -8,8 +8,8 @@ namespace System.ServiceModel.Channels
     using System.IO;
     using System.Runtime;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Xml;
 
     class PacketRoutableHeader : DictionaryHeader
     {

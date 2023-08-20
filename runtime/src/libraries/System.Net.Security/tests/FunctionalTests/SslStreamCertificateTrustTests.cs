@@ -3,10 +3,10 @@
 
 using System.IO;
 using System.IO.Tests;
+using System.Linq;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using System.Linq;
 using Xunit;
 
 namespace System.Net.Security.Tests

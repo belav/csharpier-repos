@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.ObjectModel;
+using System.Reflection;
 #if !NO_CODEDOM
 using System.CodeDom;
 #endif
-using System.Collections.ObjectModel;
-using System.Reflection;
+
 
 namespace System.Runtime.Serialization
 {

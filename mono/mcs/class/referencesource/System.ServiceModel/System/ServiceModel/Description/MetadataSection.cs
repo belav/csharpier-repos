@@ -7,12 +7,12 @@ namespace System.ServiceModel.Description
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Reflection;
     using System.Text;
     using System.Xml;
+    using System.Xml.Serialization;
     using WsdlNS = System.Web.Services.Description;
     using XsdNS = System.Xml.Schema;
-    using System.Reflection;
-    using System.Xml.Serialization;
 
     [XmlRoot(
         ElementName = MetadataStrings.MetadataExchangeStrings.MetadataSection,

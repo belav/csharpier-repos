@@ -18,10 +18,8 @@ namespace Castle.DynamicProxy.Tests
     using System.Linq;
     using System.Reflection;
     using System.Security.Permissions;
-
     using Castle.DynamicProxy.Generators;
     using Castle.DynamicProxy.Tests.Classes;
-
     using NUnit.Framework;
 
     [TestFixture]

@@ -12,8 +12,8 @@
 
 namespace System.Security.Cryptography
 {
-    using System.Security.Util;
     using System.Diagnostics.Contracts;
+    using System.Security.Util;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class SignatureDescription

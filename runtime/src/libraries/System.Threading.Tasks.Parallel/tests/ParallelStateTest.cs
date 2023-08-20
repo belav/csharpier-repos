@@ -11,7 +11,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-
 using Xunit;
 
 namespace System.Threading.Tasks.Test

@@ -3,14 +3,13 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
-
-using Internal.Runtime.Augments;
 using Internal.Reflection.Augments;
 using Internal.Reflection.Core.NonPortable;
-using System.Collections.Generic;
+using Internal.Runtime.Augments;
 
 namespace Internal.Reflection
 {

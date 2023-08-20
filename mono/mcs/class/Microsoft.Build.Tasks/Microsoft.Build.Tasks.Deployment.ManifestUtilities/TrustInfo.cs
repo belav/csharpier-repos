@@ -27,9 +27,9 @@
 
 
 using System;
-using System.Security;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities

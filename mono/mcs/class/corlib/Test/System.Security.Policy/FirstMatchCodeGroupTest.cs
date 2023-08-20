@@ -7,12 +7,12 @@
 // (C) 2004 Motus Technologies Inc. (http://www.motus.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Security;
-using System.Security.Policy;
 using System.Security.Permissions;
+using System.Security.Policy;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Policy
 {

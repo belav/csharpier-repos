@@ -13,14 +13,14 @@
 //
 
 using System;
-using System.Xml;
+using System.Collections.Generic;
 using System.IO;
-using Network = System.Net;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
-using System.Collections.Generic;
-using ExtensionsClass = System.Xml.Schema.Extensions;
 using Xunit;
+using ExtensionsClass = System.Xml.Schema.Extensions;
+using Network = System.Net;
 
 namespace CoreXml.Test.XLinq
 {

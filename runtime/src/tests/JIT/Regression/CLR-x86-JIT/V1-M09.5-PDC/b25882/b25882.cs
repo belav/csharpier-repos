@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using System.Text;
-
 using System;
+using System.Text;
 
 public class Co1245GetBytes_double
 {

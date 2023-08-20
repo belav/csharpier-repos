@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml;
-
 using System.Text;
-
+using System.Xml;
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization

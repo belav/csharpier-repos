@@ -10,7 +10,6 @@ namespace System.Data.OleDb
 {
     using System;
     using System.Runtime.InteropServices;
-
 #if DEBUG
     using System.Diagnostics;
     using System.Globalization;

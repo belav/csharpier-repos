@@ -27,12 +27,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Xml.Serialization;
+using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel
 {

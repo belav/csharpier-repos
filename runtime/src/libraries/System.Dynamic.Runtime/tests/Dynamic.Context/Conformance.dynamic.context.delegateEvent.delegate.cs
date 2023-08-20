@@ -1003,7 +1003,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgate006.dlgate006
 {
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib05.dlgatedeclarelib05;
     // <Area> Dynamic type in delegates </Area>
     // <Title> Delegate instantiation</Title>
     // <Description> delegates can has optional parameters
@@ -1012,6 +1011,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
     using System;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib05.dlgatedeclarelib05;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib05.dlgatedeclarelib05.DynNamespace51;
 
     namespace nms

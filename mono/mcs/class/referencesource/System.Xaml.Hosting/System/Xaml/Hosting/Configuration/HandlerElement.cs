@@ -5,10 +5,10 @@
 namespace System.Xaml.Hosting.Configuration
 {
     using System;
-    using System.Web;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.Web;
 
     public sealed class HandlerElement : ConfigurationElement
     {

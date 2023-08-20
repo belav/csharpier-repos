@@ -30,7 +30,6 @@ namespace Mono.Cecil.Signatures
 {
     using System;
     using System.Text;
-
     using Mono.Cecil;
     using Mono.Cecil.Binary;
     using Mono.Cecil.Metadata;

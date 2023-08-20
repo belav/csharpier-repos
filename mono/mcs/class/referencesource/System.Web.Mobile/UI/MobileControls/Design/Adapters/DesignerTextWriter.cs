@@ -8,9 +8,9 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Web.UI.Design.MobileControls;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Web.UI.Design.MobileControls;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {

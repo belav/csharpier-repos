@@ -13,16 +13,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using SLE = System.Linq.Expressions;
 using System.Linq;
-
+using System.Text;
 #if STATIC
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;
 #else
 using System.Reflection;
 using System.Reflection.Emit;
+using SLE = System.Linq.Expressions;
 #endif
 
 namespace Mono.CSharp

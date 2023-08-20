@@ -11,15 +11,15 @@ namespace System.Data
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Data.SqlTypes;
     using System.Data.Common;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Versioning;
 
     internal enum SchemaFormat
     {

@@ -6,10 +6,10 @@
 
 namespace System.Web.Hosting
 {
-    using System.Web;
-    using System.Web.Configuration;
     using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
+    using System.Web;
+    using System.Web.Configuration;
 
     internal class ContextBase
     {

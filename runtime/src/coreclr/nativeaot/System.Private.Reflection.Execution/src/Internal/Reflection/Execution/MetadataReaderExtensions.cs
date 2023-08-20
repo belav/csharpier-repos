@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using global::System;
-
 using global::Internal.Metadata.NativeFormat;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution

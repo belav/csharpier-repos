@@ -6,12 +6,12 @@ using System;
 using System.Composition;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.ExternalAccess.Razor;
+using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.LanguageServer.Handler;
 using Microsoft.CommonLanguageServerProtocol.Framework;
-using Microsoft.CodeAnalysis.ExternalAccess.Razor;
 using StreamJsonRpc;
-using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {

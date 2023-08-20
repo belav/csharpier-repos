@@ -9,14 +9,12 @@
 
 using System;
 using System.Collections;
-using DefaultValueAttribute = System.ComponentModel.DefaultValueAttribute;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using NUnit.Framework;
-
 using MonoTests.System.Xml.TestClasses;
+using NUnit.Framework;
+using DefaultValueAttribute = System.ComponentModel.DefaultValueAttribute;
 
 namespace MonoTests.System.XmlSerialization
 {

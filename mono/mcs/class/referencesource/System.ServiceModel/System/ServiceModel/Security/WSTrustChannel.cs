@@ -10,8 +10,8 @@ namespace System.ServiceModel.Security
     using System.IdentityModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Protocols.WSTrust;
-    using System.Runtime;
     using System.IdentityModel.Tokens;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;

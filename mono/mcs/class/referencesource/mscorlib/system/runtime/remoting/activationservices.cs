@@ -16,22 +16,22 @@
 namespace System.Runtime.Remoting.Activation
 {
     using System;
-    using System.Security;
-    using System.Threading;
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Contexts;
-    using System.Runtime.Remoting.Proxies;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
-    using System.Collections;
-    using System.Reflection;
-    using System.IO;
+    using System.Runtime.Remoting.Proxies;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
 
     // Implements various activation services
     internal static class ActivationServices

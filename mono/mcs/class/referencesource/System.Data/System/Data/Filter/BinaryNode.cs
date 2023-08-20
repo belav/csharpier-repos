@@ -10,12 +10,12 @@
 namespace System.Data
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Data.SqlTypes;
     using System.Data.Common;
+    using System.Data.SqlTypes;
+    using System.Diagnostics;
+    using System.Globalization;
 
     internal class BinaryNode : ExpressionNode
     {

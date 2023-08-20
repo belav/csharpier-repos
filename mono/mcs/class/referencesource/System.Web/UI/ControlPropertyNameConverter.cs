@@ -11,8 +11,8 @@ namespace System.Web.UI.WebControls
     using System.ComponentModel.Design;
     using System.Globalization;
     using System.Reflection;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     /// <devdoc>
     /// TypeConverter for ControlParameter's PropertyName property.

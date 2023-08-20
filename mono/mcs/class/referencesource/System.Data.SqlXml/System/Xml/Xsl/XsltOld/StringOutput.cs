@@ -7,10 +7,10 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
-    using System.Xml;
     using System.Text;
+    using System.Xml;
+    using Res = System.Xml.Utils.Res;
 
     internal class StringOutput : SequentialOutput
     {

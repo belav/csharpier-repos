@@ -1,11 +1,11 @@
 using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using WebAssembly;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using WebAssembly;
 
 namespace TestSuite
 {

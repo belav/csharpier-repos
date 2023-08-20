@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Configuration
 {
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Configuration;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
 
     public sealed partial class ServiceSecurityAuditElement : BehaviorExtensionElement

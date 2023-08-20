@@ -6,7 +6,6 @@
 
 using System;
 using System.Diagnostics;
-
 #if !SILVERLIGHT && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 

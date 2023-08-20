@@ -4,22 +4,21 @@
 namespace System.ServiceModel.MsmqIntegration
 {
     using System;
-    using System.ComponentModel;
-    using System.ServiceModel;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.Runtime.Serialization;
     using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using Config = System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-
+    using System.Text;
     using System.Xml;
+    using Config = System.ServiceModel.Configuration;
 
     public class MsmqIntegrationBinding : MsmqBindingBase
     {

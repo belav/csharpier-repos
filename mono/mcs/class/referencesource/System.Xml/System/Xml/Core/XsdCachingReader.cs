@@ -5,14 +5,14 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
+using System.Collections;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Security.Policy;
 using System.Text;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Diagnostics;
-using System.Globalization;
-using System.Collections;
-using System.Security.Policy;
 
 namespace System.Xml
 {

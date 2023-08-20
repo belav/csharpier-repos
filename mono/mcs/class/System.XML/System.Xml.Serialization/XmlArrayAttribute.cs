@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml.Schema;
 using System;
+using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {

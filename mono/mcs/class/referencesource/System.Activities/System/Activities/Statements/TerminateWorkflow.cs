@@ -6,8 +6,8 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
 
     public sealed class TerminateWorkflow : NativeActivity
     {

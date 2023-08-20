@@ -4,11 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
+using System.IO;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
-using System.IO;
+using Internal.TypeSystem;
 
 namespace TypeSystemTests
 {

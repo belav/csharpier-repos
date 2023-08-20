@@ -8,9 +8,9 @@ namespace System.Web.Services
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Permissions;
     using System.Web.Services.Interop;
-    using System.Security;
 
     [
         ComVisible(false),

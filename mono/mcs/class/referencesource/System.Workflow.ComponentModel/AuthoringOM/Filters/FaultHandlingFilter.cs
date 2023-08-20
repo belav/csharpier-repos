@@ -2,9 +2,9 @@ namespace System.Workflow.ComponentModel
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.Workflow.ComponentModel.Design;
 
     internal sealed class FaultAndCancellationHandlingFilter

@@ -17,7 +17,6 @@
 namespace Castle.DynamicProxy.Contributors
 {
     using System;
-
     using Castle.DynamicProxy.Generators.Emitters;
     using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
     using Castle.DynamicProxy.Tokens;

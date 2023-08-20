@@ -1,21 +1,21 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
     using System.ComponentModel;
-    using System.Resources;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
     using System.Drawing.Design;
     using System.Drawing.Imaging;
     using System.Drawing.Printing;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
+    using System.IO;
+    using System.Resources;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Xml;
 
     // IMPORTANT:
     //KEYBOARD: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\" and delete

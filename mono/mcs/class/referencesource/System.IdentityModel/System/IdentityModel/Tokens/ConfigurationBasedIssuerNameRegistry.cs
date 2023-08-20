@@ -4,10 +4,10 @@
 
 using System.Collections.Generic;
 using System.Globalization;
-using System.Xml;
 using System.IdentityModel.Configuration;
 using System.IdentityModel.Diagnostics.Application;
 using System.Runtime.Diagnostics;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {

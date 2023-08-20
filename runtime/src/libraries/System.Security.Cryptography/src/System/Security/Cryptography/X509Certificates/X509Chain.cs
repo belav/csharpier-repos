@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Runtime.Versioning;
-
 using SafeX509ChainHandle = Microsoft.Win32.SafeHandles.SafeX509ChainHandle;
 
 namespace System.Security.Cryptography.X509Certificates

@@ -30,9 +30,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Collections;
 using System.IO;
 using System.Runtime.Remoting.Messaging;
-using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {

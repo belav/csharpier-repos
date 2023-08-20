@@ -18,7 +18,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
     using Castle.Core;
     using Castle.Core.Internal;
 

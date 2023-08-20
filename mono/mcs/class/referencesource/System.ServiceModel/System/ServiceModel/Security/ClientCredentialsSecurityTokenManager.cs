@@ -5,6 +5,7 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
+    using System.IdentityModel.Protocols.WSTrust;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Net;
@@ -15,7 +16,6 @@ namespace System.ServiceModel
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.IdentityModel.Protocols.WSTrust;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
     public class ClientCredentialsSecurityTokenManager : SecurityTokenManager

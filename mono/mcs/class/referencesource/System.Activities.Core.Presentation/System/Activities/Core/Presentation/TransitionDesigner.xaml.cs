@@ -6,24 +6,24 @@ namespace System.Activities.Core.Presentation
 {
     using System.Activities.Presentation;
     using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Internal.PropertyEditing;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
     using System.Activities.Presentation.View.OutlineView;
     using System.Activities.Statements;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Windows.Controls;
-    using System.Activities.Presentation.Internal.PropertyEditing;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
     partial class TransitionDesigner
     {

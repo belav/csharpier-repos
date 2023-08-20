@@ -16,7 +16,6 @@ namespace Castle.Core.Configuration.Xml.Tests
 {
     using System.IO;
     using System.Xml;
-
     using NUnit.Framework;
 
     [TestFixture]

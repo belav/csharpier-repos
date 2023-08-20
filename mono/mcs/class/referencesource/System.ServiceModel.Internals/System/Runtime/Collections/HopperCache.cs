@@ -6,8 +6,8 @@ namespace System.Runtime.Collections
 {
     using System;
     using System.Collections;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Threading;
 
     // This cache works like a MruCache, but operates loosely and without locks in the mainline path.
     //

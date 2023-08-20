@@ -5,8 +5,8 @@ namespace System.ServiceModel.ComIntegration
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Text;
+    using System.Threading;
 
     internal static class MonikerUtility
     {

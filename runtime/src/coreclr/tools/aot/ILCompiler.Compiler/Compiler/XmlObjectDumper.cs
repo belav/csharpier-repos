@@ -5,11 +5,8 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Xml;
-
-using Internal.Text;
-
 using ILCompiler.DependencyAnalysis;
-
+using Internal.Text;
 using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
 
 namespace ILCompiler

@@ -39,10 +39,8 @@ using System.IO;
 using System.Threading;
 using System.Xml;
 using System.Xml.XPath;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.Xml
 {

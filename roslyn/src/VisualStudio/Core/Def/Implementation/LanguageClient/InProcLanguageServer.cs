@@ -25,7 +25,6 @@ using Microsoft.VisualStudio.LogHub;
 using Microsoft.VisualStudio.Shell.ServiceBroker;
 using Roslyn.Utilities;
 using StreamJsonRpc;
-
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 using VSShell = Microsoft.VisualStudio.Shell;
 

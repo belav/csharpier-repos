@@ -3,8 +3,6 @@
 extern alias MonoSecurity;
 #endif
 
-#if MONO_SECURITY_ALIAS
-using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;
 #endif
@@ -13,6 +11,8 @@ using System;
 using System.IO;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+#if MONO_SECURITY_ALIAS
+using MonoSecurity::Mono.Security.Interface;
 
 namespace Mono.Net.Security
 {

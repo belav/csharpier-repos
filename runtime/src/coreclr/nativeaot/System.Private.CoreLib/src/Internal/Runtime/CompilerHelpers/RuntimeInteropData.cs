@@ -4,10 +4,10 @@
 
 using System;
 using System.Runtime;
+using System.Runtime.InteropServices;
+using Internal.NativeFormat;
 using Internal.Runtime.Augments;
 using Internal.Runtime.TypeLoader;
-using Internal.NativeFormat;
-using System.Runtime.InteropServices;
 
 namespace Internal.Runtime.CompilerHelpers
 {

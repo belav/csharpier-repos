@@ -4,17 +4,17 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
-    using System.CodeDom;
-    using WsdlNS = System.Web.Services.Description;
     using System.Xml.Serialization;
+    using WsdlNS = System.Web.Services.Description;
 
     public class DataContractSerializerMessageContractImporter : IWsdlImportExtension
     {

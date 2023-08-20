@@ -28,20 +28,11 @@
 
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MSI = MonoSecurity::Mono.Security.Interface;
-using MX = MonoSecurity::Mono.Security.X509;
-#else
-using MSI = Mono.Security.Interface;
-using MX = Mono.Security.X509;
-#endif
-using System.Security.Cryptography.X509Certificates;
 
 using System;
-using System.Net;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-
+using System.Diagnostics;
+using System.Net;
 #if MONO_FEATURE_BTLS
 using Mono.Btls;
 #endif
@@ -51,7 +42,16 @@ using Mono.AppleTls;
 #endif
 
 #if !MOBILE
+
 using System.Reflection;
+using System.Runtime.CompilerServices;
+#else
+using MSI = Mono.Security.Interface;
+using MX = Mono.Security.X509;
+#endif
+using System.Security.Cryptography.X509Certificates;
+using MSI = MonoSecurity::Mono.Security.Interface;
+using MX = MonoSecurity::Mono.Security.X509;
 #endif
 
 namespace Mono.Net.Security

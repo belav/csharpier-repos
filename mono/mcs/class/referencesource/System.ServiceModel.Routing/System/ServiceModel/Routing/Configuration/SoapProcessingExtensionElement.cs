@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Routing.Configuration
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Configuration;
-    using System.Configuration;
 
     public class SoapProcessingExtensionElement : BehaviorExtensionElement
     {

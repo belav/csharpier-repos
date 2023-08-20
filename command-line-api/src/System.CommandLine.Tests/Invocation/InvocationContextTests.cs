@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Threading;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests.Invocation

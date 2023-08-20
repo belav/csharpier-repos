@@ -25,15 +25,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Xml;
+using Newtonsoft.Json.Utilities;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System.Text;
-using System.IO;
-using System.Xml;
-using Newtonsoft.Json.Utilities;
-using System.Diagnostics;
 
 namespace Newtonsoft.Json
 {

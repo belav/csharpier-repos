@@ -2,24 +2,24 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Xml.Serialization;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Collections;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Reflection;
+    using System.Security.Principal;
     using System.Workflow.Activities;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Security.Principal;
-    using System.Workflow.Runtime.Tracking;
-    using System.Diagnostics;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.Runtime;
+    using System.Workflow.Runtime.Tracking;
+    using System.Xml.Serialization;
 
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

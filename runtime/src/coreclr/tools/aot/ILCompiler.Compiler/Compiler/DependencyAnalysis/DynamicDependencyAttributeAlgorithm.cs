@@ -6,16 +6,11 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection.Metadata;
-
+using ILCompiler.Logging;
+using ILLink.Shared;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
-using ILCompiler.Logging;
-
-using ILLink.Shared;
-
 using static ILCompiler.Dataflow.DynamicallyAccessedMembersBinder;
-
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 
 namespace ILCompiler.DependencyAnalysis

@@ -6,8 +6,8 @@ namespace System.ServiceModel.WasHosting
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
 
     [SuppressMessage(
         FxCop.Category.Performance,

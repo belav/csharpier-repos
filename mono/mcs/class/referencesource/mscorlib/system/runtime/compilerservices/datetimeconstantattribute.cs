@@ -3,8 +3,8 @@
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 // ==--==
-using System.Reflection;
 using System.Diagnostics.Contracts;
+using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {

@@ -11,8 +11,8 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Text;
     using System.Globalization;
+    using System.Text;
 
     internal class HandlerMappingMemo
     {

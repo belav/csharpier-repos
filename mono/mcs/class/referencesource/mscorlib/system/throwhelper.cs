@@ -47,10 +47,10 @@ namespace System
 
 
 
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
-    using System.Collections.Generic;
 
     [Pure]
 #if MONO

@@ -32,9 +32,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Microsoft.Build.Construction;
-using System.IO;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Evaluation

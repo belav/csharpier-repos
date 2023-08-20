@@ -27,7 +27,6 @@
 //
 
 using System.Runtime.CompilerServices;
-
 #if BIT64
 using nuint = System.UInt64;
 #else

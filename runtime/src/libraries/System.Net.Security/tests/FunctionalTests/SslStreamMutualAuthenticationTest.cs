@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.IO;
-using System.Threading.Tasks;
 using System.Net.Test.Common;
+using System.Runtime.InteropServices;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-
+using System.Threading.Tasks;
 using Xunit;
-using System.Runtime.InteropServices;
 
 namespace System.Net.Security.Tests
 {

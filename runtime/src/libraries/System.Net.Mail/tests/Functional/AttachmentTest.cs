@@ -10,8 +10,8 @@
 //
 
 using System.IO;
-using System.Text;
 using System.Net.Mime;
+using System.Text;
 using Xunit;
 
 namespace System.Net.Mail.Tests

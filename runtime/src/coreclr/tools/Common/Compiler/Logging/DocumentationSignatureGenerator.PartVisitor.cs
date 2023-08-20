@@ -4,7 +4,6 @@
 
 using System.Diagnostics;
 using System.Text;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.Logging

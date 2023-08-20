@@ -1,8 +1,8 @@
 namespace System
 {
+    using System.Diagnostics;
     using System.Globalization;
     using System.Text;
-    using System.Diagnostics;
 
     internal static class UriHelper
     {

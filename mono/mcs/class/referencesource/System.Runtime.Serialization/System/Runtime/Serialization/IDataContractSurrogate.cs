@@ -5,8 +5,8 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.CodeDom;
-    using System.Reflection;
     using System.Collections.ObjectModel;
+    using System.Reflection;
 
     public interface IDataContractSurrogate
     {

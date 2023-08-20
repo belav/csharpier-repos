@@ -5,8 +5,8 @@
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.arrayaccess01.arrayaccess01
 {
-    using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.arrayaccess01.arrayaccess01;
+    using ManagedTests.DynamicCSharp.Test;
 
     // <Area> dynamic in unsafe code </Area>
     // <Title>pointer operator</Title>
@@ -51,8 +51,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.arrayaccess02.arrayaccess02
 {
-    using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.arrayaccess02.arrayaccess02;
+    using ManagedTests.DynamicCSharp.Test;
 
     // <Area> dynamic with pointer indexer </Area>
     // <Title>pointer operator</Title>
@@ -114,8 +114,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.sizeof01.sizeof01
 {
-    using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.sizeof01.sizeof01;
+    using ManagedTests.DynamicCSharp.Test;
 
     // <Area> dynamic in unsafe code </Area>
     // <Title>pointer operator</Title>
@@ -148,8 +148,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.stackalloc01.stackalloc01
 {
-    using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.stackalloc01.stackalloc01;
+    using ManagedTests.DynamicCSharp.Test;
 
     // <Area> dynamic in unsafe code </Area>
     // <Title>pointer operator</Title>
@@ -184,8 +184,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.pointegeregerertype01.pointegeregerertype01
 {
-    using ManagedTests.DynamicCSharp.Test;
-    using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.pointegeregerertype01.pointegeregerertype01;
     // <Area> dynamic in unsafe code </Area>
     // <Title>Regression</Title>
     // <Description>
@@ -197,6 +195,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 
     using System;
     using System.Security;
+    using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.pointegeregerertype01.pointegeregerertype01;
+    using ManagedTests.DynamicCSharp.Test;
 
     [TestClass]
     public class TestClass

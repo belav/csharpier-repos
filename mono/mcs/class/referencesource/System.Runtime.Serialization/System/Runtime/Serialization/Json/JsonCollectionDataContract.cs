@@ -4,9 +4,9 @@
 
 namespace System.Runtime.Serialization.Json
 {
+    using System.Security;
     using System.Threading;
     using System.Xml;
-    using System.Security;
 
     class JsonCollectionDataContract : JsonDataContract
     {

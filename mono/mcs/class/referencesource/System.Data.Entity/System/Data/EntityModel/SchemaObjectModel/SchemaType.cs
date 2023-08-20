@@ -10,8 +10,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Xml;
 using System.Data;
+using System.Xml;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {

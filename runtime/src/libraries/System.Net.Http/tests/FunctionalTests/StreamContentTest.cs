@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.IO.Tests;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 

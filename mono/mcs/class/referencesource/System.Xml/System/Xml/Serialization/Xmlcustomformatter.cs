@@ -7,14 +7,14 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Globalization;
+    using System.Collections;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Text;
-    using System.Collections;
-    using System.Configuration;
+    using System.Xml;
     using System.Xml.Serialization.Configuration;
 
     /// <summary>

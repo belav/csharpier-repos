@@ -3,16 +3,16 @@ namespace System.Workflow.ComponentModel
     #region Imports
 
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Globalization;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
 
     #endregion
 

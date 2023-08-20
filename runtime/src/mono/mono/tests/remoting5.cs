@@ -1,9 +1,9 @@
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
+using System.Threading;
 
 class MyProxy : RealProxy
 {

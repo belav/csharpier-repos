@@ -31,11 +31,12 @@
 //
 
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 #if FEATURE_REMOTING
 using System.Runtime.Remoting.Contexts;
 #endif
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices;
+
 
 namespace System.Threading
 {

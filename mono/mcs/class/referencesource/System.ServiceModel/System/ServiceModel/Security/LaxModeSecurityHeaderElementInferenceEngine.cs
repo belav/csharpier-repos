@@ -7,7 +7,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
     using SignedXml = System.IdentityModel.SignedXml;
     using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
 

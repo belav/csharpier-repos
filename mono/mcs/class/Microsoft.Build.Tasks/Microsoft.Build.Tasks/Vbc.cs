@@ -31,7 +31,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Utilities;

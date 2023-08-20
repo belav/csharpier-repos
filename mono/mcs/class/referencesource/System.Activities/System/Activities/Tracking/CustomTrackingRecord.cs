@@ -6,11 +6,11 @@ namespace System.Activities.Tracking
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Text;
 
     [DataContract]
     [Fx.Tag.XamlVisible(false)]

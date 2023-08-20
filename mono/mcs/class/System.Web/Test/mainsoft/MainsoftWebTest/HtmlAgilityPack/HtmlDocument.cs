@@ -1,9 +1,9 @@
 // HtmlAgilityPack V1.0 - Simon Mourier <simonm@microsoft.com>
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Diagnostics;
-using System.Collections;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.XPath;

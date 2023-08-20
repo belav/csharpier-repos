@@ -11,7 +11,6 @@
 //
 
 using System;
-
 #if STATIC
 using IKVM.Reflection;
 #else

@@ -8,8 +8,8 @@
 namespace System.Xml
 {
     using System;
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
     using System.Xml.XPath;
 
     // Represents the text content of an element or attribute.

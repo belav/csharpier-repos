@@ -1,24 +1,24 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Diagnostics;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.CodeDom.Compiler;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.CodeDom;
     using System.ComponentModel;
-    using System.Globalization;
-    using System.Security.Cryptography;
-    using System.Text.RegularExpressions;
-    using System.Text;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     internal static class StandardXomlKeys
     {

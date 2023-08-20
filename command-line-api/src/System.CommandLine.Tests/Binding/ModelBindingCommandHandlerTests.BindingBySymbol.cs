@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.CommandLine.Invocation;
 using System.Linq;
-using FluentAssertions;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests.Binding

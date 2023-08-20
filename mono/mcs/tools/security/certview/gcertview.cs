@@ -11,14 +11,12 @@
 using System;
 using System.IO;
 using System.Reflection;
-
-using Mono.Security.X509;
-
 using Gdk;
-using Gtk;
 using Glade;
 using GLib;
+using Gtk;
 using GtkSharp;
+using Mono.Security.X509;
 
 [assembly: AssemblyTitle("Mono Certificate Viewer")]
 [assembly: AssemblyDescription("X.509 Certificate Viewer for GTK#")]

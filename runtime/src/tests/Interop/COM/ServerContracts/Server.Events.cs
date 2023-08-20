@@ -6,7 +6,6 @@ namespace Server.Contract
     using System;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-
     using IConnectionPoint = System.Runtime.InteropServices.ComTypes.IConnectionPoint;
     using IConnectionPointContainer = System.Runtime.InteropServices.ComTypes.IConnectionPointContainer;
 

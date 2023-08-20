@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Tests;
-using Xunit;
 using TestAttributes;
+using Xunit;
 
 [module: Foo]
 [module: Complicated(1, Stuff = 2)]

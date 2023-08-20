@@ -8,8 +8,8 @@ namespace System.Web.Management
 {
     using System;
     using System.Configuration;
-    using System.Web;
     using System.Threading;
+    using System.Web;
 
     internal class AppDomainResourcePerfCounters
     {

@@ -60,7 +60,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-
 using RabbitMQ.Client.Apigen.Attributes;
 
 namespace RabbitMQ.Client.Apigen

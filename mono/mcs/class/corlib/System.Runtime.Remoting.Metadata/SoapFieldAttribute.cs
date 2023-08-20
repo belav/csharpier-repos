@@ -30,9 +30,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
-using System.Reflection;
 
 namespace System.Runtime.Remoting.Metadata
 {

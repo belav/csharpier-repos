@@ -2,8 +2,8 @@
 // http://localhost:8080/DuplicateArrayTest.asmx?wsdl
 
 using System;
-using NUnit.Framework;
 using DuplicateArrayTestTests.Soap;
+using NUnit.Framework;
 
 namespace Localhost.DuplicateArrayTestTests
 {

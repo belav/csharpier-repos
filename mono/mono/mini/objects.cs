@@ -1,9 +1,9 @@
 using System;
-using System.Text;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 
 /*
  * Regression tests for the mono JIT.

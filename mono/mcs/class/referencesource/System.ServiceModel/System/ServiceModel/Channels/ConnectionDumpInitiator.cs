@@ -7,11 +7,11 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Text;
+    using System.IO;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
-    using System.IO;
+    using System.Text;
 
     class ConnectionDumpInitiator : IConnectionInitiator
     {

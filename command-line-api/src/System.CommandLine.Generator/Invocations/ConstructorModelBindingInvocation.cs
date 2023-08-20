@@ -1,6 +1,6 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis;
 
 namespace System.CommandLine.Generator.Invocations
 {

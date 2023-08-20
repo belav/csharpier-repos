@@ -4,7 +4,6 @@
 
 namespace System.Activities.XamlIntegration
 {
-    using Microsoft.VisualBasic.Activities;
     using System;
     using System.Activities.Expressions;
     using System.Collections.Generic;
@@ -17,6 +16,7 @@ namespace System.Activities.XamlIntegration
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml.Linq;
+    using Microsoft.VisualBasic.Activities;
     using Microsoft.VisualBasic.Activities.XamlIntegration;
 
     public sealed class ActivityWithResultConverter : TypeConverterBase

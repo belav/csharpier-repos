@@ -10,9 +10,9 @@
 namespace System.Data
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     /// ConstraintEnumerator is an object for enumerating all constraints in a DataSet

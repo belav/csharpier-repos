@@ -8,13 +8,13 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Text;
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
-    using System.Collections.Generic;
-    using System.Diagnostics;
 
     internal sealed class StringFunctions : ValueQuery
     {

@@ -29,8 +29,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Configuration;
 using System.Collections;
+using System.Configuration;
 using Xunit;
 using SysConfig = System.Configuration.Configuration;
 

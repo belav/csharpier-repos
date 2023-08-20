@@ -30,6 +30,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Bson;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Tests.TestObjects;
 using Newtonsoft.Json.Utilities;
 #if DNXCORE50
 using Xunit;
@@ -38,7 +39,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Tests.TestObjects;
 
 namespace Newtonsoft.Json.Tests.Converters
 {

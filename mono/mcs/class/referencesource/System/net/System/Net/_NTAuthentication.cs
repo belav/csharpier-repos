@@ -6,16 +6,16 @@
 
 namespace System.Net
 {
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
+    using System.Net.Security;
+    using System.Runtime.InteropServices;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Permissions;
+    using System.Security.Principal;
     using System.Text;
     using System.Threading;
-    using System.Globalization;
-    using System.Security.Authentication.ExtendedProtection;
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Net.Security;
 
     // #define ISC_REQ_DELEGATE                0x00000001
     // #define ISC_REQ_MUTUAL_AUTH             0x00000002

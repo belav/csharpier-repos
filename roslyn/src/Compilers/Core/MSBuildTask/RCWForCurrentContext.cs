@@ -5,8 +5,8 @@
 #pragma warning disable CA1416 // Validate platform compatibility (Windows only APIs)
 
 using System;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.CodeAnalysis.BuildTasks
 {

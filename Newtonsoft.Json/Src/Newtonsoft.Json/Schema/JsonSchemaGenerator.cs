@@ -24,12 +24,12 @@
 #endregion
 
 using System;
-using System.Globalization;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Utilities;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else

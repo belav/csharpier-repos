@@ -28,7 +28,6 @@
 
 using System.Collections;
 using System.IO;
-
 using Mono.Cecil;
 using Mono.Cecil.Binary;
 using Mono.Cecil.Cil;

@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using Microsoft.Build.Locator;
 using Roslyn.Test.Utilities;
-using System.IO;
-using System.Diagnostics.CodeAnalysis;
 #if NETCOREAPP
 using System.Text.Json.Nodes;
 #endif

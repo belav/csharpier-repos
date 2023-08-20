@@ -27,8 +27,8 @@
 // THE SOFTWARE.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MonoTests.System.Configuration.Util
 {

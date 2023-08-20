@@ -51,11 +51,8 @@ using System.Security;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
-
 using Microsoft.Win32;
-
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.Diagnostics

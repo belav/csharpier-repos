@@ -6,10 +6,10 @@
 // https://code.msdn.microsoft.com/windowsdesktop/Samples-for-Parallel-b4b76364
 
 using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
 
 namespace SIMD
 {

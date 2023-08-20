@@ -5,10 +5,10 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     // used internally for performance in cases where a common usage pattern is a single item
     [DataContract]

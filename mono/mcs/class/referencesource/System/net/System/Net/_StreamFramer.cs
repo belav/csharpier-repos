@@ -21,13 +21,13 @@ Revision History:
 namespace System.Net
 {
     using System;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Threading;
     using System.ComponentModel;
     using System.Globalization;
+    using System.IO;
     using System.Net;
     using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Threading;
 
     internal class StreamFramer
     {

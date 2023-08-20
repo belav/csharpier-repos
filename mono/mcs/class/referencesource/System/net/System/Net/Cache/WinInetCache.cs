@@ -19,14 +19,14 @@ Revision History:
 --*/
 namespace System.Net.Cache
 {
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
-    using System.Collections;
     using System.Text;
-    using System.Collections.Specialized;
     using System.Threading;
-    using System.Globalization;
 
     //
     // WinInet OS Provider implementation (Caching part only)

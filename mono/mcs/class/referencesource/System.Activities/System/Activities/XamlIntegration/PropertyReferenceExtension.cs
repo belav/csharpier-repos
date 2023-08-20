@@ -6,11 +6,11 @@ namespace System.Activities.XamlIntegration
 {
     using System;
     using System.ComponentModel;
+    using System.Reflection;
     using System.Runtime;
     using System.Windows.Markup;
-    using System.Xml.Linq;
     using System.Xaml;
-    using System.Reflection;
+    using System.Xml.Linq;
 
     [MarkupExtensionReturnType(typeof(object))]
     public sealed class PropertyReferenceExtension<T> : MarkupExtension

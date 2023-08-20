@@ -6,16 +6,16 @@
 namespace System.Net.PeerToPeer
 {
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Threading;
-    using System.Text.RegularExpressions;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
     using Microsoft.Win32;
 
     /// <remarks>

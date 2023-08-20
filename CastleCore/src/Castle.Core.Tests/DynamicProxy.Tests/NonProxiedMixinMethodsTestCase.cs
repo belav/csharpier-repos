@@ -15,12 +15,10 @@
 namespace Castle.DynamicProxy.Tests
 {
     using System;
-
     using Castle.DynamicProxy.Tests.Classes;
     using Castle.DynamicProxy.Tests.Explicit;
     using Castle.DynamicProxy.Tests.InterClasses;
     using Castle.DynamicProxy.Tests.Interfaces;
-
     using NUnit.Framework;
 
     [TestFixture]

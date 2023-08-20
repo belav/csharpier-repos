@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.Metadata;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma

@@ -7,7 +7,6 @@ using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using NativeExports;
 using SharedTypes;
-
 using Xunit;
 
 namespace LibraryImportGenerator.IntegrationTests

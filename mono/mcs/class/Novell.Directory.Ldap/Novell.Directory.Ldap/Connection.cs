@@ -30,23 +30,23 @@
 //
 
 using System;
+using System.Collections;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using Mono.Security.X509;
+using Mono.Security.X509.Extensions;
 using Novell.Directory.Ldap.Asn1;
 using Novell.Directory.Ldap.Rfc2251;
 using Novell.Directory.Ldap.Utilclass;
-using Mono.Security.X509.Extensions;
 using Syscert = System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.Security;
-using System.Collections;
-using System.IO;
-using System.Text;
-using Mono.Security.X509;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Reflection;
 
 namespace Novell.Directory.Ldap
 {

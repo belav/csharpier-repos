@@ -10,13 +10,13 @@ namespace System.Activities.DurableInstancing
     using System.Globalization;
     using System.IO;
     using System.IO.Compression;
+    using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Runtime.Serialization;
-    using System.Linq;
-    using System.Xml.Linq;
     using System.Text;
     using System.Xml;
+    using System.Xml.Linq;
     using System.Xml.Serialization;
 
     static class SerializationUtilities

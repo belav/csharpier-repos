@@ -3,13 +3,10 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
 using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 using NamedArgumentMemberKind = Internal.Metadata.NativeFormat.NamedArgumentMemberKind;
 
 namespace ILCompiler.Metadata

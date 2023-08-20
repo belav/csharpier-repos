@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text;
-
 using Internal.TypeSystem;
 using Microsoft.DiaSymReader;
 

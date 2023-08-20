@@ -1,7 +1,7 @@
 // HtmlAgilityPack V1.0 - Simon Mourier <simonm@microsoft.com>
 using System;
-using System.Diagnostics;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;

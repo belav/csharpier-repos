@@ -16,7 +16,6 @@ namespace Castle.Core.Resource.Tests
 {
     using System;
     using System.Reflection;
-
     using NUnit.Framework;
 
     [TestFixture]

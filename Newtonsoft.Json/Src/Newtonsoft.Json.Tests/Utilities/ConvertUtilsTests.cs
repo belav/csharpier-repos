@@ -25,6 +25,7 @@
 
 using System;
 using System.Globalization;
+using Newtonsoft.Json.Utilities;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -32,7 +33,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.Utilities
 {

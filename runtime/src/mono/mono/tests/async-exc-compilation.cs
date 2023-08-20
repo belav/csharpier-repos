@@ -2,10 +2,10 @@
 // Test handling of async exceptions received during JIT compilation
 //
 using System;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Proxies;
-using System.Runtime.Remoting.Messaging;
 using System.Reflection;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Proxies;
 using System.Threading;
 
 class MainClass

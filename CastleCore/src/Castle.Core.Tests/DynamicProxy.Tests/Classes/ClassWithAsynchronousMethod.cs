@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Tests.Classes
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-
     using Castle.DynamicProxy.Tests.Interfaces;
 
     public class ClassWithAsynchronousMethod : IInterfaceWithAsynchronousMethod

@@ -32,14 +32,12 @@ using System;
 using System.Messaging;
 using System.Reflection;
 using Mono.Messaging;
-
+using NUnit.Framework;
 using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
 using SystemCryptographicProviderType = System.Messaging.CryptographicProviderType;
 using SystemEncryptionAlgorithm = System.Messaging.EncryptionAlgorithm;
 using SystemHashAlgorithm = System.Messaging.HashAlgorithm;
 using SystemMessagePriority = System.Messaging.MessagePriority;
-
-using NUnit.Framework;
 
 namespace MonoTests.Mono.Messaging
 {

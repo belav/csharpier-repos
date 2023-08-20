@@ -17,7 +17,6 @@ namespace Castle.Core.Logging.Tests
     using System;
     using System.IO;
     using System.Text.RegularExpressions;
-
     using NUnit.Framework;
 
     [TestFixture]

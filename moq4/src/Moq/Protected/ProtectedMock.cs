@@ -7,11 +7,9 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Language;
 using Moq.Language.Flow;
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq.Protected

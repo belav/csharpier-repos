@@ -1,7 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-//using RestSharp;
+﻿//using RestSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +13,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using POS_Server.Controllers;
 
 namespace POS_Server.Models

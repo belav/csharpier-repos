@@ -10,13 +10,13 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
-using MonoTests.Helpers;
 using System;
-using System.Net;
-using System.Threading;
 using System.Collections;
+using System.Net;
 using System.Runtime.Serialization;
+using System.Threading;
+using MonoTests.Helpers;
+using NUnit.Framework;
 using Socks = System.Net.Sockets;
 
 namespace MonoTests.System.Net

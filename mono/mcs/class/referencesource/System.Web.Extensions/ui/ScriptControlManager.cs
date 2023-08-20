@@ -7,14 +7,13 @@
 namespace System.Web.UI
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Text;
-    using System.Web.UI;
     using System.Web.Resources;
+    using System.Web.UI;
     using System.Web.Util;
-
     using Debug = System.Diagnostics.Debug;
 
     internal class ScriptControlManager

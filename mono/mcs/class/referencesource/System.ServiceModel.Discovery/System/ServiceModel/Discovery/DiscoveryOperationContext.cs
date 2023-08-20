@@ -6,10 +6,10 @@ namespace System.ServiceModel.Discovery
 {
     using System;
     using System.Runtime;
-    using System.ServiceModel.Channels;
-    using System.Xml;
     using System.Runtime.Diagnostics;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.Xml;
 
     class DiscoveryOperationContext
     {

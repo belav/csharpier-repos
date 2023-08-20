@@ -10,15 +10,15 @@ namespace System.Reflection.Emit
 {
     using System;
     using System.Collections.Generic;
-    using CultureInfo = System.Globalization.CultureInfo;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.Runtime.InteropServices;
+    using CultureInfo = System.Globalization.CultureInfo;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class DynamicMethod : MethodInfo

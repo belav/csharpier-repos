@@ -4,11 +4,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Web.WebPages.TestUtils;
+using Microsoft.TestCommon;
 #if !NETFX_CORE
 using System.Net.Http.Formatting.Internal;
 #endif
-using System.Web.WebPages.TestUtils;
-using Microsoft.TestCommon;
 
 namespace System.Net.Http.Internal
 {

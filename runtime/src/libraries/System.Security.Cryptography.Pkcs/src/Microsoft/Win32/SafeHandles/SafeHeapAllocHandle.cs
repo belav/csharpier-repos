@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using HeapAllocFlags = Interop.Kernel32.HeapAllocFlags;
 
 namespace Microsoft.Win32.SafeHandles

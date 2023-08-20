@@ -235,8 +235,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -445,8 +445,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(17,16\).*CS0219</Expects>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {

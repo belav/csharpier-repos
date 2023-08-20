@@ -17,15 +17,15 @@ using System.Diagnostics.Contracts;
 ===========================================================*/
 namespace System.Threading
 {
-    using System.Security;
-    using System.Runtime.Remoting;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Runtime.Remoting.Messaging;
     using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
     using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Messaging;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
 
     internal class HostExecutionContextSwitcher
     {

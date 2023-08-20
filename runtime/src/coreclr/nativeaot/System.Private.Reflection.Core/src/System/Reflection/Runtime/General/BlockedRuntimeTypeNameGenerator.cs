@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Reflection.Runtime.General
 {

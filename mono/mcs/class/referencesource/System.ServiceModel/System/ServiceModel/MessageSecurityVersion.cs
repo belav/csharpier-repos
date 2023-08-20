@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.ServiceModel.Security;
     using System.IdentityModel.Selectors;
+    using System.ServiceModel.Security;
 
     public abstract class MessageSecurityVersion
     {

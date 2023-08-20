@@ -1,13 +1,13 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Xml;
 
     #region DictionarySurrogate
     internal sealed class DictionarySurrogate : ISerializationSurrogate

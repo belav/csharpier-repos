@@ -9,7 +9,6 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection.Emit

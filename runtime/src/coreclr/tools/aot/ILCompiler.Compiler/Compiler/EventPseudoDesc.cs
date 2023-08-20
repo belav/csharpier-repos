@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.Metadata;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 

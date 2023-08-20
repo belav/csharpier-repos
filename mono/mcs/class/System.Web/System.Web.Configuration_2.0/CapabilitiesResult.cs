@@ -26,9 +26,9 @@ namespace System.Web.Configuration
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Reflection;
     using System.IO;
+    using System.Reflection;
+    using System.Text;
 
     internal class CapabilitiesResult : System.Web.HttpBrowserCapabilities
     {

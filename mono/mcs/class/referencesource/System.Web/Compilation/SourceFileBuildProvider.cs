@@ -9,13 +9,13 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
-    using System.Collections;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.IO;
     using System.Web.Hosting;
-    using System.Web.Util;
     using System.Web.UI;
+    using System.Web.Util;
 
     internal sealed class SourceFileBuildProvider : InternalBuildProvider
     {

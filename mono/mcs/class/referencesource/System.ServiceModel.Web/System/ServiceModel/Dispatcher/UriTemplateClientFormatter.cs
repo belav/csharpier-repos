@@ -13,9 +13,9 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Web;
 
     class UriTemplateClientFormatter : IClientMessageFormatter
     {

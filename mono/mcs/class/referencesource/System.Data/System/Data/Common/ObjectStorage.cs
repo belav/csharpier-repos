@@ -9,14 +9,14 @@
 namespace System.Data.Common
 {
     using System;
-    using System.Data;
-    using System.Xml;
-    using System.IO;
-    using System.Xml.Serialization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Data;
     using System.Diagnostics;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal sealed class ObjectStorage : DataStorage
     {

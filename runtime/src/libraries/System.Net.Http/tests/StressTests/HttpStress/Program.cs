@@ -1,18 +1,18 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
-using System.IO;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-using System.Net;
 using HttpStress;
+using Microsoft.AspNetCore;
 
 [assembly: SupportedOSPlatform("windows")]
 [assembly: SupportedOSPlatform("linux")]

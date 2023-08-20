@@ -8,8 +8,8 @@
 //
 using System;
 using System.CodeDom.Compiler;
-using NUnit.Framework;
 using Microsoft.CSharp;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.CSharp
 {

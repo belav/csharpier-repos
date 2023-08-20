@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tokens
 {
     using System.Reflection;
-
     using Castle.DynamicProxy.Internal;
 
     internal static class TypeUtilMethods

@@ -27,13 +27,13 @@
 //
 
 using System;
-using C = System.ComponentModel;
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using System.Collections;
 using NUnit.Framework;
-using System.Drawing;
-using System.ComponentModel;
+using C = System.ComponentModel;
 
 namespace MonoTests.System.Windows.Forms
 {

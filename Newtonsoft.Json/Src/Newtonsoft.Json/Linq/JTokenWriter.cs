@@ -26,10 +26,10 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using Newtonsoft.Json.Utilities;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
 {

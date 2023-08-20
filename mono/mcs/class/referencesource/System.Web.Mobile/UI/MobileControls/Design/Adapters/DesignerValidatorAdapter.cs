@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+using System.Diagnostics;
 using System.Globalization;
 using System.Web.Mobile;
 using System.Web.UI.Design.MobileControls;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Diagnostics;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {

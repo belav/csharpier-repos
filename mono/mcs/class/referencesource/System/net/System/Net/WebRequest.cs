@@ -11,6 +11,7 @@ namespace System.Net
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -19,15 +20,14 @@ namespace System.Net
     using System.IO;
     using System.Net.Cache;
     using System.Net.Configuration;
+    using System.Net.Security;
     using System.Reflection;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Net.Security;
-    using System.ComponentModel;
-    using System.Security;
 
     //
     // WebRequest - the base class of all Web resource/protocol objects. Provides

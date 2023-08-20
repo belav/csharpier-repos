@@ -6,6 +6,7 @@ namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.IdentityModel.Policy;
     using System.Runtime;
@@ -13,7 +14,6 @@ namespace System.ServiceModel.Dispatcher
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
-    using System.Diagnostics;
 
     [Serializable]
     class WorkflowRequestContext

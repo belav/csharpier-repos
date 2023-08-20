@@ -4,8 +4,8 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
 
     static class TimeSpanHelper
     {

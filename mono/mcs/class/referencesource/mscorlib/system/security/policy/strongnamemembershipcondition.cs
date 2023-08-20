@@ -12,16 +12,16 @@
 
 namespace System.Security.Policy
 {
-    using System.Text;
-    using System.Configuration.Assemblies;
     using System;
-    using SecurityManager = System.Security.SecurityManager;
-    using StrongNamePublicKeyBlob = System.Security.Permissions.StrongNamePublicKeyBlob;
+    using System.Collections;
+    using System.Configuration.Assemblies;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Text;
     using PermissionSet = System.Security.PermissionSet;
     using SecurityElement = System.Security.SecurityElement;
-    using System.Collections;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using SecurityManager = System.Security.SecurityManager;
+    using StrongNamePublicKeyBlob = System.Security.Permissions.StrongNamePublicKeyBlob;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

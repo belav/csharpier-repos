@@ -1,6 +1,6 @@
 using System;
-using Mono.Simd;
 using System.Threading;
+using Mono.Simd;
 
 class A
 {

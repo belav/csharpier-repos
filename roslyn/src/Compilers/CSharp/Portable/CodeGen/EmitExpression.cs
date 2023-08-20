@@ -12,9 +12,8 @@ using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.CodeGen;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Roslyn.Utilities;
-
-using static System.Linq.ImmutableArrayExtensions;
 using static Microsoft.CodeAnalysis.CSharp.Binder;
+using static System.Linq.ImmutableArrayExtensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 {

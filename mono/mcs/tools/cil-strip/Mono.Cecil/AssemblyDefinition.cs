@@ -30,7 +30,6 @@ namespace Mono.Cecil
 {
     using System;
     using System.Collections;
-
     using Mono.Cecil.Metadata;
 
     internal class AssemblyDefinition

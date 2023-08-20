@@ -3,10 +3,8 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
 
 namespace ILCompiler.DependencyAnalysis

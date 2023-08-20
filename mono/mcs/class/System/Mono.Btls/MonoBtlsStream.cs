@@ -33,8 +33,8 @@ using System.IO;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-
 #if MONO_SECURITY_ALIAS
+
 using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;

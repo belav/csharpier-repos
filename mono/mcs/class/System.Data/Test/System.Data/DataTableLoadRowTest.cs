@@ -32,7 +32,6 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data

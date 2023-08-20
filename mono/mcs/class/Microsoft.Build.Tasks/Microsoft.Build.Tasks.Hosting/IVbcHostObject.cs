@@ -26,9 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-using Microsoft.Build.Framework;
 using System;
 using System.Runtime.InteropServices;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Tasks.Hosting
 {

@@ -29,9 +29,9 @@
 //
 
 using System.Collections;
-using System.Runtime.Serialization.Formatters;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Serialization.Formatters;
 
 namespace Mono.Remoting.Channels.Unix
 {

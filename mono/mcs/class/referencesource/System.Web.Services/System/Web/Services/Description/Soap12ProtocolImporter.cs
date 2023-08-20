@@ -6,20 +6,20 @@
 //------------------------------------------------------------------------------
 namespace System.Web.Services.Description
 {
+    using System;
+    using System.CodeDom;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Security.Permissions;
     using System.Web.Services;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Protocols;
     using System.Xml;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Collections;
-    using System;
-    using System.Reflection;
-    using System.CodeDom;
-    using System.Web.Services.Configuration;
-    using System.Diagnostics;
-    using System.ComponentModel;
-    using System.Security.Permissions;
-    using System.Globalization;
+    using System.Xml.Serialization;
 
     /// <include file='doc\Soap12ProtocolImporter.uex' path='docs/doc[@for="Soap12ProtocolImporter"]/*' />
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]

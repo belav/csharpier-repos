@@ -28,7 +28,6 @@
 
 using System;
 using System.Data;
-
 using GHTUtils;
 using GHTUtils.Base;
 using NUnit.Framework;

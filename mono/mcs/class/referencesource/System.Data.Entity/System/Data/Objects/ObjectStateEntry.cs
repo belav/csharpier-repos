@@ -6,12 +6,12 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
-using System.Collections;
 
 namespace System.Data.Objects
 {

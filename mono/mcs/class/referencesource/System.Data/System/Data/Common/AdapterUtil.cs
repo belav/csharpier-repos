@@ -8,7 +8,6 @@
 
 namespace System.Data.Common
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -16,11 +15,8 @@ namespace System.Data.Common
     using System.Configuration;
     using System.Data;
     using System.Data.ProviderBase;
-#if !MOBILE
-    using System.Data.Odbc;
-    using System.Data.OleDb;
-#endif
     using System.Data.Sql;
+    using System.Data.SqlClient;
     using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
@@ -29,20 +25,26 @@ namespace System.Data.Common
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Data.SqlClient;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
-    using SysTx = System.Transactions;
+    using Microsoft.SqlServer.Server;
+    using Microsoft.Win32;
+#if !MOBILE
+    using System.Data.Odbc;
+    using System.Data.OleDb;
+#endif
+
 #if !MOBILE
     using SysES = System.EnterpriseServices;
 #endif
-    using System.Runtime.Versioning;
 
-    using Microsoft.SqlServer.Server;
+
+    using SysTx = System.Transactions;
 
     internal static class ADP
     {

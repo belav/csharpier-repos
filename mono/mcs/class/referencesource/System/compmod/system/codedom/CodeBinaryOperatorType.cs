@@ -8,13 +8,12 @@
 
 namespace System.CodeDom
 {
-    using System.Runtime.Remoting;
-
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>

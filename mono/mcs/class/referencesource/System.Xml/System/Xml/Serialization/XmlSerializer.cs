@@ -7,21 +7,21 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
-    using System.Collections;
-    using System.IO;
-    using System.Xml.Schema;
     using System;
-    using System.Text;
-    using System.Threading;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
+    using System.Text;
+    using System.Threading;
+    using System.Xml.Schema;
     using System.Xml.Serialization.Configuration;
-    using System.Diagnostics;
-    using System.CodeDom.Compiler;
-    using System.Runtime.Versioning;
 
     /// <include file='doc\XmlSerializer.uex' path='docs/doc[@for="XmlDeserializationEvents"]/*' />
     /// <devdoc>

@@ -31,9 +31,9 @@
 // TODO: getting the .x and .y in LoadData doesn't work with mozilla
 //
 
-using System.Globalization;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 using System.Security.Permissions;
 using System.Web.Util;
 

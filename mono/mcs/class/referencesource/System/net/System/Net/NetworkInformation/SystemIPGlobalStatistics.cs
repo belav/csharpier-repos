@@ -4,9 +4,9 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net.Sockets;
     using System;
     using System.ComponentModel;
+    using System.Net.Sockets;
 
     /// <include file='doc\Statistics.uex' path='docs/doc[@for="IPStatistics"]/*' />
     /// <summary>IP statistics</summary>

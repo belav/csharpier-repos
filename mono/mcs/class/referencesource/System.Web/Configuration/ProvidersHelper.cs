@@ -6,13 +6,13 @@
 
 namespace System.Web.Configuration
 {
+    using System;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Provider;
-    using System.Web.Compilation;
-    using System.Collections.Specialized;
-    using System;
     using System.Security;
     using System.Security.Permissions;
+    using System.Web.Compilation;
 
     public static class ProvidersHelper
     {

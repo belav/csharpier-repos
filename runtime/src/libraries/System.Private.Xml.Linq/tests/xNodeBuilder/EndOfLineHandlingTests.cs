@@ -3,10 +3,10 @@
 
 using System;
 using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using System.Text;
-using System.IO;
 using System.Xml.XmlDiff;
 using Microsoft.Test.ModuleCore;
 

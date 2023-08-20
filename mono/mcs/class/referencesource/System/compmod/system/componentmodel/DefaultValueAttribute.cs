@@ -11,10 +11,10 @@ namespace System.ComponentModel
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 #if !SILVERLIGHT
     using System.Runtime.Serialization.Formatters;
 #endif
-    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para>Specifies the default value for a property.</para>

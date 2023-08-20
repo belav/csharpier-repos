@@ -16,11 +16,11 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System.Globalization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     // The ArgumentException is thrown when an argument does not meet
     // the contract of the method.  Ideally it should give a meaningful error

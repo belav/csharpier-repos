@@ -8,19 +8,18 @@
 
 namespace System.CodeDom.Compiler
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.InteropServices;
-
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
-    using System.IO;
-    using System.Collections;
-    using System.Reflection;
-    using System.Globalization;
     using System.CodeDom;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
     using System.Security.Permissions;
     using System.Text;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides a base class for code generators.</para>

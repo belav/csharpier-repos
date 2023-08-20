@@ -19,7 +19,6 @@ namespace Castle.DynamicProxy.Internal
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
-
     using Castle.DynamicProxy.Generators;
 
     internal static class AttributeUtil

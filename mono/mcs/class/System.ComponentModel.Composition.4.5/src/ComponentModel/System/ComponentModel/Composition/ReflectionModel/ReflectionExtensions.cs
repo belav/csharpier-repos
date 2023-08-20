@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Reflection;
-using Microsoft.Internal;
-using System.Threading;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {

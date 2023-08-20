@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
+using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using static System.Runtime.Intrinsics.X86.Avx;
 using static System.Runtime.Intrinsics.X86.Avx2;
-using System.Runtime.Intrinsics.X86;
-using System.Runtime.Intrinsics;
-using System.Runtime.CompilerServices;
-using System;
 
 internal struct Intersections
 {

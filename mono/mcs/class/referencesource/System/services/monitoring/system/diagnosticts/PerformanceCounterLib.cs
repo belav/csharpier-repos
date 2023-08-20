@@ -1,19 +1,19 @@
 namespace System.Diagnostics
 {
-    using System.Runtime.InteropServices;
-    using System.Globalization;
-    using System.Security.Permissions;
-    using System.Security;
-    using System.Text;
-    using System.Threading;
-    using System.Reflection;
     using System.Collections;
-    using System.ComponentModel;
     using System.Collections.Specialized;
-    using Microsoft.Win32;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 
     internal class PerformanceCounterLib
     {

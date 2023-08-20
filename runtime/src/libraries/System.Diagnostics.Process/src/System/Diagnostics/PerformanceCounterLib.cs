@@ -2,9 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-#if FEATURE_REGISTRY
-using Microsoft.Win32;
-#endif
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +9,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+#if FEATURE_REGISTRY
+using Microsoft.Win32;
+#endif
+
 
 namespace System.Diagnostics
 {

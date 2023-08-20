@@ -7,9 +7,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Common.Internal.Materialization;
 using System.Data.Common.Utils;
 using System.Data.EntityClient;
-using System.Data.Common.Internal.Materialization;
 using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Text;

@@ -8,15 +8,15 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
-using System.Reflection;
-using System.Data.Metadata.Edm;
 using System.Data.Entity.Design.Common;
-using System.IO;
-using System.Data.Mapping;
 using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 
 namespace System.Data.Entity.Design

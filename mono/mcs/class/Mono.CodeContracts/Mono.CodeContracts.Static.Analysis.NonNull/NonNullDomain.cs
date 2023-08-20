@@ -28,7 +28,6 @@
 
 using System;
 using System.IO;
-
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.NonNull

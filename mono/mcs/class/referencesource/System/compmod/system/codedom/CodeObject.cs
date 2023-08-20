@@ -10,8 +10,8 @@ namespace System.CodeDom
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     /// <devdoc>
     ///    <para>

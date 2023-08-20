@@ -17,7 +17,6 @@ namespace Castle.DynamicProxy.Generators
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using Castle.DynamicProxy.Contributors;
     using Castle.DynamicProxy.Serialization;
 

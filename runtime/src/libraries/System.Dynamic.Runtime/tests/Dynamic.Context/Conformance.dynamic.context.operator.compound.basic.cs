@@ -791,8 +791,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -904,8 +904,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {

@@ -28,15 +28,15 @@
 //
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
-using System.Runtime.Serialization;
 using System.Runtime.Remoting.Messaging;
-using System.Xml.Serialization;
+using System.Runtime.Serialization;
 using System.Threading;
-using System.Globalization;
+using System.Xml.Serialization;
 
 namespace System.Runtime.Serialization.Formatters.Soap
 {

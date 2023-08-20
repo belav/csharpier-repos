@@ -4,10 +4,10 @@
 // </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using System.Diagnostics;
-using System.ComponentModel;
 
 namespace System.Xml.Xsl.Runtime
 {

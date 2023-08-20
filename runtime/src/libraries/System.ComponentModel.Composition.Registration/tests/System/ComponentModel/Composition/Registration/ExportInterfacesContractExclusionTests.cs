@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
-using System.ComponentModel.Composition.Hosting;
 using Xunit;
 
 namespace System.ComponentModel.Composition.Registration.Tests

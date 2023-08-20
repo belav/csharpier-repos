@@ -13,10 +13,10 @@
 namespace System.Data.Services.Parsing
 {
     using System;
+    using System.Data.Services.Client;
     using System.Diagnostics;
     using System.Text;
     using System.Xml;
-    using System.Data.Services.Client;
 
     internal static class WebConvert
     {

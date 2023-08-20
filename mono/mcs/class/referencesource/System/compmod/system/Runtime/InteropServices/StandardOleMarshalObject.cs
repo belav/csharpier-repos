@@ -6,11 +6,11 @@
 
 namespace System.Runtime.InteropServices
 {
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
+    using System.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <include file='doc\StandardOleMarshalObject.uex' path='docs/doc[@for="StandardOleMarshalObject"]/*' />
     /// <internalonly/>

@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
     using System.Globalization;
+    using System.ServiceModel.Channels;
     using System.Xml;
 
     class DurableDispatcherAddressingFault : MessageFault

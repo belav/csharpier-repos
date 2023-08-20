@@ -8,13 +8,13 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Activities.DurableInstancing;
     using System.Activities.Hosting;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Channels;
     using System.Transactions;
     using System.Xml.Linq;
 

@@ -22,13 +22,13 @@
 namespace System
 {
     using System;
-    using System.Diagnostics.Contracts;
-    using System.Text;
-    using System.Threading;
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
+    using System.Text;
+    using System.Threading;
 
     //
     // Currently, this is the only supported timezone.

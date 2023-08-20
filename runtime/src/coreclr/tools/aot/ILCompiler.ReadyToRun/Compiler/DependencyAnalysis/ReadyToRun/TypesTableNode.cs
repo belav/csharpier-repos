@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.NativeFormat;
 using Internal.Text;
 using Internal.TypeSystem;

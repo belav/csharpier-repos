@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Internal.IL.Stubs;
 using Debug = System.Diagnostics.Debug;
-using System.Threading;
 
 namespace Internal.TypeSystem.Interop
 {

@@ -25,12 +25,12 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
 #if !MOBILE && !XAMMAC_4_5
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 #endif
-using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
 
 #if !MOBILE && !XAMMAC_4_5
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;

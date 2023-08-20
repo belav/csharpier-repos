@@ -10,7 +10,6 @@
 #if !MOBILE
 
 using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.IO;

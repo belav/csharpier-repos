@@ -4,11 +4,11 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.AddImport;
+using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.AddImport;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeCleanup;

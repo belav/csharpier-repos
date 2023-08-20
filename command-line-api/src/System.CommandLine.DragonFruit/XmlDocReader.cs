@@ -3,10 +3,10 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml.Linq;
 
 namespace System.CommandLine.DragonFruit
 {

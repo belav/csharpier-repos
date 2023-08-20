@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Text;
 using System.Globalization;
+using System.Text;
 
 namespace Mono.Tools.LocaleBuilder
 {

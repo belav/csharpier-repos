@@ -1,21 +1,21 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Xml;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Globalization;
-    using System.ComponentModel;
-    using System.Transactions;
-    using System.Reflection;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Text;
+    using System.Transactions;
+    using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     [Browsable(true)]
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]

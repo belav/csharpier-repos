@@ -2,13 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Linq;
+using Microsoft.TestCommon;
 #if ASPNETWEBAPI
 using System.Web.Http.Routing.Constraints;
 #else
 using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
 #endif
-using Microsoft.TestCommon;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing

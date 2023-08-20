@@ -4,7 +4,6 @@
 #nullable enable
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Internal.IntrinsicSupport;
 using Internal.Runtime.CompilerServices;
 

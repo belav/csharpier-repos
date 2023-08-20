@@ -5,9 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-#if DEBUG
-using System.Diagnostics;
-#endif
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
@@ -25,6 +22,10 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Roslyn.Utilities;
+#if DEBUG
+using System.Diagnostics;
+#endif
+
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {

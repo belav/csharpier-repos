@@ -8,17 +8,17 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Remoting.Lifetime;
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Runtime.Remoting.Lifetime;
+    using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using XamlBuildTask;
-    using Microsoft.Build.Framework;
 
     internal class PartialClassGenerationTaskInternal : MarshalByRefObject
     {

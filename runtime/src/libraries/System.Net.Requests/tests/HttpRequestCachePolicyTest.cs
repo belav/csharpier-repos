@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Net.Cache;
-
 using Xunit;
 
 namespace System.Net.Tests

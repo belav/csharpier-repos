@@ -39,6 +39,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -46,7 +47,6 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.IO
 {

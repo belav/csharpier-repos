@@ -26,8 +26,8 @@
 using System;
 using System.IO;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Xml.Schema;
+using System.Xml.Serialization;
 using Xunit;
 
 namespace System.Data.Tests

@@ -30,12 +30,12 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
-using System.Security;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the System.Data.DataSetExtensions assembly
 // v3.5 Assembly

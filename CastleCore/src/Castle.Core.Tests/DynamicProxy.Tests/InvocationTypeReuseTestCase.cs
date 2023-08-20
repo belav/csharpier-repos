@@ -15,9 +15,7 @@
 namespace Castle.DynamicProxy.Tests
 {
     using System;
-
     using Castle.DynamicProxy.Internal;
-
     using NUnit.Framework;
 
     /// <summary>

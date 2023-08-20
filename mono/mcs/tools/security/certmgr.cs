@@ -12,16 +12,15 @@ using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Net.Sockets;
 using System.Net.Security;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Security.Cryptography;
-using SSCX = System.Security.Cryptography.X509Certificates;
 using System.Text;
-
 using Mono.Security.Authenticode;
 using Mono.Security.Cryptography;
 using Mono.Security.X509;
+using SSCX = System.Security.Cryptography.X509Certificates;
 
 [assembly: AssemblyTitle("Mono Certificate Manager")]
 [assembly: AssemblyDescription("Manage X.509 certificates and CRL from stores.")]

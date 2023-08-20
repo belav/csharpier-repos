@@ -16,7 +16,6 @@ namespace Castle.DynamicProxy.Contributors
 {
     using System;
     using System.Reflection;
-
     using Castle.DynamicProxy.Generators;
 
     internal class InterfaceMembersOnClassCollector : MembersCollector

@@ -26,17 +26,16 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Collections.Generic;
-
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Internal;
-using System.Text;
 using System;
-using System.Xml;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Globalization;
+using System.Text;
+using System.Xml;
+using Microsoft.Build.Evaluation;
 using Microsoft.Build.Exceptions;
+using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {

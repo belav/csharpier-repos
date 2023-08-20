@@ -6,8 +6,8 @@ namespace System.Runtime.Serialization.Json
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
     using System.Xml;
 
     class JsonByteArrayDataContract : JsonDataContract

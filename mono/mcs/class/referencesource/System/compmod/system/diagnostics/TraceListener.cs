@@ -9,14 +9,14 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.Text;
-    using System.Security.Permissions;
+    using System.Collections;
     using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
     using System.Runtime.InteropServices;
-    using System.Collections;
-    using System.Configuration;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Text;
 
     /// <devdoc>
     /// <para>Provides the <see langword='abstract '/>base class for the listeners who

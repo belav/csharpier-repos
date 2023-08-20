@@ -8,13 +8,13 @@ using System;
 
 namespace System
 {
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Security;
-    using System.Diagnostics.Contracts;
 
     // Warning, don't put System.Runtime.Serialization.On*Serializ*Attribute
     // on this class without first fixing ObjectClone::InvokeVtsCallbacks

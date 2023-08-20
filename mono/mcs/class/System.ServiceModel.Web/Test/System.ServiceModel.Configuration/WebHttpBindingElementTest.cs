@@ -5,7 +5,6 @@ using NUnit.Framework;
 using System.ServiceModel;
 using System.Text;
 using System.Configuration;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration

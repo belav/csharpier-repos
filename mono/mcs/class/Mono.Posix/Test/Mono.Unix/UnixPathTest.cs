@@ -7,11 +7,11 @@
 // (c) 2006 Jonathan Pryor
 //
 
-using NUnit.Framework;
-using System.IO;
 using System;
+using System.IO;
 using System.Text;
 using Mono.Unix;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix
 {

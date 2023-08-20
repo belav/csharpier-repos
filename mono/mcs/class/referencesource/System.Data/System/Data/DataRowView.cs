@@ -8,8 +8,8 @@
 
 namespace System.Data
 {
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     public class DataRowView
         : ICustomTypeDescriptor,

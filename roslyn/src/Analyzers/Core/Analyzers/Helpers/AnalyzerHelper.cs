@@ -4,7 +4,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.Options;
-
 #if CODE_STYLE
 using TOption = Microsoft.CodeAnalysis.Options.IOption2;
 #else

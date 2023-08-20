@@ -28,19 +28,21 @@
 extern alias MonoSecurity;
 #endif
 
+#endif
+
+using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Win32.SafeHandles;
 #if MONO_SECURITY_ALIAS
 using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;
 #endif
-using MNS = Mono.Net.Security;
-#endif
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.Win32.SafeHandles;
+
+using MNS = Mono.Net.Security;
 
 namespace Mono
 {

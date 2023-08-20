@@ -30,10 +30,10 @@
 //
 
 using System.IO;
-using System.Text;
-using System.Web.Services;
-using System.Web;
 using System.Reflection;
+using System.Text;
+using System.Web;
+using System.Web.Services;
 
 namespace System.Web.Services.Protocols
 {

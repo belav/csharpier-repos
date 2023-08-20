@@ -15,13 +15,11 @@
 namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
     using System;
-    using System.Xml;
-
-    using Castle.Components.DictionaryAdapter.Tests;
-
-    using NUnit.Framework;
-    using System.Xml.Serialization;
     using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using Castle.Components.DictionaryAdapter.Tests;
+    using NUnit.Framework;
 
     [TestFixture]
     public class SysXmlCursorTestCase

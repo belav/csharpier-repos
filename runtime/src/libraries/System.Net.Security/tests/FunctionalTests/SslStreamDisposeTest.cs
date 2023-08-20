@@ -5,7 +5,6 @@ using System.IO;
 using System.Net.Test.Common;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Security.Tests

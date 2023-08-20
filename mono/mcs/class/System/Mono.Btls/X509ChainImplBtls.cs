@@ -26,16 +26,16 @@
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MX = MonoSecurity::Mono.Security.X509;
 #else
 using MX = Mono.Security.X509;
 #endif
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using MX = MonoSecurity::Mono.Security.X509;
 
 namespace Mono.Btls
 {

@@ -6,8 +6,8 @@
 
 namespace System
 {
-    using System.Runtime.Serialization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
 
     [Serializable]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]

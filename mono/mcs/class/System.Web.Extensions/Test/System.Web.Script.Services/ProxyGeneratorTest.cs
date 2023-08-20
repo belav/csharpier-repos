@@ -30,8 +30,8 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Web.Script.Services;
 using System.Text;
+using System.Web.Script.Services;
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Script.Services

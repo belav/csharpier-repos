@@ -27,9 +27,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Reflection;
-using System.ComponentModel.Design;
 using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Reflection;
 
 namespace System.Resources
 {

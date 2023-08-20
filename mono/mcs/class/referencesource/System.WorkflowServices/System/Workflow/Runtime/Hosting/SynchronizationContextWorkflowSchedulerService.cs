@@ -4,13 +4,13 @@
 
 namespace System.Workflow.Runtime.Hosting
 {
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Diagnostics;
 
     class SynchronizationContextWorkflowSchedulerService : DefaultWorkflowSchedulerService
     {

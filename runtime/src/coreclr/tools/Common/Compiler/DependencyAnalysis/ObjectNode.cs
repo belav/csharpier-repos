@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis

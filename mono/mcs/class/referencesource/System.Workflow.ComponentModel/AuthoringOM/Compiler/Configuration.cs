@@ -1,11 +1,11 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
-    using System.Xml;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Xml.Serialization;
     using System.Text.RegularExpressions;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal sealed class WorkflowCompilerConfigurationSectionGroup : ConfigurationSectionGroup
     {

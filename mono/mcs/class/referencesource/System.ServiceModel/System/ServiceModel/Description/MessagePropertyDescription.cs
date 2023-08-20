@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
-    using System.Text;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.Text;
 
     public class MessagePropertyDescription : MessagePartDescription
     {

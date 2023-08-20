@@ -25,13 +25,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Converters;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using Newtonsoft.Json.Converters;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;

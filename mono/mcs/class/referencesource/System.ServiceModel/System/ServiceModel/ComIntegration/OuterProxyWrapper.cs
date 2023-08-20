@@ -6,9 +6,9 @@ namespace System.ServiceModel.ComIntegration
     using System;
     using System.Runtime;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.ServiceModel.Channels;
     using System.Threading;
-    using System.Runtime.Versioning;
 
     class ProxySupportWrapper
     {

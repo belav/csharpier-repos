@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests
 {
     using Castle.DynamicProxy.Tests.Interceptors;
-
     using NUnit.Framework;
 
     // The purpose of this test fixture is to ensure that DynamicProxy can handle the `in` parameter modifier

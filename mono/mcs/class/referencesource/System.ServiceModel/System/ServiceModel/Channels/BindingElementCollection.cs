@@ -3,11 +3,11 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel;
-    using System.ComponentModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
 
     public class BindingElementCollection : Collection<BindingElement>
     {

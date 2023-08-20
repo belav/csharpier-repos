@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Security.Authentication.ExtendedProtection;
-
 using Xunit;
 
 namespace System.Net.Security.Tests

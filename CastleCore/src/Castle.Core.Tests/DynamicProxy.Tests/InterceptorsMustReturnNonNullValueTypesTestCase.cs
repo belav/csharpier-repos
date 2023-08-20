@@ -15,7 +15,6 @@
 namespace Castle.DynamicProxy.Tests
 {
     using System;
-
     using NUnit.Framework;
 
     // The purpose of this test fixture is to ensure that DynamicProxy throws a useful exception
