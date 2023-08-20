@@ -16,23 +16,23 @@ using System.Web.Services;
 using System.EnterpriseServices;
 #endif
 
-namespace MonoTests.System.Web.Services {
+namespace MonoTests.System.Web.Services
+{
+    [TestFixture]
+    public class WebMethodAttributeTest
+    {
+        [Test]
+        public void TestConstructors()
+        {
+            WebMethodAttribute attribute;
 
-	[TestFixture]
-	public class WebMethodAttributeTest {
-
-		[Test]
-		public void TestConstructors ()
-		{
-			WebMethodAttribute attribute;
-
-			attribute = new WebMethodAttribute ();
-			Assert.AreEqual (true, attribute.BufferResponse);
-			Assert.AreEqual (0, attribute.CacheDuration);
-			Assert.AreEqual (String.Empty, attribute.Description);
-			Assert.AreEqual (false, attribute.EnableSession);
-			Assert.AreEqual (String.Empty, attribute.MessageName);
-			Assert.AreEqual (TransactionOption.Disabled, attribute.TransactionOption);
-		}
-	}
+            attribute = new WebMethodAttribute();
+            Assert.AreEqual(true, attribute.BufferResponse);
+            Assert.AreEqual(0, attribute.CacheDuration);
+            Assert.AreEqual(String.Empty, attribute.Description);
+            Assert.AreEqual(false, attribute.EnableSession);
+            Assert.AreEqual(String.Empty, attribute.MessageName);
+            Assert.AreEqual(TransactionOption.Disabled, attribute.TransactionOption);
+        }
+    }
 }

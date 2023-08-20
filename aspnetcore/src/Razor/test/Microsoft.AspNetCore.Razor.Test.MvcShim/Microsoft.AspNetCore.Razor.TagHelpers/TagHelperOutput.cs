@@ -14,9 +14,8 @@ public class TagHelperOutput : IHtmlContentContainer
     public TagHelperOutput(
         string tagName,
         TagHelperAttributeList attributes,
-        Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync)
-    {
-    }
+        Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync
+    ) { }
 
     public string TagName { get; set; }
 
@@ -36,13 +35,9 @@ public class TagHelperOutput : IHtmlContentContainer
 
     public TagHelperAttributeList Attributes { get; }
 
-    public void Reinitialize(string tagName, TagMode tagMode)
-    {
-    }
+    public void Reinitialize(string tagName, TagMode tagMode) { }
 
-    public void SuppressOutput()
-    {
-    }
+    public void SuppressOutput() { }
 
     public Task<TagHelperContent> GetChildContentAsync()
     {
@@ -64,15 +59,9 @@ public class TagHelperOutput : IHtmlContentContainer
         throw null;
     }
 
-    void IHtmlContentContainer.CopyTo(IHtmlContentBuilder destination)
-    {
-    }
+    void IHtmlContentContainer.CopyTo(IHtmlContentBuilder destination) { }
 
-    void IHtmlContentContainer.MoveTo(IHtmlContentBuilder destination)
-    {
-    }
+    void IHtmlContentContainer.MoveTo(IHtmlContentBuilder destination) { }
 
-    public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-    {
-    }
+    public void WriteTo(TextWriter writer, HtmlEncoder encoder) { }
 }

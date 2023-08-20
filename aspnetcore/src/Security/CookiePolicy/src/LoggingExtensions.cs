@@ -17,18 +17,43 @@ internal static partial class LoggingExtensions
     [LoggerMessage(4, LogLevel.Debug, "Consent withdrawn.", EventName = "ConsentWithdrawn")]
     public static partial void ConsentWithdrawn(this ILogger logger);
 
-    [LoggerMessage(5, LogLevel.Debug, "Cookie '{key}' suppressed due to consent policy.", EventName = "CookieSuppressed")]
+    [LoggerMessage(
+        5,
+        LogLevel.Debug,
+        "Cookie '{key}' suppressed due to consent policy.",
+        EventName = "CookieSuppressed"
+    )]
     public static partial void CookieSuppressed(this ILogger logger, string key);
 
-    [LoggerMessage(6, LogLevel.Debug, "Delete cookie '{key}' suppressed due to developer policy.", EventName = "DeleteCookieSuppressed")]
+    [LoggerMessage(
+        6,
+        LogLevel.Debug,
+        "Delete cookie '{key}' suppressed due to developer policy.",
+        EventName = "DeleteCookieSuppressed"
+    )]
     public static partial void DeleteCookieSuppressed(this ILogger logger, string key);
 
-    [LoggerMessage(7, LogLevel.Debug, "Cookie '{key}' upgraded to 'secure'.", EventName = "UpgradedToSecure")]
+    [LoggerMessage(
+        7,
+        LogLevel.Debug,
+        "Cookie '{key}' upgraded to 'secure'.",
+        EventName = "UpgradedToSecure"
+    )]
     public static partial void CookieUpgradedToSecure(this ILogger logger, string key);
 
-    [LoggerMessage(8, LogLevel.Debug, "Cookie '{key}' same site mode upgraded to '{mode}'.", EventName = "UpgradedSameSite")]
+    [LoggerMessage(
+        8,
+        LogLevel.Debug,
+        "Cookie '{key}' same site mode upgraded to '{mode}'.",
+        EventName = "UpgradedSameSite"
+    )]
     public static partial void CookieSameSiteUpgraded(this ILogger logger, string key, string mode);
 
-    [LoggerMessage(9, LogLevel.Debug, "Cookie '{key}' upgraded to 'httponly'.", EventName = "UpgradedToHttpOnly")]
+    [LoggerMessage(
+        9,
+        LogLevel.Debug,
+        "Cookie '{key}' upgraded to 'httponly'.",
+        EventName = "UpgradedToHttpOnly"
+    )]
     public static partial void CookieUpgradedToHttpOnly(this ILogger logger, string key);
 }

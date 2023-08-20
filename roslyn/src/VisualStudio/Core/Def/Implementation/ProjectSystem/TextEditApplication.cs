@@ -20,7 +20,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             UpdateText(changes.ToImmutableArray(), buffer, oldSnapshot, oldText, options);
         }
 
-        public static void UpdateText(ImmutableArray<TextChange> textChanges, ITextBuffer buffer, EditOptions options)
+        public static void UpdateText(
+            ImmutableArray<TextChange> textChanges,
+            ITextBuffer buffer,
+            EditOptions options
+        )
         {
             var oldSnapshot = buffer.CurrentSnapshot;
             var oldText = oldSnapshot.AsText();
@@ -28,9 +32,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             UpdateText(textChanges, buffer, oldSnapshot, oldText, options);
         }
 
-        private static void UpdateText(ImmutableArray<TextChange> textChanges, ITextBuffer buffer, ITextSnapshot oldSnapshot, SourceText oldText, EditOptions options)
+        private static void UpdateText(
+            ImmutableArray<TextChange> textChanges,
+            ITextBuffer buffer,
+            ITextSnapshot oldSnapshot,
+            SourceText oldText,
+            EditOptions options
+        )
         {
-            using var edit = buffer.CreateEdit(options, reiteratedVersionNumber: null, editTag: null);
+            using var edit = buffer.CreateEdit(
+                options,
+                reiteratedVersionNumber: null,
+                editTag: null
+            );
             if (CodeAnalysis.Workspace.TryGetWorkspace(oldText.Container, out var workspace))
             {
                 var undoService = workspace.Services.GetRequiredService<ISourceTextUndoService>();

@@ -16,7 +16,13 @@ namespace System.ServiceModel.Dispatcher
     {
         bool alwaysEmitTypeInformation;
 
-        public DataContractJsonSerializerOperationBehavior(OperationDescription description, int maxItemsInObjectGraph, bool ignoreExtensionDataObject, IDataContractSurrogate dataContractSurrogate, bool alwaysEmitTypeInformation)
+        public DataContractJsonSerializerOperationBehavior(
+            OperationDescription description,
+            int maxItemsInObjectGraph,
+            bool ignoreExtensionDataObject,
+            IDataContractSurrogate dataContractSurrogate,
+            bool alwaysEmitTypeInformation
+        )
             : base(description)
         {
             this.MaxItemsInObjectGraph = maxItemsInObjectGraph;
@@ -25,14 +31,40 @@ namespace System.ServiceModel.Dispatcher
             this.alwaysEmitTypeInformation = alwaysEmitTypeInformation;
         }
 
-        public override XmlObjectSerializer CreateSerializer(Type type, string name, string ns, IList<Type> knownTypes)
+        public override XmlObjectSerializer CreateSerializer(
+            Type type,
+            string name,
+            string ns,
+            IList<Type> knownTypes
+        )
         {
-            return new DataContractJsonSerializer(type, name, knownTypes, this.MaxItemsInObjectGraph, this.IgnoreExtensionDataObject, this.DataContractSurrogate, alwaysEmitTypeInformation);
+            return new DataContractJsonSerializer(
+                type,
+                name,
+                knownTypes,
+                this.MaxItemsInObjectGraph,
+                this.IgnoreExtensionDataObject,
+                this.DataContractSurrogate,
+                alwaysEmitTypeInformation
+            );
         }
 
-        public override XmlObjectSerializer CreateSerializer(Type type, System.Xml.XmlDictionaryString name, System.Xml.XmlDictionaryString ns, IList<Type> knownTypes)
+        public override XmlObjectSerializer CreateSerializer(
+            Type type,
+            System.Xml.XmlDictionaryString name,
+            System.Xml.XmlDictionaryString ns,
+            IList<Type> knownTypes
+        )
         {
-            return new DataContractJsonSerializer(type, name, knownTypes, this.MaxItemsInObjectGraph, this.IgnoreExtensionDataObject, this.DataContractSurrogate, alwaysEmitTypeInformation);
+            return new DataContractJsonSerializer(
+                type,
+                name,
+                knownTypes,
+                this.MaxItemsInObjectGraph,
+                this.IgnoreExtensionDataObject,
+                this.DataContractSurrogate,
+                alwaysEmitTypeInformation
+            );
         }
     }
 }

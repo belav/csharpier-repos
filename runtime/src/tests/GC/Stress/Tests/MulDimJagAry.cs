@@ -4,7 +4,6 @@
 
 using System;
 
-
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
@@ -118,7 +117,6 @@ namespace DefaultNamespace
                 //}
             }
 
-
             Object[][][] vJag;
             for (int j = 0; j < iRep; j++)
             {
@@ -131,7 +129,6 @@ namespace DefaultNamespace
                 //    Console.WriteLine( "HeapSize after GC: "+ GC.GetTotalMemory(false) );
                 //}
             }
-
 
             return 100;
         }

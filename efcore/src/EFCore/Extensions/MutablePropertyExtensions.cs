@@ -22,25 +22,34 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property">The foreign key property.</param>
         /// <returns>The list of all associated principal properties including the given property.</returns>
         [Obsolete("Use IMutableProperty.GetPrincipals")]
-        public static IReadOnlyList<IMutableProperty> FindPrincipals(this IMutableProperty property)
-            => property.GetPrincipals();
+        public static IReadOnlyList<IMutableProperty> FindPrincipals(
+            this IMutableProperty property
+        ) => property.GetPrincipals();
 
         /// <summary>
         ///     Sets the custom <see cref="ValueComparer" /> for this property when performing key comparisons.
         /// </summary>
         /// <param name="property">The property.</param>
         /// <param name="comparer">The comparer, or <see langword="null" /> to remove any previously set comparer.</param>
-        [Obsolete("Use SetValueComparer. Only a single value comparer is allowed for a given property.")]
-        public static void SetKeyValueComparer(this IMutableProperty property, ValueComparer? comparer)
-            => property.SetValueComparer(comparer);
+        [Obsolete(
+            "Use SetValueComparer. Only a single value comparer is allowed for a given property."
+        )]
+        public static void SetKeyValueComparer(
+            this IMutableProperty property,
+            ValueComparer? comparer
+        ) => property.SetValueComparer(comparer);
 
         /// <summary>
         ///     Sets the custom <see cref="ValueComparer" /> for structural copies for this property.
         /// </summary>
         /// <param name="property">The property.</param>
         /// <param name="comparer">The comparer, or <see langword="null" /> to remove any previously set comparer.</param>
-        [Obsolete("Use SetValueComparer. Only a single value comparer is allowed for a given property.")]
-        public static void SetStructuralValueComparer(this IMutableProperty property, ValueComparer? comparer)
-            => property.SetValueComparer(comparer);
+        [Obsolete(
+            "Use SetValueComparer. Only a single value comparer is allowed for a given property."
+        )]
+        public static void SetStructuralValueComparer(
+            this IMutableProperty property,
+            ValueComparer? comparer
+        ) => property.SetValueComparer(comparer);
     }
 }

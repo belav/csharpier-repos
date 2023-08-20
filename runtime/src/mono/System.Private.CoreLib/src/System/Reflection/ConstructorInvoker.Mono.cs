@@ -7,7 +7,7 @@ namespace System.Reflection
 {
     internal partial class ConstructorInvoker
     {
-        private unsafe object? InterpretedInvoke(object? obj, IntPtr *args)
+        private unsafe object? InterpretedInvoke(object? obj, IntPtr* args)
         {
             Exception exc;
             object? o = _method.InternalInvoke(obj, args, out exc);

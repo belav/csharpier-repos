@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// A <see cref="IActionResultExecutor{VirtualFileResult}"/> for <see cref="VirtualFileResult"/>.
 /// </summary>
-public partial class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultExecutor<VirtualFileResult>
+public partial class VirtualFileResultExecutor
+    : FileResultExecutorBase,
+        IActionResultExecutor<VirtualFileResult>
 {
     private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -22,7 +24,10 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="hostingEnvironment">The hosting environment</param>
-    public VirtualFileResultExecutor(ILoggerFactory loggerFactory, IWebHostEnvironment hostingEnvironment)
+    public VirtualFileResultExecutor(
+        ILoggerFactory loggerFactory,
+        IWebHostEnvironment hostingEnvironment
+    )
         : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
     {
         if (hostingEnvironment == null)
@@ -50,7 +55,9 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
         if (!fileInfo.Exists)
         {
             throw new FileNotFoundException(
-                Resources.FormatFileResult_InvalidPath(result.FileName), result.FileName);
+                Resources.FormatFileResult_InvalidPath(result.FileName),
+                result.FileName
+            );
         }
 
         Log.ExecutingFileResult(Logger, result, result.FileName);
@@ -62,7 +69,8 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
             fileInfo.Length,
             result.EnableRangeProcessing,
             lastModified,
-            result.EntityTag);
+            result.EntityTag
+        );
 
         if (serveBody)
         {
@@ -73,7 +81,13 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
     }
 
     /// <inheritdoc/>
-    protected virtual Task WriteFileAsync(ActionContext context, VirtualFileResult result, IFileInfo fileInfo, RangeItemHeaderValue? range, long rangeLength)
+    protected virtual Task WriteFileAsync(
+        ActionContext context,
+        VirtualFileResult result,
+        IFileInfo fileInfo,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         if (context == null)
         {
@@ -93,7 +107,8 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
         IFileInfo fileInfo,
         RangeItemHeaderValue? range,
         long rangeLength,
-        ILogger logger)
+        ILogger logger
+    )
     {
         if (range != null && rangeLength == 0)
         {
@@ -109,22 +124,23 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
 
         if (range != null)
         {
-            return response.SendFileAsync(fileInfo,
-                offset: range.From ?? 0L,
-                count: rangeLength);
+            return response.SendFileAsync(fileInfo, offset: range.From ?? 0L, count: rangeLength);
         }
 
-        return response.SendFileAsync(fileInfo,
-            offset: 0,
-            count: null);
+        return response.SendFileAsync(fileInfo, offset: 0, count: null);
     }
 
-    internal static IFileInfo GetFileInformation(VirtualFileResult result, IWebHostEnvironment hostingEnvironment)
+    internal static IFileInfo GetFileInformation(
+        VirtualFileResult result,
+        IWebHostEnvironment hostingEnvironment
+    )
     {
         var fileProvider = GetFileProvider(result, hostingEnvironment);
         if (fileProvider is NullFileProvider)
         {
-            throw new InvalidOperationException(Resources.VirtualFileResultExecutor_NoFileProviderConfigured);
+            throw new InvalidOperationException(
+                Resources.VirtualFileResultExecutor_NoFileProviderConfigured
+            );
         }
 
         var normalizedPath = result.FileName;
@@ -137,7 +153,10 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
         return fileInfo;
     }
 
-    internal static IFileProvider GetFileProvider(VirtualFileResult result, IWebHostEnvironment hostingEnvironment)
+    internal static IFileProvider GetFileProvider(
+        VirtualFileResult result,
+        IWebHostEnvironment hostingEnvironment
+    )
     {
         if (result.FileProvider != null)
         {
@@ -161,7 +180,11 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
 
     private static partial class Log
     {
-        public static void ExecutingFileResult(ILogger logger, FileResult fileResult, string fileName)
+        public static void ExecutingFileResult(
+            ILogger logger,
+            FileResult fileResult,
+            string fileName
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -170,10 +193,26 @@ public partial class VirtualFileResultExecutor : FileResultExecutorBase, IAction
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing {FileResultType}, sending file '{FileDownloadPath}' with download name '{FileDownloadName}' ...", EventName = "ExecutingFileResult", SkipEnabledCheck = true)]
-        private static partial void ExecutingFileResult(ILogger logger, string fileResultType, string fileDownloadPath, string fileDownloadName);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing {FileResultType}, sending file '{FileDownloadPath}' with download name '{FileDownloadName}' ...",
+            EventName = "ExecutingFileResult",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ExecutingFileResult(
+            ILogger logger,
+            string fileResultType,
+            string fileDownloadPath,
+            string fileDownloadName
+        );
 
-        [LoggerMessage(17, LogLevel.Debug, "Writing the requested range of bytes to the body...", EventName = "WritingRangeToBody")]
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Writing the requested range of bytes to the body...",
+            EventName = "WritingRangeToBody"
+        )]
         public static partial void WritingRangeToBody(ILogger logger);
     }
 }

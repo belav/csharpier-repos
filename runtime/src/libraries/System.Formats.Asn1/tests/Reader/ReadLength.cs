@@ -13,10 +13,12 @@ namespace System.Formats.Asn1.Tests.Reader
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int? parsedLength,
-            out int bytesRead);
+            out int bytesRead
+        );
 
         private static ReadTagAndLengthDelegate ReadTagAndLength = (ReadTagAndLengthDelegate)
-            typeof(AsnDecoder).GetMethod("ReadTagAndLength", BindingFlags.Static | BindingFlags.NonPublic)
+            typeof(AsnDecoder)
+                .GetMethod("ReadTagAndLength", BindingFlags.Static | BindingFlags.NonPublic)
                 .CreateDelegate(typeof(ReadTagAndLengthDelegate));
 
         [Theory]
@@ -33,7 +35,12 @@ namespace System.Formats.Asn1.Tests.Reader
 
             foreach (AsnEncodingRules rules in Enum.GetValues(typeof(AsnEncodingRules)))
             {
-                Asn1Tag tag = ReadTagAndLength(inputBytes, rules, out int? parsedLength, out int bytesRead);
+                Asn1Tag tag = ReadTagAndLength(
+                    inputBytes,
+                    rules,
+                    out int? parsedLength,
+                    out int bytesRead
+                );
 
                 Assert.Equal(inputBytes.Length, bytesRead);
                 Assert.False(tag.IsConstructed, "tag.IsConstructed");
@@ -50,7 +57,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] data = { 0x05, 0x00 };
 
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => new AsnReader(data, (AsnEncodingRules)invalidRuleSetValue));
+                () => new AsnReader(data, (AsnEncodingRules)invalidRuleSetValue)
+            );
         }
 
         [Theory]
@@ -65,7 +73,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
 
             Assert.Throws<AsnContentException>(
-                () => ReadTagAndLength(inputData, AsnEncodingRules.DER, out _, out _));
+                () => ReadTagAndLength(inputData, AsnEncodingRules.DER, out _, out _)
+            );
         }
 
         [Theory]
@@ -98,14 +107,16 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void InvalidLengths(
             string description,
             AsnEncodingRules rules,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, rules);
 
             Assert.Throws<AsnContentException>(
-                () => ReadTagAndLength(inputData, rules, out _, out _));
+                () => ReadTagAndLength(inputData, rules, out _, out _)
+            );
         }
 
         [Theory]
@@ -119,11 +130,7 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] data = { 0x30, 0x80, 0x05, 0x00, 0x00, 0x00 };
             AsnReader reader = new AsnReader(data, ruleSet);
 
-            Asn1Tag tag = ReadTagAndLength(
-                data,
-                ruleSet,
-                out int? length,
-                out int bytesRead);
+            Asn1Tag tag = ReadTagAndLength(data, ruleSet, out int? length, out int bytesRead);
 
             Assert.Equal(2, bytesRead);
             Assert.False(length.HasValue, "length.HasValue");
@@ -144,7 +151,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 inputData,
                 AsnEncodingRules.BER,
                 out int? length,
-                out int bytesRead);
+                out int bytesRead
+            );
 
             Assert.Equal(inputData.Length, bytesRead);
             Assert.Equal(expectedLength, length.Value);
@@ -161,15 +169,12 @@ namespace System.Formats.Asn1.Tests.Reader
             int tagValue,
             int? expectedLength,
             int expectedBytesRead,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
 
-            Asn1Tag tag = ReadTagAndLength(
-                inputData,
-                ruleSet,
-                out int? length,
-                out int bytesRead);
+            Asn1Tag tag = ReadTagAndLength(inputData, ruleSet, out int? length, out int bytesRead);
 
             Assert.Equal(expectedBytesRead, bytesRead);
             Assert.Equal(tagValue, tag.TagValue);

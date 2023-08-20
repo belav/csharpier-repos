@@ -30,11 +30,12 @@ namespace BuildValidator
         private readonly Dictionary<Guid, AssemblyInfo> _mvidMap = new();
 
         /// <summary>
-        /// This maps a given file name to all of the <see cref="AssemblyInfo"/> that we ever considered 
+        /// This maps a given file name to all of the <see cref="AssemblyInfo"/> that we ever considered
         /// for that file name. It's useful for diagnostic purposes to see where we may have missed a
         /// reference lookup.
         /// </summary>
-        private readonly Dictionary<string, List<AssemblyInfo>> _nameMap = new(FileNameEqualityComparer.StringComparer);
+        private readonly Dictionary<string, List<AssemblyInfo>> _nameMap =
+            new(FileNameEqualityComparer.StringComparer);
         private readonly HashSet<DirectoryInfo> _indexDirectories = new();
         private readonly ILogger _logger;
 
@@ -61,16 +62,21 @@ namespace BuildValidator
         public static DirectoryInfo GetNugetCacheDirectory()
         {
             var nugetPackageDirectory = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
-            nugetPackageDirectory ??= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget");
+            nugetPackageDirectory ??= Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                ".nuget"
+            );
 
             return new DirectoryInfo(nugetPackageDirectory);
         }
 
-        public IEnumerable<AssemblyInfo> GetCachedAssemblyInfos(string fileName) => _nameMap.TryGetValue(fileName, out var list)
-            ? list
-            : Array.Empty<AssemblyInfo>();
+        public IEnumerable<AssemblyInfo> GetCachedAssemblyInfos(string fileName) =>
+            _nameMap.TryGetValue(fileName, out var list) ? list : Array.Empty<AssemblyInfo>();
 
-        public bool TryGetCachedAssemblyInfo(Guid mvid, [NotNullWhen(true)] out AssemblyInfo? assemblyInfo) => _mvidMap.TryGetValue(mvid, out assemblyInfo);
+        public bool TryGetCachedAssemblyInfo(
+            Guid mvid,
+            [NotNullWhen(true)] out AssemblyInfo? assemblyInfo
+        ) => _mvidMap.TryGetValue(mvid, out assemblyInfo);
 
         public string GetCachedReferencePath(MetadataReferenceInfo referenceInfo)
         {
@@ -82,7 +88,10 @@ namespace BuildValidator
             throw new Exception($"Could not find referenced assembly {referenceInfo}");
         }
 
-        public bool TryResolveReferences(MetadataReferenceInfo metadataReferenceInfo, [NotNullWhen(true)] out MetadataReference? metadataReference)
+        public bool TryResolveReferences(
+            MetadataReferenceInfo metadataReferenceInfo,
+            [NotNullWhen(true)] out MetadataReference? metadataReference
+        )
         {
             if (!TryGetAssemblyInfo(metadataReferenceInfo, out var assemblyInfo))
             {
@@ -90,13 +99,16 @@ namespace BuildValidator
                 return false;
             }
 
-            // This is deliberately using an ordinal comparison here. The name of the assembly is written out 
+            // This is deliberately using an ordinal comparison here. The name of the assembly is written out
             // into the PDB. Rebuild will only succeed if the provided reference has the same name with the
             // same casing
             var filePath = assemblyInfo.FilePath;
             if (Path.GetFileName(filePath) != metadataReferenceInfo.FileName)
             {
-                filePath = Path.Combine(Path.GetDirectoryName(filePath)!, metadataReferenceInfo.FileName);
+                filePath = Path.Combine(
+                    Path.GetDirectoryName(filePath)!,
+                    metadataReferenceInfo.FileName
+                );
             }
 
             metadataReference = MetadataReference.CreateFromStream(
@@ -104,12 +116,19 @@ namespace BuildValidator
                 filePath: filePath,
                 properties: new MetadataReferenceProperties(
                     kind: MetadataImageKind.Assembly,
-                    aliases: metadataReferenceInfo.ExternAlias is null ? ImmutableArray<string>.Empty : ImmutableArray.Create(metadataReferenceInfo.ExternAlias),
-                    embedInteropTypes: metadataReferenceInfo.EmbedInteropTypes));
+                    aliases: metadataReferenceInfo.ExternAlias is null
+                        ? ImmutableArray<string>.Empty
+                        : ImmutableArray.Create(metadataReferenceInfo.ExternAlias),
+                    embedInteropTypes: metadataReferenceInfo.EmbedInteropTypes
+                )
+            );
             return true;
         }
 
-        public bool TryGetAssemblyInfo(MetadataReferenceInfo metadataReferenceInfo, [NotNullWhen(true)] out AssemblyInfo? assemblyInfo)
+        public bool TryGetAssemblyInfo(
+            MetadataReferenceInfo metadataReferenceInfo,
+            [NotNullWhen(true)] out AssemblyInfo? assemblyInfo
+        )
         {
             if (_mvidMap.TryGetValue(metadataReferenceInfo.ModuleVersionId, out assemblyInfo))
             {
@@ -118,8 +137,8 @@ namespace BuildValidator
 
             if (_nameMap.TryGetValue(metadataReferenceInfo.FileName, out var _))
             {
-                // The file name of this reference has already been searched for and none of them 
-                // had the correct MVID (else the _mvidMap lookup would succeed). No reason to do 
+                // The file name of this reference has already been searched for and none of them
+                // had the correct MVID (else the _mvidMap lookup would succeed). No reason to do
                 // more work here.
                 return false;
             }
@@ -128,7 +147,12 @@ namespace BuildValidator
 
             foreach (var directory in _indexDirectories)
             {
-                foreach (var fileInfo in directory.EnumerateFiles(metadataReferenceInfo.FileName, SearchOption.AllDirectories))
+                foreach (
+                    var fileInfo in directory.EnumerateFiles(
+                        metadataReferenceInfo.FileName,
+                        SearchOption.AllDirectories
+                    )
+                )
                 {
                     if (Util.GetPortableExecutableInfo(fileInfo.FullName) is not { } peInfo)
                     {
@@ -138,7 +162,9 @@ namespace BuildValidator
 
                     if (peInfo.IsReadyToRun)
                     {
-                        _logger.LogInformation($@"Skipping ReadyToRun image ""{fileInfo.FullName}""");
+                        _logger.LogInformation(
+                            $@"Skipping ReadyToRun image ""{fileInfo.FullName}"""
+                        );
                         continue;
                     }
 

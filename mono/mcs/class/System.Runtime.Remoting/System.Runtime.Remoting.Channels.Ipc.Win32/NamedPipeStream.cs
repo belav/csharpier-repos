@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -87,14 +87,13 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             throw new NotSupportedException();
         }
 
-        public override void Close() 
+        public override void Close()
         {
-            if (ownsSocket) socket.Close();
+            if (ownsSocket)
+                socket.Close();
         }
 
-        public override void Flush() 
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -103,8 +102,13 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         delegate int ReadMethod(byte[] buffer, int offset, int count);
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count,
-            AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ReadMethod(Read).BeginInvoke(buffer, offset, count, callback, state);
         }
@@ -121,11 +125,16 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             if (written != count)
                 throw new IOException("Cannot write data");
         }
-        
+
         delegate void WriteMethod(byte[] buffer, int offset, int count);
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count,
-            AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new WriteMethod(Write).BeginInvoke(buffer, offset, count, callback, state);
         }
@@ -135,7 +144,5 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             AsyncResult ar = asyncResult as AsyncResult;
             ((WriteMethod)ar.AsyncDelegate).EndInvoke(asyncResult);
         }
-
     }
 }
-

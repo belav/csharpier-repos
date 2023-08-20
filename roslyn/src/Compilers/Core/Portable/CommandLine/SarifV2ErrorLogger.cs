@@ -29,7 +29,13 @@ namespace Microsoft.CodeAnalysis
         private readonly string _toolFileVersion;
         private readonly Version _toolAssemblyVersion;
 
-        public SarifV2ErrorLogger(Stream stream, string toolName, string toolFileVersion, Version toolAssemblyVersion, CultureInfo culture)
+        public SarifV2ErrorLogger(
+            Stream stream,
+            string toolName,
+            string toolFileVersion,
+            Version toolAssemblyVersion,
+            CultureInfo culture
+        )
             : base(stream, culture)
         {
             _descriptors = new DiagnosticDescriptorSet();
@@ -74,7 +80,10 @@ namespace Microsoft.CodeAnalysis
                 _writer.WriteArrayStart("suppressions");
                 _writer.WriteObjectStart(); // suppression
                 _writer.Write("kind", "inSource");
-                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>("Justification", SpecialType.System_String);
+                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>(
+                    "Justification",
+                    SpecialType.System_String
+                );
                 if (justification != null)
                 {
                     _writer.Write("justification", justification);
@@ -85,13 +94,19 @@ namespace Microsoft.CodeAnalysis
                 {
                     var suppressionsStr = programmaticSuppressionInfo.Suppressions
                         .OrderBy(idAndJustification => idAndJustification.Id)
-                        .Select(idAndJustification => $"Suppression Id: {idAndJustification.Id}, Suppression Justification: {idAndJustification.Justification}")
+                        .Select(
+                            idAndJustification =>
+                                $"Suppression Id: {idAndJustification.Id}, Suppression Justification: {idAndJustification.Justification}"
+                        )
                         .Join(", ");
                     suppressionType = $"DiagnosticSuppressor {{ {suppressionsStr} }}";
                 }
                 else if (suppressionInfo != null)
                 {
-                    suppressionType = suppressionInfo.Attribute != null ? "SuppressMessageAttribute" : "Pragma Directive";
+                    suppressionType =
+                        suppressionInfo.Attribute != null
+                            ? "SuppressMessageAttribute"
+                            : "Pragma Directive";
                 }
 
                 if (suppressionType != null)
@@ -114,9 +129,18 @@ namespace Microsoft.CodeAnalysis
             _writer.WriteObjectEnd(); // result
         }
 
-        public override void AddAnalyzerDescriptors(ImmutableArray<(DiagnosticDescriptor Descriptor, bool HasAnyExternalSuppression)> descriptors)
+        public override void AddAnalyzerDescriptors(
+            ImmutableArray<(
+                DiagnosticDescriptor Descriptor,
+                bool HasAnyExternalSuppression
+            )> descriptors
+        )
         {
-            foreach (var (descriptor, hasAnyExternalSuppression) in descriptors.OrderBy(d => d.Descriptor.Id))
+            foreach (
+                var (descriptor, hasAnyExternalSuppression) in descriptors.OrderBy(
+                    d => d.Descriptor.Id
+                )
+            )
             {
                 _descriptors.Add(descriptor, hasAnyExternalSuppression);
             }
@@ -139,9 +163,11 @@ namespace Microsoft.CodeAnalysis
             // See https://github.com/dotnet/roslyn/issues/11228 for discussion around
             // whether this is the correct treatment of Diagnostic.AdditionalLocations
             // as SARIF relatedLocations.
-            if (additionalLocations != null &&
-                additionalLocations.Count > 0 &&
-                additionalLocations.Any(l => HasPath(l)))
+            if (
+                additionalLocations != null
+                && additionalLocations.Count > 0
+                && additionalLocations.Any(l => HasPath(l))
+            )
             {
                 _writer.WriteArrayStart("relatedLocations");
 
@@ -188,7 +214,7 @@ namespace Microsoft.CodeAnalysis
             _writer.Write("columnKind", "utf16CodeUnits");
 
             _writer.WriteObjectEnd(); // run
-            _writer.WriteArrayEnd();  // runs
+            _writer.WriteArrayEnd(); // runs
             _writer.WriteObjectEnd(); // root
             base.Dispose();
         }
@@ -215,7 +241,9 @@ namespace Microsoft.CodeAnalysis
             {
                 _writer.WriteArrayStart("rules");
 
-                foreach (var (_, descriptor, hasAnyExternalSuppression) in _descriptors.ToSortedList())
+                foreach (
+                    var (_, descriptor, hasAnyExternalSuppression) in _descriptors.ToSortedList()
+                )
                 {
                     _writer.WriteObjectStart(); // rule
                     _writer.Write("id", descriptor.Id);
@@ -249,10 +277,16 @@ namespace Microsoft.CodeAnalysis
                     //    either for part of the compilation or the entire compilation.
                     // 2. If there is any source suppression for diagnostic(s) with the rule ID through pragma directive,
                     //    SuppressMessageAttribute, DiagnosticSuppressor, etc.
-                    var hasAnySourceSuppression = _diagnosticIdsWithAnySourceSuppressions.Contains(descriptor.Id);
+                    var hasAnySourceSuppression = _diagnosticIdsWithAnySourceSuppressions.Contains(
+                        descriptor.Id
+                    );
                     var isEverSuppressed = hasAnyExternalSuppression || hasAnySourceSuppression;
 
-                    if (!string.IsNullOrEmpty(descriptor.Category) || isEverSuppressed || descriptor.ImmutableCustomTags.Any())
+                    if (
+                        !string.IsNullOrEmpty(descriptor.Category)
+                        || isEverSuppressed
+                        || descriptor.ImmutableCustomTags.Any()
+                    )
                     {
                         _writer.WriteObjectStart("properties");
 
@@ -336,9 +370,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private sealed class DiagnosticDescriptorSet
         {
-            private readonly record struct DescriptorInfo(int Index, bool HasAnyExternalSuppression);
+            private readonly record struct DescriptorInfo(
+                int Index,
+                bool HasAnyExternalSuppression
+            );
+
             // DiagnosticDescriptor -> DescriptorInfo
-            private readonly Dictionary<DiagnosticDescriptor, DescriptorInfo> _distinctDescriptors = new(SarifDiagnosticComparer.Instance);
+            private readonly Dictionary<DiagnosticDescriptor, DescriptorInfo> _distinctDescriptors =
+                new(SarifDiagnosticComparer.Instance);
 
             /// <summary>
             /// The total number of descriptors in the set.
@@ -357,8 +396,11 @@ namespace Microsoft.CodeAnalysis
                 {
                     // Descriptor has already been seen.
                     // Update 'HasAnyExternalSuppression' value if different from the saved one.
-                    if (hasAnyExternalSuppression.HasValue &&
-                        descriptorInfo.HasAnyExternalSuppression != hasAnyExternalSuppression.Value)
+                    if (
+                        hasAnyExternalSuppression.HasValue
+                        && descriptorInfo.HasAnyExternalSuppression
+                            != hasAnyExternalSuppression.Value
+                    )
                     {
                         descriptorInfo = new(descriptorInfo.Index, hasAnyExternalSuppression.Value);
                         _distinctDescriptors[descriptor] = descriptorInfo;
@@ -368,7 +410,10 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    _distinctDescriptors.Add(descriptor, new(Index: Count, hasAnyExternalSuppression ?? false));
+                    _distinctDescriptors.Add(
+                        descriptor,
+                        new(Index: Count, hasAnyExternalSuppression ?? false)
+                    );
                     return Count - 1;
                 }
             }
@@ -376,11 +421,19 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Converts the set to a list, sorted by index.
             /// </summary>
-            public List<(int Index, DiagnosticDescriptor Descriptor, bool HasAnyExternalSuppression)> ToSortedList()
+            public List<(
+                int Index,
+                DiagnosticDescriptor Descriptor,
+                bool HasAnyExternalSuppression
+            )> ToSortedList()
             {
                 Debug.Assert(Count > 0);
 
-                var list = new List<(int Index, DiagnosticDescriptor Descriptor, bool HasAnyExternalSuppression)>(Count);
+                var list = new List<(
+                    int Index,
+                    DiagnosticDescriptor Descriptor,
+                    bool HasAnyExternalSuppression
+                )>(Count);
 
                 foreach (var pair in _distinctDescriptors)
                 {

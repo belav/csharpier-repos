@@ -21,7 +21,8 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentType = "application/json;charset=utf-8";
         context.HttpContext.Request.ContentLength = 1;
@@ -49,18 +50,23 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentLength = 1;
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() => formatter.TestSelectCharacterEncoding(context));
+        Assert.Throws<InvalidOperationException>(
+            () => formatter.TestSelectCharacterEncoding(context)
+        );
     }
 
     [Theory]
     [InlineData("utf-8")]
     [InlineData("invalid")]
-    public void SelectCharacterEncoding_ReturnsNull_IfItCanNotUnderstandContentTypeEncoding(string charset)
+    public void SelectCharacterEncoding_ReturnsNull_IfItCanNotUnderstandContentTypeEncoding(
+        string charset
+    )
     {
         // Arrange
         var formatter = new TestFormatter();
@@ -71,7 +77,8 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentType = "application/json;charset=" + charset;
 
@@ -95,7 +102,8 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentType = "application/json;charset=utf-8";
 
@@ -121,7 +129,8 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentType = "application/json;charset=" + charset;
 
@@ -155,7 +164,8 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentType = "application/json;charset=\"" + charset + "\"";
 
@@ -177,7 +187,8 @@ public class TextInputFormatterTest
     [InlineData("application/json; charset=(garbage)")]
     [InlineData("application/json; version=(garbage); charset=utf-32")]
     public void SelectCharacterEncoding_ReturnsFirstEncoding_IfContentTypeIsMissingInvalidOrDoesNotHaveEncoding(
-        string contentType)
+        string contentType
+    )
     {
         // Arrange
         var formatter = new TestFormatter();
@@ -189,7 +200,8 @@ public class TextInputFormatterTest
             "something",
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (stream, encoding) => new StreamReader(stream, encoding));
+            (stream, encoding) => new StreamReader(stream, encoding)
+        );
 
         context.HttpContext.Request.ContentType = contentType;
 
@@ -204,7 +216,8 @@ public class TextInputFormatterTest
     {
         private readonly object _object;
 
-        public TestFormatter() : this(null) { }
+        public TestFormatter()
+            : this(null) { }
 
         public TestFormatter(object @object)
         {
@@ -218,7 +231,10 @@ public class TextInputFormatterTest
             return SupportedTypes.Count == 0 ? true : SupportedTypes.Contains(type);
         }
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context,
+            Encoding encoding
+        )
         {
             return InputFormatterResult.SuccessAsync(_object);
         }

@@ -1,5 +1,3 @@
 using NUnit.Framework;
 
-public class WebServiceTest
-{
-}
+public class WebServiceTest { }

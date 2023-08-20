@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ApiActionsDoNotRequir
 {
     [ApiController]
     [Route("/api/[controller]")]
-    public class DiagnosticsAreReturned_ForApiActionsWithModelStateChecksUsingEquality : ControllerBase
+    public class DiagnosticsAreReturned_ForApiActionsWithModelStateChecksUsingEquality
+        : ControllerBase
     {
         public IActionResult Method(int id)
         {

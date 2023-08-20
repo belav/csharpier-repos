@@ -37,7 +37,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
         public void Example()
         {
             #region Usage
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
               'description': 'A person',
               'type': 'object',
               'properties': {

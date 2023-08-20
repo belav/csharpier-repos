@@ -17,7 +17,7 @@ public struct S0
     public byte F4;
     public sbyte F5;
     public short F6;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public int M6()
     {
@@ -27,7 +27,8 @@ public struct S0
 
 public class Runtime_66414
 {
-    public static long[] s_3 = new long[]{0};
+    public static long[] s_3 = new long[] { 0 };
+
     public static int Main()
     {
         var vr1 = new S0();

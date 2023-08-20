@@ -18,7 +18,14 @@ internal class DefaultRazorProjectItem : RazorProjectItem
     /// <param name="fileKind">The file kind. If null, the document kind will be inferred from the file extension.</param>
     /// <param name="file">The <see cref="FileInfo"/>.</param>
     /// <param name="cssScope">A scope identifier that will be used on elements in the generated class, or null.</param>
-    public DefaultRazorProjectItem(string basePath, string filePath, string relativePhysicalPath, string fileKind, FileInfo file, string cssScope)
+    public DefaultRazorProjectItem(
+        string basePath,
+        string filePath,
+        string relativePhysicalPath,
+        string fileKind,
+        FileInfo file,
+        string cssScope
+    )
     {
         BasePath = basePath;
         FilePath = filePath;
@@ -44,5 +51,11 @@ internal class DefaultRazorProjectItem : RazorProjectItem
 
     public override string CssScope { get; }
 
-    public override Stream Read() => new FileStream(PhysicalPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+    public override Stream Read() =>
+        new FileStream(
+            PhysicalPath,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.ReadWrite | FileShare.Delete
+        );
 }

@@ -18,23 +18,38 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             private readonly AnalyzerConfigOptions _editorConfigOptions;
             private readonly OptionSet _visualStudioOptions;
 
-            public BooleanCodeStyleSetting(Option2<CodeStyleOption2<bool>> option,
-                                           string description,
-                                           string? trueValueDescription,
-                                           string? falseValueDescription,
-                                           AnalyzerConfigOptions editorConfigOptions,
-                                           OptionSet visualStudioOptions,
-                                           OptionUpdater updater,
-                                           string fileName)
-                : base(description, option.Group.Description, trueValueDescription, falseValueDescription, updater)
+            public BooleanCodeStyleSetting(
+                Option2<CodeStyleOption2<bool>> option,
+                string description,
+                string? trueValueDescription,
+                string? falseValueDescription,
+                AnalyzerConfigOptions editorConfigOptions,
+                OptionSet visualStudioOptions,
+                OptionUpdater updater,
+                string fileName
+            )
+                : base(
+                    description,
+                    option.Group.Description,
+                    trueValueDescription,
+                    falseValueDescription,
+                    updater
+                )
             {
                 _option = option;
                 _editorConfigOptions = editorConfigOptions;
                 _visualStudioOptions = visualStudioOptions;
-                Location = new SettingLocation(IsDefinedInEditorConfig ? LocationKind.EditorConfig : LocationKind.VisualStudio, fileName);
+                Location = new SettingLocation(
+                    IsDefinedInEditorConfig ? LocationKind.EditorConfig : LocationKind.VisualStudio,
+                    fileName
+                );
             }
 
-            public override bool IsDefinedInEditorConfig => _editorConfigOptions.TryGetEditorConfigOption<CodeStyleOption2<bool>>(_option, out _);
+            public override bool IsDefinedInEditorConfig =>
+                _editorConfigOptions.TryGetEditorConfigOption<CodeStyleOption2<bool>>(
+                    _option,
+                    out _
+                );
 
             public override SettingLocation Location { get; protected set; }
 
@@ -53,8 +68,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 Updater.QueueUpdate(_option, option.WithValue(value));
             }
 
-            protected override CodeStyleOption2<bool> GetOption()
-                => _editorConfigOptions.TryGetEditorConfigOption(_option, out CodeStyleOption2<bool>? value) && value is not null
+            protected override CodeStyleOption2<bool> GetOption() =>
+                _editorConfigOptions.TryGetEditorConfigOption(
+                    _option,
+                    out CodeStyleOption2<bool>? value
+                ) && value is not null
                     ? value
                     : _visualStudioOptions.GetOption(_option);
         }

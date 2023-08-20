@@ -24,6 +24,7 @@ internal static partial class Interop
             public IntPtr lpClass;
             public IntPtr hkeyClass;
             public uint dwHotKey;
+
             // This is a union of hIcon and hMonitor
             public IntPtr hIconMonitor;
             public IntPtr hProcess;
@@ -52,7 +53,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Shell32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool ShellExecuteExW(
-            SHELLEXECUTEINFO* pExecInfo);
+        internal static unsafe partial bool ShellExecuteExW(SHELLEXECUTEINFO* pExecInfo);
     }
 }

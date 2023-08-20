@@ -14,22 +14,35 @@ namespace System.Threading
         private uint _numBytes; // No. of bytes transferred
         private NativeOverlapped* _pNativeOverlapped;
 
-        public _IOCompletionCallback(IOCompletionCallback ioCompletionCallback, ExecutionContext executionContext)
+        public _IOCompletionCallback(
+            IOCompletionCallback ioCompletionCallback,
+            ExecutionContext executionContext
+        )
         {
             _ioCompletionCallback = ioCompletionCallback;
             _executionContext = executionContext;
         }
 
         // Context callback: same sig for SendOrPostCallback and ContextCallback
-        private static readonly ContextCallback IOCompletionCallback_Context_Delegate = IOCompletionCallback_Context;
+        private static readonly ContextCallback IOCompletionCallback_Context_Delegate =
+            IOCompletionCallback_Context;
+
         private static void IOCompletionCallback_Context(object? state)
         {
             _IOCompletionCallback helper = (_IOCompletionCallback)state!;
             Debug.Assert(helper != null, "_IOCompletionCallback cannot be null");
-            helper._ioCompletionCallback(helper._errorCode, helper._numBytes, helper._pNativeOverlapped);
+            helper._ioCompletionCallback(
+                helper._errorCode,
+                helper._numBytes,
+                helper._pNativeOverlapped
+            );
         }
 
-        public static void PerformSingleIOCompletionCallback(uint errorCode, uint numBytes, NativeOverlapped* pNativeOverlapped)
+        public static void PerformSingleIOCompletionCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* pNativeOverlapped
+        )
         {
             Debug.Assert(pNativeOverlapped != null);
 
@@ -54,7 +67,11 @@ namespace System.Threading
             helper._errorCode = errorCode;
             helper._numBytes = numBytes;
             helper._pNativeOverlapped = pNativeOverlapped;
-            ExecutionContext.RunInternal(helper._executionContext, IOCompletionCallback_Context_Delegate, helper);
+            ExecutionContext.RunInternal(
+                helper._executionContext,
+                IOCompletionCallback_Context_Delegate,
+                helper
+            );
         }
     }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,30 +32,30 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class DefaultValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			DefaultValidator v = new DefaultValidator ();
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class DefaultValidatorTest
+    {
+        [Test]
+        public void CanValidate()
+        {
+            DefaultValidator v = new DefaultValidator();
 
-			Assert.IsTrue (v.CanValidate (typeof (string)));
-			Assert.IsTrue (v.CanValidate (typeof (int)));
-			Assert.IsTrue (v.CanValidate (typeof (object)));
-		}
+            Assert.IsTrue(v.CanValidate(typeof(string)));
+            Assert.IsTrue(v.CanValidate(typeof(int)));
+            Assert.IsTrue(v.CanValidate(typeof(object)));
+        }
 
-		[Test]
-		public void Validate ()
-		{
-			DefaultValidator v = new DefaultValidator ();
+        [Test]
+        public void Validate()
+        {
+            DefaultValidator v = new DefaultValidator();
 
-			v.Validate (5);
-			v.Validate (5.4);
-			v.Validate ("hi there");
-			v.Validate (v);
-		}
-	}
+            v.Validate(5);
+            v.Validate(5.4);
+            v.Validate("hi there");
+            v.Validate(v);
+        }
+    }
 }
-

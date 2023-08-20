@@ -12,9 +12,14 @@ namespace System.Runtime.CompilerServices.Tests
         [MethodImpl(MethodImplOptions.AggressiveOptimization)]
         public static void AggressiveOptimizationTest()
         {
-            MethodImplAttributes implAttributes = MethodBase.GetCurrentMethod().MethodImplementationFlags;
+            MethodImplAttributes implAttributes = MethodBase
+                .GetCurrentMethod()
+                .MethodImplementationFlags;
             Assert.Equal(MethodImplAttributes.AggressiveOptimization, implAttributes);
-            Assert.Equal(MethodImplOptions.AggressiveOptimization, (MethodImplOptions)implAttributes);
+            Assert.Equal(
+                MethodImplOptions.AggressiveOptimization,
+                (MethodImplOptions)implAttributes
+            );
         }
     }
 }

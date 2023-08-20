@@ -18,6 +18,7 @@ namespace POS_Server.Controllers
     public class DocImageController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
@@ -27,105 +28,105 @@ namespace POS_Server.Controllers
 
 
             token = TokenManager.readToken(HttpContext.Current.Request);
-                var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
-                else
-                {
-                    long tableId = 0;
+            else
+            {
+                long tableId = 0;
                 string tableName = "";
 
-                    IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
-                    foreach (Claim c in claims)
+                IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
+                foreach (Claim c in claims)
+                {
+                    if (c.Type == "tableId")
                     {
-                        if (c.Type == "tableId")
-                        {
                         tableId = long.Parse(c.Value);
-                        }
-                  else  if (c.Type == "tableName")
+                    }
+                    else if (c.Type == "tableName")
                     {
                         tableName = c.Value;
                     }
-
                 }
 
-                    // DateTime cmpdate = DateTime.Now.AddDays(newdays);
-                    try
-                    {
+                // DateTime cmpdate = DateTime.Now.AddDays(newdays);
+                try
+                {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var docImageList = entity.docImages.Where(x => x.tableName == tableName && x.tableId == tableId)
-                            .Select(b => new
-                            {
-                                b.id,
-                                b.docName,
-                                b.docnum,
-                                b.image,
-                                b.tableName,
-                                b.tableId,
-                                b.notes,
-                                b.createDate,
-                                b.updateDate,
-                                b.createUserId,
-                                b.updateUserId,
-                            })
-                        .ToList();
-
+                        var docImageList = entity.docImages
+                            .Where(x => x.tableName == tableName && x.tableId == tableId)
+                            .Select(
+                                b =>
+                                    new
+                                    {
+                                        b.id,
+                                        b.docName,
+                                        b.docnum,
+                                        b.image,
+                                        b.tableName,
+                                        b.tableId,
+                                        b.notes,
+                                        b.createDate,
+                                        b.updateDate,
+                                        b.createUserId,
+                                        b.updateUserId,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(docImageList);
-                        }
                     }
-                    catch
-                    {
-                        return TokenManager.GenerateToken("0");
-                    }
-
                 }
-
-
-
-                //var re = Request;
-                //var headers = re.Headers;
-                //string token = "";
-                //if (headers.Contains("APIKey"))
-                //{
-                //    token = headers.GetValues("APIKey").First();
-                //}
-                //Validation validation = new Validation();
-                //bool valid = validation.CheckApiKey(token);
-
-                //if (valid) // APIKey is valid
-                //{
-                //    using (incposdbEntities entity = new incposdbEntities())
-                //    {
-                //        var docImageList = entity.docImages.Where(x => x.tableName == tableName && x.tableId == tableId)
-                //            .Select(b => new
-                //            {
-                //                b.id,
-                //                b.docName,
-                //                b.docnum,
-                //                b.image,
-                //                b.tableName,
-                //                b.tableId,
-                //                b.note,
-                //                b.createDate,
-                //                b.updateDate,
-                //                b.createUserId,
-                //                b.updateUserId,
-                //            })
-                //        .ToList();
-
-                //        if (docImageList == null)
-                //            return NotFound();
-                //        else
-                //            return Ok(docImageList);
-                //    }
-                //}
-                ////else
-                //return NotFound();
+                catch
+                {
+                    return TokenManager.GenerateToken("0");
+                }
             }
+
+            //var re = Request;
+            //var headers = re.Headers;
+            //string token = "";
+            //if (headers.Contains("APIKey"))
+            //{
+            //    token = headers.GetValues("APIKey").First();
+            //}
+            //Validation validation = new Validation();
+            //bool valid = validation.CheckApiKey(token);
+
+            //if (valid) // APIKey is valid
+            //{
+            //    using (incposdbEntities entity = new incposdbEntities())
+            //    {
+            //        var docImageList = entity.docImages.Where(x => x.tableName == tableName && x.tableId == tableId)
+            //            .Select(b => new
+            //            {
+            //                b.id,
+            //                b.docName,
+            //                b.docnum,
+            //                b.image,
+            //                b.tableName,
+            //                b.tableId,
+            //                b.note,
+            //                b.createDate,
+            //                b.updateDate,
+            //                b.createUserId,
+            //                b.updateUserId,
+            //            })
+            //        .ToList();
+
+            //        if (docImageList == null)
+            //            return NotFound();
+            //        else
+            //            return Ok(docImageList);
+            //    }
+            //}
+            ////else
+            //return NotFound();
+        }
+
         [HttpPost]
         [Route("GetCount")]
         public string GetCount(string token)
@@ -154,31 +155,34 @@ namespace POS_Server.Controllers
                     {
                         tableName = c.Value;
                     }
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var docImageCount = entity.docImages.Where(x => x.tableName == tableName && x.tableId == tableId)
-                            .Select(b => new
-                            {
-                                b.id,
-                                //b.docName,
-                                //b.docnum,
-                                //b.image,
-                                //b.tableName,
-                                //b.tableId,
-                                //b.note,
-                                //b.createDate,
-                                //b.updateDate,
-                                //b.createUserId,
-                                //b.updateUserId,
-                            })
-                        .ToList().Count;
+                        var docImageCount = entity.docImages
+                            .Where(x => x.tableName == tableName && x.tableId == tableId)
+                            .Select(
+                                b =>
+                                    new
+                                    {
+                                        b.id,
+                                        //b.docName,
+                                        //b.docnum,
+                                        //b.image,
+                                        //b.tableName,
+                                        //b.tableId,
+                                        //b.note,
+                                        //b.createDate,
+                                        //b.updateDate,
+                                        //b.createUserId,
+                                        //b.updateUserId,
+                                    }
+                            )
+                            .ToList()
+                            .Count;
 
                         return TokenManager.GenerateToken(docImageCount.ToString());
                     }
@@ -187,7 +191,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
             //var re = Request;
@@ -227,6 +230,7 @@ namespace POS_Server.Controllers
             ////else
             //return NotFound();
         }
+
         [Route("PostImage")]
         public IHttpActionResult PostImage()
         {
@@ -236,7 +240,6 @@ namespace POS_Server.Controllers
 
                 foreach (string file in httpRequest.Files)
                 {
-
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
                     var postedFile = httpRequest.Files[file];
@@ -245,17 +248,28 @@ namespace POS_Server.Controllers
 
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
-
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".bmp", ".jpeg", ".tiff", ".jfif" };
-                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        IList<string> AllowedFileExtensions = new List<string>
+                        {
+                            ".jpg",
+                            ".gif",
+                            ".png",
+                            ".bmp",
+                            ".jpeg",
+                            ".tiff",
+                            ".jfif"
+                        };
+                        var ext = postedFile.FileName.Substring(
+                            postedFile.FileName.LastIndexOf('.')
+                        );
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
                         {
-
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png,.jfif,.bmp,.jpeg,.tiff");
+                            var message = string.Format(
+                                "Please Upload image of type .jpg,.gif,.png,.jfif,.bmp,.jpeg,.tiff"
+                            );
                             return Ok(message);
                         }
                         else if (postedFile.ContentLength > MaxContentLength)
@@ -266,20 +280,44 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            if (!Directory.Exists(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage")))
-                                Directory.CreateDirectory(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"));
+                            if (
+                                !Directory.Exists(
+                                    System.Web.Hosting.HostingEnvironment.MapPath(
+                                        "~\\images\\docImage"
+                                    )
+                                )
+                            )
+                                Directory.CreateDirectory(
+                                    System.Web.Hosting.HostingEnvironment.MapPath(
+                                        "~\\images\\docImage"
+                                    )
+                                );
                             //  check if image exist
-                            var pathCheck = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), imageWithNoExt);
-                            var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), imageWithNoExt + ".*");
+                            var pathCheck = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath(
+                                    "~\\images\\docImage"
+                                ),
+                                imageWithNoExt
+                            );
+                            var files = Directory.GetFiles(
+                                System.Web.Hosting.HostingEnvironment.MapPath(
+                                    "~\\images\\docImage"
+                                ),
+                                imageWithNoExt + ".*"
+                            );
                             if (files.Length > 0)
                             {
                                 File.Delete(files[0]);
                             }
 
                             //Userimage myfolder name where i want to save my image
-                            var filePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), imageName);
+                            var filePath = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath(
+                                    "~\\images\\docImage"
+                                ),
+                                imageName
+                            );
                             postedFile.SaveAs(filePath);
-
                         }
                     }
 
@@ -298,7 +336,6 @@ namespace POS_Server.Controllers
             }
         }
 
-      
         [HttpPost]
         [Route("GetImage")]
         public string GetImage(string token)
@@ -324,8 +361,12 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
 
                 string localFilePath;
-                try { 
-                    localFilePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), imageName);
+                try
+                {
+                    localFilePath = Path.Combine(
+                        System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"),
+                        imageName
+                    );
 
                     byte[] b = System.IO.File.ReadAllBytes(localFilePath);
                     return TokenManager.GenerateToken(Convert.ToBase64String(b));
@@ -333,7 +374,6 @@ namespace POS_Server.Controllers
                 catch
                 {
                     return TokenManager.GenerateToken(null);
-
                 }
             }
         }
@@ -347,8 +387,6 @@ namespace POS_Server.Controllers
 
             //string Object
             string message = "";
-
-
 
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -367,14 +405,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<docImages>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<docImages>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                     {
                         Nullable<long> id = null;
@@ -393,22 +432,23 @@ namespace POS_Server.Controllers
                             var imageDocEntity = entity.Set<docImages>();
                             if (newObject.id == 0)
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
 
                                 docImage = imageDocEntity.Add(newObject);
                             }
                             else
                             {
-                                docImage = entity.docImages.Where(p => p.id == newObject.id).FirstOrDefault();
+                                docImage = entity.docImages
+                                    .Where(p => p.id == newObject.id)
+                                    .FirstOrDefault();
                                 docImage.docName = newObject.docName;
                                 docImage.docnum = newObject.docnum;
                                 docImage.image = newObject.image;
                                 docImage.notes = newObject.notes;
-                                docImage.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                docImage.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 docImage.updateUserId = newObject.updateUserId;
-
                             }
                             entity.SaveChanges();
 
@@ -420,15 +460,11 @@ namespace POS_Server.Controllers
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
-
                 }
                 else
                 {
                     return TokenManager.GenerateToken(message);
                 }
-
             }
             //var re = Request;
             //var headers = re.Headers;
@@ -492,9 +528,8 @@ namespace POS_Server.Controllers
             //}
             //else
             //    return 0;
-
-
         }
+
         [HttpPost]
         [Route("UpdateImage")]
         public string UpdateImage(string token)
@@ -504,8 +539,6 @@ namespace POS_Server.Controllers
 
             //string Object
             string message = "";
-
-
 
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -524,16 +557,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<docImages>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<docImages>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
-
-
                     if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                     {
                         Nullable<long> id = null;
@@ -557,22 +589,16 @@ namespace POS_Server.Controllers
 
                         return TokenManager.GenerateToken(docImage.id.ToString());
                     }
-
-
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
-
                 }
                 else
                 {
                     return TokenManager.GenerateToken(message);
                 }
-
             }
             //var re = Request;
             //var headers = re.Headers;
@@ -617,6 +643,7 @@ namespace POS_Server.Controllers
             //else
             //    return 0;
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
@@ -627,8 +654,6 @@ namespace POS_Server.Controllers
             //string Object
             string message = "";
 
-
-
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
@@ -638,49 +663,45 @@ namespace POS_Server.Controllers
             else
             {
                 long docId = 0;
-           
+
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
                     if (c.Type == "docId")
                     {
                         docId = long.Parse(c.Value);
-                   
                     }
                 }
-                
 
-                    try
+                try
+                {
+                    using (incposdbEntities entity = new incposdbEntities())
                     {
-                        using (incposdbEntities entity = new incposdbEntities())
+                        docImages docImageObj = entity.docImages.Find(docId);
+
+                        entity.docImages.Remove(docImageObj);
+                        entity.SaveChanges();
+
+                        // delete image from folder
+                        //var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), docImageObj.image);
+                        string tmpPath = System.IO.Path.Combine(
+                            System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"),
+                            docImageObj.image
+                        );
+                        if (File.Exists(tmpPath))
                         {
-                            docImages docImageObj = entity.docImages.Find(docId);
+                            File.Delete(tmpPath);
+                        }
 
-                            entity.docImages.Remove(docImageObj);
-                            entity.SaveChanges();
-
-                            // delete image from folder
-                            //var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), docImageObj.image);
-                            string tmpPath = System.IO.Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), docImageObj.image);
-                            if (File.Exists(tmpPath))
-                            {
-                                File.Delete(tmpPath);
-                            }
-
-                           // return Ok("Serial is Deleted Successfully");
+                        // return Ok("Serial is Deleted Successfully");
                         return TokenManager.GenerateToken("1");
                     }
-                    
-                      
-                    }
-
-                    catch
-                    {
-                        message = "0";
-                        return TokenManager.GenerateToken(message);
-                    }
-
-
+                }
+                catch
+                {
+                    message = "0";
+                    return TokenManager.GenerateToken(message);
+                }
             }
 
             //var re = Request;
@@ -720,6 +741,5 @@ namespace POS_Server.Controllers
             //else
             //    return NotFound();
         }
-
     }
 }

@@ -23,7 +23,8 @@ public class ServiceCollectionExtensionsTest
         services.AddHealthChecks();
 
         // Assert
-        Assert.Collection(services.OrderBy(s => s.ServiceType.FullName),
+        Assert.Collection(
+            services.OrderBy(s => s.ServiceType.FullName),
             actual =>
             {
                 Assert.Equal(ServiceLifetime.Singleton, actual.Lifetime);
@@ -39,7 +40,8 @@ public class ServiceCollectionExtensionsTest
                 Assert.Equal(typeof(HealthCheckPublisherHostedService), actual.ImplementationType);
                 Assert.Null(actual.ImplementationInstance);
                 Assert.Null(actual.ImplementationFactory);
-            });
+            }
+        );
     }
 
     [Fact] // see: https://github.com/dotnet/extensions/issues/639
@@ -53,7 +55,10 @@ public class ServiceCollectionExtensionsTest
         services.AddHealthChecks();
 
         // Assert
-        Assert.Collection(services.OrderBy(s => s.ServiceType.FullName).ThenBy(s => s.ImplementationType!.FullName),
+        Assert.Collection(
+            services
+                .OrderBy(s => s.ServiceType.FullName)
+                .ThenBy(s => s.ImplementationType!.FullName),
             actual =>
             {
                 Assert.Equal(ServiceLifetime.Singleton, actual.Lifetime);
@@ -77,7 +82,8 @@ public class ServiceCollectionExtensionsTest
                 Assert.Equal(typeof(HealthCheckPublisherHostedService), actual.ImplementationType);
                 Assert.Null(actual.ImplementationInstance);
                 Assert.Null(actual.ImplementationFactory);
-            });
+            }
+        );
     }
 
     private class DummyHostedService : IHostedService

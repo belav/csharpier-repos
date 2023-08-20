@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,13 +26,16 @@ namespace Castle.Core.Internal.Tests
         private WeakKeyDictionary<TKey, TValue> Dictionary;
         private KeyValuePair<TKey, TValue> Item;
 
-        private static readonly KeyValuePair<TKey, TValue>
-            OtherItem = new KeyValuePair<TKey,TValue>(new TKey(), new TValue());
+        private static readonly KeyValuePair<TKey, TValue> OtherItem = new KeyValuePair<
+            TKey,
+            TValue
+        >(new TKey(), new TValue());
 
         [Test]
         public void AfterExplicitTrim_LiveObject()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             GC.Collect();
             Dictionary.TrimDeadObjects();
@@ -44,7 +47,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterExplicitTrim_DeadObject()
         {
-            CreateDictionary(); AddItem(); ResetItem();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
 
             GC.Collect();
             Dictionary.TrimDeadObjects();
@@ -55,7 +60,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAutomaticTrim_LiveObject()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             GC.Collect();
             TriggerAutomaticTrim();
@@ -67,7 +73,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAutomaticTrim_DeadObject()
         {
-            CreateDictionary(); AddItem(); ResetItem();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
 
             GC.Collect();
             TriggerAutomaticTrim();
@@ -137,7 +145,9 @@ namespace Castle.Core.Internal.Tests
             CreateDictionary();
 
             Assert.Throws<KeyNotFoundException>(() =>
-                { var dummy = Dictionary[OtherItem.Key]; });
+            {
+                var dummy = Dictionary[OtherItem.Key];
+            });
         }
 
         [Test]
@@ -257,7 +267,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Count()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.AreEqual(1, Dictionary.Count);
         }
@@ -265,7 +276,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Keys_Count()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.AreEqual(1, Dictionary.Keys.Count);
         }
@@ -273,7 +285,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Values_Count()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.AreEqual(1, Dictionary.Values.Count);
         }
@@ -281,7 +294,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_ContainsKey()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.True(Dictionary.ContainsKey(Item.Key));
         }
@@ -289,7 +303,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Contains()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.True(Collection.Contains(Item));
         }
@@ -297,7 +312,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Keys_Contains()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.True(Dictionary.Keys.Contains(Item.Key));
         }
@@ -305,7 +321,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Values_Contains()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.True(Dictionary.Values.Contains(Item.Value));
         }
@@ -313,7 +330,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Indexer()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             Assert.AreEqual(Item.Value, Dictionary[Item.Key]);
         }
@@ -321,7 +339,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_TryGetValue()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             TValue value;
             var result = Dictionary.TryGetValue(Item.Key, out value);
@@ -333,7 +352,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             using (var e = Dictionary.GetEnumerator())
             {
@@ -347,7 +367,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Keys_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             using (var e = Dictionary.Keys.GetEnumerator())
             {
@@ -361,7 +382,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Values_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             using (var e = Dictionary.Values.GetEnumerator())
             {
@@ -375,7 +397,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             var e = AsEnumerable(Dictionary).GetEnumerator();
             Assert.IsNotNull(e);
@@ -387,7 +410,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Keys_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             var e = AsEnumerable(Dictionary.Keys).GetEnumerator();
             Assert.IsNotNull(e);
@@ -399,7 +423,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Values_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
 
             var e = AsEnumerable(Dictionary.Values).GetEnumerator();
             Assert.IsNotNull(e);
@@ -411,7 +436,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_CopyTo()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
             var original = new[] { OtherItem, OtherItem, OtherItem };
             var modified = new[] { OtherItem, OtherItem, OtherItem };
 
@@ -425,7 +451,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Keys_CopyTo()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
             var original = new[] { OtherItem.Key, OtherItem.Key, OtherItem.Key };
             var modified = new[] { OtherItem.Key, OtherItem.Key, OtherItem.Key };
 
@@ -439,7 +466,8 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterAdd_Values_CopyTo()
         {
-            CreateDictionary(); AddItem();
+            CreateDictionary();
+            AddItem();
             var original = new[] { OtherItem.Value, OtherItem.Value, OtherItem.Value };
             var modified = new[] { OtherItem.Value, OtherItem.Value, OtherItem.Value };
 
@@ -453,7 +481,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Count()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.AreEqual(0, Dictionary.Count);
         }
@@ -461,7 +491,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Keys_Count()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.AreEqual(0, Dictionary.Keys.Count);
         }
@@ -469,7 +501,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Values_Count()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.AreEqual(0, Dictionary.Values.Count);
         }
@@ -477,7 +511,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_ContainsKey()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.False(Dictionary.ContainsKey(Item.Key));
         }
@@ -485,7 +521,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Contains()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.False(Collection.Contains(Item));
         }
@@ -493,7 +531,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Keys_Contains()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.False(Dictionary.Keys.Contains(Item.Key));
         }
@@ -501,7 +541,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Values_Contains()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.False(Dictionary.Values.Contains(Item.Value));
         }
@@ -509,16 +551,22 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Indexer()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             Assert.Throws<KeyNotFoundException>(() =>
-                { var dummy = Dictionary[Item.Key]; });
+            {
+                var dummy = Dictionary[Item.Key];
+            });
         }
 
         [Test]
         public void AfterRemove_TryGetValue()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             TValue value;
             var result = Dictionary.TryGetValue(Item.Key, out value);
@@ -530,7 +578,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             using (var e = Dictionary.GetEnumerator())
             {
@@ -542,7 +592,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Keys_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             using (var e = Dictionary.Keys.GetEnumerator())
             {
@@ -554,7 +606,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Values_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             using (var e = Dictionary.Values.GetEnumerator())
             {
@@ -566,7 +620,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             var e = AsEnumerable(Dictionary).GetEnumerator();
             Assert.IsNotNull(e);
@@ -576,7 +632,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Keys_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             var e = AsEnumerable(Dictionary.Keys).GetEnumerator();
             Assert.IsNotNull(e);
@@ -586,7 +644,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Values_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
 
             var e = AsEnumerable(Dictionary.Values).GetEnumerator();
             Assert.IsNotNull(e);
@@ -596,7 +656,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_CopyTo()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
             var original = new[] { OtherItem, OtherItem, OtherItem };
             var modified = new[] { OtherItem, OtherItem, OtherItem };
 
@@ -608,7 +670,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Keys_CopyTo()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
             var original = new[] { OtherItem.Key, OtherItem.Key, OtherItem.Key };
             var modified = new[] { OtherItem.Key, OtherItem.Key, OtherItem.Key };
 
@@ -620,7 +684,9 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterRemove_Values_CopyTo()
         {
-            CreateDictionary(); AddItem(); RemoveItem();
+            CreateDictionary();
+            AddItem();
+            RemoveItem();
             var original = new[] { OtherItem.Value, OtherItem.Value, OtherItem.Value };
             var modified = new[] { OtherItem.Value, OtherItem.Value, OtherItem.Value };
 
@@ -632,7 +698,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Count()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             // Collected items are counted until TrimDeadObjects() is called
             Assert.AreEqual(2, Dictionary.Count);
@@ -641,7 +711,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Keys_Count()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             // Collected items are counted until TrimDeadObjects() is called
             Assert.AreEqual(2, Dictionary.Keys.Count);
@@ -650,7 +724,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Values_Count()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             // Collected items are counted until TrimDeadObjects() is called
             Assert.AreEqual(2, Dictionary.Values.Count);
@@ -659,7 +737,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_ContainsKey()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             Assert.True(Dictionary.ContainsKey(Item.Key));
         }
@@ -667,7 +749,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Contains()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             Assert.True(Collection.Contains(Item));
         }
@@ -675,7 +761,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Keys_Contains()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             Assert.True(Dictionary.Keys.Contains(Item.Key));
         }
@@ -683,7 +773,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Values_Contains()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             Assert.True(Dictionary.Values.Contains(Item.Value));
         }
@@ -691,7 +785,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Indexer()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             Assert.AreEqual(Item.Value, Dictionary[Item.Key]);
         }
@@ -699,7 +797,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_TryGetValue()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             TValue value;
             var result = Dictionary.TryGetValue(Item.Key, out value);
@@ -711,7 +813,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             using (var e = Dictionary.GetEnumerator())
             {
@@ -725,7 +831,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Keys_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             using (var e = Dictionary.Keys.GetEnumerator())
             {
@@ -739,7 +849,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Values_Enumerator_Generic()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             using (var e = Dictionary.Values.GetEnumerator())
             {
@@ -757,7 +871,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             var e = AsEnumerable(Dictionary).GetEnumerator();
             Assert.IsNotNull(e);
@@ -769,7 +887,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Keys_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             var e = AsEnumerable(Dictionary.Keys).GetEnumerator();
             Assert.IsNotNull(e);
@@ -781,7 +903,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Values_Enumerator_Nongeneric()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
 
             // Values for collected keys are present until TrimDeadObjects() is called
             var e = AsEnumerable(Dictionary.Values).GetEnumerator();
@@ -797,7 +923,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_CopyTo()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
             var original = new[] { OtherItem, OtherItem, OtherItem };
             var modified = new[] { OtherItem, OtherItem, OtherItem };
 
@@ -811,7 +941,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Keys_CopyTo()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
             var original = new[] { OtherItem.Key, OtherItem.Key, OtherItem.Key };
             var modified = new[] { OtherItem.Key, OtherItem.Key, OtherItem.Key };
 
@@ -825,7 +959,11 @@ namespace Castle.Core.Internal.Tests
         [Test]
         public void AfterCollect_Values_CopyTo()
         {
-            CreateDictionary(); AddItem(); ResetItem(); AddItem(); GC.Collect();
+            CreateDictionary();
+            AddItem();
+            ResetItem();
+            AddItem();
+            GC.Collect();
             var original = new[] { OtherItem.Value, OtherItem.Value, OtherItem.Value };
             var modified = new[] { OtherItem.Value, OtherItem.Value, OtherItem.Value };
 
@@ -951,15 +1089,16 @@ namespace Castle.Core.Internal.Tests
 
         private ICollection<KeyValuePair<TKey, TValue>> Collection
         {
-            get { return (ICollection<KeyValuePair<TKey, TValue>>) Dictionary; }
+            get { return (ICollection<KeyValuePair<TKey, TValue>>)Dictionary; }
         }
 
         private static IEnumerable AsEnumerable<T>(ICollection<T> collection)
         {
-            return (IEnumerable) collection;
+            return (IEnumerable)collection;
         }
 
-        private sealed class TKey   { }
+        private sealed class TKey { }
+
         private sealed class TValue { }
     }
 }

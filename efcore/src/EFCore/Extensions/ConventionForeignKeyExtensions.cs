@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IConventionForeignKey" />.
     /// </summary>
     [Obsolete("Use IConventionForeignKey")]
-    public static class ConventionForeignKeyExtensions
-    {
-    }
+    public static class ConventionForeignKeyExtensions { }
 }

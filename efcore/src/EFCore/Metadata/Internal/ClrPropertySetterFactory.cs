@@ -17,8 +17,9 @@ public class ClrPropertySetterFactory : ClrAccessorFactory<IClrPropertySetter>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override IClrPropertySetter Create(IPropertyBase property)
-        => property as IClrPropertySetter ?? Create(property.GetMemberInfo(forMaterialization: false, forSet: true), property);
+    public override IClrPropertySetter Create(IPropertyBase property) =>
+        property as IClrPropertySetter
+        ?? Create(property.GetMemberInfo(forMaterialization: false, forSet: true), property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,14 +29,16 @@ public class ClrPropertySetterFactory : ClrAccessorFactory<IClrPropertySetter>
     /// </summary>
     protected override IClrPropertySetter CreateGeneric<TEntity, TValue, TNonNullableEnumValue>(
         MemberInfo memberInfo,
-        IPropertyBase? propertyBase)
+        IPropertyBase? propertyBase
+    )
     {
         var entityParameter = Expression.Parameter(typeof(TEntity), "entity");
         var valueParameter = Expression.Parameter(typeof(TValue), "value");
         var memberType = memberInfo.GetMemberType();
-        var convertedParameter = memberType == typeof(TValue)
-            ? (Expression)valueParameter
-            : Expression.Convert(valueParameter, memberType);
+        var convertedParameter =
+            memberType == typeof(TValue)
+                ? (Expression)valueParameter
+                : Expression.Convert(valueParameter, memberType);
 
         Expression writeExpression;
         if (memberInfo.DeclaringType!.IsAssignableFrom(typeof(TEntity)))
@@ -53,31 +56,36 @@ public class ClrPropertySetterFactory : ClrAccessorFactory<IClrPropertySetter>
                 {
                     Expression.Assign(
                         converted,
-                        Expression.TypeAs(entityParameter, memberInfo.DeclaringType)),
+                        Expression.TypeAs(entityParameter, memberInfo.DeclaringType)
+                    ),
                     Expression.IfThen(
                         Expression.ReferenceNotEqual(converted, Expression.Constant(null)),
-                        CreateMemberAssignment(converted))
-                });
+                        CreateMemberAssignment(converted)
+                    )
+                }
+            );
         }
 
-        var setter = Expression.Lambda<Action<TEntity, TValue>>(
-            writeExpression,
-            entityParameter,
-            valueParameter).Compile();
+        var setter = Expression
+            .Lambda<Action<TEntity, TValue>>(writeExpression, entityParameter, valueParameter)
+            .Compile();
 
         var propertyType = propertyBase?.ClrType ?? memberInfo.GetMemberType();
 
-        return propertyType.IsNullableType()
-            && propertyType.UnwrapNullableType().IsEnum
-                ? new NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>(setter)
-                : new ClrPropertySetter<TEntity, TValue>(setter);
+        return propertyType.IsNullableType() && propertyType.UnwrapNullableType().IsEnum
+            ? new NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>(setter)
+            : new ClrPropertySetter<TEntity, TValue>(setter);
 
-        Expression CreateMemberAssignment(Expression parameter)
-            => propertyBase?.IsIndexerProperty() == true
+        Expression CreateMemberAssignment(Expression parameter) =>
+            propertyBase?.IsIndexerProperty() == true
                 ? Expression.Assign(
                     Expression.MakeIndex(
-                        entityParameter, (PropertyInfo)memberInfo, new List<Expression> { Expression.Constant(propertyBase.Name) }),
-                    convertedParameter)
+                        entityParameter,
+                        (PropertyInfo)memberInfo,
+                        new List<Expression> { Expression.Constant(propertyBase.Name) }
+                    ),
+                    convertedParameter
+                )
                 : Expression.MakeMemberAccess(parameter, memberInfo).Assign(convertedParameter);
     }
 }

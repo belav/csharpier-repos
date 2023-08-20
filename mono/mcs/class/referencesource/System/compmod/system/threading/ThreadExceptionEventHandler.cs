@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ThreadExceptionEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.Threading {
+namespace System.Threading
+{
     using System.Threading;
     using System.Diagnostics;
 

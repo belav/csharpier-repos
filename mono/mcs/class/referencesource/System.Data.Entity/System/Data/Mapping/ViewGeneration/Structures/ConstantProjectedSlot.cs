@@ -28,7 +28,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         internal ConstantProjectedSlot(Constant value, MemberPath memberPath)
         {
             Debug.Assert(value != null);
-            Debug.Assert(value.IsNotNull() == false, "Cannot store NotNull in a slot - NotNull is only for conditions");
+            Debug.Assert(
+                value.IsNotNull() == false,
+                "Cannot store NotNull in a slot - NotNull is only for conditions"
+            );
             m_constant = value;
             m_memberPath = memberPath;
         }
@@ -59,7 +62,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return this; // Nothing to create
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias,
+            int indentLevel
+        )
         {
             return m_constant.AsEsql(builder, outputMember, blockAlias);
         }

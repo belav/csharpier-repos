@@ -34,7 +34,7 @@ namespace System.Reflection.Runtime.General
         {
             int count = types.Length;
             if (count == 0)
-                return Array.Empty<Type>();  // Ok not to clone empty arrays - those are immutable.
+                return Array.Empty<Type>(); // Ok not to clone empty arrays - those are immutable.
 
             Type[] clonedTypes = new Type[count];
             for (int i = 0; i < count; i++)
@@ -95,8 +95,11 @@ namespace System.Reflection.Runtime.General
             return null;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Calling Assembly.GetType on a third-party Assembly class.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Calling Assembly.GetType on a third-party Assembly class."
+        )]
         public static Type GetTypeCore(this Assembly assembly, string name, bool ignoreCase)
         {
             if (assembly is RuntimeAssemblyInfo runtimeAssembly)
@@ -114,7 +117,10 @@ namespace System.Reflection.Runtime.General
             }
         }
 
-        public static TypeLoadException CreateTypeLoadException(string typeName, Assembly assemblyIfAny)
+        public static TypeLoadException CreateTypeLoadException(
+            string typeName,
+            Assembly assemblyIfAny
+        )
         {
             if (assemblyIfAny == null)
                 throw new TypeLoadException(SR.Format(SR.TypeLoad_TypeNotFound, typeName));
@@ -122,7 +128,10 @@ namespace System.Reflection.Runtime.General
                 throw Helpers.CreateTypeLoadException(typeName, assemblyIfAny.FullName);
         }
 
-        public static TypeLoadException CreateTypeLoadException(string typeName, string assemblyName)
+        public static TypeLoadException CreateTypeLoadException(
+            string typeName,
+            string assemblyName
+        )
         {
             string message = SR.Format(SR.TypeLoad_TypeNotFoundInAssembly, typeName, assemblyName);
             return ReflectionAugments.CreateTypeLoadException(message, typeName);
@@ -153,15 +162,33 @@ namespace System.Reflection.Runtime.General
             return Array.IndexOf(s_charsToEscape, c) >= 0;
         }
 
-        private static readonly char[] s_charsToEscape = new char[] { '\\', '[', ']', '+', '*', '&', ',' };
+        private static readonly char[] s_charsToEscape = new char[]
+        {
+            '\\',
+            '[',
+            ']',
+            '+',
+            '*',
+            '&',
+            ','
+        };
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Delegates always generate metadata for the Invoke method")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Delegates always generate metadata for the Invoke method"
+        )]
         public static RuntimeMethodInfo GetInvokeMethod(this RuntimeTypeInfo delegateType)
         {
             Debug.Assert(delegateType.IsDelegate);
 
-            MethodInfo invokeMethod = delegateType.GetMethod("Invoke", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            MethodInfo invokeMethod = delegateType.GetMethod(
+                "Invoke",
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly
+            );
             if (invokeMethod == null)
             {
                 // No Invoke method found. Since delegate types are compiler constructed, the most likely cause is missing metadata rather than
@@ -170,14 +197,24 @@ namespace System.Reflection.Runtime.General
                 // We're deliberating calling FullName rather than ToString() because if it's the type that's missing metadata,
                 // the FullName property constructs a more informative MissingMetadataException than we can.
                 string fullName = delegateType.FullName;
-                throw new MissingMetadataException(SR.Format(SR.Arg_InvokeMethodMissingMetadata, fullName)); // No invoke method found.
+                throw new MissingMetadataException(
+                    SR.Format(SR.Arg_InvokeMethodMissingMetadata, fullName)
+                ); // No invoke method found.
             }
             return (RuntimeMethodInfo)invokeMethod;
         }
 
-        public static BinderBundle ToBinderBundle(this Binder binder, BindingFlags invokeAttr, CultureInfo cultureInfo)
+        public static BinderBundle ToBinderBundle(
+            this Binder binder,
+            BindingFlags invokeAttr,
+            CultureInfo cultureInfo
+        )
         {
-            if (binder == null || binder is DefaultBinder || ((invokeAttr & BindingFlags.ExactBinding) != 0))
+            if (
+                binder == null
+                || binder is DefaultBinder
+                || ((invokeAttr & BindingFlags.ExactBinding) != 0)
+            )
                 return null;
             return new BinderBundle(binder, cultureInfo);
         }
@@ -185,9 +222,15 @@ namespace System.Reflection.Runtime.General
         // Helper for ICustomAttributeProvider.GetCustomAttributes(). The result of this helper is returned directly to apps
         // so it must always return a newly allocated array. Unlike most of the newer custom attribute apis, the attribute type
         // need not derive from System.Attribute. (In particular, it can be an interface or System.Object.)
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "Array.CreateInstance is only used with reference types here and is therefore safe.")]
-        public static object[] InstantiateAsArray(this IEnumerable<CustomAttributeData> cads, Type actualElementType)
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "Array.CreateInstance is only used with reference types here and is therefore safe."
+        )]
+        public static object[] InstantiateAsArray(
+            this IEnumerable<CustomAttributeData> cads,
+            Type actualElementType
+        )
         {
             LowLevelList<object> attributes = new LowLevelList<object>();
             foreach (CustomAttributeData cad in cads)
@@ -199,15 +242,22 @@ namespace System.Reflection.Runtime.General
             // This is here for desktop compatibility. ICustomAttribute.GetCustomAttributes() normally returns an array of the
             // exact attribute type requested except in two cases: when the passed in type is an open type and when
             // it is a value type. In these two cases, it returns an array of type Object[].
-            bool useObjectArray = actualElementType.ContainsGenericParameters || actualElementType.IsValueType;
+            bool useObjectArray =
+                actualElementType.ContainsGenericParameters || actualElementType.IsValueType;
             int count = attributes.Count;
-            object[] result = useObjectArray ? new object[count] : (object[])Array.CreateInstance(actualElementType, count);
+            object[] result = useObjectArray
+                ? new object[count]
+                : (object[])Array.CreateInstance(actualElementType, count);
 
             attributes.CopyTo(result, 0);
             return result;
         }
 
-        public static bool GetCustomAttributeDefaultValueIfAny(IEnumerable<CustomAttributeData> customAttributes, bool raw, out object defaultValue)
+        public static bool GetCustomAttributeDefaultValueIfAny(
+            IEnumerable<CustomAttributeData> customAttributes,
+            bool raw,
+            out object defaultValue
+        )
         {
             // Legacy: If there are multiple default value attribute, the desktop picks one at random (and so do we...)
             foreach (CustomAttributeData cad in customAttributes)
@@ -230,7 +280,9 @@ namespace System.Reflection.Runtime.General
                     }
                     else
                     {
-                        CustomConstantAttribute customConstantAttribute = (CustomConstantAttribute)(cad.Instantiate());
+                        CustomConstantAttribute customConstantAttribute = (CustomConstantAttribute)(
+                            cad.Instantiate()
+                        );
                         defaultValue = customConstantAttribute.Value;
                         return true;
                     }
@@ -239,7 +291,9 @@ namespace System.Reflection.Runtime.General
                 {
                     // We should really do a non-instanting check if "raw == false" but given that we don't support
                     // reflection-only loads, there isn't an observable difference.
-                    DecimalConstantAttribute decimalConstantAttribute = (DecimalConstantAttribute)(cad.Instantiate());
+                    DecimalConstantAttribute decimalConstantAttribute = (DecimalConstantAttribute)(
+                        cad.Instantiate()
+                    );
                     defaultValue = decimalConstantAttribute.Value;
                     return true;
                 }

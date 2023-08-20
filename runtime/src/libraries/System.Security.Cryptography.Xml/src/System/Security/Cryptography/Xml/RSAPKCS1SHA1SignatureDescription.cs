@@ -7,9 +7,8 @@ namespace System.Security.Cryptography.Xml
 {
     internal sealed class RSAPKCS1SHA1SignatureDescription : RSAPKCS1SignatureDescription
     {
-        public RSAPKCS1SHA1SignatureDescription() : base("SHA1")
-        {
-        }
+        public RSAPKCS1SHA1SignatureDescription()
+            : base("SHA1") { }
 
         [SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 needed for compat.")]
         public sealed override HashAlgorithm CreateDigest()

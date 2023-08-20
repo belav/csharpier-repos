@@ -28,8 +28,10 @@ namespace System.Net.Quic.Implementations.Mock
 
         private ConnectionState? _state;
 
-        internal PeerStreamLimit? LocalStreamLimit => _isClient ? _state?._clientStreamLimit : _state?._serverStreamLimit;
-        internal PeerStreamLimit? RemoteStreamLimit => _isClient ? _state?._serverStreamLimit : _state?._clientStreamLimit;
+        internal PeerStreamLimit? LocalStreamLimit =>
+            _isClient ? _state?._clientStreamLimit : _state?._serverStreamLimit;
+        internal PeerStreamLimit? RemoteStreamLimit =>
+            _isClient ? _state?._serverStreamLimit : _state?._clientStreamLimit;
 
         internal long? ConnectionError
         {
@@ -48,7 +50,13 @@ namespace System.Net.Quic.Implementations.Mock
         internal override X509Certificate? RemoteCertificate => null;
 
         // Constructor for outbound connections
-        internal MockConnection(EndPoint remoteEndPoint, SslClientAuthenticationOptions? sslClientAuthenticationOptions, IPEndPoint? localEndPoint = null, int maxUnidirectionalStreams = 100, int maxBidirectionalStreams = 100)
+        internal MockConnection(
+            EndPoint remoteEndPoint,
+            SslClientAuthenticationOptions? sslClientAuthenticationOptions,
+            IPEndPoint? localEndPoint = null,
+            int maxUnidirectionalStreams = 100,
+            int maxBidirectionalStreams = 100
+        )
         {
             ArgumentNullException.ThrowIfNull(remoteEndPoint);
 
@@ -154,7 +162,10 @@ namespace System.Net.Quic.Implementations.Mock
             // TODO: deal with protocol negotiation
             _state = new ConnectionState(_sslClientAuthenticationOptions!.ApplicationProtocols![0])
             {
-                _clientStreamLimit = new PeerStreamLimit(_maxUnidirectionalStreams, _maxBidirectionalStreams)
+                _clientStreamLimit = new PeerStreamLimit(
+                    _maxUnidirectionalStreams,
+                    _maxBidirectionalStreams
+                )
             };
             if (!listener.TryConnect(_state))
             {
@@ -164,7 +175,9 @@ namespace System.Net.Quic.Implementations.Mock
             return ValueTask.CompletedTask;
         }
 
-        internal async override ValueTask<QuicStreamProvider> OpenUnidirectionalStreamAsync(CancellationToken cancellationToken)
+        internal override async ValueTask<QuicStreamProvider> OpenUnidirectionalStreamAsync(
+            CancellationToken cancellationToken
+        )
         {
             PeerStreamLimit? streamLimit = RemoteStreamLimit;
             if (streamLimit is null)
@@ -174,7 +187,9 @@ namespace System.Net.Quic.Implementations.Mock
 
             while (!streamLimit.Unidirectional.TryIncrement())
             {
-                await streamLimit.Unidirectional.WaitForAvailableStreams(cancellationToken).ConfigureAwait(false);
+                await streamLimit.Unidirectional
+                    .WaitForAvailableStreams(cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             long streamId;
@@ -187,7 +202,9 @@ namespace System.Net.Quic.Implementations.Mock
             return OpenStream(streamId, false);
         }
 
-        internal async override ValueTask<QuicStreamProvider> OpenBidirectionalStreamAsync(CancellationToken cancellationToken)
+        internal override async ValueTask<QuicStreamProvider> OpenBidirectionalStreamAsync(
+            CancellationToken cancellationToken
+        )
         {
             PeerStreamLimit? streamLimit = RemoteStreamLimit;
             if (streamLimit is null)
@@ -197,7 +214,9 @@ namespace System.Net.Quic.Implementations.Mock
 
             while (!streamLimit.Bidirectional.TryIncrement())
             {
-                await streamLimit.Bidirectional.WaitForAvailableStreams(cancellationToken).ConfigureAwait(false);
+                await streamLimit.Bidirectional
+                    .WaitForAvailableStreams(cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             long streamId;
@@ -220,11 +239,16 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new InvalidOperationException("Not connected");
             }
 
-            MockStream.StreamState streamState = new MockStream.StreamState(streamId, bidirectional);
+            MockStream.StreamState streamState = new MockStream.StreamState(
+                streamId,
+                bidirectional
+            );
             // TODO Streams are never removed from a connection. Consider cleaning up in the future.
             state._streams[streamState._streamId] = streamState;
 
-            Channel<MockStream.StreamState> streamChannel = _isClient ? state._clientInitiatedStreamChannel : state._serverInitiatedStreamChannel;
+            Channel<MockStream.StreamState> streamChannel = _isClient
+                ? state._clientInitiatedStreamChannel
+                : state._serverInitiatedStreamChannel;
             streamChannel.Writer.TryWrite(streamState);
 
             return new MockStream(this, streamState, true);
@@ -252,7 +276,9 @@ namespace System.Net.Quic.Implementations.Mock
             return streamLimit.Bidirectional.AvailableCount;
         }
 
-        internal override async ValueTask<QuicStreamProvider> AcceptStreamAsync(CancellationToken cancellationToken = default)
+        internal override async ValueTask<QuicStreamProvider> AcceptStreamAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
@@ -262,21 +288,30 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new InvalidOperationException("Not connected");
             }
 
-            Channel<MockStream.StreamState> streamChannel = _isClient ? state._serverInitiatedStreamChannel : state._clientInitiatedStreamChannel;
+            Channel<MockStream.StreamState> streamChannel = _isClient
+                ? state._serverInitiatedStreamChannel
+                : state._clientInitiatedStreamChannel;
 
             try
             {
-                MockStream.StreamState streamState = await streamChannel.Reader.ReadAsync(cancellationToken).ConfigureAwait(false);
+                MockStream.StreamState streamState = await streamChannel.Reader
+                    .ReadAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return new MockStream(this, streamState, false);
             }
             catch (ChannelClosedException)
             {
                 long errorCode = _isClient ? state._serverErrorCode : state._clientErrorCode;
-                throw (errorCode == -1) ? new QuicOperationAbortedException() : new QuicConnectionAbortedException(errorCode);
+                throw (errorCode == -1)
+                    ? new QuicOperationAbortedException()
+                    : new QuicConnectionAbortedException(errorCode);
             }
         }
 
-        internal override ValueTask CloseAsync(long errorCode, CancellationToken cancellationToken = default)
+        internal override ValueTask CloseAsync(
+            long errorCode,
+            CancellationToken cancellationToken = default
+        )
         {
             // TODO: We should abort local streams (and signal the peer to do likewise)
             // Currently, we are not tracking the streams associated with this connection.
@@ -303,8 +338,12 @@ namespace System.Net.Quic.Implementations.Mock
 
                 foreach (KeyValuePair<long, MockStream.StreamState> kvp in state._streams)
                 {
-                    kvp.Value._outboundWritesCompletedTcs.TrySetException(new QuicConnectionAbortedException(errorCode));
-                    kvp.Value._inboundWritesCompletedTcs.TrySetException(new QuicConnectionAbortedException(errorCode));
+                    kvp.Value._outboundWritesCompletedTcs.TrySetException(
+                        new QuicConnectionAbortedException(errorCode)
+                    );
+                    kvp.Value._inboundWritesCompletedTcs.TrySetException(
+                        new QuicConnectionAbortedException(errorCode)
+                    );
                 }
             }
 
@@ -328,17 +367,27 @@ namespace System.Net.Quic.Implementations.Mock
             {
                 // TODO: We really only need to do the complete and drain once, but it doesn't really hurt to do it twice.
                 state._clientInitiatedStreamChannel.Writer.TryComplete();
-                while (state._clientInitiatedStreamChannel.Reader.TryRead(out MockStream.StreamState? streamState))
+                while (
+                    state._clientInitiatedStreamChannel.Reader.TryRead(
+                        out MockStream.StreamState? streamState
+                    )
+                )
                 {
-                    streamState._outboundReadErrorCode = streamState._outboundWriteErrorCode = outboundErrorCode;
+                    streamState._outboundReadErrorCode = streamState._outboundWriteErrorCode =
+                        outboundErrorCode;
                     streamState._inboundStreamBuffer?.AbortRead();
                     streamState._outboundStreamBuffer?.EndWrite();
                 }
 
                 state._serverInitiatedStreamChannel.Writer.TryComplete();
-                while (state._serverInitiatedStreamChannel.Reader.TryRead(out MockStream.StreamState? streamState))
+                while (
+                    state._serverInitiatedStreamChannel.Reader.TryRead(
+                        out MockStream.StreamState? streamState
+                    )
+                )
                 {
-                    streamState._inboundReadErrorCode = streamState._inboundWriteErrorCode = inboundErrorCode;
+                    streamState._inboundReadErrorCode = streamState._inboundWriteErrorCode =
+                        inboundErrorCode;
                     streamState._outboundStreamBuffer?.AbortRead();
                     streamState._inboundStreamBuffer?.EndWrite();
                 }
@@ -384,9 +433,12 @@ namespace System.Net.Quic.Implementations.Mock
             public readonly int MaxCount;
 
             private int _actualCount;
+
             // Since this is mock, we don't need to be conservative with the allocations.
             // We keep the TCSes allocated all the time for the simplicity of the code.
-            private TaskCompletionSource _availableTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            private TaskCompletionSource _availableTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             private readonly object _syncRoot = new object();
 
             public StreamLimit(int maxCount)
@@ -405,7 +457,9 @@ namespace System.Net.Quic.Implementations.Mock
                     if (!_availableTcs.Task.IsCompleted)
                     {
                         availableTcs = _availableTcs;
-                        _availableTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                        _availableTcs = new TaskCompletionSource(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
                     }
                 }
                 if (availableTcs is not null)
@@ -441,8 +495,10 @@ namespace System.Net.Quic.Implementations.Mock
                 return new ValueTask(availableTcs.Task.WaitAsync(cancellationToken));
             }
 
-            public void CloseWaiters()
-                => _availableTcs.SetException(ExceptionDispatchInfo.SetCurrentStackTrace(new QuicOperationAbortedException()));
+            public void CloseWaiters() =>
+                _availableTcs.SetException(
+                    ExceptionDispatchInfo.SetCurrentStackTrace(new QuicOperationAbortedException())
+                );
         }
 
         internal sealed class PeerStreamLimit

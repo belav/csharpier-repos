@@ -38,7 +38,8 @@ public class MinLengthRouteConstraint : IRouteConstraint, IParameterLiteralNodeM
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {

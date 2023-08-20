@@ -48,12 +48,12 @@ public abstract class ConnectionInfo
     /// Retrieves the client certificate.
     /// </summary>
     /// <returns>Asynchronously returns an <see cref="X509Certificate2" />. Can be null.</returns>
-    public abstract Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken = new CancellationToken());
+    public abstract Task<X509Certificate2?> GetClientCertificateAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    );
 
     /// <summary>
     /// Close connection gracefully.
     /// </summary>
-    public virtual void RequestClose()
-    {
-    }
+    public virtual void RequestClose() { }
 }

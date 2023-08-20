@@ -11,6 +11,7 @@ namespace CSharpProject_ProjectReference
     class Program
     {
         static ProjAlias::CSharpProject.CSharpClass field;
+
         static void Main()
         {
             field = new ProjAlias.CSharpProject.CSharpClass();

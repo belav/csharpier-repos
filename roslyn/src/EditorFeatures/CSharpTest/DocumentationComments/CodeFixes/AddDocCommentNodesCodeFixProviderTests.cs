@@ -16,15 +16,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.CodeFixes
 {
-    public class AddDocCommentNodesCodesFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class AddDocCommentNodesCodesFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public AddDocCommentNodesCodesFixProviderTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddDocCommentNodesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddDocCommentNodesCodeFixProvider());
 
         private async Task TestAsync(string initial, string expected)
         {
@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_NoNodesBefore()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_NoNodesAfter()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_NodesBeforeAndAfter()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_NodesBeforeAndAfter_RawTextInComment()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -137,7 +137,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_NodesBeforeAndAfter_WithContent()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -168,7 +168,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_NestedInSummaryTag()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// <param name=""j""></param>
@@ -196,7 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// <param name=""i""></param>
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_BeforeNode_EverythingOnOneLine()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary></summary> <param name=""j""></param>
     public void Fizz(int [|i|], int j, int k) {}
@@ -221,7 +221,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary></summary>
     /// <param name=""i""></param> <param name=""j""></param>
@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_AfterNode_EverythingOnOneLine()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary></summary> <param name=""j""></param>
     public void Fizz(int i, int j, int [|k|]) {}
@@ -244,7 +244,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary></summary>
     /// <param name=""i""></param> <param name=""j""></param>
@@ -259,7 +259,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_BeforeNode_JustParamNode()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <param name=""j""></param>
     public void Fizz(int [|i|], int j, int k) {}
@@ -267,7 +267,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <param name=""i""></param>
     /// <param name=""j""></param>
@@ -282,7 +282,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_AfterNode_JustParamNode()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <param name=""j""></param>
     public void Fizz(int i, int j, int [|k|]) {}
@@ -290,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <param name=""i""></param>
     /// <param name=""j""></param>
@@ -305,7 +305,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_MultipleDocComments()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary></summary>
     // ...
@@ -318,7 +318,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary></summary>
     // ...
@@ -338,7 +338,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_Ctor()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -349,7 +349,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -367,7 +367,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_Delegate()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -378,7 +378,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -396,7 +396,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task AddsParamTag_Operator()
         {
             var initial =
-@"public struct MyStruct
+                @"public struct MyStruct
 {
     public int Val { get; }
 
@@ -418,7 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"public struct MyStruct
+                @"public struct MyStruct
 {
     public int Val { get; }
 
@@ -448,7 +448,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task TestFixAllInDocument_MultipleParamNodesInVariousPlaces()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// <param name=""i""></param>
@@ -458,7 +458,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// <param name=""i""></param>
@@ -478,7 +478,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -530,7 +531,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -592,7 +594,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -638,7 +641,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -694,7 +698,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -737,7 +742,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -791,7 +797,8 @@ class Program3
         [WorkItem(52738, "https://github.com/dotnet/roslyn/issues/52738")]
         public async Task AddsParamTag_Record()
         {
-            var initial = @"
+            var initial =
+                @"
 /// <summary>
 /// 
 /// </summary>
@@ -799,7 +806,8 @@ class Program3
 record R(int [|First|], int Second, int Third);
 ";
 
-            var expected = @"
+            var expected =
+                @"
 /// <summary>
 /// 
 /// </summary>

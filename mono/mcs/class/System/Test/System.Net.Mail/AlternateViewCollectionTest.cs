@@ -14,37 +14,37 @@ using System.Net.Mime;
 
 namespace MonoTests.System.Net.Mail
 {
-	[TestFixture]
-	public class AlternateViewCollectionTest
-	{
-		AlternateViewCollection avc;
-		AlternateView av;
-		
-		[SetUp]
-		public void GetReady ()
-		{
-			avc = new  MailMessage ("foo@bar.com", "foo@bar.com").AlternateViews;
-			av = AlternateView.CreateAlternateViewFromString ("test", new ContentType ("text/plain"));
-		}
+    [TestFixture]
+    public class AlternateViewCollectionTest
+    {
+        AlternateViewCollection avc;
+        AlternateView av;
 
-		[Test]
-		public void InitialCount ()
-		{
-			Assert.IsTrue (avc.Count == 0);
-		}
+        [SetUp]
+        public void GetReady()
+        {
+            avc = new MailMessage("foo@bar.com", "foo@bar.com").AlternateViews;
+            av = AlternateView.CreateAlternateViewFromString("test", new ContentType("text/plain"));
+        }
 
-		[Test]
-		public void AddCount ()
-		{
-			avc.Add (av);
-			Assert.IsTrue (avc.Count == 1);
-		}
+        [Test]
+        public void InitialCount()
+        {
+            Assert.IsTrue(avc.Count == 0);
+        }
 
-		[Test]
-		public void RemoveCount ()
-		{
-			avc.Remove (av);
-			Assert.IsTrue (avc.Count == 0);
-		}
-	}
+        [Test]
+        public void AddCount()
+        {
+            avc.Add(av);
+            Assert.IsTrue(avc.Count == 1);
+        }
+
+        [Test]
+        public void RemoveCount()
+        {
+            avc.Remove(av);
+            Assert.IsTrue(avc.Count == 0);
+        }
+    }
 }

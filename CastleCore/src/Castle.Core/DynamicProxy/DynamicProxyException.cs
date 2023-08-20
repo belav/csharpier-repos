@@ -24,16 +24,13 @@ namespace Castle.DynamicProxy
     [Serializable]
     public sealed class DynamicProxyException : Exception
     {
-        internal DynamicProxyException(string message) : base(message)
-        {
-        }
+        internal DynamicProxyException(string message)
+            : base(message) { }
 
-        internal DynamicProxyException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+        internal DynamicProxyException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        internal DynamicProxyException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        internal DynamicProxyException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

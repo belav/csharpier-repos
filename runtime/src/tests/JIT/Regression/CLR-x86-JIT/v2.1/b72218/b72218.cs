@@ -7,7 +7,6 @@ using System.Threading;
 
 public class My
 {
-
     static void Worker()
     {
         GC.Collect();
@@ -16,7 +15,6 @@ public class My
 
     public static int Main()
     {
-
         Thread t = new Thread(new ThreadStart(Worker));
         t.Start();
 
@@ -29,5 +27,4 @@ public class My
 
         return 100;
     }
-
 }

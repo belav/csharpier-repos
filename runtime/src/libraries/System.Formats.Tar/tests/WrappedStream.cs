@@ -9,9 +9,17 @@ namespace System.Formats.Tar
     {
         private readonly Stream _baseStream;
         private readonly EventHandler _onClosed;
-        private bool _canRead, _canWrite, _canSeek;
+        private bool _canRead,
+            _canWrite,
+            _canSeek;
 
-        public WrappedStream(Stream baseStream, bool canRead, bool canWrite, bool canSeek, EventHandler onClosed = null)
+        public WrappedStream(
+            Stream baseStream,
+            bool canRead,
+            bool canWrite,
+            bool canSeek,
+            EventHandler onClosed = null
+        )
         {
             _baseStream = baseStream;
             _onClosed = onClosed;
@@ -35,7 +43,8 @@ namespace System.Formats.Tar
                     throw new InvalidOperationException("This stream does not support reading", ex);
                 }
             }
-            else throw new InvalidOperationException("This stream does not support reading");
+            else
+                throw new InvalidOperationException("This stream does not support reading");
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -51,10 +60,14 @@ namespace System.Formats.Tar
                     throw new InvalidOperationException("This stream does not support seeking", ex);
                 }
             }
-            else throw new InvalidOperationException("This stream does not support seeking");
+            else
+                throw new InvalidOperationException("This stream does not support seeking");
         }
 
-        public override void SetLength(long value) { _baseStream.SetLength(value); }
+        public override void SetLength(long value)
+        {
+            _baseStream.SetLength(value);
+        }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -69,7 +82,8 @@ namespace System.Formats.Tar
                     throw new InvalidOperationException("This stream does not support writing", ex);
                 }
             }
-            else throw new InvalidOperationException("This stream does not support writing");
+            else
+                throw new InvalidOperationException("This stream does not support writing");
         }
 
         public override bool CanRead => _canRead && _baseStream.CanRead;
@@ -110,10 +124,14 @@ namespace System.Formats.Tar
                     }
                     catch (ObjectDisposedException ex)
                     {
-                        throw new InvalidOperationException("This stream does not support seeking", ex);
+                        throw new InvalidOperationException(
+                            "This stream does not support seeking",
+                            ex
+                        );
                     }
                 }
-                else throw new InvalidOperationException("This stream does not support seeking");
+                else
+                    throw new InvalidOperationException("This stream does not support seeking");
             }
         }
 

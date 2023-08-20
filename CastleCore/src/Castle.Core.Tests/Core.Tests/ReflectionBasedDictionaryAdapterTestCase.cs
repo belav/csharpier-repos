@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,9 +28,7 @@ namespace Castle.Core.Tests
             private bool writeOnly;
 
             public Customer(int id, string name)
-                : this(id, name, false)
-            {
-            }
+                : this(id, name, false) { }
 
             public Customer(int id, string name, bool writeOnly)
             {
@@ -52,7 +50,7 @@ namespace Castle.Core.Tests
             {
                 get { return writeOnly; }
             }
-        
+
             public string this[int id]
             {
                 get { return "abcdef"; }
@@ -84,19 +82,24 @@ namespace Castle.Core.Tests
         [Test]
         public void CannotCreateWithNullArgument()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new ReflectionBasedDictionaryAdapter(null)
-            );
+            Assert.Throws<ArgumentNullException>(() => new ReflectionBasedDictionaryAdapter(null));
         }
 
         [Test]
         public void EnumeratorIteration()
         {
-            var dict = new ReflectionBasedDictionaryAdapter(new {foo = 1, name = "jonh", age = 25});
+            var dict = new ReflectionBasedDictionaryAdapter(
+                new
+                {
+                    foo = 1,
+                    name = "jonh",
+                    age = 25
+                }
+            );
 
             Assert.AreEqual(3, dict.Count);
 
-            var enumerator = (IDictionaryEnumerator) dict.GetEnumerator();
+            var enumerator = (IDictionaryEnumerator)dict.GetEnumerator();
 
             while (enumerator.MoveNext())
             {
@@ -108,7 +111,12 @@ namespace Castle.Core.Tests
         [Test]
         public void Using_anonymous_types_works_without_exception()
         {
-            var target = new { foo = 1, name = "john", age = 25 };
+            var target = new
+            {
+                foo = 1,
+                name = "john",
+                age = 25
+            };
             Assert.IsFalse(target.GetType().IsPublic);
             var dict = new ReflectionBasedDictionaryAdapter(target);
 
@@ -133,16 +141,20 @@ namespace Castle.Core.Tests
             var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name"));
 
             Assert.IsFalse(dict.Contains("Age"), "Age property found when it should not be");
-            Assert.IsFalse(dict.Contains("Address"), "Address property found when it should not be");
+            Assert.IsFalse(
+                dict.Contains("Address"),
+                "Address property found when it should not be"
+            );
         }
 
-        [Test /*(Description = "Test case for patch supplied on the mailing list by Jan Limpens")*/]
+        [Test /*(Description = "Test case for patch supplied on the mailing list by Jan Limpens")*/
+        ]
         public void ShouldNotAccessWriteOnlyProperties()
         {
             try
             {
                 var dict = new ReflectionBasedDictionaryAdapter(new Customer(1, "name", true));
-                Assert.IsTrue((bool) dict["IsWriteOnly"]);
+                Assert.IsTrue((bool)dict["IsWriteOnly"]);
             }
             catch (ArgumentException)
             {

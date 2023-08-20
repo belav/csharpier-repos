@@ -29,7 +29,6 @@ namespace System.Diagnostics
                 }
                 return null;
             }
-
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
             [System.Security.SecuritySafeCriticalAttribute]
 #endif
@@ -42,7 +41,7 @@ namespace System.Diagnostics
             }
         }
 
-#region private
+        #region private
 
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
         [System.Security.SecuritySafeCriticalAttribute]
@@ -58,7 +57,8 @@ namespace System.Diagnostics
         // Slot name depends on the AppDomain Id in order to prevent AppDomains to use the same Activity
         // Cross AppDomain calls are considered as 'external' i.e. only Activity Id and Baggage should be propagated and
         // new Activity should be started for the RPC calls (incoming and outgoing)
-        private static readonly string FieldKey = $"{typeof(Activity).FullName}_{AppDomain.CurrentDomain.Id}";
-#endregion //private
+        private static readonly string FieldKey =
+            $"{typeof(Activity).FullName}_{AppDomain.CurrentDomain.Id}";
+        #endregion //private
     }
 }

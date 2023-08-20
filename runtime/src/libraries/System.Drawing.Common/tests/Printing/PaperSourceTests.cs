@@ -62,10 +62,7 @@ namespace System.Drawing.Printing.Tests
         [InlineData(256, PaperSourceKind.Custom)]
         public void RawKind_Set_GetReturnsExpected(int value, PaperSourceKind expectedKind)
         {
-            var source = new PaperSource
-            {
-                RawKind = value
-            };
+            var source = new PaperSource { RawKind = value };
             Assert.Equal(value, source.RawKind);
             Assert.Equal(expectedKind, source.Kind);
 
@@ -81,10 +78,7 @@ namespace System.Drawing.Printing.Tests
         [InlineData("sourceName")]
         public void SourceName_Set_GetReturnsExpected(string value)
         {
-            var source = new PaperSource
-            {
-                SourceName = value
-            };
+            var source = new PaperSource { SourceName = value };
             Assert.Equal(value, source.SourceName);
 
             // Set same.

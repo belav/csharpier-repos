@@ -23,6 +23,7 @@ namespace Test
             }
             catch (Exception) { }
         }
+
         public static int Main()
         {
             try
@@ -33,5 +34,4 @@ namespace Test
             return 100;
         }
     }
-
 }

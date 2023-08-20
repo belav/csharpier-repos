@@ -7,8 +7,8 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-namespace System.Data.EntityClient {
-
+namespace System.Data.EntityClient
+{
     using System.Data.Common;
     using System.Data.Common.CommandTrees;
     using System.Data.Entity;
@@ -18,8 +18,8 @@ namespace System.Data.EntityClient {
     /// <summary>
     /// The class for provider services of the entity client
     /// </summary>
-    internal sealed class EntityProviderServices : DbProviderServices {
-
+    internal sealed class EntityProviderServices : DbProviderServices
+    {
         /// <summary>
         /// Singleton object;
         /// </summary>
@@ -32,15 +32,24 @@ namespace System.Data.EntityClient {
         /// <param name="commandTree">command tree for the statement</param>
         /// <returns>an exectable command definition object</returns>
         /// <exception cref="ArgumentNullException">connection and commandTree arguments must not be null</exception>
-        protected override DbCommandDefinition CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree) {
+        protected override DbCommandDefinition CreateDbCommandDefinition(
+            DbProviderManifest providerManifest,
+            DbCommandTree commandTree
+        )
+        {
             EntityUtil.CheckArgumentNull(providerManifest, "providerManifest");
             EntityUtil.CheckArgumentNull(commandTree, "commandTree");
 
-            StoreItemCollection storeMetadata = (StoreItemCollection)commandTree.MetadataWorkspace.GetItemCollection(DataSpace.SSpace);
+            StoreItemCollection storeMetadata = (StoreItemCollection)
+                commandTree.MetadataWorkspace.GetItemCollection(DataSpace.SSpace);
             return this.CreateCommandDefinition(storeMetadata.StoreProviderFactory, commandTree);
         }
 
-        internal EntityCommandDefinition CreateCommandDefinition(DbProviderFactory storeProviderFactory, DbCommandTree commandTree) {
+        internal EntityCommandDefinition CreateCommandDefinition(
+            DbProviderFactory storeProviderFactory,
+            DbCommandTree commandTree
+        )
+        {
             EntityUtil.CheckArgumentNull(storeProviderFactory, "storeProviderFactory");
             Debug.Assert(commandTree != null, "Command Tree cannot be null");
 
@@ -53,24 +62,30 @@ namespace System.Data.EntityClient {
         /// <param name="commandTree">The command tree for which the data space should be validated</param>
         internal override void ValidateDataSpace(DbCommandTree commandTree)
         {
-            Debug.Assert(commandTree != null, "Ensure command tree is non-null before calling ValidateDataSpace");
+            Debug.Assert(
+                commandTree != null,
+                "Ensure command tree is non-null before calling ValidateDataSpace"
+            );
 
             if (commandTree.DataSpace != DataSpace.CSpace)
             {
-                throw EntityUtil.ProviderIncompatible(Strings.EntityClient_RequiresNonStoreCommandTree);
+                throw EntityUtil.ProviderIncompatible(
+                    Strings.EntityClient_RequiresNonStoreCommandTree
+                );
             }
         }
-        
+
         /// <summary>
         /// Create a EntityCommandDefinition object based on the prototype command
         /// This method is intended for provider writers to build a default command definition
-        /// from a command. 
+        /// from a command.
         /// </summary>
         /// <param name="prototype"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">prototype argument must not be null</exception>
         /// <exception cref="InvalidCastException">prototype argument must be a EntityCommand</exception>
-        public override DbCommandDefinition CreateCommandDefinition(DbCommand prototype) {
+        public override DbCommandDefinition CreateCommandDefinition(DbCommand prototype)
+        {
             EntityUtil.CheckArgumentNull(prototype, "prototype");
             return ((EntityCommand)prototype).GetCommandDefinition();
         }
@@ -80,7 +95,11 @@ namespace System.Data.EntityClient {
             EntityUtil.CheckArgumentNull(connection, "connection");
             if (connection.GetType() != typeof(EntityConnection))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Mapping_Provider_WrongConnectionType(typeof(EntityConnection)));
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Mapping_Provider_WrongConnectionType(
+                        typeof(EntityConnection)
+                    )
+                );
             }
 
             return MetadataItem.EdmProviderManifest.Token;

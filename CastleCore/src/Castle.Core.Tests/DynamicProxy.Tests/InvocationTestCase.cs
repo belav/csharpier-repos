@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,9 +28,9 @@ namespace Castle.DynamicProxy.Tests
         {
             KeepDataInterceptor interceptor = new KeepDataInterceptor();
 
-            object proxy = generator.CreateClassProxy(typeof (ServiceClass), interceptor);
+            object proxy = generator.CreateClassProxy(typeof(ServiceClass), interceptor);
 
-            ServiceClass instance = (ServiceClass) proxy;
+            ServiceClass instance = (ServiceClass)proxy;
 
             instance.Sum(20, 25);
 
@@ -45,16 +45,19 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreEqual(45, interceptor.Invocation.ReturnValue);
 
             Assert.IsNotNull(interceptor.Invocation.Proxy);
-            Assert.IsInstanceOf(typeof (ServiceClass), interceptor.Invocation.Proxy);
+            Assert.IsInstanceOf(typeof(ServiceClass), interceptor.Invocation.Proxy);
 
             Assert.IsNotNull(interceptor.Invocation.InvocationTarget);
-            Assert.IsInstanceOf(typeof (ServiceClass), interceptor.Invocation.InvocationTarget);
+            Assert.IsInstanceOf(typeof(ServiceClass), interceptor.Invocation.InvocationTarget);
             Assert.IsNotNull(interceptor.Invocation.TargetType);
-            Assert.AreSame(typeof (ServiceClass), interceptor.Invocation.TargetType);
+            Assert.AreSame(typeof(ServiceClass), interceptor.Invocation.TargetType);
 
             Assert.IsNotNull(interceptor.Invocation.Method);
             Assert.IsNotNull(interceptor.Invocation.MethodInvocationTarget);
-            Assert.AreSame(interceptor.Invocation.Method, interceptor.Invocation.MethodInvocationTarget.GetBaseDefinition());
+            Assert.AreSame(
+                interceptor.Invocation.Method,
+                interceptor.Invocation.MethodInvocationTarget.GetBaseDefinition()
+            );
         }
 
         [Test]
@@ -63,9 +66,12 @@ namespace Castle.DynamicProxy.Tests
             KeepDataInterceptor interceptor = new KeepDataInterceptor();
 
             object proxy = generator.CreateInterfaceProxyWithTarget(
-                typeof (IService), new ServiceImpl(), interceptor);
+                typeof(IService),
+                new ServiceImpl(),
+                interceptor
+            );
 
-            IService instance = (IService) proxy;
+            IService instance = (IService)proxy;
 
             instance.Sum(20, 25);
 
@@ -89,7 +95,10 @@ namespace Castle.DynamicProxy.Tests
 
             Assert.IsNotNull(interceptor.Invocation.Method);
             Assert.IsNotNull(interceptor.Invocation.MethodInvocationTarget);
-            Assert.AreNotSame(interceptor.Invocation.Method, interceptor.Invocation.MethodInvocationTarget);
+            Assert.AreNotSame(
+                interceptor.Invocation.Method,
+                interceptor.Invocation.MethodInvocationTarget
+            );
         }
     }
 }

@@ -1,22 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="LingerOption.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
-    
-    
+
     /// <devdoc>
     ///    <para>Contains information for a socket's linger time, the amount of time it will
     ///       remain after closing if data remains to be sent.</para>
     /// </devdoc>
-    public class LingerOption {
+    public class LingerOption
+    {
 #if MONO
-		// Don't change the names of these fields without also
-		// changing socket-io.c in the runtime
+        // Don't change the names of these fields without also
+        // changing socket-io.c in the runtime
 #endif
         bool enabled;
         int lingerTime;
@@ -26,24 +27,22 @@ namespace System.Net.Sockets {
         ///       Initializes a new instance of the <see cref='Sockets.LingerOption'/> class.
         ///    </para>
         /// </devdoc>
-        public LingerOption(bool enable, int seconds) {
+        public LingerOption(bool enable, int seconds)
+        {
             Enabled = enable;
             LingerTime = seconds;
         }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Enables or disables lingering after
         ///       close.
         ///    </para>
         /// </devdoc>
-        public bool Enabled {
-            get {
-                return enabled;
-            }
-            set {
-                enabled = value;
-            }
+        public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
         }
 
         /// <devdoc>
@@ -51,14 +50,10 @@ namespace System.Net.Sockets {
         ///       The amount of time, in seconds, to remain connected after a close.
         ///    </para>
         /// </devdoc>
-        public int LingerTime {
-            get {
-                return lingerTime;
-            }
-            set {
-                lingerTime = value;
-            }
+        public int LingerTime
+        {
+            get { return lingerTime; }
+            set { lingerTime = value; }
         }
-
     } // class LingerOption
 } // namespace System.Net.Sockets

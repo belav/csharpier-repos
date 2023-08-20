@@ -23,8 +23,8 @@ internal sealed class LegacyGlobalOptionService : ILegacyGlobalOptionService
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceService(ILegacyGlobalOptionService legacyGlobalOptions)
-            => LegacyGlobalOptions = legacyGlobalOptions;
+        public WorkspaceService(ILegacyGlobalOptionService legacyGlobalOptions) =>
+            LegacyGlobalOptions = legacyGlobalOptions;
     }
 
     public IGlobalOptionService GlobalOptions { get; }
@@ -49,21 +49,26 @@ internal sealed class LegacyGlobalOptionService : ILegacyGlobalOptionService
     public object? GetExternallyDefinedOption(OptionKey key)
     {
         Debug.Assert(key.Option is not IOption2);
-        return _currentExternallyDefinedOptionValues.TryGetValue(key, out var value) ? value : key.Option.DefaultValue;
+        return _currentExternallyDefinedOptionValues.TryGetValue(key, out var value)
+            ? value
+            : key.Option.DefaultValue;
     }
 
     /// <summary>
     /// Sets values of options that may be stored in <see cref="Solution.Options"/> (public options).
     /// Clears <see cref="SolutionOptionSet"/> of registered workspaces so that next time
-    /// <see cref="Solution.Options"/> are queried for the options new values are fetched from 
+    /// <see cref="Solution.Options"/> are queried for the options new values are fetched from
     /// <see cref="GlobalOptionService"/>.
     /// </summary>
     public void SetOptions(
         ImmutableArray<KeyValuePair<OptionKey2, object?>> internallyDefinedOptions,
-        ImmutableArray<KeyValuePair<OptionKey, object?>> externallyDefinedOptions)
+        ImmutableArray<KeyValuePair<OptionKey, object?>> externallyDefinedOptions
+    )
     {
         // all values in internally defined options have internal representation:
-        Debug.Assert(internallyDefinedOptions.All(entry => OptionSet.IsInternalOptionValue(entry.Value)));
+        Debug.Assert(
+            internallyDefinedOptions.All(entry => OptionSet.IsInternalOptionValue(entry.Value))
+        );
 
         var anyExternallyDefinedOptionChanged = false;
         foreach (var (optionKey, value) in externallyDefinedOptions)
@@ -78,14 +83,15 @@ internal sealed class LegacyGlobalOptionService : ILegacyGlobalOptionService
             ImmutableInterlocked.Update(
                 ref _currentExternallyDefinedOptionValues,
                 static (options, arg) => options.SetItem(arg.optionKey, arg.value),
-                (optionKey, value));
+                (optionKey, value)
+            );
         }
 
         // Update workspaces even when value of public internally defined options have not actually changed.
         // This is necessary since these options may have been changed previously directly via IGlobalOptionService,
         // without updating the workspaces and thus the values stored in IGlobalOptionService may not match the values
         // stored on current solution snapshots.
-        // 
+        //
         // Updating workspaces more often than strictly needed is not a functional issue -
         // it's just adding a bit of extra overhead since the options need to be re-read from global options.
         if (!internallyDefinedOptions.IsEmpty || anyExternallyDefinedOptionChanged)
@@ -108,10 +114,17 @@ internal sealed class LegacyGlobalOptionService : ILegacyGlobalOptionService
         }
     }
 
-    public void RegisterWorkspace(Workspace workspace)
-        => ImmutableInterlocked.Update(ref _registeredWorkspaces, (workspaces, workspace) => workspaces.Add(workspace), workspace);
+    public void RegisterWorkspace(Workspace workspace) =>
+        ImmutableInterlocked.Update(
+            ref _registeredWorkspaces,
+            (workspaces, workspace) => workspaces.Add(workspace),
+            workspace
+        );
 
-    public void UnregisterWorkspace(Workspace workspace)
-        => ImmutableInterlocked.Update(ref _registeredWorkspaces, (workspaces, workspace) => workspaces.Remove(workspace), workspace);
-
+    public void UnregisterWorkspace(Workspace workspace) =>
+        ImmutableInterlocked.Update(
+            ref _registeredWorkspaces,
+            (workspaces, workspace) => workspaces.Remove(workspace),
+            workspace
+        );
 }

@@ -24,7 +24,5 @@ public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
         }
     }
 
-    protected virtual void OnInitialized()
-    {
-    }
+    protected virtual void OnInitialized() { }
 }

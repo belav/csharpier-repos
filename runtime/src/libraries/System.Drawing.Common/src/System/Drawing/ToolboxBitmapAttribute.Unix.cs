@@ -48,13 +48,9 @@ namespace System.Drawing
         private Image? bigImage;
         public static readonly ToolboxBitmapAttribute Default = new ToolboxBitmapAttribute();
 
-        private ToolboxBitmapAttribute()
-        {
-        }
+        private ToolboxBitmapAttribute() { }
 
-        public ToolboxBitmapAttribute(string imageFile)
-        {
-        }
+        public ToolboxBitmapAttribute(string imageFile) { }
 
         public ToolboxBitmapAttribute(Type t)
         {
@@ -123,7 +119,11 @@ namespace System.Drawing
 
             try
             {
-                using (System.IO.Stream? s = t.Assembly.GetManifestResourceStream(t.Namespace + "." + imageName))
+                using (
+                    System.IO.Stream? s = t.Assembly.GetManifestResourceStream(
+                        t.Namespace + "." + imageName
+                    )
+                )
                 {
                     if (s == null)
                     {

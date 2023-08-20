@@ -38,8 +38,15 @@ namespace System
                     // We also support overriding in the other direction.  If we'd otherwise avoid emitting color
                     // codes but the DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION environment variable is
                     // set to 1 or true, enable color.
-                    string? envVar = Environment.GetEnvironmentVariable("DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION");
-                    enabled = envVar is not null && (envVar == "1" || envVar.Equals("true", StringComparison.OrdinalIgnoreCase));
+                    string? envVar = Environment.GetEnvironmentVariable(
+                        "DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION"
+                    );
+                    enabled =
+                        envVar is not null
+                        && (
+                            envVar == "1"
+                            || envVar.Equals("true", StringComparison.OrdinalIgnoreCase)
+                        );
                 }
 
                 // Store and return the computed answer.

@@ -4,6 +4,7 @@
 
 //COMMAND LINE: csc /nologo /optimize- /debug- /w:0 bug.cs
 using System;
+
 public struct AA
 {
     static void Test(int param, __arglist)
@@ -16,5 +17,10 @@ public struct AA
             aa[param, Math.Min(0, 1)] = 0;
         } while ((new bool[2, 2])[param, param]);
     }
-    public static int Main() { Test(0, __arglist()); return 100; }
+
+    public static int Main()
+    {
+        Test(0, __arglist());
+        return 100;
+    }
 }

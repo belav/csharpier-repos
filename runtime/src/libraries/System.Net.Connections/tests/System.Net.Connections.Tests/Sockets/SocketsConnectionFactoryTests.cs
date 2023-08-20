@@ -28,7 +28,11 @@ namespace System.Net.Connections.Tests
 
             if (Socket.OSSupportsUnixDomainSockets)
             {
-                result.Add(new UnixDomainSocketEndPoint("/replaced/in/test"), SocketType.Stream, ProtocolType.Unspecified);
+                result.Add(
+                    new UnixDomainSocketEndPoint("/replaced/in/test"),
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                );
             }
 
             return result;
@@ -44,23 +48,43 @@ namespace System.Net.Connections.Tests
             return endPoint;
         }
 
-        private static Socket ValidateSocket(Connection connection, SocketType? socketType = null, ProtocolType? protocolType = null, AddressFamily? addressFamily = null)
+        private static Socket ValidateSocket(
+            Connection connection,
+            SocketType? socketType = null,
+            ProtocolType? protocolType = null,
+            AddressFamily? addressFamily = null
+        )
         {
             Assert.True(connection.ConnectionProperties.TryGet(out Socket socket));
             Assert.True(socket.Connected);
-            if (addressFamily != null) Assert.Equal(addressFamily, socket.AddressFamily);
-            if (socketType != null) Assert.Equal(socketType, socket.SocketType);
-            if (protocolType != null) Assert.Equal(protocolType, socket.ProtocolType);
+            if (addressFamily != null)
+                Assert.Equal(addressFamily, socket.AddressFamily);
+            if (socketType != null)
+                Assert.Equal(socketType, socket.SocketType);
+            if (protocolType != null)
+                Assert.Equal(protocolType, socket.ProtocolType);
             return socket;
         }
 
         [Theory]
         [MemberData(nameof(GetConnectData))]
-        public async Task Constructor3_ConnectAsync_Success_PropagatesConstructorArgumentsToSocket(EndPoint endPoint, SocketType socketType, ProtocolType protocolType)
+        public async Task Constructor3_ConnectAsync_Success_PropagatesConstructorArgumentsToSocket(
+            EndPoint endPoint,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
             endPoint = RecreateUdsEndpoint(endPoint);
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, endPoint, protocolType);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(endPoint.AddressFamily, socketType, protocolType);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                endPoint,
+                protocolType
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                endPoint.AddressFamily,
+                socketType,
+                protocolType
+            );
             using Connection connection = await factory.ConnectAsync(server.EndPoint);
 
             ValidateSocket(connection, socketType, protocolType, endPoint.AddressFamily);
@@ -69,19 +93,36 @@ namespace System.Net.Connections.Tests
         [Fact]
         public async Task Constructor2_ConnectAsync_Success_CreatesIPv6DualModeSocket()
         {
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.IPv6Loopback);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(SocketType.Stream, ProtocolType.Tcp);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                IPAddress.IPv6Loopback
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             using Connection connection = await factory.ConnectAsync(server.EndPoint);
 
-            Socket socket = ValidateSocket(connection, SocketType.Stream, ProtocolType.Tcp, AddressFamily.InterNetworkV6);
+            Socket socket = ValidateSocket(
+                connection,
+                SocketType.Stream,
+                ProtocolType.Tcp,
+                AddressFamily.InterNetworkV6
+            );
             Assert.True(socket.DualMode);
         }
 
         [Fact]
         public async Task ConnectAsync_Success_SocketNoDelayIsTrue()
         {
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.Loopback);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(SocketType.Stream, ProtocolType.Tcp);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                IPAddress.Loopback
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             using Connection connection = await factory.ConnectAsync(server.EndPoint);
 
             connection.ConnectionProperties.TryGet(out Socket socket);
@@ -91,24 +132,40 @@ namespace System.Net.Connections.Tests
         [Fact]
         public void ConnectAsync_NullEndpoint_ThrowsArgumentNullException()
         {
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(SocketType.Stream, ProtocolType.Tcp);
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             Assert.ThrowsAsync<ArgumentNullException>(() => factory.ConnectAsync(null).AsTask());
         }
 
         // TODO: On OSX and Windows7 connection failures seem to fail with unexpected SocketErrors that are mapped to NetworkError.Unknown. This needs an investigation.
         // Related: https://github.com/dotnet/runtime/pull/40565
-        public static bool PlatformHasReliableConnectionFailures => !PlatformDetection.IsOSX && !PlatformDetection.IsWindows7 && !PlatformDetection.IsFreeBSD;
+        public static bool PlatformHasReliableConnectionFailures =>
+            !PlatformDetection.IsOSX
+            && !PlatformDetection.IsWindows7
+            && !PlatformDetection.IsFreeBSD;
 
         [ConditionalFact(nameof(PlatformHasReliableConnectionFailures))]
         public async Task ConnectAsync_WhenRefused_ThrowsNetworkException()
         {
-            using Socket notListening = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using Socket notListening = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             int port = notListening.BindToAnonymousPort(IPAddress.Loopback);
             var endPoint = new IPEndPoint(IPAddress.Loopback, port);
 
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
-            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(() => factory.ConnectAsync(endPoint).AsTask());
+            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(
+                () => factory.ConnectAsync(endPoint).AsTask()
+            );
             Assert.Equal(NetworkError.ConnectionRefused, ex.NetworkError);
         }
 
@@ -116,13 +173,22 @@ namespace System.Net.Connections.Tests
         [ConditionalFact(nameof(PlatformHasReliableConnectionFailures))]
         public async Task ConnectAsync_WhenHostNotFound_ThrowsNetworkException()
         {
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
             // Unassigned as per https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
             int unusedPort = 8;
-            DnsEndPoint endPoint = new DnsEndPoint(System.Net.Test.Common.Configuration.Sockets.InvalidHost, unusedPort);
+            DnsEndPoint endPoint = new DnsEndPoint(
+                System.Net.Test.Common.Configuration.Sockets.InvalidHost,
+                unusedPort
+            );
 
-            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(() => factory.ConnectAsync(endPoint).AsTask());
+            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(
+                () => factory.ConnectAsync(endPoint).AsTask()
+            );
             Assert.Equal(NetworkError.HostNotFound, ex.NetworkError);
         }
 
@@ -130,48 +196,79 @@ namespace System.Net.Connections.Tests
         [ConditionalFact(nameof(PlatformHasReliableConnectionFailures))]
         public async Task ConnectAsync_TimedOut_ThrowsNetworkException()
         {
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
             IPEndPoint doesNotExist = new IPEndPoint(IPAddress.Parse("1.2.3.4"), 23);
 
-            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(() => factory.ConnectAsync(doesNotExist).AsTask());
+            NetworkException ex = await Assert.ThrowsAsync<NetworkException>(
+                () => factory.ConnectAsync(doesNotExist).AsTask()
+            );
             Assert.Equal(NetworkError.TimedOut, ex.NetworkError);
         }
 
         // On Windows, connection timeout takes 21 seconds. Abusing this behavior to test the cancellation logic
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)] 
+        [PlatformSpecific(TestPlatforms.Windows)]
         public async Task ConnectAsync_WhenCancelled_ThrowsTaskCancelledException()
         {
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(SocketType.Stream, ProtocolType.Tcp);
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             IPEndPoint doesNotExist = new IPEndPoint(IPAddress.Parse("1.2.3.4"), 23);
 
             CancellationTokenSource cts = new CancellationTokenSource();
             cts.CancelAfter(100);
 
-            OperationCanceledException ex = await Assert.ThrowsAsync<OperationCanceledException>(() => factory.ConnectAsync(doesNotExist, cancellationToken: cts.Token).AsTask());
+            OperationCanceledException ex = await Assert.ThrowsAsync<OperationCanceledException>(
+                () => factory.ConnectAsync(doesNotExist, cancellationToken: cts.Token).AsTask()
+            );
             Assert.Equal(cts.Token, ex.CancellationToken);
         }
 
         [Fact]
         public async Task ConnectAsync_WhenCancelledBeforeInvocation_ThrowsTaskCancelledException()
         {
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(SocketType.Stream, ProtocolType.Tcp);
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             IPEndPoint doesNotExist = new IPEndPoint(IPAddress.Parse("1.2.3.4"), 23);
 
             CancellationToken cancellationToken = new CancellationToken(true);
 
-            OperationCanceledException ex = await Assert.ThrowsAsync<OperationCanceledException>(() => factory.ConnectAsync(doesNotExist, cancellationToken: cancellationToken).AsTask());
+            OperationCanceledException ex = await Assert.ThrowsAsync<OperationCanceledException>(
+                () =>
+                    factory
+                        .ConnectAsync(doesNotExist, cancellationToken: cancellationToken)
+                        .AsTask()
+            );
             Assert.Equal(cancellationToken, ex.CancellationToken);
         }
 
         [Theory]
         [MemberData(nameof(GetConnectData))]
-        public async Task Connection_Stream_ReadWrite_Success(EndPoint endPoint, SocketType socketType, ProtocolType protocolType)
+        public async Task Connection_Stream_ReadWrite_Success(
+            EndPoint endPoint,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
             endPoint = RecreateUdsEndpoint(endPoint);
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, endPoint, protocolType);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(endPoint.AddressFamily, socketType, protocolType);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                endPoint,
+                protocolType
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                endPoint.AddressFamily,
+                socketType,
+                protocolType
+            );
 
             using Connection connection = await factory.ConnectAsync(server.EndPoint);
 
@@ -190,26 +287,49 @@ namespace System.Net.Connections.Tests
 
         [Theory]
         [MemberData(nameof(GetConnectData))]
-        public async Task Connection_EndpointsAreCorrect(EndPoint endPoint, SocketType socketType, ProtocolType protocolType)
+        public async Task Connection_EndpointsAreCorrect(
+            EndPoint endPoint,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
             endPoint = RecreateUdsEndpoint(endPoint);
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, endPoint, protocolType);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(endPoint.AddressFamily, socketType, protocolType);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                endPoint,
+                protocolType
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                endPoint.AddressFamily,
+                socketType,
+                protocolType
+            );
             using Connection connection = await factory.ConnectAsync(server.EndPoint);
 
             // Checking for .ToString() result, because UnixDomainSocketEndPoint equality doesn't seem to be implemented
-            Assert.Equal(server.EndPoint.ToString(), connection.RemoteEndPoint.ToString()); 
+            Assert.Equal(server.EndPoint.ToString(), connection.RemoteEndPoint.ToString());
             Assert.IsType(endPoint.GetType(), connection.LocalEndPoint);
         }
 
         [Theory]
         [MemberData(nameof(GetConnectData))]
-        public async Task Connection_Pipe_ReadWrite_Success(EndPoint endPoint, SocketType socketType, ProtocolType protocolType)
+        public async Task Connection_Pipe_ReadWrite_Success(
+            EndPoint endPoint,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
             endPoint = RecreateUdsEndpoint(endPoint);
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, endPoint, protocolType);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(endPoint.AddressFamily, socketType, protocolType);
-
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                endPoint,
+                protocolType
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                endPoint.AddressFamily,
+                socketType,
+                protocolType
+            );
 
             using Connection connection = await factory.ConnectAsync(server.EndPoint);
 
@@ -232,16 +352,26 @@ namespace System.Net.Connections.Tests
         [InlineData(true, true)]
         public async Task Connection_Dispose_ClosesSocket(bool disposeAsync, bool usePipe)
         {
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.Loopback);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                IPAddress.Loopback
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             Connection connection = await factory.ConnectAsync(server.EndPoint);
 
             Stream stream = usePipe ? null : connection.Stream;
-            if (usePipe) _ = connection.Pipe;
+            if (usePipe)
+                _ = connection.Pipe;
             connection.ConnectionProperties.TryGet(out Socket socket);
 
-            if (disposeAsync) await connection.DisposeAsync();
-            else connection.Dispose();
+            if (disposeAsync)
+                await connection.DisposeAsync();
+            else
+                connection.Dispose();
 
             Assert.False(socket.Connected);
 
@@ -259,10 +389,20 @@ namespace System.Net.Connections.Tests
         [InlineData(false, ConnectionCloseMethod.GracefulShutdown)]
         [InlineData(false, ConnectionCloseMethod.Immediate)]
         [InlineData(false, ConnectionCloseMethod.Abort)]
-        public async Task Connection_CloseAsync_ClosesSocket(bool usePipe, ConnectionCloseMethod method)
+        public async Task Connection_CloseAsync_ClosesSocket(
+            bool usePipe,
+            ConnectionCloseMethod method
+        )
         {
-            using var server = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.Loopback);
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using var server = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                IPAddress.Loopback
+            );
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             Connection connection = await factory.ConnectAsync(server.EndPoint);
 
             Stream stream = null;
@@ -295,9 +435,16 @@ namespace System.Net.Connections.Tests
         [OuterLoop("Might run long")]
         public async Task Connection_Pipe_ReadWrite_Integration(int totalLines)
         {
-            using SocketsConnectionFactory factory = new SocketsConnectionFactory(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            using SocketTestServer echoServer = SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.Loopback);
-            
+            using SocketsConnectionFactory factory = new SocketsConnectionFactory(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            using SocketTestServer echoServer = SocketTestServer.SocketTestServerFactory(
+                SocketImplementationType.Async,
+                IPAddress.Loopback
+            );
+
             Socket serverSocket = null;
             echoServer.Accepted += s => serverSocket = s;
 
@@ -306,32 +453,35 @@ namespace System.Net.Connections.Tests
             IDuplexPipe pipe = connection.Pipe;
 
             ConcurrentQueue<string> linesSent = new ConcurrentQueue<string>();
-            Task writerTask = Task.Factory.StartNew(async () =>
-            {
-                byte[] endl = Encoding.ASCII.GetBytes("\n");
-                StringBuilder expectedLine = new StringBuilder();
-
-                for (int i = 0; i < totalLines; i++)
+            Task writerTask = Task.Factory.StartNew(
+                async () =>
                 {
-                    int words = i % 10 + 1;
-                    for (int j = 0; j < words; j++)
+                    byte[] endl = Encoding.ASCII.GetBytes("\n");
+                    StringBuilder expectedLine = new StringBuilder();
+
+                    for (int i = 0; i < totalLines; i++)
                     {
-                        string word = Guid.NewGuid() + " ";
-                        Encoding.ASCII.GetBytes(word, pipe.Output);
-                        expectedLine.Append(word);
+                        int words = i % 10 + 1;
+                        for (int j = 0; j < words; j++)
+                        {
+                            string word = Guid.NewGuid() + " ";
+                            Encoding.ASCII.GetBytes(word, pipe.Output);
+                            expectedLine.Append(word);
+                        }
+                        linesSent.Enqueue(expectedLine.ToString());
+                        await pipe.Output.WriteAsync(endl);
+                        expectedLine.Clear();
                     }
-                    linesSent.Enqueue(expectedLine.ToString());
-                    await pipe.Output.WriteAsync(endl);
-                    expectedLine.Clear();
-                }
 
-                await pipe.Output.FlushAsync();
+                    await pipe.Output.FlushAsync();
 
-                // This will also trigger completion on the reader. TODO: Fix
-                // await pipe.Output.CompleteAsync();
-            }, TaskCreationOptions.LongRunning);
+                    // This will also trigger completion on the reader. TODO: Fix
+                    // await pipe.Output.CompleteAsync();
+                },
+                TaskCreationOptions.LongRunning
+            );
 
-            // The test server should echo the data sent to it                      
+            // The test server should echo the data sent to it
 
             PipeReader reader = pipe.Input;
 
@@ -345,7 +495,8 @@ namespace System.Net.Connections.Tests
                 lineIndex++;
 
                 // Received everything, shut down the server, so next read will complete:
-                if (lineIndex == totalLines) serverSocket.Shutdown(SocketShutdown.Both);
+                if (lineIndex == totalLines)
+                    serverSocket.Shutdown(SocketShutdown.Both);
             }
 
             while (true)
@@ -376,8 +527,7 @@ namespace System.Net.Connections.Tests
                             // Skip the line + the \n character (basically position)
                             buffer = buffer.Slice(buffer.GetPosition(1, position.Value));
                         }
-                    }
-                    while (position != null);
+                    } while (position != null);
 
                     // Tell the PipeReader how much of the buffer we have consumed
                     reader.AdvanceTo(buffer.Start, buffer.End);
@@ -386,7 +536,6 @@ namespace System.Net.Connections.Tests
                 {
                     // terminate
                 }
-
             }
 
             // Mark the PipeReader as complete

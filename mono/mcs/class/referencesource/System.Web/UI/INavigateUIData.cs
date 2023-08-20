@@ -4,39 +4,25 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     /// <devdoc>
     ///     Provides a strongly-typed way to get navigation UI-related properties
     /// </devdoc>
-    public interface INavigateUIData {
-
-        string Description {
-            get;
-        }
-        
+    public interface INavigateUIData
+    {
+        string Description { get; }
 
         /// <devdoc>
         /// </devdoc>
-        string Name {
-            get;
-        }
-
+        string Name { get; }
 
         /// <devdoc>
         /// </devdoc>
-        string NavigateUrl {
-            get;
-        }
-
+        string NavigateUrl { get; }
 
         /// <devdoc>
         /// </devdoc>
-        string Value {
-            get;
-        }
-
+        string Value { get; }
     }
 }
-
-

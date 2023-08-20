@@ -18,13 +18,13 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolSearchOptionsProvider()
-        {
-        }
+        public SymbolSearchOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            SymbolSearchOptions.Enabled,
-            SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
-            SymbolSearchOptions.SuggestForTypesInNuGetPackages);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                SymbolSearchOptions.Enabled,
+                SymbolSearchOptions.SuggestForTypesInReferenceAssemblies,
+                SymbolSearchOptions.SuggestForTypesInNuGetPackages
+            );
     }
 }

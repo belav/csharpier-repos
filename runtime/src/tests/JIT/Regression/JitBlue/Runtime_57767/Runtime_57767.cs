@@ -5,17 +5,18 @@
 // Run on .NET 6.0.0-dev on X64 Windows
 // Seed: 14701429021631883067
 // Reduced from 466.6 KiB to 0.7 KiB in 02:59:01
-// 
+//
 // Assert failure(PID 32388 [0x00007e84], Thread: 36304 [0x8dd0]): Assertion failed 'offset != BAD_STK_OFFS' in 'Program:M101(bool)' during 'Generate code' (IL size 78)
-// 
+//
 //     File: D:\dev\dotnet\runtime\src\coreclr\jit\scopeinfo.cpp Line: 278
 //     Image: D:\dev\Fuzzlyn\Fuzzlyn\publish\windows-x64\Fuzzlyn.exe
-// 
-// 
+//
+//
 public class Program
 {
     internal static sbyte s_4;
     internal static sbyte[] s_28;
+
     public static int Main()
     {
         M101(false);

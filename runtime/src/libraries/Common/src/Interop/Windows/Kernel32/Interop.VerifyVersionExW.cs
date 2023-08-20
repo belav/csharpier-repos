@@ -15,6 +15,10 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool VerifyVersionInfoW(ref OSVERSIONINFOEX lpVersionInfo, uint dwTypeMask, ulong dwlConditionMask);
+        internal static partial bool VerifyVersionInfoW(
+            ref OSVERSIONINFOEX lpVersionInfo,
+            uint dwTypeMask,
+            ulong dwlConditionMask
+        );
     }
 }

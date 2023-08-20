@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
     [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
     public class ConvertToRegularStringToRawStringString_FixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertRegularStringToRawStringCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertRegularStringToRawStringCodeRefactoringProvider();
 
         [Fact]
         public async Task FixAllInDocument_SingleLine()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -63,7 +65,7 @@ where x2 > 0
 select x2"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -102,14 +104,15 @@ from x2 in y2
 where x2 > 0
 select x2"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument_MultiLine()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -149,7 +152,7 @@ where x2 > 0
 select x2"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -206,14 +209,15 @@ select x2"";
             select x2
             """""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument_MultiLineWithoutLeadingWhitespace()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -253,7 +257,7 @@ where x2 > 0
 select x2"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -296,14 +300,16 @@ bar"";
             select x2
             """""";
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task FixAllInProject()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -340,7 +346,7 @@ class Program3
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 class Program1
@@ -375,14 +381,15 @@ class Program3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task FixAllInSolution()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -419,7 +426,7 @@ class Program3
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 class Program1
@@ -454,14 +461,15 @@ class Program3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingMember()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -484,7 +492,7 @@ class C2
         var singleLine2 = @""goo""""bar"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -506,14 +514,15 @@ class C2
         var singleLine1 = ""a"";
         var singleLine2 = @""goo""""bar"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingType()
         {
             await TestInRegularAndScriptAsync(
-@"partial class C
+                @"partial class C
 {
     void M()
     {
@@ -545,7 +554,7 @@ partial class C
         var singleLine2 = @""goo""""bar"";
     }
 }",
-@"partial class C
+                @"partial class C
 {
     void M()
     {
@@ -576,14 +585,15 @@ partial class C
         var singleLine1 = """"""a"""""";
         var singleLine2 = """"""goo""bar"""""";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task FixAllInContainingType_AcrossFiles()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -635,7 +645,7 @@ class Program3
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 partial class Program1
@@ -685,7 +695,8 @@ class Program3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
     }
 }

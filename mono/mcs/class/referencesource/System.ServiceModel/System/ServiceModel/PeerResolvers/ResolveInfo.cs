@@ -28,6 +28,7 @@ namespace System.ServiceModel.PeerResolvers
                 this.MeshId = meshId;
                 this.MaxAddresses = maxAddresses;
             }
+
             public ResolveInfoDC() { }
         }
 
@@ -65,4 +66,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

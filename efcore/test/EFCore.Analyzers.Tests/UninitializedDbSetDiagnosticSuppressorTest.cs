@@ -11,7 +11,8 @@ public class UninitializedDbSetDiagnosticSuppressorTest : DiagnosticAnalyzerTest
     [ConditionalFact]
     public async Task DbSet_property_on_DbContext_is_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public Microsoft.EntityFrameworkCore.DbSet<Blog> Blogs { get; set; }
@@ -31,7 +32,8 @@ public class Blog
     [ConditionalFact]
     public async Task Non_public_DbSet_property_on_DbContext_is_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     private Microsoft.EntityFrameworkCore.DbSet<Blog> Blogs { get; set; }
@@ -51,7 +53,8 @@ public class Blog
     [ConditionalFact]
     public async Task DbSet_property_with_non_public_setter_on_DbContext_is_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public Microsoft.EntityFrameworkCore.DbSet<Blog> Blogs { get; private set; }
@@ -71,7 +74,8 @@ public class Blog
     [ConditionalFact]
     public async Task DbSet_property_without_setter_on_DbContext_is_not_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public Microsoft.EntityFrameworkCore.DbSet<Blog> Blogs { get; }
@@ -91,7 +95,8 @@ public class Blog
     [ConditionalFact]
     public async Task Static_DbSet_property_on_DbContext_is_not_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public static Microsoft.EntityFrameworkCore.DbSet<Blog> Blogs { get; set; }
@@ -111,7 +116,8 @@ public class Blog
     [ConditionalFact]
     public async Task Non_DbSet_property_on_DbContext_is_not_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public string Name { get; set; }
@@ -126,7 +132,8 @@ public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
     [ConditionalFact]
     public async Task DbSet_property_on_non_DbContext_is_not_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class Foo
 {
     public Microsoft.EntityFrameworkCore.DbSet<Blog> Blogs { get; set; }
@@ -146,7 +153,8 @@ public class Blog
     [ConditionalFact]
     public async Task DbSet_property_on_DbContext_with_ctor_is_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public MyDbContext() {}
@@ -168,7 +176,8 @@ public class Blog
     [ConditionalFact]
     public async Task DbSet_property_on_DbContext_with_ctors_is_suppressed()
     {
-        var source = @"
+        var source =
+            @"
 public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public MyDbContext() {}
@@ -191,12 +200,13 @@ public class Blog
             {
                 Assert.Equal("CS8618", diagnostic.Id);
                 Assert.True(diagnostic.IsSuppressed);
-            });
+            }
+        );
     }
 
-    protected Task<Diagnostic[]> GetDiagnosticsFullSourceAsync(string source)
-        => base.GetDiagnosticsFullSourceAsync(source, analyzerDiagnosticsOnly: false);
+    protected Task<Diagnostic[]> GetDiagnosticsFullSourceAsync(string source) =>
+        base.GetDiagnosticsFullSourceAsync(source, analyzerDiagnosticsOnly: false);
 
-    protected override DiagnosticAnalyzer CreateDiagnosticAnalyzer()
-        => new UninitializedDbSetDiagnosticSuppressor();
+    protected override DiagnosticAnalyzer CreateDiagnosticAnalyzer() =>
+        new UninitializedDbSetDiagnosticSuppressor();
 }

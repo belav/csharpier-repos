@@ -7,7 +7,9 @@ internal class Sample4
 {
     private static int s_s = 1;
 
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static void func(object o1, object o2)
     {
         o1.GetType();

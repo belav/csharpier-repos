@@ -17,7 +17,7 @@ namespace System.Drawing.Printing
         /// Initializes a new instance of the <see cref='InvalidPrinterException'/> class.
         /// </summary>
         public InvalidPrinterException(PrinterSettings settings)
-        : base(GenerateMessage(settings))
+            : base(GenerateMessage(settings))
         {
             _settings = settings;
         }
@@ -32,11 +32,17 @@ namespace System.Drawing.Printing
             {
                 try
                 {
-                    return SR.Format(SR.InvalidPrinterException_InvalidPrinter, settings.PrinterName);
+                    return SR.Format(
+                        SR.InvalidPrinterException_InvalidPrinter,
+                        settings.PrinterName
+                    );
                 }
                 catch (SecurityException)
                 {
-                    return SR.Format(SR.InvalidPrinterException_InvalidPrinter, SR.CantTellPrinterName);
+                    return SR.Format(
+                        SR.InvalidPrinterException_InvalidPrinter,
+                        SR.CantTellPrinterName
+                    );
                 }
             }
         }

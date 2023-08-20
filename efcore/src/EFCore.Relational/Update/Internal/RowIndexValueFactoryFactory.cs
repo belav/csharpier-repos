@@ -19,17 +19,19 @@ public class RowIndexValueFactoryFactory : IRowIndexValueFactoryFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRowIndexValueFactory Create(ITableIndex index)
-        => index.Columns.Count == 1
-            ? (IRowIndexValueFactory)_createMethod
-                .MakeGenericMethod(index.Columns.First().ProviderClrType)
-                .Invoke(null, new object[] { index })!
+    public virtual IRowIndexValueFactory Create(ITableIndex index) =>
+        index.Columns.Count == 1
+            ? (IRowIndexValueFactory)
+                _createMethod
+                    .MakeGenericMethod(index.Columns.First().ProviderClrType)
+                    .Invoke(null, new object[] { index })!
             : new CompositeRowIndexValueFactory(index);
 
-    private static readonly MethodInfo _createMethod = typeof(RowIndexValueFactoryFactory).GetTypeInfo()
+    private static readonly MethodInfo _createMethod = typeof(RowIndexValueFactoryFactory)
+        .GetTypeInfo()
         .GetDeclaredMethod(nameof(CreateSimple))!;
 
     [UsedImplicitly]
-    private static IRowIndexValueFactory<TKey> CreateSimple<TKey>(ITableIndex index)
-        => new SimpleRowIndexValueFactory<TKey>(index);
+    private static IRowIndexValueFactory<TKey> CreateSimple<TKey>(ITableIndex index) =>
+        new SimpleRowIndexValueFactory<TKey>(index);
 }

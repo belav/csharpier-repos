@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            string js = "[2.8144, 2.8144, 2.6962, 2.6321, 2.5693, 2.5243, 2.5087, 2.5504, 2.535, 2.5506, 2.532, 2.491, 2.3533]";
+            string js =
+                "[2.8144, 2.8144, 2.6962, 2.6321, 2.5693, 2.5243, 2.5087, 2.5504, 2.535, 2.5506, 2.532, 2.491, 2.3533]";
             double[] values = (double[])JsonConvert.DeserializeObject(js, typeof(double[]));
 
             double value = values[7];

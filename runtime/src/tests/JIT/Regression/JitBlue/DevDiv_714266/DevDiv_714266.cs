@@ -8,16 +8,13 @@ using System.Runtime.CompilerServices;
 // Based on DevDiv_714266, the issue reporoduced with JitStressRegs=0x1.
 // `minRegCandidateCount` for `RefTypeUpperVectorSaveDef` did not count one temporary register
 // that it used for the save. So if we had a call that did not require any registers (no defs/uses)
-// then we set `minRegCandidateCount = 0`for `RefTypeUpperVectorSaveDef` `refPosition` 
+// then we set `minRegCandidateCount = 0`for `RefTypeUpperVectorSaveDef` `refPosition`
 // and was not able to find a register for do the saving.
 
 public class DevDiv_714266
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-
-    public static void CallWithoutUsesAndDefs()
-    {
-    }
+    public static void CallWithoutUsesAndDefs() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void MethodWithManyLiveVectors()
@@ -37,19 +34,7 @@ public class DevDiv_714266
 
         CallWithoutUsesAndDefs();
 
-        GC.KeepAlive(new object[10]
-        {
-            v1,
-            v2,
-            v3,
-            v4,
-            v5,
-            v6,
-            v7,
-            v8,
-            v9,
-            v0
-        });
+        GC.KeepAlive(new object[10] { v1, v2, v3, v4, v5, v6, v7, v8, v9, v0 });
     }
 
     public static int Main()
@@ -57,5 +42,4 @@ public class DevDiv_714266
         MethodWithManyLiveVectors();
         return 100;
     }
-
 }

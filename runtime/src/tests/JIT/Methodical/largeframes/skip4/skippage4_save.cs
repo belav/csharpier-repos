@@ -11,12 +11,12 @@ using System.Runtime.CompilerServices;
 
 namespace BigFrames
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct Struct65500ref
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(65496)]
         public Object o1;
     }

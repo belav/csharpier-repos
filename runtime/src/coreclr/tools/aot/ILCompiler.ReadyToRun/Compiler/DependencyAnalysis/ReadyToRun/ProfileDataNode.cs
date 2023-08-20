@@ -43,16 +43,17 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             get
             {
-                int offset = 0
+                int offset =
+                    0
                     // sizeof(CORCOMPILE_METHOD_PROFILE_LIST)
-                    + _targetDetails.PointerSize                // (CORCOMPILE_METHOD_PROFILE_LIST::next)
-                                                                // sizeof(CORBBTPROF_METHOD_HEADER)
-                    + sizeof(int)                               // (CORBBTPROF_METHOD_HEADER::size)
-                    + sizeof(int)                               // (CORBBTPROF_METHOD_HEADER::cDetail)
-                                                                // Next field is a CORBBT_METHOD_INFO struct   (CORBBTPROF_METHOD_HEADER::method)
-                     + sizeof(int)                               // (CORBBT_METHOD_INFO::token)
-                     + sizeof(int)                               // (CORBBT_METHOD_INFO::ILSize)
-                     + sizeof(int);                              // (CORBBT_METHOD_INFO::cBlock)
+                    + _targetDetails.PointerSize // (CORCOMPILE_METHOD_PROFILE_LIST::next)
+                    // sizeof(CORBBTPROF_METHOD_HEADER)
+                    + sizeof(int) // (CORBBTPROF_METHOD_HEADER::size)
+                    + sizeof(int) // (CORBBTPROF_METHOD_HEADER::cDetail)
+                    // Next field is a CORBBT_METHOD_INFO struct   (CORBBTPROF_METHOD_HEADER::method)
+                    + sizeof(int) // (CORBBT_METHOD_INFO::token)
+                    + sizeof(int) // (CORBBT_METHOD_INFO::ILSize)
+                    + sizeof(int); // (CORBBT_METHOD_INFO::cBlock)
                 // At this offset lies the block counts
                 return offset;
             }
@@ -80,9 +81,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             factory.ProfileDataSection.AddEmbeddedObject(this);
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
-            ProfileDataNode nextElementInList = ((ProfileDataSectionNode)ContainingNode).NextElementToEncode;
+            ProfileDataNode nextElementInList = (
+                (ProfileDataSectionNode)ContainingNode
+            ).NextElementToEncode;
             if (nextElementInList != null)
                 dataBuilder.EmitPointerReloc(nextElementInList, -OffsetFromStartOfObjectToSymbol);
             else
@@ -103,7 +110,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             dataBuilder.EmitInt(_blockCount); // CORBBT_METHOD_INFO::cBlock
             int sizeOfCORBBTPROF_METHOD_HEADER = dataBuilder.CountBytes - startOffset;
 
-            Debug.Assert(sizeOfCORBBTPROF_METHOD_HEADER == (OffsetFromStartOfObjectToSymbol - _targetDetails.PointerSize));
+            Debug.Assert(
+                sizeOfCORBBTPROF_METHOD_HEADER
+                    == (OffsetFromStartOfObjectToSymbol - _targetDetails.PointerSize)
+            );
             dataBuilder.EmitInt(reservation, sizeOfCORBBTPROF_METHOD_HEADER + _profileData.Length);
 
             dataBuilder.EmitBytes(_profileData);

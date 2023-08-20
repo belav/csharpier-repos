@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IReadOnlyKey" />.
     /// </summary>
     [Obsolete("Use IReadOnlyKey")]
-    public static class KeyExtensions
-    {
-    }
+    public static class KeyExtensions { }
 }

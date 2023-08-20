@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Xml;
     using System.Configuration;
@@ -47,46 +48,57 @@ namespace System.Web.Configuration {
         */
 
     /// <devdoc>
-    ///     <para> Adds Authorization specific information to this section.        
+    ///     <para> Adds Authorization specific information to this section.
     ///     </para>
     /// </devdoc>
-    public sealed class AuthorizationSection : ConfigurationSection {
+    public sealed class AuthorizationSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propRules =
-            new ConfigurationProperty(null, typeof(AuthorizationRuleCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propRules = new ConfigurationProperty(
+            null,
+            typeof(AuthorizationRuleCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
         private bool _EveryoneAllowed = false;
-        internal bool EveryoneAllowed { get { return _EveryoneAllowed; } }
+        internal bool EveryoneAllowed
+        {
+            get { return _EveryoneAllowed; }
+        }
 
-        static AuthorizationSection() {
+        static AuthorizationSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propRules);
         }
 
-        public AuthorizationSection() {
-        }
+        public AuthorizationSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public AuthorizationRuleCollection Rules {
-            get {
-                return (AuthorizationRuleCollection)base[_propRules];
+        public AuthorizationRuleCollection Rules
+        {
+            get { return (AuthorizationRuleCollection)base[_propRules]; }
+        }
+
+        protected override void PostDeserialize()
+        {
+            if (Rules.Count > 0)
+            {
+                _EveryoneAllowed = (
+                    Rules[0].Action == AuthorizationRuleAction.Allow && Rules[0].Everyone
+                );
             }
         }
 
-        protected override void PostDeserialize() {
-            if (Rules.Count > 0) {
-                _EveryoneAllowed = (Rules[0].Action == AuthorizationRuleAction.Allow && Rules[0].Everyone);
-            }
-        }
-
-        internal bool IsUserAllowed(IPrincipal user, String verb) {
+        internal bool IsUserAllowed(IPrincipal user, String verb)
+        {
             return Rules.IsUserAllowed(user, verb);
         }
     } // class AuthorizationSection

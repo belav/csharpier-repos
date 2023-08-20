@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,9 +35,7 @@ namespace Castle.DynamicProxy
         ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class with new <see cref = "ModuleScope" />.
         /// </summary>
         public DefaultProxyBuilder()
-            : this(new ModuleScope())
-        {
-        }
+            : this(new ModuleScope()) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class.
@@ -59,59 +57,117 @@ namespace Castle.DynamicProxy
             get { return scope; }
         }
 
-        public Type CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+        public Type CreateClassProxyType(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        )
         {
             AssertValidType(classToProxy, nameof(classToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
 
-            var generator = new ClassProxyGenerator(scope, classToProxy, additionalInterfacesToProxy, options) { Logger = logger };
+            var generator = new ClassProxyGenerator(
+                scope,
+                classToProxy,
+                additionalInterfacesToProxy,
+                options
+            )
+            {
+                Logger = logger
+            };
             return generator.GetProxyType();
         }
 
-        public Type CreateClassProxyTypeWithTarget(Type classToProxy, Type[] additionalInterfacesToProxy,
-                                                   ProxyGenerationOptions options)
+        public Type CreateClassProxyTypeWithTarget(
+            Type classToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        )
         {
             AssertValidType(classToProxy, nameof(classToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
 
-            var generator = new ClassProxyWithTargetGenerator(scope, classToProxy, additionalInterfacesToProxy, options)
-            { Logger = logger };
+            var generator = new ClassProxyWithTargetGenerator(
+                scope,
+                classToProxy,
+                additionalInterfacesToProxy,
+                options
+            )
+            {
+                Logger = logger
+            };
             return generator.GetProxyType();
         }
 
-        public Type CreateInterfaceProxyTypeWithTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                       Type targetType,
-                                                       ProxyGenerationOptions options)
+        public Type CreateInterfaceProxyTypeWithTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            Type targetType,
+            ProxyGenerationOptions options
+        )
         {
             AssertValidType(interfaceToProxy, nameof(interfaceToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
 
-            var generator = new InterfaceProxyWithTargetGenerator(scope, interfaceToProxy, additionalInterfacesToProxy, targetType, options) { Logger = logger };
+            var generator = new InterfaceProxyWithTargetGenerator(
+                scope,
+                interfaceToProxy,
+                additionalInterfacesToProxy,
+                targetType,
+                options
+            )
+            {
+                Logger = logger
+            };
             return generator.GetProxyType();
         }
 
-        public Type CreateInterfaceProxyTypeWithTargetInterface(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                                ProxyGenerationOptions options)
+        public Type CreateInterfaceProxyTypeWithTargetInterface(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        )
         {
             AssertValidType(interfaceToProxy, nameof(interfaceToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
 
-            var generator = new InterfaceProxyWithTargetInterfaceGenerator(scope, interfaceToProxy, additionalInterfacesToProxy, interfaceToProxy, options) { Logger = logger };
+            var generator = new InterfaceProxyWithTargetInterfaceGenerator(
+                scope,
+                interfaceToProxy,
+                additionalInterfacesToProxy,
+                interfaceToProxy,
+                options
+            )
+            {
+                Logger = logger
+            };
             return generator.GetProxyType();
         }
 
-        public Type CreateInterfaceProxyTypeWithoutTarget(Type interfaceToProxy, Type[] additionalInterfacesToProxy,
-                                                          ProxyGenerationOptions options)
+        public Type CreateInterfaceProxyTypeWithoutTarget(
+            Type interfaceToProxy,
+            Type[] additionalInterfacesToProxy,
+            ProxyGenerationOptions options
+        )
         {
             AssertValidType(interfaceToProxy, nameof(interfaceToProxy));
             AssertValidTypes(additionalInterfacesToProxy, nameof(additionalInterfacesToProxy));
             AssertValidMixins(options, nameof(options));
 
-            var generator = new InterfaceProxyWithoutTargetGenerator(scope, interfaceToProxy, additionalInterfacesToProxy, typeof(object), options) { Logger = logger };
+            var generator = new InterfaceProxyWithoutTargetGenerator(
+                scope,
+                interfaceToProxy,
+                additionalInterfacesToProxy,
+                typeof(object),
+                options
+            )
+            {
+                Logger = logger
+            };
             return generator.GetProxyType();
         }
 
@@ -123,7 +179,7 @@ namespace Castle.DynamicProxy
             }
             catch (InvalidOperationException ex)
             {
-                throw new ArgumentException(ex.Message, paramName, ex.InnerException);  // convert to more suitable exception type
+                throw new ArgumentException(ex.Message, paramName, ex.InnerException); // convert to more suitable exception type
             }
         }
 
@@ -138,11 +194,15 @@ namespace Castle.DynamicProxy
             {
                 throw new ArgumentException(
                     $"Can not create proxy for type {target.GetBestName()} because type {type.GetBestName()} is an open generic type.",
-                    paramName);
+                    paramName
+                );
             }
             if (ProxyUtil.IsAccessibleType(type) == false)
             {
-                throw new ArgumentException(ExceptionMessageBuilder.CreateMessageForInaccessibleType(type, target), paramName);
+                throw new ArgumentException(
+                    ExceptionMessageBuilder.CreateMessageForInaccessibleType(type, target),
+                    paramName
+                );
             }
             foreach (var typeArgument in type.GetGenericArguments())
             {

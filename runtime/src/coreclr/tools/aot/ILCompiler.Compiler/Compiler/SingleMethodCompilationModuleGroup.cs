@@ -22,10 +22,7 @@ namespace ILCompiler
 
         public override bool IsSingleFileCompilation
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
@@ -76,10 +73,7 @@ namespace ILCompiler
 
         public override bool CanHaveReferenceThroughImportTable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool AllowInstanceMethodOptimization(MethodDesc method)

@@ -36,7 +36,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (!Contains(site))
                     List[index] = site;
                 else
-                    throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, site), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.AlreadyExistingInCollection, site),
+                        nameof(value)
+                    );
             }
         }
 
@@ -50,7 +53,10 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!Contains(site))
                 return List.Add(site);
             else
-                throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, site), nameof(site));
+                throw new ArgumentException(
+                    SR.Format(SR.AlreadyExistingInCollection, site),
+                    nameof(site)
+                );
         }
 
         public void AddRange(ActiveDirectorySite[] sites)
@@ -77,12 +83,22 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!site.existing)
                 throw new InvalidOperationException(SR.Format(SR.SiteNotCommitted, site.Name));
 
-            string dn = (string)PropertyManager.GetPropertyValue(site.context, site.cachedEntry, PropertyManager.DistinguishedName)!;
+            string dn = (string)
+                PropertyManager.GetPropertyValue(
+                    site.context,
+                    site.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ActiveDirectorySite tmp = (ActiveDirectorySite)InnerList[i]!;
-                string tmpDn = (string)PropertyManager.GetPropertyValue(tmp.context, tmp.cachedEntry, PropertyManager.DistinguishedName)!;
+                string tmpDn = (string)
+                    PropertyManager.GetPropertyValue(
+                        tmp.context,
+                        tmp.cachedEntry,
+                        PropertyManager.DistinguishedName
+                    )!;
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -104,12 +120,22 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!site.existing)
                 throw new InvalidOperationException(SR.Format(SR.SiteNotCommitted, site.Name));
 
-            string dn = (string)PropertyManager.GetPropertyValue(site.context, site.cachedEntry, PropertyManager.DistinguishedName)!;
+            string dn = (string)
+                PropertyManager.GetPropertyValue(
+                    site.context,
+                    site.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ActiveDirectorySite tmp = (ActiveDirectorySite)InnerList[i]!;
-                string tmpDn = (string)PropertyManager.GetPropertyValue(tmp.context, tmp.cachedEntry, PropertyManager.DistinguishedName)!;
+                string tmpDn = (string)
+                    PropertyManager.GetPropertyValue(
+                        tmp.context,
+                        tmp.cachedEntry,
+                        PropertyManager.DistinguishedName
+                    )!;
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -129,7 +155,10 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!Contains(site))
                 List.Insert(index, site);
             else
-                throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, site), nameof(site));
+                throw new ArgumentException(
+                    SR.Format(SR.AlreadyExistingInCollection, site),
+                    nameof(site)
+                );
         }
 
         public void Remove(ActiveDirectorySite site)
@@ -139,12 +168,22 @@ namespace System.DirectoryServices.ActiveDirectory
             if (!site.existing)
                 throw new InvalidOperationException(SR.Format(SR.SiteNotCommitted, site.Name));
 
-            string dn = (string)PropertyManager.GetPropertyValue(site.context, site.cachedEntry, PropertyManager.DistinguishedName)!;
+            string dn = (string)
+                PropertyManager.GetPropertyValue(
+                    site.context,
+                    site.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
 
             for (int i = 0; i < InnerList.Count; i++)
             {
                 ActiveDirectorySite tmp = (ActiveDirectorySite)InnerList[i]!;
-                string tmpDn = (string)PropertyManager.GetPropertyValue(tmp.context, tmp.cachedEntry, PropertyManager.DistinguishedName)!;
+                string tmpDn = (string)
+                    PropertyManager.GetPropertyValue(
+                        tmp.context,
+                        tmp.cachedEntry,
+                        PropertyManager.DistinguishedName
+                    )!;
 
                 if (Utils.Compare(tmpDn, dn) == 0)
                 {
@@ -181,7 +220,12 @@ namespace System.DirectoryServices.ActiveDirectory
             if (initialized)
             {
                 ActiveDirectorySite site = (ActiveDirectorySite)value;
-                string dn = (string)PropertyManager.GetPropertyValue(site.context, site.cachedEntry, PropertyManager.DistinguishedName)!;
+                string dn = (string)
+                    PropertyManager.GetPropertyValue(
+                        site.context,
+                        site.cachedEntry,
+                        PropertyManager.DistinguishedName
+                    )!;
                 try
                 {
                     de!.Properties["siteList"].Add(dn);
@@ -198,7 +242,12 @@ namespace System.DirectoryServices.ActiveDirectory
 #pragma warning restore CS8765
         {
             ActiveDirectorySite site = (ActiveDirectorySite)value;
-            string dn = (string)PropertyManager.GetPropertyValue(site.context, site.cachedEntry, PropertyManager.DistinguishedName)!;
+            string dn = (string)
+                PropertyManager.GetPropertyValue(
+                    site.context,
+                    site.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
             try
             {
                 de!.Properties["siteList"].Remove(dn);
@@ -214,7 +263,12 @@ namespace System.DirectoryServices.ActiveDirectory
 #pragma warning restore CS8765
         {
             ActiveDirectorySite newsite = (ActiveDirectorySite)newValue;
-            string newdn = (string)PropertyManager.GetPropertyValue(newsite.context, newsite.cachedEntry, PropertyManager.DistinguishedName)!;
+            string newdn = (string)
+                PropertyManager.GetPropertyValue(
+                    newsite.context,
+                    newsite.cachedEntry,
+                    PropertyManager.DistinguishedName
+                )!;
             try
             {
                 de!.Properties["siteList"][index] = newdn;
@@ -233,7 +287,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentException(null, nameof(value));
 
             if (!((ActiveDirectorySite)value).existing)
-                throw new InvalidOperationException(SR.Format(SR.SiteNotCommitted, ((ActiveDirectorySite)value).Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SiteNotCommitted, ((ActiveDirectorySite)value).Name)
+                );
         }
     }
 }

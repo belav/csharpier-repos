@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig
         public const string DefaultCSharpExtensionWithoutDot = "cs";
         public const string DefaultVisualBasicPath = "/" + DefaultVisualBasicExtension;
         public const string DefaultVisualBasicSplat = "*" + DefaultVisualBasicExtension;
-        public const string DefaultVisualBasicExtension = "." + DefaultVisualBasicExtensionWithoutDot;
+        public const string DefaultVisualBasicExtension =
+            "." + DefaultVisualBasicExtensionWithoutDot;
         public const string DefaultVisualBasicExtensionWithoutDot = "vb";
     }
 }

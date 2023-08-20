@@ -10,11 +10,11 @@ internal sealed class StaticConfigurationManager : IConfigurationManager<OpenIdC
 {
     private readonly Task<OpenIdConnectConfiguration> _configuration;
 
-    public StaticConfigurationManager(OpenIdConnectConfiguration configuration) => _configuration = Task.FromResult(configuration);
+    public StaticConfigurationManager(OpenIdConnectConfiguration configuration) =>
+        _configuration = Task.FromResult(configuration);
 
-    public Task<OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel) => _configuration;
+    public Task<OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel) =>
+        _configuration;
 
-    public void RequestRefresh()
-    {
-    }
+    public void RequestRefresh() { }
 }

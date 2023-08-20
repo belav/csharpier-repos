@@ -16,28 +16,37 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
     public static readonly string RazorPageDocumentKind = "mvc.1.0.razor-page";
     public static readonly string RouteTemplateKey = "RouteTemplate";
 
-    private static readonly RazorProjectEngine LeadingDirectiveParsingEngine = RazorProjectEngine.Create(
-        RazorConfiguration.Create(RazorLanguageVersion.Version_2_1, "leading-directive-parser", Array.Empty<RazorExtension>()),
-        RazorProjectFileSystem.Create("/"),
-        builder =>
-        {
-            for (var i = builder.Phases.Count - 1; i >= 0; i--)
+    private static readonly RazorProjectEngine LeadingDirectiveParsingEngine =
+        RazorProjectEngine.Create(
+            RazorConfiguration.Create(
+                RazorLanguageVersion.Version_2_1,
+                "leading-directive-parser",
+                Array.Empty<RazorExtension>()
+            ),
+            RazorProjectFileSystem.Create("/"),
+            builder =>
             {
-                var phase = builder.Phases[i];
-                builder.Phases.RemoveAt(i);
-                if (phase is IRazorDocumentClassifierPhase)
+                for (var i = builder.Phases.Count - 1; i >= 0; i--)
                 {
-                    break;
+                    var phase = builder.Phases[i];
+                    builder.Phases.RemoveAt(i);
+                    if (phase is IRazorDocumentClassifierPhase)
+                    {
+                        break;
+                    }
                 }
-            }
 
-            RazorExtensions.Register(builder);
-            builder.Features.Add(new LeadingDirectiveParserOptionsFeature());
-        });
+                RazorExtensions.Register(builder);
+                builder.Features.Add(new LeadingDirectiveParserOptionsFeature());
+            }
+        );
 
     protected override string DocumentKind => RazorPageDocumentKind;
 
-    protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override bool IsMatch(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         return PageDirective.TryGetPageDirective(documentNode, out var pageDirective);
     }
@@ -46,7 +55,8 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
         RazorCodeDocument codeDocument,
         NamespaceDeclarationIntermediateNode @namespace,
         ClassDeclarationIntermediateNode @class,
-        MethodDeclarationIntermediateNode method)
+        MethodDeclarationIntermediateNode method
+    )
     {
         base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
@@ -85,7 +95,11 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
         AddRouteTemplateMetadataAttribute(@namespace, @class, pageDirective);
     }
 
-    private static void AddRouteTemplateMetadataAttribute(NamespaceDeclarationIntermediateNode @namespace, ClassDeclarationIntermediateNode @class, PageDirective pageDirective)
+    private static void AddRouteTemplateMetadataAttribute(
+        NamespaceDeclarationIntermediateNode @namespace,
+        ClassDeclarationIntermediateNode @class,
+        PageDirective pageDirective
+    )
     {
         if (string.IsNullOrEmpty(pageDirective.RouteTemplate))
         {
@@ -107,14 +121,20 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
         @namespace.Children.Insert(classIndex, metadataAttributeNode);
     }
 
-    private void EnsureValidPageDirective(RazorCodeDocument codeDocument, PageDirective pageDirective)
+    private void EnsureValidPageDirective(
+        RazorCodeDocument codeDocument,
+        PageDirective pageDirective
+    )
     {
         Debug.Assert(pageDirective != null);
 
         if (pageDirective.DirectiveNode.IsImported())
         {
             pageDirective.DirectiveNode.Diagnostics.Add(
-                RazorExtensionsDiagnosticFactory.CreatePageDirective_CannotBeImported(pageDirective.DirectiveNode.Source.Value));
+                RazorExtensionsDiagnosticFactory.CreatePageDirective_CannotBeImported(
+                    pageDirective.DirectiveNode.Source.Value
+                )
+            );
         }
         else
         {
@@ -125,17 +145,23 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
             var leadingDirectiveCodeDocument = RazorCodeDocument.Create(codeDocument.Source);
             LeadingDirectiveParsingEngine.Engine.Process(leadingDirectiveCodeDocument);
 
-            var leadingDirectiveDocumentNode = leadingDirectiveCodeDocument.GetDocumentIntermediateNode();
+            var leadingDirectiveDocumentNode =
+                leadingDirectiveCodeDocument.GetDocumentIntermediateNode();
             if (!PageDirective.TryGetPageDirective(leadingDirectiveDocumentNode, out var _))
             {
                 // The page directive is not the leading directive. Add an error.
                 pageDirective.DirectiveNode.Diagnostics.Add(
-                    RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(pageDirective.DirectiveNode.Source.Value));
+                    RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(
+                        pageDirective.DirectiveNode.Source.Value
+                    )
+                );
             }
         }
     }
 
-    private class LeadingDirectiveParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+    private class LeadingDirectiveParserOptionsFeature
+        : RazorEngineFeatureBase,
+            IConfigureRazorParserOptionsFeature
     {
         public int Order { get; }
 

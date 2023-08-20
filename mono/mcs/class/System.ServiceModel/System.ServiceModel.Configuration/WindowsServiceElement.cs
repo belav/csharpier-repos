@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,58 +54,68 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class WindowsServiceElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty allow_anonymous_logons;
-		static ConfigurationProperty include_windows_groups;
+    [MonoTODO]
+    public sealed partial class WindowsServiceElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty allow_anonymous_logons;
+        static ConfigurationProperty include_windows_groups;
 
-		static WindowsServiceElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			allow_anonymous_logons = new ConfigurationProperty ("allowAnonymousLogons",
-				typeof (bool), "false", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static WindowsServiceElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            allow_anonymous_logons = new ConfigurationProperty(
+                "allowAnonymousLogons",
+                typeof(bool),
+                "false",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			include_windows_groups = new ConfigurationProperty ("includeWindowsGroups",
-				typeof (bool), "true", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+            include_windows_groups = new ConfigurationProperty(
+                "includeWindowsGroups",
+                typeof(bool),
+                "true",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (allow_anonymous_logons);
-			properties.Add (include_windows_groups);
-		}
+            properties.Add(allow_anonymous_logons);
+            properties.Add(include_windows_groups);
+        }
 
-		public WindowsServiceElement ()
-		{
-		}
+        public WindowsServiceElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "allowAnonymousLogons",
+            DefaultValue = false,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool AllowAnonymousLogons
+        {
+            get { return (bool)base[allow_anonymous_logons]; }
+            set { base[allow_anonymous_logons] = value; }
+        }
 
-		[ConfigurationProperty ("allowAnonymousLogons",
-			DefaultValue = false,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool AllowAnonymousLogons {
-			get { return (bool) base [allow_anonymous_logons]; }
-			set { base [allow_anonymous_logons] = value; }
-		}
+        [ConfigurationProperty(
+            "includeWindowsGroups",
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool IncludeWindowsGroups
+        {
+            get { return (bool)base[include_windows_groups]; }
+            set { base[include_windows_groups] = value; }
+        }
 
-		[ConfigurationProperty ("includeWindowsGroups",
-			DefaultValue = true,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool IncludeWindowsGroups {
-			get { return (bool) base [include_windows_groups]; }
-			set { base [include_windows_groups] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

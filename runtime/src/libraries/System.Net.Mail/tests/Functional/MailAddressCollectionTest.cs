@@ -28,7 +28,7 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void InitialCount()
         {
-            Assert.Equal(0, ac.Count );
+            Assert.Equal(0, ac.Count);
         }
 
         [Fact]

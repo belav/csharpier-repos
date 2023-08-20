@@ -21,14 +21,20 @@ namespace Microsoft.CodeAnalysis.Options
     /// <summary>
     /// Specifies that an option should be read from an .editorconfig file.
     /// </summary>
-    internal sealed class EditorConfigStorageLocation<T> : OptionStorageLocation2, IEditorConfigStorageLocation2
+    internal sealed class EditorConfigStorageLocation<T>
+        : OptionStorageLocation2,
+            IEditorConfigStorageLocation2
     {
         public string KeyName { get; }
 
         private readonly Func<string, Type, Optional<T>> _parseValue;
         private readonly Func<T, OptionSet, string?> _getEditorConfigStringForValue;
 
-        public EditorConfigStorageLocation(string keyName, Func<string, Optional<T>> parseValue, Func<T, string> getEditorConfigStringForValue)
+        public EditorConfigStorageLocation(
+            string keyName,
+            Func<string, Optional<T>> parseValue,
+            Func<T, string> getEditorConfigStringForValue
+        )
             : this(keyName, parseValue, (value, optionSet) => getEditorConfigStringForValue(value))
         {
             if (getEditorConfigStringForValue == null)
@@ -37,8 +43,16 @@ namespace Microsoft.CodeAnalysis.Options
             }
         }
 
-        public EditorConfigStorageLocation(string keyName, Func<string, Optional<T>> parseValue, Func<OptionSet, string> getEditorConfigStringForValue)
-            : this(keyName, parseValue, (value, optionSet) => getEditorConfigStringForValue(optionSet))
+        public EditorConfigStorageLocation(
+            string keyName,
+            Func<string, Optional<T>> parseValue,
+            Func<OptionSet, string> getEditorConfigStringForValue
+        )
+            : this(
+                keyName,
+                parseValue,
+                (value, optionSet) => getEditorConfigStringForValue(optionSet)
+            )
         {
             if (getEditorConfigStringForValue == null)
             {
@@ -46,7 +60,11 @@ namespace Microsoft.CodeAnalysis.Options
             }
         }
 
-        private EditorConfigStorageLocation(string keyName, Func<string, Optional<T>> parseValue, Func<T, OptionSet, string> getEditorConfigStringForValue)
+        private EditorConfigStorageLocation(
+            string keyName,
+            Func<string, Optional<T>> parseValue,
+            Func<T, OptionSet, string> getEditorConfigStringForValue
+        )
         {
             if (parseValue == null)
             {
@@ -58,10 +76,16 @@ namespace Microsoft.CodeAnalysis.Options
             // If we're explicitly given a parsing function we can throw away the type when parsing
             _parseValue = (s, type) => parseValue(s);
 
-            _getEditorConfigStringForValue = getEditorConfigStringForValue ?? throw new ArgumentNullException(nameof(getEditorConfigStringForValue));
+            _getEditorConfigStringForValue =
+                getEditorConfigStringForValue
+                ?? throw new ArgumentNullException(nameof(getEditorConfigStringForValue));
         }
 
-        public bool TryGetOption(StructuredAnalyzerConfigOptions options, Type type, out object? result)
+        public bool TryGetOption(
+            StructuredAnalyzerConfigOptions options,
+            Type type,
+            out object? result
+        )
         {
             if (options.TryGetValue(KeyName, out var value))
             {
@@ -99,10 +123,16 @@ namespace Microsoft.CodeAnalysis.Options
             return editorConfigStringForValue;
         }
 
-        string IEditorConfigStorageLocation2.GetEditorConfigString(object? value, OptionSet optionSet)
-            => $"{KeyName} = {((IEditorConfigStorageLocation2)this).GetEditorConfigStringValue(value, optionSet)}";
+        string IEditorConfigStorageLocation2.GetEditorConfigString(
+            object? value,
+            OptionSet optionSet
+        ) =>
+            $"{KeyName} = {((IEditorConfigStorageLocation2)this).GetEditorConfigStringValue(value, optionSet)}";
 
-        string IEditorConfigStorageLocation2.GetEditorConfigStringValue(object? value, OptionSet optionSet)
+        string IEditorConfigStorageLocation2.GetEditorConfigStringValue(
+            object? value,
+            OptionSet optionSet
+        )
         {
             T typedValue;
             if (value is ICodeStyleOption codeStyleOption)

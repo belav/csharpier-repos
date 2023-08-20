@@ -16,7 +16,10 @@ namespace Microsoft.TestCommon
     {
         private static StreamAssert singleton = new StreamAssert();
 
-        public static StreamAssert Singleton { get { return singleton; } }
+        public static StreamAssert Singleton
+        {
+            get { return singleton; }
+        }
 
         /// <summary>
         /// Creates a <see cref="MemoryStream"/>, invokes <paramref name="codeThatWrites"/> to write to it,
@@ -24,7 +27,10 @@ namespace Microsoft.TestCommon
         /// </summary>
         /// <param name="codeThatWrites">Code to write to the stream. It cannot be <c>null</c>.</param>
         /// <param name="codeThatReadsAsync">Code that reads from the stream. It cannot be <c>null</c>.</param>
-        public async Task WriteAndReadAsync(Func<MemoryStream, Task> codeThatWrites, Func<MemoryStream, Task> codeThatReadsAsync)
+        public async Task WriteAndReadAsync(
+            Func<MemoryStream, Task> codeThatWrites,
+            Func<MemoryStream, Task> codeThatReadsAsync
+        )
         {
             if (codeThatWrites == null)
             {
@@ -55,7 +61,10 @@ namespace Microsoft.TestCommon
         /// <param name="codeThatWrites">Code to write to the stream.  It cannot be <c>null</c>.</param>
         /// <param name="codeThatReads">Code that reads from the stream and returns the result.  It cannot be <c>null</c>.</param>
         /// <returns>The value returned from <paramref name="codeThatReads"/>.</returns>
-        public static object WriteAndReadResult(Action<Stream> codeThatWrites, Func<Stream, object> codeThatReads)
+        public static object WriteAndReadResult(
+            Action<Stream> codeThatWrites,
+            Func<Stream, object> codeThatReads
+        )
         {
             if (codeThatWrites == null)
             {
@@ -90,7 +99,10 @@ namespace Microsoft.TestCommon
         /// <param name="codeThatWrites">Code to write to the stream.  It cannot be <c>null</c>.</param>
         /// <param name="codeThatReads">Code that reads from the stream and returns the result.  It cannot be <c>null</c>.</param>
         /// <returns>The value returned from <paramref name="codeThatReads"/>.</returns>
-        public T WriteAndReadResult<T>(Action<Stream> codeThatWrites, Func<Stream, object> codeThatReads)
+        public T WriteAndReadResult<T>(
+            Action<Stream> codeThatWrites,
+            Func<Stream, object> codeThatReads
+        )
         {
             return (T)WriteAndReadResult(codeThatWrites, codeThatReads);
         }

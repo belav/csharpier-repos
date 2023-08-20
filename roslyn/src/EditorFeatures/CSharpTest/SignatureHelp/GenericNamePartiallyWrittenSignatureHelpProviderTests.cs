@@ -17,15 +17,17 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
 {
     [Trait(Traits.Feature, Traits.Features.SignatureHelp)]
-    public class GenericNamePartiallyWrittenSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+    public class GenericNamePartiallyWrittenSignatureHelpProviderTests
+        : AbstractCSharpSignatureHelpProviderTests
     {
-        internal override Type GetSignatureHelpProviderType()
-            => typeof(GenericNamePartiallyWrittenSignatureHelpProvider);
+        internal override Type GetSignatureHelpProviderType() =>
+            typeof(GenericNamePartiallyWrittenSignatureHelpProvider);
 
         [Fact]
         public async Task NestedGenericUnterminated()
         {
-            var markup = @"
+            var markup =
+                @"
 class G<T> { };
 
 class C
@@ -37,7 +39,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("G<T>", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "G<T>",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -45,7 +54,8 @@ class C
         [Fact]
         public async Task NestedGenericUnterminatedWithAmbiguousShift()
         {
-            var markup = @"
+            var markup =
+                @"
 class G<T> { };
 
 class C
@@ -59,7 +69,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("G<T>", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "G<T>",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -67,7 +84,8 @@ class C
         [Fact]
         public async Task NestedGenericUnterminatedWithAmbiguousUnsignedShift()
         {
-            var markup = @"
+            var markup =
+                @"
 class G<T> { };
 
 class C
@@ -81,7 +99,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("G<T>", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "G<T>",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -89,7 +114,8 @@ class C
         [Fact, WorkItem(544088, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544088")]
         public async Task DeclaringGenericTypeWith1ParameterUnterminated()
         {
-            var markup = @"
+            var markup =
+                @"
 class G<T> { };
 
 class C
@@ -101,7 +127,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("G<T>", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "G<T>",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -109,7 +142,8 @@ class C
         [Fact]
         public async Task CallingGenericAsyncMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 class Program
 {
@@ -125,16 +159,29 @@ class Program
 ";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.awaitable}) Task<int> Program.Goo<T>()", methodDocumentation: string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.awaitable}) Task<int> Program.Goo<T>()",
+                    methodDocumentation: string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             // TODO: Enable the script case when we have support for extension methods in scripts
-            await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: false, sourceCodeKind: Microsoft.CodeAnalysis.SourceCodeKind.Regular);
+            await TestAsync(
+                markup,
+                expectedOrderedItems,
+                usePreviousCharAsTrigger: false,
+                sourceCodeKind: Microsoft.CodeAnalysis.SourceCodeKind.Regular
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
         public async Task EditorBrowsable_GenericMethod_BrowsableAlways()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void M()
@@ -144,7 +191,8 @@ class Program
 }
 ";
 
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class C
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
@@ -153,20 +201,30 @@ public class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void C.Goo<T>(T x)", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T>(T x)",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                       referencedCode: referencedCode,
-                                                       expectedOrderedItemsMetadataReference: expectedOrderedItems,
-                                                       expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                       sourceLanguage: LanguageNames.CSharp,
-                                                       referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItems,
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
         public async Task EditorBrowsable_GenericMethod_BrowsableNever()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void M()
@@ -176,7 +234,8 @@ class Program
 }
 ";
 
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class C
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -185,20 +244,30 @@ public class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void C.Goo<T>(T x)", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T>(T x)",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                       referencedCode: referencedCode,
-                                                       expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
-                                                       expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                       sourceLanguage: LanguageNames.CSharp,
-                                                       referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
         public async Task EditorBrowsable_GenericMethod_BrowsableAdvanced()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void M()
@@ -208,7 +277,8 @@ class Program
 }
 ";
 
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class C
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -217,29 +287,41 @@ public class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void C.Goo<T>(T x)", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T>(T x)",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                       referencedCode: referencedCode,
-                                                       expectedOrderedItemsMetadataReference: expectedOrderedItems,
-                                                       expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                       sourceLanguage: LanguageNames.CSharp,
-                                                       referencedLanguage: LanguageNames.CSharp,
-                                                       hideAdvancedMembers: false);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItems,
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp,
+                hideAdvancedMembers: false
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                       referencedCode: referencedCode,
-                                                       expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
-                                                       expectedOrderedItemsSameSolution: expectedOrderedItems,
-                                                       sourceLanguage: LanguageNames.CSharp,
-                                                       referencedLanguage: LanguageNames.CSharp,
-                                                       hideAdvancedMembers: true);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: new List<SignatureHelpTestItem>(),
+                expectedOrderedItemsSameSolution: expectedOrderedItems,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp,
+                hideAdvancedMembers: true
+            );
         }
 
         [Fact, WorkItem(7336, "DevDiv_Projects/Roslyn")]
         public async Task EditorBrowsable_GenericMethod_BrowsableMixed()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void M()
@@ -249,7 +331,8 @@ class Program
 }
 ";
 
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public class C
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
@@ -261,24 +344,48 @@ public class C
     { }
 }";
             var expectedOrderedItemsMetadataReference = new List<SignatureHelpTestItem>();
-            expectedOrderedItemsMetadataReference.Add(new SignatureHelpTestItem("void C.Goo<T>(T x)", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItemsMetadataReference.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T>(T x)",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             var expectedOrderedItemsSameSolution = new List<SignatureHelpTestItem>();
-            expectedOrderedItemsSameSolution.Add(new SignatureHelpTestItem("void C.Goo<T>(T x)", string.Empty, string.Empty, currentParameterIndex: 0));
-            expectedOrderedItemsSameSolution.Add(new SignatureHelpTestItem("void C.Goo<T, U>(T x, U y)", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItemsSameSolution.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T>(T x)",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
+            expectedOrderedItemsSameSolution.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T, U>(T x, U y)",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
-            await TestSignatureHelpInEditorBrowsableContextsAsync(markup: markup,
-                                                       referencedCode: referencedCode,
-                                                       expectedOrderedItemsMetadataReference: expectedOrderedItemsMetadataReference,
-                                                       expectedOrderedItemsSameSolution: expectedOrderedItemsSameSolution,
-                                                       sourceLanguage: LanguageNames.CSharp,
-                                                       referencedLanguage: LanguageNames.CSharp);
+            await TestSignatureHelpInEditorBrowsableContextsAsync(
+                markup: markup,
+                referencedCode: referencedCode,
+                expectedOrderedItemsMetadataReference: expectedOrderedItemsMetadataReference,
+                expectedOrderedItemsSameSolution: expectedOrderedItemsSameSolution,
+                sourceLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
         public async Task GenericExtensionMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     void Bar<T>();
@@ -301,7 +408,10 @@ class Program
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("void IGoo.Bar<T>()", currentParameterIndex: 0),
-                new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void IGoo.Bar<T1, T2>()", currentParameterIndex: 0),
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void IGoo.Bar<T1, T2>()",
+                    currentParameterIndex: 0
+                ),
             };
 
             // Extension methods are supported in Interactive/Script (yet).
@@ -311,7 +421,8 @@ class Program
         [Fact, WorkItem(544088, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544088")]
         public async Task InvokingGenericMethodWith1ParameterUnterminated()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     /// <summary>
@@ -327,8 +438,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void C.Goo<T>()",
-                    "Method Goo", "Method type parameter", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void C.Goo<T>()",
+                    "Method Goo",
+                    "Method type parameter",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -336,7 +453,8 @@ class C
         [Fact]
         public async Task TestInvocationOnTriggerBracket()
         {
-            var markup = @"
+            var markup =
+                @"
 class G<S, T> { };
 
 class C
@@ -348,7 +466,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("G<S, T>", string.Empty, string.Empty, currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "G<S, T>",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -356,7 +481,8 @@ class C
         [Fact]
         public async Task TestInvocationOnTriggerComma()
         {
-            var markup = @"
+            var markup =
+                @"
 class G<S, T> { };
 
 class C
@@ -368,7 +494,14 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("G<S, T>", string.Empty, string.Empty, currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "G<S, T>",
+                    string.Empty,
+                    string.Empty,
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
         }
@@ -376,7 +509,8 @@ class C
         [Fact, WorkItem(1067933, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1067933")]
         public async Task InvokedWithNoToken()
         {
-            var markup = @"
+            var markup =
+                @"
 // goo<$$";
 
             await TestAsync(markup);

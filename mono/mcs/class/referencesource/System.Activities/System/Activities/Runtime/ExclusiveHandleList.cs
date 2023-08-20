@@ -39,8 +39,5 @@ namespace System.Activities.Runtime
 
             return false;
         }
-
     }
 }
-
-

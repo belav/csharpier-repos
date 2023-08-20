@@ -31,8 +31,7 @@ namespace N
                     {
                         result += 5 * node.value;
                         node.value += 1;
-                    }
-                    while (result < final);
+                    } while (result < final);
                     break;
                 }
                 result += v;
@@ -43,7 +42,15 @@ namespace N
 
         public static int Main()
         {
-            Node head = new Node { value = 6, next = new Node { value = 13, next = new Node { value = 5, next = null } } };
+            Node head = new Node
+            {
+                value = 6,
+                next = new Node
+                {
+                    value = 13,
+                    next = new Node { value = 5, next = null }
+                }
+            };
 
             int expected = 6 + 5 * 26 + 5 * 27 + 5 * 28;
             int result = Process(head, 13, expected);

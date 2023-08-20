@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Tools
 {
     internal static class ReportWriter
     {
-        public static void Write(string reportPath, IEnumerable<FormattedFile> formattedFiles, ILogger logger)
+        public static void Write(
+            string reportPath,
+            IEnumerable<FormattedFile> formattedFiles,
+            ILogger logger
+        )
         {
             var reportFilePath = GetReportFilePath(reportPath);
             var reportFolderPath = Path.GetDirectoryName(reportFilePath);
@@ -22,10 +26,7 @@ namespace Microsoft.CodeAnalysis.Tools
 
             logger.LogInformation(Resources.Writing_formatting_report_to_0, reportFilePath);
 
-            var seralizerOptions = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
+            var seralizerOptions = new JsonSerializerOptions { WriteIndented = true };
             var formattedFilesJson = JsonSerializer.Serialize(formattedFiles, seralizerOptions);
 
             File.WriteAllText(reportFilePath, formattedFilesJson);

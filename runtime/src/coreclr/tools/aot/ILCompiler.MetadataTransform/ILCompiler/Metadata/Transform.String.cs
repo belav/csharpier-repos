@@ -10,7 +10,10 @@ namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        private Dictionary<string, ConstantStringValue> _strings = new Dictionary<string, ConstantStringValue>(StringComparer.Ordinal);
+        private Dictionary<string, ConstantStringValue> _strings = new Dictionary<
+            string,
+            ConstantStringValue
+        >(StringComparer.Ordinal);
 
         private ConstantStringValue HandleString(string s)
         {

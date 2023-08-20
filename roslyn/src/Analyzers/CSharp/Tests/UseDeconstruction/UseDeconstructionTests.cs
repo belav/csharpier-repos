@@ -21,18 +21,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     public class UseDeconstructionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseDeconstructionTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseDeconstructionDiagnosticAnalyzer(), new CSharpUseDeconstructionCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseDeconstructionDiagnosticAnalyzer(),
+                new CSharpUseDeconstructionCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestVar()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -41,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -49,14 +52,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfNameInInnerScope()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -67,14 +71,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfNameInOuterScope()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int age;
 
@@ -84,14 +89,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUpdateReference()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -101,7 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -110,14 +116,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTupleType()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -127,7 +134,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -136,14 +143,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestVarInForEach()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -155,7 +163,7 @@ class C
 
     IEnumerable<(string name, int age)> GetPeople() => default;
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -166,14 +174,15 @@ class C
     }
 
     IEnumerable<(string name, int age)> GetPeople() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTupleTypeInForEach()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -185,7 +194,7 @@ class C
 
     IEnumerable<(string name, int age)> GetPeople() => default;
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -196,14 +205,15 @@ class C
     }
 
     IEnumerable<(string name, int age)> GetPeople() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -213,7 +223,7 @@ class C
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -222,14 +232,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -243,7 +254,7 @@ class C
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -256,14 +267,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -273,7 +285,7 @@ class C
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -282,14 +294,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll4()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -299,7 +312,7 @@ class C
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -308,14 +321,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfDefaultTupleNameWithVar()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -323,14 +337,15 @@ class C
     }
 
     (string, int) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithUserNamesThatMatchDefaultTupleNameWithVar1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -339,7 +354,7 @@ class C
 
     (string Item1, int Item2) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -347,14 +362,15 @@ class C
     }
 
     (string Item1, int Item2) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithUserNamesThatMatchDefaultTupleNameWithVar2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -364,7 +380,7 @@ class C
 
     (string Item1, int Item2) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -373,14 +389,15 @@ class C
     }
 
     (string Item1, int Item2) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfDefaultTupleNameWithTupleType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -388,14 +405,15 @@ class C
     }
 
     (string, int) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfTupleIsUsed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -404,14 +422,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfTupleMethodIsUsed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -420,14 +439,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfTupleDefaultElementNameUsed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -436,14 +456,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotIfTupleRandomNameUsed()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -452,14 +473,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -469,7 +491,7 @@ class C
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -478,28 +500,35 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(25260, "https://github.com/dotnet/roslyn/issues/25260")]
         public async Task TestNotWithDefaultLiteralInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         (string name, int age) [|person|] = default;
         Console.WriteLine(person.name + "" "" + person.age);
     }
-}", new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1)));
+}",
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp7_1
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestWithDefaultExpressionInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -507,21 +536,22 @@ class C
         Console.WriteLine(person.name + "" "" + person.age);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         (string name, int age) = default((string, int));
         Console.WriteLine(name + "" "" + age);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithImplicitConversionFromNonTuple()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     class Person
     {
@@ -533,14 +563,15 @@ class C
         (string name, int age) [|person|] = new Person();
         Console.WriteLine(person.name + "" "" + person.age);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithExplicitImplicitConversionFromNonTuple()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     class Person
     {
@@ -553,7 +584,7 @@ class C
         Console.WriteLine(person.name + "" "" + person.age);
     }
 }",
-@"class C
+                @"class C
 {
     class Person
     {
@@ -565,14 +596,15 @@ class C
         (string name, int age) = ((string, int))new Person();
         Console.WriteLine(name + "" "" + age);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithImplicitConversionFromNonTupleInForEach()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     class Person
     {
@@ -584,14 +616,15 @@ class C
         foreach ((string name, int age) [|person|] in new Person[] { })
             Console.WriteLine(person.name + "" "" + person.age);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithExplicitImplicitConversionFromNonTupleInForEach()
         {
             await TestInRegularAndScript1Async(
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     class Person
@@ -605,7 +638,7 @@ class C
             Console.WriteLine(person.name + "" "" + person.age);
     }
 }",
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     class Person
@@ -618,14 +651,15 @@ class C
         foreach ((string name, int age) in new Person[] { }.Cast<(string, int)>())
             Console.WriteLine(name + "" "" + age);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithTupleLiteralConversion()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -633,21 +667,22 @@ class C
         Console.WriteLine(person.name + "" "" + person.age);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         (object name, double age) = (null, 0);
         Console.WriteLine(name + "" "" + age);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithImplicitTupleConversion()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -657,7 +692,7 @@ class C
 
     (string name, int age) GetPerson() => default;
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -666,14 +701,15 @@ class C
     }
 
     (string name, int age) GetPerson() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithImplicitTupleConversionInForEach()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 class C
 {
     void M()
@@ -684,7 +720,7 @@ class C
 
     IEnumerable<(string name, int age)> GetPeople() => default;
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 class C
 {
     void M()
@@ -694,14 +730,15 @@ class C
     }
 
     IEnumerable<(string name, int age)> GetPeople() => default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(27251, "https://github.com/dotnet/roslyn/issues/27251")]
         public async Task TestEscapedContextualKeywordAsTupleName()
         {
             await TestInRegularAndScript1Async(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 class C
 {
     void M()
@@ -715,7 +752,7 @@ class C
 
     IEnumerable<(string name, int age)> GetPeople() => default;
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 class C
 {
     void M()
@@ -728,14 +765,15 @@ class C
     }
 
     IEnumerable<(string name, int age)> GetPeople() => default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(42770, "https://github.com/dotnet/roslyn/issues/42770")]
         public async Task TestPreserveAwait()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -756,7 +794,7 @@ class Program
         await Task.Yield();
     }
 }" + IAsyncEnumerable,
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -776,7 +814,8 @@ class Program
         yield return (0, 0);
         await Task.Yield();
     }
-}" + IAsyncEnumerable);
+}" + IAsyncEnumerable
+            );
         }
     }
 }

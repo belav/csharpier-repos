@@ -11,9 +11,7 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
         {
             // If the path is to a file then remove the file name and process the
             // folder path.
-            var startPath = Directory.Exists(path)
-                ? path
-                : Path.GetDirectoryName(path);
+            var startPath = Directory.Exists(path) ? path : Path.GetDirectoryName(path);
 
             if (!Directory.Exists(startPath))
             {

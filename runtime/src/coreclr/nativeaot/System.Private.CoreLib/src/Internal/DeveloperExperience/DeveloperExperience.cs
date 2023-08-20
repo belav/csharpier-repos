@@ -29,7 +29,10 @@ namespace Internal.DeveloperExperience
         /// </summary>
         private static bool IsMetadataStackTraceResolutionDisabled()
         {
-            AppContext.TryGetSwitch("Diagnostics.DisableMetadataStackTraceResolution", out bool disableMetadata);
+            AppContext.TryGetSwitch(
+                "Diagnostics.DisableMetadataStackTraceResolution",
+                out bool disableMetadata
+            );
             return disableMetadata;
         }
 
@@ -37,18 +40,22 @@ namespace Internal.DeveloperExperience
         {
             if (!IsMetadataStackTraceResolutionDisabled())
             {
-                StackTraceMetadataCallbacks stackTraceCallbacks = RuntimeAugments.StackTraceCallbacksIfAvailable;
+                StackTraceMetadataCallbacks stackTraceCallbacks =
+                    RuntimeAugments.StackTraceCallbacksIfAvailable;
                 if (stackTraceCallbacks != null)
                 {
                     IntPtr methodStart = RuntimeImports.RhFindMethodStartAddress(ip);
                     if (methodStart != IntPtr.Zero)
                     {
-                        string methodName = stackTraceCallbacks.TryGetMethodNameFromStartAddress(methodStart);
+                        string methodName = stackTraceCallbacks.TryGetMethodNameFromStartAddress(
+                            methodStart
+                        );
                         if (methodName != null)
                         {
                             if (ip != methodStart)
                             {
-                                methodName += " + 0x" + (ip.ToInt64() - methodStart.ToInt64()).ToString("x");
+                                methodName +=
+                                    " + 0x" + (ip.ToInt64() - methodStart.ToInt64()).ToString("x");
                             }
                             return methodName;
                         }
@@ -57,7 +64,10 @@ namespace Internal.DeveloperExperience
             }
 
             // If we don't have precise information, try to map it at least back to the right module.
-            string moduleFullFileName = RuntimeAugments.TryGetFullPathToApplicationModule(ip, out IntPtr moduleBase);
+            string moduleFullFileName = RuntimeAugments.TryGetFullPathToApplicationModule(
+                ip,
+                out IntPtr moduleBase
+            );
 
             // Without any callbacks or the ability to map ip correctly we better admit that we don't know
             if (string.IsNullOrEmpty(moduleFullFileName))
@@ -65,12 +75,19 @@ namespace Internal.DeveloperExperience
                 return "<unknown>";
             }
 
-            ReadOnlySpan<char> fileNameWithoutExtension = Path.GetFileNameWithoutExtension(moduleFullFileName.AsSpan());
+            ReadOnlySpan<char> fileNameWithoutExtension = Path.GetFileNameWithoutExtension(
+                moduleFullFileName.AsSpan()
+            );
             int rva = (int)(ip - moduleBase);
             return $"{fileNameWithoutExtension}!<BaseAddress>+0x{rva:x}";
         }
 
-        public virtual void TryGetSourceLineInfo(IntPtr ip, out string fileName, out int lineNumber, out int columnNumber)
+        public virtual void TryGetSourceLineInfo(
+            IntPtr ip,
+            out string fileName,
+            out int lineNumber,
+            out int columnNumber
+        )
         {
             fileName = null;
             lineNumber = 0;
@@ -87,15 +104,25 @@ namespace Internal.DeveloperExperience
         /// </summary>
         public virtual void TryGetMethodBase(IntPtr methodStartAddress, out MethodBase method)
         {
-            ReflectionExecutionDomainCallbacks reflectionCallbacks = RuntimeAugments.CallbacksIfAvailable;
+            ReflectionExecutionDomainCallbacks reflectionCallbacks =
+                RuntimeAugments.CallbacksIfAvailable;
             method = null;
             if (reflectionCallbacks != null)
             {
-                method = reflectionCallbacks.GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
+                method = reflectionCallbacks.GetMethodBaseFromStartAddressIfAvailable(
+                    methodStartAddress
+                );
             }
         }
 
-        public virtual bool OnContractFailure(string? stackTrace, ContractFailureKind contractFailureKind, string? displayMessage, string userMessage, string conditionText, Exception innerException)
+        public virtual bool OnContractFailure(
+            string? stackTrace,
+            ContractFailureKind contractFailureKind,
+            string? displayMessage,
+            string userMessage,
+            string conditionText,
+            Exception innerException
+        )
         {
             Debug.WriteLine("Assertion failed: " + (displayMessage ?? ""));
             if (Debugger.IsAttached)
@@ -112,11 +139,7 @@ namespace Internal.DeveloperExperience
                     return new DeveloperExperience(); // Provide the bare-bones default if a custom one hasn't been supplied.
                 return result;
             }
-
-            set
-            {
-                s_developerExperience = value;
-            }
+            set { s_developerExperience = value; }
         }
 
         private static DeveloperExperience s_developerExperience;

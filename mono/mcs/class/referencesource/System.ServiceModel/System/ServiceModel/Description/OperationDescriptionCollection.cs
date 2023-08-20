@@ -9,10 +9,8 @@ namespace System.ServiceModel.Description
     using System.Runtime.Serialization;
 
     public class OperationDescriptionCollection : Collection<OperationDescription>
-    {        
-        internal OperationDescriptionCollection()
-        {            
-        }
+    {
+        internal OperationDescriptionCollection() { }
 
         public OperationDescription Find(string name)
         {
@@ -33,7 +31,7 @@ namespace System.ServiceModel.Description
                     results.Add(this[i]);
             }
             return results;
-        }        
+        }
 
         protected override void InsertItem(int index, OperationDescription item)
         {
@@ -54,4 +52,3 @@ namespace System.ServiceModel.Description
         }
     }
 }
-

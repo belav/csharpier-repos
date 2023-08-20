@@ -31,15 +31,21 @@ namespace Microsoft.CodeAnalysis
         private byte _slotCount;
         private int _fullWidth;
 
-        private static readonly ConditionalWeakTable<GreenNode, DiagnosticInfo[]> s_diagnosticsTable =
-            new ConditionalWeakTable<GreenNode, DiagnosticInfo[]>();
+        private static readonly ConditionalWeakTable<
+            GreenNode,
+            DiagnosticInfo[]
+        > s_diagnosticsTable = new ConditionalWeakTable<GreenNode, DiagnosticInfo[]>();
 
-        private static readonly ConditionalWeakTable<GreenNode, SyntaxAnnotation[]> s_annotationsTable =
-            new ConditionalWeakTable<GreenNode, SyntaxAnnotation[]>();
+        private static readonly ConditionalWeakTable<
+            GreenNode,
+            SyntaxAnnotation[]
+        > s_annotationsTable = new ConditionalWeakTable<GreenNode, SyntaxAnnotation[]>();
 
         private static readonly DiagnosticInfo[] s_noDiagnostics = Array.Empty<DiagnosticInfo>();
-        private static readonly SyntaxAnnotation[] s_noAnnotations = Array.Empty<SyntaxAnnotation>();
-        private static readonly IEnumerable<SyntaxAnnotation> s_noAnnotationsEnumerable = SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
+        private static readonly SyntaxAnnotation[] s_noAnnotations =
+            Array.Empty<SyntaxAnnotation>();
+        private static readonly IEnumerable<SyntaxAnnotation> s_noAnnotationsEnumerable =
+            SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
 
         protected GreenNode(ushort kind)
         {
@@ -73,14 +79,22 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected GreenNode(ushort kind, DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations) :
-            this(kind, diagnostics)
+        protected GreenNode(
+            ushort kind,
+            DiagnosticInfo[]? diagnostics,
+            SyntaxAnnotation[]? annotations
+        )
+            : this(kind, diagnostics)
         {
             if (annotations?.Length > 0)
             {
                 foreach (var annotation in annotations)
                 {
-                    if (annotation == null) throw new ArgumentException(paramName: nameof(annotations), message: "" /*CSharpResources.ElementsCannotBeNull*/);
+                    if (annotation == null)
+                        throw new ArgumentException(
+                            paramName: nameof(annotations),
+                            message: "" /*CSharpResources.ElementsCannotBeNull*/
+                        );
                 }
 
                 this.flags |= NodeFlags.ContainsAnnotations;
@@ -88,14 +102,23 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected GreenNode(ushort kind, DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations, int fullWidth) :
-            this(kind, diagnostics, fullWidth)
+        protected GreenNode(
+            ushort kind,
+            DiagnosticInfo[]? diagnostics,
+            SyntaxAnnotation[]? annotations,
+            int fullWidth
+        )
+            : this(kind, diagnostics, fullWidth)
         {
             if (annotations?.Length > 0)
             {
                 foreach (var annotation in annotations)
                 {
-                    if (annotation == null) throw new ArgumentException(paramName: nameof(annotations), message: "" /*CSharpResources.ElementsCannotBeNull*/);
+                    if (annotation == null)
+                        throw new ArgumentException(
+                            paramName: nameof(annotations),
+                            message: "" /*CSharpResources.ElementsCannotBeNull*/
+                        );
                 }
 
                 this.flags |= NodeFlags.ContainsAnnotations;
@@ -105,14 +128,17 @@ namespace Microsoft.CodeAnalysis
 
         protected void AdjustFlagsAndWidth(GreenNode node)
         {
-            RoslynDebug.Assert(node != null, "PERF: caller must ensure that node!=null, we do not want to re-check that here.");
+            RoslynDebug.Assert(
+                node != null,
+                "PERF: caller must ensure that node!=null, we do not want to re-check that here."
+            );
             this.flags |= (node.flags & NodeFlags.InheritMask);
             _fullWidth += node._fullWidth;
         }
 
         public abstract string Language { get; }
 
-        #region Kind 
+        #region Kind
         public int RawKind
         {
             get { return _kind; }
@@ -120,10 +146,7 @@ namespace Microsoft.CodeAnalysis
 
         public bool IsList
         {
-            get
-            {
-                return RawKind == ListKind;
-            }
+            get { return RawKind == ListKind; }
         }
 
         public abstract string KindText { get; }
@@ -137,7 +160,7 @@ namespace Microsoft.CodeAnalysis
 
         #endregion
 
-        #region Slots 
+        #region Slots
         public int SlotCount
         {
             get
@@ -150,11 +173,7 @@ namespace Microsoft.CodeAnalysis
 
                 return count;
             }
-
-            protected set
-            {
-                _slotCount = (byte)value;
-            }
+            protected set { _slotCount = (byte)value; }
         }
 
         internal abstract GreenNode? GetSlot(int index);
@@ -259,7 +278,7 @@ namespace Microsoft.CodeAnalysis
 
         #endregion
 
-        #region Flags 
+        #region Flags
         [Flags]
         internal enum NodeFlags : byte
         {
@@ -273,9 +292,15 @@ namespace Microsoft.CodeAnalysis
 
             FactoryContextIsInAsync = 1 << 6,
             FactoryContextIsInQuery = 1 << 7,
-            FactoryContextIsInIterator = FactoryContextIsInQuery,  // VB does not use "InQuery", but uses "InIterator" instead
+            FactoryContextIsInIterator = FactoryContextIsInQuery, // VB does not use "InQuery", but uses "InIterator" instead
 
-            InheritMask = ContainsDiagnostics | ContainsStructuredTrivia | ContainsDirectives | ContainsSkippedText | ContainsAnnotations | IsNotMissing,
+            InheritMask =
+                ContainsDiagnostics
+                | ContainsStructuredTrivia
+                | ContainsDirectives
+                | ContainsSkippedText
+                | ContainsAnnotations
+                | IsNotMissing,
         }
 
         internal NodeFlags Flags
@@ -304,81 +329,50 @@ namespace Microsoft.CodeAnalysis
 
         internal bool ParsedInAsync
         {
-            get
-            {
-                return (this.flags & NodeFlags.FactoryContextIsInAsync) != 0;
-            }
+            get { return (this.flags & NodeFlags.FactoryContextIsInAsync) != 0; }
         }
 
         internal bool ParsedInQuery
         {
-            get
-            {
-                return (this.flags & NodeFlags.FactoryContextIsInQuery) != 0;
-            }
+            get { return (this.flags & NodeFlags.FactoryContextIsInQuery) != 0; }
         }
 
         internal bool ParsedInIterator
         {
-            get
-            {
-                return (this.flags & NodeFlags.FactoryContextIsInIterator) != 0;
-            }
+            get { return (this.flags & NodeFlags.FactoryContextIsInIterator) != 0; }
         }
 
         public bool ContainsSkippedText
         {
-            get
-            {
-                return (this.flags & NodeFlags.ContainsSkippedText) != 0;
-            }
+            get { return (this.flags & NodeFlags.ContainsSkippedText) != 0; }
         }
 
         public bool ContainsStructuredTrivia
         {
-            get
-            {
-                return (this.flags & NodeFlags.ContainsStructuredTrivia) != 0;
-            }
+            get { return (this.flags & NodeFlags.ContainsStructuredTrivia) != 0; }
         }
 
         public bool ContainsDirectives
         {
-            get
-            {
-                return (this.flags & NodeFlags.ContainsDirectives) != 0;
-            }
+            get { return (this.flags & NodeFlags.ContainsDirectives) != 0; }
         }
 
         public bool ContainsDiagnostics
         {
-            get
-            {
-                return (this.flags & NodeFlags.ContainsDiagnostics) != 0;
-            }
+            get { return (this.flags & NodeFlags.ContainsDiagnostics) != 0; }
         }
 
         public bool ContainsAnnotations
         {
-            get
-            {
-                return (this.flags & NodeFlags.ContainsAnnotations) != 0;
-            }
+            get { return (this.flags & NodeFlags.ContainsAnnotations) != 0; }
         }
         #endregion
 
         #region Spans
         public int FullWidth
         {
-            get
-            {
-                return _fullWidth;
-            }
-
-            protected set
-            {
-                _fullWidth = value;
-            }
+            get { return _fullWidth; }
+            protected set { _fullWidth = value; }
         }
 
         public virtual int Width
@@ -391,36 +385,26 @@ namespace Microsoft.CodeAnalysis
 
         public virtual int GetLeadingTriviaWidth()
         {
-            return this.FullWidth != 0 ?
-                this.GetFirstTerminal()!.GetLeadingTriviaWidth() :
-                0;
+            return this.FullWidth != 0 ? this.GetFirstTerminal()!.GetLeadingTriviaWidth() : 0;
         }
 
         public virtual int GetTrailingTriviaWidth()
         {
-            return this.FullWidth != 0 ?
-                this.GetLastTerminal()!.GetTrailingTriviaWidth() :
-                0;
+            return this.FullWidth != 0 ? this.GetLastTerminal()!.GetTrailingTriviaWidth() : 0;
         }
 
         public bool HasLeadingTrivia
         {
-            get
-            {
-                return this.GetLeadingTriviaWidth() != 0;
-            }
+            get { return this.GetLeadingTriviaWidth() != 0; }
         }
 
         public bool HasTrailingTrivia
         {
-            get
-            {
-                return this.GetTrailingTriviaWidth() != 0;
-            }
+            get { return this.GetTrailingTriviaWidth() != 0; }
         }
         #endregion
 
-        #region Serialization 
+        #region Serialization
         // use high-bit on Kind to identify serialization of extra info
         private const UInt16 ExtendedSerializationInfoMask = unchecked((UInt16)(1u << 15));
 
@@ -477,7 +461,7 @@ namespace Microsoft.CodeAnalysis
 
         #endregion
 
-        #region Annotations 
+        #region Annotations
         public bool HasAnnotations(string annotationKind)
         {
             var annotations = this.GetAnnotations();
@@ -552,7 +536,10 @@ namespace Microsoft.CodeAnalysis
             return GetAnnotationsSlow(annotations, annotationKind);
         }
 
-        private static IEnumerable<SyntaxAnnotation> GetAnnotationsSlow(SyntaxAnnotation[] annotations, string annotationKind)
+        private static IEnumerable<SyntaxAnnotation> GetAnnotationsSlow(
+            SyntaxAnnotation[] annotations,
+            string annotationKind
+        )
         {
             foreach (var annotation in annotations)
             {
@@ -580,7 +567,10 @@ namespace Microsoft.CodeAnalysis
             return GetAnnotationsSlow(annotations, annotationKinds);
         }
 
-        private static IEnumerable<SyntaxAnnotation> GetAnnotationsSlow(SyntaxAnnotation[] annotations, IEnumerable<string> annotationKinds)
+        private static IEnumerable<SyntaxAnnotation> GetAnnotationsSlow(
+            SyntaxAnnotation[] annotations,
+            IEnumerable<string> annotationKinds
+        )
         {
             foreach (var annotation in annotations)
             {
@@ -598,7 +588,10 @@ namespace Microsoft.CodeAnalysis
                 SyntaxAnnotation[]? annotations;
                 if (s_annotationsTable.TryGetValue(this, out annotations))
                 {
-                    System.Diagnostics.Debug.Assert(annotations.Length != 0, "we should return nonempty annotations or NoAnnotations");
+                    System.Diagnostics.Debug.Assert(
+                        annotations.Length != 0,
+                        "we should return nonempty annotations or NoAnnotations"
+                    );
                     return annotations;
                 }
             }
@@ -633,7 +626,10 @@ namespace Microsoft.CodeAnalysis
         public virtual string ToFullString()
         {
             var sb = PooledStringBuilder.GetInstance();
-            var writer = new System.IO.StringWriter(sb.Builder, System.Globalization.CultureInfo.InvariantCulture);
+            var writer = new System.IO.StringWriter(
+                sb.Builder,
+                System.Globalization.CultureInfo.InvariantCulture
+            );
             this.WriteTo(writer, leading: true, trailing: true);
             return sb.ToStringAndFree();
         }
@@ -641,7 +637,10 @@ namespace Microsoft.CodeAnalysis
         public override string ToString()
         {
             var sb = PooledStringBuilder.GetInstance();
-            var writer = new System.IO.StringWriter(sb.Builder, System.Globalization.CultureInfo.InvariantCulture);
+            var writer = new System.IO.StringWriter(
+                sb.Builder,
+                System.Globalization.CultureInfo.InvariantCulture
+            );
             this.WriteTo(writer, leading: false, trailing: false);
             return sb.ToStringAndFree();
         }
@@ -657,7 +656,7 @@ namespace Microsoft.CodeAnalysis
             var stack = ArrayBuilder<(GreenNode node, bool leading, bool trailing)>.GetInstance();
             stack.Push((this, leading, trailing));
 
-            // Separated out stack processing logic so that it does not unintentionally refer to 
+            // Separated out stack processing logic so that it does not unintentionally refer to
             // "this", "leading" or "trailing".
             processStack(writer, stack);
             stack.Free();
@@ -665,7 +664,8 @@ namespace Microsoft.CodeAnalysis
 
             static void processStack(
                 TextWriter writer,
-                ArrayBuilder<(GreenNode node, bool leading, bool trailing)> stack)
+                ArrayBuilder<(GreenNode node, bool leading, bool trailing)> stack
+            )
             {
                 while (stack.Count > 0)
                 {
@@ -747,13 +747,32 @@ namespace Microsoft.CodeAnalysis
 
         #endregion
 
-        #region Tokens 
+        #region Tokens
 
-        public virtual int RawContextualKind { get { return this.RawKind; } }
-        public virtual object? GetValue() { return null; }
-        public virtual string GetValueText() { return string.Empty; }
-        public virtual GreenNode? GetLeadingTriviaCore() { return null; }
-        public virtual GreenNode? GetTrailingTriviaCore() { return null; }
+        public virtual int RawContextualKind
+        {
+            get { return this.RawKind; }
+        }
+
+        public virtual object? GetValue()
+        {
+            return null;
+        }
+
+        public virtual string GetValueText()
+        {
+            return string.Empty;
+        }
+
+        public virtual GreenNode? GetLeadingTriviaCore()
+        {
+            return null;
+        }
+
+        public virtual GreenNode? GetTrailingTriviaCore()
+        {
+            return null;
+        }
 
         public virtual GreenNode WithLeadingTrivia(GreenNode? trivia)
         {
@@ -826,14 +845,13 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
                 node = nonmissingChild;
-            }
-            while (node?._slotCount > 0);
+            } while (node?._slotCount > 0);
 
             return node;
         }
         #endregion
 
-        #region Equivalence 
+        #region Equivalence
         public virtual bool IsEquivalentTo([NotNullWhen(true)] GreenNode? other)
         {
             if (this == other)
@@ -887,7 +905,11 @@ namespace Microsoft.CodeAnalysis
             {
                 var node1Child = node1.GetSlot(i);
                 var node2Child = node2.GetSlot(i);
-                if (node1Child != null && node2Child != null && !node1Child.IsEquivalentTo(node2Child))
+                if (
+                    node1Child != null
+                    && node2Child != null
+                    && !node1Child.IsEquivalentTo(node2Child)
+                )
                 {
                     return false;
                 }
@@ -899,9 +921,10 @@ namespace Microsoft.CodeAnalysis
 
         public abstract SyntaxNode GetStructure(SyntaxTrivia parentTrivia);
 
-        #region Factories 
+        #region Factories
 
-        public abstract SyntaxToken CreateSeparator<TNode>(SyntaxNode element) where TNode : SyntaxNode;
+        public abstract SyntaxToken CreateSeparator<TNode>(SyntaxNode element)
+            where TNode : SyntaxNode;
         public abstract bool IsTriviaWithEndOfLine(); // trivia node has end of line
 
         /*
@@ -911,8 +934,11 @@ namespace Microsoft.CodeAnalysis
          * There is another overload for IReadOnlyList, since most collections already implement this, so checking for it will
          * perform better then copying to a List<T>, though not as good as List<T> directly.
          */
-        public static GreenNode? CreateList<TFrom>(IEnumerable<TFrom>? enumerable, Func<TFrom, GreenNode> select)
-            => enumerable switch
+        public static GreenNode? CreateList<TFrom>(
+            IEnumerable<TFrom>? enumerable,
+            Func<TFrom, GreenNode> select
+        ) =>
+            enumerable switch
             {
                 null => null,
                 List<TFrom> l => CreateList(l, select),
@@ -933,16 +959,19 @@ namespace Microsoft.CodeAnalysis
                 case 3:
                     return SyntaxList.List(select(list[0]), select(list[1]), select(list[2]));
                 default:
-                    {
-                        var array = new ArrayElement<GreenNode>[list.Count];
-                        for (int i = 0; i < array.Length; i++)
-                            array[i].Value = select(list[i]);
-                        return SyntaxList.List(array);
-                    }
+                {
+                    var array = new ArrayElement<GreenNode>[list.Count];
+                    for (int i = 0; i < array.Length; i++)
+                        array[i].Value = select(list[i]);
+                    return SyntaxList.List(array);
+                }
             }
         }
 
-        public static GreenNode? CreateList<TFrom>(IReadOnlyList<TFrom> list, Func<TFrom, GreenNode> select)
+        public static GreenNode? CreateList<TFrom>(
+            IReadOnlyList<TFrom> list,
+            Func<TFrom, GreenNode> select
+        )
         {
             switch (list.Count)
             {
@@ -955,12 +984,12 @@ namespace Microsoft.CodeAnalysis
                 case 3:
                     return SyntaxList.List(select(list[0]), select(list[1]), select(list[2]));
                 default:
-                    {
-                        var array = new ArrayElement<GreenNode>[list.Count];
-                        for (int i = 0; i < array.Length; i++)
-                            array[i].Value = select(list[i]);
-                        return SyntaxList.List(array);
-                    }
+                {
+                    var array = new ArrayElement<GreenNode>[list.Count];
+                    for (int i = 0; i < array.Length; i++)
+                        array[i].Value = select(list[i]);
+                    return SyntaxList.List(array);
+                }
             }
         }
 
@@ -981,8 +1010,8 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return ((this.flags & NodeFlags.InheritMask) == NodeFlags.IsNotMissing) &&
-                    this.SlotCount <= GreenNode.MaxCachedChildNum;
+                return ((this.flags & NodeFlags.InheritMask) == NodeFlags.IsNotMissing)
+                    && this.SlotCount <= GreenNode.MaxCachedChildNum;
             }
         }
 
@@ -1008,30 +1037,39 @@ namespace Microsoft.CodeAnalysis
         {
             Debug.Assert(this.IsCacheable);
 
-            return this.RawKind == kind &&
-                this.flags == flags &&
-                this.GetSlot(0) == child1;
+            return this.RawKind == kind && this.flags == flags && this.GetSlot(0) == child1;
         }
 
-        internal bool IsCacheEquivalent(int kind, NodeFlags flags, GreenNode? child1, GreenNode? child2)
+        internal bool IsCacheEquivalent(
+            int kind,
+            NodeFlags flags,
+            GreenNode? child1,
+            GreenNode? child2
+        )
         {
             Debug.Assert(this.IsCacheable);
 
-            return this.RawKind == kind &&
-                this.flags == flags &&
-                this.GetSlot(0) == child1 &&
-                this.GetSlot(1) == child2;
+            return this.RawKind == kind
+                && this.flags == flags
+                && this.GetSlot(0) == child1
+                && this.GetSlot(1) == child2;
         }
 
-        internal bool IsCacheEquivalent(int kind, NodeFlags flags, GreenNode? child1, GreenNode? child2, GreenNode? child3)
+        internal bool IsCacheEquivalent(
+            int kind,
+            NodeFlags flags,
+            GreenNode? child1,
+            GreenNode? child2,
+            GreenNode? child3
+        )
         {
             Debug.Assert(this.IsCacheable);
 
-            return this.RawKind == kind &&
-                this.flags == flags &&
-                this.GetSlot(0) == child1 &&
-                this.GetSlot(1) == child2 &&
-                this.GetSlot(2) == child3;
+            return this.RawKind == kind
+                && this.flags == flags
+                && this.GetSlot(0) == child1
+                && this.GetSlot(1) == child2
+                && this.GetSlot(2) == child3;
         }
         #endregion //Caching
 

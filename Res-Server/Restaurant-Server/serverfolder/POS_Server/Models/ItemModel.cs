@@ -31,13 +31,11 @@ namespace POS_Server.Models
         public string barcode { get; set; }
         public string categoryString { get; set; }
 
-
         public string categoryName { get; set; }
-      
+
         public Boolean canDelete { get; set; }
 
         public Nullable<int> itemCount { get; set; }
-
 
         // new units and offers an is new
         //units
@@ -45,6 +43,7 @@ namespace POS_Server.Models
         public string unitName { get; set; }
         public decimal price { get; set; }
         public decimal priceWithService { get; set; }
+
         //offer
         public Nullable<decimal> desPrice { get; set; }
         public Nullable<int> isNew { get; set; }
@@ -63,6 +62,5 @@ namespace POS_Server.Models
         public bool canUpdate { get; set; }
         public bool isExpired { get; set; }
         public int alertDays { get; set; }
-      
     }
 }

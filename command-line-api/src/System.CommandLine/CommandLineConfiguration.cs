@@ -38,7 +38,8 @@ namespace System.CommandLine
             LocalizationResources? resources = null,
             IReadOnlyList<InvocationMiddleware>? middlewarePipeline = null,
             Func<BindingContext, HelpBuilder>? helpBuilderFactory = null,
-            TryReplaceToken? tokenReplacer = null)
+            TryReplaceToken? tokenReplacer = null
+        )
         {
             RootCommand = command ?? throw new ArgumentNullException(nameof(command));
             EnableTokenReplacement = enableTokenReplacement;
@@ -52,7 +53,10 @@ namespace System.CommandLine
             _tokenReplacer = tokenReplacer;
         }
 
-        internal static HelpBuilder DefaultHelpBuilderFactory(BindingContext context, int? requestedMaxWidth = null)
+        internal static HelpBuilder DefaultHelpBuilderFactory(
+            BindingContext context,
+            int? requestedMaxWidth = null
+        )
         {
             int maxWidth = requestedMaxWidth ?? int.MaxValue;
             if (requestedMaxWidth is null && context.Console is SystemConsole systemConsole)
@@ -60,7 +64,10 @@ namespace System.CommandLine
                 maxWidth = systemConsole.GetWindowWidth();
             }
 
-            return new HelpBuilder(context.ParseResult.CommandResult.LocalizationResources, maxWidth);
+            return new HelpBuilder(
+                context.ParseResult.CommandResult.LocalizationResources,
+                maxWidth
+            );
         }
 
         /// <summary>
@@ -89,24 +96,25 @@ namespace System.CommandLine
         /// </summary>
         public LocalizationResources LocalizationResources { get; }
 
-        internal Func<BindingContext, HelpBuilder> HelpBuilderFactory => _helpBuilderFactory ??= context => DefaultHelpBuilderFactory(context);
+        internal Func<BindingContext, HelpBuilder> HelpBuilderFactory =>
+            _helpBuilderFactory ??= context => DefaultHelpBuilderFactory(context);
 
         internal IReadOnlyList<InvocationMiddleware> Middleware { get; }
 
         internal TryReplaceToken? TokenReplacer =>
-            EnableTokenReplacement
-                ? _tokenReplacer ??= DefaultTokenReplacer
-                : null;
+            EnableTokenReplacement ? _tokenReplacer ??= DefaultTokenReplacer : null;
 
         private bool DefaultTokenReplacer(
-            string tokenToReplace, 
-            out IReadOnlyList<string>? replacementTokens, 
-            out string? errorMessage) =>
+            string tokenToReplace,
+            out IReadOnlyList<string>? replacementTokens,
+            out string? errorMessage
+        ) =>
             StringExtensions.TryReadResponseFile(
                 tokenToReplace,
                 LocalizationResources,
                 out replacementTokens,
-                out errorMessage);
+                out errorMessage
+            );
 
         /// <summary>
         /// Gets the root command.
@@ -124,9 +132,15 @@ namespace System.CommandLine
 
             static void ThrowIfInvalid(Command command)
             {
-                if (command.Parents.FlattenBreadthFirst(c => c.Parents).Any(ancestor => ancestor == command))
+                if (
+                    command.Parents
+                        .FlattenBreadthFirst(c => c.Parents)
+                        .Any(ancestor => ancestor == command)
+                )
                 {
-                    throw new CommandLineConfigurationException($"Cycle detected in command tree. Command '{command.Name}' is its own ancestor.");
+                    throw new CommandLineConfigurationException(
+                        $"Cycle detected in command tree. Command '{command.Name}' is its own ancestor."
+                    );
                 }
 
                 int count = command.Subcommands.Count + command.Options.Count;
@@ -139,10 +153,16 @@ namespace System.CommandLine
 
                         foreach (var symbol2Alias in symbol2AsIdentifier.Aliases)
                         {
-                            if (symbol1AsIdentifier.Name.Equals(symbol2Alias, StringComparison.Ordinal) ||
-                                symbol1AsIdentifier.Aliases.Contains(symbol2Alias))
+                            if (
+                                symbol1AsIdentifier.Name.Equals(
+                                    symbol2Alias,
+                                    StringComparison.Ordinal
+                                ) || symbol1AsIdentifier.Aliases.Contains(symbol2Alias)
+                            )
                             {
-                                throw new CommandLineConfigurationException($"Duplicate alias '{symbol2Alias}' found on command '{command.Name}'.");
+                                throw new CommandLineConfigurationException(
+                                    $"Duplicate alias '{symbol2Alias}' found on command '{command.Name}'."
+                                );
                             }
                         }
                     }
@@ -154,8 +174,8 @@ namespace System.CommandLine
                 }
             }
 
-            static IdentifierSymbol GetChild(int index, Command command)
-                => index < command.Subcommands.Count
+            static IdentifierSymbol GetChild(int index, Command command) =>
+                index < command.Subcommands.Count
                     ? command.Subcommands[index]
                     : command.Options[index - command.Subcommands.Count];
         }

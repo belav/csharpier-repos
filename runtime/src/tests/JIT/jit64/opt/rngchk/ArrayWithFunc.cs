@@ -7,16 +7,20 @@ using System.Runtime.CompilerServices;
 namespace ArrayWithFunc
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                                 new RngTest(Test.Test2),
-                                 new RngTest(Test.Test3),
-                                 new RngTest(Test.Test4)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4)
+            };
             foreach (RngTest test in Tests)
             {
                 testNum++;
@@ -52,6 +56,7 @@ namespace ArrayWithFunc
             return bResult;
         }
     }
+
     internal class Modifier
     {
         public static void ModValue(ref int a)
@@ -59,10 +64,12 @@ namespace ArrayWithFunc
             a++;
             return;
         }
+
         public static int ModValue2(ref int a)
         {
             return ++a;
         }
+
         public static void ModArray(ref int[] array)
         {
             int[] array2 = new int[97];
@@ -74,8 +81,8 @@ namespace ArrayWithFunc
     internal class Test
     {
         /********************************************************************************************
-		* Index is modified through a function call 
-		*********************************************************************************************/
+        * Index is modified through a function call
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -89,8 +96,8 @@ namespace ArrayWithFunc
         }
 
         /********************************************************************************************
-		* Array is modified through a function call
-		********************************************************************************************/
+        * Array is modified through a function call
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -103,9 +110,10 @@ namespace ArrayWithFunc
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
-		* Loop upper bound is modified through a function call
-		********************************************************************************************/
+        * Loop upper bound is modified through a function call
+        ********************************************************************************************/
         public static void Test3()
         {
             int index = 0;
@@ -116,9 +124,10 @@ namespace ArrayWithFunc
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
-		* Another way to modifier loop induction variable
-		********************************************************************************************/
+        * Another way to modifier loop induction variable
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {

@@ -14,7 +14,10 @@ namespace System.Text.RegularExpressions.Tests
         private const int MaxUnicodeRange = 2 << 15;
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public async Task RegexUnicodeChar(RegexEngine engine)
         {
             // Regex engine is Unicode aware now for the \w and \d character classes
@@ -28,17 +31,17 @@ namespace System.Text.RegularExpressions.Tests
                 char c = (char)i;
                 switch (CharUnicodeInfo.GetUnicodeCategory(c))
                 {
-                    case UnicodeCategory.UppercaseLetter:        //Lu
-                    case UnicodeCategory.LowercaseLetter:        //Li
-                    case UnicodeCategory.TitlecaseLetter:        // Lt
-                    case UnicodeCategory.ModifierLetter:         // Lm
-                    case UnicodeCategory.OtherLetter:            // Lo
-                    case UnicodeCategory.DecimalDigitNumber:     // Nd
-                                                                 //                    case UnicodeCategory.LetterNumber:           // ??
-                                                                 //                    case UnicodeCategory.OtherNumber:            // ??
+                    case UnicodeCategory.UppercaseLetter: //Lu
+                    case UnicodeCategory.LowercaseLetter: //Li
+                    case UnicodeCategory.TitlecaseLetter: // Lt
+                    case UnicodeCategory.ModifierLetter: // Lm
+                    case UnicodeCategory.OtherLetter: // Lo
+                    case UnicodeCategory.DecimalDigitNumber: // Nd
+                    //                    case UnicodeCategory.LetterNumber:           // ??
+                    //                    case UnicodeCategory.OtherNumber:            // ??
                     case UnicodeCategory.NonSpacingMark:
                     //                    case UnicodeCategory.SpacingCombiningMark:   // Mc
-                    case UnicodeCategory.ConnectorPunctuation:   // Pc
+                    case UnicodeCategory.ConnectorPunctuation: // Pc
                         validChars.Add(c);
                         break;
                     default:
@@ -175,7 +178,6 @@ namespace System.Text.RegularExpressions.Tests
                 string input = builder1.ToString();
                 Match match = regex.Match(input);
 
-
                 Assert.Equal(builder2.ToString(), match.Value);
                 Assert.Equal(0, match.Index);
                 Assert.Equal(validCharLength, match.Length);
@@ -282,17 +284,23 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public async Task WideLatin(RegexEngine engine)
         {
             const string OrigPattern = @"abc";
 
             //shift each char in the pattern to the Wide-Latin alphabet of Unicode
-            string pattern_WL = new string(Array.ConvertAll(OrigPattern.ToCharArray(), c => (char)((int)c + 0xFF00 - 32)));
+            string pattern_WL = new string(
+                Array.ConvertAll(OrigPattern.ToCharArray(), c => (char)((int)c + 0xFF00 - 32))
+            );
             string pattern = $"({OrigPattern}==={pattern_WL})+";
 
             var re = await RegexHelpers.GetRegexAsync(engine, pattern, RegexOptions.IgnoreCase);
-            string input = $"====={OrigPattern.ToUpper()}==={pattern_WL}{OrigPattern}==={pattern_WL.ToUpper()}==={OrigPattern}==={OrigPattern}";
+            string input =
+                $"====={OrigPattern.ToUpper()}==={pattern_WL}{OrigPattern}==={pattern_WL.ToUpper()}==={OrigPattern}==={OrigPattern}";
 
             var match1 = re.Match(input);
             Assert.True(match1.Success);

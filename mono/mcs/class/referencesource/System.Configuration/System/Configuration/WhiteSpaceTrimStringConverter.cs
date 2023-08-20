@@ -16,21 +16,29 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
-    public sealed class WhiteSpaceTrimStringConverter : ConfigurationConverterBase {
-
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type) {
+namespace System.Configuration
+{
+    public sealed class WhiteSpaceTrimStringConverter : ConfigurationConverterBase
+    {
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
             ValidateType(value, typeof(string));
 
-            if (value == null) {
+            if (value == null)
+            {
                 return String.Empty;
             }
 
             return ((string)value).Trim();
         }
-        
-        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data) {
+
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
             Debug.Assert(data is string, "data is string");
             return ((string)data).Trim();
         }

@@ -10,25 +10,15 @@ namespace System.Runtime.Serialization
     public class InvalidDataContractException : Exception
     {
         public InvalidDataContractException()
-            : base()
-        {
-        }
+            : base() { }
 
         public InvalidDataContractException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public InvalidDataContractException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected InvalidDataContractException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
+            : base(info, context) { }
     }
 }
-

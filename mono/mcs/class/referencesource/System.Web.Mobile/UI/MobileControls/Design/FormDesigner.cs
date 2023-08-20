@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="FormDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -25,26 +25,24 @@ namespace System.Web.UI.Design.MobileControls
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.Form'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class FormDesigner : MobileContainerDesigner
     {
-        private Form   _form;
+        private Form _form;
         private TemporaryBitmapFile _backgroundBmpFile = null;
         private static readonly Attribute[] _emptyAttrs = new Attribute[0];
         private const String _titlePropertyName = "Title";
 
-        public override String ID 
+        public override String ID
         {
-            get 
-            {
-                return base.ID; 
-            }
-           
-            set 
+            get { return base.ID; }
+            set
             {
                 base.ID = value;
                 ChangeBackgroundImage();
@@ -53,11 +51,7 @@ namespace System.Web.UI.Design.MobileControls
 
         public virtual String Title
         {
-            get
-            {
-                return _form.Title;
-            }
-
+            get { return _form.Title; }
             set
             {
                 _form.Title = value;
@@ -67,10 +61,7 @@ namespace System.Web.UI.Design.MobileControls
 
         private bool ValidContainment
         {
-            get
-            {
-                return (ContainmentStatus == ContainmentStatus.AtTopLevel);
-            }
+            get { return (ContainmentStatus == ContainmentStatus.AtTopLevel); }
         }
 
         private void ChangeBackgroundImage()
@@ -80,12 +71,13 @@ namespace System.Web.UI.Design.MobileControls
             OnBackgroundImageChange(newMessage, infoMode);
         }
 
-        protected override void Dispose(bool disposing) 
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                SystemEvents.UserPreferenceChanged -= 
-                    new UserPreferenceChangedEventHandler(this.OnUserPreferenceChanged);
+                SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(
+                    this.OnUserPreferenceChanged
+                );
             }
 
             base.Dispose(disposing);
@@ -135,20 +127,21 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is Form,
-                         "FormDesigner.Initialize - Invalid Form Control");
+            Debug.Assert(component is Form, "FormDesigner.Initialize - Invalid Form Control");
 
             // This must be called first in order to get properties from runtime control.
             base.Initialize(component);
 
-            _form = (Form) component;
+            _form = (Form)component;
 
-            if (_form.DeviceSpecific != null) {
+            if (_form.DeviceSpecific != null)
+            {
                 _form.DeviceSpecific = null;
             }
 
-            SystemEvents.UserPreferenceChanged += 
-                new UserPreferenceChangedEventHandler(this.OnUserPreferenceChanged);
+            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(
+                this.OnUserPreferenceChanged
+            );
         }
 
         internal override void OnBackgroundImageChange(String message, bool infoMode)
@@ -162,12 +155,8 @@ namespace System.Web.UI.Design.MobileControls
                 GetDefaultSize().Width
             );
 
-            SetBehaviorStyle("backgroundImage",
-                "url(" + _backgroundBmpFile.Url + ")");
-            SetBehaviorStyle(
-                "paddingTop",
-                _backgroundBmpFile.UnderlyingBitmap.Height + 8
-            );
+            SetBehaviorStyle("backgroundImage", "url(" + _backgroundBmpFile.Url + ")");
+            SetBehaviorStyle("paddingTop", _backgroundBmpFile.UnderlyingBitmap.Height + 8);
         }
 
         private void OnUserPreferenceChanged(Object sender, UserPreferenceChangedEventArgs e)
@@ -177,7 +166,7 @@ namespace System.Web.UI.Design.MobileControls
                 bool infoMode;
                 String newMessage = GetErrorMessage(out infoMode);
                 OnBackgroundImageChange(newMessage, infoMode);
-            }            
+            }
         }
 
         /// <summary>
@@ -192,14 +181,17 @@ namespace System.Web.UI.Design.MobileControls
             SetBehaviorStyle("marginRight", ValidContainment ? "30%" : "5px");
         }
 
-        protected override void PreFilterProperties(IDictionary properties) 
+        protected override void PreFilterProperties(IDictionary properties)
         {
             base.PreFilterProperties(properties);
 
             PropertyDescriptor prop = (PropertyDescriptor)properties[_titlePropertyName];
             Debug.Assert(prop != null);
-            properties[_titlePropertyName] = 
-                TypeDescriptor.CreateProperty(GetType(), prop, _emptyAttrs);
+            properties[_titlePropertyName] = TypeDescriptor.CreateProperty(
+                GetType(),
+                prop,
+                _emptyAttrs
+            );
         }
 
         protected override void SetControlDefaultAppearance()

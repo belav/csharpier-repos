@@ -11,13 +11,19 @@ namespace System
         [RuntimeExport("OnFirstChanceException")]
         internal static void OnFirstChanceException(object e)
         {
-            FirstChanceException?.Invoke(/* AppDomain */ null, new FirstChanceExceptionEventArgs((Exception)e));
+            FirstChanceException?.Invoke( /* AppDomain */
+                null,
+                new FirstChanceExceptionEventArgs((Exception)e)
+            );
         }
 
         [RuntimeExport("OnUnhandledException")]
         internal static void OnUnhandledException(object e)
         {
-            UnhandledException?.Invoke(/* AppDomain */ null, new UnhandledExceptionEventArgs(e, true));
+            UnhandledException?.Invoke( /* AppDomain */
+                null,
+                new UnhandledExceptionEventArgs(e, true)
+            );
         }
     }
 }

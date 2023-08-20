@@ -33,15 +33,29 @@ namespace System.Net.Http.Internal
             }
             if (!innerStream.CanSeek)
             {
-                throw Error.Argument("innerStream", Properties.Resources.ByteRangeStreamNotSeekable, typeof(ByteRangeStream).Name);
+                throw Error.Argument(
+                    "innerStream",
+                    Properties.Resources.ByteRangeStreamNotSeekable,
+                    typeof(ByteRangeStream).Name
+                );
             }
             if (innerStream.Length < 1)
             {
-                throw Error.ArgumentOutOfRange("innerStream", innerStream.Length, Properties.Resources.ByteRangeStreamEmpty, typeof(ByteRangeStream).Name);
+                throw Error.ArgumentOutOfRange(
+                    "innerStream",
+                    innerStream.Length,
+                    Properties.Resources.ByteRangeStreamEmpty,
+                    typeof(ByteRangeStream).Name
+                );
             }
             if (range.From.HasValue && range.From.Value > innerStream.Length)
             {
-                throw Error.ArgumentOutOfRange("range", range.From, Properties.Resources.ByteRangeStreamInvalidFrom, innerStream.Length);
+                throw Error.ArgumentOutOfRange(
+                    "range",
+                    range.From,
+                    Properties.Resources.ByteRangeStreamInvalidFrom,
+                    innerStream.Length
+                );
             }
 
             // Ranges are inclusive so 0-9 means the first 10 bytes
@@ -79,7 +93,11 @@ namespace System.Net.Http.Internal
             }
 
             _totalCount = upperbounds - _lowerbounds + 1;
-            ContentRange = new ContentRangeHeaderValue(_lowerbounds, upperbounds, innerStream.Length);
+            ContentRange = new ContentRangeHeaderValue(
+                _lowerbounds,
+                upperbounds,
+                innerStream.Length
+            );
         }
 
         public ContentRangeHeaderValue ContentRange { get; private set; }
@@ -96,10 +114,7 @@ namespace System.Net.Http.Internal
 
         public override long Position
         {
-            get
-            {
-                return _currentCount;
-            }
+            get { return _currentCount; }
             set
             {
                 if (value < 0)
@@ -111,9 +126,21 @@ namespace System.Net.Http.Internal
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return base.BeginRead(buffer, offset, PrepareStreamForRangeRead(count), callback, state);
+            return base.BeginRead(
+                buffer,
+                offset,
+                PrepareStreamForRangeRead(count),
+                callback,
+                state
+            );
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -121,9 +148,19 @@ namespace System.Net.Http.Internal
             return base.Read(buffer, offset, PrepareStreamForRangeRead(count));
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            return base.ReadAsync(buffer, offset, PrepareStreamForRangeRead(count), cancellationToken);
+            return base.ReadAsync(
+                buffer,
+                offset,
+                PrepareStreamForRangeRead(count),
+                cancellationToken
+            );
         }
 
         public override int ReadByte()
@@ -172,7 +209,13 @@ namespace System.Net.Http.Internal
             throw Error.NotSupported(Properties.Resources.ByteRangeStreamReadOnly);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw Error.NotSupported(Properties.Resources.ByteRangeStreamReadOnly);
         }
@@ -182,7 +225,12 @@ namespace System.Net.Http.Internal
             throw Error.NotSupported(Properties.Resources.ByteRangeStreamReadOnly);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             throw Error.NotSupported(Properties.Resources.ByteRangeStreamReadOnly);
         }

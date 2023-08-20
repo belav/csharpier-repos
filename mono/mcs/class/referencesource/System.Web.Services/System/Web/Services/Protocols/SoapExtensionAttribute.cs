@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapExtensionAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System.Web.Services;
     using System.Xml.Serialization;
     using System;
@@ -17,22 +18,18 @@ namespace System.Web.Services.Protocols {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public abstract class SoapExtensionAttribute : System.Attribute {
-
+    public abstract class SoapExtensionAttribute : System.Attribute
+    {
         /// <include file='doc\SoapExtensionAttribute.uex' path='docs/doc[@for="SoapExtensionAttribute.ExtensionType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public abstract Type ExtensionType {
-            get;
-        }
+        public abstract Type ExtensionType { get; }
 
         /// <include file='doc\SoapExtensionAttribute.uex' path='docs/doc[@for="SoapExtensionAttribute.Priority"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public abstract int Priority {
-            get; set;
-        }
+        public abstract int Priority { get; set; }
     }
 }

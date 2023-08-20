@@ -63,7 +63,11 @@ namespace System.Drawing.Printing
 
             // Metafile framing rectangles apparently use hundredths of mm as their unit of measurement,
             // instead of the GDI+ standard hundredth of an inch.
-            Size metafileSize = PrinterUnitConvert.Convert(size, PrinterUnit.Display, PrinterUnit.HundredthsOfAMillimeter);
+            Size metafileSize = PrinterUnitConvert.Convert(
+                size,
+                PrinterUnit.Display,
+                PrinterUnit.HundredthsOfAMillimeter
+            );
 
             // Create a Metafile which accepts only GDI+ commands since we are the ones creating
             // and using this ...
@@ -74,7 +78,12 @@ namespace System.Drawing.Printing
             // is sufficiently large and has more than 254 colors.
             // This code path can easily be avoided by requesting
             // an EmfPlusOnly EMF..
-            Metafile metafile = new Metafile(_dc!.Hdc, new Rectangle(0, 0, metafileSize.Width, metafileSize.Height), MetafileFrameUnit.GdiCompatible, EmfType.EmfPlusOnly);
+            Metafile metafile = new Metafile(
+                _dc!.Hdc,
+                new Rectangle(0, 0, metafileSize.Width, metafileSize.Height),
+                MetafileFrameUnit.GdiCompatible,
+                EmfType.EmfPlusOnly
+            );
 
             PreviewPageInfo info = new PreviewPageInfo(metafile, size);
             _list.Add(info);
@@ -85,15 +94,30 @@ namespace System.Drawing.Printing
             {
                 // Adjust the origin of the graphics object to be at the
                 // user-specified margin location
-                int dpiX = Interop.Gdi32.GetDeviceCaps(new HandleRef(_dc, _dc.Hdc), Interop.Gdi32.DeviceCapability.LOGPIXELSX);
-                int dpiY = Interop.Gdi32.GetDeviceCaps(new HandleRef(_dc, _dc.Hdc), Interop.Gdi32.DeviceCapability.LOGPIXELSY);
-                int hardMarginX_DU = Interop.Gdi32.GetDeviceCaps(new HandleRef(_dc, _dc.Hdc), Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX);
-                int hardMarginY_DU = Interop.Gdi32.GetDeviceCaps(new HandleRef(_dc, _dc.Hdc), Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY);
+                int dpiX = Interop.Gdi32.GetDeviceCaps(
+                    new HandleRef(_dc, _dc.Hdc),
+                    Interop.Gdi32.DeviceCapability.LOGPIXELSX
+                );
+                int dpiY = Interop.Gdi32.GetDeviceCaps(
+                    new HandleRef(_dc, _dc.Hdc),
+                    Interop.Gdi32.DeviceCapability.LOGPIXELSY
+                );
+                int hardMarginX_DU = Interop.Gdi32.GetDeviceCaps(
+                    new HandleRef(_dc, _dc.Hdc),
+                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                );
+                int hardMarginY_DU = Interop.Gdi32.GetDeviceCaps(
+                    new HandleRef(_dc, _dc.Hdc),
+                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                );
                 float hardMarginX = hardMarginX_DU * 100f / dpiX;
                 float hardMarginY = hardMarginY_DU * 100f / dpiY;
 
                 _graphics.TranslateTransform(-hardMarginX, -hardMarginY);
-                _graphics.TranslateTransform(document.DefaultPageSettings.Margins.Left, document.DefaultPageSettings.Margins.Top);
+                _graphics.TranslateTransform(
+                    document.DefaultPageSettings.Margins.Left,
+                    document.DefaultPageSettings.Margins.Top
+                );
             }
 
             _graphics.PrintingHelper = printGraphics;

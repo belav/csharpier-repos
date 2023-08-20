@@ -18,7 +18,7 @@ namespace JIT.HardwareIntrinsics.General
 {
     public static partial class Program
     {
-        private unsafe static void ToStringByte()
+        private static unsafe void ToStringByte()
         {
             int size = Unsafe.SizeOf<Vector64<Byte>>() / sizeof(Byte);
             Byte[] values = new Byte[size];
@@ -27,17 +27,36 @@ namespace JIT.HardwareIntrinsics.General
             {
                 values[i] = TestLibrary.Generator.GetByte();
             }
-            
-            Vector64<Byte> vector = Vector64.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+
+            Vector64<Byte> vector = Vector64.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
             string actual = vector.ToString();
 
-            string expected = '<' + string.Join(", ", values.Select(x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture))) + '>';
+            string expected =
+                '<'
+                + string.Join(
+                    ", ",
+                    values.Select(
+                        x => x.ToString("G", System.Globalization.CultureInfo.InvariantCulture)
+                    )
+                )
+                + '>';
 
             bool succeeded = string.Equals(expected, actual, StringComparison.Ordinal);
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64ByteToString: Vector64<Byte>.ToString() returned an unexpected result.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64ByteToString: Vector64<Byte>.ToString() returned an unexpected result."
+                );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

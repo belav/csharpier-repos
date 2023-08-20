@@ -18,9 +18,7 @@ namespace System.Drawing.Internal
         private string AllocationSite = DbgUtil.StackTrace;
 #endif
 
-        private WindowsRegion()
-        {
-        }
+        private WindowsRegion() { }
 
         public WindowsRegion(Rectangle rect)
         {
@@ -80,24 +78,39 @@ namespace System.Drawing.Internal
             // WARNING: WindowsRegion currently supports rectangulare regions only, if the WindowsRegion was created
             //          from an HRegion and it is not rectangular this method won't work as expected.
             // Note:    This method is currently not used and is here just to implement ICloneable.
-            return IsInfinite ?
-                new WindowsRegion() :
-                new WindowsRegion(ToRectangle());
+            return IsInfinite ? new WindowsRegion() : new WindowsRegion(ToRectangle());
         }
 
         /// <summary>
         /// Combines region1 &amp; region2 into this region. The regions cannot be null. The three regions need not be
         /// distinct. For example, the sourceRgn1 can equal this region.
         /// </summary>
-        public Interop.RegionType CombineRegion(WindowsRegion region1, WindowsRegion region2, Interop.Gdi32.CombineMode mode)
+        public Interop.RegionType CombineRegion(
+            WindowsRegion region1,
+            WindowsRegion region2,
+            Interop.Gdi32.CombineMode mode
+        )
         {
-            return Interop.Gdi32.CombineRgn(new HandleRef(this, HRegion), new HandleRef(region1, region1.HRegion), new HandleRef(region2, region2.HRegion), mode);
+            return Interop.Gdi32.CombineRgn(
+                new HandleRef(this, HRegion),
+                new HandleRef(region1, region1.HRegion),
+                new HandleRef(region2, region2.HRegion),
+                mode
+            );
         }
 
         private void CreateRegion(Rectangle rect)
         {
-            Debug.Assert(_nativeHandle == IntPtr.Zero, "nativeHandle should be null, we're leaking handle");
-            _nativeHandle = Interop.Gdi32.CreateRectRgn(rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Height);
+            Debug.Assert(
+                _nativeHandle == IntPtr.Zero,
+                "nativeHandle should be null, we're leaking handle"
+            );
+            _nativeHandle = Interop.Gdi32.CreateRectRgn(
+                rect.X,
+                rect.Y,
+                rect.X + rect.Width,
+                rect.Y + rect.Height
+            );
             _ownHandle = true;
         }
 

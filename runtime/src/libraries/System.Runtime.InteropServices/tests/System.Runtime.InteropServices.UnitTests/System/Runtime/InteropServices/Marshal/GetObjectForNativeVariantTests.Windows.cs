@@ -44,23 +44,11 @@ namespace System.Runtime.InteropServices.Tests
             };
 
             // VT_I4 => int.
-            yield return new object[]
-            {
-                CreateVariant(VT_I4, new UnionTypes { _i4 = 10 }),
-                10
-            };
+            yield return new object[] { CreateVariant(VT_I4, new UnionTypes { _i4 = 10 }), 10 };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_I4, new UnionTypes { _i4 = 0 }),
-                0
-            };
+            yield return new object[] { CreateVariant(VT_I4, new UnionTypes { _i4 = 0 }), 0 };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_I4, new UnionTypes { _i4 = -10 }),
-                -10
-            };
+            yield return new object[] { CreateVariant(VT_I4, new UnionTypes { _i4 = -10 }), -10 };
 
             // VT_R4 => float.
             yield return new object[]
@@ -137,17 +125,9 @@ namespace System.Runtime.InteropServices.Tests
             };
 
             // VT_CY => decimal.
-            yield return new object[]
-            {
-                CreateVariant(VT_CY, new UnionTypes { _cy = 200 }),
-                0.02m
-            };
+            yield return new object[] { CreateVariant(VT_CY, new UnionTypes { _cy = 200 }), 0.02m };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_CY, new UnionTypes { _cy = 0 }),
-                0m
-            };
+            yield return new object[] { CreateVariant(VT_CY, new UnionTypes { _cy = 0 }), 0m };
 
             yield return new object[]
             {
@@ -254,7 +234,9 @@ namespace System.Runtime.InteropServices.Tests
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetIDispatchForObject(obj));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => Marshal.GetIDispatchForObject(obj)
+                );
             }
 
             // VT_ERROR => int.
@@ -264,11 +246,7 @@ namespace System.Runtime.InteropServices.Tests
                 int.MaxValue
             };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_ERROR, new UnionTypes { _error = 0 }),
-                0
-            };
+            yield return new object[] { CreateVariant(VT_ERROR, new UnionTypes { _error = 0 }), 0 };
 
             yield return new object[]
             {
@@ -277,23 +255,11 @@ namespace System.Runtime.InteropServices.Tests
             };
 
             // VT_BOOL => bool.
-            yield return new object[]
-            {
-                CreateVariant(VT_BOOL, new UnionTypes { _i1 = 1 }),
-                true
-            };
+            yield return new object[] { CreateVariant(VT_BOOL, new UnionTypes { _i1 = 1 }), true };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_BOOL, new UnionTypes { _i1 = 0 }),
-                false
-            };
+            yield return new object[] { CreateVariant(VT_BOOL, new UnionTypes { _i1 = 0 }), false };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_BOOL, new UnionTypes { _i1 = -1 }),
-                true
-            };
+            yield return new object[] { CreateVariant(VT_BOOL, new UnionTypes { _i1 = -1 }), true };
 
             // VT_UNKNOWN => object.
             yield return new object[]
@@ -374,11 +340,7 @@ namespace System.Runtime.InteropServices.Tests
                 (long)10
             };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_I8, new UnionTypes { _i8 = 0 }),
-                (long)0
-            };
+            yield return new object[] { CreateVariant(VT_I8, new UnionTypes { _i8 = 0 }), (long)0 };
 
             yield return new object[]
             {
@@ -400,23 +362,11 @@ namespace System.Runtime.InteropServices.Tests
             };
 
             // VT_INT => int.
-            yield return new object[]
-            {
-                CreateVariant(VT_INT, new UnionTypes { _int = 10 }),
-                10
-            };
+            yield return new object[] { CreateVariant(VT_INT, new UnionTypes { _int = 10 }), 10 };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_INT, new UnionTypes { _int = 0 }),
-                0
-            };
+            yield return new object[] { CreateVariant(VT_INT, new UnionTypes { _int = 0 }), 0 };
 
-            yield return new object[]
-            {
-                CreateVariant(VT_INT, new UnionTypes { _int = -10 }),
-                -10
-            };
+            yield return new object[] { CreateVariant(VT_INT, new UnionTypes { _int = -10 }), -10 };
 
             // VT_UINT => uint.
             yield return new object[]
@@ -432,11 +382,7 @@ namespace System.Runtime.InteropServices.Tests
             };
 
             // VT_VOID => null.
-            yield return new object[]
-            {
-                CreateVariant(VT_VOID, new UnionTypes()),
-                null
-            };
+            yield return new object[] { CreateVariant(VT_VOID, new UnionTypes()), null };
         }
 
         public static IEnumerable<object[]> GetObjectForNativeVariant_TestData()
@@ -488,15 +434,27 @@ namespace System.Runtime.InteropServices.Tests
             // VT_RECORD.
             yield return new object[]
             {
-                CreateVariant(VT_RECORD, new UnionTypes { _record = new Record { _record = IntPtr.Zero, _recordInfo = (IntPtr)1 } }),
+                CreateVariant(
+                    VT_RECORD,
+                    new UnionTypes
+                    {
+                        _record = new Record { _record = IntPtr.Zero, _recordInfo = (IntPtr)1 }
+                    }
+                ),
                 null
             };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetObjectForNativeVariant_PrimitivesByRef_TestData))]
         [MemberData(nameof(GetObjectForNativeVariant_TestData))]
-        public void GetObjectForNativeVariant_Normal_ReturnsExpected(Variant variant, object expected)
+        public void GetObjectForNativeVariant_Normal_ReturnsExpected(
+            Variant variant,
+            object expected
+        )
         {
             try
             {
@@ -513,19 +471,31 @@ namespace System.Runtime.InteropServices.Tests
         {
             // This cannot be in the [MemberData] as XUnit uses reflection to invoke the test method
             // and Type.Missing is handled specially by the runtime.
-            GetObjectForNativeVariant_Normal_ReturnsExpected(CreateVariant(VT_ERROR, new UnionTypes { _error = unchecked((int)0x80020004) }), Type.Missing);
+            GetObjectForNativeVariant_Normal_ReturnsExpected(
+                CreateVariant(VT_ERROR, new UnionTypes { _error = unchecked((int)0x80020004) }),
+                Type.Missing
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetObjectForNativeVariant_PrimitivesByRef_TestData))]
-        public void GetObjectForNativeVariant_NestedVariant_ReturnsExpected(Variant source, object expected)
+        public void GetObjectForNativeVariant_NestedVariant_ReturnsExpected(
+            Variant source,
+            object expected
+        )
         {
             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf<Variant>());
             try
             {
                 Marshal.StructureToPtr(source, ptr, fDeleteOld: false);
 
-                Variant variant = CreateVariant(VT_VARIANT | VT_BYREF, new UnionTypes { _pvarVal = ptr });
+                Variant variant = CreateVariant(
+                    VT_VARIANT | VT_BYREF,
+                    new UnionTypes { _pvarVal = ptr }
+                );
                 Assert.Equal(expected, GetObjectForNativeVariant(variant));
             }
             finally
@@ -542,19 +512,20 @@ namespace System.Runtime.InteropServices.Tests
             int record = 10;
             var recordInfo = new RecordInfo { Guid = typeof(int).GUID };
             IntPtr pRecord = Marshal.AllocHGlobal(Marshal.SizeOf<int>());
-            IntPtr pRecordInfo = Marshal.GetComInterfaceForObject<RecordInfo, IRecordInfo>(recordInfo);
+            IntPtr pRecordInfo = Marshal.GetComInterfaceForObject<RecordInfo, IRecordInfo>(
+                recordInfo
+            );
             try
             {
                 Marshal.StructureToPtr(record, pRecord, fDeleteOld: false);
 
-                Variant variant = CreateVariant(VT_RECORD, new UnionTypes
-                {
-                    _record = new Record
+                Variant variant = CreateVariant(
+                    VT_RECORD,
+                    new UnionTypes
                     {
-                        _record = pRecord,
-                        _recordInfo = pRecordInfo
+                        _record = new Record { _record = pRecord, _recordInfo = pRecordInfo }
                     }
-                });
+                );
 
                 Assert.Throws<ArgumentException>(() => GetObjectForNativeVariant(variant));
             }
@@ -566,9 +537,15 @@ namespace System.Runtime.InteropServices.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetObjectForNativeVariant_PrimitivesByRef_TestData))]
-        public unsafe void GetObjectForNativeVariant_ByRef_ReturnsExpected(Variant source, object value)
+        public unsafe void GetObjectForNativeVariant_ByRef_ReturnsExpected(
+            Variant source,
+            object value
+        )
         {
             try
             {

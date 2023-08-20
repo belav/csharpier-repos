@@ -21,14 +21,18 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 // Contains all tests related to shutdown, including app_offline, abort, and app recycle
@@ -36,9 +40,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [SkipNonHelix("https://github.com/dotnet/aspnetcore/issues/25107")]
 public class ShutdownTests : IISFunctionalTestBase
 {
-    public ShutdownTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public ShutdownTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task ShutdownTimeoutIsApplied()
@@ -46,17 +49,23 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
         deploymentParameters.TransformArguments((a, _) => $"{a} HangOnStop");
         deploymentParameters.WebConfigActionList.Add(
-            WebConfigHelpers.AddOrModifyAspNetCoreSection("shutdownTimeLimit", "1"));
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("shutdownTimeLimit", "1")
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        Assert.Equal("Hello World", await deploymentResult.HttpClient.GetStringAsync("/HelloWorld"));
+        Assert.Equal(
+            "Hello World",
+            await deploymentResult.HttpClient.GetStringAsync("/HelloWorld")
+        );
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvents(deploymentResult,
+        EventLogHelpers.VerifyEventLogEvents(
+            deploymentResult,
             EventLogHelpers.InProcessStarted(deploymentResult),
-            EventLogHelpers.InProcessFailedToStop(deploymentResult, ""));
+            EventLogHelpers.InProcessFailedToStop(deploymentResult, "")
+        );
     }
 
     [ConditionalTheory]
@@ -79,7 +88,6 @@ public class ShutdownTests : IISFunctionalTestBase
 
         deploymentResult.AssertWorkerProcessStop();
     }
-
 
     [ConditionalFact]
     public async Task AppOfflineDroppedWhileSiteIsDown_SiteReturns503_InProcess()
@@ -110,7 +118,14 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentResult = await DeployApp(HostingModel.InProcess);
 
         // Add app_offline without shared access
-        using (var stream = File.Open(Path.Combine(deploymentResult.ContentRoot, "app_offline.htm"), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
+        using (
+            var stream = File.Open(
+                Path.Combine(deploymentResult.ContentRoot, "app_offline.htm"),
+                FileMode.CreateNew,
+                FileAccess.ReadWrite,
+                FileShare.None
+            )
+        )
         using (var writer = new StreamWriter(stream))
         {
             await writer.WriteLineAsync("App if offline but you wouldn't see this message");
@@ -128,7 +143,14 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentResult = await DeployApp(HostingModel.OutOfProcess);
 
         // Add app_offline without shared access
-        using (var stream = File.Open(Path.Combine(deploymentResult.ContentRoot, "app_offline.htm"), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
+        using (
+            var stream = File.Open(
+                Path.Combine(deploymentResult.ContentRoot, "app_offline.htm"),
+                FileMode.CreateNew,
+                FileAccess.ReadWrite,
+                FileShare.None
+            )
+        )
         using (var writer = new StreamWriter(stream))
         {
             await writer.WriteLineAsync("App if offline but you wouldn't see this message");
@@ -142,8 +164,12 @@ public class ShutdownTests : IISFunctionalTestBase
     [ConditionalFact]
     public async Task AppOfflineDroppedWhileSiteFailedToStartInShim_AppOfflineServed_InProcess()
     {
-        var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel: HostingModel.InProcess);
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nonexistent"));
+        var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+            hostingModel: HostingModel.InProcess
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nonexistent")
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -161,8 +187,12 @@ public class ShutdownTests : IISFunctionalTestBase
     [RequiresNewShim]
     public async Task AppOfflineDroppedWhileSiteFailedToStartInShim_AppOfflineServed_OutOfProcess()
     {
-        var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel: HostingModel.OutOfProcess);
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nonexistent"));
+        var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+            hostingModel: HostingModel.OutOfProcess
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nonexistent")
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -182,7 +212,10 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentResult = await DeployApp(HostingModel.InProcess);
 
         // Set file content to empty so it fails at runtime
-        File.WriteAllText(Path.Combine(deploymentResult.ContentRoot, "Microsoft.AspNetCore.Server.IIS.dll"), "");
+        File.WriteAllText(
+            Path.Combine(deploymentResult.ContentRoot, "Microsoft.AspNetCore.Server.IIS.dll"),
+            ""
+        );
 
         var result = await deploymentResult.HttpClient.GetAsync("/");
         Assert.Equal(500, (int)result.StatusCode);
@@ -218,10 +251,10 @@ public class ShutdownTests : IISFunctionalTestBase
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
+                ""
+            );
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK", "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
             await connection.ReceiveHeaders();
             await connection.Receive("1", $"{i + 1}");
             connectionList.Add(connection);
@@ -235,17 +268,15 @@ public class ShutdownTests : IISFunctionalTestBase
             "Host: localhost",
             "Connection: close",
             "",
-            "");
+            ""
+        );
 
-        await statusConnection.Receive("HTTP/1.1 200 OK",
-            "");
+        await statusConnection.Receive("HTTP/1.1 200 OK", "");
 
         await statusConnection.ReceiveHeaders();
 
         // Receiving some data means we are currently waiting for IHostApplicationLifetime.
-        await statusConnection.Receive("5",
-            "test1",
-            "");
+        await statusConnection.Receive("5", "test1", "");
 
         AddAppOffline(deploymentResult.ContentRoot);
 
@@ -262,8 +293,11 @@ public class ShutdownTests : IISFunctionalTestBase
         deploymentResult.AssertWorkerProcessStop();
 
         // Shutdown should be graceful here!
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult,
-            EventLogHelpers.InProcessShutdown(), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessShutdown(),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -322,7 +356,11 @@ public class ShutdownTests : IISFunctionalTestBase
     }
 
     [ConditionalFact]
-    [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+    [MaximumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win10_20H2,
+        SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+    )]
     public async Task AppOfflineAddedAndRemovedStress_InProcess()
     {
         await AppOfflineAddAndRemovedStress(HostingModel.InProcess);
@@ -337,19 +375,28 @@ public class ShutdownTests : IISFunctionalTestBase
 
     private async Task AppOfflineAddAndRemovedStress(HostingModel hostingModel)
     {
-            var deploymentResult = await AssertStarts(hostingModel);
+        var deploymentResult = await AssertStarts(hostingModel);
 
-        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
-        {
-            var statusCode = (int)response.StatusCode;
-            // Test failure involves the stress load receiving a 400 Bad Request.
-            // We think it is due to IIS returning the 400 itself, but need to confirm the hypothesis.
-            if (statusCode == 400)
+        var load = Helpers.StressLoad(
+            deploymentResult.HttpClient,
+            "/HelloWorld",
+            response =>
             {
-                Logger.LogError($"Status code was a bad request. Content: {response.Content.ReadAsStringAsync().GetAwaiter().GetResult()}");
+                var statusCode = (int)response.StatusCode;
+                // Test failure involves the stress load receiving a 400 Bad Request.
+                // We think it is due to IIS returning the 400 itself, but need to confirm the hypothesis.
+                if (statusCode == 400)
+                {
+                    Logger.LogError(
+                        $"Status code was a bad request. Content: {response.Content.ReadAsStringAsync().GetAwaiter().GetResult()}"
+                    );
+                }
+                Assert.True(
+                    statusCode == 200 || statusCode == 503,
+                    "Status code was " + statusCode
+                );
             }
-            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
-        });
+        );
 
         for (int i = 0; i < 5; i++)
         {
@@ -358,7 +405,8 @@ public class ShutdownTests : IISFunctionalTestBase
                 () => AddAppOffline(deploymentResult.ContentRoot),
                 e => Logger.LogError($"Failed to create app_offline : {e.Message}"),
                 retryCount: 3,
-                retryDelayMilliseconds: RetryDelay.Milliseconds);
+                retryDelayMilliseconds: RetryDelay.Milliseconds
+            );
             RemoveAppOffline(deploymentResult.ContentRoot);
         }
 
@@ -366,7 +414,8 @@ public class ShutdownTests : IISFunctionalTestBase
         {
             await load;
         }
-        catch (HttpRequestException ex) when (ex.InnerException is IOException | ex.InnerException is SocketException)
+        catch (HttpRequestException ex)
+            when (ex.InnerException is IOException | ex.InnerException is SocketException)
         {
             // IOException in InProcess is fine, just means process stopped
             if (hostingModel != HostingModel.InProcess)
@@ -406,7 +455,10 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process gets restarted with new process id
-        await deploymentResult.HttpClient.RetryRequestAsync("/ProcessId", async r => await r.Content.ReadAsStringAsync() != processBefore);
+        await deploymentResult.HttpClient.RetryRequestAsync(
+            "/ProcessId",
+            async r => await r.Content.ReadAsStringAsync() != processBefore
+        );
     }
 
     [ConditionalFact]
@@ -418,16 +470,22 @@ public class ShutdownTests : IISFunctionalTestBase
 
         await deploymentResult.AssertStarts();
 
-        deploymentResult.ModifyWebConfig(element => element
-            .Descendants("system.webServer")
-            .Single()
-            .GetOrAdd("aspNetCore")
-            .SetAttributeValue("hostingModel", "inprocess"));
+        deploymentResult.ModifyWebConfig(
+            element =>
+                element
+                    .Descendants("system.webServer")
+                    .Single()
+                    .GetOrAdd("aspNetCore")
+                    .SetAttributeValue("hostingModel", "inprocess")
+        );
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that inprocess application was created and started, checking the server
         // header to see that it is running inprocess
-        await deploymentResult.HttpClient.RetryRequestAsync("/HelloWorld", r => r.Headers.Server.ToString().StartsWith("Microsoft", StringComparison.Ordinal));
+        await deploymentResult.HttpClient.RetryRequestAsync(
+            "/HelloWorld",
+            r => r.Headers.Server.ToString().StartsWith("Microsoft", StringComparison.Ordinal)
+        );
     }
 
     [ConditionalFact]
@@ -441,11 +499,18 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentResult = await DeployAsync(Fixture.GetBaseDeploymentParameters(hostingModel));
 
         await deploymentResult.AssertStarts();
-        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
-        {
-            var statusCode = (int)response.StatusCode;
-            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
-        });
+        var load = Helpers.StressLoad(
+            deploymentResult.HttpClient,
+            "/HelloWorld",
+            response =>
+            {
+                var statusCode = (int)response.StatusCode;
+                Assert.True(
+                    statusCode == 200 || statusCode == 503,
+                    "Status code was " + statusCode
+                );
+            }
+        );
 
         for (var i = 0; i < 100; i++)
         {
@@ -454,14 +519,16 @@ public class ShutdownTests : IISFunctionalTestBase
                 () => deploymentResult.ModifyWebConfig(element => { }),
                 e => Logger.LogError($"Failed to touch web.config : {e.Message}"),
                 retryCount: 3,
-                retryDelayMilliseconds: RetryDelay.Milliseconds);
+                retryDelayMilliseconds: RetryDelay.Milliseconds
+            );
         }
 
         try
         {
             await load;
         }
-        catch (HttpRequestException ex) when (ex.InnerException is IOException | ex.InnerException is SocketException)
+        catch (HttpRequestException ex)
+            when (ex.InnerException is IOException | ex.InnerException is SocketException)
         {
             // IOException in InProcess is fine, just means process stopped
             if (hostingModel != HostingModel.InProcess)
@@ -477,11 +544,15 @@ public class ShutdownTests : IISFunctionalTestBase
     {
         try
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                HostingModel.OutOfProcess
+            );
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var response = await deploymentResult.HttpClient.GetAsync("/Abort").TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+            var response = await deploymentResult.HttpClient
+                .GetAsync("/Abort")
+                .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
             Assert.Equal(HttpStatusCode.BadGateway, response.StatusCode);
             // 0x80072f78 ERROR_HTTP_INVALID_SERVER_RESPONSE The server returned an invalid or unrecognized response
@@ -501,7 +572,9 @@ public class ShutdownTests : IISFunctionalTestBase
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.InProcess);
 
             var deploymentResult = await DeployAsync(deploymentParameters);
-            var response = await deploymentResult.HttpClient.GetAsync("/Abort").TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+            var response = await deploymentResult.HttpClient
+                .GetAsync("/Abort")
+                .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
             Assert.True(false, "Should not reach here");
         }

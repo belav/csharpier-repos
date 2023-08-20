@@ -12,7 +12,8 @@ public class PocoUserRole : PocoUserRole<string> { }
 ///     EntityType that represents a user belonging to a role
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoUserRole<TKey> where TKey : IEquatable<TKey>
+public class PocoUserRole<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     UserId for the user that is in the role

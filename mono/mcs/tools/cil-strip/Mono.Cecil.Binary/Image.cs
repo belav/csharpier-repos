@@ -26,218 +26,235 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
+namespace Mono.Cecil.Binary
+{
+    using System;
+    using System.IO;
 
-	using System;
-	using System.IO;
+    using Mono.Cecil.Metadata;
 
-	using Mono.Cecil.Metadata;
+    internal sealed class Image : IBinaryVisitable
+    {
+        DOSHeader m_dosHeader;
+        PEFileHeader m_peFileHeader;
+        PEOptionalHeader m_peOptionalHeader;
 
-	internal sealed class Image : IBinaryVisitable {
+        SectionCollection m_sections;
+        Section m_textSection;
 
-		DOSHeader m_dosHeader;
-		PEFileHeader m_peFileHeader;
-		PEOptionalHeader m_peOptionalHeader;
+        ImportAddressTable m_importAddressTable;
+        CLIHeader m_cliHeader;
+        ImportTable m_importTable;
+        ImportLookupTable m_importLookupTable;
+        HintNameTable m_hintNameTable;
+        ExportTable m_exportTable;
 
-		SectionCollection m_sections;
-		Section m_textSection;
+        DebugHeader m_debugHeader;
+        MetadataRoot m_mdRoot;
 
-		ImportAddressTable m_importAddressTable;
-		CLIHeader m_cliHeader;
-		ImportTable m_importTable;
-		ImportLookupTable m_importLookupTable;
-		HintNameTable m_hintNameTable;
-		ExportTable m_exportTable;
+        ResourceDirectoryTable m_rsrcRoot;
 
-		DebugHeader m_debugHeader;
-		MetadataRoot m_mdRoot;
+        FileInfo m_img;
 
-		ResourceDirectoryTable m_rsrcRoot;
+        public DOSHeader DOSHeader
+        {
+            get { return m_dosHeader; }
+        }
 
-		FileInfo m_img;
+        public PEFileHeader PEFileHeader
+        {
+            get { return m_peFileHeader; }
+        }
 
-		public DOSHeader DOSHeader {
-			get { return m_dosHeader; }
-		}
+        public PEOptionalHeader PEOptionalHeader
+        {
+            get { return m_peOptionalHeader; }
+        }
 
-		public PEFileHeader PEFileHeader {
-			get { return m_peFileHeader; }
-		}
+        public SectionCollection Sections
+        {
+            get { return m_sections; }
+        }
 
-		public PEOptionalHeader PEOptionalHeader {
-			get { return m_peOptionalHeader; }
-		}
+        public Section TextSection
+        {
+            get { return m_textSection; }
+            set { m_textSection = value; }
+        }
 
-		public SectionCollection Sections {
-			get { return m_sections; }
-		}
+        public ImportAddressTable ImportAddressTable
+        {
+            get { return m_importAddressTable; }
+        }
 
-		public Section TextSection {
-			get { return m_textSection; }
-			set { m_textSection = value; }
-		}
+        public CLIHeader CLIHeader
+        {
+            get { return m_cliHeader; }
+            set { m_cliHeader = value; }
+        }
 
-		public ImportAddressTable ImportAddressTable {
-			get { return m_importAddressTable; }
-		}
+        public DebugHeader DebugHeader
+        {
+            get { return m_debugHeader; }
+            set { m_debugHeader = value; }
+        }
 
-		public CLIHeader CLIHeader {
-			get { return m_cliHeader; }
-			set { m_cliHeader = value; }
-		}
+        public MetadataRoot MetadataRoot
+        {
+            get { return m_mdRoot; }
+        }
 
-		public DebugHeader DebugHeader {
-			get { return m_debugHeader; }
-			set { m_debugHeader = value; }
-		}
+        public ImportTable ImportTable
+        {
+            get { return m_importTable; }
+        }
 
-		public MetadataRoot MetadataRoot {
-			get { return m_mdRoot; }
-		}
+        public ImportLookupTable ImportLookupTable
+        {
+            get { return m_importLookupTable; }
+        }
 
-		public ImportTable ImportTable {
-			get { return m_importTable; }
-		}
+        public HintNameTable HintNameTable
+        {
+            get { return m_hintNameTable; }
+        }
 
-		public ImportLookupTable ImportLookupTable {
-			get { return m_importLookupTable; }
-		}
+        public ExportTable ExportTable
+        {
+            get { return m_exportTable; }
+            set { m_exportTable = value; }
+        }
 
-		public HintNameTable HintNameTable {
-			get { return m_hintNameTable; }
-		}
+        internal ResourceDirectoryTable ResourceDirectoryRoot
+        {
+            get { return m_rsrcRoot; }
+            set { m_rsrcRoot = value; }
+        }
 
-		public ExportTable ExportTable {
-			get { return m_exportTable; }
-			set { m_exportTable = value; }
-		}
+        public FileInfo FileInformation
+        {
+            get { return m_img; }
+        }
 
-		internal ResourceDirectoryTable ResourceDirectoryRoot {
-			get { return m_rsrcRoot; }
-			set { m_rsrcRoot = value; }
-		}
+        internal Image()
+        {
+            m_dosHeader = new DOSHeader();
+            m_peFileHeader = new PEFileHeader();
+            m_peOptionalHeader = new PEOptionalHeader();
+            m_sections = new SectionCollection();
+            m_importAddressTable = new ImportAddressTable();
+            m_importTable = new ImportTable();
+            m_importLookupTable = new ImportLookupTable();
+            m_hintNameTable = new HintNameTable();
+            m_mdRoot = new MetadataRoot(this);
+        }
 
-		public FileInfo FileInformation {
-			get { return m_img; }
-		}
+        internal Image(FileInfo img)
+            : this()
+        {
+            m_img = img;
+        }
 
-		internal Image ()
-		{
-			m_dosHeader = new DOSHeader ();
-			m_peFileHeader = new PEFileHeader ();
-			m_peOptionalHeader = new PEOptionalHeader ();
-			m_sections = new SectionCollection ();
-			m_importAddressTable = new ImportAddressTable ();
-			m_importTable = new ImportTable ();
-			m_importLookupTable = new ImportLookupTable ();
-			m_hintNameTable = new HintNameTable ();
-			m_mdRoot = new MetadataRoot (this);
-		}
+        public long ResolveVirtualAddress(RVA rva)
+        {
+            foreach (Section sect in this.Sections)
+            {
+                if (rva >= sect.VirtualAddress && rva < sect.VirtualAddress + sect.SizeOfRawData)
 
-		internal Image (FileInfo img) : this ()
-		{
-			m_img = img;
-		}
+                    return rva + sect.PointerToRawData - sect.VirtualAddress;
+            }
 
-		public long ResolveVirtualAddress (RVA rva)
-		{
-			foreach (Section sect in this.Sections) {
-				if (rva >= sect.VirtualAddress &&
-					rva < sect.VirtualAddress + sect.SizeOfRawData)
+            throw new ArgumentOutOfRangeException("Cannot map the rva to any section");
+        }
 
-					return rva + sect.PointerToRawData - sect.VirtualAddress;
-			}
+        internal Section GetSectionAtVirtualAddress(RVA rva)
+        {
+            foreach (Section sect in this.Sections)
+            {
+                if (rva >= sect.VirtualAddress && rva < sect.VirtualAddress + sect.SizeOfRawData)
+                {
+                    return sect;
+                }
+            }
+            return null;
+        }
 
-			throw new ArgumentOutOfRangeException ("Cannot map the rva to any section");
-		}
+        public BinaryReader GetReaderAtVirtualAddress(RVA rva)
+        {
+            Section sect = GetSectionAtVirtualAddress(rva);
+            if (sect == null)
+                return null;
 
-		internal Section GetSectionAtVirtualAddress (RVA rva)
-		{
-			foreach (Section sect in this.Sections) {
-				if (rva >= sect.VirtualAddress &&
-					rva < sect.VirtualAddress + sect.SizeOfRawData) {
-					return sect;
-				}
-			}
-			return null;
-		}
+            BinaryReader br = new BinaryReader(new MemoryStream(sect.Data));
+            br.BaseStream.Position = rva - sect.VirtualAddress;
+            return br;
+        }
 
-		public BinaryReader GetReaderAtVirtualAddress (RVA rva)
-		{
-			Section sect = GetSectionAtVirtualAddress (rva);
-			if (sect == null)
-				return null;
+        public void AddDebugHeader()
+        {
+            m_debugHeader = new DebugHeader();
+            m_debugHeader.SetDefaultValues();
+        }
 
-			BinaryReader br = new BinaryReader (new MemoryStream (sect.Data));
-			br.BaseStream.Position = rva - sect.VirtualAddress;
-			return br;
-		}
+        internal void SetFileInfo(FileInfo file)
+        {
+            m_img = file;
+        }
 
-		public void AddDebugHeader ()
-		{
-			m_debugHeader = new DebugHeader ();
-			m_debugHeader.SetDefaultValues ();
-		}
+        public void Accept(IBinaryVisitor visitor)
+        {
+            visitor.VisitImage(this);
 
-		internal void SetFileInfo (FileInfo file)
-		{
-			m_img = file;
-		}
+            m_dosHeader.Accept(visitor);
+            m_peFileHeader.Accept(visitor);
+            m_peOptionalHeader.Accept(visitor);
 
-		public void Accept (IBinaryVisitor visitor)
-		{
-			visitor.VisitImage (this);
+            m_sections.Accept(visitor);
 
-			m_dosHeader.Accept (visitor);
-			m_peFileHeader.Accept (visitor);
-			m_peOptionalHeader.Accept (visitor);
+            m_importAddressTable.Accept(visitor);
 
-			m_sections.Accept (visitor);
+            AcceptIfNotNull(m_cliHeader, visitor);
+            AcceptIfNotNull(m_debugHeader, visitor);
 
-			m_importAddressTable.Accept (visitor);
+            m_importTable.Accept(visitor);
+            m_importLookupTable.Accept(visitor);
+            m_hintNameTable.Accept(visitor);
+            AcceptIfNotNull(m_exportTable, visitor);
 
-			AcceptIfNotNull (m_cliHeader, visitor);
-			AcceptIfNotNull (m_debugHeader, visitor);
+            visitor.TerminateImage(this);
+        }
 
-			m_importTable.Accept (visitor);
-			m_importLookupTable.Accept (visitor);
-			m_hintNameTable.Accept (visitor);
-			AcceptIfNotNull (m_exportTable, visitor);
+        static void AcceptIfNotNull(IBinaryVisitable visitable, IBinaryVisitor visitor)
+        {
+            if (visitable == null)
+                return;
 
-			visitor.TerminateImage (this);
-		}
+            visitable.Accept(visitor);
+        }
 
-		static void AcceptIfNotNull (IBinaryVisitable visitable, IBinaryVisitor visitor)
-		{
-			if (visitable == null)
-				return;
+        public static Image CreateImage()
+        {
+            Image img = new Image();
 
-			visitable.Accept (visitor);
-		}
+            ImageInitializer init = new ImageInitializer(img);
+            img.Accept(init);
 
-		public static Image CreateImage ()
-		{
-			Image img = new Image ();
+            return img;
+        }
 
-			ImageInitializer init = new ImageInitializer (img);
-			img.Accept (init);
+        public static Image GetImage(string file)
+        {
+            return ImageReader.Read(file).Image;
+        }
 
-			return img;
-		}
+        public static Image GetImage(byte[] image)
+        {
+            return ImageReader.Read(image).Image;
+        }
 
-		public static Image GetImage (string file)
-		{
-			return ImageReader.Read (file).Image;
-		}
-
-		public static Image GetImage (byte [] image)
-		{
-			return ImageReader.Read (image).Image;
-		}
-
-		public static Image GetImage (Stream stream)
-		{
-			return ImageReader.Read (stream).Image;
-		}
-	}
+        public static Image GetImage(Stream stream)
+        {
+            return ImageReader.Read(stream).Image;
+        }
+    }
 }

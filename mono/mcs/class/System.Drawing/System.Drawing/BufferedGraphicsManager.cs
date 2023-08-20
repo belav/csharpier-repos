@@ -29,22 +29,20 @@
 
 namespace System.Drawing
 {
-	public sealed class BufferedGraphicsManager
-	{
-		private static BufferedGraphicsContext graphics_context;
+    public sealed class BufferedGraphicsManager
+    {
+        private static BufferedGraphicsContext graphics_context;
 
-		static BufferedGraphicsManager ()
-		{
-			graphics_context = new BufferedGraphicsContext ();
-		}
-		
-		private BufferedGraphicsManager ()
-		{				
-		}
+        static BufferedGraphicsManager()
+        {
+            graphics_context = new BufferedGraphicsContext();
+        }
 
-		public static BufferedGraphicsContext Current {
-			get { return graphics_context; }
-		}
-	}
+        private BufferedGraphicsManager() { }
+
+        public static BufferedGraphicsContext Current
+        {
+            get { return graphics_context; }
+        }
+    }
 }
-

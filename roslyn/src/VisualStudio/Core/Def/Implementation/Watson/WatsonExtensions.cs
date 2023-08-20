@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         private const int Reserved1 = 7;
         private const int Reserved2 = 6;
 
-        // replace exception slot for callstack since the exception (with empty callstack) 
+        // replace exception slot for callstack since the exception (with empty callstack)
         // given is synthesized one that doesn't provide any meaningful data
         private const int Reserved3 = 3;
 
@@ -26,7 +26,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// This sets extra watson bucket parameters to make bucketting better
         /// in non fatal watson report
         /// </summary>
-        public static void SetExtraParameters(this IFaultUtility fault, Exception exception, bool emptyCallstack)
+        public static void SetExtraParameters(
+            this IFaultUtility fault,
+            Exception exception,
+            bool emptyCallstack
+        )
         {
             if (emptyCallstack)
             {
@@ -34,7 +38,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 // callstack in one of reserved slot for better bucketting.
                 // we put hash since NFW just takes certain length of callstack which
                 // makes the callstack useless
-                fault.SetBucketParameter(Reserved3, $"{Environment.StackTrace?.GetHashCode() ?? 0}");
+                fault.SetBucketParameter(
+                    Reserved3,
+                    $"{Environment.StackTrace?.GetHashCode() ?? 0}"
+                );
             }
 
             switch (exception)
@@ -56,7 +63,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     {
                         var flatten = aggregate.Flatten();
 
-                        fault.SetBucketParameter(Reserved1, flatten.InnerException.GetParameterString());
+                        fault.SetBucketParameter(
+                            Reserved1,
+                            flatten.InnerException.GetParameterString()
+                        );
                         fault.SetBucketParameter(Reserved2, flatten.CalculateHash());
 
                         return;
@@ -67,7 +77,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                         return;
                     }
 
-                    fault.SetBucketParameter(Reserved1, exception.InnerException.GetParameterString());
+                    fault.SetBucketParameter(
+                        Reserved1,
+                        exception.InnerException.GetParameterString()
+                    );
                     return;
             }
         }
@@ -84,11 +97,13 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             return hash.ToString();
         }
 
-        public static string GetParameterString(this Exception exception)
-            => exception switch
+        public static string GetParameterString(this Exception exception) =>
+            exception switch
             {
-                RemoteInvocationException remote => $"{remote.ErrorCode} {remote.StackTrace ?? exception.Message}",
-                AggregateException aggregate when aggregate.InnerException != null =>
+                RemoteInvocationException remote
+                    => $"{remote.ErrorCode} {remote.StackTrace ?? exception.Message}",
+                AggregateException aggregate when aggregate.InnerException != null
+                    =>
                     // get first exception that is not aggregated exception
                     GetParameterString(aggregate.InnerException),
                 _ => $"{exception.GetType()} {exception.StackTrace ?? exception.ToString()}",

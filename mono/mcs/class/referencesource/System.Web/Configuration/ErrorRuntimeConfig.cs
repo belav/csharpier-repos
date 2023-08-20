@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System.Configuration;
     using System.Configuration.Internal;
     using System.Web.Util;
@@ -13,55 +13,60 @@ namespace System.Web.Configuration {
     //
     // Any attempt to access any section will result in an exception.
     //
-    internal class ErrorRuntimeConfig : RuntimeConfig {
-        internal ErrorRuntimeConfig() : base(new ErrorConfigRecord(), false) {}
+    internal class ErrorRuntimeConfig : RuntimeConfig
+    {
+        internal ErrorRuntimeConfig()
+            : base(new ErrorConfigRecord(), false) { }
 
-        protected override object GetSectionObject(string sectionName) {
+        protected override object GetSectionObject(string sectionName)
+        {
             throw new ConfigurationErrorsException();
         }
 
         //
         // Any attempt to access the record will result in an exception.
         //
-        private class ErrorConfigRecord : IInternalConfigRecord {
-            internal ErrorConfigRecord() {
+        private class ErrorConfigRecord : IInternalConfigRecord
+        {
+            internal ErrorConfigRecord() { }
+
+            string IInternalConfigRecord.ConfigPath
+            {
+                get { throw new ConfigurationErrorsException(); }
             }
 
-            string  IInternalConfigRecord.ConfigPath {
-                get {
-                    throw new ConfigurationErrorsException();
-                }
+            string IInternalConfigRecord.StreamName
+            {
+                get { throw new ConfigurationErrorsException(); }
             }
 
-            string  IInternalConfigRecord.StreamName {
-                get {
-                    throw new ConfigurationErrorsException();
-                }
+            bool IInternalConfigRecord.HasInitErrors
+            {
+                get { return true; }
             }
 
-            bool    IInternalConfigRecord.HasInitErrors {
-                get {
-                    return true;
-                }
-            }
-
-            void    IInternalConfigRecord.ThrowIfInitErrors() {
+            void IInternalConfigRecord.ThrowIfInitErrors()
+            {
                 throw new ConfigurationErrorsException();
             }
 
-            object  IInternalConfigRecord.GetSection(string configKey) {
+            object IInternalConfigRecord.GetSection(string configKey)
+            {
                 throw new ConfigurationErrorsException();
             }
 
-            object  IInternalConfigRecord.GetLkgSection(string configKey) {
+            object IInternalConfigRecord.GetLkgSection(string configKey)
+            {
                 throw new ConfigurationErrorsException();
             }
 
-            void    IInternalConfigRecord.RefreshSection(string configKey) {
+            void IInternalConfigRecord.RefreshSection(string configKey)
+            {
                 throw new ConfigurationErrorsException();
             }
 
-            void    IInternalConfigRecord.Remove() {
+            void IInternalConfigRecord.Remove()
+            {
                 throw new ConfigurationErrorsException();
             }
         }

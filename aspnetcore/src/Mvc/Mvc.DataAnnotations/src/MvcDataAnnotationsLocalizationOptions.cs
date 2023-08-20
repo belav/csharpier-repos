@@ -12,14 +12,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// </summary>
 public class MvcDataAnnotationsLocalizationOptions : IEnumerable<ICompatibilitySwitch>
 {
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
 
     /// <summary>
     /// The delegate to invoke for creating <see cref="IStringLocalizer"/>.
     /// </summary>
-    public Func<Type, IStringLocalizerFactory, IStringLocalizer> DataAnnotationLocalizerProvider = null!;
+    public Func<Type, IStringLocalizerFactory, IStringLocalizer> DataAnnotationLocalizerProvider =
+        null!;
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

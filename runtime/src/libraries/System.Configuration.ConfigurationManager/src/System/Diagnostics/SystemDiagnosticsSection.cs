@@ -8,10 +8,34 @@ namespace System.Diagnostics
     internal sealed class SystemDiagnosticsSection : ConfigurationSection
     {
         private static readonly ConfigurationPropertyCollection s_properties = new();
-        private static readonly ConfigurationProperty s_propSources = new("sources", typeof(SourceElementsCollection), new SourceElementsCollection(), ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propSharedListeners = new("sharedListeners", typeof(SharedListenerElementsCollection), new SharedListenerElementsCollection(), ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propSwitches = new("switches", typeof(SwitchElementsCollection), new SwitchElementsCollection(), ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propTrace = new("trace", typeof(TraceSection), new TraceSection(), ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty s_propSources =
+            new(
+                "sources",
+                typeof(SourceElementsCollection),
+                new SourceElementsCollection(),
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty s_propSharedListeners =
+            new(
+                "sharedListeners",
+                typeof(SharedListenerElementsCollection),
+                new SharedListenerElementsCollection(),
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty s_propSwitches =
+            new(
+                "switches",
+                typeof(SwitchElementsCollection),
+                new SwitchElementsCollection(),
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty s_propTrace =
+            new(
+                "trace",
+                typeof(TraceSection),
+                new TraceSection(),
+                ConfigurationPropertyOptions.None
+            );
 
         static SystemDiagnosticsSection()
         {
@@ -27,7 +51,8 @@ namespace System.Diagnostics
         public SourceElementsCollection Sources => (SourceElementsCollection)base[s_propSources];
 
         [ConfigurationProperty("sharedListeners")]
-        public ListenerElementsCollection SharedListeners => (ListenerElementsCollection)base[s_propSharedListeners];
+        public ListenerElementsCollection SharedListeners =>
+            (ListenerElementsCollection)base[s_propSharedListeners];
 
         [ConfigurationProperty("switches")]
         public SwitchElementsCollection Switches => (SwitchElementsCollection)base[s_propSwitches];

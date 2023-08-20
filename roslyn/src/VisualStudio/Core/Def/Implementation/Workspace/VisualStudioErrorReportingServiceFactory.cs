@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public VisualStudioErrorReportingServiceFactory(
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _threadingContext = threadingContext;
             _listenerProvider = listenerProvider;
@@ -42,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     _threadingContext,
                     _listenerProvider,
                     workspaceServices.GetRequiredService<IInfoBarService>(),
-                    _serviceProvider);
+                    _serviceProvider
+                );
             }
 
             return _singleton;

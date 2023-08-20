@@ -125,7 +125,10 @@ namespace System.Threading
         public bool TryAcquire(int millisecondsTimeout, bool trackContentions = false)
         {
             if (millisecondsTimeout < -1)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
 
             int currentThreadId = CurrentThreadId;
 
@@ -177,14 +180,21 @@ namespace System.Threading
             }
         }
 
-        private bool TryAcquireContended(int currentThreadId, int millisecondsTimeout, bool trackContentions = false)
+        private bool TryAcquireContended(
+            int currentThreadId,
+            int millisecondsTimeout,
+            bool trackContentions = false
+        )
         {
             //
             // If we already own the lock, just increment the recursion count.
             //
             if (_owningThreadId == currentThreadId)
             {
-                checked { _recursionCount++; }
+                checked
+                {
+                    _recursionCount++;
+                }
                 return true;
             }
 
@@ -219,23 +229,25 @@ namespace System.Threading
                     // waiter progress.
                     //
                     int oldState = _state;
-                    bool canAcquire = ((oldState & Locked) == 0) &&
-                        (hasWaited || ((oldState & YieldToWaiters) == 0));
+                    bool canAcquire =
+                        ((oldState & Locked) == 0)
+                        && (hasWaited || ((oldState & YieldToWaiters) == 0));
 
                     if (canAcquire)
                     {
                         int newState = oldState | Locked;
                         if (hasWaited)
-                            newState = (newState - WaiterCountIncrement) & ~WaiterWoken & ~YieldToWaiters;
+                            newState =
+                                (newState - WaiterCountIncrement) & ~WaiterWoken & ~YieldToWaiters;
 
                         if (Interlocked.CompareExchange(ref _state, newState, oldState) == oldState)
                         {
                             if (hasWaited)
                                 _wakeWatchDog = 0;
                             else
-                                // if spinning was successful, update spin count
-                                if (iteration < localSpinLimit && localSpinLimit < MaxSpinLimit)
-                                    _spinLimit = localSpinLimit + 1;
+                            // if spinning was successful, update spin count
+                            if (iteration < localSpinLimit && localSpinLimit < MaxSpinLimit)
+                                _spinLimit = localSpinLimit + 1;
 
                             // GOT THE LOCK!!
                             Debug.Assert((_state | Locked) != 0);

@@ -25,9 +25,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 s_simplifyTupleName = SimplifyTupleName;
             }
 
-            private readonly Func<ArgumentSyntax, SemanticModel, SimplifierOptions, CancellationToken, ArgumentSyntax> s_simplifyTupleName;
+            private readonly Func<
+                ArgumentSyntax,
+                SemanticModel,
+                SimplifierOptions,
+                CancellationToken,
+                ArgumentSyntax
+            > s_simplifyTupleName;
 
-            private ArgumentSyntax SimplifyTupleName(ArgumentSyntax node, SemanticModel semanticModel, SimplifierOptions options, CancellationToken cancellationToken)
+            private ArgumentSyntax SimplifyTupleName(
+                ArgumentSyntax node,
+                SemanticModel semanticModel,
+                SimplifierOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 if (CanSimplifyTupleElementName(node, this.ParseOptions))
                 {
@@ -37,11 +48,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return node;
             }
 
-            private static readonly Func<AnonymousObjectMemberDeclaratorSyntax, SemanticModel, SimplifierOptions, CancellationToken, SyntaxNode> s_simplifyAnonymousTypeMemberName = SimplifyAnonymousTypeMemberName;
+            private static readonly Func<
+                AnonymousObjectMemberDeclaratorSyntax,
+                SemanticModel,
+                SimplifierOptions,
+                CancellationToken,
+                SyntaxNode
+            > s_simplifyAnonymousTypeMemberName = SimplifyAnonymousTypeMemberName;
 
-            private static SyntaxNode SimplifyAnonymousTypeMemberName(AnonymousObjectMemberDeclaratorSyntax node, SemanticModel semanticModel, SimplifierOptions options, CancellationToken canellationToken)
+            private static SyntaxNode SimplifyAnonymousTypeMemberName(
+                AnonymousObjectMemberDeclaratorSyntax node,
+                SemanticModel semanticModel,
+                SimplifierOptions options,
+                CancellationToken canellationToken
+            )
             {
-
                 if (CanSimplifyAnonymousTypeMemberName(node))
                 {
                     return node.WithNameEquals(null).WithTriviaFrom(node);
@@ -60,19 +81,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         node,
                         parentNode: node.Parent,
                         newNode: newNode,
-                        simplifier: s_simplifyTupleName);
+                        simplifier: s_simplifyTupleName
+                    );
                 }
 
                 return newNode;
             }
 
-            public override SyntaxNode VisitAnonymousObjectMemberDeclarator(AnonymousObjectMemberDeclaratorSyntax node)
+            public override SyntaxNode VisitAnonymousObjectMemberDeclarator(
+                AnonymousObjectMemberDeclaratorSyntax node
+            )
             {
                 return SimplifyNode(
                     node,
                     parentNode: node.Parent,
                     newNode: base.VisitAnonymousObjectMemberDeclarator(node),
-                    simplifier: s_simplifyAnonymousTypeMemberName);
+                    simplifier: s_simplifyAnonymousTypeMemberName
+                );
             }
         }
     }

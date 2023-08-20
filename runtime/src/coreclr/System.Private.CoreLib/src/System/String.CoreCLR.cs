@@ -14,12 +14,14 @@ namespace System
         // Set extra byte for odd-sized strings that came from interop as BSTR.
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal extern void SetTrailByte(byte data);
+
         // Try to retrieve the extra byte - returns false if not present.
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal extern bool TryGetTrailByte(out byte data);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern string Intern();
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern string? IsInterned();
 
@@ -43,11 +45,19 @@ namespace System
         {
             if (len != 0)
             {
-                Buffer.Memmove(ref *(byte*)dest, ref Unsafe.As<char, byte>(ref src.GetRawStringData()), (nuint)len);
+                Buffer.Memmove(
+                    ref *(byte*)dest,
+                    ref Unsafe.As<char, byte>(ref src.GetRawStringData()),
+                    (nuint)len
+                );
             }
         }
 
-        internal unsafe int GetBytesFromEncoding(byte* pbNativeBuffer, int cbNativeBuffer, Encoding encoding)
+        internal unsafe int GetBytesFromEncoding(
+            byte* pbNativeBuffer,
+            int cbNativeBuffer,
+            Encoding encoding
+        )
         {
             // encoding == Encoding.UTF8
             fixed (char* pwzChar = &_firstChar)

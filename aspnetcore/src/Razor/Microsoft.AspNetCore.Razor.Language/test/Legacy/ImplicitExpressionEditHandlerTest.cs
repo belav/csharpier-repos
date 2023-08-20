@@ -18,7 +18,10 @@ public class ImplicitExpressionEditHandlerTest
         var change = new SourceChange(new SourceSpan(6, 1), string.Empty);
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.False(result);
@@ -32,7 +35,10 @@ public class ImplicitExpressionEditHandlerTest
         var change = new SourceChange(new SourceSpan(5, 1), string.Empty);
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.False(result);
@@ -46,7 +52,10 @@ public class ImplicitExpressionEditHandlerTest
         var change = new SourceChange(new SourceSpan(5, 2), string.Empty);
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.False(result);
@@ -60,7 +69,10 @@ public class ImplicitExpressionEditHandlerTest
         var change = new SourceChange(new SourceSpan(3, 3), string.Empty);
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableDeletionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.True(result);
@@ -69,13 +81,18 @@ public class ImplicitExpressionEditHandlerTest
     [Theory]
     [InlineData("(")]
     [InlineData(")")]
-    public void IsAcceptableInsertionInBalancedParenthesis_ReturnsFalseIfChangeIsParenthesis(string changeText)
+    public void IsAcceptableInsertionInBalancedParenthesis_ReturnsFalseIfChangeIsParenthesis(
+        string changeText
+    )
     {
         // Arrange
         var change = new SourceChange(0, 1, changeText);
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(null, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(
+            null,
+            change
+        );
 
         // Assert
         Assert.False(result);
@@ -400,14 +417,19 @@ public class ImplicitExpressionEditHandlerTest
     [Theory]
     [InlineData("(")]
     [InlineData(")")]
-    public void IsAcceptableInsertionInBalancedParenthesis_InsertingParenthesis_ReturnsFalse(string text)
+    public void IsAcceptableInsertionInBalancedParenthesis_InsertingParenthesis_ReturnsFalse(
+        string text
+    )
     {
         // Arrange
         var span = GetSyntaxNode(SourceLocation.Zero, "(Hello World)");
         var change = new SourceChange(new SourceSpan(3, 0), text);
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.False(result);
@@ -421,7 +443,10 @@ public class ImplicitExpressionEditHandlerTest
         var change = new SourceChange(new SourceSpan(6, 0), " World");
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.False(result);
@@ -435,13 +460,19 @@ public class ImplicitExpressionEditHandlerTest
         var change = new SourceChange(new SourceSpan(6, 0), " World");
 
         // Act
-        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(span, change);
+        var result = ImplicitExpressionEditHandler.IsAcceptableInsertionInBalancedParenthesis(
+            span,
+            change
+        );
 
         // Assert
         Assert.True(result);
     }
 
-    private static Syntax.MarkupTextLiteralSyntax GetSyntaxNode(SourceLocation start, string content)
+    private static Syntax.MarkupTextLiteralSyntax GetSyntaxNode(
+        SourceLocation start,
+        string content
+    )
     {
         var builder = SyntaxListBuilder<SyntaxToken>.Create();
         var tokens = CSharpLanguageCharacteristics.Instance.TokenizeString(content).ToArray();
@@ -449,7 +480,9 @@ public class ImplicitExpressionEditHandlerTest
         {
             builder.Add(token);
         }
-        var node = SyntaxFactory.MarkupTextLiteral(builder.ToList()).CreateRed(parent: null, position: start.AbsoluteIndex);
+        var node = SyntaxFactory
+            .MarkupTextLiteral(builder.ToList())
+            .CreateRed(parent: null, position: start.AbsoluteIndex);
 
         return (Syntax.MarkupTextLiteralSyntax)node;
     }

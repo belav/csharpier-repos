@@ -20,12 +20,15 @@ namespace Internal.Runtime.TypeLoader
     {
         // Various functions in the type loader need to create permanent pointers for various purposes.
 
-        private static PermanentlyAllocatedMemoryRegions_Uint_In_IntPtr s_uintCellValues = new PermanentlyAllocatedMemoryRegions_Uint_In_IntPtr();
-        private static PermanentlyAllocatedMemoryRegions_IntPtr_In_IntPtr s_pointerIndirectionCellValues = new PermanentlyAllocatedMemoryRegions_IntPtr_In_IntPtr();
+        private static PermanentlyAllocatedMemoryRegions_Uint_In_IntPtr s_uintCellValues =
+            new PermanentlyAllocatedMemoryRegions_Uint_In_IntPtr();
+        private static PermanentlyAllocatedMemoryRegions_IntPtr_In_IntPtr s_pointerIndirectionCellValues =
+            new PermanentlyAllocatedMemoryRegions_IntPtr_In_IntPtr();
 
         private class PermanentlyAllocatedMemoryRegions_Uint_In_IntPtr
         {
-            private LowLevelDictionary<uint, IntPtr> _allocatedBlocks = new LowLevelDictionary<uint, IntPtr>();
+            private LowLevelDictionary<uint, IntPtr> _allocatedBlocks =
+                new LowLevelDictionary<uint, IntPtr>();
             private Lock _lock = new Lock();
 
             public unsafe IntPtr GetMemoryBlockForValue(uint value)
@@ -47,7 +50,8 @@ namespace Internal.Runtime.TypeLoader
 
         private class PermanentlyAllocatedMemoryRegions_IntPtr_In_IntPtr
         {
-            private LowLevelDictionary<IntPtr, IntPtr> _allocatedBlocks = new LowLevelDictionary<IntPtr, IntPtr>();
+            private LowLevelDictionary<IntPtr, IntPtr> _allocatedBlocks =
+                new LowLevelDictionary<IntPtr, IntPtr>();
             private Lock _lock = new Lock();
 
             public unsafe IntPtr GetMemoryBlockForValue(IntPtr value)

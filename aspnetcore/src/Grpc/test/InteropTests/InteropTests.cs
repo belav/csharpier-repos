@@ -16,8 +16,16 @@ namespace InteropTests;
 public class InteropTests
 {
     private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
-    private readonly string _clientPath = Path.Combine(Directory.GetCurrentDirectory(), "InteropClient", "InteropClient.dll");
-    private readonly string _serverPath = Path.Combine(Directory.GetCurrentDirectory(), "InteropWebsite", "InteropWebsite.dll");
+    private readonly string _clientPath = Path.Combine(
+        Directory.GetCurrentDirectory(),
+        "InteropClient",
+        "InteropClient.dll"
+    );
+    private readonly string _serverPath = Path.Combine(
+        Directory.GetCurrentDirectory(),
+        "InteropWebsite",
+        "InteropWebsite.dll"
+    );
     private readonly ITestOutputHelper _output;
 
     public InteropTests(ITestOutputHelper output)
@@ -89,7 +97,8 @@ public class InteropTests
             }
             catch (Exception ex)
             {
-                var errorMessage = $@"Error while running server process.
+                var errorMessage =
+                    $@"Error while running server process.
 
 Server ready: {serverProcess.IsReady}
 
@@ -100,7 +109,14 @@ Server process output:
                 throw new InvalidOperationException(errorMessage, ex);
             }
 
-            using (var clientProcess = new ClientProcess(_output, _clientPath, serverProcess.ServerPort, name))
+            using (
+                var clientProcess = new ClientProcess(
+                    _output,
+                    _clientPath,
+                    serverProcess.ServerPort,
+                    name
+                )
+            )
             {
                 try
                 {
@@ -112,7 +128,8 @@ Server process output:
                 }
                 catch (Exception ex)
                 {
-                    var errorMessage = $@"Error while running client process.
+                    var errorMessage =
+                        $@"Error while running client process.
 
 Server ready: {serverProcess.IsReady}
 Client ready: {clientProcess.IsReady}

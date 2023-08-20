@@ -9,15 +9,20 @@ namespace System.Speech.Internal.Synthesis
     internal class AudioException : Exception
     {
         #region Constructors
-        internal AudioException()
-        {
-        }
-        internal AudioException(Interop.WinMM.MMSYSERR errorCode) : base(string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0} - Error Code: 0x{1:x}", SR.Get(SRID.AudioDeviceError), (int)errorCode))
-        {
-        }
-        protected AudioException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        internal AudioException() { }
+
+        internal AudioException(Interop.WinMM.MMSYSERR errorCode)
+            : base(
+                string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    "{0} - Error Code: 0x{1:x}",
+                    SR.Get(SRID.AudioDeviceError),
+                    (int)errorCode
+                )
+            ) { }
+
+        protected AudioException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         #endregion
     }

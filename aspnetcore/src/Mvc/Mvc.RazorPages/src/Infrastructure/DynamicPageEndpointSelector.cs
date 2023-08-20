@@ -20,7 +20,10 @@ internal sealed class DynamicPageEndpointSelector : IDisposable
         }
 
         _dataSource = dataSource;
-        _cache = new DataSourceDependentCache<ActionSelectionTable<Endpoint>>(dataSource, Initialize);
+        _cache = new DataSourceDependentCache<ActionSelectionTable<Endpoint>>(
+            dataSource,
+            Initialize
+        );
     }
 
     private ActionSelectionTable<Endpoint> Table => _cache.EnsureInitialized();

@@ -14,10 +14,7 @@ namespace System.Formats.Cbor
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public CborContentException(string? message)
-            : base(message ?? SR.CborContentException_DefaultMessage)
-        {
-
-        }
+            : base(message ?? SR.CborContentException_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CborContentException" /> class,
@@ -26,10 +23,7 @@ namespace System.Formats.Cbor
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception.</param>
         public CborContentException(string? message, Exception? inner)
-            : base(message ?? SR.CborContentException_DefaultMessage, inner)
-        {
-
-        }
+            : base(message ?? SR.CborContentException_DefaultMessage, inner) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CborContentException" /> class with serialized data.
@@ -37,9 +31,6 @@ namespace System.Formats.Cbor
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
         protected CborContentException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-
-        }
+            : base(info, context) { }
     }
 }

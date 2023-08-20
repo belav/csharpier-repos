@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// <summary>
 /// Extension methods to <see cref="IRazorEngineBuilder" />.
 /// </summary>
-[Obsolete("This class is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngineBuilderExtensions) + ".")]
+[Obsolete(
+    "This class is obsolete and will be removed in a future version. The recommended alternative is "
+        + nameof(RazorProjectEngineBuilderExtensions)
+        + "."
+)]
 public static class RazorEngineBuilderExtensions
 {
     /// <summary>
@@ -20,7 +24,10 @@ public static class RazorEngineBuilderExtensions
     /// <param name="builder">The <see cref="IRazorEngineBuilder"/>.</param>
     /// <param name="directive">The <see cref="DirectiveDescriptor"/> to add.</param>
     /// <returns>The <see cref="IRazorEngineBuilder"/>.</returns>
-    public static IRazorEngineBuilder AddDirective(this IRazorEngineBuilder builder, DirectiveDescriptor directive)
+    public static IRazorEngineBuilder AddDirective(
+        this IRazorEngineBuilder builder,
+        DirectiveDescriptor directive
+    )
     {
         if (builder == null)
         {
@@ -44,7 +51,10 @@ public static class RazorEngineBuilderExtensions
     /// <param name="builder">The <see cref="IRazorEngineBuilder"/>.</param>
     /// <param name="extension">The <see cref="ICodeTargetExtension"/> to add.</param>
     /// <returns>The <see cref="IRazorEngineBuilder"/>.</returns>
-    public static IRazorEngineBuilder AddTargetExtension(this IRazorEngineBuilder builder, ICodeTargetExtension extension)
+    public static IRazorEngineBuilder AddTargetExtension(
+        this IRazorEngineBuilder builder,
+        ICodeTargetExtension extension
+    )
     {
         if (builder == null)
         {
@@ -89,7 +99,8 @@ public static class RazorEngineBuilderExtensions
     /// <returns>The <see cref="IRazorEngineBuilder"/>.</returns>
     public static IRazorEngineBuilder ConfigureClass(
         this IRazorEngineBuilder builder,
-        Action<RazorCodeDocument, ClassDeclarationIntermediateNode> configureClass)
+        Action<RazorCodeDocument, ClassDeclarationIntermediateNode> configureClass
+    )
     {
         if (builder == null)
         {
@@ -112,7 +123,10 @@ public static class RazorEngineBuilderExtensions
     /// <param name="builder">The <see cref="IRazorEngineBuilder"/>.</param>
     /// <param name="namespaceName">The name of the namespace.</param>
     /// <returns>The <see cref="IRazorEngineBuilder"/>.</returns>
-    public static IRazorEngineBuilder SetNamespace(this IRazorEngineBuilder builder, string namespaceName)
+    public static IRazorEngineBuilder SetNamespace(
+        this IRazorEngineBuilder builder,
+        string namespaceName
+    )
     {
         if (builder == null)
         {
@@ -120,7 +134,9 @@ public static class RazorEngineBuilderExtensions
         }
 
         var configurationFeature = GetDefaultDocumentClassifierPassFeature(builder);
-        configurationFeature.ConfigureNamespace.Add((document, @namespace) => @namespace.Content = namespaceName);
+        configurationFeature.ConfigureNamespace.Add(
+            (document, @namespace) => @namespace.Content = namespaceName
+        );
         return builder;
     }
 
@@ -136,9 +152,13 @@ public static class RazorEngineBuilderExtensions
         return directiveFeature;
     }
 
-    private static IRazorTargetExtensionFeature GetTargetExtensionFeature(IRazorEngineBuilder builder)
+    private static IRazorTargetExtensionFeature GetTargetExtensionFeature(
+        IRazorEngineBuilder builder
+    )
     {
-        var targetExtensionFeature = builder.Features.OfType<IRazorTargetExtensionFeature>().FirstOrDefault();
+        var targetExtensionFeature = builder.Features
+            .OfType<IRazorTargetExtensionFeature>()
+            .FirstOrDefault();
         if (targetExtensionFeature == null)
         {
             targetExtensionFeature = new DefaultRazorTargetExtensionFeature();
@@ -148,9 +168,13 @@ public static class RazorEngineBuilderExtensions
         return targetExtensionFeature;
     }
 
-    private static DefaultDocumentClassifierPassFeature GetDefaultDocumentClassifierPassFeature(IRazorEngineBuilder builder)
+    private static DefaultDocumentClassifierPassFeature GetDefaultDocumentClassifierPassFeature(
+        IRazorEngineBuilder builder
+    )
     {
-        var configurationFeature = builder.Features.OfType<DefaultDocumentClassifierPassFeature>().FirstOrDefault();
+        var configurationFeature = builder.Features
+            .OfType<DefaultDocumentClassifierPassFeature>()
+            .FirstOrDefault();
         if (configurationFeature == null)
         {
             configurationFeature = new DefaultDocumentClassifierPassFeature();

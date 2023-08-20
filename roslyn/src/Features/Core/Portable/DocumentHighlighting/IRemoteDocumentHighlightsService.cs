@@ -13,7 +13,13 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
     internal interface IRemoteDocumentHighlightsService
     {
         ValueTask<ImmutableArray<SerializableDocumentHighlights>> GetDocumentHighlightsAsync(
-            Checksum solutionChecksum, DocumentId documentId, int position, ImmutableArray<DocumentId> documentIdsToSearch, HighlightingOptions options, CancellationToken cancellationToken);
+            Checksum solutionChecksum,
+            DocumentId documentId,
+            int position,
+            ImmutableArray<DocumentId> documentIdsToSearch,
+            HighlightingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
@@ -25,16 +31,24 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
         [DataMember(Order = 1)]
         public readonly ImmutableArray<HighlightSpan> HighlightSpans;
 
-        public SerializableDocumentHighlights(DocumentId documentId, ImmutableArray<HighlightSpan> highlightSpans)
+        public SerializableDocumentHighlights(
+            DocumentId documentId,
+            ImmutableArray<HighlightSpan> highlightSpans
+        )
         {
             DocumentId = documentId;
             HighlightSpans = highlightSpans;
         }
 
-        public async ValueTask<DocumentHighlights> RehydrateAsync(Solution solution)
-            => new(await solution.GetRequiredDocumentAsync(DocumentId, includeSourceGenerated: true).ConfigureAwait(false), HighlightSpans);
+        public async ValueTask<DocumentHighlights> RehydrateAsync(Solution solution) =>
+            new(
+                await solution
+                    .GetRequiredDocumentAsync(DocumentId, includeSourceGenerated: true)
+                    .ConfigureAwait(false),
+                HighlightSpans
+            );
 
-        public static SerializableDocumentHighlights Dehydrate(DocumentHighlights highlights)
-            => new(highlights.Document.Id, highlights.HighlightSpans);
+        public static SerializableDocumentHighlights Dehydrate(DocumentHighlights highlights) =>
+            new(highlights.Document.Id, highlights.HighlightSpans);
     }
 }

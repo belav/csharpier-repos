@@ -15,12 +15,8 @@ namespace System.CommandLine.Parsing
         private ArgumentConversionResult? _argumentConversionResult;
         private Dictionary<Argument, ArgumentResult>? _defaultArgumentValues;
 
-        internal OptionResult(
-            Option option,
-            Token? token = null,
-            CommandResult? parent = null) :
-            base(option ?? throw new ArgumentNullException(nameof(option)),
-                 parent)
+        internal OptionResult(Option option, Token? token = null, CommandResult? parent = null)
+            : base(option ?? throw new ArgumentNullException(nameof(option)), parent)
         {
             Option = option;
             Token = token;
@@ -53,9 +49,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <returns>The parsed value or the default value for <see cref="Option"/></returns>
         [return: MaybeNull]
-        public T GetValueOrDefault<T>() =>
-            this.ConvertIfNeeded(typeof(T))
-                .GetValueOrDefault<T>();
+        public T GetValueOrDefault<T>() => this.ConvertIfNeeded(typeof(T)).GetValueOrDefault<T>();
 
         private protected override int RemainingArgumentCapacity
         {
@@ -84,22 +78,26 @@ namespace System.CommandLine.Parsing
 
                         if (child is ArgumentResult argumentResult)
                         {
-                            return _argumentConversionResult = argumentResult.GetArgumentConversionResult();
+                            return _argumentConversionResult =
+                                argumentResult.GetArgumentConversionResult();
                         }
                     }
 
-                    return _argumentConversionResult = ArgumentConversionResult.None(Option.Argument);
+                    return _argumentConversionResult = ArgumentConversionResult.None(
+                        Option.Argument
+                    );
                 }
 
                 return _argumentConversionResult;
             }
         }
-        
+
         internal override bool UseDefaultValueFor(Argument argument) => IsImplicit;
 
         internal ArgumentResult GetOrCreateDefaultArgumentResult(Argument argument) =>
             (_defaultArgumentValues ??= new()).GetOrAdd(
                 argument,
-                arg => new ArgumentResult(arg, this));
+                arg => new ArgumentResult(arg, this)
+            );
     }
 }

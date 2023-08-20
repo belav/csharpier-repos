@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -120,7 +120,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public void Contains_Changed()
         {
             var s = GetSetOfStrings();
-            var l = (IList<string>) s;
+            var l = (IList<string>)s;
 
             var v = l[0];
             l[0] = "other";
@@ -143,7 +143,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public void Contains_RemovedAt()
         {
             var s = GetSetOfStrings();
-            var l = (IList<string>) s;
+            var l = (IList<string>)s;
 
             var v = l[0];
             l.RemoveAt(0);
@@ -289,8 +289,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var x = new ArrayList();
 
             var e = s.GetEnumerator();
-                while (e.MoveNext())
-                    x.Add(e.Current as string);
+            while (e.MoveNext())
+                x.Add(e.Current as string);
 
             CollectionAssert.AreEquivalent(Strings, x);
         }
@@ -339,8 +339,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             CollectionAssert.AreEquivalent(Strings.Skip(1).Concat(new[] { "other" }), s.ToArray());
         }
 
-        private static readonly IList<string>
-            Strings = Array.AsReadOnly(new[] { "a", "b" });
+        private static readonly IList<string> Strings = Array.AsReadOnly(new[] { "a", "b" });
 
         private ISet<string> GetEmptySet()
         {
@@ -350,13 +349,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         private ISet<string> GetSetOfStrings()
         {
-            var f = Create<IFoo>
-            (
+            var f = Create<IFoo>(
                 "<Foo>",
-                    "<Strings>",
-                        "<string>a</string>",
-                        "<string>b</string>",
-                    "</Strings>",
+                "<Strings>",
+                "<string>a</string>",
+                "<string>b</string>",
+                "</Strings>",
                 "</Foo>"
             );
 

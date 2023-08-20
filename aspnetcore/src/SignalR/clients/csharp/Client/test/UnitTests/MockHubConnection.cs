@@ -19,7 +19,13 @@ public static class MockHubConnection
         EndPoint endPoint = new Mock<EndPoint>().Object;
         IServiceProvider serviceProvider = new Mock<IServiceProvider>().Object;
         ILoggerFactory loggerFactory = null;
-        return new Mock<HubConnection>(MockBehavior.Strict,
-            connectionFactory, protocol, endPoint, serviceProvider, loggerFactory);
+        return new Mock<HubConnection>(
+            MockBehavior.Strict,
+            connectionFactory,
+            protocol,
+            endPoint,
+            serviceProvider,
+            loggerFactory
+        );
     }
 }

@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlFormatExtensionAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Configuration {
-
+namespace System.Web.Services.Configuration
+{
     using System;
 
     /// <include file='doc\XmlFormatExtensionAttribute.uex' path='docs/doc[@for="XmlFormatExtensionAttribute"]/*' />
@@ -13,7 +13,8 @@ namespace System.Web.Services.Configuration {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class XmlFormatExtensionAttribute : Attribute {
+    public sealed class XmlFormatExtensionAttribute : Attribute
+    {
         Type[] types;
         string name;
         string ns;
@@ -22,27 +23,56 @@ namespace System.Web.Services.Configuration {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlFormatExtensionAttribute() {
-        }
+        public XmlFormatExtensionAttribute() { }
 
         /// <include file='doc\XmlFormatExtensionAttribute.uex' path='docs/doc[@for="XmlFormatExtensionAttribute.XmlFormatExtensionAttribute2"]/*' />
-        public XmlFormatExtensionAttribute(string elementName, string ns, Type extensionPoint1) : this(elementName, ns, new Type[] { extensionPoint1 }) {
-        }
+        public XmlFormatExtensionAttribute(string elementName, string ns, Type extensionPoint1)
+            : this(elementName, ns, new Type[] { extensionPoint1 }) { }
+
         /// <include file='doc\XmlFormatExtensionAttribute.uex' path='docs/doc[@for="XmlFormatExtensionAttribute.XmlFormatExtensionAttribute3"]/*' />
-        public XmlFormatExtensionAttribute(string elementName, string ns, Type extensionPoint1, Type extensionPoint2) : this(elementName, ns, new Type[] { extensionPoint1, extensionPoint2 }) {
-        }
+        public XmlFormatExtensionAttribute(
+            string elementName,
+            string ns,
+            Type extensionPoint1,
+            Type extensionPoint2
+        )
+            : this(elementName, ns, new Type[] { extensionPoint1, extensionPoint2 }) { }
+
         /// <include file='doc\XmlFormatExtensionAttribute.uex' path='docs/doc[@for="XmlFormatExtensionAttribute.XmlFormatExtensionAttribute4"]/*' />
-        public XmlFormatExtensionAttribute(string elementName, string ns, Type extensionPoint1, Type extensionPoint2, Type extensionPoint3) : this(elementName, ns, new Type[] { extensionPoint1, extensionPoint2, extensionPoint3 }) {
-        }
+        public XmlFormatExtensionAttribute(
+            string elementName,
+            string ns,
+            Type extensionPoint1,
+            Type extensionPoint2,
+            Type extensionPoint3
+        )
+            : this(
+                elementName,
+                ns,
+                new Type[] { extensionPoint1, extensionPoint2, extensionPoint3 }
+            ) { }
+
         /// <include file='doc\XmlFormatExtensionAttribute.uex' path='docs/doc[@for="XmlFormatExtensionAttribute.XmlFormatExtensionAttribute5"]/*' />
-        public XmlFormatExtensionAttribute(string elementName, string ns, Type extensionPoint1, Type extensionPoint2, Type extensionPoint3, Type extensionPoint4) : this(elementName, ns, new Type[] { extensionPoint1, extensionPoint2, extensionPoint3, extensionPoint4 }) {
-        }
+        public XmlFormatExtensionAttribute(
+            string elementName,
+            string ns,
+            Type extensionPoint1,
+            Type extensionPoint2,
+            Type extensionPoint3,
+            Type extensionPoint4
+        )
+            : this(
+                elementName,
+                ns,
+                new Type[] { extensionPoint1, extensionPoint2, extensionPoint3, extensionPoint4 }
+            ) { }
 
         /// <include file='doc\XmlFormatExtensionAttribute.uex' path='docs/doc[@for="XmlFormatExtensionAttribute.XmlFormatExtensionAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlFormatExtensionAttribute(string elementName, string ns, Type[] extensionPoints) {
+        public XmlFormatExtensionAttribute(string elementName, string ns, Type[] extensionPoints)
+        {
             this.name = elementName;
             this.ns = ns;
             this.types = extensionPoints;
@@ -52,7 +82,8 @@ namespace System.Web.Services.Configuration {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Type[] ExtensionPoints {
+        public Type[] ExtensionPoints
+        {
             get { return types == null ? new Type[0] : types; }
             set { types = value; }
         }
@@ -61,7 +92,8 @@ namespace System.Web.Services.Configuration {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns == null ? string.Empty : ns; }
             set { ns = value; }
         }
@@ -70,10 +102,10 @@ namespace System.Web.Services.Configuration {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ElementName {
+        public string ElementName
+        {
             get { return name == null ? string.Empty : name; }
             set { name = value; }
         }
     }
-
 }

@@ -37,7 +37,13 @@ namespace System.Security.Cryptography
                     }
 
                     using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
-                    using (SafeX509ExtensionHandle x509Ext = Interop.Crypto.X509ExtensionCreateByObj(asnOid, false, octetString))
+                    using (
+                        SafeX509ExtensionHandle x509Ext = Interop.Crypto.X509ExtensionCreateByObj(
+                            asnOid,
+                            false,
+                            octetString
+                        )
+                    )
                     {
                         if (bio.IsInvalid || x509Ext.IsInvalid)
                         {
@@ -75,8 +81,7 @@ namespace System.Security.Cryptography
 
                             current = current.Slice(read);
                             total += read;
-                        }
-                        while (read > 0);
+                        } while (read > 0);
 
                         return Encoding.UTF8.GetString(buffer.Slice(0, total));
                     }

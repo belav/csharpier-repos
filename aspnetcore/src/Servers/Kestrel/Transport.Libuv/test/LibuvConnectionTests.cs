@@ -22,22 +22,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var mockLibuv = new MockLibuv();
             var transportContext = new TestLibuvTransportContext();
             var thread = new LibuvThread(mockLibuv, transportContext);
-            var listenerContext = new ListenerContext(transportContext)
-            {
-                Thread = thread
-            };
+            var listenerContext = new ListenerContext(transportContext) { Thread = thread };
 
             try
             {
                 await thread.StartAsync();
-                await thread.PostAsync(_ =>
-                {
-                    var socket = new MockSocket(mockLibuv, Environment.CurrentManagedThreadId, transportContext.Log);
-                    listenerContext.HandleConnection(socket);
+                await thread.PostAsync(
+                    _ =>
+                    {
+                        var socket = new MockSocket(
+                            mockLibuv,
+                            Environment.CurrentManagedThreadId,
+                            transportContext.Log
+                        );
+                        listenerContext.HandleConnection(socket);
 
-                    mockLibuv.AllocCallback(socket.InternalGetHandle(), 2048, out var ignored);
-                    mockLibuv.ReadCallback(socket.InternalGetHandle(), 0, ref ignored);
-                }, (object)null);
+                        mockLibuv.AllocCallback(socket.InternalGetHandle(), 2048, out var ignored);
+                        mockLibuv.ReadCallback(socket.InternalGetHandle(), 0, ref ignored);
+                    },
+                    (object)null
+                );
 
                 await using var connection = await listenerContext.AcceptAsync();
 
@@ -64,14 +68,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                     pauseWriterThreshold: 3,
                     readerScheduler: PipeScheduler.Inline,
                     writerScheduler: PipeScheduler.Inline,
-                    useSynchronizationContext: false),
-
+                    useSynchronizationContext: false
+                ),
                 // We don't set the output writer scheduler here since we want to run the callback inline
                 OutputOptions = new PipeOptions(
                     pool: thread.MemoryPool,
                     readerScheduler: thread,
                     writerScheduler: PipeScheduler.Inline,
-                    useSynchronizationContext: false)
+                    useSynchronizationContext: false
+                )
             };
 
             try
@@ -79,15 +84,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 await thread.StartAsync();
 
                 // Write enough to make sure back pressure will be applied
-                await thread.PostAsync<object>(_ =>
-                {
-                    var socket = new MockSocket(mockLibuv, Environment.CurrentManagedThreadId, transportContext.Log);
-                    listenerContext.HandleConnection(socket);
+                await thread.PostAsync<object>(
+                    _ =>
+                    {
+                        var socket = new MockSocket(
+                            mockLibuv,
+                            Environment.CurrentManagedThreadId,
+                            transportContext.Log
+                        );
+                        listenerContext.HandleConnection(socket);
 
-                    mockLibuv.AllocCallback(socket.InternalGetHandle(), 2048, out var ignored);
-                    mockLibuv.ReadCallback(socket.InternalGetHandle(), 5, ref ignored);
-
-                }, null);
+                        mockLibuv.AllocCallback(socket.InternalGetHandle(), 2048, out var ignored);
+                        mockLibuv.ReadCallback(socket.InternalGetHandle(), 5, ref ignored);
+                    },
+                    null
+                );
 
                 var connection = await listenerContext.AcceptAsync();
 
@@ -116,10 +127,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var thread = new LibuvThread(mockLibuv, transportContext);
             var mockScheduler = new Mock<PipeScheduler>();
             Action backPressure = null;
-            mockScheduler.Setup(m => m.Schedule(It.IsAny<Action<object>>(), It.IsAny<object>())).Callback<Action<object>, object>((a, o) =>
-            {
-                backPressure = () => a(o);
-            });
+            mockScheduler
+                .Setup(m => m.Schedule(It.IsAny<Action<object>>(), It.IsAny<object>()))
+                .Callback<Action<object>, object>(
+                    (a, o) =>
+                    {
+                        backPressure = () => a(o);
+                    }
+                );
             var listenerContext = new ListenerContext(transportContext)
             {
                 Thread = thread,
@@ -129,12 +144,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                     resumeWriterThreshold: 3,
                     writerScheduler: mockScheduler.Object,
                     readerScheduler: PipeScheduler.Inline,
-                    useSynchronizationContext: false),
+                    useSynchronizationContext: false
+                ),
                 OutputOptions = new PipeOptions(
                     pool: thread.MemoryPool,
                     readerScheduler: thread,
                     writerScheduler: PipeScheduler.Inline,
-                    useSynchronizationContext: false)
+                    useSynchronizationContext: false
+                )
             };
 
             try
@@ -142,15 +159,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 await thread.StartAsync();
 
                 // Write enough to make sure back pressure will be applied
-                await thread.PostAsync<object>(_ =>
-                {
-                    var socket = new MockSocket(mockLibuv, Environment.CurrentManagedThreadId, transportContext.Log);
-                    listenerContext.HandleConnection(socket);
+                await thread.PostAsync<object>(
+                    _ =>
+                    {
+                        var socket = new MockSocket(
+                            mockLibuv,
+                            Environment.CurrentManagedThreadId,
+                            transportContext.Log
+                        );
+                        listenerContext.HandleConnection(socket);
 
-                    mockLibuv.AllocCallback(socket.InternalGetHandle(), 2048, out var ignored);
-                    mockLibuv.ReadCallback(socket.InternalGetHandle(), 5, ref ignored);
-
-                }, null);
+                        mockLibuv.AllocCallback(socket.InternalGetHandle(), 2048, out var ignored);
+                        mockLibuv.ReadCallback(socket.InternalGetHandle(), 5, ref ignored);
+                    },
+                    null
+                );
 
                 var connection = await listenerContext.AcceptAsync();
 
@@ -193,22 +216,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             var mockLibuv = new MockLibuv();
             var transportContext = new TestLibuvTransportContext();
             var thread = new LibuvThread(mockLibuv, transportContext);
-            var listenerContext = new ListenerContext(transportContext)
-            {
-                Thread = thread
-            };
+            var listenerContext = new ListenerContext(transportContext) { Thread = thread };
 
             try
             {
                 await thread.StartAsync();
-                await thread.PostAsync(_ =>
-                {
-                    var socket = new MockSocket(mockLibuv, Environment.CurrentManagedThreadId, transportContext.Log);
-                    listenerContext.HandleConnection(socket);
+                await thread.PostAsync(
+                    _ =>
+                    {
+                        var socket = new MockSocket(
+                            mockLibuv,
+                            Environment.CurrentManagedThreadId,
+                            transportContext.Log
+                        );
+                        listenerContext.HandleConnection(socket);
 
-                    var ignored = new LibuvFunctions.uv_buf_t();
-                    mockLibuv.ReadCallback(socket.InternalGetHandle(), TestConstants.EOF, ref ignored);
-                }, (object)null);
+                        var ignored = new LibuvFunctions.uv_buf_t();
+                        mockLibuv.ReadCallback(
+                            socket.InternalGetHandle(),
+                            TestConstants.EOF,
+                            ref ignored
+                        );
+                    },
+                    (object)null
+                );
 
                 await using var connection = await listenerContext.AcceptAsync();
 

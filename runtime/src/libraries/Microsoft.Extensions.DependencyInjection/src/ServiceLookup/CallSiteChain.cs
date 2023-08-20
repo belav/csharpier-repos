@@ -22,7 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             if (_callSiteChain.ContainsKey(serviceType))
             {
-                throw new InvalidOperationException(CreateCircularDependencyExceptionMessage(serviceType));
+                throw new InvalidOperationException(
+                    CreateCircularDependencyExceptionMessage(serviceType)
+                );
             }
         }
 
@@ -33,13 +35,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         public void Add(Type serviceType, Type? implementationType = null)
         {
-            _callSiteChain[serviceType] = new ChainItemInfo(_callSiteChain.Count, implementationType);
+            _callSiteChain[serviceType] = new ChainItemInfo(
+                _callSiteChain.Count,
+                implementationType
+            );
         }
 
         private string CreateCircularDependencyExceptionMessage(Type type)
         {
             var messageBuilder = new StringBuilder();
-            messageBuilder.Append(SR.Format(SR.CircularDependencyException, TypeNameHelper.GetTypeDisplayName(type)));
+            messageBuilder.Append(
+                SR.Format(SR.CircularDependencyException, TypeNameHelper.GetTypeDisplayName(type))
+            );
             messageBuilder.AppendLine();
 
             AppendResolutionPath(messageBuilder, type);
@@ -62,9 +69,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
                 else
                 {
-                    builder.AppendFormat("{0}({1})",
+                    builder.AppendFormat(
+                        "{0}({1})",
                         TypeNameHelper.GetTypeDisplayName(serviceType),
-                        TypeNameHelper.GetTypeDisplayName(implementationType));
+                        TypeNameHelper.GetTypeDisplayName(implementationType)
+                    );
                 }
 
                 builder.Append(" -> ");

@@ -8,6 +8,13 @@ namespace System
     public static partial class Environment
     {
         public static long WorkingSet =>
-            (long)(Interop.procfs.TryReadProcessStatusInfo(ProcessId, out Interop.procfs.ProcessStatusInfo status) ? status.ResidentSetSize : 0);
+            (long)(
+                Interop.procfs.TryReadProcessStatusInfo(
+                    ProcessId,
+                    out Interop.procfs.ProcessStatusInfo status
+                )
+                    ? status.ResidentSetSize
+                    : 0
+            );
     }
 }

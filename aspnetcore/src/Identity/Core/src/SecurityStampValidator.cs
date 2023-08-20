@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides default implementation of validation functions for security stamps.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class SecurityStampValidator<TUser> : ISecurityStampValidator where TUser : class
+public class SecurityStampValidator<TUser> : ISecurityStampValidator
+    where TUser : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="SecurityStampValidator{TUser}"/>.
@@ -23,7 +24,12 @@ public class SecurityStampValidator<TUser> : ISecurityStampValidator where TUser
     /// <param name="signInManager">The <see cref="SignInManager{TUser}"/>.</param>
     /// <param name="clock">The system clock.</param>
     /// <param name="logger">The logger.</param>
-    public SecurityStampValidator(IOptions<SecurityStampValidatorOptions> options, SignInManager<TUser> signInManager, ISystemClock clock, ILoggerFactory logger)
+    public SecurityStampValidator(
+        IOptions<SecurityStampValidatorOptions> options,
+        SignInManager<TUser> signInManager,
+        ISystemClock clock,
+        ILoggerFactory logger
+    )
     {
         if (options == null)
         {
@@ -68,7 +74,10 @@ public class SecurityStampValidator<TUser> : ISecurityStampValidator where TUser
     /// <param name="user">The user who has been verified.</param>
     /// <param name="context">The <see cref="CookieValidatePrincipalContext"/>.</param>
     /// <returns>A task.</returns>
-    protected virtual async Task SecurityStampVerified(TUser user, CookieValidatePrincipalContext context)
+    protected virtual async Task SecurityStampVerified(
+        TUser user,
+        CookieValidatePrincipalContext context
+    )
     {
         var newPrincipal = await SignInManager.CreateUserPrincipalAsync(user);
 
@@ -102,8 +111,8 @@ public class SecurityStampValidator<TUser> : ISecurityStampValidator where TUser
     /// </summary>
     /// <param name="principal">The principal to verify.</param>
     /// <returns>The verified user or null if verification fails.</returns>
-    protected virtual Task<TUser?> VerifySecurityStamp(ClaimsPrincipal? principal)
-        => SignInManager.ValidateSecurityStampAsync(principal);
+    protected virtual Task<TUser?> VerifySecurityStamp(ClaimsPrincipal? principal) =>
+        SignInManager.ValidateSecurityStampAsync(principal);
 
     /// <summary>
     /// Validates a security stamp of an identity as an asynchronous operation, and rebuilds the identity if the validation succeeds, otherwise rejects
@@ -137,10 +146,15 @@ public class SecurityStampValidator<TUser> : ISecurityStampValidator where TUser
             }
             else
             {
-                Logger.LogDebug(EventIds.SecurityStampValidationFailed, "Security stamp validation failed, rejecting cookie.");
+                Logger.LogDebug(
+                    EventIds.SecurityStampValidationFailed,
+                    "Security stamp validation failed, rejecting cookie."
+                );
                 context.RejectPrincipal();
                 await SignInManager.SignOutAsync();
-                await SignInManager.Context.SignOutAsync(IdentityConstants.TwoFactorRememberMeScheme);
+                await SignInManager.Context.SignOutAsync(
+                    IdentityConstants.TwoFactorRememberMeScheme
+                );
             }
         }
     }
@@ -158,8 +172,8 @@ public static class SecurityStampValidator
     /// <param name="context">The context containing the <see cref="System.Security.Claims.ClaimsPrincipal"/>
     /// and <see cref="AuthenticationProperties"/> to validate.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous validation operation.</returns>
-    public static Task ValidatePrincipalAsync(CookieValidatePrincipalContext context)
-        => ValidateAsync<ISecurityStampValidator>(context);
+    public static Task ValidatePrincipalAsync(CookieValidatePrincipalContext context) =>
+        ValidateAsync<ISecurityStampValidator>(context);
 
     /// <summary>
     /// Used to validate the <see cref="IdentityConstants.TwoFactorUserIdScheme"/> and
@@ -170,7 +184,8 @@ public static class SecurityStampValidator
     /// and <see cref="AuthenticationProperties"/> to validate.</param>
     /// <returns></returns>
 
-    public static Task ValidateAsync<TValidator>(CookieValidatePrincipalContext context) where TValidator : ISecurityStampValidator
+    public static Task ValidateAsync<TValidator>(CookieValidatePrincipalContext context)
+        where TValidator : ISecurityStampValidator
     {
         if (context.HttpContext.RequestServices == null)
         {

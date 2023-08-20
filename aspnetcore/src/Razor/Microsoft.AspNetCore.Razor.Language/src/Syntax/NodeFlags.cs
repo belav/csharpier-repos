@@ -16,5 +16,11 @@ internal enum NodeFlags : byte
     ContainsAnnotations = 1 << 4,
     IsMissing = 1 << 5,
 
-    InheritMask = ContainsDiagnostics | ContainsStructuredTrivia | ContainsDirectives | ContainsSkippedText | ContainsAnnotations | IsMissing,
+    InheritMask =
+        ContainsDiagnostics
+        | ContainsStructuredTrivia
+        | ContainsDirectives
+        | ContainsSkippedText
+        | ContainsAnnotations
+        | IsMissing,
 }

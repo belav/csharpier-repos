@@ -10,11 +10,14 @@ public static partial class Handler
 {
     private static T? GetValueForHandlerParameter<T>(
         IValueDescriptor<T> symbol,
-        InvocationContext context)
+        InvocationContext context
+    )
     {
-        if (symbol is IValueSource valueSource &&
-            valueSource.TryGetValue(symbol, context.BindingContext, out var boundValue) &&
-            boundValue is T value)
+        if (
+            symbol is IValueSource valueSource
+            && valueSource.TryGetValue(symbol, context.BindingContext, out var boundValue)
+            && boundValue is T value
+        )
         {
             return value;
         }

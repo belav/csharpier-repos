@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.RepeaterItemCollection.cs 
+// Tests for System.Web.UI.WebControls.RepeaterItemCollection.cs
 //
 // Author:
 //	Gonzalo Paniagua Javier (gonzalo@novell.com)
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,16 +32,17 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace MonoTests.System.Web.UI.WebControls {
-	[TestFixture]	
-	public class RepeaterItemCollectionTest {	
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void Repeater_DefaultsSelectArguments ()
-		{
-			RepeaterItemCollection coll = new RepeaterItemCollection (null);
-			Console.WriteLine (coll.Count);
-		}
-	}
+namespace MonoTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    public class RepeaterItemCollectionTest
+    {
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Repeater_DefaultsSelectArguments()
+        {
+            RepeaterItemCollection coll = new RepeaterItemCollection(null);
+            Console.WriteLine(coll.Count);
+        }
+    }
 }
-

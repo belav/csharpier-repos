@@ -57,7 +57,9 @@ namespace System.ServiceModel
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value")
+                        );
                 }
 
                 this.transactionIsolationLevel = value;
@@ -83,7 +85,9 @@ namespace System.ServiceModel
             {
                 if (!ConcurrencyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.concurrencyMode = value;
@@ -97,7 +101,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
 
                 try
@@ -107,7 +113,9 @@ namespace System.ServiceModel
                     if (timeout < TimeSpan.Zero)
                     {
                         string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value", value, message)
+                        );
                     }
 
                     this.transactionTimeout = timeout;
@@ -116,11 +124,19 @@ namespace System.ServiceModel
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.SFxTimeoutInvalidStringFormat), "value", e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.SFxTimeoutInvalidStringFormat),
+                            "value",
+                            e
+                        )
+                    );
                 }
                 catch (OverflowException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
             }
         }
@@ -159,31 +175,42 @@ namespace System.ServiceModel
         {
             if (channelDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "channelDispatcher"
+                );
             }
 
             channelDispatcher.TransactionIsolationLevel = this.transactionIsolationLevel;
         }
 
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
-        {
-        }
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection parameters)
-        {
-        }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime clientRuntime)
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime clientRuntime
+        )
         {
             if (!serviceEndpoint.Contract.IsDuplex())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                    SR.SFxCallbackBehaviorAttributeOnlyOnDuplex, serviceEndpoint.Contract.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxCallbackBehaviorAttributeOnlyOnDuplex,
+                            serviceEndpoint.Contract.Name
+                        )
+                    )
+                );
             }
             DispatchRuntime dispatchRuntime = clientRuntime.DispatchRuntime;
             dispatchRuntime.ValidateMustUnderstand = validateMustUnderstand;
             dispatchRuntime.ConcurrencyMode = this.concurrencyMode;
-            dispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults = this.includeExceptionDetailInFaults;
+            dispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults =
+                this.includeExceptionDetailInFaults;
             dispatchRuntime.AutomaticInputSessionShutdown = this.automaticSessionShutdown;
             if (!this.useSynchronizationContext)
             {
@@ -197,13 +224,26 @@ namespace System.ServiceModel
                 SetIsolationLevel(dispatchRuntime.ChannelDispatcher);
             }
 
-            DataContractSerializerServiceBehavior.ApplySerializationSettings(serviceEndpoint, this.ignoreExtensionDataObject, this.maxItemsInObjectGraph);
+            DataContractSerializerServiceBehavior.ApplySerializationSettings(
+                serviceEndpoint,
+                this.ignoreExtensionDataObject,
+                this.maxItemsInObjectGraph
+            );
         }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SFXEndpointBehaviorUsedOnWrongSide, typeof(CallbackBehaviorAttribute).Name)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.SFXEndpointBehaviorUsedOnWrongSide,
+                        typeof(CallbackBehaviorAttribute).Name
+                    )
+                )
+            );
         }
     }
 }

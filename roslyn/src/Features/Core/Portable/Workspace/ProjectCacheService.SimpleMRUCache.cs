@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.Host
                 _nodes[oldIndex] = new Node(instance, DateTime.UtcNow);
             }
 
-            public void Clear()
-                => Array.Clear(_nodes, 0, _nodes.Length);
+            public void Clear() => Array.Clear(_nodes, 0, _nodes.Length);
 
             private struct Node
             {

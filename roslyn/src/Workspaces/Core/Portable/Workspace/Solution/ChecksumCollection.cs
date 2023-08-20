@@ -19,35 +19,39 @@ namespace Microsoft.CodeAnalysis.Serialization
     /// </summary>
     internal class ChecksumCollection : ChecksumWithChildren, IReadOnlyCollection<Checksum>
     {
-        public ChecksumCollection(ImmutableArray<Checksum> checksums) : this(checksums.CastArray<object>())
-        {
-        }
+        public ChecksumCollection(ImmutableArray<Checksum> checksums)
+            : this(checksums.CastArray<object>()) { }
 
-        public ChecksumCollection(ImmutableArray<object> checksums) : base(checksums)
-        {
-        }
+        public ChecksumCollection(ImmutableArray<object> checksums)
+            : base(checksums) { }
 
         public int Count => Children.Length;
         public Checksum this[int index] => (Checksum)Children[index];
 
-        public IEnumerator<Checksum> GetEnumerator()
-            => this.Children.Cast<Checksum>().GetEnumerator();
+        public IEnumerator<Checksum> GetEnumerator() =>
+            this.Children.Cast<Checksum>().GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1333566", AllowGenericEnumeration = false)]
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1333566",
+            AllowGenericEnumeration = false
+        )]
         internal static async Task FindAsync<TState>(
             TextDocumentStates<TState> documentStates,
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
-            CancellationToken cancellationToken) where TState : TextDocumentState
+            CancellationToken cancellationToken
+        )
+            where TState : TextDocumentState
         {
             foreach (var (_, state) in documentStates.States)
             {
                 Contract.ThrowIfFalse(state.TryGetStateChecksums(out var stateChecksums));
 
-                await stateChecksums.FindAsync(state, searchingChecksumsLeft, result, cancellationToken).ConfigureAwait(false);
+                await stateChecksums
+                    .FindAsync(state, searchingChecksumsLeft, result, cancellationToken)
+                    .ConfigureAwait(false);
                 if (searchingChecksumsLeft.Count == 0)
                 {
                     return;
@@ -60,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ChecksumWithChildren checksums,
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(values.Count == checksums.Children.Length);
 

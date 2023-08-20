@@ -27,8 +27,16 @@ namespace System.Activities.Core.Presentation
             builder.AddCustomAttributes(type, type.GetProperty("Branches"), BrowsableAttribute.No);
             builder.AddCustomAttributes(type, type.GetProperty("Variables"), BrowsableAttribute.No);
 
-            builder.AddCustomAttributes(type, type.GetProperty("Branches"), new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false });
-            builder.AddCustomAttributes(type, type.GetProperty("CompletionCondition"), new HidePropertyInOutlineViewAttribute());
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Branches"),
+                new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false }
+            );
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("CompletionCondition"),
+                new HidePropertyInOutlineViewAttribute()
+            );
         }
     }
 }

@@ -4,22 +4,24 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.ComponentModel;
     using System.Reflection;
 
     [AttributeUsage(AttributeTargets.Method)]
-    public class ConnectionProviderAttribute : Attribute {
-
+    public class ConnectionProviderAttribute : Attribute
+    {
         private string _displayName;
         private string _id;
         private Type _connectionPointType;
         private bool _allowsMultipleConnections;
 
-        public ConnectionProviderAttribute(string displayName) {
-            if (String.IsNullOrEmpty(displayName)) {
+        public ConnectionProviderAttribute(string displayName)
+        {
+            if (String.IsNullOrEmpty(displayName))
+            {
                 throw new ArgumentNullException("displayName");
             }
 
@@ -27,70 +29,84 @@ namespace System.Web.UI.WebControls.WebParts {
             _allowsMultipleConnections = true;
         }
 
-        public ConnectionProviderAttribute(string displayName, string id) : this(displayName) {
-            if (String.IsNullOrEmpty(id)) {
+        public ConnectionProviderAttribute(string displayName, string id)
+            : this(displayName)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
                 throw new ArgumentNullException("id");
             }
 
             _id = id;
         }
 
-        public ConnectionProviderAttribute(string displayName, Type connectionPointType) : this(displayName) {
-            if (connectionPointType == null) {
+        public ConnectionProviderAttribute(string displayName, Type connectionPointType)
+            : this(displayName)
+        {
+            if (connectionPointType == null)
+            {
                 throw new ArgumentNullException("connectionPointType");
             }
 
             _connectionPointType = connectionPointType;
         }
 
-        public ConnectionProviderAttribute(string displayName, string id, Type connectionPointType) : this(displayName, connectionPointType) {
-            if (String.IsNullOrEmpty(id)) {
+        public ConnectionProviderAttribute(string displayName, string id, Type connectionPointType)
+            : this(displayName, connectionPointType)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
                 throw new ArgumentNullException("id");
             }
 
             _id = id;
         }
 
-        public bool AllowsMultipleConnections {
-            get {
-                return _allowsMultipleConnections;
-            }
-            set {
-                _allowsMultipleConnections = value;
-            }
+        public bool AllowsMultipleConnections
+        {
+            get { return _allowsMultipleConnections; }
+            set { _allowsMultipleConnections = value; }
         }
 
-        public string ID {
-            get {
-                return (_id != null) ? _id : String.Empty;
-            }
+        public string ID
+        {
+            get { return (_id != null) ? _id : String.Empty; }
         }
 
-        public virtual string DisplayName {
-            get {
-                return DisplayNameValue;
-            }
+        public virtual string DisplayName
+        {
+            get { return DisplayNameValue; }
         }
 
-        protected string DisplayNameValue {
-            get {
-                return _displayName;
-            }
-            set {
-                _displayName = value;
-            }
+        protected string DisplayNameValue
+        {
+            get { return _displayName; }
+            set { _displayName = value; }
         }
 
-        public Type ConnectionPointType {
-            get {
-                if (WebPartUtil.IsConnectionPointTypeValid(_connectionPointType, /*isConsumer*/ false)) {
+        public Type ConnectionPointType
+        {
+            get
+            {
+                if (
+                    WebPartUtil.IsConnectionPointTypeValid(
+                        _connectionPointType, /*isConsumer*/
+                        false
+                    )
+                )
+                {
                     return _connectionPointType;
                 }
-                else {
-                    throw new InvalidOperationException(SR.GetString(SR.ConnectionProviderAttribute_InvalidConnectionPointType, _connectionPointType.Name));
+                else
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.ConnectionProviderAttribute_InvalidConnectionPointType,
+                            _connectionPointType.Name
+                        )
+                    );
                 }
             }
         }
     }
 }
-

@@ -12,9 +12,7 @@ namespace System.Collections.Generic
     public class KeyedByTypeCollection<TItem> : KeyedCollection<Type, TItem>
     {
         public KeyedByTypeCollection()
-            : base(null, 4)
-        {
-        }
+            : base(null, 4) { }
 
         public KeyedByTypeCollection(IEnumerable<TItem> items)
             : base(null, 4)
@@ -106,7 +104,10 @@ namespace System.Collections.Generic
 
             if (this.Contains(item.GetType()))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("item", SR.GetString(SR.DuplicateBehavior1, item.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "item",
+                    SR.GetString(SR.DuplicateBehavior1, item.GetType().FullName)
+                );
             }
 
             base.InsertItem(index, item);

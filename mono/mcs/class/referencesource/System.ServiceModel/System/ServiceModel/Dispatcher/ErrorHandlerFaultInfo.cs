@@ -11,8 +11,8 @@ namespace System.ServiceModel.Dispatcher
 
     internal struct ErrorHandlerFaultInfo
     {
-        Message fault;   // if this is null, then we aren't interested in sending back a fault
-        bool isConsideredUnhandled;  // if this is true, it means Fault is the 'internal server error' fault
+        Message fault; // if this is null, then we aren't interested in sending back a fault
+        bool isConsideredUnhandled; // if this is true, it means Fault is the 'internal server error' fault
         string defaultFaultAction;
 
         public ErrorHandlerFaultInfo(string defaultFaultAction)

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class Test
 {
-
     List<byte[]> strongRefs;
     List<WeakReference> weakRefs;
 
@@ -20,18 +19,17 @@ public class Test
             byte[] data = new byte[1000];
             data[0] = 0xC;
 
-            strongRefs.Add(data);            
+            strongRefs.Add(data);
             weakRefs.Add(new WeakReference(data, track));
         }
     }
-
 
     public int Calculate()
     {
         int count = 0;
         foreach (WeakReference w in weakRefs)
         {
-            if (w.Target!=null)
+            if (w.Target != null)
             {
                 ++count;
             }
@@ -39,30 +37,25 @@ public class Test
         return count;
     }
 
-
     public static void Usage()
     {
         Console.WriteLine("USAGE: MultipleWR.exe <num objects> [track]");
     }
 
-
     public static int Main(string[] args)
     {
-
         int numElems = 0;
-        if ((args.Length==0) || (!Int32.TryParse(args[0], out numElems)))
+        if ((args.Length == 0) || (!Int32.TryParse(args[0], out numElems)))
         {
             Usage();
             return 1;
         }
-        
+
         bool track = false;
-        if (args.Length==2)
+        if (args.Length == 2)
         {
-            track = (args[1].ToLower()=="track");
+            track = (args[1].ToLower() == "track");
         }
-        
-        
 
         Test test = new Test(numElems, track);
 
@@ -74,20 +67,17 @@ public class Test
 
         Console.WriteLine("Number of live references: {0}", numElems);
         Console.WriteLine("Number of live WeakReferences: {0}", count);
-        
-        // this KeepAlive is necessary so test isn't collected before we get the weakreference count
-        GC.KeepAlive(test); 
 
-        if (count!=numElems)
-        {                
+        // this KeepAlive is necessary so test isn't collected before we get the weakreference count
+        GC.KeepAlive(test);
+
+        if (count != numElems)
+        {
             Console.WriteLine("Test Failed");
             return 1;
-        }            
+        }
 
         Console.WriteLine("Test Passed");
-        return 100;            
-
+        return 100;
     }
-
 }
-

@@ -22,11 +22,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         [WpfFact]
         public void SimpleTagCompletion()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo$$
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo>$$</goo>
 class c { }";
 
@@ -36,13 +38,15 @@ class c { }";
         [WpfFact]
         public void NestedTagCompletion()
         {
-            var text = @"
+            var text =
+                @"
 /// <summary>
 /// <goo$$
 /// </summary>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <summary>
 /// <goo>$$</goo>
 /// </summary>
@@ -54,12 +58,14 @@ class c { }";
         [WpfFact]
         public void CompleteBeforeIncompleteTag()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo$$
 /// </summary>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo>$$</goo>
 /// </summary>
 class c { }";
@@ -70,11 +76,13 @@ class c { }";
         [WpfFact]
         public void NotEmptyElement()
         {
-            var text = @"
+            var text =
+                @"
 /// <$$
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <>$$
 class c { }";
 
@@ -84,11 +92,13 @@ class c { }";
         [WpfFact]
         public void NotAlreadyCompleteTag()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo$$</goo>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo>$$</goo>
 class c { }";
 
@@ -98,13 +108,15 @@ class c { }";
         [WpfFact]
         public void NotAlreadyCompleteTag2()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo$$
 ///
 /// </goo>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo>$$
 ///
 /// </goo>
@@ -116,11 +128,13 @@ class c { }";
         [WpfFact]
         public void SimpleSlashCompletion()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo><$$
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo></goo>$$
 class c { }";
 
@@ -130,13 +144,15 @@ class c { }";
         [WpfFact]
         public void NestedSlashTagCompletion()
         {
-            var text = @"
+            var text =
+                @"
 /// <summary>
 /// <goo><$$
 /// </summary>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <summary>
 /// <goo></goo>$$
 /// </summary>
@@ -148,12 +164,14 @@ class c { }";
         [WpfFact]
         public void SlashCompleteBeforeIncompleteTag()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo><$$
 /// </summary>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo></goo>$$
 /// </summary>
 class c { }";
@@ -164,11 +182,13 @@ class c { }";
         [WpfFact]
         public void SlashNotEmptyElement()
         {
-            var text = @"
+            var text =
+                @"
 /// <><$$
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <></$$
 class c { }";
 
@@ -178,11 +198,13 @@ class c { }";
         [WpfFact]
         public void SlashNotAlreadyCompleteTag()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo><$$goo>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo></$$goo>
 class c { }";
 
@@ -192,13 +214,15 @@ class c { }";
         [WpfFact]
         public void SlashNotAlreadyCompleteTag2()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo>
 ///
 /// <$$goo>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo>
 ///
 /// </$$goo>
@@ -211,11 +235,13 @@ class c { }";
         [WpfFact]
         public void NestedIdenticalTags()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo><goo$$</goo>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo><goo>$$</goo></goo>
 class c { }";
 
@@ -226,11 +252,13 @@ class c { }";
         [WpfFact]
         public void MultipleNestedIdenticalTags()
         {
-            var text = @"
+            var text =
+                @"
 /// <goo><goo><goo$$</goo></goo>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <goo><goo><goo>$$</goo></goo></goo>
 class c { }";
 
@@ -241,13 +269,15 @@ class c { }";
         [WpfFact]
         public void SlashNotIfCloseTagFollows()
         {
-            var text = @"
+            var text =
+                @"
 /// <summary>
 /// <$$
 /// </summary>
 class c { }";
 
-            var expected = @"
+            var expected =
+                @"
 /// <summary>
 /// </$$
 /// </summary>
@@ -256,10 +286,15 @@ class c { }";
             Verify(text, expected, '/');
         }
 
-        internal override IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(TestWorkspace workspace)
-            => workspace.ExportProvider.GetCommandHandler<XmlTagCompletionCommandHandler>(nameof(XmlTagCompletionCommandHandler), ContentTypeNames.CSharpContentType);
+        internal override IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(
+            TestWorkspace workspace
+        ) =>
+            workspace.ExportProvider.GetCommandHandler<XmlTagCompletionCommandHandler>(
+                nameof(XmlTagCompletionCommandHandler),
+                ContentTypeNames.CSharpContentType
+            );
 
-        protected override TestWorkspace CreateTestWorkspace(string initialMarkup)
-            => TestWorkspace.CreateCSharp(initialMarkup);
+        protected override TestWorkspace CreateTestWorkspace(string initialMarkup) =>
+            TestWorkspace.CreateCSharp(initialMarkup);
     }
 }

@@ -8,26 +8,25 @@ class CheckAddInt
     public static int Main(string[] args)
     {
         // Check number of args
-        if(args.Length != 2)
+        if (args.Length != 2)
         {
-            Console.WriteLine("USAGE:  CheckAddInt " +
-                "/start:<int> /add:<int>");
+            Console.WriteLine("USAGE:  CheckAddInt " + "/start:<int> /add:<int>");
             return -1;
         }
 
         // Get the args
-        int iStart=0;
+        int iStart = 0;
         int iAdd = 0;
-        
-        for(int i=0;i<args.Length;i++)
+
+        for (int i = 0; i < args.Length; i++)
         {
-            if(args[i].ToLower().StartsWith("/start:"))
+            if (args[i].ToLower().StartsWith("/start:"))
             {
                 iStart = Convert.ToInt32(args[i].Substring(7));
                 continue;
             }
 
-            if(args[i].ToLower().StartsWith("/add:"))
+            if (args[i].ToLower().StartsWith("/add:"))
             {
                 iAdd = Convert.ToInt32(args[i].Substring(5));
                 continue;
@@ -43,7 +42,7 @@ class CheckAddInt
         int iNew = 0;
         int iNewExpected;
         int iTotal = iStart;
-        for(int i=0;i<iAdd;i++)
+        for (int i = 0; i < iAdd; i++)
         {
             iNewExpected = iTotal + (i * (i + 1));
             iNew = Interlocked.Add(ref iTotal, (i * (i + 1)));

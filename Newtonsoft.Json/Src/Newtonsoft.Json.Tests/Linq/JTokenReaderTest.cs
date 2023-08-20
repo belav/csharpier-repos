@@ -78,25 +78,30 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JObject json = JObject.Parse(@"{""IntList"":[1, ""two""]}");
 
-            ExceptionAssert.Throws<Exception>(() =>
-            {
-                JsonSerializer serializer = new JsonSerializer();
+            ExceptionAssert.Throws<Exception>(
+                () =>
+                {
+                    JsonSerializer serializer = new JsonSerializer();
 
-                serializer.Deserialize<TraceTestObject>(json.CreateReader());
-            }, "Could not convert string to integer: two. Path 'IntList[1]', line 1, position 20.");
+                    serializer.Deserialize<TraceTestObject>(json.CreateReader());
+                },
+                "Could not convert string to integer: two. Path 'IntList[1]', line 1, position 20."
+            );
         }
 
 #if !NET20
         [Test]
         public void YahooFinance()
         {
-            JObject o =
-                new JObject(
-                    new JProperty("Test1", new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc)),
-                    new JProperty("Test2", new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0))),
-                    new JProperty("Test3", "Test3Value"),
-                    new JProperty("Test4", null)
-                    );
+            JObject o = new JObject(
+                new JProperty("Test1", new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc)),
+                new JProperty(
+                    "Test2",
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0))
+                ),
+                new JProperty("Test3", "Test3Value"),
+                new JProperty("Test4", null)
+            );
 
             using (JTokenReader jsonReader = new JTokenReader(o))
             {
@@ -113,7 +118,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
                 jsonReader.Read();
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
-                Assert.AreEqual(new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc), jsonReader.Value);
+                Assert.AreEqual(
+                    new DateTime(2000, 10, 15, 5, 5, 5, DateTimeKind.Utc),
+                    jsonReader.Value
+                );
                 Assert.AreEqual(false, lineInfo.HasLineInfo());
                 Assert.AreEqual(0, lineInfo.LinePosition);
                 Assert.AreEqual(0, lineInfo.LineNumber);
@@ -124,7 +132,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
                 jsonReader.Read();
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
-                Assert.AreEqual(new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)), jsonReader.Value);
+                Assert.AreEqual(
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)),
+                    jsonReader.Value
+                );
 
                 jsonReader.Read();
                 Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
@@ -157,7 +168,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
                 Assert.IsTrue(jsonReader.Read());
                 Assert.AreEqual(JsonToken.Date, jsonReader.TokenType);
-                Assert.AreEqual(new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)), jsonReader.Value);
+                Assert.AreEqual(
+                    new DateTimeOffset(2000, 10, 15, 5, 5, 5, new TimeSpan(11, 11, 0)),
+                    jsonReader.Value
+                );
 
                 Assert.IsFalse(jsonReader.Read());
                 Assert.AreEqual(JsonToken.None, jsonReader.TokenType);
@@ -179,7 +193,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDateTimeOffset(); }, "Could not convert string to DateTimeOffset: blablahbla. Path 'Offset', line 1, position 22.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    reader.ReadAsDateTimeOffset();
+                },
+                "Could not convert string to DateTimeOffset: blablahbla. Path 'Offset', line 1, position 22."
+            );
         }
 
         [Test]
@@ -197,7 +217,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDateTimeOffset(); }, "Error reading date. Unexpected token: Boolean. Path 'Offset', line 1, position 14.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    reader.ReadAsDateTimeOffset();
+                },
+                "Error reading date. Unexpected token: Boolean. Path 'Offset', line 1, position 14."
+            );
         }
 
         [Test]
@@ -225,7 +251,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadLineInfo()
         {
-            string input = @"{
+            string input =
+                @"{
   CPU: 'Intel',
   Drives: [
     'DVD read/writer',
@@ -328,10 +355,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             byte[] data = Encoding.UTF8.GetBytes("Hello world!");
 
-            JObject o =
-                new JObject(
-                    new JProperty("Test1", data)
-                    );
+            JObject o = new JObject(new JProperty("Test1", data));
 
             using (JTokenReader jsonReader = new JTokenReader(o))
             {
@@ -356,25 +380,25 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadBytesFailure()
         {
-            ExceptionAssert.Throws<JsonReaderException>(() =>
-            {
-                JObject o =
-                    new JObject(
-                        new JProperty("Test1", 1)
-                        );
-
-                using (JTokenReader jsonReader = new JTokenReader(o))
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
                 {
-                    jsonReader.Read();
-                    Assert.AreEqual(JsonToken.StartObject, jsonReader.TokenType);
+                    JObject o = new JObject(new JProperty("Test1", 1));
 
-                    jsonReader.Read();
-                    Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
-                    Assert.AreEqual("Test1", jsonReader.Value);
+                    using (JTokenReader jsonReader = new JTokenReader(o))
+                    {
+                        jsonReader.Read();
+                        Assert.AreEqual(JsonToken.StartObject, jsonReader.TokenType);
 
-                    jsonReader.ReadAsBytes();
-                }
-            }, "Error reading bytes. Unexpected token: Integer. Path 'Test1'.");
+                        jsonReader.Read();
+                        Assert.AreEqual(JsonToken.PropertyName, jsonReader.TokenType);
+                        Assert.AreEqual("Test1", jsonReader.Value);
+
+                        jsonReader.ReadAsBytes();
+                    }
+                },
+                "Error reading bytes. Unexpected token: Integer. Path 'Test1'."
+            );
         }
 
         public class HasBytes
@@ -395,8 +419,8 @@ namespace Newtonsoft.Json.Tests.Linq
 
             jsonReader = new JTokenReader(jToken);
 
-            var result2 = (HasBytes)JsonSerializer.Create(null)
-                .Deserialize(jsonReader, typeof(HasBytes));
+            var result2 = (HasBytes)
+                JsonSerializer.Create(null).Deserialize(jsonReader, typeof(HasBytes));
 
             CollectionAssert.AreEqual(new byte[] { 1, 2, 3, 4 }, result2.Bytes);
         }
@@ -414,8 +438,8 @@ namespace Newtonsoft.Json.Tests.Linq
 
             jsonReader = new JTokenReader(jToken);
 
-            var result2 = (HasBytes)JsonSerializer.Create(null)
-                .Deserialize(jsonReader, typeof(HasBytes));
+            var result2 = (HasBytes)
+                JsonSerializer.Create(null).Deserialize(jsonReader, typeof(HasBytes));
 
             CollectionAssert.AreEquivalent(new byte[0], result2.Bytes);
         }
@@ -430,8 +454,12 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JsonSerializer s = new JsonSerializer();
 
-            JToken nullToken = JToken.ReadFrom(new JsonTextReader(new StringReader("{ Data: null }")));
-            ReadAsBytesTestObject x = s.Deserialize<ReadAsBytesTestObject>(new JTokenReader(nullToken));
+            JToken nullToken = JToken.ReadFrom(
+                new JsonTextReader(new StringReader("{ Data: null }"))
+            );
+            ReadAsBytesTestObject x = s.Deserialize<ReadAsBytesTestObject>(
+                new JTokenReader(nullToken)
+            );
             Assert.IsNull(x.Data);
         }
 
@@ -440,10 +468,11 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             TestObject test = new TestObject("Test", new byte[] { 72, 63, 62, 71, 92, 55 });
 
-            string json = JsonConvert.SerializeObject(test, Formatting.Indented, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            });
+            string json = JsonConvert.SerializeObject(
+                test,
+                Formatting.Indented,
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
+            );
 
             JObject o = JObject.Parse(json);
 
@@ -456,14 +485,18 @@ namespace Newtonsoft.Json.Tests.Linq
                 TestObject newObject = (TestObject)serializer.Deserialize(nodeReader);
 
                 Assert.AreEqual("Test", newObject.Name);
-                CollectionAssert.AreEquivalent(new byte[] { 72, 63, 62, 71, 92, 55 }, newObject.Data);
+                CollectionAssert.AreEquivalent(
+                    new byte[] { 72, 63, 62, 71, 92, 55 },
+                    newObject.Data
+                );
             }
         }
 
         [Test]
         public void DeserializeStringInt()
         {
-            string json = @"{
+            string json =
+                @"{
   ""PreProperty"": ""99"",
   ""PostProperty"": ""-1""
 }";
@@ -541,7 +574,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsInt32(); }, "Could not convert string to integer: hi. Path 'Name', line 1, position 12.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    reader.ReadAsInt32();
+                },
+                "Could not convert string to integer: hi. Path 'Name', line 1, position 12."
+            );
         }
 
         [Test]
@@ -559,7 +598,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsInt32(); }, "Error reading integer. Unexpected token: Boolean. Path 'Name', line 1, position 12.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    reader.ReadAsInt32();
+                },
+                "Error reading integer. Unexpected token: Boolean. Path 'Name', line 1, position 12."
+            );
         }
 
         [Test]
@@ -598,7 +643,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDecimal(); }, "Could not convert string to decimal: blah. Path 'Name', line 1, position 14.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    reader.ReadAsDecimal();
+                },
+                "Could not convert string to decimal: blah. Path 'Name', line 1, position 14."
+            );
         }
 
         [Test]
@@ -616,7 +667,13 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.IsTrue(reader.Read());
             Assert.AreEqual(JsonToken.PropertyName, reader.TokenType);
 
-            ExceptionAssert.Throws<JsonReaderException>(() => { reader.ReadAsDecimal(); }, "Error reading decimal. Unexpected token: Boolean. Path 'Name', line 1, position 12.");
+            ExceptionAssert.Throws<JsonReaderException>(
+                () =>
+                {
+                    reader.ReadAsDecimal();
+                },
+                "Error reading decimal. Unexpected token: Boolean. Path 'Name', line 1, position 12."
+            );
         }
 
         [Test]
@@ -643,10 +700,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void InitialPath_PropertyBase_PropertyToken()
         {
-            JObject o = new JObject
-            {
-                { "prop1", true }
-            };
+            JObject o = new JObject { { "prop1", true } };
 
             JTokenReader reader = new JTokenReader(o, "baseprop");
 
@@ -671,10 +725,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void InitialPath_ArrayBase_PropertyToken()
         {
-            JObject o = new JObject
-            {
-                { "prop1", true }
-            };
+            JObject o = new JObject { { "prop1", true } };
 
             JTokenReader reader = new JTokenReader(o, "[0]");
 
@@ -699,10 +750,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void InitialPath_PropertyBase_ArrayToken()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a, "baseprop");
 
@@ -727,10 +775,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void InitialPath_ArrayBase_ArrayToken()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a, "[0]");
 
@@ -755,62 +800,66 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadAsDouble_InvalidToken()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a);
 
             ExceptionAssert.Throws<JsonReaderException>(
-                () => { reader.ReadAsDouble(); },
-                "Error reading double. Unexpected token: StartArray. Path ''.");
+                () =>
+                {
+                    reader.ReadAsDouble();
+                },
+                "Error reading double. Unexpected token: StartArray. Path ''."
+            );
         }
 
         [Test]
         public void ReadAsBoolean_InvalidToken()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a);
 
             ExceptionAssert.Throws<JsonReaderException>(
-                () => { reader.ReadAsBoolean(); },
-                "Error reading boolean. Unexpected token: StartArray. Path ''.");
+                () =>
+                {
+                    reader.ReadAsBoolean();
+                },
+                "Error reading boolean. Unexpected token: StartArray. Path ''."
+            );
         }
 
         [Test]
         public void ReadAsDateTime_InvalidToken()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a);
 
             ExceptionAssert.Throws<JsonReaderException>(
-                () => { reader.ReadAsDateTime(); },
-                "Error reading date. Unexpected token: StartArray. Path ''.");
+                () =>
+                {
+                    reader.ReadAsDateTime();
+                },
+                "Error reading date. Unexpected token: StartArray. Path ''."
+            );
         }
 
 #if !NET20
         [Test]
         public void ReadAsDateTimeOffset_InvalidToken()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a);
 
             ExceptionAssert.Throws<JsonReaderException>(
-                () => { reader.ReadAsDateTimeOffset(); },
-                "Error reading date. Unexpected token: StartArray. Path ''.");
+                () =>
+                {
+                    reader.ReadAsDateTimeOffset();
+                },
+                "Error reading date. Unexpected token: StartArray. Path ''."
+            );
         }
 
         [Test]
@@ -820,7 +869,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JTokenReader reader = new JTokenReader(v);
 
-            Assert.AreEqual(new DateTimeOffset(2001, 12, 12, 12, 12, 12, TimeSpan.Zero), reader.ReadAsDateTimeOffset());
+            Assert.AreEqual(
+                new DateTimeOffset(2001, 12, 12, 12, 12, 12, TimeSpan.Zero),
+                reader.ReadAsDateTimeOffset()
+            );
         }
 
         [Test]
@@ -830,7 +882,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JTokenReader reader = new JTokenReader(v);
 
-            Assert.AreEqual(new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero), reader.ReadAsDateTimeOffset());
+            Assert.AreEqual(
+                new DateTimeOffset(2012, 1, 24, 3, 50, 0, TimeSpan.Zero),
+                reader.ReadAsDateTimeOffset()
+            );
         }
 
         [Test]
@@ -840,7 +895,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JTokenReader reader = new JTokenReader(v);
 
-            Assert.AreEqual(new DateTime(2012, 1, 24, 3, 50, 0, DateTimeKind.Utc), reader.ReadAsDateTime());
+            Assert.AreEqual(
+                new DateTime(2012, 1, 24, 3, 50, 0, DateTimeKind.Utc),
+                reader.ReadAsDateTime()
+            );
         }
 #endif
 
@@ -851,7 +909,10 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JTokenReader reader = new JTokenReader(v);
 
-            Assert.AreEqual(new DateTime(2012, 1, 24, 3, 50, 0, DateTimeKind.Utc), reader.ReadAsDateTime());
+            Assert.AreEqual(
+                new DateTime(2012, 1, 24, 3, 50, 0, DateTimeKind.Utc),
+                reader.ReadAsDateTime()
+            );
         }
 
         [Test]
@@ -888,7 +949,11 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadAsBoolean_BigInteger_Success()
         {
-            JValue s = new JValue(BigInteger.Parse("99999999999999999999999999999999999999999999999999999999999999999999999999"));
+            JValue s = new JValue(
+                BigInteger.Parse(
+                    "99999999999999999999999999999999999999999999999999999999999999999999999999"
+                )
+            );
 
             JTokenReader reader = new JTokenReader(s);
 
@@ -981,10 +1046,7 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void ReadAsBytes_Array()
         {
-            JArray a = new JArray
-            {
-                1, 2
-            };
+            JArray a = new JArray { 1, 2 };
 
             JTokenReader reader = new JTokenReader(a);
 

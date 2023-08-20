@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,23 +34,30 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class X509SecurityTokenProviderTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorCertNull ()
-		{
-			new X509SecurityTokenProvider (null);
-		}
+    [TestFixture]
+    public class X509SecurityTokenProviderTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorCertNull()
+        {
+            new X509SecurityTokenProvider(null);
+        }
 
-		[Test]
-		//[ExpectedException (typeof (SecurityTokenException))]
-		[Ignore ("on Mono X509Store does not work yet. on .NET there is no assurance that the user have certificates.")]
-		public void ConstructorFindValueNull ()
-		{
-			new X509SecurityTokenProvider (StoreLocation.CurrentUser, StoreName.My, X509FindType.FindByTimeExpired, DateTime.MaxValue);
-		}
-	}
+        [Test]
+        //[ExpectedException (typeof (SecurityTokenException))]
+        [Ignore(
+            "on Mono X509Store does not work yet. on .NET there is no assurance that the user have certificates."
+        )]
+        public void ConstructorFindValueNull()
+        {
+            new X509SecurityTokenProvider(
+                StoreLocation.CurrentUser,
+                StoreName.My,
+                X509FindType.FindByTimeExpired,
+                DateTime.MaxValue
+            );
+        }
+    }
 }
 #endif

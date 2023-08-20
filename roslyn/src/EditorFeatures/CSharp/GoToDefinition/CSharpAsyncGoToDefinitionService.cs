@@ -15,12 +15,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.GoToDefinition
     internal class CSharpAsyncGoToDefinitionService : AbstractAsyncGoToDefinitionService
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public CSharpAsyncGoToDefinitionService(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
-            : base(threadingContext, streamingPresenter)
-        {
-        }
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
+            : base(threadingContext, streamingPresenter) { }
     }
 }

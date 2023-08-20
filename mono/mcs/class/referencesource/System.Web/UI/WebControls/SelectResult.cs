@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 
-namespace System.Web.UI.WebControls {
-    public sealed class SelectResult {
-        public SelectResult(int totalRowCount, IEnumerable results) {
-            if (totalRowCount < 0) {
+namespace System.Web.UI.WebControls
+{
+    public sealed class SelectResult
+    {
+        public SelectResult(int totalRowCount, IEnumerable results)
+        {
+            if (totalRowCount < 0)
+            {
                 throw new ArgumentOutOfRangeException("totalRowCount");
             }
-            
+
             TotalRowCount = totalRowCount;
             Results = results;
         }

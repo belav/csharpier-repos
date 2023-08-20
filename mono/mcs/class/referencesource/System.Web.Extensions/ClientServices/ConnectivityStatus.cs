@@ -14,14 +14,18 @@ namespace System.Web.ClientServices
 
     public static class ConnectivityStatus
     {
-        public static bool IsOffline  {
-            get {
+        public static bool IsOffline
+        {
+            get
+            {
                 if (!_IsOfflineFetched)
                     FetchIsOffline();
                 return _IsOffline;
             }
-            set {
-                if (IsOffline != value) {
+            set
+            {
+                if (IsOffline != value)
+                {
                     _IsOffline = value;
                     StoreIsOffline();
                 }
@@ -34,20 +38,29 @@ namespace System.Web.ClientServices
         //[PermissionSet(SecurityAction.Assert, Unrestricted = true)]
         private static void FetchIsOffline()
         {
-            string path = Path.Combine(System.Windows.Forms.Application.UserAppDataPath, "AppIsOffline");
+            string path = Path.Combine(
+                System.Windows.Forms.Application.UserAppDataPath,
+                "AppIsOffline"
+            );
             _IsOffline = File.Exists(path);
             _IsOfflineFetched = true;
         }
 
-
         //[PermissionSet(SecurityAction.Assert, Unrestricted = true)]
         private static void StoreIsOffline()
         {
-            string path = Path.Combine(System.Windows.Forms.Application.UserAppDataPath, "AppIsOffline");
-            if (!_IsOffline) {
+            string path = Path.Combine(
+                System.Windows.Forms.Application.UserAppDataPath,
+                "AppIsOffline"
+            );
+            if (!_IsOffline)
+            {
                 File.Delete(path);
-            } else {
-                using (FileStream fs = File.Create(path)) {
+            }
+            else
+            {
+                using (FileStream fs = File.Create(path))
+                {
                     fs.Write(new byte[0], 0, 0);
                 }
             }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey
     {
-        private abstract class Reader<TStringResult> : IDisposable where TStringResult : class
+        private abstract class Reader<TStringResult> : IDisposable
+            where TStringResult : class
         {
             protected const char OpenParenChar = '(';
             protected const char CloseParenChar = ')';
@@ -57,8 +58,7 @@ namespace Microsoft.CodeAnalysis
                 CancellationToken = default;
             }
 
-            protected char Eat(SymbolKeyType type)
-                => Eat((char)type);
+            protected char Eat(SymbolKeyType type) => Eat((char)type);
 
             protected char Eat(char c)
             {
@@ -67,11 +67,9 @@ namespace Microsoft.CodeAnalysis
                 return c;
             }
 
-            protected void EatCloseParen()
-                => Eat(CloseParenChar);
+            protected void EatCloseParen() => Eat(CloseParenChar);
 
-            protected void EatOpenParen()
-                => Eat(OpenParenChar);
+            protected void EatOpenParen() => Eat(OpenParenChar);
 
             public int ReadInteger()
             {
@@ -79,8 +77,7 @@ namespace Microsoft.CodeAnalysis
                 return ReadIntegerRaw_DoNotCallDirectly();
             }
 
-            public int ReadFormatVersion()
-                => ReadIntegerRaw_DoNotCallDirectly();
+            public int ReadFormatVersion() => ReadIntegerRaw_DoNotCallDirectly();
 
             private int ReadIntegerRaw_DoNotCallDirectly()
             {
@@ -103,11 +100,9 @@ namespace Microsoft.CodeAnalysis
                 return value;
             }
 
-            protected char EatSpace()
-                => Eat(SpaceChar);
+            protected char EatSpace() => Eat(SpaceChar);
 
-            public bool ReadBoolean()
-                => ReadBoolean(out _);
+            public bool ReadBoolean() => ReadBoolean(out _);
 
             public bool ReadBoolean(out string? failureReason)
             {
@@ -117,8 +112,7 @@ namespace Microsoft.CodeAnalysis
                 return val == 1;
             }
 
-            public TStringResult? ReadString()
-                => ReadString(out _);
+            public TStringResult? ReadString() => ReadString(out _);
 
             public TStringResult? ReadString(out string? failureReason)
             {
@@ -168,22 +162,26 @@ namespace Microsoft.CodeAnalysis
                 return result;
             }
 
-            protected abstract TStringResult? CreateResultForString(int start, int end, bool hasEmbeddedQuote);
+            protected abstract TStringResult? CreateResultForString(
+                int start,
+                int end,
+                bool hasEmbeddedQuote
+            );
             protected abstract TStringResult? CreateNullForString();
 
-            private void EatDoubleQuote()
-                => Eat(DoubleQuoteChar);
+            private void EatDoubleQuote() => Eat(DoubleQuoteChar);
 
-            public PooledArrayBuilder<TStringResult?> ReadStringArray()
-                => ReadArray(_readString, out _);
+            public PooledArrayBuilder<TStringResult?> ReadStringArray() =>
+                ReadArray(_readString, out _);
 
-            public PooledArrayBuilder<bool> ReadBooleanArray()
-                => ReadArray(_readBoolean, out _);
+            public PooledArrayBuilder<bool> ReadBooleanArray() => ReadArray(_readBoolean, out _);
 
-            public PooledArrayBuilder<RefKind> ReadRefKindArray()
-                => ReadArray(_readRefKind, out _);
+            public PooledArrayBuilder<RefKind> ReadRefKindArray() => ReadArray(_readRefKind, out _);
 
-            public PooledArrayBuilder<T> ReadArray<T>(ReadFunction<T> readFunction, out string? failureReason)
+            public PooledArrayBuilder<T> ReadArray<T>(
+                ReadFunction<T> readFunction,
+                out string? failureReason
+            )
             {
                 var builder = PooledArrayBuilder<T>.GetInstance();
                 EatSpace();
@@ -203,9 +201,10 @@ namespace Microsoft.CodeAnalysis
                     if (elementFailureReason != null)
                     {
                         var reason = $"element {i} failed {elementFailureReason}";
-                        totalFailureReason = totalFailureReason == null
-                            ? $"({reason})"
-                            : $"({totalFailureReason} -> {reason})";
+                        totalFailureReason =
+                            totalFailureReason == null
+                                ? $"({reason})"
+                                : $"({totalFailureReason} -> {reason})";
                     }
                 }
 
@@ -214,8 +213,7 @@ namespace Microsoft.CodeAnalysis
                 return builder;
             }
 
-            public RefKind ReadRefKind()
-                => ReadRefKind(out _);
+            public RefKind ReadRefKind() => ReadRefKind(out _);
 
             public RefKind ReadRefKind(out string? failureReason)
             {
@@ -230,12 +228,9 @@ namespace Microsoft.CodeAnalysis
 
             private bool _skipString = false;
 
-            public RemoveAssemblySymbolKeysReader()
-            {
-            }
+            public RemoveAssemblySymbolKeysReader() { }
 
-            public void Initialize(string data)
-                => base.Initialize(data, CancellationToken.None);
+            public void Initialize(string data) => base.Initialize(data, CancellationToken.None);
 
             public string RemoveAssemblySymbolKeys()
             {
@@ -272,7 +267,11 @@ namespace Microsoft.CodeAnalysis
                 return _builder.ToString();
             }
 
-            protected override object? CreateResultForString(int start, int end, bool hasEmbeddedQuote)
+            protected override object? CreateResultForString(
+                int start,
+                int end,
+                bool hasEmbeddedQuote
+            )
             {
                 // 'start' is right after the open quote, and 'end' is right before the close quote.
                 // However, we want to include both quotes in the result.
@@ -289,15 +288,15 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
 
-            protected override object? CreateNullForString()
-                => null;
+            protected override object? CreateNullForString() => null;
         }
 
         private delegate T ReadFunction<T>(out string? failureReason);
 
         private class SymbolKeyReader : Reader<string>
         {
-            private static readonly ObjectPool<SymbolKeyReader> s_readerPool = SharedPools.Default<SymbolKeyReader>();
+            private static readonly ObjectPool<SymbolKeyReader> s_readerPool =
+                SharedPools.Default<SymbolKeyReader>();
 
             private readonly Dictionary<int, SymbolKeyResolution> _idToResult = new();
             private readonly ReadFunction<SymbolKeyResolution> _readSymbolKey;
@@ -332,9 +331,11 @@ namespace Microsoft.CodeAnalysis
             }
 
             public static SymbolKeyReader GetReader(
-                string data, Compilation compilation,
+                string data,
+                Compilation compilation,
                 bool ignoreAssemblyKey,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var reader = s_readerPool.Allocate();
                 reader.Initialize(data, compilation, ignoreAssemblyKey, cancellationToken);
@@ -345,7 +346,8 @@ namespace Microsoft.CodeAnalysis
                 string data,
                 Compilation compilation,
                 bool ignoreAssemblyKey,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 base.Initialize(data, cancellationToken);
                 Compilation = compilation;
@@ -358,9 +360,13 @@ namespace Microsoft.CodeAnalysis
 
             internal bool ParameterTypesMatch(
                 ImmutableArray<IParameterSymbol> parameters,
-                PooledArrayBuilder<ITypeSymbol> originalParameterTypes)
+                PooledArrayBuilder<ITypeSymbol> originalParameterTypes
+            )
             {
-                if (originalParameterTypes.IsDefault || parameters.Length != originalParameterTypes.Count)
+                if (
+                    originalParameterTypes.IsDefault
+                    || parameters.Length != originalParameterTypes.Count
+                )
                 {
                     return false;
                 }
@@ -382,18 +388,18 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            public void PushMethod(IMethodSymbol? method)
-                => _methodSymbolStack.Add(method);
+            public void PushMethod(IMethodSymbol? method) => _methodSymbolStack.Add(method);
 
             public void PopMethod(IMethodSymbol? method)
             {
                 Contract.ThrowIfTrue(_methodSymbolStack.Count == 0);
-                Contract.ThrowIfFalse(Equals(method, _methodSymbolStack[_methodSymbolStack.Count - 1]));
+                Contract.ThrowIfFalse(
+                    Equals(method, _methodSymbolStack[_methodSymbolStack.Count - 1])
+                );
                 _methodSymbolStack.RemoveAt(_methodSymbolStack.Count - 1);
             }
 
-            public IMethodSymbol? ResolveMethod(int index)
-                => _methodSymbolStack[index];
+            public IMethodSymbol? ResolveMethod(int index) => _methodSymbolStack[index];
 
             internal SyntaxTree? GetSyntaxTree(string filePath)
             {
@@ -447,20 +453,24 @@ namespace Microsoft.CodeAnalysis
                 return result;
             }
 
-            private SymbolKeyResolution ReadWorker(SymbolKeyType type, out string? failureReason)
-                => type switch
+            private SymbolKeyResolution ReadWorker(SymbolKeyType type, out string? failureReason) =>
+                type switch
                 {
                     SymbolKeyType.Alias => AliasSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.BodyLevel => BodyLevelSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.ConstructedMethod => ConstructedMethodSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.ConstructedMethod
+                        => ConstructedMethodSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.NamedType => NamedTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.ErrorType => ErrorTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Field => FieldSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.FunctionPointer => FunctionPointerTypeSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.DynamicType => DynamicTypeSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.FunctionPointer
+                        => FunctionPointerTypeSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.DynamicType
+                        => DynamicTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Method => MethodSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Namespace => NamespaceSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.PointerType => PointerTypeSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.PointerType
+                        => PointerTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Parameter => ParameterSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Property => PropertySymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.ArrayType => ArrayTypeSymbolKey.Resolve(this, out failureReason),
@@ -468,25 +478,33 @@ namespace Microsoft.CodeAnalysis
                     SymbolKeyType.TupleType => TupleTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Module => ModuleSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Event => EventSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.ReducedExtensionMethod => ReducedExtensionMethodSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.TypeParameter => TypeParameterSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.AnonymousType => AnonymousTypeSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.AnonymousFunctionOrDelegate => AnonymousFunctionOrDelegateSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.TypeParameterOrdinal => TypeParameterOrdinalSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.ReducedExtensionMethod
+                        => ReducedExtensionMethodSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.TypeParameter
+                        => TypeParameterSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.AnonymousType
+                        => AnonymousTypeSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.AnonymousFunctionOrDelegate
+                        => AnonymousFunctionOrDelegateSymbolKey.Resolve(this, out failureReason),
+                    SymbolKeyType.TypeParameterOrdinal
+                        => TypeParameterOrdinalSymbolKey.Resolve(this, out failureReason),
                     _ => throw new NotImplementedException(),
                 };
 
             /// <summary>
-            /// Reads an array of symbols out from the key.  Note: the number of symbols returned 
-            /// will either be the same as the original amount written, or <c>default</c> will be 
-            /// returned. It will never be less or more.  <c>default</c> will be returned if any 
-            /// elements could not be resolved to the requested <typeparamref name="TSymbol"/> type 
+            /// Reads an array of symbols out from the key.  Note: the number of symbols returned
+            /// will either be the same as the original amount written, or <c>default</c> will be
+            /// returned. It will never be less or more.  <c>default</c> will be returned if any
+            /// elements could not be resolved to the requested <typeparamref name="TSymbol"/> type
             /// in the provided <see cref="SymbolKeyReader.Compilation"/>.
-            /// 
+            ///
             /// Callers should <see cref="IDisposable.Dispose"/> the instance returned.  No check is
             /// necessary if <c>default</c> was returned before calling <see cref="IDisposable.Dispose"/>
             /// </summary>
-            public PooledArrayBuilder<TSymbol> ReadSymbolKeyArray<TSymbol>(out string? failureReason) where TSymbol : ISymbol
+            public PooledArrayBuilder<TSymbol> ReadSymbolKeyArray<TSymbol>(
+                out string? failureReason
+            )
+                where TSymbol : ISymbol
             {
                 using var resolutions = ReadArray(_readSymbolKey, out var elementsFailureReason);
                 if (elementsFailureReason != null)
@@ -505,7 +523,8 @@ namespace Microsoft.CodeAnalysis
                     else
                     {
                         result.Dispose();
-                        failureReason = $"({nameof(ReadSymbolKeyArray)} incorrect type for element)";
+                        failureReason =
+                            $"({nameof(ReadSymbolKeyArray)} incorrect type for element)";
                         return default;
                     }
                 }
@@ -518,17 +537,18 @@ namespace Microsoft.CodeAnalysis
 
             #region Strings
 
-            protected override string CreateResultForString(int start, int end, bool hasEmbeddedQuote)
+            protected override string CreateResultForString(
+                int start,
+                int end,
+                bool hasEmbeddedQuote
+            )
             {
                 var substring = Data.Substring(start, end - start);
-                var result = hasEmbeddedQuote
-                    ? substring.Replace("\"\"", "\"")
-                    : substring;
+                var result = hasEmbeddedQuote ? substring.Replace("\"\"", "\"") : substring;
                 return result;
             }
 
-            protected override string? CreateNullForString()
-                => null;
+            protected override string? CreateNullForString() => null;
 
             #endregion
 
@@ -558,14 +578,16 @@ namespace Microsoft.CodeAnalysis
 
                     if (filePath == null)
                     {
-                        failureReason = $"({nameof(ReadLocation)} failed -> '{nameof(filePath)}' came back null)";
+                        failureReason =
+                            $"({nameof(ReadLocation)} failed -> '{nameof(filePath)}' came back null)";
                         return null;
                     }
 
                     var syntaxTree = GetSyntaxTree(filePath);
                     if (syntaxTree == null)
                     {
-                        failureReason = $"({nameof(ReadLocation)} failed -> '{filePath}' not in compilation)";
+                        failureReason =
+                            $"({nameof(ReadLocation)} failed -> '{filePath}' not in compilation)";
                         return null;
                     }
 
@@ -579,13 +601,16 @@ namespace Microsoft.CodeAnalysis
 
                     if (assemblyFailureReason != null)
                     {
-                        failureReason = $"{nameof(ReadLocation)} {nameof(assemblyResolution)} failed -> " + assemblyFailureReason;
+                        failureReason =
+                            $"{nameof(ReadLocation)} {nameof(assemblyResolution)} failed -> "
+                            + assemblyFailureReason;
                         return Location.None;
                     }
 
                     if (moduleName == null)
                     {
-                        failureReason = $"({nameof(ReadLocation)} failed -> '{nameof(moduleName)}' came back null)";
+                        failureReason =
+                            $"({nameof(ReadLocation)} failed -> '{nameof(moduleName)}' came back null)";
                         return null;
                     }
 
@@ -618,7 +643,11 @@ namespace Microsoft.CodeAnalysis
             {
                 if (location.SourceTree != null)
                 {
-                    var node = location.FindNode(findInsideTrivia: true, getInnermostNodeForTie: true, CancellationToken);
+                    var node = location.FindNode(
+                        findInsideTrivia: true,
+                        getInnermostNodeForTie: true,
+                        CancellationToken
+                    );
                     var semanticModel = Compilation.GetSemanticModel(location.SourceTree);
                     var symbol = semanticModel.GetDeclaredSymbol(node, CancellationToken);
                     if (symbol != null)
@@ -635,7 +664,10 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
 
-            private static IModuleSymbol? GetModule(IEnumerable<IModuleSymbol> modules, string moduleName)
+            private static IModuleSymbol? GetModule(
+                IEnumerable<IModuleSymbol> modules,
+                string moduleName
+            )
             {
                 foreach (var module in modules)
                 {
@@ -648,8 +680,8 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
 
-            public PooledArrayBuilder<Location?> ReadLocationArray(out string? failureReason)
-                => ReadArray(_readLocation, out failureReason);
+            public PooledArrayBuilder<Location?> ReadLocationArray(out string? failureReason) =>
+                ReadArray(_readLocation, out failureReason);
 
             #endregion
         }

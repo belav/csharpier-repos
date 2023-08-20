@@ -7,7 +7,10 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public static class TestRequiredAttributeDescriptorBuilderExtensions
 {
-    public static RequiredAttributeDescriptorBuilder Name(this RequiredAttributeDescriptorBuilder builder, string name)
+    public static RequiredAttributeDescriptorBuilder Name(
+        this RequiredAttributeDescriptorBuilder builder,
+        string name
+    )
     {
         if (builder == null)
         {
@@ -21,7 +24,8 @@ public static class TestRequiredAttributeDescriptorBuilderExtensions
 
     public static RequiredAttributeDescriptorBuilder NameComparisonMode(
         this RequiredAttributeDescriptorBuilder builder,
-        RequiredAttributeDescriptor.NameComparisonMode nameComparison)
+        RequiredAttributeDescriptor.NameComparisonMode nameComparison
+    )
     {
         if (builder == null)
         {
@@ -33,7 +37,10 @@ public static class TestRequiredAttributeDescriptorBuilderExtensions
         return builder;
     }
 
-    public static RequiredAttributeDescriptorBuilder Value(this RequiredAttributeDescriptorBuilder builder, string value)
+    public static RequiredAttributeDescriptorBuilder Value(
+        this RequiredAttributeDescriptorBuilder builder,
+        string value
+    )
     {
         if (builder == null)
         {
@@ -47,7 +54,8 @@ public static class TestRequiredAttributeDescriptorBuilderExtensions
 
     public static RequiredAttributeDescriptorBuilder ValueComparisonMode(
         this RequiredAttributeDescriptorBuilder builder,
-        RequiredAttributeDescriptor.ValueComparisonMode valueComparison)
+        RequiredAttributeDescriptor.ValueComparisonMode valueComparison
+    )
     {
         if (builder == null)
         {
@@ -59,7 +67,10 @@ public static class TestRequiredAttributeDescriptorBuilderExtensions
         return builder;
     }
 
-    public static RequiredAttributeDescriptorBuilder AddDiagnostic(this RequiredAttributeDescriptorBuilder builder, RazorDiagnostic diagnostic)
+    public static RequiredAttributeDescriptorBuilder AddDiagnostic(
+        this RequiredAttributeDescriptorBuilder builder,
+        RazorDiagnostic diagnostic
+    )
     {
         builder.Diagnostics.Add(diagnostic);
 

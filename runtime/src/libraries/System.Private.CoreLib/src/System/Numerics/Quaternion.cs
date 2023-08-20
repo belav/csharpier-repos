@@ -167,8 +167,11 @@ namespace System.Numerics
 
             //-------------------------------------
             // Inverse part.
-            float ls = value2.X * value2.X + value2.Y * value2.Y +
-                       value2.Z * value2.Z + value2.W * value2.W;
+            float ls =
+                value2.X * value2.X
+                + value2.Y * value2.Y
+                + value2.Z * value2.Z
+                + value2.W * value2.W;
             float invNorm = 1.0f / ls;
 
             float q2x = -value2.X * invNorm;
@@ -443,7 +446,12 @@ namespace System.Numerics
         {
             //  Roll first, about axis the object is facing, then
             //  pitch upward, then yaw to face into the new heading
-            float sr, cr, sp, cp, sy, cy;
+            float sr,
+                cr,
+                sp,
+                cp,
+                sy,
+                cy;
 
             float halfRoll = roll * 0.5f;
             sr = MathF.Sin(halfRoll);
@@ -483,10 +491,10 @@ namespace System.Numerics
         /// <returns>The dot product.</returns>
         public static float Dot(Quaternion quaternion1, Quaternion quaternion2)
         {
-            return quaternion1.X * quaternion2.X +
-                   quaternion1.Y * quaternion2.Y +
-                   quaternion1.Z * quaternion2.Z +
-                   quaternion1.W * quaternion2.W;
+            return quaternion1.X * quaternion2.X
+                + quaternion1.Y * quaternion2.Y
+                + quaternion1.Z * quaternion2.Z
+                + quaternion1.W * quaternion2.W;
         }
 
         /// <summary>Returns the inverse of a quaternion.</summary>
@@ -500,7 +508,8 @@ namespace System.Numerics
 
             Quaternion ans;
 
-            float ls = value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
+            float ls =
+                value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
             float invNorm = 1.0f / ls;
 
             ans.X = -value.X * invNorm;
@@ -523,8 +532,11 @@ namespace System.Numerics
 
             Quaternion r = default;
 
-            float dot = quaternion1.X * quaternion2.X + quaternion1.Y * quaternion2.Y +
-                        quaternion1.Z * quaternion2.Z + quaternion1.W * quaternion2.W;
+            float dot =
+                quaternion1.X * quaternion2.X
+                + quaternion1.Y * quaternion2.Y
+                + quaternion1.Z * quaternion2.Z
+                + quaternion1.W * quaternion2.W;
 
             if (dot >= 0.0f)
             {
@@ -589,7 +601,8 @@ namespace System.Numerics
         {
             Quaternion ans;
 
-            float ls = value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
+            float ls =
+                value.X * value.X + value.Y * value.Y + value.Z * value.Z + value.W * value.W;
 
             float invNorm = 1.0f / MathF.Sqrt(ls);
 
@@ -610,8 +623,11 @@ namespace System.Numerics
         {
             float t = amount;
 
-            float cosOmega = quaternion1.X * quaternion2.X + quaternion1.Y * quaternion2.Y +
-                             quaternion1.Z * quaternion2.Z + quaternion1.W * quaternion2.W;
+            float cosOmega =
+                quaternion1.X * quaternion2.X
+                + quaternion1.Y * quaternion2.Y
+                + quaternion1.Z * quaternion2.Z
+                + quaternion1.W * quaternion2.W;
 
             bool flip = false;
 
@@ -621,7 +637,8 @@ namespace System.Numerics
                 cosOmega = -cosOmega;
             }
 
-            float s1, s2;
+            float s1,
+                s2;
 
             if (cosOmega > (1.0f - SlerpEpsilon))
             {
@@ -635,9 +652,10 @@ namespace System.Numerics
                 float invSinOmega = 1 / MathF.Sin(omega);
 
                 s1 = MathF.Sin((1.0f - t) * omega) * invSinOmega;
-                s2 = (flip)
-                    ? -MathF.Sin(t * omega) * invSinOmega
-                    : MathF.Sin(t * omega) * invSinOmega;
+                s2 =
+                    (flip)
+                        ? -MathF.Sin(t * omega) * invSinOmega
+                        : MathF.Sin(t * omega) * invSinOmega;
             }
 
             Quaternion ans;
@@ -681,7 +699,9 @@ namespace System.Numerics
 
             if (Vector128.IsHardwareAccelerated)
             {
-                return Vector128.LoadUnsafe(ref Unsafe.AsRef(in X)).Equals(Vector128.LoadUnsafe(ref other.X));
+                return Vector128
+                    .LoadUnsafe(ref Unsafe.AsRef(in X))
+                    .Equals(Vector128.LoadUnsafe(ref other.X));
             }
 
             return SoftwareFallback(in this, other);
@@ -720,7 +740,6 @@ namespace System.Numerics
         /// <summary>Returns a string that represents this quaternion.</summary>
         /// <returns>The string representation of this quaternion.</returns>
         /// <remarks>The numeric values in the returned string are formatted by using the conventions of the current culture. For example, for the en-US culture, the returned string might appear as <c>{X:1.1 Y:2.2 Z:3.3 W:4.4}</c>.</remarks>
-        public override readonly string ToString() =>
-            $"{{X:{X} Y:{Y} Z:{Z} W:{W}}}";
+        public override readonly string ToString() => $"{{X:{X} Y:{Y} Z:{Z} W:{W}}}";
     }
 }

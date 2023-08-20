@@ -17,10 +17,7 @@ public partial class ParserTests
         {
             var command = new Command("outer")
             {
-                new Command("inner")
-                {
-                    new Option<string>("-x")
-                }
+                new Command("inner") { new Option<string>("-x") }
             };
 
             var result1 = command.Parse(Split("inner -x hello"));
@@ -28,25 +25,26 @@ public partial class ParserTests
 
             result1.Diagram().Should().Be(result2.Diagram());
         }
-        
+
         [Fact]
         public void When_parsing_a_string_array_input_then_a_full_path_to_an_executable_is_not_matched_by_the_root_command()
         {
-            var command = new RootCommand
-            {
-                new Command("inner")
-                {
-                    new Option<string>("-x")
-                }
-            };
+            var command = new RootCommand { new Command("inner") { new Option<string>("-x") } };
 
             command.Parse(Split("inner -x hello")).Errors.Should().BeEmpty();
 
-            var parserResult = command.Parse(Split($"\"{RootCommand.ExecutablePath}\" inner -x hello"));
-            parserResult
-               .Errors
-               .Should()
-               .ContainSingle(e => e.Message == LocalizationResources.Instance.UnrecognizedCommandOrArgument(RootCommand.ExecutablePath));
+            var parserResult = command.Parse(
+                Split($"\"{RootCommand.ExecutablePath}\" inner -x hello")
+            );
+            parserResult.Errors
+                .Should()
+                .ContainSingle(
+                    e =>
+                        e.Message
+                        == LocalizationResources.Instance.UnrecognizedCommandOrArgument(
+                            RootCommand.ExecutablePath
+                        )
+                );
         }
 
         [Fact]
@@ -54,10 +52,7 @@ public partial class ParserTests
         {
             var command = new Command("outer")
             {
-                new Command("inner")
-                {
-                    new Option<string>("-x")
-                }
+                new Command("inner") { new Option<string>("-x") }
             };
 
             var result1 = command.Parse("inner -x hello");
@@ -69,13 +64,7 @@ public partial class ParserTests
         [Fact]
         public void When_parsing_an_unsplit_string_then_input_a_full_path_to_an_executable_is_matched_by_the_root_command()
         {
-            var command = new RootCommand
-            {
-                new Command("inner")
-                {
-                    new Option<string>("-x")
-                }
-            };
+            var command = new RootCommand { new Command("inner") { new Option<string>("-x") } };
 
             var result2 = command.Parse($"\"{RootCommand.ExecutablePath}\" inner -x hello");
 
@@ -85,13 +74,7 @@ public partial class ParserTests
         [Fact]
         public void When_parsing_an_unsplit_string_then_a_renamed_RootCommand_can_be_omitted_from_the_parsed_args()
         {
-            var rootCommand = new RootCommand
-            {
-                new Command("inner")
-                {
-                    new Option<string>("-x")
-                }
-            };
+            var rootCommand = new RootCommand { new Command("inner") { new Option<string>("-x") } };
             rootCommand.Name = "outer";
 
             var result1 = rootCommand.Parse("inner -x hello");

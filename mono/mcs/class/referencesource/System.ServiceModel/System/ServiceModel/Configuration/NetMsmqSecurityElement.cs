@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class NetMsmqSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = NetMsmqSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = NetMsmqSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(SecurityModeHelper))]
         public NetMsmqSecurityMode Mode
         {

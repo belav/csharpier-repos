@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,57 +33,65 @@ using System;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 
-namespace System.Runtime.Remoting {
+namespace System.Runtime.Remoting
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class WellKnownServiceTypeEntry : TypeEntry
+    {
+        Type obj_type;
+        string obj_uri;
+        WellKnownObjectMode obj_mode;
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class WellKnownServiceTypeEntry : TypeEntry
-	{
-		Type obj_type;
-		string obj_uri;
-		WellKnownObjectMode obj_mode;
-		
-		public WellKnownServiceTypeEntry (Type type, string objectUri, WellKnownObjectMode mode)			
-		{
-			AssemblyName = type.Assembly.FullName;
-			TypeName = type.FullName;
-			obj_type = type;
-			obj_uri = objectUri;
-			obj_mode = mode;
-		}
+        public WellKnownServiceTypeEntry(Type type, string objectUri, WellKnownObjectMode mode)
+        {
+            AssemblyName = type.Assembly.FullName;
+            TypeName = type.FullName;
+            obj_type = type;
+            obj_uri = objectUri;
+            obj_mode = mode;
+        }
 
-		public WellKnownServiceTypeEntry (string typeName, string assemblyName,
-						  string objectUri, WellKnownObjectMode mode)			
-		{
-			AssemblyName = assemblyName;
-			TypeName = typeName;
-			Assembly a = Assembly.Load (assemblyName);
-			obj_type = a.GetType (typeName);
-			obj_uri = objectUri;
-			obj_mode = mode;
-			if (obj_type == null) 
-				throw new RemotingException ("Type not found: " + typeName + ", " + assemblyName);
-		}
+        public WellKnownServiceTypeEntry(
+            string typeName,
+            string assemblyName,
+            string objectUri,
+            WellKnownObjectMode mode
+        )
+        {
+            AssemblyName = assemblyName;
+            TypeName = typeName;
+            Assembly a = Assembly.Load(assemblyName);
+            obj_type = a.GetType(typeName);
+            obj_uri = objectUri;
+            obj_mode = mode;
+            if (obj_type == null)
+                throw new RemotingException("Type not found: " + typeName + ", " + assemblyName);
+        }
 
-		public IContextAttribute [] ContextAttributes {
-			get { return null; }
-			set { } // This is not implemented in the MS runtime yet.
-		}
+        public IContextAttribute[] ContextAttributes
+        {
+            get { return null; }
+            set { } // This is not implemented in the MS runtime yet.
+        }
 
-		public WellKnownObjectMode Mode {
-			get { return obj_mode; }
-		}
+        public WellKnownObjectMode Mode
+        {
+            get { return obj_mode; }
+        }
 
-		public Type ObjectType {
-			get { return obj_type; }
-		}
+        public Type ObjectType
+        {
+            get { return obj_type; }
+        }
 
-		public string ObjectUri {
-			get { return obj_uri; }
-		}
+        public string ObjectUri
+        {
+            get { return obj_uri; }
+        }
 
-		public override string ToString ()
-		{
-			return TypeName + ", " + AssemblyName + " " + ObjectUri;
-		}
-	}
+        public override string ToString()
+        {
+            return TypeName + ", " + AssemblyName + " " + ObjectUri;
+        }
+    }
 }

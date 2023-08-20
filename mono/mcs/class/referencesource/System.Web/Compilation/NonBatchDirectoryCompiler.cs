@@ -6,8 +6,8 @@
 
 
 
-namespace System.Web.Compilation {
-
+namespace System.Web.Compilation
+{
     using System;
     using System.IO;
     using System.Collections;
@@ -23,28 +23,33 @@ namespace System.Web.Compilation {
     * This class makes sure that every file in a directory is compiled individually (i.e. it
     * doesn't use batching.  Also, the assemblies get stable names.
     */
-    internal class NonBatchDirectoryCompiler {
-
+    internal class NonBatchDirectoryCompiler
+    {
         // The <compilation> config section for the set of build providers that we handle
         private CompilationSection _compConfig;
 
         private VirtualDirectory _vdir;
 
-        internal NonBatchDirectoryCompiler(VirtualDirectory vdir) {
+        internal NonBatchDirectoryCompiler(VirtualDirectory vdir)
+        {
             _vdir = vdir;
             _compConfig = MTConfigUtil.GetCompilationConfig(_vdir.VirtualPath);
         }
 
-        internal void Process() {
-
-            foreach (VirtualFile vfile in _vdir.Files) {
-
+        internal void Process()
+        {
+            foreach (VirtualFile vfile in _vdir.Files)
+            {
                 string extension = UrlPath.GetExtension(vfile.VirtualPath);
 
                 // Skip any file for which we can't get a BuildProvider type, as it is not
                 // compilable.
-                Type buildProviderType = CompilationUtil.GetBuildProviderTypeFromExtension(_compConfig,
-                    extension, BuildProviderAppliesTo.Web, false /*failIfUnknown*/);
+                Type buildProviderType = CompilationUtil.GetBuildProviderTypeFromExtension(
+                    _compConfig,
+                    extension,
+                    BuildProviderAppliesTo.Web,
+                    false /*failIfUnknown*/
+                );
                 if (buildProviderType == null)
                     continue;
 
@@ -64,5 +69,4 @@ namespace System.Web.Compilation {
             }
         }
     }
-
 }

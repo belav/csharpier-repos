@@ -12,6 +12,7 @@ namespace System.Drawing
         /// Fills the Destination Rectangle using the color associated with the index 0 in the physical palette.
         /// </summary>
         Blackness = Interop.Gdi32.RasterOp.BLACKNESS,
+
         /// <summary>
         /// Includes any windows that are Layered on Top.
         /// </summary>

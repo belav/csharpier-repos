@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NativeExports
 {
-    public unsafe static class VirtualMethodTables
+    public static unsafe class VirtualMethodTables
     {
         struct StaticFunctionTable
         {
@@ -30,7 +30,11 @@ namespace NativeExports
 
         static VirtualMethodTables()
         {
-            StaticTable = (StaticFunctionTable*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(VirtualMethodTables), sizeof(StaticFunctionTable));
+            StaticTable = (StaticFunctionTable*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(VirtualMethodTables),
+                    sizeof(StaticFunctionTable)
+                );
 
             StaticTable->Add = &Add;
             StaticTable->Multiply = &Multiply;
@@ -54,22 +58,28 @@ namespace NativeExports
 
             public NativeObjectInterface()
             {
-                throw new UnreachableException("This type should only be accessed through a pointer as it represents an arbitrary implementation of a type that has a NativeObject virtual method table.");
+                throw new UnreachableException(
+                    "This type should only be accessed through a pointer as it represents an arbitrary implementation of a type that has a NativeObject virtual method table."
+                );
             }
         }
 
         public struct NativeObject
         {
-
             public struct VirtualFunctionTable
             {
                 // The order of functions here should match NativeObjectInterface.VirtualFunctionTable's members.
                 public delegate* unmanaged<NativeObject*, int> getData;
                 public delegate* unmanaged<NativeObject*, int, void> setData;
             }
+
             static NativeObject()
             {
-                VTablePointer = (VirtualFunctionTable*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(NativeObject), sizeof(VirtualFunctionTable));
+                VTablePointer = (VirtualFunctionTable*)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(NativeObject),
+                        sizeof(VirtualFunctionTable)
+                    );
                 VTablePointer->getData = &GetData;
                 VTablePointer->setData = &SetData;
             }
@@ -78,9 +88,7 @@ namespace NativeExports
 
             private readonly VirtualFunctionTable* vtable = VTablePointer;
 
-            public NativeObject()
-            {
-            }
+            public NativeObject() { }
 
             public int Data { get; set; } = 0;
 
@@ -109,21 +117,28 @@ namespace NativeExports
 
         [UnmanagedCallersOnly(EntryPoint = "delete_native_object")]
         [DNNE.C99DeclCode("struct NativeObject;")]
-        public static void DeleteNativeObject([DNNE.C99Type("struct NativeObject*")] NativeObject* obj)
+        public static void DeleteNativeObject(
+            [DNNE.C99Type("struct NativeObject*")] NativeObject* obj
+        )
         {
             NativeMemory.Free(obj);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "set_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static void SetNativeObjectData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj, int x)
+        public static void SetNativeObjectData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj,
+            int x
+        )
         {
             obj->VTable->setData(obj, x);
         }
 
         [UnmanagedCallersOnly(EntryPoint = "get_native_object_data")]
         [DNNE.C99DeclCode("struct INativeObject;")]
-        public static int GetNativeObjectData([DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj)
+        public static int GetNativeObjectData(
+            [DNNE.C99Type("struct INativeObject*")] NativeObjectInterface* obj
+        )
         {
             return obj->VTable->getData(obj);
         }

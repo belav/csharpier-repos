@@ -36,6 +36,7 @@ namespace System.Workflow.Activities
         }
         #endregion
     }
+
     #region WebServiceFaultDesignerTheme
     internal sealed class WebServiceFaultDesignerTheme : ActivityDesignerTheme
     {

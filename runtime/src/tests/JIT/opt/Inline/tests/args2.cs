@@ -7,12 +7,12 @@ namespace JitInliningTest
 {
     internal class Args2
     {
-        static public void FillArray(out int[] myArray)
+        public static void FillArray(out int[] myArray)
         {
             myArray = new int[5] { 1, 2, 3, 4, 5 };
         }
 
-        static public int Main()
+        public static int Main()
         {
             int retval = 85;
             int[] myArray;

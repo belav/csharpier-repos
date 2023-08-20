@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,58 +29,59 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Configuration.Assemblies {
+namespace System.Configuration.Assemblies
+{
+    [Serializable]
+    [ComVisible(true)]
+    [Obsolete]
+    public struct AssemblyHash : ICloneable
+    {
+        private AssemblyHashAlgorithm _algorithm;
+        private byte[] _value;
 
-	[Serializable]
-	[ComVisible (true)]
-	[Obsolete]
-	public struct AssemblyHash : ICloneable {
+        [Obsolete]
+        public static readonly AssemblyHash Empty = new AssemblyHash(
+            AssemblyHashAlgorithm.None,
+            null
+        );
 
-		private AssemblyHashAlgorithm _algorithm;
-		private byte[] _value;
+        [Obsolete]
+        public AssemblyHashAlgorithm Algorithm
+        {
+            get { return _algorithm; }
+            set { _algorithm = value; }
+        }
 
-		[Obsolete]
-		public static readonly AssemblyHash Empty = new AssemblyHash (AssemblyHashAlgorithm.None, null);
+        [Obsolete]
+        public AssemblyHash(AssemblyHashAlgorithm algorithm, byte[] value)
+        {
+            _algorithm = algorithm;
+            if (value != null)
+                _value = (byte[])value.Clone();
+            else
+                _value = null;
+        }
 
-		[Obsolete]
-		public AssemblyHashAlgorithm Algorithm {
-			get { return _algorithm; }
-			set { _algorithm = value; }
-		}
+        [Obsolete]
+        public AssemblyHash(byte[] value)
+            : this(AssemblyHashAlgorithm.SHA1, value) { }
 
+        [Obsolete]
+        public object Clone()
+        {
+            return new AssemblyHash(_algorithm, _value);
+        }
 
-		[Obsolete]
-		public AssemblyHash (AssemblyHashAlgorithm algorithm, byte[] value)
-		{
-			_algorithm = algorithm;
-			if (value != null)
-				_value = (byte[]) value.Clone ();
-			else
-				_value = null;
-		}
+        [Obsolete]
+        public byte[] GetValue()
+        {
+            return _value;
+        }
 
-		[Obsolete]
-		public AssemblyHash (byte[] value)
-			: this (AssemblyHashAlgorithm.SHA1, value)
-		{
-		}
-
-		[Obsolete]
-		public object Clone ()
-		{
-			return new AssemblyHash (_algorithm, _value);
-		}
-
-		[Obsolete]
-		public byte[] GetValue ()
-		{
-			return _value;
-		}
-
-		[Obsolete]
-		public void SetValue (byte[] value)
-		{
-			_value = value;
-		}
-	}
+        [Obsolete]
+        public void SetValue(byte[] value)
+        {
+            _value = value;
+        }
+    }
 }

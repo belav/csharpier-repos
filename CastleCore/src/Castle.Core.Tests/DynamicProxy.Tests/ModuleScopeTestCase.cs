@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -71,43 +71,77 @@ namespace Castle.DynamicProxy.Tests
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
         [Test]
-        [Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503."
+        )]
         public void ImplicitModulePaths()
         {
             var scope = new ModuleScope(true);
             Assert.AreEqual(ModuleScope.DEFAULT_FILE_NAME, scope.StrongNamedModuleName);
-            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), ModuleScope.DEFAULT_FILE_NAME),
-                            scope.ObtainDynamicModuleWithStrongName().FullyQualifiedName);
+            Assert.AreEqual(
+                Path.Combine(Directory.GetCurrentDirectory(), ModuleScope.DEFAULT_FILE_NAME),
+                scope.ObtainDynamicModuleWithStrongName().FullyQualifiedName
+            );
             Assert.IsNull(scope.StrongNamedModuleDirectory);
 
             Assert.AreEqual(ModuleScope.DEFAULT_FILE_NAME, scope.WeakNamedModuleName);
-            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), ModuleScope.DEFAULT_FILE_NAME),
-                            scope.ObtainDynamicModuleWithWeakName().FullyQualifiedName);
+            Assert.AreEqual(
+                Path.Combine(Directory.GetCurrentDirectory(), ModuleScope.DEFAULT_FILE_NAME),
+                scope.ObtainDynamicModuleWithWeakName().FullyQualifiedName
+            );
             Assert.IsNull(scope.WeakNamedModuleDirectory);
         }
 
         [Test]
-        [Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503."
+        )]
         public void ExplicitModulePaths()
         {
-            var scope = new ModuleScope(true, false, "Strong", "StrongModule.dll", "Weak", "WeakModule.dll");
+            var scope = new ModuleScope(
+                true,
+                false,
+                "Strong",
+                "StrongModule.dll",
+                "Weak",
+                "WeakModule.dll"
+            );
             Assert.AreEqual("StrongModule.dll", scope.StrongNamedModuleName);
-            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), "StrongModule.dll"),
-                            scope.ObtainDynamicModuleWithStrongName().FullyQualifiedName);
+            Assert.AreEqual(
+                Path.Combine(Directory.GetCurrentDirectory(), "StrongModule.dll"),
+                scope.ObtainDynamicModuleWithStrongName().FullyQualifiedName
+            );
             Assert.IsNull(scope.StrongNamedModuleDirectory);
 
             Assert.AreEqual("WeakModule.dll", scope.WeakNamedModuleName);
-            Assert.AreEqual(Path.Combine(Directory.GetCurrentDirectory(), "WeakModule.dll"),
-                            scope.ObtainDynamicModuleWithWeakName().FullyQualifiedName);
+            Assert.AreEqual(
+                Path.Combine(Directory.GetCurrentDirectory(), "WeakModule.dll"),
+                scope.ObtainDynamicModuleWithWeakName().FullyQualifiedName
+            );
             Assert.IsNull(scope.WeakNamedModuleDirectory);
 
-            scope = new ModuleScope(true, false, "Strong", @"c:\Foo\StrongModule.dll", "Weak", @"d:\Bar\WeakModule.dll");
+            scope = new ModuleScope(
+                true,
+                false,
+                "Strong",
+                @"c:\Foo\StrongModule.dll",
+                "Weak",
+                @"d:\Bar\WeakModule.dll"
+            );
             Assert.AreEqual("StrongModule.dll", scope.StrongNamedModuleName);
-            Assert.AreEqual(@"c:\Foo\StrongModule.dll", scope.ObtainDynamicModuleWithStrongName().FullyQualifiedName);
+            Assert.AreEqual(
+                @"c:\Foo\StrongModule.dll",
+                scope.ObtainDynamicModuleWithStrongName().FullyQualifiedName
+            );
             Assert.AreEqual(@"c:\Foo", scope.StrongNamedModuleDirectory);
 
             Assert.AreEqual("WeakModule.dll", scope.WeakNamedModuleName);
-            Assert.AreEqual(@"d:\Bar\WeakModule.dll", scope.ObtainDynamicModuleWithWeakName().FullyQualifiedName);
+            Assert.AreEqual(
+                @"d:\Bar\WeakModule.dll",
+                scope.ObtainDynamicModuleWithWeakName().FullyQualifiedName
+            );
             Assert.AreEqual(@"d:\Bar", scope.WeakNamedModuleDirectory);
         }
 
@@ -130,7 +164,10 @@ namespace Castle.DynamicProxy.Tests
         }
 
         [Test]
-        [Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503."
+        )]
         public void SaveSigned()
         {
             var scope = new ModuleScope(true);
@@ -152,7 +189,10 @@ namespace Castle.DynamicProxy.Tests
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
         [Test]
-        [Platform(Exclude = "Mono", Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "On Mono, `ModuleBuilder.FullyQualifiedName` does not return a fully qualified name including a path. See https://github.com/mono/mono/issues/8503."
+        )]
         public void SaveUnsigned()
         {
             var scope = new ModuleScope(true);
@@ -185,7 +225,14 @@ namespace Castle.DynamicProxy.Tests
             Assert.IsFalse(File.Exists(strongModulePath));
             Assert.IsFalse(File.Exists(weakModulePath));
 
-            var scope = new ModuleScope(true,false, "Strong", strongModulePath, "Weak", weakModulePath);
+            var scope = new ModuleScope(
+                true,
+                false,
+                "Strong",
+                strongModulePath,
+                "Weak",
+                weakModulePath
+            );
             scope.ObtainDynamicModuleWithStrongName();
             scope.ObtainDynamicModuleWithWeakName();
 
@@ -281,12 +328,14 @@ namespace Castle.DynamicProxy.Tests
 
             var savedPath = scope.SaveAssembly();
 
-            CrossAppDomainCaller.RunInOtherAppDomain(delegate(object[] args)
-                                                         {
-                                                             var assembly = Assembly.LoadFrom((string) args[0]);
-                                                             Assert.IsTrue(assembly.IsDefined(typeof (CacheMappingsAttribute), false));
-                                                         },
-                                                     savedPath);
+            CrossAppDomainCaller.RunInOtherAppDomain(
+                delegate(object[] args)
+                {
+                    var assembly = Assembly.LoadFrom((string)args[0]);
+                    Assert.IsTrue(assembly.IsDefined(typeof(CacheMappingsAttribute), false));
+                },
+                savedPath
+            );
 
             File.Delete(savedPath);
         }
@@ -296,25 +345,34 @@ namespace Castle.DynamicProxy.Tests
         {
             var scope = new ModuleScope(true);
             var builder = new DefaultProxyBuilder(scope);
-            var cp = builder.CreateClassProxyType(typeof (object), Type.EmptyTypes, ProxyGenerationOptions.Default);
+            var cp = builder.CreateClassProxyType(
+                typeof(object),
+                Type.EmptyTypes,
+                ProxyGenerationOptions.Default
+            );
 
             var savedPath = scope.SaveAssembly();
 
-            CrossAppDomainCaller.RunInOtherAppDomain(delegate(object[] args)
-                                                         {
-                                                             var assembly = Assembly.LoadFrom((string) args[0]);
-                                                             var attribute =
-                                                                 (CacheMappingsAttribute)
-                                                                 assembly.GetCustomAttributes(typeof (CacheMappingsAttribute), false)[0];
-                                                             var entries = attribute.GetDeserializedMappings();
-                                                             Assert.AreEqual(1, entries.Count);
+            CrossAppDomainCaller.RunInOtherAppDomain(
+                delegate(object[] args)
+                {
+                    var assembly = Assembly.LoadFrom((string)args[0]);
+                    var attribute = (CacheMappingsAttribute)
+                        assembly.GetCustomAttributes(typeof(CacheMappingsAttribute), false)[0];
+                    var entries = attribute.GetDeserializedMappings();
+                    Assert.AreEqual(1, entries.Count);
 
-                                                             var key = new CacheKey(typeof (object), new Type[0],
-                                                                                    ProxyGenerationOptions.Default);
-                                                             Assert.IsTrue(entries.ContainsKey(key));
-                                                             Assert.AreEqual(args[1], entries[key]);
-                                                         },
-                                                     savedPath, cp.FullName);
+                    var key = new CacheKey(
+                        typeof(object),
+                        new Type[0],
+                        ProxyGenerationOptions.Default
+                    );
+                    Assert.IsTrue(entries.ContainsKey(key));
+                    Assert.AreEqual(args[1], entries[key]);
+                },
+                savedPath,
+                cp.FullName
+            );
 
             File.Delete(savedPath);
         }
@@ -334,7 +392,14 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void GeneratedAssembliesWithCustomName()
         {
-            var scope = new ModuleScope(false,false, "Strong", "Module1.dll", "Weak", "Module2,dll");
+            var scope = new ModuleScope(
+                false,
+                false,
+                "Strong",
+                "Module1.dll",
+                "Weak",
+                "Module2,dll"
+            );
             var strong = scope.ObtainDynamicModuleWithStrongName();
             var weak = scope.ObtainDynamicModuleWithWeakName();
 
@@ -354,7 +419,14 @@ namespace Castle.DynamicProxy.Tests
             var weakModulePath = Path.Combine(moduleDirectory, "Weak.dll");
 
             Directory.CreateDirectory(moduleDirectory);
-            var scope = new ModuleScope(true, false, "Strong", strongModulePath, "Weak", weakModulePath);
+            var scope = new ModuleScope(
+                true,
+                false,
+                "Strong",
+                strongModulePath,
+                "Weak",
+                weakModulePath
+            );
 
             using (File.Create(Path.Combine(Directory.GetCurrentDirectory(), "Strong.dll")))
             {
@@ -389,8 +461,8 @@ namespace Castle.DynamicProxy.Tests
         {
             var newScope = new ModuleScope(false);
 
-            Assert.Throws<ArgumentException>(() =>
-                newScope.LoadAssemblyIntoCache(Assembly.GetExecutingAssembly())
+            Assert.Throws<ArgumentException>(
+                () => newScope.LoadAssemblyIntoCache(Assembly.GetExecutingAssembly())
             );
         }
 
@@ -398,7 +470,13 @@ namespace Castle.DynamicProxy.Tests
         public void LoadAssemblyIntoCache_CreateClassProxy()
         {
             CheckLoadAssemblyIntoCache(
-                builder => builder.CreateClassProxyType(typeof (object), null, ProxyGenerationOptions.Default));
+                builder =>
+                    builder.CreateClassProxyType(
+                        typeof(object),
+                        null,
+                        ProxyGenerationOptions.Default
+                    )
+            );
         }
 
         [Test]
@@ -406,10 +484,14 @@ namespace Castle.DynamicProxy.Tests
         {
             CheckLoadAssemblyIntoCache(
                 delegate(IProxyBuilder builder)
-                    {
-                        return builder.CreateInterfaceProxyTypeWithoutTarget(typeof (IServiceProvider), new Type[0],
-                                                                             ProxyGenerationOptions.Default);
-                    });
+                {
+                    return builder.CreateInterfaceProxyTypeWithoutTarget(
+                        typeof(IServiceProvider),
+                        new Type[0],
+                        ProxyGenerationOptions.Default
+                    );
+                }
+            );
         }
 
         [Test]
@@ -417,10 +499,15 @@ namespace Castle.DynamicProxy.Tests
         {
             CheckLoadAssemblyIntoCache(
                 delegate(IProxyBuilder builder)
-                    {
-                        return builder.CreateInterfaceProxyTypeWithTarget(typeof (IMyInterface2), new Type[0], typeof (MyInterfaceImpl),
-                                                                          ProxyGenerationOptions.Default);
-                    });
+                {
+                    return builder.CreateInterfaceProxyTypeWithTarget(
+                        typeof(IMyInterface2),
+                        new Type[0],
+                        typeof(MyInterfaceImpl),
+                        ProxyGenerationOptions.Default
+                    );
+                }
+            );
         }
 
         [Test]
@@ -428,10 +515,14 @@ namespace Castle.DynamicProxy.Tests
         {
             CheckLoadAssemblyIntoCache(
                 delegate(IProxyBuilder builder)
-                    {
-                        return builder.CreateInterfaceProxyTypeWithTargetInterface(typeof (IMyInterface2), null,
-                                                                                   ProxyGenerationOptions.Default);
-                    });
+                {
+                    return builder.CreateInterfaceProxyTypeWithTargetInterface(
+                        typeof(IMyInterface2),
+                        null,
+                        ProxyGenerationOptions.Default
+                    );
+                }
+            );
         }
 
         [Test]
@@ -444,36 +535,49 @@ namespace Castle.DynamicProxy.Tests
             options1.AddMixinInstance(new DateTime());
             var options2 = ProxyGenerationOptions.Default;
 
-            var cp1 = builder.CreateClassProxyType(typeof (object), Type.EmptyTypes, options1);
-            var cp2 = builder.CreateClassProxyType(typeof (object), Type.EmptyTypes, options2);
+            var cp1 = builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, options1);
+            var cp2 = builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, options2);
             Assert.AreNotSame(cp1, cp2);
-            Assert.AreSame(cp1, builder.CreateClassProxyType(typeof (object), Type.EmptyTypes, options1));
-            Assert.AreSame(cp2, builder.CreateClassProxyType(typeof (object), Type.EmptyTypes, options2));
+            Assert.AreSame(
+                cp1,
+                builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, options1)
+            );
+            Assert.AreSame(
+                cp2,
+                builder.CreateClassProxyType(typeof(object), Type.EmptyTypes, options2)
+            );
 
             var path = savedScope.SaveAssembly();
 
-            CrossAppDomainCaller.RunInOtherAppDomain(delegate(object[] args)
-                                                         {
-                                                             var newScope = new ModuleScope(false);
-                                                             var newBuilder = new DefaultProxyBuilder(newScope);
+            CrossAppDomainCaller.RunInOtherAppDomain(
+                delegate(object[] args)
+                {
+                    var newScope = new ModuleScope(false);
+                    var newBuilder = new DefaultProxyBuilder(newScope);
 
-                                                             var assembly = Assembly.LoadFrom((string) args[0]);
-                                                             newScope.LoadAssemblyIntoCache(assembly);
+                    var assembly = Assembly.LoadFrom((string)args[0]);
+                    newScope.LoadAssemblyIntoCache(assembly);
 
-                                                             var newOptions1 = new ProxyGenerationOptions();
-                                                             newOptions1.AddMixinInstance(new DateTime());
-                                                             var newOptions2 = ProxyGenerationOptions.Default;
+                    var newOptions1 = new ProxyGenerationOptions();
+                    newOptions1.AddMixinInstance(new DateTime());
+                    var newOptions2 = ProxyGenerationOptions.Default;
 
-                                                             var loadedCP1 = newBuilder.CreateClassProxyType(typeof (object),
-                                                                                                             Type.EmptyTypes,
-                                                                                                             newOptions1);
-                                                             var loadedCP2 = newBuilder.CreateClassProxyType(typeof (object),
-                                                                                                             Type.EmptyTypes,
-                                                                                                             newOptions2);
-                                                             Assert.AreNotSame(loadedCP1, loadedCP2);
-                                                             Assert.AreEqual(assembly, loadedCP1.Assembly);
-                                                             Assert.AreEqual(assembly, loadedCP2.Assembly);
-                                                         }, path);
+                    var loadedCP1 = newBuilder.CreateClassProxyType(
+                        typeof(object),
+                        Type.EmptyTypes,
+                        newOptions1
+                    );
+                    var loadedCP2 = newBuilder.CreateClassProxyType(
+                        typeof(object),
+                        Type.EmptyTypes,
+                        newOptions2
+                    );
+                    Assert.AreNotSame(loadedCP1, loadedCP2);
+                    Assert.AreEqual(assembly, loadedCP1.Assembly);
+                    Assert.AreEqual(assembly, loadedCP2.Assembly);
+                },
+                path
+            );
 
             File.Delete(path);
         }
@@ -490,18 +594,23 @@ namespace Castle.DynamicProxy.Tests
 
             var path = savedScope.SaveAssembly();
 
-            CrossAppDomainCaller.RunInOtherAppDomain(delegate(object[] args)
-                                                         {
-                                                             var newScope = new ModuleScope(false);
-                                                             var newBuilder = new DefaultProxyBuilder(newScope);
+            CrossAppDomainCaller.RunInOtherAppDomain(
+                delegate(object[] args)
+                {
+                    var newScope = new ModuleScope(false);
+                    var newBuilder = new DefaultProxyBuilder(newScope);
 
-                                                             var assembly = Assembly.LoadFrom((string) args[0]);
-                                                             newScope.LoadAssemblyIntoCache(assembly);
+                    var assembly = Assembly.LoadFrom((string)args[0]);
+                    newScope.LoadAssemblyIntoCache(assembly);
 
-                                                             var loadedCP = assembly.GetType((string) args[1]);
-                                                             Assert.AreSame(loadedCP, ((ProxyCreator) args[2])(newBuilder));
-                                                             Assert.AreEqual(assembly, ((ProxyCreator) args[2])(newBuilder).Assembly);
-                                                         }, path, cp.FullName, creator);
+                    var loadedCP = assembly.GetType((string)args[1]);
+                    Assert.AreSame(loadedCP, ((ProxyCreator)args[2])(newBuilder));
+                    Assert.AreEqual(assembly, ((ProxyCreator)args[2])(newBuilder).Assembly);
+                },
+                path,
+                cp.FullName,
+                creator
+            );
 
             File.Delete(path);
         }

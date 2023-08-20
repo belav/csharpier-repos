@@ -7,12 +7,12 @@ public static class Repro
 {
     private struct foo
     {
-        public int x, y;
+        public int x,
+            y;
     }
 
     public static int Main()
     {
-
         foo f = new foo();
         f.x = f.y = 1;
         Console.WriteLine(f.x + f.y);

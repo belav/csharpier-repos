@@ -17,6 +17,7 @@ public unsafe class Runtime_66585
     }
 
     private static SLarge s_s;
+
     public static void Caller(int r0, int r1, int r2, int r3)
     {
         SLarge s = s_s;
@@ -25,19 +26,14 @@ public unsafe class Runtime_66585
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void Callee(int r0, int r1, int r2, int r3)
-    {
-    }
+    public static void Callee(int r0, int r1, int r2, int r3) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume(SLarge s)
-    {
-    }
+    private static void Consume(SLarge s) { }
 
     // We cannot mark Caller as noinline because it inhibits tailcalling as well
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static delegate*<int, int, int, int, void> GetCaller()
-        => &Caller;
+    private static delegate* <int, int, int, int, void> GetCaller() => &Caller;
 
     [StructLayout(LayoutKind.Sequential, Size = 0x1008)]
     private struct SLarge

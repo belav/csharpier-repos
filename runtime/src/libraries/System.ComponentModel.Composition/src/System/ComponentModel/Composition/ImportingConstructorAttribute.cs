@@ -19,8 +19,6 @@ namespace System.ComponentModel.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportingConstructorAttribute"/> class.
         /// </summary>
-        public ImportingConstructorAttribute()
-        {
-        }
+        public ImportingConstructorAttribute() { }
     }
 }

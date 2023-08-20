@@ -31,13 +31,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         {
             private readonly JoinableTaskFactory _joinableTaskFactory;
 
-            public JoinableTaskFactoryTaskScheduler(JoinableTaskFactory joinableTaskFactory)
-                => _joinableTaskFactory = joinableTaskFactory;
+            public JoinableTaskFactoryTaskScheduler(JoinableTaskFactory joinableTaskFactory) =>
+                _joinableTaskFactory = joinableTaskFactory;
 
             public override int MaximumConcurrencyLevel => 1;
 
-            protected override IEnumerable<Task> GetScheduledTasks()
-                => SpecializedCollections.EmptyEnumerable<Task>();
+            protected override IEnumerable<Task> GetScheduledTasks() =>
+                SpecializedCollections.EmptyEnumerable<Task>();
 
             protected override void QueueTask(Task task)
             {

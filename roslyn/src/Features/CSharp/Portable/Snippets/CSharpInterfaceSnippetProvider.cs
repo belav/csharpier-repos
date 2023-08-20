@@ -23,26 +23,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInterfaceSnippetProvider()
-        {
-        }
+        public CSharpInterfaceSnippetProvider() { }
 
         public override string Identifier => "interface";
 
         public override string Description => FeaturesResources.interface_;
 
-        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(Document document, int position, bool useAccessibility, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> GenerateTypeDeclarationAsync(
+            Document document,
+            int position,
+            bool useAccessibility,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var name = NameGenerator.GenerateUniqueName("MyInterface", name => semanticModel.LookupSymbols(position, name: name).IsEmpty);
+            var name = NameGenerator.GenerateUniqueName(
+                "MyInterface",
+                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            );
             return useAccessibility is true
                 ? generator.InterfaceDeclaration(name, accessibility: Accessibility.Public)
                 : generator.InterfaceDeclaration(name);
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsInterfaceDeclaration;
         }

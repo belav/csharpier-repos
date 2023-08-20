@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.TodoComments
 {
-    internal sealed class InProcTodoCommentsIncrementalAnalyzer : AbstractTodoCommentsIncrementalAnalyzer
+    internal sealed class InProcTodoCommentsIncrementalAnalyzer
+        : AbstractTodoCommentsIncrementalAnalyzer
     {
         private readonly ITodoCommentsListener _listener;
 
-        public InProcTodoCommentsIncrementalAnalyzer(ITodoCommentsListener listener)
-            => _listener = listener;
+        public InProcTodoCommentsIncrementalAnalyzer(ITodoCommentsListener listener) =>
+            _listener = listener;
 
-        protected override ValueTask ReportTodoCommentDataAsync(DocumentId documentId, ImmutableArray<TodoCommentData> data, CancellationToken cancellationToken)
-            => _listener.ReportTodoCommentDataAsync(documentId, data, cancellationToken);
+        protected override ValueTask ReportTodoCommentDataAsync(
+            DocumentId documentId,
+            ImmutableArray<TodoCommentData> data,
+            CancellationToken cancellationToken
+        ) => _listener.ReportTodoCommentDataAsync(documentId, data, cancellationToken);
     }
 }

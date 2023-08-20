@@ -10,12 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     partial class BoundDagEvaluation
     {
-        public sealed override bool Equals([NotNullWhen(true)] object? obj) => obj is BoundDagEvaluation other && this.Equals(other);
+        public sealed override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is BoundDagEvaluation other && this.Equals(other);
+
         public bool Equals(BoundDagEvaluation other)
         {
-            return this == other ||
-                this.IsEquivalentTo(other) &&
-                this.Input.Equals(other.Input);
+            return this == other || this.IsEquivalentTo(other) && this.Input.Equals(other.Input);
         }
 
         /// <summary>
@@ -23,9 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public virtual bool IsEquivalentTo(BoundDagEvaluation other)
         {
-            return this == other ||
-               this.Kind == other.Kind &&
-               Symbol.Equals(this.Symbol, other.Symbol, TypeCompareKind.AllIgnoreOptions);
+            return this == other
+                || this.Kind == other.Kind
+                    && Symbol.Equals(this.Symbol, other.Symbol, TypeCompareKind.AllIgnoreOptions);
         }
 
         private Symbol? Symbol
@@ -57,7 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return arrayAccess.Expression.Type;
 
                         // array[Index]
-                        case BoundImplicitIndexerAccess { IndexerOrSliceAccess: BoundArrayAccess arrayAccess }:
+                        case BoundImplicitIndexerAccess
+                        {
+                            IndexerOrSliceAccess: BoundArrayAccess arrayAccess
+                        }:
                             return arrayAccess.Expression.Type;
 
                         default:
@@ -77,10 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public int Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
             internal set
             {
                 Debug.Assert(value > 0, "Id must be positive but was set to " + value);
@@ -109,9 +109,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     partial class BoundDagIndexEvaluation
     {
         public override int GetHashCode() => base.GetHashCode() ^ this.Index;
+
         public override bool IsEquivalentTo(BoundDagEvaluation obj)
         {
-            return base.IsEquivalentTo(obj) &&
+            return base.IsEquivalentTo(obj)
+                &&
                 // base.IsEquivalentTo checks the kind field, so the following cast is safe
                 this.Index == ((BoundDagIndexEvaluation)obj).Index;
         }
@@ -120,41 +122,55 @@ namespace Microsoft.CodeAnalysis.CSharp
     partial class BoundDagIndexerEvaluation
     {
         public override int GetHashCode() => base.GetHashCode() ^ this.Index;
+
         public override bool IsEquivalentTo(BoundDagEvaluation obj)
         {
-            return base.IsEquivalentTo(obj) &&
-                this.Index == ((BoundDagIndexerEvaluation)obj).Index;
+            return base.IsEquivalentTo(obj) && this.Index == ((BoundDagIndexerEvaluation)obj).Index;
         }
 
         private partial void Validate()
         {
-            Debug.Assert(IndexerAccess is BoundIndexerAccess or BoundImplicitIndexerAccess or BoundArrayAccess);
+            Debug.Assert(
+                IndexerAccess
+                    is BoundIndexerAccess
+                        or BoundImplicitIndexerAccess
+                        or BoundArrayAccess
+            );
         }
     }
 
     partial class BoundDagSliceEvaluation
     {
         public override int GetHashCode() => base.GetHashCode() ^ this.StartIndex ^ this.EndIndex;
+
         public override bool IsEquivalentTo(BoundDagEvaluation obj)
         {
-            return base.IsEquivalentTo(obj) &&
-                (BoundDagSliceEvaluation)obj is var e &&
-                this.StartIndex == e.StartIndex && this.EndIndex == e.EndIndex;
+            return base.IsEquivalentTo(obj)
+                && (BoundDagSliceEvaluation)obj is var e
+                && this.StartIndex == e.StartIndex
+                && this.EndIndex == e.EndIndex;
         }
 
         private partial void Validate()
         {
-            Debug.Assert(IndexerAccess is BoundIndexerAccess or BoundImplicitIndexerAccess or BoundArrayAccess);
+            Debug.Assert(
+                IndexerAccess
+                    is BoundIndexerAccess
+                        or BoundImplicitIndexerAccess
+                        or BoundArrayAccess
+            );
         }
     }
 
     partial class BoundDagAssignmentEvaluation
     {
-        public override int GetHashCode() => Hash.Combine(base.GetHashCode(), this.Target.GetHashCode());
+        public override int GetHashCode() =>
+            Hash.Combine(base.GetHashCode(), this.Target.GetHashCode());
+
         public override bool IsEquivalentTo(BoundDagEvaluation obj)
         {
-            return base.IsEquivalentTo(obj) &&
-                this.Target.Equals(((BoundDagAssignmentEvaluation)obj).Target);
+            return base.IsEquivalentTo(obj)
+                && this.Target.Equals(((BoundDagAssignmentEvaluation)obj).Target);
         }
     }
 }

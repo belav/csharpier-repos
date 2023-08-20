@@ -37,8 +37,7 @@ public sealed class ClrPropertyGetter<TEntity, TValue> : IClrPropertyGetter
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public object? GetClrValue(object entity)
-        => _getter((TEntity)entity);
+    public object? GetClrValue(object entity) => _getter((TEntity)entity);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,6 +46,5 @@ public sealed class ClrPropertyGetter<TEntity, TValue> : IClrPropertyGetter
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool HasDefaultValue(object entity)
-        => _hasDefaultValue((TEntity)entity);
+    public bool HasDefaultValue(object entity) => _hasDefaultValue((TEntity)entity);
 }

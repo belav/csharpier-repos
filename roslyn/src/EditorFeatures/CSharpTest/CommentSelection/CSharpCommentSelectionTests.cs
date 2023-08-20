@@ -27,14 +27,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void UncommentAndFormat1()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     [|          //            void  Method  (   )
                 // {
                 //
                 //                      }|]
 }";
-            var expected = @"class A
+            var expected =
+                @"class A
 {
     void Method()
     {
@@ -47,14 +49,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void UncommentAndFormat2()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     [|          /*            void  Method  (   )
                  {
                 
                                       } */|]
 }";
-            var expected = @"class A
+            var expected =
+                @"class A
 {
     void Method()
     {
@@ -67,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void UncommentSingleLineCommentInPseudoBlockComment()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     /// <include file='doc\Control.uex' path='docs/doc[@for=""Control.RtlTranslateAlignment1""]/*' />
@@ -78,7 +83,8 @@ class C
     /* Hello world */
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     /// <include file='doc\Control.uex' path='docs/doc[@for=""Control.RtlTranslateAlignment1""]/*' />
@@ -95,14 +101,16 @@ class C
         [WpfFact]
         public void UncommentAndFormat3()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     [|          //            void  Method  (   )       |]
     [|            // {                                  |]
     [|            //                                    |]
     [|            //                      }             |]
 }";
-            var expected = @"class A
+            var expected =
+                @"class A
 {
     void Method()
     {
@@ -116,16 +124,25 @@ class C
         {
             using var workspace = TestWorkspace.CreateCSharp(markup);
             var doc = workspace.Documents.First();
-            SetupSelection(doc.GetTextView(), doc.SelectedSpans.Select(s => Span.FromBounds(s.Start, s.End)));
+            SetupSelection(
+                doc.GetTextView(),
+                doc.SelectedSpans.Select(s => Span.FromBounds(s.Start, s.End))
+            );
 
             var commandHandler = new CommentUncommentSelectionCommandHandler(
                 workspace.GetService<ITextUndoHistoryRegistry>(),
                 workspace.GetService<IEditorOperationsFactoryService>(),
-                workspace.GetService<EditorOptionsService>());
+                workspace.GetService<EditorOptionsService>()
+            );
 
             var textView = doc.GetTextView();
             var textBuffer = doc.GetTextBuffer();
-            commandHandler.ExecuteCommand(textView, textBuffer, Operation.Uncomment, TestCommandExecutionContext.Create());
+            commandHandler.ExecuteCommand(
+                textView,
+                textBuffer,
+                Operation.Uncomment,
+                TestCommandExecutionContext.Create()
+            );
 
             Assert.Equal(expected, doc.GetTextBuffer().CurrentSnapshot.GetText());
         }
@@ -135,14 +152,19 @@ class C
             var snapshot = textView.TextSnapshot;
             if (spans.Count() == 1)
             {
-                textView.Selection.Select(new SnapshotSpan(snapshot, spans.Single()), isReversed: false);
+                textView.Selection.Select(
+                    new SnapshotSpan(snapshot, spans.Single()),
+                    isReversed: false
+                );
                 textView.Caret.MoveTo(new SnapshotPoint(snapshot, spans.Single().End));
             }
             else
             {
                 textView.Selection.Mode = TextSelectionMode.Box;
-                textView.Selection.Select(new VirtualSnapshotPoint(snapshot, spans.First().Start),
-                                          new VirtualSnapshotPoint(snapshot, spans.Last().End));
+                textView.Selection.Select(
+                    new VirtualSnapshotPoint(snapshot, spans.First().Start),
+                    new VirtualSnapshotPoint(snapshot, spans.Last().End)
+                );
                 textView.Caret.MoveTo(new SnapshotPoint(snapshot, spans.Last().End));
             }
         }

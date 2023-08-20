@@ -8,8 +8,12 @@ namespace System.Net.Connections
 {
     internal sealed class DuplexStreamPipe : IDuplexPipe
     {
-        private static readonly StreamPipeReaderOptions s_readerOpts = new StreamPipeReaderOptions(leaveOpen: true);
-        private static readonly StreamPipeWriterOptions s_writerOpts = new StreamPipeWriterOptions(leaveOpen: true);
+        private static readonly StreamPipeReaderOptions s_readerOpts = new StreamPipeReaderOptions(
+            leaveOpen: true
+        );
+        private static readonly StreamPipeWriterOptions s_writerOpts = new StreamPipeWriterOptions(
+            leaveOpen: true
+        );
 
         public DuplexStreamPipe(Stream stream)
         {

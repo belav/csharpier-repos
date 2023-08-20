@@ -86,7 +86,6 @@ namespace System.Activities.Debugger
             return this.UninstrumentedSubRoots.ContainsKey(subRoot);
         }
 
-
         // Returns Activities that have the same source as the given subRoot.
         // This will return other instantiation of the same custom activity.
         // Needed to avoid re-instrumentation of the same file.

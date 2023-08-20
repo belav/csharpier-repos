@@ -54,8 +54,12 @@ public class B279085
                 seconds[i].Add(j);
         }
 
-        MethodInfo testMethod = typeof(B279085).GetTypeInfo().GetDeclaredMethod("TestB279085Repro_Inner").MakeGenericMethod(TypeOf.Int32, typeof(IEnumerable<int>));
-        Pair<int, IEnumerable<int>>[] pairs = (Pair<int, IEnumerable<int>>[])testMethod.Invoke(null, new object[] { firsts, seconds });
+        MethodInfo testMethod = typeof(B279085)
+            .GetTypeInfo()
+            .GetDeclaredMethod("TestB279085Repro_Inner")
+            .MakeGenericMethod(TypeOf.Int32, typeof(IEnumerable<int>));
+        Pair<int, IEnumerable<int>>[] pairs = (Pair<int, IEnumerable<int>>[])
+            testMethod.Invoke(null, new object[] { firsts, seconds });
 
         firsts = null;
         seconds = null;
@@ -64,7 +68,7 @@ public class B279085
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
-        
+
         // The bug was a malformed GCDesc for an array of generic valuetypes.
         // The code that follows will crash when trying to access the Second property if the GCDesc was wrong (gc collects it).
 
@@ -96,4 +100,3 @@ public class B279085
         return arrayOfPairs;
     }
 }
-

@@ -18,8 +18,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     ///     Creates a new builder for the given <see cref="ITrigger" />.
     /// </summary>
     /// <param name="trigger">The <see cref="IMutableTrigger" /> to configure.</param>
-    public TriggerBuilder(IMutableTrigger trigger)
-        => Builder = ((Trigger)trigger).Builder;
+    public TriggerBuilder(IMutableTrigger trigger) => Builder = ((Trigger)trigger).Builder;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,7 +27,11 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalTriggerBuilder Builder { [DebuggerStepThrough] get; }
+    protected virtual InternalTriggerBuilder Builder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <inheritdoc />
     IConventionTriggerBuilder IInfrastructure<IConventionTriggerBuilder>.Instance
@@ -40,8 +43,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <summary>
     ///     The trigger being configured.
     /// </summary>
-    public virtual IMutableTrigger Metadata
-        => Builder.Metadata;
+    public virtual IMutableTrigger Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Sets the database name of the trigger.
@@ -81,8 +83,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -91,8 +92,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -100,8 +100,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

@@ -21,7 +21,13 @@ namespace ILCompiler.DependencyAnalysis.ARM64
 
         public void EmitMOV(Register regDst, Register regSrc)
         {
-            Builder.EmitUInt((uint)(0b1_0_1_01010_000_00000_000000_11111_00000u | ((uint)regSrc << 16) | (uint)regDst));
+            Builder.EmitUInt(
+                (uint)(
+                    0b1_0_1_01010_000_00000_000000_11111_00000u
+                    | ((uint)regSrc << 16)
+                    | (uint)regDst
+                )
+            );
         }
 
         public void EmitMOV(Register regDst, ushort imm16)
@@ -39,7 +45,11 @@ namespace ILCompiler.DependencyAnalysis.ARM64
 
             // Add regDst, (12bit LDR page offset reloc)
             Builder.EmitReloc(symbol, RelocType.IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A);
-            Builder.EmitUInt((uint)(0b1_0_0_100010_0_000000000000_00000_00000 | ((byte)regDst << 5) | (byte)regDst));
+            Builder.EmitUInt(
+                (uint)(
+                    0b1_0_0_100010_0_000000000000_00000_00000 | ((byte)regDst << 5) | (byte)regDst
+                )
+            );
         }
 
         // ldr regDst, [PC + imm19]
@@ -69,13 +79,27 @@ namespace ILCompiler.DependencyAnalysis.ARM64
 
                 offset /= 8;
 
-                Builder.EmitUInt((uint)(0b11_1110_0_1_0_1_000000000000_00000_00000u | ((uint)offset << 10) | ((uint)regSrc << 5) | (uint)regDst));
+                Builder.EmitUInt(
+                    (uint)(
+                        0b11_1110_0_1_0_1_000000000000_00000_00000u
+                        | ((uint)offset << 10)
+                        | ((uint)regSrc << 5)
+                        | (uint)regDst
+                    )
+                );
             }
             else if (offset >= -255 && offset < 0)
             {
                 uint o = (uint)offset & 0x1FF;
 
-                Builder.EmitUInt((uint)(0b11_1110_0_0_010_000000000_1_1_00000_00000u | (o << 12) | ((uint)regSrc << 5) | (uint)regDst));
+                Builder.EmitUInt(
+                    (uint)(
+                        0b11_1110_0_0_010_000000000_1_1_00000_00000u
+                        | (o << 12)
+                        | ((uint)regSrc << 5)
+                        | (uint)regDst
+                    )
+                );
             }
             else
             {
@@ -87,7 +111,10 @@ namespace ILCompiler.DependencyAnalysis.ARM64
         {
             if (immediate >= 0)
             {
-                Builder.EmitUInt((uint)(0b1_1_1_100010_0_000000000000_00000_11111u | immediate << 10) | ((uint)reg << 5));
+                Builder.EmitUInt(
+                    (uint)(0b1_1_1_100010_0_000000000000_00000_11111u | immediate << 10)
+                        | ((uint)reg << 5)
+                );
             }
             else
             {
@@ -98,7 +125,7 @@ namespace ILCompiler.DependencyAnalysis.ARM64
         // add reg, immediate
         public void EmitADD(Register reg, byte immediate)
         {
-            Builder.EmitInt((int)(0x91 << 24) | (immediate << 10) | ((byte)reg << 5) | (byte) reg);
+            Builder.EmitInt((int)(0x91 << 24) | (immediate << 10) | ((byte)reg << 5) | (byte)reg);
         }
 
         public void EmitSUB(Register reg, int immediate)
@@ -107,7 +134,11 @@ namespace ILCompiler.DependencyAnalysis.ARM64
             {
                 Debug.Assert(immediate % 4 == 0);
 
-                Builder.EmitUInt((uint)(0b1_1_0_100010_0_000000000000_00000_00000u | immediate << 10) | ((uint)reg << 5) | (uint)reg);
+                Builder.EmitUInt(
+                    (uint)(0b1_1_0_100010_0_000000000000_00000_00000u | immediate << 10)
+                        | ((uint)reg << 5)
+                        | (uint)reg
+                );
             }
             else
             {
@@ -121,14 +152,17 @@ namespace ILCompiler.DependencyAnalysis.ARM64
             {
                 Debug.Assert(immediate % 4 == 0);
 
-                Builder.EmitUInt((uint)(0b1_1_0_100010_0_000000000000_00000_00000u | immediate << 10) | ((uint)regSrc << 5) | (uint)regDst);
+                Builder.EmitUInt(
+                    (uint)(0b1_1_0_100010_0_000000000000_00000_00000u | immediate << 10)
+                        | ((uint)regSrc << 5)
+                        | (uint)regDst
+                );
             }
             else
             {
                 throw new NotImplementedException();
             }
         }
-
 
         public void EmitJMP(ISymbolNode symbol)
         {
@@ -154,7 +188,9 @@ namespace ILCompiler.DependencyAnalysis.ARM64
 
         public void EmitJMP(Register reg)
         {
-            Builder.EmitUInt((uint)(0b11010110_0_0_0_11111_00000_0_00000_00000u | ((uint)reg << 5)));
+            Builder.EmitUInt(
+                (uint)(0b11010110_0_0_0_11111_00000_0_00000_00000u | ((uint)reg << 5))
+            );
         }
 
         public void EmitINT3()

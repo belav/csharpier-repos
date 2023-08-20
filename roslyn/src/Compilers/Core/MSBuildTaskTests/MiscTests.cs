@@ -28,9 +28,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             foreach (var name in assembly.GetReferencedAssemblies())
             {
                 var isBadRef =
-                    name.Name == typeof(Compilation).Assembly.GetName().Name ||
-                    name.Name == typeof(CSharpCompilation).Assembly.GetName().Name ||
-                    name.Name == typeof(ImmutableArray<string>).Assembly.GetName().Name;
+                    name.Name == typeof(Compilation).Assembly.GetName().Name
+                    || name.Name == typeof(CSharpCompilation).Assembly.GetName().Name
+                    || name.Name == typeof(ImmutableArray<string>).Assembly.GetName().Name;
                 Assert.False(isBadRef);
             }
         }

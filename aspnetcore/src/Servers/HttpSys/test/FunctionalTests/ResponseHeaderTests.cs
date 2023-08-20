@@ -21,10 +21,15 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_ServerSendsDefaultHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             HttpResponseMessage response = await SendRequestAsync(address);
             response.EnsureSuccessStatusCode();
@@ -41,15 +46,19 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_ServerSendsSingleValueKnownHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
+                    var responseHeaders = responseInfo.Headers;
+                    responseHeaders["WWW-Authenticate"] = new string[] { "custom1" };
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
-            var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
-            var responseHeaders = responseInfo.Headers;
-            responseHeaders["WWW-Authenticate"] = new string[] { "custom1" };
-            return Task.FromResult(0);
-        }))
-        {
-
 #pragma warning disable SYSLIB0014 // HttpClient would merge the headers no matter what
             WebRequest request = WebRequest.Create(address);
 #pragma warning restore SYSLIB0014
@@ -67,13 +76,22 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_ServerSendsMultiValueKnownHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
-            var responseHeaders = responseInfo.Headers;
-            responseHeaders["WWW-Authenticate"] = new string[] { "custom1, and custom2", "custom3" };
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
+                    var responseHeaders = responseInfo.Headers;
+                    responseHeaders["WWW-Authenticate"] = new string[]
+                    {
+                        "custom1, and custom2",
+                        "custom3"
+                    };
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
 #pragma warning disable SYSLIB0014 // HttpClient would merge the headers no matter what
             WebRequest request = WebRequest.Create(address);
@@ -92,13 +110,22 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_ServerSendsCustomHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
-            var responseHeaders = responseInfo.Headers;
-            responseHeaders["Custom-Header1"] = new string[] { "custom1, and custom2", "custom3" };
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
+                    var responseHeaders = responseInfo.Headers;
+                    responseHeaders["Custom-Header1"] = new string[]
+                    {
+                        "custom1, and custom2",
+                        "custom3"
+                    };
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
 #pragma warning disable SYSLIB0014 // HttpClient would merge the headers no matter what
             WebRequest request = WebRequest.Create(address);
@@ -117,20 +144,28 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_ServerSendsNonAsciiHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
+                    var responseHeaders = responseInfo.Headers;
+                    responseHeaders["Custom-Header1"] = new string[] { "Daï¿½ta" };
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
-            var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
-            var responseHeaders = responseInfo.Headers;
-            responseHeaders["Custom-Header1"] = new string[] { "Dašta" };
-            return Task.FromResult(0);
-        }))
-        {
-            var socketsHttpHandler = new SocketsHttpHandler() { ResponseHeaderEncodingSelector = (_, _) => Encoding.UTF8 };
+            var socketsHttpHandler = new SocketsHttpHandler()
+            {
+                ResponseHeaderEncodingSelector = (_, _) => Encoding.UTF8
+            };
             var httpClient = new HttpClient(socketsHttpHandler);
             var response = await httpClient.GetAsync(address);
             response.EnsureSuccessStatusCode();
             Assert.True(response.Headers.TryGetValues("Custom-Header1", out var header));
-            Assert.Equal("Dašta", header.Single());
+            Assert.Equal("Daï¿½ta", header.Single());
         }
     }
 
@@ -138,13 +173,18 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_ServerSendsConnectionClose_Closed()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
-            var responseHeaders = responseInfo.Headers;
-            responseHeaders["Connection"] = new string[] { "Close" };
-            return httpContext.Response.Body.FlushAsync(); // Http.Sys adds the Content-Length: header for us if we don't flush
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var responseInfo = httpContext.Features.Get<IHttpResponseFeature>();
+                    var responseHeaders = responseInfo.Headers;
+                    responseHeaders["Connection"] = new string[] { "Close" };
+                    return httpContext.Response.Body.FlushAsync(); // Http.Sys adds the Content-Length: header for us if we don't flush
+                }
+            )
+        )
         {
             HttpResponseMessage response = await SendRequestAsync(address);
             response.EnsureSuccessStatusCode();
@@ -162,10 +202,15 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_HTTP10Request_Gets11Close()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             using (HttpClient client = new HttpClient())
             {
@@ -185,14 +230,21 @@ public class ResponseHeaderTests
     public async Task ResponseHeaders_HTTP10RequestWithChunkedHeader_ManualChunking()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            var response = httpContext.Response;
-            var responseHeaders = response.Headers;
-            responseHeaders["Transfer-Encoding"] = new string[] { "chunked" };
-            var responseBytes = Encoding.ASCII.GetBytes("10\r\nManually Chunked\r\n0\r\n\r\n");
-            return response.Body.WriteAsync(responseBytes, 0, responseBytes.Length);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var response = httpContext.Response;
+                    var responseHeaders = response.Headers;
+                    responseHeaders["Transfer-Encoding"] = new string[] { "chunked" };
+                    var responseBytes = Encoding.ASCII.GetBytes(
+                        "10\r\nManually Chunked\r\n0\r\n\r\n"
+                    );
+                    return response.Body.WriteAsync(responseBytes, 0, responseBytes.Length);
+                }
+            )
+        )
         {
             using (HttpClient client = new HttpClient())
             {
@@ -214,21 +266,32 @@ public class ResponseHeaderTests
     public async Task Headers_FlushSendsHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                var response = httpContext.Response;
-                var responseHeaders = response.Headers;
-                responseHeaders.Add("Custom1", new string[] { "value1a", "value1b" });
-                responseHeaders.Add("Custom2", new string[] { "value2a, value2b" });
-                var body = response.Body;
-                Assert.False(response.HasStarted);
-                body.Flush();
-                Assert.True(response.HasStarted);
-                Assert.Throws<InvalidOperationException>(() => response.StatusCode = 404);
-                Assert.Throws<InvalidOperationException>(() => responseHeaders.Add("Custom3", new string[] { "value3a, value3b", "value3c" }));
-                return Task.FromResult(0);
-            }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                    var response = httpContext.Response;
+                    var responseHeaders = response.Headers;
+                    responseHeaders.Add("Custom1", new string[] { "value1a", "value1b" });
+                    responseHeaders.Add("Custom2", new string[] { "value2a, value2b" });
+                    var body = response.Body;
+                    Assert.False(response.HasStarted);
+                    body.Flush();
+                    Assert.True(response.HasStarted);
+                    Assert.Throws<InvalidOperationException>(() => response.StatusCode = 404);
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            responseHeaders.Add(
+                                "Custom3",
+                                new string[] { "value3a, value3b", "value3c" }
+                            )
+                    );
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             HttpResponseMessage response = await SendRequestAsync(address);
             response.EnsureSuccessStatusCode();
@@ -246,19 +309,30 @@ public class ResponseHeaderTests
     public async Task Headers_FlushAsyncSendsHeaders_Success()
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, async httpContext =>
-            {
-                var response = httpContext.Response;
-                var responseHeaders = response.Headers;
-                responseHeaders.Add("Custom1", new string[] { "value1a", "value1b" });
-                responseHeaders.Add("Custom2", new string[] { "value2a, value2b" });
-                var body = response.Body;
-                Assert.False(response.HasStarted);
-                await body.FlushAsync();
-                Assert.True(response.HasStarted);
-                Assert.Throws<InvalidOperationException>(() => response.StatusCode = 404);
-                Assert.Throws<InvalidOperationException>(() => responseHeaders.Add("Custom3", new string[] { "value3a, value3b", "value3c" }));
-            }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    var responseHeaders = response.Headers;
+                    responseHeaders.Add("Custom1", new string[] { "value1a", "value1b" });
+                    responseHeaders.Add("Custom2", new string[] { "value2a, value2b" });
+                    var body = response.Body;
+                    Assert.False(response.HasStarted);
+                    await body.FlushAsync();
+                    Assert.True(response.HasStarted);
+                    Assert.Throws<InvalidOperationException>(() => response.StatusCode = 404);
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            responseHeaders.Add(
+                                "Custom3",
+                                new string[] { "value3a, value3b", "value3c" }
+                            )
+                    );
+                }
+            )
+        )
         {
             HttpResponseMessage response = await SendRequestAsync(address);
             response.EnsureSuccessStatusCode();
@@ -273,15 +347,24 @@ public class ResponseHeaderTests
     }
 
     [ConditionalTheory, MemberData(nameof(NullHeaderData))]
-    public async Task Headers_IgnoreNullHeaders(string headerName, StringValues headerValue, StringValues expectedValue)
+    public async Task Headers_IgnoreNullHeaders(
+        string headerName,
+        StringValues headerValue,
+        StringValues expectedValue
+    )
     {
         string address;
-        using (Utilities.CreateHttpServer(out address, httpContext =>
-        {
-            var responseHeaders = httpContext.Response.Headers;
-            responseHeaders.Add(headerName, headerValue);
-            return Task.FromResult(0);
-        }))
+        using (
+            Utilities.CreateHttpServer(
+                out address,
+                httpContext =>
+                {
+                    var responseHeaders = httpContext.Response.Headers;
+                    responseHeaders.Add(headerName, headerValue);
+                    return Task.FromResult(0);
+                }
+            )
+        )
         {
             HttpResponseMessage response = await SendRequestAsync(address);
             response.EnsureSuccessStatusCode();

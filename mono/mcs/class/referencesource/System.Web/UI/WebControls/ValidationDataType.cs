@@ -1,22 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="ValidationDataType.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-        
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
-    ///    <para>Specifies the validation data types to be used by the 
-    ///    <see cref='System.Web.UI.WebControls.CompareValidator'/> and <see cref='System.Web.UI.WebControls.RangeValidator'/> 
+    ///    <para>Specifies the validation data types to be used by the
+    ///    <see cref='System.Web.UI.WebControls.CompareValidator'/> and <see cref='System.Web.UI.WebControls.RangeValidator'/>
     ///    controls.</para>
     /// </devdoc>
-    public enum ValidationDataType {
-
+    public enum ValidationDataType
+    {
         /// <devdoc>
         ///    <para>The data type is String.</para>
         /// </devdoc>
@@ -43,4 +42,3 @@ namespace System.Web.UI.WebControls {
         Currency = 4
     }
 }
-

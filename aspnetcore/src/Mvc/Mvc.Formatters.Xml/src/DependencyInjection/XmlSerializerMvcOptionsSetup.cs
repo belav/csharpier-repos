@@ -39,7 +39,8 @@ internal sealed class XmlSerializerMvcOptionsSetup : IConfigureOptions<MvcOption
         {
             options.FormatterMappings.SetMediaTypeMappingForFormat(
                 key,
-                MediaTypeHeaderValues.ApplicationXml);
+                MediaTypeHeaderValues.ApplicationXml
+            );
         }
 
         var inputFormatter = new XmlSerializerInputFormatter(options);

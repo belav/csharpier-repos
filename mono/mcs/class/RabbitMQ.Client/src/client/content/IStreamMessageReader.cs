@@ -56,10 +56,12 @@
 //---------------------------------------------------------------------------
 using System;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Analyzes messages binary-compatible with QPid's
     ///"StreamMessage" wire encoding.</summary>
-    public interface IStreamMessageReader: IMessageReader {
+    public interface IStreamMessageReader : IMessageReader
+    {
         ///<summary>Reads a bool from the message body.</summary>
         bool ReadBool();
 

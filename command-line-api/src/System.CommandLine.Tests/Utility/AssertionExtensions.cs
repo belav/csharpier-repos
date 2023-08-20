@@ -12,7 +12,8 @@ namespace System.CommandLine.Tests.Utility
     {
         public static AndConstraint<GenericCollectionAssertions<T>> BeEquivalentSequenceTo<T>(
             this GenericCollectionAssertions<T> assertions,
-            params object[] expectedValues)
+            params object[] expectedValues
+        )
         {
             var actualValues = assertions.Subject.ToArray();
 
@@ -23,14 +24,17 @@ namespace System.CommandLine.Tests.Utility
 
             using (new AssertionScope())
             {
-                foreach (var tuple in actualValues
-                                      .Zip(expectedValues, (actual, expected) => (actual, expected))
-                                      .Where(t => (t.expected == null) || (t.expected.GetType().GetProperties().Length > 0)))
-
+                foreach (
+                    var tuple in actualValues
+                        .Zip(expectedValues, (actual, expected) => (actual, expected))
+                        .Where(
+                            t =>
+                                (t.expected == null)
+                                || (t.expected.GetType().GetProperties().Length > 0)
+                        )
+                )
                 {
-                    tuple.actual
-                         .Should()
-                         .BeEquivalentTo(tuple.expected);
+                    tuple.actual.Should().BeEquivalentTo(tuple.expected);
                 }
             }
 
@@ -39,7 +43,8 @@ namespace System.CommandLine.Tests.Utility
 
         public static AndConstraint<StringCollectionAssertions> BeEquivalentSequenceTo(
             this StringCollectionAssertions assertions,
-            params string[] expectedValues)
+            params string[] expectedValues
+        )
         {
             return assertions.BeEquivalentTo(expectedValues, c => c.WithStrictOrderingFor(s => s));
         }

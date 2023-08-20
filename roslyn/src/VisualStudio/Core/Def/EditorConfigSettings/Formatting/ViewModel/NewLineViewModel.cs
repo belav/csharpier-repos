@@ -90,7 +90,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
             {
                 yield return (ServicesVSResources.Newline_n, NewLineSetting.Newline);
                 yield return (ServicesVSResources.Carrage_Return_r, NewLineSetting.CarrageReturn);
-                yield return (ServicesVSResources.Carrage_Return_Newline_rn, NewLineSetting.CarrageReturnNewline);
+                yield return (
+                    ServicesVSResources.Carrage_Return_Newline_rn,
+                    NewLineSetting.CarrageReturnNewline
+                );
             }
         }
     }

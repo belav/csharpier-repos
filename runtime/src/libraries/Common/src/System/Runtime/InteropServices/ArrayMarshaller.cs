@@ -83,7 +83,8 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
 
         public Span<byte> NativeValueStorage { get; private set; }
 
-        public ref byte GetPinnableReference() => ref MemoryMarshal.GetReference(NativeValueStorage);
+        public ref byte GetPinnableReference() =>
+            ref MemoryMarshal.GetReference(NativeValueStorage);
 
         public void SetUnmarshalledCollectionLength(int length)
         {
@@ -107,7 +108,10 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
                 else
                 {
                     _allocatedMemory = (IntPtr)value;
-                    NativeValueStorage = new Span<byte>(value, (_managedArray?.Length ?? 0) * _sizeOfNativeElement);
+                    NativeValueStorage = new Span<byte>(
+                        value,
+                        (_managedArray?.Length ?? 0) * _sizeOfNativeElement
+                    );
                 }
             }
         }
@@ -128,7 +132,8 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
 #else
     internal
 #endif
-    unsafe ref struct PtrArrayMarshaller<T> where T : unmanaged
+    unsafe ref struct PtrArrayMarshaller<T>
+        where T : unmanaged
     {
         private T*[]? _managedArray;
         private readonly int _sizeOfNativeElement;
@@ -192,7 +197,8 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
 
         public Span<byte> NativeValueStorage { get; private set; }
 
-        public ref byte GetPinnableReference() => ref MemoryMarshal.GetReference(NativeValueStorage);
+        public ref byte GetPinnableReference() =>
+            ref MemoryMarshal.GetReference(NativeValueStorage);
 
         public void SetUnmarshalledCollectionLength(int length)
         {
@@ -216,9 +222,11 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
                 else
                 {
                     _allocatedMemory = (IntPtr)value;
-                    NativeValueStorage = new Span<byte>(value, (_managedArray?.Length ?? 0) * _sizeOfNativeElement);
+                    NativeValueStorage = new Span<byte>(
+                        value,
+                        (_managedArray?.Length ?? 0) * _sizeOfNativeElement
+                    );
                 }
-
             }
         }
 

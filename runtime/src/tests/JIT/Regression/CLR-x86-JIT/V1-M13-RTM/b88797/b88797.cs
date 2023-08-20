@@ -6,7 +6,11 @@ using System;
 
 public class CC
 {
-    public static bool Method2() { return true; }
+    public static bool Method2()
+    {
+        return true;
+    }
+
     public static int Main()
     {
         try
@@ -19,6 +23,7 @@ public class CC
             return 100;
         }
     }
+
     public static void Main1()
     {
         bool a = false;

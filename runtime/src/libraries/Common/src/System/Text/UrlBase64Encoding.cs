@@ -19,7 +19,9 @@ namespace System.Text
 
             if (!Convert.TryToBase64Chars(input, base64, out int charsWritten))
             {
-                Debug.Fail($"Convert.TryToBase64 failed with {input.Length} bytes to a {base64.Length} buffer");
+                Debug.Fail(
+                    $"Convert.TryToBase64 failed with {input.Length} bytes to a {base64.Length} buffer"
+                );
                 throw new UnreachableException();
             }
 

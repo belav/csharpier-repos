@@ -14,7 +14,13 @@ namespace System.Buffers.Text
         // Common worker for all signed integer TryFormat overloads
         //
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool TryFormatInt64(long value, ulong mask, Span<byte> destination, out int bytesWritten, StandardFormat format)
+        private static bool TryFormatInt64(
+            long value,
+            ulong mask,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format
+        )
         {
             if (format.IsDefault)
             {
@@ -42,10 +48,22 @@ namespace System.Buffers.Text
                     return TryFormatInt64N(value, format.Precision, destination, out bytesWritten);
 
                 case 'x':
-                    return TryFormatUInt64X((ulong)value & mask, format.Precision, true, destination, out bytesWritten);
+                    return TryFormatUInt64X(
+                        (ulong)value & mask,
+                        format.Precision,
+                        true,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'X':
-                    return TryFormatUInt64X((ulong)value & mask, format.Precision, false, destination, out bytesWritten);
+                    return TryFormatUInt64X(
+                        (ulong)value & mask,
+                        format.Precision,
+                        false,
+                        destination,
+                        out bytesWritten
+                    );
 
                 default:
                     return FormattingHelpers.TryFormatThrowFormatException(out bytesWritten);

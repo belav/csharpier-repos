@@ -17,25 +17,36 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
-        public static TypeSyntax AsReturnType(this IMarshallingGenerator generator, TypePositionInfo info)
+        public static TypeSyntax AsReturnType(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info
+        )
         {
             return generator.GetNativeSignatureBehavior(info) switch
             {
                 SignatureBehavior.ManagedTypeAndAttributes => info.ManagedType.Syntax,
                 SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
-                SignatureBehavior.PointerToNativeType => PointerType(generator.AsNativeType(info).Syntax),
+                SignatureBehavior.PointerToNativeType
+                    => PointerType(generator.AsNativeType(info).Syntax),
                 _ => throw new InvalidOperationException()
             };
         }
+
         /// <summary>
         /// Gets any attributes that should be applied to the return type for this <paramref name="info"/>.
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
         /// <returns>Attributes for the return type for this <paramref name="info"/>, or <c>null</c> if no attributes should be added.</returns>
-        public static AttributeListSyntax? GenerateAttributesForReturnType(this IMarshallingGenerator generator, TypePositionInfo info)
+        public static AttributeListSyntax? GenerateAttributesForReturnType(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info
+        )
         {
-            if (generator.GetNativeSignatureBehavior(info) != SignatureBehavior.ManagedTypeAndAttributes)
+            if (
+                generator.GetNativeSignatureBehavior(info)
+                != SignatureBehavior.ManagedTypeAndAttributes
+            )
             {
                 return null;
             }
@@ -54,7 +65,11 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
-        public static ParameterSyntax AsParameter(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ParameterSyntax AsParameter(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             SignatureBehavior behavior = generator.GetNativeSignatureBehavior(info);
             if (behavior == SignatureBehavior.ManagedTypeAndAttributes)
@@ -81,22 +96,29 @@ namespace Microsoft.Interop
                 identifierName = generator.GetValueBoundaryBehavior(info, context) switch
                 {
                     ValueBoundaryBehavior.ManagedIdentifier => info.IsByRef ? param : managed,
-                    ValueBoundaryBehavior.NativeIdentifier or ValueBoundaryBehavior.CastNativeIdentifier => native,
+                    ValueBoundaryBehavior.NativeIdentifier
+                    or ValueBoundaryBehavior.CastNativeIdentifier
+                        => native,
                     ValueBoundaryBehavior.AddressOfNativeIdentifier => param,
                     _ => throw new UnreachableException()
                 };
             }
             else
             {
-                throw new ArgumentException("Context direction must be ManagedToUnmanaged or UnmanagedToManaged");
+                throw new ArgumentException(
+                    "Context direction must be ManagedToUnmanaged or UnmanagedToManaged"
+                );
             }
             return Parameter(Identifier(identifierName))
-                .WithType(behavior switch
-                {
-                    SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
-                    SignatureBehavior.PointerToNativeType => PointerType(generator.AsNativeType(info).Syntax),
-                    _ => throw new InvalidOperationException()
-                });
+                .WithType(
+                    behavior switch
+                    {
+                        SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
+                        SignatureBehavior.PointerToNativeType
+                            => PointerType(generator.AsNativeType(info).Syntax),
+                        _ => throw new InvalidOperationException()
+                    }
+                );
         }
 
         private static ParameterSyntax GenerateForwardingParameter(TypePositionInfo info)
@@ -112,11 +134,15 @@ namespace Microsoft.Interop
             }
             if (info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.In))
             {
-                rehydratedAttributes.Add(Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_InAttribute)));
+                rehydratedAttributes.Add(
+                    Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_InAttribute))
+                );
             }
             if (info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.Out))
             {
-                rehydratedAttributes.Add(Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_OutAttribute)));
+                rehydratedAttributes.Add(
+                    Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_OutAttribute))
+                );
             }
 
             if (rehydratedAttributes.Count > 0)
@@ -127,20 +153,43 @@ namespace Microsoft.Interop
             return param;
         }
 
-        private static bool TryRehydrateMarshalAsAttribute(TypePositionInfo info, out AttributeSyntax marshalAsAttribute)
+        private static bool TryRehydrateMarshalAsAttribute(
+            TypePositionInfo info,
+            out AttributeSyntax marshalAsAttribute
+        )
         {
             marshalAsAttribute = null!;
             // If the parameter has [MarshalAs] marshalling, we resurface that
             // in the forwarding target since the built-in system understands it.
             // ICustomMarshaller marshalling requires additional information that we throw away earlier since it's unsupported,
             // so explicitly do not resurface a [MarshalAs(UnmanagdType.CustomMarshaler)] attribute.
-            if (info.MarshallingAttributeInfo is MarshalAsInfo { UnmanagedType: not UnmanagedType.CustomMarshaler } marshalAs)
+            if (
+                info.MarshallingAttributeInfo is MarshalAsInfo
+                {
+                    UnmanagedType: not UnmanagedType.CustomMarshaler
+                } marshalAs
+            )
             {
-                marshalAsAttribute = Attribute(ParseName(TypeNames.System_Runtime_InteropServices_MarshalAsAttribute))
-                        .WithArgumentList(AttributeArgumentList(SingletonSeparatedList(AttributeArgument(
-                        CastExpression(ParseTypeName(TypeNames.System_Runtime_InteropServices_UnmanagedType),
-                        LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                            Literal((int)marshalAs.UnmanagedType)))))));
+                marshalAsAttribute = Attribute(
+                        ParseName(TypeNames.System_Runtime_InteropServices_MarshalAsAttribute)
+                    )
+                    .WithArgumentList(
+                        AttributeArgumentList(
+                            SingletonSeparatedList(
+                                AttributeArgument(
+                                    CastExpression(
+                                        ParseTypeName(
+                                            TypeNames.System_Runtime_InteropServices_UnmanagedType
+                                        ),
+                                        LiteralExpression(
+                                            SyntaxKind.NumericLiteralExpression,
+                                            Literal((int)marshalAs.UnmanagedType)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    );
                 return true;
             }
 
@@ -148,23 +197,46 @@ namespace Microsoft.Interop
             {
                 CountInfo countInfo;
                 MarshallingInfo elementMarshallingInfo;
-                if (info.MarshallingAttributeInfo is NativeLinearCollectionMarshallingInfo collectionMarshalling
-                    && collectionMarshalling.ElementCountInfo is NoCountInfo or SizeAndParamIndexInfo)
+                if (
+                    info.MarshallingAttributeInfo
+                        is NativeLinearCollectionMarshallingInfo collectionMarshalling
+                    && collectionMarshalling.ElementCountInfo
+                        is NoCountInfo
+                            or SizeAndParamIndexInfo
+                )
                 {
-                    CustomTypeMarshallerData defaultMarshallerData = collectionMarshalling.Marshallers.GetModeOrDefault(MarshalMode.Default);
-                    if ((defaultMarshallerData.MarshallerType.FullTypeName.StartsWith($"{TypeNames.System_Runtime_InteropServices_ArrayMarshaller}<")
-                        || defaultMarshallerData.MarshallerType.FullTypeName.StartsWith($"{TypeNames.System_Runtime_InteropServices_PointerArrayMarshaller}<"))
-                        && defaultMarshallerData.CollectionElementMarshallingInfo is NoMarshallingInfo or MarshalAsInfo {  UnmanagedType: not UnmanagedType.CustomMarshaler })
+                    CustomTypeMarshallerData defaultMarshallerData =
+                        collectionMarshalling.Marshallers.GetModeOrDefault(MarshalMode.Default);
+                    if (
+                        (
+                            defaultMarshallerData.MarshallerType.FullTypeName.StartsWith(
+                                $"{TypeNames.System_Runtime_InteropServices_ArrayMarshaller}<"
+                            )
+                            || defaultMarshallerData.MarshallerType.FullTypeName.StartsWith(
+                                $"{TypeNames.System_Runtime_InteropServices_PointerArrayMarshaller}<"
+                            )
+                        )
+                        && defaultMarshallerData.CollectionElementMarshallingInfo
+                            is NoMarshallingInfo
+                                or MarshalAsInfo
+                                {
+                                    UnmanagedType: not UnmanagedType.CustomMarshaler
+                                }
+                    )
                     {
                         countInfo = collectionMarshalling.ElementCountInfo;
-                        elementMarshallingInfo = defaultMarshallerData.CollectionElementMarshallingInfo;
+                        elementMarshallingInfo =
+                            defaultMarshallerData.CollectionElementMarshallingInfo;
                     }
                     else
                     {
                         return false;
                     }
                 }
-                else if (info.MarshallingAttributeInfo is MissingSupportCollectionMarshallingInfo missingSupport)
+                else if (
+                    info.MarshallingAttributeInfo
+                    is MissingSupportCollectionMarshallingInfo missingSupport
+                )
                 {
                     countInfo = missingSupport.CountInfo;
                     elementMarshallingInfo = missingSupport.ElementMarshallingInfo;
@@ -183,9 +255,14 @@ namespace Microsoft.Interop
                 List<AttributeArgumentSyntax> marshalAsArguments = new List<AttributeArgumentSyntax>
                 {
                     AttributeArgument(
-                        CastExpression(ParseTypeName(TypeNames.System_Runtime_InteropServices_UnmanagedType),
-                        LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                            Literal((int)UnmanagedType.LPArray))))
+                        CastExpression(
+                            ParseTypeName(TypeNames.System_Runtime_InteropServices_UnmanagedType),
+                            LiteralExpression(
+                                SyntaxKind.NumericLiteralExpression,
+                                Literal((int)UnmanagedType.LPArray)
+                            )
+                        )
+                    )
                 };
 
                 if (countInfo is SizeAndParamIndexInfo sizeParamIndex)
@@ -193,17 +270,27 @@ namespace Microsoft.Interop
                     if (sizeParamIndex.ConstSize != SizeAndParamIndexInfo.UnspecifiedConstSize)
                     {
                         marshalAsArguments.Add(
-                            AttributeArgument(NameEquals("SizeConst"), null,
-                                LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                                    Literal(sizeParamIndex.ConstSize)))
+                            AttributeArgument(
+                                NameEquals("SizeConst"),
+                                null,
+                                LiteralExpression(
+                                    SyntaxKind.NumericLiteralExpression,
+                                    Literal(sizeParamIndex.ConstSize)
+                                )
+                            )
                         );
                     }
                     if (sizeParamIndex.ParamAtIndex is { ManagedIndex: int paramIndex })
                     {
                         marshalAsArguments.Add(
-                            AttributeArgument(NameEquals("SizeParamIndex"), null,
-                                LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                                    Literal(paramIndex)))
+                            AttributeArgument(
+                                NameEquals("SizeParamIndex"),
+                                null,
+                                LiteralExpression(
+                                    SyntaxKind.NumericLiteralExpression,
+                                    Literal(paramIndex)
+                                )
+                            )
                         );
                     }
                 }
@@ -211,14 +298,25 @@ namespace Microsoft.Interop
                 if (elementMarshallingInfo is MarshalAsInfo elementMarshalAs)
                 {
                     marshalAsArguments.Add(
-                        AttributeArgument(NameEquals("ArraySubType"), null,
-                            CastExpression(ParseTypeName(TypeNames.System_Runtime_InteropServices_UnmanagedType),
-                            LiteralExpression(SyntaxKind.NumericLiteralExpression,
-                                Literal((int)elementMarshalAs.UnmanagedType))))
-                        );
+                        AttributeArgument(
+                            NameEquals("ArraySubType"),
+                            null,
+                            CastExpression(
+                                ParseTypeName(
+                                    TypeNames.System_Runtime_InteropServices_UnmanagedType
+                                ),
+                                LiteralExpression(
+                                    SyntaxKind.NumericLiteralExpression,
+                                    Literal((int)elementMarshalAs.UnmanagedType)
+                                )
+                            )
+                        )
+                    );
                 }
-                marshalAsAttribute = Attribute(ParseName(TypeNames.System_Runtime_InteropServices_MarshalAsAttribute))
-                        .WithArgumentList(AttributeArgumentList(SeparatedList(marshalAsArguments)));
+                marshalAsAttribute = Attribute(
+                        ParseName(TypeNames.System_Runtime_InteropServices_MarshalAsAttribute)
+                    )
+                    .WithArgumentList(AttributeArgumentList(SeparatedList(marshalAsArguments)));
                 return true;
             }
 
@@ -231,34 +329,71 @@ namespace Microsoft.Interop
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
         /// <param name="context">Marshalling context</param>
-        public static ArgumentSyntax AsArgument(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ArgumentSyntax AsArgument(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
             return generator.GetValueBoundaryBehavior(info, context) switch
             {
-                ValueBoundaryBehavior.ManagedIdentifier when !info.IsByRef => Argument(IdentifierName(managedIdentifier)),
-                ValueBoundaryBehavior.ManagedIdentifier when info.IsByRef => Argument(IdentifierName(managedIdentifier)).WithRefKindKeyword(Token(info.RefKindSyntax)),
-                ValueBoundaryBehavior.NativeIdentifier => Argument(IdentifierName(nativeIdentifier)),
-                ValueBoundaryBehavior.AddressOfNativeIdentifier => Argument(PrefixUnaryExpression(SyntaxKind.AddressOfExpression, IdentifierName(nativeIdentifier))),
-                ValueBoundaryBehavior.CastNativeIdentifier => Argument(CastExpression(generator.AsParameter(info, context).Type, IdentifierName(nativeIdentifier))),
+                ValueBoundaryBehavior.ManagedIdentifier when !info.IsByRef
+                    => Argument(IdentifierName(managedIdentifier)),
+                ValueBoundaryBehavior.ManagedIdentifier when info.IsByRef
+                    => Argument(IdentifierName(managedIdentifier))
+                        .WithRefKindKeyword(Token(info.RefKindSyntax)),
+                ValueBoundaryBehavior.NativeIdentifier
+                    => Argument(IdentifierName(nativeIdentifier)),
+                ValueBoundaryBehavior.AddressOfNativeIdentifier
+                    => Argument(
+                        PrefixUnaryExpression(
+                            SyntaxKind.AddressOfExpression,
+                            IdentifierName(nativeIdentifier)
+                        )
+                    ),
+                ValueBoundaryBehavior.CastNativeIdentifier
+                    => Argument(
+                        CastExpression(
+                            generator.AsParameter(info, context).Type,
+                            IdentifierName(nativeIdentifier)
+                        )
+                    ),
                 _ => throw new InvalidOperationException()
             };
         }
 
-        public static ArgumentSyntax AsManagedArgument(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ArgumentSyntax AsManagedArgument(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             var (managedIdentifier, _) = context.GetIdentifiers(info);
             if (info.IsByRef)
             {
-                return Argument(IdentifierName(managedIdentifier)).WithRefKindKeyword(Token(info.RefKindSyntax));
+                return Argument(IdentifierName(managedIdentifier))
+                    .WithRefKindKeyword(Token(info.RefKindSyntax));
             }
             return Argument(IdentifierName(managedIdentifier));
         }
 
-        public static ExpressionSyntax GenerateNativeByRefInitialization(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ExpressionSyntax GenerateNativeByRefInitialization(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            string paramIdentifier = context.GetAdditionalIdentifier(info, ParameterIdentifierSuffix);
-            return RefExpression(PrefixUnaryExpression(SyntaxKind.PointerIndirectionExpression, IdentifierName(paramIdentifier)));
+            string paramIdentifier = context.GetAdditionalIdentifier(
+                info,
+                ParameterIdentifierSuffix
+            );
+            return RefExpression(
+                PrefixUnaryExpression(
+                    SyntaxKind.PointerIndirectionExpression,
+                    IdentifierName(paramIdentifier)
+                )
+            );
         }
     }
 }

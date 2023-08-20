@@ -11,10 +11,12 @@ namespace System.ServiceModel.ComIntegration
 
     static class ComPlusTraceRecord
     {
-
-        public static void SerializeRecord (XmlWriter xmlWriter, object o)
+        public static void SerializeRecord(XmlWriter xmlWriter, object o)
         {
-            DataContractSerializer serializer = DataContractSerializerDefaults.CreateSerializer(((o == null) ? typeof(object) : o.GetType()), DataContractSerializerDefaults.MaxItemsInObjectGraph);
+            DataContractSerializer serializer = DataContractSerializerDefaults.CreateSerializer(
+                ((o == null) ? typeof(object) : o.GetType()),
+                DataContractSerializerDefaults.MaxItemsInObjectGraph
+            );
             serializer.WriteObject(xmlWriter, o);
         }
     }

@@ -10,7 +10,7 @@ namespace Roslyn.Utilities
     internal static class CompilerOptionParseUtilities
     {
         /// <summary>
-        /// Parse the value provided to an MSBuild Feature option into a list of entries.  This will 
+        /// Parse the value provided to an MSBuild Feature option into a list of entries.  This will
         /// leave name=value in their raw form.
         /// </summary>
         public static IList<string> ParseFeatureFromMSBuild(string? features)
@@ -27,7 +27,12 @@ namespace Roslyn.Utilities
         {
             foreach (var commaFeatures in values)
             {
-                foreach (var feature in commaFeatures.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    var feature in commaFeatures.Split(
+                        new[] { ',' },
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
                 {
                     ParseFeatureCore(builder, feature);
                 }

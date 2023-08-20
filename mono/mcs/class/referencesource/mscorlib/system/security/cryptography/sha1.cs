@@ -1,20 +1,22 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // SHA1.cs
 //
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     [System.Runtime.InteropServices.ComVisible(true)]
     public abstract class SHA1 : HashAlgorithm
     {
-        protected SHA1() {
+        protected SHA1()
+        {
             HashSizeValue = 160;
         }
 
@@ -22,17 +24,18 @@ namespace System.Security.Cryptography {
         // public methods
         //
 
-        new static public SHA1 Create() {
+        new static public SHA1 Create()
+        {
 #if FULL_AOT_RUNTIME
-            return new System.Security.Cryptography.SHA1CryptoServiceProvider ();
+            return new System.Security.Cryptography.SHA1CryptoServiceProvider();
 #else
             return Create("System.Security.Cryptography.SHA1");
 #endif
         }
 
-        new static public SHA1 Create(String hashName) {
-            return (SHA1) CryptoConfig.CreateFromName(hashName);
+        public static new SHA1 Create(String hashName)
+        {
+            return (SHA1)CryptoConfig.CreateFromName(hashName);
         }
     }
 }
-

@@ -100,17 +100,24 @@ namespace System.ComponentModel.Composition
             return CreateCardinalityMismatchException((string)null, (Exception)null);
         }
 
-        private static ImportCardinalityMismatchException CreateCardinalityMismatchException(string message)
+        private static ImportCardinalityMismatchException CreateCardinalityMismatchException(
+            string message
+        )
         {
             return CreateCardinalityMismatchException(message, (Exception)null);
         }
 
-        private static ImportCardinalityMismatchException CreateCardinalityMismatchException(Exception innerException)
+        private static ImportCardinalityMismatchException CreateCardinalityMismatchException(
+            Exception innerException
+        )
         {
             return CreateCardinalityMismatchException((string)null, innerException);
         }
 
-        private static ImportCardinalityMismatchException CreateCardinalityMismatchException(string message, Exception innerException)
+        private static ImportCardinalityMismatchException CreateCardinalityMismatchException(
+            string message,
+            Exception innerException
+        )
         {
             return new ImportCardinalityMismatchException(message, innerException);
         }

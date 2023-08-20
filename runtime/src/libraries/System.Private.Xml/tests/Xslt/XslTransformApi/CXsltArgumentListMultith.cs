@@ -14,13 +14,15 @@ namespace System.Xml.XslTransformApiTests
     public class CSameInstanceXsltArgTestCase : XsltApiTestCaseBase
     {
         // Variables from init string
-        protected string _strPath;                // Path of the data files
+        protected string _strPath; // Path of the data files
 
         // Other global variables
-        public XsltArgumentList xsltArg1;         // Shared XsltArgumentList for same instance testing
+        public XsltArgumentList xsltArg1; // Shared XsltArgumentList for same instance testing
 
         private ITestOutputHelper _output;
-        public CSameInstanceXsltArgTestCase(ITestOutputHelper output) : base(output)
+
+        public CSameInstanceXsltArgTestCase(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             Init(null);
@@ -59,7 +61,9 @@ namespace System.Xml.XslTransformApiTests
     public class CSameInstanceXsltArgumentListGetParam : CSameInstanceXsltArgTestCase
     {
         private ITestOutputHelper _output;
-        public CSameInstanceXsltArgumentListGetParam(ITestOutputHelper output) : base(output)
+
+        public CSameInstanceXsltArgumentListGetParam(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -75,7 +79,15 @@ namespace System.Xml.XslTransformApiTests
             for (int i = 1; i <= 100; i++)
             {
                 retObj = xsltArg1.GetParam(((object[])args)[1].ToString(), szEmpty);
-                _output.WriteLine("GetParam: Thread " + ((object[])args)[0] + "\tIteration " + i + "\tAdded Value: {0}\tRetrieved Value:{1}\n", "Test1", retObj.ToString());
+                _output.WriteLine(
+                    "GetParam: Thread "
+                        + ((object[])args)[0]
+                        + "\tIteration "
+                        + i
+                        + "\tAdded Value: {0}\tRetrieved Value:{1}\n",
+                    "Test1",
+                    retObj.ToString()
+                );
                 if (retObj.ToString() != "Test1")
                 {
                     _output.WriteLine("ERROR!!!");
@@ -93,7 +105,15 @@ namespace System.Xml.XslTransformApiTests
             {
                 retObj = xsltArg1.GetParam(((object[])args)[1].ToString(), szEmpty);
                 string expected = "Test" + ((object[])args)[0];
-                _output.WriteLine("GetParam: Thread " + ((object[])args)[0] + "\tIteration " + i + "\tAdded Value: {0}\tRetrieved Value:{1}\n", expected, retObj.ToString());
+                _output.WriteLine(
+                    "GetParam: Thread "
+                        + ((object[])args)[0]
+                        + "\tIteration "
+                        + i
+                        + "\tAdded Value: {0}\tRetrieved Value:{1}\n",
+                    expected,
+                    retObj.ToString()
+                );
                 if (retObj.ToString() != expected)
                 {
                     _output.WriteLine("ERROR!!!");
@@ -144,7 +164,9 @@ namespace System.Xml.XslTransformApiTests
     public class CSameInstanceXsltArgumentListGetExtnObject : CSameInstanceXsltArgTestCase
     {
         private ITestOutputHelper _output;
-        public CSameInstanceXsltArgumentListGetExtnObject(ITestOutputHelper output) : base(output)
+
+        public CSameInstanceXsltArgumentListGetExtnObject(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -160,7 +182,14 @@ namespace System.Xml.XslTransformApiTests
             for (int i = 1; i <= 100; i++)
             {
                 retObj = xsltArg1.GetExtensionObject(((object[])args)[1].ToString());
-                _output.WriteLine("GetExtensionObject: Thread " + ((object[])args)[0] + "\tIteration " + i + "\tValue returned: " + ((MyObject)retObj).MyValue());
+                _output.WriteLine(
+                    "GetExtensionObject: Thread "
+                        + ((object[])args)[0]
+                        + "\tIteration "
+                        + i
+                        + "\tValue returned: "
+                        + ((MyObject)retObj).MyValue()
+                );
                 if (((MyObject)retObj).MyValue() != 1)
                 {
                     _output.WriteLine("ERROR!!! Set and retrieved value appear to be different");
@@ -177,7 +206,14 @@ namespace System.Xml.XslTransformApiTests
             for (int i = 1; i <= 100; i++)
             {
                 retObj = xsltArg1.GetExtensionObject(((object[])args)[1].ToString());
-                _output.WriteLine("GetExtensionObject: Thread " + ((object[])args)[0] + "\tIteration " + i + "\tValue returned: " + ((MyObject)retObj).MyValue());
+                _output.WriteLine(
+                    "GetExtensionObject: Thread "
+                        + ((object[])args)[0]
+                        + "\tIteration "
+                        + i
+                        + "\tValue returned: "
+                        + ((MyObject)retObj).MyValue()
+                );
                 if (((MyObject)retObj).MyValue() != (int)((object[])args)[0])
                 {
                     _output.WriteLine("ERROR!!! Set and retrieved value appear to be different");
@@ -228,7 +264,9 @@ namespace System.Xml.XslTransformApiTests
     public class CSameInstanceXsltArgumentListTransform : CSameInstanceXsltArgTestCase
     {
         private ITestOutputHelper _output;
-        public CSameInstanceXsltArgumentListTransform(ITestOutputHelper output) : base(output)
+
+        public CSameInstanceXsltArgumentListTransform(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -264,7 +302,13 @@ namespace System.Xml.XslTransformApiTests
             for (int i = 1; i <= 100; i++)
             {
                 xrXSLT = xslt.Transform(xd, xsltArg1);
-                _output.WriteLine("SharedArgumentList: Thread " + ((object[])args)[0] + "\tIteration " + i + "\tDone with transform...");
+                _output.WriteLine(
+                    "SharedArgumentList: Thread "
+                        + ((object[])args)[0]
+                        + "\tIteration "
+                        + i
+                        + "\tDone with transform..."
+                );
             }
             return 1;
         }
@@ -278,11 +322,26 @@ namespace System.Xml.XslTransformApiTests
         public void proc1()
         {
             CThreads rThreads = new CThreads(_output);
-            rThreads.Add(new ThreadFunc(SharedArgList), new object[] { 1, "xsltarg_multithreading1.xsl", "foo.xml" });
-            rThreads.Add(new ThreadFunc(SharedArgList), new object[] { 2, "xsltarg_multithreading2.xsl", "foo.xml" });
-            rThreads.Add(new ThreadFunc(SharedArgList), new object[] { 3, "xsltarg_multithreading3.xsl", "foo.xml" });
-            rThreads.Add(new ThreadFunc(SharedArgList), new object[] { 4, "xsltarg_multithreading4.xsl", "foo.xml" });
-            rThreads.Add(new ThreadFunc(SharedArgList), new object[] { 5, "xsltarg_multithreading5.xsl", "foo.xml" });
+            rThreads.Add(
+                new ThreadFunc(SharedArgList),
+                new object[] { 1, "xsltarg_multithreading1.xsl", "foo.xml" }
+            );
+            rThreads.Add(
+                new ThreadFunc(SharedArgList),
+                new object[] { 2, "xsltarg_multithreading2.xsl", "foo.xml" }
+            );
+            rThreads.Add(
+                new ThreadFunc(SharedArgList),
+                new object[] { 3, "xsltarg_multithreading3.xsl", "foo.xml" }
+            );
+            rThreads.Add(
+                new ThreadFunc(SharedArgList),
+                new object[] { 4, "xsltarg_multithreading4.xsl", "foo.xml" }
+            );
+            rThreads.Add(
+                new ThreadFunc(SharedArgList),
+                new object[] { 5, "xsltarg_multithreading5.xsl", "foo.xml" }
+            );
 
             //Wait until they are complete
             rThreads.Start();

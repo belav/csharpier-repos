@@ -27,8 +27,7 @@ public class FromSqlExpression : RootReferenceExpression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    public override string Alias
-        => base.Alias!;
+    public override string Alias => base.Alias!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,36 +51,32 @@ public class FromSqlExpression : RootReferenceExpression, IPrintableExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual FromSqlExpression Update(Expression arguments)
-        => arguments != Arguments
-            ? new FromSqlExpression(EntityType, Alias, Sql, arguments)
-            : this;
+    public virtual FromSqlExpression Update(Expression arguments) =>
+        arguments != Arguments ? new FromSqlExpression(EntityType, Alias, Sql, arguments) : this;
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(object);
+    public override Type Type => typeof(object);
 
     /// <inheritdoc />
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Append(Sql);
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Append(Sql);
 
     /// <inheritdoc />
-    public override bool Equals(object obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is FromSqlExpression fromSqlExpression
-                && Equals(fromSqlExpression));
+    public override bool Equals(object obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is FromSqlExpression fromSqlExpression && Equals(fromSqlExpression)
+        );
 
-    private bool Equals(FromSqlExpression fromSqlExpression)
-        => base.Equals(fromSqlExpression)
-            && Sql == fromSqlExpression.Sql
-            && ExpressionEqualityComparer.Instance.Equals(Arguments, fromSqlExpression.Arguments);
+    private bool Equals(FromSqlExpression fromSqlExpression) =>
+        base.Equals(fromSqlExpression)
+        && Sql == fromSqlExpression.Sql
+        && ExpressionEqualityComparer.Instance.Equals(Arguments, fromSqlExpression.Arguments);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Sql);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Sql);
 }

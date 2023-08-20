@@ -10,26 +10,25 @@ namespace ExchangeAdd
         static int Main(string[] args)
         {
             // Check number of args
-            if(args.Length != 2)
+            if (args.Length != 2)
             {
-                Console.WriteLine("USAGE:  InterlockedAddLong " +
-                    "/loops:<int> /addVal:<long>");
+                Console.WriteLine("USAGE:  InterlockedAddLong " + "/loops:<int> /addVal:<long>");
                 return -1;
             }
 
             // Get the args
-            int loops=100;
+            int loops = 100;
             long valueToAdd = 0;
-        
-            for(int i=0;i<args.Length;i++)
+
+            for (int i = 0; i < args.Length; i++)
             {
-                if(args[i].ToLower().StartsWith("/loops:"))
+                if (args[i].ToLower().StartsWith("/loops:"))
                 {
                     loops = Convert.ToInt32(args[i].Substring(7));
                     continue;
                 }
 
-                if(args[i].ToLower().StartsWith("/addval:"))
+                if (args[i].ToLower().StartsWith("/addval:"))
                 {
                     valueToAdd = Convert.ToInt64(args[i].Substring(8));
                     continue;
@@ -65,7 +64,10 @@ namespace ExchangeAdd
         private long totalValue = 0;
         private int numberOfIterations;
         private long valueToAdd;
-        public ThreadSafe(): this(100,100) { }
+
+        public ThreadSafe()
+            : this(100, 100) { }
+
         public ThreadSafe(int loops, long lAdd)
         {
             signal = new ManualResetEvent(false);
@@ -83,14 +85,11 @@ namespace ExchangeAdd
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Add(ref totalValue, valueToAdd);
-
         }
+
         public long Expected
         {
-            get
-            {
-                return (numberOfIterations * valueToAdd);
-            }
+            get { return (numberOfIterations * valueToAdd); }
         }
         public long Total
         {

@@ -16,29 +16,30 @@ namespace System.Reflection.Emit
 
         public override string FullName
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Module ManifestModule
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         [RequiresDynamicCode("Defining a dynamic assembly requires dynamic code.")]
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
         [RequiresDynamicCode("Defining a dynamic assembly requires dynamic code.")]
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
@@ -64,12 +65,8 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
     }
 }

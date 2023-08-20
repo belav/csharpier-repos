@@ -16,9 +16,7 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class ThrowDesigner
     [ActivityDesignerTheme(typeof(ThrowDesignerTheme))]
-    internal sealed class ThrowDesigner : ActivityDesigner
-    {
-    }
+    internal sealed class ThrowDesigner : ActivityDesigner { }
     #endregion
 
     #region ThrowDesignerTheme

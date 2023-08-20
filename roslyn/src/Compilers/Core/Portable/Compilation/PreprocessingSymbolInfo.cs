@@ -9,10 +9,13 @@ namespace Microsoft.CodeAnalysis
 {
     public readonly struct PreprocessingSymbolInfo : IEquatable<PreprocessingSymbolInfo>
     {
-        internal static readonly PreprocessingSymbolInfo None = new PreprocessingSymbolInfo(null, false);
+        internal static readonly PreprocessingSymbolInfo None = new PreprocessingSymbolInfo(
+            null,
+            false
+        );
 
         /// <summary>
-        /// The symbol that was referred to by the identifier, if any. 
+        /// The symbol that was referred to by the identifier, if any.
         /// </summary>
         public IPreprocessingSymbol? Symbol { get; }
 

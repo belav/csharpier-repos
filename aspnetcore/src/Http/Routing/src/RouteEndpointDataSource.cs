@@ -28,21 +28,23 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
     public RouteHandlerBuilder AddRequestDelegate(
         RoutePattern pattern,
         RequestDelegate requestDelegate,
-        IEnumerable<string>? httpMethods)
+        IEnumerable<string>? httpMethods
+    )
     {
-
         var conventions = new ThrowOnAddAfterEndpointBuiltConventionCollection();
         var finallyConventions = new ThrowOnAddAfterEndpointBuiltConventionCollection();
 
-        _routeEntries.Add(new()
-        {
-            RoutePattern = pattern,
-            RouteHandler = requestDelegate,
-            HttpMethods = httpMethods,
-            RouteAttributes = RouteAttributes.None,
-            Conventions = conventions,
-            FinallyConventions = finallyConventions
-        });
+        _routeEntries.Add(
+            new()
+            {
+                RoutePattern = pattern,
+                RouteHandler = requestDelegate,
+                HttpMethods = httpMethods,
+                RouteAttributes = RouteAttributes.None,
+                Conventions = conventions,
+                FinallyConventions = finallyConventions
+            }
+        );
 
         return new RouteHandlerBuilder(conventions, finallyConventions);
     }
@@ -51,7 +53,8 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         RoutePattern pattern,
         Delegate routeHandler,
         IEnumerable<string>? httpMethods,
-        bool isFallback)
+        bool isFallback
+    )
     {
         var conventions = new ThrowOnAddAfterEndpointBuiltConventionCollection();
         var finallyConventions = new ThrowOnAddAfterEndpointBuiltConventionCollection();
@@ -62,15 +65,17 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
             routeAttributes |= RouteAttributes.Fallback;
         }
 
-        _routeEntries.Add(new()
-        {
-            RoutePattern = pattern,
-            RouteHandler = routeHandler,
-            HttpMethods = httpMethods,
-            RouteAttributes = routeAttributes,
-            Conventions = conventions,
-            FinallyConventions = finallyConventions
-        });
+        _routeEntries.Add(
+            new()
+            {
+                RoutePattern = pattern,
+                RouteHandler = routeHandler,
+                HttpMethods = httpMethods,
+                RouteAttributes = routeAttributes,
+                Conventions = conventions,
+                FinallyConventions = finallyConventions
+            }
+        );
 
         return new RouteHandlerBuilder(conventions, finallyConventions);
     }
@@ -93,7 +98,14 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         var endpoints = new RouteEndpoint[_routeEntries.Count];
         for (int i = 0; i < _routeEntries.Count; i++)
         {
-            endpoints[i] = (RouteEndpoint)CreateRouteEndpointBuilder(_routeEntries[i], context.Prefix, context.Conventions, context.FinallyConventions).Build();
+            endpoints[i] = (RouteEndpoint)
+                CreateRouteEndpointBuilder(
+                        _routeEntries[i],
+                        context.Prefix,
+                        context.Conventions,
+                        context.FinallyConventions
+                    )
+                    .Build();
         }
         return endpoints;
     }
@@ -105,21 +117,32 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
     {
         if (_routeEntries.Count is not 1)
         {
-            throw new InvalidOperationException($"There are {_routeEntries.Count} endpoints defined! This can only be called for a single endpoint.");
+            throw new InvalidOperationException(
+                $"There are {_routeEntries.Count} endpoints defined! This can only be called for a single endpoint."
+            );
         }
 
         return CreateRouteEndpointBuilder(_routeEntries[0]);
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2026",
-        Justification = "We surface a RequireUnreferencedCode in the call to the Map method adding this EndpointDataSource. The trimmer is unable to infer this.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "We surface a RequireUnreferencedCode in the call to the Map method adding this EndpointDataSource. The trimmer is unable to infer this."
+    )]
     private RouteEndpointBuilder CreateRouteEndpointBuilder(
-        RouteEntry entry, RoutePattern? groupPrefix = null, IReadOnlyList<Action<EndpointBuilder>>? groupConventions = null, IReadOnlyList<Action<EndpointBuilder>>? groupFinallyConventions = null)
+        RouteEntry entry,
+        RoutePattern? groupPrefix = null,
+        IReadOnlyList<Action<EndpointBuilder>>? groupConventions = null,
+        IReadOnlyList<Action<EndpointBuilder>>? groupFinallyConventions = null
+    )
     {
         var pattern = RoutePatternFactory.Combine(groupPrefix, entry.RoutePattern);
         var handler = entry.RouteHandler;
-        var isRouteHandler = (entry.RouteAttributes & RouteAttributes.RouteHandler) == RouteAttributes.RouteHandler;
-        var isFallback = (entry.RouteAttributes & RouteAttributes.Fallback) == RouteAttributes.Fallback;
+        var isRouteHandler =
+            (entry.RouteAttributes & RouteAttributes.RouteHandler) == RouteAttributes.RouteHandler;
+        var isFallback =
+            (entry.RouteAttributes & RouteAttributes.Fallback) == RouteAttributes.Fallback;
 
         // The Map methods don't support customizing the order apart from using int.MaxValue to give MapFallback the lowest priority.
         // Otherwise, we always use the default of 0 unless a convention changes it later.
@@ -130,7 +153,10 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         // ApplicationBuilder.Build(). This was observed in MapSignalRTests and is not very useful. Maybe if we come up
         // with a better heuristic for what a useful method name is, we could use it for everything. Inline lambdas are
         // compiler generated methods so they are filtered out even for route handlers.
-        if (isRouteHandler && TypeHelper.TryGetNonCompilerGeneratedMethodName(handler.Method, out var methodName))
+        if (
+            isRouteHandler
+            && TypeHelper.TryGetNonCompilerGeneratedMethodName(handler.Method, out var methodName)
+        )
         {
             displayName = $"{displayName} => {methodName}";
         }
@@ -148,14 +174,18 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
 
         // If we're not a route handler, we started with a fully realized (although unfiltered) RequestDelegate, so we can just redirect to that
         // while running any conventions. We'll put the original back if it remains unfiltered right before building the endpoint.
-        RequestDelegate? factoryCreatedRequestDelegate = isRouteHandler ? null : (RequestDelegate)entry.RouteHandler;
+        RequestDelegate? factoryCreatedRequestDelegate = isRouteHandler
+            ? null
+            : (RequestDelegate)entry.RouteHandler;
 
         // Let existing conventions capture and call into builder.RequestDelegate as long as they do so after it has been created.
         RequestDelegate redirectRequestDelegate = context =>
         {
             if (factoryCreatedRequestDelegate is null)
             {
-                throw new InvalidOperationException(Resources.RouteEndpointDataSource_RequestDelegateCannotBeCalledBeforeBuild);
+                throw new InvalidOperationException(
+                    Resources.RouteEndpointDataSource_RequestDelegateCannotBeCalledBeforeBuild
+                );
             }
 
             return factoryCreatedRequestDelegate(context);
@@ -164,11 +194,12 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         // Add MethodInfo and HttpMethodMetadata (if any) as first metadata items as they are intrinsic to the route much like
         // the pattern or default display name. This gives visibility to conventions like WithOpenApi() to intrinsic route details
         // (namely the MethodInfo) even when applied early as group conventions.
-        RouteEndpointBuilder builder = new(redirectRequestDelegate, pattern, order)
-        {
-            DisplayName = displayName,
-            ApplicationServices = _applicationServices,
-        };
+        RouteEndpointBuilder builder =
+            new(redirectRequestDelegate, pattern, order)
+            {
+                DisplayName = displayName,
+                ApplicationServices = _applicationServices,
+            };
 
         if (isRouteHandler)
         {
@@ -199,7 +230,10 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         if (isRouteHandler)
         {
             rdfOptions = CreateRDFOptions(entry, pattern, builder);
-            rdfMetadataResult = RequestDelegateFactory.InferMetadata(entry.RouteHandler.Method, rdfOptions);
+            rdfMetadataResult = RequestDelegateFactory.InferMetadata(
+                entry.RouteHandler.Method,
+                rdfOptions
+            );
         }
 
         // Add delegate attributes as metadata before entry-specific conventions but after group conventions.
@@ -219,7 +253,12 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         }
 
         // If no convention has modified builder.RequestDelegate, we can use the RequestDelegate returned by the RequestDelegateFactory directly.
-        var conventionOverriddenRequestDelegate = ReferenceEquals(builder.RequestDelegate, redirectRequestDelegate) ? null : builder.RequestDelegate;
+        var conventionOverriddenRequestDelegate = ReferenceEquals(
+            builder.RequestDelegate,
+            redirectRequestDelegate
+        )
+            ? null
+            : builder.RequestDelegate;
 
         if (isRouteHandler || builder.FilterFactories.Count > 0)
         {
@@ -227,14 +266,17 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
 
             // We ignore the returned EndpointMetadata has been already populated since we passed in non-null EndpointMetadata.
             // We always set factoryRequestDelegate in case something is still referencing the redirected version of the RequestDelegate.
-            factoryCreatedRequestDelegate = RequestDelegateFactory.Create(entry.RouteHandler, rdfOptions, rdfMetadataResult).RequestDelegate;
+            factoryCreatedRequestDelegate = RequestDelegateFactory
+                .Create(entry.RouteHandler, rdfOptions, rdfMetadataResult)
+                .RequestDelegate;
         }
 
         Debug.Assert(factoryCreatedRequestDelegate is not null);
 
         // Use the overridden RequestDelegate if it exists. If the overridden RequestDelegate is merely wrapping the final RequestDelegate,
         // it will still work because of the redirectRequestDelegate.
-        builder.RequestDelegate = conventionOverriddenRequestDelegate ?? factoryCreatedRequestDelegate;
+        builder.RequestDelegate =
+            conventionOverriddenRequestDelegate ?? factoryCreatedRequestDelegate;
 
         entry.FinallyConventions.IsReadOnly = true;
         foreach (var entryFinallyConvention in entry.FinallyConventions)
@@ -255,7 +297,11 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         return builder;
     }
 
-    private RequestDelegateFactoryOptions CreateRDFOptions(RouteEntry entry, RoutePattern pattern, RouteEndpointBuilder builder)
+    private RequestDelegateFactoryOptions CreateRDFOptions(
+        RouteEntry entry,
+        RoutePattern pattern,
+        RouteEndpointBuilder builder
+    )
     {
         var routeParamNames = new List<string>(pattern.Parameters.Count);
         foreach (var parameter in pattern.Parameters)
@@ -277,12 +323,12 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
     {
         static bool ShouldDisableInferredBodyForMethod(string method) =>
             // GET, DELETE, HEAD, CONNECT, TRACE, and OPTIONS normally do not contain bodies
-            method.Equals(HttpMethods.Get, StringComparison.Ordinal) ||
-            method.Equals(HttpMethods.Delete, StringComparison.Ordinal) ||
-            method.Equals(HttpMethods.Head, StringComparison.Ordinal) ||
-            method.Equals(HttpMethods.Options, StringComparison.Ordinal) ||
-            method.Equals(HttpMethods.Trace, StringComparison.Ordinal) ||
-            method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
+            method.Equals(HttpMethods.Get, StringComparison.Ordinal)
+            || method.Equals(HttpMethods.Delete, StringComparison.Ordinal)
+            || method.Equals(HttpMethods.Head, StringComparison.Ordinal)
+            || method.Equals(HttpMethods.Options, StringComparison.Ordinal)
+            || method.Equals(HttpMethods.Trace, StringComparison.Ordinal)
+            || method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
 
         // If the endpoint accepts any kind of request, we should still infer parameters can come from the body.
         if (httpMethods is null)
@@ -318,14 +364,18 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
     {
         // The endpoint was defined by a RequestDelegate, RequestDelegateFactory.Create() should be skipped unless there are endpoint filters.
         None = 0,
+
         // This was added as Delegate route handler, so RequestDelegateFactory.Create() should always be called.
         RouteHandler = 1,
+
         // This was added by MapFallback.
         Fallback = 2,
     }
 
     // This private class is only exposed to internal code via ICollection<Action<EndpointBuilder>> in RouteEndpointBuilder where only Add is called.
-    private sealed class ThrowOnAddAfterEndpointBuiltConventionCollection : List<Action<EndpointBuilder>>, ICollection<Action<EndpointBuilder>>
+    private sealed class ThrowOnAddAfterEndpointBuiltConventionCollection
+        : List<Action<EndpointBuilder>>,
+            ICollection<Action<EndpointBuilder>>
     {
         // We throw if someone tries to add conventions to the RouteEntry after endpoints have already been resolved meaning the conventions
         // will not be observed given RouteEndpointDataSource is not meant to be dynamic and uses NullChangeToken.Singleton.
@@ -335,7 +385,9 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         {
             if (IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.RouteEndpointDataSource_ConventionsCannotBeModifiedAfterBuild);
+                throw new InvalidOperationException(
+                    Resources.RouteEndpointDataSource_ConventionsCannotBeModifiedAfterBuild
+                );
             }
 
             Add(convention);

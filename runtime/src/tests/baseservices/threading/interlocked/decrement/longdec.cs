@@ -18,8 +18,12 @@ namespace InterlockedTest
                 loops = Int32.Parse(Args[0]);
                 threads = Int32.Parse(Args[1]);
             }
-            Console.WriteLine("Starting Interlocked test on {0} threads for {1} iterations.",threads,loops);
-            
+            Console.WriteLine(
+                "Starting Interlocked test on {0} threads for {1} iterations.",
+                threads,
+                loops
+            );
+
             LongTest testLong = new LongTest(loops, threads);
 
             Console.WriteLine("Check Decrement: {0}", rValue = testLong.Dec());

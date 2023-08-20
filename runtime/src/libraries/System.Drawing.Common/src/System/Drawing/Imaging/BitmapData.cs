@@ -85,7 +85,11 @@ namespace System.Drawing.Imaging
                     case PixelFormat.Format64bppArgb:
                         break;
                     default:
-                        throw new System.ComponentModel.InvalidEnumArgumentException(nameof(value), unchecked((int)value), typeof(PixelFormat));
+                        throw new System.ComponentModel.InvalidEnumArgumentException(
+                            nameof(value),
+                            unchecked((int)value),
+                            typeof(PixelFormat)
+                        );
                 }
 
                 _pixelFormat = value;
@@ -113,10 +117,17 @@ namespace System.Drawing.Imaging
         internal ref int GetPinnableReference() => ref _width;
 
 #if NET7_0_OR_GREATER
-        [CustomMarshaller(typeof(BitmapData), MarshalMode.ManagedToUnmanagedIn, typeof(PinningMarshaller))]
+        [CustomMarshaller(
+            typeof(BitmapData),
+            MarshalMode.ManagedToUnmanagedIn,
+            typeof(PinningMarshaller)
+        )]
         internal static unsafe class PinningMarshaller
         {
-            public static ref int GetPinnableReference(BitmapData managed) => ref (managed is null ? ref Unsafe.NullRef<int>() : ref managed.GetPinnableReference());
+            public static ref int GetPinnableReference(BitmapData managed) =>
+                ref (
+                    managed is null ? ref Unsafe.NullRef<int>() : ref managed.GetPinnableReference()
+                );
 
             // All usages in our currently supported scenarios will always go through GetPinnableReference
             public static int* ConvertToUnmanaged(BitmapData _) => throw new UnreachableException();

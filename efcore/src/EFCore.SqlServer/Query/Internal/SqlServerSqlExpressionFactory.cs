@@ -35,7 +35,10 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [return: NotNullIfNotNull("sqlExpression")]
-    public override SqlExpression? ApplyTypeMapping(SqlExpression? sqlExpression, RelationalTypeMapping? typeMapping)
+    public override SqlExpression? ApplyTypeMapping(
+        SqlExpression? sqlExpression,
+        RelationalTypeMapping? typeMapping
+    )
     {
 #pragma warning disable IDE0046 // Convert to conditional expression
         if (sqlExpression == null
@@ -54,20 +57,30 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
         };
     }
 
-    private SqlExpression ApplyTypeMappingOnAtTimeZone(AtTimeZoneExpression atTimeZoneExpression, RelationalTypeMapping? typeMapping)
+    private SqlExpression ApplyTypeMappingOnAtTimeZone(
+        AtTimeZoneExpression atTimeZoneExpression,
+        RelationalTypeMapping? typeMapping
+    )
     {
         var operandTypeMapping = typeMapping is null
             ? null
             : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset)
                 ? typeMapping
                 : atTimeZoneExpression.Operand.Type == typeof(DateTime)
-                    ? _typeMappingSource.FindMapping(typeof(DateTime), "datetime2", precision: typeMapping.Precision)
+                    ? _typeMappingSource.FindMapping(
+                        typeof(DateTime),
+                        "datetime2",
+                        precision: typeMapping.Precision
+                    )
                     : null;
 
         return new AtTimeZoneExpression(
-            operandTypeMapping is null ? atTimeZoneExpression.Operand : ApplyTypeMapping(atTimeZoneExpression.Operand, operandTypeMapping),
+            operandTypeMapping is null
+                ? atTimeZoneExpression.Operand
+                : ApplyTypeMapping(atTimeZoneExpression.Operand, operandTypeMapping),
             atTimeZoneExpression.TimeZone,
             atTimeZoneExpression.Type,
-            typeMapping);
+            typeMapping
+        );
     }
 }

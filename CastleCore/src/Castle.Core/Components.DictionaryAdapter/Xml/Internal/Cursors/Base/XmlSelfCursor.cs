@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -25,7 +25,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public XmlSelfCursor(IXmlNode node, Type clrType)
         {
-            this.node    = node;
+            this.node = node;
             this.clrType = clrType;
             Reset();
         }
@@ -119,7 +119,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public event EventHandler Realized
         {
-            add    { node.Realized += value; }
+            add { node.Realized += value; }
             remove { node.Realized -= value; }
         }
 
@@ -171,9 +171,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public IXmlNode Save()
         {
-            return position == 0
-                ? new XmlSelfCursor(node.Save(), clrType) { position = 0 }
-                : this;
+            return position == 0 ? new XmlSelfCursor(node.Save(), clrType) { position = 0 } : this;
         }
 
         public IXmlCursor SelectSelf(Type clrType)
@@ -181,7 +179,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return new XmlSelfCursor(node, clrType);
         }
 
-        public IXmlCursor SelectChildren(IXmlKnownTypeMap knownTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public IXmlCursor SelectChildren(
+            IXmlKnownTypeMap knownTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
         {
             return node.SelectChildren(knownTypes, namespaces, flags);
         }
@@ -191,7 +193,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return node.SelectSubtree();
         }
 
-        public IXmlCursor Select(CompiledXPath path, IXmlIncludedTypeMap knownTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public IXmlCursor Select(
+            CompiledXPath path,
+            IXmlIncludedTypeMap knownTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
         {
             return node.Select(path, knownTypes, namespaces, flags);
         }

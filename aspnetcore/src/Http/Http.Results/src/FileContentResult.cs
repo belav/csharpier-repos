@@ -48,7 +48,8 @@ internal sealed partial class FileContentResult : FileResult, IResult
             EnableRangeProcessing,
             LastModified,
             EntityTag,
-            logger);
+            logger
+        );
 
         if (!serveBody)
         {
