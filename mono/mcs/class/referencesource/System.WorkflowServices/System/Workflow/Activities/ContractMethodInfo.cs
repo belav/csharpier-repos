@@ -10,8 +10,8 @@ namespace System.Workflow.Activities
     using System.Collections.Generic;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel;
     using System.Reflection;
+    using System.ServiceModel;
 
     internal sealed class ContractMethodInfo : MethodInfo
     {

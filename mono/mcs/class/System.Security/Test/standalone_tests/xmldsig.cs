@@ -19,7 +19,6 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
-
 using Mono.Security.X509;
 
 public class MyClass

@@ -24,8 +24,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {

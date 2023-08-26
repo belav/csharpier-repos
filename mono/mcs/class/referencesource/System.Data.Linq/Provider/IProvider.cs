@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Linq;
 using System.Data.Common;
-using System.Linq.Expressions;
+using System.Data.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Transactions;
-using System.Reflection;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Linq.Provider
 {

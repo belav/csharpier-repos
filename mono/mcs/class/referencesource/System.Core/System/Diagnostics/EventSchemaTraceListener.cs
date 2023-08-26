@@ -5,14 +5,14 @@
 //------------------------------------------------------------------------------
 
 using System;
-using Microsoft.Win32;
-using System.Text;
-using System.IO;
-using System.Globalization;
 using System.Collections;
-using System.Threading;
-using System.Security.Permissions;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
+using Microsoft.Win32;
 
 namespace System.Diagnostics
 {
@@ -522,8 +522,7 @@ namespace System.Diagnostics
             // Currently not tracing ProcessName as there is no place for it in the SystemProperties
             // Should we bother adding this to our own section?
             if (
-                eventCache != null
-                && ((TraceOptions.ProcessId | TraceOptions.ThreadId) & opts) != 0
+                eventCache != null && ((TraceOptions.ProcessId | TraceOptions.ThreadId) & opts) != 0
             )
             {
                 _InternalBuildRaw(writer, "<Execution ");

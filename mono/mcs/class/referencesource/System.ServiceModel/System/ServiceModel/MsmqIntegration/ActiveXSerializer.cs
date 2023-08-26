@@ -3,14 +3,14 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel.MsmqIntegration
 {
+    using System;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Text;
     using System.Threading;
-    using System.Runtime.Serialization;
-    using System.Diagnostics;
-    using System;
-    using System.IO;
-    using System.Globalization;
 
     class ActiveXSerializer
     {

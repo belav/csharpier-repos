@@ -14,12 +14,12 @@
 ===========================================================*/
 namespace System.Runtime.Remoting.Proxies
 {
-    using System.Runtime.Remoting;
     // Transparent proxy and Real proxy are vital pieces of the
     // remoting data structures. Transparent proxy magically
     // creates a message that represents a call on it and delegates
     // to the Real proxy to do the real remoting work.
     using System;
+    using System.Runtime.Remoting;
 
     internal sealed class __TransparentProxy
     {

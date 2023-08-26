@@ -8,9 +8,9 @@
 namespace System.Xml.Schema
 {
     using System;
-    using System.Xml;
     using System.Diagnostics;
     using System.Text;
+    using System.Xml;
 
     /// <summary>
     /// This enum specifies what format should be used when converting string to XsdDateTime

@@ -314,8 +314,7 @@ namespace System.Web.Security.AntiXss
                         char[] tweekedValue;
 
                         if (
-                            encoderTweak != null
-                            && encoderTweak(currentCharacter, out tweekedValue)
+                            encoderTweak != null && encoderTweak(currentCharacter, out tweekedValue)
                         )
                         {
                             builder.Append(tweekedValue);

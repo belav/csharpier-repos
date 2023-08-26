@@ -7,10 +7,10 @@ namespace System.ServiceModel.Activities.Configuration
     using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel.Configuration;
-    using System.ServiceModel.Activities.Description;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+    using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
     public class SqlWorkflowInstanceStoreElement : BehaviorExtensionElement

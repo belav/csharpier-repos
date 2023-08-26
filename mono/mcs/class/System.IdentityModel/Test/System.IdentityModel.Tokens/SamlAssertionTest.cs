@@ -34,7 +34,6 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.System.IdentityModel.Common;
 
 namespace MonoTests.System.IdentityModel.Tokens

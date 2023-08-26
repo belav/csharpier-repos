@@ -4,14 +4,14 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Xml;
-    using System.Runtime.Serialization;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Net.Security;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
+    using System.Xml;
 
     [DebuggerDisplay("Action={action}, Direction={direction}, MessageType={messageType}")]
     public class MessageDescription

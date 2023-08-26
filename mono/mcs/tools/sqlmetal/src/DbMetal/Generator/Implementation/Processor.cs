@@ -34,7 +34,6 @@ using DbLinq.Schema.Dbml;
 using DbLinq.Util;
 using DbLinq.Vendor;
 using DbMetal.Schema;
-
 using Mono.Options;
 
 namespace DbMetal.Generator.Implementation

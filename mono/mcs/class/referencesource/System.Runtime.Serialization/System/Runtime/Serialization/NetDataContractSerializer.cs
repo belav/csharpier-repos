@@ -5,18 +5,18 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Security;
     using System.Collections;
-    using System.Security.Permissions;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Formatters;
-    using System.Collections.Generic;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Xml;
 #if !NO_CONFIGURATION
     using System.Runtime.Serialization.Configuration;
 #endif
-    using System.Reflection;
 
     public sealed class NetDataContractSerializer : XmlObjectSerializer, IFormatter
     {

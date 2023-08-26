@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Security;
-using System.Collections.Specialized;
-using System.Configuration;
 using ClassConfiguration = System.Configuration.Configuration;
 
 //

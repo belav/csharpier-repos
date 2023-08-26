@@ -1,7 +1,7 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Mono.Debugger.Soft
 {

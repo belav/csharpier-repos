@@ -12,8 +12,8 @@ namespace System.ServiceModel.Security
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
 
     abstract class MessageSecurityProtocol : SecurityProtocol
@@ -717,8 +717,7 @@ namespace System.ServiceModel.Security
             }
             bool allSignaturesConfirmed = false;
             if (
-                receivedConfirmations != null
-                && sentSignatures.Count == receivedConfirmations.Count
+                receivedConfirmations != null && sentSignatures.Count == receivedConfirmations.Count
             )
             {
                 bool[] matchingSigIndexes = new bool[sentSignatures.Count];

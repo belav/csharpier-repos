@@ -8,13 +8,13 @@ namespace System.Net
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Globalization;
     using System.IO;
     using System.Net.Sockets;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading;
-    using System.ComponentModel;
 
     public sealed unsafe class HttpListenerResponse
         : /* BaseHttpResponse, */

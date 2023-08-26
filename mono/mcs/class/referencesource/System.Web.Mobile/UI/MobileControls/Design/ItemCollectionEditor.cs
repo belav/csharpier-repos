@@ -12,9 +12,9 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing.Design;
+    using System.Runtime.Serialization.Formatters;
     using System.Web.UI.MobileControls;
     using System.Web.UI.WebControls;
-    using System.Runtime.Serialization.Formatters;
 
     /// <summary>
     ///    <para>

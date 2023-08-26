@@ -5,17 +5,17 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
     using System.Text;
     using System.Threading;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Configuration;
 
     public class DuplexChannelFactory<TChannel> : ChannelFactory<TChannel>
     {

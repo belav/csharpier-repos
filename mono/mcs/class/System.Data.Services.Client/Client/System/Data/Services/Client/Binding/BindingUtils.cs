@@ -13,10 +13,10 @@
 namespace System.Data.Services.Client
 {
     #region Namespaces
+    using System.Collections;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using System.Collections;
     #endregion
 
     internal static class BindingUtils

@@ -13,14 +13,14 @@
 namespace System.Security.Policy
 {
     using System;
-    using System.Security.Util;
-    using System.Security;
     using System.Collections;
-    using System.Reflection;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
+    using System.Security.Util;
 
     //
     //This is a simple property bag used to describe connect back access.

@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Xml;
+    using System.Xml.Serialization;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
     struct ExtensibleSyndicationObject : IExtensibleSyndicationObject

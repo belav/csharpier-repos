@@ -1,27 +1,27 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
-    using System.Resources;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Windows.Forms.Design;
-    using System.Drawing.Design;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Interop;
-    using System.Text;
-    using System.Globalization;
-    using Microsoft.Win32;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Interop;
+    using Microsoft.Win32;
 
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
@@ -736,8 +736,7 @@ namespace System.Workflow.ComponentModel.Design
 
                 //Update the namespace selection in tree based on listview selection
                 if (
-                    !this.artifactListView.Focused
-                    || this.artifactListView.SelectedItems.Count == 0
+                    !this.artifactListView.Focused || this.artifactListView.SelectedItems.Count == 0
                 )
                     return;
 
@@ -1155,8 +1154,7 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     Assembly assembly = assemblyNode.Tag as Assembly;
                     if (
-                        assembly.FullName == assemblyName
-                        || assembly.GetName().Name == assemblyName
+                        assembly.FullName == assemblyName || assembly.GetName().Name == assemblyName
                     )
                     {
                         selectedAssemblyNode = assemblyNode;

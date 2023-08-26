@@ -31,7 +31,6 @@
 using System;
 using System.Collections;
 using System.IO;
-
 using Mono.Security.X509.Extensions;
 
 namespace Mono.Security.X509

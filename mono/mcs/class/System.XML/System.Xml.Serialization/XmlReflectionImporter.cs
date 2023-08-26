@@ -806,8 +806,7 @@ namespace System.Xml.Serialization
                 if (foundMap == null)
                     nameCount = -1;
                 else if (
-                    obmap.Equals(foundMap.ObjectMap)
-                    && typeData.Type == foundMap.TypeData.Type
+                    obmap.Equals(foundMap.ObjectMap) && typeData.Type == foundMap.TypeData.Type
                 )
                     return foundMap;
                 else

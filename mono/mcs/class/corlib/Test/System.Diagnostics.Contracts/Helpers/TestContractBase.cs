@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Diagnostics.Contracts.Internal;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
-using System.Diagnostics.Contracts;
-using System.Diagnostics;
-using System.Reflection;
-using System.Diagnostics.Contracts.Internal;
 
 namespace MonoTests.System.Diagnostics.Contracts.Helpers
 {

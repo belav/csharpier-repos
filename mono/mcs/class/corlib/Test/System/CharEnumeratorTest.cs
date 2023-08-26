@@ -7,8 +7,8 @@
 //   (C) 2002 Duco Fijma
 //
 
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

@@ -6,11 +6,11 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.Transactions;
-    using System.Runtime.Diagnostics;
 
     public abstract class ReceiveContext
     {

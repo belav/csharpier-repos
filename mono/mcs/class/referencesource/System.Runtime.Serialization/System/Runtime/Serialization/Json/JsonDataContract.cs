@@ -5,14 +5,14 @@
 namespace System.Runtime.Serialization.Json
 {
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Reflection;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Xml;
 
 #if USE_REFEMIT
     public class JsonDataContract

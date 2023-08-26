@@ -2,8 +2,8 @@
 // From test: Bug 348522
 //
 using System;
-using System.Reflection;
 using System.Globalization;
+using System.Reflection;
 
 public struct SimpleStruct
 {

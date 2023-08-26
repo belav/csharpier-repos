@@ -6,9 +6,9 @@ namespace System.ServiceModel.Discovery
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Xml;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime.Diagnostics;
+    using System.ServiceModel.Diagnostics;
+    using System.Xml;
 
     abstract class HelloOperationAsyncResult<TMessage> : AsyncResult
         where TMessage : class

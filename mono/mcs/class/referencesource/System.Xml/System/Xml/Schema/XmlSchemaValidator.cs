@@ -8,14 +8,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Versioning;
+using System.Text;
+using System.Threading;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Threading;
-using System.Runtime.Versioning;
 
 namespace System.Xml.Schema
 {
@@ -2990,10 +2990,7 @@ namespace System.Xml.Schema
                                 // both put in the hashtable, 1 reference, 1 not
                                 if (constraints[i].qualifiedTable != null)
                                 { //Will be null in cases when the keyref is outside the scope of the key, that is not allowed by our impl
-                                    if (
-                                        !ks.IsQualified()
-                                        || constraints[i].qualifiedTable.Contains(ks)
-                                    )
+                                    if (!ks.IsQualified() || constraints[i].qualifiedTable.Contains(ks))
                                     {
                                         continue;
                                     }

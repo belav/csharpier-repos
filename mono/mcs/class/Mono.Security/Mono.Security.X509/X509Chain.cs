@@ -34,12 +34,10 @@
 using System;
 using System.Security;
 using System.Security.Permissions;
-
+using Mono.Security.X509.Extensions;
 #if !INSIDE_CORLIB && !INSIDE_SYSTEM
 using System.Net;
 #endif
-
-using Mono.Security.X509.Extensions;
 
 namespace Mono.Security.X509
 {

@@ -1,14 +1,13 @@
 // Bridges the Mono and CoreFX FileSystemWatcher types.
 
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-
 using C = System.IO.CoreFX.FileSystemWatcher;
-using M = System.IO.FileSystemWatcher;
 using Handle = System.Object;
+using M = System.IO.FileSystemWatcher;
 
 namespace System.IO
 {

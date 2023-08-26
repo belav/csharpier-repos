@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Collections.ObjectModel;
     using WsdlNS = System.Web.Services.Description;
-    using System.ServiceModel.Channels;
 
     [XmlRoot(
         ElementName = MetadataStrings.MetadataExchangeStrings.MetadataReference,

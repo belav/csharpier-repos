@@ -2,11 +2,11 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Design;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.ComponentModel.Design;
-    using System.Diagnostics.CodeAnalysis;
 
     #region Class BindValidator
     internal static class BindValidatorHelper
@@ -1054,8 +1054,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
                             //it could be an indexer property that requires [..] part to get correctly resolved
                             if (
-                                memberInfo == null
-                                && path.StartsWith("[", StringComparison.Ordinal)
+                                memberInfo == null && path.StartsWith("[", StringComparison.Ordinal)
                             )
                             {
                                 string indexerPart = bind.Path.Substring(indexOfSeparator);

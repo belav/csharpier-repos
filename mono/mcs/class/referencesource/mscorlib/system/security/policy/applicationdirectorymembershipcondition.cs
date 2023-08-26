@@ -13,10 +13,10 @@
 namespace System.Security.Policy
 {
     using System;
-    using SecurityElement = System.Security.SecurityElement;
-    using System.Security.Policy;
-    using URLString = System.Security.Util.URLString;
     using System.Collections;
+    using System.Security.Policy;
+    using SecurityElement = System.Security.SecurityElement;
+    using URLString = System.Security.Util.URLString;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

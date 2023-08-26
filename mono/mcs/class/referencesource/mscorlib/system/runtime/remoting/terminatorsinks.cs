@@ -11,13 +11,13 @@
 namespace System.Runtime.Remoting.Messaging
 {
     using System;
-    using System.Threading;
+    using System.Collections;
+    using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting.Activation;
     using System.Runtime.Remoting.Channels;
     using System.Runtime.Remoting.Contexts;
-    using System.Collections;
-    using System.Globalization;
+    using System.Threading;
 
     //   Methods shared by all terminator sinks.
     //

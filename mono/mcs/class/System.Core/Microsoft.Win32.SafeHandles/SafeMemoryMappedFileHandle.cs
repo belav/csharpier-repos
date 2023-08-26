@@ -27,11 +27,11 @@
 //
 using System;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Permissions;
 using System.Security.Principal;
-using System.IO.MemoryMappedFiles;
 
 namespace Microsoft.Win32.SafeHandles
 {

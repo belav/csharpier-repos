@@ -9,8 +9,8 @@ namespace System.Xml.Schema
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     internal sealed class SchemaElementDecl : SchemaDeclBase, IDtdAttributeListInfo
     {

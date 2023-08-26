@@ -2,11 +2,11 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
-using System.Windows.Forms;
+using System.IO;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using System.Windows.Forms.RTF;
-using System.IO;
 
 namespace TextTestClass
 {

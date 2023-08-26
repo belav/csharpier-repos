@@ -9,11 +9,11 @@
 namespace System.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data.Objects;
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Collections.Generic;
-    using System.Data.Objects;
 
     /// <summary>
     /// This exception is thrown when a update operation violates the concurrency constraint.

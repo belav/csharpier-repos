@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml.Serialization;
 using System.Web.Services.Configuration;
+using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {

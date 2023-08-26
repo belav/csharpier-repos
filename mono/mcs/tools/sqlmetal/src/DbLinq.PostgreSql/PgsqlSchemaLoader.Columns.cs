@@ -40,8 +40,7 @@ namespace DbLinq.PostgreSql
         {
             // TODO: uncomment
             if ( /* mmConfig.useDomainTypes && */
-                domain_name != null
-            )
+                domain_name != null)
                 return domain_schema + "." + domain_name; //without precision - precision is already defined in CREATE DOMAIN
 
             if (column.Length != null)

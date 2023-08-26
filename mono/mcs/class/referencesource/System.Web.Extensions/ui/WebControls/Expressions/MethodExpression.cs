@@ -221,8 +221,7 @@
                 IQueryable queryable = result as IQueryable;
                 // Check if the user did a projection (changed the T in IQuerable<T>)
                 if (
-                    queryable == null
-                    || !queryable.ElementType.IsAssignableFrom(source.ElementType)
+                    queryable == null || !queryable.ElementType.IsAssignableFrom(source.ElementType)
                 )
                 {
                     throw new InvalidOperationException(

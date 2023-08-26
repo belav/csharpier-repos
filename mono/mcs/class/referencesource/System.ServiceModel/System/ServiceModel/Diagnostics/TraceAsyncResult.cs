@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    using System.Runtime;
     using System.Diagnostics;
+    using System.Runtime;
 
     abstract class TraceAsyncResult : AsyncResult
     {

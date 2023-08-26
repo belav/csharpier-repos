@@ -5,14 +5,14 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using System.Runtime.Serialization;
     using System.Activities.DynamicUpdate;
     using System.Activities.Statements;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract(Name = XD.Runtime.ActivityInstanceMap, Namespace = XD.Runtime.Namespace)]
     class ActivityInstanceMap
@@ -648,8 +648,7 @@ namespace System.Activities.Runtime
 
                     IInstanceUpdatable activity = instance.Activity as IInstanceUpdatable;
                     if (
-                        activity != null
-                        && instance.SubState == ActivityInstance.Substate.Executing
+                        activity != null && instance.SubState == ActivityInstance.Substate.Executing
                     )
                     {
                         NativeActivityUpdateContext updateContext = new NativeActivityUpdateContext(
@@ -726,8 +725,7 @@ namespace System.Activities.Runtime
                 {
                     ActivityInstance instance = participant.InstanceList[j] as ActivityInstance;
                     if (
-                        instance == null
-                        || instance.SubState != ActivityInstance.Substate.Executing
+                        instance == null || instance.SubState != ActivityInstance.Substate.Executing
                     )
                     {
                         // if the given ActivityInstance is not in Substate.Executing,

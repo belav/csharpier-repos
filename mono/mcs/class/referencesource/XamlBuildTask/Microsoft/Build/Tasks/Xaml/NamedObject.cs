@@ -6,9 +6,9 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml.Linq;
     using System.Xaml;
     using System.Xaml.Schema;
+    using System.Xml.Linq;
     using XamlBuildTask;
 
     public class NamedObject

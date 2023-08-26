@@ -19,15 +19,15 @@ using System.Diagnostics.Contracts;
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Reflection;
     using System.Globalization;
-    using System.Runtime.Serialization.Formatters;
-    using System.Threading;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters;
     using System.Text;
+    using System.Threading;
 
     internal sealed class __BinaryParser
     {

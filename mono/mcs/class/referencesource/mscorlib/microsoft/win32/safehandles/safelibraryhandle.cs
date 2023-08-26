@@ -10,8 +10,6 @@
 ============================================================*/
 namespace Microsoft.Win32
 {
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
@@ -21,6 +19,8 @@ namespace Microsoft.Win32
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     [System.Security.SecurityCritical] // auto-generated
     [HostProtectionAttribute(MayLeakOnAbort = true)]

@@ -7,21 +7,21 @@
 namespace System.Web.UI
 {
     using System;
-    using System.IO;
-    using System.Text;
     using System.Collections;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Globalization;
+    using System.IO;
+    using System.Security.Permissions;
+    using System.Text;
     using System.Web;
-    using System.Web.Util;
-    using System.Web.UI.HtmlControls;
-    using System.Web.UI.WebControls;
     using System.Web.Caching;
     using System.Web.Compilation;
     using System.Web.Configuration;
-    using System.Security.Permissions;
+    using System.Web.UI.HtmlControls;
+    using System.Web.UI.WebControls;
+    using System.Web.Util;
 
     // Keeps track of one call to Page Register* API
     // The semantics of the fields depends to the call type

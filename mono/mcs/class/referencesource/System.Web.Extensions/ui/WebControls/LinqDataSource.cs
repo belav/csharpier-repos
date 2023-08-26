@@ -6,7 +6,6 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.Web.UI.WebControls.Expressions;
     using System.Collections;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -17,6 +16,7 @@ namespace System.Web.UI.WebControls
     using System.Web.DynamicData;
     using System.Web.Resources;
     using System.Web.UI;
+    using System.Web.UI.WebControls.Expressions;
 
     // Represents a data source that applies LINQ expressions against a business object in order to perform the Select
     // operation.  When the Delete, Insert and Update operations are enabled the business object, specified in

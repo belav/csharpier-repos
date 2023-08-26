@@ -825,8 +825,7 @@ namespace System.Data.EntityModel.Emitters
             PrimitiveTypeKind type;
             object value = property.DefaultValue;
             if (
-                value != null
-                && Utils.TryGetPrimitiveTypeKind(property.TypeUsage.EdmType, out type)
+                value != null && Utils.TryGetPrimitiveTypeKind(property.TypeUsage.EdmType, out type)
             )
             {
                 if (!property.Nullable && value.Equals(TypeSystem.GetDefaultValue(value.GetType())))

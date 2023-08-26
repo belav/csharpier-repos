@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.Net.Security;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Security;
-    using System.Net.Security;
 
     public abstract class MessageContractMemberAttribute : Attribute
     {

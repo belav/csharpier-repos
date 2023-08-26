@@ -146,8 +146,7 @@
             }
 
             if (
-                bindingContext.Model != null
-                && !requiredType.IsInstanceOfType(bindingContext.Model)
+                bindingContext.Model != null && !requiredType.IsInstanceOfType(bindingContext.Model)
             )
             {
                 throw Error.ModelBinderUtil_ModelInstanceIsWrong(

@@ -7,8 +7,8 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

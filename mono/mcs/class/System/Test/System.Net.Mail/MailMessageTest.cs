@@ -6,11 +6,11 @@
 //
 // (C) 2005, 2006 John Luke
 //
-using NUnit.Framework;
 using System;
 using System.IO;
-using System.Text;
 using System.Net.Mail;
+using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Mail
 {

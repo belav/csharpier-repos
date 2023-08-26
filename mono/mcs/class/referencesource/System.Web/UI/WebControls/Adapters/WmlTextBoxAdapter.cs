@@ -8,8 +8,8 @@
 
 namespace System.Web.UI.WebControls.Adapters
 {
-    using System.Web.UI.Adapters;
     using System.Globalization;
+    using System.Web.UI.Adapters;
     using System.Web.UI.WebControls;
 
     // Provides adaptive rendering for the TextBox control.

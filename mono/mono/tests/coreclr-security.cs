@@ -1,7 +1,7 @@
-using System.Security;
 using System;
-using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security;
 
 [SecurityCriticalAttribute]
 public class CClass

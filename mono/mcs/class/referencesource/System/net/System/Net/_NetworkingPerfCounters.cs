@@ -7,16 +7,16 @@
 namespace System.Net
 {
     using System;
-    using System.Reflection;
-    using System.Net.Sockets;
-    using System.Diagnostics;
-    using System.Security.Permissions;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Text;
-    using System.Runtime.Versioning;
-    using System.Threading;
     using System.Net.Configuration;
+    using System.Net.Sockets;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     internal enum NetworkingPerfCounterName
     {

@@ -6,8 +6,8 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
     using System.Net.Sockets;
-    using System.ServiceModel.Channels;
     using System.Security.Authentication.ExtendedProtection.Configuration;
+    using System.ServiceModel.Channels;
 
     public sealed partial class TcpTransportElement : ConnectionOrientedTransportElement
     {

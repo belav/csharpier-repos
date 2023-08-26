@@ -12,9 +12,9 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     /*=================================MLangCodePageEncoding==================================
     ** This class is here only to deserialize the MLang classes from Everett (V1.1) into

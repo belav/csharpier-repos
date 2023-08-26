@@ -37,7 +37,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-
 using QName = System.Xml.XmlQualifiedName;
 using WS = System.Web.Services.Description;
 

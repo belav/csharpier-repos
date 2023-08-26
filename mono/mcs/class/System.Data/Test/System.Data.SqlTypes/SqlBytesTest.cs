@@ -28,13 +28,13 @@
 //
 
 
-using NUnit.Framework;
 using System;
-using System.IO;
-using System.Xml;
 using System.Data.SqlTypes;
-using System.Threading;
 using System.Globalization;
+using System.IO;
+using System.Threading;
+using System.Xml;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.SqlTypes
 {

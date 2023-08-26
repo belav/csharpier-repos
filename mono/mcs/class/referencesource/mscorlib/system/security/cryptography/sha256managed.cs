@@ -15,8 +15,8 @@
 namespace System.Security.Cryptography
 {
     using System;
-    using System.Security;
     using System.Diagnostics.Contracts;
+    using System.Security;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class SHA256Managed : SHA256

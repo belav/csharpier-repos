@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
     using System.CodeDom;
-    using System.ServiceModel.Security;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Net.Security;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.Security;
+    using System.Xml;
 
     [DebuggerDisplay("Name={name}, Action={action}, DetailType={detailType}")]
     public class FaultDescription

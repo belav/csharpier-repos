@@ -17,10 +17,10 @@ namespace System.Data.Objects.Internal
     using System.Data.Metadata.Edm;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using System.Data.Objects.ELinq;
     using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
-    using System.Data.Objects.ELinq;
     using System.Runtime.CompilerServices;
 
     /// <summary>

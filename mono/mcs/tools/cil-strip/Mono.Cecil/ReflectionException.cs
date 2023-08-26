@@ -29,7 +29,6 @@
 namespace Mono.Cecil
 {
     using System;
-
     using Mono.Cecil.Metadata;
 
     internal sealed class ReflectionException : MetadataFormatException

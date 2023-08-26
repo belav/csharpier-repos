@@ -27,8 +27,8 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Policy;
+using System.Security.Cryptography.X509Certificates;
 
 namespace System.IdentityModel.Tokens
 {

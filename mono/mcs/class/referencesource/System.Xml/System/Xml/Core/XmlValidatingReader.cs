@@ -6,12 +6,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.IO;
-using System.Text;
-using System.Xml.Schema;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Permissions;
+using System.Text;
+using System.Xml.Schema;
 
 namespace System.Xml
 {

@@ -7,8 +7,8 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel; //Component
 using System.Collections; //ICollection
+using System.ComponentModel; //Component
 using System.Data;
 using System.Data.Common;
 using System.Globalization;

@@ -27,7 +27,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 
 namespace DbLinq.Data.Linq.Sugar.Expressions

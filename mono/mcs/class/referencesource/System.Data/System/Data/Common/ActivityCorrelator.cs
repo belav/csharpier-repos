@@ -9,9 +9,9 @@ namespace System.Data.Common
 {
     using System;
     using System.Data;
-    using System.Threading;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Threading;
 
     /// <summary>
     /// This class defines the data strucutre for ActvitiyId used for correlated tracing between client (bid trace event) and server (XEvent).

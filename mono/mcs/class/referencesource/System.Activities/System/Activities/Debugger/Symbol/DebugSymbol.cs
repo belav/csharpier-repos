@@ -5,8 +5,8 @@ namespace System.Activities.Debugger.Symbol
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Xaml;
     using System.Runtime;
+    using System.Xaml;
 
     [Fx.Tag.XamlVisible(false)]
     public static class DebugSymbol

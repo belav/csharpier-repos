@@ -13,8 +13,8 @@ namespace System.Web.UI
 {
     using System;
     using System.ComponentModel;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
 
     public sealed class PostBackOptions
     {

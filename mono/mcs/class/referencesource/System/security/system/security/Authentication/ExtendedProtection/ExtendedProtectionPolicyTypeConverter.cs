@@ -57,8 +57,7 @@ namespace System.Security.Authentication.ExtendedProtection
 
                         object[] customServiceNames = null;
                         if (
-                            policy.CustomServiceNames != null
-                            && policy.CustomServiceNames.Count > 0
+                            policy.CustomServiceNames != null && policy.CustomServiceNames.Count > 0
                         )
                         {
                             customServiceNames = new object[policy.CustomServiceNames.Count];

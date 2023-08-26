@@ -11,10 +11,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Data;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Diagnostics;
 
 namespace System.Data.EntityModel.Emitters
 {

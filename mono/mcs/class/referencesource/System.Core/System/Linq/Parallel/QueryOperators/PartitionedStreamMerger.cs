@@ -11,8 +11,8 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-using System.Threading.Tasks;
 using System.Diagnostics.Contracts;
+using System.Threading.Tasks;
 
 namespace System.Linq.Parallel
 {

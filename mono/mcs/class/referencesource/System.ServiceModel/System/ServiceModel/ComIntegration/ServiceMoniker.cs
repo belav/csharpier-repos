@@ -4,15 +4,15 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.Runtime.InteropServices.ComTypes;
-    using Microsoft.Win32;
-    using System.Reflection;
     using System.Collections.Generic;
-    using System.Threading;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Services;
-    using System.Diagnostics;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
+    using Microsoft.Win32;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [System.Runtime.InteropServices.Guid("CE39D6F3-DAB7-41b3-9F7D-BD1CC4E92399")]

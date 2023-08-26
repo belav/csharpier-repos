@@ -4,19 +4,19 @@
 
 namespace System.ServiceModel.Activities.Description
 {
+    using System.Activities;
     using System.Activities.Statements;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.DurableInstancing;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.DurableInstancing;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.ServiceModel.Diagnostics;
-    using System.Activities;
+    using System.ServiceModel.Dispatcher;
+    using System.Threading;
 
     [Obsolete(
         "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"

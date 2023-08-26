@@ -29,8 +29,8 @@
 //
 
 using System.ComponentModel;
-using System.Xml.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace System.Web.Services.Protocols
 {

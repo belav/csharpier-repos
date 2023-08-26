@@ -7,10 +7,10 @@ namespace System.Activities.Runtime
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Threading;
-    using System.Runtime.Diagnostics;
 
     [DataContract(Name = XD.Runtime.Scheduler, Namespace = XD.Runtime.Namespace)]
     class Scheduler

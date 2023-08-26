@@ -1,13 +1,13 @@
 namespace System.Net.NetworkInformation
 {
-    using System.Net;
-    using System.Net.NetworkInformation;
-    using System.Net.Sockets;
     using System.Collections;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Threading;
+    using System.Net;
+    using System.Net.NetworkInformation;
+    using System.Net.Sockets;
     using System.Runtime.InteropServices;
+    using System.Threading;
 
     [Flags]
     internal enum StartIPOptions

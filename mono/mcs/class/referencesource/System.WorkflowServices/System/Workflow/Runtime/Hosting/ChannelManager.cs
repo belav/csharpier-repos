@@ -9,13 +9,13 @@ namespace System.Workflow.Runtime.Hosting
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Diagnostics;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Workflow.Activities;
-    using System.Diagnostics;
     using System.Workflow.ComponentModel;
 
     class ChannelManager
@@ -312,8 +312,7 @@ namespace System.Workflow.Runtime.Hosting
                 if (this.factoryCache.TryGetValue(address, out factory))
                 {
                     if (
-                        factory == null
-                        || factory.ChannelFactory.State != CommunicationState.Opened
+                        factory == null || factory.ChannelFactory.State != CommunicationState.Opened
                     )
                     {
                         this.factoryCache.Remove(address);

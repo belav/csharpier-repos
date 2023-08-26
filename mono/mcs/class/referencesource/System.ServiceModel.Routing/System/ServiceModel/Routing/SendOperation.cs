@@ -6,11 +6,11 @@ namespace System.ServiceModel.Routing
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
+    using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Transactions;
-    using System.Runtime;
-    using System.Configuration;
 
     class SendOperation
     {

@@ -17,8 +17,8 @@
 
 namespace System.Text.RegularExpressions
 {
-    using System.Collections.Generic;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
 
     internal sealed class RegexWriter

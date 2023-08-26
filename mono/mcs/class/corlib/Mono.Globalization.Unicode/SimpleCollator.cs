@@ -68,10 +68,9 @@
 using System;
 using System.Collections;
 using System.Globalization;
-
+using COpt = System.Globalization.CompareOptions;
 using Uni = Mono.Globalization.Unicode.MSCompatUnicodeTable;
 using UUtil = Mono.Globalization.Unicode.MSCompatUnicodeTableUtil;
-using COpt = System.Globalization.CompareOptions;
 
 namespace Mono.Globalization.Unicode
 {

@@ -12,7 +12,6 @@ using System;
 using System.IO;
 using System.Text;
 using NUnit.Framework;
-
 using Buffer = System.Text.DecoderReplacementFallbackBuffer;
 
 namespace MonoTests.System.Text

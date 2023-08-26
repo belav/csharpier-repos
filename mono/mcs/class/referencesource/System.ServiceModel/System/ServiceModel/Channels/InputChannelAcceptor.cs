@@ -5,9 +5,9 @@ namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class InputChannelAcceptor : SingletonChannelAcceptor<IInputChannel, InputChannel, Message>
     {

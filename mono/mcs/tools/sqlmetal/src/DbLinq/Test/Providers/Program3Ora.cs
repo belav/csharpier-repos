@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 #if ODP
 using Test_NUnit_OracleODP;
 #else

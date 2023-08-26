@@ -6,12 +6,12 @@
 //
 // <OWNER>Microsoft</OWNER>
 
-using System.Security;
 using System.Collections;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
-using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
+using System.Security;
 using System.Windows.Input;
 
 namespace System.Runtime.InteropServices.WindowsRuntime

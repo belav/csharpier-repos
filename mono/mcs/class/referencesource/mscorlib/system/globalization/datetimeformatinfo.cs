@@ -7,16 +7,16 @@
 namespace System.Globalization
 {
     using System;
-    using System.Security;
-    using System.Threading;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
-    using System.Text;
     using System.Diagnostics.Contracts;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     //
     // Flags used to indicate different styles of month names.
@@ -1109,8 +1109,7 @@ namespace System.Globalization
                         Environment.GetResourceString("InvalidOperation_ReadOnly")
                     );
                 if (
-                    value >= CalendarWeekRule.FirstDay
-                    && value <= CalendarWeekRule.FirstFourDayWeek
+                    value >= CalendarWeekRule.FirstDay && value <= CalendarWeekRule.FirstFourDayWeek
                 )
                 {
                     calendarWeekRule = (int)value;

@@ -219,8 +219,7 @@ namespace System.ServiceModel.Channels
             UdpUtility.ThrowIfNoSocketSupport();
 
             if (
-                via.HostNameType == UriHostNameType.IPv6
-                || via.HostNameType == UriHostNameType.IPv4
+                via.HostNameType == UriHostNameType.IPv6 || via.HostNameType == UriHostNameType.IPv4
             )
             {
                 UdpUtility.ThrowOnUnsupportedHostNameType(via);

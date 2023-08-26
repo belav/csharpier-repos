@@ -33,7 +33,6 @@ namespace Mono.Cecil
     using System.Globalization;
     using System.Security.Cryptography;
     using System.Text;
-
     using Mono.Cecil.Metadata;
 
     internal class AssemblyNameReference

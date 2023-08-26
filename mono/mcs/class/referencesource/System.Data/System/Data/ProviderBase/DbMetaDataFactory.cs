@@ -180,9 +180,7 @@ namespace System.Data.ProviderBase
                 DbParameter restrictionParameter = command.CreateParameter();
 
                 if (
-                    (restrictions != null)
-                    && (restrictions.Length > i)
-                    && (restrictions[i] != null)
+                    (restrictions != null) && (restrictions.Length > i) && (restrictions[i] != null)
                 )
                 {
                     restrictionParameter.Value = restrictions[i];

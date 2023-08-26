@@ -8,10 +8,10 @@ namespace System.Activities.Statements
     using System.Activities.DynamicUpdate;
     using System.Activities.Validation;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.Collections;
     using System.Windows.Markup;
-    using System.Collections.ObjectModel;
 
     [ContentProperty("Action")]
     public sealed class InvokeAction : NativeActivity

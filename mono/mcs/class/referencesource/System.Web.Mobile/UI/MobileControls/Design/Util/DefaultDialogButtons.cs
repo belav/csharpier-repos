@@ -13,8 +13,8 @@
 namespace System.Web.UI.Design.MobileControls.Util
 {
     using System;
-    using System.Drawing;
     using System.ComponentModel;
+    using System.Drawing;
     using System.Windows.Forms;
 
     [System.Security.Permissions.SecurityPermission(

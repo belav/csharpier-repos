@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Text;
+    using System.IO;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Security;
-    using System.IO;
     using System.ServiceModel.Diagnostics;
+    using System.Text;
     using System.Threading;
 
     class TracingConnectionInitiator : IConnectionInitiator

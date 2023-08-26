@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
-    using System.Xml;
-    using System.Runtime.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.ServiceModel;
+    using System.Xml;
 
     abstract class TransportOutputChannel : OutputChannel
     {

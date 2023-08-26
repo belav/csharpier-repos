@@ -14,11 +14,11 @@ namespace System.Configuration
     using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Xml;
-    using System.Runtime.Versioning;
 
     internal sealed class MgmtConfigurationRecord : BaseConfigurationRecord
     {
@@ -2095,16 +2095,14 @@ namespace System.Configuration
                             addGroupUpdate = true;
                         }
                         else if (
-                            configSectionGroup != null
-                            && configSectionGroup.IsDeclarationRequired
+                            configSectionGroup != null && configSectionGroup.IsDeclarationRequired
                         )
                         {
                             // The section group is declared in this config file
                             addGroupUpdate = true;
                         }
                         else if (
-                            factoryRecord.FactoryTypeName != null
-                            || configSectionGroup != null
+                            factoryRecord.FactoryTypeName != null || configSectionGroup != null
                         )
                         {
                             FactoryRecord parentFactoryRecord = null;
@@ -4263,8 +4261,7 @@ namespace System.Configuration
                             else if (!elementLocationPathApplies && !IsLocationConfig)
                             {
                                 if (
-                                    _removedSections != null
-                                    && _removedSections.Contains(configKey)
+                                    _removedSections != null && _removedSections.Contains(configKey)
                                 )
                                 {
                                     removedSectionOrGroup = true;

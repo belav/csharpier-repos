@@ -11,6 +11,7 @@ namespace System.ServiceModel.Security.Tokens
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
@@ -21,17 +22,15 @@ namespace System.ServiceModel.Security.Tokens
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
+    using System.Text;
     using System.Xml;
-
     using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
     using SafeNativeMethods = System.ServiceModel.ComIntegration.SafeNativeMethods;
     using Win32Error = System.ServiceModel.ComIntegration.Win32Error;
-    using WSTrustFeb2005Constants = System.IdentityModel.Protocols.WSTrust.WSTrustFeb2005Constants;
     using WSTrust13Constants = System.IdentityModel.Protocols.WSTrust.WSTrust13Constants;
     using WSTrust14Constants = System.IdentityModel.Protocols.WSTrust.WSTrust14Constants;
-    using System.IO;
-    using System.Text;
+    using WSTrustFeb2005Constants = System.IdentityModel.Protocols.WSTrust.WSTrustFeb2005Constants;
 
     public class IssuedSecurityTokenProvider : SecurityTokenProvider, ICommunicationObject
     {

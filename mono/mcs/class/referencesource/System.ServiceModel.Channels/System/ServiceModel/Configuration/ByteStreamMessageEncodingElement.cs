@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.Xml;
-    using System.Diagnostics.CodeAnalysis;
 
     public sealed partial class ByteStreamMessageEncodingElement : BindingElementExtensionElement
     {

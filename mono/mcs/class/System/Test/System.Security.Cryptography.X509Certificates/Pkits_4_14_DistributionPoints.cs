@@ -28,10 +28,9 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.Reflection;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

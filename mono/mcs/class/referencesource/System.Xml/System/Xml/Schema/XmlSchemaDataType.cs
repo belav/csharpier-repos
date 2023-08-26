@@ -5,12 +5,12 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System.Collections;
-using System.Diagnostics;
 using System.ComponentModel;
-using System.Xml;
-using System.IO;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace System.Xml.Schema
 {

@@ -11,10 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Query.PlanCompiler;
-using System.Globalization;
-using System.Text;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Xml;
 using md = System.Data.Metadata.Edm;
 

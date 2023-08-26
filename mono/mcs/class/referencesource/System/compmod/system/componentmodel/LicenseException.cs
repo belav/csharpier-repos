@@ -6,11 +6,11 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Represents the exception thrown when a component cannot be granted a license.</para>

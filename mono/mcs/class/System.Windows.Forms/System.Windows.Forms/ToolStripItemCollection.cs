@@ -26,10 +26,10 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
@@ -133,8 +133,7 @@ namespace System.Windows.Forms
             value.InternalOwner = owner;
 
             if (
-                value is ToolStripMenuItem
-                && (value as ToolStripMenuItem).ShortcutKeys != Keys.None
+                value is ToolStripMenuItem && (value as ToolStripMenuItem).ShortcutKeys != Keys.None
             )
                 ToolStripManager.AddToolStripMenuItem((ToolStripMenuItem)value);
 
@@ -273,8 +272,7 @@ namespace System.Windows.Forms
                 throw new ArgumentNullException("value");
 
             if (
-                value is ToolStripMenuItem
-                && (value as ToolStripMenuItem).ShortcutKeys != Keys.None
+                value is ToolStripMenuItem && (value as ToolStripMenuItem).ShortcutKeys != Keys.None
             )
                 ToolStripManager.AddToolStripMenuItem((ToolStripMenuItem)value);
 

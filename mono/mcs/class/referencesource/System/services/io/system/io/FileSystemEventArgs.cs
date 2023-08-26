@@ -6,10 +6,9 @@
 
 namespace System.IO
 {
+    using System;
     using System.Diagnostics;
     using System.Security.Permissions;
-
-    using System;
 
     /// <devdoc>
     /// <para>Provides data for the directory events: <see cref='System.IO.FileSystemWatcher.Changed'/>, <see cref='System.IO.FileSystemWatcher.Created'/>, <see cref='System.IO.FileSystemWatcher.Deleted'/>.</para>

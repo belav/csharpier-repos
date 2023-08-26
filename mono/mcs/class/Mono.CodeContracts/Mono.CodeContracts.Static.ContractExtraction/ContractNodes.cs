@@ -228,9 +228,7 @@ namespace Mono.CodeContracts.Static.ContractExtraction
             if (method == null)
                 return false;
             if (
-                IsPlainPrecondition(method)
-                || IsPostCondition(method)
-                || IsEndContractBlock(method)
+                IsPlainPrecondition(method) || IsPostCondition(method) || IsEndContractBlock(method)
             )
                 return true;
 

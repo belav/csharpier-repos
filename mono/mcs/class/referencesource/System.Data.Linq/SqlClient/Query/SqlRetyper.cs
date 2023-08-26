@@ -393,8 +393,7 @@ namespace System.Data.Linq.SqlClient
                         );
                     }
                     else if (
-                        arg2.NodeType == SqlNodeType.ClientParameter
-                        && arg2.SqlType != arg1.SqlType
+                        arg2.NodeType == SqlNodeType.ClientParameter && arg2.SqlType != arg1.SqlType
                     )
                     {
                         SqlClientParameter cp = (SqlClientParameter)arg2;
@@ -491,15 +490,13 @@ namespace System.Data.Linq.SqlClient
                     arg1 = CoerceValueForExpression((SqlValue)arg1, arg2);
                 }
                 else if (
-                    arg2.NodeType == SqlNodeType.ClientParameter
-                    && arg2.SqlType != arg1.SqlType
+                    arg2.NodeType == SqlNodeType.ClientParameter && arg2.SqlType != arg1.SqlType
                 )
                 {
                     ((SqlClientParameter)arg2).SetSqlType(arg1.SqlType);
                 }
                 else if (
-                    arg1.NodeType == SqlNodeType.ClientParameter
-                    && arg1.SqlType != arg2.SqlType
+                    arg1.NodeType == SqlNodeType.ClientParameter && arg1.SqlType != arg2.SqlType
                 )
                 {
                     ((SqlClientParameter)arg1).SetSqlType(arg2.SqlType);

@@ -15,10 +15,10 @@ namespace System.Data.Services.Client
     #region Namespaces.
 
     using System;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
@@ -276,8 +276,7 @@ namespace System.Data.Services.Client
                             "lastExpression != null -- the initilizer has been visited, and cannot be empty, and the only expressions that are allowed can be formed off the parameter, so this is always correlatd"
                         );
                         if (
-                            lastExpression != null
-                            && (lastExpression.Member.Name != ma.Member.Name)
+                            lastExpression != null && (lastExpression.Member.Name != ma.Member.Name)
                         )
                         {
                             throw new NotSupportedException(

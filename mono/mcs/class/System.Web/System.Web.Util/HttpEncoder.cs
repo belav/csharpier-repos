@@ -446,8 +446,7 @@ namespace System.Web.Util
                     {
                         string key = entity.ToString();
                         if (
-                            key.Length > 1
-                            && Entities.ContainsKey(key.Substring(1, key.Length - 2))
+                            key.Length > 1 && Entities.ContainsKey(key.Substring(1, key.Length - 2))
                         )
                             key = Entities[key.Substring(1, key.Length - 2)].ToString();
 

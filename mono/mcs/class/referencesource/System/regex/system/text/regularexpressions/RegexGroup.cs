@@ -10,8 +10,8 @@
 
 namespace System.Text.RegularExpressions
 {
-    using System.Security.Permissions;
     using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     /// <devdoc>
     ///    Group

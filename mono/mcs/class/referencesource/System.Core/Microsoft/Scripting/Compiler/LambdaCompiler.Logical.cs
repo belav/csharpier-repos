@@ -18,7 +18,6 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
 using System.Reflection.Emit;
-
 #if SILVERLIGHT
 using System.Core;
 #endif

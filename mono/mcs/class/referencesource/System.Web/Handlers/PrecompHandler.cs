@@ -18,8 +18,8 @@ namespace System.Web.Handlers
 {
     using System;
     using System.Web;
-    using System.Web.UI;
     using System.Web.Compilation;
+    using System.Web.UI;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

@@ -34,9 +34,9 @@
 //
 
 
-using NUnit.Framework;
 using System;
 using System.Data;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {

@@ -30,13 +30,12 @@
 
 // Note: class exists in 1.x but has no public ctor
 
-using NUnit.Framework;
-
 using System;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Web
 {

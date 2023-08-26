@@ -30,9 +30,9 @@
 //
 
 using System;
-using RfcLdapMessage = Novell.Directory.Ldap.Rfc2251.RfcLdapMessage;
 using ExtResponseFactory = Novell.Directory.Ldap.Utilclass.ExtResponseFactory;
 using IntermediateResponseFactory = Novell.Directory.Ldap.Utilclass.IntermediateResponseFactory;
+using RfcLdapMessage = Novell.Directory.Ldap.Rfc2251.RfcLdapMessage;
 
 namespace Novell.Directory.Ldap
 {

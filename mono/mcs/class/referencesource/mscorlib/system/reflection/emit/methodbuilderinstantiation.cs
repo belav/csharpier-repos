@@ -9,10 +9,10 @@
 namespace System.Reflection.Emit
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
 
     internal sealed class MethodBuilderInstantiation : MethodInfo
     {

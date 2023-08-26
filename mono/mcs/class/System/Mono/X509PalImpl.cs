@@ -25,8 +25,6 @@
 // THE SOFTWARE.
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MonoSecurity::Mono.Security;
-using MonoSecurity::Mono.Security.Authenticode;
 #else
 using Mono.Security;
 #if !MONOTOUCH_WATCH
@@ -34,12 +32,13 @@ using Mono.Security.Authenticode;
 #endif
 #endif
 
-using System;
-using System.IO;
-using System.Text;
+using System;using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Microsoft.Win32.SafeHandles;
+using MonoSecurity::Mono.Security;
+using MonoSecurity::Mono.Security.Authenticode;
 
 namespace Mono
 {

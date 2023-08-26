@@ -1,10 +1,10 @@
 using System;
-using System.Net.Sockets;
-using System.Net;
-using System.Threading.Tasks;
-using System.Security.Permissions;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Permissions;
+using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {

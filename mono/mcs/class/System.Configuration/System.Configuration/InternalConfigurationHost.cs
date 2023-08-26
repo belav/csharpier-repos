@@ -27,10 +27,10 @@
 //
 
 using System;
-using System.IO;
-using System.Security;
 using System.Configuration.Internal;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security;
 
 namespace System.Configuration
 {
@@ -441,8 +441,7 @@ namespace System.Configuration
             }
 
             if (
-                locationSubPath == "exe"
-                || locationSubPath == null && map.ExeConfigFilename != null
+                locationSubPath == "exe" || locationSubPath == null && map.ExeConfigFilename != null
             )
             {
                 configPath = "exe";

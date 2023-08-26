@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Globalization;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.Configuration;
-    using System.Collections.Generic;
-    using System.Globalization;
 
     public sealed partial class MessageLoggingElement : ConfigurationElement
     {

@@ -17,12 +17,15 @@ namespace System.Runtime.Remoting.Messaging
 {
     using System;
     using System.Collections;
-    using System.Threading;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Activation;
-    using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Channels;
+    using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Metadata;
     using System.Runtime.Remoting.Metadata.W3cXsd2001;
     using System.Runtime.Remoting.Proxies;
@@ -30,13 +33,10 @@ namespace System.Runtime.Remoting.Messaging
     using System.Runtime.Serialization.Formatters;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Versioning;
-    using System.Reflection;
-    using System.Text;
-    using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
     using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     //+=======================================================================
     //

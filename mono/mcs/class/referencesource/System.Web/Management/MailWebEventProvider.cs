@@ -6,17 +6,17 @@
 
 namespace System.Web.Management
 {
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Provider;
-    using System.Collections.Specialized;
-    using System.Web.Util;
-    using System.Net.Mail;
     using System.Globalization;
-    using System.Web.Configuration;
-    using System.Text;
     using System.IO;
+    using System.Net.Mail;
     using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Configuration;
+    using System.Web.Util;
 
     /*
         The class MailWebEventProvider is supposed to be used internally.  But if I don't mark it public,
@@ -61,9 +61,7 @@ namespace System.Web.Management
             ProviderUtil.GetAndRemoveStringAttribute(config, "bcc", name, ref _bcc);
 
             if (
-                String.IsNullOrEmpty(_to)
-                && String.IsNullOrEmpty(_cc)
-                && String.IsNullOrEmpty(_bcc)
+                String.IsNullOrEmpty(_to) && String.IsNullOrEmpty(_cc) && String.IsNullOrEmpty(_bcc)
             )
             {
                 throw new ConfigurationErrorsException(

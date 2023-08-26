@@ -1,11 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
-using System.Collections.Generic;
 using System.Text;
-using System.Diagnostics;
+using System.Threading;
 
 namespace Mono.Debugger.Soft
 {

@@ -8,18 +8,18 @@ namespace System.Globalization
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Principal;
     using System.Text;
     using System.Threading;
 #if !FEATURE_CORECLR
     using System.Reflection;
     using System.Resources;
 #endif
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.Security;
-    using System.Security.Principal;
 
     //
     // List of culture data

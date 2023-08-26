@@ -4,10 +4,10 @@
 
 // This file reiimplements CoreFX source file 'src/Common/src/Interop/Unix/System.Native/Interop.Read.cs'
 
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
-using System;
 
 internal static partial class Interop
 {

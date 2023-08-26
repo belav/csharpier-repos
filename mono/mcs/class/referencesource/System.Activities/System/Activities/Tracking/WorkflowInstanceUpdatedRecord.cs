@@ -7,9 +7,9 @@ namespace System.Activities.Tracking
     using System;
     using System.Activities.DynamicUpdate;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]

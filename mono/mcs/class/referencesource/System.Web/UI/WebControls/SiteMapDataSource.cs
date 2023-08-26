@@ -292,9 +292,7 @@ namespace System.Web.UI.WebControls
 
             // If the current node is not in StartingNode's subtree, return null.
             if (
-                currentNode == null
-                || !currentNode.IsDescendantOf(node)
-                || currentNode.Equals(node)
+                currentNode == null || !currentNode.IsDescendantOf(node) || currentNode.Equals(node)
             )
             {
                 return null;

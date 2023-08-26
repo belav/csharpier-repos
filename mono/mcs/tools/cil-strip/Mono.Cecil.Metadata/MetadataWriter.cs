@@ -32,7 +32,6 @@ namespace Mono.Cecil.Metadata
     using System.Collections;
     using System.IO;
     using System.Text;
-
     using Mono.Cecil;
     using Mono.Cecil.Binary;
 

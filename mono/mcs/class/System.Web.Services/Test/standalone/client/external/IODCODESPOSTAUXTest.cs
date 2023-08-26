@@ -2,8 +2,8 @@
 // http://www.e-naxos.com/scripts/enwscp.dll/wsdl/IODCODESPOSTAUX
 
 using System;
-using NUnit.Framework;
 using IODCODESPOSTAUXTests.Soap;
+using NUnit.Framework;
 
 namespace External.IODCODESPOSTAUXTests
 {

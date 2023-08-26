@@ -6,10 +6,10 @@ namespace System
 {
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Net;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
-    using System.Net;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

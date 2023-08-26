@@ -5,23 +5,23 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Xml;
-using System.Xml.XPath;
-using System.Xml.Schema;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.XPath;
 using System.Xml.Xsl;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
 
 namespace System.Xml.Xsl.IlGen
 {
-    using TypeFactory = System.Xml.Xsl.XmlQueryTypeFactory;
     using Res = System.Xml.Utils.Res;
+    using TypeFactory = System.Xml.Xsl.XmlQueryTypeFactory;
 
     /// <summary>
     /// Creates Msil code for an entire QilExpression graph.  Code is generated in one of two modes: push or
@@ -4339,8 +4339,7 @@ namespace System.Xml.Xsl.IlGen
                         NestedVisitEnsureStack(ndActualArg, clrTypeFormalArg, false);
                     }
                     else if (
-                        ndActualArg.XmlType.IsSingleton
-                        && clrTypeFormalArg == typeof(XPathItem)
+                        ndActualArg.XmlType.IsSingleton && clrTypeFormalArg == typeof(XPathItem)
                     )
                     {
                         // Formal type is XPathItem

@@ -15,9 +15,8 @@ namespace System.Web.UI.WebControls.WebParts
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using System.Web.Util;
-
-    using Debug = System.Diagnostics.Debug;
     using AttributeCollection = System.ComponentModel.AttributeCollection;
+    using Debug = System.Diagnostics.Debug;
 
     public sealed class PropertyGridEditorPart : EditorPart
     {

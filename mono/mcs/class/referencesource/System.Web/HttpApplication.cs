@@ -239,9 +239,7 @@ namespace System.Web
         private void ThrowIfEventBindingDisallowed()
         {
             if (
-                HttpRuntime.UseIntegratedPipeline
-                && _initSpecialCompleted
-                && _initInternalCompleted
+                HttpRuntime.UseIntegratedPipeline && _initSpecialCompleted && _initInternalCompleted
             )
             {
                 // throw if we're using the integrated pipeline and both InitSpecial and InitInternal have completed.

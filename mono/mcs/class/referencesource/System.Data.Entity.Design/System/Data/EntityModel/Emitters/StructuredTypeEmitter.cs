@@ -7,19 +7,19 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.CodeDom;
 using System.Data;
-using System.Data.EntityModel.SchemaObjectModel;
-using Som = System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design;
-using System.Data.Metadata.Edm;
-using System.Diagnostics;
-using System.Reflection;
-using System.Data.Objects.DataClasses;
 using System.Data.Entity.Design.Common;
 using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
+using System.Diagnostics;
+using System.Reflection;
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {

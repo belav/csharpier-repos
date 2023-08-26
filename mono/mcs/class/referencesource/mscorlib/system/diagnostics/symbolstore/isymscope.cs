@@ -19,8 +19,8 @@ namespace System.Diagnostics.SymbolStore
 {
     // Interface does not need to be marked with the serializable attribute
     using System;
-    using System.Text;
     using System.Runtime.InteropServices;
+    using System.Text;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISymbolScope

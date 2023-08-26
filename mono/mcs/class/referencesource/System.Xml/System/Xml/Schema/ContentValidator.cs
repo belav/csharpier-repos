@@ -7,9 +7,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Xml.Schema
 {
@@ -170,8 +170,7 @@ namespace System.Xml.Schema
                 }
             }
             if (
-                list.Type == NamespaceList.ListType.Any
-                || list.Type == NamespaceList.ListType.Other
+                list.Type == NamespaceList.ListType.Any || list.Type == NamespaceList.ListType.Other
             )
             {
                 match.Add(last); // add wildcard

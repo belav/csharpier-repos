@@ -1,6 +1,6 @@
 using System;
-using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Mono
 {

@@ -57,10 +57,8 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
-
-using RabbitMQ.Util;
 using RabbitMQ.Client.Exceptions;
-
+using RabbitMQ.Util;
 // We use spec version 0-9 for common constants such as frame types,
 // error codes, and the frame end byte, since they don't vary *within
 // the versions we support*. Obviously we may need to revisit this if

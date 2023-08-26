@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using Collections.ObjectModel;
     using System.Security.Principal;
     using System.ServiceModel.Activation;
+    using Collections.ObjectModel;
 
     public class NamedPipeTransportBindingElement : ConnectionOrientedTransportBindingElement
     {

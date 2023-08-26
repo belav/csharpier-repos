@@ -4,9 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System.Web.SessionState;
-using System.Security.Permissions;
 using System.Security;
+using System.Security.Permissions;
+using System.Web.SessionState;
 
 namespace System.Web.Script.Services
 {

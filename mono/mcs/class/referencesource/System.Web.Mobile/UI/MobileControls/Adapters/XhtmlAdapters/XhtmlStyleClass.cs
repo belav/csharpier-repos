@@ -5,17 +5,17 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.IO;
-using System.Text;
-using System.Drawing;
-using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters

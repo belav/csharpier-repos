@@ -63,8 +63,7 @@ namespace System.Data.Entity.Design.Common
         )
         {
             if (
-                value == LanguageOption.GenerateCSharpCode
-                || value == LanguageOption.GenerateVBCode
+                value == LanguageOption.GenerateCSharpCode || value == LanguageOption.GenerateVBCode
             )
             {
                 return value;

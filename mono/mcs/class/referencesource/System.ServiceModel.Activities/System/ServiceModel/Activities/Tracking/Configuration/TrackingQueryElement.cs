@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Configuration;
     using System.Activities.Tracking;
     using System.Collections.Generic;
-    using System.Runtime;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     // Base class for all the workflow tracking query configuration elements
     [Fx.Tag.XamlVisible(false)]

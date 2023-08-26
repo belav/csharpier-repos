@@ -9,10 +9,10 @@
 // Copyright (C) Dave Bettin, 2003
 //
 
-using NUnit.Framework;
 using System;
 using System.Web.Services.Configuration;
 using System.Web.Services.Description;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Configuration
 {

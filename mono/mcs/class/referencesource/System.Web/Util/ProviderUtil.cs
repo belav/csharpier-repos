@@ -14,9 +14,9 @@
 namespace System.Web.Util
 {
     using System.Collections.Specialized;
-    using System.Web.Mail;
     using System.Configuration;
     using System.Globalization;
+    using System.Web.Mail;
 
     internal static class ProviderUtil
     {

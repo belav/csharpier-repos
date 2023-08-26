@@ -7,8 +7,8 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.IO;
     using System.Collections.Specialized;
+    using System.IO;
     using System.Net.Mime;
 
     internal class MailWriter : BaseWriter

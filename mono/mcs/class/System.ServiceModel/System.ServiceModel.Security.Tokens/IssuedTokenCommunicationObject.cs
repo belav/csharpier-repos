@@ -27,13 +27,13 @@
 //
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Xml;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
+using System.Xml;
 
 namespace System.ServiceModel.Security.Tokens
 {

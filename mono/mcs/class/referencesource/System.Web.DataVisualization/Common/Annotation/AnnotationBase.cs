@@ -24,15 +24,14 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using System.Globalization;
 #if Microsoft_CONTROL
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
@@ -3917,8 +3916,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 // If so - change cursor to cross
                 RectangleF placementRect = new RectangleF(0f, 0f, 100f, 100f);
                 if (
-                    this.ClipToChartArea.Length > 0
-                    && this.ClipToChartArea != Constants.NotSetValue
+                    this.ClipToChartArea.Length > 0 && this.ClipToChartArea != Constants.NotSetValue
                 )
                 {
                     ChartArea area = Chart.ChartAreas[this.ClipToChartArea];

@@ -25,8 +25,8 @@
 
 
 using System;
-using System.IO;
 using System.Drawing;
+using System.IO;
 
 namespace System.Windows.Forms.RTF
 {

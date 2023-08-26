@@ -9,8 +9,8 @@
 
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 using objectModel = System.Collections.ObjectModel;
 
 namespace System.Data.Metadata.Edm

@@ -31,23 +31,23 @@
 using System;
 using System.CodeDom;
 using System.Collections;
-using System.ComponentModel;
-using System.Configuration;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
+using System.Configuration;
 using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Util;
-using System.ComponentModel.Design.Serialization;
-using System.Text.RegularExpressions;
 
 namespace System.Web.Compilation
 {
@@ -1215,9 +1215,7 @@ namespace System.Web.Compilation
 
             object[] attrs = mi.GetCustomAttributes(typeof(LocalizableAttribute), true);
             if (
-                attrs != null
-                && attrs.Length > 0
-                && !((LocalizableAttribute)attrs[0]).IsLocalizable
+                attrs != null && attrs.Length > 0 && !((LocalizableAttribute)attrs[0]).IsLocalizable
             )
                 return;
 

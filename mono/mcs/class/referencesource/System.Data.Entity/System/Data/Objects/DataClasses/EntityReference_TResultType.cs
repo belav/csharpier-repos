@@ -498,8 +498,7 @@ namespace System.Data.Objects.DataClasses
                     // The relationship will now either be detached (if it was previously in the Added state), or Deleted (if it was previously Unchanged)
                     // If it's Deleted, we need to AcceptChanges to get rid of it completely
                     if (
-                        relationshipEntry != null
-                        && relationshipEntry.State != EntityState.Detached
+                        relationshipEntry != null && relationshipEntry.State != EntityState.Detached
                     )
                     {
                         relationshipEntry.AcceptChanges();

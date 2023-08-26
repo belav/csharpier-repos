@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-
 using Mono.Options;
 
 [assembly: AssemblyTitle("Mono service contract conversion tool")]

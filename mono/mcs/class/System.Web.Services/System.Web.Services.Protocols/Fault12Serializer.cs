@@ -1,10 +1,10 @@
 using System;
+using System.Collections;
+using System.Globalization;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Text;
-using System.Collections;
-using System.Globalization;
 
 namespace System.Web.Services.Protocols
 {
@@ -35,8 +35,7 @@ namespace System.Web.Services.Protocols
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "Fault"
-                    || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
+                    t.Name != "Fault" || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -149,8 +148,7 @@ namespace System.Web.Services.Protocols
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "Detail"
-                    || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
+                    t.Name != "Detail" || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -247,8 +245,7 @@ namespace System.Web.Services.Protocols
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "Code"
-                    || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
+                    t.Name != "Code" || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -331,8 +328,7 @@ namespace System.Web.Services.Protocols
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "Reason"
-                    || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
+                    t.Name != "Reason" || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -423,8 +419,7 @@ namespace System.Web.Services.Protocols
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "Text"
-                    || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
+                    t.Name != "Text" || t.Namespace != "http://www.w3.org/2003/05/soap-envelope"
                 )
                     throw CreateUnknownTypeException(t);
             }

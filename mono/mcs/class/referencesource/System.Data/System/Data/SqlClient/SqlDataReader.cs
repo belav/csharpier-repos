@@ -13,20 +13,19 @@ namespace System.Data.SqlClient
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Data;
-    using System.Data.Sql;
-    using System.Data.SqlTypes;
     using System.Data.Common;
     using System.Data.ProviderBase;
+    using System.Data.Sql;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Threading;
-    using System.Xml;
-
-    using Microsoft.SqlServer.Server;
     using System.Threading.Tasks;
+    using System.Xml;
+    using Microsoft.SqlServer.Server;
 
     public class SqlDataReader : DbDataReader, IDataReader
     {
@@ -716,8 +715,7 @@ namespace System.Data.SqlClient
                     }
                 }
                 else if (
-                    _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005
-                    && col.IsLargeUdt
+                    _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005 && col.IsLargeUdt
                 )
                 {
                     if (_typeSystem == SqlConnectionString.TypeSystem.SQLServer2005)
@@ -1464,8 +1462,7 @@ namespace System.Data.SqlClient
             )
             {
                 if (
-                    _parser.State == TdsParserState.Broken
-                    || _parser.State == TdsParserState.Closed
+                    _parser.State == TdsParserState.Broken || _parser.State == TdsParserState.Closed
                 )
                 {
                     // Happened for DEVDIV2:180509	(SqlDataReader.ConsumeMetaData Hangs In 100% CPU Loop Forever When TdsParser._state == TdsParserState.Broken)
@@ -1549,8 +1546,7 @@ namespace System.Data.SqlClient
                 dataTypeName = MetaType.MetaNVarChar.TypeName;
             }
             else if (
-                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005
-                && metaData.IsLargeUdt
+                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005 && metaData.IsLargeUdt
             )
             {
                 if (_typeSystem == SqlConnectionString.TypeSystem.SQLServer2005)
@@ -1648,8 +1644,7 @@ namespace System.Data.SqlClient
                 fieldType = MetaType.MetaNVarChar.ClassType;
             }
             else if (
-                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005
-                && metaData.IsLargeUdt
+                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005 && metaData.IsLargeUdt
             )
             {
                 if (_typeSystem == SqlConnectionString.TypeSystem.SQLServer2005)
@@ -1770,8 +1765,7 @@ namespace System.Data.SqlClient
                 providerSpecificFieldType = MetaType.MetaNVarChar.SqlType;
             }
             else if (
-                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005
-                && metaData.IsLargeUdt
+                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005 && metaData.IsLargeUdt
             )
             {
                 if (_typeSystem == SqlConnectionString.TypeSystem.SQLServer2005)
@@ -3294,8 +3288,7 @@ namespace System.Data.SqlClient
                 return data.KatmaiDateTimeSqlString;
             }
             else if (
-                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005
-                && metaData.IsLargeUdt
+                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005 && metaData.IsLargeUdt
             )
             {
                 return data.SqlValue;
@@ -3504,8 +3497,7 @@ namespace System.Data.SqlClient
                 }
             }
             else if (
-                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005
-                && metaData.IsLargeUdt
+                _typeSystem <= SqlConnectionString.TypeSystem.SQLServer2005 && metaData.IsLargeUdt
             )
             {
                 return data.Value;
@@ -4785,8 +4777,7 @@ namespace System.Data.SqlClient
                     _sharedState._nextColumnHeaderToRead++; // We read this one
 
                     if (
-                        isNull
-                        && columnMetaData.type != SqlDbType.Timestamp /* Maintain behavior for known bug (Dev10 479607) rejected as breaking change - See comments in GetNullSqlValue for timestamp */
+                        isNull && columnMetaData.type != SqlDbType.Timestamp /* Maintain behavior for known bug (Dev10 479607) rejected as breaking change - See comments in GetNullSqlValue for timestamp */
                     )
                     {
                         TdsParser.GetNullSqlValue(

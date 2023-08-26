@@ -2,8 +2,8 @@
 // See https://bugzilla.xamarin.com/show_bug.cgi?id=8477 for details.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 [ComImport, Guid("06A82D35-8946-4E2E-AE71-DADDE8341F5D")]
 class COMponent

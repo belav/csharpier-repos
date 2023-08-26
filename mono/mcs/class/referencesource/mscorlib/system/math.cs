@@ -16,11 +16,11 @@ namespace System
 {
     //This class contains only static members and doesn't require serialization.
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     public static class Math
     {

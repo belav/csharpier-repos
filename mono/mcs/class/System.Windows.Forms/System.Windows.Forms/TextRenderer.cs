@@ -39,9 +39,9 @@
 // for things that want to measure strings without having a Graphics object.
 
 using System.Drawing;
+using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Drawing.Text;
 
 namespace System.Windows.Forms
 {

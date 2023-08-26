@@ -9,28 +9,29 @@
 namespace System.Data
 {
     using System;
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Data.Common;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary; //Binary Formatter
+    using System.Runtime.Versioning;
+    using System.Text;
     using System.Xml;
+    using System.Xml.Schema;
     using System.Xml.Serialization;
 #if !NO_CONFIGURATION
     using System.Xml.Serialization.Advanced;
 #endif
-    using System.Xml.Schema;
-    using System.Runtime.Serialization.Formatters.Binary; //Binary Formatter
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.Configuration;
-    using System.Data.Common;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
+
 
 #if !COREFX
     /// <devdoc>
@@ -305,8 +306,7 @@ namespace System.Data
             // to fix that case also, we need to add a flag and add it to below check so return (no-op) will be
             // conditional (flag needs to be set in TypedDataSet
             if (
-                remotingFormat == SerializationFormat.Xml
-                && !ConstructSchema /* && this.GetType() != typeof(DataSet)*/
+                remotingFormat == SerializationFormat.Xml && !ConstructSchema /* && this.GetType() != typeof(DataSet)*/
             )
             {
                 return; //For typed dataset xml remoting, this is a no-op

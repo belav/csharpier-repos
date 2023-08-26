@@ -4,16 +4,16 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
+    using System.Security.Authentication;
     using System.Security.Authentication.ExtendedProtection.Configuration;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
-    using System.Security.Authentication;
 
     public sealed partial class TcpTransportSecurityElement : ServiceModelConfigurationElement
     {

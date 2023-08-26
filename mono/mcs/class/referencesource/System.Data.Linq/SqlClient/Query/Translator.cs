@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Data.Linq.Provider;
-using System.Linq;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 
 namespace System.Data.Linq.SqlClient
 {
@@ -586,9 +586,7 @@ namespace System.Data.Linq.SqlClient
 
             SqlLink link1 = eLeft as SqlLink;
             if (
-                link1 != null
-                && link1.Member.IsAssociation
-                && link1.Member.Association.IsForeignKey
+                link1 != null && link1.Member.IsAssociation && link1.Member.Association.IsForeignKey
             )
             {
                 exprs1 = link1.KeyExpressions;
@@ -600,9 +598,7 @@ namespace System.Data.Linq.SqlClient
 
             SqlLink link2 = eRight as SqlLink;
             if (
-                link2 != null
-                && link2.Member.IsAssociation
-                && link2.Member.Association.IsForeignKey
+                link2 != null && link2.Member.IsAssociation && link2.Member.Association.IsForeignKey
             )
             {
                 exprs2 = link2.KeyExpressions;

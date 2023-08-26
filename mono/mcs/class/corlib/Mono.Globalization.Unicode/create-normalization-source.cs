@@ -30,7 +30,6 @@ using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
-
 using NUtil = Mono.Globalization.Unicode.NormalizationTableUtil;
 
 namespace Mono.Globalization.Unicode

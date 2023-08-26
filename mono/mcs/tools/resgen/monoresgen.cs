@@ -9,12 +9,12 @@
  */
 
 using System;
-using System.Globalization;
-using System.Text;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Resources;
+using System.Text;
 using System.Xml;
 
 class ResGen
@@ -159,8 +159,7 @@ Options:
             }
 
             if (
-                inner is System.Reflection.TargetInvocationException
-                && inner.InnerException != null
+                inner is System.Reflection.TargetInvocationException && inner.InnerException != null
             )
                 inner = inner.InnerException;
             if (inner != null)

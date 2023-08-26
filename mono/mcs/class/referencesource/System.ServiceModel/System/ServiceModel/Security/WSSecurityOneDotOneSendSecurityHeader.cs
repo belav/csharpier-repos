@@ -5,17 +5,16 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Diagnostics;
-    using System.IO;
     using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Security.Cryptography;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.ServiceModel.Diagnostics;
-
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
 
     sealed class WSSecurityOneDotOneSendSecurityHeader : WSSecurityOneDotZeroSendSecurityHeader

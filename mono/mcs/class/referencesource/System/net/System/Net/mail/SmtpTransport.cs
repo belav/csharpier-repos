@@ -8,11 +8,11 @@ namespace System.Net.Mail
 {
     using System;
     using System.Collections;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
-    using System.Security.Cryptography.X509Certificates;
     using System.Net.Mime;
-    using System.Diagnostics;
+    using System.Security.Cryptography.X509Certificates;
 
     internal enum SupportedAuth
     {

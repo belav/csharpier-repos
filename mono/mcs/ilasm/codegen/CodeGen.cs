@@ -9,19 +9,17 @@
 // (C) 2003 Jackson Harper, All rights reserved
 //
 
-using PEAPI;
 using System;
-using System.IO;
 using System.Collections;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 using System.Security;
-
-using SSPermissionSet = System.Security.PermissionSet;
-using MIPermissionSet = Mono.ILASM.PermissionSet;
-
+using System.Text;
+using PEAPI;
 using MIAssembly = Mono.ILASM.Assembly;
+using MIPermissionSet = Mono.ILASM.PermissionSet;
+using SSPermissionSet = System.Security.PermissionSet;
 
 namespace Mono.ILASM
 {

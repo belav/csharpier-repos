@@ -8,14 +8,14 @@
 namespace System.Net
 {
     using System.Collections;
-    using System.IO;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Net.Sockets;
-    using System.Security.Permissions;
-    using System.Text;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Net.Cache;
+    using System.Net.Sockets;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Permissions;
+    using System.Text;
 
     internal enum FtpPrimitive
     {
@@ -382,8 +382,7 @@ namespace System.Net
                 // The server does not like re-login
                 // (We are logged in already but want to re-login under a different user)
                 else if (
-                    status == FtpStatusCode.NotLoggedIn
-                    && m_LoginState != FtpLoginState.NotLoggedIn
+                    status == FtpStatusCode.NotLoggedIn && m_LoginState != FtpLoginState.NotLoggedIn
                 )
                 {
                     m_LoginState = FtpLoginState.ReloginFailed;

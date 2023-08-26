@@ -27,16 +27,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
-using System.Security.Permissions;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
+using System.Security.Permissions;
 using MonoTests.System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates
 {

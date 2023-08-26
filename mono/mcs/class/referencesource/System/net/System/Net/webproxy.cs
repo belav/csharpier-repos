@@ -6,15 +6,15 @@
 
 namespace System.Net
 {
-    using System.Net.NetworkInformation;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Net.NetworkInformation;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Collections;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
     class WebProxyData
     {

@@ -10,8 +10,8 @@
 namespace System.Web
 {
     using System.Runtime.Serialization.Formatters;
-    using System.Threading;
     using System.Security.Permissions;
+    using System.Threading;
 
     public class ProcessModelInfo
     {

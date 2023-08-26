@@ -12,12 +12,12 @@
 
 namespace System.Web.UI.HtmlControls
 {
-    using System.ComponentModel;
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
     /// <devdoc>
     /// <para>The <see langword='HtmlButton'/>

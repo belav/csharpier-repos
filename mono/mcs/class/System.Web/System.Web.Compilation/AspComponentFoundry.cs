@@ -250,9 +250,7 @@ namespace System.Web.Compilation
                 return;
             }
             else if (
-                f == null
-                || f is ArrayList
-                || (f is AssemblyFoundry && foundry is AssemblyFoundry)
+                f == null || f is ArrayList || (f is AssemblyFoundry && foundry is AssemblyFoundry)
             )
             {
                 newFoundry = foundry;

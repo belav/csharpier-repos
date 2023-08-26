@@ -7,14 +7,14 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
-    using System.Diagnostics;
-    using System.Text;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Text;
     using System.Xml.XPath;
     using System.Xml.Xsl.Runtime;
+    using Res = System.Xml.Utils.Res;
 
     internal class NumberAction : ContainerAction
     {
@@ -393,8 +393,7 @@ namespace System.Xml.Xsl.XsltOld
             do
             {
                 if (
-                    this.fromKey != Compiler.InvalidQueryKey
-                    && processor.Matches(nav, this.fromKey)
+                    this.fromKey != Compiler.InvalidQueryKey && processor.Matches(nav, this.fromKey)
                 )
                 {
                     return false;

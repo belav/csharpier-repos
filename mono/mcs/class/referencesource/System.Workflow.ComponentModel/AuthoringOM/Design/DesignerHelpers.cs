@@ -1,29 +1,29 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Drawing;
-    using System.Resources;
-    using System.Reflection;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Diagnostics;
-    using System.Globalization;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
     using System.Drawing.Text;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-    using System.ComponentModel;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Collections.Generic;
-    using System.ComponentModel.Design;
-    using System.Runtime.InteropServices;
-    using System.Workflow.Interop;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.Interop;
     using Microsoft.Win32;
-    using System.Runtime.CompilerServices;
 
     #region Enum LightSourcePosition
     [Flags]
@@ -2429,10 +2429,7 @@ namespace System.Workflow.ComponentModel.Design
                     string nameSpace = path.Substring(0, index);
                     string name = path.Substring(index + 1);
                     if (
-                        nameSpace != null
-                        && nameSpace.Length > 0
-                        && name != null
-                        && name.Length > 0
+                        nameSpace != null && nameSpace.Length > 0 && name != null && name.Length > 0
                     )
                     {
                         try
@@ -2847,8 +2844,7 @@ namespace System.Workflow.ComponentModel.Design
                 }
 
                 if (
-                    connector != null
-                    && !(connector.AssociatedDesigner is FreeformActivityDesigner)
+                    connector != null && !(connector.AssociatedDesigner is FreeformActivityDesigner)
                 )
                     return false;
             }

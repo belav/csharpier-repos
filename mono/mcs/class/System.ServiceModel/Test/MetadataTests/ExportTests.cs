@@ -32,10 +32,8 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-
 using QName = System.Xml.XmlQualifiedName;
 using WS = System.Web.Services.Description;
-
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 

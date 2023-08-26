@@ -10,10 +10,10 @@
 namespace System.Data
 {
     using System;
-    using System.Xml;
     using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Xml;
 
     // This is an internal helper class used during Xml load to DataSet/DataDocument.
     // XmlToDatasetMap class provides functionality for binding elemants/atributes

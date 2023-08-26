@@ -15,7 +15,6 @@ using System.IO;
 using System.Resources;
 using System.Text;
 using System.Windows.Forms;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Resources

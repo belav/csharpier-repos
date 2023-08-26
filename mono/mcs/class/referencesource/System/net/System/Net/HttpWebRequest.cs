@@ -6,23 +6,23 @@
 
 namespace System.Net
 {
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Tracing;
     using System.Globalization;
     using System.IO;
     using System.Net.Cache;
     using System.Net.Configuration;
+    using System.Net.Security;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Net.Security;
-    using System.Reflection;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Diagnostics.Tracing;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
 
     /// <devdoc>
     /// <para>
@@ -7908,9 +7908,7 @@ namespace System.Net
             }
 
             if (
-                errorException != null
-                && _SubmitWriteStream != null
-                && !_SubmitWriteStream.IsClosed
+                errorException != null && _SubmitWriteStream != null && !_SubmitWriteStream.IsClosed
             )
             {
                 _SubmitWriteStream.ErrorResponseNotify(_SubmitWriteStream.Connection.KeepAlive);

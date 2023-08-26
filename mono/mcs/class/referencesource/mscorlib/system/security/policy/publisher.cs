@@ -14,14 +14,14 @@
 
 namespace System.Security.Policy
 {
-    using System.Runtime.Remoting;
     using System;
-    using System.IO;
-    using System.Security.Util;
     using System.Collections;
-    using PublisherIdentityPermission = System.Security.Permissions.PublisherIdentityPermission;
-    using System.Security.Cryptography.X509Certificates;
     using System.Diagnostics.Contracts;
+    using System.IO;
+    using System.Runtime.Remoting;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Util;
+    using PublisherIdentityPermission = System.Security.Permissions.PublisherIdentityPermission;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -4,18 +4,19 @@
 //
 // ==--==
 using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using System.Security.Permissions;
-using System.Security;
 using System.Collections;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 using System.Threading;
+using Microsoft.Win32;
 #if !SILVERLIGHT
 using System.Runtime.Versioning;
 #endif
-using System.Diagnostics.CodeAnalysis;
+
 using NativeMethods = Microsoft.Win32.NativeMethods;
 
 namespace System.Diagnostics

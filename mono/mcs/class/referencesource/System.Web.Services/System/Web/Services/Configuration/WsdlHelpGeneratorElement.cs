@@ -7,12 +7,12 @@ namespace System.Web.Services.Configuration
     using System;
     using System.Configuration;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Security.Permissions;
     using System.Threading;
     using System.Web.Configuration;
     using System.Web.Hosting;
     using System.Xml;
-    using System.Runtime.CompilerServices;
 
     public sealed class WsdlHelpGeneratorElement : ConfigurationElement
     {

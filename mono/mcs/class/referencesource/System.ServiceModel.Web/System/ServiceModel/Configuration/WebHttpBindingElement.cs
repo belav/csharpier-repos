@@ -6,11 +6,11 @@ namespace System.ServiceModel.Configuration
 {
     using System.ComponentModel;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Text;
     using System.Xml;
-    using System.Diagnostics.CodeAnalysis;
 
     public partial class WebHttpBindingElement : StandardBindingElement
     {

@@ -11,6 +11,7 @@ namespace System.Data.Objects.ELinq
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data.Common.CommandTrees;
     using System.Data.Common.CommandTrees.Internal;
     using System.Data.Common.QueryCache;
@@ -19,10 +20,9 @@ namespace System.Data.Objects.ELinq
     using System.Data.Objects.ELinq;
     using System.Data.Objects.Internal;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Collections.ObjectModel;
+    using System.Reflection;
 
     /// <summary>
     /// Models a Linq to Entities ObjectQuery

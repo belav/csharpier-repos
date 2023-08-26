@@ -9,8 +9,8 @@ namespace System.Xml.Serialization
 {
     using System;
     using System.Collections;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
 
     class CaseInsensitiveKeyComparer : CaseInsensitiveComparer, IEqualityComparer
     {

@@ -6,17 +6,17 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
-using System.Data.Objects.DataClasses;
-using System.Data.Metadata.Edm;
-using System.Diagnostics;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Reflection;
+using System.ComponentModel;
+using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
+using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using System.Threading;
-using System.Data.Common.Utils;
-using System.Runtime.CompilerServices;
 
 namespace System.Data.Objects.Internal
 {

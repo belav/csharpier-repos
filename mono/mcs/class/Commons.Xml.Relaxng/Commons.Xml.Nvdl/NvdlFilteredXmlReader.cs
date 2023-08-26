@@ -587,8 +587,7 @@ namespace Commons.Xml.Nvdl
                     for (int i = 0; i < attributeCount; i++)
                     {
                         if (
-                            attributes[i].LocalName != localName
-                            || attributes[i].NamespaceURI != ns
+                            attributes[i].LocalName != localName || attributes[i].NamespaceURI != ns
                         )
                             continue;
                         return reader.MoveToAttribute(localName, ns);

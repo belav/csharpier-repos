@@ -6,18 +6,18 @@
 
 namespace System.Configuration
 {
-    using System.Configuration.Internal;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Configuration.Internal;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Xml;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.CodeAnalysis;
 
     [Serializable]
     public class ConfigurationErrorsException : ConfigurationException

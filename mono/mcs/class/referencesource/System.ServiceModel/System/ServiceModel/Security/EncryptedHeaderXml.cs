@@ -4,14 +4,13 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IO;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Security.Cryptography;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Xml;
-
     using DictionaryManager = System.IdentityModel.DictionaryManager;
     using ISecurityElement = System.IdentityModel.ISecurityElement;
 

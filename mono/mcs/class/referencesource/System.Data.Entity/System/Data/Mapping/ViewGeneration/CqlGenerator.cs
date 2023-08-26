@@ -7,15 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Collections.Generic;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
-using System.Text;
-using System.Diagnostics;
+using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {

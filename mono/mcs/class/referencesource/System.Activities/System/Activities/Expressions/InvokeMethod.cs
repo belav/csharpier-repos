@@ -9,11 +9,11 @@ namespace System.Activities.Expressions
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime.Collections;
-    using System.Windows.Markup;
-    using System.Runtime;
     using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Collections;
     using System.Threading;
+    using System.Windows.Markup;
 
     [ContentProperty("Parameters")]
     public sealed class InvokeMethod<TResult> : AsyncCodeActivity<TResult>

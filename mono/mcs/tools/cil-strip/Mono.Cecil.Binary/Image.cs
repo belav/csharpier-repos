@@ -30,7 +30,6 @@ namespace Mono.Cecil.Binary
 {
     using System;
     using System.IO;
-
     using Mono.Cecil.Metadata;
 
     internal sealed class Image : IBinaryVisitable

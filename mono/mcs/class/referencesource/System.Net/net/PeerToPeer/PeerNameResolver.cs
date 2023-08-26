@@ -7,14 +7,14 @@ namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.ComponentModel;
-    using System.Threading;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Sockets;
-    using System.Diagnostics;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This is the event args class we give back each time when

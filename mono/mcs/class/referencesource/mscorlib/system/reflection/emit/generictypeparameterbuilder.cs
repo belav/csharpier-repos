@@ -9,11 +9,11 @@
 namespace System.Reflection.Emit
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class GenericTypeParameterBuilder : TypeInfo

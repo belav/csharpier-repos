@@ -11,15 +11,15 @@
 namespace System.Data.Odbc
 {
     using System;
-    using System.Data;
-    using System.IO;
     using System.Collections;
+    using System.Data;
     using System.Data.Common;
+    using System.Data.ProviderBase;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Diagnostics;
-    using System.Data.ProviderBase;
-    using System.Text;
 
     internal class OdbcMetaDataFactory : DbMetaDataFactory
     {

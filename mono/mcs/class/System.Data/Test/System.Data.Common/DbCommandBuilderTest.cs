@@ -29,7 +29,6 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Globalization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Common

@@ -1206,8 +1206,7 @@ namespace System.Runtime.Serialization
                             if (memberAttribute.IsNameSetExplicitly)
                             {
                                 if (
-                                    memberAttribute.Name == null
-                                    || memberAttribute.Name.Length == 0
+                                    memberAttribute.Name == null || memberAttribute.Name.Length == 0
                                 )
                                     ThrowInvalidDataContractException(
                                         SR.GetString(

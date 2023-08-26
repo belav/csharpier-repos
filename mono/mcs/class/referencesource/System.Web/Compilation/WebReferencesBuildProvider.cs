@@ -7,19 +7,20 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Globalization;
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.Collections.Specialized;
+    using System.Globalization;
     using System.Net;
+    using System.Web.Hosting;
+    using System.Web.UI;
+    using System.Web.Util;
     using System.Xml.Serialization;
 #if !FEATURE_PAL
     using System.Web.Services.Description;
     using System.Web.Services.Discovery;
 #endif // !FEATURE_PAL
-    using System.Web.Hosting;
-    using System.Web.UI;
-    using System.Web.Util;
+
     using Util = System.Web.UI.Util;
 
     internal class WebReferencesBuildProvider : BuildProvider

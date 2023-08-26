@@ -24,16 +24,16 @@
 #region Used namespaces
 
 using System;
-using System.Text;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Design;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using System.Text;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.Data;
@@ -545,9 +545,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             if (
-                !postbackRendered
-                && !String.IsNullOrEmpty(this.PostBackValue)
-                && chart.Page != null
+                !postbackRendered && !String.IsNullOrEmpty(this.PostBackValue) && chart.Page != null
             )
             {
                 excludedAttributes.Append("onclick,");

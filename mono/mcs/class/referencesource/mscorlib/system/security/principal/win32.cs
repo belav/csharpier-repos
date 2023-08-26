@@ -6,21 +6,21 @@
 // <OWNER>Microsoft</OWNER>
 //
 
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
 using System.Text;
-using System.Runtime.Versioning;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Principal
 {
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using BOOL = System.Int32;
     using DWORD = System.UInt32;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
     [Flags]
     internal enum PolicyRights

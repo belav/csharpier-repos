@@ -2358,8 +2358,7 @@ namespace System.Windows.Forms
                 );
             }
             else if (
-                button_base.FlatStyle == FlatStyle.Flat
-                || button_base.FlatStyle == FlatStyle.Popup
+                button_base.FlatStyle == FlatStyle.Flat || button_base.FlatStyle == FlatStyle.Popup
             )
             {
                 dc.DrawString(

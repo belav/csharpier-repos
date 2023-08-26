@@ -1,8 +1,8 @@
 // Compiler options: -r:gtest-exmethod-26-lib.dll
 
 using System;
-using Test2;
 using test;
+using Test2;
 
 namespace test
 {

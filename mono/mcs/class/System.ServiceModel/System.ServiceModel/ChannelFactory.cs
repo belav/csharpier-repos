@@ -28,12 +28,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Security;
-using System.Configuration;
-using System.ServiceModel.Configuration;
 using System.Xml;
 
 namespace System.ServiceModel

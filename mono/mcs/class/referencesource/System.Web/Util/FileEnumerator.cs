@@ -52,8 +52,8 @@
 
 namespace System.Web.Util
 {
-    using System.IO;
     using System.Collections;
+    using System.IO;
 
     /*
      * This is a somewhat artificial base class for FileEnumerator.  The main reason

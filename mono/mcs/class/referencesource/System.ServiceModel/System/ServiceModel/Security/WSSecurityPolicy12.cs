@@ -9,8 +9,8 @@ namespace System.ServiceModel.Security
     using System.Collections.ObjectModel;
     using System.Net;
     using System.Runtime;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;

@@ -14,17 +14,17 @@
 ===========================================================*/
 namespace System.Text
 {
-    using System.Text;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Runtime.InteropServices;
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
     using System.Security;
+    using System.Text;
     using System.Threading;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
     // This class represents a mutable string.  It is convenient for situations in
     // which it is desirable to modify a string, perhaps by removing, replacing, or

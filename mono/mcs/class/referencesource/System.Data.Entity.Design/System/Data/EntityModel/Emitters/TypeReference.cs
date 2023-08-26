@@ -11,8 +11,8 @@ using System;
 using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Common.Utils;
+using System.Data.EntityModel.SchemaObjectModel;
 using System.Reflection;
 
 namespace System.Data.EntityModel.Emitters

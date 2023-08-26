@@ -8,11 +8,11 @@
 //---------------------------------------------------------------------
 
 
-using System.Data.Common.Utils;
-using System.Text;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

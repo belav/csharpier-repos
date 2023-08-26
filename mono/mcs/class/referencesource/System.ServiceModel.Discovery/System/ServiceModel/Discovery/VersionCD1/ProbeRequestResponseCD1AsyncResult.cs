@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
 
     sealed class ProbeRequestResponseCD1AsyncResult
         : ProbeRequestResponseAsyncResult<ProbeMessageCD1, ProbeMatchesMessageCD1>

@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
 
     [MessageContract(IsWrapped = false)]

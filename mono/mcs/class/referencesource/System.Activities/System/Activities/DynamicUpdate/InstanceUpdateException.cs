@@ -7,10 +7,10 @@ namespace System.Activities.DynamicUpdate
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Text;
-    using System.Security;
     using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Text;
 
     [Serializable]
     public class InstanceUpdateException : Exception

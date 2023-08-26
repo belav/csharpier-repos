@@ -19,9 +19,9 @@ namespace System.Workflow.Activities.Common
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
     using System.Workflow.ComponentModel;
 
     #endregion

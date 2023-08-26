@@ -28,10 +28,9 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom.Compiler;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom.Compiler
 {

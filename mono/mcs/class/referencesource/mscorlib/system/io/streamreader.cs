@@ -17,12 +17,12 @@
 ===========================================================*/
 
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
+using System.Text;
 #if FEATURE_ASYNC_IO
 using System.Threading.Tasks;
 #endif
@@ -1017,8 +1017,7 @@ namespace System.IO
         private async Task<String> ReadLineAsyncInternal()
         {
             if (
-                CharPos_Prop == CharLen_Prop
-                && (await ReadBufferAsync().ConfigureAwait(false)) == 0
+                CharPos_Prop == CharLen_Prop && (await ReadBufferAsync().ConfigureAwait(false)) == 0
             )
                 return null;
 
@@ -1159,8 +1158,7 @@ namespace System.IO
         internal override async Task<int> ReadAsyncInternal(char[] buffer, int index, int count)
         {
             if (
-                CharPos_Prop == CharLen_Prop
-                && (await ReadBufferAsync().ConfigureAwait(false)) == 0
+                CharPos_Prop == CharLen_Prop && (await ReadBufferAsync().ConfigureAwait(false)) == 0
             )
                 return 0;
 

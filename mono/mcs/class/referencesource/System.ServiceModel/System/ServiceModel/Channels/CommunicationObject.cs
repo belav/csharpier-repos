@@ -1283,8 +1283,7 @@ namespace System.ServiceModel.Channels
         internal void ThrowIfNotOpened()
         {
             if (
-                this.state == CommunicationState.Created
-                || this.state == CommunicationState.Opening
+                this.state == CommunicationState.Created || this.state == CommunicationState.Opening
             )
                 throw TraceUtility.ThrowHelperError(
                     this.CreateNotOpenException(),

@@ -29,16 +29,16 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Resources.Tools;
 using System.CodeDom;
-using Microsoft.CSharp;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Resources.Tools;
 using System.Text.RegularExpressions;
+using Microsoft.CSharp;
+using NUnit.Framework;
 
 namespace MonoTests.System.Resources.Tools
 {

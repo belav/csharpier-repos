@@ -113,8 +113,7 @@ namespace System.Reflection
             if ((type1 = left as Type) != null && (type2 = right as Type) != null)
                 return type1 == type2;
             else if (
-                (method1 = left as MethodBase) != null
-                && (method2 = right as MethodBase) != null
+                (method1 = left as MethodBase) != null && (method2 = right as MethodBase) != null
             )
                 return method1 == method2;
             else if ((field1 = left as FieldInfo) != null && (field2 = right as FieldInfo) != null)

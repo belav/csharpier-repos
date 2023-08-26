@@ -17,9 +17,9 @@
 =============================================================================*/
 namespace System.Threading
 {
-    using System.Threading;
     using System;
     using System.Runtime.Serialization;
+    using System.Threading;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

@@ -402,8 +402,7 @@ namespace System.Web.UI.WebControls.Adapters
                 topSeparatorUrl = owner.StaticTopSeparatorImageUrl;
             }
             else if (
-                depth >= owner.StaticDisplayLevels
-                && owner.DynamicTopSeparatorImageUrl.Length != 0
+                depth >= owner.StaticDisplayLevels && owner.DynamicTopSeparatorImageUrl.Length != 0
             )
             {
                 topSeparatorUrl = owner.DynamicTopSeparatorImageUrl;

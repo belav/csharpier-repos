@@ -11,8 +11,8 @@ namespace Microsoft.SqlServer.Server
     using System;
     using System.Data.Common;
     using System.Data.SqlClient;
-    using System.IO;
     using System.Diagnostics;
+    using System.IO;
 
     internal class SmiGettersStream : Stream
     {

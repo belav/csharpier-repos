@@ -1,15 +1,15 @@
 namespace System.Web.DynamicData
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
     using System.Globalization;
+    using System.Reflection;
     using System.Web.Resources;
     using System.Web.UI;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Web.UI.WebControls;
-    using System.Drawing;
-    using System.Diagnostics;
 
     /// <summary>
     /// Control used to render Dynamic Data driven UI

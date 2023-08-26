@@ -12,8 +12,8 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Xml;
 
     // IssuanceTokenProviderBase is a base class for token providers that fetch tokens from
     // another party.

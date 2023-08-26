@@ -5,8 +5,8 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
     using System.Security;
 
     [Serializable]

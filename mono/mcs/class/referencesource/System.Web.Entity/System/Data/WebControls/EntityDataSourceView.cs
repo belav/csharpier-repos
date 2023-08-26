@@ -18,9 +18,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Web.DynamicData;
-using System.Runtime.CompilerServices;
 
 namespace System.Web.UI.WebControls
 {
@@ -1542,8 +1542,7 @@ namespace System.Web.UI.WebControls
                     }
                 }
                 else if (
-                    !String.IsNullOrEmpty(_owner.DefaultContainerName)
-                    && null != _owner.Connection
+                    !String.IsNullOrEmpty(_owner.DefaultContainerName) && null != _owner.Connection
                 )
                 {
                     _ctx = new ObjectContext(_owner.Connection);

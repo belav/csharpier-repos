@@ -30,9 +30,9 @@
 //
 
 using System;
+using System.Collections;
 using System.Runtime.Remoting.Activation;
 using System.Runtime.Remoting.Contexts;
-using System.Collections;
 
 namespace System.Runtime.Remoting.Activation
 {

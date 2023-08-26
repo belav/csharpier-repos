@@ -13,11 +13,11 @@
 **
 ============================================================*/
 using System;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Security.Permissions;
 using System.Threading;
 using System.Timers;
-using System.Security.Permissions;
 using Microsoft.Win32;
 
 namespace System.Diagnostics.Eventing.Reader

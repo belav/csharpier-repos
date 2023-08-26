@@ -32,11 +32,11 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
 #if !MOBILE
 using System.Security.Cryptography.Xml;
 #endif

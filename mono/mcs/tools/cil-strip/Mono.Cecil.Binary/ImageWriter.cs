@@ -30,7 +30,6 @@ namespace Mono.Cecil.Binary
 {
     using System.IO;
     using System.Text;
-
     using Mono.Cecil.Metadata;
 
     sealed class ImageWriter : BaseImageVisitor

@@ -34,9 +34,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading;
 using NUnit.Framework;
-
 using WebServiceMoonlightTest.ServiceReference2;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher

@@ -17,28 +17,31 @@ namespace System.Data.SqlClient
     using System;
     using System.Collections;
     using System.Collections.Generic;
-#if !PROJECTK
-    using System.ComponentModel;
-#endif // !PROJECTK
     using System.Data;
     using System.Data.Common;
-#if !PROJECTK
-    using System.Data.Sql;
-#endif //PROJECTK
     using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.CompilerServices;
-#if !PROJECTK
-    using System.Runtime.ConstrainedExecution;
-#endif // !PROJECTK
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Xml;
+#if !PROJECTK
+    using System.ComponentModel;
+#endif // !PROJECTK
+
+#if !PROJECTK
+    using System.Data.Sql;
+#endif //PROJECTK
+
+#if !PROJECTK
+    using System.Runtime.ConstrainedExecution;
+#endif // !PROJECTK
+
 #if !PROJECTK
     using System.Transactions;
 #endif //PROJECTK
-    using System.Xml;
 
 #if !PROJECTK
     using MSS = Microsoft.SqlServer.Server;

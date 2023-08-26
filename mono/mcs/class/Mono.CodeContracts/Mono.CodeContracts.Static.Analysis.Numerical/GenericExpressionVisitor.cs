@@ -27,9 +27,7 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.DataStructures;
-
 using Op = Mono.CodeContracts.Static.Analysis.Numerical.ExpressionOperator;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical
@@ -344,8 +342,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                     );
             }
             else if (
-                Decoder.IsConstant(right)
-                && Decoder.OperatorFor(left) == ExpressionOperator.Sub
+                Decoder.IsConstant(right) && Decoder.OperatorFor(left) == ExpressionOperator.Sub
             )
             // (a-b) OP const
             {

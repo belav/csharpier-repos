@@ -623,8 +623,7 @@ namespace System.Web
                     idxStartEurl--;
                 }
                 if (
-                    idxStartEurl >= 0
-                    && StringUtil.Equals(path, idxStartEurl, eurl, 0, eurl.Length)
+                    idxStartEurl >= 0 && StringUtil.Equals(path, idxStartEurl, eurl, 0, eurl.Length)
                 )
                 {
                     // restore original URL

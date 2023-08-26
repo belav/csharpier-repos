@@ -5,8 +5,8 @@ namespace System.ServiceModel.Discovery
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
     using System.Runtime;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
 
     class OnlineAnnouncementChannelDispatcher : ChannelDispatcherBase

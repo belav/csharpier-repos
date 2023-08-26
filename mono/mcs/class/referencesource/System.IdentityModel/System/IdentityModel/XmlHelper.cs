@@ -4,10 +4,10 @@
 
 namespace System.IdentityModel
 {
+    using System.IdentityModel;
     using System.IO;
     using System.Text;
     using System.Xml;
-    using System.IdentityModel;
 
     static class XmlHelper
     {

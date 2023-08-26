@@ -8,17 +8,17 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Web.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.IO;
-    using System.Text;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
+    using System.IO;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Configuration;
     using System.Web.Hosting;
     using System.Web.Util;
-    using System.Security.Permissions;
+    using System.Xml;
 
     public sealed class ProtocolsSection : ConfigurationSection
     {

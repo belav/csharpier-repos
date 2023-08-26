@@ -5,10 +5,10 @@
 // ==--==
 namespace System.Text
 {
-    using System.Runtime.Serialization;
-    using System.Text;
     using System;
     using System.Diagnostics.Contracts;
+    using System.Runtime.Serialization;
+    using System.Text;
 
     // An Encoder is used to encode a sequence of blocks of characters into
     // a sequence of blocks of bytes. Following instantiation of an encoder,

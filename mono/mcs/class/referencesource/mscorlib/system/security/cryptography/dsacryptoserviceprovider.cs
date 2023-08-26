@@ -15,12 +15,12 @@
 namespace System.Security.Cryptography
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     // Object layout of the DSAParameters structure
     internal class DSACspObject

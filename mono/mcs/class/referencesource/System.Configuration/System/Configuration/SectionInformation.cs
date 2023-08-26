@@ -9,12 +9,12 @@ namespace System.Configuration
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Internal;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Security;
     using System.Text;
     using System.Xml;
-    using System.Globalization;
 
     public sealed class SectionInformation
     {
@@ -415,8 +415,7 @@ namespace System.Configuration
                 // so long as it doesn't conflict with a type already defined
                 FactoryRecord factoryRecord = FindParentFactoryRecord(false);
                 if (
-                    factoryRecord != null
-                    && factoryRecord.OverrideModeDefault.OverrideMode != value
+                    factoryRecord != null && factoryRecord.OverrideModeDefault.OverrideMode != value
                 )
                 {
                     throw new ConfigurationErrorsException(

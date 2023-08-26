@@ -189,8 +189,7 @@ namespace System.Configuration
         internal bool HasUnretrievedSections()
         {
             if (
-                _cUnretrieved > 0
-                || (_sectionGroupUpdate != null && !_sectionGroupUpdate.Retrieved)
+                _cUnretrieved > 0 || (_sectionGroupUpdate != null && !_sectionGroupUpdate.Retrieved)
             )
             {
                 return true;

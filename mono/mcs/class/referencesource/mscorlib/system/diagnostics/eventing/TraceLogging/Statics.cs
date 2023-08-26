@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Encoding = System.Text.Encoding;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+using Encoding = System.Text.Encoding;
 
 namespace Microsoft.Diagnostics.Tracing
 #else

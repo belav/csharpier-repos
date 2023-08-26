@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
-using System.Reflection;
-using System.Text;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Data.Linq.Provider;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 
 namespace System.Data.Linq.SqlClient
 {
@@ -361,8 +361,7 @@ namespace System.Data.Linq.SqlClient
                     throw Error.CapturedValuesCannotBeSequences();
                 }
                 else if (
-                    node.NodeType == SqlNodeType.Multiset
-                    || node.NodeType == SqlNodeType.Element
+                    node.NodeType == SqlNodeType.Multiset || node.NodeType == SqlNodeType.Element
                 )
                 {
                     return ((SqlSubSelect)node).Select;
@@ -887,8 +886,7 @@ namespace System.Data.Linq.SqlClient
             SqlExpression index = this.VisitExpression(b.Right);
 
             if (
-                array.NodeType == SqlNodeType.ClientParameter
-                && index.NodeType == SqlNodeType.Value
+                array.NodeType == SqlNodeType.ClientParameter && index.NodeType == SqlNodeType.Value
             )
             {
                 SqlClientParameter cpArray = (SqlClientParameter)array;
@@ -2550,8 +2548,7 @@ namespace System.Data.Linq.SqlClient
         {
             Type memberType = TypeSystem.GetMemberType(ma.Member);
             if (
-                memberType.IsGenericType
-                && memberType.GetGenericTypeDefinition() == typeof(Table<>)
+                memberType.IsGenericType && memberType.GetGenericTypeDefinition() == typeof(Table<>)
             )
             {
                 Type rowType = memberType.GetGenericArguments()[0];

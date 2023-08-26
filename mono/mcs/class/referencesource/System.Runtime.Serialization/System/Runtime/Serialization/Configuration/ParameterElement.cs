@@ -6,8 +6,8 @@ namespace System.Runtime.Serialization.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Xml;
     using System.Security;
+    using System.Xml;
 
     public sealed partial class ParameterElement : ConfigurationElement
     {

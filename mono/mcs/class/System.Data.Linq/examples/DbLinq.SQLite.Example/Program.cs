@@ -27,12 +27,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Linq;
-using nwind;
 using System.Data.SQLite;
-
+using System.Linq;
+using System.Text;
+using nwind;
 //using nwind;  // contains Northwind context
 
 #if ORACLE

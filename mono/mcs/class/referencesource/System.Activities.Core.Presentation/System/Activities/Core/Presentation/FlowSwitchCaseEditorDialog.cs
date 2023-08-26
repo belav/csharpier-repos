@@ -6,25 +6,25 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities;
+    using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
+    using System.Activities.Presentation.View;
     using System.Activities.Statements;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using System.Runtime;
-    using System.Collections.Generic;
-    using System.Activities.Core.Presentation.Themes;
-    using System.Activities.Presentation.View;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.ObjectModel;
-    using System.Globalization;
 
     sealed class FlowSwitchCaseEditorDialog : WorkflowElementDialog
     {

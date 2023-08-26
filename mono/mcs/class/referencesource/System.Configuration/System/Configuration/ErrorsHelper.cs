@@ -7,8 +7,8 @@
 namespace System.Configuration
 {
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
 
     internal static class ErrorsHelper
     {

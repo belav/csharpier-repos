@@ -401,8 +401,7 @@ namespace System.Activities
             ThrowIfCanInduceIdleNotSet();
 
             if (
-                callback != null
-                && !CallbackWrapper.IsValidCallback(callback, this.CurrentInstance)
+                callback != null && !CallbackWrapper.IsValidCallback(callback, this.CurrentInstance)
             )
             {
                 throw FxTrace.Exception.Argument(

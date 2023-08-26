@@ -17,14 +17,15 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
     using System.Runtime.Remoting;
+    using System.Security;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Proxies;
 #endif
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Security;
+
 #if FEATURE_CORECLR
     using System.Runtime.CompilerServices;
 #endif

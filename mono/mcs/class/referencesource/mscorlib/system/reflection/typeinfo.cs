@@ -18,9 +18,9 @@
 namespace System.Reflection
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     //all today's runtime Type derivations derive now from TypeInfo
     //we make TypeInfo implement IRCT - simplifies work

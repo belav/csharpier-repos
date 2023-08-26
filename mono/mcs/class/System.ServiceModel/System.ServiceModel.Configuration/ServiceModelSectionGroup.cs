@@ -27,7 +27,6 @@
 //
 using System;
 using System.Configuration;
-
 using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration

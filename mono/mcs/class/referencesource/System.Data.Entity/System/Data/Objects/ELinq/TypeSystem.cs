@@ -298,8 +298,7 @@ namespace System.Data.Objects.ELinq
             foreach (Type testInterface in test.DeclaringType.GetInterfaces())
             {
                 if (
-                    testInterface.IsGenericType
-                    && testInterface.GetGenericTypeDefinition() == match
+                    testInterface.IsGenericType && testInterface.GetGenericTypeDefinition() == match
                 )
                 {
                     // check if the method aligns

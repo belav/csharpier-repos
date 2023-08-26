@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Discovery
 {
+    using System.Collections.Generic;
     using System.Runtime;
     using System.Threading;
-    using System.Collections.Generic;
 
     abstract class RandomDelayQueuedSendsAsyncResult<TItem>
         : IteratorAsyncResult<RandomDelayQueuedSendsAsyncResult<TItem>>

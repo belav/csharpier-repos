@@ -4,12 +4,12 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net;
-    using System.Net.Sockets;
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
 
     internal class SystemNetworkInterface : NetworkInterface
     {

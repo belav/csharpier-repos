@@ -27,16 +27,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.ComponentModel.Design.Serialization;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.ComponentModel.Design.Serialization
 {

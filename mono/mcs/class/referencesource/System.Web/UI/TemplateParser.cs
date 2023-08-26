@@ -15,30 +15,30 @@
 
 namespace System.Web.UI
 {
-    using System.Runtime.Serialization.Formatters;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
     using System;
-    using System.IO;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Threading;
-    using System.Reflection;
-    using System.Globalization;
-    using System.CodeDom.Compiler;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Web.Caching;
-    using System.Web.Util;
-    using System.Web.Hosting;
-    using System.Web.Compilation;
-    using HttpException = System.Web.HttpException;
-    using System.Text.RegularExpressions;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Web.Caching;
+    using System.Web.Compilation;
     using System.Web.Configuration;
+    using System.Web.Hosting;
     using System.Web.Instrumentation;
+    using System.Web.Util;
+    using HttpException = System.Web.HttpException;
 
     /// <internalonly/>
     /// <devdoc>
@@ -3531,8 +3531,7 @@ namespace System.Web.UI
             // Add an import for the namespace of the type (if any)
             // Per ASURT 83942, only do this for namespaces we generate (e.g. ASP & _ASP)
             if (
-                type.Namespace != null
-                && BaseCodeDomTreeGenerator.IsAspNetNamespace(type.Namespace)
+                type.Namespace != null && BaseCodeDomTreeGenerator.IsAspNetNamespace(type.Namespace)
             )
                 AddImportEntry(type.Namespace);
         }

@@ -8,11 +8,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Runtime.Versioning;
+using System.Text;
 
 namespace System.Xml
 {
@@ -826,8 +826,7 @@ namespace System.Xml
                             // Now verify prefix validity
                             string definedPrefix = FindPrefix(ns);
                             if (
-                                definedPrefix != null
-                                && (prefix == null || prefix == definedPrefix)
+                                definedPrefix != null && (prefix == null || prefix == definedPrefix)
                             )
                             {
                                 prefix = definedPrefix;

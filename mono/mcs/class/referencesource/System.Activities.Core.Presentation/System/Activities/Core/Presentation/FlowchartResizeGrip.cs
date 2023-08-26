@@ -3,15 +3,15 @@
 //----------------------------------------------------------------
 namespace System.Activities.Core.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Model;
+    using System.ComponentModel;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Runtime;
-    using System.Activities.Presentation.Model;
-    using System.Activities.Presentation;
-    using System.ComponentModel;
-    using System.Activities.Presentation.FreeFormEditing;
 
     //This class is visual representation of ResizeGrip like control, which is used in a Grid to allow resizing.
     class FlowchartResizeGrip : Control

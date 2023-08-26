@@ -86,8 +86,7 @@ namespace System.Data.Mapping.Update.Internal
                 EntityUtil.CheckArgumentNull(stateEntry, "stateEntry");
 
                 if (
-                    EntityState.Added == stateEntry.State
-                    || EntityState.Deleted == stateEntry.State
+                    EntityState.Added == stateEntry.State || EntityState.Deleted == stateEntry.State
                 )
                 {
                     // We only track added and deleted entities because modifications to entities do not affect

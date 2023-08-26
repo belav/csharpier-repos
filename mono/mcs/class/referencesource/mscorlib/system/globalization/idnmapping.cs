@@ -30,12 +30,12 @@
 namespace System.Globalization
 {
     using System;
-    using System.Security;
-    using System.Globalization;
-    using System.Text;
-    using System.Runtime.Versioning;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Text;
 
     // IdnMapping class used to map names to Punycode
 
@@ -698,8 +698,7 @@ namespace System.Globalization
 
                     eBidi = CharUnicodeInfo.GetBidiCategory(unicode, iTest);
                     if (
-                        eBidi != BidiCategory.RightToLeft
-                        && eBidi != BidiCategory.RightToLeftArabic
+                        eBidi != BidiCategory.RightToLeft && eBidi != BidiCategory.RightToLeftArabic
                     )
                     {
                         // Oops, last wasn't RTL, last should be RTL if first is RTL
@@ -1228,8 +1227,7 @@ namespace System.Globalization
                         iOutputAfterLastDot
                     );
                     if (
-                        eBidi == BidiCategory.RightToLeft
-                        || eBidi == BidiCategory.RightToLeftArabic
+                        eBidi == BidiCategory.RightToLeft || eBidi == BidiCategory.RightToLeftArabic
                     )
                     {
                         // It has to be right to left.

@@ -8,10 +8,10 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
-    using System.Xml;
-    using System.Xml.XPath;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
 
     // We need this wrapper object to:
     //      1. Calculate position

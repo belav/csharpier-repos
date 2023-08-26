@@ -12,15 +12,14 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-    using System.Web.UI.Design.MobileControls.Util;
-
-    using DesignTimeData = System.Web.UI.Design.DesignTimeData;
     using Button = System.Windows.Forms.Button;
-    using Label = System.Windows.Forms.Label;
     using ComboBox = System.Windows.Forms.ComboBox;
+    using DesignTimeData = System.Web.UI.Design.DesignTimeData;
+    using Label = System.Windows.Forms.Label;
     using TextBox = System.Windows.Forms.TextBox;
 
     /// <summary>

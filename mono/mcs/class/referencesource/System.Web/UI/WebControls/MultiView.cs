@@ -73,8 +73,7 @@ namespace System.Web.UI.WebControls
                     );
                 }
                 if (
-                    Views.Count == 0
-                    && ControlState < ControlState.FrameworkInitialized /* Whidbey 113333 */
+                    Views.Count == 0 && ControlState < ControlState.FrameworkInitialized /* Whidbey 113333 */
                 )
                 {
                     _cachedActiveViewIndex = value;

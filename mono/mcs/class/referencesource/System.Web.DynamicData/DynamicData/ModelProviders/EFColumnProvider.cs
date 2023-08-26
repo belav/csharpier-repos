@@ -1,7 +1,7 @@
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 
 namespace System.Web.DynamicData.ModelProviders

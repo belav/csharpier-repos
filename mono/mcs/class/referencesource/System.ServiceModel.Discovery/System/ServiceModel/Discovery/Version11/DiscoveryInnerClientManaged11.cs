@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Discovery.Version11
 {
     using System;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.ServiceModel.Description;
 
     class DiscoveryInnerClientManaged11

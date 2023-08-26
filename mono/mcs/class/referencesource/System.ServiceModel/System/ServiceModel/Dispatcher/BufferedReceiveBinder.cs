@@ -5,9 +5,9 @@ namespace System.ServiceModel.Dispatcher
 {
     using System;
     using System.Collections.Generic;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
 
     class BufferedReceiveBinder : IChannelBinder

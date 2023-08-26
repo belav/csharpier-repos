@@ -26,13 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
-
+using System.Xml;
+using System.Xml.XPath;
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
 
 namespace System.ServiceModel.Security.Tokens

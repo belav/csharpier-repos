@@ -12,11 +12,11 @@
 
 namespace System.Web
 {
-    using System.Text;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Globalization;
     using System.Security.Permissions;
+    using System.Text;
     using System.Web.Configuration;
     using System.Web.Management;
     using Util;
@@ -424,8 +424,7 @@ namespace System.Web
                 //
                 // Domain
                 else if (
-                    attributeValue != null
-                    && StringUtil.EqualsIgnoreCase(attributeName, "Domain")
+                    attributeValue != null && StringUtil.EqualsIgnoreCase(attributeName, "Domain")
                 )
                 {
                     cookie.Domain = attributeValue;
@@ -433,8 +432,7 @@ namespace System.Web
                 //
                 // Path
                 else if (
-                    attributeValue != null
-                    && StringUtil.EqualsIgnoreCase(attributeName, "Path")
+                    attributeValue != null && StringUtil.EqualsIgnoreCase(attributeName, "Path")
                 )
                 {
                     cookie.Path = attributeValue;

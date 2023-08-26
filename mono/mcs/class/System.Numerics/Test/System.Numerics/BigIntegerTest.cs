@@ -7,8 +7,8 @@
 //
 
 using System;
-using System.Numerics;
 using System.Globalization;
+using System.Numerics;
 using System.Threading;
 using NUnit.Framework;
 

@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.Text;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.Xml;
-    using System.ServiceModel.Security;
     using System.Collections.Generic;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Selectors;
     using System.Globalization;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
+    using System.Text;
+    using System.Xml;
 
     public abstract class ServiceModelSecurityTokenRequirement : SecurityTokenRequirement
     {

@@ -8,7 +8,6 @@ namespace System.Web.UI.Design.MobileControls
 {
     using System;
     using System.Collections;
-
     using System.Web.UI.MobileControls;
 
     [System.Security.Permissions.SecurityPermission(

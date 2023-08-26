@@ -10,12 +10,12 @@
 namespace System.Data
 {
     using System;
-    using System.Xml;
     using System.Collections;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Data.Common;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Xml;
 
     internal sealed class XDRSchema : XMLSchema
     {

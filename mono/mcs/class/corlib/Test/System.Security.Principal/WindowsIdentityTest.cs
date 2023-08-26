@@ -8,13 +8,13 @@
 // Copyright (C) 2004-2005 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Principal;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Principal
 {
@@ -98,8 +98,7 @@ namespace MonoTests.System.Security.Principal
             catch (ArgumentException)
             {
                 if ( /*IsWin2k3orLater ||*/
-                    IsPosix
-                )
+                    IsPosix)
                     throw;
             }
         }
@@ -128,8 +127,7 @@ namespace MonoTests.System.Security.Principal
             catch (ArgumentException)
             {
                 if ( /*IsWin2k3orLater ||*/
-                    IsPosix
-                )
+                    IsPosix)
                     throw;
             }
         }
@@ -150,8 +148,7 @@ namespace MonoTests.System.Security.Principal
             catch (ArgumentException)
             {
                 if ( /*IsWin2k3orLater ||*/
-                    IsPosix
-                )
+                    IsPosix)
                     throw;
             }
         }

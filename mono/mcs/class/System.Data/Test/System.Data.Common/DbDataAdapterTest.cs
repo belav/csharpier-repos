@@ -30,16 +30,15 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-
+using MonoTests.Helpers;
+using NUnit.Framework;
 /*--For Bug 853 Test Begin--*/
 #if !MOBILE && !XAMMAC_4_5 && WORKING_SQLITE
 using Mono.Data.Sqlite;
 #endif
 /*--For Bug 853 Test End--*/
 
-using NUnit.Framework;
 
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Data.Common
 {

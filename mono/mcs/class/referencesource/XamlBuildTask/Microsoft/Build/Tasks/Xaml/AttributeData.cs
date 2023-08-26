@@ -4,14 +4,14 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
-    using System.Collections.Generic;
-    using System.Xaml;
-    using System.Collections.ObjectModel;
-    using System.Runtime;
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Reflection;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Xaml;
     using XamlBuildTask;
 
     public sealed class AttributeData
@@ -168,8 +168,7 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 readNext = false;
                 if (
-                    reader.NodeType == XamlNodeType.StartObject
-                    && reader.Type == XamlLanguage.Array
+                    reader.NodeType == XamlNodeType.StartObject && reader.Type == XamlLanguage.Array
                 )
                 {
                     paramInfo.IsArray = true;

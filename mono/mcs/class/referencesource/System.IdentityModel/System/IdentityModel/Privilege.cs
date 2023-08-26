@@ -9,10 +9,10 @@ namespace System.IdentityModel
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security.AccessControl;
     using System.Security.Principal;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime.Versioning;
 
     class Privilege
     {

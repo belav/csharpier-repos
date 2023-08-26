@@ -389,10 +389,7 @@ namespace System.Data.Linq.SqlClient
                         return false;
                     }
                     else if (
-                        !this.IsChar
-                        && !this.IsString
-                        && this.IsFixedSize
-                        && this.Size > 0 /*&& this.Size != LargeTypeSizeIndicator*/
+                        !this.IsChar && !this.IsString && this.IsFixedSize && this.Size > 0 /*&& this.Size != LargeTypeSizeIndicator*/
                     )
                     { // commented out because LargeTypeSizeIndicator == -1
                         return (this.Size < defaultSize);

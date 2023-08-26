@@ -15,8 +15,8 @@
 namespace System.Runtime.Remoting.Messaging
 {
     using System;
-    using IDictionary = System.Collections.IDictionary;
     using System.Security.Permissions;
+    using IDictionary = System.Collections.IDictionary;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface IMessage

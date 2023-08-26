@@ -4,8 +4,8 @@
 
 namespace System.Runtime.Diagnostics
 {
-    using System.Xml;
     using System.Collections;
+    using System.Xml;
 
     class DictionaryTraceRecord : TraceRecord
     {

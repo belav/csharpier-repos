@@ -9,8 +9,8 @@
 namespace System.Xml.Schema
 {
     using System.Collections;
-    using System.Text;
     using System.Diagnostics;
+    using System.Text;
 
     internal class NamespaceList
     {

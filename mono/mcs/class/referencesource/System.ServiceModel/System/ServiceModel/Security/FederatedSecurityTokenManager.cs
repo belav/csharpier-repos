@@ -11,7 +11,6 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security.Tokens;
-
 using SR = System.ServiceModel.SR;
 
 namespace System.ServiceModel.Security
@@ -754,8 +753,7 @@ namespace System.ServiceModel.Security
             }
 
             if (
-                saml2SecurityTokenHandler != null
-                && saml2SecurityTokenHandler.Configuration == null
+                saml2SecurityTokenHandler != null && saml2SecurityTokenHandler.Configuration == null
             )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(

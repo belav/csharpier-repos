@@ -135,8 +135,7 @@ namespace Mono.Xml.XPath
                 if (eof)
                     return String.Empty;
                 else if (
-                    current.NodeType == XPathNodeType.Namespace
-                    && current.LocalName == String.Empty
+                    current.NodeType == XPathNodeType.Namespace && current.LocalName == String.Empty
                 )
                     return "xmlns";
                 else
@@ -164,8 +163,7 @@ namespace Mono.Xml.XPath
                 if (eof)
                     return String.Empty;
                 else if (
-                    current.NodeType == XPathNodeType.Namespace
-                    && current.LocalName != String.Empty
+                    current.NodeType == XPathNodeType.Namespace && current.LocalName != String.Empty
                 )
                     return "xmlns";
                 else

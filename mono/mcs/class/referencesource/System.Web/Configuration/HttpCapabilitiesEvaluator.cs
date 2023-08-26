@@ -12,13 +12,13 @@ namespace System.Web.Configuration
     using System.Globalization;
     using System.Reflection;
     using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading;
     using System.Web.Caching;
     using System.Web.Compilation;
     using System.Web.Hosting;
-    using System.Security.Permissions;
 
     public abstract class HttpCapabilitiesProvider
     {

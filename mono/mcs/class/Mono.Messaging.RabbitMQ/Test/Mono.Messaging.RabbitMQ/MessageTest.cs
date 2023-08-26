@@ -27,16 +27,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-using NUnit.Mocks;
 using System;
+using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using System.Reflection;
-using SystemMessage = System.Messaging.Message;
-using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
-
 using Mono.Messaging;
+using NUnit.Framework;
+using NUnit.Mocks;
+using SystemAcknowledgeTypes = System.Messaging.AcknowledgeTypes;
+using SystemMessage = System.Messaging.Message;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ
 {

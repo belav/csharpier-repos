@@ -7,15 +7,15 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Runtime;
     using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Permissions;
     using System.ServiceModel;
     using System.Text;
     using System.Xml;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
 
     [Serializable]
     public class RedirectionException : CommunicationException

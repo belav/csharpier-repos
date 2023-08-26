@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Activities.Presentation
 {
-    using System.Runtime;
     using System.Activities.Core.Presentation;
     using System.Activities.Presentation.Model;
     using System.Globalization;
+    using System.Runtime;
     using System.Windows.Data;
 
     sealed class ContentButtonTitleConverter : IValueConverter

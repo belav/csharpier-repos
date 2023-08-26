@@ -7,11 +7,11 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
-    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     /// <summary>
     /// Wraps an IChannelListener<IReplyChannel> into an IChannelListener<IInputChannel>

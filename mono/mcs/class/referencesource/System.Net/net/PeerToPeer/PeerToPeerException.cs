@@ -7,14 +7,14 @@ namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.InteropServices;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Threading;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     /// <remarks>
     /// The PeerToPeerException class encpasulates the exceptions for

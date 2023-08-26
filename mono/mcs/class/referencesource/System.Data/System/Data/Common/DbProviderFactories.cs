@@ -16,9 +16,9 @@ namespace System.Data.Common
     using System.Data;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Xml;
     using System.Linq;
     using System.Reflection;
+    using System.Xml;
 
     public static class DbProviderFactories
     {

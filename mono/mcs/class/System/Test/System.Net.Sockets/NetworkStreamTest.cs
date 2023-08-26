@@ -6,10 +6,10 @@
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
 
-using System.Net.Sockets;
-using System.Net;
 using System;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using NUnit.Framework;
 
 namespace MonoTests.System.Net.Sockets

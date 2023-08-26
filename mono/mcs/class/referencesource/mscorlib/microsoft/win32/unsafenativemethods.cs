@@ -10,9 +10,8 @@
 ============================================================*/
 namespace Microsoft.Win32
 {
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
     using System;
+    using System.Diagnostics.Tracing;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
@@ -21,7 +20,8 @@ namespace Microsoft.Win32
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
-    using System.Diagnostics.Tracing;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     [System.Security.SecurityCritical] // auto-generated
     [SuppressUnmanagedCodeSecurityAttribute()]

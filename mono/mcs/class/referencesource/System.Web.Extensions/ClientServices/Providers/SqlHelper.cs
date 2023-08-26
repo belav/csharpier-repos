@@ -6,19 +6,19 @@
 namespace System.Web.ClientServices.Providers
 {
     using System;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.AccessControl;
-    using System.Globalization;
     using System.Data;
     using System.Data.Common;
     using System.Data.OleDb;
-    using System.IO;
-    using System.Windows.Forms;
     using System.Data.SqlClient;
-    using System.Reflection;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Security;
+    using System.Security.AccessControl;
+    using System.Security.Permissions;
     using System.Web.Resources;
+    using System.Windows.Forms;
 
     internal static class SqlHelper
     {

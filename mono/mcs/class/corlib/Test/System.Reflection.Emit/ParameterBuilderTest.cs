@@ -5,8 +5,8 @@
 // (c) 2012 Gleb Golubitsky
 //
 using System;
-using System.Reflection.Emit;
 using System.Reflection;
+using System.Reflection.Emit;
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection.Emit

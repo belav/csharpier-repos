@@ -5,19 +5,19 @@
 // ==--==
 namespace System.Diagnostics
 {
-    using System.Text;
-    using System.Threading;
     using System;
-    using System.Security;
-    using System.Security.Permissions;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Globalization;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     // READ ME:
     // Modifying the order or fields of this object may require other changes

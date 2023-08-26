@@ -36,7 +36,6 @@ using System;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Xml

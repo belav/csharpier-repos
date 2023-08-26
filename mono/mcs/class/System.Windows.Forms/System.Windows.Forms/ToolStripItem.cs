@@ -28,8 +28,8 @@
 
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.Layout;
 
@@ -1981,8 +1981,7 @@ namespace System.Windows.Forms
                             this.text_align
                         );
                     else if (
-                        this.text == string.Empty
-                        && (this.Image == null || !this.UseImageMargin)
+                        this.text == string.Empty && (this.Image == null || !this.UseImageMargin)
                     )
                         break;
                     else if (this.text == string.Empty && this.Image != null)

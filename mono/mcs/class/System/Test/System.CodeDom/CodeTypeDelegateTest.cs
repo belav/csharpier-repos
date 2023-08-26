@@ -8,7 +8,6 @@
 //
 using System;
 using System.CodeDom;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom

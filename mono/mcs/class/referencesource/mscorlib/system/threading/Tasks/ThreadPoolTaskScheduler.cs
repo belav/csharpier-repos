@@ -14,9 +14,9 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System;
-using System.Security;
-using System.Diagnostics.Contracts;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Security;
 using System.Text;
 #if !FEATURE_PAL && !FEATURE_CORECLR    // PAL and CoreClr don't support  eventing
 using System.Diagnostics.Tracing;

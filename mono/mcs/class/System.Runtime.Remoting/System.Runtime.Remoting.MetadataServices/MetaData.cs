@@ -29,13 +29,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.CodeDom.Compiler;
 using System.Collections;
 using System.IO;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Reflection;
-using System.Net;
-using System.CodeDom.Compiler;
 using Microsoft.CSharp;
 
 namespace System.Runtime.Remoting.MetadataServices

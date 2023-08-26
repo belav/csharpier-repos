@@ -6,13 +6,13 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.Web.Services;
+    using System;
     using System.Collections;
     using System.Globalization;
     using System.Reflection;
-    using System;
     using System.Text;
     using System.Threading;
+    using System.Web.Services;
 
     internal class ScalarFormatter
     {

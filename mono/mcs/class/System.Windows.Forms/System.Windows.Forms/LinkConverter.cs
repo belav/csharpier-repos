@@ -80,9 +80,7 @@ namespace System.Windows.Forms
         )
         {
             if (
-                (value == null)
-                || !(value is LinkLabel.Link)
-                || (destinationType != typeof(string))
+                (value == null) || !(value is LinkLabel.Link) || (destinationType != typeof(string))
             )
                 return base.ConvertTo(context, culture, value, destinationType);
 

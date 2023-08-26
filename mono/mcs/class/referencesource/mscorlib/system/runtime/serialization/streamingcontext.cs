@@ -14,8 +14,8 @@
 ===========================================================*/
 namespace System.Runtime.Serialization
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -5,13 +5,13 @@
 namespace System.Activities.DurableInstancing
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Runtime.DurableInstancing;
     using System.Xml.Linq;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class ActivatableWorkflowsQueryResult : InstanceStoreQueryResult

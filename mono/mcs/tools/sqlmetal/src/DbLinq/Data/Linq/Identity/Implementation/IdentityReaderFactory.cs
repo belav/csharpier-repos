@@ -27,7 +27,6 @@
 using System;
 using DbLinq.Data.Linq.Identity;
 using DbLinq.Data.Linq.Identity.Implementation;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

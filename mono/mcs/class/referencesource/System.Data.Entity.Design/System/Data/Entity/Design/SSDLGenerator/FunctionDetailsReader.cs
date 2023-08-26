@@ -8,11 +8,11 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Common;
 using System.Data.EntityClient;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {

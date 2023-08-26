@@ -35,7 +35,6 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
-
 using Mono.Security.Cryptography;
 
 namespace Mono.Security
@@ -379,11 +378,7 @@ namespace Mono.Security
                     return Error("read_mz2_failed");
             }
             else if (
-                mzRead >= 4
-                && mz[0] == (byte)'P'
-                && mz[1] == (byte)'E'
-                && mz[2] == 0
-                && mz[3] == 0
+                mzRead >= 4 && mz[0] == (byte)'P' && mz[1] == (byte)'E' && mz[2] == 0 && mz[3] == 0
             )
             { // 0x4550
                 // MS-DOS header/stub can be omitted and just start with PE, though it is rare.

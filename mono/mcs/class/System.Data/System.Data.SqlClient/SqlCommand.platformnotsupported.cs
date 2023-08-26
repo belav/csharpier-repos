@@ -13,7 +13,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
-
 using Microsoft.SqlServer.Server;
 
 namespace System.Data.SqlClient

@@ -7,9 +7,9 @@
 namespace System.Web.UI
 {
     using System;
-    using System.Web.UI;
-    using System.Web.Resources;
     using System.Globalization;
+    using System.Web.Resources;
+    using System.Web.UI;
 
     internal static class ApplicationServiceManager
     {

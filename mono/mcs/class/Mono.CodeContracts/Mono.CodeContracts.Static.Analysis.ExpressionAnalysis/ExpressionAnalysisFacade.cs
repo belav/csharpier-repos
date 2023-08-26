@@ -27,8 +27,8 @@
 //
 
 using System;
-using Mono.CodeContracts.Static.AST.Visitors;
 using Mono.CodeContracts.Static.Analysis.HeapAnalysis;
+using Mono.CodeContracts.Static.AST.Visitors;
 using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataFlowAnalysis;
 using Mono.CodeContracts.Static.DataStructures;

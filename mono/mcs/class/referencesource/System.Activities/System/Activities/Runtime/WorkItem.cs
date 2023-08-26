@@ -5,14 +5,14 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
+    using System.Activities.Debugger;
+    using System.Activities.Tracking;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Runtime.Serialization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Activities.Debugger;
-    using System.Collections.Generic;
-    using System.Activities.Tracking;
 
     [DataContract]
     internal abstract class WorkItem

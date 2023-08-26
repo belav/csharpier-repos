@@ -29,10 +29,8 @@
 //
 
 using System;
-
 using Mono.Messaging;
 using Mono.Messaging.RabbitMQ;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ

@@ -11,7 +11,6 @@ namespace System.Data.Query.InternalTrees
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
     using System.Data;
     using System.Data.Common;
     using System.Data.Common.CommandTrees;
@@ -19,6 +18,7 @@ namespace System.Data.Query.InternalTrees
     using System.Data.Query.PlanCompiler;
     using System.Diagnostics;
     using System.IO;
+    using System.Text;
     using System.Threading;
 
     /// <summary>

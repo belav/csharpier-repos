@@ -1488,8 +1488,7 @@ namespace System.Xml
         public override void ReadEndElement()
         {
             if (
-                node.NodeType != XmlNodeType.EndElement
-                && MoveToContent() != XmlNodeType.EndElement
+                node.NodeType != XmlNodeType.EndElement && MoveToContent() != XmlNodeType.EndElement
             )
             {
                 int nodeDepth = node.NodeType == XmlNodeType.Element ? this.depth - 1 : this.depth;

@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common.Utils;
+using System.Data.Entity;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Globalization;
@@ -19,7 +20,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Data.Entity;
 
 namespace System.Data.Mapping
 {

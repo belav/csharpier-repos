@@ -14,11 +14,11 @@ namespace System.Globalization
     //
     //
 
-    using System.Threading;
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
 
     // This calendar recognizes two era values:
     // 0 CurrentEra (AD)

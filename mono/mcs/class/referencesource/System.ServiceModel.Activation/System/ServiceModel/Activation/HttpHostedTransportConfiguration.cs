@@ -4,15 +4,15 @@
 namespace System.ServiceModel.Activation
 {
     using System.Collections;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Net;
-    using System.Security;
     using System.Runtime;
+    using System.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     class HttpHostedTransportConfiguration : HostedTransportConfigurationBase
     {

@@ -8,10 +8,10 @@
 #if MONO_FEATURE_SRE
 namespace System.Reflection.Emit
 {
-    using System.Runtime.InteropServices;
     using System;
-    using System.Reflection;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using CultureInfo = System.Globalization.CultureInfo;
 
     [Serializable]

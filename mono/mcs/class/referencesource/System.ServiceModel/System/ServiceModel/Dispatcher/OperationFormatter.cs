@@ -4,20 +4,20 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Reflection;
-    using System.Xml;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.Runtime.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
+    using System.Xml;
 
     abstract class OperationFormatter : IClientMessageFormatter, IDispatchMessageFormatter
     {

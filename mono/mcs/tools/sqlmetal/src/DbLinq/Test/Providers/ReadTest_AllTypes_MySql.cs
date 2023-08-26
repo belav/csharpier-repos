@@ -2,11 +2,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Globalization;
-using NUnit.Framework;
+using System.Linq;
+using System.Text;
 using AllTypesExample;
+using NUnit.Framework;
 
 namespace Test_NUnit_MySql
 {

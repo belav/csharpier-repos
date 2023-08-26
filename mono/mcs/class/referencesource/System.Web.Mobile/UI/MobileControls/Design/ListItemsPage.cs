@@ -12,17 +12,16 @@ namespace System.Web.UI.Design.MobileControls
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
+    using System.Web.UI.Design.MobileControls.Util;
     //    using System.Web.UI.Design.Util;
 
     using System.Web.UI.MobileControls;
-    using System.Web.UI.Design.MobileControls.Util;
-
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using Button = System.Windows.Forms.Button;
+    using CheckBox = System.Windows.Forms.CheckBox;
     using Label = System.Windows.Forms.Label;
     using TextBox = System.Windows.Forms.TextBox;
-    using CheckBox = System.Windows.Forms.CheckBox;
     using TreeView = System.Windows.Forms.TreeView;
 
     /// <summary>

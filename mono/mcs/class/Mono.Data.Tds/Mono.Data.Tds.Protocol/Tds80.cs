@@ -30,8 +30,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Mono.Data.Tds;
 using System;
+using Mono.Data.Tds;
 
 namespace Mono.Data.Tds.Protocol
 {

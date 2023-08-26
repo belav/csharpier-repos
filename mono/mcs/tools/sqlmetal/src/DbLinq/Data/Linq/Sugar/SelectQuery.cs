@@ -28,16 +28,14 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using DbLinq.Data.Linq.Database;
-
+using DbLinq.Data.Linq.Mapping;
+using DbLinq.Data.Linq.Sql;
+using DbLinq.Data.Linq.Sugar.Expressions;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using DbLinq.Data.Linq.Mapping;
-using DbLinq.Data.Linq.Sql;
-using DbLinq.Data.Linq.Sugar.Expressions;
 
 namespace DbLinq.Data.Linq.Sugar
 {

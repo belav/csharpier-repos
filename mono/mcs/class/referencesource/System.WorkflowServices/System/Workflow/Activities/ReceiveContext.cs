@@ -11,8 +11,8 @@ namespace System.Workflow.Activities
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.ServiceModel;
-    using System.Xml;
     using System.ServiceModel.Dispatcher;
+    using System.Xml;
 
     [Serializable]
     internal sealed class ReceiveContext

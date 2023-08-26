@@ -32,14 +32,16 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Authentication.ExtendedProtection;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
+using System.Xml;
 #if !MOBILE
 using System.ServiceModel.Channels.Http;
 #endif
-using System.ServiceModel.Description;
+
 #if !MOBILE
 using WS = System.Web.Services.Description;
 #endif
-using System.Xml;
+
 
 namespace System.ServiceModel.Channels
 {

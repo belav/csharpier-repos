@@ -25,10 +25,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Markup;
+using System.Xaml.Schema;
 #if !__MOBILE__
 using System.Xaml.Permissions;
 #endif
-using System.Xaml.Schema;
+
 
 namespace System.Xaml
 {

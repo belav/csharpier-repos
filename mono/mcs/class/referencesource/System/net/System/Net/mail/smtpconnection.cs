@@ -1,15 +1,15 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Net;
-    using System.Security.Cryptography.X509Certificates;
-    using System.IO;
-    using System.Threading;
-    using System.Globalization;
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Security.Authentication.ExtendedProtection;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
 
     class SmtpConnection
     {

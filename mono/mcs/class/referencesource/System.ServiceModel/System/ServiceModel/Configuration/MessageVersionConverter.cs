@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     class MessageVersionConverter : TypeConverter
     {

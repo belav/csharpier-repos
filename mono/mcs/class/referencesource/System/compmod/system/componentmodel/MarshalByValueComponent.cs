@@ -9,8 +9,8 @@ namespace System.ComponentModel
     using System;
     using System.ComponentModel.Design;
     using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     /// <devdoc>
     /// <para>Provides the base implementation for <see cref='System.ComponentModel.IComponent'/>,

@@ -32,7 +32,6 @@
 namespace Mono.Cecil.Metadata
 {
     using Mono.Cecil;
-
     using Mono.Cecil.Binary;
 
     internal sealed class MethodTable : IMetadataTable

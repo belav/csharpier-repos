@@ -7,17 +7,17 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.Util;
-    using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Util;
+    using System.Xml;
 
     public sealed class ClientTarget : ConfigurationElement
     {

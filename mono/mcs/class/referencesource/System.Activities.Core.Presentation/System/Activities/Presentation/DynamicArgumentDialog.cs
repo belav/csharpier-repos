@@ -5,11 +5,11 @@
 namespace System.Activities.Presentation
 {
     using System.Activities.Presentation.Model;
-    using System.Windows;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime;
+    using System.Windows;
 
     public sealed class DynamicArgumentDialog : WorkflowElementDialog
     {

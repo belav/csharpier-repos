@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
-    using System.Xml;
     using System.ServiceModel;
-    using System.ComponentModel;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     public sealed partial class XmlDictionaryReaderQuotasElement : ServiceModelConfigurationElement
     {

@@ -27,8 +27,8 @@
 //
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading;
 
 namespace System.Windows.Forms
@@ -91,8 +91,7 @@ namespace System.Windows.Forms
             get
             {
                 if (
-                    this.drop_down_direction == ToolStripDropDownDirection.Default
-                    && Parent != null
+                    this.drop_down_direction == ToolStripDropDownDirection.Default && Parent != null
                 )
                     return Parent.DefaultDropDownDirection;
                 return this.drop_down_direction;

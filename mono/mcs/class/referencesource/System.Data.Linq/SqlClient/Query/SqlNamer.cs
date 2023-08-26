@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Linq;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace System.Data.Linq.SqlClient
 {

@@ -122,8 +122,7 @@
                 if (memberExpr != null)
                 {
                     if (
-                        memberExpr.Expression == expr.Parameters[0]
-                        || memberExpr.Expression == null
+                        memberExpr.Expression == expr.Parameters[0] || memberExpr.Expression == null
                     )
                     {
                         // model => model.Member or model => StaticMember

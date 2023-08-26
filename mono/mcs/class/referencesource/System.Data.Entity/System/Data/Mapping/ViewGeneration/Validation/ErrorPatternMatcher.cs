@@ -419,8 +419,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             );
 
             if (
-                m_viewgenContext.ViewTarget == ViewTarget.UpdateView
-                && nonAssociationWrappers.Any()
+                m_viewgenContext.ViewTarget == ViewTarget.UpdateView && nonAssociationWrappers.Any()
             )
             {
                 LeftCellWrapper firstLeftCWrapper = nonAssociationWrappers.First();

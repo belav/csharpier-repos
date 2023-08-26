@@ -34,17 +34,16 @@
 #define FULL_AOT_RUNTIME
 #endif
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System;
-using System.Security;
 using System.Reflection;
-using System.Threading;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security;
+using System.Text;
+using System.Threading;
 #if !FULL_AOT_RUNTIME && !DISABLE_REMOTING
 using Mono.Interop;
 #endif
@@ -2073,8 +2072,7 @@ namespace System.Runtime.InteropServices
             }
 
             if (
-                info is ManagedErrorInfo
-                && ((ManagedErrorInfo)info).Exception._HResult == errorCode
+                info is ManagedErrorInfo && ((ManagedErrorInfo)info).Exception._HResult == errorCode
             )
             {
                 return ((ManagedErrorInfo)info).Exception;

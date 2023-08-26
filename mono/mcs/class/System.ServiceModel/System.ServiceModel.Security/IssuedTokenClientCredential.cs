@@ -28,9 +28,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel;
 using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security

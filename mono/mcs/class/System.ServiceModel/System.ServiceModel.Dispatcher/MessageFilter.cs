@@ -25,9 +25,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Runtime.Serialization;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Dispatcher
 {

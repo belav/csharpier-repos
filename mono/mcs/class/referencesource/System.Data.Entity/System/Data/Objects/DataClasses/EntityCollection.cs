@@ -354,8 +354,7 @@ namespace System.Data.Objects.DataClasses
             Debug.Assert(wrappedEntity != null, "IEntityWrapper instance is null.");
             // Validate that the incoming entity is also detached
             if (
-                null != wrappedEntity.Context
-                && wrappedEntity.MergeOption != MergeOption.NoTracking
+                null != wrappedEntity.Context && wrappedEntity.MergeOption != MergeOption.NoTracking
             )
             {
                 throw EntityUtil.UnableToAddToDisconnectedRelatedEnd();
@@ -381,8 +380,7 @@ namespace System.Data.Objects.DataClasses
             Debug.Assert(wrappedEntity != null, "IEntityWrapper instance is null.");
             // Validate that the incoming entity is also detached
             if (
-                null != wrappedEntity.Context
-                && wrappedEntity.MergeOption != MergeOption.NoTracking
+                null != wrappedEntity.Context && wrappedEntity.MergeOption != MergeOption.NoTracking
             )
             {
                 throw EntityUtil.UnableToRemoveFromDisconnectedRelatedEnd();

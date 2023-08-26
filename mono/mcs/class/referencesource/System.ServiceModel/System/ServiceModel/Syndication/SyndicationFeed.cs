@@ -7,13 +7,13 @@ namespace System.ServiceModel.Syndication
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.Text;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Globalization;
     using System.Xml.Serialization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
     [TypeForwardedFrom(

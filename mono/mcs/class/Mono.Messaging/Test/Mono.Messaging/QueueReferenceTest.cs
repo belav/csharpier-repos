@@ -30,7 +30,6 @@
 
 using System;
 using System.Text.RegularExpressions;
-
 using Mono.Messaging;
 using NUnit.Framework;
 

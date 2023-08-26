@@ -6,17 +6,17 @@
 
 namespace System.ComponentModel
 {
-    using System.Runtime.Remoting.Activation;
-    using System.Runtime.Remoting;
-    using System.Runtime.InteropServices;
-    using System.Reflection;
-    using System.Diagnostics;
     using System;
-    using System.Text;
     using System.Collections;
     using System.ComponentModel.Design;
-    using Microsoft.Win32;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Activation;
     using System.Security.Permissions;
+    using System.Text;
+    using Microsoft.Win32;
 
     /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager"]/*' />
     /// <devdoc>

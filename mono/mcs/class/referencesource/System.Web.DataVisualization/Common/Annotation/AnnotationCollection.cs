@@ -24,13 +24,12 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Drawing.Text;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -217,8 +216,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Restore previous background using double buffered bitmap
             if (
-                !chartPicture.isSelectionMode
-                && this.Count > 0 /*&&
+                !chartPicture.isSelectionMode && this.Count > 0 /*&&
 				!this.Chart.chartPicture.isPrinting*/
             )
             {
@@ -784,8 +782,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             ChartElementType.Annotation
                         );
                         if (
-                            result != null
-                            && result.ChartElementType == ChartElementType.Annotation
+                            result != null && result.ChartElementType == ChartElementType.Annotation
                         )
                         {
                             annotation = (Annotation)result.Object;

@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-
 // Include Silverlight's managed resources
 #if SILVERLIGHT
 using System.Core;
@@ -384,8 +383,7 @@ namespace System.Linq
             foreach (Type iType in t.GetInterfaces())
             {
                 if (
-                    iType.IsGenericType
-                    && iType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                    iType.IsGenericType && iType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                 )
                     return iType;
             }

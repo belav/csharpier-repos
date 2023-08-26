@@ -4,7 +4,6 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-
     using Microsoft.InfoCards.Diagnostics;
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 

@@ -32,12 +32,11 @@ namespace Mono.Cecil
     using System.IO;
     using System.Reflection;
     using System.Security;
-    using SSP = System.Security.Permissions;
     using System.Text;
-
     using Mono.Cecil.Metadata;
     using Mono.Cecil.Signatures;
     using Mono.Xml;
+    using SSP = System.Security.Permissions;
 
     internal sealed class SecurityDeclarationReader
     {

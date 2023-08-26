@@ -31,10 +31,10 @@
 // (C)  Novell Inc.
 //
 
+using System.Collections.Specialized;
 using System.ComponentModel;
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Utilclass;
-using System.Collections.Specialized;
 
 namespace System.DirectoryServices
 {

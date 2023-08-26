@@ -4,13 +4,13 @@
 
 namespace System.Activities.Statements
 {
+    using System.Activities.Expressions;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using System.Runtime;
-    using System.Activities.Expressions;
     using System.Threading;
 
     // Helper class for InvokeMethod.
@@ -429,8 +429,7 @@ namespace System.Activities.Statements
                 return;
             }
             else if (
-                resultType != null
-                && !TypeHelper.AreTypesCompatible(result.ReturnType, resultType)
+                resultType != null && !TypeHelper.AreTypesCompatible(result.ReturnType, resultType)
             )
             {
                 metadata.AddValidationError(

@@ -11,10 +11,9 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
-
 #if STATIC
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;

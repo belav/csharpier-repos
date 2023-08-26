@@ -1101,9 +1101,7 @@ namespace System.Web.UI.WebControls
             {
                 DataListItem item = (Controls[i] as DataListItem);
                 if (
-                    (item != null)
-                    && (item.ItemType == itemType)
-                    && (item.ItemIndex == repeatIndex)
+                    (item != null) && (item.ItemType == itemType) && (item.ItemIndex == repeatIndex)
                 )
                     return item;
             }

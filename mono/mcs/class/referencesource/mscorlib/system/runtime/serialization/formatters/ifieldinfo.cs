@@ -15,10 +15,10 @@
 
 namespace System.Runtime.Serialization.Formatters
 {
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface IFieldInfo

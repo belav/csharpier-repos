@@ -589,8 +589,7 @@ namespace System.ServiceModel.Channels
             )
                 return new UnknownSequenceFault(info.AcknowledgementInfo.SequenceID);
             else if (
-                info.AckRequestedInfo != null
-                && info.AckRequestedInfo.SequenceID != this.InputID
+                info.AckRequestedInfo != null && info.AckRequestedInfo.SequenceID != this.InputID
             )
                 return new UnknownSequenceFault(info.AckRequestedInfo.SequenceID);
             else if (
@@ -1386,8 +1385,7 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.UnexpectedAcknowledgement)
                 );
             else if (
-                info.AckRequestedInfo != null
-                && info.AckRequestedInfo.SequenceID != this.InputID
+                info.AckRequestedInfo != null && info.AckRequestedInfo.SequenceID != this.InputID
             )
                 return new UnknownSequenceFault(info.AckRequestedInfo.SequenceID);
             else if (info.CreateSequenceResponseInfo != null)

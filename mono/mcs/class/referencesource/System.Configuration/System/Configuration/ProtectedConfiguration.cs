@@ -8,11 +8,11 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Configuration.Provider;
-    using System.Xml;
-    using System.Security.Permissions;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Xml;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
     [SuppressMessage(

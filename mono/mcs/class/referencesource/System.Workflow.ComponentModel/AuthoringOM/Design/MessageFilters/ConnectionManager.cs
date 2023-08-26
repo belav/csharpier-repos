@@ -1,15 +1,15 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
-    using System.ComponentModel.Design;
     using System.Collections.ObjectModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Design;
 
     #region Class ConnectionManager

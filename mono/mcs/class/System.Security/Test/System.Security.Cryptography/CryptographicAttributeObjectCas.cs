@@ -28,15 +28,13 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Cryptography;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Security.Cryptography
 {

@@ -8,17 +8,17 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.Collections;
     using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.Remoting;
     using System.Runtime.InteropServices;
-    using System.Threading;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using System.Threading;
+    using Microsoft.Win32;
 
     /// <devdoc>
     /// <para>Provides a type converter to convert <see cref='System.Globalization.CultureInfo'/>

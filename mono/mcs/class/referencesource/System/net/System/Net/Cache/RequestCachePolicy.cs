@@ -288,8 +288,7 @@ namespace System.Net.Cache
             get
             {
                 if (
-                    m_LastSyncDateUtc == DateTime.MinValue
-                    || m_LastSyncDateUtc == DateTime.MaxValue
+                    m_LastSyncDateUtc == DateTime.MinValue || m_LastSyncDateUtc == DateTime.MaxValue
                 )
                 {
                     return m_LastSyncDateUtc;

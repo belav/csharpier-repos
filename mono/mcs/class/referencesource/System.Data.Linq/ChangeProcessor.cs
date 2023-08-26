@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Data.Linq
 {
@@ -922,8 +922,7 @@ namespace System.Data.Linq
                                 {
                                     // if other is new, visit other first (since item's FK depends on it)
                                     if (
-                                        other != item
-                                        || item.Type.DBGeneratedIdentityMember != null
+                                        other != item || item.Type.DBGeneratedIdentityMember != null
                                     )
                                     {
                                         this.BuildDependencyOrderedList(other, list, visited);

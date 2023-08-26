@@ -28,10 +28,9 @@
 
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading

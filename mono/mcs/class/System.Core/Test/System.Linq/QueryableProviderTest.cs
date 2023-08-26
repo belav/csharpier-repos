@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using NUnit.Framework;
 
 namespace MonoTests.System.Linq

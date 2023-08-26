@@ -16,13 +16,13 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-    using System.Security.Permissions;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

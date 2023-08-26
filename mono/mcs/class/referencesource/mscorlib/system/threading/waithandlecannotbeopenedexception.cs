@@ -8,8 +8,8 @@
 namespace System.Threading
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     [Serializable]
     [ComVisibleAttribute(false)]

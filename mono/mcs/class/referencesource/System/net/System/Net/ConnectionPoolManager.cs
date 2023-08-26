@@ -9,10 +9,10 @@ namespace System.Net
     using System;
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Globalization;
 
     internal class ConnectionPoolManager
     {

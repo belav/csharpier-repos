@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
 
     // Base class for all the workflow tracking configuration elements
     [Fx.Tag.XamlVisible(false)]

@@ -8,11 +8,11 @@
 namespace System.Threading
 {
     using System;
-    using System.Security.Permissions;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.Versioning;
-    using System.Runtime;
+    using System.Security.Permissions;
 
     // After much discussion, we decided the Interlocked class doesn't need
     // any HPA's for synchronization or external threading.  They hurt C#'s

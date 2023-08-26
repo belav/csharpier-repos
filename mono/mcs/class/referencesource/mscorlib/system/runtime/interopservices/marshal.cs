@@ -18,21 +18,21 @@ namespace System.Runtime.InteropServices
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
     using System.Reflection.Emit;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices.ComTypes;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Runtime.Remoting;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using Win32Native = Microsoft.Win32.Win32Native;
     using Microsoft.Win32.SafeHandles;
-    using System.Diagnostics.Contracts;
-    using System.Runtime.InteropServices.ComTypes;
+    using Win32Native = Microsoft.Win32.Win32Native;
 
     [Serializable]
     public enum CustomQueryInterfaceMode

@@ -3,15 +3,15 @@
 //------------------------------------------------------------
 namespace System.Xml
 {
-    using System.IO;
     using System.Collections;
-    using System.Text;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.Serialization;
+    using System.IO;
     using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Threading;
-    using System.Collections.Generic;
 
     abstract class XmlNodeWriter
     {

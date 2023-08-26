@@ -10,13 +10,13 @@
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Microsoft.Win32.SafeHandles;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO
 {

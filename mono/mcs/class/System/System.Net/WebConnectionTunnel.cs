@@ -28,15 +28,15 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System.IO;
 using System.Collections;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Sockets;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.ExceptionServices;
-using System.Diagnostics;
 using Mono.Net.Security;
 
 namespace System.Net
@@ -171,8 +171,7 @@ namespace System.Net
             { // Needs proxy auth
                 var connectionHeader = Headers["Connection"];
                 if (
-                    !string.IsNullOrEmpty(connectionHeader)
-                    && connectionHeader.ToLower() == "close"
+                    !string.IsNullOrEmpty(connectionHeader) && connectionHeader.ToLower() == "close"
                 )
                 {
                     // The server is requesting that this connection be closed

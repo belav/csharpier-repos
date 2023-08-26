@@ -14,9 +14,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-
+using System.Text;
 #if STATIC
 using MetaType = IKVM.Reflection.Type;
 using IKVM.Reflection;
@@ -1546,9 +1545,7 @@ namespace Mono.CSharp
             {
                 var tp = tparams[i];
                 if (
-                    tp.HasTypeConstraint
-                    || tp.InterfacesDefined != null
-                    || tp.TypeArguments != null
+                    tp.HasTypeConstraint || tp.InterfacesDefined != null || tp.TypeArguments != null
                 )
                 {
                     if (constraints == null)
@@ -2871,8 +2868,7 @@ namespace Mono.CSharp
                         continue;
                 }
                 else if (
-                    tp_b.Constraints != null
-                    && tp_a.Type.HasSameConstraintsDefinition(tp_b.Type)
+                    tp_b.Constraints != null && tp_a.Type.HasSameConstraintsDefinition(tp_b.Type)
                 )
                 {
                     continue;

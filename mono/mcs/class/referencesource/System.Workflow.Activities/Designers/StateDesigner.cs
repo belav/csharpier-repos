@@ -1,29 +1,29 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
+    using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
-    using Microsoft.Win32;
-    using System.Runtime.InteropServices;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Globalization;
-    using System.ComponentModel.Design.Serialization;
-    using System.Resources;
+    using Microsoft.Win32;
 
     #region StateDesigner Class
     [DesignerSerializer(typeof(StateDesignerLayoutSerializer), typeof(WorkflowMarkupSerializer))]
@@ -2545,8 +2545,7 @@ namespace System.Workflow.Activities
         {
             StateMachineTheme stateDesignerTheme = stateDesigner.DesignerTheme as StateMachineTheme;
             if (
-                stateDesignerTheme != null
-                && stateDesignerTheme.CompletedStateDesignerImage != null
+                stateDesignerTheme != null && stateDesignerTheme.CompletedStateDesignerImage != null
             )
                 return stateDesignerTheme.CompletedStateDesignerImage;
             else
@@ -3055,10 +3054,7 @@ namespace System.Workflow.Activities
                     string nameSpace = path.Substring(0, index);
                     string name = path.Substring(index + 1);
                     if (
-                        nameSpace != null
-                        && nameSpace.Length > 0
-                        && name != null
-                        && name.Length > 0
+                        nameSpace != null && nameSpace.Length > 0 && name != null && name.Length > 0
                     )
                     {
                         try

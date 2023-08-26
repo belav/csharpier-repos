@@ -6,10 +6,10 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Security;
+    using System.Net.Security;
     using System.ServiceModel.Channels;
     using System.ServiceModel.MsmqIntegration;
-    using System.Net.Security;
+    using System.ServiceModel.Security;
 
     public partial class MsmqIntegrationBindingElement : MsmqBindingElementBase
     {

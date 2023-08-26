@@ -32,12 +32,12 @@
 
 
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Globalization;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
@@ -2942,9 +2942,7 @@ namespace System.Windows.Forms
                         bool intersects;
                         // Can't iterate over specific items properties in virtualmode
                         if (
-                            owner.View == View.Details
-                            && !owner.FullRowSelect
-                            && !owner.VirtualMode
+                            owner.View == View.Details && !owner.FullRowSelect && !owner.VirtualMode
                         )
                             intersects = BoxIntersectsText(i);
                         else
@@ -3319,9 +3317,7 @@ namespace System.Windows.Forms
                     }
                 }
                 else if (
-                    !checking
-                    && owner.SelectedItems.Count > 0
-                    && BoxSelectRectangle.Size.IsEmpty
+                    !checking && owner.SelectedItems.Count > 0 && BoxSelectRectangle.Size.IsEmpty
                 )
                 {
                     // Need this to clean up background clicks

@@ -1295,8 +1295,7 @@ namespace System.Web.Compilation
                 // Most special dirs are not allowed in precompiled apps.  App_LocalResources is
                 // an exception, as it is allowed in updatable precompiled apps.
                 if (
-                    IsUpdatablePrecompiledAppInternal
-                    && dirType == CodeDirectoryType.LocalResources
+                    IsUpdatablePrecompiledAppInternal && dirType == CodeDirectoryType.LocalResources
                 )
                     isDirectoryAllowed = true;
                 else

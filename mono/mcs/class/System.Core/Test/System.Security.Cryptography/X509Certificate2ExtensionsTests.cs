@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography

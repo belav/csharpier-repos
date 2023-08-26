@@ -16,11 +16,11 @@ namespace System.Data.SqlClient
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Xml;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     internal sealed class SqlStream : Stream
     {

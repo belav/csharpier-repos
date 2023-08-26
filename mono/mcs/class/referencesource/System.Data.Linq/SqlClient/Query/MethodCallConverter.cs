@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Data.Linq.Provider;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Data.Linq;
-using System.Data.Linq.Provider;
-using System.Data.Linq.Mapping;
+using System.Text;
 
 namespace System.Data.Linq.SqlClient
 {
@@ -321,8 +321,7 @@ namespace System.Data.Linq.SqlClient
                         );
                     }
                     else if (
-                        mc.Method.DeclaringType == typeof(string)
-                        && mc.Method.Name == "Concat"
+                        mc.Method.DeclaringType == typeof(string) && mc.Method.Name == "Concat"
                     )
                     {
                         SqlClientArray arr = mc.Arguments[0] as SqlClientArray;

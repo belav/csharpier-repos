@@ -448,8 +448,7 @@ namespace System.ServiceModel.Channels
             // MessageLogger doesn't log AddressingVersion.None in the encoder since we want to make sure we log
             // as much of the message as possible. Here we log after stamping the addressing information
             if (
-                MessageLogger.LoggingEnabled
-                && message.Version.Addressing == AddressingVersion.None
+                MessageLogger.LoggingEnabled && message.Version.Addressing == AddressingVersion.None
             )
             {
                 MessageLogger.LogMessage(

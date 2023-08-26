@@ -27,7 +27,6 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical

@@ -36,10 +36,10 @@
 #undef DebugPreferredSizeCache
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -2467,8 +2467,7 @@ namespace System.Windows.Forms
                     {
                         Color pcolor = parent.BackColor;
                         if (
-                            pcolor.A == 0xff
-                            || GetStyle(ControlStyles.SupportsTransparentBackColor)
+                            pcolor.A == 0xff || GetStyle(ControlStyles.SupportsTransparentBackColor)
                         )
                             return pcolor;
                     }

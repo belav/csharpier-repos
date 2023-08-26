@@ -30,9 +30,9 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Runtime.Remoting.Proxies;
+using System.Threading;
 
 namespace System.Runtime.Remoting.Messaging
 {

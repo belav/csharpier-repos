@@ -7,26 +7,26 @@ namespace System.Workflow.ComponentModel
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Xml;
-    using System.Text;
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Drawing.Design;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Resources;
-    using System.Globalization;
     using System.Diagnostics;
-    using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     #endregion
 
@@ -1207,8 +1207,7 @@ namespace System.Workflow.ComponentModel
             {
                 // if custom then append its qualified id and then try it
                 if (
-                    this is CompositeActivity
-                    && Helpers.IsCustomActivity(this as CompositeActivity)
+                    this is CompositeActivity && Helpers.IsCustomActivity(this as CompositeActivity)
                 )
                     resolvedActivity = ResolveActivityByName(
                         this.QualifiedName + "." + activityQualifiedName,

@@ -11,10 +11,10 @@ namespace System.ServiceModel.Channels
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Threading;
-    using System.ServiceModel.Dispatcher;
 
     sealed class SecurityChannelListener<TChannel> : DelegatingChannelListener<TChannel>
         where TChannel : class, IChannel
@@ -636,8 +636,7 @@ namespace System.ServiceModel.Channels
                     );
                 }
                 else if (
-                    listener.SupportsDuplex
-                    && typeof(TChannel) == typeof(IDuplexSessionChannel)
+                    listener.SupportsDuplex && typeof(TChannel) == typeof(IDuplexSessionChannel)
                 )
                 {
                     securityChannel = new SecurityDuplexSessionChannel(

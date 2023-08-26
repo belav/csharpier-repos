@@ -10,9 +10,9 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     internal sealed class InternalDecoderBestFitFallback : DecoderFallback
@@ -196,8 +196,7 @@ namespace System.Text
 
             // Check trivial out of range case
             if (
-                cCheck < oFallback.arrayBestFit[0]
-                || cCheck > oFallback.arrayBestFit[highBound - 2]
+                cCheck < oFallback.arrayBestFit[0] || cCheck > oFallback.arrayBestFit[highBound - 2]
             )
                 return '\0';
 

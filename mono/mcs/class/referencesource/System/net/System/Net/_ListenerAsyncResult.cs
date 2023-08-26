@@ -7,8 +7,8 @@
 namespace System.Net
 {
     using System.ComponentModel;
-    using System.Threading;
     using System.Runtime.InteropServices;
+    using System.Threading;
 
     unsafe class ListenerAsyncResult : LazyAsyncResult
     {

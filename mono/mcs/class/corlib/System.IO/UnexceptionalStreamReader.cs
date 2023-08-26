@@ -36,8 +36,8 @@
 // get IO errors when their terminal vanishes.  See
 // UnexceptionalStreamWriter too.
 
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace System.IO
 {

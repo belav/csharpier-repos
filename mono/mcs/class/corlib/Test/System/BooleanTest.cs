@@ -9,9 +9,9 @@
 // Copyright (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

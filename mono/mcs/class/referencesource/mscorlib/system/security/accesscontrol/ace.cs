@@ -11,9 +11,9 @@
 ===========================================================*/
 
 using System;
-using System.Security.Principal;
-using System.Globalization;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
@@ -2073,8 +2073,7 @@ namespace System.Security.AccessControl
                 qualifier = AceQualifier.AccessAllowed;
             }
             else if (
-                type == AceType.AccessDeniedObject
-                || type == AceType.AccessDeniedCallbackObject
+                type == AceType.AccessDeniedObject || type == AceType.AccessDeniedCallbackObject
             )
             {
                 qualifier = AceQualifier.AccessDenied;

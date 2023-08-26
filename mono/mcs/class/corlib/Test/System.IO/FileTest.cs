@@ -11,11 +11,10 @@
 //
 
 using System;
-using System.IO;
 using System.Globalization;
-using System.Threading;
+using System.IO;
 using System.Runtime.InteropServices;
-
+using System.Threading;
 using NUnit.Framework;
 
 namespace MonoTests.System.IO

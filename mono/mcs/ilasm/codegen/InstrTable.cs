@@ -7,9 +7,9 @@
 // (C) 2003 Jackson Harper, All rights reserved
 //
 
-using PEAPI;
 using System;
 using System.Collections;
+using PEAPI;
 
 namespace Mono.ILASM
 {

@@ -8,18 +8,18 @@
 
 namespace System.Data
 {
-    using System.Configuration;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Data.Common;
-    using System.Globalization;
-    using System.Data.SqlClient;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Text;
+    using System.Configuration;
+    using System.Data.Common;
+    using System.Data.SqlClient;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     internal static class LocalDBAPI
     {

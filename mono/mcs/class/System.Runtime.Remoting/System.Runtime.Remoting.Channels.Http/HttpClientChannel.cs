@@ -27,9 +27,9 @@
 //
 
 using System;
-using System.Net;
 using System.Collections;
 using System.Globalization;
+using System.Net;
 using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Channels.Http

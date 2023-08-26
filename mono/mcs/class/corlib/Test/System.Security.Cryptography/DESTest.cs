@@ -29,7 +29,6 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography

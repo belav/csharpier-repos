@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Text;
+using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Diagnostics;
-using System.Data.Common.Utils;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Utils
 {

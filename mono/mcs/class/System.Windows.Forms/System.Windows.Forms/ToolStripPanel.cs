@@ -195,8 +195,7 @@ namespace System.Windows.Forms
                         "Must set Renderer property before setting RenderMode to Custom"
                     );
                 if (
-                    value == ToolStripRenderMode.Professional
-                    || value == ToolStripRenderMode.System
+                    value == ToolStripRenderMode.Professional || value == ToolStripRenderMode.System
                 )
                     this.Renderer = new ToolStripProfessionalRenderer();
 

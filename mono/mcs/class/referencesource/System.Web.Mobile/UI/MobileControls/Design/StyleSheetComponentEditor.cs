@@ -9,9 +9,9 @@ namespace System.Web.UI.Design.MobileControls
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls;
     using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls;
     using System.Windows.Forms;
 
     /// <summary>

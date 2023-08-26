@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Policy;
 using System.Security.Permissions;
+using System.Security.Policy;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Policy

@@ -15,9 +15,9 @@
 ===========================================================*/
 namespace System.Runtime.Serialization
 {
+    using System;
     using System.Runtime.Remoting;
     using System.Security.Permissions;
-    using System;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISurrogateSelector

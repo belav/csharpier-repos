@@ -6,8 +6,8 @@
 
 namespace System.Net.Mail
 {
-    using System.Net.Mime;
     using System.Diagnostics;
+    using System.Net.Mime;
     using System.Text;
 
     //

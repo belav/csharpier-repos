@@ -6,9 +6,6 @@
 #if FEATURE_CODEPAGES_FILE // requires BaseCodePageEncooding
 namespace System.Text
 {
-    using System.Text;
-    using System.Globalization;
-
     // EUCJPEncoding
     //
     // EUC-JP Encoding (51932)
@@ -46,6 +43,8 @@ namespace System.Text
     //
 
     using System;
+    using System.Globalization;
+    using System.Text;
 
     [Serializable]
     internal class EUCJPEncoding : DBCSCodePageEncoding

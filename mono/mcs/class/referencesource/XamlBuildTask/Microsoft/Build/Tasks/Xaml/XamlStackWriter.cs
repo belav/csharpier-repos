@@ -8,9 +8,9 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Runtime;
     using System.Text;
     using System.Xaml;
-    using System.Runtime;
     using XamlBuildTask;
 
     internal enum XamlStackFrameType

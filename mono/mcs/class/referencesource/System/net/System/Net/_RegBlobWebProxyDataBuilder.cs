@@ -7,22 +7,22 @@
 namespace System.Net
 {
     using System;
-    using System.Security.Permissions;
-    using System.Globalization;
-    using System.Text;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Net.Sockets;
-    using System.Threading;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 #if USE_WINIET_AUTODETECT_CACHE
 #if !FEATURE_PAL
     using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 #endif // !FEATURE_PAL
 #endif
-    using Microsoft.Win32;
-    using System.Runtime.Versioning;
-    using System.Diagnostics;
 
     internal class RegBlobWebProxyDataBuilder : WebProxyDataBuilder
     {

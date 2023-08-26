@@ -1,12 +1,12 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Collections;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
 

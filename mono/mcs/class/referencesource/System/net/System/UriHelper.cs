@@ -1,8 +1,8 @@
 namespace System
 {
+    using System.Diagnostics;
     using System.Globalization;
     using System.Text;
-    using System.Diagnostics;
 
     internal static class UriHelper
     {
@@ -238,8 +238,7 @@ namespace System
                             prevInputPos
                         );
                         if (
-                            i + 2 < end
-                            && EscapedAscii(pStr[i + 1], pStr[i + 2]) != Uri.c_DummyChar
+                            i + 2 < end && EscapedAscii(pStr[i + 1], pStr[i + 2]) != Uri.c_DummyChar
                         )
                         {
                             // leave it escaped

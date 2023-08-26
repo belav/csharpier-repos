@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Xml;
     using System.Security.Principal;
+    using System.ServiceModel;
+    using System.Xml;
 
     abstract class SecureConversationDriver
     {

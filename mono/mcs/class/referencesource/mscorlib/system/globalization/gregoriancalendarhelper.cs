@@ -7,9 +7,9 @@
 namespace System.Globalization
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Threading;
-    using System.Diagnostics.Contracts;
 
     // Gregorian Calendars use Era Info
     // Note: We shouldn't have to serialize this since the info doesn't change, but we have been.
@@ -505,8 +505,7 @@ namespace System.Globalization
         internal void CheckTicksRange(long ticks)
         {
             if (
-                ticks < m_Cal.MinSupportedDateTime.Ticks
-                || ticks > m_Cal.MaxSupportedDateTime.Ticks
+                ticks < m_Cal.MinSupportedDateTime.Ticks || ticks > m_Cal.MaxSupportedDateTime.Ticks
             )
             {
                 throw new ArgumentOutOfRangeException(

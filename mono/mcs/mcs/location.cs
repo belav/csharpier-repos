@@ -12,10 +12,10 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.CompilerServices.SymbolWriter;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using Mono.CompilerServices.SymbolWriter;
 
 namespace Mono.CSharp
 {

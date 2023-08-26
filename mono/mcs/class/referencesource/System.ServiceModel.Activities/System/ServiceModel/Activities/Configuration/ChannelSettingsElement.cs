@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Activities.Configuration
 {
-    using System.Runtime;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Configuration;
+    using System.Runtime;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     public sealed class ChannelSettingsElement : ConfigurationElement
     {

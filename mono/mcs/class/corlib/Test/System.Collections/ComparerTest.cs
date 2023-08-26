@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Globalization;
 using System.Runtime.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections

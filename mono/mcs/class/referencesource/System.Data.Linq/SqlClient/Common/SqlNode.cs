@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Linq.Expressions;
-using System.Diagnostics;
-using System.Data;
 
 namespace System.Data.Linq.SqlClient
 {
@@ -205,8 +205,7 @@ namespace System.Data.Linq.SqlClient
                     return ((SqlOptionalValue)this).Value.IsConstantColumn;
                 }
                 else if (
-                    this.NodeType == SqlNodeType.Value
-                    || this.NodeType == SqlNodeType.Parameter
+                    this.NodeType == SqlNodeType.Value || this.NodeType == SqlNodeType.Parameter
                 )
                 {
                     return true;

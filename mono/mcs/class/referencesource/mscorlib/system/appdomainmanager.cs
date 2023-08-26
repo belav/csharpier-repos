@@ -12,10 +12,13 @@
 namespace System
 {
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
@@ -23,9 +26,6 @@ namespace System
 #if FEATURE_CLICKONCE
     using System.Runtime.Hosting;
 #endif
-    using System.Runtime.Versioning;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
 #if FEATURE_APPDOMAINMANAGER_INITOPTIONS
     [Flags]

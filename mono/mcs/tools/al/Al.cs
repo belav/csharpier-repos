@@ -9,14 +9,13 @@
 //
 
 using System;
-using System.Globalization;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration.Assemblies;
+using System.Globalization;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Configuration.Assemblies;
-
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;
 using Mono.Security.Cryptography;

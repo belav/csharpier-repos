@@ -5,14 +5,14 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Security.Permissions;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.UI;
-using System.Collections.Specialized;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Text.RegularExpressions;
-using System.Text;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters

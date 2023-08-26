@@ -12,6 +12,7 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security.Tokens;
     using System.Xml;
     using ExclusiveCanonicalizationTransform = System.IdentityModel.ExclusiveCanonicalizationTransform;
     using HashStream = System.IdentityModel.HashStream;
@@ -23,7 +24,6 @@ namespace System.ServiceModel.Security
     using SignedInfo = System.IdentityModel.SignedInfo;
     using SignedXml = System.IdentityModel.SignedXml;
     using StandardSignedInfo = System.IdentityModel.StandardSignedInfo;
-    using System.ServiceModel.Security.Tokens;
 
     class WSSecurityOneDotZeroSendSecurityHeader : SendSecurityHeader
     {
@@ -1114,8 +1114,7 @@ namespace System.ServiceModel.Security
             index++;
 
             if (
-                index == 1
-                && localName == XD.SecurityJan2004Dictionary.SecurityTokenReference.Value
+                index == 1 && localName == XD.SecurityJan2004Dictionary.SecurityTokenReference.Value
             )
             {
                 this.insertId = true;

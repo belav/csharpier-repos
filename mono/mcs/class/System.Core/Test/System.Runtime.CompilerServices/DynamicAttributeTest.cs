@@ -29,7 +29,6 @@
 
 using System;
 using System.Runtime.CompilerServices;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices

@@ -13,9 +13,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.ServiceModel.PeerResolvers;
 using System.Text;
-
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.PeerResolvers

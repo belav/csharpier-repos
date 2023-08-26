@@ -6,19 +6,19 @@
 // @owner  Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.EntitySql;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using CqtExpression = System.Data.Common.CommandTrees.DbExpression;
 using LinqExpression = System.Linq.Expressions.Expression;
-using System.Linq.Expressions;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Collections.Generic;
-using System.Data.Common.CommandTrees;
-using System.Data.Metadata.Edm;
-using System.Reflection;
-using System.Data.Common.EntitySql;
-using System.Diagnostics;
-using System.Data.Common;
-using System.Globalization;
 
 namespace System.Data.Objects.ELinq
 {

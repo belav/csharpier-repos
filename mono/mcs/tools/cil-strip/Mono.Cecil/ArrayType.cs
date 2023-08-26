@@ -29,7 +29,6 @@
 namespace Mono.Cecil
 {
     using System.Text;
-
     using Mono.Cecil.Signatures;
 
     internal sealed class ArrayType : TypeSpecification

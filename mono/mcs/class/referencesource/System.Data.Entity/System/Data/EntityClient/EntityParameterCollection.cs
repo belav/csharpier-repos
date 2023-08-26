@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
+using System.Text;
 
 namespace System.Data.EntityClient
 {

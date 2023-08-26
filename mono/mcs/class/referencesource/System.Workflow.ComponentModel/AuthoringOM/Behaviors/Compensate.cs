@@ -1,15 +1,15 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Drawing;
-    using System.ComponentModel;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [SRDescription(SR.CompensateActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]

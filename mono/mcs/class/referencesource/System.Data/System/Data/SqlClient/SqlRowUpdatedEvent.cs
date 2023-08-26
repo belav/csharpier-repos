@@ -8,11 +8,10 @@
 
 namespace System.Data.SqlClient
 {
-    using System.Diagnostics;
-
     using System;
     using System.Data;
     using System.Data.Common;
+    using System.Diagnostics;
 
     public sealed class SqlRowUpdatedEventArgs : RowUpdatedEventArgs
     {

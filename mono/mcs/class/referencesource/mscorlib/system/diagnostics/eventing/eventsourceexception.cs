@@ -10,7 +10,6 @@
 ============================================================*/
 using System;
 using System.Runtime.Serialization;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
 #endif

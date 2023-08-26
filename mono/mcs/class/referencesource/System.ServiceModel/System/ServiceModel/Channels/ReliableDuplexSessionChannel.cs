@@ -1725,8 +1725,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (
-                    this.deliveryStrategy.EnqueuedCount > 0
-                    || this.inputConnection.Ranges.Count > 1
+                    this.deliveryStrategy.EnqueuedCount > 0 || this.inputConnection.Ranges.Count > 1
                 )
                 {
                     shouldFault = true;

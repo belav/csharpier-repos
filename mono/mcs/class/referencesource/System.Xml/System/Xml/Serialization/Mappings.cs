@@ -7,14 +7,14 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
-    using System.Collections;
-    using System.Xml.Schema;
     using System;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Xml;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Reflection;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
 
     // These classes represent a mapping between classes and a particular XML format.
     // There are two class of mapping information: accessors (such as elements and

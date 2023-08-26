@@ -5,9 +5,8 @@
 namespace System.ServiceModel.Security
 {
     using System.Xml;
-
-    using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
     using DictionaryManager = System.IdentityModel.DictionaryManager;
+    using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
 
     class SignatureConfirmationElement : ISignatureValueSecurityElement
     {

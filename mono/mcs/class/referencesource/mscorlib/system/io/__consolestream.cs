@@ -18,15 +18,15 @@
 ===========================================================*/
 
 using System;
-using System.Text;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
+using System.Text;
+using System.Threading;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Runtime.CompilerServices;
-using System.Runtime.Versioning;
-using System.Threading;
-using System.Diagnostics.Contracts;
 
 namespace System.IO
 {
@@ -288,8 +288,7 @@ namespace System.IO
             // (E.g. ERROR_NO_DATA ("pipe is being closed") is returned when we write to a console that is closing;
             // ERROR_BROKEN_PIPE ("pipe was closed") is returned when stdin was closed, which is mot an error, but EOF.)
             if (
-                errorCode == Win32Native.ERROR_NO_DATA
-                || errorCode == Win32Native.ERROR_BROKEN_PIPE
+                errorCode == Win32Native.ERROR_NO_DATA || errorCode == Win32Native.ERROR_BROKEN_PIPE
             )
                 return Win32Native.ERROR_SUCCESS;
             return errorCode;
@@ -370,8 +369,7 @@ namespace System.IO
             // (E.g. ERROR_NO_DATA ("pipe is being closed") is returned when we write to a console that is closing;
             // ERROR_BROKEN_PIPE ("pipe was closed") is returned when stdin was closed, which is mot an error, but EOF.)
             if (
-                errorCode == Win32Native.ERROR_NO_DATA
-                || errorCode == Win32Native.ERROR_BROKEN_PIPE
+                errorCode == Win32Native.ERROR_NO_DATA || errorCode == Win32Native.ERROR_BROKEN_PIPE
             )
                 return Win32Native.ERROR_SUCCESS;
             return errorCode;

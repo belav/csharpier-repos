@@ -9,8 +9,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Xml.XPath;
 using System.Xml.Schema;
+using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.XPath;
 
@@ -296,8 +296,7 @@ namespace System.Xml.Xsl.Xslt
             //If no last() and position() in predicates, use nodeFilter.Variable to fixup current
             //because all the predicates only based on the input variable, no matter what other predicates are.
             if (
-                predicateEnvironment.numFixupLast == 0
-                && predicateEnvironment.numFixupPosition == 0
+                predicateEnvironment.numFixupLast == 0 && predicateEnvironment.numFixupPosition == 0
             )
             {
                 foreach (var predicate in convertedPredicates)

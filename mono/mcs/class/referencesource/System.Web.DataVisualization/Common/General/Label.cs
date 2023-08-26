@@ -25,8 +25,8 @@
 
 using System;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
@@ -34,7 +34,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.Data;
 using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
@@ -2651,8 +2650,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                     labelsFontAngle = -labelsFontAngle;
                                 }
                                 else if (
-                                    labelsPosition == AxisPosition.Right
-                                    && labelsFontAngle < 0
+                                    labelsPosition == AxisPosition.Right && labelsFontAngle < 0
                                 )
                                 {
                                     labelsFontAngle = -labelsFontAngle;
@@ -2665,8 +2663,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                     labelsFontAngle = -labelsFontAngle;
                                 }
                                 else if (
-                                    labelsPosition == AxisPosition.Right
-                                    && labelsFontAngle > 0
+                                    labelsPosition == AxisPosition.Right && labelsFontAngle > 0
                                 )
                                 {
                                     labelsFontAngle = -labelsFontAngle;

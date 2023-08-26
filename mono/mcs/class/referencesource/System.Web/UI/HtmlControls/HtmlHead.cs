@@ -11,10 +11,10 @@ namespace System.Web.UI.HtmlControls
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Security.Permissions;
 
     public class HtmlHeadBuilder : ControlBuilder
     {

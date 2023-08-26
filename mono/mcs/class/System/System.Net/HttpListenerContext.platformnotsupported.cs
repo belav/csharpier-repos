@@ -26,9 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Net.WebSockets;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using System.Net.WebSockets;
 
 namespace System.Net
 {

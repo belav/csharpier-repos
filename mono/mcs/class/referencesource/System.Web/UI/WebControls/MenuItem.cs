@@ -255,8 +255,7 @@ namespace System.Web.UI.WebControls
                     );
                 }
                 else if (
-                    _owner.DynamicItemFormatString.Length > 0
-                    && Depth >= _owner.StaticDisplayLevels
+                    _owner.DynamicItemFormatString.Length > 0 && Depth >= _owner.StaticDisplayLevels
                 )
                 {
                     return String.Format(

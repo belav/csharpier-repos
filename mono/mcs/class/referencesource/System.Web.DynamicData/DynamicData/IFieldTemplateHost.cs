@@ -1,5 +1,5 @@
-﻿using System.Web.UI.WebControls;
-using System.Security.Permissions;
+﻿using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.DynamicData
 {

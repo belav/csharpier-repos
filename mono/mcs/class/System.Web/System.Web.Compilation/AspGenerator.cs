@@ -30,9 +30,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
-using System.CodeDom.Compiler;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -1405,8 +1405,7 @@ namespace System.Web.Compilation
             {
                 PageParserFilter pfilter = PageParserFilter;
                 if (
-                    pfilter != null
-                    && !pfilter.ProcessCodeConstruct(CodeConstructType.ScriptTag, t)
+                    pfilter != null && !pfilter.ProcessCodeConstruct(CodeConstructType.ScriptTag, t)
                 )
                     return;
 

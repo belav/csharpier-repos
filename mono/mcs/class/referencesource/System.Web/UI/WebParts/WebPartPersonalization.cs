@@ -15,9 +15,9 @@ namespace System.Web.UI.WebControls.WebParts
     using System.Security.Principal;
     using System.Web;
     using System.Web.Configuration;
+    using System.Web.Hosting;
     using System.Web.UI;
     using System.Web.Util;
-    using System.Web.Hosting;
 
     [TypeConverterAttribute(typeof(EmptyStringExpandableObjectConverter))]
     public class WebPartPersonalization

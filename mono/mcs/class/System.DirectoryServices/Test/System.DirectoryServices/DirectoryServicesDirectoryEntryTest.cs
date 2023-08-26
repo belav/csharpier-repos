@@ -6,9 +6,9 @@
 //	Boris Kirzner  <borisk@mainsoft.com>
 //
 
-using NUnit.Framework;
 using System;
 using System.DirectoryServices;
+using NUnit.Framework;
 
 namespace MonoTests.System.DirectoryServices
 {

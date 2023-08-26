@@ -10,16 +10,16 @@ namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using Microsoft.Win32.SafeHandles;
-    using System.Security;
-    using System.Runtime.InteropServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Threading;
-    using System.Net.Sockets;
-    using Microsoft.Win32;
     using System.Diagnostics;
     using System.IO;
+    using System.Net.Sockets;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_PNRP_CLOUD_INFO

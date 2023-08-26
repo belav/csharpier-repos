@@ -255,8 +255,7 @@ namespace C5
                         extra.oldref = oldref;
                     }
                     else if (
-                        cursor.extra.leftnode != leftnode
-                        || cursor.extra.lastgeneration < maxsnapid
+                        cursor.extra.leftnode != leftnode || cursor.extra.lastgeneration < maxsnapid
                     )
 #else
                     if (cursor.lastgeneration == -1)

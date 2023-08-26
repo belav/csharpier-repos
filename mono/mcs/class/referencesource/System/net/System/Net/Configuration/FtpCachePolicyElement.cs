@@ -9,8 +9,8 @@ namespace System.Net.Configuration
     using System;
     using System.Configuration;
     using System.Net.Cache;
-    using System.Xml;
     using System.Security.Permissions;
+    using System.Xml;
 
     public sealed class FtpCachePolicyElement : ConfigurationElement
     {

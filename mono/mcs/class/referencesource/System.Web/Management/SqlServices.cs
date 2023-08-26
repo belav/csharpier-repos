@@ -7,18 +7,18 @@
 namespace System.Web.Management
 {
     using System;
-    using System.Web.Util;
-    using System.IO;
+    using System.Collections;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Threading;
-    using System.Text.RegularExpressions;
-    using System.Text;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Collections;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Web.Util;
 
     [Flags]
     public enum SqlFeatures : int
@@ -543,9 +543,7 @@ namespace System.Web.Management
             if (dbFileName != null)
             {
                 if (
-                    dbFileName.Contains("[")
-                    || dbFileName.Contains("]")
-                    || dbFileName.Contains("'")
+                    dbFileName.Contains("[") || dbFileName.Contains("]") || dbFileName.Contains("'")
                 )
                     throw new ArgumentException(
                         SR.GetString(SR.DbFileName_can_not_contain_invalid_chars)

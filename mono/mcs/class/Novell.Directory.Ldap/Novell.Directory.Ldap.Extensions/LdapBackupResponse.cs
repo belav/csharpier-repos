@@ -31,7 +31,6 @@
 
 using System;
 using System.IO;
-
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Asn1;
 using Novell.Directory.Ldap.Rfc2251;

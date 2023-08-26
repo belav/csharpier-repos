@@ -31,7 +31,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 using DbLinq.Factory;
 
 [assembly: AssemblyTitle("SqlMetal")]

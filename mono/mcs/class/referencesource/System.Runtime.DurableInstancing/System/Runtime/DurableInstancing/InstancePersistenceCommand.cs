@@ -5,9 +5,9 @@
 namespace System.Runtime.DurableInstancing
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime;
     using System.Xml.Linq;
-    using System.Collections.Generic;
 
     public abstract class InstancePersistenceCommand
     {

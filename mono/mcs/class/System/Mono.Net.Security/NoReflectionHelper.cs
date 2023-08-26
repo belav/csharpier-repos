@@ -27,18 +27,17 @@
 #if SECURITY_DEP
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MSI = MonoSecurity::Mono.Security.Interface;
-using MX = MonoSecurity::Mono.Security.X509;
+#endif
+
+using System;using System.Net;
+using System.Net.Security;
 #else
 using MSI = Mono.Security.Interface;
 using MX = Mono.Security.X509;
 #endif
 using System.Security.Cryptography.X509Certificates;
-#endif
-
-using System;
-using System.Net;
-using System.Net.Security;
+using MSI = MonoSecurity::Mono.Security.Interface;
+using MX = MonoSecurity::Mono.Security.X509;
 
 namespace Mono.Net.Security
 {

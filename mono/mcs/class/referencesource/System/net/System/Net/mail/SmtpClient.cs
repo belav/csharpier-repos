@@ -1,20 +1,20 @@
 namespace System.Net.Mail
 {
     using System;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
     using System.Net;
-    using System.ComponentModel;
     using System.Net.Configuration;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.Authentication;
-    using System.Security.Cryptography.X509Certificates;
     using System.Net.NetworkInformation;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Authentication;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Permissions;
     using System.Text;
-    using System.Globalization;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public delegate void SendCompletedEventHandler(object sender, AsyncCompletedEventArgs e);
 
@@ -638,9 +638,7 @@ namespace System.Net.Mail
                     }
 
                     if (
-                        e is SecurityException
-                        || e is AuthenticationException
-                        || e is SmtpException
+                        e is SecurityException || e is AuthenticationException || e is SmtpException
                     )
                     {
                         throw;
@@ -854,9 +852,7 @@ namespace System.Net.Mail
                     }
 
                     if (
-                        e is SecurityException
-                        || e is AuthenticationException
-                        || e is SmtpException
+                        e is SecurityException || e is AuthenticationException || e is SmtpException
                     )
                     {
                         throw;

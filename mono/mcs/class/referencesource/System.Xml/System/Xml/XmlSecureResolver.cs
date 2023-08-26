@@ -8,10 +8,10 @@
 namespace System.Xml
 {
     using System.Net;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
 
     [PermissionSetAttribute(SecurityAction.InheritanceDemand, Name = "FullTrust")]
     public partial class XmlSecureResolver : XmlResolver

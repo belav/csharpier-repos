@@ -11,7 +11,6 @@
 using System;
 using System.IO;
 using System.Media;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Media

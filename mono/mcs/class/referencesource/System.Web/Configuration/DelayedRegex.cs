@@ -15,7 +15,6 @@ namespace System.Web.Configuration
     using System.Web.Configuration;
     using System.Web.Util;
     using System.Xml;
-
     using Pair = System.Web.UI.Pair;
 
     internal class DelayedRegex

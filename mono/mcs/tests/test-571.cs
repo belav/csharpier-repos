@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-
 using StringList = System.String;
 
 [assembly: AssemblyTitle("Title")]

@@ -7,9 +7,9 @@
 namespace System.Net
 {
     using System;
-    using System.Net.Sockets;
-    using System.IO;
     using System.Diagnostics;
+    using System.IO;
+    using System.Net.Sockets;
     using System.Security.Permissions;
     using System.Threading;
     using System.Threading.Tasks;

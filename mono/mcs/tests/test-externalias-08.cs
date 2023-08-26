@@ -3,8 +3,8 @@
 extern alias MyAssembly01;
 extern alias MyAssembly02;
 using System;
-
 // this is from test-externalias-01-lib.dll
+
 using Namespace1;
 
 public class Test

@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
+    using System.IdentityModel.Tokens;
     using System.Runtime.Serialization;
     using System.ServiceModel;
-    using System.IdentityModel.Tokens;
 
     [Serializable]
     class SecurityContextTokenValidationException : SecurityTokenValidationException

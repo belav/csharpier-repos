@@ -15,7 +15,6 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.Xml

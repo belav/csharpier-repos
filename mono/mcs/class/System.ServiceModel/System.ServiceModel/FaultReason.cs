@@ -29,7 +29,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-
 using TextList = System.Collections.Generic.SynchronizedReadOnlyCollection<System.ServiceModel.FaultReasonText>;
 
 namespace System.ServiceModel

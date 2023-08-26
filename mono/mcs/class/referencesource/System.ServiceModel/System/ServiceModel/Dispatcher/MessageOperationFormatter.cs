@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
 
     internal sealed class MessageOperationFormatter

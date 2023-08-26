@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Runtime.CompilerServices;
 
 namespace System.Data.Linq
 {

@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System.Text;
 using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -14,6 +13,8 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
+using System.Text;
 using System.Web;
 using System.Web.Mobile;
 using System.Web.UI;
@@ -21,7 +22,6 @@ using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.Util;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {

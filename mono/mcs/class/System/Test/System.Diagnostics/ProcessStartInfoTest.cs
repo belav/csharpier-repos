@@ -13,7 +13,6 @@
 using System;
 using System.Diagnostics;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics

@@ -8,19 +8,18 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Xml.Schema;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Reflection;
-    using System.Xml.Serialization.Configuration;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Globalization;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Xml.Schema;
     using System.Xml.Serialization.Advanced;
-
+    using System.Xml.Serialization.Configuration;
 #if DEBUG
     using System.Diagnostics;
 #endif
@@ -1431,8 +1430,7 @@ namespace System.Xml.Serialization
                 return true;
 
             if (
-                item.Form != XmlSchemaForm.None
-                && item.Form != XmlSchemaExporter.elementFormDefault
+                item.Form != XmlSchemaForm.None && item.Form != XmlSchemaExporter.elementFormDefault
             )
                 return true;
 

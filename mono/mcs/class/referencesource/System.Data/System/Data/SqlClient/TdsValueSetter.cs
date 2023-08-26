@@ -9,7 +9,6 @@
 
 namespace System.Data.SqlClient
 {
-    using Microsoft.SqlServer.Server;
     using System;
     using System.Data;
     using System.Data.Common;
@@ -17,7 +16,7 @@ namespace System.Data.SqlClient
     using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Text;
-
+    using Microsoft.SqlServer.Server;
     using MSS = Microsoft.SqlServer.Server;
 
     // TdsValueSetter handles writing a single value out to a TDS stream

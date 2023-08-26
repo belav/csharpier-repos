@@ -12,10 +12,11 @@ namespace System.Runtime.Remoting.Channels
     using System;
     using System.Collections;
     using System.IO;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Contexts;
+    using System.Runtime.Remoting.Messaging;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security;
@@ -24,7 +25,6 @@ namespace System.Runtime.Remoting.Channels
     using System.Security.Principal;
     using System.Text;
     using System.Threading;
-    using System.Runtime.ConstrainedExecution;
 
     [Serializable]
     internal class CrossAppDomainChannel : IChannel, IChannelSender, IChannelReceiver

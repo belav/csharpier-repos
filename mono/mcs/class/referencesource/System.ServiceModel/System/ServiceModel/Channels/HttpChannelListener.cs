@@ -953,8 +953,7 @@ namespace System.ServiceModel.Channels
                 case HostNameComparisonMode.Exact:
                     UriHostNameType hostNameType = listenUri.HostNameType;
                     if (
-                        hostNameType == UriHostNameType.IPv4
-                        || hostNameType == UriHostNameType.IPv6
+                        hostNameType == UriHostNameType.IPv4 || hostNameType == UriHostNameType.IPv6
                     )
                     {
                         hostName = Dns.GetHostEntry(string.Empty).HostName;

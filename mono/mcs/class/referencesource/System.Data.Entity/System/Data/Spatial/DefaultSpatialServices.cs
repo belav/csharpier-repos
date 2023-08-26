@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 
 using System.Data.Common.Internal;
-using System.Diagnostics;
 using System.Data.Spatial.Internal;
+using System.Diagnostics;
 
 namespace System.Data.Spatial
 {

@@ -31,10 +31,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.Security.Permissions;
 using System.IO;
+using System.Security.Permissions;
+using System.Text;
 
 namespace System.Web.UI
 {
@@ -255,9 +255,7 @@ namespace System.Web.UI
         protected internal virtual void Initialize()
         {
             if (
-                _triggers == null
-                || _triggers.Count == 0
-                || !ScriptManager.SupportsPartialRendering
+                _triggers == null || _triggers.Count == 0 || !ScriptManager.SupportsPartialRendering
             )
                 return;
 

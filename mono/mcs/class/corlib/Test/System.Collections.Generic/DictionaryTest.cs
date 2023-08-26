@@ -37,7 +37,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Generic

@@ -12,9 +12,8 @@ using System;
 using System.Collections;
 using System.Security;
 using System.Security.Permissions;
-
-using SSPermissionSet = System.Security.PermissionSet;
 using MIPermissionSet = Mono.ILASM.PermissionSet;
+using SSPermissionSet = System.Security.PermissionSet;
 
 namespace Mono.ILASM
 {

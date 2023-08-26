@@ -5,10 +5,10 @@
 namespace Microsoft.VisualBasic.Activities.XamlIntegration
 {
     using System;
-    using System.ComponentModel;
-    using System.Runtime;
-    using System.Globalization;
     using System.Activities;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.Runtime;
 
     // this class is necessary in order for our value serializer to get called by XAML,
     // even though the functionality is a no-op

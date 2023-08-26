@@ -27,9 +27,9 @@
 
 using System;
 using System.Collections;
-using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Mono.XBuild.Utilities
 {

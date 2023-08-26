@@ -11,11 +11,11 @@ namespace System.Web.Configuration
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Security;
     using System.Web;
     using System.Web.Compilation;
     using System.Web.Resources;
     using System.Web.Script.Serialization;
-    using System.Security;
 
     [
         ConfigurationCollection(typeof(Converter)),

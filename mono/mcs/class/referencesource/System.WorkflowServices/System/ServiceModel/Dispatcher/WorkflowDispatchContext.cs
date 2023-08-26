@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Threading;
     using System.Collections.Generic;
+    using System.Threading;
 
     class WorkflowDispatchContext : IDisposable
     {

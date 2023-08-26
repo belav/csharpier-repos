@@ -7,8 +7,8 @@ namespace System.Workflow.ComponentModel
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     #endregion
 

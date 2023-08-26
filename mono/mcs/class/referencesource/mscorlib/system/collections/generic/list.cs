@@ -17,11 +17,11 @@
 namespace System.Collections.Generic
 {
     using System;
-    using System.Runtime;
-    using System.Runtime.Versioning;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
-    using System.Collections.ObjectModel;
+    using System.Runtime;
+    using System.Runtime.Versioning;
     using System.Security.Permissions;
 
     // Implements a variable-size List that uses an array of objects to store the

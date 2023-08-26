@@ -5,12 +5,11 @@
 // Author:
 //	Boris Kirzner  <borisk@mainsoft.com>
 //
-using NUnit.Framework;
 using System;
-using System.DirectoryServices;
 using System.Collections;
-
+using System.DirectoryServices;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.DirectoryServices
 {

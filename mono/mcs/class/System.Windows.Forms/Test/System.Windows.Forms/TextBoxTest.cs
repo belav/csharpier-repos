@@ -9,13 +9,11 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Text;
-
+using System.Windows.Forms;
+using MonoTests.Helpers;
 using NUnit.Framework;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Windows.Forms
 {

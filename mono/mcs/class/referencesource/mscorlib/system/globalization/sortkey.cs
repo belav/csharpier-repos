@@ -17,9 +17,9 @@
 namespace System.Globalization
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

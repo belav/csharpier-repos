@@ -55,11 +55,10 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Net;
-using System.Collections;
 using System.Threading;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Content;
 using RabbitMQ.Client.Events;

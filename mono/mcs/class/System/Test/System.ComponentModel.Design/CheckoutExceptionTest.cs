@@ -31,7 +31,6 @@
 using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.Design

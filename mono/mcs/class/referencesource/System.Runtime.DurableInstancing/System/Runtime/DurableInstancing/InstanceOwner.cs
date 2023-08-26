@@ -141,8 +141,7 @@ namespace System.Runtime.DurableInstancing
                         if (existingHandle.Version <= 0 || reference.InstanceHandle.Version <= 0)
                         {
                             if (
-                                existingHandle.Version != 0
-                                || reference.InstanceHandle.Version != 0
+                                existingHandle.Version != 0 || reference.InstanceHandle.Version != 0
                             )
                             {
                                 throw Fx.Exception.AsError(

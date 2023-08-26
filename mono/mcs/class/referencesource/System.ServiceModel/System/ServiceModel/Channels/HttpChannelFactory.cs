@@ -498,8 +498,7 @@ namespace System.ServiceModel.Channels
             base.ValidateScheme(via);
 
             if (
-                this.MessageVersion.Addressing == AddressingVersion.None
-                && remoteAddress.Uri != via
+                this.MessageVersion.Addressing == AddressingVersion.None && remoteAddress.Uri != via
             )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -591,8 +590,7 @@ namespace System.ServiceModel.Channels
                     );
                 }
                 else if (
-                    !WebSocketHelper.OSSupportsWebSockets()
-                    && this.ClientWebSocketFactory == null
+                    !WebSocketHelper.OSSupportsWebSockets() && this.ClientWebSocketFactory == null
                 )
                 {
                     throw FxTrace.Exception.AsError(

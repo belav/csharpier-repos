@@ -6,16 +6,16 @@ namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
     using System.ServiceModel;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Activation.Diagnostics;
+    using System.ServiceModel.Configuration;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Diagnostics.CodeAnalysis;
 
     class HostedTransportConfigurationManager
     {

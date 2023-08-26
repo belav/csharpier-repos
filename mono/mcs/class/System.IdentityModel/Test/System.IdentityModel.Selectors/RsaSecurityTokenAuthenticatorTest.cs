@@ -36,10 +36,8 @@ using System.Security.Principal;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-
 using Authenticator = System.IdentityModel.Selectors.RsaSecurityTokenAuthenticator;
 using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<System.IdentityModel.Policy.IAuthorizationPolicy>;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors

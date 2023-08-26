@@ -6,9 +6,8 @@
 
 namespace System.ComponentModel
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <include file='doc\ISupportInitializeNotification.uex' path='docs/doc[@for="ISupportInitializeNotification"]/*' />
     /// <devdoc>

@@ -10,10 +10,10 @@
 namespace System.Data
 {
     using System;
-    using System.Data.Common;
-    using System.Data.SqlTypes;
     using System.Collections;
     using System.ComponentModel;
+    using System.Data.Common;
+    using System.Data.SqlTypes;
 
     public sealed class DataTableReader : DbDataReader
     {

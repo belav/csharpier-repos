@@ -78,9 +78,7 @@ namespace System.Windows.Forms
 
             // Paint gradient background
             if (
-                e.Item is ToolStripButton
-                && (e.Item as ToolStripButton).Checked
-                && !e.Item.Selected
+                e.Item is ToolStripButton && (e.Item as ToolStripButton).Checked && !e.Item.Selected
             )
             {
                 if (this.ColorTable.UseSystemColors)
@@ -134,8 +132,7 @@ namespace System.Windows.Forms
                 )
                     e.Graphics.FillRectangle(b, paint_here);
             else if (
-                e.Item.BackColor != Control.DefaultBackColor
-                && e.Item.BackColor != Color.Empty
+                e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
             )
                 using (Brush b = new SolidBrush(e.Item.BackColor))
                     e.Graphics.FillRectangle(b, paint_here);
@@ -386,8 +383,7 @@ namespace System.Windows.Forms
                     )
                         e.Graphics.FillRectangle(b, paint_here);
                 else if (
-                    e.Item.BackColor != Control.DefaultBackColor
-                    && e.Item.BackColor != Color.Empty
+                    e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
                 )
                     using (Brush b = new SolidBrush(e.Item.BackColor))
                         e.Graphics.FillRectangle(b, paint_here);

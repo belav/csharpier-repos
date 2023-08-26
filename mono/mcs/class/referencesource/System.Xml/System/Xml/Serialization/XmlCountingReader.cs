@@ -1,9 +1,9 @@
 namespace System.Xml.Serialization
 {
-    using System.IO;
-    using System.Collections;
-    using System.Text;
     using System;
+    using System.Collections;
+    using System.IO;
+    using System.Text;
     using System.Xml.Schema;
 
     internal class XmlCountingReader : XmlReader, IXmlTextParser, IXmlLineInfo

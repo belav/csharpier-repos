@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Configuration;
+    using System.ServiceModel.Description;
 
     public sealed partial class ServiceMetadataPublishingElement : BehaviorExtensionElement
     {

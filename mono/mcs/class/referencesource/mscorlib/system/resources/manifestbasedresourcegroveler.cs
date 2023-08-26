@@ -20,17 +20,16 @@ namespace System.Resources
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Text;
     using System.Threading;
-    using System.Diagnostics.Contracts;
     using Microsoft.Win32;
-
 #if !FEATURE_CORECLR
     using System.Diagnostics.Tracing;
 #endif

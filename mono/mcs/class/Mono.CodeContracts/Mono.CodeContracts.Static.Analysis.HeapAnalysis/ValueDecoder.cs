@@ -90,8 +90,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             if (!this.parent.RenamePoints.ContainsKey(from, to))
                 return null;
             if (
-                this.parent.MergeInfoCache.ContainsKey(to)
-                && this.parent.MergeInfoCache[to] == null
+                this.parent.MergeInfoCache.ContainsKey(to) && this.parent.MergeInfoCache[to] == null
             )
                 return null;
 

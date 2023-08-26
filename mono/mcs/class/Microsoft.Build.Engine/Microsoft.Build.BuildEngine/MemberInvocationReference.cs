@@ -29,11 +29,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Globalization;
+using System.Reflection;
+using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Text;
 
 namespace Microsoft.Build.BuildEngine
 {
@@ -288,8 +288,7 @@ namespace Microsoft.Build.BuildEngine
                 s = s.Substring(fn.Length);
             }
             else if (
-                s.StartsWith(type.Name, StringComparison.Ordinal)
-                && s[type.Name.Length] == '.'
+                s.StartsWith(type.Name, StringComparison.Ordinal) && s[type.Name.Length] == '.'
             )
             {
                 s = s.Substring(type.Name.Length + 1);

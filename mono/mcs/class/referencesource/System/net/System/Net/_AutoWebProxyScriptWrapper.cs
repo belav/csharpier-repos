@@ -463,12 +463,12 @@ namespace System.Net
 {
     using System.Collections;
     using System.Reflection;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.Runtime.Remoting;
-    using System.Runtime.ConstrainedExecution;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.Remoting;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
     using System.Threading;
 
     // This interface is useless to users.  We need it to interact with our Microsoft.JScript helper class.

@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System.Runtime.Serialization;
-    using System.Xml;
     using System.ServiceModel.Security;
+    using System.Xml;
 
     public sealed class AddressingVersion
     {

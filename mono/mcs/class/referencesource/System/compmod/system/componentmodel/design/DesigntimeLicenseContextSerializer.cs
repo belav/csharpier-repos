@@ -6,18 +6,18 @@
 
 namespace System.ComponentModel.Design
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Runtime.Serialization;
-    using System.Security;
-    using System.Security.Permissions;
+    using System;
     using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System;
-    using Microsoft.Win32;
-    using System.IO;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security;
+    using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>

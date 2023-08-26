@@ -19,11 +19,11 @@ namespace System.Activities.Core.Presentation
     using System.Linq;
     using System.Runtime;
     using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Input;
-    using System.Windows.Threading;
     using System.Windows.Automation;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Threading;
 
     partial class StateDesigner
     {

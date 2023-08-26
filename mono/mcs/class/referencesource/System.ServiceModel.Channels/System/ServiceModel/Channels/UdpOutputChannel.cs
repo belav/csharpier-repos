@@ -1106,8 +1106,7 @@ namespace System.ServiceModel.Channels
 
                     // we're never aborting in this case...
                     if (
-                        this.channel.retransmitList != null
-                        && this.channel.retransmitList.Count > 0
+                        this.channel.retransmitList != null && this.channel.retransmitList.Count > 0
                     )
                     {
                         needToWait = true;

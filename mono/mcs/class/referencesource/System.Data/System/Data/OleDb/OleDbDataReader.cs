@@ -2543,10 +2543,7 @@ namespace System.Data.OleDb
                 int nullIndex = dataColumns.IndexOf(ODB.NULLS);
 
                 if (
-                    (-1 != indxIndex)
-                    && (-1 != pkeyIndex)
-                    && (-1 != uniqIndex)
-                    && (-1 != nameIndex)
+                    (-1 != indxIndex) && (-1 != pkeyIndex) && (-1 != uniqIndex) && (-1 != nameIndex)
                 )
                 {
                     DataColumn indxColumn = dataColumns[indxIndex];

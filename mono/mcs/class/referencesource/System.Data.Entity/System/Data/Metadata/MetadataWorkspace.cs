@@ -14,7 +14,6 @@ namespace System.Data.Metadata.Edm
     using System.Collections.ObjectModel;
     using System.Data;
     using System.Data.Common.CommandTrees;
-    using eSQL = System.Data.Common.EntitySql;
     using System.Data.Common.Utils;
     using System.Data.Entity;
     using System.Data.Mapping;
@@ -26,6 +25,7 @@ namespace System.Data.Metadata.Edm
     using System.Reflection;
     using System.Runtime.Versioning;
     using System.Xml;
+    using eSQL = System.Data.Common.EntitySql;
 
     /// <summary>
     /// Runtime Metadata Workspace

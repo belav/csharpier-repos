@@ -6,13 +6,13 @@ namespace System.Workflow.ComponentModel.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
-    using System.Windows.Forms;
-    using System.Reflection;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Reflection;
     using System.ServiceModel;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Workflow.ComponentModel.Design;
 
     // <summary>
     // This is a helper class with static methods that dont fit anywhere but are useful in general

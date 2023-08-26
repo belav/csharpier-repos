@@ -10,9 +10,8 @@ namespace System.Runtime.InteropServices
     using System;
     using System.Collections.Generic;
     using System.Threading;
-
-    using ObjectHandle = IntPtr;
     using GCHandleCookie = IntPtr;
+    using ObjectHandle = IntPtr;
 
     // Internal class used to map a GCHandle to an IntPtr. Instead of handing out the underlying CLR
     // handle, we now hand out a cookie that can later be converted back to the CLR handle it

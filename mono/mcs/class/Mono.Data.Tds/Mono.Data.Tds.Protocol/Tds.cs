@@ -33,17 +33,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Mono.Security.Protocol.Ntlm;
 using System;
-using System.IO;
 using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Net.Sockets;
 using System.Globalization;
+using System.IO;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
-using System.Runtime.InteropServices;
+using Mono.Security.Protocol.Ntlm;
 
 namespace Mono.Data.Tds.Protocol
 {

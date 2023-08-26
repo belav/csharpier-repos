@@ -6,9 +6,9 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.IO;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 
 namespace System.Xml
 {
@@ -76,8 +76,7 @@ namespace System.Xml
                 }
 
                 if (
-                    settings.CDataSectionElements != null
-                    && settings.CDataSectionElements.Count > 0
+                    settings.CDataSectionElements != null && settings.CDataSectionElements.Count > 0
                 )
                 {
                     this.bitsCData = new BitStack();

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.Linq.Provider;
 using System.Data.Linq.SqlClient;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Linq.SqlClient
 {
@@ -1625,8 +1625,7 @@ namespace System.Data.Linq.SqlClient
                 SqlExpression returnValue = null;
                 string name = mc.Method.Name;
                 if (
-                    name.StartsWith("DateDiff", StringComparison.Ordinal)
-                    && mc.Arguments.Count == 2
+                    name.StartsWith("DateDiff", StringComparison.Ordinal) && mc.Arguments.Count == 2
                 )
                 {
                     foreach (string datePart in dateParts)
@@ -3158,15 +3157,13 @@ namespace System.Data.Linq.SqlClient
                         break;
                     case "Replace":
                         if (
-                            mc.Arguments[0] is SqlValue
-                            && ((SqlValue)mc.Arguments[0]).Value == null
+                            mc.Arguments[0] is SqlValue && ((SqlValue)mc.Arguments[0]).Value == null
                         )
                         {
                             throw Error.ArgumentNull("old");
                         }
                         if (
-                            mc.Arguments[1] is SqlValue
-                            && ((SqlValue)mc.Arguments[1]).Value == null
+                            mc.Arguments[1] is SqlValue && ((SqlValue)mc.Arguments[1]).Value == null
                         )
                         {
                             throw Error.ArgumentNull("new");

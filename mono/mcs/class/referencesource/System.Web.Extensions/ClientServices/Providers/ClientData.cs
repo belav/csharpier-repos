@@ -6,22 +6,22 @@
 namespace System.Web.ClientServices.Providers
 {
     using System;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.AccessControl;
-    using System.Globalization;
+    using System.Collections.Specialized;
     using System.Data;
     using System.Data.Common;
     using System.Data.OleDb;
-    using System.IO;
-    using System.Windows.Forms;
     using System.Data.SqlClient;
-    using System.Xml.Serialization;
     using System.Diagnostics.CodeAnalysis;
-    using System.Xml.Schema;
-    using System.Xml;
-    using System.Collections.Specialized;
+    using System.Globalization;
+    using System.IO;
     using System.IO.IsolatedStorage;
+    using System.Security;
+    using System.Security.AccessControl;
+    using System.Security.Permissions;
+    using System.Windows.Forms;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     internal class ClientData
     {

@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Description
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.IO;
-    using System.ServiceModel;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
     using System.Xml;
 
     public class DataContractSerializerOperationBehavior : IOperationBehavior, IWsdlExportExtension

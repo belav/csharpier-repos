@@ -2,8 +2,8 @@
 // http://localhost:8080/IncludeTest.asmx?wsdl
 
 using System;
-using NUnit.Framework;
 using IncludeTestTests.Soap;
+using NUnit.Framework;
 
 namespace Localhost.IncludeTestTests
 {

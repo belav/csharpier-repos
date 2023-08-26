@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     sealed class FlowThrottle
     {

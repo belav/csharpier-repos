@@ -27,8 +27,8 @@
 //
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using System.ServiceModel.Security.Tokens;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel
 {

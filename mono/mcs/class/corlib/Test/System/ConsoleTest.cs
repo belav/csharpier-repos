@@ -5,10 +5,10 @@
 // (C) Ximian, Inc.  http://www.ximian.com
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

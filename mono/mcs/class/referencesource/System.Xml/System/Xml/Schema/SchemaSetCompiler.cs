@@ -9,9 +9,9 @@ namespace System.Xml.Schema
 {
     using System;
     using System.Collections;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Text;
-    using System.Diagnostics;
 
     internal sealed class Compiler : BaseProcessor
     {
@@ -3110,8 +3110,7 @@ namespace System.Xml.Schema
                     }
                     sb.Append(attribute.QualifiedName.Name);
                     if (
-                        attribute.Use == XmlSchemaUse.Optional
-                        || attribute.Use == XmlSchemaUse.None
+                        attribute.Use == XmlSchemaUse.Optional || attribute.Use == XmlSchemaUse.None
                     )
                     {
                         sb.Append("?");

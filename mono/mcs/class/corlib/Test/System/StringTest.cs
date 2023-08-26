@@ -11,16 +11,14 @@
 //
 
 using System;
-using System.Text;
 using System.Globalization;
 using System.Reflection;
+using System.Text;
 using System.Threading;
-
+using NUnit.Framework;
 #if !MOBILE
 using System.Diagnostics;
 #endif
-
-using NUnit.Framework;
 
 namespace MonoTests.System
 {

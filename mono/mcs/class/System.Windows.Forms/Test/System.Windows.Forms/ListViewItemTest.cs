@@ -25,13 +25,13 @@
 //
 
 using System;
-using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

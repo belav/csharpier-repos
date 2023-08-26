@@ -1,7 +1,7 @@
 #region Using Directives
 using System;
-using System.Resources;
 using System.Drawing;
+using System.Resources;
 using System.Workflow.ComponentModel.Design;
 #endregion
 

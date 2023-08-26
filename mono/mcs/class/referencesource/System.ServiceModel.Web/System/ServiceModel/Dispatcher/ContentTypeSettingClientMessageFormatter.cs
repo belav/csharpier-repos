@@ -5,17 +5,17 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Reflection;
-    using System.Xml;
-    using System.ServiceModel.Diagnostics;
     using System.Net;
+    using System.Reflection;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Web;
+    using System.Xml;
 
     class ContentTypeSettingClientMessageFormatter : IClientMessageFormatter
     {

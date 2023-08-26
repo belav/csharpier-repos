@@ -35,7 +35,6 @@ using System;
 using System.Collections;
 using System.Xml;
 using Commons.Xml.Relaxng;
-
 using LabelList = System.Collections.Hashtable;
 
 namespace Commons.Xml.Relaxng.Derivative

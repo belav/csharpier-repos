@@ -7,24 +7,24 @@
 
 namespace System.Xml.Serialization
 {
+    using System;
+    using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Configuration;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Collections;
-    using System.IO;
-    using System;
-    using System.Text;
-    using System.Xml;
-    using System.Threading;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
     using System.Xml.Serialization.Configuration;
-    using System.Diagnostics;
-    using System.CodeDom.Compiler;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.CodeAnalysis;
 
     internal class TempAssembly
     {
@@ -321,8 +321,7 @@ namespace System.Xml.Serialization
 #pragma warning restore 618
                 }
                 else if (
-                    assemblyAttribute.CodeBase != null
-                    && assemblyAttribute.CodeBase.Length > 0
+                    assemblyAttribute.CodeBase != null && assemblyAttribute.CodeBase.Length > 0
                 )
                 {
                     serializerName = assemblyAttribute.CodeBase;

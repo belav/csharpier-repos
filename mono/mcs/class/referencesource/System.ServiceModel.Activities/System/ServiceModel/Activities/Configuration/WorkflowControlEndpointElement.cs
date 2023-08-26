@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Activities.Configuration
 {
     using System;
-    using System.ServiceModel.Activities;
-    using System.ServiceModel.Description;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Configuration;
+    using System.ServiceModel.Activities;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
 
     public class WorkflowControlEndpointElement : StandardEndpointElement
     {

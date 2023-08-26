@@ -12,13 +12,13 @@
 
 namespace System.Web.Profile
 {
-    using System.Security.Principal;
-    using System.Security.Permissions;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Security.Permissions;
+    using System.Security.Principal;
     using System.Web.Configuration;
-    using System.Web.Util;
     using System.Web.Security;
+    using System.Web.Util;
 
     public class ProfileGroupBase
     {

@@ -13,9 +13,9 @@
 namespace System.Data.Services.Common
 {
     using System;
+    using System.Data.Services.Client;
     using System.IO;
     using System.Xml;
-    using System.Data.Services.Client;
 
     internal sealed class EpmCustomContentWriterNodeData : IDisposable
     {

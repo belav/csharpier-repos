@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Diagnostics;
     using System.IO;
     using System.ServiceModel;
-    using System.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
 
     class MaxMessageSizeStream : DelegatingStream

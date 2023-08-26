@@ -7,9 +7,9 @@
 namespace System.Net.Mail
 {
     using System.Collections;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
     using System.Threading;
 
     /// <include file='doc\SmtpPermission.uex' path='docs/doc[@for="SmtpPermissionFlag"]/*' />

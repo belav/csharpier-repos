@@ -7,12 +7,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.IO;
-using System.Xml;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Security.Permissions;
+using System.Xml;
 
 namespace System.Xml.Schema
 {
@@ -1298,8 +1298,7 @@ namespace System.Xml.Schema
                         return el;
                     }
                     else if (
-                        el.RefName.Name == xtr.LocalName
-                        && el.RefName.Namespace == xtr.NamespaceURI
+                        el.RefName.Name == xtr.LocalName && el.RefName.Namespace == xtr.NamespaceURI
                     )
                     {
                         if (!bItemNotUsedYet) //read: if item was already used one or more times

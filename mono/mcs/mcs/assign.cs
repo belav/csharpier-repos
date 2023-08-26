@@ -13,7 +13,6 @@
 // Copyright 2011 Xamarin Inc
 //
 using System;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else

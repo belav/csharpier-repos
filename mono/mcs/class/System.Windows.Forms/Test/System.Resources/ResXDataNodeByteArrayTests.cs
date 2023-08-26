@@ -27,11 +27,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Resources;
-using System.Collections;
 using NUnit.Framework;
-using System.ComponentModel.Design;
 
 namespace MonoTests.System.Resources
 {

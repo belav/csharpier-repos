@@ -1,18 +1,18 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     #region Class HandleExternalEventActivityDesigner
     [ActivityDesignerTheme(typeof(EventSinkDesignerTheme))]
@@ -101,8 +101,7 @@ namespace System.Workflow.Activities
                     }
                 }
                 else if (
-                    (e.Member.Name == "EventName")
-                    && e.Activity is HandleExternalEventActivity
+                    (e.Member.Name == "EventName") && e.Activity is HandleExternalEventActivity
                 )
                 {
                     (e.Activity as HandleExternalEventActivity).ParameterBindings.Clear();

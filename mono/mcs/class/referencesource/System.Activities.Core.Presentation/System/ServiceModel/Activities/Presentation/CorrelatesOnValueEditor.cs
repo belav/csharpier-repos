@@ -10,8 +10,8 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.PropertyEditing;
     using System.Activities.Presentation.View;
-    using System.Windows;
     using System.Runtime;
+    using System.Windows;
     using System.Windows.Controls;
 
     sealed class CorrelatesOnValueEditor : DialogPropertyValueEditor

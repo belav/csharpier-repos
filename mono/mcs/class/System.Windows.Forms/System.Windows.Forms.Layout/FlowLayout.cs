@@ -477,8 +477,7 @@ namespace System.Windows.Forms.Layout
                         BoundsSpecified.None
                     );
                 else if (
-                    c.Dock == DockStyle.Top
-                    || ((c.Anchor & AnchorStyles.Top) == AnchorStyles.Top)
+                    c.Dock == DockStyle.Top || ((c.Anchor & AnchorStyles.Top) == AnchorStyles.Top)
                 )
                     continue;
                 else

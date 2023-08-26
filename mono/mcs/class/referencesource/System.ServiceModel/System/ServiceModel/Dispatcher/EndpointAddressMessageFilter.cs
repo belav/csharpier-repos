@@ -4,16 +4,15 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Text;
     using System.Xml;
-
-    using QName = System.ServiceModel.Dispatcher.EndpointAddressProcessor.QName;
     using HeaderBit = System.ServiceModel.Dispatcher.EndpointAddressProcessor.HeaderBit;
+    using QName = System.ServiceModel.Dispatcher.EndpointAddressProcessor.QName;
 
     public class EndpointAddressMessageFilter : MessageFilter
     {

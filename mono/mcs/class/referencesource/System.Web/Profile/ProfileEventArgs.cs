@@ -11,9 +11,9 @@
  */
 namespace System.Web.Profile
 {
-    using System.Web.Security;
-    using System.Security.Principal;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web.Security;
 
     /// <devdoc>
     ///    <SPAN>The

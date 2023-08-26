@@ -13,11 +13,11 @@
 namespace System.Security.Policy
 {
     using System;
-    using System.Security.Util;
-    using System.Security;
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Security;
+    using System.Security.Util;
 
     internal interface IUnionSemanticCodeGroup
     {

@@ -5,12 +5,12 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.Windows.Media;
-    using System.Windows.Data;
-    using System.Windows;
-    using System.Globalization;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Model;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Media;
 
     class ExpressionToExpressionTextConverter : IValueConverter
     {

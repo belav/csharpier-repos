@@ -37,7 +37,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using MonoTests.System.ServiceModel.Channels;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel

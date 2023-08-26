@@ -24,13 +24,12 @@
 //
 #endregion
 
+using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Util;
-using System.Data.Linq.Mapping;
 
 namespace DbLinq.Data.Linq.Sugar.Expressions
 {

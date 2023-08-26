@@ -5,12 +5,12 @@ namespace System.Workflow.ComponentModel
     #region Imports
 
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics;
+    using System.Text;
     using System.Workflow.ComponentModel.Design;
 
     #endregion
@@ -203,8 +203,7 @@ namespace System.Workflow.ComponentModel
                     return null;
 
                 if (
-                    trackingServiceType != null
-                    && trackingServiceType.IsAssignableFrom(serviceType)
+                    trackingServiceType != null && trackingServiceType.IsAssignableFrom(serviceType)
                 )
                     return null;
 

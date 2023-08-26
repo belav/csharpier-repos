@@ -10,12 +10,11 @@ using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Reflection;
+using System.Security.Claims;
 using System.ServiceModel;
 using System.ServiceModel.Security.Tokens;
 using SysClaim = System.IdentityModel.Claims.Claim;
 using SystemAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
-
-using System.Security.Claims;
 
 namespace System.ServiceModel.Security
 {

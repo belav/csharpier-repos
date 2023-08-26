@@ -6,10 +6,10 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Security.Cryptography.X509Certificates;
 
     public sealed partial class X509PeerCertificateElement : ConfigurationElement
     {

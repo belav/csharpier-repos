@@ -32,10 +32,9 @@ namespace System.Data.SqlClient
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using SysTx = System.Transactions;
     using System.Xml;
-
     using Microsoft.SqlServer.Server;
+    using SysTx = System.Transactions;
 
     [
         DefaultEvent("RecordsAffected"),
@@ -8107,9 +8106,7 @@ namespace System.Data.SqlClient
                     paramList.Append(')');
                 }
                 else if (
-                    mt.IsPlp
-                    && (mt.SqlDbType != SqlDbType.Xml)
-                    && (mt.SqlDbType != SqlDbType.Udt)
+                    mt.IsPlp && (mt.SqlDbType != SqlDbType.Xml) && (mt.SqlDbType != SqlDbType.Udt)
                 )
                 {
                     paramList.Append("(max) ");

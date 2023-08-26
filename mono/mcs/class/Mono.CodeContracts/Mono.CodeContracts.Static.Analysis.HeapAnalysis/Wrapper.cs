@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths;
+using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;
 

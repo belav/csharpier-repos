@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.ServiceModel.Dispatcher;
 
     // This attribute specifies what the service implementation requires for AspNet Integration mode.

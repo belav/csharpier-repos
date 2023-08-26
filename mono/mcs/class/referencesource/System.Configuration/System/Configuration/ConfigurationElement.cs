@@ -5,18 +5,18 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration.Internal;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration.Internal;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
+using System.Xml;
 
 namespace System.Configuration
 {
@@ -1507,8 +1507,7 @@ namespace System.Configuration
 
                                     {
                                         if (
-                                            !Object.Equals(value, value2)
-                                            || prop.IsRequired == true
+                                            !Object.Equals(value, value2) || prop.IsRequired == true
                                         )
                                             _values[prop.Name] = value;
                                     }

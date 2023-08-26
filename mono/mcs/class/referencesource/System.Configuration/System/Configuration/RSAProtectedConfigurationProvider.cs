@@ -7,16 +7,16 @@
 namespace System.Configuration
 {
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Configuration.Provider;
-    using System.Xml;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
     using System.Security.Permissions;
+    using System.Xml;
+    using Microsoft.Win32;
 
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public sealed class RsaProtectedConfigurationProvider : ProtectedConfigurationProvider

@@ -13,8 +13,8 @@
 
 namespace System.Web.SessionState
 {
-    using System.Security.Permissions;
     using System.Collections.Generic;
+    using System.Security.Permissions;
 
     /*
      * Marker interface to indicate that class uses granular session state.

@@ -9,7 +9,6 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
@@ -18,6 +17,7 @@ namespace System.ComponentModel
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>The exception that is thrown for a Win32 error code.</para>

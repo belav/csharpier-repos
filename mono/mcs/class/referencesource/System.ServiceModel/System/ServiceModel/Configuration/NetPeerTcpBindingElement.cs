@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Net;
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Configuration;
     using System.Globalization;
+    using System.Net;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
 
     [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]

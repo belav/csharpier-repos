@@ -26,14 +26,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Exceptions;
-using System.Collections.Generic;
-using System.Reflection;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
-using System.IO;
 
 namespace Microsoft.Build.Internal.Expressions
 {

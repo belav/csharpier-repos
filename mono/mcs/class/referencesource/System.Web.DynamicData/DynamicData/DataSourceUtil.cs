@@ -1,13 +1,13 @@
 namespace System.Web.DynamicData
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Data;
     using System.Globalization;
     using System.Web.Resources;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Collections;
-    using System.Data;
 
     static class DataSourceUtil
     {

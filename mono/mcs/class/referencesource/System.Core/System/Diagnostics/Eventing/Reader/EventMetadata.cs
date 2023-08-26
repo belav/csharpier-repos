@@ -14,11 +14,11 @@
 **
 ============================================================*/
 
-using System.Globalization;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Diagnostics.Eventing.Reader
 {

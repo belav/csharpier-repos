@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Design.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
-using System.Data.Entity.Design.Common;
 using System.Text.RegularExpressions;
 
 namespace System.Data.Entity.Design.PluralizationServices

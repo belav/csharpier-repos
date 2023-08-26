@@ -29,8 +29,8 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace System.Windows.Forms
 {
@@ -655,8 +655,7 @@ namespace System.Windows.Forms
             // Center and Tile don't matter if the image is larger than the control
             if (layout == ImageLayout.Center || layout == ImageLayout.Tile)
                 if (
-                    image.Size.Width >= bounds.Size.Width
-                    && image.Size.Height >= bounds.Size.Height
+                    image.Size.Width >= bounds.Size.Width && image.Size.Height >= bounds.Size.Height
                 )
                     layout = ImageLayout.None;
 

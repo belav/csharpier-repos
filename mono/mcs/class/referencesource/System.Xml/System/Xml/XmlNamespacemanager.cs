@@ -8,10 +8,10 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
 
     public class XmlNamespaceManager : IXmlNamespaceResolver, IEnumerable
     {
@@ -357,8 +357,7 @@ namespace System.Xml
             for (int thisDecl = lastDecl; nsdecls[thisDecl].scopeId == scopeId; thisDecl--)
             {
                 if (
-                    String.Equals(nsdecls[thisDecl].prefix, prefix)
-                    && nsdecls[thisDecl].uri != null
+                    String.Equals(nsdecls[thisDecl].prefix, prefix) && nsdecls[thisDecl].uri != null
                 )
                 {
                     if (prefix.Length > 0 || nsdecls[thisDecl].uri.Length > 0)

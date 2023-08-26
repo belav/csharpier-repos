@@ -7,10 +7,10 @@
 
 namespace System.IO
 {
-    using System.Diagnostics;
-    using System.Security.Permissions;
     using System;
+    using System.Diagnostics;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
 
     /// <devdoc>
     /// <para>Provides data for the <see cref='System.IO.FileSystemWatcher.Renamed'/> event.</para>

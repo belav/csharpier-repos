@@ -12,9 +12,9 @@ namespace System.ServiceModel.Description
     using System.Security.Claims;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.ServiceModel.Dispatcher;
 
     public class ServiceCredentials : SecurityCredentialsManager, IServiceBehavior
     {

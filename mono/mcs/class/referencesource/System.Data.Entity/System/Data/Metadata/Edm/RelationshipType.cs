@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 using System.Threading;
 
 namespace System.Data.Metadata.Edm

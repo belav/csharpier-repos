@@ -6,10 +6,9 @@
 
 namespace System.ComponentModel.Design
 {
-    using System.ComponentModel;
-
-    using System.Diagnostics;
     using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>

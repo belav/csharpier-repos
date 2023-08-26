@@ -190,8 +190,7 @@ namespace System.Diagnostics
                 // Source only affects eventlog implementation if Source was set
                 // and no Log was set
                 if (
-                    source == null
-                    || source.Length == 0 && (logName == null || logName.Length == 0)
+                    source == null || source.Length == 0 && (logName == null || logName.Length == 0)
                 )
                 {
                     source = value;

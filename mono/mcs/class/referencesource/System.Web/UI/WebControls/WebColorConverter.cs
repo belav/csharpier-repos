@@ -11,10 +11,10 @@ namespace System.Web.UI.WebControls
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
-    using System.Text;
-    using System.Web.Util;
-    using System.Web.UI;
     using System.Globalization;
+    using System.Text;
+    using System.Web.UI;
+    using System.Web.Util;
 
     /// <devdoc>
     /// </devdoc>

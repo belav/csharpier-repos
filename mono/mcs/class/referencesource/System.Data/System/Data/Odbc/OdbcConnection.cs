@@ -237,8 +237,7 @@ namespace System.Data.Odbc
                     );
                     // protected against null and index out of range. Number cannot be bigger than 99
                     if (
-                        ProviderInfo.DriverVersion != null
-                        && ProviderInfo.DriverVersion.Length >= 2
+                        ProviderInfo.DriverVersion != null && ProviderInfo.DriverVersion.Length >= 2
                     )
                     {
                         try
@@ -553,8 +552,7 @@ namespace System.Data.Odbc
                     retcode = connectionHandle.GetInfo2(info, buffer, out cbActual);
                 }
                 if (
-                    retcode == ODBC32.RetCode.SUCCESS
-                    || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO
+                    retcode == ODBC32.RetCode.SUCCESS || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO
                 )
                 {
                     value = Encoding.Unicode.GetString(

@@ -9,8 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.Metadata.Edm;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
 namespace System.Data.Objects

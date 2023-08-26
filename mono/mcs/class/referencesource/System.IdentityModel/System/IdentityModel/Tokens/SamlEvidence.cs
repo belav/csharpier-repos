@@ -7,10 +7,10 @@ namespace System.IdentityModel.Tokens
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Selectors;
+    using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.IdentityModel.Selectors;
 
     public class SamlEvidence
     {

@@ -1735,9 +1735,7 @@ namespace System.ServiceModel
                 // it is OK for us to ignore CBA case here since no referenced assembly in compiledString for CBA
                 // but do not do it for AspNet routing, since there is no compiledString
                 if (
-                    factory is ServiceHostFactory
-                    && !isConfigurationBased
-                    && !isAspNetRoutedRequest
+                    factory is ServiceHostFactory && !isConfigurationBased && !isAspNetRoutedRequest
                 )
                 {
                     Fx.Assert(

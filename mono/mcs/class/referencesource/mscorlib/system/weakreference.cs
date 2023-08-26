@@ -13,12 +13,12 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
 #if !FEATURE_CORECLR

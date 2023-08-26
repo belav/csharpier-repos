@@ -8,8 +8,8 @@ namespace System.Net.Sockets
 {
     using System;
     using System.ComponentModel;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     /// <devdoc>
     ///    <para>

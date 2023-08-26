@@ -552,8 +552,7 @@ namespace System.ServiceModel.ComIntegration
                     return arr;
 
                 if (
-                    type.GetElementType() != typeof(Int32)
-                    && type.GetElementType() != typeof(Int64)
+                    type.GetElementType() != typeof(Int32) && type.GetElementType() != typeof(Int64)
                 )
                 {
                     try

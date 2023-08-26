@@ -11,13 +11,13 @@ namespace System.Data.Common.QueryCache
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Common.Internal.Materialization;
+    using System.Data.Entity.Util;
     using System.Data.EntityClient;
     using System.Data.Metadata.Edm;
     using System.Data.Objects.Internal;
     using System.Diagnostics;
     using System.Threading;
-    using System.Data.Common.Internal.Materialization;
-    using System.Data.Entity.Util;
 
     /// <summary>
     /// Provides Query Execution Plan Caching Service

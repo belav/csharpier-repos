@@ -25,9 +25,9 @@
 //
 using System;
 using System.Collections;
-using System.Text;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace System.Windows.Forms.CarbonInternal
 {
@@ -1115,9 +1115,7 @@ namespace System.Windows.Forms.CarbonInternal
                 msg.lParam = new IntPtr(0x20000000);
             }
             else if (
-                msg.message == Msg.WM_SYSKEYUP
-                && translate_modifier
-                && msg.wParam == (IntPtr)18
+                msg.message == Msg.WM_SYSKEYUP && translate_modifier && msg.wParam == (IntPtr)18
             )
             {
                 msg.message = Msg.WM_KEYUP;

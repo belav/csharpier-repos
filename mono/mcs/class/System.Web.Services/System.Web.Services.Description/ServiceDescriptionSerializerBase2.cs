@@ -1,11 +1,11 @@
 // It is automatically generated
 using System;
+using System.Collections;
+using System.Globalization;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Text;
-using System.Collections;
-using System.Globalization;
 
 namespace System.Web.Services.Description
 {
@@ -1077,8 +1077,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "MessagePart"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "MessagePart" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -1490,8 +1489,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "OperationOutput"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "OperationOutput" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -1602,8 +1600,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "OperationInput"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "OperationInput" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -1714,8 +1711,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "OperationFault"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "OperationFault" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -1826,8 +1822,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "InputBinding"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "InputBinding" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -1934,8 +1929,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "OutputBinding"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "OutputBinding" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }
@@ -2042,8 +2036,7 @@ namespace System.Web.Services.Description
                 System.Xml.XmlQualifiedName t = GetXsiType();
                 if (t == null) { }
                 else if (
-                    t.Name != "FaultBinding"
-                    || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
+                    t.Name != "FaultBinding" || t.Namespace != "http://schemas.xmlsoap.org/wsdl/"
                 )
                     throw CreateUnknownTypeException(t);
             }

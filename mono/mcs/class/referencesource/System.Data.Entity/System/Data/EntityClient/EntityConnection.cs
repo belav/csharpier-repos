@@ -606,8 +606,7 @@ namespace System.Data.EntityClient
             // the following guards against the case when the user closes the underlying store connection
             // in the state change event handler, as a consequence of which we are in the 'Broken' state
             if (
-                this._storeConnection == null
-                || this._storeConnection.State != ConnectionState.Open
+                this._storeConnection == null || this._storeConnection.State != ConnectionState.Open
             )
             {
                 throw EntityUtil.InvalidOperation(

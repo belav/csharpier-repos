@@ -4,8 +4,8 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.Activities.Presentation.Hosting;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.Hosting;
     using System.Windows;
     using System.Windows.Media.Animation;
 

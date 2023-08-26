@@ -67,8 +67,7 @@ namespace System.Activities.Statements
             Fx.Assert(pickState != null, "Pick's Execute must have run by now.");
 
             if (
-                updateContext.IsCancellationRequested
-                || pickState.TriggerCompletionBookmark == null
+                updateContext.IsCancellationRequested || pickState.TriggerCompletionBookmark == null
             )
             {
                 // do not schedule newly added Branches once a Trigger has successfully completed.

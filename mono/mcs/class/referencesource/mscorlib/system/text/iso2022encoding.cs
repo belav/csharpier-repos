@@ -36,14 +36,14 @@
 #if FEATURE_CODEPAGES_FILE // requires BaseCodePageEncooding
 namespace System.Text
 {
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Text;
-    using System.Runtime.InteropServices;
     using System;
-    using System.Security;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
+    using System.Security;
+    using System.Text;
 
     /*=================================ISO2022Encoding============================
     **

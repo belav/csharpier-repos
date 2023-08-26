@@ -644,9 +644,7 @@ namespace System.Net
                 byte c = buffer[i];
 
                 if (
-                    ((c < '0') || (c > '9'))
-                    && ((c < 'A') || (c > 'F'))
-                    && ((c < 'a') || (c > 'f'))
+                    ((c < '0') || (c > '9')) && ((c < 'A') || (c > 'F')) && ((c < 'a') || (c > 'f'))
                 )
                 {
                     // Not a hex number. Check if we had at least one hex digit. If not, then this is an invalid chunk.

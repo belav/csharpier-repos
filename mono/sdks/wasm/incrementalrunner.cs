@@ -1,14 +1,13 @@
 using System;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
-
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using NUnit.Framework.Api;
+using NUnit.Framework.Internal;
 using NUnit.Framework.Internal.Filters;
 using NUnitLite.Runner;
 

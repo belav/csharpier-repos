@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel
 {
+    using System.Collections.Generic;
     using System.Globalization;
-    using System.Xml;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Text;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Xml;
 
     class WSAddressing10ProblemHeaderQNameFault : MessageFault
     {

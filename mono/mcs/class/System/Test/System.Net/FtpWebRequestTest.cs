@@ -7,7 +7,6 @@
 //
 // Copyright (c) 2006,2007,2008 Novell, Inc. (http://www.novell.com)
 //
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +14,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

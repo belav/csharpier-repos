@@ -10,10 +10,10 @@
 namespace System.Data.Common
 {
     using System;
+    using System.Collections;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Data.SqlTypes;
-    using System.Collections;
 
     // The string storage does not use BitArrays in DataStorage
     internal sealed class StringStorage : DataStorage

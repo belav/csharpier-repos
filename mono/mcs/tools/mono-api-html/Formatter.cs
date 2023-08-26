@@ -25,10 +25,10 @@
 //
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Xml.Linq;
+using System.IO;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Mono.ApiTools
 {

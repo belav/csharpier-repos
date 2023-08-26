@@ -15,8 +15,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Diagnostics;
-using System.Security.Permissions;
 using System.Diagnostics.Contracts;
+using System.Security.Permissions;
 
 // Prevents compiler warnings/errors regarding the use of ref params in Interlocked methods
 #pragma warning disable 0420

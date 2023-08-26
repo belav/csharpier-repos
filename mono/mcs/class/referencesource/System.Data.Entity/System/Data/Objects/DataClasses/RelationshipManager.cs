@@ -357,8 +357,7 @@ namespace System.Data.Objects.DataClasses
 
             // Ensure that all of the items in the previousCollection are already in the new collection
             if (
-                previousCollection != null
-                && relatedEntityCount != previousCollection.CountInternal
+                previousCollection != null && relatedEntityCount != previousCollection.CountInternal
             )
             {
                 throw EntityUtil.CannotRemergeCollections();

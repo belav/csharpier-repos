@@ -7,23 +7,22 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Data;
     using System.Data.Design;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Reflection;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.Web.Hosting;
-    using System.Web.Configuration;
-    using System.Collections;
-
-    using Util = System.Web.UI.Util;
 #if !FEATURE_PAL // FEATURE_PAL does not support System.Data.Design
     using TypedDataSetGenerator = System.Data.Design.TypedDataSetGenerator;
+    using Util = System.Web.UI.Util;
 #endif // !FEATURE_PAL
 
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Code)]

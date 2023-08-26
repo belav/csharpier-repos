@@ -16,8 +16,8 @@
 namespace System
 {
     using System;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     // The Boolean class provides the
     // object representation of the boolean primitive type.

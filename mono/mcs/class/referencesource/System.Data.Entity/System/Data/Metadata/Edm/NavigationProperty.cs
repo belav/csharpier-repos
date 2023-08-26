@@ -9,8 +9,8 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
-using System.Threading;
 using System.Linq;
+using System.Threading;
 
 namespace System.Data.Metadata.Edm
 {

@@ -8,9 +8,9 @@
  */
 namespace System.IO
 {
+    using System;
     using System.Diagnostics;
     using System.Runtime.Serialization;
-    using System;
 
     /// <devdoc>
     ///    <para>The exception that is thrown when the internal buffer overflows.</para>

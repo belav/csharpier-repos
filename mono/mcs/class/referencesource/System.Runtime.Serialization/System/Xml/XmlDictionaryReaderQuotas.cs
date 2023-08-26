@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.Xml
 {
-    using System.Runtime.Serialization;
     using System.ComponentModel;
+    using System.Runtime.Serialization;
 
     [Flags]
     public enum XmlDictionaryReaderQuotaTypes

@@ -23,11 +23,11 @@
 
 namespace System.Resources
 {
-    using System.Reflection;
     using System.Diagnostics.Contracts;
-    using System.IO;
-    using System.Runtime.InteropServices;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

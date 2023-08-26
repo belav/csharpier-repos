@@ -10,8 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Metadata.Edm;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.InternalTrees
 {

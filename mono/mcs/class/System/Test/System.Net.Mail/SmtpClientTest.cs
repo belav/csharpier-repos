@@ -6,14 +6,13 @@
 //
 // (C) 2006 John Luke
 //
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Mail
 {

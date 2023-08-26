@@ -8,19 +8,19 @@ namespace System.Web.Services.Protocols
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
-    using System.Reflection;
-    using System.Xml.Serialization;
     using System.Net;
     using System.Net.Cache;
-    using System.Threading;
-    using System.Text;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     internal class ClientTypeCache
     {

@@ -9,13 +9,13 @@
 namespace System.Xml.Schema
 {
     using System;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Resources;
     using System.Runtime.Serialization;
-    using System.Text;
-    using System.Diagnostics;
     using System.Security.Permissions;
-    using System.Globalization;
+    using System.Text;
 
     [Serializable]
     public class XmlSchemaInferenceException : XmlSchemaException

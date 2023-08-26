@@ -11,11 +11,11 @@ namespace System.Runtime.Remoting.Channels
 {
     using System;
     using System.Collections;
-    using System.Threading;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Serialization;
+    using System.Threading;
 
     /* package scope */
     // deliberately not [serializable]

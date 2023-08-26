@@ -6,9 +6,9 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Net;
     using System.Net.Sockets;
-    using System.Globalization;
     using System.ServiceModel.Diagnostics;
 
     class TcpConnectionPoolRegistry : ConnectionPoolRegistry

@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace System.Configuration
 {

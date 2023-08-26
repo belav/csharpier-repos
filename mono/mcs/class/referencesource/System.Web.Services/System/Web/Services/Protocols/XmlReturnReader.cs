@@ -6,18 +6,18 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
-    using System.Xml.Serialization;
-    using System.Reflection;
     using System.Collections;
-    using System.Web.Services;
+    using System.IO;
     using System.Net;
-    using System.Text;
-    using System.Security.Policy;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Text;
+    using System.Web.Services;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     internal class XmlReturn
     {

@@ -9,16 +9,16 @@ namespace System.ServiceModel.Routing
     using System.ComponentModel;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.Transactions;
     using SR2 = System.ServiceModel.Routing.SR;
-    using System.Security.Principal;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     // This class wraps a Message, MessageBuffer (if requested), and the OperationContext
     // The message is not buffered if nobody calls MessageRpc.CreateBuffer.  If the message

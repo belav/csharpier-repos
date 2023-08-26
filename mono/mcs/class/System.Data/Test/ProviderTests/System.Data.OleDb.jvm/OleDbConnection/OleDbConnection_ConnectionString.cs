@@ -22,13 +22,11 @@
 //
 
 using System;
-using System.Text;
+using System.Collections;
 using System.Data;
 using System.Data.OleDb;
-using System.Collections;
-
+using System.Text;
 using MonoTests.System.Data.Utils;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb

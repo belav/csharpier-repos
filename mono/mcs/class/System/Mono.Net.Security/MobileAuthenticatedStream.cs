@@ -12,22 +12,21 @@
 extern alias MonoSecurity;
 #endif
 
-#if MONO_SECURITY_ALIAS
-using MSI = MonoSecurity::Mono.Security.Interface;
 #else
 using MSI = Mono.Security.Interface;
 #endif
 
-using System;
+using System;using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Security;
-using System.Globalization;
-using System.Security.Authentication;
 using System.Runtime.ExceptionServices;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
+#if MONO_SECURITY_ALIAS
+using MSI = MonoSecurity::Mono.Security.Interface;
 
 using SD = System.Diagnostics;
 using SSA = System.Security.Authentication;
@@ -323,8 +322,7 @@ namespace Mono.Net.Security
             if (options.ServerMode)
             {
                 if (
-                    options.ServerCertificate == null
-                    && options.ServerCertSelectionDelegate == null
+                    options.ServerCertificate == null && options.ServerCertSelectionDelegate == null
                 )
                     throw new ArgumentException(nameof(options.ServerCertificate));
             }
@@ -548,7 +546,7 @@ namespace Mono.Net.Security
             MonoTlsProviderFactory.Debug($"MobileAuthenticatedStream({ID}): {message}");
         }
 
-        #region Called back from native code via SslConnection
+#region Called back from native code via SslConnection
 
         /*
          * Called from within SSLRead() and SSLHandshake().  We only access tha managed byte[] here.
@@ -744,9 +742,9 @@ namespace Mono.Net.Security
             return true;
         }
 
-        #endregion
+#endregion
 
-        #region Inner Stream
+#region Inner Stream
 
         /*
          * Read / write data from the inner stream; we're only called from managed code and only manipulate
@@ -837,9 +835,9 @@ namespace Mono.Net.Security
             writeBuffer.Offset = writeBuffer.Size = 0;
         }
 
-        #endregion
+#endregion
 
-        #region Main async I/O loop
+#region Main async I/O loop
 
         internal AsyncOperationStatus ProcessHandshake(
             AsyncOperationStatus status,
@@ -973,7 +971,7 @@ namespace Mono.Net.Security
             }
         }
 
-        #endregion
+#endregion
 
         public override bool IsServer
         {

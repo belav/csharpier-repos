@@ -31,7 +31,6 @@ using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics.Design;
 using System.Reflection;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics.Design

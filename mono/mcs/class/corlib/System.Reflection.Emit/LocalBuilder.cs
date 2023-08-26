@@ -33,11 +33,11 @@
 //
 
 using System;
-using System.Reflection;
+using System.Diagnostics.SymbolStore;
 using System.Globalization;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics.SymbolStore;
 
 namespace System.Reflection.Emit
 {

@@ -14,12 +14,12 @@
 
 namespace System.Collections.Specialized
 {
-    using Microsoft.Win32;
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     /// <para>Provides the <see langword='abstract '/>base class for a sorted collection of associated <see cref='System.String' qualify='true'/> keys

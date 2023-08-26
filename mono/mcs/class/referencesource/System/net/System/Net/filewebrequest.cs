@@ -6,13 +6,13 @@
 
 namespace System.Net
 {
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Threading;
-    using System.Runtime.Versioning;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Tracing;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Threading;
 
     [Serializable]
     public class FileWebRequest : WebRequest, ISerializable

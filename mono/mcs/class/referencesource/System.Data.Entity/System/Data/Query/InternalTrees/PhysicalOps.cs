@@ -10,9 +10,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Metadata.Edm;
+using System.Data.Query.PlanCompiler;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Query.PlanCompiler;
 using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.InternalTrees

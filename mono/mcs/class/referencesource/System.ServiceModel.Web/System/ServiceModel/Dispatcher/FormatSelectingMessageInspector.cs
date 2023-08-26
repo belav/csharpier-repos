@@ -5,15 +5,15 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Net.Mime;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Web;
-    using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     class FormatSelectingMessageInspector : IDispatchMessageInspector
     {

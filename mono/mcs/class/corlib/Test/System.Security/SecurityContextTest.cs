@@ -32,7 +32,6 @@ using System;
 using System.Security;
 using System.Security.Principal;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Security

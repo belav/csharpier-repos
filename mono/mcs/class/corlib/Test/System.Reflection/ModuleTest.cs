@@ -8,16 +8,16 @@
 //
 
 using System;
-using System.Threading;
+using System.Collections;
+using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Threading;
+using NUnit.Framework;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.Serialization;
-using System.IO;
-using System.Collections;
 
-using NUnit.Framework;
 
 namespace MonoTests.System.Reflection
 {

@@ -19,14 +19,14 @@
 namespace System.Collections
 {
     using System;
-    using System.Runtime;
-    using System.Security;
-    using System.Security.Permissions;
     using System.Diagnostics;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Serialization;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Permissions;
 
     // Implements a variable-size List that uses an array of objects to store the
     // elements. A ArrayList has a capacity, which is the allocated length

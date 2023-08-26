@@ -20,8 +20,8 @@
 //
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace IBM.Data.DB2
 {

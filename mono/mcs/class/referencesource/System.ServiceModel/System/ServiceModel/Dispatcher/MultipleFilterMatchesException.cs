@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
 
     [Serializable]
     public class MultipleFilterMatchesException : SystemException

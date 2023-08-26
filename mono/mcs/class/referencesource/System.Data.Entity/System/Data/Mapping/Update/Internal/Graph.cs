@@ -7,12 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.Utils;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Diagnostics;
-using System.Text;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.Update.Internal
 {

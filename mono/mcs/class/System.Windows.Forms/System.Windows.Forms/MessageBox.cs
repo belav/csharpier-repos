@@ -437,8 +437,7 @@ namespace System.Windows.Forms
                 )
                     CancelButton.PerformClick();
                 else if (
-                    (charCode == 'Y' || charCode == 'y')
-                    && (AcceptButton as Button).Text == "Yes"
+                    (charCode == 'Y' || charCode == 'y') && (AcceptButton as Button).Text == "Yes"
                 )
                     AcceptButton.PerformClick();
                 else if (
@@ -447,8 +446,7 @@ namespace System.Windows.Forms
                 )
                     CancelButton.PerformClick();
                 else if (
-                    (charCode == 'R' || charCode == 'r')
-                    && (AcceptButton as Button).Text == "Retry"
+                    (charCode == 'R' || charCode == 'r') && (AcceptButton as Button).Text == "Retry"
                 )
                     AcceptButton.PerformClick();
                 else if (

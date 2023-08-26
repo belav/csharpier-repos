@@ -5,9 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Xml;
-using System.Collections;
 
 namespace System.Xml.Xsl.Xslt
 {
@@ -131,8 +131,7 @@ namespace System.Xml.Xsl.Xslt
             else
             {
                 if (
-                    records[lastRecord].prefix.Length == 0
-                    && records[lastRecord - 1].prefix == null
+                    records[lastRecord].prefix.Length == 0 && records[lastRecord - 1].prefix == null
                 )
                 {
                     return; // Averything was already done

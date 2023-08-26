@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using DbLinq.Data.Linq.Sugar.Expressions;
 
 namespace DbLinq.Data.Linq.Sugar

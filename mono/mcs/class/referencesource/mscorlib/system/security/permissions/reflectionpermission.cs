@@ -11,15 +11,15 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
-    using System.Security.Util;
-    using System.Text;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Security;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Security.Util;
+    using System.Text;
 
     [ComVisible(true)]
     [Flags]

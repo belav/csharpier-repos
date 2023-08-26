@@ -30,10 +30,8 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Xml;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {

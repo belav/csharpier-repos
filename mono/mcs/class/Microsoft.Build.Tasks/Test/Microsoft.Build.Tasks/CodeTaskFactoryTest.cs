@@ -29,12 +29,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Tasks;
-using NUnit.Framework;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
+using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
+using Microsoft.Build.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks
 {

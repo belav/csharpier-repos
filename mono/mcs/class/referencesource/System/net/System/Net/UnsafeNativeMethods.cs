@@ -6,22 +6,22 @@
 
 namespace System.Net
 {
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Net.Sockets;
-    using System.Net.Cache;
-    using System.Threading;
-    using System.ComponentModel;
     using System.Collections;
-    using System.Runtime.ConstrainedExecution;
-    using System.Security;
-    using Microsoft.Win32.SafeHandles;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Net.Cache;
+    using System.Net.Sockets;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-    using System.IO;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32.SafeHandles;
 
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal static class UnsafeNclNativeMethods
@@ -3855,8 +3855,7 @@ namespace System.Net
                     verb = HttpVerbs[(int)request->Verb];
                 }
                 else if (
-                    request->Verb == HTTP_VERB.HttpVerbUnknown
-                    && request->pUnknownVerb != null
+                    request->Verb == HTTP_VERB.HttpVerbUnknown && request->pUnknownVerb != null
                 )
                 {
                     verb = new string(request->pUnknownVerb + fixup, 0, request->UnknownVerbLength);

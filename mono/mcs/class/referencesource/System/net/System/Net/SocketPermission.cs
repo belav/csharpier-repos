@@ -7,9 +7,9 @@
 namespace System.Net
 {
     using System.Collections;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
     using System.Threading;
 
     //NOTE: While SocketPermissionAttribute resides in System.DLL,
@@ -733,8 +733,7 @@ namespace System.Net
                     }
 
                     if (
-                        !ValidationHelper.ValidateTcpPort(port)
-                        && port != SocketPermission.AllPorts
+                        !ValidationHelper.ValidateTcpPort(port) && port != SocketPermission.AllPorts
                     )
                     {
                         throw new ArgumentOutOfRangeException(

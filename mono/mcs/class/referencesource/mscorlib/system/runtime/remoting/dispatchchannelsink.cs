@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Messaging;
-using System.Diagnostics.Contracts;
 
 namespace System.Runtime.Remoting.Channels
 {

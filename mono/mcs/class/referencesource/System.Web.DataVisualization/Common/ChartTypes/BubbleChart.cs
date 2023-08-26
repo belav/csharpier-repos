@@ -26,11 +26,10 @@
 
 using System;
 using System.Collections;
-using System.Resources;
-using System.Reflection;
 using System.Drawing;
 using System.Globalization;
-
+using System.Reflection;
+using System.Resources;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.Data;

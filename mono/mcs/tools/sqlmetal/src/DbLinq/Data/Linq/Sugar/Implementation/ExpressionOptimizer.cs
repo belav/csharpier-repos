@@ -27,7 +27,6 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Expressions;
@@ -248,8 +247,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         )
         {
             if (
-                columnExpression is ColumnExpression
-                || columnExpression is InputParameterExpression
+                columnExpression is ColumnExpression || columnExpression is InputParameterExpression
             )
             {
                 if (

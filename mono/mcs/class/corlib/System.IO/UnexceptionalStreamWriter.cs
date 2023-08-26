@@ -38,8 +38,8 @@
 // get IO errors when their terminal vanishes (ie when they spew debug
 // output.)  See UnexceptionalStreamReader too.
 
-using System.Text;
 using System;
+using System.Text;
 
 namespace System.IO
 {

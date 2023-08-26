@@ -3,11 +3,11 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Discovery
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
 
     // This class provides a mitigration to the DDOS threat when using Discovery APIs with
     // UDP multicast transport.

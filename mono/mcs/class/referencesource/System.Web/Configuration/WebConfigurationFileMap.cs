@@ -8,8 +8,8 @@ namespace System.Web.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     //
     // Holds the configuration file mapping for a Web server.

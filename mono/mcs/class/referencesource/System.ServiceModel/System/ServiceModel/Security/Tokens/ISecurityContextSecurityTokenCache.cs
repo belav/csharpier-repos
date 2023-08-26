@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.Xml;
     using System.Collections.ObjectModel;
+    using System.Xml;
 
     public interface ISecurityContextSecurityTokenCache
     {

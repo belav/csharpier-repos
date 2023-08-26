@@ -4,8 +4,8 @@
 //   Test attaching and detaching a new thread from native.
 //  If everything is working, this should not hang on shutdown.
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 public class MonoPInvokeCallbackAttribute : Attribute
 {

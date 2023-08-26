@@ -31,11 +31,10 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using NUnit.Framework;
 using System.IO;
 using System.Security.Permissions;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Imaging
 {

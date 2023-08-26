@@ -188,8 +188,7 @@ namespace System.Web
                 throw new ArgumentNullException("field");
 
             if (
-                cacheability != HttpCacheability.NoCache
-                && cacheability != HttpCacheability.Private
+                cacheability != HttpCacheability.NoCache && cacheability != HttpCacheability.Private
             )
                 throw new ArgumentException("Must be NoCache or Private", "cacheability");
 

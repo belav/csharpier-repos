@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Reflection;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace System.Data.Linq
 {

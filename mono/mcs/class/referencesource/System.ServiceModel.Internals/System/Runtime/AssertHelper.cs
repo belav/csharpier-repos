@@ -19,8 +19,8 @@ namespace System.Runtime
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
     using System.Runtime.Interop;
-    using System.Security;
     using System.Runtime.Versioning;
+    using System.Security;
 
     static class AssertHelper
     {

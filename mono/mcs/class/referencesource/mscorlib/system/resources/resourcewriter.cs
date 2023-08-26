@@ -18,19 +18,19 @@
 namespace System.Resources
 {
     using System;
-    using System.IO;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
 #if FEATURE_SERIALIZATION
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.Security;
-    using System.Security.Permissions;
 
     // Generates a binary .resources file in the system default format
     // from name and value pairs.  Create one with a unique file name,

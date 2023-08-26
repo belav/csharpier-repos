@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 {

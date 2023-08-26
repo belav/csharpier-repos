@@ -6,6 +6,7 @@ namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.Runtime;
@@ -15,7 +16,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
-    using System.Globalization;
 
     /*
      * See
@@ -1282,8 +1282,7 @@ namespace System.ServiceModel.Security
                     );
                 }
                 if (
-                    this.MaxClockSkew == TimeSpan.MaxValue
-                    || this.ReplayWindow == TimeSpan.MaxValue
+                    this.MaxClockSkew == TimeSpan.MaxValue || this.ReplayWindow == TimeSpan.MaxValue
                 )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(

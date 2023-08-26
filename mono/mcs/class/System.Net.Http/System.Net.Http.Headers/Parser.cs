@@ -26,9 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Net.Mail;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Mail;
 
 namespace System.Net.Http.Headers
 {

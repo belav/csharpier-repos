@@ -7,9 +7,9 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Security.Permissions;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules.Design
 {
@@ -468,8 +468,7 @@ namespace System.Workflow.Activities.Rules.Design
                 {
                     RuleConditionCollection conditionDefs = rules.Conditions;
                     if (
-                        conditionDefs != null
-                        && conditionDefs.Contains(conditionDecl.ConditionName)
+                        conditionDefs != null && conditionDefs.Contains(conditionDecl.ConditionName)
                     )
                     {
                         //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection

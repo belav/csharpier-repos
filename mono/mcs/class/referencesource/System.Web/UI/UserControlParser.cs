@@ -14,12 +14,12 @@ namespace System.Web.UI
 {
     using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Security;
     using System.Security.Permissions;
-    using System.Web.Compilation;
-    using System.Globalization;
     using System.Web.Caching;
+    using System.Web.Compilation;
 
     /*
      * Parser for declarative controls

@@ -1,7 +1,7 @@
 namespace System.IO.Compression
 {
-    using System.IO;
     using System.Diagnostics;
+    using System.IO;
     using System.Security.Permissions;
 
     public class GZipStream : Stream

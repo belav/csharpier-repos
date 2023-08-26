@@ -16,20 +16,20 @@
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Collections;
-    using System.Text;
+    using System.Resources;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
     using System.Security;
-    using System.Diagnostics;
-    using System.Resources;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
+    using System.Text;
     using StackCrawlMark = System.Threading.StackCrawlMark;
 
     internal sealed class ObjectReader
@@ -1937,8 +1937,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         )
         {
             if (
-                !FormatterServices.UnsafeTypeForwardersIsEnabled()
-                && sourceAssembly != destAssembly
+                !FormatterServices.UnsafeTypeForwardersIsEnabled() && sourceAssembly != destAssembly
             )
             {
                 // we have a type forward to attribute !

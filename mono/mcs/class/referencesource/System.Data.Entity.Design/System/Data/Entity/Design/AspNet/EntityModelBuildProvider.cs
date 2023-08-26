@@ -8,19 +8,19 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Globalization;
-using System.IO;
-using System.Web;
-using System.Web.Hosting;
-using System.Web.Compilation;
-using System.Xml;
+using System.Collections.Generic;
 using System.Data.Entity.Design;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Web;
+using System.Web.Compilation;
+using System.Web.Hosting;
+using System.Xml;
 
 namespace System.Data.Entity.Design.AspNet
 {

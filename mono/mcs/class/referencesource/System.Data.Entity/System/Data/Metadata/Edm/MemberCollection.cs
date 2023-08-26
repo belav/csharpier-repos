@@ -12,10 +12,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
-using System.Reflection;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {

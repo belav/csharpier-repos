@@ -12,10 +12,11 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 #if FEATURE_SERIALIZATION
 using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-using System.Security.Permissions;
+
 
 namespace System.Security.Policy
 {

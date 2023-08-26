@@ -6,18 +6,18 @@
 
 namespace System.IO
 {
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
-    using System.Security.Permissions;
-    using System.Security;
-    using System.Globalization;
-    using System.Runtime.Versioning;
 
     /// <devdoc>
     ///    <para>Listens to the system directory change notifications and

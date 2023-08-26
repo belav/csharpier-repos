@@ -13,9 +13,9 @@ namespace System.Web.UI
     using System.Globalization;
     using System.Web;
     using System.Web.Compilation;
-    using System.Web.UI;
     using System.Web.Resources;
     using System.Web.Script.Services;
+    using System.Web.UI;
 
     [DefaultProperty("Path")]
     public class ServiceReference

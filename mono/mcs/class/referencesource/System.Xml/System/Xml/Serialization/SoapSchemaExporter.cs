@@ -9,10 +9,10 @@ namespace System.Xml.Serialization
 {
     using System;
     using System.Collections;
-    using System.Xml.Schema;
-    using System.Xml;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Xml;
+    using System.Xml.Schema;
 
     /// <include file='doc\SoapSchemaExporter.uex' path='docs/doc[@for="SoapSchemaExporter"]/*' />
     /// <internalonly/>

@@ -21,14 +21,14 @@ Revision History:
 namespace System.Net.Security
 {
     using System;
-    using System.Net;
-    using System.IO;
-    using System.Security;
-    using System.Security.Principal;
-    using System.Threading;
     using System.ComponentModel;
+    using System.IO;
+    using System.Net;
+    using System.Security;
     using System.Security.Authentication;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Principal;
+    using System.Threading;
 
     //
     // The class maintains the state of the authentication process and the security context.

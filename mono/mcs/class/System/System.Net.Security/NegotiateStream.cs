@@ -32,9 +32,9 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Security.Principal;
-using System.Security.Permissions;
 using System.Security.Authentication.ExtendedProtection;
+using System.Security.Permissions;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 

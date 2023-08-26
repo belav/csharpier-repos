@@ -10,22 +10,22 @@ namespace System.ServiceModel
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Linq.Expressions;
     using System.Net;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Administration;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Text;
-    using System.Runtime.Diagnostics;
     using System.Threading;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Reflection;
-    using System.Linq.Expressions;
 
     public abstract class ServiceHostBase
         : CommunicationObject,
@@ -414,8 +414,7 @@ namespace System.ServiceModel
             }
 
             if (
-                this.State != CommunicationState.Created
-                && this.State != CommunicationState.Opening
+                this.State != CommunicationState.Created && this.State != CommunicationState.Opening
             )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -468,8 +467,7 @@ namespace System.ServiceModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
             }
             if (
-                this.State != CommunicationState.Created
-                && this.State != CommunicationState.Opening
+                this.State != CommunicationState.Created && this.State != CommunicationState.Opening
             )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(

@@ -7,9 +7,9 @@
 ///
 
 using System.Diagnostics;
-using System.Threading;
-using System.Security.Permissions;
 using System.Diagnostics.Contracts;
+using System.Security.Permissions;
+using System.Threading;
 
 namespace System.IO.Compression
 {

@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Mono.Data.Tds.Protocol;
 using System.Collections;
+using Mono.Data.Tds.Protocol;
 
 namespace Mono.Data.Tds.Protocol
 {

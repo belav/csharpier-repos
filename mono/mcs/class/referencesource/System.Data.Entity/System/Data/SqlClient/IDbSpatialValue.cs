@@ -7,8 +7,8 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-using System.Data.Spatial;
 using System.Data.Metadata.Edm;
+using System.Data.Spatial;
 
 namespace System.Data.SqlClient.Internal
 {

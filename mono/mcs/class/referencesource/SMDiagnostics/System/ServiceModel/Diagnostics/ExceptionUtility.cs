@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System;
+    using System.Collections;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Collections;
+    using System.Threading;
     using System.Xml;
 
     class ExceptionUtility

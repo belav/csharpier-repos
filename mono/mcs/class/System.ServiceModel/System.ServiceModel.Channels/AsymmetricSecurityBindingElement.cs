@@ -27,8 +27,8 @@
 //
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Security;
 using System.IdentityModel.Selectors;
+using System.Net.Security;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Channels.Security;
 using System.ServiceModel.Description;

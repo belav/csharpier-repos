@@ -5,15 +5,15 @@ namespace System.ServiceModel.ComIntegration
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.EnterpriseServices;
-    using System.Runtime.InteropServices;
-    using System.ServiceModel.Configuration;
-    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
-    using System.Threading;
+    using System.Runtime.InteropServices;
+    using System.ServiceModel.Configuration;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
     class DllHostInitializeWorker
     {

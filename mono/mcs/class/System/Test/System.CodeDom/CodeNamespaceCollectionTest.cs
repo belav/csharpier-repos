@@ -27,11 +27,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
-using System.Collections;
 using System.CodeDom;
+using System.Collections;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {

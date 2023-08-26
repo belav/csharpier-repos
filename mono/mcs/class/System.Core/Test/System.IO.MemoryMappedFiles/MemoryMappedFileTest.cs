@@ -31,7 +31,6 @@ using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.IO.MemoryMappedFiles

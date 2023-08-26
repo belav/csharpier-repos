@@ -13,7 +13,6 @@
 //
 using System;
 using System.Text;
-
 #if STATIC
 using MetaType = IKVM.Reflection.Type;
 using IKVM.Reflection;
@@ -381,9 +380,7 @@ namespace Mono.CSharp
             }
 
             if (
-                a.Type == pa.Out
-                && (ModFlags & Modifier.REF) != 0
-                && !OptAttributes.Contains(pa.In)
+                a.Type == pa.Out && (ModFlags & Modifier.REF) != 0 && !OptAttributes.Contains(pa.In)
             )
             {
                 a.Report.Error(

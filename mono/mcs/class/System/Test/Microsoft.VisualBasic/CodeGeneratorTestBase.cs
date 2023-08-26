@@ -10,12 +10,11 @@
 // (c) 2003 Jochen Wezel, CompuMaster GmbH
 //
 using System;
-using System.IO;
-using System.Text;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.IO;
+using System.Text;
 using Microsoft.VisualBasic;
-
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.VisualBasic

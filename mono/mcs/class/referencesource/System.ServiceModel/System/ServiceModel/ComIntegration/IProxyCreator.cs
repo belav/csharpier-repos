@@ -4,10 +4,10 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
-    using System.ServiceModel;
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting.Proxies;
+    using System.ServiceModel;
 
     internal interface IProxyCreator : IDisposable
     {

@@ -115,10 +115,7 @@ namespace Mono.Security.Cryptography
             if (checkInput)
             {
                 if (
-                    !p.IsProbablePrime()
-                    || g <= 0
-                    || g >= p
-                    || (x != null && (x <= 0 || x > p - 2))
+                    !p.IsProbablePrime() || g <= 0 || g >= p || (x != null && (x <= 0 || x > p - 2))
                 )
                     throw new CryptographicException();
             }

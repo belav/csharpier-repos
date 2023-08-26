@@ -4,25 +4,24 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Runtime.InteropServices;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Threading;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Security.Principal;
-    using System.IdentityModel.Tokens;
-    using System.Net;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IdentityModel;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.Net;
+    using System.Runtime.InteropServices;
     using System.Security.Authentication.ExtendedProtection;
-    using IMD = System.IdentityModel.Diagnostics;
-
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Threading;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
+    using IMD = System.IdentityModel.Diagnostics;
     using SR = System.ServiceModel.SR;
 
     internal sealed class WindowsSspiNegotiation : ISspiNegotiation

@@ -13,18 +13,18 @@
 namespace System.Data.Services.Client
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
 #if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
 #endif
-    using System.Reflection;
-    using System.Collections;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",

@@ -10,13 +10,13 @@ namespace System.ServiceModel.Syndication
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.Runtime.CompilerServices;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
@@ -933,8 +933,7 @@ namespace System.ServiceModel.Syndication
                         link.MediaType = val;
                     }
                     else if (
-                        name == Rss20Constants.LengthTag
-                        && ns == Rss20Constants.Rss20Namespace
+                        name == Rss20Constants.LengthTag && ns == Rss20Constants.Rss20Namespace
                     )
                     {
                         link.Length = !string.IsNullOrEmpty(val)

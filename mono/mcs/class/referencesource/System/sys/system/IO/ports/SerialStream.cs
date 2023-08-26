@@ -32,7 +32,6 @@ using System.Security;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
-
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
 

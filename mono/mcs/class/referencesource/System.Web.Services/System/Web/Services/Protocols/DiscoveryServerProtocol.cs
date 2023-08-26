@@ -8,19 +8,19 @@ namespace System.Web.Services.Protocols
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
+    using System.Net;
     using System.Reflection;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
+    using System.Text;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Description;
     using System.Web.Services.Discovery;
     using System.Web.UI;
-    using System.Text;
-    using System.Diagnostics;
-    using System.Net;
-    using System.Web.Services.Configuration;
-    using System.Globalization;
-    using System.Collections.Generic;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     internal class DiscoveryServerType : ServerType
     {

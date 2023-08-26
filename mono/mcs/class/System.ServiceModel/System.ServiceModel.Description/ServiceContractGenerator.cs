@@ -40,13 +40,12 @@ using System.ServiceModel.Configuration;
 using System.Threading;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 using ConfigurationType = System.Configuration.Configuration;
-using QName = System.Xml.XmlQualifiedName;
 using OPair = System.Collections.Generic.KeyValuePair<
     System.ServiceModel.Description.IOperationContractGenerationExtension,
     System.ServiceModel.Description.OperationContractGenerationContext
 >;
+using QName = System.Xml.XmlQualifiedName;
 
 namespace System.ServiceModel.Description
 {
@@ -1213,8 +1212,7 @@ namespace System.ServiceModel.Description
             if (data_contract_importer == null)
                 data_contract_importer = md.DataContractImporter;
             else if (
-                md.DataContractImporter != null
-                && data_contract_importer != md.DataContractImporter
+                md.DataContractImporter != null && data_contract_importer != md.DataContractImporter
             )
                 throw new Exception("INTERNAL ERROR: should not happen");
             if (xml_serialization_importer == null)

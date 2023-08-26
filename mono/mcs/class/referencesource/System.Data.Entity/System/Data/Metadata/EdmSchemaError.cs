@@ -100,8 +100,7 @@ namespace System.Data.Metadata.Edm
             : base(message)
         {
             if (
-                severity < EdmSchemaErrorSeverity.Warning
-                || severity > EdmSchemaErrorSeverity.Error
+                severity < EdmSchemaErrorSeverity.Warning || severity > EdmSchemaErrorSeverity.Error
             )
             {
                 throw new ArgumentOutOfRangeException(

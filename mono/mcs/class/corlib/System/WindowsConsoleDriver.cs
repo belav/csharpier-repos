@@ -579,9 +579,7 @@ namespace System
                         "Error in ReadConsoleInput " + Marshal.GetLastWin32Error()
                     );
                 if (
-                    record.KeyDown
-                    && record.EventType == 1
-                    && !IsModifierKey(record.VirtualKeyCode)
+                    record.KeyDown && record.EventType == 1 && !IsModifierKey(record.VirtualKeyCode)
                 )
                     break;
             }

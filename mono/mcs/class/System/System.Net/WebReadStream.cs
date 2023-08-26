@@ -88,9 +88,7 @@ namespace System.Net
             if (e is WebException)
                 return e;
             if (
-                Operation.Aborted
-                || e is OperationCanceledException
-                || e is ObjectDisposedException
+                Operation.Aborted || e is OperationCanceledException || e is ObjectDisposedException
             )
                 return HttpWebRequest.CreateRequestAbortedException();
             return e;

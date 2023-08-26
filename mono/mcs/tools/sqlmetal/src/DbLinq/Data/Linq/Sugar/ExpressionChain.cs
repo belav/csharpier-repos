@@ -25,9 +25,9 @@
 #endregion
 
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
-using System.Collections.Generic;
 
 namespace DbLinq.Data.Linq.Sugar
 {

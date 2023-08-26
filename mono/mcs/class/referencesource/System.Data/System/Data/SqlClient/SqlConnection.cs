@@ -17,33 +17,32 @@ namespace System.Data.SqlClient
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Configuration.Assemblies;
     using System.ComponentModel;
+    using System.Configuration.Assemblies;
     using System.Data;
     using System.Data.Common;
     using System.Data.ProviderBase;
     using System.Data.Sql;
     using System.Data.SqlTypes;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Principal;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Reflection;
-    using System.Runtime.Versioning;
-
     using Microsoft.SqlServer.Server;
-    using System.Security.Principal;
-    using System.Diagnostics.CodeAnalysis;
 
     [DefaultEvent("InfoMessage")]
     public sealed partial class SqlConnection : DbConnection, ICloneable

@@ -9,9 +9,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 #region Grammar
 //
@@ -424,8 +424,7 @@ namespace System.Workflow.Activities.Rules
                     case MemberTypes.NestedType:
                     case MemberTypes.TypeInfo:
                         if (
-                            member.DeclaringType == thisType
-                            || IsNonPrivate((Type)member, thisType)
+                            member.DeclaringType == thisType || IsNonPrivate((Type)member, thisType)
                         )
                         {
                             filteredMembers[member.Name] = member;
@@ -3499,8 +3498,7 @@ namespace System.Workflow.Activities.Rules
         private void ValidateStatement(ParserContext parserContext, CodeStatement statement)
         {
             if (
-                !CodeDomStatementWalker.Validate(Validator, statement)
-                && Validator.Errors.Count > 0
+                !CodeDomStatementWalker.Validate(Validator, statement) && Validator.Errors.Count > 0
             )
             {
                 // Choose the first one and throw it.

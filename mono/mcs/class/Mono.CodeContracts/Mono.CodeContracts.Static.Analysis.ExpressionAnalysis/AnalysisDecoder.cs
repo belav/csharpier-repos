@@ -27,9 +27,9 @@
 //
 
 using System;
+using Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions;
 using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.AST.Visitors;
-using Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Expressions;
 using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.Lattices;
 

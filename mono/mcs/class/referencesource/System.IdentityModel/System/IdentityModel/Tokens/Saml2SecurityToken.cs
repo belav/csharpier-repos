@@ -92,8 +92,7 @@ namespace System.IdentityModel.Tokens
             get
             {
                 if (
-                    null != this.assertion.Conditions
-                    && null != this.assertion.Conditions.NotBefore
+                    null != this.assertion.Conditions && null != this.assertion.Conditions.NotBefore
                 )
                 {
                     return this.assertion.Conditions.NotBefore.Value;

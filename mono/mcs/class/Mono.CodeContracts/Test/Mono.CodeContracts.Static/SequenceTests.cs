@@ -27,7 +27,6 @@
 //
 
 using Mono.CodeContracts.Static.DataStructures;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.CodeContracts

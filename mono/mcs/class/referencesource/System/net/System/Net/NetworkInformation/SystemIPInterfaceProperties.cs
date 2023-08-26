@@ -4,8 +4,8 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net.Sockets;
     using System;
+    using System.Net.Sockets;
 
     /// <summary>
     /// Provides information specific to a network

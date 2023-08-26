@@ -26,8 +26,8 @@
 
 using System;
 using System.Data.Common;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
@@ -35,8 +35,8 @@ using System.Xml.Serialization;
 
 namespace System.Data.SqlTypes
 {
-    using System.Text;
     using System.Configuration.Assemblies;
+    using System.Text;
 
     // Options that are used in comparison
     [Flags, Serializable]

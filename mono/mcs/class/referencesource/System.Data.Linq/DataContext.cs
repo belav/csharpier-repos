@@ -11,10 +11,10 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Transactions;
 using System.Xml;
-using System.Runtime.CompilerServices;
 
 namespace System.Data.Linq
 {

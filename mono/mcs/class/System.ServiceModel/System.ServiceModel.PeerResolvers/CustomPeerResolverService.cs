@@ -33,8 +33,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Transactions;
 using System.Timers;
+using System.Transactions;
 
 namespace System.ServiceModel.PeerResolvers
 {

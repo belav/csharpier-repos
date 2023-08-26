@@ -2370,8 +2370,7 @@ namespace System.Windows.Forms
                         }
 
                         if (
-                            current_backcolor != Color.Empty
-                            && current_backcolor != owner.BackColor
+                            current_backcolor != Color.Empty && current_backcolor != owner.BackColor
                         )
                         {
                             g.FillRectangle(

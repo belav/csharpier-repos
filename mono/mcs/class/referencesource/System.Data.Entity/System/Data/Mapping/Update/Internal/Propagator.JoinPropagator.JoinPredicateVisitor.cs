@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.CommandTrees;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Data.Common.CommandTrees;
+using System.Diagnostics;
 
 namespace System.Data.Mapping.Update.Internal
 {

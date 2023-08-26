@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Activities
 {
     using System;
-    using System.Transactions;
     using System.Runtime.Serialization;
+    using System.Transactions;
 
     [DataContract]
     class TransactedReceiveData

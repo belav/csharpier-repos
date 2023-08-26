@@ -5,15 +5,15 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
     using System.Security.Principal;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public class ServiceSecurityContext
     {

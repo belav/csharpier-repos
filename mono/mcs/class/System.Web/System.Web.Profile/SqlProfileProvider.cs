@@ -28,16 +28,16 @@
 //
 
 using System;
-using System.Data;
-using System.Data.Common;
 using System.Collections;
-using System.Globalization;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Configuration.Provider;
-using System.Web.Configuration;
-using System.Collections.Specialized;
+using System.Data;
+using System.Data.Common;
+using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Web.Configuration;
 using System.Web.Security;
 using System.Web.Util;
 
@@ -340,8 +340,7 @@ namespace System.Web.Profile
             {
                 if (property.SerializeAs == SettingsSerializeAs.ProviderSpecific)
                     if (
-                        property.PropertyType.IsPrimitive
-                        || property.PropertyType == typeof(String)
+                        property.PropertyType.IsPrimitive || property.PropertyType == typeof(String)
                     )
                         property.SerializeAs = SettingsSerializeAs.String;
                     else

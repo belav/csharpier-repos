@@ -6,8 +6,8 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.Net;
     using System.IO;
+    using System.Net;
 
     /// <include file='doc\HttpGetClientProtocol.uex' path='docs/doc[@for="HttpGetClientProtocol"]/*' />
     /// <devdoc>

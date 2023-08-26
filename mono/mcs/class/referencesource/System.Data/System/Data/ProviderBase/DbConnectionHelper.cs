@@ -13,12 +13,12 @@ namespace NAMESPACE
     using System.Data.Common;
     using System.Data.ProviderBase;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Threading;
     using SysTx = System.Transactions;
-    using System.Diagnostics.CodeAnalysis;
 
     public sealed partial class CONNECTIONOBJECTNAME : DbConnection
     {
@@ -451,8 +451,7 @@ namespace NAMESPACE
                 OnStateChange(DbConnectionInternal.StateChangeOpen);
             }
             else if (
-                ConnectionState.Open == originalState
-                && ConnectionState.Closed == currentState
+                ConnectionState.Open == originalState && ConnectionState.Closed == currentState
             )
             {
                 OnStateChange(DbConnectionInternal.StateChangeClosed);

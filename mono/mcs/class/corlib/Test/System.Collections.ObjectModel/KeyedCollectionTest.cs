@@ -5,11 +5,11 @@
 // (C) Carlo Kok
 //
 
-using NUnit.Framework;
 using System;
-using System.Globalization;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using NUnit.Framework;
 
 namespace MonoTests.System.Collections.ObjectModel
 {

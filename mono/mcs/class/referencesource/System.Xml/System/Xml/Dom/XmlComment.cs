@@ -7,8 +7,8 @@
 
 namespace System.Xml
 {
-    using System.Xml.XPath;
     using System.Diagnostics;
+    using System.Xml.XPath;
 
     // Represents the content of an XML comment.
     public class XmlComment : XmlCharacterData

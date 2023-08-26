@@ -7,15 +7,15 @@
 namespace System.Net.Configuration
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Reflection;
-    using System.Threading;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.ComponentModel;
+    using System.Threading;
 
 #if !MONO
     public sealed class DefaultProxySection : ConfigurationSection

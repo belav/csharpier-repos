@@ -32,9 +32,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.IO;
-
 using MonoTests.System.Data.Utils;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data

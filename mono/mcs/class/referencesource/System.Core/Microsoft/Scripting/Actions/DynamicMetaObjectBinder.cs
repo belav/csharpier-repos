@@ -13,6 +13,10 @@
  *
  * ***************************************************************************/
 
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Dynamic.Utils;
+using System.Runtime.CompilerServices;
 #if CLR2
 using Microsoft.Scripting.Ast;
 using Microsoft.Scripting.Ast.Compiler;
@@ -26,11 +30,6 @@ using System.Core;
 #else
 using System.Runtime.Remoting;
 #endif
-
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Dynamic.Utils;
-using System.Runtime.CompilerServices;
 
 namespace System.Dynamic
 {

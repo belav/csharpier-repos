@@ -16,26 +16,28 @@
 **
 ===========================================================*/
 using System;
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
+using System.Diagnostics.Contracts;
+using System.Diagnostics.Tracing;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
-#if FEATURE_MACL
-using System.Security.AccessControl;
-#endif
 using System.Security.Permissions;
 using System.Threading;
-#if FEATURE_ASYNC_IO
-using System.Threading.Tasks;
-#endif
-using System.Runtime.InteropServices;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 #if FEATURE_REMOTING
 using System.Runtime.Remoting.Messaging;
 #endif
-using System.Runtime.CompilerServices;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
-using System.Diagnostics.Tracing;
+
+#if FEATURE_ASYNC_IO
+using System.Threading.Tasks;
+#endif
+
+#if FEATURE_MACL
+using System.Security.AccessControl;
+#endif
 
 /*
  * FileStream supports different modes of accessing the disk - async mode
@@ -1004,8 +1006,7 @@ namespace System.IO
                 badArg = "rights";
 #endif
             else if (
-                tempshare < FileShare.None
-                || tempshare > (FileShare.ReadWrite | FileShare.Delete)
+                tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete)
             )
                 badArg = "share";
 

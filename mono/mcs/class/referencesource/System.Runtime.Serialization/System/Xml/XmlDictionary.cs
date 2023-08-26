@@ -4,13 +4,13 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
-    using System.Xml;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Text;
+    using System.IO;
     using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
 
     public class XmlDictionary : IXmlDictionary
     {

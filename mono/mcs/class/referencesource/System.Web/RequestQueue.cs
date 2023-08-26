@@ -12,11 +12,11 @@
 
 namespace System.Web
 {
-    using System.Threading;
     using System.Collections;
-    using System.Web.Util;
-    using System.Web.Hosting;
+    using System.Threading;
     using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
     internal class RequestQueue
     {

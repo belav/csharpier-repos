@@ -2,28 +2,28 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
 
@@ -192,13 +192,11 @@ namespace System.Workflow.ComponentModel.Design
                     else if (navdir == AccessibleNavigation.Right)
                         navigate = DesignerNavigationDirection.Right;
                     else if (
-                        navdir == AccessibleNavigation.Up
-                        || navdir == AccessibleNavigation.Previous
+                        navdir == AccessibleNavigation.Up || navdir == AccessibleNavigation.Previous
                     )
                         navigate = DesignerNavigationDirection.Up;
                     else if (
-                        navdir == AccessibleNavigation.Down
-                        || navdir == AccessibleNavigation.Next
+                        navdir == AccessibleNavigation.Down || navdir == AccessibleNavigation.Next
                     )
                         navigate = DesignerNavigationDirection.Down;
 

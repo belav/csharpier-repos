@@ -1,9 +1,9 @@
 ﻿namespace System.Web.DynamicData
 {
     using System;
-    using System.Web.DynamicData.ModelProviders;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Web.DynamicData.ModelProviders;
 
     internal interface IMetaModel
     {

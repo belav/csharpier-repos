@@ -2466,12 +2466,7 @@ namespace System.ComponentModel
             switch (this.mask[charDex.MaskPosition])
             {
                 case '#': // digit or plus/minus sign optional.
-                    if (
-                        !Char.IsDigit(input)
-                        && (input != '-')
-                        && (input != '+')
-                        && input != spaceChar
-                    )
+                    if (!Char.IsDigit(input) && (input != '-') && (input != '+') && input != spaceChar)
                     {
                         resultHint = MaskedTextResultHint.DigitExpected;
                         return false;

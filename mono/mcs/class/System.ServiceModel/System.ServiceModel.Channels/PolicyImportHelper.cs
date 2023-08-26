@@ -24,10 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Xml;
 using System.Collections.Generic;
 using System.ServiceModel.Description;
-
+using System.Xml;
 using QName = System.Xml.XmlQualifiedName;
 
 namespace System.ServiceModel.Channels

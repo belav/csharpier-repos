@@ -11,19 +11,21 @@ namespace System.Runtime.Serialization
     using System.Globalization;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-#if !NO_CONFIGURATION
-    using System.Runtime.Serialization.Configuration;
-#endif
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Security;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Xml;
     using System.Xml.Schema;
+#if !NO_CONFIGURATION
+    using System.Runtime.Serialization.Configuration;
+#endif
+
+
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
-    using System.Text.RegularExpressions;
 
 #if USE_REFEMIT
     public abstract class DataContract
@@ -2136,8 +2138,7 @@ namespace System.Runtime.Serialization
                 string trimmedNs = dataContractNs.Trim();
                 // Code similar to XmlConvert.ToUri (string.Empty is a valid uri but not "   ")
                 if (
-                    trimmedNs.Length == 0
-                    || trimmedNs.IndexOf("##", StringComparison.Ordinal) != -1
+                    trimmedNs.Length == 0 || trimmedNs.IndexOf("##", StringComparison.Ordinal) != -1
                 )
                     ThrowInvalidDataContractException(
                         SR.GetString(SR.DataContractNamespaceIsNotValid, dataContractNs),

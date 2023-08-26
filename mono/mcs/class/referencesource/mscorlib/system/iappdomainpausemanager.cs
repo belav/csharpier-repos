@@ -15,11 +15,11 @@
 namespace System
 {
     using System;
-    using System.Threading;
-    using System.Security;
     using System.Diagnostics.Contracts;
-    using System.Runtime.Versioning;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Threading;
 
 #if FEATURE_LEGACYNETCFFAS
     [System.Security.SecurityCritical]

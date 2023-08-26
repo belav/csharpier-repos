@@ -2,8 +2,8 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------------------------
 
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace System.IdentityModel.Configuration
 {

@@ -16,13 +16,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Diagnostics.Contracts;
-using System.Threading.Tasks;
 using System.Security;
 using System.Security.Permissions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Linq.Parallel
 {

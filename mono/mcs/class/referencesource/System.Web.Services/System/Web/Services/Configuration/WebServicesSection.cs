@@ -9,6 +9,7 @@ namespace System.Web.Services.Configuration
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Security.Permissions;
     using System.Threading;
     using System.Web;
@@ -16,7 +17,6 @@ namespace System.Web.Services.Configuration
     using System.Web.Services.Discovery;
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
-    using System.Runtime.CompilerServices;
 
     public sealed class WebServicesSection : ConfigurationSection
     {

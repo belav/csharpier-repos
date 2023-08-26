@@ -35,7 +35,6 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
-
 using Mono.Xml;
 
 namespace Mono.Security.Cryptography

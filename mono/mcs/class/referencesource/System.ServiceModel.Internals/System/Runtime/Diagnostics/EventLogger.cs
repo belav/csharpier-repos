@@ -6,16 +6,16 @@ namespace System.Runtime.Diagnostics
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Runtime.Interop;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Interop;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Text;
-    using System.Diagnostics.CodeAnalysis;
 
     sealed class EventLogger
     {

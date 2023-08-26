@@ -2239,8 +2239,7 @@ namespace System
                         goto HaveScale;
                 }
                 else if (
-                    resHi < OVFL_MAX_9_HI
-                    || resHi == OVFL_MAX_9_HI && resMidLo <= OVFL_MAX_9_MIDLO
+                    resHi < OVFL_MAX_9_HI || resHi == OVFL_MAX_9_HI && resMidLo <= OVFL_MAX_9_MIDLO
                 )
                     return 9;
 
@@ -3426,8 +3425,7 @@ namespace System
                             //
                             tmp = remainder << 1;
                             if (
-                                tmp < remainder
-                                || tmp >= den && (tmp > den || (bufQuo.U0 & 1) != 0)
+                                tmp < remainder || tmp >= den && (tmp > den || (bufQuo.U0 & 1) != 0)
                             )
                                 goto RoundUp;
                             break;

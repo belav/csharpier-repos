@@ -14,8 +14,8 @@
 //
 namespace System.Runtime.InteropServices
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
 
     // This Enum matchs the CorPinvokeMap defined in CorHdr.h
     [Serializable]

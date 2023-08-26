@@ -2119,8 +2119,7 @@ namespace System.ServiceModel.Channels
         static IPAddress[] GetIPAddresses(Uri uri)
         {
             if (
-                uri.HostNameType == UriHostNameType.IPv4
-                || uri.HostNameType == UriHostNameType.IPv6
+                uri.HostNameType == UriHostNameType.IPv4 || uri.HostNameType == UriHostNameType.IPv6
             )
             {
                 IPAddress ipAddress = IPAddress.Parse(uri.DnsSafeHost);

@@ -15,14 +15,14 @@ namespace System.Web.UI.WebControls
     using System.Drawing.Design;
     using System.Globalization;
     using System.Linq;
+    using System.Net.Mail;
     using System.Security.Permissions;
-    using System.Web.Security;
+    using System.Text;
     using System.Web.Configuration;
+    using System.Web.Management;
+    using System.Web.Security;
     using System.Web.UI;
     using System.Web.Util;
-    using System.Net.Mail;
-    using System.Text;
-    using System.Web.Management;
 
     /// <devdoc>
     ///     Displays UI that allows creating a user.
@@ -3124,8 +3124,7 @@ namespace System.Web.UI.WebControls
                         ITextControl errorMessageLabel = (ITextControl)
                             _createUserStepContainer.ErrorMessageLabel;
                         if (
-                            errorMessageLabel != null
-                            && !String.IsNullOrEmpty(_unknownErrorMessage)
+                            errorMessageLabel != null && !String.IsNullOrEmpty(_unknownErrorMessage)
                         )
                         {
                             errorMessageLabel.Text = _unknownErrorMessage;

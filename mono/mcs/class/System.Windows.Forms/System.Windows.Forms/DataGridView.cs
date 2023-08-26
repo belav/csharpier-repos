@@ -25,13 +25,13 @@
 //
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Reflection;
-using System.Collections;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {
@@ -5719,8 +5719,7 @@ namespace System.Windows.Forms
 
                 // Were we already in this cell?
                 if (
-                    hover_cell.RowIndex == hit.RowIndex
-                    && hover_cell.ColumnIndex == hit.ColumnIndex
+                    hover_cell.RowIndex == hit.RowIndex && hover_cell.ColumnIndex == hit.ColumnIndex
                 )
                 {
                     Rectangle display = GetCellDisplayRectangle(

@@ -5,13 +5,13 @@
 namespace System.Activities.Statements
 {
     using System;
+    using System.Activities.Validation;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
     using System.Runtime;
-    using System.Activities.Validation;
-    using System.Collections.Generic;
     using System.Windows.Markup;
-    using System.Collections.ObjectModel;
 
     [ContentProperty("Text")]
     public sealed class WriteLine : CodeActivity

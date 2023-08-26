@@ -10,8 +10,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Web.UI;

@@ -88,8 +88,7 @@ namespace System.Data.EntityClient
 
             // Check that the store connection is available
             if (
-                _connection.StoreProviderFactory == null
-                || this._connection.StoreConnection == null
+                _connection.StoreProviderFactory == null || this._connection.StoreConnection == null
             )
             {
                 throw EntityUtil.InvalidOperation(

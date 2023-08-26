@@ -6,14 +6,14 @@ namespace System.Runtime.Serialization.Json
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-#if !NO_DYNAMIC_CODEGEN
-    using System.Reflection.Emit;
-#endif
     using System.Runtime;
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Security;
     using System.Security.Permissions;
     using System.Xml;
+#if !NO_DYNAMIC_CODEGEN
+    using System.Reflection.Emit;
+#endif
 
     delegate object JsonFormatClassReaderDelegate(
         XmlReaderDelegator xmlReader,

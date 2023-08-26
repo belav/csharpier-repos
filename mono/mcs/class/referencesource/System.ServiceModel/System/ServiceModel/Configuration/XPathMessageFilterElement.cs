@@ -10,9 +10,9 @@ namespace System.ServiceModel.Configuration
     using System.IO;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
+    using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Text;
 
     public sealed partial class XPathMessageFilterElement : ConfigurationElement
     {

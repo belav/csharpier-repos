@@ -12,11 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Mono.Unix;
-using Mono.Unix.Native;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Threading;
-using System.Runtime.InteropServices;
+using Mono.Unix;
+using Mono.Unix.Native;
 
 class MonoServiceRunner : MarshalByRefObject
 {

@@ -894,8 +894,7 @@ namespace System.Data.Linq.SqlClient
                 }
                 // push converts of client-expressions inside the client-expression (to be evaluated client side)
                 else if (
-                    uo.NodeType == SqlNodeType.Convert
-                    && uo.Operand.NodeType == SqlNodeType.Value
+                    uo.NodeType == SqlNodeType.Convert && uo.Operand.NodeType == SqlNodeType.Value
                 )
                 {
                     SqlValue val = (SqlValue)uo.Operand;

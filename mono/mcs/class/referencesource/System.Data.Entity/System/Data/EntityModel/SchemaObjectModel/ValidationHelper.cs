@@ -9,12 +9,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data.Entity;
 using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
-using System.Data.Entity;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {

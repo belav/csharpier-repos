@@ -26,8 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Net;
@@ -35,8 +33,9 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using System.Threading;
 using System.Text;
+using System.Threading;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Net.Sockets
 {

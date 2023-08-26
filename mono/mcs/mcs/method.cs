@@ -14,13 +14,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Text;
-using System.Linq;
 using Mono.CompilerServices.SymbolWriter;
-using System.Runtime.CompilerServices;
-
 #if MOBILE
 using XmlElement = System.Object;
 #else
@@ -3515,8 +3514,7 @@ namespace Mono.CSharp
                     conv_type = first_arg_type;
                 }
                 else if (
-                    declaring_type == first_arg_type
-                    || declaring_type == first_arg_type_unwrap
+                    declaring_type == first_arg_type || declaring_type == first_arg_type_unwrap
                 )
                 {
                     conv_type = return_type;

@@ -15,14 +15,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
 
 // Disable the "reference to volatile field not treated as volatile" error.
 #pragma warning disable 0420

@@ -4,9 +4,9 @@
 // Author: David Menestrina (dmenest@yahoo.com)
 //
 
-using NUnit.Framework;
-using System.Collections;
 using System;
+using System.Collections;
+using NUnit.Framework;
 
 namespace MonoTests.System.Collections
 {

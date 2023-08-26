@@ -27,8 +27,8 @@ using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Drawing.Text;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.Data;
@@ -521,8 +521,7 @@ namespace System.Web.UI.DataVisualization.Charting
             LineCap oldStartCap = LineCap.Flat;
             LineCap oldEndCap = LineCap.Flat;
             if (
-                this._startCap != LineAnchorCapStyle.None
-                || this._endCap != LineAnchorCapStyle.None
+                this._startCap != LineAnchorCapStyle.None || this._endCap != LineAnchorCapStyle.None
             )
             {
                 capChanged = true;

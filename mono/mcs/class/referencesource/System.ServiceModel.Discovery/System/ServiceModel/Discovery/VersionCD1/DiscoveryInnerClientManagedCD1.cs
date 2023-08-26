@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Discovery.VersionCD1
 {
     using System;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.ServiceModel.Description;
 
     class DiscoveryInnerClientManagedCD1

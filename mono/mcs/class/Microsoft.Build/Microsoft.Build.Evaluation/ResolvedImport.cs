@@ -25,8 +25,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Microsoft.Build.Construction;
 using System;
+using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Evaluation
 {

@@ -9,11 +9,11 @@ namespace System.Web.Services.Protocols
     using System;
     using System.Collections;
     using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
 
     /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException"]/*' />
     /// <devdoc>

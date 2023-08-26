@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Globalization;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.Transactions;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
+    using System.Transactions;
 
     [DebuggerDisplay("Address={address}")]
     [DebuggerDisplay("Name={name}")]

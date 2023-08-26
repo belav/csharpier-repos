@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Channels
 {
     using System.ServiceModel;
-    using System.Text;
-    using System.Xml;
     using System.ServiceModel.Administration;
     using System.ServiceModel.Description;
+    using System.Text;
+    using System.Xml;
 
     public sealed class WebMessageEncodingBindingElement
         : MessageEncodingBindingElement,

@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
-using System.Web.UI;
-using System.Web;
 using System.Globalization;
+using System.Web;
+using System.Web.UI;
 
 namespace SampleControl
 {

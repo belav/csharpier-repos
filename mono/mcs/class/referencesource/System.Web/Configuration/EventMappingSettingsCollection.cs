@@ -7,20 +7,20 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.Hosting;
-    using System.Web.Util;
-    using System.Web.Configuration;
-    using System.Web.Management;
-    using System.Web.Compilation;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Management;
+    using System.Web.Util;
+    using System.Xml;
 
     [ConfigurationCollection(typeof(EventMappingSettings))]
     public sealed class EventMappingSettingsCollection : ConfigurationElementCollection

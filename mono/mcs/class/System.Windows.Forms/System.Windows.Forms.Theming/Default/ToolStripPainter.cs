@@ -51,8 +51,7 @@ namespace System.Windows.Forms.Theming.Default
             else if (e.Item.Selected)
                 ControlPaint.DrawBorder3D(e.Graphics, paint_here, Border3DStyle.RaisedInner);
             else if (
-                e.Item.BackColor != Control.DefaultBackColor
-                && e.Item.BackColor != Color.Empty
+                e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
             )
                 e.Graphics.FillRectangle(ResPool.GetSolidBrush(e.Item.BackColor), paint_here);
         }
@@ -69,8 +68,7 @@ namespace System.Windows.Forms.Theming.Default
             else if (e.Item.Selected)
                 ControlPaint.DrawBorder3D(e.Graphics, paint_here, Border3DStyle.RaisedInner);
             else if (
-                e.Item.BackColor != Control.DefaultBackColor
-                && e.Item.BackColor != Color.Empty
+                e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
             )
                 e.Graphics.FillRectangle(ResPool.GetSolidBrush(e.Item.BackColor), paint_here);
         }
@@ -127,8 +125,7 @@ namespace System.Windows.Forms.Theming.Default
                 else if (e.Item.Selected)
                     ControlPaint.DrawBorder3D(e.Graphics, paint_here, Border3DStyle.RaisedInner);
                 else if (
-                    e.Item.BackColor != Control.DefaultBackColor
-                    && e.Item.BackColor != Color.Empty
+                    e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
                 )
                     e.Graphics.FillRectangle(ResPool.GetSolidBrush(e.Item.BackColor), paint_here);
             }
@@ -143,8 +140,7 @@ namespace System.Windows.Forms.Theming.Default
             else if (e.Item.Selected)
                 ControlPaint.DrawBorder3D(e.Graphics, paint_here, Border3DStyle.RaisedInner);
             else if (
-                e.Item.BackColor != Control.DefaultBackColor
-                && e.Item.BackColor != Color.Empty
+                e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
             )
                 e.Graphics.FillRectangle(ResPool.GetSolidBrush(e.Item.BackColor), paint_here);
 
@@ -193,8 +189,7 @@ namespace System.Windows.Forms.Theming.Default
             else if (tssb.ButtonSelected)
                 ControlPaint.DrawBorder3D(e.Graphics, button_part, Border3DStyle.RaisedInner);
             else if (
-                e.Item.BackColor != Control.DefaultBackColor
-                && e.Item.BackColor != Color.Empty
+                e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
             )
                 e.Graphics.FillRectangle(ResPool.GetSolidBrush(e.Item.BackColor), button_part);
 
@@ -204,8 +199,7 @@ namespace System.Windows.Forms.Theming.Default
             else if (tssb.DropDownButtonSelected || tssb.ButtonSelected)
                 ControlPaint.DrawBorder3D(e.Graphics, drop_part, Border3DStyle.RaisedInner);
             else if (
-                e.Item.BackColor != Control.DefaultBackColor
-                && e.Item.BackColor != Color.Empty
+                e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty
             )
                 e.Graphics.FillRectangle(ResPool.GetSolidBrush(e.Item.BackColor), drop_part);
         }

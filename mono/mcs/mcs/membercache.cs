@@ -521,8 +521,7 @@ namespace Mono.CSharp
                             continue;
 
                         if (
-                            (restrictions & BindingRestriction.NoAccessors) != 0
-                            && entry.IsAccessor
+                            (restrictions & BindingRestriction.NoAccessors) != 0 && entry.IsAccessor
                         )
                             continue;
 
@@ -562,8 +561,7 @@ namespace Mono.CSharp
                         var entry = applicable[i];
 
                         if (
-                            (restrictions & BindingRestriction.NoAccessors) != 0
-                            && entry.IsAccessor
+                            (restrictions & BindingRestriction.NoAccessors) != 0 && entry.IsAccessor
                         )
                             continue;
 
@@ -774,8 +772,7 @@ namespace Mono.CSharp
                         var entry = applicable[i];
 
                         if (
-                            (entry.Modifiers & Modifiers.PUBLIC) == 0
-                            && !entry.IsAccessible(member)
+                            (entry.Modifiers & Modifiers.PUBLIC) == 0 && !entry.IsAccessible(member)
                         )
                             continue;
 
@@ -792,8 +789,7 @@ namespace Mono.CSharp
 
                             // A method with different arity does not hide base member
                             if (
-                                mkind != MemberKind.Method
-                                && member.MemberName.Arity != entry.Arity
+                                mkind != MemberKind.Method && member.MemberName.Arity != entry.Arity
                             )
                                 continue;
 

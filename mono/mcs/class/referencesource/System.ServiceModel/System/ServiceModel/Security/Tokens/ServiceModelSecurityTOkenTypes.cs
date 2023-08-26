@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
+using System.Globalization;
 using System.IdentityModel.Tokens;
 using System.ServiceModel;
-using System.Globalization;
 
 namespace System.ServiceModel.Security.Tokens
 {

@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
-using System.Workflow.ComponentModel;
 using System.Workflow.Activities.Common;
+using System.Workflow.ComponentModel;
 
 namespace System.Workflow.Activities.Rules
 {

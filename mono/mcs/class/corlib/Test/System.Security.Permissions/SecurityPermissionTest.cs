@@ -26,12 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
+using System.Diagnostics;
 using System.Security;
 using System.Security.Permissions;
-
-using System.Diagnostics;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Permissions
 {

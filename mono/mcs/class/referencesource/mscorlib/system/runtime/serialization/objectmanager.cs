@@ -18,12 +18,12 @@ namespace System.Runtime.Serialization
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
     using System.Runtime.Remoting;
-    using System.Security.Permissions;
     using System.Security;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
     using System.Security.Principal;
 
     [System.Runtime.InteropServices.ComVisible(true)]

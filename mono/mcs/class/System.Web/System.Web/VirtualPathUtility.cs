@@ -30,9 +30,9 @@
 //
 
 using System.Collections.Specialized;
+using System.Text;
 using System.Web.Configuration;
 using System.Web.Util;
-using System.Text;
 using Microsoft.Win32;
 
 namespace System.Web
@@ -199,8 +199,7 @@ namespace System.Web
             fromPath = ToAbsoluteInternal(fromPath);
 
             if (
-                String.CompareOrdinal(fromPath, toPath) == 0
-                && fromPath[fromPath.Length - 1] == '/'
+                String.CompareOrdinal(fromPath, toPath) == 0 && fromPath[fromPath.Length - 1] == '/'
             )
                 return "./";
 

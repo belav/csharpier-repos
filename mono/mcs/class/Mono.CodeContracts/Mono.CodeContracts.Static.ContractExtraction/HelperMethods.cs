@@ -247,9 +247,7 @@ namespace Mono.CodeContracts.Static.ContractExtraction
                                 visible = true;
                         }
                         else if (
-                            mbr1.IsPrivate
-                            && mbr.IsPrivate
-                            && IsInsideOf(mbr, mbr1.DeclaringType)
+                            mbr1.IsPrivate && mbr.IsPrivate && IsInsideOf(mbr, mbr1.DeclaringType)
                         )
                             visible = true;
                     }

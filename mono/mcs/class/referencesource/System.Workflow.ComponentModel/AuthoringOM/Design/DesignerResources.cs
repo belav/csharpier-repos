@@ -1,8 +1,8 @@
 #region Using Directives
 using System;
-using System.Resources;
 using System.Drawing;
 using System.Globalization;
+using System.Resources;
 #endregion
 
 namespace System.Workflow.ComponentModel.Design

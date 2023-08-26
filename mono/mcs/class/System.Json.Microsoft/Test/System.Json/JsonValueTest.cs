@@ -6,11 +6,11 @@
 // Authors:
 //   Miguel de Icaza
 //
-using NUnit.Framework;
 using System;
 using System.IO;
-using System.Text;
 using System.Json;
+using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

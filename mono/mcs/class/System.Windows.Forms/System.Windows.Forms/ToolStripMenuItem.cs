@@ -27,10 +27,10 @@
 //
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
-using System.Windows.Forms.Design;
 using System.ComponentModel.Design.Serialization;
+using System.Drawing;
+using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {

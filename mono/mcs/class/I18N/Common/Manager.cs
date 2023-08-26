@@ -25,12 +25,12 @@
 namespace I18N.Common
 {
     using System;
-    using System.IO;
-    using System.Text;
-    using System.Globalization;
     using System.Collections;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Security;
+    using System.Text;
 
     // This class provides the primary entry point into the I18N
     // library.  Users of the library start by getting the value

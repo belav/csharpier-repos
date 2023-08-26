@@ -4370,8 +4370,7 @@ namespace System.Web.UI.WebControls
                                     CultureInfo.InvariantCulture
                                 );
                                 if (
-                                    populateIndex >= 0
-                                    && !populatedNodes.ContainsKey(populateIndex)
+                                    populateIndex >= 0 && !populatedNodes.ContainsKey(populateIndex)
                                 )
                                 {
                                     logList[i] = populateIndex;

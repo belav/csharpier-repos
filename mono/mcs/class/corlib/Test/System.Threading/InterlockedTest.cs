@@ -7,10 +7,10 @@
 // (C) 2004 Luca Barbieri
 //
 
-using NUnit.Framework;
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
+using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Threading
 {

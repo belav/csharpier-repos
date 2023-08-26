@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
 
     [DataContract]
     public class MatchAllMessageFilter : MessageFilter

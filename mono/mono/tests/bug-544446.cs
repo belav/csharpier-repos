@@ -1,8 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
-using System.Collections.Generic;
 
 class MyProxy : RealProxy
 {

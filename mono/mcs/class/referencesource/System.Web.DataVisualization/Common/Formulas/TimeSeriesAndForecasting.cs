@@ -246,8 +246,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             // Approximation error
             bool approximationError;
             if (
-                parameterList.Length < 3
-                || !bool.TryParse(parameterList[2], out approximationError)
+                parameterList.Length < 3 || !bool.TryParse(parameterList[2], out approximationError)
             )
             {
                 approximationError = true;

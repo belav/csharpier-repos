@@ -8,14 +8,12 @@
 // (C) 2004 Jonathan Pryor
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-
 using Mono.Unix;
-
+using NUnit.Framework;
 using Group = Mono.Unix.Native.Group;
 using Syscall = Mono.Unix.Native.Syscall;
 

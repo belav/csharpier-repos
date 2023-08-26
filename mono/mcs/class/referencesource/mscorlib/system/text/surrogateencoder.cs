@@ -11,9 +11,9 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     /*=================================SurrogateEncoder==================================
     ** This class is here only to deserialize the SurrogateEncoder class from Everett (V1.1) into

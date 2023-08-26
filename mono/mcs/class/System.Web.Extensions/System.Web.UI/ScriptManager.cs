@@ -30,24 +30,24 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Security.Permissions;
-using System.Collections.Specialized;
 using System.Collections;
-using System.Web.Handlers;
-using System.Reflection;
-using System.Web.Configuration;
-using System.Web.UI.HtmlControls;
-using System.IO;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Security.Permissions;
+using System.Text;
 using System.Threading;
+using System.Web.Configuration;
+using System.Web.Handlers;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
-using System.Xml;
-using System.Collections.ObjectModel;
+using System.Web.UI.HtmlControls;
 using System.Web.Util;
+using System.Xml;
 
 namespace System.Web.UI
 {
@@ -798,8 +798,7 @@ namespace System.Web.UI
         string GetAuthenticationServicePath()
         {
             if (
-                _authenticationService != null
-                && !String.IsNullOrEmpty(_authenticationService.Path)
+                _authenticationService != null && !String.IsNullOrEmpty(_authenticationService.Path)
             )
                 return ResolveClientUrl(_authenticationService.Path);
 

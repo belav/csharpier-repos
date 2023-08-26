@@ -20,7 +20,6 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
@@ -1338,8 +1337,7 @@ namespace System.Linq.Expressions
             else
             {
                 if (
-                    m.IsGenericMethodDefinition
-                    && m.GetGenericArguments().Length == typeArgs.Length
+                    m.IsGenericMethodDefinition && m.GetGenericArguments().Length == typeArgs.Length
                 )
                     return m.MakeGenericMethod(typeArgs);
             }

@@ -30,10 +30,8 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
-
 using DbLinq.Util;
 
 namespace DbLinq.Vendor.Implementation

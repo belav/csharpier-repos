@@ -1002,8 +1002,7 @@ namespace System.ServiceModel.Security
                             throw;
 
                         if (
-                            PerformanceCounters.PerformanceCountersEnabled
-                            && null != this.ListenUri
+                            PerformanceCounters.PerformanceCountersEnabled && null != this.ListenUri
                         )
                         {
                             PerformanceCounters.AuthenticationFailed(request, this.ListenUri);

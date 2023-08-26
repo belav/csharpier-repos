@@ -187,8 +187,7 @@ namespace System.ServiceModel.Transactions
             // Read the WSAT1.0 protoocol identifier
             Guid guid = SerializationUtils.ReadGuid(mem);
             if (
-                guid == PluggableProtocol10.ProtocolGuid
-                || guid == PluggableProtocol11.ProtocolGuid
+                guid == PluggableProtocol10.ProtocolGuid || guid == PluggableProtocol11.ProtocolGuid
             )
             {
                 // This is the WS-AT extended whereabouts blob

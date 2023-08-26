@@ -4,7 +4,6 @@ using System.Xml;
 using System.Xml.Schema;
 using Commons.Xml.Relaxng;
 using Commons.Xml.Relaxng.Rnc;
-
 using BF = System.Reflection.BindingFlags;
 
 namespace Mono.XmlTools

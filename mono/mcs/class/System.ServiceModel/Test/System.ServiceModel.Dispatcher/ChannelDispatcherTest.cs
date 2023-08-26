@@ -10,7 +10,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher

@@ -6,13 +6,13 @@
 // @owner  Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
 using System.Data.Metadata.Edm;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace System.Data.Common.Internal
 {

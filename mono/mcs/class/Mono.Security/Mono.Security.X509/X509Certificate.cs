@@ -31,10 +31,10 @@
 using System;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
-using SSCX = System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Text;
 using Mono.Security.Cryptography;
+using SSCX = System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Security.X509
 {

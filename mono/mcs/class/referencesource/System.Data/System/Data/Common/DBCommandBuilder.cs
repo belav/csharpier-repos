@@ -921,9 +921,7 @@ namespace System.Data.Common
                 DbSchemaRow row = schemaRows[i];
 
                 if (
-                    (null == row)
-                    || (0 == row.BaseColumnName.Length)
-                    || !IncludeInInsertValues(row)
+                    (null == row) || (0 == row.BaseColumnName.Length) || !IncludeInInsertValues(row)
                 )
                     continue;
 

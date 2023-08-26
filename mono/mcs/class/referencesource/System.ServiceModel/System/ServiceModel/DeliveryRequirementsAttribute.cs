@@ -5,8 +5,8 @@ namespace System.ServiceModel
 {
     using System.Collections.Generic;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     // This attribute specifies what the service implementation
     // requires from the binding that dispatches messages.

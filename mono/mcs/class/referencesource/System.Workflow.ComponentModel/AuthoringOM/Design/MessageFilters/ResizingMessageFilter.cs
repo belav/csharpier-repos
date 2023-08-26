@@ -1,12 +1,12 @@
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Forms;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
-using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace System.Workflow.ComponentModel.Design
 {
@@ -151,15 +151,13 @@ namespace System.Workflow.ComponentModel.Design
                 cursorToSet = Cursors.SizeNESW;
             }
             else if (
-                (sizingEdge & DesignerEdges.Top) > 0
-                || (sizingEdge & DesignerEdges.Bottom) > 0
+                (sizingEdge & DesignerEdges.Top) > 0 || (sizingEdge & DesignerEdges.Bottom) > 0
             )
             {
                 cursorToSet = Cursors.SizeNS;
             }
             else if (
-                (sizingEdge & DesignerEdges.Left) > 0
-                || (sizingEdge & DesignerEdges.Right) > 0
+                (sizingEdge & DesignerEdges.Left) > 0 || (sizingEdge & DesignerEdges.Right) > 0
             )
             {
                 cursorToSet = Cursors.SizeWE;

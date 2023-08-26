@@ -12,7 +12,6 @@
 
 using System;
 using System.Globalization;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else
@@ -1855,9 +1854,7 @@ namespace Mono.CSharp
                     if (in_checked_context)
                     {
                         if (
-                            Value < ushort.MinValue
-                            || Value > ushort.MaxValue
-                            || float.IsNaN(Value)
+                            Value < ushort.MinValue || Value > ushort.MaxValue || float.IsNaN(Value)
                         )
                             throw new OverflowException();
                     }

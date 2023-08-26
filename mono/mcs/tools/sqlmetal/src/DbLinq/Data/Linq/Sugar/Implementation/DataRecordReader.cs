@@ -27,7 +27,6 @@
 using System;
 using System.Data;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Mapping;
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Util;

@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
+    using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.ComponentModel;
-    using System.Activities.Presentation;
 
     partial class CorrelationScopeDesigner
     {

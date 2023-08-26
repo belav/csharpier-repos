@@ -30,7 +30,6 @@
 
 using System;
 using System.Security;
-
 using NUnit.Framework;
 
 namespace MonoTests.System

@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     abstract class DelegatingMessage : Message
     {

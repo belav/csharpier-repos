@@ -30,7 +30,6 @@ namespace Mono.Cecil
 {
     using System;
     using System.IO;
-
     using Mono.Cecil.Binary;
     using Mono.Cecil.Metadata;
 

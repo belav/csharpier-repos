@@ -7,15 +7,15 @@
 namespace System.Configuration
 {
     using System.Configuration.Internal;
-    using System.IO;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.Reflection;
-    using System.Threading;
-    using System.Security;
-    using System.Net;
-    using System.Security.Principal;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Net;
+    using System.Reflection;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Principal;
+    using System.Threading;
 
     internal sealed class ClientConfigurationHost : DelegatingConfigHost, IInternalConfigClientHost
     {

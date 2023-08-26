@@ -9,11 +9,11 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
-    using System.Collections;
     using System.CodeDom.Compiler;
-    using System.Web.Util;
+    using System.Collections;
+    using System.IO;
     using System.Web.UI;
+    using System.Web.Util;
 
     internal abstract class TemplateControlBuildProvider : BaseTemplateBuildProvider
     {

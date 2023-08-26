@@ -1,14 +1,14 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
     using System.CodeDom;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
 
     [Browsable(true)]

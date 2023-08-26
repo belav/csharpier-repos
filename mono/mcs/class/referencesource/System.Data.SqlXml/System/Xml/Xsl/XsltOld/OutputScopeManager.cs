@@ -7,11 +7,11 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Xml;
+    using Res = System.Xml.Utils.Res;
 
     internal class OutputScopeManager
     {

@@ -8,12 +8,12 @@
 
 namespace System.CodeDom.Compiler
 {
-    using System.Diagnostics;
     using System;
-    using System.IO;
-    using System.Text;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Security.Permissions;
+    using System.Text;
 
     /// <devdoc>
     ///    <para>Provides a text writer that can indent new lines by a tabString token.</para>

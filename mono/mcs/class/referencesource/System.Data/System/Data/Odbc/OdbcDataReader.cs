@@ -277,8 +277,7 @@ namespace System.Data.Odbc
                 SQLLEN cRowsAffected;
                 ODBC32.RetCode retcode = StatementHandle.RowCount(out cRowsAffected);
                 if (
-                    ODBC32.RetCode.SUCCESS == retcode
-                    || ODBC32.RetCode.SUCCESS_WITH_INFO == retcode
+                    ODBC32.RetCode.SUCCESS == retcode || ODBC32.RetCode.SUCCESS_WITH_INFO == retcode
                 )
                 {
                     return cRowsAffected;

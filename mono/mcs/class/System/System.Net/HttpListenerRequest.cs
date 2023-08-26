@@ -32,11 +32,11 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
+using System.Net;
+using System.Security.Authentication.ExtendedProtection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Security.Authentication.ExtendedProtection;
 using System.Threading.Tasks;
-using System.Net;
 
 namespace System.Net
 {

@@ -8,9 +8,9 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
 
     internal sealed class XPathSelfQuery : BaseAxisQuery
     {

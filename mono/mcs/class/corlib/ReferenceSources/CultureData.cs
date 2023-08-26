@@ -28,10 +28,10 @@
 
 using System;
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 
 namespace System.Globalization
 {

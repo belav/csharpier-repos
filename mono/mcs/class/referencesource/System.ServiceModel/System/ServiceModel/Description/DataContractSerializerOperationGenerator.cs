@@ -374,10 +374,7 @@ namespace System.ServiceModel.Description
                     return true;
 
                 if (
-                    x == null
-                    || y == null
-                    || x.ArrayRank != y.ArrayRank
-                    || x.BaseType != y.BaseType
+                    x == null || y == null || x.ArrayRank != y.ArrayRank || x.BaseType != y.BaseType
                 )
                     return false;
 

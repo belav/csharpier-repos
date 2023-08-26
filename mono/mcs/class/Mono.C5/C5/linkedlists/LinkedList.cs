@@ -579,8 +579,7 @@ namespace C5
             if (last.precedes(otherfirst) || otherlast.precedes(first))
                 return MutualViewPosition.NonOverlapping;
             if (
-                size == 0
-                || (otherstartsentinel.precedes(first) && last.precedes(otherendsentinel))
+                size == 0 || (otherstartsentinel.precedes(first) && last.precedes(otherendsentinel))
             )
                 return MutualViewPosition.Contains;
             if (

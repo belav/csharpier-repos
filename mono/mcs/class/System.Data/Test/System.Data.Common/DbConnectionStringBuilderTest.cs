@@ -42,7 +42,6 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Text;
-
 using NUnit.Framework;
 
 #endregion

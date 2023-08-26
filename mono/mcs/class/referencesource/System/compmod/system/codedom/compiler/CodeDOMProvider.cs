@@ -10,12 +10,12 @@ namespace System.CodeDom.Compiler
 {
     using System;
     using System.CodeDom;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Security.Permissions;
-    using System.Configuration;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.IO;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     [ToolboxItem(false)]
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]

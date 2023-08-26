@@ -18,10 +18,10 @@
 namespace System.Runtime.Serialization.Formatters
 {
     using System;
-    using System.Runtime.Serialization;
+    using System.Globalization;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Metadata;
-    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
 
     //* Class holds soap fault information

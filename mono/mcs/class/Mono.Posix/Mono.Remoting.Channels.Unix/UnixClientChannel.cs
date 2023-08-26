@@ -32,8 +32,8 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Net.Sockets;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 
 namespace Mono.Remoting.Channels.Unix

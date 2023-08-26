@@ -28,12 +28,12 @@
 //
 
 
-using NUnit.Framework;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {

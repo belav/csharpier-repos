@@ -14,21 +14,24 @@ namespace System.Reflection
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime;
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
-#if FEATURE_REMOTING
-    using System.Runtime.Remoting.Metadata;
-#endif //FEATURE_REMOTING
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using MemberListType = System.RuntimeType.MemberListType;
+#if FEATURE_REMOTING
+    using System.Runtime.Remoting.Metadata;
+#endif //FEATURE_REMOTING
+
 #if !MONO
     using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 #endif
-    using System.Runtime.CompilerServices;
+
+
+    using MemberListType = System.RuntimeType.MemberListType;
 
     [Serializable]
     [ClassInterface(ClassInterfaceType.None)]

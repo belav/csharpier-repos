@@ -28,9 +28,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Reflection;
 using System;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace System.Xml.Serialization
 {

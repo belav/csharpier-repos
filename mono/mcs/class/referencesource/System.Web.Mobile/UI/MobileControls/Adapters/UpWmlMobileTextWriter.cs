@@ -9,19 +9,17 @@ using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
-
-using SR = System.Web.UI.MobileControls.Adapters.SR;
-
 #if COMPILING_FOR_SHIPPED_SOURCE
 using Adapters = System.Web.UI.MobileControls.ShippedAdapterSource;
 
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 using Adapters = System.Web.UI.MobileControls.Adapters;
+using SR = System.Web.UI.MobileControls.Adapters.SR;
 
 namespace System.Web.UI.MobileControls.Adapters
 #endif
@@ -1143,9 +1141,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 // ignore the
 
                 if (
-                    card.AnchorCount == 1
-                    && cardIndex == _cards.Count - 1
-                    && card.SoftkeysUsed == 1
+                    card.AnchorCount == 1 && cardIndex == _cards.Count - 1 && card.SoftkeysUsed == 1
                 )
                 {
                     card.RenderAsMenu = false;

@@ -27,7 +27,6 @@
 //
 
 using System.Collections.Generic;
-
 using Mono.CodeContracts.Static.Analysis.Numerical;
 
 namespace Mono.CodeContracts.Static.DataStructures

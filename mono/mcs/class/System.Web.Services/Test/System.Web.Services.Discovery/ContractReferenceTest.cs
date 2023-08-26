@@ -9,9 +9,9 @@
 // Copyright (C) Dave Bettin, 2003
 //
 
-using NUnit.Framework;
 using System;
 using System.Web.Services.Discovery;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Discovery
 {

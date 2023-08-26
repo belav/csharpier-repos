@@ -1,11 +1,10 @@
 //------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
-using System.Runtime.Serialization;
 ////using System.ServiceModel.Channels;
 using System.Globalization;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Diagnostics.Application;
-
 using SR_ = System.Runtime.Serialization.SR;
 
 namespace System.Xml

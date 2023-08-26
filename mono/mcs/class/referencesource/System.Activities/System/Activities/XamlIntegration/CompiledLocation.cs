@@ -8,10 +8,10 @@ namespace System.Activities.XamlIntegration
     using System.Activities;
     using System.Activities.Expressions;
     using System.Activities.Runtime;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Collections.Generic;
 
     [DataContract(Name = XD.CompiledLocation.Name, Namespace = XD.Runtime.Namespace)]
     internal class CompiledLocation<T> : Location<T>

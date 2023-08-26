@@ -29,8 +29,8 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Gtk;
 using Cairo;
+using Gtk;
 
 namespace Gdk
 {

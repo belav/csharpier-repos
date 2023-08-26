@@ -6,8 +6,8 @@
 
 namespace System.Net.Configuration
 {
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
 

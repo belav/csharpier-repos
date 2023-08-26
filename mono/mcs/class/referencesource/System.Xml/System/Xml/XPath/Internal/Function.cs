@@ -8,10 +8,10 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Collections;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
-    using System.Collections;
 
     internal class Function : AstNode
     {

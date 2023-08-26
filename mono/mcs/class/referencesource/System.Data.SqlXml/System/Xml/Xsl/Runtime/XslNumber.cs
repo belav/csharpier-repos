@@ -397,8 +397,7 @@ namespace System.Xml.Xsl.Runtime
                             break;
                         }
                         if ( /*groupSize > 0 && */
-                            --cnt == 0
-                        )
+                            --cnt == 0)
                         {
                             // Every groupSize digits insert the separator
                             *pNewEnd-- = separator;

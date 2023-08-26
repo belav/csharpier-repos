@@ -7,24 +7,24 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Xml;
-using SOM = System.Data.EntityModel;
-using System.Globalization;
-using System.Data.Metadata.Edm;
-using System.Data.Entity.Design.Common;
-using System.Data.Entity.Design.SsdlGenerator;
-using System.Data.Common;
-using System.Data.EntityClient;
-using System.IO;
-using System.Data.Mapping;
-using System.Data.Common.Utils;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
-using System.Text;
+using System.Data.Common.Utils;
+using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityClient;
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Xml;
 using Microsoft.Build.Utilities;
+using SOM = System.Data.EntityModel;
 
 namespace System.Data.Entity.Design
 {

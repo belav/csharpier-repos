@@ -15,10 +15,9 @@
 
 namespace System.Diagnostics
 {
-    using System.Runtime.InteropServices;
-
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
 
     /// <internalonly/>
     [

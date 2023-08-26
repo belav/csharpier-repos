@@ -11,10 +11,11 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Globalization;
 #if FEATURE_CAS_POLICY
     using SecurityElement = System.Security.SecurityElement;
 #endif // FEATURE_CAS_POLICY
-    using System.Globalization;
+
 
     [AttributeUsage(
         AttributeTargets.Method

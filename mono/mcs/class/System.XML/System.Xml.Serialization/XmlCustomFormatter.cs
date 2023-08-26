@@ -31,9 +31,9 @@
 
 using System;
 using System.Collections;
+using System.Globalization;
 using System.Text;
 using System.Xml;
-using System.Globalization;
 
 namespace System.Xml.Serialization
 {

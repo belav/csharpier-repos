@@ -10,10 +10,10 @@ namespace System.ServiceModel.Activities
     using System.ServiceModel;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Channels;
-    using System.Workflow.Activities;
-    using System.Workflow.Runtime;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.Workflow.Activities;
+    using System.Workflow.Runtime;
 
     class WorkflowClientDeliverMessageWrapper : IDeliverMessage
     {

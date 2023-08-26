@@ -29,10 +29,9 @@
 
 
 using System;
+using System.CodeDom;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-
-using System.CodeDom;
 
 namespace System.ComponentModel.Design.Serialization
 {

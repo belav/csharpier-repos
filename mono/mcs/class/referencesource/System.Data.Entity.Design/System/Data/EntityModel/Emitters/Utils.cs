@@ -8,15 +8,15 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Specialized;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.Specialized;
 using System.Data;
-using System.Data.Metadata.Edm;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design.Common;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 
 namespace System.Data.EntityModel.Emitters
 {

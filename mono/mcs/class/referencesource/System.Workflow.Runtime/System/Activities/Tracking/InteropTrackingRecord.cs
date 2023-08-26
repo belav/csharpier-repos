@@ -5,10 +5,10 @@
 namespace System.Activities.Tracking
 {
     using System;
+    using System.Activities.Tracking;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Activities.Tracking;
 
     [Obsolete(
         "The WF3 Types are deprecated. Instead, please use the new WF4 Types from System.Activities.*"

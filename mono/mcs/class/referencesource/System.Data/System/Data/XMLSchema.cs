@@ -9,16 +9,16 @@
 namespace System.Data
 {
     using System;
-    using System.Data.Common;
-    using System.Xml;
-    using System.Xml.Schema;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.ComponentModel;
+    using System.Data.Common;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
+    using System.Xml;
+    using System.Xml.Schema;
 
     internal class XMLSchema
     {

@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
-    using System.Security.Principal;
     using System.Collections.Generic;
+    using System.Security.Principal;
+    using System.ServiceModel;
 
     abstract class NamedPipeTransportManager
         : ConnectionOrientedTransportManager<NamedPipeChannelListener>,

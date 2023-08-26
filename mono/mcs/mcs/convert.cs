@@ -13,7 +13,6 @@
 
 using System;
 using System.Collections.Generic;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else
@@ -1513,8 +1512,7 @@ namespace Mono.CSharp
                 }
 
                 if (
-                    (restr & UserConversionRestriction.NullableSourceOnly) != 0
-                    && !t.IsNullableType
+                    (restr & UserConversionRestriction.NullableSourceOnly) != 0 && !t.IsNullableType
                 )
                     continue;
 

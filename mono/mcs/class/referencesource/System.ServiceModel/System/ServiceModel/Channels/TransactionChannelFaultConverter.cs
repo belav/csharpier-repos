@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
 
     class TransactionChannelFaultConverter<TChannel> : FaultConverter
         where TChannel : class, IChannel

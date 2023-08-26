@@ -15,16 +15,16 @@
 
 namespace System
 {
-    using System.IO;
-    using System.Text;
-    using System.Runtime.Remoting;
     using System.Diagnostics;
-    using Microsoft.Win32;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Security.Permissions;
-    using System.Security;
     using System.Diagnostics.Contracts;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using Microsoft.Win32;
 
     [Serializable]
     internal enum LogLevel

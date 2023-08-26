@@ -9,13 +9,13 @@ namespace System.Runtime.Serialization
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime.Diagnostics;
-#if !MONO
-    using System.ServiceModel.Diagnostics;
-#endif
+    using System.Runtime.Serialization.Diagnostics;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization.Diagnostics;
+#if !MONO
+    using System.ServiceModel.Diagnostics;
+#endif
 
 #if USE_REFEMIT
     public class XmlObjectSerializerReadContext : XmlObjectSerializerContext

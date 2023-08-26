@@ -10,11 +10,11 @@ namespace System.ServiceModel.Dispatcher
     using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Web;
-    using System.ServiceModel.Syndication;
-    using System.Xml.Linq;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Syndication;
+    using System.ServiceModel.Web;
+    using System.Xml.Linq;
 
     internal class HttpUnhandledOperationInvoker : IOperationInvoker
     {

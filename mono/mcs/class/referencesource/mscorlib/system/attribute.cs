@@ -7,11 +7,11 @@
 namespace System
 {
     using System;
-    using System.Reflection;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security;
 #if !MONO
     using System.Security.Permissions;
@@ -681,8 +681,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")
@@ -750,8 +749,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")
@@ -808,8 +806,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")
@@ -902,8 +899,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")
@@ -928,8 +924,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")
@@ -980,8 +975,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")
@@ -1020,8 +1014,7 @@ namespace System
                 throw new ArgumentNullException("attributeType");
 
             if (
-                !attributeType.IsSubclassOf(typeof(Attribute))
-                && attributeType != typeof(Attribute)
+                !attributeType.IsSubclassOf(typeof(Attribute)) && attributeType != typeof(Attribute)
             )
                 throw new ArgumentException(
                     Environment.GetResourceString("Argument_MustHaveAttributeBaseClass")

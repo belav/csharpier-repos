@@ -24,17 +24,16 @@
 //
 #endregion
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
 using System.Data.Linq.Mapping;
+using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
 using DbLinq.Data.Linq.SqlClient;
 using DbLinq.PostgreSql;
 using DbLinq.Util;
 using DbLinq.Vendor;
-
 #if MONO_STRICT
 using DataContext = System.Data.Linq.DataContext;
 #else

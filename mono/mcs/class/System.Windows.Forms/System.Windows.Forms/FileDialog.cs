@@ -2288,8 +2288,7 @@ namespace System.Windows.Forms
                 if (real_parent == desktopDirComboboxItem)
                     local_indent = 1;
                 else if (
-                    real_parent == personalDirComboboxItem
-                    || real_parent == networkDirComboboxItem
+                    real_parent == personalDirComboboxItem || real_parent == networkDirComboboxItem
                 )
                     local_indent = 2;
                 else

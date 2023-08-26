@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.ServiceModel.Channels;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
 
     /// <summary>
     /// Opcode that evaluates a single xpath query using the framework engine

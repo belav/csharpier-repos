@@ -29,9 +29,9 @@
 //
 
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
-using System.Runtime.CompilerServices;
 
 namespace System
 {
@@ -1645,8 +1645,7 @@ namespace System
                         if (lastGroupDiff < lastGroupSize)
                             counter = lastGroupDiff;
                         else if (
-                            lastGroupSize > 0
-                            && (lastGroupMod = _decPointPos % lastGroupSize) > 0
+                            lastGroupSize > 0 && (lastGroupMod = _decPointPos % lastGroupSize) > 0
                         )
                             counter = lastGroupMod;
                     }

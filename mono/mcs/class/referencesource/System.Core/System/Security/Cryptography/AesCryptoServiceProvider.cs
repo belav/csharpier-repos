@@ -6,15 +6,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 #if FEATURE_CORESYSTEM
 using System.Core;
 #endif
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
-using Microsoft.Win32.SafeHandles;
+
 
 namespace System.Security.Cryptography
 {
@@ -46,8 +47,7 @@ namespace System.Security.Cryptography
             // standard name
             string providerName = CapiNative.ProviderNames.MicrosoftEnhancedRsaAes;
             if (
-                Environment.OSVersion.Version.Major == 5
-                && Environment.OSVersion.Version.Minor == 1
+                Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 1
             )
             {
                 providerName = CapiNative.ProviderNames.MicrosoftEnhancedRsaAesPrototype;

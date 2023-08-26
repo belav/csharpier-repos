@@ -21,10 +21,10 @@ Revision History:
 namespace System.Net.Cache
 {
     using System;
-    using System.Diagnostics;
-    using System.Text;
-    using System.IO;
     using System.Collections.Specialized;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text;
     using System.Threading;
 
     // The class specifies the contract for a caching storage to participate in the caching protocol.

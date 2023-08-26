@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.IdentityModel.Selectors;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Security.Cryptography.X509Certificates;
-    using System.IdentityModel.Selectors;
 
     public sealed partial class X509ClientCertificateAuthenticationElement : ConfigurationElement
     {

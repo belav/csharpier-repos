@@ -7,8 +7,8 @@
 //
 
 using System;
-using NUnit.Framework;
 using Mono.Directory.LDAP;
+using NUnit.Framework;
 
 namespace MonoTests.Directory.LDAP
 {

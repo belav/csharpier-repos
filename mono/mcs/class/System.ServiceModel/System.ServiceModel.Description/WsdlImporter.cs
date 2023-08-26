@@ -36,13 +36,12 @@ using System.ServiceModel.Channels;
 using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
-
+using QName = System.Xml.XmlQualifiedName;
 using SMBinding = System.ServiceModel.Channels.Binding;
 using WS = System.Web.Services.Description;
-using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 using WSBinding = System.Web.Services.Description.Binding;
 using WSMessage = System.Web.Services.Description.Message;
-using QName = System.Xml.XmlQualifiedName;
+using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 
 namespace System.ServiceModel.Description
 {

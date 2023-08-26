@@ -13,20 +13,20 @@ using SwitchElementsCollection = System.Object;
 namespace System.Diagnostics
 {
     using System;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Globalization;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Microsoft.Win32;
 #if XML_DEP
     using System.Xml.Serialization;
 #endif
-    using System.Diagnostics.CodeAnalysis;
 
     /// <devdoc>
     /// <para>Provides an <see langword='abstract '/>base class to

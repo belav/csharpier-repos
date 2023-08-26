@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Tokens;
-    using System.ServiceModel;
-    using System.IdentityModel.Selectors;
-    using System.ServiceModel.Security.Tokens;
-    using System.IO;
     using System.Globalization;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
+    using System.ServiceModel.Security.Tokens;
 
     internal sealed class SecurityHeaderTokenResolver
         : SecurityTokenResolver,

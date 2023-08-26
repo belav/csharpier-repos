@@ -291,8 +291,7 @@ namespace System.Activities.XamlIntegration
                         return true; // output cursor didn't move forward
                     }
                     else if (
-                        this.frontLoadedDirectives
-                        && currentMember == XamlLanguage.FactoryMethod
+                        this.frontLoadedDirectives && currentMember == XamlLanguage.FactoryMethod
                     )
                     {
                         DisableRewrite();
@@ -592,9 +591,7 @@ namespace System.Activities.XamlIntegration
         bool IsXClassName(XamlType xamlType)
         {
             if (
-                xamlType == null
-                || this.xClassName == null
-                || xamlType.Name != this.xClassName.Name
+                xamlType == null || this.xClassName == null || xamlType.Name != this.xClassName.Name
             )
             {
                 return false;

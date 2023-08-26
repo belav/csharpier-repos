@@ -6,13 +6,13 @@
 
 namespace System.Web.UI.HtmlControls
 {
-    using System.Runtime.Serialization.Formatters;
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.IO;
-    using System.Web.UI;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using System.Web.UI;
 
     /*
      *  A control representing an intrinsic Html tag.
@@ -75,9 +75,7 @@ namespace System.Web.UI.HtmlControls
                 if (IsLiteralContent())
                     return ((LiteralControl)Controls[0]).Text;
                 else if (
-                    HasControls()
-                    && (Controls.Count == 1)
-                    && Controls[0] is DataBoundLiteralControl
+                    HasControls() && (Controls.Count == 1) && Controls[0] is DataBoundLiteralControl
                 )
                     return ((DataBoundLiteralControl)Controls[0]).Text;
                 else

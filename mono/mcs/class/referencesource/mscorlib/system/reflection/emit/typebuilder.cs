@@ -9,17 +9,17 @@
 namespace System.Reflection.Emit
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using CultureInfo = System.Globalization.CultureInfo;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using CultureInfo = System.Globalization.CultureInfo;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

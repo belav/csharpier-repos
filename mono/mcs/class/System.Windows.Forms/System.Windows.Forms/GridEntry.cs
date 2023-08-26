@@ -28,13 +28,13 @@
 
 using System;
 using System.Collections;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Windows.Forms;
-using System.Windows.Forms.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Drawing;
+using System.Drawing.Design;
 using System.Globalization;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms.PropertyGridInternal
 {

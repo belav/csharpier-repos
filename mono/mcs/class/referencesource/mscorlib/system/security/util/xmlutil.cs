@@ -15,21 +15,21 @@
 namespace System.Security.Util
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Remoting;
-    using System.IO;
     using System.Text;
-    using System.Runtime.CompilerServices;
-    using PermissionState = System.Security.Permissions.PermissionState;
-    using BindingFlags = System.Reflection.BindingFlags;
-    using Assembly = System.Reflection.Assembly;
     using System.Threading;
-    using System.Globalization;
-    using System.Reflection;
-    using System.Diagnostics.Contracts;
+    using Assembly = System.Reflection.Assembly;
+    using BindingFlags = System.Reflection.BindingFlags;
+    using PermissionState = System.Security.Permissions.PermissionState;
 
     internal static class XMLUtil
     {

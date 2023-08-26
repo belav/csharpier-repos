@@ -17,14 +17,14 @@ namespace System.CodeDom.Compiler
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Configuration;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.Serialization.Formatters;
     using System.Xml;
-    using System.Globalization;
 
     internal class CodeDomCompilationConfiguration
     {

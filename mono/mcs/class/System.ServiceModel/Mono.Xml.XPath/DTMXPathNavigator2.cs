@@ -29,11 +29,11 @@
 //
 using System;
 using System.Collections;
+using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.ServiceModel.Dispatcher;
 
 namespace Mono.Xml.XPath
 {

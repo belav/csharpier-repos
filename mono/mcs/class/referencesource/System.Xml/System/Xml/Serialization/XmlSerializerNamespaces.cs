@@ -7,11 +7,11 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
+    using System;
     using System.Collections;
     using System.IO;
+    using System.Reflection;
     using System.Xml.Schema;
-    using System;
 
     /// <include file='doc\XmlSerializerNamespaces.uex' path='docs/doc[@for="XmlSerializerNamespaces"]/*' />
     /// <devdoc>

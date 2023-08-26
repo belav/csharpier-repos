@@ -1,9 +1,9 @@
 ﻿//------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.     All rights    reserved.
 //------------------------------------------------------------
+using System.Threading;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
-using System.Threading;
 
 namespace System.Workflow.Runtime.Hosting
 {

@@ -6,19 +6,19 @@
 
 namespace System.Net
 {
-    using System.Net.Sockets;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Runtime.InteropServices;
+    using System.Text;
     using Microsoft.Win32;
-    using System.IO;
-    using System.Security;
-    using System.Diagnostics;
 
     internal class DigestClient : ISessionAuthenticationModule
     {

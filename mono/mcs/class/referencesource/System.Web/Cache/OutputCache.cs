@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration.Provider;
+using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Permissions;
 using System.Threading;
 using System.Web;
@@ -12,8 +14,6 @@ using System.Web.Hosting;
 using System.Web.Management;
 using System.Web.UI;
 using System.Web.Util;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace System.Web.Caching
 {

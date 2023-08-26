@@ -13,6 +13,9 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 #if CLR2
 using Microsoft.Scripting.Ast;
 #else
@@ -21,10 +24,6 @@ using System.Linq.Expressions;
 #if SILVERLIGHT
 using System.Core;
 #endif
-
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
 
 namespace System.Dynamic.Utils
 {

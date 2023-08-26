@@ -6,9 +6,9 @@
 //
 // (C) 2003 Patrick Kalkman
 //
-using NUnit.Framework;
 using System;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.Text
 {

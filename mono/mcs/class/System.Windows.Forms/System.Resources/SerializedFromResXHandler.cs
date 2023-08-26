@@ -27,14 +27,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Reflection;
-using System.ComponentModel.Design;
 using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using System.Text;
 using System.Runtime.Serialization.Formatters.Soap;
+using System.Text;
 
 namespace System.Resources
 {

@@ -12,8 +12,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 
 namespace System.Linq.Parallel
 {
@@ -333,8 +333,7 @@ namespace System.Linq.Parallel
                             }
 
                             if (
-                                m_updatesSeen > 0
-                                && m_keyComparer.Compare(key, m_currentLowKey) > 0
+                                m_updatesSeen > 0 && m_keyComparer.Compare(key, m_currentLowKey) > 0
                             )
                             {
                                 break;

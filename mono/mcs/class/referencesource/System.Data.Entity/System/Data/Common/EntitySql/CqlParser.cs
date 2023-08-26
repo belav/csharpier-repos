@@ -16221,10 +16221,7 @@ namespace System.Data.Common.EntitySql
             }
             yyn = yygindex[yym];
             if (
-                (yyn != 0)
-                && (yyn += yystate) >= 0
-                && yyn <= YYTABLESIZE
-                && yycheck[yyn] == yystate
+                (yyn != 0) && (yyn += yystate) >= 0 && yyn <= YYTABLESIZE && yycheck[yyn] == yystate
             )
                 yystate = yytable[yyn];
             else

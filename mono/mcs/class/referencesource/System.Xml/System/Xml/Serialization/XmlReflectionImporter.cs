@@ -7,15 +7,15 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
     using System;
-    using System.Xml.Schema;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.ComponentModel;
-    using System.Globalization;
-    using System.CodeDom.Compiler;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Threading;
+    using System.Xml.Schema;
 
     /// <include file='doc\XmlReflectionImporter.uex' path='docs/doc[@for="XmlReflectionImporter"]/*' />
     ///<internalonly/>
@@ -2378,9 +2378,7 @@ namespace System.Xml.Serialization
                         accessor.Text = text;
                     }
                     if (
-                        a.XmlText == null
-                        && a.XmlElements.Count == 0
-                        && a.XmlAnyElements.Count == 0
+                        a.XmlText == null && a.XmlElements.Count == 0 && a.XmlAnyElements.Count == 0
                     )
                         a.XmlElements.Add(CreateElementAttribute(accessor.TypeDesc));
 

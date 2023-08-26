@@ -4,12 +4,12 @@
 
 namespace System.Runtime.Serialization.Json
 {
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Runtime.Serialization;
-    using System.Globalization;
 
 #if USE_REFEMIT
     public class JsonReaderDelegator : XmlReaderDelegator

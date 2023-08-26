@@ -8,11 +8,11 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {

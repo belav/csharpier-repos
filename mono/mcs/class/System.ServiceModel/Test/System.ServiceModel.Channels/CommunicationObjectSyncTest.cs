@@ -27,10 +27,8 @@
 //
 
 using System;
-
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-
 // the file 'NUnitMoonHelper.cs' makes the Moon's unit test compiles and runs on NUnit
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mono.Moonlight.UnitTesting;

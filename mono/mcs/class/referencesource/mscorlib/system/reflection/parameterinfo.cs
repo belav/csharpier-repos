@@ -11,14 +11,15 @@ namespace System.Reflection
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
+    using System.Security.Permissions;
+    using System.Threading;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Metadata;
 #endif //FEATURE_REMOTING
-    using System.Security.Permissions;
-    using System.Threading;
+
     using MdToken = System.Reflection.MetadataToken;
 
     [Serializable]
@@ -373,8 +374,7 @@ namespace System.Reflection
                 // Not all parameters have tokens. Parameters may have no token
                 // if they have no name and no attributes.
                 if (
-                    cParamDefs
-                    > sigArgCount + 1 /* return type */
+                    cParamDefs > sigArgCount + 1 /* return type */
                 )
                     throw new BadImageFormatException(
                         Environment.GetResourceString("BadImageFormat_ParameterSignatureMismatch")

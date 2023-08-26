@@ -7,12 +7,12 @@ namespace System.ServiceModel.Dispatcher
     using System;
     using System.Diagnostics;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Security;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime;
 
     class AsyncMethodInvoker : IOperationInvoker
     {

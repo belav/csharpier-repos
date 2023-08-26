@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
 #if !SILVERLIGHT
 using System.Runtime.Serialization;
 #endif
-using System.Security.Permissions;
-using System.Text;
-using System.Diagnostics.CodeAnalysis;
-using System.Security;
+
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
 #endif
@@ -229,8 +230,7 @@ namespace System.Collections.Generic
                 )
                 {
                     if (
-                        m_slots[i].hashCode == hashCode
-                        && m_comparer.Equals(m_slots[i].value, item)
+                        m_slots[i].hashCode == hashCode && m_comparer.Equals(m_slots[i].value, item)
                     )
                     {
                         return true;
@@ -266,8 +266,7 @@ namespace System.Collections.Generic
                 for (int i = m_buckets[bucket] - 1; i >= 0; last = i, i = m_slots[i].next)
                 {
                     if (
-                        m_slots[i].hashCode == hashCode
-                        && m_comparer.Equals(m_slots[i].value, item)
+                        m_slots[i].hashCode == hashCode && m_comparer.Equals(m_slots[i].value, item)
                     )
                     {
                         if (last < 0)

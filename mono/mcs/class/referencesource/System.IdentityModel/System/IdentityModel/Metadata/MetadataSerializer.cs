@@ -3446,8 +3446,7 @@ namespace System.IdentityModel.Metadata
 
             // Write the encryption method element.
             if (
-                keyDescriptor.EncryptionMethods != null
-                && keyDescriptor.EncryptionMethods.Count > 0
+                keyDescriptor.EncryptionMethods != null && keyDescriptor.EncryptionMethods.Count > 0
             )
             {
                 foreach (EncryptionMethod encryptionMethod in keyDescriptor.EncryptionMethods)

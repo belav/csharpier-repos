@@ -9,7 +9,6 @@
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
-
 using ZErrorCode = System.IO.Compression.ZLibNative.ErrorCode;
 
 namespace System.IO.Compression

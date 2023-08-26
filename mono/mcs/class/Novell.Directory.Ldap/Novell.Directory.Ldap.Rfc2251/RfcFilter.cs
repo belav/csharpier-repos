@@ -31,10 +31,10 @@
 
 using System;
 using Novell.Directory.Ldap.Asn1;
+using Novell.Directory.Ldap.Utilclass;
 using LdapException = Novell.Directory.Ldap.LdapException;
 using LdapLocalException = Novell.Directory.Ldap.LdapLocalException;
 using LdapSearchRequest = Novell.Directory.Ldap.LdapSearchRequest;
-using Novell.Directory.Ldap.Utilclass;
 
 namespace Novell.Directory.Ldap.Rfc2251
 {
@@ -575,9 +575,7 @@ namespace Novell.Directory.Ldap.Rfc2251
                     {
                         // place the character into octets.
                         if (
-                            (ch >= 0x01 && ch <= 0x27)
-                            || (ch >= 0x2B && ch <= 0x5B)
-                            || (ch >= 0x5D)
+                            (ch >= 0x01 && ch <= 0x27) || (ch >= 0x2B && ch <= 0x5B) || (ch >= 0x5D)
                         )
                         {
                             // found valid char

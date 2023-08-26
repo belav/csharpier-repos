@@ -18,11 +18,11 @@
 ===========================================================*/
 namespace System.Security.Util
 {
-    using System.Text;
     using System;
-    using System.IO;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
 
     internal sealed class Tokenizer
     {

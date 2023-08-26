@@ -6,14 +6,19 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Internal.PropertyEditing;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.Services;
     using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Controls;
@@ -22,11 +27,6 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using System.Activities.Presentation.FreeFormEditing;
-    using System.Activities.Statements;
-    using System.Runtime;
-    using System.Activities.Presentation.Internal.PropertyEditing;
-    using System.Globalization;
 
     // The StateContainerEditor contains a FreeFormPanel that implements free form editing behaviors
     // for States and Transitions among them. An instance of StateMachineDesigner and an instance of
@@ -535,8 +535,7 @@ namespace System.Activities.Core.Presentation
 
             // stateMachineContainerEditor will be null when dropping a State into a WorkflowItemPresenter.
             if (
-                this.ModelItem.ItemType == typeof(State)
-                && this.stateMachineContainerEditor != null
+                this.ModelItem.ItemType == typeof(State) && this.stateMachineContainerEditor != null
             )
             {
                 this.stateMachineContainerEditor = null;
@@ -2331,9 +2330,7 @@ namespace System.Activities.Core.Presentation
                     e.OriginalSource as DependencyObject
                 );
             if (
-                destElement != null
-                && destElement.IsPopulated
-                && destElement.Child is StateDesigner
+                destElement != null && destElement.IsPopulated && destElement.Child is StateDesigner
             )
             {
                 if (this.activeSrcConnectionPoint != null)

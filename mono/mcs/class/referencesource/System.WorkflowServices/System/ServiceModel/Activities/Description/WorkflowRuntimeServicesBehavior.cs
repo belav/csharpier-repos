@@ -5,17 +5,17 @@
 namespace System.ServiceModel.Activities.Description
 {
     using System.Activities.Statements;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.DurableInstancing;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.DurableInstancing;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
+    using System.Threading;
 
     [Fx.Tag.XamlVisible(false)]
     class WorkflowRuntimeServicesBehavior : IEndpointBehavior

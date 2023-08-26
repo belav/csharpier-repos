@@ -10,8 +10,8 @@
 using System;
 using System.CodeDom;
 using System.Data;
-using System.Data.Metadata.Edm;
 using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
 
 namespace System.Data.EntityModel.Emitters
 {

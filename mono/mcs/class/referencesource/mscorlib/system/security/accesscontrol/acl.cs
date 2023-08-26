@@ -14,8 +14,8 @@ namespace System.Security.AccessControl
 {
     using System;
     using System.Collections;
-    using System.Security.Principal;
     using System.Diagnostics.Contracts;
+    using System.Security.Principal;
 
     public sealed class AceEnumerator : IEnumerator
     {
@@ -932,8 +932,7 @@ namespace System.Security.AccessControl
                 result = 0;
             }
             else if (
-                type == AceType.AccessDeniedObject
-                || type == AceType.AccessDeniedCallbackObject
+                type == AceType.AccessDeniedObject || type == AceType.AccessDeniedCallbackObject
             )
             {
                 result = 1;
@@ -943,8 +942,7 @@ namespace System.Security.AccessControl
                 result = 2;
             }
             else if (
-                type == AceType.AccessAllowedObject
-                || type == AceType.AccessAllowedCallbackObject
+                type == AceType.AccessAllowedObject || type == AceType.AccessAllowedCallbackObject
             )
             {
                 result = 3;

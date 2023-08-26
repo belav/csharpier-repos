@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.Workflow.Runtime
 {
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Compiler;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
 
     class CompiledWorkflowDefinitionContext : WorkflowDefinitionContext
     {

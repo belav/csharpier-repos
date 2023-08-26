@@ -30,9 +30,8 @@ namespace Mono.Cecil
 {
     using System;
     using System.IO;
-    using SR = System.Reflection;
-
     using Mono.Cecil.Binary;
+    using SR = System.Reflection;
 
     internal sealed class AssemblyFactory
     {

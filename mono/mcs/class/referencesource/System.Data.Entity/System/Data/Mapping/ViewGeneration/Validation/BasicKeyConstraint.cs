@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 
-using System.Data.Mapping.ViewGeneration.Structures;
 using System.Collections.Generic;
+using System.Data.Mapping.ViewGeneration.Structures;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {

@@ -10,14 +10,14 @@
 namespace System.Data
 {
     using System;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Globalization;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.ComponentModel;
-    using System.Collections;
-    using System.Globalization;
 
     [
         System.Security.Permissions.HostProtectionAttribute(

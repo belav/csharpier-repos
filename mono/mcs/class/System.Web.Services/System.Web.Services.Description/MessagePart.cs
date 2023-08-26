@@ -28,9 +28,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description
 {

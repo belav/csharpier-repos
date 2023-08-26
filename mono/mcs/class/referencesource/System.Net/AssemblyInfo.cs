@@ -4,9 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System;
-using System.Security.Permissions;
-using System.Security;
 using System.Runtime.CompilerServices;
+using System.Security;
+using System.Security.Permissions;
 
 // These types exist in System.Net.dll in Silverlight but in System.dll in the Framework.
 // Forward them so people can build portable libraries without changing assembly references.

@@ -6,17 +6,17 @@
 
 namespace System.Diagnostics
 {
-    using Microsoft.Win32;
-    using System.Runtime.Serialization.Formatters;
-    using System.Text;
+    using System;
     using System.Configuration.Assemblies;
-    using System.Runtime.InteropServices;
+    using System.Globalization;
     using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System;
-    using System.Globalization;
-    using System.Runtime.Versioning;
+    using System.Text;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides version information for a physical file on disk.</para>

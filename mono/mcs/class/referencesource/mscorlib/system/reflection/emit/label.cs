@@ -19,8 +19,8 @@ namespace System.Reflection.Emit
 {
     using System;
     using System.Reflection;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     // The Label class is an opaque representation of a label used by the
     // ILGenerator class.  The token is used to mark where labels occur in the IL

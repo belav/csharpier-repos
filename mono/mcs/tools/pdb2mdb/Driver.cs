@@ -11,12 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using Microsoft.Cci;
 using Microsoft.Cci.Pdb;
-
 using Mono.Cecil;
-
 using Mono.CompilerServices.SymbolWriter;
 
 namespace Pdb2Mdb

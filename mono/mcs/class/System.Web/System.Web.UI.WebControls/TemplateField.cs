@@ -30,9 +30,9 @@
 
 using System.Collections;
 using System.Collections.Specialized;
-using System.Web.UI;
-using System.Security.Permissions;
 using System.ComponentModel;
+using System.Security.Permissions;
+using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
@@ -220,8 +220,7 @@ namespace System.Web.UI.WebControls
             else if ((rowState & DataControlRowState.Edit) != 0)
                 bt = editItemTemplate as IBindableTemplate;
             else if (
-                alternatingItemTemplate != null
-                && (rowState & DataControlRowState.Alternate) != 0
+                alternatingItemTemplate != null && (rowState & DataControlRowState.Alternate) != 0
             )
                 bt = alternatingItemTemplate as IBindableTemplate;
             else

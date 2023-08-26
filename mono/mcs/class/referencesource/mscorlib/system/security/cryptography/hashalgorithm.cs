@@ -12,8 +12,8 @@
 
 namespace System.Security.Cryptography
 {
-    using System.IO;
     using System.Diagnostics.Contracts;
+    using System.IO;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public abstract class HashAlgorithm : IDisposable, ICryptoTransform

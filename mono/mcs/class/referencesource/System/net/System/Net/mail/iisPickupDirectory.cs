@@ -1,14 +1,14 @@
 using System;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Diagnostics;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security;
-using System.Security.Permissions;
 using System.Security.Authentication;
+using System.Security.Permissions;
+using System.Text;
 
 namespace System.Net.Mail
 {

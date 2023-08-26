@@ -302,8 +302,7 @@ namespace System.Activities.Statements
             state.SuppressCancel = true;
 
             if (
-                completedInstance != null
-                && completedInstance.State != ActivityInstanceState.Closed
+                completedInstance != null && completedInstance.State != ActivityInstanceState.Closed
             )
             {
                 state.ExceptionHandled = false;

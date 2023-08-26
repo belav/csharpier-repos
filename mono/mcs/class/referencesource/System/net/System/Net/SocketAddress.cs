@@ -7,11 +7,11 @@
 namespace System.Net
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Net.Sockets;
-    using System.Text;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Text;
 
     // a little perf app measured these times when comparing the internal
     // buffer implemented as a managed byte[] or unmanaged memory IntPtr

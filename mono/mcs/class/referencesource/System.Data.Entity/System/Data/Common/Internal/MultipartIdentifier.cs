@@ -7,9 +7,9 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using System.Collections.Generic;
 
 namespace System.Data.Common.Internal
 {

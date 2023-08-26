@@ -32,7 +32,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Generic

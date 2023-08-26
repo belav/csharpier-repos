@@ -414,9 +414,7 @@ namespace Microsoft.Win32
                 {
                     long registered_btime = GetRegisteredBootTime(btime_file);
                     if (
-                        system_btime < 0
-                        || registered_btime < 0
-                        || registered_btime != system_btime
+                        system_btime < 0 || registered_btime < 0 || registered_btime != system_btime
                     )
                         Directory.Delete(volatile_dir, true);
                 }

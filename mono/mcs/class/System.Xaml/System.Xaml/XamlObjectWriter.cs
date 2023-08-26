@@ -425,8 +425,7 @@ namespace System.Xaml
                 // ... and no need to do anything. The object value to pop *is* the return value.
             }
             else if (
-                xm == XamlLanguage.Name
-                || xm == state.Type.GetAliasedProperty(XamlLanguage.Name)
+                xm == XamlLanguage.Name || xm == state.Type.GetAliasedProperty(XamlLanguage.Name)
             )
             {
                 string name = (string)CurrentMemberState.Value;

@@ -5,16 +5,16 @@
 namespace System.Activities.Presentation
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Activities.Presentation.PropertyEditing;
+    using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation.Converters;
     using System.Activities.Presentation.Internal.PropertyEditing.Model;
-    using System.Activities.Core.Presentation.Themes;
-    using System.Windows;
-    using System.Activities.Presentation.View;
     using System.Activities.Presentation.Model;
+    using System.Activities.Presentation.PropertyEditing;
+    using System.Activities.Presentation.View;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Text;
+    using System.Windows;
     using System.Windows.Controls;
 
     sealed class ArgumentCollectionPropertyEditor : DialogPropertyValueEditor

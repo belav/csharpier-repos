@@ -8,10 +8,9 @@
  */
 namespace System.Threading
 {
-    using System.Threading;
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
+    using System.Threading;
 
     /// <devdoc>
     /// <para>Represents the method that will handle the System.Windows.Forms.Application.OnThreadException

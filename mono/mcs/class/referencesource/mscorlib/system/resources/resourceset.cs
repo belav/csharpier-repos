@@ -18,14 +18,14 @@ namespace System.Resources
 {
     using System;
     using System.Collections;
-    using System.IO;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
 
     // A ResourceSet stores all the resources defined in one particular CultureInfo.
     //

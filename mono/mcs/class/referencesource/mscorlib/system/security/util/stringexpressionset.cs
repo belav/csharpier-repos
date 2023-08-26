@@ -10,16 +10,16 @@
 
 namespace System.Security.Util
 {
-    using System.Text;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.Runtime.Versioning;
-    using System.IO;
-    using System.Diagnostics.Contracts;
+    using System.Text;
 
     [Serializable]
     internal class StringExpressionSet
@@ -635,8 +635,7 @@ namespace System.Security.Util
                 return String.Compare(right, left, strComp) == 0;
             }
             else if (
-                left.Length - right.Length == 1
-                && left[left.Length - 1] == m_directorySeparator
+                left.Length - right.Length == 1 && left[left.Length - 1] == m_directorySeparator
             )
             {
                 return String.Compare(left, 0, right, 0, right.Length, strComp) == 0;

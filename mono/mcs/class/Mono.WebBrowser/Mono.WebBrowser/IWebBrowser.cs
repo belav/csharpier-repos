@@ -24,10 +24,10 @@
 //
 
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Runtime.InteropServices;
+using System.Text;
 using Mono.WebBrowser.DOM;
 
 namespace Mono.WebBrowser

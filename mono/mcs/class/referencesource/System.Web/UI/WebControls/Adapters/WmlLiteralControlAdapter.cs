@@ -9,9 +9,9 @@
 namespace System.Web.UI.Adapters
 {
     using System;
+    using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.UI;
-    using System.Text.RegularExpressions;
 
     public class WmlLiteralControlAdapter : LiteralControlAdapter
     {

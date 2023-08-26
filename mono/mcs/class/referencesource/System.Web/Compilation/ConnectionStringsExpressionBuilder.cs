@@ -7,10 +7,10 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Security.Permissions;
     using System.CodeDom;
     using System.Configuration;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web.UI;
 
     [ExpressionPrefix("ConnectionStrings")]

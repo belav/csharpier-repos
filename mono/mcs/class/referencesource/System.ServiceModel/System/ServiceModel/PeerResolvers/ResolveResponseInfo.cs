@@ -4,9 +4,9 @@
 namespace System.ServiceModel.PeerResolvers
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     [MessageContract(IsWrapped = false)]
     public class ResolveResponseInfo

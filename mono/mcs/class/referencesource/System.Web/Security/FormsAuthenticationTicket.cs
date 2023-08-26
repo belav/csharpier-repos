@@ -12,10 +12,10 @@
 
 namespace System.Web.Security
 {
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Web.Configuration;
     using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web.Configuration;
 
     /// <devdoc>
     ///    <para>This class encapsulates the information represented in

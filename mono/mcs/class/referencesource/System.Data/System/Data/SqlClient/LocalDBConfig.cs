@@ -8,8 +8,8 @@
 
 namespace System.Data
 {
-    using System.Configuration;
     using System.Collections;
+    using System.Configuration;
 
     internal sealed class LocalDBInstanceElement : ConfigurationElement
     {

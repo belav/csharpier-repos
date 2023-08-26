@@ -9,19 +9,18 @@
 
 
 using System;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Xml.Schema;
-using System.Collections;
-using System.Collections.Specialized;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Collections;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
+using System.Web.Services;
 using System.Web.Services.Description;
 using System.Web.Services.Discovery;
-using System.Web.Services;
-
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 using Microsoft.CSharp;
 
 namespace Mono.WebServices
@@ -532,8 +531,7 @@ namespace Mono.WebServices
 
                 default:
                     if (
-                        argument.StartsWith("/")
-                        && argument.IndexOfAny(Path.InvalidPathChars) == -1
+                        argument.StartsWith("/") && argument.IndexOfAny(Path.InvalidPathChars) == -1
                     )
                     {
                         urls.Add(argument);

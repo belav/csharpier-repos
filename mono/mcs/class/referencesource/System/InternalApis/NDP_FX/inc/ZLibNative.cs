@@ -6,15 +6,15 @@
 // <owner>gpaperin</owner>
 //------------------------------------------------------------------------------
 
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
-using Microsoft.Win32.SafeHandles;
-using System.Security.Permissions;
-using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Compression
 {

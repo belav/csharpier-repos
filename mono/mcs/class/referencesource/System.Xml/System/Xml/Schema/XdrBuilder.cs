@@ -7,12 +7,12 @@
 
 namespace System.Xml.Schema
 {
-    using System.IO;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Runtime.Versioning;
 
     /*
@@ -1415,8 +1415,7 @@ namespace System.Xml.Schema
         {
             string code = null;
             if (
-                builder._AttributeDef._HasDataType
-                && builder._AttributeDef._AttDef.Datatype != null
+                builder._AttributeDef._HasDataType && builder._AttributeDef._AttDef.Datatype != null
             )
             {
                 XmlTokenizedType ttype = builder._AttributeDef._AttDef.Datatype.TokenizedType;

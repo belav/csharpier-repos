@@ -6,12 +6,12 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
-    using System.Xml.Serialization;
-    using System.Reflection;
     using System.Collections;
+    using System.IO;
+    using System.Reflection;
     using System.Web.Services;
+    using System.Xml.Serialization;
 
     /// <include file='doc\UrlParameterReader.uex' path='docs/doc[@for="UrlParameterReader"]/*' />
     /// <devdoc>

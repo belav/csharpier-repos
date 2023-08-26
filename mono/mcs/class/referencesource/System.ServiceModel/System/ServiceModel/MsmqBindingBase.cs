@@ -5,8 +5,8 @@ namespace System.ServiceModel
 {
     using System;
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
     using System.Net.Security;
+    using System.ServiceModel.Channels;
 
     public abstract class MsmqBindingBase : Binding, IBindingRuntimePreferences
     {

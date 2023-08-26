@@ -28,9 +28,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Text;
 using NUnit.Framework;
-using System.ServiceModel;
 
 namespace MonoTests.System.ServiceModel
 {

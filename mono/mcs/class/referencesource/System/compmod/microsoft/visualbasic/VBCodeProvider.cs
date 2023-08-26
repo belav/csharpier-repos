@@ -6,22 +6,22 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System.Diagnostics;
 using System;
-using System.IO;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Reflection;
-using System.CodeDom;
+using System.Runtime.Versioning;
+using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Globalization;
-using System.CodeDom.Compiler;
-using System.Security.Permissions;
 using Microsoft.Win32;
-using System.Collections.Generic;
-using System.Runtime.Versioning;
 
 namespace Microsoft.VisualBasic
 {
@@ -1022,8 +1022,7 @@ namespace Microsoft.VisualBasic
                 return;
             }
             if (
-                e.Left is CodePrimitiveExpression
-                && ((CodePrimitiveExpression)e.Left).Value == null
+                e.Left is CodePrimitiveExpression && ((CodePrimitiveExpression)e.Left).Value == null
             )
             {
                 GenerateNotIsNullExpression(e.Right);

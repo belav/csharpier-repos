@@ -5,24 +5,22 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
     using System.Text;
     using System.Threading;
     using System.Transactions;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Diagnostics;
-
     using Microsoft.Transactions.Bridge;
     using Microsoft.Transactions.Wsat.Messaging;
     using Microsoft.Transactions.Wsat.Protocol;
-
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.Security.Permissions;
 
     class WsatProxy
     {

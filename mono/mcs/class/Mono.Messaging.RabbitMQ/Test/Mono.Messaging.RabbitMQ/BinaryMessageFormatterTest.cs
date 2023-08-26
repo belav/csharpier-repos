@@ -30,9 +30,7 @@
 using System;
 using System.IO;
 using System.Messaging;
-
 using Mono.Messaging;
-
 using NUnit.Framework;
 using NUnit.Mocks;
 

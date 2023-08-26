@@ -26,11 +26,11 @@
 //
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Collections;
 using System.Text;
 
 namespace System.Windows.Forms
@@ -1125,8 +1125,7 @@ namespace System.Windows.Forms
             get
             {
                 if (
-                    CurrentTableStyle.CurrentPreferredRowHeight
-                    > Font.Height + 3 + 1 /* line */
+                    CurrentTableStyle.CurrentPreferredRowHeight > Font.Height + 3 + 1 /* line */
                 )
                     return CurrentTableStyle.CurrentPreferredRowHeight;
                 else
@@ -2879,8 +2878,7 @@ namespace System.Windows.Forms
                     current_style.CreateColumnsForTable(false);
                 }
                 else if (
-                    CurrentTableStyle == grid_style
-                    || CurrentTableStyle.MappingName != list_name
+                    CurrentTableStyle == grid_style || CurrentTableStyle.MappingName != list_name
                 )
                 {
                     // If the style has been defined by the user, use it

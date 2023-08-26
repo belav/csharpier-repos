@@ -13,16 +13,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using SLE = System.Linq.Expressions;
 using System.Linq;
-
+using System.Text;
 #if STATIC
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;
 #else
 using System.Reflection;
 using System.Reflection.Emit;
+using SLE = System.Linq.Expressions;
 #endif
 
 namespace Mono.CSharp
@@ -4436,8 +4435,7 @@ namespace Mono.CSharp
                             BindingRestriction.InstanceOnly | BindingRestriction.OverrideOnly
                         ) as MethodSpec;
                     if (
-                        base_override != null
-                        && base_override.DeclaringType != method.DeclaringType
+                        base_override != null && base_override.DeclaringType != method.DeclaringType
                     )
                     {
                         if (base_override.IsGeneric)
@@ -7482,9 +7480,7 @@ namespace Mono.CSharp
                 // Check type constraints only when explicit type arguments are used
                 //
                 if (
-                    applicable_candidates == 1
-                    && best_candidate.IsGeneric
-                    && type_arguments != null
+                    applicable_candidates == 1 && best_candidate.IsGeneric && type_arguments != null
                 )
                 {
                     MethodSpec bc = best_candidate as MethodSpec;

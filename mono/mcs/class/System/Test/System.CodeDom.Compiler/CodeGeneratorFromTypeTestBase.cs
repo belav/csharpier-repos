@@ -13,7 +13,6 @@ using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Security;
 using System.Security.Principal;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom.Compiler

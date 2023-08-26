@@ -1,8 +1,8 @@
 namespace System.Web.Services.Interop
 {
     using System;
-    using System.Threading;
     using System.Runtime.InteropServices;
+    using System.Threading;
 
     [
         ComImport(),

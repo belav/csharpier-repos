@@ -29,18 +29,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+using System.Text;
 using System.Web.Services.Description;
 using System.Web.Services.Discovery;
 using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Serialization;
-using System.IO;
-using System.Net;
-using System.Text;
-
 using SMBinding = System.ServiceModel.Channels.Binding;
 using SMMessage = System.ServiceModel.Channels.Message;
 

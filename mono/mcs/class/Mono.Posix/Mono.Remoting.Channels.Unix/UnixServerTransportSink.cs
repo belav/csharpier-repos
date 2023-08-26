@@ -29,11 +29,11 @@
 //
 
 using System;
-using System.Net.Sockets;
 using System.Collections;
-using System.Runtime.Remoting.Messaging;
 using System.IO;
+using System.Net.Sockets;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Messaging;
 
 namespace Mono.Remoting.Channels.Unix
 {

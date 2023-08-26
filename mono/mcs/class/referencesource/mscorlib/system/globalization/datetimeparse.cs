@@ -14,16 +14,16 @@
 namespace System
 {
     using System;
-    using System.Text;
-    using System.Globalization;
-    using System.Threading;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
-    using System.Diagnostics;
-    using System.Diagnostics.Contracts;
+    using System.Text;
+    using System.Threading;
 
     ////////////////////////////////////////////////////////////////////////
 
@@ -3658,8 +3658,7 @@ namespace System
 
                 // the DateTime offset must be within +- 14:00 hours.
                 if (
-                    offsetTicks < DateTimeOffset.MinOffset
-                    || offsetTicks > DateTimeOffset.MaxOffset
+                    offsetTicks < DateTimeOffset.MinOffset || offsetTicks > DateTimeOffset.MaxOffset
                 )
                 {
                     result.SetFailure(ParseFailureKind.Format, "Format_OffsetOutOfRange", null);
@@ -5378,8 +5377,7 @@ namespace System
                             result.timeZoneOffset = TimeSpan.Zero;
                         }
                         else if (
-                            (result.flags & ParseFlags.UtcSortPattern) != 0
-                            && quotedStr == ZuluName
+                            (result.flags & ParseFlags.UtcSortPattern) != 0 && quotedStr == ZuluName
                         )
                         {
                             result.flags |= ParseFlags.TimeZoneUsed;

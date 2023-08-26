@@ -522,8 +522,7 @@ namespace System.Xaml
             // of examining valid Text value by creating XmlReader
             // and call XmlWriter.WriteNode().
             if (
-                xm.DeclaringType == XamlLanguage.XData
-                && xm == XamlLanguage.XData.GetMember("Text")
+                xm.DeclaringType == XamlLanguage.XData && xm == XamlLanguage.XData.GetMember("Text")
             )
             {
                 w.WriteRaw(s);

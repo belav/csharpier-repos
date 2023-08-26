@@ -8,16 +8,16 @@ namespace System.ServiceModel.Dispatcher
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Web;
-    using System.Diagnostics;
 
     class UriTemplateDispatchFormatter : IDispatchMessageFormatter
     {

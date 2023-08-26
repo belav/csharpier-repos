@@ -35,7 +35,6 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-
 using Mono.Math;
 
 // Big chunks of code are coming from the original RSACryptoServiceProvider class.

@@ -1,8 +1,8 @@
 using System;
 using System.IO;
 using System.Net.Mime;
-using System.Text;
 using System.Runtime.Versioning;
+using System.Text;
 
 namespace System.Net.Mail
 {

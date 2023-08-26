@@ -6,15 +6,15 @@
 
 namespace System.Web.Services.Protocols
 {
+    using System;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Web.Services;
     using System.Xml.Serialization;
-    using System;
-    using System.Reflection;
-    using System.Collections;
-    using System.IO;
-    using System.ComponentModel;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
 
     /// <include file='doc\SoapServerMessage.uex' path='docs/doc[@for="SoapServerMessage"]/*' />
     /// <devdoc>

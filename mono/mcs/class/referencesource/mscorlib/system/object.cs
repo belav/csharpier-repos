@@ -17,17 +17,17 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using CultureInfo = System.Globalization.CultureInfo;
-    using FieldInfo = System.Reflection.FieldInfo;
-    using BindingFlags = System.Reflection.BindingFlags;
 #if FEATURE_REMOTING
     using RemotingException = System.Runtime.Remoting.RemotingException;
+    using BindingFlags = System.Reflection.BindingFlags;
+    using CultureInfo = System.Globalization.CultureInfo;
+    using FieldInfo = System.Reflection.FieldInfo;
 #endif
     // The Object is the root class for all object in the CLR System. Object
     // is the super class for all other CLR objects and provide a set of methods and low level

@@ -17,9 +17,9 @@
 
 namespace System.Runtime.Remoting.Messaging
 {
+    using System;
     using System.Runtime.Remoting;
     using System.Security.Permissions;
-    using System;
 
     // <TODO>Change this back to internal when the classes implementing this interface
     // are also made internal TarunA 12/16/99</TODO>

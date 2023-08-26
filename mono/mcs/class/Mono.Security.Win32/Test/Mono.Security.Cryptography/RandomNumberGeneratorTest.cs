@@ -7,12 +7,12 @@
 // (C) 2002, 2003 Motus Technologies Inc. (http://www.motus.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Security.Cryptography;
-using Mono.Security.Cryptography;
 using System.Text;
+using Mono.Security.Cryptography;
+using NUnit.Framework;
 
 namespace MonoTests.Security.Cryptography
 {

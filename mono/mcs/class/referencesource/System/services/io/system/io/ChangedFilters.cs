@@ -6,9 +6,8 @@
 
 namespace System.IO
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies the changes to watch

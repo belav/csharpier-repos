@@ -8,11 +8,11 @@
 namespace System.Xml.Schema
 {
     using System.Collections;
-    using System.IO;
-    using System.Threading;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
     using System.Runtime.Versioning;
+    using System.Threading;
 
     internal enum Compositor
     {

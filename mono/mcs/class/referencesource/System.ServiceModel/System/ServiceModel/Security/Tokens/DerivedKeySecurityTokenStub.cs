@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.Collections.ObjectModel;
-    using System.ServiceModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
 
     sealed class DerivedKeySecurityTokenStub : SecurityToken
     {

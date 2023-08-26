@@ -9,13 +9,11 @@ namespace System.Web.Configuration
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Configuration;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
-#if !FEATURE_PAL
-    using System.ServiceProcess;
-#endif // !FEATURE_PAL
     using System.Linq;
     using System.Reflection;
     using System.Security;
@@ -30,10 +28,11 @@ namespace System.Web.Configuration
     using System.Web.Util;
     using System.Xml;
     using System.Xml.Schema;
-
     using Microsoft.Build.Utilities;
     using Microsoft.CSharp;
-    using System.Diagnostics.CodeAnalysis;
+#if !FEATURE_PAL
+    using System.ServiceProcess;
+#endif // !FEATURE_PAL
 
     [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
     [PermissionSet(SecurityAction.InheritanceDemand, Unrestricted = true)]

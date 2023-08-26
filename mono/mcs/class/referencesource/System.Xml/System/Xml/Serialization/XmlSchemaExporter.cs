@@ -9,10 +9,10 @@ namespace System.Xml.Serialization
 {
     using System;
     using System.Collections;
-    using System.Xml.Schema;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Xml.Schema;
 
     /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter"]/*' />
     ///<internalonly/>
@@ -559,8 +559,7 @@ namespace System.Xml.Serialization
                         return type;
                     }
                     else if (
-                        serializableMapping.XsiType != null
-                        || serializableMapping.XsdType != null
+                        serializableMapping.XsiType != null || serializableMapping.XsdType != null
                     )
                     {
                         XmlSchemaType type = serializableMapping.XsdType;

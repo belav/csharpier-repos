@@ -5,9 +5,9 @@
 namespace Microsoft.VisualBasic.Activities
 {
     using System;
+    using System.Activities.Expressions;
     using System.Globalization;
     using System.Reflection;
-    using System.Activities.Expressions;
     using System.Xaml;
     using System.Xml.Linq;
 

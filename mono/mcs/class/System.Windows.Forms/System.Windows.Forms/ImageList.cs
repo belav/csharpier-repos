@@ -809,8 +809,7 @@ namespace System.Windows.Forms
                     throw new ArgumentNullException("value");
 
                 if (
-                    (width = value.Width) == 0
-                    || (width % (imageWidth = this.imageSize.Width)) != 0
+                    (width = value.Width) == 0 || (width % (imageWidth = this.imageSize.Width)) != 0
                 )
                     throw new ArgumentException(
                         "Width of image strip must be a positive multiple of ImageSize.Width.",

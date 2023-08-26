@@ -6,8 +6,8 @@
 
 namespace System.Collections.Specialized
 {
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Represents a collection of strings.</para>

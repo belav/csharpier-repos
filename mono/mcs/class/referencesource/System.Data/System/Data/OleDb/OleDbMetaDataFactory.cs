@@ -11,13 +11,13 @@
 namespace System.Data.OleDb
 {
     using System;
-    using System.Data;
-    using System.IO;
     using System.Collections;
-    using System.Data.ProviderBase;
+    using System.Data;
     using System.Data.Common;
+    using System.Data.ProviderBase;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
@@ -569,9 +569,7 @@ namespace System.Data.OleDb
 
                 // searchable has to be special cased becasue it is not an eaxct mapping
                 if (
-                    (isSearchable != null)
-                    && (isSearchableWithLike != null)
-                    && (searchable != null)
+                    (isSearchable != null) && (isSearchableWithLike != null) && (searchable != null)
                 )
                 {
                     newRow[isSearchable] = DBNull.Value;

@@ -8,8 +8,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     abstract class TransportManager
     {

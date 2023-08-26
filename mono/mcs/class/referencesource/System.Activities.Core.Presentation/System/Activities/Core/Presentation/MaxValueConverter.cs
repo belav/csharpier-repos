@@ -4,11 +4,11 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.Globalization;
-    using System.Windows.Data;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Model;
     using System.Activities.Statements;
+    using System.Globalization;
+    using System.Windows.Data;
 
     //Returns the maximum of input values. Input values should be of type double.
     class MaxValueConverter : IMultiValueConverter

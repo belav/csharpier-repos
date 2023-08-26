@@ -7,11 +7,11 @@ namespace System.Workflow.Activities.Design
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Drawing;
     using System.Data;
+    using System.Drawing;
+    using System.ServiceModel;
     using System.Text;
     using System.Windows.Forms;
-    using System.ServiceModel;
 
     internal partial class ServiceContractViewControl : ListItemViewControl
     {

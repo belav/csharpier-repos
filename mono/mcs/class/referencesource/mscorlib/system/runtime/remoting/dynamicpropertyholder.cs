@@ -14,11 +14,11 @@
 
 namespace System.Runtime.Remoting.Contexts
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Messaging;
     using System;
     using System.Collections;
     using System.Globalization;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Messaging;
 
     internal class DynamicPropertyHolder
     {

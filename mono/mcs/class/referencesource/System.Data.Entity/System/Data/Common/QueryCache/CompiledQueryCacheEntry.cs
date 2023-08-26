@@ -10,12 +10,12 @@
 namespace System.Data.Common.QueryCache
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Data.Metadata.Edm;
     using System.Data.Objects;
     using System.Data.Objects.Internal;
     using System.Diagnostics;
     using System.Threading;
-    using System.Collections.Concurrent;
 
     /// <summary>
     /// Represents a compiled LINQ ObjectQuery cache entry

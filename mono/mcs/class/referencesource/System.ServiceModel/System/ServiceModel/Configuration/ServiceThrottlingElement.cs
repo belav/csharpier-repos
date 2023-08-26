@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     public sealed partial class ServiceThrottlingElement : BehaviorExtensionElement
     {

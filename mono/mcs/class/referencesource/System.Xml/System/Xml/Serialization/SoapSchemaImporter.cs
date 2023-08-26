@@ -8,14 +8,14 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Xml.Schema;
-    using System.Xml;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.ComponentModel;
-    using System.Reflection;
     using System.Diagnostics;
-    using System.CodeDom.Compiler;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Xml;
+    using System.Xml.Schema;
 
     /// <include file='doc\SoapSchemaImporter.uex' path='docs/doc[@for="SoapSchemaImporter"]/*' />
     ///<internalonly/>
@@ -787,9 +787,7 @@ namespace System.Xml.Serialization
                 member.TypeDesc = member.TypeDesc.CreateArrayTypeDesc();
 
             if (
-                element.MinOccurs == 0
-                && member.TypeDesc.IsValueType
-                && !member.TypeDesc.HasIsEmpty
+                element.MinOccurs == 0 && member.TypeDesc.IsValueType && !member.TypeDesc.HasIsEmpty
             )
             {
                 member.CheckSpecified = SpecifiedAccessor.ReadWrite;

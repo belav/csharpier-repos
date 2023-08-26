@@ -5,21 +5,21 @@
 // ==--==
 namespace System.Runtime.Remoting
 {
-    using System.Globalization;
-    using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Contexts;
-    using System.Runtime.Remoting.Messaging;
-    using System.Runtime.Remoting.Activation;
-    using System.Runtime.Remoting.Lifetime;
-    using System.Security.Cryptography;
-    using Microsoft.Win32;
-    using System.Threading;
     using System;
     //  Identity is the base class for remoting identities. An instance of Identity (or a derived class)
     //  is associated with each instance of a remoted object. Likewise, an instance of Identity is
     //  associated with each instance of a remoting proxy.
     //
     using System.Collections;
+    using System.Globalization;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Activation;
+    using System.Runtime.Remoting.Contexts;
+    using System.Runtime.Remoting.Lifetime;
+    using System.Runtime.Remoting.Messaging;
+    using System.Security.Cryptography;
+    using System.Threading;
+    using Microsoft.Win32;
 
     internal class Identity
     {

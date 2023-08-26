@@ -3770,8 +3770,7 @@ namespace System.Data.Common.EntitySql
                 }
 
                 if (
-                    queryExpr.OrderByClause != null
-                    && queryExpr.OrderByClause.SkipSubClause != null
+                    queryExpr.OrderByClause != null && queryExpr.OrderByClause.SkipSubClause != null
                 )
                 {
                     throw EntityUtil.EntitySqlError(

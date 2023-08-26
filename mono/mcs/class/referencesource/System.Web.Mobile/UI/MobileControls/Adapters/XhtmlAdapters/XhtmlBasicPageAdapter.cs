@@ -5,18 +5,18 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Web;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Web.UI;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Security.Permissions;
 using System.Text;
+using System.Web;
 using System.Web.Mobile;
+using System.Web.UI;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Diagnostics;
-using System.Globalization;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
@@ -497,8 +497,7 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                     );
                 }
                 else if (
-                    CssLocation == StyleSheetLocation.SessionState
-                    && !writer.IsStyleSheetEmpty()
+                    CssLocation == StyleSheetLocation.SessionState && !writer.IsStyleSheetEmpty()
                 )
                 {
                     Page.Session[writer.SessionKey] = writer.GetStyles();

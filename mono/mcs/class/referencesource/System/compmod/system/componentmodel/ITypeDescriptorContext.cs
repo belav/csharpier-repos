@@ -8,10 +8,9 @@
  */
 namespace System.ComponentModel
 {
-    using System.Runtime.Remoting;
-    using System.Runtime.InteropServices;
-
     using System.Diagnostics;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
 
     /// <devdoc>
     ///    <para>

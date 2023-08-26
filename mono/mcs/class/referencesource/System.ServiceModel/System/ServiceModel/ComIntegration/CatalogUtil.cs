@@ -5,8 +5,8 @@ namespace System.ServiceModel.ComIntegration
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
     using System.Runtime;
+    using System.Runtime.InteropServices;
 
     class ComCatalogObject
     {

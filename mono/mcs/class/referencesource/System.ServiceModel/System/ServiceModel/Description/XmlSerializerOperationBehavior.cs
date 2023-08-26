@@ -270,8 +270,7 @@ namespace System.ServiceModel.Description
             )
                 mappings.Add(OperationReflector.Request.HeadersMapping);
             if (
-                OperationReflector.Request != null
-                && OperationReflector.Request.BodyMapping != null
+                OperationReflector.Request != null && OperationReflector.Request.BodyMapping != null
             )
                 mappings.Add(OperationReflector.Request.BodyMapping);
             if (OperationReflector.Reply != null && OperationReflector.Reply.HeadersMapping != null)
@@ -776,8 +775,7 @@ namespace System.ServiceModel.Description
                     MessagePartDescription bodyPart = message.Body.Parts[0];
                     Type bodyObjectType = bodyPart.Type;
                     if (
-                        bodyObjectType.BaseType != null
-                        && bodyObjectType.BaseType != typeof(object)
+                        bodyObjectType.BaseType != null && bodyObjectType.BaseType != typeof(object)
                     )
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                             new InvalidOperationException(

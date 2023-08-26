@@ -536,9 +536,7 @@ namespace System.ServiceModel.Dispatcher
                             bool isBeginSuccessful = false;
 
                             if (
-                                manualInvoker != null
-                                && isConcurrent
-                                && this.bufferedReceiveEnabled
+                                manualInvoker != null && isConcurrent && this.bufferedReceiveEnabled
                             )
                             {
                                 // This will modify the rpc, it has to be done before rpc.Pause

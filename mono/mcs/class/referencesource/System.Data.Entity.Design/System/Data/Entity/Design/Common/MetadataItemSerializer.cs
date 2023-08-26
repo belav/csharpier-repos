@@ -7,17 +7,17 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data.Common;
 using System.Collections.Generic;
-using System.Text;
+using System.Data.Common;
+using System.Data.Entity.Design.SsdlGenerator;
 using System.Data.Metadata.Edm;
-using System.Reflection;
 using System.Diagnostics;
-using System.Xml;
 using System.Globalization;
 using System.IO;
-using System.Data.Entity.Design.SsdlGenerator;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml;
 
 namespace System.Data.Entity.Design.Common
 {

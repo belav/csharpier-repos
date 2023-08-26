@@ -7,12 +7,12 @@
 //
 
 using System;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
-using System.ComponentModel;
-using NUnit.Framework;
 using System.Threading;
+using System.Windows.Forms;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

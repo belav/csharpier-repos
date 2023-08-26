@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Channels;
     using System.Runtime;
+    using System.ServiceModel.Channels;
 
     //
     abstract class LayeredChannel<TInnerChannel> : ChannelBase

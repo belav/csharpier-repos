@@ -7,9 +7,9 @@
 namespace System.Net.Mime
 {
     using System;
+    using System.Collections.Specialized;
     using System.IO;
     using System.Text;
-    using System.Collections.Specialized;
 
     /// <summary>
     /// Provides an abstraction for writing a MIME multi-part

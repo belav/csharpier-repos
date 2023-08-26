@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace System.Data.Entity.Design.Common

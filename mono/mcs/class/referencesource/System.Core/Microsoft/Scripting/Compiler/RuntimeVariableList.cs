@@ -13,14 +13,13 @@
  *
  * ***************************************************************************/
 
+using System.ComponentModel;
+using System.Diagnostics;
 #if CLR2
 using Microsoft.Scripting.Ast.Compiler;
 #else
 using System.Linq.Expressions.Compiler;
 #endif
-
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace System.Runtime.CompilerServices
 {

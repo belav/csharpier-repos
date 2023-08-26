@@ -10,7 +10,6 @@ using System.IdentityModel.Diagnostics;
 using System.IdentityModel.Policy;
 using System.Security.Claims;
 using System.Security.Principal;
-
 using SysClaimSet = System.IdentityModel.Claims.ClaimSet;
 
 namespace System.IdentityModel.Tokens

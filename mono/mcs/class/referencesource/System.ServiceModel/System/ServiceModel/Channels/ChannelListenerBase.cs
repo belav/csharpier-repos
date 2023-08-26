@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Net;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.Text;
     using System.Threading;
 

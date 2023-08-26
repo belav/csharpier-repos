@@ -7,14 +7,13 @@
 // (C) 2008 Realtime Worlds Ltd
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Text;
 using System.Threading;
 using Mono.Unix;
 using Mono.Unix.Android;
 using Mono.Unix.Native;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix.Native
 {

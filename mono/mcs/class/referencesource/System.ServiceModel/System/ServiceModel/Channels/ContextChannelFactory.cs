@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime.Diagnostics;
 
     class ContextChannelFactory<TChannel> : LayeredChannelFactory<TChannel>
     {

@@ -9,8 +9,8 @@ namespace System.Web.UI.WebControls.WebParts
     using System;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Configuration.Provider;
     using System.ComponentModel;
+    using System.Configuration.Provider;
     using System.Data;
     using System.Data.SqlClient;
     using System.Globalization;

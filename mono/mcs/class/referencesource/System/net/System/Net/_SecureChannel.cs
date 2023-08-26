@@ -8,20 +8,20 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net.Security
 {
+    using System.Collections;
+    using System.ComponentModel;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Net;
     using System.Net.Sockets;
     using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography;
+    using System.Security.Permissions;
+    using System.Security.Principal;
     using System.Text;
     using System.Threading;
-    using System.Security.Permissions;
-    using System.Globalization;
-    using System.ComponentModel;
-    using System.Security.Principal;
-    using System.Security;
-    using System.Collections;
 
     //
     // SecureChannel - a wrapper on SSPI based functionality,

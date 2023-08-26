@@ -27,10 +27,10 @@
 //
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.IO;
 
 namespace System.ServiceModel.Channels
 {

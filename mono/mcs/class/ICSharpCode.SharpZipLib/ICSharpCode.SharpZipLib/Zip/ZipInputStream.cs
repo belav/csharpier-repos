@@ -38,13 +38,12 @@
 // exception statement from your version.
 
 using System;
-using System.Text;
 using System.IO;
-
+using System.Text;
 using ICSharpCode.SharpZipLib.Checksums;
+using ICSharpCode.SharpZipLib.Encryption;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using ICSharpCode.SharpZipLib.Encryption;
 
 namespace ICSharpCode.SharpZipLib.Zip
 {
@@ -234,8 +233,7 @@ namespace ICSharpCode.SharpZipLib.Zip
             }
 
             if (
-                method != (int)CompressionMethod.Stored
-                && method != (int)CompressionMethod.Deflated
+                method != (int)CompressionMethod.Stored && method != (int)CompressionMethod.Deflated
             )
             {
                 throw new ZipException("Unknown compression method " + method);

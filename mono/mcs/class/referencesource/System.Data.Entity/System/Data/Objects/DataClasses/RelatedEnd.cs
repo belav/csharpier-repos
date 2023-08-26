@@ -3017,8 +3017,7 @@ namespace System.Data.Objects.DataClasses
             _wrappedOwner.RelationshipManager.NodeVisited = false;
             // If the context is the same as what we already have, and the mergeOption is consistent with our UsingNoTracking setting, nothing more to do
             if (
-                _context == context
-                && (_usingNoTracking == (mergeOption == MergeOption.NoTracking))
+                _context == context && (_usingNoTracking == (mergeOption == MergeOption.NoTracking))
             )
             {
                 return;

@@ -7,12 +7,12 @@ namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Net;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Net;
+    using System.Text;
 
     [Serializable]
     public class PeerNameRecord : ISerializable

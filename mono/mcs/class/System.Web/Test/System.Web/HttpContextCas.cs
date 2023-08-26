@@ -26,8 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Globalization;
 using System.IO;
@@ -37,6 +35,7 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Handlers;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Web
 {

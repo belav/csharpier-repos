@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
     using System.Globalization;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
 
     class MessageSecurityVersionConverter : TypeConverter

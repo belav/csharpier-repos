@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Configuration.Install;
 using System.Collections;
+using System.Configuration.Install;
 
 namespace System.Management.Instrumentation
 {

@@ -97,9 +97,7 @@ namespace System.Linq.Parallel
                         if (current == null)
                             continue;
                         if (
-                            best == null
-                            || current > best
-                            || double.IsNaN(best.GetValueOrDefault())
+                            best == null || current > best || double.IsNaN(best.GetValueOrDefault())
                         )
                         {
                             best = current;

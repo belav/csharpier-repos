@@ -30,8 +30,8 @@
 
 using System;
 using System.Collections;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 
 namespace Mono.Remoting.Channels.Unix

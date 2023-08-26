@@ -168,10 +168,6 @@
 
 
 using System;
-using System.Runtime.CompilerServices;
-#if FEATURE_ACTIVITYSAMPLING
-using System.Collections.Concurrent;
-#endif
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -179,11 +175,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
+using Microsoft.Reflection;
 using Microsoft.Win32;
+#if FEATURE_ACTIVITYSAMPLING
+using System.Collections.Concurrent;
+#endif
 
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
@@ -191,8 +192,6 @@ using EventDescriptor = Microsoft.Diagnostics.Tracing.EventDescriptor;
 #else
 using EventDescriptor = System.Diagnostics.Tracing.EventDescriptor;
 #endif
-
-using Microsoft.Reflection;
 
 #if !ES_BUILD_AGAINST_DOTNET_V35
 using Contract = System.Diagnostics.Contracts.Contract;
@@ -371,8 +370,7 @@ namespace System.Diagnostics.Tracing
 
                 ActivityFilter activityFilter = etwSession.m_activityFilter;
                 if (
-                    activityFilter == null
-                    || ActivityFilter.GetFilter(activityFilter, this) == null
+                    activityFilter == null || ActivityFilter.GetFilter(activityFilter, this) == null
                 )
                 {
                     // No activity filter for ETW, if event is active for ETW, we can't filter.
@@ -3771,9 +3769,7 @@ namespace System.Diagnostics.Tracing
                 {
                     EventSource eventSource = eventSourceRef.Target as EventSource;
                     if (
-                        eventSource != null
-                        && eventSource.Guid == m_guid
-                        && !eventSource.IsDisposed
+                        eventSource != null && eventSource.Guid == m_guid && !eventSource.IsDisposed
                     )
                     {
                         if (eventSource != this)
@@ -4259,8 +4255,7 @@ namespace System.Diagnostics.Tracing
                         // we will now allow both non-void returning and virtual methods to be Event methods, as long
                         // as they are marked with the [Event] attribute
                         if ( /* method.IsVirtual || */
-                            method.IsStatic
-                        )
+                            method.IsStatic)
                         {
                             continue;
                         }
@@ -8305,8 +8300,7 @@ namespace System.Diagnostics.Tracing
                     else if (type == typeof(IntPtr))
                         return "win:Pointer";
                     else if (
-                        (type.IsArray || type.IsPointer)
-                        && type.GetElementType() == typeof(byte)
+                        (type.IsArray || type.IsPointer) && type.GetElementType() == typeof(byte)
                     )
                         return "win:Binary";
                     ManifestError(

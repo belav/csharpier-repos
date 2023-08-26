@@ -13,11 +13,11 @@
 // Copyright 2011 Xamarin, Inc (http://www.xamarin.com)
 //
 
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Globalization;
-using System;
 
 namespace Mono.CSharp
 {

@@ -100,9 +100,7 @@ namespace System.Windows.Forms
             SelectionRange s;
 
             if (
-                (value == null)
-                || !(value is SelectionRange)
-                || (destinationType != typeof(string))
+                (value == null) || !(value is SelectionRange) || (destinationType != typeof(string))
             )
             {
                 return base.ConvertTo(context, culture, value, destinationType);

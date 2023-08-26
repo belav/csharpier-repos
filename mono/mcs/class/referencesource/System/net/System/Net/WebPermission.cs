@@ -8,11 +8,11 @@
 namespace System.Net
 {
     using System.Collections;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
     using System.Text.RegularExpressions;
-    using System.Globalization;
-    using System.Runtime.Serialization;
 
     //NOTE: While WebPermissionAttribute resides in System.DLL,
     //      no classes from that DLL are able to make declarative usage of WebPermission.

@@ -34,19 +34,19 @@
 //
 
 using System;
-using System.Net;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Configuration;
+using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.IO;
-using System.Net.Configuration;
-using System.Text;
 using System.Timers;
-using System.Net.NetworkInformation;
 
 namespace System.Net.Sockets
 {
@@ -168,8 +168,7 @@ namespace System.Net.Sockets
                     // This fails on raw sockets so we just let them be in default state.
                 }
                 else if (
-                    addressFamily == AddressFamily.InterNetworkV6
-                    && socketType != SocketType.Raw
+                    addressFamily == AddressFamily.InterNetworkV6 && socketType != SocketType.Raw
                 )
                 {
                     this.DualMode = true;

@@ -16,15 +16,15 @@ namespace System.Runtime.Hosting
 {
     using System.Deployment.Internal.Isolation;
     using System.Deployment.Internal.Isolation.Manifest;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Reflection;
     using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     internal sealed class ManifestRunner
     {

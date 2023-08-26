@@ -12,9 +12,8 @@ using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
-using CategoryAttribute = System.ComponentModel.CategoryAttribute;
-
 using NUnit.Framework;
+using CategoryAttribute = System.ComponentModel.CategoryAttribute;
 
 namespace MonoTests.System.ComponentModel
 {

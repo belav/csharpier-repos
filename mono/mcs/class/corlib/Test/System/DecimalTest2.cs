@@ -5,10 +5,10 @@
 // (C) Martin Weindel, 2001
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

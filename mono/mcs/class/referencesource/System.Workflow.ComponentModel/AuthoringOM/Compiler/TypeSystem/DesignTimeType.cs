@@ -2,13 +2,13 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
-    using System.CodeDom;
-    using System.Diagnostics;
     using System.Text;
 
     internal sealed class DesignTimeType : Type, ICloneable

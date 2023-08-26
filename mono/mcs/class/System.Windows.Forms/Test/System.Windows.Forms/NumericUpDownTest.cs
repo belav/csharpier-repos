@@ -1,15 +1,13 @@
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Collections;
-using Threading = System.Threading;
-
 using NUnit.Framework;
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
+using Threading = System.Threading;
 
 namespace MonoTests.System.Windows.Forms
 {

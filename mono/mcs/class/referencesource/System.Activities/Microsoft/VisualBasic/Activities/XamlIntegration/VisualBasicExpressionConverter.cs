@@ -7,18 +7,18 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
     using System;
     using System.Activities.Expressions;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Reflection;
-    using System.Xml.Linq;
     using System.ComponentModel;
-    using System.Xaml;
-    using System.Windows.Markup;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime;
+    using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading;
+    using System.Windows.Markup;
+    using System.Xaml;
+    using System.Xml.Linq;
 
     static class VisualBasicExpressionConverter
     {
@@ -38,8 +38,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 context.GetService(typeof(IXamlSchemaContextProvider))
                 as IXamlSchemaContextProvider;
             if (
-                xamlSchemaContextProvider != null
-                && xamlSchemaContextProvider.SchemaContext != null
+                xamlSchemaContextProvider != null && xamlSchemaContextProvider.SchemaContext != null
             )
             {
                 xsCtxReferenceAssemblies = xamlSchemaContextProvider

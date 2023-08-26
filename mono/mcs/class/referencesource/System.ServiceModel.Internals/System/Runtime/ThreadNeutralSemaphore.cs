@@ -5,10 +5,10 @@
 namespace System.Runtime
 {
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Threading;
 
     [Fx.Tag.SynchronizationPrimitive(
         Fx.Tag.BlocksUsing.PrivatePrimitive,

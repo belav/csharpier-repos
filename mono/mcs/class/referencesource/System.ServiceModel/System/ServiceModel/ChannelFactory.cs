@@ -11,8 +11,8 @@ namespace System.ServiceModel
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Security;
-    using SecurityToken = System.IdentityModel.Tokens.SecurityToken;
     using FederatedClientCredentialsParameters = System.IdentityModel.Protocols.WSTrust.FederatedClientCredentialsParameters;
+    using SecurityToken = System.IdentityModel.Tokens.SecurityToken;
 
     public abstract class ChannelFactory : CommunicationObject, IChannelFactory, IDisposable
     {

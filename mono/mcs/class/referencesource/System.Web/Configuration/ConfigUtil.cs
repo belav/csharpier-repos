@@ -7,11 +7,11 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Threading;
     using System.Configuration;
-    using System.Xml;
+    using System.Threading;
     using System.Web.Compilation;
     using System.Web.Util;
+    using System.Xml;
 
     internal class ConfigUtil
     {

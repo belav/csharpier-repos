@@ -7,8 +7,8 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Linq;
 
 namespace System.Data.Query.InternalTrees

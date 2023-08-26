@@ -32,9 +32,8 @@ using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.Caching.Hosting;
 using System.Text;
-
-using NUnit.Framework;
 using MonoTests.Common;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Caching
 {

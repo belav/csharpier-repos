@@ -13,11 +13,9 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-
 using Mono.Security.Authenticode;
-using MSX = Mono.Security.X509;
-
 using NUnit.Framework;
+using MSX = Mono.Security.X509;
 
 namespace MonoTests.Mono.Security.Authenticode
 {

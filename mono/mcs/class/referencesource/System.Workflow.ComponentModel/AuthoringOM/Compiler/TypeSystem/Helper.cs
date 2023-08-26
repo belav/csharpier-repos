@@ -2,12 +2,12 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
     using System.Text;
-    using System.Collections;
-    using System.Collections.Generic;
 
     internal static class Helper
     {

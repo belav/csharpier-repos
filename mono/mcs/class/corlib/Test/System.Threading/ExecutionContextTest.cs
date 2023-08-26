@@ -25,12 +25,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System.Runtime.Remoting.Messaging;
-
 using System;
+using System.Runtime.Remoting.Messaging;
 using System.Security;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading

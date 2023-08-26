@@ -6,13 +6,13 @@ namespace System.ServiceModel.Dispatcher
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Persistence;
-    using System.Threading;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Diagnostics;
     using System.Diagnostics;
     using System.Runtime.Diagnostics;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Persistence;
+    using System.Threading;
 
     class ServiceDurableInstanceContextProvider : DurableInstanceContextProvider
     {

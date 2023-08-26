@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel
 {
+    using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel.Channels;
-    using System.Net.Security;
-    using System.ServiceModel.Security;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     [AttributeUsage(ServiceModelAttributeTargets.MessageContract, AllowMultiple = false)]
     public sealed class MessageContractAttribute : Attribute

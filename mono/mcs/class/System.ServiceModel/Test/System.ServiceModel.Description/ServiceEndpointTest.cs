@@ -28,14 +28,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using System.ServiceModel.Channels;
-
+using System.Text;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Description
 {

@@ -21,8 +21,8 @@
 namespace System.Threading
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

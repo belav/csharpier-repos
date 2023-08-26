@@ -16,11 +16,10 @@ namespace System.Security.Cryptography.X509Certificates
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
+    using System.Runtime.Versioning;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Text;
-    using System.Runtime.Versioning;
-
     using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     public enum X509FindType
@@ -766,8 +765,7 @@ namespace System.Security.Cryptography.X509Certificates
                         pvCallbackData1 = findValue;
                     }
                     else if (
-                        findValue.GetType() == typeof(uint)
-                        || findValue.GetType() == typeof(int)
+                        findValue.GetType() == typeof(uint) || findValue.GetType() == typeof(int)
                     )
                     {
                         // We got the actual DWORD

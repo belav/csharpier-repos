@@ -131,8 +131,7 @@ namespace System.Xml.Serialization
                 )
                     continue;
                 else if (
-                    action == HookAction.Replace
-                    && (hook.Replace == null || hook.Replace == "")
+                    action == HookAction.Replace && (hook.Replace == null || hook.Replace == "")
                 )
                     continue;
 

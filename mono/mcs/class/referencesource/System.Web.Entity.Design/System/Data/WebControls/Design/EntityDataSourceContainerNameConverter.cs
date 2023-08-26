@@ -28,8 +28,7 @@ namespace System.Web.UI.Design.WebControls
 
             EntityDataSource entityDataSource = context.Instance as EntityDataSource;
             if (
-                entityDataSource != null
-                && !String.IsNullOrEmpty(entityDataSource.ConnectionString)
+                entityDataSource != null && !String.IsNullOrEmpty(entityDataSource.ConnectionString)
             )
             {
                 List<EntityDataSourceContainerNameItem> containerNameItems =

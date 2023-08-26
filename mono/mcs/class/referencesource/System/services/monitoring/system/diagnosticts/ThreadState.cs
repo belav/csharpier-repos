@@ -6,9 +6,8 @@
 
 namespace System.Diagnostics
 {
-    using System.Threading;
-
     using System.Diagnostics;
+    using System.Threading;
 
     /// <devdoc>
     ///     Specifies the execution state of a thread.

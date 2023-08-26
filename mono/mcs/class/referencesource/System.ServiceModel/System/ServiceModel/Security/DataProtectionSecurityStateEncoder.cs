@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Text;
     using System.Security.Cryptography;
+    using System.Text;
 
     public class DataProtectionSecurityStateEncoder : SecurityStateEncoder
     {

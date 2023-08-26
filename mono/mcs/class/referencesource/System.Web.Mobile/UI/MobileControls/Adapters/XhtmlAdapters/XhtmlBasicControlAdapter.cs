@@ -5,18 +5,18 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections;
+using System.Configuration;
+using System.Diagnostics;
+using System.Globalization;
 using System.Security.Permissions;
 using System.Text;
 using System.Web;
 using System.Web.Mobile;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Configuration;
-using System.Globalization;
-using System.Web.Security;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
@@ -291,8 +291,7 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 
                 // ASURT 147179
                 if (
-                    (String)Device["requiresAbsolutePostbackUrl"] == "true"
-                    && IsRelativeUrl(target)
+                    (String)Device["requiresAbsolutePostbackUrl"] == "true" && IsRelativeUrl(target)
                 )
                 {
                     String templateSourceDirectory = Page.TemplateSourceDirectory;
