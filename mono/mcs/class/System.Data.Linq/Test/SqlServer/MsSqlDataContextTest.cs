@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2009 Novell, Inc.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -43,8 +43,8 @@ using DbLinq.Data.Linq.Mapping;
 using DbLinq.Null;
 using NUnit.Framework;
 
-namespace DbLinqTest {
-
+namespace DbLinqTest
+{
     [TestFixture]
     public class MsSqlDataContextTest : DataContextTestBase
     {
@@ -58,38 +58,46 @@ namespace DbLinqTest {
 
         protected override DataContext CreateDataContext()
         {
-            return new DataContext (new NullConnection (), new AttributeMappingSource ());
+            return new DataContext(new NullConnection(), new AttributeMappingSource());
         }
 
         protected override string People(string firstName)
         {
             return string.Format(
-                "SELECT [t0].[first_name] AS [FirstName], [t0].[last_name] AS [LastName]{0}" + 
-                "FROM [people] AS [t0]{0}" +
-                "WHERE [t0].[first_name] = @p0",
-                Environment.NewLine);
+                "SELECT [t0].[first_name] AS [FirstName], [t0].[last_name] AS [LastName]{0}"
+                    + "FROM [people] AS [t0]{0}"
+                    + "WHERE [t0].[first_name] = @p0",
+                Environment.NewLine
+            );
         }
 
         protected override string People(string firstName, string lastName)
         {
             return string.Format(
-                "SELECT [t0].[first_name] AS [FirstName], [t0].[last_name] AS [LastName]{0}" + 
-                "FROM [people] AS [t0]{0}" +
-                "WHERE ([t0].[last_name] = @p0) AND ([t0].[first_name] = @p1)",
-                Environment.NewLine);
+                "SELECT [t0].[first_name] AS [FirstName], [t0].[last_name] AS [LastName]{0}"
+                    + "FROM [people] AS [t0]{0}"
+                    + "WHERE ([t0].[last_name] = @p0) AND ([t0].[first_name] = @p1)",
+                Environment.NewLine
+            );
         }
 
         protected override string People(string firstName, string lastName, int skip, int take)
         {
-            return string.Format("SELECT [t1].[first_name] AS [FirstName], [t1].[last_name] AS [LastName]{0}" +
-                "FROM ({0}" +
-                "    SELECT ROW_NUMBER() OVER (ORDER BY [t0].[first_name], [t0].[last_name]) AS [ROW_NUMBER], [t0].[first_name], [t0].[last_name]{0}" +
-                "    FROM [people] AS [t0]{0}" +
-                "    WHERE ([t0].[last_name] = @p0) AND ([t0].[first_name] = @p1){0}" +
-                "    ) AS [t1]{0}" +
-                "WHERE [t1].[ROW_NUMBER] BETWEEN @p2 + 1 AND @p2 + @p3{0}" +
-                "ORDER BY [t1].[ROW_NUMBER]",
-                Environment.NewLine, firstName, lastName, skip, take);
+            return string.Format(
+                "SELECT [t1].[first_name] AS [FirstName], [t1].[last_name] AS [LastName]{0}"
+                    + "FROM ({0}"
+                    + "    SELECT ROW_NUMBER() OVER (ORDER BY [t0].[first_name], [t0].[last_name]) AS [ROW_NUMBER], [t0].[first_name], [t0].[last_name]{0}"
+                    + "    FROM [people] AS [t0]{0}"
+                    + "    WHERE ([t0].[last_name] = @p0) AND ([t0].[first_name] = @p1){0}"
+                    + "    ) AS [t1]{0}"
+                    + "WHERE [t1].[ROW_NUMBER] BETWEEN @p2 + 1 AND @p2 + @p3{0}"
+                    + "ORDER BY [t1].[ROW_NUMBER]",
+                Environment.NewLine,
+                firstName,
+                lastName,
+                skip,
+                take
+            );
         }
 
         [Test]
@@ -100,19 +108,16 @@ namespace DbLinqTest {
             try
             {
                 Context.Log = log;
-                (from p in Context.GetTable<Person>()
-                     orderby p.LastName
-                     select p)
-                    .Count();
+                (from p in Context.GetTable<Person>() orderby p.LastName select p).Count();
             }
             catch (NotSupportedException)
             {
                 Console.WriteLine("# logfile=\n{0}", log.ToString());
-                var expected = string.Format("SELECT COUNT(*) AS [value]{0}" +
-                    "FROM [people] AS [t0]{0}" +
-                    "--",
-                    Environment.NewLine);
-                StringAssert.Contains (expected, log.ToString());
+                var expected = string.Format(
+                    "SELECT COUNT(*) AS [value]{0}" + "FROM [people] AS [t0]{0}" + "--",
+                    Environment.NewLine
+                );
+                StringAssert.Contains(expected, log.ToString());
             }
             catch (Exception e)
             {

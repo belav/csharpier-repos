@@ -15,7 +15,10 @@ namespace System.Activities.Runtime
     {
         ActivityInstance completedInstance;
 
-        public EmptyWithCancelationCheckWorkItem(ActivityInstance activityInstance, ActivityInstance completedInstance)
+        public EmptyWithCancelationCheckWorkItem(
+            ActivityInstance activityInstance,
+            ActivityInstance completedInstance
+        )
             : base(activityInstance)
         {
             this.completedInstance = completedInstance;
@@ -53,7 +56,10 @@ namespace System.Activities.Runtime
 
         public override void PostProcess(ActivityExecutor executor)
         {
-            if (this.completedInstance.State != ActivityInstanceState.Closed && this.ActivityInstance.IsPerformingDefaultCancelation)
+            if (
+                this.completedInstance.State != ActivityInstanceState.Closed
+                && this.ActivityInstance.IsPerformingDefaultCancelation
+            )
             {
                 this.ActivityInstance.MarkCanceled();
             }

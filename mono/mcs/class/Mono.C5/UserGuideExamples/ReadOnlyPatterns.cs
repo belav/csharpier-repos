@@ -21,76 +21,89 @@
 
 // C5 example: ReadOnlyPatterns.cs for pattern chapter
 
-// Compile with 
-//   csc /r:C5.dll ReadOnlyPatterns.cs 
+// Compile with
+//   csc /r:C5.dll ReadOnlyPatterns.cs
 
 using System;
 using C5;
 using SCG = System.Collections.Generic;
 
-namespace ReadOnlyPatterns {
-  class ReadOnlyPatterns {
-    public static void Main(String[] args) {
-      GuardHashSet<int>();
-      GuardTreeSet<int>();
-      GuardList<int>();
-      GuardHashDictionary<int,int>();
-      GuardSortedDictionary<int,int>();
-    }
+namespace ReadOnlyPatterns
+{
+    class ReadOnlyPatterns
+    {
+        public static void Main(String[] args)
+        {
+            GuardHashSet<int>();
+            GuardTreeSet<int>();
+            GuardList<int>();
+            GuardHashDictionary<int, int>();
+            GuardSortedDictionary<int, int>();
+        }
 
-    // Read-only access to a hash-based collection
-    
-    static void GuardHashSet<T>() {
-      ICollection<T> coll = new HashSet<T>();
-      DoWork(new GuardedCollection<T>(coll));
-    }
+        // Read-only access to a hash-based collection
 
-    static void DoWork<T>(ICollection<T> gcoll) { 
-      // Use gcoll ... 
-    }
+        static void GuardHashSet<T>()
+        {
+            ICollection<T> coll = new HashSet<T>();
+            DoWork(new GuardedCollection<T>(coll));
+        }
 
-    // Read-only access to an indexed sorted collection
+        static void DoWork<T>(ICollection<T> gcoll)
+        {
+            // Use gcoll ...
+        }
 
-    static void GuardTreeSet<T>() {
-      IIndexedSorted<T> coll = new TreeSet<T>(); 
-      DoWork(new GuardedIndexedSorted<T>(coll));
-    }
-    
-    static void DoWork<T>(IIndexedSorted<T> gcoll) { 
-      // Use gcoll ...
-    }
+        // Read-only access to an indexed sorted collection
 
-    // Read-only access to a list
+        static void GuardTreeSet<T>()
+        {
+            IIndexedSorted<T> coll = new TreeSet<T>();
+            DoWork(new GuardedIndexedSorted<T>(coll));
+        }
 
-    static void GuardList<T>() {
-      IList<T> coll = new ArrayList<T>(); 
-      DoWork(new GuardedList<T>(coll));
-    }
-    
-    static void DoWork<T>(IList<T> gcoll) { 
-      // Use gcoll ...
-    }
+        static void DoWork<T>(IIndexedSorted<T> gcoll)
+        {
+            // Use gcoll ...
+        }
 
-    // Read-only access to a dictionary
+        // Read-only access to a list
 
-    static void GuardHashDictionary<K,V>() {
-      IDictionary<K,V> dict = new HashDictionary<K,V>(); 
-      DoWork(new GuardedDictionary<K,V>(dict));
-    }
-    
-    static void DoWork<K,V>(IDictionary<K,V> gdict) { 
-      // Use gdict ...
-    }
+        static void GuardList<T>()
+        {
+            IList<T> coll = new ArrayList<T>();
+            DoWork(new GuardedList<T>(coll));
+        }
 
-    // Read-only access to a sorted dictionary
+        static void DoWork<T>(IList<T> gcoll)
+        {
+            // Use gcoll ...
+        }
 
-    static void GuardSortedDictionary<K,V>() {
-      ISortedDictionary<K,V> dict = new TreeDictionary<K,V>(); 
-      DoWork(new GuardedSortedDictionary<K,V>(dict));
+        // Read-only access to a dictionary
+
+        static void GuardHashDictionary<K, V>()
+        {
+            IDictionary<K, V> dict = new HashDictionary<K, V>();
+            DoWork(new GuardedDictionary<K, V>(dict));
+        }
+
+        static void DoWork<K, V>(IDictionary<K, V> gdict)
+        {
+            // Use gdict ...
+        }
+
+        // Read-only access to a sorted dictionary
+
+        static void GuardSortedDictionary<K, V>()
+        {
+            ISortedDictionary<K, V> dict = new TreeDictionary<K, V>();
+            DoWork(new GuardedSortedDictionary<K, V>(dict));
+        }
+
+        static void DoWork<K, V>(ISortedDictionary<K, V> gdict)
+        {
+            // Use gdict ...
+        }
     }
-    
-    static void DoWork<K,V>(ISortedDictionary<K,V> gdict) { 
-      // Use gdict ...
-    }
-  }
 }

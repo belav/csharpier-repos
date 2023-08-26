@@ -10,7 +10,7 @@ using System.DirectoryServices;
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryLocalQuery : IDirectoryOperation
+    internal sealed class DirectoryLocalQuery : IDirectoryOperation
     {
         internal String m_name;
         internal String m_value;
@@ -28,7 +28,11 @@ namespace System.Workflow.Activities
             this.m_operation = operation;
         }
 
-        public void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response)
+        public void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        )
         {
             if (rootEntry == null)
                 throw new ArgumentNullException("rootEntry");
@@ -69,5 +73,4 @@ namespace System.Workflow.Activities
             }
         }
     }
-
 }

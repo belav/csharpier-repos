@@ -1,5 +1,7 @@
-﻿namespace System.Web.Mvc {
-    public enum FilterScope {
+﻿namespace System.Web.Mvc
+{
+    public enum FilterScope
+    {
         First = 0,
         Global = 10,
         Controller = 20,

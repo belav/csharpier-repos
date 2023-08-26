@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,59 +56,62 @@ using SysConfig = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class CustomBindingCollectionElement
-		 : BindingCollectionElement
-	{
+    public sealed class CustomBindingCollectionElement : BindingCollectionElement
+    {
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "",
+            Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true
+        )]
+        public CustomBindingElementCollection Bindings
+        {
+            get { return (CustomBindingElementCollection)this[String.Empty]; }
+        }
 
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public CustomBindingElementCollection Bindings {
-			get { return (CustomBindingElementCollection) this [String.Empty]; }
-		}
+        public override ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings
+        {
+            get
+            {
+                List<IBindingConfigurationElement> list = new List<IBindingConfigurationElement>();
+                CustomBindingElementCollection bindings = Bindings;
+                for (int i = 0; i < bindings.Count; i++)
+                    list.Add(bindings[i]);
+                return new ReadOnlyCollection<IBindingConfigurationElement>(list);
+            }
+        }
 
-		public override ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings {
-			get {
-				List<IBindingConfigurationElement> list = new List<IBindingConfigurationElement> ();
-				CustomBindingElementCollection bindings = Bindings;
-				for (int i = 0; i < bindings.Count; i++)
-					list.Add (bindings [i]);
-				return new ReadOnlyCollection<IBindingConfigurationElement> (list);
-			}
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        public override Type BindingType
+        {
+            get { return typeof(CustomBinding); }
+        }
 
-		public override Type BindingType {
-			get { return typeof (CustomBinding); }
-		}
+        public override bool ContainsKey(string name)
+        {
+            return Bindings.ContainsKey(name);
+        }
 
+        protected internal override Binding GetDefault()
+        {
+            return new CustomBinding();
+        }
 
-		public override bool ContainsKey (string name)
-		{
-			return Bindings.ContainsKey (name);
-		}
+        protected internal override bool TryAdd(string name, Binding binding, SysConfig config)
+        {
+            if (!binding.GetType().Equals(typeof(CustomBinding)))
+                return false;
 
-		protected internal override Binding GetDefault ()
-		{
-			return new CustomBinding ();
-		}
-
-		protected internal override bool TryAdd (string name, Binding binding, SysConfig config)
-		{
-			if (!binding.GetType ().Equals (typeof (CustomBinding)))
-				return false;
-			
-			var element = new CustomBindingElement ();
-			element.Name = name;
-			element.InitializeFrom (binding);
-			Bindings.Add (element);
-			return true;
-		}
-	}
-
+            var element = new CustomBindingElement();
+            element.Name = name;
+            element.InitializeFrom(binding);
+            Bindings.Add(element);
+            return true;
+        }
+    }
 }

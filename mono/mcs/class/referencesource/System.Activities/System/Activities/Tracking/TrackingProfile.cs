@@ -13,9 +13,7 @@ namespace System.Activities.Tracking
     {
         Collection<TrackingQuery> queries;
 
-        public TrackingProfile()
-        {
-        }
+        public TrackingProfile() { }
 
         [DefaultValue(null)]
         public string Name { get; set; }

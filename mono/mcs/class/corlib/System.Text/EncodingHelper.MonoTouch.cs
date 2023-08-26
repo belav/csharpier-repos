@@ -1,30 +1,35 @@
 using System;
 
-namespace System.Text {
+namespace System.Text
+{
+    internal static partial class EncodingHelper
+    {
+        static volatile Encoding utf8Encoding;
 
-	internal static partial class EncodingHelper {
+        internal static Encoding UTF8
+        {
+            get
+            {
+                if (utf8Encoding == null)
+                {
+                    lock (lockobj)
+                    {
+                        if (utf8Encoding == null)
+                        {
+                            utf8Encoding = new UTF8Encoding(true, false);
+                            utf8Encoding.setReadOnly();
+                        }
+                    }
+                }
 
-		static volatile Encoding utf8Encoding;
+                return utf8Encoding;
+            }
+        }
 
-		internal static Encoding UTF8 {
-			get {
-				if (utf8Encoding == null) {
-					lock (lockobj){
-						if (utf8Encoding == null){
-							utf8Encoding = new UTF8Encoding (true, false);
-							utf8Encoding.setReadOnly ();
-						}
-					}
-				}
-
-				return utf8Encoding;
-			}
-		}
-
-		// The mobile profile has been default'ing to UTF8 since it's creation
-		internal static Encoding GetDefaultEncoding ()
-		{
-			return UTF8;
-		}
-	}
+        // The mobile profile has been default'ing to UTF8 since it's creation
+        internal static Encoding GetDefaultEncoding()
+        {
+            return UTF8;
+        }
+    }
 }

@@ -33,46 +33,44 @@ using System.IO;
 using System.Resources;
 using System.Text;
 
-namespace Mono.XBuild.Tasks.GenerateResourceInternal {
-	internal class TxtResourceWriter : IResourceWriter {
-		StreamWriter s;
+namespace Mono.XBuild.Tasks.GenerateResourceInternal
+{
+    internal class TxtResourceWriter : IResourceWriter
+    {
+        StreamWriter s;
 
-		public TxtResourceWriter (Stream stream)
-		{
-			s = new StreamWriter (stream);
-		}
+        public TxtResourceWriter(Stream stream)
+        {
+            s = new StreamWriter(stream);
+        }
 
-		public void AddResource (string name, byte[] value)
-		{
-			throw new Exception ("Binary data not valid in a text resource file");
-		}
+        public void AddResource(string name, byte[] value)
+        {
+            throw new Exception("Binary data not valid in a text resource file");
+        }
 
-		public void AddResource (string name, object value)
-		{
-			if (value is string) {
-				AddResource (name, (string)value);
-				return;
-			}
-			throw new Exception ("Objects not valid in a text resource file");
-		}
+        public void AddResource(string name, object value)
+        {
+            if (value is string)
+            {
+                AddResource(name, (string)value);
+                return;
+            }
+            throw new Exception("Objects not valid in a text resource file");
+        }
 
-		public void AddResource (string name, string value)
-		{
-			s.WriteLine ("{0}={1}", name, value);
-		}
+        public void AddResource(string name, string value)
+        {
+            s.WriteLine("{0}={1}", name, value);
+        }
 
-		public void Close ()
-		{
-			s.Close ();
-		}
+        public void Close()
+        {
+            s.Close();
+        }
 
-		public void Dispose ()
-		{
-		}
+        public void Dispose() { }
 
-		public void Generate ()
-		{
-		}
-	}
+        public void Generate() { }
+    }
 }
-

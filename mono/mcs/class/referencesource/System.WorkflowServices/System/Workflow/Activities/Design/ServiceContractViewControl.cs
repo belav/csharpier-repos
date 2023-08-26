@@ -15,7 +15,6 @@ namespace System.Workflow.Activities.Design
 
     internal partial class ServiceContractViewControl : ListItemViewControl
     {
-
         public ServiceContractViewControl()
         {
             InitializeComponent();
@@ -76,8 +75,6 @@ namespace System.Workflow.Activities.Design
                 this.backgroundPanel.BorderColor = Color.Transparent;
             }
             base.UpdateView();
-
         }
-
     }
 }

@@ -10,10 +10,8 @@ namespace System.ServiceModel.Description
 
     public class MessageDescriptionCollection : Collection<MessageDescription>
     {
-        internal MessageDescriptionCollection()
-        {            
-        }
-        
+        internal MessageDescriptionCollection() { }
+
         public MessageDescription Find(string action)
         {
             foreach (MessageDescription description in this)

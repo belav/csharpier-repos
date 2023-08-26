@@ -10,7 +10,6 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-
     [XmlSchemaProvider(null, IsAny = true)]
     public class TestElement : IXmlSerializable
     {
@@ -32,7 +31,6 @@ namespace MonoTests.System.Runtime.Serialization
         }
     }
 
-
     [TestFixture]
     public class Bug11916Test
     {
@@ -42,19 +40,23 @@ namespace MonoTests.System.Runtime.Serialization
             TestElement element = new TestElement();
             element.Value = "bar";
 
-            StringBuilder stringBuilder = new StringBuilder ();
+            StringBuilder stringBuilder = new StringBuilder();
 
-            DataContractSerializer ser = new DataContractSerializer (typeof (TestElement));
+            DataContractSerializer ser = new DataContractSerializer(typeof(TestElement));
 
-            using (var xw = XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (new StringWriter (stringBuilder))))
+            using (
+                var xw = XmlDictionaryWriter.CreateDictionaryWriter(
+                    XmlWriter.Create(new StringWriter(stringBuilder))
+                )
+            )
             {
                 ser.WriteObject(xw, element);
             }
 
-            string actualXml   = stringBuilder.ToString ();
+            string actualXml = stringBuilder.ToString();
             string expectedXml = "<?xml version=\"1.0\" encoding=\"utf-16\"?><dummy>bar</dummy>";
 
-            Assert.AreEqual (expectedXml, actualXml, "#1 IsAny=true DataContractSerializer");
+            Assert.AreEqual(expectedXml, actualXml, "#1 IsAny=true DataContractSerializer");
         }
     }
 }

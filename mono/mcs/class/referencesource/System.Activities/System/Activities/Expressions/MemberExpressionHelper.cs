@@ -14,38 +14,73 @@ namespace System.Activities.Expressions
 
     static class MemberExpressionHelper
     {
-        public static void AddOperandArgument<TOperand>(CodeActivityMetadata metadata, InArgument<TOperand> operand, bool isRequired)
+        public static void AddOperandArgument<TOperand>(
+            CodeActivityMetadata metadata,
+            InArgument<TOperand> operand,
+            bool isRequired
+        )
         {
-            RuntimeArgument operandArgument = new RuntimeArgument("Operand", typeof(TOperand), ArgumentDirection.In, isRequired);
+            RuntimeArgument operandArgument = new RuntimeArgument(
+                "Operand",
+                typeof(TOperand),
+                ArgumentDirection.In,
+                isRequired
+            );
             metadata.Bind(operand, operandArgument);
             metadata.AddArgument(operandArgument);
         }
 
-        public static void AddOperandLocationArgument<TOperand>(CodeActivityMetadata metadata, InOutArgument<TOperand> operandLocation, bool isRequired)
+        public static void AddOperandLocationArgument<TOperand>(
+            CodeActivityMetadata metadata,
+            InOutArgument<TOperand> operandLocation,
+            bool isRequired
+        )
         {
-            RuntimeArgument operandLocationArgument = new RuntimeArgument("OperandLocation", typeof(TOperand), ArgumentDirection.InOut, isRequired);
+            RuntimeArgument operandLocationArgument = new RuntimeArgument(
+                "OperandLocation",
+                typeof(TOperand),
+                ArgumentDirection.InOut,
+                isRequired
+            );
             metadata.Bind(operandLocation, operandLocationArgument);
             metadata.AddArgument(operandLocationArgument);
         }
 
-        public static bool TryGenerateLinqDelegate<TOperand, TResult>(string memberName, bool isField, bool isStatic, out Func<TOperand, TResult> operation, out ValidationError validationError)
+        public static bool TryGenerateLinqDelegate<TOperand, TResult>(
+            string memberName,
+            bool isField,
+            bool isStatic,
+            out Func<TOperand, TResult> operation,
+            out ValidationError validationError
+        )
         {
             operation = null;
             validationError = null;
 
             try
             {
-                ParameterExpression operandParameter = Expression.Parameter(typeof(TOperand), "operand");
+                ParameterExpression operandParameter = Expression.Parameter(
+                    typeof(TOperand),
+                    "operand"
+                );
                 MemberExpression memberExpression = null;
                 if (isStatic)
                 {
-                    memberExpression = Expression.MakeMemberAccess(null, GetMemberInfo<TOperand>(memberName, isField));
+                    memberExpression = Expression.MakeMemberAccess(
+                        null,
+                        GetMemberInfo<TOperand>(memberName, isField)
+                    );
                 }
                 else
                 {
-                    memberExpression = Expression.MakeMemberAccess(operandParameter, GetMemberInfo<TOperand>(memberName, isField));
+                    memberExpression = Expression.MakeMemberAccess(
+                        operandParameter,
+                        GetMemberInfo<TOperand>(memberName, isField)
+                    );
                 }
-                Expression<Func<TOperand, TResult>> lambdaExpression = Expression.Lambda<Func<TOperand, TResult>>(memberExpression, operandParameter);
+                Expression<Func<TOperand, TResult>> lambdaExpression = Expression.Lambda<
+                    Func<TOperand, TResult>
+                >(memberExpression, operandParameter);
                 operation = lambdaExpression.Compile();
                 return true;
             }
@@ -76,12 +111,11 @@ namespace System.Activities.Expressions
             }
             if (result == null)
             {
-                throw FxTrace.Exception.AsError(new ValidationException(SR.MemberNotFound(memberName, typeof(TOperand).Name)));
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(SR.MemberNotFound(memberName, typeof(TOperand).Name))
+                );
             }
             return result;
         }
-
-
     }
-
 }

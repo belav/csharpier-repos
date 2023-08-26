@@ -1,5 +1,5 @@
 //
-// SoapEnumAttribute.cs: 
+// SoapEnumAttribute.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,40 +32,39 @@ using System;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for SoapEnumAttribute.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Field)]
-	public class SoapEnumAttribute : Attribute
-	{
-		private string name;
+    /// <summary>
+    /// Summary description for SoapEnumAttribute.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field)]
+    public class SoapEnumAttribute : Attribute
+    {
+        private string name;
 
-		public SoapEnumAttribute ()
-		{
-		}
+        public SoapEnumAttribute() { }
 
-		public SoapEnumAttribute (string name)
-		{
-			this.name = name;
-		}
+        public SoapEnumAttribute(string name)
+        {
+            this.name = name;
+        }
 
-		public string Name {
-			get {
-				if (name == null) {
-					return string.Empty;
-				}
-				return name;
-			}
-			set {
-				name = value;
-			}
-		}
-		
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("SENA ");
-			KeyHelper.AddField (sb, 1, name);
-			sb.Append ('|');
-		}
-	}
+        public string Name
+        {
+            get
+            {
+                if (name == null)
+                {
+                    return string.Empty;
+                }
+                return name;
+            }
+            set { name = value; }
+        }
+
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            sb.Append("SENA ");
+            KeyHelper.AddField(sb, 1, name);
+            sb.Append('|');
+        }
+    }
 }

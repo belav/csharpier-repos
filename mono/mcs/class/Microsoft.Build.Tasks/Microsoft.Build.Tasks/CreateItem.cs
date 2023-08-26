@@ -31,74 +31,83 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class CreateItem : TaskExtension {
-	
-		string[]	additionalMetadata;
-		ITaskItem[]	exclude;
-		ITaskItem[]	include;
-		bool		preserveExistingMetadata;
+namespace Microsoft.Build.Tasks
+{
+    public class CreateItem : TaskExtension
+    {
+        string[] additionalMetadata;
+        ITaskItem[] exclude;
+        ITaskItem[] include;
+        bool preserveExistingMetadata;
 
-		public CreateItem ()
-		{
-		}
+        public CreateItem() { }
 
-		public override bool Execute ()
-		{
-			if (include == null || include.Length == 0)
-				return true;
+        public override bool Execute()
+        {
+            if (include == null || include.Length == 0)
+                return true;
 
-			// Handle wild cards
-			var directoryScanner = new Microsoft.Build.BuildEngine.DirectoryScanner ();
-			directoryScanner.Includes = include;
-			directoryScanner.Excludes = exclude;
-			directoryScanner.BaseDirectory = new DirectoryInfo (Directory.GetCurrentDirectory ());
+            // Handle wild cards
+            var directoryScanner = new Microsoft.Build.BuildEngine.DirectoryScanner();
+            directoryScanner.Includes = include;
+            directoryScanner.Excludes = exclude;
+            directoryScanner.BaseDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-			directoryScanner.Scan ();
+            directoryScanner.Scan();
 
-			List<ITaskItem> output = new List<ITaskItem> ();
-			foreach (ITaskItem matchedItem in directoryScanner.MatchedItems) {
-				output.Add (matchedItem);
-				if (AdditionalMetadata == null)
-					continue;
+            List<ITaskItem> output = new List<ITaskItem>();
+            foreach (ITaskItem matchedItem in directoryScanner.MatchedItems)
+            {
+                output.Add(matchedItem);
+                if (AdditionalMetadata == null)
+                    continue;
 
-				foreach (string metadata in AdditionalMetadata) {
-					//a=1
-					string [] parts = metadata.Split (new char [] {'='}, 2, StringSplitOptions.RemoveEmptyEntries);
-					if (parts.Length == 2) {
-						string name = parts [0].Trim ();
-						string oldValue = matchedItem.GetMetadata (name);
-						if (!preserveExistingMetadata || string.IsNullOrEmpty (oldValue))
-							matchedItem.SetMetadata (name, parts [1].Trim ());
-					}
-				}
-			}
+                foreach (string metadata in AdditionalMetadata)
+                {
+                    //a=1
+                    string[] parts = metadata.Split(
+                        new char[] { '=' },
+                        2,
+                        StringSplitOptions.RemoveEmptyEntries
+                    );
+                    if (parts.Length == 2)
+                    {
+                        string name = parts[0].Trim();
+                        string oldValue = matchedItem.GetMetadata(name);
+                        if (!preserveExistingMetadata || string.IsNullOrEmpty(oldValue))
+                            matchedItem.SetMetadata(name, parts[1].Trim());
+                    }
+                }
+            }
 
-			include = output.ToArray ();
+            include = output.ToArray();
 
-			return true;
-		}
+            return true;
+        }
 
-		public string[] AdditionalMetadata {
-			get { return additionalMetadata; }
-			set { additionalMetadata = value; }
-		}
+        public string[] AdditionalMetadata
+        {
+            get { return additionalMetadata; }
+            set { additionalMetadata = value; }
+        }
 
-		public ITaskItem[] Exclude {
-			get { return exclude; }
-			set { exclude = value; }
-		}
+        public ITaskItem[] Exclude
+        {
+            get { return exclude; }
+            set { exclude = value; }
+        }
 
-		[Output]
-		public ITaskItem[] Include {
-			get { return include; }
-			set { include = value; }
-		}
+        [Output]
+        public ITaskItem[] Include
+        {
+            get { return include; }
+            set { include = value; }
+        }
 
-		public bool PreserveExistingMetadata {
-			get { return preserveExistingMetadata; }
-			set { preserveExistingMetadata = value; }
-		}
-	}
+        public bool PreserveExistingMetadata
+        {
+            get { return preserveExistingMetadata; }
+            set { preserveExistingMetadata = value; }
+        }
+    }
 }
-

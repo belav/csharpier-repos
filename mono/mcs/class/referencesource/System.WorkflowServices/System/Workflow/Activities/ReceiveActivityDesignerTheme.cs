@@ -15,7 +15,6 @@ namespace System.Workflow.Activities
     using System.ServiceModel;
     using System.Workflow.ComponentModel.Compiler;
 
-
     internal class ReceiveActivityDesignerTheme : CompositeDesignerTheme
     {
         public ReceiveActivityDesignerTheme(WorkflowTheme theme)
@@ -28,7 +27,5 @@ namespace System.Workflow.Activities
             base.ShowDropShadow = true;
             base.BackgroundStyle = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
         }
-
     }
-
 }

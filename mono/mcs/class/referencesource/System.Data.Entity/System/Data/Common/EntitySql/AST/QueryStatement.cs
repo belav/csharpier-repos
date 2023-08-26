@@ -15,7 +15,7 @@ namespace System.Data.Common.EntitySql.AST
     using System.Collections.Generic;
 
     /// <summary>
-    /// Represents query statement AST. 
+    /// Represents query statement AST.
     /// </summary>
     internal sealed class QueryStatement : Statement
     {

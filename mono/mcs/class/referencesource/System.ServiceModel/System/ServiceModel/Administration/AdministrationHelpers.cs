@@ -9,7 +9,6 @@ namespace System.ServiceModel.Administration
     using System.ServiceModel.Channels;
     using System.ServiceModel;
 
-
     static class AdministrationHelpers
     {
         public static Type GetServiceModelBaseType(Type type)

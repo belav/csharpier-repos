@@ -17,9 +17,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         // Methods
         public SRDescriptionAttribute(string description)
-            : base(description)
-        {
-        }
+            : base(description) { }
 
         // Properties
         public override string Description
@@ -35,7 +33,4 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
     }
-
- 
-
 }

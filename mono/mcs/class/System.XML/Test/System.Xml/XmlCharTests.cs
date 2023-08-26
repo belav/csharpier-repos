@@ -21,10 +21,9 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-
-	[TestFixture]
-	public class XmlCharTests
-	{
+    [TestFixture]
+    public class XmlCharTests
+    {
 #if false
 
 		[Test]
@@ -424,5 +423,5 @@ namespace MonoTests.System.Xml
 				(ch >= 0x30FC && ch <= 0x30FE);
 		}
 #endif
-	}
+    }
 }

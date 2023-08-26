@@ -10,7 +10,6 @@ namespace System.Workflow.ComponentModel.Design
     using System.ComponentModel.Design;
     using System.Workflow.ComponentModel.Design;
 
-
     #region Class CompensatableTransactionScopeActivityDesigner
 
     internal sealed class CompensatableTransactionScopeActivityDesigner : SequenceDesigner
@@ -23,10 +22,13 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (DesignerView view in base.Views)
                 {
                     // disable the exceptions view and cancellation handler view
-                    Type activityType = view.UserData[SecondaryView.UserDataKey_ActivityType] as Type;
-                    if (activityType != null &&
-                        !typeof(CancellationHandlerActivity).IsAssignableFrom(activityType) &&
-                        !typeof(FaultHandlersActivity).IsAssignableFrom(activityType))
+                    Type activityType =
+                        view.UserData[SecondaryView.UserDataKey_ActivityType] as Type;
+                    if (
+                        activityType != null
+                        && !typeof(CancellationHandlerActivity).IsAssignableFrom(activityType)
+                        && !typeof(FaultHandlersActivity).IsAssignableFrom(activityType)
+                    )
                     {
                         views.Add(view);
                     }

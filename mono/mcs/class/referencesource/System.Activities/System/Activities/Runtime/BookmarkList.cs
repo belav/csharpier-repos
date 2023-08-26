@@ -15,9 +15,7 @@ namespace System.Activities.Runtime
     class BookmarkList : HybridCollection<Bookmark>
     {
         public BookmarkList()
-            : base()
-        {
-        }
+            : base() { }
 
         internal bool Contains(Bookmark bookmark)
         {
@@ -47,8 +45,5 @@ namespace System.Activities.Runtime
             singleItem = base.SingleItem;
             multipleItems = base.MultipleItems;
         }
-
     }
-
 }
-

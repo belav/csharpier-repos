@@ -27,11 +27,26 @@ namespace System.Web.Configuration
         SHA1,
         TripleDES,
         AES,
-        [SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Justification = "Matches spec and previous shipped values")]
+
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1705:LongAcronymsShouldBePascalCased",
+            Justification = "Matches spec and previous shipped values"
+        )]
         HMACSHA256,
-        [SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Justification = "Matches spec and previous shipped values")]
+
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1705:LongAcronymsShouldBePascalCased",
+            Justification = "Matches spec and previous shipped values"
+        )]
         HMACSHA384,
-        [SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Justification = "Matches spec and previous shipped values")]
+
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1705:LongAcronymsShouldBePascalCased",
+            Justification = "Matches spec and previous shipped values"
+        )]
         HMACSHA512,
         Custom
     }

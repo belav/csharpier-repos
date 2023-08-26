@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System.Collections;
 
     public delegate void DataSourceViewSelectCallback(IEnumerable data);

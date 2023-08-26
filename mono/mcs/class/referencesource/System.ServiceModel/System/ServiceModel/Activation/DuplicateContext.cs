@@ -28,18 +28,12 @@ namespace System.ServiceModel.Activation
 
         public Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
         }
 
         public byte[] ReadData
         {
-            get
-            {
-                return this.readData;
-            }
+            get { return this.readData; }
         }
     }
 }

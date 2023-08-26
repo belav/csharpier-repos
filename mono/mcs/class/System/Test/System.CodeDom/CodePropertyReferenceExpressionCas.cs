@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,49 +35,54 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodePropertyReferenceExpressionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodePropertyReferenceExpressionCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression();
+            Assert.AreEqual(String.Empty, cpre.PropertyName, "PropertyName");
+            cpre.PropertyName = "mono";
+            Assert.IsNull(cpre.TargetObject, "TargetObject");
+            cpre.TargetObject = new CodeExpression();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeExpression target = new CodeExpression();
+            CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression(
+                target,
+                "mono"
+            );
+            Assert.AreEqual("mono", cpre.PropertyName, "PropertyName");
+            cpre.PropertyName = String.Empty;
+            Assert.AreSame(target, cpre.TargetObject, "TargetObject");
+            cpre.TargetObject = new CodeExpression();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression ();
-			Assert.AreEqual (String.Empty, cpre.PropertyName, "PropertyName");
-			cpre.PropertyName = "mono";
-			Assert.IsNull (cpre.TargetObject, "TargetObject");
-			cpre.TargetObject = new CodeExpression ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeExpression target = new CodeExpression ();
-			CodePropertyReferenceExpression cpre = new CodePropertyReferenceExpression (target, "mono");
-			Assert.AreEqual ("mono", cpre.PropertyName, "PropertyName");
-			cpre.PropertyName = String.Empty;
-			Assert.AreSame (target, cpre.TargetObject, "TargetObject");
-			cpre.TargetObject = new CodeExpression ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodePropertyReferenceExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodePropertyReferenceExpression).GetConstructor(
+                new Type[0]
+            );
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

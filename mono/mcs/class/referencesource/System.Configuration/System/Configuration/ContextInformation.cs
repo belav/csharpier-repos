@@ -8,30 +8,29 @@ using System;
 
 namespace System.Configuration
 {
-
     // ContextInformation
     //
     // Class that encapsulates all of the Context Information that
     // is going to be associated with a ConfigurationElement
     //
-    public sealed class ContextInformation 
+    public sealed class ContextInformation
     {
-        private bool   _hostingContextEvaluated;    // Do we know the Context?
-        private object _hostingContext;             // HostingContext
+        private bool _hostingContextEvaluated; // Do we know the Context?
+        private object _hostingContext; // HostingContext
         private BaseConfigurationRecord _configRecord;
 
         // Constructor
         //
         //
-        internal ContextInformation( BaseConfigurationRecord configRecord )
+        internal ContextInformation(BaseConfigurationRecord configRecord)
         {
             Debug.Assert(configRecord != null, "configRecord != null");
-            
+
             _hostingContextEvaluated = false;
-            _hostingContext          = null;
-            _configRecord            = configRecord;
+            _hostingContext = null;
+            _configRecord = configRecord;
         }
-        
+
         // HostingContext
         //
         // Retrieve the Context of the environment that we are being
@@ -42,7 +41,7 @@ namespace System.Configuration
         {
             get
             {
-                if ( !_hostingContextEvaluated )
+                if (!_hostingContextEvaluated)
                 {
                     // Retrieve Context
                     _hostingContext = _configRecord.ConfigContext;
@@ -61,11 +60,8 @@ namespace System.Configuration
         // and in what hierarchy you are in
         //
         public bool IsMachineLevel
-        { 
-            get
-            {
-                return _configRecord.IsMachineConfig;
-            }
+        {
+            get { return _configRecord.IsMachineConfig; }
         }
 
         // GetSection

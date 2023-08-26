@@ -11,11 +11,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class CallbackTimeoutsElement : BehaviorExtensionElement
     {
-        public CallbackTimeoutsElement()
-        {
-        }
+        public CallbackTimeoutsElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.TransactionTimeout, DefaultValue = ServiceDefaults.TransactionTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransactionTimeout,
+            DefaultValue = ServiceDefaults.TransactionTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan TransactionTimeout
@@ -46,4 +47,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

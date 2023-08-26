@@ -14,7 +14,9 @@ namespace System.ServiceModel.Syndication
     using System.Runtime.CompilerServices;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class SyndicationPerson : IExtensibleSyndicationObject
     {
         string email;
@@ -23,16 +25,17 @@ namespace System.ServiceModel.Syndication
         string uri;
 
         public SyndicationPerson()
-            : this((string)null)
-        {
-        }
+            : this((string)null) { }
 
         public SyndicationPerson(string email)
-            : this(email, null, null)
-        {
-        }
+            : this(email, null, null) { }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "The Uri represents a unique category and not a network location")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "The Uri represents a unique category and not a network location"
+        )]
         public SyndicationPerson(string email, string name, string uri)
         {
             this.name = name;
@@ -74,7 +77,12 @@ namespace System.ServiceModel.Syndication
             set { name = value; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Scope = "property", Justification = "The Uri represents a unique category and not a network location")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings",
+            Scope = "property",
+            Justification = "The Uri represents a unique category and not a network location"
+        )]
         public string Uri
         {
             get { return uri; }
@@ -86,7 +94,12 @@ namespace System.ServiceModel.Syndication
             return new SyndicationPerson(this);
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -106,7 +119,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

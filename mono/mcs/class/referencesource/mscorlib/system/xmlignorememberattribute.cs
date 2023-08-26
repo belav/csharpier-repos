@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -16,8 +16,6 @@
 
 namespace System
 {
-    [AttributeUsage(AttributeTargets.Property|AttributeTargets.Field)]
-    internal sealed class XmlIgnoreMemberAttribute : Attribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    internal sealed class XmlIgnoreMemberAttribute : Attribute { }
 }

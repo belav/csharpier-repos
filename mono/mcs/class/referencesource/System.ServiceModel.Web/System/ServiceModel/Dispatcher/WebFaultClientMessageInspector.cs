@@ -22,10 +22,13 @@ namespace System.ServiceModel.Dispatcher
         {
             if (reply != null)
             {
-                HttpResponseMessageProperty prop = (HttpResponseMessageProperty) reply.Properties[HttpResponseMessageProperty.Name];
+                HttpResponseMessageProperty prop = (HttpResponseMessageProperty)
+                    reply.Properties[HttpResponseMessageProperty.Name];
                 if (prop != null && prop.StatusCode == HttpStatusCode.InternalServerError)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(prop.StatusDescription));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(prop.StatusDescription)
+                    );
                 }
             }
         }

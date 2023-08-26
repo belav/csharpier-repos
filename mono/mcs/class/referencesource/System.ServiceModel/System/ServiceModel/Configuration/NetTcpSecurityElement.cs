@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class NetTcpSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = NetTcpSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = NetTcpSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(SecurityModeHelper))]
         public SecurityMode Mode
         {

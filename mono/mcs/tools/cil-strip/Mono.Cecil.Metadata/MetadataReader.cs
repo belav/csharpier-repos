@@ -26,204 +26,216 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
+namespace Mono.Cecil.Metadata
+{
+    using System;
+    using System.IO;
+    using System.Text;
 
-	using System;
-	using System.IO;
-	using System.Text;
+    using Mono.Cecil.Binary;
 
-	using Mono.Cecil.Binary;
+    sealed class MetadataReader : BaseMetadataVisitor
+    {
+        ImageReader m_ir;
+        BinaryReader m_binaryReader;
+        MetadataTableReader m_tableReader;
+        MetadataRoot m_root;
 
-	sealed class MetadataReader : BaseMetadataVisitor {
+        public MetadataTableReader TableReader
+        {
+            get { return m_tableReader; }
+        }
 
-		ImageReader m_ir;
-		BinaryReader m_binaryReader;
-		MetadataTableReader m_tableReader;
-		MetadataRoot m_root;
+        public MetadataReader(ImageReader brv)
+        {
+            m_ir = brv;
+            m_binaryReader = brv.GetReader();
+        }
 
-		public MetadataTableReader TableReader {
-			get { return m_tableReader; }
-		}
+        public MetadataRoot GetMetadataRoot()
+        {
+            return m_root;
+        }
 
-		public MetadataReader (ImageReader brv)
-		{
-			m_ir = brv;
-			m_binaryReader = brv.GetReader ();
-		}
+        public BinaryReader GetDataReader(RVA rva)
+        {
+            return m_ir.Image.GetReaderAtVirtualAddress(rva);
+        }
 
-		public MetadataRoot GetMetadataRoot ()
-		{
-			return m_root;
-		}
+        public override void VisitMetadataRoot(MetadataRoot root)
+        {
+            m_root = root;
+            root.Header = new MetadataRoot.MetadataRootHeader();
+            root.Streams = new MetadataStreamCollection();
+        }
 
-		public BinaryReader GetDataReader (RVA rva)
-		{
-			return m_ir.Image.GetReaderAtVirtualAddress (rva);
-		}
+        public override void VisitMetadataRootHeader(MetadataRoot.MetadataRootHeader header)
+        {
+            long headpos = m_binaryReader.BaseStream.Position;
 
-		public override void VisitMetadataRoot (MetadataRoot root)
-		{
-			m_root = root;
-			root.Header = new MetadataRoot.MetadataRootHeader ();
-			root.Streams = new MetadataStreamCollection ();
-		}
+            header.Signature = m_binaryReader.ReadUInt32();
 
-		public override void VisitMetadataRootHeader (MetadataRoot.MetadataRootHeader header)
-		{
-			long headpos = m_binaryReader.BaseStream.Position;
+            if (header.Signature != MetadataRoot.MetadataRootHeader.StandardSignature)
+                throw new MetadataFormatException("Wrong magic number");
 
-			header.Signature = m_binaryReader.ReadUInt32 ();
+            header.MajorVersion = m_binaryReader.ReadUInt16();
+            header.MinorVersion = m_binaryReader.ReadUInt16();
+            header.Reserved = m_binaryReader.ReadUInt32();
 
-			if (header.Signature != MetadataRoot.MetadataRootHeader.StandardSignature)
-				throw new MetadataFormatException ("Wrong magic number");
+            // read version
+            uint length = m_binaryReader.ReadUInt32();
+            if (length != 0)
+            {
+                long pos = m_binaryReader.BaseStream.Position;
 
-			header.MajorVersion = m_binaryReader.ReadUInt16 ();
-			header.MinorVersion = m_binaryReader.ReadUInt16 ();
-			header.Reserved = m_binaryReader.ReadUInt32 ();
+                byte[] version,
+                    buffer = new byte[length];
+                int read = 0;
+                while (read < length)
+                {
+                    byte cur = (byte)m_binaryReader.ReadSByte();
+                    if (cur == 0)
+                        break;
+                    buffer[read++] = cur;
+                }
+                version = new byte[read];
+                Buffer.BlockCopy(buffer, 0, version, 0, read);
+                header.Version = Encoding.UTF8.GetString(version, 0, version.Length);
 
-			// read version
-			uint length = m_binaryReader.ReadUInt32 ();
-			if (length != 0) {
-				long pos = m_binaryReader.BaseStream.Position;
+                pos += length - headpos + 3;
+                pos &= ~3;
+                pos += headpos;
 
-				byte [] version, buffer = new byte [length];
-				int read = 0;
-				while (read < length) {
-					byte cur = (byte)m_binaryReader.ReadSByte ();
-					if (cur == 0)
-						break;
-					buffer [read++] = cur;
-				}
-				version = new byte [read];
-				Buffer.BlockCopy (buffer, 0, version, 0, read);
-				header.Version = Encoding.UTF8.GetString (version, 0, version.Length);
+                m_binaryReader.BaseStream.Position = pos;
+            }
+            else
+                header.Version = string.Empty;
 
-				pos += length - headpos + 3;
-				pos &= ~3;
-				pos += headpos;
+            header.Flags = m_binaryReader.ReadUInt16();
+            header.Streams = m_binaryReader.ReadUInt16();
+        }
 
-				m_binaryReader.BaseStream.Position = pos;
-			} else
-				header.Version = string.Empty;
+        public override void VisitMetadataStreamCollection(MetadataStreamCollection coll)
+        {
+            for (int i = 0; i < m_root.Header.Streams; i++)
+                coll.Add(new MetadataStream());
+        }
 
-			header.Flags = m_binaryReader.ReadUInt16 ();
-			header.Streams = m_binaryReader.ReadUInt16 ();
-		}
+        public override void VisitMetadataStreamHeader(MetadataStream.MetadataStreamHeader header)
+        {
+            header.Offset = m_binaryReader.ReadUInt32();
+            header.Size = m_binaryReader.ReadUInt32();
 
-		public override void VisitMetadataStreamCollection (MetadataStreamCollection coll)
-		{
-			for (int i = 0; i < m_root.Header.Streams; i++)
-				coll.Add (new MetadataStream ());
-		}
+            StringBuilder buffer = new StringBuilder();
+            while (true)
+            {
+                char cur = (char)m_binaryReader.ReadSByte();
+                if (cur == '\0')
+                    break;
+                buffer.Append(cur);
+            }
+            header.Name = buffer.ToString();
+            if (header.Name.Length == 0)
+                throw new MetadataFormatException("Invalid stream name");
 
-		public override void VisitMetadataStreamHeader (MetadataStream.MetadataStreamHeader header)
-		{
-			header.Offset = m_binaryReader.ReadUInt32 ();
-			header.Size = m_binaryReader.ReadUInt32 ();
+            long rootpos = m_root
+                .GetImage()
+                .ResolveVirtualAddress(m_root.GetImage().CLIHeader.Metadata.VirtualAddress);
 
-			StringBuilder buffer = new StringBuilder ();
-			while (true) {
-				char cur = (char) m_binaryReader.ReadSByte ();
-				if (cur == '\0')
-					break;
-				buffer.Append (cur);
-			}
-			header.Name = buffer.ToString ();
-			if (header.Name.Length == 0)
-				throw new MetadataFormatException ("Invalid stream name");
+            long curpos = m_binaryReader.BaseStream.Position;
 
-			long rootpos = m_root.GetImage ().ResolveVirtualAddress (
-				m_root.GetImage ().CLIHeader.Metadata.VirtualAddress);
+            if (header.Size != 0)
+                curpos -= rootpos;
 
-			long curpos = m_binaryReader.BaseStream.Position;
+            curpos += 3;
+            curpos &= ~3;
 
-			if (header.Size != 0)
-				curpos -= rootpos;
+            if (header.Size != 0)
+                curpos += rootpos;
 
-			curpos += 3;
-			curpos &= ~3;
+            m_binaryReader.BaseStream.Position = curpos;
 
-			if (header.Size != 0)
-				curpos += rootpos;
+            header.Stream.Heap = MetadataHeap.HeapFactory(header.Stream);
+        }
 
-			m_binaryReader.BaseStream.Position = curpos;
+        public override void VisitGuidHeap(GuidHeap heap)
+        {
+            VisitHeap(heap);
+        }
 
-			header.Stream.Heap = MetadataHeap.HeapFactory (header.Stream);
-		}
+        public override void VisitStringsHeap(StringsHeap heap)
+        {
+            VisitHeap(heap);
 
-		public override void VisitGuidHeap (GuidHeap heap)
-		{
-			VisitHeap (heap);
-		}
+            if (heap.Data.Length < 1 && heap.Data[0] != 0)
+                throw new MetadataFormatException("Malformed #Strings heap");
 
-		public override void VisitStringsHeap (StringsHeap heap)
-		{
-			VisitHeap (heap);
+            heap[(uint)0] = string.Empty;
+        }
 
-			if (heap.Data.Length < 1 && heap.Data [0] != 0)
-				throw new MetadataFormatException ("Malformed #Strings heap");
+        public override void VisitTablesHeap(TablesHeap heap)
+        {
+            VisitHeap(heap);
+            heap.Tables = new TableCollection(heap);
 
-			heap [(uint) 0] = string.Empty;
-		}
+            BinaryReader br = new BinaryReader(new MemoryStream(heap.Data));
+            try
+            {
+                heap.Reserved = br.ReadUInt32();
+                heap.MajorVersion = br.ReadByte();
+                heap.MinorVersion = br.ReadByte();
+                heap.HeapSizes = br.ReadByte();
+                heap.Reserved2 = br.ReadByte();
+                heap.Valid = br.ReadInt64();
+                heap.Sorted = br.ReadInt64();
+            }
+            finally
+            {
+                // COMPACT FRAMEWORK NOTE: BinaryReader is not IDisposable
+                br.Close();
+            }
+        }
 
-		public override void VisitTablesHeap (TablesHeap heap)
-		{
-			VisitHeap (heap);
-			heap.Tables = new TableCollection (heap);
+        public override void VisitBlobHeap(BlobHeap heap)
+        {
+            VisitHeap(heap);
+        }
 
-			BinaryReader br = new BinaryReader (new MemoryStream (heap.Data));
-			try {
-				heap.Reserved = br.ReadUInt32 ();
-				heap.MajorVersion = br.ReadByte ();
-				heap.MinorVersion = br.ReadByte ();
-				heap.HeapSizes = br.ReadByte ();
-				heap.Reserved2 = br.ReadByte ();
-				heap.Valid = br.ReadInt64 ();
-				heap.Sorted = br.ReadInt64 ();
-			} finally {
-				// COMPACT FRAMEWORK NOTE: BinaryReader is not IDisposable
-				br.Close ();
-			}
-		}
+        public override void VisitUserStringsHeap(UserStringsHeap heap)
+        {
+            VisitHeap(heap);
+        }
 
-		public override void VisitBlobHeap (BlobHeap heap)
-		{
-			VisitHeap (heap);
-		}
+        void VisitHeap(MetadataHeap heap)
+        {
+            long cursor = m_binaryReader.BaseStream.Position;
 
-		public override void VisitUserStringsHeap (UserStringsHeap heap)
-		{
-			VisitHeap (heap);
-		}
+            m_binaryReader.BaseStream.Position =
+                m_root
+                    .GetImage()
+                    .ResolveVirtualAddress(m_root.GetImage().CLIHeader.Metadata.VirtualAddress)
+                + heap.GetStream().Header.Offset;
 
-		void VisitHeap (MetadataHeap heap)
-		{
-			long cursor = m_binaryReader.BaseStream.Position;
+            heap.Data = m_binaryReader.ReadBytes((int)heap.GetStream().Header.Size);
 
-			m_binaryReader.BaseStream.Position = m_root.GetImage ().ResolveVirtualAddress (
-				m_root.GetImage ().CLIHeader.Metadata.VirtualAddress)
-				+ heap.GetStream ().Header.Offset;
+            m_binaryReader.BaseStream.Position = cursor;
+        }
 
-			heap.Data = m_binaryReader.ReadBytes ((int) heap.GetStream ().Header.Size);
+        void SetHeapIndexSize(MetadataHeap heap, byte flag)
+        {
+            if (heap == null)
+                return;
+            TablesHeap th = m_root.Streams.TablesHeap;
+            heap.IndexSize = ((th.HeapSizes & flag) > 0) ? 4 : 2;
+        }
 
-			m_binaryReader.BaseStream.Position = cursor;
-		}
-
-		void SetHeapIndexSize (MetadataHeap heap, byte flag)
-		{
-			if (heap == null)
-				return;
-			TablesHeap th = m_root.Streams.TablesHeap;
-			heap.IndexSize = ((th.HeapSizes & flag) > 0) ? 4 : 2;
-		}
-
-		public override void TerminateMetadataRoot (MetadataRoot root)
-		{
-			SetHeapIndexSize (root.Streams.StringsHeap, 0x01);
-			SetHeapIndexSize (root.Streams.GuidHeap, 0x02);
-			SetHeapIndexSize (root.Streams.BlobHeap, 0x04);
-			m_tableReader = new MetadataTableReader (this);
-			root.Streams.TablesHeap.Tables.Accept (m_tableReader);
-		}
-	}
+        public override void TerminateMetadataRoot(MetadataRoot root)
+        {
+            SetHeapIndexSize(root.Streams.StringsHeap, 0x01);
+            SetHeapIndexSize(root.Streams.GuidHeap, 0x02);
+            SetHeapIndexSize(root.Streams.BlobHeap, 0x04);
+            m_tableReader = new MetadataTableReader(this);
+            root.Streams.TablesHeap.Tables.Accept(m_tableReader);
+        }
+    }
 }

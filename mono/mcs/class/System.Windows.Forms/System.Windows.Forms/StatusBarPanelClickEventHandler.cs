@@ -23,10 +23,10 @@
 //	Jackson Harper (jackson@ximian.com)
 
 
-namespace System.Windows.Forms {
-
-	public delegate void StatusBarPanelClickEventHandler (object sender,
-			StatusBarPanelClickEventArgs e);
-
+namespace System.Windows.Forms
+{
+    public delegate void StatusBarPanelClickEventHandler(
+        object sender,
+        StatusBarPanelClickEventArgs e
+    );
 }
-

@@ -21,7 +21,16 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
                 if (this.properties == null)
                 {
                     ConfigurationPropertyCollection properties = base.Properties;
-                    properties.Add(new ConfigurationProperty(TrackingConfigurationStrings.States, typeof(System.ServiceModel.Activities.Tracking.Configuration.StateElementCollection), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TrackingConfigurationStrings.States,
+                            typeof(System.ServiceModel.Activities.Tracking.Configuration.StateElementCollection),
+                            null,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;

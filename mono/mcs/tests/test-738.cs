@@ -4,18 +4,15 @@ using System;
 
 namespace TestNamespace
 {
-	public class ResumableInputStream
-	{
-		public ResumableInputStream()
-		{
-			stream.Dispose();
-		}
+    public class ResumableInputStream
+    {
+        public ResumableInputStream()
+        {
+            stream.Dispose();
+        }
 
-		private NonClosingStream stream;
-		
-		public static void Main ()
-		{
-		}
-	}
+        private NonClosingStream stream;
+
+        public static void Main() { }
+    }
 }
-

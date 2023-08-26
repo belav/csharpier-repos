@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,97 +34,97 @@ using System.Windows.Forms.Theming;
 
 namespace System.Windows.Forms
 {
-	public class ToolStripSystemRenderer : ToolStripRenderer
-	{
-		#region Public Constructor
-		public ToolStripSystemRenderer ()
-		{
-		}
-		#endregion
+    public class ToolStripSystemRenderer : ToolStripRenderer
+    {
+        #region Public Constructor
+        public ToolStripSystemRenderer() { }
+        #endregion
 
-		#region Protected Methods
-		protected override void OnRenderButtonBackground (ToolStripItemRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderButtonBackground (e);
+        #region Protected Methods
+        protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderButtonBackground(e);
 
-			base.OnRenderButtonBackground (e);
-		}
+            base.OnRenderButtonBackground(e);
+        }
 
-		protected override void OnRenderDropDownButtonBackground (ToolStripItemRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderDropDownButtonBackground (e);
+        protected override void OnRenderDropDownButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderDropDownButtonBackground(e);
 
-			base.OnRenderDropDownButtonBackground (e);
-		}
+            base.OnRenderDropDownButtonBackground(e);
+        }
 
-		protected override void OnRenderGrip (ToolStripGripRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderGrip (e);
+        protected override void OnRenderGrip(ToolStripGripRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderGrip(e);
 
-			base.OnRenderGrip (e);
-		}
+            base.OnRenderGrip(e);
+        }
 
-		protected override void OnRenderImageMargin (ToolStripRenderEventArgs e)
-		{
-			base.OnRenderImageMargin (e);
-		}
+        protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
+        {
+            base.OnRenderImageMargin(e);
+        }
 
-		protected override void OnRenderItemBackground (ToolStripItemRenderEventArgs e)
-		{
-			base.OnRenderItemBackground (e);
-		}
+        protected override void OnRenderItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            base.OnRenderItemBackground(e);
+        }
 
-		protected override void OnRenderLabelBackground (ToolStripItemRenderEventArgs e)
-		{
-			base.OnRenderLabelBackground (e);
-		}
+        protected override void OnRenderLabelBackground(ToolStripItemRenderEventArgs e)
+        {
+            base.OnRenderLabelBackground(e);
+        }
 
-		protected override void OnRenderMenuItemBackground (ToolStripItemRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderMenuItemBackground (e);
-			
-			base.OnRenderMenuItemBackground (e);
-		}
+        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderMenuItemBackground(e);
 
-		protected override void OnRenderOverflowButtonBackground (ToolStripItemRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderOverflowButtonBackground (e);
+            base.OnRenderMenuItemBackground(e);
+        }
 
-			base.OnRenderOverflowButtonBackground (e);
-		}
+        protected override void OnRenderOverflowButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderOverflowButtonBackground(e);
 
-		protected override void OnRenderSeparator (ToolStripSeparatorRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderSeparator (e);
+            base.OnRenderOverflowButtonBackground(e);
+        }
 
-			base.OnRenderSeparator (e);
-		}
+        protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderSeparator(e);
 
-		protected override void OnRenderSplitButtonBackground (ToolStripItemRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderSplitButtonBackground (e);
+            base.OnRenderSeparator(e);
+        }
 
-			base.OnRenderSplitButtonBackground (e);
-		}
+        protected override void OnRenderSplitButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderSplitButtonBackground(e);
 
-		protected override void OnRenderToolStripBackground (ToolStripRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderToolStripBackground (e);
+            base.OnRenderSplitButtonBackground(e);
+        }
 
-			base.OnRenderToolStripBackground (e);
-		}
+        protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderToolStripBackground(e);
 
-		protected override void OnRenderToolStripBorder (ToolStripRenderEventArgs e)
-		{
-			ThemeElements.CurrentTheme.ToolStripPainter.OnRenderToolStripBorder (e);
+            base.OnRenderToolStripBackground(e);
+        }
 
-			base.OnRenderToolStripBorder (e);
-		}
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+        {
+            ThemeElements.CurrentTheme.ToolStripPainter.OnRenderToolStripBorder(e);
 
-		protected override void OnRenderToolStripStatusLabelBackground (ToolStripItemRenderEventArgs e)
-		{
-			base.OnRenderToolStripStatusLabelBackground (e);
-		}
-		#endregion
-	}
+            base.OnRenderToolStripBorder(e);
+        }
+
+        protected override void OnRenderToolStripStatusLabelBackground(
+            ToolStripItemRenderEventArgs e
+        )
+        {
+            base.OnRenderToolStripStatusLabelBackground(e);
+        }
+        #endregion
+    }
 }

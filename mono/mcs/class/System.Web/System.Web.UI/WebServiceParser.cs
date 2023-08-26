@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,36 +33,39 @@ using System.Web.Compilation;
 
 namespace System.Web.UI
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class WebServiceParser : SimpleWebHandlerParser
-	{
-		WebServiceParser (HttpContext context, string virtualPath, string physicalPath)
-			: base (context, virtualPath, physicalPath)
-		{
-		}
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class WebServiceParser : SimpleWebHandlerParser
+    {
+        WebServiceParser(HttpContext context, string virtualPath, string physicalPath)
+            : base(context, virtualPath, physicalPath) { }
 
-		internal WebServiceParser (HttpContext context, VirtualPath virtualPath, TextReader reader)
-			: this (context, virtualPath, null, reader)
-		{
-		}
-		
-		internal WebServiceParser (HttpContext context, VirtualPath virtualPath, string physicalPath, TextReader reader)
-			: base (context, virtualPath.Original, physicalPath, reader)
-		{
-		}
+        internal WebServiceParser(HttpContext context, VirtualPath virtualPath, TextReader reader)
+            : this(context, virtualPath, null, reader) { }
 
-		public static Type GetCompiledType (string inputFile, HttpContext context)
-		{
-			return BuildManager.GetCompiledType (inputFile);
-		}
+        internal WebServiceParser(
+            HttpContext context,
+            VirtualPath virtualPath,
+            string physicalPath,
+            TextReader reader
+        )
+            : base(context, virtualPath.Original, physicalPath, reader) { }
 
-		protected override string DefaultDirectiveName {
-			get {
-				return "webservice";
-			}
-		}
-	}
+        public static Type GetCompiledType(string inputFile, HttpContext context)
+        {
+            return BuildManager.GetCompiledType(inputFile);
+        }
+
+        protected override string DefaultDirectiveName
+        {
+            get { return "webservice"; }
+        }
+    }
 }
-

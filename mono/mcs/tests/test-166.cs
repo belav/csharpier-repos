@@ -2,63 +2,58 @@ using System;
 
 interface ITargetInfo
 {
-	int TargetIntegerSize {
-		get;
-	}
+    int TargetIntegerSize { get; }
 }
 
-interface ITargetMemoryAccess : ITargetInfo
-{
-}
+interface ITargetMemoryAccess : ITargetInfo { }
 
-interface IInferior : ITargetMemoryAccess
-{
-}
+interface IInferior : ITargetMemoryAccess { }
 
 interface ITest
 {
-	int this [int index] {
-		get;
-	}
+    int this[int index] { get; }
 }
 
 class Test : ITest
 {
-	public int this [int index] {
-		get { return 5; }
-	}
+    public int this[int index]
+    {
+        get { return 5; }
+    }
 
-	int ITest.this [int index] {
-		get { return 8; }
-	}
+    int ITest.this[int index]
+    {
+        get { return 8; }
+    }
 }
 
 class D : IInferior
 {
-	public int TargetIntegerSize {
-		get { return 5; }
-	}
+    public int TargetIntegerSize
+    {
+        get { return 5; }
+    }
 
-	int Hello (IInferior inferior)
-	{
-		return inferior.TargetIntegerSize;
-	}
+    int Hello(IInferior inferior)
+    {
+        return inferior.TargetIntegerSize;
+    }
 
-	public static int Main ()
-	{
-		D d = new D ();
+    public static int Main()
+    {
+        D d = new D();
 
-		if (d.Hello (d) != 5)
-			return 1;
+        if (d.Hello(d) != 5)
+            return 1;
 
-		Test test = new Test ();
-		ITest itest = test;
+        Test test = new Test();
+        ITest itest = test;
 
-		if (test [0] != 5)
-			return 2;
-		if (itest [0] != 8)
-			return 3;
+        if (test[0] != 5)
+            return 2;
+        if (itest[0] != 8)
+            return 3;
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,21 +32,20 @@ using System.Text;
 
 namespace System.Web.UI.WebControls
 {
-	class ContainedTable : Table
-	{
-		WebControl _container;
+    class ContainedTable : Table
+    {
+        WebControl _container;
 
-		public ContainedTable (WebControl container)
-		{
-			_container = container;
-		}
+        public ContainedTable(WebControl container)
+        {
+            _container = container;
+        }
 
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			ControlStyle.CopyFrom (_container.ControlStyle);
-			base.AddAttributesToRender (writer);
-			writer.AddAttribute (HtmlTextWriterAttribute.Id, _container.ClientID);
-		}
-	}
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            ControlStyle.CopyFrom(_container.ControlStyle);
+            base.AddAttributesToRender(writer);
+            writer.AddAttribute(HtmlTextWriterAttribute.Id, _container.ClientID);
+        }
+    }
 }
-
