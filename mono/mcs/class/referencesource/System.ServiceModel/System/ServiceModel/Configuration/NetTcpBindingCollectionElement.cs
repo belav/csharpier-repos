@@ -8,12 +8,15 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class NetTcpBindingCollectionElement : StandardBindingCollectionElement<NetTcpBinding, NetTcpBindingElement>
+    public partial class NetTcpBindingCollectionElement
+        : StandardBindingCollectionElement<NetTcpBinding, NetTcpBindingElement>
     {
         internal static NetTcpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (NetTcpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.NetTcpBindingCollectionElementName);
+            return (NetTcpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.NetTcpBindingCollectionElementName
+                );
         }
-
     }
 }

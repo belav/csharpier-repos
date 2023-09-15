@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-
+namespace System.Net
+{
     // These are not in sync with the flags IIS uses for the metabase. I guess that's OK.
     // For reference IIS actually uses a combination of flags to figure out what challenge to send out:
     // AuthAnonymous, AuthBasic, AuthMD5, AuthPassport, AuthNTLM: these are bool values
@@ -19,7 +19,8 @@ namespace System.Net {
     // Passport     0x00000040
 
     [Flags]
-    public enum AuthenticationSchemes {
+    public enum AuthenticationSchemes
+    {
         None = 0x00000000,
         Digest = 0x00000001,
         Negotiate = 0x00000002,
@@ -30,6 +31,4 @@ namespace System.Net {
 
         IntegratedWindowsAuthentication = Negotiate | Ntlm,
     }
-
 }
-

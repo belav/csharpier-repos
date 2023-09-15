@@ -1,23 +1,23 @@
 public interface IHelloWorldWriter
 {
-	int WriteIt();
+    int WriteIt();
 }
 
 public class RealWriter : IHelloWorldWriter
 {
-	public int WriteIt()
-	{
-		return 33;
-	}
+    public int WriteIt()
+    {
+        return 33;
+    }
 }
 
-public class ProjectName {
-	static int Main()
-	{
-       		IHelloWorldWriter writer = new RealWriter();
-		if (writer.WriteIt() != 33)
-			return 1;
-		return 0;
-    	}
+public class ProjectName
+{
+    static int Main()
+    {
+        IHelloWorldWriter writer = new RealWriter();
+        if (writer.WriteIt() != 33)
+            return 1;
+        return 0;
+    }
 }
-

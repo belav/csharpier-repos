@@ -11,17 +11,15 @@ namespace System.Xaml.Hosting.Configuration
 
     public sealed class XamlHostingSectionGroup : ConfigurationSectionGroup
     {
-        public XamlHostingSectionGroup()
-        {
-        }
+        public XamlHostingSectionGroup() { }
 
         public XamlHostingSection XamlHostingSection
         {
             get
             {
-                return (XamlHostingSection)this.Sections[XamlHostingConfiguration.XamlHostingConfigGroup];
+                return (XamlHostingSection)
+                    this.Sections[XamlHostingConfiguration.XamlHostingConfigGroup];
             }
         }
     }
 }
-

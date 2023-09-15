@@ -24,7 +24,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Creates a slot for <paramref name="statement"/>.
         /// </summary>
-        internal CaseStatementProjectedSlot(CaseStatement statement, IEnumerable<WithRelationship> withRelationships)
+        internal CaseStatementProjectedSlot(
+            CaseStatement statement,
+            IEnumerable<WithRelationship> withRelationships
+        )
         {
             m_caseStatement = statement;
             m_withRelationships = withRelationships;
@@ -51,7 +54,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return new CaseStatementProjectedSlot(newStatement, null);
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias,
+            int indentLevel
+        )
         {
             m_caseStatement.AsEsql(builder, m_withRelationships, blockAlias, indentLevel);
             return builder;

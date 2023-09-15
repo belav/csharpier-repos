@@ -3,7 +3,7 @@
 namespace System.Json
 {
     /// <summary>
-    /// An enumeration that specifies primitive and structured JavaScript Object 
+    /// An enumeration that specifies primitive and structured JavaScript Object
     /// Notation (JSON) common language runtime (CLR) types.
     /// </summary>
     public enum JsonType

@@ -29,38 +29,36 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class ProjectFinishedEventArgs : BuildStatusEventArgs {
-	
-		string	projectFile;
-		bool	succeeded;
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class ProjectFinishedEventArgs : BuildStatusEventArgs
+    {
+        string projectFile;
+        bool succeeded;
 
-		protected ProjectFinishedEventArgs ()
-		{
-		}
+        protected ProjectFinishedEventArgs() { }
 
-		public ProjectFinishedEventArgs (string message,
-						 string helpKeyword,
-						 string projectFile,
-						 bool succeeded)
-			: base (message, helpKeyword, null)
-		{
-			this.projectFile = projectFile;
-			this.succeeded = succeeded;
-		}
+        public ProjectFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            bool succeeded
+        )
+            : base(message, helpKeyword, null)
+        {
+            this.projectFile = projectFile;
+            this.succeeded = succeeded;
+        }
 
-		public string ProjectFile {
-			get {
-				return projectFile;
-			}
-		}
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
 
-		public bool Succeeded {
-			get {
-				return succeeded;
-			}
-		}
-	}
+        public bool Succeeded
+        {
+            get { return succeeded; }
+        }
+    }
 }
-

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,77 +34,83 @@ using System.Runtime.Serialization;
 
 namespace System.Xml.Query
 {
-	[Serializable]
-	public class XmlQueryException : SystemException
-	{
-		#region Constructors
+    [Serializable]
+    public class XmlQueryException : SystemException
+    {
+        #region Constructors
 
-		[MonoTODO]
-		protected XmlQueryException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected XmlQueryException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            throw new NotImplementedException();
+        }
 
-		public XmlQueryException ()
-			: base ("An XML Query Exception has occurred.")
-		{
-		}
+        public XmlQueryException()
+            : base("An XML Query Exception has occurred.") { }
 
-		public XmlQueryException (string res)
-			: this (res, null, null, null)
-		{
-		}
+        public XmlQueryException(string res)
+            : this(res, null, null, null) { }
 
-		public XmlQueryException (string resource, Exception exception)
-			: this (resource, null, null, exception)
-		{
-		}
+        public XmlQueryException(string resource, Exception exception)
+            : this(resource, null, null, exception) { }
 
-		internal XmlQueryException (string message, IXmlLineInfo lineInfo, string sourceUri, Exception innerException)
-			: base (BuildMessage (message, lineInfo, sourceUri), innerException)
-		{
-		}
+        internal XmlQueryException(
+            string message,
+            IXmlLineInfo lineInfo,
+            string sourceUri,
+            Exception innerException
+        )
+            : base(BuildMessage(message, lineInfo, sourceUri), innerException) { }
 
-		static string BuildMessage (string message, IXmlLineInfo li, string sourceUri)
-		{
-			if (li != null && li.HasLineInfo ()) {
-				message = String.Format ("{0}. Location: {1} ({2}, {3}).", message, sourceUri, li.LineNumber, li.LinePosition);
-			}
-			else if (sourceUri != null)
-				message = String.Format ("{0}. Location: {1}", message, sourceUri);
-			return message;
-		}
+        static string BuildMessage(string message, IXmlLineInfo li, string sourceUri)
+        {
+            if (li != null && li.HasLineInfo())
+            {
+                message = String.Format(
+                    "{0}. Location: {1} ({2}, {3}).",
+                    message,
+                    sourceUri,
+                    li.LineNumber,
+                    li.LinePosition
+                );
+            }
+            else if (sourceUri != null)
+                message = String.Format("{0}. Location: {1}", message, sourceUri);
+            return message;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[MonoTODO]
-		public int LineNumber {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public int LineNumber
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public int LinePosition {
-			get { throw new NotImplementedException (); }
-		}
-	
-		[MonoTODO]
-		public string SourceUri {
-			get { throw new NotImplementedException(); }
-		}
+        [MonoTODO]
+        public int LinePosition
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		#endregion // Properties
+        [MonoTODO]
+        public string SourceUri
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		[MonoTODO]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException();
-		}
-		#endregion // Methods
-	}
+        #region Methods
+
+        [MonoTODO]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion // Methods
+    }
 }
-

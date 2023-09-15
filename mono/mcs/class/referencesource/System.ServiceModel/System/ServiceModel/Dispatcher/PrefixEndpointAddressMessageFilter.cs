@@ -22,11 +22,12 @@ namespace System.ServiceModel.Dispatcher
         HostNameComparisonMode hostNameComparisonMode;
 
         public PrefixEndpointAddressMessageFilter(EndpointAddress address)
-            : this(address, false)
-        {
-        }
+            : this(address, false) { }
 
-        public PrefixEndpointAddressMessageFilter(EndpointAddress address, bool includeHostNameInComparison)
+        public PrefixEndpointAddressMessageFilter(
+            EndpointAddress address,
+            bool includeHostNameInComparison
+        )
         {
             if (address == null)
             {
@@ -36,7 +37,7 @@ namespace System.ServiceModel.Dispatcher
             this.address = address;
             this.helper = new EndpointAddressMessageFilterHelper(this.address);
 
-            this.hostNameComparisonMode = includeHostNameInComparison 
+            this.hostNameComparisonMode = includeHostNameInComparison
                 ? HostNameComparisonMode.Exact
                 : HostNameComparisonMode.StrongWildcard;
 
@@ -101,6 +102,5 @@ namespace System.ServiceModel.Dispatcher
         {
             get { return this.helper.HeaderLookup; }
         }
-
     }
 }

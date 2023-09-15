@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,7 +25,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInput"></typeparam>
     internal sealed class ContainsSearchOperator<TInput> : UnaryQueryOperator<TInput, bool>
     {
-
         private readonly TInput m_searchValue; // The value for which we are searching.
         private readonly IEqualityComparer<TInput> m_comparer; // The comparer to use for equality tests.
 
@@ -38,8 +37,12 @@ namespace System.Linq.Parallel
         //     comparer    - a comparison routine used to test equality.
         //
 
-        internal ContainsSearchOperator(IEnumerable<TInput> child, TInput searchValue, IEqualityComparer<TInput> comparer)
-            :base(child)
+        internal ContainsSearchOperator(
+            IEnumerable<TInput> child,
+            TInput searchValue,
+            IEqualityComparer<TInput> comparer
+        )
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
 
@@ -62,11 +65,16 @@ namespace System.Linq.Parallel
 
         internal bool Aggregate()
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // could do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<bool> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<bool> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Any value of true means the element was found. We needn't consult all partitions
                 while (enumerator.MoveNext())
@@ -93,18 +101,31 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<bool> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<bool> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
-
             int partitionCount = inputStream.PartitionCount;
-            PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+            PartitionedStream<bool, int> outputStream = new PartitionedStream<bool, int>(
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Correct
+            );
 
             // Create a shared cancelation variable
             Shared<bool> resultFoundFlag = new Shared<bool>(false);
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new ContainsSearchOperatorEnumerator<TKey>(inputStream[i], m_searchValue, m_comparer, i, resultFoundFlag, 
-                    settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new ContainsSearchOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    m_searchValue,
+                    m_comparer,
+                    i,
+                    resultFoundFlag,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -116,7 +137,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<bool> AsSequentialQuery(CancellationToken token)
         {
-            Contract.Assert(false, "This method should never be called as it is an ending operator with LimitsParallelism=false.");
+            Contract.Assert(
+                false,
+                "This method should never be called as it is an ending operator with LimitsParallelism=false."
+            );
             throw new NotSupportedException();
         }
 
@@ -149,9 +173,14 @@ namespace System.Linq.Parallel
             // Instantiates a new any/all search operator.
             //
 
-            internal ContainsSearchOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source, TInput searchValue,
-                                                      IEqualityComparer<TInput> comparer, int partitionIndex, Shared<bool> resultFoundFlag,
-                CancellationToken cancellationToken)
+            internal ContainsSearchOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                TInput searchValue,
+                IEqualityComparer<TInput> comparer,
+                int partitionIndex,
+                Shared<bool> resultFoundFlag,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(comparer != null);
@@ -209,8 +238,7 @@ namespace System.Linq.Parallel
                             currentElement = true;
                             break;
                         }
-                    }
-                    while (m_source.MoveNext(ref element, ref keyUnused));
+                    } while (m_source.MoveNext(ref element, ref keyUnused));
 
                     return true;
                 }

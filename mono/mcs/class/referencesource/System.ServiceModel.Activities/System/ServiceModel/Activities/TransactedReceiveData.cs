@@ -10,25 +10,16 @@ namespace System.ServiceModel.Activities
     [DataContract]
     class TransactedReceiveData
     {
-        const string propertyName = "System.ServiceModel.Activities.TransactedReceiveDataExecutionPropertyName";
+        const string propertyName =
+            "System.ServiceModel.Activities.TransactedReceiveDataExecutionPropertyName";
 
-        public TransactedReceiveData()
-        {
-        }
+        public TransactedReceiveData() { }
 
         public static string TransactedReceiveDataExecutionPropertyName
         {
-            get
-            {
-                return propertyName;
-            }
+            get { return propertyName; }
         }
 
-        public Transaction InitiatingTransaction
-        {
-            get;
-            set;
-        }
+        public Transaction InitiatingTransaction { get; set; }
     }
 }
-

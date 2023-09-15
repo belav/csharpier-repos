@@ -17,14 +17,17 @@ namespace System.Activities
         static BookmarkScope defaultBookmarkScope;
 
         long temporaryId;
-                
+
         Guid id;
 
         int handleReferenceCount;
 
         internal BookmarkScope(long temporaryId)
         {
-            Fx.Assert(temporaryId != default(long), "Should never call this constructor with the default value.");
+            Fx.Assert(
+                temporaryId != default(long),
+                "Should never call this constructor with the default value."
+            );
             this.temporaryId = temporaryId;
         }
 
@@ -41,18 +44,12 @@ namespace System.Activities
 
         public bool IsInitialized
         {
-            get
-            {
-                return this.temporaryId == default(long);
-            }
+            get { return this.temporaryId == default(long); }
         }
 
         public Guid Id
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
             internal set
             {
                 Fx.Assert(value != Guid.Empty, "Cannot set this to Guid.Empty.");
@@ -89,10 +86,7 @@ namespace System.Activities
 
         internal long TemporaryId
         {
-            get
-            {
-                return this.temporaryId;
-            }
+            get { return this.temporaryId; }
         }
 
         public static BookmarkScope Default
@@ -136,7 +130,9 @@ namespace System.Activities
 
             if (this.IsInitialized)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkScopeAlreadyInitialized));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkScopeAlreadyInitialized)
+                );
             }
 
             context.InitializeBookmarkScope(this, id);
@@ -162,7 +158,9 @@ namespace System.Activities
             }
             else
             {
-                return new BookmarkScopeInfo(this.temporaryId.ToString(CultureInfo.InvariantCulture));
+                return new BookmarkScopeInfo(
+                    this.temporaryId.ToString(CultureInfo.InvariantCulture)
+                );
             }
         }
 
@@ -184,7 +182,10 @@ namespace System.Activities
             }
             else if (this.IsInitialized)
             {
-                Fx.Assert(this.id != Guid.Empty, "If we're not the default but we're initialized then we must have a non-Empty Guid.");
+                Fx.Assert(
+                    this.id != Guid.Empty,
+                    "If we're not the default but we're initialized then we must have a non-Empty Guid."
+                );
 
                 if (other.id == this.id)
                 {
@@ -197,7 +198,10 @@ namespace System.Activities
             }
             else
             {
-                Fx.Assert(this.temporaryId != 0, "We should have a non-zero temp id if we're not the default and not initialized.");
+                Fx.Assert(
+                    this.temporaryId != 0,
+                    "We should have a non-zero temp id if we're not the default and not initialized."
+                );
 
                 if (other.temporaryId == this.temporaryId)
                 {

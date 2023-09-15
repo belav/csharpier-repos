@@ -14,9 +14,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class CertificateElement : ConfigurationElement
     {
-        public CertificateElement()
-        {
-        }
+        public CertificateElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.EncodedValue, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
@@ -34,5 +32,4 @@ namespace System.ServiceModel.Configuration
             }
         }
     }
-
 }

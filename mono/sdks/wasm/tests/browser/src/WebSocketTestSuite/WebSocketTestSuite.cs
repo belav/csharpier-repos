@@ -14,17 +14,15 @@ namespace TestSuite
 
             if (!string.IsNullOrEmpty(protocols))
             {
-
                 foreach (var p in protocols.Split(';'))
                 {
                     cws.Options.AddSubProtocol(p);
                 }
-
             }
 
             return cws;
-
         }
+
         public async Task<int> ConnectWebSocketStatus(Uri server, string protocols)
         {
             var cws = CreateWebSocket(server, protocols);
@@ -55,7 +53,6 @@ namespace TestSuite
             WebSocketCloseStatus status = cws.CloseStatus ?? WebSocketCloseStatus.Empty;
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -81,7 +78,6 @@ namespace TestSuite
             var state = cws.State;
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -107,13 +103,16 @@ namespace TestSuite
             var state = cws.State;
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
                     await taskConnect;
                     if (cws.State == WebSocketState.Open)
-                        await cws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Hic sunt Dracones!!", CancellationToken.None);
+                        await cws.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            "Hic sunt Dracones!!",
+                            CancellationToken.None
+                        );
                 }
                 catch (Exception exc)
                 {
@@ -135,7 +134,6 @@ namespace TestSuite
             var state = cws.State;
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -143,11 +141,15 @@ namespace TestSuite
                     if (cws.State == WebSocketState.Open)
                     {
                         var sndBuffer = Encoding.UTF8.GetBytes("closeme");
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None
+                        );
                         var rcvBuffer = new ArraySegment<byte>(new byte[4096]);
                         var r = await cws.ReceiveAsync(rcvBuffer, CancellationToken.None);
                     }
-
                 }
                 catch (Exception exc)
                 {
@@ -166,10 +168,10 @@ namespace TestSuite
         {
             var cws = CreateWebSocket(server, protocols);
 
-            var description = $"{{ \"code\": \"{cws.CloseStatus}\", \"desc\": \"{cws.CloseStatusDescription}\" }}";
+            var description =
+                $"{{ \"code\": \"{cws.CloseStatus}\", \"desc\": \"{cws.CloseStatusDescription}\" }}";
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -177,11 +179,15 @@ namespace TestSuite
                     if (cws.State == WebSocketState.Open)
                     {
                         var sndBuffer = Encoding.UTF8.GetBytes("closeme");
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None
+                        );
                         var rcvBuffer = new ArraySegment<byte>(new byte[4096]);
                         var r = await cws.ReceiveAsync(rcvBuffer, CancellationToken.None);
                     }
-
                 }
                 catch (Exception exc)
                 {
@@ -189,7 +195,8 @@ namespace TestSuite
                 }
                 finally
                 {
-                    description = $"{{ \"code\": \"{cws.CloseStatus}\", \"desc\": \"{cws.CloseStatusDescription}\" }}";
+                    description =
+                        $"{{ \"code\": \"{cws.CloseStatus}\", \"desc\": \"{cws.CloseStatusDescription}\" }}";
                     cws = null;
                 }
             }
@@ -202,7 +209,6 @@ namespace TestSuite
 
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -210,12 +216,16 @@ namespace TestSuite
                     if (cws.State == WebSocketState.Open)
                     {
                         var sndBuffer = Encoding.UTF8.GetBytes(text);
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None
+                        );
                         var rcvBuffer = new ArraySegment<byte>(new byte[4096]);
                         var r = await cws.ReceiveAsync(rcvBuffer, CancellationToken.None);
                         return Encoding.UTF8.GetString(rcvBuffer.Array, rcvBuffer.Offset, r.Count);
                     }
-
                 }
                 catch (Exception exc)
                 {
@@ -235,7 +245,6 @@ namespace TestSuite
 
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -243,12 +252,16 @@ namespace TestSuite
                     if (cws.State == WebSocketState.Open)
                     {
                         var sndBuffer = Encoding.UTF8.GetBytes(text);
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer), WebSocketMessageType.Binary, true, CancellationToken.None);
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer),
+                            WebSocketMessageType.Binary,
+                            true,
+                            CancellationToken.None
+                        );
                         var rcvBuffer = new ArraySegment<byte>(new byte[4096]);
                         var r = await cws.ReceiveAsync(rcvBuffer, CancellationToken.None);
                         return Encoding.UTF8.GetString(rcvBuffer.Array, rcvBuffer.Offset, r.Count);
                     }
-
                 }
                 catch (Exception exc)
                 {
@@ -262,13 +275,16 @@ namespace TestSuite
             return "SomethingWentWrong";
         }
 
-        public async Task<string> WebSocketSendBinaryPartial(Uri server, string protocols, string text)
+        public async Task<string> WebSocketSendBinaryPartial(
+            Uri server,
+            string protocols,
+            string text
+        )
         {
             var cws = CreateWebSocket(server, protocols);
 
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -276,13 +292,22 @@ namespace TestSuite
                     if (cws.State == WebSocketState.Open)
                     {
                         var sndBuffer = Encoding.UTF8.GetBytes(text);
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer, 0, 2), WebSocketMessageType.Binary, false, CancellationToken.None);
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer, 2, sndBuffer.Length - 2), WebSocketMessageType.Binary, true, CancellationToken.None);
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer, 0, 2),
+                            WebSocketMessageType.Binary,
+                            false,
+                            CancellationToken.None
+                        );
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer, 2, sndBuffer.Length - 2),
+                            WebSocketMessageType.Binary,
+                            true,
+                            CancellationToken.None
+                        );
                         var rcvBuffer = new ArraySegment<byte>(new byte[4096]);
                         var r = await cws.ReceiveAsync(rcvBuffer, CancellationToken.None);
                         return Encoding.UTF8.GetString(rcvBuffer.Array, rcvBuffer.Offset, r.Count);
                     }
-
                 }
                 catch (Exception exc)
                 {
@@ -295,13 +320,17 @@ namespace TestSuite
             }
             return "SomethingWentWrong";
         }
-        public async Task<string> WebSocketSendTextPartial(Uri server, string protocols, string text)
+
+        public async Task<string> WebSocketSendTextPartial(
+            Uri server,
+            string protocols,
+            string text
+        )
         {
             var cws = CreateWebSocket(server, protocols);
 
             using (var cts2 = new CancellationTokenSource(500))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -309,23 +338,40 @@ namespace TestSuite
                     if (cws.State == WebSocketState.Open)
                     {
                         var sndBuffer = Encoding.UTF8.GetBytes(text);
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer, 0, 2), WebSocketMessageType.Text, false, CancellationToken.None);
-                        await cws.SendAsync(new ArraySegment<byte>(sndBuffer, 2, sndBuffer.Length - 2), WebSocketMessageType.Text, true, CancellationToken.None);
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer, 0, 2),
+                            WebSocketMessageType.Text,
+                            false,
+                            CancellationToken.None
+                        );
+                        await cws.SendAsync(
+                            new ArraySegment<byte>(sndBuffer, 2, sndBuffer.Length - 2),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None
+                        );
 
                         var rcvBuffer = new ArraySegment<byte>(new byte[4096]);
                         var r = 0;
                         WebSocketReceiveResult receiveResult;
 
-                        while (true) {
-                            receiveResult =  await cws.ReceiveAsync(rcvBuffer, CancellationToken.None);
-                            r+= receiveResult.Count;
+                        while (true)
+                        {
+                            receiveResult = await cws.ReceiveAsync(
+                                rcvBuffer,
+                                CancellationToken.None
+                            );
+                            r += receiveResult.Count;
                             if (receiveResult.EndOfMessage)
                                 break;
-                            rcvBuffer = new ArraySegment<byte>(rcvBuffer.Array, r, rcvBuffer.Array.Length - r);
+                            rcvBuffer = new ArraySegment<byte>(
+                                rcvBuffer.Array,
+                                r,
+                                rcvBuffer.Array.Length - r
+                            );
                         }
                         return Encoding.UTF8.GetString(rcvBuffer.Array, 0, r);
                     }
-
                 }
                 catch (Exception exc)
                 {
@@ -346,7 +392,6 @@ namespace TestSuite
             var state = cws.State;
             using (var cts2 = new CancellationTokenSource(4000))
             {
-
                 try
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts2.Token);
@@ -364,6 +409,5 @@ namespace TestSuite
             }
             return state;
         }
-
     }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,22 +34,24 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class ScriptingWebServicesSectionGroup : ConfigurationSectionGroup
-	{
-		[ConfigurationProperty ("authenticationService")]
-		public ScriptingAuthenticationServiceSection AuthenticationService {
-			get { return (ScriptingAuthenticationServiceSection) Sections ["authenticationService"]; }
-		}
+    public sealed class ScriptingWebServicesSectionGroup : ConfigurationSectionGroup
+    {
+        [ConfigurationProperty("authenticationService")]
+        public ScriptingAuthenticationServiceSection AuthenticationService
+        {
+            get { return (ScriptingAuthenticationServiceSection)Sections["authenticationService"]; }
+        }
 
-		[ConfigurationProperty ("jsonSerialization")]
-		public ScriptingJsonSerializationSection JsonSerialization {
-			get { return (ScriptingJsonSerializationSection) Sections ["jsonSerialization"]; }
-		}
+        [ConfigurationProperty("jsonSerialization")]
+        public ScriptingJsonSerializationSection JsonSerialization
+        {
+            get { return (ScriptingJsonSerializationSection)Sections["jsonSerialization"]; }
+        }
 
-		[ConfigurationProperty ("profileService")]
-		public ScriptingProfileServiceSection ProfileService {
-			get { return (ScriptingProfileServiceSection) Sections ["profileService"]; }
-		}
-
-	}
+        [ConfigurationProperty("profileService")]
+        public ScriptingProfileServiceSection ProfileService
+        {
+            get { return (ScriptingProfileServiceSection)Sections["profileService"]; }
+        }
+    }
 }

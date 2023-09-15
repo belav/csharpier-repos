@@ -13,15 +13,18 @@ namespace System.Runtime.Serialization.Json
     class JsonStringDataContract : JsonDataContract
     {
         public JsonStringDataContract(StringDataContract traditionalStringDataContract)
-            : base(traditionalStringDataContract)
-        {
-        }
+            : base(traditionalStringDataContract) { }
 
-        public override object ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public override object ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             if (context == null)
             {
-                return TryReadNullAtTopLevel(jsonReader) ? null : jsonReader.ReadElementContentAsString();
+                return TryReadNullAtTopLevel(jsonReader)
+                    ? null
+                    : jsonReader.ReadElementContentAsString();
             }
             else
             {

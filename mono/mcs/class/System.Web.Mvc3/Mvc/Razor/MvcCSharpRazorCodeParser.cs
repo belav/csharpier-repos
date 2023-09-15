@@ -33,7 +33,14 @@ namespace System.Web.Mvc.Razor
         {
             if (_modelStatementFound && _endInheritsLocation.HasValue)
             {
-                Context.OnError(_endInheritsLocation.Value, String.Format(CultureInfo.CurrentCulture, MvcResources.MvcRazorCodeParser_CannotHaveModelAndInheritsKeyword, ModelKeyword));
+                Context.OnError(
+                    _endInheritsLocation.Value,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.MvcRazorCodeParser_CannotHaveModelAndInheritsKeyword,
+                        ModelKeyword
+                    )
+                );
             }
         }
 
@@ -46,13 +53,24 @@ namespace System.Web.Mvc.Razor
             SourceLocation endModelLocation = CurrentLocation;
 
             BaseTypeDirective(
-                String.Format(CultureInfo.CurrentCulture,
-                              MvcResources.MvcRazorCodeParser_ModelKeywordMustBeFollowedByTypeName, ModelKeyword),
-                CreateModelCodeGenerator);
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.MvcRazorCodeParser_ModelKeywordMustBeFollowedByTypeName,
+                    ModelKeyword
+                ),
+                CreateModelCodeGenerator
+            );
 
             if (_modelStatementFound)
             {
-                Context.OnError(endModelLocation, String.Format(CultureInfo.CurrentCulture, MvcResources.MvcRazorCodeParser_OnlyOneModelStatementIsAllowed, ModelKeyword));
+                Context.OnError(
+                    endModelLocation,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.MvcRazorCodeParser_OnlyOneModelStatementIsAllowed,
+                        ModelKeyword
+                    )
+                );
             }
 
             _modelStatementFound = true;

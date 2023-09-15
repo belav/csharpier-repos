@@ -5,9 +5,7 @@ using StringList = System.String;
 
 [assembly: AssemblyTitle("Title")]
 
-class Test {
-	public static void Main ()
-	{
-	}
+class Test
+{
+    public static void Main() { }
 }
-

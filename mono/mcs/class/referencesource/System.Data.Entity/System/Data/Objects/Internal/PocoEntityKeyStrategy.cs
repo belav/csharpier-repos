@@ -24,9 +24,7 @@ namespace System.Data.Objects.Internal
         /// <summary>
         /// Creates a new strategy object; no reference to the actual entity is required.
         /// </summary>
-        public PocoEntityKeyStrategy()
-        {
-        }
+        public PocoEntityKeyStrategy() { }
 
         // See IEntityKeyStrategy
         public EntityKey GetEntityKey()

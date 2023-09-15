@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,29 +37,30 @@ using System.Xml;
 
 namespace Mono.ServiceModel.IdentitySelectors
 {
-	public class CardSelectionContext
-	{
-		EndpointAddress target;
-		EndpointAddress issuer;
-		Collection<ClaimTypeRequirement> requirements;
-		Collection<XmlElement> additional_parameters;
-		Uri policy_link;
-		int policy_ver;
+    public class CardSelectionContext
+    {
+        EndpointAddress target;
+        EndpointAddress issuer;
+        Collection<ClaimTypeRequirement> requirements;
+        Collection<XmlElement> additional_parameters;
+        Uri policy_link;
+        int policy_ver;
 
-		public CardSelectionContext (
-			EndpointAddress target,
-			EndpointAddress issuer,
-			Collection<ClaimTypeRequirement> requirements,
-			Collection<XmlElement> additionalRequestParameters,
-			Uri policyNoticeLink,
-			int policyNoticeVersion)
-		{
-			this.target = target;
-			this.issuer = issuer;
-			this.requirements = requirements;
-			additional_parameters = additionalRequestParameters;
-			policy_link = policyNoticeLink;
-			policy_ver = policyNoticeVersion;
-		}
-	}
+        public CardSelectionContext(
+            EndpointAddress target,
+            EndpointAddress issuer,
+            Collection<ClaimTypeRequirement> requirements,
+            Collection<XmlElement> additionalRequestParameters,
+            Uri policyNoticeLink,
+            int policyNoticeVersion
+        )
+        {
+            this.target = target;
+            this.issuer = issuer;
+            this.requirements = requirements;
+            additional_parameters = additionalRequestParameters;
+            policy_link = policyNoticeLink;
+            policy_ver = policyNoticeVersion;
+        }
+    }
 }

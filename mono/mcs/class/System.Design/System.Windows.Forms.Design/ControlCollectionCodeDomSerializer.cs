@@ -39,11 +39,8 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
-	{
-
-		public ControlCollectionCodeDomSerializaer ()
-		{
-		}
-	}
+    internal class ControlCollectionCodeDomSerializaer : CollectionCodeDomSerializer
+    {
+        public ControlCollectionCodeDomSerializaer() { }
+    }
 }

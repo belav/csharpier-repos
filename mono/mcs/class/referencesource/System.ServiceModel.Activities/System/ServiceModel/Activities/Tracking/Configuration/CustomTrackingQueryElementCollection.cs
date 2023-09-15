@@ -8,10 +8,13 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(CustomTrackingQueryElement),
+    [ConfigurationCollection(
+        typeof(CustomTrackingQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.CustomTrackingQuery)]
-    public class CustomTrackingQueryElementCollection : TrackingConfigurationCollection<CustomTrackingQueryElement>
+        AddItemName = TrackingConfigurationStrings.CustomTrackingQuery
+    )]
+    public class CustomTrackingQueryElementCollection
+        : TrackingConfigurationCollection<CustomTrackingQueryElement>
     {
         protected override string ElementName
         {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,50 +54,57 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class PolicyImporterElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty type;
+    public sealed class PolicyImporterElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty type;
 
-		static PolicyImporterElement () {
-			properties = new ConfigurationPropertyCollection ();
-			type = new ConfigurationProperty ("type",
-				typeof (string), null, new StringConverter (), new StringValidator (1),
-				ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        static PolicyImporterElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            type = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                null,
+                new StringConverter(),
+                new StringValidator(1),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (type);
-		}
+            properties.Add(type);
+        }
 
-		public PolicyImporterElement () {
-		}
+        public PolicyImporterElement() { }
 
-		public PolicyImporterElement (string type) {
-			Type = type;
-		}
+        public PolicyImporterElement(string type)
+        {
+            Type = type;
+        }
 
-		public PolicyImporterElement (Type type) {
-			Type = type.AssemblyQualifiedName;
-		}
+        public PolicyImporterElement(Type type)
+        {
+            Type = type.AssemblyQualifiedName;
+        }
 
-		// Properties
+        // Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("type",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator (MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Type {
-			get { return (string) base [type]; }
-			set { base [type] = value; }
-		}
-	}
-
+        [ConfigurationProperty(
+            "type",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Type
+        {
+            get { return (string)base[type]; }
+            set { base[type] = value; }
+        }
+    }
 }

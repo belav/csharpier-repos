@@ -3,7 +3,7 @@
 //
 // CONTENTS
 //     Synchronization Interceptor/Filter Executor
-// 
+//
 // DESCRIPTION
 //
 // ****************************************************************************
@@ -15,9 +15,15 @@ namespace System.Workflow.ComponentModel
     using System.Collections.Generic;
     using System.Workflow.ComponentModel.Design;
 
-    internal sealed class SynchronizationFilter : ActivityExecutionFilter, IActivityEventListener<EventArgs>, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    internal sealed class SynchronizationFilter
+        : ActivityExecutionFilter,
+            IActivityEventListener<EventArgs>,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
-        public override ActivityExecutionStatus Execute(Activity activity, ActivityExecutionContext executionContext)
+        public override ActivityExecutionStatus Execute(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -36,7 +42,10 @@ namespace System.Workflow.ComponentModel
 
         private ActivityExecutionStatus ExecuteActivityNow(ActivityExecutionContext context)
         {
-            return ((ActivityExecutor)NextActivityExecutorInChain(context.Activity)).Execute(context.Activity, context);
+            return ((ActivityExecutor)NextActivityExecutorInChain(context.Activity)).Execute(
+                context.Activity,
+                context
+            );
         }
 
         #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
@@ -48,7 +57,10 @@ namespace System.Workflow.ComponentModel
             {
                 // release locks and status change locks
                 context.ReleaseLocks(false);
-                context.Activity.UnregisterForStatusChange(Activity.LockCountOnStatusChangeChangedEvent, this);
+                context.Activity.UnregisterForStatusChange(
+                    Activity.LockCountOnStatusChangeChangedEvent,
+                    this
+                );
                 context.Activity.ReleaseLockOnStatusChange(this);
             }
         }

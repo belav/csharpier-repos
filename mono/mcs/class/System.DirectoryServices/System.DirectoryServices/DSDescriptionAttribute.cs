@@ -10,20 +10,17 @@
 
 using System.ComponentModel;
 
-namespace System.DirectoryServices {
+namespace System.DirectoryServices
+{
+    [AttributeUsage(AttributeTargets.All)]
+    public class DSDescriptionAttribute : DescriptionAttribute
+    {
+        public DSDescriptionAttribute(String description)
+            : base(description) { }
 
-	[AttributeUsage (AttributeTargets.All)]
-	public class DSDescriptionAttribute : DescriptionAttribute
-	{
-
-		public DSDescriptionAttribute (String description)
-			: base (description)
-		{
-		}
-
-		public override String Description {
-			get { return base.Description; }
-		}
-	}
+        public override String Description
+        {
+            get { return base.Description; }
+        }
+    }
 }
-

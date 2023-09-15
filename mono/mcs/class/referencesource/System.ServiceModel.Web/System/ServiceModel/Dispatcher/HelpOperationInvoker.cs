@@ -16,7 +16,7 @@ namespace System.ServiceModel.Web
     class HelpOperationInvoker : IOperationInvoker
     {
         HelpPage helpPage;
-        IOperationInvoker unhandledDispatchOperation;        
+        IOperationInvoker unhandledDispatchOperation;
 
         public const string OperationName = "HelpPageInvoke";
 
@@ -34,11 +34,19 @@ namespace System.ServiceModel.Web
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
             outputs = null;
-            UriTemplateMatch match = (UriTemplateMatch)OperationContext.Current.IncomingMessageProperties[IncomingWebRequestContext.UriTemplateMatchResultsPropertyName];
+            UriTemplateMatch match = (UriTemplateMatch)
+                OperationContext.Current.IncomingMessageProperties[
+                    IncomingWebRequestContext.UriTemplateMatchResultsPropertyName
+                ];
             return this.helpPage.Invoke(match);
         }
 
-        public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+        public IAsyncResult InvokeBegin(
+            object instance,
+            object[] inputs,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }
@@ -51,6 +59,6 @@ namespace System.ServiceModel.Web
         public bool IsSynchronous
         {
             get { return true; }
-        }        
+        }
     }
 }

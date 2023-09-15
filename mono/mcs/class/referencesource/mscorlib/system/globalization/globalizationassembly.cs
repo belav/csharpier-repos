@@ -1,10 +1,11 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-namespace System.Globalization {
+namespace System.Globalization
+{
     using System;
     using System.Reflection;
     using System.Collections;
@@ -19,7 +20,6 @@ namespace System.Globalization {
     using System.IO;
     using System.Diagnostics.Contracts;
 
-    
     /*=================================GlobalizationAssembly==========================
     **
     ** This class provides the table loading wrapper that calls GetManifestResourceStream
@@ -34,34 +34,43 @@ namespace System.Globalization {
         // Instance data members and instance methods.
         //
         // ----------------------------------------------------------------------------------------------------
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Process)]
-        internal unsafe static byte* GetGlobalizationResourceBytePtr(Assembly assembly, String tableName) {
-            Contract.Assert(assembly != null, "assembly can not be null.  This should be generally the mscorlib.dll assembly.");
+        internal static unsafe byte* GetGlobalizationResourceBytePtr(
+            Assembly assembly,
+            String tableName
+        )
+        {
+            Contract.Assert(
+                assembly != null,
+                "assembly can not be null.  This should be generally the mscorlib.dll assembly."
+            );
             Contract.Assert(tableName != null, "table name can not be null");
-            
+
             Stream stream = assembly.GetManifestResourceStream(tableName);
             UnmanagedMemoryStream bytesStream = stream as UnmanagedMemoryStream;
-            if (bytesStream != null) {
+            if (bytesStream != null)
+            {
                 byte* bytes = bytesStream.PositionPointer;
-                if (bytes != null) {
+                if (bytes != null)
+                {
                     return (bytes);
                 }
             }
-            
+
             Contract.Assert(
-                    false, 
-                    String.Format(
-                        CultureInfo.CurrentCulture,
-                        "Didn't get the resource table {0} for System.Globalization from {1}", 
-                        tableName, 
-                        assembly));
-            
+                false,
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    "Didn't get the resource table {0} for System.Globalization from {1}",
+                    tableName,
+                    assembly
+                )
+            );
+
             // We can not continue if we can't get the resource.
             throw new InvalidOperationException();
         }
-
     }
 }
-

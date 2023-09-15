@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Xml;
     using System.Configuration;
@@ -25,34 +26,34 @@ namespace System.Web.Configuration {
                 <trustLevel name="Minimal" policyFile="web_minimaltrust.config" />
             </securityPolicy>
     */
-    public sealed class SecurityPolicySection : ConfigurationSection {
+    public sealed class SecurityPolicySection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propTrustLevels =
-            new ConfigurationProperty(null, 
-                                        typeof(TrustLevelCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propTrustLevels = new ConfigurationProperty(
+            null,
+            typeof(TrustLevelCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
-        static SecurityPolicySection() {
+        static SecurityPolicySection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propTrustLevels);
         }
 
-        public SecurityPolicySection() {
-        }
+        public SecurityPolicySection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public TrustLevelCollection TrustLevels {
-            get {
-                return (TrustLevelCollection)base[_propTrustLevels];
-            }
+        public TrustLevelCollection TrustLevels
+        {
+            get { return (TrustLevelCollection)base[_propTrustLevels]; }
         }
     }
 }

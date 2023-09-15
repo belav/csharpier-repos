@@ -63,7 +63,7 @@ using RabbitMQ.Client.Exceptions;
 namespace RabbitMQ.Client.Impl
 {
     ///<summary>Normal ISession implementation used during normal channel operation.</summary>
-    public class Session: SessionBase
+    public class Session : SessionBase
     {
         public CommandAssembler m_assembler;
 

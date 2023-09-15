@@ -28,26 +28,34 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
-	[TestFixture]
-	public class ExternalProjectFinishedEventArgsTest {
-		[Test]
-		public void AssignmentTest ()
-		{
-			ExternalProjectFinishedEventArgs epfea;
-			string message = "message";
-			string helpKeyword = "helpKeyword";
-			string senderName = "senderName";
-			string projectFile = "projectFile";
-			bool succeeded = true;
-			
-			epfea = new ExternalProjectFinishedEventArgs (message, helpKeyword, senderName, projectFile, succeeded);
-			
-			Assert.AreEqual (message, epfea.Message, "Message");
-			Assert.AreEqual (helpKeyword, epfea.HelpKeyword, "HelpKeyword");
-			Assert.AreEqual (senderName, epfea.SenderName, "SenderName");
-			Assert.AreEqual (projectFile, epfea.ProjectFile, "ProjectFile");
-			Assert.AreEqual (succeeded, epfea.Succeeded, "Succeeded");
-		}
-	}
+namespace MonoTests.Microsoft.Build.Framework
+{
+    [TestFixture]
+    public class ExternalProjectFinishedEventArgsTest
+    {
+        [Test]
+        public void AssignmentTest()
+        {
+            ExternalProjectFinishedEventArgs epfea;
+            string message = "message";
+            string helpKeyword = "helpKeyword";
+            string senderName = "senderName";
+            string projectFile = "projectFile";
+            bool succeeded = true;
+
+            epfea = new ExternalProjectFinishedEventArgs(
+                message,
+                helpKeyword,
+                senderName,
+                projectFile,
+                succeeded
+            );
+
+            Assert.AreEqual(message, epfea.Message, "Message");
+            Assert.AreEqual(helpKeyword, epfea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(senderName, epfea.SenderName, "SenderName");
+            Assert.AreEqual(projectFile, epfea.ProjectFile, "ProjectFile");
+            Assert.AreEqual(succeeded, epfea.Succeeded, "Succeeded");
+        }
+    }
 }

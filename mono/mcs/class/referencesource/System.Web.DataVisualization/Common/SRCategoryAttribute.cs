@@ -14,9 +14,7 @@ namespace System.Web.UI.DataVisualization.Charting
     {
         // Methods
         public SRCategoryAttribute(string category)
-            : base(category)
-        {
-        }
+            : base(category) { }
 
         protected override string GetLocalizedString(string value)
         {

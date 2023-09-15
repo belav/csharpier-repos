@@ -1,5 +1,5 @@
 //
-// OracleInfoMessageEventHandler.cs 
+// OracleInfoMessageEventHandler.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -18,6 +18,7 @@ using System;
 using System.IO;
 using System.Data.SqlTypes;
 
-namespace System.Data.OracleClient {
-	public delegate void OracleInfoMessageEventHandler (object sender, OracleInfoMessageEventArgs e);
+namespace System.Data.OracleClient
+{
+    public delegate void OracleInfoMessageEventHandler(object sender, OracleInfoMessageEventArgs e);
 }

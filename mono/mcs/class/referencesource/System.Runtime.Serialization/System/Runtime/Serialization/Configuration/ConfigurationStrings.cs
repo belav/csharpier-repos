@@ -17,14 +17,24 @@ namespace System.Runtime.Serialization.Configuration
             return string.Concat(ConfigurationStrings.SectionGroupName, "/", sectionName);
         }
 
-        static internal string DataContractSerializerSectionPath
+        internal static string DataContractSerializerSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.DataContractSerializerSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.DataContractSerializerSectionName
+                );
+            }
         }
 
-        static internal string NetDataContractSerializerSectionPath
+        internal static string NetDataContractSerializerSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.NetDataContractSerializerSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.NetDataContractSerializerSectionName
+                );
+            }
         }
 
         internal const string SectionGroupName = "system.runtime.serialization";

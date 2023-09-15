@@ -34,44 +34,36 @@ using System.Security.Cryptography;
 
 namespace Mono.Security.Interface
 {
-	delegate X509Certificate MonoServerCertificateSelectionCallback (object sender, string hostName);
+    delegate X509Certificate MonoServerCertificateSelectionCallback(object sender, string hostName);
 
-	interface IMonoAuthenticationOptions
-	{
-		bool AllowRenegotiation {
-			get; set;
-		}
+    interface IMonoAuthenticationOptions
+    {
+        bool AllowRenegotiation { get; set; }
 
-		RemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; set; }
+        RemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; set; }
 
-		SslProtocols EnabledSslProtocols {
-			get; set;
-		}
+        SslProtocols EnabledSslProtocols { get; set; }
 
-		EncryptionPolicy EncryptionPolicy {
-			get; set;
-		}
+        EncryptionPolicy EncryptionPolicy { get; set; }
 
-		X509RevocationMode CertificateRevocationCheckMode {
-			get; set;
-		}
-	}
+        X509RevocationMode CertificateRevocationCheckMode { get; set; }
+    }
 
-	interface IMonoSslClientAuthenticationOptions : IMonoAuthenticationOptions
-	{
-		LocalCertificateSelectionCallback LocalCertificateSelectionCallback { get; set; }
+    interface IMonoSslClientAuthenticationOptions : IMonoAuthenticationOptions
+    {
+        LocalCertificateSelectionCallback LocalCertificateSelectionCallback { get; set; }
 
-		string TargetHost { get; set; }
+        string TargetHost { get; set; }
 
-		X509CertificateCollection ClientCertificates { get; set; }
-	}
+        X509CertificateCollection ClientCertificates { get; set; }
+    }
 
-	interface IMonoSslServerAuthenticationOptions : IMonoAuthenticationOptions
-	{
-		bool ClientCertificateRequired { get; set; }
+    interface IMonoSslServerAuthenticationOptions : IMonoAuthenticationOptions
+    {
+        bool ClientCertificateRequired { get; set; }
 
-		MonoServerCertificateSelectionCallback ServerCertificateSelectionCallback { get; set; }
+        MonoServerCertificateSelectionCallback ServerCertificateSelectionCallback { get; set; }
 
-		X509Certificate ServerCertificate { get; set; }
-	}
+        X509Certificate ServerCertificate { get; set; }
+    }
 }

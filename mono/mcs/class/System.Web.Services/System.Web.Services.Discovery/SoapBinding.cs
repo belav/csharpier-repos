@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Discovery.SoapBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,43 +31,46 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Discovery {
+namespace System.Web.Services.Discovery
+{
+    [XmlRootAttribute(
+        "soap",
+        Namespace = "http://schemas.xmlsoap.org/disco/soap/",
+        IsNullable = true
+    )]
+    public sealed class SoapBinding
+    {
+        #region Fields
 
-	[XmlRootAttribute("soap", Namespace="http://schemas.xmlsoap.org/disco/soap/", IsNullable=true)]
-	public sealed class SoapBinding  {
+        public const string Namespace = "http://schemas.xmlsoap.org/disco/soap/";
 
-		#region Fields
-		
-		public const string Namespace = "http://schemas.xmlsoap.org/disco/soap/";
+        private string address;
+        private XmlQualifiedName binding;
 
-		private string address;
-		private XmlQualifiedName binding;
-		
-		#endregion // Fields
-		
-		#region Constructors
+        #endregion // Fields
 
-		public SoapBinding () 
-		{
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
-		
-		[XmlAttribute("address")]
-		public string Address {
-			get { return address; }
-			set { address = value; }
-		}
-		
-		[XmlAttribute("binding")]
-		public XmlQualifiedName Binding {
-			get { return binding; }
-			set { binding = value; }
-		}
-		
-		#endregion // Properties
+        public SoapBinding() { }
 
-	}
+        #endregion // Constructors
+
+        #region Properties
+
+        [XmlAttribute("address")]
+        public string Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
+
+        [XmlAttribute("binding")]
+        public XmlQualifiedName Binding
+        {
+            get { return binding; }
+            set { binding = value; }
+        }
+
+        #endregion // Properties
+    }
 }

@@ -6,7 +6,11 @@ namespace System.Runtime
 {
     using System.Diagnostics;
 
-    [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.NonBlocking, SupportsAsync = true, ReleaseMethod = "Complete")]
+    [Fx.Tag.SynchronizationPrimitive(
+        Fx.Tag.BlocksUsing.NonBlocking,
+        SupportsAsync = true,
+        ReleaseMethod = "Complete"
+    )]
     abstract class AsyncEventArgs : IAsyncEventArgs
     {
 #if DEBUG
@@ -37,7 +41,11 @@ namespace System.Runtime
                     case OperationState.PendingCompletion:
                         if (this.state == OperationState.PendingCompletion)
                         {
-                            throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.AsyncEventArgsCompletionPending(GetType())));
+                            throw Fx.Exception.AsError(
+                                new InvalidOperationException(
+                                    InternalSR.AsyncEventArgsCompletionPending(GetType())
+                                )
+                            );
                         }
 #if DEBUG
                         if (!Fx.FastDebug)
@@ -50,7 +58,11 @@ namespace System.Runtime
                     case OperationState.CompletedSynchronously:
                         if (this.state != OperationState.PendingCompletion)
                         {
-                            throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.AsyncEventArgsCompletedTwice(GetType())));
+                            throw Fx.Exception.AsError(
+                                new InvalidOperationException(
+                                    InternalSR.AsyncEventArgsCompletedTwice(GetType())
+                                )
+                            );
                         }
 #if DEBUG
                         if (!Fx.FastDebug)
@@ -109,11 +121,7 @@ namespace System.Runtime
 
     class AsyncEventArgs<TArgument> : AsyncEventArgs
     {
-        public TArgument Arguments
-        {
-            get;
-            private set;
-        }
+        public TArgument Arguments { get; private set; }
 
         public virtual void Set(AsyncEventArgsCallback callback, TArgument arguments, object state)
         {

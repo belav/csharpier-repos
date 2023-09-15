@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
-
     public enum PeerTransportCredentialType
     {
         Password,
@@ -15,9 +14,9 @@ namespace System.ServiceModel
         internal static bool IsDefined(PeerTransportCredentialType value)
         {
             return (
-                value == PeerTransportCredentialType.Password ||
-                value == PeerTransportCredentialType.Certificate);
+                value == PeerTransportCredentialType.Password
+                || value == PeerTransportCredentialType.Certificate
+            );
         }
     }
 }
-

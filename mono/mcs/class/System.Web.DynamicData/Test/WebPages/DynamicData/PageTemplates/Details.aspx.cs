@@ -12,22 +12,27 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 using System.Web.DynamicData;
 
-public partial class Details : System.Web.UI.Page {
+public partial class Details : System.Web.UI.Page
+{
     protected MetaTable table;
 
-    protected void Page_Init(object sender, EventArgs e) {
+    protected void Page_Init(object sender, EventArgs e)
+    {
         DynamicDataManager1.RegisterControl(DetailsView1);
     }
 
-    protected void Page_Load(object sender, EventArgs e) {
+    protected void Page_Load(object sender, EventArgs e)
+    {
         table = DetailsDataSource.GetTable();
         Title = table.DisplayName;
-        
+
         ListHyperLink.NavigateUrl = table.ListActionPath;
     }
 
-    protected void DetailsView1_ItemDeleted(object sender, DetailsViewDeletedEventArgs e) {
-        if (e.Exception == null || e.ExceptionHandled) {
+    protected void DetailsView1_ItemDeleted(object sender, DetailsViewDeletedEventArgs e)
+    {
+        if (e.Exception == null || e.ExceptionHandled)
+        {
             Response.Redirect(table.ListActionPath);
         }
     }

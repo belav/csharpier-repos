@@ -27,7 +27,6 @@ using System.ComponentModel.Design.Serialization;
 
 namespace System.Workflow.Runtime
 {
-
     internal sealed class CreationContext
     {
         internal Type Type;
@@ -39,7 +38,12 @@ namespace System.Workflow.Runtime
         internal bool IsActivation;
         internal bool Created;
 
-        internal CreationContext(Type type, WorkflowExecutor invokerExec, string invokeActivityID, Dictionary<string, object> args)
+        internal CreationContext(
+            Type type,
+            WorkflowExecutor invokerExec,
+            string invokeActivityID,
+            Dictionary<string, object> args
+        )
         {
             Type = type;
             InvokerExecutor = invokerExec;
@@ -48,7 +52,11 @@ namespace System.Workflow.Runtime
             IsActivation = true;
         }
 
-        internal CreationContext(XmlReader xomlReader, XmlReader rulesReader, Dictionary<string, object> args)
+        internal CreationContext(
+            XmlReader xomlReader,
+            XmlReader rulesReader,
+            Dictionary<string, object> args
+        )
         {
             XomlReader = xomlReader;
             RulesReader = rulesReader;

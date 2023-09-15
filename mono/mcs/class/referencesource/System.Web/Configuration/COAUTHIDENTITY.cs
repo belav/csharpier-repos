@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Configuration;
     using System.Configuration.Internal;
@@ -24,13 +25,14 @@ namespace System.Web.Configuration {
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COAUTHIDENTITY
     {
-        internal COAUTHIDENTITY(string usr, string dom, string pwd) {
+        internal COAUTHIDENTITY(string usr, string dom, string pwd)
+        {
             user = usr;
-            userlen = (user==null) ? 0 : user.Length;
+            userlen = (user == null) ? 0 : user.Length;
             domain = dom;
-            domainlen = (domain==null) ? 0 : domain.Length;
+            domainlen = (domain == null) ? 0 : domain.Length;
             password = pwd;
-            passwordlen = (password==null) ? 0 : password.Length;
+            passwordlen = (password == null) ? 0 : password.Length;
         }
 
         [MarshalAs(UnmanagedType.LPWStr)]
@@ -44,7 +46,7 @@ namespace System.Web.Configuration {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string password = null;
         internal int passwordlen = 0;
-        internal int flags = 2;        // SEC_WINNT_AUTH_IDENTITY_UNICODE
+        internal int flags = 2; // SEC_WINNT_AUTH_IDENTITY_UNICODE
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
@@ -77,6 +79,6 @@ namespace System.Web.Configuration {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string password = null;
         internal int passwordlen = 0;
-        internal int flags = 2;        // SEC_WINNT_AUTH_IDENTITY_UNICODE
+        internal int flags = 2; // SEC_WINNT_AUTH_IDENTITY_UNICODE
     }
 }

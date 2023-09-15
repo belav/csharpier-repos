@@ -4,8 +4,8 @@ using System;
 
 class Program
 {
-	public static int Main ()
-	{
-		return B.Test ();
-	}
+    public static int Main()
+    {
+        return B.Test();
+    }
 }
