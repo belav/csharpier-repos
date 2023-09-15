@@ -241,3 +241,10 @@
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/Table.cs 
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/WriteTest.cs 
 /mono/mcs/tools/sqlmetal/src/DbLinq/Test/Providers/ReadTests_Join.cs 
+
+# funky #if in usings
+/mono/mcs/class/System/Mono.AppleTls/X509CertificateImplApple.cs
+/mono/mcs/class/System/Mono.Net.Security/MonoSslClientAuthenticationOptions.cs
+/mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Helper2.cs
+/mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Certificate2ImplMono.cs
+/mono/mcs/class/System/System.Net.Mail/SmtpClient.cs
