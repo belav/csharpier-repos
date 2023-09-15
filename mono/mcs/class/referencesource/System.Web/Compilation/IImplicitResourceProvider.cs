@@ -7,17 +7,17 @@
 namespace System.Web.Compilation
 {
     using System;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Reflection;
-    using System.IO;
-    using System.CodeDom;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Resources;
-    using System.Web.Compilation;
-    using System.Web.Util;
-    using System.Web.UI;
     using System.Security.Permissions;
+    using System.Web.Compilation;
+    using System.Web.UI;
+    using System.Web.Util;
 
     /*
      * Interface to access implicit (automatic) page resources

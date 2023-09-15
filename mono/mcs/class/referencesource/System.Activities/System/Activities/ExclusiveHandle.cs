@@ -5,13 +5,13 @@
 namespace System.Activities
 {
     using System;
+    using System.Activities.Runtime;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Activities.Runtime;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     public class ExclusiveHandle : Handle

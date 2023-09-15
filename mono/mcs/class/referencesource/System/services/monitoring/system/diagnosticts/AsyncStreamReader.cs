@@ -17,11 +17,11 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.IO;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Collections;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
     using Microsoft.Win32.SafeHandles;
 
     internal delegate void UserCallBack(String data);

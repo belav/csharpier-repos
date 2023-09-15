@@ -13,14 +13,14 @@ namespace nwind
     using System;
     using System.ComponentModel;
     using System.Data;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics;
 #if MONO_STRICT
     using System.Data.Linq;
 #else   // MONO_STRICT
     using DbLinq.Data.Linq;
     using DbLinq.Vendor;
 #endif  // MONO_STRICT
-    using System.Data.Linq.Mapping;
-    using System.Diagnostics;
 
     public partial class Northwind : DataContext
     {

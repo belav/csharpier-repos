@@ -6,9 +6,9 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Xml
 {

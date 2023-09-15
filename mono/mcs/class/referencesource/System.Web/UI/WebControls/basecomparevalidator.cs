@@ -9,10 +9,10 @@ namespace System.Web.UI.WebControls
     using System.ComponentModel;
     using System.Drawing;
     using System.Globalization;
+    using System.Text;
+    using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.UI.HtmlControls;
-    using System.Text.RegularExpressions;
-    using System.Text;
     using System.Web.Util;
 
     /// <devdoc>

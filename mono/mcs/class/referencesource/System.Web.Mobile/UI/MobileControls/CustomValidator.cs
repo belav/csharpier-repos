@@ -6,9 +6,9 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web.UI.WebControls;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {

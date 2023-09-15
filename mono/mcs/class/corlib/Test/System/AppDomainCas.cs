@@ -29,7 +29,6 @@
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
 
 using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;

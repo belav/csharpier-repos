@@ -34,10 +34,8 @@ using System.IdentityModel.Tokens;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-
 using Key = System.IdentityModel.Tokens.InMemorySymmetricSecurityKey;
 using AES = System.Security.Cryptography.RijndaelManaged;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Tokens

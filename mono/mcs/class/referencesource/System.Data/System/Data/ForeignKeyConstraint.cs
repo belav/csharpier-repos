@@ -11,8 +11,8 @@ namespace System.Data
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Data.Common;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Represents an action

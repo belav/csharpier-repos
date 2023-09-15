@@ -6,15 +6,15 @@
 
 namespace System.Web.Services.Description
 {
+    using System;
+    using System.Collections;
+    using System.Reflection;
     using System.Web.Services;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Protocols;
     using System.Xml;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Collections;
-    using System;
-    using System.Reflection;
-    using System.Web.Services.Configuration;
+    using System.Xml.Serialization;
 
     internal class SoapProtocolReflector : ProtocolReflector
     {

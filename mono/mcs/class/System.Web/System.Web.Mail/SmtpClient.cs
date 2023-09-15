@@ -28,14 +28,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Net;
-using System.IO;
-using System.Text;
 using System.Collections;
-using System.Net.Sockets;
+using System.IO;
+using System.Net;
 using System.Net.Security;
-using System.Security.Permissions;
+using System.Net.Sockets;
 using System.Reflection;
+using System.Security.Permissions;
+using System.Text;
 
 namespace System.Web.Mail
 {

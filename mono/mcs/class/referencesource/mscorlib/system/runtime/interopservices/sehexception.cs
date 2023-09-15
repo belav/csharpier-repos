@@ -15,8 +15,8 @@
 
 namespace System.Runtime.InteropServices
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
 
     // Exception for Structured Exception Handler exceptions.

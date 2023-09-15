@@ -8,16 +8,16 @@ namespace System.Runtime.Serialization
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Xml;
     using System.Runtime.CompilerServices;
     using System.Runtime.Diagnostics;
-    using System.Text;
+    using System.Runtime.Serialization.Diagnostics;
     using System.Security;
+    using System.Text;
+    using System.Xml;
     using DataContractDictionary = System.Collections.Generic.Dictionary<
         System.Xml.XmlQualifiedName,
         DataContract
     >;
-    using System.Runtime.Serialization.Diagnostics;
 
     public abstract class XmlObjectSerializer
     {

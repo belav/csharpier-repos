@@ -28,10 +28,8 @@
 using System;
 using System.Data.Common;
 using System.Data.SqlClient;
-
-using WebMatrix.Data;
-
 using NUnit.Framework;
+using WebMatrix.Data;
 
 namespace MonoTests.WebMatrix.Data
 {

@@ -13,18 +13,18 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
+using NUnit.Framework;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
+
 #if !DISABLE_REMOTING
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 #endif
-using System.Security;
-using System.Security.Permissions;
-
-using NUnit.Framework;
 
 // The class in this namespace is used by the main test class
 namespace MonoTests.System.ActivatorTestInternal

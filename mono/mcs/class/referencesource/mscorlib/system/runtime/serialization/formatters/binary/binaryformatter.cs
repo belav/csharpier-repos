@@ -16,21 +16,21 @@
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Remoting;
+    using System.Runtime.Remoting.Messaging;
+    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters;
+    using System.Security.Permissions;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Proxies;
 #endif
-    using System.Runtime.Remoting;
-    using System.Runtime.Remoting.Messaging;
 
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class BinaryFormatter :

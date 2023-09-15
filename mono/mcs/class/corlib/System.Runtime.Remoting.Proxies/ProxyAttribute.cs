@@ -30,12 +30,11 @@
 //
 
 using System;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Activation;
-using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Channels;
-
-using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 
 namespace System.Runtime.Remoting.Proxies
 {

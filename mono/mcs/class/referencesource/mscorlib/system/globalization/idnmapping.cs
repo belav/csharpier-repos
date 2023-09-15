@@ -30,12 +30,12 @@
 namespace System.Globalization
 {
     using System;
-    using System.Security;
-    using System.Globalization;
-    using System.Text;
-    using System.Runtime.Versioning;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Text;
 
     // IdnMapping class used to map names to Punycode
 

@@ -26,10 +26,10 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-using System.Drawing;
 using System.ComponentModel;
-using System.Windows.Forms.Design;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {

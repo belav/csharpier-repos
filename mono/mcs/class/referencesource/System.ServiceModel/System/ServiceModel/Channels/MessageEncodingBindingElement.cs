@@ -5,11 +5,10 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
     using System.Runtime.Serialization;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
-
     using System.Xml;
 
     public abstract class MessageEncodingBindingElement : BindingElement

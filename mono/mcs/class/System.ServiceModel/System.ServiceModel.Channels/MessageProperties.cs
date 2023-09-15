@@ -31,7 +31,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
-
 using Pair = System.Collections.Generic.KeyValuePair<string, object>;
 
 namespace System.ServiceModel.Channels

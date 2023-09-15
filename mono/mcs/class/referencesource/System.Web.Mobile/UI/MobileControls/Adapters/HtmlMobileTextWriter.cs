@@ -5,16 +5,16 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mobile;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
-using System.Collections;
-using System.Diagnostics;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource

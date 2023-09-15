@@ -1,12 +1,12 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Drawing;
-    using System.Windows.Forms;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Text;
+    using System.Windows.Forms;
 
     #region Class DynamicActionMessageFilter
     //Behavior needs coordinates in client coordinate system

@@ -29,10 +29,10 @@
 
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {

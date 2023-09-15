@@ -24,7 +24,6 @@
 //
 #endregion
 using System.Data;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

@@ -30,13 +30,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.IO;
-using System.Reflection;
-using System.Xml.Serialization;
 using System.Collections;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Text;
-
+using System.Xml.Serialization;
 using HookDir = System.Xml.Serialization.XmlMappingAccess;
 
 namespace System.Xml.Serialization

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Data.Linq.Mapping;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Diagnostics;
-using System.Collections.Specialized;
-using System.Collections;
-using System.Globalization;
 
 namespace System.Web.DynamicData.ModelProviders
 {

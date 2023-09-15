@@ -1,6 +1,6 @@
 using System;
-using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))]
 class MyTask<T> { }

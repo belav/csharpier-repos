@@ -31,7 +31,6 @@
 
 using System;
 using System.Collections;
-
 using Mono.Messaging;
 
 namespace System.Messaging

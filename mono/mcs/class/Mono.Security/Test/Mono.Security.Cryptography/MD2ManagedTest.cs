@@ -10,7 +10,6 @@
 
 using System;
 using System.Security.Cryptography;
-
 using Mono.Security.Cryptography;
 using NUnit.Framework;
 

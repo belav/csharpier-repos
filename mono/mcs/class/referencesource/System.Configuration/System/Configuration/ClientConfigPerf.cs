@@ -6,15 +6,15 @@
 
 namespace System.Configuration
 {
+    using System.Collections;
     using System.Configuration.Internal;
     using System.Globalization;
-    using System.Collections;
     using System.IO;
-    using System.Xml;
+    using System.Net;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Net;
+    using System.Xml;
     using Assembly = System.Reflection.Assembly;
     using StringBuilder = System.Text.StringBuilder;
 

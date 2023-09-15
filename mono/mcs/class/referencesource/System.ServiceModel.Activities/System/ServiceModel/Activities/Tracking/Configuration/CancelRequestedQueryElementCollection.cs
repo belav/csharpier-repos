@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Runtime;
     using System.Configuration;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     [ConfigurationCollection(

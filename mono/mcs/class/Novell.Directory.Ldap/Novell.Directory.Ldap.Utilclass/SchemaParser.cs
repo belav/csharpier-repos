@@ -30,8 +30,8 @@
 //
 
 using System;
-using LdapObjectClassSchema = Novell.Directory.Ldap.LdapObjectClassSchema;
 using LdapAttributeSchema = Novell.Directory.Ldap.LdapAttributeSchema;
+using LdapObjectClassSchema = Novell.Directory.Ldap.LdapObjectClassSchema;
 
 namespace Novell.Directory.Ldap.Utilclass
 {

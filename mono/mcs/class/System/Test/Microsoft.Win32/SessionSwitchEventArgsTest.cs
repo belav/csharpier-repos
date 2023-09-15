@@ -28,10 +28,9 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using Microsoft.Win32;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Win32
 {

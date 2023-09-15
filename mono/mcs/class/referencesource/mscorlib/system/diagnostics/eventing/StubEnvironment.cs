@@ -8,11 +8,11 @@ namespace Microsoft.Diagnostics.Tracing.Internal
 namespace System.Diagnostics.Tracing.Internal
 #endif
 {
+    using System.Reflection;
+    using Microsoft.Reflection;
 #if ES_BUILD_AGAINST_DOTNET_V35
     using Microsoft.Internal;
 #endif
-    using Microsoft.Reflection;
-    using System.Reflection;
 
     internal static class Environment
     {

@@ -8,16 +8,14 @@
 // Copyright (C) 2005,2006 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-
 using Mono.Security.Cryptography;
 using Mono.Security.X509;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.X509
 {

@@ -16,8 +16,8 @@
 namespace System.Collections.Generic
 {
     using System;
-    using System.Security.Permissions;
     using System.Diagnostics;
+    using System.Security.Permissions;
 
     internal sealed class System_CollectionDebugView<T>
     {

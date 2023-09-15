@@ -33,7 +33,6 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Text;
-
 using Novell.Directory.Ldap.Asn1;
 
 namespace Novell.Directory.Ldap.Events.Edir.EventData

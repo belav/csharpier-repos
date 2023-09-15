@@ -31,7 +31,6 @@
 
 using System;
 using System.Threading;
-
 using Novell.Directory.Ldap;
 
 namespace Novell.Directory.Ldap.Events

@@ -10,10 +10,10 @@
 //
 namespace System.Runtime.Remoting.Contexts
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
-    using System;
 
     /// <internalonly/>
     [System.Runtime.InteropServices.ComVisible(true)]

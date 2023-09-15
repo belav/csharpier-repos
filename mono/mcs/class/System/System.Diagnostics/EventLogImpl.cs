@@ -35,7 +35,6 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
-
 using Microsoft.Win32;
 
 namespace System.Diagnostics

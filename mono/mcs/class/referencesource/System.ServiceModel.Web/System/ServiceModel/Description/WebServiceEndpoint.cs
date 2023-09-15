@@ -7,9 +7,9 @@ namespace System.ServiceModel.Description
     using System;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Web;
 
     public abstract class WebServiceEndpoint : ServiceEndpoint
     {

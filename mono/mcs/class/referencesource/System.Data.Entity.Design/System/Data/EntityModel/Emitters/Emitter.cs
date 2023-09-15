@@ -9,8 +9,8 @@
 
 using System;
 using System.CodeDom;
-using System.Diagnostics;
 using System.Data.EntityModel.SchemaObjectModel;
+using System.Diagnostics;
 
 namespace System.Data.EntityModel.Emitters
 {

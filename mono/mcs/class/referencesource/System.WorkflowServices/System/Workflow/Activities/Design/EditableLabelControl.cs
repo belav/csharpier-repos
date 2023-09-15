@@ -6,9 +6,9 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Text;
     using System.Windows.Forms;
-    using System.Drawing;
 
     internal class EditableLabelControl : Panel
     {

@@ -5,7 +5,6 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Collections;
-    using System.Threading;
     using System.Net;
     using System.Net.Security;
     using System.Runtime;
@@ -15,6 +14,7 @@ namespace System.ServiceModel.Channels
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Authentication.ExtendedProtection.Configuration;
+    using System.Threading;
 
     static class ChannelBindingUtility
     {

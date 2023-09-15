@@ -6,9 +6,9 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections.Generic;
+    using System.Security;
     using System.Text;
     using System.Xml;
-    using System.Security;
 
     sealed class SpecialTypeDataContract : DataContract
     {

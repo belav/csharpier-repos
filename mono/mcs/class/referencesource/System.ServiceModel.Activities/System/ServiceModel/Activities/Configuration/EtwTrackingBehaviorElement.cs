@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Activities.Configuration
 {
     using System;
-    using System.Runtime;
     using System.Configuration;
-    using System.ServiceModel.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Activities.Tracking.Configuration;
+    using System.ServiceModel.Configuration;
     using SR2 = System.ServiceModel.Activities.SR;
 
     public class EtwTrackingBehaviorElement : BehaviorExtensionElement

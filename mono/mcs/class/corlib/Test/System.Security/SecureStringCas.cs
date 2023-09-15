@@ -31,9 +31,8 @@ using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
-using NUnit.Framework;
 using MonoTests.System.Security;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Security
 {

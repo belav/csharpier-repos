@@ -13,13 +13,12 @@ namespace System.Data.SqlClient
     using System.ComponentModel;
     using System.Data.Common;
     using System.Data.OleDb;
+    using System.Data.Sql;
     using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Xml;
     using System.IO;
-    using System.Data.Sql;
-
+    using System.Xml;
     using MSS = Microsoft.SqlServer.Server;
 
     internal sealed class MetaType

@@ -6,19 +6,19 @@
 
 namespace System.Configuration
 {
-    using System.Configuration.Internal;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Configuration;
+    using System.Configuration.Internal;
     using System.Globalization;
     using System.IO;
+    using System.Net;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Xml;
-    using System.Net;
 
     internal sealed class ConfigXmlReader : XmlTextReader, IConfigErrorInfo
     {

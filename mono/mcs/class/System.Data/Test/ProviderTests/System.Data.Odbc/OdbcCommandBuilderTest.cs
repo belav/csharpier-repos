@@ -34,7 +34,6 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.Odbc;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.Odbc

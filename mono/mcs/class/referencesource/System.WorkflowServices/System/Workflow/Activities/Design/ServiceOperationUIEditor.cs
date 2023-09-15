@@ -6,16 +6,16 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Drawing.Design;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing.Design;
+    using System.ServiceModel;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Windows.Forms.Design;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Diagnostics;
-    using System.ServiceModel;
-    using System.Windows.Forms;
 
     internal class ServiceOperationUIEditor : UITypeEditor
     {

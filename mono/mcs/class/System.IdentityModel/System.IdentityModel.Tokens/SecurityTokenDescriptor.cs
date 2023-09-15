@@ -28,10 +28,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace System.IdentityModel.Tokens
 {

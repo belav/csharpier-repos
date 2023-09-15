@@ -8,13 +8,13 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides a type converter to convert 64-bit unsigned integer objects to and

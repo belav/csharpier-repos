@@ -3,10 +3,10 @@
 //----------------------------------------------------------------
 namespace System.Workflow.Activities
 {
-    using System.ServiceModel;
-    using System.Security.Permissions;
-    using System.Security;
     using System.Diagnostics.CodeAnalysis;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.ServiceModel;
 
     class PrincipalPermissionServiceAuthorizationManager : ServiceAuthorizationManager
     {

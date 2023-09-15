@@ -133,13 +133,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.ComponentModel
 {
-    using System.Runtime.InteropServices;
-
-    using System.Diagnostics;
-
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>

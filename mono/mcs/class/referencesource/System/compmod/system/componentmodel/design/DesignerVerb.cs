@@ -8,12 +8,12 @@
  */
 namespace System.ComponentModel.Design
 {
-    using Microsoft.Win32;
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Security.Permissions;
     using System.Text.RegularExpressions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para> Represents a verb that can be executed by a component's designer.</para>

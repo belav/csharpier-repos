@@ -9,9 +9,9 @@
 // A generic LinkedList class
 
 using System;
-using System.IO; // TextWriter
 using System.Collections;
 using System.Collections.Generic; // IEnumerable<T>, IEnumerator<T>
+using System.IO; // TextWriter
 
 public delegate R Mapper<A, R>(A x);
 

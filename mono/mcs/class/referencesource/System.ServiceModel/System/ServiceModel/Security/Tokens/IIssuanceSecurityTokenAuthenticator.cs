@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.Xml;
     using System.IdentityModel.Tokens;
+    using System.Xml;
 
     public delegate void IssuedSecurityTokenHandler(
         SecurityToken issuedToken,

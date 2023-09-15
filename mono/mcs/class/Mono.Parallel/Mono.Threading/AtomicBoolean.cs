@@ -23,7 +23,6 @@
 //
 
 using System;
-
 #if INSIDE_MONO_PARALLEL
 using System.Threading;
 

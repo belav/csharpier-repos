@@ -9,22 +9,22 @@
 
 namespace System.Data.SqlClient
 {
-    using System.Threading;
-    using System.Diagnostics;
-    using System.Reflection;
     using System;
-    using System.Data;
-    using System.IO;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Data.Sql;
-    using System.Data.SqlTypes;
+    using System.ComponentModel;
+    using System.Data;
     using System.Data.Common;
     using System.Data.ProviderBase;
-    using System.ComponentModel;
+    using System.Data.Sql;
+    using System.Data.SqlTypes;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Xml;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Xml;
 
     internal sealed class SqlBuffer
     {

@@ -27,7 +27,6 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.Analysis.Drivers;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical

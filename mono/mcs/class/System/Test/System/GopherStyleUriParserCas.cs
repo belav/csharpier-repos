@@ -29,13 +29,11 @@
 #if !MOBILE
 
 using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System;
 
 namespace MonoCasTests.System

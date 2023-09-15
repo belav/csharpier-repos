@@ -4,13 +4,13 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
-    using System.Diagnostics;
 
     abstract class DurableInstanceContextProvider : IInstanceContextProvider
     {

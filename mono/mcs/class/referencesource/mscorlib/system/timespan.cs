@@ -5,13 +5,13 @@
 // ==--==
 namespace System
 {
-    using System.Text;
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.Globalization;
+    using System.Text;
 
     // TimeSpan represents a duration of time.  A TimeSpan can be negative
     // or positive.

@@ -30,7 +30,6 @@
 using System;
 using System.Globalization;
 using System.Text;
-
 using Mono.Security;
 
 namespace Mono.Security.X509

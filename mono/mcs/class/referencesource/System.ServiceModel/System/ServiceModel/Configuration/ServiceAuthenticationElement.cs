@@ -6,8 +6,8 @@
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Net;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
     public sealed partial class ServiceAuthenticationElement : BehaviorExtensionElement

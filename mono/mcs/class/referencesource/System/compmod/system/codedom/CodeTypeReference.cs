@@ -8,13 +8,13 @@
 
 namespace System.CodeDom
 {
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Globalization;
+    using Microsoft.Win32;
 
     [ComVisible(true), Serializable, FlagsAttribute]
     public enum CodeTypeReferenceOptions

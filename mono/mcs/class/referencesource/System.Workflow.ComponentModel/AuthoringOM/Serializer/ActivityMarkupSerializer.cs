@@ -1,21 +1,21 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Reflection;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Xml;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.ComponentModel.Design.Serialization;
-    using System.Text;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Collections;
-    using System.IO;
-    using System.Diagnostics;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     #region Class ActivityMarkupSerializer
     [DefaultSerializationProvider(typeof(ActivityMarkupSerializationProvider))]

@@ -7,10 +7,10 @@ namespace System.Web.ClientServices
 {
     using System;
     using System.IO;
-    using System.Security.Principal;
     using System.Security;
-    using System.Security.Permissions;
     using System.Security.AccessControl;
+    using System.Security.Permissions;
+    using System.Security.Principal;
 
     public static class ConnectivityStatus
     {

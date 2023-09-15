@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Globalization;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;

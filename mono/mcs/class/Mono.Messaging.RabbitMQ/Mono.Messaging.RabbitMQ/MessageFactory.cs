@@ -32,9 +32,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Text;
-
 using Mono.Messaging;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Content;
 using RabbitMQ.Client.Events;

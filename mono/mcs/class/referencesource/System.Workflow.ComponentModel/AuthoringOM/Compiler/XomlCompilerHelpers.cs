@@ -3,30 +3,30 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.CodeDom.Compiler;
-    using System.Reflection;
-    using System.Xml;
-    using System.Globalization;
-    using System.IO;
-    using System.Text;
-    using System.Diagnostics;
-    using System.Text.RegularExpressions;
-    using Microsoft.CSharp;
-    using Microsoft.VisualBasic;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Serialization;
-    using Microsoft.Win32;
     using System.ComponentModel.Design.Serialization;
     using System.Configuration;
-    using System.Runtime.InteropServices;
-    using System.Workflow.Interop;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Workflow.Interop;
+    using System.Xml;
+    using Microsoft.CSharp;
+    using Microsoft.VisualBasic;
+    using Microsoft.Win32;
 
     #endregion
 

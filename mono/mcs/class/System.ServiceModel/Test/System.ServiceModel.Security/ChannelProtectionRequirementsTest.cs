@@ -33,10 +33,11 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
+using NUnit.Framework;
 #if !MOBILE
 using System.Security.Cryptography.Xml;
 #endif
-using NUnit.Framework;
+
 
 namespace MonoTests.System.ServiceModel.Security
 {

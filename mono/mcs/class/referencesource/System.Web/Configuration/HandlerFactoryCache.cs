@@ -12,10 +12,10 @@ namespace System.Web.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Web.Compilation;
     using System.Security;
     using System.Security.Permissions;
     using System.Web;
+    using System.Web.Compilation;
 
     /*
      * An object to cache a factory

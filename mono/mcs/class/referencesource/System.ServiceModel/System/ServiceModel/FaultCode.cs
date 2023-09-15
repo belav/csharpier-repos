@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel
 {
-    using System.Xml;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
 
     public class FaultCode
     {

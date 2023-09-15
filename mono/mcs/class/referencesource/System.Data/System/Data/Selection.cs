@@ -9,9 +9,9 @@
 namespace System.Data
 {
     using System;
-    using System.Diagnostics;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.Threading;
 
     internal struct IndexField

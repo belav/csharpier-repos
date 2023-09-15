@@ -12,14 +12,14 @@
 
 namespace System.Web.Hosting
 {
-    using Microsoft.Win32;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
     using System.Web;
     using System.Web.Configuration;
-    using System.Web.Util;
     using System.Web.Management;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Web.Util;
+    using Microsoft.Win32;
 
     // helper class to implement AppHost based on ISAPI
     internal class ISAPIApplicationHost : MarshalByRefObject, IApplicationHost

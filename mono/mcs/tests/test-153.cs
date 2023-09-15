@@ -1,7 +1,7 @@
 #define DEBUG
 using System;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 class Z
 {

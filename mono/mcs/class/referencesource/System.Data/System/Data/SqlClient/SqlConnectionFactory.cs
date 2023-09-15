@@ -9,14 +9,13 @@
 namespace System.Data.SqlClient
 {
     using System;
-    using System.Data.Common;
-    using System.Data.ProviderBase;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Data.Common;
+    using System.Data.ProviderBase;
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.Versioning;
-
     using Microsoft.SqlServer.Server;
 
     internal sealed class SqlConnectionFactory : DbConnectionFactory

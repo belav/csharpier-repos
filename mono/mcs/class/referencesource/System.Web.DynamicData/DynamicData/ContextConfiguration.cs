@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Security.Permissions;
-using System.Diagnostics.CodeAnalysis;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Permissions;
 using System.Web.DynamicData.ModelProviders;
 
 namespace System.Web.DynamicData

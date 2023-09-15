@@ -30,7 +30,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data

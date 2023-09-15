@@ -10,11 +10,10 @@
 //
 
 using System;
-using System.Runtime.CompilerServices;
-using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
+using System.Runtime.CompilerServices;
 #if STATIC
 using MetaType = IKVM.Reflection.Type;
 using IKVM.Reflection;

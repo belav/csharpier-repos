@@ -17,13 +17,13 @@
 
 namespace System.Runtime.Serialization
 {
-    using System.Threading;
-    using System.Runtime.Remoting;
     using System;
     using System.Collections;
-    using System.Reflection;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Remoting;
+    using System.Threading;
 
     // This abstract class provides some helper methods for implementing
     // IFormatter.  It will manage queueing objects for serialization

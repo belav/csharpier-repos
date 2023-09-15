@@ -8,12 +8,12 @@
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Principal;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Principal
 {

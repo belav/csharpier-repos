@@ -18,8 +18,8 @@ namespace System.Collections.Generic
 {
     using System;
     using System.Collections;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     // An IList is an ordered collection of objects.  The exact ordering
     // is up to the implementation of the list, ranging from a sorted

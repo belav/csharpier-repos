@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
 #if !SILVERLIGHT
 using System.Runtime.Serialization;
 #endif
-using System.Security.Permissions;
-using System.Text;
-using System.Diagnostics.CodeAnalysis;
-using System.Security;
+
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
 #endif

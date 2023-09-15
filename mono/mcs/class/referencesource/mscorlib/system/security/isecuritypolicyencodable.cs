@@ -14,8 +14,8 @@
 namespace System.Security
 {
     using System;
-    using System.Security.Util;
     using System.Security.Policy;
+    using System.Security.Util;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public interface ISecurityPolicyEncodable

@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Internal;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Primitives
 {

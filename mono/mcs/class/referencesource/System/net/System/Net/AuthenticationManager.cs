@@ -6,19 +6,19 @@
 
 namespace System.Net
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Net.Configuration;
     using System.Reflection;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System;
     using System.Threading;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
 
     //
     // A contract that applications can use to restrict auth scenarios in current appDomain

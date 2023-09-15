@@ -13,7 +13,6 @@
 // Copyright (c) 2013 7digital Media Ltd (http://www.7digital.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -21,14 +20,14 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
-using System.Reflection;
-using System.Runtime.ExceptionServices;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

@@ -33,7 +33,6 @@ using System.Security.Principal;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Claims

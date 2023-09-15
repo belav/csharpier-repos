@@ -7,9 +7,9 @@
 // (C) 2005 John Luke
 //
 
-using NUnit.Framework;
 using System;
 using System.Net.Mail;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Mail
 {

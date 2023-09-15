@@ -12,7 +12,6 @@
 
 using System;
 using System.Collections.Generic;
-
 #if STATIC
 using IKVM.Reflection.Emit;
 #else

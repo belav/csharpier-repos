@@ -3,9 +3,9 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Discovery
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.Diagnostics.CodeAnalysis;
 
     [Fx.Tag.XamlVisible(false)]
     public class UdpTransportSettings

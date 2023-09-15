@@ -4,13 +4,13 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.ComponentModel;
     using System.Configuration;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Text;
     using System.Xml;
-    using System.ComponentModel;
 
     public class WebHttpBinding : Binding, IBindingRuntimePreferences
     {

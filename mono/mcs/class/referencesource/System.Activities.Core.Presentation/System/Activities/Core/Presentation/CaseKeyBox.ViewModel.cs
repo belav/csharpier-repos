@@ -5,14 +5,14 @@
 namespace System.Activities.Core.Presentation
 {
     using System;
+    using System.Activities.Presentation.Model;
     using System.Collections.ObjectModel;
-    using System.Windows;
-    using System.Linq;
     using System.ComponentModel;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Activities.Presentation.Model;
+    using System.Linq;
+    using System.Runtime;
+    using System.Windows;
 
     class CaseKeyBoxViewModel : DependencyObject
     {

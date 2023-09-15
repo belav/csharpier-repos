@@ -4,25 +4,24 @@
 namespace Microsoft.InfoCards.Diagnostics
 {
     using System;
-    using System.Xml;
     using System.Collections.Generic;
+    using System.ComponentModel; //win32exception
     using System.Diagnostics;
     using System.Globalization;
-    using System.ComponentModel; //win32exception
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using Microsoft.Win32.SafeHandles;
-    using System.Security;
-    using System.Security.Principal;
-    using System.Runtime;
-    using System.ServiceModel.Diagnostics;
-    using System.Threading;
-
     //
     // For InfoCardBaseException
     //
     using System.IdentityModel.Selectors;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Principal;
+    using System.ServiceModel.Diagnostics;
+    using System.Threading;
+    using System.Xml;
+    using Microsoft.Win32.SafeHandles;
 
     // Summary
     // InfoCardTrace is the main driver class for the managed tracing infrastructure.

@@ -4,17 +4,17 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Globalization;
+    using System.IdentityModel.Tokens;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.IdentityModel.Tokens;
-    using System.ComponentModel;
     using System.Xml;
 
     public sealed partial class FederatedMessageSecurityOverHttpElement

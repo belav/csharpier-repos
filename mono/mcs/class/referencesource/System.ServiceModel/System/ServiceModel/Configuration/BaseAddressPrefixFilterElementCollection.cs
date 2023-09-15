@@ -6,8 +6,8 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Configuration;
+    using System.Text;
 
     [ConfigurationCollection(typeof(BaseAddressPrefixFilterElement))]
     public sealed class BaseAddressPrefixFilterElementCollection

@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Security.Permissions;
+using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {

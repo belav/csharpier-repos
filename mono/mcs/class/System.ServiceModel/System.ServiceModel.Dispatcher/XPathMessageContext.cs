@@ -27,10 +27,10 @@
 //
 
 using System;
+using System.ServiceModel;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using System.ServiceModel;
 
 namespace System.ServiceModel.Dispatcher
 {

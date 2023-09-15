@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-
-using MonoTests.ModelProviders;
 using MonoTests.DataSource;
+using MonoTests.ModelProviders;
 
 namespace MonoTests.Common
 {

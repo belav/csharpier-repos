@@ -21,8 +21,8 @@
 //
 
 using System;
-using System.Threading;
 using System.ComponentModel;
+using System.Threading;
 
 // Some implementation details:
 // http://msdn.microsoft.com/msdnmag/issues/06/06/NETMatters/default.aspx

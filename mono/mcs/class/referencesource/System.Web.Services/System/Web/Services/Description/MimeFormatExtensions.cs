@@ -1,10 +1,10 @@
 namespace System.Web.Services.Description
 {
-    using System.Xml.Serialization;
     using System.Collections;
     using System.ComponentModel;
-    using System.Web.Services.Configuration;
     using System.Globalization;
+    using System.Web.Services.Configuration;
+    using System.Xml.Serialization;
 
     /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeContentBinding"]/*' />
     [XmlFormatExtension(

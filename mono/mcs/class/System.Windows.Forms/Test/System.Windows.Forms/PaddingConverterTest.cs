@@ -22,14 +22,14 @@
 
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
 using NUnit.Framework;
-using System.Collections;
-using System.ComponentModel.Design.Serialization;
-using System.Collections.Generic;
 
 namespace MonoTests.System.Windows.Forms
 {

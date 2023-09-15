@@ -6,8 +6,8 @@ namespace System.Runtime.Serialization.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
 
     public sealed partial class DeclaredTypeElement : ConfigurationElement
     {

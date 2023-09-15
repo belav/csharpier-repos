@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Data.Metadata.Edm;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping
 {

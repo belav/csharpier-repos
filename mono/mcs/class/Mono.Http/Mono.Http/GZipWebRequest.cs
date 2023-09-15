@@ -29,9 +29,9 @@
 //
 
 using System;
-using System.Net;
 using System.Collections;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization;
 using ICSharpCode.SharpZipLib.GZip;
 

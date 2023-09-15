@@ -13,8 +13,8 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Net;
 using System.Configuration;
+using System.Net;
 
 //
 // This file contains configuration collections that are used by multiple sections

@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel.Security.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security.Tokens;
 
     class SecurityProtocolCorrelationState
     {

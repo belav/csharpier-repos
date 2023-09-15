@@ -8,8 +8,8 @@
  */
 namespace Microsoft.Win32
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para> Specifies the reason for the session switch</para>

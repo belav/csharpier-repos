@@ -9,14 +9,14 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
-    using System.Collections;
-    using System.Reflection;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.IO;
+    using System.Reflection;
     using System.Web.Configuration;
-    using System.Web.Util;
     using System.Web.UI;
+    using System.Web.Util;
 
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Web)]
     internal abstract class SimpleHandlerBuildProvider : InternalBuildProvider

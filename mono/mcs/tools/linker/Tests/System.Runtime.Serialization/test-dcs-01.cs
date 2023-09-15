@@ -1,6 +1,6 @@
 using System;
-using System.Runtime;
 using System.Collections.Generic;
+using System.Runtime;
 
 public class DataContractSerializerTest
 {

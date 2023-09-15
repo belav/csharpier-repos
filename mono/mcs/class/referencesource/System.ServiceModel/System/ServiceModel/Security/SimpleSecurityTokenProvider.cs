@@ -3,15 +3,15 @@
 //------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IdentityModel;
+using System.IdentityModel.Claims;
+using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-using System.Collections.ObjectModel;
-using System.IdentityModel.Policy;
 using System.ServiceModel;
-using System.Collections.Generic;
-using System.IdentityModel.Claims;
 using System.ServiceModel.Security.Tokens;
-using System.IdentityModel;
 
 namespace System.ServiceModel.Security
 {

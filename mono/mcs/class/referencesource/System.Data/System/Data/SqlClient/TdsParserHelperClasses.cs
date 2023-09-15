@@ -16,12 +16,11 @@ namespace System.Data.SqlClient
     using System.Data.Sql;
     using System.Data.SqlTypes;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Reflection;
+    using System.Security;
     using System.Text;
     using System.Threading;
-    using System.Security;
-    using System.Globalization;
-
     using Microsoft.SqlServer.Server; // for SMI metadata
 
     internal enum CallbackType

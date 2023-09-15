@@ -7,11 +7,11 @@
 namespace System.Net.Mime
 {
     using System;
-    using System.Text;
-    using System.Net.Mail;
-    using System.Globalization;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Net.Mail;
+    using System.Text;
 
     internal static class MailBnfHelper
     {

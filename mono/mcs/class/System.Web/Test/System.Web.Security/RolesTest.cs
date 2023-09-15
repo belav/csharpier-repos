@@ -28,15 +28,14 @@
 
 
 using System;
+using System.Configuration.Provider;
 using System.IO;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
-
 using MonoTests.SystemWeb.Framework;
 using NUnit.Framework;
-using System.Configuration.Provider;
 
 namespace MonoTests.System.Web.Security
 {

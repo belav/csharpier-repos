@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel.Security.Tokens;
     using System.Net.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security.Tokens;
 
     public class SecurityMessageProperty : IMessageProperty, IDisposable
     {

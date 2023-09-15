@@ -5,19 +5,19 @@ namespace System.Workflow.ComponentModel
 
     using System;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Globalization;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
     using System.Xml;
-    using System.IO;
 
     #endregion
 

@@ -27,12 +27,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if CONFIGURATION_DEP
-using System.Configuration.Internal;
-#endif
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
+#if CONFIGURATION_DEP
+using System.Configuration.Internal;
+#endif
 
 #if (XML_DEP)
 using System.Xml;

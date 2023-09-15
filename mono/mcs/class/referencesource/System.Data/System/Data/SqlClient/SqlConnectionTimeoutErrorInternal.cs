@@ -11,6 +11,7 @@ namespace System.Data.SqlClient
     using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
+    using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.ConstrainedExecution;
@@ -18,10 +19,9 @@ namespace System.Data.SqlClient
     using System.Runtime.InteropServices.ComTypes;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
     using System.Threading;
     using SysTx = System.Transactions;
-    using System.Data.SqlClient;
-    using System.Text;
 
     // VSTFDevDiv# 643319 - Improve timeout error message reported when SqlConnection.Open fails
     internal enum SqlConnectionTimeoutErrorPhase

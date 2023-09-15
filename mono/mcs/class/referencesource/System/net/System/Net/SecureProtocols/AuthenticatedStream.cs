@@ -19,9 +19,9 @@ namespace System.Net.Security
 {
     using System;
     using System.IO;
-    using System.Threading;
     using System.Security.Permissions;
     using System.Security.Principal;
+    using System.Threading;
 
     public abstract class AuthenticatedStream : Stream
     {

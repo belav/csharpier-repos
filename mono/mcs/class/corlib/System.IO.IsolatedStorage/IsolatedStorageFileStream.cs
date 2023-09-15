@@ -30,9 +30,9 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.IsolatedStorage

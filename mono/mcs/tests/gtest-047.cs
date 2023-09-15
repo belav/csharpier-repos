@@ -5,8 +5,8 @@
 // There's a generic and a non-generic `List' type in two
 // different namespaces: make sure we pick the correct one.
 
-using Foo;
 using Bar;
+using Foo;
 
 class X
 {

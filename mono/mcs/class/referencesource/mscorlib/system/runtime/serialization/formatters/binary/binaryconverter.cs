@@ -16,15 +16,15 @@
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    using System.Threading;
+    using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Text;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
+    using System.Text;
+    using System.Threading;
 
     internal sealed class Converter
     {

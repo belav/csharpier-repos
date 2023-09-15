@@ -4,12 +4,12 @@
 //
 // ==--==
 
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System
 {

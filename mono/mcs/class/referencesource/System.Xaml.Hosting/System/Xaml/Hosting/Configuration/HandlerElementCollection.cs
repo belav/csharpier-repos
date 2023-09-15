@@ -5,10 +5,10 @@
 namespace System.Xaml.Hosting.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Collections.Generic;
-    using System.Web;
+    using System.Configuration;
     using System.Runtime;
+    using System.Web;
 
     [ConfigurationCollection(
         typeof(HandlerElement),

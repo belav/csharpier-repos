@@ -8,7 +8,6 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -20,6 +19,7 @@ namespace System.ComponentModel
     using System.Runtime.Serialization.Formatters;
     using System.Security;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <internalonly/>
     /// <devdoc>

@@ -30,7 +30,6 @@
 
 using System;
 using System.Messaging;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Messaging

@@ -29,18 +29,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Threading;
+using NUnit.Framework;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-
-using System.Collections.Generic;
 
 namespace A.B.C
 {

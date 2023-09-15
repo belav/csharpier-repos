@@ -19,7 +19,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
     using CanonicalizationDriver = System.IdentityModel.CanonicalizationDriver;
     using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
 

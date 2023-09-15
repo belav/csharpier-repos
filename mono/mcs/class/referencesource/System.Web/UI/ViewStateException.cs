@@ -1,11 +1,11 @@
 namespace System.Web.UI
 {
     using System;
+    using System.Globalization;
     using System.Runtime.Serialization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.Util;
-    using System.Globalization;
-    using System.Security.Permissions;
 
     [Serializable]
     public sealed class ViewStateException : Exception, ISerializable

@@ -1,6 +1,6 @@
 using System;
-using System.Threading;
 using System.Globalization;
+using System.Threading;
 
 namespace Mono.Tools
 {

@@ -7,14 +7,14 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Reflection;
-    using System.Xml.Serialization;
     using System.Collections;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Threading;
     using System.Web.Services.Configuration;
     using System.Web.Services.Description;
-    using System.Globalization;
     using System.Xml;
-    using System.Threading;
+    using System.Xml.Serialization;
 
     internal class SoapReflectedHeader
     {

@@ -32,11 +32,9 @@ using System.Configuration.Provider;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
-
-using NUnit.Framework;
 
 namespace StandAloneTests.ApplicationPreStartMethods
 {

@@ -32,7 +32,6 @@ using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors

@@ -7,12 +7,12 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Text;
-    using System.Net.Mime;
-    using System.Globalization;
     using System.Collections;
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Net.Mime;
+    using System.Text;
 
     //
     // This class is responsible for parsing E-mail addresses as described in RFC 2822.

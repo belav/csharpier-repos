@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Configuration;
     using System.Activities.Tracking;
-    using System.Runtime;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     public class VariableElement : TrackingConfigurationElement

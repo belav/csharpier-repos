@@ -7,13 +7,13 @@ namespace System.ServiceModel.Activities
     using System;
     using System.Activities;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime;
+    using System.Runtime.Collections;
     using System.Runtime.DurableInstancing;
     using System.ServiceModel.Activities.Dispatcher;
-    using SR2 = System.ServiceModel.Activities.SR;
-    using System.ComponentModel;
     using System.Windows.Markup;
-    using System.Runtime.Collections;
-    using System.Runtime;
+    using SR2 = System.ServiceModel.Activities.SR;
 
     [ContentProperty("CorrelationData")]
     public sealed class InitializeCorrelation : NativeActivity

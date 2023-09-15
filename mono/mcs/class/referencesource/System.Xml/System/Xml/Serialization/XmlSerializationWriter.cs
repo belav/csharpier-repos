@@ -8,19 +8,19 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.IO;
+    using System.CodeDom.Compiler;
     using System.Collections;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Xml.Schema;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.CodeDom.Compiler;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Security.Permissions;
-    using System.Runtime.Versioning;
+    using System.Xml.Schema;
 
     /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter"]/*' />
     ///<internalonly/>

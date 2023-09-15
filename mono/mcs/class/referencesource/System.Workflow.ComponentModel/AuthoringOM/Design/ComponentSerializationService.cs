@@ -1,20 +1,20 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Reflection;
     using System.Collections;
-    using System.Globalization;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Runtime.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
     using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     internal class XomlComponentSerializationService : ComponentSerializationService
     {

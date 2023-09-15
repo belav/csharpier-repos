@@ -9,13 +9,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
-using System.Data.Common.CommandTrees;
+using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
 
 namespace System.Data.Objects.Internal
 {

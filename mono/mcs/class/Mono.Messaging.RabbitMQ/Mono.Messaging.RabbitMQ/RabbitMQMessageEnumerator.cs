@@ -29,9 +29,7 @@
 //
 
 using System;
-
 using Mono.Messaging;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Content;
 using RabbitMQ.Client.Events;

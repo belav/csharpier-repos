@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections;
-    using System.Collections.ObjectModel;
-    using System.ServiceModel;
-    using System.Xml;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Selectors;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     class DerivedKeyCachingSecurityTokenSerializer : SecurityTokenSerializer
     {

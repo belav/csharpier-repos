@@ -6,15 +6,15 @@ namespace System.Workflow.Activities
 {
     using System;
     using System.ComponentModel;
-    using System.Drawing.Design;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing.Design;
     using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Workflow.Activities.Design;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Activities.Design;
 
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

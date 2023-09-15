@@ -8,8 +8,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 using System.Diagnostics.Contracts;
-using System.Security.Permissions;
 using System.Runtime.CompilerServices;
+using System.Security.Permissions;
 
 namespace System.Threading
 {

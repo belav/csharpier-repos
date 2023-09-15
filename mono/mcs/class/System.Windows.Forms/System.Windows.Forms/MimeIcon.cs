@@ -30,12 +30,12 @@
 // to get the image index in MimeIconEngine.SmallIcons and MimeIconEngine.LargeIcons
 
 using System;
-using System.Reflection;
-using System.Drawing;
 using System.Collections;
+using System.Drawing;
 using System.IO;
-using System.Text;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Xml;
 
 namespace System.Windows.Forms

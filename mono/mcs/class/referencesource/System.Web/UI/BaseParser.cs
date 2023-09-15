@@ -36,12 +36,12 @@ namespace System.Web.UI
     using System;
     using System.Collections;
     using System.Reflection;
+    using System.Security.Permissions;
+    using System.Text.RegularExpressions;
     using System.Web.Compilation;
     using System.Web.Hosting;
-    using System.Web.Util;
-    using System.Text.RegularExpressions;
     using System.Web.RegularExpressions;
-    using System.Security.Permissions;
+    using System.Web.Util;
 
     // Internal interface for Parser that have exteranl assembly dependency.
     internal interface IAssemblyDependencyParser

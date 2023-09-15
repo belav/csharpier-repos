@@ -12,14 +12,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
+using System.Xml.XmlConfiguration;
 using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.Runtime;
 using System.Xml.Xsl.Xslt;
-using System.Runtime.Versioning;
-using System.Xml.XmlConfiguration;
 
 namespace System.Xml.Xsl
 {

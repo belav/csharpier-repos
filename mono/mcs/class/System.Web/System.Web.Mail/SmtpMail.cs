@@ -27,12 +27,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
+using System.Text;
 
 namespace System.Web.Mail
 {

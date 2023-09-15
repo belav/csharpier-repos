@@ -9,12 +9,11 @@
 namespace System.CodeDom.Compiler
 {
     using System;
+    using System.CodeDom.Compiler;
+    using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
-    using System.CodeDom.Compiler;
-    using System.Configuration;
-    using System.Collections.Generic;
-
     using Microsoft.Win32;
 
     // The default compiler is the one corresponding to the current-running version of the runtime.

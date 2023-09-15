@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Routing
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
+    using System.ServiceModel.Dispatcher;
     using System.Threading;
 
     abstract class RoutingChannelExtension : IExtension<IContextChannel>

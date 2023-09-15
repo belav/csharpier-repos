@@ -4,15 +4,15 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Runtime.CompilerServices;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.Net.Security;
+    using System.Runtime.CompilerServices;
+    using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel;
     using System.ServiceModel.Security;
-    using System.Transactions;
     using System.ServiceModel.Security.Tokens;
-    using System.Net.Security;
-    using System.Security.Cryptography.X509Certificates;
+    using System.Transactions;
     using SR = System.ServiceModel.SR;
 
     class MsmqOutputMessage<TChannel> : NativeMsmqMessage

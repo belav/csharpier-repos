@@ -6,9 +6,9 @@
 
 namespace System.Net
 {
-    using System.Threading;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Threading;
 
     // LazyAsyncResult - Base class for all IAsyncResult classes
     // that want to take advantage of lazy allocated event handles

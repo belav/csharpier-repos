@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Threading;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Threading;
 
     sealed class ChannelBindingMessageProperty : IDisposable, IMessageProperty
     {

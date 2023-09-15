@@ -14,7 +14,6 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if !SILVERLIGHT
 
 #if CODEPLEX_40

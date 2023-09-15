@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Channels
 {
+    using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
-    using System.Transactions;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Runtime;
+    using System.Transactions;
 
     class MsmqReceiveContextSettings : IReceiveContextSettings
     {

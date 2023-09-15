@@ -16,8 +16,8 @@
 namespace System
 {
     //This class contains only static members and does not need to be serializable.
-    using System.Configuration.Assemblies;
     using System;
+    using System.Configuration.Assemblies;
 
     internal static class ResId
     {

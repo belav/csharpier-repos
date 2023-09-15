@@ -8,12 +8,12 @@
 namespace System.Xml.Serialization
 {
     using System;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.IO;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Collections;
-    using System.Collections.Specialized;
 
 #if !MONO_HYBRID_SYSTEM_XML
     public class ImportContext

@@ -9,15 +9,15 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
-    using System.Collections;
-    using System.Globalization;
     using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Configuration;
+    using System.Globalization;
+    using System.IO;
     using System.Security.Permissions;
     using System.Web.Hosting;
-    using System.Web.Util;
     using System.Web.UI;
+    using System.Web.Util;
 
     internal static class ThemeDirectoryCompiler
     {

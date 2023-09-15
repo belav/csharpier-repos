@@ -48,15 +48,15 @@
 ===========================================================*/
 
 using System;
+using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Versioning;
 using System.Threading;
 #if !MONO
 using System.Security.Permissions;
 #endif
-using System.Runtime.CompilerServices;
-using System.Runtime.Versioning;
-using System.Runtime.ConstrainedExecution;
-using System.IO;
 
 /*
   Problems addressed by the CriticalHandle class:

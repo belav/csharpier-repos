@@ -7,9 +7,9 @@
 namespace System.Web.Services.Discovery
 {
     using System;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Diagnostics;
 
     /// <include file='doc\SoapBinding.uex' path='docs/doc[@for="SoapBinding"]/*' />
     /// <devdoc>

@@ -29,7 +29,6 @@
 namespace Mono.Cecil
 {
     using System.Collections;
-
     using Mono.Cecil;
     using Mono.Cecil.Metadata;
 

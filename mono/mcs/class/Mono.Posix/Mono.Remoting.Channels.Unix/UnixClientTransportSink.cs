@@ -29,12 +29,12 @@
 //
 
 using System;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Messaging;
 using System.Collections;
 using System.IO;
-using System.Threading;
 using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Messaging;
+using System.Threading;
 
 namespace Mono.Remoting.Channels.Unix
 {

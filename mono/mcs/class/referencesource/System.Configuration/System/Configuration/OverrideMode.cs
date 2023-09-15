@@ -6,17 +6,17 @@
 
 namespace System.Configuration
 {
-    using System.Configuration.Internal;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Configuration.Internal;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Xml;
 

@@ -20,18 +20,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Versioning;
 using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif
-using System.Security.Permissions;
-using Microsoft.Win32;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
 
 namespace System.IO
 {

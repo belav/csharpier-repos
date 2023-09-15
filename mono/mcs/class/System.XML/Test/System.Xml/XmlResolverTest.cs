@@ -30,7 +30,6 @@ using System;
 using System.IO;
 using System.Net;
 using System.Xml;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Xml

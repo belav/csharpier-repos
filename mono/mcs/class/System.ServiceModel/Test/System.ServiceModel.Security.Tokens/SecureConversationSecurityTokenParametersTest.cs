@@ -38,7 +38,6 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using NUnit.Framework;
-
 using Parameters = System.ServiceModel.Security.Tokens.SecureConversationSecurityTokenParameters;
 
 namespace MonoTests.System.ServiceModel

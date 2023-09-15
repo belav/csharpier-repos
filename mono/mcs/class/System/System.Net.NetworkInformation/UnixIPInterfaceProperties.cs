@@ -27,10 +27,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Collections.Generic;
-using System.Net.Sockets;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace System.Net.NetworkInformation
 {

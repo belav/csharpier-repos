@@ -10,9 +10,9 @@
 namespace System.Data
 {
     using System;
-    using System.Diagnostics;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
 
     [Editor(
         "Microsoft.VSDesigner.Data.Design.DataViewSettingsCollectionEditor, "

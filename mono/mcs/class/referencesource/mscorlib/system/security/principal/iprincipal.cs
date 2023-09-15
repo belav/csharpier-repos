@@ -14,8 +14,8 @@
 
 namespace System.Security.Principal
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Security.Util;
 
     [System.Runtime.InteropServices.ComVisible(true)]

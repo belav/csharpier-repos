@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Discovery
 {
     using System;
-    using System.Xml;
     using System.Runtime;
     using System.ServiceModel.Discovery.Version11;
     using System.ServiceModel.Discovery.VersionApril2005;
     using System.ServiceModel.Discovery.VersionCD1;
+    using System.Xml;
 
     [ServiceBehavior(
         InstanceContextMode = InstanceContextMode.Single,

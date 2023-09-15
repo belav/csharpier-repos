@@ -6,6 +6,7 @@ namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
@@ -14,12 +15,11 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
     using System.Threading;
     using System.Xml;
-    using System.Globalization;
-    using System.ServiceModel.Diagnostics.Application;
 
     // Please use 'sdv //depot/devdiv/private/indigo_xws/ndp/indigo/src/ServiceModel/System/ServiceModel/Security/SecuritySessionListenerFactory.cs'
     // to see version history before the file was renamed

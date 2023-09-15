@@ -9,19 +9,19 @@
 // Copyright (C) 2015 Xamarin, Inc. (http://www.xamarin.com)
 //
 
-using NUnit.Framework;
 using System;
-using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using NUnit.Framework;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Globalization;
 
 class NoNamespaceClass { }
 

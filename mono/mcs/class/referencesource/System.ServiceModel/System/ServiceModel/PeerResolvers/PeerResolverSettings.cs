@@ -4,15 +4,15 @@
 namespace System.ServiceModel.PeerResolvers
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel.Configuration;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
 
     public class PeerResolverSettings
     {

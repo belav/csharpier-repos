@@ -29,11 +29,11 @@
 
 using System;
 using System.Collections;
-using System.Drawing;
 using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
+using System.Drawing;
 using System.Globalization;
 using System.Reflection;
-using System.ComponentModel.Design.Serialization;
 
 #endregion
 

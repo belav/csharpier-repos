@@ -48,11 +48,10 @@
 #region Used Namespaces
 
 using System;
-using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-
+using System.Drawing;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.ChartTypes;

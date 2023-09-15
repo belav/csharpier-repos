@@ -24,12 +24,12 @@
 #region Used namespaces
 
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 #endregion
 

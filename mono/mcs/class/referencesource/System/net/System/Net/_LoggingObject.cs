@@ -17,16 +17,16 @@ namespace System.Net
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Threading;
+    using System.Configuration;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.ConstrainedExecution;
+    using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Security;
+    using System.Threading;
     using Microsoft.Win32;
-    using System.Runtime.ConstrainedExecution;
-    using System.Globalization;
-    using System.Configuration;
 
     //
     // BaseLoggingObject - used to disable logging,

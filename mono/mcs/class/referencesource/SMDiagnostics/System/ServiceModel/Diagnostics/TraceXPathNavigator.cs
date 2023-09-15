@@ -6,12 +6,12 @@ namespace System.ServiceModel.Diagnostics
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Xml;
-    using System.Xml.XPath;
     using System.Globalization;
-    using System.Text;
     using System.IO;
     using System.Runtime;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.XPath;
 
     // We have to put something here so that when this item appears in the
     // debugger, ToString() isn't called. Calling ToString() can cause bad behavior.

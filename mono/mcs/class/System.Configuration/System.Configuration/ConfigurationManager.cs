@@ -29,13 +29,13 @@
 
 using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using System.Collections.Specialized;
-using System.Reflection;
-using System.Xml;
-using System.IO;
-using System.Text;
 using System.Configuration.Internal;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Xml;
 
 namespace System.Configuration
 {

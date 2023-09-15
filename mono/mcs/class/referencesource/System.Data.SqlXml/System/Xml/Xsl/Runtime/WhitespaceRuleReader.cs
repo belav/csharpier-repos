@@ -5,10 +5,10 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using System.Diagnostics;
 using MS.Internal.Xml;
 
 namespace System.Xml.Xsl.Runtime

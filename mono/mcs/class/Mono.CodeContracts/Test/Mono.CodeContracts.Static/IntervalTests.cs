@@ -27,7 +27,6 @@
 //
 
 using Mono.CodeContracts.Static.Analysis.Numerical;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.CodeContracts

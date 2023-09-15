@@ -28,8 +28,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.UI.WebControls;
 using System.ComponentModel.Design;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {

@@ -1,12 +1,12 @@
 namespace System.Web.Services.Protocols
 {
-    using System.IO;
     using System;
-    using System.Xml.Serialization;
-    using System.Reflection;
     using System.Collections;
-    using System.Web.Services;
+    using System.IO;
     using System.Net;
+    using System.Reflection;
+    using System.Web.Services;
+    using System.Xml.Serialization;
 
     /// <include file='doc\NopReturnReader.uex' path='docs/doc[@for="NopReturnReader"]/*' />
     public class NopReturnReader : MimeReturnReader

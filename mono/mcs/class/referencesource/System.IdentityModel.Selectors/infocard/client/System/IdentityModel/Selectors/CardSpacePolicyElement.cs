@@ -9,7 +9,6 @@ namespace System.IdentityModel.Selectors
     using System.IO;
     using System.Text;
     using System.Xml;
-
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //

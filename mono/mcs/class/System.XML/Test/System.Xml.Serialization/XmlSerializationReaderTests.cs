@@ -13,10 +13,8 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
-
-using NUnit.Framework;
-
 using MonoTests.System.Xml.TestClasses;
+using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {

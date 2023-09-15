@@ -10,18 +10,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Data;
+using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel;
 using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
-using System.Data.EntityModel;
-using System.Data.Entity.Design.Common;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Xml;
-using System.Data.Entity.Design.SsdlGenerator;
-using Microsoft.Build.Utilities;
 using System.Runtime.Versioning;
+using System.Xml;
+using Microsoft.Build.Utilities;
 
 namespace System.Data.Entity.Design
 {

@@ -15,9 +15,9 @@
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.WindowsRuntime;
-    using System.Runtime.CompilerServices;
     using System.Security;
 
     // Local definition of Windows.Foundation.IStringable

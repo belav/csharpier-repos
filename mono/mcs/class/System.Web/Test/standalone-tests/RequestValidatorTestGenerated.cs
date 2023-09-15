@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using StandAloneTests.RequestValidator;
 
 namespace StandAloneTests.RequestValidator.Generated

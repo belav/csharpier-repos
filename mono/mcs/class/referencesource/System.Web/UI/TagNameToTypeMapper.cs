@@ -17,12 +17,12 @@ namespace System.Web.UI
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel.Design;
-    using System.Reflection;
     using System.Globalization;
-    using System.Web.Hosting;
-    using System.Web.Util;
+    using System.Reflection;
     using System.Web.Compilation;
     using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Util;
 #if !FEATURE_PAL
     using System.Web.UI.Design;
 #endif // !FEATURE_PAL

@@ -5,8 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.Versioning;
 using System.Security.Permissions;
 #if !SILVERLIGHT
 using Microsoft.Win32;
@@ -15,7 +16,6 @@ using System.Security;
 using System.Xml.Schema;
 using System.Xml.XmlConfiguration;
 #endif
-using System.Runtime.Versioning;
 
 namespace System.Xml
 {

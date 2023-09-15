@@ -7,13 +7,13 @@
 // Copyright (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Threading;
-using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

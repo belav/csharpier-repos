@@ -4,10 +4,10 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Runtime.Serialization;
-    using System.Xml;
-    using System.Security;
     using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Xml;
 
     static class JsonGlobals
     {

@@ -36,9 +36,9 @@ using System.Globalization;
 using System.Security.Permissions;
 using System.Security.Principal;
 using System.Web.Caching;
+using System.Web.DynamicData.ModelProviders;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.DynamicData.ModelProviders;
 
 namespace System.Web.DynamicData
 {

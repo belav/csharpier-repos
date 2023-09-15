@@ -32,14 +32,14 @@
 // (C)  Novell Inc.
 //
 
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
+using System.DirectoryServices.Design;
+using System.Globalization;
+using System.Runtime.InteropServices;
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Utilclass;
-using System.Globalization;
-using System.DirectoryServices.Design;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Runtime.InteropServices;
 
 namespace System.DirectoryServices
 {

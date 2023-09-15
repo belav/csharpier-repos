@@ -32,7 +32,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-
 using Mono.CodeContracts.Static.DataStructures;
 
 namespace Mono.CodeContracts.Static.Analysis.Numerical

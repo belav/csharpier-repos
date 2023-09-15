@@ -6,16 +6,16 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
-    using System.Security.Principal;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Threading;
-    using System.ServiceModel;
-    using System.ComponentModel;
 
     unsafe class SharedMemory : IDisposable
     {

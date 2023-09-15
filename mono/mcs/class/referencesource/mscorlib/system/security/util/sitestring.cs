@@ -12,8 +12,8 @@ namespace System.Security.Util
 {
     using System;
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     [Serializable]
     internal class SiteString

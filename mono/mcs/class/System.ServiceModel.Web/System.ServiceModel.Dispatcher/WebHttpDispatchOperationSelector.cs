@@ -32,7 +32,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Web;
-
 using TemplateTablePair = System.Collections.Generic.KeyValuePair<System.UriTemplate, object>;
 
 namespace System.ServiceModel.Dispatcher

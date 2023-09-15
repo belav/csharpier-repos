@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Diagnostics;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Web.Hosting;
 
     class MsmqHostedTransportConfiguration : HostedTransportConfigurationBase

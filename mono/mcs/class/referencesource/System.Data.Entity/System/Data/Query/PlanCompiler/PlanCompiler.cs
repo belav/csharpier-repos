@@ -9,8 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Query.InternalTrees;
+using System.Data.Query.PlanCompiler;
 using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
-
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
 // to prevent from simple mistakes during development (e.g. method argument validation
 // in cases where it was you who created the variables or the variables had already been validated or
@@ -27,8 +28,6 @@ using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Ass
 
 using cqt = System.Data.Common.CommandTrees;
 using md = System.Data.Metadata.Edm;
-using System.Data.Query.InternalTrees;
-using System.Data.Query.PlanCompiler;
 
 namespace System.Data.Query.PlanCompiler
 {

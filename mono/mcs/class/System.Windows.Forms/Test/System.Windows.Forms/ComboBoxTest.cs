@@ -29,16 +29,15 @@
 //      Matt Hargett  <matt@use.net>
 
 using System;
-using System.Data;
-using System.IO;
 using System.Collections;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
-
 using NUnit.Framework;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 

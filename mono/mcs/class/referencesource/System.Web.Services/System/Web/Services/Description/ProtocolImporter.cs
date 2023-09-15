@@ -6,22 +6,22 @@
 
 namespace System.Web.Services.Description
 {
-    using System.Web.Services;
-    using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Collections;
     using System;
-    using System.Reflection;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Text;
-    using System.Xml;
-    using System.Web.Services.Configuration;
+    using System.Collections;
     using System.Configuration;
-    using System.Security.Permissions;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Reflection;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services;
+    using System.Web.Services.Configuration;
+    using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ProtocolImporter.uex' path='docs/doc[@for="ProtocolImporter"]/*' />
     /// <devdoc>

@@ -6,9 +6,9 @@
 // (C) Krister Hansson & Andreas Jonsson
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

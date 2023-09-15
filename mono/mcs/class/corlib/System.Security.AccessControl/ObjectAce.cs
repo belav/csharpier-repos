@@ -30,8 +30,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Security.Principal;
 using System.Globalization;
+using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {

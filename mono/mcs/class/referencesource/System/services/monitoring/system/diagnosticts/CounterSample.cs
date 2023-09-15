@@ -6,9 +6,8 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///     A struct holding the raw data for a performance counter.

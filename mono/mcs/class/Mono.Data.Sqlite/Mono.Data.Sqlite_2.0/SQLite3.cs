@@ -8,10 +8,10 @@
 namespace Mono.Data.Sqlite
 {
     using System;
-    using System.Data;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
+    using System.Data;
     using System.Globalization;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// This class implements SQLiteBase completely, and is the guts of the code that interop's SQLite with .NET

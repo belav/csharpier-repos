@@ -8,8 +8,8 @@
 
 namespace System.Threading
 {
-    using System.Threading;
     using System;
+    using System.Threading;
 
     // A constant used by methods that take a timeout (Object.Wait, Thread.Sleep
     // etc) to indicate that no timeout should occur.

@@ -6,22 +6,22 @@
 
 namespace System.Web.Services.Description
 {
-    using System.Web.Services;
-    using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System;
-    using System.Reflection;
-    using System.CodeDom.Compiler;
-    using System.Web.Services.Configuration;
-    using System.Xml;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Globalization;
-    using System.Security.Permissions;
+    using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Web.Services;
+    using System.Web.Services.Configuration;
+    using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ServiceDescriptionImporter.uex' path='docs/doc[@for="ServiceDescriptionImportWarnings"]/*' />
     /// <devdoc>

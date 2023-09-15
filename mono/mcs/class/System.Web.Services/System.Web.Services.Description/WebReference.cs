@@ -28,9 +28,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.Services.Discovery;
-using System.Collections.Specialized;
 using System.CodeDom;
+using System.Collections.Specialized;
+using System.Web.Services.Discovery;
 
 namespace System.Web.Services.Description
 {

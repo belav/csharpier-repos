@@ -29,9 +29,7 @@
 
 using System;
 using System.Security.Cryptography;
-
 using Mono.Security.X509;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.X509

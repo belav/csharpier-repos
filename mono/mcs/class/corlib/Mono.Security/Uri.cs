@@ -37,11 +37,11 @@
 //
 
 using System;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Text;
 
 // See RFC 2396 for more info on URI's.
 

@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Description;
-    using System.Diagnostics;
 
     interface IConnectionOrientedConnectionSettings
     {

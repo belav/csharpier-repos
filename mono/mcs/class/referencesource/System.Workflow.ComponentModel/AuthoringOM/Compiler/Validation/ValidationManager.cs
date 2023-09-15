@@ -3,10 +3,10 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.Design.Serialization;
+    using System.Reflection;
 
     #endregion
 

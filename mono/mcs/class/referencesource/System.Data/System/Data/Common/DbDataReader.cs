@@ -13,8 +13,8 @@ namespace System.Data.Common
     using System.ComponentModel;
     using System.Data;
     using System.IO;
-    using System.Threading.Tasks;
     using System.Threading;
+    using System.Threading.Tasks;
 
     public abstract class DbDataReader : MarshalByRefObject, IDataReader, IEnumerable
     { // V1.2.3300

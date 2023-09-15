@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System;
-using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace System.Diagnostics.Eventing
 {

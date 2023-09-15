@@ -13,12 +13,12 @@
 namespace System
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Security;
+    using System.Diagnostics.Contracts;
     using System.Runtime;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
 
     [Serializable]
     // This class is sealed to mitigate security issues caused by Object::MemberwiseClone.

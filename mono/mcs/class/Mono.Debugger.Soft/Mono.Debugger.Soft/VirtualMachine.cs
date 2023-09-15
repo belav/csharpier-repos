@@ -1,10 +1,10 @@
 using System;
-using System.IO;
-using System.Threading;
-using System.Net;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Threading;
 
 namespace Mono.Debugger.Soft
 {

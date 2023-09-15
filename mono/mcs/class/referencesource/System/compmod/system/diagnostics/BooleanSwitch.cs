@@ -9,8 +9,8 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
 

@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Reflection;
-    using System.ServiceModel.Description;
-    using System.Runtime.Serialization;
-    using System.ServiceModel;
-    using System.Xml;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
     public sealed class BinaryMessageEncodingBindingElement
         : MessageEncodingBindingElement,

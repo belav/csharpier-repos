@@ -11,15 +11,15 @@ namespace System.Workflow.ComponentModel
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.Runtime;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Reflection;
 
     // TransactedFilter
     //

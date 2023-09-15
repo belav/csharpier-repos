@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Data.Objects.DataClasses;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {

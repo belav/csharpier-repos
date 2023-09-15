@@ -1,7 +1,7 @@
 using System;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 //TODO add to a typeref
 //TODO is Bla<D> a memberref?

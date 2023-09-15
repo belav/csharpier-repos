@@ -17,11 +17,11 @@ namespace System.Configuration
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Versioning;
 
     /// <devdoc>
     ///    <para>

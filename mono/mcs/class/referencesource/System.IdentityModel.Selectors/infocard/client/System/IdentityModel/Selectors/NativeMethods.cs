@@ -4,16 +4,14 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.ConstrainedExecution;
     using System.ComponentModel;
-
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     internal static class NativeMethods
     {

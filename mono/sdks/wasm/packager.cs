@@ -1,10 +1,10 @@
 using System;
-using System.Linq;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Mono.Cecil;
-using Mono.Options;
 using Mono.Cecil.Cil;
+using Mono.Options;
 
 //
 // Google V8 style options:

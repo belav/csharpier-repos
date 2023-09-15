@@ -12,10 +12,8 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
-
 using Mono.Unix;
 using Mono.Unix.Native;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix.Native

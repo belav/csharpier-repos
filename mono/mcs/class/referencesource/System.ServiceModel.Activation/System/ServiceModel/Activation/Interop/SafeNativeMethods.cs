@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Activation.Interop
 {
     using System;
-    using System.Security;
-    using System.Runtime.InteropServices;
-    using System.Security.Principal;
-    using System.Runtime.Versioning;
     using System.Runtime;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Principal;
 
     [SuppressUnmanagedCodeSecurity]
     static class SafeNativeMethods

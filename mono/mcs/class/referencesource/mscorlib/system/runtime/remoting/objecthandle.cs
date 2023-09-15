@@ -19,9 +19,9 @@
 namespace System.Runtime.Remoting
 {
     using System;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
+    using System.Security.Permissions;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Activation;
     using System.Runtime.Remoting.Lifetime;

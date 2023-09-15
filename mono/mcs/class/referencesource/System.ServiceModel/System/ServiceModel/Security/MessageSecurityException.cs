@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.IO;
+    using System.Runtime;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Cryptography;
     using System.Security.Permissions;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Text;
     using System.Xml;
-    using System.Security;
-    using System.Runtime;
 
     [Serializable]
     public class MessageSecurityException : CommunicationException

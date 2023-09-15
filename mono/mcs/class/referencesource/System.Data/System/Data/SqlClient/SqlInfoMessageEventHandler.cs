@@ -8,9 +8,8 @@
 
 namespace System.Data.SqlClient
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>

@@ -14,12 +14,12 @@ namespace System.Security.Policy
 {
     using System.Deployment.Internal.Isolation;
     using System.Deployment.Internal.Isolation.Manifest;
+    using System.Diagnostics.Contracts;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.Versioning;
     using System.Security.Permissions;
     using System.Security.Util;
-    using System.Diagnostics.Contracts;
-    using System.Reflection;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public static class ApplicationSecurityManager

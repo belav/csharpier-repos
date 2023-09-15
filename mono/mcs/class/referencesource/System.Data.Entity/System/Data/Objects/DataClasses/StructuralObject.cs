@@ -6,13 +6,13 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
+using System.ComponentModel;
 using System.Data;
+using System.Data.Common.Utils;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
-using System.ComponentModel;
 using System.Runtime.Serialization;
-using System.Data.Common.Utils;
 
 namespace System.Data.Objects.DataClasses
 {

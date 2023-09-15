@@ -6,10 +6,10 @@
 namespace System.Globalization
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
 
     // This abstract class represents a calendar. A calendar reckons time in
     // divisions such as weeks, months and years. The number, length and start of

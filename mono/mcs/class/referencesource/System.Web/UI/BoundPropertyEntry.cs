@@ -6,11 +6,11 @@
 
 namespace System.Web.UI
 {
-    using System.Reflection;
-    using System.Web.Util;
-    using System.Web.Compilation;
     using System.ComponentModel.Design;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Web.Compilation;
+    using System.Web.Util;
 
     /// <devdoc>
     /// PropertyEntry for any bound properties

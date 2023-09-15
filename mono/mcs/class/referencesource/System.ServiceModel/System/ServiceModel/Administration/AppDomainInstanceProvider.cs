@@ -10,11 +10,11 @@ namespace System.ServiceModel.Administration
     using System.Globalization;
     using System.Reflection;
     using System.Runtime;
-    using System.ServiceModel;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Activation;
     using System.Security;
     using System.Security.Permissions;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Diagnostics;
 
     class AppDomainInstanceProvider : ProviderBase, IWmiProvider
     {

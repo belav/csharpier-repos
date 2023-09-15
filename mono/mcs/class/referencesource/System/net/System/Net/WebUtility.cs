@@ -12,9 +12,6 @@ namespace System.Net
 {
     using System;
     using System.Collections.Generic;
-#if !FEATURE_NETCORE
-    using System.Configuration;
-#endif
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -22,6 +19,10 @@ namespace System.Net
     using System.Net.Configuration;
     using System.Runtime.Versioning;
     using System.Text;
+#if !FEATURE_NETCORE
+    using System.Configuration;
+#endif
+
 #if FEATURE_NETCORE
     using System.Security;
 #endif

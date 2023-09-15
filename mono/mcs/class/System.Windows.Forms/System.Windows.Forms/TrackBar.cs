@@ -37,10 +37,10 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Timers;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Timers;
 
 namespace System.Windows.Forms
 {

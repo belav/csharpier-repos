@@ -6,9 +6,9 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Xml;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Xml;
 
 namespace System.Xml.Schema
 {

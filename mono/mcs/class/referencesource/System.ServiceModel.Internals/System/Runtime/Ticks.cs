@@ -4,8 +4,8 @@
 
 namespace System.Runtime
 {
-    using System.Security;
     using System.Runtime.Interop;
+    using System.Security;
 
     static class Ticks
     {

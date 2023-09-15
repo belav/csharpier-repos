@@ -14,10 +14,10 @@
 ============================================================*/
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Threading;
+using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 using Microsoft.Win32;
 
 namespace System.Diagnostics.Eventing.Reader

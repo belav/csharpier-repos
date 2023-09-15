@@ -30,7 +30,6 @@
 
 using System;
 using System.IO;
-
 using Mono.Security.Authenticode;
 using Mono.Security.X509;
 using Mono.Security.X509.Stores;

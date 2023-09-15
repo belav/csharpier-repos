@@ -11,17 +11,17 @@ namespace System.Net
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
+    using System.Security.Principal;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Security;
-    using System.Security.Authentication.ExtendedProtection;
-    using System.Security.Principal;
-    using System.Diagnostics.CodeAnalysis;
 
     public class HttpListenerBasicIdentity : GenericIdentity
     {

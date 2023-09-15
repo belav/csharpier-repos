@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Threading;
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Threading;
 
     internal class ThreadSafeMessageFilterTable<FilterData> : IMessageFilterTable<FilterData>
     {

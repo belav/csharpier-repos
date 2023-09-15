@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.ServiceModel;
-    using System.Xml;
     using System.IdentityModel.Selectors;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.Xml;
 
     sealed class IssuedTokensHeader : MessageHeader
     {

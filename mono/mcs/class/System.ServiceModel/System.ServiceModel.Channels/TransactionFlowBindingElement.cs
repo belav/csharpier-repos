@@ -27,9 +27,9 @@
 //
 using System;
 using System.Collections.Generic;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
-using System.ServiceModel.Channels;
 using System.Transactions;
 
 namespace System.ServiceModel.Channels

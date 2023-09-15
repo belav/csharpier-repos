@@ -10,13 +10,13 @@
 namespace System.Data.Common
 {
     using System;
-    using System.Xml;
-    using System.IO;
-    using System.Xml.Serialization;
+    using System.Collections;
     using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Collections;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal sealed class SqlCharsStorage : DataStorage
     {

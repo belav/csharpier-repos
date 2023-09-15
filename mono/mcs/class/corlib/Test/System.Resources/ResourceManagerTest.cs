@@ -34,14 +34,12 @@
 using System;
 using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Threading;
-using System.IO;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Resources
 {

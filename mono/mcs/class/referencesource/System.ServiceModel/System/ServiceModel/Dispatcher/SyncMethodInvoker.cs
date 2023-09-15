@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Globalization;
-    using System.Threading;
     using System.Collections;
     using System.Diagnostics;
-    using System.Security;
+    using System.Globalization;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class SyncMethodInvoker : IOperationInvoker
     {

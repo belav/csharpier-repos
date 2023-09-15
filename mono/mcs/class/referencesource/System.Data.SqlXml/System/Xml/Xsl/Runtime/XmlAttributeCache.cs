@@ -10,8 +10,8 @@ namespace System.Xml.Xsl.Runtime
     using System;
     using System.Diagnostics;
     using System.Xml;
-    using System.Xml.XPath;
     using System.Xml.Schema;
+    using System.Xml.XPath;
 
     /// <summary>
     /// This writer supports only writer methods which write attributes.  Attributes are stored in a

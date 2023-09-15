@@ -14,7 +14,6 @@ namespace Foo
 {
     using A;
     using B;
-
     using C = A.CAttribute;
 
     [C]

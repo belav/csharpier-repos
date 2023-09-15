@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
-    using System.ComponentModel;
     using System.ServiceModel.PeerResolvers;
 
     public sealed partial class PeerResolverElement : ServiceModelConfigurationElement

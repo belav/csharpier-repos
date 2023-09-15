@@ -27,10 +27,10 @@
 //
 
 using System;
-using System.Reflection;
-using System.Security.Cryptography;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.ServiceModel;
 using System.ServiceModel.Channels;

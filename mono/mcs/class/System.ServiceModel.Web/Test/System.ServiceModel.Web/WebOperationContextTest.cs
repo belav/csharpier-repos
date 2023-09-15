@@ -31,16 +31,15 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+using System.ServiceModel.Web;
+using System.Xml;
+using MonoTests.Helpers;
+using NUnit.Framework;
 #if !MOBILE
 using System.ServiceModel.Syndication;
 #endif
-using System.ServiceModel.Web;
-using System.Xml;
-using NUnit.Framework;
 
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Web
 {

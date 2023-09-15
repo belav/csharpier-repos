@@ -9,9 +9,9 @@
 namespace System.Data.Common
 {
     using System;
-    using System.Xml;
-    using System.Data.SqlTypes;
     using System.Collections;
+    using System.Data.SqlTypes;
+    using System.Xml;
 
     internal sealed class DateTimeOffsetStorage : DataStorage
     {

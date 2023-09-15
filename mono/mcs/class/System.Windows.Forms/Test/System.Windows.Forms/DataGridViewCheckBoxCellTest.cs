@@ -29,12 +29,11 @@
 
 
 using System;
-using System.Windows.Forms;
-
-using NUnit.Framework;
+using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
-using System.ComponentModel;
+using System.Windows.Forms;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {

@@ -26,9 +26,9 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-using System.Windows.Forms.Layout;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
 {

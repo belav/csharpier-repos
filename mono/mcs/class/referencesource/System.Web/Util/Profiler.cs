@@ -13,11 +13,11 @@
 namespace System.Web.Util
 {
     using System;
+    using System.Collections;
+    using System.Threading;
     using System.Web;
     using System.Web.SessionState;
     using System.Web.UI;
-    using System.Threading;
-    using System.Collections;
 
     internal class Profiler
     {

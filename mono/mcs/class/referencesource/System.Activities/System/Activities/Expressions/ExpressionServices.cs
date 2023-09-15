@@ -6,13 +6,13 @@ namespace System.Activities.Expressions
 {
     using System;
     using System.Activities.Statements;
+    using System.Collections;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections;
 
     public static class ExpressionServices
     {

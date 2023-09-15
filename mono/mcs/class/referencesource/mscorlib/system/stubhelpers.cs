@@ -6,18 +6,18 @@
 
 namespace System.StubHelpers
 {
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Text;
     using Microsoft.Win32;
-    using System.Security;
-    using System.Collections.Generic;
-    using System.Runtime;
-    using System.Runtime.InteropServices;
 #if FEATURE_COMINTEROP
     using System.Runtime.InteropServices.WindowsRuntime;
 #endif // FEATURE_COMINTEROP
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics.Contracts;
 
     [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
     internal static class AnsiCharMarshaler

@@ -29,12 +29,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml;
 using System;
 using System.Collections;
 using System.Globalization;
-using System.Xml.Schema;
 using System.Reflection;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {

@@ -4,9 +4,9 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.Globalization;
     using System.Reflection;
     using System.Xml;
-    using System.Globalization;
 
     [DataContract(
         Name = "DateTimeOffset",

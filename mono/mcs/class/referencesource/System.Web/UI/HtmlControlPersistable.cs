@@ -6,8 +6,8 @@
 
 namespace System.Web.UI
 {
-    using System.ComponentModel;
     using System;
+    using System.ComponentModel;
 
     [AttributeUsage(AttributeTargets.Property)]
     internal sealed class HtmlControlPersistableAttribute : Attribute

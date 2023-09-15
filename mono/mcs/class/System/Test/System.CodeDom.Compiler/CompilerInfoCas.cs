@@ -28,18 +28,16 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
-using System.IO;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.IO;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
-using MCSharp = Microsoft.CSharp;
 using MonoTests.System.CodeDom.Compiler;
+using NUnit.Framework;
+using MCSharp = Microsoft.CSharp;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

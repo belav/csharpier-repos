@@ -8,17 +8,17 @@
 
 namespace System.Reflection.Emit
 {
-    using System.Text;
     using System;
-    using CultureInfo = System.Globalization.CultureInfo;
-    using System.Diagnostics.SymbolStore;
-    using System.Reflection;
-    using System.Security;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
+    using System.Diagnostics.SymbolStore;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using CultureInfo = System.Globalization.CultureInfo;
 #if !MONO
     [HostProtection(MayLeakOnAbort = true)]
     [ClassInterface(ClassInterfaceType.None)]

@@ -7,10 +7,10 @@
 // Copyright (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO
 {

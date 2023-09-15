@@ -25,16 +25,16 @@ using System.Security.Cryptography.X509Certificates;
 namespace System.Net.Security
 {
     using System;
-    using System.IO;
-    using System.Threading;
     using System.Collections;
-    using System.Runtime.InteropServices;
-    using System.Globalization;
-    using System.Net.Sockets;
-    using System.Security.Authentication;
-    using System.Security.Authentication.ExtendedProtection;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
+    using System.Security.Authentication;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Threading;
 
     internal partial class SslState
     {

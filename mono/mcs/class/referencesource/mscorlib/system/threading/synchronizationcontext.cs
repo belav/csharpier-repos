@@ -16,22 +16,23 @@
 
 namespace System.Threading
 {
-#if !MONO
-    using Microsoft.Win32.SafeHandles;
-#endif
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
 #if FEATURE_CORRUPTING_EXCEPTIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-    using System.Runtime;
-    using System.Runtime.Versioning;
-    using System.Runtime.ConstrainedExecution;
-    using System.Reflection;
-    using System.Security;
-    using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
+
+#if !MONO
+    using Microsoft.Win32.SafeHandles;
+#endif
 
 #if FEATURE_SYNCHRONIZATIONCONTEXT_WAIT
     [Flags]

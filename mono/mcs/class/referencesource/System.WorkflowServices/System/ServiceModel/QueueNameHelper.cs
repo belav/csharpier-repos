@@ -4,13 +4,13 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.Workflow.Runtime;
-    using System.ServiceModel.Channels;
     using System.Reflection;
-    using System.Text;
-    using System.Xml;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
+    using System.Text;
     using System.Workflow.Activities;
+    using System.Workflow.Runtime;
+    using System.Xml;
 
     static class QueueNameHelper
     {

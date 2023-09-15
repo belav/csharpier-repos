@@ -11,8 +11,8 @@ namespace System.Activities
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime;
-    using System.Text;
     using System.Security;
+    using System.Text;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class RuntimeArgument : LocationReference

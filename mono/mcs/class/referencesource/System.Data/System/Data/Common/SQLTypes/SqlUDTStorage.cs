@@ -10,17 +10,17 @@
 namespace System.Data.Common
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Data.SqlTypes;
-    using System.Xml;
-    using System.IO;
-    using System.Xml.Serialization;
-    using System.Globalization;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal sealed class SqlUdtStorage : DataStorage
     {

@@ -6,10 +6,10 @@
 //
 // (C) 2003 Patrick Kalkman
 //
-using NUnit.Framework;
 using System;
-using System.Threading;
 using System.Globalization;
+using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

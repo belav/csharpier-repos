@@ -32,7 +32,6 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.InteropServices

@@ -10,14 +10,14 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using System.Threading;
 using NUnit.Framework;
-using System.Globalization;
-using Thread = System.Threading.Thread;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-using System.Reflection;
+using Thread = System.Threading.Thread;
 
 namespace MonoTests.System.Windows.Forms
 {

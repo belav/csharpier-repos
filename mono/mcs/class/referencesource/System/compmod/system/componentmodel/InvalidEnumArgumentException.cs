@@ -6,11 +6,11 @@
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.Serialization;
+    using Microsoft.Win32;
 #if MONO_FEATURE_CAS
     using System.Security.Permissions;
 #endif

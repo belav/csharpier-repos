@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Specialized;
-using System.Net.Mail;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Globalization;
+using System.Net.Mail;
 
 namespace System.Net.Mail
 {

@@ -35,9 +35,7 @@ using System.Text;
 using System.Runtime.Serialization;
 using System.ServiceModel.Description;
 using System.ServiceModel;
-
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Description

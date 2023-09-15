@@ -38,11 +38,8 @@ using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.System.ServiceModel.Channels;
-
 using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenRequirement;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel

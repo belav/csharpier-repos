@@ -8,9 +8,9 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Text;
-using System.Data.Common.Utils;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {

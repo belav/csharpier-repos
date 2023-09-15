@@ -54,10 +54,10 @@ namespace System.Net
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Globalization;
     using System.Net.NetworkInformation;
     using System.Text;
+    using System.Threading;
 
     internal struct HeaderVariantInfo
     {

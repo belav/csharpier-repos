@@ -39,8 +39,8 @@
 //     not minimized.
 
 using System;
-using System.Text;
 using System.IO;
+using System.Text;
 using C5;
 using SCG = System.Collections.Generic;
 

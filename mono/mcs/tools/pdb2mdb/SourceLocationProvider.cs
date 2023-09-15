@@ -5,11 +5,11 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.IO;
+using System.Text;
 using Microsoft.Cci;
 using Microsoft.Cci.Pdb;
-using System.Text;
-using System.Diagnostics.SymbolStore;
 
 namespace Microsoft.Cci
 {

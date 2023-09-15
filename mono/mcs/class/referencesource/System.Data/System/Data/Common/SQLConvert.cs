@@ -9,9 +9,9 @@ namespace System.Data.Common
 {
     using System;
     using System.Data.SqlTypes;
-    using System.Xml;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Xml;
 
     internal static class SqlConvert
     {

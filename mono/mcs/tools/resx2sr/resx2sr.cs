@@ -61,10 +61,10 @@
  */
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Resources;
 using System.ComponentModel.Design;
+using System.IO;
+using System.Resources;
 using System.Text.RegularExpressions;
 using Mono.Options;
 

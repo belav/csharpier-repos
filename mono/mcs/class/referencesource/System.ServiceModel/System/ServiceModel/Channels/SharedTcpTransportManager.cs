@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Activation;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.ServiceModel;
-    using System.Threading;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
     class SharedTcpTransportManager : TcpTransportManager, ITransportManagerRegistration
     {

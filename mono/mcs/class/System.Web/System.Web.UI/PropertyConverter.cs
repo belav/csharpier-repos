@@ -26,8 +26,8 @@
 //
 // Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 
-using System.Reflection;
 using System.ComponentModel;
+using System.Reflection;
 using System.Security.Permissions;
 
 namespace System.Web.UI

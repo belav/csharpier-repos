@@ -3,10 +3,10 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Hosting;
 
 namespace System.ComponentModel.Composition
 {

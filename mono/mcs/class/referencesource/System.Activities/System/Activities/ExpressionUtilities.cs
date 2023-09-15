@@ -5,16 +5,16 @@
 namespace System.Activities
 {
     using System;
+    using System.Activities.XamlIntegration;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Activities.XamlIntegration;
 
     static class ExpressionUtilities
     {

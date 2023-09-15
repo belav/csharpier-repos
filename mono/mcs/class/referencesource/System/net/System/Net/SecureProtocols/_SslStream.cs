@@ -20,13 +20,13 @@ Revision History:
 namespace System.Net.Security
 {
     using System;
-    using System.IO;
-    using System.Security;
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Threading;
     using System.Collections.Generic;
+    using System.IO;
     using System.Net.Sockets;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
 
     //
     // This is a wrapping stream that does data encryption/decryption based on a successfully authenticated SSPI context.

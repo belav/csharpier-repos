@@ -10,13 +10,13 @@
 //
 
 using System;
-using System.Linq;
-using SLE = System.Linq.Expressions;
 using System.Dynamic;
+using System.Linq;
 #if STATIC
 using IKVM.Reflection.Emit;
 #else
 using System.Reflection.Emit;
+using SLE = System.Linq.Expressions;
 #endif
 
 namespace Mono.CSharp

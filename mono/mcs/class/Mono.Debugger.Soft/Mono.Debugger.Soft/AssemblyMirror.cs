@@ -1,9 +1,8 @@
 using System;
-using System.Reflection;
-using Mono.Debugger;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Reflection;
+using Mono.Debugger;
 #if ENABLE_CECIL
 using Mono.Cecil;
 #endif

@@ -19,13 +19,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-#if FEATURE_CORECLR
-using System.Diagnostics.Contracts;
-#endif
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+#if FEATURE_CORECLR
+using System.Diagnostics.Contracts;
+#endif
 
 namespace System.Resources
 {

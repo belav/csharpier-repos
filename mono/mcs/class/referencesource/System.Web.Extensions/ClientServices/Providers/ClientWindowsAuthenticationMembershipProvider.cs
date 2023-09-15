@@ -6,20 +6,20 @@
 namespace System.Web.ClientServices.Providers
 {
     using System;
+    using System.Collections.Specialized;
     using System.Data;
     using System.Data.OleDb;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
-    using System.Windows.Forms;
-    using System.Web;
-    using System.Web.Resources;
-    using System.Web.Security;
-    using System.Threading;
     using System.Security;
     using System.Security.Principal;
-    using System.Collections.Specialized;
+    using System.Threading;
+    using System.Web;
     using System.Web.ClientServices;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Web.Resources;
+    using System.Web.Security;
+    using System.Windows.Forms;
 
     public class ClientWindowsAuthenticationMembershipProvider : MembershipProvider
     {

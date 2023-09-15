@@ -11,8 +11,8 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Claims;
     using System.IdentityModel.Selectors;
     using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Xml;
+    using System.Xml.Serialization;
 
     public class SamlAttributeStatement : SamlSubjectStatement
     {

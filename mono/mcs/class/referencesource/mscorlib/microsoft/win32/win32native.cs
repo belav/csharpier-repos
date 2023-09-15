@@ -92,18 +92,17 @@
 namespace Microsoft.Win32
 {
     using System;
+    using System.Configuration.Assemblies;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Principal;
     using System.Text;
-    using System.Configuration.Assemblies;
-    using System.Runtime.Remoting;
-    using System.Runtime.InteropServices;
     using System.Threading;
     using Microsoft.Win32.SafeHandles;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-
     using BOOL = System.Int32;
     using DWORD = System.UInt32;
     using ULONG = System.UInt32;

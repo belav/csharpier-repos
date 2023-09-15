@@ -4,13 +4,13 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
+    using System.ComponentModel;
     using System.Runtime.Serialization;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.Text;
     using System.Xml;
-    using System.ComponentModel;
 
     public sealed class MtomMessageEncodingBindingElement
         : MessageEncodingBindingElement,

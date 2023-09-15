@@ -7,9 +7,9 @@
 // @backupOwner jeffders
 //---------------------------------------------------------------------
 using System.Collections;
+using System.Data.Metadata.Edm;
 using System.Data.Objects.DataClasses;
 using System.Runtime.CompilerServices;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Objects.Internal
 {

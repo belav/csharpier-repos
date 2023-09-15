@@ -8,15 +8,15 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.Collections;
     using System.ComponentModel.Design.Serialization;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.Remoting;
     using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     An InstanceCreationEditor allows the user to create an instance of a particular type of property from a dropdown

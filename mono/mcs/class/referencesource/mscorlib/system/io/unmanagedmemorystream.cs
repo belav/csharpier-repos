@@ -16,13 +16,13 @@
 **
 ===========================================================*/
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System.Diagnostics.Contracts;
 #if !FEATURE_PAL && FEATURE_ASYNC_IO || MONO
 using System.Threading.Tasks;
 #endif  // !FEATURE_PAL && FEATURE_ASYNC_IO

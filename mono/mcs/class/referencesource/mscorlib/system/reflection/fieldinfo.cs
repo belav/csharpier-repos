@@ -17,12 +17,13 @@ namespace System.Reflection
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
-#if FEATURE_REMOTING
-    using System.Runtime.Remoting.Metadata;
-#endif //FEATURE_REMOTING
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Threading;
+#if FEATURE_REMOTING
+    using System.Runtime.Remoting.Metadata;
+#endif //FEATURE_REMOTING
+
     using RuntimeTypeCache = System.RuntimeType.RuntimeTypeCache;
 
     [Serializable]

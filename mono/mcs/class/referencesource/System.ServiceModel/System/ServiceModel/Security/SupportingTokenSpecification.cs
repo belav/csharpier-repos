@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.ObjectModel;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
 
     public class SupportingTokenSpecification : SecurityTokenSpecification

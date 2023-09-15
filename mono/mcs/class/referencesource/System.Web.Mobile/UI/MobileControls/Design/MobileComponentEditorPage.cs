@@ -19,7 +19,6 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.WebControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-
     using ControlDesigner = System.Web.UI.Design.ControlDesigner;
 
     /// <summary>

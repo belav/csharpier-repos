@@ -6,13 +6,13 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities.Expressions;
-    using System.Activities.Statements;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.PropertyEditing;
+    using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Activities.Presentation.View;
 
     /// <summary>
     /// Interaction logic for InvokeMethodDesigner.xaml

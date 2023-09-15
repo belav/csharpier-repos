@@ -25,13 +25,12 @@ using System;
 // PlanCompiler.Assert.
 
 using System.Collections.Generic;
-using System.Globalization;
-
 using System.Data.Common;
-using md = System.Data.Metadata.Edm;
 using System.Data.Query.InternalTrees;
 using System.Data.Query.PlanCompiler;
+using System.Globalization;
 using System.Linq;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.PlanCompiler
 {

@@ -31,7 +31,6 @@
 
 using System.Data;
 using System.Data.OleDb;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb

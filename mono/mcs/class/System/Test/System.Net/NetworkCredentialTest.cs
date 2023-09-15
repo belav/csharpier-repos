@@ -29,7 +29,6 @@
 using System;
 using System.Net;
 using System.Security;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Net

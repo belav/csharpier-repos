@@ -13,11 +13,11 @@
 
 namespace System.Collections.Specialized
 {
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Globalization;
     using System.Runtime.Serialization;
     using System.Text;
-    using System.Globalization;
+    using Microsoft.Win32;
 
     /// <devdoc>
     /// <para>Represents a sorted collection of associated <see cref='System.String' qualify='true'/> keys and <see cref='System.String' qualify='true'/> values that

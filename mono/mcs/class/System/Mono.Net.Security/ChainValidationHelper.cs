@@ -35,30 +35,28 @@
 extern alias MonoSecurity;
 #endif
 
-#if MONO_SECURITY_ALIAS
-using MonoSecurity::Mono.Security.Interface;
-using MSX = MonoSecurity::Mono.Security.X509;
-using MonoSecurity::Mono.Security.X509.Extensions;
 #else
 using Mono.Security.Interface;
 using MSX = Mono.Security.X509;
 using Mono.Security.X509.Extensions;
 #endif
 
-using System;
-using System.Net;
-using System.Threading;
-using System.Collections;
+using System;using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Net.Configuration;
-using System.Text.RegularExpressions;
-using System.Security.Cryptography.X509Certificates;
-
-using System.Globalization;
-using System.Net.Security;
 using System.Diagnostics;
+using System.Globalization;
+using System.Net;
+using System.Net.Configuration;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
+using System.Threading;
+#if MONO_SECURITY_ALIAS
+using MonoSecurity::Mono.Security.Interface;
+using MonoSecurity::Mono.Security.X509.Extensions;
+using MSX = MonoSecurity::Mono.Security.X509;
 
 namespace Mono.Net.Security
 {

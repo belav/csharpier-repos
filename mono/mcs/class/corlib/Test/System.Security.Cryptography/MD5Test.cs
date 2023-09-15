@@ -5,9 +5,9 @@
 // (C)  Eduardo Garcia Cebollero.
 // (C)  Ximian, Inc.  http://www.ximian.com
 
-using NUnit.Framework;
 using System;
 using System.Security.Cryptography;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography
 {

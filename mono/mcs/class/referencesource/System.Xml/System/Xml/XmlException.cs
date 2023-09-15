@@ -8,12 +8,12 @@
 namespace System.Xml
 {
     using System;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Resources;
-    using System.Text;
-    using System.Diagnostics;
     using System.Security.Permissions;
-    using System.Globalization;
+    using System.Text;
     using System.Threading;
 #if !SILVERLIGHT
     using System.Runtime.Serialization;

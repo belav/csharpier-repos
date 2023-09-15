@@ -6,11 +6,11 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Collections.Generic;
     using System.Runtime;
-    using System.Collections.ObjectModel;
     using System.Windows.Markup;
 
     [ContentProperty("Exception")]

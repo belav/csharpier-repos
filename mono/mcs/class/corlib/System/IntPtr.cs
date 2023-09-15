@@ -42,10 +42,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Runtime.ConstrainedExecution;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Serialization;
 
 namespace System
 {

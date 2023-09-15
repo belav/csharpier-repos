@@ -8,7 +8,6 @@
 // (C) 2002, 2003 Motus Technologies Inc. (http://www.motus.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
 using System.IO;
@@ -16,6 +15,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

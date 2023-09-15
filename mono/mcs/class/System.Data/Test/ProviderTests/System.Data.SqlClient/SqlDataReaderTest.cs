@@ -38,7 +38,6 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.SqlClient

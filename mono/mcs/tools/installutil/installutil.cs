@@ -27,11 +27,11 @@
 //
 
 using System;
-using System.IO;
 using System.Collections;
 using System.ComponentModel;
-using System.Reflection;
 using System.Configuration.Install;
+using System.IO;
+using System.Reflection;
 
 public class InstallUtil
 {

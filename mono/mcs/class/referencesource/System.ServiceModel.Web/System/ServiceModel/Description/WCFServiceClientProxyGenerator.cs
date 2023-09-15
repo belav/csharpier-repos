@@ -7,15 +7,15 @@
 namespace System.ServiceModel.Description
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Web;
     using System.Text;
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Collections;
     using System.Web.Script.Services;
+    using System.Xml;
 
     internal class WCFServiceClientProxyGenerator : ClientProxyGenerator
     {

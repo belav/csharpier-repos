@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Versioning;
-using System.Text;
 using System.Security.Permissions;
-using System.ComponentModel;
-using System.Configuration;
+using System.Text;
 using System.Xml;
 
 namespace System.Data.Common

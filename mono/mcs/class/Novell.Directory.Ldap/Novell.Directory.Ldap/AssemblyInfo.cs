@@ -30,10 +30,10 @@
 //
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Resources;
-using System.Security;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 //
 // General Information about an assembly is controlled through the following

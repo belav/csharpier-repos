@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel
 {
-    using System.Xml;
     using System.Collections.Generic;
+    using System.Xml;
 
     // NOTE: This is a dynamic dictionary of XmlDictionaryStrings for the Binary Encoder to dynamically encode should
     // the string not exist in the static cache.

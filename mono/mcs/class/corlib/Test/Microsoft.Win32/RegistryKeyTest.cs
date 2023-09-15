@@ -13,10 +13,8 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Win32

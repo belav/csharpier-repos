@@ -33,11 +33,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
-using System.Runtime.Serialization;
-using System.Reflection;
 
 namespace System.Xml.Serialization
 {

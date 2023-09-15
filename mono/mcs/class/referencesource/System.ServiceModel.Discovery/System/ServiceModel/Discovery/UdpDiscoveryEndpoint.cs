@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Discovery
 {
     using System.Diagnostics.CodeAnalysis;
+    using System.Net.Sockets;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Net.Sockets;
 
     [Fx.Tag.XamlVisible(false)]
     public class UdpDiscoveryEndpoint : DiscoveryEndpoint

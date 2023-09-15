@@ -9,13 +9,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
-using System.Data.Query.InternalTrees;
-using System.Data.Query.PlanCompiler;
-using System.Linq;
 using System.Data.Mapping;
 using System.Data.Metadata.Edm;
+using System.Data.Query.InternalTrees;
+using System.Data.Query.PlanCompiler;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Data.Query.InternalTrees
 {

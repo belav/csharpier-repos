@@ -8,8 +8,8 @@ namespace System.Net.Sockets
 {
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Security.Permissions;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <devdoc>

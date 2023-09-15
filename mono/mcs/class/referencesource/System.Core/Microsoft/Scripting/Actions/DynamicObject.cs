@@ -13,16 +13,15 @@
  *
  * ***************************************************************************/
 
+using System.Diagnostics;
+using System.Dynamic.Utils;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 #if CLR2
 using Microsoft.Scripting.Ast;
 #else
 using System.Linq.Expressions;
 #endif
-
-using System.Diagnostics;
-using System.Dynamic.Utils;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace System.Dynamic
 {

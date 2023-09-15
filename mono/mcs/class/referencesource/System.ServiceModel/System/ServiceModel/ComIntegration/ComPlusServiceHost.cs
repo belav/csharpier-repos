@@ -6,16 +6,16 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
-    using System.Diagnostics;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
 
     abstract class ComPlusServiceHost : ServiceHostBase
     {

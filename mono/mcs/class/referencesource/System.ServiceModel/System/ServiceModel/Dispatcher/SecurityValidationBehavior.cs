@@ -3,18 +3,17 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IdentityModel.Tokens;
+    using System.Net.Security;
+    using System.Runtime.CompilerServices;
+    using System.Security.Principal;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.IdentityModel.Tokens;
-
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Runtime.CompilerServices;
-    using System.Net.Security;
-    using System.Security.Principal;
 
     class SecurityValidationBehavior : IEndpointBehavior, IServiceBehavior
     {

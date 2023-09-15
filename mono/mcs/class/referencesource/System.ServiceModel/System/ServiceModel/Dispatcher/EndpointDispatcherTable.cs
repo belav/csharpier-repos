@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
 

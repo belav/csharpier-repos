@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Security
 {
     using System;
+    using System.IdentityModel.Protocols.WSTrust;
     using System.IdentityModel.Tokens;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
-    using System.IdentityModel.Protocols.WSTrust;
 
     /// <summary>
     /// A service contract that defines the methods which wrap the Message-oriented

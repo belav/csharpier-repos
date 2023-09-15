@@ -29,8 +29,8 @@
 // (C) 2003 Novell, Inc (http://www.novell.com)
 //
 
-using Novell.Directory.Ldap.Rfc2251;
 using Novell.Directory.Ldap.Asn1;
+using Novell.Directory.Ldap.Rfc2251;
 
 namespace Novell.Directory.Ldap.Events.Edir
 {

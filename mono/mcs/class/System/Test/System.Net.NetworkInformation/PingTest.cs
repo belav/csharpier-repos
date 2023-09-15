@@ -1,8 +1,8 @@
-using NUnit.Framework;
 using System;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.NetworkInformation
 {

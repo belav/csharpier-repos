@@ -28,7 +28,6 @@
 //
 
 using System.Security.Permissions;
-
 using Mono.Security.Cryptography;
 
 namespace System.Security.Cryptography

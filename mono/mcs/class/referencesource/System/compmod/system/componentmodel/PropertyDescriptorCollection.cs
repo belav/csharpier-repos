@@ -248,13 +248,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>

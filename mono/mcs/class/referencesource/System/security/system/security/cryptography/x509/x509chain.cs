@@ -19,7 +19,6 @@ namespace System.Security.Cryptography.X509Certificates
     using System.Security.Permissions;
     using System.Text;
     using Microsoft.Win32.SafeHandles;
-
     using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     [Flags]

@@ -4,18 +4,18 @@
 
 namespace System.ServiceModel
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.ServiceModel.Administration;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Configuration;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.Threading;
     using System.Transactions;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
 
     [AttributeUsage(ServiceModelAttributeTargets.CallbackBehavior)]
     public sealed class CallbackBehaviorAttribute : Attribute, IEndpointBehavior

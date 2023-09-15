@@ -31,10 +31,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 #if !MOBILE && !XAMMAC_4_5
 using System.ServiceModel.Channels.NetTcp;
 #endif
-using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {

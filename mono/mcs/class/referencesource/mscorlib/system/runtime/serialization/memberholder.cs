@@ -15,9 +15,9 @@
 ============================================================*/
 namespace System.Runtime.Serialization
 {
-    using System.Runtime.Remoting;
     using System;
     using System.Reflection;
+    using System.Runtime.Remoting;
 
     [Serializable]
     internal class MemberHolder

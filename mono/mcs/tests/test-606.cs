@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Reflection;
-
 using Mono.Test;
 
 class Program

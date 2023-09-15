@@ -27,11 +27,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.ComponentModel;
 using System.Reflection;
+using System.Text;
 using DbLinq;
 using DbLinq.Util;
 

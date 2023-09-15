@@ -32,12 +32,11 @@
 
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MonoSecurity::Mono.Security;
 #else
 using Mono.Security;
 #endif
 
-using System.Text;
+using System.Text;using MonoSecurity::Mono.Security;
 
 namespace System.Security.Cryptography.X509Certificates
 {

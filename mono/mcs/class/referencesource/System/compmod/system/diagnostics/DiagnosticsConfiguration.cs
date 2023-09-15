@@ -8,11 +8,11 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Configuration;
-    using System.Threading;
+    using System.Reflection;
     using System.Runtime.Versioning;
+    using System.Threading;
 
     internal enum InitState
     {

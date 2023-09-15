@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections;
-    using System.ServiceModel.Channels;
     using System.IO;
     using System.Security.Cryptography;
+    using System.ServiceModel.Channels;
     using System.Text;
     using System.Xml;
 

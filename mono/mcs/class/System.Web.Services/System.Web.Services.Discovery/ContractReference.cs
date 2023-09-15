@@ -31,9 +31,9 @@
 
 using System.IO;
 using System.Web.Services.Description;
-using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace System.Web.Services.Discovery
 {

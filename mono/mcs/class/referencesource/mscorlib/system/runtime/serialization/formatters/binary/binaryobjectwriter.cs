@@ -16,19 +16,19 @@
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Serialization;
-    using System.Security.Permissions;
     using System.Security;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
+    using System.Text;
 
     internal sealed class ObjectWriter
     {

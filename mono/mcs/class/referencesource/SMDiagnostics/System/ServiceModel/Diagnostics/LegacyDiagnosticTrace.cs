@@ -8,6 +8,7 @@ namespace System.ServiceModel.Diagnostics
     using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.Diagnostics;
@@ -15,7 +16,6 @@ namespace System.ServiceModel.Diagnostics
     using System.Security.Permissions;
     using System.Text;
     using System.Xml;
-    using System.Diagnostics.CodeAnalysis;
 
     class LegacyDiagnosticTrace : DiagnosticTraceBase
     {

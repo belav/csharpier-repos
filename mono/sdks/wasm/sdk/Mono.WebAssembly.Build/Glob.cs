@@ -6,11 +6,11 @@
 // Licensed under the MIT License.
 
 using System;
-using System.IO;
-using System.Text;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 // Reuse of code from https://github.com/Microsoft/workbooks/blob/master/Agents/Xamarin.Interactive/ProcessControl/Glob.cs
 namespace Xamarin.ProcessControl

@@ -1,23 +1,23 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.Activities;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
 
     #region Class SetStateDesigner
 

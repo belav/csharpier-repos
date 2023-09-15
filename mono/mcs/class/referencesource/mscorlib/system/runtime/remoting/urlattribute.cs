@@ -17,11 +17,11 @@
 ===========================================================*/
 namespace System.Runtime.Remoting.Activation
 {
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
-    using System;
 
     [System.Security.SecurityCritical] // auto-generated
     [Serializable]

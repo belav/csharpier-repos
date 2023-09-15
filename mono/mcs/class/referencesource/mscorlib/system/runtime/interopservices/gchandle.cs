@@ -6,11 +6,11 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
-    using System.Threading;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Threading;
 
     // These are the types of handles used by the EE.
     // IMPORTANT: These must match the definitions in ObjectHandle.h in the EE.

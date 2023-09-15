@@ -17,8 +17,8 @@ namespace System.Web.UI
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.IO;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
     using System.Web.Util;
 
     internal class DataBoundLiteralControlBuilder : ControlBuilder

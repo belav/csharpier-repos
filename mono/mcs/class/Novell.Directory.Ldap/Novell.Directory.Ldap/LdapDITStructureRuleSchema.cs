@@ -29,8 +29,8 @@
 // (C) 2003 Novell, Inc (http://www.novell.com)
 //
 using System;
-using SchemaParser = Novell.Directory.Ldap.Utilclass.SchemaParser;
 using AttributeQualifier = Novell.Directory.Ldap.Utilclass.AttributeQualifier;
+using SchemaParser = Novell.Directory.Ldap.Utilclass.SchemaParser;
 
 namespace Novell.Directory.Ldap
 {

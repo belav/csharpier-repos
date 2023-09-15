@@ -29,11 +29,10 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using NUnit.Framework;
 #if !MOBILE
 using System.Data.Odbc;
 #endif
-
-using NUnit.Framework;
 
 namespace MonoTests.System.Data.SqlClient
 {

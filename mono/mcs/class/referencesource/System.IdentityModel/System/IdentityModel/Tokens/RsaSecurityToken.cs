@@ -8,9 +8,9 @@ namespace System.IdentityModel.Tokens
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
-    using System.Runtime.CompilerServices;
 
     public class RsaSecurityToken : SecurityToken
     {

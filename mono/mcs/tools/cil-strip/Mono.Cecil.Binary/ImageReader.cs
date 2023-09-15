@@ -31,7 +31,6 @@ namespace Mono.Cecil.Binary
     using System;
     using System.IO;
     using System.Text;
-
     using Mono.Cecil.Metadata;
 
     sealed class ImageReader : BaseImageVisitor

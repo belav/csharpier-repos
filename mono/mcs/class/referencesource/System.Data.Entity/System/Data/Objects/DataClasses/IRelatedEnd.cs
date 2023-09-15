@@ -6,13 +6,13 @@
 // @owner       mirszy
 // @backupOwner sparra
 //---------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Objects.DataClasses
 {

@@ -12,18 +12,19 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Security.Policy;
+    using System.Security.Util;
 #if FEATURE_CAS_POLICY
     using SecurityElement = System.Security.SecurityElement;
 #endif // FEATURE_CAS_POLICY
-    using System.Security.Util;
-    using System.IO;
+
     using String = System.String;
     using Version = System.Version;
-    using System.Security.Policy;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
     // The only difference between this class and System.Security.Policy.StrongName is that this one
     // allows m_name to be null.  We should merge this class with System.Security.Policy.StrongName

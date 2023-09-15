@@ -6,10 +6,9 @@
 // (C) Ximian, Inc.  http://www.ximian.com
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
-
+using System.Threading;
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection.Emit

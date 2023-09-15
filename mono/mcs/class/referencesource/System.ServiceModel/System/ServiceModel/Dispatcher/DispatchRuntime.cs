@@ -10,13 +10,13 @@ namespace System.ServiceModel.Dispatcher
     using System.Diagnostics;
     using System.IdentityModel.Policy;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Web.Security;
-    using System.Runtime.Diagnostics;
 
     public sealed class DispatchRuntime
     {

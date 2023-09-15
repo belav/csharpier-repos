@@ -8,8 +8,8 @@
 //
 
 using System;
-using NUnit.Framework;
 using Mono.Security.Cryptography;
+using NUnit.Framework;
 
 namespace MonoTests.Security.Cryptography
 {

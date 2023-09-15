@@ -1,7 +1,7 @@
 namespace System.Web.Services.Description
 {
-    using System.Xml.Serialization;
     using System.Web.Services.Configuration;
+    using System.Xml.Serialization;
 
     /// <include file='doc\HttpFormatExtensions.uex' path='docs/doc[@for="HttpAddressBinding"]/*' />
     [XmlFormatExtension("address", HttpBinding.Namespace, typeof(Port))]

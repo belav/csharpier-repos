@@ -6,11 +6,11 @@
 
 namespace System.Web.Util
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
-    using System.Diagnostics.CodeAnalysis;
 
     internal static class XmlUtils
     {

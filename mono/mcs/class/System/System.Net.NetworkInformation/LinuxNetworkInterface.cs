@@ -31,9 +31,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace System.Net.NetworkInformation
 {

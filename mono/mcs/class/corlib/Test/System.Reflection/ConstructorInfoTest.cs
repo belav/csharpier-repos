@@ -29,7 +29,6 @@
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection

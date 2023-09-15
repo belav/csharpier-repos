@@ -13,9 +13,9 @@ namespace System.Data
 {
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
+    using System.Data.SqlTypes;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Data.SqlTypes;
 
     /// <devdoc>
     ///    <para>Provides a type

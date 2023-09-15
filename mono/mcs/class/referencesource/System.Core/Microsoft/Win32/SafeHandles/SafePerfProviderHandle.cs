@@ -7,8 +7,8 @@
 namespace Microsoft.Win32.SafeHandles
 {
     using System;
-    using System.Threading;
     using System.Diagnostics;
+    using System.Threading;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
 

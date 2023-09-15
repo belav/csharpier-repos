@@ -6,11 +6,11 @@
 // <owner current="true" primary="false">spather</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Data;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data;
 using System.Data.DataSetExtensions;
+using System.Diagnostics;
 
 namespace System.Data
 {

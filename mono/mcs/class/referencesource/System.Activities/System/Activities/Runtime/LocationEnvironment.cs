@@ -6,10 +6,10 @@ namespace System.Activities.Runtime
 {
     using System;
     using System.Activities.DynamicUpdate;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
 
     [DataContract]
     internal sealed class LocationEnvironment

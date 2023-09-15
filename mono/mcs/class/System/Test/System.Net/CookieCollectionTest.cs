@@ -8,10 +8,10 @@
 // (C) 2003 Martin Willemoes Hansen
 //
 
-using NUnit.Framework;
 using System;
-using System.Net;
 using System.Collections;
+using System.Net;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

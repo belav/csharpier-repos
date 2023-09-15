@@ -4,9 +4,9 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net.Sockets;
     using System;
     using System.ComponentModel;
+    using System.Net.Sockets;
 
     internal enum IcmpV6StatType
     {

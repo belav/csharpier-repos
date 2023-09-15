@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Threading;
     using System.Net.Security;
+    using System.Threading;
 
     internal static class Msmq
     {

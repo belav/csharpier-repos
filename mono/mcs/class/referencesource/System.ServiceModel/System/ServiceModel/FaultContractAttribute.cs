@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel
 {
-    using System.Reflection;
-    using System.ServiceModel.Security;
     using System.Net.Security;
+    using System.Reflection;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     [AttributeUsage(
         ServiceModelAttributeTargets.OperationContract,

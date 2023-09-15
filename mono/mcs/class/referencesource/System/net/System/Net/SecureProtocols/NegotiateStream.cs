@@ -30,11 +30,11 @@ namespace System.Net.Security
 {
     using System;
     using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
     using System.Security.Principal;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     //
     // Negotiate

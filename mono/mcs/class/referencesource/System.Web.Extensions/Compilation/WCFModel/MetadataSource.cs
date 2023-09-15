@@ -7,12 +7,11 @@
 
 using System;
 using System.Diagnostics;
-using XmlSerialization = System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else
 using Microsoft.VSDesigner.WCF.Resources;
+using XmlSerialization = System.Xml.Serialization;
 #endif
 
 #if WEB_EXTENSIONS_CODE

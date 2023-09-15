@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Activities.Tracking
 {
     using System;
-    using System.Runtime;
     using System.Activities.Tracking;
+    using System.Runtime;
 
     abstract class TrackingProfileManager
     {

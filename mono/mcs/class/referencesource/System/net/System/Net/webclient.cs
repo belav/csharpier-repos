@@ -9,17 +9,17 @@ namespace System.Net
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
+    using System.Net.Cache;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
-    using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Net.Cache;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

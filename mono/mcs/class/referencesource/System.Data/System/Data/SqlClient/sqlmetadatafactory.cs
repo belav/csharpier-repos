@@ -11,14 +11,14 @@
 namespace System.Data.SqlClient
 {
     using System;
-    using System.Data;
-    using System.IO;
     using System.Collections;
-    using System.Data.ProviderBase;
+    using System.Data;
     using System.Data.Common;
+    using System.Data.ProviderBase;
     using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;

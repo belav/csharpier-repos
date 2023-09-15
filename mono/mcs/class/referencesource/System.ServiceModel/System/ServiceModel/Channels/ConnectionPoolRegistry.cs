@@ -3,9 +3,9 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.ServiceModel;
-    using System.Collections.Generic;
     using System.ServiceModel.Diagnostics;
 
     abstract class ConnectionPoolRegistry

@@ -30,8 +30,8 @@
 //
 
 using System;
-using Novell.Directory.Ldap.Rfc2251;
 using Novell.Directory.Ldap.Asn1;
+using Novell.Directory.Ldap.Rfc2251;
 using RespExtensionSet = Novell.Directory.Ldap.Utilclass.RespExtensionSet;
 
 namespace Novell.Directory.Ldap

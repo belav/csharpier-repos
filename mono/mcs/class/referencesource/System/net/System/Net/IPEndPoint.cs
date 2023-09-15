@@ -6,8 +6,8 @@
 
 namespace System.Net
 {
-    using System.Net.Sockets;
     using System.Globalization;
+    using System.Net.Sockets;
 
     /// <devdoc>
     ///    <para>

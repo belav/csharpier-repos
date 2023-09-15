@@ -14,7 +14,6 @@
 //
 
 using System;
-
 #if STATIC
 using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;
 using IKVM.Reflection;

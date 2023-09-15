@@ -3,11 +3,11 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
+using System;
 using System.Security.Permissions;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters

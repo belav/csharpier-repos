@@ -7,8 +7,9 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
-    using System.Activities.Presentation.View;
     using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.View;
+    using System.Activities.Presentation.View.OutlineView;
     using System.Activities.Statements;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
@@ -19,10 +20,9 @@ namespace System.Activities.Core.Presentation
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Automation.Peers;
+    using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using System.Windows.Controls;
-    using System.Activities.Presentation.View.OutlineView;
 
     /// <summary>
     /// Interaction logic for TryCatchDesigner.xaml

@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel
 {
-    using System.IO;
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
-    using System.Diagnostics.CodeAnalysis;
     using System.Configuration;
-    using System.ServiceModel.Web;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Net;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Web;
 
     class WebScriptServiceHost : ServiceHost
     {

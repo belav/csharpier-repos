@@ -6,15 +6,15 @@
 
 namespace System.Net
 {
-    using System.Net.Cache;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Net.Cache;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Globalization;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Text;
 
     internal enum WebHeaderCollectionType : ushort
     {

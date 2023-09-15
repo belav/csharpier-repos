@@ -8,9 +8,9 @@
 // TODO: Some of the tests could be a bit more thorough
 //
 
-using NUnit.Framework;
-using System.IO;
 using System;
+using System.IO;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO
 {

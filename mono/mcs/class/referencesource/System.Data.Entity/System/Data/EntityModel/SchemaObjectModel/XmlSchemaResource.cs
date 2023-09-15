@@ -6,10 +6,10 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Data.Mapping;
 using System.Data.Metadata.Edm;
-using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {

@@ -8,11 +8,11 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
-    using System.Diagnostics;
-    using System.Collections.Generic;
 
     // See comments to QueryBuilder.Props
     // Not all of them are used currently

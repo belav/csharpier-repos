@@ -26,9 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using Mono.Math;
 using NUnit.Framework;
 using myalias = System;
-using Mono.Math;
 
 namespace MonoTests.Mono.Math
 {

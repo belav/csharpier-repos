@@ -29,9 +29,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Collections;
 using System.Xml;
 using System.Xml.Schema;
-using System.Collections;
 
 namespace System.Xml.Serialization
 {

@@ -7,11 +7,10 @@
 // (C) 2003 Erik LeBel
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Web.Services.Description;
 using System.Xml;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Description
 {

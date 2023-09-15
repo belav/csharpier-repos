@@ -33,7 +33,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics

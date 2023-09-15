@@ -5,6 +5,7 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -14,9 +15,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Security.AccessControl;
-    using System.ComponentModel;
     using System.Security;
+    using System.Security.AccessControl;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Security.Principal;

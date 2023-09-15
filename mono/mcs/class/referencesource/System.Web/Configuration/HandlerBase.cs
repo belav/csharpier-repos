@@ -18,10 +18,10 @@ namespace System.Web.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.Text;
+    using System.Web.Compilation;
     using System.Web.Hosting;
     using System.Web.Util;
     using System.Xml;
-    using System.Web.Compilation;
 
     internal static class HandlerBase
     {

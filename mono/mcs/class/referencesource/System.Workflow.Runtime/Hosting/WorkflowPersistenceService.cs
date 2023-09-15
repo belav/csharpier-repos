@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Workflow.Runtime;
 using System.Workflow.ComponentModel;
-using System.Diagnostics;
+using System.Workflow.Runtime;
 
 namespace System.Workflow.Runtime.Hosting
 {

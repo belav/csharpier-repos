@@ -1,5 +1,5 @@
-using static System.String;
 using static S;
+using static System.String;
 
 struct S
 {

@@ -5,11 +5,11 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     [AttributeUsage(ServiceModelAttributeTargets.OperationBehavior)]
     public sealed class TransactionFlowAttribute : Attribute, IOperationBehavior

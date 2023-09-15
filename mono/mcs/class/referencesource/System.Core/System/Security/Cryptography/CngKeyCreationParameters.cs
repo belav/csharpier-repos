@@ -7,9 +7,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.Cryptography
 {

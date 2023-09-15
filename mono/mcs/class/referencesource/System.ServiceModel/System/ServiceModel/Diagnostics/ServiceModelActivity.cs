@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System;
-    using System.Diagnostics;
-    using System.Runtime.Remoting.Messaging;
-    using System.Threading;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.ServiceModel.Diagnostics.Application;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Runtime.Diagnostics;
+    using System.Runtime.Remoting.Messaging;
+    using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class ServiceModelActivity : IDisposable
     {

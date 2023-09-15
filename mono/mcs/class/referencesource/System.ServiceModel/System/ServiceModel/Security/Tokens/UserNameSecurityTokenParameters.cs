@@ -6,8 +6,8 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System.IdentityModel.Selectors;
-    using System.ServiceModel;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security;
 
     public class UserNameSecurityTokenParameters : SecurityTokenParameters

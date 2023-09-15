@@ -10,11 +10,11 @@
 namespace System.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Data.Objects;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Data.Objects;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Exception during save changes to store

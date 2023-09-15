@@ -25,11 +25,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System.Net;
-using System.Security.Principal;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-
+using System.Net;
+using System.Security.Principal;
 using System.ServiceModel.Security.Tokens;
 
 // mhm, why is this class not in S.SM.S.Tokens??

@@ -31,8 +31,8 @@
 //
 
 using System;
-using System.IO;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace System.Drawing.Design
 {

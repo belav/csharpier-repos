@@ -9,6 +9,7 @@
 namespace System.Data.SqlClient
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Data.Common;
     using System.Data.ProviderBase;
@@ -16,7 +17,6 @@ namespace System.Data.SqlClient
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using System.Collections.Concurrent;
 
     internal class TdsParserSessionPool
     {

@@ -8,10 +8,10 @@
 //
 // This class is a set of event test.
 //
-using NUnit.Framework;
 using System;
 using System.Text;
 using System.Xml;
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

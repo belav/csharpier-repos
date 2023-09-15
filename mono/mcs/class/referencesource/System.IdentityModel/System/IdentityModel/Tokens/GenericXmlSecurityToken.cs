@@ -5,16 +5,16 @@
 namespace System.IdentityModel.Tokens
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IO;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
     using System.Security.Principal;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Collections.Generic;
 
     public class GenericXmlSecurityToken : SecurityToken
     {

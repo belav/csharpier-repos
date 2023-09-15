@@ -10,8 +10,8 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.Security;
+using System.Security.Permissions;
 
 [assembly: DependencyAttribute("System.ComponentModel.DataAnnotations,", LoadHint.Always)]
 [assembly: DependencyAttribute("System.Web,", LoadHint.Always)]

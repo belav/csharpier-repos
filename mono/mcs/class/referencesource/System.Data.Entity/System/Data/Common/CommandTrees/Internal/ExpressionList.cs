@@ -9,10 +9,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common;
-using System.Data.Metadata.Edm;
 using System.Data.Common.CommandTrees;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Common.CommandTrees.Internal
 {

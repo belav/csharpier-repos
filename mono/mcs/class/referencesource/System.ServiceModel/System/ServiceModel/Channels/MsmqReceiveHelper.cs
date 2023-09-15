@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.ComponentModel;
     using System.Runtime;
+    using System.Runtime.Versioning;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Transactions;
-    using System.ComponentModel;
-    using System.Runtime.Versioning;
 
     // PostRollbackErrorStrategy
     interface IPostRollbackErrorStrategy

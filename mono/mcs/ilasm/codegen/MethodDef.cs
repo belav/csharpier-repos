@@ -9,10 +9,9 @@
 
 
 using System;
-using System.Text;
 using System.Collections;
 using System.Security;
-
+using System.Text;
 using Mono.CompilerServices.SymbolWriter;
 
 namespace Mono.ILASM

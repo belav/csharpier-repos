@@ -8,10 +8,10 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Xml;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Xml;
 
     public sealed class ProtectedConfigurationSection : ConfigurationSection
     {

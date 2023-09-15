@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel
 {
-    using System.ServiceModel.Security;
     using System.ComponentModel;
+    using System.ServiceModel.Security;
 
     public enum AuditLogLocation
     {

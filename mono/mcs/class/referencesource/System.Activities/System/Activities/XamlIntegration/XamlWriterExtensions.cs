@@ -5,8 +5,8 @@
 namespace System.Activities.XamlIntegration
 {
     using System;
-    using System.Xaml;
     using System.Runtime;
+    using System.Xaml;
 
     static class XamlWriterExtensions
     {

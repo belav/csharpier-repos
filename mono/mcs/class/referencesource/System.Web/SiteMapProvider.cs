@@ -13,10 +13,10 @@ namespace System.Web
     using System.Collections;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
+    using System.Security.Permissions;
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.Util;
-    using System.Security.Permissions;
 
     public abstract class SiteMapProvider : ProviderBase
     {

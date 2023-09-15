@@ -6,8 +6,8 @@
 
 namespace System.ComponentModel
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies when the license can be used.</para>

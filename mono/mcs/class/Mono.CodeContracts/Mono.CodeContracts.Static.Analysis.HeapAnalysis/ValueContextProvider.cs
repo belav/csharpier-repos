@@ -28,8 +28,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths;
+using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.ControlFlow;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;

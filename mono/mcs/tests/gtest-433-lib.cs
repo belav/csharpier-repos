@@ -1,7 +1,7 @@
 // Compiler options: -target:library
 
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("gtest-433")]
 

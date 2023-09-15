@@ -8,16 +8,16 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Collections;
-    using System.IO;
-    using System.ComponentModel;
-    using System.Xml.Schema;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Reflection;
-    using System.Globalization;
+    using System.Collections;
+    using System.ComponentModel;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Xml.Schema;
     using System.Xml.Serialization.Advanced;
 
     /// <include file='doc\XmlCodeExporter.uex' path='docs/doc[@for="XmlCodeExporter"]/*' />

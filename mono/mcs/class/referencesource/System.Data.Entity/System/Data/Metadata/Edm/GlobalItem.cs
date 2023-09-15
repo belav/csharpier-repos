@@ -12,9 +12,9 @@ using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Text;
-using System.Xml.Serialization;
-using System.Xml.Schema;
 using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace System.Data.Metadata.Edm
 {

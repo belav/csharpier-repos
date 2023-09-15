@@ -9,15 +9,15 @@ namespace System.Net.PeerToPeer.Collaboration
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Runtime.InteropServices;
-    using System.Threading;
     using System.ComponentModel;
-    using System.Text;
-    using System.Net.Mail;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Net.Mail;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This is the event args class we give back when

@@ -6,10 +6,10 @@
 
 namespace System.Diagnostics
 {
-    using System.Threading;
+    using System.Collections;
     using System.IO;
     using System.Security.Permissions;
-    using System.Collections;
+    using System.Threading;
 
     internal static class TraceInternal
     {

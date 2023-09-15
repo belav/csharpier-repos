@@ -5,8 +5,8 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 
 namespace System.Data.Common.Internal.Materialization
 {

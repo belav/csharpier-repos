@@ -17,9 +17,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-
 using NUnit.Framework;
-
 using AssertType = NUnit.Framework.Assert;
 
 namespace MonoTests.System.Xml

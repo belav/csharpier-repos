@@ -8,13 +8,13 @@
  */
 namespace System.ComponentModel.Design
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>

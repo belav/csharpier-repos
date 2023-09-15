@@ -4,19 +4,19 @@
 
 namespace System.Activities.Presentation
 {
-    using System.ComponentModel;
-    using System.Activities.Statements;
+    using System.Activities.Core.Presentation;
+    using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
-    using System.Activities.Core.Presentation.Themes;
-    using System.Linq;
-    using System.Activities.Core.Presentation;
+    using System.Activities.Statements;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Linq;
+    using System.Runtime;
     using System.ServiceModel.Activities;
     using System.Windows;
-    using System.Runtime;
-    using System.Globalization;
 
     static class ActivityDesignerHelper
     {

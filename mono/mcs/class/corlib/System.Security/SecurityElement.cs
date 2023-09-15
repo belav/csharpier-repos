@@ -29,12 +29,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Globalization;
 using System.Collections;
+using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Diagnostics.Contracts;
-
 using Mono.Xml;
 
 namespace System.Security

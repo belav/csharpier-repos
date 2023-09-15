@@ -29,10 +29,9 @@ using System;
 using System.Messaging;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-
-using SMessage = System.ServiceModel.Channels.Message;
 using MQMessage = System.Messaging.Message;
 using MQMessageType = System.Messaging.MessageType;
+using SMessage = System.ServiceModel.Channels.Message;
 
 namespace System.ServiceModel.MsmqIntegration
 {

@@ -17,8 +17,8 @@
 namespace System.Threading
 {
     using System;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     [HostProtection(Synchronization = true, ExternalThreading = true)]
     [System.Runtime.InteropServices.ComVisible(true)]

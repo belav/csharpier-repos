@@ -8,8 +8,8 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Xml;
     using System.Globalization;
+    using System.Xml;
 
     /// <devdoc>
     /// Simple dictionary config factory

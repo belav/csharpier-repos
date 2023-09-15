@@ -7,14 +7,14 @@
 
 namespace System.Configuration
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Threading;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Security.Permissions;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Runtime.InteropServices;
     using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Threading;
 
     /// <summary>
     /// Summary description for UriSection.

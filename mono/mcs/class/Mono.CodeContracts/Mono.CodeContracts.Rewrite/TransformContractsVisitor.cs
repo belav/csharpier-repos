@@ -28,14 +28,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
 using Mono.CodeContracts.Rewrite;
 using Mono.CodeContracts.Rewrite.Ast;
-using System.Diagnostics.Contracts;
-using Mono.Cecil;
 using Mono.CodeContracts.Rewrite.AstVisitors;
-using Mono.Cecil.Cil;
 
 namespace Mono.CodeContracts.Rewrite
 {

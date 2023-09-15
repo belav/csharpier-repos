@@ -19,13 +19,13 @@ Revision History:
 namespace System.Net.Cache
 {
     using System;
-    using System.Net;
-    using System.Diagnostics;
-    using System.Text;
-    using System.IO;
-    using System.Collections.Specialized;
-    using System.Threading;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Net;
+    using System.Text;
+    using System.Threading;
 
     internal class SingleItemRequestCache :
 #if !FEATURE_PAL

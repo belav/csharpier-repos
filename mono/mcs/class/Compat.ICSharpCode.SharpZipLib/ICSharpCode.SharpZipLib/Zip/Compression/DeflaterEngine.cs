@@ -36,7 +36,6 @@
 // exception statement from your version.
 
 using System;
-
 using ICSharpCode.SharpZipLib.Checksums;
 
 namespace ICSharpCode.SharpZipLib.Zip.Compression

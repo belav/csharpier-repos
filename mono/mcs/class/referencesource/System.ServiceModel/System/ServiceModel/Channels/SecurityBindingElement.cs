@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
@@ -15,8 +15,8 @@ namespace System.ServiceModel.Channels
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
-    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Text;

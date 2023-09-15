@@ -11,19 +11,19 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security.AccessControl;
+    using System.Security.Util;
 #if FEATURE_CAS_POLICY
     using SecurityElement = System.Security.SecurityElement;
 #endif // FEATURE_CAS_POLICY
-    using System.Security.AccessControl;
-    using System.Security.Util;
-    using System.IO;
-    using System.Collections;
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [Flags]

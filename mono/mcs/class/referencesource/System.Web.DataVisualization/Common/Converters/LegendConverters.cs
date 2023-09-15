@@ -24,9 +24,8 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Reflection;
 using System.Globalization;
-
+using System.Reflection;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 #else

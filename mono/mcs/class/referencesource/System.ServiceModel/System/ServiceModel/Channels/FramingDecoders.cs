@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System.Globalization;
-    using System.ServiceModel;
     using System.IO;
+    using System.ServiceModel;
     using System.Text;
 
     static class DecoderHelper

@@ -7,9 +7,9 @@ namespace System.Activities.DurableInstancing
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Globalization;
     using System.Runtime.DurableInstancing;
     using System.Transactions;
-    using System.Globalization;
 
     sealed class TryLoadRunnableWorkflowAsyncResult : LoadWorkflowAsyncResult
     {

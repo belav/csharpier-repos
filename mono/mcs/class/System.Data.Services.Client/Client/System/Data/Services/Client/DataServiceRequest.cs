@@ -19,12 +19,12 @@ namespace System.Data.Services.Client
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml;
 #if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
 #endif
-    using System.Xml;
 
     public abstract class DataServiceRequest
     {

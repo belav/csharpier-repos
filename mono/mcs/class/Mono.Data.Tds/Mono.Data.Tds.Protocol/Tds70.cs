@@ -36,9 +36,8 @@
 
 using System;
 using System.Globalization;
-using System.Text;
 using System.Security;
-
+using System.Text;
 using Mono.Security.Protocol.Ntlm;
 
 namespace Mono.Data.Tds.Protocol

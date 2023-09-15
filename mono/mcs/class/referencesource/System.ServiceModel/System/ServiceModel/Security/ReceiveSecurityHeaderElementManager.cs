@@ -4,6 +4,7 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.ServiceModel;
@@ -12,7 +13,6 @@ namespace System.ServiceModel.Security
     using ISignatureReaderProvider = System.IdentityModel.ISignatureReaderProvider;
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
     using SignedXml = System.IdentityModel.SignedXml;
-    using System.Collections.Generic;
 
     sealed class ReceiveSecurityHeaderElementManager : ISignatureReaderProvider
     {

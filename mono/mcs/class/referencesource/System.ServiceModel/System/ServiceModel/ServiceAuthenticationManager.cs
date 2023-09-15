@@ -5,13 +5,13 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
     using System.ServiceModel.Channels;
-    using System.Collections;
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
 
     public class ServiceAuthenticationManager
     {

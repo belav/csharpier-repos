@@ -31,11 +31,11 @@ using System;
 using System.Collections;
 using System.Reflection;
 using System.Resources;
+using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Microsoft.Build.BuildEngine;
-using NUnit.Framework;
 using MonoTests.Microsoft.Build.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Utilities
 {

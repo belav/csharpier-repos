@@ -15,7 +15,6 @@ using System.Collections;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.IO

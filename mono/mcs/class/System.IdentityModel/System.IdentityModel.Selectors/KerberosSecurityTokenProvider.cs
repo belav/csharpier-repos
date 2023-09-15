@@ -26,9 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.IdentityModel.Tokens;
 using System.Net;
 using System.Security.Principal;
-using System.IdentityModel.Tokens;
 
 namespace System.IdentityModel.Selectors
 {

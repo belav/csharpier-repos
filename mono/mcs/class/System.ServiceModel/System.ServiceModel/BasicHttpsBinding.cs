@@ -32,10 +32,10 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Security;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Xml;
-using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel
 {

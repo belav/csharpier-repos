@@ -6,9 +6,9 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Configuration;
     using System.Globalization;
+    using System.ServiceModel.Channels;
     using System.Xml;
 
     public abstract class BindingElementExtensionElement : ServiceModelExtensionElement

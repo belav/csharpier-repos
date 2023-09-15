@@ -32,16 +32,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-
+using Cadenza.Collections.Tests;
+using NUnit.Framework;
 #if NDESK_OPTIONS
 using NDesk.Options;
 #else
 using Mono.Options;
 #endif
-
-using Cadenza.Collections.Tests;
-
-using NUnit.Framework;
 
 #if NDESK_OPTIONS
 namespace Tests.NDesk.Options

@@ -19,10 +19,10 @@ namespace System.Data.Services.Client
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Linq.Expressions;
+    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
-    using System.Text;
-    using System.Linq.Expressions;
 
     #endregion Namespaces.
 

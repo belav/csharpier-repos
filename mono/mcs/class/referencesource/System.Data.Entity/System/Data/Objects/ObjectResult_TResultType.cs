@@ -16,13 +16,13 @@ namespace System.Data.Objects
     using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
+    using System.Data.Common.Internal.Materialization;
     using System.Data.Common.Utils;
-    using System.Data.Metadata.Edm;
     using System.Data.Mapping;
+    using System.Data.Metadata.Edm;
     using System.Data.Objects.DataClasses;
     using System.Diagnostics;
     using System.Linq.Expressions;
-    using System.Data.Common.Internal.Materialization;
 
     /// <summary>
     /// This class implements IEnumerable of T and IDisposable. Instance of this class

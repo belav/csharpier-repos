@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
-    using System.ComponentModel;
-    using System.ServiceModel;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.PropertyEditing;
+    using System.ComponentModel;
+    using System.ServiceModel;
 
     sealed class EndpointDesigner
     {

@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Net;
     using System.Configuration;
+    using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 

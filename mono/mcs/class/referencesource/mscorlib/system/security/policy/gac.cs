@@ -12,14 +12,14 @@
 
 namespace System.Security.Policy
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Collections;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Remoting;
     using System.Security;
     using System.Security.Util;
-    using System.IO;
-    using System.Collections;
     using GacIdentityPermission = System.Security.Permissions.GacIdentityPermission;
-    using System.Runtime.CompilerServices;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

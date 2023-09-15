@@ -24,13 +24,12 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Drawing.Text;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;

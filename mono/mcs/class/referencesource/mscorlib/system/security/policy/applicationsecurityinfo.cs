@@ -19,16 +19,16 @@ namespace System.Security.Policy
     using System.Collections;
     using System.Deployment.Internal.Isolation;
     using System.Deployment.Internal.Isolation.Manifest;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Runtime.Hosting;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Security.Policy;
     using System.Security.Util;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Runtime.Hosting;
-    using System.Diagnostics.Contracts;
 
     [System.Security.SecurityCritical] // auto-generated
     [SecurityPermissionAttribute(

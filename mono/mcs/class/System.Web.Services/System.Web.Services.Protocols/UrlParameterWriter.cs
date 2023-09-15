@@ -29,8 +29,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.Services;
 using System.IO;
+using System.Web.Services;
 
 namespace System.Web.Services.Protocols
 {

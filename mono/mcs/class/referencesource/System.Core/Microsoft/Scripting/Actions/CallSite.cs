@@ -13,6 +13,12 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Dynamic;
+using System.Dynamic.Utils;
+using System.Reflection;
 #if CLR2
 using Microsoft.Scripting.Ast;
 using Microsoft.Scripting.Ast.Compiler;
@@ -25,13 +31,6 @@ using System.Linq.Expressions.Compiler;
 #if SILVERLIGHT
 using System.Core;
 #endif
-
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Dynamic.Utils;
-using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {

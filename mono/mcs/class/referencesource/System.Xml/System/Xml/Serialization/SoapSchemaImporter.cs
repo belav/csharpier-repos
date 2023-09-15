@@ -8,14 +8,14 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Xml.Schema;
-    using System.Xml;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.ComponentModel;
-    using System.Reflection;
     using System.Diagnostics;
-    using System.CodeDom.Compiler;
+    using System.Reflection;
     using System.Security.Permissions;
+    using System.Xml;
+    using System.Xml.Schema;
 
     /// <include file='doc\SoapSchemaImporter.uex' path='docs/doc[@for="SoapSchemaImporter"]/*' />
     ///<internalonly/>

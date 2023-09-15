@@ -5,9 +5,9 @@
 namespace System.IdentityModel
 {
     using System.Diagnostics;
+    using System.IdentityModel.Tokens;
     using System.IO;
     using System.Security.Cryptography;
-    using System.IdentityModel.Tokens;
     using System.Text;
     using System.Xml;
 

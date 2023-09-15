@@ -7,17 +7,17 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Globalization;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security;
     using System.Xml.XPath;
     using System.Xml.Xsl.Runtime;
     using MS.Internal.Xml.XPath;
-    using System.Reflection;
-    using System.Security;
-    using System.Runtime.Versioning;
+    using Res = System.Xml.Utils.Res;
 
     internal class XsltCompileContext : XsltContext
     {

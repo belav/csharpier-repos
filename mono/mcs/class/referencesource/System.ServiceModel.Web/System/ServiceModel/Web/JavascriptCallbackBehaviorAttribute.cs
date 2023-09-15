@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Web
 {
     using System;
+    using System.Collections.Generic;
+    using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Web;
-    using System.ServiceModel.Administration;
-    using System.Collections.Generic;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public sealed class JavascriptCallbackBehaviorAttribute : Attribute, IContractBehavior

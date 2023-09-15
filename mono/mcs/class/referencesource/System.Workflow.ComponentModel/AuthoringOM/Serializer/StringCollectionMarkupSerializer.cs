@@ -1,13 +1,13 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Reflection;
-    using System.Xml;
-    using System.ComponentModel;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Reflection;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Xml;
 
     internal sealed class StringCollectionMarkupSerializer : WorkflowMarkupSerializer
     {

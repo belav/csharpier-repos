@@ -8,12 +8,12 @@ namespace System.Net.Mime
 {
     using System;
     using System.Collections;
-    using System.Collections.Specialized;
-    using System.IO;
-    using System.Text;
-    using System.Globalization;
-    using System.Net.Mail;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Globalization;
+    using System.IO;
+    using System.Net.Mail;
+    using System.Text;
 
     public class ContentDisposition
     {

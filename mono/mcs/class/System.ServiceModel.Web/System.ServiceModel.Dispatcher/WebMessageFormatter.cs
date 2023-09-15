@@ -40,7 +40,6 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Xml;
-
 #if MOBILE
 using XmlObjectSerializer = System.Object;
 #endif

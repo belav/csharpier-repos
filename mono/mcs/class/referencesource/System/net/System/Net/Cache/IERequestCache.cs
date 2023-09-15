@@ -7,18 +7,18 @@
 namespace Microsoft.Win32
 {
     using System;
-    using System.Net;
-    using System.Net.Cache;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Threading;
-    using System.Collections.Specialized;
+    using System.Net;
+    using System.Net.Cache;
+    using System.Runtime.Versioning;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.ComponentModel;
     using System.Text;
-    using System.Runtime.Versioning;
-    using System.Diagnostics;
+    using System.Threading;
 
     // The class implements a RequestCache class contract on top of WinInet provider
     // Author: Alexei Vopilov    21-Dec-2002

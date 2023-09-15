@@ -4,13 +4,13 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
 
     class SecurityCookieModeValidator : IServiceBehavior

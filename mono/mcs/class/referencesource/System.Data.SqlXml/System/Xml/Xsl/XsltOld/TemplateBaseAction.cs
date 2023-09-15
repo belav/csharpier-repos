@@ -7,13 +7,13 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Globalization;
+    using Res = System.Xml.Utils.Res;
 
     // RootAction and TemplateActions have a litle in common -- they are responsible for variable allocation
     // TemplateBaseAction -- implenemts this shared behavior

@@ -28,18 +28,15 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.Linq.Mapping;
-using System.Linq;
 using System.IO;
-
+using System.Linq;
+using DbLinq.Null;
+using NUnit.Framework;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using NUnit.Framework;
-
-using DbLinq.Null;
 
 namespace DbLinqTest
 {

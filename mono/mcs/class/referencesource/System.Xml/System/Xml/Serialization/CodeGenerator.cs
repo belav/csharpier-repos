@@ -16,17 +16,17 @@ namespace System.Xml.Serialization
     using System.Collections;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Xml;
-    using System.Xml.Serialization.Configuration;
+    using System.IO;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.IO;
     using System.Security;
     using System.Security.Permissions;
     using System.Text.RegularExpressions;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Xml;
+    using System.Xml.Serialization.Configuration;
 
     internal class CodeGenerator
     {

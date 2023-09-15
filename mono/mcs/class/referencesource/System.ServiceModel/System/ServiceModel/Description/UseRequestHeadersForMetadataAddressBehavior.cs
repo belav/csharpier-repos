@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     public class UseRequestHeadersForMetadataAddressBehavior : IServiceBehavior
     {

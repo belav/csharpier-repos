@@ -10,9 +10,9 @@ namespace System.Xml
     using System.IO;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Text;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
 
     public interface IXmlMtomReaderInitializer
     {

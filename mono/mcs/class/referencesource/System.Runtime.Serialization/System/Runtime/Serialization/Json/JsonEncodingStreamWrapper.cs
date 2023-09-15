@@ -7,12 +7,13 @@
 namespace System.Runtime.Serialization.Json
 {
     using System.IO;
+    using System.Security;
+    using System.Text;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Xml;
-    using System.Security;
+
 
     // This wrapper does not support seek.
     // Supports: UTF-8, Unicode, BigEndianUnicode

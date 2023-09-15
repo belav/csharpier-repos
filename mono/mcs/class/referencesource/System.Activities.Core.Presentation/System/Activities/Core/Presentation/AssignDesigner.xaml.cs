@@ -6,15 +6,15 @@ namespace System.Activities.Core.Presentation
 {
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
-    using System.Activities.Statements;
-    using System.ComponentModel;
     using System.Activities.Presentation.Model;
-    using System.Runtime;
-    using Microsoft.VisualBasic.Activities;
-    using System.Reflection;
     using System.Activities.Presentation.PropertyEditing;
     using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Reflection;
+    using System.Runtime;
+    using Microsoft.VisualBasic.Activities;
 
     partial class AssignDesigner
     {

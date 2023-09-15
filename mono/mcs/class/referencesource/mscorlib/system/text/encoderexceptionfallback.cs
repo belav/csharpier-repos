@@ -7,8 +7,8 @@
 namespace System.Text
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Diagnostics.Contracts;
+    using System.Runtime.Serialization;
 
     [Serializable]
     public sealed class EncoderExceptionFallback : EncoderFallback

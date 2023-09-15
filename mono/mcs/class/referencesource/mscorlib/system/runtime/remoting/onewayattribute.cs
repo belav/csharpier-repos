@@ -14,8 +14,8 @@
 ===========================================================*/
 namespace System.Runtime.Remoting.Messaging
 {
-    using System.Runtime.Remoting;
     using System;
+    using System.Runtime.Remoting;
     using System.Security.Permissions;
 
     [AttributeUsage(AttributeTargets.Method)] // bInherited

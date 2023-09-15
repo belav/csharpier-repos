@@ -18,8 +18,8 @@
 ===========================================================*/
 namespace System.Diagnostics.SymbolStore
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
 
     // Interface does not need to be marked with the serializable attribute
     [System.Runtime.InteropServices.ComVisible(true)]

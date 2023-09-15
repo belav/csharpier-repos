@@ -3,9 +3,9 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Discovery
 {
-    using System.Xml;
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
+    using System.Xml;
 
     class AnnouncementSendsAsyncResult : RandomDelaySendsAsyncResult
     {

@@ -26,12 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Net;
 using System.Collections;
 using System.Globalization;
-using System.Threading;
-using System.Runtime.Remoting.MetadataServices;
+using System.Net;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.MetadataServices;
+using System.Threading;
 
 namespace System.Runtime.Remoting.Channels.Http
 {

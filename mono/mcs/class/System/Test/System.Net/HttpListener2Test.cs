@@ -35,10 +35,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 // ***************************************************************************************
 // NOTE: when adding prefixes, make then unique per test, as MS might take 'some time' to

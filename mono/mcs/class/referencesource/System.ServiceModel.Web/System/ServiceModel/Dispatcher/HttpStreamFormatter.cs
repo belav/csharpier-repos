@@ -7,16 +7,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Net;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
     using System.Xml;
-    using System.Runtime.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.IO;
-    using System.Collections.Specialized;
-    using System.Net;
 
     class HttpStreamFormatter : IDispatchMessageFormatter, IClientMessageFormatter
     {

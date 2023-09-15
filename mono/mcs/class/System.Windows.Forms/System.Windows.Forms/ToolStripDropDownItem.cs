@@ -27,8 +27,8 @@
 //
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading;
 
 namespace System.Windows.Forms

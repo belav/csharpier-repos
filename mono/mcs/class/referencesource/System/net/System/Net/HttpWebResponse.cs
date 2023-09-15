@@ -6,16 +6,16 @@
 
 namespace System.Net
 {
-    using System.IO;
-    using System.IO.Compression;
-    using System.Runtime.Serialization;
     using System.ComponentModel;
-    using System.Globalization;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.IO.Compression;
     using System.Net.WebSockets;
+    using System.Runtime.Serialization;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Permissions;
 
     //
     // HttpWebResponse - Handles retrival of HTTP Response headers, und Data reads.

@@ -25,7 +25,6 @@ namespace System.Web.Hosting
     using System.Web.Security;
     using System.Web.Util;
     using System.Web.WebSockets;
-
     using IIS = UnsafeIISMethods;
 
     internal sealed class IIS7WorkerRequest : HttpWorkerRequest

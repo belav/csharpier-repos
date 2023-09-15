@@ -29,7 +29,6 @@ using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Util;

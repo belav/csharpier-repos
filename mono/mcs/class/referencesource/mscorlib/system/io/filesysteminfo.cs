@@ -17,16 +17,16 @@
 
 using System;
 using System.Collections;
-using System.Security;
-#if MONO_FEATURE_CAS
-using System.Security.Permissions;
-#endif
-using Microsoft.Win32;
-using System.Text;
+using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
+using System.Security;
+using System.Text;
+using Microsoft.Win32;
+#if MONO_FEATURE_CAS
+using System.Security.Permissions;
+#endif
 
 namespace System.IO
 {

@@ -4,9 +4,9 @@
 // I assume that it's under the MS sample license. - BL
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 public class ObjectDumper

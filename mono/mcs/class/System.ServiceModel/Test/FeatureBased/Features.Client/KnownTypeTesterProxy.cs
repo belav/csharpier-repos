@@ -1,7 +1,7 @@
 ﻿namespace Proxy.MonoTests.Features.Client
 {
-    using System.Runtime.Serialization;
     using System;
+    using System.Runtime.Serialization;
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]

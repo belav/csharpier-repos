@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {

@@ -8,11 +8,10 @@ using System.Web.DynamicData;
 using System.Web.DynamicData.ModelProviders;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using MonoTests.System.Web.DynamicData;
-using MonoTests.ModelProviders;
-using MonoTests.DataSource;
 using MonoTests.DataObjects;
+using MonoTests.DataSource;
+using MonoTests.ModelProviders;
+using MonoTests.System.Web.DynamicData;
 
 namespace MonoTests.Common
 {

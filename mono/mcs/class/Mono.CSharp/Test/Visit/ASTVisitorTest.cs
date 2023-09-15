@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
 using Mono.CSharp;
-using System.IO;
+using NUnit.Framework;
 
 namespace MonoTests.Visit
 {

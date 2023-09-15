@@ -1,17 +1,17 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel.Design;
 
     #region Class ThrowDesigner

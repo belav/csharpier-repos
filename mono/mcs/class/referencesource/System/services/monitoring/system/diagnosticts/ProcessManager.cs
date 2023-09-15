@@ -1,24 +1,24 @@
 #if !FEATURE_PAL
 namespace System.Diagnostics
 {
-    using System.Text;
-    using System.Threading;
-    using System.Runtime.InteropServices;
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
-    using System;
-    using System.Collections;
-    using System.IO;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
-    using System.Collections.Specialized;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     /// <devdoc>
     ///     This class finds the main window of a process.  It needs to be

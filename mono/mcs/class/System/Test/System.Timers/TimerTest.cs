@@ -29,9 +29,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Timers;
+using NUnit.Framework;
 using ST = System.Threading;
 
 namespace MonoTests.System.Timers

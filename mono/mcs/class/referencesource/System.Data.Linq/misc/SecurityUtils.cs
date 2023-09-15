@@ -28,8 +28,8 @@ namespace System.Windows.Forms
 #endif
 {
     using System;
-    using System.Reflection;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
 

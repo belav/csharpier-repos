@@ -13,13 +13,13 @@
 
 namespace System.Web.SessionState
 {
-    using System.Text;
-    using System.Configuration.Assemblies;
-    using System.Runtime.InteropServices;
     using System.Collections;
+    using System.Configuration.Assemblies;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Text;
     using System.Web;
     using System.Web.Util;
-    using System.Globalization;
 
     class StateHttpWorkerRequest : HttpWorkerRequest
     {

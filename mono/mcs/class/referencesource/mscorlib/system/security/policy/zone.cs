@@ -14,13 +14,13 @@
 
 namespace System.Security.Policy
 {
-    using System.Security.Util;
-    using ZoneIdentityPermission = System.Security.Permissions.ZoneIdentityPermission;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
+    using System.Runtime.Versioning;
+    using System.Security.Util;
+    using ZoneIdentityPermission = System.Security.Permissions.ZoneIdentityPermission;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

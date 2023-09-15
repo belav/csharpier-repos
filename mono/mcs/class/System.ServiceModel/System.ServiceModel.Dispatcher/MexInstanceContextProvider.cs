@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.ServiceModel.Description;
-using System.ServiceModel.Channels;
-using System.Xml;
 using System.IO;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
+using System.Xml;
 
 namespace System.ServiceModel.Dispatcher
 {

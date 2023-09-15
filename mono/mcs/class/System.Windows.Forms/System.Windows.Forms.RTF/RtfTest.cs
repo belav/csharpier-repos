@@ -10,7 +10,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.RTF;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

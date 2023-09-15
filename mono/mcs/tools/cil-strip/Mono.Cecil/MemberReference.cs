@@ -29,7 +29,6 @@
 namespace Mono.Cecil
 {
     using System.Collections;
-
     using Mono.Cecil.Metadata;
 
     internal abstract class MemberReference : IMemberReference

@@ -24,8 +24,8 @@
 //
 #endregion
 
-using DbMetal.Language;
 using System.Collections.Generic;
+using DbMetal.Language;
 using NUnit.Framework;
 
 // These don't build in tools/sqlmetal

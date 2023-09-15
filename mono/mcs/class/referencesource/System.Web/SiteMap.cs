@@ -16,8 +16,8 @@ namespace System.Web
     using System.Configuration.Provider;
     using System.Security.Permissions;
     using System.Web.Configuration;
-    using System.Web.UI;
     using System.Web.Hosting;
+    using System.Web.UI;
 
     public static class SiteMap
     {

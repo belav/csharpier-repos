@@ -10,11 +10,9 @@
 
 using System;
 using System.IO;
-
 using Mono.Security;
 using Mono.Security.X509;
 using Mono.Security.X509.Extensions;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.X509.Extensions

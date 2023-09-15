@@ -4,12 +4,12 @@
 namespace System.ServiceModel.Description
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel;
     using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
 
     public class ServiceThrottlingBehavior : IServiceBehavior
     {

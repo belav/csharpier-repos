@@ -6,16 +6,16 @@
 
 namespace System.Web.Services.Protocols
 {
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
     using System.Web.Services;
+    using System.Web.Services.Diagnostics;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System;
-    using System.Text;
-    using System.IO;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Web.Services.Diagnostics;
 
     internal class RuntimeUtils
     {

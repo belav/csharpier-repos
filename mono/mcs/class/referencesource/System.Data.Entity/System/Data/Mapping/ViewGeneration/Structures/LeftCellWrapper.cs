@@ -8,15 +8,15 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Common.Utils;
-using System.Text;
-using System.Linq;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
-using System.Data.Metadata.Edm;
+using System.Data.Common.Utils;
 using System.Data.Common.Utils.Boolean;
-using System.Data.Mapping.ViewGeneration.Validation;
 using System.Data.Mapping.ViewGeneration.QueryRewriting;
+using System.Data.Mapping.ViewGeneration.Validation;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

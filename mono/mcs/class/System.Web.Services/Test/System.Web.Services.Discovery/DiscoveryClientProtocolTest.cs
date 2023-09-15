@@ -7,10 +7,10 @@
 // Copyright (C) Xamarin Inc. 2016
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Web.Services.Discovery;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Discovery
 {

@@ -4,12 +4,12 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Xaml;
-    using System.Runtime;
     using System.Reflection;
-    using System;
+    using System.Runtime;
+    using System.Xaml;
     using System.Xaml.Schema;
     using Microsoft.Build.Utilities;
     using XamlBuildTask;

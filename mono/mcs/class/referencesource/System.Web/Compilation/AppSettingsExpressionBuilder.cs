@@ -7,11 +7,11 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Security.Permissions;
     using System.CodeDom;
     using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics;
+    using System.Security.Permissions;
     using System.Web.UI;
 
     [ExpressionPrefix("AppSettings")]

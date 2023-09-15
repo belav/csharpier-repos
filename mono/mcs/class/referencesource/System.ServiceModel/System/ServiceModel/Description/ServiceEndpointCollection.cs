@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
     public class ServiceEndpointCollection : Collection<ServiceEndpoint>
     {

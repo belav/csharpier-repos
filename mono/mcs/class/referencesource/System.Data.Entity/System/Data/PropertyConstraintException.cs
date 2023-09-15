@@ -11,12 +11,12 @@
 namespace System.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Property constraint exception class. Note that this class has state - so if you change even

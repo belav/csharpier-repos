@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Collections;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Collections.Generic;
 
     [ConfigurationCollection(
         typeof(EndpointBehaviorElement),

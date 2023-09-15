@@ -5,11 +5,11 @@
 namespace System.Activities.Expressions
 {
     using System;
+    using System.Activities.Statements;
     using System.ComponentModel;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Activities.Statements;
     using System.Threading;
 
     public sealed class ValueTypePropertyReference<TOperand, TResult>

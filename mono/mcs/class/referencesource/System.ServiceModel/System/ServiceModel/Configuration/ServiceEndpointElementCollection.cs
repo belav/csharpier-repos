@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Collections;
     using System.Configuration;
     using System.Globalization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     [ConfigurationCollection(
         typeof(ServiceEndpointElement),

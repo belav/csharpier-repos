@@ -1,10 +1,9 @@
-#if !FULL_AOT_RUNTIME
-using System.Reflection.Emit;
-#endif
-
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
+#if !FULL_AOT_RUNTIME
+using System.Reflection.Emit;
+#endif
 
 namespace System.Reflection
 {

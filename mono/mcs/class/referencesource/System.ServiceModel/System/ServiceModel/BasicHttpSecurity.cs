@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
-    using System.ComponentModel;
 
     public sealed class BasicHttpSecurity
     {

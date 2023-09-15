@@ -28,11 +28,10 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
-using System.Collections;
 using System.CodeDom;
+using System.Collections;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {

@@ -16,13 +16,13 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     ///#if GENERICS_WORK
     ///    using System.Numerics;
     ///#endif
     using System.Runtime;
     using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.StructLayout(LayoutKind.Sequential)]

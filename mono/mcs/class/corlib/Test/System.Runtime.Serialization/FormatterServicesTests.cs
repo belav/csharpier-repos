@@ -7,10 +7,10 @@
 // (c) 2002 Ximian Inc. (http://www.ximian.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {

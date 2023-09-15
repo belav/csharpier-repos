@@ -14,10 +14,10 @@ namespace System.Data.Mapping.Update.Internal
     using System.Data.Common.Utils;
     using System.Data.EntityClient;
     using System.Data.Metadata.Edm;
+    using System.Data.Spatial;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-    using System.Data.Spatial;
 
     /// <summary>
     /// Aggregates information about a modification command delegated to a store function.

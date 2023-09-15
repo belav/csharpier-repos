@@ -1,6 +1,6 @@
 using System;
-using System.Xml;
 using System.IO;
+using System.Xml;
 
 namespace MonoTests.stand_alone.WebHarness
 {

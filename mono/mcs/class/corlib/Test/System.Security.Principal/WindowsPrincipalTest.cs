@@ -8,10 +8,10 @@
 // (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Runtime.Serialization;
 using System.Security.Principal;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Principal
 {

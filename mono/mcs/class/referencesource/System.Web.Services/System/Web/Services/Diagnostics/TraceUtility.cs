@@ -6,16 +6,16 @@
 
 namespace System.Web.Services.Diagnostics
 {
-    using System.Threading;
-    using System.Net;
+    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
-    using System.Text;
     using System.Globalization;
-    using System.Xml.Serialization;
+    using System.IO;
+    using System.Net;
+    using System.Text;
+    using System.Threading;
     using System.Web.Services;
     using System.Web.Services.Protocols;
-    using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     internal static class Tracing
     {

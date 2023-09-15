@@ -9,12 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-
-using System.Data.Metadata.Edm;
+using System.Collections.ObjectModel;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Collections.ObjectModel;
 using ReadOnlyModificationClauses = System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.CommandTrees.DbModificationClause>; // System.Data.Common.ReadOnlyCollection conflicts
 
 namespace System.Data.Common.CommandTrees

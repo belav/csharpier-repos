@@ -2,7 +2,6 @@
 // Fixed, incorporated into test
 //
 using System;
-
 using System.Runtime.InteropServices;
 
 [StructLayout(LayoutKind.Explicit)]

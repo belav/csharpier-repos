@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Globalization;
-    using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
+    using System.ServiceModel.Description;
 
     [ConfigurationCollection(
         typeof(ServiceBehaviorElement),

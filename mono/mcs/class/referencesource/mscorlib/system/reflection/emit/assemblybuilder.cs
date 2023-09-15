@@ -31,7 +31,6 @@ namespace System.Reflection.Emit
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Diagnostics.SymbolStore;
-    using CultureInfo = System.Globalization.CultureInfo;
     using System.IO;
     using System.Reflection;
     using System.Resources;
@@ -43,6 +42,7 @@ namespace System.Reflection.Emit
     using System.Security.Permissions;
     using System.Security.Policy;
     using System.Threading;
+    using CultureInfo = System.Globalization.CultureInfo;
 
     // These must match the definitions in Assembly.hpp
     [Flags]

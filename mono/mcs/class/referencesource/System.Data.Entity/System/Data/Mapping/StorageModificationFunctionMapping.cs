@@ -11,12 +11,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.Utils;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping
 {

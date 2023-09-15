@@ -12,11 +12,11 @@
 
 using System;
 using System.Collections.Generic;
-using MetaType = IKVM.Reflection.Type;
+using System.Configuration.Assemblies;
+using System.IO;
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;
-using System.IO;
-using System.Configuration.Assemblies;
+using MetaType = IKVM.Reflection.Type;
 
 namespace Mono.CSharp
 {

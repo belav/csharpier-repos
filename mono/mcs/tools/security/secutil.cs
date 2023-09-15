@@ -9,9 +9,9 @@
 //
 
 using System;
-using System.Text;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 [assembly: AssemblyTitle("Mono SecUtil")]
 [assembly: AssemblyDescription("Extract strongname and X509 certificates from assemblies.")]

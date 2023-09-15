@@ -4,11 +4,9 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-
 using System.Security.Claims;
 
 namespace System.ServiceModel.Security

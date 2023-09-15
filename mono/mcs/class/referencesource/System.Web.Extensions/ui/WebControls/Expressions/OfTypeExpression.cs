@@ -1,5 +1,6 @@
 namespace System.Web.UI.WebControls.Expressions
 {
+    using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
@@ -8,7 +9,6 @@ namespace System.Web.UI.WebControls.Expressions
     using System.Reflection;
     using System.Web.Compilation;
     using System.Web.Resources;
-    using System;
     using System.Web.UI;
 
     public class OfTypeExpression : DataSourceExpression

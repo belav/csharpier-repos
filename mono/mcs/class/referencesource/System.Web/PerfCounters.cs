@@ -9,9 +9,9 @@
  */
 namespace System.Web
 {
-    using System.Web.Util;
-    using System.Threading;
     using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Web.Util;
 
     internal sealed class PerfInstanceDataHandle : SafeHandle
     {

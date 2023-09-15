@@ -6,13 +6,13 @@
 
 namespace System.Net
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Globalization;
     using System.Security.Permissions;
+    using System.Threading;
     using System.Threading.Tasks;
-    using System.Diagnostics.CodeAnalysis;
 
     unsafe class HttpResponseStream : Stream
     {

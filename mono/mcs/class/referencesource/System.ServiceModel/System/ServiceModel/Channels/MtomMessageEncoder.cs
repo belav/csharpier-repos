@@ -6,14 +6,14 @@ namespace System.ServiceModel.Channels
     using System.Globalization;
     using System.IO;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.Text;
     using System.Threading;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Diagnostics;
 
     class MtomMessageEncoderFactory : MessageEncoderFactory
     {

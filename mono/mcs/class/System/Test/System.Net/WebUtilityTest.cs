@@ -36,7 +36,6 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Collections.Specialized;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Net

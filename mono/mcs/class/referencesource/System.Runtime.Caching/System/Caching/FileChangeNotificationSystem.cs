@@ -2,10 +2,10 @@
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 using System;
-using System.Runtime.Caching.Hosting;
-using System.Runtime.Caching.Resources;
 using System.Collections;
 using System.IO;
+using System.Runtime.Caching.Hosting;
+using System.Runtime.Caching.Resources;
 using System.Security;
 using System.Security.Permissions;
 

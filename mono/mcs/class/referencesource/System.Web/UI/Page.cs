@@ -43,8 +43,11 @@ namespace System.Web.UI
     using System.Web.Handlers;
     using System.Web.Hosting;
     using System.Web.Management;
+    using System.Web.ModelBinding;
     using System.Web.RegularExpressions;
+    using System.Web.Routing;
     using System.Web.Security;
+    using System.Web.Security.Cryptography;
     using System.Web.SessionState;
     using System.Web.UI.Adapters;
     using System.Web.UI.HtmlControls;
@@ -52,9 +55,6 @@ namespace System.Web.UI
     using System.Web.UI.WebControls.WebParts;
     using System.Web.Util;
     using System.Xml;
-    using System.Web.Routing;
-    using System.Web.ModelBinding;
-    using System.Web.Security.Cryptography;
 
     /// <devdoc>
     ///    Default ControlBuilder used to parse page files.

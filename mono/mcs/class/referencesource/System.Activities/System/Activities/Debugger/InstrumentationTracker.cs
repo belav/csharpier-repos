@@ -4,8 +4,8 @@
 
 namespace System.Activities.Debugger
 {
-    using System.Collections.Generic;
     using System.Activities.Debugger.Symbol;
+    using System.Collections.Generic;
 
     // Keep track of instrumentation information.
     // - which subroot has source file but not yet instrumented.

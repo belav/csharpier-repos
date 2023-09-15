@@ -5,9 +5,9 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime;
     using System.Threading;
-    using System.Collections.ObjectModel;
 
     sealed class WorkflowCompensationBehavior : NativeActivity
     {

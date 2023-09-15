@@ -36,7 +36,6 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Security;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher

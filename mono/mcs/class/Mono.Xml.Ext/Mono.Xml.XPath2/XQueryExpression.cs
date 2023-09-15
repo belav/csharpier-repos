@@ -32,8 +32,8 @@ using System.Xml;
 using System.Xml.Query;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using Mono.Xml.XPath2;
 using Mono.Xml;
+using Mono.Xml.XPath2;
 
 namespace Mono.Xml.XQuery
 {

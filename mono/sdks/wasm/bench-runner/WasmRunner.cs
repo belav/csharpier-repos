@@ -1,24 +1,24 @@
 using System;
-using System.Linq;
-using System.Globalization;
-using System.Text;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Characteristics;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Loggers;
-using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Engines;
-using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Exporters;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Loggers;
+using BenchmarkDotNet.Reports;
+using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Toolchains;
-using BenchmarkDotNet.Toolchains.Parameters;
-using BenchmarkDotNet.Toolchains.Results;
 using BenchmarkDotNet.Toolchains.InProcess;
 using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
-using BenchmarkDotNet.Characteristics;
+using BenchmarkDotNet.Toolchains.Parameters;
+using BenchmarkDotNet.Toolchains.Results;
 
 //
 // WebAssembly runner for BenchmarkDotNet

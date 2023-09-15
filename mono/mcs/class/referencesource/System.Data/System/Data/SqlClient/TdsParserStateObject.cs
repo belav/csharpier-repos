@@ -18,12 +18,12 @@ namespace System.Data.SqlClient
     using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     internal sealed class LastIOTimer
     {

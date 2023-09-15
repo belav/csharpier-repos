@@ -5,11 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Xamarin.ProcessControl;
-using System.Runtime.InteropServices;
 
 namespace Mono.WebAssembly.Build
 {

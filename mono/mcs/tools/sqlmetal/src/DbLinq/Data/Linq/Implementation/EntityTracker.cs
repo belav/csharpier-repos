@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using DbLinq.Data.Linq.Identity;
 
 namespace DbLinq.Data.Linq.Implementation

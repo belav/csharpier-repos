@@ -36,7 +36,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.ServiceModel.Syndication;
 using NUnit.Framework;
-
 using QName = System.Xml.XmlQualifiedName;
 
 namespace MonoTests.System.ServiceModel.Syndication

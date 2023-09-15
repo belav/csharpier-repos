@@ -8,7 +8,6 @@ namespace System.ServiceModel
     using System.Collections;
     using System.Collections.Generic;
     using System.Net.Security;
-
     using System.ServiceModel.Channels;
 
     [AttributeUsage(

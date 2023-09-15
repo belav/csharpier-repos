@@ -8,8 +8,8 @@ namespace System.Configuration
 {
     using System.Configuration.Internal;
     using System.IO;
-    using System.Xml;
     using System.Runtime.Versioning;
+    using System.Xml;
 
     /// <internalonly/>
     /// <devdoc>

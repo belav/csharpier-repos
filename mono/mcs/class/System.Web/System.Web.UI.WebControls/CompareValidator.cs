@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Globalization;
 using System.ComponentModel;
+using System.Globalization;
 using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls

@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Transactions;
 
     abstract class TransactionFormatter

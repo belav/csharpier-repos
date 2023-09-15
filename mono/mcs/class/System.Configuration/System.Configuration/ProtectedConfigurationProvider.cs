@@ -26,8 +26,8 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 
-using System.Xml;
 using System.Configuration.Provider;
+using System.Xml;
 
 namespace System.Configuration
 {

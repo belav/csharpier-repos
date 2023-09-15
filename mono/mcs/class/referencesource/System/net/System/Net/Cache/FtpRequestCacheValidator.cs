@@ -18,12 +18,12 @@ Revision History:
 namespace System.Net.Cache
 {
     using System;
-    using System.Net;
-    using System.IO;
     using System.Collections;
-    using System.Text;
     using System.Collections.Specialized;
     using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Text;
     using System.Threading;
 
     // The class represents an adavanced way for an application to control caching protocol

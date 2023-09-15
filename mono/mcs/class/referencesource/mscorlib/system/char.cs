@@ -16,11 +16,11 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Runtime;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
+    using System.Runtime.InteropServices;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

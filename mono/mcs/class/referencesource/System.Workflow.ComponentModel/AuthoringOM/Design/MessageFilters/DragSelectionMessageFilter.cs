@@ -1,11 +1,11 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Windows.Forms;
 
     #region Class DragRectangleMessageFilter
     /// This behavior requires the coordinates in logical coordinate system

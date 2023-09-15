@@ -12,8 +12,8 @@ namespace System.ServiceModel.Security
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
 
     abstract class MessageSecurityProtocol : SecurityProtocol

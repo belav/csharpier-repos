@@ -35,7 +35,6 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-
 using Authenticator = System.IdentityModel.Selectors.CustomUserNameSecurityTokenAuthenticator;
 using PolicyCollection = System.Collections.ObjectModel.ReadOnlyCollection<System.IdentityModel.Policy.IAuthorizationPolicy>;
 

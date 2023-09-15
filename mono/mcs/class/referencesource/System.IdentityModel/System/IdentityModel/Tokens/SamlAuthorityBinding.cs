@@ -4,10 +4,10 @@
 
 namespace System.IdentityModel.Tokens
 {
+    using System.IdentityModel.Selectors;
+    using System.Runtime.Serialization;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.IdentityModel.Selectors;
 
     [DataContract]
     public class SamlAuthorityBinding

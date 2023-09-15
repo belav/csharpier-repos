@@ -8,8 +8,8 @@ namespace System.Runtime.Serialization.Configuration
     using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Security;
+    using System.ServiceModel.Diagnostics;
 
     public sealed partial class TypeElement : ConfigurationElement
     {

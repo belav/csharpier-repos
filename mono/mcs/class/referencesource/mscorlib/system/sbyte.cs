@@ -14,13 +14,13 @@
 ===========================================================*/
 namespace System
 {
-    using System.Globalization;
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     ///#if GENERICS_WORK
     ///    using System.Numerics;
     ///#endif
     using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
     // A place holder class for signed bytes.
     [Serializable]

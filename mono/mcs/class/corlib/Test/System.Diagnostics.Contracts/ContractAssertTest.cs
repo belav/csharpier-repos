@@ -3,12 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
-using System.Diagnostics.Contracts;
-using System.Diagnostics;
 using MonoTests.System.Diagnostics.Contracts.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Diagnostics.Contracts
 {

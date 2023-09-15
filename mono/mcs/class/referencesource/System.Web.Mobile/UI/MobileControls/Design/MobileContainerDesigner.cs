@@ -18,7 +18,6 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.MobileControls;
     using System.Web.UI.MobileControls.Adapters;
-
     using IHTMLElement = NativeMethods.IHTMLElement;
     using IHTMLElementCollection = NativeMethods.IHTMLElementCollection;
 

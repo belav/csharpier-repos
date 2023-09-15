@@ -1,11 +1,10 @@
+using System.Runtime;
+using System.Runtime.CompilerServices;
 #if BIT64
 using nuint = System.UInt64;
 #else
 using nuint = System.UInt32;
 #endif
-
-using System.Runtime.CompilerServices;
-using System.Runtime;
 
 namespace System
 {

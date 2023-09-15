@@ -23,8 +23,8 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms.VisualStyles;
 
 namespace System.Windows.Forms

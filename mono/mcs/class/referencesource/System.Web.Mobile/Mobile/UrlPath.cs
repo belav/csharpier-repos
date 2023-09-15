@@ -10,11 +10,11 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-using System.Text;
-using System.Runtime.Serialization.Formatters;
-using System.Runtime.InteropServices;
 using System.Collections;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters;
+using System.Text;
 
 namespace System.Web.Mobile
 {

@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.ServiceModel.Configuration;
     using System.ComponentModel;
+    using System.ServiceModel.Configuration;
 
     [TypeConverter(typeof(TransactionProtocolConverter))]
     public abstract class TransactionProtocol

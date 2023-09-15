@@ -8,8 +8,8 @@
 namespace Mono.Data.Sqlite
 {
     using System;
-    using System.Data;
     using System.Collections.Generic;
+    using System.Data;
     using System.Globalization;
 
     /// <summary>

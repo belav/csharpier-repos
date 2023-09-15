@@ -7,11 +7,11 @@
 namespace System
 {
     using System;
-    using System.Reflection;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security;
 #if !MONO
     using System.Security.Permissions;

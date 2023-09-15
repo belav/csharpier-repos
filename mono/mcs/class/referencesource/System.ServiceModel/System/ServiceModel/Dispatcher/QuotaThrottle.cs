@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
 
     sealed class QuotaThrottle

@@ -16,10 +16,10 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Threading;
-using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
 
 namespace System.Threading
 {

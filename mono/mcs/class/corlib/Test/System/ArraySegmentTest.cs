@@ -9,9 +9,9 @@
 // Copyright (C) 2012 Xamarin, Inc (http://www.xamarin.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

@@ -6,12 +6,12 @@ namespace System.ServiceModel.Channels
 {
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics.Application;
 
     delegate void ConnectionAvailableCallback(
         IConnection connection,

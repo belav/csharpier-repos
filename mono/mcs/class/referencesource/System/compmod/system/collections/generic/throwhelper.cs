@@ -42,11 +42,12 @@ namespace System
 
 
 
+    using System.Diagnostics;
 #if !SILVERLIGHT
     using System.Runtime.Serialization;
 #endif
 
-    using System.Diagnostics;
+
 
     internal static class ThrowHelper
     {

@@ -17,9 +17,9 @@
 namespace System
 {
     using System;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
 
     // Helper class to aid removal of LocalDataStore from the LocalDataStoreMgr
     // LocalDataStoreMgr does not holds references to LocalDataStoreHolder. It holds

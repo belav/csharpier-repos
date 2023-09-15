@@ -24,8 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using Mono.Security.Interface;
 using System.Security.Cryptography.X509Certificates;
+using Mono.Security.Interface;
 using MNS = Mono.Net.Security;
 
 namespace Mono.Btls.Interface

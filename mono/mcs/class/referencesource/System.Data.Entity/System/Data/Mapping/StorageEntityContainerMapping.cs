@@ -9,15 +9,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Data.Mapping.ViewGeneration.Validation;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
-using System.Diagnostics;
-using System.Data.Mapping.ViewGeneration;
-using System.Data.Common.Utils;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Data.Mapping.ViewGeneration.Validation;
 
 namespace System.Data.Mapping
 {

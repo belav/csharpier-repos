@@ -6,6 +6,7 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics;
     using System.Net;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
@@ -13,7 +14,6 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Runtime.Diagnostics;
 
     class SharedHttpTransportManager : HttpTransportManager
     {

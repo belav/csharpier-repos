@@ -10,10 +10,10 @@ namespace System.Data.Common
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.ProviderBase;
     using System.Diagnostics;
-    using System.ComponentModel;
 
     public class DbEnumerator : IEnumerator
     {

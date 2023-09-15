@@ -27,12 +27,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Policy
 {

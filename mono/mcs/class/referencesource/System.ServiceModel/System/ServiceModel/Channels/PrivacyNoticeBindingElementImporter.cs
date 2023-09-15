@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
     static class PrivacyNoticePolicyStrings
     {

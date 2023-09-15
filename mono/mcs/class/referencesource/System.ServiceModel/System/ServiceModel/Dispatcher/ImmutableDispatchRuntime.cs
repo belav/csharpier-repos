@@ -9,14 +9,14 @@ namespace System.ServiceModel.Dispatcher
     using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.Threading;
     using System.Transactions;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Diagnostics;
-    using System.Security;
 
     class ImmutableDispatchRuntime
     {

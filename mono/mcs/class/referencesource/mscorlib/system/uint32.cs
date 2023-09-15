@@ -15,14 +15,14 @@
 ===========================================================*/
 namespace System
 {
-    using System.Globalization;
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     ///#if GENERICS_WORK
     ///    using System.Numerics;
     ///#endif
     using System.Runtime;
     using System.Runtime.InteropServices;
-    using System.Diagnostics.Contracts;
 
     // * Wrapper for unsigned 32 bit integers.
     [Serializable]

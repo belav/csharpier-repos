@@ -97,9 +97,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.ComponentModel
 {
-    using System.Reflection;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Reflection;
 
     /// <devdoc>
     ///     Represents a collection of attributes.

@@ -34,7 +34,6 @@ using System.Text;
 using System.ServiceModel.Security;
 using System.ServiceModel;
 using System.Net.Security;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration

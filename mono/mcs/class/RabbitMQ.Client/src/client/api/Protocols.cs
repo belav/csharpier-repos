@@ -55,8 +55,8 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.Reflection;
 using System.Configuration;
+using System.Reflection;
 
 namespace RabbitMQ.Client
 {

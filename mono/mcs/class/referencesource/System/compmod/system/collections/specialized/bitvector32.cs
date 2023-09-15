@@ -6,9 +6,9 @@
 
 namespace System.Collections.Specialized
 {
+    using System;
     using System.Diagnostics;
     using System.Text;
-    using System;
     using Microsoft.Win32;
 
     /// <devdoc>

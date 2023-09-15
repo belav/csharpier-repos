@@ -29,8 +29,8 @@
 //
 
 using System.Collections;
-using System.Runtime.Serialization.Formatters;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters;
 
 namespace System.Runtime.Remoting.Channels
 {

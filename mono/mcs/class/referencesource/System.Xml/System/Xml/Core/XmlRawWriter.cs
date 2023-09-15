@@ -6,13 +6,13 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.IO;
+using System.Collections;
 using System.Diagnostics;
+using System.IO;
+using System.Xml.Schema;
 #if !SILVERLIGHT
 using System.Xml.XPath;
 #endif
-using System.Xml.Schema;
-using System.Collections;
 
 namespace System.Xml
 {

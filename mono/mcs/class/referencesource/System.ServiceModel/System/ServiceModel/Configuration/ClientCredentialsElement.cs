@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Security;
-    using System.Security.Cryptography.X509Certificates;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     public partial class ClientCredentialsElement : BehaviorExtensionElement
     {

@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 namespace System.IO
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     /// <para>Represents the method that will handle the <see cref='System.IO.FileSystemWatcher.Renamed'/> event of a <see cref='System.IO.FileSystemWatcher'/>

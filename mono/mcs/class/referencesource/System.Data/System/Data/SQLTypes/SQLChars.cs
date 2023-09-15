@@ -43,18 +43,18 @@
 namespace System.Data.SqlTypes
 {
     using System;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System.Data.Common;
     using System.Data.Sql;
     using System.Data.SqlClient;
     using System.Data.SqlTypes;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
 
     [Serializable, XmlSchemaProvider("GetXsdType")]
     public sealed class SqlChars : System.Data.SqlTypes.INullable, IXmlSerializable, ISerializable

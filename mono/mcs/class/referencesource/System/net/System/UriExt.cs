@@ -23,10 +23,10 @@ Revision History:
 
 namespace System
 {
-    using System.Globalization;
-    using System.Text;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Text;
 
     public partial class Uri
     {

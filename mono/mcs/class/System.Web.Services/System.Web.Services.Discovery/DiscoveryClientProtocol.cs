@@ -31,12 +31,12 @@
 
 using System.Collections;
 using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Net;
-using System.Text.RegularExpressions;
 #if !MOBILE
 using System.Web.Services.Description;
 #endif

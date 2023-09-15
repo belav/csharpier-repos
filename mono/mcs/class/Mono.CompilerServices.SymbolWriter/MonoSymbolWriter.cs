@@ -32,9 +32,9 @@
 //
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Mono.CompilerServices.SymbolWriter
 {

@@ -6,8 +6,8 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.Web.Query.Dynamic;
     using System.Linq;
+    using System.Web.Query.Dynamic;
 
     internal class DynamicQueryableWrapper : IDynamicQueryable
     {

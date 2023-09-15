@@ -8,7 +8,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices

@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.Xml;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     internal sealed class BinaryNegotiation
     {

@@ -4,15 +4,15 @@
 #pragma warning disable 1634, 1691
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Net;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Web;
     using System.Web;
-    using System.ServiceModel.Description;
-    using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
 
     class JavascriptCallbackMessageInspector : IDispatchMessageInspector
     {

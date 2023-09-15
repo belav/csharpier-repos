@@ -26,7 +26,6 @@
 
 using System;
 using System.Data.Linq.Mapping;
-
 using DbLinq.Data.Linq.Mapping;
 
 #if MONO_STRICT

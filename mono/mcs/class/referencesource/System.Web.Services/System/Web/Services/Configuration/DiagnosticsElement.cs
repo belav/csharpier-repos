@@ -5,8 +5,8 @@
 namespace System.Web.Services.Configuration
 {
     using System;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.IO;
     using System.Security.Permissions;
     using System.Threading;

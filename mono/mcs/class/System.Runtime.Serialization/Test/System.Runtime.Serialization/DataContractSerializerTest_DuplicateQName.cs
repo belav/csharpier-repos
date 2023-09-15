@@ -32,7 +32,6 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization

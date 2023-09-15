@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Runtime;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
-using System.Runtime;
 
 namespace System.ServiceModel.Security
 {

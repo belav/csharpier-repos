@@ -5,19 +5,19 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
+    using System.IO;
+    using System.Net.Security;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.Net.Security;
 
     abstract class MessageSecurityProtocolFactory : SecurityProtocolFactory
     {

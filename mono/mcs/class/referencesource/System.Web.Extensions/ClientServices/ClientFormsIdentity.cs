@@ -6,12 +6,12 @@
 namespace System.Web.ClientServices
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Net;
-    using System.Security.Principal;
     using System.Runtime.InteropServices;
     using System.Security;
+    using System.Security.Principal;
     using System.Web.Security;
-    using System.Diagnostics.CodeAnalysis;
 
     public class ClientFormsIdentity : IIdentity, IDisposable
     {

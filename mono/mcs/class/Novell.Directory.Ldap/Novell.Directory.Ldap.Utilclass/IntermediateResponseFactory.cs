@@ -31,7 +31,6 @@
 
 using System;
 using System.Reflection;
-
 using Novell.Directory.Ldap;
 using Novell.Directory.Ldap.Rfc2251;
 

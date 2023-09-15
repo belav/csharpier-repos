@@ -5,8 +5,8 @@
 namespace System.Activities
 {
     using System.Collections.Generic;
-    using System.Transactions;
     using System.Runtime;
+    using System.Transactions;
 
     class WorkflowPersistenceContext
     {

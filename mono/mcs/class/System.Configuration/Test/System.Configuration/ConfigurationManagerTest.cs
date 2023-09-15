@@ -32,12 +32,12 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Net.Configuration;
 using System.IO;
+using System.Net.Configuration;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 using SysConfig = System.Configuration.Configuration;
-using System.Runtime.InteropServices;
-using System.Reflection;
 
 namespace MonoTests.System.Configuration
 {

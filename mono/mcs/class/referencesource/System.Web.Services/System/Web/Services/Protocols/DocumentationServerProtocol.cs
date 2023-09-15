@@ -8,21 +8,21 @@ namespace System.Web.Services.Protocols
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
+    using System.Net;
     using System.Reflection;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services.Configuration;
+    using System.Web.Services.Description;
+    using System.Web.Services.Diagnostics;
     using System.Web.Services.Discovery;
     using System.Web.UI;
-    using System.Diagnostics;
-    using System.Web.Services.Configuration;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Text;
-    using System.Net;
-    using System.Web.Services.Description;
-    using System.Threading;
-    using System.Web.Services.Diagnostics;
-    using System.Security.Permissions;
-    using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     internal class DocumentationServerType : ServerType
     {

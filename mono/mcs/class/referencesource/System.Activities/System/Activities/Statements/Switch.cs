@@ -10,9 +10,9 @@ namespace System.Activities.Statements
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Windows.Markup;
     using System.Runtime;
     using System.Runtime.Collections;
+    using System.Windows.Markup;
 
     [ContentProperty("Cases")]
     public sealed class Switch<T> : NativeActivity

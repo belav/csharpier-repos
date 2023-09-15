@@ -2,9 +2,8 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.Security;
-
+using System.Security.Permissions;
 #if !PLATFORM_COMPACTFRAMEWORK
 using System.Runtime.ConstrainedExecution;
 #endif

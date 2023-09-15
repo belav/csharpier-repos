@@ -20,15 +20,16 @@
 // Copyright (C) 2005, 2006 Novell, Inc (http://www.novell.com)
 //
 
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Reflection;
+using System.Threading;
 #if CONFIGURATION_DEP
 using System.IO;
 using System.Xml.Serialization;
 #endif
 
-using System.ComponentModel;
-using System.Reflection;
-using System.Threading;
-using System.Collections.Specialized;
+
 
 namespace System.Configuration
 {

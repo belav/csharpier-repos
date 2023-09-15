@@ -17,8 +17,8 @@ namespace System.Data.SqlClient
     using System.Data.Metadata.Edm;
     using System.Data.Spatial;
     using System.Diagnostics;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
 
     /// <summary>
     /// The DbProviderServices implementation for the SqlClient provider for SQL Server.

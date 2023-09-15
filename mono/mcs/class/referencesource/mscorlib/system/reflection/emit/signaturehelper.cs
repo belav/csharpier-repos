@@ -8,7 +8,6 @@
 
 namespace System.Reflection.Emit
 {
-    using System.Text;
     using System;
     using System.Diagnostics.Contracts;
     using System.Reflection;
@@ -16,6 +15,7 @@ namespace System.Reflection.Emit
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security.Permissions;
+    using System.Text;
 
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_SignatureHelper))]

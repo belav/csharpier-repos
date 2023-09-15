@@ -6,10 +6,9 @@
 
 namespace System.Diagnostics
 {
-    using System.Diagnostics;
-
     // cpr: make this class an enum
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>

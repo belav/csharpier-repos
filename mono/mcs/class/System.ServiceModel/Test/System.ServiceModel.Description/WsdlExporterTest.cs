@@ -35,14 +35,11 @@ using NUnit.Framework;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Web.Services;
-
 using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 using WSMessage = System.Web.Services.Description.Message;
 using WSBinding = System.Web.Services.Description.Binding;
 using QName = System.Xml.XmlQualifiedName;
-
 using SMMessage = System.ServiceModel.Channels.Message;
-
 using System.Xml;
 using System.Web.Services.Description;
 using System.Xml.Schema;

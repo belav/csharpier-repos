@@ -23,15 +23,14 @@
 //
 
 using System;
+using System.Collections;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using MonoTests.System.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-
 using NUnit;
 using NUnit.Framework;
 

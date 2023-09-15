@@ -30,7 +30,6 @@
 using System;
 using System.Messaging;
 using System.Reflection;
-
 using Mono.Messaging;
 
 namespace MonoTests.Mono.Messaging.RabbitMQ

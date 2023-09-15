@@ -11,7 +11,6 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security.Tokens;
-
 using SR = System.ServiceModel.SR;
 
 namespace System.ServiceModel.Security

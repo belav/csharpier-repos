@@ -9,13 +9,12 @@
 //
 
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO.Compression
 {

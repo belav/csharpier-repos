@@ -7,9 +7,9 @@
 namespace System.Web.UI.HtmlControls
 {
     using System;
+    using System.ComponentModel;
     using System.Security;
     using System.Security.Permissions;
-    using System.ComponentModel;
 
     [ControlBuilderAttribute(typeof(HtmlEmptyTagControlBuilder))]
     public class HtmlMeta : HtmlControl

@@ -38,10 +38,9 @@ using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
+using Message = System.Web.Services.Description.Message;
 using QName = System.Xml.XmlQualifiedName;
 using WSDL = System.Web.Services.Description.ServiceDescription;
-using Message = System.Web.Services.Description.Message;
 
 namespace System.ServiceModel.Description
 {

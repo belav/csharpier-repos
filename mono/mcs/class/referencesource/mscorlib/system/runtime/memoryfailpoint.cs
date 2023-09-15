@@ -16,15 +16,15 @@
 ===========================================================*/
 
 using System;
+using System.Diagnostics.Contracts;
 using System.IO;
-using Microsoft.Win32;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
-using System.Security.Permissions;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
+using System.Security.Permissions;
+using System.Threading;
+using Microsoft.Win32;
 
 /*
    This class allows an application to fail before starting certain

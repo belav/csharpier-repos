@@ -31,11 +31,10 @@
 #region Using directives
 
 using System;
-using System.Text;
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Text;
 using NUnit.Framework;
 
 #endregion

@@ -19,8 +19,8 @@ namespace System.Data.OleDb
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Threading;
     using System.Text;
+    using System.Threading;
 
     [
         DefaultEvent("RecordsAffected"),

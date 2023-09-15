@@ -12,8 +12,8 @@ namespace System.Configuration
     using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Security.Permissions;
     using System.Security;
+    using System.Security.Permissions;
     using System.Text;
     using System.Xml;
     using Microsoft.Win32;

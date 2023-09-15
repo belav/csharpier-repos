@@ -6,18 +6,18 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.Net.Mail;
-    using System.Net.Mime;
     using System.Collections;
     using System.ComponentModel;
-    using System.IO;
+    using System.Configuration;
     using System.Drawing.Design;
+    using System.IO;
+    using System.Net.Mail;
+    using System.Net.Mime;
+    using System.Text;
     using System.Text.RegularExpressions;
     using System.Web;
-    using System.Web.Util;
-    using System.Text;
     using System.Web.Configuration;
-    using System.Configuration;
+    using System.Web.Util;
 
     /// <devdoc>
     /// Defines an email message.  Smaller object model than System.Net.Mail.MailMessage.  Creates a MailMessage

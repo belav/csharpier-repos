@@ -29,12 +29,12 @@
 //
 
 using System;
+using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
-using NUnit.Framework;
-using System.Collections;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Imaging
 {

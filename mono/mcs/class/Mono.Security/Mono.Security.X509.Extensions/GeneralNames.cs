@@ -29,10 +29,9 @@
 //
 
 using System;
-using System.Net;
 using System.Collections;
+using System.Net;
 using System.Text;
-
 using Mono.Security;
 using Mono.Security.X509;
 

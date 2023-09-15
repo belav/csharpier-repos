@@ -8,10 +8,10 @@ namespace System
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
-    using System.Runtime.Serialization;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

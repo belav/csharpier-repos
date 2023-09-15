@@ -7,13 +7,13 @@
 namespace System.Web.UI.HtmlControls
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Reflection;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para>Defines the properties, methods, and events for the

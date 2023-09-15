@@ -16,11 +16,11 @@
 namespace System.Runtime.Serialization.Formatters
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Reflection;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
 #if FEATURE_PAL
     // To turn on tracing, add the following to the per-machine

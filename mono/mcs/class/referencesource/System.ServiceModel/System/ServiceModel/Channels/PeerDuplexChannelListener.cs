@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Diagnostics;
-    using System.Threading;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
     [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     sealed class PeerDuplexChannelAcceptor

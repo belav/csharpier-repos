@@ -12,7 +12,6 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Protocols.WSTrust;
     using System.Security.Claims;
     using System.Xml;
-
     using RST = System.IdentityModel.Protocols.WSTrust.RequestSecurityToken;
     using RSTR = System.IdentityModel.Protocols.WSTrust.RequestSecurityTokenResponse;
 

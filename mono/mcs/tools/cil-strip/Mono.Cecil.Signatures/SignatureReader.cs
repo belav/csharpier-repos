@@ -32,7 +32,6 @@ namespace Mono.Cecil.Signatures
     using System.Collections;
     using System.IO;
     using System.Text;
-
     using Mono.Cecil;
     using Mono.Cecil.Metadata;
 

@@ -14,7 +14,6 @@ namespace System.Web.Script.Serialization
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Web.Resources;
-
     using AppSettings = System.Web.Util.AppSettings;
     using Debug = System.Web.Util.Debug;
     using Utf16StringValidator = System.Web.Util.Utf16StringValidator;

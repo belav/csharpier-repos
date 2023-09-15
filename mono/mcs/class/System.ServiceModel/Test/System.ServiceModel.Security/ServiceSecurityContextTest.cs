@@ -37,7 +37,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using NUnit.Framework;
-
 using PolicyList = System.Collections.ObjectModel.ReadOnlyCollection<System.IdentityModel.Policy.IAuthorizationPolicy>;
 
 namespace MonoTests.System.ServiceModel

@@ -7,20 +7,20 @@
 
 namespace System.Xml.Serialization
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
-    using System;
-    using System.Globalization;
     using System.ComponentModel;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
     using System.Diagnostics;
-    using System.Threading;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
-    using System.Security;
-    using System.Net;
+    using System.Threading;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\XmlSchemas.uex' path='docs/doc[@for="XmlSchemas"]/*' />
     /// <internalonly/>

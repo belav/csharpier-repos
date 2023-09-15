@@ -6,16 +6,16 @@
 
 namespace System.Diagnostics
 {
-    using System.Threading;
     using System;
     using System.ComponentModel;
-    using Microsoft.Win32;
-    using System.Text;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Security.Permissions;
-    using System.Globalization;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     Set of utility functions for interpreting the counter data

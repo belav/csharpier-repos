@@ -18,11 +18,11 @@ namespace System.Workflow.Activities.Common
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Globalization;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Reflection;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Reflection;
 
     internal class DelegateTypeInfo
     {

@@ -19,10 +19,10 @@ namespace System.Data.Objects.ELinq
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using CqtExpression = System.Data.Common.CommandTrees.DbExpression;
-    using LinqExpression = System.Linq.Expressions.Expression;
 #if MONO
     using System.Globalization;
+    using CqtExpression = System.Data.Common.CommandTrees.DbExpression;
+    using LinqExpression = System.Linq.Expressions.Expression;
 #endif
 
     internal sealed partial class ExpressionConverter

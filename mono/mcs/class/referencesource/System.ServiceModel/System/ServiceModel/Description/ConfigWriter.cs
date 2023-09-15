@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Diagnostics;
 

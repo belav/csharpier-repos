@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Data.Services.Providers;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Services.Providers;
 
 namespace System.Data.Services
 {

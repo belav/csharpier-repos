@@ -16,8 +16,8 @@
 //
 namespace System.Reflection
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
 
     [Serializable]
     [Flags]

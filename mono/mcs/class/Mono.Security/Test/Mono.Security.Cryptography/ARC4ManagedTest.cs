@@ -8,10 +8,10 @@
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Security.Cryptography;
 using Mono.Security.Cryptography;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.Cryptography
 {

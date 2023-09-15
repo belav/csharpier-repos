@@ -7,8 +7,8 @@
 namespace System.Web.Services.Discovery
 {
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Security.Permissions;
 
     /// <include file='doc\DiscoveryClientReferences.uex' path='docs/doc[@for="DiscoveryClientReferenceCollection"]/*' />

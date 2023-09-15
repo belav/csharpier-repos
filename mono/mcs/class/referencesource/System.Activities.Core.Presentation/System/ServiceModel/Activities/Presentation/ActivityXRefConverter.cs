@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
-    using System.Globalization;
-    using System.Windows.Data;
-    using System.Activities.Presentation.Model;
     using System.Activities;
     using System.Activities.Core.Presentation;
+    using System.Activities.Presentation.Model;
+    using System.Globalization;
+    using System.Windows.Data;
 
     sealed class ActivityXRefConverter : IValueConverter
     {

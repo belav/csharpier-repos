@@ -14,7 +14,6 @@ using System.Web.Mobile;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-
 using WebControls = System.Web.UI.WebControls;
 
 #if COMPILING_FOR_SHIPPED_SOURCE

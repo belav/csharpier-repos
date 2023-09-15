@@ -1,10 +1,10 @@
 ﻿namespace System.Web.DynamicData.Util
 {
     using System;
+    using System.Globalization;
+    using System.Web.Resources;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Web.Resources;
-    using System.Globalization;
     using IDataBoundControlInterface = System.Web.UI.WebControls.IDataBoundControl;
 
     internal static class DataControlHelper

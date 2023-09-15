@@ -7,16 +7,16 @@
 namespace System.Security.Permissions
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Security;
-    using System.Security.Permissions;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

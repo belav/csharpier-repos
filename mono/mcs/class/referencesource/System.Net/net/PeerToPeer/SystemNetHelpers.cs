@@ -1,11 +1,11 @@
 namespace System.Net.PeerToPeer
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Sockets;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
 
     internal static class SystemNetHelpers
     {

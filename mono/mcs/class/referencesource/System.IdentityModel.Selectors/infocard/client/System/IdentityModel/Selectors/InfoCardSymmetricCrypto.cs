@@ -5,18 +5,17 @@ namespace System.IdentityModel.Selectors
 {
     using System;
     using System.ComponentModel;
+    using System.IdentityModel.Tokens;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.IdentityModel.Tokens;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:

@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Text;
-using NUnit.Framework;
-using Microsoft.Build.BuildEngine;
 using System.IO;
+using System.Text;
+using Microsoft.Build.BuildEngine;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Tasks
 {

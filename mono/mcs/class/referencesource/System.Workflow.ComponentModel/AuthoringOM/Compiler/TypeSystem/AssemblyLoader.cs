@@ -2,9 +2,9 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.ComponentModel.Design;
     using System.IO;
+    using System.Reflection;
 
     internal class AssemblyLoader
     {

@@ -11,9 +11,8 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-
-using NUnit.Framework;
 using Mono.Unix;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix
 {

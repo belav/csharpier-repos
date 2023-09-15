@@ -27,15 +27,15 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
 using System.Runtime;
-using System.Security;
-using System.Security.Permissions;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Security;
+using System.Security.Permissions;
 
 // General Information about the Microsoft.Build assembly
 

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel;
 using NUnit.Framework;
-
 using ObjectList = System.Collections.Generic.SynchronizedReadOnlyCollection<object>;
 
 namespace MonoTests.System.ServiceModel

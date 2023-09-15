@@ -6,13 +6,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Diagnostics;
-using System.Collections;
-using System.Globalization;
-using System.Collections.Generic;
 
 // OpenIssue : is it better to cache the current namespace decls for each elem
 //  as the current code does, or should it just always walk the namespace stack?

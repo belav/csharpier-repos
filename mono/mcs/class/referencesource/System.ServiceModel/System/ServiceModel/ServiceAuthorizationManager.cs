@@ -5,11 +5,11 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IdentityModel.Policy;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
 

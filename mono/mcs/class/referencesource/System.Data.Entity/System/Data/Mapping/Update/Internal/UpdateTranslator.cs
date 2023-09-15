@@ -8,19 +8,19 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Data.Objects;
-using System.Data.Common.Utils;
-using System.Data.Common.CommandTrees;
-using System.Data.Common;
-using System.Threading;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Data.Metadata.Edm;
-using System.Data.EntityClient;
-using System.Data.Spatial;
-using System.Globalization;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.Utils;
 using System.Data.Entity;
+using System.Data.EntityClient;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Data.Spatial;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 
 namespace System.Data.Mapping.Update.Internal
 {

@@ -12,14 +12,6 @@
 
 namespace System.Web
 {
-    using System.Configuration;
-    using System.Globalization;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using System.Web.Configuration;
-    using System.Web.Hosting;
-    using System.Web.Util;
     /*
     This is just a temporary code to get some timings for the Http Debug request.  To enable it, add the following
     to the app's "web.config" file:
@@ -39,6 +31,14 @@ namespace System.Web
     
     */
     using System.Collections;
+    using System.Configuration;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
 #if PERF
 

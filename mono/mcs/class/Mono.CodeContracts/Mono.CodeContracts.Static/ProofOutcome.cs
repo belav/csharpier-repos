@@ -28,7 +28,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Mono.CodeContracts.Static.Lattices;
 
 namespace Mono.CodeContracts.Static

@@ -6,23 +6,24 @@
 // <OWNER>Microsoft</OWNER>
 namespace System.Security.Permissions
 {
-    using System.Security.Util;
+    using System.Diagnostics.Contracts;
     using System.IO;
-    using System.Security.Policy;
-#if FEATURE_MACL
-    using System.Security.AccessControl;
-#endif
-    using System.Text;
-    using System.Runtime.Serialization.Formatters;
-    using System.Threading;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Versioning;
+    using System.Security.Policy;
+    using System.Security.Util;
+    using System.Text;
+    using System.Threading;
 #if FEATURE_X509
     using System.Security.Cryptography.X509Certificates;
 #endif
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+
+#if FEATURE_MACL
+    using System.Security.AccessControl;
+#endif
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

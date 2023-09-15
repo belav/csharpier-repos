@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
 
     public partial class WS2007FederationHttpBindingCollectionElement
         : StandardBindingCollectionElement<

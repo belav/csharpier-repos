@@ -5,12 +5,12 @@
 //   Lawrence Pit (loz@cable.a2000.nl)
 //
 
-using NUnit.Framework;
 using System;
-using System.Net;
 using System.Collections;
+using System.Net;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

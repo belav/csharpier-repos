@@ -8,11 +8,11 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Data;
-using Som = System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {

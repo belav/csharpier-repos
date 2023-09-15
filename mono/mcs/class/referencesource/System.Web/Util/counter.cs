@@ -7,8 +7,8 @@
 namespace System.Web.Util
 {
     using System;
-    using System.Web;
     using System.Runtime.InteropServices;
+    using System.Web;
 
     /// <devdoc>
     ///    <para>Provides access to system timers.</para>

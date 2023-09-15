@@ -7,16 +7,16 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
-using System.Data.Common.Utils;
-using System.Data.Objects;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
+using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.Update.Internal
 {

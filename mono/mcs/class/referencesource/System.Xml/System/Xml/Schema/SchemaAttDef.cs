@@ -7,8 +7,8 @@
 
 namespace System.Xml.Schema
 {
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /*
      * This class describes an attribute type and potential values.

@@ -23,8 +23,8 @@
 namespace System.Text.RegularExpressions
 {
     using System.Collections;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
 
     /// <internalonly/>

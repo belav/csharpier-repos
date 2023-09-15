@@ -7,8 +7,8 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-using System.Data.Common.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common.Internal;
 using System.Data.Spatial.Internal;
 using System.Diagnostics;
 using System.Globalization;

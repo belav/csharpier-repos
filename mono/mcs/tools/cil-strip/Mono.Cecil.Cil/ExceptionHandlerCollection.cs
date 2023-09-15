@@ -33,7 +33,6 @@ namespace Mono.Cecil.Cil
 {
     using System;
     using System.Collections;
-
     using Mono.Cecil.Cil;
 
     internal sealed class ExceptionHandlerCollection : CollectionBase, ICodeVisitable

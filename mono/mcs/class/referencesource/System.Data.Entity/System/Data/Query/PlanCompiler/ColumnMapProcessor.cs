@@ -12,11 +12,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Common.Utils;
-using md = System.Data.Metadata.Edm;
 using System.Data.Query.InternalTrees;
 using System.Data.Query.PlanCompiler;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 using System.Globalization;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.PlanCompiler
 {

@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using System.Web;
 using System.Web.Compilation;
-
 using ApplicationPreStartMethods;
 
 namespace ApplicationPreStartMethods.Tests

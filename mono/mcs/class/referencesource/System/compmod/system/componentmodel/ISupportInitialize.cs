@@ -6,9 +6,8 @@
 
 namespace System.ComponentModel
 {
-    using System.Diagnostics;
-
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies that this object supports

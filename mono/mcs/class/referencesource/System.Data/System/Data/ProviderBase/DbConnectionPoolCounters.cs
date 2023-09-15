@@ -14,10 +14,10 @@ namespace System.Data.ProviderBase
     using System.Globalization;
     using System.Reflection;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Runtime.Versioning;
 
     internal abstract class DbConnectionPoolCounters
     {

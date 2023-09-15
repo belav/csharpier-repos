@@ -8,15 +8,14 @@
 //---------------------------------------------------------------------
 
 using System.CodeDom;
-
-using System.Diagnostics;
-using System.Data.SqlTypes;
-using System.Data.Metadata.Edm;
 using System.Collections.Generic;
 using System.Data.Entity.Design;
 using System.Data.Entity.Design.Common;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace System.Data.EntityModel.Emitters

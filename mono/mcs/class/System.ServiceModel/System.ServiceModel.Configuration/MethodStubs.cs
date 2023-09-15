@@ -7,7 +7,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Xml;
-
 using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration

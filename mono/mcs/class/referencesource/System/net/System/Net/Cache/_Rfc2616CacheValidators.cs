@@ -18,11 +18,11 @@ Revision History:
 namespace System.Net.Cache
 {
     using System;
-    using System.Net;
-    using System.IO;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
 
     //
     // Caching RFC

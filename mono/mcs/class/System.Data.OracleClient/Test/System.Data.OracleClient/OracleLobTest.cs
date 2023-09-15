@@ -27,14 +27,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-using System.Configuration;
-using System.Globalization;
-using System.Threading;
-using System.Data.OracleClient;
-using System.Data;
-using System.IO;
 using System;
+using System.Configuration;
+using System.Data;
+using System.Data.OracleClient;
+using System.Globalization;
+using System.IO;
+using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {

@@ -1,9 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using WebAssembly;
-using System.Threading;
-using System.IO;
 
 namespace TestSuite
 {

@@ -26,8 +26,8 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 
-using System.Resources;
 using System.Globalization;
+using System.Resources;
 
 namespace System.Web.Compilation
 {

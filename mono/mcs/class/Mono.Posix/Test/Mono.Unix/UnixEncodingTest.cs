@@ -11,10 +11,10 @@
 // (C) 2005 Jonathan Pryor
 //
 
-using NUnit.Framework;
 using System;
 using System.Text;
 using Mono.Unix;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix
 {

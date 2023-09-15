@@ -4,9 +4,9 @@
 //
 // ==--==
 using System;
+using System.Diagnostics.Contracts;
 using System.Security;
 using System.Threading;
-using System.Diagnostics.Contracts;
 
 namespace System.Text
 {

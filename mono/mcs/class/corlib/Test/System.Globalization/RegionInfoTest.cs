@@ -7,11 +7,11 @@
 // (c) 2007 Novell, Inc. (http://www.novell.com)
 //
 
-using NUnit.Framework;
-using System.IO;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Globalization
 {

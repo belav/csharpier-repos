@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.Xml;
-
 #if CONFIGURATION_DEP
 using System.Configuration;
 #endif

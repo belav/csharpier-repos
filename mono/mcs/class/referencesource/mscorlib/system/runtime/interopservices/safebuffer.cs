@@ -70,13 +70,13 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using System.Security.Permissions;
     using Microsoft.Win32.SafeHandles;
-    using System.Diagnostics.Contracts;
 
     [System.Security.SecurityCritical]
     public abstract unsafe class SafeBuffer : SafeHandleZeroOrMinusOneIsInvalid

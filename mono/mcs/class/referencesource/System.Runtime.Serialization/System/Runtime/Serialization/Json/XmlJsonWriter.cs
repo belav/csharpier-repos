@@ -10,11 +10,12 @@ namespace System.Runtime.Serialization.Json
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
+    using System.Text;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Xml;
+
 
     class XmlJsonWriter : XmlDictionaryWriter, IXmlJsonWriterInitializer
     {

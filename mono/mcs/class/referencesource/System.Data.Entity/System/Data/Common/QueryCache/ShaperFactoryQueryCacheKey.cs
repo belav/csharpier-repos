@@ -7,8 +7,8 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-using System.Diagnostics;
 using System.Data.Objects;
+using System.Diagnostics;
 
 namespace System.Data.Common.QueryCache
 {

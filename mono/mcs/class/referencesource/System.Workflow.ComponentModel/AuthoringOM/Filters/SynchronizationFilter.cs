@@ -10,9 +10,9 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Workflow.ComponentModel.Design;
 
     internal sealed class SynchronizationFilter

@@ -33,7 +33,6 @@ using System.Collections;
 using System.Xml;
 using System.Xml.Schema;
 using Commons.Xml.Relaxng;
-
 using QName = System.Xml.XmlQualifiedName;
 
 namespace Commons.Xml.Relaxng.Inference

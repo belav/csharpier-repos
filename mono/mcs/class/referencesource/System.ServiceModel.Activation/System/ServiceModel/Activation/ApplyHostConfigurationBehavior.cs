@@ -6,9 +6,9 @@ namespace System.ServiceModel.Activation
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
 
     //This is the behavior is intended to auto apply IIS/AspNet configuration to WCF post design time
     class ApplyHostConfigurationBehavior : IServiceBehavior

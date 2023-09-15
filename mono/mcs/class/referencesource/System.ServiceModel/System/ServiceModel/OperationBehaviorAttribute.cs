@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel
 {
-    using System.Reflection;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
-    using System.Transactions;
-    using System.ServiceModel.Security;
-    using System.Security.Principal;
     using System.Collections.Generic;
+    using System.Reflection;
+    using System.Security.Principal;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
+    using System.Transactions;
 
     [AttributeUsage(ServiceModelAttributeTargets.OperationBehavior)]
     public sealed class OperationBehaviorAttribute : Attribute, IOperationBehavior

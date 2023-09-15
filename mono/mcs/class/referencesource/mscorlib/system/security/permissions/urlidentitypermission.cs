@@ -11,17 +11,17 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Security.Util;
+    using System.Text;
 #if FEATURE_CAS_POLICY
     using SecurityElement = System.Security.SecurityElement;
 #endif // FEATURE_CAS_POLICY
-    using System.Security.Util;
-    using System.IO;
-    using System.Text;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

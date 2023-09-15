@@ -7,12 +7,12 @@
 // the LocalDataStore facility.
 namespace System.Runtime.Remoting.Messaging
 {
-    using System.Threading;
-    using System.Runtime.Remoting;
-    using System.Security.Principal;
     using System.Collections;
+    using System.Runtime.Remoting;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
 
     // This class exposes the API for the users of call context. All methods
     // in CallContext are static and operate upon the call context in the Thread.

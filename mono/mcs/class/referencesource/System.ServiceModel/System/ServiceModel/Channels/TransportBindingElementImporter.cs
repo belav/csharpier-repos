@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.ServiceModel.Security;
+    using System.Xml;
     using System.Xml.Schema;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
     using WsdlNS = System.Web.Services.Description;
 
     // implemented by Indigo Transports

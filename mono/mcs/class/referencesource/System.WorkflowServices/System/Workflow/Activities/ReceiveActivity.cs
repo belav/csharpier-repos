@@ -5,10 +5,9 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
@@ -16,6 +15,7 @@ namespace System.Workflow.Activities
     using System.Drawing;
     using System.Globalization;
     using System.IdentityModel.Claims;
+    using System.Reflection;
     using System.Security.Permissions;
     using System.ServiceModel;
     using System.ServiceModel.Description;

@@ -7,12 +7,12 @@
 namespace System.Web.UI.Design.MobileControls.Util
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Drawing;
-    using System.ComponentModel;
     using System.Globalization;
-    using System.Windows.Forms;
     using System.Web.UI.Design.MobileControls;
+    using System.Windows.Forms;
 
     [
         ToolboxItem(false),

@@ -8,8 +8,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Threading;
 using System.Runtime.InteropServices;
+using System.Threading;
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection.Emit

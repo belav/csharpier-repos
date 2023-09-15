@@ -44,11 +44,11 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
+using System.Diagnostics.Tracing;
 using System.Security;
+using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Security.Permissions;
-using System.Diagnostics.Tracing;
 
 // NOTE: For performance reasons, initialization is not verified.  If a developer
 //       incorrectly initializes a task awaiter, which should only be done by the compiler,

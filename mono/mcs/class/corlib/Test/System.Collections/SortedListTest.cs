@@ -19,7 +19,6 @@ using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections

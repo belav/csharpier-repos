@@ -7,17 +7,17 @@
 namespace System.Web.Services.Description
 {
     using System;
-    using System.Globalization;
-    using System.Collections;
-    using System.IO;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Diagnostics;
-    using System.Reflection;
+    using System.Collections;
     using System.ComponentModel;
-    using System.Xml.Serialization;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Threading;
     using System.Web.Services.Protocols;
+    using System.Xml.Serialization;
 
     internal enum CodeFlags
     {

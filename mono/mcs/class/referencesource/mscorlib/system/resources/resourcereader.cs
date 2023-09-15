@@ -19,22 +19,22 @@
 namespace System.Resources
 {
     using System;
-    using System.IO;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Configuration.Assemblies;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
 #if FEATURE_SERIALIZATION
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters;
     using System.Runtime.Serialization.Formatters.Binary;
 #endif // FEATURE_SERIALIZATION
-    using System.Reflection;
-    using System.Security.Permissions;
-    using System.Security;
-    using System.Globalization;
-    using System.Configuration.Assemblies;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     // Provides the default implementation of IResourceReader, reading
     // .resources file from the system default binary format.  This class

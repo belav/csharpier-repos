@@ -2,10 +2,10 @@
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 using System;
-using System.Runtime.Caching.Resources;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.Caching.Resources;
 
 namespace System.Runtime.Caching.Configuration
 {

@@ -4,8 +4,8 @@
 
 namespace System.Runtime
 {
-    using System.Threading;
     using System.Security;
+    using System.Threading;
 
     // IOThreadScheduler takes no locks due to contention problems on multiproc.
     [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.NonBlocking)]

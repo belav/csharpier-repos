@@ -24,10 +24,10 @@
 // 	Andy Hume <andyhume32@yahoo.co.uk>
 //
 
-using NUnit.Framework;
 using System;
 using System.Drawing;
 using System.Drawing.Printing;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Printing
 {

@@ -13,14 +13,13 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
 #if CLR2
 using Microsoft.Scripting.Ast;
 using Microsoft.Scripting.Utils;
 #else
 using System.Linq.Expressions;
 #endif
-
-using System.Collections.Generic;
 
 namespace System.Dynamic.Utils
 {

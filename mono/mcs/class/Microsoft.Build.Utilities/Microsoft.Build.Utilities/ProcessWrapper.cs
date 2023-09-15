@@ -1,7 +1,7 @@
 // created on 12/18/2004 at 16:28
 using System;
-using System.Threading;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Microsoft.Build.Utilities
 {

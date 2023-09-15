@@ -5,14 +5,14 @@
 //------------------------------------------------------------------------------
 
 using System;
-using Microsoft.Win32;
-using System.Text;
-using System.IO;
-using System.Globalization;
 using System.Collections;
-using System.Threading;
-using System.Security.Permissions;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
+using Microsoft.Win32;
 
 namespace System.Diagnostics
 {

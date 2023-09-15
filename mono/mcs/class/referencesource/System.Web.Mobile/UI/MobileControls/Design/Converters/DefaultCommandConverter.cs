@@ -6,9 +6,9 @@
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Web.UI.MobileControls;
 
     /// <summary>

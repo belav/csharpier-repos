@@ -8,12 +8,12 @@
 namespace System.Data.SqlClient
 {
     using System;
-    using System.Text;
     using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
     using System.Security;
     using System.Security.Cryptography;
+    using System.Text;
 
     /// <summary>
     /// Provides implementation similar to certificate store provider.

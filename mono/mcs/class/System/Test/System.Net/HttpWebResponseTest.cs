@@ -13,9 +13,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-
 using MonoTests.Helpers;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Net

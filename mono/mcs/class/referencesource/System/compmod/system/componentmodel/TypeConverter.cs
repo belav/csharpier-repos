@@ -8,10 +8,9 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.Collections;
-    using System.Configuration;
     using System.ComponentModel.Design.Serialization;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -19,6 +18,7 @@ namespace System.ComponentModel
     using System.Runtime.Remoting;
     using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Converts the value of an object into a different data type.</para>

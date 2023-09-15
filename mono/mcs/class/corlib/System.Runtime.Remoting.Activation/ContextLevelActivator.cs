@@ -30,8 +30,8 @@
 //
 
 using System;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Contexts;
+using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Activation
 {

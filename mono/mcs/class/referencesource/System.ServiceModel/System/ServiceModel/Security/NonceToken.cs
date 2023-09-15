@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections;
-    using System.ServiceModel;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IO;
     using System.Security.Cryptography;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;

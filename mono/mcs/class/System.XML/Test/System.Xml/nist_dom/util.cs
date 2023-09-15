@@ -13,7 +13,6 @@
 
 using System;
 using System.Xml;
-
 using MonoTests.Helpers;
 
 namespace nist_dom

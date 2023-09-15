@@ -16,11 +16,11 @@
 namespace System.Collections
 {
     using System;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Security.Permissions;
 
     // The SortedList class implements a sorted list of keys and values. Entries in
     // a sorted list are sorted by their keys and are accessible both by key and by

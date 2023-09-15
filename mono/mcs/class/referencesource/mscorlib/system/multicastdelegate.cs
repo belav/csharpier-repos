@@ -6,11 +6,11 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
-    using System.Reflection.Emit;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

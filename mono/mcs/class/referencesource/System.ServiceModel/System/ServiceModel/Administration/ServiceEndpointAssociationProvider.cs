@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Administration
 {
     using System;
-    using System.ServiceModel.Description;
     using System.Diagnostics;
-    using System.ServiceModel.Channels;
     using System.Globalization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     internal class ServiceEndpointAssociationProvider : ProviderBase, IWmiProvider
     {

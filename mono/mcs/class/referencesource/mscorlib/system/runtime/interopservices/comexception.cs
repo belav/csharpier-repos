@@ -17,8 +17,8 @@
 namespace System.Runtime.InteropServices
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Security;
     using Microsoft.Win32;
 

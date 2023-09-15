@@ -9,9 +9,9 @@
 namespace System.Data
 {
     using System;
-    using System.Data.Common;
     using System.Collections;
     using System.ComponentModel;
+    using System.Data.Common;
 
     internal sealed class DataTableReaderListener
     {

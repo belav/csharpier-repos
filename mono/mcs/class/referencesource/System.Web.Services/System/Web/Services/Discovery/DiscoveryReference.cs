@@ -7,14 +7,14 @@
 namespace System.Web.Services.Discovery
 {
     using System;
-    using System.Xml.Serialization;
-    using System.Text.RegularExpressions;
-    using System.IO;
-    using System.Text;
-    using System.Threading;
     using System.Collections;
     using System.Diagnostics;
+    using System.IO;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference"]/*' />
     /// <devdoc>

@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Data;
-using System.Data.Objects;
-using System.Data.Metadata.Edm;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
 
 namespace System.Data
 {

@@ -34,7 +34,6 @@ using System.ServiceModel.Configuration;
 using System.Configuration;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration

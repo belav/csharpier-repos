@@ -4,11 +4,11 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
+    using System.ComponentModel;
     using System.Net;
     using System.Net.Security;
-    using System.ComponentModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public sealed class NamedPipeTransportSecurity
     {

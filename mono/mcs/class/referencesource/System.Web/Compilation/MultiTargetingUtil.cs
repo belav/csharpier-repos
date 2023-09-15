@@ -12,7 +12,6 @@ using Microsoft.Build.Utilities;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
-
 using FrameworkName = System.Runtime.Versioning.FrameworkName;
 
 namespace System.Web.Compilation

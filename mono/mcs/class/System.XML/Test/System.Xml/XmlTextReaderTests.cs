@@ -10,12 +10,10 @@
 
 using System;
 using System.IO;
-using System.Xml;
 using System.Text;
-
-using NUnit.Framework;
-
+using System.Xml;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {

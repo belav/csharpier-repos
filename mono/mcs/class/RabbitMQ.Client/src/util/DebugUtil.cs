@@ -55,10 +55,10 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.IO;
-using System.Text;
-using System.Reflection;
 using System.Collections;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace RabbitMQ.Util
 {

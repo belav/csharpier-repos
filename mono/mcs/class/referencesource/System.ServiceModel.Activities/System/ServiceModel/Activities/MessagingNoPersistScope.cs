@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Activities
 {
     using System;
-    using System.Activities.Statements;
     using System.Activities;
-    using System.Collections.ObjectModel;
+    using System.Activities.Statements;
     using System.Collections.Generic;
-    using System.Windows.Markup;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Windows.Markup;
 
     [ContentProperty("Body")]
     class MessagingNoPersistScope : NativeActivity

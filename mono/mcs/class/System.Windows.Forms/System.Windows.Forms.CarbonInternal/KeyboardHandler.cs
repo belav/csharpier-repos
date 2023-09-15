@@ -25,9 +25,9 @@
 //
 using System;
 using System.Collections;
-using System.Text;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace System.Windows.Forms.CarbonInternal
 {

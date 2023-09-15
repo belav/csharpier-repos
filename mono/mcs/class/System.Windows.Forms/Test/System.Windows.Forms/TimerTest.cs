@@ -8,12 +8,11 @@
 using System;
 using System.Drawing;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Threading;
-using Timer = System.Windows.Forms.Timer;
-using Sys_Threading = System.Threading;
-
+using System.Windows.Forms;
 using NUnit.Framework;
+using Sys_Threading = System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace MonoTests.System.Windows.Forms
 {

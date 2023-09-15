@@ -14,7 +14,6 @@
  * ***************************************************************************/
 using System;
 using Microsoft;
-
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else

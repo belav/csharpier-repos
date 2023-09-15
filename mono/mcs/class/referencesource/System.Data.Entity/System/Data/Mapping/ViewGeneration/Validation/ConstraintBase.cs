@@ -7,23 +7,23 @@
 // @backupOwner cmeek
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.Utils;
 using System.Data.Common.Utils.Boolean;
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Text;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
 {
-    using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
-    using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
     using WrapperAndExpr = AndExpr<LeftCellWrapper>;
-    using WrapperOrExpr = OrExpr<LeftCellWrapper>;
-    using WrapperNotExpr = NotExpr<LeftCellWrapper>;
-    using WrapperTermExpr = TermExpr<LeftCellWrapper>;
-    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
+    using WrapperBoolExpr = BoolExpr<LeftCellWrapper>;
     using WrapperFalseExpr = FalseExpr<LeftCellWrapper>;
+    using WrapperNotExpr = NotExpr<LeftCellWrapper>;
+    using WrapperOrExpr = OrExpr<LeftCellWrapper>;
+    using WrapperTermExpr = TermExpr<LeftCellWrapper>;
+    using WrapperTreeExpr = TreeExpr<LeftCellWrapper>;
+    using WrapperTrueExpr = TrueExpr<LeftCellWrapper>;
 
     // A superclass for constraint errors. It also contains useful constraint
     // checking methods

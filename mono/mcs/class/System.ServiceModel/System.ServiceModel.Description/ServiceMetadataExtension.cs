@@ -41,11 +41,10 @@ using System.Web.Services;
 using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
-
-using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
-using WSMessage = System.Web.Services.Description.Message;
 using SMMessage = System.ServiceModel.Channels.Message;
 using WCFBinding = System.ServiceModel.Channels.Binding;
+using WSMessage = System.Web.Services.Description.Message;
+using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 
 namespace System.ServiceModel.Description
 {

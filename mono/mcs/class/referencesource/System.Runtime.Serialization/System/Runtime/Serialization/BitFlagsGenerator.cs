@@ -6,10 +6,11 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Reflection;
+    using System.Security;
 #if !NO_DYNAMIC_CODEGEN
     using System.Reflection.Emit;
 #endif
-    using System.Security;
+
 
     [Fx.Tag.SecurityNote(
         Miscellaneous = "RequiresReview (Critical) - works on CodeGenerator objects, which require Critical access."

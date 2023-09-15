@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Services.Providers;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Services.Providers

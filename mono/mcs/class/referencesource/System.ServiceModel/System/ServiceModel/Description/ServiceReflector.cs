@@ -8,9 +8,9 @@ namespace System.ServiceModel.Description
     using System.Reflection;
     using System.Runtime;
     using System.ServiceModel;
-    using System.Xml;
-    using System.Threading.Tasks;
     using System.Threading;
+    using System.Threading.Tasks;
+    using System.Xml;
 
     static class NamingHelper
     {

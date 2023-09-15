@@ -1,12 +1,12 @@
 namespace System.Web.Services.Description
 {
-    using System.Xml;
-    using System.IO;
-    using System.Xml.Schema;
-    using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.IO;
     using System.Text;
     using System.Web.Services.Configuration;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBinding"]/*' />
     [XmlFormatExtension("binding", SoapBinding.Namespace, typeof(Binding))]

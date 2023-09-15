@@ -15,9 +15,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
 
 namespace System.Dynamic.Utils
 {

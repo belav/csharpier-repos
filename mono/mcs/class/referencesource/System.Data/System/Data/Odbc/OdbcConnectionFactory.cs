@@ -9,11 +9,11 @@
 namespace System.Data.Odbc
 {
     using System;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Data.Common;
     using System.Data.ProviderBase;
     using System.Diagnostics;
-    using System.Collections.Specialized;
-    using System.Configuration;
     using System.IO;
     using System.Runtime.Versioning;
 
