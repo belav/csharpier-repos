@@ -41,28 +41,19 @@ public abstract class StreamBackedTestConnection : IDisposable
 
     public Task SendEmptyGet()
     {
-        return Send("GET / HTTP/1.1",
-            "Host:",
-            "",
-            "");
+        return Send("GET / HTTP/1.1", "Host:", "", "");
     }
 
-    public Task SendEmptyGetWithUpgradeAndKeepAlive()
-        => SendEmptyGetWithConnection("Upgrade, keep-alive");
+    public Task SendEmptyGetWithUpgradeAndKeepAlive() =>
+        SendEmptyGetWithConnection("Upgrade, keep-alive");
 
-    public Task SendEmptyGetWithUpgrade()
-        => SendEmptyGetWithConnection("Upgrade");
+    public Task SendEmptyGetWithUpgrade() => SendEmptyGetWithConnection("Upgrade");
 
-    public Task SendEmptyGetAsKeepAlive()
-        => SendEmptyGetWithConnection("keep-alive");
+    public Task SendEmptyGetAsKeepAlive() => SendEmptyGetWithConnection("keep-alive");
 
     private Task SendEmptyGetWithConnection(string connection)
     {
-        return Send("GET / HTTP/1.1",
-            "Host:",
-            "Connection: " + connection,
-            "",
-            "");
+        return Send("GET / HTTP/1.1", "Host:", "Connection: " + connection, "", "");
     }
 
     public async Task SendAll(params string[] lines)
@@ -116,10 +107,12 @@ public abstract class StreamBackedTestConnection : IDisposable
         }
         catch (TimeoutException ex) when (offset != 0)
         {
-            throw new TimeoutException($"Did not receive a complete response within {Timeout}.{Environment.NewLine}{Environment.NewLine}" +
-                $"Expected:{Environment.NewLine}{expected}{Environment.NewLine}{Environment.NewLine}" +
-                $"Actual:{Environment.NewLine}{new string(actual, 0, offset)}{Environment.NewLine}",
-                ex);
+            throw new TimeoutException(
+                $"Did not receive a complete response within {Timeout}.{Environment.NewLine}{Environment.NewLine}"
+                    + $"Expected:{Environment.NewLine}{expected}{Environment.NewLine}{Environment.NewLine}"
+                    + $"Actual:{Environment.NewLine}{new string(actual, 0, offset)}{Environment.NewLine}",
+                ex
+            );
         }
 
         var actualText = new string(actual, 0, offset);
@@ -143,7 +136,8 @@ public abstract class StreamBackedTestConnection : IDisposable
         if (bytesTransferred > 0)
         {
             throw new IOException(
-                $"Expected connection close, received data instead: \"{_reader.CurrentEncoding.GetString(buffer, 0, bytesTransferred)}\"");
+                $"Expected connection close, received data instead: \"{_reader.CurrentEncoding.GetString(buffer, 0, bytesTransferred)}\""
+            );
         }
     }
 }

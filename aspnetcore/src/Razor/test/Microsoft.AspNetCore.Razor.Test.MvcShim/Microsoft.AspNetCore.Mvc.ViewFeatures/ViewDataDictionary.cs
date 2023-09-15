@@ -12,14 +12,8 @@ public class ViewDataDictionary : IDictionary<string, object>
     #region IDictionary properties
     public object this[string index]
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
+        get { throw new NotImplementedException(); }
+        set { throw new NotImplementedException(); }
     }
 
     public int Count { get; }
@@ -32,9 +26,7 @@ public class ViewDataDictionary : IDictionary<string, object>
     #endregion
 
     #region IDictionary methods
-    public void Add(string key, object value)
-    {
-    }
+    public void Add(string key, object value) { }
 
     public bool ContainsKey(string key)
     {
@@ -51,29 +43,25 @@ public class ViewDataDictionary : IDictionary<string, object>
         throw new NotImplementedException();
     }
 
-    public void Add(KeyValuePair<string, object> item)
-    {
-    }
+    public void Add(KeyValuePair<string, object> item) { }
 
-    public void Clear()
-    {
-    }
+    public void Clear() { }
 
     public bool Contains(KeyValuePair<string, object> item)
     {
         throw new NotImplementedException();
     }
 
-    public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
-    {
-    }
+    public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex) { }
 
     public bool Remove(KeyValuePair<string, object> item)
     {
         throw new NotImplementedException();
     }
 
-    IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, object>> IEnumerable<
+        KeyValuePair<string, object>
+    >.GetEnumerator()
     {
         throw new NotImplementedException();
     }

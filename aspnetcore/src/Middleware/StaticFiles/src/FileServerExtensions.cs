@@ -41,17 +41,19 @@ public static class FileServerExtensions
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
     /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
     /// </remarks>
-    public static IApplicationBuilder UseFileServer(this IApplicationBuilder app, bool enableDirectoryBrowsing)
+    public static IApplicationBuilder UseFileServer(
+        this IApplicationBuilder app,
+        bool enableDirectoryBrowsing
+    )
     {
         if (app == null)
         {
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseFileServer(new FileServerOptions
-        {
-            EnableDirectoryBrowsing = enableDirectoryBrowsing
-        });
+        return app.UseFileServer(
+            new FileServerOptions { EnableDirectoryBrowsing = enableDirectoryBrowsing }
+        );
     }
 
     /// <summary>
@@ -64,7 +66,10 @@ public static class FileServerExtensions
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
     /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
     /// </remarks>
-    public static IApplicationBuilder UseFileServer(this IApplicationBuilder app, string requestPath)
+    public static IApplicationBuilder UseFileServer(
+        this IApplicationBuilder app,
+        string requestPath
+    )
     {
         if (app == null)
         {
@@ -76,10 +81,9 @@ public static class FileServerExtensions
             throw new ArgumentNullException(nameof(requestPath));
         }
 
-        return app.UseFileServer(new FileServerOptions
-        {
-            RequestPath = new PathString(requestPath)
-        });
+        return app.UseFileServer(
+            new FileServerOptions { RequestPath = new PathString(requestPath) }
+        );
     }
 
     /// <summary>
@@ -88,7 +92,10 @@ public static class FileServerExtensions
     /// <param name="app"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public static IApplicationBuilder UseFileServer(this IApplicationBuilder app, FileServerOptions options)
+    public static IApplicationBuilder UseFileServer(
+        this IApplicationBuilder app,
+        FileServerOptions options
+    )
     {
         if (app == null)
         {

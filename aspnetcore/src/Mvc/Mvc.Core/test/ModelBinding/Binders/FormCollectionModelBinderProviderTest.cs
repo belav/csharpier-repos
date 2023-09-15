@@ -21,7 +21,8 @@ public class FormCollectionModelBinderProviderTest
 
         Assert.Equal(
             $"The '{typeof(FormCollectionModelBinder).FullName}' cannot bind to a model of type '{modelType.FullName}'. Change the model type to '{typeof(IFormCollection).FullName}' instead.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Theory]
@@ -55,12 +56,11 @@ public class FormCollectionModelBinderProviderTest
         Assert.IsType<FormCollectionModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 
     private class DerivedFormCollection : FormCollection
     {
-        public DerivedFormCollection() : base(fields: null, files: null) { }
+        public DerivedFormCollection()
+            : base(fields: null, files: null) { }
     }
 }

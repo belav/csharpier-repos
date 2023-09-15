@@ -12,7 +12,9 @@ internal static class GrpcProtocolConstants
     internal const string MessageAcceptEncodingHeader = "grpc-accept-encoding";
     internal static readonly ReadOnlyMemory<byte> StreamingDelimiter = new byte[] { (byte)'\n' };
 
-    internal static readonly HashSet<string> FilteredHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    internal static readonly HashSet<string> FilteredHeaders = new HashSet<string>(
+        StringComparer.OrdinalIgnoreCase
+    )
     {
         MessageEncodingHeader,
         MessageAcceptEncodingHeader,

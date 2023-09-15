@@ -58,7 +58,8 @@ internal abstract class RazorParserFeatureFlags
             allowUsingVariableDeclarations,
             allowConditionalDataDashAttributes,
             allowCSharpInMarkupAttributeArea,
-            allowNullableForgivenessOperator);
+            allowNullableForgivenessOperator
+        );
     }
 
     public abstract bool AllowMinimizedBooleanTagHelperAttributes { get; }
@@ -87,7 +88,8 @@ internal abstract class RazorParserFeatureFlags
             bool allowUsingVariableDeclarations,
             bool allowConditionalDataDashAttributesInComponents,
             bool allowCSharpInMarkupAttributeArea,
-            bool allowNullableForgivenessOperator)
+            bool allowNullableForgivenessOperator
+        )
         {
             AllowMinimizedBooleanTagHelperAttributes = allowMinimizedBooleanTagHelperAttributes;
             AllowHtmlCommentsInTagHelpers = allowHtmlCommentsInTagHelpers;

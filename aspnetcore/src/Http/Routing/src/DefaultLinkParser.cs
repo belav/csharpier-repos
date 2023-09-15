@@ -17,7 +17,9 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
     private readonly IServiceProvider _serviceProvider;
 
     // Caches RoutePatternMatcher instances
-    private readonly DataSourceDependentCache<ConcurrentDictionary<RouteEndpoint, MatcherState>> _matcherCache;
+    private readonly DataSourceDependentCache<
+        ConcurrentDictionary<RouteEndpoint, MatcherState>
+    > _matcherCache;
 
     // Used to initialize RoutePatternMatcher and constraint instances
     private readonly Func<RouteEndpoint, MatcherState> _createMatcher;
@@ -26,7 +28,8 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
         ParameterPolicyFactory parameterPolicyFactory,
         EndpointDataSource dataSource,
         ILogger<DefaultLinkParser> logger,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
         _parameterPolicyFactory = parameterPolicyFactory;
         _logger = logger;
@@ -34,18 +37,26 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
 
         // We cache RoutePatternMatcher instances per-Endpoint for performance, but we want to wipe out
         // that cache is the endpoints change so that we don't allow unbounded memory growth.
-        _matcherCache = new DataSourceDependentCache<ConcurrentDictionary<RouteEndpoint, MatcherState>>(dataSource, (_) =>
-        {
-            // We don't eagerly fill this cache because there's no real reason to. Unlike URL matching, we don't
-            // need to build a big data structure up front to be correct.
-            return new ConcurrentDictionary<RouteEndpoint, MatcherState>();
-        });
+        _matcherCache = new DataSourceDependentCache<
+            ConcurrentDictionary<RouteEndpoint, MatcherState>
+        >(
+            dataSource,
+            (_) =>
+            {
+                // We don't eagerly fill this cache because there's no real reason to. Unlike URL matching, we don't
+                // need to build a big data structure up front to be correct.
+                return new ConcurrentDictionary<RouteEndpoint, MatcherState>();
+            }
+        );
 
         // Cached to avoid per-call allocation of a delegate on lookup.
         _createMatcher = CreateRoutePatternMatcher;
     }
 
-    public override RouteValueDictionary? ParsePathByAddress<TAddress>(TAddress address, PathString path)
+    public override RouteValueDictionary? ParsePathByAddress<TAddress>(
+        TAddress address,
+        PathString path
+    )
     {
         var endpoints = GetEndpoints(address);
         if (endpoints.Count == 0)
@@ -69,7 +80,9 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
 
     private List<RouteEndpoint> GetEndpoints<TAddress>(TAddress address)
     {
-        var addressingScheme = _serviceProvider.GetRequiredService<IEndpointAddressScheme<TAddress>>();
+        var addressingScheme = _serviceProvider.GetRequiredService<
+            IEndpointAddressScheme<TAddress>
+        >();
         var endpoints = addressingScheme.FindEndpoints(address).OfType<RouteEndpoint>().ToList();
 
         if (endpoints.Count == 0)
@@ -86,7 +99,9 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
 
     private MatcherState CreateRoutePatternMatcher(RouteEndpoint endpoint)
     {
-        var constraints = new Dictionary<string, List<IRouteConstraint>>(StringComparer.OrdinalIgnoreCase);
+        var constraints = new Dictionary<string, List<IRouteConstraint>>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         var policies = endpoint.RoutePattern.ParameterPolicies;
         foreach (var kvp in policies)
@@ -108,15 +123,23 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             }
         }
 
-        var matcher = new RoutePatternMatcher(endpoint.RoutePattern, new RouteValueDictionary(endpoint.RoutePattern.Defaults));
+        var matcher = new RoutePatternMatcher(
+            endpoint.RoutePattern,
+            new RouteValueDictionary(endpoint.RoutePattern.Defaults)
+        );
         return new MatcherState(matcher, constraints);
     }
 
     // Internal for testing
-    internal MatcherState GetMatcherState(RouteEndpoint endpoint) => _matcherCache.EnsureInitialized().GetOrAdd(endpoint, _createMatcher);
+    internal MatcherState GetMatcherState(RouteEndpoint endpoint) =>
+        _matcherCache.EnsureInitialized().GetOrAdd(endpoint, _createMatcher);
 
     // Internal for testing
-    internal bool TryParse(RouteEndpoint endpoint, PathString path, [NotNullWhen(true)] out RouteValueDictionary? values)
+    internal bool TryParse(
+        RouteEndpoint endpoint,
+        PathString path,
+        [NotNullWhen(true)] out RouteValueDictionary? values
+    )
     {
         var (matcher, constraints) = GetMatcherState(endpoint);
 
@@ -132,7 +155,15 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             for (var i = 0; i < kvp.Value.Count; i++)
             {
                 var constraint = kvp.Value[i];
-                if (!constraint.Match(httpContext: null, NullRouter.Instance, kvp.Key, values, RouteDirection.IncomingRequest))
+                if (
+                    !constraint.Match(
+                        httpContext: null,
+                        NullRouter.Instance,
+                        kvp.Key,
+                        values,
+                        RouteDirection.IncomingRequest
+                    )
+                )
                 {
                     values = null;
                     return false;
@@ -154,13 +185,19 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
         public readonly RoutePatternMatcher Matcher;
         public readonly Dictionary<string, List<IRouteConstraint>> Constraints;
 
-        public MatcherState(RoutePatternMatcher matcher, Dictionary<string, List<IRouteConstraint>> constraints)
+        public MatcherState(
+            RoutePatternMatcher matcher,
+            Dictionary<string, List<IRouteConstraint>> constraints
+        )
         {
             Matcher = matcher;
             Constraints = constraints;
         }
 
-        public void Deconstruct(out RoutePatternMatcher matcher, out Dictionary<string, List<IRouteConstraint>> constraints)
+        public void Deconstruct(
+            out RoutePatternMatcher matcher,
+            out Dictionary<string, List<IRouteConstraint>> constraints
+        )
         {
             matcher = Matcher;
             constraints = Constraints;
@@ -169,7 +206,11 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
 
     private static partial class Log
     {
-        public static void EndpointsFound(ILogger logger, object? address, IEnumerable<Endpoint> endpoints)
+        public static void EndpointsFound(
+            ILogger logger,
+            object? address,
+            IEnumerable<Endpoint> endpoints
+        )
         {
             // Checking level again to avoid allocation on the common path
             if (logger.IsEnabled(LogLevel.Debug))
@@ -178,10 +219,25 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             }
         }
 
-        [LoggerMessage(100, LogLevel.Debug, "Found the endpoints {Endpoints} for address {Address}", EventName = "EndpointsFound", SkipEnabledCheck = true)]
-        private static partial void EndpointsFound(ILogger logger, IEnumerable<string?> endpoints, object? address);
+        [LoggerMessage(
+            100,
+            LogLevel.Debug,
+            "Found the endpoints {Endpoints} for address {Address}",
+            EventName = "EndpointsFound",
+            SkipEnabledCheck = true
+        )]
+        private static partial void EndpointsFound(
+            ILogger logger,
+            IEnumerable<string?> endpoints,
+            object? address
+        );
 
-        [LoggerMessage(101, LogLevel.Debug, "No endpoints found for address {Address}", EventName = "EndpointsNotFound")]
+        [LoggerMessage(
+            101,
+            LogLevel.Debug,
+            "No endpoints found for address {Address}",
+            EventName = "EndpointsNotFound"
+        )]
         public static partial void EndpointsNotFound(ILogger logger, object? address);
 
         public static void PathParsingSucceeded(ILogger logger, PathString path, Endpoint endpoint)
@@ -193,10 +249,24 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             }
         }
 
-        [LoggerMessage(102, LogLevel.Debug, "Path parsing succeeded for endpoint {Endpoint} and URI path {URI}", EventName = "PathParsingSucceeded", SkipEnabledCheck = true)]
-        private static partial void PathParsingSucceeded(ILogger logger, string? endpoint, string? uri);
+        [LoggerMessage(
+            102,
+            LogLevel.Debug,
+            "Path parsing succeeded for endpoint {Endpoint} and URI path {URI}",
+            EventName = "PathParsingSucceeded",
+            SkipEnabledCheck = true
+        )]
+        private static partial void PathParsingSucceeded(
+            ILogger logger,
+            string? endpoint,
+            string? uri
+        );
 
-        public static void PathParsingFailed(ILogger logger, PathString path, IEnumerable<Endpoint> endpoints)
+        public static void PathParsingFailed(
+            ILogger logger,
+            PathString path,
+            IEnumerable<Endpoint> endpoints
+        )
         {
             // Checking level again to avoid allocation on the common path
             if (logger.IsEnabled(LogLevel.Debug))
@@ -205,7 +275,17 @@ internal sealed partial class DefaultLinkParser : LinkParser, IDisposable
             }
         }
 
-        [LoggerMessage(103, LogLevel.Debug, "Path parsing failed for endpoints {Endpoints} and URI path {URI}", EventName = "PathParsingFailed", SkipEnabledCheck = true)]
-        private static partial void PathParsingFailed(ILogger logger, IEnumerable<string?> endpoints, string? uri);
+        [LoggerMessage(
+            103,
+            LogLevel.Debug,
+            "Path parsing failed for endpoints {Endpoints} and URI path {URI}",
+            EventName = "PathParsingFailed",
+            SkipEnabledCheck = true
+        )]
+        private static partial void PathParsingFailed(
+            ILogger logger,
+            IEnumerable<string?> endpoints,
+            string? uri
+        );
     }
 }

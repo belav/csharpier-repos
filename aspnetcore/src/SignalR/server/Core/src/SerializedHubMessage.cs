@@ -57,7 +57,8 @@ public class SerializedHubMessage
                 if (Message == null)
                 {
                     throw new InvalidOperationException(
-                        "This message was received from another server that did not have the requested protocol available.");
+                        "This message was received from another server that did not have the requested protocol available."
+                    );
                 }
 
                 serialized = protocol.GetMessageBytes(Message);
@@ -148,7 +149,13 @@ public class SerializedHubMessage
         {
             foreach (var serializedMessage in _cachedItems)
             {
-                if (string.Equals(serializedMessage.ProtocolName, protocolName, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        serializedMessage.ProtocolName,
+                        protocolName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     result = serializedMessage.Serialized;
                     return true;

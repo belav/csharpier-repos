@@ -17,10 +17,14 @@ public class PageDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddOptionalStringToken(RazorExtensionsResources.PageDirective_RouteToken_Name, RazorExtensionsResources.PageDirective_RouteToken_Description);
+            builder.AddOptionalStringToken(
+                RazorExtensionsResources.PageDirective_RouteToken_Name,
+                RazorExtensionsResources.PageDirective_RouteToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = RazorExtensionsResources.PageDirective_Description;
-        });
+        }
+    );
 
     private PageDirective(string routeTemplate, IntermediateNode directiveNode)
     {
@@ -43,7 +47,10 @@ public class PageDirective
         return builder;
     }
 
-    public static bool TryGetPageDirective(DocumentIntermediateNode documentNode, out PageDirective pageDirective)
+    public static bool TryGetPageDirective(
+        DocumentIntermediateNode documentNode,
+        out PageDirective pageDirective
+    )
     {
         var visitor = new Visitor();
         for (var i = 0; i < documentNode.Children.Count; i++)

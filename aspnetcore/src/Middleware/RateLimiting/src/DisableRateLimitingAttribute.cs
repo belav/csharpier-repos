@@ -9,8 +9,13 @@ namespace Microsoft.AspNetCore.RateLimiting;
 /// <remarks>
 /// Completely disables the rate limiting middleware from applying to this endpoint.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class DisableRateLimitingAttribute : Attribute
 {
-    internal static DisableRateLimitingAttribute Instance { get; } = new DisableRateLimitingAttribute();
+    internal static DisableRateLimitingAttribute Instance { get; } =
+        new DisableRateLimitingAttribute();
 }

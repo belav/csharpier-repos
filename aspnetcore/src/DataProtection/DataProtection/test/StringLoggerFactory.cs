@@ -28,9 +28,7 @@ internal sealed class StringLoggerFactory : ILoggerFactory
         return new StringLogger(name, this);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     public override string ToString()
     {
@@ -58,14 +56,31 @@ internal sealed class StringLoggerFactory : ILoggerFactory
             return (logLevel >= _factory.MinimumLevel);
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
-            string message = string.Format(CultureInfo.InvariantCulture,
-                "Provider: {0}" + Environment.NewLine +
-                "Log level: {1}" + Environment.NewLine +
-                "Event id: {2}" + Environment.NewLine +
-                "Exception: {3}" + Environment.NewLine +
-                "Message: {4}", _name, logLevel, eventId, exception?.ToString(), formatter(state, exception));
+            string message = string.Format(
+                CultureInfo.InvariantCulture,
+                "Provider: {0}"
+                    + Environment.NewLine
+                    + "Log level: {1}"
+                    + Environment.NewLine
+                    + "Event id: {2}"
+                    + Environment.NewLine
+                    + "Exception: {3}"
+                    + Environment.NewLine
+                    + "Message: {4}",
+                _name,
+                logLevel,
+                eventId,
+                exception?.ToString(),
+                formatter(state, exception)
+            );
             _factory._log.AppendLine(message);
         }
 

@@ -39,7 +39,11 @@ class Program
 
 static class BlazorClientExtensions
 {
-    public static Task NavigateAsync(this BlazorClient client, string url, CancellationToken cancellationToken = default)
+    public static Task NavigateAsync(
+        this BlazorClient client,
+        string url,
+        CancellationToken cancellationToken = default
+    )
     {
         return client.HubConnection.InvokeAsync("OnLocationChanged", url, false, cancellationToken);
     }

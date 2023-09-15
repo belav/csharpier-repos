@@ -32,7 +32,7 @@ public class WorkerTemplateTest : LoggedTest
 
     [ConditionalTheory]
     [InlineData("C#", null)]
-    [InlineData("C#", new [] { ArgConstants.UseProgramMain })]
+    [InlineData("C#", new[] { ArgConstants.UseProgramMain })]
     [InlineData("F#", null)]
     public async Task WorkerTemplateAsync(string language, string[] args)
     {
@@ -52,14 +52,24 @@ public class WorkerTemplateTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
         }
 
         using (var aspNetProcess = project.StartPublishedProjectAsync(hasListeningUri: false))
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
         }
     }
 }

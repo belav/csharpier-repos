@@ -21,9 +21,7 @@ internal partial struct VirtualCharSequence
     /// </summary>
     private abstract partial class Chunk
     {
-        protected Chunk()
-        {
-        }
+        protected Chunk() { }
 
         public abstract int Length { get; }
         public abstract VirtualChar this[int index] { get; }
@@ -39,8 +37,7 @@ internal partial struct VirtualCharSequence
     {
         private readonly ImmutableList<VirtualChar> _array;
 
-        public ImmutableSegmentedListChunk(ImmutableList<VirtualChar> array)
-            => _array = array;
+        public ImmutableSegmentedListChunk(ImmutableList<VirtualChar> array) => _array = array;
 
         public override int Length => _array.Count;
         public override VirtualChar this[int index] => _array[index];
@@ -55,26 +52,34 @@ internal partial struct VirtualCharSequence
             {
                 return null;
             }
-            var index = BinarySearch(_array, position, static (ch, position) =>
-            {
-                if (position < ch.Span.Start)
+            var index = BinarySearch(
+                _array,
+                position,
+                static (ch, position) =>
                 {
-                    return 1;
-                }
+                    if (position < ch.Span.Start)
+                    {
+                        return 1;
+                    }
 
-                if (position >= ch.Span.End)
-                {
-                    return -1;
-                }
+                    if (position >= ch.Span.End)
+                    {
+                        return -1;
+                    }
 
-                return 0;
-            });
+                    return 0;
+                }
+            );
             Debug.Assert(index >= 0);
             return _array[index];
         }
     }
 
-    internal static int BinarySearch<TElement, TValue>(ImmutableList<TElement> array, TValue value, Func<TElement, TValue, int> comparer)
+    internal static int BinarySearch<TElement, TValue>(
+        ImmutableList<TElement> array,
+        TValue value,
+        Func<TElement, TValue, int> comparer
+    )
     {
         int low = 0;
         int high = array.Count - 1;
@@ -147,8 +152,10 @@ internal partial struct VirtualCharSequence
                 // when the string has the same number of chars as there are VirtualChars.
                 if (char.IsHighSurrogate(_underlyingData[index]))
                 {
-                    Debug.Assert(index + 1 >= _underlyingData.Length ||
-                                 !char.IsLowSurrogate(_underlyingData[index + 1]));
+                    Debug.Assert(
+                        index + 1 >= _underlyingData.Length
+                            || !char.IsLowSurrogate(_underlyingData[index + 1])
+                    );
                 }
 #endif
 

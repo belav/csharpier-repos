@@ -66,11 +66,13 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
         // Act
         var i = 3;
         IEnumerable<SyntaxToken> previousTokens = null;
-        var tokenFound = tokenizer.LookaheadUntil((s, p) =>
-        {
-            previousTokens = p;
-            return --i == 0;
-        });
+        var tokenFound = tokenizer.LookaheadUntil(
+            (s, p) =>
+            {
+                previousTokens = p;
+                return --i == 0;
+            }
+        );
 
         // Assert
         Assert.Equal(4, previousTokens.Count());
@@ -78,9 +80,18 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
         // For the very first element, there will be no previous items, so null is expected
         var orderIndex = 0;
         Assert.Null(previousTokens.ElementAt(orderIndex++));
-        AssertTokenEqual(SyntaxFactory.Token(SyntaxKind.Text, "asdf"), previousTokens.ElementAt(orderIndex++));
-        AssertTokenEqual(SyntaxFactory.Token(SyntaxKind.DoubleHyphen, "--"), previousTokens.ElementAt(orderIndex++));
-        AssertTokenEqual(SyntaxFactory.Token(SyntaxKind.Text, "fvd"), previousTokens.ElementAt(orderIndex++));
+        AssertTokenEqual(
+            SyntaxFactory.Token(SyntaxKind.Text, "asdf"),
+            previousTokens.ElementAt(orderIndex++)
+        );
+        AssertTokenEqual(
+            SyntaxFactory.Token(SyntaxKind.DoubleHyphen, "--"),
+            previousTokens.ElementAt(orderIndex++)
+        );
+        AssertTokenEqual(
+            SyntaxFactory.Token(SyntaxKind.Text, "fvd"),
+            previousTokens.ElementAt(orderIndex++)
+        );
     }
 
     [Fact]
@@ -91,11 +102,13 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
 
         // Act
         var tokens = new Stack<SyntaxToken>();
-        var tokenFound = tokenizer.LookaheadUntil((s, p) =>
-        {
-            tokens.Push(s);
-            return false;
-        });
+        var tokenFound = tokenizer.LookaheadUntil(
+            (s, p) =>
+            {
+                tokens.Push(s);
+                return false;
+            }
+        );
 
         // Assert
         Assert.False(tokenFound);
@@ -113,11 +126,13 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
 
         // Act
         var tokens = new Stack<SyntaxToken>();
-        var tokenFound = tokenizer.LookaheadUntil((s, p) =>
-        {
-            tokens.Push(s);
-            return s.Kind == SyntaxKind.DoubleHyphen;
-        });
+        var tokenFound = tokenizer.LookaheadUntil(
+            (s, p) =>
+            {
+                tokens.Push(s);
+                return s.Kind == SyntaxKind.DoubleHyphen;
+            }
+        );
 
         // Assert
         Assert.True(tokenFound);
@@ -132,7 +147,10 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
         var options = RazorParserOptions.CreateDefault();
         var context = new ParserContext(source, options);
 
-        var tokenizer = new TestTokenizerBackedParser(HtmlLanguageCharacteristics.Instance, context);
+        var tokenizer = new TestTokenizerBackedParser(
+            HtmlLanguageCharacteristics.Instance,
+            context
+        );
         return tokenizer;
     }
 
@@ -144,54 +162,38 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
     private class ExposedTokenizer : Tokenizer
     {
         public ExposedTokenizer(string input)
-            : base(new SeekableTextReader(input, filePath: null))
-        {
-        }
+            : base(new SeekableTextReader(input, filePath: null)) { }
 
         public new StringBuilder Buffer
         {
-            get
-            {
-                return base.Buffer;
-            }
+            get { return base.Buffer; }
         }
 
         public override SyntaxKind RazorCommentStarKind
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override SyntaxKind RazorCommentTransitionKind
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override SyntaxKind RazorCommentKind
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         protected override int StartState
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         protected override SyntaxToken CreateToken(
             string content,
             SyntaxKind type,
-            RazorDiagnostic[] errors)
+            RazorDiagnostic[] errors
+        )
         {
             throw new NotImplementedException();
         }
@@ -204,11 +206,15 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
 
     private class TestTokenizerBackedParser : TokenizerBackedParser<HtmlTokenizer>
     {
-        internal TestTokenizerBackedParser(LanguageCharacteristics<HtmlTokenizer> language, ParserContext context) : base(language, context)
-        {
-        }
+        internal TestTokenizerBackedParser(
+            LanguageCharacteristics<HtmlTokenizer> language,
+            ParserContext context
+        )
+            : base(language, context) { }
 
-        internal new bool LookaheadUntil(Func<SyntaxToken, IEnumerable<SyntaxToken>, bool> condition)
+        internal new bool LookaheadUntil(
+            Func<SyntaxToken, IEnumerable<SyntaxToken>, bool> condition
+        )
         {
             return base.LookaheadUntil(condition);
         }

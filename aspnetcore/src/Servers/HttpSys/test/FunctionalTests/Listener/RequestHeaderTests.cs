@@ -22,7 +22,12 @@ public class RequestHeaderTests
         using (var server = Utilities.CreateHttpServer(out address))
         {
             string[] customValues = new string[] { "custom1, and custom测试2", "custom3" };
-            Task responseTask = SendRequestAsync(address, "Custom-Header", customValues, Encoding.UTF8);
+            Task responseTask = SendRequestAsync(
+                address,
+                "Custom-Header",
+                customValues,
+                Encoding.UTF8
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout);
             var requestHeaders = context.Request.Headers;
@@ -63,7 +68,12 @@ public class RequestHeaderTests
         using (var server = Utilities.CreateHttpServer(out address))
         {
             string[] customValues = new string[] { "custom1, and custom测试2", "custom3" };
-            Task responseTask = SendRequestAsync(address, "Custom-Header", customValues, Encoding.UTF8);
+            Task responseTask = SendRequestAsync(
+                address,
+                "Custom-Header",
+                customValues,
+                Encoding.UTF8
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout);
             var requestHeaders = context.Request.Headers;
@@ -74,9 +84,15 @@ public class RequestHeaderTests
             Assert.Equal(new[] { "close" }, requestHeaders.GetValues("Connection"));
             // Apparently Http.Sys squashes request headers together.
             Assert.Equal("custom1, and custom测试2, custom3", requestHeaders["Custom-Header"]);
-            Assert.Equal(new[] { "custom1", "and custom测试2", "custom3" }, requestHeaders.GetValues("Custom-Header"));
+            Assert.Equal(
+                new[] { "custom1", "and custom测试2", "custom3" },
+                requestHeaders.GetValues("Custom-Header")
+            );
             Assert.Equal("spacervalue, spacervalue", requestHeaders["Spacer-Header"]);
-            Assert.Equal(new[] { "spacervalue", "spacervalue" }, requestHeaders.GetValues("Spacer-Header"));
+            Assert.Equal(
+                new[] { "spacervalue", "spacervalue" },
+                requestHeaders.GetValues("Spacer-Header")
+            );
             context.Dispose();
 
             await responseTask;
@@ -90,7 +106,12 @@ public class RequestHeaderTests
         using (var server = Utilities.CreateHttpServer(out address))
         {
             string[] customValues = new string[] { "£" };
-            Task responseTask = SendRequestAsync(address, "Custom-Header", customValues, Encoding.Latin1);
+            Task responseTask = SendRequestAsync(
+                address,
+                "Custom-Header",
+                customValues,
+                Encoding.Latin1
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout);
             var requestHeaders = context.Request.Headers;
@@ -118,7 +139,12 @@ public class RequestHeaderTests
         {
             server.Options.UseLatin1RequestHeaders = true;
             string[] customValues = new string[] { "£" };
-            Task responseTask = SendRequestAsync(address, "Custom-Header", customValues, Encoding.Latin1);
+            Task responseTask = SendRequestAsync(
+                address,
+                "Custom-Header",
+                customValues,
+                Encoding.Latin1
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout);
             var requestHeaders = context.Request.Headers;
@@ -146,7 +172,12 @@ public class RequestHeaderTests
         {
             server.Options.UseLatin1RequestHeaders = true;
             string[] customValues = new string[] { "£\0a" };
-            var responseTask = SendRequestAsync(address, "Custom-Header", customValues, Encoding.Latin1);
+            var responseTask = SendRequestAsync(
+                address,
+                "Custom-Header",
+                customValues,
+                Encoding.Latin1
+            );
             var response = await responseTask;
             Assert.StartsWith("400", response.Substring(9));
         }
@@ -159,7 +190,12 @@ public class RequestHeaderTests
         using (var server = Utilities.CreateHttpServer(out address))
         {
             string[] customValues = new string[] { "" };
-            Task responseTask = SendRequestAsync(address, "If-None-Match", customValues, Encoding.UTF8);
+            Task responseTask = SendRequestAsync(
+                address,
+                "If-None-Match",
+                customValues,
+                Encoding.UTF8
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout);
             var requestHeaders = context.Request.Headers;
@@ -184,7 +220,12 @@ public class RequestHeaderTests
         using (var server = Utilities.CreateHttpServer(out address))
         {
             string[] customValues = new string[] { "" };
-            Task responseTask = SendRequestAsync(address, "Custom-Header", customValues, Encoding.UTF8);
+            Task responseTask = SendRequestAsync(
+                address,
+                "Custom-Header",
+                customValues,
+                Encoding.UTF8
+            );
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout);
             var requestHeaders = context.Request.Headers;
@@ -202,7 +243,12 @@ public class RequestHeaderTests
         }
     }
 
-    private async Task<string> SendRequestAsync(string address, string customHeader, string[] customValues, Encoding encoding)
+    private async Task<string> SendRequestAsync(
+        string address,
+        string customHeader,
+        string[] customValues,
+        Encoding encoding
+    )
     {
         var uri = new Uri(address);
         StringBuilder builder = new StringBuilder();

@@ -58,10 +58,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
             ParameterType = typeof(int[])
         };
 
@@ -218,10 +215,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix",
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
             ParameterType = typeof(Person[])
         };
 
@@ -346,7 +340,9 @@ public class ArrayModelBinderIntegrationTest
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?parameter.Name=James&parameter.Aliases[0]=bill&parameter.Aliases[1]=william");
+            request.QueryString = new QueryString(
+                "?parameter.Name=James&parameter.Aliases[0]=bill&parameter.Aliases[1]=william"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -359,25 +355,29 @@ public class ArrayModelBinderIntegrationTest
 
         Assert.True(modelState.IsValid);
 
-        var model = Assert.IsType<PersonWithReadOnlyAndInitializedProperty>(modelBindingResult.Model);
+        var model = Assert.IsType<PersonWithReadOnlyAndInitializedProperty>(
+            modelBindingResult.Model
+        );
         Assert.Equal("James", model.Name);
         Assert.NotNull(model.Aliases);
         Assert.Collection(
             model.Aliases,
             (e) => Assert.Equal("Alias1", e),
-            (e) => Assert.Equal("Alias2", e));
+            (e) => Assert.Equal("Alias2", e)
+        );
     }
 
     [Fact]
     public async Task ArrayModelBinder_ThrowsOn1025Items_AtTopLevel()
     {
         // Arrange
-        var expectedMessage = "Collection bound to 'parameter' exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a " +
-            $"safeguard against incorrect model binders and models. Address issues in " +
-            $"'{typeof(SuccessfulModel)}'. For example, this type may have a property with a model binder that " +
-            $"always succeeds. See the {nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} " +
-            "documentation for more information.";
+        var expectedMessage =
+            "Collection bound to 'parameter' exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a "
+            + $"safeguard against incorrect model binders and models. Address issues in "
+            + $"'{typeof(SuccessfulModel)}'. For example, this type may have a property with a model binder that "
+            + $"always succeeds. See the {nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} "
+            + "documentation for more information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -397,7 +397,8 @@ public class ArrayModelBinderIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 }

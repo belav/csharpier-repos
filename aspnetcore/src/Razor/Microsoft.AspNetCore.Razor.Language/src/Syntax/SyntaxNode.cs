@@ -71,18 +71,12 @@ internal abstract partial class SyntaxNode
 
     public bool HasLeadingTrivia
     {
-        get
-        {
-            return GetLeadingTrivia().Count > 0;
-        }
+        get { return GetLeadingTrivia().Count > 0; }
     }
 
     public bool HasTrailingTrivia
     {
-        get
-        {
-            return GetTrailingTrivia().Count > 0;
-        }
+        get { return GetTrailingTrivia().Count > 0; }
     }
 
     public bool ContainsDiagnostics => Green.ContainsDiagnostics;
@@ -108,7 +102,11 @@ internal abstract partial class SyntaxNode
             var green = Green.GetSlot(slot);
             if (green != null)
             {
-                Interlocked.CompareExchange(ref field, green.CreateRed(this, GetChildPosition(slot)), null);
+                Interlocked.CompareExchange(
+                    ref field,
+                    green.CreateRed(this, GetChildPosition(slot)),
+                    null
+                );
                 result = field;
             }
         }
@@ -134,7 +132,8 @@ internal abstract partial class SyntaxNode
         return result;
     }
 
-    protected T GetRed<T>(ref T field, int slot) where T : SyntaxNode
+    protected T GetRed<T>(ref T field, int slot)
+        where T : SyntaxNode
     {
         var result = field;
 
@@ -143,7 +142,11 @@ internal abstract partial class SyntaxNode
             var green = Green.GetSlot(slot);
             if (green != null)
             {
-                Interlocked.CompareExchange(ref field, (T)green.CreateRed(this, this.GetChildPosition(slot)), null);
+                Interlocked.CompareExchange(
+                    ref field,
+                    (T)green.CreateRed(this, this.GetChildPosition(slot)),
+                    null
+                );
                 result = field;
             }
         }
@@ -152,7 +155,8 @@ internal abstract partial class SyntaxNode
     }
 
     // special case of above function where slot = 0, does not need GetChildPosition
-    protected T GetRedAtZero<T>(ref T field) where T : SyntaxNode
+    protected T GetRedAtZero<T>(ref T field)
+        where T : SyntaxNode
     {
         var result = field;
 
@@ -179,7 +183,11 @@ internal abstract partial class SyntaxNode
         {
             var green = Green.GetSlot(slot);
             // passing list's parent
-            Interlocked.CompareExchange(ref element, green.CreateRed(Parent, GetChildPosition(slot)), null);
+            Interlocked.CompareExchange(
+                ref element,
+                green.CreateRed(Parent, GetChildPosition(slot)),
+                null
+            );
             result = element;
         }
 
@@ -281,8 +289,7 @@ internal abstract partial class SyntaxNode
             {
                 return null;
             }
-        }
-        while (node.SlotCount != 0);
+        } while (node.SlotCount != 0);
 
         return node == this ? this : node;
     }
@@ -322,9 +329,7 @@ internal abstract partial class SyntaxNode
     /// </summary>
     public IEnumerable<SyntaxNode> Ancestors()
     {
-        return Parent?
-            .AncestorsAndSelf() ??
-            Array.Empty<SyntaxNode>();
+        return Parent?.AncestorsAndSelf() ?? Array.Empty<SyntaxNode>();
     }
 
     /// <summary>
@@ -359,7 +364,9 @@ internal abstract partial class SyntaxNode
     /// Gets a list of descendant nodes in prefix document order.
     /// </summary>
     /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-    public IEnumerable<SyntaxNode> DescendantNodes(Func<SyntaxNode, bool> descendIntoChildren = null)
+    public IEnumerable<SyntaxNode> DescendantNodes(
+        Func<SyntaxNode, bool> descendIntoChildren = null
+    )
     {
         return DescendantNodesImpl(FullSpan, descendIntoChildren, includeSelf: false);
     }
@@ -368,25 +375,35 @@ internal abstract partial class SyntaxNode
     /// Gets a list of descendant nodes (including this node) in prefix document order.
     /// </summary>
     /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-    public IEnumerable<SyntaxNode> DescendantNodesAndSelf(Func<SyntaxNode, bool> descendIntoChildren = null)
+    public IEnumerable<SyntaxNode> DescendantNodesAndSelf(
+        Func<SyntaxNode, bool> descendIntoChildren = null
+    )
     {
         return DescendantNodesImpl(FullSpan, descendIntoChildren, includeSelf: true);
     }
 
     protected internal SyntaxNode ReplaceCore<TNode>(
         IEnumerable<TNode> nodes = null,
-        Func<TNode, TNode, SyntaxNode> computeReplacementNode = null)
+        Func<TNode, TNode, SyntaxNode> computeReplacementNode = null
+    )
         where TNode : SyntaxNode
     {
         return SyntaxReplacer.Replace(this, nodes, computeReplacementNode);
     }
 
-    protected internal SyntaxNode ReplaceNodeInListCore(SyntaxNode originalNode, IEnumerable<SyntaxNode> replacementNodes)
+    protected internal SyntaxNode ReplaceNodeInListCore(
+        SyntaxNode originalNode,
+        IEnumerable<SyntaxNode> replacementNodes
+    )
     {
         return SyntaxReplacer.ReplaceNodeInList(this, originalNode, replacementNodes);
     }
 
-    protected internal SyntaxNode InsertNodesInListCore(SyntaxNode nodeInList, IEnumerable<SyntaxNode> nodesToInsert, bool insertBefore)
+    protected internal SyntaxNode InsertNodesInListCore(
+        SyntaxNode nodeInList,
+        IEnumerable<SyntaxNode> nodesToInsert,
+        bool insertBefore
+    )
     {
         return SyntaxReplacer.InsertNodeInList(this, nodeInList, nodesToInsert, insertBefore);
     }
@@ -437,6 +454,12 @@ internal abstract partial class SyntaxNode
             return string.Format(CultureInfo.InvariantCulture, "{0};[{1}]", Kind, ToFullString());
         }
 
-        return string.Format(CultureInfo.InvariantCulture, "{0} [{1}..{2})", Kind, Position, EndPosition);
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0} [{1}..{2})",
+            Kind,
+            Position,
+            EndPosition
+        );
     }
 }

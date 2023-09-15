@@ -14,8 +14,11 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
     private readonly HostApplicationBuilder _builder;
 
     private readonly List<Action<IConfigurationBuilder>> _configureHostActions = new();
-    private readonly List<Action<HostBuilderContext, IConfigurationBuilder>> _configureAppActions = new();
-    private readonly List<Action<HostBuilderContext, IServiceCollection>> _configureServicesActions = new();
+    private readonly List<Action<HostBuilderContext, IConfigurationBuilder>> _configureAppActions =
+        new();
+    private readonly List<
+        Action<HostBuilderContext, IServiceCollection>
+    > _configureServicesActions = new();
 
     public BootstrapHostBuilder(HostApplicationBuilder builder)
     {
@@ -32,7 +35,9 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
 
         if (Context is null)
         {
-            throw new InvalidOperationException($"{nameof(HostBuilderContext)} must exist in the {nameof(IServiceCollection)}");
+            throw new InvalidOperationException(
+                $"{nameof(HostBuilderContext)} must exist in the {nameof(IServiceCollection)}"
+            );
         }
     }
 
@@ -42,19 +47,29 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
 
     public IHostBuilder ConfigureHostConfiguration(Action<IConfigurationBuilder> configureDelegate)
     {
-        _configureHostActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+        _configureHostActions.Add(
+            configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
+        );
         return this;
     }
 
-    public IHostBuilder ConfigureAppConfiguration(Action<HostBuilderContext, IConfigurationBuilder> configureDelegate)
+    public IHostBuilder ConfigureAppConfiguration(
+        Action<HostBuilderContext, IConfigurationBuilder> configureDelegate
+    )
     {
-        _configureAppActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+        _configureAppActions.Add(
+            configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
+        );
         return this;
     }
 
-    public IHostBuilder ConfigureServices(Action<HostBuilderContext, IServiceCollection> configureDelegate)
+    public IHostBuilder ConfigureServices(
+        Action<HostBuilderContext, IServiceCollection> configureDelegate
+    )
     {
-        _configureServicesActions.Add(configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate)));
+        _configureServicesActions.Add(
+            configureDelegate ?? throw new ArgumentNullException(nameof(configureDelegate))
+        );
         return this;
     }
 
@@ -64,19 +79,27 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
         throw new InvalidOperationException();
     }
 
-    public IHostBuilder ConfigureContainer<TContainerBuilder>(Action<HostBuilderContext, TContainerBuilder> configureDelegate)
+    public IHostBuilder ConfigureContainer<TContainerBuilder>(
+        Action<HostBuilderContext, TContainerBuilder> configureDelegate
+    )
     {
         // ConfigureWebHostDefaults should never call this.
         throw new InvalidOperationException();
     }
 
-    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(IServiceProviderFactory<TContainerBuilder> factory) where TContainerBuilder : notnull
+    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
+        IServiceProviderFactory<TContainerBuilder> factory
+    )
+        where TContainerBuilder : notnull
     {
         // ConfigureWebHostDefaults should never call this.
         throw new InvalidOperationException();
     }
 
-    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory) where TContainerBuilder : notnull
+    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
+        Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
+    )
+        where TContainerBuilder : notnull
     {
         // ConfigureWebHostDefaults should never call this.
         throw new InvalidOperationException();
@@ -116,6 +139,9 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
             }
         }
 
-        return genericWebHostServiceDescriptor ?? throw new InvalidOperationException($"GenericWebHostedService must exist in the {nameof(IServiceCollection)}");
+        return genericWebHostServiceDescriptor
+            ?? throw new InvalidOperationException(
+                $"GenericWebHostedService must exist in the {nameof(IServiceCollection)}"
+            );
     }
 }

@@ -10,7 +10,11 @@ namespace Microsoft.AspNetCore.Routing;
 /// Attribute for providing host metdata that is used during routing.
 /// </summary>
 [DebuggerDisplay("{DebuggerToString(),nq}")]
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = false
+)]
 public sealed class HostAttribute : Attribute, IHostMetadata
 {
     /// <summary>
@@ -20,7 +24,8 @@ public sealed class HostAttribute : Attribute, IHostMetadata
     /// The host used during routing.
     /// Host should be Unicode rather than punycode, and may have a port.
     /// </param>
-    public HostAttribute(string host) : this(new[] { host })
+    public HostAttribute(string host)
+        : this(new[] { host })
     {
         if (host == null)
         {
@@ -55,9 +60,10 @@ public sealed class HostAttribute : Attribute, IHostMetadata
 
     private string DebuggerToString()
     {
-        var hostsDisplay = (Hosts.Count == 0)
-            ? "*:*"
-            : string.Join(",", Hosts.Select(h => h.Contains(':') ? h : h + ":*"));
+        var hostsDisplay =
+            (Hosts.Count == 0)
+                ? "*:*"
+                : string.Join(",", Hosts.Select(h => h.Contains(':') ? h : h + ":*"));
 
         return $"Hosts: {hostsDisplay}";
     }

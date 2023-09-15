@@ -9,7 +9,10 @@ internal struct FlowControl
 {
     public FlowControl(uint initialWindowSize)
     {
-        Debug.Assert(initialWindowSize <= Http2PeerSettings.MaxWindowSize, $"{nameof(initialWindowSize)} too large.");
+        Debug.Assert(
+            initialWindowSize <= Http2PeerSettings.MaxWindowSize,
+            $"{nameof(initialWindowSize)} too large."
+        );
 
         Available = (int)initialWindowSize;
         IsAborted = false;
@@ -21,7 +24,10 @@ internal struct FlowControl
     public void Advance(int bytes)
     {
         Debug.Assert(!IsAborted, $"({nameof(Advance)} called after abort.");
-        Debug.Assert(bytes == 0 || (bytes > 0 && bytes <= Available), $"{nameof(Advance)}({bytes}) called with {Available} bytes available.");
+        Debug.Assert(
+            bytes == 0 || (bytes > 0 && bytes <= Available),
+            $"{nameof(Advance)}({bytes}) called with {Available} bytes available."
+        );
 
         Available -= bytes;
     }

@@ -12,9 +12,7 @@ internal sealed unsafe class ManagedGenRandomImpl : IManagedGenRandom
 #endif
     public static readonly ManagedGenRandomImpl Instance = new ManagedGenRandomImpl();
 
-    private ManagedGenRandomImpl()
-    {
-    }
+    private ManagedGenRandomImpl() { }
 
     public byte[] GenRandom(int numBytes)
     {

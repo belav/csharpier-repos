@@ -50,34 +50,39 @@ namespace Company.WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
 #if (IndividualLocalAuth)
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
 #if (UseLocalDB)
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #else
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #endif
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services
+                .AddDefaultIdentity<IdentityUser>(
+                    options => options.SignIn.RequireConfirmedAccount = true
+                )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
 #endif
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
-                    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
 #if (GenerateApi)
                         .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
                         .AddMicrosoftGraph(Configuration.GetSection("DownstreamApi"))
 #endif
-                        .AddInMemoryTokenCaches();
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
 #endif
@@ -86,12 +91,13 @@ namespace Company.WebApplication1
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
 #endif
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAdB2C"))
-                    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-                        .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
-                        .AddInMemoryTokenCaches();
+                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+                .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAdB2C"));
 #endif
@@ -100,17 +106,14 @@ namespace Company.WebApplication1
 
             services.AddControllersWithViews(options =>
             {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
 #else
             services.AddControllersWithViews();
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-           services.AddRazorPages()
-                .AddMicrosoftIdentityUI();
+            services.AddRazorPages().AddMicrosoftIdentityUI();
 #endif
         }
 
@@ -148,7 +151,8 @@ namespace Company.WebApplication1
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
 #if (OrganizationalAuth || IndividualAuth)
                 endpoints.MapRazorPages();
 #endif

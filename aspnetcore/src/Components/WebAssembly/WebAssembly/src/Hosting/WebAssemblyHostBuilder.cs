@@ -36,7 +36,10 @@ public sealed class WebAssemblyHostBuilder
     /// <param name="args">The argument passed to the application's main method.</param>
     /// <returns>A <see cref="WebAssemblyHostBuilder"/>.</returns>
     [DynamicDependency(nameof(JSInteropMethods.NotifyLocationChanged), typeof(JSInteropMethods))]
-    [DynamicDependency(nameof(JSInteropMethods.NotifyLocationChangingAsync), typeof(JSInteropMethods))]
+    [DynamicDependency(
+        nameof(JSInteropMethods.NotifyLocationChangingAsync),
+        typeof(JSInteropMethods)
+    )]
     [DynamicDependency(JsonSerialized, typeof(WebEventDescriptor))]
     // The following dependency prevents HeadOutlet from getting trimmed away in
     // WebAssembly prerendered apps.
@@ -46,9 +49,7 @@ public sealed class WebAssemblyHostBuilder
         // We don't use the args for anything right now, but we want to accept them
         // here so that it shows up this way in the project templates.
         var jsRuntime = DefaultWebAssemblyJSRuntime.Instance;
-        var builder = new WebAssemblyHostBuilder(
-            jsRuntime,
-            jsRuntime.ReadJsonSerializerOptions());
+        var builder = new WebAssemblyHostBuilder(jsRuntime, jsRuntime.ReadJsonSerializerOptions());
 
         WebAssemblyCultureProvider.Initialize();
 
@@ -62,7 +63,10 @@ public sealed class WebAssemblyHostBuilder
     /// <summary>
     /// Creates an instance of <see cref="WebAssemblyHostBuilder"/> with the minimal configuration.
     /// </summary>
-    internal WebAssemblyHostBuilder(IJSUnmarshalledRuntime jsRuntime, JsonSerializerOptions jsonOptions)
+    internal WebAssemblyHostBuilder(
+        IJSUnmarshalledRuntime jsRuntime,
+        JsonSerializerOptions jsonOptions
+    )
     {
         // Private right now because we don't have much reason to expose it. This can be exposed
         // in the future if we want to give people a choice between CreateDefault and something
@@ -84,15 +88,23 @@ public sealed class WebAssemblyHostBuilder
 
         _createServiceProvider = () =>
         {
-            return Services.BuildServiceProvider(validateScopes: WebAssemblyHostEnvironmentExtensions.IsDevelopment(hostEnvironment));
+            return Services.BuildServiceProvider(
+                validateScopes: WebAssemblyHostEnvironmentExtensions.IsDevelopment(hostEnvironment)
+            );
         };
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Root components are expected to be defined in assemblies that do not get trimmed.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2072",
+        Justification = "Root components are expected to be defined in assemblies that do not get trimmed."
+    )]
     private void InitializeRegisteredRootComponents(IJSUnmarshalledRuntime jsRuntime)
     {
 #pragma warning disable CS0618 // Type or member is obsolete
-        var componentsCount = jsRuntime.InvokeUnmarshalled<int>(RegisteredComponentsInterop.GetRegisteredComponentsCount);
+        var componentsCount = jsRuntime.InvokeUnmarshalled<int>(
+            RegisteredComponentsInterop.GetRegisteredComponentsCount
+        );
         if (componentsCount == 0)
         {
             return;
@@ -102,11 +114,34 @@ public sealed class WebAssemblyHostBuilder
         for (var i = 0; i < componentsCount; i++)
         {
             var id = jsRuntime.InvokeUnmarshalled<int, int>(RegisteredComponentsInterop.GetId, i);
-            var assembly = jsRuntime.InvokeUnmarshalled<int, string>(RegisteredComponentsInterop.GetAssembly, id);
-            var typeName = jsRuntime.InvokeUnmarshalled<int, string>(RegisteredComponentsInterop.GetTypeName, id);
-            var serializedParameterDefinitions = jsRuntime.InvokeUnmarshalled<int, object?, object?, string>(RegisteredComponentsInterop.GetParameterDefinitions, id, null, null);
-            var serializedParameterValues = jsRuntime.InvokeUnmarshalled<int, object?, object?, string>(RegisteredComponentsInterop.GetParameterValues, id, null, null);
-            registeredComponents[i] = new WebAssemblyComponentMarker(WebAssemblyComponentMarker.ClientMarkerType, assembly, typeName, serializedParameterDefinitions, serializedParameterValues, id.ToString(CultureInfo.InvariantCulture));
+            var assembly = jsRuntime.InvokeUnmarshalled<int, string>(
+                RegisteredComponentsInterop.GetAssembly,
+                id
+            );
+            var typeName = jsRuntime.InvokeUnmarshalled<int, string>(
+                RegisteredComponentsInterop.GetTypeName,
+                id
+            );
+            var serializedParameterDefinitions = jsRuntime.InvokeUnmarshalled<
+                int,
+                object?,
+                object?,
+                string
+            >(RegisteredComponentsInterop.GetParameterDefinitions, id, null, null);
+            var serializedParameterValues = jsRuntime.InvokeUnmarshalled<
+                int,
+                object?,
+                object?,
+                string
+            >(RegisteredComponentsInterop.GetParameterValues, id, null, null);
+            registeredComponents[i] = new WebAssemblyComponentMarker(
+                WebAssemblyComponentMarker.ClientMarkerType,
+                assembly,
+                typeName,
+                serializedParameterDefinitions,
+                serializedParameterValues,
+                id.ToString(CultureInfo.InvariantCulture)
+            );
         }
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -114,16 +149,24 @@ public sealed class WebAssemblyHostBuilder
         foreach (var registeredComponent in registeredComponents)
         {
             _rootComponentCache = new RootComponentTypeCache();
-            var componentType = _rootComponentCache.GetRootComponent(registeredComponent.Assembly!, registeredComponent.TypeName!);
+            var componentType = _rootComponentCache.GetRootComponent(
+                registeredComponent.Assembly!,
+                registeredComponent.TypeName!
+            );
             if (componentType is null)
             {
                 throw new InvalidOperationException(
-                    $"Root component type '{registeredComponent.TypeName}' could not be found in the assembly '{registeredComponent.Assembly}'. " +
-                    $"This is likely a result of trimming (tree shaking).");
+                    $"Root component type '{registeredComponent.TypeName}' could not be found in the assembly '{registeredComponent.Assembly}'. "
+                        + $"This is likely a result of trimming (tree shaking)."
+                );
             }
 
-            var definitions = WebAssemblyComponentParameterDeserializer.GetParameterDefinitions(registeredComponent.ParameterDefinitions!);
-            var values = WebAssemblyComponentParameterDeserializer.GetParameterValues(registeredComponent.ParameterValues!);
+            var definitions = WebAssemblyComponentParameterDeserializer.GetParameterDefinitions(
+                registeredComponent.ParameterDefinitions!
+            );
+            var values = WebAssemblyComponentParameterDeserializer.GetParameterValues(
+                registeredComponent.ParameterValues!
+            );
             var parameters = componentDeserializer.DeserializeParameters(definitions, values);
 
             RootComponents.Add(componentType, registeredComponent.PrerenderId!, parameters);
@@ -133,15 +176,21 @@ public sealed class WebAssemblyHostBuilder
     private void InitializePersistedState(IJSUnmarshalledRuntime jsRuntime)
     {
 #pragma warning disable CS0618 // Type or member is obsolete
-        _persistedState = jsRuntime.InvokeUnmarshalled<string>("Blazor._internal.getPersistedState");
+        _persistedState = jsRuntime.InvokeUnmarshalled<string>(
+            "Blazor._internal.getPersistedState"
+        );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
 
     private static void InitializeNavigationManager(IJSUnmarshalledRuntime jsRuntime)
     {
 #pragma warning disable CS0618 // Type or member is obsolete
-        var baseUri = jsRuntime.InvokeUnmarshalled<string>(BrowserNavigationManagerInterop.GetBaseUri);
-        var uri = jsRuntime.InvokeUnmarshalled<string>(BrowserNavigationManagerInterop.GetLocationHref);
+        var baseUri = jsRuntime.InvokeUnmarshalled<string>(
+            BrowserNavigationManagerInterop.GetBaseUri
+        );
+        var uri = jsRuntime.InvokeUnmarshalled<string>(
+            BrowserNavigationManagerInterop.GetLocationHref
+        );
 #pragma warning restore CS0618 // Type or member is obsolete
 
         WebAssemblyNavigationManager.Instance = new WebAssemblyNavigationManager(baseUri, uri);
@@ -150,30 +199,39 @@ public sealed class WebAssemblyHostBuilder
     private WebAssemblyHostEnvironment InitializeEnvironment(IJSUnmarshalledRuntime jsRuntime)
     {
 #pragma warning disable CS0618 // Type or member is obsolete
-        var applicationEnvironment = jsRuntime.InvokeUnmarshalled<string>("Blazor._internal.getApplicationEnvironment");
+        var applicationEnvironment = jsRuntime.InvokeUnmarshalled<string>(
+            "Blazor._internal.getApplicationEnvironment"
+        );
 #pragma warning restore CS0618 // Type or member is obsolete
-        var hostEnvironment = new WebAssemblyHostEnvironment(applicationEnvironment, WebAssemblyNavigationManager.Instance.BaseUri);
+        var hostEnvironment = new WebAssemblyHostEnvironment(
+            applicationEnvironment,
+            WebAssemblyNavigationManager.Instance.BaseUri
+        );
 
         Services.AddSingleton<IWebAssemblyHostEnvironment>(hostEnvironment);
 
         var configFiles = new[]
         {
-                "appsettings.json",
-                $"appsettings.{applicationEnvironment}.json"
-            };
+            "appsettings.json",
+            $"appsettings.{applicationEnvironment}.json"
+        };
 
         foreach (var configFile in configFiles)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             var appSettingsJson = jsRuntime.InvokeUnmarshalled<string, byte[]>(
-                "Blazor._internal.getConfig", configFile);
+                "Blazor._internal.getConfig",
+                configFile
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             if (appSettingsJson != null)
             {
                 // Perf: Using this over AddJsonStream. This allows the linker to trim out the "File"-specific APIs and assemblies
                 // for Configuration, of where there are several.
-                Configuration.Add<JsonStreamConfigurationSource>(s => s.Stream = new MemoryStream(appSettingsJson));
+                Configuration.Add<JsonStreamConfigurationSource>(
+                    s => s.Stream = new MemoryStream(appSettingsJson)
+                );
             }
         }
 
@@ -225,7 +283,11 @@ public sealed class WebAssemblyHostBuilder
     /// the previously stored <paramref name="factory"/> and <paramref name="configure"/> delegate.
     /// </para>
     /// </remarks>
-    public void ConfigureContainer<TBuilder>(IServiceProviderFactory<TBuilder> factory, Action<TBuilder>? configure = null) where TBuilder : notnull
+    public void ConfigureContainer<TBuilder>(
+        IServiceProviderFactory<TBuilder> factory,
+        Action<TBuilder>? configure = null
+    )
+        where TBuilder : notnull
     {
         if (factory == null)
         {
@@ -265,11 +327,15 @@ public sealed class WebAssemblyHostBuilder
         Services.AddSingleton<INavigationInterception>(WebAssemblyNavigationInterception.Instance);
         Services.AddSingleton(new LazyAssemblyLoader(DefaultWebAssemblyJSRuntime.Instance));
         Services.AddSingleton<ComponentStatePersistenceManager>();
-        Services.AddSingleton<PersistentComponentState>(sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State);
+        Services.AddSingleton<PersistentComponentState>(
+            sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State
+        );
         Services.AddSingleton<IErrorBoundaryLogger, WebAssemblyErrorBoundaryLogger>();
         Services.AddLogging(builder =>
         {
-            builder.AddProvider(new WebAssemblyConsoleLoggerProvider(DefaultWebAssemblyJSRuntime.Instance));
+            builder.AddProvider(
+                new WebAssemblyConsoleLoggerProvider(DefaultWebAssemblyJSRuntime.Instance)
+            );
         });
     }
 }

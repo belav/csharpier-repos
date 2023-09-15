@@ -127,7 +127,11 @@ internal class SyntaxTriviaListBuilder
             {
                 tmp[i].Value = _nodes[i].Green;
             }
-            return new SyntaxTriviaList(InternalSyntax.SyntaxList.List(tmp).CreateRed(), position: 0, index: 0);
+            return new SyntaxTriviaList(
+                InternalSyntax.SyntaxList.List(tmp).CreateRed(),
+                position: 0,
+                index: 0
+            );
         }
         else
         {

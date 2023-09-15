@@ -15,6 +15,5 @@ public class TestDTO
         _nonSerializedValue = nonSerializedValue;
     }
 
-    public int GetNonSerializedValue()
-        => _nonSerializedValue;
+    public int GetNonSerializedValue() => _nonSerializedValue;
 }

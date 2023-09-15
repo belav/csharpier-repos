@@ -30,10 +30,10 @@ public partial class HttpResultsHelperTests
         await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value);
 
         // Assert
-        var body = JsonSerializer.Deserialize<TodoStruct>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var body = JsonSerializer.Deserialize<TodoStruct>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.Equal("Write even more tests!", body!.Name);
         Assert.True(body!.IsComplete);
@@ -58,10 +58,10 @@ public partial class HttpResultsHelperTests
         await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value);
 
         // Assert
-        var body = JsonSerializer.Deserialize<Todo>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var body = JsonSerializer.Deserialize<Todo>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.NotNull(body);
         Assert.Equal("Write even more tests!", body!.Name);
@@ -88,10 +88,10 @@ public partial class HttpResultsHelperTests
         await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value);
 
         // Assert
-        var body = JsonSerializer.Deserialize<TodoChild>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var body = JsonSerializer.Deserialize<TodoChild>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.NotNull(body);
         Assert.Equal("Write even more tests!", body!.Name);
@@ -99,15 +99,10 @@ public partial class HttpResultsHelperTests
         Assert.Equal("With type hierarchies!", body!.Child);
     }
 
-    private static DefaultHttpContext CreateHttpContext(Stream stream, bool useJsonContext = false)
-        => new()
-        {
-            RequestServices = CreateServices(useJsonContext),
-            Response =
-            {
-                Body = stream,
-            },
-        };
+    private static DefaultHttpContext CreateHttpContext(
+        Stream stream,
+        bool useJsonContext = false
+    ) => new() { RequestServices = CreateServices(useJsonContext), Response = { Body = stream, }, };
 
     private static IServiceProvider CreateServices(bool useJsonContext = false)
     {
@@ -116,7 +111,9 @@ public partial class HttpResultsHelperTests
 
         if (useJsonContext)
         {
-            services.ConfigureHttpJsonOptions(o => o.SerializerOptions.AddContext<TestJsonContext>());
+            services.ConfigureHttpJsonOptions(
+                o => o.SerializerOptions.AddContext<TestJsonContext>()
+            );
         }
 
         return services.BuildServiceProvider();
@@ -125,8 +122,7 @@ public partial class HttpResultsHelperTests
     [JsonSerializable(typeof(Todo))]
     [JsonSerializable(typeof(TodoChild))]
     [JsonSerializable(typeof(TodoStruct))]
-    private partial class TestJsonContext : JsonSerializerContext
-    { }
+    private partial class TestJsonContext : JsonSerializerContext { }
 
     private class Todo
     {
@@ -137,9 +133,7 @@ public partial class HttpResultsHelperTests
 
     private struct TodoStruct
     {
-        public TodoStruct()
-        {
-        }
+        public TodoStruct() { }
 
         public int Id { get; set; }
         public string Name { get; set; } = "Todo";

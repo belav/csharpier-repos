@@ -19,12 +19,13 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
     private readonly ILogger _log;
     private readonly IDuplexPipe _originalTransport;
 
-    private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _connectionClosedTokenSource =
+        new CancellationTokenSource();
     private bool _connectionClosed;
     private bool _connectionDisposed;
     private Exception? _shutdownReason;
     private readonly object _shutdownLock = new object();
-    
+
     private Task _receivingTask = Task.CompletedTask;
     private Task _sendingTask = Task.CompletedTask;
 
@@ -34,7 +35,8 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         ILogger logger,
         MemoryPool<byte> memoryPool,
         PipeOptions inputOptions,
-        PipeOptions outputOptions)
+        PipeOptions outputOptions
+    )
     {
         _stream = stream;
         _log = logger;
@@ -65,7 +67,11 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}."
+            );
         }
     }
 
@@ -218,7 +224,11 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
             // shutdownReason should only be null if the output was completed gracefully, so no one should ever
             // ever observe the nondescript ConnectionAbortedException except for connection middleware attempting
             // to half close the connection which is currently unsupported.
-            _shutdownReason = shutdownReason ?? new ConnectionAbortedException("The Socket transport's send loop completed gracefully.");
+            _shutdownReason =
+                shutdownReason
+                ?? new ConnectionAbortedException(
+                    "The Socket transport's send loop completed gracefully."
+                );
             NamedPipeLog.ConnectionDisconnect(_log, this, _shutdownReason.Message);
 
             try
@@ -259,7 +269,11 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(CancelConnectionClosedToken)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(CancelConnectionClosedToken)}."
+            );
         }
     }
 
@@ -285,9 +299,13 @@ internal sealed class NamedPipeConnection : TransportConnection, IConnectionName
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(NamedPipeConnection)}.{nameof(Start)}."
+            );
         }
-        
+
         await _stream.DisposeAsync();
     }
 }

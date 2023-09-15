@@ -26,26 +26,34 @@ public class ApiAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
     public async Task BearerAzureAD_Challenges_UnauthorizedRequests()
     {
         // Arrange
-        var client = Factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(
-            services =>
-            {
-                services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
-                    .AddAzureADBearer(o =>
+        var client = Factory
+            .WithWebHostBuilder(
+                builder =>
+                    builder.ConfigureTestServices(services =>
                     {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.Domain = "test.onmicrosoft.com";
-                        o.ClientId = "ClientId";
-                        o.TenantId = "TenantId";
-                    });
+                        services
+                            .AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+                            .AddAzureADBearer(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.ClientId = "ClientId";
+                                o.TenantId = "TenantId";
+                            });
 
-                services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, o =>
-                {
-                    o.Configuration = new OpenIdConnectConfiguration()
-                    {
-                        Issuer = "https://www.example.com",
-                    };
-                });
-            })).CreateDefaultClient();
+                        services.Configure<JwtBearerOptions>(
+                            AzureADDefaults.JwtBearerAuthenticationScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
+                                {
+                                    Issuer = "https://www.example.com",
+                                };
+                            }
+                        );
+                    })
+            )
+            .CreateDefaultClient();
 
         // Act
         var response = await client.GetAsync("/api/get");
@@ -58,26 +66,34 @@ public class ApiAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
     public async Task BearerAzureADB2C_Challenges_UnauthorizedRequests()
     {
         // Arrange
-        var client = Factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(
-            services =>
-            {
-                services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
-                    .AddAzureADB2CBearer(o =>
+        var client = Factory
+            .WithWebHostBuilder(
+                builder =>
+                    builder.ConfigureTestServices(services =>
                     {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.Domain = "test.onmicrosoft.com";
-                        o.ClientId = "ClientId";
-                        o.SignUpSignInPolicyId = "B2c_1_SiSu";
-                    });
+                        services
+                            .AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
+                            .AddAzureADB2CBearer(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.ClientId = "ClientId";
+                                o.SignUpSignInPolicyId = "B2c_1_SiSu";
+                            });
 
-                services.Configure<JwtBearerOptions>(AzureADB2CDefaults.JwtBearerAuthenticationScheme, o =>
-                {
-                    o.Configuration = new OpenIdConnectConfiguration()
-                    {
-                        Issuer = "https://www.example.com",
-                    };
-                });
-            })).CreateDefaultClient();
+                        services.Configure<JwtBearerOptions>(
+                            AzureADB2CDefaults.JwtBearerAuthenticationScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
+                                {
+                                    Issuer = "https://www.example.com",
+                                };
+                            }
+                        );
+                    })
+            )
+            .CreateDefaultClient();
 
         // Act
         var response = await client.GetAsync("/api/get");

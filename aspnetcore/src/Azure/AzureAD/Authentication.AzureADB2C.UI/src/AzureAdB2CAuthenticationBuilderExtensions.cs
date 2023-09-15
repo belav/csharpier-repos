@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Extension methods to add Azure Active Directory B2C Authentication to your application.
 /// </summary>
-[Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+)]
 public static class AzureADB2CAuthenticationBuilderExtensions
 {
     /// <summary>
@@ -27,12 +29,18 @@ public static class AzureADB2CAuthenticationBuilderExtensions
     /// <see cref="AzureADB2COptions"/>.
     /// </param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    [Obsolete("This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
-    public static AuthenticationBuilder AddAzureADB2CBearer(this AuthenticationBuilder builder, Action<AzureADB2COptions> configureOptions) =>
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
+    public static AuthenticationBuilder AddAzureADB2CBearer(
+        this AuthenticationBuilder builder,
+        Action<AzureADB2COptions> configureOptions
+    ) =>
         builder.AddAzureADB2CBearer(
             AzureADB2CDefaults.BearerAuthenticationScheme,
             AzureADB2CDefaults.JwtBearerAuthenticationScheme,
-            configureOptions);
+            configureOptions
+        );
 
     /// <summary>
     /// Adds JWT Bearer authentication to your app for Azure AD B2C Applications.
@@ -44,23 +52,40 @@ public static class AzureADB2CAuthenticationBuilderExtensions
     /// <see cref="AzureADB2COptions"/>.
     /// </param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    [Obsolete("This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
     public static AuthenticationBuilder AddAzureADB2CBearer(
         this AuthenticationBuilder builder,
         string scheme,
         string jwtBearerScheme,
-        Action<AzureADB2COptions> configureOptions)
+        Action<AzureADB2COptions> configureOptions
+    )
     {
-        builder.AddPolicyScheme(scheme, displayName: null, configureOptions: o =>
-        {
-            o.ForwardDefault = jwtBearerScheme;
-        });
+        builder.AddPolicyScheme(
+            scheme,
+            displayName: null,
+            configureOptions: o =>
+            {
+                o.ForwardDefault = jwtBearerScheme;
+            }
+        );
 
         builder.Services.Configure(TryAddJwtBearerSchemeMapping(scheme, jwtBearerScheme));
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<AzureADB2COptions>, AzureADB2COptionsConfiguration>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<AzureADB2COptions>,
+                AzureADB2COptionsConfiguration
+            >()
+        );
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<JwtBearerOptions>, AzureADB2CJwtBearerOptionsConfiguration>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<JwtBearerOptions>,
+                AzureADB2CJwtBearerOptionsConfiguration
+            >()
+        );
 
         builder.Services.Configure(scheme, configureOptions);
         builder.AddJwtBearer(jwtBearerScheme, o => { });
@@ -76,14 +101,20 @@ public static class AzureADB2CAuthenticationBuilderExtensions
     /// <see cref="AzureADB2COptions"/>
     /// </param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    [Obsolete("This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
-    public static AuthenticationBuilder AddAzureADB2C(this AuthenticationBuilder builder, Action<AzureADB2COptions> configureOptions) =>
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
+    public static AuthenticationBuilder AddAzureADB2C(
+        this AuthenticationBuilder builder,
+        Action<AzureADB2COptions> configureOptions
+    ) =>
         builder.AddAzureADB2C(
             AzureADB2CDefaults.AuthenticationScheme,
             AzureADB2CDefaults.OpenIdScheme,
             AzureADB2CDefaults.CookieScheme,
             AzureADB2CDefaults.DisplayName,
-            configureOptions);
+            configureOptions
+        );
 
     /// <summary>
     /// Adds Azure Active Directory B2C Authentication to your application.
@@ -97,29 +128,53 @@ public static class AzureADB2CAuthenticationBuilderExtensions
     /// <see cref="AzureADB2COptions"/>
     /// </param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    [Obsolete("This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use AddMicrosoftWebApiAuthentication from Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
     public static AuthenticationBuilder AddAzureADB2C(
         this AuthenticationBuilder builder,
         string scheme,
         string openIdConnectScheme,
         string cookieScheme,
         string displayName,
-        Action<AzureADB2COptions> configureOptions)
+        Action<AzureADB2COptions> configureOptions
+    )
     {
         AddAdditionalMvcApplicationParts(builder.Services);
-        builder.AddPolicyScheme(scheme, displayName, o =>
-        {
-            o.ForwardDefault = cookieScheme;
-            o.ForwardChallenge = openIdConnectScheme;
-        });
+        builder.AddPolicyScheme(
+            scheme,
+            displayName,
+            o =>
+            {
+                o.ForwardDefault = cookieScheme;
+                o.ForwardChallenge = openIdConnectScheme;
+            }
+        );
 
-        builder.Services.Configure(TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme));
+        builder.Services.Configure(
+            TryAddOpenIDCookieSchemeMappings(scheme, openIdConnectScheme, cookieScheme)
+        );
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<AzureADB2COptions>, AzureADB2COptionsConfiguration>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<AzureADB2COptions>,
+                AzureADB2COptionsConfiguration
+            >()
+        );
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<OpenIdConnectOptions>, AzureADB2COpenIdConnectOptionsConfiguration>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<OpenIdConnectOptions>,
+                AzureADB2COpenIdConnectOptionsConfiguration
+            >()
+        );
 
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<CookieAuthenticationOptions>, AzureADB2CCookieOptionsConfiguration>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<CookieAuthenticationOptions>,
+                AzureADB2CCookieOptionsConfiguration
+            >()
+        );
 
         builder.Services.Configure(scheme, configureOptions);
 
@@ -129,7 +184,10 @@ public static class AzureADB2CAuthenticationBuilderExtensions
         return builder;
     }
 
-    private static Action<AzureADB2CSchemeOptions> TryAddJwtBearerSchemeMapping(string scheme, string jwtBearerScheme)
+    private static Action<AzureADB2CSchemeOptions> TryAddJwtBearerSchemeMapping(
+        string scheme,
+        string jwtBearerScheme
+    )
     {
         return TryAddMapping;
 
@@ -137,25 +195,36 @@ public static class AzureADB2CAuthenticationBuilderExtensions
         {
             if (o.JwtBearerMappings.ContainsKey(scheme))
             {
-                throw new InvalidOperationException($"A scheme with the name '{scheme}' was already added.");
+                throw new InvalidOperationException(
+                    $"A scheme with the name '{scheme}' was already added."
+                );
             }
             foreach (var mapping in o.JwtBearerMappings)
             {
                 if (mapping.Value.JwtBearerScheme == jwtBearerScheme)
                 {
                     throw new InvalidOperationException(
-                        $"The JSON Web Token Bearer scheme '{jwtBearerScheme}' can't be associated with the Azure Active Directory B2C scheme '{scheme}'. " +
-                        $"The JSON Web Token Bearer scheme '{jwtBearerScheme}' is already mapped to the Azure Active Directory B2C scheme '{mapping.Key}'");
+                        $"The JSON Web Token Bearer scheme '{jwtBearerScheme}' can't be associated with the Azure Active Directory B2C scheme '{scheme}'. "
+                            + $"The JSON Web Token Bearer scheme '{jwtBearerScheme}' is already mapped to the Azure Active Directory B2C scheme '{mapping.Key}'"
+                    );
                 }
             }
-            o.JwtBearerMappings.Add(scheme, new AzureADB2CSchemeOptions.JwtBearerSchemeMapping
-            {
-                JwtBearerScheme = jwtBearerScheme
-            });
-        };
+            o.JwtBearerMappings.Add(
+                scheme,
+                new AzureADB2CSchemeOptions.JwtBearerSchemeMapping
+                {
+                    JwtBearerScheme = jwtBearerScheme
+                }
+            );
+        }
+        ;
     }
 
-    private static Action<AzureADB2CSchemeOptions> TryAddOpenIDCookieSchemeMappings(string scheme, string openIdConnectScheme, string cookieScheme)
+    private static Action<AzureADB2CSchemeOptions> TryAddOpenIDCookieSchemeMappings(
+        string scheme,
+        string openIdConnectScheme,
+        string cookieScheme
+    )
     {
         return TryAddMapping;
 
@@ -163,30 +232,38 @@ public static class AzureADB2CAuthenticationBuilderExtensions
         {
             if (o.OpenIDMappings.ContainsKey(scheme))
             {
-                throw new InvalidOperationException($"A scheme with the name '{scheme}' was already added.");
+                throw new InvalidOperationException(
+                    $"A scheme with the name '{scheme}' was already added."
+                );
             }
             foreach (var mapping in o.OpenIDMappings)
             {
                 if (mapping.Value.CookieScheme == cookieScheme)
                 {
                     throw new InvalidOperationException(
-                        $"The cookie scheme '{cookieScheme}' can't be associated with the Azure Active Directory B2C scheme '{scheme}'. " +
-                        $"The cookie scheme '{cookieScheme}' is already mapped to the Azure Active Directory B2C scheme '{mapping.Key}'");
+                        $"The cookie scheme '{cookieScheme}' can't be associated with the Azure Active Directory B2C scheme '{scheme}'. "
+                            + $"The cookie scheme '{cookieScheme}' is already mapped to the Azure Active Directory B2C scheme '{mapping.Key}'"
+                    );
                 }
 
                 if (mapping.Value.OpenIdConnectScheme == openIdConnectScheme)
                 {
                     throw new InvalidOperationException(
-                        $"The Open ID Connect scheme '{openIdConnectScheme}' can't be associated with the Azure Active Directory B2C scheme '{scheme}'. " +
-                        $"The Open ID Connect scheme '{openIdConnectScheme}' is already mapped to the Azure Active Directory B2C scheme '{mapping.Key}'");
+                        $"The Open ID Connect scheme '{openIdConnectScheme}' can't be associated with the Azure Active Directory B2C scheme '{scheme}'. "
+                            + $"The Open ID Connect scheme '{openIdConnectScheme}' is already mapped to the Azure Active Directory B2C scheme '{mapping.Key}'"
+                    );
                 }
             }
-            o.OpenIDMappings.Add(scheme, new AzureADB2CSchemeOptions.AzureADB2COpenIDSchemeMapping
-            {
-                OpenIdConnectScheme = openIdConnectScheme,
-                CookieScheme = cookieScheme
-            });
-        };
+            o.OpenIDMappings.Add(
+                scheme,
+                new AzureADB2CSchemeOptions.AzureADB2COpenIDSchemeMapping
+                {
+                    OpenIdConnectScheme = openIdConnectScheme,
+                    CookieScheme = cookieScheme
+                }
+            );
+        }
+        ;
     }
 
     private static void AddAdditionalMvcApplicationParts(IServiceCollection services)
@@ -207,13 +284,17 @@ public static class AzureADB2CAuthenticationBuilderExtensions
                 apm.FeatureProviders.Add(new AzureADB2CAccountControllerFeatureProvider());
             });
 
-        static bool HasSameName(string left, string right) => string.Equals(left, right, StringComparison.Ordinal);
+        static bool HasSameName(string left, string right) =>
+            string.Equals(left, right, StringComparison.Ordinal);
     }
 
     private static IEnumerable<ApplicationPart> GetAdditionalParts()
     {
         var thisAssembly = typeof(AzureADB2CAuthenticationBuilderExtensions).Assembly;
-        var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(thisAssembly, throwOnError: true);
+        var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(
+            thisAssembly,
+            throwOnError: true
+        );
 
         foreach (var reference in relatedAssemblies)
         {

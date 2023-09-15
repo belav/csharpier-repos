@@ -15,7 +15,9 @@ internal static class TestCertificateHelper
         if (OperatingSystem.IsWindows())
         {
             // Detect Win10+
-            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            var key = Registry.LocalMachine.OpenSubKey(
+                @"SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+            );
             var major = key.GetValue("CurrentMajorVersionNumber") as int?;
             var minor = key.GetValue("CurrentMinorVersionNumber") as int?;
 
@@ -32,13 +34,21 @@ internal static class TestCertificateHelper
         if (useRSA)
         {
             // RSA cert, won't work on Windows 8.1 & Windows 2012 R2 using HTTP2, and ECC won't work in some Node environments
-            var certPath = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "TestCertificates", "testCert.pfx");
+            var certPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetCallingAssembly().Location),
+                "TestCertificates",
+                "testCert.pfx"
+            );
             return new X509Certificate2(certPath, "testPassword");
         }
         else
         {
             // ECC cert, works on Windows 8.1 & Windows 2012 R2 using HTTP2
-            var certPath = Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "TestCertificates", "testCertECC.pfx");
+            var certPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetCallingAssembly().Location),
+                "TestCertificates",
+                "testCertECC.pfx"
+            );
             return new X509Certificate2(certPath, "testPassword");
         }
     }

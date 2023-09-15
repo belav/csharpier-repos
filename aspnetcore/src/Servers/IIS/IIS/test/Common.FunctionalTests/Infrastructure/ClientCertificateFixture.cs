@@ -28,21 +28,30 @@ public class ClientCertificateFixture : IDisposable
             // Create a cert name with a random guid to avoid name conflicts
             var parentRequest = new CertificateRequest(
                 _certIssuerPrefix + Guid.NewGuid().ToString(),
-                parentKey, HashAlgorithmName.SHA256,
-                RSASignaturePadding.Pkcs1);
+                parentKey,
+                HashAlgorithmName.SHA256,
+                RSASignaturePadding.Pkcs1
+            );
 
             parentRequest.CertificateExtensions.Add(
                 new X509BasicConstraintsExtension(
                     certificateAuthority: true,
                     hasPathLengthConstraint: false,
                     pathLengthConstraint: 0,
-                    critical: true));
+                    critical: true
+                )
+            );
 
             parentRequest.CertificateExtensions.Add(
-                new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.NonRepudiation, critical: true));
+                new X509KeyUsageExtension(
+                    X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.NonRepudiation,
+                    critical: true
+                )
+            );
 
             parentRequest.CertificateExtensions.Add(
-                new X509SubjectKeyIdentifierExtension(parentRequest.PublicKey, false));
+                new X509SubjectKeyIdentifierExtension(parentRequest.PublicKey, false)
+            );
 
             var notBefore = DateTimeOffset.Now.AddDays(-1);
             var notAfter = DateTimeOffset.Now.AddYears(5);
@@ -53,7 +62,11 @@ public class ClientCertificateFixture : IDisposable
             var imported = parentCert;
 
             var export = parentCert.Export(X509ContentType.Pkcs12, "");
-            imported = new X509Certificate2(export, "", X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            imported = new X509Certificate2(
+                export,
+                "",
+                X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable
+            );
             Array.Clear(export, 0, export.Length);
 
             // Add the cert to the cert store
@@ -95,7 +108,9 @@ public class ClientCertificateFixture : IDisposable
         var rsa = RSA.Create(minimumKeySize);
         if (rsa.KeySize < minimumKeySize)
         {
-            throw new InvalidOperationException($"Failed to create a key with a size of {minimumKeySize} bits");
+            throw new InvalidOperationException(
+                $"Failed to create a key with a size of {minimumKeySize} bits"
+            );
         }
 
         return rsa;

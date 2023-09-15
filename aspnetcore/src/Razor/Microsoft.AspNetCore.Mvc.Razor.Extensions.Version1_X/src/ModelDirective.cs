@@ -16,10 +16,14 @@ public static class ModelDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddTypeToken(Resources.ModelDirective_TypeToken_Name, Resources.ModelDirective_TypeToken_Description);
+            builder.AddTypeToken(
+                Resources.ModelDirective_TypeToken_Name,
+                Resources.ModelDirective_TypeToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = Resources.ModelDirective_Description;
-        });
+        }
+    );
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {
@@ -67,7 +71,10 @@ public static class ModelDirective
         // Runs after the @inherits directive
         public override int Order => 5;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             var visitor = new Visitor();
             var modelType = GetModelType(documentNode, visitor);
@@ -96,7 +103,8 @@ public static class ModelDirective
 
         public ClassDeclarationIntermediateNode Class { get; private set; }
 
-        public IList<DirectiveIntermediateNode> ModelDirectives { get; } = new List<DirectiveIntermediateNode>();
+        public IList<DirectiveIntermediateNode> ModelDirectives { get; } =
+            new List<DirectiveIntermediateNode>();
 
         public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
         {

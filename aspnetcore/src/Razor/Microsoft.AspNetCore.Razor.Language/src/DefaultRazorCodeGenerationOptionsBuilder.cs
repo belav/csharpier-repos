@@ -9,7 +9,10 @@ internal class DefaultRazorCodeGenerationOptionsBuilder : RazorCodeGenerationOpt
 {
     private bool _designTime;
 
-    public DefaultRazorCodeGenerationOptionsBuilder(RazorConfiguration configuration, string fileKind)
+    public DefaultRazorCodeGenerationOptionsBuilder(
+        RazorConfiguration configuration,
+        string fileKind
+    )
     {
         if (configuration == null)
         {
@@ -58,7 +61,8 @@ internal class DefaultRazorCodeGenerationOptionsBuilder : RazorCodeGenerationOpt
             SuppressNullabilityEnforcement,
             OmitMinimizedComponentAttributeValues,
             SupportLocalizedComponentNames,
-            UseEnhancedLinePragma)
+            UseEnhancedLinePragma
+        )
         {
             SuppressMetadataSourceChecksumAttributes = SuppressMetadataSourceChecksumAttributes,
         };

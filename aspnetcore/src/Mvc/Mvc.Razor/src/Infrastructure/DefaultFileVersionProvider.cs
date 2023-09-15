@@ -20,7 +20,8 @@ internal sealed class DefaultFileVersionProvider : IFileVersionProvider
 
     public DefaultFileVersionProvider(
         IWebHostEnvironment hostingEnvironment,
-        TagHelperMemoryCacheProvider cacheProvider)
+        TagHelperMemoryCacheProvider cacheProvider
+    )
     {
         if (hostingEnvironment == null)
         {
@@ -70,9 +71,11 @@ internal sealed class DefaultFileVersionProvider : IFileVersionProvider
         cacheEntryOptions.AddExpirationToken(FileProvider.Watch(resolvedPath));
         var fileInfo = FileProvider.GetFileInfo(resolvedPath);
 
-        if (!fileInfo.Exists &&
-            requestPathBase.HasValue &&
-            resolvedPath.StartsWith(requestPathBase.Value, StringComparison.OrdinalIgnoreCase))
+        if (
+            !fileInfo.Exists
+            && requestPathBase.HasValue
+            && resolvedPath.StartsWith(requestPathBase.Value, StringComparison.OrdinalIgnoreCase)
+        )
         {
             var requestPathBaseRelativePath = resolvedPath.Substring(requestPathBase.Value.Length);
             cacheEntryOptions.AddExpirationToken(FileProvider.Watch(requestPathBaseRelativePath));

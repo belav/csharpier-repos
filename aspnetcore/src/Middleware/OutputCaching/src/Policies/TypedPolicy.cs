@@ -21,7 +21,10 @@ internal sealed class TypedPolicy : IOutputCachePolicy
     /// Creates a new instance of <see cref="TypedPolicy"/>
     /// </summary>
     /// <param name="policyType">The type of policy.</param>
-    public TypedPolicy([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type policyType)
+    public TypedPolicy(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type policyType
+    )
     {
         ArgumentNullException.ThrowIfNull(policyType);
 
@@ -30,25 +33,41 @@ internal sealed class TypedPolicy : IOutputCachePolicy
 
     private IOutputCachePolicy? CreatePolicy(OutputCacheContext context)
     {
-        var options = context.HttpContext.RequestServices.GetRequiredService<IOptions<OutputCacheOptions>>();
-        return _instance ??= ActivatorUtilities.CreateInstance(options.Value.ApplicationServices, _policyType) as IOutputCachePolicy;
+        var options = context.HttpContext.RequestServices.GetRequiredService<
+            IOptions<OutputCacheOptions>
+        >();
+        return _instance ??=
+            ActivatorUtilities.CreateInstance(options.Value.ApplicationServices, _policyType)
+            as IOutputCachePolicy;
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return CreatePolicy(context)?.CacheRequestAsync(context, cancellationToken) ?? ValueTask.CompletedTask;
+        return CreatePolicy(context)?.CacheRequestAsync(context, cancellationToken)
+            ?? ValueTask.CompletedTask;
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return CreatePolicy(context)?.ServeFromCacheAsync(context, cancellationToken) ?? ValueTask.CompletedTask;
+        return CreatePolicy(context)?.ServeFromCacheAsync(context, cancellationToken)
+            ?? ValueTask.CompletedTask;
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return CreatePolicy(context)?.ServeResponseAsync(context, cancellationToken) ?? ValueTask.CompletedTask;
+        return CreatePolicy(context)?.ServeResponseAsync(context, cancellationToken)
+            ?? ValueTask.CompletedTask;
     }
 }

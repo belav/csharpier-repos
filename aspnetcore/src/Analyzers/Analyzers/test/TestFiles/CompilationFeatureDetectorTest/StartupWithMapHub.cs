@@ -19,7 +19,5 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         }
     }
 
-    public class MyHub : Hub
-    {
-    }
+    public class MyHub : Hub { }
 }

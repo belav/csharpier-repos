@@ -12,16 +12,24 @@ public class ApiConventionMethodAttributeTest
     public void Constructor_ThrowsIfConventionMethodIsAnnotatedWithProducesAttribute()
     {
         // Arrange
-        var methodName = typeof(ConventionWithProducesAttribute).FullName + '.' + nameof(ConventionWithProducesAttribute.Get);
+        var methodName =
+            typeof(ConventionWithProducesAttribute).FullName
+            + '.'
+            + nameof(ConventionWithProducesAttribute.Get);
         var attribute = typeof(ProducesAttribute);
 
         var expected = GetErrorMessage(methodName, attribute);
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
-            () => new ApiConventionMethodAttribute(typeof(ConventionWithProducesAttribute), nameof(ConventionWithProducesAttribute.Get)),
+            () =>
+                new ApiConventionMethodAttribute(
+                    typeof(ConventionWithProducesAttribute),
+                    nameof(ConventionWithProducesAttribute.Get)
+                ),
             "conventionType",
-            expected);
+            expected
+        );
     }
 
     public static class ConventionWithProducesAttribute
@@ -34,7 +42,10 @@ public class ApiConventionMethodAttributeTest
     public void Constructor_ThrowsIfTypeIsNotStatic()
     {
         // Arrange
-        var methodName = typeof(ConventionWithProducesAttribute).FullName + '.' + nameof(ConventionWithProducesAttribute.Get);
+        var methodName =
+            typeof(ConventionWithProducesAttribute).FullName
+            + '.'
+            + nameof(ConventionWithProducesAttribute.Get);
         var attribute = typeof(ProducesAttribute);
 
         var expected = $"API convention type '{typeof(object)}' must be a static type.";
@@ -43,14 +54,18 @@ public class ApiConventionMethodAttributeTest
         ExceptionAssert.ThrowsArgument(
             () => new ApiConventionMethodAttribute(typeof(object), nameof(object.ToString)),
             "conventionType",
-            expected);
+            expected
+        );
     }
 
     [Fact]
     public void Constructor_ThrowsIfMethodCannotBeFound()
     {
         // Arrange
-        var methodName = typeof(ConventionWithProducesAttribute).FullName + '.' + nameof(ConventionWithProducesAttribute.Get);
+        var methodName =
+            typeof(ConventionWithProducesAttribute).FullName
+            + '.'
+            + nameof(ConventionWithProducesAttribute.Get);
         var attribute = typeof(ProducesAttribute);
         var type = typeof(TestConventions);
 
@@ -60,14 +75,18 @@ public class ApiConventionMethodAttributeTest
         ExceptionAssert.ThrowsArgument(
             () => new ApiConventionMethodAttribute(typeof(TestConventions), "DoesNotExist"),
             "methodName",
-            expected);
+            expected
+        );
     }
 
     [Fact]
     public void Constructor_ThrowsIfMethodIsNotPublic()
     {
         // Arrange
-        var methodName = typeof(ConventionWithProducesAttribute).FullName + '.' + nameof(ConventionWithProducesAttribute.Get);
+        var methodName =
+            typeof(ConventionWithProducesAttribute).FullName
+            + '.'
+            + nameof(ConventionWithProducesAttribute.Get);
         var attribute = typeof(ProducesAttribute);
         var type = typeof(TestConventions);
 
@@ -77,24 +96,34 @@ public class ApiConventionMethodAttributeTest
         ExceptionAssert.ThrowsArgument(
             () => new ApiConventionMethodAttribute(typeof(TestConventions), "NotPublic"),
             "methodName",
-            expected);
+            expected
+        );
     }
 
     [Fact]
     public void Constructor_ThrowsIfMethodIsAmbiguous()
     {
         // Arrange
-        var methodName = typeof(ConventionWithProducesAttribute).FullName + '.' + nameof(ConventionWithProducesAttribute.Get);
+        var methodName =
+            typeof(ConventionWithProducesAttribute).FullName
+            + '.'
+            + nameof(ConventionWithProducesAttribute.Get);
         var attribute = typeof(ProducesAttribute);
         var type = typeof(TestConventions);
 
-        var expected = $"Method name 'Method' is ambiguous for convention type '{type}'. More than one method found with the name 'Method'.";
+        var expected =
+            $"Method name 'Method' is ambiguous for convention type '{type}'. More than one method found with the name 'Method'.";
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
-            () => new ApiConventionMethodAttribute(typeof(TestConventions), nameof(TestConventions.Method)),
+            () =>
+                new ApiConventionMethodAttribute(
+                    typeof(TestConventions),
+                    nameof(TestConventions.Method)
+                ),
             "methodName",
-            expected);
+            expected
+        );
     }
 
     private static class TestConventions
@@ -108,10 +137,10 @@ public class ApiConventionMethodAttributeTest
 
     private static string GetErrorMessage(string methodName, params Type[] attributes)
     {
-        return $"Method {methodName} is decorated with the following attributes that are not allowed on an API convention method:" +
-            Environment.NewLine +
-            string.Join(Environment.NewLine, attributes.Select(a => a.FullName)) +
-            Environment.NewLine +
-            $"The following attributes are allowed on API convention methods: {nameof(ProducesResponseTypeAttribute)}, {nameof(ProducesDefaultResponseTypeAttribute)}, {nameof(ApiConventionNameMatchAttribute)}";
+        return $"Method {methodName} is decorated with the following attributes that are not allowed on an API convention method:"
+            + Environment.NewLine
+            + string.Join(Environment.NewLine, attributes.Select(a => a.FullName))
+            + Environment.NewLine
+            + $"The following attributes are allowed on API convention methods: {nameof(ProducesResponseTypeAttribute)}, {nameof(ProducesDefaultResponseTypeAttribute)}, {nameof(ApiConventionNameMatchAttribute)}";
     }
 }

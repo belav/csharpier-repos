@@ -30,7 +30,8 @@ public class RequestDecompressionMiddlewareTests
 
     private static async Task<byte[]> GetCompressedContent(
         Func<Stream, Stream> compressorDelegate,
-        byte[] uncompressedBytes)
+        byte[] uncompressedBytes
+    )
     {
         await using var uncompressedStream = new MemoryStream(uncompressedBytes);
 
@@ -76,7 +77,10 @@ public class RequestDecompressionMiddlewareTests
         var compressedBytes = await GetBrotliCompressedContent(uncompressedBytes);
 
         // Act
-        var (logMessages, decompressedBytes) = await InvokeMiddleware(compressedBytes, new[] { contentEncoding });
+        var (logMessages, decompressedBytes) = await InvokeMiddleware(
+            compressedBytes,
+            new[] { contentEncoding }
+        );
 
         // Assert
         AssertDecompressedWithLog(logMessages, contentEncoding.ToLowerInvariant());
@@ -92,7 +96,10 @@ public class RequestDecompressionMiddlewareTests
         var compressedBytes = await GetDeflateCompressedContent(uncompressedBytes);
 
         // Act
-        var (logMessages, decompressedBytes) = await InvokeMiddleware(compressedBytes, new[] { contentEncoding });
+        var (logMessages, decompressedBytes) = await InvokeMiddleware(
+            compressedBytes,
+            new[] { contentEncoding }
+        );
 
         // Assert
         AssertDecompressedWithLog(logMessages, contentEncoding.ToLowerInvariant());
@@ -108,7 +115,10 @@ public class RequestDecompressionMiddlewareTests
         var compressedBytes = await GetGZipCompressedContent(uncompressedBytes);
 
         // Act
-        var (logMessages, decompressedBytes) = await InvokeMiddleware(compressedBytes, new[] { contentEncoding });
+        var (logMessages, decompressedBytes) = await InvokeMiddleware(
+            compressedBytes,
+            new[] { contentEncoding }
+        );
 
         // Assert
         AssertDecompressedWithLog(logMessages, contentEncoding.ToLowerInvariant());
@@ -126,7 +136,11 @@ public class RequestDecompressionMiddlewareTests
 
         // Assert
         var logMessage = Assert.Single(logMessages);
-        AssertLog(logMessage, LogLevel.Trace, "The Content-Encoding header is empty or not specified. Skipping request decompression.");
+        AssertLog(
+            logMessage,
+            LogLevel.Trace,
+            "The Content-Encoding header is empty or not specified. Skipping request decompression."
+        );
         Assert.Equal(uncompressedBytes, outputBytes);
     }
 
@@ -139,7 +153,10 @@ public class RequestDecompressionMiddlewareTests
         var contentEncoding = "custom";
 
         // Act
-        var (logMessages, outputBytes) = await InvokeMiddleware(compressedBytes, new[] { contentEncoding });
+        var (logMessages, outputBytes) = await InvokeMiddleware(
+            compressedBytes,
+            new[] { contentEncoding }
+        );
 
         // Assert
         AssertNoDecompressionProviderLog(logMessages);
@@ -159,7 +176,11 @@ public class RequestDecompressionMiddlewareTests
 
         // Assert
         var logMessage = Assert.Single(logMessages);
-        AssertLog(logMessage, LogLevel.Debug, "Request decompression is not supported for multiple Content-Encodings.");
+        AssertLog(
+            logMessage,
+            LogLevel.Debug,
+            "Request decompression is not supported for multiple Content-Encodings."
+        );
         Assert.Equal(inputBytes, outputBytes);
     }
 
@@ -175,37 +196,42 @@ public class RequestDecompressionMiddlewareTests
 
         var sink = new TestSink(
             TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
-            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>);
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddRequestDecompression();
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                })
-                .Configure(app =>
-                {
-                    app.Use((context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                            new FakeHttpMaxRequestBodySizeFeature());
-                        return next(context);
-                    });
-                    app.UseRequestDecompression();
-                    app.UseRequestDecompression();
-                    app.Run(async context =>
+                        services.AddRequestDecompression();
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
                     {
-                        await using var ms = new MemoryStream();
-                        await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
-                        decompressedBytes = ms.ToArray();
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature()
+                                );
+                                return next(context);
+                            }
+                        );
+                        app.UseRequestDecompression();
+                        app.UseRequestDecompression();
+                        app.Run(async context =>
+                        {
+                            await using var ms = new MemoryStream();
+                            await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            decompressedBytes = ms.ToArray();
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -223,8 +249,16 @@ public class RequestDecompressionMiddlewareTests
         var logMessages = sink.Writes.ToList();
 
         Assert.Equal(2, logMessages.Count);
-        AssertLog(logMessages.First(), LogLevel.Debug, $"The request will be decompressed with '{contentEncoding}'.");
-        AssertLog(logMessages.Skip(1).First(), LogLevel.Trace, "The Content-Encoding header is empty or not specified. Skipping request decompression.");
+        AssertLog(
+            logMessages.First(),
+            LogLevel.Debug,
+            $"The request will be decompressed with '{contentEncoding}'."
+        );
+        AssertLog(
+            logMessages.Skip(1).First(),
+            LogLevel.Trace,
+            "The Content-Encoding header is empty or not specified. Skipping request decompression."
+        );
 
         Assert.Equal(uncompressedBytes, decompressedBytes);
     }
@@ -245,38 +279,43 @@ public class RequestDecompressionMiddlewareTests
 
         var sink = new TestSink(
             TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
-            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>);
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddRequestDecompression();
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                })
-                .Configure(app =>
-                {
-                    app.Use((context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                            new FakeHttpMaxRequestBodySizeFeature());
-                        return next(context);
-                    });
-                    app.UseRequestDecompression();
-                    app.Run(async context =>
+                        services.AddRequestDecompression();
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
                     {
-                        contentEncodingHeader = context.Request.Headers.ContentEncoding;
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature()
+                                );
+                                return next(context);
+                            }
+                        );
+                        app.UseRequestDecompression();
+                        app.Run(async context =>
+                        {
+                            contentEncodingHeader = context.Request.Headers.ContentEncoding;
 
-                        await using var ms = new MemoryStream();
-                        await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
-                        outputBytes = ms.ToArray();
+                            await using var ms = new MemoryStream();
+                            await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            outputBytes = ms.ToArray();
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -321,38 +360,43 @@ public class RequestDecompressionMiddlewareTests
 
         var sink = new TestSink(
             TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
-            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>);
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddRequestDecompression();
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                })
-                .Configure(app =>
-                {
-                    app.Use((context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                            new FakeHttpMaxRequestBodySizeFeature());
-                        return next(context);
-                    });
-                    app.UseRequestDecompression();
-                    app.Run(async context =>
+                        services.AddRequestDecompression();
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
                     {
-                        exception = await Record.ExceptionAsync(async () =>
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature()
+                                );
+                                return next(context);
+                            }
+                        );
+                        app.UseRequestDecompression();
+                        app.Run(async context =>
                         {
-                            using var ms = new MemoryStream();
-                            await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            exception = await Record.ExceptionAsync(async () =>
+                            {
+                                using var ms = new MemoryStream();
+                                await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            });
                         });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -384,14 +428,17 @@ public class RequestDecompressionMiddlewareTests
         var contentEncoding = "custom";
 
         // Act
-        var (logMessages, decompressedBytes) =
-            await InvokeMiddleware(
-                compressedBytes,
-                new[] { contentEncoding },
-                configure: (RequestDecompressionOptions options) =>
-                {
-                    options.DecompressionProviders.Add(contentEncoding, new CustomDecompressionProvider());
-                });
+        var (logMessages, decompressedBytes) = await InvokeMiddleware(
+            compressedBytes,
+            new[] { contentEncoding },
+            configure: (RequestDecompressionOptions options) =>
+            {
+                options.DecompressionProviders.Add(
+                    contentEncoding,
+                    new CustomDecompressionProvider()
+                );
+            }
+        );
 
         // Assert
         AssertDecompressedWithLog(logMessages, contentEncoding);
@@ -415,46 +462,52 @@ public class RequestDecompressionMiddlewareTests
         Exception exception = null;
 
         var sink = new TestSink(
-           TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
-           TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>);
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddRequestDecompression();
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                })
-                .Configure(app =>
-                {
-                    app.Use((context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        context.Features.Set<IEndpointFeature>(
-                            GetFakeEndpointFeature(attributeSizeLimit));
-                        context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                            new FakeHttpMaxRequestBodySizeFeature(featureSizeLimit));
-
-                        return next(context);
-                    });
-                    app.UseRequestDecompression();
-                    app.Run(async context =>
+                        services.AddRequestDecompression();
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
                     {
-                        await using var ms = new MemoryStream();
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IEndpointFeature>(
+                                    GetFakeEndpointFeature(attributeSizeLimit)
+                                );
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature(featureSizeLimit)
+                                );
 
-                        exception = await Record.ExceptionAsync(async () =>
+                                return next(context);
+                            }
+                        );
+                        app.UseRequestDecompression();
+                        app.Run(async context =>
                         {
-                            await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            await using var ms = new MemoryStream();
+
+                            exception = await Record.ExceptionAsync(async () =>
+                            {
+                                await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                                decompressedBytes = ms.ToArray();
+                            });
+
                             decompressedBytes = ms.ToArray();
                         });
-
-                        decompressedBytes = ms.ToArray();
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -501,44 +554,49 @@ public class RequestDecompressionMiddlewareTests
         Exception exception = null;
 
         var sink = new TestSink(
-           TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
-           TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>);
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddRequestDecompression();
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                })
-                .Configure(app =>
-                {
-                    app.Use((context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                            new FakeHttpMaxRequestBodySizeFeature(featureSizeLimit));
-
-                        return next(context);
-                    });
-                    app.UseRequestDecompression();
-                    app.Run(async context =>
+                        services.AddRequestDecompression();
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
                     {
-                        await using var ms = new MemoryStream();
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature(featureSizeLimit)
+                                );
 
-                        exception = await Record.ExceptionAsync(async () =>
+                                return next(context);
+                            }
+                        );
+                        app.UseRequestDecompression();
+                        app.Run(async context =>
                         {
-                            await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            await using var ms = new MemoryStream();
+
+                            exception = await Record.ExceptionAsync(async () =>
+                            {
+                                await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                                decompressedBytes = ms.ToArray();
+                            });
+
                             decompressedBytes = ms.ToArray();
                         });
-
-                        decompressedBytes = ms.ToArray();
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -577,7 +635,8 @@ public class RequestDecompressionMiddlewareTests
         // Arrange
         var sink = new TestSink();
         var logger = new TestLogger<RequestDecompressionMiddleware>(
-            new TestLoggerFactory(sink, enabled: true));
+            new TestLoggerFactory(sink, enabled: true)
+        );
         IRequestDecompressionProvider provider = new FakeRequestDecompressionProvider(isCompressed);
 
         var middleware = new RequestDecompressionMiddleware(
@@ -587,7 +646,8 @@ public class RequestDecompressionMiddlewareTests
                 return Task.CompletedTask;
             },
             logger,
-            provider);
+            provider
+        );
 
         var context = new DefaultHttpContext();
 
@@ -596,7 +656,8 @@ public class RequestDecompressionMiddlewareTests
             Endpoint = new Endpoint(
                 requestDelegate: null,
                 metadata: new EndpointMetadataCollection(),
-                displayName: null)
+                displayName: null
+            )
         };
         context.HttpContext.Features.Set(endpointFeature);
 
@@ -610,8 +671,11 @@ public class RequestDecompressionMiddlewareTests
 
         // Assert
         var logMessages = sink.Writes.ToList();
-        AssertLog(Assert.Single(logMessages), LogLevel.Debug,
-            $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.");
+        AssertLog(
+            Assert.Single(logMessages),
+            LogLevel.Debug,
+            $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}."
+        );
 
         var actualRequestSizeLimit = maxRequestBodySizeFeature.MaxRequestBodySize;
         Assert.Equal(expectedRequestSizeLimit, actualRequestSizeLimit);
@@ -625,7 +689,8 @@ public class RequestDecompressionMiddlewareTests
         // Arrange
         var sink = new TestSink();
         var logger = new TestLogger<RequestDecompressionMiddleware>(
-            new TestLoggerFactory(sink, enabled: true));
+            new TestLoggerFactory(sink, enabled: true)
+        );
         IRequestDecompressionProvider provider = new FakeRequestDecompressionProvider(isCompressed);
 
         var middleware = new RequestDecompressionMiddleware(
@@ -635,7 +700,8 @@ public class RequestDecompressionMiddlewareTests
                 return Task.CompletedTask;
             },
             logger,
-            provider);
+            provider
+        );
 
         var context = new DefaultHttpContext();
 
@@ -650,8 +716,11 @@ public class RequestDecompressionMiddlewareTests
 
         // Assert
         var logMessages = sink.Writes.ToList();
-        AssertLog(Assert.Single(logMessages), LogLevel.Warning,
-            $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.");
+        AssertLog(
+            Assert.Single(logMessages),
+            LogLevel.Warning,
+            $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}."
+        );
     }
 
     [Theory]
@@ -662,7 +731,8 @@ public class RequestDecompressionMiddlewareTests
         // Arrange
         var sink = new TestSink();
         var logger = new TestLogger<RequestDecompressionMiddleware>(
-            new TestLoggerFactory(sink, enabled: true));
+            new TestLoggerFactory(sink, enabled: true)
+        );
         IRequestDecompressionProvider provider = new FakeRequestDecompressionProvider(isCompressed);
 
         var middleware = new RequestDecompressionMiddleware(
@@ -672,7 +742,8 @@ public class RequestDecompressionMiddlewareTests
                 return Task.CompletedTask;
             },
             logger,
-            provider);
+            provider
+        );
 
         var context = new DefaultHttpContext();
 
@@ -689,8 +760,11 @@ public class RequestDecompressionMiddlewareTests
 
         // Assert
         var logMessages = sink.Writes.ToList();
-        AssertLog(Assert.Single(logMessages), LogLevel.Warning,
-            $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.");
+        AssertLog(
+            Assert.Single(logMessages),
+            LogLevel.Warning,
+            $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only."
+        );
 
         var actualRequestSizeLimit = maxRequestBodySizeFeature.MaxRequestBodySize;
         Assert.Equal(expectedRequestSizeLimit, actualRequestSizeLimit);
@@ -701,12 +775,16 @@ public class RequestDecompressionMiddlewareTests
     [InlineData(true, false)]
     [InlineData(false, false)]
     [InlineData(false, true)]
-    public async Task Endpoint_HasBodySizeFeature_SetUsingSizeLimitMetadata(bool isCompressed, bool isRequestSizeLimitDisabled)
+    public async Task Endpoint_HasBodySizeFeature_SetUsingSizeLimitMetadata(
+        bool isCompressed,
+        bool isRequestSizeLimitDisabled
+    )
     {
         // Arrange
         var sink = new TestSink();
         var logger = new TestLogger<RequestDecompressionMiddleware>(
-            new TestLoggerFactory(sink, enabled: true));
+            new TestLoggerFactory(sink, enabled: true)
+        );
         IRequestDecompressionProvider provider = new FakeRequestDecompressionProvider(isCompressed);
 
         var middleware = new RequestDecompressionMiddleware(
@@ -716,7 +794,8 @@ public class RequestDecompressionMiddlewareTests
                 return Task.CompletedTask;
             },
             logger,
-            provider);
+            provider
+        );
 
         var context = new DefaultHttpContext();
 
@@ -736,13 +815,19 @@ public class RequestDecompressionMiddlewareTests
 
         if (isRequestSizeLimitDisabled)
         {
-            AssertLog(Assert.Single(logMessages), LogLevel.Debug,
-                "The maximum request body size as been disabled.");
+            AssertLog(
+                Assert.Single(logMessages),
+                LogLevel.Debug,
+                "The maximum request body size as been disabled."
+            );
         }
         else
         {
-            AssertLog(Assert.Single(logMessages), LogLevel.Debug,
-                $"The maximum request body size has been set to {expectedRequestSizeLimit.Value.ToString(CultureInfo.InvariantCulture)}.");
+            AssertLog(
+                Assert.Single(logMessages),
+                LogLevel.Debug,
+                $"The maximum request body size has been set to {expectedRequestSizeLimit.Value.ToString(CultureInfo.InvariantCulture)}."
+            );
         }
 
         var actualRequestSizeLimit = maxRequestBodySizeFeature.MaxRequestBodySize;
@@ -755,7 +840,8 @@ public class RequestDecompressionMiddlewareTests
         // Arrange
         RequestDelegate requestDelegate = null;
         var logger = new TestLogger<RequestDecompressionMiddleware>(
-            new TestLoggerFactory(new TestSink(), enabled: true));
+            new TestLoggerFactory(new TestSink(), enabled: true)
+        );
         var provider = new FakeRequestDecompressionProvider();
 
         // Act + Assert
@@ -786,7 +872,8 @@ public class RequestDecompressionMiddlewareTests
         // Arrange
         static Task requestDelegate(HttpContext context) => Task.FromResult(context);
         var logger = new TestLogger<RequestDecompressionMiddleware>(
-            new TestLoggerFactory(new TestSink(), enabled: true));
+            new TestLoggerFactory(new TestSink(), enabled: true)
+        );
         IRequestDecompressionProvider provider = null;
 
         // Act + Assert
@@ -806,10 +893,8 @@ public class RequestDecompressionMiddlewareTests
         }
 
 #nullable enable
-        public Stream? GetDecompressionStream(HttpContext context)
-            => _isCompressed
-                ? new MemoryStream()
-                : null;
+        public Stream? GetDecompressionStream(HttpContext context) =>
+            _isCompressed ? new MemoryStream() : null;
 #nullable disable
     }
 
@@ -822,7 +907,11 @@ public class RequestDecompressionMiddlewareTests
     private static void AssertDecompressedWithLog(List<WriteContext> logMessages, string encoding)
     {
         var logMessage = Assert.Single(logMessages);
-        AssertLog(logMessage, LogLevel.Debug, $"The request will be decompressed with '{encoding}'.");
+        AssertLog(
+            logMessage,
+            LogLevel.Debug,
+            $"The request will be decompressed with '{encoding}'."
+        );
     }
 
     private static void AssertNoDecompressionProviderLog(List<WriteContext> logMessages)
@@ -834,11 +923,13 @@ public class RequestDecompressionMiddlewareTests
     private static async Task<(List<WriteContext>, byte[])> InvokeMiddleware(
         byte[] compressedContent,
         string[] contentEncodings = null,
-        Action<RequestDecompressionOptions> configure = null)
+        Action<RequestDecompressionOptions> configure = null
+    )
     {
         var sink = new TestSink(
             TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>,
-            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>);
+            TestSink.EnableWithTypeName<DefaultRequestDecompressionProvider>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         var outputContent = Array.Empty<byte>();
@@ -847,29 +938,33 @@ public class RequestDecompressionMiddlewareTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddRequestDecompression(configure ?? (_ => { }));
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                })
-                .Configure(app =>
-                {
-                    app.Use((context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                            new FakeHttpMaxRequestBodySizeFeature());
-                        return next(context);
-                    });
-                    app.UseRequestDecompression();
-                    app.Run(async context =>
+                        services.AddRequestDecompression(configure ?? (_ => { }));
+                        services.AddSingleton<ILoggerFactory>(loggerFactory);
+                    })
+                    .Configure(app =>
                     {
-                        await using var ms = new MemoryStream();
-                        await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
-                        outputContent = ms.ToArray();
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature()
+                                );
+                                return next(context);
+                            }
+                        );
+                        app.UseRequestDecompression();
+                        app.Run(async context =>
+                        {
+                            await using var ms = new MemoryStream();
+                            await context.Request.Body.CopyToAsync(ms, context.RequestAborted);
+                            outputContent = ms.ToArray();
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -891,6 +986,7 @@ public class RequestDecompressionMiddlewareTests
 
         return (sink.Writes.ToList(), outputContent);
     }
+
     private class CustomDecompressionProvider : IDecompressionProvider
     {
         public Stream GetDecompressionStream(Stream stream)
@@ -906,15 +1002,15 @@ public class RequestDecompressionMiddlewareTests
             MaxRequestBodySize = requestSizeLimit
         };
 
-        var endpointMetadata =
-            new EndpointMetadataCollection(new[] { requestSizeLimitMetadata });
+        var endpointMetadata = new EndpointMetadataCollection(new[] { requestSizeLimitMetadata });
 
         return new FakeEndpointFeature
         {
             Endpoint = new Endpoint(
                 requestDelegate: null,
                 metadata: endpointMetadata,
-                displayName: null)
+                displayName: null
+            )
         };
     }
 
@@ -932,7 +1028,8 @@ public class RequestDecompressionMiddlewareTests
     {
         public FakeHttpMaxRequestBodySizeFeature(
             long? maxRequestBodySize = null,
-            bool isReadOnly = false)
+            bool isReadOnly = false
+        )
         {
             MaxRequestBodySize = maxRequestBodySize;
             IsReadOnly = isReadOnly;
