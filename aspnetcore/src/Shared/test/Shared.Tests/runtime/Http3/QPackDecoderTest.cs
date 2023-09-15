@@ -8,9 +8,9 @@ using System.Net.Http.HPack;
 using System.Net.Http.QPack;
 using System.Text;
 using Xunit;
-using HeaderField = System.Net.Http.QPack.HeaderField;
 #if KESTREL
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+using HeaderField = System.Net.Http.QPack.HeaderField;
 #endif
 
 namespace System.Net.Http.Unit.Tests.QPack

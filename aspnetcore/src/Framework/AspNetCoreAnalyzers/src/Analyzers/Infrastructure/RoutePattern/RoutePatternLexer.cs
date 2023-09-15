@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
 using static RoutePatternHelpers;
-
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
 
 internal struct RoutePatternLexer

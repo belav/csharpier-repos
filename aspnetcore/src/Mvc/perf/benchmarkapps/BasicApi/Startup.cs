@@ -3,9 +3,6 @@
 
 using System;
 using System.IO;
-#if GENERATE_SQL_SCRIPTS
-using System.Linq;
-#endif
 using System.Security.Cryptography;
 using BasicApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +16,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Npgsql;
+#if GENERATE_SQL_SCRIPTS
+using System.Linq;
+#endif
+
 
 namespace BasicApi
 {
